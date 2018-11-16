@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-15"
+lastupdated: "2018-11-16"
 
 ---
 
@@ -33,7 +33,7 @@ When the Ingress ALB add-on is updated, the `nginx-ingress` and `ingress-auth` c
 
 Refer to the following table for a summary of changes for each build of the Ingress ALB add-on.
 
-<table summary="Changelog for the Ingress application load balancer add-on">
+<table summary="Overview of build changes for the Ingress application load balancer add-on">
 <caption>Changelog for the Ingress application load balancer add-on</caption>
 <thead>
 <tr>
