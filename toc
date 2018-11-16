@@ -112,7 +112,9 @@ IBM Cloud Kubernetes Service
     cs_access_reference.md
     {: .navgroup-end}
 
-    {: .navgroup id="help"}  
+    {: .navgroup id="help"}
+    faqs.md
+    
     {: .topicgroup}
     Troubleshooting clusters
         cs_troubleshoot.md
