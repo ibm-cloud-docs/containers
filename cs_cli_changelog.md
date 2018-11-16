@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-15"
+lastupdated: "2018-11-16"
 
 ---
 
@@ -29,7 +29,7 @@ To install the CLI plug-in, see [Installing the CLI](cs_cli_install.html#cs_cli_
 
 Refer to the following table for a summary of changes for each CLI plug-in version.
 
-<table summary="Changelog for the {{site.data.keyword.containerlong_notm}} CLI plug-in">
+<table summary="Overview of version changes for the {{site.data.keyword.containerlong_notm}} CLI plug-in">
 <caption>Changelog for the {{site.data.keyword.containerlong_notm}} CLI plug-in</caption>
 <thead>
 <tr>
