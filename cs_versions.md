@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-16"
 
 ---
 
@@ -638,12 +638,12 @@ Review the following situations in which you must make changes to take full adva
 
 <br>
 **Updating your firewall or custom Calico host network policies for HA masters**:</br>
-{: #ha-firewall}
+{: #110_ha-firewall}
 If you use a firewall or custom Calico host network policies to control egress from your worker nodes, allow outgoing traffic to the ports and IP addresses for all the zones within the region that your cluster is in. See [Allowing the cluster to access infrastructure resources and other services](cs_firewall.html#firewall_outbound).
 
 <br>
 **Reserving host ports `2040` and `2041` on your worker nodes**:</br>
-{: #ha-ports}
+{: #110_ha-ports}
 To allow access to the cluster master in an HA configuration, you must leave host ports `2040` and `2041` available on all worker nodes.
 * Update any pods with `hostPort` set to `2040` or `2041` to use different ports.
 * Update any pods with `hostNetwork` set to to `true` that listen on ports `2040` or `2041` to use different ports.
@@ -657,7 +657,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 
 <br>
 **Using `kubernetes` service cluster IP or domain for in-cluster access to the master**:</br>
-{: #ha-incluster}
+{: #110_ha-incluster}
 To access the cluster master in an HA configuration from within the cluster, use one of the following:
 * The `kubernetes` service cluster IP address, which by default is: `https://172.21.0.1`
 * The `kubernetes` service domain name, which by default is: `https://kubernetes.default.svc.cluster.local`
@@ -666,14 +666,14 @@ If you previously used the cluster master IP address, this method continues to w
 
 <br>
 **Configuring Calico for out-of-cluster access to master with HA configuration**:</br>
-{: #ha-outofcluster}
+{: #110_ha-outofcluster}
 The data that is stored in the `calico-config` configmap in the `kube-system` namespace is changed to support HA master configuration. In particular, the `etcd_endpoints` value now supports in-cluster access only. Using this value to configure Calico CLI for access from outside the cluster no longer works.
 
 Instead, use the data that is stored in the `cluster-info` configmap in the `kube-system` namespace. In particular, use the `etcd_host` and `etcd_port` values to configure the endpoint for the [Calico CLI](cs_network_policy.html#cli_install) to access the master with HA configuration from outside the cluster.
 
 <br>
 **Updating Kubernetes or Calico network policies**:</br>
-{: #ha-networkpolicies}
+{: #110_ha-networkpolicies}
 You need to take additional actions if you use [Kubernetes or Calico network policies](cs_network_policy.html#network_policies) to control pod egress access to the cluster master and you are currently using:
 *  The Kubernetes service cluster IP, which you can get by running `kubectl get service kubernetes -o yaml | grep clusterIP`.
 *  The Kubernetes service domain name, which by default is `https://kubernetes.default.svc.cluster.local`.
