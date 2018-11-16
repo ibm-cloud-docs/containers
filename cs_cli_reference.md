@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-15"
+lastupdated: "2018-11-16"
 
 ---
 
@@ -3267,7 +3267,7 @@ You can create a worker pool in your cluster. When you add a worker pool, it is 
     <dd>The level of hardware isolation for your worker node. Use `dedicated` if you want to have available physical resources dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. For bare metal machine types, specify `dedicated`. This value is required.</dd>
 
   <dt><code>--labels <em>LABELS</em></code></dt>
-    <dd>The labels that you want to assign to the workers in your pool. Example: <key1>=<val1>,<key2>=<val2></dd>
+    <dd>The labels that you want to assign to the workers in your pool. Example: `<key1>=<val1>`,`<key2>=<val2>`</dd>
 
   <dt><code>--disable-disk-encrpyt</code></dt>
     <dd>Specifies that the disk is not encrypted. The default value is <code>false</code>.</dd>
