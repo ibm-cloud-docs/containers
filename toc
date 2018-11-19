@@ -35,9 +35,9 @@ IBM Cloud Kubernetes Service
         cs_tutorials_istio.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
-        [Tutorial: Move a VM-based application to Kubernetes](../tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
-        [Tutorial: Create a multi-region cluster using Cloud Internet Services](../tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
-        [Tutorial: Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](../tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
+        [Tutorial: Move a VM-based application to Kubernetes](https://console.bluemix.net/docs/tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
+        [Tutorial: Create a multi-region cluster using Cloud Internet Services](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
+        [Tutorial: Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
