@@ -1087,7 +1087,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 If you want to increase storage capacity or performance, you can modify your existing volume. 
 {: shortdesc}
 
-For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding Block Storage capacity](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). If you use the {{site.data.keyword.Bluemix_notm}} console to modify you storage, you must follow steps 4-7 in this topic to complete the modification. 
+For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding Block Storage capacity](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). If you use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, you must follow steps 4-7 in this topic to complete the modification. 
 {: tip}
 
 1. List the PVCs in your cluster and note the name of the associated PV from the **VOLUME** column. 
