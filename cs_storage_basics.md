@@ -177,11 +177,11 @@ When you dynamically provision persistent storage by using a storage class, you 
 <tbody>
 <tr>
 <td>File storage</td>
-<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](cs_storage_file.html##change_storage_configuration). </td>
+<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](cs_storage_file.html#change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Block storage</td>
-<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](cs_storage_block.html##change_storage_configuration). </td>
+<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](cs_storage_block.html#change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Object storage</td>
