@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-16"
+lastupdated: "2018-11-19"
 
 ---
 
@@ -35,7 +35,7 @@ lastupdated: "2018-11-16"
 **Supported Kubernetes versions**:
 - Latest: 1.12.2
 - Default: 1.10.8
-- Other: 1.11.3, 1.9.10
+- Other: 1.11.3, 1.9.11
 
 </br>
 
