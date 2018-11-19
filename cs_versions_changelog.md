@@ -46,6 +46,30 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.12.2_1528, released 19 November 2018
+{: #1122_1528}
+
+<table summary="Changes that were made since version 1.12.2_1527">
+<caption>Changes since version 1.12.2_1527</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>Updated worker node images with kernel update for [CVE-2018-7755 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+</tr>
+</tbody>
+</table>
+
+
 ### Changelog for 1.12.2_1527, released 7 November 2018
 {: #1122_1527}
 
@@ -143,6 +167,30 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018
+{: #1113_1534}
+
+<table summary="Changes that were made since version 1.11.3_1533">
+<caption>Changes since version 1.11.3_1533</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>Updated worker node images with kernel update for [CVE-2018-7755 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for 1.11.3_1533, released 7 November 2018
 {: #1113_1533}
@@ -565,6 +613,29 @@ Also, now when you update the cluster master, the default IBM file storage class
 {: #110_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.10.8_1531, released 19 November 2018
+{: #1108_1531}
+
+<table summary="Changes that were made since version 1.10.8_1530">
+<caption>Changes since version 1.10.8_1530</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>Updated worker node images with kernel update for [CVE-2018-7755 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.10.8_1530, released 7 November 2018
 {: #1108_1530_ha-master}
