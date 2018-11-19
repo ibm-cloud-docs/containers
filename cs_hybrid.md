@@ -22,7 +22,7 @@ lastupdated: "2018-11-19"
 {:tsResolve: .tsResolve}
 
 
-# Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.Bluemix_notm}} Private
+# Hybrid cloud
 {: #hybrid_iks_icp}
 
 If you have an {{site.data.keyword.Bluemix}} Private account, you can use it with select {{site.data.keyword.Bluemix_notm}} services, including {{site.data.keyword.containerlong}}. For more information, see the blog on [Hybrid experience across {{site.data.keyword.Bluemix_notm}} Private and IBM Public Cloud![External link icon](../icons/launch-glyph.svg "External link icon")](http://ibm.biz/hybridJune2018).
