@@ -96,7 +96,7 @@ IBM Cloud Kubernetes Service
         cs_dedicated.md
         [Deprecated: Running single and scalable containers](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
-    [Hybrid cloud](cs_hybrid.html#hybrid_iks_icp)
+    [Hybrid cloud](../containers/cs_hybrid.html#hybrid_iks_icp)
 
     {: .topicgroup}
     IBM Cloud Kubernetes Service CLI plug-in reference
