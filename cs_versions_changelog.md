@@ -36,7 +36,7 @@ For information about changes since the previous version, see the following chan
 -  Version 1.9 [changelog](#19_changelog).
 -  [Archive](#changelog_archive) of changelogs for deprecated or unsupported versions.
 
-Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](cs_cli_reference.html#cs_worker_update) to ensure security compliance for your worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](cs_cli_reference.html#cs_cluster_update). For more information about patch types, see [Update types](cs_versions.html#update_types).
+Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](cs_cli_reference.html#cs_worker_update) to ensure security compliance for your worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied<, or you might have [disabled automatic updates](cs_cli_reference.html#cs_cluster_autoupdate_disable)</. You can choose to [apply them manually](cs_cli_reference.html#cs_cluster_update). For more information about patch types, see [Update types](cs_versions.html#update_types).
 {: note}
 
 </br>
@@ -1242,7 +1242,52 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 Review the following changes.
 
+### Changelog for 1.9.11_1536, released 19 November 2018
+{: #1911_1536}
 
+<table summary="Changes that were made since version 1.9.10_1532">
+<caption>Changes since version 1.9.10_1532</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v2.6.5</td>
+<td>v2.6.12</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v2.6/releases/#v2612). Update resolves [Tigera Technical Advisory TTA-2018-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>Updated worker node images with kernel update for [CVE-2018-7755 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.9.10</td>
+<td>v1.9.11</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.11).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.9.10-219</td>
+<td>v1.9.11-249</td>
+<td>Updated to support the Kubernetes 1.9.11 release.</td>
+</tr>
+<tr>
+<td>OpenVPN client and server</td>
+<td>2.4.4-r2</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>Updated image for [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) and [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix 1.9.10_1532, released 7 November 2018
 {: #1910_1532}
