@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-15"
+lastupdated: "2018-11-19"
 
 
 ---
@@ -41,6 +41,7 @@ The following table shows the cluster management permissions granted by each pla
     <th>Cluster management permissions</th>
     <th>Corresponding RBAC role and resource permissions</th>
 </thead>
+<tbody>
   <tr>
     <td>**Viewer**</td>
     <td>
@@ -129,6 +130,7 @@ The following table shows the cluster management permissions granted by each pla
       <li>Create an Ingress resource that makes apps publicly available</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 
@@ -146,6 +148,7 @@ The following table shows the Cloud Foundry roles required for cluster action pe
     <th>Cloud Foundry role</th>
     <th>Cluster management permissions</th>
   </thead>
+  <tbody>
   <tr>
     <td>Space role: Manager</td>
     <td>Manage user access to an {{site.data.keyword.Bluemix_notm}} space</td>
@@ -158,6 +161,7 @@ The following table shows the Cloud Foundry roles required for cluster action pe
       <li>View logs from a cluster's log forwarding configuration at the space level</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 ## Infrastructure roles

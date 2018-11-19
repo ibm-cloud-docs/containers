@@ -35,8 +35,9 @@ IBM Cloud Kubernetes Service
         cs_tutorials_istio.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
-        [Tutorial: Move a VM-based application to Kubernetes](../tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
-        [Tutorial: Create a multi-region cluster using Cloud Internet Services](../tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
+        [Tutorial: Move a VM-based application to Kubernetes](https://console.bluemix.net/docs/tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
+        [Tutorial: Create a multi-region cluster using Cloud Internet Services](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
+        [Tutorial: Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -95,7 +96,7 @@ IBM Cloud Kubernetes Service
         cs_dedicated.md
         [Deprecated: Running single and scalable containers](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
-    [Hybrid cloud](cs_hybrid.html#hybrid_iks_icp)
+    cs_hybrid.md
 
     {: .topicgroup}
     IBM Cloud Kubernetes Service CLI plug-in reference
@@ -112,7 +113,9 @@ IBM Cloud Kubernetes Service
     cs_access_reference.md
     {: .navgroup-end}
 
-    {: .navgroup id="help"}  
+    {: .navgroup id="help"}
+    faqs.md
+
     {: .topicgroup}
     Troubleshooting clusters
         cs_troubleshoot.md

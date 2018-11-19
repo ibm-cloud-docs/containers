@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-19"
 
 ---
 
@@ -33,7 +33,7 @@ lastupdated: "2018-11-13"
 
 Every storage class specifies the type of file storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
-Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
+After you provision a specific type of storage by using a storage class, you cannot change the type, or retention policy for the storage device. However, you can [change the size and the IOPS](#change_storage_configuration) if you want to increase your storage capacity and performance. To change the type and retention policy for your storage, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
 {: important}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
@@ -860,6 +860,137 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 <br />
 
+
+## Changing the size and IOPS of your existing storage device
+{: #change_storage_configuration}
+
+If you want to increase storage capacity or performance, you can modify your existing volume. 
+{: shortdesc}
+
+For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding File Share capacity](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity). 
+{: tip}
+
+1. List the PVCs in your cluster and note the name of the associated PV from the **VOLUME** column. 
+   ```
+   kubectl get pvc
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-file-bronze    147d
+   ```
+   {: screen}
+   
+2. Retrieve the **StorageType**, **volumeId**, and the **server** of the physical file storage that is associated with your PVC by listing the details of the PV that your PVC is bound to. Replace `<pv_name>` with the name of the PV that you retrieved in the previous step. The storage type, volume ID, and the server name are shown in the **Labels** section of your CLI output. 
+   ```
+   kubectl describe pv <pv_name>
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   Name:            pvc-4b62c704-5f77-11e8-8a75-b229c11ba64a
+   Labels:          CapacityGb=20
+                    Datacenter=dal10
+                    Iops=2
+                    StorageType=ENDURANCE
+                    Username=IBM02SEV1543159_6
+                    billingType=hourly
+                    failure-domain.beta.kubernetes.io/region=us-south
+                    failure-domain.beta.kubernetes.io/zone=dal10
+                    path=IBM01SEV1234567_8ab12t
+                    server=fsf-dal1001g-fz.adn.networklayer.com
+                    volumeId=12345678
+   ...
+   ```
+   {: screen}
+
+3. Modify the size or IOPS of your volume in your IBM Cloud infrastructure (SoftLayer) account. 
+
+   Example for performance storage: 
+   ```
+   ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-iops <iops>
+   ```
+   {: pre}
+   
+   Example for endurance storage: 
+   ```
+   ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-tier <iops>
+   ```
+   {: pre}
+   
+   <table>
+   <caption>Understanding the command's components</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>&lt;volume_ID&gt;</code></td>
+   <td>Enter the ID of the volume that you retrieved earlier.</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-size&gt;</code></td>
+   <td>Enter the new size in gigabytes (Gi) for your volume. For valid sizes, see [Deciding on the file storage configuration](#predefined_storageclass). The size that you enter must be greater than or equal to the current size of your volume. If you do not specify a new size, the current size of the volume is used. </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-iops&gt;</code></td>
+   <td>For performance storage only. Enter the new number of IOPS that you want. For valid IOPS, see [Deciding on the file storage configuration](#predefined_storageclass). If you do not specify the IOPS, the current IOPS is used. <p class="note">If the original IOPS/GB ratio for the volume is less than 0.3, the new IOPS/GB ratio must be less than 0.3. If the original IOPS/GB ratio for the volume is greater than or equal to 0.3, the new IOPS/GB ratio for the volume must be greater than or equal to 0.3.</p> </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-tier&gt;</code></td>
+   <td>For endurance stoage only. Enter the new number of IOPS per GB that you want. For valid IOPS, see [Deciding on the file storage configuration](#predefined_storageclass). If you do not specify the IOPS, the current IOPS is used. <p class="note">If the original IOPS/GB ratio for the volume is less than 0.25, the new IOPS/GB ratio must be less than 0.25. If the original IOPS/GB ratio for the volume is greater than or equal to 0.25, the new IOPS/GB ratio for the volume must be greater than or equal to 0.25.</p> </td>
+   </tr>
+   </tbody>
+   </table>
+   
+   Example output: 
+   ```
+   Order 31020713 was placed successfully!.
+   > Storage as a Service
+
+   > 40 GBs
+
+   > 2 IOPS per GB
+
+   > 20 GB Storage Space (Snapshot Space)
+
+   You may run 'ibmcloud sl file volume-list --order 12345667' to find this file volume after it is ready.
+   ```
+   {: screen}
+   
+4. If you changed the size of your volume and you use the volume in a pod, log in to your pod to verify the new size. 
+   1. List all the pods that use PVC.
+      ```
+      kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+      ```
+      {: pre}
+      
+      Pods are returned in the format: `<pod_name>: <pvc_name>`. 
+   2. Log in to your pod. 
+      ```
+      kubectl exec -it <pod_name> bash
+      ```
+      {: pre}
+      
+   3. Show the disk usage statistics and find the server path for your volume that you retrieved earlier. 
+      ```
+      df -h
+      ```
+      {: pre}
+      
+      Example output: 
+      ```
+      Filesystem                                                      Size  Used Avail Use% Mounted on
+      overlay                                                          99G  4.8G   89G   6% /
+      tmpfs                                                            64M     0   64M   0% /dev
+      tmpfs                                                           7.9G     0  7.9G   0% /sys/fs/cgroup
+      fsf-dal1001g-fz.adn.networklayer.com:/IBM01SEV1234567_6/data01   40G     0   40G   0% /myvol
+      ```
+      {: screen}
+   
 
 ## Changing the default NFS version
 {: #nfs_version}

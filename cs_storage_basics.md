@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-19"
 
 ---
 
@@ -165,47 +165,30 @@ If you cannot use one of the provided storage classes, you can create your own c
 ### Changing or updating to a different storage class
 {: #update_storageclass}
 
-When you dynamically provision persistent storage by using a storage class, you provision persistent storage with a specific configuration, also referred to as flavor. This flavor cannot be changed after your storage is provisioned.
+When you dynamically provision persistent storage by using a storage class, you provision persistent storage with a specific configuration. You cannot change the name of the storage class or the type of storage that you provisioned. However, you have the option to scale your storage as shows in the following table. 
+{: shortdesc}
 
-If you want to change the size, IOPS, type, or retention policy for a storage device, you must provision a new storage device and copy your data from your old storage to the new one.
-
-1. Decide on the persistent storage flavor that you want to provision.
-   - [File storage](cs_storage_file.html#predefined_storageclass)
-   - [Block storage](cs_storage_block.html#predefined_storageclass)
-
-2. Create a PVC to provision your persistent storage.
-   - [File storage](cs_storage_file.html#add_file)
-   - [Block storage](cs_storage_block.html#add_block)
-
-3. Copy the data from your existing storage device to your new one. Every type of storage comes with different options to backup and restore data.
-   - [File storage](cs_storage_file.html#backup_restore)
-   - [Block storage](cs_storage_block.html#backup_restore)
-
-4. Update your app deployment to reference the new storage device.
-   1. Get the name of the PVC that you created earlier.
-      ```
-      kubectl get pvc
-      ```
-      {: pre}
-
-   2. List the deployment in your cluster.
-      ```
-      kubectl get deployments
-      ```
-      {: pre}
-
-   3. Get the deployment yaml for the deployment that uses the old persistent storage device.
-      ```
-      kubectl get deployment <deployment_name> -o yaml
-      ```
-      {: pre}
-
-   4. Change the name of the PVC in the `spec.volumes` section of your deployment.
-   5. Apply the changes to your deployment. When you apply changes, a new pod is created and the PVC that binds the PV is mounted to your pod. The pod that mounted the old persistent storage instance is removed.
-      ```
-      kubectl apply -f deployment.yaml
-      ```
-      {: pre}
+<table> 
+<caption>Overview of scaling options for {{site.data.keyword.containerlong_notm}} storage solutions</caption>
+<thead>
+<th>Storage solution</th>
+<th>Scaling options</th>
+</thead>
+<tbody>
+<tr>
+<td>File storage</td>
+<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](cs_storage_file.html#change_storage_configuration). </td>
+</tr>
+<tr>
+<td>Block storage</td>
+<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](cs_storage_block.html#change_storage_configuration). </td>
+</tr>
+<tr>
+<td>Object storage</td>
+<td>Your volume automatically scales in size and you are charged based on your actual consumption. However, you cannot change the performance attributes of your volume as they are defined in the storage class that you used to create your bucket in {{site.data.keyword.cos_full_notm}}. To change to a different storage class, you must provision a new bucket by using the storage class that you want. Then, copy your data from the old bucket to the new one. </td>
+</tr>
+</tbody>
+</table>
 
 
 ## Preparing existing storage for multizone usage with Kubernetes labels

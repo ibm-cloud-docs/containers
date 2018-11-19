@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-19"
 
 ---
 
@@ -45,7 +45,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.9.10_1523* 
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.10.8_1523* 
       ```
       {: screen}
       
@@ -1080,6 +1080,163 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 <br />
 
+
+## Changing the size and IOPS of your existing storage device
+{: #change_storage_configuration}
+
+If you want to increase storage capacity or performance, you can modify your existing volume. 
+{: shortdesc}
+
+For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding Block Storage capacity](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). If you use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, you must follow steps 4-7 in this topic to complete the modification. 
+{: tip}
+
+1. List the PVCs in your cluster and note the name of the associated PV from the **VOLUME** column. 
+   ```
+   kubectl get pvc
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
+   ```
+   {: screen}
+   
+2. Retrieve the **VolumeID** and the **StorageType** of the physical file storage that is associated with your PVC by listing the details of the PV that your PVC is bound to. Replace `<pv_name>` with the name of the PV that you retrieved in the previous step. The storage type is shown in the **Labels** section, and the volume ID is shown in the **Source** > **Options** section of your CLI output. 
+   ```
+   kubectl describe pv <pv_name>
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   Name:            pvc-c1839152-c333-11e8-b6a8-46ad53f2579a
+   Labels:          CapacityGb=24
+                    Datacenter=dal13
+                    IOPS=4
+                    StorageType=Endurance
+                    billingType=hourly
+                    failure-domain.beta.kubernetes.io/region=us-south
+                    failure-domain.beta.kubernetes.io/zone=dal13
+                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
+   ...
+   Source:
+       Type:       FlexVolume (a generic volume resource that is provisioned/attached using an exec based plugin)
+       Driver:     ibm/ibmc-block
+       FSType:     ext4
+       SecretRef:  <nil>
+       ReadOnly:   false
+       Options:    map[volumeName:pvc-c1839152-c333-11e8-b6a8-46ad53f2579a Lun:1 TargetPortal:161.26.114.56 VolumeID:51889685]
+   ...
+   ```
+   {: screen}
+
+3. Modify the size or IOPS of your volume in your IBM Cloud infrastructure (SoftLayer) account. 
+
+   Example for performance storage: 
+   ```
+   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-iops <iops>
+   ```
+   {: pre}
+   
+   Example for endurance storage: 
+   ```
+   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-tier <iops>
+   ```
+   {: pre}
+   
+   <table>
+   <caption>Understanding the command's components</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>&lt;volume_ID&gt;</code></td>
+   <td>Enter the ID of the volume that you retrieved earlier.</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-size&gt;</code></td>
+   <td>Enter the new size in gigabytes (Gi) for your volume. For valid sizes, see [Deciding on the block storage configuration](#predefined_storageclass). The size that you enter must be greater than or equal to the current size of your volume. If you do not specify a new size, the current size of the volume is used. </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-iops&gt;</code></td>
+   <td>For performance storage only. Enter the new number of IOPS that you want. For valid IOPS, see [Deciding on the block storage configuration](#predefined_storageclass). If you do not specify the IOPS, the current IOPS is used. <p class="note">If the original IOPS/GB ratio for the volume is less than 0.3, the new IOPS/GB ratio must be less than 0.3. If the original IOPS/GB ratio for the volume is greater than or equal to 0.3, the new IOPS/GB ratio for the volume must be greater than or equal to 0.3.</p> </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-tier&gt;</code></td>
+   <td>For endurance stoage only. Enter the new number of IOPS per GB that you want. For valid IOPS, see [Deciding on the block storage configuration](#predefined_storageclass). If you do not specify the IOPS, the current IOPS is used. <p class="note">If the original IOPS/GB ratio for the volume is less than 0.25, the new IOPS/GB ratio must be less than 0.25. If the original IOPS/GB ratio for the volume is greater than or equal to 0.25, the new IOPS/GB ratio for the volume must be greater than or equal to 0.25.</p> </td>
+   </tr>
+   </tbody>
+   </table>
+   
+   Example output: 
+   ```
+   Order 31020713 was placed successfully!.
+   > Storage as a Service
+
+   > 40 GBs
+
+   > 2 IOPS per GB
+
+   > 20 GB Storage Space (Snapshot Space)
+
+   You may run 'ibmcloud sl block volume-list --order 12345667' to find this block volume after it is ready.
+   ```
+   {: screen}
+   
+4. Patch the PV configuration to add the `autofix-resizefs` annotation. This annotation automatically resizes the file system when the volume is mounted to a pod.  
+   ```
+   kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
+   ```
+   {: pre}
+   
+5. List all the pods that use the PVC. 
+   ```
+   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+   ```
+   {: pre}
+   
+   Pods are returned in the format: `<pod_name>: <pvc_name>`. 
+   
+6. If you have a pod that uses the PVC, restart the pod by removing the pod and letting Kubernetes re-create it. If you created a pod without using a Kubernetes deployment or replica set, then you must re-create your pod after you remove it. 
+   To retrieve the YAML file that was used to create your pod, run `kubectl get pod <pod_name> -o yaml >pod.yaml`. 
+   {: tip}
+   ```
+   kubectl delete pod <pod_name>
+   ```
+   {: pre}
+   
+7. If you changed the size of your volume, log in to your pod to verify the new size. 
+   1. Get the volume mount path that you used in your pod to access your volume. 
+      ```
+      kubectl describe pod <pod_name>
+      ```
+      {: pre}
+      
+      The volume mount path is shown in the **Containers** > **block** > **Mounts** section of your CLI output. 
+   2. Log in to your pod. 
+      ```
+      kubectl exec -it <pod_name> bash
+      ```
+      {: pre}
+      
+   3. Show the disk usage statistics and find the mount path for your volume that you retrieved earlier. Verify that the **Size** column shows the new size of your volume. 
+      ```
+      df -h
+      ```
+      {: pre}
+      
+      Example output: 
+      ```
+      Filesystem                                     Size  Used Avail Use% Mounted on
+      overlay                                         99G  3.2G   91G   4% /
+      tmpfs                                           64M     0   64M   0% /dev
+      tmpfs                                          7.9G     0  7.9G   0% /sys/fs/cgroup
+      /dev/mapper/3600a098038304471562b4c4743384e4d   40G   44M   23G   1% /test
+      ```
+      {: screen}
 
 
 ## Backing up and restoring data
