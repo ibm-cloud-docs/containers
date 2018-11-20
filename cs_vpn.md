@@ -394,10 +394,8 @@ After you deploy your Helm chart, test the VPN connectivity.
 ## Limiting strongSwan VPN traffic by namespace or worker node
 {: #limit}
 
-Limit the traffic for VPN deployments to pods in certain namespaces or on certain worker nodes.
-{: shortdesc}
-
 If you have a single-tenant cluster, or if you have a multi-tenant cluster in which cluster resources are shared among the tenants, you can [limit VPN traffic for each strongSwan deployment to pods in certain namespaces](#limit_namespace). If you have a multi-tenant cluster in which cluster resources are dedicated to tenants, you can [limit VPN traffic for each strongSwan deployment to the worker nodes dedicated to each tenant](#limit_worker).
+{: shortdesc}
 
 ### Limiting strongSwan VPN traffic by namespace
 {: #limit_namespace}
@@ -472,9 +470,9 @@ To limit VPN traffic to a certain namespace:
 
 5. Verify that the global network policies are created in your cluster.
     ```
-     calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
-     ```
-     {: pre}
+    calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
+    ```
+    {: pre}
 
 ### Limiting strongSwan VPN traffic by worker node
 {: #limit_worker}
@@ -482,7 +480,7 @@ To limit VPN traffic to a certain namespace:
 When you have multiple strongSwan VPN deployments in a multi-tenant cluster, you can limit VPN traffic for each deployment to specific worker nodes that are dedicated to each tenant.
 {: shortdesc}
 
-When you deploy a strongSwan Helm chart, a strongSwan VPN deployment is created. The strongSwan VPN pods are deployed to any untainted worker nodes. Additionally, a Kubernetes daemonset is created. This daemonset automatically configures routes on all untainted worker nodes in the cluster to each of the remote subnets. The strongSwan VPN pod uses the routes on worker nodes to forward requests to the remote subnet in the on-prenises network.
+When you deploy a strongSwan Helm chart, a strongSwan VPN deployment is created. The strongSwan VPN pods are deployed to any untainted worker nodes. Additionally, a Kubernetes daemonset is created. This daemonset automatically configures routes on all untainted worker nodes in the cluster to each of the remote subnets. The strongSwan VPN pod uses the routes on worker nodes to forward requests to the remote subnet in the on-premises network.
 
 Routes are not configured on tainted nodes unless you specify the taint in the `tolerations` setting in the `value.yaml` file. By tainting worker nodes, you can prevent any VPN routes from being configured on those workers. Then, you can specify the taint in the `tolerations` setting for only the VPN deployment that you do want to permit on the tainted workers. In this way, the strongSwan VPN pods for one tenant's Helm chart deployment only use the routes on that tenant's worker nodes to forward traffic over the VPN connection to the remote subnet.
 
@@ -494,6 +492,8 @@ The following steps for limiting strongSwan VPN traffic by worker node use this 
 * Two worker nodes are tainted so that only tenant A pods are scheduled on the workers.
 * Two worker nodes are tainted so that only tenant B pods are scheduled on the workers.
 * Two worker nodes are not tainted because at least 2 worker nodes are required for the strongSwan VPN pods and the load balancer IP to run on.
+
+To limit VPN traffic to tainted nodes for each tenant:
 
 1. To limit the VPN traffic to only workers dedicated to tenant A in this example, you specify the following `toleration` in the `values.yaml` file for the tenant A strongSwan Helm chart:
     ```
