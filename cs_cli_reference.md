@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-20"
 
 ---
 
@@ -3052,7 +3052,7 @@ Before you reload your worker node, make sure that pods are rescheduled on other
     This process can take a few minutes.
  5. Reload the worker node. Use the worker ID that is returned from the `ibmcloud ks workers <cluster_name_or_ID>` command.
     ```
-    ibmcloud ks worker-reload --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
+    ibmcloud ks worker-reload --cluster <cluster_name_or_ID> --workers <worker_name_or_ID>
     ```
     {: pre}
  6. Wait for the reload to complete.
@@ -3083,7 +3083,7 @@ Before you reload your worker node, make sure that pods are rescheduled on other
 **Example**:
 
   ```
-  ibmcloud ks worker-reload --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
+  ibmcloud ks worker-reload --cluster my_cluster --workers kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
