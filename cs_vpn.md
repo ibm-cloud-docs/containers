@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-20"
 
 ---
 
@@ -387,6 +387,135 @@ After you deploy your Helm chart, test the VPN connectivity.
     helm test vpn
     ```
     {: pre}
+
+<br />
+
+
+## Limiting strongSwan VPN traffic by namespace or worker node
+{: #limit}
+
+Limit the traffic for VPN deployments to pods in certain namespaces or on certain worker nodes.
+{: shortdesc}
+
+If you have a single-tenant cluster, or if you have a multi-tenant cluster in which cluster resources are shared among the tenants, you can [limit VPN traffic for each strongSwan deployment to pods in certain namespaces](#limit_namespace). If you have a multi-tenant cluster in which cluster resources are dedicated to tenants, you can [limit VPN traffic for each strongSwan deployment to the worker nodes dedicated to each tenant](#limit_worker).
+
+### Limiting strongSwan VPN traffic by namespace
+{: #limit_namespace}
+
+When you have a single-tenant or multi-tenant cluster, you can limit VPN traffic to pods in only certain namespaces.
+{: shortdesc}
+
+For example, say that you want pods in only a specific namespace, `my-secure-namespace`, to send and receive data over the VPN. You do not want pods in other namespaces, such as `kube-system`, `ibm-system`, or `default`, to access your on-premises network. To limit the VPN traffic to only `my-secure-namespace`, you can create Calico global network policies.
+
+Before you use this solution, review the following considerations and limitations.
+* You do not need to deploy the strongSwan Helm chart into the specified namespace. The strongSwan VPN pod and the routes daemonset can be deployed into `kube-system` or any other namespace. If the strongSwan VPN is not deployed into the specified namespace, then the `vpn-strongswan-ping-remote-ip-1` Helm test fails. This failure is expected and acceptable. The test pings the `remote.privateIPtoPing` private IP address of the on-premises VPN gateway from the VPN pod in the cluster, which is not in the namespace that has direct access to the remote subnet. However, the VPN pod is still able to forward traffic to pods in the namespaces that do have routes to the remote subnet, and traffic can still flow correctly. The VPN state is still `ESTABLISHED` and pods in the specified namespace can connect over the VPN.
+* The Calico global network policies in the following steps do not prevent Kubernetes pods that use host networking from sending and receiving data over the VPN. When a pod is configured with host networking, the app running in the pod can listen on the network interfaces of the worker node that it is on. These host networking pods can exist in any namespace. To determine which pods have host networking, run `kubectl get pods --all-namespaces -o wide` and look for any pods that do not have a `172.30.0.0/16` pod IP address. If you want to prevent host networking pods from sending and receiving data over the VPN, you can set the following options in your `values.yaml` deployment file: `local.subnet: 172.30.0.0/16` and `enablePodSNAT: false`. These configuration settings expose all of the Kubernetes pods over the VPN connection to the remote network. However, only the pods that are located in the specified secure namespace are reachable over the VPN.
+
+Before you begin:
+* Create or use a cluster that runs Kubernetes version 1.10 or later.
+* [Deploy the strongSwan Helm chart](#vpn_configure) and [ensure that VPN connectivity is working correctly](#vpn_test).
+* [Install and configure the Calico CLI](cs_network_policy.html#cli_install).
+
+To limit VPN traffic to a certain namespace:
+
+1. Create a Calico global network policy named `allow-non-vpn-outbound.yaml`. This policy allows all namespaces to continue to send outbound traffic to all destinations, except to the remote subnet that the strongSwan VPN accesses. Replace `<remote.subnet>` with the `remote.subnet` that you specified in the Helm `values.yaml` configuration file. To specify multiple remote subnets, see the [Calico documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
+    ```yaml
+    apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+      name: allow-non-vpn-outbound
+    spec:
+      selector: has(projectcalico.org/namespace)
+      egress:
+      - action: Allow
+        destination:
+          notNets:
+          - <remote.subnet>
+      order: 900
+      types:
+      - Egress
+    ```
+    {: codeblock}
+
+2. Apply the policy.
+
+    ```
+    calicoctl apply -f allow-non-vpn-outbound.yaml --config=filepath/calicoctl.cfg
+    ```
+    {: pre}
+
+3. Create another Calico global network policy named `allow-vpn-from-namespace.yaml`. This policy allows only a specified namespace to send outbound traffic to the remote subnet that the strongSwan VPN accesses. Replace `<namespace>` with the namespace that can access the VPN and `<remote.subnet>` with the `remote.subnet` that you specified in the Helm `values.yaml` configuration file. To specify multiple namespaces or remote subnets, see the [Calico documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
+    ```yaml
+    apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+      name: allow-vpn-from-namespace
+    spec:
+      selector: projectcalico.org/namespace == "<namespace>"
+      egress:
+      - action: Allow
+        destination:
+          nets:
+          - <remote.subnet>
+      order: 900
+      types:
+      - Egress
+    ```
+    {: codeblock}
+
+4. Apply the policy.
+
+    ```
+    calicoctl apply -f allow-vpn-from-namespace.yaml --config=filepath/calicoctl.cfg
+    ```
+    {: pre}
+
+5. Verify that the global network policies are created in your cluster.
+    ```
+     calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
+     ```
+     {: pre}
+
+### Limiting strongSwan VPN traffic by worker node
+{: #limit_worker}
+
+When you have multiple strongSwan VPN deployments in a multi-tenant cluster, you can limit VPN traffic for each deployment to specific worker nodes that are dedicated to each tenant.
+{: shortdesc}
+
+When you deploy a strongSwan Helm chart, a strongSwan VPN deployment is created. The strongSwan VPN pods are deployed to any untainted worker nodes. Additionally, a Kubernetes daemonset is created. This daemonset automatically configures routes on all untainted worker nodes in the cluster to each of the remote subnets. The strongSwan VPN pod uses the routes on worker nodes to forward requests to the remote subnet in the on-prenises network.
+
+Routes are not configured on tainted nodes unless you specify the taint in the `tolerations` setting in the `value.yaml` file. By tainting worker nodes, you can prevent any VPN routes from being configured on those workers. Then, you can specify the taint in the `tolerations` setting for only the VPN deployment that you do want to permit on the tainted workers. In this way, the strongSwan VPN pods for one tenant's Helm chart deployment only use the routes on that tenant's worker nodes to forward traffic over the VPN connection to the remote subnet.
+
+Before you use this solution, review the following considerations and limitations.
+* By default, Kubernetes places app pods onto any untainted worker nodes that are available. To make sure that this solution works correctly, each tenant must first ensure that they deploy their app pods only to workers that are tainted for the correct tenant. Additionally, each tainted worker node must also have a toleration to allow the app pods to be placed on the node. For more information about taints and tolerations, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+* Cluster resources might not be optimally utilized because neither tenant can place app pods on the shared non-tainted nodes.
+
+The following steps for limiting strongSwan VPN traffic by worker node use this example scenario: Say that you have a multi-tenant {{site.data.keyword.containerlong_notm}} cluster with six worker nodes. The cluster supports tenant A and tenant B. You taint the worker nodes in the following ways:
+* Two worker nodes are tainted so that only tenant A pods are scheduled on the workers.
+* Two worker nodes are tainted so that only tenant B pods are scheduled on the workers.
+* Two worker nodes are not tainted because at least 2 worker nodes are required for the strongSwan VPN pods and the load balancer IP to run on.
+
+1. To limit the VPN traffic to only workers dedicated to tenant A in this example, you specify the following `toleration` in the `values.yaml` file for the tenant A strongSwan Helm chart:
+    ```
+    tolerations:
+     - key: dedicated
+       operator: "Equal"
+       value: "tenantA"
+       effect: "NoSchedule"
+    ```
+    {: codeblock}
+    This toleration allows the route daemonset to run on the two worker nodes that have the `dedicated="tenantA"` taint and on the two untainted worker nodes. The strongSwan VPN pods for this deployment run on the two untainted worker nodes.
+
+2. To limit the VPN traffic to only workers dedicated to tenant B in this example, you specify the following `toleration` in the `values.yaml` file for the tenant B strongSwan Helm chart:
+    ```
+    tolerations:
+     - key: dedicated
+       operator: "Equal"
+       value: "tenantB"
+       effect: "NoSchedule"
+    ```
+    {: codeblock}
+    This toleration allows the route daemonset to run on the two worker nodes that have the `dedicated="tenantB"` taint and on the two untainted worker nodes. The strongSwan VPN pods for this deployment also run on the two untainted worker nodes.
 
 <br />
 

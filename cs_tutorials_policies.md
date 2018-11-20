@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-20"
 
 ---
 
@@ -43,7 +43,7 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
-- [Create a version 1.10 or later cluster](cs_clusters.html#clusters_ui) or [update an existing cluster to version 1.10](cs_versions.html#cs_v110). A Kubernetes version 1.10 or later cluster is required to use the 3.1.1 Calico CLI and Calico v3 policy syntax in this tutorial.
+- [Create a version 1.10 or later cluster](cs_clusters.html#clusters_ui) or [update an existing cluster to version 1.10](cs_versions.html#cs_v110). A Kubernetes version 1.10 or later cluster is required to use the 3.3.1 Calico CLI and Calico v3 policy syntax in this tutorial.
 - [Target your CLI to the cluster](cs_cli_install.html#cs_cli_configure).
 - [Install and configure the Calico CLI](cs_network_policy.html#1.10_install).
 - Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
