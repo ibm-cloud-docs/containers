@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-20"
+lastupdated: "2018-11-21"
 
 ---
 
@@ -55,6 +55,7 @@ Because strongSwan is integrated within your cluster, you don't need an external
 {: strongswan_limitations}
 
 Before using the strongSwan Helm chart, review the following considerations and limitations.
+{: shortdesc}
 
 * The strongSwan Helm chart requires NAT traversal to be enabled by the remote VPN endpoint. NAT traversal requires UDP port 4500 in addition to the default IPSec UDP port of 500. Both UDP ports need to be allowed through any firewall that is configured.
 * The strongSwan Helm chart does not support route-based IPSec VPNs.
@@ -67,12 +68,18 @@ Before using the strongSwan Helm chart, review the following considerations and 
 ## Configuring the strongSwan Helm chart
 {: #vpn_configure}
 
+Before you install the strongSwan Helm chart, you must decide on your strongSwan configuration. 
+{: shortdesc}
+
 Before you begin:
 * [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 ### Step 1: Get the strongSwan Helm chart
 {: #strongswan_1}
+
+Install Helm and get the strongSwan Helm chart to view possible configurations. 
+{: shortdesc}
 
 1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](cs_integrations.html#helm).
 
@@ -89,6 +96,7 @@ Before you begin:
 {: #strongswan_2}
 
 To control the establishment of the VPN connection, modify the following basic IPSec settings.
+{: shortdesc}
 
 For more information about each setting, read the documentation provided within the `config.yaml` file for the Helm chart.
 {: tip}
@@ -215,6 +223,9 @@ To monitor the status of the strongSwan VPN, you can set up a webhook to automat
 
 ### Step 7: Deploy the Helm chart
 {: #strongswan_7}
+
+Deploy the strongSwan Helm chart in your cluster with the configurations that you chose earlier. 
+{: shortdesc}
 
 1. If you need to configure more advanced settings, follow the documentation provided for each setting in the Helm chart.
 
