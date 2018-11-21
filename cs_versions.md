@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-21"
 
 ---
 
@@ -107,9 +107,13 @@ For a complete list of changes, review the following information:
 <p><img src="images/certified_kubernetes_1x12.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.12 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.12 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.12.
+{: shortdesc}
 
 ### Update before master
 {: #112_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master. 
+{: shortdesc}
 
 <table summary="Kubernetes updates for version 1.12">
 <caption>Changes to make before you update the master to Kubernetes 1.12</caption>
@@ -133,6 +137,9 @@ Review changes that you might need to make when you are updating from the previo
 
 ### Update after master
 {: #112_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master. 
+{: shortdesc}
 
 <table summary="Kubernetes updates for version 1.12">
 <caption>Changes to make after you update the master to Kubernetes 1.12</caption>
@@ -215,12 +222,16 @@ Review changes that you might need to make when you are updating from the previo
 <p><img src="images/certified_kubernetes_1x11.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.11 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.11 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.11.
+{: shortdesc}
 
 Before you can successfully update a cluster from Kubernetes version 1.9 or earlier to version 1.11, you must follow the steps listed in [Preparing to update to Calico v3](#111_calicov3).
 {: important}
 
 ### Update before master
 {: #111_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master. 
+{: shortdesc}
 
 <table summary="Kubernetes updates for version 1.11">
 <caption>Changes to make before you update the master to Kubernetes 1.11</caption>
@@ -261,6 +272,9 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 
 ### Update after master
 {: #111_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master. 
+{: shortdesc}
 
 <table summary="Kubernetes updates for version 1.11">
 <caption>Changes to make after you update the master to Kubernetes 1.11</caption>
@@ -498,6 +512,7 @@ In general, your container deployment processes do not change. You can still use
 {: #111_calicov3}
 
 If you are updating a cluster from Kubernetes version 1.9 or earlier to version 1.11, prepare for the Calico v3 update before you update the master. During the master upgrade to Kubernetes v1.11, new pods and new Kubernetes or Calico network policies are not scheduled. The amount of time that the update prevents new scheduling varies. Small clusters can take a few minutes, with a few extra minutes for every 10 nodes. Existing network policies and pods continue to run.
+{: shortdesc}
 
 If you are updating a cluster from Kubernetes version 1.10 to version 1.11, skip these steps because you completed these steps when you updated to 1.10.
 {: note}
@@ -527,6 +542,7 @@ Before you begin, your cluster master and all worker nodes must be running Kuber
 <p><img src="images/certified_kubernetes_1x10.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.10 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.10 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.10.
+{: shortdesc}
 
 Before you can successfully update to Kubernetes 1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).
 {: important}
@@ -535,6 +551,9 @@ Before you can successfully update to Kubernetes 1.10, you must follow the steps
 
 ### Update before master
 {: #110_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master. 
+{: shortdesc}
 
 <table summary="Kubernetes updates for version 1.10">
 <caption>Changes to make before you update the master to Kubernetes 1.10</caption>
@@ -579,6 +598,9 @@ Before you can successfully update to Kubernetes 1.10, you must follow the steps
 
 ### Update after master
 {: #110_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master. 
+{: shortdesc}
 
 <table summary="Kubernetes updates for version 1.10">
 <caption>Changes to make after you update the master to Kubernetes 1.10</caption>
@@ -784,6 +806,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 {: #110_calicov3}
 
 Before you begin, your cluster master and all worker nodes must be running Kubernetes version 1.8 or later, and must have at least one worker node.
+{: shortdesc}
 
 Prepare for the Calico v3 update before you update the master. During the master upgrade to Kubernetes v1.10, new pods and new Kubernetes or Calico network policies are not scheduled. The amount of time that the update prevents new scheduling varies. Small clusters can take a few minutes, with a few extra minutes for every 10 nodes. Existing network policies and pods continue to run.
 {: important}
@@ -811,11 +834,15 @@ Prepare for the Calico v3 update before you update the master. During the master
 <p><img src="images/certified_kubernetes_1x9.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.9 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.9 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.9.
+{: shortdesc}
 
 <br/>
 
 ### Update before master
 {: #19_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master. 
+{: shortdesc}
 
 <table summary="Kubernetes updates for version 1.9">
 <caption>Changes to make before you update the master to Kubernetes 1.9</caption>
@@ -835,6 +862,9 @@ Review changes that you might need to make when you are updating from the previo
 
 ### Update after master
 {: #19_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master. 
+{: shortdesc}
 
 <table summary="Kubernetes updates for version 1.9">
 <caption>Changes to make after you update the master to Kubernetes 1.9</caption>
@@ -888,10 +918,14 @@ If `Action required` is returned, modify the pod tolerations accordingly.</td>
 ## Archive
 {: #k8s_version_archive}
 
+Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}. 
+{: shortdesc}
+
 ### Version 1.8 (Unsupported)
 {: #cs_v18}
 
 As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.8](cs_versions_changelog.html#changelog_archive) are unsupported. Version 1.8 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.9](#cs_v19)).
+{: shortdesc}
 
 [Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately to at least 1.9.
 
@@ -899,6 +933,7 @@ As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that 
 {: #cs_v17}
 
 As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.7](cs_versions_changelog.html#changelog_archive) are unsupported. Version 1.7 clusters cannot receive security updates or support unless they are updated to the next most recently supported version ([Kubernetes 1.9](#cs_v19)).
+{: shortdesc}
 
 [Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately to at least 1.9.
 
@@ -906,5 +941,6 @@ As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [
 {: #cs_v1-5}
 
 As of 4 April 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) are unsupported. Version 1.5 clusters cannot receive security updates or support.
+{: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](cs_clusters.html#clusters) and [deploy your apps](cs_app.html#app) to the new cluster.
