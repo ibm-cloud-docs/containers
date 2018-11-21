@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-21"
 
 ---
 
@@ -783,6 +783,9 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 ## Connection annotations
 {: #connection}
 
+With connection annotations, you can change how the ALB connects to the back-end app and upstream-servers, and set timeouts or a maximum number of keepalive connections before the app or server is considered to be unavailable. 
+{: shortdesc}
+
 ### Custom connect-timeouts and read-timeouts (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
 
@@ -1303,6 +1306,9 @@ spec:
 
 ## HTTPS and TLS/SSL authentication annotations
 {: #https-auth}
+
+With HTTPS and TLS/SSL authentication annotations, you can configure your ALB for HTTPS traffic, change default HTTPS ports, enable SSL encryption for traffic that is sent to your back-end apps, or set up mutual authentication. 
+{: shortdesc}
 
 ### {{site.data.keyword.appid_short_notm}} Authentication (appid-auth)
 {: #appid-auth}
@@ -1861,6 +1867,9 @@ spec:
 ## Istio annotations
 {: #istio-annotations}
 
+Use Istio annotations to route incoming traffic to Istio-managed services. 
+{: shortdesc}
+
 ### Istio services (istio-services)
 {: #istio-services}
 
@@ -2051,6 +2060,8 @@ spec:
 ## Proxy buffer annotations
 {: #proxy-buffer}
 
+The Ingress ALB acts as a proxy between your back-end app and the client web browser. With proxy buffer annotations, you can configure how data is buffered on your ALB when sending or receiving data packets.  
+{: shortdesc}
 
 ### Client response data buffering (proxy-buffering)
 {: #proxy-buffering}
@@ -2297,8 +2308,14 @@ spec:
 ## Request and response annotations
 {: #request-response}
 
+Use request and response annotations to add or remove header information from the client and server requests, and to change the size of the body that the client can send. 
+{: shortdesc}
+
 ### Add server port to host header (add-host-port)
 {: #add-host-port}
+
+Add a server port to the client request before the request is forwarded to your back-end app. 
+{: shortdesc}
 
 <dl>
 <dt>Description</dt>
@@ -2625,6 +2642,8 @@ spec:
 ## Service limit annotations
 {: #service-limit}
 
+With service limit annotations, you can change the default request processing rate and the number of connections that can come from a single IP address. 
+{: shortdesc}
 
 ### Global rate limits (global-rate-limit)
 {: #global-rate-limit}
