@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-21"
 
 ---
 
@@ -22,6 +22,7 @@ lastupdated: "2018-11-19"
 # Cluster add-ons changelog
 
 Your {{site.data.keyword.containerlong}} cluster comes with add-ons that are updated automatically by IBM. You can also disable automatic updates for some add-ons and manually update them separately from the master and worker nodes. Refer to the tables in the following sections for a summary of changes for each version.
+{: shortdesc}
 
 ## Ingress ALB add-on changelog
 {: #alb_changelog}
