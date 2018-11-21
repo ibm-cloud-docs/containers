@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-21"
 
 ---
 
@@ -44,10 +44,14 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 ## Version 1.12 changelog
 {: #112_changelog}
 
-Review the following changes.
+Review the version 1.12 changelog. 
+{: shortdesc}
 
 ### Changelog for worker node fix pack 1.12.2_1528, released 19 November 2018
 {: #1122_1528}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.2_1528. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.12.2_1527">
 <caption>Changes since version 1.12.2_1527</caption>
@@ -72,6 +76,9 @@ Review the following changes.
 
 ### Changelog for 1.12.2_1527, released 7 November 2018
 {: #1122_1527}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.2_1527. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.11.3_1533">
 <caption>Changes since version 1.11.3_1533</caption>
@@ -166,10 +173,13 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 ## Version 1.11 changelog
 {: #111_changelog}
 
-Review the following changes.
+Review the version 1.11 changelog.
 
 ### Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018
 {: #1113_1534}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.3_1534. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.11.3_1533">
 <caption>Changes since version 1.11.3_1533</caption>
@@ -194,6 +204,9 @@ Review the following changes.
 
 ### Changelog for 1.11.3_1533, released 7 November 2018
 {: #1113_1533}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.3_1533. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.11.3_1531">
 <caption>Changes since version 1.11.3_1531</caption>
@@ -229,6 +242,9 @@ Review the following changes.
 
 ### Changelog for master fix pack 1.11.3_1531, released 1 November 2018
 {: #1113_1531_ha-master}
+
+The following table shows the changes that are included in the master fix pack 1.11.3_1531. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.11.3_1527">
 <caption>Changes since version 1.11.3_1527</caption>
@@ -276,6 +292,9 @@ Review the following changes.
 ### Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018
 {: #1113_1531}
 
+The following table shows the changes that are included in the worker node fix pack 1.11.3_1531. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.11.3_1525">
 <caption>Changes since version 1.11.3_1525</caption>
 <thead>
@@ -298,6 +317,9 @@ Review the following changes.
 
 ### Changelog for master fix pack 1.11.3_1527, released 15 October 2018
 {: #1113_1527}
+
+The following table shows the changes that are included in the master fix pack 1.11.3_1527. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.11.3_1524">
 <caption>Changes since version 1.11.3_1524</caption>
@@ -328,6 +350,9 @@ Review the following changes.
 ### Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018
 {: #1113_1525}
 
+The following table shows the changes that are included in the worker node fix pack 1.11.3_1525. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.11.3_1524">
 <caption>Changes since version 1.11.3_1524</caption>
 <thead>
@@ -357,6 +382,9 @@ Review the following changes.
 
 ### Changelog for 1.11.3_1524, released 2 October 2018
 {: #1113_1524}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.3_1524. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.11.3_1521">
 <caption>Changes since version 1.11.3_1521</caption>
@@ -393,6 +421,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for 1.11.3_1521, released 20 September 2018
 {: #1113_1521}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.3_1521. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.11.2_1516">
 <caption>Changes since version 1.11.2_1516</caption>
@@ -466,6 +497,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for 1.11.2_1516, released 4 September 2018
 {: #1112_1516}
 
+The following table shows the changes that are included in the worker node fix pack 1.11.2_1516. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.11.2_1514">
 <caption>Changes since version 1.11.2_1514</caption>
 <thead>
@@ -507,6 +541,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018
 {: #1112_1514}
 
+The following table shows the changes that are included in the worker node fix pack 1.11.2_1514. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.11.2_1513">
 <caption>Changes since version 1.11.2_1513</caption>
 <thead>
@@ -535,6 +572,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for 1.11.2_1513, released 14 August 2018
 {: #1112_1513}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.2_1513. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.10.5_1518">
 <caption>Changes since version 1.10.5_1518</caption>
@@ -612,10 +652,13 @@ Also, now when you update the cluster master, the default IBM file storage class
 ## Version 1.10 changelog
 {: #110_changelog}
 
-Review the following changes.
+Review the version 1.10 changelog. 
 
 ### Changelog for worker node fix pack 1.10.8_1531, released 19 November 2018
 {: #1108_1531}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.8_1531. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.10.8_1530">
 <caption>Changes since version 1.10.8_1530</caption>
@@ -639,6 +682,9 @@ Review the following changes.
 
 ### Changelog for 1.10.8_1530, released 7 November 2018
 {: #1108_1530_ha-master}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.8_1530. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.10.8_1528">
 <caption>Changes since version 1.10.8_1528</caption>
@@ -698,6 +744,9 @@ Review the following changes.
 ### Changelog for worker node fix pack 1.10.8_1528, released 26 October 2018
 {: #1108_1528}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.8_1528. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.10.8_1527">
 <caption>Changes since version 1.10.8_1527</caption>
 <thead>
@@ -720,6 +769,9 @@ Review the following changes.
 
 ### Changelog for master fix pack 1.10.8_1527, released 15 October 2018
 {: #1108_1527}
+
+The following table shows the changes that are included in the master fix pack 1.10.8_1527. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.10.8_1524">
 <caption>Changes since version 1.10.8_1524</caption>
@@ -750,6 +802,9 @@ Review the following changes.
 ### Changelog for worker node fix pack 1.10.8_1525, released 10 October 2018
 {: #1108_1525}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.8_1525. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.10.8_1524">
 <caption>Changes since version 1.10.8_1524</caption>
 <thead>
@@ -779,6 +834,9 @@ Review the following changes.
 
 ### Changelog for 1.10.8_1524, released 2 October 2018
 {: #1108_1524}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.8_1524. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.10.7_1520">
 <caption>Changes since version 1.10.7_1520</caption>
@@ -827,6 +885,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for worker node fix pack 1.10.7_1521, released 20 September 2018
 {: #1107_1521}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.7_1521. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.10.7_1520">
 <caption>Changes since version 1.10.7_1520</caption>
@@ -877,6 +938,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for 1.10.7_1520, released 4 September 2018
 {: #1107_1520}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.7_1520. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.10.5_1519">
 <caption>Changes since version 1.10.5_1519</caption>
 <thead>
@@ -924,6 +988,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.10.5_1519, released 23 August 2018
 {: #1105_1519}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.5_1519. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.10.5_1518">
 <caption>Changes since version 1.10.5_1518</caption>
 <thead>
@@ -954,6 +1021,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.10.5_1518, released 13 August 2018
 {: #1105_1518}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.5_1518. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.10.5_1517">
 <caption>Changes since version 1.10.5_1517</caption>
 <thead>
@@ -976,6 +1046,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for 1.10.5_1517, released 27 July 2018
 {: #1105_1517}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.5_1517. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.10.3_1514">
 <caption>Changes since version 1.10.3_1514</caption>
@@ -1030,6 +1103,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.10.3_1514, released 3 July 2018
 {: #1103_1514}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.3_1514. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.10.3_1513">
 <caption>Changes since version 1.10.3_1513</caption>
 <thead>
@@ -1054,6 +1130,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.10.3_1513, released 21 June 2018
 {: #1103_1513}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.3_1513. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.10.3_1512">
 <caption>Changes since version 1.10.3_1512</caption>
 <thead>
@@ -1076,6 +1155,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for 1.10.3_1512, released 12 June 2018
 {: #1103_1512}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.3_1512. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.10.1_1510">
 <caption>Changes since version 1.10.1_1510</caption>
@@ -1132,6 +1214,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.10.1_1510, released 18 May 2018
 {: #1101_1510}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.1_1510. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.10.1_1509">
 <caption>Changes since version 1.10.1_1509</caption>
 <thead>
@@ -1155,6 +1240,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.10.1_1509, released 16 May 2018
 {: #1101_1509}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.1_1509. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.10.1_1508">
 <caption>Changes since version 1.10.1_1508</caption>
 <thead>
@@ -1177,6 +1265,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for 1.10.1_1508, released 01 May 2018
 {: #1101_1508}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.1_1508. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.9.7_1510">
 <caption>Changes since version 1.9.7_1510</caption>
@@ -1240,10 +1331,13 @@ Also, now when you update the cluster master, the default IBM file storage class
 ## Version 1.9 changelog
 {: #19_changelog}
 
-Review the following changes.
+Review the version 1.9 changelog.
 
 ### Changelog for 1.9.11_1536, released 19 November 2018
 {: #1911_1536}
+
+The following table shows the changes that are included in the worker node fix pack 1.9.11_1536. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.9.10_1532">
 <caption>Changes since version 1.9.10_1532</caption>
@@ -1292,6 +1386,9 @@ Review the following changes.
 ### Changelog for worker node fix 1.9.10_1532, released 7 November 2018
 {: #1910_1532}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.11_1532. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.9.10_1531">
 <caption>Changes since version 1.9.10_1531</caption>
 <thead>
@@ -1314,6 +1411,9 @@ Review the following changes.
 
 ### Changelog for worker node fix pack 1.9.10_1531, released 26 October 2018
 {: #1910_1531}
+
+The following table shows the changes that are included in the worker node fix pack 1.9.10_1531. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.9.10_1530">
 <caption>Changes since version 1.9.10_1530</caption>
@@ -1338,6 +1438,9 @@ Review the following changes.
 ### Changelog for master fix pack 1.9.10_1530 released 15 October 2018
 {: #1910_1530}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.10_1530. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.9.10_1527">
 <caption>Changes since version 1.9.10_1527</caption>
 <thead>
@@ -1360,6 +1463,9 @@ Review the following changes.
 
 ### Changelog for worker node fix pack 1.9.10_1528, released 10 October 2018
 {: #1910_1528}
+
+The following table shows the changes that are included in the worker node fix pack 1.9.10_1528. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.9.10_1527">
 <caption>Changes since version 1.9.10_1527</caption>
@@ -1391,6 +1497,9 @@ Review the following changes.
 ### Changelog for 1.9.10_1527, released 2 October 2018
 {: #1910_1527}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.10_1527. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.9.10_1523">
 <caption>Changes since version 1.9.10_1523</caption>
 <thead>
@@ -1420,6 +1529,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for worker node fix pack 1.9.10_1524, released 20 September 2018
 {: #1910_1524}
+
+The following table shows the changes that are included in the worker node fix pack 1.9.10_1524. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.9.10_1523">
 <caption>Changes since version 1.9.10_1523</caption>
@@ -1470,6 +1582,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for 1.9.10_1523, released 4 September 2018
 {: #1910_1523}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.10_1523. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.9.9_1522">
 <caption>Changes since version 1.9.9_1522</caption>
 <thead>
@@ -1511,6 +1626,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.9.9_1522, released 23 August 2018
 {: #199_1522}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.9_1522. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.9.9_1521">
 <caption>Changes since version 1.9.9_1521</caption>
 <thead>
@@ -1541,6 +1659,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.9.9_1521, released 13 August 2018
 {: #199_1521}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.9_1521. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.9.9_1520">
 <caption>Changes since version 1.9.9_1520</caption>
 <thead>
@@ -1563,6 +1684,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for 1.9.9_1520, released 27 July 2018
 {: #199_1520}
+
+The following table shows the changes that are included in the worker node fix pack 1.9.9_1520. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.9.8_1517">
 <caption>Changes since version 1.9.8_1517</caption>
@@ -1611,6 +1735,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.9.8_1517, released 3 July 2018
 {: #198_1517}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.8_1517. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.9.8_1516">
 <caption>Changes since version 1.9.8_1516</caption>
 <thead>
@@ -1635,6 +1762,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.9.8_1516, released 21 June 2018
 {: #198_1516}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.8_1516. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.9.8_1515">
 <caption>Changes since version 1.9.8_1515</caption>
 <thead>
@@ -1657,6 +1787,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for 1.9.8_1515, released 19 June 2018
 {: #198_1515}
+
+The following table shows the changes that are included in the worker node fix pack 1.9.8_1515. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.9.7_1513">
 <caption>Changes since version 1.9.7_1513</caption>
@@ -1700,6 +1833,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.9.7_1513, released 11 June 2018
 {: #197_1513}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.7_1513. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.9.7_1512">
 <caption>Changes since version 1.9.7_1512</caption>
 <thead>
@@ -1722,6 +1858,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for worker node fix pack 1.9.7_1512, released 18 May 2018
 {: #197_1512}
+
+The following table shows the changes that are included in the worker node fix pack 1.9.7_1512. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.9.7_1511">
 <caption>Changes since version 1.9.7_1511</caption>
@@ -1746,6 +1885,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for worker node fix pack 1.9.7_1511, released 16 May 2018
 {: #197_1511}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.7_1511. 
+{: shortdesc}
+
 <table summary="Changes that were made since version 1.9.7_1510">
 <caption>Changes since version 1.9.7_1510</caption>
 <thead>
@@ -1768,6 +1910,9 @@ Also, now when you update the cluster master, the default IBM file storage class
 
 ### Changelog for 1.9.7_1510, released 30 April 2018
 {: #197_1510}
+
+The following table shows the changes that are included in the worker node fix pack 1.9.7_1510. 
+{: shortdesc}
 
 <table summary="Changes that were made since version 1.9.3_1506">
 <caption>Changes since version 1.9.3_1506</caption>
