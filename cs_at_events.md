@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-21"
 
 ---
 
@@ -39,6 +39,9 @@ For more information about how the service works, see the [{{site.data.keyword.c
 
 ## Finding information for events
 {: #kube-find}
+
+You can monitor the activities in your cluster by looking at the logs in the Kibana dashboard. 
+{: shortdesc}
 
 To monitor administrative activity:
 
