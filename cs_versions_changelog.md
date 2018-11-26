@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-21"
+lastupdated: "2018-11-26"
 
 ---
 
@@ -47,6 +47,9 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.12 changelog. 
 {: shortdesc}
 
+
+
+
 ### Changelog for worker node fix pack 1.12.2_1528, released 19 November 2018
 {: #1122_1528}
 
@@ -77,7 +80,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.12.2_1527, released 7 November 2018
 {: #1122_1527}
 
-The following table shows the changes that are included in the worker node fix pack 1.12.2_1527. 
+The following table shows the changes that are included in patch 1.12.2_1527. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.11.3_1533">
@@ -175,6 +178,8 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 
 Review the version 1.11 changelog.
 
+
+
 ### Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018
 {: #1113_1534}
 
@@ -205,7 +210,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.11.3_1533, released 7 November 2018
 {: #1113_1533}
 
-The following table shows the changes that are included in the worker node fix pack 1.11.3_1533. 
+The following table shows the changes that are included in patch 1.11.3_1533. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.11.3_1531">
@@ -383,7 +388,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.11.3_1524, released 2 October 2018
 {: #1113_1524}
 
-The following table shows the changes that are included in the worker node fix pack 1.11.3_1524. 
+The following table shows the changes that are included in patch 1.11.3_1524. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.11.3_1521">
@@ -422,7 +427,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for 1.11.3_1521, released 20 September 2018
 {: #1113_1521}
 
-The following table shows the changes that are included in the worker node fix pack 1.11.3_1521. 
+The following table shows the changes that are included in patch 1.11.3_1521. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.11.2_1516">
@@ -497,7 +502,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 ### Changelog for 1.11.2_1516, released 4 September 2018
 {: #1112_1516}
 
-The following table shows the changes that are included in the worker node fix pack 1.11.2_1516. 
+The following table shows the changes that are included in patch 1.11.2_1516. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.11.2_1514">
@@ -573,7 +578,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.11.2_1513, released 14 August 2018
 {: #1112_1513}
 
-The following table shows the changes that are included in the worker node fix pack 1.11.2_1513. 
+The following table shows the changes that are included in patch 1.11.2_1513. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.10.5_1518">
@@ -652,7 +657,9 @@ The following table shows the changes that are included in the worker node fix p
 ## Version 1.10 changelog
 {: #110_changelog}
 
-Review the version 1.10 changelog. 
+Review the version 1.10 changelog.
+
+
 
 ### Changelog for worker node fix pack 1.10.8_1531, released 19 November 2018
 {: #1108_1531}
@@ -683,7 +690,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.10.8_1530, released 7 November 2018
 {: #1108_1530_ha-master}
 
-The following table shows the changes that are included in the worker node fix pack 1.10.8_1530. 
+The following table shows the changes that are included in patch 1.10.8_1530. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.10.8_1528">
@@ -835,7 +842,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.10.8_1524, released 2 October 2018
 {: #1108_1524}
 
-The following table shows the changes that are included in the worker node fix pack 1.10.8_1524. 
+The following table shows the changes that are included in patch 1.10.8_1524. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.10.7_1520">
@@ -938,7 +945,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.10.7_1520, released 4 September 2018
 {: #1107_1520}
 
-The following table shows the changes that are included in the worker node fix pack 1.10.7_1520. 
+The following table shows the changes that are included in patch 1.10.7_1520. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.10.5_1519">
@@ -1047,7 +1054,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.10.5_1517, released 27 July 2018
 {: #1105_1517}
 
-The following table shows the changes that are included in the worker node fix pack 1.10.5_1517. 
+The following table shows the changes that are included in patch 1.10.5_1517. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.10.3_1514">
@@ -1156,7 +1163,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.10.3_1512, released 12 June 2018
 {: #1103_1512}
 
-The following table shows the changes that are included in the worker node fix pack 1.10.3_1512. 
+The following table shows the changes that are included in patch 1.10.3_1512. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.10.1_1510">
@@ -1266,7 +1273,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.10.1_1508, released 01 May 2018
 {: #1101_1508}
 
-The following table shows the changes that are included in the worker node fix pack 1.10.1_1508. 
+The following table shows the changes that are included in patch 1.10.1_1508. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.9.7_1510">
@@ -1333,10 +1340,12 @@ The following table shows the changes that are included in the worker node fix p
 
 Review the version 1.9 changelog.
 
+
+
 ### Changelog for 1.9.11_1536, released 19 November 2018
 {: #1911_1536}
 
-The following table shows the changes that are included in the worker node fix pack 1.9.11_1536. 
+The following table shows the changes that are included in patch 1.9.11_1536. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.9.10_1532">
@@ -1497,7 +1506,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.9.10_1527, released 2 October 2018
 {: #1910_1527}
 
-The following table shows the changes that are included in the worker node fix pack 1.9.10_1527. 
+The following table shows the changes that are included in patch 1.9.10_1527. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.9.10_1523">
@@ -1582,7 +1591,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.9.10_1523, released 4 September 2018
 {: #1910_1523}
 
-The following table shows the changes that are included in the worker node fix pack 1.9.10_1523. 
+The following table shows the changes that are included in patch 1.9.10_1523. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.9.9_1522">
@@ -1685,7 +1694,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.9.9_1520, released 27 July 2018
 {: #199_1520}
 
-The following table shows the changes that are included in the worker node fix pack 1.9.9_1520. 
+The following table shows the changes that are included in patch 1.9.9_1520. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.9.8_1517">
@@ -1788,7 +1797,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.9.8_1515, released 19 June 2018
 {: #198_1515}
 
-The following table shows the changes that are included in the worker node fix pack 1.9.8_1515. 
+The following table shows the changes that are included in patch 1.9.8_1515. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.9.7_1513">
@@ -1911,7 +1920,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.9.7_1510, released 30 April 2018
 {: #197_1510}
 
-The following table shows the changes that are included in the worker node fix pack 1.9.7_1510. 
+The following table shows the changes that are included in patch 1.9.7_1510. 
 {: shortdesc}
 
 <table summary="Changes that were made since version 1.9.3_1506">
