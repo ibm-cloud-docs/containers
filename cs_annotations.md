@@ -509,7 +509,7 @@ rules:
 </tr>
 <tr>
 <td>Location snippet</td>
-<td>Provide the configuration snippet that you want to use for the specified service. The sample snippet for the <code>myservice1</code> service configures the location block to turn off proxy request buffering, turn on log rewrites, and set additional headers when it forwards a request to the service. The sample snippet for the the <code>myservice2</code> service sets an empty <code>Authorization</code> header. Every location snippet must end with the value <code>&lt;EOS&gt;</code>.</td>
+<td>Provide the configuration snippet that you want to use for the specified service. The sample snippet for the <code>myservice1</code> service configures the location block to turn off proxy request buffering, turn on log rewrites, and set additional headers when it forwards a request to the service. The sample snippet for the <code>myservice2</code> service sets an empty <code>Authorization</code> header. Every location snippet must end with the value <code>&lt;EOS&gt;</code>.</td>
 </tr>
 </tbody></table>
 </dd>
