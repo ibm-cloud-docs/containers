@@ -417,7 +417,7 @@ Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you ca
 In order to make changes to your logging or filter configurations, the Fluentd add-on must be at the latest version. By default, automatic updates to the add-on are enabled.
 {: shortdesc}
 
-You can manage automatic updates of the Ingress ALB add-on in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
+You can manage automatic updates of the Fluentd add-on in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
 
 * Check whether automatic updates are enabled by running the `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_log_autoupdate_get).
 * Disable automatic updates by running the `ibmcloud ks logging-autoupdate-disable` [command](cs_cli_reference.html#cs_log_autoupdate_disable).
