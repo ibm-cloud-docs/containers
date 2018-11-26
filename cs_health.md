@@ -57,9 +57,6 @@ In the following image you can see the location of the sources that you can conf
 4. `storage`: Information about persistent storage that is set up in your cluster. Storage logs can help you set up problem determination dashboards and alerts as part of your DevOps pipeline and production releases. **Note**: The paths `/var/log/kubelet.log` and `/var/log/syslog` also contain storage logs, but logs from these paths are collected by the `kubernetes` and `worker` log sources.</br>**Paths**:
     * `/var/log/ibmc-s3fs.log`
     * `/var/log/ibmc-block.log`
-    * `/var/lib/docker/containers/ibm-file-plugin.log`
-    * `/var/lib/docker/containers/ibmcloud-block-storage.log`
-    * `/var/lib/docker/containers/ibmcloud-object-storage.log`
 
   **Pods**:
     * `portworx-***`
