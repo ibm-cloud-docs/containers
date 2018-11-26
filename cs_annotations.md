@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-21"
+lastupdated: "2018-11-26"
 
 ---
 
@@ -474,11 +474,14 @@ metadata:
 name: myingress
 annotations:
   ingress.bluemix.net/location-snippets: |
-    serviceName=&lt;myservice&gt;
+    serviceName=&lt;myservice1&gt;
     # Example location snippet
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
+    &lt;EOS&gt;
+    serviceName=&lt;myservice2&gt;
+    proxy_set_header Authorization "";
     &lt;EOS&gt;
 spec:
 tls:
@@ -506,7 +509,7 @@ rules:
 </tr>
 <tr>
 <td>Location snippet</td>
-<td>Provide the configuration snippet that you want to use for the specified service. This sample snippet configures the location block to turn off proxy request buffering, turn on log rewrites, and set additional headers when it forwards a request to the <code>myservice</code> service.</td>
+<td>Provide the configuration snippet that you want to use for the specified service. The sample snippet for the <code>myservice1</code> service configures the location block to turn off proxy request buffering, turn on log rewrites, and set additional headers when it forwards a request to the service. The sample snippet for the the <code>myservice2</code> service sets an empty <code>Authorization</code> header. Every location snippet must end with the value <code>&lt;EOS&gt;</code>.</td>
 </tr>
 </tbody></table>
 </dd>
