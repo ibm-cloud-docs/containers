@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-27"
 
 ---
 
@@ -25,6 +25,7 @@ lastupdated: "2018-11-19"
 {: faq}
 
 Kubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers managements tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention. All containers that make up your microservice are grouped into pods, a logical unit to ensure easy management and discovery. These pods run on compute hosts that are managed in a Kubernetes cluster that is portable, extensible, and self-healing in case of failures. 
+{: shortdesc}
 
 For more information about Kubernetes, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational). 
 
@@ -92,7 +93,7 @@ For more information about available bare metal flavors and how bare metal is di
 
 - Latest: 1.12.2
 - Default: 1.10.8
-- Other: 1.11.3, 1.9.11
+- Other: 1.11.3
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](cs_versions.html#cs_versions).
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-27"
 
 
 ---
@@ -323,6 +323,7 @@ To set the API key to access the IBM Cloud infrastructure (SoftLayer) portfolio:
 {: #credentials}
 
 Instead of using the default linked IBM Cloud infrastructure (SoftLayer) account to order infrastructure for clusters within a region, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using the [`ibmcloud ks credential-set`](cs_cli_reference.html#cs_credentials_set) command. The IBM Cloud infrastructure (SoftLayer) credentials are used instead of the default Pay-As-You-Go account's credentials that are stored for the region.
+{: shortdesc}
 
 The IBM Cloud infrastructure (SoftLayer) credentials set by the `ibmcloud ks credential-set` command persist after your session ends. If you remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set with the [`ibmcloud ks credential-unset`](cs_cli_reference.html#cs_credentials_unset) command, the default Pay-As-You-Go account credentials are used. However, this change in infrastructure account credentials might cause [orphaned clusters](cs_troubleshoot_clusters.html#orphaned).
 {: important}
@@ -824,6 +825,9 @@ Now that you created and bound a custom Kubernetes RBAC role or cluster role, fo
 ## Assigning RBAC permissions
 {: #role-binding}
 
+Use RBAC roles to define the actions that a user can take to work with the Kubernetes resources in your cluster. 
+{: shortdesc}
+
 **What are RBAC roles and cluster roles?**</br>
 
 RBAC roles and cluster roles define a set of permissions for how users can interact with Kubernetes resources in your cluster. A role is scoped to resources within a specific namespace, like a deployment. A cluster role is scoped to cluster-wide resources, like worker nodes, or to namespace-scoped resources that can be found in each namespace, like pods.
@@ -1295,6 +1299,9 @@ Before you begin, [ensure that the user's infrastructure credentials are not use
 #### Remove custom RBAC permissions
 {: #remove_custom_rbac}
 
+If you do not need custom RBAC permissions anymore, you can remove them. 
+{: shortdesc}
+
 1. Open the `.yaml` file for the role binding or cluster role binding that you created.
 2. In the `subjects` section, remove the section for the user.
 3. Save the file.
@@ -1308,6 +1315,7 @@ Before you begin, [ensure that the user's infrastructure credentials are not use
 {: #remove_cloud_foundry}
 
 To remove all of a user's Cloud Foundry permissions, you can remove the user's organization roles. If you only want to remove a user's ability, for example, to bind services in a cluster, only remove the user's space roles.
+{: shortdesc}
 
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) and navigate to **Manage > Account > Users**.
 2. Click the name of the user that you want to remove permissions from.
@@ -1326,6 +1334,9 @@ To remove all of a user's Cloud Foundry permissions, you can remove the user's o
 
 #### Remove IBM Cloud infrastructure (SoftLayer) permissions
 {: #remove_infra}
+
+You can remove IBM Cloud infrastructure (SoftLayer) permissions for a user by using the {{site.data.keyword.Bluemix_notm}} console.
+{: shortdesc}
 
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/).
 2. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Infrastructure**.

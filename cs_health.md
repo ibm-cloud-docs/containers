@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-27"
 
 ---
 
@@ -24,6 +24,9 @@ lastupdated: "2018-11-19"
 
 Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you troubleshoot issues and improve the health and performance of your Kubernetes clusters and apps.
 {: shortdesc}
+
+Looking for other {{site.data.keyword.Bluemix_notm}} or third-party logging services that you can add to your cluster? Check out [Logging and monitoring integrations](cs_integrations.html#health_services), including [{{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).
+{: note}
 
 ## Understanding cluster and app log forwarding
 {: #logging}
@@ -57,9 +60,6 @@ In the following image you can see the location of the sources that you can conf
 4. `storage`: Information about persistent storage that is set up in your cluster. Storage logs can help you set up problem determination dashboards and alerts as part of your DevOps pipeline and production releases. **Note**: The paths `/var/log/kubelet.log` and `/var/log/syslog` also contain storage logs, but logs from these paths are collected by the `kubernetes` and `worker` log sources.</br>**Paths**:
     * `/var/log/ibmc-s3fs.log`
     * `/var/log/ibmc-block.log`
-    * `/var/lib/docker/containers/ibm-file-plugin.log`
-    * `/var/lib/docker/containers/ibmcloud-block-storage.log`
-    * `/var/lib/docker/containers/ibmcloud-object-storage.log`
 
   **Pods**:
     * `portworx-***`

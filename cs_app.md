@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-27"
 
 ---
 
@@ -43,13 +43,14 @@ Learn the general steps for deploying apps by clicking an area of the following 
 ## Planning to run apps in clusters
 {: #plan_apps}
 
-Ensure that your app is ready for deploying to {{site.data.keyword.containerlong_notm}}.
+Before you deploy an app to an {{site.data.keyword.containerlong_notm}} cluster, decide how you want to set up your app so that your app can be accessed properly and be integrated with other services in {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
 ### What type of Kubernetes objects can I make for my app?
 {: #object}
 
 When you prepare your app YAML file, you have many options to increase the app's availability, performance, and security. For example, instead of a single pod, you can use a Kubernetes controller object to manage your workload, such as a replica set, job, or daemon set. For more information about pods and controllers, view the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). A deployment that manages a replica set of pods is a common use case for an app.
+{: shortdesc}
 
 For example, a `kind: Deployment` object is a good choice to deploy an app pod because with it, you can specify a replica set for more availability for your pods.
 
@@ -83,6 +84,7 @@ See [Specifying your app requirements in your YAML file](#app_yaml) for descript
 {: #variables}
 
 To add variable information to your deployments instead of hard-coding the data into the YAML file, you can use a Kubernetes [`ConfigMap` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) or [`Secret` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/) object.
+{: shortdesc}
 
 To consume a configmap or secret, you need to mount it to the pod. The configmap or secret is combined with the pod just before the pod is run. You can reuse a deployment spec and image across many apps, but then swap out the customized configmaps and secrets. Secrets in particular can take up a lot of storage on the local node, so plan accordingly.
 
@@ -109,6 +111,7 @@ See [Adding services to apps](cs_integrations.html#adding_app).
 
 ### How can I make sure that my app has the right resources?
 When you [specify your app YAML file](#app_yaml), you can add Kubernetes functionalities to your app configuration that help your app get the right resources. In particular, [set resource limits and requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) for each container that is defined in your YAML file.
+{: shortdesc}
 
 Additionally, your cluster admin might set up resource controls that can affect your app deployment, such as the following.
 *  [Resource quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
@@ -116,6 +119,7 @@ Additionally, your cluster admin might set up resource controls that can affect 
 
 ### How can I access my app?
 You can access your app privately within the cluster by [using a `clusterIP` service](cs_network_cluster.html#planning).
+{: shortdesc}
 
 If you want to expose your app publicly, you have different options that depend on your cluster type.
 *  **Free cluster**: You can expose your app by using a [NodePort service](cs_nodeport.html#nodeport).
@@ -125,14 +129,17 @@ If you want to expose your app publicly, you have different options that depend 
 
 ### After I deploy my app, how can I monitor its health?
 You can set up {{site.data.keyword.Bluemix_notm}} [logging and monitoring](cs_health.html#health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](cs_integrations.html#health_services).
+{: shortdesc}
 
 ### How can I keep my app up-to-date?
 If you want to dynamically add and remove apps in response to workload usage, see [Scaling apps](cs_app.html#app_scaling).
+{: shortdesc}
 
 If you want to manage updates to your app, see [Managing rolling deployments](cs_app.html#app_rolling).
 
 ### How can I control who has access to my app deployments?
 The account and cluster admins can control access on many different levels: the cluster, Kubernetes namespace, pod, and container.
+{: shortdesc}
 
 With {{site.data.keyword.Bluemix_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](cs_users.html#users).
 
@@ -161,6 +168,9 @@ You can also [connect multiple clusters in different regions with a global load 
 
 ### Increasing the availability of your app
 {: #increase_availability}
+
+Consider the following options to increase availability of your app. 
+{: shortdesc}
 
 <dl>
   <dt>Use deployments and replica sets to deploy your app and its dependencies</dt>
@@ -458,6 +468,7 @@ spec:
 {: #yaml-example}
 
 The following is a copy of the deployment YAML that is [discussed section-by-section previously](#app_yaml). You can also [download the YAML from GitHub](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
+{: shortdesc}
 
 ```yaml
 apiVersion: apps/v1beta1

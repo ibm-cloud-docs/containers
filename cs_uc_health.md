@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-27"
 
 ---
 
@@ -164,7 +164,7 @@ Security first: The Development Exec chose Trusted Compute for bare metal to hos
 
 Secured research apps lead to increased clinical trial participation.
 
-To achieve global availability, the Dev, Test, and Production systems are deployed across the globe in several data centers. For HA, they use a combination of clusters in multiple geographic regions as well as multizone clusters. They can easily deploy the research app to Frankfort clusters to comply with the local European regulation. They also deploy the app within the United States clusters to ensure availability and recovery locally. They also spread the research workload across multizone clusters in Frankfort to ensure that the European app is available and also balances the workload efficiently. Because researchers are uploading sensitive data with the research-sharing app, the app’s clusters are hosted in regions where stricter regulations apply.
+To achieve global availability, the Dev, Test, and Production systems are deployed across the globe in several data centers. For HA, they use a combination of clusters in multiple geographic regions as well as multizone clusters. They can easily deploy the research app to Frankfurt clusters to comply with the local European regulation. They also deploy the app within the United States clusters to ensure availability and recovery locally. They also spread the research workload across multizone clusters in Frankfurt to ensure that the European app is available and also balances the workload efficiently. Because researchers are uploading sensitive data with the research-sharing app, the app’s clusters are hosted in regions where stricter regulations apply.
 
 Developers focus on domain problems, by using existing tools: Instead of writing unique ML code, ML logic is snapped into apps, by binding {{site.data.keyword.cloud_notm}} services to clusters. Developers are also freed up from infrastructure management tasks because IBM takes care of Kubernetes and infrastructure upgrades, security, and more.
 

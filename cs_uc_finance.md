@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-27"
 
 ---
 
@@ -155,7 +155,7 @@ Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, th
 **Step 1: Lift and shift to secure compute**
 * Apps that manage highly sensitive data can be rehosted on {{site.data.keyword.containerlong_notm}} running on Bare Metal for Trusted Compute. Trusted Compute can verify the underlying hardware against tampering. 
 * Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public {{site.data.keyword.Bluemix_notm}}.
-* From that core, Vulnerability Advisor provides image, policy, container, and packaging scanning vulnerability scanning, for known malware. 
+* From that core, Vulnerability Advisor provides image, policy, container, and packaging vulnerability scanning, for known malware. 
 * Private data center / on-premises capital costs are greatly reduced and replaced with a utility computing model that scales based on workload demand.
 
 **Step 2: Operations and connections to existing payment systems back-end**

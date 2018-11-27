@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-19"
+lastupdated: "2018-11-27"
 
 ---
 
@@ -38,6 +38,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>27 November</td>
+<td>{{site.data.keyword.loganalysisfull_notm}} with LogDNA</td>
+<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
+</tr>
 <tr>
 <td>7 November</td>
 <td>Load balancer 2.0 (beta)</td>
@@ -94,7 +99,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <tr>
 <td>04 October</td>
 <td>[{{site.data.keyword.registrylong}} is now integrated with {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam)</td>
-<td>You can use {{site.data.keyword.Bluemix_notm}} IAM to control access to your registry resources, such as pulling, pushing, and building images. When you create a cluster, you also create a registry token so that the cluster can work with your registry. Therefore, you need the registry **Administrator** platform management role to create a cluster. To enable {{site.data.keyword.Bluemix_notm}} IAM for your registry account, see [Enabling policy enforcement for existing users](/docs/services/Registry/registry_users.html#existing_users).</td>
+<td>You can use {{site.data.keyword.Bluemix_notm}} IAM to control access to your registry resources, such as pulling, pushing, and building images. When you create a cluster, you also create a registry token so that the cluster can work with your registry. Therefore, you need the account-level registry **Administrator** platform management role to create a cluster. To enable {{site.data.keyword.Bluemix_notm}} IAM for your registry account, see [Enabling policy enforcement for existing users](/docs/services/Registry/registry_users.html#existing_users).</td>
 </tr>
 <tr>
 <td>01 October</td>
