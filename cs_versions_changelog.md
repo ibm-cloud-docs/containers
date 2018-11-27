@@ -46,8 +46,49 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.12 changelog. 
 {: shortdesc}
 
+### Changelog for 1.12.2_1529, released 27 November 2018
+{: #1122_1529}
 
+The following table shows the changes that are included in patch 1.12.2_1529.
+{: shortdesc}
 
+<table summary="Changes that were made since version 1.12.2_1528">
+<caption>Changes since version 1.12.2_1528</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.2.1</td>
+<td>v3.3.1</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/releases/#v331). Update resolves [Tigera Technical Advisory TTA-2018-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/).</td>
+</tr>
+<tr>
+<td>Cluster DNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed a bug that could result in both Kubernetes DNS and CoreDNS pods to run after cluster creation or update operations.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>v1.2.0</td>
+<td>v1.1.5</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.5). Updated containerd to fix a deadlock that can [stop pods from terminating ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/issues/2744).</td>
+</tr>
+<tr>
+<td>OpenVPN client and server</td>
+<td>2.4.4-r1-6</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>Updated image for [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) and [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.2_1528, released 19 November 2018
 {: #1122_1528}
@@ -177,7 +218,55 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 
 Review the version 1.11 changelog.
 
+### Changelog for 1.11.4_1535, released 27 November 2018
+{: #1114_1535}
 
+The following table shows the changes that are included in patch 1.11.4_1535.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.3_1534">
+<caption>Changes since version 1.11.3_1534</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.2.1</td>
+<td>v3.3.1</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/releases/#v331). Update resolves [Tigera Technical Advisory TTA-2018-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/).</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>v1.1.4</td>
+<td>v1.1.5</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.5). Updated containerd to fix a deadlock that can [stop pods from terminating ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/issues/2744).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.3-127</td>
+<td>v1.11.4-142</td>
+<td>Updated to support the Kubernetes 1.11.4 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.3</td>
+<td>v1.11.4</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.4).</td>
+</tr>
+<tr>
+<td>OpenVPN client and server</td>
+<td>2.4.4-r1-6</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>Updated image for [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) and [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018
 {: #1113_1534}
@@ -658,7 +747,31 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 
 Review the version 1.10 changelog.
 
+### Changelog for worker node fix pack 1.10.8_1532, released 27 November 2018
+{: #1108_1532}
 
+The following table shows the changes that are included in the worker node fix pack 1.10.8_1532.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.8_1531">
+<caption>Changes since version 1.10.8_1531</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>17.06.2</td>
+<td>18.06.1</td>
+<td>See the [Docker release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/release-notes/#18061-ce).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.8_1531, released 19 November 2018
 {: #1108_1531}
@@ -1347,7 +1460,31 @@ Unsupported Kubernetes versions:
 
 Review the version 1.9 changelog.
 
+### Changelog for worker node fix pack 1.9.11_1537, released 27 November 2018
+{: #1911_1537}
 
+The following table shows the changes that are included in the worker node fix pack 1.9.11_1537.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.9.11_1536">
+<caption>Changes since version 1.9.11_1536</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>17.06.2</td>
+<td>18.06.1</td>
+<td>See the [Docker release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/release-notes/#18061-ce).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.9.11_1536, released 19 November 2018
 {: #1911_1536}
