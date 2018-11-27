@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-26"
+lastupdated: "2018-11-27"
 
 ---
 
@@ -122,7 +122,7 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
 The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. To install and configure the Calico CLI, click one of the following links based on your cluster version:
 
 * [Kubernetes version 1.10 or later clusters](#1.10_install)
-* [Kubernetes version 1.9 or earlier clusters](#1.9_install)
+* [Kubernetes version 1.9 or earlier clusters (deprecated)](#1.9_install)
 
 Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
 {: tip}
@@ -213,8 +213,11 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
       {: screen}
 
 
-### Installing and configuring the version 1.6.3 Calico CLI for clusters that are running Kubernetes version 1.9 or earlier
+### Installing and configuring the version 1.6.3 Calico CLI for clusters that are running Kubernetes version 1.9 or earlier (deprecated)
 {: #1.9_install}
+
+Kubernetes version 1.9 is deprecated and is unsupported 27 December 2018. Earlier versions of Kubernetes are unsupported. As soon as possible, [update](cs_cluster_update.html#update) or [create](cs_clusters.html#clusters) clusters that run a [supported version](cs_versions.html#cs_versions).
+{: note}
 
 1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
 
@@ -383,10 +386,10 @@ Before you begin:
 The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. To install and configure the Calico CLI, click one of the following links based on your cluster version:
 
 * [Kubernetes version 1.10 or later clusters](#1.10_examine_policies)
-* [Kubernetes version 1.9 or earlier clusters](#1.9_examine_policies)
+* [Kubernetes version 1.9 or earlier clusters (deprecated)](#1.9_examine_policies)
 
-Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
-{: tip}
+Kubernetes version 1.9 is deprecated and is unsupported 27 December 2018. Earlier versions of Kubernetes are unsupported. As soon as possible, [update](cs_cluster_update.html#update) or [create](cs_clusters.html#clusters) clusters that run a [supported version](cs_versions.html#cs_versions). Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
+{: note}
 
 ### View network policies in clusters that are running Kubernetes version 1.10 or later
 {: #1.10_examine_policies}
@@ -429,8 +432,11 @@ Linux and Mac users don't need to include the `--config=filepath/calicoctl.cfg` 
     ```
     {: pre}
 
-### View network policies in clusters that are running Kubernetes version 1.9 or earlier
+### View network policies in clusters that are running Kubernetes version 1.9 or earlier (deprecated)
 {: #1.9_examine_policies}
+
+Kubernetes version 1.9 is deprecated and is unsupported 27 December 2018. Earlier versions of Kubernetes are unsupported. As soon as possible, [update](cs_cluster_update.html#update) or [create](cs_clusters.html#clusters) clusters that run a [supported version](cs_versions.html#cs_versions).
+{: note}
 
 Linux users don't need to include the `--config=filepath/calicoctl.cfg` flag in `calicoctl` commands.
 {: tip}
@@ -477,9 +483,9 @@ To create Kubernetes network policies, see the [Kubernetes network policy docume
 To create Calico policies, use the following steps. The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. Click one of the following links based on your cluster version:
 
 * [Kubernetes version 1.10 or later clusters](#1.10_create_new)
-* [Kubernetes version 1.9 or earlier clusters](#1.9_create_new)
+* [Kubernetes version 1.9 or earlier clusters (deprecated)](#1.9_create_new)
 
-Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
+Kubernetes version 1.9 is deprecated and is unsupported 27 December 2018. Earlier versions of Kubernetes are unsupported. As soon as possible, [update](cs_cluster_update.html#update) or [create](cs_clusters.html#clusters) clusters that run a [supported version](cs_versions.html#cs_versions). Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
 {: tip}
 
 ### Adding Calico policies in clusters that are running Kubernetes version 1.10 or later
@@ -510,8 +516,11 @@ Before you begin:
       ```
       {: pre}
 
-### Adding Calico policies in clusters that are running Kubernetes version 1.9 or earlier
+### Adding Calico policies in clusters that are running Kubernetes version 1.9 or earlier (deprecated)
 {: #1.9_create_new}
+
+Kubernetes version 1.9 is deprecated and is unsupported 27 December 2018. Earlier versions of Kubernetes are unsupported. As soon as possible, [update](cs_cluster_update.html#update) or [create](cs_clusters.html#clusters) clusters that run a [supported version](cs_versions.html#cs_versions).
+{: note}
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)

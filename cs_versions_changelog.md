@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-26"
+lastupdated: "2018-11-27"
 
 ---
 
@@ -33,7 +33,6 @@ For information about changes since the previous version, see the following chan
 -  Version 1.12 [changelog](#112_changelog).
 -  Version 1.11 [changelog](#111_changelog).
 -  Version 1.10 [changelog](#110_changelog).
--  Version 1.9 [changelog](#19_changelog).
 -  [Archive](#changelog_archive) of changelogs for deprecated or unsupported versions.
 
 Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](cs_cli_reference.html#cs_worker_update) to ensure security compliance for your worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](cs_cli_reference.html#cs_cluster_update). For more information about patch types, see [Update types](cs_versions.html#update_types).
@@ -1335,7 +1334,15 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 <br />
 
 
-## Version 1.9 changelog
+## Archive
+{: #changelog_archive}
+
+Unsupported Kubernetes versions:
+*  [Version 1.9](#19_changelog)
+*  [Version 1.8](#18_changelog)
+*  [Version 1.7](#17_changelog)
+
+### Version 1.9 changelog (deprecated, unsupported 27 December 2018)
 {: #19_changelog}
 
 Review the version 1.9 changelog.
@@ -1963,13 +1970,6 @@ The following table shows the changes that are included in patch 1.9.7_1510.
 
 <br />
 
-
-## Archive
-{: #changelog_archive}
-
-Unsupported Kubernetes versions:
-*  [Version 1.8](#18_changelog)
-*  [Version 1.7](#17_changelog)
 
 ### Version 1.8 changelog (Unsupported)
 {: #18_changelog}

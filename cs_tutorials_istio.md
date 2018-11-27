@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-26"
+lastupdated: "2018-11-27"
 
 ---
 
@@ -44,8 +44,8 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
--  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
--  [Create a cluster that runs Kubernetes version 1.9 or later](cs_clusters.html#clusters_cli), or [update an existing cluster to version 1.9 or later](cs_versions.html#cs_v19).
+-  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps). Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
+-  [Create a cluster ](cs_clusters.html#clusters_cli). 
 -  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure).
 
 ## Lesson 1: Download and install Istio

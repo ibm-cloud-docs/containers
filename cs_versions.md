@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-26"
+lastupdated: "2018-11-27"
 
 ---
 
@@ -35,7 +35,7 @@ lastupdated: "2018-11-26"
 **Supported Kubernetes versions**:
 - Latest: 1.12.2
 - Default: 1.10.8
-- Other: 1.11.3, 1.9.11
+- Other: 1.11.3
 
 </br>
 
@@ -78,7 +78,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud ks workers <cluster>` or `ibmcloud ks worker-get <cluster> <worker>` commands.
 -  **Major and minor updates**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node).
-   - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.7 and you want to update to 1.10, you must update to 1.9 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results or failure.
+   - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.9 and you want to update to 1.12, you must update to 1.10 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results or failure.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](cs_cli_install.html#kubectl) up-to-date.
 -  **Patch updates**: Changes across patches are documented in the [Version changelog](cs_versions_changelog.html). As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
    - **Worker node patches**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `ibmcloud ks worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. Note that during an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
@@ -90,7 +90,6 @@ This information summarizes updates that are likely to have impact on deployed a
 -  Version 1.12 [preparation actions](#cs_v112).
 -  Version 1.11 [preparation actions](#cs_v111).
 -  Version 1.10 [preparation actions](#cs_v110).
--  Version 1.9 [preparation actions](#cs_v19).
 -  [Archive](#k8s_version_archive) of deprecated or unsupported versions.
 
 <br/>
@@ -828,7 +827,13 @@ Prepare for the Calico v3 update before you update the master. During the master
 <br />
 
 
-## Version 1.9
+## Archive
+{: #k8s_version_archive}
+
+Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}. 
+{: shortdesc}
+
+### Version 1.9 (deprecated, unsupported 27 December 2018)
 {: #cs_v19}
 
 <p><img src="images/certified_kubernetes_1x9.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.9 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.9 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
@@ -910,16 +915,6 @@ If `Action required` is returned, modify the pod tolerations accordingly.</td>
 </tr>
 </tbody>
 </table>
-
-<br />
-
-
-
-## Archive
-{: #k8s_version_archive}
-
-Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}. 
-{: shortdesc}
 
 ### Version 1.8 (Unsupported)
 {: #cs_v18}
