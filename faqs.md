@@ -93,7 +93,7 @@ For more information about available bare metal flavors and how bare metal is di
 
 - Latest: 1.12.2
 - Default: 1.10.8
-- Other: 1.11.3
+- Other: 1.11.4
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](cs_versions.html#cs_versions).
 
