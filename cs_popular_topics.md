@@ -39,6 +39,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
+<td>27 November</td>
+<td>{{site.data.keyword.loganalysisfull_notm}} with LogDNA</td>
+<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
+</tr>
+<tr>
 <td>7 November</td>
 <td>Load balancer 2.0 (beta)</td>
 <td>You now can choose between [load balancer 1.0 or 2.0](cs_loadbalancer.html#planning_ipvs) to securely expose your cluster apps to the public.</td>
