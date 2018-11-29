@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-11-29"
 
 ---
 
@@ -38,6 +38,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>29 November</td>
+<td>[Zone available in Chennai](cs_regions.html)</td>
+<td>Welcome Chennai, India as a new zone for clusters in the AP North region. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this zone and the other zones within the region that your cluster is in.</td>
+</tr>
 <tr>
 <td>27 November</td>
 <td>{{site.data.keyword.loganalysisfull_notm}} with LogDNA</td>
