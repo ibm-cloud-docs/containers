@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-11-29"
 
 ---
 
@@ -207,8 +207,8 @@ Let your cluster access infrastructure resources and services from behind a fire
       <tbody>
         <tr>
           <td>AP North</td>
-          <td>hkg02<br>seo01<br>sng01<br>tok02, tok04, tok05</td>
-          <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210, 128.168.71.117, 165.192.69.69</code></td>
+          <td>che01<br>hkg02<br>seo01<br>sng01<br>tok02, tok04, tok05</td>
+          <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210, 128.168.71.117, 165.192.69.69</code></td>
          </tr>
         <tr>
            <td>AP South</td>
