@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -62,7 +62,7 @@ lastupdated: "2018-09-10"
 可以修改这些 RBAC 角色，以在策略中除去或添加管理员、用户、服务或节点。
 
 开始之前： 
-*  [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
+*  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 *  了解如何使用 RBAC 角色。有关更多信息，请参阅[使用定制 Kubernetes RBAC 角色授权用户](cs_users.html#rbac)或 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview)。
 *  **注**：修改缺省配置后，可能会阻止重要的集群操作，例如 pod 部署或集群更新。请在其他团队不依赖的非生产集群中测试您的更改。
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -76,7 +76,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 Um die Podpriorität festzulegen, müssen Sie eine Prioritätsklasse verwenden.
 {: shortdesc}
 
-Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Kubernetes-Cluster (Version 1.11 oder höher) aus.
+Vorbereitende Schritte:
+* [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
+* [Erstellen](cs_clusters.html#clusters_ui) oder [aktualisieren](cs_cluster_update.html#update) Sie den Cluster so, dass Kubernetes Version 1.11 oder eine höhere Version verwendet wird.
 
 1.  Optional: Verwenden Sie eine vorhandene Prioritätsklasse als Vorlage für die neue Klasse.
     
@@ -114,7 +116,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
     </thead>
     <tbody>
     <tr>
-    <td><code>metadata/name</code></td>
+    <td><code>metadata.name</code></td>
     <td>Erforderlich: Der Name der Prioritätsklasse, die Sie erstellen möchten.</td>
     </tr>
     <tr>
@@ -145,7 +147,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
     ```
     {: pre}
 
-Sehr gut! Sie haben jetzt eine Prioritätsklasse erstellt. Informieren Sie Ihr Team über die Prioritätsklasse und teilen Sie ihm mit, welche Prioritätsklasse für die Podbereitstellungen verwendet werden muss.  
+Super! Sie haben jetzt eine Prioritätsklasse erstellt. Informieren Sie Ihr Team über die Prioritätsklasse und teilen Sie ihm mit, welche Prioritätsklasse für die Podbereitstellungen verwendet werden muss.  
 
 ## Priorität für Pods zuweisen
 {: #prioritize}
@@ -154,7 +156,8 @@ Ordnen Sie Ihrer Podspezifikation eine Prioritätsklasse zu, um die Priorität d
 {: shortdesc}
 
 Vorbereitende Schritte:
-* [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Kubernetes-Cluster (Version 1.11 oder höher) aus.
+* [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
+* [Erstellen](cs_clusters.html#clusters_ui) oder [aktualisieren](cs_cluster_update.html#update) Sie den Cluster so, dass Kubernetes Version 1.11 oder eine höhere Version verwendet wird.
 * [Machen Sie sich damit vertraut, wie die Planung anhand der Priorität funktioniert](#priority_scheduling), da die Priorität die Zurückstellung vorhandener Pods bewirken und außerdem beeinflussen kann, wie die Ressourcen Ihres Clusters genutzt werden.
 
 Gehen Sie wie folgt vor, um Ihren Pods eine Priorität zuzuweisen:

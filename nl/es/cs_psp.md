@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -62,7 +62,7 @@ De forma predeterminada, el clúster contiene los siguientes recursos de RBAC qu
 Puede modificar estos roles de RBAC para eliminar o añadir administradores, usuarios, servicios o nodos a la política.
 
 Antes de empezar: 
-*  Defina su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
+*  [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 *  Comprende cómo se trabaja con los roles de RBAC. Para obtener más información, consulte [Autorización de usuarios con roles de RBAC personalizados de Kubernetes](cs_users.html#rbac) o la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 *  **Nota**: si modifica la configuración predeterminada, puede evitar acciones de clúster importantes, como despliegues de pod o actualizaciones de clúster. Pruebe sus cambios en un clúster que no sea de producción y en el que no confíen otros equipos.
 

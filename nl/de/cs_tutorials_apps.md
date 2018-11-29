@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-05-24"
 {:download: .download}
 
 
-# Lernprogramm: Apps in Clustern bereitstellen
+# Lernprogramm: Apps in Kubernetes-Clustern bereitstellen
 {: #cs_apps_tutorial}
 
 Hier erfahren Sie, wie Sie mit {{site.data.keyword.containerlong}} eine containerisierte App bereitstellen, die den {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} nutzt.
@@ -26,14 +26,13 @@ In diesem Szenario nutzt ein fiktives PR-Unternehmen den {{site.data.keyword.Blu
 
 Der App-Entwickler des PR-Unternehmens verwendet den im vorherigen Lernprogramm erstellten Kubernetes-Cluster, um eine 'Hello World'-Version der App bereitzustellen. In den aufeinander aufbauenden Lerneinheiten dieses Lernprogramms stellt der App-Entwickler zunehmend komplexere Versionen derselben App bereit. Das folgende Diagramm zeigt die Komponenten der Bereitstellungen in den einzelnen Lerneinheiten.
 
-
-![Komponenten der Lerneinheit](images/cs_app_tutorial_roadmap.png)
+![Komponenten der Lerneinheit](images/cs_app_tutorial_mz-roadmap.png)
 
 Wie im Diagramm dargestellt, verwendet Kubernetes verschiedene Typen von Ressourcen, um Ihre Apps betriebsbereit für die Ausführung in Clustern zu gestalten. In Kubernetes arbeiten Bereitstellungen und Services zusammen. Bereitstellungen enthalten die Definitionen für die App. Dazu zählen beispielsweise das Image, das für den Container verwendet werden soll, oder die Angabe, welcher Port für die App zugänglich gemacht werden muss. Wenn Sie eine Bereitstellung erstellen, wird für jeden Container, den Sie in der Bereitstellung definiert haben, ein Kubernetes-Pod erstellt. Um Ihre App widerstandsfähiger zu machen, können Sie in Ihrer Bereitstellung mehrere Instanzen derselben App definieren und von Kubernetes automatisch eine Replikatgruppe erstellen lassen. Die Replikatgruppe überwacht die Pods und stellt sicher, dass die angegebene Anzahl von Pods immer betriebsbereit ist. Reagiert einer der Pods nicht mehr, so wird dieser automatisch neu erstellt.
 
 Services fassen eine Gruppe von Pods zusammen und stellen diesen Pods eine Netzverbindung für andere Services im Cluster bereit, ohne hierbei die tatsächlichen privaten IP-Adressen der einzelnen Pods preiszugeben. Mit Kubernetes-Services können Sie eine App anderen Pods im Cluster zur Verfügung stellen oder über das Internet verfügbar machen. Im vorliegenden Lernprogramm verwenden Sie einen Kubernetes-Service, um über eine öffentliche IP-Adresse, die automatisch einem Workerknoten zugewiesen wird, und einen öffentlichen Port vom Internet aus auf Ihre aktive App zuzugreifen.
 
-Um die Verfügbarkeit Ihrer App noch weiter zu steigern, können Sie bei Standardclustern mehrere Workerknoten erstellen, die eine noch größere Anzahl an Replikaten der App ausführen. Obwohl diese Task im vorliegenden Lernprogramm nicht behandelt wird, sollten Sie dieses Konzept im Hinterkopf behalten, wenn Sie zu einem späteren Zeitpunkt die Verfügbarkeit einer App weiter verbessern möchten.
+Um die Verfügbarkeit Ihrer App noch weiter zu steigern, können Sie in Standardclustern einen Worker-Pool erstellen, der mehrere Zonen mit Workerknoten in jeder Zone umfasst, um eine noch größere Anzahl an Replikaten der App ausführen. Obwohl diese Task im vorliegenden Lernprogramm nicht behandelt wird, sollten Sie dieses Konzept im Hinterkopf behalten, wenn Sie zu einem späteren Zeitpunkt die Verfügbarkeit einer App weiter verbessern möchten.
 
 Die Integration eines {{site.data.keyword.Bluemix_notm}}-Service in eine App wird nur in einer Lerneinheit behandelt. Sie können Services jedoch mit so einfach oder so komplex konzipierten Apps verwenden, wie überhaupt vorstellbar.
 
@@ -56,7 +55,7 @@ Softwareentwickler und Netzadministratoren, die erstmalig eine App in einem Kube
 
 ## Voraussetzungen
 
-* [Lernprogramm: Kubernetes-Cluster in {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial) erstellen.
+* [Lernprogramm: Kubernetes-Cluster erstellen](cs_tutorials.html#cs_cluster_tutorial).
 
 
 ## Lerneinheit 1: Einzelinstanz-Apps auf Kubernetes-Clustern bereitstellen
@@ -67,8 +66,7 @@ Im vorherigen Lernprogramm haben Sie einen Cluster mit einem Workerknoten erstel
 
 Das folgende Diagramm zeigt die Komponenten, die Sie im Rahmen dieser Lerneinheit bereitstellen.
 
-
-![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components1.png)
+![Konfiguration für die Bereitstellung](images/cs_app_tutorial_mz-components1.png)
 
 Gehen Sie wie folgt vor, um die App bereitzustellen:
 
@@ -89,98 +87,47 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
     ```
     {: pre}
 
-3.  Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden. Um eine {{site.data.keyword.Bluemix_notm}}-Region anzugeben, verwenden Sie den Befehl `bx cs region-set`.
-
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
-
-    **Hinweis**: Wenn der Anmeldebefehl fehlschlägt, verwenden Sie möglicherweise eine eingebundene ID. Versuchen Sie, das Flag `--sso` an den Befehl anzufügen. Verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um einen einmaligen Kenncode abzurufen.
-
-4.  Legen Sie in Ihrer CLI (Befehlszeilenschnittstelle) den Kontext für den Cluster fest.
-    1.  Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter.
-
-        ```
-        bx cs cluster-config <clustername_oder_-id>
-        ```
-        {: pre}
-
-        Wenn
-der Download der Konfigurationsdateien abgeschlossen ist, wird ein Befehl angezeigt, den Sie verwenden können,
-um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable festzulegen.
-    2.  Kopieren Sie die Ausgabe und fügen Sie sie ein, um die Umgebungsvariable `KUBECONFIG` festzulegen.
-
-        Beispiel für OS X:
-
-        ```
-        export KUBECONFIG=/Users/<benutzername>/.bluemix/plugins/container-service/clusters/<pr-unternehmenscluster>/kube-config-prod-dal10-pr_firm_cluster.yml
-        ```
-        {: screen}
+3. [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
 5.  Melden Sie sich an der {{site.data.keyword.registryshort_notm}}-CLI an. **Hinweis**: Stellen Sie sicher, dass das Plug-in 'container-registry' [installiert](/docs/services/Registry/index.html#registry_cli_install) ist.
 
     ```
-    bx cr login
+    ibmcloud cr login
     ```
     {: pre}
     -   Wenn Sie Ihren Namensbereich in {{site.data.keyword.registryshort_notm}} vergessen haben, führen Sie den folgenden Befehl aus.
 
         ```
-        bx cr namespace-list
+        ibmcloud cr namespace-list
         ```
         {: pre}
 
-6.  Starten Sie Docker.
-    * Wenn Sie Docker Community Edition verwenden, sind keine weiteren Maßnahmen erforderlich.
-    * Wenn Sie Linux verwenden, durchsuchen Sie die [Docker-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/engine/admin/) nach Anweisungen dazu, wie Docker abhängig von der verwendeten Linux-Distribution gestartet wird.
-    * Wenn Sie Docker Toolbox unter Windows oder OSX verwenden, können Sie das Programm 'Docker Quickstart Terminal' verwenden, das Docker für Sie startet. Verwenden Sie 'Docker Quickstart Terminal' für die nächsten Schritte, um die Docker-Befehle auszuführen. Wechseln Sie anschließend zurück zur CLI (Befehlszeilenschnittstelle) und legen Sie dort die Sitzungsvariable `KUBECONFIG` fest.
+6.  Erstellen Sie ein Docker-Image, das die App-Dateien aus dem Verzeichnis `Lab 1` enthält, und übertragen Sie das Image per Push zu dem {{site.data.keyword.registryshort_notm}}-Namensbereich, den Sie im vorherigen Lernprogramm erstellt haben. Falls zu einem späteren Zeitpunkt Änderungen an der App vorgenommen werden sollen, wiederholen Sie diese Schritte, um eine weitere Version des Image zu erstellen. **Hinweis**: Erfahren Sie mehr über das [Sichern der persönlichen Daten](cs_secure.html#pi) bei der Arbeit mit Container-Images.
 
-7.  Erstellen Sie ein Docker-Image, das die App-Dateien aus dem Verzeichnis `Lab 1` enthält. Falls zu einem späteren Zeitpunkt Änderungen an der App vorgenommen werden sollen, wiederholen Sie diese Schritte, um eine weitere Version des Image zu erstellen.
+    Verwenden Sie im Imagenamen nur alphanumerische Zeichen in Kleinschreibung oder Unterstreichungszeichen (`_`). Vergessen Sie nicht den Punkt (`.`) am Ende des Befehls. Der Punkt signalisiert Docker, im aktuellen Verzeichnis nach der Dockerfile zu suchen und Artefakte zum Erstellen des Image zu erstellen.
 
-    Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Container-Images.
+    ```
+    ibmcloud cr build -t registry.<region>.bluemix.net/<namensbereich>/hello-world:1 .
+    ```
+    {: pre}
 
-    1.  Erstellen Sie das Image lokal. Geben Sie den Namen und den Tag an, den Sie verwenden möchten. Verwenden Sie unbedingt den Namensbereich, den Sie in {{site.data.keyword.registryshort_notm}} im vorherigen Lernprogramm erstellt haben. Durch die Kennzeichnung (das Tagging) des Image mit den Namensbereichsinformationen weiß Docker, wohin das Image in einem späteren Schritt per Push-Operation übertragen werden soll. Verwenden Sie im Imagenamen nur alphanumerische Zeichen in Kleinschreibung oder Unterstreichungszeichen (`_`). Vergessen Sie nicht den Punkt (`.`) am Ende des Befehls. Der Punkt signalisiert Docker, im aktuellen Verzeichnis nach der Dockerfile zu suchen und Artefakte zum Erstellen des Image zu erstellen.
+    Überprüfen Sie nach der Beendigung des Buildprozesses, dass die folgende Nachricht über die erfolgreiche Ausführung angezeigt wird:
 
-        ```
-        docker build -t registry.<region>.bluemix.net/<namensbereich>/hello-world:1 .
-        ```
-        {: pre}
+    ```
+    Successfully built <image_ID>
+    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
+    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    29042bc0b00c: Pushed
+    f31d9ee9db57: Pushed
+    33c64488a635: Pushed
+    0804854a4553: Layer already exists
+    6bd4a62f5178: Layer already exists
+    9dfa40a0da3b: Layer already exists
+    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    ```
+    {: screen}
 
-        Überprüfen Sie nach der Beendigung des Buildprozesses, dass die folgende Nachricht über die erfolgreiche Ausführung angezeigt wird:
-        ```
-        Successfully built <image-id>
-        Successfully tagged <image_tag>
-        ```
-        {: screen}
-
-    2.  Übertragen Sie das Image mit einer Push-Operation in den Registry-Namensbereich.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namensbereich>/hello-world:1
-        ```
-        {: pre}
-
-        Beispielausgabe:
-
-        ```
-        The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
-  ea2ded433ac8: Pushed
-  894eb973f4d3: Pushed
-  788906ca2c7e: Pushed
-  381c97ba7dc3: Pushed
-  604c78617f34: Pushed
-  fa18e5ffd316: Pushed
-  0a5e2b2ddeaa: Pushed
-  53c779688d06: Pushed
-  60a0858edcd5: Pushed
-  b6ca02dfe5e6: Pushed
-  1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
-  43 size: 2398
-        ```
-        {: screen}
-
-8.  Bereitstellungen werden zum Verwalten von Pods verwendet, die containerisierte Instanzen einer App enthalten. Der folgende Befehl stellt die App in einem einzelnen Pod bereit. Im vorliegenden Lernprogramm wird der Bereitstellung der Name **hello-world-deployment** zugeordnet. Sie können jedoch einen eigenen Namen verwenden. Wenn Sie das Docker Quickstart-Terminal verwendet haben, um Docker-Befehle auszuführen, wechseln Sie unbedingt zurück zu der CLI (Befehlszeilenschnittstelle), die Sie zum Festlegen der Sitzungsvariablen `KUBECONFIG` verwendet haben.
+7.  Bereitstellungen werden zum Verwalten von Pods verwendet, die containerisierte Instanzen einer App enthalten. Der folgende Befehl stellt die App in einem einzelnen Pod bereit. Im vorliegenden Lernprogramm wird der Bereitstellung der Name **hello-world-deployment** zugeordnet. Sie können jedoch einen eigenen Namen verwenden.
 
     ```
     kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namensbereich>/hello-world:1
@@ -196,7 +143,7 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
 
     Erfahren Sie mehr über das [Sichern der persönliche Daten](cs_secure.html#pi) bei der Arbeit mit Kubernetes-Ressourcen.
 
-9.  Machen Sie die App zugänglich, indem Sie die Bereitstellung als Service vom Typ 'NodePort' zur Verfügung stellen. Genau wie beim Zugänglichmachen eines Ports für eine Cloud Foundry-App machen Sie als Knotenport (NodePort) den Port zugänglich, an dem der Workerknoten für Datenverkehr empfangsbereit ist.
+8.  Machen Sie die App zugänglich, indem Sie die Bereitstellung als Service vom Typ 'NodePort' zur Verfügung stellen. Genau wie beim Zugänglichmachen eines Ports für eine Cloud Foundry-App machen Sie als Knotenport (NodePort) den Port zugänglich, an dem der Workerknoten für Datenverkehr empfangsbereit ist.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -242,7 +189,7 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
     </tr>
     </tbody></table>
 
-10. Nachdem alle Schritte für die Bereitstellung ausgeführt worden sind, können Sie Ihre App in einem Browser testen. Rufen Sie die Details ab, um die zugehörige URL zu bilden.
+9. Nachdem alle Schritte für die Bereitstellung ausgeführt worden sind, können Sie Ihre App in einem Browser testen. Rufen Sie die Details ab, um die zugehörige URL zu bilden.
     1.  Rufen Sie Informationen zum Service ab, um zu erfahren, welcher Knotenport (NodePort) zugewiesen wurde.
 
         ```
@@ -272,22 +219,22 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
     2.  Rufen Sie die öffentliche IP-Adresse für den Workerknoten im Cluster ab.
 
         ```
-        bx cs workers <clustername_oder_-id>
+        ibmcloud ks workers <cluster_name_or_ID>
         ```
         {: pre}
 
         Beispielausgabe:
 
         ```
-        bx cs workers pr_firm_cluster
+        ibmcloud ks workers pr_firm_cluster
         Listing cluster workers...
         OK
-        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.9.7
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
         ```
         {: screen}
 
-11. Öffnen Sie einen Browser und überprüfen Sie die App mit der folgenden URL: `http://<IP_address>:<NodePort>`. Anhand der Werte im Beispiel lautet die URL wie folgt: `http://169.xx.xxx.xxx:30872`. Bei Eingabe dieser URL in einen Browser wird folgender Text angezeigt.
+10. Öffnen Sie einen Browser und überprüfen Sie die App mit der folgenden URL: `http://<IP_address>:<NodePort>`. Anhand der Werte im Beispiel lautet die URL wie folgt: `http://169.xx.xxx.xxx:30872`. Bei Eingabe dieser URL in einen Browser wird folgender Text angezeigt.
 
     ```
     Hello world! Your app is up and running in a cluster!
@@ -298,12 +245,12 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
     Um zu überprüfen, ob die App öffentlich verfügbar ist, versuchen Sie, sie im Browser Ihres Mobiltelefons einzugeben.
     {: tip}
 
-12. [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
+11. [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
 
     Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-GUI](https://console.bluemix.net/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
     {: tip}
 
-13. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt.
+12. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt.
 
 Glückwunsch! Sie haben die erste Version der App bereitgestellt.
 
@@ -320,8 +267,7 @@ In dieser Lerneinheit stellen Sie drei Instanzen der App 'Hello World' in einem 
 
 Höhere Verfügbarkeit bedeutet, dass der Benutzerzugriff auf drei Instanzen aufgeteilt ist. Versuchen zu viele Benutzer, auf dieselbe Instanz der App zuzugreifen, so können schleppende Reaktionszeiten auftreten. Eine höhere Anzahl von Instanzen kann für Ihre Benutzer gleichbedeutend mit geringeren Reaktionszeiten sein. In der vorliegenden Lerneinheit erfahren Sie außerdem, wie Statusprüfungen und Bereitstellungsaktualisierungen mit Kubernetes funktionieren können. Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
 
-
-![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components2.png)
+![Konfiguration für die Bereitstellung](images/cs_app_tutorial_mz-components2.png)
 
 Im vorherigen Lernprogramm haben Sie ein eigenes Konto und einen Cluster mit einem Workerknoten erstellt. In dieser Lerneinheit konfigurieren Sie eine Bereitstellung und stellen drei Instanzen der App 'Hello World' bereit. Jede dieser Instanzen wird in einem Kubernetes-Pod als Teil einer Replikatgruppe im Workerknoten implementiert. Um die App öffentlich zu machen, erstellen Sie zudem einen Kubernetes-Service.
 
@@ -336,47 +282,30 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
 
 2.  Wenn Sie eine CLI-Sitzung gestartet haben, melden Sie sich an und legen Sie den Clusterkontext fest.
 
-3.  Erstellen und kennzeichnen (taggen) Sie die zweite Version der App lokal als Image. Vergessen Sie auch hier nicht den Punkt (`.`) am Ende des Befehls.
+3.  Erstellen und kennzeichnen (taggen) Sie die App und übertragen Sie sie per Push als Image an Ihren Namensbereich in {{site.data.keyword.registryshort_notm}}.  Vergessen Sie auch hier nicht den Punkt (`.`) am Ende des Befehls.
 
-  ```
-  docker build -t registry.<region>.bluemix.net/<namensbereich>/hello-world:2 .
-  ```
-  {: pre}
+    ```
+    ibmcloud cr build -t registry.<region>.bluemix.net/<namensbereich>/hello-world:2 .
+      ```
+    {: pre}
 
-  Stellen Sie sicher, dass die Nachricht über die erfolgreiche Ausführung angezeigt wird.
+    Stellen Sie sicher, dass die Nachricht über die erfolgreiche Ausführung angezeigt wird.
 
-  ```
-  Successfully built <image-id>
-  ```
-  {: screen}
+    ```
+    Successfully built <image_ID>
+    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
+    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    29042bc0b00c: Pushed
+    f31d9ee9db57: Pushed
+    33c64488a635: Pushed
+    0804854a4553: Layer already exists
+    6bd4a62f5178: Layer already exists
+    9dfa40a0da3b: Layer already exists
+    1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
+    ```
+    {: screen}
 
-4.  Übertragen Sie die zweite Version des Image mit einer Push-Operation an Ihren Registry-Namensbereich. Fahren Sie erst dann mit dem nächsten Schritt fort, wenn das Image per Push-Operation übertragen worden ist.
-
-  ```
-  docker push registry.<region>.bluemix.net/<namensbereich>/hello-world:2
-  ```
-  {: pre}
-
-  Beispielausgabe:
-
-  ```
-  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
-  ea2ded433ac8: Pushed
-  894eb973f4d3: Pushed
-  788906ca2c7e: Pushed
-  381c97ba7dc3: Pushed
-  604c78617f34: Pushed
-  fa18e5ffd316: Pushed
-  0a5e2b2ddeaa: Pushed
-  53c779688d06: Pushed
-  60a0858edcd5: Pushed
-  b6ca02dfe5e6: Pushed
-  1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
-  43 size: 2398
-  ```
-  {: screen}
-
-5.  Öffnen Sie die Datei `healthcheck.yml` im Verzeichnis `Lab 2` mit einem Texteditor. Dieses Konfigurationsscript verbindet einige Schritte aus der vorherigen Lerneinheit, um zur gleichen Zeit eine Bereitstellung sowie einen Service zu erstellen. Die App-Entwickler des PR-Unternehmens können diese Scripts verwenden, wenn Aktualisierungen durchgeführt werden. Sie können sie auch im Rahmen der Fehlerbehebung einsetzen, indem Sie die Pods neu erstellen.
+4.  Öffnen Sie die Datei `healthcheck.yml` im Verzeichnis `Lab 2` mit einem Texteditor. Dieses Konfigurationsscript verbindet einige Schritte aus der vorherigen Lerneinheit, um zur gleichen Zeit eine Bereitstellung sowie einen Service zu erstellen. Die App-Entwickler des PR-Unternehmens können diese Scripts verwenden, wenn Aktualisierungen durchgeführt werden. Sie können sie auch im Rahmen der Fehlerbehebung einsetzen, indem Sie die Pods neu erstellen.
     1. Aktualisieren Sie die Details für das Image in Ihrem privaten Registry-Namensbereich.
 
         ```
@@ -405,7 +334,7 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
 
     4.  Beachten Sie im Abschnitt **Service** die Angabe für die Knotenportnummern (`NodePort`). Anstatt einen Knotenport nach dem Zufallsprinzip generieren zu lassen, wie das der Fall in der vorherigen Lerneinheit war, können Sie eine Portnummer im Bereich 30000-32767 angeben. Das vorliegende Beispiel verwendet die Nummer 30072.
 
-6.  Wechseln Sie zurück zu der CLI, die Sie zum Festlegen des Clusterkontexts verwendet haben, und führen Sie das Konfigurationsscript aus. Wenn die Bereitstellung und der Service erstellt worden sind, kann die App gegenüber den Benutzern des PR-Unternehmens verfügbar gemacht werden.
+5.  Wechseln Sie zurück zu der CLI, die Sie zum Festlegen des Clusterkontexts verwendet haben, und führen Sie das Konfigurationsscript aus. Wenn die Bereitstellung und der Service erstellt worden sind, kann die App gegenüber den Benutzern des PR-Unternehmens verfügbar gemacht werden.
 
   ```
   kubectl apply -f healthcheck.yml
@@ -420,10 +349,10 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
   ```
   {: screen}
 
-7.  Nachdem die Bereitstellung nun abgeschlossen ist, können Sie einen Browser öffnen und die App überprüfen. Um die URL zu bilden, kombinieren Sie die öffentliche IP-Adresse, die Sie in der vorherigen Lerneinheit für Ihren Workerknoten verwendet haben, mit der Knotenportnummer (NodePort), die im Konfigurationsscript angegeben war. So rufen Sie die öffentliche IP-Adresse für den Workerknoten ab:
+6.  Nachdem die Bereitstellung nun abgeschlossen ist, können Sie einen Browser öffnen und die App überprüfen. Um die URL zu bilden, kombinieren Sie die öffentliche IP-Adresse, die Sie in der vorherigen Lerneinheit für Ihren Workerknoten verwendet haben, mit der Knotenportnummer (NodePort), die im Konfigurationsscript angegeben war. So rufen Sie die öffentliche IP-Adresse für den Workerknoten ab:
 
   ```
-  bx cs workers <clustername_oder_-id>
+  ibmcloud ks workers <clustername_oder_-id>
   ```
   {: pre}
 
@@ -445,19 +374,28 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
   ```
   {: screen}
 
-8.  [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
+7.  Überprüfen Sie Ihren Podstatus, um den Zustand Ihrer App in Kubernetes zu überwachen. Sie können den Status über die CLI oder über die Kubernetes-Dashboard-GUI überprüfen.
 
-9. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt. Von dieser Registerkarte aus können Sie die Anzeige fortlaufend aktualisieren lassen und sicherstellen, dass die Statusprüfung ordnungsgemäß funktioniert. Im Abschnitt **Pods** wird angegeben, wie häufig die Pods erneut gestartet werden, wenn die in ihnen enthaltenen Container erneut erstellt werden. Falls Sie per Zufall den folgenden Fehler im Dashboard abfangen, so beachten Sie, das diese Nachricht darauf hinweist, dass bei der Statusprüfung ein Problem festgestellt wurde. Warten Sie einige Minuten ab und aktualisieren Sie dann die Anzeige erneut. Sie können erkennen, dass die Anzahl von Neustarts für jeden Pod variiert.
+    *  **Über die CLI**: Beobachten Sie, was mit Ihren Pods geschieht, während sich ihr Status ändert.
+       ```
+       kubectl get pods -o wide -w
+       ```
+       {: pre}
 
-    ```
-    Liveness probe failed: HTTP probe failed with statuscode: 500
+    *  **Über die GUI**:
+
+       1.  [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
+       2.  Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt. Von dieser Registerkarte aus können Sie die Anzeige fortlaufend aktualisieren lassen und sicherstellen, dass die Statusprüfung ordnungsgemäß funktioniert. Im Abschnitt **Pods** wird angegeben, wie häufig die Pods erneut gestartet werden, wenn die in ihnen enthaltenen Container erneut erstellt werden. Falls Sie per Zufall den folgenden Fehler im Dashboard abfangen, so beachten Sie, das diese Nachricht darauf hinweist, dass bei der Statusprüfung ein Problem festgestellt wurde. Warten Sie einige Minuten ab und aktualisieren Sie dann die Anzeige erneut. Sie können erkennen, dass die Anzahl von Neustarts für jeden Pod variiert.
+
+       ```
+       Liveness probe failed: HTTP probe failed with statuscode: 500
 Back-off restarting failed docker container
 Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
 (Aktivitätsprüfung fehlgeschlagen: HTTP-Prüfung fehlgeschlagen mit Statuscode: 500
 Fehlgeschlagener Container wird mit 'Back-off' neu gestartet
 Fehler bei Synchronisierung von Pod, wird übersprungen: "StartContainer" für "hw-container" mit CrashLoopBackOff fehlgeschlagen: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
-    ```
-    {: screen}
+       ```
+       {: screen}
 
 Glückwunsch! Sie haben die zweite Version der App bereitgestellt. Hierzu haben Sie eine geringere Anzahl von Befehlen verwenden müssen, konnten erfahren, wie Statusprüfungen funktionieren, und haben eine Bereitstellung bearbeitet, was hervorragend ist. Die App 'Hello World' hat den Test für das PR-Unternehmen bestanden. Nun können Sie eine App mit höherem Nutzwert für das PR-Unternehmen bereitstellen, um mit der Analyse von Pressemitteilungen zu beginnen.
 
@@ -487,8 +425,7 @@ In den vorherigen Lerneinheiten wurden die Apps als einzelne Komponenten in eine
 
 Durch das Aufteilen der Komponenten auf verschiedene Container stellen Sie sicher, dass Sie ein Element aktualisieren können, ohne dass sich dies nachteilig auf die übrigen auswirkt. Dann aktualisieren Sie die App, um sie mit einer größeren Anzahl von Replikaten vertikal zu skalieren und so ihre Verfügbarkeit weiter zu steigern. Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
 
-![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components3.png)
-
+![Konfiguration für die Bereitstellung](images/cs_app_tutorial_mz-components3.png)
 
 Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen Cluster mit einem Workerknoten. In dieser Lerneinheit erstellen Sie eine Instanz des {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Service in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto und konfigurieren zwei Bereitstellungen (eine Bereitstellung für jede Komponente der App). Jede Komponente wird in einem Kubernetes-Pod im Workerknoten implementiert. Um beide Komponenten öffentlich zu machen, erstellen Sie zudem für jede Komponente einen Kubernetes-Service.
 
@@ -514,10 +451,10 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         ```
         {: pre}
 
-    2.  Erstellen und kennzeichnen (taggen) Sie den ersten Teil der App lokal als Image. Vergessen Sie auch hier nicht den Punkt (`.`) am Ende des Befehls. Wenn Sie das Docker Quickstart-Terminal verwenden, um Docker-Befehle auszuführen, wechseln Sie unbedingt die CLI.
+    2.  Erstellen und kennzeichnen (taggen) Sie die `watson`-App und übertragen Sie sie per Push als Image an Ihren Namensbereich in {{site.data.keyword.registryshort_notm}}. Vergessen Sie auch hier nicht den Punkt (`.`) am Ende des Befehls.
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namensbereich>/watson .
+        ibmcloud cr build -t registry.<region>.bluemix.net/<namensbereich>/watson .
         ```
         {: pre}
 
@@ -527,13 +464,6 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         Successfully built <image-id>
         ```
         {: screen}
-
-    3.  Übertragen Sie den ersten Teil der App mit einer Push-Operation als Image an Ihren private Registry-Namensbereich. Fahren Sie erst dann mit dem nächsten Schritt fort, wenn das Image per Push-Operation übertragen worden ist.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namensbereich>/watson
-        ```
-        {: pre}
 
 4.  Erstellen Sie das '{{site.data.keyword.watson}}-talk'-Image.
 
@@ -544,10 +474,10 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         ```
         {: pre}
 
-    2.  Erstellen und kennzeichnen (taggen) Sie den zweiten Teil der App lokal als Image. Vergessen Sie auch hier nicht den Punkt (`.`) am Ende des Befehls.
+    2.  Erstellen und kennzeichnen (taggen) Sie die `watson-talk`-App und übertragen Sie sie per Push als Image an Ihren Namensbereich in {{site.data.keyword.registryshort_notm}}. Vergessen Sie auch hier nicht den Punkt (`.`) am Ende des Befehls.
 
         ```
-        docker build -t registry.<region>.bluemix.net/<namensbereich>/watson-talk .
+        ibmcloud cr build -t registry.<region>.bluemix.net/<namensbereich>/watson-talk .
         ```
         {: pre}
 
@@ -558,17 +488,10 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         ```
         {: screen}
 
-    3.  Übertragen Sie den zweiten Teil der App mit einer Push-Operation an Ihren privaten Registry-Namensbereich. Fahren Sie erst dann mit dem nächsten Schritt fort, wenn das Image per Push-Operation übertragen worden ist.
-
-        ```
-        docker push registry.<region>.bluemix.net/<namensbereich>/watson-talk
-        ```
-        {: pre}
-
-5.  Überprüfen Sie, ob die Images erfolgreich zu Ihrem Registry-Namensbereich hinzugefügt wurden. Wenn Sie das Docker Quickstart-Terminal verwendet haben, um Docker-Befehle auszuführen, wechseln Sie unbedingt zurück zu der CLI (Befehlszeilenschnittstelle), die Sie zum Festlegen der Sitzungsvariablen `KUBECONFIG` verwendet haben.
+5.  Überprüfen Sie, ob die Images erfolgreich zu Ihrem Registry-Namensbereich hinzugefügt wurden.
 
     ```
-    bx cr images
+    ibmcloud cr images
     ```
     {: pre}
 
@@ -730,7 +653,7 @@ Während der Ausführung einer Bereitstellung können Sie die Bereitstellung dur
 
     Wenn Sie eine Änderung implementieren, wird ein weiterer Pod von Kubernetes erstellt getestet. Wenn der Test erfolgreich ist, wird der alte Pod entfernt.
 
-[Testen Sie Ihr Wissen in einem Quiz! ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
+
 
 Glückwunsch! Sie haben die App '{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}' bereitgestellt. Das PR-Unternehmen kann diese Bereitstellung künftig einsetzen, um mit der Analyse seiner Pressemitteilungen zu beginnen.
 
@@ -754,7 +677,7 @@ service "watson-talk-service" deleted
   Falls Sie den Cluster nicht beibehalten wollen, können Sie diesen ebenfalls löschen.
 
   ```
-  bx cs cluster-rm <clustername_oder_-id>
+  ibmcloud ks cluster-rm <clustername_oder_-id>
   ```
   {: pre}
 
@@ -764,5 +687,5 @@ service "watson-talk-service" deleted
 Nachdem Sie sich mit den grundlegenden Informationen vertraut gemacht haben, können Sie nun komplexere Aufgaben in Angriff nehmen. Ziehen Sie eine der folgenden Aufgaben in Betracht:
 
 - Ein [kompliziertes Lab ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) im Repository vervollständigen
-- [Apps automatisch skalieren](cs_app.html#app_scaling) mit {{site.data.keyword.containershort_notm}}
-- Lernprogramme für die Containerorchestrierung unter [developerWorks ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/journey/category/container-orchestration/) erkunden
+- [Apps automatisch skalieren](cs_app.html#app_scaling) mit {{site.data.keyword.containerlong_notm}}
+- Lernprogramme für Codemuster für die Containerorchestrierung unter [IBM Developer ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/technologies/container-orchestration/) erkunden

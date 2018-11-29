@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -17,13 +17,13 @@ lastupdated: "2018-05-24"
 
 
 
-# Ingress 註釋
+# 自訂包含註釋的 Ingress
 {: #ingress_annotation}
 
 若要將功能新增至 Ingress 應用程式負載平衡器 (ALB)，您可以將註釋指定為 Ingress 資源中的 meta 資料。
 {: shortdesc}
 
-如需 Ingress 服務及如何開始使用它們的一般資訊，請參閱[使用 Ingress 來管理網路資料流量](cs_ingress.html#planning)。
+**重要事項**：在使用註釋之前，請遵循[使用 Ingress 公開應用程式](cs_ingress.html)中的步驟，確定已適當地設定 Ingress 服務配置。使用基本配置設定 Ingress ALB 之後，接著可以將註釋新增至 Ingress 資源檔，來擴充其功能。
 
 <table>
 <caption>一般註釋</caption>
@@ -47,6 +47,11 @@ lastupdated: "2018-05-24"
  <td>修改 ALB 比對要求 URI 與應用程式路徑的方式。</td>
  </tr>
  <tr>
+ <td><a href="#location-snippets">位置 Snippet</a></td>
+ <td><code>location-snippets</code></td>
+ <td>新增服務的自訂位置區塊配置。</td>
+ </tr>
+ <tr>
  <td><a href="#alb-id">專用 ALB 遞送</a></td>
  <td><code>ALB-ID</code></td>
  <td>使用專用 ALB，將送入要求遞送至應用程式。</td>
@@ -55,6 +60,11 @@ lastupdated: "2018-05-24"
  <td><a href="#rewrite-path">重寫路徑</a></td>
  <td><code>rewrite-path</code></td>
  <td>將送入的網路資料流量遞送至後端應用程式接聽的不同路徑。</td>
+ </tr>
+ <tr>
+ <td><a href="#server-snippets">伺服器 Snippet</a></td>
+ <td><code>server-snippets</code></td>
+ <td>新增自訂伺服器區塊配置。</td>
  </tr>
  <tr>
  <td><a href="#tcp-ports">TCP 埠</a></td>
@@ -102,9 +112,19 @@ lastupdated: "2018-05-24"
   <td>使用 Sticky Cookie 一律將送入的網路資料流量遞送至相同的上游伺服器。</td>
   </tr>
   <tr>
+  <td><a href="#upstream-fail-timeout">上游失敗逾時</a></td>
+  <td><code>upstream-fail-timeout</code></td>
+  <td>設定時間量，在此期間，ALB 可以先嘗試連接至伺服器，再將伺服器視為無法使用。</td>
+  </tr>
+  <tr>
   <td><a href="#upstream-keepalive">上游保留作用中</a></td>
   <td><code>upstream-keepalive</code></td>
   <td>設定上游伺服器之閒置保留作用中連線的數目上限。</td>
+  </tr>
+  <tr>
+  <td><a href="#upstream-max-fails">上游失敗次數上限</a></td>
+  <td><code>upstream-max-fails</code></td>
+  <td>設定與伺服器通訊的不成功嘗試次數上限，在此次數之後，會將伺服器視為無法使用。</td>
   </tr>
   </tbody></table>
 
@@ -223,14 +243,9 @@ lastupdated: "2018-05-24"
 </thead>
 <tbody>
 <tr>
-<td><a href="#proxy-add-headers">額外的用戶端要求或回應標頭</a></td>
-<td><code>proxy-add-headers、response-add-headers</code></td>
-<td>將標頭資訊新增至用戶端要求，然後再將要求轉遞至後端應用程式，或新增至用戶端回應，然後再將回應傳送至用戶端。</td>
-</tr>
-<tr>
-<td><a href="#response-remove-headers">移除用戶端回應標頭</a></td>
-<td><code>response-remove-headers</code></td>
-<td>從用戶端回應移除標頭資訊，然後才將回應轉遞至用戶端。</td>
+<td><a href="#add-host-port">將伺服器埠新增至主機標頭</a></td>
+<td><code>add-host-port</code></td>
+<td>將伺服器埠新增至主機，以遞送要求。</td>
 </tr>
 <tr>
 <td><a href="#client-max-body-size">用戶端要求內文大小</a></td>
@@ -241,6 +256,16 @@ lastupdated: "2018-05-24"
 <td><a href="#large-client-header-buffers">大型用戶端標頭緩衝區</a></td>
 <td><code>large-client-header-buffers</code></td>
 <td>設定讀取大型用戶端要求標頭的緩衝區數目上限及大小。</td>
+</tr>
+<tr>
+<td><a href="#proxy-add-headers">額外的用戶端要求或回應標頭</a></td>
+<td><code>proxy-add-headers、response-add-headers</code></td>
+<td>將標頭資訊新增至用戶端要求，然後再將要求轉遞至後端應用程式，或新增至用戶端回應，然後再將回應傳送至用戶端。</td>
+</tr>
+<tr>
+<td><a href="#response-remove-headers">移除用戶端回應標頭</a></td>
+<td><code>response-remove-headers</code></td>
+<td>從用戶端回應移除標頭資訊，然後才將回應轉遞至用戶端。</td>
 </tr>
 </tbody></table>
 
@@ -285,6 +310,7 @@ lastupdated: "2018-05-24"
 <dl>
 <dt>說明</dt>
 <dd>將路徑定義新增至外部服務。只有在您的應用程式在外部服務上作業，而非在後端服務上作業時才使用此註釋。當您使用此註釋建立外部服務路徑時，只會一起支援 `client-max-body-size`、`proxy-read-timeout`、`proxy-connect-timeout` 及 `proxy-buffering` 註釋。任何其他註釋都不支援與 `proxy-external-service` 一起使用。
+<br><br><strong>附註</strong>：您不可以指定單一服務及路徑的多個主機。
 </dd>
 <dt>Ingress 資源範例 YAML</dt>
 <dd>
@@ -298,14 +324,14 @@ apiVersion: extensions/v1beta1
    annotations:
     ingress.bluemix.net/proxy-external-service: "path=&lt;mypath&gt; external-svc=https:&lt;external_service&gt; host=&lt;mydomain&gt;"
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
     secretName: mysecret
   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /
         backend:
           serviceName: myservice
@@ -369,7 +395,7 @@ apiVersion: extensions/v1beta1
  </tr>
  <tr>
  <td><code>~\*</code></td>
- <td>波狀符號後面接一個星號修飾元，讓 ALB 在比對期間將路徑當作不區分大小寫的 regex 路徑來處理。<br>例如，如果您的應用程式在 <code>/coffee</code> 上接聽，則在將要求與您的應用程式進行或時，即使未針對您的應用程式明確地指定路徑，ALB 也可以選取 <code>/ab/Coffee</code> 或 <code>/123/COFFEE</code> 路徑。</td>
+ <td>波狀符號後面接一個星號修飾元，讓 ALB 在比對期間將路徑當作不區分大小寫的 regex 路徑來處理。<br>例如，如果您的應用程式在 <code>/coffee</code> 上接聽，則在將要求與您的應用程式進行比對時，即使未針對您的應用程式明確地指定路徑，ALB 也可以選取 <code>/ab/Coffee</code> 或 <code>/123/COFFEE</code> 路徑。</td>
  </tr>
  <tr>
  <td><code>^~</code></td>
@@ -391,14 +417,14 @@ apiVersion: extensions/v1beta1
    annotations:
   ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
     secretName: mysecret
   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /
         backend:
           serviceName: &lt;myservice&gt;
@@ -421,6 +447,68 @@ apiVersion: extensions/v1beta1
   </tbody></table>
   </dd>
   </dl>
+
+<br />
+
+
+### 位置 Snippet (location-snippets)
+{: #location-snippets}
+
+新增服務的自訂位置區塊配置。
+{:shortdesc}
+
+<dl>
+<dt>說明</dt>
+<dd>伺服器區塊是一種 nginx 指引，定義 ALB 虛擬伺服器的配置。位置區塊是伺服器區塊內定義的 nginx 指引。位置區塊定義 Ingress 如何處理要求 URI，或在網域名稱或 IP 位址及埠後面的要求部分。<br><br>伺服器區塊收到要求時，位置區塊會比對 URI 與路徑，而且要求會轉遞至應用程式部署所在 Pod 的 IP 位址。使用 <code>location-snippets</code> 註釋，即可修改位置區塊如何將要求轉遞至特定服務。<br><br>若要改為修改整個伺服器區塊，請參閱 <a href="#server-snippets">server-snippets</a> 註釋。</dd>
+
+
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+   name: myingress
+   annotations:
+  ingress.bluemix.net/location-snippets: |
+    serviceName=&lt;myservice&gt;
+    # Example location snippet
+    proxy_request_buffering off;
+    rewrite_log on;
+    proxy_set_header "x-additional-test-header" "location-snippet-header";
+    &lt;EOS&gt;
+ spec:
+   tls:
+- hosts:
+  - mydomain
+     secretName: mytlssecret
+   rules:
+- host: mydomain
+  http:
+    paths:
+    - path: /
+      backend:
+        serviceName: &lt;myservice&gt;
+        servicePort: 8080</code></pre>
+
+<table>
+<caption>瞭解註釋元件</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為您為應用程式所建立之服務的名稱。</td>
+</tr>
+<tr>
+<td>位置 Snippet</td>
+<td>提供要用於所指定服務的配置 Snippet。此範例 Snippet 將要求轉遞至 <code>myservice</code> 服務時，會配置位置區塊來關閉 Proxy 要求緩衝、開啟日誌重寫，以及設定其他標頭。</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
 
 <br />
 
@@ -469,7 +557,8 @@ apiVersion: extensions/v1beta1
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>專用 ALB 的 ID。若要尋找專用 ALB ID，請執行 <code>bx cs albs --cluster &lt;my_cluster&gt;</code>。
+<td>專用 ALB 的 ID。若要尋找專用 ALB ID，請執行 <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>。<p>
+如果您的多區域叢集已啟用多個專用 ALB，則可以提供以 <code>;</code> 區隔的 ALB ID 清單。例如：<code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt</code></p>
 </td>
 </tr>
 </tbody></table>
@@ -498,14 +587,14 @@ apiVersion: extensions/v1beta1
    annotations:
     ingress.bluemix.net/rewrite-path: "serviceName=&lt;myservice1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;myservice2&gt; rewrite=&lt;target_path2&gt;"
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
     secretName: mysecret
   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /beans
         backend:
           serviceName: myservice1
@@ -533,6 +622,61 @@ apiVersion: extensions/v1beta1
 <br />
 
 
+### 伺服器 Snippet (server-snippets)
+{: #server-snippets}
+
+新增自訂伺服器區塊配置。
+{:shortdesc}
+
+<dl>
+<dt>說明</dt>
+<dd>伺服器區塊是一種 nginx 指引，定義 ALB 虛擬伺服器的配置。使用 <code>server-snippets</code> 註釋，即可提供自訂配置 Snippet 來修改 ALB 如何處理要求。</dd>
+
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+   name: myingress
+   annotations:
+  ingress.bluemix.net/server-snippets: |
+    location = /health {
+    return 200 'Healthy';
+    add_header Content-Type text/plain;
+    }
+ spec:
+   tls:
+- hosts:
+  - mydomain
+     secretName: mytlssecret
+   rules:
+- host: mydomain
+  http:
+    paths:
+    - path: /
+      backend:
+        serviceName: &lt;myservice&gt;
+        servicePort: 8080</code></pre>
+
+<table>
+<caption>瞭解註釋元件</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+</thead>
+<tbody>
+<tr>
+<td>伺服器 Snippet</td>
+<td>提供要使用的配置 Snippet。此範例 Snippet 指定位置區塊來處理 <code>/health</code> 要求。位置區塊配置成在轉遞要求時傳回性能良好的回應，以及新增標頭。</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
+
+
 ### 應用程式負載平衡器的 TCP 埠 (tcp-ports)
 {: #tcp-ports}
 
@@ -546,7 +690,7 @@ apiVersion: extensions/v1beta1
 
 
 
-<p>**附註**：ALB 係以透通模式運作，並將資料流量轉遞至後端應用程式。在此情況下，不支援 SSL 終止。</p>
+<p>**附註**：ALB 係以透通模式運作，並將資料流量轉遞至後端應用程式。在此情況下，不支援 SSL 終止。TLS 連線不會終止，並會通過不受影響。</p>
 </dd>
 
 
@@ -561,14 +705,14 @@ apiVersion: extensions/v1beta1
    annotations:
   ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; [servicePort=&lt;service_port&gt;]"
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
     secretName: mysecret
   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /
         backend:
           serviceName: &lt;myservice&gt;
@@ -628,12 +772,11 @@ CLI 輸出會與下列內容類似：
 <code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
 public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
 <li>配置 Ingress 透過非標準 TCP 埠來存取您的應用程式。請在此參照中使用範例 YAML。</li>
-<li>更新 ALB 配置。
+<li>請建立您的 ALB 資源，或更新現有的 ALB 配置。
 <pre class="pre">
-<code>        kubectl apply -f myingress.yaml
-        </code></pre>
+<code>kubectl apply -f myingress.yaml</code></pre>
 </li>
-<li>開啟偏好的 Web 瀏覽器以存取您的應用程式。範例：<code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
+<li>Curl Ingress 子網域，以存取應用程式。範例：<code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
 
 <br />
 
@@ -666,7 +809,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
    name: myingress
    annotations:
@@ -682,9 +825,9 @@ kind: Ingress
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+      backend:
+        serviceName: myservice
+        servicePort: 8080</code></pre>
 
 <table>
 <caption>瞭解註釋元件</caption>
@@ -694,7 +837,7 @@ kind: Ingress
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>要等待連接至後端應用程式的秒數或分鐘數，例如 <code>65s</code> 或 <code>2m</code>。<strong>附註：</strong>連接逾時不可超過 75 秒。</td>
+ <td>要等待連接至後端應用程式的秒數或分鐘數，例如 <code>65s</code> 或 <code>1m</code>。<strong>附註：</strong>連接逾時不可超過 75 秒。</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
@@ -788,22 +931,22 @@ kind: Ingress
 <code>apiVersion: extensions/v1beta1
  kind: Ingress
  metadata:
-   name: myingress
+  name: myingress
    annotations:
    ingress.bluemix.net/keepalive-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;time&gt;s"
  spec:
-   tls:
+  tls:
  - hosts:
    - mydomain
-     secretName: mytlssecret
-   rules:
+    secretName: mytlssecret
+  rules:
  - host: mydomain
    http:
      paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+      backend:
+        serviceName: myservice
+        servicePort: 8080</code></pre>
 
 <table>
 <caption>瞭解註釋元件</caption>
@@ -847,14 +990,14 @@ Ingress ALB 會充當用戶端應用程式與您的應用程式之間的 Proxy�
    annotations:
     ingress.bluemix.net/proxy-next-upstream-config: "serviceName=&lt;myservice1&gt; retries=&lt;tries&gt; timeout=&lt;time&gt; error=true http_502=true; serviceName=&lt;myservice2&gt; http_403=true non_idempotent=true"
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
     secretName: mysecret
   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /
         backend:
           serviceName: myservice1
@@ -936,14 +1079,14 @@ Ingress ALB 會充當用戶端應用程式與您的應用程式之間的 Proxy�
    annotations:
     ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
-    secretName: mytlssecret
-  rules:
+     secretName: mytlssecret
+   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
@@ -986,6 +1129,61 @@ Ingress ALB 會充當用戶端應用程式與您的應用程式之間的 Proxy�
 <br />
 
 
+### 上游失敗逾時 (upstream-fail-timeout)
+{: #upstream-fail-timeout}
+
+設定時間量，在此期間，ALB 可以嘗試連接至伺服器。
+{:shortdesc}
+
+<dl>
+<dt>說明</dt>
+<dd>
+設定時間量，在此期間，ALB 可以先嘗試連接至伺服器，再將伺服器視為無法使用。若要將伺服器視為無法使用，ALB 必須在所設定時間量內符合 <a href="#upstream-max-fails"><code>upstream-max-fails</code> 註釋</a>所設定的連線失敗嘗試次數上限。此時間量也決定了將伺服器視為無法使用的時間。
+</dd>
+
+
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+  name: myingress
+   annotations:
+    ingress.bluemix.net/upstream-fail-timeout: "serviceName=&lt;myservice&gt; fail-timeout=&lt;fail_timeout&gt;"
+ spec:
+   tls:
+  - hosts:
+    - mydomain
+     secretName: mytlssecret
+   rules:
+  - host: mydomain
+     http:
+       paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName（選用）</code></td>
+<td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。</td>
+</tr>
+<tr>
+<td><code>fail-timeout</code></td>
+<td>將 <code>&lt;<em>fail_timeout</em>&gt;</code> 取代為 ALB 可以先嘗試連接至伺服器、再將伺服器視為無法使用的時間量。預設值為 <code>10s</code>。時間必須以秒為單位。</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
 
 
 ### 上游保留作用中 (upstream-keepalive)
@@ -1001,11 +1199,11 @@ Ingress ALB 會充當用戶端應用程式與您的應用程式之間的 Proxy�
 </dd>
 
 
- <dt>Ingress 資源範例 YAML</dt>
- <dd>
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
 
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
  kind: Ingress
  metadata:
   name: myingress
@@ -1025,27 +1223,81 @@ Ingress ALB 會充當用戶端應用程式與您的應用程式之間的 Proxy�
           serviceName: myservice
           servicePort: 8080</code></pre>
 
- <table>
- <caption>瞭解註釋元件</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。</td>
-  </tr>
-  <tr>
-  <td><code>keepalive</code></td>
-  <td>將 <code>&lt;<em>max_connections</em>&gt;</code> 取代為上游伺服器之閒置保留作用中連線的數目上限。預設值為 <code>64</code>。<code>0</code> 值會停用給定服務的上游保留作用中連線。</td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
+<table>
+<caption>瞭解註釋元件</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。</td>
+</tr>
+<tr>
+<td><code>keepalive</code></td>
+<td>將 <code>&lt;<em>max_connections</em>&gt;</code> 取代為上游伺服器之閒置保留作用中連線的數目上限。預設值為 <code>64</code>。<code>0</code> 值會停用給定服務的上游保留作用中連線。</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
 
 <br />
 
 
+### 上游失敗次數上限 (upstream-max-fails)
+{: #upstream-max-fails}
+
+設定與伺服器通訊的不成功嘗試次數上限。
+{:shortdesc}
+
+<dl>
+<dt>說明</dt>
+<dd>
+設定 ALB 無法連接至伺服器、再將伺服器視為無法使用的次數上限。若要將伺服器視為無法使用，ALB 必須在此期間內符合 <a href="#upstream-fail-timeout"><code>upstream-fail-timeout</code> 註釋</a>所設定的次數上限。<code>upstream-fail-timeout</code> 註釋也會設定伺服器視為無法使用的期間。</dd>
+
+
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+  name: myingress
+   annotations:
+    ingress.bluemix.net/upstream-max-fails: "serviceName=&lt;myservice&gt; max-fails=&lt;max_fails&gt;"
+ spec:
+   tls:
+  - hosts:
+    - mydomain
+     secretName: mytlssecret
+   rules:
+  - host: mydomain
+     http:
+       paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName（選用）</code></td>
+<td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。</td>
+</tr>
+<tr>
+<td><code>max-fails</code></td>
+<td>將 <code>&lt;<em>max_fails</em>&gt;</code> 取代為 ALB 可進行以與伺服器通訊的不成功嘗試次數上限。預設值為 <code>1</code>。<code>0</code> 值會停用註釋。</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
 
 
 ## HTTPS 及 TLS/SSL 鑑別註釋
@@ -1054,78 +1306,108 @@ Ingress ALB 會充當用戶端應用程式與您的應用程式之間的 Proxy�
 ### {{site.data.keyword.appid_short_notm}} 鑑別 (appid-auth)
 {: #appid-auth}
 
-  使用 {{site.data.keyword.appid_full_notm}} 對您的應用程式進行鑑別。
+使用 {{site.data.keyword.appid_full_notm}} 對您的應用程式進行鑑別。
   {:shortdesc}
 
-  <dl>
-  <dt>說明</dt>
-  <dd>
+<dl>
+<dt>說明</dt>
+<dd>
 使用 {{site.data.keyword.appid_short_notm}} 鑑別 Web 或 API HTTP/HTTPS 要求。
 
-  <p>如果您將要求類型設為 <code>web</code>，則會驗證包含 {{site.data.keyword.appid_short_notm}} 存取記號的 Web 要求。如果記號驗證失敗，則會拒絕 Web 要求。如果要求不包含存取記號，則會將該要求重新導向至 {{site.data.keyword.appid_short_notm}} 登入頁面。<strong>附註</strong>：若要讓 {{site.data.keyword.appid_short_notm}} Web 鑑別能夠運作，必須在使用者的瀏覽器中啟用 Cookie。</p>
+<p>如果您將要求類型設為 <code>web</code>，則會驗證包含 {{site.data.keyword.appid_short_notm}} 存取記號的 Web 要求。如果記號驗證失敗，則會拒絕 Web 要求。如果要求不包含存取記號，則會將該要求重新導向至 {{site.data.keyword.appid_short_notm}} 登入頁面。<strong>附註</strong>：若要讓 {{site.data.keyword.appid_short_notm}} Web 鑑別能夠運作，必須在使用者的瀏覽器中啟用 Cookie。</p>
 
-  <p>如果您將要求類型設為 <code>api</code>，則會驗證包含 {{site.data.keyword.appid_short_notm}} 存取記號的 API 要求。如果要求不包含存取記號，則會向使用者傳回 <code>401: Unauthorized</code> 錯誤訊息。</p>
+<p>如果您將要求類型設為 <code>api</code>，則會驗證包含 {{site.data.keyword.appid_short_notm}} 存取記號的 API 要求。如果要求不包含存取記號，則會向使用者傳回 <code>401: Unauthorized</code> 錯誤訊息。</p>
 
-  <p>**附註**：基於安全理由，{{site.data.keyword.appid_short_notm}} 鑑別僅支援已啟用 TLS/SSL 的後端。</p>
-  </dd>
-   <dt>Ingress 資源範例 YAML</dt>
-   <dd>
+<p>**附註**：基於安全理由，{{site.data.keyword.appid_short_notm}} 鑑別僅支援已啟用 TLS/SSL 的後端。</p>
+</dd>
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
 
-   <pre class="codeblock">
-   <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
  kind: Ingress
  metadata:
-   name: myingress
+  name: myingress
    annotations:
       ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=&lt;myservice&gt;"
  spec:
    tls:
-    - hosts:
-      - mydomain
+  - hosts:
+    - mydomain
      secretName: mytlssecret
    rules:
-    - host: mydomain
+  - host: mydomain
      http:
        paths:
-        - path: /
-      backend:
-        serviceName: myservice
-        servicePort: 8080</code></pre>
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
-   <table>
-   <caption>瞭解註釋元件</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>bindSecret</code></td>
-    <td>將 <em><code>&lt;bind_secret&gt;</code></em> 取代為儲存連結密碼的 Kubernetes 密碼。</td>
-    </tr>
-    <tr>
-    <td><code>namespace</code></td>
-    <td>將 <em><code>&lt;namespace&gt;</code></em> 取代為連結密碼的名稱空間。這個欄位預設為 `default` 名稱空間。</td>
-    </tr>
-    <tr>
-    <td><code>requestType</code></td>
-    <td>將 <code><em>&lt;request_type&gt;</em></code> 取代為您要傳送至 {{site.data.keyword.appid_short_notm}} 的要求類型。接受的值包含 `web` 或 `api`。預設值為 `api`。</td>
-    </tr>
-    <tr>
-    <td><code>serviceName</code></td>
-    <td>將 <code><em>&lt;myservice&gt;</em></code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。這是選用欄位。如果不包括服務名稱，則會啟用所有服務的註釋。如果包括服務名稱，則只會啟用該服務的註釋。以分號 (;) 區隔多項服務。</td>
-    </tr>
-    </tbody></table>
-    </dd>
-    <dt>用法</dt>
-    <dd>因為應用程式使用 {{site.data.keyword.appid_short_notm}} 進行鑑別，所以您必須佈建 {{site.data.keyword.appid_short_notm}} 實例，以有效的重新導向 URI 配置該實例，並產生連結密碼。
-    <ol>
-    <li>佈建 [{{site.data.keyword.appid_short_notm}} 實例](https://console.bluemix.net/catalog/services/app-id)。</li>
-    <li>在 {{site.data.keyword.appid_short_notm}} 管理主控台中，新增應用程式的 redirectURI。</li>
-    <li>建立連結密碼。
-    <pre class="pre"><code>bx cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
-    <li>配置 <code>appid-auth</code> 註釋。</li>
-    </ol></dd>
-    </dl>
+<table>
+<caption>瞭解註釋元件</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+</thead>
+<tbody>
+<tr>
+<td><code>bindSecret</code></td>
+<td>將 <em><code>&lt;bind_secret&gt;</code></em> 取代為儲存 {{site.data.keyword.appid_short_notm}} 服務實例的連結密碼的 Kubernetes 密碼。</td>
+</tr>
+<tr>
+<td><code>namespace</code></td>
+<td>將 <em><code>&lt;namespace&gt;</code></em> 取代為連結密碼的名稱空間。這個欄位預設為 `default` 名稱空間。</td>
+</tr>
+<tr>
+<td><code>requestType</code></td>
+<td>將 <code><em>&lt;request_type&gt;</em></code> 取代為您要傳送至 {{site.data.keyword.appid_short_notm}} 的要求類型。接受的值包含 `web` 或 `api`。預設值為 `api`。</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td>將 <code><em>&lt;myservice&gt;</em></code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。此欄位為必要欄位。如果不包括服務名稱，則會啟用所有服務的註釋。如果包括服務名稱，則只會啟用該服務的註釋。以逗點 (,) 區隔多項服務。</td>
+</tr>
+</tbody></table>
+</dd>
+<dt>用法</dt></dl>
+
+因為應用程式使用 {{site.data.keyword.appid_short_notm}} 進行鑑別，所以您必須佈建 {{site.data.keyword.appid_short_notm}} 實例，以有效的重新導向 URI 配置該實例，並藉由將實例連結至叢集來產生連結密碼。
+
+1. 選擇現有實例，或建立新的 {{site.data.keyword.appid_short_notm}} 實例。
+    * 若要使用現有實例，請確定服務實例名稱不包含空格。若要移除空格，請選取服務實例名稱旁邊的其他選項功能表，然後選取**重新命名服務**。
+    * 若要佈建[新的 {{site.data.keyword.appid_short_notm}} 實例](https://console.bluemix.net/catalog/services/app-id)，請執行下列動作：
+        1. 將自動填入的**服務名稱**取代為您自己的唯一服務實例名稱。
+            **重要事項**：服務實例名稱不得包含空格。
+        2. 選擇叢集部署所在的相同地區。
+        3. 按一下**建立**。
+2. 新增應用程式的重新導向 URL。重新導向 URL 是應用程式的回呼端點。為了防止網路釣魚攻擊，App ID 會根據重新導向 URL 白名單來驗證要求 URL。
+    1. 在 {{site.data.keyword.appid_short_notm}} 管理主控台中，導覽至**身分提供者 > 管理**。
+    2. 確定您已選取「身分提供者」。如果未選取「身分提供者」，則不會鑑別使用者，但會向其發出存取記號，以匿名存取應用程式。
+    3. 在**新增 Web 重新導向 URL** 欄位中，新增應用程式的重新導向 URL，格式為 `http://<hostname>/<app_path>/appid_callback` 或 `https://<hostname>/<app_path>/appid_callback`。
+        * 例如，向 IBM Ingress 子網域登錄的應用程式可能類似 `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`。
+        * 向自訂網域登錄的應用程式可能類似 `http://mydomain.net/myapp2path/appid_callback`。
+
+3. 將 {{site.data.keyword.appid_short_notm}} 服務實例連結至叢集。
+    ```
+    ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ```
+    {: pre}
+    將服務順利新增至叢集之後，即會建立叢集密碼，以保留服務實例認證。CLI 輸出範例：
+    ```
+    ibmcloud ks cluster-service-bind mycluster mynamespace appid1
+    Binding service instance to namespace...
+    OK
+    Namespace:    mynamespace
+    Secret name:  binding-<service_instance_name>
+    ```
+    {: screen}
+
+4. 取得已在叢集名稱空間中建立的密碼。
+    ```
+    kubectl get secrets --namespace=<namespace>
+    ```
+    {: pre}
+
+5. 使用連結密碼及叢集名稱空間，將 `appid-auth` 註釋新增至 Ingress 資源。
 
 <br />
 
@@ -1140,7 +1422,7 @@ Ingress ALB 會充當用戶端應用程式與您的應用程式之間的 Proxy�
 <dl>
 <dt>說明</dt>
 <dd>依預設，Ingress ALB 是配置為在埠 80 接聽送入的 HTTP 網路資料流量，並在埠 443 接聽送入的 HTTPS 網路資料流量。您可以變更預設埠來增加 ALB 網域的安全，或只啟用 HTTPS 埠。
-</dd>
+<p><strong>附註</strong>: ：若要在埠上啟用交互鑑別，請[配置 ALB 以開啟有效的埠](cs_ingress.html#opening_ingress_ports)，然後在 [`mutual-auth` 註釋中指定該埠](#mutual-auth)。請不要使用 `custom-port` 註釋來指定用於交互鑑別的埠。</p></dd>
 
 
 <dt>Ingress 資源範例 YAML</dt>
@@ -1219,8 +1501,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 <li>配置您的 Ingress，以在將送入的網路資料流量遞送至服務時使用非預設埠。請在此參照中使用範例 YAML。</li>
 <li>更新 ALB 配置。
 <pre class="pre">
-<code>        kubectl apply -f myingress.yaml
-        </code></pre>
+<code>kubectl apply -f myingress.yaml</code></pre>
 </li>
 <li>開啟偏好的 Web 瀏覽器以存取您的應用程式。範例：<code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
 
@@ -1293,14 +1574,14 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
    annotations:
     ingress.bluemix.net/hsts: enabled=true maxAge=&lt;31536000&gt; includeSubdomains=true
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
     secretName: mysecret
   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /service1_path
         backend:
           serviceName: myservice1
@@ -1348,16 +1629,17 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
 <dt>說明</dt>
 <dd>
 針對 Ingress ALB 配置下游資料流量的交互鑑別。外部用戶端會鑑別伺服器，而伺服器也會使用憑證來鑑別用戶端。交互鑑別也稱為憑證型鑑別或雙向鑑別。
- </dd>
+ </br></br>
+將 `mutual-auth` 註釋用於用戶端與 Ingress ALB 之間的 SSL 終止。將 [`ssl-services` 註釋](#ssl-services)用於 Ingress ALB 與後端應用程式之間的 SSL 終止。
+</dd>
 
 <dt>必要條件</dt>
 <dd>
 <ul>
-<li>[您必須具有包含必要憑證管理中心 (CA) 的有效密碼](cs_app.html#secrets)。同時需要 <code>client.key</code> 和 <code>client.crt</code> 來進行交互鑑別。</li>
-<li>若要在 443 以外的埠上啟用交互鑑別，請[配置 ALB 以開啟有效的埠](cs_ingress.html#opening_ingress_ports)。</li>
+<li>您必須具有包含必要 <code>ca.crt</code> 的有效交互鑑別密碼。若要建立交互鑑別密碼，請參閱本節尾端的步驟。</li>
+<li>若要在 443 以外的埠上啟用交互鑑別，請[配置 ALB 以開啟有效的埠](cs_ingress.html#opening_ingress_ports)，然後在此註釋中指定該埠。請不要使用 `custom-port` 註釋來指定用於交互鑑別的埠。</li>
 </ul>
 </dd>
-
 
 <dt>Ingress 資源範例 YAML</dt>
 <dd>
@@ -1370,14 +1652,14 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
    annotations:
   ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
-    secretName: mytlssecret
-  rules:
+     secretName: mytlssecret
+   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /
         backend:
           serviceName: myservice
@@ -1407,6 +1689,44 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
 </dd>
 </dl>
 
+**若要建立交互鑑別密碼，請執行下列動作：**
+
+1. 使用下列其中一種方法來產生金鑰及憑證：
+    * 從憑證提供者產生憑證管理中心 (CA) 憑證及金鑰。如果您有自己的網域，請為您的網域購買正式的 TLS 憑證。**重要事項**：請確定每一個憑證的 [CN ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://support.dnsimple.com/articles/what-is-common-name/) 都不同。
+    * 基於測試用途，您可以使用 OpenSSL 來建立自簽憑證。如需相關資訊，請參閱此[自簽 SSL 憑證指導教學 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.akadia.com/services/ssh_test_certificate.html)。
+        1. 建立 `ca.key`。
+            ```
+            openssl genrsa -out ca.key 1024
+            ```
+            {: pre}
+        2. 使用金鑰，以建立 `ca.crt`。
+            ```
+            openssl req -new -x509 -key ca.key -out ca.crt
+            ```
+            {: pre}
+        3. 使用 `ca.crt`，以建立自簽憑證。
+            ```
+            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            ```
+            {: pre}
+2. [將憑證轉換為 base-64 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.base64encode.org/)。
+3. 使用憑證，以建立密碼 YAML 檔案。
+     ```
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       ca.crt: <ca_certificate>
+     ```
+     {: codeblock}
+4. 建立憑證作為 Kubernetes 密碼。
+     ```
+     kubectl create -f ssl-my-test
+     ```
+     {: pre}
+
 <br />
 
 
@@ -1420,64 +1740,9 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
 <dl>
 <dt>說明</dt>
 <dd>
-加密 Ingress 傳送至需要 HTTPS 的上游應用程式的資料流量。如果您的上游應用程式可以處理 TLS，則您可以選擇性地提供 TLS 密碼中包含的憑證。<br></br>**選用**：您可以將[單向鑑別或交互鑑別](#ssl-services-auth)新增至此註釋。</dd>
-
-
-<dt>Ingress 資源範例 YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-  name: &lt;myingressname&gt;
-   annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]
- spec:
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /service1_path
-        backend:
-          serviceName: myservice1
-          servicePort: 8443
-      - path: /service2_path
-        backend:
-          serviceName: myservice2
-          servicePort: 8444</code></pre>
-
-<table>
-<caption>瞭解註釋元件</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為需要 HTTPS 的服務名稱。系統會加密從 ALB 到此應用程式之服務的資料流量。</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>選用項目：如果您要使用 TLS 密碼，且您的上游應用程式可以處理 TLS，請將 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 取代為服務的密碼。如果您提供密碼，則此值必須包含您的應用程式預期來自用戶端的 <code>trusted.crt</code>、<code>client.crt</code> 及 <code>client.key</code>。若要建立 TLS 密碼，請先[將憑證及金鑰轉換為 base-64 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.base64encode.org/)。然後，請參閱[建立密碼](cs_app.html#secrets)。</td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
-
-<br />
-
-
-#### SSL 服務支援與鑑別
-{: #ssl-services-auth}
-
-<dl>
-<dt>說明</dt>
-<dd>
-容許 HTTPS 要求，並使用單向或交互鑑別，加密要送至上游應用程式的資料流量，以取得額外的安全。
-</dd>
-
+當您的 Ingress 資源配置具有 TLS 區段時，Ingress ALB 可以處理應用程式的 HTTPS 保護 URL 要求。不過，ALB 會處理 TLS 終止，並先解密要求，再將資料流量轉遞至應用程。如果您的應用程式需要 HTTPS 通訊協定，並且需要資料流量保持加密，請使用 `ssl-services` 註釋來停用 ALB 的預設 TLS 終止。ALB 會先終止 TLS 連線，並在將資料流量傳送至後端應用程式之前重新加密 SSL。</br></br>
+此外，如果後端應用程式可以處理 TLS，而且您想要新增其他安全，則可以藉由提供密碼中包含的憑證，來新增單向或交互鑑別。</br></br>
+將 `ssl-services` 註釋用於 Ingress ALB 與後端應用程式之間的 SSL 終止。將 [`mutual-auth` 註釋](#mutual-auth)用於用戶端與 Ingress ALB 之間的 SSL 終止。</dd>
 
 <dt>Ingress 資源範例 YAML</dt>
 <dd>
@@ -1492,14 +1757,14 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
       ssl-service=&lt;myservice1&gt; ssl-secret=&lt;service1-ssl-secret&gt;;
       ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
     secretName: mysecret
   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /service1_path
         backend:
           serviceName: myservice1
@@ -1522,12 +1787,73 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>將 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 取代為服務的交互鑑別密碼。此值必須包含您的應用程式預期來自用戶端的 CA 憑證。若要建立交互鑑別密碼，請先[將憑證及金鑰轉換為 base-64 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.base64encode.org/)。然後，請參閱[建立密碼](cs_app.html#secrets)。</td>
+  <td>如果後端應用程式可以處理 TLS，而且您想要新增其他安全，請將 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 取代為服務的單向或交互鑑別密碼。<ul><li>如果您提供單向密碼，則此值必須包含來自上游伺服器的 <code>trusted.crt</code>。若要建立單向密碼，請參閱本節尾端的步驟。</li><li>如果您提供交互鑑別密碼，則此值必須包含您應用程式預期來自用戶端的必要 <code>ca.crt</code> 及 <code>ca.key</code>。若要建立交互鑑別密碼，請參閱本節尾端的步驟。</li></ul><strong>警告</strong>：如果您未提供密碼，則允許不安全的連線。如果要測試連線且未備妥憑證，或者您的憑證已過期且您想要允許不安全的連線，您可以選擇省略密碼。</td>
   </tr>
   </tbody></table>
 
   </dd>
   </dl>
+
+**若要建立單向密碼，請執行下列動作：**
+
+1. 從上游伺服器取得憑證管理中心 (CA) 金鑰及憑證。
+2. [將憑證轉換為 base-64 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.base64encode.org/)。
+3. 使用憑證，以建立密碼 YAML 檔案。
+     ```
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       trusted.crt: <ca_certificate>
+     ```
+     {: codeblock}
+     **附註**：如果您也要施行上游資料流量的交互鑑別，則可以提供 `client.crt` 和 `client.key`，以及 data 區段中的 `trusted.crt`。
+4. 建立憑證作為 Kubernetes 密碼。
+     ```
+     kubectl create -f ssl-my-test
+     ```
+     {: pre}
+
+</br>
+**若要建立交互鑑別密碼，請執行下列動作：**
+
+1. 使用下列其中一種方法來產生金鑰及憑證：
+    * 從憑證提供者產生憑證管理中心 (CA) 憑證及金鑰。如果您有自己的網域，請為您的網域購買正式的 TLS 憑證。**重要事項**：請確定每一個憑證的 [CN ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://support.dnsimple.com/articles/what-is-common-name/) 都不同。
+    * 基於測試用途，您可以使用 OpenSSL 來建立自簽憑證。如需相關資訊，請參閱此[自簽 SSL 憑證指導教學 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.akadia.com/services/ssh_test_certificate.html)。
+        1. 建立 `ca.key`。
+            ```
+            openssl genrsa -out ca.key 1024
+            ```
+            {: pre}
+        2. 使用金鑰，以建立 `ca.crt`。
+            ```
+            openssl req -new -x509 -key ca.key -out ca.crt
+            ```
+            {: pre}
+        3. 使用 `ca.crt`，以建立自簽憑證。
+            ```
+            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            ```
+            {: pre}
+2. [將憑證轉換為 base-64 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.base64encode.org/)。
+3. 使用憑證，以建立密碼 YAML 檔案。
+     ```
+     apiVersion: v1
+     kind: Secret
+     metadata:
+       name: ssl-my-test
+     type: Opaque
+     data:
+       ca.crt: <ca_certificate>
+     ```
+     {: codeblock}
+4. 建立憑證作為 Kubernetes 密碼。
+     ```
+     kubectl create -f ssl-my-test
+     ```
+     {: pre}
 
 <br />
 
@@ -1538,86 +1864,189 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
 ### Istio 服務（istio-services）
 {: #istio-services}
 
-  將資料流量遞送至 Istio 受管理服務。
+將資料流量遞送至 Istio 受管理服務。
   {:shortdesc}
 
-  <dl>
-  <dt>說明</dt>
-  <dd>
-  如果您具有 Istio 受管理服務，則可以使用叢集 ALB，將 HTTP/HTTPS 要求遞送至 Istio Ingress 控制器。Istio Ingress 控制器接著會將要求遞送至應用程式服務。為了遞送資料流量，您必須對叢集 ALB 及 Istio Ingress 控制器兩者的 Ingress 資源進行變更。<br><br>在叢集 ALB 的 Ingress 資源中，您必須：
+<dl>
+<dt>說明</dt>
+<dd>
+<strong>附註</strong>：此註釋只能與 Istio 0.7 及更早版本搭配使用。
+<br>  如果您具有 Istio 受管理服務，則可以使用叢集 ALB，將 HTTP/HTTPS 要求遞送至 Istio Ingress 控制器。Istio Ingress 控制器接著會將要求遞送至應用程式服務。為了遞送資料流量，您必須對叢集 ALB 及 Istio Ingress 控制器兩者的 Ingress 資源進行變更。<br><br>在叢集 ALB 的 Ingress 資源中，您必須：
       <ul>
-        <li>指定 `istio-services` 註釋</li>
-        <li>將服務路徑定義為應用程式接聽所在的實際路徑</li>
-        <li>將服務埠定義為 Istio Ingress 控制器的埠</li>
-      </ul>
-    <br>在 Istio Ingress 控制器的 Ingress 資源中，您必須：
+    <li>指定 `istio-services` 註釋</li>
+    <li>將服務路徑定義為應用程式接聽所在的實際路徑</li>
+    <li>將服務埠定義為 Istio Ingress 控制器的埠</li>
+  </ul>
+<br>在 Istio Ingress 控制器的 Ingress 資源中，您必須：
       <ul>
-        <li>將服務路徑定義為應用程式接聽所在的實際路徑</li>
-        <li>將服務埠定義為 Istio Ingress 控制器所公開之應用程式服務的 HTTP/HTTPS 埠</li>
-    </ul>
-  </dd>
+    <li>將服務路徑定義為應用程式接聽所在的實際路徑</li>
+    <li>將服務埠定義為 Istio Ingress 控制器所公開之應用程式服務的 HTTP/HTTPS 埠</li>
+</ul>
+</dd>
 
-   <dt>叢集 ALB 的範例 Ingress 資源 YAML</dt>
-   <dd>
+<dt>叢集 ALB 的範例 Ingress 資源 YAML</dt>
+<dd>
 
-   <pre class="codeblock">
-   <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
  kind: Ingress
  metadata:
-   name: myingress
+  name: myingress
    annotations:
-      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+    ingress.bluemix.net/istio-services: "enable=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
  spec:
    tls:
-    - hosts:
-      - mydomain
+  - hosts:
+    - mydomain
      secretName: mytlssecret
    rules:
-    - host: mydomain
+  - host: mydomain
      http:
        paths:
-        - path: &lt;/myapp1&gt;
+      - path: &lt;/myapp1&gt;
           backend:
             serviceName: &lt;myservice1&gt;
             servicePort: &lt;istio_ingress_port&gt;
-        - path: &lt;/myapp2&gt;
+      - path: &lt;/myapp2&gt;
           backend:
             serviceName: &lt;myservice2&gt;
             servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
-   <table>
-   <caption>瞭解 YAML 檔案元件</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>enabled</code></td>
-      <td>若要讓資料流量可以遞送至 Istio 管理服務，請設為 <code>True</code>。</td>
-    </tr>
-    <tr>
-    <td><code>serviceName</code></td>
-    <td>將 <code><em>&lt;myservice1&gt;</em></code> 取代為您為 Istio 受管理應用程式所建立之 Kubernetes 服務的名稱。以分號 (;) 區隔多項服務。這是選用欄位。如果未指定服務名稱，則會啟用所有 Istio 受管理服務進行資料流量遞送。</td>
-    </tr>
-    <tr>
-    <td><code>istioServiceNamespace</code></td>
-    <td>將 <code><em>&lt;istio-namespace&gt;</em></code> 取代為已安裝 Istio 的 Kubernees 名稱空間。這是選用欄位。如果未指定名稱空間，則會使用 <code>istio-system</code> 名稱空間。</td>
-    </tr>
-    <tr>
-    <td><code>istioServiceName</code></td>
-    <td>將 <code><em>&lt;istio-ingress-service&gt;</em></code> 取代為 Istio Ingress 服務的名稱。這是選用欄位。如果未指定 Itio Ingress 服務名稱，則會使用服務名稱 <code>istio-ingress</code>。</td>
-    </tr>
-    <tr>
-    <td><code>path</code></td>
-      <td>對於每一個您要將資料流量遞送至其中的 Istio 受管理服務，請將 <code><em>&lt;/myapp1&gt;</em></code> 取代為 Istio 受管理服務接聽所在的後端路徑。此路徑必須對應於您已在 Istio Ingress 資源中定義的路徑。</td>
-    </tr>
-    <tr>
-    <td><code>servicePort</code></td>
-    <td>對於每一個您要將資料流量遞送至其中的 Istio 受管理服務，請將 <code><em>&lt;istio_ingress_port&gt;</em></code> 取代為 Istio Ingress 控制器的埠。</td>
-    </tr>
-    </tbody></table>
-    </dd>
-    </dl>
+<table>
+<caption>瞭解 YAML 檔案元件</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+</thead>
+<tbody>
+<tr>
+<td><code>enable</code></td>
+  <td>若要讓資料流量可以遞送至 Istio 管理服務，請設為 <code>True</code>。</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td>將 <code><em>&lt;myservice1&gt;</em></code> 取代為您為 Istio 受管理應用程式所建立之 Kubernetes 服務的名稱。以分號 (;) 區隔多項服務。這是選用欄位。如果未指定服務名稱，則會啟用所有 Istio 受管理服務進行資料流量遞送。</td>
+</tr>
+<tr>
+<td><code>istioServiceNamespace</code></td>
+<td>將 <code><em>&lt;istio-namespace&gt;</em></code> 取代為已安裝 Istio 的 Kubernees 名稱空間。這是選用欄位。如果未指定名稱空間，則會使用 <code>istio-system</code> 名稱空間。</td>
+</tr>
+<tr>
+<td><code>istioServiceName</code></td>
+<td>將 <code><em>&lt;istio-ingress-service&gt;</em></code> 取代為 Istio Ingress 服務的名稱。這是選用欄位。如果未指定 Itio Ingress 服務名稱，則會使用服務名稱 <code>istio-ingress</code>。</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+  <td>對於每一個您要將資料流量遞送至其中的 Istio 受管理服務，請將 <code><em>&lt;/myapp1&gt;</em></code> 取代為 Istio 受管理服務接聽所在的後端路徑。此路徑必須對應於您已在 Istio Ingress 資源中定義的路徑。</td>
+</tr>
+<tr>
+<td><code>servicePort</code></td>
+<td>對於每一個您要將資料流量遞送至其中的 Istio 受管理服務，請將 <code><em>&lt;istio_ingress_port&gt;</em></code> 取代為 Istio Ingress 控制器的埠。</td>
+</tr>
+</tbody></table>
+</dd>
+
+<dt>用法</dt></dl>
+
+1. 部署應用程式。這些步驟中所提供的範例資源使用稱為 [BookInfo ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://archive.istio.io/v0.7/docs/guides/bookinfo.html) 的 Istio 範例應用程式，其位於 `istio-0.7.1/samples/bookinfo/kube` 儲存庫中。
+   ```
+   kubectl apply -f bookinfo.yaml -n istio-system
+   ```
+   {: pre}
+
+2. 設定應用程式的 Istio 遞送規則。例如，在稱為 BookInfo 的 Istio 範例應用程式中，[每個微服務的遞送規則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://archive.istio.io/v0.7/docs/tasks/traffic-management/request-routing.html) 都定義於 `route-rule-all-v1.yaml` 檔案中。
+
+3. 建立 Istio Ingress 資源，以將應用程式公開至 Istio Ingress 控制器。資源容許要套用至進入叢集的資料流量的 Istio 特性（例如監視及遞送規則）。
+    例如，BookInfo 應用程式的下列資源預先定義於 `bookinfo.yaml` 檔案中：
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: istio-ingress-resource
+      annotations:
+        kubernetes.io/ingress.class: "istio"
+    spec:
+      rules:
+      - http:
+          paths:
+          - path: /productpage
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /login
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /logout
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /api/v1/products.*
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+    ```
+    {: codeblock}
+
+4. 建立 Istio Ingress 資源。
+    ```
+    kubectl create -f istio-ingress-resource.yaml -n istio-system
+    ```
+    {: pre}
+    您的應用程式會連接至 Istio Ingress 控制器。
+
+5. 取得叢集的 IBM **Ingress 子網域**及 **Ingress 密碼**。子網域及密碼是針對叢集所預先登錄，並且用來作為應用程式的唯一公用 URL。
+    ```
+    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ```
+    {: pre}
+
+6. 建立 IBM Ingress 資源，以將 Istio Ingress 控制器連接至叢集的 IBM Ingress ALB。
+    BookInfo 應用程式的範例：
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: ibm-ingress-resource
+      annotations:
+        ingress.bluemix.net/istio-services: "enabled=true serviceName=productpage istioServiceName=istio-ingress-resource"
+    spec:
+      tls:
+      - hosts:
+        - mycluster-459249.us-south.containers.mybluemix.net
+        secretName: mycluster-459249
+      rules:
+      - host: mycluster-459249.us-south.containers.mybluemix.net
+        http:
+          paths:
+          - path: /productpage
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /login
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /logout
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /api/v1/products.*
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+    ```
+    {: codeblock}
+
+7. 建立 IBM ALB Ingress 資源。
+    ```
+    kubectl apply -f ibm-ingress-resource.yaml -n istio-system
+    ```
+    {: pre}
+
+8. 在瀏覽器中，移至 `https://<hostname>/frontend` 以檢視應用程式網頁。
+
+<br />
+
 
 ## Proxy 緩衝區註釋
 {: #proxy-buffer}
@@ -1704,11 +2133,11 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
    annotations:
    ingress.bluemix.net/proxy-buffers: "serviceName=&lt;myservice&gt; number=&lt;number_of_buffers&gt; size=&lt;size&gt;"
  spec:
-   tls:
+  tls:
  - hosts:
    - mydomain
-     secretName: mytlssecret
-   rules:
+    secretName: mytlssecret
+  rules:
  - host: mydomain
    http:
      paths:
@@ -1760,7 +2189,7 @@ HSTS 指示瀏覽器僅使用 HTTPS 來存取網域。即使使用者輸入或�
 
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
  name: proxy-ingress
    annotations:
@@ -1824,14 +2253,14 @@ kind: Ingress
  kind: Ingress
  metadata:
  name: proxy-ingress
-  annotations:
+   annotations:
    ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;myservice&gt; size=&lt;size&gt;"
  spec:
-  tls:
+   tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+     secretName: mytlssecret
+   rules:
  - host: mydomain
    http:
      paths:
@@ -1867,6 +2296,57 @@ kind: Ingress
 ## 要求及回應註釋
 {: #request-response}
 
+### 將伺服器埠新增至主機標頭 (add-host-port)
+{: #add-host-port}
+
+<dl>
+<dt>說明</dt>
+<dd>將 `:server_port` 新增至用戶端要求的主機標頭，再將要求轉遞至後端應用程式。
+
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+   name: myingress
+   annotations:
+   ingress.bluemix.net/add-host-port: "enabled=&lt;true&gt; serviceName=&lt;myservice&gt;"
+ spec:
+   tls:
+ - hosts:
+   - mydomain
+     secretName: mytlssecret
+   rules:
+ - host: mydomain
+   http:
+     paths:
+     - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+<table>
+<caption>瞭解註釋元件</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>enabled</code></td>
+   <td>若要啟用主機的 server_port 設定，請設為 <code>true</code>。</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>將 <code><em>&lt;myservice&gt;</em></code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。以分號 (;) 區隔多項服務。這是選用欄位。如果您未指定服務名稱，則所有服務都會使用此註釋。</td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
+
+<br />
+
 
 ### 其他用戶端要求或回應標頭（proxy-add-headers、response-add-headers）
 {: #proxy-add-headers}
@@ -1886,6 +2366,7 @@ kind: Ingress
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
@@ -1895,8 +2376,9 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
 
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
-serviceName=<myservice1> {
+      serviceName=&lt;myservice1&gt; {
   Host $host;
+  X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
@@ -1931,14 +2413,14 @@ serviceName=<myservice1> {
       &lt;header3&gt;: &lt;value3&gt;;
       }
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
-    secretName: mytlssecret
-  rules:
+     secretName: mytlssecret
+   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
@@ -1979,59 +2461,59 @@ serviceName=<myservice1> {
 移除來自後端應用程式之用戶端回應中內含的標頭資訊，再將回應傳送至用戶端。
 {:shortdesc}
 
- <dl>
- <dt>說明</dt>
- <dd>Ingress ALB 會充當後端應用程式與用戶端 Web 瀏覽器之間的 Proxy。從後端應用程式傳送到 ALB 的用戶端回應會經過處理（代理），然後放入新的回應，再從 ALB 傳送到用戶端 Web 瀏覽器。雖然代理回應會移除一開始從後端應用程式傳送的 HTTP 標頭資訊，但這個程序不一定會移除所有後端應用程式特有的標頭。從用戶端回應移除標頭資訊，然後再將回應從 ALB 轉遞到用戶端 Web 瀏覽器。</dd>
- <dt>Ingress 資源範例 YAML</dt>
- <dd>
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
+<dl>
+<dt>說明</dt>
+<dd>Ingress ALB 會充當後端應用程式與用戶端 Web 瀏覽器之間的 Proxy。從後端應用程式傳送到 ALB 的用戶端回應會經過處理（代理），然後放入新的回應，再從 ALB 傳送到用戶端 Web 瀏覽器。雖然代理回應會移除一開始從後端應用程式傳送的 HTTP 標頭資訊，但這個程序不一定會移除所有後端應用程式特有的標頭。從用戶端回應移除標頭資訊，再將回應從 ALB 轉遞到用戶端 Web 瀏覽器。</dd>
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
  kind: Ingress
  metadata:
-   name: myingress
+  name: myingress
    annotations:
      ingress.bluemix.net/response-remove-headers: |
-       serviceName=&lt;myservice1&gt; {
+      serviceName=&lt;myservice1&gt; {
        "&lt;header1&gt;";
        "&lt;header2&gt;";
-       }
-       serviceName=&lt;myservice2&gt; {
+      }
+      serviceName=&lt;myservice2&gt; {
        "&lt;header3&gt;";
-       }
+      }
  spec:
    tls:
-   - hosts:
-     - mydomain
+  - hosts:
+    - mydomain
      secretName: mytlssecret
    rules:
-   - host: mydomain
+  - host: mydomain
      http:
        paths:
-       - path: /service1_path
-         backend:
-           serviceName: &lt;myservice1&gt;
-           servicePort: 8080
-       - path: /service2_path
-         backend:
-           serviceName: &lt;myservice2&gt;
-           servicePort: 80</code></pre>
+      - path: /service1_path
+        backend:
+          serviceName: &lt;myservice1&gt;
+          servicePort: 8080
+      - path: /service2_path
+        backend:
+          serviceName: &lt;myservice2&gt;
+          servicePort: 80</code></pre>
 
-  <table>
-  <caption>瞭解註釋元件</caption>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>service_name</code></td>
-   <td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。</td>
-   </tr>
-   <tr>
-   <td><code>&lt;header&gt;</code></td>
-   <td>要從用戶端回應移除的標頭索引鍵。</td>
-   </tr>
-   </tbody></table>
-   </dd></dl>
+<table>
+<caption>瞭解註釋元件</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+</thead>
+<tbody>
+<tr>
+<td><code>service_name</code></td>
+<td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。</td>
+</tr>
+<tr>
+<td><code>&lt;header&gt;</code></td>
+<td>要從用戶端回應移除的標頭索引鍵。</td>
+</tr>
+</tbody></table>
+</dd></dl>
 
 <br />
 
@@ -2059,7 +2541,7 @@ serviceName=<myservice1> {
  metadata:
    name: myingress
    annotations:
-   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
+   ingress.bluemix.net/client-max-body-size: size=&lt;size&gt;
  spec:
    tls:
  - hosts:
@@ -2099,7 +2581,7 @@ serviceName=<myservice1> {
 
 <dl>
 <dt>說明</dt>
-<dd>讀取大型用戶端要求標頭的緩衝區僅依需求配置：如果在結束要求處理之後連線轉移至保留作用中狀態，則會釋放這些緩衝區。依預設，緩衝區大小等於 <code>8K</code> 位元組。如果要求行超出設定的大小上限，即一個緩衝區，則會對用戶端傳回 <code>414 Request-URI Too Large</code> 錯誤。此外，如果要求標頭欄位超出設定的大小上限，即一個緩衝區，則會對用戶端傳回 <code>400 Bad Request</code> 錯誤。您可以調整用於讀取大型用戶端要求標頭的緩衝區數目上限及大小。
+<dd>讀取大型用戶端要求標頭的緩衝區僅依需求配置：如果在結束要求處理之後連線轉移至保留作用中狀況，則會釋放這些緩衝區。依預設，緩衝區大小等於 <code>8K</code> 位元組。如果要求行超出設定的大小上限，即一個緩衝區，則會對用戶端傳回 <code>414 Request-URI Too Large</code> 錯誤。此外，如果要求標頭欄位超出設定的大小上限，即一個緩衝區，則會對用戶端傳回 <code>400 Bad Request</code> 錯誤。您可以調整用於讀取大型用戶端要求標頭的緩衝區數目上限及大小。
 
 <dt>Ingress 資源範例 YAML</dt>
 <dd>
@@ -2164,52 +2646,52 @@ serviceName=<myservice1> {
 </dd>
 
 
- <dt>Ingress 資源範例 YAML</dt>
- <dd>
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
 
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
  kind: Ingress
  metadata:
   name: myingress
    annotations:
     ingress.bluemix.net/global-rate-limit: "key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
-    secretName: mytlssecret
-  rules:
+     secretName: mytlssecret
+   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
- <table>
- <caption>瞭解註釋元件</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>key</code></td>
-  <td>若要根據位置或服務來設定送入要求的廣域限制，請使用 `key=location`。若要根據標頭來設定送入要求的廣域限制，請使用 `X-USER-ID key=$http_x_user_id`。</td>
-  </tr>
-  <tr>
-  <td><code>rate</code></td>
-  <td>將 <code>&lt;<em>rate</em>&gt;</code> 取代為處理速率。輸入值作為每秒速率 (r/s) 或每分鐘速率 (r/m)。範例：<code>50r/m</code>。</td>
-  </tr>
-  <tr>
-  <td><code>number-of_connections</code></td>
-  <td>將 <code>&lt;<em>conn</em>&gt;</code> 取代為連線數目。</td>
-  </tr>
-  </tbody></table>
+<table>
+<caption>瞭解註釋元件</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+</thead>
+<tbody>
+<tr>
+<td><code>key</code></td>
+<td>若要根據區域或服務來設定送入要求的廣域限制，請使用 `key=zone`。若要根據標頭來設定送入要求的廣域限制，請使用 `X-USER-ID key=$http_x_user_id`。</td>
+</tr>
+<tr>
+<td><code>rate</code></td>
+<td>將 <code>&lt;<em>rate</em>&gt;</code> 取代為處理速率。輸入值作為每秒速率 (r/s) 或每分鐘速率 (r/m)。範例：<code>50r/m</code>。</td>
+</tr>
+<tr>
+<td><code>number-of_connections</code></td>
+<td>將 <code>&lt;<em>conn</em>&gt;</code> 取代為連線數目。</td>
+</tr>
+</tbody></table>
 
-  </dd>
-  </dl>
+</dd>
+</dl>
 
 <br />
 
@@ -2226,57 +2708,57 @@ serviceName=<myservice1> {
 <dd>針對特定服務，根據來自所選取後端的所有路徑之單一 IP 位址的已定義金鑰，限制要求處理速率及連線數目。</dd>
 
 
- <dt>Ingress 資源範例 YAML</dt>
- <dd>
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
 
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
  kind: Ingress
  metadata:
   name: myingress
    annotations:
     ingress.bluemix.net/service-rate-limit: "serviceName=&lt;myservice&gt; key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
  spec:
-  tls:
+   tls:
   - hosts:
     - mydomain
-    secretName: mytlssecret
-  rules:
+     secretName: mytlssecret
+   rules:
   - host: mydomain
-    http:
-      paths:
+     http:
+       paths:
       - path: /
         backend:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
- <table>
- <caption>瞭解註釋元件</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為您要建立處理速率的服務名稱。</li>
-  </tr>
-  <tr>
-  <td><code>key</code></td>
-  <td>若要根據位置或服務來設定送入要求的廣域限制，請使用 `key=location`。若要根據標頭來設定送入要求的廣域限制，請使用 `X-USER-ID key=$http_x_user_id`。</td>
-  </tr>
-  <tr>
-  <td><code>rate</code></td>
-  <td>將 <code>&lt;<em>rate</em>&gt;</code> 取代為處理速率。若要定義每秒速率，請使用 r/s：<code>10r/s</code>。若要定義每分鐘速率，請使用 r/m：<code>50r/m</code>。</td>
-  </tr>
-  <tr>
-  <td><code>number-of_connections</code></td>
-  <td>將 <code>&lt;<em>conn</em>&gt;</code> 取代為連線數目。</td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
+<table>
+<caption>瞭解註釋元件</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解註釋元件</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>將 <code>&lt;<em>myservice</em>&gt;</code> 取代為您要建立處理速率的服務名稱。</li>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td>若要根據區域或服務來設定送入要求的廣域限制，請使用 `key=zone`。若要根據標頭來設定送入要求的廣域限制，請使用 `X-USER-ID key=$http_x_user_id`。</td>
+</tr>
+<tr>
+<td><code>rate</code></td>
+<td>將 <code>&lt;<em>rate</em>&gt;</code> 取代為處理速率。若要定義每秒速率，請使用 r/s：<code>10r/s</code>。若要定義每分鐘速率，請使用 r/m：<code>50r/m</code>。</td>
+</tr>
+<tr>
+<td><code>number-of_connections</code></td>
+<td>將 <code>&lt;<em>conn</em>&gt;</code> 取代為連線數目。</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
 
-  <br />
+<br />
 
 
 

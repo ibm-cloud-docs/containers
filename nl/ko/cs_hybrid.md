@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-12"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -40,13 +40,13 @@ lastupdated: "2018-09-12"
 
 2.  {{site.data.keyword.containerlong_notm}} 클러스터에서 [지시사항에 따라 strongSwan IPSec VPN 서비스를 설정](cs_vpn.html#vpn_configure)하십시오. 
 
-    *  [2단계](cs_vpn.html#strongswan_2)의 경우 다음을 유념하십시오. 
+    *  [2단계](cs_vpn.html#strongswan_2)의 경우 다음을 유념하십시오.
 
-       * {{site.data.keyword.containerlong_notm}} 클러스터에서 설정하는 `local.id`는 {{site.data.keyword.Bluemix}} Private 클러스터에서 나중에 `remote.id`로 설정하는 것과 일치해야 합니다.  
-       * {{site.data.keyword.containerlong_notm}} 클러스터에서 설정하는 `remote.id`는 {{site.data.keyword.Bluemix}} Private 클러스터에서 나중에 `local.id`로 설정하는 것과 일치해야 합니다. 
-       * {{site.data.keyword.containerlong_notm}} 클러스터에서 설정하는 `preshared.secret`는 {{site.data.keyword.Bluemix}} Private 클러스터에서 나중에 `preshared.secret`으로 설정하는 것과 일치해야 합니다. 
+       * {{site.data.keyword.containerlong_notm}} 클러스터에서 설정하는 `local.id`는 {{site.data.keyword.Bluemix}} Private 클러스터에서 나중에 `remote.id`로 설정하는 것과 일치해야 합니다. 
+       * {{site.data.keyword.containerlong_notm}} 클러스터에서 설정하는 `remote.id`는 {{site.data.keyword.Bluemix}} Private 클러스터에서 나중에 `local.id`로 설정하는 것과 일치해야 합니다.
+       * {{site.data.keyword.containerlong_notm}} 클러스터에서 설정하는 `preshared.secret`는 {{site.data.keyword.Bluemix}} Private 클러스터에서 나중에 `preshared.secret`으로 설정하는 것과 일치해야 합니다.
 
-    *  [3단계](cs_vpn.html#strongswan_3)의 경우, **인바운드** VPN 연결에 대해 strongSwan을 고려하십시오. 
+    *  [3단계](cs_vpn.html#strongswan_3)의 경우, **인바운드** VPN 연결에 대해 strongSwan을 고려하십시오.
 
        ```
        ipsec.auto: add
@@ -54,22 +54,22 @@ lastupdated: "2018-09-12"
        ```
        {: codeblock}
 
-3.  `loadbalancerIP`로 설정한 포터블 공인 IP 주소를 기록해 두십시오. 
+3.  `loadbalancerIP`로 설정한 포터블 공인 IP 주소를 기록해 두십시오.
 
     ```
     kubectl get svc vpn-strongswan
     ```
     {: pre}
 
-4.  [{{site.data.keyword.Bluemix_notm}} Private에서 클러스터를 작성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html)하십시오. 
+4.  [{{site.data.keyword.Bluemix_notm}} Private에서 클러스터를 작성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html)하십시오.
 
 5.  {{site.data.keyword.Bluemix_notm}} Private 클러스터에서 strongSwan IPSec VPN 서비스를 배치하십시오.
 
     1.  [strongSwan IPSec VPN 임시 해결책을 완료 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html)하십시오. 
 
-    2.  개인용 클러스터에서 [strongSwan VPN Helm 차트를 설정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html)하십시오.  
+    2.  개인용 클러스터에서 [strongSwan VPN Helm 차트를 설정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html)하십시오. 
     
-        *  구성 매개변수에서 {{site.data.keyword.containerlong_notm}} 클러스터의 `loadbalancerIP`로 설정한 포터블 공인 IP 주소의 값으로 **원격 게이트웨이** 필드를 설정하십시오. 
+        *  구성 매개변수에서 {{site.data.keyword.containerlong_notm}} 클러스터의 `loadbalancerIP`로 설정한 포터블 공인 IP 주소의 값으로 **원격 게이트웨이** 필드를 설정하십시오.
     
            ```
            Operation at startup: start
@@ -79,9 +79,9 @@ lastupdated: "2018-09-12"
            ```
            {: codeblock}
     
-        *  개인용 `local.id`는 공용 `remote.id`와 일치해야 하고 개인용 `remote.id`는  공용 `local.id`와 일치해야 하며 개인용 및 공용의 `preshared.secret` 값은 일치해야 한다는 점을 유념하십시오. 
+        *  개인용 `local.id`는 공용 `remote.id`와 일치해야 하고 개인용 `remote.id`는  공용 `local.id`와 일치해야 하며 개인용 및 공용의 `preshared.secret` 값은 일치해야 한다는 점을 유념하십시오.
         
-        이제 {{site.data.keyword.Bluemix_notm}} Private 클러스터에서 {{site.data.keyword.containerlong_notm}} 클러스터로의 연결을 시작할 수 있습니다. 
+        이제 {{site.data.keyword.Bluemix_notm}} Private 클러스터에서 {{site.data.keyword.containerlong_notm}} 클러스터로의 연결을 시작할 수 있습니다.
 
 7.  클러스터 간에 [VPN 연결을 테스트](cs_vpn.html#vpn_test)하십시오.
 

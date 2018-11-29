@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-12"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -54,6 +54,7 @@ Se il cluster si trova in una delle [città metropolitane multizona supportate](
 **Devo utilizzare i cluster multizona?**</br>
 No. Puoi creare tutti i cluster a zona singola che desideri. In effetti, potresti preferire i cluster a zona singola per la gestione semplificata oppure se il tuo cluster deve risiedere in una specifica [città a zona singola](cs_regions.html#zones).
 
+
 ## Cluster multizona
 {: #multizone}
 
@@ -76,6 +77,7 @@ Se il cluster si trova in una delle [città metropolitane multizona supportate](
 
 <img src="images/cs_cluster_multizone.png" alt="Alta disponibilità per i cluster multizona" width="500" style="width:500px; border-style: none"/>
 
+
 Puoi aggiungere ulteriori zone al tuo cluster per replicare i nodi di lavoro nei tuoi pool di nodi di lavoro tra più zone all'interno di una regione. I cluster multizona sono progettati per pianificare uniformemente i pod tra i nodi di lavoro e le zone per garantire la disponibilità e il ripristino in caso di malfunzionamento. Se i nodi di lavoro non vengono estesi uniformemente tra le zone o se la capacità di una delle zone non è sufficiente, il programma di pianificazione (scheduler) Kubernetes potrebbe non riuscire a pianificare tutti i pod richiesti. Di conseguenza, i pod potrebbero essere in uno stato di **In sospeso** fino a quando non sarà disponibile capacità sufficiente. Se vuoi modificare il comportamento predefinito in modo che il programma di pianificazione (scheduler) Kubernetes distribuisca i pod tra le zone con una distribuzione migliore, usa la [politica di affinità pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
 
 **Perché ho bisogno dei nodi di lavoro in 3 zone?** </br>
@@ -96,14 +98,14 @@ Il [master Kubernetes](cs_tech.html#architecture) è il componente principale ch
 Per proteggere il tuo cluster da un malfunzionamento del master Kubernetes o quando si trova in regioni in cui non sono disponibili cluster multizona, puoi [impostare più cluster e collegarli ad un programma di bilanciamento del carico globale](#multiple_clusters).
 
 **Devo fare qualcosa perché il master possa comunicare con i nodi di lavoro tra le zone?**</br>
-Sì. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
+Sì. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
 
 **Come posso consentire ai miei utenti l'accesso alla mia applicazione da un Internet pubblico?**</br>
 Puoi esporre le tue applicazioni utilizzando un ALB Ingress o il servizio del programma di bilanciamento del carico.
 
-Per impostazione predefinita, gli ALB pubblici vengono creati e abilitati automaticamente in ciascuna zona nel tuo cluster. Viene anche creato e distribuito automaticamente un programma di bilanciamento del carico multizona (MZLB) Cloudflare per il tuo cluster in modo che esista 1 MZLB per ogni regione. L'MZLB mette gli indirizzi IP dei tuoi ALB dietro lo stesso nome host e abilita i controlli dell'integrità su tali indirizzi IP per determinare se sono disponibili o meno. Ad esempio, se hai dei nodi di lavoro in 3 zone nella regione Stati Uniti Est, il nome host `yourcluster.us-east.containers.appdomain.cloud` ha 3 indirizzi IP ALB. L'MZLB controlla l'integrità dell'IP ALB pubblico in ciascuna zona di una regione e tiene i risultati della ricerca DNS aggiornati in base a tali controlli dell'integrità. Per ulteriori informazioni, vedi [Componenti e architettura di Ingress](cs_ingress.html#planning).
+- **ALB (application load balancer) Ingress:** per impostazione predefinita, gli ALB pubblici vengono creati e abilitati automaticamente in ciascuna zona del tuo cluster. Viene anche creato e distribuito automaticamente un programma di bilanciamento del carico multizona (MZLB) Cloudflare per il tuo cluster in modo che esista 1 MZLB per ogni regione. L'MZLB mette gli indirizzi IP dei tuoi ALB dietro lo stesso nome host e abilita i controlli dell'integrità su tali indirizzi IP per determinare se sono disponibili o meno. Ad esempio, se hai dei nodi di lavoro in 3 zone nella regione Stati Uniti Est, il nome host `yourcluster.us-east.containers.appdomain.cloud` ha 3 indirizzi IP ALB. L'MZLB controlla l'integrità dell'IP ALB pubblico in ciascuna zona di una regione e tiene i risultati della ricerca DNS aggiornati in base a tali controlli dell'integrità. Per ulteriori informazioni, vedi [Componenti e architettura di Ingress](cs_ingress.html#planning).
 
-I servizi del programma di bilanciamento dei carico vengono impostati solo in una zona. Le richieste in entrata alla tua applicazione vengono instradate da tale zona a tutte le istanze dell'applicazione in altre zone. Se questa zona diventa non disponibile, la tua applicazione potrebbe non essere raggiungibile da internet. Puoi impostare ulteriori servizi del programma di bilanciamento del carico nelle altre zone per tenere conto del malfunzionamento di una singola zona. Per ulteriori informazioni, vedi i [servizi del programma di bilanciamento del carico](cs_loadbalancer.html#multi_zone_config) ad alta disponibilità.
+- **Servizi del programma di bilanciamento del carico:** i servizi del programma di bilanciamento del carico vengono configurati solo in una zona. Le richieste in entrata alla tua applicazione vengono instradate da tale zona a tutte le istanze dell'applicazione in altre zone. Se questa zona diventa non disponibile, la tua applicazione potrebbe non essere raggiungibile da Internet. Puoi impostare ulteriori servizi del programma di bilanciamento del carico nelle altre zone per tenere conto del malfunzionamento di una singola zona. Per ulteriori informazioni, vedi i [servizi del programma di bilanciamento del carico](cs_loadbalancer.html#multi_zone_config) ad alta disponibilità.
 
 **Posso configurare l'archiviazione persistente per il mio cluster multizona?**</br>
 Per l'archiviazione persistente altamente disponibile, usa un servizio cloud come [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
@@ -171,7 +173,7 @@ Puoi impostare più cluster in regioni diverse di una geolocalizzazione (ad esem
 **Per impostare un programma di bilanciamento del carico globale per più cluster:**
 
 1. [Crea i cluster](cs_clusters.html#clusters) in più zone o regioni.
-2. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
+2. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
 3. In ciascun cluster, esponi la tua applicazione utilizzando un [ALB](cs_ingress.html#ingress_expose_public) o un [servizio del programma di bilanciamento del carico](cs_loadbalancer.html#config).
 4. Per ciascun cluster, elenca gli indirizzi IP pubblici dei tuoi ALB o dei tuoi servizi del programma di bilanciamento del carico.
    - Per elencare l'indirizzo IP di tutti gli AL pubblici abilitati nel tuo cluster:
@@ -207,16 +209,17 @@ Puoi impostare più cluster in regioni diverse di una geolocalizzazione (ad esem
 
 Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} configura il tuo cluster con l'accesso a una VLAN privata e una VLAN pubblica. La VLAN privata determina l'indirizzo IP privato che viene assegnato a ciascun nodo di lavoro, che fornisce a ciascun nodo di lavoro un'interfaccia di rete privata. La VLAN pubblica consente ai nodi di lavoro di connettersi automaticamente e in modo protetto al master.
 
+Se vuoi bloccare il cluster per consentire il traffico privato sulla VLAN privata ma bloccare il traffico pubblico sulla VLAN pubblica, puoi [proteggere il tuo cluster dall'accesso pubblico con le politiche di rete Calico](cs_network_cluster.html#both_vlans_private_services). Queste politiche di rete Calico non impediscono ai tuoi nodi di lavoro di comunicare con il master. Puoi anche limitare l'area di vulnerabilità nel tuo cluster senza bloccare il traffico pubblico mediante l'[isolamento dei carichi di lavoro di rete nei nodi di lavoro edge](cs_edge.html).
 
 Se vuoi creare un cluster che abbia accesso solo su una VLAN privata, puoi creare un cluster privato a zona singola o multizona. Tuttavia, quando sono connessi solo a una VLAN privata, i tuoi nodi di lavoro non possono connettersi automaticamente al master. Devi configurare un'applicazione gateway per fornire la connettività di rete tra i nodi di lavoro e il master.
 **Nota**: non puoi convertire un cluster che è connesso a una VLAN pubblica e privata in modo che diventi un cluster solo privato. In caso di rimozione di tutte le VLAN pubbliche da un cluster, diversi componenti cluster smettono di funzionare. Devi creare un nuovo cluster attenendoti alla seguente procedura:
 
 Se vuoi creare un cluster che ha accesso solo su una VLAN privata:
 
-1.  Consulta [Pianificazione della rete cluster solo privata](cs_network_planning.html#private_vlan)
+1.  Rivedi [Pianificazione della rete cluster solo privata](cs_network_cluster.html#private_vlan).
 2.  Configura la tua applicazione gateway per la connettività di rete. Nota: devi [aprire le porte e gli indirizzi IP richiesti](cs_firewall.html#firewall_outbound) nel tuo firewall e [abilitare lo spanning della VLAN](cs_subnets.html#vra-routing) per le sottoreti.
 3.  [Crea un cluster utilizzando la CLI](cs_clusters.html#clusters_cli) includendo l'indicatore `--private-only`.
-4.  Se vuoi esporre un'applicazione a una rete privata utilizzando un servizio NodePort, LoadBalancer o Ingress privato, consulta [Pianificazione di una rete esterna privata per la configurazione di solo una VLAN privata](cs_network_planning.html#private_vlan). Il servizio è accessibile solo sull'indirizzo IP privato e devi configurare le porte nel tuo firewall per utilizzare l'indirizzo IP privato.
+4.  Se vuoi esporre un'applicazione a una rete privata utilizzando un servizio NodePort, programma di bilanciamento del carico o Ingress privato, consulta [Pianificazione di una rete esterna privata per la configurazione di solo una VLAN privata](cs_network_planning.html#private_vlan). Il servizio è accessibile solo sull'indirizzo IP privato e devi configurare le porte nel tuo firewall per utilizzare l'indirizzo IP privato.
 
 
 ## Pool di nodi di lavoro e nodi di lavoro
@@ -273,7 +276,7 @@ potresti voler verificare con il tuo dipartimento legale e discutere sul livello
 che il tuo ambiente dell'applicazione necessita.
 
 **Quali sono le caratteristiche generali delle macchine virtuali (VM, Virtual Machine)?**</br>
-Le macchine virtuali utilizzano il disco locale anziché SAN (Storage Area Networking) per garantire l'affidabilità. I vantaggi dell'affidabilità includono una velocità di elaborazione più elevata durante la serializzazione dei byte sul disco locale e una riduzione del danneggiamento del file system dovuto a errori di rete. Ogni VM offre una velocità di rete di 1000Mbps, 25GB di archiviazione disco locale primaria per il file system del sistema operativo e 100GB di archiviazione disco locale secondaria per dati quali il runtime del contenitore e il `kubelet`.
+Le macchine virtuali utilizzano il disco locale anziché SAN (Storage Area Networking) per garantire l'affidabilità. I vantaggi dell'affidabilità includono una velocità di elaborazione più elevata durante la serializzazione dei byte sul disco locale e una riduzione del danneggiamento del file system dovuto a errori di rete. Ogni VM offre una velocità di rete di 1000Mbps, 25GB di archiviazione disco locale primaria per il file system del sistema operativo e 100GB di archiviazione disco locale secondaria per dati quali il runtime del contenitore e il `kubelet`. L'archiviazione locale sul nodo di lavoro è solo per l'elaborazione a breve termine e i dischi primari e secondari vengono cancellati quando aggiorni o ricarichi il nodo di lavoro. Per le soluzioni di archiviazione persistente, vedi [Pianificazione di archiviazione persistente altamente disponibile](cs_storage_planning.html#storage_planning).
 
 **Cosa succede se ho tipi di macchine `u1c` o `b1c` obsoleti?**</br>
 Per iniziare a utilizzare i tipi di macchina `u2c` e `b2c`, [aggiorna i tipi di macchina aggiungendo i nodi di lavoro](cs_cluster_update.html#machine_type).
@@ -326,7 +329,7 @@ I tipi di macchina variano per zona. Per vedere i tipi di macchina disponibili n
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtuale, c2c.16x32</strong>: utilizza questa varietà quando vuoi uno stretto bilanciamento di risorse di CPU e memoria dal nodo di lavoro per i carichi di lavoro leggeri o di medie dimensioni.</td></td>
+<td><strong>Virtuale, c2c.16x32</strong>: utilizza questa varietà quando vuoi un rapporto 1:2 tra CPU e risorse di memoria dal nodo di lavoro per i carichi di lavoro leggeri o di medie dimensioni.</td></td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
@@ -336,8 +339,8 @@ I tipi di macchina variano per zona. Per vedere i tipi di macchina disponibili n
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtuale, c2c.32x64</strong>: utilizza questa varietà quando vuoi uno stretto bilanciamento di risorse di CPU e memoria dal nodo di lavoro per i carichi di lavoro di medie dimensioni.</td></td>
-<td>16 / 16GB</td>
+<td><strong>Virtuale, c2c.32x64</strong>: utilizza questa varietà quando vuoi un rapporto 1:2 tra CPU e risorse di memoria dal nodo di lavoro per i carichi di lavoro di medie dimensioni.</td></td>
+<td>32 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
@@ -351,13 +354,13 @@ Puoi eseguire il provisioning del tuo nodo di lavoro come server fisico a singol
 {: shortdesc}
 
 **In che modo bare metal è diverso dalle macchine virtuali?**</br>
-Bare metal ti dà accesso diretto alle risorse fisiche sulla macchina, come la memoria o la CPU. Questa configurazione elimina l'hypervisor della macchina virtuale che assegna risorse fisiche alle macchine virtuali eseguite sull'host. Invece, tutte le risorse di una macchina bare metal sono dedicate esclusivamente al nodo di lavoro, quindi non devi preoccuparti dei "vicini rumorosi" che condividono risorse o rallentano le prestazioni. I tipi di macchine fisiche hanno un'archiviazione locale maggiore rispetto a quelle virtuali e alcune dispongono di RAID per il backup dei dati locali.
+Bare metal ti dà accesso diretto alle risorse fisiche sulla macchina, come la memoria o la CPU. Questa configurazione elimina l'hypervisor della macchina virtuale che assegna risorse fisiche alle macchine virtuali eseguite sull'host. Invece, tutte le risorse di una macchina bare metal sono dedicate esclusivamente al nodo di lavoro, quindi non devi preoccuparti degli "elementi di disturbo" che condividono risorse o rallentano le prestazioni. I tipi di macchine fisiche hanno più archiviazione locale rispetto a quelle virtuali e alcune dispongono di RAID per aumentare la disponibilità dei dati. L'archiviazione locale sul nodo di lavoro è solo per l'elaborazione a breve termine e i dischi primari e secondari vengono cancellati quando aggiorni o ricarichi il nodo di lavoro. Per le soluzioni di archiviazione persistente, vedi [Pianificazione di archiviazione persistente altamente disponibile](cs_storage_planning.html#storage_planning).
 
 **Oltre a specifiche migliori per le prestazioni, posso fare qualcosa con bare metal che non posso fare con le macchine virtuali?**</br>
 Sì. Con bare metal, puoi abilitare Trusted Compute per verificare possibili tentativi di manomissione dei tuoi nodi di lavoro. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente. Puoi creare un nuovo cluster senza attendibilità. Per ulteriori informazioni su come funziona l'attendibilità durante il processo di avvio del nodo, vedi [{{site.data.keyword.containerlong_notm}} con Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute è disponibile sui cluster su cui è in esecuzione Kubernetes versione 1.9 o successive e che hanno alcuni tipi di macchine bare metal. Quando esegui il [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types<zone>`, puoi vedere quali macchine supportano l'attendibilità controllando il campo **Trustable**. Ad esempio, le varietà GPU `mgXc` non supportano Trusted Compute.
 
 **Bare metal sembra essere un'opzione estremamente valida. Cosa mi impedisce di ordinarne uno immediatamente?**</br>
-I server bare metal sono più costosi di quelli virtuali e sono più adatti per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host. 
+I server bare metal sono più costosi di quelli virtuali e sono più adatti per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host.
 
 **Importante**:i server bare metal sono fatturati mensilmente. Se annulli un server bare metal prima della fine del mese, ti viene addebitato il costo fino alla fine di quel mese. L'ordinazione e l'annullamento dei server bare metal è un processo manuale che viene eseguito tramite il tuo account dell'infrastruttura IBM Cloud (SoftLayer). Il suo completamento può richiedere più di un giorno lavorativo.
 
@@ -402,13 +405,13 @@ Scegli un tipo di macchina con la configurazione di archiviazione corretta per s
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal con dai intensivi, md1c.16x64.4x4tb</strong>: per una quantità significativa di archiviazione su disco locale, incluso RAID per eseguire il backup dei dati memorizzati localmente sulla macchina. Utilizza per casi come i file system distribuiti, i database molto grandi e i carichi di lavoro di analisi Big Data.</td>
+<td><strong>Bare metal con uso intensivo di dati, md1c.16x64.4x4tb</strong>: utilizza questo tipo per una quantità significativa di archiviazione su disco locale, incluso RAID per aumentare la disponibilità dei dati, per carichi di lavoro come file system distribuiti, database di grandi dimensioni e analisi dei big data.</td>
 <td>16 / 64GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal con dai intensivi, md1c.28x512.4x4tb</strong>: per una quantità significativa di archiviazione su disco locale, incluso RAID per eseguire il backup dei dati memorizzati localmente sulla macchina. Utilizza per casi come i file system distribuiti, i database molto grandi e i carichi di lavoro di analisi Big Data.</td>
+<td><strong>Bare metal con uso intensivo di dati, md1c.28x512.4x4tb</strong>: utilizza questo tipo per una quantità significativa di archiviazione su disco locale, incluso RAID per aumentare la disponibilità dei dati, per carichi di lavoro come file system distribuiti, database di grandi dimensioni e analisi dei big data.</td>
 <td>28 / 512 GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
@@ -432,7 +435,7 @@ Scegli un tipo di macchina con la configurazione di archiviazione corretta per s
 ### Macchine SDS (software-defined storage)
 {: #sds}
 
-Le varietà SDS (software-defined storage) sono macchine fisiche di cui viene eseguito il provisioning con un disco raw per l'archiviazione locale fisica. Poiché i dati sono co-ubicati con il nodo di elaborazione, le macchine SDS sono adatte per i carichi di lavoro ad elevate prestazioni.
+Le varietà SDS (software-defined storage) sono macchine fisiche fornite con dischi non formattati aggiuntivi per l'archiviazione locale fisica. A differenza del disco locale primario e secondario, questi dischi non formattati non vengono cancellati durante l'aggiornamento o il ricaricamento del nodo di lavoro. Poiché i dati sono co-ubicati con il nodo di elaborazione, le macchine SDS sono adatte per i carichi di lavoro ad elevate prestazioni.
 {: shortdesc}
 
 **Quando utilizzo le varietà SDS?**</br>
@@ -440,6 +443,8 @@ Di norma utilizzi le macchine SDS nei seguenti casi:
 *  Se utilizzi un componente aggiuntivo SDS al tuo cluster, devi utilizzare una macchina SDS.
 *  Se la tua applicazione è uno [StatefulSet ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) che richiede l'archiviazione locale, puoi utilizzare le macchine SDS ed eseguire il provisioning di [volumi persistenti locali Kubernetes (beta)![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
 *  Potresti avere delle applicazioni personalizzate o dei componenti aggiuntivi del cluster che richiedono SDS o l'archiviazione locale. Ad esempio, se intendi utilizzare logDNA, devi utilizzare un tipo di macchina SDS.
+
+Per ulteriori soluzioni di archiviazione, vedi [Pianificazione di archiviazione persistente altamente disponibile](cs_storage_planning.html#storage_planning).
 
 **Quali varietà di SDS posso ordinare?**</br>
 I tipi di macchina variano per zona. Per vedere i tipi di macchina disponibili nella tua zona, esegui `ibmcloud ks machine-types <zone>`. Puoi anche riesaminare i tipi di macchina [bare metal](#bm) o [VM](#vm) disponibili.
@@ -458,21 +463,35 @@ Scegli un tipo di macchina con la configurazione di archiviazione corretta per s
 <th>Nome e caso di utilizzo</th>
 <th>Core / Memoria</th>
 <th>Disco primario / secondario</th>
-<th>Archiviazione locale</th>
+<th>Dischi non formattati aggiuntivi</th>
 <th>Velocità di rete</th>
 </thead>
 <tbody>
 <tr>
+<td><strong>Bare metal con SDS, ms2c.4x32.1.9tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per le prestazioni, utilizza la varietà con una notevole capacità di disco che supporta SDS (software-defined storage).</td>
+<td>4 / 32GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>SSD raw di 1,9TB</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal con SDS, ms2c.16x64.1.9tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per le prestazioni, utilizza la varietà con una notevole capacità di disco che supporta SDS (software-defined storage).</td>
+<td>16 / 64GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>SSD raw di 1,9TB</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
 <td><strong>Bare metal con SDS, ms2c.28x256.3.8tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per le prestazioni, utilizza la varietà con una notevole capacità di disco che supporta SDS (software-defined storage).</td>
 <td>28 / 256GB</td>
-<td>SATA di 2TB / SSD d 1,9TB</td>
+<td>SATA di 2TB / SSD di 1,9TB</td>
 <td>SSD raw di 3,8TB</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>Bare metal con SDS, ms2c.28x512.4x3.8tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per le prestazioni, utilizza la varietà con una notevole capacità di disco che supporta SDS (software-defined storage).</td>
 <td>28 / 512GB</td>
-<td>SATA di 2TB / SSD d 1,9TB</td>
+<td>SATA di 2TB / SSD di 1,9TB</td>
 <td>4 dischi, SSD raw di 3,8TB</td>
 <td>10000Mbps</td>
 </tr>

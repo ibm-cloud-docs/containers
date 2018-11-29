@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-09-10"
 Wenn Sie bestimmte Voraussetzungen für die Leistungsoptimierung haben, können Sie die Standardeinstellungen für die `sysctl`-Parameter für den Linux-Kernel auf Workerknoten und Pod-Netznamensbereiche in {{site.data.keyword.containerlong}} ändern.
 {: shortdesc}
 
-Workerknoten werden automatisch mit optimierter Kerneloptimierung eingerichtet, aber Sie können die Standardeinstellungen ändern, indem Sie ein angepasstes DaemonSet auf Ihren Cluster anwenden. Das DaemonSet ändert die Einstellungen für alle vorhandenen Workerknoten und wendet die Einstellungen auf alle neuen Workerknoten an, die im Cluster eingerichtet werden. Es sind keine Pods betroffen.
+Workerknoten werden automatisch mit optimierter Kerneloptimierung eingerichtet, aber Sie können die Standardeinstellungen ändern, indem Sie ein angepasstes Kubernetes-Objekt des Typs `DaemonSet` auf Ihren Cluster anwenden. Das DaemonSet ändert die Einstellungen für alle vorhandenen Workerknoten und wendet die Einstellungen auf alle neuen Workerknoten an, die im Cluster eingerichtet werden. Es sind keine Pods betroffen.
 
 Um die Kerneleinstellungen für App-Pods zu optimieren, können Sie einen initContainer in die YAML-Datei `pod/ds/rs/deployment` für jede Bereitstellung einfügen. Der initContainer wird jeder App-Bereitstellung hinzugefügt, die sich in dem Pod-Netznamensbereich befindet, für den Sie die Leistung optimieren möchten.
 
@@ -32,11 +32,11 @@ Die Beispiele in den folgenden Abschnitten ändern den Standardwert für die Anz
 ## Leistung des Workerknotens optimieren
 {: #worker}
 
-Wenden Sie ein [DaemonSet ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) an, um die Kernelparameter auf dem Workerknotenhost zu ändern.
+Wenden Sie ein [DaemonSet ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) an, um die Kernelparameter auf dem Host des Workerknotens zu ändern.
 
-**Hinweis**: Sie müssen über die [Rolle mit Administratorzugriff](cs_users.html#user-roles) verfügen, um das Beispiel für den berechtigten initContainer ausführen zu können. Nachdem die Container für die Bereitstellungen initialisiert wurden, werden die Berechtigungen gelöscht.
+**Hinweis**: Sie müssen über die [Rolle mit Administratorzugriff](cs_users.html#access_policies) verfügen, um das Beispiel für den berechtigten initContainer ausführen zu können. Nachdem die Container für die Bereitstellungen initialisiert wurden, werden die Berechtigungen gelöscht.
 
-1. Speichern Sie das folgende DaemonSet in einer Datei mit dem Namen `worker-node-kernel-settings.yaml`. Fügen Sie im Abschnitt `spec.template.spec.initContainers` die Felder und Werte für die `sysctl`-Parameter hinzu, die Sie optimieren möchten. In diesem beispielhaften DaemonSet werden die Werte der Parameter `net.core.somaxconn` und `net.ipv4.ip_local_port_range` geändert.
+1. Speichern Sie das folgende DaemonSet in einer Datei mit dem Namen `worker-node-kernel-settings.yaml`. Fügen Sie im Abschnitt `spec.template.spec.initContainers` die Felder und Werte für die `sysctl`-Parameter hinzu, die Sie optimieren möchten. In diesem Beispiel für ein DaemonSet werden die Werte der Parameter `net.core.somaxconn` und `net.ipv4.ip_local_port_range` geändert.
     ```
     apiVersion: extensions/v1beta1
     kind: DaemonSet
@@ -118,7 +118,7 @@ Gehen Sie wie folgt vor, um die `sysctl`-Parameter der Workerknoten auf die Stan
 Wenn Sie bestimmte Workloadanforderungen haben, können Sie ein Patch auf den [initContainer ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") ](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) anwenden, um die Kernelparameter für App-Pods zu ändern.
 {: shortdesc}
 
-**Hinweis**: Sie müssen über die [Rolle mit Administratorzugriff](cs_users.html#user-roles) verfügen, um das Beispiel für den berechtigten initContainer ausführen zu können. Nachdem die Container für die Bereitstellungen initialisiert wurden, werden die Berechtigungen gelöscht.
+**Hinweis**: Sie müssen über die [Rolle mit Administratorzugriff](cs_users.html#access_policies) verfügen, um das Beispiel für den berechtigten initContainer ausführen zu können. Nachdem die Container für die Bereitstellungen initialisiert wurden, werden die Berechtigungen gelöscht.
 
 1. Speichern Sie das folgende initContainer-Patch in einer Datei mit dem Namen `pod-patch.yaml` und fügen Sie die Felder und Werte für die `sysctl`-Parameter hinzu, die Sie optimieren möchten. In diesem beispielhaften initContainer werden die Werte der Parameter `net.core.somaxconn` und `net.ipv4.ip_local_port_range` geändert.
     ```

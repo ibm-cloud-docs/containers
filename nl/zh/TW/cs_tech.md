@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -25,18 +25,19 @@ lastupdated: "2018-05-24"
 ## Docker 容器
 {: #docker_containers}
 
-建置在現有 Linux 容器技術 (LXC) 上的開放程式碼專案 Docker，已成為快速建置、測試、部署及擴充應用程式用的軟體平台。Docker 會將軟體包裝為稱為容器的標準化單元，其中包括執行應用程式所需要的所有元素。
+建置在現有 Linux 容器技術 (LXC) 上的開放程式碼專案 Docker，定義了如何將軟體包裝成標準化單位（稱為容器）的範本，容器中包含了執行應用程式所需要的所有元素。
+{{site.data.keyword.containerlong_notm}} 使用 `containerd` 作為容器運行環境，將容器從 Docker 容器映像檔部署到叢集中。
 {:shortdesc}
 
 瞭解一些基本 Docker 概念：
 
 <dl>
 <dt>映像檔</dt>
-<dd>Docker 映像檔是從 Dockerfile 所建置的，而 Dockerfile 文字檔定義如何建置映像檔，以及要包含在其中的建置構件，例如應用程式、應用程式配置及其相依關係。映像檔一律是從其他映像檔建置而成，使它們可以快速配置。請讓其他人對映像檔執行大量工作，然後調整映像檔以供您使用。</dd>
+<dd>容器映像檔是您要執行的每個容器的基礎。容器映像檔是從 Dockerfile 所建置的，Dockerfile 是一個文字檔，定義了如何建置映像檔，以及要包含在其中的建置構件，例如應用程式、應用程式配置及其相依關係。映像檔一律是從其他映像檔建置而成，這使得它們可以快速地配置。讓其他人對映像檔執行大量工作，然後針對您的用途調整映像檔。</dd>
 <dt>登錄</dt>
-<dd>映像檔登錄是儲存、擷取及共用 Docker 映像檔的位置。登錄中所儲存的映像檔可公開使用（公用登錄）或供一小群使用者存取（專用登錄）。{{site.data.keyword.containershort_notm}} 提供公用映像檔（例如 ibmliberty），可用來建立第一個容器化應用程式。如果是企業應用程式，請使用專用登錄（例如 {{site.data.keyword.Bluemix_notm}} 中提供的專用登錄）來防止未獲授權的使用者使用您的映像檔。</dd>
+<dd>映像檔登錄是儲存、擷取及共用容器映像檔的位置。登錄中所儲存的映像檔可公開使用（公用登錄）或供一小群使用者存取（專用登錄）。{{site.data.keyword.containerlong_notm}} 提供公用映像檔（例如 ibmliberty），您可以用來建立第一個容器化應用程式。如果是企業應用程式，請使用專用登錄（例如 {{site.data.keyword.Bluemix_notm}} 中提供的專用登錄）來防止未獲授權的使用者使用您的映像檔。</dd>
 <dt>容器</dt>
-<dd>每個容器都是從映像檔所建立。容器是具有其所有相依關係的已包裝應用程式，讓應用程式能夠在環境之間移動，並且不需變更即可執行。容器與虛擬機器不同，容器不會將裝置、其作業系統及基礎硬體虛擬化。只有應用程式碼、運行環境、系統工具、程式庫及設定會包裝在容器中。容器會以隔離的處理程序形式在 Ubuntu 運算主機上執行，並共用主機作業系統及其硬體資源。此方式讓容器比虛擬機器更輕量、可攜性更高且更有效率。</dd>
+<dd>每個容器都是從映像檔所建立。容器是具有其所有相依關係的已包裝應用程式，因此應用程式能夠在環境之間移動，並且不需變更即可執行。容器與虛擬機器不同，容器不會將裝置、其作業系統及基礎硬體虛擬化。只有應用程式碼、運行環境、系統工具、程式庫及設定會包裝在容器中。容器會以隔離的處理程序形式在 Ubuntu 運算主機上執行，並且共用主機作業系統及其硬體資源。此方式讓容器比起虛擬機器顯得更輕量、可攜性更高且更有效率。</dd>
 </dl>
 
 
@@ -46,7 +47,7 @@ lastupdated: "2018-05-24"
 
 <dl>
 <dt>容器靈活多變</dt>
-<dd>容器可透過為開發及正式作業部署提供標準化環境來簡化系統管理。輕量型運行環境可讓您快速擴增及縮減部署。透過使用容器協助您在任何基礎架構上快速且可靠地部署及執行任何應用程式，可去除不同作業系統平台及其基礎基礎架構的管理複雜性。</dd>
+<dd>容器可透過為開發及正式作業部署提供標準化環境，來簡化系統管理。輕量型運行環境可讓您快速地擴增及縮減部署。透過使用容器協助您在任何基礎架構上快速且可靠地部署及執行任何應用程式，可去除不同作業系統平台及其基礎基礎架構的管理複雜性。</dd>
 <dt>容器很小</dt>
 <dd>您可以在單一虛擬機器所需的空間量中容納許多容器。</dd>
 <dt>容器具有可攜性</dt>
@@ -60,7 +61,7 @@ lastupdated: "2018-05-24"
 
 <p>進一步瞭解使用容器映像檔時如何[保護個人資訊安全](cs_secure.html#pi)。</p>
 
-<p>準備好深入瞭解 Docker 嗎？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">完成本課程來瞭解 Docker 與 {{site.data.keyword.containershort_notm}} 如何一起運作。</a></p>
+<p>準備好深入瞭解 Docker 嗎？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">完成本課程來瞭解 Docker 與 {{site.data.keyword.containerlong_notm}} 如何一起運作。</a></p>
 
 </dl>
 
@@ -82,7 +83,7 @@ lastupdated: "2018-05-24"
 <dd>您的帳戶指的是 {{site.data.keyword.Bluemix_notm}} 帳戶。</dd>
 
 <dt>叢集</dt>
-<dd>Kubernetes 叢集包含一台以上稱為工作者節點的運算主機。工作者節點是由 Kubernetes 主節點進行管理，Kubernetes 主節點會集中控制及監視叢集中的所有 Kubernetes 資源。因此，當您部署容器化應用程式的資源時，Kubernetes 主節點會考慮部署需求及叢集中的可用容量，來決定要在其上部署這些資源的工作者節點。Kubernetes 資源包括服務、部署及 Pod。</dd>
+<dd>Kubernetes 叢集包含一台以上稱為工作者節點的運算主機。工作者節點是由 Kubernetes 主節點進行管理，Kubernetes 主節點會集中控制及監視叢集裡的所有 Kubernetes 資源。因此，當您部署容器化應用程式的資源時，Kubernetes 主節點會考慮部署需求及叢集裡的可用容量，來決定要在其上部署這些資源的工作者節點。Kubernetes 資源包括服務、部署及 Pod。</dd>
 
 <dt>服務</dt>
 <dd>服務是一種 Kubernetes 資源，可將一組 Pod 分組在一起，並提供這些 Pod 的網路連線功能，而不需要公開每一個 Pod 的實際專用 IP 位址。您可以使用服務，將您的應用程式設為可在叢集內使用或可供公用網際網路使用。
@@ -94,7 +95,7 @@ lastupdated: "2018-05-24"
 定義應用程式的更新策略，包括您要在漸進式更新期間新增的 Pod 數目，以及每次更新時可能無法使用的 Pod 數目。當您執行漸進式更新時，部署會檢查更新是否正常運作，並且在偵測到失敗時停止推出。</dd>
 
 <dt>Pod</dt>
-<dd>稱為 Pod 的 Kubernetes 資源會部署、執行及管理每個部署至叢集的容器化應用程式。Pod 代表 Kubernetes 叢集中的小型可部署單元，並且用來將必須視為單一單元的容器分組在一起。在大部分情況下，每一個容器都會部署至其專屬 Pod。不過，應用程式可能會要求將一個容器及其他協助容器部署至某個 Pod，以便使用相同的專用 IP 位址來為那些容器定址。</dd>
+<dd>稱為 Pod 的 Kubernetes 資源會部署、執行及管理每個部署至叢集的容器化應用程式。Pod 代表 Kubernetes 叢集裡的小型可部署單元，並且用來將必須視為單一單元的容器分組在一起。在大部分情況下，每一個容器都會部署至其專屬 Pod。不過，應用程式可能會要求將一個容器及其他協助容器部署至某個 Pod，以便使用相同的專用 IP 位址來為那些容器定址。</dd>
 
 <dt>應用程式</dt>
 <dd>應用程式可能指的是完整應用程式或應用程式的元件。您可以在個別 Pod 或個別工作者節點中部署應用程式的元件。
@@ -104,7 +105,7 @@ lastupdated: "2018-05-24"
 
 <p>準備好深入瞭解 Kubernetes 嗎？</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">使用「建立叢集」指導教學</a>，擴充您的術語知識。</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">完成本課程來瞭解 Kubernetes 與 {{site.data.keyword.containershort_notm}} 如何一起運作。</a></li></ul>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">完成本課程來瞭解 Kubernetes 與 {{site.data.keyword.containerlong_notm}} 如何一起運作。</a></li></ul>
 
 
 </dl>
@@ -115,27 +116,137 @@ lastupdated: "2018-05-24"
 ## 服務架構
 {: #architecture}
 
-在 {{site.data.keyword.containershort_notm}} 上執行的 Kubernetes 叢集中，您的容器化應用程式是在稱為工作者節點的運算主機上進行管理。更明確的說法是，應用程式是在 Pod 執行，而 Pod 是在工作者節點上進行管理。工作者節點是由 Kubernetes 主節點管理。Kubernetes 主節點及工作者節點是透過安全的 TLS 憑證及 openVPN 連線來彼此通訊，以編排叢集配置。
+在 {{site.data.keyword.containerlong_notm}} 上執行的 Kubernetes 叢集裡，您的容器化應用程式是在稱為工作者節點的運算主機上進行管理。更明確的說法是，應用程式是在 Pod 執行，而 Pod 是在工作者節點上進行管理。工作者節點是由 Kubernetes 主節點管理。Kubernetes 主節點及工作者節點是透過安全的 TLS 憑證及 openVPN 連線來彼此通訊，以編排叢集配置。
 {: shortdesc}
+
+下圖顯示您的叢集元件及其互動方式。
+<p>
+<figure>
+ <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 架構">
+ <figcaption>{{site.data.keyword.containerlong_notm}} 架構</figcaption>
+</figure>
+</p>
 
 Kubernetes 主節點與工作者節點之間的差異為何？問得好。
 
 <dl>
   <dt>Kubernetes 主節點</dt>
-    <dd>Kubernetes 主節點負責管理叢集中的所有運算、網路及儲存空間資源。Kubernetes 主節點確保您的容器化應用程式和服務平均部署至叢集中的工作者節點。取決於您如何配置應用程式及服務，主節點會判斷具有足夠資源來滿足應用程式需求的工作者節點。</dd>
+    <dd>Kubernetes 主節點負責管理叢集裡的所有運算、網路及儲存空間資源。Kubernetes 主節點確保您的容器化應用程式和服務平均部署至叢集裡的工作者節點。視您如何配置應用程式及服務而定，主節點會判斷具有足夠資源可滿足應用程式需求的工作者節點。</br></br>下表說明 Kubernetes 主節點的元件。
+    <table>
+    <caption>Kubernetes 主節點的元件</caption>
+    <thead>
+    <th>主節點元件</th>
+    <th>說明</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>kube-apiserver</td>
+    <td>Kubernetes API 伺服器作為從工作者節點到 Kubernetes 主節點的所有叢集管理要求的主要進入點。Kubernetes API 伺服器會驗證並處理變更 Kubernetes 資源（例如 Pod 或服務）之狀況的要求，並將此狀況儲存在 etcd 中。</td>
+    </tr>
+    <tr>
+    <td>openvpn-server</td>
+    <td>OpenVPN 伺服器會使用 OpenVPN 用戶端，將主節點安全地連接至工作者節點。此連線支援 kubectl exec、attach、logs 及 apiserver proxy。</td>
+    </tr>
+    <tr>
+    <td>etcd</td>
+    <td>etcd 是高度可用的金鑰值儲存庫，其中儲存叢集的所有 Kubernetes 資源（例如服務、部署及 Pod）的狀況。etcd 中的資料會儲存在 IBM 所管理的已加密磁碟上，並且每日進行備份。</td>
+    </tr>
+    <tr>
+    <td>kube-scheduler</td>
+    <td>Kubernetes 排程器會監看剛建立的 Pod，並根據容量、效能需求、原則限制、反親緣性規格及工作負載需求，來決定要在何處進行部署。如果找不到符合需求的工作者節點，則不會在叢集裡部署 Pod。</td>
+    </tr>
+    <tr>
+    <td>kube-controller-manager</td>
+    <td>Kubernetes 控制器管理程式是一種常駐程式，它會監看叢集資源（例如抄本集）的狀況。當資源的狀況變更時，例如，如果抄本集中的 Pod 關閉，控制器管理程式會起始更正動作以達到想要的狀況。</td>
+    </tr>
+    </tbody></table></dd>
   <dt>工作者節點</dt>
-    <dd>每一個工作者節點都是實體機器（裸機）或是在雲端環境中實體硬體上執行的虛擬機器。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、不同的運算資源、網路及磁區服務。內建安全特性提供隔離、資源管理功能及工作者節點安全規範。</dd>
+    <dd>每一個工作者節點都是雲端環境中，實體機器（裸機）或是在實體硬體上執行的虛擬機器。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、個別的運算資源、網路及磁區服務。內建的安全特性提供了隔離、資源管理功能及工作者節點安全規範。</br></br>下表說明工作者節點的元件。
+    <table>
+    <caption>工作者節點的元件</caption>
+    <thead>
+    <th>工作者節點元件</th>
+    <th>名稱空間</th>
+    <th>說明</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>openvpn-client</td>
+    <td>kube-system</td>
+    <td>OpenVPN 用戶端會使用 OpenVPN 伺服器，將主節點安全地連接至工作者節點。此連線支援 kubectl exec、attach、logs 及 apiserver proxy。</td>
+    </tr>
+    <tr>
+    <td>calico-policy-controller</td>
+    <td>kube-system</td>
+    <td>Calico 原則控制器會監看入埠及出埠網路資料流量是否遵循已設定的網路原則。如果叢集裡不容許資料流量，則對叢集的存取會遭到封鎖。Calico 原則控制器也用來建立及設定叢集的網路原則。</td>
+    </tr>
+    <tr>
+    <td>儲存空間提供者</td>
+    <td>kube-system</td>
+    <td>每個叢集都會設定一個外掛程式，以佈建檔案儲存空間。您可以選擇安裝其他附加程式，例如區塊儲存空間。</td>
+    </tr>
+    <tr>
+    <td>kube-proxy</td>
+    <td>kube-system</td>
+    <td>Kubernetes 網路 Proxy 是一種常駐程式，其在每個工作者節點上執行，並為叢集裡執行的服務轉遞 TCP 及 UDP 網路資料流量，或對這些網路資料流量進行負載平衡。</td>
+    </tr>
+    <tr>
+    <td>kube-dashboard</td>
+    <td>kube-system</td>
+    <td>Kubernetes 儀表板是 Web 型使用者介面，容許使用者管理及疑難排解叢集和叢集裡執行的應用程式。</td>
+    </tr>
+    <tr>
+    <td>kube-dns</td>
+    <td>kube-system</td>
+    <td>Kubernetes DNS 會在叢集上排定 DNS Pod 及服務。容器在搜尋其他 Pod 及服務時，會自動使用 DNS 服務的 IP 來解析 DNS 名稱。</td>
+    </tr>
+    <tr>
+    <td>heapster</td>
+    <td>kube-system</td>
+    <td>Heapster 是監視及事件資料的全叢集聚集器。Heapster Pod 會探索叢集裡的所有節點，並從每一個節點的 kubelet 查詢用量資訊。您可以在 Kubernetes 儀表板中找到使用率圖形。</td>
+    </tr>
+    <tr>
+    <td>calico-node</td>
+    <td>kube-system</td>
+    <td>Calico 節點是一種容器，它會將透過網路連接容器與 Calico 所需的各種元件組合在一起。</td>
+    </tr>
+    <tr>
+    <td>記載及測量</td>
+    <td>ibm-system</td>
+    <td>您可以使用整合式 {{site.data.keyword.loganalysislong_notm}} 及 {{site.data.keyword.monitoringlong_notm}} 服務，在使用日誌及度量值時，擴展您的收集和保留功能。</td>
+    </tr>
+    <tr>
+    <td>Ingress ALB</td>
+    <td>ibm-system</td>
+    <td>Ingress 是一種 Kubernetes 服務，可用來將公用或專用要求轉遞給叢集裡的多個應用程式，以平衡叢集裡的網路資料流量工作負載。若要透過公用及專用網路來公開您的應用程式，您必須建立 Ingress 資源，向 Ingress 應用程式負載平衡器 (ALB) 登錄您的應用程式。然後，便可以使用單一 URL 或 IP 位址來存取多個應用程式。</td>
+    </tr>
+    <tr>
+    <td>負載平衡器</td>
+    <td>ibm-system</td>
+    <td>負載平衡器是一種 Kubernetes 服務，可用來將公用或專用要求轉遞給應用程式，以平衡叢集裡的網路資料流量工作負載。</td>
+    </tr>
+    <tr>
+    <td>應用程式 Pod 及服務</td>
+    <td>default</td>
+    <td>在 <code>default</code> 名稱空間或在您建立的名稱空間中，您可以在 Pod 及服務中部署應用程式，以便與那些 Pod 進行通訊。</td>
+    </tr>
+    <tr>
+    <td>calico-cni</td>
+    <td>n/a</td>
+    <td>Calico 容器網路介面 (CNI) 可以管理容器的網路連線功能，並在刪除容器時移除已配置的資源。</td>
+    </tr>
+    <tr>
+    <td>calico-ipam</td>
+    <td>n/a</td>
+    <td>Calico IPAM 可管理容器的 IP 位址指派。</td>
+    </tr>
+    <tr>
+    <td>kubelet</td>
+    <td>n/a</td>
+    <td>kubelet 是在每個工作者節點上執行的 Pod，負責監視在工作者節點上執行之 Pod 的性能，以及監看 Kubernetes API 伺服器傳送的事件。根據這些事件，kubelet 會建立或移除 Pod、確保存活性及就緒探測，以及向 Kubernetes API 伺服器回報 Pod 的狀態。</td>
+    </tr>
+    </tbody></table></dd>
 </dl>
 
-<p>
-<figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 架構">
- <figcaption>{{site.data.keyword.containershort_notm}} 架構</figcaption>
-</figure>
-</p>
-
-想要查看 {{site.data.keyword.containerlong_notm}} 如何與其他產品及服務搭配使用嗎？請查看部分[整合](cs_integrations.html#integrations)。
-
-
-<br />
-
+想要查看 {{site.data.keyword.containerlong_notm}} 如何與其他產品及服務搭配使用嗎？請參閱部分[整合](cs_integrations.html#integrations)。
+{: tip}

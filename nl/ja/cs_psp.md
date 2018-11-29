@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -64,7 +64,7 @@ lastupdated: "2018-09-10"
 これらの RBAC ロールを変更して、管理者、ユーザー、サービス、またはノードを、ポリシーから削除したりポリシーに追加したりできます。
 
 開始前に、以下のことを行います。 
-*  [CLI のターゲットを](cs_cli_install.html#cs_cli_configure)自分のクラスターに設定します。
+*  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 *  RBAC 役割の使用方法を理解します。 詳しくは、[カスタム Kubernetes RBAC 役割によるユーザーの許可](cs_users.html#rbac)または [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview) を参照してください。
 *  **注**: デフォルト構成を変更すると、ポッドのデプロイメントやクラスターの更新などの重要なクラスター操作を禁止できます。 他のチームが依存していない非実稼働クラスターで変更内容をテストしてください。
 

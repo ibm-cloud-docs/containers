@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -16,12 +16,13 @@ lastupdated: "2018-10-10"
 {:download: .download}
 
 # 地區及區域
+{: #regions-and-zones}
 
 地區是您可部署應用程式、服務及其他 {{site.data.keyword.Bluemix}} 資源的特定地理位置。[{{site.data.keyword.Bluemix_notm}} 地區](#bluemix_regions)與 [{{site.data.keyword.containerlong}} 地區](#container_regions)不同。地區包含一個以上的區域，這些區域是實體資料中心，用於管理運算、網路和儲存空間資源以及管理服務和應用程式的相關散熱及電源。區域彼此隔離，以確保不會共用單一失敗點。
 {:shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} 是在全球各地管理。{{site.data.keyword.Bluemix_notm}} 內的服務可能在全球提供，或在特定地區內提供。當您在 {{site.data.keyword.containerlong_notm}} 中建立 Kubernetes 叢集時，其資源會保留在您已部署叢集的地區。
-
+ 
 
 **附註**：您可以在每個支援的 {{site.data.keyword.containerlong_notm}} 地區建立標準叢集。免費叢集僅適用於選取地區。
 
@@ -180,8 +181,7 @@ _{{site.data.keyword.containerlong_notm}} 地區及區域_
     </tr>
     <tr>
       <td>英國南部</td>
-      <td>倫敦：lon02、lon04、lon06</td>
-      <td></td>
+      <td>倫敦：lon04、lon05、lon06<br><br>**附註**：lon05 會取代 lon02。新叢集必須使用 lon05。</td>
     </tr>
     <tr>
       <td>美國東部</td>
@@ -192,8 +192,7 @@ _{{site.data.keyword.containerlong_notm}} 地區及區域_
     <tr>
       <td>美國南部</td>
       <td>達拉斯：dal10、dal12、dal13</td>
-      <td><p>聖荷西：sjc03、sjc04</p>
-      <p>聖保羅：sao01</p></td>
+      <td><p>聖荷西：sjc03、sjc04</p><p>聖保羅：sao01</p></td>
     </tr>
   </tbody>
 </table>

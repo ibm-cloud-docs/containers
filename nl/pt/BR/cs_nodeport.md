@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -35,7 +35,7 @@ serviço. Para acessar o serviço por meio da Internet, será possível usar o e
 
 O diagrama a seguir mostra como a comunicação é direcionada da Internet para um app quando um serviço NodePort está configurado:
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Expor um app no {{site.data.keyword.containershort_notm}} usando NodePort" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="Expor um app no {{site.data.keyword.containerlong_notm}} usando NodePort" style="width:550px; border-style: none"/>
 
 1. Uma solicitação é enviada para seu app usando o endereço IP público do seu nó do trabalhador e o NodePort no nó do trabalhador.
 
@@ -51,7 +51,7 @@ nó do trabalhador. É possível usar o serviço do NodePort para testar o acess
 <br />
 
 
-## Ativando o acesso público a um app usando um serviço NodePort
+## Ativando o acesso a um app usando um serviço NodePort
 {: #config}
 
 É possível expor seu app como um serviço NodePort do Kubernetes para clusters grátis ou padrão.
@@ -97,7 +97,7 @@ Se você ainda não tem um app pronto, é possível usar um app de exemplo do Ku
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td>Substitua <code><em>&lt;my-selector-key&gt;</em></code> e <code><em>&lt;my-selector-value&gt;</em></code> pelo par de chaves/valores usado na seção <code>spec.template.metadata.labels</code> do yaml de sua implementação.
+      <td>Substitua <code><em>&lt;my-selector-key&gt;</em></code> e <code><em>&lt;my-selector-value&gt;</em></code> pelo par de chaves/valores usado na seção <code>spec.template.metadata.labels</code> do yaml de sua implementação. Para associar o serviço com a implementação, o seletor deve corresponder aos rótulos de implementação.
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -115,12 +115,13 @@ Se você ainda não tem um app pronto, é possível usar um app de exemplo do Ku
 
 **E agora?**
 
-Quando o app for implementado, será possível usar o endereço IP público de qualquer nó do trabalhador e o NodePort para formar a URL pública para acessar o app em um navegador.
+Quando o app for implementado, será possível usar o endereço IP público de qualquer nó do trabalhador e o NodePort
+para formar a URL pública para acessar o app em um navegador. Se os nós do trabalhador estiverem conectados somente a uma VLAN privada, então, um serviço NodePort privado foi criado e pode ser acessível por meio do endereço IP privado do nó do trabalhador.
 
-1.  Obtenha o endereço IP público para um nó do trabalhador no cluster.
+1.  Obtenha o endereço IP público para um nó do trabalhador no cluster. Se desejar acessar o nó do trabalhador em uma rede privada, obtenha o endereço IP privado no lugar.
 
     ```
-    bx cs workers <cluster_name>
+    ibmcloud ks workers <cluster_name>
     ```
     {: pre}
 
@@ -160,4 +161,4 @@ Quando o app for implementado, será possível usar o endereço IP público de q
     Neste exemplo, o NodePort é `30872`.</br>
     **Nota:** se a seção **Terminais** exibir `<none>`, verifique o `<selectorkey>` e o `<selectorvalue>` que você usa na seção `spec.selector` do serviço NodePort. Assegure-se de que seja o mesmo que o par _chave/valor_ que você usou na seção `spec.template.metadata.labels` de seu yaml de implementação.
 
-3.  Forme a URL com um dos endereços IP públicos do nó do trabalhador e o NodePort. Exemplo: `http://192.0.2.23:30872`
+3.  Forme a URL com um dos endereços IP do nó do trabalhador e o NodePort. Exemplo: `http://192.0.2.23:30872`

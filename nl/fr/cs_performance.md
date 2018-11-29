@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-09-10"
 Si vous avez des exigences spécifiques en termes d'optimisation des performances, vous pouvez modifier les paramètres par défaut `sysctl` du noyau Linux sur les noeuds worker et dans les espaces de nom de réseau de pods dans {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Les noeuds worker sont automatiquement mis à disposition avec des performances de noyau déjà optimisées, mais vous pouvez modifier les paramètres par défaut en appliquant un DaemonSet personnalisé à votre cluster. Le DaemonSet modifie les paramètres de tous les noeuds worker existants et les applique aux nouveaux noeuds worker mis à disposition dans le cluster. Aucun pod n'est affecté.
+Les noeuds worker sont automatiquement mis à disposition avec des performances de noyau déjà optimisées, mais vous pouvez modifier les paramètres par défaut en appliquant un objet Kubernetes `DaemonSet` personnalisé à votre cluster. Cet objet modifie les paramètres de tous les noeuds worker existants et les applique aux nouveaux noeuds worker mis à disposition dans le cluster. Aucun pod n'est affecté.
 
 Pour optimiser les paramètres du noyau pour les pods d'application, vous pouvez insérer l'élément initContainer dans le fichier YAML `pod/ds/rs/deployment` pour chaque déploiement. L'élément initContainer est ajouté à chaque déploiement d'application figurant dans l'espace de nom du réseau de pods dont vous souhaitez optimiser les performances.
 
@@ -32,11 +32,11 @@ Ainsi, les exemples dans les sections suivantes changent le nombre maximal de co
 ## Optimisation des performances de noeud worker
 {: #worker}
 
-Appliquez un [DaemonSet ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) pour modifier les paramètres du noyau sur l'hôte du noeud worker.
+Appliquez un objet [DaemonSet ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) pour modifier les paramètres du noyau sur l'hôte du noeud worker.
 
-**Remarque** : vous devez disposer du [rôle d'accès Administrateur](cs_users.html#user-roles) pour exécuter  le modèle d'élément privilégié initContainer. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
+**Remarque** : vous devez disposer du [rôle d'accès Administrateur](cs_users.html#access_policies) pour exécuter  le modèle d'élément privilégié initContainer. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
 
-1. Sauvegardez le DaemonSet suivant dans un fichier nommé `worker-node-kernel-settings.yaml`. Dans la section `spec.template.spec.initContainers`, ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple de DaemonSet modifie les valeurs des paramètres `net.core.somaxconn` et `net.ipv4.ip_local_port_range`.
+1. Sauvegardez l'objet DaemonSet suivant dans un fichier nommé `worker-node-kernel-settings.yaml`. Dans la section `spec.template.spec.initContainers`, ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple d'objet DaemonSet modifie les valeurs des paramètres `net.core.somaxconn` et `net.ipv4.ip_local_port_range`.
     ```
     apiVersion: extensions/v1beta1
     kind: DaemonSet
@@ -91,7 +91,7 @@ Appliquez un [DaemonSet ![Icône de lien externe](../icons/launch-glyph.svg "Ic�
     ```
     {: codeblock}
 
-2. Appliquez le DaemonSet à vos noeuds worker. Les modifications sont appliquées immédiatement.
+2. Appliquez l'objet DaemonSet à vos noeuds worker. Les modifications sont appliquées immédiatement.
     ```
     kubectl apply -f worker-node-kernel-settings.yaml
     ```
@@ -101,7 +101,7 @@ Appliquez un [DaemonSet ![Icône de lien externe](../icons/launch-glyph.svg "Ic�
 
 Pour rétablir les valeurs par défaut des paramètres `sysctl` de vos noeuds worker, définis par {{site.data.keyword.containerlong_notm}} :
 
-1. Supprimez le DaemonSet. Les éléments initContainers qui avaient appliqué les paramètres personnalisés sont supprimés.
+1. Supprimer l'objet DaemonSet. Les éléments initContainers qui avaient appliqué les paramètres personnalisés sont supprimés.
     ```
     kubectl delete ds kernel-optimization
     ```
@@ -118,7 +118,7 @@ Pour rétablir les valeurs par défaut des paramètres `sysctl` de vos noeuds wo
 Si vous avez des exigences spécifiques en matière de charge de travail, vous pouvez appliquer un correctif [initContainer ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) pour modifier les paramètres du noyau pour les pods d'application.
 {: shortdesc}
 
-**Remarque** : vous devez disposer du [rôle d'accès Administrateur](cs_users.html#user-roles) pour exécuter  le modèle d'élément privilégié initContainer. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
+**Remarque** : vous devez disposer du [rôle d'accès Administrateur](cs_users.html#access_policies) pour exécuter  le modèle d'élément privilégié initContainer. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
 
 1. Sauvegardez le correctif initContainer suivant dans un fichier nommé `pod-patch.yaml` et ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple de correctif initContainer modifie les valeurs des paramètres `net.core.somaxconn` et `net.ipv4.ip_local_port_range`.
     ```

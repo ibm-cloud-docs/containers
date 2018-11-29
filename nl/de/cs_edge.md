@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -25,52 +25,65 @@ Mit Edge-Workerknoten kann die Sicherheit des Kubernetes-Clusters verbessert wer
 
 Wenn diese Workerknoten nur für den Netzbetrieb markiert sind, können andere Arbeitslasten nicht die CPU oder den Speicher des entsprechenden Workerknotens nutzen und somit Auswirkungen auf den Netzbetrieb haben.
 
-
-
+Wenn Sie über einen Mehrzonencluster verfügen und den Datenaustausch im Netz auf Edge-Workerknoten beschränken möchten, müssen in jeder Zone mindestens zwei Edge-Workerknoten für die Hochverfügbarkeit von Lastausgleichsfunktions- oder Ingress-Pods aktiviert werden. Erstellen Sie einen Worker-Pool für Edge-Workerknoten, der sich über alle Zonen im Cluster erstreckt, mit mindestens zwei Workerknoten pro Zone.
+{: tip}
 
 ## Bezeichnung für Edge-Knoten zu Workerknoten hinzufügen
 {: #edge_nodes}
 
-Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten auf jedem öffentlichen VLAN in Ihrem Cluster hinzu, um sicherzustellen, dass Ingress- und  Lastausgleichsservices nur für diese Workerknoten bereitgestellt werden.
+Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten auf jedem öffentlichen VLAN in Ihrem Cluster hinzu, um sicherzustellen, dass Ingress- und LoadBalancer-Services nur für diese Workerknoten bereitgestellt werden.
 {:shortdesc}
 
 Vorbemerkungen:
 
 - [Erstellen Sie einen Standardcluster.](cs_clusters.html#clusters_cli)
 - Stellen Sie sicher, dass der Cluster mindestens über ein öffentliches VLAN verfügt. Edge-Workerknoten stehen nicht für Cluster mit ausschließlich privaten VLANs zur Verfügung.
+- [Erstellen Sie einen neuen Worker-Pool](cs_clusters.html#add_pool), der sich über alle Zonen im Cluster erstreckt und mindestens zwei Worker pro Zone aufweist.
 - [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure).
 
 Gehen Sie wie folgt vor, um eine Bezeichnung für Edge-Knoten zu Workerknoten hinzuzufügen:
 
-1. Listen Sie alle Workerknoten im Cluster auf. Verwenden Sie die private IP-Adresse aus der Spalte **NAME**, um die Knoten anzugeben. Wählen Sie mindestens zwei Workerknoten in jedem öffentlichen VLAN als Edge-Workerknoten aus. Für Ingress sind mindestens zwei Workerknoten in jeder Zone zur Bereitstellung von Hochverfügbarkeit erforderlich. 
+1. Listen Sie die Workerknoten im Worker-Pool für Edge-Knoten auf. Verwenden Sie die Adresse unter **Private IP** zum Identifizieren des Knotens.
 
   ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ibmcloud ks workers <clustername_oder_-id> --worker-pool <poolname_für_edge-knoten>
   ```
   {: pre}
 
 2. Ordnen Sie den Workerknoten die Bezeichnung `dedicated=edge` zu. Nachdem ein Workerknoten mit der Bezeichnung `dedicated=edge` markiert wurde, werden alle Ingress- und LoadBalancer-Services auf einem Edge-Workerknoten bereitgestellt.
 
   ```
-  kubectl label nodes <knoten1_name> <knoten2_name> dedicated=edge
+  kubectl label nodes <knoten1-IP> <knoten2-IP> dedicated=edge
   ```
   {: pre}
 
-3. Rufen Sie alle vorhandenen LoadBalancer-Services in Ihrem Cluster auf.
+3. Rufen Sie alle vorhandenen Lastausgleichsfunktionen und Ingress-Lastausgleichsfunktionen für Anwendungen (ALBs) im Cluster ab.
 
   ```
-  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  kubectl get services --all-namespaces
   ```
   {: pre}
 
-  Beispielausgabe:
+  Suchen Sie in der Ausgabe Services, für die als **Typ** der Wert **LoadBalancer** angegeben ist. Notieren Sie für jeden Lastenausgleichsservice die Angeben unter **Namespace** und **Name**. Beispiel: In der folgenden Ausgabe sind drei Lastenausgleichsservices vorhanden: die Lastausgleichsfunktion `webserver-lb` im Namensbereich `default` und die Ingress-Lastausgleichsfunktionen für Anwendungen `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` und `public-crdf253b6025d64944ab99ed63bb4567b6-alb2` im Namensbereich `kube-system`.
 
   ```
-  kubectl get service -n <namensbereich> <servicename> -o yaml | kubectl apply -f
+  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE
+  default       kubernetes                                       ClusterIP      172.21.0.1       <none>          443/TCP                      1h
+  default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                 10m
+  kube-system   heapster                                         ClusterIP      172.21.101.189   <none>          80/TCP                       1h
+  kube-system   kube-dns                                         ClusterIP      172.21.0.10      <none>          53/UDP,53/TCP                1h
+  kube-system   kubernetes-dashboard                             ClusterIP      172.21.153.239   <none>          443/TCP                      1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP   1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP   57m
   ```
   {: screen}
 
-4. Kopieren Sie unter Verwendung der Ausgabe aus dem vorherigen Schritt jede Zeile `kubectl get service` und fügen Sie sie ein. Mit diesem Befehl wird die Lastausgleichsfunktion erneut auf einem Edge-Workerknoten bereitgestellt. Nur öffentliche Lastausgleichsfunktionen müssen erneut bereitgestellt werden.
+4. Führen Sie unter Verwendung der Ausgabe des vorherigen Schritts den folgenden Befehl für jede Lastausgleichsfunktion und Ingress-Lastausgleichsfunktion für Anwendungen aus. Mit diesem Befehl wird die Lastausgleichsfunktion oder Ingress-Lastausgleichsfunktion für Anwendungen erneut auf einem Edge-Workerknoten bereitgestellt. Nur öffentliche Lastausgleichsfunktionen oder Lastausgleichsfunktionen für Anwendungen müssen erneut bereitgestellt werden.
+
+  ```
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
+  ```
+  {: pre}
 
   Beispielausgabe:
 
@@ -105,6 +118,7 @@ Die Verwendung der Tolerierung `dedicated=edge` bedeutet, dass alle LoadBalancer
   ```
   kubectl taint node <knotenname> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+  {: pre}
   Nun werden nur Pods mit der Tolerierung `dedicated=edge` auf Ihren Edge-Workerknoten bereitgestellt.
 
 3. Wenn Sie die [Beibehaltung der Quellen-IP für einen LoadBalancer-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") aktivieren](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), stellen Sie sicher, dass App-Pods auf den Edge-Workerknoten geplant sind, indem Sie [Edge-Knoten-Affinität zu App-Pods hinzufügen](cs_loadbalancer.html#edge_nodes). App-Pods müssen auf Edge-Knoten geplant werden, um eingehende Anforderungen empfangen zu können.

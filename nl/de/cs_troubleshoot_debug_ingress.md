@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -28,7 +28,10 @@ Ziehen Sie bei der Verwendung von {{site.data.keyword.containerlong}} die folgen
 
 Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie eine Ingress-Ressource für Ihre App in Ihrem Cluster erstellt haben. Wenn Sie jedoch versuchen, über die öffentliche IP-Adresse oder Unterdomäne der ALB eine Verbindung zu Ihrer App herzustellen, schlägt die Verbindung fehl oder es wird ein Zeitlimit überschritten. Die Schritte in den folgenden Abschnitten können Ihnen beim Debugging Ihrer Ingress-Konfiguration helfen.
 
-## Schritt 1: Ingress-Ressourcenbereitstellung oder ALB-Pod-Protokolle auf Fehlernachrichten überprüfen
+Stellen Sie sicher, dass Sie einen Host in nur einer Ingress-Ressource definieren. Wenn ein Host in mehreren Ingress-Ressourcen definiert ist, leitet die Lastausgleichsfunktion für Anwendungen den Datenverkehr möglicherweise nicht ordnungsgemäß weiter und es können Fehler auftreten.
+{: tip}
+
+## Schritt 1: Ingress-Bereitstellung und Pod-Protokolle der Lastausgleichsfunktion für Anwendungen auf Fehlernachrichten überprüfen
 {: #errors}
 
 Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung und in den ALB-Pod-Protokollen nach Fehlernachrichten suchen. Diese Fehlernachrichten können Ihnen bei der Suche nach den Ursachen für Ausfälle und bei der weiteren Fehlerbehebung für Ihre Ingress-Konfiguration in den nächsten Abschnitten helfen.
@@ -40,7 +43,7 @@ Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung 
     ```
     {: pre}
 
-    Im Abschnitt **Events** der Ausgabe sehen Sie möglicherweise Nachrichten zu ungültigen Werten in Ihrer Ingress-Ressource oder in bestimmten Annotationen, die Sie verwendet haben. Weitere Informationen finden Sie in der [Dokumentation zur Ingress-Ressourcenkonfiguration](cs_ingress.html#public_inside_3) oder in der [Dokumentation zu Annotationen](cs_annotations.html).
+    Im Abschnitt **Events** der Ausgabe sehen Sie möglicherweise Nachrichten zu ungültigen Werten in Ihrer Ingress-Ressource oder in bestimmten Annotationen, die Sie verwendet haben. Weitere Informationen finden Sie in der [Dokumentation zur Ingress-Ressourcenkonfiguration](cs_ingress.html#public_inside_4) oder in der [Dokumentation zu Annotationen](cs_annotations.html).
 
     ```
     Name:             myingress
@@ -140,18 +143,19 @@ Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung 
         * Wenn die CLI ein Zeitlimit zurückgibt und Sie über eine angepasste Firewall verfügen, die Ihre Workerknoten schützt, stellen Sie sicher, dass Ihre [Firewall](cs_troubleshoot_clusters.html#cs_firewall) ICMP zulässt.
         * Wenn keine Firewall vorhanden ist, die die Pingsignale blockiert, und die Pingsignale weiterhin das Zeitlimit überschreiten, müssen Sie den [Status der ALB-Pods überprüfen](#check_pods).
 
-    * Nur bei Mehrzonenclustern: Sie können die MZLB-Zustandsprüfung verwenden, um den Status Ihrer ALB-IPs zu ermitteln. Weitere Informationen zur MZLB finden Sie unter [Lastausgleichsfunktion für mehrere Zonen (MZLB)](cs_ingress.html#planning). **Hinweis**: Die MZLB-Zustandsprüfung ist nur für Cluster verfügbar, die über die neue Ingress-Unterdomäne im Format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` verfügen. Wenn Ihr Cluster noch das ältere Format von `<cluster_name>.<region>.containers.mybluemix.net` verwendet, müssen Sie Ihren [Einzelzonencluster in einen Mehrzonencluster konvertieren](cs_clusters.html#add_zone). Ihrem Cluster wird eine Unterdomäne mit dem neuen Format zugewiesen, er kann aber auch weiterhin das ältere Unterdomänenformat verwenden. Alternativ können Sie einen neuen Cluster bestellen, dem automatisch das neue Unterdomänenformat zugeordnet wird. Der folgende HTTP-cURL-Befehl verwendet den Host `albhealth`, der von {{site.data.keyword.containerlong_notm}} so konfiguriert wird, dass er entweder den Status `healthy` oder den Status `unhealthy` für eine ALB-IP zurückgibt.
-            ```
-            curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
-            ```
-            {: pre}
+    * Nur bei Mehrzonenclustern: Sie können die MZLB-Zustandsprüfung verwenden, um den Status Ihrer ALB-IPs zu ermitteln. Weitere Informationen zur MZLB finden Sie unter [Lastausgleichsfunktion für mehrere Zonen (MZLB)](cs_ingress.html#planning). **Hinweis**: Die MZLB-Zustandsprüfung ist nur für Cluster verfügbar, die über die neue Ingress-Unterdomäne im Format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` verfügen. Wenn Ihr Cluster noch das ältere Format von `<cluster_name>.<region>.containers.mybluemix.net` verwendet, müssen Sie Ihren [Einzelzonencluster in einen Mehrzonencluster konvertieren](cs_clusters.html#add_zone). Ihrem Cluster wird eine Unterdomäne mit dem neuen Format zugewiesen, er kann aber auch weiterhin das ältere Unterdomänenformat verwenden. Alternativ können Sie einen neuen Cluster bestellen, dem automatisch das neue Unterdomänenformat zugeordnet wird.
+    Der folgende HTTP-cURL-Befehl verwendet den Host `albhealth`, der von {{site.data.keyword.containerlong_notm}} so konfiguriert wird, dass er entweder den Status `healthy` oder den Status `unhealthy` für eine ALB-IP zurückgibt.
+        ```
+        curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+        ```
+        {: pre}
 
-            Beispielausgabe:
-            ```
-            healthy
-            ```
-            {: screen}
-            Wenn ein oder mehrere IPs `unhealthy` zurückgeben, müssen Sie [den Status der ALB-Pods überprüfen](#check_pods).
+        Beispielausgabe:
+        ```
+        healthy
+        ```
+        {: screen}
+        Wenn ein oder mehrere IPs `unhealthy` zurückgeben, müssen Sie [den Status der ALB-Pods überprüfen](#check_pods).
 
 3. Rufen Sie die von IBM bereitgestellte Ingress-Unterdomäne ab.
     ```
@@ -217,11 +221,13 @@ Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung 
     ```
     {: pre}
 
-    1. Prüfen Sie, ob die Unterdomäne und das TLS-Zertifikat korrekt sind. Um die von IBM bereitgestellte Ingress-Unterdomäne und das TLS-Zertifikat zu finden, führen Sie den Befehl `ibmcloud ks cluster-get <cluster_name_or_ID>` aus.
+    1. Stellen Sie sicher, dass Sie einen Host in nur einer Ingress-Ressource definieren. Wenn ein Host in mehreren Ingress-Ressourcen definiert ist, leitet die Lastausgleichsfunktion für Anwendungen den Datenverkehr möglicherweise nicht ordnungsgemäß weiter und es können Fehler auftreten.
 
-    2.  Stellen Sie sicher, dass Ihre App denselben Pfad überwacht, der im Abschnitt **path** von Ingress konfiguriert ist. Wenn Ihre App so eingerichtet ist, dass sie den Rootpfad überwacht, verwenden Sie `/` als Pfad. Wenn der für diesen Pfad eingehende Datenverkehr an einen anderen Pfad weitergeleitet werden muss, an dem Ihre App empfangsbereit ist, verwenden Sie die Annotation [rewrite-path](cs_annotations.html#rewrite-path).
+    2. Prüfen Sie, ob die Unterdomäne und das TLS-Zertifikat korrekt sind. Um die von IBM bereitgestellte Ingress-Unterdomäne und das TLS-Zertifikat zu finden, führen Sie den Befehl `ibmcloud ks cluster-get <cluster_name_or_ID>` aus.
 
-    3. Bearbeiten Sie die YAML-Datei für die Ressourcenkonfiguration nach Bedarf. Wenn Sie den Editor schließen, werden Ihre Änderungen gespeichert und automatisch angewendet.
+    3.  Stellen Sie sicher, dass Ihre App denselben Pfad überwacht, der im Abschnitt **path** von Ingress konfiguriert ist. Wenn Ihre App so eingerichtet ist, dass sie den Rootpfad überwacht, verwenden Sie `/` als Pfad. Wenn der für diesen Pfad eingehende Datenverkehr an einen anderen Pfad weitergeleitet werden muss, an dem Ihre App empfangsbereit ist, verwenden Sie die Annotation [rewrite-path](cs_annotations.html#rewrite-path).
+
+    4. Bearbeiten Sie die YAML-Datei für die Ressourcenkonfiguration nach Bedarf. Wenn Sie den Editor schließen, werden Ihre Änderungen gespeichert und automatisch angewendet.
         ```
         kubectl edit ingress <meine_ingress-ressource>
         ```
@@ -337,7 +343,7 @@ Beispiel: Angenommen, Sie haben einen Mehrzonencluster in zwei Zonen und die bei
     {: pre}
 
     * Wenn alles ordnungsgemäß konfiguriert ist, erhalten Sie die erwartete Antwort von Ihrer App.
-    * Wenn die Antwort einen Fehler enthält, liegt möglicherweise ein Fehler in Ihrer App oder in einer Konfiguration vor, die nur für diese spezielle ALB gültig ist. Überprüfen Sie Ihren App-Code, Ihre [Ingress-Ressourcenkonfigurationsdateien](cs_ingress.html#public_inside_3) oder alle anderen Konfigurationen, die Sie nur auf diese ALB angewendet haben.
+    * Wenn die Antwort einen Fehler enthält, liegt möglicherweise ein Fehler in Ihrer App oder in einer Konfiguration vor, die nur für diese spezielle ALB gültig ist. Überprüfen Sie Ihren App-Code, Ihre [Ingress-Ressourcenkonfigurationsdateien](cs_ingress.html#public_inside_4) oder alle anderen Konfigurationen, die Sie nur auf diese ALB angewendet haben.
 
 7. Wenn Sie das Debugging beendet haben, stellen Sie die Zustandsprüfung für die ALB-Pods wieder her. Wiederholen Sie diese Schritte für jeden ALB-Pod.
   1. Melden Sie sich beim ALB-Pod an und entfernen Sie das Zeichen `#` in der Zeile `server_name`.

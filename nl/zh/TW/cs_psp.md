@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -62,7 +62,7 @@ lastupdated: "2018-09-10"
 您可以修改這些 RBAC 角色，以在原則中移除或新增管理者、使用者、服務或節點。
 
 開始之前： 
-*  [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
+*  [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 *  瞭解使用 RBAC 角色。如需相關資訊，請參閱[使用自訂 Kubernetes RBAC 角色授權使用者](cs_users.html#rbac)或 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview)。
 *  **附註**：當您修改預設配置時，可以防止重要叢集動作（例如 Pod 部署或叢集更新）。測試其他團隊未依賴的非正式作業叢集裡的變更。
 

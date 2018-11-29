@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -24,237 +24,382 @@ lastupdated: "2018-05-24"
 Puoi utilizzare le funzioni di sicurezza integrate in {{site.data.keyword.containerlong}} per l'analisi dei rischi e la protezione di sicurezza. Queste funzioni ti aiutano a proteggere la tua infrastruttura cluster Kubernetes e le comunicazioni di rete, isolare le tue risorse di calcolo e garantire la conformità di sicurezza tra i componenti della tua infrastruttura e le distribuzioni del contenitore.
 {: shortdesc}
 
+## Panoramica delle minacce alla sicurezza per il tuo cluster
+{: #threats}
 
-
-## Sicurezza per componente del cluster
-{: #cluster}
-
-Ogni cluster {{site.data.keyword.containerlong_notm}} ha funzioni di sicurezza integrate nei propri nodi [master](#master) e [di lavoro](#worker).
+Per proteggere il tuo cluster da attacchi che potrebbero comprometterlo, devi comprendere i potenziali rischi per la sicurezza per il tuo cluster e cosa puoi fare per ridurre l'esposizione alle vulnerabilità.
 {: shortdesc}
 
-Se hai un firewall, oppure se vuoi eseguire i comandi `kubectl` dal tuo sistema locale quando le politiche di rete aziendale impediscono l'accesso agli endpoint internet pubblici, [apri le porte nel tuo firewall](cs_firewall.html#firewall). Per collegarti alle applicazioni su una rete in loco o ad altre applicazioni esterne al tuo cluster, [configura la connettività VPN](cs_vpn.html#vpn). 
+<img src="images/cs_security_threats.png" width="400" alt="Minacce alla sicurezza per il tuo cluster" style="width:400px; border-style: none"/>
 
-Nel seguente diagramma, puoi visualizzare le funzioni di sicurezza raggruppate per master Kubernetes, nodi di lavoro e immagini di contenitore.
+La sicurezza cloud e la protezione dei tuoi sistemi, della tua infrastruttura e dei tuoi dati da attacchi sono diventati fattori molto importanti nell'ultimo paio di anni poiché le aziende continuano a spostare i loro carichi di lavoro nel cloud pubblico. Un cluster è costituito da diversi componenti e ciascuno di essi può esporre il tuo ambiente ad attacchi dolosi. Per proteggere il tuo cluster da queste minacce alla sicurezza, ti devi assicurare di applicare le funzioni e gli aggiornamenti della sicurezza {{site.data.keyword.containerlong_notm}} e Kubernetes più recenti in tutti i componenti del cluster.
 
-<img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} - Sicurezza cluster " style="width:400px; border-style: none"/>
+Questi componenti includono:
+- [Server API Kubernetes e archivio dati etcd](#apiserver)
+- [Nodi di lavoro](#workernodes)
+- [Rete](#network)
+- [Archiviazione persistente](#storage)
+- [Monitoraggio e registrazione](#monitoring_logging)
+- [Immagini e registro contenitore](#images_registry)
+- [Isolamento e sicurezza contenitore](#container)
+- [Informazioni personali](#pi)
 
+## Server API Kubernetes ed etcd
+{: #apiserver}
 
-<table summary="La prima riga nella tabella si estende su entrambe le colonne. Le righe rimanenti devono essere lette da sinistra a destra, con il componente di sicurezza nella colonna uno e le funzioni corrispondenti nella colonna due.">
-<caption>Sicurezza per componente </caption>
+Il server API Kubernetes ed etcd sono i componenti più vulnerabili eseguiti nel tuo master Kubernetes. Se un utente o un sistema non autorizzati ottengono l'accesso al tuo server API Kubernetes, possono modificare le impostazioni e manipolare o assumere il controllo del tuo cluster, il che espone quest'ultimo al rischio di attacchi dolosi.
+{: shortdesc}
+
+Per proteggere il tuo server API Kubernetes e il tuo archivio dati etcd, devi proteggere e limitare l'accesso al tuo server API Kubernetes sia per gli utenti reali che per gli account di servizio Kubernetes.
+
+**In che modo viene concesso l'accesso al mio server API Kubernetes?** </br>
+Per impostazione predefinita, Kubernetes esige che ogni richiesta passi per diverse fasi prima che venga concesso l'accesso al server API:
+
+<ol><li><strong>Autenticazione: </strong>convalida l'identità di un account utente o di servizio registrato.</li><li><strong>Autorizzazione: </strong>limita le autorizzazioni degli utenti e degli account di servizio autenticati per garantire che possano accedere e utilizzare solo i componenti cluster che tu vuoi.</li><li><strong>Controllo di ammissione: </strong>convalida o modifica le richieste prima che vengano elaborate dal server API Kubernetes. Per funzionare correttamente, molte funzioni Kubernetes richiedono i controller di ammissione.</li></ol>
+
+**Cosa fa {{site.data.keyword.containerlong_notm}} per proteggere il mio server API Kubernetes e il mio archivio dati etcd?** </br>
+La seguente immagine mostra le impostazioni di sicurezza del cluster predefinite che si occupano di autenticazione, autorizzazione, controllo di ammissione e connettività protetta tra i nodi master e di lavoro Kubernetes.
+
+<img src="images/cs_security_apiserver_access.png" width="600" alt="Fasi di sicurezza quando si accede al server API Kubernetes" style="width:600px; border-style: none"/>
+
+<table>
+<caption>Sicurezza di server API Kubernetes ed etcd</caption>
   <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Impostazioni di sicurezza cluster integrate in {{site.data.keyword.containershort_notm}}</th>
+  <th>Funzione di sicurezza</th>
+  <th>Descrizione</th>
   </thead>
   <tbody>
     <tr>
-      <td>Master Kubernetes</td>
-      <td>Il master Kubernetes in ogni cluster viene gestito da IBM ed è altamente disponibile. Il master include le impostazioni di sicurezza {{site.data.keyword.containershort_notm}}
-che assicurano la conformità di sicurezza e la comunicazione protetta dai/ai nodi
-di lavoro. Gli aggiornamenti di sicurezza vengono eseguiti da IBM quando necessario. Il master Kubernetes dedicato controlla e monitora in modo centralizzato tutte le risorse Kubernetes
-nel cluster. In base ai requisiti di distribuzione e alla capacità nel cluster, il master
-Kubernetes automaticamente pianifica le tue applicazioni contenute nel contenitore per la distribuzione nei nodi
-di lavoro disponibili. Per ulteriori informazioni, consulta [Sicurezza master Kubernetes](#master).</td>
+      <td>Master Kubernetes dedicato completamente gestito</td>
+      <td><p>Ogni cluster Kubernetes in {{site.data.keyword.containerlong_notm}} è controllato da un master Kubernetes dedicato gestito da IBM in un account dell'infrastruttura IBM Cloud (SoftLayer) di proprietà di IBM. Il master Kubernetes è configurato con i seguenti componenti dedicati che non sono condivisi con altri clienti IBM.</p>
+        <ul><li><strong>archivio dati etcd</strong> memorizza tutte le risorse Kubernetes di un cluster, ad esempio `Servizi`, `Distribuzioni` e `Pod`. Le `Mappe di configurazione` e i `Segreti` di Kubernetes sono dati dell'applicazione che vengono memorizzati come coppie chiave-valore in modo che possano essere utilizzati da un'applicazione che viene eseguita in un pod. I dati in etcd sono memorizzati su un disco crittografato gestito da IBM e sottoposto a backup giornaliero. Quando inviati a un pod, i dati vengono crittografati tramite TLS per garantirne la protezione e l'integrità.</li>
+          <li><strong>kube-apiserver:</strong> funge da punto di ingresso principale per tutte le richieste di gestione del cluster dal nodo di lavoro al master Kubernetes. kube-apiserver convalida ed elabora le richieste e può leggere e scrivere nell'archivio dati etcd.</li>
+          <li><strong>kube-scheduler:</strong> decide dove distribuire i pod tenendo conto dei bisogni di prestazioni e capacità dell'account, dei vincoli della politica software, delle specifiche dell'anti-affinità e dei requisiti del carico di lavoro. Se non è possibile trovare alcun nodo di lavoro che corrisponda ai requisiti, il pod non viene distribuito nel cluster.</li>
+          <li><strong>kube-controller-manager:</strong> responsabile del monitoraggio delle serie di repliche e della creazione dei pod corrispondenti per ottenere lo stato desiderato.</li>
+          <li><strong>OpenVPN:</strong> componente specifico di {{site.data.keyword.containerlong_notm}} per fornire la connettività di rete protetta per tutte le comunicazioni tra master Kubernetes e i nodi di lavoro. Le comunicazioni tra master Kubernetes e nodi di lavoro vengono avviate dall'utente e includono i comandi <code>kubectl</code>, quali <code>logs</code>, <code>attach</code>, <code>exec</code> e <code>top</code>.</li></ul></td>
     </tr>
     <tr>
-      <td>Nodo di lavoro</td>
-      <td>I contenitori sono distribuiti su nodi di lavoro dedicati a un cluster e assicurano
-l'isolamento di calcolo, di rete e di archiviazione ai clienti IBM. {{site.data.keyword.containershort_notm}} fornisce funzioni di sicurezza integrate per
-mantenere protetti i tuoi nodi di lavoro sulla rete pubblica e privata e per assicurare la conformità
-di sicurezza del nodo di lavoro. Per ulteriori informazioni, consulta [Sicurezza nodo di lavoro](#worker). Inoltre, puoi aggiungere le [politiche di rete Calico](cs_network_policy.html#network_policies) per specificare ulteriormente il traffico di rete consentito o bloccato da e verso un pod su un nodo di lavoro. </td>
+    <td>Monitoraggio continuo da parte dei Site Reliability Engineer (SRE) IBM</td>
+    <td>Il master Kubernetes, incluse tutte le risorse di calcolo, di rete e di archiviazione del componente master, viene continuamente monitorato dagli SRE (Site Reliability Engineer) IBM. Gli SRE applicano i più recenti standard di sicurezza, rilevano e correggono le attività dannose e operano per garantire l'affidabilità e la disponibilità di {{site.data.keyword.containerlong_notm}}. </td>
     </tr>
     <tr>
-      <td>Immagini</td>
-      <td>Come amministratore del cluster, puoi configurare il tuo proprio repository delle immagini Docker
-in {{site.data.keyword.registryshort_notm}} dove puoi archiviare e condividere le immagini
-Docker tra i tuoi utenti del cluster. Per assicurare le distribuzioni del contenitore sicure, ogni immagine nel tuo registro privato viene scansionata dal
-controllo vulnerabilità. Il controllo vulnerabilità è un componente di {{site.data.keyword.registryshort_notm}} che esegue le scansioni per le vulnerabilità potenziali,
-effettua raccomandazioni di sicurezza e fornisce le istruzioni per risolvere le vulnerabilità. Per ulteriori informazioni, consulta [Sicurezza immagine in {{site.data.keyword.containershort_notm}}](#images).</td>
+      <td>Comunicazioni protette tramite TLS</td>
+      <td>Per utilizzare {{site.data.keyword.containerlong_notm}} devi eseguire l'autenticazione presso il servizio utilizzando le tue credenziali. Quando vieni autenticato, {{site.data.keyword.containerlong_notm}} genera i certificati TLS che crittografano le comunicazioni verso e dal server API Kubernetes e verso e dall'archivio dati etcd per garantire comunicazioni end-to-end protette tra i nodi di lavoro e il master Kubernetes. Questi certificati non sono mai condivisi tra i cluster o tra i componenti master Kubernetes. </td>
+    </tr>
+    <tr>
+      <td>Connettività OpenVPN ai nodi di lavoro</td>
+      <td>Anche se Kubernetes protegge le comunicazioni tra il master Kubernetes e i nodi di lavoro utilizzando il protocollo
+<code>https</code>, non viene fornita alcuna autenticazione al nodo di lavoro per
+impostazione predefinita. Per proteggere queste comunicazioni, {{site.data.keyword.containerlong_notm}} configura automaticamente una connessione OpenVPN
+tra il master Kubernetes e il nodo di lavoro quando viene creato il cluster.</td>
+    </tr>
+    <tr>
+      <td>Controllo dell'accesso dettagliato</td>
+      <td>In quanto amministratore dell'account, puoi [concedere l'accesso ad altri utenti per {{site.data.keyword.containerlong_notm}}](cs_users.html#users) utilizzando {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management). IAM fornisce un'autenticazione sicura presso la piattaforma {{site.data.keyword.Bluemix_notm}}, {{site.data.keyword.containerlong_notm}} e tutte le risorse nel tuo account. Configurare dei ruoli e delle autorizzazioni utente appropriati è un fattore chiave per limitare chi può accedere alle tue risorse e limitare il danno che un utente può arrecare quando vengono utilizzate in modo improprio delle autorizzazioni legittime. </br></br>Puoi selezionare dai seguenti ruoli utente predefiniti che determinano l'insieme di azioni che l'utente può eseguire: <ul><li><strong>Ruoli della piattaforma:</strong> determina le azioni correlate a cluster e nodi di lavoro che un utente può eseguire in {{site.data.keyword.containerlong_notm}}.</li><li><strong>Ruoli dell'infrastruttura:</strong> determinano le autorizzazioni per ordinare, aggiornare o rimuovere risorse dell'infrastruttura, quali nodi di lavoro, VLAN o sottoreti.</li><li><strong>Ruoli RBAC Kubernetes:</strong> determina i comandi `kubectl` che gli utenti possono eseguire quando sono autorizzati ad accedere a un cluster. I ruoli RBAC vengono configurati automaticamente per lo spazio dei nomi predefinito di un cluster. Per utilizzare gli stessi ruoli RBAC in altri spazi dei nomi, puoi copiare i ruoli RBAC dallo spazio dei nomi predefinito.  </li></ul> </br> Invece di utilizzare i ruoli utente predefiniti, puoi scegliere di [personalizzare le autorizzazioni dell'infrastruttura](cs_users.html#infra_access) o [configurare i tuoi ruoli RBAC](cs_users.html#rbac) per aggiungere un controllo dell'accesso più dettagliato. </td>
+    </tr>
+    <tr>
+      <td>Controller di ammissione</td>
+      <td>I controller di ammissione sono implementati per specifiche funzioni in Kubernetes e {{site.data.keyword.containerlong_notm}}. Con i controller di ammissione, puoi configurare le politiche nel tuo cluster che determinano se una specifica azione nel cluster è consentita o meno. Nella politica, puoi specificare le condizioni quando un utente non può eseguire un'azione, anche se tale azione fa parte delle autorizzazioni generali da te assegnate all'utente utilizzando RBAC. Pertanto, i controller di ammissione possono fornire un livello supplementare di sicurezza per il tuo cluster prima che una richiesta API venga elaborata dal server API Kubernetes. </br></br> Quando crei un cluster, {{site.data.keyword.containerlong_notm}} installa automaticamente i seguenti [controller di ammissione Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/admin/admission-controllers/) nel master Kubernetes, che non possono essere modificati dall'utente. <ul>
+      <li>DefaultTolerationSeconds</li>
+      <li>DefaultStorageClass</li>
+      <li>GenericAdmissionWebhook (Kubernetes 1.8)</li>
+      <li>Initializers</li>
+      <li>LimitRanger</li>
+      <li>MutatingAdmissionWebhook (Kubernetes 1.9 e successive)</li>
+      <li>NamespaceLifecycle</li>
+      <li>PersistentVolumeLabel</li>
+      <li>[PodSecurityPolicy](cs_psp.html#ibm_psp) (Kubernetes 1.8.13, 1.9.8, o 1.10.3 e successive)</li>
+      <li>[Priority](cs_pod_priority.html#pod_priority) (Kubernetes 1.11.2 o successive)</li>
+      <li>ResourceQuota</li>
+      <li>ServiceAccount</li>
+      <li>StorageObjectInUseProtection (Kubernetes 1.10 e successive)</li>
+      <li>ValidatingAdmissionWebhook (Kubernetes 1.9 e successive)</li></ul></br>
+      Puoi [installare i tuoi controller di ammissione nel cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) oppure scegliere dai controller di ammissione facoltativi forniti da {{site.data.keyword.containerlong_notm}}. <ul><li><strong>[Container Image Security Enforcer](/docs/services/Registry/registry_security_enforce.html#security_enforce):</strong> utilizza questo controller di ammissione per implementare le politiche del Controllo vulnerabilità nel tuo cluster per bloccare le distribuzioni da immagini vulnerabili.</li></ul></br><strong>Nota: </strong> se hai installato manualmente i controller di ammissione e non vuoi più usarli, assicurati di rimuoverli completamente. Se i controller di ammissione non vengono rimossi completamente, potrebbero bloccare tutte le azioni che vuoi eseguire sul cluster. </td>
     </tr>
   </tbody>
 </table>
 
-<br />
+## Nodo di lavoro
+{: #workernodes}
 
-
-## Master Kubernetes
-{: #master}
-
-Riesamina le funzioni di sicurezza del master Kubernetes integrate per proteggere il master Kubernetes
-e la comunicazione di rete del cluster.
+I nodi di lavoro contengono le distribuzioni e dei servizi che formano la tua applicazione. Quando ospiti dei carichi di lavoro nel cloud pubblico, vuoi assicurarti che la tua applicazione sia protetta da eventuali accessi, modifiche o monitoraggio da parte di utenti o software non autorizzati.
 {: shortdesc}
 
-<dl>
-  <dt>Master Kubernetes dedicato completamente gestito</dt>
-    <dd>Ogni cluster Kubernetes in {{site.data.keyword.containershort_notm}} è controllato da un master Kubernetes dedicato gestito da IBM in un account dell'infrastruttura IBM Cloud (SoftLayer) di proprietà di IBM. Il master Kubernetes è configurato con i seguenti componenti dedicati che non sono condivisi con altri clienti IBM o con cluster differenti all'interno dello stesso account IBM.
-      <ul><li>etcd data store: archivia tutte le risorse Kubernetes di un cluster, come servizi, distribuzioni e pod. Le mappe di configurazione e i segreti Kubernetes sono dati dell'applicazione che vengono archiviati come coppie chiave-valore in modo che possano essere utilizzati da un'applicazione che viene eseguita in un pod. I dati in etcd sono memorizzati su un disco crittografato gestito da IBM e sottoposto a backup giornaliero. Quando inviati a un pod, i dati vengono crittografati tramite TLS per garantire la protezione e l'integrità dei dati. </li>
-      <li>kube-apiserver: funge da punto di ingresso principale per tutte le richieste dal nodo di lavoro al master
-Kubernetes. kube-apiserver convalida ed elabora le richiese e può leggere e scrivere in
-etcd data store.</li>
-      <li>kube-scheduler: decide dove distribuire i pod, tenendo conto dei bisogni di prestazioni e capacità dell'account,
-i vincoli della politica software, le specifiche dell'anti-affinità e i requisiti
-del carico di lavoro. Se non è possibile trovare alcun nodo di lavoro che corrisponda ai requisiti, il pod
-non viene distribuito nel cluster.</li>
-      <li>kube-controller-manager: responsabile del monitoraggio delle serie di repliche e della creazione dei pod corrispondenti
-per archiviare lo stato desiderato.</li>
-      <li>OpenVPN: componente specifico di {{site.data.keyword.containershort_notm}}
-per fornire la connettività di rete protetta per tutti i master Kubernetes alla comunicazione del nodo di lavoro.</li></ul></dd>
-  <dt>Connettività di rete protetta TLS per tutti i nodi di lavoro alla comunicazione master Kubernetes</dt>
-    <dd>Per proteggere la comunicazione al master Kubernetes, {{site.data.keyword.containershort_notm}} genera certificati TLS che crittografano la comunicazione verso e dall'archivio dati kube-apiserver e etcd. Questi certificati non sono mai condivisi tra i cluster o tra i componenti master Kubernetes.</dd>
-  <dt>Connettività di rete protetta OpenVPN per tutti i master Kubernetes alla comunicazione del nodo di lavoro</dt>
-    <dd>Anche se Kubernetes protegge la comunicazione tra il master Kubernetes e i nodi di lavoro utilizzando il protocollo
-`https`, non viene fornita alcuna autenticazione al nodo di lavoro per
-impostazione predefinita. Per garantire questa comunicazione, {{site.data.keyword.containershort_notm}} configura automaticamente una connessione OpenVPN
-tra il master Kubernetes e il nodo di lavoro quando viene creato il cluster.</dd>
-  <dt>Monitoraggio della rete del master Kubernetes continuo</dt>
-    <dd>Ogni master Kubernetes è continuamente monitorato da IBM per controllare e rimediare agli attacchi
-DOS (Denial-Of-Service) al livello del processo.</dd>
-  <dt>Conformità di sicurezza del nodo master Kubernetes</dt>
-    <dd>{{site.data.keyword.containershort_notm}} esegue la scansione automaticamente di ogni nodo
-in cui viene distribuito il master Kubernetes alla ricerca di vulnerabilità trovate nelle correzioni di sicurezza specifiche del sistema operativo e di Kubernetes. Se vengono trovate delle vulnerabilità,
-{{site.data.keyword.containershort_notm}} automaticamente applica le correzioni
-e risolve le vulnerabilità per conto dell'utente per garantire la protezione del nodo master. </dd>
-</dl>
+**Chi possiede il nodo di lavoro ed è una mia responsabilità proteggerlo?** </br>
+La proprietà di un nodo di lavoro dipende dal tipo di cluster che crei. I nodi di lavoro nei cluster gratuiti sono forniti nell'account dell'infrastruttura di IBM Cloud (Softlayer) di proprietà di IBM. Puoi distribuire le applicazioni al nodo di lavoro ma non puoi modificare le impostazioni o installare ulteriore software nel nodo di lavoro. A causa della capacità limitata e delle funzioni {{site.data.keyword.containerlong_notm}} limitate, non eseguire carichi di lavoro di produzione sui cluster gratuiti. Considera l'utilizzo di cluster standard per i tuoi carichi di lavoro di produzione. </br> </br>
+Il provisioning dei nodi di lavoro nei cluster standard viene eseguito nell'account dell'infrastruttura IBM Cloud (SoftLayer) associato al tuo account {{site.data.keyword.Bluemix_notm}} pubblico o dedicato. I nodi di lavoro sono dedicati al tuo account ed è una tua responsabilità richiedere degli aggiornamenti tempestivi ai nodi di lavoro per garantire che i componenti {{site.data.keyword.containerlong_notm}} e il sistema operativo dei nodi di lavoro siano applicati con gli aggiornamenti e le patch di sicurezza più recenti. </br></br><strong>Importante: </strong>utilizza il [comando](cs_cli_reference.html#cs_worker_update) <code>ibmcloud ks worker-update</code> regolarmente (ad esempio mensilmente) per distribuire gli aggiornamenti e le patch di sicurezza al sistema operativo e per aggiornare la versione di Kubernetes. Quando sono disponibili degli aggiornamenti, ricevi una notifica quando visualizzi le informazioni sui nodi master e di lavoro nella GUI o nella CLI, ad esempio con i comandi <code>ibmcloud ks clusters</code> o <code>ibmcloud ks workers <cluster_name></code>.
 
-<br />
+**Come si presenta la mia configurazione dei nodi di lavoro?**</br>
+La seguente immagine mostra i componenti configurati per ogni nodo di lavoro per proteggerli da attacchi dolosi. </br></br>
+**Nota:** l'immagine non include i componenti che garantiscono comunicazioni end-to-end protette verso e dal nodo di lavoro. Per ulteriori informazioni, vedi la sezione relativa alla [sicurezza di rete](#network).
 
+<img src="images/cs_worker_setup.png" width="600" alt="Configurazione dei nodi di lavoro (tranne la sicurezza di rete)" style="width:600px; border-style: none"/>
 
-## Nodi di lavoro
-{: #worker}
+<table>
+<caption>Configurazione della sicurezza dei nodi di lavoro</caption>
+  <thead>
+  <th>Funzione di sicurezza</th>
+  <th>Descrizione</th>
+  </thead>
+  <tbody>
+    <tr><td>Immagine Linux conforme a CIS</td><td>Ogni nodo di lavoro è configurato con un sistema operativo Ubuntu che implementa i benchmark pubblicati dal CIS (Center for Internet Security). Il sistema operativo Ubuntu non può essere modificato dall'utente o dal proprietario della macchina. Per controllare la versione attuale di Ubuntu, esegui <code>kubectl get nodes -o wide</code>. IBM collabora con team di sicurezza esterni e interni per risolvere le vulnerabilità di conformità di sicurezza potenziali. Gli aggiornamenti e le patch di sicurezza per il sistema operativo sono resi disponibili tramite {{site.data.keyword.containerlong_notm}} e devono essere installati dall'utente per mantenere protetto il nodo di lavoro. </br></br><strong>Importante: </strong>{{site.data.keyword.containerlong_notm}} utilizza un kernel Linux Ubuntu per i nodi di lavoro. Puoi eseguire contenitori basati su qualsiasi distribuzione Linux in {{site.data.keyword.containerlong_notm}}. Verifica insieme al tuo fornitore dell'immagine contenitore se supporta l'immagine contenitore da eseguire sui kernel Linux Ubuntu.</td></tr>
+    <tr>
+    <td>Monitoraggio continuo da parte dei Site Reliability Engineer (SRE) </td>
+    <td>L'immagine Linux installata sui tuoi nodi di lavoro è continuamente monitorata dagli SRE (Site Reliability Engineer) IBM per rilevare vulnerabilità e problemi di conformità di sicurezza. Per affrontare le vulnerabilità, gli SRE creano patch di sicurezza e fix pack per i tuoi nodi di lavoro. Assicurati di applicare queste patch quando disponibili per garantire un ambiente sicuro per i tuoi nodi di lavoro e per le applicazioni eseguite su di essi.</td>
+    </tr>
+    <tr>
+  <td>Isolamento di calcolo</td>
+  <td>I nodi di lavoro sono dedicati a un cluster e non ospitano i carichi di lavoro di altri cluster. Quando crei un cluster standard, puoi scegliere di eseguire il provisioning dei tuoi nodi di lavoro come [macchine fisiche (bare metal) o come macchine virtuali](cs_clusters_planning.html#planning_worker_nodes) eseguite su hardware fisico condiviso o dedicato. Il provisioning del nodo di lavoro in un cluster gratuito viene eseguito automaticamente come un nodo condiviso virtuale nell'account dell'infrastruttura IBM Cloud (SoftLayer) di proprietà di IBM.</td>
+</tr>
+<tr>
+<td>Opzione per la distribuzione bare metal</td>
+<td>Se scegli di eseguire il provisioning dei nodi di lavoro su server fisici bare metal (anziché sulle istanze di server virtuali), hai un ulteriore controllo sull'host di calcolo, ad esempio la memoria o la CPU. Questa configurazione elimina l'hypervisor della macchina virtuale che assegna risorse fisiche alle macchine virtuali eseguite sull'host. Invece, tutte le risorse di una macchina bare metal sono dedicate esclusivamente al nodo di lavoro, quindi non devi preoccuparti degli "elementi di disturbo" che condividono risorse o rallentano le prestazioni. I server bare metal sono dedicati a te, con tutte le sue risorse disponibili per l'utilizzo del cluster.</td>
+</tr>
+<tr>
+  <td id="trusted_compute">Opzione per Trusted Compute</td>
+    <td>Quando distribuisci il tuo cluster su bare metal che supporta Trusted Compute, puoi [abilitare l'attendibilità](cs_cli_reference.html#cs_cluster_feature_enable). Il chip TPM (Trusted Platform Module) viene abilitato su ciascun nodo di lavoro bare metal nel cluster che supporta Trusted Compute (inclusi i futuri nodi che aggiungerai al cluster). Pertanto, dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente per il cluster. Un server di attendibilità viene distribuito sul nodo master e un agent di attendibilità viene distribuito come pod sul nodo di lavoro. All'avvio del nodo di lavoro, il pod dell'agent di attendibilità monitora ogni fase del processo.<p>L'hardware è alla base dell'attendibilità, che invia le misurazioni utilizzando il TPM. TPM genera chiavi di crittografia utilizzate per proteggere la trasmissione dei dati di misurazione durante l'intero processo. L'agent di attendibilità trasferisce al server di attendibilità la misurazione di ciascun componente nel processo di avvio: dal firmware del BIOS che interagisce con l'hardware del TPM al kernel del sistema operativo e bootloader. Quindi, l'agent attendibile confronta queste misurazioni con i valori previsti nel server attendibile per attestare se l'avvio è stato valido. Il processo di calcolo attendibile non monitora altri pod nei tuoi nodi di lavoro, come ad esempio le applicazioni.</p><p>Ad esempio, se un utente non autorizzato ottiene l'accesso al tuo sistema e modifica il kernel del sistema operativo con un'ulteriore logica per raccogliere i dati, l'agent di attendibilità individua questa modifica e contrassegna il nodo come non attendibile. Con il calcolo attendibile puoi verificare possibili tentativi di intrusione nei tuoi nodi di lavoro.</p>
+    <p><strong>Nota</strong>: Trusted Compute è disponibile per alcuni tipi di macchina bare metal selezionati. Ad esempio, le varietà GPU `mgXc` non supportano Trusted Compute.</p>
+    <p><img src="images/trusted_compute.png" alt="Trusted Compute per i cluster bare metal" width="480" style="width:480px; border-style: none"/></p></td>
+  </tr>
+    <tr>
+  <td id="encrypted_disk">Dischi crittografati</td>
+    <td>Per impostazione predefinita, il provisioning di ogni nodo di lavoro viene eseguito con due partizioni di dati con crittografia SSD locali. La prima partizione contiene l'immagine kernel utilizzata per avviare il nodo di lavoro e non è crittografata. La seconda partizione contiene il file system del contenitore ed è sbloccata utilizzando le chiavi di crittografia LUKS. Ogni nodo di lavoro in ogni cluster Kubernetes ha la propria chiave di crittografia LUKS, gestita da {{site.data.keyword.containerlong_notm}}. Quando crei un cluster o aggiungi un nodo di lavoro a un cluster esistente, le chiavi vengono trasmesse in modo sicuro e quindi scartate dopo che il disco codificato viene sbloccato.</br></br><strong>Nota: </strong>la crittografia può avere delle ripercussioni sulle prestazioni I/O del disco. Per i carichi di lavoro che richiedono I/O del disco di elevate prestazioni, esegui il test di un cluster con la codifica sia abilitata che disabilitata per aiutarti a decidere se disattivarla.</td>
+      </tr>
+    <tr>
+      <td>Politiche AppArmor degli esperti</td>
+      <td>Ogni nodo di lavoro è configurato con politiche di sicurezza e di accesso che vengono implementate da profili [AppArmor ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://wiki.ubuntu.com/AppArmor) che vengono caricati nel nodo di lavoro durante il bootstrap. I profili AppArmor non possono essere modificati dall'utente o dal proprietario della macchina. </td>
+    </tr>
+    <tr>
+      <td>SSH disabilitato</td>
+      <td>Per impostazione predefinita, l'accesso SSH è disabilitato sul nodo di lavoro per proteggere il tuo cluster da attacchi dolosi. Quando l'accesso SSH è disabilitato, l'accesso al cluster viene forzato tramite il server API Kubernetes. Il server API Kubernetes richiede che ogni richiesta venga controllata rispetto alle politiche impostate nel modulo di autenticazione, autorizzazione e controllo di ammissione prima che la richiesta venga eseguita nel cluster. </br></br>  Se hai un cluster standard e vuoi installare ulteriori funzioni sul tuo nodo di lavoro, puoi scegliere tra i componenti aggiuntivi forniti da {{site.data.keyword.containerlong_notm}} oppure utilizzare le [serie di daemon Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) per tutto quello che vuoi eseguire su ogni nodo di lavoro. Per qualsiasi azione monouso che devi eseguire, utilizza i [lavori Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/).</td>
+    </tr>
+  </tbody>
+  </table>
 
-Riesamina le funzioni di sicurezza integrate dei nodi di lavoro per proteggere l'ambiente di tali nodi e per garantire l'isolamento delle risorse, della rete e dell'archiviazione.
+## Rete
+{: #network}
+L'approccio classico per proteggere una rete aziendale consiste nel configurare un firewall e bloccare tutto il traffico di rete indesiderato alle tue applicazioni. Anche se questo è ancora vero, la ricerca dimostra che molti attacchi dolosi provengono da persone interne o da utenti autorizzati che utilizzano in modo improprio le autorizzazioni ad essi assegnate.
 {: shortdesc}
 
-<dl>
-  <dt>Proprietà del nodo di lavoro</dt>
-    <dd>La proprietà dei nodi di lavoro dipende dal tipo di cluster che crei. <p> I nodi di lavoro nei cluster gratuiti sono forniti nell'account dell'infrastruttura di IBM Cloud (Softlayer) di proprietà di IBM. Gli utenti possono distribuire le applicazioni ai nodi di lavoro ma non possono configurare o installare ulteriore software nel nodo di lavoro. </p>
-    <p>I nodi di lavoro nei cluster standard sono forniti nell'account dell'infrastruttura di IBM Cloud (Softlayer) associato all'account IBM Cloud dedicato o pubblico del cliente. I nodi di lavoro sono di proprietà del cliente. I clienti possono scegliere di modificare le impostazioni di sicurezza o installare ulteriore software nei nodi di lavoro come fornito da {{site.data.keyword.containerlong}}.</p> </dd>
-  <dt>Isolamento dell'infrastruttura di calcolo, di rete e di archiviazione </dt>
-    <dd><p>Quando crei un cluster, i nodi di lavoro sono forniti come macchine virtuali da IBM. I nodi di lavoro sono dedicati a un cluster e non ospitano i carichi di lavoro di altri cluster.</p>
-    <p> Ogni account {{site.data.keyword.Bluemix_notm}} è configurato con le VLAN dell'infrastruttura IBM Cloud (SoftLayer) per garantire prestazioni di rete di qualità e l'isolamento sui nodi di lavoro. Puoi anche designare i nodi di lavoro come privati collegandoli solo a una VLAN privata.</p> <p>Per conservare i dati nel tuo cluster, puoi eseguire il provisioning dell'archivio file basato su NFS dedicato dall'infrastruttura IBM Cloud (SoftLayer) e utilizzare le funzioni di sicurezza dei dati integrate di questa piattaforma. </p></dd>
-  <dt>Configurazione di nodi di lavoro protetti </dt>
-    <dd><p>Ogni nodo di lavoro è configurato con un sistema operativo Ubuntu che non può essere modificato dal proprietario del nodo di lavoro. Poiché il sistema operativo del nodo di lavoro è Ubuntu, tutti i contenitori distribuiti sul nodo di lavoro devono utilizzare una distribuzione Linux che utilizza il kernel Ubuntu. Le distribuzioni Linux che devono comunicare con il kernel in un modo diverso non possono essere utilizzate. Per proteggere il sistema operativo dei nodi di lavoro da potenziali attacchi, ogni nodo di lavoro è configurato con delle impostazioni del firewall avanzate che sono implementate dalle regole iptable di Linux.</p>
-    <p>Tutti i contenitori in esecuzione su
-Kubernetes sono protetti da impostazioni di rete Calico predefinite configurate su ogni nodo di lavoro durante
-la creazione del cluster. Questa configurazione garantisce comunicazioni di rete sicure tra i nodi di lavoro e i pod.</p>
-    <p>L'accesso SSH è disabilitato sul nodo di lavoro. Se hai un cluster standard e vuoi installare delle funzioni aggiuntive sul nodo di lavoro, puoi utilizzare le [serie daemon Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) per tutto quello che vuoi eseguire su ogni nodo di lavoro. Per qualsiasi azione monouso che devi eseguire, utilizza i [lavori Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/).</p></dd>
-  <dt>Conformità di sicurezza del nodo di lavoro Kubernetes</dt>
-    <dd>IBM collabora con team di sicurezza esterni e interni per risolvere le vulnerabilità di conformità di sicurezza potenziali. <b>Importante</b>: utilizza regolarmente il [comando](cs_cli_reference.html#cs_worker_update) `bx cs worker-update` (ad esempio mensilmente) per distribuire gli aggiornamenti e le patch di sicurezza al sistema operativo e per aggiornare la versione di Kubernetes. Quando gli aggiornamenti sono disponibili, riceverai una notifica quando visualizzerai le informazioni relative ai nodi di lavoro, ad esempio con il comando `bx cs workers <cluster_name>` o `bx cs worker-get <cluster_name> <worker_ID>`.</dd>
-  <dt>Opzione per distribuire i nodi di lavoro sui server fisici (bare metal)</dt>
-    <dd>Se scegli di eseguire il provisioning dei nodi di lavoro su server fisici bare metal (anziché sulle istanze di server virtuali), hai un ulteriore controllo sull'host di calcolo, ad esempio la memoria o la CPU. Questa configurazione elimina l'hypervisor della macchina virtuale che assegna risorse fisiche alle macchine virtuali eseguite sull'host. Invece, tutte le risorse di una macchina bare metal sono dedicate esclusivamente al nodo di lavoro, quindi non devi preoccuparti dei "vicini rumorosi" che condividono risorse o rallentano le prestazioni. I server bare metal sono dedicati a te, con tutte le sue risorse disponibili per l'utilizzo del cluster.</dd>
-  <dt id="trusted_compute">{{site.data.keyword.containershort_notm}} con Trusted Compute</dt>
-    <dd><p>Se [distribuisci il tuo cluster su bare metal](cs_clusters.html#clusters_ui) che supporta Trusted Compute, puoi abilitare l'attendibilità. Il chip TPM (Trusted Platform Module) viene abilitato su ciascun nodo di lavoro bare metal nel cluster che supporta Trusted Compute (inclusi i futuri nodi che aggiungerai al cluster). Pertanto, dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente per il cluster. Un server di attendibilità viene distribuito sul nodo master e un agent di attendibilità viene distribuito come pod sul nodo di lavoro. All'avvio del nodo di lavoro, il pod dell'agent di attendibilità monitora ogni fase del processo.</p>
-    <p>Ad esempio, se un utente non autorizzato ottiene l'accesso al tuo sistema e modifica il kernel del sistema operativo con un'ulteriore logica per raccogliere i dati, l'agent di attendibilità individua questa modifica e contrassegna il nodo come non attendibile. Con il calcolo attendibile puoi verificare possibili tentativi di intrusione nei tuoi nodi di lavoro.</p>
-    <p><strong>Nota</strong>: Trusted Compute è disponibile per alcuni tipi di macchina bare metal selezionati. Ad esempio, le caratteristiche GPU `mgXc` non supportano Trusted Compute.</p></dd>
-  <dt id="encrypted_disks">Codifica del disco</dt>
-    <dd><p>Per impostazione predefinita, {{site.data.keyword.containershort_notm}} fornisce due partizioni di dati codificate SSD locali per tutti i nodi di lavoro quando ne viene eseguito il provisioning. La prima partizione non è codificata e la seconda montata in _/var/lib/docker_ viene sbloccata utilizzando le chiavi di codifica LUKS. Ogni nodo di lavoro in ogni cluster Kubernetes ha la propria chiave di codifica LUKS, gestita da {{site.data.keyword.containershort_notm}}. Quando crei un cluster o aggiungi un nodo di lavoro a un cluster esistente, le chiavi vengono trasmesse in modo sicuro e quindi scartate dopo che il disco codificato viene sbloccato.</p>
-    <p><b>Nota</b>: la codifica può influenzare le prestazioni I/O del disco. Per i carichi di lavoro che richiedono I/O del disco di elevate prestazioni, esegui il test di un cluster con la codifica sia abilitata che disabilitata per aiutarti a decidere se disattivarla.</p></dd>
-  <dt>Supporto per i firewall di rete dell'infrastruttura IBM Cloud (SoftLayer)</dt>
-    <dd>{{site.data.keyword.containershort_notm}} è compatibile con tutte le [offerte firewall dell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud-computing/bluemix/network-security). Su {{site.data.keyword.Bluemix_notm}} pubblico,
+Per proteggere la tua rete e limitare la gamma di danni che un utente può produrre quando gli viene concesso l'accesso a una rete, devi assicurarti che i tuoi carichi di lavoro siano il più isolati possibile e di limitare il numero di applicazioni e nodi di lavoro esposti pubblicamente.
+
+**Quale traffico di rete è consentito per il mio cluster, per impostazione predefinita?**</br>
+Tutti i contenitori sono protetti dalle [impostazioni della politica di rete Calico predefinite](cs_network_policy.html#default_policy) che sono configurate su ogni nodo di lavoro durante la creazione del cluster. Per impostazione predefinita, tutto il traffico di rete in uscita è consentito per tutti i nodi di lavoro. Il traffico di rete in entrata è bloccato, fatta eccezione per alcune porte che sono aperte per consentire a IBM di monitorare il traffico di rete e di installare automaticamente aggiornamenti di sicurezza per il master Kubernetes. L'accesso dal master Kubernetes al kubelet del nodo di lavoro è protetto da un tunnel OpenVPN. Per ulteriori informazioni, vedi l'[architettura di {{site.data.keyword.containerlong_notm}}](cs_tech.html).
+
+Se vuoi consentire il traffico di rete in entrata da Internet, devi esporre le tue applicazioni con [un servizio NodePort, un servizio LoadBalancer o un programma di bilanciamento del carico dell'applicazione Ingress](cs_network_planning.html#planning).  
+
+**Cos'è la segmentazione di rete e come posso configurarla per un cluster?** </br>
+La segmentazione di rete descrive l'approccio di dividere una rete in più sottoreti. Puoi raggruppare le applicazioni e i dati correlati a cui deve avere accesso uno specifico gruppo nella tua organizzazione. Le applicazioni eseguite in una sottorete non possono vedere o accedere alle applicazioni in un'altra sottorete. La segmentazione di rete limita anche l'accesso fornito a una persona interna o a software di terze parti e può limitare la gamma di attività dolose.   
+
+{{site.data.keyword.containerlong_notm}} fornisce delle VLAN dell'infrastruttura IBM Cloud (SoftLayer) che garantiscono delle prestazioni di rete di qualità e un isolamento della rete per i nodi di lavoro. Una VLAN configura un gruppo di
+nodi di lavoro come se fossero collegati con lo stesso cavo fisico. Le VLAN sono dedicate al tuo account {{site.data.keyword.Bluemix_notm}} e non sono condivise tra i clienti IBM. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare lo [spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](cs_users.html#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning di VLAN è già abilitato, usa il [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se stai utilizzando {{site.data.keyword.BluDirectLink}}, devi invece utilizzare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Per abilitare la VRF, contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer).
+
+Lo spanning delle VLAN è un'impostazione dell'account {{site.data.keyword.Bluemix_notm}} e può essere attivato o disattivato. Quando è attivato, tutti i cluster nel tuo account possono rilevarsi e comunicare tra loro. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Anche se ciò può essere utile per alcuni scenari, lo spanning delle VLAN rimuove la segmentazione di rete per i tuoi cluster.
+
+Esamina la seguente tabella per vedere le opzioni a tua disposizione relative a come ottenere la segmentazione di rete quando lo spanning delle VLAN è attivato.
+
+|Funzione di sicurezza|Descrizione|
+|-------|----------------------------------|
+|Configura le politiche di rete personalizzate con Calico|Puoi utilizzare l'interfaccia Calico integrata per [configurare le politiche di rete Calico personalizzate](cs_network_policy.html#network_policies) per i tuoi nodi di lavoro. Ad esempio, puoi consentire o bloccare il traffico di rete su specifiche interfacce di rete e per specifici pod o servizi. Per configurare le politiche di rete personalizzate, devi [installare la CLI <code> calicoctl </code>](cs_network_policy.html#cli_install).|
+|Supporto per i firewall di rete dell'infrastruttura IBM Cloud (SoftLayer)|{{site.data.keyword.containerlong_notm}} è compatibile con tutte le [offerte firewall dell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud-computing/bluemix/network-security). Su {{site.data.keyword.Bluemix_notm}} pubblico,
 puoi configurare un firewall con politiche di rete personalizzate per fornire
-una sicurezza di rete dedicata al tuo cluster standard e per rilevare e risolvere intrusioni di rete. Ad esempio, puoi scegliere di configurare un [VRA (Virtual Router Appliance)](/docs/infrastructure/virtual-router-appliance/about.html) ad agire come tuo firewall e bloccare il traffico indesiderato. Quando configuri un firewall, [devi anche aprire le porte e gli indirizzi IP necessari](cs_firewall.html#firewall) per ogni regione in modo che il master e i nodi di lavoro possano comunicare.</dd>
-  <dt>Mantieni i servizi privati o esponi selettivamente i sevizi e le applicazioni a internet pubblicamente</dt>
-    <dd>Puoi scegliere di mantenere privati i tuoi servizi e le tue applicazioni e di utilizzare le funzioni di sicurezza integrate
-per garantire la comunicazione protetta tra i nodi di lavoro e i pod. Per esporre i servizi e le applicazioni pubblicamente su internet, puoi utilizzare il supporto Ingress e il programma di bilanciamento del carico per
-rendere in modo sicuro i tuoi servizi pubblicamente disponibili.</dd>
-  <dt>Collega in modo sicuro i tuoi nodi di lavoro e applicazioni a un data center in loco</dt>
-    <dd><p>Per collegare i tuoi nodi di lavoro e le tue applicazioni a un data center in loco, puoi configurare un endpoint IPSec VPN con un servizio strongSwan, un Virtual Router Appliance o un Fortigate Security Appliance.</p>
-    <ul><li><b>Servizio VPN IPsec strongSwan</b>: puoi configurare un [Servizio VPN IPSec strongSwan ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.strongswan.org/) che collega in modo sicuro il tuo cluster Kubernetes a una rete in loco. Il servizio VPN IPSec strongSwan fornisce un canale di comunicazione end-to-end sicuro su Internet basato sulla suite di protocolli IPsec (Internet Protocol Security) standard del settore. Per configurare una connessione sicura tra il tuo cluster e una rete in loco, [configura e distribuisci il servizio VPN IPSec strongSwan](cs_vpn.html#vpn-setup) direttamente in un pod nel tuo cluster.
-    </li>
-    <li><b>Virtual Router Appliance (VRA) o Fortigate Security Appliance (FSA)</b>: puoi scegliere di configurare un [VRA](/docs/infrastructure/virtual-router-appliance/about.html) o un [FSA](/docs/infrastructure/fortigate-10g/about.html) per configurare un endpoint VPN IPSec. Questa opzione è utile quando hai un cluster più grande, vuoi accedere a risorse non Kubernetes tramite VPN o vuoi accedere a più cluster su una singola VPN. Per configurare un VRA, vedi [Configurazione della connettività VPN con VRA](cs_vpn.html#vyatta).</li></ul></dd>
+una sicurezza di rete dedicata al tuo cluster standard e per rilevare e risolvere intrusioni di rete. Ad esempio, puoi scegliere di configurare una [VRA (Virtual Router Appliance)](/docs/infrastructure/virtual-router-appliance/about.html) perché funga da tuo firewall e blocchi il traffico indesiderato. Quando configuri un firewall, [devi anche aprire le porte e gli indirizzi IP necessari](cs_firewall.html#firewall) per ogni regione in modo che il master e i nodi di lavoro possano comunicare.|
+{: caption="Opzioni di segmentazione della rete" caption-side="top"}
 
-  <dt>Registrazione e monitoraggio continuo dell'attività del cluster</dt>
-    <dd>Per i cluster standard, tutti gli eventi correlati al cluster possono essere registrati e inviati a {{site.data.keyword.loganalysislong_notm}} e {{site.data.keyword.monitoringlong_notm}}. Questi eventi includono l'aggiunta di un nodo di lavoro, lo stato di avanzamento dell'aggiornamento in sequenza o le informazioni sull'utilizzo della capacità. Puoi [configurare la registrazione del cluster](/docs/containers/cs_health.html#logging) e il [monitoraggio del cluster](/docs/containers/cs_health.html#view_metrics) per decidere quali eventi vuoi monitorare. </dd>
-</dl>
+** Cos'altro posso fare per ridurre l'area di esposizione ad attacchi esterni?**</br>
+Maggiore è il numero di applicazioni o nodi di lavoro che esponi pubblicamente e più complessa diventa la procedura che devi implementare per evitare attacchi dolosi esterni. Esamina la seguente tabella per trovare le opzioni relative a come mantenere private le applicazioni e i nodi di lavoro.
 
-<br />
+|Funzione di sicurezza|Descrizione|
+|-------|----------------------------------|
+|Limita il numero di applicazioni esposte|Per impostazione predefinita, le tue applicazioni e i tuoi servizi eseguiti all'interno del cluster non sono raggiungibili su Internet pubblico. Puoi scegliere se vuoi esporre le tue applicazioni al pubblico o se desideri che le tue applicazioni e i tuoi servizi siano raggiungibili solo sulla rete privata. Quando mantieni le tue applicazioni e i tuoi servizi privati, puoi avvalerti delle funzioni di sicurezza integrate per garantire delle comunicazioni protette tra i nodi di lavoro e i pod. Per esporre i servizi e le applicazioni a Internet pubblico, puoi avvalerti del [supporto Ingress e del programma di bilanciamento del carico](cs_network_planning.html#planning) per rendere i tuoi servizi pubblicamente disponibili. Assicurati che solo i servizi necessari siano esposti e rivisita l'elenco delle applicazioni esposte su base regolare per assicurarti che siano ancora valide. |
+|Mantieni i nodi di lavoro privati|Quando crei un cluster, ogni cluster viene automaticamente collegato a una VLAN privata. La VLAN privata determina l'indirizzo IP privato che viene assegnato a un nodo di lavoro. Puoi scegliere di mantenere i tuoi nodi di lavoro privati connettendoli solo a una VLAN privata. Le VLAN private nei cluster gratuiti sono gestite da IBM e le VLAN private nei cluster standard sono gestite da te nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). </br></br><strong>Attenzione:</strong> tieni presente che per comunicare con il master Kubernetes, e perché {{site.data.keyword.containerlong_notm}} funzioni correttamente, devi configurare la connettività pubblica a [URL e indirizzi IP specifici](cs_firewall.html#firewall_outbound). Per configurare questa connettività pubblica, puoi configurare un firewall, come ad esempio una VRA ([Virtual Router Appliance)](/docs/infrastructure/virtual-router-appliance/about.html) davanti ai tuoi nodi di lavoro e abilitare il traffico di rete a questi URL e indirizzi IP.|
+|Limita la connettività a Internet pubblico con i nodi edge|Per impostazione predefinita, ogni nodo di lavoro è configurato per accettare i pod dell'applicazione e il programma di bilanciamento del carico associato o i pod ingress. Puoi etichettare i nodi di lavoro come [nodi edge](cs_edge.html#edge) per forzare la distribuzione del programma di bilanciamento del carico e dei pod ingress solo a questi nodi di lavoro. Puoi inoltre [danneggiare i tuoi nodi di lavoro](cs_edge.html#edge_workloads) in modo che i pod dell'applicazione non possano eseguire pianificazioni sui nodi edge. Con i nodi edge, puoi isolare il carico di lavoro di rete su un numero inferiore di nodi di lavoro nel tuo cluster e mantenere privati gli altri nodi di lavoro nel cluster.|
+{: caption="Servizi privati e opzioni del nodo di lavoro" caption-side="top"}
 
+**Che devo fare se desidero connettere il mio cluster a un data center in loco?**</br>
+Per connettere i tuoi nodi di lavoro e le tue applicazioni a un data center in loco, puoi configurare un [endpoint IPSec VPN con un servizio strongSwan, una VRA (Virtual Router Appliance) o con una FSA (Fortgate Security Appliance)](cs_vpn.html#vpn).
 
-## Immagini
-{: #images}
+### Servizi LoadBalancer e Ingress
+{: #network_lb_ingress}
 
-Gestisci la sicurezza e l'integrità delle tue immagini con le funzioni di sicurezza integrate.
+Puoi utilizzare i servizi di rete LoadBalancer e Ingress per connettere le tue applicazioni a Internet pubblico oppure a reti private esterne, Esamina le seguenti impostazioni facoltative per i programmi di bilanciamento del carico e gli ALB Ingress che puoi utilizzare per soddisfare i requisiti di sicurezza delle applicazioni di backend o crittografare il traffico quando transita per il tuo cluster.
+
+**Posso utilizzare i gruppi di sicurezza per gestire il traffico di rete del mio cluster?** </br>
+Per utilizzare i servizi Ingress e LoadBalancer, utilizza le [politiche Calico e Kubernetes](cs_network_policy.html) per gestire il traffico di rete verso e dal tuo cluster. Non utilizzare i [gruppi di sicurezza](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups) dell'infrastruttura IBM Cloud (SoftLayer). I gruppi di sicurezza dell'infrastruttura IBM Cloud (SoftLayer) vengono applicati all'interfaccia di rete di un singolo server virtuale per filtrare il traffico a livello dell'hypervisor. Tuttavia, i gruppi di sicurezza non supportano il protocollo VRRP, che viene utilizzato da {{site.data.keyword.containerlong_notm}} per gestire l'indirizzo IP dei LoadBalancer. Se il protocollo VRRP non è presente per gestire l'IP LoadBalancer, i servizi Ingress e LoadBalancer non funzionano correttamente. Se non stai utilizzando i servizi Ingress o LoadBalancer e vuoi isolare completamente il tuo nodo di lavoro dal pubblico, puoi utilizzare i gruppi di sicurezza.
+
+**Come posso proteggere l'IP di origine all'interno del cluster?** </br>
+Per impostazione predefinita, l'indirizzo IP di origine della richiesta client non viene conservato. Quando una richiesta client alla tua applicazione viene inviata al tuo cluster, la richiesta viene instradata a un pod per il servizio di programma di bilanciamento del carico che espone l'ALB. Se sullo stesso nodo di lavoro del pod del servizio del programma di bilanciamento del carico non esiste un pod dell'applicazione, il programma di bilanciamento inoltra la richiesta a un pod dell'applicazione su un nodo di lavoro diverso. L'indirizzo IP di origine del pacchetto viene modificato con l'indirizzo IP pubblico del nodo di lavoro su cui è in esecuzione il pod dell'applicazione.
+
+La conservazione dell'IP del client è utile quando, ad esempio, i server delle applicazioni devono applicare le politiche di sicurezza e di controllo dell'accesso. Per conservare l'indirizzo IP di origine iniziale della richiesta client, puoi abilitare la conservazione dell'IP di origine per [i programmi di bilanciamento del carico](cs_loadbalancer.html#node_affinity_tolerations) o [gli ALB Ingress](cs_ingress.html#preserve_source_ip).
+
+**Come posso crittografare il traffico con TLS?** </br>
+Il servizio Ingress offre la terminazione TLS in due punti nel flusso del traffico:
+* [Decrittografa il pacchetto all'arrivo](cs_ingress.html#public_inside_2): per impostazione predefinita, l'ALB Ingress bilancia il carico del traffico di rete HTTP alle applicazioni nel tuo cluster. Per bilanciare anche il traffico delle connessioni HTTPS in entrata, puoi configurare l'ALB per decodificare il traffico di rete e inoltrare la richiesta decodificata alle applicazioni esposte nel tuo cluster. Se stai utilizzando il dominio secondario fornito da IBM, puoi utilizzare il certificato TLS fornito da IBM. Se stai utilizzando un dominio personalizzato, puoi utilizzare il tuo certificato TLS per gestire la terminazione TLS.
+* [Crittografa nuovamente il pacchetto prima che venga inoltrato alle applicazioni upstream](cs_annotations.html#ssl-services): l'ALB decrittografa le richieste HTTPS prima di inoltrare il traffico alle tue applicazioni. Se hai delle applicazioni che richiedono HTTPS e hanno bisogno che il traffico venga crittografato prima di essere inoltrato a queste applicazioni upstream, puoi utilizzare l'annotazione `ssl-services`. Se le tue applicazioni upstream possono gestire TLS, puoi facoltativamente fornire un certificato che è contenuto in un segreto TLS unidirezionale o di autenticazione reciproca.
+
+Per proteggere le comunicazioni tra i servizi, puoi utilizzare l'[autenticazione TLS reciproca di Istio![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://istio.io/docs/concepts/security/mutual-tls/). Istio è un servizio open source che offre agli sviluppatori un modo per connettere, proteggere, gestire e monitorare una rete di microservizi, nota anche come rete (mesh) di servizi, su piattaforme di orchestrazione cloud come Kubernetes.
+
+## Archiviazione persistente
+{: #storage}
+
+Quando esegui il provisioning di archiviazione persistente per archiviare i dati nel tuo cluster, i dati vengono crittografati automaticamente e gratuitamente quando vengono archiviati nella tua archiviazione blocchi o condivisione file. La crittografia include le istantanee e l'archiviazione replicata.
 {: shortdesc}
 
-<dl>
-<dt>Repository delle immagini privato Docker sicuro in {{site.data.keyword.registryshort_notm}}</dt>
-  <dd>Configura il tuo proprio repository delle immagini Docker in un registro delle immagini privato a più tenant, altamente disponibile e scalabile
-ospitato da IBM. Utilizzando il registro, puoi creare, archiviare in modo sicuro e condividere le immagini Docker tra più utenti del cluster.
-  <p>Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le immagini del contenitore.</p></dd>
-<dt>Conformità della sicurezza dell'immagine</dt>
-  <dd>Quando utilizzi {{site.data.keyword.registryshort_notm}},
-puoi utilizzare la scansione di sicurezza integrata fornita dal Controllo vulnerabilità. Ogni immagine trasmessa al tuo spazio dei nomi
-viene automaticamente scansionata alla ricerca di vulnerabilità
-con un database di problemi CentOS, Debian, Red Hat e Ubuntu conosciuti. Se vengono trovate delle vulnerabilità,
-il Controllo vulnerabilità fornisce le istruzioni su come risolverli per garantire la sicurezza e l'integrità dell'immagine.</dd>
-</dl>
+Per ulteriori informazioni sul modo in cui vengono crittografati i dati per lo specifico tipo di archiviazione, consulta i seguenti link.
+- [Archiviazione file NFS](/docs/infrastructure/FileStorage/block-file-storage-encryption-rest.html#securing-your-data-provider-managed-encryption-at-rest)
+- [Archiviazione blocchi](/docs/infrastructure/BlockStorage/block-file-storage-encryption-rest.html#securing-your-data-provider-managed-encryption-at-rest) </br>
 
-Per visualizzare la valutazione della vulnerabilità per le tue immagini, [consulta la documentazione del Controllo vulnerabilità](/docs/services/va/va_index.html#va_registry_cli).
+Puoi anche utilizzare un servizio di database {{site.data.keyword.Bluemix_notm}}, ad esempio [{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant), per mantenere i dati in un database gestito all'esterno del cluster. I dati che vengono archiviati con un servizio database cloud sono accessibili nei cluster, nelle zone e nelle regioni. Per le informazioni correlate alla sicurezza relative al database IBM Cloudant NoSQL, vedi la [documentazione del servizio](/docs/services/Cloudant/offerings/security.html#security).
 
-<br />
+## Monitoraggio e registrazione
+{: #monitoring_logging}
 
+La chiave per rilevare attacchi dolosi nel tuo cluster è il monitoraggio e la registrazione corretti di tutti gli eventi che si verificano nel cluster. Il monitoraggio e la registrazione possono inoltre aiutarti a comprendere la capacità del cluster e la disponibilità delle risorse per la tua applicazione in modo da poter pianificare di conseguenza per proteggere le tue applicazioni da un tempo di inattività.
+{: shortdesc}
 
-## Rete in cluster
-{: #in_cluster_network}
+**IBM monitora il mio cluster?**</br>
+Ogni master Kubernetes è continuamente monitorato da IBM per controllare e rimediare agli attacchi
+DOS (Denial-Of-Service) al livello del processo. {{site.data.keyword.containerlong_notm}} esegue automaticamente la scansione di ogni nodo in cui viene distribuito il master Kubernetes alla ricerca di vulnerabilità trovate nelle correzioni di sicurezza specifiche del sistema operativo e di Kubernetes. Se vengono trovate delle vulnerabilità,
+{{site.data.keyword.containerlong_notm}} automaticamente applica le correzioni
+e risolve le vulnerabilità per conto dell'utente per garantire la protezione del nodo master.  
 
-La comunicazione di rete in cluster protetta tra i nodi di lavoro e i pod viene realizzata mediante le VLAN (virtual local area network) private. Una VLAN configura un gruppo di
-nodi di lavoro come se fossero collegati con lo stesso cavo fisico.
-{:shortdesc}
+**Quali informazioni vengono registrate?**</br>
+Per i cluster standard, puoi [configurare l'inoltro dei log](/docs/containers/cs_health.html#logging) per tutti gli eventi correlati al cluster da origini differenti a {{site.data.keyword.loganalysislong_notm}} o a un altro server esterno in modo da poter filtrare e analizzare i tuoi log. Queste origini includono i log da:
 
-Quando crei un cluster, ogni cluster viene automaticamente collegato a una VLAN privata. La VLAN privata
-determina l'indirizzo IP privato assegnato a un nodo di lavoro durante la creazione del cluster.
+- **Contenitori**: i log che vengono scritti in STDOUT o STDERR.
+- **Applicazioni**: i log che vengono scritti in un percorso specifico all'interno della tua applicazione.
+- **Nodi di lavoro**: i log dal sistema operativo Ubuntu che vengono inviati a /var/log/syslog e /var/log/auth.log.
+- **Server API Kubernetes**: ogni azione correlata al cluster che viene inviata al server API Kubernetes viene registrata per motivi di controllo, inclusi la data/ora, l'utente e la risorsa interessata. Per ulteriori informazioni, consulta il documento relativo ai [log di controllo Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno") ](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
+- **Componenti di sistema Kubernetes**: i log da `kubelet`, da `kube-proxy` e da altri componenti che vengono eseguiti nello spazio dei nomi `kube-system`.
+- **Ingress**: i log per un programma di bilanciamento del carico dell'applicazione Ingress che gestisce il traffico di rete in arrivo in un cluster.
 
-|Tipo di cluster|Gestore della VLAN privata del cluster|
-|------------|-------------------------------------------|
-|Cluster gratuiti in {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
-|Cluster standard in {{site.data.keyword.Bluemix_notm}}|Tu nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) <p>**Suggerimento:** per avere accesso a tutte le VLAN nel tuo account, attiva lo [Spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).</p>|
-{: caption="Gestori delle VLAN private" caption-side="top"}
+Puoi scegliere quali eventi desideri registrare per il tuo cluster e la destinazione alla quale vuoi inoltrare i tuoi log. Per rilevare attività dolose e per verificare l'integrità del tuo cluster, devi analizzare continuamente i tuoi log.
 
-A tutti i pod distribuiti a un nodo di lavoro viene assegnato anche un indirizzo IP privato. Ai pod viene assegnato
-un IP nell'intervallo di indirizzi privati 172.30.0.0/16 e sono instradati solo tra i nodi di lavoro. Per evitare conflitti, non utilizzare questo intervallo di IP sui nodi che comunicano con i tuoi nodi di lavoro. I pod e i nodi di lavoro possono comunicare in modo sicuro nella rete privata utilizzando gli indirizzi IP
-privati. Tuttavia, quando un pod ha un arresto anomalo o un nodo di lavoro deve essere ricreato, viene assegnato un nuovo
-indirizzo IP.
+**Come posso monitorare l'integrità e le prestazioni del mio cluster?**</br>
+Puoi verificare la capacità e le prestazioni del tuo cluster monitorando i componenti e le risorse di calcolo del tuo cluster, come ad esempio l'utilizzo della CPU e della memoria. {{site.data.keyword.containerlong_notm}} invia automaticamente le metriche per i cluster standard a {{site.data.keyword.monitoringlong}} in modo da consentirti di [visualizzarle e analizzarle in Grafana](cs_health.html#view_metrics).
 
-Per impostazione predefinita, è difficile tenere traccia degli indirizzi IP privati mutevoli per le applicazioni che devono essere ad alta disponibilità. Per evitare questo, puoi utilizzare le funzioni di rilevamento del servizio Kubernetes integrate ed esporre le applicazioni come servizi IP cluster sulla rete privata. Un servizio Kubernetes raggruppa un insieme di pod e fornisce una connessione di rete a questi pod per altri servizi nel cluster senza esporre l'effettivo indirizzo IP privato di ciascun pod. Quando crei un servizio IP cluster, a esso viene assegnato un indirizzo IP privato dall'intervallo di
-indirizzi privati 10.10.10.0/24. Analogamente all'intervallo di indirizzi privati del pod, non utilizzare questo intervallo di IP sui nodi che comunicano con i tuoi nodi di lavoro. Questo indirizzo IP è accessibile soltanto all'interno del cluster. Non puoi
-accedere a questo indirizzo IP da internet. Contemporaneamente, viene creata una voce di ricerca DNS per il servizio
-e archiviata nel componente kube-dns del cluster. La voce DNS contiene il nome del servizio,
-lo spazio dei nomi in cui è stato creato il servizio e il link all'indirizzo IP del cluster privato assegnato.
+Puoi anche utilizzare gli strumenti integrati, quale la pagina dei dettagli di {{site.data.keyword.containerlong_notm}}, il dashboard Kubernetes oppure [configurare le integrazioni di terze parti](cs_integrations.html#health_services), quali Prometheus, Weave Scope e altri.
 
-Per accedere a un pod che si trova dietro a un servizio IP cluster, l'applicazione può utilizzare l'indirizzo IP cluster privato del servizio o inviare una richiesta utilizzando il nome del servizio. Quando utilizzi il nome del servizio, il nome viene ricercato nel componente
-kube-dns e instradato all'indirizzo IP del cluster privato del servizio. Quando una richiesta raggiunge il servizio,
-questo si assicura che tutte le richieste siano ugualmente inoltrate ai pod,
-indipendentemente dai loro indirizzi IP privati e che al nodo di lavoro a cui sono distribuiti.
+**Come possono controllare gli eventi che si verificano nel mio cluster?**</br>
+Puoi [configurare {{site.data.keyword.cloudaccesstraillong}} nel tuo cluster {{site.data.keyword.containerlong_notm}}](cs_at_events.html#at_events). Per ulteriori informazioni, visualizza la [documentazione di {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker/activity_tracker_ov.html#activity_tracker_ov).
 
-Per ulteriori informazioni su come creare servizio del tipo di IP
-cluster, consulta [Servizi Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types).
-
-Per collegare in modo sicuro le applicazioni in un cluster Kubernetes a una rete in loco, consulta [Configurazione della connettività VPN](cs_vpn.html#vpn). Per esporre le tue applicazioni per la comunicazione di rete esterna, vedi [Consentire l'accesso pubblico alle applicazioni](cs_network_planning.html#public_access). 
-
-
-<br />
-
-
-## Attendibilità del cluster
-{: cs_trust}
-
-Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} fornisce molte [funzioni per i tuoi componenti cluster](#cluster), quindi puoi distribuire le tue applicazioni inserite in un contenitore in ambiente altamente sicuro. Estendi il tuo livello di attendibilità nel tuo cluster per garantire ulteriormente che le operazioni che esegui all'interno del cluster sono effettivamente quelle che desideri eseguire. Puoi implementare l'attendibilità nel tuo cluster in diversi modi, come mostrato nel seguente diagramma.
-{:shortdesc}
+**Quali sono le mie opzioni per abilitare l'attendibilità nel mio cluster?** </br>
+Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} fornisce molte funzioni per i tuoi componenti cluster in modo da consentirti di distribuire le tue applicazioni inserite in un contenitore in un ambiente altamente sicuro. Estendi il tuo livello di attendibilità nel tuo cluster per garantire ulteriormente che le operazioni che esegui all'interno del cluster sono effettivamente quelle che desideri eseguire. Puoi implementare l'attendibilità nel tuo cluster in diversi modi, come mostrato nel seguente diagramma.
 
 ![Distribuzione dei contenitori con contenuti attendibili](images/trusted_story.png)
 
-1.  **{{site.data.keyword.containerlong_notm}} con Trusted Compute**: sui cluster bare metal, puoi abilitare l'attendibilità. L'agent di attendibilità monitora il processo di avvio dell'hardware e riporta le modifiche in modo che tu possa verificare i tentativi di intrusione nei tuoi nodi di lavoro bare metal. Con Trusted Compute, puoi distribuire i tuoi contenitori su host bare metal verificati in modo che i tuoi carichi di lavoro vengano eseguiti su hardware attendibile. Tieni presente che alcune macchine bare metal, come GPU, non supportano Trusted Compute. [Ulteriori informazioni su come funziona Trusted Compute](#trusted_compute).
+1.  **{{site.data.keyword.containerlong_notm}} con Trusted Compute**: suo nodi di lavoro bare metal, puoi abilitare l'attendibilità. L'agent di attendibilità monitora il processo di avvio dell'hardware e riporta le modifiche in modo che tu possa verificare i tentativi di intrusione nei tuoi nodi di lavoro bare metal. Con Trusted Compute, puoi distribuire i tuoi contenitori su host bare metal verificati in modo che i tuoi carichi di lavoro vengano eseguiti su hardware attendibile. Tieni presente che alcune macchine bare metal, come GPU, non supportano Trusted Compute. [Ulteriori informazioni su come funziona Trusted Compute](#trusted_compute).
 
 2.  **Attendibilità dei contenuti per le tue immagini**: assicura l'integrità delle tue immagini abilitando l'attendibilità dei contenuti nel tuo {{site.data.keyword.registryshort_notm}}. Con i contenuti attendibili, puoi controllare chi firma le immagini come attendibili. Una volta che i firmatari attendibili inseriscono un'immagine nel tuo registro, gli utenti possono estrarre il contenuto firmato in modo che possano verificare l'origine dell'immagine. Per ulteriori informazioni, vedi [Firma le immagini per i contenuti attendibili](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent).
 
 3.  **Container Image Security Enforcement (beta)**: crea un controller di ammissione con politiche personalizzate in modo che tu possa verificare le immagini del contenitore prima di distribuirle. Con Container Image Security Enforcement, controlli l'ubicazione da cui vengono distribuite le immagini e garantisci che soddisfano le politiche di [Controllo vulnerabilità](/docs/services/va/va_index.html) o i requisiti di [attendibilità dei contenuti](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent). Se una distribuzione non soddisfa le politiche che hai impostato, Security Enforcement impedisce le modifiche al tuo cluster. Per ulteriori informazioni, vedi [Applicazione della sicurezza dell'immagine del contenitore (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce).
 
-4.  **Programma di scansione vulnerabilità del contenitore**: per impostazione predefinita, Controllo vulnerabilità esegue la scansione delle immagini memorizzate in {{site.data.keyword.registryshort_notm}}. Per controllare lo stato dei contenitori attivi in esecuzione nel tuo cluster, puoi installare il programma di scansione del contenitore. Per ulteriori informazioni, vedi [Installazione del programma di scansione del contenitore](/docs/services/va/va_index.html#va_install_livescan).
+4.  **Programma di scansione vulnerabilità del contenitore**: per impostazione predefinita, Controllo vulnerabilità esegue la scansione delle immagini memorizzate in {{site.data.keyword.registryshort_notm}}. Per controllare lo stato dei contenitori attivi in esecuzione nel tuo cluster, puoi installare il programma di scansione del contenitore. Per ulteriori informazioni, vedi [Installazione del programma di scansione del contenitore](/docs/services/va/va_index.html#va_install_container_scanner).
 
-5.  **Analisi di rete con Security Advisor (anteprima)**: con {{site.data.keyword.Bluemix_notm}} Security Advisor, puoi centralizzare la sicurezza approfondita dai servizi {{site.data.keyword.Bluemix_notm}} come Controllo vulnerabilità e {{site.data.keyword.cloudcerts_short}}. Quando abiliti Security Advisor nel tuo cluster, puoi vedere i report relativi al traffico di rete sospetto in entrata e in uscita. Per ulteriori informazioni, vedi [Analisi di rete](/docs/services/security-advisor/network-analytics.html#network-analytics). Per eseguire l'installazione, vedi [Impostazione del monitoraggio degli indirizzi IP server e dei client sospetti per un cluster Kubernetes](/docs/services/security-advisor/setup_cluster.html). 
+5.  **Analisi di rete con il Security Advisor (anteprima)**: con {{site.data.keyword.Bluemix_notm}} Security Advisor, puoi centralizzare la sicurezza approfondita dai servizi {{site.data.keyword.Bluemix_notm}} come Controllo vulnerabilità e {{site.data.keyword.cloudcerts_short}}. Quando abiliti Security Advisor nel tuo cluster, puoi vedere i report relativi al traffico di rete sospetto in entrata e in uscita. Per ulteriori informazioni, vedi [Analisi di rete](/docs/services/security-advisor/network-analytics.html#network-analytics). Per eseguire l'installazione, vedi [Impostazione del monitoraggio degli indirizzi IP server e dei client sospetti per un cluster Kubernetes](/docs/services/security-advisor/setup_cluster.html).
 
-6.  **{{site.data.keyword.cloudcerts_long_notm}} (beta)**: se hai un cluster negli Stati Uniti Sud e desideri [esporre la tua applicazione utilizzando un dominio personalizzato con TLS](https://console.bluemix.net/docs/containers/cs_ingress.html#ingress_expose_public), puoi memorizzare il tuo certificato TLS in {{site.data.keyword.cloudcerts_short}}. Anche i certificati scaduti o che stanno per scadere possono essere riportati nel tuo Security Advisor. Per ulteriori informazioni, vedi [Introduzione a {{site.data.keyword.cloudcerts_short}}](/docs/services/certificate-manager/index.html#gettingstarted).
+6.  **{{site.data.keyword.cloudcerts_long_notm}} (beta)**: se hai un cluster negli Stati Uniti Sud e desideri [esporre la tua applicazione utilizzando un dominio personalizzato con TLS](cs_ingress.html#ingress_expose_public), puoi memorizzare il tuo certificato TLS in {{site.data.keyword.cloudcerts_short}}. Anche i certificati scaduti o che stanno per scadere possono essere riportati nel tuo Security Advisor. Per ulteriori informazioni, vedi [Introduzione a {{site.data.keyword.cloudcerts_short}}](/docs/services/certificate-manager/index.html#gettingstarted).
 
-<br />
 
+## Immagine e registro
+{: #images_registry}
+
+Ogni distribuzione è basata su un'immagine che contiene le istruzioni su come effettuare lo spin-up del contenitore che esegue la tua applicazione. Queste istruzioni includono il sistema operativo all'interno del contenitore e del software extra che vuoi installare. Per proteggere la tua applicazione, devi proteggere l'immagine e stabilire dei controlli per garantire l'integrità dell'immagine.
+{: shortdesc}
+
+**Come uso un registro pubblico o privato per archiviare le mie immagini?** </br>
+I registri pubblici, come ad esempio Docker Hub, possono essere utilizzati per iniziare a lavorare con le immagini Docker e Kubernetes per creare la tua prima applicazione inserita in un contenitore in un cluster. Quando si tratta però di applicazioni enterprise, evita i registri che non conosci o che non ritieni attendibili per proteggere il tuo cluster da immagini dolose. Tieni le tue immagini in un registro privato, come quello fornito in {{site.data.keyword.registryshort_notm}}, e assicurati di controllare l'accesso al registro e il contenuto dell'immagine di cui può essere eseguito il push.
+
+**Perché è importante controllare le immagini rispetto alle vulnerabilità?** </br>
+La ricerca mostra che la maggior parte degli attacchi dolosi sfrutta vulnerabilità software note e configurazioni di sistema deboli. Quando distribuisci un contenitore da un'immagine, il contenitore esegue lo spin-up con il sistema operativo e i file binari extra che hai descritto nell'immagine. Proprio come proteggi la tua macchina virtuale o fisica, devi eliminare le vulnerabilità note nel sistema operativo e nei file binari che usi all'interno del contenitore per proteggere la tua applicazione dall'accesso da parte di utenti non autorizzati. </br>
+
+Per proteggere le tue applicazioni, valuta lo stabilimento di un processo all'interno del tuo team per coprire le seguenti aree:
+
+1. **Scansione delle immagini prima della loro distribuzione in produzione:** </br>
+Assicurati di eseguire la scansione di ogni immagine prima di distribuire un contenitore da essa. Se vengono rilevate delle vulnerabilità, considera di eliminare le vulnerabilità o di bloccare la distribuzione per tali immagini. Stabilisci un processo in cui il contenuto dell'immagine deve essere approvato e dove puoi distribuire solo le immagini che superano i controlli di vulnerabilità.
+
+2. **Esegui regolarmente la scansione dei contenitori in esecuzione:** </br>
+Anche se hai distribuito un contenitore da un'immagine che supera il controllo delle vulnerabilità, il sistema operativo o i file binari in esecuzione nel contenitore potrebbero diventare vulnerabili nel tempo. Per proteggere la tua applicazione, devi assicurarti che i contenitori in esecuzione vengano scansionati regolarmente in modo da poter rilevare e correggere le vulnerabilità. A seconda dell'applicazione, per aggiungere ulteriore sicurezza, puoi stabilire un processo che rimuove i contenitori vulnerabili dopo che questi sono stati rilevati.
+
+**In che modo {{site.data.keyword.registryshort_notm}} può aiutarmi a proteggere le mie immagini e il processo di distribuzione?**  
+
+![Distribuzione dei contenitori con contenuti attendibili](images/cs_image_security.png)
+
+<table>
+<caption>Sicurezza per immagini e distribuzioni</caption>
+  <thead>
+    <th>Funzione di sicurezza</th>
+    <th>Descrizione</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Repository delle immagini privato Docker sicuro in {{site.data.keyword.registryshort_notm}}</td>
+      <td>Configura il tuo [repository delle immagini](/docs/services/Registry/index.html#index) Docker in un registro delle immagini privato a più tenant, altamente disponibile e scalabile ospitato e gestito da IBM. Utilizzando il registro, puoi creare, archiviare in modo sicuro e condividere le immagini Docker tra più utenti del cluster. </br></br>Ulteriori informazioni sulla [protezione delle tue informazioni personali](cs_secure.html#pi) quando utilizzi le immagini del contenitore.</td>
+    </tr>
+    <tr>
+      <td>Push delle sole immagini con contenuto attendibile</td>
+      <td>Garantisci l'integrità delle tue immagini abilitando l'[attendibilità dei contenuti](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent) nel tuo repository delle immagini. Con il contenuto attendibile, puoi controllare chi firma le immagini come attendibili ed eseguire il push di immagini a uno specifico spazio dei nomi del registro. Dopo che i firmatari attendibili hanno eseguito il push di un'immagine a uno spazio di nomi del registro, gli utenti possono estrarre il contenuto firmato in modo da poter verificare l'editore e l'integrità dell'immagine.</td>
+    </tr>
+    <tr>
+      <td>Scansioni delle vulnerabilità automatiche</td>
+      <td>Quando utilizzi {{site.data.keyword.registryshort_notm}}, puoi avvalerti della scansione di sicurezza integrata fornita dal [Controllo vulnerabilità](/docs/services/va/va_index.html#va_registry_cli). Ogni immagine di cui viene eseguito il push al tuo spazio dei nomi
+del registro viene automaticamente scansionata per rilevare eventuali vulnerabilità
+rispetto a un database di problemi CentOS, Debian, Red Hat e Ubuntu noti. Se vengono rilevate delle vulnerabilità,
+il Controllo vulnerabilità fornisce le istruzioni su come risolverli per garantire la sicurezza e l'integrità dell'immagine.</td>
+    </tr>
+    <tr>
+      <td>Blocco delle distribuzioni da immagini vulnerabili o utenti non attendibili</td>
+      <td>Crea un controller di ammissione con politiche personalizzate in modo da poter verificare le immagini del contenitore prima di distribuirle. Con [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce), controlli l'ubicazione da cui vengono distribuite le immagini e garantisci che soddisfano le politiche del Controllo vulnerabilità o i requisiti di attendibilità dei contenuti. Se una distribuzione non soddisfa le politiche da te impostate, il controller di ammissione blocca la distribuzione nel tuo cluster.</td>
+    </tr>
+    <tr>
+      <td>Scansione live dei contenitori</td>
+      <td>Per rilevare le vulnerabilità nei contenitori in esecuzione, puoi installare [ibmcloud-container-scanner](/docs/services/va/va_index.html#va_install_container_scanner). In modo simile alle immagini, puoi configurare lo scanner del contenitore per monitorare i contenitori per rilevare eventuali vulnerabilità in tutti gli spazi dei nomi del cluster. Quando vengono rilevate delle vulnerabilità, aggiorna l'immagine di origine e ridistribuisci il contenitore.</td>
+    </tr>
+  </tbody>
+  </table>
+
+
+## Isolamento e sicurezza del contenitore
+{: #container}
+
+**Cos'è uno spazio dei nomi Kubernetes e perché dovrei usarlo?** </br>
+Gli spazi dei nomi Kubernetes sono un modo per partizionare virtualmente un cluster e fornire l'isolamento per le tue distribuzioni e i gruppi di utenti che desiderano spostare il loro carico di lavoro nel cluster. Con gli spazi dei nomi, puoi organizzare le risorse nei nodi di lavoro e anche nelle zone nei cluster multizona.  
+
+Ogni cluster è configurato con i seguenti spazi dei nomi:
+- **default:** lo spazio dei nomi in cui viene distribuito tutto quanto non definisce uno spazio dei nomi specifico. Quando assegni il ruolo della piattaforma Visualizzatore, Editor oppure Operatore, l'utente può accedere allo spazio dei nomi default ma non agli spazi dei nomi `kube-system`, `ibm-system` o `ibm-cloud-cert`.
+- **kube-system e ibm-system:** questo spazio dei nomi contiene le distribuzioni e i servizi richiesti per Kubernetes e {{site.data.keyword.containerlong_notm}} per gestire il cluster. Gli amministratori del cluster possono utilizzare questo spazio dei nomi per rendere una risorsa Kubernetes disponibile negli spazi dei nomi.
+- **ibm-cloud-cert:** questo spazio dei nomi viene utilizzato per le risorse correlate a {{site.data.keyword.cloudcerts_long_notm}}.
+- **kube-public:** a questo spazio dei nomi possono accedere tutti gli utenti, anche quelli non autenticati presso il cluster. Devi prestare attenzione a distribuire le risorse in questo spazio dei nomi poiché potresti esporre il tuo cluster al rischio di essere compromesso.
+
+Gli amministratori del cluster possono configurare ulteriori spazi dei nomi nel cluster e personalizzarli in base alle loro esigenze. </br></br>
+**Importante:** per ogni spazio dei nomi che hai nel cluster, assicurati di configurare le opportune [politiche RBAC](cs_users.html#rbac) per limitare l'accesso a questo spazio dei nomi e controllare cosa viene distribuito e di impostare le opportune [quote di risorse![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) e gli [intervalli di limiti![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/).  
+
+**Devo configurare un cluster a singolo tenant o a più tenant?** </br>
+In un cluster a singolo tenant, crei un singolo cluster per ogni gruppo di persone che deve eseguire dei carichi di lavoro in un cluster. Di norma, questo team è responsabile della gestione del cluster e della sua adeguata configurazione e protezione. I cluster a più tenant utilizzano più spazi dei nomi per isolare i tenant e i loro carichi di lavoro.
+
+<img src="images/cs_single_multitenant.png" width="600" alt="Confronto tra cluster a singolo tenant e a più tenant" style="width:600px; border-style: none"/>
+
+I cluster a singolo tenant e a più tenant forniscono lo stesso livello di isolamento per i carichi di lavoro e vengono forniti più o meno con gli stessi costi. L'opzione giusta per te dipende dal numero di team che devono eseguire dei carichi di lavoro in un cluster, i loro requisiti di servizio e la dimensione del servizio.
+
+Un cluster a singolo tenant potrebbe essere la tua opzione se hai molti team con servizi complessi e ciascuno di essi deve avere il controllo sul ciclo di vita del cluster. Ciò include la libertà di decidere quando viene aggiornato un cluster o quali risorse possono essere distribuite al cluster. Tieni presente che la gestione di un cluster richiede una conoscenza approfondita dell'infrastruttura e di Kubernetes per garantire la capacità e la sicurezza per le tue distribuzioni.  
+
+I cluster a più tenant offrono il vantaggio che puoi usare lo stesso nome servizio in spazi dei nomi differenti, il che potrebbe tornare utile quando pianifichi di utilizzare lo spazio dei nomi per separare i tuoi ambienti di produzione, preparazione e sviluppo. Anche se di norma richiedono meno persone per gestire e amministrare il cluster, i cluster a più tenant spesso aggiungono maggiore complessità nelle seguenti aree:
+
+- **Accesso:** quando configuri più spazi dei nomi, devi configurare le appropriate politiche RBAC per ogni spazio dei nomi per garantire l'isolamento delle risorse. Le politiche RBAC sono complesse e richiedono una conoscenza approfondita di Kubernetes.
+- **Limitazione delle risorse di calcolo: ** per garantire che ogni team disponga delle risorse necessarie per distribuire i servizi ed eseguire le applicazioni nel cluster, devi configurare le [quote di risorse](https://kubernetes.io/docs/concepts/policy/resource-quotas/) per ogni spazio dei nomi. Le quote di risorse determinano i vincoli di distribuzione per uno spazio dei nomi, come il numero di risorse Kubernetes che puoi distribuire e la quantità di CPU e memoria che può essere utilizzata da tali risorse. Dopo che hai impostato una quota, gli utenti devono includere le richieste di risorse e i limiti nelle loro distribuzioni.
+- **Risorse cluster condivise:** se esegui più tenant in un singolo cluster, alcune risorse cluster, quali il programma di bilanciamento del carico dell'applicazione Ingress o gli indirizzi IP portatili disponibili, vengono condivise tra i tenant. I servizi più piccoli potrebbero avere difficoltà ad utilizzare le risorse condivise se devono competere con servizi di grandi dimensioni nel cluster.
+- **Aggiornamenti:** puoi eseguire una sola versione API Kubernetes alla volta. Tutte le applicazioni che vengono eseguite in un cluster devono conformarsi alla versione API Kubernetes attuale, indipendentemente dal team proprietario dell'applicazione. Quando vuoi aggiornare un cluster, devi assicurarti che tutti i team siano pronti a passare a una nuova versione API Kubernetes e che le applicazioni vengano aggiornate per operare con tale nuova versione. Questo significa anche che i singoli team hanno meno controllo sulla versione API Kubernetes che vogliono eseguire.
+- **Modifiche nella configurazione del cluster:** se vuoi modificare la configurazione del cluster oppure eseguire la migrazione a nuovi nodi di lavoro, devi distribuire tale modifica tra i tenant. Questa distribuzione richiede più riconciliazione e test che in un cluster a singolo tenant.
+- **Processo di comunicazione:** quando gestisci più tenant, considera l'impostazione di un processo di comunicazione per consentire ai tenant di sapere dove andare quando si verifica un problema con il cluster o quando hanno bisogno di più risorse per i loro servizi. Questo processo di comunicazione include anche l'informare i tuoi tenant delle modifiche nella configurazione del cluster o degli aggiornamenti pianificati.
+
+**Cos'altro posso fare per proteggere il mio contenitore?**
+
+|Funzione di sicurezza|Descrizione|
+|-------|----------------------------------|
+|Limita il numero di contenitori privilegiati|I contenitori vengono eseguiti come un processo Linux separato sull'host di calcolo che è isolato da altri processi. Sebbene gli utenti abbiano accesso root all'interno del contenitore, le autorizzazioni di tali utenti sono limitate al di fuori del contenitore per proteggere gli altri processi Linux, i file system host e i dispositivi host. Per una corretta esecuzione, alcune applicazioni richiedono l'accesso al file system host o delle autorizzazioni avanzate. Puoi eseguire i contenitori in modalità privilegiata per consentire al contenitore lo stesso accesso dei processi in esecuzione sull'host di calcolo. </br></br> <strong>Importante: </strong>tieni presente che i contenitori privilegiati possono causare notevoli danni al cluster e all'host di calcolo sottostante quando risultano compromessi. Prova a limitare il numero di contenitori che vengono eseguiti in modalità privilegiata e considera la modifica della configurazione per la tua applicazione in modo che l'applicazione possa essere eseguita senza autorizzazioni avanzate. Se vuoi bloccare l'esecuzione dei contenitori privilegiati nel tuo cluster, considera l'impostazione delle [politiche di sicurezza pod](cs_psp.html#customize_psp) personalizzate. |
+|Imposta i limiti di CPU e memoria per i contenitori|Ogni contenitore richiede una specifica quantità di CPU e memoria per un avvio corretto e per continuare l'esecuzione. Puoi definire i [limiti di risorse e le richieste di risorse Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) per i tuoi contenitori per limitare la quantità di CPU e memoria che il contenitore può utilizzare. Se non vengono impostati dei limiti per CPU e memoria, e il contenitore è occupato, il contenitore utilizza tutte le risorse disponibili. Questo elevato utilizzo di risorse potrebbe avere ripercussioni sugli altri contenuti nel nodo di lavoro che non dispongono di risorse sufficienti per un avvio o un'esecuzione appropriati ed espone il nodo di lavoro al rischio di attacchi DoS (denial-of-service).|
+|Applica le impostazioni di sicurezza del sistema operativo ai pod|Puoi aggiungere la sezione [<code>securityContext</code> ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) alla tua distribuzione del pod per applicare impostazioni della sicurezza specifiche per Linux al pod oppure a uno specifico contenitore all'interno del pod. Le impostazioni di sicurezza includono il controllo sull'ID utente e sull'ID gruppo che esegue gli script all'interno del contenitore, come ad esempio lo script entrypoint, sull'ID utente e sull'IP gruppo proprietario del percorso di montaggio del volume. </br></br><strong>Suggerimento:</strong> se vuoi utilizzare <code>securityContext</code> per impostare l'ID utente <code>runAsUser</code> o l'ID gruppo <code>fsGroup</code>, considera l'utilizzo dell'archiviazione blocchi quando [crei l'archiviazione persistente](cs_storage_block.html#add_block). L'archiviazione NFS non supporta <code>fsGroup</code> e <code>runAsUser</code> deve essere impostato a livello del contenitore, non a livello del pod. |
+{: caption="Altre protezioni di sicurezza" caption-side="top"}
 
 ## Archiviazione delle informazioni personali
 {: #pi}
@@ -264,16 +409,10 @@ Sei responsabile per la garanzia delle tue informazioni personali nelle immagini
 
 <dl>
   <dt>Utilizzo di un segreto Kubernetes per archiviare le informazioni personali</dt>
-  <dd>Archivia solo le informazioni personali nelle risorse Kubernetes progettate per contenere le informazioni personali. Ad esempio, non utilizzare il tuo nome nel nome di uno spazio di lavoro, una distribuzione, un servizio o una mappa di configurazione Kubernetes. Per una protezione e una codifica adeguate, archivia invece le informazioni personali nei <a href="cs_app.html#secrets">segreti Kubernetes</a>.</dd>
+  <dd>Archivia solo le informazioni personali nelle risorse Kubernetes progettate per contenere le informazioni personali. Ad esempio, non utilizzare il tuo nome nel nome di uno spazio di lavoro, una distribuzione, un servizio o una mappa di configurazione Kubernetes. Per una protezione e una codifica adeguate, archivia invece le informazioni personali nei <a href="cs_encrypt.html#secrets">segreti Kubernetes</a>.</dd>
 
   <dt>Utilizza un `imagePullSecret` Kubernetes per archiviare le credenziali del registro.</dt>
-  <dd>Non archiviare le informazioni personali in immagini del contenitore o negli spazi dei nomi del registro. Per una protezione e una codifica adeguate, archivia le credenziali del registro nei <a href="cs_images.html#other">imagePullSecret Kubernetes</a> e le altre informazioni personali invece nei <a href="cs_app.html#secrets">segreti Kubernetes</a>. Ricorda che se le informazioni personali sono archiviate in un livello precedente di un'immagine, l'eliminazione di un'immagine potrebbe non essere sufficiente per eliminare queste informazioni personali.</dd>
+  <dd>Non archiviare le informazioni personali in immagini del contenitore o negli spazi dei nomi del registro. Per una protezione e una codifica adeguate, archivia le credenziali del registro nei <a href="cs_images.html#other">imagePullSecret Kubernetes</a> e le altre informazioni personali invece nei <a href="cs_encrypt.html#secrets">segreti Kubernetes</a>. Ricorda che se le informazioni personali sono archiviate in un livello precedente di un'immagine, l'eliminazione di un'immagine potrebbe non essere sufficiente per eliminare queste informazioni personali.</dd>
   </dl>
 
-<br />
-
-
-
-
-
-
+Per configurare la crittografia per i tuoi segreti, vedi [Crittografia dei segreti Kubernetes mediante {{site.data.keyword.keymanagementserviceshort}}](cs_encrypt.html#keyprotect).

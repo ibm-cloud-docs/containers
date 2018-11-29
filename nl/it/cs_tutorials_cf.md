@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-05-24"
 # Esercitazione: Migrazione di un'applicazione da Cloud Foundry a un cluster
 {: #cf_tutorial}
 
-Puoi prendere un'applicazione che hai precedentemente distribuito utilizzando Cloud Foundry e distribuire lo stesso codice presente in un contenitore in un cluster Kubernetes in {{site.data.keyword.containershort_notm}}.
+Puoi prendere un'applicazione che hai precedentemente distribuito utilizzando Cloud Foundry e distribuire lo stesso codice presente in un contenitore in un cluster Kubernetes in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 
@@ -42,6 +42,7 @@ Questa esercitazione è progettata per gli sviluppatori dell'applicazione Cloud 
 - [Crea un
 cluster](cs_clusters.html#clusters_ui).
 - [Indirizza la tua CLI al cluster](cs_cli_install.html#cs_cli_configure).
+- [Assicurati di disporre del ruolo della piattaforma **Editor**, **Operatore** o **Amministratore**](cs_users.html#add_users_cli).
 - [Acquisisci informazioni sulla terminologia Docker e Kubernetes](cs_tech.html).
 
 
@@ -49,7 +50,7 @@ cluster](cs_clusters.html#clusters_ui).
 
 
 
-## Lezione 1: scarica il codice dell'applicazione
+## Lezione 1: Scarica il codice dell'applicazione
 
 Tieni il tuo codice pronto per l'utilizzo. Non hai ancora il codice? Puoi scaricare il codice iniziale da utilizzare in questa esercitazione.
 {: shortdesc}
@@ -68,7 +69,7 @@ Tieni il tuo codice pronto per l'utilizzo. Non hai ancora il codice? Puoi scaric
     a. Nel catalogo, in **Boilerplates**, fai clic su **Python Flask**. Questo contenitore tipo include un ambiente di runtime per le applicazioni Python 2 e Python 3.
 
     b. Immetti il nome dell'applicazione `cf-py-<name>` e fai clic su **CREATE**. Per accedere al codice dell'applicazione per il contenitore tipo, devi innanzitutto distribuire l'applicazione CF nel cloud. Puoi utilizzare qualsiasi nome per l'applicazione. Se utilizzi il nome proveniente dall'esempio, sostituisci `<name>` con un identificativo univoco, come `cf-py-msx`.
-    
+
     **Attenzione**: non utilizzare informazioni personali nei nomi dell'applicazione, del contenitore delle immagini o della risorsa Kubernetes.
 
     Quando viene distribuita l'applicazione, vengono visualizzate le istruzioni per scaricare, modificare e ridistribuire la tua applicazione con l'interfaccia riga di comando.
@@ -84,7 +85,7 @@ Il tuo codice applicazione è pronto per essere inserito nel contenitore!
 
 
 
-## Lezione 2: creazione di un'immagine Docker con il tuo codice applicazione
+## Lezione 2: Creazione di un'immagine Docker con il tuo codice applicazione
 
 Crea un Dockerfile che includa il tuo codice applicazione e le configurazioni necessarie per il tuo contenitore. Quindi, crea un'immagine Docker da tale Dockerfile e inseriscila nel tuo registro delle immagini privato.
 {: shortdesc}
@@ -129,7 +130,7 @@ computer. Il seguente esempio mostra come creare un file Dockerfile con l'editor
 4. Crea un'immagine Docker che includa il tuo codice applicazione e inseriscila nel tuo registro privato.
 
   ```
-  bx cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
   ```
   {: pre}
 
@@ -149,7 +150,7 @@ computer. Il seguente esempio mostra come creare un file Dockerfile con l'editor
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>Il tuo percorso privato, che include il tuo spazio dei nomi univoco e il nome dell'immagine. Per questo esempio, viene utilizzato lo stesso nome sia per l'immagine che per la directory dell'applicazione, ma puoi scegliere qualsiasi nome per l'immagine nel tuo registro privato. Se non sei sicuro di quale sia il tuo spazio dei nomi, esegui il comando `bx cr namespaces` per trovarlo.</td>
+  <td>Il tuo percorso privato, che include il tuo spazio dei nomi univoco e il nome dell'immagine. Per questo esempio, viene utilizzato lo stesso nome sia per l'immagine che per la directory dell'applicazione, ma puoi scegliere qualsiasi nome per l'immagine nel tuo registro privato. Se non sei sicuro di quale sia il tuo spazio dei nomi, esegui il comando `ibmcloud cr namespaces` per trovarlo.</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -159,7 +160,7 @@ contiene il Dockerfile, immetti un punto (.). Altrimenti, utilizza il percorso r
   </tbody>
   </table>
 
-  L'immagine viene creata nel tuo registro privato. Puoi eseguire il comando `bx cr images` per verificare che l'immagine sia stata creata.
+  L'immagine viene creata nel tuo registro privato. Puoi eseguire il comando `ibmcloud cr images` per verificare che l'immagine sia stata creata.
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -172,7 +173,7 @@ contiene il Dockerfile, immetti un punto (.). Altrimenti, utilizza il percorso r
 
 
 
-## Lezione 3: distribuzione di un contenitore dalla propria immagine
+## Lezione 3: Distribuzione di un contenitore dalla propria immagine
 
 Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 {: shortdesc}
@@ -225,7 +226,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>In `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, sostituisci &lt;registry_namespace&gt; con lo spazio dei nomi del tuo registro delle immagini privato. Se non sei sicuro di quale sia il tuo spazio dei nomi, esegui il comando `bx cr namespaces` per trovarlo.</td>
+  <td>In `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, sostituisci &lt;registry_namespace&gt; con lo spazio dei nomi del tuo registro delle immagini privato. Se non sei sicuro di quale sia il tuo spazio dei nomi, esegui il comando `ibmcloud cr namespaces` per trovarlo.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -253,7 +254,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
     a.  Ottieni l'indirizzo IP pubblico per il nodo di lavoro nel cluster.
 
     ```
-    bx cs workers <cluster_name>
+    ibmcloud ks workers <cluster_name>
     ```
     {: pre}
 
@@ -261,7 +262,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8
     ```
     {: screen}
 

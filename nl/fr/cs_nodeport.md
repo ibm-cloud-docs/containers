@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-05-24"
 
 
 
-# Exposition d'application avec des services NodePort
+# Exposition d'applications avec des ports de noeud (NodePort)
 {: #nodeport}
 
 Rendez votre application conteneurisée accessible sur Internet en utilisant l'adresse IP publique de n'importe quel noeud worker dans un cluster Kubernetes et en exposant un port de noeud (NodePort). Utilisez cette option pour tester {{site.data.keyword.containerlong}} et pour un accès public à court terme.
@@ -27,14 +27,14 @@ Rendez votre application conteneurisée accessible sur Internet en utilisant l'a
 ## Gestion de trafic réseau à l'aide de services NodePort
 {: #planning}
 
-Exposez un port public sur votre noeud worker et utilisez l'adresse IP publique du noeud worker pour un accès public au service dans le cluster depuis Internet.
+Exposez un port public sur votre noeud worker et utilisez l'adresse IP publique du noeud worker pour accéder au service du cluster depuis Internet.
 {:shortdesc}
 
 Lorsque vous exposez votre application en créant un service Kubernetes du type NodePort, une valeur de port de noeud (NodePort) comprise entre 30000 et 32767 et une adresse IP interne de cluster sont affectées au service. Le service NodePort fait office de point d'entrée externe pour les demandes entrantes vers votre application. Le port de noeud affecté est exposé au public dans les paramètres kubeproxy de chaque noeud worker dans le cluster. Chaque noeud worker commence à écouter sur le port de noeud affecté pour détecter des demandes entrantes pour le service. Pour accéder au service depuis Internet, vous pouvez utiliser l'adresse IP publique de n'importe quel noeud worker affectée lors de la création du cluster et le service NodePort au format `<IP_address>:<nodeport>`. En plus de l'adresse IP publique, un service NodePort est accessible via l'adresse IP privée d'un noeud worker.
 
 Le diagramme suivant montre comment la communication est dirigée vers une application depuis Internet lorsqu'un service NodePort est configuré :
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Exposition d'une application dans {{site.data.keyword.containershort_notm}} avec NodePort" style="width:550px; border-style: none"/>
+<img src="images/cs_nodeport_planning.png" width="550" alt="Exposition d'une application dans {{site.data.keyword.containerlong_notm}} en utilisant NodePort" style="width:550px; border-style: none"/>
 
 1. Une demande est envoyée à votre application en utilisant l'adresse IP publique de votre noeud worker et le port de noeud (NodePort) sur le noeud worker.
 
@@ -49,7 +49,7 @@ Le diagramme suivant montre comment la communication est dirigée vers une appli
 <br />
 
 
-## Activation de l'accès public à une application à l'aide d'un service NodePort
+## Activation de l'accès à une application à l'aide d'un service NodePort
 {: #config}
 
 Vous pouvez exposer votre application en tant que service Kubernetes NodePort pour les clusters gratuits ou standard.
@@ -57,7 +57,7 @@ Vous pouvez exposer votre application en tant que service Kubernetes NodePort po
 
 Si vous n'avez pas encore d'application prête, vous pouvez utiliser l'exemple d'application Kubernetes intitulé [Guestbook ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml).
 
-1.  Dans le fichier de configuration de votre application, définissez une section [service ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/service/). **Remarque** : Dans l'exemple Guestbook, il existe une section de service front-end dans le fichier de configuration. Pour rendre l'application Guestbook disponible en externe, ajoutez le type NodePort et un port de noeud compris entre 30000 et 32767 dans la section de service front-end.
+1.  Dans le fichier de configuration de votre application, définissez une section [service ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/service/). **Remarque** : dans l'exemple Guestbook, il existe une section de service front-end dans le fichier de configuration. Pour rendre l'application Guestbook disponible en externe, ajoutez le type NodePort et un port de noeud compris entre 30000 et 32767 dans la section de service front-end.
 
     Exemple :
 
@@ -95,7 +95,7 @@ Si vous n'avez pas encore d'application prête, vous pouvez utiliser l'exemple d
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td>Remplacez <code><em>&lt;my-selector-key&gt;</em></code> et <code><em>&lt;my-selector-value&gt;</em></code> par la paire clé/valeur que vous avez utilisée dans la section <code>spec.template.metadata.labels</code> de votre fichier YAML de déploiement.
+      <td>Remplacez <code><em>&lt;my-selector-key&gt;</em></code> et <code><em>&lt;my-selector-value&gt;</em></code> par la paire clé/valeur que vous avez utilisée dans la section <code>spec.template.metadata.labels</code> de votre fichier YAML de déploiement. Pour associer le service au déploiement, le sélecteur doit correspondre aux libellés du déploiement.
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -113,12 +113,12 @@ Si vous n'avez pas encore d'application prête, vous pouvez utiliser l'exemple d
 
 **Etape suivante ?**
 
-Une fois l'application déployée, vous pouvez utiliser l'adresse IP publique de n'importe quel noeud worker et la valeur NodePort pour composer l'URL publique d'accès à l'application dans un navigateur.
+Une fois l'application déployée, vous pouvez utiliser l'adresse IP publique de n'importe quel noeud worker et la valeur NodePort pour composer l'URL publique d'accès à l'application dans un navigateur. Si vos noeuds worker sont connectés uniquement à un VLAN privé, un service NodePort privé a été créé et peut être accessible via l'adresse IP privée d'un noeud worker.
 
-1.  Extrayez l'adresse IP publique d'un noeud worker dans le cluster.
+1.  Obtenez l'adresse IP publique d'un noeud worker dans le cluster. Si vous souhaitez accéder au noeud worker sur un réseau privé, obtenez l'adresse IP privée à la place.
 
     ```
-    bx cs workers <cluster_name>
+    ibmcloud ks workers <cluster_name>
     ```
     {: pre}
 
@@ -158,4 +158,4 @@ Une fois l'application déployée, vous pouvez utiliser l'adresse IP publique de
     Dans cet exemple, la valeur de NodePort est `30872`.</br>
     **Remarque :** si la section **Endpoints** affiche `<none>`, vérifiez les éléments `<selectorkey>` et `<selectorvalue>` que vous avez utilisés dans la section `spec.selector` du service NodePort. Assurez-vous qu'ils sont identiques à la paire _clé/valeur_ que vous avez utilisée à la section `spec.template.metadata.labels` de votre fichier YAML de déploiement.
 
-3.  Composez l'URL avec l'une des adresses IP publiques de noeud worker et la valeur NodePort. Exemple : `http://192.0.2.23:30872`
+3.  Formez l'adresse URL avec l'une des adresses IP du noeud worker et la valeur de NodePort. Exemple : `http://192.0.2.23:30872`

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -43,7 +43,7 @@ Dipende da cosa elimini e dal tipo di fatturazione. Se elimini la PVC e il PV ma
 * Quando ripulisci l'archiviazione persistente, elimini tutti i dati in essa archiviati. Se hai bisogno di una copia dei dati, crea un backup per l'[archiviazione file](cs_storage_file.html#backup_restore) o l'[archiviazione blocchi](cs_storage_block.html#backup_restore).
 * Se utilizzi un account {{site.data.keyword.Bluemix_dedicated}}, devi richiedere l'eliminazione del volume [aprendo un ticket di supporto](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
 
 Per ripulire i dati persistenti:
 
@@ -173,7 +173,7 @@ Per ripulire i dati persistenti:
    ```
    {: pre}
      
-9. Verifica che l'istanza di archiviazione fisica venga rimossa. Questo processo potrebbe impiegare qualche minuto. 
+9. Verifica che l'istanza di archiviazione fisica venga rimossa. **Nota**: il completamento del processo di eliminazione potrebbe richiedere alcuni giorni. 
 
    **Archiviazione file:** 
    ```

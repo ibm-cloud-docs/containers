@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -66,7 +66,7 @@ políticas permitem que os usuários criem e atualizem os pods privilegiados e n
 É possível modificar essas funções RBAC para remover ou incluir administradores, usuários, serviços ou nós na política.
 
 Antes de iniciar: 
-*  [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
+*  [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
 *  Entender trabalhar com funções RBAC. Para obter mais informações, consulte [Autorizando usuários com funções RBAC customizadas do Kubernetes](cs_users.html#rbac) ou a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 *  **Nota**: quando você modifica a configuração padrão, é possível evitar ações de cluster importantes, como implementações de pod ou atualizações de cluster. Teste suas mudanças em um cluster não de produção do qual as outras equipes não dependem.
 

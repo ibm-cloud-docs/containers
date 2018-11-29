@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -123,7 +123,7 @@ Par défaut, {{site.data.keyword.containerlong_notm}} configure votre cluster av
 **Pourquoi utiliser cette configuration ?**
 
 * Vous disposez d'une application dans un cluster à zone unique. Vous souhaitez exposer cette application uniquement sur les pods figurant dans le cluster ou dans d'autres clusters connectés au même VLAN privé.
-* Vous disposez d'une application dans un cluster à zones multiples. Vous souhaitez exposer cette application uniquement sur les pods figurant dans le cluster ou dans d'autres clusters connectés aux mêmes VLAN privés que votre cluster. 
+* Vous disposez d'une application dans un cluster à zones multiples. Vous souhaitez exposer cette application uniquement sur les pods figurant dans le cluster ou dans d'autres clusters connectés aux mêmes VLAN privés que votre cluster. Cependant, comme la fonction [Spanning VLAN](cs_subnets.html#subnet-routing) doit être activée pour les clusters à zones multiples, d'autres systèmes connectés à un VLAN privé dans le même compte IBM Cloud peuvent accéder au cluster. Vous souhaitez donc isoler votre cluster à zones multiples pour éviter que d'autres systèmes puissent y accéder.
 
 **Quelles sont mes options pour la gestion de l'accès public et privé à mon cluster ?**</br>Les sections suivantes décrivent les fonctions d'{{site.data.keyword.containerlong_notm}} que vous pouvez utiliser pour configurer les réseaux privés uniquement et bloquer les réseaux publics pour les clusters connectés à un VLAN public et un VLAN privé.
 

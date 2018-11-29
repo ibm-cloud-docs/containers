@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -125,7 +125,7 @@ Por padrão, o {{site.data.keyword.containerlong_notm}} configura seu cluster co
 ** Por que posso usar essa configuração? **
 
 * Você tem um app em um cluster de zona única. Você deseja expor o app somente aos pods dentro do cluster ou em outros clusters que estão conectados à mesma VLAN privada.
-* Você tem um app em um cluster de múltiplas zonas. Você deseja expor o app somente aos pods dentro do cluster ou em outros clusters que estão conectados às mesmas VLANs privadas que o seu cluster. 
+* Você tem um app em um cluster de múltiplas zonas. Você deseja expor o app somente aos pods dentro do cluster ou em outros clusters que estão conectados às mesmas VLANs privadas que o seu cluster. No entanto, como o [VLAN Spanning](cs_subnets.html#subnet-routing) deve ser ativado para clusters de múltiplas zonas, outros sistemas que estão conectados a qualquer VLAN privada na mesma conta do IBM Cloud podem acessar o cluster. Você deseja isolar seu cluster de múltiplas zonas de outros sistemas.
 
 **Quais são as minhas opções para gerenciar o acesso público e privado ao meu cluster?**</br>As seções a seguir descrevem os recursos no {{site.data.keyword.containerlong_notm}} que podem ser usados para configurar a rede somente privada e bloquear a rede pública para clusters que estão conectados a uma VLAN pública e uma privada.
 
@@ -136,7 +136,7 @@ A interface de rede pública para os nós do trabalhador é protegida por [confi
 
 Se você desejar expor os seus apps somente em uma rede privada, será possível criar os serviços privados NodePort, LoadBalancer ou Ingress. Para obter mais informações sobre como planejar a rede privada, consulte [Planejando a rede privada para uma configuração de VLAN pública e privada](cs_network_planning.html#private_both_vlans).
 
-No entanto, as políticas de rede padrão do Calico também permitem o tráfego de rede pública de entrada da Internet para esses serviços. É possível criar políticas do Calico para, em vez disso, bloquear todo o tráfego público para os serviços. Por exemplo, um serviço NodePort abre uma porta em um nó trabalhador por meio do endereço IP privado e público do nó do trabalhador. Um serviço de balanceador de carga com um endereço IP privado móvel abre um NodePort público aberto em cada nó do trabalhador. Deve-se criar uma [política de rede preDNAT do Calico](cs_network_policy.html#block_ingress) para bloquear os NodePorts públicos.
+No entanto, as políticas de rede padrão do Calico também permitem o tráfego de rede pública de entrada da Internet para esses serviços. É possível criar políticas do Calico para, em vez disso, bloquear todo o tráfego público para os serviços. Por exemplo, um serviço NodePort abre uma porta em um nó trabalhador por meio do endereço IP privado e público do nó do trabalhador. Um serviço de balanceador de carga com um endereço IP privado móvel abre um NodePort público em cada nó do trabalhador. Deve-se criar uma [política de rede preDNAT do Calico](cs_network_policy.html#block_ingress) para bloquear os NodePorts públicos.
 
 Como um exemplo, vamos supor que você criou um serviço de balanceador de carga privado. Você também criou uma política preDNAT do Calico para bloquear o tráfego público de atingir os NodePorts públicos abertos pelo balanceador de carga. Esse balanceador de carga privado pode ser acessado por:
 * [ Qualquer pod no mesmo cluster ](#in-cluster)

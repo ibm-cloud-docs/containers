@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-12"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -53,6 +53,7 @@ lastupdated: "2018-09-12"
 **必须使用多专区集群吗？**</br>
 不是。您可以根据需要创建任意数量的单专区集群。实际上，为了简化管理，或者在集群必须位于特定[单专区城市](cs_regions.html#zones)中时，您可能更愿意使用单专区集群。
 
+
 ## 多专区集群
 {: #multizone}
 
@@ -74,6 +75,7 @@ lastupdated: "2018-09-12"
 {: #mz_setup}
 
 <img src="images/cs_cluster_multizone.png" alt="多专区集群的高可用性" width="500" style="width:500px; border-style: none"/>
+
 
 您可以向集群添加更多专区，以在一个区域内跨多个专区的工作程序池中复制工作程序节点。多专区集群旨在跨工作程序节点和专区均匀安排 pod，以确保可用性和故障恢复。如果工作程序节点未跨专区均匀分布，或者其中一个专区中的容量不足，那么 Kubernetes 调度程序可能无法安排所有请求的 pod。结果，pod 可能会进入**暂挂**状态，直到有足够的容量可用为止。如果要更改缺省行为，以使 Kubernetes 调度程序在多个专区中以最佳分布方式分布 pod，请使用 `preferredDuringSchedulingIgnoredDuringExecution` [pod 亲缘关系策略](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)。
 
@@ -100,9 +102,9 @@ lastupdated: "2018-09-12"
 **如何允许用户通过公共因特网访问应用程序？**</br>
 可以使用 Ingress 应用程序负载均衡器 (ALB) 或 LoadBalancer 服务来公开应用程序。
 
-缺省情况下，会自动在集群的每个专区中创建并启用公共 ALB。此外，还会自动创建并部署集群的 Cloudflare 多专区负载均衡器 (MZLB)，从而对于每个区域存在 1 个 MZLB。MZLB 将 ALB 的 IP 地方放在同一主机名后，并且在这些 IP 地址上启用运行状况检查以确定它们是否可用。例如，如果工作程序节点位于美国东部区域的 3 个专区中，那么主机名 `yourcluster.us-east.containers.appdomain.cloud` 具有 3 个 ALB IP 地址。MZLB 运行状况检查会检查区域的每个专区中的公共 ALB IP，并根据这些运行状况检查使 DNS 查找结果保持更新。有关更多信息，请参阅 [Ingress 组件和体系结构](cs_ingress.html#planning)。
+- **Ingress 应用程序负载均衡器 (ALB)：**缺省情况下，会自动在集群的每个专区中创建并启用公共 ALB。此外，还会自动创建并部署集群的 Cloudflare 多专区负载均衡器 (MZLB)，从而对于每个区域存在 1 个 MZLB。MZLB 将 ALB 的 IP 地方放在同一主机名后，并且在这些 IP 地址上启用运行状况检查以确定它们是否可用。例如，如果工作程序节点位于美国东部区域的 3 个专区中，那么主机名 `yourcluster.us-east.containers.appdomain.cloud` 具有 3 个 ALB IP 地址。MZLB 运行状况检查会检查区域的每个专区中的公共 ALB IP，并根据这些运行状况检查使 DNS 查找结果保持更新。有关更多信息，请参阅 [Ingress 组件和体系结构](cs_ingress.html#planning)。
 
-LoadBalancer 服务只需在一个专区中设置。应用程序的入局请求会从一个专区路由到其他专区中的所有应用程序实例。如果此专区变得不可用，那么可能无法通过因特网访问应用程序。考虑到单专区故障，您可以在其他专区中设置更多 LoadBalancer 服务。有关更多信息，请参阅高可用性 [LoadBalancer 服务](cs_loadbalancer.html#multi_zone_config)。
+- **LoadBalancer 服务：**LoadBalancer 服务只需在一个专区中设置。应用程序的入局请求会从一个专区路由到其他专区中的所有应用程序实例。如果此专区变得不可用，那么可能无法通过因特网访问应用程序。考虑到单专区故障，您可以在其他专区中设置更多 LoadBalancer 服务。有关更多信息，请参阅高可用性 [LoadBalancer 服务](cs_loadbalancer.html#multi_zone_config)。
 
 **是否可为多专区集群设置持久性存储器？**</br>
 对于高可用性持久性存储器，请使用云服务，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)。
@@ -208,16 +210,17 @@ NFS 文件和块存储器不可跨专区共享。持久性卷只能在实际存�
 缺省情况下，{{site.data.keyword.containerlong_notm}} 将集群设置为具有专用 VLAN 和公用 VLAN 的访问权。专用 VLAN 用于确定分配给每个工作程序节点的专用 IP 地址，这将为每个工作程序节点提供一个专用网络接口。
 公用 VLAN 允许工作程序节点自动、安全地连接到主节点。
 
+如果要锁定集群以允许专用 VLAN 上的专用流量，但阻止公用 VLAN 上的公共流量，那么可以[使用 Calico 网络策略保护集群不被公共访问](cs_network_cluster.html#both_vlans_private_services)。这些 Calico 网络策略不会阻止工作程序节点与主节点进行通信。通过[将联网工作负载隔离到边缘工作程序节点](cs_edge.html)，您还可以限制集群中漏洞的浮现，而无需锁定公共流量。
 
 如果想要创建仅具有专用 VLAN 访问权的集群，那么可创建单专区或多专区专用集群。但是，在工作程序节点仅连接到专用 VLAN 时，工作程序节点无法自动连接到主节点。必须配置网关设备以在工作程序节点和主节点之间提供网络连接。
 **注**：您无法将连接到公共和专用 VLAN 的集群转换为仅专用。从集群除去所有公用 VLAN 将导致多个集群组件停止工作。必须使用以下步骤来创建新集群。
 
 如果想要创建仅具有专用 VLAN 访问权的集群：
 
-1.  查看[规划仅专用集群联网](cs_network_planning.html#private_vlan)
+1.  查看[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。
 2.  针对网络连接配置网关设备。请注意，您必须在防火墙中[打开必需的端口和 IP 地址](cs_firewall.html#firewall_outbound)并针对子网[启用 VLAN 生成](cs_subnets.html#vra-routing)。
 3.  通过包含 `--private-only` 标志，[使用 CLI 创建集群](cs_clusters.html#clusters_cli)。
-4.  如果想要使用专用 NodePort、LoadBalancer 或 Ingress 服务向专用网络公开应用程序，那么请查看[针对仅专用 VLAN 设置规划专用外部联网](cs_network_planning.html#private_vlan)。该服务仅可供专用 IP 地址进行访问，必须在防火墙中配置端口以使用专用 IP 地址。
+4.  如果想要使用专用 NodePort、LoadBalancer 或 Ingress 服务向专用网络公开应用程序，请查看[针对仅专用 VLAN 设置规划专用外部联网](cs_network_planning.html#private_vlan)。该服务仅可供专用 IP 地址进行访问，必须在防火墙中配置端口以使用专用 IP 地址。
 
 
 ## 工作程序池和工作程序节点
@@ -266,7 +269,7 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 共享节点通常比专用节点更便宜，因为底层硬件的开销由多个客户分担。但是，在决定是使用共享还是专用节点时，可能需要咨询您的法律部门，以讨论应用程序环境所需的基础架构隔离和合规性级别。
 
 **VM 有哪些常规功能部件？**</br>
-虚拟机使用本地磁盘（而不是存储区联网 (SAN)）来实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。每个 VM 具备 1000Mbps 联网速度、用于操作系统文件系统的 25 GB 主本地磁盘存储和用于数据（例如，容器运行时和 `kubelet`）的 100 GB 辅助本地磁盘存储。
+虚拟机使用本地磁盘（而不是存储区联网 (SAN)）来实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。每个 VM 具备 1000Mbps 联网速度、用于操作系统文件系统的 25 GB 主本地磁盘存储和用于数据（例如，容器运行时和 `kubelet`）的 100 GB 辅助本地磁盘存储。工作程序节点上的本地存储器仅用于短期处理，更新或重新装入工作程序节点时将擦除主磁盘和辅助磁盘。对于持久性存储器解决方案，请参阅[规划高可用性持久性存储器](cs_storage_planning.html#storage_planning)。
 
 **如果我拥有不推荐使用的 `u1c` 或 `b1c` 机器类型该怎么办？**</br>要开始使用 `u2c` 和 `b2c` 机器类型，请[通过添加工作程序节点来更新机器类型](cs_cluster_update.html#machine_type)。
 
@@ -318,7 +321,7 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>虚拟，c2c.16x32</strong>：如果想要针对轻型到中型工作负载近似均衡来自工作程序节点的 CPU 和内存资源，请使用此类型模板。</td></td>
+<td><strong>虚拟，c2c.16x32</strong>：如果想要针对轻型到中型工作负载提供工作程序节点中比率为 1:2 的 CPU 和内存资源，请使用此类型模板。</td></td>
 <td>16 / 32GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
@@ -328,8 +331,8 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>虚拟，c2c.32x64</strong>：如果想要针对中型工作负载近似均衡来自工作程序节点的 CPU 和内存资源，请使用此类型模板。</td></td>
-<td>16 / 16GB</td>
+<td><strong>虚拟，c2c.32x64</strong>：如果想要针对中型工作负载提供工作程序节点中比率为 1:2 的 CPU 和内存资源，请使用此类型模板。</td></td>
+<td>32 / 64GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
@@ -343,13 +346,13 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 {: shortdesc}
 
 **裸机与 VM 有何不同？**</br>
-通过裸机，您可以直接访问机器上的物理资源，例如内存或 CPU。此设置无需虚拟机系统管理程序将物理资源分配给在主机上运行的虚拟机。相反，裸机机器的所有资源都仅供工作程序专用，因此您无需担心“吵闹的邻居”共享资源或降低性能。物理机器类型的本地存储器大于虚拟机，并且某些类型具有用于备份本地数据的 RAID。
+通过裸机，您可以直接访问机器上的物理资源，例如内存或 CPU。此设置无需虚拟机系统管理程序将物理资源分配给在主机上运行的虚拟机。相反，裸机机器的所有资源都仅供工作程序专用，因此您无需担心“吵闹的邻居”共享资源或降低性能。物理机器类型的本地存储器大于虚拟机，并且某些类型具有用于提高数据可用性的 RAID。工作程序节点上的本地存储器仅用于短期处理，更新或重新装入工作程序节点时将擦除主磁盘和辅助磁盘。对于持久性存储器解决方案，请参阅[规划高可用性持久性存储器](cs_storage_planning.html#storage_planning)。
 
 **除了更优秀的性能规格外，是否有些事情是裸机能做而 VM 无法做到的？**</br>
 可以。利用裸机，可以选择启用“可信计算”来验证工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。可以创建不含信任的新集群。有关节点启动过程中的信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containerlong_notm}}](cs_secure.html#trusted_compute)。在运行 Kubernetes V1.9 或更高版本并具有特定裸机机器类型的集群上，可信计算可用。运行 `ibmcloud ks machine-types <zone>` [命令](cs_cli_reference.html#cs_machine_types)后，可以通过查看 **Trustable** 字段来了解哪些机器支持信任。例如，`mgXc` GPU 类型模板不支持可信计算。
 
 **裸机听起来很不错！现在，有什么阻止我订购？**</br>
-裸机服务器比虚拟服务器更昂贵，最适用于需要更多资源和主机控制的高性能应用程序。 
+裸机服务器比虚拟服务器更昂贵，最适用于需要更多资源和主机控制的高性能应用程序。
 
 **重要信息**：裸机服务器按月计费。如果您在月底之前取消裸机服务器，那么仍将收取该整月的费用。订购和取消裸机服务器是通过 IBM Cloud Infrastructure (SoftLayer) 帐户进行的手动过程。完成此过程可能需要超过一个工作日的时间。
 
@@ -394,13 +397,13 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>数据密集型裸机，md1c.16x64.4x4tb</strong>：适用于需要大量本地磁盘存储的情况，包括用于备份机器上本地存储的数据的 RAID。用于分布式文件系统、大型数据库和大数据分析工作负载等用例。</td>
+<td><strong>数据密集型裸机，md1c.16x64.4x4tb</strong>：要将大量本地磁盘存储（包括用于提高数据可用性的 RAID）用于分布式文件系统、大型数据库和大数据分析等工作负载，请使用此类型。</td>
 <td>16 / 64 GB</td>
 <td>2 个 2 TB RAID1 / 4 个 4 TB SATA RAID10</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>数据密集型裸机，md1c.28x512.4x4tb</strong>：适用于需要大量本地磁盘存储的情况，包括用于备份机器上本地存储的数据的 RAID。用于分布式文件系统、大型数据库和大数据分析工作负载等用例。</td>
+<td><strong>数据密集型裸机，md1c.28x512.4x4tb</strong>：要将大量本地磁盘存储（包括用于提高数据可用性的 RAID）用于分布式文件系统、大型数据库和大数据分析等工作负载，请使用此类型。</td>
 <td>28 / 512 GB</td>
 <td>2 个 2 TB RAID1 / 4 个 4 TB SATA RAID10</td>
 <td>10000 Mbps</td>
@@ -424,7 +427,7 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 ### 软件定义的存储 (SDS) 机器
 {: #sds}
 
-软件定义的存储 (SDS) 类型模板是为物理本地存储的原始磁盘供应的物理机器。因为数据与计算节点并存，SDS 机器适合高性能工作负载。
+软件定义的存储 (SDS) 类型模板是供应有物理本地存储的其他原始磁盘的物理机器。与本地主磁盘和本地辅助磁盘不同，这些原始磁盘在工作节点更新或重新装入期间不会被擦除。因为数据与计算节点并存，SDS 机器适合高性能工作负载。
 {: shortdesc}
 
 **何时使用 SDS 类型模板？**</br>
@@ -432,6 +435,8 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 *  如果对集群使用 SDS 附加组件，那么必须使用 SDS 机器。
 *  如果应用程序是需要本地存储器的 [StatefulSet ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)，那么可使用 SDS 机器并供应 [Kubernetes 本地持久性卷 (beta) ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/)。
 *  您可能具有需要 SDS 或本地存储器的定制应用程序或集群附加组件。例如，如果计划使用 logDNA，那么必须使用 SDS 机器类型。
+
+有关更多存储解决方案的信息，请参阅[规划高可用性持久性存储器](cs_storage_planning.html#storage_planning)。
 
 **我可订购哪些 SDS 类型模板？**</br>
 机器类型因专区而变化。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`. 您还可以复查可用[裸机](#bm)或 [VM](#vm) 机器类型。
@@ -450,10 +455,24 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 <th>名称和用例</th>
 <th>核心数/内存</th>
 <th>主/辅助磁盘</th>
-<th>本地存储器</th>
+<th>其他原始磁盘</th>
 <th>网络速度</th>
 </thead>
 <tbody>
+<tr>
+<td><strong>具有 SDS 的裸机，ms2c.4x32.1.9tb.ssd</strong>：如果需要额外的本地存储器以获取性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
+<td>4 / 32 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>1.9 TB 原始 SSD</td>
+<td>10000 Mbps</td>
+</tr>
+<tr>
+<td><strong>具有 SDS 的裸机，ms2c.16x64.1.9tb.ssd</strong>：如果需要额外的本地存储器以获取性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
+<td>16 / 64 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>1.9 TB 原始 SSD</td>
+<td>10000 Mbps</td>
+</tr>
 <tr>
 <td><strong>具有 SDS 的裸机，ms2c.28x256.3.8tb.ssd</strong>：如果需要额外的本地存储器以获取性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
 <td>28 / 256 GB</td>

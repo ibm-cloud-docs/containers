@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -25,44 +25,13 @@ lastupdated: "2018-05-24"
 Cree una señal que no caduque para un registro de imágenes que pueda utilizar para grupos escalables y únicos con clústeres en {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-1.  Inicie sesión en el entorno de {{site.data.keyword.Bluemix_dedicated_notm}}.
-
+1.  Solicite una señal de registro permanente para la sesión actual. Esta señal otorga acceso a las imágenes en el espacio de nombres actual.
     ```
-    bx login -a api.<dedicated_domain>
-    ```
-    {: pre}
-
-2.  Solicite una `oauth-token` para la sesión actual y guárdela como una variable.
-
-    ```
-    OAUTH_TOKEN=`bx iam oauth-tokens | awk 'FNR == 2 {print $3 " " $4}'`
+    ibmcloud cr token-add --description "<description>" --non-expiring -q
     ```
     {: pre}
 
-3.  Solicite el ID de la organización para la sesión actual y guárdela como una variable.
-
-    ```
-    ORG_GUID=`bx iam org <org_name> --guid`
-    ```
-    {: pre}
-
-4.  Solicite una señal de registro permanente para la sesión actual. Sustituya su <dedicated_domain> con el dominio de su entorno {{site.data.keyword.Bluemix_dedicated_notm}}. Esta señal otorga acceso a las imágenes en el espacio de nombres actual.
-
-    ```
-    curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
-    ```
-    {: pre}
-
-    Salida:
-
-    ```
-    {
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MzdiM2Q4Yy1hMDg3LTVhZjktYTYzNi0xNmU3ZWZjNzA5NjciLCJpc3MiOiJyZWdpc3RyeS5jZnNkZWRpY2F0ZWQxLnVzLXNvdXRoLmJsdWVtaXgubmV0"
-    }
-    ```
-    {: screen}
-
-5.  Verifique el secreto de Kubernetes.
+2.  Verifique el secreto de Kubernetes.
 
     ```
     kubectl describe secrets
@@ -71,7 +40,7 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
 
     Utilice este secreto para trabajar con {{site.data.keyword.containerlong}}.
 
-6.  Cree el secreto de Kubernetes para almacenar la información de la señal.
+3.  Cree el secreto de Kubernetes para almacenar la información de la señal.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
@@ -93,24 +62,24 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
     <td>Obligatorio. El nombre que desea utilizar para su imagePullSecret.</td>
     </tr>
     <tr>
-    <td><code>--docker-server &lt;registry_url&gt;</code></td>
-    <td>Obligatorio. URL del registro de imágenes en donde está configurado su espacio de nombres: registry.&lt;dedicated_domain&gt;</li></ul></td>
+    <td><code>--docker-server=&lt;registry_url&gt;</code></td>
+    <td>Obligatorio. El URL del registro de imágenes donde está configurado el espacio de nombres: <code>registry.&lt;dedicated_domain&gt;</code></li></ul></td>
     </tr>
     <tr>
-    <td><code>--docker-username &lt;docker_username&gt;</code></td>
-    <td>Obligatorio. El nombre de usuario para iniciar una sesión en su registro privado.</td>
+    <td><code>--docker-username=token</code></td>
+    <td>Obligatorio. No cambie este valor.</td>
     </tr>
     <tr>
-    <td><code>--docker-password &lt;token_value&gt;</code></td>
+    <td><code>--docker-password=&lt;token_value&gt;</code></td>
     <td>Obligatorio. El valor de la señal de registro que ha recuperado anteriormente.</td>
     </tr>
     <tr>
-    <td><code>--docker-email &lt;docker-email&gt;</code></td>
+    <td><code>--docker-email=&lt;docker-email&gt;</code></td>
     <td>Obligatorio. Si tiene una, especifique la dirección de correo electrónico de Docker. Si no tiene una, especifique una dirección de correo electrónico ficticia, como por ejemplo a@b.c. Este correo electrónico es obligatorio para crear un secreto de Kubernetes, pero no se utiliza después de la creación.</td>
     </tr>
     </tbody></table>
 
-7.  Cree un pod que haga referencia a imagePullSecret.
+4.  Cree un pod que haga referencia a imagePullSecret.
 
     1.  Abra el editor de texto que prefiera y cree un script de configuración de pod llamado mypod.yaml.
     2.  Defina el pod y el imagePullSecret que desea utilizar para acceder al registro. Para utilizar una imagen privada de un espacio de nombres:
@@ -145,10 +114,10 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
-        <td>El espacio de nombres donde se almacena la imagen. Para obtener una lista de los espacios de nombres disponibles, ejecute `bx cr namespace-list`.</td>
+        <td>El espacio de nombres donde se almacena la imagen. Para obtener una lista de los espacios de nombres disponibles, ejecute `ibmcloud cr namespace-list`.</td>
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>El nombre del imagen que desea utilizar. Para ver una lista de las imágenes disponibles en una cuenta de {{site.data.keyword.Bluemix_notm}}, ejecute <code>bx cr image-list</code>.</td>
+        <td>El nombre del imagen que desea utilizar. Para ver una lista de todas las imágenes disponibles en una cuenta de {{site.data.keyword.Bluemix_notm}}, ejecute <code>ibmcloud cr image-list</code>.</td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
@@ -165,7 +134,6 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
     4.  Cree el despliegue en el clúster.
 
           ```
-          kubectl apply -f mypod.yaml
+          kubectl apply -f mypod.yaml -n <namespace>
           ```
           {: pre}
-

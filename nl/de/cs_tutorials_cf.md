@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-05-24"
 # Lernprogramm: App aus Cloud Foundry in einen Cluster migrieren
 {: #cf_tutorial}
 
-Sie können eine App nehmen, die Sie zuvor mithilfe von Cloud Foundry bereitgestellt haben, und denselben Code in einen Container auf einem Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} bereitstellen.
+Sie können eine App nehmen, die Sie zuvor mithilfe von Cloud Foundry bereitgestellt haben, und denselben Code in einen Container auf einem Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} bereitstellen.
 {: shortdesc}
 
 
@@ -41,6 +41,7 @@ Dieses Lernprogramm richtet sich an Entwickler von Cloud Foundry-Apps.
 - [Erstellen Sie eine private Image-Registry in {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
 - [Erstellen Sie einen Cluster](cs_clusters.html#clusters_ui).
 - [Geben Sie als Ziel Ihrer CLI den Cluster an](cs_cli_install.html#cs_cli_configure).
+- [Stellen Sie sicher, dass Sie die Plattformrolle **Bearbeiter**, **Operator** oder **Administrator** haben](cs_users.html#add_users_cli).
 - [Lernen Sie die Docker- und Kubernetes-Terminologie kennen](cs_tech.html).
 
 
@@ -67,7 +68,7 @@ Bereiten Sie Ihren Code vor. Sie haben noch keinen Code? Sie können den in dies
     a. Klicken Sie im Katalog unter **Boilerplates** auf **Python Flask**. Diese Boilerplate enthält eine Laufzeitumgebung für Python 2- und Python 3-Anwendungen.
 
     b. Geben Sie den App-Namen `cf-py-<name>` ein und klicken Sie auf **ERSTELLEN**. Um auf den App-Code für die Boilerplate zuzugreifen, müssen Sie die CF-App zunächst in der Cloud bereitstellen. Sie können einen beliebigen Namen für die App verwenden. Wenn Sie den Namen aus dem Beispiel verwenden, ersetzen Sie `.<name>` durch eine eindeutige ID wie `cf-py-msx`.
-    
+
     **Achtung**: Verwenden Sie keine persönlichen Informationen in Namen von Apps, Container-Images oder Kubernetes-Ressourcen.
 
     Während die App bereitgestellt wird, werden Anweisungen für das Herunterladen, Ändern und erneute Bereitstellen Ihrer App mithilfe der Befehlszeilenschnittstelle angezeigt.
@@ -127,7 +128,7 @@ Erstellen Sie eine Dockerfile, die Ihren App-Code und die notwendigen Konfigurat
 4. Erstellen Sie ein Docker-Image, das Ihren App-Code enthält und übertragen Sie es per Push-Operation in Ihre private Registry.
 
   ```
-  bx cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
   ```
   {: pre}
 
@@ -147,7 +148,7 @@ Erstellen Sie eine Dockerfile, die Ihren App-Code und die notwendigen Konfigurat
   </tr>
   <tr>
   <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>Der Pfad zu Ihrer privaten Registry, mit Ihrem eindeutigen Namensbereich und dem Namen des Image. In diesem Beispiel wird derselbe Name für das Image verwendet wie für das App-Verzeichnis, aber Sie können einen beliebigen Namen für das Image in Ihrer privaten Registry wählen. Wenn Sie nicht sicher sind, wie Ihr Namensbereich lautet, führen Sie den Befehl `bx cr namespaces` aus, um ihn abzurufen.</td>
+  <td>Der Pfad zu Ihrer privaten Registry, mit Ihrem eindeutigen Namensbereich und dem Namen des Image. In diesem Beispiel wird derselbe Name für das Image verwendet wie für das App-Verzeichnis, aber Sie können einen beliebigen Namen für das Image in Ihrer privaten Registry wählen. Wenn Sie nicht sicher sind, wie Ihr Namensbereich lautet, führen Sie den Befehl `ibmcloud cr namespaces` aus, um ihn abzurufen.</td>
   </tr>
   <tr>
   <td><code>.</code></td>
@@ -156,7 +157,7 @@ Erstellen Sie eine Dockerfile, die Ihren App-Code und die notwendigen Konfigurat
   </tbody>
   </table>
 
-  Das Image wird in Ihrer privaten Registry erstellt. Sie können den Befehl `bx cr images` ausführen, um zu überprüfen, dass das Image erstellt wurde.
+  Das Image wird in Ihrer privaten Registry erstellt. Sie können den Befehl `ibmcloud cr images` ausführen, um zu überprüfen, dass das Image erstellt wurde.
 
   ```
   REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
@@ -222,7 +223,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>Ersetzen Sie in `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` den Eintrag &lt;registry-namensbereich&gt; durch den Namensbereich Ihrer privaten Image-Registry. Wenn Sie nicht sicher sind, wie Ihr Namensbereich lautet, führen Sie den Befehl `bx cr namespaces` aus, um ihn abzurufen.</td>
+  <td>Ersetzen Sie in `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` den Eintrag &lt;registry-namensbereich&gt; durch den Namensbereich Ihrer privaten Image-Registry. Wenn Sie nicht sicher sind, wie Ihr Namensbereich lautet, führen Sie den Befehl `ibmcloud cr namespaces` aus, um ihn abzurufen.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -250,7 +251,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
     a.  Rufen Sie die öffentliche IP-Adresse für den Workerknoten im Cluster ab.
 
     ```
-    bx cs workers <clustername>
+    ibmcloud ks workers <clustername>
     ```
     {: pre}
 
@@ -258,7 +259,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.9.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8
     ```
     {: screen}
 

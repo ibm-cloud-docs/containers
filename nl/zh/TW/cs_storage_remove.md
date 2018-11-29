@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -43,7 +43,7 @@ lastupdated: "2018-09-10"
 * 清除持續性儲存空間時，也會刪除其中儲存的所有資料。如果您需要資料的副本，請備份[檔案儲存空間](cs_storage_file.html#backup_restore)或[區塊儲存空間](cs_storage_block.html#backup_restore)。
 * 如果使用 {{site.data.keyword.Bluemix_dedicated}} 帳戶，您必須[開立支援問題單](/docs/get-support/howtogetsupport.html#getting-customer-support)來要求刪除磁區。
 
-開始之前，請先[設定 CLI 的目標](cs_cli_install.html#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 
 若要清除持續性資料，請執行下列動作：
 
@@ -173,7 +173,7 @@ lastupdated: "2018-09-10"
    ```
    {: pre}
      
-9. 驗證已移除實體儲存空間實例。此處理程序可能需要幾分鐘的時間。 
+9. 驗證已移除實體儲存空間實例。**附註**：刪除處理程序可能需要幾天才能完成。 
 
    **檔案儲存空間：** 
    ```

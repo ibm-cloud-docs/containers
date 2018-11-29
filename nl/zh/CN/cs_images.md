@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -37,11 +37,11 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 
 
-可以通过 {{site.data.keyword.containershort_notm}} 使用多个注册表将应用程序部署到集群。
+可以通过 {{site.data.keyword.containerlong_notm}} 使用多个注册表将应用程序部署到集群。
 
 |注册表|描述|优点|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry/index.html)|使用此选项，可以在 {{site.data.keyword.registryshort_notm}} 中设置自己的安全 Docker 映像存储库，在其中可以安全地存储映像并在集群用户之间共享这些映像。|<ul><li>管理对您帐户中映像的访问权。</li><li>将 {{site.data.keyword.IBM_notm}} 提供的映像和样本应用程序（如 {{site.data.keyword.IBM_notm}} Liberty）用作父映像，并向其添加自己的应用程序代码。</li><li>漏洞顾问程序会自动扫描映像以确定是否有潜在漏洞，包括特定于操作系统的漏洞修复建议。</li></ul>|
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry/index.html)|使用此选项，可以在 {{site.data.keyword.registryshort_notm}} 中设置您自己的安全 Docker 映像存储库，在其中可以安全地存储映像并在集群用户之间共享这些映像。|<ul><li>管理对您帐户中映像的访问权。</li><li>将 {{site.data.keyword.IBM_notm}} 提供的映像和样本应用程序（如 {{site.data.keyword.IBM_notm}} Liberty）用作父映像，并向其添加您自己的应用程序代码。</li><li>漏洞顾问程序会自动扫描映像以确定是否有潜在漏洞，包括特定于操作系统的漏洞修复建议。</li></ul>|
 |其他任何专用注册表|通过创建 [imagePullSecret ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/containers/images/)，将任何现有专用注册表连接到集群。私钥用于将注册表 URL 和凭证安全地保存在 Kubernetes 私钥中。|<ul><li>独立于源（Docker Hub、组织拥有的注册表或其他云专用注册表）使用现有专用注册表。</li></ul>|
 |[公共 Docker Hub ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://hub.docker.com/){: #dockerhub}|使用此选项可在不需要 Dockerfile 更改时，在 [Kubernetes 部署 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) 中通过 Docker Hub 直接使用现有公共映像。<p>**注**：请记住，此选项可能不满足您组织的安全需求，如访问管理、漏洞扫描或应用程序隐私。</p>|<ul><li>无需为集群进行其他设置。</li><li>包含各种开放式源代码应用程序。</li></ul>|
 {: caption="公共和专用映像注册表选项" caption-side="top"}
@@ -76,9 +76,12 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 创建集群时，会自动为[离得最近的区域注册表和全局注册表](/docs/services/Registry/registry_overview.html#registry_regions)创建不到期的注册表令牌和私钥。全局注册表用于安全地存储 IBM 提供的公共映像，您可以在不同部署中引用这些映像，而不用分别引用存储在各个区域注册表中的映像。区域注册表用于安全地存储您自己的专用 Docker 映像以及全局注册表中所存储的相同公共映像。令牌用于授予对 {{site.data.keyword.registryshort_notm}} 中设置的任一名称空间的只读访问权，以便您可以使用这些公共（全局注册表）映像和专用（区域注册表）映像。
 
-每个令牌必须存储在 Kubernetes `imagePullSecret` 中，才能在部署容器化应用程序时供 Kubernetes 集群访问。创建集群时，{{site.data.keyword.containershort_notm}} 会自动将全局（IBM 提供的公共映像）和区域注册表的令牌存储在 Kubernetes 映像拉取私钥中。映像拉取私钥会添加到 `default` Kubernetes 名称空间、该名称空间的 `ServiceAccount` 中的缺省私钥列表以及 `kube-system` 名称空间。
+每个令牌必须存储在 Kubernetes `imagePullSecret` 中，才能在部署容器化应用程序时供 Kubernetes 集群访问。创建集群时，{{site.data.keyword.containerlong_notm}} 会自动将全局（IBM 提供的公共映像）和区域注册表的令牌存储在 Kubernetes 映像拉取私钥中。映像拉取私钥会添加到 `default` Kubernetes 名称空间、该名称空间的 `ServiceAccount` 中的缺省私钥列表以及 `kube-system` 名称空间。
 
 **注**：使用此初始设置时，可以通过 {{site.data.keyword.Bluemix_notm}} 帐户的名称空间中可用的任何映像，将容器部署到集群的**缺省**名称空间。要将容器部署到集群的其他名称空间，或者要使用存储在其他 {{site.data.keyword.Bluemix_notm}} 区域或其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，您必须[为集群创建自己的 imagePullSecret](#other)。
+
+想要使注册表凭证更安全吗？请要求集群管理员在集群中[启用 {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect)，以加密集群中的 Kubernetes 私钥，例如用于存储注册表凭证的 `imagePullSecret`。
+{: tip}
 
 开始之前：
 1. [在 {{site.data.keyword.Bluemix_notm}} Public 或 {{site.data.keyword.Bluemix_dedicated_notm}} 的 {{site.data.keyword.registryshort_notm}} 中设置名称空间并将映像推送到此名称空间](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)。
@@ -94,7 +97,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 
     ```
-    apiVersion: apps/v1beta1
+apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -111,19 +114,19 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     ```
     {: codeblock}
 
-    **提示**：要检索名称空间信息，请运行 `bx cr namespace-list`。
+    **提示**：要检索名称空间信息，请运行 `ibmcloud cr namespace-list`。
 
 3.  在集群中创建部署。
 
     ```
-        kubectl apply -f mydeployment.yaml
+    kubectl apply -f mydeployment.yaml
     ```
     {: pre}
 
     **提示：**您还可以部署现有配置文件，如 IBM 提供的其中一个公共映像。此示例使用美国南部区域中的 **ibmliberty** 映像。
 
     ```
-        kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy-ibmliberty.yaml
+    kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy-ibmliberty.yaml
     ```
     {: pre}
 
@@ -148,7 +151,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 3.  [设定 CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
 
 <br/>
-要创建自己的 imagePullSecret，可以在以下选项中进行选择：
+要创建您自己的 imagePullSecret，可以在以下选项中进行选择：
 - [将 imagePullSecret 从缺省名称空间复制到集群中的其他名称空间](#copy_imagePullSecret)。
 - [创建 imagePullSecret 以访问其他 {{site.data.keyword.Bluemix_notm}} 区域和帐户中的映像](#other_regions_accounts)。
 - [创建 imagePullSecret 以访问外部专用注册表中的映像](#private_images)。
@@ -215,7 +218,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 2.  列出您的 {{site.data.keyword.Bluemix_notm}} 帐户中的令牌。
 
     ```
-        bx cr token-list
+    ibmcloud cr token-list
     ```
     {: pre}
 
@@ -223,7 +226,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 4.  检索令牌的值。将 <em>&lt;token_ID&gt;</em> 替换为在上一步中检索到的令牌的标识。
 
     ```
-        bx cr token-get <token_id>
+    ibmcloud cr token-get <token_id>
     ```
     {: pre}
 
@@ -232,7 +235,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 5.  创建 Kubernetes 私钥以用于存储令牌信息。
 
     ```
-        kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
+    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
     ```
     {: pre}
 
@@ -256,7 +259,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>必需。用于登录到专用注册表的用户名。对于 {{site.data.keyword.registryshort_notm}}，用户名设置为 <code>token</code>。</td>
+    <td>必需。用于登录到专用注册表的用户名。对于 {{site.data.keyword.registryshort_notm}}，用户名设置为值 <strong><code>token</code></strong>。</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -271,7 +274,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 6.  验证私钥是否已成功创建。将 <em>&lt;kubernetes_namespace&gt;</em> 替换为在其中创建 imagePullSecret 的名称空间。
 
     ```
-        kubectl get secrets --namespace <kubernetes_namespace>
+    kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
@@ -293,7 +296,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 1.  创建 Kubernetes 私钥以用于存储专用注册表凭证。
 
     ```
-        kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
+    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
     ```
     {: pre}
 
@@ -333,7 +336,7 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
 
 
     ```
-        kubectl get secrets --namespace <kubernetes_namespace>
+    kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
@@ -404,11 +407,11 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>存储映像的名称空间。要列出可用名称空间，请运行 `bx cr namespace-list`。</td>
+    <td>存储映像的名称空间。要列出可用名称空间，请运行 `ibmcloud cr namespace-list`。</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>要使用的映像的名称。要列出 {{site.data.keyword.Bluemix_notm}} 帐户中的可用映像，请运行 `bx cr image-list`。</td>
+    <td>要使用的映像的名称。要列出 {{site.data.keyword.Bluemix_notm}} 帐户中的可用映像，请运行 `ibmcloud cr image-list`。</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -489,5 +492,4 @@ ImagePullSecret 仅对于创建它们所用于的 Kubernetes 名称空间有效�
    {: pre}
 
 <br />
-
 

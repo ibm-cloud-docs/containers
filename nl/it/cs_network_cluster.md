@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -29,7 +29,7 @@ indirizzo IP.
 
 Per impostazione predefinita, è difficile tenere traccia degli indirizzi IP privati mutevoli per le applicazioni che devono essere ad alta disponibilità. Puoi invece utilizzare le funzioni di rilevamento integrate del servizio Kubernetes per esporre le applicazioni come servizi IP cluster sulla rete privata. Un servizio Kubernetes raggruppa un insieme di pod e fornisce una connessione di rete a questi pod. Questa connessione fornisce la connettività ad altri servizi nel cluster senza esporre l'effettivo indirizzo IP privato di ciascun pod. Ai servizi viene assegnato un indirizzo IP in cluster accessibile solo all'interno del cluster.
 * Cluster più vecchi: nei cluster creati prima del febbraio 2018 nella zona dal13 o prima dell'ottobre 2017 in qualsiasi altra zona, ai servizi viene assegnato un IP tra i 254 IP nell'intervallo 10.10.10.0/24. Se hai raggiunto il limite di 254 e hai bisogno di altri servizi, devi creare un nuovo cluster.
-* Cluster più recenti: nei cluster creati dopo il febbraio 2018 nella zona dal13 o dopo l'ottobre 2017 in qualsiasi altra zona, ai servizi viene assegnato un IP tra i 65.000 IP nell'intervallo 172.21.0.0/16. 
+* Cluster più recenti: nei cluster creati dopo il febbraio 2018 nella zona dal13 o dopo l'ottobre 2017 in qualsiasi altra zona, ai servizi viene assegnato un IP tra i 65.000 IP nell'intervallo 172.21.0.0/16.
 
 Per evitare conflitti, non utilizzare questo intervallo di IP sui nodi che comunicano con i tuoi nodi di lavoro. Viene creata anche una voce di ricerca DNS per il servizio e viene memorizzata nel componente `kube-dns` del cluster. La voce DNS contiene il nome del servizio, lo spazio dei nomi in cui è stato creato il servizio e il link all'indirizzo IP in cluster assegnato.
 
@@ -78,8 +78,8 @@ Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} configura
 
 **Perché potrei utilizzare questa impostazione?**
 
-* Hai un'applicazione che deve essere accessibile a internet pubblico in un cluster a zona singola.
-* Hai un'applicazione che deve essere accessibile a internet pubblico in un cluster multizona. Poiché devi abilitare lo [spanning della VLAN](cs_subnets.html#subnet-routing) per creare un cluster multizona, il cluster può comunicare con altri sistemi che sono connessi a qualsiasi VLAN privata nello stesso account IBM Cloud. **Nota**: per isolare il tuo cluster multizona sulla rete privata, usa [Politiche di rete Calico](cs_network_policy.html#isolate_workers).
+* Hai un'applicazione che deve essere accessibile a Internet pubblico in un cluster a zona singola.
+* Hai un'applicazione che deve essere accessibile a Internet pubblico in un cluster multizona. Poiché devi abilitare lo [spanning della VLAN](cs_subnets.html#subnet-routing) per creare un cluster multizona, il cluster può comunicare con altri sistemi che sono connessi a qualsiasi VLAN privata nello stesso account IBM Cloud. **Nota**: per isolare il tuo cluster multizona sulla rete privata, usa [Politiche di rete Calico](cs_network_policy.html#isolate_workers).
 
 **Quali sono le mie opzioni per gestire l'accesso pubblico e privato al mio cluster?**
 </br>Le seguenti sezioni descrivono le funzionalità tra {{site.data.keyword.containerlong_notm}} che puoi utilizzare per configurare la rete per i cluster connessi a una VLAN pubblica e a una VLAN privata.
@@ -124,7 +124,7 @@ Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} configura
 **Perché potrei utilizzare questa impostazione?**
 
 * Hai un'applicazione in un cluster a zona singola. Vuoi esporre l'applicazione solo ai pod all'interno del cluster o in altri cluster collegati alla stessa VLAN privata.
-* Hai un'applicazione in un cluster multizona. Vuoi esporre l'applicazione solo ai pod all'interno del cluster o in altri cluster collegati alle stesse VLAN private del tuo cluster. 
+* Hai un'applicazione in un cluster multizona. Vuoi esporre l'applicazione solo ai pod all'interno del cluster o in altri cluster collegati alle stesse VLAN private del tuo cluster. Tuttavia, poiché è necessario abilitare lo [spanning della VLAN](cs_subnets.html#subnet-routing) per i cluster multizona, gli altri sistemi connessi a una VLAN privata nello stesso account IBM Cloud possono accedere al cluster. Vuoi isolare il tuo cluster multizona dagli altri sistemi.
 
 **Quali sono le mie opzioni per gestire l'accesso pubblico e privato al mio cluster?**</br>Le seguenti sezioni descrivono le funzionalità tra {{site.data.keyword.containerlong_notm}} che puoi utilizzare per configurare la rete solo privata e bloccare la rete pubblica per i cluster connessi a una VLAN pubblica e a una VLAN privata.
 
@@ -135,9 +135,9 @@ L'interfaccia di rete pubblica per i nodi di rete è protetta dalle [impostazion
 
 Se vuoi esporre le tue applicazioni solo su una rete privata, puoi creare dei servizi NodePort, a LoadBalancer o Ingress privati. Per ulteriori informazioni sulla pianificazione di rete esterna privata, vedi [Pianificazione di una rete esterna privata per la configurazione di una VLAN pubblica e privata](cs_network_planning.html#private_both_vlans).
 
-Tuttavia, le politiche di rete Calico predefinite consentono anche il traffico di rete pubblica in entrata da internet a questi servizi. Puoi creare politiche Calico per bloccare invece tutto il traffico pubblico verso i servizi. Ad esempio, un servizio NodePort apre una porta su un nodo di lavoro sia sull'indirizzo IP privato che su quello pubblico del nodo di lavoro. Un servizio del programma di bilanciamento del carico con un indirizzo IP privato portatile apre una NodePort pubblica su ogni nodo di lavoro. Devi creare una [politica di rete preDNAT Calico](cs_network_policy.html#block_ingress) per bloccare le NodePort pubbliche.
+Tuttavia, le politiche di rete Calico predefinite consentono anche il traffico di rete pubblica in entrata da Internet a questi servizi. Puoi creare politiche Calico per bloccare invece tutto il traffico pubblico verso i servizi. Ad esempio, un servizio NodePort apre una porta su un nodo di lavoro sia sull'indirizzo IP privato che su quello pubblico del nodo di lavoro. Un servizio del programma di bilanciamento del carico con un indirizzo IP privato portatile apre un NodePort pubblico su ogni nodo di lavoro. Devi creare una [politica di rete preDNAT Calico](cs_network_policy.html#block_ingress) per bloccare le NodePort pubbliche.
 
-Per fare un esempio, supponiamo che hai creato un servizio di programma di bilanciamento del carico privato. Hai anche creato una politica preDNAT Calico per impedire al traffico pubblico di raggiungere le NodePort pubbliche aperte dal programma di bilanciamento del carico.A questo programma di bilanciamento del carico privato possono accedere:
+Per fare un esempio, supponiamo che hai creato un servizio di programma di bilanciamento del carico privato. Hai anche creato una politica preDNAT Calico per impedire al traffico pubblico di raggiungere le NodePort pubbliche aperte dal programma di bilanciamento del carico. A questo programma di bilanciamento del carico privato possono accedere:
 * [Qualsiasi pod in quello stesso cluster](#in-cluster)
 * Qualsiasi pod in qualsiasi cluster connesso alla stessa VLAN privata
 * Se hai lo [spanning VLAN abilitato](cs_subnets.html#subnet-routing), qualsiasi sistema connesso a una qualsiasi delle VLAN private nello stesso account IBM Cloud
@@ -184,7 +184,7 @@ Puoi scegliere di [creare un cluster solo VLAN privata](cs_clusters.html#cluster
 * Una connessione automatica tra tutti i nodi di lavoro e il master. Devi fornire questa connessione [ configurando un'applicazione gateway](#private_vlan_gateway).
 
 **Perché potrei utilizzare questa impostazione?**
-</br>Hai dei requisiti di sicurezza specifici oppure hai bisogno di creare delle politiche di rete personalizzate e delle regole di instradamento per fornire una sicurezza di rete dedicata.**Nota**: l'utilizzo di un'applicazione gateway comporta dei costi separati. Per i dettagli, vedi la [documentazione](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
+</br>Hai dei requisiti di sicurezza specifici oppure hai bisogno di creare delle politiche di rete personalizzate e delle regole di instradamento per fornire una sicurezza di rete dedicata. **Nota**: l'utilizzo di un'applicazione gateway comporta dei costi separati. Per i dettagli, vedi la [documentazione](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
 
 **Quali sono le mie opzioni per gestire l'accesso pubblico e privato al mio cluster?**
 </br>Le seguenti sezioni descrivono le funzionalità tra {{site.data.keyword.containerlong_notm}} che puoi utilizzare per configurare la rete per i cluster connessi solo a una VLAN privata.

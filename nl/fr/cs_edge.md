@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -25,8 +25,8 @@ Les noeuds worker de périphérie peuvent améliorer la sécurité de votre clus
 
 Lorsque ces noeuds worker sont marqués pour mise en réseau uniquement, les autres charges de travail ne peuvent pas consommer d'unité centrale ou de mémoire ni interférer avec le réseau.
 
-
-
+Si vous disposez d'un cluster à zones multiples et que vous voulez limiter le trafic réseau aux noeuds worker de périphérie, au moins deux noeuds worker de périphérie doivent être activés dans chaque zone pour assurer la haute disponibilité de l'équilibreur de charge ou des pods Ingress. Créez un pool de noeuds worker de périphérie couvrant toutes les zones de votre cluster, avec au moins 2 noeuds worker par zone.
+{: tip}
 
 ## Etiquetage de noeuds worker en tant que noeuds de périphérie
 {: #edge_nodes}
@@ -36,42 +36,54 @@ Ajoutez l'étiquette `dedicated=edge` à au moins deux noeuds worker sur chaque 
 
 Avant de commencer :
 
-- [Créez un cluster standard.
-](cs_clusters.html#clusters_cli)
+- [Créez un cluster standard.](cs_clusters.html#clusters_cli)
 - Vérifiez que votre cluster dispose d'au moins un VLAN public. Les noeuds worker de périphérie ne sont pas disponibles pour les clusters avec VLAN privés uniquement.
+- [Créez un nouveau pool de noeuds worker](cs_clusters.html#add_pool) couvrant toutes le zones de votre cluster et comportant au moins 2 noeuds worker par zone.
 - [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure).
 
 Pour étiqueter des noeuds worker en tant que noeuds de périphérie :
 
-1. Répertoriez tous les noeuds worker présents dans votre cluster. Utilisez l'adresse IP privée de la colonne **NAME** pour identifier les noeuds. Sélectionnez au moins deux noeuds worker sur chaque VLAN public comme noeuds worker de périphérie. Ingress nécessite au moins deux noeuds worker dans chaque zone pour fournir la haute disponibilité. 
+1. Affichez la liste des noeuds worker figurant dans le pool de noeuds worker de périphérie. Utilisez l'**adresse IP privée** pour identifier les noeuds.
 
   ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
-  ```
-  {: pre}
-
-2. Etiquetez les noeuds worker `dedicated=edge`. Une fois qu'un noeud worker est marqué avec `dedicated=edge`, tous les équilibreurs de charge et Ingress suivants sont déployés sur un noeud worker de périphérie.
-
-  ```
-  kubectl label nodes <node1_name> <node2_name> dedicated=edge
+  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 
-3. Extrayez tous les services d'équilibreur de charge dans le cluster.
+2. Etiquetez les noeuds worker `dedicated=edge`. Une fois qu'un noeud worker est marqué avec `dedicated=edge`, tous les services d'équilibreur de charge et Ingress suivants sont déployés sur un noeud worker de périphérie.
 
   ```
-  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
   ```
   {: pre}
 
-  Exemple de sortie :
+3. Extrayez tous les équilibreurs de charge et les équilibreurs de charge d'application (ALB) Ingress dans le cluster.
 
   ```
-  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
+  kubectl get services --all-namespaces
+  ```
+  {: pre}
+
+  Dans la sortie, recherchez les services dont la valeur de **TYPE** est **LoadBalancer**. Notez les valeurs de **NAME** et **NAMESPACE** de chaque service d'équilibreur de charge. Par exemple, dans la sortie suivante, il y a 3 services d'équilibreur de charge : l'équilibreur de charge `webserver-lb` dans l'espace de nom `default` et les ALB Ingress, `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` et `public-crdf253b6025d64944ab99ed63bb4567b6-alb2`, dans l'espace de nom `kube-system`.
+
+  ```
+  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE
+  default       kubernetes                                       ClusterIP      172.21.0.1       <none>          443/TCP                      1h
+  default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                 10m
+  kube-system   heapster                                         ClusterIP      172.21.101.189   <none>          80/TCP                       1h
+  kube-system   kube-dns                                         ClusterIP      172.21.0.10      <none>          53/UDP,53/TCP                1h
+  kube-system   kubernetes-dashboard                             ClusterIP      172.21.153.239   <none>          443/TCP                      1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP   1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP   57m
   ```
   {: screen}
 
-4. A partir de la sortie de l'étape précédente, copiez et collez chaque ligne `kubectl get service`. Cette commande redéploie l'équilibreur de charge sur un noeud worker de périphérie. Seuls les équilibreurs de charge publics doivent être redéployés.
+4. A partir de la sortie de l'étape précédente, exécutez la commande suivante pour chaque équilibreur de charge et ALB Ingress. Cette commande redéploie l'équilibreur de charge ou l'ALB Ingress sur un noeud worker de périphérie. Seuls les équilibreurs de charge et les ALB publics doivent être redéployés.
+
+  ```
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
+  ```
+  {: pre}
 
   Exemple de sortie :
 
@@ -106,6 +118,7 @@ La tolérance `dedicated=edge` implique que tous les services d'équilibreur de 
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+  {: pre}
   Maintenant, seuls les pods ayant la tolérance `dedicated=edge` sont déployés sur vos noeuds worker de périphérie.
 
 3. Si vous choisissez d'[activer la conservation de l'adresse IP source pour un service d'équilibreur de charge ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assurez-vous que tous les pods d'application sont planifiés sur les noeuds worker de périphérie en [ajoutant l'affinité avec les noeuds de périphérie aux pods d'application](cs_loadbalancer.html#edge_nodes). Les pods d'application doivent être planifiés sur des noeuds de périphérie pour recevoir des demandes entrantes.

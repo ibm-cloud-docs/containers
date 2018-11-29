@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-09-10"
 Se você tiver requisitos específicos de otimização de desempenho, será possível mudar as configurações padrão para os parâmetros `sysctl` do kernel do Linux em nós do trabalhador e os namespaces de rede de pod no {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Os nós do trabalhador são provisionados automaticamente com desempenho de kernel otimizado, mas é possível mudar as configurações padrão aplicando um DaemonSet customizado a seu cluster. O DaemonSet muda as configurações para todos os nós do trabalhador existentes e aplica as configurações a quaisquer novos nós do trabalhador que são provisionados no cluster. Nenhum pods é afetado.
+Os nós do trabalhador são provisionados automaticamente com o desempenho do kernel otimizado, mas é possível mudar as configurações padrão aplicando um objeto `DaemonSet` customizado do Kubernetes para seu cluster. O daemonset altera as configurações para todos os nós do trabalhador existentes e aplica as configurações a quaisquer novos nós do trabalhador que são provisionados no cluster. Nenhum pods é afetado.
 
 Para otimizar as configurações do kernel para os pods de app, é possível inserir um initContainer no YAML `pod/ds/rs/deployment` para cada implementação. O initContainer é incluído em cada implementação de app que está no namespace de rede do pod para o qual você deseja otimizar o desempenho.
 
@@ -32,11 +32,11 @@ Por exemplo, as amostras nas seções a seguir mudam o número máximo padrão d
 ## Otimizando o desempenho do nó do
 {: #worker}
 
-Aplique um [DaemonSet ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) para mudar os parâmetros do kernel no host do nó do trabalhador.
+Aplique um [daemonset ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) para mudar os parâmetros do kernel no host do nó do trabalhador.
 
-**Nota**: deve-se ter a [função de acesso de Administrador](cs_users.html#user-roles) para executar o initContainer privilegiado de amostra. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
+**Nota**: deve-se ter a [função de acesso de Administrador](cs_users.html#access_policies) para executar o initContainer privilegiado de amostra. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
 
-1. Salve o DaemonSet a seguir em um arquivo denominado `worker-node-kernel-settings.yaml`. Na seção `spec.template.spec.initContainers`, inclua os campos e valores para os parâmetros `sysctl` que você deseja ajustar. Este DaemonSet muda os valores dos parâmetros `net.core.somaxconn` e `net.ipv4.ip_local_local_port_range`.
+1. Salve o daemonset a seguir em um arquivo denominado `worker-node-kernel-settings.yaml`. Na seção `spec.template.spec.initContainers`, inclua os campos e valores para os parâmetros `sysctl` que você deseja ajustar. Este daemonset de exemplo muda os valores dos parâmetros `net.core.somaxconn` e `net.ipv4.ip_local_port_range`.
     ```
     apiVersion: extensions/v1beta1
     kind: DaemonSet
@@ -91,7 +91,7 @@ Aplique um [DaemonSet ![Ícone de link externo](../icons/launch-glyph.svg "Ícon
     ```
     {: codeblock}
 
-2. Aplique o DaemonSet aos seus nós do trabalhador. As mudanças são aplicadas imediatamente.
+2. Aplique o daemonset aos nós do trabalhador. As mudanças são aplicadas imediatamente.
     ```
     kubectl apply -f worker-node-node-kernel-settings.yaml
     ```
@@ -101,7 +101,7 @@ Aplique um [DaemonSet ![Ícone de link externo](../icons/launch-glyph.svg "Ícon
 
 Para reverter os parâmetros `sysctl` de seus nós do trabalhador para os valores padrão configurados pelo {{site.data.keyword.containerlong_notm}}:
 
-1. Exclua o DaemonSet. Os initContainers que aplicaram as configurações customizadas são removidos.
+1. Exclua o daemonset. Os initContainers que aplicaram as configurações customizadas são removidos.
     ```
     kubectl delete ds kernel-optimization
     ```
@@ -118,7 +118,7 @@ Para reverter os parâmetros `sysctl` de seus nós do trabalhador para os valore
 Se você tiver demandas de carga de trabalho específicas, será possível aplicar uma correção de [initContainer ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) para mudar os parâmetros do kernel para os pods de app.
 {: shortdesc}
 
-**Nota**: deve-se ter a [função de acesso de Administrador](cs_users.html#user-roles) para executar o initContainer privilegiado de amostra. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
+**Nota**: deve-se ter a [função de acesso de Administrador](cs_users.html#access_policies) para executar o initContainer privilegiado de amostra. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
 
 1. Salve a correção de initContainer a seguir em um arquivo denominado `pod-patch.yaml` e inclua os campos e valores para os parâmetros `sysctl` que você deseja ajustar. Esse initContainer de exemplo muda os valores dos parâmetros `net.core.somaxconn` e `net.ipv4.ip_local_local_port_range`.
     ```

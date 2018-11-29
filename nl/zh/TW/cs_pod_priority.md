@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -75,7 +75,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 若要設定 Pod 優先順序，您必須使用優先順序等級。
 {: shortdesc}
 
-開始之前，請將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為 Kubernetes 1.11 或更新版本的叢集。
+開始之前：
+* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+* [建立](cs_clusters.html#clusters_ui)或[更新](cs_cluster_update.html#update)您的叢集至 Kubernetes 1.11 版或更新版本。
 
 1.  選用項目：使用現有的優先順序等級作為新等級的範本。
     
@@ -113,7 +115,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     </thead>
     <tbody>
     <tr>
-    <td><code>metadata/name</code></td>
+    <td><code>metadata.name</code></td>
     <td>必要：您要建立的優先順序等級的名稱。</td>
     </tr>
     <tr>
@@ -153,7 +155,8 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始之前：
-* 請將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為 Kubernetes 1.11 或更新版本的叢集。
+* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+* [建立](cs_clusters.html#clusters_ui)或[更新](cs_cluster_update.html#update)您的叢集至 Kubernetes 1.11 版或更新版本。
 * [瞭解優先順序排程的運作方式](#priority_scheduling)，因為優先順序可能先佔現有的 Pod，並影響叢集資源的使用。
 
 若要指派 Pod 的優先順序，請執行下列動作：

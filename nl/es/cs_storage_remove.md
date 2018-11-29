@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -43,7 +43,7 @@ Depende de lo que suprima y del tipo de facturación. Si suprime la PVC y el PV,
 * Cuando se limpia el almacenamiento persistente, se suprimen todos los datos almacenados en el mismo. Si necesita una copia de los datos, realice una copia de seguridad del [almacenamiento de archivos](cs_storage_file.html#backup_restore) o del [almacenamiento en bloque](cs_storage_block.html#backup_restore).
 * Si utiliza una cuenta de {{site.data.keyword.Bluemix_dedicated}}, debe solicitar la supresión de volúmenes [abriendo una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-Antes de empezar, seleccione [la CLI como destino](cs_cli_install.html#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 
 Para limpiar los datos persistentes:
 
@@ -173,7 +173,7 @@ Para limpiar los datos persistentes:
    ```
    {: pre}
      
-9. Verifique que se ha eliminado la instancia de almacenamiento físico. Este proceso puede tardar unos minutos. 
+9. Verifique que se ha eliminado la instancia de almacenamiento físico. **Nota**: el proceso de supresión puede tardar unos días en completarse. 
 
    **Almacenamiento de archivos:** 
    ```

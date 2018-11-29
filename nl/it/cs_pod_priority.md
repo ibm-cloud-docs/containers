@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -76,7 +76,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 Per impostare la priorità dei pod, devi utilizzare una classe di priorità.
 {: shortdesc}
 
-Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster Kubernetes 1.11 o successive.
+Prima di iniziare:
+* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+* [Crea](cs_clusters.html#clusters_ui) o [aggiorna](cs_cluster_update.html#update) il tuo cluster a Kubernetes versione 1.11 o successiva.
 
 1.  Facoltativo: utilizza una classe di priorità esistente come template per la nuova classe.
     
@@ -114,12 +116,12 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
     </thead>
     <tbody>
     <tr>
-    <td><code>metadata/name</code></td>
+    <td><code>metadata.name</code></td>
     <td>Obbligatorio: il nome della classe di priorità che vuoi creare.</td>
     </tr>
     <tr>
     <td><code>value</code></td>
-    <td>Obbligatorio: immetti un numero intero inferiore o uguale a 1 miliardo (1000000000). Più è alto il valore e più è alta la priorità, I valori sono relativi ai valori delle altre classi di priorità nel cluster.Riserva i numeri molto alti per i pod critici per il sistema di cui non vuoi che venga indicata la prevenzione (rimozione). </br></br>Ad esempio, le [classi di priorità critiche per il cluster predefinite](#default_priority_class) hanno un valore compreso nell'intervallo 900000000-2000001000; immetti quindi un valore inferiore a questi numeri per le nuove classi di priorità in modo che nessun elemento abbia un'indicazione di priorità superiore a quella di questi pod.</td>
+    <td>Obbligatorio: immetti un numero intero inferiore o uguale a 1 miliardo (1000000000). Più è alto il valore e più è alta la priorità, I valori sono relativi ai valori delle altre classi di priorità nel cluster. Riserva i numeri molto alti per i pod critici per il sistema di cui non vuoi che venga indicata la prevenzione (rimozione). </br></br>Ad esempio, le [classi di priorità critiche per il cluster predefinite](#default_priority_class) hanno un valore compreso nell'intervallo 900000000-2000001000; immetti quindi un valore inferiore a questi numeri per le nuove classi di priorità in modo che nessun elemento abbia un'indicazione di priorità superiore a quella di questi pod.</td>
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
@@ -154,7 +156,8 @@ Assegna una classe di priorità alla tua specifica di pod per impostare la prior
 {: shortdesc}
 
 Prima di iniziare:
-* [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster Kubernetes 1.11 o successive.
+* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+* [Crea](cs_clusters.html#clusters_ui) o [aggiorna](cs_cluster_update.html#update) il tuo cluster a Kubernetes versione 1.11 o successiva.
 * [Comprendi come funziona la pianificazione delle priorità](#priority_scheduling), poiché la priorità può prevenire i pod esistenti e influenzare il modo in cui vengono utilizzate le risorse del tuo cluster.
 
 Per assegnare la priorità ai tuoi pod:

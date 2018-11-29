@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -76,7 +76,9 @@ kubectl get pods -- all-namespaces -o custom-columns=NAME: .metadata.name, PRIOR
 Para configurar a prioridade do pod, é necessário usar uma classe de prioridade.
 {: shortdesc}
 
-Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster do Kubernetes 1.11 ou mais recente.
+Antes de iniciar:
+* [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+* [Crie](cs_clusters.html#clusters_ui) ou [atualize](cs_cluster_update.html#update) seu cluster para o Kubernetes versão 1.11 ou mais recente.
 
 1.  Opcional: use uma classe de prioridade existente como um modelo para a nova classe.
     
@@ -114,7 +116,7 @@ Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para
     </thead>
     <tbody>
     <tr>
-    <td><code>metadata/name</code></td>
+    <td><code>metadata.name</code></td>
     <td>Necessário: o nome da classe de prioridade que você deseja criar.</td>
     </tr>
     <tr>
@@ -154,7 +156,8 @@ Designe uma classe de prioridade à sua especificação de pod para configurar a
 {: shortdesc}
 
 Antes de iniciar:
-* [Direcione a sua CLI](cs_cli_install.html#cs_cli_configure) para o cluster do Kubernetes 1.11 ou mais recente.
+* [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+* [Crie](cs_clusters.html#clusters_ui) ou [atualize](cs_cluster_update.html#update) seu cluster para o Kubernetes versão 1.11 ou mais recente.
 * [Entenda como o planejamento de prioridade funciona](#priority_scheduling), pois a prioridade pode priorizar os pods existentes e afetar como os recursos de seu cluster são consumidos.
 
 Para designar prioridade a seus pods:

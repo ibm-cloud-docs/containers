@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -28,7 +28,7 @@ Ao usar o {{site.data.keyword.containerlong}}, considere estas técnicas para re
 
 É possível seguir estas etapas gerais para assegurar que seus clusters estejam atualizados:
 - Verifique mensalmente por correções de segurança e de sistema operacional disponíveis para [atualizar seus nós do trabalhador](cs_cli_reference.html#cs_worker_update).
-- [Atualize seu cluster](cs_cli_reference.html#cs_cluster_update) para a [versão do Kubernetes](cs_versions.html) padrão mais recente do {{site.data.keyword.containershort_notm}}
+- [Atualize seu cluster](cs_cli_reference.html#cs_cluster_update) para a [versão do Kubernetes](cs_versions.html) padrão mais recente do {{site.data.keyword.containerlong_notm}}
 
 ## Depurando clusters
 {: #debug_clusters}
@@ -38,7 +38,7 @@ Revise as opções para depurar seus clusters e localizar as causas raízes das 
 1.  Liste o cluster e localize o `Estado` dele.
 
   ```
-  bx cs clusters
+  ibmcloud ks clusters
   ```
   {: pre}
 
@@ -81,7 +81,7 @@ Revise as opções para depurar seus clusters e localizar as causas raízes das 
       </tr>
       <tr>
        <td>Normal</td>
-       <td>Todos os nós do trabalhador em um cluster estão funcionando. É possível acessar o cluster e implementar apps no cluster. Esse estado é considerado saudável e não requer uma ação sua. **Nota**: embora os nós do trabalhador possam ser normais, outros recursos de infraestrutura, como [redes](cs_troubleshoot_network.html) e [armazenamento](cs_troubleshoot_storage.html), ainda podem precisar de atenção.</td>
+       <td>Todos os nós do trabalhador em um cluster estão funcionando. É possível acessar o cluster e implementar apps no cluster. Esse estado é considerado funcional e não requer uma ação sua. **Nota**: embora os nós do trabalhador possam ser normais, outros recursos de infraestrutura, como [redes](cs_troubleshoot_network.html) e [armazenamento](cs_troubleshoot_storage.html), ainda podem precisar de atenção.</td>
     </tr>
       <tr>
        <td>Pendente</td>
@@ -103,6 +103,9 @@ Revise as opções para depurar seus clusters e localizar as causas raízes das 
  </table>
 
 
+**Nota**: o [mestre do Kubernetes](cs_tech.html#architecture) é o componente principal que mantém o cluster funcionando. O mestre armazena recursos de cluster e suas configurações no banco de dados etcd que serve como o ponto único de verdade para seu cluster. O servidor da API do Kubernetes é o ponto de entrada principal para todas as solicitações de gerenciamento de cluster dos nós do trabalhador para o principal ou quando você deseja interagir com os recursos de cluster.<br><br>Se ocorrer uma falha do mestre, suas cargas de trabalho continuarão a ser executadas nos nós do trabalhador, mas não será possível usar os comandos `kubectl` para trabalhar com seus recursos de cluster ou visualizar o funcionamento do cluster até que o servidor da API do Kubernetes no mestre esteja novamente ativo. Se um pod ficar inativo durante a indisponibilidade do mestre, o pod não poderá ser reprogramado até que o nó do trabalhador possa atingir o servidor da API do Kubernetes novamente.<br><br>Durante uma indisponibilidade do mestre, ainda é possível executar os comandos `ibmcloud ks` com relação à API do {{site.data.keyword.containerlong_notm}} para trabalhar com seus recursos de infraestrutura, como nós do trabalhador ou VLANs. Se você mudar a configuração de cluster atual incluindo ou removendo nós do trabalhador no cluster, suas mudanças não ocorrerão até que o mestre esteja ativo novamente. **Nota**: não reinicie ou reinicialize um nó do trabalhador durante uma indisponibilidade do mestre. Essa ação remove os pods de seu nó do trabalhador. Como o servidor da API do Kubernetes está indisponível, os pods não podem ser reprogramados em outros nós do trabalhador no cluster.
+
+
 <br />
 
 
@@ -115,7 +118,7 @@ Revise as opções para depurar seus nós do trabalhador e localizar as causas r
 1.  Se o seu cluster está em um estado **Crítico**, **Exclusão com falha** ou **Aviso** ou está preso no estado **Pendente** por muito tempo, revise o estado de seus nós do trabalhador.
 
   ```
-  bx cs workers <cluster_name_or_id>
+  ibmcloud ks workers <cluster_name_or_id>
   ```
   {: pre}
 
@@ -130,17 +133,21 @@ Revise as opções para depurar seus nós do trabalhador e localizar as causas r
     <tbody>
   <tr>
       <td>Crítico</td>
-      <td>Um nó do trabalhador pode entrar em um estado Crítico por muitas razões: <ul><li>Você iniciou uma reinicialização para seu nó do trabalhador sem bloquear e drenar seu nó do trabalhador. A reinicialização de um nó do trabalhador pode causar distorção de dados em <code>docker</code>, <code>kubelet</code>, <code>kube-proxy</code> e <code>calico</code>. </li><li>Os pods que são implementados em seu nó do trabalhador não usam os limites de recurso para [memória ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) e [CPU ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Sem limites de recurso, os pods podem consumir todos os recursos disponíveis, sem deixar recursos para outros pods executarem nesse nó do trabalhador. Esse supercomprometimento de carga de trabalho faz com que o nó do trabalhador falhe. </li><li><code>Docker</code>, <code>kubelet</code> ou <code>calico</code> entraram em um estado irrecuperável depois de executarem centenas ou milhares de contêineres ao longo do tempo. </li><li>Você configurou um Virtual Router Appliance para seu nó do trabalhador que ficou inativo e cortou a comunicação entre o seu nó do trabalhador e o mestre do Kubernetes. </li><li> Problemas de rede atual no {{site.data.keyword.containershort_notm}} ou na infraestrutura do IBM Cloud (SoftLayer) que fazem a comunicação entre seu nó do trabalhador e o mestre do Kubernetes falhar.</li><li>O nó do trabalhador ficou sem capacidade. Verifique o <strong>Status</strong> do nó do trabalhador para ver se ele mostra <strong>Sem disco</strong> ou <strong>Sem memória</strong>. Se o nó do trabalhador está fora de capacidade, considere reduzir a carga de trabalho em seu nó do trabalhador ou incluir um nó do trabalhador em seu cluster para ajudar no balanceamento de carga da carga de trabalho.</li></ul> Em muitos casos, [recarregar](cs_cli_reference.html#cs_worker_reload) seu nó do trabalhador pode resolver o problema. Ao
-recarregar o nó do trabalhador, a [versão de correção](cs_versions.html#version_types) mais recente é aplicada ao nó do trabalhador. As versões principal e secundária não mudam. Antes de recarregar seu nó do trabalhador, certifique-se de bloquear e drenar o seu nó do trabalhador para assegurar que os pods existentes sejam finalizados normalmente e reprogramados em outros nós do trabalhador. </br></br> Se o recarregamento do nó do trabalhador não resolver o problema, acesse a próxima etapa para continuar a resolução de problemas de seu nó do trabalhador. </br></br><strong>Dica:</strong> é possível [configurar verificações de funcionamento para seu nó do trabalhador e ativar a Recuperação automática](cs_health.html#autorecovery). Se a Recuperação automática detecta um nó do trabalhador que não está saudável com base nas verificações configuradas, a Recuperação automática aciona uma ação corretiva como um recarregamento do S.O. no nó do trabalhador. Para obter mais informações sobre como a Recuperação automática funciona, veja o [blog de Recuperação automática ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
+      <td>Um nó do trabalhador pode entrar em um estado Crítico por muitas razões: <ul><li>Você iniciou uma reinicialização para seu nó do trabalhador sem bloquear e drenar seu nó do trabalhador. Reinicializar um nó do trabalhador pode causar distorção de dados em <code>containerd</code>, <code>kubelet</code>, <code>kube-proxy</code> e <code>calico</code>. </li><li>Os pods que são implementados em seu nó do trabalhador não usam os limites de recurso para [memória ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) e [CPU ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Sem limites de recurso, os pods podem consumir todos os recursos disponíveis, sem deixar recursos para outros pods executarem nesse nó do trabalhador. Esse supercomprometimento de carga de trabalho faz com que o nó do trabalhador falhe. </li><li>O <code>containerd</code>, <code>kubelet</code> ou <code>calico</code> entrou em um estado irrecuperável depois que ele executou centenas ou milhares de contêineres ao longo do tempo. </li><li>Você configurou um Virtual Router Appliance para seu nó do trabalhador que ficou inativo e cortou a comunicação entre o seu nó do trabalhador e o mestre do Kubernetes. </li><li> Problemas da rede atual no {{site.data.keyword.containerlong_notm}} ou na infraestrutura do IBM Cloud (SoftLayer) que fazem com que a comunicação entre o nó do trabalhador e o mestre do Kubernetes falhe.</li><li>O nó do trabalhador ficou sem capacidade. Verifique o <strong>Status</strong> do nó do trabalhador para ver se ele mostra <strong>Sem disco</strong> ou <strong>Sem memória</strong>. Se o nó do trabalhador está fora de capacidade, considere reduzir a carga de trabalho em seu nó do trabalhador ou incluir um nó do trabalhador em seu cluster para ajudar no balanceamento de carga da carga de trabalho.</li></ul> Em muitos casos, [recarregar](cs_cli_reference.html#cs_worker_reload) seu nó do trabalhador pode resolver o problema. Ao
+recarregar o nó do trabalhador, a [versão de correção](cs_versions.html#version_types) mais recente é aplicada ao nó do trabalhador. As versões principal e secundária não mudam. Antes de recarregar seu nó do trabalhador, certifique-se de bloquear e drenar o seu nó do trabalhador para assegurar que os pods existentes sejam finalizados normalmente e reprogramados em outros nós do trabalhador. </br></br> Se o recarregamento do nó do trabalhador não resolver o problema, acesse a próxima etapa para continuar a resolução de problemas de seu nó do trabalhador. </br></br><strong>Dica:</strong> é possível [configurar verificações de funcionamento para seu nó do trabalhador e ativar a Recuperação automática](cs_health.html#autorecovery). Se a Recuperação automática detecta um nó do trabalhador não funcional com base nas verificações configuradas, a Recuperação automática aciona uma ação corretiva como um recarregamento do S.O. no nó do trabalhador. Para obter mais informações sobre como a Recuperação automática funciona, veja o [blog de Recuperação automática ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
       </td>
+     </tr>
+     <tr>
+     <td>Implementado</td>
+     <td>As atualizações são implementadas com êxito em seu nó do trabalhador. Após as atualizações serem implementadas, o {{site.data.keyword.containerlong_notm}} inicia uma verificação de funcionamento no nó do trabalhador. Depois que a verificação de funcionamento é bem-sucedida, o nó do trabalhador entra em um estado <code>Normal</code>. Os nós do trabalhador em um estado <code>Deployed</code> geralmente estão prontos para receber cargas de trabalho, que é possível verificar executando <code>kubectl get nodes</code> e confirmando se o estado mostra <code>Normal</code>. </td>
      </tr>
       <tr>
         <td>Implementando</td>
-        <td>Quando você atualiza a versão do Kubernetes do nó do trabalhador, seu nó do trabalhador é reimplementado para instalar as atualizações. Se o nó do trabalhador está preso nesse estado por muito tempo, continue com a próxima etapa para ver se um problema ocorreu durante a implementação. </td>
+        <td>Quando você atualiza a versão do Kubernetes do nó do trabalhador, seu nó do trabalhador é reimplementado para instalar as atualizações. Se você recarregar ou reinicializar o nó do trabalhador, o nó do trabalhador será reimplementado para instalar automaticamente a versão de correção mais recente. Se o nó do trabalhador está preso nesse estado por muito tempo, continue com a próxima etapa para ver se um problema ocorreu durante a implementação. </td>
      </tr>
         <tr>
         <td>Normal</td>
-        <td>O nó do trabalhador está totalmente provisionado e pronto para ser usado no cluster. Esse estado é considerado saudável e não requer uma ação do usuário. **Nota**: embora os nós do trabalhador possam ser normais, outros recursos de infraestrutura, como [redes](cs_troubleshoot_network.html) e [armazenamento](cs_troubleshoot_storage.html), ainda podem precisar de atenção.</td>
+        <td>O nó do trabalhador está totalmente provisionado e pronto para ser usado no cluster. Esse estado é considerado funcional e não requer uma ação do usuário. **Nota**: embora os nós do trabalhador possam ser normais, outros recursos de infraestrutura, como [redes](cs_troubleshoot_network.html) e [armazenamento](cs_troubleshoot_storage.html), ainda podem precisar de atenção.</td>
      </tr>
    <tr>
         <td>Provisionando</td>
@@ -164,7 +171,7 @@ recarregar o nó do trabalhador, a [versão de correção](cs_versions.html#vers
       </tr>
       <tr>
        <td>Desconhecido</td>
-       <td>O mestre do Kubernetes não está acessível por um dos motivos a seguir:<ul><li>Você solicitou uma atualização do mestre do Kubernetes. O estado do nó do trabalhador não pode ser recuperado durante a atualização.</li><li>Você pode ter outro firewall que está protegendo seus nós do trabalhador ou mudado as configurações de firewall recentemente. O {{site.data.keyword.containershort_notm}} requer que determinados endereços IP e portas sejam abertos para permitir a comunicação do nó do trabalhador com o mestre do Kubernetes e vice-versa. Para obter mais informações, veja [O firewall evita que os nós do trabalhador se conectem](cs_troubleshoot_clusters.html#cs_firewall).</li><li>O mestre do Kubernetes está inativo. Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um chamado de suporte do [{{site.data.keyword.Bluemix_notm}}](#ts_getting_help).</li></ul></td>
+       <td>O mestre do Kubernetes não está acessível por um dos motivos a seguir:<ul><li>Você solicitou uma atualização do mestre do Kubernetes. O estado do nó do trabalhador não pode ser recuperado durante a atualização.</li><li>Você pode ter outro firewall que está protegendo seus nós do trabalhador ou mudado as configurações de firewall recentemente. O {{site.data.keyword.containerlong_notm}} requer que determinados endereços IP e portas sejam abertos para permitir a comunicação do nó do trabalhador com o mestre do Kubernetes e vice-versa. Para obter mais informações, veja [O firewall evita que os nós do trabalhador se conectem](cs_troubleshoot_clusters.html#cs_firewall).</li><li>O mestre do Kubernetes está inativo. Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um chamado de suporte do [{{site.data.keyword.Bluemix_notm}}](#ts_getting_help).</li></ul></td>
   </tr>
      <tr>
         <td>Avisar</td>
@@ -176,12 +183,12 @@ recarregar o nó do trabalhador, a [versão de correção](cs_versions.html#vers
 5.  Liste os detalhes para o nó do trabalhador. Se os detalhes incluem uma mensagem de erro, revise a lista de [mensagens de erro comum para nós do trabalhador](#common_worker_nodes_issues) para saber como resolver o problema.
 
    ```
-   bx cs worker-get <worker_id>
+   ibmcloud ks worker-get <worker_id>
    ```
    {: pre}
 
   ```
-  bx cs worker-get [<cluster_name_or_id>] <worker_node_id>
+  ibmcloud ks worker-get [<cluster_name_or_id>] <worker_node_id>
   ```
   {: pre}
 
@@ -205,12 +212,18 @@ Revise as mensagens de erro comuns e saiba como resolvê-las.
         <td>Sua conta de infraestrutura do IBM Cloud (SoftLayer) pode ser restringida de pedir recursos de cálculo. Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um chamado de suporte do [{{site.data.keyword.Bluemix_notm}}](#ts_getting_help).</td>
       </tr>
       <tr>
-        <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: não foi possível fazer a ordem. Há recursos insuficientes atrás do roteador 'router_name' para preencher a solicitação para os convidados a seguir: 'worker_id'.</td>
-        <td>A VLAN selecionada está associada a um pod no data center que possui espaço insuficiente para provisionar o nó do trabalhador. Você pode escolher entre as seguintes opções:<ul><li>Use um data center diferente para provisionar o nó do trabalhador. Execute <code>bx cs locations</code> para listar o data center disponível.<li>Se você tiver um par existente de VLAN pública e privada que esteja associado a outro pod no data center, use esse par de VLAN como alternativa.<li>Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um chamado de suporte do [{{site.data.keyword.Bluemix_notm}}](#ts_getting_help).</ul></td>
+      <td>{{site.data.keyword.Bluemix_notm}}  Exceção de infraestrutura: não foi possível colocar a ordem.<br><br>
+      Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: não foi possível fazer a ordem. Há recursos insuficientes atrás do roteador 'router_name' para preencher a solicitação para os convidados a seguir: 'worker_id'.</td>
+      <td>A zona que você selecionou pode não ter capacidade de infraestrutura suficiente para provisionar os seus nós do trabalhador. Ou, você pode ter excedido um limite em sua conta de infraestrutura do IBM Cloud (SoftLayer). Para resolver, tente uma das opções a seguir:
+      <ul><li>A disponibilidade do recurso de infraestrutura em zonas pode flutuar frequentemente. Espere alguns minutos e tente novamente.</li>
+      <li>Para um cluster de zona única, crie o cluster em uma zona diferente. Para um cluster de múltiplas zonas, inclua uma zona no cluster.</li>
+      <li>Especifique um par diferente de VLANs públicas e privadas para os nós do trabalhador em sua conta da infraestrutura do IBM Cloud (SoftLayer). Para nós do trabalhador que estão em um conjunto de trabalhadores, é possível usar o [comando](cs_cli_reference.html#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</li>
+      <li>Entre em contato com o gerenciador de conta da infraestrutura do IBM Cloud (SoftLayer) para verificar se você não excede um limite de conta, como uma cota global.</li>
+      <li>Abra um [chamado de suporte da infraestrutura do IBM Cloud (SoftLayer)](#ts_getting_help)</li></ul></td>
       </tr>
       <tr>
         <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: não foi possível obter a VLAN de rede com o ID: &lt;vlan id&gt;.</td>
-        <td>O nó do trabalhador não pôde ser provisionado porque o ID de VLAN selecionado não pôde ser localizado por um dos motivos a seguir:<ul><li>Talvez você tenha especificado o número da VLAN, em vez do ID da VLAN. O número da VLAN tem 3 ou 4 dígitos de comprimento, enquanto o ID da VLAN tem 7 dígitos. Execute <code>bx cs vlans &lt;location&gt;</code> para recuperar o ID da VLAN.<li>O ID da VLAN pode não estar associado à conta de infraestrutura do IBM Cloud (SoftLayer) que você usa. Execute <code>bx cs vlans &lt;location&gt;</code> para listar os IDs de VLAN disponíveis para sua conta. Para mudar a conta de infraestrutura do IBM Cloud (SoftLayer), veja [`bx cs credentials-set`](cs_cli_reference.html#cs_credentials_set). </ul></td>
+        <td>O nó do trabalhador não pôde ser provisionado porque o ID de VLAN selecionado não pôde ser localizado por um dos motivos a seguir:<ul><li>Talvez você tenha especificado o número da VLAN, em vez do ID da VLAN. O número da VLAN tem 3 ou 4 dígitos de comprimento, enquanto o ID da VLAN tem 7 dígitos. Execute <code>ibmcloud ks vlans &lt;zone&gt;</code> para recuperar o ID de VLAN.<li>O ID da VLAN pode não estar associado à conta de infraestrutura do IBM Cloud (SoftLayer) que você usa. Execute <code>ibmcloud ks vlans &lt;zone&gt;</code> para listar os IDs de VLAN disponíveis para sua conta. Para mudar a conta de infraestrutura do IBM Cloud (SoftLayer), consulte [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: o local fornecido para essa ordem é inválido. (HTTP 500)</td>
@@ -219,16 +232,18 @@ Revise as mensagens de erro comuns e saiba como resolvê-las.
        <tr>
         <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: o usuário não tem as permissões de infraestrutura necessárias do {{site.data.keyword.Bluemix_notm}} para incluir servidores
         </br></br>
-        Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: 'Item' deve ser pedido com permissão.</td>
-        <td>Você pode não ter as permissões necessárias para provisionar um nó do trabalhador do portfólio da infraestrutura do IBM Cloud (SoftLayer). Veja [Configurar o acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer) para criar clusters padrão do Kubernetes](cs_troubleshoot_clusters.html#cs_credentials).</td>
+        Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: 'Item' deve ser pedido com permissão.
+        </br></br>
+        As credenciais de infraestrutura do {{site.data.keyword.Bluemix_notm}} não puderam ser validadas.</td>
+        <td>Você talvez não tenha as permissões necessárias para executar a ação em seu portfólio de infraestrutura do IBM Cloud (SoftLayer) ou esteja usando as credenciais de infraestrutura erradas. Veja [Configurando a chave API para ativar o acesso ao portfólio de infraestrutura](cs_users.html#api_key).</td>
       </tr>
       <tr>
-       <td>O trabalhador não consegue conversar com servidores {{site.data.keyword.containershort_notm}}. Verifique se sua configuração de firewall está permitindo tráfego desse trabalhador.
-       <td><ul><li>Se você tiver um firewall, [defina suas configurações de firewall para permitir o tráfego de saída para as portas e endereços IP](cs_firewall.html#firewall_outbound).</li><li>Verifique se o seu cluster não tem um IP público executando `bx cs workers <mycluster>`. Se nenhum IP público está listado, então seu cluster tem somente VLANs privadas.<ul><li>Se você deseja que o cluster tenha somente VLANs privadas, configure sua [conexão VLAN](cs_clusters.html#worker_vlan_connection) e seu [firewall](cs_firewall.html#firewall_outbound).</li><li>Se você deseja que o cluster tenha um IP público, [inclua novos nós do trabalhador](cs_cli_reference.html#cs_worker_add) com as VLANs públicas e privadas.</li></ul></li></ul></td>
+       <td>O trabalhador não consegue conversar com servidores {{site.data.keyword.containerlong_notm}}. Verifique se sua configuração de firewall está permitindo tráfego desse trabalhador.
+       <td><ul><li>Se você tiver um firewall, [defina suas configurações de firewall para permitir o tráfego de saída para as portas e endereços IP](cs_firewall.html#firewall_outbound).</li><li>Verifique se o seu cluster não tem um IP público executando `ibmcloud ks workers &lt;mycluster&gt;`. Se nenhum IP público está listado, então seu cluster tem somente VLANs privadas.<ul><li>Se você deseja que o cluster tenha somente VLANs privadas, configure sua [conexão VLAN](cs_clusters_planning.html#private_clusters) e seu [firewall](cs_firewall.html#firewall_outbound).</li><li>Se você deseja que o cluster tenha um IP público, [inclua novos nós do trabalhador](cs_cli_reference.html#cs_worker_add) com as VLANs públicas e privadas.</li></ul></li></ul></td>
      </tr>
       <tr>
   <td>Não é possível criar o token do portal do IMS, pois nenhuma conta do IMS está vinculada à conta selecionada do BSS</br></br>Usuário fornecido não localizado ou ativo</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: a conta do usuário é atualmente cancel_pending.</br></br>Aguardando a máquina ficar visível para o usuário</td>
-  <td>O proprietário da chave API que é usada para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer) não tem as permissões necessárias para executar a ação ou pode estar com exclusão pendente.</br></br><strong>Como o usuário</strong>, siga estas etapas: <ol><li>Se você tem acesso a múltiplas contas, certifique-se de que tenha efetuado login na conta em que deseja trabalhar com o {{site.data.keyword.containerlong_notm}}. </li><li>Execute <code>bx cs api-key-info</code> para visualizar o proprietário da chave API atual que é usado para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer). </li><li>Execute <code>bx account list</code> para visualizar o proprietário da conta do {{site.data.keyword.Bluemix_notm}} que você usa atualmente. </li><li>Entre em contato com o proprietário da conta do {{site.data.keyword.Bluemix_notm}} e relate que o proprietário da chave API tem permissões insuficientes na infraestrutura do IBM Cloud (SoftLayer) ou pode estar com exclusão pendente. </li></ol></br><strong>Como o proprietário da conta</strong>, siga estas etapas: <ol><li>Revise as [permissões necessárias na infraestrutura do IBM Cloud (SoftLayer)](cs_users.html#infra_access) para executar a ação que falhou anteriormente. </li><li>Corrija as permissões do proprietário da chave API ou crie uma nova chave API usando o comando [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset). </li><li>Se você ou outro administrador de conta configura manualmente as credenciais de infraestrutura do IBM Cloud (SoftLayer) em sua conta, execute [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) para remover as credenciais de sua conta.</li></ol></td>
+  <td>O proprietário da chave API que é usada para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer) não tem as permissões necessárias para executar a ação ou pode estar com exclusão pendente.</br></br><strong>Como o usuário</strong>, siga estas etapas: <ol><li>Se você tem acesso a múltiplas contas, certifique-se de que tenha efetuado login na conta em que deseja trabalhar com o {{site.data.keyword.containerlong_notm}}. </li><li>Execute <code>ibmcloud ks api-key-info</code> para visualizar o proprietário da chave API atual que é usado para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer). </li><li>Execute <code>ibmcloud account list</code> para visualizar o proprietário da conta do {{site.data.keyword.Bluemix_notm}} que você usa atualmente. </li><li>Entre em contato com o proprietário da conta do {{site.data.keyword.Bluemix_notm}} e relate que o proprietário da chave API tem permissões insuficientes na infraestrutura do IBM Cloud (SoftLayer) ou pode estar com exclusão pendente. </li></ol></br><strong>Como o proprietário da conta</strong>, siga estas etapas: <ol><li>Revise as [permissões necessárias na infraestrutura do IBM Cloud (SoftLayer)](cs_users.html#infra_access) para executar a ação que falhou anteriormente. </li><li>Corrija as permissões do proprietário da chave API ou crie uma nova chave API usando o comando [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset). </li><li>Se você ou outro administrador de conta configurou manualmente as credenciais de infraestrutura do IBM Cloud (SoftLayer) em sua conta, execute [<code>ibmcloud ks credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) para remover as credenciais de sua conta.</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -288,19 +303,21 @@ Revise as opções que você tiver para depurar suas implementações de app e l
 Ainda está tendo problemas com o seu cluster?
 {: shortdesc}
 
+-  No terminal, você é notificado quando atualizações para a CLI `ibmcloud` e plug-ins estão disponíveis. Certifique-se de manter sua CLI atualizada para que seja possível usar todos os comandos e sinalizações disponíveis.
+
 -   Para ver se o {{site.data.keyword.Bluemix_notm}} está disponível, [verifique a página de status do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/bluemix/support/#status).
--   Poste uma pergunta no [{{site.data.keyword.containershort_notm}} Slack ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com).
+-   Poste uma pergunta no [{{site.data.keyword.containerlong_notm}} Slack ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com).
 
     Se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}}, [solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para essa Folga.
     {: tip}
 -   Revise os fóruns para ver se outros usuários tiveram o mesmo problema. Ao usar os fóruns para fazer uma pergunta, marque sua pergunta para que ela seja vista pelas equipes de desenvolvimento do {{site.data.keyword.Bluemix_notm}}.
 
-    -   Se você tiver questões técnicas sobre como desenvolver ou implementar clusters ou apps com o {{site.data.keyword.containershort_notm}}, poste sua pergunta no [Stack Overflow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e identifique a sua pergunta com `ibm-cloud`, `kubernetes` e `containers`.
-    -   Para perguntas sobre o serviço e instruções de introdução, use o fórum [IBM developerWorks dW Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `ibm-cloud` e `containers`.
+    -   Se você tiver questões técnicas sobre como desenvolver ou implementar clusters ou apps com o {{site.data.keyword.containerlong_notm}}, poste sua pergunta no [Stack Overflow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo") ](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e identifique-a com `ibm-cloud`, `kubernetes` e `containers`.
+    -   Para perguntas sobre o serviço e instruções de introdução, use o fórum do [IBM Developer Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `ibm-cloud` e `containers`.
     Consulte [Obtendo ajuda](/docs/get-support/howtogetsupport.html#using-avatar) para obter mais detalhes sobre o uso dos fóruns.
 
 -   Entre em contato com o Suporte IBM abrindo um chamado. Para saber como abrir um chamado de suporte IBM ou sobre os níveis de suporte e as severidades de chamado, veja [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Ao relatar um problema, inclua o ID do cluster. Para obter o ID do cluster, execute `bx cs clusters`.
+Ao relatar um problema, inclua o ID do cluster. Para obter o ID do seu cluster, execute `ibmcloud ks clusters`.
 

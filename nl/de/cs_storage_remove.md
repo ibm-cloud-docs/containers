@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -43,7 +43,7 @@ Dies hängt vom Abrechnungstyp sowie davon ab, welche Elemente Sie löschen. Wen
 * Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](cs_storage_file.html#backup_restore) oder den [Blockspeicher](cs_storage_block.html#backup_restore) eine Sicherung ausführen.
 * Wenn Sie ein {{site.data.keyword.Bluemix_dedicated}}-Konto verwenden, müssen Sie die Datenträgerlöschung anfordern, indem Sie [ein Support-Ticket öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-Führen Sie zunächst den folgenden Schritt aus: [Geben Sie ein Ziel für Ihre CLI an](cs_cli_install.html#cs_cli_configure).
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
 Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
 
@@ -173,7 +173,7 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    ```
    {: pre}
      
-9. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. Dieser Prozess dauert möglicherweise einige Minuten. 
+9. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. **Anmerkung:** Der Löschvorgang kann mehrere Tage andauern. 
 
    **File Storage:** 
    ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -16,11 +16,12 @@ lastupdated: "2018-10-10"
 {:download: .download}
 
 # Régions et zones
+{: #regions-and-zones}
 
-Une région est un emplacement géographique spécifique dans lequel vous pouvez déployer des applications, des services et d'autres ressources {{site.data.keyword.Bluemix}}. [Les régions {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sont différentes des [régions {{site.data.keyword.containerlong}}](#container_regions). Les régions se composent d'une ou de plusieurs zones, lesquelles correspondent à des centres de données physiques qui hébergent les ressources de calcul, les ressources réseau et les ressources de stockage, ainsi que les systèmes de refroidissement et les appareils électriques hébergeant les services et les applications. Les zones sont isolées les unes des autres pour garantir qu'aucun point de défaillance unique ne sera partagé.
+Une région est un emplacement géographique spécifique dans lequel vous pouvez déployer des applications, des services et d'autres ressources {{site.data.keyword.Bluemix}}. [Les régions {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sont différentes des [régions {{site.data.keyword.containerlong}}](#container_regions). Les régions se composent d'une ou de plusieurs zones, lesquelles correspondent à des centres de données physiques qui hébergent les ressources de calcul, les ressources réseau et les ressources de stockage, ainsi que les systèmes de refroidissement et les appareils électriques hébergeant les services et les applications. Les zones sont isolées les unes des autres pour garantir qu'aucun point de défaillance unique ne sera partagé. 
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} est présent dans le monde entier. Les services au sein d'{{site.data.keyword.Bluemix_notm}} peuvent être disponibles partout ou dans une région spécifique. Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containerlong_notm}}, ses ressources restent dans la région dans laquelle vous avez déployé le cluster.
+{{site.data.keyword.Bluemix_notm}} est présent dans le monde entier. Les services au sein d'{{site.data.keyword.Bluemix_notm}} peuvent être disponibles partout ou dans une région spécifique. Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containerlong_notm}}, ses ressources restent dans la région dans laquelle vous avez déployé le cluster. 
 
 **Remarque** : vous pouvez créer des clusters standard dans toutes les régions {{site.data.keyword.containerlong_notm}} prises en charge. Les clusters gratuits ne sont disponibles que dans certaines régions.
 
@@ -179,8 +180,7 @@ Les zones sont des centres de données physiques disponibles au sein d'une régi
     </tr>
     <tr>
       <td>Sud du Royaume-Uni</td>
-      <td>Londres : lon02, lon04, lon06</td>
-      <td></td>
+      <td>Londres : lon04, lon05, lon06<br><br>**Remarque** : la zone lon05 remplace lon02. Les nouveaux clusters doivent utiliser lon05.</td>
     </tr>
     <tr>
       <td>Est des Etats-Unis</td>
@@ -191,8 +191,7 @@ Les zones sont des centres de données physiques disponibles au sein d'une régi
     <tr>
       <td>Sud des Etats-Unis</td>
       <td>Dallas : dal10, dal12, dal13</td>
-      <td><p>San Jose : sjc03, sjc04</p>
-      <p>São Paulo : sao01</p></td>
+      <td><p>San Jose : sjc03, sjc04</p><p>São Paulo : sao01</p></td>
     </tr>
   </tbody>
 </table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-12"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -53,6 +53,7 @@ lastupdated: "2018-09-12"
 **必須使用多區域叢集嗎？**</br>
 不必。您可以建立所需數目的單一區域叢集。實際上，您可能偏好使用單一區域叢集來簡化管理，或者，如果您的叢集必須位於特定[單一區域城市](cs_regions.html#zones)中。
 
+
 ## 多區域叢集
 {: #multizone}
 
@@ -74,6 +75,7 @@ lastupdated: "2018-09-12"
 {: #mz_setup}
 
 <img src="images/cs_cluster_multizone.png" alt="多區域叢集的高可用性" width="500" style="width:500px; border-style: none"/>
+
 
 您可以將其他區域新增至叢集，以將工作者節點儲存區中的工作者節點抄寫到某個地區內的多個區域。多區域叢集的設計為將 Pod 平均排定到各工作者節點及區域，以確保可用性及失敗回復。如果工作者節點未平均分散到各區域，或其中一個區域中的容量不足，則 Kubernetes 排程器可能無法排定所有要求的 Pod。因此，Pod 可能會進入**擱置**狀態，直到有足夠的可用容量為止。如果您要變更預設行為，讓 Kubernetes 排程器以最佳效能分佈將 Pod 分佈到各區域，請使用 `preferredDuringSchedulingIgnoredDuringExecution` [Pod 親緣性原則](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)。
 
@@ -100,9 +102,9 @@ lastupdated: "2018-09-12"
 **如何讓使用者從公用網際網路存取我的應用程式？**</br>
 您可以使用 Ingress 應用程式負載平衡器 (ALB) 或負載平衡器服務來公開應用程式。
 
-依預設，會在叢集的每一個區域中自動建立及啟用公用 ALB。也會自動建立及部署叢集的 Cloudflare 多區域負載平衡器 (MZLB)，使每個地區有 1 個 MZLB。MZLB 會在相同主機名稱後面放置 ALB 的 IP 位址，並對這些 IP 位址啟用性能檢查，以判斷是否可以使用它們。例如，如果您在美國東部地區的 3 個區域有工作者節點，則主機名稱 `yourcluster.us-east.containers.appdomain.cloud` 具有 3 個 ALB IP 位址。MZLB 性能檢查會檢查地區中每一個區域的公用 ALB IP，並根據這些性能檢查來更新 DNS 查閱結果。如需相關資訊，請參閱 [Ingress 元件和架構](cs_ingress.html#planning)。
+- **Ingress 應用程式負載平衡器 (ALB)** 依預設，會在叢集的每一個區域中自動建立及啟用公用 ALB。也會自動建立及部署叢集的 Cloudflare 多區域負載平衡器 (MZLB)，使每個地區有 1 個 MZLB。MZLB 會在相同主機名稱後面放置 ALB 的 IP 位址，並對這些 IP 位址啟用性能檢查，以判斷是否可以使用它們。例如，如果您在美國東部地區的 3 個區域有工作者節點，則主機名稱 `yourcluster.us-east.containers.appdomain.cloud` 具有 3 個 ALB IP 位址。MZLB 性能檢查會檢查地區中每一個區域的公用 ALB IP，並根據這些性能檢查來更新 DNS 查閱結果。如需相關資訊，請參閱 [Ingress 元件和架構](cs_ingress.html#planning)。
 
-負載平衡器服務只會設定在某個區域中。您應用程式的送入要求會從該區域遞送至其他區域中的所有應用程式實例。如果此區域變成無法使用，則可能無法從網際網路存取您的應用程式。您可以在其他區域中設定其他負載平衡器服務來負責單一區域故障。如需相關資訊，請參閱高可用性[負載平衡器服務](cs_loadbalancer.html#multi_zone_config)。
+- **負載平衡器服務：**負載平衡器服務只會設定在某個區域中。您應用程式的送入要求會從該區域遞送至其他區域中的所有應用程式實例。如果此區域變成無法使用，則可能無法從網際網路存取您的應用程式。您可以在其他區域中設定其他負載平衡器服務來負責單一區域故障。如需相關資訊，請參閱高可用性[負載平衡器服務](cs_loadbalancer.html#multi_zone_config)。
 
 **我可以為多區域叢集設定持續性儲存空間嗎？**</br>
 對於高可用性持續性儲存空間，請使用雲端服務（例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)）。
@@ -208,15 +210,16 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 依預設，{{site.data.keyword.containerlong_notm}} 會設定叢集能夠存取專用 VLAN 和公用 VLAN。專用 VLAN 會判定指派給每一個工作者節點的專用 IP 位址，以將專用網路介面提供給每一個工作者節點。
 公用 VLAN 容許工作者節點自動及安全地連接至主節點。
 
+如果您要鎖定叢集，以容許透過專用 VLAN 傳輸專用資料流量，但封鎖透過公用 VLAN 傳輸公用資料流量，則可以[使用 Calico 網路原則來保護您的叢集免於公用存取](cs_network_cluster.html#both_vlans_private_services)。這些 Calico 網路原則不會阻止您的工作者節點與主節點通訊。您可以限制叢集中顯現的漏洞，而無需藉由[將網路工作負載隔離至邊緣工作者節點](cs_edge.html)來鎖定公用資料流量。
 
 如果您要建立只能存取專用 VLAN 的叢集，則可以建立單一區域或多區域專用叢集。不過，當您的工作者節點僅連接至專用 VLAN 時，工作者節點無法自動連接至主節點。您必須配置閘道應用裝置，才能提供工作者節點與主節點之間的網路連線功能。**附註**：您無法轉換已連接至公用及專用 VLAN 的叢集，使其變成僅限專用叢集。從叢集中移除所有公用 VLAN 會導致數個叢集元件停止運作。您必須使用下列步驟來建立新的叢集。
 
 如果您想要建立只能存取專用 VLAN 的叢集，請執行下列動作：
 
-1.  檢閱[規劃僅限專用叢集網路](cs_network_planning.html#private_vlan)
+1.  檢閱[規劃僅限專用叢集網路](cs_network_cluster.html#private_vlan)。
 2.  為網路連線功能配置閘道應用裝置。請注意，您必須在防火牆中[開啟必要的埠和 IP 位址](cs_firewall.html#firewall_outbound)，以及對子網路[啟用 VLAN Spanning](cs_subnets.html#vra-routing)。
 3.  透過併入 `--private-only` 旗標，以[使用 CLI 來建立叢集](cs_clusters.html#clusters_cli)。
-4.  如果您要使用專用 NodePort、LoadBalancer 或 Ingress 服務，將應用程式公開給專用網路，請檢閱[針對僅限專用 VLAN 設定來規劃專用外部網路](cs_network_planning.html#private_vlan)。只能在專用 IP 位址存取此服務，且您必須在防火牆中配置埠，才能使用專用 IP 位址。
+4.  如果您要使用專用 NodePort、負載平衡器或 Ingress 服務，將應用程式公開給專用網路，請檢閱[針對僅限專用 VLAN 設定來規劃專用外部網路](cs_network_planning.html#private_vlan)。只能在專用 IP 位址存取此服務，且您必須在防火牆中配置埠，才能使用專用 IP 位址。
 
 
 ## 工作者節點儲存區及工作者節點
@@ -264,7 +267,7 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 因為基礎硬體的成本是由多個客戶分攤，所以共用節點成本通常會比專用節點成本低。不過，當您決定共用或專用節點時，可能會想要與法務部門討論應用程式環境所需的基礎架構隔離及法規遵循層次。
 
 **哪些是 VM 的一般功能？**</br>
-虛擬機器使用本端磁碟而非儲存區域網路 (SAN) 來達到可靠性。可靠性優點包括將位元組序列化到本端磁碟時的更高傳輸量，以及減少檔案系統由於網路故障而造成的退化。每個 VM 都配備了 1000Mbps 網路速度、OS 檔案系統的 25GB 主要本端磁碟儲存空間，以及 100GB 次要本端磁碟儲存空間（用於容器運行環境和 `kubelet` 等資料）。
+虛擬機器使用本端磁碟而非儲存區域網路 (SAN) 來達到可靠性。可靠性優點包括將位元組序列化到本端磁碟時的更高傳輸量，以及減少檔案系統由於網路故障而造成的退化。每個 VM 都配備了 1000Mbps 網路速度、OS 檔案系統的 25GB 主要本端磁碟儲存空間，以及 100GB 次要本端磁碟儲存空間（用於容器運行環境和 `kubelet` 等資料）。工作者節點上的本端儲存空間僅適用於短期處理，當您更新或重新載入工作者節點時，會清除主要及次要磁碟。如需持續性儲存空間解決方案的相關資訊，請參閱[規劃高度可用的持續性儲存空間](cs_storage_planning.html#storage_planning)。
 
 **如果我已淘汰 `u1c` 或 `b1c` 機型，怎麼辨？**</br>若要開始使用 `u2c` 及 `b2c` 機型，[請藉由新增工作者節點來更新機型](cs_cluster_update.html#machine_type)。
 
@@ -316,7 +319,7 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>虛擬，c2c.16x32</strong>：當您想要工作者節點的 CPU 和記憶體資源取得近似平衡以處理輕量型到中量型工作負載時，請使用此特性。</td></td>
+<td><strong>虛擬，c2c.16x32</strong>：當您想要輕量型到中量型工作負載之工作者節點的 CPU 和記憶體資源比例為 1:2 時，請使用此特性。</td></td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
@@ -326,8 +329,8 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>虛擬，c2c.32x64</strong>：當您想要工作者節點的 CPU 和記憶體資源取得近似平衡以處理中量型工作負載時，請使用此特性。</td></td>
-<td>16 / 16GB</td>
+<td><strong>虛擬，c2c.32x64</strong>：當您想要中量型工作負載之工作者節點的 CPU 和記憶體資源比例為 1:2 時，請使用此特性。</td></td>
+<td>32 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
@@ -341,13 +344,13 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 {: shortdesc}
 
 **裸機與 VM 的不同之處？**</br>
-裸機可讓您直接存取機器上的實體資源，例如記憶體或 CPU。此設定可免除虛擬機器 Hypervisor，該 Hypervisor 將實體資源配置給在主機上執行的虛擬機器。相反地，裸機的所有資源將由工作者節點專用，因此您不需要擔心「吵雜的鄰居」共用資源或降低效能。實體機型的本端儲存空間多於虛擬機型，有些實體機型具有 RAID 可用來備份本端資料。
+裸機可讓您直接存取機器上的實體資源，例如記憶體或 CPU。此設定可免除虛擬機器 Hypervisor，該 Hypervisor 將實體資源配置給在主機上執行的虛擬機器。相反地，裸機的所有資源將由工作者節點專用，因此您不需要擔心「吵雜的鄰居」共用資源或降低效能。實體機型的本端儲存空間多於虛擬機型，而且有些實體機型具有 RAID 可用來增加資料可用性。工作者節點上的本端儲存空間僅適用於短期處理，當您更新或重新載入工作者節點時，會清除主要及次要磁碟。如需持續性儲存空間解決方案的相關資訊，請參閱[規劃高度可用的持續性儲存空間](cs_storage_planning.html#storage_planning)。
 
 **除了更好的效能規格之外，裸機還有什麼功能是 VM 所沒有的？**</br>
 是。透過裸機，您可以選擇啟用「授信運算」，以驗證工作者節點是否遭到竄改。如果您未在建立叢集期間啟用信任，但後來想要啟用，則可以使用 `ibmcloud ks feature-enable` [指令](cs_cli_reference.html#cs_cluster_feature_enable)。啟用信任之後，以後您就無法再予以停用。無需信任，即可建立新叢集。如需在節點啟動處理程序期間信任如何運作的相關資訊，請參閱[使用授信運算的 {{site.data.keyword.containerlong_notm}}](cs_secure.html#trusted_compute)。「授信運算」適用於執行 Kubernets 1.9 版或更新版本，且具有特定裸機機型的叢集。當您執行 `ibmcloud ks machine-types <zone>` [指令](cs_cli_reference.html#cs_machine_types)時，可以檢閱 **Trustable** 欄位來查看哪些機器支援信任。例如，`mgXc` GPU 特性不支援「授信運算」。
 
 **裸機聽起來真棒！有什麼原因阻止我立即訂購？**</br>
-裸機伺服器的成本高於虛擬伺服器，最適合需要更多資源和主機控制的高效能應用程式。 
+裸機伺服器的成本高於虛擬伺服器，最適合需要更多資源和主機控制的高效能應用程式。
 
 **重要事項**：裸機伺服器是按月計費。如果您在月底之前取消裸機伺服器，則會向您收取該月整個月的費用。訂購及取消裸機伺服器是透過 IBM Cloud 基礎架構 (SoftLayer) 帳戶進行的手動程序。可能需要多個營業日才能完成。
 
@@ -392,13 +395,13 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>資料密集的裸機，md1c.16x64.4x4tb</strong>：適用於大量的本端磁碟儲存空間，包括 RAID 來備份儲存在本端機器上的資料。用於分散式檔案系統、大型資料庫及海量資料分析工作負載之類的案例。</td>
+<td><strong>資料密集的裸機，md1c.16x64.4x4tb</strong>：針對大量的本端磁碟儲存空間（包括 RAID 來增加資料可用性）、工作負載（例如分散式檔案系統）、大型資料庫及海量資料分析使用此類型。</td>
 <td>16 / 64GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>資料密集的裸機，md1c.28x512.4x4tb</strong>：適用於大量的本端磁碟儲存空間，包括 RAID 來備份儲存在本端機器上的資料。用於分散式檔案系統、大型資料庫及海量資料分析工作負載之類的案例。</td>
+<td><strong>資料密集的裸機，md1c.28x512.4x4tb</strong>：針對大量的本端磁碟儲存空間（包括 RAID 來增加資料可用性）、工作負載（例如分散式檔案系統）、大型資料庫及海量資料分析使用此類型。</td>
 <td>28 / 512 GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
@@ -422,7 +425,7 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 ### 軟體定義儲存 (SDS) 機器
 {: #sds}
 
-軟體定義儲存 (SDS) 特性是使用原始磁碟作為實體本端儲存空間而佈建的實體機器。由於資料與計算節點會並存，所以 SDS 機器很適合高效能工作負載。
+軟體定義儲存 (SDS) 特性是使用其他原始磁碟作為實體本端儲存空間而佈建的實體機器。不同於主要及次要本端磁碟，在工作者節點更新或重新載入期間，不會清除這些原始磁碟。由於資料與計算節點會並存，所以 SDS 機器很適合高效能工作負載。
 {: shortdesc}
 
 **何時要使用 SDS 特性？**</br>
@@ -430,6 +433,8 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 *  如果您在叢集中使用 SDS 附加程式，則必須使用 SDS 機器。
 *  如果您的應用程式是一個需要本端儲存空間的 [StatefulSet ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)，則可以使用 SDS 機器，並佈建 [Kubernetes 本端持續性磁區（測試版）![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/)。
 *  您可能有需要 SDS 或本端儲存空間的自訂應用程式或叢集附加程式。例如，如果您計劃使用 logDNA，則必須使用 SDS 機型。
+
+如需其他儲存空間解決方案，請參閱[規劃高度可用的持續性儲存空間](cs_storage_planning.html#storage_planning)。
 
 **我可以訂購哪些 SDS 特性？**</br>
 機型因區域而異。若要查看您區域中可用的機型，請執行 `ibmcloud ks machine-types <zone>`。您也可以檢閱可用的[裸機](#bm)或 [VM](#vm) 機型。
@@ -448,10 +453,24 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 <th>名稱及使用案例</th>
 <th>核心 / 記憶體</th>
 <th>主要 / 次要磁碟</th>
-<th>本端儲存空間</th>
+<th>其他原始磁碟</th>
 <th>網路速度</th>
 </thead>
 <tbody>
+<tr>
+<td><strong>具有 SDS 的裸機，ms2c.4x32.1.9tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存 (SDS) 的這個需要大量磁碟空間的特性。</td>
+<td>4 / 32GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>1.9TB 原始 SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>具有 SDS 的裸機，ms2c.16x64.1.9tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存 (SDS) 的這個需要大量磁碟空間的特性。</td>
+<td>16 / 64GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>1.9TB 原始 SSD</td>
+<td>10000Mbps</td>
+</tr>
 <tr>
 <td><strong>具有 SDS 的裸機，ms2c.28x256.3.8tb.ssd</strong>：如果您需要額外的本端儲存空間以獲得效能，請使用支援軟體定義儲存 (SDS) 的這個需要大量磁碟空間的特性。</td>
 <td>28 / 256GB</td>

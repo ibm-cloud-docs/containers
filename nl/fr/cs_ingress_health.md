@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -105,15 +105,15 @@ Les journaux sont automatiquement collectés pour vos équilibreurs de charge d'
 </tr>
 <tr>
 <td><code>"upstream_response_time": $upstream_response_time</code></td>
-<td>Temps nécessaire à l'ALB pour recevoir la réponse du serveur en amont pour l'application de back end, mesuré en secondes avec une résolution en millisecondes. Les temps de plusieurs réponses sont séparés par des virgules ou des signes deux-points comme les adresses dans la variable <code>$upstream_addr</code>. </td>
+<td>Temps nécessaire à l'ALB pour recevoir la réponse du serveur en amont pour l'application de back end, mesuré en secondes avec une résolution en millisecondes. Les temps de plusieurs réponses sont séparés par des virgules ou des signes deux-points comme les adresses dans la variable <code>$upstream_addr</code>.</td>
 </tr>
 <tr>
 <td><code>"upstream_connect_time": $upstream_connect_time</code></td>
-<td>Temps nécessaire à l'ALB pour établir une connexion avec le serveur en amont pour l'application de back end, mesuré en secondes avec une résolution en millisecondes. Si TLS/SSL est activé dans la configuration de la ressource Ingress, ce temps comprend la durée d'établissement de la liaison. Les temps de plusieurs connexions sont séparés par des virgules ou des signes deux-points comme les adresses dans la variable <code>$upstream_addr</code>. </td>
+<td>Temps nécessaire à l'ALB pour établir une connexion avec le serveur en amont pour l'application de back end, mesuré en secondes avec une résolution en millisecondes. Si TLS/SSL est activé dans la configuration de la ressource Ingress, ce temps comprend la durée d'établissement de la liaison. Les temps de plusieurs connexions sont séparés par des virgules ou des signes deux-points comme les adresses dans la variable <code>$upstream_addr</code>.</td>
 </tr>
 <tr>
 <td><code>"upstream_header_time": $upstream_header_time</code></td>
-<td>Temps nécessaire à l'ALB pour recevoir l'en-tête de réponse du serveur en amont pour l'application de back end, mesuré en secondes avec une résolution en millisecondes. Les temps de plusieurs connexions sont séparés par des virgules ou des signes deux-points comme les adresses dans la variable <code>$upstream_addr</code>. </td>
+<td>Temps nécessaire à l'ALB pour recevoir l'en-tête de réponse du serveur en amont pour l'application de back end, mesuré en secondes avec une résolution en millisecondes. Les temps de plusieurs connexions sont séparés par des virgules ou des signes deux-points comme les adresses dans la variable <code>$upstream_addr</code>.</td>
 </tr>
 </tbody></table>
 

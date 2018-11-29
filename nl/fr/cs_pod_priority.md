@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -41,7 +41,7 @@ _Figure : Scénarios illustrant la priorité des pods_
 ![Scénarios illustrant la priorité des pods](images/pod-priority.png)
 1.  Trois pods avec une priorité élevée, moyenne et faible sont en attente de planification. Le planificateur trouve un noeud worker disposant d'assez d'espace pour les trois pods et planifie ces pods par ordre de priorité, en planifiant en premier le pod dont la priorité est la plus élevée.
 2.  Trois pods avec une priorité élevée, moyenne et faible sont en attente de planification. Le planificateur trouve un noeud worker disponible mais ce noeud n'a pas assez de ressources pour prendre en charge les pods avec une priorité élevée ou moyenne. Le pod de priorité faible n'est pas planifié et reste en attente.
-3.  Deux pods avec une priorité élevée et moyenne sont en attente de planification. Il existe déjà un troisième pod avec une priorité faible sur un noeud worker disponible. Cependant, le noeud worker ne dispose pas de ressources suffisantes pour planifier les pods en attente. Le planificateur préempte, ou retire, le pod de faible priorité, qui repasse alors à l'état en attente. Ensuite, le planificateur tente de planifier le pod avec une priorité élevée. Cependant, le noeud worker ne dispose pas de ressources suffisantes pour planifier le pod de priorité élevée et le planificateur planifie à la place le pod avec une priorité moyenne. 
+3.  Deux pods avec une priorité élevée et moyenne sont en attente de planification. Il existe déjà un troisième pod avec une priorité faible sur un noeud worker disponible. Cependant, le noeud worker ne dispose pas de ressources suffisantes pour planifier les pods en attente. Le planificateur préempte, ou retire, le pod de faible priorité, qui repasse alors à l'état en attente. Ensuite, le planificateur tente de planifier le pod avec une priorité élevée. Cependant, le noeud worker ne dispose pas de ressources suffisantes pour planifier le pod de priorité élevée et le planificateur planifie à la place le pod avec une priorité moyenne.
 
 **Pour plus d'informations** : voir la documentation de Kubernetes sur la [priorité et la préemption des pods ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/).
 
@@ -76,7 +76,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 Pour définir la priorité d'un pod, vous devez utiliser une classe de priorité.
 {: shortdesc}
 
-Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster Kubernetes version 1.11 ou ultérieure.
+Avant de commencer :
+* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+* [Créez](cs_clusters.html#clusters_ui) ou [mettez à jour](cs_cluster_update.html#update) votre cluster avec Kubernetes version 1.11 ou ultérieure.
 
 1.  Facultatif : utilisez une classe de priorité existante comme modèle pour définir la nouvelle classe.
     
@@ -114,7 +116,7 @@ Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install
     </thead>
     <tbody>
     <tr>
-    <td><code>metadata/name</code></td>
+    <td><code>metadata.name</code></td>
     <td>Obligatoire : nom de la classe de priorité que vous désirez créer.</td>
     </tr>
     <tr>
@@ -154,7 +156,8 @@ Affectez une classe de priorité à la spécification de votre pod pour définir
 {: shortdesc}
 
 Avant de commencer :
-* [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster Kubernetes version 1.11 ou ultérieure.
+* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+* [Créez](cs_clusters.html#clusters_ui) ou [mettez à jour](cs_cluster_update.html#update) votre cluster avec Kubernetes version 1.11 ou ultérieure.
 * [Familiarisez-vous avec le fonctionnement de la planification des priorités](#priority_scheduling), car la priorité peut préempter des pods existants et affecter le mode de consommation des ressources de votre cluster.
 
 Pour affecter une priorité à vos pods :

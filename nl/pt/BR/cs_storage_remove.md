@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -43,7 +43,7 @@ Depende do que você excluir e do tipo de faturamento. Se você excluir o PVC e 
 * Ao limpar o armazenamento persistente, você exclui todos os dados que estão armazenados nele. Se você precisar de uma cópia dos dados, faça um backup para o [armazenamento de arquivo](cs_storage_file.html#backup_restore) ou [armazenamento de bloco](cs_storage_block.html#backup_restore).
 * Se você usa uma conta do {{site.data.keyword.Bluemix_dedicated}}, deve-se solicitar a exclusão do volume [abrindo um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-Antes de iniciar,  [ direcionar sua CLI ](cs_cli_install.html#cs_cli_configure).
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
 
 Para limpar os dados persistentes:
 
@@ -173,7 +173,7 @@ Para limpar os dados persistentes:
    ```
    {: pre}
      
-9. Verifique se a instância de armazenamento físico foi removida. Esse processo pode demorar alguns minutos. 
+9. Verifique se a instância de armazenamento físico foi removida. **Nota**: o processo de exclusão pode levar até alguns dias para ser concluído. 
 
    **Armazenamento de arquivo:** 
    ```

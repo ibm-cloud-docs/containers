@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -28,7 +28,10 @@ Lorsque vous utilisez {{site.data.keyword.containerlong}}, tenez compte de ces t
 
 Vous avez exposé votre application au public en créant une ressource Ingress pour votre application dans votre cluster. Cependant, lorsque vous tentez de vous connecter à votre application via le sous-domaine ou l'adresse IP publique de l'ALB, la connexion échoue ou arrive à expiration. Les étapes indiquées dans les sections suivantes peuvent vous aider à déboguer votre configuration d'Ingress.
 
-## Etape 1 : Vérification des messages d'erreur dans la ressource Ingress ou les journaux de pod d'ALB
+Veillez à définir un hôte dans une seule ressource Ingress. Si un hôte est défini dans plusieurs ressources Ingress, l'ALB risque de ne pas acheminer le trafic correctement et vous pourrez obtenir des erreurs.
+{: tip}
+
+## Etape 1 : Vérification des messages d'erreur dans le déploiement de la ressource Ingress et les journaux de pod de l'équilibreur de charge d'application (ALB)
 {: #errors}
 
 Commencez par vérifier les messages d'erreur dans les événements de déploiement de la ressource Ingress et les journaux de pod d'ALB. Ces messages d'erreur peuvent vous aider à trouver la cause première des erreurs, puis à déboguer votre configuration Ingress dans les sections suivantes.
@@ -40,7 +43,7 @@ Commencez par vérifier les messages d'erreur dans les événements de déploiem
     ```
     {: pre}
 
-    Dans la section **Events** de la sortie, vous pourrez voir des messages d'avertissement signalant des valeurs non valides dans votre ressource Ingress ou dans certaines annotations que vous avez utilisées. Consultez la [documentation sur la configuration de la ressource Ingress](cs_ingress.html#public_inside_3) ou la [documentation sur les annotations](cs_annotations.html).
+    Dans la section **Events** de la sortie, vous pourrez voir des messages d'avertissement signalant des valeurs non valides dans votre ressource Ingress ou dans certaines annotations que vous avez utilisées. Consultez la [documentation sur la configuration de la ressource Ingress](cs_ingress.html#public_inside_4) ou la [documentation sur les annotations](cs_annotations.html).
 
     ```
     Name:             myingress
@@ -142,17 +145,17 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
 
     * Clusters à zones multiples uniquement : vous pouvez utiliser le diagnostic d'intégrité de l'équilibreur de charge MZLB pour déterminer le statut des adresses IP de votre ALB. Pour plus d'informations sur l'équilibreur de charge MZLB, voir [Equilibreur de charge pour zones multiples (MZLB)](cs_ingress.html#planning). **Remarque** : le diagnostic d'intégrité de l'équilibreur de charge MZLB est disponible uniquement pour les clusters dont le nouveau sous-domaine Ingress est au format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si votre cluster utilise encore l'ancien format `<cluster_name>.<region>.containers.mybluemix.net`, [convertissez votre cluster à zone unique en cluster à zones multiples](cs_clusters.html#add_zone). Un sous-domaine au nouveau format est affecté à votre cluster, mais celui-ci peut continuer à utiliser l'ancien format de sous-domaine. Vous pouvez aussi commander un nouveau cluster auquel le nouveau format de sous-domaine sera automatiquement affecté.
     La commande curl HTTP suivante utilise l'hôte `albhealth`, qui est configuré par {{site.data.keyword.containerlong_notm}} de sorte à renvoyer le statut `healthy` ou `unhealthy` pour une adresse IP d'ALB.
-            ```
-            curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
-            ```
-            {: pre}
+        ```
+        curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+        ```
+        {: pre}
 
-            Exemple de sortie :
-            ```
-            healthy
-            ```
-            {: screen}
-            Si une ou plusieurs adresses IP renvoient `unhealthy`, [vérifiez le statut des pods d'ALB](#check_pods).
+        Exemple de sortie :
+        ```
+        healthy
+        ```
+        {: screen}
+        Si une ou plusieurs adresses IP renvoient `unhealthy`, [vérifiez le statut des pods d'ALB](#check_pods).
 
 3. Obtenez le sous-domaine Ingress fourni par IBM.
     ```
@@ -218,11 +221,13 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
     ```
     {: pre}
 
-    1. Vérifiez que le sous-domaine et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine Ingress fournis par IBM, exécutez la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.
+    1. Veillez à définir un hôte dans une seule ressource Ingress. Si un hôte est défini dans plusieurs ressources Ingress, l'ALB risque de ne pas acheminer le trafic correctement et vous pourrez obtenir des erreurs.
 
-    2.  Assurez-vous que votre application est en mode écoute sur le même chemin que celui qui est configuré dans la section **path** de votre ressource Ingress. Si votre application est configurée pour être en mode écoute à la racine, utilisez `/` comme chemin. Si le trafic entrant dans ce chemin doit être acheminé vers un autre chemin que celui où votre application est à l'écoute, utilisez l'annotation des [chemins de redirection (rewrite path)](cs_annotations.html#rewrite-path).
+    2. Vérifiez que le sous-domaine et le certificat TLS sont corrects. Pour obtenir le certificat TLS et le sous-domaine Ingress fournis par IBM, exécutez la commande `ibmcloud ks cluster-get <cluster_name_or_ID>`.
 
-    3. Editez le fichier YAML de configuration de votre ressource selon les besoins. Lorsque vous fermez l'éditeur, vos modifications sont sauvegardées et automatiquement appliquées.
+    3.  Assurez-vous que votre application est en mode écoute sur le même chemin que celui qui est configuré dans la section **path** de votre ressource Ingress. Si votre application est configurée pour être en mode écoute à la racine, utilisez `/` comme chemin. Si le trafic entrant dans ce chemin doit être acheminé vers un autre chemin que celui où votre application est à l'écoute, utilisez l'annotation des [chemins de redirection (rewrite path)](cs_annotations.html#rewrite-path).
+
+    4. Editez le fichier YAML de configuration de votre ressource selon les besoins. Lorsque vous fermez l'éditeur, vos modifications sont sauvegardées et automatiquement appliquées.
         ```
         kubectl edit ingress <myingressresource>
         ```
@@ -338,7 +343,7 @@ Par exemple, admettons que vous disposez d'un cluster à zones multiples dans 2 
     {: pre}
 
     * Si tout est configuré correctement, vous obtenez la réponse prévue de votre application.
-    * Si vous obtenez une erreur en réponse, une erreur a pu se produire dans votre application ou dans une configuration qui ne s'applique qu'à cet ALB spécifique. Vérifiez le code de votre application, les [fichiers de configuration de votre ressource Ingress](cs_ingress.html#public_inside_3) ou toute autre configuration ayant été appliquée uniquement à cet ALB.
+    * Si vous obtenez une erreur en réponse, une erreur a pu se produire dans votre application ou dans une configuration qui ne s'applique qu'à cet ALB spécifique. Vérifiez le code de votre application, les [fichiers de configuration de votre ressource Ingress](cs_ingress.html#public_inside_4) ou toute autre configuration ayant été appliquée uniquement à cet ALB.
 
 7. Après avoir terminé le débogage, rétablissez le diagnostic d'intégrité sur tous les pods d'ALB. Répétez ces étapes pour chaque pod d'ALB.
   1. Connectez-vous au pod d'ALB et supprimez le signe `#` de `server_name`.

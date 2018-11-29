@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -16,11 +16,12 @@ lastupdated: "2018-10-10"
 {:download: .download}
 
 # 지역 및 구역
+{: #regions-and-zones}
 
-지역(region)은 앱, 서비스 및 기타 {{site.data.keyword.Bluemix}} 리소스가 배치될 수 있는 특정한 지리적 위치입니다. [{{site.data.keyword.Bluemix_notm}} 지역](#bluemix_regions)은 [{{site.data.keyword.containerlong}} 지역](#container_regions)과 다릅니다. 지역은 서비스와 애플리케이션을 호스팅하는 컴퓨팅, 네트워크, 스토리지 리소스 및 관련 냉각 장치와 전원 장치를 호스팅하는 실제 데이터센터인 하나 이상의 구역으로 구성되어 있습니다. 구역은 서로 간에 격리되어 있으며, 이는 공유되는 단일 장애 지점이 없도록 보장합니다.
+지역(region)은 앱, 서비스 및 기타 {{site.data.keyword.Bluemix}} 리소스가 배치될 수 있는 특정한 지리적 위치입니다. [{{site.data.keyword.Bluemix_notm}} 지역](#bluemix_regions)은 [{{site.data.keyword.containerlong}} 지역](#container_regions)과 다릅니다. 지역은 서비스와 애플리케이션을 호스팅하는 컴퓨팅, 네트워크, 스토리지 리소스 및 관련 냉각 장치와 전원 장치를 호스팅하는 실제 데이터센터인 하나 이상의 구역으로 구성되어 있습니다. 구역은 서로 간에 격리되어 있으며, 이는 공유되는 단일 장애 지점이 없도록 보장합니다. 
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}}는 전세계적으로 호스팅됩니다. {{site.data.keyword.Bluemix_notm}} 내의 서비스는 글로벌로 사용 가능하거나 특정 지역 내에서 사용 가능할 수 있습니다. {{site.data.keyword.containerlong_notm}}에서 Kubernetes 클러스터를 작성할 때 리소스는 클러스터를 배치하는 지역에 남아 있습니다.
+{{site.data.keyword.Bluemix_notm}}는 전세계적으로 호스팅됩니다. {{site.data.keyword.Bluemix_notm}} 내의 서비스는 글로벌로 사용 가능하거나 특정 지역 내에서 사용 가능할 수 있습니다. {{site.data.keyword.containerlong_notm}}에서 Kubernetes 클러스터를 작성할 때 리소스는 클러스터를 배치하는 지역에 남아 있습니다. 
 
 **참고**: 지원되는 모든 {{site.data.keyword.containerlong_notm}} 지역에서 표준 클러스터를 작성할 수 있습니다. 무료 클러스터는 선택된 지역에서만 사용 가능합니다.
 
@@ -179,8 +180,7 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
     </tr>
     <tr>
       <td>영국 남부</td>
-      <td>런던: lon02, lon04, lon06</td>
-      <td></td>
+      <td>런던: lon04, lon05, lon06<br><br>**참고**: lon05는 lon02를 대체합니다. 새 클러스터는 lon05를 사용해야 합니다. </td>
     </tr>
     <tr>
       <td>미국 동부</td>
@@ -191,8 +191,7 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
     <tr>
       <td>미국 남부</td>
       <td>달라스: dal10, dal12, dal13</td>
-      <td><p>산호세: sjc03, sjc04</p>
-      <p>상파울루: sao01</p></td>
+      <td><p>산호세: sjc03, sjc04</p><p>상파울루: sao01</p></td>
     </tr>
   </tbody>
 </table>

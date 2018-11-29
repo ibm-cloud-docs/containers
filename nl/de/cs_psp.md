@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -34,7 +34,7 @@ Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containerl
 {: tip}
 
 **Gibt es Richtlinien, die standardmäßig festgelegt werden? Was kann ich hinzufügen?**</br>
-Standardmäßig konfiguriert {{site.data.keyword.containerlong_notm}} den Zugangscontroller `PodSecurityPolicy` mit [Ressourcen für das {{site.data.keyword.IBM_notm}} Cluster-Management](#ibm_psp), den Sie nicht löschen oder ändern können. Sie können den Zugangscontroller auch nicht inaktivieren. 
+Standardmäßig konfiguriert {{site.data.keyword.containerlong_notm}} den Zugangscontroller `PodSecurityPolicy` mit [Ressourcen für die {{site.data.keyword.IBM_notm}} Clusterverwaltung](#ibm_psp), den Sie nicht löschen oder ändern können. Sie können den Zugangscontroller auch nicht inaktivieren. 
 
 Pod-Aktionen sind standardmäßig nicht gesperrt. Stattdessen autorisieren zwei rollenbasierte Zugriffssteuerungsressourcen (RBAC, Role-Based Access Control) im Cluster alle Administratoren, Benutzer, Services und Knoten, um privilegierte und nicht privilegierte Pods zu erstellen. Wenn Sie bestimmte Benutzer daran hindern möchten, Pods zu erstellen oder zu aktualisieren, können Sie [diese RBAC-Ressourcen ändern oder eigene Ressourcen erstellen](#customize_psp).
 
@@ -66,7 +66,7 @@ Richtlinien können Benutzer privilegierte und nicht privilegierte (eingeschrän
 Sie können diese RBAC-Rollen ändern, um Administratoren, Benutzer, Services oder Knoten zu der Richtlinie hinzuzufügen oder aus ihr zu entfernen.
 
 Vorbemerkungen: 
-*  [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
+*  [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 *  Verstehen Sie die Funktionsweise von RBAC-Rollen. Weitere Informationen hierzu finden Sie im Abschnitt [Benutzer mit angepassten Kubernetes-RBAC-Rollen berechtigen](cs_users.html#rbac) oder in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 *  **Hinweis**: Wenn Sie die Standardkonfiguration ändern, können Sie wichtige Clusteraktionen, wie Podbereitstellungen oder Clusteraktualisierungen, verhindern. Testen Sie Ihre Änderungen in einem Cluster, der sich nicht in einer Produktionsumgebung befindet und für andere Teams nicht wichtig ist.
 
@@ -178,7 +178,7 @@ Informationen darüber, wie Sie Ihre eigene Ressource für die Pod-Sicherheitsri
 
 Stellen Sie sicher, dass Sie die vorhandenen Richtlinien so geändert haben, dass die neue Richtlinie, die Sie erstellen, nicht mit der vorhandenen Richtlinie in Konflikt steht. Die vorhandene Richtlinie ermöglicht es Benutzern beispielsweise, privilegierte Pods zu erstellen und zu aktualisieren. Wenn Sie eine Richtlinie erstellen, die es Benutzern nicht erlaubt, privilegierte Pods zu erstellen oder zu aktualisieren, kann der Konflikt zwischen der vorhandenen und der neuen Richtlinie zu unerwarteten Ergebnissen führen.
 
-## Informationen zu Standardressourcen für die {{site.data.keyword.IBM_notm}} Cluster-Management
+## Informationen zu Standardressourcen für die {{site.data.keyword.IBM_notm}} Clusterverwaltung
 {: #ibm_psp}
 
 Ihr Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} enthält die folgenden

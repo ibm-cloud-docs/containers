@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -29,7 +29,7 @@ lastupdated: "2018-05-24"
 
 按一下選項以開始使用：
 
-<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="按一下圖示，以快速開始使用 {{site.data.keyword.containershort_notm}}。透過 {{site.data.keyword.Bluemix_dedicated_notm}}，按一下此圖示以查看選項。" style="width:440px;" />
+<img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="按一下圖示，以快速開始使用 {{site.data.keyword.containerlong_notm}}。透過 {{site.data.keyword.Bluemix_dedicated_notm}}，按一下此圖示以查看選項。" style="width:440px;" />
 <map name="home_map" id="home_map">
 <area href="#clusters" alt="在 {{site.data.keyword.Bluemix_notm}} 中開始使用 Kubernetes 叢集" title="在 {{site.data.keyword.Bluemix_notm}} 中開始使用 Kubernetes 叢集" shape="rect" coords="-7, -8, 108, 211" />
 <area href="cs_cli_install.html" alt="安裝 CLI。" title="安裝 CLI。" shape="rect" coords="155, -1, 289, 210" />
@@ -47,31 +47,32 @@ lastupdated: "2018-05-24"
 
 **開始之前**
 
-您必須具有「試用」、「隨收隨付制」或「訂閱」的 [{{site.data.keyword.Bluemix_notm}} 帳戶](https://console.bluemix.net/registration/)。
-
-使用「試用」帳戶，您可以建立一個可使用 21 天的免費叢集，以熟悉服務。使用「隨收隨付制」或「訂閱」帳戶時，您仍然可以建立免費的試用叢集，但也可以佈建要在標準叢集中使用的 IBM Cloud 基礎架構 (SoftLayer) 資源。
-{:tip}
+取得您所適用的 [{{site.data.keyword.Bluemix_notm}} 帳戶](https://console.bluemix.net/registration/)類型：
+* **隨收隨付制或訂閱**：您可以建立免費試用叢集。您也可以佈建要在標準叢集裡建立及使用的 IBM Cloud 基礎架構 (SoftLayer) 資源。
+* **精簡**：您無法建立免費或標準叢集。[升級帳戶](/docs/account/account_faq.html#changeacct)至「隨收隨付制」或「訂閱」。
+* **試用（適用於教育目的）**：您可以建立一個可使用 30 天的免費叢集，以熟悉服務。
 
 若要建立免費叢集，請執行下列動作：
 
-1.  在 [{{site.data.keyword.Bluemix_notm}} **型錄** ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/catalog/?category=containers) 中，選取 **Kubernetes 叢集中的容器**，然後按一下**建立**。即會開啟叢集配置頁面。依預設，會選取**免費叢集**。
+1.  在 [{{site.data.keyword.Bluemix_notm}} **型錄** ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/catalog/?category=containers) 中，選取 **{{site.data.keyword.containerlong_notm}}**，然後按一下**建立**。即會開啟叢集配置頁面。依預設，會選取**免費叢集**。
 
 2. 為叢集提供唯一名稱。
 
-3.  按一下**建立叢集**。即會建立可能需要幾分鐘來佈建的工作者節點，但您可以在**工作者節點**標籤中看到進度。當狀態達到`備妥`時，您可以開始使用您的叢集！
+3.  按一下**建立叢集**。建立的工作者節點儲存區包含 1 個工作者節點。工作者節點可能需要幾分鐘的時間進行佈建，但您可以在**工作者節點**標籤中看到進度。當狀態達到`備妥`時，您可以開始使用您的叢集！
 
 做得好！您已建立第一個 Kubernetes 叢集。以下是關於您的免費叢集的一些詳細資料：
 
-*   **機型**：免費叢集有一個虛擬工作者節點，它具有 2 個 CPU 及 4 GB 記憶體可供應用程式使用。當您建立標準叢集時，您可以選擇實體（裸機）或虛擬機器，以及各種機器大小。
-*   **受管理主節點**：工作者節點是由專用及高可用性 {{site.data.keyword.IBM_notm}} 擁有的 Kubernetes 主節點集中監視及管理，這個主節點會控制及監視叢集中的所有 Kubernetes 資源。您可以著重在工作者節點以及工作者節點中所部署的應用程式，而不需要擔心這個主節點的管理。
+*   **機型**：免費叢集有一個分組到工作者節點儲存區的虛擬工作者節點（具有 2 個 CPU、4 GB 記憶體及單一 100 GB SAN 磁碟）可供應用程式使用。當您建立標準叢集時，您可以選擇實體（裸機）或虛擬機器，以及各種機器大小。
+*   **受管理主節點**：工作者節點是由專用及高可用性 {{site.data.keyword.IBM_notm}} 擁有的 Kubernetes 主節點集中監視及管理，這個主節點會控制及監視叢集裡的所有 Kubernetes 資源。您可以著重在工作者節點以及工作者節點中所部署的應用程式，而不需要擔心這個主節點的管理。
 *   **基礎架構資源**：執行叢集所需的資源（例如 VLANS 及 IP 位址）是使用 {{site.data.keyword.IBM_notm}} 擁有的 IBM Cloud 基礎架構 (SoftLayer) 帳戶進行管理。當您建立標準叢集時，會使用您自己的 IBM Cloud 基礎架構 (SoftLayer) 帳戶來管理這些資源。建立標準叢集時，您可以進一步瞭解這些資源及[所需的許可權](cs_users.html#infra_access)。
-*   **其他選項**：免費叢集將部署在您選取的地區內，但您無法選擇哪個位置（資料中心）。如需對於位置、網路及持續性儲存空間進行控制，請建立標準叢集。[進一步瞭解免費叢集及標準叢集的優點](cs_why.html#cluster_types)。
+*   **其他選項**：免費叢集將部署在您選取的地區內，但您無法選擇哪個區域。如需對於區域、網路及持續性儲存空間進行控制，請建立標準叢集。[進一步瞭解免費叢集和標準叢集的優點](cs_why.html#cluster_types)。
 
 
-**下一步為何？**
-在未來 21 天內，請試著使用您的免費叢集來做一些事情。
+**下一步為何？**</br>
+在到期之前，請試著使用您的免費叢集來做一些事情。
 
-* [安裝 CLI 以開始使用您的叢集。](cs_cli_install.html#cs_cli_install)
-* [在叢集中部署應用程式。](cs_app.html#app_cli)
-* [建立含有多個節點的標準叢集，以提高可用性。](cs_clusters.html#clusters_ui)
-* [在 {{site.data.keyword.Bluemix_notm}} 中設定專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry/index.html)
+* 瀏覽[第一個 {{site.data.keyword.containerlong_notm}} 指導教學](cs_tutorials.html#cs_cluster_tutorial)來建立 Kubernetes 叢集、安裝 CLI、建立專用登錄、設定叢集環境，以及將服務新增至叢集。
+* 使用將應用程式部署至叢集的[第二個 {{site.data.keyword.containerlong_notm}} 指導教學](cs_tutorials_apps.html#cs_apps_tutorial)持續執行作業。
+* [建立標準叢集](cs_clusters.html#clusters_ui)（含多個節點），以提高可用性。
+
+

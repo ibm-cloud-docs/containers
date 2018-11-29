@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -33,7 +33,7 @@ Kubernetes의 이전 버전을 사용 중이십니까? 지금 바로 [클러스�
 {: tip}
 
 **기본적으로 설정되는 정책이 있습니까? 무엇을 추가할 수 있습니까?**</br>
-기본적으로, {{site.data.keyword.containerlong_notm}}는 사용자가 삭제하거나 수정할 수 없는 [{{site.data.keyword.IBM_notm}} 클러스터 관리용 리소스](#ibm_psp)를 사용하여 `PodSecurityPolicy` 허가 제어기를 구성합니다.  또한 사용자는 허가 제어기를 사용 중지할 수 없습니다. 
+기본적으로, {{site.data.keyword.containerlong_notm}}는 사용자가 삭제하거나 수정할 수 없는 [{{site.data.keyword.IBM_notm}} 클러스터 관리용 리소스](#ibm_psp)를 사용하여 `PodSecurityPolicy` 허가 제어기를 구성합니다. 또한 사용자는 허가 제어기를 사용 중지할 수 없습니다. 
 
 팟(Pod) 조치는 기본적으로 잠겨 있지 않습니다. 그 대신에 클러스터에서 2개의 역할 기반 액세스 제어(RBAC) 리소스가 인가된 및 비인가된 팟(Pod)을 작성할 수 있도록 모든 관리자, 사용자, 서비스 및 노드에 권한을 부여합니다. 특정 사용자가 팟(Pod)을 작성하거나 업데이트하지 못하도록 방지하려면 [이러한 RBAC 리소스를 수정하거나 자체 리소스를 작성](#customize_psp)할 수 있습니다.
 
@@ -62,7 +62,7 @@ Kubernetes의 이전 버전을 사용 중이십니까? 지금 바로 [클러스�
 이러한 RBAC 역할을 수정하여 관리자, 사용자, 서비스 또는 노드를 정책에서 제거하거나 추가할 수 있습니다.
 
 시작하기 전에: 
-*  클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+*  [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
 *  RBAC 역할 관련 작업에 대해 잘 숙지하십시오. 자세한 정보는 [사용자 정의 Kubernetes RBAC 역할로 사용자의 권한 부여](cs_users.html#rbac) 또는 [Kubernetes 문서![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview)를 참조하십시오.
 *  **참고**: 기본 구성을 수정하면 중요한 클러스터 조치(예: 팟(Pod) 배치 또는 클러스터 업데이트)를 방지할 수 있습니다. 다른 팀에게 영향을 주지 않는 비-프로덕션 클러스터에서 변경사항을 테스트하십시오.
 

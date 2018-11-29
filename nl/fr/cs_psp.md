@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -66,7 +66,7 @@ politiques permettent aux utilisateurs de créer et mettre à jour des pods priv
 Vous pouvez modifier ces rôles RBAC pour retirer ou ajouter des administrateurs, des utilisateurs, des services ou des noeuds dans une politique.
 
 Avant de commencer : 
-*  [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur votre cluster.
+*  [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 *  Familiarisez-vous avec l'utilisation des rôles RBAC. Pour plus d'informations, voir [Autorisation des utilisateurs avec des rôles RBAC Kubernetes personnalisés](cs_users.html#rbac) ou la [documentation de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 *  **Remarque** : lorsque vous modifiez la configuration par défaut, vous pouvez empêcher l'exécution d'actions importantes sur le cluster, comme par exemple les déploiements de pod ou les mises à jour de cluster. Testez vos modifications dans un cluster hors production qui n'est pas utilisé par d'autres équipes.
 

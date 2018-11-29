@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -76,7 +76,9 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 要设置 pod 优先级，需要使用优先级类。
 {: shortdesc}
 
-开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为 Kubernetes 1.11 或更高版本集群。
+开始之前：
+* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+* [创建](cs_clusters.html#clusters_ui) Kubernetes V1.11 或更高版本集群，或将集群[更新](cs_cluster_update.html#update)到 Kubernetes V1.11 或更高版本。
 
 1.  可选：使用现有优先级类作为新类的模板。
     
@@ -114,7 +116,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     </thead>
     <tbody>
     <tr>
-    <td><code>metadata/name</code></td>
+    <td><code>metadata.name</code></td>
     <td>必需：要创建的优先级类的名称。</td>
     </tr>
     <tr>
@@ -124,7 +126,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     <tr>
     <td><code>globalDefault</code></td>
     <td>可选：将此字段设置为 `true` 可将此优先级类设置为全局缺省值，此缺省值将应用于安排的未指定 `priorityClassName` 值的每个 pod。集群中只能有 1 个优先级类可设置为全局缺省值。如果没有全局缺省值，那么没有指定 `priorityClassName` 的 pod 的优先级为零 (`0`)。</br></br>
-    [缺省优先级类](#default_priority_class)不会设置 `globalDefault`。如果在集群中创建了其他优先级类，那么可以通过运行 `kubectl describe priorityclass <name>` 进行检查，以确保它们未设置 `globalDefault`。</td>
+    [缺省优先级类](#default_priority_class)不会设置 `globalDefault`。如果在集群中创建了其他优先级类，那么可以通过运行 `kubectl describe priorityclass <name>`.</td>
     </tr>
     <tr>
     <td><code>description</code></td>
@@ -154,7 +156,8 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 开始之前：
-* [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为 Kubernetes 1.11 或更高版本集群。
+* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+* [创建](cs_clusters.html#clusters_ui) Kubernetes V1.11 或更高版本集群，或将集群[更新](cs_cluster_update.html#update)到 Kubernetes V1.11 或更高版本。
 * [了解优先级安排的运作方式](#priority_scheduling)，因为优先级可以抢占现有 pod，并影响如何使用集群的资源。
 
 要为 pod 分配优先级，请执行以下操作：

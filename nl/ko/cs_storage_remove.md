@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -43,7 +43,7 @@ lastupdated: "2018-09-10"
 * 지속적 스토리지를 정리하면 그 안에 저장된 모든 데이터가 삭제됩니다. 데이터의 사본이 필요한 경우에는 [파일 스토리지](cs_storage_file.html#backup_restore) 또는 [블록 스토리지](cs_storage_block.html#backup_restore)에 대한 백업을 작성하십시오.
 * {{site.data.keyword.Bluemix_dedicated}} 계정을 사용하는 경우에는 [지원 티켓을 열어서](/docs/get-support/howtogetsupport.html#getting-customer-support) 볼륨 삭제를 요청해야 합니다.
 
-시작하기 전에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
 
 지속적 데이터를 정리하려면 다음을 수행하십시오.
 
@@ -173,7 +173,7 @@ lastupdated: "2018-09-10"
    ```
    {: pre}
      
-9. 실제 스토리지 인스턴스가 제거되었는지 확인하십시오. 이 프로세스에는 몇 분 정도 소요될 수 있습니다. 
+9. 실제 스토리지 인스턴스가 제거되었는지 확인하십시오. **참고**: 삭제 프로세스가 완료되려면 며칠이 소요될 수 있습니다.  
 
    **파일 스토리지: ** 
    ```

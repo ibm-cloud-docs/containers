@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -24,7 +24,7 @@ Personalizza la registrazione e configura il monitoraggio per un supporto nella 
 ## Visualizzazione dei log Ingress
 {: #ingress_logs}
 
-I log vengono raccolti automaticamente per i tuoi ALB Ingress  Per visualizzare i log ALB, scegli tra due opzioni.
+I log vengono raccolti automaticamente per i tuoi ALB Ingress Per visualizzare i log ALB, scegli tra due opzioni.
 * [Crea una configurazione di registrazione per il servizio Ingress](cs_health.html#configuring) nel tuo cluster.
 * Controlla i log dalla CLI.
     1. Ottieni l'ID di un pod per un ALB.
@@ -74,7 +74,7 @@ I log vengono raccolti automaticamente per i tuoi ALB Ingress  Per visualizzare 
 </tr>
 <tr>
 <td><code>"request_uri": "$uri"</code></td>
-<td>L'URI della richiesta originale al tuo percorso dell'applicazione. Gli ALB elaborano i percorsi su cui le applicazioni sono in ascolto sotto forma di prefissi. Alla ricezione di una richiesta da un client a un'applicazione, l'ALB controlla la risorsa Ingress per rilevare un percorso (come prefisso) che corrisponda al percorso nell'URI della richiesta. </td>
+<td>L'URI della richiesta originale al tuo percorso dell'applicazione. Gli ALB elaborano i percorsi su cui le applicazioni sono in ascolto sotto forma di prefissi. Alla ricezione di una richiesta da un client a un'applicazione, l'ALB controlla la risorsa Ingress per rilevare un percorso (come prefisso) che corrisponda al percorso nell'URI della richiesta.</td>
 </tr>
 <tr>
 <td><code>"request_id": "$request_id"</code></td>

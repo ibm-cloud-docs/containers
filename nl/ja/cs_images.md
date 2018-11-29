@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -35,7 +35,7 @@ Docker イメージが、{{site.data.keyword.containerlong}} で作成するす�
 Docker Hub などのパブリック・レジストリーは、Docker および Kubernetes の入門として最初のコンテナー化アプリをクラスター内に作成する時に使用できます。 しかしエンタープライズ・アプリケーションを作成する場合は、許可されていないユーザーが勝手にイメージを使用したり変更したりすることがないように、 {{site.data.keyword.registryshort_notm}} で提供されているようなプライベート・レジストリーを使用してください。 プライベート・レジストリーはクラスター管理者がセットアップする必要があります。プライベート・レジストリーにアクセスするための資格情報をクラスター・ユーザーに提供する必要があるためです。
 
 
-{{site.data.keyword.containershort_notm}} では、複数のレジストリーを使用してアプリをクラスターにデプロイできます。
+{{site.data.keyword.containerlong_notm}} では、複数のレジストリーを使用してアプリをクラスターにデプロイできます。
 
 |レジストリー|説明|利点|
 |--------|-----------|-------|
@@ -74,9 +74,12 @@ Docker Hub などのパブリック・レジストリーは、Docker および K
 
 クラスターを作成すると、有効期限のないレジストリー・トークンおよびシークレットが、[最も近い地域レジストリーとグローバル・レジストリー](/docs/services/Registry/registry_overview.html#registry_regions)の両方に対して自動的に作成されます。 グローバル・レジストリーには、ユーザーが各地域レジストリーに保管されたイメージを別個に参照する代わりにデプロイメント全体で参照することのできる、IBM 提供のパブリック・イメージが安全に保管されます。 地域レジストリーには、グローバル・レジストリーに保管されるパブリック・イメージと同じイメージに加えて、独自のプライベート Docker イメージが安全に保管されます。 トークンは、{{site.data.keyword.registryshort_notm}} 内にセットアップした名前空間への読み取り専用アクセスを許可するために使用されるもので、これにより、パブリック (グローバル・レジストリー) およびプライベート (地域レジストリー) のイメージの処理が可能になります。
 
-コンテナー化アプリのデプロイ時に Kubernetes クラスターがトークンにアクセスできるように、各トークンは Kubernetes の `imagePullSecret` 内に保管されている必要があります。 クラスターが作成されると、{{site.data.keyword.containershort_notm}} により、グローバル・レジストリー (IBM 提供のパブリック・イメージ) および地域レジストリーのトークンが Kubernetes イメージ・プル・シークレット内に自動的に保管されます。 イメージ・プル・シークレットは、`default` Kubernetes 名前空間、その名前空間の `ServiceAccount` 内のデフォルトのシークレット・リスト、`kube-system` 名前空間に追加されます。
+コンテナー化アプリのデプロイ時に Kubernetes クラスターがトークンにアクセスできるように、各トークンは Kubernetes の `imagePullSecret` 内に保管されている必要があります。 クラスターが作成されると、{{site.data.keyword.containerlong_notm}} により、グローバル・レジストリー (IBM 提供のパブリック・イメージ) および地域レジストリーのトークンが Kubernetes イメージ・プル・シークレット内に自動的に保管されます。 イメージ・プル・シークレットは、`default` Kubernetes 名前空間、その名前空間の `ServiceAccount` 内のデフォルトのシークレット・リスト、`kube-system` 名前空間に追加されます。
 
 **注:** この初期セットアップを使用すると、{{site.data.keyword.Bluemix_notm}} アカウントの名前空間にある任意のイメージのコンテナーを、クラスターの **default** 名前空間にデプロイできます。 クラスターのその他の名前空間にコンテナーをデプロイする場合や、別の {{site.data.keyword.Bluemix_notm}} 地域か別の {{site.data.keyword.Bluemix_notm}} アカウントに保管されているイメージを使用する場合は、その[クラスター用に独自の imagePullSecret を作成](#other)する必要があります。
+
+レジストリー資格情報の安全性をさらに高めたいですか? クラスター管理者に連絡してクラスター内の [{{site.data.keyword.keymanagementservicefull}} を有効にして](cs_encrypt.html#keyprotect)もらい、レジストリー資格情報を保管する `imagePullSecret` などの、クラスター内の Kubernetes シークレットを暗号化します。
+{: tip}
 
 開始前に、以下のことを行います。
 1. [{{site.data.keyword.Bluemix_notm}} Public または {{site.data.keyword.Bluemix_dedicated_notm}} の {{site.data.keyword.registryshort_notm}} に名前空間をセットアップし、その名前空間にイメージをプッシュします](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)。
@@ -108,7 +111,7 @@ Docker Hub などのパブリック・レジストリーは、Docker および K
     ```
     {: codeblock}
 
-    **ヒント:** 名前空間の情報を取得するには、`bx cr namespace-list` を実行します。
+    **ヒント:** 名前空間の情報を取得するには、`ibmcloud cr namespace-list` を実行します。
 
 3.  クラスター内にデプロイメントを作成します。
 
@@ -212,7 +215,7 @@ ImagePullSecrets は、それらが作成された対象の Kubernetes 名前空
 2.  {{site.data.keyword.Bluemix_notm}} アカウント内のトークンのリストを表示します。
 
     ```
-    bx cr token-list
+    ibmcloud cr token-list
     ```
     {: pre}
 
@@ -220,7 +223,7 @@ ImagePullSecrets は、それらが作成された対象の Kubernetes 名前空
 4.  トークンの値を取得します。 <em>&lt;token_ID&gt;</em> を、前のステップで取得したトークンの ID に置き換えます。
 
     ```
-    bx cr token-get <token_id>
+    ibmcloud cr token-get <token_id>
     ```
     {: pre}
 
@@ -253,7 +256,7 @@ ImagePullSecrets は、それらが作成された対象の Kubernetes 名前空
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>必須。 プライベート・レジストリーにログインするためのユーザー名。 {{site.data.keyword.registryshort_notm}} の場合、ユーザー名は <code>token</code> に設定されます。</td>
+    <td>必須。 プライベート・レジストリーにログインするためのユーザー名。 {{site.data.keyword.registryshort_notm}} の場合、ユーザー名は値 <strong><code>token</code></strong> に設定されます。</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -261,7 +264,7 @@ ImagePullSecrets は、それらが作成された対象の Kubernetes 名前空
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>必須。 Docker E メール・アドレスがある場合は、その値を入力します。 ない場合は、a@b.c のような架空の E メール・アドレスを入力します。この E メールは、Kubernetes シークレットを作成する際には必須ですが、作成後は使用されません。</td>
+    <td>必須。 Docker E メール・アドレスがある場合は、その値を入力します。 ない場合は、a@b.c のような架空の E メール・アドレスを入力します。 この E メールは、Kubernetes シークレットを作成する際には必須ですが、作成後は使用されません。</td>
     </tr>
     </tbody></table>
 
@@ -341,7 +344,7 @@ imagePullSecret を作成するには、以下のようにします。
 ポッド・デプロイメントに imagePullSecret を定義するか、Kubernetes サービス・アカウントに imagePullSecret を保管すると、サービス・アカウントを指定しないすべてのデプロイメントで imagePullSecret を使用できるようになります。
 {: shortdesc}
 
-次の選択肢から選択します。
+次のいずれかのオプションを選択します。
 * [ポッド・デプロイメントで imagePullSecret を参照する](#pod_imagePullSecret): 名前空間内のすべてのポッドにデフォルトでレジストリーへのアクセス権限を付与したくない場合は、このオプションを使用します。
 * [Kubernetes サービス・アカウントに imagePullSecret を保管する](#store_imagePullSecret): 選択した Kubernetes 名前空間にデプロイするためにレジストリー内のイメージへのアクセス権限を付与する場合は、このオプションを使用します。
 
@@ -400,11 +403,11 @@ imagePullSecret を作成するには、以下のようにします。
     </tr>
     <tr>
     <td><code><em>&lt;namespace_name&gt;</em></code></td>
-    <td>イメージが保管されている名前空間。 使用可能な名前空間をリストするには、`bx cr namespace-list` を実行します。</td>
+    <td>イメージが保管されている名前空間。 使用可能な名前空間をリストするには、`ibmcloud cr namespace-list` を実行します。</td>
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>使用するイメージの名前。 {{site.data.keyword.Bluemix_notm}} アカウント内の使用可能なイメージをリストするには、`bx cr image-list` を実行します。</td>
+    <td>使用するイメージの名前。 {{site.data.keyword.Bluemix_notm}} アカウント内の使用可能なイメージをリストするには、`ibmcloud cr image-list` を実行します。</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -485,5 +488,4 @@ imagePullSecret を作成するには、以下のようにします。
    {: pre}
 
 <br />
-
 

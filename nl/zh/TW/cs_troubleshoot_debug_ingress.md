@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -28,7 +28,10 @@ lastupdated: "2018-09-10"
 
 您已透過在叢集裡建立應用程式的 Ingress 資源，來公開應用程式。不過，當您嘗試透過 ALB 的公用 IP 位址或子網域連接至應用程式時，連線會失敗或逾時。下列各節中的步驟可協助您除錯 Ingress 設定。
 
-## 步驟 1：檢查 Ingress 資源或 ALB Pod 日誌中的錯誤訊息
+確定您只在一個 Ingress 資源中定義主機。如果在多個 Ingress 資源中定義一個主機，則 ALB 可能不會適當地轉遞資料流量，而且您可能會遭遇錯誤。
+{: tip}
+
+## 步驟 1：檢查 Ingress 部署及 ALB Pod 日誌中的錯誤訊息
 {: #errors}
 
 從檢查 Ingress 資源部署事件及 ALB Pod 日誌中的錯誤訊息開始。這些錯誤訊息可協助您找到失敗的主要原因，並在下列各節進一步除錯 Ingress 設定。
@@ -40,7 +43,7 @@ lastupdated: "2018-09-10"
     ```
     {: pre}
 
-    在輸出的 **Events** 區段中，您可能會看到關於您使用之 Ingress 資源或某些註釋中含有無效值的警告訊息。請檢查 [Ingress 資源配置文件](cs_ingress.html#public_inside_3)或[註釋文件](cs_annotations.html)。
+    在輸出的 **Events** 區段中，您可能會看到關於您使用之 Ingress 資源或某些註釋中含有無效值的警告訊息。請檢查 [Ingress 資源配置文件](cs_ingress.html#public_inside_4)或[註釋文件](cs_annotations.html)。
 
     ```
         Name:             myingress
@@ -139,18 +142,17 @@ lastupdated: "2018-09-10"
         * 如果 CLI 傳回逾時，而且您有保護工作者節點的自訂防火牆，請確定[防火牆](cs_troubleshoot_clusters.html#cs_firewall)中容許 ICMP。
         * 如果沒有任何防火牆封鎖連線測試，但連線測試仍然執行逾時，則請[檢查 ALB Pod 的狀態](#check_pods)。
 
-    * 僅限多區域叢集：您可以使用 MZLB 性能檢查來判斷您 ALB IP 的狀態。如需 MZLB 的相關資訊，請參閱[多區域負載平衡器 (MZLB)](cs_ingress.html#planning)。**附註**：MZLB 性能檢查僅適用於格式為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 之新 Ingress 子網域的叢集。如果您的叢集仍然使用舊格式 `<cluster_name>.<region>.containers.mybluemix.net`，則請[將單一區域叢集轉換成多區域](cs_clusters.html#add_zone)。您的叢集獲指派具有新格式的子網域，但也可以繼續使用較舊的子網域格式。或者，您可以訂購自動獲指派新子網域格式的新叢集。
-    下列 HTTP cURL 指令使用 `albhealth` 主機，其由 {{site.data.keyword.containerlong_notm}} 配置成傳回 ALB IP 的 `healthy` 或 `unhealthy` 狀態。
-            ```
-            curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
-            ```
-            {: pre}
+    * 僅限多區域叢集：您可以使用 MZLB 性能檢查來判斷您 ALB IP 的狀態。如需 MZLB 的相關資訊，請參閱[多區域負載平衡器 (MZLB)](cs_ingress.html#planning)。**附註**：MZLB 性能檢查僅適用於格式為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 之新 Ingress 子網域的叢集。如果您的叢集仍然使用舊格式 `<cluster_name>.<region>.containers.mybluemix.net`，則請[將單一區域叢集轉換成多區域](cs_clusters.html#add_zone)。您的叢集獲指派具有新格式的子網域，但也可以繼續使用較舊的子網域格式。或者，您可以訂購自動獲指派新子網域格式的新叢集。下列 HTTP cURL 指令使用 `albhealth` 主機，其由 {{site.data.keyword.containerlong_notm}} 配置成傳回 ALB IP 的 `healthy` 或 `unhealthy` 狀態。
+        ```
+        curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+        ```
+        {: pre}
 
-            輸出範例：
-            ```
-            healthy
-            ```
-            {: screen}
+        輸出範例：
+        ```
+        healthy
+        ```
+        {: screen}
             如果有一或多個 IP 傳回 `unhealthy`，則請[檢查 ALB Pod 的狀態](#check_pods)。
 
 3. 取得 IBM 提供的 Ingress 子網域。
@@ -217,11 +219,13 @@ lastupdated: "2018-09-10"
     ```
     {: pre}
 
-    1. 確認子網域及 TLS 憑證正確無誤。若要尋找 IBM 提供的 Ingress 子網域及 TLS 憑證，請執行 `ibmcloud ks cluster-get <cluster_name_or_ID>`。
+    1. 確定您只在一個 Ingress 資源中定義主機。如果在多個 Ingress 資源中定義一個主機，則 ALB 可能不會適當地轉遞資料流量，而且您可能會遭遇錯誤。
 
-    2.  確定應用程式接聽與 Ingress 之 **path** 區段中配置相同的路徑。如果您的應用程式設定成接聽根路徑，請使用 `/` 作為路徑。如果必須將此路徑的送入資料流量遞送至應用程式所接聽的不同路徑，請使用 [rewrite paths](cs_annotations.html#rewrite-path) 註釋。
+    2. 確認子網域及 TLS 憑證正確無誤。若要尋找 IBM 提供的 Ingress 子網域及 TLS 憑證，請執行 `ibmcloud ks cluster-get <cluster_name_or_ID>`。
 
-    3. 視需要編輯資源配置 YAML。當您關閉編輯器時，即會儲存並自動套用您的變更。
+    3.  確定應用程式接聽與 Ingress 之 **path** 區段中配置相同的路徑。如果您的應用程式設定成接聽根路徑，請使用 `/` 作為路徑。如果必須將此路徑的送入資料流量遞送至應用程式所接聽的不同路徑，請使用 [rewrite paths](cs_annotations.html#rewrite-path) 註釋。
+
+    4. 視需要編輯資源配置 YAML。當您關閉編輯器時，即會儲存並自動套用您的變更。
         ```
         kubectl edit ingress <myingressresource>
         ```
@@ -306,7 +310,7 @@ lastupdated: "2018-09-10"
     {: pre}
 
     輸出：
-        ```
+    ```
     <html>
         <head>
             <title>404 找不到</title>
@@ -337,7 +341,7 @@ lastupdated: "2018-09-10"
     {: pre}
 
     * 如果已正確配置所有項目，則會從應用程式取得預期回應。
-    * 如果您在回應中收到錯誤，則您的應用程式或只套用至此特定 ALB 的配置中可能發生錯誤。請檢查您的應用程式碼、[Ingress 資源配置檔](cs_ingress.html#public_inside_3)，或您只套用至此 ALB 的任何其他配置。
+    * 如果您在回應中收到錯誤，則您的應用程式或只套用至此特定 ALB 的配置中可能發生錯誤。請檢查您的應用程式碼、[Ingress 資源配置檔](cs_ingress.html#public_inside_4)，或您只套用至此 ALB 的任何其他配置。
 
 7. 完成除錯之後，請在 ALB Pod 上還原性能檢查。針對每個 ALB Pod，重複這些步驟。
   1. 登入 ALB Pod，並移除 `server_name` 中的 `#`。
@@ -385,7 +389,7 @@ lastupdated: "2018-09-10"
 -   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/bluemix/support/#status)。
 -   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。
 
-如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
+    如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
     {: tip}
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
 

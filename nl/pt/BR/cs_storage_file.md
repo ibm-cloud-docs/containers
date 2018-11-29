@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -167,13 +167,16 @@ Antes de iniciar:
 - Se você tiver um firewall, [permita o acesso ao egresso](cs_firewall.html#pvc) para os intervalos de IP de infraestrutura do IBM Cloud (SoftLayer) das zonas nas quais os seus clusters estiverem para que seja possível criar PVCs.
 - [Decida sobre uma classe de armazenamento predefinida](#predefined_storageclass) ou crie uma [classe de armazenamento customizada](#custom_storageclass).
 
-  **Dica:** se você tiver um cluster de múltiplas zonas, a zona na qual seu armazenamento é provisionado será selecionada em uma base round-robin para balancear as solicitações de volume uniformemente entre todas as zonas. Se você desejar especificar a zona para o seu armazenamento, crie uma [classe de armazenamento customizada](#multizone_yaml) primeiro. Em seguida, siga as etapas neste tópico para provisionar armazenamento usando sua classe de armazenamento customizada.
+  **Nota:** se você tiver um cluster de múltiplas zonas, a zona na qual seu armazenamento for provisionado será selecionada em uma base round-robin para balancear as solicitações de volume uniformemente em todas as zonas. Se você desejar especificar a zona para o seu armazenamento, crie uma [classe de armazenamento customizada](#multizone_yaml) primeiro. Em seguida, siga as etapas neste tópico para provisionar armazenamento usando sua classe de armazenamento customizada.
+
+Procurando implementar o armazenamento de arquivo em um conjunto stateful? Veja [Usando o armazenamento de arquivo em um conjunto stateful](#file_statefulset) para obter mais informações.
+{: tip}
 
 Para incluir armazenamento de arquivo:
 
 1.  Crie um arquivo de configuração para definir a sua solicitação de volume persistente (PVC) e salve a configuração como um arquivo `.yaml`.
 
-    -  **Exemplo para classes de armazenamento bronze, prata, ouro**:
+    - **Exemplo para classes de armazenamento bronze, prata, ouro**:
        o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da classe de armazenamento `"ibmc-file-silver"`, faturada `"monthly"`, com um tamanho de gigabyte de `24Gi`.
 
        ```
@@ -191,8 +194,8 @@ Para incluir armazenamento de arquivo:
          resources:
            requests:
              storage: 24Gi
-        ```
-        {: codeblock}
+       ```
+       {: codeblock}
 
     -  **Exemplo para usar a classe de armazenamento customizada**:
 o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da classe de armazenamento `ibmc-file-retain-custom`, faturada `"hourly"`, com um tamanho de gigabyte de `45Gi` e IOPS de `"300"`.
@@ -213,40 +216,40 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
            requests:
              storage: 45Gi
              iops: "300"
-        ```
-        {: codeblock}
+       ```
+       {: codeblock}
 
-        <table>
-        <caption>Entendendo os componentes de arquivo YAML</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>metadata/name</code></td>
-        <td>Insira o nome do PVC.</td>
-        </tr>
-        <tr>
-        <td><code>metadata/annotations</code></td>
-        <td>O nome da classe de armazenamento que você deseja usar para provisionar armazenamento de arquivo. </br> Se você não especificar uma classe de armazenamento, o PV será criado com a classe de armazenamento padrão <code>ibmc-file-bronze</code><p>**Dica:** se você deseja mudar a classe de armazenamento padrão, execute <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> e substitua <code>&lt;storageclass&gt;</code> pelo nome da classe de armazenamento.</p></td>
-        </tr>
-        <tr>
-          <td><code>metadata/labels/billingType</code></td>
+       <table>
+       <caption>Entendendo os componentes de arquivo YAML</caption>
+       <thead>
+       <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+       </thead>
+       <tbody>
+       <tr>
+       <td><code>metadata.name</code></td>
+       <td>Insira o nome do PVC.</td>
+       </tr>
+       <tr>
+       <td><code> metadata.annotations </code></td>
+       <td>O nome da classe de armazenamento que você deseja usar para provisionar armazenamento de arquivo. </br> Se você não especificar uma classe de armazenamento, o PV será criado com a classe de armazenamento padrão <code>ibmc-file-bronze</code><p>**Dica:** se você deseja mudar a classe de armazenamento padrão, execute <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> e substitua <code>&lt;storageclass&gt;</code> pelo nome da classe de armazenamento.</p></td>
+       </tr>
+       <tr>
+         <td><code> metadata.labels.billingType </code></td>
           <td>Especifique a frequência para a qual sua conta de armazenamento é calculada, como "mensal" ou "por hora". Se você não especificar um tipo de faturamento, o armazenamento será provisionado com um tipo de faturamento por hora. </td>
-        </tr>
-        <tr>
-        <td><code> spec/accessMode </code></td>
-        <td>Especifique uma das seguintes opções: <ul><li><strong>ReadWriteMany:</strong> o PVC pode ser montado por múltiplos pods. Todos os pods podem ler e gravar no volume. </li><li><strong>ReadOnlyMany:</strong> o PVC pode ser montado por múltiplos pods. Todos os pods têm acesso somente leitura. <li><strong>ReadWriteOnce: </strong> O PVC pode ser montado por somente um pod. Esse pod pode ler e gravar no volume. </li></ul></td>
-        </tr>
-        <tr>
-        <td><code>spec/resources/requests/storage</code></td>
-        <td>Insira o tamanho do armazenamento de arquivo, em gigabytes (Gi). </br></br><strong>Nota: </strong> depois que seu armazenamento for provisionado, não será possível mudar o tamanho de seu armazenamento de arquivo. Certifique-se de especificar um tamanho que corresponda à quantia de dados que você deseja armazenar. </td>
-        </tr>
-        <tr>
-        <td><code>spec/resources/requests/iops</code></td>
-        <td>Essa opção está disponível somente para as classes de armazenamento customizadas (`ibmc-file-custom/ibmc-file-retain-custom`). Especifique o IOPS total para o armazenamento, selecionando um múltiplo de 100 dentro do intervalo permitido. Se você escolher um IOPS diferente de um que esteja listado, o IOPS será arredondado para cima.</td>
-        </tr>
-        </tbody></table>
+       </tr>
+       <tr>
+       <td><code> spec.accessMode </code></td>
+       <td>Especifique uma das seguintes opções: <ul><li><strong>ReadWriteMany:</strong> o PVC pode ser montado por múltiplos pods. Todos os pods podem ler e gravar no volume. </li><li><strong>ReadOnlyMany:</strong> o PVC pode ser montado por múltiplos pods. Todos os pods têm acesso somente leitura. <li><strong>ReadWriteOnce: </strong> O PVC pode ser montado por somente um pod. Esse pod pode ler e gravar no volume. </li></ul></td>
+       </tr>
+       <tr>
+       <td><code> spec.resources.requests.storage </code></td>
+       <td>Insira o tamanho do armazenamento de arquivo, em gigabytes (Gi). </br></br><strong>Nota: </strong> depois que seu armazenamento for provisionado, não será possível mudar o tamanho de seu armazenamento de arquivo. Certifique-se de especificar um tamanho que corresponda à quantia de dados que você deseja armazenar. </td>
+       </tr>
+       <tr>
+       <td><code> spec.resources.requests.iops </code></td>
+       <td>Essa opção está disponível somente para as classes de armazenamento customizadas (`ibmc-file-custom/ibmc-file-retain-custom`). Especifique o IOPS total para o armazenamento, selecionando um múltiplo de 100 dentro do intervalo permitido. Se você escolher um IOPS diferente de um que esteja listado, o IOPS será arredondado para cima.</td>
+       </tr>
+       </tbody></table>
 
     Se você deseja usar uma classe de armazenamento customizado, crie seu PVC com o nome de classe de armazenamento correspondente, um IOPS válido e o tamanho.   
     {: tip}
@@ -327,39 +330,39 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
     </thead>
     <tbody>
         <tr>
-    <td><code>metadata/labels/app</code></td>
+    <td><code> metadata.labels.app </code></td>
     <td>Um rótulo para a implementação.</td>
       </tr>
       <tr>
-        <td><code>spec/selector/matchLabels/app</code> <br/> <code>spec/template/metadata/labels/app</code></td>
+        <td><code>spec.selector.matchLabels.app</code> <br/> <code> spec.template.metadata.labels.app </code></td>
         <td>Um rótulo para o seu app.</td>
       </tr>
     <tr>
-    <td><code>template/metadata/labels/app</code></td>
+    <td><code> template.metadata.labels.app </code></td>
     <td>Um rótulo para a implementação.</td>
       </tr>
     <tr>
-    <td><code>spec/containers/image</code></td>
+    <td><code> spec.containers.image </code></td>
     <td>O nome da imagem que você deseja usar. Para listar as imagens disponíveis em sua conta do {{site.data.keyword.registryshort_notm}}, execute `ibmcloud cr image-list`.</td>
     </tr>
     <tr>
-    <td><code>spec/containers/name</code></td>
+    <td><code> spec.containers.name </code></td>
     <td>O nome do contêiner que você deseja implementar em seu cluster.</td>
     </tr>
     <tr>
-    <td><code>spec/containers/volumeMounts/mountPath</code></td>
-    <td>O caminho absoluto do diretório no qual o volume está montado dentro do contêiner. Os dados que são gravados no caminho de montagem são armazenados sob o diretório <coode>root</code> em sua instância de armazenamento de arquivo físico. Para criar diretórios em sua instância de armazenamento de arquivo físico, deve-se criar subdiretórios em seu caminho de montagem. </td>
+    <td><code> spec.containers.volumeMounts.mountPath </code></td>
+    <td>O caminho absoluto do diretório no qual o volume está montado dentro do contêiner. Os dados que são gravados no caminho de montagem são armazenados sob o diretório <code>root</code> em sua instância de armazenamento de arquivo físico. Para criar diretórios em sua instância de armazenamento de arquivo físico, deve-se criar subdiretórios em seu caminho de montagem. </td>
     </tr>
     <tr>
-    <td><code>spec/containers/volumeMounts/name</code></td>
+    <td><code> spec.containers.volumeMounts.name </code></td>
     <td>O nome do volume a ser montado no pod.</td>
     </tr>
     <tr>
-    <td><code>volumes/name</code></td>
-    <td>O nome do volume a ser montado no pod. Geralmente, esse nome é o mesmo que <code>volumeMounts/name</code>.</td>
+    <td><code> volumes.name </code></td>
+    <td>O nome do volume a ser montado no pod. Geralmente, esse nome é igual a <code>volumeMounts.name</code>.</td>
     </tr>
     <tr>
-    <td><code>volumes/persistentVolumeClaim/claimName</code></td>
+    <td><code> volumes.persistentVolumeClaim.claimName </code></td>
     <td>O nome do PVC que liga o PV que você deseja usar. </td>
     </tr>
     </tbody></table>
@@ -393,8 +396,6 @@ o arquivo `.yaml` a seguir cria uma solicitação que é denominada `mypvc` da c
      {: screen}
 
 <br />
-
-
 
 
 ## Usando armazenamento de arquivo existente em seu cluster
@@ -491,19 +492,19 @@ Se desejar usar o armazenamento existente que você provisionou anteriormente, m
     <td>Insira o nome do objeto PV a ser criado.</td>
     </tr>
     <tr>
-    <td><code>metadata/labels</code></td>
+    <td><code>metadata.labels</code></td>
     <td>Insira a região e a zona que você recuperou anteriormente. Deve-se ter pelo menos um nó do trabalhador na mesma região e zona que o seu armazenamento persistente para montar o armazenamento em seu cluster. Se um PV para o seu armazenamento já existir, [inclua o rótulo de zona e região](cs_storage_basics.html#multizone) em seu PV.
     </tr>
     <tr>
-    <td><code>spec/capacity/storage</code></td>
+    <td><code> spec.capacity.storage </code></td>
     <td>Insira o tamanho de armazenamento do compartilhamento de arquivo NFS existente que você recuperou anteriormente. O tamanho de armazenamento deve ser gravado em gigabytes, por exemplo, 20Gi (20 GB) ou 1000Gi (1 TB), e o tamanho deve corresponder ao tamanho do compartilhamento de arquivo existente.</td>
     </tr>
     <tr>
-    <td><code> spec/accessMode </code></td>
+    <td><code> spec.accessMode </code></td>
     <td>Especifique uma das seguintes opções: <ul><li><strong>ReadWriteMany:</strong> o PVC pode ser montado por múltiplos pods. Todos os pods podem ler e gravar no volume. </li><li><strong>ReadOnlyMany:</strong> o PVC pode ser montado por múltiplos pods. Todos os pods têm acesso somente leitura. <li><strong>ReadWriteOnce: </strong> O PVC pode ser montado por somente um pod. Esse pod pode ler e gravar no volume. </li></ul></td>
     </tr>
     <tr>
-    <td><code>spec/nfs/server</code></td>
+    <td><code> spec.nfs.server </code></td>
     <td>Insira o ID do servidor de compartilhamento de arquivo NFS que você recuperou anteriormente.</td>
     </tr>
     <tr>
@@ -582,6 +583,231 @@ Você criou com êxito um PV e ligou-o a um PVC. Os usuários do cluster agora p
 
 <br />
 
+
+
+## Usando o armazenamento de arquivo em um conjunto stateful
+{: #file_statefulset}
+
+Se você tiver um app stateful como um banco de dados, será possível criar conjuntos stateful que usam armazenamento de arquivo para armazenar os dados de seu app. Como alternativa, é possível usar um banco de dados como um serviço do {{site.data.keyword.Bluemix_notm}} e armazenar seus dados na nuvem.
+{: shortdesc}
+
+**De que eu preciso estar ciente ao incluir armazenamento de arquivo em um conjunto stateful?** </br>
+Para incluir armazenamento em um conjunto stateful, especifique sua configuração de armazenamento na seção `volumeClaimTemplates` do YAML do conjunto stateful. O `volumeClaimTemplates` é a base para seu PVC e pode incluir a classe de armazenamento e o tamanho ou IOPS do armazenamento de arquivo que você deseja provisionar. No entanto, se você desejar incluir rótulos nos `volumeClaimTemplates`, os Kubernetes não incluirão esses rótulos ao criar o PVC. Em vez disso, deve-se incluir os rótulos diretamente no conjunto stateful.
+
+**Importante:** não é possível implementar dois conjuntos stateful ao mesmo tempo. Se você tentar criar um conjunto stateful antes que um diferente seja totalmente implementado, a implementação do conjunto stateful poderá levar a resultados inesperados.
+
+**Como posso criar meu conjunto stateful em uma zona específica?** </br>
+Em um cluster com várias zonas, é possível especificar a zona e a região em que você deseja criar seu conjunto stateful nas seções `spec.selector.matchLabels` e `spec.template.metadata.labels` do YAML do conjunto stateful. Como alternativa, é possível incluir esses rótulos em uma [classe de armazenamento customizada](cs_storage_basics.html#customized_storageclass) e usar essa classe de armazenamento na seção `volumeClaimTemplates` de seu conjunto stateful. 
+
+**Quais opções eu tenho para incluir armazenamento de arquivo em um conjunto stateful?** </br>
+Se você desejar criar automaticamente seu PVC ao criar o conjunto stateful, use o [fornecimento dinâmico](#dynamic_statefulset). Também é possível optar por [pré-provisionar os PVCs ou usar PVCs existentes](#static_statefulset) com o conjunto stateful.  
+
+### Provisionar dinamicamente o PVC ao criar um conjunto stateful
+{: #dynamic_statefulset}
+
+Use essa opção se desejar criar automaticamente o PVC ao criar o conjunto stateful.
+{: shortdesc}
+
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+
+1. Verifique se todos os conjuntos stateful existentes no cluster estão totalmente implementados. Se um conjunto stateful ainda estiver sendo implementado, não será possível iniciar a criação do conjunto stateful. Deve-se aguardar até que todos os conjuntos stateful no cluster estejam totalmente implementados para evitar resultados inesperados.
+   1. Liste os conjuntos stateful existentes em seu cluster.
+      ```
+      kubectl get statefulset -- all-namespaces
+      ```
+      {: pre}
+
+      Saída de exemplo:
+      ```
+      NAME DESIRED CURRENT AGE mystatefulset 3 3 6s
+      ```
+      {: screen}
+
+   2. Visualize o **Status dos pods** de cada conjunto stateful para assegurar-se de que a implementação do conjunto stateful esteja concluída.  
+      ```
+      kubectl describe statefulset <statefulset_name>
+      ```
+      {: pre}
+
+      Saída de exemplo:
+      ```
+      Name: nginx Namespace: default CreationTimestamp: Fri, 05 Oct 2018 13:22:41 -0400 Selector: app=nginx,billingType=hourly,region=us-south,zone=dal10 Labels: app=nginx billingType=hourly region=us-south zone=dal10 Annotations: kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"apps/v1beta1","kind":"StatefulSet","metadata":{"annotations":{},"name":"nginx","namespace":"default"},"spec":{"podManagementPolicy":"Par... Replicas: 3 desired | 3 total Pods Status: 0 Running / 3 Waiting / 0 Succeeded / 0 Failed Pod Template: Labels: app=nginx billingType=hourly region=us-south zone=dal10 ...
+      ```
+      {: screen}
+
+      Um conjunto stateful é totalmente implementado quando o número de réplicas localizadas na seção **Réplicas** de sua saída da CLI é igual ao número de pods **Em execução** na seção **Status dos pods**. Se um conjunto stateful ainda não estiver totalmente implementado, aguarde até que a implementação seja concluída antes de continuar.
+
+3. Crie um arquivo de configuração para seu conjunto stateful e o serviço usado para expor o conjunto stateful. O exemplo a seguir mostra como implementar nginx como um conjunto stateful com 3 réplicas. Para cada réplica, um dispositivo de armazenamento de arquivo de 20 gigabytes é provisionado com base nas especificações definidas na classe de armazenamento `ibmc-file-retain-bronze`. Todos os dispositivos de armazenamento são provisionados na zona `dal10`. Como o armazenamento de arquivo não pode ser acessado de outras zonas, todas as réplicas do conjunto stateful também são implementadas em um nó do trabalhador que está localizado em `dal10`.
+
+   ```
+   apiVersion: v1
+   kind: Service
+   metadata:
+    name: nginx
+    labels:
+      app: nginx
+   spec:
+    ports:
+    - port: 80
+      name: web
+    clusterIP: None
+    selector:
+      app: nginx
+   ---
+   apiVersion: apps/v1beta1
+   kind: StatefulSet
+   metadata:
+    name: nginx
+   spec:
+    serviceName: "nginx"
+    replicas: 3
+    podManagementPolicy: Parallel
+    selector:
+      matchLabels:
+        app: nginx
+        billingType: "hourly"
+        region: "us-south"
+        zone: "dal10"
+    template:
+      metadata:
+        labels:
+          app: nginx
+          billingType: "hourly"
+          region: "us-south"
+          zone: "dal10"
+      spec:
+        containers:
+        - name: nginx
+          image: k8s.gcr.io/nginx-slim:0.8
+          ports:
+          - containerPort: 80
+            name: web
+          volumeMounts:
+          - name: myvol
+            mountPath: /usr/share/nginx/html
+    volumeClaimTemplates:
+    - metadata:
+        annotations:
+          volume.beta.kubernetes.io/storage-class: ibmc-file-retain-bronze
+        name: myvol
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
+            iops: "300" #required only for performance storage
+   ```
+   {: codeblock}
+
+   <table>
+    <caption>Entendendo os componentes de arquivo YAML do conjunto stateful</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ícone Ideia"/> Entendendo os componentes de arquivo YAML do conjunto stateful</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align:left"><code>metadata.name</code></td>
+    <td style="text-align:left">Insira um nome para seu conjunto stateful. O nome inserido é usado para criar o nome para seu PVC no formato: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code> spec.serviceName </code></td>
+    <td style="text-align:left">Insira o nome do serviço que deseja usar para expor o conjunto stateful. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code> spec.replicas </code></td>
+    <td style="text-align:left">Insira o número de réplicas para seu conjunto stateful. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code> spec.podManagementPolicy </code></td>
+    <td style="text-align:left">Insira a política de gerenciamento de pod que deseja usar para o conjunto stateful. Escolha entre as opções a seguir: <ul><li><strong>OrderedReady: </strong>com essa opção, as réplicas do conjunto stateful são implementadas uma após a outra. Por exemplo, se você tiver especificado 3 réplicas, o Kubernetes criará o PVC para sua primeira réplica, aguardará até que o PVC seja ligado, implementará a réplica do conjunto stateful e montará o PVC para a réplica. Depois que a implementação é concluída, a segunda réplica é implementada. Para obter mais informações sobre essa opção, consulte [Gerenciamento do pod OrderedReady ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Paralelo: </strong> com essa opção, a implementação de todas as réplicas do conjunto stateful é iniciada ao mesmo tempo. Se o seu app suportar a implementação paralela de réplicas, use essa opção para economizar tempo de implementação para seus PVCs e réplicas do conjunto stateful. </li></ul></td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code> spec.selector.matchLabels </code></td>
+    <td style="text-align:left">Insira todos os rótulos que deseja incluir no conjunto stateful e no PVC. Os rótulos incluídos no <code>volumeClaimTemplates</code> de seu conjunto stateful não são reconhecidos pelo Kubernetes. Os rótulos de amostra que você pode desejar incluir são: <ul><li><code><strong>region</strong></code> e <code><strong>zone</strong></code>: se você desejar que todas as réplicas e PVCs do conjunto stateful sejam criados em uma zona específica, inclua ambos os rótulos. Também é possível especificar a zona e a região na classe de armazenamento usada. Se você não especificar uma zona e uma região e tiver um cluster com várias zonas, a zona na qual seu armazenamento é provisionado será selecionada em uma base round-robin para balancear solicitações de volume uniformemente em todas as zonas.</li><li><code><strong>billingType</strong></code>: insira o tipo de faturamento que você deseja usar para seus PVCs. Escolha entre  <code> horária </code>  ou  <code> mensal </code>. Se você não especificar esse rótulo, todos os PVCs serão criados com um tipo de faturamento por hora. </li></ul></td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code> spec.template.metadata.labels </code></td>
+    <td style="text-align:left">Insira os mesmos rótulos incluídos na seção <code>spec.selector.matchLabels</code>. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code> spec.volumeClaimTemplates.metadata. </code></br><code> annotations.volume.beta. </code></br><code> kubernetes.io/storage-class </code></td>
+    <td style="text-align:left">Insira a classe de armazenamento que deseja usar. Para listar as classes de área de armazenamento, execute <code>kubectl get storageclasses | grep file</code>. Se você não especificar uma classe de armazenamento, o PVC será criado com a classe de armazenamento padrão configurada em seu cluster. Certifique-se de que a classe de armazenamento padrão use o provisionador <code>ibm.io/ibmc-file</code> para que seu conjunto stateful seja provisionado com armazenamento de arquivo.</td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code> spec.volumeClaimTemplates.metadata.name </code></td>
+    <td style="text-align:left">Insira um nome para seu volume. Use o mesmo nome definido na seção <code>spec.containers.volumeMount.name</code>. O nome inserido aqui é usado para criar o nome para seu PVC no formato: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code> spec.volumeClaimTemplates.spec.resources. </code></br><code> requests.storage </code></td>
+    <td style="text-align:left">Insira o tamanho do armazenamento de arquivo em gigabytes (Gi).</td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code> spec.volumeClaimTemplates.spec.resources. </code></br><code> requests.iops </code></td>
+    <td style="text-align:left">Se você desejar provisionar o [armazenamento de desempenho](#predefined_storageclass), insira o número de IOPS. Se você usar uma classe de armazenamento do Endurance e especificar vários IOPS, o número de IOPS será ignorado. Em vez disso, o IOPS especificado em sua classe de armazenamento é usado.  </td>
+    </tr>
+    </tbody></table>
+
+4. Crie seu conjunto stateful.
+   ```
+   kubectl aplicar -f statefulset.yaml
+   ```
+   {: pre}
+
+5. Aguarde o seu conjunto stateful ser implementado.
+   ```
+   kubectl describe statefulset <statefulset_name>
+   ```
+   {: pre}
+
+   Para ver o status atual de seus PVCs, execute `kubectl get pvc`. O nome de seu PVC é formatado como `<volume_name>-<statefulset_name>-<replica_number>`.
+   {: tip}
+
+### Pré-provisionando o PVC antes de criar o conjunto stateful
+{: #static_statefulset}
+
+É possível pré-provisionar seus PVCs antes de criar seu conjunto stateful ou usar PVCs existentes com esse conjunto.
+{: shortdesc}
+
+Quando você [provisionar dinamicamente seus PVCs ao criar o conjunto stateful](#dynamic_statefulset), o nome do PVC será designado com base nos valores usados no arquivo YAML do conjunto stateful. Para que o conjunto stateful use PVCs existentes, o nome dos PVCs deve corresponder ao nome que seria criado automaticamente ao usar o fornecimento dinâmico.
+
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+
+1. Siga as etapas 1 - 3 em [Incluindo armazenamento de arquivo em apps](#add_file) para criar um PVC para cada réplica de conjunto stateful. Certifique-se de criar seu PVC com um nome que siga o formato a seguir: `<volume_name>-<statefulset_name>-<replica_number>`.
+   - **`<volume_name>`**: use o nome que você deseja especificar na seção `spec.volumeClaimTemplates.metadata.name` de seu conjunto stateful, como `nginxvol`.
+   - **`<statefulset_name>`**: use o nome que você deseja especificar na seção `metadata.name` de seu conjunto stateful, como `nginx_statefulset`.
+   - **`<replica_number>`**: insira o número de sua réplica começando em 0.
+
+   Por exemplo, se for necessário criar 3 réplicas do conjunto stateful, crie 3 PVCs com os nomes a seguir: `nginxvol-nginx_statefulset-0`, `nginxvol-nginx_statefulset-1` e `nginxvol-nginx_statefulset-2`.  
+
+2. Siga as etapas de [Provisionar dinamicamente o PVC ao criar um conjunto stateful](#dynamic_statefulset) para criar seu conjunto stateful. Certifique-se de usar os valores dos nomes do PVC na especificação do conjunto stateful:
+   - ** ` spec.volumeClaimTemplates.metadata.name ` **: insira o  `<volume_name>` usado na etapa anterior.
+   - ** ` metadata.name ` **: insira o  `<statefulset_name>` usado na etapa anterior.
+   - **`spec.replicas`**: insira o número de réplicas que você deseja criar para seu conjunto stateful. O número de réplicas deve ser igual ao número de PVCs criados anteriormente.
+
+   **Nota:** se você tiver criado seus PVCs em zonas diferentes, não inclua um rótulo de região ou de zona no conjunto stateful.
+
+3. Verifique se os PVCs são usados nos pods de réplica do conjunto stateful.
+   1. Liste os pods em seu cluster. Identifique os pods que pertencem ao conjunto stateful.
+      ```
+      kubectl get pods
+      ```
+      {: pre}
+
+   2. Verifique se o PVC existente está montado na réplica do conjunto stateful. Revise o **ClaimName** na seção **Volumes** da saída da CLI.
+      ```
+      kubectl describe pod <pod_name>
+      ```
+      {: pre}
+
+      Saída de exemplo:
+      ```
+      Name: nginx-0 Namespace: default Node: 10.xxx.xx.xxx/10.xxx.xx.xxx Start Time: Fri, 05 Oct 2018 13:24:59 -0400 ...
+      Volumes: myvol: Type: PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace) ClaimName: myvol-nginx-0 ...
+      ```
+      {: screen}
+
+<br />
 
 
 ## Mudando a versão do NFS padrão
@@ -682,7 +908,8 @@ Revise as opções de backup e restauração a seguir para o seu armazenamento d
 
 <dl>
   <dt>Configurar capturas instantâneas periódicas</dt>
-  <dd><p>É possível [configurar capturas instantâneas periódicas para o seu armazenamento de arquivo](/docs/infrastructure/FileStorage/snapshots.html), que é uma imagem somente leitura que captura o estado da instância em um momento. Para armazenar a captura instantânea, deve-se solicitar espaço de captura instantânea em seu armazenamento de arquivo. As capturas instantâneas são armazenadas na instância de armazenamento existente dentro da mesma zona. É possível restaurar dados de uma captura instantânea se um usuário acidentalmente remove dados importantes do volume. <strong>Nota</strong>: se você tiver uma conta Dedicada, deverá [abrir um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).</br></br> <strong>Para criar uma captura instantânea para seu volume: </strong><ol><li>PVs de Lista existente em seu cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenha os detalhes para o PV para o qual você deseja criar espaço de captura instantânea e anote o ID do volume, o tamanho e os IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> O ID do volume, o tamanho e o IOPS podem ser localizados na seção <strong>Labels</strong> de sua saída da CLI. </li><li>Crie o tamanho da captura instantânea para o volume existente com os parâmetros que você recuperou na etapa anterior. <pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Espere o tamanho da captura instantânea para criar. <pre class="pre"><code>slcli arquivo volume-detail &lt;volume_id&gt;</code></pre>O tamanho da captura instantânea é provisionado com êxito quando o <strong>Snapshot Capacity (GB)</strong> em sua saída da CLI muda de 0 para o tamanho que você pediu. </li><li>Crie a captura instantânea para o volume e anote o ID da captura instantânea que é criado para você. <pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre></li><li>Verifique se a captura instantânea foi criada com êxito. <pre class="pre"><code>slcli arquivo volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>Para restaurar dados por meio de uma captura instantânea para um volume existente: </strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></p></dd>
+  <dd><p>É possível [configurar capturas instantâneas periódicas para o seu armazenamento de arquivo](/docs/infrastructure/FileStorage/snapshots.html), que é uma imagem somente leitura que captura o estado da instância em um momento. Para armazenar a captura instantânea, deve-se solicitar espaço de captura instantânea em seu armazenamento de arquivo. As capturas instantâneas são armazenadas na instância de armazenamento existente dentro da mesma zona. É possível restaurar dados de uma captura instantânea se um usuário acidentalmente remove dados importantes do volume. <strong>Nota</strong>: se você tiver uma conta Dedicada, deverá [abrir um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).</br></br> <strong>Para criar uma captura instantânea para seu volume: </strong><ol><li>[Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).</li><li>Efetue login na CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
+    </code></pre></li><li>PVs de Lista existente em seu cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenha os detalhes para o PV para o qual você deseja criar espaço de captura instantânea e anote o ID do volume, o tamanho e os IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> O ID do volume, o tamanho e o IOPS podem ser localizados na seção <strong>Labels</strong> de sua saída da CLI. </li><li>Crie o tamanho da captura instantânea para o volume existente com os parâmetros que você recuperou na etapa anterior. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Espere o tamanho da captura instantânea para criar. <pre class="pre"><code> ibmcloud sl arquivo volume-detail  &lt;volume_ID&gt; </code></pre>O tamanho da captura instantânea é provisionado com êxito quando o <strong>Tamanho da captura instantânea (GB)</strong> na saída da CLI muda de 0 para o tamanho solicitado. </li><li>Crie a captura instantânea para o volume e anote o ID da captura instantânea que é criado para você. <pre class="pre"><code> Captura instantânea do arquivo ibmcloud sl-create  &lt;volume_ID&gt; </code></pre></li><li>Verifique se a captura instantânea foi criada com êxito. <pre class="pre"><code> ibmcloud sl file snapshot-list  &lt;volume_ID&gt; </code></pre></li></ol></br><strong>Para restaurar dados por meio de uma captura instantânea para um volume existente: </strong><pre class="pre"><code> ibmcloud sl file snapshot-restore  &lt;volume_ID&gt;  &lt;snapshot_ID&gt; </code></pre></p></dd>
   <dt>Replicar capturas instantâneas para outra zona</dt>
  <dd><p>Para proteger seus dados de uma falha de zona, é possível [replicar capturas instantâneas](/docs/infrastructure/FileStorage/replication.html#replicating-data) para uma instância de armazenamento de arquivo que está configurada em outra zona. Os dados podem ser replicados do armazenamento primário para o armazenamento de backup somente. Não é possível montar uma instância de armazenamento de arquivo replicada em um cluster. Quando seu armazenamento primário falha, é possível configurar manualmente o armazenamento de backup replicado para ser o primário. Em seguida, é possível montá-lo para seu cluster. Depois que o armazenamento primário é restaurado, é possível restaurar os dados do armazenamento de backup. <strong>Nota</strong>: se você tiver uma conta Dedicada, não será possível replicar capturas instantâneas para outra zona.</p></dd>
  <dt>Armazenamento duplicado</dt>
@@ -692,7 +919,7 @@ Revise as opções de backup e restauração a seguir para o seu armazenamento d
   <p>Para tornar os seus dados ainda mais altamente disponíveis e proteger o seu app de uma falha de zona, configure uma segunda instância do {{site.data.keyword.cos_full}} e replique dados entre as zonas. Se você precisa restaurar dados de sua instância do {{site.data.keyword.cos_full}}, use o script de restauração que é fornecido com a imagem.</p></dd>
 <dt>Copiar dados de e para pods e contêineres</dt>
 <dd><p>É possível usar o [comando `kubectl cp` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) para copiar arquivos e diretórios de pods ou contêineres específicos ou para eles em seu cluster.</p>
-<p>Antes de iniciar, [direcione sua CLI do Kubernetes](cs_cli_install.html#cs_cli_configure) para o cluster que deseja usar. Se você não especificar um contêiner com <code>-c</code>, o comando usará o primeiro contêiner disponível no pod.</p>
+<p>Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).Se você não especificar um contêiner com <code>-c</code>, o comando usará o primeiro contêiner disponível no pod.</p>
 <p>É possível usar o comando de várias maneiras:</p>
 <ul>
 <li>Copiar dados de sua máquina local para um pod no cluster: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
@@ -890,6 +1117,13 @@ Revise as opções de backup e restauração a seguir para o seu armazenamento d
 ## Classes de armazenamento customizado de amostra
 {: #custom_storageclass}
 
+É possível criar uma classe de armazenamento customizada e usar a classe de armazenamento no PVC.
+{: shortdesc}
+
+O {{site.data.keyword.containerlong_notm}} fornece [classes de armazenamento predefinidas](#storageclass_reference) para provisionar o armazenamento de arquivo com uma camada e uma configuração específicas. Em alguns casos, talvez você queira provisionar armazenamento com uma configuração diferente que não esteja coberta nas classes de armazenamento predefinidas. É possível usar os exemplos neste tópico para localizar classes de armazenamento customizadas de amostra.
+
+Para criar sua classe de armazenamento customizada, consulte [Customizando uma classe de armazenamento](cs_storage_basics.html#customized_storageclass). Em seguida, [use a sua classe de armazenamento customizada em seu PVC](#add_file).
+
 ### Especificando a zona para clusters de múltiplas zonas
 {: #multizone_yaml}
 
@@ -905,10 +1139,12 @@ metadata:
 provisioner: ibm.io/ibmc-file
 parameters:
   zone: "dal12"
+  region: "us-south"
   type: "Endurance"
   iopsPerGB: "4"
   sizeRange: "[20-12000]Gi"
-reclaimPolicy: "Delete"
+  reclaimPolicy: "Delete"
+  classVersion: "2"
 ```
 {: codeblock}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -28,7 +28,10 @@ Quando você usar o {{site.data.keyword.containerlong}}, considere estas técnic
 
 Você expôs publicamente seu app criando um recurso de Ingresso para seu app no cluster. No entanto, quando você tenta se conectar ao seu app por meio do endereço IP público ou subdomínio público do ALB, a conexão falha ou atinge o tempo limite. As etapas nas seções a seguir podem ajudar a depurar sua configuração do Ingress.
 
-## Etapa 1: verificando mensagens de erro nos logs do recurso Ingress ou do pod do ALB
+Assegure-se de definir um host em apenas um recurso do Ingress. Se um host for definido em múltiplos recursos do Ingress, o ALB poderá não encaminhar o tráfego corretamente e poderá haver erros.
+{: tip}
+
+## Etapa 1: verificando mensagens de erro em sua implementação do Ingress e nos logs do pod do ALB
 {: #errors}
 
 Inicie verificando se há mensagens de erro nos eventos de implementação do recurso Ingress e nos logs do pod do ALB. Essas mensagens de erro podem ajudá-lo a localizar as causas raiz para falhas e depurar ainda mais sua configuração do Ingress nas próximas seções.
@@ -40,7 +43,7 @@ Inicie verificando se há mensagens de erro nos eventos de implementação do re
     ```
     {: pre}
 
-    Na seção **Events** da saída, você pode ver mensagens de aviso sobre valores inválidos em seu recurso Ingress ou em certas anotações usadas. Verifique a [documentação de configuração do recurso Ingress](cs_ingress.html#public_inside_3) ou a [documentação de anotações](cs_annotations.html).
+    Na seção **Events** da saída, você pode ver mensagens de aviso sobre valores inválidos em seu recurso Ingress ou em certas anotações usadas. Verifique a [documentação de configuração do recurso Ingress](cs_ingress.html#public_inside_4) ou a [documentação de anotações](cs_annotations.html).
 
     ```
     Name:             myingress
@@ -142,17 +145,17 @@ Verifique a disponibilidade de seu subdomínio do Ingress e endereços IP públi
 
     * Somente clusters de múltiplas zonas: é possível usar a verificação de funcionamento do MZLB para determinar o status de seus IPs do ALB. Para obter mais informações sobre o MZLB, consulte [Multizone load balancer (MZLB)](cs_ingress.html#planning). **Nota**: a verificação de funcionamento do MZLB está disponível somente para clusters que têm o novo subdomínio do Ingress no formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Se seu cluster ainda usar o formato mais antigo de `<cluster_name>.<region>.containers.mybluemix.net`, [converta seu cluster de zona única para múltiplas zonas](cs_clusters.html#add_zone). Seu cluster é designado a um subdomínio com o novo formato, mas também pode continuar a usar o formato de subdomínio mais antigo. Como alternativa, é possível pedir um novo cluster que é designado automaticamente ao novo formato de subdomínio.
     O comando HTTP cURL a seguir usa o host `albhealth`, que é configurado pelo {{site.data.keyword.containerlong_notm}} para retornar o status `healthy` ou `unhealthy` para um IP do ALB.
-            ```
-            curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
-            ```
-            {: pre}
+        ```
+        curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+        ```
+        {: pre}
 
-            Saída de exemplo:
-            ```
-            funcional
-            ```
-            {: screen}
-            Se um ou mais IPs retornarem `unhealthy`, [verifique o status de seus pods do ALB](#check_pods).
+        Saída de exemplo:
+        ```
+        funcional
+        ```
+        {: screen}
+        Se um ou mais IPs retornarem `unhealthy`, [verifique o status de seus pods do ALB](#check_pods).
 
 3. Obtenha o subdomínio do Ingresso fornecido pela IBM.
     ```
@@ -218,11 +221,13 @@ Verifique a disponibilidade de seu subdomínio do Ingress e endereços IP públi
     ```
     {: pre}
 
-    1. Verifique se o subdomínio e o certificado TLS estão corretos. Para localizar o subdomínio do Ingress fornecido pela IBM e o certificado TLS, execute `ibmcloud ks cluster-get <cluster_name_or_ID>`.
+    1. Assegure-se de definir um host em apenas um recurso do Ingress. Se um host for definido em múltiplos recursos do Ingress, o ALB poderá não encaminhar o tráfego corretamente e poderá haver erros.
 
-    2.  Certifique-se de que seu app atenda no mesmo caminho configurado na seção de **caminho** de seu Ingresso. Se seu app estiver configurado para atender no caminho raiz, use `/` como o caminho. Se o tráfego recebido para esse caminho deve ser roteado para um caminho diferente no qual seu app atende, use a anotação [caminhos de nova gravação](cs_annotations.html#rewrite-path).
+    2. Verifique se o subdomínio e o certificado TLS estão corretos. Para localizar o subdomínio do Ingress fornecido pela IBM e o certificado TLS, execute `ibmcloud ks cluster-get <cluster_name_or_ID>`.
 
-    3. Edite seu YAML de configuração de recurso, conforme necessário. Quando você fecha o editor, suas mudanças são salvas e aplicadas automaticamente.
+    3.  Certifique-se de que seu app atenda no mesmo caminho configurado na seção de **caminho** de seu Ingresso. Se seu app estiver configurado para atender no caminho raiz, use `/` como o caminho. Se o tráfego recebido para esse caminho deve ser roteado para um caminho diferente no qual seu app atende, use a anotação [caminhos de nova gravação](cs_annotations.html#rewrite-path).
+
+    4. Edite seu YAML de configuração de recurso, conforme necessário. Quando você fecha o editor, suas mudanças são salvas e aplicadas automaticamente.
         ```
         kubectl edit ingress <myingressresource>
         ```
@@ -338,7 +343,7 @@ Por exemplo, vamos supor que você tenha um cluster de múltiplas zonas em 2 zon
     {: pre}
 
     * Se tudo estiver configurado corretamente, você obterá de volta a resposta esperada de seu app.
-    * Se você obtiver um erro em resposta, poderá haver um erro em seu app ou em uma configuração que se aplique somente a esse ALB específico. Verifique seu código de app, seus [arquivos de configuração do recurso Ingress](cs_ingress.html#public_inside_3) ou quaisquer outras configurações que você tenha aplicado somente a esse ALB.
+    * Se você obtiver um erro em resposta, poderá haver um erro em seu app ou em uma configuração que se aplique somente a esse ALB específico. Verifique seu código de app, seus [arquivos de configuração do recurso Ingress](cs_ingress.html#public_inside_4) ou quaisquer outras configurações que você tenha aplicado somente a esse ALB.
 
 7. Depois de concluir a depuração, restaure a verificação de funcionamento nos pods do ALB. Repita essas etapas para cada pod ALB.
   1. Efetue login no pod do ALB e remova o `#` do `server_name`.

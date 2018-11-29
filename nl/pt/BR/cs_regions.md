@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -16,11 +16,12 @@ lastupdated: "2018-10-10"
 {:download: .download}
 
 # Regiões e Zonas
+{: #regions-and-zones}
 
-Uma região é uma localização geográfica específica na qual é possível implementar apps, serviços e outros recursos do {{site.data.keyword.Bluemix}}. [ {{site.data.keyword.Bluemix_notm}}  regiões ](#bluemix_regions)  diferem de  [ {{site.data.keyword.containerlong}}  regiões ](#container_regions). As regiões consistem em uma ou mais zonas, que são data centers físicos que hospedam os recursos de cálculo, rede e armazenamento e o resfriamento e energia relacionados que hospedam serviços e aplicativos. As zonas são isoladas umas das outras, o que assegura nenhum ponto único de falha compartilhado.
+Uma região é uma localização geográfica específica na qual é possível implementar apps, serviços e outros recursos do {{site.data.keyword.Bluemix}}. [ {{site.data.keyword.Bluemix_notm}}  regiões ](#bluemix_regions)  diferem de  [ {{site.data.keyword.containerlong}}  regiões ](#container_regions). As regiões consistem em uma ou mais zonas, que são data centers físicos que hospedam os recursos de cálculo, rede e armazenamento e o resfriamento e energia relacionados que hospedam serviços e aplicativos. As zonas são isoladas umas das outras, o que assegura nenhum ponto único de falha compartilhado. 
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} é hospedado no mundo todo. Os serviços no {{site.data.keyword.Bluemix_notm}} podem ficar disponíveis globalmente ou dentro de uma região específica. Ao criar um cluster do Kubernetes no {{site.data.keyword.containerlong_notm}}, seus recursos permanecem na região na qual você implementa o cluster.
+{{site.data.keyword.Bluemix_notm}} é hospedado no mundo todo. Os serviços no {{site.data.keyword.Bluemix_notm}} podem ficar disponíveis globalmente ou dentro de uma região específica. Ao criar um cluster do Kubernetes no {{site.data.keyword.containerlong_notm}}, seus recursos permanecem na região na qual você implementa o cluster. 
 
 **Nota**: é possível criar clusters padrão em cada região suportada do {{site.data.keyword.containerlong_notm}}. Os clusters grátis estão disponíveis somente em regiões selecionadas.
 
@@ -179,8 +180,7 @@ Zonas são data centers físicos que estão disponíveis em uma região do {{sit
     </tr>
     <tr>
       <td>Sul do Reino Unido</td>
-      <td>Londres: lon02, lon04, lon06</td>
-      <td></td>
+      <td>Londres: lon04, lon05, lon06<br><br>** Nota **: o lon05 substitui o lon02. Os novos clusters devem usar lon05.</td>
     </tr>
     <tr>
       <td>Leste dos EUA</td>
@@ -191,8 +191,7 @@ Zonas são data centers físicos que estão disponíveis em uma região do {{sit
     <tr>
       <td>SUL dos EUA</td>
       <td>Dallas: dal10, dal12, dal13</td>
-      <td><p>San Jose: sjc03, sjc04</p>
-      <p>São Paulo: sao01</p></td>
+      <td><p>San Jose: sjc03, sjc04</p><p>São Paulo: sao01</p></td>
     </tr>
   </tbody>
 </table>

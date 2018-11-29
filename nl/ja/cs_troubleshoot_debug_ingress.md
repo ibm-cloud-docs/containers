@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -26,12 +26,15 @@ lastupdated: "2018-09-10"
 {{site.data.keyword.containerlong}} を使用する際は、ここに示す一般的な Ingress のトラブルシューティングとデバッグの手法を検討してください。
 {: shortdesc}
 
-クラスターでアプリ用の Ingress リソースを作成して、アプリをパブリックに公開しました。 ただし、ALB のパブリック IP アドレスまたはサブドメインを介してアプリに接続しようとすると、接続が失敗するか、タイムアウトになります。以下のセクションのステップは、Ingress のセットアップのデバッグに役立ちます。
+クラスターでアプリ用の Ingress リソースを作成して、アプリをパブリックに公開しました。 ただし、ALB のパブリック IP アドレスまたはサブドメインを介してアプリに接続しようとすると、接続が失敗するか、タイムアウトになります。 以下のセクションのステップは、Ingress のセットアップのデバッグに役立ちます。
 
-## ステップ 1: Ingress リソースまたは ALB ポッドのログでのエラー・メッセージの確認
+1 つのホストは、必ず 1 つの Ingress リソースだけに定義するようにしてください。1 つのホストが複数の Ingress リソースに定義された場合、ALB はトラフィックを正しく転送しないことがあり、その場合エラーが発生する場合があります。
+{: tip}
+
+## ステップ 1: Ingress デプロイメントと ALB ポッドのログでのエラー・メッセージの確認
 {: #errors}
 
-まず、Ingress リソースのデプロイメント・イベントと ALB ポッドのログでエラー・メッセージを確認します。これらのエラー・メッセージは、障害の根本原因を探して、次のセクションで Ingress のセットアップをさらにデバッグするのに役立ちます。
+まず、Ingress リソースのデプロイメント・イベントと ALB ポッドのログでエラー・メッセージを確認します。 これらのエラー・メッセージは、障害の根本原因を探して、次のセクションで Ingress のセットアップをさらにデバッグするのに役立ちます。
 {: shortdesc}
 
 1. Ingress リソースのデプロイメントを確認して、警告またはエラー・メッセージがないか探します。
@@ -40,7 +43,7 @@ lastupdated: "2018-09-10"
     ```
     {: pre}
 
-    出力の **Events** セクションに、Ingress リソースや使用した特定のアノテーション内の無効な値に関する警告メッセージが表示される場合があります。[Ingress リソース構成の資料](cs_ingress.html#public_inside_3)または[アノテーションの資料](cs_annotations.html)を参照してください。
+    出力の **Events** セクションに、Ingress リソースや使用した特定のアノテーション内の無効な値に関する警告メッセージが表示される場合があります。 [Ingress リソース構成の資料](cs_ingress.html#public_inside_4)または[アノテーションの資料](cs_annotations.html)を参照してください。
 
     ```
     Name:             myingress
@@ -78,7 +81,7 @@ lastupdated: "2018-09-10"
 
     2. **STATUS** 列を確認して、すべてのポッドが実行されていることを確認します。
 
-    3. ポッドが `Running` でない場合は、ALB を無効にして再度有効にすることができます。以下のコマンドで、`<ALB_ID>` をポッドの ALB の ID に置き換えます。例えば、稼働していないポッドの名前が `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z` の場合、ALB ID は `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1` です。
+    3. ポッドが `Running` でない場合は、ALB を無効にして再度有効にすることができます。 以下のコマンドで、`<ALB_ID>` をポッドの ALB の ID に置き換えます。 例えば、稼働していないポッドの名前が `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z` の場合、ALB ID は `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1` です。
         ```
         ibmcloud ks alb-configure --albID <ALB_ID> --disable
         ```
@@ -131,7 +134,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 
 2. ALB IP の正常性を確認します。
 
-    * 単一ゾーン・クラスターと複数ゾーン・クラスターの場合: 各 ALB が正常にパケットを受信できるように、各パブリック ALB の IP アドレスを ping します。注: プライベート ALB を使用している場合は、プライベート・ネットワークからのみ IP アドレスを ping できます。
+    * 単一ゾーン・クラスターと複数ゾーン・クラスターの場合: 各 ALB が正常にパケットを受信できるように、各パブリック ALB の IP アドレスを ping します。 注: プライベート ALB を使用している場合は、プライベート・ネットワークからのみ IP アドレスを ping できます。
         ```
         ping <ALB_IP>
         ```
@@ -140,19 +143,19 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
         * CLI がタイムアウトを返し、ワーカー・ノードを保護するカスタム・ファイアウォールがある場合は、[ファイアウォール](cs_troubleshoot_clusters.html#cs_firewall)で ICMP を許可していることを確認します。
         * ping をブロックしているファイアウォールがなく、引き続き ping がタイムアウトになる場合は、[ALB ポッドの状況を確認](#check_pods)します。
 
-    * 複数ゾーン・クラスターのみの場合: MZLB ヘルス・チェックを使用して、ALB IP の状況を確認できます。MZLB について詳しくは、[複数ゾーン・ロード・バランサー (MZLB)](cs_ingress.html#planning) を参照してください。**注**: MZLB ヘルス・チェックは、`<cluster_name>.<region_or_zone>.containers.appdomain.cloud` の形式の新しい Ingress サブドメインを持つクラスターのみに使用できます。クラスターでまだ `<cluster_name>.<region>.containers.mybluemix.net` の古い形式を使用している場合は、[単一ゾーン・クラスターを複数ゾーンに変換](cs_clusters.html#add_zone)します。クラスターに新しい形式のサブドメインが割り当てられますが、古いサブドメイン形式も引き続き使用できます。別の方法として、新しいサブドメイン形式が自動的に割り当てられた新しいクラスターを注文することもできます。
+    * 複数ゾーン・クラスターのみの場合: MZLB ヘルス・チェックを使用して、ALB IP の状況を確認できます。 MZLB について詳しくは、[複数ゾーン・ロード・バランサー (MZLB)](cs_ingress.html#planning) を参照してください。 **注**: MZLB ヘルス・チェックは、`<cluster_name>.<region_or_zone>.containers.appdomain.cloud` の形式の新しい Ingress サブドメインを持つクラスターのみに使用できます。 クラスターでまだ `<cluster_name>.<region>.containers.mybluemix.net` の古い形式を使用している場合は、[単一ゾーン・クラスターを複数ゾーンに変換](cs_clusters.html#add_zone)します。 クラスターに新しい形式のサブドメインが割り当てられますが、古いサブドメイン形式も引き続き使用できます。 別の方法として、新しいサブドメイン形式が自動的に割り当てられた新しいクラスターを注文することもできます。
     以下の HTTP cURL コマンドは、`albhealth` ホストを使用します。このホストは、{{site.data.keyword.containerlong_notm}} によって構成され、ALB IP の `healthy` または `unhealthy` の状況を返します。
-            ```
-            curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
-            ```
-            {: pre}
+        ```
+        curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+        ```
+        {: pre}
 
-            出力例:
-            ```
-            健全な
-            ```
-            {: screen}
-            If one or more of the IPs returns `unhealthy`, [check the status of your ALB pods](#check_pods).
+        出力例:
+        ```
+        健全な
+        ```
+        {: screen}
+        If one or more of the IPs returns `unhealthy`, [check the status of your ALB pods](#check_pods).
 
 3. IBM 提供の Ingress サブドメインを取得します。
     ```
@@ -167,7 +170,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: screen}
 
-4. このセクションのステップ 2 で取得した各パブリック ALB の IP が、クラスターの IBM 提供の Ingress サブドメインに登録されていることを確認します。例えば、複数ゾーン・クラスターでは、ワーカー・ノードがある各ゾーンのパブリック ALB IP は、同じホスト名で登録される必要があります。
+4. このセクションのステップ 2 で取得した各パブリック ALB の IP が、クラスターの IBM 提供の Ingress サブドメインに登録されていることを確認します。 例えば、複数ゾーン・クラスターでは、ワーカー・ノードがある各ゾーンのパブリック ALB IP は、同じホスト名で登録される必要があります。
 
     ```
     kubectl get ingress -o wide
@@ -184,7 +187,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 ## ステップ 3: ドメイン・マッピングおよび Ingress リソース構成の確認
 {: #config}
 
-1. カスタム・ドメインを使用する場合は、DNS プロバイダーを使用してカスタム・ドメインを IBM 提供のサブドメインまたは ALB のパブリック IP アドレスにマップしていることを確認します。IBM では IBM サブドメインに対する自動ヘルス・チェックを提供しており、障害のある IP がすべて DNS 応答から削除されるため、CNAME の使用がお勧めされることに注意してください。
+1. カスタム・ドメインを使用する場合は、DNS プロバイダーを使用してカスタム・ドメインを IBM 提供のサブドメインまたは ALB のパブリック IP アドレスにマップしていることを確認します。 IBM では IBM サブドメインに対する自動ヘルス・チェックを提供しており、障害のある IP がすべて DNS 応答から削除されるため、CNAME の使用がお勧めされることに注意してください。
     * IBM 提供のサブドメイン: 正規名レコード (CNAME) 内のクラスターの IBM 提供のサブドメインにカスタム・ドメインがマップされていることを確認します。
         ```
         host www.my-domain.com
@@ -199,7 +202,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
         ```
         {: screen}
 
-    * パブリック IP アドレス: A レコードの ALB のポータブル・パブリック IP アドレスにカスタム・ドメインがマップされていることを確認します。IP は、[前のセクション](#ping)のステップ 1 で取得したパブリック ALB IP と一致する必要があります。
+    * パブリック IP アドレス: A レコードの ALB のポータブル・パブリック IP アドレスにカスタム・ドメインがマップされていることを確認します。 IP は、[前のセクション](#ping)のステップ 1 で取得したパブリック ALB IP と一致する必要があります。
         ```
         host www.my-domain.com
         ```
@@ -218,11 +221,13 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: pre}
 
-    1. サブドメインと TLS 証明書が正しいことを確認します。 IBM 提供の Ingress サブドメインと TLS 証明書を見つけるには、`ibmcloud ks cluster-get <cluster_name_or_ID>` を実行します。
+    1. 1 つのホストは、必ず 1 つの Ingress リソースだけに定義するようにしてください。1 つのホストが複数の Ingress リソースに定義された場合、ALB はトラフィックを正しく転送しないことがあり、その場合エラーが発生する場合があります。
 
-    2.  アプリが、Ingress の **path** セクションで構成されているパスを使用して listen していることを確認します。 アプリがルート・パスで listen するようにセットアップされている場合は、`/` をパスとして使用します。このパスへの着信トラフィックを、アプリが listen している別のパスにルーティングする必要がある場合は、[再書き込みパス](cs_annotations.html#rewrite-path)・アノテーションを使用します。
+    2. サブドメインと TLS 証明書が正しいことを確認します。 IBM 提供の Ingress サブドメインと TLS 証明書を見つけるには、`ibmcloud ks cluster-get <cluster_name_or_ID>` を実行します。
 
-    3. 必要に応じてリソース構成 YAML を編集します。エディターを閉じると、変更内容が保存され、自動的に適用されます。
+    3.  アプリが、Ingress の **path** セクションで構成されているパスを使用して listen していることを確認します。 アプリがルート・パスで listen するようにセットアップされている場合は、`/` をパスとして使用します。 このパスへの着信トラフィックを、アプリが listen している別のパスにルーティングする必要がある場合は、[再書き込みパス](cs_annotations.html#rewrite-path)・アノテーションを使用します。
+
+    4. 必要に応じてリソース構成 YAML を編集します。 エディターを閉じると、変更内容が保存され、自動的に適用されます。
         ```
         kubectl edit ingress <myingressresource>
         ```
@@ -231,9 +236,9 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 ## デバッグのための DNS からの ALB の削除
 {: #one_alb}
 
-特定の ALB IP を介してアプリにアクセスできない場合は、その DNS 登録を無効にすることによって、一時的に ALB を実動から削除することができます。その後、ALB の IP アドレスを使用して、その ALB に対してデバッグ・テストを実行できます。
+特定の ALB IP を介してアプリにアクセスできない場合は、その DNS 登録を無効にすることによって、一時的に ALB を実動から削除することができます。 その後、ALB の IP アドレスを使用して、その ALB に対してデバッグ・テストを実行できます。
 
-例えば、2 つのゾーンに複数ゾーン・クラスターがあり、2 つのパブリック ALB に IP アドレス `169.46.52.222` と `169.62.196.238` が指定されているとします。2 番目のゾーンの ALB についてはヘルス・チェックで正常と返されますが、アプリがそこから直接到達することはできません。デバッグのために実動から ALB の IP アドレス `169.62.196.238` を削除します。1 番目のゾーンの ALB IP `169.46.52.222` がドメインに登録され、2 番目のゾーンの ALB のデバッグ中にトラフィックのルーティングを続行します。
+例えば、2 つのゾーンに複数ゾーン・クラスターがあり、2 つのパブリック ALB に IP アドレス `169.46.52.222` と `169.62.196.238` が指定されているとします。 2 番目のゾーンの ALB についてはヘルス・チェックで正常と返されますが、アプリがそこから直接到達することはできません。 デバッグのために実動から ALB の IP アドレス `169.62.196.238` を削除します。 1 番目のゾーンの ALB IP `169.46.52.222` がドメインに登録され、2 番目のゾーンの ALB のデバッグ中にトラフィックのルーティングを続行します。
 
 1. 到達不能な IP アドレスを持つ ALB の名前を取得します。
     ```
@@ -248,7 +253,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: screen}
 
-2. 前のステップの ALB 名を使用して、ALB ポッドの名前を取得します。以下のコマンドでは、前のステップの ALB 名の例を使用しています。
+2. 前のステップの ALB 名を使用して、ALB ポッドの名前を取得します。 以下のコマンドでは、前のステップの ALB 名の例を使用しています。
     ```
     kubectl get pods -n kube-system | grep public-cr24a9f2caf6554648836337d240064935-alb1
     ```
@@ -261,7 +266,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: screen}
 
-3. すべての ALB ポッドに対して実行されるヘルス・チェックを無効にします。前のステップで取得した ALB ポッドごとに、これらのステップを繰り返します。これらのステップのコマンドと出力の例では、1 番目のポッド `public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq` を使用しています。
+3. すべての ALB ポッドに対して実行されるヘルス・チェックを無効にします。 前のステップで取得した ALB ポッドごとに、これらのステップを繰り返します。 これらのステップのコマンドと出力の例では、1 番目のポッド `public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq` を使用しています。
     1. ALB ポッドにログインして、NGINX 構成ファイルで `server_name` 行を確認します。
         ```
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- grep server_name /etc/nginx/conf.d/kube-system-alb-health.conf
@@ -274,7 +279,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
         ```
         {: screen}
 
-    2. ヘルス・チェックを無効にして IP を削除するには、`server_name` の前に `#` を挿入します。`albhealth.mycluster-12345.us-south.containers.appdomain.cloud` 仮想ホストが ALB に対して無効になっている場合、自動化ヘルス・チェックによって自動的に DNS 応答から IP が削除されます。
+    2. ヘルス・チェックを無効にして IP を削除するには、`server_name` の前に `#` を挿入します。 `albhealth.mycluster-12345.us-south.containers.appdomain.cloud` 仮想ホストが ALB に対して無効になっている場合、自動化ヘルス・チェックによって自動的に DNS 応答から IP が削除されます。
         ```
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- sed -i -e 's*server_name*#server_name*g' /etc/nginx/conf.d/kube-system-alb-health.conf
         ```
@@ -319,7 +324,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: screen}
 
-5. Cloudflare サーバーを調べて、ご使用のドメインの DNS 登録から ALB IP アドレスが削除されたことを確認します。DNS 登録は更新に数分かかることがあります。
+5. Cloudflare サーバーを調べて、ご使用のドメインの DNS 登録から ALB IP アドレスが削除されたことを確認します。 DNS 登録は更新に数分かかることがあります。
     ```
     host mycluster-12345.us-south.containers.appdomain.cloud ada.ns.cloudflare.com
     ```
@@ -331,16 +336,16 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: screen}
 
-6. これで、ALB IP が実動から削除されたので、これを使用してアプリに対してデバッグ・テストを実行できます。この IP を使用してアプリとの通信をテストするには、次の cURL コマンドを、例の値を独自の値に置き換えて実行します。
+6. これで、ALB IP が実動から削除されたので、これを使用してアプリに対してデバッグ・テストを実行できます。 この IP を使用してアプリとの通信をテストするには、次の cURL コマンドを、例の値を独自の値に置き換えて実行します。
     ```
     curl -X GET --resolve mycluster-12345.us-south.containers.appdomain.cloud:443:169.62.196.238 https://mycluster-12345.us-south.containers.appdomain.cloud/
     ```
     {: pre}
 
     * すべてが正しく構成されていれば、アプリから予期される応答が返されます。
-    * 応答にエラーがある場合、アプリにエラーがあるか、この特定の ALB にのみ適用される構成にエラーがある可能性があります。アプリのコード、[Ingress リソース構成ファイル](cs_ingress.html#public_inside_3)、またはこの ALB のみに適用したその他の構成を確認します。
+    * 応答にエラーがある場合、アプリにエラーがあるか、この特定の ALB にのみ適用される構成にエラーがある可能性があります。 アプリのコード、[Ingress リソース構成ファイル](cs_ingress.html#public_inside_4)、またはこの ALB のみに適用したその他の構成を確認します。
 
-7. デバッグが完了したら、ALB ポッドに対するヘルス・チェックをリストアします。ALB ポッドごとに、これらのステップを繰り返します。
+7. デバッグが完了したら、ALB ポッドに対するヘルス・チェックをリストアします。 ALB ポッドごとに、これらのステップを繰り返します。
   1. ALB ポッドにログインし、`server_name` から `#` を削除します。
     ```
     kubectl exec -ti <pod_name> -n kube-system -c nginx-ingress -- sed -i -e 's*#server_name*server_name*g' /etc/nginx/conf.d/kube-system-alb-health.conf
@@ -359,7 +364,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: pre}
 
-10. Cloudflare サーバーを調べて、ご使用のドメインの DNS 登録で ALB IP アドレスがリストアされたことを確認します。DNS 登録は更新に数分かかることがあります。
+10. Cloudflare サーバーを調べて、ご使用のドメインの DNS 登録で ALB IP アドレスがリストアされたことを確認します。 DNS 登録は更新に数分かかることがあります。
     ```
     host mycluster-12345.us-south.containers.appdomain.cloud ada.ns.cloudflare.com
     ```
@@ -381,7 +386,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 まだクラスターに問題がありますか?
 {: shortdesc}
 
--  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
+-  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
 
 -   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページを確認します![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status)。
 -   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。

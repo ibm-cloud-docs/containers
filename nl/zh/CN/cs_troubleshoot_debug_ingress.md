@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -28,7 +28,10 @@ lastupdated: "2018-09-10"
 
 您已通过为集群中的应用程序创建 Ingress 资源来向公众公开应用程序。但尝试通过 ALB 的公共 IP 地址或子域连接到应用程序时，连接失败或超时。以下各部分中的步骤可帮助您调试 Ingress 设置。
 
-## 步骤 1：检查 Ingress 资源或 ALB pod 日志中的错误消息
+确保一个主机仅在一个 Ingress 资源中进行定义。如果一个主机在多个 Ingress 资源中进行定义，那么 ALB 可能无法正确转发流量，并且您可能会遇到错误。
+{: tip}
+
+## 步骤 1：检查 Ingress 部署或 ALB pod 日志中的错误消息
 {: #errors}
 
 首先检查 Ingress 资源部署事件和 ALB pod 日志中的错误消息。这些错误消息可帮助您找到故障的根本原因，并在后续各部分中进一步调试 Ingress 设置。
@@ -40,7 +43,7 @@ lastupdated: "2018-09-10"
   ```
     {: pre}
 
-    在输出的 **Events** 部分中，您可能会看到警告消息，提醒您所使用的 Ingress 资源或某些注释中有无效的值。请检查 [Ingress 资源配置文档](cs_ingress.html#public_inside_3)或[注释文档](cs_annotations.html)。
+    在输出的 **Events** 部分中，您可能会看到警告消息，提醒您所使用的 Ingress 资源或某些注释中有无效的值。请检查 [Ingress 资源配置文档](cs_ingress.html#public_inside_4)或[注释文档](cs_annotations.html)。
 
     ```
     Name:             myingress
@@ -142,15 +145,15 @@ ping <ALB_IP>
     * 仅多专区集群：可以使用 MZLB 运行状况检查来确定 ALB IP 的阶段状态。有关 MZLB 的更多信息，请参阅[多专区负载均衡器 (MZLB)](cs_ingress.html#planning)。**注**：MZLB 运行状况检查仅可用于具有以下格式的新 Ingress 子域的集群：`<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。如果集群仍使用旧格式的 `<cluster_name>.<region>.containers.mybluemix.net`，请[将单专区集群转换为多专区集群](cs_clusters.html#add_zone)。将为集群分配采用新格式的子域，但也可以继续使用较旧的子域格式。或者，可以对自动分配了新的子域格式的新集群进行排序。
     以下 HTTP cURL 命令使用 `albhealth` 主机，该主机由 {{site.data.keyword.containerlong_notm}} 配置为返回 ALB IP 的 `healthy` 或 `unhealthy` 阶段状态。
             ```
-            curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
-            ```
-            {: pre}
+    curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+    ```
+        {: pre}
 
-            输出示例：
+        输出示例：
+        ```
+        运行正常
             ```
-            运行正常
-            ```
-            {: screen}
+        {: screen}
             如果一个或多个 IP 返回 `unhealthy`，请[检查 ALB pod 的状态](#check_pods)。
 
 3. 获取 IBM 提供的 Ingress 子域。
@@ -160,7 +163,7 @@ ping <ALB_IP>
     {: pre}
 
     输出示例：
-    ```
+        ```
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     ```
@@ -174,7 +177,7 @@ ping <ALB_IP>
     {: pre}
 
     输出示例：
-    ```
+        ```
     NAME                HOSTS                                                    ADDRESS                        PORTS     AGE
     myingressresource   mycluster-12345.us-south.containers.appdomain.cloud      169.46.52.222,169.62.196.238   80        1h
     ```
@@ -217,11 +220,14 @@ ping <ALB_IP>
     ```
     {: pre}
 
-    1. 检查子域和 TLS 证书是否正确。要查找 IBM 提供的 Ingress 子域和 TLS 证书，请运行 `ibmcloud ks cluster-get <cluster_name_or_ID>`。
+    1. 确保一个主机仅在一个 Ingress 资源中进行定义。如果一个主机在多个 Ingress 资源中进行定义，那么 ALB 可能无法正确转发流量，并且您可能会遇到错误。
 
-    2.  确保应用程序侦听的是在 Ingress 的 **path** 部分中配置的路径。如果应用程序设置为侦听根路径，请使用 `/` 作为路径。如果流至此路径的入局流量必须路由到应用程序侦听的其他路径，请使用[重写路径](cs_annotations.html#rewrite-path)注释。
 
-    3. 根据需要编辑资源配置 YAML。关闭编辑器时，会保存并自动应用更改。
+    2. 检查子域和 TLS 证书是否正确。要查找 IBM 提供的 Ingress 子域和 TLS 证书，请运行 `ibmcloud ks cluster-get <cluster_name_or_ID>`.
+
+    3.  确保应用程序侦听的是在 Ingress 的 **path** 部分中配置的路径。如果应用程序设置为侦听根路径，请使用 `/` 作为路径。如果流至此路径的入局流量必须路由到应用程序侦听的其他路径，请使用[重写路径](cs_annotations.html#rewrite-path)注释。
+
+    4. 根据需要编辑资源配置 YAML。关闭编辑器时，会保存并自动应用更改。
         ```
         kubectl edit ingress <myingressresource>
         ```
@@ -254,7 +260,7 @@ ping <ALB_IP>
     {: pre}
 
     输出示例：
-    ```
+        ```
     public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq   2/2       Running   0          24m
     public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-trqxc   2/2       Running   0          24m
     ```
@@ -267,7 +273,7 @@ ping <ALB_IP>
         ```
         {: pre}
 
-        以下示例输出确认 ALB pod 已使用正确的运行状况检查主机名 `albhealth.<domain>` 进行配置：
+        以下示例输出确认 ALB pod 已使用正确的运行状况检查主机名 `albhealth.<domain>`:
         ```
         server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud;
         ```
@@ -337,7 +343,7 @@ ping <ALB_IP>
     {: pre}
 
     * 如果已正确配置所有内容，那么您将获得从应用程序返回的预期响应。
-    * 如果在响应中获得错误，说明应用程序中或仅适用于此特定 ALB 的配置中可能存在错误。请检查应用程序代码、[Ingress 资源配置文件](cs_ingress.html#public_inside_3)或仅应用于此 ALB 的其他任何配置。
+    * 如果在响应中获得错误，说明应用程序中或仅适用于此特定 ALB 的配置中可能存在错误。请检查应用程序代码、[Ingress 资源配置文件](cs_ingress.html#public_inside_4)或仅应用于此 ALB 的其他任何配置。
 
 7. 完成调试后，请对 ALB pod 复原运行状况检查。对每个 ALB pod 重复这些步骤。
   1. 登录到 ALB pod，并从 `server_name` 中除去 `#`。
@@ -365,7 +371,7 @@ ping <ALB_IP>
     {: pre}
 
     输出示例：
-    ```
+        ```
     mycluster-12345.us-south.containers.appdomain.cloud has address 169.46.52.222
     mycluster-12345.us-south.containers.appdomain.cloud has address 169.62.196.238
     ```

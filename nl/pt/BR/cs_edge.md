@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -25,8 +25,8 @@ Os nós do trabalhador de borda podem melhorar a segurança de seu cluster do Ku
 
 Quando esses nós do trabalhador são marcados somente para rede, outras cargas de trabalho não podem consumir a CPU ou memória do nó do trabalhador e interferir na rede.
 
-
-
+Se você tiver um cluster de múltiplas zonas e desejar restringir o tráfego de rede para os nós do trabalhador de borda, pelo menos 2 nós do trabalhador de borda deverão ser ativados em cada zona para alta disponibilidade de balanceador de carga ou pods do Ingress. Crie um conjunto de trabalhadores do nó de borda que abrange todas as zonas em seu cluster, com pelo menos 2 nós do trabalhador por zona.
+{: tip}
 
 ## Identificação de nós do trabalhador como nós de borda
 {: #edge_nodes}
@@ -38,39 +38,52 @@ Antes de iniciar:
 
 - [Crie um cluster padrão.](cs_clusters.html#clusters_cli)
 - Assegure-se de que seu cluster tem pelo menos uma VLAN pública. Os nós do trabalhador de borda não estão disponíveis para clusters somente com VLANs privadas.
+- [Crie um novo conjunto de trabalhadores](cs_clusters.html#add_pool) que abranja toda a zona em seu cluster e tenha pelo menos 2 trabalhadores por zona.
 - [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure).
 
 Para rotular nós do trabalhador como nós de borda:
 
-1. Liste todos os nós do trabalhador no cluster. Use o endereço IP privado da coluna **NAME** para identificar os nós. Selecione pelo menos dois nós do trabalhador em cada VLAN pública para serem os nós do trabalhador de borda. O Ingresso requer pelo menos dois nós do trabalhador em cada zona para fornecer alta disponibilidade. 
+1. Liste os nós do trabalhador em seu conjunto de trabalhadores do nó de borda. Use o endereço **IP privado** para identificar os nós.
 
   ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 
 2. Rotule os nós do trabalhador com `dedicated=edge`. Após um nó do trabalhador ser marcado com `dedicated=edge`, todo Ingresso subsequente e balanceadores de carga são implementados em um nó do trabalhador de borda.
 
   ```
-  Kubectl label nodes < node1_name> < node2_name> dedicated=edge
+  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
   ```
   {: pre}
 
-3. Recupere todos os serviços existentes do balanceador de carga no cluster.
+3. Recupere todos os balanceadores de carga existentes e os balanceadores de carga do aplicativo (ALBs) do Ingress no cluster.
 
   ```
-  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  kubectl get services -- all-namespaces
   ```
   {: pre}
 
-  Saída de exemplo:
+  Na saída, procure serviços que tenham o **Tipo** de **LoadBalancer**. Anote o **Namespace** e o **Nome** de cada serviço de balanceador de carga. Por exemplo, na saída a seguir, há 3 serviços de balanceador de carga: o balanceador de carga `webserver-lb` no namespace `default` e os ALBs do Ingress `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` e `public-crdf253b6025d64944ab99ed63bb4567b6-alb2` no namespace `kube-system`.
 
   ```
-  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
+  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE
+  default       kubernetes                                       ClusterIP      172.21.0.1       <none>          443/TCP                      1h
+  default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                 10m
+  kube-system   heapster                                         ClusterIP      172.21.101.189   <none>          80/TCP                       1h
+  kube-system   kube-dns                                         ClusterIP      172.21.0.10      <none>          53/UDP,53/TCP                1h
+  kube-system   kubernetes-dashboard                             ClusterIP      172.21.153.239   <none>          443/TCP                      1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP   1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP   57m
   ```
   {: screen}
 
-4. Usando a saída da etapa anterior, copie e cole cada linha `kubectl get service`. Esse comando reimplementa o balanceador de carga para um nó do trabalhador de borda. Somente balanceadores de carga públicos devem ser reimplementados.
+4. Usando o resultado da etapa anterior, execute o comando a seguir para cada balanceador de carga e ALB do Ingress. Esse comando reimplementa o balanceador de carga ou o ALB do Ingress para um nó do trabalhador de borda. Somente balanceadores de carga públicos ou ALBs devem ser reimplementados.
+
+  ```
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
+  ```
+  {: pre}
 
   Saída de exemplo:
 
@@ -105,6 +118,7 @@ Usar a tolerância `dedicated=edge` significa que todos os serviços de balancea
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+  {: pre}
   Agora, somente pods com a tolerância `dedicated=edge` são implementados em nós do trabalhador de borda.
 
 3. Se você optar por [ativar a preservação do IP de origem para um serviço de balanceador de carga ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda nos pods do app](cs_loadbalancer.html#edge_nodes). Os pods do app devem ser planejados nos nós de borda para obter solicitações recebidas.

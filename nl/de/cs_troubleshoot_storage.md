@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -17,7 +17,7 @@ lastupdated: "2018-05-24"
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
+ 
 
 
 # Fehlerbehebung für Clusterspeicher
@@ -29,9 +29,26 @@ Ziehen Sie bei der Verwendung von {{site.data.keyword.containerlong}} die folgen
 Wenn Sie ein allgemeineres Problem haben, testen Sie das [Cluster-Debugging](cs_troubleshoot.html).
 {: tip}
 
+## In einem Mehrzonencluster schlägt das Anhängen eines persistenten Datenträgers an einen Pod fehl
+{: #mz_pv_mount}
+
+{: tsSymptoms}
+Ihr Cluster war zuvor ein Einzelzonencluster mit eigenständigen Workerknoten, die sich nicht in Worker-Pools befanden. Sie haben erfolgreich einen Persistent Volume Claim (PVC) angehängt, der den persistenten Datenträger (PV) beschrieben hat, der für die Bereitstellung des Pods Ihrer App verwendet werden soll. Da Sie nun über Worker-Pools verfügen und Ihrem Cluster Zonen hinzugefügt haben, schlägt das Anhängen des persistenten Datenträgers (PV) an einen Pod jedoch fehl.
+
+{: tsCauses}
+Bei Mehrzonenclustern müssen die persistenten Datenträger über folgende Bezeichnungen verfügen, damit Pods nicht versuchen, Datenträger in einer anderen Zone anzuhängen.
+* `failure-domain.beta.kubernetes.io/region`
+* `failure-domain.beta.kubernetes.io/zone`
+
+Neue Cluster mit Worker-Pools, die mehrere Zonen umfassen können, kennzeichnen die persistenten Datenträger standardmäßig. Wenn Sie Ihre Cluster vor der Einführung von Worker-Pools erstellt haben, müssen Sie die Bezeichnungen manuell hinzufügen.
+
+{: tsResolve}
+[Aktualisieren Sie die persistenten Datenträger in Ihrem Cluster mit der Region und den Zonenbezeichnungen](cs_storage_basics.html#multizone).
+
+<br />
 
 
-## Dateisysteme für Workerknoten werden schreibgeschützt
+## Dateispeicher: Dateisysteme für Workerknoten werden schreibgeschützt
 {: #readonly_nodes}
 
 {: tsSymptoms}
@@ -46,19 +63,19 @@ Das Dateisystem auf dem Workerknoten ist schreibgeschützt.
 {: tsResolve}
 1.  Erstellen Sie eine Sicherungskopie aller Daten, die möglicherweise auf dem Workerknoten oder in Ihren Containern gespeichert werden.
 2.  Laden Sie den Workerknoten erneut, um eine kurzfristige Programmkorrektur für den vorhandenen Workerknoten zu erreichen.
-    <pre class="pre"><code>bx cs worker-reload &lt;clustername&gt; &lt;worker-id&gt;</code></pre>
+    <pre class="pre"><code>ibmcloud ks worker-reload &lt;clustername&gt; &lt;worker-id&gt;</code></pre>
 
-Für eine langfristige Programmkorrektur müssen Sie [den Maschinentyp aktualisieren, indem Sie einen anderen Workerknoten hinzufügen](cs_cluster_update.html#machine_type).
+Für eine langfristige Programmkorrektur müssen Sie [den Maschinentyp Ihres Worker-Pools aktualisieren](cs_cluster_update.html#machine_type).
 
 <br />
 
 
 
-## App schlägt fehl, wenn ein Benutzer ohne Rootberechtigung Eigner des NFS-Dateispeicher-Mountpfads ist
+## Dateispeicher: App schlägt fehl, wenn ein Benutzer ohne Rootberechtigung Eigner des NFS-Dateispeicher-Mountpfads ist
 {: #nonroot}
 
 {: tsSymptoms}
-Nach dem [Hinzufügen von NFS-Speicher](cs_storage.html#app_volume_mount) zu Ihrer Bereitstellung schlägt die Bereitstellung Ihres Containers fehl. Wenn Sie die Protokolle für Ihren Container abrufen, werden möglicherweise Fehler wie "write-permission" oder "do not have required permission" angezeigt. Der Pod schlägt fehl und bleibt in einer Neuladeschleife stecken.
+Nach dem [Hinzufügen von NFS-Speicher](cs_storage_file.html#app_volume_mount) zu Ihrer Bereitstellung schlägt die Bereitstellung Ihres Containers fehl. Wenn Sie die Protokolle für Ihren Container abrufen, werden möglicherweise Fehler wie "write-permission" oder "do not have required permission" angezeigt. Der Pod schlägt fehl und bleibt in einer Neuladeschleife stecken.
 
 {: tsCauses}
 Standardmäßig haben Benutzer ohne Rootberechtigung keinen Schreibzugriff auf den Datenträgermountpfad für NFS-gesicherte Speicher. Einige allgemeine App-Images, wie z. B. Jenkins und Nexus3, geben einen Benutzer ohne Rootberechtigung an, der Eigner des Mountpfads in der Dockerfile ist. Wenn Sie einen Container aus dieser Dockerfile erstellen, schlägt die Erstellung des Containers aufgrund unzureichender Berechtigungen für den Benutzer ohne Rootberechtigung auf dem Mountpfad fehl. Um Schreibberechtigung zu erteilen, können Sie die Dockerfile so ändern, dass der Benutzer ohne Rootberechtigung temporär zur Stammbenutzergruppe hinzugefügt wird, bevor die Mountpfadberechtigungen geändert werden, oder Sie verwenden einen Init-Container.
@@ -72,7 +89,7 @@ Wenn Sie ein Helm-Diagramm verwenden, um das Image bereitzustellen, bearbeiten S
 Wenn Sie einen [Init-Container![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) in Ihre Bereitstellung einschließen, können Sie einem Benutzer ohne Rootberechtigung, der in Ihrer Dockerfile angegeben ist, Schreibberechtigungen für den Datenträgermountpfad innerhalb des Containers erteilen. Der Init-Container startet, bevor Ihr App-Container startet. Der Init-Container erstellt den Datenträgermountpfad innerhalb des Containers, ändert den Mountpfad, sodass der richtige Benutzer (ohne Rootberechtigung) Eigner ist, und schließt den Pfad wieder. Anschließend wird Ihr App-Container mit dem Benutzer ohne Rootberechtigung gestartet, der in den Mountpfad schreiben muss. Da der Benutzer ohne Rootberechtigung bereits Eigner des Pfads ist, ist das Schreiben in den Mountpfad erfolgreich. Wenn Sie keinen Init-Container verwenden möchten, können Sie die Dockerfile ändern, um Benutzern ohne Rootberechtigung Zugriff auf den NFS-Dateispeicher hinzuzufügen.
 
 
-Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus.
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
 1.  Öffnen Sie die Dockerfile für Ihre App und rufen Sie die Benutzer-ID (UID) und die Benutzer-ID (GID) von dem Benutzer ab, dem Sie Schreibzugriff auf den Datenträgermountpfad erteilen möchten. Im Beispiel einer Jenkins-Dockerfile lautet die Information:
     - UID: `1000`
@@ -254,14 +271,14 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
 <br />
 
 
-## Hinzufügen von Zugriff für Benutzer ohne Rootberechtigung auf persistente Speicher ist fehlgeschlagen
+## Dateispeicher: Hinzufügen von Zugriff für Benutzer ohne Rootberechtigung auf persistente Speicher ist fehlgeschlagen
 {: #cs_storage_nonroot}
 
 {: tsSymptoms}
 Nach dem [Hinzufügen von Zugriff für Benutzer ohne Rootberechtigung auf persistenten Speicher](#nonroot) oder nach dem Bereitstellen eines Helm-Diagramms, in dem ein Benutzer ohne Rootberechtigung angegeben ist, kann der Benutzer nicht in den angehängten Speicher schreiben.
 
 {: tsCauses}
-Die Bereitstellungs- oder Helm-Diagrammkonfiguration gibt den [Sicherheitskontext](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) für `fsGroup` (Gruppen-ID) und `runAsUser` (Benutzer-ID) des Pod an. Aktuell unterstützt {{site.data.keyword.containershort_notm}} die Spezifikation `fsGroup` nicht, sondern nur `runAsUser` mit der Festlegung als `0` (Rootberechtigungen).
+Die Bereitstellungs- oder Helm-Diagrammkonfiguration gibt den [Sicherheitskontext](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) für `fsGroup` (Gruppen-ID) und `runAsUser` (Benutzer-ID) des Pod an. Aktuell unterstützt {{site.data.keyword.containerlong_notm}} die Spezifikation `fsGroup` nicht, sondern nur `runAsUser` mit der Festlegung als `0` (Rootberechtigungen).
 
 {: tsResolve}
 Entfernen Sie in der Konfiguration die `securityContext`-Felder für `fsGroup` und `runAsUser` aus dem Image, der Bereitstellungs- oder Helm-Diagrammkonfigurationsdatei und nehmen Sie die Bereitstellung erneut vor. Wenn Sie die Eigentumsrechte des Mountpfads von `nobody` ändern müssen, [fügen Sie Zugriff für Benutzer ohne Rootberechtigung hinzu](#nonroot). Nachdem Sie den [non-root initContainer](#nonroot) hinzugefügt haben, legen Sie `runAsUser` auf Containerebene fest, nicht Podebene.
@@ -271,7 +288,7 @@ Entfernen Sie in der Konfiguration die `securityContext`-Felder für `fsGroup` u
 
 
 
-## Das Anhängen eines vorhandenen Blockspeichers an einen Pod schlägt aufgrund des falschen Dateisystems fehl
+## Blockspeicher: Das Anhängen eines vorhandenen Blockspeichers an einen Pod schlägt aufgrund des falschen Dateisystems fehl
 {: #block_filesystem}
 
 {: tsSymptoms}
@@ -282,7 +299,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-Sie verfügen über eine vorhandene Blockspeichereinheit, die für ein `XFS`-Dateisystem konfiguriert ist. Um diese Einheit an Ihren Pod anzuhängen, haben Sie [einen persistenten Datenträger (PV) erstellt](cs_storage.html#existing_block), der `ext4` als Ihr Dateisystem oder kein Dateisystem im Abschnitt `spec/flexVolume/fsType` angegeben hat. Wenn kein Dateisystem definiert ist, nimmt der persistente Datenträger standardmäßig den Wert `ext4` ein.
+Sie verfügen über eine vorhandene Blockspeichereinheit, die für ein `XFS`-Dateisystem konfiguriert ist. Um diese Einheit an Ihren Pod anzuhängen, haben Sie [einen persistenten Datenträger (PV) erstellt](cs_storage_block.html#existing_block), der `ext4` als Ihr Dateisystem oder kein Dateisystem im Abschnitt `spec/flexVolume/fsType` angegeben hat. Wenn kein Dateisystem definiert ist, nimmt der persistente Datenträger standardmäßig den Wert `ext4` ein.
 Der persistente Datenträger wurde erfolgreich erstellt und mit der vorhandenen Blockspeicherinstanz verknüpft. Wenn Sie jedoch versuchen, den persistenten Datenträger mithilfe eines PVC an den Cluster anzuhängen, schlägt dieser Vorgang fehl. Sie können die `XFS`-Blockspeicherinstanz nicht mit einem `ext4`-Dateisystem an den Pod anhängen.
 
 {: tsResolve}
@@ -329,14 +346,300 @@ Aktualisieren Sie das Dateisystem im vorhandenen persistenten Datenträger von `
 
 
 
+## Objektspeicher: Installation des Helm-Plug-ins {{site.data.keyword.cos_full_notm}} `ibmc` schlägt fehl
+{: #cos_helm_fails}
+
+{: tsSymptoms}
+Wenn Sie das Helm-Plug-in {{site.data.keyword.cos_full_notm}} `ibmc` installieren, schlägt die Installation mit dem folgenden Fehler fehl: 
+```
+Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
+```
+{: screen}
+
+{: tsCauses}
+Bei der Installation des Helm-Plug-ins `ibmc` wird eine symbolische Verbindung aus dem Verzeichnis `./helm/plugins/helm-ibmc` zu dem Verzeichnis hergestellt, in dem sich das Helm-Plug-in `ibmc` auf Ihrem lokalen System befindet, das normalerweise in `./ibmcloud-object-storage-plugin/helm-ibmc` enthalten ist. Wenn Sie das Helm-Plug-in `ibmc` von Ihrem lokalen System entfernen oder das Helm-Plug-in-Verzeichnis `ibmc` an eine andere Position verschieben, wird die symbolische Verbindung nicht entfernt.
+
+{: tsResolve}
+1. Entfernen Sie das {{site.data.keyword.cos_full_notm}}-Helm-Plug-in. 
+   ```
+   rm -rf ~/.helm/plugins/helm-ibmc
+   ```
+   {: pre}
+   
+2. [Installieren Sie {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos). 
+
+<br />
+
+
+## Objektspeicher: PVC- oder Poderstellung schlägt fehl, weil der geheime Kubernetes-Schlüssel nicht gefunden wurde
+{: #cos_secret_access_fails}
+
+{: tsSymptoms}
+Wenn Sie Ihren PVC erstellen oder einen Pod bereitstellen, der den PVC anhängt, schlägt die Erstellung oder Bereitstellung fehl. 
+
+- Beispielfehlernachricht für einen Fehler bei der PVC-Erstellung: 
+  ```
+  pvc-3:1b23159vn367eb0489c16cain12345:cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
+  ```
+  {: screen}
+
+- Beispielfehlernachricht für einen Fehler bei der Erstellung eines Pods: 
+  ```
+  persistentvolumeclaim "pvc-3" not found (repeated 3 times)
+  ```
+  {: screen}
+  
+{: tsCauses}
+Der geheime Kubernetes-Schlüssel, in dem Sie Ihre {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise, den PVC und den Pod speichern, befinden sich nicht alle im selben Kubernetes-Namensbereich. Wenn der geheime Schlüssel in einem anderen Namensbereich bereitgestellt wird als Ihr PVC oder Pod, kann nicht auf den geheimen Schlüssel zugegriffen werden. 
+
+{: tsResolve}
+1. Listen Sie die geheimen Schlüssel in Ihrem Cluster auf und überprüfen Sie den Kubernetes-Namensbereich, in dem der geheime Kubernetes-Schlüssel für Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz erstellt wird. Der geheime Schlüssel muss `ibm/ibmc-s3fs` als **Typ** aufweisen. 
+   ```
+   kubectl get secrets --all-namespaces
+   ```
+   {: pre}
+   
+2. Überprüfen Sie die YAML-Konfigurationsdatei auf Ihren PVC und Pod, um zu ermitteln, ob Sie denselben Namensbereich verwendet haben. Wenn Sie einen Pod in einem anderen Namensbereich als dem mit dem geheimen Schlüssel bereitstellen wollen, müssen Sie [einen weiteren geheimen Schlüssel](cs_storage_cos.html#create_cos_secret) im gewünschten Namensbereich erstellen. 
+   
+3. Erstellen Sie den PVC in dem gewünschten Namensbereich oder stellen Sie dort den Pod bereit. 
+
+<br />
+
+
+## Objektspeicher: PVC-Erstellung schlägt wegen falscher Berechtigungsnachweise fehl oder Zugriff verweigert
+{: #cred_failure}
+
+{: tsSymptoms}
+Wenn Sie den PVC erstellen, wird eine Fehlernachricht ähnlich der folgenden angezeigt: 
+
+```
+SignatureDoesNotMatch: The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. For more information, see REST Authentication and SOAP Authentication for details.
+```
+{: screen}
+
+```
+AccessDenied: Access Denied status code: 403 
+```
+{: screen}
+
+```
+CredentialsEndpointError: failed to load credentials
+```
+{: screen}
+
+{: tsCauses}
+Die {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise, die Sie für den Zugriff auf die Serviceinstanz verwenden, sind möglicherweise falsch oder lassen nur Lesezugriff auf das Bucket zu.
+
+{: tsResolve}
+1. Klicken Sie in der Navigation auf der Seite mit den Servicedetails auf **Serviceberechtigungsnachweise**.
+2. Suchen Sie nach Ihren Berechtigungsnachweisen und klicken Sie anschließend auf **Berechtigungsnachweise anzeigen**. 
+3. Stellen Sie sicher, dass die richtigen Werte für **access_key_id** und **secret_access_key** in Ihrem geheimen Kubernetes-Schlüssel enthalten sind. Falls dies nicht der Fall ist, aktualisieren Sie den geheimen Kubernetes-Schlüssel. 
+   1. Rufen Sie die YAML-Datei ab, die Sie zum Erstellen des geheimen Schlüssels verwendet haben. 
+      ```
+      kubectl get secret <geheimer_schlüssel> -o yaml
+      ```
+      {: pre}
+      
+   2. Aktualisieren Sie die Werte für **access_key_id** und **secret_access_key**. 
+   3. Aktualisieren Sie den geheimen Schlüssel. 
+      ```
+      kubectl apply -f secret.yaml
+      ```
+      {: pre}
+      
+4. Überprüfen Sie im Abschnitt **iam_role_crn**, ob Sie über die Rolle `Schreibberechtigter` oder `Manager` verfügen. Wenn Sie nicht über die richtige Rolle verfügen, müssen Sie [neue {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise mit den richtigen Berechtigungen erstellen](cs_storage_cos.html#create_cos_service). Aktualisieren Sie anschließend Ihren vorhandenen geheimen Schlüssel oder [erstellen Sie einen neuen geheimen Schlüssel](cs_storage_cos.html#create_cos_secret) mit Ihren neuen Serviceberechtigungsnachweisen. 
+
+<br />
+
+
+## Objektspeicher: Zugriff auf ein vorhandenes Bucket nicht möglich
+
+{: tsSymptoms}
+Wenn Sie den PVC erstellen, kann auf das Bucket in {{site.data.keyword.cos_full_notm}} nicht zugegriffen werden. Es wird eine Fehlernachricht ähnlich der folgenden angezeigt: 
+
+```
+Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:1b2345678b69175abc98y873e2:cannot access bucket <bucketname>: NotFound: Not Found
+```
+{: screen}
+
+{: tsCauses}
+Sie haben möglicherweise die falsche Speicherklasse verwendet, um auf das vorhandene Bucket zuzugreifen, oder Sie haben versucht, auf ein Bucket zuzugreifen, das Sie nicht erstellt haben. 
+
+{: tsResolve}
+1. Wählen Sie im [{{site.data.keyword.Bluemix_notm}}-Dashboard ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/dashboard/apps) Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz aus. 
+2. Wählen Sie **Buckets** aus. 
+3. Überprüfen Sie die Informationen zu **Klasse** und **Standort** für Ihr vorhandenes Bucket. 
+4. Wählen Sie die entsprechende [Speicherklasse](cs_storage_cos.html#storageclass_reference) aus. 
+
+<br />
+
+
+## Objektspeicher: Zugriff auf Dateien mit einem Benutzer ohne Rootberechtigung schlägt fehl
+{: #cos_nonroot_access}
+
+{: tsSymptoms}
+Sie haben Dateien über die GUI oder die REST-API auf Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz hochgeladen. Wenn Sie versuchen, auf diese Dateien als Benutzer ohne Rootberechtigung zuzugreifen, den Sie in der App-Bereitstellung mit `runAsUser` definiert haben, wird der Zugriff auf die Dateien verweigert. 
+
+{: tsCauses}
+Unter Linux hat eine Datei oder ein Verzeichnis drei Zugriffsgruppen: `Eigner`, `Gruppe` und `Andere`. Wenn Sie eine Datei über die GUI oder die REST-API in {{site.data.keyword.cos_full_notm}} hochladen, werden die Berechtigungen für `Eigner`, `Gruppe` und `Andere` entfernt. Die Berechtigung der einzelnen Dateien sieht wie folgt aus: 
+
+```
+d--------- 1 root root 0 Jan 1 1970 <dateiname>
+```
+{: screen}
+
+Wenn Sie eine Datei mithilfe des {{site.data.keyword.cos_full_notm}}-Plug-ins hochladen, werden die Berechtigungen für die Datei beibehalten und nicht geändert. 
+
+{: tsResolve}
+Um auf die Datei als Benutzer ohne Rootberechtigung zugreifen zu können, muss der Benutzer ohne Rootberechtigung über Lese- und Schreibberechtigungen für die Datei verfügen. Wenn Sie die Berechtigung für eine Datei im Rahmen Ihrer Podbereitstellung ändern, ist eine Schreiboperation erforderlich. {{site.data.keyword.cos_full_notm}} ist nicht für Schreibworkloads konzipiert. Durch die Aktualisierung der Berechtigungen während der Podbereitstellung kann verhindert werden, dass Ihr Pod in den Status `Aktiv` wechselt. 
+
+Um dieses Problem zu beheben, müssen Sie vor dem Anhängen des PVC an Ihren App-Pod einen weiteren Pod erstellen, um die richtige Berechtigung für den Benutzer ohne Rootberechtigung festzulegen. 
+
+1. Überprüfen Sie die Berechtigungen Ihrer Dateien in Ihrem Bucket. 
+   1. Erstellen Sie eine Konfigurationsdatei für Ihren Pod `test-permission` und geben Sie der Datei den Namen `test-permission.yaml`. 
+      ```
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: test-permission
+      spec:
+        containers:
+        - name: test-permission
+          image: nginx
+          volumeMounts:
+          - name: cos-vol
+            mountPath: /test
+        volumes:
+        - name: cos-vol
+          persistentVolumeClaim:
+            claimName: <pvc-name>
+      ```
+      {: codeblock}
+        
+   2. Erstellen Sie den Pod `test-permission`. 
+      ```
+      kubectl apply -f test-permission.yaml
+      ```
+      {: pre}
+      
+   3. Melden Sie sich beim Pod an. 
+      ```
+      kubectl exec test-permission -it bash
+      ```
+      {: pre}
+   
+   4. Navigieren Sie zu Ihrem Mountpfad und listen Sie die Berechtigungen für Ihre Dateien auf. 
+      ```
+      cd test && ls -al
+      ```
+      {: pre}
+      
+      Beispielausgabe: 
+      ```
+      d--------- 1 root root 0 Jan 1 1970 <dateiname>
+      ```
+      {: screen}
+      
+2. Löschen Sie den Pod. 
+   ```
+   kubectl delete pod test-permission
+   ```
+   {: pre}
+      
+3. Erstellen Sie eine Konfigurationsdatei für den Pod, die Sie verwenden, um die Berechtigungen Ihrer Dateien zu korrigieren, und geben Sie ihr den Namen `fix-permission.yaml`. 
+   ```
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: fix-permission
+     namespace: <namensbereich>
+   spec:
+     containers:
+     - name: fix-permission
+       image: busybox
+       command: ['sh', '-c']
+       args: ['chown -R <nicht-root-benutzer-id> <mountpfad>/*; find <mountpfad>/ -type d -print -exec chmod u=+rwx,g=+rx {} \;']
+       volumeMounts:
+       - mountPath: "<mountpfad>"
+         name: cos-volume
+     volumes:
+     - name: cos-volume
+       persistentVolumeClaim:
+         claimName: <pvc-name>
+    ```
+    {: codeblock}
+    
+3. Erstellen Sie den Pod `fix-permission`. 
+   ```
+   kubectl apply -f fix-permission.yaml
+   ```
+   {: pre}
+   
+4. Warten Sie, bis der Pod in den Status `Abgeschlossen` wechselt.  
+   ```
+   kubectl get pod fix-permission
+   ```
+   {: pre}
+
+5. Löschen Sie den Pod `fix-permission`. 
+   ```
+   kubectl delete pod fix-permission
+   ```
+   {: pre} 
+   
+5. Erstellen Sie wieder den Pod `test-permission`, den Sie zuvor verwendet haben, um die Berechtigungen zu überprüfen. 
+   ```
+   kubectl apply -f test-permission.yaml
+   ```
+   {: pre}
+   
+5. Stellen Sie sicher, dass die Berechtigungen für Ihre Dateien aktualisiert wurden. 
+   1. Melden Sie sich beim Pod an. 
+      ```
+      kubectl exec test-permission -it bash
+      ```
+      {: pre}
+   
+   2. Navigieren Sie zu Ihrem Mountpfad und listen Sie die Berechtigungen für Ihre Dateien auf. 
+      ```
+      cd test && ls -al
+      ```
+      {: pre}
+
+      Beispielausgabe: 
+      ```
+      -rwxrwx--- 1 <nicht-root-benutzer-id> root 6193 Aug 21 17:06 <dateiname>
+      ```
+      {: screen}
+      
+6. Löschen Sie den Pod `test-permission`. 
+   ```
+   kubectl delete pod test-permission
+   ```
+   {: pre}
+   
+7. Hängen Sie den PVC mit dem Benutzer ohne Rootberechtigung an die App an. 
+
+   **Wichtig:** Definieren Sie den Benutzer ohne Rootberechtigung als `runAsUser`, ohne gleichzeitig `fsGroup` in Ihrer YAML-Datei für die Bereitstellung zu definieren. Wenn Sie `fsGroup` festlegen, wird das {{site.data.keyword.cos_full_notm}}-Plug-in ausgelöst, das die Gruppenberechtigungen für alle Dateien in einem Bucket aktualisiert, wenn der Pod bereitgestellt wird. Das Aktualisieren der Berechtigungen ist eine Schreiboperation, die möglicherweise verhindert, dass Ihr Pod in den Status `Aktiv` wechselt. 
+
+Laden Sie keine Dateien über die GUI oder die REST-API hoch, wenn Sie die richtigen Dateiberechtigungen in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz festgelegt haben. Verwenden Sie das {{site.data.keyword.cos_full_notm}}-Plug-in, um Dateien zu Ihrer Serviceinstanz hinzuzufügen. 
+{: tip}
+
+<br />
+
+
+
+
 ## Hilfe und Unterstützung anfordern
 {: #ts_getting_help}
 
 Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
+-  Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
+
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
--   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack ![External link icon](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
+-   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containerlong_notm}}-Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
 
     Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
     {: tip}
@@ -344,13 +647,13 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
 
-    -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containershort_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
-    -   Verwenden Sie für Fragen zum Service und zu ersten Schritten das Forum [IBM developerWorks dW Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
+    -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
+    -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren
 finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
 
 -   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `bx cs clusters` aus, um Ihre Cluster-ID abzurufen.
+Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 

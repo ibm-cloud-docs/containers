@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-12"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -53,6 +53,7 @@ Si el clúster se encuentra en una de las [ciudades metropolitanas multizona sop
 **¿Tengo que utilizar clústeres multizona?**</br>
 No. Puede crear tantos clústeres de una sola zona como desee. De hecho, quizás prefiera clústeres de una sola zona para facilitar la gestión o si el clúster debe residir en una [ciudad de una sola zona](cs_regions.html#zones) específica.
 
+
 ## Clúster multizona
 {: #multizone}
 
@@ -74,6 +75,7 @@ Si el clúster se encuentra en una de las [ciudades metropolitanas multizona sop
 
 <img src="images/cs_cluster_multizone.png" alt="Alta disponibilidad para clústeres multizona" width="500" style="width:500px; border-style: none"/>
 
+
 Puede añadir zonas adicionales al clúster para replicar los nodos trabajadores de las agrupaciones de nodos trabajadores entre varias zonas dentro de una región. Los clústeres multizona se han diseñado para planificar uniformemente los pods entre nodos trabajadores y zonas a fin de garantizar su disponibilidad y la recuperación de errores. Si los nodos trabajadores no se distribuyen uniformemente entre las zonas o si no hay suficiente capacidad en una de las zonas, es posible que el planificador de Kubernetes no planifique todos los pods solicitados. Como resultado, los pods podrían pasar a estar en estado **Pendiente** hasta que haya suficiente capacidad disponible. Si desea cambiar el comportamiento predeterminado para que el planificador de Kubernetes distribuya los pods entre zonas con una mejor distribución, utilice la [política de afinidad de pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
 
 **¿Por qué necesito nodos trabajadores en 3 zonas?** </br>
@@ -94,14 +96,14 @@ El [nodo maestro de Kubernetes](cs_tech.html#architecture) es el componente prin
 Para proteger el clúster frente a un error del nodo maestro de Kubernetes o en regiones en las que no hay clústeres multizona disponibles, puede [configurar varios clústeres y conectarlos con un equilibrador de carga global](#multiple_clusters).
 
 **¿Tengo que hacer algo para que el nodo maestro se pueda comunicar con los trabajadores entre zonas?**</br>
-Sí. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](cs_users.html#infra_access) **Red > Gestionar expansión de VLAN de la red**, o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Si utiliza {{site.data.keyword.BluDirectLink}}, en su lugar debe utilizar una [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para habilitar la VRF, póngase en contacto con el representante de cuentas de la infraestructura de IBM Cloud (SoftLayer).
+Sí. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](cs_users.html#infra_access) **Red > Gestionar expansión de VLAN de la red**, o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Si utiliza {{site.data.keyword.BluDirectLink}}, en su lugar debe utilizar una [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para habilitar la VRF, póngase en contacto con el representante de cuentas de infraestructura de IBM Cloud (SoftLayer).
 
 **¿Cómo puedo permitir que mis usuarios accedan a mi app desde Internet pública?**</br>
 Puede exponer sus apps utilizando un equilibrador de carga de aplicación (ALB) de Ingress o un servicio equilibrador de carga.
 
-De forma predeterminada, los ALB públicos se crean y se habilitan automáticamente en cada zona del clúster. También se crea y se despliega automáticamente un equilibrador de carga multizona (MZLB) de Cloudflare para el clúster, de forma que exista 1 MZLB para cada región. El MZLB coloca las direcciones IP de los ALB detrás del mismo nombre de host y habilita las comprobaciones de estado en estas direcciones IP para determinar si están disponibles o no. Por ejemplo, si tiene nodos trabajadores en 3 zonas en la región EE.UU. este, el nombre de host `yourcluster.us-east.containers.appdomain.cloud` tiene 3 direcciones IP de ALB. El estado de MZLB comprueba la IP de ALB pública en cada zona de una región y mantiene actualizados los resultados de la búsqueda de DNS en función de estas comprobaciones de estado. Para obtener más información, consulte [Componentes y arquitectura de Ingress](cs_ingress.html#planning).
+- **Equilibrador de carga de aplicación (ALB) de Ingress** de forma predeterminada, los ALB públicos se crean y se habilitan automáticamente en cada zona del clúster. También se crea y se despliega automáticamente un equilibrador de carga multizona (MZLB) de Cloudflare para el clúster, de forma que exista 1 MZLB para cada región. El MZLB coloca las direcciones IP de los ALB detrás del mismo nombre de host y habilita las comprobaciones de estado en estas direcciones IP para determinar si están disponibles o no. Por ejemplo, si tiene nodos trabajadores en 3 zonas en la región EE.UU. este, el nombre de host `yourcluster.us-east.containers.appdomain.cloud` tiene 3 direcciones IP de ALB. El estado de MZLB comprueba la IP de ALB pública en cada zona de una región y mantiene actualizados los resultados de la búsqueda de DNS en función de estas comprobaciones de estado. Para obtener más información, consulte [Componentes y arquitectura de Ingress](cs_ingress.html#planning).
 
-Los servicios del equilibrador de carga se configuran en una sola zona. Las solicitudes de entrada a la app se direccionan desde esa zona a todas las instancias de la app de otras zonas. Si esta zona deja de estar disponible, es posible que no se pueda acceder a la app desde Internet. Puede configurar servicios de equilibrador de carga adicionales en otras zonas como ayuda frente a un error de una sola zona. Para obtener más información, consulte [servicios del equilibrador de carga](cs_loadbalancer.html#multi_zone_config) de alta disponibilidad.
+- **Servicios de equilibrador de carga:** los servicios del equilibrador de carga se configuran en una sola zona. Las solicitudes de entrada a la app se direccionan desde esa zona a todas las instancias de la app de otras zonas. Si esta zona deja de estar disponible, es posible que no se pueda acceder a la app desde Internet. Puede configurar servicios de equilibrador de carga adicionales en otras zonas como ayuda frente a un error de una sola zona. Para obtener más información, consulte [servicios del equilibrador de carga](cs_loadbalancer.html#multi_zone_config) de alta disponibilidad.
 
 **¿Puedo configurar el almacenamiento persistente para mi clúster multizona?**</br>
 Para el almacenamiento persistente de alta disponibilidad, utilice un servicio de nube, como por ejemplo [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
@@ -169,7 +171,7 @@ Puede configurar varios clústeres en distintas regiones de una geolocalización
 **Para configurar un equilibrador de carga global para varios clústeres:**
 
 1. [Cree clústeres](cs_clusters.html#clusters) en varias zonas o regiones.
-2. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](cs_users.html#infra_access) **Red > Gestionar expansión de VLAN de la red**, o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Si utiliza {{site.data.keyword.BluDirectLink}}, en su lugar debe utilizar una [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para habilitar la VRF, póngase en contacto con el representante de cuentas de la infraestructura de IBM Cloud (SoftLayer).
+2. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](cs_users.html#infra_access) **Red > Gestionar expansión de VLAN de la red**, o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Si utiliza {{site.data.keyword.BluDirectLink}}, en su lugar debe utilizar una [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para habilitar la VRF, póngase en contacto con el representante de cuentas de infraestructura de IBM Cloud (SoftLayer).
 3. En cada clúster, exponga la app utilizando un [equilibrador de carga de aplicación (ALB)](cs_ingress.html#ingress_expose_public) o un [servicio equilibrador de carga](cs_loadbalancer.html#config).
 4. Para cada clúster, obtenga una lista de las direcciones IP públicas correspondientes a los ALB o a los servicios equilibradores de carga.
    - Para obtener una lista de la dirección IP de todos los ALB públicos habilitados en el clúster:
@@ -205,16 +207,17 @@ Puede configurar varios clústeres en distintas regiones de una geolocalización
 
 De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el clúster con acceso a una VLAN privada y a una VLAN pública. La VLAN privada determina la dirección IP privada que se asigna a cada nodo trabajador, lo que proporciona a cada nodo trabajador una interfaz de red privada. La VLAN pública permite que los nodos trabajadores se conecten de forma automática y segura con el maestro.
 
+Si desea bloquear el clúster para permitir el tráfico privado a través de la VLAN privada pero bloquear el tráfico público a través de la VLAN pública, puede [proteger el clúster del acceso público con las políticas de red Calico](cs_network_cluster.html#both_vlans_private_services). Estas políticas de red Calico no impiden que los nodos trabajadores se comuniquen con el nodo maestro. También puede limitar la superficie de vulnerabilidad del clúster sin bloquear el tráfico público mediante el [aislamiento de las cargas de trabajo de red en los nodos trabajadores de extremo](cs_edge.html).
 
 Si desea crear un clúster que sólo tenga acceso a una VLAN privada, puede crear clúster privado multizona o de una sola zona. Sin embargo, cuando los nodos trabajadores están conectados únicamente a una VLAN privada, los nodos trabajadores no se pueden conectar automáticamente al nodo maestro. Debe configurar un dispositivo de pasarela para proporcionar conectividad de red entre los nodos trabajadores y el maestro.
 **Nota**: no puede convertir un clúster que esté conectado a una VLAN pública y una VLAN privada en un clúster sólo privado. La eliminación de todas las VLAN públicas de un clúster hace que varios componentes del clúster dejen de funcionar. Debe crear un nuevo clúster utilizando los pasos siguientes.
 
 Si desea crear un clúster que sólo tenga acceso a una VLAN privada:
 
-1.  Consulte [Planificación de redes de clúster solo privadas](cs_network_planning.html#private_vlan)
+1.  Consulte [Planificación de redes de clúster solo privadas](cs_network_cluster.html#private_vlan).
 2.  Configure el dispositivo de pasarela para la conectividad de red. Tenga en cuenta que debe [abrir las direcciones IP y los puertos necesarios](cs_firewall.html#firewall_outbound) en el cortafuegos y [habilitar la expansión de VLAN](cs_subnets.html#vra-routing) para las subredes.
 3.  [Cree un clúster utilizando la CLI](cs_clusters.html#clusters_cli) incluyendo el distintivo `--private-only`.
-4.  Si desea exponer una app a una red privada utilizando un servicio privado de NodePort, LoadBalancer o Ingress, consulte [Planificación del sistema de red externo privado para una configuración solo de VLAN privada](cs_network_planning.html#private_vlan). Solo se puede acceder al servicio en la dirección IP privada y debe configurar los puertos en el cortafuegos para utilizar la dirección IP privada.
+4.  Si desea exponer una app a una red privada utilizando un servicio privado de NodePort, equilibrador de carga o Ingress, consulte [Planificación del sistema de red externo privado para una configuración solo de VLAN privada](cs_network_planning.html#private_vlan). Solo se puede acceder al servicio en la dirección IP privada y debe configurar los puertos en el cortafuegos para utilizar la dirección IP privada.
 
 
 ## Agrupaciones de nodos trabajadores y nodos trabajadores
@@ -262,7 +265,7 @@ el hipervisor asegura que cada nodo trabajador recibe su parte compartida de los
 Los nodos compartidos suelen resultar más económicos que los nodos dedicados porque los costes del hardware subyacente se comparten entre varios clientes. Sin embargo, cuando decida entre nodos compartidos y dedicados, debe ponerse en contacto con el departamento legal y ver el nivel de aislamiento y de conformidad de la infraestructura que necesita el entorno de app.
 
 **¿Cuáles son las características generales de las máquinas virtuales?**</br>
-Las máquinas virtuales utilizan el disco local en lugar de la red de área de almacenamiento (SAN) por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Todas las máquinas virtuales se suministran con velocidad de red de 1000 Mbps, 25 GB de almacenamiento en disco local primario para el sistema de archivos del sistema operativo y 100 GB de almacenamiento en disco local secundario para datos como, por ejemplo, el tiempo de ejecución de contenedor y `kubelet`.
+Las máquinas virtuales utilizan el disco local en lugar de la red de área de almacenamiento (SAN) por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Todas las máquinas virtuales se suministran con velocidad de red de 1000 Mbps, 25 GB de almacenamiento en disco local primario para el sistema de archivos del sistema operativo y 100 GB de almacenamiento en disco local secundario para datos como, por ejemplo, el tiempo de ejecución de contenedor y `kubelet`. El almacenamiento local en el nodo trabajador solo es para el proceso a corto plazo y los discos primario y secundario se limpian cuando se actualiza o se vuelve a cargar el nodo trabajador. Para ver las soluciones de almacenamiento persistente, consulte [Planificación de almacenamiento persistente altamente disponible](cs_storage_planning.html#storage_planning).
 
 **¿Qué hago si tengo tipos de máquina `u1c` o `b1c` en desuso?**</br>
 Para empezar a utilizar los tipos de máquina `u2c` y `b2c`, [actualice los tipos de máquina añadiendo nodos trabajadores](cs_cluster_update.html#machine_type).
@@ -315,7 +318,7 @@ Los tipos de máquina varían por zona. Para ver los tipos de máquinas disponib
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.16x32</strong>: utilice este tipo cuando desee un equilibrio estrecho de recursos de CPU y de memoria del nodo trabajador para cargas de trabajo ligeras o de tamaño medio.</td></td>
+<td><strong>Virtual, c2c.16x32</strong>: utilice este tipo cuando desee una proporción de 1:2 entre recursos de CPU y de memoria del nodo trabajador para cargas de trabajo ligeras o de tamaño medio.</td></td>
 <td>16 / 32 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
@@ -325,8 +328,8 @@ Los tipos de máquina varían por zona. Para ver los tipos de máquinas disponib
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x64</strong>: utilice este tipo cuando desee un equilibrio estrecho de recursos de CPU y de memoria del nodo trabajador para cargas de trabajo de tamaño medio.</td></td>
-<td>16 / 16 GB</td>
+<td><strong>Virtual, c2c.32x64</strong>: utilice este tipo cuando desee una proporción de 1:2 entre recursos de CPU y de memoria del nodo trabajador para cargas de trabajo de tamaño medio.</td></td>
+<td>32 / 64 GB</td>
 <td>25 GB / 100 GB</td>
 <td>1000 Mbps</td>
 </tr>
@@ -340,13 +343,13 @@ Puede suministrar el nodo trabajador como un servidor físico de arrendatario ú
 {: shortdesc}
 
 **¿En qué se diferencian las máquinas nativas de las máquinas virtuales?**</br>
-Los servidores nativos ofrecen acceso directo a los recursos físicos en la máquina, como la memoria o la CPU. Esta configuración elimina el hipervisor de máquina virtual que asigna recursos físicos a máquinas virtuales que se ejecutan en el host. En su lugar, todos los recursos de una máquina nativa están dedicados exclusivamente al trabajador, por lo que no es necesario preocuparse por "vecinos ruidosos" que compartan recursos o ralenticen el rendimiento. Los tipos de máquina física tienen más almacenamiento local que virtual, y algunos tienen RAID para realizar copias de seguridad de datos locales.
+Los servidores nativos ofrecen acceso directo a los recursos físicos en la máquina, como la memoria o la CPU. Esta configuración elimina el hipervisor de máquina virtual que asigna recursos físicos a máquinas virtuales que se ejecutan en el host. En su lugar, todos los recursos de una máquina nativa están dedicados exclusivamente al trabajador, por lo que no es necesario preocuparse por "vecinos ruidosos" que compartan recursos o ralenticen el rendimiento. Los tipos de máquina física tienen más almacenamiento local que virtual, y algunos tienen RAID para aumentar la disponibilidad de los datos. El almacenamiento local en el nodo trabajador solo es para el proceso a corto plazo y los discos primario y secundario se limpian cuando se actualiza o se vuelve a cargar el nodo trabajador. Para ver las soluciones de almacenamiento persistente, consulte [Planificación de almacenamiento persistente altamente disponible](cs_storage_planning.html#storage_planning).
 
 **Además de mejores especificaciones para el rendimiento, ¿puedo conseguir algo con las máquinas nativas que no pueda con las máquinas virtuales?**</br>
 Sí. Con las máquinas nativas, puede optar por habilitar Trusted Compute para verificar que los nodos trabajadores no se manipulan de forma indebida. Si no habilita la confianza durante la creación del clúster pero desea hacerlo posteriormente, puede utilizar el [mandato](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Una vez que habilita la confianza, no puede inhabilitarla posteriormente. Puede crear un nuevo clúster sin confianza. Para obtener más información sobre cómo funciona la confianza durante el proceso de inicio del nodo, consulte [{{site.data.keyword.containerlong_notm}} con Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute está disponible en los clústeres donde se ejecuta Kubernetes versión 1.9 o posterior y poseen determinados tipos de máquina nativos. Cuando ejecute el [mandato](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types <zone>`, en el campo **Trustable** puede ver qué máquinas dan soporte a la confianza. Por ejemplo, los distintos tipos de GPU `mgXc` no dan soporte a Trusted Compute.
 
 **La opción nativa suena genial. ¿Qué me impide solicitarla en este momento? **</br>
-Los servidores nativos son más caros que los servidores virtuales, y son más apropiados para apps de alto rendimiento que necesitan más recursos y control de host. 
+Los servidores nativos son más caros que los servidores virtuales, y son más apropiados para apps de alto rendimiento que necesitan más recursos y control de host.
 
 **Importante**: los servidores nativos se facturan mensualmente. Si cancela un servidor nativo antes de fin de mes, se le facturará a finales de ese mes. La realización de pedidos de servidores nativos, y su cancelación, es un proceso manual que se realiza a través de su cuenta (SoftLayer) de la infraestructura de IBM Cloud. Puede ser necesario más de un día laborable para completar la tramitación.
 
@@ -391,13 +394,13 @@ Elija un tipo de máquina con la configuración de almacenamiento correcta para 
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Máquina nativa intensiva para datos, md1c.16x64.4x4tb</strong>: Para una cantidad significativa de almacenamiento local, incluido RAID para respaldar datos que se almacenan locamente en la máquina. Casos de uso de ejemplo: sistemas de archivos distribuidos, bases de datos grandes y cargas de trabajo analíticas de Big Data.</td>
+<td><strong>Nativo con mucho uso de datos, md1c.16x64.4x4tb</strong>: utilice este tipo para una cantidad significativa de almacenamiento en disco local, incluido RAID para aumentar la disponibilidad de los datos, para cargas de trabajo como sistemas de archivos distribuidos, bases de datos grandes y analítica de big data.</td>
 <td>16 / 64 GB</td>
 <td>2x2 TB RAID1 / 4x4 TB SATA RAID10</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Máquina nativa intensiva para datos, md1c.28x512.4x4tb</strong>: Para una cantidad significativa de almacenamiento local, incluido RAID para respaldar datos que se almacenan locamente en la máquina. Casos de uso de ejemplo: sistemas de archivos distribuidos, bases de datos grandes y cargas de trabajo analíticas de Big Data.</td>
+<td><strong>Nativo con mucho uso de datos, md1c.28x512.4x4tb</strong>: utilice este tipo para una cantidad significativa de almacenamiento en disco local, incluido RAID para aumentar la disponibilidad de los datos, para cargas de trabajo como sistemas de archivos distribuidos, bases de datos grandes y analítica de big data.</td>
 <td>28 / 512 GB</td>
 <td>2x2 TB RAID1 / 4x4 TB SATA RAID10</td>
 <td>10000 Mbps</td>
@@ -421,7 +424,7 @@ Elija un tipo de máquina con la configuración de almacenamiento correcta para 
 ### Máquinas de almacenamiento definido por software (SDS)
 {: #sds}
 
-Los tipos de almacenamiento definido por software (SDS) son máquinas físicas que se suministran con un disco físico para el almacenamiento local físico. Debido a que los datos se coubican con el nodo de cálculo, las máquinas SDS son adecuadas para cargas de trabajo de alto rendimiento.
+Los tipos de almacenamiento definido por software (SDS) son máquinas físicas que se suministran con discos adicionales sin formato para el almacenamiento local físico. A diferencia del disco local primario y secundario, estos discos sin formato no se limpian durante la actualización o la recarga de un nodo trabajador. Debido a que los datos se coubican con el nodo de cálculo, las máquinas SDS son adecuadas para cargas de trabajo de alto rendimiento.
 {: shortdesc}
 
 **¿Cuándo debo utilizar los tipos de SDS?**</br>
@@ -429,6 +432,8 @@ Normalmente, se utilizan máquinas SDS en los casos siguientes:
 *  Si utiliza un complemento SDS para el clúster, debe utilizar una máquina SDS.
 *  Si la app es un [StatefulSet ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) que requiere almacenamiento local, puede utilizar máquinas SDS y suministrar [volúmenes persistentes locales de Kubernetes (beta) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
 *  Es posible que tenga apps personalizadas o complementos de clúster que requieran almacenamiento local o SDS. Por ejemplo, si tiene previsto utilizar logDNA, debe utilizar un tipo de máquina SDS.
+
+Para ver más soluciones de almacenamiento, consulte [Planificación de almacenamiento persistente altamente disponible](cs_storage_planning.html#storage_planning).
 
 **¿Qué tipos de SDS puedo solicitar?**</br>
 Los tipos de máquina varían por zona. Para ver los tipos de máquinas disponibles en su zona, ejecute `ibmcloud ks machine-types <zone>`. También puede consultar los tipos de máquina [nativa](#bm) o [virtual](#vm) disponibles.
@@ -447,10 +452,24 @@ Elija un tipo de máquina con la configuración de almacenamiento correcta para 
 <th>Nombre y caso de uso</th>
 <th>Núcleos / Memoria</th>
 <th>Disco primario / secundario</th>
-<th>Almacenamiento local</th>
+<th>Discos sin formato adicionales</th>
 <th>Velocidad de red</th>
 </thead>
 <tbody>
+<tr>
+<td><strong>Nativo con SDS, ms2c.4x32.1.9tb.ssd</strong>: si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
+<td>4 / 32 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>1,9 TB Raw SSD</td>
+<td>10000 Mbps</td>
+</tr>
+<tr>
+<td><strong>Nativo con SDS, ms2c.16x64.1.9tb.ssd</strong>: si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
+<td>16 / 64 GB</td>
+<td>2 TB SATA / 960 GB SSD</td>
+<td>1,9 TB Raw SSD</td>
+<td>10000 Mbps</td>
+</tr>
 <tr>
 <td><strong>Nativo con SDS, ms2c.28x256.3.8tb.ssd</strong>: si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
 <td>28 / 256 GB</td>

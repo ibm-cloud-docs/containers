@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -43,7 +43,7 @@ Tout dépend de ce que vous supprimez et du type de facturation. Si vous supprim
 * Lorsque vous nettoyez du stockage persistant, vous supprimez toutes les données qui y sont stockées. Si vous avez besoin d'une copie des données, effectuez une sauvegarde de [stockage de fichiers](cs_storage_file.html#backup_restore) ou de [stockage par blocs](cs_storage_block.html#backup_restore).
 * Si vous utilisez un compte {{site.data.keyword.Bluemix_dedicated}}, vous devez demander la suppression du volume en [ouvrant un ticket de demande de service](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 
 Pour nettoyer des données persistantes :
 
@@ -173,7 +173,7 @@ Pour nettoyer des données persistantes :
    ```
    {: pre}
      
-9. Vérifiez que l'instance de stockage physique est supprimée. Ce processus peut prendre quelques minutes. 
+9. Vérifiez que l'instance de stockage physique est supprimée. **Remarque** : l'exécution du processus de suppression peut prendre quelques jours. 
 
    **Stockage de fichiers :** 
    ```

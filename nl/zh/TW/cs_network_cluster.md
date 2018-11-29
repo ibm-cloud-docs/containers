@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -123,7 +123,7 @@ lastupdated: "2018-09-10"
 **為何我可能使用此設定？**
 
 * 您在單一區域叢集中具有一個應用程式。您只想要將應用程式公開給該叢集內或連接至相同專用 VLAN 的其他叢集中的 Pod。
-* 您在多區域叢集中具有一個應用程式。您只想要將應用程式公開給該叢集內或連接至與您叢集相同的專用 VLAN 的其他叢集中的 Pod。 
+* 您在多區域叢集中具有一個應用程式。您只想要將應用程式公開給該叢集內或連接至與您叢集相同的專用 VLAN 的其他叢集中的 Pod。不過，因為必須對多區域叢集啟用 [VLAN Spanning](cs_subnets.html#subnet-routing)，所以連接至相同 IBM Cloud 帳戶中任何專用 VLAN 的其他系統都可以存取叢集。您想要將多區域叢集與其他系統隔離。
 
 **我要管理叢集的公用和專用存取權時有哪些選項？**</br>下列各節說明跨越 {{site.data.keyword.containerlong_notm}} 的功能，您可以使用這些功能來設定連接至公用及專用 VLAN 之叢集的僅限專用網路功能及鎖定公用網路功能。
 
@@ -134,9 +134,9 @@ lastupdated: "2018-09-10"
 
 如果您只想在專用網路上公開應用程式，您可以建立專用 NodePort、LoadBalancer 或 Ingress 服務。如需規劃專用外部網路功能的相關資訊，請參閱[為公用及專用 VLAN 設定規劃專用外部網路功能](cs_network_planning.html#private_both_vlans)。
 
-不過，預設 Calico 網路原則也容許從網際網路到這些服務的入埠公用網路資料流量。您可以建立 Calico 原則，改為封鎖服務的所有公用資料流量。例如，NodePort 服務會在工作者節點的專用及公用 IP 位址上開啟工作者節點上的埠。具有可攜式專用 IP 位址的負載平衡器服務會在每一個工作者節點上開啟一個公用 NodePort。您必須建立 [Calico preDNAT 網路原則](cs_network_policy.html#block_ingress)，以封鎖公用 NodePort。
+不過，預設 Calico 網路原則也容許從網際網路到這些服務的入埠公用網路資料流量。您可以建立 Calico 原則，改為封鎖服務的所有公用資料流量。例如，NodePort 服務會在工作者節點的專用及公用 IP 位址上開啟工作者節點上的埠。具有可攜式專用 IP 位址的負載平衡器服務會在每個工作者節點上開啟一個公用 NodePort。您必須建立 [Calico DNAT 前網路原則](cs_network_policy.html#block_ingress)，以封鎖公用 NodePort。
 
-舉例來說，假設您已建立專用負載平衡器服務。您也建立了 Calico preDNAT 原則來封鎖公用資料流量，使其無法到達負載平衡器所開啟的公用 NodePort。可以透過下列方式存取此專用負載平衡器：
+舉例來說，假設您已建立專用負載平衡器服務。您也建立了 Calico DNAT 前原則來封鎖公用資料流量，使其無法到達負載平衡器所開啟的公用 NodePort。可以透過下列方式存取此專用負載平衡器：
 * [相同叢集中的任何 Pod](#in-cluster)
 * 已連接至相同專用 VLAN 的任何叢集中的任何 Pod
 * 如果您[已啟用 VLAN Spanning](cs_subnets.html#subnet-routing)，則為任何已連接至位於相同 IBM Cloud 帳戶中之任何專用 VLAN 的系統
@@ -154,7 +154,7 @@ lastupdated: "2018-09-10"
 邊緣工作者節點可以藉由容許較少的工作者節點可在外部進行存取，以及隔離網路工作負載，來增進叢集的安全。若要確定只將 Ingress 及負載平衡器 Pod 部署至指定的工作者節點，請[將工作者節點標示為邊緣節點](cs_edge.html#edge_nodes)。若也要防止在邊緣節點上執行其他工作負載，請[污染邊緣節點](cs_edge.html#edge_workloads)。
 
 
-然後，使用 [Calico preDNAT 網路原則](cs_network_policy.html#block_ingress)，封鎖對執行邊緣工作者節點的叢集上的公用 NodePort 的資料流量。封鎖節點埠可確保邊緣工作者節點是處理送入資料流量的唯一工作者節點。
+然後，使用 [Calico DNAT 前網路原則](cs_network_policy.html#block_ingress)，封鎖對執行邊緣工作者節點的叢集上的公用 NodePort 的資料流量。封鎖節點埠可確保邊緣工作者節點是處理送入資料流量的唯一工作者節點。
 
 ### 選用項目：使用 strongSwan VP，連接至內部部署網路或 IBM Cloud Private
 {: #both_vlans_private_vpn}
@@ -195,7 +195,7 @@ lastupdated: "2018-09-10"
 
 **附註**：如果您具有現有的路由器應用裝置，然後新增叢集，則系統不會在路由器應用裝置上配置針對該叢集所訂購的新可攜式子網路。為了能夠使用網路服務，您必須[啟用 VLAN Spanning](cs_subnets.html#vra-routing)，在相同 VLAN 上的子網路之間啟用遞送。
 
-若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](cs_cli_reference.html#cs_vlan_spanning_get)。
+若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](cs_cli_reference.html#cs_vlan_spanning_get)。
 {: tip}
 
 ### 使用專用網路服務公開應用程式

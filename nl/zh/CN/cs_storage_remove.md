@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -43,7 +43,7 @@ lastupdated: "2018-09-10"
 * 清除持久性存储器时，将删除其中存储的所有数据。如果需要数据的副本，请备份[文件存储器](cs_storage_file.html#backup_restore)或[块存储器](cs_storage_block.html#backup_restore)。
 * 如果使用的是 {{site.data.keyword.Bluemix_dedicated}} 帐户，那么必须通过[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)来请求卷删除。
 
-开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 
 要清除持久数据，请执行以下操作：
 
@@ -173,7 +173,7 @@ lastupdated: "2018-09-10"
    ```
    {: pre}
      
-9. 验证物理存储器实例是否已除去。此过程可能需要几分钟时间。 
+9. 验证物理存储器实例是否已除去。**注**：删除过程可能需要最多几天时间才能完成。 
 
    **文件存储器：** 
    ```

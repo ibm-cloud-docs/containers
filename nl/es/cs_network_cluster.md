@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -126,7 +126,7 @@ De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el c
 **¿Para qué puedo utilizar esta configuración?**
 
 * Tiene una app en un clúster de una sola zona. Desea exponer la app solo a los pods dentro del clúster o en otros clústeres que están conectados a la misma VLAN privada.
-* Tiene una app en un clúster multizona. Desea exponer la app solo a los pods dentro del clúster o en otros clústeres que están conectados a las mismas VLAN privadas que el clúster. 
+* Tiene una app en un clúster multizona. Desea exponer la app solo a los pods dentro del clúster o en otros clústeres que están conectados a las mismas VLAN privadas que el clúster. Sin embargo, como la [expansión de VLAN](cs_subnets.html#subnet-routing) debe estar habilitada para los clústeres multizona, otros sistemas conectados a cualquier VLAN privada en la misma cuenta de IBM Cloud pueden acceder al clúster. Desea aislar su clúster multizona de otros sistemas.
 
 **¿Cuáles son mis opciones para gestionar el acceso público y privado a mi clúster?**</br>En las secciones siguientes se describen las funciones de {{site.data.keyword.containerlong_notm}} que puede utilizar para configurar las redes solo privadas y bloquear las redes públicas para clústeres conectados a una VLAN pública y una VLAN privada.
 
@@ -137,7 +137,7 @@ La interfaz de red pública de los nodos trabajadores está protegida por [valor
 
 Si desea exponer sus apps sólo a través de una red privada, puede crear servicios de NodePort, LoadBalancer o Ingress privados. Para obtener más información sobre la planificación de redes externas privadas, consulte [Planificación del sistema de red externo privado para una configuración de VLAN pública y privada](cs_network_planning.html#private_both_vlans).
 
-Sin embargo, las políticas de red de Calico predeterminadas también permiten el tráfico de red pública entrante desde Internet a estos servicios. Puede crear políticas de Calico para bloquear todo el tráfico público a los servicios. Por ejemplo, un servicio NodePort abre un puerto en un nodo trabajador sobre la dirección IP privada y pública del nodo trabajador. Un servicio de equilibrador de carga con una dirección IP privada portátil abre un NodePort público abierto en cada nodo trabajador. Debe crear una [política de red preDNAT de Calico](cs_network_policy.html#block_ingress) para bloquear los NodePorts públicos.
+Sin embargo, las políticas de red de Calico predeterminadas también permiten el tráfico de red pública entrante desde Internet a estos servicios. Puede crear políticas de Calico para bloquear todo el tráfico público a los servicios. Por ejemplo, un servicio NodePort abre un puerto en un nodo trabajador sobre la dirección IP privada y pública del nodo trabajador. Un servicio de equilibrador de carga con una dirección IP privada portátil abre un NodePort público en cada nodo trabajador. Debe crear una [política de red preDNAT de Calico](cs_network_policy.html#block_ingress) para bloquear los NodePorts públicos.
 
 Como ejemplo, supongamos que ha creado un servicio de equilibrador de carga privado. También ha creado una política de preDNAT de Calico para evitar que el tráfico público llegue a los NodePorts públicos abiertos por el equilibrador de carga. A este equilibrador de carga privado se puede acceder mediante:
 * [Cualquier pod en ese mismo clúster](#in-cluster)

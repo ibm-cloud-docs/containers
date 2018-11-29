@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-12"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -54,6 +54,7 @@ Se o cluster estiver em uma das [cidades metropolitanas de multizona suportadas]
 **Eu tenho que usar clusters de múltiplas zonas?**</br>
 Não. É possível criar tantos clusters de zona única quantos você desejar. De fato, você pode preferir clusters de zona única para gerenciamento simplificado ou se o seu cluster deve residir em uma [cidade de zona única](cs_regions.html#zones) específica.
 
+
 ## Cluster de múltiplas zonas
 {: #multizone}
 
@@ -74,6 +75,7 @@ Se o cluster estiver em uma das [cidades metropolitanas de multizona suportadas]
 {: #mz_setup}
 
 <img src="images/cs_cluster_multizone.png" alt="High availability for multizone clusters" width="500" style="width:500px; border-style: none"/>
+
 
 É possível incluir zonas adicionais em seu cluster para replicar os nós do trabalhador em seus conjuntos de trabalhadores em múltiplas zonas dentro de uma região. Os clusters de múltiplas zonas são projetados para planejar uniformemente os pods em nós do trabalhador e zonas para assegurar disponibilidade e recuperação de falha. Se os nós do trabalhador não forem difundidos uniformemente entre as zonas ou se houver capacidade insuficiente em uma das zonas, o planejador do Kubernetes poderá falhar ao planejar todos os pods solicitados. Como resultado, os pods podem entrar em um estado **Pendente** até que capacidade suficiente esteja disponível. Se você desejar mudar o comportamento padrão para fazer o planejador do Kubernetes distribuir os pods entre zonas em uma melhor distribuição de esforço, use a [política de afinidade de pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
 
@@ -100,9 +102,9 @@ Sim. Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesm
 **Como permitir que meus usuários acessem meu app por meio da Internet pública?**</br>
 É possível expor seus apps usando um balanceador de carga do aplicativo (ALB) do Ingresso ou um serviço de balanceador de carga.
 
-Por padrão, os ALBs públicos são criados e ativados automaticamente em cada zona em seu cluster. Um multizone load balancer (MZLB) do Cloudflare para seu cluster também é criado e implementado automaticamente para que exista 1 MZLB para cada região. O MZLB coloca os endereços IP de seus ALBs atrás do mesmo nome do host e ativa as verificações de funcionamento nesses endereços IP para determinar se elas estão disponíveis ou não. Por exemplo, se você tiver nós do trabalhador em 3 zonas na região dos Leste dos EUA, o nome do host `yourcluster.us-east.containers.appdomain.cloud` terá 3 endereços IP do ALB. O funcionamento do MZLB verifica o IP do ALB público em cada zona de uma região e mantém os resultados de consulta de DNS atualizados com base nessas verificações de funcionamento. Para obter mais informações, consulte [Componentes e arquitetura do Ingress](cs_ingress.html#planning).
+- **Balanceador de carga do aplicativo (ALB) do Ingress** Por padrão, os ALBs públicos são automaticamente criados e ativados em cada zona em seu cluster. Um multizone load balancer (MZLB) do Cloudflare para seu cluster também é criado e implementado automaticamente para que exista 1 MZLB para cada região. O MZLB coloca os endereços IP de seus ALBs atrás do mesmo nome do host e ativa as verificações de funcionamento nesses endereços IP para determinar se elas estão disponíveis ou não. Por exemplo, se você tiver nós do trabalhador em 3 zonas na região dos Leste dos EUA, o nome do host `yourcluster.us-east.containers.appdomain.cloud` terá 3 endereços IP do ALB. O funcionamento do MZLB verifica o IP do ALB público em cada zona de uma região e mantém os resultados de consulta de DNS atualizados com base nessas verificações de funcionamento. Para obter mais informações, consulte [Componentes e arquitetura do Ingress](cs_ingress.html#planning).
 
-Os serviços de balanceador de carga são configurados somente em uma zona. As solicitações recebidas para seu app são roteadas dessa zona para todas as instâncias do app em outras zonas. Se essa zona se tornar indisponível, seu app poderá não ser acessível por meio da Internet. É possível configurar serviços adicionais de balanceador de carga em outras zonas para considerar uma falha de zona única. Para obter mais informações, consulte [serviços de balanceador de carga](cs_loadbalancer.html#multi_zone_config) altamente disponíveis.
+- **Serviços do balanceador de carga:** os serviços do balanceador de carga são configurados em somente uma zona. As solicitações recebidas para seu app são roteadas dessa zona para todas as instâncias do app em outras zonas. Se essa zona se tornar indisponível, seu app poderá não ser acessível por meio da Internet. É possível configurar serviços adicionais de balanceador de carga em outras zonas para considerar uma falha de zona única. Para obter mais informações, consulte [serviços de balanceador de carga](cs_loadbalancer.html#multi_zone_config) altamente disponíveis.
 
 **Posso configurar o armazenamento persistente para o meu cluster de múltiplas zonas?**</br>
 Para o armazenamento persistente altamente disponível, use um serviço de nuvem como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
@@ -206,16 +208,17 @@ Semelhante ao uso de [3 zonas em um cluster de múltiplas zonas](#multizone), é
 
 Por padrão, o {{site.data.keyword.containerlong_notm}} configura seu cluster com acesso a uma VLAN privada e a uma VLAN pública. A VLAN privada determina o endereço IP privado que é designado a cada nó do trabalhador, que fornece cada nó do trabalhador com uma interface de rede privada. A VLAN pública permite que os nós do trabalhador se conectem de forma automática e segura ao mestre.
 
+Se você desejar bloquear seu cluster para permitir o tráfego privado sobre a VLAN privada, mas bloquear o tráfego público sobre a VLAN pública, será possível [proteger seu cluster do acesso público com as políticas de rede do Calico](cs_network_cluster.html#both_vlans_private_services). Essas políticas de rede do Calico não evitam que os nós do trabalhador se comuniquem com o mestre. Também é possível limitar a superfície de vulnerabilidade em seu cluster sem bloquear o tráfego público, [isolando cargas de trabalho de rede para os nós do trabalhador de borda](cs_edge.html).
 
 Se você deseja criar um cluster que tenha acesso somente a uma VLAN privada, é possível criar um cluster privado de zona única ou de múltiplas zonas. No entanto, quando os nós do trabalhador estão conectados somente a uma VLAN privada, os nós do trabalhador não podem se conectar automaticamente ao mestre. Deve-se configurar um dispositivo de gateway para fornecer conectividade de rede entre os nós do trabalhador e o mestre.
 **Nota**: não é possível converter um cluster que está conectado a uma VLAN pública e privada para se tornar um cluster somente privado. A remoção de todas as VLANs públicas de um cluster faz com que diversos componentes do cluster parem de funcionar. Deve-se criar um novo cluster usando as etapas a seguir.
 
 Se você deseja criar um cluster que tenha acesso somente a uma VLAN privada:
 
-1.  Revise  [ Planejando a rede do cluster somente privado ](cs_network_planning.html#private_vlan)
+1.  Revise  [ Planejando a rede de cluster somente privada ](cs_network_cluster.html#private_vlan).
 2.  Configure seu dispositivo de gateway para conectividade de rede. Observe que é necessário [abrir as portas e os endereços IP necessários](cs_firewall.html#firewall_outbound) em seu firewall e [ativar o VLAN Spanning ](cs_subnets.html#vra-routing) para as sub-redes.
 3.  [Crie um cluster usando a CLI](cs_clusters.html#clusters_cli), incluindo a sinalização `--private-only`.
-4.  Se você deseja expor um app a uma rede privada usando um serviço privado NodePort, LoadBalancer ou Ingress, revise [Planejando a rede externa privada para uma configuração somente de VLAN privada](cs_network_planning.html#private_vlan). O serviço é acessível somente no endereço IP privado e deve-se configurar as portas em seu firewall para usar o endereço IP privado.
+4.  Se você desejar expor um app a uma rede privada usando um serviço privado NodePort, balanceador de carga ou Ingress, revise [Planejando a rede privada externa para uma configuração somente de VLAN privada](cs_network_planning.html#private_vlan). O serviço é acessível somente no endereço IP privado e deve-se configurar as portas em seu firewall para usar o endereço IP privado.
 
 
 ## Conjuntos do Trabalhador e nós do trabalhador
@@ -271,7 +274,7 @@ e dedicados, você pode desejar verificar com seu departamento jurídico para di
 e conformidade de infraestrutura que seu ambiente de app requer.
 
 **Quais são os recursos gerais de VMs?**</br>
-As máquinas virtuais usam o disco local em vez da rede de área de armazenamento (SAN) para confiabilidade. Os benefícios de confiabilidade incluem maior rendimento ao serializar bytes para o disco local e a degradação do sistema de arquivos reduzido devido a falhas de rede. Cada MV vem com velocidade de rede 1000 Mbps, 25 GB de armazenamento em disco local primário para o sistema de arquivos do S.O. e 100 GB de armazenamento em disco local secundário para dados, como o tempo de execução do contêiner e o `kubelet`.
+As máquinas virtuais usam o disco local em vez da rede de área de armazenamento (SAN) para confiabilidade. Os benefícios de confiabilidade incluem maior rendimento ao serializar bytes para o disco local e a degradação do sistema de arquivos reduzido devido a falhas de rede. Cada MV vem com velocidade de rede 1000 Mbps, 25 GB de armazenamento em disco local primário para o sistema de arquivos do S.O. e 100 GB de armazenamento em disco local secundário para dados, como o tempo de execução do contêiner e o `kubelet`. O armazenamento local no nó do trabalhador é somente para processamento de curto prazo e os discos primário e secundário são limpos quando você atualiza ou recarrega o nó do trabalhador. Para obter soluções de armazenamento persistente, consulte [Planejando o armazenamento persistente altamente disponível](cs_storage_planning.html#storage_planning).
 
 **E se eu tiver descontinuado os tipos de máquina `u1c` ou `b1c`?**</br>
 Para começar a usar os tipos de máquina `u2c` e `b2c`, [atualize os tipos de máquina incluindo nós do trabalhador](cs_cluster_update.html#machine_type).
@@ -324,7 +327,7 @@ Tipos de máquina variam por zona. Para ver os tipos de máquina disponíveis em
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.16x32</strong>: use esse tipo quando desejar um saldo próximo de recursos de CPU e memória do nó do trabalhador para cargas de trabalho de leve a médio porte.</td></td>
+<td><strong>Virtual, c2c.16x32</strong>: use esse tipo quando desejar uma razão 1:2 de CPU e recursos de memória do nó do trabalhador para cargas de trabalho de pequeno a médio porte.</td></td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
@@ -334,8 +337,8 @@ Tipos de máquina variam por zona. Para ver os tipos de máquina disponíveis em
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x64</strong>: use esse tipo quando desejar um saldo próximo de recursos de CPU e memória do nó do trabalhador para cargas de trabalho de médio porte.</td></td>
-<td>16 / 16GB</td>
+<td><strong>Virtual, c2c.32x64</strong>: use esse tipo quando desejar uma razão 1:2 de CPU e recursos de memória do nó do trabalhador para cargas de trabalho de médio porte.</td></td>
+<td>32 / 64 GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
@@ -349,13 +352,13 @@ Tipos de máquina variam por zona. Para ver os tipos de máquina disponíveis em
 {: shortdesc}
 
 **Como o bare metal é diferente de VMs?**</br>
-O bare metal dá acesso direto aos recursos físicos na máquina, como a memória ou CPU. Essa configuração elimina o hypervisor da máquina virtual que aloca recursos físicos para máquinas virtuais executadas no host. Em vez disso, todos os recursos de uma máquina bare metal são dedicados exclusivamente ao trabalhador, portanto, você não precisará se preocupar com "vizinhos barulhentos" compartilhando recursos ou diminuindo o desempenho. Os tipos de máquina física têm mais armazenamento local do que virtual e alguns têm RAID para fazer backup de dados locais.
+O bare metal dá acesso direto aos recursos físicos na máquina, como a memória ou CPU. Essa configuração elimina o hypervisor da máquina virtual que aloca recursos físicos para máquinas virtuais executadas no host. Em vez disso, todos os recursos de uma máquina bare metal são dedicados exclusivamente ao trabalhador, portanto, você não precisará se preocupar com "vizinhos barulhentos" compartilhando recursos ou diminuindo o desempenho. Os tipos de máquina física têm mais armazenamento local do que virtual e alguns têm RAID para aumentar a disponibilidade de dados. O armazenamento local no nó do trabalhador é somente para processamento de curto prazo e os discos primário e secundário são limpos quando você atualiza ou recarrega o nó do trabalhador. Para obter soluções de armazenamento persistente, consulte [Planejando o armazenamento persistente altamente disponível](cs_storage_planning.html#storage_planning).
 
 **Além de melhores especificações para desempenho, posso fazer algo com bare metal que eu não posso com VMs?**</br>
 Sim. Com bare metal, você tem a opção de ativar o Cálculo Confiável para verificar seus nós do trabalhador com relação à violação. Se você não ativar a confiança durante a criação do cluster, mas desejar posteriormente, será possível usar o comando `ibmcloud ks feature-enable` [](cs_cli_reference.html#cs_cluster_feature_enable). Depois de ativar a confiança, não é possível desativá-la posteriormente. É possível fazer um novo cluster sem confiança. Para obter mais informações sobre como a confiança funciona durante o processo de inicialização do nó, veja [{{site.data.keyword.containerlong_notm}} com Cálculo confiável](cs_secure.html#trusted_compute). O Cálculo confiável está disponível em clusters que executam o Kubernetes versão 1.9 ou mais recente e têm determinados tipos de máquina bare metal. Quando você executa o [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types <zone>`, é possível ver quais máquinas suportam confiança revisando o campo **Confiável**. Por exemplo, os tipos GPU `mgXc` não suportam o Cálculo confiável.
 
 ** Bare metal parece incrível! O que está me impedindo de pedir um agora?**</br>
-Os servidores bare metal são mais caros do que os servidores virtuais e são mais adequados para apps de alto desempenho que precisam de mais recursos e controle de host. 
+Os servidores bare metal são mais caros do que os servidores virtuais e são mais adequados para apps de alto desempenho que precisam de mais recursos e controle de host.
 
 **Importante**: os servidores bare metal são faturados mensalmente. Se você cancelar um servidor bare metal antes do final do mês, será cobrado até o final do mês. Ordenar e cancelar servidores bare metal é um processo manual por meio da sua conta de infraestrutura (SoftLayer) do IBM Cloud. Pode levar mais de um dia útil para serem concluídos.
 
@@ -400,13 +403,13 @@ Escolha um tipo de máquina com a configuração de armazenamento correta para s
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal com uso intensivo de dados, md1c.16x64.4x4tb</strong>: para uma quantia significativa de armazenamento em disco local, incluindo RAID para fazer backup de dados que são armazenados localmente na máquina. Use para casos como sistemas de arquivo distribuído, bancos de dados grandes e cargas de trabalho de análise de Big Data.</td>
+<td><strong>Bare metal com uso intensivo de dados, md1c.16x64.4x4tb</strong>: use esse tipo para uma quantia significativa de armazenamento em disco local, incluindo RAID para aumentar a disponibilidade de dados, para cargas de trabalho, como sistemas de arquivos distribuídos, bancos de dados grandes e análise de Big Data.</td>
 <td>16 / 64GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal com uso intensivo de dados, md1c.28x512.4x4tb</strong>: para uma quantia significativa de armazenamento em disco local, incluindo RAID para fazer backup de dados que são armazenados localmente na máquina. Use para casos como sistemas de arquivo distribuído, bancos de dados grandes e cargas de trabalho de análise de Big Data.</td>
+<td><strong>Bare metal com uso intensivo de dados, md1c.28x512.4x4tb</strong>: use esse tipo para uma quantia significativa de armazenamento em disco local, incluindo RAID para aumentar a disponibilidade de dados, para cargas de trabalho, como sistemas de arquivos distribuídos, bancos de dados grandes e análise de Big Data.</td>
 <td>28 / 512 GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
@@ -430,7 +433,7 @@ Escolha um tipo de máquina com a configuração de armazenamento correta para s
 ### Máquinas de armazenamento definido pelo software (SDS)
 {: #sds}
 
-Os tipos de software-defined storage (SDS) são máquinas físicas provisionadas com um disco bruto para armazenamento local físico. Como os dados são localizados juntamente com o nó de cálculo, as máquinas SDS são adequadas para cargas de trabalho de alto desempenho.
+Os tipos de software-defined storage (SDS) são máquinas físicas que são provisionadas com discos rígidos adicionais para armazenamento local físico. Diferentemente do disco local primário e secundário, esses discos rígidos não são limpos durante uma atualização ou um recarregamento do nó do trabalhador. Como os dados são localizados juntamente com o nó de cálculo, as máquinas SDS são adequadas para cargas de trabalho de alto desempenho.
 {: shortdesc}
 
 ** Quando uso os sabores SDS? **</br>
@@ -438,6 +441,8 @@ Você normalmente usa máquinas SDS nos casos a seguir:
 *  Se você usa um complemento SDS para o cluster, deve-se usar uma máquina SDS.
 *  Se seu app é um [StatefulSet ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) que requer armazenamento local, é possível usar máquinas SDS e provisionar [volumes persistentes locais do Kubernetes (beta) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
 *  Você pode ter aplicativos customizados ou complementos de cluster que requerem armazenamento SDS ou local. Por exemplo, se você planeja usar logDNA, deve-se usar um tipo de máquina SDS.
+
+Para obter mais soluções de armazenamento, veja [Planejando o armazenamento persistente altamente disponível](cs_storage_planning.html#storage_planning).
 
 ** Quais tipos de SDS posso pedir? **</br>
 Tipos de máquina variam por zona. Para ver os tipos de máquina disponíveis em sua zona, execute `ibmcloud ks machine-types <zone>`. Também é possível revisar os tipos de máquina [bare metal](#bm) ou [VM](#vm) disponíveis.
@@ -456,10 +461,24 @@ Escolha um tipo de máquina com a configuração de armazenamento correta para s
 <th>Caso Nome e uso</th>
 <th>Núcleos / Memória</th>
 <th>Disco Primário / Secundário</th>
-<th>Armazenamento local</th>
+<th>Discos brutos adicionais</th>
 <th>Velocidade</th>
 </thead>
 <tbody>
+<tr>
+<td><strong>Bare metal com SDS, ms2c.4x32.1.9tb.ssd</strong>: se você precisar de armazenamento local extra para desempenho, use esse tipo de disco pesado que suporta o software-defined storage (SDS).</td>
+<td>4 / 32GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>1.9TB Raw SSD</td>
+<td>10000Mbps</td>
+</tr>
+<tr>
+<td><strong>Bare metal com SDS, ms2c.16x64.1.9tb.ssd</strong>: se for necessário armazenamento local extra para desempenho, use esse tipo de disco pesado que suporta software-defined storage (SDS).</td>
+<td>16 / 64GB</td>
+<td>2TB SATA / 960GB SSD</td>
+<td>1.9TB Raw SSD</td>
+<td>10000Mbps</td>
+</tr>
 <tr>
 <td><strong>Bare metal com SDS, ms2c.28x256.3.8tb.ssd</strong>: se você precisar de armazenamento local extra para o desempenho, use esse tipo de disco pesado que suporte software-defined storage (SDS).</td>
 <td>28 / 256GB</td>

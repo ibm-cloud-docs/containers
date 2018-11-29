@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-11"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -20,17 +20,17 @@ lastupdated: "2018-09-11"
 # Esercitazione: Utilizzo delle politiche di rete Calico per bloccare il traffico
 {: #policy_tutorial}
 
-Per impostazione predefinita, i servizi Ingress, LoadBalancer e NodePort Kubernetes rendono la tua applicazione disponibile su tutte le interfacce di rete cluster private e pubbliche. La politica Calico predefinita `allow-node-port-dnat` consente il traffico in entrata dai servizi Ingress, LoadBalancer e NodePort ai pod dell'applicazione esposti da tali servizi. Kubernetes utilizza la conversione degli indirizzi di rete di destinazione (o DNAT, destination network address translation) per inoltrare le richieste di servizio ai pod corretti.
+Per impostazione predefinita, i servizi Ingress, LoadBalancer e NodePort Kubernetes rendono la tua applicazione disponibile su tutte le interfacce di rete cluster private e pubbliche. La politica Calico predefinita `allow-node-port-dnat` consente il traffico in entrata dai servizi di porta del nodo, programma di bilanciamento del carico e Ingress ai pod dell'applicazione esposti da tali servizi. Kubernetes utilizza la conversione degli indirizzi di rete di destinazione (o DNAT, destination network address translation) per inoltrare le richieste di servizio ai pod corretti.
 
 Tuttavia, per motivi di sicurezza, potresti dover consentire il traffico ai servizi di rete solo da specifici indirizzi IP di origine. Puoi utilizzare le [politiche pre-DNAT Calico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) per inserire in whitelist o in blacklist il traffico da o verso specifici indirizzi IP. Le politiche pre-DNAT impediscono al traffico specificato di raggiungere le tue applicazioni perché vengono applicate prima che Kubernetes utilizzi la DNAT regolare per inoltrare il traffico ai pod. Quando crei delle politiche pre-DNAT Calico, scegli se inserire in whitelist o in blacklist gli indirizzi IP di origine. Per la maggior parte degli scenari, l'inserimento in whitelist fornisce la configurazione più sicura perché viene bloccato tutto il traffico tranne quello da indirizzi IP di origine noti e consentiti. L'inserimento in blacklist è di norma utile solo negli scenari in cui, ad esempio, si intende evitare un attacco da un piccolo insieme di indirizzi IP.
 
-In questo scenario, hai il ruolo di amministratore di rete per una società di PR e noti del traffico insolito verso le tue applicazioni. Le lezioni in questa esercitazione ti guidano nella creazione di un'applicazione server web di esempio, nell'esposizione dell'applicazione utilizzando un servizio LoadBalancer e nella protezione dell'applicazione d traffico insolito e indesiderato con entrambe le politiche Calico di whitelist e blacklist.
+In questo scenario, hai il ruolo di amministratore di rete per una società di PR e noti del traffico insolito verso le tue applicazioni. Le lezioni in questa esercitazione ti guidano nella creazione di un'applicazione server web di esempio, nell'esposizione dell'applicazione utilizzando un servizio del programma di bilanciamento del carico e nella protezione dell'applicazione da traffico insolito e indesiderato con entrambe le politiche Calico di whitelist e blacklist.
 
 ## Obiettivi
 
-- Impara a bloccare tutto il traffico in entrata per tutte le NodePort creando una politica pre-DNAT di ordine superiore.
-- Impara a consentire agli indirizzi IP di origine inseriti nella whitelist l'accesso all'IP e alla porta pubblici del LoadBalancer creando una politica pre-DNAT di ordine inferiore. Le politiche di ordine inferiore sovrascrivono le politiche di ordine superiore.
-- Impara a bloccare per gli indirizzi IP di origine inseriti nella blacklist l'accesso all'IP e alla porta pubblici del LoadBalancer creando una politica pre-DNAT di ordine inferiore.
+- Impara a bloccare tutto il traffico in entrata per tutte le porte del nodo creando una politica pre-DNAT di ordine superiore.
+- Impara a consentire agli indirizzi IP di origine inseriti nella whitelist l'accesso all'IP e alla porta pubblici del programma di bilanciamento del carico creando una politica pre-DNAT di ordine inferiore. Le politiche di ordine inferiore sovrascrivono le politiche di ordine superiore.
+- Impara a bloccare per gli indirizzi IP di origine inseriti nella blacklist l'accesso all'IP e alla porta pubblici del programma di bilanciamento del carico creando una politica pre-DNAT di ordine inferiore.
 
 ## Tempo richiesto
 1 ora
@@ -48,17 +48,17 @@ Questa esercitazione è destinata agli sviluppatori di software e agli amministr
 <br />
 
 
-## Lezione 1: Distribuisci un'applicazione ed esponila utilizzando un LoadBalancer
+## Lezione 1: Distribuisci un'applicazione ed esponila utilizzando un programma di bilanciamento del carico
 {: #lesson1}
 
 La prima lezione ti mostra in che modo la tua applicazione viene esposta da molteplici indirizzi IP e porte e da dove proviene il traffico pubblico nel tuo cluster.
 {: shortdesc}
 
-Inizia distribuendo un'applicazione webserver di esempio da utilizzare in tutta l'esercitazione. Il webserver (server web) `echoserver` mostra i dati sulla connessione che si sta stabilendo al cluster dal client e ti consente di testare l'accesso al cluster della società di PR. Esponi quindi l'applicazione creando un servizio LoadBalancer. Un servizio LoadBalancer rende la tua applicazione disponibile sia sull'indirizzo IP del servizio LoadBalancer che sulle NodePort dei nodi di lavoro.
+Inizia distribuendo un'applicazione webserver di esempio da utilizzare in tutta l'esercitazione. Il webserver (server web) `echoserver` mostra i dati sulla connessione che si sta stabilendo al cluster dal client e ti consente di testare l'accesso al cluster della società di PR. Esponi quindi l'applicazione creando un servizio del programma di bilanciamento del carico. Un servizio del programma di bilanciamento del carico rende la tua applicazione disponibile sia sull'indirizzo IP del servizio del programma di bilanciamento del carico che sulle porte del nodo dei nodi di lavoro.
 
-La seguente immagine mostra in che modo l'applicazione webserver sarà esposta a internet dalla NodePort pubblica e dal LoadBalancer pubblico alla fine della Lezione 1:
+La seguente immagine mostra in che modo l'applicazione webserver sarà esposta a Internet dalla porta del nodo pubblico e dal programma di bilanciamento del carico pubblico alla fine della Lezione 1:
 
-<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="Alla fine della Lezione 1, l'applicazione webserver è esposta a internet dalla NodePort pubblica e dal LoadBalancer pubblico." style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson1.png" width="450" alt="Alla fine della Lezione 1, l'applicazione webserver è esposta a Internet dalla porta del nodo pubblico e dal programma di bilanciamento del carico pubblico." style="width:450px; border-style: none"/>
 
 1. Distribuisci l'applicazione webserver di esempio. Quando viene stabilita una connessione all'applicazione webserver, essa risponde con le intestazioni HTTP che aveva ricevuto nella connessione.
     ```
@@ -81,7 +81,7 @@ La seguente immagine mostra in che modo l'applicazione webserver sarà esposta a
     ```
     {: screen}
 
-3. Per esporre l'applicazione a internet pubblico, crea un file di configurazione del servizio LoadBalancer denominato `webserver.yaml` in un editor di testo.
+3. Per esporre l'applicazione a Internet pubblico, crea un file di configurazione del servizio del programma di bilanciamento del carico denominato `webserver-lb.yaml` in un editor di testo.
     ```
     apiVersion: v1
     kind: Service
@@ -89,7 +89,6 @@ La seguente immagine mostra in che modo l'applicazione webserver sarà esposta a
       labels:
         run: webserver
       name: webserver-lb
-      namespace: pr-firm
     spec:
       externalTrafficPolicy: Cluster
       ports:
@@ -103,15 +102,15 @@ La seguente immagine mostra in che modo l'applicazione webserver sarà esposta a
     ```
     {: codeblock}
 
-4. Distribuisci il LoadBalancer.
+4. Distribuisci il programma di bilanciamento del carico.
     ```
     kubectl apply -f filepath/webserver-lb.yaml
     ```
     {: pre}
 
-5. Verifica che puoi accedere pubblicamente all'applicazione esposta dal LoadBalancer dal tuo computer.
+5. Verifica di poter accedere pubblicamente all'applicazione esposta dal programma di bilanciamento del carico dal tuo computer.
 
-    1. Ottieni l'indirizzo **EXTERNAL-IP** pubblico del LoadBalancer.
+    1. Ottieni l'indirizzo **EXTERNAL-IP** pubblico del programma di bilanciamento del carico.
         ```
         kubectl get svc -o wide
         ```
@@ -124,15 +123,15 @@ La seguente immagine mostra in che modo l'applicazione webserver sarà esposta a
         ```
         {: screen}
 
-    2. Crea un file di testo di scheda di riferimento e copia in esso l'IP del LoadBalancer. La scheda di riferimento ti aiuterà a usare più rapidamente i valori nelle lezioni successive.
+    2. Crea un file di testo di scheda di riferimento e copia in esso l'IP del programma di bilanciamento del carico. La scheda di riferimento ti aiuterà a usare più rapidamente i valori nelle lezioni successive.
 
-    3. Verifica che puoi accedere pubblicamente all'IP esterno per il LoadBalancer.
+    3. Verifica di poter accedere pubblicamente all'IP esterno per il programma di bilanciamento del carico.
         ```
         curl --connect-timeout 10 <loadbalancer_IP>:80
         ```
         {: pre}
 
-        Il seguente output di esempio conferma che il LoadBalancer espone la tua applicazione sull'indirizzo IP del LoadBalancer pubblico `169.1.1.1`. Il pod dell'applicazione `webserver-855556f688-76rkp` ha ricevuto la richiesta curl:
+        Il seguente output di esempio conferma che il programma di bilanciamento del carico espone la tua applicazione sull'indirizzo IP del programma di bilanciamento del carico pubblico `169.1.1.1`. Il pod dell'applicazione `webserver-855556f688-76rkp` ha ricevuto la richiesta curl:
         ```
         Hostname: webserver-855556f688-76rkp
         Pod Information:
@@ -156,15 +155,15 @@ La seguente immagine mostra in che modo l'applicazione webserver sarà esposta a
         ```
         {: screen}
 
-6. Verifica che puoi accedere pubblicamente all'applicazione esposta dalla NodePort dal tuo computer. Un servizio LoadBalancer rende la tua applicazione disponibile sia sull'indirizzo IP del servizio LoadBalancer che sulle NodePort dei nodi di lavoro.
+6. Verifica di poter accedere pubblicamente all'applicazione esposta dalla porta del nodo dal tuo computer. Un servizio del programma di bilanciamento del carico rende la tua applicazione disponibile sia sull'indirizzo IP del servizio del programma di bilanciamento del carico che sulle porte del nodo dei nodi di lavoro.
 
-    1. Ottieni la NodePort che il LoadBalancer ha assegnato ai nodi di lavoro. La NodePort è compresa nell'intervallo 30000 - 32767.
+    1. Ottieni la porta del nodo che il programma di bilanciamento del carico ha assegnato ai nodi di lavoro. La porta del nodo è compresa nell'intervallo 30000 - 32767.
         ```
         kubectl get svc -o wide
         ```
         {: pre}
 
-        Nel seguente output di esempio, la NodePort è `31024`:
+        Nel seguente output di esempio, la porta del nodo è `31024`:
         ```
         NAME           CLUSTER-IP       EXTERNAL-IP        PORT(S)        AGE       SELECTOR
         webserver-lb   172.21.xxx.xxx   169.xx.xxx.xxx     80:31024/TCP   2m        run=webserver
@@ -180,21 +179,21 @@ La seguente immagine mostra in che modo l'applicazione webserver sarà esposta a
         Output di esempio:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
         ```
         {: screen}
 
-    3. Copia l'IP pubblico del nodo di lavoro e la NodePort nella tua scheda di riferimento testuale per un utilizzo nelle lezioni successive.
+    3. Copia l'IP pubblico del nodo di lavoro e la porta del nodo nella tua scheda di riferimento testuale per un utilizzo nelle lezioni successive.
 
-    4. Verifica che puoi accedere all'indirizzo IP pubblico del nodo di lavoro tramite la NodePort.
+    4. Verifica di poter accedere all'indirizzo IP pubblico del nodo di lavoro tramite la porta del nodo.
         ```
         curl  --connect-timeout 10 <worker_IP>:<NodePort>
         ```
         {: pre}
 
-        Il seguente output di esempio conferma che la richiesta alla tua applicazione è arrivata tramite l'indirizzo IP privato `10.1.1.1` per il nodo di lavoro e la NodePort `31024`. Il pod dell'applicazione `webserver-855556f688-xd849` ha ricevuto la richiesta curl:
+        Il seguente output di esempio conferma che la richiesta alla tua applicazione è arrivata tramite l'indirizzo IP privato `10.1.1.1` per il nodo di lavoro e la porta del nodo `31024`. Il pod dell'applicazione `webserver-855556f688-xd849` ha ricevuto la richiesta curl:
         ```
         Hostname: webserver-855556f688-xd849
         Pod Information:
@@ -218,18 +217,18 @@ La seguente immagine mostra in che modo l'applicazione webserver sarà esposta a
         ```
         {: screen}
 
-A questo punto, la tua applicazione è esposta a molteplici indirizzi IP e porte. La maggior parte di questi IP è interna al cluster ed è possibile accedervi solo sulla rete privata. Solo la NodePort pubblica e la porta del LoadBalancer pubblica sono esposte a internet pubblico.
+A questo punto, la tua applicazione è esposta a molteplici indirizzi IP e porte. La maggior parte di questi IP è interna al cluster ed è possibile accedervi solo sulla rete privata. Solo la porta del nodo pubblico e la porta del programma di bilanciamento del carico pubblico sono esposte all'Internet pubblico.
 
 Puoi quindi iniziare a creare ed applicare politiche Calico per bloccare il traffico pubblico.
 
-## Lezione 2: Blocco di tutto il traffico in arrivo verso tutte le NodePort
+## Lezione 2: Blocca tutto il traffico in entrata verso tutte le porte del nodo
 {: #lesson2}
 
-Per proteggere il cluster dell'agenzia di PR, devi bloccare l'accesso pubblico sia al servizio LoadBalancer che alle NodePort che stanno esponendo la tua applicazione. Inizia bloccando l'accesso alle NodePort. La seguente immagine mostra come verrà consentito il traffico al LoadBalancer ma non alle NodePort alla fine della Lezione 2:
+Per proteggere il cluster dell'agenzia di PR, devi bloccare l'accesso pubblico sia al servizio del programma di bilanciamento del carico che alle porte del nodo che stanno esponendo la tua applicazione. Inizia bloccando l'accesso alle porte del nodo. La seguente immagine mostra come verrà consentito il traffico al programma di bilanciamento del carico ma non alle porte del nodo alla fine della Lezione 2:
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="Alla fine della Lezione 2, l'applicazione webserver è esposta a Internet solo dal LoadBalancer pubblico." style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="Alla fine della Lezione 2, l'applicazione webserver è esposta a Internet solo dal programma di bilanciamento del carico pubblico." style="width:450px; border-style: none"/>
 
-1. In un editor di testo, crea una politica pre-DNAT di ordine superiore denominata `deny-nodeports.yaml` per negare il traffico TCP e UDP in entrata d qualsiasi IP di origine a tutte le NodePort.
+1. In un editor di testo, crea una politica pre-DNAT di ordine superiore denominata `deny-nodeports.yaml` per negare il traffico TCP e UDP in entrata da qualsiasi IP di origine a tutte le porte del nodo.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -278,25 +277,25 @@ Per proteggere il cluster dell'agenzia di PR, devi bloccare l'accesso pubblico s
   ```
   {: screen}
 
-3. Utilizzando il valori dalla tua scheda di riferimento, verifica che non puoi accedere pubblicamente alla NodePort e all'indirizzo IP pubblico del nodo di lavoro.
+3. Utilizzando i valori dalla tua scheda di riferimento, verifica di non poter accedere pubblicamente alla porta del nodo e all'indirizzo IP pubblico del nodo di lavoro.
     ```
     curl  --connect-timeout 10 <worker_IP>:<NodePort>
     ```
     {: pre}
 
-    La connessione va in timeout perché la politica Calico da te creata sta bloccando il traffico alle NodePort.
+    La connessione va in timeout perché la politica Calico da te creata sta bloccando il traffico alle porte del nodo.
     ```
     curl: (28) Connection timed out after 10016 milliseconds
     ```
     {: screen}
 
-4. Modifica la externalTrafficPolicy del LoadBalancer che hai creato nella lezione precedente da `Cluster` a `Local`. `Local` garantisce che l'IP di origine del tuo sistema venga preservato quando esegui il curl dell'IP esterno del LoadBalancer nel passo successivo.
+4. Modifica la externalTrafficPolicy del programma di bilanciamento del carico che hai creato nella lezione precedente da `Cluster` in `Local`. `Local` garantisce che l'IP di origine del tuo sistema venga preservato quando esegui il curl dell'IP esterno del programma di bilanciamento del carico nel passo successivo.
     ```
     kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
-5. Utilizzando il valore dalla tua scheda di riferimento, verifica che puoi ancora accedere pubblicamente all'indirizzo IP esterno del LoadBalancer.
+5. Utilizzando il valore dalla tua scheda di riferimento, verifica di potere ancora accedere pubblicamente all'indirizzo IP esterno del programma di bilanciamento del carico.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -325,24 +324,24 @@ Per proteggere il cluster dell'agenzia di PR, devi bloccare l'accesso pubblico s
         -no body in request-
     ```
     {: screen}
-    Nella sezione `Request Information` dell'output, nota che l'indirizzo IP di origine è, ad esempio, `client_address=1.1.1.1`. L'indirizzo IP di origine è l'IP pubblico del sistema che stai utilizzando per eseguire curl. Altrimenti, se ti stai collegando a internet tramite un proxy o una VPN, è possibile che questi ultimi stiano oscurando l'indirizzo IP effettivo del tuo sistema. In entrambi i casi, il LoadBalancer vede l'indirizzo IP di origine del tuo sistema come l'indirizzo IP del client.
+    Nella sezione `Request Information` dell'output, nota che l'indirizzo IP di origine è, ad esempio, `client_address=1.1.1.1`. L'indirizzo IP di origine è l'IP pubblico del sistema che stai utilizzando per eseguire curl. Altrimenti, se ti stai collegando a Internet tramite un proxy o una VPN, è possibile che questi ultimi stiano oscurando l'indirizzo IP effettivo del tuo sistema. In entrambi i casi, il programma di bilanciamento del carico vede l'indirizzo IP di origine del tuo sistema come indirizzo IP del client.
 
 6. Copia l'indirizzo IP di origine del sistema (`client_address=1.1.1.1` nell'output del passo precedente) nella tua scheda di riferimento per utilizzarlo nelle lezioni successive.
 
-Ottimo! A questo punto la tua applicazione è esposta a internet pubblico solo dalla porta del LoadBalancer pubblica. Il traffico alle NodePort pubbliche è bloccato. Hai parzialmente bloccato il tuo cluster al traffico indesiderato.
+Ottimo! A questo punto la tua applicazione è esposta all'Internet pubblico solo dalla porta del programma di bilanciamento del carico pubblico. Il traffico alle porte del nodo pubblico è bloccato. Hai parzialmente bloccato il tuo cluster al traffico indesiderato.
 
 Ora puoi creare e applicare le politiche Calico per inserire in whitelist il traffico da specifici IP di origine.
 
-## Lezione 3: Consenti il traffico in entrata da un IP inserito in whitelist al LoadBalancer
+## Lezione 3: Consenti il traffico in entrata da un IP inserito in whitelist al programma di bilanciamento del carico
 {: #lesson3}
 
 Ora decidi di bloccare completamente il traffico al cluster dell'agenzia di PR e di testare l'accesso inserendo in whitelist solo l'indirizzo IP del tuo computer.
 {: shortdesc}
 
-Per prima cosa, oltre alle NodePort, devi bloccare tutto il traffico in entrata al LoadBalancer che espone l'applicazione. Puoi quindi creare una politica che inserisce in whitelist l'indirizzo IP del tuo sistema. Alla fine della Lezione 3, tutto il traffico alle NodePort pubbliche e al LoadBalancer sarà bloccato e sarà consentito solo il traffico dal tuo IP di sistema inserito in whitelist.
-<img src="images/cs_tutorial_policies_L3.png" width="600" alt="L'applicazione webserver è esposta dal LoadBalancer pubblico solo all'IP del tuo sistema" style="width:600px; border-style: none"/>
+Per prima cosa, oltre alle NodePort, devi bloccare tutto il traffico in entrata al programma di bilanciamento del carico che espone l'applicazione. Puoi quindi creare una politica che inserisce in whitelist l'indirizzo IP del tuo sistema. Alla fine della Lezione 3, tutto il traffico alle porte del nodo pubblico e al programma di bilanciamento del carico sarà bloccato e sarà consentito solo il traffico dal tuo IP di sistema inserito in whitelist.
+<img src="images/cs_tutorial_policies_L3.png" width="600" alt="L'applicazione webserver è esposta dal programma di bilanciamento del carico pubblico solo all'IP del tuo sistema." style="width:600px; border-style: none"/>
 
-1. In un editor di testo, crea una politica pre-DNAT di ordine superiore denominata `deny-lb-port-80.yaml` per negare tutto il traffico TCP e UDP da qualsiasi IP di origine all'indirizzo IP e alla porta del LoadBalancer. Sostituisci `<loadbalancer_IP>` con l'indirizzo IP pubblico del LoadBalancer dalla tua scheda di riferimento.
+1. In un editor di testo, crea una politica pre-DNAT di ordine superiore denominata `deny-lb-port-80.yaml` per negare tutto il traffico TCP e UDP in entrata da qualsiasi IP di origine all'indirizzo IP e alla porta del programma di bilanciamento del carico. Sostituisci `<loadbalancer_IP>` con l'indirizzo IP pubblico del programma di bilanciamento del carico dalla tua scheda di riferimento.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -390,13 +389,13 @@ Per prima cosa, oltre alle NodePort, devi bloccare tutto il traffico in entrata 
       ```
       {: pre}
 
-3. Utilizzando il valore dalla tua scheda di riferimento, verifica che ora non puoi accedere all'indirizzo IP del LoadBalancer pubblico. La connessione va in timeout perché la politica Calico da te creata sta bloccando il traffico al LoadBalancer.
+3. Utilizzando il valore dalla tua scheda di riferimento, verifica che ora non puoi accedere all'indirizzo IP del programma di bilanciamento del carico pubblico. La connessione va in timeout perché la politica Calico da te creata sta bloccando il traffico al programma di bilanciamento del carico.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
-4. In un editor di testo, crea una politica pre-DNAT di ordine inferiore denominata `whitelist.yaml` per consentire il traffico dall'IP del tuo sistema all'indirizzo IP e alla porta del LoadBalancer. Utilizzando i valori dalla tua scheda di riferimento, sostituisci `<loadbalancer_IP>` con l'indirizzo IP pubblico del LoadBalancer e `<client_address>` con l'indirizzo IP pubblico dell'IP di origine del tuo sistema.
+4. In un editor di testo, crea una politica pre-DNAT di ordine inferiore denominata `whitelist.yaml` per consentire il traffico dall'IP del tuo sistema all'indirizzo IP e alla porta del programma di bilanciamento del carico. Utilizzando i valori dalla tua scheda di riferimento, sostituisci `<loadbalancer_IP>` con l'indirizzo IP pubblico del programma di bilanciamento del carico e `<client_address>` con l'indirizzo IP pubblico dell'IP di origine del tuo sistema.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -439,28 +438,28 @@ Per prima cosa, oltre alle NodePort, devi bloccare tutto il traffico in entrata 
       {: pre}
   L'indirizzo IP del tuo sistema è ora inserito nella whitelist.
 
-6. Utilizzando il valore dalla tua scheda di riferimento, verifica che ora puoi accedere all'indirizzo IP del LoadBalancer pubblico.
+6. Utilizzando il valore dalla tua scheda di riferimento, verifica che ora puoi accedere all'indirizzo IP del programma di bilanciamento del carico pubblico.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
-7. Se hai accesso a un altro sistema che ha un indirizzo IP differente, prova ad accedere al LoadBalancer da tale sistema.
+7. Se hai accesso a un altro sistema che ha un indirizzo IP differente, prova ad accedere al programma di bilanciamento del carico da tale sistema.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
     La connessione va in timeout perché l'indirizzo IP del sistema non è inserita nella whitelist.
 
-A questo punto, tutto il traffico alle NodePort pubbliche e al LoadBalancer è bloccato. È consentito solo il traffico dal tuo IP di sistema inserito nella whitelist.
+A questo punto, tutto il traffico alle porte del nodo pubblico e al programma di bilanciamento del carico è bloccato. È consentito solo il traffico dal tuo IP di sistema inserito nella whitelist.
 
-## Lezione 4: Negare il traffico in entrata da IP inseriti nella blacklist al LoadBalancer
+## Lezione 4: Nega il traffico in entrata da IP inseriti nella blacklist al programma di bilanciamento del carico
 {: #lesson4}
 
 Nella lezione precedente, hai bloccato tutto il traffico e inserito nella whitelist solo alcuni IP. Tale scenario funziona bene per scopi di test quando vuoi limitare l'accesso solo a pochi indirizzi IP di origine controllati. Tuttavia, l'agenzia di PR ha delle applicazioni che devono essere ampiamente disponibili per il pubblico. Devi assicurarti che sia consentito tutto il traffico, fatta eccezione per il traffico insolito che vedi da qualche indirizzo IP. L'inserimento in blacklist è utile in uno scenario come questo perché può aiutare ad evitare un attacco da un piccolo insieme di indirizzi IP,
 
-In questa lezione, farai un test dell'inserimento in blacklist bloccando il traffico dall'indirizzo IP di origine del tuo sistema. Alla fine della Lezione 4, tutto il traffico alle NodePort pubbliche sarà bloccato e tutto il traffico al LoadBalancer pubblico sarà consentito. Sarà bloccato solo il traffico dal tuo IP di sistema inserito nella blacklist al LoadBalancer.
-<img src="images/cs_tutorial_policies_L4.png" width="600" alt="L'applicazione webserver è esposta dal LoadBalancer pubblico a internet. Solo il traffico dal tuo IP di sistema è bloccato." style="width:600px; border-style: none"/>
+In questa lezione, farai un test dell'inserimento in blacklist bloccando il traffico dall'indirizzo IP di origine del tuo sistema. Alla fine della Lezione 4, tutto il traffico alle porte del nodo pubblico sarà bloccato e tutto il traffico al programma di bilanciamento del carico pubblico sarà consentito. Sarà bloccato solo il traffico dal tuo IP di sistema inserito nella blacklist al programma di bilanciamento del carico:
+<img src="images/cs_tutorial_policies_L4.png" width="600" alt="L'applicazione webserver è esposta dal programma di bilanciamento del carico pubblico a Internet. Solo il traffico dal tuo IP di sistema è bloccato." style="width:600px; border-style: none"/>
 
 1. Elimina le politiche di whitelist che hai creato nella lezione precedente.
     - Linux:
@@ -483,9 +482,9 @@ In questa lezione, farai un test dell'inserimento in blacklist bloccando il traf
       ```
       {: pre}
 
-    Ora tutto il traffico TCP e UDP in entrata da qualsiasi IP di origine all'indirizzo IP e alla porta del LoadBalancer è nuovamente consentito.
+    Ora tutto il traffico TCP e UDP in entrata da qualsiasi IP di origine all'indirizzo IP e alla porta del programma di bilanciamento del carico è nuovamente consentito.
 
-2. Per negare tutto il traffico TCP e UDP in entrata dall'indirizzo IP di origine del tuo sistema all'indirizzo IP e alla porta del LoadBalancer, crea una politica pre-DNAT di ordine inferiore denominata `deny-lb-port-80.yaml` in un editor di testo. Utilizzando i valori dalla tua scheda di riferimento, sostituisci `<loadbalancer_IP>` con l'indirizzo IP pubblico del LoadBalancer e `<client_address>` con l'indirizzo IP pubblico dell'IP di origine del tuo sistema.
+2. Per negare tutto il traffico TCP e UDP in entrata dall'indirizzo IP di origine del tuo sistema all'indirizzo IP e alla porta del programma di bilanciamento del carico, crea una politica pre-DNAT di ordine inferiore denominata `deny-lb-port-80.yaml` in un editor di testo. Utilizzando i valori dalla tua scheda di riferimento, sostituisci `<loadbalancer_IP>` con l'indirizzo IP pubblico del programma di bilanciamento del carico e `<client_address>` con l'indirizzo IP pubblico dell'IP di origine del tuo sistema.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -538,12 +537,12 @@ In questa lezione, farai un test dell'inserimento in blacklist bloccando il traf
       {: pre}
   L'indirizzo IP del tuo sistema è ora inserito nella blacklist.
 
-4. Utilizzando il valore dalla tua scheda di riferimento, verifica dal tuo sistema che non puoi accedere all'IP LoadBalancer perché l'IP del tuo sistema è stato inserito nella blacklist.
+4. Utilizzando il valore dalla tua scheda di riferimento, verifica dal tuo sistema che non puoi accedere all'IP del programma di bilanciamento del carico perché l'IP del tuo sistema è stato inserito nella blacklist.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
-    A questo punto, tutto il traffico alle NodePort pubbliche è bloccato e tutto il traffico al LoadBalancer pubblico è consentito. Solo il traffico dall'IP di sistema inserito nella blacklist al LoadBalancer è bloccato.
+    A questo punto, tutto il traffico alle porte del nodo pubblico è bloccato e tutto il traffico al programma di bilanciamento del carico pubblico è consentito. Viene bloccato solo il traffico dal tuo IP di sistema inserito nella blacklist al programma di bilanciamento del carico.
 
 5. Per ripulire questa politica di blacklist:
 

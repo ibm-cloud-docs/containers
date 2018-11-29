@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -78,7 +78,7 @@ Klicken Sie auf eine der folgenden Konfigurationen, um den Vernetzung Ihres Clus
 **Warum sollte ich diese Konfiguration verwenden?**
 
 * Sie verfügen über eine App, die für das öffentliche Internet in einem Einzelzonencluster zugänglich sein muss.
-* Sie verfügen über eine App, die für das öffentliche Internet in einem Mehrzonencluster zugänglich sein muss. Da Sie [VLAN-Spanning](cs_subnets.html#subnet-routing) aktivieren müssen, um einen Mehrzonencluster zu erstellen, kann der Cluster mit anderen Systemen kommunizieren, die mit einem beliebigen privaten VLAN in demselben IBM Cloud-Konto verbunden sind. **Hinweis**: Verwenden Sie [Calico-Netzrichtlinien](cs_network_policy.html#isolate_workers), um Ihren Mehrzonencluster im privaten Netz zu isolieren. 
+* Sie verfügen über eine App, die für das öffentliche Internet in einem Mehrzonencluster zugänglich sein muss. Da Sie [VLAN-Spanning](cs_subnets.html#subnet-routing) aktivieren müssen, um einen Mehrzonencluster zu erstellen, kann der Cluster mit anderen Systemen kommunizieren, die mit einem beliebigen privaten VLAN in demselben IBM Cloud-Konto verbunden sind. **Hinweis**: Verwenden Sie [Calico-Netzrichtlinien](cs_network_policy.html#isolate_workers), um Ihren Mehrzonencluster im privaten Netz zu isolieren.
 
 **Welche Optionen habe ich für die Verwaltung des öffentlichen und privaten Zugriffs auf meinen Cluster?**
 </br>In den folgenden Abschnitten werden die Funktionen von {{site.data.keyword.containerlong_notm}} beschrieben, mit denen Sie den Netzbetrieb für Cluster einrichten können, die mit einem öffentlichen und einem privaten VLAN verbunden sind.
@@ -123,7 +123,7 @@ Um eine sichere Verbindung Ihrer Workerknoten und Apps zu einem lokalen Netz her
 **Warum sollte ich diese Konfiguration verwenden?**
 
 * Sie verfügen über eine App in einem Einzelzonencluster. Sie möchten die App nur für Pods innerhalb des Clusters oder in anderen Clustern, die mit demselben privaten VLAN verbunden sind, zugänglich machen.
-* Sie verfügen über eine App in einem Mehrzonencluster. Sie möchten die App nur für Pods innerhalb des Clusters oder in anderen Clustern, die mit denselben privaten VLANs wie Ihr Cluster verbunden sind, zugänglich machen. 
+* Sie verfügen über eine App in einem Mehrzonencluster. Sie möchten die App nur für Pods innerhalb des Clusters oder in anderen Clustern, die mit denselben privaten VLANs wie Ihr Cluster verbunden sind, zugänglich machen. Da [VLAN-Spanning](cs_subnets.html#subnet-routing) für Mehrzonencluster jedoch aktiviert sein muss, kann von anderen Systemen, die mit einem privaten VLAN in demselben IBM Cloud-Konto verbunden sind, auf den Cluster zugegriffen werden. Es ist sinnvoll, den Mehrzonencluster von anderen Systemen zu isolieren.
 
 **Welche Optionen habe ich für die Verwaltung des öffentlichen und privaten Zugriffs auf meinen Cluster?**</br>In den folgenden Abschnitten werden die Funktionen von {{site.data.keyword.containerlong_notm}} beschrieben, mit denen Sie ausschließlich private Netze einrichten und öffentliche Netze für Cluster sperren können, die mit einem öffentlichen und einem privaten VLAN verbunden sind.
 
@@ -203,7 +203,7 @@ Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Be
 
 Um Ihre App nur über ein privates Netz zugänglich zu machen, können Sie private NodePort-, LoadBalancer- oder Ingress-Services verwenden. Da Ihre Workerknoten nicht mit einem öffentlichen VLAN verbunden sind, wird kein öffentlicher Datenverkehr an diese Services weitergeleitet. Sie müssen außerdem [die erforderlichen Ports und IP-Adressen für die einzelnen Regionen öffnen](cs_firewall.html#firewall_inbound), um den eingehenden Datenverkehr für diese Services zuzulassen.
 
-Weitere Informationen zu den einzelnen Services finden Sie unter [ NodePort-, LoadBalancer- oder Ingress-Service auswählen](cs_network_planning.html#external).
+Weitere Informationen zu den einzelnen Services finden Sie unter [NodePort-Service, Service für die Lastausgleichsfunktion oder Ingress-Service auswählen](cs_network_planning.html#external).
 
 ### Optional: Verbindung zu einer lokalen Datenbank mithilfe der Gateway-Appliance herstellen
 {: #private_vlan_vpn}

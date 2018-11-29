@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -28,7 +28,10 @@ Mentre utilizzi {{site.data.keyword.containerlong}}, valuta le seguenti tecniche
 
 Hai esposto pubblicamente la tua applicazione creando una risorsa Ingress per la tua applicazione nel tuo cluster. Tuttavia, quando provi a connettere la tua applicazione tramite il dominio secondario o l'indirizzo IP pubblico di ALB, la connessione non riesce o va in timeout. La procedura nelle seguenti sezioni può aiutarti ad eseguire il debug della tua impostazione Ingress.
 
-## Passo 1: Controllo della presenza di messaggi di errore nei log dei pod ALB o delle risorse Ingress
+Assicurati di definire un host in una sola risorsa Ingress. Se un host è definito in più risorse Ingress, l'ALB potrebbe non inoltrare correttamente il traffico e potresti riscontrare degli errori.
+{: tip}
+
+## Passo 1: controllo dei messaggi di errore nella distribuzione Ingress e nei log dei pod ALB
 {: #errors}
 
 Inizia controllando l'eventuale presenza di messaggi di errore negli eventi di distribuzione di risorse Ingress o nei log dei pod ALB. Questi messaggi di errore ti possono aiutare a trovare le cause principali dei malfunzionamenti e di eseguire un ulteriore debug della tua impostazione di Ingress nelle sezioni successive.
@@ -40,7 +43,7 @@ Inizia controllando l'eventuale presenza di messaggi di errore negli eventi di d
     ```
     {: pre}
 
-    Nella sezione **Events** dell'output, potresti vedere dei messaggi di avvertenza relativi a valori non validi nella tua risorsa Ingress o in specifiche annotazioni che hai utilizzato. Controlla la [documentazione relativa alla configurazione delle risorse Ingress](cs_ingress.html#public_inside_3) oppure la [documentazione relativa alle annotazioni](cs_annotations.html).
+    Nella sezione **Events** dell'output, potresti vedere dei messaggi di avvertenza relativi a valori non validi nella tua risorsa Ingress o in specifiche annotazioni che hai utilizzato. Controlla la [documentazione relativa alla configurazione delle risorse Ingress](cs_ingress.html#public_inside_4) oppure la [documentazione relativa alle annotazioni](cs_annotations.html).
 
     ```
     Name:             myingress
@@ -142,17 +145,17 @@ Controlla la disponibilità del tuo dominio secondario Ingress e degli indirizzi
 
     * Solo cluster multizona: puoi utilizzare il controllo dell'integrità MZLB per determinare lo stato dei tuoi IP ALB. Per ulteriori informazioni sull'MZLB, vedi [Programma di bilanciamento del carico multizona (o MZLB, multizone load balancer)](cs_ingress.html#planning). **Nota**: il controllo dell'integrità MZLB è disponibile solo per i cluster che hanno il nuovo dominio secondario Ingress nel formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Se il tuo cluster utilizza ancora il formato meno recente di `<cluster_name>.<region>.containers.mybluemix.net`, [converti il tuo cluster a zona singola in multizona](cs_clusters.html#add_zone). Al tuo cluster viene assegnato un dominio secondario con il nuovo formato ma può anche continuare a utilizzare il formato di dominio secondario meno recente. In alternativa, puoi ordinare un nuovo cluster a cui viene automaticamente assegnato il nuovo formato di dominio secondario.
     Il seguente comando HTTP cURL utilizza l'host `albhealth`, che è configurato da {{site.data.keyword.containerlong_notm}} per restituire lo stato `healthy` o `unhealthy` per un IP ALB.
-            ```
-            curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
-            ```
-            {: pre}
+        ```
+        curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+        ```
+        {: pre}
 
-            Output di esempio:
-            ```
-            healthy
-            ```
-            {: screen}
-            Se uno o più degli IP restituiscono `unhealthy`, [controlla lo stato dei tuoi pod ALB](#check_pods).
+        Output di esempio:
+        ```
+        healthy
+        ```
+        {: screen}
+        Se uno o più degli IP restituiscono `unhealthy`, [controlla lo stato dei tuoi pod ALB](#check_pods).
 
 3. Ottieni il dominio secondario Ingress fornito da IBM.
     ```
@@ -218,11 +221,13 @@ Controlla la disponibilità del tuo dominio secondario Ingress e degli indirizzi
     ```
     {: pre}
 
-    1. Controlla che il dominio secondario e il certificato TLS siano corretti. Per trovare il dominio secondario Ingress fornito da IBM e il certificato TLS, esegui `ibmcloud ks cluster-get <cluster_name_or_ID>`.
+    1. Assicurati di definire un host in una sola risorsa Ingress. Se un host è definito in più risorse Ingress, l'ALB potrebbe non inoltrare correttamente il traffico e potresti riscontrare degli errori.
 
-    2.  Assicurati che la tua applicazione sia in ascolto sullo stesso percorso configurato nella sezione **percorso** del tuo Ingress. Se la tua applicazione è configurata per essere in ascolto sul percorso root, utilizza `/` come percorso. Se il traffico in entrata a questo percorso deve essere instradato a un percorso differente su cui la tua applicazione è in ascolto, utilizza l'annotazione di [percorsi di riscrittura](cs_annotations.html#rewrite-path).
+    2. Controlla che il dominio secondario e il certificato TLS siano corretti. Per trovare il dominio secondario Ingress fornito da IBM e il certificato TLS, esegui `ibmcloud ks cluster-get <cluster_name_or_ID>`.
 
-    3. Modifica il tuo YAML di configurazione delle risorse come necessario. Quando chiudi l'editor, le tue modifiche vengono salvate e applicate automaticamente.
+    3.  Assicurati che la tua applicazione sia in ascolto sullo stesso percorso configurato nella sezione **percorso** del tuo Ingress. Se la tua applicazione è configurata per essere in ascolto sul percorso root, utilizza `/` come percorso. Se il traffico in entrata a questo percorso deve essere instradato a un percorso differente su cui la tua applicazione è in ascolto, utilizza l'annotazione di [percorsi di riscrittura](cs_annotations.html#rewrite-path).
+
+    4. Modifica il tuo YAML di configurazione delle risorse come necessario. Quando chiudi l'editor, le tue modifiche vengono salvate e applicate automaticamente.
         ```
         kubectl edit ingress <myingressresource>
         ```
@@ -233,7 +238,7 @@ Controlla la disponibilità del tuo dominio secondario Ingress e degli indirizzi
 
 Se non puoi accedere alla tua applicazione tramite uno specifico IP ALB, puoi rimuovere temporaneamente l'ALB dalla produzione disabilitandone la registrazione DNS. Puoi quindi utilizzare l'indirizzo IP dell'ALB per eseguire i test di debug su detto ALB.
 
-Supponiamo ad esempio che hai un cluster multizona in 2 zone e 2 ALB pubblici hanno gli indirizzi IP `169.46.52.222` e `169.62.196.238`. Anche se il controllo dell'integrità sta restituendo uno stato di integro per l'ALB della seconda zona, la tua applicazione non è raggiungibile direttamente per suo tramite. Decidi di rimuovere l'indirizzo IP di tale ALB, `169.62.196.238`, dalla produzione per l'esecuzione del debug.l'IP ALB della prima zona, `169.46.52.222`, viene registrato presso il tuo dominio e continua a instradare il traffico mentre tu esegui il debug dell'ALB della seconda zona.
+Supponiamo ad esempio che hai un cluster multizona in 2 zone e 2 ALB pubblici hanno gli indirizzi IP `169.46.52.222` e `169.62.196.238`. Anche se il controllo dell'integrità sta restituendo uno stato di integro per l'ALB della seconda zona, la tua applicazione non è raggiungibile direttamente per suo tramite. Decidi di rimuovere l'indirizzo IP di tale ALB, `169.62.196.238`, dalla produzione per l'esecuzione del debug. l'IP ALB della prima zona, `169.46.52.222`, viene registrato presso il tuo dominio e continua a instradare il traffico mentre tu esegui il debug dell'ALB della seconda zona.
 
 1. Ottieni il nome dell'ALB con l'indirizzo IP irraggiungibile.
     ```
@@ -338,7 +343,7 @@ Supponiamo ad esempio che hai un cluster multizona in 2 zone e 2 ALB pubblici ha
     {: pre}
 
     * Se tutto è configurato correttamente, ottieni la risposta prevista dalla tua applicazione.
-    * Se in risposta ottieni un errore, ci potrebbe essere un errore nella tua applicazione oppure in una configurazione che si applica solo a questo specifico ALB. Controlla il tuo codice dell'applicazione, i tuoi [file di configurazione delle risorse Ingress](cs_ingress.html#public_inside_3) o qualsiasi altra configurazione che hai applicato solo a questo ALB.
+    * Se in risposta ottieni un errore, ci potrebbe essere un errore nella tua applicazione oppure in una configurazione che si applica solo a questo specifico ALB. Controlla il tuo codice dell'applicazione, i tuoi [file di configurazione delle risorse Ingress](cs_ingress.html#public_inside_4) o qualsiasi altra configurazione che hai applicato solo a questo ALB.
 
 7. Dopo aver terminato il debug, ripristina il controllo dell'integrità sui pod ALB. Ripeti questa procedura per ciascun pod ALB.
   1. Accedi al pod ALB e rimuovi `#` dal `server_name`.

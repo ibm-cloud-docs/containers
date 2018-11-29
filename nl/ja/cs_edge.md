@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -25,8 +25,8 @@ lastupdated: "2018-05-24"
 
 これらのワーカー・ノードがネットワーキング専用としてマーク付けされると、他のワークロードはワーカー・ノードの CPU やメモリーを消費してネットワーキングに干渉することがなくなります。
 
-
-
+複数ゾーン・クラスターがあり、エッジ・ワーカー・ノードへのネットワーク・トラフィックを制限する場合は、ロード・バランサーまたは Ingress ポッドの高可用性のために各ゾーンで少なくとも 2 つのエッジ・ワーカー・ノードを使用可能にする必要があります。 クラスター内のすべてのゾーンにかかるエッジ・ノード・ワーカー・プールを作成し、ゾーンごとに少なくとも 2 つのワーカー・ノードがあるようにします。
+{: tip}
 
 ## ワーカー・ノードにエッジ・ノードとしてラベル付けする
 {: #edge_nodes}
@@ -38,39 +38,52 @@ lastupdated: "2018-05-24"
 
 - [標準クラスターを作成します。](cs_clusters.html#clusters_cli)
 - クラスターに 1 つ以上のパブリック VLAN があることを確認してください。 エッジ・ワーカー・ノードは、プライベート VLAN だけがあるクラスターには使用できません。
+- クラスター内のすべてのゾーンにかかる[新しいワーカー・プールを作成](cs_clusters.html#add_pool)し、ゾーンごとに少なく少なくとも 2 つのワーカーがあるようにします。
 - [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。
 
 ワーカー・ノードにエッジ・ノードとしてラベル付けするには、以下のようにします。
 
-1. クラスター内のすべてのワーカー・ノードをリストします。 **NAME** 列からプライベート IP アドレスを使用して、ノードを識別します。 各パブリック VLAN で少なくとも 2 つのワーカー・ノードをエッジ・ワーカー・ノードとして選択します。 Ingress は、高可用性を提供するために、各ゾーンに少なくとも 2 つのワーカー・ノードを必要とします。 
+1. エッジ・ノード・ワーカー・プール内にあるワーカー・ノードをリストします。 **プライベート IP** アドレスを使用して、ノードを識別します。
 
   ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 
 2. `dedicated=edge` により、ワーカー・ノードにラベルを付けます。 `dedicated=edge` によりワーカー・ノードにマークが付けられると、すべての後続の Ingress とロード・バランサーは、エッジ・ワーカー・ノードにデプロイされます。
 
   ```
-  kubectl label nodes <node1_name> <node2_name> dedicated=edge
+  kubectl label nodes <node1_IP> <node2_IP> dedicated=edge
   ```
   {: pre}
 
-3. クラスター内の既存のロード・バランサー・サービスをすべて検索します。
+3. クラスター内の既存のロード・バランサーと Ingress アプリケーション・ロード・バランサー (ALB) をすべて検索します。
 
   ```
-  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  kubectl get services --all-namespaces
   ```
   {: pre}
 
-  出力例:
+  出力から、**TYPE** が **LoadBalancer** になっているサービスを探します。各ロード・バランサー・サービスの **Namespace** と **Name** をメモします。例えば、以下の出力には 3 つのロード・バランサー・サービスがあります。`default` 名前空間内のロード・バランサー `webserver-lb` と、`kube-system` 名前空間内の Ingress ALB `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` と `public-crdf253b6025d64944ab99ed63bb4567b6-alb2` です。
 
   ```
-  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
+  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE
+  default       kubernetes                                       ClusterIP      172.21.0.1       <none>          443/TCP                      1h
+  default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                 10m
+  kube-system   heapster                                         ClusterIP      172.21.101.189   <none>          80/TCP                       1h
+  kube-system   kube-dns                                         ClusterIP      172.21.0.10      <none>          53/UDP,53/TCP                1h
+  kube-system   kubernetes-dashboard                             ClusterIP      172.21.153.239   <none>          443/TCP                      1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP   1h
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP   57m
   ```
   {: screen}
 
-4. 直前のステップからの出力を使用して、それぞれの `kubectl get service` 行をコピーして貼り付けます。 このコマンドは、ロード・バランサーをエッジ・ワーカー・ノードに再デプロイします。 再デプロイする必要があるのは、パブリック・ロード・バランサーだけです。
+4. 直前のステップで得られた出力を使用して、ロード・バランサーと Ingress ALB ごとに以下のコマンドを実行します。このコマンドは、ロード・バランサーや Ingress ALB をエッジ・ワーカー・ノードに再デプロイします。再デプロイする必要があるのは、パブリック・ロード・バランサーまたは ALB だけです。
+
+  ```
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
+  ```
+  {: pre}
 
   出力例:
 
@@ -79,7 +92,7 @@ lastupdated: "2018-05-24"
   ```
   {: screen}
 
-ワーカー・ノードに `dedicated=edge` のラベルを付け、既存のロード・バランサーのすべてと Ingress をエッジ・ワーカー・ノードに再デプロイしました。次に、他の[ワークロードがエッジ・ワーカー・ノード上で実行されないようにして](#edge_workloads)、[ワーカー・ノード上の NodePort へのインバウンド・トラフィックをブロックします](cs_network_policy.html#block_ingress)。
+ワーカー・ノードに `dedicated=edge` のラベルを付け、既存のロード・バランサーのすべてと Ingress をエッジ・ワーカー・ノードに再デプロイしました。 次に、他の[ワークロードがエッジ・ワーカー・ノード上で実行されないようにして](#edge_workloads)、[ワーカー・ノード上の NodePort へのインバウンド・トラフィックをブロックします](cs_network_policy.html#block_ingress)。
 
 <br />
 
@@ -105,6 +118,7 @@ lastupdated: "2018-05-24"
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+  {: pre}
   これで、`dedicated=edge` 耐障害性のあるポッドだけがエッジ・ワーカー・ノードにデプロイされます。
 
-3. [ロード・バランサー・サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。
+3. [ロード・バランサー・サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。 着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。

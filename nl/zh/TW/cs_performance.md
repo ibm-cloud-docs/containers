@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-09-10"
 如果您具有特定的效能最佳化需求，則可以在 {{site.data.keyword.containerlong}} 中變更工作者節點及 Pod 網路名稱空間上的 Linux kernel `sysctl` 參數的預設值。
 {: shortdesc}
 
-會以最佳化核心效能來自動佈建工作者節點，但您可以將自訂 DaemonSet 套用至叢集來變更預設值。DaemonSet 會變更所有現有工作者節點的設定，並將這些設定套用至叢集中所佈建的任何新工作者節點。不影響任何 Pod。
+會以最佳化核心效能來自動佈建工作者節點，但您可以藉由將自訂 Kubernetes `DaemonSet` 物件套用至叢集來變更預設值。DaemonSet 會變更所有現有工作者節點的設定，並將這些設定套用至叢集中所佈建的任何新工作者節點。不影響任何 Pod。
 
 若要將應用程式 Pod 的核心設定最佳化，您可以將 initContainer 插入至每個部署的 `pod/ds/rs/deployment` YAML 中。initContainer 會新增至您要將效能最佳化的 Pod 網路名稱空間中的每一個應用程式部署。
 
@@ -34,9 +34,9 @@ lastupdated: "2018-09-10"
 
 套用 [DaemonSet ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)，以變更工作者節點主機上的核心參數。
 
-**附註**：您必須具有[管理者存取角色](cs_users.html#user-roles)，才能執行特許 initContainer 範例。在起始設定用於部署的容器之後，就會捨棄這些專用權。
+**附註**：您必須具有[管理者存取角色](cs_users.html#access_policies)，才能執行特許 initContainer 範例。在起始設定用於部署的容器之後，就會捨棄這些專用權。
 
-1. 將下列 DaemonSet 儲存在名稱為 `worker-node-kernel-settings.yaml` 的檔案中。在 `spec.template.spec.initContainers` 區段中，新增您要調整的 `sysctl` 參數的欄位和值。此 DaemonSet 範例會變更 `net.core.somaxconn` 和 `net.ipv4.ip_local_port_range` 參數的值。
+1. 將下列 DaemonSet 儲存在名為 `worker-node-kernel-settings.yaml` 的檔案中。在 `spec.template.spec.initContainers` 區段中，新增您要調整的 `sysctl` 參數的欄位和值。此 DaemonSet 範例會變更 `net.core.somaxconn` 和 `net.ipv4.ip_local_port_range` 參數的值。
     ```
     apiVersion: extensions/v1beta1
     kind: DaemonSet
@@ -118,7 +118,7 @@ lastupdated: "2018-09-10"
 如果您有特定的工作負載需求，您可以套用 [initContainer![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 修補程式來變更應用程式 Pod 的核心參數。
 {: shortdesc}
 
-**附註**：您必須具有[管理者存取角色](cs_users.html#user-roles)，才能執行特許 initContainer 範例。在起始設定用於部署的容器之後，就會捨棄這些專用權。
+**附註**：您必須具有[管理者存取角色](cs_users.html#access_policies)，才能執行特許 initContainer 範例。在起始設定用於部署的容器之後，就會捨棄這些專用權。
 
 1. 將下列 initContainer 修補程式儲存在名稱為 `pod-patch.yaml` 的檔案中，並新增您要調整的 `sysctl` 參數的欄位和值。此 initContainer 範例會變更 `net.core.somaxconn` 和 `net.ipv4.ip_local_port_range` 參數的值。
     ```

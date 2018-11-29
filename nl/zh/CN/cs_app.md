@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -24,7 +24,7 @@ lastupdated: "2018-05-24"
 您可以在 {{site.data.keyword.containerlong}} 中使用 Kubernetes 方法来部署容器中的应用程序，并确保这些应用程序始终保持启动并正常运行。例如，可以执行滚动更新以及回滚，而不给用户造成任何停机时间。
 {: shortdesc}
 
-通过单击下图中的某个区域可了解用于部署应用程序的常规步骤。
+通过单击下图中的某个区域可了解用于部署应用程序的常规步骤。要首先了解基础知识吗？请试用[部署应用程序教程](cs_tutorials_apps.html#cs_apps_tutorial)。
 
 <img usemap="#d62e18" border="0" class="image" id="basic_deployment_process" src="images/basic_deployment_process.png" width="780" style="width:780px;" alt="基本部署过程"/>
 <map name="d62e18" id="d62e18">
@@ -34,6 +34,106 @@ lastupdated: "2018-05-24"
 <area href="#cli_dashboard" target="_blank" alt="选项 2：在本地启动 Kubernetes 仪表板，然后运行配置文件。" title="选项 2：在本地启动 Kubernetes 仪表板，然后运行配置文件。" shape="rect" coords="544, 141, 728, 204" />
 </map>
 
+<br />
+
+
+## 计划在集群中运行应用程序
+{: #plan_apps}
+
+确保应用程序已准备好部署到 {{site.data.keyword.containerlong_notm}}。
+{:shortdesc}
+
+### 我可以为自己的应用程序创建什么类型的 Kubernetes 对象？
+{: #object}
+
+准备应用程序 YAML 文件时，您有许多选项可用于提高应用程序的可用性、性能和安全性。例如，您可以不使用单个 pod，而改为使用 Kubernetes 控制器对象来管理工作负载（例如，副本集、作业或守护程序集）。有关 pod 和控制器的更多信息，请查看 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)。用于管理 pod 副本集的部署是应用程序的常见用例。
+
+例如，要部署应用程序 pod，`kind: Deployment` 对象是一个不错的选择，因为使用该对象，可以指定副本集，从而提高 pod 的可用性。
+
+下表描述了您可能会创建不同类型 Kubernetes 工作负载对象的原因。
+
+|Object|描述| 
+| --- | --- |
+|[`pod` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/pod/)|pod 是工作负载的最小可部署单元，可以容纳单个或多个容器。pod 与容器类似，也设计为可一次性使用，通常用于应用程序功能的单元测试。为了避免应用程序发生停机时间，请考虑使用 Kubernetes 控制器（例如，部署）来部署 pod。部署可帮助您管理多个 pod、副本、pod 扩展、应用等。|
+|[`副本集` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)|副本集可确保 pod 的多个副本同时运行，并且如果某个 pod 关闭，会重新安排一个 pod。您可以创建副本集来测试 pod 安排的工作方式，但要管理应用程序更新、应用和扩展，请改为创建部署。|
+|[`部署` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)|部署是一种控制器，用于管理 pod 模板的 pod 或[副本集 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)。您可以不使用部署来创建 pod 或副本集，以测试应用程序功能。对于生产级别的设置，请使用部署来管理应用程序更新、应用和扩展。|
+|[`有状态集` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)|有状态集与部署类似，也是管理 pod 副本集的控制器。但与部署不同的是，有状态集可确保 pod 具有唯一的网络身份，用于在重新安排期间保持相应 pod 的状态不变。如果要在云中运行工作负载，请尝试将应用程序设计为无状态，这样服务实例可实现彼此独立，并且万一发生故障也不会导致服务中断。但是，某些应用程序（例如，数据库）必须是无状态的。对于这些情况，请考虑创建有状态集，并使用[文件](cs_storage_file.html#file_statefulset)存储器、[块](cs_storage_block.html#block_statefulset)存储器或[对象](cs_storage_cos.html#cos_statefulset)存储器作为有状态集的持久性存储器。|
+|[`守护程序集` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)|必须在集群中的每个工作程序节点上运行相同的 pod 时，请使用守护程序集。将工作程序节点添加到集群时，会自动安排守护程序集所管理的 pod。典型用例包括日志收集器（例如，`logstash` 或 `prometheus`），用于从每个工作程序节点收集日志，以提供对集群或应用程序的运行状况的洞察。|
+|[`作业` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)|作业可确保一个或多个 pod 成功运行至完成。您可以使用排队的作业或批处理作业来支持并行处理不同但相关的工作项，例如要呈现的特定数量的帧、要发送的电子邮件以及要转换的文件。要将作业安排为在特定时间运行，请使用[定时作业 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)。|
+{: caption="可以创建的 Kubernetes 工作负载对象的类型。" caption-side="top"}
+
+### 如何向 Kubernetes 应用程序配置添加功能？
+请参阅[在 YAML 文件中指定应用程序需求](#app_yaml)，以获取有关部署中可包含的内容的描述。示例包括：
+* [副本集](#replicaset)
+* [标签](#label)
+* [亲缘关系](#affinity)
+* [映像策略](#image)
+* [端口](#port)
+* [资源请求和限制](#resourcereq)
+* [活性和就绪性探测器](#probe)
+* [服务](#service)，用于在端口上公开应用程序服务
+* [配置映射](#configmap)，用于设置容器环境变量
+* [私钥](#secret)，用于设置容器环境变量
+* [持久性卷](#pv)，安装到容器以用于存储
+
+### 如果我希望 Kubernetes 应用程序配置使用变量该怎么做？如何将这些变量添加到 YAML？
+{: #variables}
+
+要将变量信息添加到部署，而不是将数据硬编码到 YAML 文件中，可以使用 Kubernetes [`配置映射` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) 或[`私钥` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/secret/) 对象。
+
+要使用配置映射或私钥，您需要将其安装到 pod。就在运行 pod 之前，配置映射或私钥会与 pod 组合在一起。您可以跨许多应用程序复用部署规范和映像，但要交换出定制的配置映射和私钥。尤其是私钥可能会在本地节点上占用大量存储空间，因此请相应地进行规划。
+
+这两个资源都会定义键/值对，但这些对将用于不同的情境。
+
+<dl>
+<dt>配置映射</dt>
+<dd>为部署中指定的工作负载提供非敏感配置信息。您可以通过三种主要方式来使用配置映射。<ul><li><strong>文件系统</strong>：可以将整个文件或一组变量安装到 pod。系统将根据文件中设置为该值的键名内容为每个条目创建一个文件。</li>
+<li><strong>环境变量</strong>：动态设置容器规范的环境变量。</li>
+<li><strong>命令行参数</strong>：设置容器规范中使用的命令行参数。</li></ul></dd>
+
+<dt>私钥</dt>
+<dd>为工作负载提供敏感信息，例如以下信息。请注意，集群的其他用户可能有权访问私钥，因此请确保您确定可以与这些用户共享私钥信息。<ul><li><strong>个人可标识信息 (PII)</strong>：将敏感信息（例如，电子邮件地址或者公司合规性或政府法规要求的其他类型的信息）存储在私钥中。</li>
+<li><strong>凭证</strong>：将密码、密钥和令牌等凭证置于私钥中，以减少意外暴露的风险。例如，[绑定服务](cs_integrations.html#adding_cluster)到集群时，凭证会存储在私钥中。</li></ul></dd>
+</dl>
+
+想要使私钥更安全吗？请要求集群管理员在集群中[启用 {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect)，以加密新私钥和现有私钥。
+{: tip}
+
+### 如何将 IBM 服务添加到应用程序（例如 Watson）？
+请参阅[向应用程序添加服务](cs_integrations.html#adding_app)。
+
+### 该如何确保应用程序具有正确的资源？
+[指定应用程序 YAML 文件](#app_yaml)时，可以将 Kubernetes 功能添加到应用程序配置，以帮助应用程序获得正确的资源。尤其是，对于 YAML 文件中定义的每个容器，[设置资源限制和请求 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)。
+
+此外，集群管理员可能会设置可影响应用程序部署的资源控制，例如以下各项。
+*  [资源配额 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+*  [pod 优先级](cs_pod_priority.html#pod_priority)
+
+### 如何访问我的应用程序？
+您可以[使用 `clusterIP` 服务](cs_network_cluster.html#planning)在集群中以专用方式访问您的应用程序。
+
+如果要以公共方式公开应用程序，您有不同的选项可用，具体取决于集群类型。
+*  **免费集群**：可以使用 [NodePort 服务](cs_nodeport.html#nodeport)来公开应用程序。
+*  **标准集群**：可以使用 [NodePort、LoadBalancer 或 Ingress 服务](cs_network_planning.html#planning)来公开应用程序。
+*  **使用 Calico 变为专用的集群**：可以使用 [NodePort、LoadBalancer 或 Ingress 服务](cs_network_planning.html#private_both_vlans)来公开应用程序。您还必须使用 Calico DNAT 前网络策略来阻止公共节点端口。
+*  **仅专用 VLAN 标准集群**：可以使用 [NodePort、LoadBalancer 或 Ingress 服务 ](cs_network_planning.html#private_vlan)来公开应用程序。您还必须在防火墙中打开用于该服务的专用 IP 地址的端口。
+
+### 部署应用程序后，如何监视其运行状况？
+您可以为集群设置 {{site.data.keyword.Bluemix_notm}} [日志记录和监视](cs_health.html#health)。此外，还可以选择与第三方[日志记录或监视服务](cs_integrations.html#health_services)集成。
+
+### 如何使应用程序保持最新？
+如果要动态添加和除去应用程序以响应工作负载的使用情况，请参阅[扩展应用程序](cs_app.html#app_scaling)。
+
+如果要管理应用程序的更新，请参阅[管理滚动部署](cs_app.html#app_rolling)。
+
+### 如何控制谁有权访问我的应用程序部署？
+帐户和集群管理员可以控制在许多不同级别的访问权：集群、Kubernetes 名称空间、pod 和容器。
+
+通过 IAM，可以在集群实例级别为各个用户、组或服务帐户分配许可权。您可以通过将用户限制为只能访问集群内的特定名称空间，从而进一步缩小集群访问范围。有关更多信息，请参阅[分配集群访问权](cs_users.html#users)。
+
+要在 pod 级别控制访问权，可以[使用 Kubernetes RBAC 配置 pod 安全策略](cs_psp.html#psp)。
+
+在应用程序部署 YAML 中，可以为 pod 或容器设置安全上下文。有关更多信息，请查看 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)。
 
 <br />
 
@@ -47,15 +147,13 @@ lastupdated: "2018-05-24"
 查看以下潜在的应用程序设置（按可用性程度从低到高排序）。
 
 
-![应用程序的高可用性阶段](images/cs_app_ha_roadmap.png)
+![应用程序的高可用性阶段](images/cs_app_ha_roadmap-mz.png)
 
-1.  部署具有 n+2 个 pod，这些 pod 由副本集管理。
-2.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨同一位置的多个节点分布（反亲缘关系）。
-3.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨不同位置的多个节点分布（反亲缘关系）。
-4.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨不同区域的多个节点分布（反亲缘关系）。
+1.  部署具有 n+2 个 pod，这些 pod 由单专区集群中单个节点中的副本集管理。
+2.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨单专区集群的多个节点分布（反亲缘关系）。
+3.  部署具有 n+2 个 pod，这些 pod 由副本集管理并在多个专区中跨多专区集群的多个节点分布（反亲缘关系）。
 
-
-
+您还可以[使用全局负载均衡器连接不同区域中的多个集群](cs_clusters_planning.html#multiple_clusters)，以提高高可用性。
 
 ### 提高应用程序的可用性
 {: #increase_availability}
@@ -70,65 +168,425 @@ lastupdated: "2018-05-24"
   <dt>包含足够多的副本用于应用程序的工作负载，在此基础上再额外增加两个副本</dt>
     <dd>要使应用程序具有更高可用性且在出现故障时能够更快恢复，请考虑在处理预期工作负载所需最低要求的副本数基础上，再包含额外的副本。在某个 pod 崩溃且副本集尚未恢复已崩溃 pod 的情况下，额外的副本可处理工作负载。要针对同时发生两个故障的情况进行防护，请包含两个额外的副本。此设置是 N+2 模式，其中 N 是处理入局工作负载的副本数，+2 是额外两个副本。只要集群具有足够的空间，就可以拥有任意数量的 pod。</dd>
   <dt>跨多个节点分布 pod（反亲缘关系）</dt>
-    <dd><p>创建部署时，各个 pod 可部署到同一工作程序节点。这称为亲缘关系或共存。为了保护应用程序不受工作程序节点故障的影响，可以在标准集群中使用 <em>podAntiAffinity</em> 选项将部署配置为跨多个工作程序节点分布 pod。可以定义两种类型的 pod 反亲缘关系：首选或必需。有关更多信息，请参阅有关<a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">为节点分配 pod</a> 的 Kubernetes 文档。</p>
-    <p><strong>注</strong>：在需要反亲缘关系的情况下，可以部署的副本数不超过您拥有的工作程序节点数。例如，如果集群中有 3 个工作程序节点，但在 YAML 文件中定义了 5 个副本，那么仅部署 3 个副本。每个副本位于不同的工作程序节点上。剩余的 2 个副本保持暂挂状态。如果将另一个工作程序节点添加到集群，那么其中一个剩余副本将自动部署到这一新的工作程序节点。<p>
-    <p><strong>部署 YAML 文件示例</strong>：<ul>
-    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">具有首选 pod 反亲缘关系的 Nginx 应用程序。</a></li>
-    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">具有必需 pod 反亲缘关系的 IBM® WebSphere® Application Server Liberty 应用程序。</a></li></ul></p>
+    <dd><p>创建部署时，各个 pod 可部署到同一工作程序节点。这称为亲缘关系或共存。为了保护应用程序不受工作程序节点故障的影响，可以在标准集群中使用 <em>podAntiAffinity</em> 选项将部署配置为跨多个工作程序节点分布 pod。可以定义两种类型的 pod 反亲缘关系：首选或必需。<p>有关更多信息，请参阅有关<a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">为节点分配 pod</a> 的 Kubernetes 文档。</p>
+      <p>有关应用程序部署中的亲缘关系的示例，请参阅[创建应用程序部署 YAML 文件](#app_yaml)。</p>
+      </dd>
     </dd>
 <dt>跨多个专区或区域分布 pod</dt>
-  <dd>为了保护应用程序不受位置或区域故障的影响，可以在另一个位置或区域中创建第二个集群，并使用部署 YAML 来部署应用程序的重复副本集。通过在集群前端添加共享路径和负载均衡器，可以跨位置和区域分布工作负载。有关更多信息，请参阅[集群的高可用性](cs_clusters.html#clusters)。</dd>
+  <dd><p>要保护应用程序不受专区故障的影响，可以在不同专区中创建多个集群，或者向多专区集群的工作程序池添加专区。多专区集群仅在[特定大城市区域](cs_regions.html#zones)（例如，达拉斯）中可用。如果在不同专区中创建多个集群，那么必须[设置全局负载均衡器](cs_clusters_planning.html#multiple_clusters)。</p>
+  <p>使用副本集并指定 pod 反亲缘关系时，Kubernetes 会跨节点分布应用程序 pod。如果节点位于多个专区中，那么 pod 会跨这些专区分布，从而提高应用程序的可用性。如果要限制应用程序仅在一个专区中运行，您可以配置 pod 亲缘关系，或者在一个专区中创建并标记工作程序池。有关更多信息，请参阅[多专区集群的高可用性](cs_clusters_planning.html#ha_clusters)。</p>
+  <p><strong>在多专区集群部署中，应用程序 pod 会跨节点均匀分布吗？</strong></p>
+  <p>pod 会跨专区均匀分布，但不一定会跨节点均匀分布。例如，如果有一个集群在 3 个专区中分别有 1 个节点，并且部署了包含 6 个 pod 的副本集，那么每个节点会获得 2 个 pod。但是，如果集群在 3 个专区中分别有 2 个节点，并且部署了包含 6 个 pod 的副本集，那么每个专区会安排 2 个 pod，这 2 个 pod 可能会每个节点安排 1 个，也可能 2 个 pod 都安排在一个节点上。要对安排具有更多控制权，可以[设置 pod 亲缘关系 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node)。</p>
+  <p><strong>如果某个专区发生故障，如何将 pod 重新安排到其他专区中的剩余节点上？</strong></br>这取决于您在部署中使用的安排策略。如果包含[特定于节点的 pod 亲缘关系 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)，那么不会重新安排 pod。如果未包含此策略，那么会在其他专区中的可用工作程序节点上创建 pod，但可能不会对这些 pod 进行均衡。例如，2 个 pod 可能分布在 2 个可用节点上，也可能都安排到 1 个具有可用容量的节点上。与此类似，当不可用专区恢复时，不会自动删除 pod 并跨节点对这些 pod 进行重新均衡。如果要在该专区恢复后跨专区重新均衡 pod，请考虑使用 [Kubernetes Descheduler ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes-incubator/descheduler)。</p>
+  <p><strong>提示</strong>：在多专区集群中，请尽量使每个专区的工作程序节点容量保持在 50%，以便您有足够的容量来保护集群不受专区故障的影响。</p>
+  <p><strong>如果要跨区域分布应用程序该怎么做？</strong></br>要保护应用程序不受区域故障的影响，请在另一个区域中创建第二个集群，[设置全局负载均衡器](cs_clusters_planning.html#multiple_clusters)以连接集群，并使用部署 YAML 为应用程序部署具有 [pod 反亲缘关系 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 的重复副本集。</p>
+  <p><strong>如果应用程序需要持久性存储器该怎么做？</strong></p>
+  <p>使用云服务，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)。</p></dd>
 </dl>
 
+## 在 YAML 文件中指定应用程序需求
+{: #app_yaml}
 
-### 最低应用程序部署
-{: #minimal_app_deployment}
-
-免费或标准集群中的基本应用程序部署可能包含以下组件。
+在 Kubernetes 中，您可在 YAML 文件中描述应用程序，该文件声明了 Kubernetes 对象的所需配置。然后，Kubernetes API 服务器会处理 YAML 文件，并在 etcd 数据存储中存储对象的配置和所需状态。Kubernetes 调度程序将工作负载安排到集群内的工作程序节点上，并考虑 YAML 文件中的规范、管理员设置的任何集群策略以及可用的集群容量。
 {: shortdesc}
 
-![部署设置](images/cs_app_tutorial_components1.png)
+查看[完整 YAML 文件](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml)的副本。然后，查看以下各部分以了解如何增强应用程序部署。
 
-要部署图中所示的最简应用程序的组件，请使用类似于以下示例的配置文件：
-```
+* [副本集](#replicaset)
+* [标签](#label)
+* [亲缘关系](#affinity)
+* [映像策略](#image)
+* [端口](#port)
+* [资源请求和限制](#resourcereq)
+* [活性和就绪性探测器](#probe)
+* [服务](#service)，用于在端口上公开应用程序服务
+* [配置映射](#configmap)，用于设置容器环境变量
+* [私钥](#secret)，用于设置容器环境变量
+* [持久性卷](#pv)，安装到容器以用于存储
+* [后续步骤](#nextsteps)
+* [完整示例 YAML](#yaml-example)
+
+<dl>
+<dt>基本部署元数据</dt>
+  <dd><p>将相应的 API 版本用于部署的 [Kubernetes 对象类型](#object)。API 版本将确定可供您使用的 Kubernetes 对象的受支持功能。在元数据中提供的名称是对象的名称，而不是对象的标签。与对象交互时可使用该名称，例如 `kubectl get deployment <name>`。</p>
+  <p><pre class="codeblock"><code>apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: wasliberty</code></pre></p></dd>
+
+<dt id="replicaset">副本集</dt>
+  <dd><p>要提高应用程序的可用性，可以在部署中指定副本集。在副本集内，定义要部署的应用程序实例数。副本集由 Kubernetes 部署进行管理和监视。如果一个应用程序实例停止运行，Kubernetes 会自动启动新的应用程序实例，以保持指定数量的应用程序实例。</p>
+  <p><pre class="codeblock"><code>spec:
+replicas: 3
+        </pre></code></p></dd>
+
+<dt id="label">标签</dt>
+  <dd><p>通过标签，可以使用相同的 `key: value` 对来标记集群中不同类型的资源。然后，可以指定与标签匹配的选择器，以便可以基于这些其他资源进行构建。如果计划以公共方式公开应用程序，那么必须使用与服务中指定的选择器相匹配的标签。在示例中，部署 spec 使用的是与标签 `app: wasliberty` 相匹配的模板。</p>
+  <p>您可以检索在集群中标注的对象，如查看 `staging` 或 `production` 组成部分。例如，列出集群中所有名称空间上具有 `env: production` 标签的所有资源。请注意，您需要访问所有名称空间才能运行此命令。<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
+  <ul><li>有关标签的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)。</li>
+  <li>有关更详细的示例，请参阅[使用标签将应用程序部署到特定工作程序节点](cs_app.html#node_affinity)。</li></ul>
+  <p><pre class="codeblock"><code>selector:
+  matchLabels:
+app: wasliberty
+template:
+metadata:
+labels:
+app: wasliberty
+</pre></code></p></dd>
+
+<dt id="affinity">亲缘关系</dt>
+  <dd><p>您希望对将 pod 安排在哪些工作程序节点上有更多控制权时，请指定亲缘关系（共存）。亲缘关系仅在安排时影响 pod。例如，要跨工作程序节点分布部署，而不允许 pod 安排在同一节点上，请将 <code>podAntiAffinity</code> 选项用于标准集群。可以定义两种类型的 pod 反亲缘关系：首选或必需。</p>
+  <p>有关更多信息，请参阅有关<a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">为节点分配 pod</a> 的 Kubernetes 文档。</p>
+  <ul><li><strong>需要反亲缘关系</strong>：只能部署与工作程序节点数相等的副本数。例如，如果集群中有 3 个工作程序节点，但在 YAML 文件中定义了 5 个副本，那么仅部署 3 个副本。每个副本位于不同的工作程序节点上。剩余的 2 个副本保持暂挂状态。如果将另一个工作程序节点添加到集群，那么其中一个剩余副本将自动部署到这一新的工作程序节点。如果工作程序节点发生故障，那么该 pod 不会重新安排，因为需要亲缘关系策略。有关需要反亲缘关系的 YAML 示例，请参阅<a href="https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">使用需要 pod 反亲缘关系的 Liberty 应用程序</a>。</li>
+  <li><strong>首选反亲缘关系</strong>：可以将 pod 部署到具有可用容量的节点，从而为工作负载提供更大的灵活性。如果可能，pod 将安排在不同的工作程序节点上。例如，如果集群中有 3 个工作程序节点具有足够的容量，那么可以在这些节点上安排 5 个副本 pod。但是，如果又向集群添加了 2 个工作程序节点，那么该亲缘关系规则并不会强制将现有节点上运行的两个额外 pod 重新安排到空闲节点上。</li>
+  <li><strong>工作程序节点亲缘关系</strong>：可以将部署配置为仅在特定工作程序节点（例如，裸机）上运行。有关更多信息，请参阅[使用标签将应用程序部署到特定工作程序节点](cs_app.html#node_affinity)。</li></ul>
+  <p>首选反亲缘关系的示例：</p>
+  <p><pre class="codeblock"><code>spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+            - key: app
+                  operator: In
+                  values:
+              - wasliberty
+          topologyKey: kubernetes.io/hostname</pre></code></p></dd>
+
+<dt id="image">容器映像</dt>
+  <dd>
+  <p>指定要用于容器的映像、该映像的位置以及映像拉取策略。如果未指定映像标记，那么缺省情况下，会拉取标记为 `latest` 的映像。</p>
+  <p>**注意**：避免将 latest 标记用于生产工作负载。如果使用的是公共存储库或共享存储库（例如，Docker Hub 或 {{site.data.keyword.registryshort_notm}}），那么您可能尚未使用最新映像测试过工作负载。</p>
+  <p>例如，要列出公共 IBM 映像的标记，请执行以下操作：</p>
+  <ol><li>切换到全局注册表区域。<pre class="pre"><code>ibmcloud cr region-set global</code></pre></li>
+  <li>列出 IBM 映像。<pre class="pre"><code>ibmcloud cr images --include-ibm</code></pre></li></ol>
+  <p>缺省 `imagePullPolicy` 设置为 `IfNotPresent`，仅当映像在本地不存在时才会拉取该映像。如果希望每次容器启动时都拉取映像，请指定 `imagePullPolicy: Always`。</p>
+  <p><pre class="codeblock"><code>containers:
+- name: wasliberty
+  image: registry.bluemix.net/ibmliberty:webProfile8
+  imagePullPolicy: Always</pre></code></p></dd>
+
+<dt id="port">用于应用程序服务的端口</dt>
+  <dd><p>选择容器端口以用于打开应用程序的服务。要查看需要打开哪个端口，请参阅应用程序规范或 Dockerfile。该端口可从专用网络进行访问，但不能从公用网络连接进行访问。要以公共方式公开应用程序，那么必须创建 NodePort、LoadBalancer 或 Ingress 服务。在[创建`服务`对象](#service)时，可使用此相同的端口号。</p>
+  <p><pre class="codeblock"><code>ports:
+- containerPort: 9080</pre></code></p></dd>
+
+<dt id="resourcereq">资源请求和限制</dt>
+  <dd><p>作为集群管理员，您可以通过为集群中的每个 Kubernetes 名称空间创建一个 [ResourceQuota 对象 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)，确保共享该集群的团队使用的计算资源（内存和 CPU）不会超过其公平份额。如果集群管理员设置了计算资源配额，那么部署模板中的每个容器都必须指定内存和 CPU 的资源请求和限制，否则创建 pod 会失败。</p>
+  <p><ol><li>检查是否为名称空间设置了资源配额。<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
+  <li>查看配额限制。<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
+  <p>即使未设置任何资源配额，您也可以在部署中包含资源请求和限制，以改进对工作程序节点资源的管理。**注**：如果容器超过其限制，容器可能会重新启动或失败。如果容器超过请求，那么当工作程序节点即将耗尽超过的该资源时，可能会逐出该容器的 pod。有关故障诊断信息，请参阅 [pod 重新启动一再失败或 pod 被意外除去](cs_troubleshoot_clusters.html#pods_fail)。</p>
+  <p>**请求**：调度程序保留供容器使用的最小资源量。如果资源量等于限制，那么将保证请求。如果资源量小于限制，那么仍会保证请求，但调度程序可以使用请求和限制之间的差异来利用其他容器的资源。</p>
+  <p>**限制**：容器可以使用的最大资源量。如果跨容器使用的资源总量超过工作程序节点上的可用资源量，那么会逐出容器以释放空间。为了避免逐出，请将资源请求设置为等于容器限制。如果未指定任何限制，那么缺省值为工作程序节点的容量。</p>
+  <p>有关更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)。</p>
+  <p><pre class="codeblock"><code>resources:
+  requests:
+    memory: "512Mi"
+    cpu: "500m"
+  limits:
+    memory: "1024Mi"
+    cpu: "1000m"</pre></code></p></dd>
+
+<dt id="probe">活性和就绪性探测器</dt>
+  <dd><p>缺省情况下，Kubernetes 在 pod 中的所有容器启动后，会将流量发送到应用程序 pod，如果容器崩溃，会重新启动这些容器。但是，您可以设置运行状况检查，以提高服务流量路由的稳健性。例如，应用程序可能会有启动延迟。应用程序进程可能在整个应用程序完全就绪之前启动，这可能会影响响应，尤其是跨多个实例向上扩展时。通过运行状况检查，您可以让系统了解应用程序是否在运行以及是否已准备好接收请求。通过设置这两个探测器，还可以帮助避免在执行应用程序的[滚动更新](#app_rolling)时发生停机时间。您可以设置两种类型的运行状况检查：活性和就绪性探测器。</p>
+  <p>**活性探测器**：设置活性探测器可检查容器是否在运行。如果该探测器失败，那么容器将重新启动。如果容器未指定活性探测器，那么该探测器会成功，因为它会假定当容器处于**正在运行**状态时即有活性。</p>
+  <p>**就绪性探测器**：设置就绪性探测器可检查容器是否已准备好接收请求和外部流量。如果该探测器失败，那么会将 pod 的 IP 地址作为与该 pod 匹配的服务的可用 IP 地址除去，但不会重新启动容器。如果应用程序需要一段时间才能启动，那么设置具有初始延迟的就绪性探测器就尤其重要。在初始延迟之前，探测器不会启动，从而为容器提供启动时间。如果容器未提供就绪性探测器，那么该探测器会成功，因为它会假定当容器处于**正在运行**状态时即有活性。</p>
+  <p>您可以将探测器设置为命令、HTTP 请求或 TCP 套接字。示例使用的是 HTTP 请求。为活性探测器提供比就绪性探测器长的时间。有关更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)。</p>
+  <p><pre class="codeblock"><code>livenessProbe:
+  httpGet:
+    path: /
+    port: 9080
+  initialDelaySeconds: 300
+  periodSeconds: 15
+readinessProbe:
+  httpGet:
+    path: /
+    port: 9080
+  initialDelaySeconds: 45
+  periodSeconds: 5</pre></code></p></dd>
+
+<dt id="service">公开应用程序服务</dt>
+  <dd><p>您可以创建用于公开应用程序的服务。在 `spec` 部分中，确保使 `port` 和 label 值与部署中使用的值相匹配。该服务将公开与标签匹配的对象，例如以下示例中的 `app: wasliberty`。</p>
+  <ul><li>缺省情况下，服务会使用 [ClusterIP ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/)，此项使服务只可在集群内进行访问，而不能从集群外部进行访问。</li>
+  <li>可以创建 NodePort、LoadBalancer 或 Ingress 服务以公共方式公开应用程序。这些服务有两个 IP：一个外部 IP 和一个内部 IP。外部 IP 上收到流量时，会将其转发到内部集群 IP。然后，流量从内部集群 IP 路由到应用程序的容器 IP。</li>
+  <li>以下示例使用 `NodePort` 在集群外部公开服务。有关如何设置外部访问权的信息，请参阅[选择 NodePort、LoadBalancer 或 Ingress 服务](cs_network_planning.html#external)。</li></ul>
+  <p><pre class="codeblock"><code>apiVersion: v1
+kind: Service
+metadata:
+name: wasliberty
+labels:
+app: wasliberty
+spec:
+  ports:
+  - port: 9080
+  selector:
+    app: wasliberty
+  type: NodePort</pre></code></p></dd>
+
+<dt id="configmap">用于容器环境变量的配置映射</dt>
+<dd><p>配置映射提供了部署工作负载的非敏感配置信息。以下示例显示如何在部署 YAML 的容器 spec 部分中，将配置映射中的值作为环境变量引用。通过引用配置映射中的值，可以将此配置信息与部署相分离，从而使容器化应用程序保持可移植。<ul><li>[帮我决定是否将 Kubernetes `配置映射`或`私钥`对象用于变量](#variables)。</li>
+<li>有关使用配置映射的更多方法，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/)。</li></ul></p>
+<p><pre class="codeblock"><code>apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+name: wasliberty
+spec:
+replicas: 3
+        template:
+    ...
+spec:
+      ...
+      containers:
+      - name: wasliberty
+        ...
+        env:
+          - name: VERSION
+            valueFrom:
+              configMapKeyRef:
+                name: wasliberty
+                key: VERSION
+          - name: LANGUAGE
+            valueFrom:
+              configMapKeyRef:
+                name: wasliberty
+                key: LANGUAGE
+        ...
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wasliberty
+  labels:
+    app: wasliberty
+data:
+  VERSION: "1.0"
+  LANGUAGE: en</pre></code></p></dd>
+
+  <dt id="secret">用于容器环境变量的私钥</dt>
+  <dd><p>私钥提供了部署工作负载的敏感配置信息（例如，密码）。以下示例显示如何在部署 YAML 的容器 spec 部分中，将私钥中的值作为环境变量引用。您还可以将私钥安装为卷。通过引用私钥中的值，可以将此配置信息与部署相分离，从而使容器化应用程序保持可移植。<ul><li>[帮我决定是否将配置映射或私钥用于变量](#variables)。</li>
+  <li>有关更多信息，请参阅[了解何时使用私钥](cs_encrypt.html#secrets)。</li></ul></p>
+  <p><pre class="codeblock"><code>apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+name: wasliberty
+spec:
+replicas: 3
+        template:
+      ...
+spec:
+        ...
+        containers:
+        - name: wasliberty
+          ...
+          env:
+          - name: username
+            valueFrom:
+              secretKeyRef:
+                name: wasliberty
+                key: username
+          - name: password
+            valueFrom:
+              secretKeyRef:
+                name: wasliberty
+                key: password
+          ...
+  ---
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: wasliberty
+    labels:
+      app: wasliberty
+  type: Opaque
+  data:
+    username: dXNlcm5hbWU=
+    password: cGFzc3dvcmQ=</pre></code></p></dd>
+
+<dt id="pv">用于容器存储的持久性卷</dt>
+<dd><p>持久性卷 (PV) 与物理存储器连接，为容器工作负载提供持久性数据存储器。以下示例显示如何向应用程序添加持久性存储器。要供应持久性存储器，可创建持久性卷申领 (PVC)，以描述要拥有的文件存储器的类型和大小。创建 PVC 后，将使用[动态供应](cs_storage_basics.html#dynamic_provisioning)自动创建持久性卷和物理存储器。通过在部署 YAML 中引用 PVC，存储器会自动安装到应用程序 pod。当 pod 中的容器将数据写入 `/test` 安装路径目录时，数据将存储在 NFS 文件存储器实例上。</p><ul><li>有关更多信息，请参阅[了解 Kubernetes 存储器基础知识](cs_storage_basics.html#kube_concepts)。</li><li>有关可以供应的其他存储器类型的选项，请参阅[规划高可用性持久存储器](cs_storage_planning.html#storage_planning)。</li></ul>
+<p><pre class="codeblock"><code>apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+name: wasliberty
+spec:
+replicas: 3
+        template:
+    ...
+spec:
+      ...
+      containers:
+      - name: wasliberty
+        ...
+        volumeMounts:
+        - name: pvmount
+          mountPath: /test
+      volumes:
+      - name: pvmount
+        persistentVolumeClaim:
+          claimName: wasliberty
+        ...
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wasliberty
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-bronze"
+  labels:
+    billingType: "hourly"
+    app: wasliberty
+spec:
+  accessModes:
+    - ReadWriteMany
+         resources:
+           requests:
+             storage: 24Gi
+        </pre></code></p></dd>
+
+<dt id="nextsteps">准备好部署应用程序了吗？</dt>
+<dd><ul><li>[使用完整 YAML 的副本作为模板以开始](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml)。</li>
+<li>[通过 Kubernetes 仪表板部署应用程序](cs_app.html#app_ui)。</li>
+<li>[通过 CLI 部署应用程序](cs_app.html#app_cli)。</li></ul></dd>
+
+</dl>
+
+### 完整示例部署 YAML
+{: #yaml-example}
+
+下面是[先前逐个部分讨论](#app_yaml)的部署 YAML 的副本。您还可以[从 GitHub 下载 YAML](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml)。
+
+```yaml
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: ibmliberty
+  name: wasliberty
 spec:
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
-        app: ibmliberty
+        app: wasliberty
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - wasliberty
+              topologyKey: kubernetes.io/hostname
       containers:
-      - name: ibmliberty
-        image: registry.bluemix.net/ibmliberty:latest
+      - name: wasliberty
+        image: registry.bluemix.net/ibmliberty
+        env:
+          - name: VERSION
+            valueFrom:
+              configMapKeyRef:
+                name: wasliberty
+                key: VERSION
+          - name: LANGUAGE
+            valueFrom:
+              configMapKeyRef:
+                name: wasliberty
+                key: LANGUAGE
+          - name: username
+            valueFrom:
+              secretKeyRef:
+                name: wasliberty
+                key: username
+          - name: password
+            valueFrom:
+              secretKeyRef:
+                name: wasliberty
+                key: password
         ports:
-        - containerPort: 9080        
+          - containerPort: 9080
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1024Mi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9080
+          initialDelaySeconds: 300
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9080
+          initialDelaySeconds: 45
+          periodSeconds: 5
+        volumeMounts:
+        - name: pvmount
+          mountPath: /test
+      volumes:
+      - name: pvmount
+        persistentVolumeClaim:
+          claimName: wasliberty
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: ibmliberty-service
+  name: wasliberty
   labels:
-    app: ibmliberty
+    app: wasliberty
 spec:
-  selector:
-    app: ibmliberty
-  type: NodePort
   ports:
-   - protocol: TCP
-     port: 9080
+  - port: 9080
+  selector:
+    app: wasliberty
+  type: NodePort
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wasliberty
+  labels:
+    app: wasliberty
+data:
+  VERSION: "1.0"
+  LANGUAGE: en
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: wasliberty
+  labels:
+    app: wasliberty
+type: Opaque
+data:
+  username: dXNlcm5hbWU=
+  password: cGFzc3dvcmQ=
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wasliberty
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-bronze"
+  labels:
+    billingType: "hourly"
+    app: wasliberty
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 24Gi
 ```
 {: codeblock}
 
-**注**：要公开服务，请确保在服务的 `spec.selector` 部分中使用的键/值对与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的键/值对相同。要了解有关每个组件的更多信息，请查看 [Kubernetes 基础知识](cs_tech.html#kubernetes_basics)。
-
 <br />
-
-
 
 
 ## 启动 Kubernetes 仪表板
@@ -138,9 +596,9 @@ spec:
 [在 GUI 中](#db_gui)，可以使用方便的一次单击按钮来访问该仪表板。[通过 CLI](#db_cli)，可以访问该仪表板或使用自动化过程中的步骤，例如针对 CI/CD 管道的步骤。
 {:shortdesc}
 
-开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。此任务需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 
-可以使用缺省端口或设置自己的端口来启动集群的 Kubernetes 仪表板。
+您可以使用缺省端口或设置自己的端口来启动集群的 Kubernetes 仪表板。
 
 **通过 GUI 启动 Kubernetes 仪表板**
 {: #db_gui}
@@ -151,160 +609,53 @@ spec:
 4.  在**集群**页面上，单击要访问的集群。
 5.  在集群详细信息页面中，单击 **Kubernetes 仪表板**按钮。
 
+</br>
+</br>
+
 **通过 CLI 启动 Kubernetes 仪表板**
 {: #db_cli}
 
-*  对于带有 Kubernetes V1.7.16 或更低版本主节点的集群：
+1.  获取 Kubernetes 的凭证。
 
-    1.  使用缺省端口号设置代理。
-
+    ```
+        kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
         ```
-                kubectl proxy
+    {: pre}
+
+2.  复制输出中显示的 **id-token** 值。
+
+3.  使用缺省端口号设置代理。
+
+    ```
+        kubectl proxy
         ```
-        {: pre}
+    {: pre}
 
-        输出：
+    输出示例：
 
+    ```
+        Starting to serve on 127.0.0.1:8001
         ```
-                Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
+    {: screen}
 
-    2.  在 Web 浏览器中打开 Kubernetes 仪表板。
+4.  登录到仪表板。
 
-        ```
-                http://localhost:8001/ui
-        ```
-        {: codeblock}
+  1.  在浏览器中，浏览至以下 URL：
 
-*  对于带有 Kubernetes V1.8.2 或更高版本主节点的集群：
-
-    1.  获取 Kubernetes 的凭证。
-
-        ```
-                kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
-        ```
-        {: pre}
-
-    2.  复制输出中显示的 **id-token** 值。
-
-    3.  使用缺省端口号设置代理。
-
-        ```
-                kubectl proxy
-        ```
-        {: pre}
-
-        输出示例：
-
-        ```
-                Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
-
-    4.  登录到仪表板。
-
-      1.  在浏览器中，浏览至以下 URL：
-
-          ```
-                      http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+      ```
+            http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
             ```
-          {: codeblock}
+      {: codeblock}
 
-      2.  在登录页面中，选择**令牌**认证方法。
+  2.  在登录页面中，选择**令牌**认证方法。
 
-      3.  接下来，将先前复制的 **id-token** 值粘贴到**令牌**字段中，然后单击**登录**。
+  3.  接下来，将先前复制的 **id-token** 值粘贴到**令牌**字段中，然后单击**登录**。
 
 对 Kubernetes 仪表板操作完毕后，使用 `CTRL+C` 以退出 `proxy` 命令。退出后，Kubernetes 仪表板不再可用。运行 `proxy` 命令以重新启动 Kubernetes 仪表板。
 
 [接下来，可以通过仪表板来运行配置文件。](#app_ui)
 
-
 <br />
-
-
-
-
-## 创建私钥
-{: #secrets}
-
-Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）的安全方法。
-{:shortdesc}
-
-<table>
-<caption>要通过任务以私钥形式存储的必需文件</caption>
-<thead>
-<th>任务</th>
-<th>要以私钥形式存储的必需文件</th>
-</thead>
-<tbody>
-<tr>
-<td>向集群添加服务</td>
-<td>无。将服务绑定到集群时，会创建私钥。</td>
-</tr>
-<tr>
-<td>可选：如果不打算使用 ingress-secret，请将 Ingress 服务配置为使用 TLS。<p><b>注</b>：缺省情况下已启用 TLS，并且已经为 TLS 连接创建私钥。
-
-
-要查看缺省 TLS 私钥：
-<pre>
-bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
-</pre>
-</p>
-要改为创建自己的私钥，请完成本主题中的步骤。</td>
-<td>服务器证书和密钥：<code>server.crt</code> 和 <code>server.key</code></td>
-<tr>
-<td>创建相互认证注释。</td>
-<td>CA 证书：<code>ca.crt</code></td>
-</tr>
-</tbody>
-</table>
-
-有关在私钥中可以存储哪些内容的更多信息，请参阅 [Kubernetes 文档](https://kubernetes.io/docs/concepts/configuration/secret/)。
-
-
-
-要使用证书创建私钥，请执行以下操作：
-
-1. 通过证书提供者生成认证中心 (CA) 证书和密钥。如果您有自己的域，请为您的域购买正式的 TLS 证书。如果是为了进行测试，您可以生成自签名证书。
-
- **重要信息**：请确保每个证书的 [CN](https://support.dnsimple.com/articles/what-is-common-name/) 都是不同的。
-
- 必须验证客户机证书和客户机密钥，一直验证到可信根证书（在本例中为 CA 证书）。示例：
-
- ```
- 客户机证书：由中间证书签发
- 中间证书：由根证书签发
- 根证书：由其自身签发
- ```
- {: codeblock}
-
-2. 将证书创建为 Kubernetes 私钥。
-
-   ```
-   kubectl create secret generic <secret_name> --from-file=<cert_file>=<cert_file>
-   ```
-   {: pre}
-
-     示例：
-   - TLS 连接：
-
-     ```
-          kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
-     ```
-     {: pre}
-
-   - 相互认证注释：
-
-     ```
-          kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
-     ```
-     {: pre}
-
-<br />
-
-
-
 
 
 ## 使用 GUI 部署应用程序
@@ -315,8 +666,8 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
 开始之前：
 
--   安装必需的 [CLI](cs_cli_install.html#cs_cli_install)。
--   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
+-   [安装必需的 CLI](cs_cli_install.html#cs_cli_install)。
+-   [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 
 要部署应用程序，请执行以下操作：
 
@@ -345,7 +696,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 开始之前：
 
 -   安装必需的 [CLI](cs_cli_install.html#cs_cli_install)。
--   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
+-   [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 
 要部署应用程序，请执行以下操作：
 
@@ -362,7 +713,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 2.  在集群上下文中运行配置文件。
 
     ```
-        kubectl apply -f config.yaml
+    kubectl apply -f config.yaml
     ```
     {: pre}
 
@@ -371,12 +722,104 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 <br />
 
 
+## 使用标签将应用程序部署到特定工作程序节点
+{: #node_affinity}
+
+部署应用程序时，应用程序 pod 会不加选择地部署到集群中的各种工作程序节点。在某些情况下，您可能希望限制应用程序 pod 部署到的工作程序节点。例如，您可能希望应用程序 pod 仅部署到特定工作程序池中的工作程序节点，因为这些工作程序节点位于裸机机器上。要指定应用程序 pod 必须部署到的工作程序节点，请将亲缘关系规则添加到应用程序部署。
+{:shortdesc}
+
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+
+1. 获取要将应用程序 pod 部署到的工作程序池的名称。
+    ```
+    ibmcloud ks worker-pools <cluster_name_or_ID>
+    ```
+    {:pre}
+
+    这些步骤使用工作程序池名称作为示例。要根据其他因素将应用程序 pod 部署到特定工作程序节点，请改为获取该因素的值。例如，要仅将应用程序 pod 部署到特定 VLAN 上的工作程序节点，请通过运行 `ibmcloud ks vlans <zone>`.
+    {: tip}
+
+2. 向应用程序部署[添加亲缘关系规则 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)（针对工作程序池名称）。
+
+    示例 YAML：
+
+    ```
+apiVersion: extensions/v1beta1
+    kind: Deployment
+    metadata:
+      name: with-node-affinity
+    spec:
+      template:
+        spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: workerPool
+                    operator: In
+                    values:
+                    - <worker_pool_name>
+    ...
+    ```
+    {: codeblock}
+
+    在示例 YAML 的 **affinity** 部分中，`workerPool` 为 `key`，`<worker_pool_name>` 为 `value`。
+
+3. 应用已更新的部署配置文件。
+    ```
+    kubectl apply -f with-node-affinity.yaml
+    ```
+    {: pre}
+
+4. 验证应用程序 pod 是否部署到正确的工作程序节点。
+
+    1. 列出集群中的 pod。
+        ```
+        kubectl get pods -o wide
+        ```
+        {: pre}
+
+        输出示例：
+        ```
+                NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
+        cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.176.48.78
+        ```
+        {: screen}
+
+    2. 在输出中，确定应用程序的 pod。记下该 pod 所在的工作程序节点的 **NODE** 专用 IP 地址。
+
+        在上面的示例输出中，应用程序 pod `cf-py-d7b7d94db-vp8pq` 位于 IP 地址为 `10.176.48.78` 的工作程序节点上。
+
+    3. 列出在应用程序部署中指定的工作程序池中的工作程序节点。
+
+        ```
+        ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool_name>
+        ```
+        {: pre}
+
+        输出示例：
+
+        ```
+        ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+        ```
+        {: screen}
+
+        如果基于其他因素创建了应用程序亲缘关系规则，请改为获取该因素的值。例如，要验证部署到特定 VLAN 上工作程序节点的应用程序 pod，请通过运行 `ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>`.
+        {: tip}
+
+    4. 在输出中，验证在先前步骤中识别的具有专用 IP 地址的工作程序节点是否部署在此工作程序池中。
+
+<br />
 
 
 ## 在 GPU 机器上部署应用程序
 {: #gpu_app}
 
-如果您有[裸机图形处理单元 (GPU) 机器类型](cs_clusters.html#shared_dedicated_node)，那么可以在工作程序节点上安排数学密集型工作负载。例如，您可以运行使用计算统一设备体系结构 (CUDA) 平台的 3D 应用程序，使处理负载在 GPU 和 CPU 上共享以提高性能。
+如果您有[裸机图形处理单元 (GPU) 机器类型](cs_clusters_planning.html#shared_dedicated_node)，那么可以在工作程序节点上安排数学密集型工作负载。例如，您可以运行使用计算统一设备体系结构 (CUDA) 平台的 3D 应用程序，使处理负载在 GPU 和 CPU 上共享以提高性能。
 {:shortdesc}
 
 在以下步骤中，您将了解如何部署需要 GPU 的工作负载。您还可以[部署应用程序](#app_ui)，这些应用程序无需处理 GPU 和 CPU 上的工作负载。之后，您可能会发现使用数学密集型工作负载（例如，[此 Kubernetes 演示 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow) 中的 [TensorFlow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.tensorflow.org/) 机器学习框架）非常有用。
@@ -433,19 +876,19 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
     <td>为作业提供名称和标签，并在文件的元数据和 `spec template` 元数据中使用相同的名称。例如，`nvidi-smi`。</td>
     </tr>
     <tr>
-    <td><code>containers/image</code></td>
+    <td><code>containers.image</code></td>
     <td>提供容器是其运行实例的映像。在此示例中，该值设置为使用 DockerHub CUDA 映像：<code>nvidia/cuda:9.1-base-ubuntu16.04</code></td>
     </tr>
     <tr>
-    <td><code>containers/command</code></td>
+    <td><code>containers.command</code></td>
     <td>指定要在容器中运行的命令。在此示例中，<code>[ "/usr/test/nvidia-smi" ]</code> 命令引用 GPU 机器上的二进制文件，因此您还必须设置卷安装。</td>
     </tr>
     <tr>
-    <td><code>containers/imagePullPolicy</code></td>
+    <td><code>containers.imagePullPolicy</code></td>
     <td>要仅在映像当前不在工作程序节点上时才拉取新映像，请指定 <code>IfNotPresent</code>。</td>
     </tr>
     <tr>
-    <td><code>resources/limits</code></td>
+    <td><code>resources.limits</code></td>
     <td>对于 GPU 机器，必须指定资源限制。Kubernetes [设备插件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/cluster-administration/device-plugins/) 会设置缺省资源请求以与该限制相匹配。
     <ul><li>必须将键指定为 <code>nvidia.com/gpu</code>。</li>
     <li>输入整数表示请求的 GPU 数，例如 <code>2</code>。<strong>注</strong>：容器 pod 不会共享 GPU，并且 GPU 也无法超量使用。例如，如果只有 1 个 `mg1c.16x128` 机器，那么该机器中只有 2 个 GPU，因此可以指定的最大值为 `2`。</li></ul></td>
@@ -463,19 +906,19 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 2.  应用 YAML 文件。例如：
 
     ```
-    kubectl apply -f nvidia-smi.yaml
+kubectl apply -f nvidia-smi.yaml
     ```
     {: pre}
 
 3.  通过按 `nvipia-sim` 标签过滤 pod 来检查作业 pod。验证 **STATUS** 是否为 **Completed**。
 
     ```
-    kubectl get pod -a -l 'name in (nvidia-sim)'
+kubectl get pod -a -l 'name in (nvidia-sim)'
     ```
     {: pre}
 
     输出示例：
-    ```
+        ```
     NAME                  READY     STATUS      RESTARTS   AGE
     nvidia-smi-ppkd4      0/1       Completed   0          36s
     ```
@@ -486,12 +929,12 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
     * 在 Events 中，验证是否已将 pod 分配给 GPU 工作程序节点。
 
     ```
-    kubectl describe pod nvidia-smi-ppkd4
+kubectl describe pod nvidia-smi-ppkd4
     ```
     {: pre}
 
     输出示例：
-    ```
+        ```
     Name:           nvidia-smi-ppkd4
     Namespace:      default
     ...
@@ -511,12 +954,12 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 5.  要验证作业是否使用了 GPU 来计算其工作负载，可以检查日志。从作业发出的 `[ "/usr/test/nvidia-smi" ]` 命令查询 GPU 工作程序节点上的 GPU 设备状态。
 
     ```
-    kubectl logs nvidia-sim-ppkd4
+kubectl logs nvidia-sim-ppkd4
     ```
     {: pre}
 
     输出示例：
-    ```
+        ```
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 390.12                 Driver Version: 390.12                    |
     |-------------------------------+----------------------+----------------------+
@@ -541,7 +984,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
     在此示例中，您看到两个 GPU 都用于执行作业，因为这两个 GPU 均已安排在工作程序节点中。如果限制设置为 1，那么仅显示 1 个 GPU。
 
-## 扩展应用程序 
+## 扩展应用程序
 {: #app_scaling}
 
 使用 Kubernetes，可以启用[水平 pod 自动扩展 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)，以根据 CPU 来自动增加或减少应用程序的实例数。
@@ -551,7 +994,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 {: tip}
 
 开始之前：
-- [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 - 必须在要自动扩展的集群中部署 heapster 监视。
 
 步骤：
@@ -560,7 +1003,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 
 
     ```
-        kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
     ```
     {: pre}
 
@@ -593,7 +1036,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 2.  创建自动扩展程序并定义策略。有关使用 `kubectl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
 
     ```
-        kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
+    kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
     ```
     {: pre}
 
@@ -621,11 +1064,14 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 <br />
 
 
-## 管理滚动部署
+## 管理滚动部署以更新应用程序
 {: #app_rolling}
 
-可以通过自动和受控方式来管理如何应用您的更改。如果应用未按计划开展，那么可以将部署回滚到先前的修订版。
+您可以使用 pod 模板（例如，部署），以自动化和受控方式来为工作负载管理应用程序更改的应用。如果应用未按计划开展，那么可以将部署回滚到先前的修订版。
 {:shortdesc}
+
+要避免在滚动更新期间发生停机时间吗？请确保在部署中指定[就绪性探测器](#probe)，以便在最近更新的 pod 就绪后，继续对下一个应用程序 pod 执行应用。
+{: tip}
 
 开始之前，请创建[部署](#app_cli)。
 
@@ -634,28 +1080,28 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
     1.  获取部署名称。
 
         ```
-                kubectl get deployments
+        kubectl get deployments
         ```
         {: pre}
 
     2.  获取 pod 名称。
 
         ```
-                    kubectl get pods
-            ```
+kubectl get pods
+        ```
         {: pre}
 
     3.  获取在 pod 中运行的容器的名称。
 
         ```
-                kubectl describe pod <pod_name>
+        kubectl describe pod <pod_name>
         ```
         {: pre}
 
     4.  设置新映像以供部署使用。
 
         ```
-                kubectl set image deployment/<deployment_name><container_name>=<image_name>
+        kubectl set image deployment/<deployment_name><container_name>=<image_name>
         ```
         {: pre}
 
@@ -664,7 +1110,7 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 2.  检查部署的状态。
 
     ```
-        kubectl rollout status deployments/<deployment_name>
+    kubectl rollout status deployments/<deployment_name>
     ```
     {: pre}
 
@@ -672,21 +1118,21 @@ bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
     1.  查看部署的应用历史记录，并确定上次部署的修订版号。
 
         ```
-                kubectl rollout history deployment/<deployment_name>
+        kubectl rollout history deployment/<deployment_name>
         ```
         {: pre}
 
         **提示**：要查看特定修订版的详细信息，请包含相应的修订版号。
 
         ```
-                kubectl rollout history deployment/<deployment_name> --revision=<number>
+        kubectl rollout history deployment/<deployment_name> --revision=<number>
         ```
         {: pre}
 
     2.  回滚到先前的版本或指定修订版。要回滚到先前的版本，请使用以下命令。
 
         ```
-                kubectl rollout undo deployment/<depoyment_name> --to-revision=<number>
+        kubectl rollout undo deployment/<depoyment_name> --to-revision=<number>
         ```
         {: pre}
 

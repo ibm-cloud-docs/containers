@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -18,17 +18,155 @@ lastupdated: "2018-05-24"
 
 
 
-# Tópicos populares para {{site.data.keyword.containershort_notm}}
+# Tópicos populares para {{site.data.keyword.containerlong_notm}}
 {: #cs_popular_topics}
 
 Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprenda sobre os novos recursos para explorar, um truque para experimentar ou alguns tópicos populares que outros desenvolvedores estão achando úteis agora.
 {:shortdesc}
 
+## Tópicos populares em outubro de 2018
+{: #oct18}
+
+<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em agosto de 2018</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>25 de Outubro</td>
+<td>[ Zona disponível em Milão ](cs_regions.html)</td>
+<td>Bem-vindo Milão, Itália, como uma nova zona para os clusters pagos na região central da UE. Anteriormente, Milão estava disponível somente para clusters grátis. Se você tiver um firewall, certifique-se de [abrir as portas de firewall](cs_firewall.html#firewall) para essa zona e as outras zonas dentro da região em que seu cluster está.</td>
+</tr>
+<tr>
+<td>22 de Outubro</td>
+<td>[ Nova posição de multisona de Londres,  ` lon05 ` ](cs_regions.html#zones)</td>
+<td>A cidade metropolitana de múltiplas zonas de Londres substitui a zona `lon02` pela nova zona `lon05`, uma zona com mais recursos de infraestrutura do que `lon02`. Crie novos clusters multizona com  ` lon05 `. Os clusters existentes com `lon02` são suportados, mas os novos clusters de múltiplas zonas devem usar `lon05` no lugar.</td>
+</tr>
+<tr>
+<td>05 de outubro</td>
+<td>Integração com o  {{site.data.keyword.keymanagementservicefull}}</td>
+<td>É possível criptografar os segredos do Kubernetes em seu cluster [ativando o {{site.data.keyword.keymanagementserviceshort}} (beta)](cs_encrypt.html#keyprotect).</td>
+</tr>
+<tr>
+<td>04 de outubro</td>
+<td>[O {{site.data.keyword.registrylong}} está agora integrado ao {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam)</td>
+<td>É possível usar o IAM para controlar o acesso a seus recursos de registro, como puxar, enviar por push e construir imagens. Ao criar um cluster, você também cria um token de registro para que o cluster possa trabalhar com seu registro. Portanto, você precisa da função de gerenciamento de plataforma **Administrador** de registro para criar um cluster. Para ativar o IAM para sua conta de registro, veja [Ativando o cumprimento de política para usuários existentes](/docs/services/Registry/registry_users.html#existing_users).</td>
+</tr>
+<tr>
+<td>01 de outubro</td>
+<td>[Grupos de recursos](cs_users.html#resource_groups)</td>
+<td>É possível usar grupos de recursos para separar seus recursos do {{site.data.keyword.Bluemix_notm}} em pipelines, departamentos ou outros agrupamentos para ajudar a designar o acesso e medir o uso. Agora, o {{site.data.keyword.containerlong_notm}} suporta a criação de clusters no grupo `default` ou em qualquer outro grupo de recursos que você criar!</td>
+</tr>
+</tbody></table>
+
+## Tópicos populares em setembro de 2018
+{: #sept18}
+
+<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em agosto de 2018</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>25 de setembro</td>
+<td>[Novas zonas disponíveis](cs_regions.html)</td>
+<td>Agora você tem ainda mais opções de onde implementar seus apps!
+<ul><li>Bem-vindo a San Jose como duas novas zonas na região sul dos EUA, `sjc03` e `sjc04`. Se você tiver um firewall, certifique-se de [abrir as portas do firewall](cs_firewall.html#firewall) para essa zona e as outras dentro da região em que seu cluster estiver.</li>
+<li>Com duas novas zonas `tok04` e `tok05`, agora é possível [criar clusters de múltiplas zonas](cs_clusters_planning.html#multizone) em Tóquio na região Norte de AP.</li></ul></td>
+</tr>
+<tr>
+<td>05 de setembro</td>
+<td>[ Zona disponível em Oslo ](cs_regions.html)</td>
+<td>Bem-vindo Oslo, Noruega, como uma nova zona na região Central da UE. Se você tiver um firewall, certifique-se de [abrir as portas do firewall](cs_firewall.html#firewall) para essa zona e as outras dentro da região em que seu cluster estiver.</td>
+</tr>
+</tbody></table>
+
+## Tópicos populares em agosto de 2018
+{: #aug18}
+
+<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em agosto de 2018</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>31 de agosto</td>
+<td>{{site.data.keyword.cos_full_notm}}  está agora integrado com o  {{site.data.keyword.containerlong}}</td>
+<td>Use solicitações de volume persistente (PVC) nativas do Kubernetes para provisionar o {{site.data.keyword.cos_full_notm}} para seu cluster. O {{site.data.keyword.cos_full_notm}} é melhor usado para cargas de trabalho de leitura intensiva e se você deseja armazenar dados entre múltiplas zonas em um cluster de múltiplas zonas. Inicie [criando uma instância de serviço do {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#create_cos_service) e [instalando o plug-in do {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos) em seu cluster. </br></br>Não tem certeza de qual solução de armazenamento pode ser a correta para você? Inicie [aqui](cs_storage_planning.html#choose_storage_solution) para analisar seus dados e escolher a solução de armazenamento apropriada para seus dados. </td>
+</tr>
+<tr>
+<td>14 de agosto</td>
+<td>Atualizar seus clusters para o Kubernetes versões 1.11 para designar prioridade do pod</td>
+<td>Depois de atualizar seu cluster para o [Kubernetes versão 1.11](cs_versions.html#cs_v111), é possível aproveitar novos recursos, como aumento de desempenho do tempo de execução do contêiner com `containerd` ou [designando a prioridade do pod](cs_pod_priority.html#pod_priority).</td>
+</tr>
+</tbody></table>
+
+## Tópicos populares em julho de 2018
+{: #july18}
+
+<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em julho de 2018</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>30 de julho</td>
+<td>[ Traga seu próprio controlador de Ingresso ](cs_ingress.html#user_managed)</td>
+<td>Você tem segurança muito específica ou outros requisitos customizados para o controlador de ingresso do seu cluster? Se sim, você pode desejar executar seu próprio controlador de ingresso em vez do padrão.</td>
+</tr>
+<tr>
+<td>10 de julho</td>
+<td>Introducing multizone clusters</td>
+<td>Deseja melhorar a disponibilidade do cluster? Agora, é possível estender seu cluster em múltiplas zonas em áreas metro selecionadas. Para obter mais informações, veja [Criando clusters multizona no {{site.data.keyword.containerlong_notm}}](cs_clusters_planning.html#multizone).</td>
+</tr>
+</tbody></table>
+
+## Tópicos populares em junho de 2018
+{: #june18}
+
+<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em junho de 2018</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>13 de junho</td>
+<td>O nome do comando da CLI `bx` está sendo mudado para a CLI `ic`</td>
+<td>Ao fazer download da versão mais recente da CLI do {{site.data.keyword.Bluemix_notm}}, agora você executa comandos usando o prefixo `ic` em vez de `bx`. Por exemplo, liste seus clusters executando `ibmcloud ks clusters`.</td>
+</tr>
+<tr>
+<td>12 de junho</td>
+<td>[ Políticas de segurança do Pod ](cs_psp.html)</td>
+<td>Para clusters que executam o Kubernetes 1.10.3 ou mais recente, é possível
+configurar políticas de segurança de pod para autorizar quem pode criar e atualizar pods no {{site.data.keyword.containerlong_notm}}.</td>
+</tr>
+<tr>
+<td>06 de junho</td>
+<td>[Suporte do TLS para o subdomínio curinga do Ingresso fornecido pela IBM](cs_ingress.html#wildcard_tls)</td>
+<td>Para clusters criados em ou após 6 de junho de 2018, o certificado TLS de subdomínio do Ingresso fornecido pela IBM agora é um certificado curinga e pode ser usado para o subdomínio curinga registrado. Para clusters criados antes de 6 de junho de 2018, o certificado do TLS será atualizado para um certificado curinga quando o certificado do TLS atual for renovado.</td>
+</tr>
+</tbody></table>
+
 ## Tópicos populares em maio de 2018
 {: #may18}
 
 
-<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em maio de 2018</caption>
 <thead>
 <th>Data</th>
@@ -44,7 +182,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 <tr>
 <td>14 de maio</td>
 <td>[Atualização: implementar cargas de trabalho na GPU bare metal no mundo todo](cs_app.html#gpu_app)</td>
-<td>Se você tem um [tipo de máquina de unidade de processamento de gráfico (GPU) bare metal](cs_clusters.html#shared_dedicated_node) em seu cluster, é possível planejar apps matematicamente intensivos. O nó do trabalhador de GPU pode processar a carga de trabalho de seu app na CPU e GPU para aumentar o desempenho.</td>
+<td>Se você tem um [tipo de máquina de unidade de processamento de gráfico (GPU) bare metal](cs_clusters_planning.html#shared_dedicated_node) em seu cluster, é possível planejar apps matematicamente intensivos. O nó do trabalhador de GPU pode processar a carga de trabalho de seu app na CPU e GPU para aumentar o desempenho.</td>
 </tr>
 <tr>
 <td>Maio 03</td>
@@ -64,7 +202,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 ## Tópicos populares em abril de 2018
 {: #apr18}
 
-<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em abril de 2018</caption>
 <thead>
 <th>Data</th>
@@ -75,7 +213,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 <tr>
 <td>17 de abril</td>
 <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-<td>Instale o [plug-in](cs_storage.html#install_block) do {{site.data.keyword.Bluemix_notm}} Block Storage para salvar dados persistentes no armazenamento de bloco. Em seguida, é possível [criar um novo](cs_storage.html#create) armazenamento de bloco ou [usar um existente](cs_storage.html#existing_block) para seu cluster.</td>
+<td>Instale o [plug-in](cs_storage_block.html#install_block) do {{site.data.keyword.Bluemix_notm}} Block Storage para salvar dados persistentes no armazenamento de bloco. Em seguida, é possível [criar um novo](cs_storage_block.html#add_block) armazenamento de bloco ou [usar um existente](cs_storage_block.html#existing_block) para seu cluster.</td>
 </tr>
 <tr>
 <td>13 de abril</td>
@@ -83,7 +221,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 <td>Você tem um app Cloud Foundry? Saiba como implementar o mesmo código desse app em um contêiner executado em um cluster do Kubernetes.</td>
 </tr>
 <tr>
-<td>5 de abril</td>
+<td>05 de abril</td>
 <td>[Filtrando logs](cs_health.html#filter-logs)</td>
 <td>Filtrar logs específicos de serem encaminhados. Os logs podem ser filtrados em relação a um namespace, um nome de contêiner, um nível de log e uma sequência de mensagem específicos.</td>
 </tr>
@@ -92,7 +230,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 ## Tópicos populares em março de 2018
 {: #mar18}
 
-<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em março de 2018</caption>
 <thead>
 <th>Data</th>
@@ -102,30 +240,30 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 <tbody>
 <tr>
 <td>16 de março</td>
-<td>[Provisionar um cluster bare metal com Cálculo confiável](cs_clusters.html#shared_dedicated_node)</td>
+<td>[Provisionar um cluster bare metal com Cálculo confiável](cs_clusters_planning.html#shared_dedicated_node)</td>
 <td>Crie um cluster bare metal que execute o [Kubernetes versão 1.9](cs_versions.html#cs_v19) ou mais recente e ative o Cálculo confiável para verificar os nós do trabalhador com relação à violação.</td>
 </tr>
 <tr>
 <td>14 de março</td>
 <td>[Conexão segura com o {{site.data.keyword.appid_full}}](cs_integrations.html#appid)</td>
-<td>Aprimore seus apps que estão em execução no {{site.data.keyword.containershort_notm}} requerendo que os usuários se conectem.</td>
+<td>Aprimore seus apps que estão em execução no {{site.data.keyword.containerlong_notm}} requerendo que os usuários se conectem.</td>
 </tr>
 <tr>
 <td>13 de março</td>
-<td>[Local disponível em São Paulo](cs_regions.html)</td>
-<td>Bem-vindo São Paulo, Brasil, como um novo local na região sul dos EUA. Se tiver um firewall, certifique-se de [abrir as portas do firewall](cs_firewall.html#firewall) para esse local e os outros na região em que seu cluster está.</td>
+<td>[Zona disponível em São Paulo](cs_regions.html)</td>
+<td>Bem-vindo São Paulo, Brasil, como uma nova zona na região Sul dos EUA. Se você tiver um firewall, certifique-se de [abrir as portas do firewall](cs_firewall.html#firewall) para essa zona e as outras dentro da região em que seu cluster estiver.</td>
 </tr>
 <tr>
 <td>12 de março</td>
 <td>[Acabou de se associar ao {{site.data.keyword.Bluemix_notm}} com uma conta para Teste? Experimente um cluster grátis do Kubernetes!](container_index.html#clusters)</td>
-<td>Com uma [conta do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) para Teste, é possível implementar um cluster grátis por 21 dias para testar os recursos do Kubernetes.</td>
+<td>Com uma [conta do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) para teste, é possível implementar um cluster grátis por 30 dias para testar os recursos do Kubernetes.</td>
 </tr>
 </tbody></table>
 
 ## Tópicos populares em fevereiro de 2018
 {: #feb18}
 
-<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em fevereiro de 2018</caption>
 <thead>
 <th>Data</th>
@@ -136,7 +274,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 <tr>
 <td>27 de fevereiro</td>
 <td>Imagens de Hardware Virtual Machine (HVM) para nós do trabalhador</td>
-<td>Aumente o desempenho de E/S de suas cargas de trabalho com imagens de HVM. Ative em cada nó do trabalhador existente usando o [comando](cs_cli_reference.html#cs_worker_reload) `bx cs worker-reload` ou o [comando](cs_cli_reference.html#cs_worker_update) `bx cs worker-update`.</td>
+<td>Aumente o desempenho de E/S de suas cargas de trabalho com imagens de HVM. Ative em cada nó do trabalhador existente usando o [comando](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` ou o [comando](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>26 de fevereiro</td>
@@ -156,15 +294,15 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 <tr>
 <td>19 de fevereiro</td>
 <td>[Configurar a VPN IPSec do strongSwan](cs_vpn.html#vpn-setup)</td>
-<td>Implemente rapidamente o gráfico Helm da VPN IPSec do strongSwan para conectar seu cluster do {{site.data.keyword.containershort_notm}} de forma segura a seu data center no local sem um Virtual Router Appliance.</td>
+<td>Implemente rapidamente o gráfico Helm da VPN IPSec strongSwan para conectar seu cluster do {{site.data.keyword.containerlong_notm}} de forma segura a seu data center no local sem um Virtual Router Appliance.</td>
 </tr>
 <tr>
 <td>14 de fevereiro</td>
-<td>[Local disponível em Seul](cs_regions.html)</td>
-<td>No prazo dos Jogos Olímpicos, implemente um cluster do Kubernetes para Seul na região Norte AP. Se tiver um firewall, certifique-se de [abrir as portas do firewall](cs_firewall.html#firewall) para esse local e os outros na região em que seu cluster está.</td>
+<td>[ Zona disponível em Seul ](cs_regions.html)</td>
+<td>No prazo dos Jogos Olímpicos, implemente um cluster do Kubernetes para Seul na região Norte AP. Se você tiver um firewall, certifique-se de [abrir as portas do firewall](cs_firewall.html#firewall) para essa zona e as outras dentro da região em que seu cluster estiver.</td>
 </tr>
 <tr>
-<td>8 de fevereiro</td>
+<td>08 de fevereiro</td>
 <td>[Atualizar o Kubernetes 1.9](cs_versions.html#cs_v19)</td>
 <td>Revise as mudanças a serem feitas em seus clusters antes de atualizar para o Kubernetes 1.9.</td>
 </tr>
@@ -173,7 +311,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 ## Tópicos populares em janeiro de 2018
 {: #jan18}
 
-<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em janeiro de 2018</caption>
 <thead>
 <th>Data</th>
@@ -187,11 +325,11 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 </tr>
 <tr>
 <td>23 de janeiro</td>
-<td>[Locais disponíveis em Singapura e Montreal, CA](cs_regions.html)</td>
-<td>Singapura e Montreal são locais disponíveis nas regiões Norte AP e Leste dos EUA do {{site.data.keyword.containershort_notm}}. Se você tiver um firewall, certifique-se de [abrir as portas de firewall](cs_firewall.html#firewall) para esses locais e os outros na região em que seu cluster está.</td>
+<td>[Zonas disponíveis em Singapura e Montreal, CA](cs_regions.html)</td>
+<td>Singapura e Montreal são zonas disponíveis nas regiões Norte de AP e Leste dos EUA do {{site.data.keyword.containerlong_notm}}. Se você tiver um firewall, certifique-se de [abrir as portas de firewall](cs_firewall.html#firewall) para essas zonas e as outras dentro da região em que seu cluster está.</td>
 </tr>
 <tr>
-<td>8 de janeiro</td>
+<td>08 de janeiro</td>
 <td>[Enhanced sabores disponíveis](cs_cli_reference.html#cs_machine_types)</td>
 <td>Os tipos de máquina virtual de série 2 incluem armazenamento SSD local e criptografia de disco. [Mova suas cargas de trabalho](cs_cluster_update.html#machine_type) para esses tipos para melhor desempenho e estabilidade.</td>
 </tr>
@@ -200,7 +338,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 ## Bate-papo com desenvolvedores com os mesmos interesses no Slack
 {: #slack}
 
-É possível ver sobre o que os outros estão falando e fazer suas próprias perguntas no [{{site.data.keyword.containershort_notm}} Slack. ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com)
+É possível ver sobre o que os outros estão falando e fazer as suas próprias perguntas no [{{site.data.keyword.containerlong_notm}} Slack. ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com)
 {:shortdesc}
 
 Se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}}, [solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para essa Folga.

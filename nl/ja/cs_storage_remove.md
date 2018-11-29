@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -43,7 +43,7 @@ lastupdated: "2018-09-10"
 * 永続ストレージをクリーンアップすると、保管されているすべてのデータが削除されます。 データのコピーが必要な場合は、[ファイル・ストレージ](cs_storage_file.html#backup_restore)または[ブロック・ストレージ](cs_storage_block.html#backup_restore)のバックアップを作成してください。
 * {{site.data.keyword.Bluemix_dedicated}} アカウントを使用している場合は、[サポート・チケットを開いて](/docs/get-support/howtogetsupport.html#getting-customer-support)、ボリュームの削除を要求する必要があります。
 
-始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を設定してください。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 永続データをクリーンアップするには、次の手順を実行します。
 
@@ -173,7 +173,7 @@ lastupdated: "2018-09-10"
    ```
    {: pre}
      
-9. 物理ストレージ・インスタンスが削除されたことを確認します。 この処理には、数分かかる場合があります。 
+9. 物理ストレージ・インスタンスが削除されたことを確認します。 **注**: 削除処理が完了するまで最大で数日かかることがあります。 
 
    **ファイル・ストレージ:** 
    ```

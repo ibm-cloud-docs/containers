@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-10"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -16,13 +16,14 @@ lastupdated: "2018-10-10"
 {:download: .download}
 
 # 区域和专区
+{: #regions-and-zones}
 
 区域是可以部署应用程序、服务和其他 {{site.data.keyword.Bluemix}} 资源的特定地理位置。[{{site.data.keyword.Bluemix_notm}} 区域](#bluemix_regions)与 [{{site.data.keyword.containerlong}} 区域](#container_regions)不同。区域由一个或多个专区组成，专区是物理数据中心，用于托管计算、网络和存储资源以及相关冷却系统和电源，服务和应用程序通过这些资源托管。专区彼此隔离，可确保没有共享的单点故障。
 {:shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} 在全球托管。{{site.data.keyword.Bluemix_notm}} 内的服务可以在全球可用或在特定区域内可用。
 在 {{site.data.keyword.containerlong_notm}} 中创建 Kubernetes 集群时，其资源仍保留在将集群部署到的区域中。
-
+ 
 
 **注**：您可以在每个受支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
 
@@ -182,8 +183,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
     </tr>
     <tr>
       <td>英国南部</td>
-      <td>伦敦：lon02、lon04、lon06</td>
-      <td></td>
+      <td>伦敦：lon04、lon05、lon06<br><br>**注**：lon05 替换了 lon02。新集群必须使用 lon05。</td>
     </tr>
     <tr>
       <td>美国东部</td>
@@ -194,8 +194,7 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
     <tr>
       <td>美国南部</td>
       <td>达拉斯：dal10、dal12、dal13</td>
-      <td><p>圣何塞：sjc03、sjc04</p>
-      <p>圣保罗：sao01</p></td>
+      <td><p>圣何塞：sjc03、sjc04</p><p>圣保罗：sao01</p></td>
     </tr>
   </tbody>
 </table>

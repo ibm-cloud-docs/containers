@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-09-12"
+lastupdated: "2018-10-25"
 
 ---
 
@@ -53,6 +53,7 @@ Oui, à condition que le cluster se trouve dans l'une des [métropoles à zones 
 **Dois-je utiliser des clusters à zones multiples ?**</br>
 Non. Vous pouvez créer autant de clusters à zone unique que vous le souhaitez. En effet, vous pouvez même préférer des clusters à zone unique pour une gestion simplifiée ou si votre cluster doit résider dans une [ville à zone unique](cs_regions.html#zones).
 
+
 ## Cluster à zones multiples
 {: #multizone}
 
@@ -74,12 +75,13 @@ Oui, à condition que le cluster se trouve dans l'une des [métropoles à zones 
 
 <img src="images/cs_cluster_multizone.png" alt="Haute disponibilité pour les clusters à zones multiples" width="500" style="width:500px; border-style: none"/>
 
+
 Vous pouvez ajouter des zones supplémentaires dans votre cluster pour répliquer les noeuds worker de votre pool de noeuds worker sur plusieurs zones au sein d'une région. Les clusters à zones multiples sont conçus pour planifier de manière uniforme les pods sur les noeuds worker et les zones afin d'assurer la disponibilité et la reprise en cas d'incident. Si les noeuds worker ne sont pas répartis uniformément sur les zones ou si la capacité est insuffisante dans l'une des zones, le planificateur de Kubernetes risque de ne pas parvenir à planifier tous les pods demandés. Par conséquent, les pods peuvent passer à l'état **En attente** jusqu'à ce que la capacité suffisante soit disponible. Si vous souhaitez modifier le comportement par défaut pour que le planificateur de Kubernetes répartisse les pods entre les zones avec une meilleure distribution, utilisez la [règle d'affinité de pods](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
 
 **Pourquoi dois-je avoir des noeuds worker répartis sur 3 zones ?** </br>
-La répartition de vos charges de travail sur 3 zones permet d'assurer la haute disponibilité de votre application en cas d'indisponibilité d'une ou de deux zones, mais cela assure une configuration de cluster plus rentable. Mais pour quelle raison ? Voici un exemple.
+La répartition de vos charges de travail sur 3 zones permet d'assurer la haute disponibilité de votre application en cas d'indisponibilité d'une ou de deux zones, tout en ayant une configuration de cluster plus rentable. Mais pour quelle raison ? Voici un exemple.
 
-Supposons que vous ayez besoin d'un noeud worker à 6 coeurs pour traiter la charge de travail de votre application. Voici les options à votre disposition pour rendre votre cluster encore plus disponible :
+Supposons que vous ayez besoin d'un noeud worker à 6 coeurs pour traiter la charge de travail de votre application. Voici les options à votre disposition pour garantir une meilleure disponibilité de votre cluster :
 
 - **Dupliquer vos ressources dans une autre zone :** cette option vous laisse 2 noeuds worker, chacun avec 6 coeurs dans chaque zone, soit un total de 12 coeurs. </br>
 - **Répartir les ressources sur 3 zones :** avec cette option, vous déployez 3 coeurs par zone, ce qui vous laisse une capacité totale de 9 coeurs. Pour gérer votre charge de travail, deux zones doivent être opérationnelles en même temps. Si l'une des zones est indisponible, les deux autres zones peuvent traiter votre charge de travail. Si deux zones sont indisponibles, il reste trois coeurs opérationnels pour traiter votre charge de travail. Le déploiement de 3 coeurs par zone signifie des machines plus petites et donc une réduction de coût pour vous.</br>
@@ -88,7 +90,7 @@ Supposons que vous ayez besoin d'un noeud worker à 6 coeurs pour traiter la cha
 Un cluster à zones multiples est configuré avec un maître Kubernetes mis à disposition dans la même zone métropolitaine que les noeuds worker. Par exemple, si les noeuds worker se trouvent dans une ou plusieurs zones `dal10`, `dal12` ou `dal13`, le maître figure dans la métropole à zones multiples Dallas.
 
 **Que se passe-t-il si le maître Kubernetes devient indisponible ?** </br>
-Le [maître Kubernetes](cs_tech.html#architecture) est le composant principal qui permet de garder votre cluster opérationnel. Le maître stocke les ressources du cluster et leurs configurations dans la base de données etcd qui assure le bon fonctionnement de votre cluster. Le serveur d'API Kubernetes correspond au point d'entrée principal pour toutes les demandes de gestion de cluster des noeuds worker au maître, ou lorsque vous souhaitez interagir avec les ressources de votre cluster. <br><br>En cas de défaillance du maître, vos charges de travail continuent à s'exécuter sur les noeuds worker, mais vous ne pouvez pas utiliser des commandes `kubectl` pour gérer les ressources de votre cluster ou afficher l'état de santé du cluster tant que le serveur d'API Kubernetes dans le maître n'est pas opérationnel. Si un pod tombe en panne lors d'une indisponibilité du maître, le pod ne peut pas être replanifié tant que le noeud worker n'a pas rétabli le contact avec le serveur d'API Kubernetes.<br><br>Lors d'une indisponibilité du maître, vous pouvez toujours exécuter des commandes `ibmcloud ks` pour l'API {{site.data.keyword.containerlong_notm}} pour gérer vos ressources d'infrastructure, telles que les noeuds worker ou les réseaux locaux virtuels (VLAN). Si vous modifiez la configuration actuelle du cluster en ajoutant ou en retirant des noeuds worker dans le cluster, vos modifications ne sont pas appliquées tant que le maître n'est pas opérationnel. **Remarque** : veillez à ne pas redémarrer ou réamorcer un noeud worker pendant la durée d'indisponibilité du maître. Cette action retire les pods de votre noeud worker. Comme le serveur d'API Kubernetes n'est pas disponible, les pods ne peuvent pas être replanifiés sur d'autres noeuds worker dans le cluster.
+Le [maître Kubernetes](cs_tech.html#architecture) est le composant principal qui permet de garder votre cluster opérationnel. Le maître stocke les ressources du cluster et leurs configurations dans la base de données etcd qui assure le bon fonctionnement de votre cluster. Le serveur d'API Kubernetes correspond au point d'entrée principal pour toutes les demandes de gestion de cluster des noeuds worker au maître, ou lorsque vous souhaitez interagir avec les ressources de votre cluster.<br><br>En cas de défaillance du maître, vos charges de travail continuent à s'exécuter sur les noeuds worker, mais vous ne pouvez pas utiliser des commandes `kubectl` pour gérer les ressources de votre cluster ou afficher l'état de santé du cluster tant que le serveur d'API Kubernetes dans le maître n'est pas opérationnel. Si un pod tombe en panne lors d'une indisponibilité du maître, le pod ne peut pas être replanifié tant que le noeud worker n'a pas rétabli le contact avec le serveur d'API Kubernetes.<br><br>Lors d'une indisponibilité du maître, vous pouvez toujours exécuter des commandes `ibmcloud ks` pour l'API {{site.data.keyword.containerlong_notm}} pour gérer vos ressources d'infrastructure, telles que les noeuds worker ou les réseaux locaux virtuels (VLAN). Si vous modifiez la configuration actuelle du cluster en ajoutant ou en retirant des noeuds worker dans le cluster, vos modifications ne sont pas appliquées tant que le maître n'est pas opérationnel. **Remarque** : veillez à ne pas redémarrer ou réamorcer un noeud worker pendant la durée d'indisponibilité du maître. Cette action retire les pods de votre noeud worker. Comme le serveur d'API Kubernetes n'est pas disponible, les pods ne peuvent pas être replanifiés sur d'autres noeuds worker dans le cluster.
 
 
 Pour protéger votre cluster en cas de défaillance du maître ou dans les régions où les clusters à zones multiples ne sont pas disponibles, vous pouvez [configurer plusieurs clusters et les connecter avec un équilibreur de charge global](#multiple_clusters).
@@ -99,9 +101,9 @@ Oui. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-rése
 **Comment laisser les utilisateurs accéder à mon application à partir de l'Internet public ?**</br>
 Vous pouvez exposer vos applications en utilisant un équilibreur de charge d'application (ALB) Ingress ou le service d'équilibreur de charge.
 
-Par défaut, les équilibreurs de charge d'application sont automatiquement créés et activés dans chaque zone de votre cluster. Un équilibreur de charge pour zones multiples (MZLB) Cloudflare pour votre cluster est également automatiquement créé et déployé de sorte à obtenir 1 équilibreur de charge MZLB pour chaque région. L'équilibreur de charge MZLB place les adresses IP de vos équilibreurs de charge d'application (ALB) derrière le même hôte et active des diagnostics d'intégrité sur ces adresses IP pour déterminer si elles sont disponibles ou pas. Par exemple, si vous disposez de noeuds worker dans 3 zones dans la région Est des Etats-Unis, le nom d'hôte `yourcluster.us-east.containers.appdomain.cloud` comporte 3 adresses IP d'ALB. L'équilibreur de charge MZLB réalise des diagnostics d'intégrité de l'adresse IP ALB publique dans chaque zone d'une région et conserve les résultats de recherche DNS à jour en fonction de ces diagnostics. Pour plus d'informations, voir [Composants et architecture du service Ingress](cs_ingress.html#planning).
+- **Equilibreur de charge d'application (ALB) :** par défaut, les équilibreurs de charge d'application sont automatiquement créés et activés dans chaque zone de votre cluster. Un équilibreur de charge pour zones multiples (MZLB) Cloudflare pour votre cluster est également automatiquement créé et déployé de sorte à obtenir 1 équilibreur de charge MZLB pour chaque région. L'équilibreur de charge MZLB place les adresses IP de vos équilibreurs de charge d'application (ALB) derrière le même hôte et active des diagnostics d'intégrité sur ces adresses IP pour déterminer si elles sont disponibles ou pas. Par exemple, si vous disposez de noeuds worker dans 3 zones dans la région Est des Etats-Unis, le nom d'hôte `yourcluster.us-east.containers.appdomain.cloud` comporte 3 adresses IP d'ALB. L'équilibreur de charge MZLB réalise des diagnostics d'intégrité de l'adresse IP ALB publique dans chaque zone d'une région et conserve les résultats de recherche DNS à jour en fonction de ces diagnostics. Pour plus d'informations, voir [Composants et architecture du service Ingress](cs_ingress.html#planning).
 
-Les services d'équilibreur de charge sont configurés dans une seule zone. Les demandes entrantes dans votre application sont dirigées depuis cette zone vers toutes les instances d'application situées dans d'autres zones. Si cette zone devient indisponible, votre application risque d'être inaccessible sur Internet. Vous pouvez configurer des services d'équilibreur de charge supplémentaires dans d'autres zones pour tenir compte d'une défaillance de zone unique. Pour plus d'informations, voir [Services d'équilibreur de charge](cs_loadbalancer.html#multi_zone_config) à haute disponibilité.
+- **Services d'équilibreur de charge :** les services d'équilibreur de charge sont configurés dans une seule zone uniquement. Les demandes entrantes dans votre application sont dirigées depuis cette zone vers toutes les instances d'application situées dans d'autres zones. Si cette zone devient indisponible, votre application risque d'être inaccessible sur Internet. Vous pouvez configurer des services d'équilibreur de charge supplémentaires dans d'autres zones pour tenir compte d'une défaillance de zone unique. Pour plus d'informations, voir [Services d'équilibreur de charge](cs_loadbalancer.html#multi_zone_config) à haute disponibilité.
 
 **Puis-je configurer du stockage persistant pour mon cluster à zones multiples ?**</br>
 Pour le stockage persistant à haute disponibilité, utilisez un service de cloud, tel que [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
@@ -205,16 +207,17 @@ Vous pouvez configurer plusieurs clusters dans différentes régions d'une géol
 
 Par défaut, {{site.data.keyword.containerlong_notm}} configure votre cluster avec accès à un VLAN privé et à un VLAN public. Le VLAN privé détermine l'adresse IP privée qui est affectée à chaque noeud worker, ce qui offre à chaque noeud worker une interface réseau privée. Le VLAN public permet aux noeuds worker de se connecter automatiquement au maître de manière sécurisée.
 
+Si vous souhaitez verrouiller votre cluster pour autoriser le trafic privé sur le VLAN privé et bloquer le trafic public sur le VLAN public, vous pouvez [protéger votre cluster de l'accès public avec des règles réseau Calico](cs_network_cluster.html#both_vlans_private_services). Ces règles réseau Calico n'empêchent pas vos noeuds worker de communiquer avec le maître. Vous pouvez également limiter la surface de vulnérabilité dans votre cluster sans bloquer le trafic public en [isolant les charges de travail réseau dans des noeuds worker de périphérie](cs_edge.html).
 
 Si vous envisagez de créer un cluster qui n'a accès qu'à un VLAN privé, vous pouvez créer un cluster privé à une ou plusieurs zones. Cependant, lorsque vos noeuds worker sont connectés uniquement à un VLAN privé, ils ne peuvent pas se connecter automatiquement au maître. Vous devez configurer un dispositif de passerelle pour assurer la connectivité du réseau entre les noeuds worker et le maître.
 **Remarque** : vous ne pouvez pas convertir un cluster connecté à un VLAN public et à un VLAN privé pour en faire un cluster strictement privé. Le retrait de tous les VLAN publics d'un cluster peut provoquer l'arrêt de plusieurs composants du cluster. Vous devez créer un cluster à l'aide de la procédure suivante.
 
 Si vous souhaitez créer un cluster n'ayant accès qu'à un VLAN privé :
 
-1.  Consultez la rubrique [Planification des réseaux de cluster privés uniquement](cs_network_planning.html#private_vlan)
+1.  Consultez la rubrique [Planification des réseaux de cluster privés uniquement](cs_network_cluster.html#private_vlan).
 2.  Configurez votre dispositif de passerelle pour la connectivité du réseau. Notez que vous devez [ouvrir les adresses IP et les ports requis](cs_firewall.html#firewall_outbound) dans votre pare-feu et [activer le spanning VLAN](cs_subnets.html#vra-routing) pour les sous-réseaux.
 3.  [Créez un cluster via l'interface de ligne de commande](cs_clusters.html#clusters_cli) en incluant l'indicateur `--private-only`.
-4.  Si vous souhaitez exposer une application sur un réseau privé en utilisant un service NodePort, LoadBalancer ou Ingress privé, consultez la rubrique [Planification d'un réseau externe privé pour une configuration de VLAN privé uniquement](cs_network_planning.html#private_vlan). Le service est accessible uniquement sur l'adresse IP privée et vous devez configurer les ports dans votre pare-feu pour utiliser l'adresse IP privée.
+4.  Si vous souhaitez exposer une application sur un réseau privé en utilisant un service NodePort, un service d'équilibreur de charge ou un service Ingress privé, consultez la rubrique [Planification d'un réseau externe privé pour une configuration de VLAN privé uniquement](cs_network_planning.html#private_vlan). Le service est accessible uniquement sur l'adresse IP privée et vous devez configurer les ports dans votre pare-feu pour utiliser l'adresse IP privée.
 
 
 ## Pools de noeuds worker et noeuds worker
@@ -261,7 +264,7 @@ Lorsque vous créez un cluster virtuel standard, vous devez décider si vous sou
 Les noeuds partagés sont généralement moins coûteux que les noeuds dédiés, car les coûts du matériel sous-jacent sont partagés entre plusieurs clients. Toutefois, lorsque vous choisissez entre noeuds partagés et noeud dédiés, vous devriez contacter votre service juridique pour déterminer le niveau d'isolement de l'infrastructure et de conformité requis par votre environnement d'application.
 
 **Quelles sont les fonctions générales des machines virtuelles ?**</br>
-Les machines virtuelles utilisent le disque local à la place d'un réseau SAN (Storage Area Network) pour plus de fiabilité. Un réseau SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Toutes les machines virtuelles sont fournies avec une vitesse réseau de 1000 Mbit/s, un stockage sur disque local principal de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local secondaire pour les données d'exécution de conteneur ou le `kubelet`.
+Les machines virtuelles utilisent le disque local à la place d'un réseau SAN (Storage Area Network) pour plus de fiabilité. Un réseau SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Toutes les machines virtuelles sont fournies avec une vitesse réseau de 1000 Mbit/s, un stockage sur disque local principal de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local secondaire pour les données d'exécution de conteneur ou le `kubelet`. Le stockage local sur le noeud worker est conçu pour un traitement à court terme uniquement et le disque principal et le disque secondaire sont effacés lorsque vous mettez à jour ou rechargez le noeud worker. Pour les solutions de stockage persistant, voir [Planification de stockage persistant à haute disponibilité](cs_storage_planning.html#storage_planning).
 
 **Que se passe-t-il si je dispose de types de machine `u1c` ou `b1c` obsolètes ?**</br>
 Pour commencer à utiliser les types de machine `u2c` et `b2c`, [mettez à jour les types de machine en ajoutant des noeuds worker](cs_cluster_update.html#machine_type).
@@ -314,7 +317,7 @@ Les types de machine varient en fonction de la zone. Pour voir les types de mach
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr><tr>
-<td><strong>Virtuel, c2c.16x32</strong> : utilisez cette version lorsque vous souhaitez un certain équilibre entre les ressources d'UC et de mémoire du noeud worker pour les charges de travail légères ou de taille moyenne.</td></td>
+<td><strong>Virtuel, c2c.16x32</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:2 entre les ressources d'UC et de mémoire du noeud worker pour les charges de travail légères ou de taille moyenne.</td></td>
 <td>16 / 32 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
@@ -324,8 +327,8 @@ Les types de machine varient en fonction de la zone. Pour voir les types de mach
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr><tr>
-<td><strong>Virtuel, c2c.32x64</strong> : utilisez cette version lorsque vous souhaitez un certain équilibre entre les ressources d'UC et de mémoire du noeud worker pour les charges de travail de taille moyenne.</td></td>
-<td>16 / 16 Go</td>
+<td><strong>Virtuel, c2c.32x64</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:2 entre les ressources d'UC et de mémoire du noeud worker pour les charges de travail de taille moyenne.</td></td>
+<td>32 / 64 Go</td>
 <td>25 Go / 100 Go</td>
 <td>1000 Mbit/s</td>
 </tr>
@@ -339,13 +342,13 @@ Vous pouvez mettre à disposition votre noeud worker sous forme de serveur physi
 {: shortdesc}
 
 **En quoi une machine bare metal est-elle différente d'une machine virtuelle ?**</br>
-Le type bare metal vous permet d'accéder directement aux ressources physiques sur la machine, par exemple à la mémoire ou à l'UC. Cette configuration élimine l'hyperviseur de machine virtuelle qui alloue des ressources physiques aux machines virtuelles qui s'exécutent sur l'hôte. A la place, toutes les ressources d'une machine bare metal sont dédiées exclusivement au noeud worker, donc vous n'avez pas à vous soucier de "voisins gênants" partageant des ressources et responsables du ralentissement des performances. Les types de machine physique ont davantage de capacité de stockage local par rapport aux machines virtuelles et certaines disposent de disques RAID pour effectuer des sauvegardes de données locales.
+Le type bare metal vous permet d'accéder directement aux ressources physiques sur la machine, par exemple à la mémoire ou à l'UC. Cette configuration élimine l'hyperviseur de machine virtuelle qui alloue des ressources physiques aux machines virtuelles qui s'exécutent sur l'hôte. A la place, toutes les ressources d'une machine bare metal sont dédiées exclusivement au noeud worker, donc vous n'avez pas à vous soucier de "voisins gênants" partageant des ressources et responsables du ralentissement des performances. Les types de machine physique ont davantage de capacité de stockage local par rapport aux machines virtuelles et certaines disposent de disques RAID pour augmenter la disponibilité des données. Le stockage local sur le noeud worker est conçu pour un traitement à court terme uniquement et le disque principal et le disque secondaire sont effacés lorsque vous mettez à jour ou rechargez le noeud worker. Pour les solutions de stockage persistant, voir [Planification de stockage persistant à haute disponibilité](cs_storage_planning.html#storage_planning).
 
 **Hormis de meilleures spécifications en termes de performances, puis-je faire quelque chose avec une machine bare metal qui ne soit pas possible avec une machine virtuelle ?**</br>
 Oui. Avec une machine bare metal, vous avez la possibilité d'activer la fonction Calcul sécurisé (Trusted Compute) pour vérifier que vos noeuds worker ne font pas l'objet de falsification. Si vous n'activez pas cette fonction lors de la création du cluster mais souhaitez le faire ultérieurement, vous pouvez utiliser la [commande](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Après avoir activé cette fonction, vous ne pourrez plus la désactiver par la suite. Vous pouvez créer un nouveau cluster sans la fonction trust. Pour plus d'informations sur le mode de fonctionnement de la fonction de confiance (trust) lors du processus de démarrage du noeud, voir [{{site.data.keyword.containerlong_notm}} avec calcul sécurisé](cs_secure.html#trusted_compute). La fonction de calcul sécurisé est activée sur les clusters qui exécutent Kubernetes version 1.9 ou ultérieure et qui ont certains types de machine bare metal. Lorsque vous exécutez la [commande](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types <zone>`, vous pouvez voir les machines qui prennent en charge la fonction de confiance en examinant la zone **Trustable**. Par exemple, les versions GPU `mgXc` ne prennent pas en charge la fonction de calcul sécurisé.
 
 **Bare metal, ça a l'air génial ! Qu'est-ce qui m'empêche de commander une machine de ce type dès maintenant ?**</br>
-Les serveurs bare metal sont plus chers que les serveurs virtuels et conviennent mieux aux applications à hautes performances qui nécessitent plus de ressources et de contrôle hôte.  
+Les serveurs bare metal sont plus chers que les serveurs virtuels et conviennent mieux aux applications à hautes performances qui nécessitent plus de ressources et de contrôle hôte.
 
 **Important** : les serveurs bare metal sont facturés au mois. Si vous annulez un serveur bare metal avant la fin du mois, vous êtes facturé jusqu'à la fin de ce mois. La commande et l'annulation de serveurs bare metal est un processus manuel qui s'effectue via votre compte d'infrastructure IBM Cloud (SoftLayer). Ce processus peut prendre plus d'un jour ouvrable.
 
@@ -390,13 +393,13 @@ Choisissez un type de machine avec la configuration de stockage adaptée à votr
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal à forte consommation de données, md1c.16x64.4x4tb</strong> : idéal pour une quantité substantielle de stockage sur disque local, y compris RAID, pour la sauvegarde de données stockées localement sur la machine. A utiliser pour les charges de travail de systèmes de fichiers répartis, de bases de données volumineuses ou d'analyse de big data.</td>
+<td><strong>Bare metal à forte consommation de données, md1c.16x64.4x4tb</strong> : utilisez ce type pour une grande quantité de stockage sur disque local, avec notamment des disques RAID pour augmenter la disponibilité des données, pour des charges de travail de type systèmes de fichiers répartis, bases de données volumineuses et analyse de mégadonnées.</td>
 <td>16 / 64 Go</td>
 <td>RAID1 2x2 To / RAID10 SATA 4x4 To</td>
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Bare metal à forte consommation de données, md1c.28x512.4x4tb</strong> : idéal pour une quantité substantielle de stockage sur disque local, y compris RAID, pour la sauvegarde de données stockées localement sur la machine. A utiliser pour les charges de travail de systèmes de fichiers répartis, de bases de données volumineuses ou d'analyse de big data.</td>
+<td><strong>Bare metal à forte consommation de données, md1c.28x512.4x4tb</strong> : utilisez ce type pour une grande quantité de stockage sur disque local, avec notamment des disques RAID pour augmenter la disponibilité des données, pour des charges de travail de type systèmes de fichiers répartis, bases de données volumineuses et analyse de mégadonnées.</td>
 <td>28 / 512 Go</td>
 <td>RAID1 2x2 To / RAID10 SATA 4x4 To</td>
 <td>10000 Mbit/s</td>
@@ -420,7 +423,7 @@ Choisissez un type de machine avec la configuration de stockage adaptée à votr
 ### Machines SDS (Software-Defined Storage)
 {: #sds}
 
-Les versions SDS (Software-Defined Storage) sont des machines physiques mises à disposition avec un disque RAW pour du stockage local physique. Comme les données sont colocalisées avec le noeud de traitement, les machines SSD conviennent particulièrement aux charges de travail hautes performances.
+Les versions SDS (Software-Defined Storage) sont des machines physiques mises à disposition avec des disques RAW supplémentaires pour le stockage local physique. Contrairement aux disques locaux principaux et secondaires, les disques RAW ne sont pas effacés lors de la mise à jour ou du rechargement d'un noeud worker. Comme les données sont colocalisées avec le noeud de traitement, les machines SSD conviennent particulièrement aux charges de travail hautes performances.
 {: shortdesc}
 
 **Quand utiliser des versions SDS ?**</br>
@@ -428,6 +431,8 @@ En général, vous utilisez les machines SDS dans les cas suivants :
 *  Si vous utilisez un module complémentaire SDS dans le cluster, vous devez utiliser une machine SDS.
 *  Si votre application est un objet [StatefulSet ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) qui nécessite un stockage local, vous pouvez utiliser des machines SDS et mettre à disposition des [volumes persistants locaux Kubernetes (bêta) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
 *  Vous pouvez disposer d'applications personnalisées ou de modules complémentaires de cluster qui nécessitent SDS ou du stockage local. Par exemple, si vous envisagez d'utiliser logDNA, vous devez utiliser un type de machine SDS.
+
+Pour d'autres solutions de stockage, voir [Planification de stockage persistant à haute disponibilité](cs_storage_planning.html#storage_planning).
 
 **Quelles versions SDS puis-je commander ?**</br>
 Les types de machine varient en fonction de la zone. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Vous pouvez également passer en revue les types de machine [bare metal](#bm) ou [VM](#vm).
@@ -446,10 +451,24 @@ Choisissez un type de machine avec la configuration de stockage adaptée à votr
 <th>Nom et cas d'utilisation</th>
 <th>Coeurs/ Mémoire</th>
 <th>Disque principal / secondaire</th>
-<th>Stockage local</th>
+<th>Disques RAW supplémentaires</th>
 <th>Vitesse réseau</th>
 </thead>
 <tbody>
+<tr>
+<td><strong>Bare metal avec SDS, ms2c.4x32.1.9tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
+<td>4 / 32 Go</td>
+<td>SATA 2 To / SSD 960 Go</td>
+<td>SSD RAW 1,9 To</td>
+<td>10000 Mbit/s</td>
+</tr>
+<tr>
+<td><strong>Bare metal avec SDS, ms2c.16x64.1.9tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
+<td>16 / 64 Go</td>
+<td>SATA 2 To / SSD 960 Go</td>
+<td>SSD RAW 1,9 To</td>
+<td>10000 Mbit/s</td>
+</tr>
 <tr>
 <td><strong>Bare metal avec SDS, ms2c.28x256.3.8tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
 <td>28 / 256 Go</td>
