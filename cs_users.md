@@ -754,7 +754,7 @@ To create custom RBAC permissions:
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
-              <td><ul><li>For `User`: Append the individual user's email address to one the following URLs.<ul><li>For clusters that run Kubernetes 1.11 or later: <code>IAM#user@email.com</code></li><li>For clusters that run Kubernetes 1.10 or earlier: <code>kubernetes#user@email.com</code></li></ul></li>
+              <td><ul><li>For `User`: Append the individual user's email address to one the following URLs.<ul><li>For clusters that run Kubernetes 1.11 or later: <code>IAM#user@email.com</code></li><li>For clusters that run Kubernetes 1.10 or earlier: <code>https://iam.ng.bluemix.net/kubernetes#user@email.com</code></li></ul></li>
               <li>For `Group`: For clusters that run Kubernetes 1.11 or later, specify the name of the [{{site.data.keyword.Bluemix_notm}} IAM access group](/docs/iam/groups.html#groups) in your account.</li>
               <li>For `ServiceAccount`: Specify the service account name.</li></ul></td>
             </tr>
@@ -1084,7 +1084,7 @@ To create custom RBAC permissions:
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
-              <td><ul><li>For `User`: Append the individual user's email address to one the following URLs.<ul><li>For clusters that run Kubernetes 1.11 or later: <code>IAM#user@email.com</code></li><li>For clusters that run Kubernetes 1.10 or earlier: <code>kubernetes#user@email.com</code></li></ul></li>
+              <td><ul><li>For `User`: Append the individual user's email address to one the following URLs.<ul><li>For clusters that run Kubernetes 1.11 or later: <code>IAM#user@email.com</code></li><li>For clusters that run Kubernetes 1.10 or earlier: <code>https://iam.ng.bluemix.net/kubernetes#user@email.com</code></li></ul></li>
               <li>For `Group`: For clusters that run Kubernetes 1.11 or later, specify the name of the [{{site.data.keyword.Bluemix_notm}} IAM group](/docs/iam/groups.html#groups) in your account.</li>
               <li>For `ServiceAccount`: Specify the service account name.</li></ul></td>
             </tr>
