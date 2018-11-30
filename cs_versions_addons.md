@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-28"
+lastupdated: "2018-11-30"
 
 ---
 
@@ -45,6 +45,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>393 / 282</td>
+<td>29 Nov 2018</td>
+<td>Improves performance for {{site.data.keyword.appid_full}}.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>384 / 246</td>
 <td>14 Nov 2018</td>
