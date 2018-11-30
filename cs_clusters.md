@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-11-30"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2018-11-27"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:gif: data-image-type='gif'}
 
 
 # Setting up clusters and worker nodes

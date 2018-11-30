@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-11-30"
 
 ---
 
@@ -706,7 +706,7 @@ kind: Ingress
 metadata:
 name: myingress
 annotations:
-  ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; [servicePort=&lt;service_port&gt;]"
+  ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
 spec:
   tls:
   - hosts:
@@ -737,7 +737,7 @@ spec:
   </tr>
   <tr>
   <td><code>servicePort</code></td>
-  <td>This parameter is optional. When provided, the port is substituted to this value before traffic is sent to the back-end app. Otherwise, the port remains same as the Ingress port.</td>
+  <td>This parameter is optional. When provided, the port is substituted to this value before traffic is sent to the back-end app. Otherwise, the port remains the same as the Ingress port. If you don't want to set this parameter, you can remove it from your configuration. </td>
   </tr>
   </tbody></table>
 
@@ -1642,7 +1642,7 @@ Use the `mutual-auth` annotation for SSL termination between the client and the 
 <dt>Pre-requisites</dt>
 <dd>
 <ul>
-<li>You must have a valid mutual authentication secret that contains the required <code>ca.crt</code>. To create a mutual authentication secret, see the steps at the end of this section.</li>
+<li>You must have a valid mutual authentication secret that contains the required <code>client.crt</code>. To create a mutual authentication secret, see the steps at the end of this section.</li>
 <li>To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](cs_ingress.html#opening_ingress_ports) and then specify that port in this annotation. Do not use the `custom-port` annotation to specify a port for mutual authentication.</li>
 </ul>
 </dd>
@@ -1700,19 +1700,19 @@ spec:
 1. Generate a key and certificate in one of the following ways:
     * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
     * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Create a `ca.key`.
+        1. Create a `client.key`.
             ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. Use the key to create a `ca.crt`.
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
+            openssl genrsa -out client.key 1024
             ```
             {: pre}
-        3. Use the `ca.crt` to create a self-signed certificate.
+        2. Use the key to create a `client.crt`.
             ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            openssl req -new -x509 -key client.key -out client.crt
+            ```
+            {: pre}
+        3. Use the `client.crt` to create a self-signed certificate.
+            ```
+            openssl x509 -req -in example.org.csr -CA client.crt -CAkey client.key -CAcreateserial -out example.org.crt
             ```
             {: pre}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
@@ -1724,7 +1724,7 @@ spec:
        name: ssl-my-test
      type: Opaque
      data:
-       ca.crt: <ca_certificate>
+       client.crt: <ca_certificate>
      ```
      {: codeblock}
 4. Create the certificate as a Kubernetes secret.
@@ -1793,7 +1793,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>If your back-end app can handle TLS and you want to add additional security, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the one-way or mutual authentication secret for the service.<ul><li>If you provide a one-way authentication secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a one-way secret, see the steps at the end of this section.</li><li>If you provide a mutual authentication secret, the value must contain the required <code>ca.crt</code> and <code>ca.key</code> that your app is expecting from the client. To create a mutual authentication secret, see the steps at the end of this section.</li></ul><p class="important">If you do not provide a secret, insecure connections are permitted. You might choose to omit a secret if want to test the connection and do not have certificates ready, or if your certificates are expired and you want to allow insecure connections.</p></td>
+  <td>If your back-end app can handle TLS and you want to add additional security, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the one-way or mutual authentication secret for the service.<ul><li>If you provide a one-way authentication secret, the value must contain the <code>trusted.crt</code> from the upstream server. To create a one-way secret, see the steps at the end of this section.</li><li>If you provide a mutual authentication secret, the value must contain the required <code>client.crt</code> and <code>client.key</code> that your app is expecting from the client. To create a mutual authentication secret, see the steps at the end of this section.</li></ul><p class="important">If you do not provide a secret, insecure connections are permitted. You might choose to omit a secret if want to test the connection and do not have certificates ready, or if your certificates are expired and you want to allow insecure connections.</p></td>
   </tr>
   </tbody></table>
 
@@ -1831,19 +1831,19 @@ spec:
 1. Generate a key and certificate in one of the following ways:
     * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
     * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Create a `ca.key`.
+        1. Create a `client.key`.
             ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. Use the key to create a `ca.crt`.
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
+            openssl genrsa -out client.key 1024
             ```
             {: pre}
-        3. Use the `ca.crt` to create a self-signed certificate.
+        2. Use the key to create a `client.crt`.
             ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            openssl req -new -x509 -key client.key -out client.crt
+            ```
+            {: pre}
+        3. Use the `client.crt` to create a self-signed certificate.
+            ```
+            openssl x509 -req -in example.org.csr -CA client.crt -CAkey client.key -CAcreateserial -out example.org.crt
             ```
             {: pre}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
@@ -1855,7 +1855,7 @@ spec:
        name: ssl-my-test
      type: Opaque
      data:
-       ca.crt: <ca_certificate>
+       client.crt: <ca_certificate>
      ```
      {: codeblock}
 4. Create the certificate as a Kubernetes secret.

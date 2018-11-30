@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-11-30"
 
 
 ---
@@ -512,7 +512,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
   subjects:
   - apiGroup: rbac.authorization.k8s.io
     kind: User
-    name: https://iam.ng.bluemix.net/IAM#user@email.com
+    name: IAM#user@email.com
   ```
   {: screen}
 
@@ -708,7 +708,7 @@ To create custom RBAC permissions:
           namespace: default
         subjects:
         - kind: User
-          name: https://iam.ng.bluemix.net/IAM#user1@example.com
+          name: IAM#user1@example.com
           apiGroup: rbac.authorization.k8s.io
         - kind: Group
           name: team1
@@ -754,7 +754,7 @@ To create custom RBAC permissions:
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
-              <td><ul><li>For `User`: Append the individual user's email address to one the following URLs.<ul><li>For clusters that run Kubernetes 1.11 or later: <code>https://iam.ng.bluemix.net/IAM#user_email</code></li><li>For clusters that run Kubernetes 1.10 or earlier: <code>https://iam.ng.bluemix.net/kubernetes#user_email</code></li></ul></li>
+              <td><ul><li>For `User`: Append the individual user's email address to one the following URLs.<ul><li>For clusters that run Kubernetes 1.11 or later: <code>IAM#user@email.com</code></li><li>For clusters that run Kubernetes 1.10 or earlier: <code>kubernetes#user@email.com</code></li></ul></li>
               <li>For `Group`: For clusters that run Kubernetes 1.11 or later, specify the name of the [{{site.data.keyword.Bluemix_notm}} IAM access group](/docs/iam/groups.html#groups) in your account.</li>
               <li>For `ServiceAccount`: Specify the service account name.</li></ul></td>
             </tr>
@@ -1038,7 +1038,7 @@ To create custom RBAC permissions:
           namespace: default
         subjects:
         - kind: User
-          name: https://iam.ng.bluemix.net/IAM#user1@example.com
+          name: IAM#user1@example.com
           apiGroup: rbac.authorization.k8s.io
         - kind: Group
           name: team1
@@ -1084,7 +1084,7 @@ To create custom RBAC permissions:
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
-              <td><ul><li>For `User`: Append the individual user's email address to one the following URLs.<ul><li>For clusters that run Kubernetes 1.11 or later: <code>https://iam.ng.bluemix.net/IAM#user_email</code></li><li>For clusters that run Kubernetes 1.10 or earlier: <code>https://iam.ng.bluemix.net/kubernetes#user_email</code></li></ul></li>
+              <td><ul><li>For `User`: Append the individual user's email address to one the following URLs.<ul><li>For clusters that run Kubernetes 1.11 or later: <code>IAM#user@email.com</code></li><li>For clusters that run Kubernetes 1.10 or earlier: <code>kubernetes#user@email.com</code></li></ul></li>
               <li>For `Group`: For clusters that run Kubernetes 1.11 or later, specify the name of the [{{site.data.keyword.Bluemix_notm}} IAM group](/docs/iam/groups.html#groups) in your account.</li>
               <li>For `ServiceAccount`: Specify the service account name.</li></ul></td>
             </tr>
