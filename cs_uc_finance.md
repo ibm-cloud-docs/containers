@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-03"
 
 ---
 
@@ -33,6 +33,7 @@ compute, easy spin-up of clusters for faster development, and AI from {{site.dat
 {: #uc_mortgage}
 
 A Risk Management VP for a residential mortgage company processes 70 million records a day, but the on-premises system was slow and also inaccurate. IT expenses soared because hardware quickly went out of date and wasn't utilized fully. While they waited for hardware provisioning, their regulatory compliance slowed. 
+{: shortdesc}
 
 Why {{site.data.keyword.Bluemix_notm}}: To improve risk analysis, the company looked to {{site.data.keyword.containerlong_notm}} and IBM Cloud Analytic services to reduce costs, increase worldwide availability, and ultimately accelerate regulatory compliance. With {{site.data.keyword.containerlong_notm}} in multiple regions, their analysis apps can be containerized and deployed across the globe, improving availability and addressing local regulations. Those deployments are accelerated with familiar open source tools, already part of {{site.data.keyword.containerlong_notm}}.
 
@@ -100,6 +101,7 @@ This solution provides the immediate benefit of scalability. By using Kubernetes
 {: #uc_payment_tech}
 
 A Development Exec has Developers that use on-premises traditional tools that slow down prototyping while they wait for hardware procurement.
+{: shortdesc}
 
 Why {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} provides spin-up of compute by using open-source standard technology. After the company moved to {{site.data.keyword.containerlong_notm}}, Developers have access to DevOps friendly tools, such as portable and easily shared containers.
 
