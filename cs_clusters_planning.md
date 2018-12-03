@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-03"
 
 ---
 
@@ -440,7 +440,7 @@ Software-defined storage (SDS) flavors are physical machines that are provisione
 
 **When do I use SDS flavors?**</br>
 You typically use SDS machines in the following cases:
-*  If you use an SDS add-on to the cluster, you must use an SDS machine.
+*  If you use an SDS add-on to the cluster, use an SDS machine.
 *  If your app is a [StatefulSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) that requires local storage, you can use SDS machines and provision [Kubernetes local persistent volumes (beta) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
 *  You might have custom apps that require additional raw local storage.
 
