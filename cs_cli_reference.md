@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-04"
 
 ---
 
@@ -447,6 +447,7 @@ If you find that you need to update the API key that is stored for a resource gr
 {: #cs_api_key_reset}
 
 Replace the current {{site.data.keyword.Bluemix_notm}} IAM API key in an {{site.data.keyword.containerlong_notm}} region.
+{: shortdesc}
 
 This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The {{site.data.keyword.Bluemix_notm}} IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how {{site.data.keyword.Bluemix_notm}} IAM API keys work, see the [`ibmcloud ks api-key-info` command](#cs_api_key_info).
 
@@ -566,6 +567,7 @@ Disable the webhook backend configuration for the cluster's API server. Disablin
 {: #cs_apiserver_refresh}
 
 Restart the cluster master to apply new Kubernetes API configuration changes. Your worker nodes, apps, and resources are not modified and continue to run.
+{: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -617,6 +619,7 @@ View a list of supported commands and parameters.
 {: #cs_init}
 
 Initialize the {{site.data.keyword.containerlong_notm}} plug-in or specify the region where you want to create or access Kubernetes clusters.
+{: shortdesc}
 
 <strong>Minimum required permissions</strong>: None
 
@@ -653,6 +656,7 @@ ibmcloud ks init --host https://uk-south.containers.bluemix.net
 {: #cs_messages}
 
 View current messages for the IBMid user.
+{: shortdesc}
 
 <strong>Minimum required permissions</strong>: None
 
@@ -676,6 +680,7 @@ ibmcloud ks messages
 {: #cs_cluster_config}
 
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
+{: shortdesc}
 
 **Minimum required permissions**: None
 
@@ -786,7 +791,7 @@ trusted: <em>true</em>
      <tr>
       <td><code><em>kube-version</em></code></td>
       <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks kube-versions</code>.
-</td></tr>
+</td></tr> 
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
       <td>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
@@ -898,6 +903,7 @@ trusted: <em>true</em>
 {: #cs_cluster_feature_enable}
 
 Enable a feature on an existing cluster.
+{: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -929,6 +935,7 @@ Enable a feature on an existing cluster.
 {: #cs_cluster_get}
 
 View information about a cluster in your organization.
+{: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -995,6 +1002,7 @@ View information about a cluster in your organization.
 {: #cs_cluster_refresh}
 
 Restart the cluster master nodes to apply new Kubernetes API configuration changes. Your worker nodes, apps, and resources are not modified and continue to run.
+{: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1023,6 +1031,7 @@ Restart the cluster master nodes to apply new Kubernetes API configuration chang
 {: #cs_cluster_rm}
 
 Remove a cluster from your organization.
+{: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1055,6 +1064,7 @@ Remove a cluster from your organization.
 {: #cs_cluster_update}
 
 Update the Kubernetes master to the default API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that were deployed by the user are not modified and continue to run.
+{: shortdesc}
 
 You might need to change your YAML files for future deployments. Review this [release note](cs_versions.html) for details.
 
@@ -1091,6 +1101,7 @@ You might need to change your YAML files for future deployments. Review this [re
 {: #cs_clusters}
 
 View a list of clusters in your organization.
+{: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1116,6 +1127,7 @@ View a list of clusters in your organization.
 {: #cs_kube_versions}
 
 View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](cs_cli_reference.html#cs_worker_update) to the default version for the latest, stable capabilities.
+{: shortdesc}
 
 <strong>Minimum required permissions</strong>: None
 
@@ -1148,6 +1160,7 @@ View a list of Kubernetes versions supported in {{site.data.keyword.containerlon
 {: #cs_cluster_service_bind}
 
 Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
+{: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
@@ -1180,6 +1193,7 @@ Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view availabl
 {: #cs_cluster_service_unbind}
 
 Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
+{: shortdesc}
 
 When you remove an {{site.data.keyword.Bluemix_notm}} service, the service credentials are removed from the cluster. If a pod is still using the service, it fails because the service credentials cannot be found.
 {: note}
@@ -1358,6 +1372,7 @@ Register a webhook.
 {: #cs_cluster_subnet_add}
 
 You can add existing portable public or private subnets from your IBM Cloud infrastructure (SoftLayer) account to your Kubernetes cluster or reuse subnets from a deleted cluster instead of using the automatically provisioned subnets.
+{: shortdesc}
 
 <p class="important">Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.</br>
 </br>When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.</br>
