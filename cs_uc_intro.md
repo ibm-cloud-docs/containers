@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-03"
 
 ---
 
@@ -28,8 +28,8 @@ A variety of use cases show the strengths of {{site.data.keyword.containerlong_n
 * AI and machine learning
 * Data and storage
 * DevOps
-
 {: shortdesc}
+
 <table summary="The table shows the use cases. Rows are to be read from the left to right, with icons representing each industry in column one the description in column two.">
 <caption>Use cases</caption>
   <thead>

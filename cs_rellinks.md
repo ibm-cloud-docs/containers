@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-04"
 
 ---
 
@@ -77,7 +77,7 @@ lastupdated: "2018-11-27"
 
 **Glossaries**
 
-- [{{site.data.keyword.Bluemix_notm}} glossary](/docs/overview/glossary/index.html#glossary)
+- [{{site.data.keyword.Bluemix_notm}} glossary](/docs/overview/glossary/glossary.html#glossary)
 - [Kubernetes glossary ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Docker glossary ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/glossary/)
 

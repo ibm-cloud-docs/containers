@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-04"
 
 ---
 
@@ -141,7 +141,7 @@ Review some frequently asked questions about {{site.data.keyword.containerlong_n
 **How can I check my billing and usage?**<br>
 To check your usage and estimated totals, see [Viewing your usage](/docs/billing-usage/viewing_usage.html#viewingusage).
 
-If you link your {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructure (SoftLayer) accounts, you receive a consolidated bill. For more information, see [Consolidated billing for linked accounts](/docs/billing-usage/linking_accounts.html#unifybillaccounts).
+If you link your {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructure (SoftLayer) accounts, you receive a consolidated bill. For more information, see [Consolidated billing for linked accounts](/docs/customer-portal/linking_accounts.html#unifybillaccounts).
 
 **Can I group my cloud resources by teams or departments for billing purposes?**<br>
 You can [use resource groups](/docs/resources/bestpractice_rgs.html#bp_resourcegroups) to organize your {{site.data.keyword.Bluemix_notm}} resources, including clusters, into groups to organize your billing.

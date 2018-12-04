@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-03"
 
 ---
 
@@ -32,6 +32,7 @@ take advantage of analytics for market insights, multiregion deployments across 
 {: #uc_data-share}
 
 A Line-of-Business (LOB) Exec needs to increase sales channels, but the retail system is closed off in an on-premises data center. The competition has global partners to cross-sell and upsell permutations of their goods: across brick-and-mortar and online sites. 
+{: shortdesc}
 
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides a public-cloud ecosystem, where containers enable new partners and other external players to co-develop apps and data, through APIs. Now that the retail system is on the public cloud, APIs also streamline data sharing and jumpstart new app development. App deployments increase when Developers experiment easily, pushing changes to Development and Test systems quickly with toolchains. 
 
@@ -113,6 +114,7 @@ Technical solution:
 {: #uc_grocer}
 
 A Chief Marketing Officer (CMO) needs to increase customer traffic by 20% in stores by making the stores a differentiating asset. Large retail competitors and online retailers are stealing sales. At the same time, the CMO needs to reduce inventory without markdowns because holding inventory too long locks up millions in capital.
+{: shortdesc}
 
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides easy spin-up of more compute, where Developers quickly add Cloud Analytics services for sales behavior insights and digital market adaptability. 
 

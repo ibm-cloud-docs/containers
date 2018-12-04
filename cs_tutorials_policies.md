@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-04"
 
 ---
 
@@ -246,6 +246,7 @@ To secure the PR firm's cluster, you must block public access to both the load b
       name: deny-nodeports
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
         destination:
@@ -259,7 +260,6 @@ To secure the PR firm's cluster, you must block public access to both the load b
           - 30000:32767
         protocol: UDP
         source: {}
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 1100
       types:
@@ -372,9 +372,8 @@ First, in addition to the node ports, you must block all incoming traffic to the
           - 80
         protocol: UDP
         source: {}
-      preDNAT: true
       selector: ibm.role=='worker_public'
-      order: 1100
+      order: 800
       types:
       - Ingress
     ```
@@ -421,7 +420,6 @@ First, in addition to the node ports, you must block all incoming traffic to the
         source:
           nets:
           - <client_address>/32
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 500
       types:
@@ -491,7 +489,7 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
 
     Now, all incoming TCP and UDP traffic from any source IP to the load balancer IP address and port is permitted again.
 
-2. To deny all incoming TCP and UDP traffic from your system's source IP address to the load balancer IP address and port, create a low-order pre-DNAT policy called `deny-lb-port-80.yaml` in a text editor. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the load balancer and `<client_address>` with the public IP address of your system's source IP.
+2. To deny all incoming TCP and UDP traffic from your system's source IP address to the load balancer IP address and port, create a low-order pre-DNAT policy called `blacklist.yaml` in a text editor. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the load balancer and `<client_address>` with the public IP address of your system's source IP.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -521,7 +519,6 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
         source:
           nets:
           - <client_address>/32
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 500
       types:
