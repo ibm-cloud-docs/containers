@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-03"
+lastupdated: "2018-12-04"
 
 ---
 
@@ -251,7 +251,7 @@ When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you ch
 
 ![Hardware options for worker nodes in a standard cluster](images/cs_clusters_hardware.png)
 
-If you want more than one flavor of worker node, you must create a worker pool for each flavor. When you create a free cluster, your worker node is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account. As you plan, consider the [worker node limit minimum threshold](#resource_limit_node) of 10% of total memory capacity.
+If you want more than one flavor of worker node, you must create a worker pool for each flavor. When you create a free cluster, your worker node is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account. In standard clusters, you can choose the type of machine that works best for your workload. As you plan, consider the [worker node resource reserves](#resource_limit_node) on the total CPU and memory capacity.
 
 You can deploy clusters by using the [console UI](cs_clusters.html#clusters_ui) or the [CLI](cs_clusters.html#clusters_cli).
 
@@ -498,17 +498,106 @@ Choose a machine type with the right storage configuration to support your workl
 </tbody>
 </table>
 
-## Worker node memory limits
+## Worker node resource reserves
 {: #resource_limit_node}
 
-{{site.data.keyword.containerlong_notm}} sets a memory limit on each worker node. When pods that are running on the worker node exceed this memory limit, the pods are removed. In Kubernetes, this limit is called a [hard eviction threshold ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
+{{site.data.keyword.containerlong_notm}} sets compute resource reserves that limit available compute resources on each worker node. Reserved memory and CPU resources cannot be used by pods on the worker node. Further, if pods exceed the worker node resource limit, the pods are removed. In Kubernetes, this limit is called a [hard eviction threshold ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
 {:shortdesc}
 
-If your pods are removed frequently, add more worker nodes to your cluster or set [resource limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) on your pods.
+If less CPU or memory is available than the worker node reserves, Kubernetes starts to remove pods to restore sufficient compute resources. The pods reschedule onto another worker node if a worker node is available. If your pods are removed frequently, add more worker nodes to your cluster or set [resource limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) on your pods.
 
-**Each machine has a minimum threshold that equals 10% of its total memory capacity**. When there is less memory available on the worker node than the minimum threshold that is allowed, Kubernetes immediately removes the pod. The pod reschedules onto another worker node if a worker node is available. For example, if you have a `b2c.4x16` virtual machine, its total memory capacity is 16GB. If less than 1600MB (10%) of memory is available, new pods cannot schedule onto this worker node but instead are scheduled onto another worker node. If no other worker node is available, the new pods remain unscheduled.
+The resources that are reserved on your worker node depend on the amount of CPU and memory that your worker node comes with. {{site.data.keyword.containerlong_notm}} defines memory and CPU tiers as shown in the following tables. If your worker node comes with compute resources in multiple tiers, a percentage of your CPU and memory resources is reserved for each tier.
 
-To review how much memory is used on your worker node, run [`kubectl top node` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
+To review how much compute resources are currently used on your worker node, run [`kubectl top node` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
+{: tip}
+
+<table summary="Worker node memory reserves by tier.">
+<caption>Worker node memory reserves by tier.</caption>
+<thead>
+<tr>
+  <th>Memory tier</th>
+  <th>% or amount reserved</th>
+  <th>`b2c.4x16` worker node (16 GB) example</th>
+  <th>`mg1c.28x256` worker node (256 GB) example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>First 16GB (0-16GB)</td>
+  <td>10% of memory</td>
+  <td>1.6 GB</td>
+  <td>1.6 GB</td>
+</tr>
+<tr>
+  <td>Next 112GB (17-128GB)</td>
+  <td>6% of memory</td>
+  <td>N/A</td>
+  <td>6.72 GB</td>
+</tr>
+<tr>
+  <td>Remaining GBs (129GB+)</td>
+  <td>2% of memory</td>
+  <td>N/A</td>
+  <td>2.54 GB</td>
+</tr>
+<tr>
+  <td>Additional reserve for [`kubelet` eviction ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
+  <td>100MB</td>
+  <td>100MB (flat amount)</td>
+  <td>100MB (flat amount)</td>
+</tr>
+<tr>
+  <td>Total</td>
+  <td>(varies)</td>
+  <td>1.7 GB reserved of 16 GB total</td>
+  <td>10.96 GB reserved of 256 GB total</td>
+</tr>
+</tbody>
+</table>
+
+<table summary="Worker node CPU reserves by tier.">
+<caption>Worker node CPU reserves by tier.</caption>
+<thead>
+<tr>
+  <th>CPU tier</th>
+  <th>% reserved</th>
+  <th>`b2c.4x16` worker node (4 cores) example</th>
+  <th>`mg1c.28x256` worker node (28 cores) example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>First core (Core 1)</td>
+  <td>6% cores</td>
+  <td>0.06 cores</td>
+  <td>0.06 cores</td>
+</tr>
+<tr>
+  <td>Next 2 cores (Cores 2-3)</td>
+  <td>1% cores</td>
+  <td>0.02 cores</td>
+  <td>0.02 cores</td>
+</tr>
+<tr>
+  <td>Next 2 cores (Cores 4-5)</td>
+  <td>0.5% cores</td>
+  <td>0.005 cores</td>
+  <td>0.01 cores</td>
+</tr>
+<tr>
+  <td>Remaining cores (Cores 6+)</td>
+  <td>0.25% cores</td>
+  <td>N/A</td>
+  <td>0.0575 cores</td>
+</tr>
+<tr>
+  <td>Total</td>
+  <td>(varies)</td>
+  <td>0.085 cores reserved of 4 cores total</td>
+  <td>0.1475 cores reserved of 28 cores total</td>
+</tr>
+</tbody>
+</table>
 
 ## Autorecovery for your worker nodes
 {: #autorecovery}
