@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-04"
 
 ---
 
@@ -110,6 +110,7 @@ Much of the CI/CD process itself is automated with IBM's Continuous Delivery ser
 {: #uc_research}
 
 A Development Exec for a disease research nonprofit has academic and industry researchers who can't easily share research data. Instead, their work's isolated in pockets across the globe due to regional compliance regulations and centralized databases.
+{: shortdesc}
 
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} delivers secure compute that can host sensitive and performant data processing on an open platform. That global platform is hosted in near-by regions. So it's tied to local regulations that inspire patients’ and researchers’ confidence that their data is both protected locally and makes a difference in better health outcomes.
 
