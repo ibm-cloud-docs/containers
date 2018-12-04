@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-04"
 
 ---
 
@@ -200,7 +200,7 @@ Monthly resources are billed based upon the first of the month for usage in the 
 {: faq}
 
 When you use a billable {{site.data.keyword.Bluemix_notm}} account, platform and infrastructure resources are summarized in one bill.
-If you linked your {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructure (SoftLayer) accounts, you receive a [consolidated bill](/docs/billing-usage/linking_accounts.html#unifybillaccounts) for your {{site.data.keyword.Bluemix_notm}} platform and infrastructure resources. 
+If you linked your {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructure (SoftLayer) accounts, you receive a [consolidated bill](/docs/customer-portal/linking_accounts.html#unifybillaccounts) for your {{site.data.keyword.Bluemix_notm}} platform and infrastructure resources. 
 
 ## Can I estimate my costs?
 {: #cost_estimate}
