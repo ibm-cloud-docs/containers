@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-11-27"
+lastupdated: "2018-12-04"
 
 ---
 
@@ -26,7 +26,7 @@ lastupdated: "2018-11-27"
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components.
 {:shortdesc}
 
-For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](cs_versions.html).
+For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](cs_versions.html). 
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
@@ -45,6 +45,34 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.12 changelog. 
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.2_1530, released 4 December 2018
+{: #1122_1530}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.2_1530.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.2_1529">
+<caption>Changes since version 1.12.2_1529</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worker node resource utilization</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](cs_clusters_planning.html#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
+
+
 
 ### Changelog for 1.12.2_1529, released 27 November 2018
 {: #1122_1529}
@@ -217,6 +245,32 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018
+{: #1114_1536}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.4_1536.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.4_1535">
+<caption>Changes since version 1.11.4_1535</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worker node resource utilization</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](cs_clusters_planning.html#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.11.4_1535, released 27 November 2018
 {: #1114_1535}
@@ -746,6 +800,56 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 {: #110_changelog}
 
 Review the version 1.10 changelog.
+
+### Changelog for 1.10.11_1536, released 4 December 2018
+{: #11011_1536}
+
+The following table shows the changes that are included in patch 1.10.11_1536.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.8_1532">
+<caption>Changes since version 1.10.8_1532</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.2.1</td>
+<td>v3.3.1</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/releases/#v331). Update resolves [Tigera Technical Advisory TTA-2018-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.8-197</td>
+<td>v1.10.11-219</td>
+<td>Updated to support the Kubernetes 1.10.11 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.8</td>
+<td>v1.10.11</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.11). Update resolves [CVE-2018-1002105 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1002105).</td>
+</tr>
+<tr>
+<td>OpenVPN client and server</td>
+<td>2.4.4-r1-6</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>Updated image for [CVE-2018-0732 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) and [CVE-2018-0737 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737).</td>
+</tr>
+<tr>
+<td>Worker node resource utilization</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](cs_clusters_planning.html#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.8_1532, released 27 November 2018
 {: #1108_1532}
@@ -1459,6 +1563,32 @@ Unsupported Kubernetes versions:
 {: #19_changelog}
 
 Review the version 1.9 changelog.
+
+### Changelog for worker node fix pack 1.9.11_1538, released 4 December 2018
+{: #1911_1538}
+
+The following table shows the changes that are included in the worker node fix pack 1.9.11_1538.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.9.11_1537">
+<caption>Changes since version 1.9.11_1537</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worker node resource utilization</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](cs_clusters_planning.html#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.9.11_1537, released 27 November 2018
 {: #1911_1537}
