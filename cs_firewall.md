@@ -281,7 +281,7 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 4.  Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, and LogDNA services:
     *   **{{site.data.keyword.monitoringlong_notm}}**:
-        `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+        <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_public_IP&gt;</pre>
         Replace <em>&lt;monitoring_public_IP&gt;</em> with all of the addresses for the monitoring regions to which you want to allow traffic:
         <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for monitoring traffic</caption>
@@ -311,7 +311,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       </table>
 </p>
     *   **{{site.data.keyword.loganalysislong_notm}}**:
-        `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+        <pre class="screen">TCP port 443, port 9091 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logging_public_IP&gt;</pre>
         Replace <em>&lt;logging_public_IP&gt;</em> with all of the addresses for the logging regions to which you want to allow traffic:
         <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
 <caption>IP addresses to open for logging traffic</caption>
@@ -345,7 +345,7 @@ Let your cluster access infrastructure resources and services from behind a fire
        </table>
 </p>
     *   **{{site.data.keyword.la_full_notm}}**:
-        `TCP port 443, port 80 FROM <each_worker_node_public_IP> TO <logDNA_public_IP>`
+        <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
         Replace `<logDNA_public_IP>` with the [LogDNA IP addresses](/docs/services/Log-Analysis-with-LogDNA/network.html#ips).
 
 5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
