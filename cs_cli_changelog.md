@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-04"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -39,6 +39,11 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.1.654</td>
+<td>05 Dec 2018</td>
+<td>Updates documentation and translation.</td>
+</tr>
 <tr>
 <td>0.1.638</td>
 <td>15 Nov 2018</td>

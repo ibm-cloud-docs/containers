@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-04"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -45,6 +45,38 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.12 changelog. 
 {: shortdesc}
+
+### Changelog for 1.12.3_1531, released 5 December 2018
+{: #1123_1531}
+
+The following table shows the changes that are included in the patch 1.12.3_1531.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.2_1530">
+<caption>Changes since version 1.12.2_1530</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.2-68</td>
+<td>v1.12.3-91</td>
+<td>Updated to support the Kubernetes 1.12.3 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.2</td>
+<td>v1.12.3</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.3). Update resolves [CVE-2018-1002105 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/71411).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.2_1530, released 4 December 2018
 {: #1122_1530}
@@ -245,6 +277,38 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for 1.11.5_1537, released 5 December 2018
+{: #1115_1537}
+
+The following table shows the changes that are included in the patch 1.11.5_1537.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.4_1536">
+<caption>Changes since version 1.11.4_1536</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.4-142</td>
+<td>v1.11.5-152</td>
+<td>Updated to support the Kubernetes 1.11.5 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.4</td>
+<td>v1.11.5</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.5). Update resolves [CVE-2018-1002105 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/71411).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018
 {: #1114_1536}
@@ -834,7 +898,7 @@ The following table shows the changes that are included in patch 1.10.11_1536.
 <td>Kubernetes</td>
 <td>v1.10.8</td>
 <td>v1.10.11</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.11). Update resolves [CVE-2018-1002105 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1002105).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.11). Update resolves [CVE-2018-1002105 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/71411).</td>
 </tr>
 <tr>
 <td>OpenVPN client and server</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-04"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -143,7 +143,7 @@ For reference information about these CLIs, see the documentation for those tool
 -   [`ibmcloud` commands](../cli/reference/ibmcloud/bx_cli.html#ibmcloud_cli)
 -   [`ibmcloud ks` commands](cs_cli_reference.html#cs_cli_reference)
 -   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
--   [`ibmcloud cr` commands](/docs/cli/plugins/registry/index.html)
+-   [`ibmcloud cr` commands](/docs/container-registry-cli-plugin/container-registry-cli.html#containerregcli)
 
 <br />
 

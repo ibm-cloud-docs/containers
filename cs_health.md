@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-04"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2018-12-04"
 Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you troubleshoot issues and improve the health and performance of your Kubernetes clusters and apps.
 {: shortdesc}
 
-Looking for other {{site.data.keyword.Bluemix_notm}} or third-party logging services that you can add to your cluster? Check out [Logging and monitoring integrations](cs_integrations.html#health_services), including [{{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).
+Looking for other {{site.data.keyword.Bluemix_notm}} or third-party logging services that you can add to your cluster? Check out [Logging and monitoring integrations](cs_integrations.html#health_services), including [{{site.data.keyword.la_full_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).
 {: note}
 
 ## Understanding cluster and app log forwarding
