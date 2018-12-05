@@ -124,7 +124,7 @@ Each {{site.data.keyword.Bluemix_dedicated_notm}} environment has a public, clie
 Before you begin:
   * [Set up an {{site.data.keyword.Bluemix_dedicated_notm}} environment](/docs/dedicated/index.html#setupdedicated).
   * If your local system or your corporate network controls public internet endpoints by using proxies or firewalls, you must [open required ports and IP addresses in your firewall](cs_firewall.html#firewall).
-  * [Download the Cloud Foundry CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/cloudfoundry/cli/releases) and [Add the IBM Cloud Admin CLI plug-in](/docs/cli/plugins/bluemix_admin/index.html#adding-the-ibm-cloud-admin-cli-plug-in).
+  * [Download the Cloud Foundry CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/cloudfoundry/cli/releases).
 
 To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
 
@@ -172,7 +172,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
             ```
             {: pre}
 
-            Replace <em>&lt;user_IBMid&gt;</em> with the email of the user you want to invite, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the GUID of the public account organization. For more information about this command, see [Inviting a user from IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public).
+            Replace <em>&lt;user_IBMid&gt;</em> with the email of the user you want to invite, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the GUID of the public account organization. 
 
         * To invite all users currently in a Dedicated account organization:
 
@@ -180,7 +180,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
             ibmcloud cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
 
-            Replace <em>&lt;dedicated_org_ID&gt;</em> with the Dedicated account organization ID, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the public account organization GUID. For more information about this command, see [Inviting a user from IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public).
+            Replace <em>&lt;dedicated_org_ID&gt;</em> with the Dedicated account organization ID, <em>&lt;public_API_key&gt;</em> with the API key generated in the previous step, and <em>&lt;public_org_ID&gt;</em> with the public account organization GUID. 
 
     3.  If an IBMid exists for a user, the user is automatically added to the specified organization in the public account. If an IBMid does not exist for a user, then an invitation is sent to the user's email address. After the user accepts the invitation, an IBMid is created for the user, and the user is added to the specified organization in the public account.
 
