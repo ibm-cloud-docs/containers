@@ -40,7 +40,7 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 </thead>
 <tbody>
 <tr>
-<td>0.1.653</td>
+<td>0.1.654</td>
 <td>05 Dec 2018</td>
 <td>Updates documentation and translation.</td>
 </tr>
