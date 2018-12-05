@@ -27,6 +27,20 @@ lastupdated: "2018-12-05"
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
 
+## Popular topics in December 2018
+{: #dec18}
+
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in December 2018</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+
+</tbody></table>
+
 ## Popular topics in November 2018
 {: #nov18}
 
@@ -45,7 +59,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </tr>
 <tr>
 <td>27 November</td>
-<td>{{site.data.keyword.loganalysisfull_notm}} with LogDNA</td>
+<td>{{site.data.keyword.la_full_notm}}</td>
 <td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
 </tr>
 <tr>
