@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-04"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -911,7 +911,7 @@ View information about a cluster in your organization.
   Ingress secret:       my_cluster
   Workers:              3
   Worker Zones:         dal10
-  Version:              1.12.2
+  Version:              1.12.3
   Owner:                name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
   Resource Group ID:    a8a12accd63b437bbd6d58fb6a462ca7
