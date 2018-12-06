@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -524,7 +524,13 @@ Before you begin, your cluster master and all worker nodes must be running Kuber
     ```
     {: pre}
 
-2.  If any pod is not in a **Running** state, delete the pod and wait until it is in a **Running** state before you continue.
+2.  If any pod is not in a **Running** state, delete the pod and wait until it is in a **Running** state before you continue. If the pod does not return to a **Running** state:
+    1.  Check the **State** and **Status** of the worker node.
+        ```
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  If the worker node state is not **Normal**, follow the [Debugging worker nodes](cs_troubleshoot.html#debug_worker_nodes) steps. For example, a **Critical** or **Unknown** state is often resolved by [reloading the worker node](cs_cli_reference.html#cs_worker_reload).
 
 3.  If you auto-generate Calico policies or other Calico resources, update your automation tooling to generate these resources with [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/).
 
@@ -816,7 +822,13 @@ Prepare for the Calico v3 update before you update the master. During the master
     ```
     {: pre}
 
-2.  If any pod is not in a **Running** state, delete the pod and wait until it is in a **Running** state before you continue.
+2.  If any pod is not in a **Running** state, delete the pod and wait until it is in a **Running** state before you continue. If the pod does not return to a **Running** state:
+    1.  Check the **State** and **Status** of the worker node.
+        ```
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  If the worker node state is not **Normal**, follow the [Debugging worker nodes](cs_troubleshoot.html#debug_worker_nodes) steps. For example, a **Critical** or **Unknown** state is often resolved by [reloading the worker node](cs_cli_reference.html#cs_worker_reload).
 
 3.  If you auto-generate Calico policies or other Calico resources, update your automation tooling to generate these resources with [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/).
 
