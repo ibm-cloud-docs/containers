@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -763,6 +763,8 @@ Metrics help you monitor the health and performance of your clusters. You can us
         </tbody>
       </table>
  </dd>
+  <dt>{{site.data.keyword.mon_full_notm}}</dt>
+  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Note**: {{site.data.keyword.mon_full_notm}} does not support the `containerd` container runtime. When you use {{site.data.keyword.mon_full_notm}} with version 1.11 or later clusters, not all container metrics are collected.</dd>
 </dl>
 
 To avoid conflicts when using the built in metric service, be sure that clusters across resource groups and regions have unique names.

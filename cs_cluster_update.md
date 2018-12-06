@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -89,16 +89,6 @@ When the Kubernetes API server update is complete, you can update your worker no
 You received a notification to update your worker nodes. What does that mean? As security updates and patches are put in place for the Kubernetes API server and other Kubernetes master components, you must be sure that the worker nodes remain in sync.
 {: shortdesc}
 
-Before you begin:
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
-- [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
-- Make any changes that are marked with _Update after master_ in the [Kubernetes changes](cs_versions.html).
-- If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog).
-- Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform). </br>
-
-**Attention**: Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
-
-
 **What happens to my apps during an update?**</br>
 If you run apps as part of a deployment on worker nodes that you update, the apps are rescheduled onto other worker nodes in the cluster. These worker nodes might be in a different worker pool, or if you have stand-alone worker nodes, apps might be scheduled onto stand-alone worker nodes. To avoid downtime for your app, you must ensure that you have enough capacity in the cluster to carry the workload.
 
@@ -110,7 +100,17 @@ In addition, you can create a Kubernetes config map that specifies the maximum n
 **What if I choose not to define a config map?**</br>
 When the config map is not defined, the default is used. By default, a maximum of 20% of all of your worker nodes in each cluster can be unavailable during the update process.
 
-To create a config map and update worker nodes:
+**Before you begin**:
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+- [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
+- Make any changes that are marked with _Update after master_ in the [Kubernetes changes](cs_versions.html).
+- If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog).
+- Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform). </br>
+
+Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
+{: important}
+
+**To create a config map and update worker nodes**:
 
 1.  List available worker nodes and note their private IP address.
 
