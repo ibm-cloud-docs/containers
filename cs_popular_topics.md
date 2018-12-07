@@ -116,7 +116,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </tr>
 <tr>
 <td>05 October</td>
-<td>Integration with {{site.data.keyword.keymanagementservicefull}}</td>
+<td>Integration with {{site.data.keyword.keymanagementservicefull}} (beta)</td>
 <td>You can encrypt the Kubernetes secrets in your cluster by [enabling {{site.data.keyword.keymanagementserviceshort}} (beta)](cs_encrypt.html#keyprotect).</td>
 </tr>
 <tr>
