@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -286,7 +286,7 @@ You can [set up {{site.data.keyword.cloudaccesstraillong}} in your {{site.data.k
 **What are my options to enable trust in my cluster?** </br>
 By default, {{site.data.keyword.containerlong_notm}} provides many features for your cluster components so that you can deploy your containerized apps in a security-rich environment. Extend your level of trust in your cluster to better ensure that what happens within your cluster is what you intended to happen. You can implement trust in your cluster in various ways, as shown in the following diagram.
 
-![Deploying containers with trusted content](images/trusted_story.png)
+<img src="images/trusted_story.png" width="700" alt="Deploying containers with trusted content" style="width:700px; border-style: none"/>
 
 1.  **{{site.data.keyword.containerlong_notm}} with Trusted Compute**: On bare metal worker nodes, you can enable trust. The trust agent monitors the hardware startup process and reports any changes so that you can verify your bare metal worker nodes against tampering. With Trusted Compute, you can deploy your containers on verified bare metal hosts so that your workloads run on trusted hardware. Note that some bare metal machines, such as GPU, do not support Trusted Compute. [Learn more about how Trusted Compute works](#trusted_compute).
 

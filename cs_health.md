@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-06"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -47,7 +47,7 @@ Logs are collected by the [Fluentd ![External link icon](../icons/launch-glyph.s
 
 In the following image you can see the location of the sources that you can configure logging for.
 
-<img src="images/log_sources.png" width="550" alt="Log sources in your cluster" style="width:550px; border-style: none"/>
+<img src="images/log_sources.png" width="600" alt="Log sources in your cluster" style="width:600px; border-style: none"/>
 
 1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.</br>**Paths**:
     * `/var/log/syslog`

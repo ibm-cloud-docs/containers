@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -30,7 +30,7 @@ Before you get started with provisioning storage, it is important to understand 
 
 The following image shows the storage components in a Kubernetes cluster.
 
-<img src="images/cs_storage_pvc_pv.png" alt="Storage components in a cluster" width="300" style="width: 300px; border-style: none"/>
+<img src="images/cs_storage_pvc_pv.png" alt="Storage components in a cluster" width="275" style="width: 275px; border-style: none"/>
 
 - **Cluster**</br> By default, every cluster is set up with a plug-in to [provision file storage](cs_storage_file.html#add_file). You can choose to install other add-ons, such as the one for [block storage](cs_storage_block.html). To use storage in a cluster, you must create a persistent volume claim, a persistent volume and a physical storage instance. When you delete the cluster, you have the option to delete related storage instances.
 - **App**</br> To read from and write to your storage instance, you must mount the persistent volume claim (PVC) to your app. Different storage types have different read-write rules. For example, you can mount multiple pods to the same PVC for file storage. Block storage comes with a RWO (ReadWriteOnce) access mode so that you can mount the storage to one pod only.
@@ -104,7 +104,7 @@ The following image shows how to statically provision file storage in a cluster.
 Review the following common use cases for static provisioning of persistent storage:
 1. **Make retained data available to the cluster:** You provisioned persistent storage with a retain storage class by using dynamic provisioning. You removed the PVC, but the PV, the physical storage in IBM Cloud infrastructure (SoftLayer), and the data still exist. You want to access the retained data from an app in your cluster.
 2. **Use an existing storage device:** You provisioned persistent storage directly in your IBM Cloud infrastructure (SoftLayer) account and want to use this storage device in your cluster.
-3. **Share persistent storage across clusters in the same zone:** You provisioned persistent storage for your cluster. To share the same persistent storage instance with other clusters in the same zone, you must manually create the PV and matching PVC in the other cluster. **Note:** Sharing persistent storage across clusters is available only if the cluster and the storage instance are located in the same zone. 
+3. **Share persistent storage across clusters in the same zone:** You provisioned persistent storage for your cluster. To share the same persistent storage instance with other clusters in the same zone, you must manually create the PV and matching PVC in the other cluster. **Note:** Sharing persistent storage across clusters is available only if the cluster and the storage instance are located in the same zone.
 4. **Share persistent storage across namespaces in the same cluster:** You provisioned persistent storage in a namespace of your cluster. You want to use the same storage instance for an app pod that is deployed to a different namespace in your cluster.
 
 For more information about how to statically provision storage, see:
@@ -165,10 +165,10 @@ If you cannot use one of the provided storage classes, you can create your own c
 ### Changing or updating to a different storage class
 {: #update_storageclass}
 
-When you dynamically provision persistent storage by using a storage class, you provision persistent storage with a specific configuration. You cannot change the name of the storage class or the type of storage that you provisioned. However, you have the option to scale your storage as shows in the following table. 
+When you dynamically provision persistent storage by using a storage class, you provision persistent storage with a specific configuration. You cannot change the name of the storage class or the type of storage that you provisioned. However, you have the option to scale your storage as shows in the following table.
 {: shortdesc}
 
-<table> 
+<table>
 <caption>Overview of scaling options for {{site.data.keyword.containerlong_notm}} storage solutions</caption>
 <thead>
 <th>Storage solution</th>

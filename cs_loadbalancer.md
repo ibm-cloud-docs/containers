@@ -62,7 +62,7 @@ As opposed to version 1.0 load balancers, version 2.0 load balancers don't use N
 
 The following diagram shows how a load balancer 2.0 directs communication from the internet to an app in a single zone cluster.
 
-<img src="images/cs_loadbalancer_ipvs_planning.png" width="550" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a version 2.0 load balancer" style="width:550px; border-style: none"/>
+<img src="images/cs_loadbalancer_ipvs_planning.png" width="600" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a version 2.0 load balancer" style="width:600px; border-style: none"/>
 
 1. A client request to your app uses the public IP address of your load balancer and the assigned port on the worker node. In this example, the load balancer has a virtual IP address of 169.61.23.130, which is currently on worker 10.73.14.25.
 
@@ -497,7 +497,7 @@ The TCP/UDP load balancer 1.0 uses Iptables, a Linux kernel feature, to load bal
 
 The following diagram shows how a load balancer 1.0 directs communication from the internet to an app.
 
-<img src="images/cs_loadbalancer_planning.png" width="450" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a load balancer 1.0" style="width:450px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" width="410" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a load balancer 1.0" style="width:410px; border-style: none"/>
 
 1. A request to your app uses the public IP address of your load balancer and the assigned port on the worker node.
 
@@ -511,7 +511,7 @@ The following diagram shows how a load balancer 1.0 directs communication from t
 
 If you have a multizone cluster, app instances are deployed in pods on workers across the different zones. The following diagram shows how a load balancer 1.0 directs communication from the internet to an app in a multizone cluster.
 
-<img src="images/cs_loadbalancer_planning_multizone.png" width="475" alt="Use a load balancer 1.0 to load balance apps in multizone clusters" style="width:475px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning_multizone.png" width="500" alt="Use a load balancer 1.0 to load balance apps in multizone clusters" style="width:500px; border-style: none"/>
 
 By default, each load balancer 1.0 is set up in one zone only. To achieve high availability, you must deploy a load balancer 1.0 in every zone where you have app instances. Requests are handled by the load balancers in various zones in a round-robin cycle. Additionally, each load balancer routes requests to the app instances in its own zone and to app instances in other zones.
 

@@ -51,7 +51,7 @@ Ingress consists of three components:
 
 The following diagram shows how Ingress directs communication from the internet to an app in a single-zone cluster:
 
-<img src="images/cs_ingress_singlezone.png" alt="Expose an app in a single-zone cluster by using Ingress" style="border-style: none"/>
+<img src="images/cs_ingress_singlezone.png" width="800" alt="Expose an app in a single-zone cluster by using Ingress" style="width:800px; border-style: none"/>
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
@@ -68,7 +68,7 @@ The following diagram shows how Ingress directs communication from the internet 
 
 The following diagram shows how Ingress directs communication from the internet to an app in a multizone cluster:
 
-<img src="images/cs_ingress_multizone.png" alt="Expose an app in a multizone cluster by using Ingress" style="border-style: none"/>
+<img src="images/cs_ingress_multizone.png" width="800" alt="Expose an app in a multizone cluster by using Ingress" style="width:800px; border-style: none"/>
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
@@ -129,7 +129,7 @@ To use the same cluster ALB to manage traffic to these apps, you create the foll
 * A Kubernetes service in the staging namespace to expose `app3`.
 * An Ingress resource in the staging namespace that specifies the host as `stage.domain.net`.
 </br>
-<img src="images/cs_ingress_multi_ns.png" width="600" alt="Within a namespace, use subdomains in one or multiple resources" style="width:600px; border-style: none"/>
+<img src="images/cs_ingress_multi_ns.png" width="625" alt="Within a namespace, use subdomains in one or multiple resources" style="width:625px; border-style: none"/>
 
 Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.domain.net/app3` URL to only `app3`.
 
@@ -142,7 +142,7 @@ The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containe
 
 Within an individual namespace, you can use one domain to access all the apps in the namespace. If you want to use different domains for the apps within an individual namespace, use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.appdomain.cloud` is registered, multiple subdomains all resolve to the same host. Then, you can use one resource to specify multiple subdomain hosts within that resource. Alternatively, you can create multiple Ingress resources in the namespace and specify a different subdomain in each Ingress resource.
 
-<img src="images/cs_ingress_single_ns_multi_subs.png" alt="One resource is required per namespace." style="border-style: none"/>
+<img src="images/cs_ingress_single_ns_multi_subs.png" width="600" alt="One resource is required per namespace." style="width:600px; border-style: none"/>
 
 The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.appdomain.cloud`, is registered by default for your cluster. The IBM-provided TLS certificate is a wildcard certificate and can be used for the wildcard subdomain. If you want to use a custom domain, you must register the custom domain as a wildcard domain such as `*.custom_domain.net`. To use TLS, you must get a wildcard certificate.
 {: note}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -27,9 +27,6 @@ lastupdated: "2018-12-05"
 
 You can use the {{site.data.keyword.containerlong}} CLI or API to create and manage your Kubernetes clusters.
 {:shortdesc}
-
-<br />
-
 
 ## Installing the CLI
 {: #cs_cli_install_steps}
