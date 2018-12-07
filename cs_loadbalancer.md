@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -130,7 +130,7 @@ You can find the complete example in [this IBM Cloud deployment pattern blog ![E
 <li>Locality-Based Least Connection (<code>lblc</code>)</li>
 <li>Locality-Based Least Connection with Replication (<code>lblcr</code>)</li>
 <li>Never Queue (<code>nq</code>)</li>
-<li>Shortest Expected Delay (<code>seq</code>)</li><ul></dd>
+<li>Shortest Expected Delay (<code>seq</code>)</li></ul></dd>
 <dt>Weighted pod algorithms</dt>
 <dd>The following algorithms depend on weighted app pods. However, in {{site.data.keyword.containerlong_notm}}, all app pods are assigned equal weight for load balancing.<ul>
 <li>Weighted Least Connection (<code>wlc</code>)</li>
@@ -269,7 +269,7 @@ To set up a load balancer 2.0 in a multizone cluster:
       </tr>
       <tr>
         <td><code>loadBalancerIP</code></td>
-        <td>Optional: To create a private load balancer or to use a specific portable IP address for a public load balancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. If you specify a VLAN or zone, the IP address must be in that VLAN or zone. If you do not specify an IP address:<ul><li>If your cluster is on a public VLAN, a portable public IP address is used. Most clusters are on a public VLAN.</li><li>If your cluster is available on a private VLAN only, then a portable private IP address is used.</li></td>
+        <td>Optional: To create a private load balancer or to use a specific portable IP address for a public load balancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. If you specify a VLAN or zone, the IP address must be in that VLAN or zone. If you do not specify an IP address:<ul><li>If your cluster is on a public VLAN, a portable public IP address is used. Most clusters are on a public VLAN.</li><li>If your cluster is available on a private VLAN only, then a portable private IP address is used.</li></ul></td>
       </tr>
       <tr>
         <td><code>externalTrafficPolicy: Local</code></td>
@@ -423,7 +423,7 @@ To create a load balancer 2.0 service in a single-zone cluster:
         </tr>
         <tr>
           <td><code>loadBalancerIP</code></td>
-          <td>Optional: To create a private load balancer or to use a specific portable IP address for a public load balancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. If you specify a VLAN, the IP address must be on that VLAN. If you do not specify an IP address:<ul><li>If your cluster is on a public VLAN, a portable public IP address is used. Most clusters are on a public VLAN.</li><li>If your cluster is available on a private VLAN only, then a portable private IP address is used.</li></td>
+          <td>Optional: To create a private load balancer or to use a specific portable IP address for a public load balancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. If you specify a VLAN, the IP address must be on that VLAN. If you do not specify an IP address:<ul><li>If your cluster is on a public VLAN, a portable public IP address is used. Most clusters are on a public VLAN.</li><li>If your cluster is available on a private VLAN only, then a portable private IP address is used.</li></ul></td>
         </tr>
         <tr>
           <td><code>externalTrafficPolicy: Local</code></td>
@@ -726,7 +726,7 @@ To create a load balancer 1.0 service in a single-zone cluster:
         </tr>
         <tr>
           <td><code>loadBalancerIP</code></td>
-          <td>Optional: To create a private load balancer or to use a specific portable IP address for a public load balancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. If you specify a VLAN, the IP address must be on that VLAN. If you do not specify an IP address:<ul><li>If your cluster is on a public VLAN, a portable public IP address is used. Most clusters are on a public VLAN.</li><li>If your cluster is available on a private VLAN only, then a portable private IP address is used.</li></td>
+          <td>Optional: To create a private load balancer or to use a specific portable IP address for a public load balancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. If you specify a VLAN, the IP address must be on that VLAN. If you do not specify an IP address:<ul><li>If your cluster is on a public VLAN, a portable public IP address is used. Most clusters are on a public VLAN.</li><li>If your cluster is available on a private VLAN only, then a portable private IP address is used.</li></ul></td>
         </tr>
         </tbody></table>
 
