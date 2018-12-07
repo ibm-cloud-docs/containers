@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -46,6 +46,10 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
+<td>Expected 14 Jan 2019</td>
+<td>-</td>
+<td>Disables TLS 1.0 and 1.1 by default. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, manually enable the required TLS versions by following [these steps](cs_ingress.html#ssl_protocols_ciphers). For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.Bluemix_notm}} Blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).</td>
+<tr>
 <td>393 / 282</td>
 <td>29 Nov 2018</td>
 <td>Improves performance for {{site.data.keyword.appid_full}}.</td>
@@ -54,7 +58,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td>384 / 246</td>
 <td>14 Nov 2018</td>
-<td>Improves logging and logout features for {{site.data.keyword.appid_full}}.</td>
+<td>Improves logging and logout features for {{site.data.keyword.appid_full_notm}}.</td>
 <td>Replaces the self-signed certificate for `*.containers.mybluemix.net` with the LetsEncrypt signed certificate that is automatically generated for and used by the cluster. The `*.containers.mybluemix.net` self-signed certificate is removed.</td>
 </tr>
 <tr>
