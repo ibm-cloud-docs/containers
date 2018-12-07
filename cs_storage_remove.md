@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -147,18 +147,19 @@ To clean up persistent data:
    Example output:
    ```
    id         notes   
-   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z
+   12345678   {"plugin":"ibm-file-plugin-5b55b7b77b-55bb7","region":"us-south","cluster":"aa1a11a1a11b2b2bb22b22222c3c3333","type":"Endurance","ns":"default","pvc":"mypvc","pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7","storageclass":"ibmc-file-gold"}
    ```
    {: screen}
 
    Understanding the **Notes** field information:
-   *  **`:`**: A colon (`:`) separates information.
-   *  **` ibmcloud-block-storage-plugin-7566ccb8d-44nff`**: The storage plug-in that the cluster uses.
-   *  **`us-south`**: The region that your cluster is in.
-   *  **`aa1a11a1a11b2b2bb22b22222c3c3333`**: The cluster ID that is associated with the storage instance.
-   *  **`Performance`**: The type of file or block storage, either `Endurance` or `Performance`.
-   *  **`mypvc`**: The name of the PVC that is associated with the storage instance.
-   *  **`pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z`**: The PV that is associated with the storage instance.
+   *  **`"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`**: The storage plug-in that the cluster uses.
+   *  **`"region":"us-south"`**: The region that your cluster is in.
+   *  **`"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`**: The cluster ID that is associated with the storage instance.
+   *  **`"type":"Endurance"`**: The type of file or block storage, either `Endurance` or `Performance`.
+   *  **`"ns":"default"`**: The namespace that the storage instance is deployed to.
+   *  **`"pvc":"mypvc"`**: The name of the PVC that is associated with the storage instance.
+   *  **`"pv":"pvc-d979977d-d79d-77d9-9d7d-d7d97ddd99d7"`**: The PV that is associated with the storage instance.
+   *  **`"storageclass":"ibmc-file-gold"`**: The type of storage class: bronze, silver, gold, or custom.
 
 9. Remove the physical storage instance.
 
