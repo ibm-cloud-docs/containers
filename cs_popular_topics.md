@@ -20,7 +20,6 @@ lastupdated: "2018-12-07"
 
 
 
-
 # Popular topics for {{site.data.keyword.containerlong_notm}}
 {: #cs_popular_topics}
 
@@ -89,7 +88,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
 <li>If you used the cluster master IP address for in-cluster access to the master.</li>
 <li>If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.</li>
-<li>If you use Kubernetes or Calico network policies to control pod egress access to the master.</li></td>
+<li>If you use Kubernetes or Calico network policies to control pod egress access to the master.</li></ul></td>
 </tr>
 </tbody></table>
 
