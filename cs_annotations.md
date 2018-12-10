@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -1638,7 +1638,7 @@ Configure mutual authentication for the ALB.
 <dd>
 Configure mutual authentication of downstream traffic for the Ingress ALB. The external client authenticates the server and the server also authenticates the client by using certificates. Mutual authentication is also known as certificate-based authentication or two-way authentication.</br></br>
 Use the `mutual-auth` annotation for SSL termination between the client and the Ingress ALB. Use the [`ssl-services` annotation](#ssl-services) for SSL termination between the Ingress ALB and the back-end app.
-<p class="tip">The mutual authentication annotation validates client certificates. To forward client certificates in a header for the applications to handle authorization, you can use the following [`proxy-add-headers` annotation](proxy-add-headers): <code>"ingress.bluemix.net/proxy-add-headers": "serviceName=router-set {\n X-Forwarded-Client-Cert $ssl_client_escaped_cert;\n}\n"</code>
+<p class="tip">The mutual authentication annotation validates client certificates. To forward client certificates in a header for the applications to handle authorization, you can use the following [`proxy-add-headers` annotation](#proxy-add-headers): <code>"ingress.bluemix.net/proxy-add-headers": "serviceName=router-set {\n X-Forwarded-Client-Cert $ssl_client_escaped_cert;\n}\n"</code>
 </p>
 </dd>
 

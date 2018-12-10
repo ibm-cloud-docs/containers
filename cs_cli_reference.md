@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -30,7 +30,7 @@ To install the CLI plug-in, see [Installing the CLI](cs_cli_install.html#cs_cli_
 
 In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all the available commands and flags.
 
-Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_notm}} CLI reference](/docs/container-registry-cli-plugin/container-registry-cli.html#containerregcli). Looking for `kubectl` commands? See the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).
+Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_notm}} CLI reference](/docs/container-registry-cli-plugin/container-registry-cli.html). Looking for `kubectl` commands? See the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).
 {:tip}
 
 ## ibmcloud ks commands
@@ -791,7 +791,7 @@ trusted: <em>true</em>
      <tr>
       <td><code><em>kube-version</em></code></td>
       <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks kube-versions</code>.
-</td></tr> 
+</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
       <td>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
