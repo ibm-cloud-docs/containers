@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -41,6 +41,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <td>6 December</td>
 <td>{{site.data.keyword.mon_full_notm}}</td>
 <td>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Note**: If you use {{site.data.keyword.mon_full_notm}} with clusters that run Kubernetes version 1.11 or later, not all container metrics are collected because Sysdig does not currently support `containerd`.</td>
+</tr>
+<tr>
+<td>4 December</td>
+<td>[Worker node resource reserves](cs_clusters_planning.html#resource_limit_node)</td>
+<td>Are you deploying so many apps that you’re worried about maxing out your cluster? Worker node resource reserves and Kubernetes evictions protect your cluster’s compute capacity so that your cluster has enough resources to keep running. Just add a few more worker nodes, and your pods start rescheduling to them automatically. Worker node resource reserves are updated in the latest [version patch changes](cs_versions_changelog.html#changelog).</td>
 </tr>
 </tbody></table>
 
