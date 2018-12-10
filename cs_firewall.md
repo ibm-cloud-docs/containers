@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -116,12 +116,12 @@ To allow access for a specific cluster:
    Example output:
    ```
    ...
-   Master URL:		https://c3.<region>.containers.cloud.ibm.com
+   Master URL:		https://c3.<region>.containers.cloud.ibm.com:31142
    ...
    ```
    {: screen}
 
-5. Allow access to the **Master URL** on the port, such as port `31142` from the previous example.
+5. Allow access to the **Master URL** on the port, such as port `31142` from the previous example. If your firewall is IP-based, you can see which IP addresses are opened when you allow access to the master URL by reviewing [this table](#master_ips).
 
 6. Verify your connection.
 
@@ -197,6 +197,7 @@ Let your cluster access infrastructure resources and services from behind a fire
     You must allow outgoing traffic to port 443 for all of the zones within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from the public IPs of each of your worker nodes to port 443 of the IP address for all the zones.
     {: important}
 
+    {: #master_ips}
     <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
     <caption>IP addresses to open for outgoing traffic</caption>
         <thead>
