@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -849,6 +849,9 @@ You cannot deploy two stateful sets at the same time. If you try to create a sta
 
 **How can I create my stateful set in a specific zone?** </br>
 In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set.
+
+**Can I delay binding of a PV to my stateful pod until the pod is ready?**<br>
+Yes, you can [create a custom storage class](cs_storage_basics.html#storageclasses) for your PVC that includes the [`volumeBindingMode: WaitForFirstConsumer` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) field.
 
 **What options do I have to add block storage to a stateful set?** </br>
 If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#static_statefulset) with your stateful set.  

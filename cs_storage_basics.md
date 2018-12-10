@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -117,7 +117,7 @@ For more information about how to statically provision storage, see:
 To dynamically provision persistent storage, you must define the type and configuration of the storage that you want.
 {: shortdesc}
 
-A Kubernetes storage class is used to abstract the underlying storage platform that is supported in {{site.data.keyword.Bluemix_notm}} so that you do not have to know all the details about supported sizes, IOPS, or retention policies to successfully provision persistent storage in a cluster. {{site.data.keyword.containerlong_notm}} provides pre-defined storage classes for every type of storage that is supported. Each storage class is designed to abstract the supported storage tier while giving you the choice to decide on the size, IOPS, and retention policy that you want.
+A [Kubernetes storage class ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/) is used to abstract the underlying storage platform that is supported in {{site.data.keyword.Bluemix_notm}} so that you do not have to know all the details about supported sizes, IOPS, or retention policies to successfully provision persistent storage in a cluster. {{site.data.keyword.containerlong_notm}} provides pre-defined storage classes for every type of storage that is supported. Each storage class is designed to abstract the supported storage tier while giving you the choice to decide on the size, IOPS, and retention policy that you want.
 
 For the pre-defined storage class specifications, see:
 - [File storage](cs_storage_file.html#storageclass_reference)
@@ -129,7 +129,7 @@ Not finding what you are looking for? You can also create your own customized st
 ### Customizing a storage class
 {: #customized_storageclass}
 
-If you cannot use one of the provided storage classes, you can create your own customized storage class.
+If you cannot use one of the provided storage classes, you can create your own customized storage class. You might want to customize a storage class to specify configurations such as the zone, file system type, server type, or [volume binding mode ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) options (block storage only).
 {: shortdesc}
 
 1. Create a customized storage class. You can start by using one of the pre-defined storage classes, or check out our sample customized storage classes.
