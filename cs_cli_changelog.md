@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -49,7 +49,7 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <td>15 Nov 2018</td>
 <td>
 <ul><li>Adds the [<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh) command.</li>
-<li>Adds the resource group name to the output of <code>ibmcloud ks cluster-get</code> and <code>ibmcloud ks clusters</code>.</li>
+<li>Adds the resource group name to the output of <code>ibmcloud ks cluster-get</code> and <code>ibmcloud ks clusters</code>.</li></ul>
 </td>
 </tr>
 <tr>
@@ -65,7 +65,7 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <li>Adds the [<code>ibmcloud ks credential-get</code> command](cs_cli_reference.html#cs_credential_get).</li>
 <li>Adds support for the <code>storage</code> log source to all cluster logging commands. For more information, see <a href="cs_health.html#logging">Understanding cluster and app log forwarding</a>.</li>
 <li>Adds the `--network` flag to the [<code>ibmcloud ks cluster-config</code> command](cs_cli_reference.html#cs_cluster_config), which downloads the Calico configuration file to run all Calico commands.</li>
-<li>Minor bug fixes and refactoring</li>
+<li>Minor bug fixes and refactoring</li></ul>
 </td>
 </tr>
 <tr>

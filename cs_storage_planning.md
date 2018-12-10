@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -65,8 +65,8 @@ Before you can decide what type of storage is the right solution for you, you mu
 5. Investigate if your data must be shared across multiple app instances, zones, or regions.
    - **Access across pods:** When you use Kubernetes persistent volumes to access your storage, you can determine the number of pods that can mount the volume at the same time. Some storage solutions, such as block storage, can be accessed by one pod at a time only. Other storage solutions allow you to share the same volume across multiple pods.
    - **Access across zones and regions:** You might require your data to be accessible across zones or regions. Some storage solutions, such as file and block storage, are data center-specific and cannot be shared across zones in a multizone cluster setup.
-   
-   If you want to make your data accessible across zones or regions, make sure to consult your legal department to verify that your data can be stored in multiple zones or a different country. 
+
+   If you want to make your data accessible across zones or regions, make sure to consult your legal department to verify that your data can be stored in multiple zones or a different country.
    {: note}
 
 6. Understand other storage characteristics that impact your choice.
@@ -88,7 +88,7 @@ You can use non-persistent storage options if your data is not required to be pe
 
 The following image shows available non-persistent data storage options in {{site.data.keyword.containerlong_notm}}. These options are available for free and standard clusters.
 <p>
-<img src="images/cs_storage_nonpersistent.png" alt="Non-persistent data storage options" width="500" style="width: 500px; border-style: none"/></p>
+<img src="images/cs_storage_nonpersistent.png" alt="Non-persistent data storage options" width="550" style="width: 550px; border-style: none"/></p>
 
 <table>
 <thead>

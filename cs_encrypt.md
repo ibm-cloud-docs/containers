@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -31,7 +31,7 @@ You can create sensitive data on different levels in your cluster that each requ
 
 For more information on securing your cluster, see [Security for {{site.data.keyword.containerlong_notm}}](cs_secure.html#security).
 
-![Overview of cluster encryption](images/cs_encrypt_ov.png)
+<img src="images/cs_encrypt_ov.png" width="700" alt="Overview of cluster encryption" style="width:700px; border-style: none"/>
 _Figure: Overview of data encryption in a cluster_
 
 1.  **etcd**: etcd is the component of the master that stores the data of your Kubernetes resources, such as object configuration `.yaml` files and secrets. In clusters that run Kubernetes version 1.10 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](#keyprotect) for your cluster. Etcd data in clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.
@@ -72,10 +72,10 @@ When you create a cluster, secrets for your {{site.data.keyword.registrylong}} c
 <br />
 
 
-## Encrypting the Kubernetes master's local disk and secrets by using {{site.data.keyword.keymanagementserviceshort}}
+## Encrypting the Kubernetes master's local disk and secrets by using {{site.data.keyword.keymanagementserviceshort}} (beta)
 {: #keyprotect}
 
-You can protect the etcd component in your Kubernetes master and Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect/index.html#getting-started-with-key-protect) as a Kubernetes [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. KMS provider is an alpha feature in Kubernetes for versions 1.10 and 1.11.
+You can protect the etcd component in your Kubernetes master and Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect/index.html#getting-started-with-key-protect) as a Kubernetes [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. KMS provider is an alpha feature in Kubernetes for versions 1.10 and 1.11, which makes the {{site.data.keyword.keymanagementserviceshort}} integration a beta release in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 By default, your cluster configuration and Kubernetes secrets are stored in the etcd component of the IBM-managed Kubernetes master. Your worker nodes also have secondary disks that are encrypted by IBM-managed LUKS keys that are stored as secrets in etcd. In clusters that run Kubernetes version 1.10 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, data in your etcd component on the local disk of your Kubernetes master is not automatically encrypted until you enable {{site.data.keyword.keymanagementserviceshort}} encryption for your cluster. The etcd data for clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily.

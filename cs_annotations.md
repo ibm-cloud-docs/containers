@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -786,7 +786,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 ## Connection annotations
 {: #connection}
 
-With connection annotations, you can change how the ALB connects to the back-end app and upstream-servers, and set timeouts or a maximum number of keepalive connections before the app or server is considered to be unavailable. 
+With connection annotations, you can change how the ALB connects to the back-end app and upstream-servers, and set timeouts or a maximum number of keepalive connections before the app or server is considered to be unavailable.
 {: shortdesc}
 
 ### Custom connect-timeouts and read-timeouts (proxy-connect-timeout, proxy-read-timeout)
@@ -1073,7 +1073,8 @@ Use the sticky cookie annotation to add session affinity to your ALB and always 
 </br></br>
 Every client that connects to your back-end app is assigned to one of the available upstream servers by the ALB. The ALB creates a session cookie that is stored in the client's app, which is included in the header information of every request between the ALB and the client. The information in the cookie ensures that all requests are handled by the same upstream server throughout the session.
 
-</br></br>
+<p class="note">Relying on sticky sessions can add complexity and reduce your availability. For example, you might have an HTTP server that maintains some session state for an initial connection so that the HTTP service only accepts subsequent requests with the same session state value. However, this prevents easy horizontal scaling of the HTTP service. Consider using an external database, such as Redis or Memcached, to store the HTTP request session value so that you can maintain the session state across multiple servers.</p>
+
 When you include multiple services, use a semi-colon (;) to separate them.</dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -1310,7 +1311,7 @@ spec:
 ## HTTPS and TLS/SSL authentication annotations
 {: #https-auth}
 
-With HTTPS and TLS/SSL authentication annotations, you can configure your ALB for HTTPS traffic, change default HTTPS ports, enable SSL encryption for traffic that is sent to your back-end apps, or set up mutual authentication. 
+With HTTPS and TLS/SSL authentication annotations, you can configure your ALB for HTTPS traffic, change default HTTPS ports, enable SSL encryption for traffic that is sent to your back-end apps, or set up mutual authentication.
 {: shortdesc}
 
 ### {{site.data.keyword.appid_short_notm}} Authentication (appid-auth)
@@ -1637,6 +1638,8 @@ Configure mutual authentication for the ALB.
 <dd>
 Configure mutual authentication of downstream traffic for the Ingress ALB. The external client authenticates the server and the server also authenticates the client by using certificates. Mutual authentication is also known as certificate-based authentication or two-way authentication.</br></br>
 Use the `mutual-auth` annotation for SSL termination between the client and the Ingress ALB. Use the [`ssl-services` annotation](#ssl-services) for SSL termination between the Ingress ALB and the back-end app.
+<p class="tip">The mutual authentication annotation validates client certificates. To forward client certificates in a header for the applications to handle authorization, you can use the following [`proxy-add-headers` annotation](#proxy-add-headers): <code>"ingress.bluemix.net/proxy-add-headers": "serviceName=router-set {\n X-Forwarded-Client-Cert $ssl_client_escaped_cert;\n}\n"</code>
+</p>
 </dd>
 
 <dt>Pre-requisites</dt>
@@ -1870,7 +1873,7 @@ spec:
 ## Istio annotations
 {: #istio-annotations}
 
-Use Istio annotations to route incoming traffic to Istio-managed services. 
+Use Istio annotations to route incoming traffic to Istio-managed services.
 {: shortdesc}
 
 ### Istio services (istio-services)
@@ -2311,13 +2314,13 @@ spec:
 ## Request and response annotations
 {: #request-response}
 
-Use request and response annotations to add or remove header information from the client and server requests, and to change the size of the body that the client can send. 
+Use request and response annotations to add or remove header information from the client and server requests, and to change the size of the body that the client can send.
 {: shortdesc}
 
 ### Add server port to host header (add-host-port)
 {: #add-host-port}
 
-Add a server port to the client request before the request is forwarded to your back-end app. 
+Add a server port to the client request before the request is forwarded to your back-end app.
 {: shortdesc}
 
 <dl>
@@ -2645,7 +2648,7 @@ spec:
 ## Service limit annotations
 {: #service-limit}
 
-With service limit annotations, you can change the default request processing rate and the number of connections that can come from a single IP address. 
+With service limit annotations, you can change the default request processing rate and the number of connections that can come from a single IP address.
 {: shortdesc}
 
 ### Global rate limits (global-rate-limit)

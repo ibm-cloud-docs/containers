@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-06"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -272,6 +272,8 @@ Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 - Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
+
+To update machine types:
 
 1. List available worker nodes and note their private IP address.
    - **For worker nodes in a worker pool**:

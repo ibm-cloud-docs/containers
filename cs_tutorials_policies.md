@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -343,6 +343,7 @@ You now decide to completely lock down traffic to the PR firm's cluster and test
 {: shortdesc}
 
 First, in addition to the node ports, you must block all incoming traffic to the load balancer exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public node ports and load balancer will be blocked and only traffic from your whitelisted system IP will be allowed:
+
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="The webserver app is exposed by public load balancer to your system IP only." style="width:500px; border-style: none"/>
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-lb-port-80.yaml` to deny all incoming TCP and UDP traffic from any source IP to the load balancer IP address and port. Replace `<loadbalancer_IP>` with the load balancer public IP address from your cheat sheet.
@@ -464,6 +465,7 @@ At this point, all traffic to the public node ports and load balancer is blocked
 In the previous lesson, you blocked all traffic and whitelisted only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blacklisting is useful in a scenario like this because it can help you prevent an attack from a small set of IP addresses.
 
 In this lesson, you will test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports will be blocked, and all traffic to the public load balancer will be allowed. Only traffic from your blacklisted system IP to the load balancer will be blocked:
+
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="The webserver app is exposed by public load balancer to the internet. Traffic from your system IP only is blocked." style="width:550px; border-style: none"/>
 
 1. Clean up the whitelist policies you created in the previous lesson.

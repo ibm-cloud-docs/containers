@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -210,7 +210,7 @@ Zones are physical data centers that are available within an {{site.data.keyword
 
 In a single-zone cluster, your cluster's resources remain in the zone in which the cluster is deployed. The following image highlights the relationship of single-zone cluster components within an example region of US East:
 
-![Understanding where your cluster resources reside](/images/region-cluster-resources.png)
+<img src="/images/region-cluster-resources.png" width="650" alt="Understanding where your cluster resources reside" style="width:650px; border-style: none"/>
 
 _Understanding where your single-zone cluster resources are._
 

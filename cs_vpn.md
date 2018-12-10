@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-07"
 
 ---
 
@@ -68,7 +68,7 @@ Before using the strongSwan Helm chart, review the following considerations and 
 ## Configuring the strongSwan Helm chart
 {: #vpn_configure}
 
-Before you install the strongSwan Helm chart, you must decide on your strongSwan configuration. 
+Before you install the strongSwan Helm chart, you must decide on your strongSwan configuration.
 {: shortdesc}
 
 Before you begin:
@@ -78,7 +78,7 @@ Before you begin:
 ### Step 1: Get the strongSwan Helm chart
 {: #strongswan_1}
 
-Install Helm and get the strongSwan Helm chart to view possible configurations. 
+Install Helm and get the strongSwan Helm chart to view possible configurations.
 {: shortdesc}
 
 1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](cs_integrations.html#helm).
@@ -224,7 +224,7 @@ To monitor the status of the strongSwan VPN, you can set up a webhook to automat
 ### Step 7: Deploy the Helm chart
 {: #strongswan_7}
 
-Deploy the strongSwan Helm chart in your cluster with the configurations that you chose earlier. 
+Deploy the strongSwan Helm chart in your cluster with the configurations that you chose earlier.
 {: shortdesc}
 
 1. If you need to configure more advanced settings, follow the documentation provided for each setting in the Helm chart.
@@ -417,7 +417,8 @@ When you have a single-tenant or multi-tenant cluster, you can limit VPN traffic
 For example, say that you want pods in only a specific namespace, `my-secure-namespace`, to send and receive data over the VPN. You do not want pods in other namespaces, such as `kube-system`, `ibm-system`, or `default`, to access your on-premises network. To limit the VPN traffic to only `my-secure-namespace`, you can create Calico global network policies.
 
 Before you use this solution, review the following considerations and limitations.
-* You do not need to deploy the strongSwan Helm chart into the specified namespace. The strongSwan VPN pod and the routes daemonset can be deployed into `kube-system` or any other namespace. If the strongSwan VPN is not deployed into the specified namespace, then the `vpn-strongswan-ping-remote-ip-1` Helm test fails. This failure is expected and acceptable. The test pings the `remote.privateIPtoPing` private IP address of the on-premises VPN gateway from the VPN pod in the cluster, which is not in the namespace that has direct access to the remote subnet. However, the VPN pod is still able to forward traffic to pods in the namespaces that do have routes to the remote subnet, and traffic can still flow correctly. The VPN state is still `ESTABLISHED` and pods in the specified namespace can connect over the VPN.
+* You do not need to deploy the strongSwan Helm chart into the specified namespace. The strongSwan VPN pod and the routes daemonset can be deployed into `kube-system` or any other namespace. If the strongSwan VPN is not deployed into the specified namespace, then the `vpn-strongswan-ping-remote-ip-1` Helm test fails. This failure is expected and acceptable. The test pings the `remote.privateIPtoPing` private IP address of the on-premises VPN gateway from a pod which is not in the namespace that has direct access to the remote subnet. However, the VPN pod is still able to forward traffic to pods in the namespaces that do have routes to the remote subnet, and traffic can still flow correctly. The VPN state is still `ESTABLISHED` and pods in the specified namespace can connect over the VPN.
+
 * The Calico global network policies in the following steps do not prevent Kubernetes pods that use host networking from sending and receiving data over the VPN. When a pod is configured with host networking, the app running in the pod can listen on the network interfaces of the worker node that it is on. These host networking pods can exist in any namespace. To determine which pods have host networking, run `kubectl get pods --all-namespaces -o wide` and look for any pods that do not have a `172.30.0.0/16` pod IP address. If you want to prevent host networking pods from sending and receiving data over the VPN, you can set the following options in your `values.yaml` deployment file: `local.subnet: 172.30.0.0/16` and `enablePodSNAT: false`. These configuration settings expose all of the Kubernetes pods over the VPN connection to the remote network. However, only the pods that are located in the specified secure namespace are reachable over the VPN.
 
 Before you begin:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -41,7 +41,8 @@ If you do not specify a priority for your pod deployment, the default is set to 
 To understand how pod priority and scheduler work together, consider the scenarios in the following figure. You must place prioritized pods on worker nodes with available resources. Otherwise, high priority pods in your cluster can remain in pending at the same time that existing pods are removed, such as in Scenario 3.
 
 _Figure: Pod priority scenarios_
-![Pod priority scenarios](images/pod-priority.png)
+<img src="images/pod-priority.png" width="500" alt="Pod priority scenarios" style="width:500px; border-style: none"/>
+
 1.  Three pods with high, medium, and low priority are pending scheduling. The scheduler finds an available worker node with room for all 3 pods, and schedules them in order of priority, with the highest priority pod scheduled first.
 2.  Three pods with high, medium, and low priority are pending scheduling. The scheduler finds an available worker node, but the worker node only has enough resources to support the high and medium priority pods. The low priority pod is not scheduled and it remains in pending.
 3.  Two pods with high and medium priority are pending scheduling. A third pod with low priority exists on an available worker node. However, the worker node does not have enough resources to schedule any of the pending pods. The scheduler preempts, or removes, the low-priority pod, which returns the pod to a pending state. Then, the scheduler tries to schedule the high priority pod. However, the worker node does not have enough resources to schedule the high priority pod, and instead, the scheduler schedules the medium priority pod.
