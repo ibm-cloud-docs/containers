@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -464,7 +464,7 @@ At this point, all traffic to the public node ports and load balancer is blocked
 
 In the previous lesson, you blocked all traffic and whitelisted only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blacklisting is useful in a scenario like this because it can help you prevent an attack from a small set of IP addresses.
 
-In this lesson, you will test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports will be blocked, and all traffic to the public load balancer will be allowed. Only traffic from your blacklisted system IP to the load balancer will be blocked
+In this lesson, you will test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports will be blocked, and all traffic to the public load balancer will be allowed. Only traffic from your blacklisted system IP to the load balancer will be blocked:
 
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="The webserver app is exposed by public load balancer to the internet. Traffic from your system IP only is blocked." style="width:550px; border-style: none"/>
 
