@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-10"
 
 ---
 
@@ -169,7 +169,7 @@ If you have special requirements, you can set up your own logging solution in yo
 ## Configuring log forwarding
 {: #configuring}
 
-You can configure logging for {{site.data.keyword.containerlong_notm}} through the console or through the CLI.
+You can configure logging for {{site.data.keyword.containerlong_notm}} standard clusters through the console or through the CLI.
 {: shortdesc}
 
 ### Enabling log forwarding with the {{site.data.keyword.Bluemix_notm}} console
@@ -180,10 +180,13 @@ You can configure log forwarding in the {{site.data.keyword.containerlong_notm}}
 To create a configuration at the account level, for a specific container namespace, or for app logging use the CLI.
 {: tip}
 
-1. Navigate to the **Overview** tab of the dashboard.
-2. Select the Cloud Foundry org and space from which you want to forward logs. When you configure log forwarding in the dashboard, logs are sent to the default {{site.data.keyword.loganalysisshort_notm}} endpoint for your cluster. To forward logs to an external server, or to another {{site.data.keyword.loganalysisshort_notm}} endpoint, you can use the CLI to configure logging.
-3. Select the log sources from which you want to forward logs.
-4. Click **Create**.
+Before you begin, [create](cs_clusters.html#clusters) or identify a standard cluster to use.
+
+1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/containers-kubernetes/clusters) and navigate to **Kubernetes > Clusters**.
+2. Select your standard cluster and from the **Overview** tab **Logs** field, click **Enable**.
+3. Select the **Cloud Foundry Org** and **Space** from which you want to forward logs. When you configure log forwarding in the dashboard, logs are sent to the default {{site.data.keyword.loganalysisshort_notm}} endpoint for your cluster. To forward logs to an external server, or to another {{site.data.keyword.loganalysisshort_notm}} endpoint, you can use the CLI to configure logging.
+4. Select the **Log sources** from which you want to forward logs.
+5. Click **Create**.
 
 </br>
 </br>
@@ -192,6 +195,8 @@ To create a configuration at the account level, for a specific container namespa
 {: #enable-forwarding}
 
 You can create a configuration for cluster logging. You can differentiate between the different logging options by using flags.
+
+Before you begin, [create](cs_clusters.html#clusters) or identify a standard cluster to use.
 
 **Forwarding logs to IBM**
 
@@ -209,7 +214,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
           ```
           {: pre}
 
-2.  For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+2.  For the standard cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
     If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
     {: tip}
