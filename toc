@@ -83,6 +83,8 @@ IBM Cloud Kubernetes Service
         cs_storage_file.md
         cs_storage_block.md
         cs_storage_cos.md
+        cs_storage_portworx.md
+        cs_storage_utilities.md
         cs_storage_remove.md
 
     cs_integrations.md
