@@ -443,10 +443,11 @@ Use this option if you want to add different block storage configurations, add b
 To attach the block storage device to a non-SDS worker node you must create a persistent volume (PV) with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher storage class and the details of your block storage device.
 {: shortdesc}
 
-Before you begin
+**Before you begin**:
 - Make sure that you [automatically](#automatic_block) or [manually](#manual_block) created raw, unformatted and unmounted block storage to your non-SDS worker nodes. 
-- {[Target]}
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
+**To attach raw block storage to non-SDS worker nodes**:
 1. Prepare the PV creation.  
    - **If you used the `mkpvyaml` container:**
      1. Open the `pv-<cluster_name>.yaml` file.
@@ -495,10 +496,10 @@ Before you begin
         <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
         </thead>
         <tbody>
-	<tr>
-	<td><code>metadata.name</td>
-	<td>Enter a name for your PV.</td>
-	</tr>
+      	<tr>
+      	<td><code>metadata.name</td>
+      	<td>Enter a name for your PV.</td>
+      	</tr>
         <tr>
         <td><code>ibm.io/iqn</code></td>
         <td>Enter the IQN host name that you retrieved earlier. </td>
@@ -533,8 +534,7 @@ Before you begin
         </tr>
         </tbody>
         </table>
-
-3. Create the PV to attach the block storage device to your non-SDS worker node.
+2. Create the PV to attach the block storage device to your non-SDS worker node.
    - **If you used the `mkpvyaml` container:**
      ```
      kubectl apply -f pv-<cluster_name>.yaml
@@ -547,7 +547,7 @@ Before you begin
      ```
      {: pre}
 
-4. Verify that the block storage is successfully attached to your worker node.
+3. Verify that the block storage is successfully attached to your worker node.
    ```
    kubectl describe pv <pv_name>
    ```
