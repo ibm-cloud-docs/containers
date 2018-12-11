@@ -56,7 +56,7 @@ You can also choose to use only a subset of worker nodes for your Portworx stora
 **How can I make sure that my data is stored highly available?** </br>
 You need at least 3 worker nodes in your Portworx cluster so that Portworx can replicate your data across nodes. By replicating your data across worker nodes, Portworx can ensure that your stateful app can be rescheduled to a different worker node in case of a failure without losing data. For even higher availability, use a [multizone cluster](cs_clusters_planning.html#multizone) and replicate your volumes on SDS worker nodes across 3 zones.
 
-All set? Let's start with [creating a cluster with an SDS worker pool of at least 3 worker nodes](cs_clusters.html#clusters_ui). If you want to include non-SDS worker nodes into your Portworx cluster, [add raw block storage](#create_block_storage) to each worker node. After your cluster is prepared, then [install the Portworx Helm chart](#install_portworx_plugin) in your cluster and creating your first hyper-converged storage cluster.  
+All set? Let's start with [creating a cluster with an SDS worker pool of at least 3 worker nodes](cs_clusters.html#clusters_ui). If you want to include non-SDS worker nodes into your Portworx cluster, [add raw block storage](#create_block_storage) to each worker node. After your cluster is prepared, then [install the Portworx Helm chart](#install_portworx) in your cluster and creating your first hyper-converged storage cluster.  
 
 ## Creating raw, unformatted, and unmounted block storage for non-SDS worker nodes
 {: #create_block_storage}
@@ -70,13 +70,13 @@ If you have SDS worker node flavors in your cluster and want to use these worker
 {: note}
 
 1. [Install the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in](cs_storage_utilities.html#block_storage_attacher). 
-2. If you want to add block storage with the same configuration to all your worker nodes, [automatically add block storage](cs_storage_utilities.html#automatic_block) with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in. To add block storage with a different configuration, add block storage to a subset of worker nodes only, or to have more control over the provisioning process, [manually add block storage](#cs_storage_utilities.html#manual_block). 
+2. If you want to add block storage with the same configuration to all your worker nodes, [automatically add block storage](cs_storage_utilities.html#automatic_block) with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in. To add block storage with a different configuration, add block storage to a subset of worker nodes only, or to have more control over the provisioning process, [manually add block storage](cs_storage_utilities.html#manual_block). 
 3. [Attach the block storage](cs_storage_utilities.html#attach_block) to your worker nodes. 
 
 ## Getting a Portworx license
 {: #portworx_license}
 
-When you [install Portworx with a Helm chart](#install_portworx_plugin), you get the Portworx `px-enterprise` edition as a Trial version. The Trial version provides you with the full Portworx functionality that you can test out for 30 days. After the Trial version expires, you must purchase a Portworx license to continue using your Portworx cluster.
+When you [install Portworx with a Helm chart](#install_portworx), you get the Portworx `px-enterprise` edition as a Trial version. The Trial version provides you with the full Portworx functionality that you can test out for 30 days. After the Trial version expires, you must purchase a Portworx license to continue using your Portworx cluster.
 {: shortdesc}
 
 For more information about available license types and how to upgrade your Trial license, see [Portworx Licensing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/getting-started/px-licensing.html).
@@ -131,7 +131,7 @@ Looking for instructions about how to update or remove Portworx? See [Updating P
 
 Before you begin:
 - [Create or use an existing cluster](cs_clusters.html#clusters_ui).
-- If you want to use non-SDS worker nodes for your Portworx storage layer, [add an unformatted block storage device to your non-SDS worker node](#attach_block_to_worker).
+- If you want to use non-SDS worker nodes for your Portworx storage layer, [add an unformatted block storage device to your non-SDS worker node](#create_block_storage).
 - Create a [{{site.data.keyword.composeForEtcd}} service instance](#portworx_database) to store the Portworx configuration and metadata.
 - Decide if you want to encrypt your Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}. To encrypt your volumes, you must [set up an {{site.data.keyword.keymanagementservicelong_notm}} service instance and store your service information in a Kubernetes secret](#encrypt_volumes). 
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
@@ -395,7 +395,7 @@ To install Portworx:
 Great! Now that you set up your Portworx cluster, you can now [add storage from your cluster to your apps](#add_portworx_storage).
 
 ### Updating Portworx in your cluster
-{: #udpate_portworx}
+{: #update_portworx}
 
 You can upgrade Portworx to the latest version.
 
@@ -420,7 +420,7 @@ You can upgrade Portworx to the latest version.
    {: pre}
 
 ### Remove Portworx from your cluster
-{: #remove_portworx_plugin}
+{: #remove_portworx}
 
 If you do not want to use Portworx in your cluster, you can uninstall the Helm chart.
 
@@ -1137,10 +1137,9 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 {: important}
 
 - **Remove a worker node from the Portworx cluster:** If you want to remove a worker node that runs Portworx and stores data in your Portworx cluster,  you must migrate existing pods to remaining worker nodes and then uninstall Portworx from the node. For more information, see [Decommission a Portworx node in Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/k8s-node-decommission.html)
-- **Remove the entire Portworx cluster:** You can remove a Portworx cluster by using the [`kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl cluster-delete` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/control/cluster.html#pxctl-cluster-delete) or by [uninstalling the Portworx Helm chart](#remove_portworx_plugin).
+- **Remove the entire Portworx cluster:** You can remove a Portworx cluster by using the [`kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl cluster-delete` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/control/cluster.html#pxctl-cluster-delete) or by [uninstalling the Portworx Helm chart](#remove_portworx).
 
 ## Getting help and support
 {: #help}
 
 If you run into an issue with using Portworx or you want to chat about Portworx configurations for your specific use case, post a question in the `portworx-on-iks` channel in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/). Log in to Slack by using your IBM ID. If you do not use an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation to this Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/).
-

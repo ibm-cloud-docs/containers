@@ -444,7 +444,7 @@ To attach the block storage device to a non-SDS worker node you must create a pe
 {: shortdesc}
 
 Before you begin
-- Make sure that you [automatically](#automatic_block) or [manually](#manul_block) created raw, unformatted and unmounted block storage to your non-SDS worker nodes. 
+- Make sure that you [automatically](#automatic_block) or [manually](#manual_block) created raw, unformatted and unmounted block storage to your non-SDS worker nodes. 
 - {[Target]}
 
 1. Prepare the PV creation.  
