@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-11"
 
 ---
 
@@ -166,11 +166,105 @@ The following image shows available non-persistent data storage options in {{sit
 </table>
 
 
+## Comparison of persistent storage options for single zone clusters
+{: #single_zone_persistent_storage}
 
-## Comparison of persistent storage options
+If you have a single zone cluster, you can choose between the following options in {{site.data.keyword.containerlong_notm}} that provide fast access to your data. For higher availability, use a storage option that is designed for [geographically distributed data](#persistent_storage_overview) and, if possible for your requirements, create a multizone cluster.
+{: shortdesc}
+
+Persistent data storage options are available for standard clusters only.
+{: note}
+
+The following image shows the options that you have in {{site.data.keyword.containerlong_notm}} to permanently store your data in a single cluster.
+
+<img src="images/cs_storage_single_zone.png" alt="Persistent storage options for single zone cluster"  width="300" style="width: 300px; border-style: none"/>
+
+<table>
+<thead>
+<th style="text-align:left">Characteristics</th>
+<th style="text-align:left">File</th>
+<th style="text-align:left">Block</th>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Multizone-capable</td>
+<td style="text-align:left">No, as specific to a data center. Data cannot be shared across zones, unless you implement your own data replication.</td>
+<td style="text-align:left">No, as specific to a data center. Data cannot be shared across zones, unless you implement your own data replication.</td>
+</tr>
+<tr>
+<td style="text-align:left">Ideal data types</td>
+<td style="text-align:left">All</td>
+<td style="text-align:left">All</td>
+</tr>
+<tr>
+<td style="text-align:left">Data usage pattern</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Random read-write operations</li><li style="margin:0px; padding:0px">Sequential read-write operations</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Random read-write operations</li><li style="margin:0px; padding:0px">Write-intensive workloads</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Access</td>
+<td style="text-align:left">Via file system on mounted volume</td>
+<td style="text-align:left">Via file system on mounted volume</td>
+</tr>
+<tr>
+<td style="text-align:left">Supported Kubernetes access writes</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Performance</td>
+<td style="text-align:left">Predictable due to assigned IOPS and size. IOPS are shared between the pods that access the volume.</td>
+<td style="text-align:left">Predictable due to assigned IOPS and size. IOPS are not shared between pods. </td>
+</tr>
+<tr>
+<td style="text-align:left">Consistency</td>
+<td style="text-align:left">Strong</td>
+<td style="text-align:left">Strong</td>
+</tr>
+<tr>
+<td style="text-align:left">Durability</td>
+<td style="text-align:left">High</td>
+<td style="text-align:left">High</td>
+</tr>
+<tr>
+<td style="text-align:left">Resiliency</td>
+<td style="text-align:left">Medium as specific to a data center. File storage server is clustered by IBM with redundant networking.</td>
+<td style="text-align:left">Medium as specific to a data center. Block storage server is clustered by IBM with redundant networking.</td>
+</tr>
+<tr>
+<td style="text-align:left">Availability</td>
+<td style="text-align:left">Medium as specific to a data center.</td>
+<td style="text-align:left">Medium as specific to a data center.</td>
+</tr>
+<tr>
+<td style="text-align:left">Scalability</td>
+<td style="text-align:left">Difficult to extend beyond the data center. You cannot change an existing storage tier. </td>
+<td style="text-align:left">Difficult to extend beyond the data center. You cannot change an existing storage tier.</td>
+</tr>
+<tr>
+<td style="text-align:left">Encryption</td>
+<td style="text-align:left">At rest</td>
+<td style="text-align:left">At rest</td>
+</tr>
+<tr>
+<td style="text-align:left">Common use cases</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Mass or single file storage</li><li style="margin:0px; padding:0px">File sharing across a single zone cluster</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stateful sets</li><li style="margin:0px; padding:0px">Backing storage when you run your own database</li><li style="margin:0px; padding:0px">High performance access for single pods</li></ul></td>
+</tr>
+<tr>
+<td style="text-align:left">Non-ideal use cases</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li><li style="margin:0px; padding:0px">Sharing data across multiple app instances</li></ul></td>
+</tr>
+</tbody>
+</table>
+
+
+
+## Comparison of persistent storage options for multizone clusters
 {: #persistent_storage_overview}
 
-Use persistent storage options for any data that you want to permanently keep, even if the container, the worker node, or the cluster is removed.
+If you have a multizone cluster, choose between the following persistent storage options to access your data from worker nodes that are spread across zones.
 {: shortdesc}
 
 Persistent data storage options are available for standard clusters only.
@@ -178,121 +272,102 @@ Persistent data storage options are available for standard clusters only.
 Looking to connect your cluster to an on-prem database instead? See [Setting up VPN connectivity to your cluster](cs_vpn.html#vpn).
 {: tip}
 
-The following image shows the options that you have in {{site.data.keyword.containerlong_notm}} to permanently store your data and make your data highly available in a cluster.
+The following image shows the options that you have in {{site.data.keyword.containerlong_notm}} to permanently store your data in a multizone cluster and make your data highly available.
 
-<img src="images/cs_storage_mz-ha.png" alt="High availability options for persistent storage"/>
+<img src="images/cs_storage_options_multizone.png" alt="High availability options for persistent storage in a multizone cluster"/>
 
 <table>
 <thead>
 <th style="text-align:left">Characteristics</th>
-<th style="text-align:left">File</th>
-<th style="text-align:left">Block</th>
 <th style="text-align:left">Object</th>
+<th style="text-align:left">SDS (Portworx)</th>
 <th style="text-align:left">DBaaS</th>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">Multizone-capable</td>
-<td style="text-align:left">No, as specific to a data center. Data cannot be shared across zones, unless you implement your own data replication.</td>
-<td style="text-align:left">No, as specific to a data center. Data cannot be shared across zones, unless you implement your own data replication.</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left">Yes</td>
 <td style="text-align:left">Yes</td>
 </tr>
 <tr>
 <td style="text-align:left">Ideal data types</td>
-<td style="text-align:left">All</td>
-<td style="text-align:left">All</td>
 <td style="text-align:left">Semi-structured and unstructured data</td>
+<td style="text-align:left">All</td>
 <td style="text-align:left">Depends on the DBaaS</td>
 </tr>
 <tr>
 <td style="text-align:left">Data usage pattern</td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Random read-write operations</li><li style="margin:0px; padding:0px">Sequential read-write operations</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Random read-write operations</li><li style="margin:0px; padding:0px">Write-intensive workloads</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Read-intensive workloads</li><li style="margin:0px; padding:0px">Few or no write operations</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Write-intensive workloads</li><li style="margin:0px; padding:0px">Random read and write operation</li><li style="margin:0px; padding:0px">Sequential read and write operations</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Read-write-intensive workloads</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">Access</td>
-<td style="text-align:left">Via file system on mounted volume</td>
-<td style="text-align:left">Via file system on mounted volume</td>
 <td style="text-align:left">Via file system on mounted volume (plug-in) or via REST API from your app</td>
+<td style="text-align:left">Via file system on mounted volume or NFS client access to the volume</td>
 <td style="text-align:left">Via REST API from your app</td>
 </tr>
 <tr>
 <td style="text-align:left">Supported Kubernetes access writes</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
+<td style="text-align:left">All</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">N/A as accessed from the app directly</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">Performance</td>
-<td style="text-align:left">Predictable due to assigned IOPS and size. IOPS are shared between the pods that access the volume.</td>
-<td style="text-align:left">Predictable due to assigned IOPS and size. IOPS are not shared between pods. </td>
-<td style="text-align:left">High for read operations. Not predictable for write operations.</td>
+<td style="text-align:left">High for read operations. Predictable due to assigned IOPS and size when using non-SDS machines.</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Close to bare metal performance for sequential read and write operations when using SDS machines. </li><li style="margin:0px; padding:0px">Provides profiles to run high performance databases</li><li style="margin:0px; padding:0px">Possibility to create a storage layer with different performance profiles that your app can choose from.</li></ul> </td>
 <td style="text-align:left">High if deployed to the same data center as your app.</td>
 </tr>
 <tr>
 <td style="text-align:left">Consistency</td>
-<td style="text-align:left">Strong</td>
-<td style="text-align:left">Strong</td>
 <td style="text-align:left">Eventual</td>
+<td style="text-align:left">Strong</td>
 <td style="text-align:left">Depends on the DBaaS</td>
 </tr>
 <tr>
 <td style="text-align:left">Durability</td>
-<td style="text-align:left">High</td>
-<td style="text-align:left">High</td>
 <td style="text-align:left">Very high as data slices are dispersed across a cluster of storage
 nodes. Every node stores only a part of the data. </td>
+<td style="text-align:left">Very high as three copies of your data is maintained at all times.</td>
 <td style="text-align:left">High</td>
 </tr>
 <tr>
 <td style="text-align:left">Resiliency</td>
-<td style="text-align:left">Medium as specific to a data center. File storage server is clustered by IBM with redundant networking.</td>
-<td style="text-align:left">Medium as specific to a data center. Block storage server is clustered by IBM with redundant networking.</td>
 <td style="text-align:left">High as data slices are dispersed across 3 zones or regions. Medium, when set up in a single zone only.</td>
+<td style="text-align:left">High when set up with replication across 3 zones. Medium, when storing data in a single zone only.</td>
 <td style="text-align:left">Depends on the DBaaS and your setup. </td>
 </tr>
 <tr>
 <td style="text-align:left">Availability</td>
-<td style="text-align:left">Medium as specific to a data center.</td>
-<td style="text-align:left">Medium as specific to a data center.</td>
 <td style="text-align:left">High due to the distribution across zones or regions. </td>
+<td style="text-align:left">High when replicating data across 3 worker nodes in different zones.</td>
 <td style="text-align:left">High if you set up multiple instances. </td>
 </tr>
 <tr>
 <td style="text-align:left">Scalability</td>
-<td style="text-align:left">Difficult to extend beyond the data center. You cannot change an existing storage tier. </td>
-<td style="text-align:left">Difficult to extend beyond the data center. You cannot change an existing storage tier.</td>
-<td style="text-align:left">Easy to scale.</td>
-<td style="text-align:left">Easy to scale.</td>
+<td style="text-align:left">Scales automatically</td>
+<td style="text-align:left">Increase volume capacity by resizing the volume. To increase overall storage layer capacity, you must add worker nodes or remote block storage. Both scenarios require monitoring of capacity by the user. </td>
+<td style="text-align:left">Scales automatically</td>
 </tr>
 <tr>
 <td style="text-align:left">Encryption</td>
-<td style="text-align:left">At rest</td>
-<td style="text-align:left">At rest</td>
 <td style="text-align:left">In transit and at rest</td>
+<td style="text-align:left">Bring your own key to protect your data in transit and at rest with {{site.data.keyword.keymanagementservicelong_notm}}. </td>
 <td style="text-align:left">At rest</td>
 </tr>
 <tr>
 <td style="text-align:left">Common use cases</td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Mass or single file storage</li><li style="margin:0px; padding:0px">File sharing across a single zone cluster</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stateful sets</li><li style="margin:0px; padding:0px">Backing storage when you run your own database</li><li style="margin:0px; padding:0px">High performance access for single pods</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li><li style="margin:0px; padding:0px">Static big data</li><li style="margin:0px; padding:0px">Static multimedia content</li><li style="margin:0px; padding:0px">Web apps</li><li style="margin:0px; padding:0px">Backups</li><li style="margin:0px; padding:0px">Archives</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stateful sets</li><li style="margin:0px; padding:0px">Geographically distributed data</li><li style="margin:0px; padding:0px">Common storage solution when running apps across multiple cloud providers</li><li style="margin:0px; padding:0px">Backing storage when you run your own database</li><li style="margin:0px; padding:0px">High performance access for single pods</li><li style="margin:0px; padding:0px">Shared storage access across multiple pods and worker nodes</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Relational and non-relational databases</li><li style="margin:0px; padding:0px">Geographically distributed data</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">Non-ideal use cases</td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Multizone clusters</li><li style="margin:0px; padding:0px">Geographically distributed data</li><li style="margin:0px; padding:0px">Sharing data across multiple app instances</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Write-intensive workloads</li><li style="margin:0px; padding:0px">Random write operations</li><li style="margin:0px; padding:0px">Incremental data updates</li><li style="margin:0px; padding:0px">Transaction databases</li></ul></td>
+<td style="text-align:left">N/A</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">App that is designed to write to a file system</li></ul></td>
 </tr>
 </tbody>
 </table>
-
-
-
-

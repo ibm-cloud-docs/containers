@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-10"
+lastupdated: "2018-12-11"
 
 ---
 
@@ -37,6 +37,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>11 December</td>
+<td>SDS support with Portworx</td>
+<td>Manage persistent storage for your containerized databases and other stateful apps, or share data between pods across multiple zones with Portworx. [Portworx ![External link icon](../icons/launch-glyph.svg "External link icon")](https://portworx.com/products/introduction/) is a highly available software-defined storage solution (SDS) that manages the local block storage of your worker nodes to create a unified persistent storage layer for your apps. By using volume replication of each container-level volume across multiple worker nodes, Portworx ensures data persistence and data accessibility across zones. For more information, see [Storing data on software-defined storage (SDS) with Portworx](cs_storage_portworx.html#portworx).    </td>
+</tr>
 <tr>
 <td>6 December</td>
 <td>{{site.data.keyword.mon_full_notm}}</td>
