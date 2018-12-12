@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-10"
+lastupdated: "2018-12-12"
 
 ---
 
@@ -152,7 +152,7 @@ To view documentation on the API commands, view [https://containers.bluemix.net/
 Zones are physical data centers that are available within an {{site.data.keyword.Bluemix_notm}} region. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries. The following table displays the zones available by region.
 {:shortdesc}
 
-* **Multizone Metro City**: Worker nodes in clusters that are created in a multizone metro city can be spread across zones. Additionally, if you create a Kubernetes version 1.10 or later cluster in a multizone metro city, the highly available masters are spread across zones.
+* **Multizone Metro City**: Worker nodes in clusters that are created in a multizone metro city can be spread across zones. Additionally, if you create a Kubernetes version 1.10 or later cluster in a multizone metro city **except Sydney (AP South)**, the highly available masters are spread across zones.
 * **Single Zone City**: Worker nodes in clusters that are created in a single zone city stay within one zone. You cannot spread worker nodes across multiple zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
 
 <table summary="The table shows the zones available by regions. Rows are to be read from the left to right, with the region in column one, the multizone metro cities in column two, and the single zone cities in column three.">
@@ -173,9 +173,8 @@ Zones are physical data centers that are available within an {{site.data.keyword
     </tr>
     <tr>
       <td>AP South</td>
-      <td>None</td>
-      <td><p>Sydney: syd01, syd04</p>
-      <p>Melbourne: mel01</p></td>
+      <td>Sydney: syd01, syd04, syd05</td>
+      <td>Melbourne: mel01</td>
     </tr>
     <tr>
       <td>EU Central</td>
@@ -188,7 +187,7 @@ Zones are physical data centers that are available within an {{site.data.keyword
     </tr>
     <tr>
       <td>UK South</td>
-      <td>London: lon04, lon05, lon06 **Note**: lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.</td>
+      <td>London: lon04, lon05`*`, lon06</td>
       <td></td>
     </tr>
     <tr>
@@ -204,6 +203,9 @@ Zones are physical data centers that are available within an {{site.data.keyword
     </tr>
   </tbody>
 </table>
+
+`*` lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.
+{: note}
 
 ### Single-zone clusters
 {: #single_zone}
