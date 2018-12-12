@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-12"
 
 ---
 
@@ -115,7 +115,7 @@ You can expose your apps by using an Ingress application load balancer (ALB) or 
 - **Load balancer services:** Load balancer services are set up in one zone only. Incoming requests to your app are routed from that one zone to all app instances in other zones. If this zone becomes unavailable, then your app might not be reachable from the internet. You can set up additional load balancer services in other zones to account for a single zone failure. For more information, see highly available [load balancer services](cs_loadbalancer.html#multi_zone_config).
 
 **Can I set up persistent storage for my multizone cluster?**</br>
-For highly available persistent storage, use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
+For highly available persistent storage, use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage). You can also try a software-defined storage (SDS) solution such as [Portworx](cs_storage_portworx.html#portworx) that uses [SDS machines](#sds). For more information, see [Comparison of persistent storage options for multizone clusters](cs_storage_planning.html#persistent_storage_overview).
 
 NFS file and block storage is not sharable across zones. Persistent volumes can be used only in the zone where the actual storage device is located. If you have existing NFS file or block storage in your cluster that you want to continue to use, you must apply region and zone labels to existing persistent volumes. These labels help the kube-scheduler to determine where to schedule an app that uses the persistent volume. Run the following command and replace `<mycluster>` with your cluster name.
 
@@ -440,7 +440,7 @@ Software-defined storage (SDS) flavors are physical machines that are provisione
 
 **When do I use SDS flavors?**</br>
 You typically use SDS machines in the following cases:
-*  If you use an SDS add-on to the cluster, use an SDS machine.
+*  If you use an SDS add-on such as [Portworx](cs_storage_portworx.html#portworx) to the cluster, use an SDS machine.
 *  If your app is a [StatefulSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) that requires local storage, you can use SDS machines and provision [Kubernetes local persistent volumes (beta) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
 *  You might have custom apps that require additional raw local storage.
 
