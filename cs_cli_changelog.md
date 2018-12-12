@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-11"
 
 ---
 
@@ -25,9 +25,9 @@ lastupdated: "2018-12-07"
 In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all the available commands and flags.
 {:shortdesc}
 
-To install the CLI plug-in, see [Installing the CLI](cs_cli_install.html#cs_cli_install_steps).
+To install the {{site.data.keyword.containerlong}} CLI plug-in, see [Installing the CLI](cs_cli_install.html#cs_cli_install_steps).
 
-Refer to the following table for a summary of changes for each CLI plug-in version.
+Refer to the following table for a summary of changes for each {{site.data.keyword.containerlong_notm}} CLI plug-in version.
 
 <table summary="Overview of version changes for the {{site.data.keyword.containerlong_notm}} CLI plug-in">
 <caption>Changelog for the {{site.data.keyword.containerlong_notm}} CLI plug-in</caption>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-11"
+lastupdated: "2018-12-12"
 
 ---
 
@@ -53,6 +53,8 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <td>Are you deploying so many apps that you’re worried about maxing out your cluster? Worker node resource reserves and Kubernetes evictions protect your cluster’s compute capacity so that your cluster has enough resources to keep running. Just add a few more worker nodes, and your pods start rescheduling to them automatically. Worker node resource reserves are updated in the latest [version patch changes](cs_versions_changelog.html#changelog).</td>
 </tr>
 </tbody></table>
+
+
 
 ## Popular topics in November 2018
 {: #nov18}

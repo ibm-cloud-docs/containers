@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-10"
+lastupdated: "2018-12-11"
 
 ---
 
@@ -801,6 +801,8 @@ Autorecovery requires at least one healthy node to function properly. Configure 
 Before you begin:
 - Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+To configure Autorecovery:
 
 1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](cs_integrations.html#helm).
 

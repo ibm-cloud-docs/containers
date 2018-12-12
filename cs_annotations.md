@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-10"
+lastupdated: "2018-12-11"
 
 ---
 
@@ -1762,9 +1762,7 @@ kind: Ingress
 metadata:
   name: &lt;myingressname&gt;
   annotations:
-    ingress.bluemix.net/ssl-services: |
-      ssl-service=&lt;myservice1&gt; ssl-secret=&lt;service1-ssl-secret&gt;;
-      ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
+    ingress.bluemix.net/ssl-services: ssl-service=&lt;myservice1&gt; ssl-secret=&lt;service1-ssl-secret&gt;;ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
 spec:
   tls:
   - hosts:
