@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-12"
+lastupdated: "2018-12-13"
 
 ---
 
@@ -610,6 +610,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
 {: #lesson3b}
 
 While a deployment is running, you can edit the deployment to change values in the pod template. This lesson includes updating the image that is used. The PR firm wants to change the app in the deployment.
+{: shortdesc}
 
 Change the name of the image:
 
