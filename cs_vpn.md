@@ -52,7 +52,7 @@ Because strongSwan is integrated within your cluster, you don't need an external
 5. The VPN tunnel endpoint (router) forwards the request to the on-premises server or mainframe, depending on the destination IP address that was specified in step 2. The necessary data is sent back over the VPN connection to `myapp` through the same process.
 
 ## strongSwan VPN service considerations
-{: strongswan_limitations}
+{: #strongswan_limitations}
 
 Before using the strongSwan Helm chart, review the following considerations and limitations.
 {: shortdesc}
