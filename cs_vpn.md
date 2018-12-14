@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-14"
 
 ---
 
@@ -64,6 +64,39 @@ Before using the strongSwan Helm chart, review the following considerations and 
 * The strongSwan Helm chart runs as a Kubernetes pod inside of the cluster. The VPN performance is affected by the memory and network usage of Kubernetes and other pods that are running in the cluster. If you have a performance-critical environment, consider using a VPN solution that runs outside of the cluster on dedicated hardware.
 * The strongSwan Helm chart runs a single VPN pod as the IPSec tunnel endpoint. If the pod fails, the cluster restarts the pod. However, you might experience a short down time while the new pod starts and the VPN connection is re-established. If you require faster error recovery or a more elaborate high availability solution, consider using a VPN solution that runs outside of the cluster on dedicated hardware.
 * The strongSwan Helm chart does not provide metrics or monitoring of the network traffic flowing over the VPN connection. For a list of supported monitoring tools, see [Logging and monitoring services](cs_integrations.html#health_services).
+
+<br />
+
+
+
+
+## Configuring the strongSwan VPN in a multizone cluster
+{: #multizone}
+
+Deploy a strongSwan VPN service in a multizone cluster. By making app instances available on worker nodes in multiple zones, your apps can continue to be available over the VPN connection in the event of a zonal outage.
+{: shortdesc}
+
+When you deploy a strongSwan VPN service in a multizone cluster, a single outbound VPN connection can float between different worker nodes across all availability zones in your cluster. For example, if the worker node that the VPN is currently on is removed or experiences downtime, `kubelet` reschedules the VPN pod onto a new worker node. If an availability zone where the VPN pod currently exists experiences an outage, `kubelet` reschedules the VPN pod onto a new worker node in a different zone.
+
+To get started with strongSwan in a multizone cluster, you must be able to use an [outbound VPN connection](#strongswan_3), and the remote VPN endpoint must allow the `local.id` value to be specified. In either of the following scenarios, you cannot currently deploy strongSwan into your multizone cluster:
+* You can use an outbound VPN connection, but the remote VPN endpoint requires that `local.id` must be the public IP address of the local endpoint for the VPN IPSec tunnel.
+* You require inbound VPN connections only and cannot use outbound VPN connections.
+
+To configure the strongSwan VPN service in a multizone cluster:
+
+1. [Configure one strongSwan VPN Helm chart](cs_vpn.html#vpn_configure). When you follow the steps in that section, ensure that you specify the following settings:
+    - `ipsec.auto`: Change to `start`.
+    - `loadBalancerIP`: Do not specify an IP address. Leave this setting blank.
+    - `connectUsingLoadBalancerIP`: Set to `false`. The strongSwan service uses the worker node's public IP address to establish the outbound connection.
+    - `local.id`: Specify a fixed value that is supported by your remote VPN endpoint.
+
+2. In your remote network firewall, allow incoming IPSec VPN connections from the public IP address of each worker node in your cluster. Because the IP address can float between worker nodes, you must allow the public IP addresses of all workers. List the public IPs of workers by running `ibmcloud ks workers --cluster <cluster_node_or_ID>`.
+
+
+
+
+<br />
+
 
 ## Configuring the strongSwan Helm chart
 {: #vpn_configure}
