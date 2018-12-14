@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-14"
 
 ---
 
@@ -517,10 +517,10 @@ You can manage automatic updates of the Ingress ALB add-on in the following ways
     ```
     {: pre}
 * Re-enable automatic updates. Whenever the next build becomes available, the ALB pods are automatically updated to the latest build.
-        ```
-        ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+    ```
+    ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 <br />
 
