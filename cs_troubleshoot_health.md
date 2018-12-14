@@ -177,7 +177,7 @@ Review the following reasons why you are hitting your log quota and the correspo
 
 
 ## Log lines are too long
-{#long_lines}
+{: #long_lines}
 
 {: tsSymptoms}
 You set up a logging configuration in your cluster to forward logs to {{site.data.keyword.loganalysisfull_notm}}. When you view logs, you see a very long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.

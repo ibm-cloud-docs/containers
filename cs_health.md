@@ -33,12 +33,12 @@ Continuous monitoring and logging is the key to detecting attacks on your cluste
 By default, logs are generated and written locally for all of the following {{site.data.keyword.containerlong_notm}} cluster components: worker nodes, containers, applications, persistent storage, Ingress application load balancer, Kubernetes API, and the `kube-system` namespace. Several logging solutions are available to collect, forward, and view these logs.
 {: shortdesc}
 
-You can choose your logging solution based on which cluster components you need to collect logs for. A common implementation is to choose a logging service that you prefer based on its analysis and interface capabilities, such as {{site.data.keyword.la_full}}, {{site.data.keyword.loganalysisfull}}, or a third-party service. You can then use {{site.data.keyword.cloudaccesstrailfull}} to audit user activity in the cluster and backup cluster master logs to {{site.data.keyword.cos_full}}. **Note**: To configure logging, you must have a standard Kubernetes cluster.
+You can choose your logging solution based on which cluster components you need to collect logs for. A common implementation is to choose a logging service that you prefer based on its analysis and interface capabilities, such as {{site.data.keyword.loganalysisfull}}, {{site.data.keyword.la_full}}, or a third-party service. You can then use {{site.data.keyword.cloudaccesstrailfull}} to audit user activity in the cluster and backup cluster master logs to {{site.data.keyword.cos_full}}. **Note**: To configure logging, you must have a standard Kubernetes cluster.
 
 <dl>
 
 <dt>Fluentd with {{site.data.keyword.loganalysisfull_notm}} or syslog</dt>
-<dd>To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) cluster add-on collects logs from the paths for a specified source. Fluentd then forwards these logs to {{site.data.keyword.loganalysisfull}} or an external syslog server.
+<dd>To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) cluster add-on collects logs from the paths for a specified source. Fluentd then forwards these logs to {{site.data.keyword.loganalysisfull_notm}} or an external syslog server.
 
 <ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](../services/CloudLogAnalysis/log_analysis_ov.html) expands your log collection, retention, and search abilities. When you create a logging configuration that forwards logs for a source to {{site.data.keyword.loganalysisfull_notm}}, you can view your logs in a Kibana dashboard.</li>
 
@@ -46,6 +46,9 @@ You can choose your logging solution based on which cluster components you need 
 
 To get started, see [Understanding cluster and app log forwarding](#logging).
 </dd>
+
+<dt>{{site.data.keyword.la_full_notm}}</dt>
+<dd>Manage pod container logs by deploying LogDNA as a third-party service to your cluster. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](../services/Log-Analysis-with-LogDNA/overview.html) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</dd>
 
 <dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
 <dd>To monitor user-initiated administrative activity made in your cluster, you can collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}. Clusters generate two types of {{site.data.keyword.cloudaccesstrailshort}} events.
@@ -56,9 +59,6 @@ To get started, see [Understanding cluster and app log forwarding](#logging).
 
 For more information about the types of {{site.data.keyword.containerlong_notml}} events that you can track, see [Activity Tracker events](cs_at_events.html). For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) documentation.
 </dd>
-
-<dt>{{site.data.keyword.la_full_notm}}</dt>
-<dd>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to manage logs from your pod containers. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](../services/Log-Analysis-with-LogDNA/overview.html) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</dd>
 
 <dt>{{site.data.keyword.cos_full_notm}}</dt>
 <dd>To collect, forward, and view logs for your cluster's Kubernetes master, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies. To get started, see [Collecting master logs](#collect_master).</dd>
