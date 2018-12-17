@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-11"
+lastupdated: "2018-12-17"
 
 ---
 
@@ -34,7 +34,7 @@ The {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in creates pod
 Looking for instructions for how to update or remove the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in? See [Updating the plug-in](#update_block_attacher) and [Removing the plug-in](#remove_block_attacher).
 {: tip}
 
-1. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) version 2.9 or higher with a Kubernetes service account in your cluster.
+1. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) version 2.10 or later with a Kubernetes service account in your cluster.
 
 2. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
