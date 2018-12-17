@@ -261,7 +261,7 @@ To add different block storage configurations, add block storage to a subset of 
    </table>  
 
 4. Retrieve your IBM Cloud infrastructure (SoftLayer) user name and API key. The user name and API key are used by the `mkpvyaml` script to access the cluster.
-   1. Log in to the [{{site.data.keyword.Bluemix_notm}} console.
+   1. Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
    2. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), select **Infrastructure**.
    3. From the menu bar, select **Account** > **Users** > **User List**.
    4. Find the user whose user name and API key you want to retrieve.
