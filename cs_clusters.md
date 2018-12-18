@@ -448,6 +448,7 @@ Before you begin, make sure you have the [**Operator** or **Administrator** {{si
   * [Deprecated: Add a stand-alone worker node to a cluster](#standalone)
 
 
+
 ### Adding worker nodes by resizing an existing worker pool
 {: #resize_pool}
 
@@ -668,6 +669,7 @@ If you have a cluster that was created after worker pools were introduced, you c
    ```
    {: pre}
 
+<br />
 
 
 ## Viewing cluster states
