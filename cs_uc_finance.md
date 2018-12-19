@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -42,8 +42,8 @@ Why {{site.data.keyword.Bluemix_notm}}: To improve risk analysis, the company lo
 * [Multiple regions for high availability](cs_regions.html#regions-and-zones)
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Container security and isolation](cs_secure.html#security)
-* [{{site.data.keyword.cloudant}} to persist and sync data across apps](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
-* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant/getting-started.html)
+* [SDK for Node.js](/docs/runtimes/nodejs/index.html#nodejs_runtime)
 
 **The solution**
 
@@ -111,7 +111,7 @@ Key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Fraud prevention with {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](/docs/runtimes/nodejs/index.html#nodejs_runtime)
 
 **Context: Streamlining developer productivity and deploying AI tools to partners 4 times faster**
 

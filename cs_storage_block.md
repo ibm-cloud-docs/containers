@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-10"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -1217,7 +1217,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    ```
    {: pre}
    
-7. If you changed the size of your volume, log in to your pod to verify the new size. 
+7. If you changed the size of your volume, log in to your pod to verify the new size. Note that the storage instance takes a while to resize, and you cannot verify the size until the process is complete.
    1. Get the volume mount path that you used in your pod to access your volume. 
       ```
       kubectl describe pod <pod_name>

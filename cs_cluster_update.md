@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -494,7 +494,7 @@ Before you begin:
     private-crb110acca09414e88a44227b87576ceea-alb1   enabled   private   10.130.5.78    mex01   ingress:350/ingress-auth:192*
     public-crb110acca09414e88a44227b87576ceea-alb1    enabled   public    169.57.1.110   mex01   ingress:350/ingress-auth:192*
 
-    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://console.bluemix.net/docs/containers/cs_cluster_update.html#alb
+    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://cloud.ibm.com/docs/containers/cs_cluster_update.html#alb
     ```
     {: screen}
 
@@ -517,10 +517,10 @@ You can manage automatic updates of the Ingress ALB add-on in the following ways
     ```
     {: pre}
 * Re-enable automatic updates. Whenever the next build becomes available, the ALB pods are automatically updated to the latest build.
-        ```
-        ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
+    ```
+    ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 <br />
 

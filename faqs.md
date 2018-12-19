@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -170,7 +170,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <p>For details on the machine specifications, see [Available hardware for worker nodes](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).</p></dd>
 
 <dt id="bandwidth">Public bandwidth</dt>
-  <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.Bluemix_notm}} resources in data centers around the globe. Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.
+  <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.Bluemix_notm}} resources in data centers around the globe. Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.
   <p>Review the following factors that impact public bandwidth charges:</p>
   <ul><li><strong>Location</strong>: As with worker nodes, charges vary depending on the zone that your resources are deployed in.</li>
   <li><strong>Included bandwidth or Pay-As-You-Go</strong>: Your worker node machines might come with a certain allocation of outbound networking per month, such as 250GB for VMs or 500GB for bare metal. Or, the allocation might be Pay-As-You-Go, based on GB usage.</li>
@@ -188,7 +188,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <li>[Object storage plans![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
 
 <dt id="services">{{site.data.keyword.Bluemix_notm}} services</dt>
-  <dd>Each service that you integrate with your cluster has its own pricing model. Consult each product documentation and the [cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/) for more information.</dd>
+  <dd>Each service that you integrate with your cluster has its own pricing model. Consult each product documentation and the [cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/) for more information.</dd>
 
 </dl>
 
@@ -206,11 +206,10 @@ If you linked your {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructu
 {: #cost_estimate}
 {: faq}
 
-Yes, see [Estimating your costs](/docs/billing-usage/estimating_costs.html#cost) and the [cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/) tool for more information. 
+Yes, see [Estimating your costs](/docs/billing-usage/estimating_costs.html#cost) and the [cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/) tool for more information. 
 
 ## Can I view my current usage? 
 {: #usage}
 {: faq}
 
 You can check your current usage and estimated monthly totals for your {{site.data.keyword.Bluemix_notm}} platform and infrastructure resources. For more information, see [Viewing your usage](/docs/billing-usage/viewing_usage.html#viewingusage). To organize your billing, you can group your resources with [resource groups](/docs/resources/bestpractice_rgs.html#bp_resourcegroups). 
-

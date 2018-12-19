@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -49,14 +49,14 @@ And what is a cluster? A cluster is a set of resources, worker nodes, networks, 
 
 **Before you begin**
 
-Get the [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/) type that is right for you:
+Get the [{{site.data.keyword.Bluemix_notm}} account](https://cloud.ibm.com/registration) type that is right for you:
 * **Billable (Pay-As-You-Go or Subscription)**: You can create a free trial cluster. You can also provision IBM Cloud infrastructure (SoftLayer) resources to create and use in standard clusters.
 * **Lite**: You cannot create a free or standard cluster. [Upgrade your account](/docs/account/account_faq.html#changeacct) to a billable account.
 * **Trial (for educational purposes)**: You can create one free cluster that you can use for 30 days to get familiar with the service.
 
 To create a free cluster:
 
-1.  In the [{{site.data.keyword.Bluemix_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **{{site.data.keyword.containershort_notm}}** and click **Create**. A cluster configuration page opens. By default, **Free cluster** is selected.
+1.  In the [{{site.data.keyword.Bluemix_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **{{site.data.keyword.containershort_notm}}** and click **Create**. A cluster configuration page opens. By default, **Free cluster** is selected.
 
 2.  Give your cluster a unique name.
 

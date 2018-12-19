@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-11"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -79,7 +79,7 @@ If you have SDS worker node flavors in your cluster and want to use these worker
 When you [install Portworx with a Helm chart](#install_portworx), you get the Portworx `px-enterprise` edition as a Trial version. The Trial version provides you with the full Portworx functionality that you can test out for 30 days. After the Trial version expires, you must purchase a Portworx license to continue using your Portworx cluster.
 {: shortdesc}
 
-For more information about available license types and how to upgrade your Trial license, see [Portworx Licensing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/getting-started/px-licensing.html).
+For more information about available license types and how to upgrade your Trial license, see [Portworx Licensing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/knowledge-base/px-licensing/).
 
 ## Setting up a Compose for etcd database for Portworx metadata
 {: #portworx_database}
@@ -96,7 +96,7 @@ The following steps show how to provision and set up the {{site.data.keyword.com
 1. Make sure that you have the [`Developer` Cloud Foundry role for the space](/docs/iam/mngcf.html#mngcf) where you want to create your {{site.data.keyword.composeForEtcd}} database service. 
 
 2. Deploy a {{site.data.keyword.composeForEtcd}} service instance.
-   1. Open the [{{site.data.keyword.composeForEtcd}} catalog page](https://console.bluemix.net/catalog/services/compose-for-etcd)
+   1. Open the [{{site.data.keyword.composeForEtcd}} catalog page](https://cloud.ibm.com/catalog/services/compose-for-etcd)
    2. Enter a name for your service instance, such as `px-etcd`.
    3. Select the region where you want to deploy your service instance. For optimal performance, choose the region that your cluster is in.
    4. Select a Cloud Foundy org and space.
@@ -499,7 +499,7 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
 1. Make sure that you are [assigned the `Adminstrator` platform access role and the `Writer` service access role](/docs/services/key-protect/manage-access.html#manage-access) in {{site.data.keyword.Bluemix_notm}} Identity and Access Management for {{site.data.keyword.keymanagementservicelong_notm}}. 
 
 2. Create an {{site.data.keyword.keymanagementservicelong_notm}} service instance.
-   1. Open the [{{site.data.keyword.keymanagementservicelong_notm}} catalog page](https://console.bluemix.net/catalog/services/key-protect).
+   1. Open the [{{site.data.keyword.keymanagementservicelong_notm}} catalog page](https://cloud.ibm.com/catalog/services/key-protect).
    2. In the **Service name** field, enter a name for your service instance.
    3. Select the region where you want to deploy your service instance. For optimal performance, choose the region that your cluster is in.
    4. Select the resource group that your cluster is in.

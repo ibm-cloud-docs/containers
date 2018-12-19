@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-11"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -39,6 +39,13 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.1.668</td>
+<td>18 Dec 2018</td>
+<td><ul><li>Switches the default API endpoint from <code>https://containers.bluemix.net</code> to <code>https://containers.cloud.ibm.com</code>.</li>
+<li>Fixes bug so that translations are displaying properly for command help and error messages.</li>
+<li>Displays command help faster.</li></ul></td>
+</tr>
 <tr>
 <td>0.1.654</td>
 <td>05 Dec 2018</td>

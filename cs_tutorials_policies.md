@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-10"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -234,7 +234,10 @@ Next, you can start creating and applying Calico policies to block public traffi
 ## Lesson 2: Block all incoming traffic to all node ports
 {: #lesson2}
 
-To secure the PR firm's cluster, you must block public access to both the load balancer service and node ports that are exposing your app. Start by blocking access to node ports. The following image shows how traffic will be permitted to the load balancer but not to node ports at the end of Lesson 2:
+To secure the PR firm's cluster, you must block public access to both the load balancer service and node ports that are exposing your app. Start by blocking access to node ports. 
+{: shortdesc}
+
+The following image shows how traffic will be permitted to the load balancer but not to node ports at the end of Lesson 2:
 
 <img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="At the end of Lesson 2, the webserver app is exposed to the internet by public load balancer only." style="width:425px; border-style: none"/>
 
@@ -463,6 +466,7 @@ At this point, all traffic to the public node ports and load balancer is blocked
 {: #lesson4}
 
 In the previous lesson, you blocked all traffic and whitelisted only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blacklisting is useful in a scenario like this because it can help you prevent an attack from a small set of IP addresses.
+{: shortdesc}
 
 In this lesson, you will test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports will be blocked, and all traffic to the public load balancer will be allowed. Only traffic from your blacklisted system IP to the load balancer will be blocked:
 

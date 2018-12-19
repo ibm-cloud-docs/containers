@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-07"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -149,11 +149,14 @@ Before you create a version 2.0 load balancer, you must complete the following p
 1. [Update your cluster's master and worker nodes](cs_cluster_update.html) to Kubernetes version 1.12 or later.
 
 2. To allow your load balancer 2.0 to forward requests to app pods in multiple zones, open a support case to request a configuration setting for your VLANs. **Important**: You must request this configuration for all public VLANs. If you request a new VLAN associated, you must open another ticket for that VLAN.
-    1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/).
-    2. In the menu, navigate to **Infrastructure**, and then to **Support > Add Ticket**.
-    3. In the case fields, select **Technical**, **Infrastructure**, and **Public Network Question.**
+    1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/).
+    2. From the menu bar, click **Support**, click the **Manage cases** tab, and click **Create new case**.
+    3. In the case fields, enter the following:
+       * For type of support, select **Technical**.
+       * For category, select **VLAN Spanning**. 
+       * For subject, enter **Public VLAN Network Question.**
     4. Add the following information to the description: "Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145".
-    5. Click **Submit Ticket**.
+    5. Click **Submit**.
 
 3. After your VLANs have been configured with capacity aggregation, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account. When VLAN spanning is enabled, the version 2.0 load balancer can route packets to various subnets in the account.
 

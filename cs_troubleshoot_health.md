@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -132,6 +132,61 @@ Delete the `kube-dashboard` pod to force a restart. The pod is re-created with R
 
 <br />
 
+
+## Log quota is too low
+{: #quota}
+
+{: tsSymptoms}
+You set up a logging configuration in your cluster to forward logs to {{site.data.keyword.loganalysisfull}}. When you view logs, you see this or a similar error message:
+
+```
+You have reached the daily quota that is allocated to the Bluemix space {Space GUID} for the IBM® Cloud Log Analysis instance {Instance GUID}. Your current daily allotment is XXX for Log Search storage, which is retained for a period of 3 days, during which it can be searched for in Kibana. This does not affect your log retention policy in Log Collection storage. To upgrade your plan so that you can store more data in Log Search storage per day, upgrade the Log Analysis service plan for this space. For more information about service plans and how to upgrade your plan, see Plans.
+```
+{: screen}
+
+{: tsResolve}
+Review the following reasons why you are hitting your log quota and the corresponding troubleshooting steps:
+
+<table>
+<caption>Troubleshooting log storage issues</caption>
+  <col width="40%">
+  <col width="60%">
+  <thead>
+    <tr>
+      <th>Why it's happening</th>
+      <th>How to fix it</th>
+    </tr>
+ </thead>
+ <tbody>
+  <tr>
+    <td>One or more pods is producing a very high amount of logs.</td>
+    <td>You can free up log storage space by preventing the logs from specific pods from being forwarded. Create a [logging filter](cs_health.html#filter-logs) for these pods.</td>
+  </tr>
+  <tr>
+    <td>You are exceeding the 500MB daily allotment for log storage for the Lite plan.</td>
+    <td>First, [calculate the search quota and daily usage](../services/CloudLogAnalysis/how-to/quota.html) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](../services/CloudLogAnalysis/how-to/change_plan.html#change_plan).</td>
+  </tr>
+  <tr>
+    <td>You are exceeding the log storage quota for your current paid plan.</td>
+    <td>First, [calculate the search quota and daily usage](../services/CloudLogAnalysis/how-to/quota.html) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](../services/CloudLogAnalysis/how-to/change_plan.html#change_plan).</td>
+  </tr>
+  </tbody>
+</table>
+
+<br />
+
+
+## Log lines are too long
+{: #long_lines}
+
+{: tsSymptoms}
+You set up a logging configuration in your cluster to forward logs to {{site.data.keyword.loganalysisfull_notm}}. When you view logs, you see a very long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
+
+{: tsCauses}
+A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to {{site.data.keyword.loganalysisshort_notm}}.
+
+{: tsResolve}
+To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [EnhancedPatternLayout ![External link icon](../icons/launch-glyph.svg "External link icon")](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html) to limit the `stack_trace` to 15KB.
 
 ## Getting help and support
 {: #ts_getting_help}

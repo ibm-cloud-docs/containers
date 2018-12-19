@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -54,13 +54,15 @@ This tutorial is intended for software developers and network administrators who
 Download and install Istio in your cluster.
 {:shortdesc}
 
-1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-istio).
+1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-istio).
     1. [Set up Helm in your cluster and add the `ibm-charts` repository to your Helm instance](cs_integrations.html#helm).
     2.  **For Helm versions 2.9 or earlier only**: Install Istio’s custom resource definitions.
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
         ```
         {: pre}
+        Did you apply the custom resource definitions by accident? Helm versions 2.10 or later don't need these CRDs, so you can remove them by running `kubectl delete --force -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml`.
+        {: tip}
     3. Install the Helm chart to your cluster.
         ```
         helm install ibm-charts/ibm-istio --name=istio --namespace istio-system

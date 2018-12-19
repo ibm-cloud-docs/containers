@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-10"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -368,13 +368,13 @@ Switching regions? Use the `ibmcloud ks region-set` [command](#cs_region-set) in
    <dl>
    <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
    <dd>The {{site.data.keyword.containerlong_notm}} API endpoint. Note that this endpoint is different than the {{site.data.keyword.Bluemix_notm}} endpoints. This value is required to set the API endpoint. Accepted values are:<ul>
-   <li>Global endpoint: https://containers.bluemix.net</li>
-   <li>AP North endpoint: https://ap-north.containers.bluemix.net</li>
-   <li>AP South endpoint: https://ap-south.containers.bluemix.net</li>
-   <li>EU Central endpoint: https://eu-central.containers.bluemix.net</li>
-   <li>UK South endpoint: https://uk-south.containers.bluemix.net</li>
-   <li>US East endpoint: https://us-east.containers.bluemix.net</li>
-   <li>US South endpoint: https://us-south.containers.bluemix.net</li></ul>
+   <li>Global endpoint: https://containers.cloud.ibm.com</li>
+   <li>AP North endpoint: https://ap-north.containers.cloud.ibm.com</li>
+   <li>AP South endpoint: https://ap-south.containers.cloud.ibm.com</li>
+   <li>EU Central endpoint: https://eu-central.containers.cloud.ibm.com</li>
+   <li>UK South endpoint: https://uk-south.containers.cloud.ibm.com</li>
+   <li>US East endpoint: https://us-east.containers.cloud.ibm.com</li>
+   <li>US South endpoint: https://us-south.containers.cloud.ibm.com</li></ul>
    </dd>
 
    <dt><code>--insecure</code></dt>
@@ -398,7 +398,7 @@ ibmcloud ks api
 {: pre}
 
 ```
-API Endpoint:          https://containers.bluemix.net   
+API Endpoint:          https://containers.cloud.ibm.com   
 API Version:           v1   
 Skip SSL Validation:   false   
 Region:                us-south
@@ -647,7 +647,7 @@ Initialize the {{site.data.keyword.containerlong_notm}} plug-in or specify the r
 
 
 ```
-ibmcloud ks init --host https://uk-south.containers.bluemix.net
+ibmcloud ks init --host https://uk-south.containers.cloud.ibm.com
 ```
 {: pre}
 

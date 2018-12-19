@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-11"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -34,7 +34,7 @@ The {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in creates pod
 Looking for instructions for how to update or remove the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in? See [Updating the plug-in](#update_block_attacher) and [Removing the plug-in](#remove_block_attacher).
 {: tip}
 
-1. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) version 2.9 or higher with a Kubernetes service account in your cluster.
+1. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) version 2.10 or later with a Kubernetes service account in your cluster.
 
 2. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
@@ -204,9 +204,15 @@ To add different block storage configurations, add block storage to a subset of 
    ```
    {: pre}
 
+2.  Clone the {{site.data.keyword.Bluemix_notm}} Storage Utilities repo.
+    ```
+    git clone git@github.com:IBM/ibmcloud-storage-utilities.git
+    ```
+    {: pre}
+
 2. Navigate in to the `block-storage-utilities` directory.
    ```
-   cd ../block-storage-provisioner
+   cd ibmcloud-storage-utilities/block-storage-provisioner
    ```
    {: pre}
 
@@ -261,7 +267,7 @@ To add different block storage configurations, add block storage to a subset of 
    </table>  
 
 4. Retrieve your IBM Cloud infrastructure (SoftLayer) user name and API key. The user name and API key are used by the `mkpvyaml` script to access the cluster.
-   1. Log in to the [{{site.data.keyword.Bluemix_notm}} console.
+   1. Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).
    2. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), select **Infrastructure**.
    3. From the menu bar, select **Account** > **Users** > **User List**.
    4. Find the user whose user name and API key you want to retrieve.
@@ -285,61 +291,92 @@ To add different block storage configurations, add block storage to a subset of 
       ```
       {: pre}
 
-6. Run the `mkpvyaml` container. You can choose to create the `mkpvyaml` image from the Dockerfile that you downloaded by using the `docker build -t mkpvyaml .` command. You can also use the [`mkpvyaml` image from DockerHub ![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/r/portworx/iks-mkpvyaml/) that is already built for you as shown in the example. When you run the container from the image, the `mkpvyaml.py` script is executed. The script adds a block storage device to every worker node in the cluster and authorizes each worker node to access the block storage device. At the end of the script, a `pv-<cluster_name>.yaml` YAML file is generated for you that you can later use to create the persistent volumes in the cluster.
-   ```
-   docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME portworx/iks-mkpvyaml
-   ```
-   {: pre}
+6.  Build and run the `mkpvyaml` container. When you run the container from the image, the `mkpvyaml.py` script is executed. The script adds a block storage device to every worker node in the cluster and authorizes each worker node to access the block storage device. At the end of the script, a `pv-<cluster_name>.yaml` YAML file is generated for you that you can later use to create the persistent volumes in the cluster.
+    1.  Build the `mkpvyaml` container.
+        ```
+        docker build -t mkpvyaml .
+        ```
+        {: pre}
+        Example output:
+        ```
+        Sending build context to Docker daemon   29.7kB
+        Step 1/16 : FROM ubuntu:18.10
+        18.10: Pulling from library/ubuntu
+        5940862bcfcd: Pull complete 
+        a496d03c4a24: Pull complete 
+        5d5e0ccd5d0c: Pull complete 
+        ba24b170ddf1: Pull complete 
+        Digest: sha256:20b5d52b03712e2ba8819eb53be07612c67bb87560f121cc195af27208da10e0
+        Status: Downloaded newer image for ubuntu:18.10
+         ---> 0bfd76efee03
+        Step 2/16 : RUN apt-get update
+         ---> Running in 85cedae315ce
+        Get:1 http://security.ubuntu.com/ubuntu cosmic-security InRelease [83.2 kB]
+        Get:2 http://archive.ubuntu.com/ubuntu cosmic InRelease [242 kB]
+        ...
+        Step 16/16 : ENTRYPOINT [ "/docker-entrypoint.sh" ]
+         ---> Running in 9a6842f3dbe3
+        Removing intermediate container 9a6842f3dbe3
+         ---> 7926f5384fc7
+        Successfully built 7926f5384fc7
+        Successfully tagged mkpvyaml:latest
+        ```
+        {: screen}
+    2.  Run the container to execute the `mkpvyaml.py` script.
+        ```
+        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME portworx/iks-mkpvyaml
+        ```
+        {: pre}
 
-   Example output:
-   ```
-   Unable to find image 'portworx/iks-mkpvyaml:latest' locally
-   latest: Pulling from portworx/iks-mkpvyaml
-   72f45ff89b78: Already exists
-   9f034a33b165: Already exists
-   386fee7ab4d3: Already exists
-   f941b4ac6aa8: Already exists
-   fe93e194fcda: Pull complete
-   f29a13da1c0a: Pull complete
-   41d6e46c1515: Pull complete
-   e89af7a21257: Pull complete
-   b8a7a212d72e: Pull complete
-   5e07391a6f39: Pull complete
-   51539879626c: Pull complete
-   cdbc4e813dcb: Pull complete
-   6cc28f4142cf: Pull complete
-   45bbaad87b7c: Pull complete
-   05b0c8595749: Pull complete
-   Digest: sha256:43ac58a8e951994e65f89ed997c173ede1fa26fb41e5e764edfd3fc12daf0120
-   Status: Downloaded newer image for portworx/iks-mkpvyaml:latest
+        Example output:
+        ```
+        Unable to find image 'portworx/iks-mkpvyaml:latest' locally
+        latest: Pulling from portworx/iks-mkpvyaml
+        72f45ff89b78: Already exists
+        9f034a33b165: Already exists
+        386fee7ab4d3: Already exists
+        f941b4ac6aa8: Already exists
+        fe93e194fcda: Pull complete
+        f29a13da1c0a: Pull complete
+        41d6e46c1515: Pull complete
+        e89af7a21257: Pull complete
+        b8a7a212d72e: Pull complete
+        5e07391a6f39: Pull complete
+        51539879626c: Pull complete
+        cdbc4e813dcb: Pull complete
+        6cc28f4142cf: Pull complete
+        45bbaad87b7c: Pull complete
+        05b0c8595749: Pull complete
+        Digest: sha256:43ac58a8e951994e65f89ed997c173ede1fa26fb41e5e764edfd3fc12daf0120
+        Status: Downloaded newer image for portworx/iks-mkpvyaml:latest
 
-   kube-dal10-abc1d23e123456ac8b12a3c1e12b123a4 10.XXX.XX.XX
-   Creating Vol of size 20 with type:  endurance
-            Ordering block storage of size: 20 for host: kube-dal10-abc1d23e123456ac8b12a3c1e12b123a4
-            ORDER ID =  30087291
-   kube-dal10-abc1d23e123456ac8b12a3c1e12b123a4 10.XXX.XX.XX
-   Creating Vol of size 20 with type:  endurance
-            Ordering block storage of size: 20 for host: kube-dal10-abc1d23e123456ac8b12a3c1e12b123a4
-            ORDER ID =  30087293
-   kube-dal12-abc1d23e123456ac8b12a3c1e12b456v1 10.XXX.XX.XX
-   Creating Vol of size 20 with type:  endurance
-            Ordering block storage of size: 20 for host: kube-dal12-abc1d23e123456ac8b12a3c1e12b456v1
-            ORDER ID =  30085655
-            No volume yet ... for orderID :  30087291
-            No volume yet ... for orderID :  30087291
-            No volume yet ... for orderID :  30087291
-            No volume yet ... for orderID :  30087291
-            Order ID =  30087291 has created VolId =  12345678
-            Granting access to volume: 12345678 for HostIP: 10.XXX.XX.XX
-            Order ID =  30087293 has created VolId =  87654321
-            Granting access to volume: 87654321 for HostIP: 10.XXX.XX.XX
-            Vol 53002831 is not yet ready ...
-            Granting access to volume: 87654321 for HostIP: 10.XXX.XX.XX
-            Order ID =  30085655 has created VolId =  98712345
-            Granting access to volume: 98712345 for HostIP: 10.XXX.XX.XX
-   Output file created as :  pv-<cluster_name>.yaml
-   ```
-   {: screen}
+        kube-dal10-abc1d23e123456ac8b12a3c1e12b123a4 10.XXX.XX.XX
+        Creating Vol of size 20 with type:  endurance
+                  Ordering block storage of size: 20 for host: kube-dal10-abc1d23e123456ac8b12a3c1e12b123a4
+                  ORDER ID =  30087291
+        kube-dal10-abc1d23e123456ac8b12a3c1e12b123a4 10.XXX.XX.XX
+        Creating Vol of size 20 with type:  endurance
+                  Ordering block storage of size: 20 for host: kube-dal10-abc1d23e123456ac8b12a3c1e12b123a4
+                  ORDER ID =  30087293
+        kube-dal12-abc1d23e123456ac8b12a3c1e12b456v1 10.XXX.XX.XX
+        Creating Vol of size 20 with type:  endurance
+                  Ordering block storage of size: 20 for host: kube-dal12-abc1d23e123456ac8b12a3c1e12b456v1
+                  ORDER ID =  30085655
+                  No volume yet ... for orderID :  30087291
+                  No volume yet ... for orderID :  30087291
+                  No volume yet ... for orderID :  30087291
+                  No volume yet ... for orderID :  30087291
+                  Order ID =  30087291 has created VolId =  12345678
+                  Granting access to volume: 12345678 for HostIP: 10.XXX.XX.XX
+                  Order ID =  30087293 has created VolId =  87654321
+                  Granting access to volume: 87654321 for HostIP: 10.XXX.XX.XX
+                  Vol 53002831 is not yet ready ...
+                  Granting access to volume: 87654321 for HostIP: 10.XXX.XX.XX
+                  Order ID =  30085655 has created VolId =  98712345
+                  Granting access to volume: 98712345 for HostIP: 10.XXX.XX.XX
+        Output file created as :  pv-<cluster_name>.yaml
+        ```
+        {: screen}
 
 7. [Attach the block storage devices to your worker nodes](#attach_block).
 

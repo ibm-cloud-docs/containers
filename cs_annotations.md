@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-11"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -1385,7 +1385,7 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
 
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
     * To use an existing instance, ensure that the service instance name doesn't contain spaces. To remove spaces, select the more options menu next to the name of your service instance and select **Rename service**.
-    * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id):
+    * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
         1. Replace the auto-filled **Service name** with your own unique name for the service instance. The service instance name can't contain spaces.
         2. Choose the same region that your cluster is deployed in.
         3. Click **Create**.

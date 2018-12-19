@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-10"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -239,7 +239,7 @@ To use `kubectl` commands:
 
     2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
 
-        **Mac or Linux user**: Instead of running the `ibmcloud ks cluster-config` command and copying the `KUBECONFIG` environment variable, you can run `(ibmcloud ks cluster-config "<cluster-name>" | grep export)`.
+        **Mac or Linux user**: Instead of running the `ibmcloud ks cluster-config` command and copying the `KUBECONFIG` environment variable, you can run `ibmcloud ks cluster-config --export <cluster-name>`. Depending on your shell, you can set up your shell by running `eval $(ibmcloud ks cluster-config --export <cluster-name>)`.
         {:tip}
 
     3.  Verify that the `KUBECONFIG` environment variable is set properly.
@@ -401,11 +401,11 @@ To uninstall the CLIs:
 You can use the {{site.data.keyword.containerlong_notm}} API to automate the creation, deployment, and management of your Kubernetes clusters.
 {:shortdesc}
 
-The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api).
+The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.cloud.ibm.com/swagger-api).
 
 To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.Bluemix_notm}} credentials and that includes the {{site.data.keyword.Bluemix_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.Bluemix_notm}}, you can choose between the following options to automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM token.
 
-You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
+You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
 {: tip}
 
 <table>
@@ -635,7 +635,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 4.  List all Kubernetes clusters in your account. Use the information that you retrieved in earlier steps to build your header information.
 
      ```
-     GET https://containers.bluemix.net/v1/clusters
+     GET https://containers.cloud.ibm.com/v1/clusters
      ```
      {: codeblock}
 
@@ -654,7 +654,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
      </tbody>
      </table>
 
-5.  Review the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api) to find a list of supported APIs.
+5.  Review the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api) to find a list of supported APIs.
 
 <br />
 
@@ -667,10 +667,11 @@ Every {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) ac
 
 Before you begin, make sure that you have an {{site.data.keyword.Bluemix_notm}} IAM refresh token or an {{site.data.keyword.Bluemix_notm}} API key that you can use to request a new access token.
 - **Refresh token:** Follow the instructions in [Automating the cluster creation and management process with the {{site.data.keyword.Bluemix_notm}} API](#cs_api).
-- **API key:** Retrieve your [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) API key as follows.
-   1. From the menu bar, click **Manage** > **Security** > **Platform API keys**.
-   2. Click **Create**.
-   3. Enter a **Name** and **Description** for your API key and click **Create**.
+- **API key:** Retrieve your [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) API key as follows.
+   1. From the menu bar, click **Manage** > **Access (IAM)**.
+   2. Click the **Users** page and then select yourself.
+   3. In the **API keys** pane, click **Create an IBM Cloud API key**. 
+   4. Enter a **Name** and **Description** for your API key and click **Create**.
    4. Click **Show** to see the API key that was generated for you.
    5. Copy the API key so that you can use it to retrieve your new {{site.data.keyword.Bluemix_notm}} IAM access token.
 
@@ -732,7 +733,7 @@ Use the following steps if you want to create an {{site.data.keyword.Bluemix_not
 
     You can find your new {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token**, and the refresh token in the **refresh_token** field of your API output.
 
-2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api) by using the token from the previous step.
+2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api) by using the token from the previous step.
 
 <br />
 

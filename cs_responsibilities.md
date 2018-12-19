@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -80,4 +80,4 @@ Misuse includes:
 *   Violation of the rights of others
 
 
-See [Cloud Services terms](https://console.bluemix.net/docs/overview/terms-of-use/notices.html#terms) for overall terms of use.
+See [Cloud Services terms](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms) for overall terms of use.

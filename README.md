@@ -2,13 +2,13 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 ---
 
 
 # Source files for customer-facing documentation
 
-Customer-facing documentation: https://console.bluemix.net/docs/containers/container_index.html
+Customer-facing documentation: https://cloud.ibm.com/docs/containers/container_index.html
 
 

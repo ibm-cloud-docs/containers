@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-12"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -417,7 +417,7 @@ Choose a machine type with the right storage configuration to support your workl
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Balanced bare metal, mb1c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
+<td><strong>Balanced bare metal, mb2c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 2TB SATA</td>
 <td>10000Mbps</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -38,11 +38,11 @@ An IT Exec has worldwide ship routing and scheduling systems that partners inter
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} scales containerized apps with five 9s of availability to meet growing demands. App deployments occur 40 times daily when Developers experiment easily, pushing changes to Development and Test systems quickly. The IoT Platform makes access to IoT data easy. 
  
 Key technologies:    
-* [Multi-regions for partner ecosystem ](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)
+* [Multi-regions for partner ecosystem ](cs_regions.html#regions-and-locations)
 * [Horizontal scaling](cs_app.html#highly_available_apps) 
 * [Open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Cloud services for innovation](https://www.ibm.com/cloud/products/#analytics)
-* [{{site.data.keyword.messagehub_full}} to feed event data to apps](https://console.bluemix.net/docs/services/MessageHub/messagehub010.html#about)
+* [{{site.data.keyword.messagehub_full}} to feed event data to apps](/docs/services/MessageHub/messagehub010.html#about)
 
 **Context: Shipping company increases availability of worldwide systems for partner ecosystem**
 
@@ -130,7 +130,7 @@ Key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Chatbot service powered by Watson](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](/docs/runtimes/nodejs/index.html#nodejs_runtime)
 
 **Context: Rapidly building and deploying innovative HR benefits site in less than 3 weeks**
 * Employee growth and changing HR policies meant that a whole new site would be required for annual enrollment. 
@@ -188,5 +188,3 @@ With {{site.data.keyword.containerlong_notm}}, they went from over-built hardwar
 * Authenticity with personalization in the site addressed the changing expectations of the airline’s workforce today. 
 * Last-minute updates to the HR site, including ones that driven by the employees chatbot conversations, went live quickly because Developers were pushing changes at least 10 times daily. 
 * With infrastructure management taken care of by IBM, the Development team was freed up to deliver the site in only 3 weeks. 
-
-

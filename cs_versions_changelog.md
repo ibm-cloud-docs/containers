@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -45,6 +45,33 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.12 changelog. 
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.3_1532, released 17 December 2018
+{: #1123_1532}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.2_1532.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.3_1531">
+<caption>Changes since version 1.12.3_1531</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for 1.12.3_1531, released 5 December 2018
 {: #1123_1531}
@@ -277,6 +304,32 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018
+{: #1115_1538}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.5_1538.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.5_1537">
+<caption>Changes since version 1.11.5_1537</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.11.5_1537, released 5 December 2018
 {: #1115_1537}
@@ -864,6 +917,33 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 {: #110_changelog}
 
 Review the version 1.10 changelog.
+
+### Changelog for worker node fix pack 1.10.11_1537, released 17 December 2018
+{: #11011_1537}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.11_1537.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.11_1536">
+<caption>Changes since version 1.10.11_1536</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for 1.10.11_1536, released 4 December 2018
 {: #11011_1536}
@@ -1627,6 +1707,32 @@ Unsupported Kubernetes versions:
 {: #19_changelog}
 
 Review the version 1.9 changelog.
+
+### Changelog for worker node fix pack 1.9.11_1539, released 17 December 2018
+{: #1911_1539}
+
+The following table shows the changes that are included in the worker node fix pack 1.9.11_1539.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.9.11_1538">
+<caption>Changes since version 1.9.11_1538</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.9.11_1538, released 4 December 2018
 {: #1911_1538}

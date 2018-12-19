@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -79,7 +79,7 @@ Learn about some basic Docker concepts:
 
 Learn about some basic Kubernetes concepts as shown in the following diagram.
 
-![Deployment setup](images/cs_app_tutorial_components1.png)
+![Deployment setup](images/cs_app_tutorial_mz-components1.png)
 
 <dl>
 <dt>Account</dt>
