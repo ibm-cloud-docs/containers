@@ -79,7 +79,7 @@ If you have SDS worker node flavors in your cluster and want to use these worker
 When you [install Portworx with a Helm chart](#install_portworx), you get the Portworx `px-enterprise` edition as a Trial version. The Trial version provides you with the full Portworx functionality that you can test out for 30 days. After the Trial version expires, you must purchase a Portworx license to continue using your Portworx cluster.
 {: shortdesc}
 
-For more information about available license types and how to upgrade your Trial license, see [Portworx Licensing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/getting-started/px-licensing.html).
+For more information about available license types and how to upgrade your Trial license, see [Portworx Licensing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/knowledge-base/px-licensing/).
 
 ## Setting up a Compose for etcd database for Portworx metadata
 {: #portworx_database}

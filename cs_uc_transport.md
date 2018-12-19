@@ -38,7 +38,7 @@ An IT Exec has worldwide ship routing and scheduling systems that partners inter
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} scales containerized apps with five 9s of availability to meet growing demands. App deployments occur 40 times daily when Developers experiment easily, pushing changes to Development and Test systems quickly. The IoT Platform makes access to IoT data easy. 
  
 Key technologies:    
-* [Multi-regions for partner ecosystem ](/docs/containers/cs_regions.html#regions-and-locations)
+* [Multi-regions for partner ecosystem ](cs_regions.html#regions-and-locations)
 * [Horizontal scaling](cs_app.html#highly_available_apps) 
 * [Open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Cloud services for innovation](https://www.ibm.com/cloud/products/#analytics)
