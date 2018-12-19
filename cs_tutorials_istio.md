@@ -61,6 +61,8 @@ Download and install Istio in your cluster.
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
         ```
         {: pre}
+        Did you apply the custom resource definitions by accident? Helm versions 2.10 or later don't need these CRDs, so you can remove them by running `kubectl delete --force -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml`.
+        {: tip}
     3. Install the Helm chart to your cluster.
         ```
         helm install ibm-charts/ibm-istio --name=istio --namespace istio-system
