@@ -38,7 +38,7 @@ Why {{site.data.keyword.Bluemix_notm}}: With {{site.data.keyword.containerlong_n
 Key technologies:    
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Provide access to public data with {{site.data.keyword.cos_full_notm}}](https://console.bluemix.net/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)
+* [Provide access to public data with {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)
 * [Plug-and-play IBM Cloud Analytics services](https://www.ibm.com/cloud/analytics)
 
 **Context: Government improves collaboration and velocity with community Developers who combine public-private data**
@@ -117,7 +117,7 @@ Key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Container security and isolation](cs_secure.html#security)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](/docs/runtimes/nodejs/index.html#nodejs_runtime)
 
 **Context: Port secures exchange of port data and shipping manifests that connects public and private organizations.**
 
@@ -184,4 +184,3 @@ Technical solution:
 * Shipping customers and government officials have access to manifest data and can share customs data, while they comply with local regulations. 
 * The shipping company benefits from improved logistics management in the supply chain: reduced costs and faster clearance times.
 * 99% are digital declarations, and 90% of imports processed without human intervention.
-

@@ -40,7 +40,7 @@ Key technologies:
 * [Horizontal scaling](cs_app.html#highly_available_apps)
 * [Container security and isolation](cs_secure.html#security)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](docs/runtimes/nodejs/index.html#nodejs_runtime)
 
 They started by containerizing their SaaS systems and putting them in the cloud. From that first step, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the SaaS systems, they easily designed Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for decreased staff costs is that IBM manages Kubernetes, so the provider can focus on delivering better customer service.
 
@@ -116,11 +116,11 @@ A Development Exec for a disease research nonprofit has academic and industry re
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} delivers secure compute that can host sensitive and performant data processing on an open platform. That global platform is hosted in near-by regions. So it's tied to local regulations that inspire patients’ and researchers’ confidence that their data is both protected locally and makes a difference in better health outcomes.
 
 Key technologies:    
-* [Intelligent scheduling places workloads where needed](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)    
-* [{{site.data.keyword.cloudant}} to persist and sync data across apps](https://console.bluemix.net/docs/services/Cloudant/getting-started.html)
-* [Vulnerability scanning  and isolation for workloads](https://console.bluemix.net/docs/services/Registry/registry_ui.html#registry_ui)    
+* [Intelligent scheduling places workloads where needed](/docs/containers/cs_regions.html#regions-and-locations)    
+* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant/getting-started.html)
+* [Vulnerability scanning  and isolation for workloads](/docs/services/Registry/registry_ui.html#registry_ui)    
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}} to sanitize data and notify researchers about data structure changes](https://console.bluemix.net/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}} to sanitize data and notify researchers about data structure changes](/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
 
 **Context: Securely hosting and sharing disease data for Research Nonprofit**
 

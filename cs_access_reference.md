@@ -178,7 +178,7 @@ The following table shows the infrastructure permissions required to complete gr
  <caption>Commonly required infrastructure permissions for {{site.data.keyword.containerlong_notm}}</caption>
  <thead>
   <th>Common tasks in {{site.data.keyword.containerlong_notm}}</th>
-  <th>Required infrastructure permissions by tab</th>
+  <th>Required infrastructure permissions by category</th>
  </thead>
  <tbody>
    <tr>

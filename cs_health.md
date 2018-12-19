@@ -216,7 +216,7 @@ To create a configuration at the account level, for a specific container namespa
 
 Before you begin, [create](cs_clusters.html#clusters) or identify a standard cluster to use.
 
-1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/containers-kubernetes/clusters) and navigate to **Kubernetes > Clusters**.
+1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/containers-kubernetes/clusters) and navigate to **Kubernetes > Clusters**.
 2. Select your standard cluster and from the **Overview** tab **Logs** field, click **Enable**.
 3. Select the **Cloud Foundry Org** and **Space** from which you want to forward logs. When you configure log forwarding in the dashboard, logs are sent to the default {{site.data.keyword.loganalysisshort_notm}} endpoint for your cluster. To forward logs to an external server, or to another {{site.data.keyword.loganalysisshort_notm}} endpoint, you can use the CLI to configure logging.
 4. Select the **Log sources** from which you want to forward logs.
@@ -708,12 +708,12 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
 **Before you begin**
 
-* [Provision an instance](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.Bluemix_notm}} catalog.
+* [Provision an instance](/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.Bluemix_notm}} catalog.
 * Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
 
 **Creating a snapshot**
 
-1. Create an Object Storage bucket through the {{site.data.keyword.Bluemix_notm}} console by following [this getting started tutorial](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
+1. Create an Object Storage bucket through the {{site.data.keyword.Bluemix_notm}} console by following [this getting started tutorial](/docs/services/cloud-object-storage/getting-started.html#create-buckets).
 
 2. Generate [HMAC service credentials](/docs/services/cloud-object-storage/iam/service-credentials.html) in the bucket that you created.
   1. In the **Service Credentials** tab of the {{site.data.keyword.cos_short}} dashboard, click **New Credential**.

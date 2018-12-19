@@ -29,7 +29,7 @@ Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, 
 {: shortdesc}
 
 1. Deploy an {{site.data.keyword.cos_full_notm}} service instance.
-   1.  Open the [{{site.data.keyword.cos_full_notm}} catalog page](https://console.bluemix.net/catalog/services/cloud-object-storage).
+   1.  Open the [{{site.data.keyword.cos_full_notm}} catalog page](https://cloud.ibm.com/catalog/services/cloud-object-storage).
    2.  Enter a name for your service instance, such as `cos-backup`, and select the same resource group that your cluster is in. To view the resource group of your cluster, run `[bxcs] cluster-get --cluster <cluster_name_or_ID>`.   
    3.  Review the [plan options ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) for pricing information and select a plan.
    4.  Click **Create**. The service details page opens.

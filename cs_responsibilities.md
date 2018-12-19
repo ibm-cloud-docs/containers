@@ -80,4 +80,4 @@ Misuse includes:
 *   Violation of the rights of others
 
 
-See [Cloud Services terms](https://console.bluemix.net/docs/overview/terms-of-use/notices.html#terms) for overall terms of use.
+See [Cloud Services terms](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms) for overall terms of use.

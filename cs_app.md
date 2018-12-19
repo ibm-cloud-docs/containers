@@ -619,8 +619,8 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 **Launching the Kubernetes dashboard from the {{site.data.keyword.Bluemix_notm}} console**
 {: #db_gui}
 
-1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/).
-2.  From the menu bar, click your user avatar ![Avatar icon](../icons/i-avatar-icon.svg "Avatar icon") and select the account that you want to use.
+1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/).
+2.  From the menu bar, select the account that you want to use.
 3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
 4.  On the **Clusters** page, click the cluster that you want to access.
 5.  From the cluster detail page, click the **Kubernetes Dashboard** button.

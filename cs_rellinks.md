@@ -29,7 +29,7 @@ lastupdated: "2018-12-19"
 
 **General**
 
-- [Cost estimator for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
+- [Cost estimator for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/configure/iaas/containers-kubernetes)
 
 <br />
 
@@ -48,16 +48,16 @@ lastupdated: "2018-12-19"
 
 - [Modernize and extend an existing Java web app (JPetStore) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
 - [{{site.data.keyword.containerlong_notm}} Cognitive Class learning path ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
-- [How to build a web app on IKS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
-- [Secure multi-region clusters with Cloud Internet Service (CIS) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
-- [Apply end-to-end security to a cloud application with {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.keymanagementservicelong_notm}}, {{site.data.keyword.appid_full_notm}}, and {{site.data.keyword.cos_full_notm}}](https://console.bluemix.net/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application)
-- [Analyze logs and monitor the health of apps ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)
-- [Set up Continuous Integration/ Continuous Delivery for {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
-- [Migrate a VM app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/vm-to-containers-and-kubernetes.html#moving-a-vm-based-app-to-kubernetes)
-- [Migrate a CF app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/containers/cs_tutorials_cf.html#cf_tutorial)
-- [Orchestrate long running workloads for apps with an Apache Kafka based messaging service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
-- [Automate deployments in a cluster with Terraform ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/plan-create-update-deployments.html#plan-create-and-update-deployment-environments)
-- [Organizing users and teams ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/tutorials/users-teams-applications.html#best-practices-for-organizing-users-teams-applications)
+- [How to build a web app on IKS ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
+- [Secure multi-region clusters with Cloud Internet Service (CIS) ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
+- [Apply end-to-end security to a cloud application with {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.keymanagementservicelong_notm}}, {{site.data.keyword.appid_full_notm}}, and {{site.data.keyword.cos_full_notm}}](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application)
+- [Analyze logs and monitor the health of apps ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)
+- [Set up Continuous Integration/ Continuous Delivery for {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/continuous-deployment-to-kubernetes.html#continuous-deployment-to-kubernetes)
+- [Migrate a VM app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/vm-to-containers-and-kubernetes.html#moving-a-vm-based-app-to-kubernetes)
+- [Migrate a CF app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/containers/cs_tutorials_cf.html#cf_tutorial)
+- [Orchestrate long running workloads for apps with an Apache Kafka based messaging service ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
+- [Automate deployments in a cluster with Terraform ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/plan-create-update-deployments.html#plan-create-and-update-deployment-environments)
+- [Organizing users and teams ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/users-teams-applications.html#best-practices-for-organizing-users-teams-applications)
 - [Using Logistics Wizard with Istio and {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/logistics-wizard-kubernetes)
 - [Enable your microservices with advanced traffic management and request tracing capabilities with Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/patterns/manage-microservices-traffic-using-istio/)
 
@@ -88,8 +88,8 @@ lastupdated: "2018-12-19"
 {: #registry}
 
 - [{{site.data.keyword.registryshort_notm}} documentation](/docs/services/Registry/index.html)
-- [{{site.data.keyword.registryshort_notm}} REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/container-registry)
-- [Vulnerability Advisor REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/container-registry/va)
+- [{{site.data.keyword.registryshort_notm}} REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/apidocs/container-registry)
+- [Vulnerability Advisor REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/apidocs/container-registry/va)
 
 <br />
 

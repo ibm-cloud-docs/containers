@@ -336,7 +336,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tr>
 <td>12 March</td>
 <td>[Just joined the {{site.data.keyword.Bluemix_notm}} with a Trial account? Try out a free Kubernetes cluster!](container_index.html#clusters)</td>
-<td>With a Trial [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/), you can deploy one free cluster for 30 days to test out Kubernetes capabilities.</td>
+<td>With a Trial [{{site.data.keyword.Bluemix_notm}} account](https://cloud.ibm.com/registration/), you can deploy one free cluster for 30 days to test out Kubernetes capabilities.</td>
 </tr>
 </tbody></table>
 

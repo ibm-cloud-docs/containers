@@ -87,9 +87,9 @@ If you use a different IBM Cloud infrastructure (SoftLayer) account to provision
 {: tsResolve}
 The account owner must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
 
-1.  Verify that you have access to an infrastructure account. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) and from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Infrastructure**. If you see the infrastructure dashboard, you have access to an infrastructure account.
+1.  Verify that you have access to an infrastructure account. Log in to the [{{site.data.keyword.Bluemix_notm}} console![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) and from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Classic Infrastructure**. If you see a menu, you have access to an infrastructure account. If you do not have access, you see an option to upgrade your account.
 2.  Check if your cluster uses a different infrastructure account than the one that comes with your Pay-As-You-Go account.
-    1.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Containers > Clusters**.
+    1.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes > Clusters**.
     2.  From the table, select your cluster.
     3.  In the **Overview** tab, check for an **Infrastructure User** field.
         * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts.
@@ -354,14 +354,14 @@ Consider the following scenario to understand how clusters might become orphaned
 
 {: tsResolve}
 1.  Check which infrastructure account the region that your cluster is in currently uses to provision clusters.
-    1.  Log in to the [{{site.data.keyword.containerlong_notm}} clusters console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/clusters).
+    1.  Log in to the [{{site.data.keyword.containerlong_notm}} clusters console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters).
     2.  From the table, select your cluster.
     3.  In the **Overview** tab, check for an **Infrastructure User** field. This field helps you determine if your {{site.data.keyword.containerlong_notm}} account uses a different infrastructure account than the default.
         * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts. The cluster that cannot be modified might be provisioned in a different infrastructure account.
         * If you see an **Infrastructure User** field, you use a different infrastructure account than the one that came with your Pay-As-You-Go account. These different credentials apply to all clusters within the region. The cluster that cannot be modified might be provisioned in your Pay-As-You-Go or a different infrastructure account.
 2.  Check which infrastructure account was used to provision the cluster.
     1.  In the **Worker Nodes** tab, select a worker node and note its **ID**.
-    2.  Open the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") and click **Infrastructure**.
+    2.  Open the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") and click **Classic Infrastructure**.
     3.  From the infrastructure navigation pane, click **Devices > Device List**.
     4.  Search for the worker node ID that you previously noted.
     5.  If you do not find the worker node ID, the worker node is not provisioned into this infrastructure account. Switch to a different infrastructure account and try again.
@@ -526,7 +526,7 @@ This service doesn't support creation of keys
 Some services in {{site.data.keyword.Bluemix_notm}}, such as {{site.data.keyword.keymanagementservicelong}} do not support the creation of service credentials, also referred to as service keys. Without the support of service keys, the service is not bindable to a cluster. To find a list of services that support the creation of service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/resources/connect_external_app.html#externalapp).
 
 {: tsResolve}
-To integrate services that do not support service keys, check if the service provides an API that you can use to access the service directly from your app. For example, if you want to use {{site.data.keyword.keymanagementservicelong}}, see the [API reference ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/kms?language=curl).
+To integrate services that do not support service keys, check if the service provides an API that you can use to access the service directly from your app. For example, if you want to use {{site.data.keyword.keymanagementservicelong}}, see the [API reference ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/apidocs/kms?language=curl).
 
 <br />
 

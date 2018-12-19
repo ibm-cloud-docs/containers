@@ -38,7 +38,7 @@ The list is divided into two parts:
 ### Account-level
 {: #prepare_account_level}
 
-1.  [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://console.bluemix.net/registration/).
+1.  [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
 2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
     *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
     *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
@@ -59,15 +59,15 @@ The list is divided into two parts:
 {: #prepare_cluster_level}
 
 1.  Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}.
-    1.  From the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), click **Manage > Account > Users**.
-    2.  From the table, select yourself.
+    1.  From the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) menu bar, click **Manage > Access (IAM)**.
+    2.  Click the **Users** page, and then from the table, select yourself.
     3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}. **Note**: If you have the **Administrator** role for {{site.data.keyword.containershort_notm}} in only one resource group or region instead of the entire account, you must have at least the **Viewer** role at the account level to see the account's VLANs.
 2.  Decide between a [free or standard cluster](cs_why.html#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
 3.  [Plan your cluster set up](cs_clusters_planning.html#plan_clusters).
     *  Decide whether to create a [single zone](cs_clusters_planning.html#single_zone) or [multizone](cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are available in select locations only.
     *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](cs_clusters_planning.html#private_clusters).
     *  Choose what type of [hardware and isolation](cs_clusters_planning.html#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
-4.  For standard clusters, you can [estimate the cost with the cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). For more information on charges that might not be included in the estimator, see [Pricing and billing](cs_why.html#pricing).
+4.  For standard clusters, you can [estimate the cost with the cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/configure/iaas/containers-kubernetes). For more information on charges that might not be included in the estimator, see [Pricing and billing](cs_why.html#pricing).
 <br>
 <br>
 
@@ -91,7 +91,7 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 
-2. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.
+2. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.
 
 3. Select a location in which to deploy your cluster. **Note**: You cannot create free clusters in the Washington DC (US East) or Tokyo (AP North) locations.
 
@@ -112,7 +112,7 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 
-2. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.
+2. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.
 
 3. Select a resource group in which to create your cluster.
   **Note**:

@@ -38,7 +38,7 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} p
 
 {{site.data.keyword.containerlong_notm}} and key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
-* [{{site.data.keyword.cos_full}} to persist and sync data across apps](https://console.bluemix.net/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
+* [{{site.data.keyword.cos_full}} to persist and sync data across apps](/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
 **Context: Retailer shares data, by using APIs with global partners to drive omnichannel sales**
@@ -123,7 +123,7 @@ Key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
 * [Insights to market trends with Watson Discovery](https://www.ibm.com/watson/services/discovery/)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Inventory management with {{site.data.keyword.messagehub_full}}](https://console.bluemix.net/docs/services/MessageHub/messagehub010.html#about)
+* [Inventory management with {{site.data.keyword.messagehub_full}}](/docs/services/MessageHub/messagehub010.html#about)
 
 **Context: Traditional grocer increases customer traffic and sales with digital insights**
 
@@ -189,6 +189,3 @@ Technical solution:
 * Customer traffic and sales increased in stores by making the stores themselves a differentiating asset. 
 * At the same time, new insights from social and cognitive analysis improved reduced inventory OpEx (operating expenses). 
 * Social sharing in the mobile app also helps to identify and market to new customers.
-
-
-

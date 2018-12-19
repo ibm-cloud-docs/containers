@@ -96,7 +96,7 @@ The following steps show how to provision and set up the {{site.data.keyword.com
 1. Make sure that you have the [`Developer` Cloud Foundry role for the space](/docs/iam/mngcf.html#mngcf) where you want to create your {{site.data.keyword.composeForEtcd}} database service. 
 
 2. Deploy a {{site.data.keyword.composeForEtcd}} service instance.
-   1. Open the [{{site.data.keyword.composeForEtcd}} catalog page](https://console.bluemix.net/catalog/services/compose-for-etcd)
+   1. Open the [{{site.data.keyword.composeForEtcd}} catalog page](https://cloud.ibm.com/catalog/services/compose-for-etcd)
    2. Enter a name for your service instance, such as `px-etcd`.
    3. Select the region where you want to deploy your service instance. For optimal performance, choose the region that your cluster is in.
    4. Select a Cloud Foundy org and space.
@@ -499,7 +499,7 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
 1. Make sure that you are [assigned the `Adminstrator` platform access role and the `Writer` service access role](/docs/services/key-protect/manage-access.html#manage-access) in {{site.data.keyword.Bluemix_notm}} Identity and Access Management for {{site.data.keyword.keymanagementservicelong_notm}}. 
 
 2. Create an {{site.data.keyword.keymanagementservicelong_notm}} service instance.
-   1. Open the [{{site.data.keyword.keymanagementservicelong_notm}} catalog page](https://console.bluemix.net/catalog/services/key-protect).
+   1. Open the [{{site.data.keyword.keymanagementservicelong_notm}} catalog page](https://cloud.ibm.com/catalog/services/key-protect).
    2. In the **Service name** field, enter a name for your service instance.
    3. Select the region where you want to deploy your service instance. For optimal performance, choose the region that your cluster is in.
    4. Select the resource group that your cluster is in.

@@ -273,7 +273,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
 5.  [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
 
-    If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
+    If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
 
 6. In the **Workloads** tab, you can see the resources that you created.
