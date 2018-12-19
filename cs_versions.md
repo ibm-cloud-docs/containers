@@ -256,7 +256,7 @@ The following table shows the actions that you must take before you update the K
 </tr>
 <tr>
 <td>Encrypting data in etcd</td>
-<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](cs_encrypt.html#keyprotect).</td>
+<td>Previously, etcd data was stored on a master’s NFS file storage instance that was encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](cs_encrypt.html#keyprotect).</td>
 </tr>
 <tr>
 <td>Kubernetes container volume mount propagation</td>
@@ -338,7 +338,7 @@ If you use a firewall or custom Calico host network policies to control egress f
 {: #ha-ports}
 To allow access to the cluster master in an HA configuration, you must leave host ports `2040` and `2041` available on all worker nodes.
 * Update any pods with `hostPort` set to `2040` or `2041` to use different ports.
-* Update any pods with `hostNetwork` set to to `true` that listen on ports `2040` or `2041` to use different ports.
+* Update any pods with `hostNetwork` set to `true` that listen on ports `2040` or `2041` to use different ports.
 
 To check if your pods are currently using ports `2040` or `2041`, target your cluster and run the following command.
 
@@ -673,7 +673,7 @@ If you use a firewall or custom Calico host network policies to control egress f
 {: #110_ha-ports}
 To allow access to the cluster master in an HA configuration, you must leave host ports `2040` and `2041` available on all worker nodes.
 * Update any pods with `hostPort` set to `2040` or `2041` to use different ports.
-* Update any pods with `hostNetwork` set to to `true` that listen on ports `2040` or `2041` to use different ports.
+* Update any pods with `hostNetwork` set to `true` that listen on ports `2040` or `2041` to use different ports.
 
 To check if your pods are currently using ports `2040` or `2041`, target your cluster and run the following command.
 
@@ -706,7 +706,7 @@ You need to take additional actions if you use [Kubernetes or Calico network pol
 *  The Kubernetes service domain name, which by default is `https://kubernetes.default.svc.cluster.local`.
 *  The cluster master IP, which you can get by running `kubectl cluster-info | grep Kubernetes`.
 
-The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and `calicoctl` to search policies for impacts.
+The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and use `calicoctl` to search policies for impacts.
 {: note}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
