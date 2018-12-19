@@ -57,7 +57,7 @@ To get started, see [Understanding cluster and app log forwarding](#logging).
 
 <li>Kubernetes API server audit events are automatically generated, but you must [create a logging configuration](#api_forward) so that Fluentd can forward these logs to {{site.data.keyword.loganalysisshort}}. {{site.data.keyword.cloudaccesstrailshort}} then pulls these logs from {{site.data.keyword.loganalysisshort}}.</li></ul>
 
-For more information about the types of {{site.data.keyword.containerlong_notml}} events that you can track, see [Activity Tracker events](cs_at_events.html). For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) documentation.
+For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](cs_at_events.html). For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) documentation.
 </dd>
 
 <dt>{{site.data.keyword.cos_full_notm}}</dt>
