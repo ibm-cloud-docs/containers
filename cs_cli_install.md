@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-18"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -401,11 +401,11 @@ To uninstall the CLIs:
 You can use the {{site.data.keyword.containerlong_notm}} API to automate the creation, deployment, and management of your Kubernetes clusters.
 {:shortdesc}
 
-The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api).
+The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.cloud.ibm.com/swagger-api).
 
 To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.Bluemix_notm}} credentials and that includes the {{site.data.keyword.Bluemix_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.Bluemix_notm}}, you can choose between the following options to automate the creation of your {{site.data.keyword.Bluemix_notm}} IAM token.
 
-You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
+You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
 {: tip}
 
 <table>
@@ -635,7 +635,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 4.  List all Kubernetes clusters in your account. Use the information that you retrieved in earlier steps to build your header information.
 
      ```
-     GET https://containers.bluemix.net/v1/clusters
+     GET https://containers.cloud.ibm.com/v1/clusters
      ```
      {: codeblock}
 
@@ -654,7 +654,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
      </tbody>
      </table>
 
-5.  Review the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api) to find a list of supported APIs.
+5.  Review the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api) to find a list of supported APIs.
 
 <br />
 
@@ -732,7 +732,7 @@ Use the following steps if you want to create an {{site.data.keyword.Bluemix_not
 
     You can find your new {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token**, and the refresh token in the **refresh_token** field of your API output.
 
-2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api) by using the token from the previous step.
+2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api) by using the token from the previous step.
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-12"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -43,10 +43,10 @@ Review these situations in which you might need to open specific ports and IP ad
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `ibmcloud ks` commands, you must allow TCP access for {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
-1. Allow access to `containers.bluemix.net` on port 443.
+1. Allow access to `containers.cloud.ibm.com` on port 443.
 2. Verify your connection. If access is configured correctly, ships are displayed in the output.
    ```
-   curl https://containers.bluemix.net/v1/
+   curl https://containers.cloud.ibm.com/v1/
    ```
    {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-12"
+lastupdated: "2018-12-19"
 
 ---
 
@@ -108,7 +108,7 @@ Supported {{site.data.keyword.containerlong_notm}} regions:
   * US East (standard clusters only)
   * US South
 
-You can access the {{site.data.keyword.containerlong_notm}} through one global endpoint: `https://containers.bluemix.net/v1`.
+You can access the {{site.data.keyword.containerlong_notm}} through one global endpoint: `https://containers.cloud.ibm.com/v1`.
 * To check which {{site.data.keyword.containerlong_notm}} region you are currently in, run `ibmcloud ks region`.
 * To retrieve a list of available regions and their endpoints, run `ibmcloud ks regions`.
 
@@ -135,7 +135,7 @@ To interact with the {{site.data.keyword.containerlong_notm}} API, enter the com
 
 Example of `GET /clusters` API:
   ```
-  GET https://containers.bluemix.net/v1/clusters
+  GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
@@ -144,7 +144,7 @@ Example of `GET /clusters` API:
 To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header. To list available regions, run `ibmcloud ks regions`.
 {: tip}
 
-To view documentation on the API commands, view [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
+To view documentation on the API commands, view [https://containers.cloud.ibm.com/swagger-api/](https://containers.cloud.ibm.com/swagger-api/).
 
 ## Zones in {{site.data.keyword.containerlong_notm}}
 {: #zones}

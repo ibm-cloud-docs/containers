@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-05"
+lastupdated: "2018-12-19"
 
 
 ---
@@ -825,7 +825,7 @@ Now that you created and bound a custom Kubernetes RBAC role or cluster role, fo
 ## Assigning RBAC permissions
 {: #role-binding}
 
-Use RBAC roles to define the actions that a user can take to work with the Kubernetes resources in your cluster. 
+Use RBAC roles to define the actions that a user can take to work with the Kubernetes resources in your cluster.
 {: shortdesc}
 
 **What are RBAC roles and cluster roles?**</br>
@@ -1299,7 +1299,7 @@ Before you begin, [ensure that the user's infrastructure credentials are not use
 #### Remove custom RBAC permissions
 {: #remove_custom_rbac}
 
-If you do not need custom RBAC permissions anymore, you can remove them. 
+If you do not need custom RBAC permissions anymore, you can remove them.
 {: shortdesc}
 
 1. Open the `.yaml` file for the role binding or cluster role binding that you created.
