@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-19"
+lastupdated: "2018-12-27"
 
 ---
 
@@ -72,9 +72,9 @@ To update the Kubernetes master _major_ or _minor_ version:
 
 1.  Review the [Kubernetes changes](cs_versions.html) and make any updates marked _Update before master_.
 
-2.  Update your Kubernetes API server and associated Kubernetes master components by using the {{site.data.keyword.Bluemix_notm}} console or running the CLI `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
+2.  Update your Kubernetes API server and associated Kubernetes master components by using the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com) or running the CLI `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
 
-3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud ks clusters`.
+3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} clusters dashboard or run `ibmcloud ks clusters`.
 
 4.  Install the version of the [`kubectl cli`](cs_cli_install.html#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master.
 
@@ -226,11 +226,11 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
    ```
    {: pre}
 
-5. Verify that the config map is created.
-   ```
-   kubectl get configmap --namespace kube-system
-   ```
-   {: pre}
+5.  Verify that the config map is created.
+    ```
+    kubectl get configmap --namespace kube-system
+    ```
+    {: pre}
 
 6.  Update the worker nodes.
 
@@ -254,9 +254,32 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 9. Verify that you do not have duplicate worker nodes. In some cases, older clusters might list duplicate worker nodes with a **NotReady** status after an update. To remove duplicates, see [troubleshooting](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
 
 Next steps:
-  - Repeat the update process with other worker pools.
-  - Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
-  - If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](cs_troubleshoot_health.html#cs_dashboard_graphs).
+-   Repeat the update process with other worker pools.
+-   Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
+-   If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](cs_troubleshoot_health.html#cs_dashboard_graphs).
+
+
+### Updating worker nodes in the console
+{: #worker_up_console}
+
+After you set up the config map for the first time, you can subsequently update worker nodes by using the {{site.data.keyword.Bluemix_notm}} console.
+{: shortdesc}
+
+Before you begin: 
+*   [Set up a config map](#worker_node) to control how your worker nodes are updated.
+*   [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
+*   Make any changes that are marked with _Update after master_ in the [Kubernetes changes](cs_versions.html).
+*   If you want to apply a patch update, review the [Kubernetes version changelog](cs_versions_changelog.html#changelog).
+*   Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform). </br>
+
+Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](cs_storage_planning.html#persistent_storage_overview).
+{: important}
+
+To update worker nodes from the console:
+1.  From the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/) menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
+2.  From the **Clusters** page, click your cluster.
+3.  From the **Worker Nodes** tab, select the check box for each worker node that you want to update. An action bar is displayed over the table header row.
+4.  From the action bar, click **Update Kubernetes**.
 
 <br />
 
