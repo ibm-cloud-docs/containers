@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-19"
+lastupdated: "2018-12-27"
 
 ---
 
@@ -704,9 +704,9 @@ Use this annotation for an app that is running a TCP streams workload.
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
-annotations:
-  ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
+  name: myingress
+  annotations:
+    ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
 spec:
   tls:
   - hosts:
@@ -2399,7 +2399,9 @@ To add the X-Forward header information to the request that is sent to your app,
   }</code></pre>
 </li></ul>
 </br>
-<p class="tip">The <code>response-add-headers</code> annotation does not support global headers for all services. To add a header for all service responses at a server level, you can use the [<code>server-snippets</code> annotation](#server-snippets).</p>
+<p class="tip">The <code>response-add-headers</code> annotation does not support global headers for all services. To add a header for all service responses at a server level, you can use the [<code>server-snippets</code> annotation](#server-snippets):</br> <pre class="codeblock">annotations:
+  ingress.bluemix.net/server-snippets: |
+    add_header &lt;header1&gt; &lt;value1&gt;;</pre></p>
 </dd>
 
 <dt>Sample Ingress resource YAML</dt>

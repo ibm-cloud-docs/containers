@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-19"
+lastupdated: "2018-12-27"
 
 ---
 
@@ -169,7 +169,7 @@ You can also [connect multiple clusters in different regions with a global load 
 ### Increasing the availability of your app
 {: #increase_availability}
 
-Consider the following options to increase availability of your app. 
+Consider the following options to increase availability of your app.
 {: shortdesc}
 
 <dl>
@@ -840,7 +840,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 If you have a [bare metal graphics processing unit (GPU) machine type](cs_clusters_planning.html#shared_dedicated_node), you can schedule mathematically intensive workloads onto the worker node. For example, you might run a 3D app that uses the Compute Unified Device Architecture (CUDA) platform to share the processing load across the GPU and CPU to increase performance.
 {:shortdesc}
 
-In the following steps, you learn how to deploy workloads that require the GPU. You can also [deploy apps](#app_ui) that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tensorflow.org/) machine learning framework with [this Kubernetes demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow).
+In the following steps, you learn how to deploy workloads that require the GPU. You can also [deploy apps](#app_ui) that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tensorflow.org/) machine learning framework with [this Kubernetes demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow).
 
 Before you begin:
 * [Create a bare metal GPU machine type](cs_clusters.html#clusters_cli). Note that this process can take more than 1 business day to complete.
