@@ -563,9 +563,9 @@ When your cluster is at [Kubernetes version 1.10 or later](cs_versions.html), yo
 
 To ensure that all Calico factors align:
 
-1. [Install and configure the version 3.3.1 Calico CLI](cs_network_policy.html#1.10_install). Configuration includes manually updating the `calicoctl.cfg` file to use Calico v3 syntax.
+1. [Install and configure the version 3.3.1 Calico CLI](cs_network_policy.html#cli_install). Configuration includes manually updating the `calicoctl.cfg` file to use Calico v3 syntax.
 2. Ensure that any policies you create and want to apply to your cluster use [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). If you have an existing policy `.yaml` or `.json` file in Calico v2 syntax, you can convert it to Calico v3 syntax by using the [`calicoctl convert` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
-3. To [view policies](cs_network_policy.html#1.10_examine_policies), ensure that you are using `calicoctl get GlobalNetworkPolicy` for global policies and `calicoctl get NetworkPolicy --namespace <policy_namespace>` for policies that are scoped to specific namespaces.
+3. To [view policies](cs_network_policy.html#view_policies), ensure that you are using `calicoctl get GlobalNetworkPolicy` for global policies and `calicoctl get NetworkPolicy --namespace <policy_namespace>` for policies that are scoped to specific namespaces.
 
 <br />
 
