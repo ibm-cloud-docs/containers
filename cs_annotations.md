@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-19"
+lastupdated: "2018-12-27"
 
 ---
 
@@ -704,9 +704,9 @@ Use this annotation for an app that is running a TCP streams workload.
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
-annotations:
-  ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
+  name: myingress
+  annotations:
+    ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
 spec:
   tls:
   - hosts:
