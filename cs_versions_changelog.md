@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-19"
+lastupdated: "2018-12-27"
 
 ---
 
@@ -1703,7 +1703,7 @@ Unsupported Kubernetes versions:
 *  [Version 1.8](#18_changelog)
 *  [Version 1.7](#17_changelog)
 
-### Version 1.9 changelog (deprecated, unsupported 27 December 2018)
+### Version 1.9 changelog (unsupported as of 27 December 2018)
 {: #19_changelog}
 
 Review the version 1.9 changelog.

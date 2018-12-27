@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-19"
+lastupdated: "2018-12-27"
 
 ---
 
@@ -32,7 +32,7 @@ If you have unique security requirements or you have a multizone cluster with VL
   [Kubernetes network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): These policies specify how pods can communicate with other pods and with external endpoints. As of Kubernetes version 1.8, both incoming and outgoing network traffic can be allowed or blocked based on protocol, port, and source or destination IP addresses. Traffic can also be filtered based on pod and namespace labels. Kubernetes network policies are applied by using `kubectl` commands or the Kubernetes APIs. When these policies are applied, they are automatically converted into Calico network policies and Calico enforces these policies.
   </li>
   <li>
-  Calico network policies for Kubernetes version [1.10 and later clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) or [1.9 and earlier clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy): These policies are a superset of the Kubernetes network policies and are applied by using `calicoctl` commands. Calico policies add the following features.
+  [Calico network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy): These policies are a superset of the Kubernetes network policies and are applied by using `calicoctl` commands. Calico policies add the following features.
     <ul>
     <li>Allow or block network traffic on specific network interfaces regardless of the Kubernetes pod source or destination IP address or CIDR.</li>
     <li>Allow or block network traffic for pods across namespaces.</li>
@@ -95,7 +95,7 @@ Do not remove policies that are applied to a host endpoint unless you fully unde
   </tbody>
 </table>
 
-In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to clusters connected only to a private VLAN and clusters connected to a public and private VLAN.
+In Kubernetes version 1.10 and later clusters, a default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to clusters connected only to a private VLAN and clusters connected to a public and private VLAN.
 
 <table>
 <caption>Default Kubernetes policies for each cluster</caption>
@@ -105,7 +105,7 @@ In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy that 
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td><b>In Kubernetes v1.10 or later only</b>, provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} console or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
+  <td>In Kubernetes v1.10 or later only, provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} console or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
  </tr>
 </tbody>
 </table>
@@ -118,17 +118,6 @@ In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy that 
 
 To view, manage, and add Calico policies, install and configure the Calico CLI.
 {:shortdesc}
-
-The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. To install and configure the Calico CLI, click one of the following links based on your cluster version:
-
-* [Kubernetes version 1.10 or later clusters](#1.10_install)
-* [Kubernetes version 1.9 or earlier clusters (deprecated)](#1.9_install)
-
-Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
-{: tip}
-
-### Install and configure the version 3.3.1 Calico CLI for clusters that are running Kubernetes version 1.10 or later
-{: #1.10_install}
 
 1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
 
@@ -212,160 +201,6 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
       ```
       {: screen}
 
-
-### Installing and configuring the version 1.6.3 Calico CLI for clusters that are running Kubernetes version 1.9 or earlier (deprecated)
-{: #1.9_install}
-
-Kubernetes version 1.9 is deprecated and is unsupported 27 December 2018. Earlier versions of Kubernetes are unsupported. As soon as possible, [update](cs_cluster_update.html#update) or [create](cs_clusters.html#clusters) clusters that run a [supported version](cs_versions.html#cs_versions).
-{: note}
-
-1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
-
-  ```
-  ibmcloud ks cluster-config <cluster_name> --admin
-  ```
-  {: pre}
-
-
-2. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.3).
-
-    If you are using OSX, download the `-darwin-amd64` version. If you are using Windows, install the Calico CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some filepath changes when you run commands later.
-    {: tip}
-
-3. For OSX and Linux users, complete the following steps.
-    1. Move the executable file to the _/usr/local/bin_ directory.
-        - Linux:
-          ```
-          mv filepath/calicoctl /usr/local/bin/calicoctl
-          ```
-          {: pre}
-
-        - OS X:
-          ```
-          mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
-          ```
-          {: pre}
-
-    2. Make the file an executable file.
-        ```
-        chmod +x /usr/local/bin/calicoctl
-        ```
-        {: pre}
-
-4. Verify that `calicoctl` commands run properly by checking the Calico CLI client version.
-    ```
-    calicoctl version
-    ```
-    {: pre}
-
-5. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints: See [Running `calicoctl` commands from behind a firewall](cs_firewall.html#firewall) for instructions on how to allow TCP access for Calico commands.
-
-6. For Linux and OS X, create the `/etc/calico` directory. For Windows, any directory can be used.
-    ```
-    sudo mkdir -p /etc/calico/
-    ```
-    {: pre}
-
-7. Create a `calicoctl.cfg` file.
-    - Linux and OS X:
-      ```
-      sudo vi /etc/calico/calicoctl.cfg
-      ```
-      {: pre}
-
-    - Windows: Create the file with a text editor.
-
-8. Enter the following information in the <code>calicoctl.cfg</code> file.
-
-    ```
-    apiVersion: v1
-    kind: calicoApiConfig
-    metadata:
-    spec:
-        etcdEndpoints: https://<ETCD_HOST>:<ETCD_PORT>
-        etcdKeyFile: <CERTS_DIR>/admin-key.pem
-        etcdCertFile: <CERTS_DIR>/admin.pem
-        etcdCACertFile: <CERTS_DIR>/<ca-*pem_file>
-    ```
-    {: codeblock}
-
-    1. Retrieve the `<ETCD_HOST>` and `<ETCD_PORT>`.
-        1. Get the Calico configuration values from the `cluster-info` configmap.
-            ```
-            kubectl get cm -n kube-system cluster-info -o yaml
-            ```
-            {: pre}
-
-        2. In the `data` section, locate the `etcd_host` and `etcd_port` values.
-
-    2. Retrieve the `<CERTS_DIR>`, the directory that the Kubernetes certificates are downloaded in.
-
-        - Linux and OS X:
-          ```
-          dirname $KUBECONFIG
-          ```
-          {: pre}
-
-          Example output:
-          ```
-          /home/sysadmin/.bluemix/plugins/container-service/clusters/<cluster_name>-admin/
-          ```
-          {: screen}
-
-        - Windows:
-          ```
-          ECHO %KUBECONFIG%
-          ```
-          {: pre}
-
-          Example output:
-          ```
-          C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
-          ```
-          {: screen}
-
-        To get the directory path, remove the file name `kube-config-prod-<zone>-<cluster_name>.yml` from the end of the output.
-
-    3. Retrieve the `ca-*pem_file`.
-
-        - Linux and OS X:
-          ```
-          ls `dirname $KUBECONFIG` | grep "ca-"
-          ```
-          {: pre}
-
-        - Windows:
-          1. Open the directory that you retrieved in the last step.
-              ```
-              C:\Users\<user>\.bluemix\plugins\container-service\<cluster_name>-admin\
-              ```
-              {: pre}
-
-          2. Locate the `ca-*pem_file` file.
-
-    4. Verify that the Calico configuration is working correctly.
-
-        - Linux and OS X:
-          ```
-          calicoctl get nodes
-          ```
-          {: pre}
-
-        - Windows: Use the `--config` flag to point to the network config file that you created. Include this flag each time you run a `calicoctl` command.
-          ```
-          calicoctl get nodes --config=filepath/calicoctl.cfg
-          ```
-          {: pre}
-
-          Output:
-          ```
-          NAME
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w2.cloud.ibm
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w3.cloud.ibm
-          ```
-          {: screen}
-
 <br />
 
 
@@ -383,16 +218,7 @@ Before you begin:
     ```
     {: pre}
 
-The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. To install and configure the Calico CLI, click one of the following links based on your cluster version:
-
-* [Kubernetes version 1.10 or later clusters](#1.10_examine_policies)
-* [Kubernetes version 1.9 or earlier clusters (deprecated)](#1.9_examine_policies)
-
-Kubernetes version 1.9 is deprecated and is unsupported 27 December 2018. Earlier versions of Kubernetes are unsupported. As soon as possible, [update](cs_cluster_update.html#update) or [create](cs_clusters.html#clusters) clusters that run a [supported version](cs_versions.html#cs_versions). Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
-{: note}
-
-### View network policies in clusters that are running Kubernetes version 1.10 or later
-{: #1.10_examine_policies}
+**To view network policies in clusters**:
 
 Linux and Mac users don't need to include the `--config=filepath/calicoctl.cfg` flag in `calicoctl` commands.
 {: tip}
@@ -432,43 +258,6 @@ Linux and Mac users don't need to include the `--config=filepath/calicoctl.cfg` 
     ```
     {: pre}
 
-### View network policies in clusters that are running Kubernetes version 1.9 or earlier (deprecated)
-{: #1.9_examine_policies}
-
-Kubernetes version 1.9 is deprecated and is unsupported 27 December 2018. Earlier versions of Kubernetes are unsupported. As soon as possible, [update](cs_cluster_update.html#update) or [create](cs_clusters.html#clusters) clusters that run a [supported version](cs_versions.html#cs_versions).
-{: note}
-
-Linux users don't need to include the `--config=filepath/calicoctl.cfg` flag in `calicoctl` commands.
-{: tip}
-
-1. View the Calico host endpoint.
-
-    ```
-    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-2. View all of the Calico and Kubernetes network policies that were created for the cluster. This list includes policies that might not be applied to any pods or hosts yet. For a network policy to be enforced, a Kubernetes resource must be found that matches the selector that was defined in the Calico network policy.
-
-    ```
-    calicoctl get policy -o wide --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-3. View details for a network policy.
-
-    ```
-    calicoctl get policy -o yaml <policy_name> --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
-4. View the details of all network policies for the cluster.
-
-    ```
-    calicoctl get policy -o yaml --config=filepath/calicoctl.cfg
-    ```
-    {: pre}
-
 <br />
 
 
@@ -480,16 +269,7 @@ In most cases, the default policies do not need to be changed. Only advanced sce
 
 To create Kubernetes network policies, see the [Kubernetes network policy documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
-To create Calico policies, use the following steps. The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. Click one of the following links based on your cluster version:
-
-* [Kubernetes version 1.10 or later clusters](#1.10_create_new)
-* [Kubernetes version 1.9 or earlier clusters (deprecated)](#1.9_create_new)
-
-Kubernetes version 1.9 is deprecated and is unsupported 27 December 2018. Earlier versions of Kubernetes are unsupported. As soon as possible, [update](cs_cluster_update.html#update) or [create](cs_clusters.html#clusters) clusters that run a [supported version](cs_versions.html#cs_versions). Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
-{: tip}
-
-### Adding Calico policies in clusters that are running Kubernetes version 1.10 or later
-{: #1.10_create_new}
+To create Calico policies, use the following steps.
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
@@ -500,38 +280,6 @@ Before you begin:
     {: pre}
 
 1. Define your Calico [network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) or [global network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own. Note that Kubernetes version 1.10 or later clusters must use Calico v3 policy syntax.
-
-2. Apply the policies to the cluster.
-    - Linux and OS X:
-
-      ```
-      calicoctl apply -f policy.yaml
-      ```
-      {: pre}
-
-    - Windows:
-
-      ```
-      calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
-
-### Adding Calico policies in clusters that are running Kubernetes version 1.9 or earlier (deprecated)
-{: #1.9_create_new}
-
-Kubernetes version 1.9 is deprecated and is unsupported 27 December 2018. Earlier versions of Kubernetes are unsupported. As soon as possible, [update](cs_cluster_update.html#update) or [create](cs_clusters.html#clusters) clusters that run a [supported version](cs_versions.html#cs_versions).
-{: note}
-
-Before you begin:
-1. [Install and configure the Calico CLI.](#cli_install)
-2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
-    ```
-    ibmcloud ks cluster-config <cluster_name> --admin
-    ```
-    {: pre}
-
-1. Define your [Calico network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own. Note that Kubernetes version 1.9 or earlier clusters must use Calico v2 policy syntax.
-
 
 2. Apply the policies to the cluster.
     - Linux and OS X:
@@ -570,7 +318,8 @@ To see how to whitelist or blacklist source IP addresses, try the [Using Calico 
 {: tip}
 
 1. Define a Calico pre-DNAT network policy for ingress (inbound traffic) access to Kubernetes services.
-    * Kubernetes version 1.10 or later clusters must use [Calico v3 policy syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Kubernetes version 1.9 or earlier clusters must use [Calico v2 policy syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
+    * Kubernetes version 1.10 or later clusters must use [Calico v3 policy syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy).
+    * If you manage traffic to a [version 2.0 load balancer service](cs_loadbalancer.html#planning_ipvs), you must include the `applyOnForward: true` and `doNotTrack: true` fields to the `spec` section of the policy.
 
         Example resource that blocks all node ports:
 
@@ -597,6 +346,35 @@ To see how to whitelist or blacklist source IP addresses, try the [Using Calico 
           preDNAT: true
           selector: ibm.role=='worker_public'
           order: 1100
+          types:
+          - Ingress
+        ```
+        {: codeblock}
+
+        Example resource that whitelists traffic from only a specified source CIDR to a load balancer 2.0:
+
+        ```
+        apiVersion: projectcalico.org/v3
+        kind: GlobalNetworkPolicy
+        metadata:
+          name: whitelist
+        spec:
+          applyOnForward: true
+          doNotTrack: true
+          ingress:
+          - action: Allow
+            destination:
+              nets:
+              - <loadbalancer_IP>/32
+              ports:
+              - 80
+            protocol: TCP
+            source:
+              nets:
+              - <client_address>/32
+          preDNAT: true
+          selector: ibm.role=='worker_public'
+          order: 500
           types:
           - Ingress
         ```
@@ -657,17 +435,10 @@ To isolate your cluster on the private network using Calico policies:
     {: pre}
 
 2. Navigate to the private policy directory for the Calico version that your cluster version is compatible with.
-    * Kubernetes version 1.10 or later clusters:
-      ```
-      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
-      ```
-      {: pre}
-
-    * Kubernetes version 1.9 or earlier clusters:
-      ```
-      cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v2
-      ```
-      {: pre}
+   ```
+   cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
+   ```
+   {: pre}
 
 3. Set up a policy for the private host endpoint.
     1. Open the `generic-privatehostendpoint.yaml` policy.
@@ -814,7 +585,7 @@ To log denied traffic requests to certain pods in your cluster, you can create a
 When you set up network policies to limit traffic to app pods, traffic requests that are not permitted by these policies are denied and dropped. In some scenarios, you might want more information about denied traffic requests. For example, you might notice some unusual traffic that is continuously being denied by one of your network policies. To monitor the potential security threat, you can set up logging to record every time that the policy denies an attempted action on specified app pods.
 
 Before you begin:
-1. [Install and configure the Calico CLI.](#cli_install) **Note**: The policies in these steps use Calico v3 syntax that is compatible with clusters that run Kubernetes version 1.10 or later. For clusters that run Kubernetes version 1.9 or earlier, you must use [Calico v2 policy syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
+1. [Install and configure the Calico CLI.](#cli_install)
 2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
     ```
     ibmcloud ks cluster-config <cluster_name> --admin
