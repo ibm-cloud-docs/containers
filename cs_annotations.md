@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-12-27"
+lastupdated: "2018-12-28"
 
 ---
 
@@ -647,6 +647,7 @@ metadata:
 name: myingress
 annotations:
   ingress.bluemix.net/server-snippets: |
+    # Example snippet
     location = /health {
     return 200 'Healthy';
     add_header Content-Type text/plain;
@@ -676,6 +677,9 @@ rules:
 <td>Provide the configuration snippet that you want to use. This sample snippet specifies a location block to handle <code>/health</code> requests. The location block is configured to return a healthy response and add a header when it forwards a request.</td>
 </tr>
 </tbody></table>
+<p class="tip">You can use the <code>server-snippets</code> annotation to add a header for all service responses at a server level:</br> <pre class="codeblock">annotations:
+  ingress.bluemix.net/server-snippets: |
+    add_header &lt;header1&gt; &lt;value1&gt;;</pre></p>
 </dd>
 </dl>
 
@@ -2696,7 +2700,7 @@ spec:
 <tbody>
 <tr>
 <td><code>key</code></td>
-<td>To set a global limit for incoming requests based on the zone or service, use `key=zone`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+<td>Supported values are `location`, `$http_` headers, and `$uri`. To set a global limit for incoming requests based on the zone or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
 </tr>
 <tr>
 <td><code>rate</code></td>
@@ -2763,7 +2767,7 @@ spec:
 </tr>
 <tr>
 <td><code>key</code></td>
-<td>To set a global limit for incoming requests based on the zone or service, use `key=zone`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+<td>Supported values are `location`, `$http_` headers, and `$uri`. To set a global limit for incoming requests based on the zone or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
 </tr>
 <tr>
 <td><code>rate</code></td>
