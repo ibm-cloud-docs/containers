@@ -266,32 +266,13 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 
    You can also see the different service types in your dashboard as **Cloud Foundry Services** and **Services**.
 
-3. For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, create a Cloud Foundry alias so that you can bind this service to your cluster. If your service already is a Cloud Foundry service, this step is not necessary and you can continue with the next step.
-   1. Target a Cloud Foundry org and space.
-      ```
-      ibmcloud target --cf
-      ```
-      {: pre}
-
-   2. Create a Cloud Foundry alias for the service instance.
-      ```
-      ibmcloud resource service-alias-create <service_alias_name> --instance-name <iam_service_instance_name>
-      ```
-      {: pre}
-
-   3. Verify that the service alias is created.
-      ```
-      ibmcloud service list
-      ```
-      {: pre}
-
-4. Identify the cluster namespace that you want to use to add your service. Choose between the following options.
+3. Identify the cluster namespace that you want to use to add your service. Choose between the following options.
      ```
      kubectl get namespaces
      ```
      {: pre}
 
-5.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](cs_cli_reference.html#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
+4.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](cs_cli_reference.html#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
     ```
     ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
     ```
@@ -309,7 +290,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
     ```
     {: screen}
 
-6.  Verify the service credentials in your Kubernetes secret.
+5.  Verify the service credentials in your Kubernetes secret.
     1. Get the details of the secret and note the **binding** value. The **binding** value is base64 encoded and holds the credentials for your service instance in JSON format.
        ```
        kubectl get secrets binding-<service_instance_name> --namespace=<namespace> -o yaml
@@ -350,7 +331,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 
     3. Optional: Compare the service credentials that you decoded in the previous step with the service credentials that you find for your service instance in the {{site.data.keyword.Bluemix_notm}} dashboard.
 
-7. Now that your service is bound to your cluster, you must configure your app to [access the service credentials in the Kubernetes secret](#adding_app).
+6. Now that your service is bound to your cluster, you must configure your app to [access the service credentials in the Kubernetes secret](#adding_app).
 
 
 ## Accessing service credentials from your apps
