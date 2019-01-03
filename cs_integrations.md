@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-19"
+  years: 2014, 2019
+lastupdated: "2019-01-03"
 
 ---
 
@@ -291,17 +291,17 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      ```
      {: pre}
 
-5.  Add the service to your cluster. For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier.
+5.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](cs_cli_reference.html#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
     ```
-    ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
     ```
     {: pre}
 
-    When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Secrets are automatically encrypted in etcd to protect your data.
+    When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. The secrets are automatically encrypted in etcd to protect your data.
 
     Example output:
     ```
-    ibmcloud ks cluster-service-bind mycluster mynamespace cleardb
+    ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service cleardb
     Binding service instance to namespace...
     OK
     Namespace:	     mynamespace

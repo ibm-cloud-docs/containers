@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-19"
+  years: 2014, 2019
+lastupdated: "2019-01-03"
 
 ---
 
@@ -1156,7 +1156,7 @@ View a list of Kubernetes versions supported in {{site.data.keyword.containerlon
 {: #cluster_services_commands}
 
 
-### ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_NAME [-s]
+### ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_NAME [--key SERVICE_INSTANCE_KEY] [--role IAM_ROLE] [-s]
 {: #cs_cluster_service_bind}
 
 Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
@@ -1170,11 +1170,18 @@ Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view availabl
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
 
+   <dt><code>--key <em>SERVICE_INSTANCE_KEY</em></code></dt>
+   <dd>The name or GUID of the service key. This value is optional. Include this value if you want to use an existing service key instead of creating a new service key.</dd>
+
    <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
    <dd>The name of the Kubernetes namespace. This value is required.</dd>
 
    <dt><code>--service <em>SERVICE_INSTANCE_NAME</em></code></dt>
    <dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the name of your service instance, run <code>ibmcloud service list</code>. If more than one instance has the same name in the account, use the service instance ID instead of the name. To find the ID, run <code>ibmcloud service show <service instance name> --guid</code>. One of these values is required.</dd>
+   
+   <dt><code>--role <em>IAM_ROLE</em></code></dt>
+   <dd>The {{site.data.keyword.Bluemix_notm}} IAM role that you want the service key to have. The default value is the IAM service role `Writer`. Do not include this value if you are using an existing service key or for services that are not IAM-enabled, such as Cloud Foundry services.<br><br>
+   To list available roles for the service, run `ibmcloud iam roles --service <service_name>`. The service name is the name of the service in the catalog which you can get by running `ibmcloud catalog search`.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
