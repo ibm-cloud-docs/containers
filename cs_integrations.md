@@ -681,7 +681,14 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-6. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
+6. Update the repos to retrieve the latest version of all Helm charts.
+
+    ```
+    helm repo update
+    ```
+    {: pre}
+
+7. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
 
     ```
     helm search ibm
@@ -693,7 +700,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-7. To learn more about a chart, list its settings and default values.
+8. To learn more about a chart, list its settings and default values.
 
     For example, to view the settings, documentation, and default values for the strongSwan IPSec VPN service Helm chart:
 

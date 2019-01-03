@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-19"
+  years: 2014, 2019
+lastupdated: "2019-01-03"
 
 ---
 
@@ -32,6 +32,35 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for ge
 You can take these general steps to ensure that your clusters are up-to-date:
 - Check monthly for available security and operating system patches to [update your worker nodes](cs_cli_reference.html#cs_worker_update).
 - [Update your cluster](cs_cli_reference.html#cs_cluster_update) to the latest default [version of Kubernetes](cs_versions.html) for {{site.data.keyword.containerlong_notm}}
+
+## Running tests with the {{site.data.keyword.containerlong_notm}} Debug Utility
+{: #debug_utility}
+
+While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Debug Utility to run tests and gather pertinent information from your cluster. To use the debug utility, install the [`ibm-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-istio):
+
+1. [Set up Helm in your cluster, create a service account for Tiller, and add the `ibm` repository to your Helm instance](cs_integrations.html#helm).
+
+2. Install the Helm chart to your cluster.
+    ```
+    helm install ibm/ibm-iks-debug --name debug-utility
+    ```
+    {: pre}
+
+3. Start a proxy server to display the debug utility interface.
+    ```
+    kubectl proxy --port 8080
+    ```
+    {: pre}
+
+4. In a web browser, open the debug utility interface URL: http://localhost:8080/api/v1/namespaces/default/services/debug-utility-ibm-iks-debug:8822/proxy/page
+
+5. Select individual tests or a group of tests to run. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
+
+6. Click **Run**.
+
+7. Check the results of each test.
+  * If any test fails, click the information icon next to the test's name in the left column for information about how to resolve the issue.
+  * You can also use the results of tests to gather information, such as complete YAMLs, that can help you debug your cluster in the following sections.
 
 ## Debugging clusters
 {: #debug_clusters}
@@ -320,6 +349,6 @@ Still having issues with your cluster?
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support/howtogetsupport.html#using-avatar) for more details about using the forums.
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Debug Utility](cs_troubleshoot.html#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 
