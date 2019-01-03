@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-27"
+  years: 2014, 2019
+lastupdated: "2019-01-03"
 
 ---
 
@@ -647,6 +647,7 @@ metadata:
 name: myingress
 annotations:
   ingress.bluemix.net/server-snippets: |
+    # Example snippet
     location = /health {
     return 200 'Healthy';
     add_header Content-Type text/plain;
@@ -676,6 +677,9 @@ rules:
 <td>Provide the configuration snippet that you want to use. This sample snippet specifies a location block to handle <code>/health</code> requests. The location block is configured to return a healthy response and add a header when it forwards a request.</td>
 </tr>
 </tbody></table>
+<p class="tip">You can use the <code>server-snippets</code> annotation to add a header for all service responses at a server level:</br> <pre class="codeblock">annotations:
+  ingress.bluemix.net/server-snippets: |
+    add_header &lt;header1&gt; &lt;value1&gt;;</pre></p>
 </dd>
 </dl>
 
@@ -1396,14 +1400,14 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
         * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`.
         * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/appid_callback`.
 
-3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster.
+3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
     ```
-    ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
     ```
     {: pre}
     When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
     ```
-    ibmcloud ks cluster-service-bind mycluster mynamespace appid1
+    ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service appid1
     Binding service instance to namespace...
     OK
     Namespace:    mynamespace
@@ -2696,7 +2700,7 @@ spec:
 <tbody>
 <tr>
 <td><code>key</code></td>
-<td>To set a global limit for incoming requests based on the zone or service, use `key=zone`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+<td>Supported values are `location`, `$http_` headers, and `$uri`. To set a global limit for incoming requests based on the zone or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
 </tr>
 <tr>
 <td><code>rate</code></td>
@@ -2763,7 +2767,7 @@ spec:
 </tr>
 <tr>
 <td><code>key</code></td>
-<td>To set a global limit for incoming requests based on the zone or service, use `key=zone`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+<td>Supported values are `location`, `$http_` headers, and `$uri`. To set a global limit for incoming requests based on the zone or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
 </tr>
 <tr>
 <td><code>rate</code></td>

@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-19"
+  years: 2014, 2019
+lastupdated: "2019-01-03"
 
 ---
 
@@ -317,7 +317,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <tr>
 <td style="text-align:left">Performance</td>
 <td style="text-align:left">High for read operations. Predictable due to assigned IOPS and size when using non-SDS machines.</td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Close to bare metal performance for sequential read and write operations when using SDS machines. </li><li style="margin:0px; padding:0px">Provides profiles to run high performance databases</li><li style="margin:0px; padding:0px">Possibility to create a storage layer with different performance profiles that your app can choose from.</li></ul> </td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Close to bare metal performance for sequential read and write operations when using SDS machines. </li><li style="margin:0px; padding:0px">Provides [profiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) to run high performance databases</li><li style="margin:0px; padding:0px">Possibility to create a storage layer with different performance profiles that your app can choose from.</li></ul> </td>
 <td style="text-align:left">High if deployed to the same data center as your app.</td>
 </tr>
 <tr>
