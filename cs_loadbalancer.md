@@ -31,7 +31,7 @@ When you create a standard cluster, {{site.data.keyword.containerlong}} automati
 * The portable public subnet provides 5 usable IP addresses. 1 portable public IP address is used by the default [public Ingress ALB](cs_ingress.html). The remaining 4 portable public IP addresses can be used to expose single apps to the internet by creating public load balancer services.
 * The portable private subnet provides 5 usable IP addresses. 1 portable private IP address is used by the default [private Ingress ALB](cs_ingress.html#private_ingress). The remaining 4 portable private IP addresses can be used to expose single apps to a private network by creating private load balancer services.
 
-Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node that the load balancer IP address is on is removed, a Keepalived daemon that constantly monitors the IP automatically moves the IP to another worker node. You can assign any port to your load balancer and are not bound to a certain port range. The load balancer service serves as the external entry point for incoming requests for the app. To access the load balancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`.
+Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node that the load balancer IP address is on is removed, a Keepalived daemon that constantly monitors the IP automatically moves the IP to another worker node. You can assign any port to your load balancer. The load balancer service serves as the external entry point for incoming requests for the app. To access the load balancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`.
 
 When you expose an app with a load balancer service, your app is automatically made available over the service's NodePorts too. [NodePorts](cs_nodeport.html) are accessible on every public and private IP address of every worker node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](cs_network_policy.html#block_ingress).
 
@@ -153,7 +153,7 @@ Before you create a version 2.0 load balancer, you must complete the following p
     2. From the menu bar, click **Support**, click the **Manage cases** tab, and click **Create new case**.
     3. In the case fields, enter the following:
        * For type of support, select **Technical**.
-       * For category, select **VLAN Spanning**. 
+       * For category, select **VLAN Spanning**.
        * For subject, enter **Public VLAN Network Question.**
     4. Add the following information to the description: "Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145".
     5. Click **Submit**.
