@@ -31,19 +31,19 @@ Load balancer services are available for standard clusters only and do not suppo
 
 Choose one of the following options to get started:
 
-<img src="images/cs_loadbalancer_imagemap.png" usemap="#image-map">
+<img src="images/cs_loadbalancer_imagemap.png" width="700px" usemap="#image-map" style="width:700px;">
 <map name="image-map">
-    <area target="" alt="Overview" title="Overview" href="#overview" coords="111,155,601,261" shape="rect">
-    <area target="" alt="Comparison of version 1.0 and 2.0 load balancers" title="Comparison of version 1.0 and 2.0 load balancers" href="#comparison" coords="594,375,115,288" shape="rect">
-    <area target="" alt="v2.0: Components and architecture (Beta)" title="v2.0: Components and architecture (Beta)" href="#planning_ipvs" coords="950,159,1432,259" shape="rect">
-    <area target="" alt="v2.0: Prerequisites" title="v2.0: Prerequisites" href="#ipvs_provision" coords="944,288,1436,382" shape="rect">
-    <area target="" alt="v2.0: Setting up a load balancer 2.0 in a multizone cluster" title="v2.0: Setting up a load balancer 2.0 in a multizone cluster" href="#ipvs_multi_zone_config" coords="944,414,1434,507" shape="rect">
-    <area target="" alt="v2.0: Setting up a load balancer 2.0 in a single-zone cluster" title="v2.0: Setting up a load balancer 2.0 in a single-zone cluster" href="#ipvs_single_zone_config" coords="944,537,1434,632" shape="rect">
-    <area target="" alt="v2.0: Scheduling algorithms" title="v2.0: Scheduling algorithms" href="#scheduling" coords="946,672,1427,755" shape="rect">
-    <area target="" alt="v1.0: Components and architecture" title="v1.0: Components and architecture" href="#planning" coords="2290,263,1777,157" shape="rect">
-    <area target="" alt="v1.0: Setting up a load balancer 1.0 in a multizone cluster" title="v1.0: Setting up a load balancer 1.0 in a multizone cluster" href="#multi_zone_config" coords="1781,293,2288,377" shape="rect">
-    <area target="" alt="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" title="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" href="#config" coords="1781,414,2286,507" shape="rect">
-    <area target="" alt="v1.0: Enabling source IP preservation" title="v1.0: Enabling source IP preservation" href="#node_affinity_toleration" coords="1777,544,2288,676" shape="rect">
+    <area target="" alt="Overview" title="Overview" href="#overview" coords="35,44,175,72" shape="rect">
+    <area target="" alt="Comparison of version 1.0 and 2.0 load balancers" title="Comparison of version 1.0 and 2.0 load balancers" href="#comparison" coords="34,83,173,108" shape="rect">
+    <area target="" alt="v2.0: Components and architecture (Beta)" title="v2.0: Components and architecture (Beta)" href="#planning_ipvs" coords="273,45,420,72" shape="rect">
+    <area target="" alt="v2.0: Prerequisites" title="v2.0: Prerequisites" href="#ipvs_provision" coords="277,85,417,108" shape="rect">
+    <area target="" alt="v2.0: Setting up a load balancer 2.0 in a multizone cluster" title="v2.0: Setting up a load balancer 2.0 in a multizone cluster" href="#ipvs_multi_zone_config" coords="276,122,417,147" shape="rect">
+    <area target="" alt="v2.0: Setting up a load balancer 2.0 in a single-zone cluster" title="v2.0: Setting up a load balancer 2.0 in a single-zone cluster" href="#ipvs_single_zone_config" coords="277,156,419,184" shape="rect">
+    <area target="" alt="v2.0: Scheduling algorithms" title="v2.0: Scheduling algorithms" href="#scheduling" coords="276,196,419,220" shape="rect">
+    <area target="" alt="v1.0: Components and architecture" title="v1.0: Components and architecture" href="#planning" coords="519,47,668,74" shape="rect">
+    <area target="" alt="v1.0: Setting up a load balancer 1.0 in a multizone cluster" title="v1.0: Setting up a load balancer 1.0 in a multizone cluster" href="#multi_zone_config" coords="520,85,667,110" shape="rect">
+    <area target="" alt="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" title="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" href="#config" coords="520,122,667,146" shape="rect">
+    <area target="" alt="v1.0: Enabling source IP preservation" title="v1.0: Enabling source IP preservation" href="#node_affinity_toleration" coords="519,157,667,194" shape="rect">
 </map>
 
 Already have the [prerequisites for a load balancer 2.0](#ipvs_provision) completed? You can use the following deployment YAML to create a new load balancer:
@@ -87,6 +87,8 @@ When you expose an app with a load balancer service, your app is automatically m
 
 ## Comparison of version 1.0 and 2.0 load balancers
 {: #comparison}
+
+When you create a load balancer, you can choose a version 1.0 or 2.0 load balancer. Note that version 2.0 load balancers are in beta.
 
 **How are version 1.0 and 2.0 load balancers similar?**
 
