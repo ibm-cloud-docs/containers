@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-04"
 
 ---
 
@@ -123,89 +123,3 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Option to provision bare metal workers with Trusted Compute](cs_clusters_planning.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Available in {{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Characteristics of free and standard clusters" caption-side="top"}
-
-<br />
-
-
-
-
-## Pricing and billing
-{: #pricing}
-
-Review some frequently asked questions about {{site.data.keyword.containerlong_notm}} pricing and billing. For account-level questions, check out the [Managing billing and usage docs](/docs/billing-usage/how_charged.html#charges). For details about your account agreements, consult the appropriate [{{site.data.keyword.Bluemix_notm}} Terms and Notices](/docs/overview/terms-of-use/notices.html#terms).
-{: shortdesc}
-
-### How can I view and organize my usage?
-{: #usage}
-
-**How can I check my billing and usage?**<br>
-To check your usage and estimated totals, see [Viewing your usage](/docs/billing-usage/viewing_usage.html#viewingusage).
-
-If you link your {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructure (SoftLayer) accounts, you receive a consolidated bill. For more information, see [Consolidated billing for linked accounts](/docs/customer-portal/linking_accounts.html#unifybillaccounts).
-
-**Can I group my cloud resources by teams or departments for billing purposes?**<br>
-You can [use resource groups](/docs/resources/bestpractice_rgs.html#bp_resourcegroups) to organize your {{site.data.keyword.Bluemix_notm}} resources, including clusters, into groups to organize your billing.
-
-### How am I charged? Are charges hourly or monthly?
-{: #monthly-charges}
-
-Your charges depend on the type of resource that you use, and might be fixed, metered, tiered, or reserved. For more information, view [How you are charged](/docs/billing-usage/how_charged.html#charges).
-
-IBM Cloud infrastructure (SoftLayer) resources can be billed hourly or monthly in {{site.data.keyword.containerlong_notm}}.
-* Virtual machine (VM) worker nodes are billed hourly.
-* Physical (bare metal) worker nodes are billed monthly resources in {{site.data.keyword.containerlong_notm}}.
-* For other infrastructure resources, such as file or block storage, you might be able to choose between hourly or monthly billing when you create the resource.
-
-Monthly resources are billed based upon the first of the month for usage in the preceding month. If you order a monthly resource in the middle of the month, you are charged a prorated amount for that month. However, if you cancel a resource in the middle of the month, you are still charged the full amount for the monthly resource.
-
-### Can I estimate my costs?
-{: #estimate}
-
-Yes, see [Estimating your costs](/docs/billing-usage/estimating_costs.html#cost) and the [cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/) tool. Continue reading for information about costs that are not included in the cost estimator, such as outbound networking.
-
-### What am I charged for when I use {{site.data.keyword.containerlong_notm}}?
-{: #cluster-charges}
-
-With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud infrastructure (SoftLayer) compute, networking, and storage resources with platform services such as Watson AI or Compose Database-as-a-Service. Each resource might entail its own charges.
-* [Worker nodes](#nodes)
-* [Outbound networking](#bandwidth)
-* [Subnet IP addresses](#subnets)
-* [Storage](#storage)
-* [{{site.data.keyword.Bluemix_notm}} services](#services)
-
-<dl>
-<dt id="nodes">Worker nodes</dt>
-  <dd><p>Clusters can have two main types of worker nodes: virtual or physical (bare metal) machines. Machine type availability and pricing varies by the zone that you deploy your cluster to.</p>
-  <p><strong>Virtual machines</strong> feature greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price than bare-metal. However, VMs have a performance trade-off when compared to bare metal specs, such as networking Gbps, RAM and memory thresholds, and storage options. Keep in mind these factors that impact your VM costs:</p>
-  <ul><li><strong>Shared vs. dedicated</strong>: If you share the underlying hardware of the VM, the cost is lower than dedicated hardware, but the physical resources are not dedicated to your VM.</li>
-  <li><strong>Hourly billing only</strong>: Hourly offers more flexibility to order and cancel VMs quickly. 
-  <li><strong>Tiered hours per month</strong>: Hourly billing is tiered. As your VM remains ordered for a tier of hours within a billing month, the hourly rate that you are charged lowers. The tiers of hours are as follows: 0 - 150 hours, 151 - 290 hours, 291 - 540 hours, and 541+ hours.</li></ul>
-  <p><strong>Physical machines (bare metal)</strong> yield high performance benefits for workloads such as data, AI, and GPU. Additionally, all the hardware resources are dedicated to your workloads, so you don't have "noisy neighbors". Keep in mind these factors that impact your bare metal costs:</p>
-  <ul><li><strong>Monthly billing only</strong>: All bare metals are charged monthly.</li>
-  <li><strong>Longer ordering process</strong>:  Because ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account, it can take more than one business day to complete.</li></ul>
-  <p>For details on the machine specifications, see [Available hardware for worker nodes](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).</p></dd>
-
-<dt id="bandwidth">Public bandwidth</dt>
-  <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.Bluemix_notm}} resources in data centers around the globe. Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.
-  <p>Review the following factors that impact public bandwidth charges:</p>
-  <ul><li><strong>Location</strong>: As with worker nodes, charges vary depending on the zone that your resources are deployed in.</li>
-  <li><strong>Included bandwidth or Pay-As-You-Go</strong>: Your worker node machines might come with a certain allocation of outbound networking per month, such as 250GB for VMs or 500GB for bare metal. Or, the allocation might be Pay-As-You-Go, based on GB usage.</li>
-  <li><strong>Tiered packages</strong>: After you exceed any included bandwidth, you are charged according to a tiered usage scheme that varies by location. If you exceed a tier allotment, you might also be charged a standard data transfer fee.</li></ul>
-  <p>For more information, see [Bandwidth packages![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth).</p></dd>
-
-<dt id="subnets">Subnet IP addresses</dt>
-  <dd><p>When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly.</p><p>If you already have available subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](cs_cli_reference.html#cs_cluster_create), and then [reuse your subnets](cs_subnets.html#custom).</p>
-  </dd>
-
-<dt id="storage">Storage</dt>
-  <dd>When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. To choose the right storage solution, see [Planning highly available persistent storage](cs_storage_planning.html#storage_planning). For more information, see:
-  <ul><li>[NFS file storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</li>
-  <li>[Block storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</li>
-  <li>[Object storage plans![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
-
-<dt id="services">{{site.data.keyword.Bluemix_notm}} services</dt>
-  <dd>Each service that you integrate with your cluster has its own pricing model. Consult each product documentation and the [cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/) for more information.</dd>
-
-</dl>
-
-
