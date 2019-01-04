@@ -31,7 +31,7 @@ Load balancer services are available for standard clusters only and do not suppo
 
 Choose one of the following options to get started:
 
-<img src="images/cs_loadbalancer_imagemap.png" width="700px" usemap="#image-map" style="width:700px;">
+<img src="images/cs_loadbalancer_imagemap.png" width="725px" usemap="#image-map" style="width:725px;">
 <map name="image-map">
     <area target="" alt="Overview" title="Overview" href="#overview" coords="35,44,175,72" shape="rect">
     <area target="" alt="Comparison of version 1.0 and 2.0 load balancers" title="Comparison of version 1.0 and 2.0 load balancers" href="#comparison" coords="34,83,173,108" shape="rect">
@@ -46,7 +46,10 @@ Choose one of the following options to get started:
     <area target="" alt="v1.0: Enabling source IP preservation" title="v1.0: Enabling source IP preservation" href="#node_affinity_toleration" coords="519,157,667,194" shape="rect">
 </map>
 
-Already have the [prerequisites for a load balancer 2.0](#ipvs_provision) completed? You can use the following deployment YAML to create a new load balancer:
+### Quickstart: Load balancer 2.0
+{: #quickstart-2.0}
+
+Already have the [prerequisites for a load balancer 2.0](#ipvs_provision) completed? You can use the following deployment YAML to create a load balancer 2.0:
 
 ```
 apiVersion: v1
@@ -71,6 +74,30 @@ spec:
 ```
 {: codeblock}
 
+### Quickstart: Load balancer 1.0
+{: #quickstart-1.0}
+
+Use the following deployment YAML to create a load balancer 1.0:
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+ name: myloadbalancer
+ annotations:
+   service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>
+   service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"
+   service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "<vlan_id>"
+spec:
+ type: LoadBalancer
+ selector:
+   <selector_key>: <selector_value>
+ ports:
+  - protocol: TCP
+    port: 8080
+ loadBalancerIP: <IP_address>
+```
+{: codeblock}
 
 ## Overview
 {: #overview}
