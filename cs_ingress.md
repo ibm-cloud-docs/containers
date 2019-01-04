@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-04"
 
 ---
 
@@ -49,11 +49,11 @@ Ingress consists of three components:
 ### How are IPs assigned to Ingress ALBs?
 {: #ips}
 
-When you create a standard cluster, {{site.data.keyword.containerlong}} automatically provisions a portable public subnet and a portable private subnet. By default, the cluster automatically uses:
+When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically provisions a portable public subnet and a portable private subnet. By default, the cluster automatically uses:
 * 1 portable public IP address from the portable public subnet for the default public Ingress ALB.
 * 1 portable private IP address from the portable private subnet for the default private Ingress ALB.
 
-If you have a multizone cluster, a default public ALB and a default private ALB are automatically created in each zone. The IP addresses of your default public ALBs are all behind the same hostname for your cluster.
+If you have a multizone cluster, a default public ALB and a default private ALB are automatically created in each zone. The IP addresses of your default public ALBs are all behind the same IBM-provided hostname for your cluster.
 
 Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node is removed, a Keepalived daemon that constantly monitors the IP automatically reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. For the life of the cluster, the ALB IP address in each zone does not change. If you remove a zone from a cluster, then the ALB IP address for that zone is removed.
 
