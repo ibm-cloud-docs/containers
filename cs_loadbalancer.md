@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-04"
+lastupdated: "2019-01-07"
 
 ---
 
@@ -46,8 +46,7 @@ Choose one of the following options to get started:
     <area target="" alt="v1.0: Enabling source IP preservation" title="v1.0: Enabling source IP preservation" href="#node_affinity_toleration" coords="519,157,667,194" shape="rect">
 </map>
 
-### Quickstart: Load balancer 2.0
-{: #quickstart-2.0}
+**Quickstart: Load balancer 2.0**</br>
 
 Already have the [prerequisites for a load balancer 2.0](#ipvs_provision) completed? You can use the following deployment YAML to create a load balancer 2.0:
 
@@ -74,8 +73,7 @@ spec:
 ```
 {: codeblock}
 
-### Quickstart: Load balancer 1.0
-{: #quickstart-1.0}
+**Quickstart: Load balancer 1.0**</br>
 
 Use the following deployment YAML to create a load balancer 1.0:
 
