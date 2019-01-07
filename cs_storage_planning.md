@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-07"
 
 ---
 
@@ -272,7 +272,7 @@ Persistent data storage options are available for standard clusters only.
 Looking to connect your cluster to an on-prem database instead? See [Setting up VPN connectivity to your cluster](cs_vpn.html#vpn).
 {: tip}
 
-The following image shows the options that you have in {{site.data.keyword.containerlong_notm}} to permanently store your data in a multizone cluster and make your data highly available.
+The following image shows the options that you have in {{site.data.keyword.containerlong_notm}} to permanently store your data in a multizone cluster and make your data highly available. You can use these options in a single zone cluster, but you might not get the high availability benefits that your app requires. 
 
 <img src="images/cs_storage_options_multizone.png" alt="High availability options for persistent storage in a multizone cluster"/>
 
@@ -281,7 +281,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <th style="text-align:left">Characteristics</th>
 <th style="text-align:left">Object</th>
 <th style="text-align:left">SDS (Portworx)</th>
-<th style="text-align:left">DBaaS</th>
+<th style="text-align:left">{{site.data.keyword.Bluemix_notm}} Databases</th>
 </thead>
 <tbody>
 <tr>
