@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-07"
 
 ---
 
@@ -25,6 +25,24 @@ lastupdated: "2019-01-03"
 
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
+
+## Popular topics in January 2019
+{: #jan19}
+
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in January 2019</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>7 January</td>
+<td>[Cluster autoscaler preview beta](cs_cluster_scaling.html#ca)</td>
+<td>Scale the worker pools in your cluster automatically to increase or decrease the number of worker nodes in the worker pool based on the sizing needs of your scheduled workloads. To test out this beta, you must request access to the whitelist.</td>
+</tr>
+</tbody></table>
 
 ## Popular topics in December 2018
 {: #dec18}
@@ -53,8 +71,6 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <td>Are you deploying so many apps that you’re worried about maxing out your cluster? Worker node resource reserves and Kubernetes evictions protect your cluster’s compute capacity so that your cluster has enough resources to keep running. Just add a few more worker nodes, and your pods start rescheduling to them automatically. Worker node resource reserves are updated in the latest [version patch changes](cs_versions_changelog.html#changelog).</td>
 </tr>
 </tbody></table>
-
-
 
 ## Popular topics in November 2018
 {: #nov18}

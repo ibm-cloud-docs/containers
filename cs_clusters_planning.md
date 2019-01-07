@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-04"
+lastupdated: "2019-01-07"
 
 ---
 
@@ -239,7 +239,8 @@ When you create a standard cluster, worker nodes of the same memory, CPU, and di
 
 Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/cluster-large/) for more information.
 
-
+Want to be sure that you always have enough worker nodes to cover your workload? Try out [the cluster autoscaler (beta)](cs_cluster_scaling.html#ca).
+{: tip}
 
 ## Available hardware for worker nodes
 {: #shared_dedicated_node}
