@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-07"
+lastupdated: "2019-01-08"
 
 ---
 
@@ -160,7 +160,7 @@ The cluster autoscaler is available as a **preview beta** for select users only.
    *  {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
    *  Kubernetes (`kubectl`)
    *  Helm (`helm`)
-2. [Create a standard cluster](cs_clusters.html#clusters_ui) that runs **Kubernetes version 1.12 or later**.
+2. [Create a standard cluster](cs_clusters.html#clusters_ui) that runs **Kubernetes version 1.12**.
 3.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 4.  Confirm that your {{site.data.keyword.Bluemix_notm}} Identity and Access Management credentials are stored in the cluster. The cluster autoscaler uses this secret to authenticate.
     ```
