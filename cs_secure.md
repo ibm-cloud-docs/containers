@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-08"
 
 ---
 
@@ -249,8 +249,8 @@ When you provision persistent storage to store data in your cluster, your data i
 {: shortdesc}
 
 For more information about how data is encrypted for the specific storage type, see the following links.
-- [NFS file storage](/docs/infrastructure/FileStorage/block-file-storage-encryption-rest.html#securing-your-data-provider-managed-encryption-at-rest)
-- [Block storage](/docs/infrastructure/BlockStorage/block-file-storage-encryption-rest.html#securing-your-data-provider-managed-encryption-at-rest) </br>
+- [NFS file storage](/docs/infrastructure/FileStorage/block-file-storage-encryption-rest.html#provider-managed-encryption-at-rest)
+- [Block storage](/docs/infrastructure/BlockStorage/block-file-storage-encryption-rest.html#block-storage-encryption-at-rest) </br>
 
 You can also use an {{site.data.keyword.Bluemix_notm}} database service, such as [{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant), to persist data in a managed database outside the cluster. Data that is stored with a cloud database service can be accessed across clusters, zones, and regions. For security-related information about IBM Cloudant NoSQL DB, see the [service documentation](/docs/services/Cloudant/offerings/security.html#security).
 

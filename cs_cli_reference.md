@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-08"
 
 ---
 
@@ -1318,7 +1318,7 @@ If you delete the root key in your {{site.data.keyword.keymanagementserviceshort
 <dd>The name or ID of the cluster.</dd>
 
 <dt><code>--key-protect-url ENDPOINT</code></dt>
-<dd>The {{site.data.keyword.keymanagementserviceshort}} endpoint for your cluster instance. To get the endpoint, see [service endpoints by region](/docs/services/key-protect/regions.html#endpoints).</dd>
+<dd>The {{site.data.keyword.keymanagementserviceshort}} endpoint for your cluster instance. To get the endpoint, see [service endpoints by region](/docs/services/key-protect/regions.html#service-endpoints).</dd>
 
 <dt><code>--key-protect-instance INSTANCE_GUID</code></dt>
 <dd>Your {{site.data.keyword.keymanagementserviceshort}} instance GUID. To get the instance GUID, run <code>ibmcloud resource service-instance SERVICE_INSTANCE_NAME --id</code> and copy the second value (not the full CRN).</dd>
