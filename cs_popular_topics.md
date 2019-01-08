@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-07"
+lastupdated: "2019-01-08"
 
 ---
 
@@ -38,9 +38,14 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
-<td>7 January</td>
+<td>8 January</td>
 <td>[Cluster autoscaler preview beta](cs_cluster_scaling.html#ca)</td>
 <td>Scale the worker pools in your cluster automatically to increase or decrease the number of worker nodes in the worker pool based on the sizing needs of your scheduled workloads. To test out this beta, you must request access to the whitelist.</td>
+</tr>
+<tr>
+<td>8 January</td>
+<td>[{{site.data.keyword.containerlong_notm}} debug utility](cs_troubleshoot.html#debug_utility)</td>
+<td>Do you sometimes find it hard to get all the YAML files and other information that you need to help troubleshoot an issue? Try out the {{site.data.keyword.containerlong_notm}} debug utility for a graphical user interface that helps you gather cluster, deployment, and network information.</td>
 </tr>
 </tbody></table>
 
