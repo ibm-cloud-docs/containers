@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-19"
+  years: 2014, 2019
+lastupdated: "2019-01-07"
 
 ---
 
@@ -1481,6 +1481,9 @@ Use the customized storage class if you use the {{site.data.keyword.Bluemix_notm
 The following `.yaml` file customizes a storage class that is based on the `ibm-block-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. The zone is specified as `dal12`. You can review the previous information on `ibmc` storage classes to help you choose acceptable values for these </br>
 
 To use a different storage class as your base, see the [storage class reference](#storageclass_reference).
+
+Create the storage class in the same region and zone as your cluster and worker nodes. To get the region of your cluster, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and look for the region prefix in the **Master URL**, such as `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`. To get the zone of your worker node, run `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
+{: tip}
 
 ```
 apiVersion: storage.k8s.io/v1beta1

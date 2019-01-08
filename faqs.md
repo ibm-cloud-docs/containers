@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-19"
+  years: 2014, 2019
+lastupdated: "2019-01-04"
 
 ---
 
@@ -166,7 +166,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <li><strong>Tiered hours per month</strong>: Hourly billing is tiered. As your VM remains ordered for a tier of hours within a billing month, the hourly rate that you are charged lowers. The tiers of hours are as follows: 0 - 150 hours, 151 - 290 hours, 291 - 540 hours, and 541+ hours.</li></ul>
   <p><strong>Physical machines (bare metal)</strong> yield high performance benefits for workloads such as data, AI, and GPU. Additionally, all the hardware resources are dedicated to your workloads, so you don't have "noisy neighbors". Keep in mind these factors that impact your bare metal costs:</p>
   <ul><li><strong>Monthly billing only</strong>: All bare metals are charged monthly.</li>
-  <li><strong>Longer ordering process</strong>:  Because ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account, it can take more than one business day to complete.</li></ul>
+  <li><strong>Longer ordering process</strong>:  After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure (SoftLayer) account. Therefore, it can take more than one business day to complete.</li></ul>
   <p>For details on the machine specifications, see [Available hardware for worker nodes](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).</p></dd>
 
 <dt id="bandwidth">Public bandwidth</dt>

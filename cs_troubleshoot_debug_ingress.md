@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-19"
+  years: 2014, 2019
+lastupdated: "2019-01-03"
 
 ---
 
@@ -37,7 +37,35 @@ Ensure that you define a host in only one Ingress resource. If one host is defin
 Before you begin, ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM access policies](cs_users.html#platform):
   - **Editor** or **Administrator** platform role for the cluster
 
-## Step 1: Check for error messages in your Ingress deployment and the ALB pod logs
+## Step 1: Run Ingress tests in the {{site.data.keyword.containerlong_notm}} Debug Utility
+
+While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Debug Utility to run Ingress tests and gather pertinent Ingress information from your cluster. To use the debug utility, install the [`ibm-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-istio):
+
+1. [Set up Helm in your cluster, create a service account for Tiller, and add the `ibm` repository to your Helm instance](cs_integrations.html#helm).
+
+2. Install the Helm chart to your cluster.
+    ```
+    helm install ibm/ibm-iks-debug --name debug-utility
+    ```
+    {: pre}
+
+3. Start a proxy server to display the debug utility interface.
+    ```
+    kubectl proxy --port 8080
+    ```
+    {: pre}
+
+4. In a web browser, open the debug utility interface URL: http://localhost:8080/api/v1/namespaces/default/services/debug-utility-ibm-iks-debug:8822/proxy/page
+
+5. Select the **ingress** group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
+
+6. Click **Run**.
+
+7. Check the results of each test.
+  * If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.
+  * You can also use the results of tests that only gather information while you debug your Ingress service in the following sections.
+
+## Step 2: Check for error messages in your Ingress deployment and the ALB pod logs
 {: #errors}
 
 Start by checking for error messages in the Ingress resource deployment events and ALB pod logs. These error messages can help you find the root causes for failures and further debug your Ingress setup in the next sections.
@@ -113,7 +141,7 @@ Start by checking for error messages in the Ingress resource deployment events a
 
     4. Look for error messages in the ALB logs.
 
-## Step 2: Ping the ALB subdomain and public IP addresses
+## Step 3: Ping the ALB subdomain and public IP addresses
 {: #ping}
 
 Check the availability of your Ingress subdomain and ALBs' public IP addresses.
@@ -191,7 +219,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     ```
     {: screen}
 
-## Step 3: Check your domain mappings and Ingress resource configuration
+## Step 4: Check your domain mappings and Ingress resource configuration
 {: #config}
 
 1. If you use a custom domain, verify that you used your DNS provider to map the custom domain to the IBM-provided subdomain or the ALB's public IP address. Note that using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
@@ -403,6 +431,6 @@ Still having issues with your cluster?
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support/howtogetsupport.html#using-avatar) for more details about using the forums.
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Debug Utility](cs_troubleshoot.html#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

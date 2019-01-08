@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-28"
+  years: 2014, 2019
+lastupdated: "2019-01-07"
 
 ---
 
@@ -239,7 +239,8 @@ When you create a standard cluster, worker nodes of the same memory, CPU, and di
 
 Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/cluster-large/) for more information.
 
-
+Want to be sure that you always have enough worker nodes to cover your workload? Try out [the cluster autoscaler (beta)](cs_cluster_scaling.html#ca).
+{: tip}
 
 ## Available hardware for worker nodes
 {: #shared_dedicated_node}
@@ -359,7 +360,7 @@ Yes. With bare metal, you have the option to enable Trusted Compute to verify yo
 **Bare metal sounds awesome! What's stopping me from ordering one right now?**</br>
 Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control.
 
-Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.
+Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure (SoftLayer) account. Therefore, it can take more than one business day to complete.
 {: important}
 
 **What bare metal flavors can I order?**</br>

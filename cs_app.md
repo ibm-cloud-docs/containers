@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-27"
+  years: 2014, 2019
+lastupdated: "2019-01-08"
 
 ---
 
@@ -1009,7 +1009,7 @@ To execute a workload on a GPU machine:
 With Kubernetes, you can enable [horizontal pod autoscaling ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) to automatically increase or decrease the number of instances of your apps based on CPU.
 {:shortdesc}
 
-Looking for information about scaling Cloud Foundry applications? Check out [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html). 
+Looking for information about scaling Cloud Foundry applications? Check out [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html). Want to scale your worker nodes instead of your pods? Check out the [cluster autoscaler preview (beta)](cs_cluster_scaling.html#ca).
 {: tip}
 
 Before you begin:

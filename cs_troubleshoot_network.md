@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-27"
+  years: 2014, 2019
+lastupdated: "2019-01-03"
 
 ---
 
@@ -30,6 +30,9 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 {: shortdesc}
 
 Having trouble connecting to your app through Ingress? Try [debugging Ingress](cs_troubleshoot_debug_ingress.html).
+{: tip}
+
+While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Debug Utility](cs_troubleshoot.html#debug_utility) to run tests and gather pertinent networking, Ingress, and strongSwan information from your cluster.
 {: tip}
 
 ## Cannot connect to an app via a load balancer service
@@ -653,6 +656,6 @@ Still having issues with your cluster?
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support/howtogetsupport.html#using-avatar) for more details about using the forums.
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Debug Utility](cs_troubleshoot.html#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

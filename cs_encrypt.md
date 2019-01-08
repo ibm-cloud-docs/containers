@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2018
-lastupdated: "2018-12-19"
+  years: 2014, 2019
+lastupdated: "2019-01-08"
 
 ---
 
@@ -109,7 +109,7 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
 
 4.  Note the [root key **ID**](/docs/services/key-protect/view-keys.html#gui).
 
-5.  Get the [{{site.data.keyword.keymanagementserviceshort}} endpoint](/docs/services/key-protect/regions.html#endpoints) of your instance.
+5.  Get the [{{site.data.keyword.keymanagementserviceshort}} endpoint](/docs/services/key-protect/regions.html#service-endpoints) of your instance.
 
 6.  Get the name of the cluster for which you want to enable {{site.data.keyword.keymanagementserviceshort}}.
 
