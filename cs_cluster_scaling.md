@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-08"
+lastupdated: "2019-01-09"
 
 ---
 
@@ -394,22 +394,27 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     </thead>
     <tbody>
     <tr>
+    <td>`api_route`</td>
+    <td>Set the [{{site.data.keyword.containerlong_notm}} API endpoint](cs_cli_reference.html#cs_api) for the region that your cluster is in.</td>
+    <td>No default; uses the targeted region that your cluster is in.</td>
+    </tr>
+    <tr>
     <td>`expander`</td>
     <td>Specify how the cluster autoscaler determines which worker pool to scale if you have multiple worker pools. Possible values are:
     <ul><li>`random`: Selects randomly between `most-pods` and `least-waste`.</li>
     <li>`most-pods`: Selects the worker pool that is able to schedule the most pods when scaling up. Use this method if you are using `nodeSelector` to make sure that pods land on specific worker nodes.</li>
     <li>`least-waste`: Selects the worker pool that has the least unused CPU, or in case of a tie the least unused memory, after scaling up. Use this method if you have multiple worker pools with large CPU and memory machine types, and want to use these larger machines only when pending pods need large amounts of resources.</li></ul></td>
-    <td>least-waste</td>
+    <td>random</td>
     </tr>
     <tr>
     <td>`image.repository`</td>
     <td>Specify the cluster autoscaler Docker image to use.</td>
-    <td>registry.ng.bluemix.net/armada-master/ibmcloud-cluster-autoscaler</td>
+    <td>registry.bluemix.net/ibm/ibmcloud-cluster-autoscaler</td>
     </tr>
     <tr>
     <td>`image.tag`</td>
     <td>Set the version of the image that you want to pull.</td>
-    <td>dev</td>
+    <td>1.12</td>
     </tr>
     <tr>
     <td>`image.pullPolicy`</td>
@@ -420,7 +425,7 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     <td>Always</td>
     </tr>
     <tr>
-    <td>`max-node-provision-time`</td>
+    <td>`maxNodeProvisionTime`</td>
     <td>Set the maximum amount of time in minutes that a worker node can take to begin provisioning before the cluster autoscaler cancels the scale-up request.</td>
     <td>120m</td>
     </tr>
@@ -445,17 +450,17 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     <td>100Mi</td>
     </tr>
     <tr>
-    <td>`scale_down_unneeded_time`</td>
+    <td>`scaleDownUnneededTime`</td>
     <td>Set the amount of time in minutes that a worker node must be unnecessary before it can be scaled down.</td>
     <td>10m</td>
     </tr>
     <tr>
-    <td>`scale_down_delay_after_add`, `scale_down_delay_after_delete`</td>
+    <td>`scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete`</td>
     <td>Set the amount of time in minutes that the cluster autoscaler waits to start scaling actions again after scaling up (`add`) or scaling down (`delete`).</td>
     <td>10m</td>
     </tr>
     <tr>
-    <td>`scan_interval`</td>
+    <td>`scanInterval`</td>
     <td>Set how often in minutes that the cluster autoscaler scans for workload usage that triggers scaling up or down.</td>
     <td>1m</td>
     </tr>
