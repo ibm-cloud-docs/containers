@@ -57,7 +57,7 @@ The cluster autoscaler adjusts the number of worker nodes based on the [resource
 In general, the cluster autoscaler calculates the number of worker nodes that your cluster needs to run its workload. Scaling the cluster up or down depends on many factors including the following.
 *   The minimum and maximum worker node size per zone that you set.
 *   Your pending workload resource requests and certain metadata that you associate with the workload, such as using labels to place pods only on certain machine types or [pod disruption budgets![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
-*   The worker pools that the cluster autoscaler manages, potentially across zones in a [multizone cluster](cs_cluster_planning.html#multizone).
+*   The worker pools that the cluster autoscaler manages, potentially across zones in a [multizone cluster](cs_clusters_planning.html#multizone).
 
 Consider the following image for an example of scaling the cluster up and down.
 
