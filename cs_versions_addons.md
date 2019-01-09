@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-09"
 
 ---
 
@@ -52,9 +52,15 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <td>Disables TLS 1.0 and 1.1 by default. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, manually enable the required TLS versions by following [these steps](cs_ingress.html#ssl_protocols_ciphers). For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.Bluemix_notm}} Blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).</td>
 </tr>
 <tr>
+<td>393 / 291</td>
+<td>09 Jan 2019</td>
+<td>Adds support for multiple {{site.data.keyword.appid_full}} instances.</td>
+<td>-</td>
+</tr>
+<tr>
 <td>393 / 282</td>
 <td>29 Nov 2018</td>
-<td>Improves performance for {{site.data.keyword.appid_full}}.</td>
+<td>Improves performance for {{site.data.keyword.appid_full_notm}}.</td>
 <td>-</td>
 </tr>
 <tr>

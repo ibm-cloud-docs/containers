@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-08"
+lastupdated: "2019-01-09"
 
 ---
 
@@ -57,7 +57,7 @@ The cluster autoscaler adjusts the number of worker nodes based on the [resource
 In general, the cluster autoscaler calculates the number of worker nodes that your cluster needs to run its workload. Scaling the cluster up or down depends on many factors including the following.
 *   The minimum and maximum worker node size per zone that you set.
 *   Your pending workload resource requests and certain metadata that you associate with the workload, such as using labels to place pods only on certain machine types or [pod disruption budgets![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
-*   The worker pools that the cluster autoscaler manages, potentially across zones in a [multizone cluster](cs_cluster_planning.html#multizone).
+*   The worker pools that the cluster autoscaler manages, potentially across zones in a [multizone cluster](cs_clusters_planning.html#multizone).
 
 Consider the following image for an example of scaling the cluster up and down.
 
@@ -299,7 +299,7 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
       uid: b45d047b-f406-11e8-b7f0-82ddffc6e65e
     ```
     {: screen}
-2.  Edit the configmap with the parameters to define how the cluster autoscaler scales your cluster worker pool.
+2.  Edit the configmap with the parameters to define how the cluster autoscaler scales your cluster worker pool. Note that unless you [disabled](cs_cli_reference.html#cs_alb_configure) application load balancers (ALBs) in your standard cluster, you must change the `minSize` to `2` per zone so that the ALB pods can be spread for high availability.
 
     <table>
     <caption>Cluster autoscaler configmap parameters</caption>
@@ -317,7 +317,7 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     </tr>
     <tr>
     <td>`"minSize": 1`</td>
-    <td>Specify the minimum number of worker nodes per zone to be in the worker pool at all times. The value must be 1 or greater.</td>
+    <td>Specify the minimum number of worker nodes per zone to be in the worker pool at all times. The value must be 2 or greater so that your ALB pods can be spread for high availability. If you [disabled](cs_cli_reference.html#cs_alb_configure) the ALB in your standard cluster, you can set the value to `1`.</td>
     </tr>
     <tr>
     <td>`"maxSize": 2`</td>
@@ -394,22 +394,27 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     </thead>
     <tbody>
     <tr>
+    <td>`api_route`</td>
+    <td>Set the [{{site.data.keyword.containerlong_notm}} API endpoint](cs_cli_reference.html#cs_api) for the region that your cluster is in.</td>
+    <td>No default; uses the targeted region that your cluster is in.</td>
+    </tr>
+    <tr>
     <td>`expander`</td>
     <td>Specify how the cluster autoscaler determines which worker pool to scale if you have multiple worker pools. Possible values are:
     <ul><li>`random`: Selects randomly between `most-pods` and `least-waste`.</li>
     <li>`most-pods`: Selects the worker pool that is able to schedule the most pods when scaling up. Use this method if you are using `nodeSelector` to make sure that pods land on specific worker nodes.</li>
     <li>`least-waste`: Selects the worker pool that has the least unused CPU, or in case of a tie the least unused memory, after scaling up. Use this method if you have multiple worker pools with large CPU and memory machine types, and want to use these larger machines only when pending pods need large amounts of resources.</li></ul></td>
-    <td>least-waste</td>
+    <td>random</td>
     </tr>
     <tr>
     <td>`image.repository`</td>
     <td>Specify the cluster autoscaler Docker image to use.</td>
-    <td>registry.ng.bluemix.net/armada-master/ibmcloud-cluster-autoscaler</td>
+    <td>registry.bluemix.net/ibm/ibmcloud-cluster-autoscaler</td>
     </tr>
     <tr>
     <td>`image.tag`</td>
     <td>Set the version of the image that you want to pull.</td>
-    <td>dev</td>
+    <td>1.12</td>
     </tr>
     <tr>
     <td>`image.pullPolicy`</td>
@@ -420,7 +425,7 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     <td>Always</td>
     </tr>
     <tr>
-    <td>`max-node-provision-time`</td>
+    <td>`maxNodeProvisionTime`</td>
     <td>Set the maximum amount of time in minutes that a worker node can take to begin provisioning before the cluster autoscaler cancels the scale-up request.</td>
     <td>120m</td>
     </tr>
@@ -445,17 +450,17 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     <td>100Mi</td>
     </tr>
     <tr>
-    <td>`scale_down_unneeded_time`</td>
+    <td>`scaleDownUnneededTime`</td>
     <td>Set the amount of time in minutes that a worker node must be unnecessary before it can be scaled down.</td>
     <td>10m</td>
     </tr>
     <tr>
-    <td>`scale_down_delay_after_add`, `scale_down_delay_after_delete`</td>
+    <td>`scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete`</td>
     <td>Set the amount of time in minutes that the cluster autoscaler waits to start scaling actions again after scaling up (`add`) or scaling down (`delete`).</td>
     <td>10m</td>
     </tr>
     <tr>
-    <td>`scan_interval`</td>
+    <td>`scanInterval`</td>
     <td>Set how often in minutes that the cluster autoscaler scans for workload usage that triggers scaling up or down.</td>
     <td>1m</td>
     </tr>

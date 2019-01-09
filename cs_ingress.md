@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-04"
+lastupdated: "2019-01-09"
 
 ---
 
@@ -753,12 +753,18 @@ If you used the `--no-subnet` flag when you created the cluster, then you must a
 Private VLAN-only clusters are not assigned an IBM-provided Ingress subdomain. When you configure the private ALB, expose your apps by using a custom domain.
 {: shortdesc}
 
+**Private VLAN-only clusters:**
+
+1. If your worker nodes are connected to a private VLAN only, you must configure your own [DNS service that is available on your private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+2. Create a custom domain through your DNS provider. If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as *.custom_domain.net`.
+3. Using your private DNS service, map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks alb-get <private_alb_ID>` for each ALB.
+
+**Private and public VLAN clusters:**
+
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
-2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
-    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
-    -   Map your custom domain to the portable private IP address of the IBM-provided ALB by adding the IP address as an A record. To find the portable private IP address of the ALB, run `ibmcloud ks alb-get <private_alb_ID>`.
+2.  Map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks alb-get <private_alb_ID>` for each ALB.
 
 ### Step 4: Select TLS termination
 {: #private_4}
@@ -841,7 +847,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     metadata:
       name: myingressresource
       annotations:
-        ingress.bluemix.net/ALB-ID: "<private_ALB_ID>"
+        ingress.bluemix.net/ALB-ID: "<private_ALB_ID_1>;<private_ALB_ID_2>"
     spec:
       rules:
       - host: <domain>
@@ -865,7 +871,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     metadata:
       name: myingressresource
       annotations:
-        ingress.bluemix.net/ALB-ID: "<private_ALB_ID>"
+        ingress.bluemix.net/ALB-ID: "<private_ALB_ID_1>;<private_ALB_ID_2>"
     spec:
       tls:
       - hosts:
@@ -893,7 +899,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     <tbody>
     <tr>
     <td><code>ingress.bluemix.net/ALB-ID</code></td>
-    <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. Run <code>ibmcloud ks albs --cluster <my_cluster></code> to find the ALB ID. For more information about this Ingress annotation, see [Private application load balancer routing](cs_annotations.html#alb-id).</td>
+    <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. If you have a multizone cluster and have enabled multiple private ALBs, include the ID of each ALB. Run <code>ibmcloud ks albs --cluster <my_cluster></code> to find the ALB IDs. For more information about this Ingress annotation, see [Private application load balancer routing](cs_annotations.html#alb-id).</td>
     </tr>
     <tr>
     <td><code>tls.hosts</code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-07"
+lastupdated: "2019-01-09"
 
 ---
 
@@ -67,7 +67,7 @@ The list is divided into two parts:
     *  Decide whether to create a [single zone](cs_clusters_planning.html#single_zone) or [multizone](cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are available in select locations only.
     *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](cs_clusters_planning.html#private_clusters).
     *  Choose what type of [hardware and isolation](cs_clusters_planning.html#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
-4.  For standard clusters, you can [estimate the cost with the cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/configure/iaas/containers-kubernetes). For more information on charges that might not be included in the estimator, see [Pricing and billing](cs_why.html#pricing).
+4.  For standard clusters, you can [estimate the cost with the cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/configure/iaas/containers-kubernetes). For more information on charges that might not be included in the estimator, see [Pricing and billing](faqs.html#charges).
 <br>
 <br>
 
@@ -165,7 +165,7 @@ When the cluster is up and running, you can check out the following tasks:
 -   [Deploy an app in your cluster.](cs_app.html#app_cli)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
 -   If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
--   [Set up the cluster autoscaler (preview beta)](cs_cluster_scaling.html/#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
+-   [Set up the cluster autoscaler (preview beta)](cs_cluster_scaling.html#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 -   Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
 
 <br />
@@ -424,7 +424,7 @@ To create a cluster:
 -   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
 - If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
--   [Set up the cluster autoscaler (preview beta)](cs_cluster_scaling.html/#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
+-   [Set up the cluster autoscaler (preview beta)](cs_cluster_scaling.html#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 -  Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
 
 <br />
@@ -448,7 +448,7 @@ Before you begin, make sure you have the [**Operator** or **Administrator** {{si
   * [Add a zone to your cluster and replicate the worker nodes in your worker pools across multiple zones](#add_zone)
   * [Deprecated: Add a stand-alone worker node to a cluster](#standalone)
 
-After you set up your worker pool, you can [set up the cluster autoscaler (preview beta)](cs_cluster_scaling.html/#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
+After you set up your worker pool, you can [set up the cluster autoscaler (preview beta)](cs_cluster_scaling.html#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 {:tip}
 
 ### Adding worker nodes by resizing an existing worker pool

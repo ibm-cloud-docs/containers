@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-04"
+lastupdated: "2019-01-09"
 
 ---
 
@@ -241,7 +241,7 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 3.  Allow outgoing network traffic from the worker nodes to [{{site.data.keyword.registrylong_notm}} regions](/docs/services/Registry/registry_overview.html#registry_regions):
     - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-    - Replace <em>&lt;registry_publicIP&gt;</em> with the registry IP addresses to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images. Port 4443 is required for notary functions, such as [Signing images for content trust](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent).
+    - Replace <em>&lt;registry_publicIP&gt;</em> with the registry IP addresses to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images. Port 4443 is required for notary functions, such as [Verifying image signatures](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent).
       <p>
 <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for Registry traffic</caption>

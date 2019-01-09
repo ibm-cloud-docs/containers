@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-07"
+lastupdated: "2019-01-09"
 
 ---
 
@@ -239,8 +239,10 @@ When you create a standard cluster, worker nodes of the same memory, CPU, and di
 
 Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/cluster-large/) for more information.
 
+
 Want to be sure that you always have enough worker nodes to cover your workload? Try out [the cluster autoscaler (beta)](cs_cluster_scaling.html#ca).
 {: tip}
+
 
 ## Available hardware for worker nodes
 {: #shared_dedicated_node}
@@ -357,6 +359,8 @@ Bare metal gives you direct access to the physical resources on the machine, suc
 **Besides better specs for performance, can I do something with bare metal that I can't with VMs?**</br>
 Yes. With bare metal, you have the option to enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containerlong_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available for certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.
 
+In addition to Trusted Compute, you can also take advantage of {{site.data.keyword.datashield_full}} (Beta). {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified. If you or your company require data sensitivity due to internal policies, government regulations, or industry compliance requirements, this solution might help you to move to the cloud. Example use cases include financial and healthcare institutions, or countries with government policies that require on-premises cloud solutions.
+
 **Bare metal sounds awesome! What's stopping me from ordering one right now?**</br>
 Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control.
 
@@ -416,7 +420,7 @@ Choose a machine type with the right storage configuration to support your workl
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Balanced bare metal, mb2c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
+<td><strong>Balanced bare metal, mb2c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer. This flavor can also be enabled with Intel® Software Guard Extensions (SGX) so that you can use <a href="/docs/services/data-shield/index.html#gettingstarted" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory.</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 2TB SATA</td>
 <td>10000Mbps</td>

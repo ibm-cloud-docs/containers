@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-09"
 
 ---
 
@@ -158,6 +158,10 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
 <td>You can use <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to store and manage SSL certificates for your apps. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+</tr>
+<tr>
+  <td>{{site.data.keyword.datashield_full}} (Beta)</td>
+  <td>You can use <a href="/docs/services/data-shield/index.html#gettingstarted" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
