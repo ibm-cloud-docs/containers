@@ -299,7 +299,7 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
       uid: b45d047b-f406-11e8-b7f0-82ddffc6e65e
     ```
     {: screen}
-2.  Edit the configmap with the parameters to define how the cluster autoscaler scales your cluster worker pool.
+2.  Edit the configmap with the parameters to define how the cluster autoscaler scales your cluster worker pool. Note that unless you [disabled](cs_cli_reference.html#cs_alb_configure) application load balancers (ALBs) in your standard cluster, you must change the `minSize` to `2` per zone so that the ALB pods can be spread for high availability.
 
     <table>
     <caption>Cluster autoscaler configmap parameters</caption>
@@ -317,7 +317,7 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     </tr>
     <tr>
     <td>`"minSize": 1`</td>
-    <td>Specify the minimum number of worker nodes per zone to be in the worker pool at all times. The value must be 1 or greater.</td>
+    <td>Specify the minimum number of worker nodes per zone to be in the worker pool at all times. The value must be 2 or greater so that your ALB pods can be spread for high availability. If you [disabled](cs_cli_reference.html#cs_alb_configure) the ALB in your standard cluster, you can set the value to `1`.</td>
     </tr>
     <tr>
     <td>`"maxSize": 2`</td>
