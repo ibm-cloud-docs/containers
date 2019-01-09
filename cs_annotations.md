@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-09"
 
 ---
 
@@ -211,6 +211,11 @@ Before you use annotations, make sure you have properly set up your Ingress serv
  </thead>
  <tbody>
  <tr>
+<td><a href="#large-client-header-buffers">Large client header buffers</a></td>
+<td><code>large-client-header-buffers</code></td>
+<td>Set the maximum number and size of buffers that read large client request headers.</td>
+</tr>
+ <tr>
  <td><a href="#proxy-buffering">Client response data buffering</a></td>
  <td><code>proxy-buffering</code></td>
  <td>Disable the buffering of a client response on the ALB while sending the response to the client.</td>
@@ -254,11 +259,6 @@ Before you use annotations, make sure you have properly set up your Ingress serv
 <td><a href="#client-max-body-size">Client request body size</a></td>
 <td><code>client-max-body-size</code></td>
 <td>Set the maximum size of the body that the client can send as part of a request.</td>
-</tr>
-<tr>
-<td><a href="#large-client-header-buffers">Large client header buffers</a></td>
-<td><code>large-client-header-buffers</code></td>
-<td>Set the maximum number and size of buffers that read large client request headers.</td>
 </tr>
 <tr>
 <td><a href="#proxy-add-headers">Additional client request or response header</a></td>
@@ -539,7 +539,7 @@ kind: Ingress
 metadata:
 name: myingress
 annotations:
-  ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID&gt;"
+  ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;"
 spec:
 tls:
 - hosts:
@@ -861,9 +861,6 @@ spec:
 ### Keepalive requests (keepalive-requests)
 {: #keepalive-requests}
 
-Set the maximum number of requests that can be served through one keepalive connection.
-{:shortdesc}
-
 <dl>
 <dt>Description</dt>
 <dd>
@@ -921,9 +918,6 @@ rules:
 ### Keepalive timeout (keepalive-timeout)
 {: #keepalive-timeout}
 
-Set the maximum time that a keepalive connection stays open on the server side.
-{:shortdesc}
-
 <dl>
 <dt>Description</dt>
 <dd>
@@ -967,7 +961,7 @@ spec:
  </tr>
  <tr>
  <td><code>timeout</code></td>
- <td>Replace <code>&lt;<em>time</em>&gt;</code> with an amount of time in seconds. Example: <code>timeout=20s</code>. A zero value disables the keepalive client connections.</td>
+ <td>Replace <code>&lt;<em>time</em>&gt;</code> with an amount of time in seconds. Example: <code>timeout=20s</code>. A <code>0</code> value disables the keepalive client connections.</td>
  </tr>
  </tbody></table>
 
@@ -2071,6 +2065,61 @@ spec:
 The Ingress ALB acts as a proxy between your back-end app and the client web browser. With proxy buffer annotations, you can configure how data is buffered on your ALB when sending or receiving data packets.  
 {: shortdesc}
 
+### Large client header buffers (large-client-header-buffers)
+{: #large-client-header-buffers}
+
+Set the maximum number and size of buffers that read large client request headers.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>Buffers that read large client request headers are allocated only by demand: If a connection is transitioned into the keepalive state after the end-of-request processing, these buffers are released. By default, the there are <code>4</code> buffers and buffer size is equal to <code>8K</code> bytes. If a request line exceeds the set maximum size of one buffer, the <code>414 Request-URI Too Large</code> HTTP error is returned to the client. Additionally, if a request header field exceeds the set maximum size of one buffer, the <code>400 Bad Request</code> error is returned to the client. You can adjust the maximum number and size of buffers that are used for reading large client request headers.
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/large-client-header-buffers: "number=&lt;number&gt; size=&lt;size&gt;"
+spec:
+ tls:
+ - hosts:
+   - mydomain
+   secretName: mytlssecret
+ rules:
+ - host: mydomain
+   http:
+     paths:
+     - path: /
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>&lt;number&gt;</code></td>
+ <td>The maximum number of buffers that should be allocated to read large client request header. For example, to set it to 4, define <code>4</code>.</td>
+ </tr>
+ <tr>
+ <td><code>&lt;size&gt;</code></td>
+ <td>The maximum size of buffers that read large client request header. For example, to set it to 16 kilobytes, define <code>16k</code>. The size must end with a <code>k</code> for kilobyte or <code>m</code> for megabyte.</td>
+ </tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
+
+
 ### Client response data buffering (proxy-buffering)
 {: #proxy-buffering}
 
@@ -2201,6 +2250,7 @@ Configure the size of the proxy buffer that reads the first part of the response
 <dt>Description</dt>
 <dd>
 Set the size of the buffer that reads the first part of the response that is received from the proxied server. This part of the response usually contains a small response header. The configuration is applied to all of the services in the Ingress host unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>size=1k</code> is specified, 1k is applied to all of the services in the Ingress host.
+<p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your backend sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffer-size</code> and [<code>proxy-buffers</code>](#proxy-buffers).</p>
 </dd>
 
 
@@ -2241,7 +2291,7 @@ spec:
  </tr>
  <tr>
  <td><code>size</code></td>
- <td>Replace <code>&lt;<em>size</em>&gt;</code> with the size of each buffer in kilobytes (k or K), such as <em>1K</em>.</td>
+ <td>Replace <code>&lt;<em>size</em>&gt;</code> with the size of each buffer in kilobytes (k or K), such as <em>1K</em>. To calculate the proper size, you can check out [this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.getpagespeed.com/server-setup/nginx/tuning-proxy_buffer_size-in-nginx). </td>
  </tr>
  </tbody></table>
 
@@ -2590,61 +2640,6 @@ spec:
  </tbody></table>
 
  </dd></dl>
-
-<br />
-
-
-### Large client header buffers (large-client-header-buffers)
-{: #large-client-header-buffers}
-
-Set the maximum number and size of buffers that read large client request headers.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>Buffers that read large client request headers are allocated only by demand: If a connection is transitioned into the keepalive state after the end-of-request processing, these buffers are released. By default, the buffer size is equal to <code>8K</code> bytes. If a request line exceeds the set maximum size of one buffer, the <code>414 Request-URI Too Large</code> error is returned to the client. Additionally, if a request header field exceeds the set maximum size of one buffer, the <code>400 Bad Request</code> error is returned to the client. You can adjust the maximum number and size of buffers that are used for reading large client request headers.
-
-<dt>Sample Ingress resource YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
- name: myingress
- annotations:
-   ingress.bluemix.net/large-client-header-buffers: "number=&lt;number&gt; size=&lt;size&gt;"
-spec:
- tls:
- - hosts:
-   - mydomain
-   secretName: mytlssecret
- rules:
- - host: mydomain
-   http:
-     paths:
-     - path: /
-       backend:
-         serviceName: myservice
-         servicePort: 8080</code></pre>
-
-<table>
-<caption>Understanding the annotation components</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
- </thead>
- <tbody>
- <tr>
- <td><code>&lt;number&gt;</code></td>
- <td>The maximum number of buffers that should be allocated to read large client request header. For example, to set it to 4, define <code>4</code>.</td>
- </tr>
- <tr>
- <td><code>&lt;size&gt;</code></td>
- <td>The maximum size of buffers that read large client request header. For example, to set it to 16 kilobytes, define <code>16k</code>. The size must end with a <code>k</code> for kilobyte or <code>m</code> for megabyte.</td>
- </tr>
-</tbody></table>
-</dd>
-</dl>
 
 <br />
 
