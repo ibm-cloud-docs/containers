@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-09"
+lastupdated: "2019-01-10"
 
 ---
 
@@ -167,6 +167,19 @@ The cluster autoscaler is available as a **preview beta** for select users only.
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```
     {: pre}
+5.  The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label.
+ 		1.  Check if your worker pool has the required label.
+        ```
+        ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels
+        ```
+        {: pre}
+        Example output of a worker pool with the label:
+        ```
+        Labels:             ibm-cloud.kubernetes.io/worker-pool-id=a1aa111111b22b22cc3c3cc444444d44-4d555e5
+        ```
+        {: screen}
+		2.  If your worker pool does not have the required label, [add a new worker pool](cs_clusters.html#add_pool) and use this worker pool with the cluster autoscaler.
+
 
 <br>
 **To install the `ibm-ks-cluster-autoscaler` plug-in in your cluster**:
@@ -313,7 +326,8 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     To manage more than one worker pool, copy the JSON line to a comma-separated line, such as follows. <pre class="codeblock">[
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 1,"maxSize": 2,"enabled":true}
-    ]</pre></td>
+    ]<br><br>
+    **Note**: The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check if your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](cs_clusters.html#add_pool) and use this worker pool with the cluster autoscaler.</pre></td>
     </tr>
     <tr>
     <td>`"minSize": 1`</td>
