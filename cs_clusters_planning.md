@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-09"
+lastupdated: "2019-01-10"
 
 ---
 
@@ -213,8 +213,9 @@ You can set up multiple clusters in different regions of one geolocation (such a
 {: #private_clusters}
 
 By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access to a private VLAN and a public VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface. The public VLAN allows the worker nodes to automatically and securely connect to the master.
+{: shortdesc}
 
-If you want to lock down your cluster to allow private traffic over the private VLAN but block public traffic over the public VLAN, you can [secure your cluster from public access with Calico network policies](cs_network_cluster.html#both_vlans_private_services). These Calico network policies do not prevent your worker nodes from communicating with the master. You can also limit the surface of vulnerability in your cluster without locking down public traffic by [isolating networking workloads to edge worker nodes](cs_edge.html).
+For most cases, your cluster setup can include worker nodes on both public and private VLANs. If you want to lock down your cluster to allow private traffic over the private VLAN but block public traffic over the public VLAN, you can [secure your cluster from public access with Calico network policies](cs_network_cluster.html#both_vlans_private_services). These Calico network policies do not prevent your worker nodes from communicating with the master. You can also limit the surface of vulnerability in your cluster without locking down public traffic by [isolating networking workloads to edge worker nodes](cs_edge.html).
 
 If you want to create a cluster that only has access on a private VLAN, you can create a single zone or multizone private cluster. However, when your worker nodes are connected to a private VLAN only, the worker nodes can't automatically connect to the master. You must configure a gateway appliance to provide network connectivity between the worker nodes and the master.
 
@@ -225,8 +226,11 @@ If you want to create a cluster that only has access on a private VLAN:
 
 1.  Review [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
 2.  Configure your gateway appliance for network connectivity. Note that you must [open the required ports and IP addresses](cs_firewall.html#firewall_outbound) in your firewall and [enable VLAN spanning](cs_subnets.html#vra-routing) for the subnets.
-3.  [Create a cluster by using the CLI](cs_clusters.html#clusters_cli) by including the `--private-only` flag.
+3.  Create a cluster. 
+    *  [From the console](cs_clusters.html#clusters_ui), select a private VLAN but not select a public VLAN. 
+    *  [From the CLI](cs_clusters.html#clusters_cli), include the `--private-only` flag.
 4.  If you want to expose an app to a private network by using a private NodePort, load balancer, or Ingress service, review [Planning private external networking for a private VLAN only setup](cs_network_planning.html#private_vlan). The service is accessible on only the private IP address and you must configure the ports in your firewall to use the private IP address.
+
 
 
 ## Worker pools and worker nodes
