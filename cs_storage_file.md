@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-07"
+lastupdated: "2019-01-10"
 
 ---
 
@@ -24,6 +24,10 @@ lastupdated: "2019-01-07"
 # Storing data on IBM File Storage for IBM Cloud
 {: #file_storage}
 
+{{site.data.keyword.Bluemix_notm}} FILE Storage is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} File Storage is the right storage option for you, see [Choosing a storage solution](cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/FileStorage/index.html#billing). 
+
+{{site.data.keyword.Bluemix_notm}} File Storage is available for standard clusters only.
+{: note}
 
 ## Deciding on the file storage configuration
 {: #predefined_storageclass}
