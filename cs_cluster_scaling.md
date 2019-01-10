@@ -168,17 +168,18 @@ The cluster autoscaler is available as a **preview beta** for select users only.
     ```
     {: pre}
 5.  The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label.
- 		1.  Check if your worker pool has the required label.
+    1.  Check if your worker pool has the required label.
         ```
         ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels
         ```
         {: pre}
+	
         Example output of a worker pool with the label:
         ```
         Labels:             ibm-cloud.kubernetes.io/worker-pool-id=a1aa111111b22b22cc3c3cc444444d44-4d555e5
         ```
         {: screen}
-		2.  If your worker pool does not have the required label, [add a new worker pool](cs_clusters.html#add_pool) and use this worker pool with the cluster autoscaler.
+    2.  If your worker pool does not have the required label, [add a new worker pool](cs_clusters.html#add_pool) and use this worker pool with the cluster autoscaler.
 
 
 <br>
