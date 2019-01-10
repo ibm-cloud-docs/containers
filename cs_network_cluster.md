@@ -213,3 +213,8 @@ For more information about each service, see [Choosing a NodePort, LoadBalancer,
 To securely connect your worker nodes and apps to an on-premises network, you must set up a VPN gateway. You can use the VRA or FSA that you previously set up to also configure an IPSec VPN endpoint. To configure a VRA, see [Setting up VPN connectivity with a VRA](cs_vpn.html#vyatta).
 
 
+
+
+
+
+
