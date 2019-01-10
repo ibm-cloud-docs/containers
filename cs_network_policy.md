@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-10"
 
 ---
 
@@ -361,6 +361,32 @@ To see how to whitelist or blacklist source IP addresses, try the [Using Calico 
         spec:
           applyOnForward: true
           doNotTrack: true
+          ingress:
+          - action: Allow
+            destination:
+              nets:
+              - <loadbalancer_IP>/32
+              ports:
+              - 80
+            protocol: TCP
+            source:
+              nets:
+              - <client_address>/32
+          selector: ibm.role=='worker_public'
+          order: 500
+          types:
+          - Ingress
+        ```
+        {: codeblock}
+
+        Example resource that whitelists traffic from only a specified source CIDR to a load balancer 1.0:
+
+        ```
+        apiVersion: projectcalico.org/v3
+        kind: GlobalNetworkPolicy
+        metadata:
+          name: whitelist
+        spec:
           ingress:
           - action: Allow
             destination:
