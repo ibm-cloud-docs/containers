@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-07"
+lastupdated: "2019-01-10"
 
 ---
 
@@ -18,13 +18,13 @@ lastupdated: "2019-01-07"
 {:deprecated: .deprecated}
 {:download: .download}
 
-
-
-
-
 # Storing data on IBM Block Storage for IBM Cloud
 {: #block_storage}
 
+{{site.data.keyword.Bluemix_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage/index.html#billing). 
+
+{{site.data.keyword.Bluemix_notm}} Block Storage is available for standard clusters only.
+{: note}
 
 ## Installing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in in your cluster
 {: #install_block}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-09"
 
 ---
 
@@ -17,6 +17,8 @@ lastupdated: "2019-01-03"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
 
 
 
@@ -88,8 +90,8 @@ lastupdated: "2019-01-03"
 {: #registry}
 
 - [{{site.data.keyword.registryshort_notm}} documentation](/docs/services/Registry/index.html)
-- [{{site.data.keyword.registryshort_notm}} REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/apidocs/container-registry)
-- [Vulnerability Advisor REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/apidocs/container-registry/va)
+- [{{site.data.keyword.registryshort_notm}} REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/container-registry)
+- [Vulnerability Advisor REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/container-registry/va)
 
 <br />
 

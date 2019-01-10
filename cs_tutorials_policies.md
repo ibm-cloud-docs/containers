@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-10"
 
 ---
 
@@ -61,7 +61,7 @@ The first lesson shows you how your app is exposed from multiple IP addresses an
 
 Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection being made to the cluster from the client, and lets you test access to the PR firm's cluster. Then, expose the app by creating a load balancer 2.0 service. A load balancer 2.0 service makes your app available over both the load balancer service IP address and the worker nodes' node ports.
 
-Want to use an [Ingress application load balancer (ALB)](cs_ingress.html) instead? Skip the load balancer creation in steps 3 and 4. Instead, get the public IPs of your ALBs by running `ibmcloud ks albs --cluster <cluster_name>` and use these IPs throughout the tutorial in place of the `<loadbalancer_IP>.`
+Want to use an Ingress application load balancer (ALB)? Instead of creating a load balancer in steps 3 and 4, [create a service for the webserver app](cs_ingress.html#public_inside_1) and [create an Ingress resource for the webserver app](cs_ingress.html#public_inside_4). Then get the public IPs of your ALBs by running `ibmcloud ks albs --cluster <cluster_name>` and use these IPs throughout the tutorial in place of the `<loadbalancer_IP>.`
 {: tip}
 
 The following image shows how the webserver app will be exposed to the internet by the public node port and public load balancer at the end of Lesson 1:
@@ -234,7 +234,7 @@ Next, you can start creating and applying Calico policies to block public traffi
 ## Lesson 2: Block all incoming traffic to all node ports
 {: #lesson2}
 
-To secure the PR firm's cluster, you must block public access to both the load balancer service and node ports that are exposing your app. Start by blocking access to node ports. 
+To secure the PR firm's cluster, you must block public access to both the load balancer service and node ports that are exposing your app. Start by blocking access to node ports.
 {: shortdesc}
 
 The following image shows how traffic will be permitted to the load balancer but not to node ports at the end of Lesson 2:

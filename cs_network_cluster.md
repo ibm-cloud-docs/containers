@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-10"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2019-01-03"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 # Planning in-cluster and private networking
 {: #planning}
@@ -210,3 +211,5 @@ For more information about each service, see [Choosing a NodePort, LoadBalancer,
 {: #private_vlan_vpn}
 
 To securely connect your worker nodes and apps to an on-premises network, you must set up a VPN gateway. You can use the VRA or FSA that you previously set up to also configure an IPSec VPN endpoint. To configure a VRA, see [Setting up VPN connectivity with a VRA](cs_vpn.html#vyatta).
+
+

@@ -128,7 +128,7 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
 After {{site.data.keyword.keymanagementserviceshort}} is enabled in the cluster, data in `etcd`, existing secrets and new secrets that are created in the cluster are automatically encrypted by using your {{site.data.keyword.keymanagementserviceshort}} root key. You can rotate your key at any time by repeating these steps with a new root key ID.
 
 
-## Encrypting data by using {{site.data.keyword.datashield_short}} (Beta)
+## Encrypting data by using IBM Cloud Data Shield (Beta)
 {: #datashield}
 
 {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.
