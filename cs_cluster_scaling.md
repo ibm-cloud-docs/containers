@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-10"
+lastupdated: "2019-01-11"
 
 ---
 
@@ -31,7 +31,8 @@ The cluster autoscaler is available as a **preview beta** for select users only.
 
 Keep reading for more information about how cluster autoscaler works, or skip to the instructions for using it.
 * [Deploying the cluster autoscaler Helm chart to your cluster](#ca_helm)
-* [Updating the cluster autoscaler configuration](#ca_cm)
+* [Updating the cluster autoscaler configmap](#ca_cm)
+* [Customizing the cluster autoscaler Helm chart configuration values](#ca_chart_values)
 * [Limiting apps to run on only certain autoscaled worker pools](#ca_limit_pool)
 * [Removing the cluster autoscaler](#ca_rm)
 
@@ -49,16 +50,23 @@ The cluster autoscaler periodically scans the cluster to adjust the number of wo
 
 Scanning and scaling up and down happens at regular intervals over time, and depending on the number of worker nodes might take a longer period of time to complete, such as 30 minutes.
 
-The cluster autoscaler adjusts the number of worker nodes based on the [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) that you define for your deployments, not actual worker node usage. If your pods and deployments don't request appropriate amounts of resources, you must adjust their configuration files. The cluster autoscaler can't adjust them for you. Also keep in mind that worker nodes use some of their compute resources for basic cluster functionality, default and custom [add-ons](cs_cluster_update.html#addons), and [resource reserves](cs_clusters_planning.html#resource_limit_node).
+The cluster autoscaler adjusts the number of worker nodes by considering the [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) that you define for your deployments, not actual worker node usage. If your pods and deployments don't request appropriate amounts of resources, you must adjust their configuration files. The cluster autoscaler can't adjust them for you. Also keep in mind that worker nodes use some of their compute resources for basic cluster functionality, default and custom [add-ons](cs_cluster_update.html#addons), and [resource reserves](cs_clusters_planning.html#resource_limit_node).
 {: note}
 
 <br>
 **What does scaling up and down look like?**<br>
 In general, the cluster autoscaler calculates the number of worker nodes that your cluster needs to run its workload. Scaling the cluster up or down depends on many factors including the following.
 *   The minimum and maximum worker node size per zone that you set.
-*   Your pending workload resource requests and certain metadata that you associate with the workload, such as using labels to place pods only on certain machine types or [pod disruption budgets![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
+*   Your pending pod resource requests and certain metadata that you associate with the workload, such as anti-affinity, labels to place pods only on certain machine types, or [pod disruption budgets![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
 *   The worker pools that the cluster autoscaler manages, potentially across zones in a [multizone cluster](cs_clusters_planning.html#multizone).
+*   For more information, see the [Kubernetes Cluster Autoscaler FAQs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md).
 
+**How is this behavior different from worker pools that are not manage by the cluster autoscaler?**<br>
+When you [create a worker pool](cs_clusters.html#add_pool), you specify how many worker nodes per zone it has. The worker pool maintains that number of worker nodes until you [resize](cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](cs_cli_reference.html#cs_rebalance) it. The worker pool does not add or remove worker nodes for you. If you have more pods than can be scheduled, the pods remain in pending state until you resize the worker pool.
+
+When you enable the cluster austoscaler for a worker pool, worker nodes are scaled up or down in response to your pod spec settings and resource requests. You don't need to resize or rebalance the worker pool manually.
+
+**Can I see an example of how the cluster autoscaler scales up and down?**<br>
 Consider the following image for an example of scaling the cluster up and down.
 
 _Figure: Autoscaling a cluster up and down._
@@ -196,6 +204,10 @@ The cluster autoscaler is available as a **preview beta** for select users only.
     ```
     {: pre}
 3.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster.
+    
+    You can also [customize the cluster autoscaler settings](#ca_chart_values) such as the amount of time it waits before scaling worker nodes up or down.
+    {: tip}
+    
     ```
     helm install ibm/ibm-ks-cluster-autoscaler --namespace kube-system --name ibm-ks-cluster-autoscaler
     ```
@@ -278,10 +290,10 @@ The cluster autoscaler is available as a **preview beta** for select users only.
 <br />
 
 
-## Updating the cluster autoscaler configuration
+## Updating the cluster autoscaler configmap
 {: #ca_cm}
 
-Customize the cluster autoscaler configmap to control how worker nodes are automatically scaled up or down in response to your workload resource requests. You can modify two types of settings: worker pool scaling settings in the cluster autoscaler configmap, and cluster autoscaler settings for the Helm chart.
+Update the cluster autoscaler configmap to enable automatically scaling worker nodes in your worker pools based on the minimum and maximum values that you set.
 {: shortdesc}
 
 **Before you begin**:
@@ -326,7 +338,7 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     <td>Replace `"default"` with the name or ID of the worker pool that you want to scale. To list worker pools, run `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`.<br><br>
     To manage more than one worker pool, copy the JSON line to a comma-separated line, such as follows. <pre class="codeblock">[
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
-     {"name": "Pool2","minSize": 1,"maxSize": 2,"enabled":true}
+     {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
     ]<br><br>
     **Note**: The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check if your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](cs_clusters.html#add_pool) and use this worker pool with the cluster autoscaler.</pre></td>
     </tr>
@@ -369,7 +381,19 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     ```
     {: screen}
     
-5.  Review the cluster autoscaler Helm chart configuration values. The cluster autoscaler comes with default settings. However, you might want to change some values such as the scale-down or scanning intervals, depending on how often you change your cluster workloads.
+## Customizing the cluster autoscaler Helm chart configuration values
+{: #ca_chart_values}
+
+Customize the cluster autoscaler settings such as the amount of time it waits before scaling worker nodes up or down.
+{: shortdesc}
+
+**Before you begin**:
+*  [Install the `ibm-ks-cluster-autoscaler` plug-in](#ca_helm).
+*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+**To update the cluster autoscaler values**:
+
+1.  Review the cluster autoscaler Helm chart configuration values. The cluster autoscaler comes with default settings. However, you might want to change some values such as the scale-down or scanning intervals, depending on how often you change your cluster workloads.
     ```
     helm get values ibm-ks-cluster-autoscaler -a
     ```
@@ -491,7 +515,7 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     </tr>
     </tbody>
     </table>
-6.  If you want to change any of the cluster autoscaler configuration values, upgrade the Helm chart with the new values.
+2.  To change any of the cluster autoscaler configuration values, upgrade the Helm chart with the new values.
     ```
     helm upgrade --set scanInterval=2m ibm-ks-cluster-autoscaler ibm/ibm-ks-cluster-autoscaler -i
     ```
@@ -502,8 +526,7 @@ Customize the cluster autoscaler configmap to control how worker nodes are autom
     helm upgrade --reset-values ibm-ks-cluster-autoscaler ibm/ibm-ks-cluster-autoscaler
     ```
     {: pre}
-
-    To verify your changes, review the Helm chart values again:
+3.  To verify your changes, review the Helm chart values again.
     ```
     helm get values ibm-ks-cluster-autoscaler -a
     ```
