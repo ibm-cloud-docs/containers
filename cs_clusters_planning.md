@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-10"
+lastupdated: "2019-01-14"
 
 ---
 
@@ -279,6 +279,8 @@ When you create a standard virtual cluster, you must choose whether you want the
 
 Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.
 
+
+
 **What are the general features of VMs?**</br>
 Virtual machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. Every VM comes with 1000Mbps networking speed, 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for data such as the container runtime and the `kubelet`. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](cs_storage_planning.html#storage_planning).
 
@@ -316,34 +318,34 @@ Machine types vary by zone. To see the machine types available in your zone, run
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b2c.32x128</strong>: Select this balanced VM for mid to large workloads, such as a database and a dynamic website with many concurrent users.</td></td>
+<td><strong>Virtual, b2c.32x128</strong>: Select this balanced VM for mid to large workloads, such as a database and a dynamic website with many concurrent users.</td>
 <td>32 / 128GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b2c.56x242</strong>: Select this balanced VM for large workloads, such as a database and multiple apps with many concurrent users.</td></td>
+<td><strong>Virtual, b2c.56x242</strong>: Select this balanced VM for large workloads, such as a database and multiple apps with many concurrent users.</td>
 <td>56 / 242GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, c2c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node for light workloads.</td></td>
+<td><strong>Virtual, c2c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node for light workloads.</td>
 <td>16 / 16GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light to mid-sized workloads.</td></td>
+<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light to mid-sized workloads.</td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node for mid-sized workloads.</td></td>
+<td><strong>Virtual, c2c.32x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node for mid-sized workloads.</td>
 <td>32 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads.</td></td>
+<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads.</td>
 <td>32 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
