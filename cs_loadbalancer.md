@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-10"
+lastupdated: "2019-01-14"
 
 ---
 
@@ -327,7 +327,7 @@ To set up a load balancer 2.0 in a multizone cluster:
       ```
       {: codeblock}
 
-  3. Optional: Configure a firewall by specifying the `loadBalancerSourceRanges` in the **spec** section. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+  3. Optional: Make your load balancer service available to only a limited range of IP addresses by specifying the IPs in the `spec.loadBalancerSourceRanges` field. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
   4. Create the service in your cluster.
 
@@ -458,7 +458,7 @@ To create a load balancer 2.0 service in a single-zone cluster:
         </tr>
         </tbody></table>
 
-    3.  Optional: Configure a firewall by specifying the `loadBalancerSourceRanges` in the **spec** section. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+    3.  Optional: Make your load balancer service available to only a limited range of IP addresses by specifying the IPs in the `spec.loadBalancerSourceRanges` field. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
     4.  Create the service in your cluster.
 
@@ -689,7 +689,7 @@ To set up a load balancer 1.0 service in a multizone cluster:
       ```
       {: codeblock}
 
-  3. Optional: Configure a firewall by specifying the `loadBalancerSourceRanges` in the **spec** section. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+  3. Optional: Make your load balancer service available to only a limited range of IP addresses by specifying the IPs in the `spec.loadBalancerSourceRanges` field. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
   4. Create the service in your cluster.
 
@@ -826,7 +826,7 @@ To create a load balancer 1.0 service in a single-zone cluster:
         ```
         {: codeblock}
 
-    3.  Optional: Configure a firewall by specifying the `loadBalancerSourceRanges` in the **spec** section. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+    3. Optional: Make your load balancer service available to only a limited range of IP addresses by specifying the IPs in the `spec.loadBalancerSourceRanges` field. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
     4.  Create the service in your cluster.
 
