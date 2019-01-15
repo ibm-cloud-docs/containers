@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -31,7 +34,10 @@ Você expôs publicamente seu app criando um recurso de Ingresso para seu app no
 Assegure-se de definir um host em apenas um recurso do Ingress. Se um host for definido em múltiplos recursos do Ingress, o ALB poderá não encaminhar o tráfego corretamente e poderá haver erros.
 {: tip}
 
-## Etapa 1: verificando mensagens de erro em sua implementação do Ingress e nos logs do pod do ALB
+Antes de iniciar, assegure-se de que você tenha as [políticas de acesso do {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) a seguir:
+  - A função de plataforma **Editor** ou **Administrador** para o cluster
+
+## Etapa 1: verificar mensagens de erro em sua implementação do Ingress e nos logs do pod do ALB
 {: #errors}
 
 Inicie verificando se há mensagens de erro nos eventos de implementação do recurso Ingress e nos logs do pod do ALB. Essas mensagens de erro podem ajudá-lo a localizar as causas raiz para falhas e depurar ainda mais sua configuração do Ingress nas próximas seções.
@@ -107,7 +113,7 @@ Inicie verificando se há mensagens de erro nos eventos de implementação do re
 
     4. Procure mensagens de erro nos logs do ALB.
 
-## Etapa 2: executando ping do subdomínio e endereços IP públicos do ALB
+## Etapa 2: execute ping do subdomínio ALB e endereços IP públicos
 {: #ping}
 
 Verifique a disponibilidade de seu subdomínio do Ingress e endereços IP públicos do ALB.
@@ -122,11 +128,11 @@ Verifique a disponibilidade de seu subdomínio do Ingress e endereços IP públi
     Saída de exemplo para um cluster de múltiplas zonas com nós do trabalhador em `dal10` e `dal13`:
 
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone   
-    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -                dal13   
-    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -                dal10   
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13   
-    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222    dal10  
+    ALB ID                                            Status     Type      ALB IP           Zone    Build
+    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
+    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
     ```
     {: screen}
 
@@ -134,7 +140,7 @@ Verifique a disponibilidade de seu subdomínio do Ingress e endereços IP públi
 
 2. Verifique o funcionamento de seus IPs do ALB.
 
-    * Para cluster de zona única e clusters de múltiplas zonas: execute ping do endereço IP de cada ALB público para assegurar que cada ALB esteja apto a receber pacotes com êxito. Nota: se você estiver usando ALBs privados, será possível executar ping de seus endereços IP somente na rede privada.
+    * Para cluster de zona única e clusters de múltiplas zonas: execute ping do endereço IP de cada ALB público para assegurar que cada ALB esteja apto a receber pacotes com êxito. Se você estiver usando ALBs privados, será possível executar ping de seus endereços IP somente por meio da rede privada.
         ```
         ping <ALB_IP>
         ```
@@ -143,7 +149,8 @@ Verifique a disponibilidade de seu subdomínio do Ingress e endereços IP públi
         * Se a CLI retornar um tempo limite e você tiver um firewall customizado que esteja protegendo os nós do trabalhador, certifique-se de permitir o ICMP em seu [firewall](cs_troubleshoot_clusters.html#cs_firewall).
         * Se não houver nenhum firewall que esteja bloqueando os pings e os pings ainda forem executados até o tempo limite, [verifique o status de seus pods do ALB](#check_pods).
 
-    * Somente clusters de múltiplas zonas: é possível usar a verificação de funcionamento do MZLB para determinar o status de seus IPs do ALB. Para obter mais informações sobre o MZLB, consulte [Multizone load balancer (MZLB)](cs_ingress.html#planning). **Nota**: a verificação de funcionamento do MZLB está disponível somente para clusters que têm o novo subdomínio do Ingress no formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Se seu cluster ainda usar o formato mais antigo de `<cluster_name>.<region>.containers.mybluemix.net`, [converta seu cluster de zona única para múltiplas zonas](cs_clusters.html#add_zone). Seu cluster é designado a um subdomínio com o novo formato, mas também pode continuar a usar o formato de subdomínio mais antigo. Como alternativa, é possível pedir um novo cluster que é designado automaticamente ao novo formato de subdomínio.
+    * Somente clusters de múltiplas zonas: é possível usar a verificação de funcionamento do MZLB para determinar o status de seus IPs do ALB. Para obter mais informações sobre o MZLB, consulte [Multizone load balancer (MZLB)](cs_ingress.html#planning). A verificação de funcionamento do MZLB está disponível somente para clusters que têm o novo subdomínio do Ingress no formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Se seu cluster ainda usar o formato mais antigo de `<cluster_name>.<region>.containers.mybluemix.net`, [converta seu cluster de zona única para múltiplas zonas](cs_clusters.html#add_zone). Seu cluster é designado a um subdomínio com o novo formato, mas também pode continuar a usar o formato de subdomínio mais antigo. Como alternativa, é possível pedir um novo cluster que é designado automaticamente ao novo formato de subdomínio.
+
     O comando HTTP cURL a seguir usa o host `albhealth`, que é configurado pelo {{site.data.keyword.containerlong_notm}} para retornar o status `healthy` ou `unhealthy` para um IP do ALB.
         ```
         curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
@@ -184,7 +191,7 @@ Verifique a disponibilidade de seu subdomínio do Ingress e endereços IP públi
     ```
     {: screen}
 
-## Etapa 3: verificando os mapeamentos de domínio e a configuração do recurso Ingress
+## Etapa 3: verifique os mapeamentos de domínio e a configuração de recurso do Ingress
 {: #config}
 
 1. Se você usar um domínio customizado, verifique se usou seu provedor DNS para mapear o domínio customizado para o subdomínio fornecido pela IBM ou o endereço IP público do ALB. Observe que usar um CNAME é preferencial porque a IBM fornece verificações automáticas de funcionamento no subdomínio IBM e remove os IPs com falha da resposta de DNS.
@@ -248,8 +255,8 @@ Por exemplo, vamos supor que você tenha um cluster de múltiplas zonas em 2 zon
 
     Por exemplo, o IP inatingível `169.62.196.238` pertence ao ALB `public-cr24a9f2caf6554648836337d240064935-alb1`:
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13
+    ALB ID                                            Status     Type      ALB IP           Zone   Build
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
     ```
     {: screen}
 
@@ -387,20 +394,15 @@ Ainda está tendo problemas com o seu cluster?
 {: shortdesc}
 
 -  No terminal, você é notificado quando atualizações para a CLI `ibmcloud` e plug-ins estão disponíveis. Certifique-se de manter sua CLI atualizada para que seja possível usar todos os comandos e sinalizações disponíveis.
-
 -   Para ver se o {{site.data.keyword.Bluemix_notm}} está disponível, [verifique a página de status do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/bluemix/support/#status).
 -   Poste uma pergunta no [{{site.data.keyword.containerlong_notm}} Slack ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com).
-
     Se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}}, [solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para essa Folga.
     {: tip}
 -   Revise os fóruns para ver se outros usuários tiveram o mesmo problema. Ao usar os fóruns para fazer uma pergunta, marque sua pergunta para que ela seja vista pelas equipes de desenvolvimento do {{site.data.keyword.Bluemix_notm}}.
-
     -   Se você tiver questões técnicas sobre como desenvolver ou implementar clusters ou apps com o {{site.data.keyword.containerlong_notm}}, poste sua pergunta no [Stack Overflow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo") ](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e identifique-a com `ibm-cloud`, `kubernetes` e `containers`.
     -   Para perguntas sobre o serviço e instruções de introdução, use o fórum do [IBM Developer Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `ibm-cloud` e `containers`.
     Consulte [Obtendo ajuda](/docs/get-support/howtogetsupport.html#using-avatar) para obter mais detalhes sobre o uso dos fóruns.
-
--   Entre em contato com o Suporte IBM abrindo um chamado. Para saber como abrir um chamado de suporte IBM ou sobre os níveis de suporte e as severidades de chamado, veja [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
-{: tip}
+-   Entre em contato com o Suporte IBM abrindo um caso. Para saber mais sobre como abrir um caso de suporte IBM ou sobre os níveis de suporte e as severidades do caso, consulte [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 Ao relatar um problema, inclua o ID do cluster. Para obter o ID do seu cluster, execute `ibmcloud ks clusters`.
+{: tip}
 

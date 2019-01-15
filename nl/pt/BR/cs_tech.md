@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -31,7 +34,7 @@ Construído sobre a tecnologia Linux container (LXC) existente, o projeto de sof
 Aprenda alguns conceitos básicos do Docker:
 
 <dl>
-<dt>Imagem</dt>
+<dt>Image</dt>
 <dd>Uma imagem de contêiner é a base para cada contêiner que você deseja executar. As imagens de contêiner são construídas por meio de um Dockerfile, um arquivo de texto que define como construir a imagem e quais artefatos de construção incluir nele, como o app, a configuração do app e suas dependências. As imagens sempre são construídas usando outras imagens, tornando-as rápidas de serem configuradas. Deixe alguém fazer a maior parte do trabalho em uma imagem e, em seguida, ajuste-a para seu uso.</dd>
 <dt>Registro</dt>
 <dd>Um registro de imagem é um local para armazenar, recuperar e compartilhar imagens de contêiner. As imagens que são armazenadas em um registro podem estar publicamente disponíveis (registro público) ou acessíveis por um pequeno grupo de usuários (registro privado). O {{site.data.keyword.containerlong_notm}} oferece imagens públicas, como o ibmliberty, que podem ser usadas para criar seu primeiro app conteinerizado. Quando se trata de aplicativos corporativos, use um registro privado como aquele que é fornecido no {{site.data.keyword.Bluemix_notm}} para proteger suas imagens de serem usadas por usuários não autorizados.
@@ -148,11 +151,11 @@ Qual é a diferença entre o mestre do Kubernetes e um nó do trabalhador? Feliz
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>O servidor OpenVPN funciona com o cliente OpenVPN para conectar com segurança o mestre ao nó do trabalhador. Essa conexão suporta kubectl exec, attach, logs e apiserver proxy.</td>
+    <td>O servidor OpenVPN funciona com o cliente OpenVPN para conectar com segurança o mestre ao nó do trabalhador. Essa conexão suporta chamadas `apiserver proxy` para seus pods e serviços e chamadas `kubectl exec`, `attach` e `logs` para o kubelet.</td>
     </tr>
     <tr>
     <td>etcd</td>
-    <td>etcd é um armazenamento de valores de chaves altamente disponível que armazena o estado de todos os recursos do Kubernetes de um cluster, como serviços, implementações e pods. Os dados no etcd são armazenados em um disco criptografado que é gerenciado pela IBM e submetido a backup diariamente.</td>
+    <td>etcd é um armazenamento de valores de chaves altamente disponível que armazena o estado de todos os recursos do Kubernetes de um cluster, como serviços, implementações e pods. Os dados em etcd são submetidos a backup para uma instância de armazenamento criptografada que a IBM gerencia.</td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -175,19 +178,34 @@ no cluster.</td>
     </thead>
     <tbody>
     <tr>
+    <td>ibm-master-proxy</td>
+    <td>kube-system</td>
+    <td>Para clusters que executam o Kubernetes versão 1.10 ou mais recente, o `ibm-master-proxy` encaminha solicitações do nó do trabalhador para os endereços IP das réplicas do mestre altamente disponíveis. Em clusters de zona única, o principal tem três réplicas em hosts separados com um endereço IP principal e um nome de domínio. Para clusters que estão em uma zona com capacidade para várias zonas, o mestre tem três réplicas que são difundidas entre as zonas. Dessa forma, cada mestre tem seu próprio endereço IP que é registrado com o DNS, com um nome de domínio para o cluster mestre inteiro.</td>
+    </tr>
+    <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>O cliente OpenVPN trabalha com o servidor OpenVPN para conectar com segurança o mestre ao nó do trabalhador. Essa conexão suporta kubectl exec, attach, logs e apiserver proxy.</td>
+    <td>O cliente OpenVPN trabalha com o servidor OpenVPN para conectar com segurança o mestre ao nó do trabalhador. Essa conexão suporta chamadas `apiserver proxy` para seus pods e serviços e chamadas `kubectl exec`, `attach` e `logs` para o kubelet.</td>
     </tr>
     <tr>
-    <td>calico-policy-controller</td>
+    <td>kubelet</td>
     <td>kube-system</td>
-    <td>O controlador de política do Calico observa o tráfego de rede de entrada e de saída para conformidade com as políticas de rede configuradas. Se o tráfego não for permitido no cluster, o acesso ao cluster será bloqueado. O controlador de política do Calico também é usado para criar e configurar políticas de rede para um cluster.</td>
+    <td>O kubelet é um pod que é executado em cada nó do trabalhador e é responsável por monitorar o funcionamento de pods que são executados no nó do trabalhador e por observar os eventos que o servidor de API do Kubernetes envia. Com base nos eventos, o kubelet cria ou remove pods, assegura as análises de vivacidade e prontidão e relata de volta o status dos pods para o servidor de API do Kubernetes.</td>
     </tr>
     <tr>
-    <td>Provedor de armazenamento</td>
+    <td>kube-dns</td>
     <td>kube-system</td>
-    <td>Cada cluster é configurado com um plug-in para provisionar armazenamento de arquivo. É possível escolher instalar outros complementos, como armazenamento de bloco.</td>
+    <td>O DNS do Kubernetes planeja um pod e serviço do DNS no cluster. Os contêineres usam automaticamente o IP do serviço DNS para resolver nomes do DNS em suas procuras para outros pods e serviços.</td>
+    </tr>
+    <tr>
+    <td>calico</td>
+    <td>kube-system</td>
+    <td>O Calico gerencia políticas de rede para seu cluster e compreende alguns componentes conforme a seguir.
+    <ul>
+    <li>**calico-cni**: a interface de rede de contêiner do Calico (CNI) gerencia a conectividade de rede de contêineres e remove os recursos alocados quando um contêiner é excluído.</li>
+    <li>**calico-ipam**: o Calico IPAM gerencia a designação de endereço IP para contêineres.</li>
+    <li>**calico-node**: o nó do Calico é um contêiner que agrupa os vários componentes necessários para contêineres de rede com o Calico.</li>
+    <li>**calico-policy-controller**: o controlador de política do Calico observa o tráfego de rede de entrada e de saída para conformidade com as políticas de rede configuradas. Se o tráfego não for permitido no cluster, o acesso ao cluster será bloqueado. O controlador de política do Calico também é usado para criar e configurar políticas de rede para um cluster.</li></ul></td>
     </tr>
     <tr>
     <td>kube-proxy</td>
@@ -197,12 +215,7 @@ no cluster.</td>
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>O painel do Kubernetes é uma UI baseada na web que permite que os usuários gerenciem e solucionem problemas do cluster e aplicativos em execução no cluster.</td>
-    </tr>
-    <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>O DNS do Kubernetes planeja um pod e serviço do DNS no cluster. Os contêineres usam automaticamente o IP do serviço DNS para resolver nomes do DNS em suas procuras para outros pods e serviços.</td>
+    <td>O painel do Kubernetes é uma GUI baseada na web que permite que os usuários gerenciem e solucionem problemas do cluster e aplicativos em execução no cluster.</td>
     </tr>
     <tr>
     <td>heapster</td>
@@ -210,19 +223,19 @@ no cluster.</td>
     <td>O Heapster é um agregador em todo o cluster de monitoramento e dados do evento. O pod Heapster descobre todos os nós no cluster e consulta as informações de uso do kubelet de cada nó. É possível localizar gráficos de utilização no painel do Kubernetes.</td>
     </tr>
     <tr>
-    <td>calico-node</td>
+    <td>ALB do Ingresso</td>
     <td>kube-system</td>
-    <td>O nó Calico é um contêiner que empacota os vários componentes necessários para integrar em rede os contêineres com o Calico.</td>
+    <td>O Ingresso é um serviço do Kubernetes que pode ser usado para balancear cargas de trabalho do tráfego de rede em seu cluster, encaminhando solicitações públicas ou privadas para múltiplos apps em seu cluster. Para expor seus apps por meio da rede pública ou privada, deve-se criar um recurso Ingresso para registrar seus apps com o balanceador de carga do aplicativo (ALB) de ingresso. Múltiplos apps podem então ser acessados usando uma única URL ou endereço IP.</td>
+    </tr>
+    <tr>
+    <td>Provedor de armazenamento</td>
+    <td>kube-system</td>
+    <td>Cada cluster é configurado com um plug-in para provisionar armazenamento de arquivo. É possível escolher instalar outros complementos, como armazenamento de bloco.</td>
     </tr>
     <tr>
     <td>Criação de Log e Métricas</td>
     <td>ibm-system</td>
     <td>É possível usar os serviços integrados {{site.data.keyword.loganalysislong_notm}} e {{site.data.keyword.monitoringlong_notm}} para expandir seus recursos de coleção e retenção ao trabalhar com logs e métricas.</td>
-    </tr>
-    <tr>
-    <td>ALB do Ingresso</td>
-    <td>ibm-system</td>
-    <td>O Ingresso é um serviço do Kubernetes que pode ser usado para balancear cargas de trabalho do tráfego de rede em seu cluster, encaminhando solicitações públicas ou privadas para múltiplos apps em seu cluster. Para expor seus apps por meio da rede pública ou privada, deve-se criar um recurso Ingresso para registrar seus apps com o balanceador de carga do aplicativo (ALB) de ingresso. Múltiplos apps podem então ser acessados usando uma única URL ou endereço IP.</td>
     </tr>
     <tr>
     <td>Equilibrador de carga</td>
@@ -233,21 +246,6 @@ no cluster.</td>
     <td>Pods e serviços de app</td>
     <td>padrão</td>
     <td>No namespace <code>default</code> ou em namespaces que você cria, é possível implementar apps em pods e serviços para se comunicar com esses pods.</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>n/d</td>
-    <td>O container network interface (CNI) do Calico gerencia a conectividade de rede de contêineres e remove os recursos alocados quando um contêiner é excluído.</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>n/d</td>
-    <td>O IPAM do Calico gerencia a designação de endereço IP para contêineres.</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>n/d</td>
-    <td>O kubelet é um pod que é executado em cada nó do trabalhador e é responsável por monitorar o funcionamento de pods que são executados no nó do trabalhador e por observar os eventos que o servidor de API do Kubernetes envia. Com base nos eventos, o kubelet cria ou remove pods, assegura as análises de vivacidade e prontidão e relata de volta o status dos pods para o servidor de API do Kubernetes.</td>
     </tr>
     </tbody></table></dd>
 </dl>

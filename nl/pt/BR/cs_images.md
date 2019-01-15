@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -90,7 +93,8 @@ Ao criar um cluster, segredos e tokens de registro sem expiração são criados 
 
 Cada token deve ser armazenado em um `imagePullSecret` do Kubernetes para que ele seja acessível para um cluster do Kubernetes quando você implementa um app conteinerizado. Quando o cluster é criado, o {{site.data.keyword.containerlong_notm}} armazena automaticamente os tokens para os registros globais (imagens públicas fornecidas pela IBM) e regionais nos segredos de pull de imagem do Kubernetes. Os segredos de pull de imagem são incluídos no namespace do Kubernetes `default`, na lista padrão de segredos no `ServiceAccount` para esse namespace e no namespace `kube-system`.
 
-**Nota:** ao usar essa configuração inicial, será possível implementar contêineres de qualquer imagem que estiver disponível em um namespace na conta do {{site.data.keyword.Bluemix_notm}} no namespace **padrão** do cluster. Para implementar um contêiner em outros namespaces de seu cluster ou para usar uma imagem que está armazenada em outra região do {{site.data.keyword.Bluemix_notm}} ou em outra conta do {{site.data.keyword.Bluemix_notm}}, deve-se [criar seu próprio imagePullSecret para o cluster](#other).
+Usando essa configuração inicial, é possível implementar contêineres de qualquer imagem que esteja disponível em um namespace em sua conta do {{site.data.keyword.Bluemix_notm}} no namespace **padrão** de seu cluster. Para implementar um contêiner em outros namespaces de seu cluster ou para usar uma imagem que está armazenada em outra região do {{site.data.keyword.Bluemix_notm}} ou em outra conta do {{site.data.keyword.Bluemix_notm}}, deve-se [criar seu próprio imagePullSecret para o cluster](#other).
+{: note}
 
 Deseja tornar as credenciais de registro ainda mais seguras? Peça ao administrador de cluster para [ativar o {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect) em seu cluster para criptografar segredos do Kubernetes em seu cluster, como o `imagePullSecret` que armazena suas credenciais de registro.
 {: tip}
@@ -204,7 +208,7 @@ Se você já tiver criado um imagePullSecret em seu namespace que queira usar em
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
-   
+
    ```
    kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -29,6 +32,7 @@ aproveitar de analítica para insights de mercado, implementações multiregion 
 {: #uc_data-share}
 
 Um Exec de Linha de Negócios (LOB) precisa aumentar os canais de vendas, mas o sistema de varejo é encerrado em um data center no local. A competição tem parceiros globais para permutações de venda cruzada e venda ampliada de suas mercadorias: no brick-and-mortar e em sites on-line. 
+{: shortdesc}
 
 Por que o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_notm}} fornece um ecossistema de nuvem pública, em que os contêineres permitem que novos parceiros e outros participantes externos desenvolvam em conjunto apps e dados por meio de APIs. Agora que o sistema de varejo está na nuvem pública, as APIs também aperfeiçoam o compartilhamento de dados e iniciam o novo desenvolvimento de app. As implementações de app aumentam quando os Desenvolvedores experimentam facilmente, enviando por push as mudanças para os sistemas de Desenvolvimento e Teste rapidamente com cadeias de ferramentas. 
 
@@ -55,7 +59,7 @@ A solução é composta por estes componentes primários:
 * VENDAS CRUZADAS E AMPLIADAS: app que exibe as oportunidades de venda cruzada e de venda ampliada com APIs que podem ser usadas em vários apps de e-commerce e móveis
 * AMBIENTE DE DESENVOLVIMENTO: os clusters do Kubernetes para sistemas de Desenvolvimento, Teste e Produção aumentam a colaboração e o compartilhamento de dados entre o varejista e seus parceiros
 
-Para que o varejista trabalhe com parceiros globais, as APIs de inventário exigiram mudanças para ajustar às preferências de idioma e mercado de cada região. O {{site.data.keyword.containerlong_notm}} oferece cobertura em múltiplas regiões, incluindo América do Norte, Europa, Ásia e Austrália, para que as APIs reflitam as necessidades de cada país e com baixa latência.
+Para que o varejista trabalhe com parceiros globais, as APIs de inventário exigiram mudanças para ajustar às preferências de idioma e mercado de cada região. O {{site.data.keyword.containerlong_notm}} oferece cobertura em múltiplas regiões, incluindo América do Norte, Europa, Ásia e Austrália, para que as APIs reflitam as necessidades de cada país e assegurem a baixa latência para chamadas API.
 
 Outro requisito é que os dados do inventário devem ser compartilháveis com os clientes dos parceiros e da empresa. Com as APIs de inventário, os Desenvolvedores podem obter informações em apps, como apps de inventário de dispositivo móvel ou soluções de e-commerce da web. Os Desenvolvedores também estão ocupados com a construção e a manutenção do site de e-commerce primário. Em resumo, eles precisam focar na codificação em vez de gerenciar a infraestrutura. 
 
@@ -101,7 +105,7 @@ Solução Técnica:
 * O {{site.data.keyword.containerlong_notm}} fornece fácil lançamento e retrocesso de apps; os apps customizados são implementados para testar campanhas por meio do roteamento e o balanceamento de carga inteligentes do Istio. 
 
 ** Resultados **
-* Os microsserviços reduzem muito o tempo de entrega de correções, correções de bug e novos recursos. O desenvolvimento de WW inicial é rápido e as atualizações são tão frequentes quanto 40 vezes por semana.
+* Os microsserviços reduzem muito o tempo de entrega de correções, correções de bug e novos recursos. O desenvolvimento mundial inicial é rápido, e as atualizações são tão frequentes quanto 40 vezes por semana.
 * O varejista e seus parceiros têm acesso imediato à disponibilidade de inventário e aos planejamentos de entrega, usando as APIs. 
 * Com as ferramentas {{site.data.keyword.containerlong_notm}} e IBM CI e CD, as versões A-B de apps estão prontas para campanhas de teste. 
 * O {{site.data.keyword.containerlong_notm}} fornece cálculo escalável, para que o inventário e as cargas de trabalho da API de vendas cruzadas possam crescer durante períodos de alto volume do ano, como os feriados de outono. 
@@ -110,6 +114,7 @@ Solução Técnica:
 {: #uc_grocer}
 
 Um Diretor de Marketing (CMO) precisa aumentar o tráfego de clientes em 20% nas lojas, tornando as lojas um recurso diferenciado. Os grandes concorrentes de varejo e os varejistas on-line estão roubando vendas. Ao mesmo tempo, a CMO precisa reduzir o inventário sem redução de preço porque manter o inventário por muito tempo empata milhões em capital.
+{: shortdesc}
 
 Por que o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_notm}} fornece fácil aceleração de mais cálculo, em que os Desenvolvedores incluem serviços de análise de nuvem rapidamente para insights de comportamento de vendas e adaptabilidade de mercado digital. 
 

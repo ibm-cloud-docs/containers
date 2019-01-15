@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -21,6 +24,7 @@ lastupdated: "2018-10-25"
 {: #policy_tutorial}
 
 Por padrão, os serviços NodePort, LoadBalancer e Ingresso do Kubernetes disponibilizam o seu app em todas as interfaces de rede de cluster pública e privada. A política padrão do Calico `allow-node-port-port-dnat` permite o tráfego recebido dos serviços de porta de nó, balanceador de carga e Ingress para os pods de app que esses serviços expõem. O Kubernetes usa a conversão de endereço de rede de destino (DNAT) para encaminhar as solicitações de serviço para os pods corretos.
+{: shortdesc}
 
 No entanto, por razões de segurança, pode ser necessário permitir o tráfego para os serviços de rede somente de determinados endereços IP de origem. É possível usar as [políticas pré-DNAT do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo") ](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) para incluir na lista de desbloqueio ou lista de bloqueio o tráfego de/para determinados endereços IP. As políticas pré-DNAT evitam que o tráfego especificado atinja seus apps porque elas são aplicadas antes que o Kubernetes use DNAT regular para encaminhar tráfego para os pods. Ao criar políticas pré-DNAT do Calico, você escolhe se deseja incluir na lista de desbloqueio ou lista de bloqueio os endereços IP de origem. Para a maioria dos cenários, a lista de aplicativos confiáveis fornece a configuração mais segura porque todo o tráfego está bloqueado, exceto o tráfego de endereços IP de origem conhecidos e permitidos. A listagem negra é geralmente útil somente em cenários, tais como, evitar um ataque de um pequeno conjunto de endereços IP.
 
@@ -40,10 +44,11 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 
 ## Pré-requisitos
 
-- [Crie um cluster da versão 1.10](cs_clusters.html#clusters_ui) ou [atualize um cluster existente para a versão 1.10](cs_versions.html#cs_v110). Um cluster do Kubernetes versão 1.10 ou mais recente é necessário para usar a CLI do Calico 3.1.1 e a sintaxe de política do Calico v3 neste tutorial.
+- [Crie um cluster da versão 1.10 ou mais recente](cs_clusters.html#clusters_ui) ou [atualize um cluster existente para a versão 1.10](cs_versions.html#cs_v110). Um cluster do Kubernetes versão 1.10 ou mais recente é necessário para usar a sintaxe de política 3.3.1 Calico CLI e Calico v3 neste tutorial.
 - [Destinar sua CLI para o cluster](cs_cli_install.html#cs_cli_configure).
 - [Instale e configure a CLI do Calico](cs_network_policy.html#1.10_install).
-- [Certifique-se de que você tenha a função de plataforma **Editor**, **Operador** ou **Administrador**](cs_users.html#add_users_cli).
+- Assegure-se de que tenha as políticas de acesso do IAM do {{site.data.keyword.Bluemix_notm}} para o {{site.data.keyword.containerlong_notm}}:
+    - [Qualquer função de plataforma](cs_users.html#platform)
 
 <br />
 
@@ -54,7 +59,10 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 A primeira lição mostra como seu app é exposto por meio de múltiplos endereços IP e portas e onde o tráfego público está chegando em seu cluster.
 {: shortdesc}
 
-Inicie implementando um app de servidor da web de amostra para usar em todo o tutorial. O servidor da web `echoserver` mostra dados sobre a conexão que está sendo feita com o cluster por meio do cliente e permite que você teste o acesso ao cluster da firma PR. Em seguida, exponha o app criando um serviço de balanceador de carga. Um serviço de balanceador de carga disponibiliza seu app no endereço IP do serviço de balanceador de carga e nas portas de nó dos nós do trabalhador.
+Inicie implementando um app de servidor da web de amostra para usar em todo o tutorial. O servidor da web `echoserver` mostra dados sobre a conexão que está sendo feita com o cluster por meio do cliente e permite que você teste o acesso ao cluster da firma PR. Em seguida, exponha o app, criando um serviço de balanceador de carga 2.0. Um serviço do balanceador de carga 2.0 torna seu app disponível por meio do endereço IP do serviço do balanceador de carga e das portas do nó dos nós do trabalhador.
+
+Deseja usar um [Balanceador de carga do aplicativo (ALB) Ingress](cs_ingress.html) no lugar? Ignore a criação do balanceador de carga nas etapas 3 e 4. Em vez disso, obtenha os IPs públicos de seus ALBs ao executar `ibmcloud ks albs --cluster <cluster_name>` e use esses IPs em todo o tutorial no lugar do `<loadbalancer_IP>.`
+{: tip}
 
 A imagem a seguir mostra como o app de servidor da web será exposto à Internet pela porta de nó público e pelo balanceador de carga público no término da Lição 1:
 
@@ -81,7 +89,7 @@ A imagem a seguir mostra como o app de servidor da web será exposto à Internet
     ```
     {: screen}
 
-3. Para expor o app à Internet pública, crie um arquivo de configuração do serviço de balanceador de carga chamado `webserver-lb.yaml` em um editor de texto.
+3. Para expor o app à Internet pública, crie um arquivo de configuração do serviço de balanceador de carga 2.0 chamado `webserver-lb.yaml` em um editor de texto.
     ```
     apiVersion: v1
     kind: Service
@@ -89,16 +97,18 @@ A imagem a seguir mostra como o app de servidor da web será exposto à Internet
       labels:
         run: webserver
       name: webserver-lb
+      annotations:
+        service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
     spec:
-      externalTrafficPolicy: Cluster
+      type: LoadBalancer
+      selector:
+        run: webserver
       ports:
       - name: webserver-port
         port: 80
         protocol: TCP
         targetPort: 8080
-      selector:
-        run: webserver
-      type: LoadBalancer
+      externalTrafficPolicy: Local
     ```
     {: codeblock}
 
@@ -177,9 +187,9 @@ A imagem a seguir mostra como o app de servidor da web será exposto à Internet
         Saída de exemplo:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
         ```
         {: screen}
 
@@ -224,7 +234,7 @@ Em seguida, é possível iniciar a criação e aplicação de políticas do Cali
 
 Para proteger o cluster da firma PR, deve-se bloquear o acesso público ao serviço de balanceador de carga e às portas de nó que estão expondo seu app. Inicie bloqueando o acesso às portas de nó. A imagem a seguir mostra como o tráfego será permitido para o balanceador de carga, mas não para as portas de nó no término da Lição 2:
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="No término da Lição 2, o app de servidor da web é exposto à Internet somente pelo balanceador de carga público." style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="No término da Lição 2, o app do servidor da web é exposto à Internet somente pelo balanceador de carga público." style="width:425px; border-style: none"/>
 
 1. Em um editor de texto, crie uma política pré-DNAT de alta ordem chamada `deny-nodeports.yaml` para negar o tráfego TCP e UDP recebido de qualquer IP de origem para todas as portas de nó.
     ```
@@ -234,13 +244,19 @@ Para proteger o cluster da firma PR, deve-se bloquear o acesso público ao servi
       name: deny-nodeports
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny destination: ports:
           - 30000:32767
             protocol: TCP
             source: {}
       - action: Deny destination: ports:
-          - 30000:32767 protocol: UDP source: {} preDNAT: true selector: ibm.role=='worker_public' order: 1100 types:
+          - 30000:32767
+        protocol: UDP
+        source: {}
+      selector: ibm.role=='worker_public'
+      order: 1100
+      types:
       - Entrada
     ```
     {: codeblock}
@@ -277,13 +293,7 @@ Para proteger o cluster da firma PR, deve-se bloquear o acesso público ao servi
     ```
     {: screen}
 
-4. Mude o externalTrafficPolicy do balanceador de carga que você criou na lição anterior de `Cluster` para `Local`. `Local` assegura que o IP de origem de seu sistema seja preservado ao efetuar curl do IP externo do balanceador de carga na próxima etapa.
-    ```
-    Correção kubectl patch svc webserver-lb -p '{ }'
-    ```
-    {: pre}
-
-5. Usando o valor de sua folha de dicas, verifique se ainda é possível acessar publicamente o endereço IP externo do balanceador de carga.
+4. Usando o valor de sua folha de dicas, verifique se ainda é possível acessar publicamente o endereço IP externo do balanceador de carga.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -314,7 +324,7 @@ Para proteger o cluster da firma PR, deve-se bloquear o acesso público ao servi
     {: screen}
     Na seção `Request Information` da saída, observe que o endereço IP de origem é, por exemplo, `client_address=1.1.1.1`. O endereço IP de origem é o IP público do sistema que você está usando para executar curl. Caso contrário, se você estiver se conectando à Internet por meio de um proxy ou uma VPN, o proxy ou a VPN poderá estar obscurecendo o endereço IP real do seu sistema. Em qualquer um dos casos, o balanceador de carga vê o endereço IP de origem do seu sistema como o endereço IP do cliente.
 
-6. Copie o endereço IP de origem do seu sistema (`client_address=1.1.1.1` na saída de etapa anterior) em sua folha de dicas para usar em lições posteriores.
+5. Copie o endereço IP de origem do seu sistema (`client_address=1.1.1.1` na saída de etapa anterior) em sua folha de dicas para usar em lições posteriores.
 
 Ótimo! Neste momento, seu app é exposto à Internet pública somente por meio da porta do balanceador de carga público. O tráfego para as portas de nó público está bloqueado. Você bloqueou parcialmente seu cluster contra tráfego indesejado.
 
@@ -327,9 +337,10 @@ Agora você decide bloquear completamente o tráfego para o cluster da firma PR 
 {: shortdesc}
 
 Primeiro, além das portas de nó, deve-se bloquear todo o tráfego recebido para o balanceador de carga que expõe o app. Em seguida, é possível criar uma política que inclua na lista de desbloqueio o endereço IP do sistema. No término da Lição 3, todo o tráfego para as portas de nó público e o balanceador de carga será bloqueado e somente o tráfego de seu IP do sistema incluído na lista de desbloqueio será permitido:
-<img src="images/cs_tutorial_policies_L3.png" width="600" alt="O app de servidor da web é exposto pelo balanceador de carga público somente para seu IP do sistema." style="width:600px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L3.png" width="550" alt="O app de servidor da web é exposto pelo balanceador de carga público somente para seu IP do sistema." style="width:500px; border-style: none"/>
 
 1. Em um editor de texto, crie uma política pré-DNAT de alta ordem chamada `deny-lb-port-80.yaml` para negar todo o tráfego TCP e UDP recebido de qualquer IP de origem para o endereço IP e porta do balanceador de carga. Substitua `<loadbalancer_IP>` pelo endereço IP público do balanceador de carga de sua folha de dicas.
+
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -337,6 +348,7 @@ Primeiro, além das portas de nó, deve-se bloquear todo o tráfego recebido par
       name: deny-lb-port-80
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - ação: negar destino: redes:
           - <loadbalancer_IP>/32 portas:
@@ -348,9 +360,8 @@ Primeiro, além das portas de nó, deve-se bloquear todo o tráfego recebido par
           - 80
         protocol: UDP
         source: {}
-      preDNAT: true
       selector: ibm.role=='worker_public'
-      order: 1100
+      order: 800
       types:
       - Entrada
     ```
@@ -379,19 +390,13 @@ Primeiro, além das portas de nó, deve-se bloquear todo o tráfego recebido par
 
 4. Em um editor de texto, crie uma política pré-DNAT de baixa ordem chamada `whitelist.yaml` para permitir o tráfego do IP de seu sistema para o endereço IP e porta do balanceador de carga. Usando os valores de sua folha de dicas, substitua `<loadbalancer_IP>` com o endereço IP público do balanceador de carga e `<client_address>` com o endereço IP público do IP de origem do seu sistema.
     ```
-    apiVersion: projectcalico.org/v3
-    kind: GlobalNetworkPolicy
-    metadata:
-      name: whitelist
-    spec:
-      applyOnForward: true
-      ingress:
+    apiVersion: projectcalico.org/v3 kind: GlobalNetworkPolicy metadata: name: whitelist spec: applyOnForward: true doNotTrack: true ingress:
       - action: Allow
         destination:
           nets:
           - <loadbalancer_IP>/32 portas:
           - 80 protocol: TCP source: nets:
-          - <client_address>/32 preDNAT: seletor true: ibm.role=='worker_public' pedido: 500 tipos:
+          - <client_address>/32 selector: ibm.role=='worker_public' order: 500 types:
       - Entrada
     ```
     {: codeblock}
@@ -433,7 +438,7 @@ Neste momento, todo o tráfego para as portas de nó e o balanceador de carga p�
 Na lição anterior, você bloqueou todo o tráfego e incluiu na lista de desbloqueio somente alguns IPs. Esse cenário funciona bem para propósitos de teste quando você deseja limitar o acesso a somente alguns endereços IP de origem controlada. No entanto, a firma PR tem apps que precisam estar amplamente disponíveis para o público. É necessário certificar-se de que todo o tráfego seja permitido, exceto o tráfego incomum que você está vendo de alguns endereços IP. A listagem negra é útil em um cenário como este porque pode ajudar a evitar um ataque de um pequeno conjunto de endereços IP.
 
 Nesta lição, você testará a listagem negra bloqueando o tráfego do endereço IP de origem de seu próprio sistema. No término da Lição 4, todo o tráfego para as portas de nó público será bloqueado e todo o tráfego para o balanceador de carga público será permitido. Somente o tráfego de seu IP do sistema incluído na lista de bloqueio para o balanceador de carga será bloqueado:
-<img src="images/cs_tutorial_policies_L4.png" width="600" alt="O app de servidor da web é exposto pelo balanceador de carga público à Internet. Somente o tráfego de seu IP do sistema é bloqueado." style="width:600px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="O app de servidor da web é exposto pelo balanceador de carga público à Internet. Somente o tráfego de seu IP do sistema é bloqueado." style="width:550px; border-style: none"/>
 
 1. Limpe as políticas de lista de desbloqueio que você criou na lição anterior.
     - Linux:
@@ -458,7 +463,7 @@ Nesta lição, você testará a listagem negra bloqueando o tráfego do endereç
 
     Agora, todo o tráfego TCP e UDP recebido de qualquer IP de origem para o endereço IP e a porta do balanceador de carga é permitido novamente.
 
-2. Para negar todo o tráfego TCP e UDP recebido do endereço IP de origem de seu sistema para o endereço IP e a porta do balanceador de carga, crie uma política pré-DNAT de baixa ordem chamada `deny-lb-port-80.yaml` em um editor de texto. Usando os valores de sua folha de dicas, substitua `<loadbalancer_IP>` com o endereço IP público do balanceador de carga e `<client_address>` com o endereço IP público do IP de origem do seu sistema.
+2. Para negar todo o tráfego TCP e UDP recebido do endereço IP de origem do seu sistema para o endereço IP e porta do balanceador de carga, crie uma política pré-DNAT de baixa ordem chamada `blacklist.yaml` em um editor de texto. Usando os valores de sua folha de dicas, substitua `<loadbalancer_IP>` com o endereço IP público do balanceador de carga e `<client_address>` com o endereço IP público do IP de origem do seu sistema.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -466,6 +471,7 @@ Nesta lição, você testará a listagem negra bloqueando o tráfego do endereç
       name: blacklist
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - ação: negar destino: redes:
           - <loadbalancer_IP>/32 portas:
@@ -477,7 +483,7 @@ Nesta lição, você testará a listagem negra bloqueando o tráfego do endereç
         protocol: UDP
         source:
           nets:
-          - <client_address>/32 preDNAT: seletor true: ibm.role=='worker_public' pedido: 500 tipos:
+          - <client_address>/32 selector: ibm.role=='worker_public' order: 500 types:
       - Entrada
     ```
     {: codeblock}

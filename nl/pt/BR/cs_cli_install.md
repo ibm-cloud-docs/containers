@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -56,7 +59,8 @@ Para instalar as CLIs:
     ```
     {: pre}
 
-    **Nota:** se você tiver um ID federado, use `ibmcloud login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
+    Se você tiver um ID federado, use `ibmcloud login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
+    {: tip}
 
 3.  Para criar clusters do Kubernetes e gerenciar nós do trabalhador, instale o plug-in do {{site.data.keyword.containerlong_notm}}. O prefixo para executar comandos usando o plug-in do {{site.data.keyword.containerlong_notm}} é `ibmcloud ks`.
 
@@ -76,11 +80,14 @@ Para instalar as CLIs:
 
 4.  {: #kubectl}Para visualizar uma versão local do painel do Kubernetes e implementar apps em seus clusters, [instale a CLI do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). O prefixo para executar comandos usando o Kubernetes CLI é `kubectl`.
 
-    1.  Faça download da versão `major.minor` da CLI do Kubernetes que corresponda à versão `major.minor` do cluster do Kubernetes que você planeja usar. A versão atual do Kubernetes padrão do {{site.data.keyword.containerlong_notm}} é 1.10.8. **Nota**: se você usar uma versão da CLI `kubectl` que não corresponda pelo menos à versão `major.minor` de seus clusters, poderá ter resultados inesperados. Certifique-se de manter as versões de cluster e de CLI do Kubernetes atualizadas.
+    1.  Faça download da versão `major.minor` da CLI do Kubernetes que corresponda à versão `major.minor` do cluster do Kubernetes que você planeja usar. A versão atual do Kubernetes padrão do {{site.data.keyword.containerlong_notm}} é 1.10.11.
 
-        - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl)
-        - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl)
-        - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe)
+        Se você usar uma versão da CLI `kubectl` que não corresponda pelo menos à versão `major.minor` de seus clusters, poderá ter resultados inesperados. Certifique-se de manter as versões de cluster e de CLI do Kubernetes atualizadas.
+        {: note}
+
+        - **S.O X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe)
 
     2.  **Para OSX e Linux**: conclua as etapas a seguir.
         1.  Mova o arquivo executável para o diretório `/usr/local/bin`.
@@ -137,7 +144,7 @@ Para obter informações de referência sobre essas CLIs, veja a documentação 
 -   [Comandos `ibmcloud`](../cli/reference/ibmcloud/bx_cli.html#ibmcloud_cli)
 -   [ Comandos ` ibmcloud ks `  ](cs_cli_reference.html#cs_cli_reference)
 -   [Comandos `kubectl` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/kubectl/overview/)
--   [ Comandos ` ibmcloud cr `  ](/docs/cli/plugins/registry/index.html)
+-   [comandos `ibmcloud cr`](/docs/container-registry-cli-plugin/container-registry-cli.html#containerregcli)
 
 <br />
 
@@ -178,9 +185,13 @@ Antes de iniciar, [instale o Docker ![Ícone de link externo](../icons/launch-gl
 É possível usar os comandos que são fornecidos com a CLI do Kubernetes para gerenciar clusters no {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
-Todos os comandos `kubectl` que estão disponíveis no Kubernetes 1.10.8 são suportados para uso com clusters no {{site.data.keyword.Bluemix_notm}}. Após criar um cluster, configure o contexto para sua CLI local para esse cluster com uma variável de ambiente. Então, é possível executar os comandos `kubectl` do Kubernetes para trabalhar com o seu cluster no {{site.data.keyword.Bluemix_notm}}.
+Todos os comandos `kubectl` que estão disponíveis no Kubernetes 1.10.11 são suportados para uso com clusters no {{site.data.keyword.Bluemix_notm}}. Após criar um cluster, configure o contexto para sua CLI local para esse cluster com uma variável de ambiente. Então, é possível executar os comandos `kubectl` do Kubernetes para trabalhar com o seu cluster no {{site.data.keyword.Bluemix_notm}}.
 
-Antes de poder executar comandos `kubectl`, [instale as CLIs necessárias](#cs_cli_install) e [crie um cluster](cs_clusters.html#clusters_cli).
+Antes de poder executar os comandos `kubectl`:
+* [ Instale as CLIs necessárias ](#cs_cli_install).
+* [Crie um cluster](cs_clusters.html#clusters_cli).
+
+Para usar os comandos `kubectl`:
 
 1.  Efetue login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira suas credenciais do {{site.data.keyword.Bluemix_notm}} quando solicitadas. Para especificar uma região do {{site.data.keyword.Bluemix_notm}}, [inclua o terminal de API](cs_regions.html#bluemix_regions).
 
@@ -189,26 +200,31 @@ Antes de poder executar comandos `kubectl`, [instale as CLIs necessárias](#cs_c
     ```
     {: pre}
 
-    **Nota:** se você tiver um ID federado, use `ibmcloud login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
+    Se você tiver um ID federado, use `ibmcloud login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
+    {: tip}
 
 2.  Selecione uma conta do {{site.data.keyword.Bluemix_notm}}. Se você estiver designado para múltiplas organizações do {{site.data.keyword.Bluemix_notm}}, selecione a organização na qual o cluster foi criado. Os clusters são específicos para uma organização, mas são independentes de um espaço do {{site.data.keyword.Bluemix_notm}}. Portanto, não é necessário selecionar um espaço.
 
-3. Para criar e trabalhar com clusters em um grupo de recursos diferente do padrão, destine esse grupo de recursos. **Nota**: deve-se ter [acesso **Visualizador**](cs_users.html#platform) para o grupo de recursos.
+3.  Para criar e trabalhar com clusters em um grupo de recursos diferente do padrão, destine esse grupo de recursos. Para ver o grupo de recursos ao qual cada cluster pertence, execute `ibmcloud ks clusters`. **Nota**: deve-se ter [acesso **Visualizador**](cs_users.html#platform) para o grupo de recursos.
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {: pre}
 
-3.  Para criar ou acessar clusters do Kubernetes em uma região diferente da região do {{site.data.keyword.Bluemix_notm}} que você selecionou anteriormente, execute `ibmcloud ks region-set`.
+4.  Para criar ou acessar clusters do Kubernetes em uma região diferente da região do {{site.data.keyword.Bluemix_notm}} que você selecionou anteriormente, destinar a região.
+    ```
+    ibmcloud ks region-set
+    ```
+    {: pre}
 
-4.  Liste todos os clusters na conta para obter o nome do cluster.
+5.  Liste todos os clusters na conta para obter o nome do cluster.
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-5.  Configure o cluster criado como o contexto para esta sessão. Conclua estas etapas de configuração toda vez que você trabalhar com o seu cluster.
+6.  Configure o cluster criado como o contexto para esta sessão. Conclua estas etapas de configuração toda vez que você trabalhar com o seu cluster.
     1.  Obtenha o comando para configurar a variável de ambiente e fazer download dos arquivos de configuração do Kubernetes.
 
         ```
@@ -245,7 +261,7 @@ Antes de poder executar comandos `kubectl`, [instale as CLIs necessárias](#cs_c
         ```
         {: screen}
 
-6.  Verifique se os comandos `kubectl` são executados adequadamente com seu cluster verificando a versão do servidor de CLI do Kubernetes.
+7.  Verifique se os comandos `kubectl` são executados adequadamente com seu cluster verificando a versão do servidor de CLI do Kubernetes.
 
     ```
     kubectl version  --short
@@ -255,7 +271,7 @@ Antes de poder executar comandos `kubectl`, [instale as CLIs necessárias](#cs_c
     Saída de exemplo:
 
     ```
-    Versão do cliente: v1.10.8 Versão do servidor: v1.10.8
+    Versão do cliente: v1.10.11 Versão do servidor: v1.10.11
     ```
     {: screen}
 
@@ -277,7 +293,7 @@ Esta tarefa inclui as informações para atualizar essas CLIs.
 
 -   {{site.data.keyword.Bluemix_notm}}  CLI versão 0.8.0 ou mais recente
 -   Plug-in do {{site.data.keyword.containerlong_notm}}
--   CLI do Kubernetes versão 1.10.8 ou mais recente
+-   CLI do Kubernetes versão 1.10.11 ou mais recente
 -   Plug-in do {{site.data.keyword.registryshort_notm}}
 
 <br>
@@ -292,7 +308,8 @@ Para atualizar as CLIs:
     ```
     {: pre}
 
-     **Nota:** se você tiver um ID federado, use `ibmcloud login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
+     Se você tiver um ID federado, use `ibmcloud login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
+     {: tip}
 
 3.  Atualize o plug-in {{site.data.keyword.containerlong_notm}}.
     1.  Instale a atualização do repositório do plug-in do {{site.data.keyword.Bluemix_notm}}.
@@ -352,7 +369,7 @@ Esta tarefa inclui as informações para remover estas CLIs:
 -   Plug-in do {{site.data.keyword.containerlong_notm}}
 -   Kubernetes CLI
 -   Plug-in do {{site.data.keyword.registryshort_notm}}
-<br>
+
 Para desinstalar as CLIs:
 
 1.  Desinstale o plug-in do {{site.data.keyword.containerlong_notm}}.
@@ -389,10 +406,10 @@ Para desinstalar as CLIs:
 
 A API do {{site.data.keyword.containerlong_notm}} requer informações do cabeçalho que devem ser fornecidas na solicitação de API e que podem variar, dependendo da API que você deseja usar. Para determinar quais informações do cabeçalho são necessárias para sua API, consulte a [documentação da API do {{site.data.keyword.containerlong_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-api).
 
+Para se autenticar com o {{site.data.keyword.containerlong_notm}}, deve-se fornecer um token do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) que é gerado com suas credenciais do {{site.data.keyword.Bluemix_notm}} e que inclui o ID da conta do {{site.data.keyword.Bluemix_notm}} em que o cluster foi criado. Dependendo da maneira que você autenticar com o {{site.data.keyword.Bluemix_notm}}, será possível escolher entre as opções a seguir para automatizar a criação de seu token do {{site.data.keyword.Bluemix_notm}} IAM.
+
 Também é possível usar o [arquivo JSON do swagger de API ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.bluemix.net/swagger-api-json) para gerar um cliente que possa interagir com a API como parte de seu trabalho de automação.
 {: tip}
-
-**Nota:** para autenticar com o {{site.data.keyword.containerlong_notm}}, deve-se fornecer um token Identity and Access Management (IAM) que é gerado com suas credenciais do {{site.data.keyword.Bluemix_notm}} e que inclui o ID da conta do {{site.data.keyword.Bluemix_notm}} na qual o cluster foi criado. Dependendo da maneira que se autenticar com o {{site.data.keyword.Bluemix_notm}}, será possível escolher entre as opções a seguir para automatizar a criação de seu token IAM.
 
 <table>
 <caption>Tipos de ID e opções</caption>
@@ -403,16 +420,16 @@ Também é possível usar o [arquivo JSON do swagger de API ![Ícone de link ext
 <tbody>
 <tr>
 <td>ID não federado</td>
-<td><ul><li><strong>Nome do usuário e senha do {{site.data.keyword.Bluemix_notm}}:</strong> é possível seguir as etapas neste tópico para automatizar totalmente a criação de seu token de acesso IAM.</li>
-<li><strong>Gerar uma chave API do {{site.data.keyword.Bluemix_notm}}:</strong> como uma alternativa ao uso de nome do usuário e senha do {{site.data.keyword.Bluemix_notm}}, é possível <a href="../iam/apikeys.html#manapikey" target="_blank">usar chaves API do {{site.data.keyword.Bluemix_notm}}</a>. As chaves API do {{site.data.keyword.Bluemix_notm}} são dependentes da conta do {{site.data.keyword.Bluemix_notm}} para a qual elas são geradas. Não é possível combinar a sua chave API do {{site.data.keyword.Bluemix_notm}} com um ID da conta diferente no mesmo token do IAM. Para acessar os clusters que foram criados com uma conta diferente daquela na qual a sua chave API do {{site.data.keyword.Bluemix_notm}} é baseada; deve-se efetuar login na conta para gerar uma nova chave API. </li></ul></tr>
+<td><ul><li><strong>Nome de usuário e senha do {{site.data.keyword.Bluemix_notm}}:</strong> é possível seguir as etapas neste tópico para automatizar totalmente a criação de seu token de acesso do {{site.data.keyword.Bluemix_notm}} IAM.</li>
+<li><strong>Gerar uma chave API do {{site.data.keyword.Bluemix_notm}}:</strong> como uma alternativa ao uso de nome do usuário e senha do {{site.data.keyword.Bluemix_notm}}, é possível <a href="../iam/apikeys.html#manapikey" target="_blank">usar chaves API do {{site.data.keyword.Bluemix_notm}}</a>. As chaves API do {{site.data.keyword.Bluemix_notm}} são dependentes da conta do {{site.data.keyword.Bluemix_notm}} para a qual elas são geradas. Não é possível combinar sua chave de API do {{site.data.keyword.Bluemix_notm}} com um ID de conta diferente no mesmo token do IAM do {{site.data.keyword.Bluemix_notm}}. Para acessar os clusters que foram criados com uma conta diferente daquela na qual a sua chave API do {{site.data.keyword.Bluemix_notm}} é baseada; deve-se efetuar login na conta para gerar uma nova chave API. </li></ul></tr>
 <tr>
 <td>ID federado</td>
-<td><ul><li><strong>Gerar uma chave API do {{site.data.keyword.Bluemix_notm}}:</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">as chaves API do {{site.data.keyword.Bluemix_notm}}</a> são dependentes da conta do {{site.data.keyword.Bluemix_notm}} para a qual elas são geradas. Não é possível combinar a sua chave API do {{site.data.keyword.Bluemix_notm}} com um ID da conta diferente no mesmo token do IAM. Para acessar os clusters que foram criados com uma conta diferente daquela na qual a sua chave API do {{site.data.keyword.Bluemix_notm}} é baseada; deve-se efetuar login na conta para gerar uma nova chave API. </li><li><strong>Usar uma senha única: </strong> se você autenticar com o {{site.data.keyword.Bluemix_notm}} usando uma senha única, não será possível automatizar totalmente a criação de seu token IAM porque a recuperação de sua senha única requer uma interação manual com seu navegador da web. Para automatizar totalmente a criação de seu token do IAM, deve-se criar uma chave API do {{site.data.keyword.Bluemix_notm}}. </ul></td>
+<td><ul><li><strong>Gerar uma chave API do {{site.data.keyword.Bluemix_notm}}:</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">as chaves API do {{site.data.keyword.Bluemix_notm}}</a> são dependentes da conta do {{site.data.keyword.Bluemix_notm}} para a qual elas são geradas. Não é possível combinar sua chave de API do {{site.data.keyword.Bluemix_notm}} com um ID de conta diferente no mesmo token do IAM do {{site.data.keyword.Bluemix_notm}}. Para acessar os clusters que foram criados com uma conta diferente daquela na qual a sua chave API do {{site.data.keyword.Bluemix_notm}} é baseada; deve-se efetuar login na conta para gerar uma nova chave API. </li><li><strong>Use uma senha descartável:</strong> se você autenticar com o {{site.data.keyword.Bluemix_notm}} usando uma senha descartável, não será possível automatizar totalmente a criação de seu token do {{site.data.keyword.Bluemix_notm}} IAM porque a recuperação de sua senha única requer uma interação manual com seu navegador da web. Para automatizar totalmente a criação de seu token do {{site.data.keyword.Bluemix_notm}} IAM, deve-se criar uma chave de API do {{site.data.keyword.Bluemix_notm}}. </ul></td>
 </tr>
 </tbody>
 </table>
 
-1.  Crie seu token de acesso do IAM (Identity and Access Management). As informações do corpo incluídas em sua solicitação variam com base no método de autenticação do {{site.data.keyword.Bluemix_notm}} usado. Substitua os seguintes valores:
+1.  Crie seu token de acesso do {{site.data.keyword.Bluemix_notm}} IAM. As informações do corpo incluídas em sua solicitação variam com base no método de autenticação do {{site.data.keyword.Bluemix_notm}} usado. Substitua os seguintes valores:
   - _&lt;username&gt;_: seu nome de usuário do {{site.data.keyword.Bluemix_notm}}.
   - _&lt;password&gt;_: sua senha do {{site.data.keyword.Bluemix_notm}}.
   - _&lt;api_key&gt;_: sua chave API do {{site.data.keyword.Bluemix_notm}}.
@@ -491,9 +508,9 @@ abreviações de região conforme elas são usadas nos endpoints de API](cs_regi
     ```
     {: screen}
 
-    É possível localizar o token IAM no campo **access_token** de sua saída da API. Observe o token IAM para recuperar informações adicionais do cabeçalho nas próximas etapas.
+    É possível localizar o token do {{site.data.keyword.Bluemix_notm}} IAM no campo **access_token** de sua saída da API. Anote o token do {{site.data.keyword.Bluemix_notm}} IAM para recuperar informações adicionais do cabeçalho nas próximas etapas.
 
-2.  Recupere o ID da conta do {{site.data.keyword.Bluemix_notm}} em que o cluster foi criado. Substitua _&lt;iam_token&gt;_ pelo token IAM recuperado na etapa anterior.
+2.  Recupere o ID da conta do {{site.data.keyword.Bluemix_notm}} em que o cluster foi criado. Substitua _&lt;iam_token&gt;_ pelo token do {{site.data.keyword.Bluemix_notm}} IAM que você recuperou na etapa anterior.
 
     ```
     GET https://accountmanagement.<region>.bluemix.net/v1/accounts
@@ -538,9 +555,10 @@ abreviações de região conforme elas são usadas nos endpoints de API](cs_regi
 
     É possível localizar o ID de sua conta do {{site.data.keyword.Bluemix_notm}} no campo **resources/metadata/guid** de sua saída da API.
 
-3.  Gere um novo token IAM que inclua as credenciais do {{site.data.keyword.Bluemix_notm}} e o ID da conta no qual o cluster foi criado. Substitua _&lt;account_ID&gt;_ pelo ID da conta do {{site.data.keyword.Bluemix_notm}} recuperada na etapa anterior.
+3.  Gere um novo token do {{site.data.keyword.Bluemix_notm}} IAM que inclua suas credenciais do {{site.data.keyword.Bluemix_notm}} e o ID da conta no qual o cluster foi criado. Substitua _&lt;account_ID&gt;_ pelo ID da conta do {{site.data.keyword.Bluemix_notm}} recuperada na etapa anterior.
 
-    **Nota:** se você está usando uma chave API do {{site.data.keyword.Bluemix_notm}}, deve-se usar o ID da conta do {{site.data.keyword.Bluemix_notm}} para a qual a chave API foi criada. Para acessar clusters em outras contas, efetue login nessa conta e crie uma chave API do {{site.data.keyword.Bluemix_notm}} que seja baseada nessa conta.
+    Se você estiver usando uma chave de API do {{site.data.keyword.Bluemix_notm}}, deverá usar o ID da conta do {{site.data.keyword.Bluemix_notm}} para o qual a chave de API foi criada. Para acessar clusters em outras contas, efetue login nessa conta e crie uma chave API do {{site.data.keyword.Bluemix_notm}} que seja baseada nessa conta.
+    {: note}
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
@@ -617,7 +635,7 @@ abreviações de região conforme elas são usadas nos endpoints de API](cs_regi
     ```
     {: screen}
 
-    É possível localizar o token do IAM no **access_token** e o token de atualização do IAM no **refresh_token**.
+    É possível localizar o token do {{site.data.keyword.Bluemix_notm}} IAM no **access_token** e o token de atualização no **refresh_token**.
 
 4.  Liste todos os clusters do Kubernetes em sua conta. Use as informações que você recuperou nas etapas anteriores para construir as informações do cabeçalho.
 
@@ -646,14 +664,14 @@ abreviações de região conforme elas são usadas nos endpoints de API](cs_regi
 <br />
 
 
-## Atualizando tokens de acesso IAM e obtendo novos tokens de atualização
+## Atualizando os tokens de acesso do {{site.data.keyword.Bluemix_notm}} IAM e obtendo novos tokens de atualização com a API
 {: #cs_api_refresh}
 
-Cada token de acesso IAM (Identity and Access Management) emitido por meio da API expira depois de uma hora. Deve-se atualizar seu token de acesso regularmente para assegurar acesso à
+Cada token de acesso do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) que é emitido por meio da API expira após uma hora. Deve-se atualizar seu token de acesso regularmente para assegurar acesso à
 API do {{site.data.keyword.Bluemix_notm}}. É possível usar as mesmas etapas para obter um novo token de atualização.
 {:shortdesc}
 
-Antes de iniciar, certifique-se de que tenha um token de atualização IAM ou uma chave API do {{site.data.keyword.Bluemix_notm}} que possa ser usada para solicitar um novo token de acesso.
+Antes de iniciar, certifique-se de que você tenha um token de atualização do {{site.data.keyword.Bluemix_notm}} IAM ou uma chave de API do {{site.data.keyword.Bluemix_notm}} que possa ser usada para solicitar um novo token de acesso.
 - **Token de atualização:** siga as instruções em [Automatizando a criação do cluster e o processo de gerenciamento com a {{site.data.keyword.Bluemix_notm}}API do ](#cs_api).
 - **Chave API:** Recupere sua chave API do [{{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/) conforme a seguir.
    1. Na barra de menus, clique em **Gerenciar** > **Segurança** > **Chaves API da plataforma**.
@@ -661,18 +679,18 @@ Antes de iniciar, certifique-se de que tenha um token de atualização IAM ou um
 **Criar**.
    3. Insira um **Nome** e uma **Descrição** para sua chave API e clique em **Criar**.
    4. Clique em **Mostrar** para ver a chave API que foi gerado para você.
-   5. Copie a chave API para que possa ser usada para recuperar seu novo token de acesso IAM.
+   5. Copie a chave de API para que seja possível usá-la para recuperar seu novo token de acesso do {{site.data.keyword.Bluemix_notm}} IAM.
 
-Use as etapas a seguir se desejar criar um token IAM ou se desejar obter um novo token de atualização.
+Use as etapas a seguir se você desejar criar um token do {{site.data.keyword.Bluemix_notm}} IAM ou se desejar obter um novo token de atualização.
 
-1.  Gere um novo token de acesso IAM usando o token de atualização ou a chave API do {{site.data.keyword.Bluemix_notm}}.
+1.  Gere um novo token de acesso do {{site.data.keyword.Bluemix_notm}} IAM usando o token de atualização ou a chave de API do {{site.data.keyword.Bluemix_notm}}.
     ```
     POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 
     <table summary="Parâmetros de entrada para o novo token IAM">
-    <caption>Parâmetros de entrada para um novo token do IAM</caption>
+    <caption>Parâmetros de entrada para um novo token do {{site.data.keyword.Bluemix_notm}} IAM</caption>
     <thead>
     <th>Parâmetros de entrada</th>
     <th>Values</th>
@@ -719,6 +737,19 @@ Use as etapas a seguir se desejar criar um token IAM ou se desejar obter um novo
     ```
     {: screen}
 
-    É possível localizar seu novo token IAM no **access_token** e o token de atualização IAM no campo **refresh_token** da saída de API.
+    É possível localizar seu novo token do {{site.data.keyword.Bluemix_notm}} IAM no **access_token** e o token de atualização no campo **refresh_token** de sua saída da API.
 
-2.  Continue trabalhando com a [documentação da API do {{site.data.keyword.containerlong_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-api) usando o token da etapa anterior.
+2.  Continue trabalhando com a [documentação da API do {{site.data.keyword.containerlong_notm}}![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.bluemix.net/swagger-api) usando o token da etapa anterior.
+
+<br />
+
+
+## Atualizando tokens de acesso do {{site.data.keyword.Bluemix_notm}} IAM e obtendo novos tokens de atualização com a CLI
+{: #cs_cli_refresh}
+
+Quando você inicia uma nova sessão da CLI ou se 24 horas expiraram em sua sessão da CLI atual, deve-se configurar o contexto para seu cluster executando `ibmcloud ks cluster-config <cluster_name>`. Quando você configura o contexto para seu cluster com esse comando, o arquivo `kubeconfig` para seu cluster do Kubernetes é transferido por download. Além disso, um token de ID do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) e um token de atualização são emitidos para fornecer autenticação.
+{: shortdesc}
+
+**Token de ID**: cada token de ID do IAM que é emitido por meio da CLI expira após uma hora. Quando o token de ID expira, o token de atualização é enviado para o provedor de token para atualizar o token de ID. Sua autenticação é atualizada e é possível continuar a executar comandos com relação ao seu cluster.
+
+**Token de atualização**: os tokens de atualização expiram a cada 30 dias. Quando o token de atualização expira, o token de ID não pode ser atualizado e não é possível continuar executando os comandos na CLI. É possível obter um novo token de atualização executando `ibmcloud ks cluster-config <cluster_name>`. Esse comando também atualiza seu token de ID.

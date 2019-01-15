@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -41,7 +44,8 @@ Este tutorial é destinado a desenvolvedores de apps Cloud Foundry.
 - [Criar um registro de imagem privada no {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
 - [Criar um cluster](cs_clusters.html#clusters_ui).
 - [Destinar sua CLI para o cluster](cs_cli_install.html#cs_cli_configure).
-- [Certifique-se de que você tenha a função de plataforma **Editor**, **Operador** ou **Administrador**](cs_users.html#add_users_cli).
+- Assegure-se de que tenha as políticas de acesso do IAM do {{site.data.keyword.Bluemix_notm}} para o {{site.data.keyword.containerlong_notm}}:
+    - [Qualquer função de plataforma](cs_users.html#platform)
 - [Conhecer a terminologia do Docker e do Kubernetes](cs_tech.html).
 
 
@@ -73,7 +77,7 @@ Pegue seu código pronto para ir. Não tem nenhum código ainda? É possível fa
 
     Conforme o app é implementado, instruções para "Fazer download, modificar e reimplementar seu app com a interface da linha de comandos" são exibidas.
 
-    c. Na etapa 1 nas instruções da GUI, clique em **FAZER DOWNLOAD DO CÓDIGO DE INÍCIO**.
+    c. Na etapa 1 nas instruções do console, clique em **DOWNLOAD STARTER CODE**.
 
     d. Extraia o arquivo .zip e salve seu conteúdo no diretório `cf-py`.
 
@@ -261,7 +265,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
     ```
     {: screen}
 
@@ -271,7 +275,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
 5.  [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
 
-    Se selecionar seu cluster na GUI do [{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
+    Se você selecionar seu cluster no [console do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
     {: tip}
 
 6. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.

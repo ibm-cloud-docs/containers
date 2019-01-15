@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,15 +50,15 @@ E o que é um cluster? Um cluster é um conjunto de recursos, nós de trabalhado
 **Antes de começar**
 
 Obtenha o tipo de [conta do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) certo para você:
-* **Pré-paga ou Assinatura**: é possível criar um cluster de avaliação grátis. Também é possível provisionar os recursos de infraestrutura do IBM Cloud (SoftLayer) para criar e usar em clusters padrão.
-* **Lite**: não é possível criar um cluster grátis ou padrão. [Faça upgrade de sua conta](/docs/account/account_faq.html#changeacct) para Pré-paga ou Assinatura.
+* **Faturável (Pré-paga ou Assinatura)**: é possível criar um cluster de avaliação grátis. Também é possível provisionar os recursos de infraestrutura do IBM Cloud (SoftLayer) para criar e usar em clusters padrão.
+* **Lite**: não é possível criar um cluster grátis ou padrão. [Faça upgrade de sua conta](/docs/account/account_faq.html#changeacct) para uma conta faturável.
 * **Avaliação (para propósitos educacionais)**: é possível criar um cluster grátis que pode ser usado por 30 dias para se familiarizar com o serviço.
 
 Para criar um cluster grátis:
 
-1.  No **Catálogo** do [{{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/catalog/?category=containers), selecione **{{site.data.keyword.containerlong_notm}}** e clique em **Criar**. Uma página de configuração do cluster é aberta. Por padrão, o **grátis cluster** é selecionado.
+1.  No [**Catálogo** do {{site.data.keyword.Bluemix_notm}}![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/catalog/?category=containers), selecione **{{site.data.keyword.containershort_notm}}** e clique em **Criar**. Uma página de configuração do cluster é aberta. Por padrão, o **grátis cluster** é selecionado.
 
-2. Forneça seu cluster um nome exclusivo.
+2.  Forneça seu cluster um nome exclusivo.
 
 3.  Clique em **Criar Cluster**. É criado um conjunto de trabalhadores que contém 1 nó do trabalhador. O nó do trabalhador pode demorar alguns minutos para provisionar, mas é possível ver o progresso na guia **Nós do trabalhador**. Quando o status atinge `Ready`, é possível começar a trabalhar com seu cluster!
 

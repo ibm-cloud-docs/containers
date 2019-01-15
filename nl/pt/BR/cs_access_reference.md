@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 
 ---
@@ -14,6 +14,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Permissões de acesso de
@@ -24,24 +27,27 @@ lastupdated: "2018-10-25"
 Ao [designar permissões de cluster](cs_users.html), pode ser difícil julgar qual função precisa ser designada a um usuário. Use as tabelas nas seções a seguir para determinar o nível mínimo de permissões que são necessárias para executar tarefas comuns no {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-## Plataforma IAM e Kubernetes RBAC
+## {{site.data.keyword.Bluemix_notm}} Plataforma IAM e Kubernetes RBAC
 {: #platform}
 
-O {{site.data.keyword.containerlong_notm}} é configurado para usar funções do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). As funções da plataforma IAM determinam as ações que os usuários podem executar em um cluster. Cada usuário que é designado a uma função da plataforma IAM também é designado automaticamente a uma função correspondente de controle de acesso baseado na função (RBAC) do Kubernetes no namespace padrão. Além disso, as funções da plataforma IAM configuram automaticamente as permissões de infraestrutura básica para os usuários. Para configurar políticas do IAM, veja [Designando permissões da plataforma IAM](cs_users.html#platform). Para saber mais sobre funções RBAC, veja [Designando permissões de RBAC](cs_users.html#role-binding).
+O {{site.data.keyword.containerlong_notm}} é configurado para usar funções do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). As funções da plataforma {{site.data.keyword.Bluemix_notm}} IAM determinam as ações que os usuários podem executar em um cluster. Cada usuário que é designado a uma função de plataforma também é designado automaticamente a uma função correspondente de controle de acesso baseado em função (RBAC) do Kubernetes no namespace padrão. Além disso, as funções da plataforma configuram automaticamente as permissões de infraestrutura básica para os usuários. Para configurar políticas, veja [Designando permissões da plataforma do {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform). Para saber mais sobre funções RBAC, veja [Designando permissões de RBAC](cs_users.html#role-binding).
+{: shortdesc}
 
-A tabela a seguir mostra as permissões de gerenciamento de cluster concedidas por cada função da plataforma IAM e as permissões de recurso do Kubernetes para as funções RBAC correspondentes.
+A tabela a seguir mostra as permissões de gerenciamento de cluster concedidas por cada função de plataforma e as permissões de recurso do Kubernetes para as funções RBAC correspondentes.
 
-<table>
-  <tr>
-    <th>Função da plataforma IAM</th>
+<table summary="A tabela mostra permissões do usuário para as funções da plataforma IAM e políticas RBAC correspondentes. As linhas devem ser lidas da esquerda para a direita, com a função da plataforma IAM na coluna um, a permissão de cluster na coluna dois e a função RBAC correspondente na coluna três.">
+<caption>Permissões de gerenciamento de cluster por plataforma e função RBAC</caption>
+<thead>
+    <th>Função da plataforma</th>
     <th>Permissões de gerenciamento de cluster</th>
     <th>Função RBAC Correspondente e Permissões de Recursos</th>
-  </tr>
+</thead>
+<tbody>
   <tr>
     <td>**Viewer**</td>
     <td>
       Cluster:<ul>
-        <li>Visualizar o nome e o endereço de e-mail para o proprietário da chave API do IAM para um grupo de recursos e região</li>
+        <li>Visualize o nome e o endereço de e-mail para o proprietário da chave de API do {{site.data.keyword.Bluemix_notm}} IAM para um grupo de recursos e região</li>
         <li>Se a sua conta do {{site.data.keyword.Bluemix_notm}} usar credenciais diferentes para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer), visualizar o nome do usuário da infraestrutura</li>
         <li>Listar todos ou visualizar detalhes para clusters, nós do trabalhador, conjuntos de trabalhadores, serviços em um cluster e webhooks</li>
         <li>Visualize o status do VLAN Spanning para a conta de infraestrutura</li>
@@ -106,7 +112,7 @@ A tabela a seguir mostra as permissões de gerenciamento de cluster concedidas p
         <li>Criptografar segredos do Kubernetes usando  {{site.data.keyword.keymanagementservicefull}}</li>
         <li>Configurar a chave API para a conta do {{site.data.keyword.Bluemix_notm}} para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer) vinculado</li>
         <li>Configurar, visualizar e remover credenciais de infraestrutura para a conta do {{site.data.keyword.Bluemix_notm}} para acessar um portfólio de infraestrutura do IBM Cloud (SoftLayer) diferente</li>
-        <li>Designar e mudar funções da plataforma IAM para outros usuários existentes na conta</li>
+        <li>Designar e mudar as funções da plataforma do {{site.data.keyword.Bluemix_notm}} IAM para outros usuários existentes na conta</li>
         <li>Quando configurado para todas as instâncias do {{site.data.keyword.containerlong_notm}} (clusters) em todas as regiões: listar todas as VLANs disponíveis na conta</ul>
       Criação de Log:<ul>
         <li>Criar e atualizar configurações de encaminhamento de log para o tipo `kube-audit`</li>
@@ -116,7 +122,7 @@ A tabela a seguir mostra as permissões de gerenciamento de cluster concedidas p
         <li>Listar todos ou visualizar detalhes para segredos do ALB em um cluster</li>
         <li>Implementar um certificado de sua instância do {{site.data.keyword.cloudcerts_long_notm}} para um ALB</li>
         <li>Atualizar ou remover segredos do ALB de um cluster</li></ul>
-      <strong>Nota</strong>: para criar recursos, como máquinas, VLANs e sub-redes, os usuários Administradores precisam da função de infraestrutura **Superusuário**.
+      <p class="note">Para criar recursos como máquinas, VLANs e sub-redes, os usuários Administradores precisam da função de infraestrutura **Superusuário**.</p>
     </td>
     <td>A função de cluster <code>cluster-admin</code> é aplicada pela ligação de função de cluster <code>ibm-admin</code>, fornecendo as permissões a seguir:
       <ul><li>Acesso de leitura/gravação para recursos em cada namespace</li>
@@ -125,6 +131,7 @@ A tabela a seguir mostra as permissões de gerenciamento de cluster concedidas p
       <li>Criar um recurso Ingress que disponibiliza apps publicamente</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 
@@ -132,15 +139,18 @@ A tabela a seguir mostra as permissões de gerenciamento de cluster concedidas p
 ## Funções do Cloud Foundry
 {: #cloud-foundry}
 
-As funções do Cloud Foundry concedem acesso a organizações e espaços dentro da conta. Para ver a lista de serviços baseados no Cloud Foundry no {{site.data.keyword.Bluemix_notm}}, execute `ibmcloud service list`. Para saber mais, veja todas as [funções de organização e espaço](/docs/iam/cfaccess.html) disponíveis ou as etapas para [gerenciar o acesso ao Cloud Foundry](/docs/iam/mngcf.html) na documentação do IAM.
+As funções do Cloud Foundry concedem acesso a organizações e espaços dentro da conta. Para ver a lista de serviços baseados no Cloud Foundry no {{site.data.keyword.Bluemix_notm}}, execute `ibmcloud service list`. Para saber mais, veja todas as [funções de organização e espaço](/docs/iam/cfaccess.html) disponíveis ou as etapas para [gerenciar o acesso do Cloud Foundry](/docs/iam/mngcf.html) na documentação do {{site.data.keyword.Bluemix_notm}} IAM.
+{: shortdesc}
 
 A tabela a seguir mostra as funções do Cloud Foundry necessárias para permissões de ação do cluster.
 
-<table>
-  <tr>
+<table summary="A tabela mostra as permissões do usuário para o Cloud Foundry. As linhas devem ser lidas da esquerda para a direita, com a função do Cloud Foundry na coluna um e a permissão de cluster na coluna dois. ">
+  <caption>Permissões de gerenciamento de cluster por função do Cloud Foundry</caption>
+  <thead>
     <th>Função do Cloud Foundry</th>
     <th>Permissões de gerenciamento de cluster</th>
-  </tr>
+  </thead>
+  <tbody>
   <tr>
     <td>Função de espaço: gerenciador</td>
     <td>Gerenciar acesso de usuário a um espaço do  {{site.data.keyword.Bluemix_notm}}</td>
@@ -154,12 +164,14 @@ A tabela a seguir mostra as funções do Cloud Foundry necessárias para permiss
       <li>Visualizar logs da configuração de encaminhamento de logs de um cluster no nível de espaço</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 ## Funções de infraestrutura
 {: #infra}
 
-**Nota**: quando um usuário com a função de acesso de infraestrutura **Superusuário** [configura a chave API para uma região e um grupo de recursos](cs_users.html#api_key), as permissões de infraestrutura para os outros usuários na conta são configuradas pelas funções da plataforma IAM. Não é necessário editar as permissões de infraestrutura do IBM Cloud (SoftLayer) dos outros usuários. Use a tabela a seguir para customizar permissões de infraestrutura do IBM Cloud (SoftLayer) dos usuários somente quando não puder designar **Superusuário** ao usuário que configura a chave API. Para obter mais informações, veja [Customizando permissões de infraestrutura](cs_users.html#infra_access).
+Quando um usuário com a função de acesso de infraestrutura de **Superusuário** [configura a chave de API para uma região e um grupo de recursos](cs_users.html#api_key), as permissões de infraestrutura para os outros usuários na conta são configuradas por funções da plataforma do {{site.data.keyword.Bluemix_notm}} IAM. Não é necessário editar as permissões de infraestrutura do IBM Cloud (SoftLayer) dos outros usuários. Use a tabela a seguir para customizar permissões de infraestrutura do IBM Cloud (SoftLayer) dos usuários somente quando não puder designar **Superusuário** ao usuário que configura a chave API. Para obter mais informações, veja [Customizando permissões de infraestrutura](cs_users.html#infra_access).
+{: shortdesc}
 
 A tabela a seguir mostra as permissões de infraestrutura necessárias para concluir grupos de tarefas comuns.
 

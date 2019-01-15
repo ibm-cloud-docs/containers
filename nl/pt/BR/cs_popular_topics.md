@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -24,11 +27,77 @@ lastupdated: "2018-10-25"
 Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprenda sobre os novos recursos para explorar, um truque para experimentar ou alguns tópicos populares que outros desenvolvedores estão achando úteis agora.
 {:shortdesc}
 
+## Tópicos populares em dezembro de 2018
+{: #dec18}
+
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em dezembro de 2018</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>6 de dezembro</td>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>Obtenha visibilidade operacional para o desempenho e o funcionamento de seus apps implementando o Sysdig como um serviço de terceiro para os nós do trabalhador para encaminhar métricas para o {{site.data.keyword.monitoringlong}}. Para obter mais informações, consulte [Analisando métricas para um app implementado em um cluster do Kubernetes](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Nota**: se você usar o {{site.data.keyword.mon_full_notm}} com clusters que executam o Kubernetes versão 1.11 ou mais recente, nem todas as métricas de contêiner serão coletadas, porque o Sysdig não suporta atualmente o `containerd`.</td>
+</tr>
+</tbody></table>
+
+## Tópicos populares em novembro de 2018
+{: #nov18}
+
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em novembro de 2018</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>29 de novembro</td>
+<td>[Zona disponível em Chennai](cs_regions.html)</td>
+<td>Bem-vindo Chennai, Índia como uma nova zona para clusters na região Norte AP. Se você tiver um firewall, certifique-se de [abrir as portas de firewall](cs_firewall.html#firewall) para essa zona e as outras zonas dentro da região em que seu cluster está.</td>
+</tr>
+<tr>
+<td>27 de novembro</td>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>Inclua recursos de gerenciamento de log no cluster implementando LogDNA como um serviço de terceiro para seus nós do trabalhador para gerenciar logs dos contêineres de pod. Para obter mais informações, consulte [Gerenciando logs de cluster do Kubernetes com o {{site.data.keyword.loganalysisfull_notm}} com LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
+</tr>
+<tr>
+<td>7 de novembro</td>
+<td>Balanceador de carga 2.0 (beta)</td>
+<td>Agora é possível escolher entre o [balanceador de carga 1.0 ou 2.0](cs_loadbalancer.html#planning_ipvs) para expor com segurança seus apps de cluster para o público.</td>
+</tr>
+<tr>
+<td>7 de novembro</td>
+<td>Kubernetes versão 1.12 disponível</td>
+<td>Agora, é possível atualizar ou criar clusters que executam [Kubernetes versão 1.12](cs_versions.html#cs_v112)! Clusters 1.12 vêm com os mestres do Kubernetes altamente disponíveis por padrão.</td>
+</tr>
+<tr>
+<td>7 de novembro</td>
+<td>Mestres altamente disponíveis em clusters que executam o Kubernetes versão 1.10</td>
+<td>Os mestres altamente disponíveis estão disponíveis para clusters que executam o Kubernetes versão 1.10! Todos os benefícios descritos na entrada anterior para clusters 1.11 se aplicam aos clusters 1.10, assim como as [etapas de preparação](cs_versions.html#110_ha-masters) que devem ser executadas.</td>
+</tr>
+<tr>
+<td>1 de novembro</td>
+<td>Mestres altamente disponíveis em clusters que executam o Kubernetes versão 1.11</td>
+<td>Em uma zona única, seu mestre está altamente disponível e inclui réplicas em hosts físicos separados para seu servidor de API do Kubernetes, um etcd, um planejador e um gerenciador de controlador para proteger contra uma indisponibilidade, como durante uma atualização de cluster. Se o seu cluster estiver em uma zona com capacidade para várias zonas, o seu mestre altamente disponível também será distribuído entre zonas para ajudar a proteger contra uma falha zonal.<br>Para ações que devem ser executadas, consulte [Atualizando para os clusters mestres altamente disponíveis](cs_versions.html#ha-masters). Estas ações de preparação se aplicam:<ul>
+<li>Se você tiver um firewall ou políticas de rede customizadas do Calico.</li>
+<li>Se você estiver usando as portas do host `2040` ou `2041` nos nós do trabalhador.</li>
+<li>Se você usou o endereço IP do cluster mestre para acesso no cluster ao mestre.</li>
+<li>Se você tiver automação que chame a API ou a CLI do Calico (`calicoctl`), tal como para criar políticas do Calico.</li>
+<li>Se você usar políticas de rede do Kubernetes ou do Calico para controlar o acesso de egresso do pod ao mestre.</li></ul></td>
+</tr>
+</tbody></table>
+
 ## Tópicos populares em outubro de 2018
 {: #oct18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
-<caption>Tópicos populares para contêineres e clusters do Kubernetes em agosto de 2018</caption>
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em outubro de 2018</caption>
 <thead>
 <th>Data</th>
 <th>Título (Title)</th>
@@ -53,7 +122,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 <tr>
 <td>04 de outubro</td>
 <td>[O {{site.data.keyword.registrylong}} está agora integrado ao {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam)</td>
-<td>É possível usar o IAM para controlar o acesso a seus recursos de registro, como puxar, enviar por push e construir imagens. Ao criar um cluster, você também cria um token de registro para que o cluster possa trabalhar com seu registro. Portanto, você precisa da função de gerenciamento de plataforma **Administrador** de registro para criar um cluster. Para ativar o IAM para sua conta de registro, veja [Ativando o cumprimento de política para usuários existentes](/docs/services/Registry/registry_users.html#existing_users).</td>
+<td>É possível usar o {{site.data.keyword.Bluemix_notm}} IAM para controlar o acesso a seus recursos de registro, como puxar, enviar por push e construir imagens. Ao criar um cluster, você também cria um token de registro para que o cluster possa trabalhar com seu registro. Portanto, você precisa da função **Administrador** de gerenciamento de plataforma do registro de nível de conta para criar um cluster. Para ativar o {{site.data.keyword.Bluemix_notm}} IAM para sua conta de registro, veja [Ativando a aplicação de política para usuários existentes](/docs/services/Registry/registry_users.html#existing_users).</td>
 </tr>
 <tr>
 <td>01 de outubro</td>
@@ -65,8 +134,8 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 ## Tópicos populares em setembro de 2018
 {: #sept18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
-<caption>Tópicos populares para contêineres e clusters do Kubernetes em agosto de 2018</caption>
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em setembro de 2018</caption>
 <thead>
 <th>Data</th>
 <th>Título (Title)</th>
@@ -90,7 +159,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 ## Tópicos populares em agosto de 2018
 {: #aug18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em agosto de 2018</caption>
 <thead>
 <th>Data</th>
@@ -113,7 +182,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 ## Tópicos populares em julho de 2018
 {: #july18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em julho de 2018</caption>
 <thead>
 <th>Data</th>
@@ -136,7 +205,7 @@ Acompanhe o que está acontecendo no {{site.data.keyword.containerlong}}. Aprend
 ## Tópicos populares em junho de 2018
 {: #june18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em junho de 2018</caption>
 <thead>
 <th>Data</th>
@@ -166,7 +235,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 {: #may18}
 
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em maio de 2018</caption>
 <thead>
 <th>Data</th>
@@ -191,8 +260,8 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 </tr>
 <tr>
 <td>Maio 01</td>
-<td>[Implementar o painel do Kubernetes na GUI](cs_app.html#cli_dashboard)</td>
-<td>Alguma vez você desejou acessar o painel do Kubernetes com um clique? Veja o botão **Painel do Kubernetes** na GUI do {{site.data.keyword.Bluemix_notm}}.</td>
+<td>[Implementar o painel do Kubernetes por meio do console](cs_app.html#cli_dashboard)</td>
+<td>Alguma vez você desejou acessar o painel do Kubernetes com um clique? Confira o botão **Painel do Kubernetes** no console do {{site.data.keyword.Bluemix_notm}}.</td>
 </tr>
 </tbody></table>
 
@@ -202,7 +271,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 ## Tópicos populares em abril de 2018
 {: #apr18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em abril de 2018</caption>
 <thead>
 <th>Data</th>
@@ -230,7 +299,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 ## Tópicos populares em março de 2018
 {: #mar18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em março de 2018</caption>
 <thead>
 <th>Data</th>
@@ -263,7 +332,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 ## Tópicos populares em fevereiro de 2018
 {: #feb18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em fevereiro de 2018</caption>
 <thead>
 <th>Data</th>
@@ -283,7 +352,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 </tr>
 <tr>
 <td>23 de fevereiro</td>
-<td>Visualize a UI da web para [criação de log](cs_health.html#view_logs) e [métricas](cs_health.html#view_metrics)</td>
+<td>Visualize o console da web para [criação de log](cs_health.html#view_logs) e [métricas](cs_health.html#view_metrics)</td>
 <td>Visualize facilmente os dados de log e de métrica em seu cluster e seus componentes com uma UI da Web melhorada. Veja suas páginas de detalhes do cluster para obter acesso.</td>
 </tr>
 <tr>
@@ -311,7 +380,7 @@ configurar políticas de segurança de pod para autorizar quem pode criar e atua
 ## Tópicos populares em janeiro de 2018
 {: #jan18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra tópicos populares. Linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em janeiro de 2018</caption>
 <thead>
 <th>Data</th>

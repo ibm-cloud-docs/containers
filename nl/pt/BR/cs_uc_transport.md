@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -30,8 +33,9 @@ aproveitar as cadeias de ferramentas para rápidas atualizações de app e imple
 {: #uc_shipping}
 
 Um Exec de TI tem sistemas de roteamento e planejamento de envio no mundo inteiro com os quais os parceiros interagem. Os parceiros requerem informações atualizadas desses sistemas que acessam dados do dispositivo IoT. Mas, esses sistemas não eram capazes de escalar no mundo inteiro com HA suficiente.
+{: shortdesc}
  
- Por que o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_notm}} escala apps conteinerizados com cinco 9s de disponibilidade para atender às demandas crescentes. As implementações de app ocorrem 40 vezes diariamente quando os Desenvolvedores experimentam facilmente, enviando por push as mudanças para os sistemas de Desenvolvimento e Teste rapidamente. A Plataforma IoT torna fácil o acesso a dados do IoT. 
+Por que o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_notm}} escala apps conteinerizados com cinco 9s de disponibilidade para atender às demandas crescentes. As implementações de app ocorrem 40 vezes diariamente quando os Desenvolvedores experimentam facilmente, enviando por push as mudanças para os sistemas de Desenvolvimento e Teste rapidamente. A Plataforma IoT torna fácil o acesso a dados do IoT. 
  
 Tecnologias chave:    
 * [ Multi-regiões para o ecossistema de parceiro  ](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)
@@ -118,6 +122,7 @@ Solução Técnica:
 {: #uc_airline}
 
 Um Exec de RH (CHRO) precisa de um novo site de benefícios de RH com um robô de bate-papo inovador, mas as ferramentas de desenvolvimento e a plataforma atuais significam tempos longos de preparação para que os apps fiquem ativos. Essa situação inclui esperas longas para compras de hardware.
+{: shortdesc}
 
 Por que o  {{site.data.keyword.cloud_notm}}:  {{site.data.keyword.containerlong_notm}}  fornece fácil spin-up de cálculo. Em seguida, os Desenvolvedores podem experimentar facilmente, enviando por push mudanças para sistemas de Desenvolvimento e teste rapidamente com cadeias de ferramentas abertas. Suas ferramentas de desenvolvimento de software tradicionais ganham impulso quando elas incluem o IBM Watson Assistant. O novo site de benefícios foi criado em menos de 3 semanas.
 

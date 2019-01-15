@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -76,7 +79,7 @@ para acessar publicamente seu serviço no cluster.</td>
  <td>Use o [fornecimento
 dinâmico](cs_storage_basics.html#dynamic_provisioning) ou o [fornecimento
 estático](cs_storage_basics.html#static_provisioning) de volumes.</td>
- <td>Use [fornecimento dinâmico](cs_storage_basics.html#dynamic_provisioning) de volumes. [Abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para solicitar um backup para seus volumes, solicitar uma restauração de seus volumes e executar outras funções de armazenamento.</li></ul></td>
+ <td>Use [fornecimento dinâmico](cs_storage_basics.html#dynamic_provisioning) de volumes. [Abra um caso de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para solicitar um backup para seus volumes, solicite uma restauração por meio de seus volumes e execute outras funções de armazenamento.</li></ul></td>
  </tr>
  <tr>
  <td>URL do registro de imagem no {{site.data.keyword.registryshort_notm}}</td>
@@ -125,7 +128,7 @@ Cada ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} tem uma conta corp
 Antes de iniciar:
   * [Configure um ambiente do {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/dedicated/index.html#setupdedicated).
   * Caso o seu sistema local ou sua rede corporativa controle os terminais de Internet pública usando proxies ou firewalls, deve-se [abrir portas e endereços IP requeridos em seu firewall](cs_firewall.html#firewall).
-  * [Faça download da CLI do Cloud Foundry![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/cloudfoundry/cli/releases) e [Inclua o plug-in da CLI de Administrador do IBM Cloud](/docs/cli/plugins/bluemix_admin/index.html#adding-the-ibm-cloud-admin-cli-plug-in).
+  * [Download da CLI do Cloud Foundry![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/cloudfoundry/cli/releases).
 
 Para permitir que os usuários do {{site.data.keyword.Bluemix_dedicated_notm}} acessem clusters:
 
@@ -137,7 +140,8 @@ Para permitir que os usuários do {{site.data.keyword.Bluemix_dedicated_notm}} a
         ```
         {: pre}
 
-        **Nota:** se você tiver um ID federado, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem o `--sso` e é bem-sucedido com a opção `--sso`.
+        Se você tiver um ID federado, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem o `--sso` e é bem-sucedido com a opção `--sso`.
+        {: tip}
 
     2.  Gere uma chave API para convidar usuários para a conta pública. Anote o valor da chave API, que o administrador da conta Dedicated deve usar na próxima etapa.
 
@@ -161,7 +165,8 @@ Para permitir que os usuários do {{site.data.keyword.Bluemix_dedicated_notm}} a
         ```
         {: pre}
 
-        **Nota:** se você tiver um ID federado, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem o `--sso` e é bem-sucedido com a opção `--sso`.
+        Se você tiver um ID federado, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem o `--sso` e é bem-sucedido com a opção `--sso`.
+        {: tip}
 
     2.  Convide os usuários para a conta pública.
         * Para convidar um único usuário:
@@ -171,7 +176,7 @@ Para permitir que os usuários do {{site.data.keyword.Bluemix_dedicated_notm}} a
             ```
             {: pre}
 
-            Substitua <em>&lt;user_IBMid&gt;</em> pelo e-mail do usuário que você deseja convidar, <em>&lt;public_API_key&gt;</em> pela chave API gerada na etapa anterior e <em>&lt;public_org_ID&gt;</em> pelo GUID da organização da conta pública. Para obter mais informações sobre esse comando, veja [Convidando um usuário do IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public).
+            Substitua <em>&lt;user_IBMid&gt;</em> pelo e-mail do usuário que você deseja convidar, <em>&lt;public_API_key&gt;</em> pela chave API gerada na etapa anterior e <em>&lt;public_org_ID&gt;</em> pelo GUID da organização da conta pública. 
 
         * Para convidar todos os usuários atualmente em uma organização de conta dedicada:
 
@@ -179,7 +184,7 @@ Para permitir que os usuários do {{site.data.keyword.Bluemix_dedicated_notm}} a
             ibmcloud cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
 
-            Substitua <em>&lt;dedicated_org_ID&gt;</em> pelo ID da organização da conta dedicada, <em>&lt;public_API_key&gt;</em> pela chave API gerada na etapa anterior e <em>&lt;public_org_ID&gt;</em> pelo GUID da organização da conta pública. Para obter mais informações sobre esse comando, veja [Convidando um usuário do IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public).
+            Substitua <em>&lt;dedicated_org_ID&gt;</em> pelo ID da organização da conta dedicada, <em>&lt;public_API_key&gt;</em> pela chave API gerada na etapa anterior e <em>&lt;public_org_ID&gt;</em> pelo GUID da organização da conta pública. 
 
     3.  Se um IBMid existe para um usuário, o usuário é automaticamente incluído na organização especificada na conta pública. Se um IBMid não existe para um usuário, um convite é enviado para o endereço de e-mail do usuário. Depois que o usuário aceita o convite, um IBMid é criado para o usuário e o usuário é incluído na organização especificada na conta pública.
 
@@ -217,11 +222,13 @@ Para permitir que os usuários do {{site.data.keyword.Bluemix_dedicated_notm}} a
         ```
         {: pre}
 
-        **Nota:** se você tiver um ID federado, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem o `--sso` e é bem-sucedido com a opção `--sso`.
+        Se você tiver um ID federado, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem o `--sso` e é bem-sucedido com a opção `--sso`.
+        {: tip}
 
-    2.  Se você estiver efetuando login pela primeira vez, forneça seu ID do usuário dedicado e senha quando solicitado. Sua conta Dedicated é autenticada e as contas Dedicated e pública são vinculadas. Toda vez que efetua login após essa primeira vez, você usa somente o seu IBMid para efetuar login. Para obter mais informações, veja [Conectando um ID dedicado ao seu IBMid público](/docs/cli/connect_dedicated_id.html#connect_dedicated_id).
+    2.  Se você estiver efetuando login pela primeira vez, forneça seu ID do usuário dedicado e senha quando solicitado. Sua conta Dedicated é autenticada e as contas Dedicated e pública são vinculadas. Toda vez que efetua login após essa primeira vez, você usa somente o seu IBMid para efetuar login. Para obter mais informações, veja [Conectando um ID dedicado ao seu IBMid público](/docs/iam/connect_dedicated_id.html#connect_dedicated_id).
 
-        **Nota**: deve-se efetuar login em sua conta Dedicated e sua conta pública para criar clusters. Se você desejar efetuar login somente na sua conta Dedicated, use a sinalização `--no-iam` quando efetuar login no terminal Dedicated.
+        Deve-se efetuar login na sua conta do Dedicated e na sua conta pública para criar clusters. Se você desejar efetuar login somente na sua conta Dedicated, use a sinalização `--no-iam` quando efetuar login no terminal Dedicated.
+        {: note}
 
     3.  Para criar ou acessar clusters no ambiente dedicado, deve-se configurar a região que está associada a esse ambiente. **Nota**: não é possível criar clusters em grupos de recursos diferentes de `default`.
 
@@ -230,7 +237,7 @@ Para permitir que os usuários do {{site.data.keyword.Bluemix_dedicated_notm}} a
         ```
         {: pre}
 
-5.  Se desejar desvincular suas contas, será possível desconectar seu IBMid do seu ID do usuário dedicado. Para obter mais informações, veja [Desconectar o seu ID dedicado do IBMid público](/docs/cli/connect_dedicated_id.html#disconnect-your-dedicated-id-from-the-public-ibmid).
+5.  Se desejar desvincular suas contas, será possível desconectar seu IBMid do seu ID do usuário dedicado. Para obter mais informações, veja [Desconectar o seu ID dedicado do IBMid público](/docs/iam/connect_dedicated_id.html#disconnect-your-dedicated-id-from-the-public-ibmid).
 
     ```
     ibmcloud iam UNK-id-disconnect
@@ -246,7 +253,7 @@ Para permitir que os usuários do {{site.data.keyword.Bluemix_dedicated_notm}} a
 Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_notm}} para máxima disponibilidade e capacidade.
 {:shortdesc}
 
-### Criando clusters com a GUI
+### Criando clusters com o console do {{site.data.keyword.Bluemix_notm}}
 {: #dedicated_creating_ui}
 
 1. Abra o console dedicado: `https://<my-dedicated-cloud-instance>.bluemix.net`.
@@ -279,12 +286,16 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     6. Escolha o **Número de nós do trabalhador** que você precisa. Selecione `3` para assegurar a alta disponibilidade de seu cluster.
 
     7. Selecione uma **VLAN pública** (opcional) e uma **VLAN privada** (necessário). As VLANs pública e privada disponíveis são predefinidas quando o ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} é configurado. Ambas as VLANs se comunicam entre os nós do trabalhador, mas a VLAN pública também se comunica com o mestre do Kubernetes gerenciado pela IBM. É possível usar a mesma VLAN para múltiplos clusters.
-        **Nota**: se os nós do trabalhador estiverem configurados com apenas uma VLAN privada, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Planejando a rede de cluster somente privada](cs_network_cluster.html#private_vlan).
+        Se nós do trabalhador forem configurados com uma VLAN privada apenas, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Planejando a rede de cluster somente privada](cs_network_cluster.html#private_vlan).
+        {: note}
 
     8. Por padrão, **Criptografar disco local** é selecionado. Se você escolher limpar a caixa de seleção, os dados de tempo de execução do contêiner do host não serão criptografados. [ Saiba mais sobre a criptografia ](cs_secure.html#encrypted_disk).
 
 6. Clique em **Criar cluster**. É possível ver o progresso da implementação do nó do trabalhador na guia **Nós do trabalhador**. Quando a implementação é feita, é possível ver que seu cluster está pronto na guia **Visão geral**.
-    **Nota:** a cada nó do trabalhador é designado um ID de nó do trabalhador e um nome de domínio exclusivos que não devem ser mudados manualmente após a criação do cluster. Mudar o ID ou o nome do domínio evita que o mestre do Kubernetes gerencie o cluster.
+    A cada nó do trabalhador é designado um ID de nó do trabalhador e um nome de domínio exclusivos que não devem ser
+mudados manualmente após a criação do cluster. Mudar o ID ou o nome do domínio evita que o
+mestre do Kubernetes gerencie o cluster.
+    {: important}
 
 ### Criando clusters com a CLI
 {: #dedicated_creating_cli}
@@ -297,7 +308,8 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     ```
     {: pre}
 
-    **Nota:** se você tiver um ID federado, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem o `--sso` e é bem-sucedido com a opção `--sso`.
+    Se você tiver um ID federado, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem o `--sso` e é bem-sucedido com a opção `--sso`.
+    {: tip}
 
 3.  Para destinar uma região, execute `ibmcloud ks region-set`.
 
@@ -330,7 +342,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>Insira o ID da VLAN pública que seu ambiente dedicado está configurado para usar. Se você deseja conectar seus nós do trabalhador somente a uma VLAN privada, não especifique esta opção. **Nota**: se os nós do trabalhador estiverem configurados com apenas uma VLAN privada, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Planejando a rede de cluster somente privada](cs_network_cluster.html#private_vlan).</td>
+    <td>Insira o ID da VLAN pública que seu ambiente dedicado está configurado para usar. Se você deseja conectar seus nós do trabalhador somente a uma VLAN privada, não especifique esta opção.<p class="note">Se nós do trabalhador forem configurados com uma VLAN privada apenas, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Planejando a rede de cluster somente privada](cs_network_cluster.html#private_vlan).</p></td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -367,9 +379,8 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     ```
     {: pre}
 
-    **Nota:**
     * Para máquinas virtuais, pode levar alguns minutos para que as máquinas do nó do trabalhador sejam ordenadas e para que o cluster seja configurado e provisionado em sua conta. As máquinas físicas bare metal são provisionadas pela interação manual com a infraestrutura do IBM Cloud (SoftLayer) e podem levar mais de um dia útil para serem concluídas.
-    * Se você vir a mensagem de erro a seguir, [abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+    * Se você vir a mensagem de erro a seguir, [abra um caso de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
         ```
         Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: não foi possível fazer a ordem. Há recursos insuficientes atrás do roteador 'router_name' para preencher a solicitação para os convidados a seguir: 'worker_id'.
         ```
@@ -377,7 +388,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     Quando o fornecimento do cluster é concluído, o status do cluster muda para **implementado**.
 
     ```
-    Name ID State Created Workers Zone Version my_cluster paf97e8843e29941b49c598f516de72101 deployed 20170201162433 1 mil01 1.10.8
+    Name ID State Created Workers Zone Version Resource Group Name my_cluster paf97e8843e29941b49c598f516de72101 deployed 20170201162433 1 mil01 1.10.11 Default
     ```
     {: screen}
 
@@ -390,10 +401,13 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
 
     Quando os nós do trabalhador estiverem prontos, o estado mudará para **normal** e o status será **Pronto**. Quando o status do nó for **Pronto**, será possível, então, acessar o cluster.
 
-    **Nota:** a cada nó do trabalhador é designado um ID de nó do trabalhador e um nome de domínio exclusivos que não devem ser mudados manualmente após a criação do cluster. Mudar o ID ou o nome do domínio evita que o mestre do Kubernetes gerencie o cluster.
+    A cada nó do trabalhador é designado um ID do nó do trabalhador e um nome de domínio exclusivos que não devem ser mudados manualmente após a criação do cluster. Mudar o ID ou o nome do domínio evita que o
+mestre do Kubernetes gerencie o cluster.
+    {: important}
 
     ```
-    ID Public IP Private IP Machine Type State Status Zone Version kube-mil01-paf97e8843e29941b49c598f516de72101-w1 169.xx.xxx.xxx 10.xxx.xx.xxx free normal Ready mil01 1.10.8
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
     ```
     {: screen}
 
@@ -483,8 +497,7 @@ Requisitos:
 
 Antes de iniciar: configure o roteamento de tráfego de rede dentro e fora de sua rede corporativa para a rede do {{site.data.keyword.Bluemix_dedicated_notm}} que utilizará a sub-rede gerenciada pelo usuário.
 
-1. Para usar sua própria sub-rede, [abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) e forneça a lista de sub-CIDRs que você deseja usar.
-    **Observação**: a forma com que o ALB e os balanceadores de carga são gerenciados para conectividade de conta local e interna difere, dependendo do formato da sub-rede CIDR. Consulte a etapa final para ver as diferenças de configuração.
+1. Para usar sua própria sub-rede, [abra um caso de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) e forneça a lista de CIDRs de sub-rede que você deseja usar. **Observação**: a forma com que o ALB e os balanceadores de carga são gerenciados para conectividade de conta local e interna difere, dependendo do formato da sub-rede CIDR. Consulte a etapa final para ver as diferenças de configuração.
 
 2. Após a {{site.data.keyword.IBM_notm}} provisionar as sub-redes gerenciadas pelo usuário, torne a sub-rede disponível para seu cluster do Kubernetes.
 
@@ -492,7 +505,7 @@ Antes de iniciar: configure o roteamento de tráfego de rede dentro e fora de su
     ibmcloud ks cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
     ```
     {: pre}
-    Substitua <em>&lt;cluster_name&gt;</em> pelo nome ou o ID do cluster, <em>&lt;subnet_CIDR&gt;</em> por uma das sub-redes CIDRs que você forneceu no chamado de suporte e <em>&lt;private_VLAN&gt;</em> por um ID de VLAN privada disponível. É possível localizar o ID de uma VLAN privada disponível, executando `ibmcloud ks vlans`.
+    Substitua <em>&lt;cluster_name&gt;</em> pelo nome ou ID de seu cluster, <em>&lt;subnet_CIDR&gt;</em> por um dos CIDRs de sub-rede que você forneceu no caso de suporte e <em>&lt;private_VLAN&gt;</em> com um ID de VLAN privada disponível. É possível localizar o ID de uma VLAN privada disponível, executando `ibmcloud ks vlans`.
 
 3. Verifique se as sub-redes foram incluídas em seu cluster. O campo **Gerenciado pelo usuário** para sub-redes fornecidas pelo usuário é _`true`_.
 
@@ -523,10 +536,8 @@ Revise as opções a seguir para outras configurações de cluster:
   * [Gerenciando o acesso ao cluster](cs_users.html#access_policies)
   * [Atualizando o mestre do Kubernetes](cs_cluster_update.html#master)
   * [Atualizando nós do trabalhador](cs_cluster_update.html#worker_node)
-  * [Configurando a criação de log de cluster](cs_health.html#logging)
-      * **Nota**: a ativação de log não é suportada no terminal Dedicado. Deve-se efetuar login no terminal público do {{site.data.keyword.cloud_notm}} e destinar sua organização e espaço públicos para ativar o encaminhamento de log.
-  * [Configurando o monitoramento de cluster](cs_health.html#view_metrics)
-      * **Observação**: um cluster `ibm-monitoring` existe dentro de cada conta do {{site.data.keyword.Bluemix_dedicated_notm}}. Esse cluster monitora continuamente o funcionamento do {{site.data.keyword.containerlong_notm}} no ambiente dedicado, verificando a estabilidade e a conectividade do ambiente. Não remova esse cluster do ambiente.
+  * [Configurando a criação de log do cluster](cs_health.html#logging). A ativação do log não é suportada pelo terminal Dedicado. Deve-se efetuar login no terminal público do {{site.data.keyword.cloud_notm}} e destinar sua organização e espaço públicos para ativar o encaminhamento de log.
+  * [Configurando o monitoramento de cluster](cs_health.html#view_metrics). Um cluster `ibm-monitoring` existe dentro de cada conta do {{site.data.keyword.Bluemix_dedicated_notm}}. Esse cluster monitora continuamente o funcionamento do {{site.data.keyword.containerlong_notm}} no ambiente dedicado, verificando a estabilidade e a conectividade do ambiente. Não remova esse cluster do ambiente.
   * [Visualizando recursos de cluster do Kubernetes](cs_integrations.html#weavescope)
   * [Removendo Clusters](cs_clusters.html#remove)
 
@@ -551,16 +562,16 @@ Para ambientes do {{site.data.keyword.Bluemix_dedicated_notm}}, os endereços IP
 #### Configurando o acesso a um app usando o tipo de serviço do balanceador de carga
 {: #dedicated_apps_public_load_balancer}
 
-Se você quiser usar endereços IP públicos para o balanceador de carga, assegure-se de que uma lista de desbloqueio firewall corporativo tenha sido fornecido para a IBM ou [abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar o desbloqueio de firewall. Em seguida, siga as etapas em [Expondo apps com balanceadores de carga](cs_loadbalancer.html).
+Se você desejar usar endereços IP públicos para o balanceador de carga, assegure-se de que uma lista de desbloqueio de firewall corporativo tenha sido fornecida para a IBM ou [abra um caso de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar a lista de desbloqueio de firewall. Em seguida, siga as etapas em [Expondo apps com balanceadores de carga](cs_loadbalancer.html).
 
 #### Configurando o acesso público a um app usando o Ingress
 {: #dedicated_apps_public_ingress}
 
-Se você deseja usar endereços IP públicos para o ALB de Ingresso, assegure-se de que uma lista de desbloqueio de firewall corporativo tenha sido fornecida para a IBM ou [abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar a lista de desbloqueio de firewall. Em seguida, siga as etapas em [Expondo apps ao público](cs_ingress.html#ingress_expose_public).
+Se você desejar usar endereços IP públicos para o ALB do Ingress, assegure-se de que uma lista de desbloqueio de firewall corporativo tenha sido fornecida para a IBM ou [abra um caso de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar a lista de desbloqueio de firewall. Em seguida, siga as etapas em [Expondo apps ao público](cs_ingress.html#ingress_expose_public).
 
 ### Criando armazenamento persistente
 {: #dedicated_apps_volume_claim}
 
-Para revisar as opções para criar armazenamento persistente, consulte as Opções de armazenamento de dados persistentes para alta disponibilidade](cs_storage_planning.html#persistent_storage_overview). Para solicitar um backup para seus volumes, uma restauração de seus volumes, uma exclusão de volumes ou uma captura instantânea periódica do armazenamento de arquivo, deve-se [abrir um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Para revisar as opções para criar armazenamento persistente, consulte as Opções de armazenamento de dados persistentes para alta disponibilidade](cs_storage_planning.html#persistent_storage_overview). Para solicitar um backup de seus volumes, uma restauração de seus volumes, uma exclusão de volumes ou uma captura instantânea periódica do armazenamento de arquivo, deve-se [abrir um caso de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-Se você escolher provisionar o [armazenamento de arquivo](cs_storage_file.html#predefined_storageclass), escolha as classes de armazenamento não retidas. A escolha das classes de armazenamento não retidas ajuda a evitar instâncias de armazenamento persistente órfãs na infraestrutura do IBM Cloud (SoftLayer) que é possível remover somente abrindo um chamado de suporte.
+Se você escolher provisionar o [armazenamento de arquivo](cs_storage_file.html#predefined_storageclass), escolha as classes de armazenamento não retidas. Escolher classes de armazenamento sem retenção ajuda a evitar instâncias de armazenamento persistente órfãs na infraestrutura do IBM Cloud (SoftLayer) que você pode remover apenas abrindo um caso de suporte.

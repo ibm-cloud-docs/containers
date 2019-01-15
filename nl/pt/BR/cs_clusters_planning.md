@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -54,6 +57,10 @@ Se o cluster estiver em uma das [cidades metropolitanas de multizona suportadas]
 **Eu tenho que usar clusters de múltiplas zonas?**</br>
 Não. É possível criar tantos clusters de zona única quantos você desejar. De fato, você pode preferir clusters de zona única para gerenciamento simplificado ou se o seu cluster deve residir em uma [cidade de zona única](cs_regions.html#zones) específica.
 
+**Posso ter um mestre altamente disponível em uma única zona?**</br>
+Sim, com clusters que executam o Kubernetes versão 1.10 ou mais recente. Em uma única zona, o seu mestre está altamente disponível e inclui réplicas em hosts físicos separados para seu servidor de API do Kubernetes, um etcd, um planejador e um gerenciador de controlador para proteger contra uma indisponibilidade, como durante uma atualização principal. Para proteger contra uma falha zonal, é possível:
+* [criar um cluster em uma zona com capacidade para várias zonas](cs_clusters_planning.html#multizone), em que o mestre seja distribuído entre zonas.
+* [criar múltiplos clusters](#multiple_clusters) e conectá-los a um balanceador de carga global.
 
 ## Cluster de múltiplas zonas
 {: #multizone}
@@ -65,7 +72,7 @@ Com o  {{site.data.keyword.containerlong}}, é possível criar clusters multizon
 Um conjunto de trabalhadores é uma coleção de nós do trabalhador com o mesmo tipo, como o tipo de máquina, a CPU e a memória. Quando você cria um cluster, um conjunto de trabalhadores padrão é criado automaticamente. Para difundir os nós do trabalhador em seu conjunto nas zonas, incluir nós do trabalhador no conjunto ou atualizar nós do trabalhador, é possível usar os novos comandos `ibmcloud ks worker-pool`.
 
 **Ainda posso usar nós do trabalhador independentes?**</br>
-A configuração de cluster anterior de nós do trabalhador independentes é suportada, mas descontinuada. Certifique-se de [incluir um conjunto de trabalhadores em seu cluster](cs_clusters.html#add_pool) e, em seguida, [migrar para usar os conjuntos de trabalhadores](cs_cluster_update.html#standalone_to_workerpool) para organizar os nós do trabalhador em vez de nós do trabalhador independentes.
+A configuração de cluster anterior de nós do trabalhador independentes é suportada, mas descontinuada. Certifique-se de [incluir um conjunto de trabalhadores em seu cluster](cs_clusters.html#add_pool) e, em seguida, [usar os conjuntos de trabalhadores](cs_cluster_update.html#standalone_to_workerpool) para organizar os nós do trabalhador em vez de nós do trabalhador independentes.
 
 **Posso converter meu cluster de zona única em um cluster multizona?**</br>
 Se o cluster estiver em uma das [cidades metropolitanas de multizona suportadas](cs_regions.html#zones), sim. Veja [Atualizando de nós do trabalhador independentes para conjuntos de trabalhadores](cs_cluster_update.html#standalone_to_workerpool).
@@ -74,8 +81,7 @@ Se o cluster estiver em uma das [cidades metropolitanas de multizona suportadas]
 ### Conte-me mais sobre a configuração do cluster de múltiplas zonas
 {: #mz_setup}
 
-<img src="images/cs_cluster_multizone.png" alt="High availability for multizone clusters" width="500" style="width:500px; border-style: none"/>
-
+<img src="images/cs_cluster_multizone-ha.png" alt="Alta disponibilidade para clusters de várias zonas" width="500" style="width:500px; border-style: none"/>
 
 É possível incluir zonas adicionais em seu cluster para replicar os nós do trabalhador em seus conjuntos de trabalhadores em múltiplas zonas dentro de uma região. Os clusters de múltiplas zonas são projetados para planejar uniformemente os pods em nós do trabalhador e zonas para assegurar disponibilidade e recuperação de falha. Se os nós do trabalhador não forem difundidos uniformemente entre as zonas ou se houver capacidade insuficiente em uma das zonas, o planejador do Kubernetes poderá falhar ao planejar todos os pods solicitados. Como resultado, os pods podem entrar em um estado **Pendente** até que capacidade suficiente esteja disponível. Se você desejar mudar o comportamento padrão para fazer o planejador do Kubernetes distribuir os pods entre zonas em uma melhor distribuição de esforço, use a [política de afinidade de pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
 
@@ -88,10 +94,13 @@ Vamos dizer que você precisa de um nó do trabalhador com 6 núcleos para manip
 - **Distribuir recursos em 3 zonas:** com essa opção, você implementa 3 núcleos por zona, deixando-o uma capacidade total de 9 núcleos. Para manipular a sua carga de trabalho, duas zonas devem estar ativas por vez. Se uma zona estiver indisponível, as outras duas zonas poderão manipular sua carga de trabalho. Se duas zonas estiverem indisponíveis, os 3 núcleos restantes estarão ativos para manipular sua carga de trabalho. A implementação de 3 núcleos por zona significa máquinas menores e, portanto, um custo reduzido para você.</br>
 
 **Como meu mestre do Kubernetes está configurado?** </br>
-Um cluster de múltiplas zonas é configurado com um único mestre do Kubernetes que é provisionado na mesma área metropolitana que os trabalhadores. Por exemplo, se os trabalhadores estiverem em uma ou múltiplas zonas `dal10`, `dal12` ou `dal13`, o mestre estará localizado na cidade metropolitana de Dallas.
+Um cluster de várias zonas é configurado com um mestre do Kubernetes único ou altamente disponível (no Kubernetes 1.10 ou mais recente) que é provisionado na mesma área metropolitana que os trabalhadores. Além disso, se você criar um cluster de várias zonas, os mestres altamente disponíveis serão difundidos entre as zonas. Por exemplo, se o cluster estiver nas zonas `dal10`, `dal12` ou `dal13`, o mestre será distribuído em cada zona na cidade metropolitana de Dallas.
 
 **O que acontece se o mestre do Kubernetes se torna indisponível?** </br>
-O [Mestre do Kubernetes](cs_tech.html#architecture) é o componente principal que mantém seu cluster funcionando. O mestre armazena recursos de cluster e suas configurações no banco de dados etcd que serve como o ponto único de verdade para seu cluster. O servidor da API do Kubernetes é o ponto de entrada principal para todas as solicitações de gerenciamento de cluster dos nós do trabalhador para o principal ou quando você deseja interagir com os recursos de cluster.<br><br>Se ocorrer uma falha do mestre, suas cargas de trabalho continuarão a ser executadas nos nós do trabalhador, mas não será possível usar os comandos `kubectl` para trabalhar com seus recursos de cluster ou visualizar o funcionamento do cluster até que o servidor da API do Kubernetes no mestre esteja novamente ativo. Se um pod ficar inativo durante a indisponibilidade do mestre, o pod não poderá ser reprogramado até que o nó do trabalhador possa atingir o servidor da API do Kubernetes novamente.<br><br>Durante uma indisponibilidade do mestre, ainda é possível executar os comandos `ibmcloud ks` com relação à API do {{site.data.keyword.containerlong_notm}} para trabalhar com seus recursos de infraestrutura, como nós do trabalhador ou VLANs. Se você mudar a configuração de cluster atual incluindo ou removendo nós do trabalhador no cluster, suas mudanças não ocorrerão até que o mestre esteja ativo novamente. **Nota**: não reinicie ou reinicialize um nó do trabalhador durante uma indisponibilidade do mestre. Essa ação remove os pods de seu nó do trabalhador. Como o servidor da API do Kubernetes está indisponível, os pods não podem ser reprogramados em outros nós do trabalhador no cluster.
+O [Mestre do Kubernetes](cs_tech.html#architecture) é o componente principal que mantém seu cluster funcionando. O mestre armazena recursos de cluster e suas configurações no banco de dados etcd que serve como o ponto único de verdade para seu cluster. O servidor da API do Kubernetes é o ponto de entrada principal para todas as solicitações de gerenciamento de cluster dos nós do trabalhador para o principal ou quando você deseja interagir com os recursos de cluster.<br><br>Se ocorrer uma falha do mestre, suas cargas de trabalho continuarão a ser executadas nos nós do trabalhador, mas não será possível usar os comandos `kubectl` para trabalhar com seus recursos de cluster ou visualizar o funcionamento do cluster até que o servidor da API do Kubernetes no mestre esteja novamente ativo. Se um pod ficar inativo durante a indisponibilidade do mestre, o pod não poderá ser reprogramado até que o nó do trabalhador possa atingir o servidor da API do Kubernetes novamente.<br><br>Durante uma indisponibilidade do mestre, ainda é possível executar os comandos `ibmcloud ks` com relação à API do {{site.data.keyword.containerlong_notm}} para trabalhar com seus recursos de infraestrutura, como nós do trabalhador ou VLANs. Se você mudar a configuração de cluster atual incluindo ou removendo nós do trabalhador no cluster, suas mudanças não ocorrerão até que o mestre esteja ativo novamente.
+
+Não reinicie ou reinicialize um nó do trabalhador durante uma indisponibilidade do mestre. Essa ação remove os pods de seu nó do trabalhador. Como o servidor da API do Kubernetes está indisponível, os pods não podem ser reprogramados em outros nós do trabalhador no cluster.
+{: important}
 
 
 Para proteger seu cluster com relação a uma falha do mestre do Kubernetes ou em regiões onde os clusters de múltiplas zonas não estão disponíveis, é possível [configurar múltiplos clusters e conectá-los a um balanceador de carga global](#multiple_clusters).
@@ -135,7 +144,7 @@ A tabela a seguir compara os métodos antigos e novos para algumas ações comun
   <tbody>
     <tr>
     <td>Inclua nós do trabalhador no cluster.</td>
-    <td><strong>Descontinuado</strong>: <code>ibmcloud ks worker-add</code> para incluir nós do trabalhador independentes.</td>
+    <td><p class="deprecated"><code>ibmcloud ks worker-add</code> para incluir nós do trabalhador independentes.</p></td>
     <td><ul><li>Para incluir tipos de máquina diferentes de seu conjunto existente, crie um novo conjunto de trabalhadores: [comando](cs_cli_reference.html#cs_worker_pool_create) <code>ibmcloud ks worker-pool-create</code>.</li>
     <li>Para incluir nós do trabalhador em um conjunto existente, redimensione o número de nós por zona no conjunto: [comando](cs_cli_reference.html#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
     </tr>
@@ -147,7 +156,7 @@ A tabela a seguir compara os métodos antigos e novos para algumas ações comun
     </tr>
     <tr>
     <td>Use uma nova VLAN para os nós do trabalhador.</td>
-    <td><strong>Descontinuado</strong>: inclua um novo nó do trabalhador que use a nova VLAN privada ou pública: <code>ibmcloud ks worker-add</code>.</td>
+    <td><p class="deprecated">Inclua um novo nó do trabalhador que use a nova VLAN privada ou pública: <code>ibmcloud ks worker-add</code>.</p></td>
     <td>Configure o conjunto de trabalhadores para usar uma VLAN pública ou privada diferente do que ele usou anteriormente: [comando](cs_cli_reference.html#cs_zone_network_set) <code>ibmcloud ks zone-network-network-set</code>.</td>
     </tr>
   </tbody>
@@ -173,7 +182,7 @@ Semelhante ao uso de [3 zonas em um cluster de múltiplas zonas](#multizone), é
 
 1. [Crie clusters](cs_clusters.html#clusters) em múltiplas zonas ou regiões.
 2. Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster multizona, deve-se ativar o [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que os nós do trabalhador possam se comunicar entre si na rede privada. Para executar essa ação, você precisa da [permissão de infraestrutura](cs_users.html#infra_access) **Rede > Gerenciar rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Se você está usando o {{site.data.keyword.BluDirectLink}}, deve-se usar um [ Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para ativar o VRF, entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer).
-3. Em cada cluster, exponha seu app usando um [balanceador de carga do aplicativo (ALB)](cs_ingress.html#ingress_expose_public) ou um [serviço de balanceador de carga](cs_loadbalancer.html#config).
+3. Em cada cluster, exponha seu app usando um [balanceador de carga do aplicativo (ALB)](cs_ingress.html#ingress_expose_public) ou um [serviço de balanceador de carga](cs_loadbalancer.html).
 4. Para cada cluster, liste os endereços IP públicos para os seus ALBs ou serviços de balanceador de carga.
    - Para listar o endereço IP de todos os ALBs ativados públicos em seu cluster:
      ```
@@ -211,7 +220,9 @@ Por padrão, o {{site.data.keyword.containerlong_notm}} configura seu cluster co
 Se você desejar bloquear seu cluster para permitir o tráfego privado sobre a VLAN privada, mas bloquear o tráfego público sobre a VLAN pública, será possível [proteger seu cluster do acesso público com as políticas de rede do Calico](cs_network_cluster.html#both_vlans_private_services). Essas políticas de rede do Calico não evitam que os nós do trabalhador se comuniquem com o mestre. Também é possível limitar a superfície de vulnerabilidade em seu cluster sem bloquear o tráfego público, [isolando cargas de trabalho de rede para os nós do trabalhador de borda](cs_edge.html).
 
 Se você deseja criar um cluster que tenha acesso somente a uma VLAN privada, é possível criar um cluster privado de zona única ou de múltiplas zonas. No entanto, quando os nós do trabalhador estão conectados somente a uma VLAN privada, os nós do trabalhador não podem se conectar automaticamente ao mestre. Deve-se configurar um dispositivo de gateway para fornecer conectividade de rede entre os nós do trabalhador e o mestre.
-**Nota**: não é possível converter um cluster que está conectado a uma VLAN pública e privada para se tornar um cluster somente privado. A remoção de todas as VLANs públicas de um cluster faz com que diversos componentes do cluster parem de funcionar. Deve-se criar um novo cluster usando as etapas a seguir.
+
+Não é possível converter um cluster que está conectado a uma VLAN pública e privada para se tornar um cluster somente privado. A remoção de todas as VLANs públicas de um cluster faz com que diversos componentes do cluster parem de funcionar. Deve-se criar um novo cluster usando as etapas a seguir.
+{: note}
 
 Se você deseja criar um cluster que tenha acesso somente a uma VLAN privada:
 
@@ -242,7 +253,7 @@ Ao criar um cluster padrão no {{site.data.keyword.Bluemix_notm}}, você escolhe
 
 ![Opções de hardware para nós do trabalhador em um cluster padrão](images/cs_clusters_hardware.png)
 
-Se você deseja mais de um tipo de nó do trabalhador, deve-se criar um conjunto de trabalhadores para cada tipo. Ao criar um cluster grátis, seu nó do trabalhador é provisionado automaticamente como um nó virtual compartilhado na conta de infraestrutura do IBM Cloud (SoftLayer). Conforme você planejar, considere o [limite mínimo do limite de nós do trabalhador](#resource_limit_node) de 10% de capacidade de memória total.
+Se você deseja mais de um tipo de nó do trabalhador, deve-se criar um conjunto de trabalhadores para cada tipo. Ao criar um cluster grátis, seu nó do trabalhador é provisionado automaticamente como um nó virtual compartilhado na conta de infraestrutura do IBM Cloud (SoftLayer). Em clusters padrão, é possível escolher o tipo de máquina que funciona melhor para sua carga de trabalho. Conforme você planeja, considere as [reservas de recurso do nó do trabalhador](#resource_limit_node) na capacidade total de CPU e memória.
 
 É possível implementar clusters usando a [UI do console](cs_clusters.html#clusters_ui) ou a [CLI](cs_clusters.html#clusters_cli).
 
@@ -355,12 +366,13 @@ Tipos de máquina variam por zona. Para ver os tipos de máquina disponíveis em
 O bare metal dá acesso direto aos recursos físicos na máquina, como a memória ou CPU. Essa configuração elimina o hypervisor da máquina virtual que aloca recursos físicos para máquinas virtuais executadas no host. Em vez disso, todos os recursos de uma máquina bare metal são dedicados exclusivamente ao trabalhador, portanto, você não precisará se preocupar com "vizinhos barulhentos" compartilhando recursos ou diminuindo o desempenho. Os tipos de máquina física têm mais armazenamento local do que virtual e alguns têm RAID para aumentar a disponibilidade de dados. O armazenamento local no nó do trabalhador é somente para processamento de curto prazo e os discos primário e secundário são limpos quando você atualiza ou recarrega o nó do trabalhador. Para obter soluções de armazenamento persistente, consulte [Planejando o armazenamento persistente altamente disponível](cs_storage_planning.html#storage_planning).
 
 **Além de melhores especificações para desempenho, posso fazer algo com bare metal que eu não posso com VMs?**</br>
-Sim. Com bare metal, você tem a opção de ativar o Cálculo Confiável para verificar seus nós do trabalhador com relação à violação. Se você não ativar a confiança durante a criação do cluster, mas desejar posteriormente, será possível usar o comando `ibmcloud ks feature-enable` [](cs_cli_reference.html#cs_cluster_feature_enable). Depois de ativar a confiança, não é possível desativá-la posteriormente. É possível fazer um novo cluster sem confiança. Para obter mais informações sobre como a confiança funciona durante o processo de inicialização do nó, veja [{{site.data.keyword.containerlong_notm}} com Cálculo confiável](cs_secure.html#trusted_compute). O Cálculo confiável está disponível em clusters que executam o Kubernetes versão 1.9 ou mais recente e têm determinados tipos de máquina bare metal. Quando você executa o [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types <zone>`, é possível ver quais máquinas suportam confiança revisando o campo **Confiável**. Por exemplo, os tipos GPU `mgXc` não suportam o Cálculo confiável.
+Sim. Com bare metal, você tem a opção de ativar o Cálculo Confiável para verificar seus nós do trabalhador com relação à violação. Se você não ativar a confiança durante a criação do cluster, mas desejar posteriormente, será possível usar o comando `ibmcloud ks feature-enable` [](cs_cli_reference.html#cs_cluster_feature_enable). Depois de ativar a confiança, não é possível desativá-la posteriormente. É possível fazer um novo cluster sem confiança. Para obter mais informações sobre como a confiança funciona durante o processo de inicialização do nó, veja [{{site.data.keyword.containerlong_notm}} com Cálculo confiável](cs_secure.html#trusted_compute). O Trusted Compute está disponível para determinados tipos de máquina bare metal. Quando você executa o [comando](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types <zone>`, é possível ver quais máquinas suportam confiança revisando o campo **Confiável**. Por exemplo, os tipos GPU `mgXc` não suportam o Cálculo confiável.
 
 ** Bare metal parece incrível! O que está me impedindo de pedir um agora?**</br>
 Os servidores bare metal são mais caros do que os servidores virtuais e são mais adequados para apps de alto desempenho que precisam de mais recursos e controle de host.
 
-**Importante**: os servidores bare metal são faturados mensalmente. Se você cancelar um servidor bare metal antes do final do mês, será cobrado até o final do mês. Ordenar e cancelar servidores bare metal é um processo manual por meio da sua conta de infraestrutura (SoftLayer) do IBM Cloud. Pode levar mais de um dia útil para serem concluídos.
+Os servidores bare metal são faturados mensalmente. Se você cancelar um servidor bare metal antes do final do mês, será cobrado até o final do mês. Ordenar e cancelar servidores bare metal é um processo manual por meio da sua conta de infraestrutura (SoftLayer) do IBM Cloud. Pode levar mais de um dia útil para serem concluídos.
+{: important}
 
 **Que tipos de bare metal posso pedir?**</br>
 Tipos de máquina variam por zona. Para ver os tipos de máquina disponíveis em sua zona, execute `ibmcloud ks machine-types <zone>`. Também é possível revisar os tipos de máquina [VM](#vm) ou [SDS](#sds) disponíveis.
@@ -438,9 +450,9 @@ Os tipos de software-defined storage (SDS) são máquinas físicas que são prov
 
 ** Quando uso os sabores SDS? **</br>
 Você normalmente usa máquinas SDS nos casos a seguir:
-*  Se você usa um complemento SDS para o cluster, deve-se usar uma máquina SDS.
+*  Se você usar um complemento SDS para o cluster, use uma máquina SDS.
 *  Se seu app é um [StatefulSet ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) que requer armazenamento local, é possível usar máquinas SDS e provisionar [volumes persistentes locais do Kubernetes (beta) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
-*  Você pode ter aplicativos customizados ou complementos de cluster que requerem armazenamento SDS ou local. Por exemplo, se você planeja usar logDNA, deve-se usar um tipo de máquina SDS.
+*  Você pode ter apps customizados que requeiram armazenamento local bruto adicional.
 
 Para obter mais soluções de armazenamento, veja [Planejando o armazenamento persistente altamente disponível](cs_storage_planning.html#storage_planning).
 
@@ -496,17 +508,106 @@ Escolha um tipo de máquina com a configuração de armazenamento correta para s
 </tbody>
 </table>
 
-## Limites de memória do nó do trabalhador
+## Reservas de recursos do nó do trabalhador
 {: #resource_limit_node}
 
-O {{site.data.keyword.containerlong_notm}} configura um limite de memória em cada nó do trabalhador. Quando os pods que estão em execução no nó do trabalhador excedem esse limite de memória, os pods são removidos. No Kubernetes, esse limite é chamado de [limite máximo de despejo ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
+O {{site.data.keyword.containerlong_notm}} configura as reservas de recursos de cálculo que limitam os recursos de cálculo disponíveis em cada nó do trabalhador. Os recursos de memória e CPU reservados não podem ser usados por pods no nó do trabalhador e reduzem os recursos alocáveis em cada nó do trabalhador. Quando você implementa inicialmente os pods, se o nó do trabalhador não tiver recursos alocáveis suficientes, a implementação falhará. Além disso, se os pods excederem o limite de recurso do nó do trabalhador, os pods serão despejados. No Kubernetes, esse limite é chamado de [limite máximo de despejo ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
 {:shortdesc}
 
-Se os pods são removidos frequentemente, inclua mais nós do trabalhador em seu cluster ou configure [limites de recursos ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) em seu pods.
+Se menos CPU ou memória estiver disponível do que as reservas do nó do trabalhador, o Kubernetes começará a despejar os pods para restaurar recursos de cálculo suficientes. Os pods serão reagendados em outro nó do trabalhador se um nó do trabalhador estiver disponível. Se os pods forem despejados frequentemente, inclua mais nós do trabalhador em seu cluster ou configure [limites de recurso ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) em seus pods.
 
-**Cada máquina tem um limite mínimo que equivale a 10% de sua capacidade de memória total**. Quando há menos memória disponível no nó do trabalhador do que o limite mínimo que é permitido, o Kubernetes remove imediatamente o pod. O pod reagenda em outro nó do trabalhador se um nó do trabalhador está disponível. Por exemplo, se você tem uma máquina virtual `b2c.4x16`, sua capacidade de memória total é 16 GB. Se menos que 1600 MB (10%) de memória estiver disponível, novos pods não poderão ser planejados nesse nó do trabalhador, mas, como alternativa, serão planejados em outro nó do trabalhador. Se nenhum outro nó do trabalhador estiver disponível, os novos pods permanecerão não planejados.
+Os recursos que são reservados em seu nó do trabalhador dependem da quantia de CPU e memória que acompanha seu nó do trabalhador. O {{site.data.keyword.containerlong_notm}} define as camadas de memória e de CPU, conforme mostrado nas tabelas a seguir. Se o nó do trabalhador vem com recursos de cálculo em múltiplas camadas, uma porcentagem de seus recursos de CPU e memória é reservada para cada camada.
 
-Para revisar quanta memória é usada em seu nó do trabalhador, execute [`kubectl top node ` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
+Para revisar quantos recursos de cálculo são usados atualmente no nó do trabalhador, execute [`kubectl top node` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
+{: tip}
+
+<table summary="Reservas de memória de nó do trabalhador por camada.">
+<caption>Reservas de memória do nó do trabalhador por camada.</caption>
+<thead>
+<tr>
+  <th>Camada de memória</th>
+  <th>% ou quantia reservada</th>
+  <th>Exemplo do nó do trabalhador `b2c.4x16` (16 GB)</th>
+  <th>Exemplo do nó do trabalhador `mg1c.28x256` (256 GB)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Primeiros 16 GB (0 a 16 GB)</td>
+  <td>10% de memória</td>
+  <td>1,6 GB</td>
+  <td>1,6 GB</td>
+</tr>
+<tr>
+  <td>Próximos 112 GB (17 a 128 GB)</td>
+  <td>6% de memória</td>
+  <td>N/A</td>
+  <td>6,72 GB</td>
+</tr>
+<tr>
+  <td>GBs restantes (mais de 129 GB)</td>
+  <td>2% de memória</td>
+  <td>N/A</td>
+  <td>2,54 GB</td>
+</tr>
+<tr>
+  <td>Reserva adicional para o despejo de [`kubelet` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
+  <td>100 MB</td>
+  <td>100 MB (quantia simples)</td>
+  <td>100 MB (quantia simples)</td>
+</tr>
+<tr>
+  <td>**Total reservado**</td>
+  <td>**(varia)**</td>
+  <td>**1,7 GB do total de 16 GB**</td>
+  <td>**10,96 GB do total de 256 GB**</td>
+</tr>
+</tbody>
+</table>
+
+<table summary="Reservas de CPU do nó do trabalhador por camada.">
+<caption>Reservas de CPU do nó do trabalhador por camada.</caption>
+<thead>
+<tr>
+  <th>Camada da CPU</th>
+  <th>% reservada</th>
+  <th>Exemplo do nó do trabalhador `b2c.4x16` (4 núcleos)</th>
+  <th>Exemplo do nó do trabalhador `mg1c.28x256` (28 núcleos)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Primeiro núcleo (núcleo 1)</td>
+  <td>6% núcleos</td>
+  <td>0,06 núcleos</td>
+  <td>0,06 núcleos</td>
+</tr>
+<tr>
+  <td>Próximos 2 núcleos (núcleos 2-3)</td>
+  <td>1% núcleos</td>
+  <td>0,02 núcleos</td>
+  <td>0,02 núcleos</td>
+</tr>
+<tr>
+  <td>Próximos 2 núcleos (núcleos 4-5)</td>
+  <td>0,5% núcleos</td>
+  <td>0,005 núcleos</td>
+  <td>0,01 núcleos</td>
+</tr>
+<tr>
+  <td>Núcleos restantes (Núcleos 6 +)</td>
+  <td>0,25% núcleos</td>
+  <td>N/A</td>
+  <td>0,0575 núcleos</td>
+</tr>
+<tr>
+  <td>**Total reservado**</td>
+  <td>**(varia)**</td>
+  <td>**0,085 núcleos de 4 núcleos totais**</td>
+  <td>**0,1475 núcleos de 28 núcleos totais**</td>
+</tr>
+</tbody>
+</table>
 
 ## Recuperação automática para seus nós do trabalhador
 {: #autorecovery}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Planejando a rede em cluster e privada
@@ -80,7 +83,7 @@ Por padrão, o {{site.data.keyword.containerlong_notm}} configura seu cluster co
 ** Por que posso usar essa configuração? **
 
 * Você tem um app que deve ser acessível para a Internet pública em um cluster de zona única.
-* Você tem um app que deve ser acessível para a Internet pública em um cluster de múltiplas zonas. Como é necessário ativar o [VLAN Spanning](cs_subnets.html#subnet-routing) para criar um cluster de múltiplas zonas, o cluster pode se comunicar com outros sistemas que estão conectados a qualquer VLAN privada na mesma conta do IBM Cloud. **Nota**: para isolar seu cluster de múltiplas zonas na rede privada, use [Políticas de rede do Calico](cs_network_policy.html#isolate_workers).
+* Você tem um app que deve ser acessível para a Internet pública em um cluster de múltiplas zonas. Como é necessário ativar o [VLAN Spanning](cs_subnets.html#subnet-routing) para criar um cluster de múltiplas zonas, o cluster pode se comunicar com outros sistemas que estão conectados a qualquer VLAN privada na mesma conta do IBM Cloud. Para isolar seu cluster de várias zonas na rede privada, é possível usar [políticas de rede do Calico](cs_network_policy.html#isolate_workers).
 
 **Quais são as minhas opções para gerenciar o acesso público e privado ao meu cluster?**
 </br>As seções a seguir descrevem os recursos no {{site.data.keyword.containerlong_notm}} que podem ser usados para configurar a rede para clusters que estão conectados a uma VLAN pública e uma privada.
@@ -185,7 +188,7 @@ Para conectar com segurança seus nós do trabalhador e apps a uma rede no local
 * Uma conexão automática entre todos os nós do trabalhador e o mestre. Deve-se fornecer essa conexão [configurando um dispositivo de gateway](#private_vlan_gateway).
 
 ** Por que posso usar essa configuração? **
-</br>Você tem requisitos de segurança específicos ou precisa criar políticas de rede e regras de roteamento customizadas para fornecer segurança de rede dedicada. **Nota**: usar um dispositivo de gateway incorre em custos separados. Para obter detalhes, consulte a  [ documentação ](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
+</br>Você tem requisitos de segurança específicos ou precisa criar políticas de rede e regras de roteamento customizadas para fornecer segurança de rede dedicada. Observe que a utilização de um dispositivo de gateway incorre em custos separados. Para obter detalhes, consulte a  [ documentação ](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
 
 **Quais são as minhas opções para gerenciar o acesso público e privado ao meu cluster?**
 </br>As seções a seguir descrevem os recursos no {{site.data.keyword.containerlong_notm}} que podem ser usados para configurar a rede para clusters que estão conectados somente a uma VLAN privada.
@@ -195,10 +198,8 @@ Para conectar com segurança seus nós do trabalhador e apps a uma rede no local
 
 Se os nós do trabalhador estão configurados somente com uma VLAN privada, deve-se configurar uma solução alternativa para conectividade de rede entre os nós do trabalhador e o mestre. É possível configurar um firewall com políticas de rede customizadas para fornecer segurança de rede dedicada para seu cluster padrão e para detectar e corrigir a intrusão de rede. Por exemplo, você pode escolher configurar um [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) ou um [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) para agir como seu firewall e bloquear o tráfego indesejado. Ao configurar um firewall, deve-se também [abrir as portas e os endereços IP necessários](cs_firewall.html#firewall_outbound) para cada região para que o mestre e os nós do trabalhador possam se comunicar.
 
-**Nota**: se você tiver um dispositivo de roteador existente e, em seguida, incluir um cluster, as novas sub-redes móveis que forem pedidas para o cluster não serão configuradas no dispositivo do roteador. Para usar os serviços de rede, deve-se ativar o roteamento entre as sub-redes na mesma VLAN [ativando o VLAN Spanning](cs_subnets.html#vra-routing).
-
-Para verificar se o VLAN Spanning já está ativado, use o [comando](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-{: tip}
+Se você tiver um dispositivo roteador existente e, em seguida, incluir um cluster, as novas sub-redes móveis que são pedidas para o cluster não serão configuradas no dispositivo roteador. Para usar os serviços de rede, deve-se ativar o roteamento entre as sub-redes na mesma VLAN [ativando o VLAN Spanning](cs_subnets.html#vra-routing).
+{: important}
 
 ### Expor seus apps com serviços de rede privada
 {: #private_vlan_services}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -22,57 +25,60 @@ lastupdated: "2018-10-25"
 ## Escolhendo uma solução de armazenamento
 {: #choose_storage_solution}
 
-Antes de decidir qual tipo de armazenamento é a solução correta para você, deve-se entender os requisitos do app, o tipo de dados que deseja armazenar e a frequência com que deseja acessar esses dados. 
+Antes de decidir qual tipo de armazenamento é a solução correta para você, deve-se entender os requisitos do app, o tipo de dados que deseja armazenar e a frequência com que deseja acessar esses dados.
 {: shortdesc}
 
-1. Decida se seus dados devem ser armazenados permanentemente ou se seus dados podem ser removidos em um determinado momento. 
-   - **Armazenamento persistente:** seus dados ainda devem estar disponíveis, mesmo se o contêiner, o nó do trabalhador ou o cluster for removido. Use armazenamento persistente nos cenários a seguir: 
+1. Decida se seus dados devem ser armazenados permanentemente ou se seus dados podem ser removidos em um determinado momento.
+   - **Armazenamento persistente:** seus dados ainda devem estar disponíveis, mesmo se o contêiner, o nó do trabalhador ou o cluster for removido. Use armazenamento persistente nos cenários a seguir:
        - Apps stateful
        - Dados de negócios principais
        - Dados que devem estar disponíveis em razão de requisitos legais, como um período de retenção definido
-       - Auditoria 
+       - Auditoria
        - Os dados que devem ser acessados e compartilhados entre as instâncias do app
-   - **Armazenamento não persistente:** seus dados podem ser removidos quando o contêiner, o nó do trabalhador ou o cluster é removido. O armazenamento não persistente é geralmente usado para registrar informações, como logs do sistema ou logs de contêiner, teste de desenvolvimento ou quando você deseja acessar dados do sistema de arquivos do host. Para localizar uma visão geral das opções de armazenamento não persistente disponíveis, consulte [Comparação de opções de armazenamento não persistente](#non_persistent_overview). 
+   - **Armazenamento não persistente:** seus dados podem ser removidos quando o contêiner, o nó do trabalhador ou o cluster é removido. O armazenamento não persistente é geralmente usado para registrar informações, como logs do sistema ou logs de contêiner, teste de desenvolvimento ou quando você deseja acessar dados do sistema de arquivos do host. Para localizar uma visão geral das opções de armazenamento não persistente disponíveis, consulte [Comparação de opções de armazenamento não persistente](#non_persistent_overview).
 
 2. Se seus dados devem ser persistidos, analise se o app requer um tipo específico de armazenamento. Quando você usa um app existente, o app pode ser projetado para armazenar dados de uma das maneiras a seguir:  
-   - **Em um sistema de arquivos:** os dados podem ser armazenados como um arquivo em um diretório. Por exemplo, você poderia armazenar esse arquivo em seu disco rígido local. Alguns apps requerem que os dados sejam armazenados em um sistema de arquivos específico, como `nfs` ou `ext4`, para otimizar o armazenamento de dados e atingir os objetivos de desempenho. 
-   - **Em um banco de dados:** os dados devem ser armazenados em um banco de dados que segue um esquema específico. Alguns apps vêm com uma interface de banco de dados que pode ser usada para armazenar dados. Por exemplo, o WordPress é otimizado para armazenar dados em um banco de dados MySQL. Nesses casos, o tipo de armazenamento é selecionado para você. 
-   
-3. Se seu app não tem uma limitação no tipo de armazenamento que se deve usar, determine o tipo de dados que você deseja armazenar. 
-   - **Dados estruturados:** dados que podem ser armazenados em um banco de dados relacional no qual você tem uma tabela com colunas e linhas. Os dados em tabelas podem ser conectados usando chaves e geralmente são fáceis de acessar devido ao modelo de dados predefinido. Exemplos são números de telefone, números de conta, números de Seguridade Social ou CEPs. 
+   - **Em um sistema de arquivos:** os dados podem ser armazenados como um arquivo em um diretório. Por exemplo, você poderia armazenar esse arquivo em seu disco rígido local. Alguns apps requerem que os dados sejam armazenados em um sistema de arquivos específico, como `nfs` ou `ext4`, para otimizar o armazenamento de dados e atingir os objetivos de desempenho.
+   - **Em um banco de dados:** os dados devem ser armazenados em um banco de dados que segue um esquema específico. Alguns apps vêm com uma interface de banco de dados que pode ser usada para armazenar dados. Por exemplo, o WordPress é otimizado para armazenar dados em um banco de dados MySQL. Nesses casos, o tipo de armazenamento é selecionado para você.
+
+3. Se seu app não tem uma limitação no tipo de armazenamento que se deve usar, determine o tipo de dados que você deseja armazenar.
+   - **Dados estruturados:** dados que podem ser armazenados em um banco de dados relacional no qual você tem uma tabela com colunas e linhas. Os dados em tabelas podem ser conectados usando chaves e geralmente são fáceis de acessar devido ao modelo de dados predefinido. Exemplos são números de telefone, números de conta, números de Seguridade Social ou CEPs.
    - **Dados semiestruturados:** dados que não se ajustam a um banco de dados relacional, mas que vêm com algumas propriedades organizacionais que podem ser usadas para ler e analisar esses dados mais facilmente. Exemplos são arquivos de linguagem de marcações, como CSV, XML ou JSON.  
-   - **Dados não estruturados:** dados que não seguem um padrão organizacional e que são tão complexos que não é possível armazená-los em um banco de dados relacional com modelos de dados predefinidos. Para acessar esses dados, você precisa de ferramentas e software avançados. Exemplos são mensagens de e-mail, vídeos, fotos, arquivos de áudio, apresentações, dados de mídia social ou páginas da web. 
+   - **Dados não estruturados:** dados que não seguem um padrão organizacional e que são tão complexos que não é possível armazená-los em um banco de dados relacional com modelos de dados predefinidos. Para acessar esses dados, você precisa de ferramentas e software avançados. Exemplos são mensagens de e-mail, vídeos, fotos, arquivos de áudio, apresentações, dados de mídia social ou páginas da web.
 
-   Se você tiver dados estruturados e não estruturados, tente armazenar cada tipo de dados separadamente em uma solução de armazenamento que seja projetada para esse tipo de dados. Usar uma solução de armazenamento apropriada para o seu tipo de dados facilita o acesso aos seus dados e fornece os benefícios de desempenho, escalabilidade, durabilidade e consistência. 
+   Se você tiver dados estruturados e não estruturados, tente armazenar cada tipo de dados separadamente em uma solução de armazenamento que seja projetada para esse tipo de dados. Usar uma solução de armazenamento apropriada para o seu tipo de dados facilita o acesso aos seus dados e fornece os benefícios de desempenho, escalabilidade, durabilidade e consistência.
    {: tip}
-   
+
 4. Analise como você deseja acessar os seus dados. As soluções de armazenamento são geralmente projetadas e otimizadas para suportar operações de leitura ou gravação.  
-   - ** Somente leitura: **  seus dados são somente leitura. Você não deseja gravar ou mudar seus dados. 
-   - **Leitura e gravação:** você deseja ler, gravar e mudar seus dados. Para dados que são lidos e gravados, é importante entender se as operações são de leitura pesada, de gravação pesada ou balanceada. 
-   
-4. Determine a frequência em que seus dados são acessados. Entender a frequência de acesso a dados pode ajudar a entender o desempenho requerido para seu armazenamento. Por exemplo, os dados que são acessados frequentemente geralmente residem em armazenamento rápido. 
-   - **Dados quentes:** dados que são acessados frequentemente. Casos de uso comuns são apps da web ou móveis. 
-   - **Dados frescos ou mornos:** dados que são acessados infrequentemente, como uma vez por mês ou menos. Os casos de uso comuns são archives, retenção de dados de curto prazo ou recuperação de desastre. 
-   - **Dados frios:** dados que são raramente acessados, se forem. Os casos de uso comuns são archives, backups de longo prazo, dados históricos. 
-   - **Dados congelados:** dados que não são acessados e que você precisa manter devido a motivos jurídicos. 
+   - ** Somente leitura: **  seus dados são somente leitura. Você não deseja gravar ou mudar seus dados.
+   - **Leitura e gravação:** você deseja ler, gravar e mudar seus dados. Para dados que são lidos e gravados, é importante entender se as operações são de leitura pesada, de gravação pesada ou balanceada.
 
-   Se não for possível prever a frequência ou a frequência não seguir um padrão estrito, determine se as cargas de trabalho são de leitura pesada, de gravação pesada ou balanceada. Em seguida, consulte a opção de armazenamento que se ajusta à sua carga de trabalho e investigue qual camada de armazenamento fornece a flexibilidade necessária. Por exemplo, o {{site.data.keyword.containerlong_notm}} fornece uma classe de armazenamento `flex` que considera com que frequência os dados são acessados em um mês e considera essa medida para otimizar o faturamento mensal. 
+4. Determine a frequência em que seus dados são acessados. Entender a frequência de acesso a dados pode ajudar a entender o desempenho requerido para seu armazenamento. Por exemplo, os dados que são acessados frequentemente geralmente residem em armazenamento rápido.
+   - **Dados quentes:** dados que são acessados frequentemente. Casos de uso comuns são apps da web ou móveis.
+   - **Dados frescos ou mornos:** dados que são acessados infrequentemente, como uma vez por mês ou menos. Os casos de uso comuns são archives, retenção de dados de curto prazo ou recuperação de desastre.
+   - **Dados frios:** dados que são raramente acessados, se forem. Os casos de uso comuns são archives, backups de longo prazo, dados históricos.
+   - **Dados congelados:** dados que não são acessados e que você precisa manter devido a motivos jurídicos.
+
+   Se não for possível prever a frequência ou a frequência não seguir um padrão estrito, determine se as cargas de trabalho são de leitura pesada, de gravação pesada ou balanceada. Em seguida, consulte a opção de armazenamento que se ajusta à sua carga de trabalho e investigue qual camada de armazenamento fornece a flexibilidade necessária. Por exemplo, o {{site.data.keyword.cos_full_notm}} fornece uma classe de armazenamento `flex` que considera com que frequência os dados são acessados em um mês e considera essa medida para otimizar o faturamento mensal.
    {: tip}
- 
-5. Investigue se seus dados devem ser compartilhados entre múltiplas instâncias de app, zonas ou regiões. 
-   - **Acessar entre pods:** quando você usa volumes persistentes do Kubernetes para acessar seu armazenamento, é possível determinar o número de pods que podem montar o volume ao mesmo tempo. Algumas soluções de armazenamento, como armazenamento de bloco, podem ser acessadas somente por um pod por vez. Outras soluções de armazenamento permitem que você compartilhe o mesmo volume entre múltiplos pods. 
-   - **Acessar entre zonas e regiões:** você pode requerer que os seus dados estejam acessíveis entre zonas ou regiões. Algumas soluções de armazenamento, como armazenamento de arquivo e de bloco, são específicas do data center e não podem ser compartilhadas entre as zonas em uma configuração de cluster de múltiplas zonas. 
 
-6. Entenda outras características de armazenamento que impactam sua opção. 
-   - **Consistência:** a garantia de que uma operação de leitura retorna a versão mais recente de um arquivo. As soluções de armazenamento podem fornecer `strong consistency` quando você tem garantia de sempre receber a versão mais recente de um arquivo ou `eventual consistency` quando a operação de leitura pode não retornar a versão mais recente. Frequentemente, você localiza uma consistência eventual em sistemas distribuídos geograficamente em que uma operação de gravação deve primeiro ser replicada em todas as instâncias. 
-   - **Desempenho:** o tempo que leva para concluir uma operação de leitura ou gravação. 
-   - **Durabilidade:** a garantia de que uma operação de gravação que está confirmada em seu armazenamento mantenha-se permanentemente e não seja corrompida ou perdida, mesmo se gigabytes ou terabytes de dados forem gravados em seu armazenamento ao mesmo tempo. 
-   - **Resiliência:** a capacidade de se recuperar de uma indisponibilidade e continuar as operações, mesmo se um componente de hardware ou software falhou. Por exemplo, seu armazenamento físico experimenta uma indisponibilidade de energia, uma indisponibilidade de rede ou é destruído durante um desastre natural. 
-   - **Disponibilidade:** a capacidade de fornecer acesso a seus dados, mesmo que um data center ou uma região esteja indisponível. A disponibilidade para seus dados é geralmente obtida pela inclusão de redundância e configuração de mecanismos de failover. 
-   - **Escalabilidade:** a capacidade de ampliar a capacidade e customizar o desempenho com base em suas necessidades. 
-   - **Criptografia:** o mascaramento de dados para evitar visibilidade quando os dados são acessados por um usuário não autorizado. 
+5. Investigue se seus dados devem ser compartilhados entre múltiplas instâncias de app, zonas ou regiões.
+   - **Acessar entre pods:** quando você usa volumes persistentes do Kubernetes para acessar seu armazenamento, é possível determinar o número de pods que podem montar o volume ao mesmo tempo. Algumas soluções de armazenamento, como armazenamento de bloco, podem ser acessadas somente por um pod por vez. Outras soluções de armazenamento permitem que você compartilhe o mesmo volume entre múltiplos pods.
+   - **Acessar entre zonas e regiões:** você pode requerer que os seus dados estejam acessíveis entre zonas ou regiões. Algumas soluções de armazenamento, como armazenamento de arquivo e de bloco, são específicas do data center e não podem ser compartilhadas entre as zonas em uma configuração de cluster de múltiplas zonas.
    
-7. [Revise as soluções de armazenamento persistente disponíveis](#persistent_storage_overview) e escolha a solução que melhor se ajuste ao seu app e aos requisitos de dados. 
+   Se você desejar tornar seus dados acessíveis entre zonas ou regiões, certifique-se de consultar seu departamento jurídico para verificar se os dados podem ser armazenados em múltiplas zonas ou em um país diferente.
+   {: note}
+
+6. Entenda outras características de armazenamento que impactam sua opção.
+   - **Consistência:** a garantia de que uma operação de leitura retorna a versão mais recente de um arquivo. As soluções de armazenamento podem fornecer `strong consistency` quando você tem garantia de sempre receber a versão mais recente de um arquivo ou `eventual consistency` quando a operação de leitura pode não retornar a versão mais recente. Frequentemente, você localiza uma consistência eventual em sistemas distribuídos geograficamente em que uma operação de gravação deve primeiro ser replicada em todas as instâncias.
+   - **Desempenho:** o tempo que leva para concluir uma operação de leitura ou gravação.
+   - **Durabilidade:** a garantia de que uma operação de gravação que está confirmada em seu armazenamento mantenha-se permanentemente e não seja corrompida ou perdida, mesmo se gigabytes ou terabytes de dados forem gravados em seu armazenamento ao mesmo tempo.
+   - **Resiliência:** a capacidade de se recuperar de uma indisponibilidade e continuar as operações, mesmo se um componente de hardware ou software falhou. Por exemplo, seu armazenamento físico experimenta uma indisponibilidade de energia, uma indisponibilidade de rede ou é destruído durante um desastre natural.
+   - **Disponibilidade:** a capacidade de fornecer acesso a seus dados, mesmo que um data center ou uma região esteja indisponível. A disponibilidade para seus dados é geralmente obtida pela inclusão de redundância e configuração de mecanismos de failover.
+   - **Escalabilidade:** a capacidade de ampliar a capacidade e customizar o desempenho com base em suas necessidades.
+   - **Criptografia:** o mascaramento de dados para evitar visibilidade quando os dados são acessados por um usuário não autorizado.
+
+7. [Revise as soluções de armazenamento persistente disponíveis](#persistent_storage_overview) e escolha a solução que melhor se ajuste ao seu app e aos requisitos de dados.
 
 ## Comparação de Opções de Armazenamento não Persistente
 {: #non_persistent_overview}
@@ -160,13 +166,14 @@ A imagem a seguir mostra as opções de armazenamento de dados não persistentes
 </table>
 
 
+
 ## Comparação de opções de armazenamento persistente
 {: #persistent_storage_overview}
 
-Use as opções de armazenamento persistente para quaisquer dados que você deseja manter permanentemente, mesmo se o contêiner, o nó do trabalhador ou o cluster for removido. 
+Use as opções de armazenamento persistente para quaisquer dados que você deseja manter permanentemente, mesmo se o contêiner, o nó do trabalhador ou o cluster for removido.
 {: shortdesc}
 
-**Nota:** as opções de armazenamento de dados persistentes estão disponíveis somente para clusters padrão. 
+As opções de armazenamento de dados persistentes estão disponíveis somente para clusters padrão.
 
 Procurando conectar seu cluster a um banco de dados no local? Consulte [Configurando a conectividade de VPN para o cluster](cs_vpn.html#vpn).
 {: tip}
@@ -285,3 +292,7 @@ armazenamento. Cada nó armazena somente uma parte dos dados. </td>
 </tr>
 </tbody>
 </table>
+
+
+
+

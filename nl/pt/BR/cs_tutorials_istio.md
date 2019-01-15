@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -28,7 +31,7 @@ Neste tutorial, será possível ver como instalar o Istio com quatro microsservi
 ## Objetivos
 
 -   Implementar o gráfico Helm do Istio em seu cluster
--   Implementar o aplicativo de amostra BookInfo
+-   Implemente o aplicativo de amostra BookInfo
 -   Verificar a implementação do app BookInfo e executar round robin nas três versões do serviço de classificações
 
 ## Tempo Necessário
@@ -41,8 +44,8 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 
 ## Pré-requisitos
 
--  [Instale a CLI do IBM Cloud, o plug-in do {{site.data.keyword.containerlong_notm}} e a CLI do Kubernetes](cs_cli_install.html#cs_cli_install_steps). O Istio requer o Kubernetes versão 1.9 ou superior. Certifique-se de instalar a versão da CLI `kubectl` que corresponde à versão do Kubernetes do seu cluster.
--  [Crie um cluster que execute o Kubernetes versão 1.9 ou mais recente](cs_clusters.html#clusters_cli) ou [atualize um cluster existente para a versão 1.9](cs_versions.html#cs_v19).
+-  [Instale a CLI do IBM Cloud, o plug-in do {{site.data.keyword.containerlong_notm}} e a CLI do Kubernetes](cs_cli_install.html#cs_cli_install_steps). Certifique-se de instalar a versão da CLI `kubectl` que corresponde à versão do Kubernetes do seu cluster.
+-  [Criar um cluster](cs_clusters.html#clusters_cli). 
 -  [Destino a CLI para seu cluster](cs_cli_install.html#cs_cli_configure).
 
 ## Lição 1: Fazer download e instalar o Istio

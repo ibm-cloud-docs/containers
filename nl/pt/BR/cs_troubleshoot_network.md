@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -54,10 +57,35 @@ Para solucionar problemas do serviço de balanceador de carga:
 
     Na saída da CLI, certifique-se de que o **Status** dos nós do trabalhador exiba **Pronto** e que o **Tipo de máquina** mostre um tipo de máquina diferente de **livre**.
 
-2.  Verifique a precisão do arquivo de configuração para o serviço de balanceador de carga.
+2. Para balanceadores de carga da versão 2.0: assegure-se de concluir os [pré-requisitos do balanceador de carga 2.0](cs_loadbalancer.html#ipvs_provision).
 
-    ```
-    apiVersion: v1
+3. Verifique a precisão do arquivo de configuração para o serviço de balanceador de carga.
+    * Balanceadores de carga da versão 2.0:
+        ```
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: myservice
+          annotations:
+            service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
+        spec:
+          type: LoadBalancer
+          selector:
+            <selector_key>:<selector_value>
+          ports:
+           - protocol: TCP port: 8080 externalTrafficPolicy: Local
+        ```
+        {: screen}
+
+        1. Verifique se você definiu **LoadBalancer** como o tipo para seu serviço.
+        2. Verifique se você incluiu a anotação `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"`.
+        3. Na seção `spec.selector` do serviço LoadBalancer, assegure-se de que o `<selector_key>` e o `<selector_value>` sejam os mesmos que o par chave/valor que você usou na seção `spec.template.metadata.labels` de seu yaml de implementação. Se os rótulos não corresponderem, a seção **Terminais** em seu serviço LoadBalancer exibirá **<nenhum>** e seu app não ficará acessível na Internet.
+        4. Verifique se usou a **porta** em que seu app atende.
+        5. Verifique se você configurou `externalTrafficPolicy` para `Local`.
+
+    * Balanceadores de carga da Versão 1.0:
+        ```
+        apiVersion: v1
     kind: Service
     metadata:
       name: myservice
@@ -66,14 +94,13 @@ Para solucionar problemas do serviço de balanceador de carga:
       selector:
         <selector_key>:<selector_value>
       ports:
-       - protocol: TCP
-         port: 8080
-    ```
-    {: pre}
+           - protocol: TCP port: 8080
+        ```
+        {: screen}
 
-    1.  Verifique se você definiu **LoadBalancer** como o tipo para seu serviço.
-    2.  Na seção `spec.selector` do serviço LoadBalancer, assegure-se de que o `<selector_key>` e o `<selector_value>` sejam os mesmos que o par chave/valor que você usou na seção `spec.template.metadata.labels` de seu yaml de implementação. Se os rótulos não corresponderem, a seção **Terminais** em seu serviço LoadBalancer exibirá **<nenhum>** e seu app não ficará acessível na Internet.
-    3.  Verifique se usou a **porta** em que seu app atende.
+        1. Verifique se você definiu **LoadBalancer** como o tipo para seu serviço.
+        2. Na seção `spec.selector` do serviço LoadBalancer, assegure-se de que o `<selector_key>` e o `<selector_value>` sejam os mesmos que o par chave/valor que você usou na seção `spec.template.metadata.labels` de seu yaml de implementação. Se os rótulos não corresponderem, a seção **Terminais** em seu serviço LoadBalancer exibirá **<nenhum>** e seu app não ficará acessível na Internet.
+        3. Verifique se usou a **porta** em que seu app atende.
 
 3.  Verifique o serviço de balanceador de carga e revise a seção **Eventos** para localizar erros em potencial.
 
@@ -88,13 +115,12 @@ Para solucionar problemas do serviço de balanceador de carga:
     <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Essa mensagem de erro indica que não sobrou nenhum endereço IP público móvel para ser alocado para o serviço de balanceador de carga. Consulte <a href="cs_subnets.html#subnets">Incluindo sub-redes nos clusters</a> para localizar informações sobre como solicitar endereços IP públicos móveis para seu cluster. Depois que os endereços IP públicos móveis estiverem disponíveis para o cluster, o serviço de balanceador de carga será criado automaticamente.</li>
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Você definiu um endereço IP público móvel para o serviço de balanceador de carga usando a seção **loadBalancerIP**, mas esse endereço IP público móvel não está disponível em sua sub-rede pública móvel. Na seção **loadBalancerIP** de seu script de configuração, remova o endereço IP existente e inclua um dos endereços IP públicos móveis disponíveis. Também é possível remover a seção **loadBalancerIP** de seu script para que um endereço IP público móvel disponível possa ser alocado automaticamente.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Você não tem nós do trabalhador suficientes para implementar um serviço de balanceador de carga. Um motivo talvez seja que você tenha implementado um cluster padrão com mais de um nó do trabalhador, mas o fornecimento dos nós do trabalhador tenha falhado.</li>
-    <ol><li>Liste os nós do trabalhador disponíveis.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
-    <li>Se pelo menos dois nós do trabalhador disponíveis forem localizados, liste os detalhes do nó do trabalhador.</br><pre class="codeblock"><code>ibmcloud ks worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
-    <li>Certifique-se de que os IDs de VLAN pública e privada para os nós do trabalhador que foram retornados pelos comandos <code>kubectl get nodes</code> e <code>ibmcloud ks [&lt;cluster_name_or_ID&gt;] worker-get</code> correspondam.</li></ol></li></ul>
+    <ol><li>Liste os nós do trabalhador disponíveis.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
+    <li>Se pelo menos dois nós do trabalhador disponíveis forem localizados, liste os detalhes do nó do trabalhador.</br><pre class="pre"><code>ibmcloud ks worker-get &lt;cluster_name_or_ID&gt; &lt;worker_ID&gt;</code></pre></li>
+    <li>Certifique-se de que os IDs de VLAN pública e privada para os nós do trabalhador que foram retornados pelos comandos <code>kubectl get nodes</code> e <code>ibmcloud ks &lt;cluster_name_or_ID&gt; worker-get</code> correspondam.</li></ol></li></ul>
 
 4.  Se você estiver usando um domínio customizado para se conectar ao serviço de balanceador de carga, certifique-se de que seu domínio customizado seja mapeado para o endereço IP público do serviço de balanceador de carga.
     1.  Localize o endereço IP público do serviço de balanceador de carga.
-
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
@@ -113,10 +139,10 @@ Você expôs publicamente seu app criando um recurso de Ingresso para seu app no
 
 {: tsResolve}
 Primeiro, verifique se seu cluster está totalmente implementado e tem pelo menos 2 nós do trabalhador disponíveis por zona para assegurar alta disponibilidade para o ALB.
-    ```
-    ibmcloud ks workers <cluster_name_or_ID>
-    ```
-    {: pre}
+```
+ibmcloud ks workers <cluster_name_or_ID>
+```
+{: pre}
 
 Na saída da CLI, certifique-se de que o **Status** dos nós do trabalhador exiba **Pronto** e que o **Tipo de máquina** mostre um tipo de máquina diferente de **livre**.
 
@@ -146,7 +172,7 @@ Revise as razões a seguir por que o segredo do ALB pode falhar e as etapas de r
  <tbody>
  <tr>
  <td>Você não tem as funções de acesso necessárias para fazer download e atualizar os dados do certificado.</td>
- <td>Verifique com seu Administrador de conta para designar a você as funções **Gerenciador** e **Gravador** para sua instância do {{site.data.keyword.cloudcerts_full_notm}}. Para obter mais informações, veja <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Gerenciando acesso de serviço</a> para {{site.data.keyword.cloudcerts_short}}.</td>
+ <td>Verifique com seu Administrador de conta para designar a você as funções do {{site.data.keyword.Bluemix_notm}} IAM a seguir:<ul><li>As funções de serviço **Gerente** e **Gravador** para sua instância do {{site.data.keyword.cloudcerts_full_notm}}. Para obter mais informações, veja <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Gerenciando acesso de serviço</a> para {{site.data.keyword.cloudcerts_short}}.</li><li>A <a href="cs_users.html#platform">função de plataforma **Administrador**</a> para o cluster.</li></ul></td>
  </tr>
  <tr>
  <td>O CRN do certificado fornecido no tempo de criação, atualização ou remoção não pertence à mesma conta que o cluster.</td>
@@ -190,12 +216,15 @@ Para visualizar quantas sub-redes uma VLAN tem:
 2.  Clique no **Número da VLAN** da VLAN usada para criar seu cluster. Revise a seção **Subnets** para ver se 40 ou mais sub-redes existem.
 
 {: tsResolve}
-Se você precisar de uma nova VLAN, peça uma [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#order-vlans). Em seguida, [crie um cluster](cs_cli_reference.html#cs_cluster_create) que usa essa nova VLAN.
+Se você precisar de uma nova VLAN, peça uma [entrando em contato com o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans). Em seguida, [crie um cluster](cs_cli_reference.html#cs_cluster_create) que usa essa nova VLAN.
 
 Se você tiver outra VLAN disponível, será possível [configurar a ampliação da VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) no cluster existente. Depois, será possível incluir novos nós do trabalhador no cluster que usam a outra VLAN com sub-redes disponíveis. Para verificar se o VLAN Spanning já está ativado, use o [comando](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
 Se você não estiver usando todas as sub-redes na VLAN, será possível reutilizar sub-redes no cluster.
-1.  Verifique se as sub-redes que você deseja usar estão disponíveis. **Nota**: a conta de infraestrutura que você está usando pode ser compartilhada ao longo de múltiplas contas do {{site.data.keyword.Bluemix_notm}}. Em caso positivo, mesmo se você executar o comando `ibmcloud ks subnets` para ver sub-redes com **Clusters ligados**, será possível ver informações somente para os seus clusters. Verifique com o proprietário da conta de infraestrutura para certificar-se de que as sub-redes estão disponíveis e não em uso por nenhuma outra conta ou equipe.
+1.  Verifique se as sub-redes que você deseja usar estão disponíveis.
+
+    A conta de infraestrutura que você está usando pode ser compartilhada entre múltiplas contas do {{site.data.keyword.Bluemix_notm}}. Em caso positivo, mesmo se você executar o comando `ibmcloud ks subnets` para ver sub-redes com **Clusters ligados**, será possível ver informações somente para os seus clusters. Verifique com o proprietário da conta de infraestrutura para certificar-se de que as sub-redes estão disponíveis e não em uso por nenhuma outra conta ou equipe.
+    {: note}
 
 2.  [Crie um cluster](cs_cli_reference.html#cs_cluster_create) com a opção `--no-subnet` para que o serviço não tente criar novas sub-redes. Especifique a zona e a VLAN que tem as sub-redes que estão disponíveis para reutilização.
 
@@ -210,12 +239,12 @@ Se você não estiver usando todas as sub-redes na VLAN, será possível reutili
 {: tsSymptoms}
 Quando você tem um cluster de múltiplas zonas e executa `ibmcloud ks albs <cluster>`, nenhum ALB é implementado em uma zona. Por exemplo, se você tiver nós do trabalhador em 3 zonas, poderá ver uma saída semelhante à seguinte na qual um ALB público não foi implementado na terceira zona.
 ```
-ALB ID                                            Enabled   Status     Type      ALB IP   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false     disabled   private   -   
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true      enabled    public    169.xx.xxx.xxx
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public    169.xx.xxx.xxx
+ALB ID                                            Status     Type      ALB IP           Zone    Build
+private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
+private-cr96039a75fddb4ad1a09ced6699c88888-alb2   disabled   private   -                dal12   ingress:350/ingress-auth:192
+private-cr96039a75fddb4ad1a09ced6699c88888-alb3   disabled   private   -                dal13   ingress:350/ingress-auth:192
+public-cr96039a75fddb4ad1a09ced6699c88888-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
+public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
 ```
 {: screen}
 
@@ -258,14 +287,14 @@ Para evitar que a conexão seja fechada após 60 segundos de inatividade:
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-Você ativou a preservação de IP de origem para um serviço de [balanceador de carga](cs_loadbalancer.html#node_affinity_tolerations) ou [ALB do Ingress](cs_ingress.html#preserve_source_ip) mudando `externalTrafficPolicy` para `Local` no arquivo de configuração do serviço. No entanto, nenhum tráfego atinge o serviço de backend para seu app.
+Você ativou a preservação de IP de origem para um [balanceador de carga da versão 1.0](cs_loadbalancer.html#node_affinity_tolerations) ou um serviço [ALB do Ingress](cs_ingress.html#preserve_source_ip), mudando `externalTrafficPolicy` para `Local` no arquivo de configuração do serviço. No entanto, nenhum tráfego atinge o serviço de backend para seu app.
 
 {: tsCauses}
 Ao ativar a preservação de IP de origem para os serviços de balanceador de carga ou ALB do Ingress, o endereço IP de origem da solicitação do cliente é preservado. O serviço encaminha o tráfego para os pods de app no mesmo nó do trabalhador somente para assegurar que o endereço IP do pacote de solicitações não seja mudado. Geralmente, os pods dos serviços de balanceador de carga ou ALB de Ingress são implementados nos mesmos nós do trabalhador nos quais os pods de app são implementados. No entanto, existem algumas situações em que os pods de serviço e os pods de app podem não ser planejados para o mesmo nó do trabalhador. Se você usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) em nós do trabalhador, quaisquer pods que não tiverem uma tolerância de contaminação serão impedidos de serem executados nos nós do trabalhador contaminados. A preservação de IP de origem pode não estar funcionando com base no tipo de contaminação que você usou:
 
 * **Contaminações do nó de borda**: você [incluiu o rótulo `dedicated=edge`](cs_edge.html#edge_nodes) em dois ou mais nós do trabalhador em cada VLAN pública em seu cluster para assegurar que os pods do Ingress e do balanceador de carga sejam implementados somente nesses nós do trabalhador. Em seguida, você também [contaminou esses nós de borda](cs_edge.html#edge_workloads) para evitar que quaisquer outras cargas de trabalho sejam executadas em nós de borda. No entanto, você não incluiu uma regra de afinidade de nó de borda e tolerância em sua implementação do app. Seus pods de app não podem ser planejados nos mesmos nós contaminados que os pods de serviço e nenhum tráfego atinge o serviço de backend para seu app.
 
-* **Contaminações customizadas**: você usou contaminações customizadas em vários nós para que somente os pods de app com essa tolerância de contaminação possam ser implementados nesses nós. Você incluiu regras de afinidade e tolerâncias para as implementações de seu app e o serviço de balanceador de carga ou Ingress para que seus pods sejam implementados somente nesses nós. No entanto, os pods `ibm-cloud-provider-ip` `keepalived` que são criados automaticamente no namespace `ibm-system` asseguram que os pods do balanceador de carga sigam os pods do app para os mesmos nós. Esses pods `keepalived` não têm as tolerâncias para as contaminações customizadas que você usou. Eles não podem ser planejados nos mesmos nós contaminados em que os seus pods de app estão em execução e nenhum tráfego atinge o serviço de backend para seu app.
+* **Contaminações customizadas**: você usou contaminações customizadas em vários nós para que somente os pods de app com essa tolerância de contaminação possam ser implementados nesses nós. Você incluiu regras de afinidade e tolerâncias para as implementações de seu app e o serviço de balanceador de carga ou Ingress para que seus pods sejam implementados somente nesses nós. No entanto, os pods `ibm-cloud-provider-ip` `keepalived` que são criados automaticamente no namespace `ibm-system` asseguram que os pods do balanceador de carga e os pods de app estejam sempre planejados para o mesmo nó do trabalhador. Esses pods `keepalived` não têm as tolerâncias para as contaminações customizadas que você usou. Eles não podem ser planejados nos mesmos nós contaminados em que os seus pods de app estão em execução e nenhum tráfego atinge o serviço de backend para seu app.
 
 {: tsResolve}
 Resolva o problema escolhendo uma das opções a seguir:
@@ -291,7 +320,7 @@ Se você concluir uma das opções acima, mas os pods `keepalived` ainda não es
 
 3. Descreva cada pod `keepalived` e procure a seção **Eventos**. Trate quaisquer mensagens de erro ou de aviso que estejam listadas.
     ```
-    ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
+    kubectl describe pod ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
     ```
     {: pre}
 
@@ -302,7 +331,7 @@ Se você concluir uma das opções acima, mas os pods `keepalived` ainda não es
 {: #cs_vpn_fails}
 
 {: tsSymptoms}
-Quando você verifica a conectividade VPN executando `kubectl exec -n kube-system $STRONGSWAN_POD -- ipsec status`, você não vê um status de `ESTABLISHED` ou o pod VPN está em um estado `ERROR` ou continua travando e reiniciando.
+Quando você verifica a conectividade de VPN executando `kubectl exec $STRONGSWAN_POD -- ipsec status`, você não vê um status de `ESTABLISHED` ou o pod de VPN está em um estado de `ERROR` ou continua travando e reiniciando.
 
 {: tsCauses}
 Seu arquivo de configuração do gráfico Helm tem valores incorretos, valores ausentes ou erros de sintaxe.
@@ -310,48 +339,21 @@ Seu arquivo de configuração do gráfico Helm tem valores incorretos, valores a
 {: tsResolve}
 Quando você tentar estabelecer a conectividade VPN com o gráfico Helm do strongSwan, é provável que o status da VPN não seja `ESTABLISHED` na primeira vez. Você pode precisar verificar vários tipos de problemas e mudar seu arquivo de configuração de acordo. Para solucionar problemas de sua conectividade VPN do strongSwan:
 
-1. Verifique as configurações de terminal de VPN no local com relação às configurações em seu arquivo de configuração. Se as configurações não corresponderem:
+1. [Teste e verifique a conectividade de VPN do strongSwan](cs_vpn.html#vpn_test) executando os cinco testes do Helm que estão incluídos na definição de gráfico do strongSwan.
 
-    <ol>
-    <li>Exclua o gráfico do Helm existente.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
-    <li>Corrija os valores incorretos no arquivo <code>config.yaml</code> e salve o arquivo atualizado.</li>
-    <li>Instale o novo gráfico do Helm.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
-    </ol>
-
-2. Se o pod VPN está em um estado de `ERROR` ou continua travando e reiniciando, pode ser devido à validação do parâmetro das configurações `ipsec.conf` no mapa de configuração do gráfico.
-
-    <ol>
-    <li>Verifique quaisquer erros de validação nos logs do pod do strongSwan.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
-    <li>Se os logs contiverem erros de validação, exclua o gráfico Helm existente.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
-    <li>Corrija os valores incorretos no arquivo `config.yaml` e salve o arquivo atualizado.</li>
-    <li>Instale o novo gráfico do Helm.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
-    </ol>
-
-3. Execute os 5 testes do Helm incluídos na definição de gráfico do strongSwan.
-
-    <ol>
-    <li>Execute os testes do Helm.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
-    <li>Se algum teste falhar, consulte [Entendendo os testes de conectividade VPN do Helm](cs_vpn.html#vpn_tests_table) para obter informações sobre cada teste e por que ele pode falhar. <b>Nota</b>: alguns dos testes têm requisitos que são configurações opcionais na configuração de VPN. Se alguns dos testes falharem, as falhas poderão ser aceitáveis, dependendo de se você especificou essas configurações opcionais.</li>
-    <li>Visualize a saída de um teste com falha consultando os logs do pod de teste.<br><pre class="codeblock"><code>kubectl logs -n kube-system <test_program></code></pre></li>
-    <li>Exclua o gráfico do Helm existente.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
-    <li>Corrija os valores incorretos no arquivo <code>config.yaml</code> e salve o arquivo atualizado.</li>
-    <li>Instale o novo gráfico do Helm.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
-    <li>Para verificar suas mudanças:<ol><li>Obtenha os pods do teste atual.</br><pre class="codeblock"><code>kubectl get pods -a -n kube-system -l app=strongswan-test</code></pre></li><li>Limpe os pods de teste atuais.</br><pre class="codeblock"><code>kubectl delete pods -n kube-system -l app=strongswan-test</code></pre></li><li>Execute os testes novamente.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
-    </ol></ol>
-
-4. Execute a ferramenta de depuração VPN que é compactada dentro da imagem de pod da VPN.
+2. Se não for possível estabelecer a conectividade de VPN depois de executar os testes do Helm, será possível executar a ferramenta de depuração de VPN que está empacotada dentro da imagem do pod VPN.
 
     1. Configure a variável de ambiente `STRONGSWAN_POD`.
 
         ```
-        export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+        export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
         ```
         {: pre}
 
     2. Execute a ferramenta de depuração.
 
         ```
-        kubectl exec -n kube-system  $STRONGSWAN_POD -- vpnDebug
+        kubectl exec  $STRONGSWAN_POD -- vpnDebug
         ```
         {: pre}
 
@@ -364,9 +366,9 @@ Quando você tentar estabelecer a conectividade VPN com o gráfico Helm do stron
 {: #cs_strongswan_release}
 
 {: tsSymptoms}
-Você modifica o gráfico Helm do strongSwan e tenta instalar sua nova liberação executando `helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan `. No entanto, você vê o erro a seguir:
+Você modifica o gráfico Helm do strongSwan e tenta instalar sua nova liberação executando `helm install -f config.yaml --name=vpn ibm/strongswan`. No entanto, você vê o erro a seguir:
 ```
-Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan" already exists
+Error: release vpn failed: deployments.extensions "vpn-strongswan" already exists
 ```
 {: screen}
 
@@ -377,25 +379,25 @@ Esse erro indica que a versão anterior do gráfico do strongSwan não foi compl
 
 1. Exclua a liberação do gráfico anterior.
     ```
-    helm delete --purge <old_release_name>
+    helm delete --purge vpn
     ```
     {: pre}
 
 2. Exclua a implementação para a liberação anterior. A exclusão da implementação e do pod associado leva até 1 minuto.
     ```
-    kubectl delete deploy -n kube-system vpn-strongswan
+    kubectl delete deploy vpn-strongswan
     ```
     {: pre}
 
 3. Verifique se a implementação foi excluída. A implementação `vpn-strongswan` não aparece na lista.
     ```
-    kubectl get deployments -n kube-system
+    kubectl get deployments
     ```
     {: pre}
 
 4. Reinstale o gráfico Helm do strongSwan atualizado com um novo nome de liberação.
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan
+    -f config.yaml helm install -- name=vpn ibm/strongswan
     ```
     {: pre}
 
@@ -496,7 +498,7 @@ Atualize os valores do gráfico Helm para refletir as mudanças do nó do trabal
 4. Instale o novo gráfico Helm com os seus valores atualizados.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
@@ -516,14 +518,14 @@ Atualize os valores do gráfico Helm para refletir as mudanças do nó do trabal
 8. Configure a variável de ambiente `STRONGSWAN_POD`.
 
     ```
-    export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=<release_name> -o jsonpath='{ .items[0].metadata.name }')
+    export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=<release_name> -o jsonpath='{ .items[0].metadata.name }')
     ```
     {: pre}
 
 9. Verifique o status da VPN.
 
     ```
-    kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+    Kubectl exec $STRONGSWAN_POD -- ipsec status
     ```
     {: pre}
 
@@ -567,7 +569,7 @@ Para assegurar que todos os fatores do Calico estejam alinhados:
     {: pre}
 
     * Se o seu cluster estiver no Kubernetes versão 1.10 ou mais recente:
-        1. [Instale e configure a CLI do Calico versão 3.1.1](cs_network_policy.html#1.10_install). A configuração inclui atualizar manualmente o arquivo `calicoctl.cfg` para usar a sintaxe do Calico v3.
+        1. [Instale e configure a CLI versão 3.3.1 do Calico](cs_network_policy.html#1.10_install). A configuração inclui atualizar manualmente o arquivo `calicoctl.cfg` para usar a sintaxe do Calico v3.
         2. Assegure-se de que quaisquer políticas que você criar e desejar aplicar a seu cluster usem a [Sintaxe do Calico v3 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Se você tiver um arquivo `.yaml` ou `.json` de política existente na sintaxe do Calico v2, será possível converter isso para a sintaxe do Calico v3 usando o comando [`calicoctl convert` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
         3. Para [visualizar políticas](cs_network_policy.html#1.10_examine_policies), assegure-se de que você esteja usando `calicoctl get GlobalNetworkPolicy` para as políticas globais e `calicoctl get NetworkPolicy --namespace <policy_namespace>` para políticas que estão com escopo definido para namespaces específicos.
 
@@ -611,7 +613,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
     ```
     {: pre}
 
-2.  Obtenha uma nova VLAN privada e pública para cada zona em que seu cluster está [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#order-vlans).
+2.  Obtenha uma nova VLAN privada e pública para cada zona em que seu cluster está [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans).
 
 3.  Anote os novos IDs de VLAN privada e pública para cada zona.
 
@@ -656,20 +658,15 @@ Ainda está tendo problemas com o seu cluster?
 {: shortdesc}
 
 -  No terminal, você é notificado quando atualizações para a CLI `ibmcloud` e plug-ins estão disponíveis. Certifique-se de manter sua CLI atualizada para que seja possível usar todos os comandos e sinalizações disponíveis.
-
 -   Para ver se o {{site.data.keyword.Bluemix_notm}} está disponível, [verifique a página de status do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/bluemix/support/#status).
 -   Poste uma pergunta no [{{site.data.keyword.containerlong_notm}} Slack ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com).
-
     Se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}}, [solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para essa Folga.
     {: tip}
 -   Revise os fóruns para ver se outros usuários tiveram o mesmo problema. Ao usar os fóruns para fazer uma pergunta, marque sua pergunta para que ela seja vista pelas equipes de desenvolvimento do {{site.data.keyword.Bluemix_notm}}.
-
     -   Se você tiver questões técnicas sobre como desenvolver ou implementar clusters ou apps com o {{site.data.keyword.containerlong_notm}}, poste sua pergunta no [Stack Overflow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo") ](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e identifique-a com `ibm-cloud`, `kubernetes` e `containers`.
     -   Para perguntas sobre o serviço e instruções de introdução, use o fórum do [IBM Developer Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `ibm-cloud` e `containers`.
     Consulte [Obtendo ajuda](/docs/get-support/howtogetsupport.html#using-avatar) para obter mais detalhes sobre o uso dos fóruns.
-
--   Entre em contato com o Suporte IBM abrindo um chamado. Para saber como abrir um chamado de suporte IBM ou sobre os níveis de suporte e as severidades de chamado, veja [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
-{: tip}
+-   Entre em contato com o Suporte IBM abrindo um caso. Para saber mais sobre como abrir um caso de suporte IBM ou sobre os níveis de suporte e as severidades do caso, consulte [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 Ao relatar um problema, inclua o ID do cluster. Para obter o ID do seu cluster, execute `ibmcloud ks clusters`.
+{: tip}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -21,6 +24,9 @@ lastupdated: "2018-10-25"
 
 Configure a criação de log e o monitoramento no {{site.data.keyword.containerlong}} para ajudá-lo a solucionar problemas e melhorar o funcionamento e o desempenho de seus clusters e apps do Kubernetes.
 {: shortdesc}
+
+Procurando outros serviços de criação de log do {{site.data.keyword.Bluemix_notm}} ou de terceiros que possam ser incluídos em seu cluster? Confira [Integrações de criação de log e monitoramento](cs_integrations.html#health_services), incluindo [ {{site.data.keyword.la_full_notm}} com LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).
+{: note}
 
 ## Entendendo o cluster e o encaminhamento de log do app
 {: #logging}
@@ -50,6 +56,17 @@ Na imagem a seguir, é possível ver o local das origens para as quais é possí
 2. `container`: informações que são registradas por um contêiner em execução.</br>**Caminhos**: qualquer coisa gravada em `STDOUT` ou `STDERR`.
 
 3. `application`: informações sobre eventos que ocorrem no nível do aplicativo. Isso pode ser uma notificação de que um evento ocorreu, como um login bem-sucedido, um aviso sobre armazenamento ou outras operações que podem ser executadas no nível do app.</br>**Caminhos**: é possível configurar os caminhos para os quais seus logs são encaminhados. No entanto, para que os logs sejam enviados, é necessário usar um caminho absoluto em sua configuração de criação de log ou os logs não podem ser lidos. Se o seu caminho estiver montado em seu nó do trabalhador, ele poderá ter criado um link simbólico. Exemplo: se o caminho especificado for `/usr/local/spark/work/app-0546/0/stderr`, mas os logs forem realmente para `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, os logs não poderão ser lidos.
+
+4. `storage`: informações sobre o armazenamento persistente que está configurado em seu cluster. Os logs de armazenamento podem ajudar a configurar painéis e alertas de determinação de problemas como parte de seu pipeline DevOps e liberações de produção. **Nota**: os caminhos `/var/log/kubelet.log` e `/var/log/syslog` também contêm logs de armazenamento, mas os logs desses caminhos são coletados pelas origens de log `kubernetes` e `worker`.</br>** Caminhos **:
+    * `/var/log/ibmc-s3fs.log`
+    * `/var/log/ibmc-block.log`
+
+  **Pods**:
+    * `portworx-***`
+    * `ibmcloud-block-storage-attacher-***`
+    * `ibmcloud-block-storage-driver-***`
+    * `ibmcloud-block-storage-plugin-***`
+    * `ibmcloud-object-storage-plugin-***`
 
 5. `kubernetes`: informações do kubelet, do kube-proxy e de outros eventos do Kubernetes que acontecem no namespace kube-system do nó do trabalhador.</br>** Caminhos **:
     * ` /var/log/kubelet.log `
@@ -83,7 +100,7 @@ A tabela a seguir mostra as diferentes opções que você tem ao configurar a cr
     </tr>
     <tr>
       <td><code> <em> -- log_source </em> </code></td>
-      <td>A origem da qual você deseja encaminhar logs. Os valores aceitos são <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> e <code>kube-audit</code>. Esse argumento suporta uma lista separada por vírgula de origens de log para aplicar a configuração. Se você não fornecer uma origem de log, configurações de criação de log serão criadas para as origens de log <code>container</code> e <code>ingress</code>.</td>
+      <td>A origem da qual você deseja encaminhar logs. Os valores aceitos são <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, <code>storage</code> e <code>kube-audit</code>. Esse argumento suporta uma lista separada por vírgula de origens de log para aplicar a configuração. Se você não fornecer uma origem de log, configurações de criação de log serão criadas para as origens de log <code>container</code> e <code>ingress</code>.</td>
     </tr>
     <tr>
       <td><code> <em> -- type </em> </code></td>
@@ -152,10 +169,10 @@ Se você tiver requisitos especiais, será possível configurar sua própria sol
 ## Configurando o encaminhamento de log
 {: #configuring}
 
-É possível configurar a criação de log para o {{site.data.keyword.containerlong_notm}} por meio da GUI ou da CLI.
+É possível configurar a criação de log para o {{site.data.keyword.containerlong_notm}} por meio do console ou por meio da CLI.
 {: shortdesc}
 
-### Ativando o encaminhamento de log com a GUI
+### Ativando o encaminhamento de log com o console do {{site.data.keyword.Bluemix_notm}}
 {: #enable-forwarding-ui}
 
 É possível configurar o encaminhamento de log no painel do {{site.data.keyword.containerlong_notm}}. Pode levar alguns minutos para o processo ser concluído, então, se você não vir logs imediatamente, tente esperar alguns minutos e, em seguida, verifique novamente.
@@ -179,22 +196,24 @@ Para criar uma configuração no nível de conta, para um namespace de contêine
 
 ** Forwarding logs para a IBM **
 
-1.  Para o cluster no qual a origem de log está localizada: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+1. Verifique as permissões.
+    1. Assegure-se de que tenha a [função de plataforma do IAM **Editor** ou **Administrador** do {{site.data.keyword.Bluemix_notm}}](cs_users.html#platform).
+    2. Se você especificou um espaço quando criou o cluster, você e o proprietário da chave da API do {{site.data.keyword.containerlong_notm}} precisarão da função [**Desenvolvedor** do Cloud Foundry](/docs/iam/mngcf.html) nesse espaço.
+      * Se você não souber quem é o proprietário da chave API do {{site.data.keyword.containerlong_notm}}, execute o comando a seguir.
+          ```
+          ibmcloud ks api-key-info <cluster_name>
+          ```
+          {: pre}
+      * Para aplicar imediatamente quaisquer mudanças feitas, execute o comando a seguir.
+          ```
+          ibmcloud ks logging-config-refresh <cluster_name>
+          ```
+          {: pre}
+
+2.  Para o cluster no qual a origem de log está localizada: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
 
     Se você está usando uma conta Dedicada, deve-se efetuar login no terminal público do {{site.data.keyword.cloud_notm}} e destinar a sua organização e o espaço públicos para ativar o encaminhamento de log.
     {: tip}
-
-2. Verifique as permissões. Se você especificou um espaço quando criou o cluster ou a configuração de criação de log, o proprietário da conta e o proprietário da chave API do {{site.data.keyword.containerlong_notm}} precisam de [permissões](cs_users.html#access_policies) de Gerenciador, Desenvolvedor ou Auditor nesse espaço.
-  * Se você não souber quem é o proprietário da chave API do {{site.data.keyword.containerlong_notm}}, execute o comando a seguir.
-      ```
-      ibmcloud ks api-key-info <cluster_name>
-      ```
-      {: pre}
-  * Para aplicar imediatamente quaisquer mudanças feitas, execute o comando a seguir.
-      ```
-      ibmcloud ks logging-config-refresh <cluster_name>
-      ```
-      {: pre}
 
 3. Crie uma configuração de encaminhamento de log.
     ```
@@ -233,17 +252,19 @@ Se você tiver apps que são executados em seus contêineres que não podem ser 
 
 **Encaminhando logs para seu próprio servidor sobre os protocolos `udp` ou `tcp`**
 
-1. Para encaminhar logs para o syslog, configure um servidor que aceite um protocolo syslog de uma de duas maneiras:
+1. Assegure-se de que tenha a [função de plataforma do IAM **Editor** ou **Administrador** do {{site.data.keyword.Bluemix_notm}}](cs_users.html#platform).
+
+2. Para o cluster no qual a origem de log está localizada: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure). **Nota**: se você estiver usando uma conta Dedicada, deve-se efetuar login no terminal do {{site.data.keyword.cloud_notm}} público e destinar sua organização e seu espaço públicos para ativar o encaminhamento de log.
+
+3. Para encaminhar logs para o syslog, configure um servidor que aceite um protocolo syslog de uma de duas maneiras:
   * Configure e gerencie seu próprio servidor ou faça com que um provedor gerencie-o para você. Se um provedor gerenciar o servidor para você, obtenha o terminal de criação de log do provedor de criação de log.
 
-  * Execute syslog por meio de um contêiner. Por exemplo, é possível usar este [arquivo .yaml de implementação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) para buscar uma imagem pública do Docker que executa um contêiner em um cluster do Kubernetes. A imagem publica a porta `514` no endereço IP do cluster público e usa esse endereço IP do cluster público para configurar o host do syslog.
+  * Execute syslog por meio de um contêiner. Por exemplo, é possível usar esse [arquivo .yaml de implementação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) para buscar uma imagem pública do Docker que executa um contêiner em seu cluster. A imagem publica a porta `514` no endereço IP do cluster público e usa esse endereço IP do cluster público para configurar o host do syslog.
 
   É possível ver seus logs como JSON válido removendo prefixos de syslog. Para fazer isso, inclua o código a seguir na parte superior de seu arquivo <code>etc/rsyslog.conf</code> no qual o servidor rsyslog está em execução: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
   {: tip}
 
-2. Para o cluster no qual a origem de log está localizada: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).**Nota**: se você estiver usando uma conta Dedicada, deve-se efetuar login no terminal do {{site.data.keyword.cloud_notm}} público e destinar sua organização e seu espaço públicos para ativar o encaminhamento de log.
-
-3. Crie uma configuração de encaminhamento de log.
+4. Crie uma configuração de encaminhamento de log.
     ```
     ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
     ```
@@ -258,22 +279,24 @@ Se você tiver apps que são executados em seus contêineres que não podem ser 
 As etapas a seguir são instruções gerais. Antes de usar o contêiner em um ambiente de produção, certifique-se de que quaisquer requisitos de segurança necessários sejam atendidos.
 {: tip}
 
-1. Configure um servidor que aceite um protocolo syslog de uma de duas maneiras:
+1. Assegure-se de que tenha a [função de plataforma do IAM **Editor** ou **Administrador** do {{site.data.keyword.Bluemix_notm}}](cs_users.html#platform).
+
+2. Para o cluster no qual a origem de log está localizada: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure). **Nota**: se você estiver usando uma conta Dedicada, deve-se efetuar login no terminal do {{site.data.keyword.cloud_notm}} público e destinar sua organização e seu espaço públicos para ativar o encaminhamento de log.
+
+3. Configure um servidor que aceite um protocolo syslog de uma de duas maneiras:
   * Configure e gerencie seu próprio servidor ou faça com que um provedor gerencie-o para você. Se um provedor gerenciar o servidor para você, obtenha o terminal de criação de log do provedor de criação de log.
 
-  * Execute syslog por meio de um contêiner. Por exemplo, é possível usar este [arquivo .yaml de implementação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) para buscar uma imagem pública do Docker que executa um contêiner em um cluster do Kubernetes. A imagem publica a porta `514` no endereço IP do cluster público e usa esse endereço IP do cluster público para configurar o host do syslog. Será necessário injetar a Autoridade de Certificação e os certificados do lado do servidor relevantes e atualizar o `syslog.conf` para ativar `tls` em seu servidor.
+  * Execute syslog por meio de um contêiner. Por exemplo, é possível usar esse [arquivo .yaml de implementação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) para buscar uma imagem pública do Docker que executa um contêiner no cluster ypur. A imagem publica a porta `514` no endereço IP do cluster público e usa esse endereço IP do cluster público para configurar o host do syslog. Será necessário injetar a Autoridade de Certificação e os certificados do lado do servidor relevantes e atualizar o `syslog.conf` para ativar `tls` em seu servidor.
 
-2. Salve seu certificado de Autoridade de certificação em um arquivo denominado `ca-cert`. Deve ser esse nome exato.
+4. Salve seu certificado de Autoridade de certificação em um arquivo denominado `ca-cert`. Deve ser esse nome exato.
 
-3. Crie um segredo no namespace `kube-system` para o arquivo `ca-cert`. Ao criar sua configuração de criação de log, você usará o nome do segredo para a sinalização `--ca-cert`.
+5. Crie um segredo no namespace `kube-system` para o arquivo `ca-cert`. Ao criar sua configuração de criação de log, você usará o nome do segredo para a sinalização `--ca-cert`.
     ```
     kubectl -n kube-system create secret generic --from-file=ca-cert
     ```
     {: pre}
 
-4. Para o cluster no qual a origem de log está localizada: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).**Nota**: se você estiver usando uma conta Dedicada, deve-se efetuar login no terminal do {{site.data.keyword.cloud_notm}} público e destinar sua organização e seu espaço públicos para ativar o encaminhamento de log.
-
-3. Crie uma configuração de encaminhamento de log.
+6. Crie uma configuração de encaminhamento de log.
     ```
     ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
     ```
@@ -465,7 +488,7 @@ Para obter mais informações sobre logs de auditoria do Kubernetes, consulte o 
 * Atualmente, uma política de auditoria padrão é usada para todos os clusters com essa configuração de criação de log.
 * Atualmente, os filtros não são suportados.
 * Pode haver somente uma configuração `kube-audit` por cluster, mas é possível encaminhar logs para o {{site.data.keyword.loganalysisshort_notm}} e um servidor externo criando uma configuração de criação de log e um webhook.
-{: tip}
+* Deve-se ter a [função de plataforma **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para o cluster.
 
 
 ### Enviando logs de auditoria para {{site.data.keyword.loganalysisshort_notm}}
@@ -477,7 +500,7 @@ Para obter mais informações sobre logs de auditoria do Kubernetes, consulte o 
 
 1. Verifique as permissões. Se tiver especificado um espaço quando criou o cluster ou a configuração de criação de log, o proprietário da conta e o proprietário da chave do {{site.data.keyword.containerlong_notm}} precisarão das permissões de Gerenciador, Desenvolvedor ou Auditor nesse espaço.
 
-2. Para o cluster do qual você deseja coletar logs de auditoria do servidor de API: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).**Nota**: se você estiver usando uma conta Dedicada, deve-se efetuar login no terminal do {{site.data.keyword.cloud_notm}} público e destinar sua organização e seu espaço públicos para ativar o encaminhamento de log.
+2. Para o cluster do qual você deseja coletar logs de auditoria do servidor de API: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure). **Nota**: se você estiver usando uma conta Dedicada, deve-se efetuar login no terminal do {{site.data.keyword.cloud_notm}} público e destinar sua organização e seu espaço públicos para ativar o encaminhamento de log.
 
 **Encaminhando logs**
 
@@ -558,7 +581,7 @@ Para obter mais informações sobre logs de auditoria do Kubernetes, consulte o 
 
 1. Configure um servidor de criação de log remoto para o qual é possível encaminhar os logs. Por exemplo, é possível [usar Logstash com o Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend) para coletar eventos de auditoria.
 
-2. Para o cluster do qual você deseja coletar logs de auditoria do servidor de API: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).**Nota**: se você estiver usando uma conta Dedicada, deve-se efetuar login no terminal do {{site.data.keyword.cloud_notm}} público e destinar sua organização e seu espaço públicos para ativar o encaminhamento de log.
+2. Para o cluster do qual você deseja coletar logs de auditoria do servidor de API: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure). **Nota**: se você estiver usando uma conta Dedicada, deve-se efetuar login no terminal do {{site.data.keyword.cloud_notm}} público e destinar sua organização e seu espaço públicos para ativar o encaminhamento de log.
 
 Para encaminhar logs de auditoria da API do Kubernetes:
 
@@ -649,15 +672,15 @@ Como os logs do servidor de API do Kubernetes são transmitidos automaticamente,
 **Antes de começar**
 
 * [Provisione uma instância](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) do {{site.data.keyword.cos_short}} por meio do catálogo do {{site.data.keyword.Bluemix_notm}}.
-* Certifique-se de que você tenha [a função **Administrador da plataforma IAM](cs_users.html#platform) para o cluster com o qual está trabalhando.
+* Assegure-se de que tenha a [função de plataforma do IAM **Administrador** do {{site.data.keyword.Bluemix_notm}}](cs_users.html#platform) para o cluster.
 
 ** Criando uma Captura Instantânea
 
-1. Crie um bucket do Object Storage por meio da GUI, seguindo [este tutorial de introdução](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
+1. Crie um depósito de Object Storage por meio do console do {{site.data.keyword.Bluemix_notm}}, seguindo [este tutorial de introdução](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
 
 2. Gere [credenciais de serviço HMAC](/docs/services/cloud-object-storage/iam/service-credentials.html) no bucket que você criou.
   1. Na guia **Credenciais de serviço** do painel do {{site.data.keyword.cos_short}}, clique em **Nova credencial**.
-  2. Forneça às credenciais HMAC a função `Writer` do IAM.
+  2. Forneça às credenciais HMAC a função de serviço `Writer`.
   3. No campo **Incluir parâmetros de configuração sequenciais**, especifique `{"HMAC":true}`.
 
 3. Por meio da CLI, faça uma solicitação para uma captura instantânea de seus logs principais.
@@ -676,7 +699,7 @@ Como os logs do servidor de API do Kubernetes são transmitidos automaticamente,
   ```
   {: screen}
 
-4. Verifique o status de sua solicitação. Pode levar algum tempo para que a captura instantânea seja concluída, mas é possível verificar se a solicitação está sendo concluída com êxito ou não. É possível localizar o nome do arquivo que contém os logs principais na resposta e usar a UI do {{site.data.keyword.Bluemix_notm}} para fazer download do arquivo.
+4. Verifique o status de sua solicitação. Pode levar algum tempo para que a captura instantânea seja concluída, mas é possível verificar se a solicitação está sendo concluída com êxito ou não. É possível localizar o nome do arquivo que contém os logs principais na resposta e usar o console do {{site.data.keyword.Bluemix_notm}} para fazer download do arquivo.
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
@@ -708,7 +731,7 @@ As métricas ajudam a monitorar o funcionamento e o desempenho de seus clusters.
 <dl>
   <dt>Página de detalhes do cluster no {{site.data.keyword.Bluemix_notm}}</dt>
     <dd>O {{site.data.keyword.containerlong_notm}} fornece informações sobre o
-funcionamento e a capacidade do cluster e o uso dos recursos de cluster. É possível usar essa GUI para ampliar o cluster, trabalhar com seu armazenamento persistente e incluir mais recursos em seu cluster por meio da ligação de serviços do {{site.data.keyword.Bluemix_notm}}. Para visualizar a página de detalhes do cluster, acesse o **Painel do {{site.data.keyword.Bluemix_notm}}** e selecione um cluster.</dd>
+funcionamento e a capacidade do cluster e o uso dos recursos de cluster. É possível usar esse console para ampliar a escala do cluster, trabalhar com seu armazenamento persistente e incluir mais recursos no cluster por meio da ligação de serviços do {{site.data.keyword.Bluemix_notm}}. Para visualizar a página de detalhes do cluster, acesse o **Painel do {{site.data.keyword.Bluemix_notm}}** e selecione um cluster.</dd>
   <dt>Painel do Kubernetes</dt>
     <dd>O painel do Kubernetes é uma interface administrativa da web na qual é possível revisar o funcionamento de seus nós do trabalhador, localizar recursos do Kubernetes, implementar apps conteinerizados e solucionar problemas de apps com informações de criação de log e de monitoramento. Para obter mais informações sobre como acessar o painel do Kubernetes, veja [Ativando o painel do Kubernetes para o {{site.data.keyword.containerlong_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
@@ -740,6 +763,8 @@ funcionamento e a capacidade do cluster e o uso dos recursos de cluster. É poss
         </tbody>
       </table>
  </dd>
+  <dt>{{site.data.keyword.mon_full_notm}}</dt>
+  <dd>Obtenha visibilidade operacional para o desempenho e o funcionamento de seus apps implementando o Sysdig como um serviço de terceiro para os nós do trabalhador para encaminhar métricas para o {{site.data.keyword.monitoringlong}}. Para obter mais informações, consulte [Analisando métricas para um app implementado em um cluster do Kubernetes](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Nota**: o {{site.data.keyword.mon_full_notm}} não suporta o tempo de execução do contêiner `containerd`. Quando você usa o {{site.data.keyword.mon_full_notm}} com os clusters da versão 1.11 ou mais recente, nem todas as métricas de contêiner são coletadas.</dd>
 </dl>
 
 Para evitar conflitos ao usar o serviço de métrica integrado, certifique-se de que os clusters em grupos de recursos e regiões tenham nomes exclusivos.
@@ -764,9 +789,13 @@ O sistema de recuperação automática do {{site.data.keyword.containerlong_notm
 {: shortdesc}
 
 O sistema de Recuperação automática usa várias verificações para consultar o status de funcionamento do nó do trabalhador. Se a Recuperação automática detecta um nó do trabalhador não funcional com base nas verificações configuradas, a Recuperação automática aciona uma ação corretiva como um recarregamento do S.O. no nó do trabalhador. Somente um nó do trabalhador é submetido a uma ação corretiva por vez. O nó do trabalhador deve concluir com êxito a ação corretiva antes que qualquer nó do trabalhador seja submetido a uma ação corretiva. Para obter mais informações, consulte esta [postagem do blog automática ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>
-**Nota**: a recuperação automática requer que pelo menos um nó funcional funcione corretamente. Configure a Recuperação automática com verificações ativas somente em clusters com dois ou mais nós do trabalhador.
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+A recuperação automática requer pelo menos um nó funcional para funcionar corretamente. Configure a Recuperação automática com verificações ativas somente em clusters com dois ou mais nós do trabalhador.
+{: note}
+
+Antes de iniciar:
+- Assegure-se de que você tenha a [função de plataforma **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform).
+- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
 
 1. [Instale o Helm para seu cluster e inclua o repositório do {{site.data.keyword.Bluemix_notm}} em sua instância do Helm](cs_integrations.html#helm).
 

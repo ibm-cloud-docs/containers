@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -168,8 +171,8 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks credentials-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
@@ -290,7 +293,7 @@ ibmcloud plugin list
   </tbody>
 </table>
 
-<table summary="Worker pool commands table">
+<table summary="Tabela de comandos do conjunto do trabalhador">
 <caption>Comandos do conjunto do trabalhador</caption>
 <col width="25%">
 <col width="25%">
@@ -383,7 +386,7 @@ Quando um usuário diferente executa uma ação nessa região que requer intera�
 
 Se você descobrir que é necessário atualizar a chave API que está armazenada para uma região, será possível fazer isso executando o comando [ibmcloud ks api-key-reset](#cs_api_key_reset). Esse comando requer a política de acesso de administrador do {{site.data.keyword.containerlong_notm}} e armazena a chave API do usuário que executa esse comando na conta.
 
-**Dica:** a chave API que é retornada nesse comando poderá não ser usada se as credenciais de infraestrutura do IBM Cloud (SoftLayer) foram configuradas manualmente usando o comando [ibmcloud ks credentials-set](#cs_credentials_set).
+**Dica:** a chave de API retornada nesse comando poderá não ser usada se as credenciais de infraestrutura do IBM Cloud (SoftLayer) tiverem sido configuradas manualmente usando o comando [ibmcloud ks credential-set](#cs_credentials_set).
 
 <strong>Opções de comando</strong>:
 
@@ -898,21 +901,23 @@ Visualizar informações sobre um cluster em sua organização.
 **Saída de exemplo**:
 
   ```
-  Name:        my_cluster
-  ID:          abc1234567
-  State:       normal
-  Trust ready: false
-  Created:     2018-01-01T17:19:28+0000
-  Zone:        dal10
-  Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Master Location: Dallas
-  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
-  Ingress secret:    my_cluster
-  Workers:      3
-  Worker Zones: dal10
-  Version:      1.11.3
-  Owner Email:  name@example.com
+  Name:                 my_cluster
+  ID:                   abc1234567
+  State:                normal
+  Trust ready:          false
+  Created:              2018-01-01T17:19:28+0000
+  Zone:                 dal10
+  Master URL:           https://169.xx.xxx.xxx:xxxxx
+  Master Location:      Dallas
+  Ingress subdomain:    my_cluster.us-south.containers.appdomain.cloud
+  Ingress secret:       my_cluster
+  Workers:              3
+  Worker Zones:         dal10
+  Version:              1.12.3
+  Owner:                name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Resource Group ID:    a8a12accd63b437bbd6d58fb6a462ca7
+  Resource Group Name:  Default
 
   Addons
   Name                   Enabled
@@ -1660,7 +1665,7 @@ Visualize o status de todos os ALBs em um cluster. Se nenhum ID de ALB for retor
 ## Comandos de infraestrutura
 {: #infrastructure_commands}
 
-### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 Configure as credenciais de conta de infraestrutura do IBM Cloud (SoftLayer) para a sua conta do {{site.data.keyword.containerlong_notm}}.
@@ -1716,12 +1721,12 @@ Não é possível configurar múltiplas credenciais para uma conta do {{site.dat
 **Exemplo**:
 
   ```
-  ibmcloud ks credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+  ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
 
-### ibmcloud ks credentials-unset
+### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
 Remova as credenciais da conta de infraestrutura do IBM Cloud (SoftLayer) de sua conta do {{site.data.keyword.containerlong_notm}}.
@@ -1738,7 +1743,7 @@ Depois de remover as credenciais, a [chave API do IAM](#cs_api_key_info) é usad
 **Exemplo**:
 
   ```
-  ibmcloud ks credentials-unset
+  ibmcloud ks credential-unset
   ```
   {: pre}
 
@@ -2163,7 +2168,7 @@ Atualize um filtro de criação de log. É possível usar esse comando para atua
     <dd>Filtra logs que estão no nível especificado e inferior. Os valores aceitáveis na ordem canônica são <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> e <code>trace</code>. Esse valor é opcional. Como um exemplo, se você filtrou logs no nível <code>info</code>, <code>debug</code> e <code>trace</code> também serão filtrados. **Nota**: é possível usar essa sinalização apenas quando as mensagens de log estiverem em formato JSON e contiverem um campo de nível. Saída de exemplo: <code>{"log": "hello", "level": "info"}</code></dd>
 
   <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Filtra quaisquer logs que contêm uma mensagem especificada em qualquer lugar no log. A mensagem é correspondida literalmente e não como uma expressão. Exemplo: As mensagens “Hello”, “!”e “Hello, World!”se aplicaria ao log “Hello, World!”. Esse valor é opcional.</dd>
+    <dd>Filtra quaisquer logs que contêm uma mensagem especificada em qualquer lugar no log. A mensagem é correspondida literalmente e não como uma expressão. Exemplo: As mensagens “Hello”, “!” e “Hello, World!” se aplicariam ao log “Hello, World!”. Esse valor é opcional.</dd>
 
   <dt><code>--json</code></dt>
     <dd>Imprime a saída de comando no formato JSON. Esse valor é opcional.</dd>
@@ -2786,7 +2791,7 @@ Visualize os detalhes de um conjunto de trabalhadores.
 **Saída de exemplo**:
 
   ```
-  Name: pool ID: a1a11b2222222bb3c33c3d4d44d555e5-f6f777g State: active Hardware: shared Zones: dal10,dal12 Workers per zone: 3 Machine type: b2c.4x16.encrypted Labels: - Version: 1.10.8_1512
+  Name: pool ID: a1a11b2222222bb3c33c3d4d44d555e5-f6f777g State: active Hardware: shared Zones: dal10,dal12 Workers per zone: 3 Machine type: b2c.4x16.encrypted Labels: - Version: 1.10.11_1512
   ```
   {: screen}
 
@@ -3002,4 +3007,3 @@ Antes de remover uma zona, certifique-se de que tenha nós do trabalhador sufici
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
-  

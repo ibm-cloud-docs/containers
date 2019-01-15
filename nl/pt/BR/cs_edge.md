@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -36,10 +39,10 @@ Inclua o rótulo `dedicated=edge` em dois ou mais nós do trabalhador em cada VL
 
 Antes de iniciar:
 
-- [Crie um cluster padrão.](cs_clusters.html#clusters_cli)
-- Assegure-se de que seu cluster tem pelo menos uma VLAN pública. Os nós do trabalhador de borda não estão disponíveis para clusters somente com VLANs privadas.
-- [Crie um novo conjunto de trabalhadores](cs_clusters.html#add_pool) que abranja toda a zona em seu cluster e tenha pelo menos 2 trabalhadores por zona.
-- [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure).
+1. Certifique-se de ter qualquer [função da plataforma](cs_users.html#platform) do {{site.data.keyword.Bluemix_notm}} IAM.
+2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+3. Assegure-se de que seu cluster tem pelo menos uma VLAN pública. Os nós do trabalhador de borda não estão disponíveis para clusters somente com VLANs privadas.
+4. [Crie um novo conjunto de trabalhadores](cs_clusters.html#add_pool) que abranja toda a zona em seu cluster e tenha pelo menos 2 trabalhadores por zona.
 
 Para rotular nós do trabalhador como nós de borda:
 
@@ -105,6 +108,7 @@ Um benefício de nós do trabalhador de borda é que eles podem ser especificado
 
 Usar a tolerância `dedicated=edge` significa que todos os serviços de balanceador de carga e de Ingresso são implementados somente nos nós do trabalhador rotulados. No entanto, para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda e consumam recursos do nó do trabalhador, deve-se usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
+Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
 
 1. Liste todos os nós do trabalhador com o rótulo `dedicated=edge`.
 
@@ -121,4 +125,4 @@ Usar a tolerância `dedicated=edge` significa que todos os serviços de balancea
   {: pre}
   Agora, somente pods com a tolerância `dedicated=edge` são implementados em nós do trabalhador de borda.
 
-3. Se você optar por [ativar a preservação do IP de origem para um serviço de balanceador de carga ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda nos pods do app](cs_loadbalancer.html#edge_nodes). Os pods do app devem ser planejados nos nós de borda para obter solicitações recebidas.
+3. Se você optar por [ativar a preservação do IP de origem para um serviço de balanceador de carga 1.0![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda nos pods do app](cs_loadbalancer.html#edge_nodes). Os pods do app devem ser planejados nos nós de borda para obter solicitações recebidas.

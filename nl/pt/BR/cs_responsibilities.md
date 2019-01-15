@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,7 +50,7 @@ Revise as responsabilidades que você compartilha com a IBM para gerenciar seus 
 - [Incluindo ou removendo a capacidade do cluster redimensionando seus conjuntos de trabalhadores](cs_clusters.html#add_workers)
 - [Ativando o VLAN Spanning e mantendo os seus conjuntos de trabalhadores de múltiplas zonas balanceados entre as zonas](cs_clusters_planning.html#ha_clusters)
 - [Criar VLANs públicas e privadas na infraestrutura do IBM Cloud (SoftLayer) para isolamento da rede de seu cluster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Assegurar que todos os nós do trabalhador tenham conectividade de rede com a URL do mestre](cs_firewall.html#firewall) <p>**Nota**: se um nó do trabalhador possuir duas VLANs públicas e privadas, a conectividade de rede será configurada. Se nós do trabalhador forem configurados com uma VLAN privada apenas, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Planejando a rede de cluster somente privada](cs_network_cluster.html#private_vlan). </p>
+- [Assegurar que todos os nós do trabalhador tenham conectividade de rede com a URL do mestre](cs_firewall.html#firewall) <p class="note">Se um nó do trabalhador tiver VLANs públicas e privadas, a conectividade de rede será configurada. Se nós do trabalhador forem configurados com uma VLAN privada apenas, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Planejando a rede de cluster somente privada](cs_network_cluster.html#private_vlan). </p>
 - [Atualizando o kube-apiserver mestre quando atualizações de versão do Kubernetes estão disponíveis](cs_cluster_update.html#master)
 - [Mantendo os nós do trabalhador atualizados em versões principais, secundárias e de correção](cs_cluster_update.html#worker_node)
 - [Recuperando nós do trabalhador problemáticos executando comandos `kubectl`, como `cordon` ou `drain`, e executando comandos `ibmcloud ks`, como `reboot`, `reload` ou `delete`](cs_cli_reference.html#cs_worker_reboot)

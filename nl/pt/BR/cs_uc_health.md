@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -29,24 +32,24 @@ Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.co
 
 Um Exec de TI para um provedor de assistência médica tem relatório de negócios e sistemas de pacientes no local. Esses sistemas passam por ciclos de aprimoramento lento, o que leva a níveis de serviço de pacientes estagnados.
 
-Por que o {{site.data.keyword.cloud_notm}}: para melhorar o atendimento ao paciente, o provedor buscou o {{site.data.keyword.containerlong_notm}} e o {{site.data.keyword.contdelivery_full}} para reduzir os gastos de TI e acelerar o desenvolvimento, tudo em uma plataforma segura. Os sistemas SaaS de alto uso do provedor, que mantiveram os sistemas de registro de pacientes e apps de relatório de negócios, precisavam de atualizações frequentemente. No entanto, o ambiente no local dificultou o desenvolvimento ágil. O provedor também queria combater o aumento dos custos de mão de obra e um orçamento decrescente. 
+Por que o {{site.data.keyword.cloud_notm}}: para melhorar o atendimento ao paciente, o provedor buscou o {{site.data.keyword.containerlong_notm}} e o {{site.data.keyword.contdelivery_full}} para reduzir os gastos de TI e acelerar o desenvolvimento, tudo em uma plataforma segura. Os sistemas SaaS de alto uso do provedor, que mantiveram os sistemas de registro de pacientes e apps de relatório de negócios, precisavam de atualizações frequentemente. No entanto, o ambiente no local dificultou o desenvolvimento ágil. O provedor também queria combater o aumento dos custos de mão de obra e um orçamento decrescente.
 
 Tecnologias chave:    
 * [Clusters que se ajustam às necessidades variadas de CPU, RAM e armazenamento](cs_clusters_planning.html#shared_dedicated_node)
-* [ Escalação Horizontal ](cs_app.html#highly_available_apps) 
+* [ Escalação Horizontal ](cs_app.html#highly_available_apps)
 * [ Segurança do contêiner e isolamento ](cs_secure.html#security)
 * [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
 
 Eles começaram conteinerizando seus sistemas SaaS e colocando-os na nuvem. Nessa primeira etapa, eles foram de hardware superconstruído em um data center privado para cálculo customizável que reduz as operações de TI, a manutenção e a energia. Para hospedar os sistemas SaaS, eles projetaram facilmente os clusters do Kubernetes para ajustar suas necessidades de CPU, RAM e armazenamento. Outro fator para diminuir os custos de equipe é que a IBM gerencia o Kubernetes, para que o provedor possa se concentrar em entregar o melhor atendimento ao cliente.
 
-O desenvolvimento acelerado é a vitória chave para o Exec de TI. Com a mudança para a nuvem pública, os Desenvolvedores podem experimentar facilmente com o SDK do Node.js, enviando por push as mudanças para os sistemas de Desenvolvimento e Teste, escalados em clusters separados. Esses pushes foram automatizados com cadeias de ferramentas abertas e o {{site.data.keyword.contdelivery_full}}. As atualizações para o sistema SaaS não mais se arrastam em processos de construção lentos e propensos a erros. Os Desenvolvedores podem fornecer atualizações incrementais para seus usuários, diariamente ou ainda mais frequentemente.  Além disso, a criação de log e o monitoramento para os sistemas SaaS, especialmente como os relatórios de front-end e backend de paciente interagem, se integram rapidamente ao sistema. Os desenvolvedores não perdem tempo construindo sistemas de criação de log complexos, apenas para solucionar problemas de sistemas em tempo real. 
+O desenvolvimento acelerado é a vitória chave para o Exec de TI. Com a mudança para a nuvem pública, os Desenvolvedores podem experimentar facilmente com o SDK do Node.js, enviando por push as mudanças para os sistemas de Desenvolvimento e Teste, escalados em clusters separados. Esses pushes foram automatizados com cadeias de ferramentas abertas e o {{site.data.keyword.contdelivery_full}}. As atualizações para o sistema SaaS não mais se arrastam em processos de construção lentos e propensos a erros. Os Desenvolvedores podem fornecer atualizações incrementais para seus usuários, diariamente ou ainda mais frequentemente.  Além disso, a criação de log e o monitoramento para os sistemas SaaS, especialmente como os relatórios de front-end e backend de paciente interagem, se integram rapidamente ao sistema. Os desenvolvedores não perdem tempo construindo sistemas de criação de log complexos, apenas para solucionar problemas de sistemas em tempo real.
 
 Segurança primeiro: com bare metal para o {{site.data.keyword.containerlong_notm}}, as cargas de trabalho sensíveis do paciente agora têm um isolamento familiar, mas dentro da flexibilidade da nuvem pública. O bare metal fornece Cálculo confiável que pode verificar o hardware subjacente com relação à violação. Nesse núcleo, o Vulnerability Advisor fornece varredura:
 * Varredura de Vulnerabilidade de Imag
 * Varredura de política com base no ISO 27k
 * Varredura de contêiner ativo
-* Varredura de pacote para malware conhecido 
+* Varredura de pacote para malware conhecido
 
 Os dados seguros do paciente levam a pacientes mais felizes.
 
@@ -65,8 +68,8 @@ Os serviços de cálculo, armazenamento e E/S sob demanda são executados na nuv
 
 ** Etapa 1: Proteger a plataforma de cálculo **
 * Os apps que gerenciam dados do paciente altamente sensíveis podem ser hospedados novamente no {{site.data.keyword.containerlong_notm}} que são executados no Bare Metal para Cálculo Confiável.
-* O cálculo confiável pode verificar o hardware subjacente com relação à violação. 
-* Por meio desse núcleo, o Vulnerability Advisor fornece varredura de vulnerabilidade de varredura de imagem, política, contêiner e empacotamento, para malware conhecido. 
+* O cálculo confiável pode verificar o hardware subjacente com relação à violação.
+* Por meio desse núcleo, o Vulnerability Advisor fornece varredura de vulnerabilidade de varredura de imagem, política, contêiner e empacotamento, para malware conhecido.
 
 ** Etapa 2: Levantar e deslocar **
 * Migre imagens de máquina virtual para imagens de contêiner que são executadas no {{site.data.keyword.containerlong_notm}} na nuvem pública.
@@ -78,7 +81,7 @@ Os serviços de cálculo, armazenamento e E/S sob demanda são executados na nuv
 ** Etapa 3: Microserviços e Método de Garagem **
 * Reprojete apps em um conjunto de microsserviços cooperativos. Esse conjunto é executado no {{site.data.keyword.containerlong_notm}} que é baseado nas áreas funcionais do app com os problemas mais importantes.
 * Use o {{site.data.keyword.cloudant}} com chaves fornecidas pelo cliente para armazenar dados em cache na nuvem.
-* Adote as práticas de integração e entrega contínuas (CI/CD) para que os Desenvolvedores criem versão e liberem um microsserviço em seu próprio planejamento, conforme necessário. O {{site.data.keyword.contdelivery_full}} fornece cadeias de ferramentas de fluxo de trabalho para o processo CI/CD juntamente com a criação de imagem e a varredura de vulnerabilidade de imagens de contêiner. 
+* Adote as práticas de integração e entrega contínuas (CI/CD) para que os Desenvolvedores criem versão e liberem um microsserviço em seu próprio planejamento, conforme necessário. O {{site.data.keyword.contdelivery_full}} fornece cadeias de ferramentas de fluxo de trabalho para o processo CI/CD juntamente com a criação de imagem e a varredura de vulnerabilidade de imagens de contêiner.
 * Adote as práticas de desenvolvimento agile e iterativo do IBM Garage Method para permitir liberações frequentes de novas funções, correções e correções sem tempo de inatividade.
 
 ** Solução Técnica **
@@ -86,7 +89,7 @@ Os serviços de cálculo, armazenamento e E/S sob demanda são executados na nuv
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
 
-Para as cargas de trabalho mais sensíveis, os clusters podem ser hospedados no {{site.data.keyword.containerlong_notm}} para Bare Metal.  Isso fornece uma plataforma de cálculo confiável que varre automaticamente o hardware e o código de tempo de execução em busca de vulnerabilidades. Usando a tecnologia de contêineres de padrão de mercado, os apps podem ser inicialmente hospedados novamente no {{site.data.keyword.containerlong_notm}} de forma rápida sem grandes mudanças arquiteturais. Essa mudança fornece o benefício imediato de escalabilidade. 
+Para as cargas de trabalho mais sensíveis, os clusters podem ser hospedados no {{site.data.keyword.containerlong_notm}} para Bare Metal.  Isso fornece uma plataforma de cálculo confiável que varre automaticamente o hardware e o código de tempo de execução em busca de vulnerabilidades. Usando a tecnologia de contêineres de padrão de mercado, os apps podem ser inicialmente hospedados novamente no {{site.data.keyword.containerlong_notm}} de forma rápida sem grandes mudanças arquiteturais. Essa mudança fornece o benefício imediato de escalabilidade.
 
 Eles podem replicar e escalar os apps usando regras definidas e o orquestrador do Kubernetes automatizado. O {{site.data.keyword.containerlong_notm}} fornece recursos de cálculo escaláveis e os painéis associados do DevOps para criar, escalar e derrubar apps e serviços on demand. Usando os objetos de implementação e de tempo de execução do Kubernetes, o provedor pode monitorar e gerenciar upgrades para apps de forma confiável.
 
@@ -96,17 +99,18 @@ O {{site.data.keyword.SecureGatewayfull}} é usado para criar um pipeline seguro
 
 Mover as cargas de trabalho de cálculo para o {{site.data.keyword.cloud_notm}} não é o suficiente. O provedor precisa passar por uma transformação de processo e métodos também. Adotando as práticas do IBM Garage Method, o provedor pode implementar um processo de entrega agile e iterativo que suporta práticas modernas do DevOps como CI/CD.
 
-Grande parte do processo CI/CD propriamente dito é automatizado com o serviço de Entrega Contínua da IBM no Cloud. O provedor pode definir cadeias de ferramentas de fluxo de trabalho para preparar imagens de contêiner, verificar vulnerabilidades e implementá-las no cluster do Kubernetes. 
+Grande parte do processo CI/CD propriamente dito é automatizado com o serviço de Entrega Contínua da IBM no Cloud. O provedor pode definir cadeias de ferramentas de fluxo de trabalho para preparar imagens de contêiner, verificar vulnerabilidades e implementá-las no cluster do Kubernetes.
 
 ** Resultados **
 * Levantar as VMs monolíticas existentes em contêineres hospedados em nuvem foi uma primeira etapa que permitiu ao provedor economizar em custos de capital e iniciar o aprendizado de práticas modernas do DevOps.
-* Reprojetar apps monolíticos para um conjunto de microsserviços de baixa granularidade reduziu muito o tempo de entrega para correções, correções de bug e novos recursos. 
+* Reprojetar apps monolíticos para um conjunto de microsserviços de baixa granularidade reduziu muito o tempo de entrega para correções, correções de bug e novos recursos.
 * Em paralelo, o provedor implementou iterações de prazo fechado simples para obter um identificador na dívida técnica existente.
 
 ## A pesquisa sem fins lucrativos hospeda com segurança os dados sensíveis enquanto aumenta a pesquisa com parceiros
 {: #uc_research}
 
 Um Exec de Desenvolvimento para uma pesquisa de doença sem fins lucrativos tem pesquisadores acadêmicos e industriais que não podem compartilhar dados de pesquisa facilmente. Em vez disso, o trabalho deles é isolado em áreas no mundo inteiro devido às regulamentações regionais de conformidade e bancos de dados centralizados.
+{: shortdesc}
 
 Por que o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_notm}} entrega cálculo seguro que pode hospedar processamento de dados sensíveis e de desempenho em uma plataforma aberta. Essa plataforma global é hospedada em regiões próximas. Portanto, ela está vinculada às regulamentações locais que inspiram a confiança dos pacientes e dos pesquisadores de que seus dados são protegidos localmente e que fazem a diferença em melhores resultados de saúde.
 
@@ -119,21 +123,21 @@ Tecnologias chave:
 
 **Contexto: hospedando e compartilhando com segurança dados de doença para Pesquisa sem fins lucrativos**
 
-* Grupos distintos de pesquisadores de várias instituições não têm uma forma unificada de compartilhar dados, reduzindo a colaboração. 
-* A preocupação com a segurança soma-se à carga de colaboração, que dá origem a ainda menos pesquisa compartilhada. 
-* Os Desenvolvedores e os Pesquisadores são difundidos no mundo inteiro e ao longo de limites organizacionais, que tornam o PaaS e o SaaS a melhor opção para cada grupo de usuários. 
-* As diferenças regionais em regulamentações de saúde requerem que alguns dados e processamento de dados permaneçam dentro dessa região. 
+* Grupos distintos de pesquisadores de várias instituições não têm uma forma unificada de compartilhar dados, reduzindo a colaboração.
+* A preocupação com a segurança soma-se à carga de colaboração, que dá origem a ainda menos pesquisa compartilhada.
+* Os Desenvolvedores e os Pesquisadores são difundidos no mundo inteiro e ao longo de limites organizacionais, que tornam o PaaS e o SaaS a melhor opção para cada grupo de usuários.
+* As diferenças regionais em regulamentações de saúde requerem que alguns dados e processamento de dados permaneçam dentro dessa região.
 
 ** A Solução **
 
 A pesquisa sem fins lucrativos deseja agregar dados de pesquisa do câncer em todo o mundo. Então eles criam uma divisão que é dedicada a soluções para seus pesquisadores:
 * ALIMENTAR - apps para alimentar dados de pesquisa. Hoje em dia, os pesquisadores usam planilhas, documentos, produtos comerciais e bancos de dados proprietários ou internos para registrar resultados de pesquisa. É improvável que essa situação mude com a tentativa sem fins lucrativos de centralizar a análise de dados.
-* ANONIMAR - apps para anonimar os dados. O SPI deve ser removido para obedecer às regulamentações de saúde regionais. 
+* ANONIMAR - apps para anonimar os dados. O SPI deve ser removido para obedecer às regulamentações de saúde regionais.
 * ANALISAR - apps para analisar os dados. O padrão básico é armazenar os dados em um formato regular e, em seguida, consultar e processá-los usando tecnologia de AI e aprendizado de máquina (ML), regressões simples e assim por diante.
 
 Os pesquisadores precisam se afiliar a um cluster regional e os apps alimentam, transformam e anonimam os dados:
 1. Sincronizando os dados anonimados em clusters regionais ou enviando-os para um armazenamento de dados centralizado
-2. Processando os dados, usando ML como PyTorch em nós do trabalhador bare metal que fornecem GPUs 
+2. Processando os dados, usando ML como PyTorch em nós do trabalhador bare metal que fornecem GPUs
 
 **ALIMENTAR** O {{site.data.keyword.cloudant}} é usado em cada cluster regional que armazena os documentos de dados ricos dos pesquisadores e pode ser consultado e processado conforme necessário. O {{site.data.keyword.cloudant}} criptografa dados em repouso e em trânsito, que obedecem às leis regionais de privacidade de dados.
 
@@ -153,17 +157,17 @@ A organização sem fins lucrativos também fornece apps que são executados em 
 
 Os desenvolvedores iniciaram implementando seus apps SaaS de compartilhamento de pesquisa em contêineres com o {{site.data.keyword.containerlong_notm}}. Eles criaram clusters para um ambiente de Desenvolvimento que permitem que os Desenvolvedores no mundo inteiro implementem colaborativamente melhorias de app de forma rápida.
 
-Segurança primeiro: o Exec de Desenvolvimento escolheu Cálculo Confiável para bare metal para hospedar os clusters de pesquisa. Com bare metal para {{site.data.keyword.containerlong_notm}}, as cargas de trabalho de pesquisa sensíveis agora têm um isolamento familiar, mas dentro da flexibilidade da nuvem pública. O bare metal fornece Cálculo confiável que pode verificar o hardware subjacente com relação à violação. Como essa organização sem fins lucrativos também tem uma parceria com as empresas farmacêuticas, a segurança do app é crucial. A competição é acirrada e a espionagem corporativa é possível. Nesse núcleo seguro, o Vulnerability Advisor fornece varredura: 
+Segurança primeiro: o Exec de Desenvolvimento escolheu Cálculo Confiável para bare metal para hospedar os clusters de pesquisa. Com bare metal para {{site.data.keyword.containerlong_notm}}, as cargas de trabalho de pesquisa sensíveis agora têm um isolamento familiar, mas dentro da flexibilidade da nuvem pública. O bare metal fornece Cálculo confiável que pode verificar o hardware subjacente com relação à violação. Como essa organização sem fins lucrativos também tem uma parceria com as empresas farmacêuticas, a segurança do app é crucial. A competição é acirrada e a espionagem corporativa é possível. Nesse núcleo seguro, o Vulnerability Advisor fornece varredura:
 * Varredura de Vulnerabilidade de Imag
 * Varredura de política com base no ISO 27k
 * Varredura de contêiner ativo
-* Varredura de pacote para malware conhecido 
+* Varredura de pacote para malware conhecido
 
 Os apps de pesquisa protegidos levam ao aumento da participação de avaliação clínica.
 
-Para alcançar a disponibilidade global, os sistemas de Desenvolvimento, Teste e Produção são implementados no mundo inteiro em vários data centers. Para HA, eles usam uma combinação de clusters em múltiplas regiões geográficas, bem como clusters de múltiplas zonas. Eles podem implementar facilmente o app de pesquisa em clusters de Frankfurt para obedecer à regulamentação europeia local. Eles também implementam o app dentro dos clusters dos Estados Unidos para assegurar a disponibilidade e a recuperação localmente. Eles também difundem a carga de trabalho de pesquisa entre clusters de múltiplas zonas em Frankfurt para assegurar que o app europeu esteja disponível, além de equilibrar a carga de trabalho de maneira eficiente. Como os pesquisadores estão fazendo upload de dados sensíveis com o app de compartilhamento de pesquisa, os clusters do app são hospedados em regiões onde regulamentações mais restritas se aplicam.
+Para alcançar a disponibilidade global, os sistemas de Desenvolvimento, Teste e Produção são implementados no mundo inteiro em vários data centers. Para HA, eles usam uma combinação de clusters em múltiplas regiões geográficas, bem como clusters de múltiplas zonas. Eles podem implementar facilmente o app de pesquisa em clusters de Frankfurt para conformidade com a regulamentação europeia local. Eles também implementam o app dentro dos clusters dos Estados Unidos para assegurar a disponibilidade e a recuperação localmente. Eles também difundem a carga de trabalho de pesquisa em clusters de várias zonas em Frankfurt para assegurar que o app europeu esteja disponível e também equilibre a carga de trabalho de forma eficiente. Como os pesquisadores estão fazendo upload de dados sensíveis com o app de compartilhamento de pesquisa, os clusters do app são hospedados em regiões onde regulamentações mais restritas se aplicam.
 
-Os desenvolvedores se concentram em problemas de domínio, usando as ferramentas existentes: em vez de gravar o código ML exclusivo, a lógica ML é encaixada em apps, ligando os serviços do {{site.data.keyword.cloud_notm}} aos clusters. Os desenvolvedores também são liberados das tarefas de gerenciamento de infraestrutura porque a IBM cuida do Kubernetes e de upgrades de infraestrutura, segurança e muito mais. 
+Os desenvolvedores se concentram em problemas de domínio, usando as ferramentas existentes: em vez de gravar o código ML exclusivo, a lógica ML é encaixada em apps, ligando os serviços do {{site.data.keyword.cloud_notm}} aos clusters. Os desenvolvedores também são liberados das tarefas de gerenciamento de infraestrutura porque a IBM cuida do Kubernetes e de upgrades de infraestrutura, segurança e muito mais.
 
 ** A Solução **
 
@@ -178,31 +182,30 @@ Solução Técnica:
 **Etapa 1: conteinerizar apps usando microsserviços**
 * Use o kit iniciador do Node.js da IBM para iniciar o desenvolvimento.
 * Projete apps em um conjunto de microsserviços cooperativos dentro do {{site.data.keyword.containerlong_notm}} com base em áreas funcionais do app e suas dependências.
-* Implementar apps de pesquisa em contêineres no  {{site.data.keyword.containerlong_notm}}. 
+* Implementar apps de pesquisa em contêineres no  {{site.data.keyword.containerlong_notm}}.
 * Forneça painéis padronizados do DevOps por meio do Kubernetes.
 * Ative o ajuste de escala sob demanda de cálculo para lote e outras cargas de trabalho de pesquisa que são executadas com pouca frequência.
 * Use o {{site.data.keyword.SecureGatewayfull}} para manter as conexões seguras com os bancos de dados no local existentes.
 
 ** Etapa 2: usar cálculo seguro e de desempenho**
-* Os apps ML que requerem cálculo de alto desempenho são hospedados no {{site.data.keyword.containerlong_notm}} no Bare Metal. Esse cluster ML é centralizado, portanto, cada cluster regional não tem a despesa de trabalhadores de bare metal; as implementações do Kubernetes são mais fáceis também. 
+* Os apps ML que requerem cálculo de alto desempenho são hospedados no {{site.data.keyword.containerlong_notm}} no Bare Metal. Esse cluster ML é centralizado, portanto, cada cluster regional não tem a despesa de trabalhadores de bare metal; as implementações do Kubernetes são mais fáceis também.
 * Os apps que processam dados clínicos altamente sensíveis podem ser hospedados no {{site.data.keyword.containerlong_notm}} no Bare Metal para Cálculo Confiável.
-* O cálculo confiável pode verificar o hardware subjacente com relação à violação. Por meio desse núcleo, o Vulnerability Advisor fornece varredura de vulnerabilidade de varredura de imagem, política, contêiner e empacotamento, para malware conhecido. 
+* O cálculo confiável pode verificar o hardware subjacente com relação à violação. Por meio desse núcleo, o Vulnerability Advisor fornece varredura de vulnerabilidade de varredura de imagem, política, contêiner e empacotamento, para malware conhecido.
 
 ** Etapa 3: assegure-se de disponibilidade global **
-* Depois que os Desenvolvedores constroem e testam os apps em seus clusters de Desenvolvimento e teste, eles usam as cadeias de ferramentas CI/CD da IBM para implementar apps nos clusters em todo o globo. 
+* Depois que os Desenvolvedores constroem e testam os apps em seus clusters de Desenvolvimento e teste, eles usam as cadeias de ferramentas CI/CD da IBM para implementar apps nos clusters em todo o globo.
 * Ferramentas HA integradas no {{site.data.keyword.containerlong_notm}} fazem o balanceamento da carga de trabalho dentro de cada região geográfica, incluindo balanceamento com capacidade de recuperação automática e balanceamento de carga.
-* Com as cadeias de ferramentas e ferramentas de implementação do Helm, os apps também são implementados em clusters no mundo inteiro, portanto, as cargas de trabalho e os dados atendem às regulamentações regionais. 
+* Com as cadeias de ferramentas e ferramentas de implementação do Helm, os apps também são implementados em clusters no mundo inteiro, portanto, as cargas de trabalho e os dados atendem às regulamentações regionais.
 
 ** Etapa 4: Compartilhamento de dados **
-* {{site.data.keyword.cloudant}} é um banco de dados NoSQL moderno adequado a uma gama de casos de uso acionados por dados, desde o valor de chave até o armazenamento e a consulta de dados complexos orientados a documentos. 
-* Para minimizar consultas nos bancos de dados regionais, o {{site.data.keyword.cloudant}} é usado para armazenar em cache os dados de sessão do usuário nos apps. 
+* {{site.data.keyword.cloudant}} é um banco de dados NoSQL moderno adequado a uma gama de casos de uso acionados por dados, desde o valor de chave até o armazenamento e a consulta de dados complexos orientados a documentos.
+* Para minimizar consultas nos bancos de dados regionais, o {{site.data.keyword.cloudant}} é usado para armazenar em cache os dados de sessão do usuário nos apps.
 * Essa opção melhora a usabilidade e o desempenho do app de front-end em apps no {{site.data.keyword.containerlong_notm}}.
-* Enquanto os apps do trabalhador no {{site.data.keyword.containerlong_notm}} analisam dados no local e armazenam resultados no {{site.data.keyword.cloudant}}, o {{site.data.keyword.openwhisk}} reage a mudanças e limpa automaticamente os dados nos feeds de dados recebidos. 
+* Enquanto os apps do trabalhador no {{site.data.keyword.containerlong_notm}} analisam dados no local e armazenam resultados no {{site.data.keyword.cloudant}}, o {{site.data.keyword.openwhisk}} reage a mudanças e limpa automaticamente os dados nos feeds de dados recebidos.
 * Da mesma forma, as notificações de avanços de pesquisa em uma região podem ser acionadas por meio de uploads de dados para que todos os pesquisadores possam tirar vantagem dos novos dados.
 
 ** Resultados **
-* Com os kits do iniciador, o {{site.data.keyword.containerlong_notm}} e as ferramentas IBM CI/CD, os Desenvolvedores globais trabalham entre as instituições e desenvolvem colaborativamente apps de pesquisa, com ferramentas familiares e interoperáveis. 
+* Com os kits do iniciador, o {{site.data.keyword.containerlong_notm}} e as ferramentas IBM CI/CD, os Desenvolvedores globais trabalham entre as instituições e desenvolvem colaborativamente apps de pesquisa, com ferramentas familiares e interoperáveis.
 * Os microsserviços reduzem muito o tempo de entrega de correções, correções de bug e novos recursos. O desenvolvimento inicial é rápido e as atualizações são frequentes.
 * Os pesquisadores têm acesso a dados clínicos e podem compartilhar dados clínicos, enquanto eles obedecem às regulamentações locais.
-* Os pacientes que participam da pesquisa de doenças se sentem confiantes de que seus dados estão seguros e fazendo a diferença, quando são compartilhados com grandes equipes de pesquisa. 
-
+* Os pacientes que participam da pesquisa de doenças se sentem confiantes de que seus dados estão seguros e fazendo a diferença, quando são compartilhados com grandes equipes de pesquisa.

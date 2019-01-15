@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -20,7 +23,7 @@ lastupdated: "2018-10-25"
 # Por que o {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
-O {{site.data.keyword.containerlong}} entrega ferramentas poderosas, combinando contêineres do Docker, a tecnologia do Kubernetes, uma experiência do usuário intuitiva e segurança e isolamento integrados para automatizar a implementação, a operação, o ajuste de escala e o monitoramento de apps conteinerizados em um cluster de hosts de cálculo. Para obter informações de certificação, veja [Conformidade no {{site.data.keyword.Bluemix_notm}} [Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")(https://www.ibm.com/cloud/compliance)].
+O {{site.data.keyword.containerlong}} entrega ferramentas poderosas, combinando contêineres do Docker, a tecnologia do Kubernetes, uma experiência do usuário intuitiva e segurança e isolamento integrados para automatizar a implementação, a operação, o ajuste de escala e o monitoramento de apps conteinerizados em um cluster de hosts de cálculo. Para obter informações de certificação, consulte [Conformidade no {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud/compliance).
 {:shortdesc}
 
 
@@ -35,6 +38,7 @@ Os clusters são implementados em hosts de cálculo que fornecem Kubernetes nati
 |Clusters do Kubernetes de locatário único com isolamento de infraestrutura de cálculo, de rede e de armazenamento|<ul><li>Crie sua própria infraestrutura customizada que atenda aos requisitos de sua organização.</li><li>Provisione um mestre do Kubernetes dedicado e seguro, nós do trabalhador, redes virtuais e armazenamento usando os recursos fornecidos pela infraestrutura do IBM Cloud (SoftLayer).</li><li>O mestre do Kubernetes totalmente gerenciado que é continuamente monitorado e atualizado pelo {{site.data.keyword.IBM_notm}} para manter seu cluster disponível.</li><li>Opção para provisionar nós do trabalhador como servidores bare metal com Cálculo confiável.</li><li>Armazene dados persistentes, compartilhar dados entre pods do Kubernetes e restaure dados quando necessário com o
 serviço de volume integrado e seguro.</li><li>Benefício do suporte integral para todas as APIs nativas do Kubernetes.</li></ul>|
 | Clusters Multizone para Aumentar a Alta Disponibilidade | <ul><li>Gerencie facilmente os nós do trabalhador do mesmo tipo de máquina (CPU, memória, virtual ou física) com conjuntos de trabalhadores.</li><li>Proteja contra a falha de zona difundindo os nós uniformemente entre as múltiplas zonas selecionadas e usando implementações de pod de antiafinidade para seus apps.</li><li>Diminua seus custos usando os clusters de múltiplas zonas em vez de duplicar os recursos em um cluster separado.</li><li>Beneficie-se do balanceamento automático de carga entre apps com o multizone load balancer (MZLB) que é configurado automaticamente para você em cada zona do cluster.</li></ul>|
+| Mestres altamente disponíveis | <ul>Disponível em clusters que executam o Kubernetes versão 1.10 ou mais recente.<li>Reduza o tempo de inatividade do cluster, por exemplo, durante as atualizações principais com os mestres altamente disponíveis que são provisionados automaticamente ao criar um cluster.</li><li>Espalhe seus mestres em zonas em um [cluster de várias zonas](cs_clusters_planning.html#multizone) para proteger seu cluster contra falhas de zonas.</li></ul> |
 |Conformidade de segurança de imagem com o Vulnerability Advisor|<ul><li>Configure seu próprio repositório em nosso registro de imagem privada do Docker protegido em que as imagens são armazenadas e compartilhadas por todos os usuários na organização.</li><li>Benefício de varredura automática de imagens em seu registro privado do {{site.data.keyword.Bluemix_notm}}.</li><li>Revise as recomendações específicas para o sistema operacional usado na imagem para corrigir potenciais
 vulnerabilidades.</li></ul>|
 |Monitoramento contínuo do funcionamento do cluster|<ul><li>Use o painel de cluster para ver e gerenciar rapidamente o funcionamento de seu cluster, os nós do trabalhador
@@ -111,6 +115,8 @@ Se você tiver um cluster grátis e desejar fazer upgrade para um cluster padrã
 |[Espaço em disco no nó do trabalhador para armazenamento não persistente](cs_storage_planning.html#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 | [Capacidade para criar cluster em cada região do {{site.data.keyword.containerlong_notm}}](cs_regions.html) | | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> |
 |[Clusters de múltiplas zonas para aumentar a alta disponibilidade do app](cs_clusters_planning.html#multizone) | |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
+| Mestres replicados para disponibilidade mais alta (Kubernetes 1.10 ou mais recente) | | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> |
+|[Número escalável de nós do trabalhador para aumentar a capacidade](cs_app.html#app_scaling)| |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 |[Armazenamento persistente baseado em arquivo NFS com volumes](cs_storage_file.html#file_storage)| |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 |[Acesso ao app de rede pública ou privada por um serviço de balanceador de carga para um endereço IP estável](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 |[Acesso ao app de rede pública por um serviço de Ingresso para um endereço IP estável e URL customizável](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
@@ -122,6 +128,8 @@ Se você tiver um cluster grátis e desejar fazer upgrade para um cluster padrã
 {: caption="Características de clusters grátis e padrão" caption-side="top"}
 
 <br />
+
+
 
 
 ## Precificação e faturamento
@@ -136,7 +144,7 @@ Revise algumas perguntas mais frequentes sobre precificação e faturamento do {
 **Como posso verificar meu faturamento e uso?**<br>
 Para verificar seu uso e os totais estimados, veja [Visualizando seu uso](/docs/billing-usage/viewing_usage.html#viewingusage).
 
-Se vincular suas contas do {{site.data.keyword.Bluemix_notm}} e da infraestrutura do IBM Cloud (SoftLayer), você receberá uma conta consolidada. Para obter mais informações, veja [Faturamento consolidado para contas vinculadas](/docs/billing-usage/linking_accounts.html#unifybillaccounts).
+Se vincular suas contas do {{site.data.keyword.Bluemix_notm}} e da infraestrutura do IBM Cloud (SoftLayer), você receberá uma conta consolidada. Para obter mais informações, veja [Faturamento consolidado para contas vinculadas](/docs/customer-portal/linking_accounts.html#unifybillaccounts).
 
 **Posso agrupar meus recursos em nuvem por equipes ou departamentos para propósitos de faturamento?**<br>
 É possível [usar grupos de recursos](/docs/resources/bestpractice_rgs.html#bp_resourcegroups) para organizar seus recursos do {{site.data.keyword.Bluemix_notm}}, incluindo clusters, em grupos para organizar seu faturamento.
@@ -174,14 +182,14 @@ Com os clusters do {{site.data.keyword.containerlong_notm}}, é possível usar o
   <p>As <strong>Máquinas virtuais</strong> apresentam maior flexibilidade, tempos de fornecimento mais rápidos e recursos de escalabilidade mais automáticos do que o bare metal, com um preço com custo mais reduzido do que o bare metal. No entanto, as VMs têm um troca de desempenho quando comparadas com especificações de bare metal, como limites de Gbps de rede, RAM e memória e opções de armazenamento. Tenha em mente estes fatores que afetam os custos da VM:</p>
   <ul><li><strong>Compartilhado vs. dedicado</strong>: se você compartilhar o hardware subjacente da VM, o custo será menor que o hardware dedicado, mas os recursos físicos não serão dedicados à sua VM.</li>
   <li><strong>Somente faturamento por hora</strong>: por hora oferece mais flexibilidade para pedir e cancelar VMs rapidamente.
-   <li><strong>Horas em camadas por mês</strong>: o faturamento por hora é em camadas. À medida que sua VM permanece pedida para uma camada de horas dentro de um mês de faturamento, a taxa horária que é cobrada diminui. Os níveis de horas são os seguintes: 0 - 150 horas, 151 - 290 horas, 291 - 540 horas e 541+ horas.</li></ul>
+  <li><strong>Horas em camadas por mês</strong>: o faturamento por hora é em camadas. À medida que sua VM permanece pedida para uma camada de horas dentro de um mês de faturamento, a taxa horária que é cobrada diminui. Os níveis de horas são os seguintes: 0 - 150 horas, 151 - 290 horas, 291 - 540 horas e 541+ horas.</li></ul>
   <p>As <strong>Máquinas físicas (bare metal)</strong> produzem benefícios de alto desempenho para cargas de trabalho, como dados, AI e GPU. Além disso, todos os recursos de hardware são dedicados às suas cargas de trabalho, para que você não tenha "vizinhos barulhentos". Tenha em mente estes fatores que afetam seus custos de bare metal:</p>
   <ul><li><strong>Somente faturamento mensal</strong>: todos os bare metals são cobrados mensalmente.</li>
   <li><strong>Processo de pedido mais longo</strong>: como o pedido e o cancelamento de servidores bare metal é um processo manual por meio de sua conta de infraestrutura do IBM Cloud (SoftLayer), isso pode levar mais de um dia útil para ser concluído.</li></ul>
   <p>Para obter detalhes sobre as especificações da máquina, veja [Hardware disponível para nós do trabalhador](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).</p></dd>
 
 <dt id="bandwidth">Largura da banda</dt>
-  <dd><p>A largura da banda refere-se à transferência de dados públicos de tráfego de rede de entrada e saída, para e de recursos do {{site.data.keyword.Bluemix_notm}} em data centers no mundo inteiro. A largura da banda pública é cobrada por GB. É possível revisar seu resumo de largura da banda atual efetuando login no [console do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/) e, no menu, selecionando **Infraestrutura** e, em seguida, selecionando a página **Rede > Largura da banda > Resumo**.
+  <dd><p>A largura da banda refere-se à transferência de dados públicos de tráfego de rede de entrada e saída, para e de recursos do {{site.data.keyword.Bluemix_notm}} em data centers no mundo inteiro. A largura da banda pública é cobrada por GB. É possível revisar seu resumo de largura de banda atual efetuando login no [console do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), no menu ![Ícone de menu](../icons/icon_hamburger.svg "Ícone de menu") selecionando **Infraestrutura** e, em seguida, selecionando a página **Rede > Largura de banda > Resumo**.
   <p>Revise os fatores a seguir que afetam os encargos de largura da banda pública:</p>
   <ul><li><strong>Local</strong>: como ocorre com os nós do trabalhador, os encargos variam dependendo da zona em que seus recursos são implementados.</li>
   <li><strong>Largura de banda incluída ou Pré-pago</strong>: as máquinas do nó do trabalhador podem vir com certa alocação de rede de saída por mês, como 250 GB para VMs ou 500 GB para bare metal. Ou, a alocação pode ser Pré-pago, com base no uso de GB.</li>

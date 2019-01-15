@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -51,20 +54,22 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 ## Pré-requisitos
 
 -  Verifique as etapas que você precisa executar para [preparar-se para criar um cluster](cs_clusters.html#cluster_prepare).
--  A [função **Desenvolvedor** do Cloud Foundry](/docs/iam/mngcf.html#mngcf) no espaço do cluster no qual você deseja trabalhar.
+-  Assegure-se de que tenha as políticas de acesso a seguir:
+    - A [função **Administrador** da plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para o {{site.data.keyword.containerlong_notm}}
+    -  A [função **Desenvolvedor** do Cloud Foundry](/docs/iam/mngcf.html#mngcf) no espaço do cluster em que você deseja trabalhar
 
 
 ## Lição 1: criando um cluster e configurando a CLI
 {: #cs_cluster_tutorial_lesson1}
 
-Crie seu cluster do Kubernetes na GUI e instale as CLIs necessárias.
+Crie seu cluster do Kubernetes no console do {{site.data.keyword.Bluemix_notm}} e instale as CLIs necessárias.
 {: shortdesc}
 
 **Para criar seu cluster**
 
 Como pode levar alguns minutos para provisão, crie seu cluster antes de instalar as CLIs.
 
-1.  [Na GUI ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create), crie um cluster grátis ou padrão com 1 conjunto de trabalhadores que contenha um nó do trabalhador.
+1.  [No console do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create), crie um cluster grátis ou padrão com 1 conjunto de trabalhadores que tenha 1 nó do trabalhador nele.
 
     Também é possível criar um [cluster na CLI](cs_clusters.html#clusters_cli).
     {: tip}
@@ -89,13 +94,13 @@ Como seu cluster é provisionado, instale as CLIs a seguir que são usadas para 
     {: pre}
 
 5.  Para implementar apps em seus clusters, [instale a CLI do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Para executar comandos usando a CLI do Kubernetes, use o prefixo `kubectl`.
-    1.  Para obter compatibilidade funcional completa, faça download da versão de CLI do Kubernetes que corresponda à versão do cluster do Kubernetes que você planeja usar. A versão atual do Kubernetes padrão do {{site.data.keyword.containerlong_notm}} é 1.10.8.
+    1.  Para obter compatibilidade funcional completa, faça download da versão de CLI do Kubernetes que corresponda à versão do cluster do Kubernetes que você planeja usar. A versão atual do Kubernetes padrão do {{site.data.keyword.containerlong_notm}} é 1.10.11.
 
-        OS X: [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl)
+        S.O. X:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
 
-        Linux: [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl)
 
-        Windows: [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe)
 
           **Dica:** se estiver usando o Windows, instale a CLI do Kubernetes no mesmo diretório que a CLI do {{site.data.keyword.Bluemix_notm}}. Essa configuração economiza algumas
 mudanças de caminho de arquivo ao executar comandos posteriormente.
@@ -159,9 +164,11 @@ Configure um repositório de imagem privada no {{site.data.keyword.registryshort
     ```
     {: pre}
 
-    **Nota:** se você tiver um ID federado, use a sinalização `--sso` para efetuar login. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável.
+    Se você tiver um ID federado, use o sinalizador `--sso` para efetuar login. Insira seu nome do usuário e use a
+URL fornecida na saída da CLI para recuperar sua senha descartável.
+    {: tip}
 
-2.  Se o cluster estiver em um grupo de recursos diferente de `default`, destine esse grupo de recursos.
+2.  Se o cluster estiver em um grupo de recursos diferente de `default`, destine esse grupo de recursos. Para ver o grupo de recursos ao qual cada cluster pertence, execute `ibmcloud ks clusters`.
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -190,7 +197,7 @@ os desenvolvedores podem usar para acessar imagens privadas do Docker.
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.11
     ```
     {: screen}
 
@@ -246,7 +253,7 @@ Toda vez que você efetua login na CLI do {{site.data.keyword.containerlong}} pa
     Saída de exemplo:
 
     ```
-    Versão do cliente: v1.10.8 Versão do servidor: v1.10.8
+    Versão do cliente: v1.10.11 Versão do servidor: v1.10.11
     ```
     {: screen}
 
@@ -258,7 +265,8 @@ Com serviços {{site.data.keyword.Bluemix_notm}}, é possível aproveitar a func
 
 1.  Inclua o serviço {{site.data.keyword.toneanalyzershort}} em sua conta do {{site.data.keyword.Bluemix_notm}}. Substitua <service_name> por um nome para sua instância de serviço.
 
-    **Nota:** quando você incluir o serviço {{site.data.keyword.toneanalyzershort}} em sua conta, será exibida uma mensagem de que o serviço não é grátis. Se você limitar sua chamada API, este tutorial não incorrerá em encargos do serviço {{site.data.keyword.watson}}. [Revise as informações de precificação para o serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/catalog/services/tone-analyzer).
+    Quando você inclui o serviço do {{site.data.keyword.toneanalyzershort}} em sua conta, uma mensagem é exibida de que o serviço não está livre. Se você limitar sua chamada API, este tutorial não incorrerá em encargos do serviço {{site.data.keyword.watson}}. [Revise as informações de precificação para o serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/catalog/services/tone-analyzer).
+    {: note}
 
     ```
     ibmcloud service create tone_analyzer standard <service_name>
@@ -283,7 +291,7 @@ Com serviços {{site.data.keyword.Bluemix_notm}}, é possível aproveitar a func
     ```
     {: screen}
 
-3.  Verifique se o segredo do Kubernetes foi criado em seu namespace do cluster. Cada serviço do {{site.data.keyword.Bluemix_notm}} é definido por um arquivo JSON que inclui informação confidencial, como o nome do usuário, senha e URL que o contêiner usa para obter acesso. Para armazenar essas informações com segurança, segredos do Kubernetes são usados. Neste exemplo, o segredo inclui as credenciais para acessar a instância do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que é provisionada em sua conta.
+3.  Verifique se o segredo do Kubernetes foi criado em seu namespace do cluster. Cada serviço do {{site.data.keyword.Bluemix_notm}} é definido por um arquivo JSON que inclui informações confidenciais, como a chave de API do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) e a URL que o contêiner usa para obter acesso. Para armazenar essas informações com segurança, segredos do Kubernetes são usados. Neste exemplo, o segredo inclui a chave de API para acessar a instância do {{site.data.keyword.watson}}{{site.data.keyword.toneanalyzershort}} que é provisionado em sua conta.
 
     ```
     kubectl get secrets --namespace=default

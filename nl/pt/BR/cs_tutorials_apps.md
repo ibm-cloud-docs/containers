@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -57,6 +60,7 @@ Os desenvolvedores de software e administradores da rede que estão implementand
 ## Pré-requisitos
 
 * [ Tutorial: criando clusters do Kubernetes ](cs_tutorials.html#cs_cluster_tutorial).
+* Instale o [plug-in container-registry](/docs/services/Registry/index.html#registry_cli_install).
 
 
 ## Lição 1: implementando apps de instância única em clusters do Kubernetes
@@ -90,7 +94,7 @@ Para implementar o app:
 
 3. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
 
-5.  Efetue login na CLI do {{site.data.keyword.registryshort_notm}}. **Nota**: assegure-se de que o plug-in de registro de contêiner esteja [instalado](/docs/services/Registry/index.html#registry_cli_install).
+5.  Efetue login na CLI do {{site.data.keyword.registryshort_notm}}.
 
     ```
     ibmcloud cr login
@@ -222,7 +226,7 @@ Para implementar o app:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
         ```
         {: screen}
 
@@ -238,7 +242,7 @@ Para implementar o app:
 
 11. [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
 
-    Se selecionar seu cluster na GUI do [{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
+    Se você selecionar seu cluster no [console do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
     {: tip}
 
 12. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.
@@ -358,7 +362,7 @@ do que apenas uma instância.
   ```
   {: screen}
 
-7.  Verifique seu status do pod para monitorar o funcionamento de seu app no Kubernetes. É possível verificar o status na CLI ou na GUI do painel do Kubernetes.
+7.  Verifique seu status do pod para monitorar o funcionamento de seu app no Kubernetes. É possível verificar o status na CLI ou no painel do Kubernetes.
 
     *  **Na CLI**: consulte o que está acontecendo com seus pods à medida que eles mudam o status.
        ```
@@ -366,7 +370,7 @@ do que apenas uma instância.
        ```
        {: pre}
 
-    *  ** A partir da GUI **:
+    *  **No painel do Kubernetes**:
 
        1.  [Ativar o painel do Kubernetes](cs_app.html#cli_dashboard).
        2.  Na guia **Cargas de trabalho**, é possível ver os recursos que você criou. Nessa guia, é possível atualizar continuamente e ver que a verificação de funcionamento está funcionando. Na seção **Pods**, é possível ver quantas vezes os pods são reiniciados quando os contêineres neles são recriados. Se acontecer de você capturar o erro a seguir no painel, esta mensagem indicará que a verificação de funcionamento capturou um problema. Aguarde alguns minutos e atualize novamente. Você verá o número de mudança de reinicializações para cada pod.
@@ -508,7 +512,7 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
         ```
         {: codeblock}
 
-    2.  Na seção de volumes da implementação do watson, atualize o nome do segredo do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} criado no tutorial anterior. Montando o segredo do Kubernetes como um volume para a sua implementação, você tornará as credenciais de serviço do {{site.data.keyword.Bluemix_notm}} disponíveis para o contêiner que estiver em execução em seu pod. Os componentes do app {{site.data.keyword.watson}} neste tutorial são configurados para consultar as credenciais de serviço usando o caminho de montagem do volume.
+    2.  Na seção de volumes da implementação do watson, atualize o nome do segredo do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} criado no tutorial anterior. Montando o segredo do Kubernetes como um volume para a sua implementação, você torna a chave de API do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) disponível para o contêiner que está em execução em seu pod. Os componentes do app do {{site.data.keyword.watson}} neste tutorial são configurados para consultar a chave de API usando o caminho de montagem do volume.
 
         ```
         volumes:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -45,8 +48,9 @@ O diagrama a seguir mostra como a comunicação é direcionada da Internet para 
 
 4. A solicitação é encaminhada para o endereço IP privado do pod no qual o app é implementado. Se múltiplas instâncias do app são implementadas no cluster, o serviço NodePort roteia as solicitações entre os pods de app.
 
-**Nota:** o endereço IP público do nó do trabalhador não é permanente. Quando um nó do trabalhador é removido ou recriado, um novo endereço IP público é designado ao
+O endereço IP público do nó do trabalhador não é permanente. Quando um nó do trabalhador é removido ou recriado, um novo endereço IP público é designado ao
 nó do trabalhador. É possível usar o serviço do NodePort para testar o acesso público para o seu aplicativo ou quando o acesso público for necessário apenas para uma quantia pequena de tempo. Ao requerer um endereço IP público estável e mais disponibilidade para seu serviço, exponha seu app usando um [serviço LoadBalancer](cs_loadbalancer.html) ou [Ingresso](cs_ingress.html).
+{: note}
 
 <br />
 
@@ -59,7 +63,10 @@ nó do trabalhador. É possível usar o serviço do NodePort para testar o acess
 
 Se você ainda não tem um app pronto, é possível usar um app de exemplo do Kubernetes chamado [Guestbook ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml).
 
-1.  No arquivo de configuração para seu app, defina uma seção de [serviço ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/). **Nota**: para o exemplo Guestbook, uma seção de serviço de front-end existe no arquivo de configuração. Para disponibilizar o app Guestbook externamente, inclua o tipo NodePort e uma NodePort no intervalo de 30000 a 32767 na seção de serviço de front-end.
+1.  No arquivo de configuração para seu app, defina uma seção de [serviço ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/).
+
+    Para o exemplo Guestbook, uma seção de serviço de front-end existe no arquivo de configuração. Para disponibilizar o app Guestbook externamente, inclua o tipo NodePort e uma NodePort no intervalo de 30000 a 32767 na seção de serviço de front-end.
+    {: tip}
 
     Exemplo:
 
@@ -116,7 +123,7 @@ Se você ainda não tem um app pronto, é possível usar um app de exemplo do Ku
 **E agora?**
 
 Quando o app for implementado, será possível usar o endereço IP público de qualquer nó do trabalhador e o NodePort
-para formar a URL pública para acessar o app em um navegador. Se os nós do trabalhador estiverem conectados somente a uma VLAN privada, então, um serviço NodePort privado foi criado e pode ser acessível por meio do endereço IP privado do nó do trabalhador.
+para formar a URL pública para acessar o app em um navegador. Se os nós do trabalhador estão conectados somente a uma VLAN privada, um serviço NodePort privado foi criado e pode ser acessado por meio de um endereço IP privado do nó do trabalhador.
 
 1.  Obtenha o endereço IP público para um nó do trabalhador no cluster. Se desejar acessar o nó do trabalhador em uma rede privada, obtenha o endereço IP privado no lugar.
 
@@ -158,7 +165,9 @@ para formar a URL pública para acessar o app em um navegador. Se os nós do tra
     ```
     {: screen}
 
-    Neste exemplo, o NodePort é `30872`.</br>
-    **Nota:** se a seção **Terminais** exibir `<none>`, verifique o `<selectorkey>` e o `<selectorvalue>` que você usa na seção `spec.selector` do serviço NodePort. Assegure-se de que seja o mesmo que o par _chave/valor_ que você usou na seção `spec.template.metadata.labels` de seu yaml de implementação.
+    Neste exemplo, o NodePort é `30872`.
+
+    Se a seção **Terminais** exibir `<none>`, verifique o `<selectorkey>` e o `<selectorvalue>` que você usa na seção `spec.selector` do serviço NodePort. Assegure-se de que seja o mesmo que o par _chave/valor_ que você usou na seção `spec.template.metadata.labels` de seu yaml de implementação.
+    {: note}
 
 3.  Forme a URL com um dos endereços IP do nó do trabalhador e o NodePort. Exemplo: `http://192.0.2.23:30872`

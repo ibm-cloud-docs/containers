@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -23,13 +26,14 @@ lastupdated: "2018-10-25"
 
 Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.containerlong_notm}} podem
 aproveitar a alta disponibilidade, o cálculo de alto desempenho,
-a aceleração fácil de clusters para desenvolvimento mais rápido e AI do {{site.data.keyword.ibmwatson}}.
+a aceleração fácil de clusters para desenvolvimento mais rápido e AI do {{site.data.keyword.ibmwatson}}. 
 {: shortdesc}
 
 ## A empresa de hipoteca reduz os custos e acelera a conformidade regulamentar
 {: #uc_mortgage}
 
 Um VP de Gerenciamento de Risco para uma empresa de hipoteca residencial processa 70 milhões de registros por dia, mas o sistema no local estava lento e também inexato. As despesas de TI subiram porque o hardware ficou desatualizado rapidamente e não foi totalmente utilizado. Enquanto aguardavam o fornecimento de hardware, sua conformidade regulamentar desacelerou. 
+{: shortdesc}
 
 Por que o {{site.data.keyword.Bluemix_notm}}: para melhorar a análise de risco, a empresa verificou os serviços {{site.data.keyword.containerlong_notm}} e IBM Cloud Analytic para reduzir custos, aumentar a disponibilidade mundial e, por último, acelerar a conformidade regulamentar. Com o {{site.data.keyword.containerlong_notm}} em múltiplas regiões, seus apps de análise podem ser conteinerizados e implementados no mundo inteiro, melhorando a disponibilidade e endereçando regulamentações locais. Essas implementações são aceleradas com as ferramentas de software livre conhecidas, que já fazem parte do {{site.data.keyword.containerlong_notm}}.
 
@@ -57,7 +61,10 @@ Eles também aceleraram sua análise de risco e conformidade. Suas funções de 
 O problema da empresa neste momento é a escala e o tempo para a entrega. 
 
 Seu ambiente atual tem 7+ anos, está no local e com cálculo limitado, armazenamento e capacidade de E/S.
-As atualizações do servidor são dispendiosas e levam muito tempo para serem concluídas.   As atualizações de software e app seguem um processo informal e não são repetidas.   A grade HPC real é difícil de ser programada. A API é muito complexa para os novos Desenvolvedores que são trazidos para a equipe e requer conhecimento não documentado.   Além disso, os upgrades de app principais levam de 6 a 9 meses para serem concluídos. 
+As atualizações do servidor são dispendiosas e levam muito tempo para serem concluídas. 
+As atualizações de software e app seguem um processo informal e não são repetidas. 
+A grade HPC real é difícil de ser programada. A API é muito complexa para os novos Desenvolvedores que são trazidos para a equipe e requer conhecimento não documentado. 
+Além disso, os upgrades de app principais levam de 6 a 9 meses para serem concluídos. 
 
 **Modelo de solução: serviços de cálculo, armazenamento e E/S sob demanda que são executados em nuvem pública com acesso seguro a ativos corporativos no local conforme necessário**
 
@@ -94,6 +101,7 @@ O {{site.data.keyword.cloudant}} é um banco de dados NoSQL moderno que é útil
 {: #uc_payment_tech}
 
 Um Exec de Desenvolvimento tem Desenvolvedores que usam ferramentas tradicionais no local que desaceleram a criação de protótipos enquanto aguardam as compras de hardware.
+{: shortdesc}
 
 Por que o {{site.data.keyword.Bluemix_notm}}: o {{site.data.keyword.containerlong_notm}} fornece a aceleração de cálculo usando a tecnologia padrão de software livre. Depois que a empresa mudou para o {{site.data.keyword.containerlong_notm}}, os Desenvolvedores têm acesso a ferramentas amigáveis do DevOps, como contêineres móveis e facilmente compartilhados.
 
@@ -149,7 +157,7 @@ Segurança primeiro: com bare metal para o {{site.data.keyword.containerlong_not
 **Etapa 1: levantar e deslocar para cálculo seguro**
 * Os apps que gerenciam dados altamente sensíveis podem ser hospedados novamente no {{site.data.keyword.containerlong_notm}} em execução no Bare Metal para Cálculo Confiável. O cálculo confiável pode verificar o hardware subjacente com relação à violação. 
 * Migre imagens de máquina virtual para imagens de contêiner que são executadas no {{site.data.keyword.containerlong_notm}} no {{site.data.keyword.Bluemix_notm}} público.
-* Por meio desse núcleo, o Vulnerability Advisor fornece varredura de vulnerabilidade de varredura de imagem, política, contêiner e empacotamento, para malware conhecido. 
+* Nesse núcleo, o Vulnerability Advisor fornece varredura de vulnerabilidade de imagem, política, contêiner e empacotamento, para malware conhecido. 
 * O data center privado/os custos de capital no local são bastante reduzidos e substituídos por um modelo de computação utilitária que é escalado com base na demanda de carga de trabalho.
 
 **Etapa 2: operações e conexões para os sistemas de pagamento existentes de backend**

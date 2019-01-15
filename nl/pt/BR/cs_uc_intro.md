@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -25,8 +28,8 @@ Uma variedade de casos de uso mostra as intensidades dos serviços {{site.data.k
 * IA e aprendizado de máquina
 * Dados e armazenamento
 * DevOps
-
 {: shortdesc}
+
 <table summary="A tabela mostra os casos de uso. As linhas devem ser lidas da esquerda para a direita, com ícones representando cada indústria na coluna um e a descrição na coluna dois.">
 <caption>Casos de uso</caption>
   <thead>

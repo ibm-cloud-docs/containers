@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -40,19 +43,19 @@ Aprenda as etapas gerais para implementar apps clicando em uma área da imagem a
 ## Planejamento para executar apps em clusters
 {: #plan_apps}
 
-Assegure-se de que seu app esteja pronto para implementação no {{site.data.keyword.containerlong_notm}}.
-{:shortdesc}
+Antes de implementar um app em um cluster do {{site.data.keyword.containerlong_notm}}, decida como deseja configurar seu app para que ele possa ser acessado corretamente e integrado a outros serviços no {{site.data.keyword.Bluemix_notm}}. {:shortdesc}
 
 ### Que tipo de objetos do Kubernetes posso fazer para meu app?
 {: #object}
 
 Ao preparar seu arquivo YAML do app, você tem muitas opções para aumentar a disponibilidade, o desempenho e a segurança do app. Por exemplo, em vez de um único pod, é possível usar um objeto de controlador do Kubernetes para gerenciar sua carga de trabalho, como um conjunto de réplicas, uma tarefa ou um conjunto de daemons. Para obter mais informações sobre pods e controladores, visualize a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). Uma implementação que gerencia um conjunto de réplicas de pods é um caso de uso comum para um app.
+{: shortdesc}
 
 Por exemplo, um objeto `kind: Deployment` é uma boa opção para implementar um pod de app porque, com ele, é possível especificar um conjunto de réplicas para obter mais disponibilidade para seus pods.
 
 A tabela a seguir descreve por que é possível criar diferentes tipos de objetos de carga de trabalho do Kubernetes.
 
-| Objeto | Descrição | 
+| Objeto | Descrição |
 | --- | --- |
 | [`Pod` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | Um pod é a menor unidade implementável para suas cargas de trabalho e pode conter um ou mais contêineres. Semelhante a contêineres, os pods são projetados para serem descartáveis e são frequentemente usados para teste de unidade de recursos de app. Para evitar tempo de inatividade para seu app, considere a implementação de pods com um controlador do Kubernetes, como uma implementação. Uma implementação ajuda a gerenciar múltiplos pods, réplicas, ajuste de escala de pod, lançamentos e mais. |
 | [`ReplicaSet` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | Um conjunto de réplicas assegura que múltiplas réplicas de seu pod estejam em execução e reagenda um pod se ele fica inativo. Você pode criar um conjunto de réplicas para testar como o planejamento de pod funciona, mas para gerenciar atualizações de aplicativo, lançamentos e ajuste de escala, crie uma implementação em seu lugar. |
@@ -80,6 +83,7 @@ Veja [Especificando seus requisitos de app em seu arquivo YAML](#app_yaml) para 
 {: #variables}
 
 Para incluir informações de variável em suas implementações em vez de codificar permanentemente os dados no arquivo YAML, é possível usar um [`ConfigMap` do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) ou um objeto [`Secret` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/secret/).
+{: shortdesc}
 
 Para consumir um configmap ou segredo, é necessário montá-lo no pod. O configmap ou segredo é combinado com o pod exatamente antes de o pod ser executado. É possível reutilizar uma especificação de implementação e imagem em muitos apps, mas, em seguida, descarregar para a área de troca os configmaps e segredos customizados. Os segredos em particular podem ocupar muito armazenamento no nó local, portanto, planeje adequadamente.
 
@@ -106,6 +110,7 @@ Consulte  [ Incluindo serviços em apps ](cs_integrations.html#adding_app).
 
 ### Como posso ter certeza de que meu app tem os recursos certos?
 Quando você [especifica seu arquivo YAML do app](#app_yaml), é possível incluir funcionalidades do Kubernetes em sua configuração do aplicativo que ajudam seu app a obter os recursos certos. Em particular, [configure limites de recurso e solicitações ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) para cada contêiner que está definido em seu arquivo YAML.
+{: shortdesc}
 
 Além disso, seu administrador de cluster pode configurar controles de recurso que podem afetar a implementação do app, conforme a seguir.
 *  [Cotas de recurso ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
@@ -113,6 +118,7 @@ Além disso, seu administrador de cluster pode configurar controles de recurso q
 
 ### Como posso acessar meu app?
 É possível acessar seu app privadamente dentro do cluster [usando um serviço `clusterIP`](cs_network_cluster.html#planning).
+{: shortdesc}
 
 Se desejar expor publicamente seu app, você terá opções diferentes que dependem do tipo de cluster.
 *  **Cluster grátis**: é possível expor seu app usando um [serviço NodePort](cs_nodeport.html#nodeport).
@@ -122,16 +128,19 @@ Se desejar expor publicamente seu app, você terá opções diferentes que depen
 
 ### Depois de implementar meu app, como posso monitorar seu funcionamento?
 É possível configurar a [criação de log e monitoramento](cs_health.html#health) do {{site.data.keyword.Bluemix_notm}} para seu cluster. Também é possível escolher integrar a um [serviço de criação de log ou de monitoramento](cs_integrations.html#health_services) de terceiros.
+{: shortdesc}
 
 ### Como posso manter meu app atualizado?
 Se desejar incluir e remover apps dinamicamente em resposta ao uso de carga de trabalho, veja [Escalando apps](cs_app.html#app_scaling).
+{: shortdesc}
 
 Se desejar gerenciar atualizações para seu app, veja [Gerenciando implementações contínuas](cs_app.html#app_rolling).
 
 ### Como posso controlar quem tem acesso às minhas implementações de app?
 Os administradores de conta e cluster podem controlar o acesso em vários níveis diferentes: cluster, namespace do Kubernetes, pod e contêiner.
+{: shortdesc}
 
-Com o IAM, é possível designar permissões para usuários individuais, grupos ou contas de serviço no nível de instância de cluster.  É possível definir o escopo de acesso do cluster ainda mais, restringindo os usuários a namespaces específicos dentro do cluster. Para obter mais informações, veja [Designando acesso ao cluster](cs_users.html#users).
+Com o {{site.data.keyword.Bluemix_notm}} IAM, é possível designar permissões a usuários individuais, grupos ou contas de serviço no nível de instância de cluster. É possível definir o escopo de acesso do cluster ainda mais, restringindo os usuários a namespaces específicos dentro do cluster. Para obter mais informações, veja [Designando acesso ao cluster](cs_users.html#users).
 
 Para controlar o acesso no nível de pod, é possível [configurar políticas de segurança de pod com o RBAC do Kubernetes](cs_psp.html#psp).
 
@@ -159,6 +168,9 @@ Também é possível [conectar múltiplos clusters em regiões diferentes com um
 
 ### Aumentando a disponibilidade de seu app
 {: #increase_availability}
+
+Considere as opções a seguir para aumentar a disponibilidade de seu app.
+{: shortdesc}
 
 <dl>
   <dt>Usar implementações e conjuntos de réplicas para implementar seu app e suas dependências</dt>
@@ -287,7 +299,7 @@ metadados:
   <dd><p>Como um administrador de cluster, é possível certificar-se de que as equipes que compartilham um cluster não ocupem mais do que seu compartilhamento justo de recursos de cálculo (memória e CPU) criando um [objeto ResourceQuota ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) para cada namespace do Kubernetes no cluster. Se o administrador de cluster configurar uma cota de recurso de cálculo, cada contêiner dentro do modelo de implementação deverá especificar solicitações de recurso e limites para memória e CPU, caso contrário, a criação do pod falhará.</p>
   <p><ol><li>Verifique se uma cota de recurso está configurada para um namespace.<pre class="pre"><code> kubectl get quota -- namespace= < namespace> </code></pre></li>
   <li>Veja quais são os limites de cota.<pre class="pre"><code> kubectl describe quota < quota_name> -- namespace= < namespace> </code></pre></li></ol></p>
-  <p>Mesmo que nenhuma cota de recurso seja configurada, é possível incluir solicitações de recurso e limites em sua implementação para melhorar o gerenciamento de recursos do nó do trabalhador. **Nota**: se um contêiner exceder seu limite, o contêiner poderá ser reiniciado ou falhar. Se um contêiner exceder uma solicitação, seu pod poderá ser despejado se o nó do trabalhador ficar sem esse recurso que foi excedido. Para obter informações de resolução de problemas, veja [Os pods falham repetidamente ao reiniciar ou são removidos inesperadamente](cs_troubleshoot_clusters.html#pods_fail).</p>
+  <p>Mesmo que nenhuma cota de recurso seja configurada, é possível incluir solicitações de recurso e limites em sua implementação para melhorar o gerenciamento de recursos do nó do trabalhador.</p><p class="note">Se um contêiner exceder seu limite, o contêiner poderá ser reiniciado ou falhar. Se um contêiner exceder uma solicitação, seu pod poderá ser despejado se o nó do trabalhador ficar sem esse recurso que foi excedido. Para obter informações de resolução de problemas, veja [Os pods falham repetidamente ao reiniciar ou são removidos inesperadamente](cs_troubleshoot_clusters.html#pods_fail).</p>
   <p>**Solicitação**: a quantia mínima do recurso que o planejador reserva para que o contêiner use. Se a quantia for igual ao limite, a solicitação será garantida. Se a quantia for menor que o limite, a solicitação ainda será garantida, mas o planejador poderá usar a diferença entre a solicitação e o limite para preencher os recursos de outros contêineres.</p>
   <p>**Limite**: a quantia máxima do recurso que o contêiner pode consumir. Se a quantia total de recursos que for usada nos contêineres exceder a quantia disponível no nó do trabalhador, os contêineres poderão ser despejados para liberar espaço. Para evitar o despejo, configure a solicitação de recurso igual ao limite do contêiner. Se nenhum limite for especificado, o padrão será a capacidade do nó do trabalhador.</p>
   <p>Para obter mais informações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
@@ -462,6 +474,7 @@ spec:
 {: #yaml-example}
 
 A seguir está uma cópia do YAML de implementação que foi [discutido seção por seção anteriormente](#app_yaml). Também é possível [fazer download do YAML por meio do GitHub](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
+{: shortdesc}
 
 ```yaml
 apiVersion: apps/v1beta1
@@ -598,19 +611,23 @@ spec:
 ## Ativando o painel do Kubernetes
 {: #cli_dashboard}
 
-Abra um painel do Kubernetes em seu sistema local para visualizar informações sobre um cluster e seus nós do trabalhador. [Na GUI](#db_gui), é possível acessar o painel com um conveniente botão de um clique. [Com a CLI](#db_cli), é possível acessar o painel ou usar as etapas em um processo de automação, como para um pipeline CI/CD.
+Abra um painel do Kubernetes em seu sistema local para visualizar informações sobre um cluster e seus nós do trabalhador. [No console {{site.data.keyword.Bluemix_notm}}](#db_gui), é possível acessar o painel com um botão de um clique conveniente. [Com a CLI](#db_cli), é possível acessar o painel ou usar as etapas em um processo de automação, como para um pipeline CI/CD.
 {:shortdesc}
 
+Você tem tantos recursos e usuários em seu cluster que o painel do Kubernetes está um pouco lento? Para clusters que executam o Kubernetes versão 1.12 ou mais recente, seu administrador de cluster pode escalar a implementação do `kubernetes-dashboard` executando `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
+{: tip}
+
 Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
+* [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](cs_cli_install.html#cs_cli_configure).
 
 É possível usar a porta padrão ou configurar sua própria porta para ativar o painel do Kubernetes para um cluster.
 
-**Ativando o painel do Kubernetes por meio da GUI**
+**Ativando o painel do Kubernetes por meio do console do {{site.data.keyword.Bluemix_notm}}**
 {: #db_gui}
 
-1.  Efetue login no [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/).
-2.  No seu perfil na barra de menus, selecione a conta que você deseja usar.
-3.  No menu, clique em **Contêineres**.
+1.  Efetue login no [console do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/).
+2.  Na barra de menus, clique em seu avatar do usuário ![Ícone de avatar](../icons/i-avatar-icon.svg "Ícone de avatar") e selecione a conta que você deseja usar.
+3.  No menu ![Ícone de menu](../icons/icon_hamburger.svg "Ícone de menu"), clique em **Kubernetes**.
 4.  Na página **Clusters**, clique no cluster que você deseja acessar.
 5.  Na página de detalhes do cluster, clique no botão **Painel do Kubernetes**.
 
@@ -663,11 +680,14 @@ Quando estiver pronto com o painel do Kubernetes, use `CTRL+C` para sair do coma
 <br />
 
 
-## Implementando apps com a GUI
+## Implementando apps com o painel do Kubernetes
 {: #app_ui}
 
-Ao implementar um app em seu cluster usando o painel do Kubernetes, um recurso de implementação cria, atualiza e gerencia automaticamente os pods em seu cluster.
+Ao implementar um app em seu cluster usando o painel do Kubernetes, um recurso de implementação cria, atualiza e gerencia automaticamente os pods em seu cluster. Para obter mais informações sobre como usar o painel, veja [os docs do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/).
 {:shortdesc}
+
+Você tem tantos recursos e usuários em seu cluster que o painel do Kubernetes está um pouco lento? Para clusters que executam o Kubernetes versão 1.12 ou mais recente, seu administrador de cluster pode escalar a implementação do `kubernetes-dashboard` executando `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
+{: tip}
 
 Antes de iniciar:
 
@@ -834,7 +854,8 @@ Antes de iniciar:
 Para executar uma carga de trabalho em uma máquina de GPU:
 1.  Crie um arquivo YAML. Neste exemplo, um `Job` YAML gerencia cargas de trabalho em lote, fazendo um pod de curta duração que é executado até que o comando planejado para ser concluído com êxito seja finalizado.
 
-    **Importante**: para cargas de trabalho de GPU, deve-se sempre fornecer o campo `resources: limits: nvidia.com/gpu` na especificação YAML.
+    Para cargas de trabalho GPU, deve-se sempre fornecer o campo `resources: limits: nvidia.com/gpu` na especificação YAML.
+    {: note}
 
     ```yaml
     apiVersion: batch/v1
@@ -1035,7 +1056,7 @@ Etapas:
     Para implementações mais complexas, você pode precisar criar um [arquivo de configuração](#app_cli).
     {: tip}
 
-2.  Crie um ajustador automático de escala e defina sua política. Para obter mais informações sobre como trabalhar com o comando `kubectl autoscale`, veja [a documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+2.  Crie um ajustador automático de escala e defina sua política. Para obter mais informações sobre como trabalhar com o comando `kubectl autoscale`, consulte [a documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,11 +13,14 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
- 
+
 
 
 # Resolução de problemas de armazenamento do cluster
@@ -350,7 +353,7 @@ Atualize o sistema de arquivos no PV existente de `ext4` para `XFS`.
 {: #cos_helm_fails}
 
 {: tsSymptoms}
-Quando você instala o plug-in Helm `ibmc` do {{site.data.keyword.cos_full_notm}}, a instalação falha com o erro a seguir: 
+Quando você instala o plug-in Helm `ibmc` do {{site.data.keyword.cos_full_notm}}, a instalação falha com o erro a seguir:
 ```
 Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
 ```
@@ -360,13 +363,13 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 Quando o plug-in Helm `ibmc` está instalado, um symlink é criado do diretório `./helm/plugins/helm-ibmc` para o diretório no qual o plug-in Helm `ibmc` está localizado em seu sistema local, que está geralmente em `./ibmcloud-object-storage-plugin/helm-ibmc`. Quando você remove o plug-in Helm `ibmc` de seu sistema local ou move o diretório do plug-in Helm `ibmc` para um local diferente, o symlink não é removido.
 
 {: tsResolve}
-1. Remova o  {{site.data.keyword.cos_full_notm}}  Plug-in do Helm. 
+1. Remova o  {{site.data.keyword.cos_full_notm}}  Plug-in do Helm.
    ```
    rm -rf ~/.helm/plugins/helm-ibmc
    ```
    {: pre}
-   
-2. [ Instale o  {{site.data.keyword.cos_full_notm}} ](cs_storage_cos.html#install_cos). 
+
+2. [ Instale o  {{site.data.keyword.cos_full_notm}} ](cs_storage_cos.html#install_cos).
 
 <br />
 
@@ -375,33 +378,35 @@ Quando o plug-in Helm `ibmc` está instalado, um symlink é criado do diretório
 {: #cos_secret_access_fails}
 
 {: tsSymptoms}
-Quando você cria seu PVC ou implementa um pod que monta o PVC, a criação ou a implementação falha. 
+Quando você cria seu PVC ou implementa um pod que monta o PVC, a criação ou a implementação falha.
 
-- Mensagem de erro de exemplo para uma falha de criação de PVC: 
+- Mensagem de erro de exemplo para uma falha de criação de PVC:
   ```
   pvc-3:1b23159vn367eb0489c16cain12345:cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
   ```
   {: screen}
 
-- Mensagem de erro de exemplo para uma falha de criação do pod: 
+- Mensagem de erro de exemplo para uma falha de criação do pod:
   ```
   persistentvolumeclaim "pvc-3" not found (repeated 3 times)
   ```
   {: screen}
-  
+
 {: tsCauses}
-O segredo do Kubernetes no qual você armazena suas credenciais de serviço do {{site.data.keyword.cos_full_notm}}, o PVC e o pod não estão todos no mesmo namespace do Kubernetes. Quando o segredo é implementado em um namespace diferente de seu PVC ou pod, o segredo não pode ser acessado. 
+O segredo do Kubernetes no qual você armazena suas credenciais de serviço do {{site.data.keyword.cos_full_notm}}, o PVC e o pod não estão todos no mesmo namespace do Kubernetes. Quando o segredo é implementado em um namespace diferente de seu PVC ou pod, o segredo não pode ser acessado.
 
 {: tsResolve}
-1. Liste os segredos em seu cluster e revise o namespace do Kubernetes no qual o segredo do Kubernetes para sua instância de serviço do {{site.data.keyword.cos_full_notm}} é criado. O segredo deve mostrar `ibm/ibmc-s3fs` como o **Tipo**. 
+
+
+1. Liste os segredos em seu cluster e revise o namespace do Kubernetes no qual o segredo do Kubernetes para sua instância de serviço do {{site.data.keyword.cos_full_notm}} é criado. O segredo deve mostrar `ibm/ibmc-s3fs` como o **Tipo**.
    ```
    kubectl get secrets --all-namespaces
    ```
    {: pre}
-   
-2. Verifique seu arquivo de configuração YAML quanto a seu PVC e pod para verificar se você usou o mesmo namespace. Se você desejar implementar um pod em um namespace diferente daquele em que seu segredo existe, [crie outro segredo](cs_storage_cos.html#create_cos_secret) no namespace desejado. 
-   
-3. Crie o PVC ou implemente o pod no namespace desejado. 
+
+2. Verifique seu arquivo de configuração YAML quanto a seu PVC e pod para verificar se você usou o mesmo namespace. Se você desejar implementar um pod em um namespace diferente daquele em que seu segredo existe, [crie outro segredo](cs_storage_cos.html#create_cos_secret) no namespace desejado.
+
+3. Crie o PVC ou implemente o pod no namespace desejado.
 
 <br />
 
@@ -410,7 +415,7 @@ O segredo do Kubernetes no qual você armazena suas credenciais de serviço do {
 {: #cred_failure}
 
 {: tsSymptoms}
-Ao criar o PVC, você vê uma mensagem de erro semelhante a uma das seguintes: 
+Ao criar o PVC, você vê uma mensagem de erro semelhante a uma das seguintes:
 
 ```
 SignatureDoesNotMatch: The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. For more information, see REST Authentication and SOAP Authentication for details.
@@ -418,7 +423,7 @@ SignatureDoesNotMatch: The request signature we calculated does not match the si
 {: screen}
 
 ```
-AccessDenied: Access Denied status code: 403 
+AccessDenied: Access Denied status code: 403
 ```
 {: screen}
 
@@ -432,22 +437,22 @@ As credenciais de serviço do {{site.data.keyword.cos_full_notm}} que você usa 
 
 {: tsResolve}
 1. Na navegação na página de detalhes do serviço, clique em **Credenciais de serviço**.
-2. Localize suas credenciais e, em seguida, clique em **Visualizar credenciais**. 
-3. Verifique se você usa o **access_key_id** e o **secret_access_key** corretos em seu segredo do Kubernetes. Se não, atualize seu segredo do Kubernetes. 
-   1. Obtenha o YAML que você usou para criar o segredo. 
+2. Localize suas credenciais e, em seguida, clique em **Visualizar credenciais**.
+3. Verifique se você usa o **access_key_id** e o **secret_access_key** corretos em seu segredo do Kubernetes. Se não, atualize seu segredo do Kubernetes.
+   1. Obtenha o YAML que você usou para criar o segredo.
       ```
       kubectl get secret < secret_name> -o yaml
       ```
       {: pre}
-      
-   2. Atualize o  ** access_key_id **  e  ** secret_access_key **. 
-   3. Atualize o segredo. 
+
+   2. Atualize o  ** access_key_id **  e  ** secret_access_key **.
+   3. Atualize o segredo.
       ```
       kubectl aplicar -f secret.yaml
       ```
       {: pre}
-      
-4. Na seção **iam_role_crn**, verifique se você tem a função `Writer` ou `Manager`. Se você não tem a função correta, deve-se [criar novas credenciais de serviço do {{site.data.keyword.cos_full_notm}} com a permissão correta](cs_storage_cos.html#create_cos_service). Em seguida, atualize seu segredo existente ou [crie um novo segredo](cs_storage_cos.html#create_cos_secret) com suas novas credenciais de serviço. 
+
+4. Na seção **iam_role_crn**, verifique se você tem a função `Writer` ou `Manager`. Se você não tem a função correta, deve-se [criar novas credenciais de serviço do {{site.data.keyword.cos_full_notm}} com a permissão correta](cs_storage_cos.html#create_cos_service). Em seguida, atualize seu segredo existente ou [crie um novo segredo](cs_storage_cos.html#create_cos_secret) com suas novas credenciais de serviço.
 
 <br />
 
@@ -455,7 +460,7 @@ As credenciais de serviço do {{site.data.keyword.cos_full_notm}} que você usa 
 ## Armazenamento de objeto: não é possível acessar um bucket existente
 
 {: tsSymptoms}
-Quando você cria o PVC, o bucket no {{site.data.keyword.cos_full_notm}} não pode ser acessado. Você vê uma mensagem de erro semelhante à seguinte: 
+Quando você cria o PVC, o bucket no {{site.data.keyword.cos_full_notm}} não pode ser acessado. Você vê uma mensagem de erro semelhante à seguinte:
 
 ```
 Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:1b2345678b69175abc98y873e2:cannot access bucket <bucket_name>: NotFound: Not Found
@@ -463,13 +468,13 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: screen}
 
 {: tsCauses}
-Você pode ter usado a classe de armazenamento errada para acessar seu bucket existente ou tentou acessar um bucket não criado. 
+Você pode ter usado a classe de armazenamento errada para acessar seu depósito existente ou tentado acessar um depósito que você não criou.
 
 {: tsResolve}
-1. No [painel do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/dashboard/apps), selecione sua instância de serviço do {{site.data.keyword.cos_full_notm}}. 
-2. Selecione  ** Buckets **. 
-3. Revise as informações de **Classe** e **Localização** para o seu bucket existente. 
-4. Escolha a  [ classe de armazenamento ](cs_storage_cos.html#storageclass_reference) apropriada. 
+1. No [painel do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/dashboard/apps), selecione sua instância de serviço do {{site.data.keyword.cos_full_notm}}.
+2. Selecione  ** Buckets **.
+3. Revise as informações de **Classe** e **Localização** para o seu bucket existente.
+4. Escolha a  [ classe de armazenamento ](cs_storage_cos.html#storageclass_reference) apropriada.
 
 <br />
 
@@ -478,25 +483,25 @@ Você pode ter usado a classe de armazenamento errada para acessar seu bucket ex
 {: #cos_nonroot_access}
 
 {: tsSymptoms}
-Você transferiu por upload arquivos para a sua instância de serviço do {{site.data.keyword.cos_full_notm}} usando a GUI ou a API de REST. Quando você tenta acessar esses arquivos com um usuário não raiz definido com `runAsUser` em sua implementação de app, o acesso aos arquivos é negado. 
+Você transferiu por upload os arquivos para a sua instância de serviço do {{site.data.keyword.cos_full_notm}} usando o console ou a API de REST. Quando você tenta acessar esses arquivos com um usuário não raiz definido com `runAsUser` em sua implementação de app, o acesso aos arquivos é negado.
 
 {: tsCauses}
-No Linux, um arquivo ou um diretório tem 3 grupos de acesso: `Owner`, `Group` e `Other`. Ao fazer upload de um arquivo para o {{site.data.keyword.cos_full_notm}} usando a GUI ou a API de REST, as permissões para o `Owner`, `Group` e `Other` são removidas. A permissão de cada arquivo é semelhante à seguinte: 
+No Linux, um arquivo ou um diretório tem 3 grupos de acesso: `Owner`, `Group` e `Other`. Ao fazer upload de um arquivo para o {{site.data.keyword.cos_full_notm}} usando o console ou a API de REST, as permissões para o `Owner`, `Group` e `Other` serão removidas. A permissão de cada arquivo é semelhante à seguinte:
 
 ```
 d--------- 1 root root 0 Jan 1 1970 <file_name>
 ```
 {: screen}
 
-Ao fazer upload de um arquivo usando o plug-in {{site.data.keyword.cos_full_notm}}, as permissões para o arquivo são preservadas e não mudam. 
+Ao fazer upload de um arquivo usando o plug-in {{site.data.keyword.cos_full_notm}}, as permissões para o arquivo são preservadas e não mudam.
 
 {: tsResolve}
-Para acessar o arquivo com um usuário não raiz, o usuário não raiz deve ter permissões de leitura e gravação para o arquivo. Mudar a permissão em um arquivo como parte de sua implementação do pod requer uma operação de gravação. O {{site.data.keyword.cos_full_notm}}  não foi projetado para cargas de trabalho de gravação. A atualização de permissões durante a implementação do pod pode evitar que seu pod entre em um estado `Running`. 
+Para acessar o arquivo com um usuário não raiz, o usuário não raiz deve ter permissões de leitura e gravação para o arquivo. Mudar a permissão em um arquivo como parte de sua implementação do pod requer uma operação de gravação. O {{site.data.keyword.cos_full_notm}}  não foi projetado para cargas de trabalho de gravação. A atualização de permissões durante a implementação do pod pode evitar que seu pod entre em um estado `Running`.
 
-Para resolver esse problema, antes de montar o PVC em seu pod de app, crie outro pod para configurar a permissão correta para o usuário não raiz. 
+Para resolver esse problema, antes de montar o PVC em seu pod de app, crie outro pod para configurar a permissão correta para o usuário não raiz.
 
-1. Verifique as permissões de seus arquivos em seu bucket. 
-   1. Crie um arquivo de configuração para seu pod `test-permission` e nomeie o arquivo como `test-permission.yaml`. 
+1. Verifique as permissões de seus arquivos em seu bucket.
+   1. Crie um arquivo de configuração para seu pod `test-permission` e nomeie o arquivo como `test-permission.yaml`.
       ```
       apiVersion: v1
       kind: Pod
@@ -515,38 +520,38 @@ Para resolver esse problema, antes de montar o PVC em seu pod de app, crie outro
             claimName: <pvc_name>
       ```
       {: codeblock}
-        
-   2. Crie o pod  ` test-permission ` . 
+
+   2. Crie o pod  ` test-permission ` .
       ```
       kubectl apply -f test-permission.yaml
       ```
       {: pre}
-      
-   3. Efetue login em seu pod. 
+
+   3. Efetue login em seu pod.
       ```
       kubectl exec test-permission-permission -it bash
       ```
       {: pre}
-   
-   4. Navegue para o caminho de montagem e liste as permissões para seus arquivos. 
+
+   4. Navegue para o caminho de montagem e liste as permissões para seus arquivos.
       ```
       cd test & & ls -al
       ```
       {: pre}
-      
-      Saída de exemplo: 
+
+      Saída de exemplo:
       ```
       d--------- 1 root root 0 Jan 1 1970 <file_name>
       ```
       {: screen}
-      
-2. Exclua o pod. 
+
+2. Exclua o pod.
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-      
-3. Crie um arquivo de configuração para o pod que você usar para corrigir as permissões de seus arquivos e nomeie-o como `fix-permission.yaml`. 
+
+3. Crie um arquivo de configuração para o pod que você usar para corrigir as permissões de seus arquivos e nomeie-o como `fix-permission.yaml`.
    ```
    apiVersion: v1
    kind: Pod
@@ -568,61 +573,62 @@ Para resolver esse problema, antes de montar o PVC em seu pod de app, crie outro
          claimName: <pvc_name>
     ```
     {: codeblock}
-    
-3. Crie o pod  ` fix-permission ` . 
+
+3. Crie o pod  ` fix-permission ` .
    ```
    kubectl aplicar -f fix-permission.yaml
    ```
    {: pre}
-   
+
 4. Espere o pod entrar em um estado `Completed`.  
    ```
    kubectl get pod fix-permission
    ```
    {: pre}
 
-5. Exclua o pod `fix-permission`. 
+5. Exclua o pod `fix-permission`.
    ```
    kubectl delete pod fix-permission
    ```
-   {: pre} 
-   
-5. Recrie o pod `test-permission` que você usou anteriormente para verificar as permissões. 
+   {: pre}
+
+5. Recrie o pod `test-permission` que você usou anteriormente para verificar as permissões.
    ```
    kubectl apply -f test-permission.yaml
    ```
    {: pre}
-   
-5. Verifique se as permissões para seus arquivos estão atualizadas. 
-   1. Efetue login em seu pod. 
+
+5. Verifique se as permissões para seus arquivos estão atualizadas.
+   1. Efetue login em seu pod.
       ```
       kubectl exec test-permission-permission -it bash
       ```
       {: pre}
-   
-   2. Navegue para o caminho de montagem e liste as permissões para seus arquivos. 
+
+   2. Navegue para o caminho de montagem e liste as permissões para seus arquivos.
       ```
       cd test & & ls -al
       ```
       {: pre}
 
-      Saída de exemplo: 
+      Saída de exemplo:
       ```
       -rwxrwx--- 1 <nonroot_userID> root 6193 Aug 21 17:06 <file_name>
       ```
       {: screen}
-      
-6. Exclua o pod  ` test-permission ` . 
+
+6. Exclua o pod  ` test-permission ` .
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-   
-7. Monte o PVC para o app com o usuário não raiz. 
 
-   **Importante:** defina o usuário não raiz como `runAsUser` sem configurar `fsGroup` em seu YAML de implementação ao mesmo tempo. Configurar o `fsGroup` aciona o plug-in do {{site.data.keyword.cos_full_notm}} para atualizar as permissões de grupo para todos os arquivos em um depósito quando o pod é implementado. A atualização das permissões é uma operação de gravação e pode evitar que seu pod entre em um estado `Running`. 
+7. Monte o PVC para o app com o usuário não raiz.
 
-Depois de configurar as permissões de arquivo corretas em sua instância de serviço do {{site.data.keyword.cos_full_notm}}, não faça upload de arquivos usando a GUI ou a API de REST. Use o plug-in do {{site.data.keyword.cos_full_notm}} para incluir arquivos em sua instância de serviço. 
+   Defina o usuário não raiz como `runAsUser` sem configurar `fsGroup` em sua implementação YAML ao mesmo tempo. Configurar o `fsGroup` aciona o plug-in do {{site.data.keyword.cos_full_notm}} para atualizar as permissões de grupo para todos os arquivos em um depósito quando o pod é implementado. A atualização das permissões é uma operação de gravação e pode evitar que seu pod entre em um estado `Running`.
+   {: important}
+
+Depois de configurar as permissões de arquivo corretas em sua instância de serviço do {{site.data.keyword.cos_full_notm}}, não faça upload dos arquivos usando o console ou a API de REST. Use o plug-in do {{site.data.keyword.cos_full_notm}} para incluir arquivos em sua instância de serviço.
 {: tip}
 
 <br />
@@ -637,20 +643,15 @@ Ainda está tendo problemas com o seu cluster?
 {: shortdesc}
 
 -  No terminal, você é notificado quando atualizações para a CLI `ibmcloud` e plug-ins estão disponíveis. Certifique-se de manter sua CLI atualizada para que seja possível usar todos os comandos e sinalizações disponíveis.
-
 -   Para ver se o {{site.data.keyword.Bluemix_notm}} está disponível, [verifique a página de status do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/bluemix/support/#status).
 -   Poste uma pergunta no [{{site.data.keyword.containerlong_notm}} Slack ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com).
-
     Se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}}, [solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para essa Folga.
     {: tip}
 -   Revise os fóruns para ver se outros usuários tiveram o mesmo problema. Ao usar os fóruns para fazer uma pergunta, marque sua pergunta para que ela seja vista pelas equipes de desenvolvimento do {{site.data.keyword.Bluemix_notm}}.
-
     -   Se você tiver questões técnicas sobre como desenvolver ou implementar clusters ou apps com o {{site.data.keyword.containerlong_notm}}, poste sua pergunta no [Stack Overflow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo") ](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e identifique-a com `ibm-cloud`, `kubernetes` e `containers`.
     -   Para perguntas sobre o serviço e instruções de introdução, use o fórum do [IBM Developer Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `ibm-cloud` e `containers`.
     Consulte [Obtendo ajuda](/docs/get-support/howtogetsupport.html#using-avatar) para obter mais detalhes sobre o uso dos fóruns.
-
--   Entre em contato com o Suporte IBM abrindo um chamado. Para saber como abrir um chamado de suporte IBM ou sobre os níveis de suporte e as severidades de chamado, veja [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
-{: tip}
+-   Entre em contato com o Suporte IBM abrindo um caso. Para saber mais sobre como abrir um caso de suporte IBM ou sobre os níveis de suporte e as severidades do caso, consulte [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 Ao relatar um problema, inclua o ID do cluster. Para obter o ID do seu cluster, execute `ibmcloud ks clusters`.
+{: tip}
 
