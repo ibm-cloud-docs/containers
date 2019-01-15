@@ -850,6 +850,8 @@ trusted: <em>true</em>
 <dt><code>--private-only</code></dt>
   <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  <p class="note">If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Private clusters](cs_clusters_planning.html#private_clusters).</p></dd>
 
+
+
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with 1 worker node is created. This value is optional for standard clusters and is not available for free clusters.
 
