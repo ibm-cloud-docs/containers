@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -72,14 +75,14 @@ Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubern
 <tbody>
 <tr>
 <td>CoScale</td>
-<td>Monitora i nodi di lavoro, i contenitori, le serie di repliche, i controller della replica e i servizi con <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+<td>Monitora i nodi di lavoro, i contenitori, le serie di repliche, i controller della replica e i servizi con <a href="https://www.newrelic.com/coscale" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
 <td>Datadog</td>
 <td>Monitora il tuo cluster e visualizza le metriche delle prestazioni dell'applicazione e dell'infrastruttura con <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
-<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>{{site.data.keyword.cloudaccesstrailfull}}</td>
 <td>Monitora l'attività amministrativa eseguita nel tuo cluster analizzando i log tramite Grafana. Per ulteriori informazioni sul servizio, vedi la documentazione del [Programma di traccia dell'attività](/docs/services/cloud-activity-tracker/index.html). Per ulteriori informazioni sui tipi di eventi che puoi tracciare, vedi gli [eventi del Programma di traccia dell'attività](cs_at_events.html).</td>
 </tr>
 <tr>
@@ -87,8 +90,16 @@ Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubern
 <td>Espandi le tue capacità di raccolta, conservazione e ricerca dei log con {{site.data.keyword.loganalysisfull_notm}}. Per ulteriori informazioni, vedi <a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">Abilitazione della raccolta automatica dei log di cluster <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>Aggiungi funzionalità di gestione dei log al tuo cluster distribuendo LogDNA come servizio di terze parti ai tuoi nodi di lavoro per gestire i log dai contenitori di pod. Per ulteriori informazioni, vedi [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
+</tr>
+<tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
-<td>Espandi le tue capacità di raccolta e conservazione delle metriche definendo regole e avvisi con {{site.data.keyword.monitoringlong_notm}}. Per ulteriori informazioni, vedi <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Analizza le metriche in Grafana per un'applicazione distribuita in un cluster Kubernetes <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+<td>Espandi le tue capacità di raccolta e conservazione delle metriche definendo regole e avvisi con {{site.data.keyword.monitoringlong_notm}}. Per ulteriori informazioni, vedi <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Analizza le metriche in Grafana per un'applicazione distribuita in un cluster Kubernetes <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>Ottieni visibilità operativa sulle prestazioni e sull'integrità delle tue applicazioni distribuendo Sysdig come servizio di terze parti ai tuoi nodi di lavoro per inoltrare le metriche a {{site.data.keyword.monitoringlong}}. Per ulteriori informazioni, vedi [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Nota**: se utilizzi {{site.data.keyword.mon_full_notm}} con i cluster che eseguono Kubernetes versione 1.11 o successive, non vengono raccolte tutte le metriche del contenitore perché Sysdig attualmente non supporta `containerd`.</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -126,7 +137,7 @@ per la CPU e la memoria e inoltre fornisce strumenti per inserire ed eseguire in
 ## Servizi di sicurezza
 {: #security_services}
 
-Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.keyword.Bluemix_notm}} con il tuo cluster? Controlla l'[esercitazione su come applicare la sicurezza end-to-end a un'applicazione cloud](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application).
+Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.keyword.Bluemix_notm}} con il tuo cluster? Controlla l'[esercitazione su come applicare la sicurezza end-to-end a un'applicazione cloud](/docs/tutorials/cloud-e2e-security.html).
 {: shortdesc}
 
 <table summary="Riepilogo dell'accessibilità">
@@ -156,7 +167,7 @@ Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.k
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
-  <td>Crittografa i segreti Kubernetes che si trovano nel tuo cluster abilitando {{site.data.keyword.keymanagementserviceshort}}. La crittografia dei tuoi segreti Kubernetes impedisce agli utenti non autorizzati di accedere a informazioni riservate sui cluster. <br>Per la configurazione, vedi <a href="cs_encrypt.html#keyprotect">Crittografia dei segreti Kubernetes mediante {{site.data.keyword.keymanagementserviceshort}}</a>.<br>Per ulteriori informazioni, vedi la <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentazione <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
+  <td>Crittografa i segreti Kubernetes che si trovano nel tuo cluster abilitando {{site.data.keyword.keymanagementserviceshort}}. La crittografia dei tuoi segreti Kubernetes impedisce agli utenti non autorizzati di accedere a informazioni riservate sui cluster.<br>Per la configurazione, vedi <a href="cs_encrypt.html#keyprotect">Crittografia dei segreti Kubernetes mediante {{site.data.keyword.keymanagementserviceshort}}</a>.<br>Per ulteriori informazioni, vedi la <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentazione <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -186,7 +197,7 @@ Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.k
 <tbody>
 <tr>
   <td>Heptio Ark</td>
-  <td>Puoi utilizzare <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per eseguire il backup e per ripristinare le risorse del cluster e i volumi persistenti. Per ulteriori informazioni, vedi Heptio Ark <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
+  <td>Puoi utilizzare <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per eseguire il backup e per ripristinare le risorse del cluster e i volumi persistenti. Per ulteriori informazioni, vedi Heptio Ark <a href="https://github.com/heptio/ark/blob/release-0.9/docs/use-cases.md" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -215,12 +226,19 @@ ai cluster
 Aggiungi i servizi {{site.data.keyword.Bluemix_notm}} per migliorare il tuo cluster Kubernetes con funzionalità supplementari in aree quali l'intelligenza artificiale Watson, i dati, la sicurezza e IoT (Internet of Things).
 {:shortdesc}
 
-**Importante:** puoi eseguire il bind solo di servizi che supportano le chiavi del servizio. Per trovare un elenco con i servizi che supportano le chiavi del servizio, vedi [Abilitazione di applicazioni esterne a utilizzare servizi {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#accser_external).
+Puoi eseguire il bind solo di servizi che supportano le chiavi del servizio. Per trovare un elenco con i servizi che supportano le chiavi del servizio, vedi [Abilitazione di applicazioni esterne a utilizzare servizi {{site.data.keyword.Bluemix_notm}}](/docs/resources/connect_external_app.html#externalapp).
+{: note}
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+Prima di iniziare:
+- Assicurati di avere i seguenti ruoli:
+    - [Ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Editor** o **Amministratore** ](cs_users.html#platform)per il cluster.
+    - [Ruolo Cloud Foundry **Sviluppatore**](/docs/iam/mngcf.html#mngcf) per lo spazio che vuoi utilizzare
+- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
 
 Per aggiungere un servizio {{site.data.keyword.Bluemix_notm}} al tuo cluster:
-1. [Crea un'istanza del servizio {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance). </br></br>**Nota:**<ul><li>Alcuni servizi {{site.data.keyword.Bluemix_notm}} sono disponibili solo in determinate regioni. Puoi eseguire il bind di un servizio al tuo cluster solo se il servizio è disponibile nella stessa regione del tuo cluster. Inoltre, se vuoi creare un'istanza del servizio nella zona Washington DC, devi utilizzare la CLI.</li><li>Devi creare l'istanza del servizio nello stesso gruppo di risorse del tuo cluster. Una risorsa può essere creata in un solo gruppo di risorse che non puoi modificare in seguito.</li></ul>
+1. [Crea un'istanza del servizio {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
+    * Alcuni servizi {{site.data.keyword.Bluemix_notm}} sono disponibili solo in determinate regioni. Puoi eseguire il bind di un servizio al tuo cluster solo se il servizio è disponibile nella stessa regione del tuo cluster. Inoltre, se vuoi creare un'istanza del servizio nella zona Washington DC, devi utilizzare la CLI.
+    * Devi creare l'istanza del servizio nello stesso gruppo di risorse del tuo cluster. Una risorsa può essere creata in un solo gruppo di risorse che non puoi modificare in seguito.
 
 2. Controlla il tipo di servizio che hai creato e prendi nota del nome (**Name**) dell'istanza del servizio.
    - **Servizi Cloud Foundry:**
@@ -236,7 +254,7 @@ Per aggiungere un servizio {{site.data.keyword.Bluemix_notm}} al tuo cluster:
      ```
      {: screen}
 
-  - **Servizi abilitati a IAM:**
+  - **Servizi abilitati a {{site.data.keyword.Bluemix_notm}} IAM:**
      ```
      ibmcloud resource service-instances
      ```
@@ -251,7 +269,7 @@ Per aggiungere un servizio {{site.data.keyword.Bluemix_notm}} al tuo cluster:
 
    Puoi anche vedere i diversi tipi di servizio nel tuo dashboard come **Servizi Cloud Foundry** e **Servizi**.
 
-3. Per i servizi abilitati a IAM, crea un alias Cloud Foundry in modo da poter eseguire il bind di questo servizio al tuo cluster. Se il tuo servizio è già un servizio Cloud Foundry, questo passo non è necessario e puoi continuare con il passo successivo.
+3. Per i servizi abilitati a {{site.data.keyword.Bluemix_notm}} IAM, crea un alias Cloud Foundry in modo da poter eseguire il bind di questo servizio al tuo cluster. Se il tuo servizio è già un servizio Cloud Foundry, questo passo non è necessario e puoi continuare con il passo successivo.
    1. Specifica come destinazione un'organizzazione e uno spazio Cloud Foundry.
       ```
       ibmcloud target --cf
@@ -270,20 +288,13 @@ Per aggiungere un servizio {{site.data.keyword.Bluemix_notm}} al tuo cluster:
       ```
       {: pre}
 
-4. Identifica lo spazio dei nomi del cluster che desideri utilizzare per l'aggiunta del tuo servizio. Scegli tra le seguenti opzioni:
-   - Elenca gli spazi dei nomi esistenti e scegline uno che desideri utilizzare.
+4. Identifica lo spazio dei nomi del cluster che desideri utilizzare per l'aggiunta del tuo servizio. Scegli tra le seguenti opzioni.
      ```
      kubectl get namespaces
      ```
      {: pre}
 
-   - Crea uno spazio dei nomi nel tuo cluster.
-     ```
-     kubectl create namespace <namespace_name>
-     ```
-     {: pre}
-
-5.  Aggiungi il servizio al tuo cluster. Per i servizi abilitati a IAM, assicurati di utilizzare l'alias Cloud Foundry che hai creato in precedenza.
+5.  Aggiungi il servizio al tuo cluster. Per i servizi abilitati a {{site.data.keyword.Bluemix_notm}} IAM, assicurati di utilizzare l'alias Cloud Foundry che hai creato in precedenza.
     ```
     ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
@@ -722,7 +733,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 {: #helm_links}
 
 * Per utilizzare il grafico Helm strongSwan, vedi [Configurazione della connettività VPN con il grafico Helm del servizio VPN IPSec strongSwan](cs_vpn.html#vpn-setup).
-* Visualizza i grafici Helm disponibili che puoi utilizzare con {{site.data.keyword.Bluemix_notm}} nella GUI [Helm Charts Catalog ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts).
+* Visualizza i grafici Helm disponibili che puoi utilizzare con {{site.data.keyword.Bluemix_notm}} nel [Catalogo dei grafici Helm ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) della console.
 * Ulteriori informazioni sui comandi Helm utilizzati per configurare e gestire i grafici Helm sono disponibili nella <a href="https://docs.helm.sh/helm/" target="_blank">documentazione Helm <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.
 * Ulteriori informazioni su come puoi [aumentare la velocità di distribuzione con i grafici Helm Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 

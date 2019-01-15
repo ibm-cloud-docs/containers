@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -30,8 +33,9 @@ sfruttare le toolchain per aggiornamenti rapidi delle applicazioni e le distribu
 {: #uc_shipping}
 
 Un responsabile IT ha sistemi di traffico e pianificazione di spedizione con cui i partner interagiscono. I partner richiedono informazioni aggiornate da questi sistemi che accedono ai dati dei dispositivi IoT. Tuttavia, questi sistemi non potevano essere ridimensionati in tutto il mondo con sufficiente HA.
+{: shortdesc}
  
- Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} ridimensiona le applicazioni inserite nel contenitore con 99,999 percento di disponibilità per soddisfare le crescenti richieste. Le distribuzioni di applicazioni si verificano 40 volte a giorno quando gli sviluppatori sperimentano facilmente, distribuendo rapidamente le modifiche ai sistemi di sviluppo e test. La piattaforma IoT facilita l'accesso ai dati IoT. 
+Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} ridimensiona le applicazioni inserite nel contenitore con 99,999 percento di disponibilità per soddisfare le crescenti richieste. Le distribuzioni di applicazioni si verificano 40 volte a giorno quando gli sviluppatori sperimentano facilmente, distribuendo rapidamente le modifiche ai sistemi di sviluppo e test. La piattaforma IoT facilita l'accesso ai dati IoT. 
  
 Tecnologie chiave:    
 * [Più regioni per l'ecosistema di partner ](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)
@@ -111,13 +115,14 @@ Soluzione tecnica:
 * Con {{site.data.keyword.containerlong_notm}} e gli strumenti CI/CD di IBM, le versioni regionali delle applicazioni sono ospitate vicino ai dispositivi fisici da cui raccolgono i dati. 
 * I microservizi riducono notevolmente i tempi di consegna di patch, correzioni di bug e nuove funzioni. Lo sviluppo iniziale è veloce e gli aggiornamenti sono frequenti.
 * I clienti di spedizione hanno accesso in tempo reale alle posizioni delle spedizioni, alle pianificazioni di consegna e persino ai registri portuali approvati.
-* I partner di transito presso vari terminali di spedizione sono a conoscenza dei manifesti di carico e dei dettagli della spedizione, in modo che la logistica in loco sia migliorata, anziché ritardata.  
+* I partner di transito presso vari terminali di spedizione sono a conoscenza dei manifesti di carico e dei dettagli della spedizione, in modo che la logistica in loco sia migliorata, anziché ritardata. 
 * Separatamente da questo articolo, [Maersk e IBM hanno costituito una joint venture](https://www.ibm.com/press/us/en/pressrelease/53602.wss) per migliorare le catene di fornitura internazionali con Blockchain. 
 
 ## La compagnia aerea fornisce un innovativo sito di indennità per le risorse umane (HR) in meno di 3 settimane
 {: #uc_airline}
 
 Un responsabile delle risorse umane (CHRO) ha bisogno di un nuovo sito di indennità per le risorse umane con un chatbot innovativo, ma gli strumenti e le piattaforme di sviluppo correnti implicano lunghi tempi di esecuzione per l'attivazione delle applicazioni. Questa situazione include lunghe attese per l'acquisto dell'hardware.
+{: shortdesc}
 
 Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} fornisce una facile attivazione del calcolo. Quindi, gli sviluppatori possono sperimentare facilmente, distribuendo rapidamente le modifiche nei sistemi di sviluppo e test con toolchain aperte. I loro strumenti di sviluppo software tradizionali ottengono una marcia in più quando aggiungono IBM Watson Assistant. Il nuovo sito di indennità è stato creato in meno di 3 settimane.
 
@@ -151,7 +156,7 @@ Soluzione tecnica:
 * IBM Logging and Monitoring
 * {{site.data.keyword.SecureGatewayfull}}
 
-Lo sviluppo accelerato è una vittoria fondamentale per il responsabile delle risorse umane. Il team ha iniziato caricando le applicazioni in un contenitore e inserendole nel cloud. Con l'uso di moderni contenitori, gli sviluppatori possono sperimentare facilmente con l'SDK Node.js SDK e distribuire le modifiche nei sistemi di sviluppo e test, che vengono ridimensionati su cluster separati. Queste distribuzioni sono state automatizzate con le toolchain aperte e {{site.data.keyword.contdelivery_full}}. Gli aggiornamenti al sito HR non languivano più in processi di build lenti e soggetti a errori. Gli sviluppatori possono fornire aggiornamenti incrementali al loro sito, tutti i giorni o anche più frequentemente. Inoltre, la registrazione e il monitoraggio per il sito HR si integrano rapidamente, in particolare per il modo in cui il sito estrae dati personalizzati dai sistemi di indennità di back-end. Gli sviluppatori non sprecano tempo a creare sistemi di registrazione complessi, solo per essere in grado di risolvere i problemi dei sistemi attivi.
+Lo sviluppo accelerato è una vittoria fondamentale per il responsabile delle risorse umane. Il team ha iniziato caricando le applicazioni in un contenitore e inserendole nel cloud. Con l'uso di moderni contenitori, gli sviluppatori possono sperimentare facilmente con l'SDK Node.js SDK e distribuire le modifiche nei sistemi di sviluppo e test, che vengono ridimensionati su cluster separati. Queste distribuzioni sono state automatizzate con le toolchain aperte e {{site.data.keyword.contdelivery_full}}. Gli aggiornamenti al sito HR non languivano più in processi di build lenti e soggetti a errori. Gli sviluppatori possono fornire aggiornamenti incrementali al loro sito, tutti i giorni o anche più frequentemente.  Inoltre, la registrazione e il monitoraggio per il sito HR si integrano rapidamente, in particolare per il modo in cui il sito estrae dati personalizzati dai sistemi di indennità di back-end. Gli sviluppatori non sprecano tempo a creare sistemi di registrazione complessi, solo per essere in grado di risolvere i problemi dei sistemi attivi.
 
 Con {{site.data.keyword.containerlong_notm}}, sono passati dall'hardware sovradimensionato in un data center privato al calcolo personalizzabile che riduce le operazioni IT, la manutenzione e l'energia. Per ospitare il sito HR, sono riusciti a progettare facilmente cluster Kubernetes per soddisfare le loro esigenze di CPU, RAM e archiviazione. Un altro fattore per la riduzione dei costi del personale è che IBM gestisce Kubernetes, quindi gli sviluppatori possono concentrarsi sulla realizzazione di una migliore esperienza dei dipendenti per l'iscrizione alle indennità.
 
@@ -181,7 +186,7 @@ Con {{site.data.keyword.containerlong_notm}}, sono passati dall'hardware sovradi
 **Risultati**
 * Con strumenti come il chatbot, il team delle risorse umane ha dimostrato alla propria forza lavoro che l'innovazione faceva parte della cultura aziendale e non era solo una parole in voga. 
 * L'autenticità con la personalizzazione nel sito ha affrontato le mutevoli aspettative della forza lavoro della compagnia aerea attuale. 
-* Gli aggiornamenti dell'ultimo minuto del sito HR, compresi quelli guidati dalle conversazioni chatbox dei dipendenti, sono stati pubblicati rapidamente perché gli sviluppatori hanno distribuito modifiche almeno 10 volte al giorno. 
+* Gli aggiornamenti dell'ultimo minuto del sito HR, compresi quelli guidati dalle conversazioni chatbot dei dipendenti, sono stati pubblicati rapidamente perché gli sviluppatori hanno distribuito modifiche almeno 10 volte al giorno. 
 * Con la gestione dell'infrastruttura curata da IBM, il team di sviluppo è stato libero di consegnare il sito in sole 3 settimane. 
 
 

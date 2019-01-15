@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -42,7 +45,8 @@ Questa esercitazione è progettata per gli sviluppatori dell'applicazione Cloud 
 - [Crea un
 cluster](cs_clusters.html#clusters_ui).
 - [Indirizza la tua CLI al cluster](cs_cli_install.html#cs_cli_configure).
-- [Assicurati di disporre del ruolo della piattaforma **Editor**, **Operatore** o **Amministratore**](cs_users.html#add_users_cli).
+- Assicurati di disporre delle seguenti politiche di accesso {{site.data.keyword.Bluemix_notm}} IAM per {{site.data.keyword.containerlong_notm}}:
+    - [Qualsiasi ruolo della piattaforma](cs_users.html#platform)
 - [Acquisisci informazioni sulla terminologia Docker e Kubernetes](cs_tech.html).
 
 
@@ -74,7 +78,7 @@ Tieni il tuo codice pronto per l'utilizzo. Non hai ancora il codice? Puoi scaric
 
     Quando viene distribuita l'applicazione, vengono visualizzate le istruzioni per scaricare, modificare e ridistribuire la tua applicazione con l'interfaccia riga di comando.
 
-    c. Dal passo 1 nelle istruzioni della GUI, fai clic su **DOWNLOAD STARTER CODE**.
+    c. Dal passo 1 nelle istruzioni della console, fai clic su **DOWNLOAD STARTER CODE**.
 
     d. Estrai il file .zip e salvane il contenuto nella tua directory `cf-py`.
 
@@ -262,7 +266,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
     ```
     {: screen}
 
@@ -272,7 +276,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
 5.  [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard).
 
-    Se selezioni il tuo cluster nella [GUI {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
+    Se selezioni il tuo cluster nella [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
     {: tip}
 
 6. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato.

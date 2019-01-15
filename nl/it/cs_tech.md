@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -151,11 +154,11 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>Il server OpenVPN funziona con il client OpenVPN per connettere in modo protetto il master al nodo di lavoro. Questa connessione supporta proxy apiserver, kubectl exec, attach e logs.</td>
+    <td>Il server OpenVPN funziona con il client OpenVPN per connettere in modo protetto il master al nodo di lavoro. Questa connessione supporta le chiamate `apiserver proxy` ai tuoi pod e servizi e le chiamate `kubectl exec`, `attach` e `logs` a kubelet.</td>
     </tr>
     <tr>
     <td>etcd</td>
-    <td>etcd è un archivio di valori chiave altamente disponibile che archivia lo stato di tutte le risorse Kubernetes di un cluster, quali servizi, distribuzioni e pod. I dati in etcd sono memorizzati su un disco crittografato gestito da IBM e sottoposto a backup giornaliero.</td>
+    <td>etcd è un archivio di valori chiave altamente disponibile che archivia lo stato di tutte le risorse Kubernetes di un cluster, quali servizi, distribuzioni e pod. I dati in etcd sono sottoposti a backup su un'istanza di archiviazione crittografata gestita da IBM.</td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -177,19 +180,34 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     </thead>
     <tbody>
     <tr>
+    <td>ibm-master-proxy</td>
+    <td>kube-system</td>
+    <td>Per i cluster che eseguono Kubernetes versione 1.10 o successive, `ibm-master-proxy` inoltra le richieste dal nodo di lavoro agli indirizzi IP delle repliche dei master altamente disponibili. Nei cluster a zona singola, il master ha tre repliche su host separati con un indirizzo IP e un nome di dominio del master. Per i cluster che si trovano in una zona che supporta il multizona, il master ha tre repliche che vengono estese tra le zone. In quanto tale, ogni master ha il proprio indirizzo IP registrato con DNS, con un nome di dominio per l'intero master del cluster.</td>
+    </tr>
+    <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>Il client OpenVPN funziona con il server OpenVPN per connettere in modo protetto il master al nodo di lavoro. Questa connessione supporta proxy apiserver, kubectl exec, attach e logs.</td>
+    <td>Il client OpenVPN funziona con il server OpenVPN per connettere in modo protetto il master al nodo di lavoro. Questa connessione supporta le chiamate `apiserver proxy` ai tuoi pod e servizi e le chiamate `kubectl exec`, `attach` e `logs` a kubelet.</td>
     </tr>
     <tr>
-    <td>calico-policy-controller</td>
+    <td>kubelet</td>
     <td>kube-system</td>
-    <td>Il controller politiche Calico controlla il traffico di rete in entrata e in uscita per la conformità alle politiche di rete impostate. Se il traffico non è consentito nel cluster, l'accesso al cluster viene bloccato. Il controller politiche Calico viene inoltre utilizzato per creare e impostare le politiche di rete per un cluster.</td>
+    <td>Il kubelet è un pod che viene eseguito su ogni nodo di lavoro ed è responsabile del monitoraggio dell'integrità dei pod in esecuzione sul nodo di lavoro e del controllo degli eventi inviati dal server API Kubernetes. In base agli eventi, il kubelet crea o rimuove i pod, garantisce i probe di attività e disponibilità e segnala in risposta lo stato dei pod al server API Kubernetes.</td>
     </tr>
     <tr>
-    <td>Provider di archiviazione</td>
+    <td>kube-dns</td>
     <td>kube-system</td>
-    <td>Ogni cluster è configurato con un plug-in per eseguire il provisioning dell'archiviazione file. Puoi scegliere di installare altri componenti aggiuntivi, come ad esempio l'archiviazione blocchi.</td>
+    <td>Il DNS Kubernetes pianifica un servizio e un pod DNS sul cluster. I contenitori utilizzano automaticamente l'IP del servizio DNS per risolvere i nomi DNS nelle loro ricerche di altri pod e servizi.</td>
+    </tr>
+    <tr>
+    <td>calico</td>
+    <td>kube-system</td>
+    <td>Calico gestisce le politiche di rete per il tuo cluster e comprende alcuni componenti come i seguenti.
+    <ul>
+    <li>**calico-cni**: la CNI (container network interface) Calico gestisce la connettività di rete dei contenitori e rimuove le risorse assegnate quando un contenitore viene eliminato.</li>
+    <li>**calico-ipam**: l'IPAM Calico gestisce l'assegnazione degli indirizzi IP per i contenitori.</li>
+    <li>**calico-node**: il nodo Calico è un contenitore che riunisce i vari componenti necessari per i contenitori di rete con Calico.</li>
+    <li>**calico-policy-controller**: il controller politiche Calico controlla il traffico di rete in entrata e in uscita per la conformità alle politiche di rete impostate. Se il traffico non è consentito nel cluster, l'accesso al cluster viene bloccato. Il controller politiche Calico viene inoltre utilizzato per creare e impostare le politiche di rete per un cluster.</li></ul></td>
     </tr>
     <tr>
     <td>kube-proxy</td>
@@ -199,12 +217,7 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>Il dashboard Kubernetes è un'interfaccia utente basata sul web che consente agli utenti di gestire e risolvere i problemi del cluster e delle applicazioni in esecuzione nel cluster.</td>
-    </tr>
-    <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>Il DNS Kubernetes pianifica un servizio e un pod DNS sul cluster. I contenitori utilizzano automaticamente l'IP del servizio DNS per risolvere i nomi DNS nelle loro ricerche di altri pod e servizi.</td>
+    <td>Il dashboard Kubernetes è una GUI basata sul web che consente agli utenti di gestire e risolvere i problemi relativi al cluster e alle applicazioni in esecuzione nel cluster.</td>
     </tr>
     <tr>
     <td>heapster</td>
@@ -212,19 +225,19 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     <td>Heapster è un aggregatore a livello di cluster di dati di monitoraggio e di evento. Il pod Heapster rileva tutti i nodi nel cluster e interroga le informazioni sull'utilizzo dal kubelet di ciascun nodo. Puoi trovare i grafici di utilizzo nel dashboard Kubernetes.</td>
     </tr>
     <tr>
-    <td>calico-node</td>
+    <td>ALB Ingress</td>
     <td>kube-system</td>
-    <td>Il nodo Calico è un contenitore che raccoglie insieme i vari componenti richiesti per i contenitori di rete con Calico.</td>
+    <td>Ingress è un servizio Kubernetes che puoi utilizzare per bilanciare i carichi di lavoro del traffico di rete nel tuo cluster inoltrando le richieste pubbliche o private a più applicazioni nel tuo cluster. Per esporre le tue applicazioni sulla rete pubblica o privata, devi creare una risorsa Ingress per registrare le tue applicazioni con il programma di bilanciamento del carico (ALB - application load balancer) Ingress. È quindi possibile accedere a più applicazioni utilizzando un singolo URL o indirizzo IP.</td>
+    </tr>
+    <tr>
+    <td>Provider di archiviazione</td>
+    <td>kube-system</td>
+    <td>Ogni cluster è configurato con un plug-in per eseguire il provisioning dell'archiviazione file. Puoi scegliere di installare altri componenti aggiuntivi, come ad esempio l'archiviazione blocchi.</td>
     </tr>
     <tr>
     <td>Registrazione e metriche</td>
     <td>ibm-system</td>
     <td>Puoi utilizzare i servizi {{site.data.keyword.loganalysislong_notm}} e {{site.data.keyword.monitoringlong_notm}} integrati per espandere le tue funzionalità di raccolta e conservazione quando lavori con log e metriche.</td>
-    </tr>
-    <tr>
-    <td>ALB Ingress</td>
-    <td>ibm-system</td>
-    <td>Ingress è un servizio Kubernetes che puoi utilizzare per bilanciare i carichi di lavoro del traffico di rete nel tuo cluster inoltrando le richieste pubbliche o private a più applicazioni nel tuo cluster. Per esporre le tue applicazioni sulla rete pubblica o privata, devi creare una risorsa Ingress per registrare le tue applicazioni con il programma di bilanciamento del carico (ALB - application load balancer) Ingress. È quindi possibile accedere a più applicazioni utilizzando un singolo URL o indirizzo IP.</td>
     </tr>
     <tr>
     <td>Programma di bilanciamento del carico</td>
@@ -235,21 +248,6 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
     <td>Servizi e pod dell'applicazione</td>
     <td>default</td>
     <td>Nello spazio dei nomi <code>default</code> o negli spazi dei nomi che crei, puoi distribuire le applicazioni in pod e servizi per comunicare con tali pod.</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>n/d</td>
-    <td>La CNI (container network interface) Calico gestisce la connettività di rete dei contenitori e rimuove le risorse assegnate quando un contenitore viene eliminato.</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>n/d</td>
-    <td>L'IPAM Calico gestisce l'assegnazione degli indirizzi IP per i contenitori.</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>n/d</td>
-    <td>Il kubelet è un pod che viene eseguito su ogni nodo di lavoro ed è responsabile del monitoraggio dell'integrità dei pod in esecuzione sul nodo di lavoro e del controllo degli eventi inviati dal server API Kubernetes. In base agli eventi, il kubelet crea o rimuove i pod, garantisce i probe di attività e disponibilità e segnala in risposta lo stato dei pod al server API Kubernetes.</td>
     </tr>
     </tbody></table></dd>
 </dl>

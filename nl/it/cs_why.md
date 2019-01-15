@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -20,7 +23,7 @@ lastupdated: "2018-10-25"
 # Perché {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
-{{site.data.keyword.containerlong}} offre potenti strumenti combinando i contenitori Docker e la tecnologia Kubernetes, un'esperienza utente intuitiva e la sicurezza e l'isolamento integrati per automatizzare la distribuzione, il funzionamento, il ridimensionamento e il monitoraggio di applicazioni caricate nei contenitori in un cluster di host di calcolo. Per le informazioni di certificazione, vedi [Compliance on the {{site.data.keyword.Bluemix_notm}} [Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")(https://www.ibm.com/cloud/compliance)].
+{{site.data.keyword.containerlong}} offre potenti strumenti combinando i contenitori Docker e la tecnologia Kubernetes, un'esperienza utente intuitiva e la sicurezza e l'isolamento integrati per automatizzare la distribuzione, il funzionamento, il ridimensionamento e il monitoraggio di applicazioni caricate nei contenitori in un cluster di host di calcolo. Per le informazioni di certificazione, vedi [Compliance on the {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/compliance).
 {:shortdesc}
 
 
@@ -35,6 +38,7 @@ I cluster vengono distribuiti su host di calcolo che forniscono funzionalità Ku
 |Cluster Kubernetes a singolo tenant con calcolo, rete e isolamento dell'infrastruttura di archiviazione|<ul><li>Crea la tua propria infrastruttura personalizzata che soddisfi i requisiti della tua organizzazione.</li><li>Esegui il provisioning di un master Kubernetes sicuro e dedicato, dei nodi di lavoro, delle reti virtuali e dell'archiviazione utilizzando le risorse fornite dall'infrastruttura IBM Cloud (SoftLayer).</li><li>Master Kubernetes completamente gestito e continuamente monitorato da {{site.data.keyword.IBM_notm}} per mantenere il tuo cluster disponibile.</li><li>Opzione per il provisioning dei nodi di lavoro come server bare metal con Trusted Compute.</li><li>Archivia i dati persistenti, i dati condivisi tra i pod Kubernetes e ripristinali quando necessario
 con il servizio del volume protetto e integrato.</li><li>Vantaggi del supporto completo per le API Kubernetes native.</li></ul>|
 | Cluster multizona per aumentare l'alta disponibilità | <ul><li>Gestisci facilmente i nodi di lavoro dello stesso tipo di macchina (CPU, memoria, virtuale o fisica) con i pool di nodi di lavoro.</li><li>Proteggiti dai malfunzionamenti di zona distribuendo equamente i nodi tra le multizona selezionate e utilizzando le distribuzioni pod anti-affinità per le tue applicazioni.</li><li>Riduci i costi utilizzando i cluster multizona invece di duplicare le risorse in un cluster separato.</li><li>Avvaliti del bilanciamento del carico automatico tra le applicazioni con il programma di bilanciamento del carico multizona (o MZLB, multizone load balancer) che viene configurato automaticamente per tuo conto in ciascuna zona del cluster.</li></ul>|
+| Master altamente disponibili | <ul>Disponibili nei cluster che eseguono Kubernetes versione 1.10 o successive.<li>Riduci i tempi di inattività del cluster, ad esempio durante gli aggiornamenti del master, con i master altamente disponibili che vengono forniti automaticamente quando crei un cluster.</li><li>Estendi i tuoi master tra le zone in un [cluster multizona](cs_clusters_planning.html#multizone) per proteggere il tuo cluster in caso di malfunzionamenti della zona.</li></ul> |
 |Conformità della sicurezza dell'immagine con il Controllo vulnerabilità|<ul><li>Configura il tuo repository nel nostro registro delle immagini privato Docker protetto in cui le immagini vengono archiviate e condivise da tutti gli utenti nell'organizzazione.</li><li>Vantaggi dalla scansione automatica delle immagini nel tuo registro {{site.data.keyword.Bluemix_notm}} privato.</li><li>Rivedi la raccomandazioni specifiche del sistema operativo utilizzato nell'immagine per risolvere le vulnerabilità potenziali.</li></ul>|
 |Monitoraggio continuo dell'integrità del cluster|<ul><li>Utilizza il dashboard del cluster per visualizzare e gestire rapidamente l'integrità del tuo cluster, dei nodi di lavoro e delle distribuzioni del contenitore.</li><li>Trova le metriche di consumo dettagliate utilizzando {{site.data.keyword.monitoringlong}} ed
 espandi velocemente il tuo cluster per soddisfare i carichi di lavoro.</li><li>Esamina le informazioni di registrazione utilizzando {{site.data.keyword.loganalysislong}} per visualizzare le attività del cluster dettagliate.</li></ul>|
@@ -111,6 +115,8 @@ Se hai un cluster gratuito e vuoi eseguire l'upgrade a un cluster standard, puoi
 |[Spazio su disco sul nodo di lavoro per l'archiviazione non persistente](cs_storage_planning.html#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 | [Capacità di creare il cluster in ogni regione {{site.data.keyword.containerlong_notm}}](cs_regions.html) | | <img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" /> |
 |[Cluster multizona per aumentare l'alta disponibilità delle applicazioni](cs_clusters_planning.html#multizone) | |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
+| Master replicati per una maggiore disponibilità (Kubernetes 1.10 o versioni successive) | | <img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" /> |
+|[Numero scalabile di nodi di lavoro per aumentare la capacità](cs_app.html#app_scaling)| |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 |[Archiviazione basata sul file NFS persistente con i volumi](cs_storage_file.html#file_storage)| |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 |[Accesso dell'applicazione della rete pubblica o privata da un servizio di bilanciamento del carico a un indirizzo IP stabile](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 |[Accesso dell'applicazione della rete pubblica da un servizio Ingress a un indirizzo IP stabile e URL personalizzabile](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
@@ -122,6 +128,8 @@ Se hai un cluster gratuito e vuoi eseguire l'upgrade a un cluster standard, puoi
 {: caption="Caratteristiche dei cluster standard e gratuito" caption-side="top"}
 
 <br />
+
+
 
 
 ## Prezzi e fatturazione
@@ -136,7 +144,7 @@ Esamina alcune domande frequenti sui prezzi e sulla fatturazione di {{site.data.
 **Come posso controllare la mia fatturazione e il mio utilizzo?**<br>
 Per controllare il tuo utilizzo e i totali stimati, vedi [Visualizzazione del tuo utilizzo](/docs/billing-usage/viewing_usage.html#viewingusage).
 
-Se colleghi i tuoi account di {{site.data.keyword.Bluemix_notm}} e dell'infrastruttura IBM Cloud (SoftLayer), ricevi una fatturazione consolidata. Per ulteriori informazioni, vedi [Fatturazione consolidata per gli account collegati](/docs/billing-usage/linking_accounts.html#unifybillaccounts).
+Se colleghi i tuoi account di {{site.data.keyword.Bluemix_notm}} e dell'infrastruttura IBM Cloud (SoftLayer), ricevi una fatturazione consolidata. Per ulteriori informazioni, vedi [Fatturazione consolidata per gli account collegati](/docs/customer-portal/linking_accounts.html#unifybillaccounts).
 
 **Posso raggruppare le mie risorse cloud per team o dipartimenti per scopi di fatturazione?**<br>
 Puoi [utilizzare i gruppi di risorse](/docs/resources/bestpractice_rgs.html#bp_resourcegroups) per organizzare le tue risorse {{site.data.keyword.Bluemix_notm}}, inclusi i cluster, in gruppi per organizzare la tua fatturazione.
@@ -181,7 +189,7 @@ Con i cluster {{site.data.keyword.containerlong_notm}}, puoi utilizzare le risor
   <p>Per i dettagli sulle specifiche delle macchine, vedi [Hardware disponibile per i nodi di lavoro](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).</p></dd>
 
 <dt id="bandwidth">Larghezza di banda pubblica</dt>
-  <dd><p>La larghezza di banda si riferisce al trasferimento di dati pubblici del traffico di rete in entrata e in uscita, sia da che verso le risorse {{site.data.keyword.Bluemix_notm}} nei data center in tutto il mondo. La larghezza di banda pubblica viene addebitata per GB. Puoi rivedere il tuo riepilogo di larghezza di banda corrente accedendo alla [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), selezionando dal menu **Infrastruttura** e selezionando quindi la pagina **Rete > Larghezza di banda > Riepilogo**.
+  <dd><p>La larghezza di banda si riferisce al trasferimento di dati pubblici del traffico di rete in entrata e in uscita, sia da che verso le risorse {{site.data.keyword.Bluemix_notm}} nei data center in tutto il mondo. La larghezza di banda pubblica viene addebitata per GB. Puoi rivedere il tuo riepilogo di larghezza di banda corrente accedendo alla [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), selezionando dal menu ![Icona Menu](../icons/icon_hamburger.svg "Icona Menu") **Infrastruttura** e selezionando quindi la pagina **Rete > Larghezza di banda > Riepilogo**.
   <p>Esamina i seguenti fattori che influiscono sui costi della larghezza di banda pubblica:</p>
   <ul><li><strong>Ubicazione</strong>: come per i nodi di lavoro, gli addebiti variano a seconda della zona in cui vengono distribuite le tue risorse.</li>
   <li><strong>Larghezza di banda inclusa o a pagamento</strong>: le macchine del tuo nodo di lavoro potrebbero essere dotate di una determinata assegnazione di rete in uscita al mese, come 250 GB per le VM o 500 GB per bare metal. Oppure, l'assegnazione potrebbe essere a consumo, in base all'utilizzo di GB.</li>

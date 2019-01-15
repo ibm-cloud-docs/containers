@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,15 +50,15 @@ E cos'è un cluster? Un cluster è un insieme di risorse, nodi di lavoro, reti e
 **Prima di iniziare**
 
 Ottieni il tipo di [account {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) giusto per te:
-* **Pagamento a consumo o Sottoscrizione**: puoi creare un cluster di prova gratuito. Puoi anche eseguire il provisioning delle risorse dell'infrastruttura IBM Cloud (SoftLayer) da creare e utilizzare nei cluster standard.
-* **Lite**: puoi creare un cluster gratuito o standard. [Aggiorna il tuo account](/docs/account/account_faq.html#changeacct) a Pagamento a consumo o Sottoscrizione.
+* **Fatturabile (Pagamento a consumo o Sottoscrizione)**: puoi creare un cluster di prova gratuito. Puoi anche eseguire il provisioning delle risorse dell'infrastruttura IBM Cloud (SoftLayer) da creare e utilizzare nei cluster standard.
+* **Lite**: puoi creare un cluster gratuito o standard. [Aggiorna il tuo account](/docs/account/account_faq.html#changeacct) a un account fatturabile.
 * **Prova (per scopi educativi)**: puoi creare un cluster gratuito che puoi utilizzare per 30 giorni per acquisire familiarità con il servizio.
 
 Per creare un cluster gratuito:
 
-1.  Nel [{{site.data.keyword.Bluemix_notm}} **Catalogo** ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/catalog/?category=containers), seleziona **{{site.data.keyword.containerlong_notm}}** e fai clic su **Crea**. Viene visualizzata una pagina di configurazione cluster. Per impostazione predefinita, è selezionato **Cluster gratuito**.
+1.  Nel [{{site.data.keyword.Bluemix_notm}} **Catalogo** ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/catalog/?category=containers), seleziona **{{site.data.keyword.containershort_notm}}** e fai clic su **Crea**. Viene visualizzata una pagina di configurazione cluster. Per impostazione predefinita, è selezionato **Cluster gratuito**.
 
-2. Fornisci al tuo cluster un nome univoco.
+2.  Fornisci al tuo cluster un nome univoco.
 
 3.  Fai clic su **Crea cluster**. Viene creato un pool di nodi di lavoro che contiene un nodo di lavoro. Il provisioning del nodo di lavoro può richiedere alcuni minuti, ma puoi vedere l'avanzamento nella scheda **Nodi di lavoro**. Quando lo stato diventa `Pronto` puoi iniziare ad utilizzare il tuo cluster!
 

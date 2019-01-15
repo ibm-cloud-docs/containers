@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -37,11 +40,14 @@ Per ulteriori informazioni su come funziona il servizio, consulta la [documentaz
 ## Ricerca di informazioni per gli eventi
 {: #kube-find}
 
+Puoi monitorare le attività nel tuo cluster controllando i log nel dashboard Kibana.
+{: shortdesc}
+
 Per monitorare l'attività amministrativa:
 
 1. Accedi al tuo account {{site.data.keyword.Bluemix_notm}}.
 2. Dal catalogo, esegui il provisioning di un'istanza del servizio {{site.data.keyword.cloudaccesstrailshort}} nello stesso account della tua istanza di {{site.data.keyword.containerlong_notm}}.
-3. Nella scheda **Gestisci** del dashboard {{site.data.keyword.cloudaccesstrailshort}}, seleziona il dominio di account o spazio. 
+3. Nella scheda **Gestisci** del dashboard {{site.data.keyword.cloudaccesstrailshort}}, seleziona il dominio di account o spazio.
   * **Log di account**: gli eventi di gestione del cluster e gli eventi di controllo del server API Kubernetes sono disponibili nel **dominio account** relativo alla regione {{site.data.keyword.Bluemix_notm}} in cui vengono generati gli eventi.
   * **Log dello spazio**: se hai specificato uno spazio quando hai configurato il tuo cluster per l'inoltro degli eventi di controllo del server API Kubernetes, questi eventi sono disponibili nel **dominio spazio** associato allo spazio Cloud Foundry in cui è stato eseguito il provisioning del servizio {{site.data.keyword.cloudaccesstrailshort}}.
 4. Fai clic su **Visualizza in Kibana**.
@@ -62,9 +68,9 @@ Controlla il seguente elenco degli eventi di gestione del cluster che vengono in
 <th>Azione</th>
 <th>Descrizione</th></tr><tr>
 <td><code>containers-kubernetes.account-credentials.set</code></td>
-<td>Sono state impostate le credenziali di infrastruttura in una regione per un gruppo di risorse.</td></tr><tr>
+<td>Sono state impostate le credenziali dell'infrastruttura in una regione per un gruppo di risorse.</td></tr><tr>
 <td><code>containers-kubernetes.account-credentials.unset</code></td>
-<td>È stata annullata l'impostazione delle credenziali di infrastruttura in una regione per un gruppo di risorse.</td></tr><tr>
+<td>È stata annullata l'impostazione delle credenziali dell'infrastruttura in una regione per un gruppo di risorse.</td></tr><tr>
 <td><code>containers-kubernetes.alb.create</code></td>
 <td>È stato creato un ALB Ingress.</td></tr><tr>
 <td><code>containers-kubernetes.alb.delete</code></td>
@@ -110,7 +116,7 @@ Controlla il seguente elenco degli eventi di gestione del cluster che vengono in
 <td><code>containers-kubernetes.service.unbind</code></td>
 <td>È stato annullato il bind di un servizio a un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.add</code></td>
-<td>Una sottorete esistente dell'infrastruttura IBM Cloud (SoftLayer) è stata aggiunta a un cluster.</td></tr><tr>
+<td>Una sottorete dell'infrastruttura IBM Cloud (SoftLayer) esistente è stata aggiunta a un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.create</code></td>
 <td>È stata creata una sottorete.</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.add</code></td>
@@ -168,19 +174,19 @@ Prima di iniziare: assicurati che il cluster sia configurato per inoltrare gli [
   </tr>
   <tr>
     <td><code>clusterbindings.create</code></td>
-    <td>È stato creato un bind del ruolo del cluster.</td>
+    <td>È stato creato un bind del ruolo cluster.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.deleted</code></td>
-    <td>È stato eliminato un bind del ruolo del cluster.</td>
+    <td>È stato eliminato un bind del ruolo cluster.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.patched</code></td>
-    <td>È stato corretto un bind del ruolo del cluster.</td>
+    <td>È stato corretto un bind del ruolo cluster.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.updated</code></td>
-    <td>È stato aggiornato un bind del ruolo del cluster.</td>
+    <td>È stato aggiornato un bind del ruolo cluster.</td>
   </tr>
   <tr>
     <td><code>clusterroles.create</code></td>
@@ -296,19 +302,19 @@ Prima di iniziare: assicurati che il cluster sia configurato per inoltrare gli [
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.create</code></td>
-    <td>È stata creata una politica di ridimensionamento pod orizzontale.</td>
+    <td>È stata creata una politica di ridimensionamento automatico pod orizzontale.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.delete</code></td>
-    <td>È stata eliminata una politica di ridimensionamento pod orizzontale.</td>
+    <td>È stata eliminata una politica di ridimensionamento automatico pod orizzontale.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.patch</code></td>
-    <td>È stata corretta una politica di ridimensionamento pod orizzontale.</td>
+    <td>È stata corretta una politica di ridimensionamento automatico pod orizzontale.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.update</code></td>
-    <td>È stata aggiornata una politica di ridimensionamento pod orizzontale.</td>
+    <td>È stata aggiornata una politica di ridimensionamento automatico pod orizzontale.</td>
   </tr>
   <tr>
     <td><code>ingresses.create</code></td>
@@ -640,15 +646,15 @@ Prima di iniziare: assicurati che il cluster sia configurato per inoltrare gli [
   </tr>
   <tr>
     <td><code>selfsubjectaccessreviews.create</code></td>
-    <td>È stata creata una auto revisione di accesso del soggetto.</td>
+    <td>È stata creata una revisione dell'accesso del soggetto autonomo.</td>
   </tr>
   <tr>
     <td><code>selfsubjectrulesreviews.create</code></td>
-    <td>È stata creata una auto revisione delle regole del soggetto.</td>
+    <td>È stata creata una revisione delle regole del soggetto autonomo.</td>
   </tr>
   <tr>
     <td><code>subjectaccessreviews.create</code></td>
-    <td>È stata creata una revisione di accesso del soggetto.</td>
+    <td>È stata creata una revisione dell'accesso del soggetto.</td>
   </tr>
   <tr>
     <td><code>serviceaccounts.create</code></td>

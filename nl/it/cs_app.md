@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -40,24 +43,25 @@ Scopri la procedura generale per distribuire le applicazioni facendo clic su un'
 ## Pianificazione per l'esecuzione di applicazioni nei cluster
 {: #plan_apps}
 
-Assicurati che la tua applicazione sia pronta per la distribuzione in {{site.data.keyword.containerlong_notm}}.
+Prima di distribuire un'applicazione in un cluster {{site.data.keyword.containerlong_notm}}, decidi come vuoi configurare la tua applicazione in modo che sia accessibile correttamente e sia integrata con altri servizi in {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
 ### Che tipo di oggetti Kubernetes posso creare per la mia applicazione?
 {: #object}
 
 Quando prepari il file YAML della tua applicazione, hai molte opzioni per aumentare la disponibilità, le prestazioni e la sicurezza dell'applicazione. Ad esempio, invece di un singolo pod, puoi utilizzare un oggetto controller Kubernetes per gestire il tuo carico di lavoro, ad esempio una serie di repliche, un lavoro o una serie di daemon. Per ulteriori informazioni su pod e controller, consulta la [documentazione di Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). Una distribuzione che gestisce una serie di repliche dei pod è un caso di utilizzo comune per un'applicazione.
+{: shortdesc}
 
 Ad esempio, un oggetto `kind: Deployment` è una buona scelta per distribuire un pod dell'applicazione perché con esso puoi specificare una serie di repliche per una maggiore disponibilità dei tuoi pod.
 
 La seguente tabella descrive il motivo per cui potresti creare diversi tipi di oggetti del carico di lavoro Kubernetes.
 
-| Oggetto | Descrizione | 
+| Oggetto | Descrizione |
 | --- | --- |
 | [`Pod` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | Un pod è la più piccola unità distribuibile per i tuoi carichi di lavoro e può contenere uno o più contenitori. Analogamente ai contenitori, i pod sono progettati per essere eliminabili e vengono spesso utilizzati per il test unitario delle funzioni dell'applicazione. Per evitare tempi di inattività per la tua applicazione, prendi in considerazione la distribuzione di pod con un controller Kubernetes, ad esempio una distribuzione. Una distribuzione ti aiuta a gestire più pod, repliche, ridimensionamento pod, rollout e altro ancora. |
 | [`ReplicaSet` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | Una serie di repliche garantisce che più repliche del tuo pod siano in esecuzione e ripianifica un pod se si arresta. Puoi creare una serie di repliche per verificare come funziona la pianificazione dei pod, ma per gestire gli aggiornamenti, i rollout e il ridimensionamento dell'applicazione, crea invece una distribuzione. |
 | [`Deployment` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | Una distribuzione è un controller che gestisce un pod o una [serie di repliche ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) di template di pod. Puoi creare pod o serie di repliche senza una distribuzione per testare le funzioni dell'applicazione. Per una configurazione a livello di produzione, utilizza le distribuzioni per gestire gli aggiornamenti, i rollout e il ridimensionamento dell'applicazione. |
-| [`StatefulSet` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Analogamente alle distribuzioni, una serie con stato è un controller che gestisce una serie di repliche dei pod. A differenza delle distribuzioni, una serie con stato garantisce che il tuo pod abbia un'identità di rete univoca che mantiene il suo stato dopo la ripianificazione. Quando vuoi eseguire i carichi di lavoro nel cloud, prova a progettare la tua applicazione in modo che sia senza stato affinché le istanze del servizio siano indipendenti le une dalle altre e possano non riuscire senza provocare un'interruzione del servizio. Tuttavia alcune applicazioni, come i database, devono essere senza stato. Per questi casi, valuta la possibilità di creare una serie con stato e di utilizzare un'archiviazione di [file](cs_storage_file.html#file_statefulset), [blocchi](cs_storage_block.html#block_statefulset) o [oggetti](cs_storage_cos.html#cos_statefulset) come archiviazione persistente per la tua serie con stato.|
+| [`StatefulSet` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Analogamente alle distribuzioni, una serie con stato è un controller che gestisce una serie di repliche dei pod. A differenza delle distribuzioni, una serie con stato garantisce che il tuo pod abbia un'identità di rete univoca che mantiene il suo stato dopo la ripianificazione. Quando vuoi eseguire i carichi di lavoro nel cloud, prova a progettare la tua applicazione in modo che sia senza stato affinché le istanze del servizio siano indipendenti le une dalle altre e possano non riuscire senza provocare un'interruzione del servizio. Tuttavia alcune applicazioni, come i database, devono essere senza stato. Per questi casi, valuta la possibilità di creare una serie con stato e di utilizzare un'archiviazione di [file](cs_storage_file.html#file_statefulset), [blocchi](cs_storage_block.html#block_statefulset) o [oggetti](cs_storage_cos.html#cos_statefulset) come archiviazione persistente per la tua serie con stato. |
 | [`DaemonSet` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | Utilizza una serie di daemon quando devi eseguire lo stesso pod su ogni nodo di lavoro nel tuo cluster. I pod gestiti da una serie di daemon sono pianificati automaticamente quando un nodo di lavoro viene aggiunto a un cluster. I casi di utilizzo tipici includono programmi di raccolta log, come ad esempio `logstash` o `prometheus`, che raccolgono i log da ogni nodo di lavoro per fornire informazioni approfondite sull'integrità di un cluster o di un'applicazione. |
 | [`Job` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | Un lavoro assicura che uno o più pod vengano eseguiti correttamente fino al completamento. Potresti utilizzare un lavoro per le code o i lavori batch per supportare l'elaborazione parallela di elementi di lavoro separati ma correlati, come un certo numero di frame da visualizzare, e-mail da inviare e file da convertire. Per pianificare un lavoro da eseguire in determinati orari, utilizza un [lavoro Cron ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/).|
 {: caption="Tipi di oggetti del carico di lavoro Kubernetes che puoi creare." caption-side="top"}
@@ -80,6 +84,7 @@ Vedi [Specifica dei requisiti della tua applicazione nel file YAML](#app_yaml) p
 {: #variables}
 
 Per aggiungere informazioni della variabile alle tue distribuzioni invece di codificare in modo permanente i dati nel file YAML, puoi utilizzare un oggetto [`ConfigMap` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) o [`Secret` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/secret/) di Kubernetes.
+{: shortdesc}
 
 Per utilizzare una mappa di configurazione o un segreto, devi montarli sul pod. La mappa di configurazione o il segreto vengono combinati con il pod subito prima della sua esecuzione. Puoi riutilizzare la specifica e l'immagine di una distribuzione tra molte applicazioni, ma devi quindi sostituire le mappe di configurazione e i segreti personalizzati. I segreti in particolare possono occupare molto spazio di archiviazione sul nodo locale, quindi pianifica di conseguenza.
 
@@ -94,7 +99,7 @@ Entrambe le risorse definiscono coppie chiave-valore, ma puoi usarle per situazi
 
 <dt>Segreto</dt>
 <dd>Fornisci informazioni sensibili ai tuoi carichi di lavoro, come quelle che seguono. Nota che altri utenti del cluster potrebbero avere accesso al segreto, quindi assicurati di sapere che le informazioni sul segreto possono essere condivise con tali utenti.
-<ul><li><strong>Informazioni di identificazione personale</strong>: memorizza nei segreti le informazioni sensibili come indirizzi e-mail o altri tipi di informazioni necessarie per la conformità aziendale o la regolamentazione governativa. </li>
+<ul><li><strong>Informazioni di identificazione personale</strong>: memorizza nei segreti le informazioni sensibili come indirizzi e-mail o altri tipi di informazioni necessarie per la conformità aziendale o la regolamentazione governativa.</li>
 <li><strong>Credenziali</strong>: inserisci in un segreto le credenziali come password, chiavi e token per ridurre il rischio di esposizione accidentale. Ad esempio, quando esegui il [bind di un servizio](cs_integrations.html#adding_cluster) al tuo cluster, le credenziali vengono memorizzate in un segreto.</li></ul></dd>
 </dl>
 
@@ -106,6 +111,7 @@ Vedi [Aggiunta dei servizi alle applicazioni](cs_integrations.html#adding_app).
 
 ### Come posso assicurarmi che la mia applicazione abbia le risorse giuste?
 Quando [specifichi il file YAML della tua applicazione](#app_yaml), puoi aggiungere le funzionalità di Kubernetes alla configurazione dell'applicazione che consentono all'applicazione di ottenere le risorse giuste. In particolare, [imposta i limiti e le richieste di risorse ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) per ogni contenitore definito nel file YAML.
+{: shortdesc}
 
 Inoltre, il tuo amministratore cluster potrebbe configurare controlli delle risorse che possono influire sulla distribuzione dell'applicazione, tra cui:
 *  [Quote di risorse ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
@@ -113,6 +119,7 @@ Inoltre, il tuo amministratore cluster potrebbe configurare controlli delle riso
 
 ### Come posso accedere alla mia applicazione?
 Puoi accedere alla tua applicazione in modo privato all'interno del cluster [utilizzando un servizio `clusterIP`](cs_network_cluster.html#planning).
+{: shortdesc}
 
 Se vuoi esporre pubblicamente la tua applicazione, hai diverse opzioni che dipendono dal tuo tipo di cluster.
 *  **Cluster gratuito**: puoi esporre la tua applicazione utilizzando un [servizio NodePort](cs_nodeport.html#nodeport).
@@ -122,16 +129,19 @@ Se vuoi esporre pubblicamente la tua applicazione, hai diverse opzioni che dipen
 
 ### Dopo aver distribuito la mia applicazione, come posso monitorarne l'integrità?
 Puoi configurare la [registrazione e il monitoraggio](cs_health.html#health) di {{site.data.keyword.Bluemix_notm}} per il tuo cluster. Puoi anche scegliere di integrare un [servizio di registrazione o monitoraggio](cs_integrations.html#health_services) di terze parti.
+{: shortdesc}
 
 ### Come posso mantenere aggiornata la mia applicazione?
 Se vuoi aggiungere e rimuovere dinamicamente le applicazioni in risposta all'utilizzo del carico di lavoro, vedi [Ridimensionamento delle applicazioni](cs_app.html#app_scaling).
+{: shortdesc}
 
 Se vuoi gestire gli aggiornamenti alla tua applicazione, vedi [Gestione delle distribuzioni graduali](cs_app.html#app_rolling).
 
 ### Come posso controllare chi ha accesso alle distribuzioni della mia applicazione?
 Gli amministratori di account e di cluster possono controllare l'accesso su molti livelli diversi: cluster, spazio dei nomi Kubernetes, pod e contenitore.
+{: shortdesc}
 
-Con IAM, puoi assegnare autorizzazioni a singoli utenti, gruppi o account di servizio a livello di istanza del cluster.  Puoi ridurre ulteriormente l'accesso al cluster limitando gli utenti a determinati spazi dei nomi all'interno del cluster. Per ulteriori informazioni, vedi [Assegnazione dell'accesso al cluster](cs_users.html#users).
+Con {{site.data.keyword.Bluemix_notm}} IAM, puoi assegnare autorizzazioni a singoli utenti, gruppi o account di servizio a livello di istanza del cluster.  Puoi ridurre ulteriormente l'accesso al cluster limitando gli utenti a determinati spazi dei nomi all'interno del cluster. Per ulteriori informazioni, vedi [Assegnazione dell'accesso al cluster](cs_users.html#users).
 
 Per controllare l'accesso a livello di pod, puoi [configurare le politiche di sicurezza del pod con RBAC Kubernetes](cs_psp.html#psp).
 
@@ -158,6 +168,9 @@ Puoi anche [collegare più cluster in regioni diverse con un programma di bilanc
 
 ### Aumento della disponibilità della tua applicazione
 {: #increase_availability}
+
+Considera le seguenti opzioni per aumentare la disponibilità della tua applicazione.
+{: shortdesc}
 
 <dl>
   <dt>Utilizza le distribuzioni e le serie di repliche per distribuire la tua applicazione e le sue dipendenze.</dt>
@@ -277,7 +290,7 @@ template:
   <dd><p>Come amministratore cluster, puoi garantire che i team che condividono un cluster non utilizzino più della loro giusta quota di risorse di calcolo (memoria e CPU) creando un [oggetto ResourceQuota ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) per ogni spazio dei nomi Kubernetes nel cluster. Se l'amministratore del cluster imposta una quota di risorse di calcolo, ogni contenitore all'interno del template di distribuzione deve specificare le richieste e i limiti di risorse per la memoria e la CPU, altrimenti la creazione del pod non riesce.</p>
   <p><ol><li>Verifica se è impostata una quota della risorsa per uno spazio dei nomi.<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>Vedi quali sono i limiti di quota.<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
-  <p>Anche se non è impostata alcuna quota di risorsa, puoi includere richieste e limiti di risorse nella tua distribuzione per migliorare la gestione delle risorse del nodo di lavoro. **Nota**: se un contenitore supera il suo limite, potrebbe essere riavviato o avere esito negativo. Se un contenitore supera una richiesta, il suo pod potrebbe essere rimosso se il nodo di lavoro esaurisce quella risorsa che viene superata. Per informazioni sulla risoluzione dei problemi, vedi [Continui errori di riavvio o rimozione imprevista dei pod](cs_troubleshoot_clusters.html#pods_fail).</p>
+  <p>Anche se non è impostata alcuna quota di risorsa, puoi includere richieste e limiti di risorse nella tua distribuzione per migliorare la gestione delle risorse del nodo di lavoro.</p><p class="note">Se un contenitore supera il suo limite, potrebbe essere riavviato o avere esito negativo. Se un contenitore supera una richiesta, il suo pod potrebbe essere rimosso se il nodo di lavoro esaurisce quella risorsa che viene superata. Per informazioni sulla risoluzione dei problemi, vedi [Continui errori di riavvio o rimozione imprevista dei pod](cs_troubleshoot_clusters.html#pods_fail).</p>
   <p>**Richiesta**: la quantità minima della risorsa che il programma di pianificazione riserva per il contenitore da utilizzare. Se la quantità è uguale al limite, la risorsa viene garantita. Se la quantità è inferiore al limite, la richiesta è comunque garantita, ma il programma di pianificazione può utilizzare la differenza tra la richiesta e il limite per soddisfare le risorse di altri contenitori.</p>
   <p>**Limite**: la quantità massima della risorsa che il contenitore può consumare. Se la quantità totale di risorse che viene utilizzata tra i contenitori supera la quantità disponibile sul nodo di lavoro, è possibile rimuovere i contenitori per liberare spazio. Per evitare la rimozione, imposta la richiesta di risorse su un valore uguale al limite del contenitore. Se non è specificato alcun limite, il valore predefinito è la capacità del nodo di lavoro.</p>
   <p>Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
@@ -455,6 +468,7 @@ spec:
 {: #yaml-example}
 
 Di seguito è riportata una copia dello YAML di distribuzione [discusso precedentemente sezione per sezione](#app_yaml). Puoi anche [scaricare il file YAML da GitHub](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
+{: shortdesc}
 
 ```yaml
 apiVersion: apps/v1beta1
@@ -591,19 +605,23 @@ spec:
 ## Avvio del dashboard Kubernetes
 {: #cli_dashboard}
 
-Apri il dashboard Kubernetes nel tuo sistema locale per visualizzare le informazioni su un cluster e sui suoi nodi di lavoro. [Nella GUI](#db_gui), puoi accedere al dashboard con un pulsante di un clic pratico. [Con la CLI](#db_cli), puoi accedere al dashboard o utilizzare la procedura in un processo di automazione come per una pipeline CI/CD.
+Apri il dashboard Kubernetes nel tuo sistema locale per visualizzare le informazioni su un cluster e sui suoi nodi di lavoro. [Nella console {{site.data.keyword.Bluemix_notm}}](#db_gui), puoi accedere al dashboard con un solo clic. [Con la CLI](#db_cli), puoi accedere al dashboard o utilizzare la procedura in un processo di automazione come per una pipeline CI/CD.
 {:shortdesc}
 
+Hai così tante risorse e utenti nel tuo cluster che il dashboard Kubernetes è un po' lento? Per i cluster che eseguono Kubernetes versione 1.12 o successive, il tuo amministratore cluster può ridimensionare la distribuzione di `kubernetes-dashboard` eseguendo `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
+{: tip}
+
 Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
 
 Puoi utilizzare la porta predefinita o impostare una tua porta per avviare il dashboard Kubernetes per un cluster.
 
-**Avvio del dashboard Kubernetes dalla GUI**
+**Avvio del dashboard Kubernetes dalla console {{site.data.keyword.Bluemix_notm}}**
 {: #db_gui}
 
-1.  Accedi alla [GUI {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/).
-2.  Dal tuo profilo nella barra dei menu, seleziona l'account che vuoi utilizzare.
-3.  Dal menu, fai clic su **Contenitori**.
+1.  Accedi alla [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/).
+2.  Dalla barra dei menu, fai clic sul tuo avatar utente ![Icona Avatar](../icons/i-avatar-icon.svg "Icona Avatar") e seleziona l'account che vuoi utilizzare.
+3.  Dal menu ![Icona Menu](../icons/icon_hamburger.svg "Icona Menu"), fai clic su **Kubernetes**.
 4.  Nella pagina **Cluster**, fai clic sul cluster a cui vuoi accedere.
 5.  Dalla pagina dei dettagli del cluster, fai clic sul pulsante **Dashboard Kubernetes**.
 
@@ -656,11 +674,14 @@ Quando hai finito con il dashboard Kubernetes, utilizza `CTRL+C` per uscire dal 
 <br />
 
 
-## Distribuzione di applicazioni con la GUI
+## Distribuzione di applicazioni con il dashboard Kubernetes
 {: #app_ui}
 
-Quando distribuisci un'applicazione al tuo cluster utilizzando il dashboard Kubernetes, una risorsa di distribuzione crea, aggiorna e gestisce automaticamente i pod nel tuo cluster.
+Quando distribuisci un'applicazione al tuo cluster utilizzando il dashboard Kubernetes, una risorsa di distribuzione crea, aggiorna e gestisce automaticamente i pod nel tuo cluster. Per ulteriori informazioni sull'utilizzo del dashboard, consulta [la documentazione di Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/).
 {:shortdesc}
+
+Hai così tante risorse e utenti nel tuo cluster che il dashboard Kubernetes è un po' lento? Per i cluster che eseguono Kubernetes versione 1.12 o successive, il tuo amministratore cluster può ridimensionare la distribuzione di `kubernetes-dashboard` eseguendo `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
+{: tip}
 
 Prima di iniziare:
 
@@ -828,7 +849,8 @@ Prima di iniziare:
 Per eseguire un carico di lavoro su una macchina GPU:
 1.  Crea un file YAML. In questo esempio, un `Job` YAML gestisce i carichi di lavoro come batch creando un pod di breve durata che viene eseguito finché il comando pianificato per il completamento non viene terminato correttamente.
 
-    **Importante**: per i carichi di lavoro GPU, devi sempre fornire il campo `resources: limits: nvidia.com/gpu` nella specifica YAML.
+    Per i carichi di lavoro GPU, devi sempre fornire il campo `resources: limits: nvidia.com/gpu` nella specifica YAML.
+    {: note}
 
     ```yaml
     apiVersion: batch/v1
@@ -1029,7 +1051,7 @@ Passi:
     Per distribuzioni più complesse, potresti dover creare un [file di configurazione](#app_cli).
     {: tip}
 
-2.  Crea un autoscaler e definisci la tua politica. Per ulteriori informazioni sull'utilizzo del comando `kubectl autoscale`, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+2.  Crea un autoscaler e definisci la tua politica. Per ulteriori informazioni sull'utilizzo del comando `kubectl autoscale`, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>

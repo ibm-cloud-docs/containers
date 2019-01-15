@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -168,8 +171,8 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks credentials-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
@@ -383,7 +386,7 @@ Quando un altro utente esegue un'azione in questa regione che richiede l'interaz
 
 Se ritieni di dover aggiornare la chiave API memorizzata per una regione, puoi farlo eseguendo il comando [ibmcloud ks api-key-reset](#cs_api_key_reset). Questo comando richiede la politica di accesso come amministratore {{site.data.keyword.containerlong_notm}} e memorizza la chiave API dell'utente che esegue questo comando nell'account.
 
-**Suggerimento:** la chiave API restituita in questo comando potrebbe non essere utilizzata se le credenziali dell'infrastruttura IBM Cloud (SoftLayer) sono state impostate manualmente utilizzando il comando [ibmcloud ks credentials-set](#cs_credentials_set).
+**Suggerimento:** la chiave API restituita in questo comando potrebbe non essere utilizzata se le credenziali dell'infrastruttura IBM Cloud (SoftLayer) sono state impostate manualmente utilizzando il comando [ibmcloud ks credential-set](#cs_credentials_set).
 
 <strong>Opzioni comando</strong>:
 
@@ -903,21 +906,23 @@ Visualizzare le informazioni su un cluster nella tua organizzazione.
 **Output di esempio**:
 
   ```
-  Name:        my_cluster
-  ID:          abc1234567
-  State:       normal
-  Trust ready: false
-  Created:     2018-01-01T17:19:28+0000
-  Zone:        dal10
-  Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Master Location: Dallas
-  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
-  Ingress secret:    my_cluster
-  Workers:      3
-  Worker Zones: dal10
-  Version:      1.11.3
-  Owner Email:  name@example.com
+  Name:                 my_cluster
+  ID:                   abc1234567
+  State:                normal
+  Trust ready:          false
+  Created:              2018-01-01T17:19:28+0000
+  Zone:                 dal10
+  Master URL:           https://169.xx.xxx.xxx:xxxxx
+  Master Location:      Dallas
+  Ingress subdomain:    my_cluster.us-south.containers.appdomain.cloud
+  Ingress secret:       my_cluster
+  Workers:              3
+  Worker Zones:         dal10
+  Version:              1.12.3
+  Owner:                name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Resource Group ID:    a8a12accd63b437bbd6d58fb6a462ca7
+  Resource Group Name:  Default
 
   Addons
   Name                   Enabled
@@ -1672,7 +1677,7 @@ Visualizza lo stato di tutti gli ALB in un cluster. Se non viene restituito alcu
 ## Comandi infrastruttura
 {: #infrastructure_commands}
 
-### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 Imposta le credenziali di account dell'infrastruttura IBM Cloud (SoftLayer) per il tuo account {{site.data.keyword.containerlong_notm}}.
@@ -1689,7 +1694,7 @@ Non puoi impostare più credenziali per un account {{site.data.keyword.container
 
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
-   <dd>Nome utente API dell'account dell'infrastruttura IBM Cloud (SoftLayer). Questo valore è obbligatorio. **Nota**: il nome utente API dell'infrastruttura non è lo stesso dell'IBMid. Per visualizzare il nome utente API dell'infrastruttura:
+   <dd>Nome utente API dell'account dell'infrastruttura IBM Cloud (SoftLayer). Questo valore è obbligatorio. **Nota**: il nome utente API dell'infrastruttura non è lo stesso dell'ID IBM. Per visualizzare il nome utente API dell'infrastruttura:
    <ol><li>Accedi al portale [{{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/).</li>
    <li>Dal menu che si espande, seleziona **Infrastruttura**.</li>
    <li>Dalla barra dei menu, seleziona **Account** > **Utenti** > **Elenco utenti**.</li>
@@ -1728,12 +1733,12 @@ Non puoi impostare più credenziali per un account {{site.data.keyword.container
 **Esempio**:
 
   ```
-  ibmcloud ks credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+  ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
 
-### ibmcloud ks credentials-unset
+### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
 Rimuovi le credenziali di account dell'infrastruttura IBM Cloud (SoftLayer) dal tuo account {{site.data.keyword.containerlong_notm}}.
@@ -1750,7 +1755,7 @@ Dopo aver rimosso le credenziali, la [chiave API IAM](#cs_api_key_info) viene ut
 **Esempio**:
 
   ```
-  ibmcloud ks credentials-unset
+  ibmcloud ks credential-unset
   ```
   {: pre}
 
@@ -1832,7 +1837,7 @@ Crea una configurazione di registrazione. Puoi utilizzare questo comando per ino
     <dd>Il nome o l'ID del cluster.</dd>
 
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>    
-    <dd>'origine del log per abilitare l'inoltro di log. Questo argomento supporta un elenco separato da virgole di origini log per cui applicare la configurazione. I valori accettati sono <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> e <code>kube-audit</code>. Se non fornisci un'origine log, vengono create le configurazioni per <code>container</code> e <code>ingress</code>.</dd>
+    <dd>L'origine del log per abilitare l'inoltro di log. Questo argomento supporta un elenco separato da virgole di origini log per cui applicare la configurazione. I valori accettati sono <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> e <code>kube-audit</code>. Se non fornisci un'origine log, vengono create le configurazioni per <code>container</code> e <code>ingress</code>.</dd>
 
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
     <dd>Il luogo in cui vuoi inoltrare i tuoi log. Le opzioni sono <code>ibm</code>, che inoltra i tuoi log a {{site.data.keyword.loganalysisshort_notm}} e <code>syslog</code>, che inoltra i log a un server esterno.</dd>
@@ -2817,7 +2822,7 @@ Visualizza i dettagli di un pool di nodi di lavoro.
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.8_1512
+  Version:            1.10.11_1512
   ```
   {: screen}
 
@@ -3033,4 +3038,3 @@ Prima di rimuovere una zona, assicurati di avere nodi di lavoro sufficienti in a
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
-  

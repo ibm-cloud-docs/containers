@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Pianificazione della rete in cluster e privata
@@ -79,7 +82,7 @@ Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} configura
 **Perché potrei utilizzare questa impostazione?**
 
 * Hai un'applicazione che deve essere accessibile a Internet pubblico in un cluster a zona singola.
-* Hai un'applicazione che deve essere accessibile a Internet pubblico in un cluster multizona. Poiché devi abilitare lo [spanning della VLAN](cs_subnets.html#subnet-routing) per creare un cluster multizona, il cluster può comunicare con altri sistemi che sono connessi a qualsiasi VLAN privata nello stesso account IBM Cloud. **Nota**: per isolare il tuo cluster multizona sulla rete privata, usa [Politiche di rete Calico](cs_network_policy.html#isolate_workers).
+* Hai un'applicazione che deve essere accessibile a Internet pubblico in un cluster multizona. Poiché devi abilitare lo [spanning della VLAN](cs_subnets.html#subnet-routing) per creare un cluster multizona, il cluster può comunicare con altri sistemi che sono connessi a qualsiasi VLAN privata nello stesso account IBM Cloud. Per isolare il tuo cluster multizona sulla rete privata, puoi utilizzare le [Politiche di rete Calico](cs_network_policy.html#isolate_workers).
 
 **Quali sono le mie opzioni per gestire l'accesso pubblico e privato al mio cluster?**
 </br>Le seguenti sezioni descrivono le funzionalità tra {{site.data.keyword.containerlong_notm}} che puoi utilizzare per configurare la rete per i cluster connessi a una VLAN pubblica e a una VLAN privata.
@@ -184,7 +187,7 @@ Puoi scegliere di [creare un cluster solo VLAN privata](cs_clusters.html#cluster
 * Una connessione automatica tra tutti i nodi di lavoro e il master. Devi fornire questa connessione [ configurando un'applicazione gateway](#private_vlan_gateway).
 
 **Perché potrei utilizzare questa impostazione?**
-</br>Hai dei requisiti di sicurezza specifici oppure hai bisogno di creare delle politiche di rete personalizzate e delle regole di instradamento per fornire una sicurezza di rete dedicata. **Nota**: l'utilizzo di un'applicazione gateway comporta dei costi separati. Per i dettagli, vedi la [documentazione](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
+</br>Hai dei requisiti di sicurezza specifici oppure hai bisogno di creare delle politiche di rete personalizzate e delle regole di instradamento per fornire una sicurezza di rete dedicata. Nota che l'utilizzo di un'applicazione gateway comporta dei costi separati. Per i dettagli, vedi la [documentazione](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
 
 **Quali sono le mie opzioni per gestire l'accesso pubblico e privato al mio cluster?**
 </br>Le seguenti sezioni descrivono le funzionalità tra {{site.data.keyword.containerlong_notm}} che puoi utilizzare per configurare la rete per i cluster connessi solo a una VLAN privata.
@@ -194,10 +197,8 @@ Puoi scegliere di [creare un cluster solo VLAN privata](cs_clusters.html#cluster
 
 Se i nodi di lavoro sono configurati solo con una VLAN privata, devi configurare una soluzione alternativa per la connettività di rete tra i tuoi nodi di lavoro e il master. Puoi configurare un firewall con politiche di rete personalizzate per fornire una sicurezza di rete dedicata per il tuo cluster standard e per rilevare e risolvere intrusioni di rete. Ad esempio, puoi scegliere di configurare un [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) o un [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) in modo che funga da firewall e blocchi il traffico non desiderato. Quando configuri un firewall, devi anche [aprire le porte e gli indirizzi IP necessari](cs_firewall.html#firewall_outbound) per ogni regione in modo che il master e i nodi di lavoro possano comunicare.
 
-**Nota**: se hai un'applicazione router esistente e aggiungi quindi un cluster, le nuove sottoreti portatili ordinate per il cluster non sono configurate sull'applicazione router. Per poter usare i servizi di rete, devi abilitare l'instradamento tra le sottoreti sulla stessa VLAN [abilitando lo spanning delle VLAN](cs_subnets.html#vra-routing).
-
-Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-{: tip}
+Se hai un'applicazione router esistente e aggiungi quindi un cluster, le nuove sottoreti portatili ordinate per il cluster non sono configurate sull'applicazione router. Per utilizzare i servizi di rete, devi abilitare l'instradamento tra le sottoreti sulla stessa VLAN [abilitando lo spanning delle VLAN](cs_subnets.html#vra-routing).
+{: important}
 
 ### Esposizione delle tue applicazioni con i servizi di rete privati
 {: #private_vlan_services}

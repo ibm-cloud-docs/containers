@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -24,11 +27,77 @@ lastupdated: "2018-10-25"
 Resta al passo con cosa succede in {{site.data.keyword.containerlong}}. Ulteriori informazioni sulle nuove funzioni da esplorare, su un suggerimento per la sperimentazione o su alcuni argomenti popolari che gli altri sviluppatori stanno trovando utili al momento.
 {:shortdesc}
 
+## Argomenti popolari nel dicembre 2018
+{: #dec18}
+
+<table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
+<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel dicembre 2018</caption>
+<thead>
+<th>Data</th>
+<th>Titolo</th>
+<th>Descrizione</th>
+</thead>
+<tbody>
+<tr>
+<td>6 dicembre</td>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>Ottieni visibilità operativa sulle prestazioni e sull'integrità delle tue applicazioni distribuendo Sysdig come servizio di terze parti ai tuoi nodi di lavoro per inoltrare le metriche a {{site.data.keyword.monitoringlong}}. Per ulteriori informazioni, vedi [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Nota**: se utilizzi {{site.data.keyword.mon_full_notm}} con i cluster che eseguono Kubernetes versione 1.11 o successive, non vengono raccolte tutte le metriche del contenitore perché Sysdig attualmente non supporta `containerd`.</td>
+</tr>
+</tbody></table>
+
+## Argomenti popolari nel novembre 2018
+{: #nov18}
+
+<table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
+<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel novembre 2018</caption>
+<thead>
+<th>Data</th>
+<th>Titolo</th>
+<th>Descrizione</th>
+</thead>
+<tbody>
+<tr>
+<td>29 novembre</td>
+<td>[Zona disponibile a Chennai](cs_regions.html)</td>
+<td>Benvenuta Chennai, India come nuova zona per i cluster nella regione Asia Pacifico Nord. Se hai un firewall, assicurati di [aprire le porte del firewall](cs_firewall.html#firewall) per questa e le altre zone all'interno della regione in cui si trova il tuo cluster.</td>
+</tr>
+<tr>
+<td>27 novembre</td>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>Aggiungi funzionalità di gestione dei log al tuo cluster distribuendo LogDNA come servizio di terze parti ai tuoi nodi di lavoro per gestire i log dai contenitori di pod. Per ulteriori informazioni, vedi [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
+</tr>
+<tr>
+<td>7 novembre</td>
+<td>Programma di bilanciamento del carico 2.0 (beta)</td>
+<td>Puoi ora scegliere tra il [programma di bilanciamento del carico 1.0 o 2.0](cs_loadbalancer.html#planning_ipvs) per esporre in sicurezza le tue applicazioni cluster al pubblico.</td>
+</tr>
+<tr>
+<td>7 novembre</td>
+<td>Kubernetes versione 1.12 disponibile</td>
+<td>Adesso, puoi aggiornare o creare i cluster che eseguono [Kubernetes versione 1.12](cs_versions.html#cs_v112). I cluster della versione 1.12 vengono forniti con master Kubernetes altamente disponibili per impostazione predefinita.</td>
+</tr>
+<tr>
+<td>7 novembre</td>
+<td>Master altamente disponibili nei cluster che eseguono Kubernetes versione 1.10</td>
+<td>Sono disponibili master altamente disponibili per i cluster che eseguono Kubernetes versione 1.10. Tutti i vantaggi descritti nella voce precedente per i cluster della versione 1.11 si applicano ai cluster della versione 1.10, così come i [passi di preparazione](cs_versions.html#110_ha-masters) che devi eseguire.</td>
+</tr>
+<tr>
+<td>1 novembre</td>
+<td>Master altamente disponibili nei cluster che eseguono Kubernetes versione 1.11</td>
+<td>In una singola zona, il tuo master è altamente disponibile e include repliche su host fisici separati per il server API, etcd, il programma di pianificazione e il gestore controller Kubernetes per proteggerti in caso di interruzione, come durante un aggiornamento del cluster. Se il tuo cluster si trova in una zona che supporta il multizona, il tuo master altamente disponibile viene esteso anche tra le zone per fornire protezione in caso di un malfunzionamento della zona. <br>Per le azioni che devi eseguire, vedi [Aggiornamento a master cluster altamente disponibili](cs_versions.html#ha-masters). Queste azioni di preparazione si applicano:<ul>
+<li>Se hai un firewall o politiche di rete Calico personalizzate.</li>
+<li>Se utilizzi le porte host `2040` o `2041` sui tuoi nodi di lavoro.</li>
+<li>Se hai utilizzato l'indirizzo IP del master cluster per l'accesso in cluster al master.</li>
+<li>Se disponi dell'automazione che richiama l'API o la CLI Calico (`calicoctl`), ad esempio per creare le politiche Calico.</li>
+<li>Se utilizzi le politiche di rete di Kubernetes o Calico per controllare l'accesso in uscita dei pod al master.</li></ul></td>
+</tr>
+</tbody></table>
+
 ## Argomenti popolari nell'ottobre 2018
 {: #oct18}
 
 <table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
-<caption>Argomenti popolari per i contenitori e i cluster Kubernetes ad agosto 2018</caption>
+<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nell'ottobre 2018</caption>
 <thead>
 <th>Data</th>
 <th>Titolo</th>
@@ -53,7 +122,7 @@ Resta al passo con cosa succede in {{site.data.keyword.containerlong}}. Ulterior
 <tr>
 <td>04 ottobre</td>
 <td>[{{site.data.keyword.registrylong}} è ora integrato con {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management)](/docs/services/Registry/iam.html#iam)</td>
-<td>Puoi utilizzare IAM per controllare l'accesso alle tue risorse del registro, come l'estrazione, l'inserimento e la creazione di immagini. Quando crei un cluster, crei anche un token del registro in modo che il cluster possa lavorare con il tuo registro. Pertanto, hai bisogno del ruolo di gestione della piattaforma **Amministratore** del registro per creare un cluster. Per abilitare IAM per il tuo account del registro, vedi [Abilitazione dell'applicazione delle politiche per gli utenti esistenti](/docs/services/Registry/registry_users.html#existing_users).</td>
+<td>Puoi utilizzare {{site.data.keyword.Bluemix_notm}} IAM per controllare l'accesso alle tue risorse del registro, come l'estrazione, l'inserimento e la creazione di immagini. Quando crei un cluster, crei anche un token del registro in modo che il cluster possa lavorare con il tuo registro. Pertanto, hai bisogno del ruolo di gestione della piattaforma **Amministratore** del registro a livello di account per creare un cluster. Per abilitare {{site.data.keyword.Bluemix_notm}} IAM per il tuo account del registro, vedi [Abilitazione dell'applicazione delle politiche per gli utenti esistenti](/docs/services/Registry/registry_users.html#existing_users).</td>
 </tr>
 <tr>
 <td>01 ottobre</td>
@@ -66,7 +135,7 @@ Resta al passo con cosa succede in {{site.data.keyword.containerlong}}. Ulterior
 {: #sept18}
 
 <table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
-<caption>Argomenti popolari per i contenitori e i cluster Kubernetes ad agosto 2018</caption>
+<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel settembre 2018</caption>
 <thead>
 <th>Data</th>
 <th>Titolo</th>
@@ -191,8 +260,8 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 </tr>
 <tr>
 <td>01 maggio</td>
-<td>[Distribuisci il dashboard Kubernetes dalla GUI](cs_app.html#cli_dashboard)</td>
-<td>Hai mai voluto accedere al dashboard Kubernetes con un clic? Controlla il pulsante **Dashboard Kubernetes** nella GUI {{site.data.keyword.Bluemix_notm}}.</td>
+<td>[Distribuisci il dashboard Kubernetes dalla console](cs_app.html#cli_dashboard)</td>
+<td>Hai mai voluto accedere al dashboard Kubernetes con un clic? Controlla il pulsante **Dashboard Kubernetes** nella console {{site.data.keyword.Bluemix_notm}}.</td>
 </tr>
 </tbody></table>
 
@@ -203,7 +272,7 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 {: #apr18}
 
 <table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
-<caption>Argomenti popolari per i contenitori e i cluster Kubernetes  nell'aprile 2018</caption>
+<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nell'aprile 2018</caption>
 <thead>
 <th>Data</th>
 <th>Titolo</th>
@@ -283,7 +352,7 @@ pod per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.co
 </tr>
 <tr>
 <td>23 febbraio</td>
-<td>Visualizza l'IU web per la [registrazione](cs_health.html#view_logs) e le [metriche](cs_health.html#view_metrics)</td>
+<td>Visualizza la console web per la [registrazione](cs_health.html#view_logs) e le [metriche](cs_health.html#view_metrics)</td>
 <td>Visualizza facilmente dati di log e metriche sul tuo cluster e i suoi componenti con un'IU web migliorata. Per l'accesso, vedi la pagina dei dettagli del tuo cluster.</td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -27,7 +30,7 @@ Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyw
 ## Il governo regionale migliora la collaborazione e la velocità con gli sviluppatori della comunità che combinano i dati pubblici e privati
 {: #uc_data_mashup}
 
-Un responsabile dei programmi OGD (Open-Government Data) deve condividere i dati pubblici con la comunità e il settore privato, ma i dati sono bloccati in un sistema monolitico installato in loco. 
+Un responsabile dei programmi OGD (Open-Government Data) deve condividere i dati pubblici con la comunità e il settore privato, ma i dati sono bloccati in un sistema monolitico installato in loco.
 
 Perché {{site.data.keyword.Bluemix_notm}}: con {{site.data.keyword.containerlong_notm}}, il responsabile fornisce il valore trasformativo dei dati pubblici e privati combinati. Allo stesso modo, il servizio fornisce la piattaforma cloud pubblica per il refactoring e l'esposizione di microservizi da applicazioni monolitiche in loco. Inoltre, il cloud pubblico consente al governo e alle associazioni pubbliche di utilizzare servizi cloud esterni e strumenti open source adatti alla collaborazione. 
 
@@ -83,7 +86,7 @@ Soluzione tecnica:
 * Utilizza IBM {{site.data.keyword.SecureGateway}} per mantenere connessioni sicure ai database installati in loco esistenti.
 
 **Passo 2: fornisci l'accesso ai dati con le API**
-* Utilizza {{site.data.keyword.apiconnect_long}} per la piattaforma di economia delle API. Le API consentono ai settori pubblico e privato di combinare i dati nelle loro applicazioni. 
+* Utilizza {{site.data.keyword.apiconnect_long}} per la piattaforma di economia delle API. Le API consentono ai settori pubblico e privato di combinare i dati nelle loro applicazioni.
 * Crea cluster per applicazioni pubbliche-private, guidate dalle API. 
 * Progetta le applicazioni in una serie di microservizi cooperativi eseguiti all'interno di {{site.data.keyword.containerlong_notm}}, che si basa sulle aree funzionali delle applicazioni e delle loro dipendenze.
 * Distribuisci le applicazioni nei contenitori eseguiti in {{site.data.keyword.containerlong_notm}}. Gli strumenti HA integrati in {{site.data.keyword.containerlong_notm}} bilanciano i carichi di lavoro, tra cui la riparazione automatica e il bilanciamento del carico.
@@ -116,7 +119,7 @@ Tecnologie chiave:
 
 **Contesto: il porto protegge lo scambio di dati portuali e manifesti di carico che collegano organizzazioni pubbliche e private.**
 
-* Diversi gruppi di sviluppatori delle società di governo e di spedizione non dispongono di una piattaforma unificata in cui possano collaborare, il che rallenta le distribuzioni di aggiornamenti e funzioni.  
+* Diversi gruppi di sviluppatori delle società di governo e di spedizione non dispongono di una piattaforma unificata in cui possano collaborare, il che rallenta le distribuzioni di aggiornamenti e funzioni. 
 * Gli sviluppatori sono sparsi in tutto il mondo e oltre i confini organizzativi, il che rende l'open-source e PaaS l'opzione migliore.
 * La sicurezza è una preoccupazione primaria e questa preoccupazione aumenta la difficoltà di collaborazione che influisce sulle funzioni e sugli aggiornamenti del software, specialmente dopo che le applicazioni passano in produzione.
 * I dati just-in-time hanno comportato la necessità di sistemi mondiali altamente disponibili per ridurre ritardi nelle operazioni di transito. Le tabelle orarie per i terminali di spedizione sono altamente controllate e in alcuni casi inflessibili. L'utilizzo del Web sta crescendo, quindi l'instabilità potrebbe causare un'esperienza utente insoddisfacente. 
@@ -132,7 +135,7 @@ Quindi creano una collaborazione dedicata alle soluzioni per il sistema commerci
 
 Gli sviluppatori hanno iniziato distribuendo le loro applicazioni in contenitori con {{site.data.keyword.containerlong_notm}}. Hanno creato cluster per un ambiente di sviluppo condiviso che consentono agli sviluppatori di tutto il mondo di distribuire rapidamente e in modo collaborativo i miglioramenti alle applicazioni. I contenitori consentono a ciascun team di sviluppo di utilizzare la lingua di loro scelta.
 
-La sicurezza prima di tutto: i responsabili IT hanno scelto Trusted Compute per bare metal per ospitare i cluster. Con bare metal per {{site.data.keyword.containerlong_notm}}, i carichi di lavoro doganali sensibili ora hanno un isolamento familiare ma all'interno della flessibilità del cloud pubblico. Bare metal fornisce Trusted Compute, che è in grado di verificare eventuali manomissioni dell'hardware sottostante.  
+La sicurezza prima di tutto: i responsabili IT hanno scelto Trusted Compute per bare metal per ospitare i cluster. Con bare metal per {{site.data.keyword.containerlong_notm}}, i carichi di lavoro doganali sensibili ora hanno un isolamento familiare ma all'interno della flessibilità del cloud pubblico. Bare metal fornisce Trusted Compute, che è in grado di verificare eventuali manomissioni dell'hardware sottostante. 
 
 Poiché la società di spedizione vuole anche collaborare con altri porti, la sicurezza delle applicazioni è fondamentale. I manifesti di carico e le informazioni doganali sono altamente confidenziali. Da tale nucleo sicuro, Vulnerability Advisor fornisce le seguenti scansioni: 
 * Scansioni dei punti vulnerabili delle immagini
@@ -140,7 +143,7 @@ Poiché la società di spedizione vuole anche collaborare con altri porti, la si
 * Scansioni dei contenitori attivi
 * Scansioni dei pacchetti per malware noti 
 
-Allo stesso tempo, {{site.data.keyword.iamlong}} aiuta a controllare chi ha accesso alle risorse e a quale livello. 
+Allo stesso tempo, {{site.data.keyword.iamlong}} aiuta a controllare chi ha accesso alle risorse e a quale livello.
 
 Gli sviluppatori si concentrano sui problemi di dominio, utilizzando gli strumenti esistenti: invece di scrivere un codice di registrazione e monitoraggio univoco, lo inseriscono nelle applicazioni, eseguendo il bind dei servizi {{site.data.keyword.Bluemix_notm}} nei cluster. Gli sviluppatori vengono inoltre liberati dalle attività di gestione dell'infrastruttura perché IBM si occupa di Kubernetes e degli aggiornamenti dell'infrastruttura, della sicurezza e altro ancora. 
 
@@ -167,8 +170,8 @@ Soluzione tecnica:
 * Gli strumenti HA integrati in {{site.data.keyword.containerlong_notm}} bilanciano il carico di lavoro all'interno di ogni regione geografica, tra cui la riparazione automatica e il bilanciamento del carico.
 
 **Passo 3: condivisione dei dati**
-* {{site.data.keyword.cloudant}} è un moderno database NoSQL adatto a una serie di casi di utilizzo basati sui dati, dall'archiviazione e query di dati chiave-valore all'archiviazione e query di dati complessi orientati ai documenti.  
-* Per ridurre al minimo le query ai database regionali, {{site.data.keyword.cloudant}} viene utilizzato per memorizzare nella cache i dati della sessione dell'utente tra le applicazioni.  
+* {{site.data.keyword.cloudant}} è un moderno database NoSQL adatto a una serie di casi di utilizzo basati sui dati, dall'archiviazione e query di dati chiave-valore all'archiviazione e query di dati complessi orientati ai documenti. 
+* Per ridurre al minimo le query ai database regionali, {{site.data.keyword.cloudant}} viene utilizzato per memorizzare nella cache i dati della sessione dell'utente tra le applicazioni. 
 * Questa configurazione migliora l'usabilità e le prestazioni dell'applicazione di front-end in tutte le applicazioni su {{site.data.keyword.containershort}}.
 * Mentre le applicazioni di lavoro in {{site.data.keyword.containerlong_notm}} analizzano i dati in loco e memorizzano i risultati in {{site.data.keyword.cloudant}}, {{site.data.keyword.openwhisk}} reagisce alle modifiche e ripulisce automaticamente i dati sui feed dei dati in entrata. 
 * Allo stesso modo, è possibile attivare notifiche sulle spedizioni in una regione tramite caricamenti di dati in modo che tutti i consumatori futuri possano accedere ai nuovi dati.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -68,6 +71,7 @@ Gli sviluppatori software e gli amministratori di rete che stanno distribuendo u
 ## Prerequisiti
 
 * [Esercitazione: Creazione di cluster Kubernetes](cs_tutorials.html#cs_cluster_tutorial).
+* Installa il [plug-in container-registry](/docs/services/Registry/index.html#registry_cli_install).
 
 
 ## Lezione 1: Distribuzione di singole applicazioni dell'istanza ai cluster Kubernetes
@@ -76,7 +80,7 @@ Gli sviluppatori software e gli amministratori di rete che stanno distribuendo u
 Nell'esercitazione precedente, hai creato un cluster con un nodo di lavoro. In questa lezione, configura una distribuzione e distribuisci una sola istanza dell'applicazione in un pod Kubernetes nel nodo di lavoro.
 {:shortdesc}
 
-Il seguente diagramma include i componenti che distribuisci completando questa lezione.
+Il seguente diagramma mostra i componenti che distribuisci completando questa lezione.
 
 ![Impostazioni di distribuzione](images/cs_app_tutorial_mz-components1.png)
 
@@ -101,7 +105,7 @@ Per distribuire l'applicazione:
 
 3. [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
 
-5.  Accedi alla CLI {{site.data.keyword.registryshort_notm}}. **Nota**: assicurati che il plug-in container-registry [sia installato](/docs/services/Registry/index.html#registry_cli_install).
+5.  Accedi alla CLI {{site.data.keyword.registryshort_notm}}.
 
     ```
     ibmcloud cr login
@@ -244,7 +248,7 @@ dell'immagine. **Nota**: acquisisci ulteriori informazioni sulla [protezione del
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
         ```
         {: screen}
 
@@ -260,7 +264,7 @@ dell'immagine. **Nota**: acquisisci ulteriori informazioni sulla [protezione del
 
 11. [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard).
 
-    Se selezioni il tuo cluster nella [GUI {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
+    Se selezioni il tuo cluster nella [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
     {: tip}
 
 12. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato.
@@ -387,7 +391,7 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
   ```
   {: screen}
 
-7.  Controlla lo stato del tuo pod per monitorare l'integrità della tua applicazione in Kubernetes. Puoi controllare lo stato dalla CLI oppure nella GUI del dashboard Kubernetes.
+7.  Controlla lo stato del tuo pod per monitorare l'integrità della tua applicazione in Kubernetes. Puoi controllare lo stato dalla CLI o nel dashboard Kubernetes.
 
     *  **Dalla CLI**: guarda cosa sta accadendo ai tuoi pod mentre cambiano stato.
        ```
@@ -395,7 +399,7 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
        ```
        {: pre}
 
-    *  **Dalla GUI**:
+    *  **Dal dashboard Kubernetes**:
 
        1.  [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard).
        2.  Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato. Da questa scheda, puoi continuamente aggiornare e visualizzare che il controllo dell'integrità stia funzionando. Nella sezione **Pod**, puoi visualizzare quante volte i pod sono riavviati quando i contenitori in essi vengono ricreati. Se ti capita di ricevere il seguente errore nel dashboard, questo messaggio indica che il controllo dell'integrità ha rilevato un problema. Attendi alcuni minuti e aggiorna di nuovo. Vedrai che il numero di riavvii cambia per ogni pod.
@@ -536,7 +540,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: codeblock}
 
-    2.  Nella sezione volumes della distribuzione watson, aggiorna il nome del segreto {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} creato nell'esercitazione precedente. Montando il segreto Kubernetes come un volume alla tua distribuzione, rendi le credenziali del servizio {{site.data.keyword.Bluemix_notm}} disponibili al contenitore che è in esecuzione nel tuo pod. I componenti dell'applicazione {{site.data.keyword.watson}} in questa esercitazione sono configurati per cercare le credenziali del servizio utilizzando il percorso di montaggio del volume.
+    2.  Nella sezione volumes della distribuzione watson, aggiorna il nome del segreto {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} creato nell'esercitazione precedente. Montando il segreto Kubernetes come volume nella tua distribuzione, rendi la chiave API {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) disponibile al contenitore che è in esecuzione nel tuo pod. I componenti dell'applicazione {{site.data.keyword.watson}} in questa esercitazione sono configurati per cercare la chiave API utilizzando il percorso di montaggio del volume.
 
         ```
         volumes:

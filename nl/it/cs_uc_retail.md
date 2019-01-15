@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -29,6 +32,7 @@ sfruttare le analisi relative a conoscenze di mercato, distribuzioni multiregion
 {: #uc_data-share}
 
 Un responsabile della linea di business deve aumentare i canali di vendita, ma il sistema di vendita al dettaglio è isolato in un data center in loco. La competizione ha partner globali per la vendita incrociata e incrementale di combinazioni delle loro merci, attraverso siti fisici e online. 
+{: shortdesc}
 
 Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} fornisce un ecosistema di cloud pubblico, in cui i contenitori consentono a nuovi partner e altri partecipanti esterni di co-sviluppare applicazioni e dati, tramite le API. Ora che il sistema di vendita al dettaglio è sul cloud pubblico, le API semplificano anche la condivisione dei dati e lanciano il nuovo sviluppo di applicazioni. Le distribuzioni di applicazioni aumentano quando gli sviluppatori sperimentano facilmente, distribuendo rapidamente le modifiche ai sistemi di sviluppo e test con le toolchain. 
 
@@ -41,7 +45,7 @@ Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm
 
 * Il rivenditore si trova di fronte a forti pressioni competitive. In primo luogo, deve mascherare la complessità del passaggio a nuovi prodotti e nuovi canali. Ad esempio, deve espandere la sofisticazione del prodotto. Allo stesso tempo, i clienti devono riuscire a passare tra i vari marchi con facilità.
 * Questa capacità di passaggio tra i marchi significa che l'ecosistema di vendita al dettaglio richiede la connettività ai partner. Quindi, il cloud può portare nuovo valore da partner, clienti e altri partecipanti esterni. 
-* Gli eventi utente lampo, come il Black Friday, mettono a dura prova i sistemi online esistenti, costringendo il rivenditore a sovraccaricare l'infrastruttura di calcolo.  
+* Gli eventi utente lampo, come il Black Friday, mettono a dura prova i sistemi online esistenti, costringendo il rivenditore a sovraccaricare l'infrastruttura di calcolo. 
 * Gli sviluppatori del rivenditore dovevano evolvere costantemente le applicazioni, ma gli strumenti tradizionali rallentavano la loro capacità di distribuire frequentemente aggiornamenti e funzioni, specialmente quando collaborano con i team partner.  
 
 **Soluzione**
@@ -55,7 +59,7 @@ La soluzione è composta da questi componenti principali:
 * VENDITE INCROCIATE E INCREMENTALI: applicazione che rende visibili le opportunità di vendita incrociata e incrementale con le API che possono essere utilizzate in varie applicazioni di e-commerce e mobili
 * AMBIENTE DI SVILUPPO: i cluster Kubernetes per i sistemi di sviluppo, test e produzione aumentano la collaborazione e la condivisione dei dati tra il rivenditore e i suoi partner
 
-Affinché il rivenditore lavori con partner globali, le API di inventario hanno richiesto modifiche per adattarsi alle preferenze della lingua e del mercato di ciascuna regione. {{site.data.keyword.containerlong_notm}} offre copertura in più regioni, tra cui Nord America, Europa, Asia e Australia, in modo che le API riflettano le esigenze di ogni paese e con bassa latenza.
+Affinché il rivenditore lavori con partner globali, le API di inventario hanno richiesto modifiche per adattarsi alle preferenze della lingua e del mercato di ciascuna regione. {{site.data.keyword.containerlong_notm}} offre copertura in più regioni, tra cui Nord America, Europa, Asia e Australia, in modo che le API riflettano le esigenze di ogni paese e garantiscano una bassa latenza per le chiamate API.
 
 Un altro requisito è che i dati di inventario siano condivisibili con i clienti dei partner e delle società. Con le API di inventario, gli sviluppatori possono fornire informazioni nelle applicazioni, ad esempio applicazioni di inventario per dispositivi mobili o soluzioni di e-commerce web. Gli sviluppatori sono anche impegnati nella creazione e manutenzione del sito di e-commerce principale. In sintesi, devono concentrarsi sulla codifica anziché sulla gestione dell'infrastruttura. 
 
@@ -101,7 +105,7 @@ Soluzione tecnica:
 * {{site.data.keyword.containerlong_notm}} fornisce un facile roll-out e roll-back delle applicazioni; applicazioni personalizzate vengono distribuite nelle campagne di test attraverso l'instradamento e il bilanciamento del carico intelligente di Istio. 
 
 **Risultati**
-* I microservizi riducono notevolmente i tempi di consegna di patch, correzioni di bug e nuove funzioni. Lo sviluppo iniziale di WW è veloce e gli aggiornamenti sono frequenti, fino a 40 volte a settimana.
+* I microservizi riducono notevolmente i tempi di consegna di patch, correzioni di bug e nuove funzioni. Lo sviluppo iniziale in tutto il mondo è veloce e gli aggiornamenti sono frequenti 40 volte a settimana.
 * Il rivenditore e i suoi partner hanno accesso immediato alla disponibilità di inventario e alle pianificazioni di consegna, utilizzando le API. 
 * Con {{site.data.keyword.containerlong_notm}} e gli strumenti CI e CD di IBM, le versioni A-B delle applicazioni sono pronte per le campagne di test. 
 * {{site.data.keyword.containerlong_notm}} fornisce calcoli scalabili, in modo che i carichi di lavoro delle API di inventario e vendite incrociate possano aumentare durante i periodi di volume elevato dell'anno, come le festività autunnali. 
@@ -110,6 +114,7 @@ Soluzione tecnica:
 {: #uc_grocer}
 
 Un direttore marketing ha bisogno di aumentare il traffico dei clienti del 20% nei negozi, rendendo i negozi una risorsa di differenziazione. Numerosi concorrenti di vendita al dettaglio e rivenditori online stanno rubando le vendite. Allo stesso tempo, il direttore marketing deve ridurre l'inventario senza diminuzioni di prezzo, perché mantenere l'inventario troppo a lungo blocca milioni di capitale.
+{: shortdesc}
 
 Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} fornisce una facile attivazione di più calcolo, in cui gli sviluppatori aggiungono rapidamente servizi Cloud Analytics per informazioni approfondite sui comportamenti di vendita e l'adattabilità del mercato digitale. 
 

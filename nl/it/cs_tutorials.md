@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -51,27 +54,29 @@ Questa esercitazione è destinata agli sviluppatori software e agli amministrato
 ## Prerequisiti
 
 -  Controlla i passi che devi seguire per [prepararti a creare un cluster](cs_clusters.html#cluster_prepare).
--  Il [ruolo Cloud Foundry **Sviluppatore**](/docs/iam/mngcf.html#mngcf) nello spazio del cluster che vuoi utilizzare.
+-  Assicurati di disporre delle seguenti politiche di accesso:
+    - Il [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Amministratore**](cs_users.html#platform) per {{site.data.keyword.containerlong_notm}}
+    -  Il ruolo di [**Sviluppatore**](/docs/iam/mngcf.html#mngcf) di Cloud Foundry nello spazio del cluster in cui vuoi lavorare
 
 
 ## Lezione 1: Creazione di un cluster e configurazione della CLI
 {: #cs_cluster_tutorial_lesson1}
 
-Crea il tuo cluster Kubernetes nella GUI e installa le CLI richieste.
+Crea il tuo cluster Kubernetes nella console {{site.data.keyword.Bluemix_notm}} e installa le CLI richieste.
 {: shortdesc}
 
 **Per creare il tuo cluster**
 
 Poiché servono alcuni minuti per eseguire il provisioning, crea il tuo cluster prima di installare le CLI.
 
-1.  [Nella GUI ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create), crea un cluster gratuito o standard con un (1) pool di nodi di lavoro che abbia un (1) nodo di lavoro in esso.
+1.  [Nella console {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create), crea un cluster gratuito o standard con 1 pool di nodi di lavoro contenente 1 nodo di lavoro.
 
     Puoi anche creare un [cluster nella CLI](cs_clusters.html#clusters_cli).
     {: tip}
 
 Come viene eseguito il provisioning del tuo cluster, installa le seguenti CLI che vengono utilizzate per gestire i cluster:
 -   CLI {{site.data.keyword.Bluemix_notm}}
--   Plugin {{site.data.keyword.containerlong_notm}}
+-   Plug-in {{site.data.keyword.containerlong_notm}}
 -   CLI Kubernetes
 -   Plug-in {{site.data.keyword.registryshort_notm}}
 
@@ -89,13 +94,13 @@ Come viene eseguito il provisioning del tuo cluster, installa le seguenti CLI ch
     {: pre}
 
 5.  Per distribuire le applicazioni nei tuoi cluster, [installa la CLI Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Per eseguire i comandi utilizzando la CLI Kubernetes, utilizza il prefisso `kubectl`.
-    1.  Per una compatibilità funzionale completa, scarica la versione della CLI Kubernetes che corrisponde alla versione del cluster Kubernetes che vuoi utilizzare. L'attuale versione Kubernetes predefinita per {{site.data.keyword.containerlong_notm}} è la 1.10.8. 
+    1.  Per una compatibilità funzionale completa, scarica la versione della CLI Kubernetes che corrisponde alla versione del cluster Kubernetes che vuoi utilizzare. L'attuale versione Kubernetes predefinita per {{site.data.keyword.containerlong_notm}} è la 1.10.11.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe)
 
           **Suggerimento:** se stai utilizzando Windows, installa la CLI Kubernetes nella stessa directory della CLI {{site.data.keyword.Bluemix_notm}}. Questa configurazione salva alcune modifiche al percorso file quando esegui il comando in un secondo momento.
 
@@ -133,7 +138,7 @@ sarà simile al seguente.
             ```
             {: pre}
 
-6. Per configurare e gestire un repository delle immagini privato in {{site.data.keyword.registryshort_notm}}, installa il plug-in
+6. Per configurare e gestire un repository delle immagini privato in {{site.data.keyword.registryshort_notm}}, installa il plugin
 {{site.data.keyword.registryshort_notm}}. Per eseguire i comandi del registro, utilizza il prefisso `ibmcloud cr`.
 
     ```
@@ -141,7 +146,7 @@ sarà simile al seguente.
     ```
     {: pre}
 
-    Per verificare che i plug-in container-service e container-registry siano installati correttamente, esegui il seguente comando:
+    Per verificare che i plugin container-service e container-registry siano installati correttamente, esegui il seguente comando:
 
     ```
     ibmcloud plugin list
@@ -165,9 +170,10 @@ in modo che l'applicazione possa accedere al servizio {{site.data.keyword.tonean
     ```
     {: pre}
 
-    **Nota:** se disponi di un ID federato, utilizza l'indicatore `--sso` per accedere. Immetti il tuo nome utente e usa l'URL fornito nell'output della CLI per richiamare la tua passcode monouso.
+    Se disponi di un ID federato, utilizza l'indicatore `--sso` per accedere. Immetti il tuo nome utente e usa l'URL fornito nell'output della CLI per richiamare la tua passcode monouso.
+    {: tip}
 
-2.  Se il cluster si trova in un gruppo di risorse diverso da quello di `default`, specifica tale gruppo di risorse. 
+2.  Se il cluster si trova in un gruppo di risorse diverso da quello di `default`, specifica tale gruppo di risorse. Per visualizzare il gruppo di risorse a cui appartiene ciascun cluster, esegui `ibmcloud ks clusters`.
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -200,7 +206,7 @@ _agenzia_PR_ come proprio spazio dei nomi per raggruppare tutte le immagini nel 
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.11
     ```
     {: screen}
 
@@ -260,8 +266,8 @@ Kubernetes.
     Output di esempio:
 
     ```
-    Client Version: v1.10.8
-    Server Version: v1.10.8
+    Client Version: v1.10.11
+    Server Version: v1.10.11
     ```
     {: screen}
 
@@ -276,7 +282,8 @@ servizio {{site.data.keyword.Bluemix_notm}} che desideri utilizzare con le tue a
 
 1.  Aggiungi il servizio {{site.data.keyword.toneanalyzershort}} al tuo account {{site.data.keyword.Bluemix_notm}}. Sostituisci <service_name> con un nome per la tua istanza di servizio.
 
-    **Nota:** quando aggiungi il servizio {{site.data.keyword.toneanalyzershort}} al tuo account, viene visualizzato un messaggio che indica che il servizio non è gratuito. Se limiti la tua chiamata API, per questa esercitazione non sarà addebitato nulla dal tuo servizio {{site.data.keyword.watson}}. [Rivedi le informazioni sul prezzo per il servizio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/catalog/services/tone-analyzer).
+    Quando aggiungi il servizio {{site.data.keyword.toneanalyzershort}} al tuo account, viene visualizzato un messaggio che indica che il servizio non è gratuito. Se limiti la tua chiamata API, per questa esercitazione non sarà addebitato nulla dal tuo servizio {{site.data.keyword.watson}}. [Rivedi le informazioni sul prezzo per il servizio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/catalog/services/tone-analyzer).
+    {: note}
 
     ```
     ibmcloud service create tone_analyzer standard <service_name>
@@ -302,11 +309,8 @@ sono diversi dallo spazio dei nomi del registro che hai precedentemente creato
     ```
     {: screen}
 
-3.  Verifica che il segreto Kubernetes sia stato creato nel tuo spazio dei nomi del cluster. Ogni servizio {{site.data.keyword.Bluemix_notm}} viene definito da un file
-JSON che include informazioni confidenziali, come il nome utente, la
-password e l'URL che il contenitore utilizza per ottenere l'accesso. Per archiviare in modo sicuro queste informazioni, vengono utilizzati i segreti
-Kubernetes. In questo esempio, il segreto include le credenziali per l'accesso all'istanza di
-{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} di cui è stato eseguito il provisioning nel tuo account.
+3.  Verifica che il segreto Kubernetes sia stato creato nel tuo spazio dei nomi del cluster. Ogni servizio {{site.data.keyword.Bluemix_notm}} è definito da un file JSON che include informazioni riservate come la chiave API {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) e l'URL utilizzato dal contenitore per ottenere l'accesso. Per archiviare in modo sicuro queste informazioni, vengono utilizzati i segreti
+Kubernetes. In questo esempio, il segreto include la chiave API per l'accesso all'istanza di {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} di cui è stato eseguito il provisioning nel tuo account.
 
     ```
     kubectl get secrets --namespace=default

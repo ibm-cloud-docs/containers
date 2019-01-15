@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -26,15 +29,15 @@ lastupdated: "2018-10-25"
 
 **Generale**
 
-- [Pricing calculator for clusters ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
+- [Stimatore del costo per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
 
 <br />
 
 
 **API REST**
 
-- [API REST per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.bluemix.net/swagger)
-- [JSON API RES>T per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.bluemix.net/swagger-api-json)
+- [API REST per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.bluemix.net/swagger-api/)
+- [JSON API REST per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.bluemix.net/swagger-api/swagger.json)
 - [API REST per la registrazione nei cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [API REST per la gestione dei programmi di bilanciamento del carico dell'applicazione Ingress nei cluster![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 
@@ -74,7 +77,7 @@ lastupdated: "2018-10-25"
 
 **Glossari**
 
-- [Glossario {{site.data.keyword.Bluemix_notm}}](/docs/overview/glossary/index.html#glossary)
+- [Glossario {{site.data.keyword.Bluemix_notm}}](/docs/overview/glossary/glossary.html#glossary)
 - [Glossario Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Glossario Docker ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.docker.com/glossary/)
 
@@ -85,7 +88,8 @@ lastupdated: "2018-10-25"
 {: #registry}
 
 - [Documentazione {{site.data.keyword.registryshort_notm}}](/docs/services/Registry/index.html)
-- [API REST ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://registry.ng.bluemix.net/api/doc/)
+- [{{site.data.keyword.registryshort_notm}}API REST ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/apidocs/container-registry)
+- [API REST Vulnerability Advisor ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/apidocs/container-registry/va)
 
 <br />
 
@@ -93,7 +97,7 @@ lastupdated: "2018-10-25"
 ## Seguici
 {: #follow}
 
-- [Twitter ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://twitter.com/hashtag/ibmcontainers)
+- [Twitter ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://twitter.com/hashtag/IKS)
 - [Developers Community articles ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/tag/containers/)
 - [Microservices.TV ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/tv/microservices/)
 

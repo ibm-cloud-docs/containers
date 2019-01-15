@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -23,13 +26,14 @@ lastupdated: "2018-10-25"
 
 Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong_notm}} possano
 sfruttare l'alta disponibilità, il calcolo ad alte
-prestazione, la facile attivazione dei cluster per uno sviluppo più rapido e l'intelligenza artificiale di {{site.data.keyword.ibmwatson}}.
+prestazione, la facile attivazione dei cluster per uno sviluppo più rapido e l'intelligenza artificiale di {{site.data.keyword.ibmwatson}}. 
 {: shortdesc}
 
 ## La società di prestiti riduce i costi e accelera la conformità normativa
 {: #uc_mortgage}
 
 Un VP per il Risk Management di una società di prestiti residenziali elabora 70 milioni di record al giorno, ma il sistema locale è lento e anche impreciso. Le spese IT sono aumentate vertiginosamente perché l'hardware è diventato rapidamente obsoleto e non è stato utilizzato pienamente. Nell'attesa del provisioning hardware, la conformità alle normative rallentava. 
+{: shortdesc}
 
 Perché {{site.data.keyword.Bluemix_notm}}: per migliorare l'analisi dei rischi, la società ha cercato i servizi {{site.data.keyword.containerlong_notm}} e IBM Cloud Analytic per ridurre i costi, aumentare la disponibilità a livello mondiale e infine accelerare la conformità alle normative. Con {{site.data.keyword.containerlong_notm}} in più regioni, le loro applicazioni di analisi possono essere inserite in un contenitore e distribuite in tutto il mondo, migliorando la disponibilità e rispondendo alle normative locali. Tali distribuzioni sono accelerate con strumenti familiari open source, già parte di {{site.data.keyword.containerlong_notm}}.
 
@@ -57,9 +61,9 @@ Hanno anche accelerato la loro analisi dei rischi e la conformità. Le loro funz
 Il problema della società in questo momento è il ridimensionamento e il tempo di consegna. 
 
 Il loro ambiente attuale ha più di 7 anni, è installato in loco e ha una capacità di calcolo, archiviazione e I/O limitata.
-Gli aggiornamenti del server sono costosi e richiedono molto tempo.
-Gli aggiornamenti di software e applicazioni seguono un processo informale e non sono ripetibili.
-La griglia HPC effettiva è difficile da programmare. L'API è troppo complessa per i nuovi sviluppatori che vengono contrattati e richiede conoscenze non documentate.
+Gli aggiornamenti del server sono costosi e richiedono molto tempo. 
+Gli aggiornamenti di software e applicazioni seguono un processo informale e non sono ripetibili. 
+La griglia HPC effettiva è difficile da programmare. L'API è troppo complessa per i nuovi sviluppatori che vengono contrattati e richiede conoscenze non documentate. 
 Inoltre, il completamento dei principali aggiornamenti delle applicazioni richiede da 6 a 9 mesi. 
 
 **Modello di soluzione: servizi IO, archiviazione e calcolo su richiesta eseguiti nel cloud pubblico con accesso sicuro alle risorse aziendali in loco in base alle necessità**
@@ -97,6 +101,7 @@ Questa soluzione offre il vantaggio immediato della scalabilità. Utilizzando la
 {: #uc_payment_tech}
 
 Un responsabile dello sviluppo ha sviluppatori che utilizzano gli strumenti tradizionali installati in loco che rallentano la prototipazione nell'attesa di acquisti hardware.
+{: shortdesc}
 
 Perché {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} fornisce l'attivazione di risorse di calcolo utilizzando la tecnologia standard open source. Una volta che la società è passata a {{site.data.keyword.containerlong_notm}}, gli sviluppatori hanno accesso agli strumenti compatibili DevOps, come i contenitori portatili e facilmente condivisibili.
 
@@ -114,7 +119,7 @@ Tecnologie chiave:
 * Sono necessarie funzioni cognitive per rilevare le transazioni fraudolente in modi nuovi e più veloci.
 * Con il crescente numero di partner e delle loro transazioni, il traffico di strumenti aumenta, ma il budget di infrastruttura deve diminuire, massimizzando l'efficienza delle risorse.
 * Il loro debito tecnico è in crescita, a causa dell'incapacità di rilasciare software di qualità per stare al passo con le richieste del mercato.
-* I budget di spesa capitale sono sotto stretto controllo e l'IT ritiene di non disporre del budget o dello staff per creare scenari di test e preparazione con i propri sistemi interni. 
+* I budget di spesa capitale sono sotto stretto controllo e l'IT ritiene di non disporre del budget o dello staff per creare scenari di test e preparazione con i propri sistemi interni.
 * La sicurezza è sempre più una preoccupazione primaria e questa preoccupazione si aggiunge alla difficoltà di consegna causando ancora più ritardi.
 
 **Soluzione**

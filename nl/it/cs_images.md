@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -95,9 +98,8 @@ Quando crei un cluster, i segreti e i token del registro senza scadenza vengono 
 Ogni token deve essere memorizzato in un `imagePullSecret` Kubernetes per poter essere accessibile da un cluster Kubernetes
 quando distribuisci un'applicazione inserita in un contenitore. Quando il tuo cluster viene creato, {{site.data.keyword.containerlong_notm}} memorizza automaticamente i token per il registro globale (immagini pubbliche fornite da IBM) e il regionale nei segreti di pull dell'immagine Kubernetes. I segreti di pull dell'immagine sono aggiunti allo spazio dei nomi Kubernetes `default`, all'elenco predefinito dei segreti in `ServiceAccount` per tale spazio dei nomi e allo spazio dei nomi `kube-system`.
 
-**Nota:** utilizzando questa configurazione iniziale, puoi distribuire i contenitori da qualsiasi immagine disponibile in
-uno spazio dei nomi del tuo account {{site.data.keyword.Bluemix_notm}} allo
-spazio dei nomi **predefinito** del tuo cluster. Per distribuire un contenitore in altri spazi dei nomi del tuo cluster, o per utilizzare un'immagine memorizzata in un'altra regione {{site.data.keyword.Bluemix_notm}} o in un altro account {{site.data.keyword.Bluemix_notm}}, devi [creare il tuo proprio imagePullSecret per il cluster](#other).
+Utilizzando questa configurazione iniziale, puoi distribuire i contenitori da qualsiasi immagine disponibile in uno spazio dei nomi del tuo account {{site.data.keyword.Bluemix_notm}} allo spazio dei nomi **predefinito** del tuo cluster. Per distribuire un contenitore in altri spazi dei nomi del tuo cluster, o per utilizzare un'immagine memorizzata in un'altra regione {{site.data.keyword.Bluemix_notm}} o in un altro account {{site.data.keyword.Bluemix_notm}}, devi [creare il tuo proprio imagePullSecret per il cluster](#other).
+{: note}
 
 Vuoi rendere le tue credenziali del registro ancora più sicure? Chiedi al tuo amministratore cluster di [abilitare {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect) nel tuo cluster per crittografare i segreti Kubernetes nel cluster, come ad esempio `imagePullSecret` che memorizza le tue credenziali del registro.
 {: tip}
@@ -214,7 +216,7 @@ Puoi copiare l'imagePullSecret creato automaticamente per lo spazio dei nomi Kub
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
-   
+
    ```
    kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
@@ -350,14 +352,11 @@ Per creare un imagePullSecret:
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>Obbligatoria. Se ne hai uno, immetti il tuo indirizzo e-mail Docker. Se non hai uno, immetti un indirizzo e-mail fittizio, come ad esempio a@b.c. Questa e-mail è obbligatoria per creare un segreto Kubernetes,
-ma non viene utilizzata dopo la creazione.</td>
+    <td>Obbligatoria. Se ne hai uno, immetti il tuo indirizzo e-mail Docker. Se non hai uno, immetti un indirizzo e-mail fittizio, come ad esempio a@b.c. Questa e-mail è obbligatoria per creare un segreto Kubernetes, ma non viene utilizzata dopo la creazione.</td>
     </tr>
     </tbody></table>
 
-2.  Verifica che il segreto sia stato creato correttamente. Sostituisci
-<em>&lt;kubernetes_namespace&gt;</em> con il nome dello spazio in cui hai creato
-imagePullSecret.
+2.  Verifica che il segreto sia stato creato correttamente. Sostituisci <em>&lt;kubernetes_namespace&gt;</em> con il nome dello spazio in cui hai creato imagePullSecret.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>

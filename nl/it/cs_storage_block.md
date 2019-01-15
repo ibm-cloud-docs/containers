@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -32,7 +35,7 @@ Installa il plug-in {{site.data.keyword.Bluemix_notm}} Block Storage con un graf
 Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
 
 1. Assicurati che il tuo nodo di lavoro applichi la patch più recente per la tua versione secondaria. 
-   1. Elenca la versione patch corrente dei tuoi nodi di lavoro.
+   1. Elenca la versione patch corrente dei tuoi nodi di lavoro. 
       ```
       ibmcloud ks workers --cluster <cluster_name_or_ID>
       ```
@@ -42,7 +45,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.9.10_1523* 
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.10.11_1523* 
       ```
       {: screen}
       
@@ -50,19 +53,26 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
       
    2. Esamina il [changelog di versione](cs_versions_changelog.html#changelog) per trovare le modifiche incluse nella versione patch più recente. 
    
-   3. Applica la versione patch più recente ricaricando il tuo nodo di lavoro. Segui le istruzioni nel [comando ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) per ripianificare correttamente qualsiasi pod in esecuzione sul tuo nodo di lavoro prima di ricaricare il nodo.
+   3. Applica la versione patch più recente ricaricando il tuo nodo di lavoro. Segui le istruzioni nel [comando ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) per ripianificare correttamente qualsiasi pod in esecuzione sul tuo nodo di lavoro prima di ricaricare il nodo. Nota che durante il ricaricamento, la macchina del nodo di lavoro viene aggiornata con l'immagine più recente e i dati vengono eliminati se non sono [archiviati all'esterno del nodo di lavoro](cs_storage_planning.html#persistent_storage_overview).
 
-2. Attieniti alle [istruzioni](cs_integrations.html#helm) per installare il client Helm sulla tua macchina locale, installare il server Helm (tiller) nel tuo cluster e aggiungere il repository di grafici {{site.data.keyword.Bluemix_notm}} Helm al cluster dove vuoi utilizzare il plug-in {{site.data.keyword.Bluemix_notm}} Block Storage.
+2. Segui le [istruzioni](cs_integrations.html#helm) per installare il client Helm sulla tua macchina locale e per installare il server Helm (tiller) nel tuo cluster.
 
-   **Importante:** se utilizzi Helm versione 2.9 o successive, assicurati di avere installato tiller con un [account di servizio](cs_integrations.html#helm).
+   Se utilizzi Helm versione 2.9 o superiore, assicurati di avere installato tiller con un [account di servizio](cs_integrations.html#helm).
+    {: important}
+   
+3. Aggiungi il repository di grafici Helm {{site.data.keyword.Bluemix_notm}} al cluster in cui vuoi utilizzare il plug-in {{site.data.keyword.Bluemix_notm}} Block Storage.
+   ```
+   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   ```
+   {: pre}
 
-3. Aggiorna il repository Helm per richiamare la versione più recente di tutti i grafici Helm in questo repository.
+4. Aggiorna il repository Helm per richiamare la versione più recente di tutti i grafici Helm in questo repository.
    ```
    helm repo update
    ```
    {: pre}
 
-4. Installa il plug-in {{site.data.keyword.Bluemix_notm}} Block Storage. Quando installi il plug-in, al tuo cluster vengono aggiunte le classi di archiviazione blocchi predefinite.
+5. Installa il plug-in {{site.data.keyword.Bluemix_notm}} Block Storage. Quando installi il plug-in, al tuo cluster vengono aggiunte le classi di archiviazione blocchi predefinite.
    ```
    helm install ibm/ibmcloud-block-storage-plugin
    ```
@@ -112,7 +122,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
    ```
    {: screen}
 
-5. Verifica che l'installazione sia stata eseguita correttamente.
+6. Verifica che l'installazione sia stata eseguita correttamente.
    ```
    kubectl get pod -n kube-system | grep block
    ```
@@ -127,7 +137,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 
    L'installazione ha avuto esito positivo quando visualizzi un pod `ibmcloud-block-storage-plugin` e uno o più pod `ibmcloud-block-storage-driver`. Il numero di pod `ibmcloud-block-storage-driver` è uguale al numero di nodi di lavoro nel tuo cluster. Tutti i pod devono essere in uno stato **In esecuzione**.
 
-6. Verifica che le classi di archiviazione per l'archiviazione blocchi siano state aggiunte al tuo cluster.
+7. Verifica che le classi di archiviazione per l'archiviazione blocchi siano state aggiunte al tuo cluster.
    ```
    kubectl get storageclasses | grep block
    ```
@@ -146,7 +156,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
    ```
    {: screen}
 
-7. Ripeti questa procedura per ogni cluster in cui desideri eseguire il provisioning dell'archiviazione blocchi.
+8. Ripeti questa procedura per ogni cluster in cui desideri eseguire il provisioning dell'archiviazione blocchi.
 
 Ora puoi continuare a [creare una PVC](#add_block) per eseguire il provisioning dell'archiviazione blocchi per la tua applicazione.
 
@@ -198,7 +208,8 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 Se non vuoi eseguire il provisioning di {{site.data.keyword.Bluemix_notm}} Block Storage e farne uso nel tuo cluster, puoi disinstallare il grafico Helm.
 {: shortdesc}
 
-**Nota:** la rimozione del plug-in non rimuove PVC, PV o dati esistenti. Quando rimuovi il plug-in, tutti i pod e le serie di daemon correlati vengono rimossi dal tuo cluster. Non puoi eseguire il provisioning di una nuova archiviazione blocchi per il tuo cluster o utilizzare i PV e le PVC dell'archiviazione blocchi esistente una volta rimosso il plug-in.
+La rimozione del plug-in non rimuove PVC, PV o dati esistenti. Quando rimuovi il plug-in, tutti i pod e le serie di daemon correlati vengono rimossi dal tuo cluster. Non puoi eseguire il provisioning di una nuova archiviazione blocchi per il tuo cluster o utilizzare i PV e le PVC dell'archiviazione blocchi esistente una volta rimosso il plug-in.
+{: important}
 
 Prima di iniziare:
 - [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
@@ -250,7 +261,8 @@ Per rimuovere il plug-in:
 
 Ogni classe di archiviazione specifica il tipo di archiviazione blocchi di cui esegui il provisioning, compresi la dimensione disponibile, il file system IOPS e la politica di conservazione.  
 
-**Importante:** assicurati di scegliere la tua configurazione di archiviazione attentamente per disporre di sufficiente capacità per archiviare i tuoi dati. Dopo che hai eseguito il provisioning di uno specifico tipo di archiviazione utilizzando una classe di archiviazione, non puoi modificare la dimensione, il tipo, l'IOPS e la politica di conservazione per il dispositivo di archiviazione. Se hai bisogno di più archiviazione oppure di un'archiviazione con una configurazione differente, devi [creare una nuova istanza di archiviazione e copiare i dati](cs_storage_basics.html#update_storageclass) dalla vecchia istanza di archiviazione a quella nuova.
+Assicurati di scegliere attentamente la tua configurazione di archiviazione per disporre di sufficiente capacità per archiviare i tuoi dati. Dopo che hai eseguito il provisioning di uno specifico tipo di archiviazione utilizzando una classe di archiviazione, non puoi modificare la dimensione, il tipo, l'IOPS e la politica di conservazione per il dispositivo di archiviazione. Se hai bisogno di più archiviazione oppure di un'archiviazione con una configurazione differente, devi [creare una nuova istanza di archiviazione e copiare i dati](cs_storage_basics.html#update_storageclass) dalla vecchia istanza di archiviazione a quella nuova.
+{: important}
 
 1. Elenca le classi di archiviazione disponibili in {{site.data.keyword.containerlong}}.
     ```
@@ -283,8 +295,8 @@ Ogni classe di archiviazione specifica il tipo di archiviazione blocchi di cui e
    {: tip}
 
 3. Scegli il tipo di archiviazione blocchi di cui desideri eseguire il provisioning.
-   - **Classi di archiviazione bronze, silver e gold:** queste classi di archiviazione eseguono il provisioning di [archiviazione Endurance ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://knowledgelayer.softlayer.com/topic/endurance-storage). L'archiviazione Endurance ti consente di scegliere la dimensione dell'archiviazione in gigabyte in livelli IOPS predefiniti.
-   - **Classe di archiviazione personalizzata:** questa classe di archiviazione esegue il provisioning di [archiviazione Performance ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://knowledgelayer.softlayer.com/topic/performance-storage). Con l'archiviazione Performance, hai più controllo sulla dimensione dell'archiviazione e sull'IOPS.
+   - **Classi di archiviazione bronze, silver e gold:** queste classi di archiviazione eseguono il provisioning di [archiviazione Endurance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers). L'archiviazione Endurance ti consente di scegliere la dimensione dell'archiviazione in gigabyte in livelli IOPS predefiniti.
+   - **Classe di archiviazione personalizzata:** questa classe di archiviazione esegue il provisioning di [archiviazione Performance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-performance). Con l'archiviazione Performance, hai più controllo sulla dimensione dell'archiviazione e sull'IOPS.
 
 4. Scegli la dimensione e l'IOPS per la tua archiviazione blocchi. La dimensione e il numero di IOPS definiscono il numero totale di IOPS (operazioni di input/ output al secondo) che funge da indicatore della rapidità della tua archiviazione. Più IOPS totale ha la tua archiviazione e più rapidamente elabora le operazioni di lettura e scrittura.
    - **Classi di archiviazione bronze, silver e gold:** queste classi di archiviazione vengono fornite con un numero fisso di IOPS per gigabyte e ne viene eseguito il provisioning su dischi rigidi SSD. Il numero totale di IOPS dipende dalla dimensione dell'archiviazione che scegli. Puoi selezionare qualsiasi numero intero di gigabyte all'interno dell'intervallo di dimensioni consentite, come ad esempio 20 Gi, 256 Gi o 11854 Gi. Per determinare il numero totale di IOPS, devi moltiplicare l'IOPS con la dimensione selezionata. Ad esempio, se selezioni una dimensione di archiviazione blocchi di 1000Gi nella classe di archiviazione silver che viene fornita con 4 IOPS per GB, la tua archiviazione ha un totale di 4000 IOPS  
@@ -382,7 +394,8 @@ Ogni classe di archiviazione specifica il tipo di archiviazione blocchi di cui e
 Crea un'attestazione del volume persistente (o PVC, persistent volume claim) per [eseguire dinamicamente il provisioning](cs_storage_basics.html#dynamic_provisioning) di archiviazione blocchi per il tuo cluster. Il provisioning dinamico crea automaticamente il volume persistente (o PV, persistent volume) corrispondente e ordina il dispositivo di archiviazione effettivo nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).
 {:shortdesc}
 
-**Importante**: l'archiviazione blocchi viene fornita con una modalità di accesso `ReadWriteOnce`. Puoi montarla su un solo pod in un nodo di lavoro nel cluster alla volta.
+L'archiviazione blocchi viene fornita con una modalità di accesso `ReadWriteOnce`. Puoi montarla su un solo pod in un nodo di lavoro nel cluster alla volta.
+{: note}
 
 Prima di iniziare:
 - Se hai un firewall, [consenti l'accesso in uscita](cs_firewall.html#pvc) per gli intervalli IP dell'infrastruttura IBM Cloud (SoftLayer) delle zone in cui si trovano i tuoi cluster, in modo da poter creare le PVC.
@@ -463,15 +476,15 @@ Per aggiungere l'archiviazione blocchi:
        </tr>
        <tr>
        <td><code>metadata.labels.region</code></td>
-       <td>Specifica la regione in cui desideri eseguire il provisioning dell'archiviazione blocchi. Se specifichi la regione, devi specificare anche una zona. Se non specifichi una regione, o se la regione specificata non viene trovata, l'archiviazione viene creata nella stessa regione del tuo cluster. </br><strong>Nota:</strong> questa opzione è supportata solo con il plug-in IBM Cloud Block Storage versione 1.0.1 o successive. Per le versioni del plug-in meno recenti, se hai un cluster multizona, la zona in cui viene eseguito il provisioning della tua archiviazione è selezionata su una base round-robin per bilanciare equamente le richieste di volume tra tutte le zone. Se vuoi specificare la zona per la tua archiviazione, crea prima una [classe di archiviazione personalizzata](#multizone_yaml). Crea quindi una PVC on la tua classe di archiviazione personalizzata.</td>
+       <td>Specifica la regione in cui desideri eseguire il provisioning dell'archiviazione blocchi. Se specifichi la regione, devi specificare anche una zona. Se non specifichi una regione, o se la regione specificata non viene trovata, l'archiviazione viene creata nella stessa regione del tuo cluster. <p class="note">Questa opzione è supportata solo con il plug-in IBM Cloud Block Storage versione 1.0.1 o superiore. Per le versioni del plug-in meno recenti, se hai un cluster multizona, la zona in cui viene eseguito il provisioning della tua archiviazione è selezionata su una base round-robin per bilanciare equamente le richieste di volume tra tutte le zone. Se vuoi specificare la zona per la tua archiviazione, crea prima una [classe di archiviazione personalizzata](#multizone_yaml). Crea quindi una PVC on la tua classe di archiviazione personalizzata.</p></td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
-	<td>Specifica la zona in cui desideri eseguire il provisioning dell'archiviazione blocchi. Se specifichi la zona, devi specificare anche una regione. Se non specifichi una zona o se la zona specificata non viene trovata in un cluster multizona, la zona viene selezionata su una base round-robin. </br><strong>Nota:</strong> questa opzione è supportata solo con il plug-in IBM Cloud Block Storage versione 1.0.1 o successive. Per le versioni del plug-in meno recenti, se hai un cluster multizona, la zona in cui viene eseguito il provisioning della tua archiviazione è selezionata su una base round-robin per bilanciare equamente le richieste di volume tra tutte le zone. Se vuoi specificare la zona per la tua archiviazione, crea prima una [classe di archiviazione personalizzata](#multizone_yaml). Crea quindi una PVC on la tua classe di archiviazione personalizzata.</td>
+	<td>Specifica la zona in cui desideri eseguire il provisioning dell'archiviazione blocchi. Se specifichi la zona, devi specificare anche una regione. Se non specifichi una zona o se la zona specificata non viene trovata in un cluster multizona, la zona viene selezionata su una base round-robin. <p class="note">Questa opzione è supportata solo con il plug-in IBM Cloud Block Storage versione 1.0.1 o superiore. Per le versioni del plug-in meno recenti, se hai un cluster multizona, la zona in cui viene eseguito il provisioning della tua archiviazione è selezionata su una base round-robin per bilanciare equamente le richieste di volume tra tutte le zone. Se vuoi specificare la zona per la tua archiviazione, crea prima una [classe di archiviazione personalizzata](#multizone_yaml). Crea quindi una PVC on la tua classe di archiviazione personalizzata.</p></td>
 	</tr>
         <tr>
         <td><code>spec.resources.requests.storage</code></td>
-        <td>Immetti la dimensione dell'archiviazione blocchi, in gigabyte (Gi). </br></br><strong>Nota: </strong> dopo che è stato eseguito il provisioning della tua archiviazione, non puoi modificare la dimensione della tua archiviazione blocchi. Assicurati di specificare una dimensione che corrisponda alla quantità di dati che desideri memorizzare. </td>
+        <td>Immetti la dimensione dell'archiviazione blocchi, in gigabyte (Gi). Una volta eseguito il provisioning dell'archiviazione, non puoi modificare la dimensione della tua archiviazione blocchi. Assicurati di specificare una dimensione che corrisponda alla quantità di dati che desideri memorizzare. </td>
         </tr>
         <tr>
         <td><code>spec.resources.requests.iops</code></td>
@@ -831,10 +844,11 @@ Se hai un'applicazione con stato, come ad esempio un database, puoi creare delle
 **Cosa devo sapere quando aggiungo l'archiviazione blocchi a una serie con stato?** </br>
 Per aggiungere l'archiviazione a una serie con stato, devi specificare la tua configurazione di archiviazione nella sezione `volumeClaimTemplates` del file YAML della serie con stato. La sezione `volumeClaimTemplates` è la base per la tua PVC e può includere la classe di archiviazione e la dimensione o l'IOPS della tua archiviazione blocchi di cui desideri eseguire il provisioning. Tuttavia, se vuoi includere etichette in `volumeClaimTemplates`, Kubernetes non le include durante la creazione della PVC. Devi invece aggiungere le etichette direttamente alla tua serie con stato.
 
-**Importante:** non puoi distribuire due serie con stato contemporaneamente. Se tenti di creare una serie con stato prima ne venga completamente distribuita un'altra, la distribuzione della tua serie con stato potrebbe portare a risultati imprevisti.
+Non puoi distribuire due serie con stato contemporaneamente. Se tenti di creare una serie con stato prima ne venga completamente distribuita un'altra, la distribuzione della tua serie con stato potrebbe portare a risultati imprevisti.
+{: important}
 
 **Come posso creare la mia serie con stato in una zona specifica?** </br>
-In un cluster multizona, puoi specificare la zona e la regione in cui vuoi creare la serie con stato nella sezione `spec.selector.matchLabels` e `spec.template.metadata.labels` del file YAML della serie con stato. In alternativa, puoi aggiungere queste etichette a una [classe di archiviazione personalizzata](cs_storage_basics.html#customized_storageclass) e utilizzare questa classe di archiviazione nella sezione `volumeClaimTemplates` della tua serie con stato. 
+In un cluster multizona, puoi specificare la zona e la regione in cui vuoi creare la serie con stato nella sezione `spec.selector.matchLabels` e `spec.template.metadata.labels` del file YAML della serie con stato. In alternativa, puoi aggiungere queste etichette a una [classe di archiviazione personalizzata](cs_storage_basics.html#customized_storageclass) e utilizzare questa classe di archiviazione nella sezione `volumeClaimTemplates` della tua serie con stato.
 
 **Quali opzioni ho per aggiungere l'archiviazione blocchi a una serie con stato?** </br>
 Se vuoi creare automaticamente la tua PVC quando crei la serie con stato, utilizza il [provisioning dinamico](#dynamic_statefulset). Puoi anche scegliere di eseguire il [pre-provisioning delle PVC o utilizzare PVC esistenti](#static_statefulset) con la tua serie con stato.  
@@ -974,7 +988,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.podManagementPolicy</code></td>
-    <td style="text-align:left">Immetti la politica di gestione pod che vuoi utilizzare per la tua serie con stato. Scegli tra le seguenti opzioni: <ul><li><strong>OrderedReady: </strong>con questa opzione, le repliche della serie con stato vengono distribuite una dopo l'altra. Ad esempio, se hai distribuito 3 repliche, Kubernetes crea la PVC per la prima replica, attende che la PVC venga collegata, distribuisce la replica della serie con stato e monta la PVC sulla replica. Al termine della distribuzione, viene distribuita la seconda replica. Per ulteriori informazioni su questa opzione, vedi [Gestione pod OrderedReady ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel: </strong>con questa opzione, la distribuzione di tutte le repliche della serie con stato viene avviata contemporaneamente. Se la tua applicazione supporta la distribuzione parallela di repliche, utilizza questa opzione per risparmiare tempo di distribuzione per le tue PVC e repliche della serie con stato.</li></ul></td>
+    <td style="text-align:left">Immetti la politica di gestione pod che vuoi utilizzare per la tua serie con stato. Scegli tra le seguenti opzioni: <ul><li><strong>OrderedReady: </strong>con questa opzione, le repliche della serie con stato vengono distribuite una dopo l'altra. Ad esempio, se hai distribuito 3 repliche, Kubernetes crea la PVC per la prima replica, attende che la PVC venga collegata, distribuisce la replica della serie con stato e monta la PVC sulla replica. Al termine della distribuzione, viene distribuita la seconda replica. Per ulteriori informazioni su questa opzione, vedi [Gestione pod OrderedReady ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel: </strong>con questa opzione, la distribuzione di tutte le repliche della serie con stato viene avviata contemporaneamente. Se la tua applicazione supporta la distribuzione parallela di repliche, utilizza questa opzione per risparmiare tempo di distribuzione per le tue PVC e repliche della serie con stato. </li></ul></td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
@@ -1039,7 +1053,8 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
    - **`metadata.name`**: immetti il `<statefulset_name>` che hai usato nel passo precedente.
    - **`spec.replicas`**: immetti il numero di repliche che vuoi creare per la tua serie con stato. Il numero di repliche deve essere uguale al numero di PVC create in precedenza.
 
-   **Nota:** se hai creato le tue PVC in zone diverse, non includere un'etichetta di regione o zona nella serie con stato.
+   Se hai creato le tue PVC in zone diverse, non includere un'etichetta di regione o zona nella serie con stato.
+   {: note}
 
 3. Verifica che le PVC siano utilizzate nei pod di replica della serie con stato.
    1. Elenca i pod nel tuo cluster. Identifica i pod che appartengono alla tua serie con stato.
@@ -1072,6 +1087,163 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 <br />
 
 
+## Modifica della dimensione e dell'IOPS del tuo dispositivo di archiviazione esistente
+{: #change_storage_configuration}
+
+Se vuoi modificare la capacità o le prestazioni di archiviazione, puoi modificare il tuo volume esistente.
+{: shortdesc}
+
+Per domande sulla fatturazione e per trovare i passi su come utilizzare la console {{site.data.keyword.Bluemix_notm}} per modificare la tua archiviazione, vedi [Espansione della capacità di Block Storage](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). Se utilizzi la console {{site.data.keyword.Bluemix_notm}} per modificare l'archiviazione, devi seguire i passi 4-7 in questo argomento per completare la modifica.
+{: tip}
+
+1. Elenca le PVC nel tuo cluster e prendi nota del nome del PV associato dalla colonna **VOLUME**. 
+   ```
+   kubectl get pvc
+   ```
+   {: pre}
+   
+   Output di esempio: 
+   ```
+   NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
+   ```
+   {: screen}
+   
+2. Richiama il **VolumeID** e il **StorageType** dell'archiviazione file fisica associata alla tua PVC elencando i dettagli del PV a cui è collegata la PVC. Sostituisci `<pv_name>` con il nome del PV che hai richiamato nel passo precedente. Il tipo di archiviazione è mostrato nella sezione **Labels** e l'ID volume nella sezione **Source** > **Options** dell'output della CLI. 
+   ```
+   kubectl describe pv <pv_name>
+   ```
+   {: pre}
+   
+   Output di esempio: 
+   ```
+   Name:            pvc-c1839152-c333-11e8-b6a8-46ad53f2579a
+   Labels:          CapacityGb=24
+                    Datacenter=dal13
+                    IOPS=4
+                    StorageType=Endurance
+                    billingType=hourly
+                    failure-domain.beta.kubernetes.io/region=us-south
+                    failure-domain.beta.kubernetes.io/zone=dal13
+                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
+   ...
+   Source:
+       Type:       FlexVolume (a generic volume resource that is provisioned/attached using an exec based plugin)
+       Driver:     ibm/ibmc-block
+       FSType:     ext4
+       SecretRef:  <nil>
+       ReadOnly:   false
+       Options:    map[volumeName:pvc-c1839152-c333-11e8-b6a8-46ad53f2579a Lun:1 TargetPortal:161.26.114.56 VolumeID:51889685]
+   ...
+   ```
+   {: screen}
+
+3. Modifica la dimensione o l'IOPS del volume nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). 
+
+   Esempio per l'archiviazione Performance: 
+   ```
+   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-iops <iops>
+   ```
+   {: pre}
+   
+   Esempio per l'archiviazione Endurance: 
+   ```
+   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-tier <iops>
+   ```
+   {: pre}
+   
+   <table>
+   <caption>Descrizione dei componenti del comando</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>&lt;volume_ID&gt;</code></td>
+   <td>Immetti l'ID del volume che hai richiamato in precedenza.</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-size&gt;</code></td>
+   <td>Immetti la nuova dimensione in gigabyte (Gi) per il tuo volume. Per le dimensioni valide, vedi [Decisioni relative alla configurazione dell'archiviazione blocchi](#predefined_storageclass). La dimensione che immetti deve essere maggiore o uguale alla dimensione corrente del tuo volume. Se non specifichi una nuova dimensione, viene utilizzata la dimensione corrente del volume. </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-iops&gt;</code></td>
+   <td>Solo per l'archiviazione Performance. Immetti il nuovo numero di IOPS che desideri. Per l'IOPS valido, vedi [Decisioni relative alla configurazione dell'archiviazione blocchi](#predefined_storageclass). Se non specifichi l'IOPS, viene utilizzato l'IOPS corrente. <p class="note">Se il rapporto IOPS/GB originale per il volume è inferiore a 0,3, il nuovo rapporto IOPS/GB deve essere inferiore a 0,3. Se il rapporto IOPS/GB originale per il volume è maggiore o uguale a 0,3, il nuovo rapporto IOPS/GB per il volume deve essere maggiore o uguale a 0,3.</p> </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-tier&gt;</code></td>
+   <td>Solo per l'archiviazione Endurance. Immetti il nuovo numero di IOPS per GB che desideri. Per l'IOPS valido, vedi [Decisioni relative alla configurazione dell'archiviazione blocchi](#predefined_storageclass). Se non specifichi l'IOPS, viene utilizzato l'IOPS corrente. <p class="note">Se il rapporto IOPS/GB originale per il volume è inferiore a 0,25, il nuovo rapporto IOPS/GB deve essere inferiore a 0,25. Se il rapporto IOPS/GB originale per il volume è maggiore o uguale a 0,25, il nuovo rapporto IOPS/GB per il volume deve essere maggiore o uguale a 0,25.</p> </td>
+   </tr>
+   </tbody>
+   </table>
+   
+   Output di esempio: 
+   ```
+   Order 31020713 was placed successfully!.
+   > Storage as a Service
+
+   > 40 GBs
+
+   > 2 IOPS per GB
+
+   > 20 GB Storage Space (Snapshot Space)
+
+   You may run 'ibmcloud sl block volume-list --order 12345667' to find this block volume after it is ready.
+   ```
+   {: screen}
+   
+4. Correggi la configurazione PV per aggiungere l'annotazione `autofix-resizefs`. Questa annotazione ridimensiona automaticamente il file system quando il volume viene montato su un pod.  
+   ```
+   kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
+   ```
+   {: pre}
+   
+5. Elenca tutti i pod che utilizzano la PVC. 
+   ```
+   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+   ```
+   {: pre}
+   
+   I pod vengono restituiti nel formato: `<pod_name>: <pvc_name>`. 
+   
+6. Se hai un pod che utilizza la PVC, riavvialo rimuovendo il pod e lasciando che Kubernetes lo ricrei. Se hai creato un pod senza utilizzare una distribuzione o una serie di repliche Kubernetes, devi ricreare il pod dopo averlo rimosso.
+   Per richiamare il file YAML che è stato utilizzato per creare il tuo pod, esegui `kubectl get pod <pod_name> -o yaml >pod.yaml`. 
+   {: tip}
+   ```
+   kubectl delete pod <pod_name>
+   ```
+   {: pre}
+   
+7. Se hai modificato la dimensione del tuo volume, accedi al pod per verificare la nuova dimensione. 
+   1. Ottieni il percorso di montaggio del volume che hai usato nel tuo pod per accedere al tuo volume.
+      ```
+      kubectl describe pod <pod_name>
+      ```
+      {: pre}
+      
+      Il percorso di montaggio del volume è mostrato nella sezione **Containers** > **block** > **Mounts** dell'output della CLI.
+   2. Accedi al tuo pod. 
+      ```
+      kubectl exec -it <pod_name> bash
+      ```
+      {: pre}
+      
+   3. Mostra le statistiche di utilizzo del disco e trova il percorso di montaggio per il volume che hai richiamato in precedenza. Verifica che la colonna **Size** mostri la nuova dimensione del tuo volume.
+      ```
+      df -h
+      ```
+      {: pre}
+      
+      Output di esempio: 
+      ```
+      Filesystem                                     Size  Used Avail Use% Mounted on
+      overlay                                         99G  3.2G   91G   4% /
+      tmpfs                                           64M     0   64M   0% /dev
+      tmpfs                                          7.9G     0  7.9G   0% /sys/fs/cgroup
+      /dev/mapper/3600a098038304471562b4c4743384e4d   40G   44M   23G   1% /test
+      ```
+      {: screen}
+
 
 ## Backup e ripristino di dati
 {: #backup_restore}
@@ -1082,15 +1254,15 @@ Esamina le seguenti opzioni di backup e ripristino per la tua archiviazione bloc
 
 <dl>
   <dt>Configura istantanee periodiche</dt>
-  <dd><p>Puoi [configurare delle istantanee periodiche per la tua archiviazione blocchi](/docs/infrastructure/BlockStorage/snapshots.html#snapshots), che è un'immagine di sola lettura che acquisisce lo stato dell'istanza in un punto nel tempo. Per archiviare l'istantanea, devi richiedere lo spazio per l'istantanea nella tua archiviazione blocchi. Le istantanee vengono archiviate nell'istanza di archiviazione esistente all'interno della stessa zona. Puoi ripristinare i dati da un'istantanea se un utente rimuove accidentalmente dati importanti dal volume. <strong>Nota</strong>: se hai un account dedicato, devi <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">aprire un ticket di supporto</a>.</br></br> <strong>Per creare un'istantanea per il tuo volume:</strong><ol><li>[Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).</li><li>Accedi alla CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>Puoi [configurare delle istantanee periodiche per la tua archiviazione blocchi](/docs/infrastructure/BlockStorage/snapshots.html#snapshots), che è un'immagine di sola lettura che acquisisce lo stato dell'istanza in un punto nel tempo. Per archiviare l'istantanea, devi richiedere lo spazio per l'istantanea nella tua archiviazione blocchi. Le istantanee vengono archiviate nell'istanza di archiviazione esistente all'interno della stessa zona. Puoi ripristinare i dati da un'istantanea se un utente rimuove accidentalmente dati importanti dal volume. <strong>Nota</strong>: se hai un account dedicato, devi <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">aprire un caso di supporto</a>.</br></br> <strong>Per creare un'istantanea per il tuo volume:</strong><ol><li>[Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).</li><li>Accedi alla CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>Elenca i PV esistenti nel tuo cluster. <pre class="pre"><code>    kubectl get pv
     </code></pre></li><li>Ottieni i dettagli del PV per cui vuoi creare uno spazio per l'istantanea e prendi nota dell'ID volume, della dimensione e dell'IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> La dimensione e l'IOPS vengono visualizzati nella sezione <strong>Etichette</strong> del tuo output della CLI. Per trovare l'ID volume, controlla l'annotazione <code>ibm.io/network-storage-id</code> del tuo output della CLI. </li><li>Crea la dimensione dell'istantanea per il tuo volume esistente con i parametri che hai richiamato nel passo precedente. <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Attendi che la dimensione dell'istantanea venga creata. <pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>La dimensione dell'istantanea viene fornita correttamente quando la <strong>Dimensione istantanea (GB)</strong> nel tuo output della CLI viene modificata da 0 con la dimensione che hai ordinato. </li><li>Crea l'istantanea per il tuo volume e prendi nota dell'ID dell'istantanea che ti viene creata. <pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verifica che l'istantanea sia stata creata correttamente. <pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Per ripristinare i dati da un'istantanea in un volume esistente: </strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Replica le istantanee in un'altra zona</dt>
  <dd><p>Per proteggere i tuoi dati da un malfunzionamento dell'ubicazione, puoi [replicare le istantanee](/docs/infrastructure/BlockStorage/replication.html#replicating-data) in un'istanza di archiviazione blocchi configurata in un'altra zona. I dati possono essere replicati solo dall'archiviazione primaria a quella di backup. Non puoi montare un'istanza di archiviazione blocchi replicata in un cluster. Quando la tua archiviazione primaria non funziona più, puoi impostare manualmente la tua archiviazione di backup replicata in modo che sia quella primaria. Quindi, puoi montarla nel tuo cluster. Una volta ripristinata la tua archiviazione primaria, puoi ripristinare i dati dall'archiviazione di backup. <strong>Nota</strong>: se hai un account dedicato, non puoi replicare le istantanee in un'altra zona.</p></dd>
  <dt>Duplica l'archiviazione</dt>
- <dd><p>Puoi [duplicare la tua istanza di archiviazione blocchi](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume) nella stessa zona dell'istanza di archiviazione originale. Un duplicato contiene gli stessi dati dell'istanza di archiviazione originale nel momento in cui è stato creato il duplicato. A differenza delle repliche, puoi utilizzare il duplicato come un'istanza di archiviazione indipendente dall'originale. Per eseguire la duplicazione, configura innanzitutto le istantanee per il volume. <strong>Nota</strong>: se hai un account dedicato, devi <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">aprire un ticket di supporto</a>.</p></dd>
+ <dd><p>Puoi [duplicare la tua istanza di archiviazione blocchi](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume) nella stessa zona dell'istanza di archiviazione originale. Un duplicato contiene gli stessi dati dell'istanza di archiviazione originale nel momento in cui è stato creato il duplicato. A differenza delle repliche, puoi utilizzare il duplicato come un'istanza di archiviazione indipendente dall'originale. Per eseguire la duplicazione, configura innanzitutto le istantanee per il volume. <strong>Nota</strong>: se hai un account dedicato, devi <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">aprire un caso di supporto</a>.</p></dd>
   <dt>Esegui il backup dei dati in {{site.data.keyword.cos_full}}</dt>
-  <dd><p>Puoi utilizzare l'[**immagine ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) per avviare un pod di backup e ripristino nel tuo cluster. Questo pod contiene uno script per eseguire un backup una tantum o periodico per qualsiasi attestazione del volume persistente (PVC) nel tuo cluster. I dati vengono archiviati nella tua istanza {{site.data.keyword.cos_full}} che hai configurato in una zona.</p><strong>Nota:</strong> l'archiviazione blocchi viene montata con una modalità di accesso RWO. Questo accesso consente di montare un solo pod nell'archiviazione blocchi alla volta. Per eseguire il backup dei tuoi dati, devi smontare il pod dell'applicazione dall'archiviazione, montarlo nel tuo pod di backup, eseguire il backup dei dati e rimontare l'archiviazione nel tuo pod dell'applicazione. </br></br>
+  <dd><p>Puoi utilizzare l'[**immagine ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) per avviare un pod di backup e ripristino nel tuo cluster. Questo pod contiene uno script per eseguire un backup una tantum o periodico per qualsiasi attestazione del volume persistente (PVC) nel tuo cluster. I dati vengono archiviati nella tua istanza {{site.data.keyword.cos_full}} che hai configurato in una zona.</p><p class="note">L'archiviazione blocchi viene montata con una modalità di accesso RWO. Questo accesso consente di montare un solo pod nell'archiviazione blocchi alla volta. Per eseguire il backup dei tuoi dati, devi smontare il pod dell'applicazione dall'archiviazione, montarlo nel tuo pod di backup, eseguire il backup dei dati e rimontare l'archiviazione nel tuo pod dell'applicazione. </p>
 Per rendere i tuoi dati ancora più disponibili e proteggere la tua applicazione da un errore di zona, configura una seconda istanza {{site.data.keyword.cos_short}} e replica i dati tra le varie zone. Se devi ripristinare i dati dalla tua istanza {{site.data.keyword.cos_short}}, utilizza lo script di ripristino fornito con l'immagine.</dd>
 <dt>Copia i dati nei/dai pod e contenitori</dt>
 <dd><p>Puoi utilizzare il comando `kubectl cp` [![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) per copiare i file e le directory in/da pod o specifici contenitori nel tuo cluster.</p>
@@ -1125,7 +1297,7 @@ Per rendere i tuoi dati ancora più disponibili e proteggere la tua applicazione
 </tr>
 <tr>
 <td>Tipo</td>
-<td>[Archiviazione Endurance ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Archiviazione Endurance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1171,7 +1343,7 @@ Per rendere i tuoi dati ancora più disponibili e proteggere la tua applicazione
 </tr>
 <tr>
 <td>Tipo</td>
-<td>[Archiviazione Endurance ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Archiviazione Endurance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1216,7 +1388,7 @@ Per rendere i tuoi dati ancora più disponibili e proteggere la tua applicazione
 </tr>
 <tr>
 <td>Tipo</td>
-<td>[Archiviazione Endurance ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Archiviazione Endurance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1261,7 +1433,7 @@ Per rendere i tuoi dati ancora più disponibili e proteggere la tua applicazione
 </tr>
 <tr>
 <td>Tipo</td>
-<td>[Performance ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://knowledgelayer.softlayer.com/topic/performance-storage)</td>
+<td>[Prestazioni](/docs/infrastructure/BlockStorage/index.html#provisioning-with-performance)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1302,7 +1474,8 @@ Per creare la tua classe di archiviazione personalizzata, vedi [Personalizzazion
 ### Specifica della zona per i cluster a multizona
 {: #multizone_yaml}
 
-**Nota:** utilizza la classe di archiviazione personalizzata se usi il plug-in {{site.data.keyword.Bluemix_notm}} Block Storage versione 1.0.0 o se vuoi eseguire [in modo statico il provisioning dell'archiviazione blocchi](#existing_block) in una zona specifica. In tutti gli altri casi, [specifica la zona direttamente nella tua PVC](#add_block).  
+Utilizza la classe di archiviazione personalizzata se usi il plug-in {{site.data.keyword.Bluemix_notm}} Block Storage versione 1.0.0 o se vuoi eseguire [il provisioning dell'archiviazione blocchi in modo statico](#existing_block) in una zona specifica. In tutti gli altri casi, [specifica la zona direttamente nella tua PVC](#add_block).
+{: note}
 
 Il seguente file `.yaml` personalizza una classe di archiviazione basata sulla classe di archiviazione di non conservazione `ibm-block-silver`: il `type` è `"Endurance"`, l'`iopsPerGB` è `4`, il `sizeRange` è `"[20-12000]Gi"` e la `reclaimPolicy` è impostata su `"Delete"`. La zona viene specificata come `dal12`. Puoi esaminare le informazioni precedenti nelle classi di archiviazione `ibmc` per un ausilio nella scelta di valori accettabili per esse, </br>
 

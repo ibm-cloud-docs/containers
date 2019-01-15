@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -25,8 +28,8 @@ Diversi casi di utilizzano mostrano i punti di forza dei servizi {{site.data.key
 * Intelligenza artificiale e machine learning
 * Dati e archiviazione
 * DevOps
-
 {: shortdesc}
+
 <table summary="La tabella mostra i casi di utilizzo. Le righe devono essere lette da sinistra a destra, con le icone che rappresentano ciascun settore nella colonna uno e la descrizione nella colonna due.">
 <caption>Casi di utilizzo</caption>
   <thead>

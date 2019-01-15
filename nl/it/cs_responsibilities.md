@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,7 +50,7 @@ Controlla le responsabilità che condividi con IBM per gestire i tuoi cluster.
 - [Aggiunta o rimozione della capacità del cluster ridimensionando i tuoi pool di nodi di lavoro](cs_clusters.html#add_workers)
 - [Abilitazione dello spanning delle VLAN e mantenimento del bilanciamento dei pool di nodi di lavoro multizona tra le zone](cs_clusters_planning.html#ha_clusters)
 - [Creazione delle VLAN pubblica e privata nell'infrastruttura IBM Cloud (SoftLayer) per l'isolamento di rete del tuo cluster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Verifica che tutti i nodi di lavoro dispongano di connettività di rete all'URL del master Kubernetes](cs_firewall.html#firewall) <p>**Nota**: se un nodo di lavoro ha sia una VLAN pubblica che privata, viene configurata la connettività di rete. Se i nodi di lavoro sono impostati solo con una VLAN privata, devi configurare una soluzione alternativa per la connettività di rete. Per ulteriori informazioni, vedi [Pianificazione della rete cluster solo privata](cs_network_cluster.html#private_vlan). </p>
+- [Verifica che tutti i nodi di lavoro dispongano di connettività di rete all'URL del master Kubernetes](cs_firewall.html#firewall) <p class="note">Se un nodo di lavoro ha sia una VLAN pubblica che privata, viene configurata la connettività di rete. Se i nodi di lavoro sono impostati solo con una VLAN privata, devi configurare una soluzione alternativa per la connettività di rete. Per ulteriori informazioni, vedi [Pianificazione della rete cluster solo privata](cs_network_cluster.html#private_vlan). </p>
 - [Aggiornamento del kube-apiserver master quando sono disponibili aggiornamenti alla versione di Kubernetes](cs_cluster_update.html#master)
 - [Mantenere i nodi di lavoro aggiornati alle versioni patch, principale e secondaria](cs_cluster_update.html#worker_node)
 - [Ripristino dei nodi di lavoro con problemi eseguendo i comandi `kubectl`, come `cordon` o `drain`, ed eseguendo i comandi `ibmcloud ks`, come `reboot`, `reload` o `delete`](cs_cli_reference.html#cs_worker_reboot)

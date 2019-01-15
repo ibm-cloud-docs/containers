@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 
 ---
@@ -14,6 +14,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Autorizzazioni di accesso utente
@@ -24,24 +27,27 @@ lastupdated: "2018-10-25"
 Quando [assegni le autorizzazioni del cluster](cs_users.html), può essere difficile valutare quale ruolo devi assegnare a un utente. Utilizza le tabelle riportate nelle seguenti sezioni per determinare il livello minimo di autorizzazioni necessarie per eseguire attività comuni in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-## Piattaforma IAM e RBAC Kubernetes
+## Piattaforma {{site.data.keyword.Bluemix_notm}} IAM e RBAC Kubernetes
 {: #platform}
 
-{{site.data.keyword.containerlong_notm}} è configurato per utilizzare i ruoli {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management). I ruoli della piattaforma IAM determinano le azioni che gli utenti possono eseguire su un cluster. A ogni utente a cui viene assegnato un ruolo della piattaforma IAM viene assegnato automaticamente anche un ruolo RBAC (role-based access control) di Kubernetes corrispondente nello spazio dei nomi predefinito. Inoltre, i ruoli della piattaforma IAM impostano automaticamente le autorizzazioni di infrastruttura di base per gli utenti. Per impostare le politiche IAM, vedi [Assegnazione delle autorizzazioni della piattaforma IAM](cs_users.html#platform). Per ulteriori informazioni sui ruoli RBAC, vedi [Assegnazione delle autorizzazioni RBAC](cs_users.html#role-binding).
+{{site.data.keyword.containerlong_notm}} è configurato per utilizzare i ruoli {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management). I ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM determinano le azioni che gli utenti possono eseguire su un cluster. A ogni utente a cui viene assegnato un ruolo della piattaforma viene assegnato automaticamente anche un ruolo RBAC (role-based access control) di Kubernetes corrispondente nello spazio dei nomi predefinito. Inoltre, i ruoli della piattaforma impostano automaticamente le autorizzazioni di infrastruttura di base per gli utenti. Per impostare le politiche, vedi [Assegnazione delle autorizzazioni della piattaforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform). Per ulteriori informazioni sui ruoli RBAC, vedi [Assegnazione delle autorizzazioni RBAC](cs_users.html#role-binding).
+{: shortdesc}
 
-La seguente tabella mostra le autorizzazioni di gestione del cluster concesse da ciascun ruolo della piattaforma IAM e le autorizzazioni delle risorse Kubernetes per i ruoli RBAC corrispondenti.
+La seguente tabella mostra le autorizzazioni di gestione del cluster concesse da ciascun ruolo della piattaforma e le autorizzazioni delle risorse Kubernetes per i ruoli RBAC corrispondenti.
 
-<table>
-  <tr>
-    <th>Ruolo della piattaforma IAM</th>
+<table summary="La tabella mostra le autorizzazioni utente per i ruoli della piattaforma IAM e le politiche RBAC corrispondenti. Le righe devono essere lette da sinistra a destra, con il ruolo della piattaforma IAM nella colonna uno, l'autorizzazione cluster nella colonna due e il ruolo RBAC corrispondente nella colonna tre.">
+<caption>Autorizzazioni di gestione del cluster per piattaforma e ruolo RBAC</caption>
+<thead>
+    <th>Ruolo piattaforma</th>
     <th>Autorizzazioni di gestione del cluster</th>
     <th>Ruolo RBAC corrispondente e autorizzazioni delle risorse</th>
-  </tr>
+</thead>
+<tbody>
   <tr>
     <td>**Visualizzatore**</td>
     <td>
       Cluster:<ul>
-        <li>Visualizzare il nome e l'indirizzo e-mail del proprietario della chiave API IAM per un gruppo di risorse e una regione</li>
+        <li>Visualizzare il nome e l'indirizzo e-mail del proprietario della chiave API {{site.data.keyword.Bluemix_notm}} IAM per un gruppo di risorse e una regione</li>
         <li>Se il tuo account {{site.data.keyword.Bluemix_notm}} utilizza credenziali diverse per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer), visualizzare il nome utente dell'infrastruttura</li>
         <li>Elencare o visualizzare i dettagli per i cluster, i nodi di lavoro , i pool di nodi di lavoro, i servizi in un cluster e i webhook</li>
         <li>Visualizzare lo stato di spanning della VLAN per l'account dell'infrastruttura</li>
@@ -106,7 +112,7 @@ La seguente tabella mostra le autorizzazioni di gestione del cluster concesse da
         <li>Crittografare i segreti Kubernetes utilizzando {{site.data.keyword.keymanagementservicefull}}</li>
         <li>Impostare la chiave API per l'account {{site.data.keyword.Bluemix_notm}} per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) collegato</li>
         <li>Impostare, visualizzare e rimuovere le credenziali dell'infrastruttura per l'account {{site.data.keyword.Bluemix_notm}} per accedere a un portfolio dell'infrastruttura IBM Cloud (SoftLayer) diverso</li>
-        <li>Assegnare e modificare i ruoli della piattaforma IAM per altri utenti esistenti nell'account</li>
+        <li>Assegnare e modificare i ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM per altri utenti esistenti nell'account</li>
         <li>Quando impostato per tutte le istanze (cluster) {{site.data.keyword.containerlong_notm}} in tutte le regioni: elencare tutte le VLAN disponibili nell'account</ul>
       Registrazione:<ul>
         <li>Creare e aggiornare le configurazioni di inoltro log per il tipo `kube-audit`</li>
@@ -116,7 +122,7 @@ La seguente tabella mostra le autorizzazioni di gestione del cluster concesse da
         <li>Elencare o visualizzare i dettagli per i segreti ALB in un cluster</li>
         <li>Distribuire un certificato dalla tua istanza {{site.data.keyword.cloudcerts_long_notm}} a un ALB</li>
         <li>Aggiornare o rimuovere i segreti ALB da un cluster</li></ul>
-      <strong>Nota</strong>: per creare risorse come macchine, VLAN e sottoreti, gli utenti Amministratore devono disporre del ruolo di infrastruttura **Super utente**.
+      <p class="note">Per creare risorse come macchine, VLAN e sottoreti, gli utenti Amministratore devono disporre del ruolo dell'infrastruttura **Super utente**.</p>
     </td>
     <td>Il ruolo cluster <code>cluster-admin</code> viene applicato mediante il bind del ruolo cluster <code>ibm-admin</code>, che fornisce le seguenti autorizzazioni:
       <ul><li>Accesso in lettura/scrittura alle risorse in ogni spazio dei nomi</li>
@@ -125,6 +131,7 @@ La seguente tabella mostra le autorizzazioni di gestione del cluster concesse da
       <li>Creare una risorsa Ingress che rende le applicazioni disponibili al pubblico</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 
@@ -132,15 +139,18 @@ La seguente tabella mostra le autorizzazioni di gestione del cluster concesse da
 ## Ruoli Cloud Foundry
 {: #cloud-foundry}
 
-I ruoli di Cloud Foundry concedono l'accesso a organizzazioni e spazi all'interno dell'account. Per visualizzare l'elenco dei servizi basati su Cloud Foundry in {{site.data.keyword.Bluemix_notm}}, esegui `ibmcloud service list`. Per ulteriori informazioni, vedi tutti i [ruoli disponibili per l'organizzazione e lo spazio](/docs/iam/cfaccess.html) o la procedura per la [gestione dell'accesso a Cloud Foundry](/docs/iam/mngcf.html) nella documentazione IAM.
+I ruoli di Cloud Foundry concedono l'accesso a organizzazioni e spazi all'interno dell'account. Per visualizzare l'elenco dei servizi basati su Cloud Foundry in {{site.data.keyword.Bluemix_notm}}, esegui `ibmcloud service list`. Per ulteriori informazioni, vedi tutti i [ruoli disponibili per l'organizzazione e lo spazio](/docs/iam/cfaccess.html) o la procedura per la [gestione dell'accesso a Cloud Foundry](/docs/iam/mngcf.html) nella documentazione di {{site.data.keyword.Bluemix_notm}} IAM.
+{: shortdesc}
 
 La seguente tabella mostra i ruoli di Cloud Foundry richiesti per le autorizzazioni all'azione nel cluster.
 
-<table>
-  <tr>
+<table summary="La tabella mostra le autorizzazioni utente per Cloud Foundry. Le righe devono essere lette da sinistra a destra, con il ruolo Cloud Foundry nella colonna uno e l'autorizzazione cluster nella colonna due.">
+  <caption>Autorizzazioni di gestione del cluster per ruolo Cloud Foundry</caption>
+  <thead>
     <th>Ruolo Cloud Foundry</th>
     <th>Autorizzazioni di gestione del cluster</th>
-  </tr>
+  </thead>
+  <tbody>
   <tr>
     <td>Ruolo spazio: gestore</td>
     <td>Gestire l'accesso utente a uno spazio {{site.data.keyword.Bluemix_notm}}</td>
@@ -154,12 +164,14 @@ ai cluster</li>
       <li>Visualizzare i log dalla configurazione di inoltro log di un cluster a livello di spazio</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 ## Ruoli dell'infrastruttura
 {: #infra}
 
-**Nota**: quando un utente con il ruolo di accesso all'infrastruttura **Super utente** [imposta la chiave API per una regione e un gruppo di risorse](cs_users.html#api_key), le autorizzazioni dell'infrastruttura per gli altri utenti dell'account sono impostate dai ruoli della piattaforma IAM. Non dovrai modificare le autorizzazioni dell'infrastruttura IBM Cloud (SoftLayer) degli altri utenti. Utilizza la seguente tabella solo per personalizzare le autorizzazioni dell'infrastruttura IBM Cloud (SoftLayer) degli utenti quando non puoi assegnare il ruolo **Super utente** all'utente che imposta la chiave API. Per ulteriori informazioni, vedi [Personalizzazione delle autorizzazioni di infrastruttura](cs_users.html#infra_access).
+Quando un utente con il ruolo di accesso all'infrastruttura **Super utente** [imposta la chiave API per una regione e un gruppo di risorse](cs_users.html#api_key), le autorizzazioni dell'infrastruttura per gli altri utenti dell'account sono impostate dai ruoli della piattaforma {{site.data.keyword.Bluemix_notm}} IAM. Non dovrai modificare le autorizzazioni dell'infrastruttura IBM Cloud (SoftLayer) degli altri utenti. Utilizza la seguente tabella solo per personalizzare le autorizzazioni dell'infrastruttura IBM Cloud (SoftLayer) degli utenti quando non puoi assegnare il ruolo **Super utente** all'utente che imposta la chiave API. Per ulteriori informazioni, vedi [Personalizzazione delle autorizzazioni di infrastruttura](cs_users.html#infra_access).
+{: shortdesc}
 
 La seguente tabella mostra le autorizzazioni dell'infrastruttura richieste per completare gruppi di attività comuni.
 

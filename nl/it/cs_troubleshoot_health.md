@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -75,39 +78,37 @@ Controlla i seguenti motivi sul perché i tuoi log del cluster non vengono visua
   </tbody>
 </table>
 
-Per verificare le modifiche che hai apportato durante la risoluzione dei problemi, puoi distribuire *Noisy*, un pod di esempio che produce diversi eventi di log, su un nodo di lavoro nel tuo cluster.
+Per verificare le modifiche che hai apportato durante la risoluzione dei problemi, puoi distribuire *Noisy*, un pod di esempio che produce diversi eventi di log, a un nodo di lavoro nel tuo cluster.
 
-  1. Per il cluster in cui vuoi iniziare a produrre i log: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
 
-  2. Crea il file di configurazione `deploy-noisy.yaml`.
-
-      ```
-      apiVersion: v1
+1. Crea il file di configurazione `deploy-noisy.yaml`.
+    ```
+    apiVersion: v1
       kind: Pod
       metadata:
         name: noisy
       spec:
         containers:
-        - name: noisy
+      - name: noisy
           image: ubuntu:16.04
           command: ["/bin/sh"]
           args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
           imagePullPolicy: "Always"
-        ```
-        {: codeblock}
+      ```
+      {: codeblock}
 
-  3. Esegui il file di configurazione nel contesto del cluster.
+2. Esegui il file di configurazione nel contesto del cluster.
+    ```
+    kubectl apply -f noisy.yaml
+    ```
+    {:pre}
 
-        ```
-        kubectl apply -f noisy.yaml
-        ```
-        {:pre}
-
-  4. Dopo alcuni minuti, puoi visualizzare i tuoi log nel dashboard Kibana. Per accedere al dashboard Kibana, vai a uno dei seguenti URL e seleziona l'account {{site.data.keyword.Bluemix_notm}} in cui hai creato il cluster. Se hai specificato uno spazio durante la creazione del cluster, vai a tale spazio.
-      - Stati Uniti Sud e Stati Uniti Est: https://logging.ng.bluemix.net
-      - Regno Unito-Sud: https://logging.eu-gb.bluemix.net
-      - Europa centrale: https://logging.eu-fra.bluemix.net
-      - Asia Pacifico Sud: https://logging.au-syd.bluemix.net
+3. Dopo alcuni minuti, puoi visualizzare i tuoi log nel dashboard Kibana. Per accedere al dashboard Kibana, vai a uno dei seguenti URL e seleziona l'account {{site.data.keyword.Bluemix_notm}} in cui hai creato il cluster. Se hai specificato uno spazio durante la creazione del cluster, vai a tale spazio.
+    - Stati Uniti Sud e Stati Uniti Est: https://logging.ng.bluemix.net
+    - Regno Unito-Sud: https://logging.eu-gb.bluemix.net
+    - Europa centrale: https://logging.eu-fra.bluemix.net
+    - Asia Pacifico Sud: https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -139,14 +140,11 @@ Stai ancora avendo problemi con il tuo cluster?
 {: shortdesc}
 
 -  Nel terminale, ricevi una notifica quando sono disponibili degli aggiornamenti ai plug-in e alla CLI `ibmcloud`. Assicurati di mantenere la tua CLI aggiornata in modo che tu possa utilizzare tutti i comandi e gli indicatori disponibili.
-
 -   Per vedere se {{site.data.keyword.Bluemix_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/bluemix/support/#status).
 -   Pubblica una domanda in [{{site.data.keyword.containerlong_notm}} Slack ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
-
     Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.Bluemix_notm}}, [richiedi un invito](https://bxcs-slack-invite.mybluemix.net/) a questo Slack.
     {: tip}
 -   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.Bluemix_notm}}.
-
     -   Se hai domande tecniche sullo sviluppo o la distribuzione di cluster o applicazioni con
 {{site.data.keyword.containerlong_notm}}, inserisci la tua domanda in
 [Stack Overflow ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e contrassegnala con le tag `ibm-cloud`, `kubernetes` e `containers`.
@@ -154,9 +152,7 @@ Stai ancora avendo problemi con il tuo cluster?
 [IBM Developer Answers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Includi le tag `ibm-cloud`
 e `containers`.
     Consulta [Come ottenere supporto](/docs/get-support/howtogetsupport.html#using-avatar) per ulteriori dettagli sull'utilizzo dei forum.
-
--   Contatta il supporto IBM aprendo un ticket. Per informazioni su come aprire un ticket di supporto IBM o sui livelli di supporto e sulla gravità dei ticket, consulta [Come contattare il supporto](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
-{: tip}
+-   Contatta il supporto IBM aprendo un caso. Per informazioni su come aprire un caso di supporto IBM o sui livelli di supporto e sulla gravità dei casi, consulta [Come contattare il supporto](/docs/get-support/howtogetsupport.html#getting-customer-support).
 Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `ibmcloud ks clusters`.
+{: tip}
 
