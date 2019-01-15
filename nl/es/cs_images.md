@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -76,7 +79,8 @@ Cuando crea un clúster, se crean automáticamente señales y secretos tanto par
 
 Cada señal se debe guardar en `imagePullSecret` de Kubernetes para que resulte accesible para un clúster de Kubernetes cuando se despliegue una app contenerizada. Cuando se crea el clúster, {{site.data.keyword.containerlong_notm}} almacena automáticamente las señales para los registros global (imágenes públicas proporcionadas por IBM) y regionales en los secretos de extracción de imágenes de Kubernetes. Los secretos de extracción de imágenes se añaden al espacio de nombres `predeterminado` de Kubernetes, la lista predeterminada de secretos en la `ServiceAccount` de dicho espacio de nombres y el espacio de nombres `kube-system`.
 
-**Nota:** Con esta configuración inicial, puede desplegar contenedores desde cualquier imagen disponible en un espacio de nombres de la cuenta de {{site.data.keyword.Bluemix_notm}} en el espacio de nombres **default** del clúster. Para desplegar un contenedor en otros espacios de nombres del clúster, o utilizar una imagen almacenada en otra región de {{site.data.keyword.Bluemix_notm}} o en otra cuenta de {{site.data.keyword.Bluemix_notm}}, debe [crear su propio imagePullSecret para el clúster](#other).
+Con esta configuración inicial, puede desplegar contenedores desde cualquier imagen disponible en un espacio de nombres de la cuenta de {{site.data.keyword.Bluemix_notm}} en el espacio de nombres **default** del clúster. Para desplegar un contenedor en otros espacios de nombres del clúster, o utilizar una imagen almacenada en otra región de {{site.data.keyword.Bluemix_notm}} o en otra cuenta de {{site.data.keyword.Bluemix_notm}}, debe [crear su propio imagePullSecret para el clúster](#other).
+{: note}
 
 ¿Desea proteger aún más sus credenciales de registro? Solicite al administrador del clúster que [habilite {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect) en
 el clúster para cifrar los secretos de Kubernetes en el clúster, como por ejemplo el `imagePullSecret` que almacena las credenciales de registro.
@@ -191,7 +195,7 @@ Puede copiar el imagePullSecret que se crea automáticamente para el espacio de 
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
-   
+
    ```
    kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -20,7 +23,7 @@ lastupdated: "2018-10-25"
 # Por qué {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
-{{site.data.keyword.containerlong}} combina contenedores Docker, la tecnología Kubernetes y una experiencia de usuario intuitiva para ofrecer herramientas potentes y funciones integradas de seguridad e identificación para automatizar el despliegue, operación, escalado y supervisión de apps contenerizadas sobre un clúster de hosts de cálculo. Para obtener información sobre certificación, consulte [Conformidad en {{site.data.keyword.Bluemix_notm}} [Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")(https://www.ibm.com/cloud/compliance)].
+{{site.data.keyword.containerlong}} combina contenedores Docker, la tecnología Kubernetes y una experiencia de usuario intuitiva para ofrecer herramientas potentes y funciones integradas de seguridad e identificación para automatizar el despliegue, operación, escalado y supervisión de apps contenerizadas sobre un clúster de hosts de cálculo. Para obtener información sobre certificación, consulte [Conformidad en {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/compliance).
 {:shortdesc}
 
 
@@ -34,6 +37,7 @@ Los clústeres se despliegan en hosts de cálculo que proporcionan funciones de 
 |-------|-----------|
 |Clústeres de Kubernetes de un solo arrendatario con funciones de aislamiento de la infraestructura de cálculo, red y almacenamiento|<ul><li>Cree su propia infraestructura personalizada que se ajuste a los requisitos de su empresa.</li><li>Suministre un maestro de Kubernetes dedicado y seguro, nodos trabajadores, redes virtuales y almacenamiento utilizando los recursos que proporciona la infraestructura de IBM Cloud (SoftLayer).</li><li>Maestro de Kubernetes completamente gestionado que {{site.data.keyword.IBM_notm}} supervisa y actualiza continuamente para mantener el clúster disponible.</li><li>Opción para suministrar nodos trabajadores como servidores nativos con Trusted Compute.</li><li>Almacene datos persistentes, comparta datos entre pods de Kubernetes y restaure datos cuando lo necesite con el servicio de volúmenes seguro e integrado.</li><li>Aproveche el soporte de todas las API nativas de Kubernetes.</li></ul>|
 | Clústeres multizona para aumentar la alta disponibilidad | <ul><li>Gestione fácilmente nodos trabajadores del mismo tipo de máquina (CPU, memoria, virtual o físico) con agrupaciones de nodos trabajadores.</li><li>Protección frente a errores de zona mediante la dispersión de nodos de forma uniforme entre varias zonas y mediante el uso de despliegues de pod de antiafinidad para sus apps.</li><li>Disminuya los costes utilizando clústeres multizona en lugar de duplicar los recursos en un clúster independiente.</li><li>Aproveche el equilibrio de carga automático entre las apps con el equilibrador de carga de varias zonas (MZLB) que se configura automáticamente en cada zona del clúster.</li></ul>|
+| Maestros de alta disponibilidad | <ul>Disponibles en clústeres que ejecutan Kubernetes versión 1.10 o posterior.<li>Reduzca el tiempo de inactividad del clúster, por ejemplo, durante las actualizaciones del maestro, con maestros de alta disponibilidad que se suministran automáticamente al crear un clúster.</li><li>Disperse los maestros en zonas en un [clúster multizona](cs_clusters_planning.html#multizone) para proteger el clúster frente a errores zonales.</li></ul> |
 |Conformidad de seguridad de imágenes con Vulnerability Advisor|<ul><li>Configure su propio repositorio en nuestro registro seguro de imágenes privadas de Docker donde todas las imágenes se almacenan y se comparten entre todos los usuarios de la organización.</li><li>Aproveche la exploración automática de imágenes en su registro de {{site.data.keyword.Bluemix_notm}} privado.</li><li>Revise recomendaciones específicas del sistema operativo utilizado en la imagen para solucionar vulnerabilidades potenciales.</li></ul>|
 |Supervisión continua del estado del clúster|<ul><li>Utilice el panel de control del clúster para ver y gestionar rápidamente el estado del clúster, de los nodos trabajadores y de los despliegues de contenedores.</li><li>Busque métricas detalladas sobre consumo mediante {{site.data.keyword.monitoringlong}}
 y expanda rápidamente su clúster para ajustarlo a las cargas de trabajo.</li><li>Revise la información de registro mediante {{site.data.keyword.loganalysislong}} para ver las actividades detalladas del clúster.</li></ul>|
@@ -78,7 +82,7 @@ Kubernetes y una experiencia de usuario intuitiva para ofrecer herramientas pote
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Privado
  </td>
- <td>{{site.data.keyword.Bluemix_notm}} Privado es una plataforma de aplicaciones que se puede instalar de forma local en sus propias máquinas. Utilice Kubernetes en {{site.data.keyword.Bluemix_notm}} Privado cuando necesite desarrollar y gestionar apps contenerizadas localmente en su propio entorno controlado detrás de un cortafuegos. <br><br>Para obtener más información, consulte la [{{site.data.keyword.Bluemix_notm}}documentación de producto privado ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
+ <td>{{site.data.keyword.Bluemix_notm}} Privado es una plataforma de aplicaciones que se puede instalar de forma local en sus propias máquinas. Utilice Kubernetes en {{site.data.keyword.Bluemix_notm}} Privado cuando necesite desarrollar y gestionar apps contenerizadas localmente en su propio entorno controlado detrás de un cortafuegos. <br><br>Para obtener más información, consulte la [documentación de producto de {{site.data.keyword.Bluemix_notm}} Privado ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
  </td>
  </tr>
  <tr>
@@ -110,6 +114,8 @@ Si tiene un clúster gratuito y desea actualizar a un clúster estándar, puede 
 |[Espacio de disco en nodo trabajador para almacenamiento no persistente](cs_storage_planning.html#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 | [Posibilidad de crear un clúster en cada región de {{site.data.keyword.containerlong_notm}}](cs_regions.html) | | <img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" /> |
 |[Clústeres multizona para aumentar la alta disponibilidad de las apps](cs_clusters_planning.html#multizone) | |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
+| Maestros replicados para obtener una mayor disponibilidad (Kubernetes 1.10 o posterior) | | <img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" /> |
+|[Número escalable de nodos trabajadores para aumentar la capacidad](cs_app.html#app_scaling)| |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Almacenamiento persistente basado en archivo NFS con volúmenes](cs_storage_file.html#file_storage)| |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Acceso a app de red pública o privada por parte de un servicio de equilibrador de carga a una dirección IP estable](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Acceso a app de red pública por parte de un servicio Ingress a una dirección IP estable y un URL personalizable](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
@@ -121,6 +127,8 @@ Si tiene un clúster gratuito y desea actualizar a un clúster estándar, puede 
 {: caption="Características de los clústeres gratuitos y estándares" caption-side="top"}
 
 <br />
+
+
 
 
 ## Precios y facturación
@@ -135,7 +143,7 @@ Revise algunas de las preguntas más frecuentes acerca de los precios y la factu
 **¿Cómo puedo comprobar mi facturación y uso?**<br>
 Para comprobar su uso y los totales estimados, consulte [Visualización de su uso](/docs/billing-usage/viewing_usage.html#viewingusage).
 
-Si enlaza sus cuentas de {{site.data.keyword.Bluemix_notm}} y de la infraestructura IBM Cloud (SoftLayer), recibirá una factura consolidada. Para obtener más información, consulte [Consolidación de la facturación de cuentas enlazadas](/docs/billing-usage/linking_accounts.html#unifybillaccounts).
+Si enlaza sus cuentas de {{site.data.keyword.Bluemix_notm}} y de la infraestructura IBM Cloud (SoftLayer), recibirá una factura consolidada. Para obtener más información, consulte [Consolidación de la facturación de cuentas enlazadas](/docs/customer-portal/linking_accounts.html#unifybillaccounts).
 
 **¿Puedo agrupar mis recursos de nube por equipos o departamentos para fines de facturación?**<br>
 Puede [utilizar grupos de recursos](/docs/resources/bestpractice_rgs.html#bp_resourcegroups) para organizar los recursos de {{site.data.keyword.Bluemix_notm}}, incluidos los clústeres, en grupos para organizar la facturación.
@@ -172,7 +180,7 @@ Con los clústeres de {{site.data.keyword.containerlong_notm}}, puede utilizar l
   <dd><p>Los clústeres pueden tener dos tipos principales de nodos trabajadores: máquinas virtuales o físicas (nativas). La disponibilidad y los precios de los tipos de máquina varían según la zona en la que se despliega el clúster.</p>
   <p>Las <strong>máquinas virtuales</strong> ofrecen una mayor flexibilidad, unos tiempos de suministro más reducidos y proporcionan más características automáticas de escalabilidad que las máquinas nativas. Sin embargo, las VM tienen compensaciones en cuanto a rendimiento en comparación con las especificaciones de las máquinas nativas, tales como los umbrales de Gbps de red, RAM y memoria, y las opciones de almacenamiento. Tenga en cuenta estos factores que afectan a los costes de la máquina virtual:</p>
   <ul><li><strong>Compartida frente a dedicada</strong>: si comparte el hardware subyacente de la máquina virtual, el coste es menor que el del hardware dedicado, pero los recursos físicos no están dedicados a la máquina virtual.</li>
-  <li><strong>Solo facturación por hora</strong>: la facturación por hora ofrece más flexibilidad para solicitar y cancelar rápidamente máquinas virtuales. 
+  <li><strong>Solo facturación por hora</strong>: la facturación por hora ofrece más flexibilidad para solicitar y cancelar rápidamente máquinas virtuales.
   <li><strong>Niveles de horas al mes</strong>: la facturación por hora funciona por niveles. A medida que la VM permanezca solicitada durante un nivel de horas dentro del mes de facturación, la tasa por hora que se le factura baja. Los niveles de horas son los siguientes: 0 - 150 horas, 151 - 290 horas, 291 - 540 horas y más de 541 horas.</li></ul>
   <p>Las <strong>máquinas físicas (nativas)</strong> ofrecen grandes beneficios en cuanto a alto rendimiento para cargas de trabajo como datos, IA y GPU. Además, todos los recursos de hardware están dedicados a sus cargas de trabajo, así que no tiene "vecinos molestos". Tenga en cuenta estos factores que afectan a los costes de la máquina nativa:</p>
   <ul><li><strong>Solo facturación mensual</strong>: todas las máquinas nativas se facturan mensualmente.</li>
@@ -180,7 +188,7 @@ Con los clústeres de {{site.data.keyword.containerlong_notm}}, puede utilizar l
   <p>Para obtener detalles sobre las especificaciones de la máquina, consulte [Hardware disponible para los nodos trabajadores](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).</p></dd>
 
 <dt id="bandwidth">Ancho de banda público</dt>
-  <dd><p>Ancho de banda se refiere a la transferencia de datos públicos del tráfico de red de entrada y salida, tanto a como desde los recursos de {{site.data.keyword.Bluemix_notm}} de los centros de datos de todo el mundo. El ancho de banda público se carga por GB. Para revisar el resumen de ancho de banda actual, inicie una sesión en la [consola de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), en el menú seleccione **Infraestructura** y, a continuación, seleccione la página **Red > Ancho de banda > Resumen**.
+  <dd><p>Ancho de banda se refiere a la transferencia de datos públicos del tráfico de red de entrada y salida, tanto a como desde los recursos de {{site.data.keyword.Bluemix_notm}} de los centros de datos de todo el mundo. El ancho de banda público se carga por GB. Para revisar el resumen de ancho de banda actual, inicie una sesión en la [consola de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), en el menú ![Icono de menú](../icons/icon_hamburger.svg "Icono de menú") seleccione **Infraestructura** y, a continuación, seleccione la página **Red > Ancho de banda > Resumen**.
   <p>Revise los factores siguientes que afectan a los cargos de ancho de banda público:</p>
   <ul><li><strong>Ubicación</strong>: al igual que sucede con los nodos trabajadores, los cargos varían en función de la zona en la que se despliegan los recursos.</li>
   <li><strong>Ancho de banda incluido o pago según uso</strong>: las máquinas de nodo trabajador pueden venir con una determinada asignación de red de salida al mes, como por ejemplo 250 GB para máquinas virtuales o 500 GB para las nativas. O bien, la asignación puede ser de tipo Pago según uso, que se basa en el uso de GB.</li>

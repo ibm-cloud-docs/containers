@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -28,6 +31,7 @@ En estos casos de uso se muestra cómo las cargas de trabajo de {{site.data.keyw
 {: #uc_mortgage}
 
 El responsable de gestión de riesgos de una empresa hipotecaria procesa 70 millones de registros al día, pero el sistema local era lento y también inexacto. Los gastos de TI se dispararon porque el hardware se quedó obsoleto y no se sacaba el máximo provecho del mismo. Mientras esperaban el repuesto de hardware, el cumplimiento con las normativas se ralentizó. 
+{: shortdesc}
 
 Por qué {{site.data.keyword.Bluemix_notm}}: para mejorar el análisis de riesgos, la empresa examinó los servicios {{site.data.keyword.containerlong_notm}} e IBM Cloud Analytic para reducir costes, para aumentar la disponibilidad a nivel mundial y, en última instancia, para acelerar el cumplimiento de normativas. Con {{site.data.keyword.containerlong_notm}} en varias regiones, sus apps de análisis se pueden contenerizar y desplegar en todo el mundo, mejorando la disponibilidad y atendiendo las regulaciones locales. Estos despliegues se aceleran con herramientas de código abierto ampliamente conocidas, que ya forman parte de {{site.data.keyword.containerlong_notm}}.
 
@@ -41,7 +45,7 @@ Por qué {{site.data.keyword.Bluemix_notm}}: para mejorar el análisis de riesgo
 
 **La solución**
 
-Empezaron por contenerizar las apps de análisis y colocarlas en la nube. De inmediato, sus problemas de hardware desaparecieron. También diseñaron fácilmente clústeres de Kubernetes que se ajustaban a sus requisitos de alto rendimiento, CPU, RAM, almacenamiento y seguridad. Y, cuando sus aplicaciones de análisis cambian, pueden añadir o reducir la capacidad de cálculo sin grandes inversiones en hardware. Con el escalado horizontal de {{site.data.keyword.containerlong_notm}}, sus apps se adaptan el número creciente de registros, lo que les permite confeccionar informes de normativas con mayor rapidez. {{site.data.keyword.containerlong_notm}} proporciona recursos de cálculo elásticos en todo el mundo que son seguros y de alto rendimiento para aprovechar los modernos recursos de cálculo.
+Empezaron por contenerizar las apps de análisis y colocarlas en la nube. De inmediato, sus problemas de hardware desaparecieron. También diseñaron fácilmente clústeres de Kubernetes que se ajustaban a sus requisitos de alto rendimiento, CPU, RAM, almacenamiento y seguridad. Y, cuando sus apps de análisis cambian, pueden añadir o reducir la capacidad de cálculo sin grandes inversiones en hardware. Con el escalado horizontal de {{site.data.keyword.containerlong_notm}}, sus apps se adaptan el número creciente de registros, lo que les permite confeccionar informes de normativas con mayor rapidez. {{site.data.keyword.containerlong_notm}} proporciona recursos de cálculo elásticos en todo el mundo que son seguros y de alto rendimiento para aprovechar los modernos recursos de cálculo.
 
 Ahora esas apps reciben grandes volúmenes de datos de un almacén de datos en {{site.data.keyword.cloudant}}. El almacenamiento basado en nube de {{site.data.keyword.cloudant}} garantiza una mayor disponibilidad que cuando estaba limitado a un sistema local. Dado que la disponibilidad resulta esencial, las apps se despliegan en los centros de datos globales: también para DR y para latencia.
 
@@ -74,7 +78,7 @@ Y las actualizaciones importantes de la app tardan entre 6 y 9 meses en implemen
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGateway}}
 
-{{site.data.keyword.containerlong_notm}} proporciona recursos de cálculo escalables y los paneles de control de DevOps asociados para crear, escalar y eliminar servicios según demanda. Mediante el uso de contenedores estándares del sector, las apps se pueden realojar inicialmente en {{site.data.keyword.containerlong_notm}} de forma rápida sin tener que realizar cambios arquitectónicos importantes. 
+{{site.data.keyword.containerlong_notm}} proporciona recursos de cálculo escalables y los paneles de control de DevOps asociados para crear, escalar y eliminar apps y servicios según demanda. Mediante el uso de contenedores estándares del sector, las apps se pueden realojar inicialmente en {{site.data.keyword.containerlong_notm}} de forma rápida sin tener que realizar cambios arquitectónicos importantes. 
 
 Esta solución proporciona la ventaja inmediata de la escalabilidad. Gracias al completo conjunto de objetos de despliegue y de tiempo de ejecución de Kubernetes, la empresa hipotecaria supervisa y gestiona las actualizaciones de las apps de forma fiable. También pueden duplicar y escalar las apps mediante el uso de reglas definidas y el orquestador automático de Kubernetes.
 
@@ -95,6 +99,7 @@ Se utiliza {{site.data.keyword.SecureGateway}} para crear una interconexión seg
 {: #uc_payment_tech}
 
 Un ejecutivo de desarrollo tiene desarrolladores que utilizan herramientas locales tradicionales que ralentizan la creación de prototipos mientras esperan la adquisición de hardware.
+{: shortdesc}
 
 Por qué {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} facilita el uso de la capacidad de cálculo mediante el uso de tecnología estándar de código abierto. Después de que la empresa realizar la transición a {{site.data.keyword.containerlong_notm}}, los desarrolladores tienen acceso a herramientas que facilitan DevOps, como por ejemplo contenedores portátiles y de fácil compartición.
 
@@ -150,7 +155,7 @@ La seguridad es lo primero: con el entorno nativo para {{site.data.keyword.conta
 **Paso 1: Adopción de un sistema de cálculo seguro**
 * Las apps que gestionan datos altamente confidenciales se pueden realojar en {{site.data.keyword.containerlong_notm}} que se ejecuta en un entorno nativo para Trusted Compute. Trusted Compute puede verificar el hardware subyacente para protegerlo frente a una posible manipulación. 
 * Migre las imágenes de máquina virtual a imágenes de contenedor que se ejecutan en {{site.data.keyword.containerlong_notm}} en {{site.data.keyword.Bluemix_notm}} público.
-* Desde ese punto de partida, Vulnerability Advisor proporciona funciones de exploración de imágenes, políticas, contenedores y vulnerabilidades de exploración de paquetes en busca de software malicioso conocido. 
+* Desde ese punto de partida, Vulnerability Advisor proporciona funciones de exploración de vulnerabilidades de imágenes, políticas, contenedores y paquetes en busca de software malicioso conocido. 
 * Los costes del centro de datos privado y de capital local se reducen enormemente y se sustituyen por un modelo de cálculo de utilidad que se basa en la demanda de la carga de trabajo.
 
 **Paso 2: Operaciones y conexiones con sistemas de fondo de pago existentes**

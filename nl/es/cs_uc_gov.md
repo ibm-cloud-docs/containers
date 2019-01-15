@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -83,7 +86,7 @@ Solución técnica:
 * Utilizar IBM {{site.data.keyword.SecureGateway}} para mantener conexiones seguras con las bases de datos locales existentes.
 
 **Paso 2: Proporcionar acceso a los datos con API**
-* Utilizar {{site.data.keyword.apiconnect_long}} para la plataforma de economía de API. Las API permiten a los sectores público y privado combinar datos en sus aplicaciones.
+* Utilizar {{site.data.keyword.apiconnect_long}} para la plataforma de economía de API. Las API permiten a los sectores público y privado combinar datos en sus apps.
 * Crear clústeres para apps públicas y privadas, controladas por las API. 
 * Organizar las apps en un conjunto de microservicios cooperativos que se ejecuten en {{site.data.keyword.containerlong_notm}}, que se basa en áreas funcionales de apps y sus dependencias.
 * Desplegar las apps en contenedores que se ejecutan en {{site.data.keyword.containerlong_notm}}. Las herramientas de alta disponibilidad integradas en {{site.data.keyword.containerlong_notm}} equilibran las cargas de trabajo e incluyen reparación automática y equilibrio de carga.
@@ -118,7 +121,7 @@ Tecnologías clave:
 
 * Grupos diversos de desarrolladores de organizaciones gubernamentales y de la compañía naviera no tienen una plataforma de unificada en la que puedan colaborar, lo que ralentiza los despliegues de actualizaciones y de características. 
 * Los desarrolladores están repartidos por todo el mundo y en distintas organizaciones, lo que significa que el código abierto y PaaS constituyen la mejor opción.
-* La seguridad es una preocupación primordial, y esto aumenta la carga de colaboración que afecta a las características y actualizaciones del software, especialmente después de que las aplicaciones se encuentran en producción.
+* La seguridad es una preocupación primordial, y esto aumenta la carga de colaboración que afecta a las características y actualizaciones del software, especialmente después de que las apps se encuentren en producción.
 * Los datos de última hora significan que los sistemas de todo el mundo deben estar muy disponibles para reducir los retrasos en las operaciones de tránsito. Los horarios de las terminales del puerto están muy controlados y en algunos casos son inflexibles. El uso de la web está creciendo, por lo que la inestabilidad podría dar lugar a una experiencia deficiente para el usuario. 
 
 **La solución**
@@ -128,7 +131,7 @@ El puerto y la compañía naviera desarrollan conjuntamente un sistema de comerc
 Por lo tanto, crean una asociación dedicada a soluciones para el sistema de comercio:
 * DECLARACIONES - App que recibe manifiestos de transporte marítimo y procesa digitalmente el papeleo aduanero típico y detecta los artículos que no cumplen con las políticas para que se investiguen
 * TARIFAS - App para calcular tarifas, enviar los cargos electrónicamente al expedidor y recibir pagos digitales
-* REGULACIONES - App flexible y configurable que suministra datos a las dos aplicaciones anteriores sobre políticas y regulaciones en cambio constante que afectan a importaciones, exportaciones y proceso de tarifas
+* REGULACIONES - App flexible y configurable que suministra datos a las dos apps anteriores sobre políticas y regulaciones en cambio constante que afectan a importaciones, exportaciones y proceso de tarifas
 
 Los desarrolladores comenzaron por desplegar sus apps en contenedores con {{site.data.keyword.containerlong_notm}}. Crearon clústeres para un entorno de desarrollo compartido que permiten a los desarrolladores de todo el mundo desplegar de forma colaborativa mejoras de apps rápidamente. Los contenedores permiten que cada equipo de desarrollo utilice el lenguaje que desee.
 

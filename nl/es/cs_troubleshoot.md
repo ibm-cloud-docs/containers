@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -53,7 +56,7 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
    <tbody>
 <tr>
    <td>Terminado anormalmente</td>
-   <td>El usuario ha solicitado la supresión del clúster antes de desplegar el maestro de Kubernetes. Una vez realizada la supresión del clúster, el clúster se elimina del panel de control. Si el clúster está bloqueado en este estado durante mucho tiempo, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help).</td>
+   <td>El usuario ha solicitado la supresión del clúster antes de desplegar el maestro de Kubernetes. Una vez realizada la supresión del clúster, el clúster se elimina del panel de control. Si el clúster está bloqueado en este estado durante mucho tiempo, abra un [caso de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help).</td>
    </tr>
  <tr>
      <td>Crítico</td>
@@ -65,7 +68,7 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
    </tr>
    <tr>
      <td>Suprimido</td>
-     <td>El clúster se ha suprimido pero todavía no se ha eliminado del panel de control. Si el clúster está bloqueado en este estado durante mucho tiempo, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help). </td>
+     <td>El clúster se ha suprimido pero todavía no se ha eliminado del panel de control. Si el clúster está bloqueado en este estado durante mucho tiempo, abra un [caso de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
    <tr>
    <td>Suprimiendo</td>
@@ -73,7 +76,7 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
    </tr>
    <tr>
      <td>Error al desplegar</td>
-     <td>El despliegue del maestro de Kubernetes no se ha podido realizar. No puede resolver este estado. Póngase en contacto con el soporte de IBM Cloud abriendo una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help).</td>
+     <td>El despliegue del maestro de Kubernetes no se ha podido realizar. No puede resolver este estado. Póngase en contacto con el soporte de IBM Cloud abriendo un [caso de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help).</td>
    </tr>
      <tr>
        <td>Despliegue</td>
@@ -81,7 +84,7 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
       </tr>
       <tr>
        <td>Normal</td>
-       <td>Todos los nodos trabajadores de un clúster están activos y en ejecución. Puede acceder al clúster y desplegar apps en el clúster. Este estado se considera correcto y no requiere ninguna acción por su parte. **Nota**: Aunque los nodos trabajadores podrían poseer un estado normal, otros recursos de infraestructura como, por ejemplo la [red](cs_troubleshoot_network.html) y el [almacenamiento](cs_troubleshoot_storage.html), podrían requerir su atención.</td>
+       <td>Todos los nodos trabajadores de un clúster están activos y en ejecución. Puede acceder al clúster y desplegar apps en el clúster. Este estado se considera correcto y no requiere ninguna acción por su parte.<p class="note">Aunque los nodos trabajadores podrían poseer un estado normal, otros recursos de infraestructura como, por ejemplo la [red](cs_troubleshoot_network.html) y el [almacenamiento](cs_troubleshoot_storage.html), podrían requerir su atención.</p></td>
     </tr>
       <tr>
        <td>Pendiente</td>
@@ -89,7 +92,7 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
      </tr>
    <tr>
      <td>Solicitado</td>
-     <td>Se ha enviado una solicitud para crear el clúster y pedir la infraestructura para el maestro de Kubernetes y los nodos trabajadores. Cuando se inicia el despliegue del clúster, el estado del clúster cambia a <code>Desplegando</code>. Si el clúster está bloqueado en el estado <code>Solicitado</code> durante mucho tiempo, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help). </td>
+     <td>Se ha enviado una solicitud para crear el clúster y pedir la infraestructura para el maestro de Kubernetes y los nodos trabajadores. Cuando se inicia el despliegue del clúster, el estado del clúster cambia a <code>Desplegando</code>. Si el clúster está bloqueado en el estado <code>Solicitado</code> durante mucho tiempo, abra un [caso de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
    <tr>
      <td>Actualizando</td>
@@ -103,7 +106,10 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
  </table>
 
 
-**Nota**: El [nodo maestro de Kubernetes](cs_tech.html#architecture) es el componente principal que mantiene el clúster en funcionamiento. El nodo maestro almacena los recursos de clúster y sus configuraciones en la base de datos etcd, que sirve como único punto fiable para el clúster. El servidor de API de Kubernetes es el punto de entrada principal para todas las solicitudes de gestión del clúster procedentes de los nodos trabajadores destinadas al nodo maestro, o cuando desea interactuar con los recursos de clúster.<br><br>Si se produce un fallo del nodo maestro, las cargas de trabajo siguen ejecutándose en los nodos trabajadores, pero no se pueden utilizar mandatos `kubectl` para trabajar con los recursos del clúster o ver el estado del clúster hasta que el servidor de API de Kubernetes del nodo maestro vuelve a estar activo. Si un pod cae durante la interrupción del nodo maestro, el pod no se puede volver a planificar hasta que el nodo trabajador pueda volver a acceder al servidor de API de Kubernetes.<br><br>Durante una interrupción del nodo maestro, todavía puede ejecutar mandatos `ibmcloud ks` en la API de {{site.data.keyword.containerlong_notm}} para trabajar con los recursos de la infraestructura, como nodos trabajadores o VLAN. Si cambia la configuración actual del clúster añadiendo o eliminando nodos trabajadores en el clúster, los cambios no se producen hasta que el nodo maestro vuelve a estar activo. **Nota**: No reinicie o rearranque un nodo trabajador durante una interrupción del nodo maestro. Esta acción elimina los pods del nodo trabajador. Puesto que el servidor de API de Kubernetes no está disponible, los pods no se pueden volver a programar en otros nodos trabajadores del clúster.
+El [nodo maestro de Kubernetes](cs_tech.html#architecture) es el componente principal que mantiene el clúster en funcionamiento. El nodo maestro almacena los recursos de clúster y sus configuraciones en la base de datos etcd, que sirve como único punto fiable para el clúster. El servidor de API de Kubernetes es el punto de entrada principal para todas las solicitudes de gestión del clúster procedentes de los nodos trabajadores destinadas al nodo maestro, o cuando desea interactuar con los recursos de clúster.<br><br>Si se produce un fallo del nodo maestro, las cargas de trabajo siguen ejecutándose en los nodos trabajadores, pero no se pueden utilizar mandatos `kubectl` para trabajar con los recursos del clúster o ver el estado del clúster hasta que el servidor de API de Kubernetes del nodo maestro vuelve a estar activo. Si un pod cae durante la interrupción del nodo maestro, el pod no se puede volver a planificar hasta que el nodo trabajador pueda volver a acceder al servidor de API de Kubernetes.<br><br>Durante una interrupción del nodo maestro, todavía puede ejecutar mandatos `ibmcloud ks` en la API de {{site.data.keyword.containerlong_notm}} para trabajar con los recursos de la infraestructura, como nodos trabajadores o VLAN. Si cambia la configuración actual del clúster añadiendo o eliminando nodos trabajadores en el clúster, los cambios no se producen hasta que el nodo maestro vuelve a estar activo.
+
+No reinicie o rearranque un nodo trabajador durante una interrupción del nodo maestro. Esta acción elimina los pods del nodo trabajador. Puesto que el servidor de API de Kubernetes no está disponible, los pods no se pueden volver a programar en otros nodos trabajadores del clúster.
+{: important}
 
 
 <br />
@@ -170,7 +176,7 @@ Revise las opciones para depurar sus nodos trabajadores y encontrar las causas r
       </tr>
       <tr>
        <td>Desconocido</td>
-       <td>No se puede acceder al maestro de Kubernetes por uno de estos motivos:<ul><li>Ha solicitado una actualización del maestro de Kubernetes. El estado del nodo trabajador no se puede recuperar durante la actualización.</li><li>Es posible que tenga otro cortafuegos que está protegiendo sus nodos trabajadores o que haya modificado los valores del cortafuegos recientemente. {{site.data.keyword.containerlong_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el maestro de Kubernetes y viceversa. Para obtener más información, consulte [El cortafuegos impide que los nodos trabajadores se conecten](cs_troubleshoot_clusters.html#cs_firewall).</li><li>El maestro de Kubernetes está inactivo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](#ts_getting_help).</li></ul></td>
+       <td>No se puede acceder al maestro de Kubernetes por uno de estos motivos:<ul><li>Ha solicitado una actualización del maestro de Kubernetes. El estado del nodo trabajador no se puede recuperar durante la actualización. Si el nodo trabajador sigue en este estado durante un periodo de tiempo prolongado incluso después de que se haya actualizado correctamente el maestro de Kubernetes, intente [recargar](cs_cli_reference.html#cs_worker_reload) el nodo trabajador.</li><li>Es posible que tenga otro cortafuegos que está protegiendo sus nodos trabajadores o que haya modificado los valores del cortafuegos recientemente. {{site.data.keyword.containerlong_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el maestro de Kubernetes y viceversa. Para obtener más información, consulte [El cortafuegos impide que los nodos trabajadores se conecten](cs_troubleshoot_clusters.html#cs_firewall).</li><li>El maestro de Kubernetes está inactivo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra un [caso de soporte de {{site.data.keyword.Bluemix_notm}}](#ts_getting_help).</li></ul></td>
   </tr>
      <tr>
         <td>Aviso</td>
@@ -208,7 +214,7 @@ Revise los mensajes de error comunes y busque cómo resolverlos.
     <tbody>
       <tr>
         <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: En este momento su cuenta no tiene permitido solicitar 'Instancias de cálculo'.</td>
-        <td>Puede que su cuenta de infraestructura de IBM Cloud (SoftLayer) tenga restringida la solicitud de recursos de cálculo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](#ts_getting_help).</td>
+        <td>Puede que su cuenta de infraestructura de IBM Cloud (SoftLayer) tenga restringida la solicitud de recursos de cálculo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra un [caso de soporte de {{site.data.keyword.Bluemix_notm}}](#ts_getting_help).</td>
       </tr>
       <tr>
       <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: No se ha podido realizar el pedido.<br><br>
@@ -218,11 +224,11 @@ Revise los mensajes de error comunes y busque cómo resolverlos.
       <li>Para un clúster de una sola zona, cree el clúster en otra zona. Para un clúster multizona, añada una zona al clúster.</li>
       <li>Especifique un par distinto de VLAN pública y privada para los nodos trabajadores en la cuenta de infraestructura de IBM Cloud (SoftLayer). Para los nodos trabajadores que están en una agrupación de trabajadores, puede utilizar el [mandato](cs_cli_reference.html#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</li>
       <li>Póngase en contacto con el gestor de cuentas de infraestructura de IBM Cloud (SoftLayer) para verificar que no supera un límite de cuenta, como por ejemplo una cuota global.</li>
-      <li>Abra una [incidencia de soporte de infraestructura de IBM Cloud (SoftLayer)](#ts_getting_help)</li></ul></td>
+      <li>Abra un [caso de soporte de infraestructura de IBM Cloud (SoftLayer)](#ts_getting_help)</li></ul></td>
       </tr>
       <tr>
         <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: No se ha podido obtener la VLAN de red con el ID: &lt;vlan id&gt;.</td>
-        <td>El nodo trabajador no se ha podido suministrar porque no se ha encontrado el ID de VLAN por una de las siguientes razones:<ul><li>Puede que haya especificado el número de VLAN en lugar del ID de VLAN. El número de VLAN tiene 3 ó 4 dígitos, mientras que el ID de VLAN tiene 7 dígitos. Ejecute <code>ibmcloud ks vlans &lt;zone&gt;</code> para recupera el ID de VLAN.<li>Es posible que el ID de VLAN no esté asociado a la cuenta de infraestructura de IBM Cloud (SoftLayer) que está utilizando. Ejecute <code>ibmcloud ks vlans &lt;zone&gt;</code> para ver una lista de los ID de VLAN disponibles para su cuenta. Para cambiar la cuenta de infraestructura de IBM Cloud (SoftLayer), consulte [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set). </ul></td>
+        <td>El nodo trabajador no se ha podido suministrar porque no se ha encontrado el ID de VLAN por una de las siguientes razones:<ul><li>Puede que haya especificado el número de VLAN en lugar del ID de VLAN. El número de VLAN tiene 3 ó 4 dígitos, mientras que el ID de VLAN tiene 7 dígitos. Ejecute <code>ibmcloud ks vlans &lt;zone&gt;</code> para recupera el ID de VLAN.<li>Es posible que el ID de VLAN no esté asociado a la cuenta de infraestructura de IBM Cloud (SoftLayer) que está utilizando. Ejecute <code>ibmcloud ks vlans &lt;zone&gt;</code> para ver una lista de los ID de VLAN disponibles para su cuenta. Para cambiar la cuenta de infraestructura de IBM Cloud (SoftLayer), consulte [`ibmcloud ks credential-set`](cs_cli_reference.html#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: La ubicación suministrada para este pedido no es válida. (HTTP 500)</td>
@@ -242,7 +248,7 @@ Revise los mensajes de error comunes y busque cómo resolverlos.
      </tr>
       <tr>
   <td>No se puede crear la señal de portal de IMS, ya que ninguna cuenta de IMS está enlazada con la cuenta de BSS seleccionada</br></br>El usuario proporcionado no se ha encontrado o está activo</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: La cuenta del usuario está actualmente en estado cancel_pending.</br></br>Esperando que la máquina se haga visible para el usuario</td>
-  <td>El propietario de la clave de API que se utiliza para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer) no tiene los permisos necesarios para realizar la acción o puede estar pendiente de supresión.</br></br><strong>Como usuario</strong>, siga estos pasos: <ol><li>Si tiene acceso a varias cuentas, asegúrese de que ha iniciado la sesión en la cuenta en la que desea trabajar con {{site.data.keyword.containerlong_notm}}. </li><li>Ejecute <code>ibmcloud ks api-key-info</code> para ver el propietario de la clave de API actual que se utiliza para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer) próximo. </li><li>Ejecute <code>ibmcloud account list</code> para ver el propietario de la cuenta de {{site.data.keyword.Bluemix_notm}} que utiliza actualmente. </li><li>Póngase en contacto con el propietario de la cuenta de {{site.data.keyword.Bluemix_notm}} e infórmele de que el propietario de la clave de API tiene permisos insuficientes en la infraestructura de IBM Cloud (SoftLayer) o puede estar pendiente de supresión. </li></ol></br><strong>Como propietario de cuenta</strong>, siga estos pasos: <ol><li>Revise los [permisos necesarios en la infraestructura de IBM Cloud (SoftLayer)](cs_users.html#infra_access) para realizar la acción que ha fallado anteriormente. </li><li>Corrija los permisos del propietario de la clave de API o cree una nueva clave de API mediante el mandato [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset). </li><li>Si usted u otro administrador de la cuenta define manualmente las credenciales de la infraestructura de IBM Cloud (SoftLayer) en la cuenta, ejecute [<code>ibmcloud ks credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) para eliminar las credenciales de la cuenta.</li></ol></td>
+  <td>El propietario de la clave de API que se utiliza para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer) no tiene los permisos necesarios para realizar la acción o puede estar pendiente de supresión.</br></br><strong>Como usuario</strong>, siga estos pasos: <ol><li>Si tiene acceso a varias cuentas, asegúrese de que ha iniciado la sesión en la cuenta en la que desea trabajar con {{site.data.keyword.containerlong_notm}}. </li><li>Ejecute <code>ibmcloud ks api-key-info</code> para ver el propietario de la clave de API actual que se utiliza para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer) próximo. </li><li>Ejecute <code>ibmcloud account list</code> para ver el propietario de la cuenta de {{site.data.keyword.Bluemix_notm}} que utiliza actualmente. </li><li>Póngase en contacto con el propietario de la cuenta de {{site.data.keyword.Bluemix_notm}} e infórmele de que el propietario de la clave de API tiene permisos insuficientes en la infraestructura de IBM Cloud (SoftLayer) o puede estar pendiente de supresión. </li></ol></br><strong>Como propietario de cuenta</strong>, siga estos pasos: <ol><li>Revise los [permisos necesarios en la infraestructura de IBM Cloud (SoftLayer)](cs_users.html#infra_access) para realizar la acción que ha fallado anteriormente. </li><li>Corrija los permisos del propietario de la clave de API o cree una nueva clave de API mediante el mandato [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset). </li><li>Si usted u otro administrador de la cuenta define manualmente las credenciales de la infraestructura de IBM Cloud (SoftLayer) en la cuenta, ejecute [<code>ibmcloud ks credential-unset</code>](cs_cli_reference.html#cs_credentials_unset) para eliminar las credenciales de la cuenta.</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -258,6 +264,8 @@ Revise los mensajes de error comunes y busque cómo resolverlos.
 {: #debug_apps}
 
 Revise las opciones que tiene para depurar sus despliegues de app y busque las causas raíz de los errores.
+
+
 
 1. Busque anomalías en el servicio o en los recursos de despliegue mediante el mandato `describe`.
 
@@ -303,20 +311,15 @@ Revise las opciones que tiene para depurar sus despliegues de app y busque las c
 {: shortdesc}
 
 -  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plug-ins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
-
 -   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/bluemix/support/#status).
 -   Publique una pregunta en [{{site.data.keyword.containerlong_notm}}Slack ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
-
     Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
     {: tip}
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
-
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containerlong_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
     -   Para las preguntas relativas a las instrucciones de inicio y el servicio, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
     Consulte [Obtención de ayuda](/docs/get-support/howtogetsupport.html#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
-
--   Póngase en contacto con el soporte de IBM abriendo una incidencia. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
-{: tip}
+-   Póngase en contacto con el soporte de IBM abriendo un caso. Para obtener información sobre cómo abrir un caso de soporte de IBM, o sobre los niveles de soporte y las gravedades de los casos, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`.
+{: tip}
 

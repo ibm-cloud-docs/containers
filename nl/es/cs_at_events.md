@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -36,6 +39,9 @@ Para obtener más información sobre el funcionamiento del servicio, consulte la
 
 ## Búsqueda de información sobre sucesos
 {: #kube-find}
+
+Puede supervisar las actividades del clúster consultando los registros en el panel de control de Kibana. 
+{: shortdesc}
 
 Para supervisar la actividad administrativa:
 
@@ -62,75 +68,75 @@ Consulte la lista siguiente de sucesos de gestión de clústeres que se envían 
 <th>Acción</th>
 <th>Descripción</th></tr><tr>
 <td><code>containers-kubernetes.account-credentials.set</code></td>
-<td>Se han establecido las credenciales de infraestructura en una región para un grupo de recursos.</td></tr><tr>
+<td>Se establecen las credenciales de infraestructura en una región para un grupo de recursos.</td></tr><tr>
 <td><code>containers-kubernetes.account-credentials.unset</code></td>
-<td>No se han establecido las credenciales de infraestructura en una región para un grupo de recursos.</td></tr><tr>
+<td>Se desestablecen las credenciales de infraestructura en una región para un grupo de recursos.</td></tr><tr>
 <td><code>containers-kubernetes.alb.create</code></td>
-<td>Se ha creado un ALB Ingress.</td></tr><tr>
+<td>Se crea un ALB Ingress.</td></tr><tr>
 <td><code>containers-kubernetes.alb.delete</code></td>
-<td>Se ha suprimido un ALB Ingress.</td></tr><tr>
+<td>Se suprime un ALB Ingress.</td></tr><tr>
 <td><code>containers-kubernetes.alb.get</code></td>
-<td>Se ha visualizado la información de ALB Ingress.</td></tr><tr>
+<td>Se visualiza la información de ALB Ingress.</td></tr><tr>
 <td><code>containers-kubernetes.apikey.reset</code></td>
-<td>Se ha restablecido una clave de API para una región y un grupo de recursos.</td></tr><tr>
+<td>Se restablece una clave de API para una región y un grupo de recursos.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.create</code></td>
-<td>Se ha creado un clúster.</td></tr><tr>
+<td>Se crea un clúster.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.delete</code></td>
-<td>Se ha suprimido un clúster.</td></tr><tr>
+<td>Se suprime un clúster.</td></tr><tr>
 <td><code>containers-kubernetes.cluster-feature.enable</code></td>
-<td>Se ha habilitado en un clúster una característica, como por ejemplo el cálculo de confianza para los nodos trabajadores nativos.</td></tr><tr>
+<td>Se habilita en un clúster una característica, como por ejemplo el cálculo de confianza para los nodos trabajadores nativos.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.get</code></td>
-<td>Se ha visualizado información del clúster.</td></tr><tr>
+<td>Se visualiza información del clúster.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.create</code></td>
-<td>Se ha creado una configuración de reenvío de registro.</td></tr><tr>
+<td>Se crea una configuración de reenvío de registro.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.delete</code></td>
-<td>Se ha suprimido una configuración de reenvío de registro.</td></tr><tr>
+<td>Se suprime una configuración de reenvío de registro.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.get</code></td>
-<td>Se ha visualizado información de una configuración de reenvío de registro.</td></tr><tr>
+<td>Se visualiza información de una configuración de reenvío de registro.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.update</code></td>
-<td>Se ha actualizado una configuración de reenvío de registro.</td></tr><tr>
+<td>Se actualiza una configuración de reenvío de registro.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.refresh</code></td>
-<td>Se ha renovado una configuración de reenvío de registro.</td></tr><tr>
+<td>Se renueva una configuración de reenvío de registro.</td></tr><tr>
 <td><code>containers-kubernetes.logging-filter.create</code></td>
-<td>Se ha creado un filtro de registro.</td></tr><tr>
+<td>Se crea un filtro de registro.</td></tr><tr>
 <td><code>containers-kubernetes.logging-filter.delete</code></td>
-<td>Se ha suprimido un filtro de registro.</td></tr><tr>
+<td>Se suprime un filtro de registro.</td></tr><tr>
 <td><code>containers-kubernetes.logging-filter.get</code></td>
-<td>Se ha visualizado información de un filtro de registro.</td></tr><tr>
+<td>Se visualiza información de un filtro de registro.</td></tr><tr>
 <td><code>containers-kubernetes.logging-filter.update</code></td>
-<td>Se ha actualizado un filtro de registro.</td></tr><tr>
+<td>Se actualiza un filtro de registro.</td></tr><tr>
 <td><code>containers-kubernetes.logging-autoupdate.changed</code></td>
-<td>El actualizador automático del complemento de registro se ha habilitado o inhabilitado.</td></tr><tr>
+<td>Se habilita o inhabilita el actualizador automático del complemento de registro.</td></tr><tr>
 <td><code>containers-kubernetes.mzlb.create</code></td>
-<td>Se ha creado un equilibrador de carga multizona.</td></tr><tr>
+<td>Se crea un equilibrador de carga multizona.</td></tr><tr>
 <td><code>containers-kubernetes.mzlb.delete</code></td>
-<td>Se ha suprimido un equilibrador de carga multizona.</td></tr><tr>
+<td>Se suprime un equilibrador de carga multizona.</td></tr><tr>
 <td><code>containers-kubernetes.service.bind</code></td>
-<td>Se ha enlazado un servicio a un clúster.</td></tr><tr>
+<td>Se enlaza un servicio a un clúster.</td></tr><tr>
 <td><code>containers-kubernetes.service.unbind</code></td>
-<td>Se ha desenlazado un servicio de un clúster.</td></tr><tr>
+<td>Se desenlaza un servicio de un clúster.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.add</code></td>
-<td>Se ha añadido a un clúster una subred de la infraestructura de IBM Cloud (SoftLayer) existente.</td></tr><tr>
+<td>Se añade a un clúster una subred de la infraestructura de IBM Cloud (SoftLayer) existente.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.create</code></td>
-<td>Se ha creado una subred.</td></tr><tr>
+<td>Se crea una subred.</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.add</code></td>
-<td>Se ha añadido a un clúster una subred gestionada por el usuario.</td></tr><tr>
+<td>Se añade a un clúster una subred gestionada por el usuario.</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.delete</code></td>
-<td>Se ha eliminado de un clúster una subred gestionada por el usuario.</td></tr><tr>
+<td>Se elimina de un clúster una subred gestionada por el usuario.</td></tr><tr>
 <td><code>containers-kubernetes.version.update</code></td>
-<td>Se ha actualizado la versión de Kubernetes de un nodo maestro de clúster.</td></tr><tr>
+<td>Se actualiza la versión de Kubernetes de un nodo maestro de clúster.</td></tr><tr>
 <td><code>containers-kubernetes.worker.create</code></td>
-<td>Se ha creado un nodo trabajador.</td></tr><tr>
+<td>Se crea un nodo trabajador.</td></tr><tr>
 <td><code>containers-kubernetes.worker.delete</code></td>
-<td>Se ha suprimido un nodo trabajador.</td></tr><tr>
+<td>Se suprime un nodo trabajador.</td></tr><tr>
 <td><code>containers-kubernetes.worker.get</code></td>
-<td>Se ha visualizado información de un nodo trabajador.</td></tr><tr>
+<td>Se visualiza información de un nodo trabajador.</td></tr><tr>
 <td><code>containers-kubernetes.worker.reboot</code></td>
-<td>Se ha reiniciado un nodo trabajador.</td></tr><tr>
+<td>Se reinicia un nodo trabajador.</td></tr><tr>
 <td><code>containers-kubernetes.worker.reload</code></td>
-<td>Se ha vuelto a cargar un nodo trabajador.</td></tr><tr>
+<td>Se vuelve a cargar un nodo trabajador.</td></tr><tr>
 <td><code>containers-kubernetes.worker.update</code></td>
-<td>Se ha actualizado un nodo trabajador.</td></tr>
+<td>Se actualiza un nodo trabajador.</td></tr>
 </table>
 
 ## Seguimiento de sucesos de auditoría de Kubernetes
@@ -148,23 +154,23 @@ Antes de empezar: asegúrese de que el clúster está configurado para reenviar 
   </tr>
   <tr>
     <td><code>bindings.create</code></td>
-    <td>Se ha creado un enlace.</td>
+    <td>Se crea un enlace.</td>
   </tr>
   <tr>
     <td><code>certificatesigningrequests.create</code></td>
-    <td>Se ha creado una solicitud para firmar un certificado.</td>
+    <td>Se crea una solicitud para firmar un certificado.</td>
   </tr>
   <tr>
     <td><code>certificatesigningrequests.delete</code></td>
-    <td>Se ha suprimido una solicitud para firmar un certificado.</td>
+    <td>Se suprime una solicitud para firmar un certificado.</td>
   </tr>
   <tr>
     <td><code>certificatesigningrequests.patch</code></td>
-    <td>Se ha aplicado un parche a una solicitud para firmar un certificado.</td>
+    <td>Se aplica un parche a una solicitud para firmar un certificado.</td>
   </tr>
   <tr>
     <td><code>certificatesigningrequests.update</code></td>
-    <td>Se ha actualizado una solicitud para firmar un certificado.</td>
+    <td>Se actualiza una solicitud para firmar un certificado.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.create</code></td>
@@ -172,243 +178,243 @@ Antes de empezar: asegúrese de que el clúster está configurado para reenviar 
   </tr>
   <tr>
     <td><code>clusterbindings.deleted</code></td>
-    <td>Se ha suprimido un enlace de rol de clúster.</td>
+    <td>Se suprime un enlace de rol de clúster.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.patched</code></td>
-    <td>Se ha aplicado un parche a un enlace de rol de clúster.</td>
+    <td>Se aplica un parche a un enlace de rol de clúster.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.updated</code></td>
-    <td>Se ha actualizado un enlace de rol de clúster.</td>
+    <td>Se actualiza un enlace de rol de clúster.</td>
   </tr>
   <tr>
     <td><code>clusterroles.create</code></td>
-    <td>Se ha creado un rol de clúster.</td>
+    <td>Se crea un rol de clúster.</td>
   </tr>
   <tr>
     <td><code>clusterroles.deleted</code></td>
-    <td>Se ha suprimido un rol de clúster.</td>
+    <td>Se suprime un rol de clúster.</td>
   </tr>
   <tr>
     <td><code>clusterroles.patched</code></td>
-    <td>Se ha aplicado un parche a un rol de clúster.</td>
+    <td>Se aplica un parche a un rol de clúster.</td>
   </tr>
   <tr>
     <td><code>clusterroles.updated</code></td>
-    <td>Se ha actualizado un rol de clúster.</td>
+    <td>Se actualiza un rol de clúster.</td>
   </tr>
   <tr>
     <td><code>configmaps.create</code></td>
-    <td>Se ha creado un mapa de configuración.</td>
+    <td>Se crea un mapa de configuración.</td>
   </tr>
   <tr>
     <td><code>configmaps.delete</code></td>
-    <td>Se ha suprimido un mapa de configuración.</td>
+    <td>Se suprime un mapa de configuración.</td>
   </tr>
   <tr>
     <td><code>configmaps.patch</code></td>
-    <td>Se ha aplicado un parche a un mapa de configuración.</td>
+    <td>Se aplica un parche a un mapa de configuración.</td>
   </tr>
   <tr>
     <td><code>configmaps.update</code></td>
-    <td>Se ha actualizado un mapa de configuración.</td>
+    <td>Se actualiza un mapa de configuración.</td>
   </tr>
   <tr>
     <td><code>controllerrevisions.create</code></td>
-    <td>Se ha creado una revisión de controlador.</td>
+    <td>Se crea una revisión de controlador.</td>
   </tr>
   <tr>
     <td><code>controllerrevisions.delete</code></td>
-    <td>Se ha suprimido una revisión de controlador.</td>
+    <td>Se suprime una revisión de controlador.</td>
   </tr>
   <tr>
     <td><code>controllerrevisions.patch</code></td>
-    <td>Se ha aplicado un parche a una revisión de controlador.</td>
+    <td>Se aplica un parche a una revisión de controlador.</td>
   </tr>
   <tr>
     <td><code>controllerrevisions.update</code></td>
-    <td>Se ha actualizado una revisión de controlador.</td>
+    <td>Se actualiza una revisión de controlador.</td>
   </tr>
   <tr>
     <td><code>daemonsets.create</code></td>
-    <td>Se ha creado un conjunto de daemons.</td>
+    <td>Se crea un conjunto de daemons.</td>
   </tr>
   <tr>
     <td><code>daemonsets.delete</code></td>
-    <td>Se ha suprimido un conjunto de daemons.</td>
+    <td>Se suprime un conjunto de daemons.</td>
   </tr>
   <tr>
     <td><code>daemonsets.patch</code></td>
-    <td>Se ha aplicado un parche a un conjunto de daemons.</td>
+    <td>Se aplica un parche a un conjunto de daemons.</td>
   </tr>
   <tr>
     <td><code>daemonsets.update</code></td>
-    <td>Se ha actualizado un conjunto de daemons.</td>
+    <td>Se actualiza un conjunto de daemons.</td>
   </tr>
   <tr>
     <td><code>deployments.create</code></td>
-    <td>Se ha creado un despliegue.</td>
+    <td>Se crea un despliegue.</td>
   </tr>
   <tr>
     <td><code>deployments.delete</code></td>
-    <td>Se ha suprimido un despliegue.</td>
+    <td>Se suprime un despliegue.</td>
   </tr>
   <tr>
     <td><code>deployments.patch</code></td>
-    <td>Se ha aplicado un parche a un despliegue.</td>
+    <td>Se aplica un parche a un despliegue.</td>
   </tr>
   <tr>
     <td><code>deployments.update</code></td>
-    <td>Se ha actualizado un despliegue.</td>
+    <td>Se actualiza un despliegue.</td>
   </tr>
   <tr>
     <td><code>events.create</code></td>
-    <td>Se ha creado un suceso.</td>
+    <td>Se crea un suceso.</td>
   </tr>
   <tr>
     <td><code>events.delete</code></td>
-    <td>Se ha suprimido un suceso.</td>
+    <td>Se suprime un suceso.</td>
   </tr>
   <tr>
     <td><code>events.patch</code></td>
-    <td>Se ha aplicado un parche a un suceso.</td>
+    <td>Se aplica un parche a un suceso.</td>
   </tr>
   <tr>
     <td><code>events.update</code></td>
-    <td>Se ha actualizado un suceso.</td>
+    <td>Se actualiza un suceso.</td>
   </tr>
   <tr>
     <td><code>externaladmissionhookconfigurations.create</code></td>
-    <td>En Kubernetes v1.8, se ha creado una configuración de hook de admisiones externo.</td>
+    <td>En Kubernetes v1.8, se crea una configuración de hook de admisiones externo.</td>
   </tr>
   <tr>
     <td><code>externaladmissionhookconfigurations.delete</code></td>
-    <td>En Kubernetes v1.8, se ha suprimido una configuración de hook de admisiones externo.</td>
+    <td>En Kubernetes v1.8, se suprime una configuración de hook de admisiones externo.</td>
   </tr>
   <tr>
     <td><code>externaladmissionhookconfigurations.patch</code></td>
-    <td>En Kubernetes v1.8, se ha aplicado un parche a una configuración de hook de admisiones externo.</td>
+    <td>En Kubernetes v1.8, se aplica un parche a una configuración de hook de admisiones externo.</td>
   </tr>
   <tr>
     <td><code>externaladmissionhookconfigurations.update</code></td>
-    <td>En Kubernetes v1.8, se ha actualizado una configuración de hook de admisiones externo.</td>
+    <td>En Kubernetes v1.8, se actualiza una configuración de hook de admisiones externo.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.create</code></td>
-    <td>Se ha creado una política de escalado automático de pod horizontal.</td>
+    <td>Se crea una política de escalado automático de pod horizontal.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.delete</code></td>
-    <td>Se ha suprimido una política de escalado automático de pod horizontal.</td>
+    <td>Se suprime una política de escalado automático de pod horizontal.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.patch</code></td>
-    <td>Se ha aplicado un parche a una política de escalado automático de pod horizontal.</td>
+    <td>Se aplica un parche a una política de escalado automático de pod horizontal.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.update</code></td>
-    <td>Se ha actualizado una política de escalado automático de pod horizontal.</td>
+    <td>Se actualiza una política de escalado automático de pod horizontal.</td>
   </tr>
   <tr>
     <td><code>ingresses.create</code></td>
-    <td>Se ha creado un ALB Ingress.</td>
+    <td>Se crea un ALB Ingress.</td>
   </tr>
   <tr>
     <td><code>ingresses.delete</code></td>
-    <td>Se ha suprimido un ALB Ingress.</td>
+    <td>Se suprime un ALB Ingress.</td>
   </tr>
   <tr>
     <td><code>ingresses.patch</code></td>
-    <td>Se ha aplicado un parche a un ALB Ingress.</td>
+    <td>Se aplica un parche a un ALB Ingress.</td>
   </tr>
   <tr>
     <td><code>ingresses.update</code></td>
-    <td>Se ha actualizado un ALB Ingress.</td>
+    <td>Se actualiza un ALB Ingress.</td>
   </tr>
   <tr>
     <td><code>jobs.create</code></td>
-    <td>Se ha creado un trabajo.</td>
+    <td>Se crea un trabajo.</td>
   </tr>
   <tr>
     <td><code>jobs.delete</code></td>
-    <td>Se ha suprimido un trabajo.</td>
+    <td>Se suprime un trabajo.</td>
   </tr>
   <tr>
     <td><code>jobs.patch</code></td>
-    <td>Se ha aplicado un parche a un trabajo.</td>
+    <td>Se aplica un parche a un trabajo.</td>
   </tr>
   <tr>
     <td><code>jobs.update</code></td>
-    <td>Se ha actualizado un trabajo.</td>
+    <td>Se actualiza un trabajo.</td>
   </tr>
   <tr>
     <td><code>localsubjectaccessreviews.create</code></td>
-    <td>Se ha creado una revisión de acceso de asunto local.</td>
+    <td>Se crea una revisión de acceso de asunto local.</td>
   </tr>
   <tr>
     <td><code>limitranges.create</code></td>
-    <td>Se ha creado un límite de rango.</td>
+    <td>Se crea un límite de rango.</td>
   </tr>
   <tr>
     <td><code>limitranges.delete</code></td>
-    <td>Se ha suprimido un límite de rango.</td>
+    <td>Se suprime un límite de rango.</td>
   </tr>
   <tr>
     <td><code>limitranges.patch</code></td>
-    <td>Se ha aplicado un parche a un límite de rango.</td>
+    <td>Se aplica un parche a un límite de rango.</td>
   </tr>
   <tr>
     <td><code>limitranges.update</code></td>
-    <td>Se ha actualizado un límite de rango.</td>
+    <td>Se actualiza un límite de rango.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.create</code></td>
-    <td>En Kubernetes v1.9 y posteriores, se ha creado una configuración de webhook mutante.</td>
+    <td>En Kubernetes v1.9 y posteriores, se crea una configuración de webhook mutante.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.delete</code></td>
-    <td>En Kubernetes v1.9 y posteriores, se ha suprimido una configuración de webhook mutante.</td>
+    <td>En Kubernetes v1.9 y posteriores, se suprime una configuración de webhook mutante.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.patch</code></td>
-    <td>En Kubernetes v1.9 y posteriores, se ha aplicado un parche a una configuración de webhook mutante.</td>
+    <td>En Kubernetes v1.9 y posteriores, se aplica un parche a una configuración de webhook mutante.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.update</code></td>
-    <td>En Kubernetes v1.9 y posteriores, se ha actualizado una configuración de webhook mutante.</td>
+    <td>En Kubernetes v1.9 y posteriores, se actualiza una configuración de webhook mutante.</td>
   </tr>
   <tr>
     <td><code>namespaces.create</code></td>
-    <td>Se ha creado un espacio de nombres.</td>
+    <td>Se crea un espacio de nombres.</td>
   </tr>
   <tr>
     <td><code>namespaces.delete</code></td>
-    <td>Se ha suprimido un espacio de nombres.</td>
+    <td>Se suprime un espacio de nombres.</td>
   </tr>
   <tr>
     <td><code>namespaces.patch</code></td>
-    <td>Se ha aplicado un parche a un espacio de nombres.</td>
+    <td>Se aplica un parche a un espacio de nombres.</td>
   </tr>
   <tr>
     <td><code>namespaces.update</code></td>
-    <td>Se ha actualizado un espacio de nombres.</td>
+    <td>Se actualiza un espacio de nombres.</td>
   </tr>
   <tr>
     <td><code>networkpolicies.create</code></td>
-    <td>Se ha creado una política de red.</td>
+    <td>Se crea una política de red.</td>
   </tr>
   <tr>
     <td><code>networkpolicies.delete</code></td>
-    <td>Se ha suprimido una política de red.</td>
+    <td>Se suprime una política de red.</td>
   </tr>
   <tr>
     <td><code>networkpolicies.patch</code></td>
-    <td>Se ha aplicado un parche a una política de red.</td>
+    <td>Se aplica un parche a una política de red.</td>
   </tr>
   <tr>
     <td><code>networkpolicies.update</code></td>
-    <td>Se ha actualizado una política de red.</td>
+    <td>Se actualiza una política de red.</td>
   </tr>
   <tr>
     <td><code>nodes.create</code></td>
@@ -416,306 +422,306 @@ Antes de empezar: asegúrese de que el clúster está configurado para reenviar 
   </tr>
   <tr>
     <td><code>nodes.delete</code></td>
-    <td>Se ha suprimido un nodo.</td>
+    <td>Se suprime un nodo.</td>
   </tr>
   <tr>
     <td><code>nodes.patch</code></td>
-    <td>Se ha aplicado un parche a un nodo.</td>
+    <td>Se aplica un parche a un nodo.</td>
   </tr>
   <tr>
     <td><code>nodes.update</code></td>
-    <td>Se ha actualizado un nodo.</td>
+    <td>Se actualiza un nodo.</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.create</code></td>
-    <td>Se ha creado una reclamación de volumen persistente.</td>
+    <td>Se crea una reclamación de volumen persistente.</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.delete</code></td>
-    <td>Se ha suprimido una reclamación de volumen persistente.</td>
+    <td>Se suprime una reclamación de volumen persistente.</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.patch</code></td>
-    <td>Se ha aplicado un parche a una reclamación de volumen persistente.</td>
+    <td>Se aplica un parche a una reclamación de volumen persistente.</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.update</code></td>
-    <td>Se ha actualizado una reclamación de volumen persistente.</td>
+    <td>Se actualiza una reclamación de volumen persistente.</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.create</code></td>
-    <td>Se ha creado un volumen persistente.</td>
+    <td>Se crea un volumen persistente.</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.delete</code></td>
-    <td>Se ha suprimido un volumen persistente.</td>
+    <td>Se suprime un volumen persistente.</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.patch</code></td>
-    <td>Se ha aplicado un parche a un volumen persistente.</td>
+    <td>Se aplica un parche a un volumen persistente.</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.update</code></td>
-    <td>Se ha actualizado un volumen persistente.</td>
+    <td>Se actualiza un volumen persistente.</td>
   </tr>
   <tr>
     <td><code>poddisruptionbudgets.create</code></td>
-    <td>Se ha creado un presupuesto de interrupción de pod.</td>
+    <td>Se crea un presupuesto de interrupción de pod.</td>
   </tr>
   <tr>
     <td><code>poddisruptionbudgets.delete</code></td>
-    <td>Se ha suprimido un presupuesto de interrupción de pod.</td>
+    <td>Se suprime un presupuesto de interrupción de pod.</td>
   </tr>
   <tr>
     <td><code>poddisruptionbudgets.patch</code></td>
-    <td>Se ha aplicado un parche a un presupuesto de interrupción de pod.</td>
+    <td>Se aplica un parche a un presupuesto de interrupción de pod.</td>
   </tr>
   <tr>
     <td><code>poddisruptionbudgets.update</code></td>
-    <td>Se ha actualizado un presupuesto de interrupción de pod.</td>
+    <td>Se actualiza un presupuesto de interrupción de pod.</td>
   </tr>
   <tr>
     <td><code>podpresets.create</code></td>
-    <td>Se ha creado un pod preestablecido.</td>
+    <td>Se crea un pod preestablecido.</td>
   </tr>
   <tr>
     <td><code>podpresets.deleted</code></td>
-    <td>Se ha suprimido un pod preestablecido.</td>
+    <td>Se suprime un pod preestablecido.</td>
   </tr>
   <tr>
     <td><code>podpresets.patched</code></td>
-    <td>Se ha aplicado un parche a un pod preestablecido.</td>
+    <td>Se aplica un parche a un pod preestablecido.</td>
   </tr>
   <tr>
     <td><code>podpresets.updated</code></td>
-    <td>Se ha actualizado un pod preestablecido.</td>
+    <td>Se actualiza un pod preestablecido.</td>
   </tr>
   <tr>
     <td><code>pods.create</code></td>
-    <td>Se ha creado un pod.</td>
+    <td>Se crea un pod.</td>
   </tr>
   <tr>
     <td><code>pods.delete</code></td>
-    <td>Se ha suprimido un pod.</td>
+    <td>Se suprime un pod.</td>
   </tr>
   <tr>
     <td><code>pods.patch</code></td>
-    <td>Se ha aplicado un parche a un pod.</td>
+    <td>Se aplica un parche a un pod.</td>
   </tr>
   <tr>
     <td><code>pods.update</code></td>
-    <td>Se ha actualizado un pod.</td>
+    <td>Se actualiza un pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>Para Kubernetes v1.10 y superior, se ha creado una política de seguridad de pod.</td>
+    <td>Para Kubernetes v1.10 y superior, se crea una política de seguridad de pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>Para Kubernetes v1.10 y superior, se ha suprimido una política de seguridad de pod.</td>
+    <td>Para Kubernetes v1.10 y superior, se suprime una política de seguridad de pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>Para Kubernetes v1.10 y superior, se ha aplicado un parche a una política de seguridad de pod.</td>
+    <td>Para Kubernetes v1.10 y superior, se aplica un parche a una política de seguridad de pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>Para Kubernetes v1.10 y superior, se ha actualizado una política de seguridad de pod.</td>
+    <td>Para Kubernetes v1.10 y superior, se actualiza una política de seguridad de pod.</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>
-    <td>Se ha creado una plantilla de pod.</td>
+    <td>Se crea una plantilla de pod.</td>
   </tr>
   <tr>
     <td><code>podtemplates.delete</code></td>
-    <td>Se ha suprimido una plantilla de pod.</td>
+    <td>Se suprime una plantilla de pod.</td>
   </tr>
   <tr>
     <td><code>podtemplates.patch</code></td>
-    <td>Se ha aplicado un parche a una plantilla de pod.</td>
+    <td>Se aplica un parche a una plantilla de pod.</td>
   </tr>
   <tr>
     <td><code>podtemplates.update</code></td>
-    <td>Se ha actualizado una plantilla de pod.</td>
+    <td>Se actualiza una plantilla de pod.</td>
   </tr>
   <tr>
     <td><code>replicasets.create</code></td>
-    <td>Se ha creado un conjunto de réplicas.</td>
+    <td>Se crea un conjunto de réplicas.</td>
   </tr>
   <tr>
     <td><code>replicasets.delete</code></td>
-    <td>Se ha suprimido un conjunto de réplicas.</td>
+    <td>Se suprime un conjunto de réplicas.</td>
   </tr>
   <tr>
     <td><code>replicasets.patch</code></td>
-    <td>Se ha aplicado un parche a un conjunto de réplicas.</td>
+    <td>Se aplica un parche a un conjunto de réplicas.</td>
   </tr>
   <tr>
     <td><code>replicasets.update</code></td>
-    <td>Se ha actualizado un conjunto de réplicas.</td>
+    <td>Se actualiza un conjunto de réplicas.</td>
   </tr>
   <tr>
     <td><code>replicationcontrollers.create</code></td>
-    <td>Se ha creado un controlador de réplicas.</td>
+    <td>Se crea un controlador de réplicas.</td>
   </tr>
   <tr>
     <td><code>replicationcontrollers.delete</code></td>
-    <td>Se ha suprimido un controlador de réplicas.</td>
+    <td>Se suprime un controlador de réplicas.</td>
   </tr>
   <tr>
     <td><code>replicationcontrollers.patch</code></td>
-    <td>Se ha aplicado un parche a un controlador de réplicas.</td>
+    <td>Se aplica un parche a un controlador de réplicas.</td>
   </tr>
   <tr>
     <td><code>replicationcontrollers.update</code></td>
-    <td>Se ha actualizado un controlador de réplicas.</td>
+    <td>Se actualiza un controlador de réplicas.</td>
   </tr>
   <tr>
     <td><code>resourcequotas.create</code></td>
-    <td>Se ha creado una cuota de recursos.</td>
+    <td>Se crea una cuota de recursos.</td>
   </tr>
   <tr>
     <td><code>resourcequotas.delete</code></td>
-    <td>Se ha suprimido una cuota de recursos.</td>
+    <td>Se suprime una cuota de recursos.</td>
   </tr>
   <tr>
     <td><code>resourcequotas.patch</code></td>
-    <td>Se ha aplicado un parche a una cuota de recursos.</td>
+    <td>Se aplica un parche a una cuota de recursos.</td>
   </tr>
   <tr>
     <td><code>resourcequotas.update</code></td>
-    <td>Se ha actualizado una cuota de recursos.</td>
+    <td>Se actualiza una cuota de recursos.</td>
   </tr>
   <tr>
     <td><code>rolebindings.create</code></td>
-    <td>Se ha creado un enlace de rol.</td>
+    <td>Se crea un enlace de rol.</td>
   </tr>
   <tr>
     <td><code>rolebindings.deleted</code></td>
-    <td>Se ha suprimido un enlace de rol.</td>
+    <td>Se suprime un enlace de rol.</td>
   </tr>
   <tr>
     <td><code>rolebindings.patched</code></td>
-    <td>Se ha aplicado un parche a un enlace de rol.</td>
+    <td>Se aplica un parche a un enlace de rol.</td>
   </tr>
   <tr>
     <td><code>rolebindings.updated</code></td>
-    <td>Se ha actualizado un enlace de rol.</td>
+    <td>Se actualiza un enlace de rol.</td>
   </tr>
   <tr>
     <td><code>roles.create</code></td>
-    <td>Se ha creado un rol.</td>
+    <td>Se crea un rol.</td>
   </tr>
   <tr>
     <td><code>roles.deleted</code></td>
-    <td>Se ha suprimido un rol.</td>
+    <td>Se suprime un rol.</td>
   </tr>
   <tr>
     <td><code>roles.patched</code></td>
-    <td>Se ha aplicado un parche a un rol.</td>
+    <td>Se aplica un parche a un rol.</td>
   </tr>
   <tr>
     <td><code>roles.updated</code></td>
-    <td>Se ha actualizado un rol.</td>
+    <td>Se actualiza un rol.</td>
   </tr>
   <tr>
     <td><code>secrets.create</code></td>
-    <td>Se ha creado un secreto.</td>
+    <td>Se crea un secreto.</td>
   </tr>
   <tr>
     <td><code>secrets.deleted</code></td>
-    <td>Se ha suprimido un secreto.</td>
+    <td>Se suprime un secreto.</td>
   </tr>
   <tr>
     <td><code>secrets.get</code></td>
-    <td>Se ha visto un secreto.</td>
+    <td>Se visualiza un secreto.</td>
   </tr>
   <tr>
     <td><code>secrets.patch</code></td>
-    <td>Se ha aplicado un parche a un secreto.</td>
+    <td>Se aplica un parche a un secreto.</td>
   </tr>
   <tr>
     <td><code>secrets.updated</code></td>
-    <td>Se ha actualizado un secreto.</td>
+    <td>Se actualiza un secreto.</td>
   </tr>
   <tr>
     <td><code>selfsubjectaccessreviews.create</code></td>
-    <td>Se ha creado una revisión de acceso de asunto propio.</td>
+    <td>Se crea una revisión de acceso de asunto propio.</td>
   </tr>
   <tr>
     <td><code>selfsubjectrulesreviews.create</code></td>
-    <td>Se ha creado una revisión de reglas de asuntos propios.</td>
+    <td>Se crea una revisión de reglas de asuntos propios.</td>
   </tr>
   <tr>
     <td><code>subjectaccessreviews.create</code></td>
-    <td>Se ha creado una revisión de acceso de asunto.</td>
+    <td>Se crea una revisión de acceso de asunto.</td>
   </tr>
   <tr>
     <td><code>serviceaccounts.create</code></td>
-    <td>Se ha creado una cuenta de servicio.</td>
+    <td>Se crea una cuenta de servicio.</td>
   </tr>
   <tr>
     <td><code>serviceaccounts.deleted</code></td>
-    <td>Se ha suprimido una cuenta de servicio.</td>
+    <td>Se suprime una cuenta de servicio.</td>
   </tr>
   <tr>
     <td><code>serviceaccounts.patch</code></td>
-    <td>Se ha aplicado un parche a una cuenta de servicio.</td>
+    <td>Se aplica un parche a una cuenta de servicio.</td>
   </tr>
   <tr>
     <td><code>serviceaccounts.updated</code></td>
-    <td>Se ha actualizado una cuenta de servicio.</td>
+    <td>Se actualiza una cuenta de servicio.</td>
   </tr>
   <tr>
     <td><code>services.create</code></td>
-    <td>Se ha creado un servicio.</td>
+    <td>Se crea un servicio.</td>
   </tr>
   <tr>
     <td><code>services.deleted</code></td>
-    <td>Se ha suprimido un servicio.</td>
+    <td>Se suprime un servicio.</td>
   </tr>
   <tr>
     <td><code>services.patch</code></td>
-    <td>Se ha aplicado un parche a un servicio.</td>
+    <td>Se aplica un parche a un servicio.</td>
   </tr>
   <tr>
     <td><code>services.updated</code></td>
-    <td>Se ha actualizado un servicio.</td>
+    <td>Se actualiza un servicio.</td>
   </tr>
   <tr>
     <td><code>statefulsets.create</code></td>
-    <td>Se ha creado un conjunto con estado.</td>
+    <td>Se crea un conjunto con estado.</td>
   </tr>
   <tr>
     <td><code>statefulsets.delete</code></td>
-    <td>Se ha suprimido un conjunto con estado.</td>
+    <td>Se suprime un conjunto con estado.</td>
   </tr>
   <tr>
     <td><code>statefulsets.patch</code></td>
-    <td>Se ha aplicado un parche a un conjunto con estado.</td>
+    <td>Se aplica un parche a un conjunto con estado.</td>
   </tr>
   <tr>
     <td><code>statefulsets.update</code></td>
-    <td>Se ha actualizado un conjunto con estado.</td>
+    <td>Se actualiza un conjunto con estado.</td>
   </tr>
   <tr>
     <td><code>tokenreviews.create</code></td>
-    <td>Se ha creado una revisión de señal.</td>
+    <td>Se crea una revisión de señal.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.create</code></td>
-    <td>En Kubernetes v1.9 y posteriores, se ha creado una validación de configuración de webhook.</td>
+    <td>En Kubernetes v1.9 y posteriores, se crea una validación de configuración de webhook.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.delete</code></td>
-    <td>En Kubernetes v1.9 y posteriores, se ha suprimido una validación de configuración de webhook.</td>
+    <td>En Kubernetes v1.9 y posteriores, se suprime una validación de configuración de webhook.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.patch</code></td>
-    <td>En Kubernetes v1.9 y posteriores, se ha aplicado un parche a una validación de configuración de webhook.</td>
+    <td>En Kubernetes v1.9 y posteriores, se aplica un parche a una validación de configuración de webhook.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.update</code></td>
-    <td>En Kubernetes v1.9 y posteriores, se ha actualizado una validación de configuración de webhook.</td>
+    <td>En Kubernetes v1.9 y posteriores, se actualiza una validación de configuración de webhook.</td>
   </tr>
 </table>

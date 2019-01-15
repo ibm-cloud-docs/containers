@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -40,19 +43,20 @@ Conozca los pasos generales para desplegar apps pulsando en un área de la image
 ## Planificación de la ejecución de apps en clústeres
 {: #plan_apps}
 
-Asegúrese de que su app esté lista para desplegarla en {{site.data.keyword.containerlong_notm}}.
+Antes de desplegar una app en un clúster de {{site.data.keyword.containerlong_notm}}, decida cómo desea configurar la app para que se pueda acceder a la app correctamente y se pueda integrar con otros servicios de {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
 ### ¿Qué tipo de objetos Kubernetes puedo hacer para mi app?
 {: #object}
 
 Cuando prepare el archivo YAML de la app, tiene muchas opciones para aumentar la disponibilidad, el rendimiento y la seguridad de la app. Por ejemplo, en lugar de un solo pod, puede utilizar un objeto controlador de Kubernetes para gestionar la carga de trabajo, como un conjunto de réplicas, un trabajo o un conjunto de daemons. Para obtener más información sobre los pods y los controladores, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). Un despliegue que gestiona un conjunto de réplicas de pods es un caso de uso común para una app.
+{: shortdesc}
 
 Por ejemplo, un objeto `kind: Deployment` constituye una buena opción para desplegar un pod de app porque con este objeto puede especificar un conjunto de réplicas para aumentar la disponibilidad de los pods.
 
 En la tabla siguiente se describe por qué puede crear distintos tipos de objetos de carga de trabajo de Kubernetes.
 
-| Objeto | Descripción | 
+| Objeto | Descripción |
 | --- | --- |
 | [`Pod` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | Un pod es la unidad desplegable más pequeña para las cargas de trabajo, y puede contener un solo contenedor o varios. Parecidos a los contenedores, los pods están diseñadas para ser desechados y a menudo se utilizan para probar las características de una app. Para evitar el tiempo de inactividad de la app, considere la posibilidad de desplegar pods con un controlador de Kubernetes, como un despliegue. Un despliegue le ayuda a gestionar varios pods, réplicas, escalado de pods, despliegues y más. |
 | [`ReplicaSet` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | Un conjunto de réplicas garantiza que se ejecutan varias réplicas del pod y que se vuelve a planificar el pod en el caso de que se desactive. Puede crear un conjunto de réplicas para probar cómo funciona la planificación del pod, pero, para gestionar actualizaciones de app, despliegues y escalado, cree en su lugar un despliegue. |
@@ -80,6 +84,7 @@ Consulte [Especificación de los requisitos de la app en el archivo YAML](#app_y
 {: #variables}
 
 Para añadir información sobre variables a los despliegues en lugar de codificar los datos en el archivo YAML, puede utilizar un objeto [`ConfigMap` de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) o un objeto [`Secret` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/secret/).
+{: shortdesc}
 
 Para consumir un mapa de configuración o un secreto, debe montarlo en el pod. El objeto configmap o secret se combina con el pod justo antes de que se ejecute el pod. Puede reutilizar una especificación de despliegue y una imagen entre varias apps, pero luego debe intercambiar los mapas de configuración y los secretos personalizados. Los secretos en concreto consumen mucho almacenamiento en el nodo local, así que debe planificarlos en consecuencia.
 
@@ -106,6 +111,7 @@ Consulte [Adición de servicios a apps](cs_integrations.html#adding_app).
 
 ### ¿Cómo puedo asegurarme de que mi app tenga los recursos adecuados?
 Cuando [especifique el archivo YAML de la app](#app_yaml), puede añadir a la configuración de la app funciones de Kubernetes que ayuden a que la app a obtener los recursos correctos. En particular, [establezca límites de recursos y solicitudes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) para cada contenedor que esté definido en el archivo YAML.
+{: shortdesc}
 
 Además, el administrador del clúster puede configurar controles de recursos que afecten al despliegue de la app, como los siguientes.
 *  [Cuotas de recursos ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
@@ -113,6 +119,7 @@ Además, el administrador del clúster puede configurar controles de recursos qu
 
 ### ¿Cómo puedo acceder a mi app?
 Puede acceder a la app de forma privada dentro del clúster, [utilizando un servicio `clusterIP`](cs_network_cluster.html#planning).
+{: shortdesc}
 
 Si desea exponer su app públicamente, tiene distintas opciones que dependen del tipo de clúster.
 *  **Clúster gratuito**: puede exponer la app utilizando un [servicio NodePort](cs_nodeport.html#nodeport).
@@ -122,16 +129,19 @@ Si desea exponer su app públicamente, tiene distintas opciones que dependen del
 
 ### Después de desplegar mi app, ¿cómo puedo supervisar su estado?
 Puede configurar el [registro y supervisión](cs_health.html#health) de {{site.data.keyword.Bluemix_notm}} para el clúster. También puede integrar un [servicio de registro o supervisión](cs_integrations.html#health_services) de terceros.
+{: shortdesc}
 
 ### ¿Cómo puedo mantener actualizada mi app?
 Si desea añadir y eliminar apps de forma dinámica en respuesta a la utilización de la carga de trabajo, consulte [Escalado de apps](cs_app.html#app_scaling).
+{: shortdesc}
 
 Si desea gestionar las actualizaciones de la app, consulte [Gestión de despliegues continuos](cs_app.html#app_rolling).
 
 ### ¿Cómo puedo controlar quién tiene acceso a mis implementaciones de apps?
 Los administradores de cuentas y de clústeres pueden controlar el acceso a diferentes niveles: clúster, espacio de nombres de Kubernetes, pod y contenedor.
+{: shortdesc}
 
-Con IAM, puede asignar permisos a usuarios individuales, grupos o cuentas de servicio a nivel de instancia de clúster.  Puede limitar aún más el acceso al clúster restringiendo el acceso de los usuarios a determinados espacios de nombres del clúster. Para obtener más información, consulte [Asignación de acceso a clúster](cs_users.html#users).
+Con {{site.data.keyword.Bluemix_notm}} IAM, puede asignar permisos a usuarios individuales, grupos o cuentas de servicio a nivel de instancia de clúster.  Puede limitar aún más el acceso al clúster restringiendo el acceso de los usuarios a determinados espacios de nombres del clúster. Para obtener más información, consulte [Asignación de acceso a clúster](cs_users.html#users).
 
 Para controlar el acceso a nivel de pod, puede [configurar políticas de seguridad de pod con Kubernetes RBAC](cs_psp.html#psp).
 
@@ -158,6 +168,9 @@ También puede [conectar varios clústeres en distintas regiones con un equilibr
 
 ### Cómo aumentar la disponibilidad de la app
 {: #increase_availability}
+
+Tenga en cuenta las opciones siguientes para aumentar la disponibilidad de la app. 
+{: shortdesc}
 
 <dl>
   <dt>Utilice despliegues y conjuntos de réplicas para desplegar la app y sus dependencias</dt>
@@ -269,7 +282,7 @@ template:
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">Puerto para el servicio de la app</dt>
-  <dd><p>Seleccione un puerto de contenedor en el que abrir los servicios de la app. Para ver qué puerto se debe abrir, consulte las especificaciones de la aplicación o Dockerfile. El puerto es accesible desde la red privada, pero no desde una conexión de red pública. Para exponer la app públicamente, debe crear un puerto NodePort, un equilibrador de carga o un servicio Ingress. Utilice este mismo número de puerto cuando [cree un objeto `Service` ](#service).</p>
+  <dd><p>Seleccione un puerto de contenedor en el que abrir los servicios de la app. Para ver qué puerto se debe abrir, consulte las especificaciones de la app o Dockerfile. El puerto es accesible desde la red privada, pero no desde una conexión de red pública. Para exponer la app públicamente, debe crear un puerto NodePort, un equilibrador de carga o un servicio Ingress. Utilice este mismo número de puerto cuando [cree un objeto `Service` ](#service).</p>
   <p><pre class="codeblock"><code>ports:
 - containerPort: 9080</pre></code></p></dd>
 
@@ -277,7 +290,7 @@ template:
   <dd><p>Como administrador del clúster, puede asegurarse de que los equipos que comparten el clúster no adquieran más que la parte justa de recursos de cálculo (memoria y CPU) mediante la creación de un [objeto ResourceQuota ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) para cada espacio de nombres de Kubernetes del clúster. Si el administrador del clúster establece una cuota de recursos de cálculo, cada contenedor de la plantilla de despliegue debe especificar solicitudes y límites de recursos para la memoria y la CPU; de lo contrario, la creación del pod falla.</p>
   <p><ol><li>Compruebe si se ha definido una cuota de recursos para un espacio de nombres.<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>Vea cuáles son los límites de la cuota.<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
-  <p>Aunque no haya ninguna cuota de recursos definida, puede incluir solicitudes y límites de recursos en el despliegue para mejorar la gestión de los recursos de los nodos trabajadores. **Nota**: si un contenedor sobrepasa su límite, el contenedor se puede reiniciar o fallar. Si un contenedor excede una solicitud, su pod se puede desalojar si el nodo trabajador se queda sin este recurso que se ha sobrepasado. Para obtener información sobre la resolución del problema, consulte [Los pods no se pueden reiniciar repetidamente o se eliminan inesperadamente](cs_troubleshoot_clusters.html#pods_fail).</p>
+  <p>Aunque no haya ninguna cuota de recursos definida, puede incluir solicitudes y límites de recursos en el despliegue para mejorar la gestión de los recursos de los nodos trabajadores.</p><p class="note">Si un contenedor sobrepasa su límite, el contenedor se puede reiniciar o fallar. Si un contenedor excede una solicitud, su pod se puede desalojar si el nodo trabajador se queda sin este recurso que se ha sobrepasado. Para obtener información sobre la resolución del problema, consulte [Los pods no se pueden reiniciar repetidamente o se eliminan inesperadamente](cs_troubleshoot_clusters.html#pods_fail).</p>
   <p>**Solicitud**: la cantidad mínima del recurso que el planificador reserva para que la utilice el contenedor. Si la cantidad es igual al límite, la solicitud está garantizada. Si la cantidad es menor que el límite, la solicitud sigue estando garantizada, pero el planificador puede utilizar la diferencia entre la solicitud y el límite para asignarla a recursos de otros contenedores.</p>
   <p>**Límite**: la cantidad máxima del recurso que puede consumir el contenedor. Si la cantidad total de recursos que se utiliza en los contenedores supera la cantidad disponible en el nodo trabajador, los contenedores pueden ser desalojados para liberar espacio. Para evitar el desalojo, defina una solicitud de recurso igual al límite del contenedor. Si no se especifica ningún límite, el valor predeterminado es la capacidad del nodo trabajador.</p>
   <p>Para obtener más información, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
@@ -292,7 +305,7 @@ template:
 <dt id="probe">Sondeos de actividad y de preparación</dt>
   <dd><p>De forma predeterminada, Kubernetes envía tráfico a los pods de la app después de que se inicien todos los contenedores del pod y reinicia los contenedores cuando se bloquean. Sin embargo, puede definir comprobaciones de estado para mejorar la potencia del direccionamiento del tráfico de servicio. Por ejemplo, es posible que la app tenga un retardo de arranque. Puede que los procesos de la app comiencen antes de que la app esté completamente preparada, lo que puede afectar a las respuestas, especialmente cuando se escala entre varias instancias. Con las comprobaciones de estado, puede dejar que el sistema sepa si la app se está ejecutando y está lista para recibir solicitudes. Mediante el establecimiento de estos sondeos también puede ayudar a evitar tiempos de inactividad cuando realice una [actualización continua](#app_rolling) de la app. Puede definir dos tipos de comprobaciones de estado: sondeos de actividad y de preparación.</p>
   <p>**Sondeo de actividad**: configure un sondeo de actividad para comprobar si el contenedor se está ejecutando. Si el sondeo falla, el contenedor se reinicia. Si el contenedor no especifica un sondeo de actividad, el sondeo tiene éxito porque presupone que el contenedor está activo cuando el contenedor está en el estado **Running (en ejecución)**.</p>
-  <p>**Sondeo de preparación**: configure un sondeo de preparación para comprobar si el contenedor está preparado para recibir solicitudes y tráfico externo. Si el sondeo falla, la dirección IP del pod se elimina como dirección IP utilizable para los servicios que coinciden con el pod, pero el contenedor no se reinicia. Resulta especialmente importante establecer un sondeo de preparación con un retardo inicial si la aplicación tarda un rato en iniciarse. Antes del retardo inicial, el sondeo no se inicia, con lo que el contenedor tiente tiempo para iniciarse. Si el contenedor no proporciona un sondeo de preparación, el sondeo tiene éxito porque presupone que el contenedor está activo cuando el contenedor está en el estado **Running (en ejecución)**.</p>
+  <p>**Sondeo de preparación**: configure un sondeo de preparación para comprobar si el contenedor está preparado para recibir solicitudes y tráfico externo. Si el sondeo falla, la dirección IP del pod se elimina como dirección IP utilizable para los servicios que coinciden con el pod, pero el contenedor no se reinicia. Resulta especialmente importante establecer un sondeo de preparación con un retardo inicial si la app tarda un rato en iniciarse. Antes del retardo inicial, el sondeo no se inicia, con lo que el contenedor tiente tiempo para iniciarse. Si el contenedor no proporciona un sondeo de preparación, el sondeo tiene éxito porque presupone que el contenedor está activo cuando el contenedor está en el estado **Running (en ejecución)**.</p>
   <p>Puede configurar los sondeos como mandatos, como solicitudes HTTP o como sockets TCP. En el ejemplo se utilizan solicitudes HTTP. Dé más tiempo al sondeo de actividad que al de preparación. Para obtener más información, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).</p>
   <p><pre class="codeblock"><code>livenessProbe:
   httpGet:
@@ -405,7 +418,7 @@ data:
     password: cGFzc3dvcmQ=</pre></code></p></dd>
 
 <dt id="pv">Volúmenes persistentes para el almacenamiento de contenedores</dt>
-<dd><p>Los volúmenes persistentes (PV) interactúan con el almacenamiento físico para proporcionar almacenamiento de datos permanentes para las cargas de trabajo del contenedor. En el ejemplo siguiente se muestra cómo se puede añadir almacenamiento persistente a la app. Para suministrar almacenamiento persistente, cree una reclamación de volumen persistente (PVC) para describir el tipo y el tamaño del almacenamiento de archivos que desea tener. Después de crear la PVC, el volumen persistente y el almacenamiento físico se crean automáticamente mediante el [suministro dinámico](cs_storage_basics.html#dynamic_provisioning). Cuando se hace referencia a la PVC en el archivo YAML de despliegue, el almacenamiento se monta automáticamente en la pod de la app. Cuando el contenedor del pod escribe datos en el directorio de la vía de acceso de montaje `/test`, los datos se almacenan en la instancia de almacenamiento de archivos NFS.</p><ul><li>Para obtener más información, consulte [Conceptos básicos del almacenamiento de Kubernetes](cs_storage_basics.html#kube_concepts).</li><li>Para ver las opciones de otros tipos de almacenamiento que puede suministrar, consulte [Planificación del almacenamiento persistente de alta disponibilidad](cs_storage_planning.html#storage_planning).</li></ul>
+<dd><p>Los volúmenes persistentes (PV) interactúan con el almacenamiento físico para proporcionar almacenamiento de datos persistentes para las cargas de trabajo del contenedor. En el ejemplo siguiente se muestra cómo se puede añadir almacenamiento persistente a la app. Para suministrar almacenamiento persistente, cree una reclamación de volumen persistente (PVC) para describir el tipo y el tamaño del almacenamiento de archivos que desea tener. Después de crear la PVC, el volumen persistente y el almacenamiento físico se crean automáticamente mediante el [suministro dinámico](cs_storage_basics.html#dynamic_provisioning). Cuando se hace referencia a la PVC en el archivo YAML de despliegue, el almacenamiento se monta automáticamente en la pod de la app. Cuando el contenedor del pod escribe datos en el directorio de la vía de acceso de montaje `/test`, los datos se almacenan en la instancia de almacenamiento de archivos NFS.</p><ul><li>Para obtener más información, consulte [Conceptos básicos del almacenamiento de Kubernetes](cs_storage_basics.html#kube_concepts).</li><li>Para ver las opciones de otros tipos de almacenamiento que puede suministrar, consulte [Planificación del almacenamiento persistente de alta disponibilidad](cs_storage_planning.html#storage_planning).</li></ul>
 <p><pre class="codeblock"><code>apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -455,6 +468,7 @@ spec:
 {: #yaml-example}
 
 A continuación se muestra una copia del archivo YAML de despliegue que se ha [explicado en las secciones anteriores](#app_yaml). También puede [descargar el archivo YAML desde GitHub](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
+{: shortdesc}
 
 ```yaml
 apiVersion: apps/v1beta1
@@ -591,19 +605,24 @@ spec:
 ## Inicio del panel de control de Kubernetes
 {: #cli_dashboard}
 
-Abra un panel de control de Kubernetes en el sistema local para ver información sobre un clúster y sus nodos trabajadores. [En la GUI](#db_gui), puede acceder al panel de control mediante una simple pulsación desde un botón. [Con la CLI](#db_cli), puede acceder al panel de control o utilizar los pasos en un proceso de automatización como, por ejemplo, para un conducto CI/CD.
+Abra un panel de control de Kubernetes en el sistema local para ver información sobre un clúster y sus nodos trabajadores. [En la consola de {{site.data.keyword.Bluemix_notm}}](#db_gui), puede acceder al panel de control mediante una simple pulsación desde un botón. [Con la CLI](#db_cli), puede acceder al panel de control o utilizar los pasos en un proceso de automatización como, por ejemplo, para un conducto CI/CD.
 {:shortdesc}
 
+¿Tiene tantos recursos y usuarios en el clúster que el panel de control de Kubernetes está un poco lento? Para clústeres que ejecutan Kubernetes versión 1.12 o posterior, el administrador del clúster puede escalar el despliegue de
+`kubernetes-dashboard` ejecutando `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
+{: tip}
+
 Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 
 Puede utilizar el puerto predeterminado o definir su propio puerto para iniciar el panel de control de Kubernetes para un clúster.
 
-**Inicio del panel de control de Kubernetes desde la GUI**
+**Inicio del panel de control de Kubernetes desde la consola de {{site.data.keyword.Bluemix_notm}}**
 {: #db_gui}
 
-1.  Inicie una sesión en la [GUI de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/).
-2.  Desde su perfil en la barra de menús, seleccione la cuenta que desea utilizar.
-3.  En el menú, pulse **Contenedores**.
+1.  Inicie una sesión en la [consola de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/).
+2.  En la barra de menús, pulse su avatar de usuario ![Icono de avatar](../icons/i-avatar-icon.svg "Icono de avatar") y seleccione la cuenta que desea utilizar.
+3.  En el menú ![Icono de menú](../icons/icon_hamburger.svg "Icono de menú"), pulse **Kubernetes**.
 4.  En la página **Clústeres**, pulse el clúster al que desea acceder.
 5.  En la página de detalles del clúster, pulse el botón **Panel de control de Kubernetes**.
 
@@ -656,11 +675,16 @@ Cuando termine de utilizar el panel de control de Kubernetes, utilice `CONTROL+C
 <br />
 
 
-## Despliegue de apps con la GUI
+## Despliegue de apps con el panel de control de Kubernetes
 {: #app_ui}
 
-Cuando despliega una app a un clúster utilizando el panel de control de Kubernetes, un recurso de despliegue crea, actualiza y gestiona automáticamente los pods del clúster.
+Cuando despliega una app a un clúster utilizando el panel de control de Kubernetes, un recurso de despliegue crea, actualiza y gestiona automáticamente los pods del clúster. Para obtener más información sobre el uso del panel de control, consulte
+[los documentos de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/).
 {:shortdesc}
+
+¿Tiene tantos recursos y usuarios en el clúster que el panel de control de Kubernetes está un poco lento? Para clústeres que ejecutan Kubernetes versión 1.12 o posterior, el administrador del clúster puede escalar el despliegue de
+`kubernetes-dashboard` ejecutando `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
+{: tip}
 
 Antes de empezar:
 
@@ -828,7 +852,8 @@ Antes de empezar:
 Para ejecutar una carga de trabajo en una máquina con GPU:
 1.  Cree un archivo YAML. En este ejemplo, un `trabajo` YAML gestiona cargas de trabajo como lotes creando un pod de corta vida que está en ejecución hasta que el mandato que se planifica finaliza de forma satisfactoria.
 
-    **Importante**: Para cargas de trabajo de GPU, siempre debe proporcionar el campo `resources: limits: nvidia.com/gpu` en la especificación YAML.
+    Para cargas de trabajo de GPU, siempre debe proporcionar el campo `resources: limits: nvidia.com/gpu` en la especificación YAML.
+    {: note}
 
     ```yaml
     apiVersion: batch/v1
@@ -1029,7 +1054,7 @@ Pasos:
     Para despliegues más complejos, es posible que tenga que crear un [archivo de configuración](#app_cli).
     {: tip}
 
-2.  Cree un autoscaler y defina la política. Para obtener más información sobre cómo trabajar con el mandato `kubectl autoscale`, consulte [la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+2.  Cree un autoscaler y defina la política. Para obtener más información sobre cómo trabajar con el mandato `kubectl autoscale`, consulte [la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -1066,7 +1091,7 @@ Pasos:
 Puede gestionar el despliegue de cambios en una app de forma automática y controlada para las cargas de trabajo con una plantilla de pod como, por ejemplo los despliegues. Si el despliegue no va según lo planificado, puede retrotraerlo a la revisión anterior.
 {:shortdesc}
 
-¿Desea evitar el tiempo de inactividad durante una actualización continua? Asegúrese de especificar un [sondeo de preparación en el despliegue](#probe) para que el despliegue continúe en la siguiente pod de la aplicación cuando esté listo el pod actualizado más recientemente.
+¿Desea evitar el tiempo de inactividad durante una actualización continua? Asegúrese de especificar un [sondeo de preparación en el despliegue](#probe) para que el despliegue continúe en el siguiente pod de la app cuando esté listo el pod actualizado más recientemente.
 {: tip}
 
 Antes de empezar, cree un [despliegue](#app_cli).

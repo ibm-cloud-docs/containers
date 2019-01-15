@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -36,10 +39,10 @@ Añada la etiqueta `dedicated=edge` a dos o más nodos trabajadores en cada VLAN
 
 Antes de empezar:
 
-- [Cree un clúster estándar.](cs_clusters.html#clusters_cli)
-- Asegúrese de que el clúster tiene al menos una VLAN pública. Los nodos trabajadores de extremo no están disponibles para clústeres solo con VLAN privadas.
-- [Cree una nueva agrupación de nodos trabajadores](cs_clusters.html#add_pool) que abarque toda la zona del clúster y que tenga al menos 2 nodos trabajadores por zona.
-- [Defina el clúster como destino de la CLI de Kubernetes](cs_cli_install.html#cs_cli_configure).
+1. Asegúrese de tener cualquier [rol de plataforma](cs_users.html#platform) {{site.data.keyword.Bluemix_notm}} IAM.
+2. [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+3. Asegúrese de que el clúster tiene al menos una VLAN pública. Los nodos trabajadores de extremo no están disponibles para clústeres solo con VLAN privadas.
+4. [Cree una nueva agrupación de nodos trabajadores](cs_clusters.html#add_pool) que abarque toda la zona del clúster y que tenga al menos 2 nodos trabajadores por zona.
 
 Para etiquetar nodos trabajadores como nodos extremos:
 
@@ -105,6 +108,7 @@ Una ventaja de los nodos trabajadores extremos es que se puede especificar que s
 
 Mediante la tolerancia `dedicated=edge` se conseguirá que todos los servicios de equilibradores de carga y de Ingress se desplieguen solo en los nodos trabajadores etiquetados. Sin embargo, para evitar que se ejecuten otras cargas de trabajo en los nodos trabajadores de extremo y consuman recursos de los nodos trabajadores, se deben utilizar [antagonismos de Kubernetes ![Enlace de icono externo](../icons/launch-glyph.svg "Enlace de icono externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 
 1. Listar todos los nodos trabajadores con la etiqueta `dedicated=edge`.
 
@@ -121,4 +125,4 @@ Mediante la tolerancia `dedicated=edge` se conseguirá que todos los servicios d
   {: pre}
   Ahora, solo se desplegarán en los nodos trabajadores de extremo los pods con la tolerancia `dedicated=edge`.
 
-3. Si elige [habilitar la conservación de direcciones IP de origen para un servicio de equilibrio de carga ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), asegúrese de que los pods de apps están planificados en los nodos trabajadores de extremo [añadiendo afinidad de nodos de extremo a los pods de app](cs_loadbalancer.html#edge_nodes). Los pods de app se deben planificar en los nodos de extremo para recibir solicitudes entrantes.
+3. Si elige [habilitar la conservación de direcciones IP de origen para un servicio de equilibrio de carga 1.0 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), asegúrese de que los pods de apps están planificados en los nodos trabajadores de extremo [añadiendo afinidad de nodos de extremo a los pods de app](cs_loadbalancer.html#edge_nodes). Los pods de app se deben planificar en los nodos de extremo para recibir solicitudes entrantes.

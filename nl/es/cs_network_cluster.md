@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Planificación de las redes privadas y en clúster
@@ -80,7 +83,7 @@ De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el c
 **¿Para qué puedo utilizar esta configuración?**
 
 * Tiene una app que debe ser accesible para el Internet público en un clúster de una sola zona.
-* Tiene una app que debe ser accesible para el Internet público en un clúster multizona. Puesto que debe habilitar la [expansión de VLAN](cs_subnets.html#subnet-routing) para crear un clúster multizona, el clúster se puede comunicar con otros sistemas que están conectados a cualquier VLAN privada en la misma cuenta de IBM Cloud. **Nota**: para aislar el clúster multizona en la red privada, utilice las [políticas de red de Calico](cs_network_policy.html#isolate_workers).
+* Tiene una app que debe ser accesible para el Internet público en un clúster multizona. Puesto que debe habilitar la [expansión de VLAN](cs_subnets.html#subnet-routing) para crear un clúster multizona, el clúster se puede comunicar con otros sistemas que están conectados a cualquier VLAN privada en la misma cuenta de IBM Cloud. Para aislar el clúster multizona en la red privada, puede utilizar las [políticas de red de Calico](cs_network_policy.html#isolate_workers).
 
 **¿Cuáles son mis opciones para gestionar el acceso público y privado a mi clúster?**
 </br>En las secciones siguientes se describen las funciones de {{site.data.keyword.containerlong_notm}} que puede utilizar para configurar las redes para clústeres conectados a una VLAN pública y una VLAN privada.
@@ -187,7 +190,7 @@ Puede optar por [crear un clúster solo de VLAN privada](cs_clusters.html#cluste
 * Una conexión automática entre todos los nodos trabajadores y el maestro. Debe proporcionar esta conexión [configurando un dispositivo de pasarela](#private_vlan_gateway).
 
 **¿Para qué puedo utilizar esta configuración?**
-</br>Tiene requisitos de seguridad específicos o necesita crear reglas de direccionamiento y políticas de red personalizadas para ofrecer seguridad de red dedicada. **Nota**: el uso de un dispositivo de pasarela genera costes por separado. Para obtener detalles, consulte la [documentación](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
+</br>Tiene requisitos de seguridad específicos o necesita crear reglas de direccionamiento y políticas de red personalizadas para ofrecer seguridad de red dedicada. Tenga en cuenta que el uso de un dispositivo de pasarela genera costes por separado. Para obtener detalles, consulte la [documentación](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
 
 **¿Cuáles son mis opciones para gestionar el acceso público y privado a mi clúster?**
 </br>En las secciones siguientes se describen las funciones de {{site.data.keyword.containerlong_notm}} que puede utilizar para configurar las redes para clústeres conectados únicamente a una VLAN privada.
@@ -197,10 +200,8 @@ Puede optar por [crear un clúster solo de VLAN privada](cs_clusters.html#cluste
 
 Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red entre los nodos trabajadores y el maestro. Puede configurar un cortafuegos con políticas de red personalizadas para proporcionar seguridad de red dedicada para el clúster estándar y para detectar y solucionar problemas de intrusión en la red. Por ejemplo, puede configurar un [dispositivo direccionador virtual](/docs/infrastructure/virtual-router-appliance/about.html) o un [dispositivo de seguridad Fortigate](/docs/infrastructure/fortigate-10g/about.html) para que actúe como cortafuegos y bloquee el tráfico no deseado. Si configura un cortafuegos, también debe [abrir los puertos y direcciones IP necesarios](cs_firewall.html#firewall_outbound) para cada región para que los nodos maestro y trabajador se puedan comunicar.
 
-**Nota**: si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN mediante la [habilitación de la expansión de VLAN](cs_subnets.html#vra-routing).
-
-Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-{: tip}
+Si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN mediante la [habilitación de la expansión de VLAN](cs_subnets.html#vra-routing).
+{: important}
 
 ### Exponga sus apps con servicios de red privados
 {: #private_vlan_services}

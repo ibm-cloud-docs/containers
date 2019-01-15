@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -26,7 +29,7 @@ Para instalar el plugin de CLI, consulte [Instalación de la CLI](cs_cli_install
 
 Consulte la tabla siguiente para ver un resumen de cambios para cada versión del plugin de CLI.
 
-<table summary="Registro de cambios para el plugin de CLI de {{site.data.keyword.containerlong_notm}}">
+<table summary="Visión general de los cambios de versión del plugin de CLI de {{site.data.keyword.containerlong_notm}} ">
 <caption>Registro de cambios para el plugin de CLI de {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <tr>
@@ -36,6 +39,36 @@ Consulte la tabla siguiente para ver un resumen de cambios para cada versión de
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.1.654</td>
+<td>05 de diciembre de 2018</td>
+<td>Actualiza la documentación y la traducción.</td>
+</tr>
+<tr>
+<td>0.1.638</td>
+<td>15 de noviembre de 2018</td>
+<td>
+<ul><li>Añade el mandato [<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh).</li>
+<li>Añade el nombre de grupo de recursos a la salida de <code>ibmcloud ks cluster-get</code> e <code>ibmcloud ks clusters</code>.</li></ul>
+</td>
+</tr>
+<tr>
+<td>0.1.635</td>
+<td>06 de noviembre de 2018</td>
+<td>Añade los mandatos [<code>ibmcloud ks alb-autoupdate-disable</code>](cs_cli_reference.html#cs_alb_autoupdate_disable),  [<code>ibmcloud ks alb-autoupdate-enable</code>](cs_cli_reference.html#cs_alb_autoupdate_enable), [<code>ibmcloud ks alb-autoupdate-get</code>](cs_cli_reference.html#cs_alb_autoupdate_get), [<code>ibmcloud ks alb-rollback</code>](cs_cli_reference.html#cs_alb_rollback) e [<code>ibmcloud ks alb-update</code>](cs_cli_reference.html#cs_alb_update) para gestionar las actualizaciones automáticas del complemento de clúster del ALB de Ingress.
+</td>
+</tr>
+<tr>
+<td>0.1.621</td>
+<td>30 de octubre de 2018</td>
+<td><ul>
+<li>Añade el mandato [<code>ibmcloud ks credential-get</code>](cs_cli_reference.html#cs_credential_get).</li>
+<li>Añade soporte para el origen de registro <code>storage</code> a todos los mandatos de registro de clúster. Para obtener más información, consulte
+<a href="cs_health.html#logging">Visión general del reenvío de registros de clúster y de app</a>.</li>
+<li>Añade el distintivo `--network` al [mandato <code>ibmcloud ks cluster-config</code>](cs_cli_reference.html#cs_cluster_config), que descarga el archivo de configuración de Calico para ejecutar todos los mandatos de Calico.</li>
+<li>Arreglos de errores menores y refactorización</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.1.593</td>
 <td>10 de octubre de 2018</td>

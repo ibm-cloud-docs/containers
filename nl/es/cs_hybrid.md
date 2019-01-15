@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,13 +13,16 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 
 
-# Utilización de {{site.data.keyword.containerlong_notm}} con {{site.data.keyword.Bluemix_notm}} privado
+# Nube híbrida
 {: #hybrid_iks_icp}
 
 Si tiene una cuenta privada de {{site.data.keyword.Bluemix}}, puede utilizarla con determinados servicios de {{site.data.keyword.Bluemix_notm}}, incluido {{site.data.keyword.containerlong}}. Para obtener más información, consulte el blog sobre [Experiencia híbrida en nube pública de IBM y privada de {{site.data.keyword.Bluemix_notm}}![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](http://ibm.biz/hybridJune2018).
@@ -34,7 +37,7 @@ Establezca conectividad de VPN entre el clúster de Kubernetes público y la ins
 {: shortdesc}
 
 1.  Cree un clúster estándar con {{site.data.keyword.containerlong}} en {{site.data.keyword.Bluemix_notm}} público o utilice uno existente. Para crear un clúster, elija entre las opciones siguientes: 
-    - [Cree un clúster estándar desde la GUI ](cs_clusters.html#clusters_ui). 
+    - [Cree un clúster estándar desde la consola](cs_clusters.html#clusters_ui). 
     - [Cree un clúster estándar desde la CLI](cs_clusters.html#clusters_cli). 
     - [Utilice Cloud Automation Manager (CAM) para crear un clúster utilizando una plantilla predefinida![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). Cuando se despliega un clúster con CAM, el tiller de Helm se instala automáticamente.
 

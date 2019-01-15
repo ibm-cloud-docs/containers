@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -23,7 +26,8 @@ lastupdated: "2018-10-25"
 Para añadir prestaciones al equilibrador de carga de aplicación (ALB) de Ingress, especifique anotaciones como metadatos en un recurso Ingress.
 {: shortdesc}
 
-**Importante**: antes de utilizar anotaciones, asegúrese de que ha definido correctamente la configuración del servicio Ingress siguiendo los pasos del apartado [Exposición de apps con Ingress](cs_ingress.html). Cuando haya configurado el ALB Ingress con una configuración básica, puede ampliar sus prestaciones añadiendo anotaciones al archivo de recursos de Ingress.
+Antes de utilizar anotaciones, asegúrese de que ha definido correctamente la configuración del servicio Ingress siguiendo los pasos del apartado [Exposición de apps con Ingress](cs_ingress.html). Cuando haya configurado el ALB Ingress con una configuración básica, puede ampliar sus prestaciones añadiendo anotaciones al archivo de recursos de Ingress.
+{: note}
 
 <table>
 <caption>Anotaciones generales</caption>
@@ -142,9 +146,9 @@ Para añadir prestaciones al equilibrador de carga de aplicación (ALB) de Ingre
   </thead>
   <tbody>
   <tr>
-  <td><a href="#appid-auth">{{site.data.keyword.appid_short}}Autenticación</a></td>
+  <td><a href="#appid-auth">Autenticación de {{site.data.keyword.appid_short}}</a></td>
   <td><code>appid-auth</code></td>
-  <td>Utilice {{site.data.keyword.appid_full_notm}} para autenticarse con la app.</td>
+  <td>Utilice {{site.data.keyword.appid_full}} para autenticarse con la app.</td>
   </tr>
   <tr>
   <td><a href="#custom-port">Puertos HTTP y HTTPS personalizados</a></td>
@@ -308,7 +312,7 @@ Añada definiciones de vía de acceso a servicios externos, como servicios aloja
 
 <dl>
 <dt>Descripción</dt>
-<dd>Añada definiciones de vía de acceso a servicios externos. Utilice esta anotación sólo si su app opera en un servicio externo en lugar de un servicio de fondo. Cuando se utiliza esta anotación para crear una ruta de servicio externo, sólo las anotaciones `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` y `proxy-buffering` están soportadas de forma conjunta. Las demás anotaciones no están soportadas de forma conjunta con `proxy-external-service`.<br><br><strong>Nota</strong>: no puede especificar varios hosts para un solo servicio y vía de acceso.
+<dd>Añada definiciones de vía de acceso a servicios externos. Utilice esta anotación sólo si su app opera en un servicio externo en lugar de un servicio de fondo. Cuando se utiliza esta anotación para crear una ruta de servicio externo, sólo las anotaciones `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` y `proxy-buffering` están soportadas de forma conjunta. Las demás anotaciones no están soportadas de forma conjunta con `proxy-external-service`.<p class="note">No puede especificar varios hosts para un solo servicio y vía de acceso.</p>
 </dd>
 <dt>YAML del recurso de Ingress de ejemplo</dt>
 <dd>
@@ -369,7 +373,7 @@ Modifique la forma en la que el ALB coteja el URI de solicitud con la vía de ac
 
 <dl>
 <dt>Descripción</dt>
-<dd>De forma predeterminada, los ALB procesan las vías de acceso en las que escuchan las apps como prefijos. Cuando un ALB recibe una solicitud para una app, el ALB comprueba el recurso de Ingress para una vía de acceso (como prefijo) que coincide con el comienzo del URI de solicitud. Si se encuentra una coincidencia, la solicitud se reenvía a la dirección IP del pod en el que se ha desplegado la app.<br><br>La anotación `location-modifier` cambia la forma en la que el ALB busca coincidencias modificando la configuración de bloques de ubicación. El bloque de ubicación determina cómo se gestionan las solicitudes de vía de acceso de la app.<br><br><strong>Nota</strong>: Para gestionar vías de acceso de expresión regular (regex), es necesaria esta anotación.</dd>
+<dd>De forma predeterminada, los ALB procesan las vías de acceso en las que escuchan las apps como prefijos. Cuando un ALB recibe una solicitud para una app, el ALB comprueba el recurso de Ingress para una vía de acceso (como prefijo) que coincide con el comienzo del URI de solicitud. Si se encuentra una coincidencia, la solicitud se reenvía a la dirección IP del pod en el que se ha desplegado la app.<br><br>La anotación `location-modifier` cambia la forma en la que el ALB busca coincidencias modificando la configuración de bloques de ubicación. El bloque de ubicación determina cómo se gestionan las solicitudes de vía de acceso de la app.<p class="note">Para gestionar vías de acceso de expresión regular (regex), es necesaria esta anotación.</p></dd>
 
 <dt>Modificadores soportados</dt>
 <dd>
@@ -470,11 +474,14 @@ metadata:
 name: myingress
 annotations:
   ingress.bluemix.net/location-snippets: |
-    serviceName=&lt;myservice&gt;
+    serviceName=&lt;myservice1&gt;
     # Example location snippet
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
+    &lt;EOS&gt;
+    serviceName=&lt;myservice2&gt;
+    proxy_set_header Authorization "";
     &lt;EOS&gt;
 spec:
 tls:
@@ -502,7 +509,7 @@ tls:
 </tr>
 <tr>
 <td>Fragmento de ubicación</td>
-<td>Especifique el fragmento de código de configuración que desea utilizar para el servicio especificado. Este fragmento de código de ejemplo configura el bloque de ubicación para desactivar la colocación en almacenamiento intermedio de la solicitud de proxy, activar las reescrituras de registro y establecer cabeceras adicionales cuando se reenvía una solicitud al servicio <code>myservice</code>.</td>
+<td>Especifique el fragmento de código de configuración que desea utilizar para el servicio especificado. El fragmento de código de ejemplo del servicio <code>myservice1</code> configura el bloque de ubicación para desactivar la colocación en almacenamiento intermedio de la solicitud de proxy, activar las reescrituras de registro y establecer cabeceras adicionales cuando se reenvía una solicitud al servicio. El fragmento de código de ejemplo del servicio <code>myservice2</code> establece una cabecera <code>Authorization</code> vacía. Cada fragmento de código de ubicación termina con el valor <code>&lt;EOS&gt;</code>.</td>
 </tr>
 </tbody></table>
 </dd>
@@ -569,7 +576,7 @@ Si tiene un clúster multizona con más de un ALB privado habilitado, puede prop
 ### Vías de acceso de reescritura (rewrite-path)
 {: #rewrite-path}
 
-Direccione el tráfico de red de entrada en una vía de acceso de dominio de ALB a una vía de acceso diferente que escuche su aplicación de fondo.
+Direccione el tráfico de red de entrada en una vía de acceso de dominio de ALB a una vía de acceso diferente en la que la app de fondo está a la escucha.
 {:shortdesc}
 
 <dl>
@@ -686,7 +693,7 @@ Acceda a una app a través de un puerto TCP no estándar.
 <dd>
 Utilice esta anotación para una app que esté ejecutando una carga de trabajo con secuencias TCP.
 
-<p>**Nota**: El ALB funciona en modalidad de paso y envía tráfico a las apps de fondo. En este caso, no se soporta la terminación SSL. La conexión TLS no se termina y pasa sin tocarla.</p>
+<p class="note">El ALB funciona en modalidad de paso y envía tráfico a las apps de fondo. En este caso, no se soporta la terminación SSL. La conexión TLS no se termina y pasa sin tocarla.</p>
 </dd>
 
 
@@ -699,7 +706,7 @@ kind: Ingress
 metadata:
 name: myingress
 annotations:
-  ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; [servicePort=&lt;service_port&gt;]"
+  ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
 spec:
   tls:
   - hosts:
@@ -731,7 +738,7 @@ spec:
   <tr>
   <td><code>servicePort</code></td>
   <td>Este parámetro
-es opcional. Cuando se proporciona, el puerto se sustituye por este valor antes de que el tráfico se envíe a la app de backend. En caso contrario, el puerto permanece igual que el puerto de Ingress.</td>
+es opcional. Cuando se proporciona, el puerto se sustituye por este valor antes de que el tráfico se envíe a la app de fondo. En caso contrario, el puerto permanece igual que el puerto de Ingress. Si no desea establecer este parámetro, puede eliminarlo de la configuración. </td>
   </tr>
   </tbody></table>
 
@@ -747,7 +754,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>Abra el mapa de configuración del ALB.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Añada los puertos TCP al mapa de configuración. Sustituya <code>&lt;port&gt;</code> por los puertos TCP que desea abrir. <b>Nota</b>: De forma predeterminada, los puertos 80 y 443 están abiertos. Si desea mantener los puertos 80 y 443 abiertos, también debe incluirlos, además de cualquier otro puerto TCP que especifique en el campo `public-ports`. Si ha habilitado un ALB privado, también debe especificar los puertos que desea mantener abiertos en el campo `private-ports`. Para obtener más información, consulte <a href="cs_ingress.html#opening_ingress_ports">Apertura de puertos en el ALB de Ingress</a>.
+<li>Añada los puertos TCP al mapa de configuración. Sustituya <code>&lt;port&gt;</code> por los puertos TCP que desea abrir.<p class="note">De forma predeterminada, los puertos 80 y 443 están abiertos. Si desea mantener los puertos 80 y 443 abiertos, también debe incluirlos, además de cualquier otro puerto TCP que especifique en el campo `public-ports`. Si ha habilitado un ALB privado, también debe especificar los puertos que desea mantener abiertos en el campo `private-ports`. Para obtener más información, consulte <a href="cs_ingress.html#opening_ingress_ports">Apertura de puertos en el ALB de Ingress</a>.</p>
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -779,6 +786,9 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 
 ## Anotaciones de conexión
 {: #connection}
+
+Con las anotaciones de conexión, puede cambiar el modo en que ALB se conecta a la app de fondo y servidores en sentido ascendente, así como establecer tiempos de espera o un número máximo de conexiones de estado activo antes de que se considere que la app o el servidor no está disponible. 
+{: shortdesc}
 
 ### Tiempos de espera excedidos de conexión y tiempos de espera excedidos de lectura personalizados (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
@@ -831,7 +841,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>El número de segundos o minutos que se debe esperar para conectar con la app de fondo, por ejemplo <code>65s</code> o <code>1m</code>. <strong>Nota:</strong> El valor de connect-timeout no puede superar los 75 segundos.</td>
+ <td>El número de segundos o minutos que se debe esperar para conectar con la app de fondo, por ejemplo <code>65s</code> o <code>1m</code>. El valor de connect-timeout no puede superar los 75 segundos.</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
@@ -975,7 +985,8 @@ Establece cuándo el ALB puede pasar una solicitud al siguiente servidor en sent
 <dl>
 <dt>Descripción</dt>
 <dd>
-El ALB de Ingress actúa como un proxy entre la app del cliente y la app. Algunas configuraciones de app precisan de varios servidores en sentido ascendente para manejar las solicitudes de cliente entrantes desde el ALB. A veces el servidor proxy que utiliza el ALB no puede establecer una conexión con un servidor en sentido ascendente que utilice la app. El ALB, puede entonces intentar establecer una conexión con el siguiente servidor en sentido ascendente para pasarle en su lugar la solicitud. Puede utilizar la anotación `proxy-next-upstream-config` para definir en qué casos, cuánto tiempo y cuántas veces el ALB puede intentar pasar una solicitud al siguiente servidor en sentido ascendente.<br><br><strong>Nota</strong>: Siempre se configura un tiempo de espera al utilizar `proxy-next-upstream-config`, de forma que no añada `timeout=true` a esta anotación.
+El ALB de Ingress actúa como un proxy entre la app del cliente y la app. Algunas configuraciones de app precisan de varios servidores en sentido ascendente para manejar las solicitudes de cliente entrantes desde el ALB. A veces el servidor proxy que utiliza el ALB no puede establecer una conexión con un servidor en sentido ascendente que utilice la app. El ALB, puede entonces intentar establecer una conexión con el siguiente servidor en sentido ascendente para pasarle en su lugar la solicitud. Puede utilizar la anotación `proxy-next-upstream-config` para definir en qué casos, cuánto tiempo y cuántas veces el ALB puede intentar pasar una solicitud al siguiente servidor en sentido ascendente.<p class="note">Siempre se
+configura un tiempo de espera al utilizar `proxy-next-upstream-config`, de forma que no añada `timeout=true` a esta anotación.</p>
 </dd>
 <dt>YAML del recurso de Ingress de ejemplo</dt>
 <dd>
@@ -1304,10 +1315,13 @@ spec:
 ## Anotaciones de autenticación TLS/SSL y HTTPS
 {: #https-auth}
 
+Con las anotaciones de autenticación TLS/SSL y HTTPS, puede configurar el ALB para el tráfico HTTPS, cambiar los puertos HTTPS predeterminados, habilitar el cifrado SSL para el tráfico que se envía a las apps de fondo o configurar la autenticación mutua. 
+{: shortdesc}
+
 ### Autenticación de {{site.data.keyword.appid_short_notm}} (appid-auth)
 {: #appid-auth}
 
-Utilice {{site.data.keyword.appid_full_notm}} para autenticarse con la aplicación.
+Utilice {{site.data.keyword.appid_full_notm}} para autenticarse con la app.
 {:shortdesc}
 
 <dl>
@@ -1315,11 +1329,11 @@ Utilice {{site.data.keyword.appid_full_notm}} para autenticarse con la aplicaci�
 <dd>
 Autentique las solicitudes HTTP/HTTPS de API o web con {{site.data.keyword.appid_short_notm}}.
 
-<p>Si establece el tipo de solicitud en <code>web</code>, se valida una solicitud web que contiene una señal de acceso de {{site.data.keyword.appid_short_notm}}. Si la validación de señal falla, la solicitud web es rechazada. Si la solicitud no contiene ninguna señal de acceso, la solicitud se redirige a la página de inicio de sesión de {{site.data.keyword.appid_short_notm}}. <strong>Nota</strong>: Para que funcione la autenticación web de {{site.data.keyword.appid_short_notm}}, las cookies deben estar habilitadas en el navegador del usuario.</p>
+<p>Si establece el tipo de solicitud en <code>web</code>, se valida una solicitud web que contiene una señal de acceso de {{site.data.keyword.appid_short_notm}}. Si la validación de señal falla, la solicitud web es rechazada. Si la solicitud no contiene ninguna señal de acceso, la solicitud se redirige a la página de inicio de sesión de {{site.data.keyword.appid_short_notm}}. Para que funcione la autenticación web de {{site.data.keyword.appid_short_notm}}, las cookies deben estar habilitadas en el navegador del usuario.</p>
 
 <p>Si establece el tipo de solicitud en <code>api</code>, se valida una solicitud de API que contiene una señal de acceso de {{site.data.keyword.appid_short_notm}}. Si la solicitud no contiene ninguna señal de acceso, el usuario recibe un mensaje de error <code>401: Unauthorized</code>.</p>
 
-<p>**Nota**: Por razones de seguridad, la autenticación de {{site.data.keyword.appid_short_notm}} solo da soporte a sistemas de fondos que tenga TLS/SSL habilitado.</p>
+<p class="note">Por razones de seguridad, la autenticación de {{site.data.keyword.appid_short_notm}} solo da soporte a sistemas de fondos que tenga TLS/SSL habilitado.</p>
 </dd>
 <dt>YAML del recurso de Ingress de ejemplo</dt>
 <dd>
@@ -1372,13 +1386,12 @@ coma (,).</td>
 </dd>
 <dt>Uso</dt></dl>
 
-Puesto que la aplicación utiliza {{site.data.keyword.appid_short_notm}} para la autenticación, debe suministrar una instancia de {{site.data.keyword.appid_short_notm}}, configurar la instancia con URI de redirección válidos y generar un secreto de enlace vinculando la instancia al clúster.
+Puesto que la app utiliza {{site.data.keyword.appid_short_notm}} para la autenticación, debe suministrar una instancia de {{site.data.keyword.appid_short_notm}}, configurar la instancia con URI de redirección válidos y generar un secreto de enlace vinculando la instancia al clúster.
 
 1. Elija una existente o cree una nueva instancia de {{site.data.keyword.appid_short_notm}}.
     * Para utilizar una instancia existente, asegúrese de que el nombre de la instancia de servicio no contenga espacios. Para eliminar espacios, seleccione el menú de más opciones que hay junto al nombre de la instancia de servicio y seleccione **Cambiar nombre de servicio**.
     * Para suministrar una [nueva instancia de {{site.data.keyword.appid_short_notm}}](https://console.bluemix.net/catalog/services/app-id):
-        1. Sustituya el valor de **Nombre de servicio** que se suministra por su propio nombre exclusivo correspondiente a la instancia de servicio.
-            **Importante**: el nombre de la instancia de servicio de puede contener espacios.
+        1. Sustituya el valor de **Nombre de servicio** que se suministra por su propio nombre exclusivo correspondiente a la instancia de servicio. El nombre de la instancia de servicio de puede contener espacios.
         2. Elija la región en la que se ha desplegado el clúster.
         3. Pulse **Crear**.
 2. Añada los URL de redirección para la app. Un URL de redirección es el punto final de devolución de llamada de la app. Para evitar ataques de suplantación, el ID de app valida el URL de solicitud comparándolo con la lista blanca de los URL de redirección.
@@ -1423,7 +1436,7 @@ Cambie los puertos predeterminados para el tráfico de red HTTP (puerto 80) y HT
 
 <dl>
 <dt>Descripción</dt>
-<dd>De forma predeterminada, el ALB de Ingress está configurado para escuchar el tráfico de red de entrada HTTP en el puerto 80 y el tráfico de red de entrada HTTPS en el puerto 443. Puede cambiar los puertos predeterminados para añadir seguridad a su dominio del ALB o para habilitar solo un puerto HTTPS.<p><strong>Nota</strong>: Para habilitar la autenticación mutua en un puerto, [configure el ALB para abrir el puerto válido](cs_ingress.html#opening_ingress_ports) y luego especifique dicho puerto en la [anotación `mutual-auth`](#mutual-auth). No utilice la anotación `custom-port` para especificar un puerto para la autenticación mutua.</p></dd>
+<dd>De forma predeterminada, el ALB de Ingress está configurado para escuchar el tráfico de red de entrada HTTP en el puerto 80 y el tráfico de red de entrada HTTPS en el puerto 443. Puede cambiar los puertos predeterminados para añadir seguridad a su dominio del ALB o para habilitar solo un puerto HTTPS.<p class="note">Para habilitar la autenticación mutua en un puerto, [configure el ALB para abrir el puerto válido](cs_ingress.html#opening_ingress_ports) y luego especifique dicho puerto en la [anotación `mutual-auth`](#mutual-auth). No utilice la anotación `custom-port` para especificar un puerto para la autenticación mutua.</p></dd>
 
 
 <dt>YAML del recurso de Ingress de ejemplo</dt>
@@ -1462,7 +1475,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>Especifique el número de puerto que se debe utilizar para el tráfico de red HTTP o HTTPS entrante.  <p><strong>Nota:</strong> Cuando se especifica un puerto personalizado para HTTP o HTTPS, los puertos predeterminados dejan de ser válidos para HTTP y HTTPS. Por ejemplo, para cambiar el puerto predeterminado de HTTPS por 8443, pero utilizar el puerto predeterminado para HTTP, debe definir ciertos puertos personalizados para ambos: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
+ <td>Especifique el número de puerto que se debe utilizar para el tráfico de red HTTP o HTTPS entrante.  <p class="note">Cuando se especifica un puerto personalizado para HTTP o HTTPS, los puertos predeterminados dejan de ser válidos para HTTP y HTTPS. Por ejemplo, para cambiar el puerto predeterminado de HTTPS por 8443, pero utilizar el puerto predeterminado para HTTP, debe definir ciertos puertos personalizados para ambos: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
  </tr>
  </tbody></table>
 
@@ -1478,7 +1491,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>Abra el mapa de configuración del ALB.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Añada los puertos HTTP y HTTPS no predeterminados al mapa de configuración. Sustituya &lt;port&gt; por el puerto HTTP o HTTPS que desea abrir. <b>Nota</b>: De forma predeterminada, los puertos 80 y 443 están abiertos. Si desea mantener los puertos 80 y 443 abiertos, también debe incluirlos, además de cualquier otro puerto TCP que especifique en el campo `public-ports`. Si ha habilitado un ALB privado, también debe especificar los puertos que desea mantener abiertos en el campo `private-ports`. Para obtener más información, consulte <a href="cs_ingress.html#opening_ingress_ports">Apertura de puertos en el ALB de Ingress</a>.
+<li>Añada los puertos HTTP y HTTPS no predeterminados al mapa de configuración. Sustituya &lt;port&gt; por el puerto HTTP o HTTPS que desea abrir.<p class="note">De forma predeterminada, los puertos 80 y 443 están abiertos. Si desea mantener los puertos 80 y 443 abiertos, también debe incluirlos, además de cualquier otro puerto TCP que especifique en el campo `public-ports`. Si ha habilitado un ALB privado, también debe especificar los puertos que desea mantener abiertos en el campo `private-ports`. Para obtener más información, consulte <a href="cs_ingress.html#opening_ingress_ports">Apertura de puertos en el ALB de Ingress</a>.</p>
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1629,13 +1642,13 @@ Configure la autenticación mutua para el ALB.
 <dt>Descripción</dt>
 <dd>
 Configure la autenticación mutua para el tráfico en sentido descendente para el ALB de Ingress. El cliente externo autentica el servidor y el servidor también autentica el cliente mediante certificados. La autenticación mutua también se conoce como autenticación basada en certificado o autenticación bidireccional.</br></br>
-Utilice la anotación `mutual-auth` para la terminación SSL entre el cliente y el ALB Ingress. Utilice la [anotación `ssl-services`](#ssl-services) para la terminación SSL entre el ALB Ingress y la aplicación de fondo.
+Utilice la anotación `mutual-auth` para la terminación SSL entre el cliente y el ALB Ingress. Utilice la [anotación `ssl-services`](#ssl-services) para la terminación SSL entre el ALB de Ingress y la app de fondo.
 </dd>
 
 <dt>Requisitos previos</dt>
 <dd>
 <ul>
-<li>Debe tener un secreto de autenticación mutua válido que contenga el <code>ca.crt</code> necesario. Para crear un secreto de autenticación mutua, consulte los pasos que se indican al final de esta sección.</li>
+<li>Debe tener un secreto de autenticación mutua válido que contenga el <code>client.crt</code> necesario. Para crear un secreto de autenticación mutua, consulte los pasos que se indican al final de esta sección.</li>
 <li>Para habilitar la autenticación mutua en un puerto distinto de 443, [configure el ALB para abrir el puerto válido](cs_ingress.html#opening_ingress_ports) y luego especifique dicho puerto en esta anotación. No utilice la anotación `custom-port` para especificar un puerto para la autenticación mutua.</li>
 </ul>
 </dd>
@@ -1691,22 +1704,21 @@ es opcional.</td>
 **Para crear un secreto de autenticación mutua:**
 
 1. Genere una clave y un certificado de una de estas formas:
-    * Genere un certificado de la autoridad de certificados (CA) y una clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo.
-      **Importante**: asegúrese de que el [CN ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://support.dnsimple.com/articles/what-is-common-name/) sea distinto para cada certificado.
+    * Genere un certificado de la autoridad de certificados (CA) y una clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo. Asegúrese de que el [CN ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://support.dnsimple.com/articles/what-is-common-name/) sea distinto para cada certificado.
     * A efectos de prueba, puede crear un certificado autofirmado mediante OpenSSL. Para obtener más información, consulte esta [guía de aprendizaje sobre los certificados SSL autofirmados ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Cree un archivo `ca.key`.
+        1. Cree un archivo `client.key`.
             ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. Utilice la clave para crear un archivo `ca.crt`.
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
+            openssl genrsa -out client.key 1024
             ```
             {: pre}
-        3. Utilice el archivo `ca.crt` para crear un certificado autofirmado.
+        2. Utilice la clave para crear un archivo `client.crt`.
             ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            openssl req -new -x509 -key client.key -out client.crt
+            ```
+            {: pre}
+        3. Utilice el archivo `client.crt` para crear un certificado autofirmado.
+            ```
+            openssl x509 -req -in example.org.csr -CA client.crt -CAkey client.key -CAcreateserial -out example.org.crt
             ```
             {: pre}
 2. [Convierta el certificado a base-64 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.base64encode.org/).
@@ -1718,7 +1730,7 @@ es opcional.</td>
        name: ssl-my-test
      type: Opaque
      data:
-       ca.crt: <ca_certificate>
+       client.crt: <ca_certificate>
      ```
      {: codeblock}
 4. Cree el certificado como un secreto de Kubernetes.
@@ -1740,9 +1752,9 @@ Permite las solicitudes HTTPS y cifra el tráfico en las apps ascendentes.
 <dl>
 <dt>Descripción</dt>
 <dd>
-Si la configuración del recurso Ingress tiene una sección TLS, el ALB Ingress puede manejar solicitudes URL con protección de HTTPS dirigidas a la app. Sin embargo, el ALB maneja la terminación de TLS descifra la solicitud antes de reenviar el tráfico a sus apps. Si tiene apps que requieren el protocolo HTTPS y necesita que el tráfico permanezca cifrado, utilice la anotación `ssl-services` para inhabilitar la terminación de TLS predeterminada del ALB. El ALB termina la conexión TLS y vuelve a cifrar SSL antes de enviar tráfico a la app de fondo.</br></br>
-Además, si la app de fondo puede manejar TLS y desea añadir seguridad adicional, puede añadir una autenticación mutua o unidireccional proporcionando un certificado que esté contenido en un secreto.</br></br>
-Utilice la anotación `ssl-services` para la terminación SSL entre el ALB Ingress y la aplicación de fondo. Utilice la [anotación `mutual-auth`](#mutual-auth) para la terminación SSL entre el cliente y el ALB Ingress. </dd>
+Si la configuración del recurso Ingress tiene una sección TLS, el ALB Ingress puede manejar solicitudes URL con protección de HTTPS dirigidas a la app. De forma predeterminada, el ALB termina la terminación TLS y descifra la solicitud antes de utilizar el protocolo HTTP para reenviar el tráfico a las apps. Si tiene apps que requieren el protocolo HTTPS y necesita que el tráfico se cifre, utilice la anotación `ssl-services`. Con la anotación `ssl-services`, el ALB termina la conexión TLS externa y, a continuación, crea una nueva conexión SSL entre el ALB y el pod de app. El tráfico se vuelve a cifrar antes de que se envíe a los pods en sentido ascendente.</br></br>
+Si la app de fondo puede manejar TLS y desea añadir seguridad adicional, puede añadir la autenticación unidireccional o mutua proporcionando un certificado que esté contenido en un secreto.</br></br>
+Utilice la anotación `ssl-services` para la terminación SSL entre el ALB de Ingress y la app de fondo. Utilice la [anotación `mutual-auth`](#mutual-auth) para la terminación SSL entre el cliente y el ALB Ingress. </dd>
 
 <dt>YAML del recurso de Ingress de ejemplo</dt>
 <dd>
@@ -1787,7 +1799,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Si la app de fondo puede manejar TLS y desea añadir seguridad adicional, sustituya <code>&lt;<em>service-ssl-secret</em>&gt;</code> con el secreto de autenticación mutua o unidireccional para el servicio.<ul><li>Si desea proporcionar un secreto de autenticación unidireccional, el valor debe contener el <code>trusted.crt</code> del servidor en sentido ascendente. Para crear un secreto unidireccional, consulte los pasos que se indican al final de esta sección.</li><li>Si desea proporcionar un secreto de autenticación mutua, el valor debe contener los <code>ca.crt</code> y <code>ca.key</code> necesarios que la app espera del cliente. Para crear un secreto de autenticación mutua, consulte los pasos que se indican al final de esta sección.</li></ul><strong>Aviso</strong>: si no proporciona un secreto, se permiten las conexiones inseguras. Es posible que elija omitir un secreto si desea probar la conexión y no tiene certificados preparados, o si los certificados están caducados y desea permitir conexiones inseguras.</td>
+  <td>Si la app de fondo puede manejar TLS y desea añadir seguridad adicional, sustituya <code>&lt;<em>service-ssl-secret</em>&gt;</code> con el secreto de autenticación mutua o unidireccional para el servicio.<ul><li>Si desea proporcionar un secreto de autenticación unidireccional, el valor debe contener el <code>trusted.crt</code> del servidor en sentido ascendente. Para crear un secreto unidireccional, consulte los pasos que se indican al final de esta sección.</li><li>Si desea proporcionar un secreto de autenticación mutua, el valor debe contener los <code>client.crt</code> y <code>client.key</code> necesarios que la app espera del cliente. Para crear un secreto de autenticación mutua, consulte los pasos que se indican al final de esta sección.</li></ul><p class="important">Si no proporciona un secreto, se permiten las conexiones inseguras. Es posible que elija omitir un secreto si desea probar la conexión y no tiene certificados preparados, o si los certificados están caducados y desea permitir conexiones inseguras.</p></td>
   </tr>
   </tbody></table>
 
@@ -1809,7 +1821,10 @@ spec:
        trusted.crt: <ca_certificate>
      ```
      {: codeblock}
-     **Nota**: si también desea imponer la autenticación mutua para el tráfico en sentido ascendente, puede suministrar un archivo `client.crt` y un archivo `client.key` además de `trusted.crt` en la sección de datos.
+
+     Si también desea imponer la autenticación mutua para el tráfico en sentido ascendente, puede suministrar un archivo `client.crt` y un archivo `client.key` además de `trusted.crt` en la sección de datos.
+     {: tip}
+
 4. Cree el certificado como un secreto de Kubernetes.
      ```
      kubectl create -f ssl-my-test
@@ -1820,22 +1835,21 @@ spec:
 **Para crear un secreto de autenticación mutua:**
 
 1. Genere una clave y un certificado de una de estas formas:
-    * Genere un certificado de la autoridad de certificados (CA) y una clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo.
-      **Importante**: asegúrese de que el [CN ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://support.dnsimple.com/articles/what-is-common-name/) sea distinto para cada certificado.
+    * Genere un certificado de la autoridad de certificados (CA) y una clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo. Asegúrese de que el [CN ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://support.dnsimple.com/articles/what-is-common-name/) sea distinto para cada certificado.
     * A efectos de prueba, puede crear un certificado autofirmado mediante OpenSSL. Para obtener más información, consulte esta [guía de aprendizaje sobre los certificados SSL autofirmados ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Cree un archivo `ca.key`.
+        1. Cree un archivo `client.key`.
             ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. Utilice la clave para crear un archivo `ca.crt`.
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
+            openssl genrsa -out client.key 1024
             ```
             {: pre}
-        3. Utilice el archivo `ca.crt` para crear un certificado autofirmado.
+        2. Utilice la clave para crear un archivo `client.crt`.
             ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            openssl req -new -x509 -key client.key -out client.crt
+            ```
+            {: pre}
+        3. Utilice el archivo `client.crt` para crear un certificado autofirmado.
+            ```
+            openssl x509 -req -in example.org.csr -CA client.crt -CAkey client.key -CAcreateserial -out example.org.crt
             ```
             {: pre}
 2. [Convierta el certificado a base-64 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.base64encode.org/).
@@ -1847,7 +1861,7 @@ spec:
        name: ssl-my-test
      type: Opaque
      data:
-       ca.crt: <ca_certificate>
+       client.crt: <ca_certificate>
      ```
      {: codeblock}
 4. Cree el certificado como un secreto de Kubernetes.
@@ -1862,6 +1876,9 @@ spec:
 ## Anotaciones de Istio
 {: #istio-annotations}
 
+Utilice anotaciones Istio para direccionar el tráfico de entrada a los servicios gestionados por Istio. 
+{: shortdesc}
+
 ### Servicios de Istio (istio-services)
 {: #istio-services}
 
@@ -1871,8 +1888,7 @@ Direcciona el tráfico a los servicios gestionados por Istio.
 <dl>
 <dt>Descripción</dt>
 <dd>
-<strong>Nota</strong>: esta anotación solo funciona con Istio 0.7 y anteriores.
-<br>Si tiene servicios gestionados por Istio, puede utilizar un clúster ALB para direccionar las solicitudes HTTP/HTTPS al controlador de Ingress Istio. A continuación, el controlador de Istio Ingress direcciona las solicitudes a los servicios de app. Para poder direccionar el tráfico, es necesario cambiar los recursos de Ingress tanto para el clúster ALB como al controlador de Istio Ingress.
+<p class="note">Esta anotación solo funciona con Istio 0.7 y anteriores.</p>Si tiene servicios gestionados por Istio, puede utilizar un clúster ALB para direccionar las solicitudes HTTP/HTTPS al controlador de Ingress Istio. A continuación, el controlador de Istio Ingress direcciona las solicitudes a los servicios de app. Para poder direccionar el tráfico, es necesario cambiar los recursos de Ingress tanto para el clúster ALB como al controlador de Istio Ingress.
 <br><br>En el recurso Ingress para el clúster ALB debe:
   <ul>
     <li>especificar la anotación `istio-services`</li>
@@ -2053,6 +2069,8 @@ spec:
 ## Anotaciones de almacenamiento intermedio de proxy
 {: #proxy-buffer}
 
+El ALB de Ingress actúa como un proxy entre la app de fondo y el navegador web del cliente. Con las anotaciones de almacenamiento intermedio de proxy, puede configurar cómo se almacenan los datos en el almacenamiento intermedio en el ALB al enviar o recibir paquetes de datos.  
+{: shortdesc}
 
 ### Colocación en almacenamiento intermedio de datos de respuesta del cliente (proxy-buffering)
 {: #proxy-buffering}
@@ -2123,7 +2141,8 @@ Configure el número y el tamaño de los almacenamientos intermedios de proxy pa
 <dl>
 <dt>Descripción</dt>
 <dd>
-Establece el número y el tamaño de los almacenamientos intermedios que leen una respuesta de una única conexión desde el servidor mediante proxy. La configuración se aplica a todos los servicios del host de Ingress a menos que se especifique un servicio. Por ejemplo, si se especifica una configuración como <code>serviceName=SERVICE number=2 size=1k</code>, se aplica 1 k al servicio. Si se especifica una configuración como <code>number=2 size=1k</code>, se aplica 1 k a todos los servicios del host de Ingress.
+Establece el número y el tamaño de los almacenamientos intermedios que leen una respuesta de una única conexión desde el servidor mediante proxy. La configuración se aplica a todos los servicios del host de Ingress a menos que se especifique un servicio. Por ejemplo, si se especifica una configuración como <code>serviceName=SERVICE number=2 size=1k</code>, se aplica 1 k al servicio. Si se especifica una configuración como <code>number=2 size=1k</code>, se aplica 1 k a todos los servicios del host de Ingress.</br>
+<p class="tip">Si obtiene el mensaje de error `upstream sent too big header while reading response header from upstream`, significa que el servidor en sentido ascendente del programa de fondo ha enviado un tamaño de cabecera mayor que el límite predeterminado. Aumente el límite para <code>proxy-buffers</code> y [<code>proxy-buffer-size</code>](#proxy-buffer-size).</p>
 </dd>
 <dt>YAML del recurso de Ingress de ejemplo</dt>
 <dd>
@@ -2297,8 +2316,14 @@ spec:
 ## Anotaciones de solicitud y respuesta
 {: #request-response}
 
+Utilice anotaciones de solicitud y respuesta para añadir o eliminar información de cabecera de las solicitudes de cliente y servidor, así como para cambiar el tamaño del cuerpo que puede enviar el cliente. 
+{: shortdesc}
+
 ### Añada el puerto del servidor a la cabecera del host (add-host-port)
 {: #add-host-port}
+
+Añada un puerto de servidor a la solicitud de cliente antes de que se reenvíe la solicitud a la app de fondo. 
+{: shortdesc}
 
 <dl>
 <dt>Descripción</dt>
@@ -2358,23 +2383,16 @@ Añada información de cabecera adicional a una solicitud de cliente antes de en
 <dl>
 <dt>Descripción</dt>
 <dd>El ALB de Ingress actúa como un proxy entre la app del cliente y la app de fondo. Las solicitudes del cliente que se envían al ALB se procesan (mediante proxy) y se colocan en una nueva solicitud que se envía a la app de fondo. Asimismo, las respuestas de la app de fondo que se envían al ALB se procesan (mediante proxy) y se colocan en una nueva respuesta que se envía al cliente. El proceso mediante proxy de una solicitud o respuesta elimina la información de cabecera HTTP, como por ejemplo el nombre de usuario, que se envió inicialmente desde el cliente o la app de fondo.
-
 <br><br>
-Si la app de fondo necesita la información de cabecera HTTP, puede utilizar la anotación <code>proxy-add-headers</code> para añadir la información de cabecera a la solicitud del cliente antes de que el ALB reenvíe la solicitud a la app de fondo.
+Si la app de fondo necesita la información de cabecera HTTP, puede utilizar la anotación <code>proxy-add-headers</code> para añadir la información de cabecera a la solicitud del cliente antes de que el ALB reenvíe la solicitud a la app de fondo. Si la app web del cliente necesita la información de cabecera HTTP, puede utilizar la anotación <code>response-add-headers</code> para añadir la información de cabecera a la respuesta antes de que el ALB reenvíe la respuesta a la app web del cliente.<br>
 
-<br>
 <ul><li>Por ejemplo, puede que necesite añadir la información de cabecera X-Forward siguiente a la solicitud antes de reenviarla a la app:
-
 <pre class="screen">
 <code>proxy_set_header Host $host;
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
-
-</li>
-
-<li>Para añadir la información de cabecera X-Forward a la solicitud enviada a la app, utilice la anotación `proxy-add-headers` de la siguiente forma:
-
+Para añadir la información de cabecera X-Forward a la solicitud que se envía a la app, utilice la anotación `proxy-add-headers` de la siguiente forma:
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
   serviceName=&lt;myservice1&gt; {
@@ -2383,10 +2401,10 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
-
-</li></ul><br>
-
-Si la app web del cliente necesita la información de cabecera HTTP, puede utilizar la anotación <code>response-add-headers</code> para añadir la información de cabecera a la respuesta antes de que el ALB reenvíe la respuesta a la app web del cliente.</dd>
+</li></ul>
+</br>
+<p class="tip">La anotación <code>response-add-headers</code> no admite cabeceras globales para todos los servicios. Para añadir una cabecera para todas las respuestas de servicio a nivel de servidor, puede utilizar la anotación [<code>server-snippets</code>](#server-snippets).</p>
+</dd>
 
 <dt>YAML del recurso de Ingress de ejemplo</dt>
 <dd>
@@ -2532,7 +2550,7 @@ Defina el tamaño máximo del cuerpo que puede enviar el cliente como parte de u
 </br></br>
 Es posible que desee aumentar el tamaño máximo del cuerpo porque espera solicitudes del cliente con un tamaño de cuerpo superior a 1 megabyte. Por ejemplo, si desea que el cliente pueda cargar archivos grandes. El hecho de aumentar el tamaño máximo del cuerpo de la solicitud puede afectar el rendimiento del ALB, ya que la conexión con el cliente debe permanecer abierta hasta que se recibe la solicitud.
 </br></br>
-<strong>Nota:</strong> Algunos navegadores web de cliente no pueden mostrar correctamente el mensaje de respuesta de HTTP 413.</dd>
+<p class="note">Algunos navegadores web de cliente no pueden mostrar correctamente el mensaje de respuesta de HTTP 413.</p></dd>
 <dt>YAML del recurso de Ingress de ejemplo</dt>
 <dd>
 
@@ -2565,7 +2583,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>El tamaño máximo del cuerpo de la respuesta del cliente. Por ejemplo, para establecer el tamaño máximo en 200 megabytes, defina <code>200m</code>.  <strong>Nota:</strong> Puede establecer el tamaño en 0 para inhabilitar la comprobación del tamaño del cuerpo de la solicitud del cliente.</td>
+ <td>El tamaño máximo del cuerpo de la respuesta del cliente. Por ejemplo, para establecer el tamaño máximo en 200 megabytes, defina <code>200m</code>. Puede establecer el tamaño en 0 para inhabilitar la comprobación del tamaño del cuerpo de la solicitud del cliente.</td>
  </tr>
  </tbody></table>
 
@@ -2620,8 +2638,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>El tamaño máximo de los almacenamientos intermedios que leen cabeceras largas de solicitud del cliente. Por ejemplo, para establecerlo en 16 kilobytes, defina <code>16k</code>.
-   <strong>Nota:</strong> El tamaño debe terminar en <code>k</code> para kilobytes o <code>m</code> para megabytes.</td>
+ <td>El tamaño máximo de los almacenamientos intermedios que leen cabeceras largas de solicitud del cliente. Por ejemplo, para establecerlo en 16 kilobytes, defina <code>16k</code>. El tamaño debe terminar en <code>k</code> para kilobytes o <code>m</code> para megabytes.</td>
  </tr>
 </tbody></table>
 </dd>
@@ -2633,6 +2650,8 @@ spec:
 ## Anotaciones de límite de servicio
 {: #service-limit}
 
+Con las anotaciones de límite de servicio, puede cambiar la velocidad de proceso de solicitudes predeterminada y el número de conexiones que pueden proceder de una única dirección IP. 
+{: shortdesc}
 
 ### Límites de velocidad global (global-rate-limit)
 {: #global-rate-limit}

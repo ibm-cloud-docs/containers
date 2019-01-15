@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -145,11 +148,11 @@ En la imagen siguiente se muestran los componentes del clúster y la forma en qu
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>El servidor OpenVPN funciona con el cliente OpenVPN para conectar de forma segura el nodo maestro con el nodo trabajador. Esta conexión da soporte a kubectl exec, attach, logs y apiserver proxy.</td>
+    <td>El servidor OpenVPN funciona con el cliente OpenVPN para conectar de forma segura el nodo maestro con el nodo trabajador. Esta conexión admite llamadas `apiserver proxy` a los pods y servicios, y llamadas `kubectl exec`, `attach` y `logs` a kubelet.</td>
     </tr>
     <tr>
     <td>etcd</td>
-    <td>etcd es un almacén de valores de claves de alta disponibilidad que almacena el estado de todos los recursos de Kubernetes de un clúster, como servicios, despliegues y pods. Los datos de etcd, de los que se hace una copia de seguridad diaria, se almacenan en un disco cifrado gestionado por IBM.</td>
+    <td>etcd es un almacén de valores de claves de alta disponibilidad que almacena el estado de todos los recursos de Kubernetes de un clúster, como servicios, despliegues y pods. Se realiza una copia de seguridad de los datos de etcd en una instancia de almacenamiento cifrada que gestiona IBM.</td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -171,19 +174,34 @@ En la imagen siguiente se muestran los componentes del clúster y la forma en qu
     </thead>
     <tbody>
     <tr>
+    <td>ibm-master-proxy</td>
+    <td>kube-system</td>
+    <td>Para clústeres que ejecutan Kubernetes versión 1.10 o posterior, el `ibm-master-proxy` reenvía solicitudes desde el nodo trabajador a las direcciones IP de las réplicas del maestro de alta disponibilidad. En clústeres de una sola zona, el maestro tiene tres réplicas en hosts independientes con un nombre de dominio y una dirección IP de maestro. Para clústeres que se encuentran en una zona con capacidad multizona, el maestro tiene tres réplicas que se dispersan entre zonas. Como tal, cada maestro tiene su propia dirección IP que se registra con DNS, con un nombre de dominio para el maestro de clúster completo.</td>
+    </tr>
+    <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>El cliente OpenVPN funciona con el servidor OpenVPN para conectar de forma segura el nodo maestro con el nodo trabajador. Esta conexión da soporte a kubectl exec, attach, logs y apiserver proxy.</td>
+    <td>El cliente OpenVPN funciona con el servidor OpenVPN para conectar de forma segura el nodo maestro con el nodo trabajador. Esta conexión admite llamadas `apiserver proxy` a los pods y servicios, y llamadas `kubectl exec`, `attach` y `logs` a kubelet.</td>
     </tr>
     <tr>
-    <td>calico-policy-controller</td>
+    <td>kubelet</td>
     <td>kube-system</td>
-    <td>El controlador de políticas de Calico observa el tráfico de red de entrada y de salida para comprobar la conformidad con las políticas de red establecidas. Si el tráfico no está permitido en el clúster, se bloquea el acceso al clúster. El controlador de políticas de Calico también se utiliza para crear y establecer políticas de red para un clúster.</td>
+    <td>El kubelet es un pod que se ejecuta en cada nodo trabajador y que es el responsable de supervisar el estado de los pods que se ejecutan en el nodo trabajador y de ver los sucesos que envía el servidor de API de Kubernetes. Basándose en los sucesos, el kubelet crea o elimina pods, garantiza sondeos de actividad y de preparación e informa sobre el estado de los pods al servidor de API de Kubernetes.</td>
     </tr>
     <tr>
-    <td>Proveedor de almacenamiento</td>
+    <td>kube-dns</td>
     <td>kube-system</td>
-    <td>Cada clúster se configura con un plugin para suministrar almacenamiento de archivos. Si lo desea puede instalar otros complementos, como almacenamiento en bloque.</td>
+    <td>Kubernetes DNS planifica un servicio y pod DNS en el clúster. Los contenedores utilizan automáticamente la IP del servicio DNS para resolver nombres de DNS en sus búsquedas de otros pods y servicios.</td>
+    </tr>
+    <tr>
+    <td>calico</td>
+    <td>kube-system</td>
+    <td>Calico gestiona las políticas de red del clúster y consta de varios componentes, indicados a continuación.
+    <ul>
+    <li>**calico-cni**: La interfaz de red de contenedor de Calico (CNI) gestiona la conectividad de red de los contenedores y elimina los recursos asignados cuando se suprime un contenedor.</li>
+    <li>**calico-ipam**: Calico IPAM gestiona la asignación de direcciones IP a contenedores.</li>
+    <li>**calico-node**: El nodo Calico es un contenedor que agrupa los distintos componentes necesarios para los contenedores de red con Calico.</li>
+    <li>**calico-policy-controller**: El controlador de políticas de Calico observa el tráfico de red de entrada y de salida para comprobar la conformidad con las políticas de red establecidas. Si el tráfico no está permitido en el clúster, se bloquea el acceso al clúster. El controlador de políticas de Calico también se utiliza para crear y establecer políticas de red para un clúster.</li></ul></td>
     </tr>
     <tr>
     <td>kube-proxy</td>
@@ -193,12 +211,7 @@ En la imagen siguiente se muestran los componentes del clúster y la forma en qu
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>El panel de control de Kubernetes es una interfaz de usuario basada en web que permite a los usuarios gestionar y resolver problemas en el clúster y en las aplicaciones que se ejecutan en el clúster.</td>
-    </tr>
-    <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>Kubernetes DNS planifica un servicio y pod DNS en el clúster. Los contenedores utilizan automáticamente la IP del servicio DNS para resolver nombres de DNS en sus búsquedas de otros pods y servicios.</td>
+    <td>El panel de control de Kubernetes es una GUI basada en web que permite a los usuarios gestionar y resolver problemas en el clúster y en las aplicaciones que se ejecutan en el clúster.</td>
     </tr>
     <tr>
     <td>heapster</td>
@@ -206,19 +219,19 @@ En la imagen siguiente se muestran los componentes del clúster y la forma en qu
     <td>Heapster es un agregador a nivel de clúster de datos de supervisión y de sucesos. El pod Heapster descubre todos los nodos del clúster y consulta información de uso del kubelet de cada nodo. En el panel de control de Kubernetes encontrará gráficos de utilización.</td>
     </tr>
     <tr>
-    <td>calico-node</td>
+    <td>ALB de Ingress</td>
     <td>kube-system</td>
-    <td>El nodo Calico es un contenedor que agrupa los distintos componentes necesarios para los contenedores de red con Calico.</td>
+    <td>Ingress es un servicio de Kubernetes que puede utilizar para equilibrar las cargas de trabajo de tráfico de red en el clúster reenviando solicitudes públicas o privadas a varias apps del clúster. Para exponer sus apps a través de la red pública o privada, debe crear un recurso de Ingress para registrar sus apps con el equilibrador de carga de aplicación de Ingress (ALB). Un solo URL o dirección IP puede acceder a varias apps.</td>
+    </tr>
+    <tr>
+    <td>Proveedor de almacenamiento</td>
+    <td>kube-system</td>
+    <td>Cada clúster se configura con un plugin para suministrar almacenamiento de archivos. Si lo desea puede instalar otros complementos, como almacenamiento en bloque.</td>
     </tr>
     <tr>
     <td>Registro y métricas</td>
     <td>ibm-system</td>
     <td>Puede utilizar los servicios {{site.data.keyword.loganalysislong_notm}} y {{site.data.keyword.monitoringlong_notm}} integrados para ampliar las funciones de recopilación y retención cuando trabaje con registros y con métricas.</td>
-    </tr>
-    <tr>
-    <td>ALB de Ingress</td>
-    <td>ibm-system</td>
-    <td>Ingress es un servicio de Kubernetes que puede utilizar para equilibrar las cargas de trabajo de tráfico de red en el clúster reenviando solicitudes públicas o privadas a varias apps del clúster. Para exponer sus apps a través de la red pública o privada, debe crear un recurso de Ingress para registrar sus apps con el equilibrador de carga de aplicación de Ingress (ALB). Un solo URL o dirección IP puede acceder a varias apps.</td>
     </tr>
     <tr>
     <td>Equilibrador de carga</td>
@@ -229,21 +242,6 @@ En la imagen siguiente se muestran los componentes del clúster y la forma en qu
     <td>Servicios y pods de app</td>
     <td>default</td>
     <td>En el espacio de nombres <code>default</code> o en los espacios de nombres que cree, puede desplegar apps en pods y servicios para que se comuniquen con dichos pods.</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>n/d</td>
-    <td>La interfaz de red de contenedor de Calico (CNI) gestiona la conectividad de red de los contenedores y elimina los recursos asignados cuando se suprime un contenedor.</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>n/d</td>
-    <td>Calico IPAM gestiona la asignación de direcciones IP a contenedores.</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>n/d</td>
-    <td>El kubelet es un pod que se ejecuta en cada nodo trabajador y que es el responsable de supervisar el estado de los pods que se ejecutan en el nodo trabajador y de ver los sucesos que envía el servidor de API de Kubernetes. Basándose en los sucesos, el kubelet crea o elimina pods, garantiza sondeos de actividad y de preparación e informa sobre el estado de los pods al servidor de API de Kubernetes.</td>
     </tr>
     </tbody></table></dd>
 </dl>

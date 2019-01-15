@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,7 +13,11 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
+{:gif: data-image-type='gif'}
 
 
 # Configuración de clústeres y nodos trabajadores
@@ -34,11 +38,11 @@ La lista se divide en dos partes:
 ### Nivel de cuenta
 {: #prepare_account_level}
 
-1.  [Cree o actualice su cuenta a una cuenta de pago según uso o de suscripción de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/).
+1.  [Cree o actualice su cuenta a una cuenta de pago (Pago según uso o Suscripción de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/)).
 2.  [Configure una clave de API de {{site.data.keyword.containerlong_notm}}](cs_users.html#api_key) en las regiones en las que desea crear clústeres. Asigne la clave de API con los permisos adecuados para crear clústeres:
-    *  Rol de **superusuario** para la infraestructura de IBM Cloud (SoftLayer).
-    *  Rol de **administrador** de la gestión de la plataforma para {{site.data.keyword.containerlong_notm}}.
-    *  Rol de **administrador** de la gestión de la plataforma para {{site.data.keyword.registrylong_notm}}.
+    *  Rol de **Superusuario** para la infraestructura de IBM Cloud (SoftLayer).
+    *  Rol de gestión de la plataforma de **Administrador** para {{site.data.keyword.containerlong_notm}} a nivel de cuenta.
+    *  Rol de gestión de la plataforma de **Administrador** para {{site.data.keyword.registrylong_notm}} a nivel de cuenta.
 
     ¿Es el propietario de la cuenta? Si es así, ya tiene los permisos necesarios. Cuando se crea un clúster, la clave de API correspondiente a esa región y grupo de recursos se establece con las credenciales.
     {: tip}
@@ -46,7 +50,9 @@ La lista se divide en dos partes:
 3.  Si la cuenta utiliza varios grupos de recursos, debe decidir la estrategia de su cuenta para [gestionar grupos de recursos](cs_users.html#resource_groups). 
     *  El clúster se crea en el grupo de recursos que ha elegido como destino al iniciar la sesión en {{site.data.keyword.Bluemix_notm}}. Si no elige como destino un grupo de recursos, se establece automáticamente el grupo de recursos predeterminado.
     *  Si desea crear un clúster en un grupo de recursos distinto del predeterminado, necesitará al menos el rol **Visor** para el grupo de recursos. Si no tiene ningún rol para el grupo de recursos pero es **Administrador** del servicio dentro del grupo de recursos, el clúster se crea en el grupo de recursos predeterminado.
-    *  No se puede cambiar el grupo de recursos de un clúster. El clúster sólo se puede integrar con otros servicios de {{site.data.keyword.Bluemix_notm}} que estén en el mismo grupo de recursos.
+    *  No se puede cambiar el grupo de recursos de un clúster. El clúster solo se puede integrar con otros servicios de
+{{site.data.keyword.Bluemix_notm}} que estén en el mismo grupo de recursos o con servicios que no admitan grupos de recursos, como
+{{site.data.keyword.registrylong_notm}}.
     *  Si tiene previsto utilizar [{{site.data.keyword.monitoringlong_notm}} para métricas](cs_health.html#view_metrics), asigne al clúster un nombre que sea exclusivo entre todos los grupos de recursos y regiones de la cuenta para evitar conflictos de nombres de métricas.
     * Si tiene una cuenta de {{site.data.keyword.Bluemix_dedicated}}, solo debe crear clústeres en el grupo de recursos predeterminado.
 4.  Habilite la expansión de VLAN. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](cs_users.html#infra_access) **Red > Gestionar expansión de VLAN de la red**, o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Si utiliza {{site.data.keyword.BluDirectLink}}, en su lugar debe utilizar una [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Para habilitar la VRF, póngase en contacto con el representante de cuentas de infraestructura de IBM Cloud (SoftLayer).
@@ -63,66 +69,76 @@ La lista se divide en dos partes:
     *  Decida si desea crear un clúster de [una sola zona](cs_clusters_planning.html#single_zone) o [multizona](cs_clusters_planning.html#multizone). Tenga en cuenta que los clústeres multizona solo están disponibles en determinadas ubicaciones.
     *  Si desea crear un clúster que no sea accesible públicamente, revise los [pasos de clúster privado](cs_clusters_planning.html#private_clusters) adicionales.
     *  Elija el tipo de [hardware y aislamiento](cs_clusters_planning.html#shared_dedicated_node) que desea para los nodos trabajadores del clúster, incluida la decisión entre máquinas virtuales o nativas.
-4.  Para los clústeres estándar, puede [estimar el coste con la calculadora de precios![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). **Nota**: para obtener más información sobre los cargos que no incluye el estimador, consulte [Precios y facturación](cs_why.html#pricing).
+4.  Para los clústeres estándar, puede [estimar el coste con el estimador de costes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes). Para obtener más información sobre los cargos que no incluye el estimador, consulte [Precios y facturación](cs_why.html#pricing).
 <br>
 <br>
 
 **¿Qué es lo siguiente?**
-* [Creación de clústeres con la GUI](#clusters_ui)
-* [Creación de clústeres con la CLI](#clusters_cli)
+* [Creación de clústeres con la consola de {{site.data.keyword.Bluemix_notm}}](#clusters_ui)
+* [Creación de clústeres con la CLI de {{site.data.keyword.Bluemix_notm}}](#clusters_cli)
 
-## Creación de clústeres con la GUI
+## Creación de clústeres con la consola de {{site.data.keyword.Bluemix_notm}}
 {: #clusters_ui}
 
 La finalidad del clúster de Kubernetes es definir un conjunto de recursos, nodos, redes y dispositivos de almacenamiento que mantengan la alta disponibilidad de las apps. Para poder desplegar una app, debe crear un clúster y establecer las definiciones de los nodos trabajadores en dicho clúster.
 {:shortdesc}
 
-Antes de empezar, consulte los pasos que debe llevar a cabo para [prepararse para crear un clúster](#cluster_prepare).
+### Creación de un clúster gratuito
+{: #clusters_ui_free}
 
-**Para crear un clúster gratuito**
+Puede utilizar 1 clúster gratuito para familiarizarse con el funcionamiento de {{site.data.keyword.containerlong_notm}}. Con los clústeres gratuitos puede aprender la terminología, completar una guía de aprendizaje y familiarizarse con el sistema antes de dar el salto a los clústeres estándares de nivel de producción. No se preocupe, seguirá disponiendo de un clúster gratuito, aunque tenga una cuenta facturable.
 
-Puede utilizar 1 clúster gratuito para familiarizarse con el funcionamiento de {{site.data.keyword.containerlong_notm}}. Con los clústeres gratuitos puede aprender la terminología, completar una guía de aprendizaje y familiarizarse con el sistema antes de dar el salto a los clústeres estándares de nivel de producción. No se preocupe, sigue disponiendo de un clúster gratuito, aunque tenga una cuenta de Pago según uso o de Suscripción. **Nota**: los clústeres gratuitos tienen un período de vida de 30 días. Transcurrido este periodo, el clúster caduca y el clúster y sus datos se suprimen. {{site.data.keyword.Bluemix_notm}} no hace copia de seguridad de los datos suprimidos y no se pueden restaurar. Asegúrese de realizar una copia de seguridad de los datos importantes.
+Los clústeres gratuitos tienen un período de vida de 30 días. Transcurrido este periodo, el clúster caduca y el clúster y sus datos se suprimen. {{site.data.keyword.Bluemix_notm}} no hace copia de seguridad de los datos suprimidos y no se pueden restaurar. Asegúrese de realizar una copia de seguridad de los datos importantes.
+{: note}
 
-1. En el catálogo, seleccione **{{site.data.keyword.containerlong_notm}}**.
+1. [Prepare la creación de un clúster](#cluster_prepare) para asegurarse de que tiene los permisos de usuario correctos y la configuración adecuada de la cuenta de {{site.data.keyword.Bluemix_notm}}, así como para decidir qué configuración de clúster y grupo de recursos desea utilizar.
 
-2. Seleccione una región en la que desea desplegar el clúster. **Nota**: No se pueden crear clústeres gratuitos en las regiones de EE.UU. este o AP norte y las zonas correspondientes.
+2. En el [catálogo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/catalog/?category=containers), seleccione
+**{{site.data.keyword.containershort_notm}}** para crear un clúster.
 
-3. Seleccione el plan de clúster **Gratuito**.
+3. Seleccione una ubicación en la que desea desplegar el clúster. **Nota**: No se pueden crear clústeres gratuitos en las ubicaciones Washington DC (EE.UU. este) o Tokio (AP norte).
 
-4. Asigne un nombre al clúster. El nombre debe empezar por una letra, puede contener letras, números, guiones (-) y debe tener 35 caracteres como máximo. El nombre del clúster y la región en la que el clúster se despliega forman el nombre de dominio completo para el subdominio de Ingress. Para garantizar que el subdominio de Ingress es exclusivo dentro de una región, el nombre del clúster se puede truncar y se le puede añadir un valor aleatorio al nombre de dominio de Ingress.
+4. Seleccione el plan de clúster **Gratuito**.
+
+5. Asigne un nombre al clúster. El nombre debe empezar por una letra, puede contener letras, números, guiones (-) y debe tener 35 caracteres como máximo. El nombre del clúster y la región en la que el clúster se despliega forman el nombre de dominio completo para el subdominio de Ingress. Para garantizar que el subdominio de Ingress es exclusivo dentro de una región, el nombre del clúster se puede truncar y se le puede añadir un valor aleatorio al nombre de dominio de Ingress.
 
 
-5. Pulse **Crear clúster**. De forma predeterminada, se crea una agrupación de nodos trabajadores con un nodo trabajador. Verá el progreso del despliegue del nodo trabajador en el separador **Nodos trabajadores**. Cuando finalice el despliegue, podrá ver que el clúster está listo en el separador **Visión general**.
+6. Pulse **Crear clúster**. De forma predeterminada, se crea una agrupación de nodos trabajadores con un nodo trabajador. Verá el progreso del despliegue del nodo trabajador en el separador **Nodos trabajadores**. Cuando finalice el despliegue, podrá ver que el clúster está listo en el separador **Visión general**.
 
     Si se cambia el nombre de dominio o el ID exclusivo asignado durante la creación, se impide que el nodo maestro de Kubernetes gestione el clúster.
     {: tip}
 
 </br>
 
-**Para crear un clúster estándar**
+### Creación de un clúster estándar
+{: #clusters_ui_standard}
 
-1. En el catálogo, seleccione **{{site.data.keyword.containershort_notm}}**.
+1. [Prepare la creación de un clúster](#cluster_prepare) para asegurarse de que tiene los permisos de usuario correctos y la configuración adecuada de la cuenta de {{site.data.keyword.Bluemix_notm}}, así como para decidir qué configuración de clúster y grupo de recursos desea utilizar.
 
-2. Seleccione el grupo de recursos en el que desea crear el clúster.
+2. En el [catálogo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/catalog/?category=containers), seleccione
+**{{site.data.keyword.containershort_notm}}** para crear un clúster.
+
+3. Seleccione el grupo de recursos en el que desea crear el clúster.
   **Nota**:
     * Un clúster solo se puede crear en un grupo de recursos y, después de crear el clúster, no puede cambiar su grupo de recursos.
     * En el grupo de recursos predeterminado se crean automáticamente clústeres gratuitos.
     * Para crear clústeres, que no sea el predeterminado, en un grupo de recursos, debe tener al menos el [rol de **Visor** ](cs_users.html#platform) para el grupo de recursos.
 
-2. Seleccione una región en la que desea desplegar el clúster. Para obtener el mejor rendimiento, seleccione la región físicamente más cercana. Tenga en cuenta que, si selecciona una zona que está fuera de su país, es posible que necesite autorización legal para que se puedan almacenar datos.
+4. Seleccione una [ubicación de {{site.data.keyword.Bluemix_notm}}](cs_regions.html#regions-and-zones) en la que desea desplegar el clúster. Para obtener el mejor rendimiento, seleccione la ubicación físicamente más cercana. Tenga en cuenta que, si selecciona una zona que está fuera de su país, es posible que necesite autorización legal para que se puedan almacenar datos.
 
-3. Seleccione el plan de clúster **Estándar**. Con un clúster estándar, obtiene acceso a características como, por ejemplo, varios nodos trabajadores para obtener un entorno de alta disponibilidad.
+5. Seleccione el plan de clúster **Estándar**. Con un clúster estándar, obtiene acceso a características como, por ejemplo, varios nodos trabajadores para obtener un entorno de alta disponibilidad.
 
-4. Especifique los detalles de la zona.
+6. Especifique los detalles de la zona.
 
     1. Seleccione la disponibilidad **Una sola zona** o **Multizona**. En un clúster multizona, el nodo maestro se despliega en una zona con soporte multizona y los recursos del clúster se distribuyen entre varias zonas. Las opciones pueden verse limitadas por región.
 
     2. Seleccione las zonas específicas en las que desea alojar el clúster. Debe seleccionar al menos 1 zona, pero puede seleccionar tantas como desee. Si selecciona más de 1 zona, los nodos trabajadores se distribuyen entre las zonas que elija, lo que le proporciona una mayor disponibilidad. Si selecciona solo 1 zona, puede [añadir zonas a su clúster](#add_zone) después de crearlo.
 
-    3. Seleccione una VLAN pública (opcional) y una VLAN privada (obligatorio) en la cuenta de infraestructura de IBM Cloud (SoftLayer). Los nodos trabajadores se comunican entre sí a través de la VLAN privada. Para comunicarse con el nodo maestro de Kubernetes, debe configurar la conectividad pública para el nodo trabajador.  Si no tiene una VLAN pública o privada en esta zona, déjelo en blanco. Se crea automáticamente una VLAN privada y una pública. Si ya tiene VLAN y no especifica una VLAN pública, tenga en cuenta la posibilidad de configurar un cortafuegos, como por ejemplo [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about). Puede utilizar la misma VLAN para varios clústeres.
-        **Nota**: Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red. Para obtener más información, consulte [Planificación de redes de clúster solo privado](cs_network_cluster.html#private_vlan).
+    3. Seleccione una VLAN pública (opcional) y una VLAN privada (obligatorio) en la cuenta de infraestructura de IBM Cloud (SoftLayer). Los nodos trabajadores se comunican entre sí a través de la VLAN privada. Para comunicarse con el nodo maestro de Kubernetes, debe configurar la conectividad pública para el nodo trabajador.  Si no tiene una VLAN pública o privada en esta zona, déjelo en blanco. Se crea automáticamente una VLAN privada y una pública. Si ya tiene VLAN y no especifica una VLAN pública, tenga en cuenta la posibilidad de configurar un cortafuegos, como por ejemplo [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about-the-vra). Puede utilizar la misma VLAN para varios clústeres.
+        Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red. Para obtener más información, consulte [Planificación de redes de clúster solo privado](cs_network_cluster.html#private_vlan).
+        {: note}
 
-5. Configure la agrupación de nodos trabajadores predeterminada. Las agrupaciones de nodos trabajadores son grupos de nodos trabajadores que comparten la misma configuración. Siempre puede añadir más agrupaciones de nodos trabajadores a su clúster posteriormente.
+7. Configure la agrupación de nodos trabajadores predeterminada. Las agrupaciones de nodos trabajadores son grupos de nodos trabajadores que comparten la misma configuración. Siempre puede añadir más agrupaciones de nodos trabajadores a su clúster posteriormente.
 
     1. Seleccione un tipo de aislamiento de hardware. La opción virtual se factura por hora, y la nativa se factura mensualmente.
 
@@ -130,7 +146,7 @@ Puede utilizar 1 clúster gratuito para familiarizarse con el funcionamiento de 
 
         - **Virtual - Compartido**: Los recursos de infraestructura, como por ejemplo el hipervisor y el hardware físico, están compartidos entre usted y otros clientes de IBM, pero cada nodo trabajador es accesible sólo por usted. Aunque esta opción es menos costosa y suficiente en la mayoría de los casos, es posible que desee verificar los requisitos de rendimiento e infraestructura con las políticas de la empresa.
 
-        - **Nativo**: Los servidores nativos se facturan de forma mensual y su suministro se realiza mediante interacción manual con la infraestructura de IBM Cloud (SoftLayer), por lo que puede tardar más de un día laborable en realizarse. Los servidores nativos son más apropiados para aplicaciones de alto rendimiento que necesitan más recursos y control de host. Para clústeres que ejecutan la versión 1.9 o posterior de Kubernetes, también puede optar por habilitar [Trusted Compute](cs_secure.html#trusted_compute) para verificar que los nodos trabajadores no se manipulan de forma indebida. Trusted Compute está disponible para determinados tipos de máquinas nativas. Por ejemplo, los distintos tipos de GPU `mgXc` no dan soporte a Trusted Compute. Si no habilita la confianza durante la creación del clúster pero desea hacerlo posteriormente, puede utilizar el [mandato](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Una vez que habilita la confianza, no puede inhabilitarla posteriormente.
+        - **Nativo**: Los servidores nativos se facturan de forma mensual y su suministro se realiza mediante interacción manual con la infraestructura de IBM Cloud (SoftLayer), por lo que puede tardar más de un día laborable en realizarse. Los servidores nativos son más apropiados para aplicaciones de alto rendimiento que necesitan más recursos y control de host. También puede optar por habilitar [Trusted Compute](cs_secure.html#trusted_compute) para verificar que los nodos trabajadores no se manipulan de forma indebida. Trusted Compute está disponible para determinados tipos de máquinas nativas. Por ejemplo, los distintos tipos de GPU `mgXc` no dan soporte a Trusted Compute. Si no habilita la confianza durante la creación del clúster pero desea hacerlo posteriormente, puede utilizar el [mandato](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Una vez que habilita la confianza, no puede inhabilitarla posteriormente.
 
         Asegúrese de que desea suministrar una máquina nativa. Puesto que se factura mensualmente, si cancela la operación inmediatamente tras realizar un pedido por error, se le cobrará el mes completo.
         {:tip}
@@ -139,11 +155,11 @@ Puede utilizar 1 clúster gratuito para familiarizarse con el funcionamiento de 
 
     3. Especifique el número de nodos trabajadores que necesita en el clúster. El número de nodos trabajadores que especifique se replica entre el número de zonas que ha seleccionado. Esto significa que si tiene 2 zonas y selecciona 3 nodos trabajadores, se suministran 6 nodos y en cada zona residen 3 nodos.
 
-6. Dele un nombre exclusivo al clúster. **Nota**: si se cambia el nombre de dominio o el ID exclusivo asignado durante la creación, se impide que el nodo maestro de Kubernetes gestione el clúster.
+8. Dele un nombre exclusivo al clúster. **Nota**: si se cambia el nombre de dominio o el ID exclusivo asignado durante la creación, se impide que el nodo maestro de Kubernetes gestione el clúster.
 
-7. Elija la versión del servidor de API de Kubernetes para el nodo maestro del clúster.
+9. Elija la versión del servidor de API de Kubernetes para el nodo maestro del clúster.
 
-8. Pulse **Crear clúster**. Se crea una agrupación de nodos trabajadores con el número de nodos trabajadores que ha especificado. Verá el progreso del despliegue del nodo trabajador en el separador **Nodos trabajadores**. Cuando finalice el despliegue, podrá ver que el clúster está listo en el separador **Visión general**.
+10. Pulse **Crear clúster**. Se crea una agrupación de nodos trabajadores con el número de nodos trabajadores que ha especificado. Verá el progreso del despliegue del nodo trabajador en el separador **Nodos trabajadores**. Cuando finalice el despliegue, podrá ver que el clúster está listo en el separador **Visión general**.
 
 **¿Qué es lo siguiente?**
 
@@ -159,19 +175,19 @@ Cuando el clúster esté activo y en ejecución, puede realizar las siguientes t
 <br />
 
 
-## Creación de clústeres con la CLI
+## Creación de clústeres con la CLI de {{site.data.keyword.Bluemix_notm}}
 {: #clusters_cli}
 
 La finalidad del clúster de Kubernetes es definir un conjunto de recursos, nodos, redes y dispositivos de almacenamiento que mantengan la alta disponibilidad de las apps. Para poder desplegar una app, debe crear un clúster y establecer las definiciones de los nodos trabajadores en dicho clúster.
 {:shortdesc}
 
-Antes de empezar:
-* Consulte los pasos que debe llevar a cabo para [prepararse para crear un clúster](#cluster_prepare).
-* Instale la CLI de {{site.data.keyword.Bluemix_notm}} y el [plugin de {{site.data.keyword.containerlong_notm}}](cs_cli_install.html#cs_cli_install).
+Antes de empezar, instale la CLI de {{site.data.keyword.Bluemix_notm}} y el [plugin de {{site.data.keyword.containerlong_notm}}](cs_cli_install.html#cs_cli_install).
 
 Para crear un clúster:
 
-1.  Inicie la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}.
+1. [Prepare la creación de un clúster](#cluster_prepare) para asegurarse de que tiene los permisos de usuario correctos y la configuración adecuada de la cuenta de {{site.data.keyword.Bluemix_notm}}, así como para decidir qué configuración de clúster y grupo de recursos desea utilizar.
+
+2.  Inicie la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}.
 
     1.  Inicie una sesión y escriba sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite.
 
@@ -180,7 +196,8 @@ Para crear un clúster:
         ```
         {: pre}
 
-        **Nota:** si tiene un ID federado, utilice `ibmcloud login --sso` para iniciar la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Especifique su nombre de usuario y utilice el URL proporcionado en la salida de la CLI para recuperar el código de acceso de un solo uso. Sabe tiene un ID federado cuando el inicio de sesión falla sin el `--sso` y se lleva a cabo correctamente con la opción `--sso`.
+        Si tiene un ID federado, utilice `ibmcloud login --sso` para iniciar la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Especifique su nombre de usuario y utilice el URL proporcionado en la salida de la CLI para recuperar el código de acceso de un solo uso. Sabe tiene un ID federado cuando el inicio de sesión falla sin el `--sso` y se lleva a cabo correctamente con la opción `--sso`.
+        {: tip}
 
     2. Si tiene varias cuentas de {{site.data.keyword.Bluemix_notm}}, seleccione la cuenta donde desea crear el clúster de Kubernetes.
 
@@ -197,11 +214,9 @@ Para crear un clúster:
     4.  Si desea crear o acceder a clústeres de Kubernetes en una región distinta de la región de {{site.data.keyword.Bluemix_notm}} seleccionada anteriormente, ejecute `ibmcloud ks region-set`.
 
 
-3.  Cree un clúster. **Nota**: los clústeres estándar se pueden crear en cualquier región y zona disponible. No se pueden crear clústeres gratuitos en las regiones de EE.UU. este o AP norte y las zonas correspondientes, y no se puede seleccionar la zona.
+4.  Cree un clúster. Los clústeres estándar se pueden crear en cualquier región y zona disponible. No se pueden crear clústeres gratuitos en las regiones de EE.UU. este o AP norte y las zonas correspondientes, y no se puede seleccionar la zona.
 
-    1.  **Clústeres estándares**: revise las zonas que están disponibles. Las zonas que se muestran dependen de la región de {{site.data.keyword.containerlong_notm}} en la que ha iniciado la sesión.
-
-        **Nota**: para distribuir el clúster entre zonas, debe crear el clúster en una [zona con soporte multizona](cs_regions.html#zones).
+    1.  **Clústeres estándares**: revise las zonas que están disponibles. Las zonas que se muestran dependen de la región de {{site.data.keyword.containerlong_notm}} en la que ha iniciado la sesión. Para distribuir el clúster entre zonas, debe crear el clúster en una [zona con soporte multizona](cs_regions.html#zones).
 
         ```
         ibmcloud ks zones
@@ -213,7 +228,7 @@ Para crear un clúster:
         -  Consulte el campo **Tipo de servidor** para elegir máquinas virtuales o físicas (nativas).
         -  **Virtual**: Las máquinas virtuales se facturan por horas y se suministran en hardware compartido o dedicado.
         -  **Físico**: Los servidores nativos se facturan de forma mensual y su suministro se realiza mediante interacción manual con la infraestructura de IBM Cloud (SoftLayer), por lo que puede tardar más de un día laborable en realizarse. Los servidores nativos son más apropiados para aplicaciones de alto rendimiento que necesitan más recursos y control de host.
-        - **Máquinas físicas con Trusted Compute**: Para clústeres nativos que ejecutan la versión 1.9 o posterior de Kubernetes, también puede optar por habilitar [Trusted Compute](cs_secure.html#trusted_compute) para verificar que los nodos trabajadores nativos no se manipulan de forma indebida. Trusted Compute está disponible para determinados tipos de máquinas nativas. Por ejemplo, los distintos tipos de GPU `mgXc` no dan soporte a Trusted Compute. Si no habilita la confianza durante la creación del clúster pero desea hacerlo posteriormente, puede utilizar el [mandato](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Una vez que habilita la confianza, no puede inhabilitarla posteriormente.
+        - **Máquinas físicas con Trusted Compute**: También puede optar por habilitar [Trusted Compute](cs_secure.html#trusted_compute) para verificar que los nodos trabajadores nativos no se manipulan de forma indebida. Trusted Compute está disponible para determinados tipos de máquinas nativas. Por ejemplo, los distintos tipos de GPU `mgXc` no dan soporte a Trusted Compute. Si no habilita la confianza durante la creación del clúster pero desea hacerlo posteriormente, puede utilizar el [mandato](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Una vez que habilita la confianza, no puede inhabilitarla posteriormente.
         -  **Tipos de máquina**: para decidir qué tipo de máquina desplegar, revise el núcleo, la memoria y las combinaciones de almacenamiento del [hardware del nodo trabajador disponible](cs_clusters_planning.html#shared_dedicated_node). Después de crear el clúster, puede añadir distintos tipos de máquina física o virtual mediante la [adición de una agrupación de nodos trabajadores](#add_pool).
 
            Asegúrese de que desea suministrar una máquina nativa. Puesto que se factura mensualmente, si cancela la operación inmediatamente tras realizar un pedido por error, se le cobrará el mes completo.
@@ -272,7 +287,7 @@ empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster espe
         </tr>
         <tr>
         <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-        <td>**Clústeres estándares**: Sustituya <em>&lt;zone&gt;</em> por el ID de zona de {{site.data.keyword.Bluemix_notm}} donde desea crear el clúster. Las zonas disponibles dependen de la región de {{site.data.keyword.containerlong_notm}} en la que ha iniciado la sesión.<br></br>**Nota**: los nodos trabajadores de clúster se despliegan en esta zona. Para distribuir el clúster entre zonas, debe crear el clúster en una [zona con soporte multizona](cs_regions.html#zones). Después de que se haya creado el clúster, puede [añadir una zona al clúster](#add_zone).</td>
+        <td>**Clústeres estándares**: Sustituya <em>&lt;zone&gt;</em> por el ID de zona de {{site.data.keyword.Bluemix_notm}} donde desea crear el clúster. Las zonas disponibles dependen de la región de {{site.data.keyword.containerlong_notm}} en la que ha iniciado la sesión.<p class="note">Los nodos trabajadores de clúster se despliegan en esta zona. Para distribuir el clúster entre zonas, debe crear el clúster en una [zona con soporte multizona](cs_regions.html#zones). Después de que se haya creado el clúster, puede [añadir una zona al clúster](#add_zone).</p></td>
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
@@ -286,13 +301,18 @@ empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster espe
         <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
         <td><ul>
           <li>**Clústeres gratuitos**: No tiene que definir una VLAN pública. El clúster gratuito se conecta automáticamente a una VLAN pública propiedad de IBM.</li>
-          <li>**Clústeres estándares**: Si ya tiene una VLAN pública configurada en su cuenta de infraestructura de IBM Cloud (SoftLayer) para esta zona, escriba el ID de la VLAN pública. Si desea conectar los nodos trabajadores solo a una VLAN privada, no especifique esta opción. **Nota**: Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red. Para obtener más información, consulte [Planificación de redes de clúster solo privado](cs_network_cluster.html#private_vlan).<br/><br/>
-          <strong>Nota</strong>: Los direccionadores de VLAN privadas siempre empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores de VLAN públicas siempre empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster especificando las VLAN privadas y públicas, deben coincidir el número y la combinación de letras después de dichos prefijos.</li>
+          <li>**Clústeres estándares**: Si ya tiene una VLAN pública configurada en su cuenta de infraestructura de IBM Cloud (SoftLayer) para esta zona, escriba el ID de la VLAN pública. Si desea conectar los nodos trabajadores solo a una VLAN privada, no especifique esta opción.
+          <p>Los direccionadores de VLAN privadas siempre
+empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores de VLAN públicas siempre
+empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster especificando las VLAN privadas y públicas, deben coincidir el número y la combinación de letras después de dichos prefijos.</p>
+          <p class="note">Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red. Para obtener más información, consulte [Planificación de redes de clúster solo privado](cs_network_cluster.html#private_vlan).</p></li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>**Clústeres gratuitos**: No tiene que definir una VLAN privada. El clúster gratuito se conecta automáticamente a una VLAN privada propiedad de IBM.</li><li>**Clústeres estándares**: Si ya tiene una VLAN privada configurada en su cuenta de infraestructura de IBM Cloud (SoftLayer) para esta zona, escriba el ID de la VLAN privada. Si no tiene una VLAN privada en la ubicación, no especifique esta opción. {{site.data.keyword.containerlong_notm}} crea automáticamente una VLAN privada.<br/><br/><strong>Nota</strong>: Los direccionadores de VLAN privadas siempre empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores de VLAN públicas siempre empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster especificando las VLAN privadas y públicas, deben coincidir el número y la combinación de letras después de dichos prefijos.</li></ul></td>
+        <td><ul><li>**Clústeres gratuitos**: No tiene que definir una VLAN privada. El clúster gratuito se conecta automáticamente a una VLAN privada propiedad de IBM.</li><li>**Clústeres estándares**: Si ya tiene una VLAN privada configurada en su cuenta de infraestructura de IBM Cloud (SoftLayer) para esta zona, escriba el ID de la VLAN privada. Si no tiene una VLAN privada en la ubicación, no especifique esta opción. {{site.data.keyword.containerlong_notm}} crea automáticamente una VLAN privada.<p>Los direccionadores de VLAN privadas siempre
+empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores de VLAN públicas siempre
+empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster especificando las VLAN privadas y públicas, deben coincidir el número y la combinación de letras después de dichos prefijos.</p></li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -318,24 +338,22 @@ empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster espe
         </tr>
         </tbody></table>
 
-4.  Verifique que ha solicitado la creación del clúster.
+5.  Verifique que ha solicitado la creación del clúster. Para máquinas virtuales, se puede tardar varios minutos en pedir las máquinas de nodo trabajador y en configurar y suministrar el clúster en la cuenta. El suministro de las máquinas físicas nativas se realiza mediante interacción manual con la infraestructura de IBM Cloud (SoftLayer), por lo que puede tardar más de un día laborable en realizarse.
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-    **Nota:** Para máquinas virtuales, se puede tardar varios minutos en pedir las máquinas de nodo trabajador y en configurar y suministrar el clúster en la cuenta. El suministro de las máquinas físicas nativas se realiza mediante interacción manual con la infraestructura de IBM Cloud (SoftLayer), por lo que puede tardar más de un día laborable en realizarse.
-
     Una vez completado el suministro del clúster, el estado del clúster pasa a ser **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.8
+    Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.11      Default
     ```
     {: screen}
 
-5.  Compruebe el estado de los nodos trabajadores.
+6.  Compruebe el estado de los nodos trabajadores.
 
     ```
     ibmcloud ks workers <cluster_name_or_ID>
@@ -344,15 +362,16 @@ empiezan por <code>fcr</code> (direccionador frontal). Al crear un clúster espe
 
     Cuando los nodos trabajadores están listos, el estado pasa a **normal** y el estado es **Ready**. Cuando el estado del nodo sea **Preparado**, podrá acceder al clúster.
 
-    **Nota:** A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar de forma manual después de haber creado el clúster. Si se cambia el nombre de dominio o el ID se impide que el maestro de Kubernetes gestione el clúster.
+    A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar de forma manual después de haber creado el clúster. Si se cambia el nombre de dominio o el ID se impide que el maestro de Kubernetes gestione el clúster.
+    {: important}
 
     ```
-    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.8
+    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.10.11      Default
     ```
     {: screen}
 
-6.  Defina el clúster que ha creado como contexto para esta sesión. Siga estos pasos de configuración cada vez que de trabaje con el clúster.
+7.  Defina el clúster que ha creado como contexto para esta sesión. Siga estos pasos de configuración cada vez que de trabaje con el clúster.
     1.  Obtenga el mandato para establecer la variable de entorno y descargar los archivos de configuración de Kubernetes.
 
         ```
@@ -388,7 +407,7 @@ Kubernetes como variable de entorno.
         ```
         {: screen}
 
-7.  Inicie el panel de control de Kubernetes con el puerto predeterminado `8001`.
+8.  Inicie el panel de control de Kubernetes con el puerto predeterminado `8001`.
     1.  Establezca el proxy con el número de puerto predeterminado.
 
         ```
@@ -433,7 +452,7 @@ Cuando se crea un clúster, los nodos trabajadores se suministran en una agrupac
 Si tiene un clúster multizona, mantenga equilibrados los recursos de los nodos trabajadores. Asegúrese de que todas las agrupaciones de nodos trabajadores estén distribuidas entre las mismas zonas y añada o elimine nodos trabajadores cambiando el tamaño de las agrupaciones en lugar de añadir nodos individuales.
 {: tip}
 
-En las secciones siguientes se muestra cómo:
+Antes de comenzar, asegúrese de tener el rol de [**Operador** o **Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform). A continuación, elija una de las secciones siguientes:
   * [Añadir nodos trabajadores cambiando el tamaño de una agrupación de nodos trabajadores existente en el clúster](#resize_pool)
   * [Añadir nodos trabajadores añadiendo al clúster una agrupación de nodos trabajadores](#add_pool)
   * [Añadir una zona al clúster y replicar los nodos trabajadores de las agrupaciones de nodos trabajadores entre varias zonas](#add_zone)
@@ -489,7 +508,8 @@ Para redimensionar la agrupación de nodos trabajadores, cambie el número de no
 Puede añadir nodos trabajadores a un clúster creando una nueva agrupación de nodos trabajadores.
 {:shortdesc}
 
-1. Elija las **zonas de trabajo** del clúster en que desea desplegar los nodos trabajadores en la agrupación de nodos trabajadores. Si tiene previsto distribuir los nodos trabajadores en una agrupación de nodos trabajadores existente entre varias zonas, elija o [añada una nueva zona](#add_zone) a un clúster [multizona](cs_regions.html#zones). Para obtener una lista de las zonas disponibles, ejecute `ibmcloud ks zones`.
+1. Recupere las **Worker Zones** (zonas de trabajo) del clúster y elija la zona donde desea desplegar los nodos trabajadores en la agrupación de nodos trabajadores. Si tiene un clúster de una sola zona, debe utilizar la zona que puede ver en el campo **Worker Zones**. Para clústeres multizona, puede elegir cualquiera de las
+**Worker Zones** existentes del clúster, o añadir una de las [ciudades metropolitanas multizona](cs_regions.html#zones) de la región en la que se encuentra el clúster. Para obtener una lista de las zonas disponibles, ejecute `ibmcloud ks zones`.
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
@@ -555,7 +575,7 @@ Puede distribuir el clúster entre varias zonas dentro de una región mediante l
 
 Cuando se añade una zona a una agrupación de nodos trabajadores, los nodos trabajadores definidos en la agrupación de nodos trabajadores se suministran en la nueva zona y se tienen en cuenta para la futura planificación de la carga de trabajo. {{site.data.keyword.containerlong_notm}} añade automáticamente a cada nodo trabajador la etiqueta `failure-domain.beta.kubernetes.io/region` correspondiente a la región y la etiqueta `failure-domain.beta.kubernetes.io/zone` correspondiente a la zona. El planificador de Kubernetes utiliza estas etiquetas para distribuir los pods entre zonas de la misma región.
 
-**Nota**: si tiene varias agrupaciones de nodos trabajadores en el clúster, añada la zona a todas ellas para que los nodos trabajadores se distribuya uniformemente en el clúster.
+Si tiene varias agrupaciones de nodos trabajadores en el clúster, añada la zona a todas ellas para que los nodos trabajadores se distribuya uniformemente en el clúster.
 
 Antes de empezar:
 *  Para añadir una zona a la agrupación de nodos trabajadores, la agrupación de nodos trabajadores debe estar en una [zona con soporte multizona](cs_regions.html#zones). Si la agrupación de nodos trabajadores no está en una zona con soporte multizona, tenga en cuenta la posibilidad de [crear una nueva agrupación de nodos trabajadores](#add_pool).
@@ -581,7 +601,10 @@ Para añadir una zona con nodos trabajadores a la agrupación de nodos trabajado
    ```
    {: pre}
 
-4. Añada la zona a la agrupación de nodos trabajadores. Si tiene varias agrupaciones de nodos trabajadores, añada la zona a todas las agrupaciones de nodos trabajadores de forma que el clúster quede equilibrado en todas las zonas. Sustituya `<pool1_id_or_name,pool2_id_or_name,...>` por los nombres de todas sus agrupaciones de nodos trabajadores en una lista separada por comas. </br>**Nota:** debe existir una VLAN privada y pública para que pueda añadir una zona a varias agrupaciones de nodos trabajadores. Si no tiene una VLAN privada y pública en dicha zona, añada primero la zona a una agrupación de nodos trabajadores para que se cree una VLAN privada y pública. A continuación, puede añadir la zona a otras agrupaciones de nodos trabajadores especificando la VLAN privada y pública que se ha creado automáticamente.
+4. Añada la zona a la agrupación de nodos trabajadores. Si tiene varias agrupaciones de nodos trabajadores, añada la zona a todas las agrupaciones de nodos trabajadores de forma que el clúster quede equilibrado en todas las zonas. Sustituya `<pool1_id_or_name,pool2_id_or_name,...>` por los nombres de todas sus agrupaciones de nodos trabajadores en una lista separada por comas.
+
+    Debe existir una VLAN privada y pública para que pueda añadir una zona a varias agrupaciones de nodos trabajadores. Si no tiene una VLAN privada y pública en dicha zona, añada primero la zona a una agrupación de nodos trabajadores para que se cree una VLAN privada y pública. A continuación, puede añadir la zona a otras agrupaciones de nodos trabajadores especificando la VLAN privada y pública que se ha creado automáticamente.
+    {: note}
 
    Si desea utilizar distintas VLAN para distintas agrupaciones de nodos trabajadores, repita este mandato para cada VLAN y sus agrupaciones de nodos trabajadores correspondientes. Los nuevos nodos trabajadores se añaden a las VLAN que especifique, pero las VLAN de los nodos trabajadores existentes no se modifican.
    {: tip}
@@ -599,21 +622,22 @@ Para añadir una zona con nodos trabajadores a la agrupación de nodos trabajado
     Salida de ejemplo:
     ```
     Name:                   mycluster
-    ID:                     df253b6025d64944ab99ed63bb4567b6
-    State:                  normal
-    Created:                2018-09-28T15:43:15+0000
-    Location:               dal10
-    Master URL:             https://169.xx.xxx.xxx:30426
-    Master Location:        Dallas
-    Master Status:          Ready (21 hours ago)
-    Ingress Subdomain:      ...
-    Ingress Secret:         mycluster
-    Workers:                6
-    Worker Zones:           dal10, dal12
-    Version:                1.11.3_1524
-    Owner:                  owner@email.com
-    Monitoring Dashboard:   ...
-    Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
+  ID:                     df253b6025d64944ab99ed63bb4567b6
+  State:                  normal
+  Created:                2018-09-28T15:43:15+0000
+  Location:               dal10
+  Master URL:             https://169.xx.xxx.xxx:30426
+  Master Location:        Dallas
+  Master Status:          Ready (21 hours ago)
+  Ingress Subdomain:      ...
+  Ingress Secret:         mycluster
+  Workers:                6
+  Worker Zones:           dal10, dal12
+  Version:                1.11.3_1524
+  Owner:                  owner@email.com
+  Monitoring Dashboard:   ...
+  Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
+  Resource Group Name:    Default
     ```
     {: screen}  
 
@@ -621,9 +645,10 @@ Para añadir una zona con nodos trabajadores a la agrupación de nodos trabajado
 {: #standalone}
 
 Si tiene un clúster que se ha creado antes de la introducción de las agrupaciones de nodos trabajadores, puede utilizar los mandatos en desuso para añadir nodos trabajadores autónomos.
-{: shortdesc}
+{: deprecated}
 
-**Nota:** si tiene un clúster que se ha creado después de que se hayan incorporado las agrupaciones de nodos trabajadores, no puede añadir nodos trabajadores autónomos. En su lugar, puede [crear una agrupación de nodos trabajadores](#add_pool), [redimensionar la agrupación de nodos trabajadores existente](#resize_pool) o [añadir una zona a una agrupación de nodos trabajadores](#add_zone) para añadir nodos trabajadores al clúster.
+Si tiene un clúster que se ha creado después de que se hayan incorporado las agrupaciones de nodos trabajadores, no puede añadir nodos trabajadores autónomos. En su lugar, puede [crear una agrupación de nodos trabajadores](#add_pool), [redimensionar la agrupación de nodos trabajadores existente](#resize_pool) o [añadir una zona a una agrupación de nodos trabajadores](#add_zone) para añadir nodos trabajadores al clúster.
+{: note}
 
 1. Obtenga una lista de las zonas disponibles y elija la zona en la desea añadir nodos trabajadores.
    ```
@@ -676,7 +701,7 @@ Puede ver el estado actual del clúster ejecutando el mandato `ibmcloud ks clust
    <tbody>
 <tr>
    <td>Terminado anormalmente</td>
-   <td>El usuario ha solicitado la supresión del clúster antes de desplegar el maestro de Kubernetes. Una vez realizada la supresión del clúster, el clúster se elimina del panel de control. Si el clúster está bloqueado en este estado durante mucho tiempo, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help).</td>
+   <td>El usuario ha solicitado la supresión del clúster antes de desplegar el maestro de Kubernetes. Una vez realizada la supresión del clúster, el clúster se elimina del panel de control. Si el clúster está bloqueado en este estado durante mucho tiempo, abra un [caso de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help).</td>
    </tr>
  <tr>
      <td>Crítico</td>
@@ -688,7 +713,7 @@ Puede ver el estado actual del clúster ejecutando el mandato `ibmcloud ks clust
    </tr>
    <tr>
      <td>Suprimido</td>
-     <td>El clúster se ha suprimido pero todavía no se ha eliminado del panel de control. Si el clúster está bloqueado en este estado durante mucho tiempo, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help). </td>
+     <td>El clúster se ha suprimido pero todavía no se ha eliminado del panel de control. Si el clúster está bloqueado en este estado durante mucho tiempo, abra un [caso de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
    <tr>
    <td>Suprimiendo</td>
@@ -696,7 +721,7 @@ Puede ver el estado actual del clúster ejecutando el mandato `ibmcloud ks clust
    </tr>
    <tr>
      <td>Error al desplegar</td>
-     <td>El despliegue del maestro de Kubernetes no se ha podido realizar. No puede resolver este estado. Póngase en contacto con el soporte de IBM Cloud abriendo una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help).</td>
+     <td>El despliegue del maestro de Kubernetes no se ha podido realizar. No puede resolver este estado. Póngase en contacto con el soporte de IBM Cloud abriendo un [caso de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help).</td>
    </tr>
      <tr>
        <td>Despliegue</td>
@@ -704,7 +729,7 @@ Puede ver el estado actual del clúster ejecutando el mandato `ibmcloud ks clust
       </tr>
       <tr>
        <td>Normal</td>
-       <td>Todos los nodos trabajadores de un clúster están activos y en ejecución. Puede acceder al clúster y desplegar apps en el clúster. Este estado se considera correcto y no requiere ninguna acción por su parte. **Nota**: Aunque los nodos trabajadores podrían poseer un estado normal, otros recursos de infraestructura como, por ejemplo la [red](cs_troubleshoot_network.html) y el [almacenamiento](cs_troubleshoot_storage.html), podrían requerir su atención.</td>
+       <td>Todos los nodos trabajadores de un clúster están activos y en ejecución. Puede acceder al clúster y desplegar apps en el clúster. Este estado se considera correcto y no requiere ninguna acción por su parte.<p class="note">Aunque los nodos trabajadores podrían poseer un estado normal, otros recursos de infraestructura como, por ejemplo la [red](cs_troubleshoot_network.html) y el [almacenamiento](cs_troubleshoot_storage.html), podrían requerir su atención.</p></td>
     </tr>
       <tr>
        <td>Pendiente</td>
@@ -712,7 +737,7 @@ Puede ver el estado actual del clúster ejecutando el mandato `ibmcloud ks clust
      </tr>
    <tr>
      <td>Solicitado</td>
-     <td>Se ha enviado una solicitud para crear el clúster y pedir la infraestructura para el maestro de Kubernetes y los nodos trabajadores. Cuando se inicia el despliegue del clúster, el estado del clúster cambia a <code>Desplegando</code>. Si el clúster está bloqueado en el estado <code>Solicitado</code> durante mucho tiempo, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help). </td>
+     <td>Se ha enviado una solicitud para crear el clúster y pedir la infraestructura para el maestro de Kubernetes y los nodos trabajadores. Cuando se inicia el despliegue del clúster, el estado del clúster cambia a <code>Desplegando</code>. Si el clúster está bloqueado en el estado <code>Solicitado</code> durante mucho tiempo, abra un [caso de soporte de {{site.data.keyword.Bluemix_notm}}](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
    <tr>
      <td>Actualizando</td>
@@ -732,20 +757,21 @@ Puede ver el estado actual del clúster ejecutando el mandato `ibmcloud ks clust
 ## Eliminación de clústeres
 {: #remove}
 
-Los clústeres gratuitos y estándares que se crean con una cuenta Pago según uso se deben eliminar de forma manual cuando dejan de necesitarse para que dejen de consumir recursos.
+Los clústeres gratuitos y estándares que se han creado con una cuenta facturable se deben eliminar manualmente cuando ya no sean necesarios, de manera que dichos clústeres ya no consuman recursos.
 {:shortdesc}
 
-**Aviso:**
-  - No se crean copias de seguridad del clúster ni de los datos del almacén persistente. La supresión de un clúster o del almacenamiento persistente es irreversible y no se puede deshacer.
-  - Cuando se elimina un clúster, también se eliminan todas las subredes suministradas de forma automática al crear el clúster con el mandato `ibmcloud ks cluster-subnet-create`. Sin embargo, si ha añadido de forma manual subredes existentes al clúster con el mandato `ibmcloud ks cluster-subnet-add`, estas subredes no se eliminan de su cuenta (SoftLayer) de la infraestructura IBM Cloud y podrá reutilizarlas en otros clústeres.
+<p class="important">
+No se crean copias de seguridad del clúster ni de los datos del almacén persistente. La supresión de un clúster o del almacenamiento persistente es irreversible y no se puede deshacer.</br>
+</br>Cuando se elimina un clúster, también se eliminan todas las subredes suministradas de forma automática al crear el clúster con el mandato `ibmcloud ks cluster-subnet-create`. Sin embargo, si ha añadido de forma manual subredes existentes al clúster con el mandato `ibmcloud ks cluster-subnet-add`, estas subredes no se eliminan de su cuenta (SoftLayer) de la infraestructura IBM Cloud y podrá reutilizarlas en otros clústeres.</p>
 
 Antes de empezar:
 * Anote el ID de clúster. Podría necesitar el ID de clúster para investigar y eliminar recursos (Softlayer) de la infraestructura IBM Cloud que no se suprimen de forma automática al suprimir su clúster.
 * Si desea suprimir los datos en el almacenamiento persistente, [debe comprender las opciones de supresión](cs_storage_remove.html#cleanup).
+* Asegúrese de tener el rol de [**Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform).
 
 Para eliminar un clúster:
 
--   Desde la interfaz gráfica de usuario de {{site.data.keyword.Bluemix_notm}}
+-   Desde la consola de {{site.data.keyword.Bluemix_notm}}
     1.  Seleccione el clúster y pulse **Suprimir** en el menú **Más acciones...**.
 
 -   Desde la CLI de {{site.data.keyword.Bluemix_notm}}
@@ -766,9 +792,10 @@ Para eliminar un clúster:
     3.  Siga las indicaciones y decidir si desea suprimir los recursos del clúster (contenedores, pods, servicios enlazados, almacenamiento persistente y secretos).
       - **Almacenamiento persistente**: El almacenamiento persistente proporciona alta disponibilidad a los datos. Si ha creado una reclamación de volumen persistente utilizando una [compartición de archivo existente](cs_storage_file.html#existing_file), no puede suprimir la compartición de archivo al suprimir el clúster. Suprima manualmente la compartición de archivo desde el portafolio de infraestructura de IBM Cloud (SoftLayer).
 
-          **Nota**: Debido al ciclo de facturación mensual, una reclamación de volumen persistente no se puede suprimir el último día del mes. Si suprime la reclamación de volumen persistente el último día del mes, la supresión permanece pendiente hasta el principio del siguiente mes.
+          Debido al ciclo de facturación mensual, una reclamación de volumen persistente no se puede suprimir el último día del mes. Si suprime la reclamación de volumen persistente el último día del mes, la supresión permanece pendiente hasta el principio del siguiente mes.
+          {: note}
 
 Pasos siguientes:
 - Después de que deje de aparecer en la lista de clústeres disponibles, al ejecutar el mandato `ibmcloud ks clusters`, podrá reutilizar el nombre de un clúster eliminado.
 - Si ha conservado las subredes, puede [reutilizarlas en un nuevo clúster](cs_subnets.html#custom) o suprimirlas de forma manual más tarde de su portafolio de infraestructura de IBM Cloud (SoftLayer).
-- Si ha conservado el almacenamiento persistente, puede [suprimir el almacenamiento](cs_storage_remove.html#cleanup) más tarde a través el panel de control de infraestructura IBM Cloud (SoftLayer) en la interfaz gráfica de usuario de {{site.data.keyword.Bluemix_notm}}.
+- Si ha conservado el almacenamiento persistente, puede [suprimir el almacenamiento](cs_storage_remove.html#cleanup) más tarde a través el panel de control de infraestructura IBM Cloud (SoftLayer) en la consola de {{site.data.keyword.Bluemix_notm}}.

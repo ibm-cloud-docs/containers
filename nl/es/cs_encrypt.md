@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,18 +13,32 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
 # Protección de la información confidencial del clúster
 {: #encryption}
 
-De forma predeterminada, el clúster de {{site.data.keyword.containerlong}} utiliza discos cifrados para almacenar información, como configuraciones, en `etcd` o en el sistema de archivos de contenedor que se ejecuta en los discos secundarios del nodo trabajador. Cuando despliegue la app, no almacene información confidencial, como credenciales o claves, en el archivo de configuración de YAML, mapas de configuración o scripts. Utilice en su lugar [secretos de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/secret/). También puede cifrar datos en secretos de Kubernetes para evitar que usuarios no autorizados accedan a la información confidencial del clúster.
+Proteja la información confidencial del clúster para garantizar la integridad de los datos y evitar que los datos se expongan a usuarios no autorizados.
 {: shortdesc}
+
+Puede crear datos confidenciales en distintos niveles del clúster que requieran una protección adecuada.
+- **Nivel de clúster:** los datos de configuración del clúster se almacenan en el componente etcd del maestro de Kubernetes. En clústeres que ejecuten Kubernetes versión 1.10 o posterior, los datos de etcd se almacenan en el disco local del maestro de Kubernetes y se realiza una copia de seguridad en {{site.data.keyword.cos_full_notm}}. Los datos se cifran durante el tránsito a {{site.data.keyword.cos_full_notm}} y en reposo. Puede optar por habilitar el cifrado de los datos de etcd en el disco local del maestro de Kubernetes mediante la [habilitación del cifrado de {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#encryption) para el clúster. Los datos de etcd para clústeres que ejecutan una versión anterior de Kubernetes, de los que se hace una copia de seguridad diaria, se almacenan en un disco cifrado gestionado por IBM.
+- **Nivel de app:** Cuando despliegue la app, no almacene información confidencial, como credenciales o claves, en el archivo de configuración de YAML, mapas de configuración o scripts. Utilice en su lugar [secretos de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/secret/). También puede [cifrar datos en secretos de Kubernetes](#keyprotect) para evitar que usuarios no autorizados accedan a la información confidencial del clúster.
 
 Para obtener más información sobre cómo proteger el clúster, consulte [Seguridad para {{site.data.keyword.containerlong_notm}}](cs_secure.html#security).
 
+![Visión general del cifrado del clúster](images/cs_encrypt_ov.png)
+_Figura: visión general del cifrado de datos en un clúster_
 
+1.  **etcd**: etcd es el componente del maestro que almacena los datos de los recursos de Kubernetes, como los secretos y archivos `.yaml` de configuración de objetos. En clústeres que ejecuten Kubernetes versión 1.10 o posterior, los datos de etcd se almacenan en el disco local del maestro de Kubernetes y se realiza una copia de seguridad en {{site.data.keyword.cos_full_notm}}. Los datos se cifran durante el tránsito a {{site.data.keyword.cos_full_notm}} y en reposo. Puede optar por habilitar el cifrado de los datos de etcd en el disco local del maestro de Kubernetes mediante la [habilitación del cifrado de {{site.data.keyword.keymanagementservicelong_notm}}](#keyprotect) para el clúster. Los datos de etcd en clústeres que ejecutan una versión anterior de Kubernetes, de los que se hace una copia de seguridad diaria, se almacenan en un disco cifrado gestionado por IBM. Cuando los datos de etcd se envían a un pod, los datos se cifran mediante TLS para garantizar la protección y la integridad de los datos.
+2.  **Disco secundario del nodo trabajador**: el disco secundario del nodo trabajador es donde se almacenan el sistema de archivos del contenedor y las imágenes extraídas localmente. El disco se cifra con una clave de cifrado LUKS que es exclusiva para el nodo trabajador y se almacena como un secreto en etcd, gestionado por IBM. Al volver a cargar o actualizar los nodos trabajadores, se rotan las claves LUKS.
+3.  **Almacenamiento**: puede elegir almacenar los datos mediante la [configuración de almacenamiento persistente de archivos, bloques u objetos](cs_storage_planning.html#persistent_storage_overview). Las instancias de almacenamiento de la infraestructura de IBM Cloud (SoftLayer) guardan los datos en discos cifrados, por lo que los datos en reposo se cifran. Además, si opta por el almacenamiento de objetos, también se cifrarán los datos en tránsito.
+4.  **Servicios de {{site.data.keyword.Bluemix_notm}}**: puede [integrar servicios de {{site.data.keyword.Bluemix_notm}}](cs_integrations.html#adding_cluster), como {{site.data.keyword.registryshort_notm}} o {{site.data.keyword.watson}}, con el clúster. Las credenciales del servicio se almacenan en un secreto que se guarda en etcd, al que puede acceder la app montando el secreto como un volumen o especificando el secreto como una variable de entorno en [el despliegue](cs_app.html#secret).
+5.  **{{site.data.keyword.keymanagementserviceshort}}**: cuando [habilita {{site.data.keyword.keymanagementserviceshort}}](#keyprotect) en el clúster, se almacena una clave de cifrado de datos (DEK) empaquetada en etcd. La DEK cifra los secretos del clúster, incluyendo las credenciales de servicio y la clave LUKS. Debido a que la clave raíz está en la instancia de {{site.data.keyword.keymanagementserviceshort}}, controlará el acceso a sus secretos cifrados. Para obtener más información sobre cómo funciona el cifrado de {{site.data.keyword.keymanagementserviceshort}}, consulte [Cifrado de sobre](/docs/services/key-protect/concepts/envelope-encryption.html#envelope-encryption).
 
 ## Cuándo utilizar secretos
 {: #secrets}
@@ -59,20 +73,25 @@ desea desplegar un contenedor en las situaciones siguientes.
 <br />
 
 
-## Cifrado de secretos de Kubernetes mediante {{site.data.keyword.keymanagementserviceshort}}
+## Cifrado de los secretos y el disco local del maestro de Kubernetes mediante {{site.data.keyword.keymanagementserviceshort}}
 {: #keyprotect}
 
-Puede cifrar sus secretos de Kubernetes mediante [{{site.data.keyword.keymanagementservicefull}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/services/key-protect/index.html#getting-started-with-key-protect) como [proveedor de servicios de gestión de claves (KMS) de Kubernetes![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) en su clúster. El proveedor de KMS es una característica alfa en Kubernetes para las versiones 1.10 y 1.11.
+Puede proteger el componente etcd del maestro de Kubernetes y los secretos de Kubernetes mediante [{{site.data.keyword.keymanagementservicefull}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/services/key-protect/index.html#getting-started-with-key-protect) como [proveedor de servicios de gestión de claves (KMS) de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) en su clúster. El proveedor de KMS es una característica alfa en Kubernetes para las versiones 1.10 y 1.11.
 {: shortdesc}
 
-De forma predeterminada, los secretos de Kubernetes se almacenan en un disco cifrado en el componente `etcd` del nodo maestro de Kubernetes gestionado por IBM. Los nodos trabajadores también tienen discos secundarios cifrados mediante claves LUKS gestionadas por IBM que se almacenan como secretos en el clúster. Cuando habilita {{site.data.keyword.keymanagementserviceshort}} en el clúster, se utiliza su propia clave raíz para cifrar los secretos de Kubernetes, incluidos los secretos de LUKS. Puede obtener más control sobre los datos confidenciales mediante el cifrado de secretos con la clave raíz. El uso de su propio cifrado añade una capa de seguridad a los secretos de Kubernetes y le proporciona un mayor control sobre quién puede acceder a la información confidencial del clúster. Si alguna vez necesita eliminar de forma irreversible el acceso a sus secretos, puede eliminar la clave raíz.
+De forma predeterminada, la configuración del clúster y los secretos de Kubernetes se almacenan en el componente etcd del maestro de Kubernetes gestionado por IBM. Los nodos trabajadores también tienen discos secundarios cifrados mediante claves LUKS gestionadas por IBM que se almacenan como secretos en etcd. En clústeres que ejecuten Kubernetes versión 1.10 o posterior, los datos de etcd se almacenan en el disco local del maestro de Kubernetes y se realiza una copia de seguridad en
+{{site.data.keyword.cos_full_notm}}. Los datos se cifran durante el tránsito a {{site.data.keyword.cos_full_notm}} y en reposo. No obstante, los datos del componente etcd en el disco local del maestro de Kubernetes no se cifran de forma automática hasta que habilite el cifrado de
+{{site.data.keyword.keymanagementserviceshort}} para el clúster. Los datos de etcd para clústeres que ejecutan una versión anterior de Kubernetes, de los que se hace una copia de seguridad diaria, se almacenan en un disco cifrado gestionado por IBM.
 
-**Importante**: si suprime la clave raíz en la instancia de {{site.data.keyword.keymanagementserviceshort}}, no puede acceder ni eliminar los datos de los secretos del clúster posteriormente.
+Cuando habilita {{site.data.keyword.keymanagementserviceshort}} en el clúster, se utiliza su propia clave raíz para cifrar los datos en etcd, incluidos los secretos de LUKS. Puede obtener más control sobre los datos confidenciales mediante el cifrado de secretos con la clave raíz. El uso de su propio cifrado añade una capa de seguridad a los datos de etcd y los secretos de Kubernetes y le proporciona un mayor control sobre quién puede acceder a la información confidencial del clúster. Si alguna vez necesita eliminar de forma irreversible el acceso a etcd o a sus secretos, puede eliminar la clave raíz.
+
+Si suprime la clave raíz en la instancia de {{site.data.keyword.keymanagementserviceshort}}, no puede acceder ni eliminar los datos de etcd ni los datos de los secretos del clúster posteriormente.
+{: important}
 
 Antes de empezar:
 * [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 * Compruebe que el clúster ejecuta Kubernetes versión 1.10.8_1524, 1.11.3_1521 o posterior ejecutando `ibmcloud ks clúster-get --cluster <cluster_name_or_ID>` y comprobando el campo **Version**.
-* Compruebe que dispone de [permisos de **administrador**](cs_users.html#access_policies) para llevar a cabo estos pasos.
+* Asegúrese de tener el rol de [**Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para el clúster.
 * Asegúrese de que la clave de API establecida para la región en la que está el clúster está autorizada para utilizar la protección por clave. Para comprobar el propietario de la clave de API cuyas credenciales están almacenadas para la región, ejecute `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`.
 
 Para habilitar {{site.data.keyword.keymanagementserviceshort}} o para actualizar la instancia o clave raíz que cifra los secretos del clúster:
@@ -109,4 +128,4 @@ Para habilitar {{site.data.keyword.keymanagementserviceshort}} o para actualizar
     ```
     {: pre}
 
-Después de habilitar {{site.data.keyword.keymanagementserviceshort}} en el clúster, los secretos existentes y los nuevos que se creen en el clúster se cifran automáticamente mediante la clave raíz de {{site.data.keyword.keymanagementserviceshort}}. Puede rotar la clave en cualquier momento repitiendo estos pasos con un ID de clave raíz nuevo.
+Después de habilitar {{site.data.keyword.keymanagementserviceshort}} en el clúster, los datos de `etcd`, los secretos existentes y los nuevos que se creen en el clúster se cifran automáticamente mediante la clave raíz de {{site.data.keyword.keymanagementserviceshort}}. Puede rotar la clave en cualquier momento repitiendo estos pasos con un ID de clave raíz nuevo.

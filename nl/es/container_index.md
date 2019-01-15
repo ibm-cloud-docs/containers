@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,16 +50,16 @@ Y ¿qué es un clúster? Un clúster es un conjunto de recursos, nodos, redes y 
 **Antes de empezar**
 
 Obtenga el tipo de [cuenta de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) que se ajuste a sus necesidades:
-* **Pago según uso o Suscripción**: puede crear un clúster de prueba gratuito. También puede suministrar recursos de
+* **Facturable (Pago según uso o Suscripción)**: puede crear un clúster de prueba gratuito. También puede suministrar recursos de
 infraestructura de IBM Cloud (SoftLayer) para crear y utilizar en clústeres estándares.
-* **Lite**: no puede crar un clúster gratuito o estándar. [Actualice su cuenta](/docs/account/account_faq.html#changeacct) a Pago según uso o a Suscripción.
+* **Lite**: no puede crar un clúster gratuito o estándar. [Actualice su cuenta](/docs/account/account_faq.html#changeacct) a una cuenta facturable.
 * **Prueba (para fines educativos)**: puede crear un clúster gratuito que puede utilizar durante 30 días para familiarizarse con el servicio.
 
 Para crear un clúster gratuito:
 
-1.  En el [**catálogo** de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/catalog/?category=containers), seleccione **{{site.data.keyword.containerlong_notm}}** y pulse **Crear**. Se abre una página de configuración del clúster. De forma predeterminada, se selecciona **Clúster gratuito**.
+1.  En el [**catálogo** de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/catalog/?category=containers), seleccione **{{site.data.keyword.containershort_notm}}** y pulse **Crear**. Se abre una página de configuración del clúster. De forma predeterminada, se selecciona **Clúster gratuito**.
 
-2. Dele un nombre exclusivo al clúster.
+2.  Dele un nombre exclusivo al clúster.
 
 3.  Pulse **Crear clúster**. Se crea una agrupación de nodos trabajadores que contiene 1 nodo trabajador. El nodo trabajador puede tardar unos minutos en ser suministrado; verá el progreso en el separador **Nodos trabajadores**. Cuando el estado sea `Listo`, podrá empezar a trabajar con el clúster.
 

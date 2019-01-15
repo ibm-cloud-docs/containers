@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,12 +13,15 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Configuración de políticas de seguridad de pod
 {: #psp}
 
-Con [políticas de seguridad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), puede configurar políticas para autorizar quién puede crear y actualizar pods en {{site.data.keyword.containerlong}}. Los clústeres que ejecutan las versiones de Kubernetes 1.10.3, 1.9.8 y 1.8.13 o posteriores dan soporte al controlador de admisiones `PodSecurityPolicy` que impone estas políticas. 
+Con [políticas de seguridad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), puede configurar políticas para autorizar quién puede crear y actualizar pods en {{site.data.keyword.containerlong}}. Los clústeres que ejecutan las versiones de Kubernetes 1.10.3, 1.9.8 y 1.8.13 o posteriores dan soporte al controlador de admisiones `PodSecurityPolicy` que impone estas políticas.
 {: shortdesc}
 
 ¿Utiliza una versión más antigua de Kubernetes? [Actualice su clúster](cs_cluster_update.html) hoy mismo.
@@ -29,13 +32,15 @@ Como administrador del clúster, desea controlar lo que sucede en el clúster, e
 
 Con el controlador de admisiones `PodSecurityPolicy`, no se pueden crear pods hasta después de [autorizar políticas](#customize_psp). La configuración de políticas de seguridad de pod puede tener efectos secundarios no deseados, por lo tanto asegúrese de probar un despliegue después de cambiar la política. Para desplegar apps, las cuentas de usuario y de servicio deben estar autorizadas por las políticas de seguridad de pod necesarias para desplegar pods. Por ejemplo, si instala apps utilizando [Helm](cs_integrations.html#helm_links), el componente tiller de Helm crea pods y, por lo tanto, debe tener la autorización de política de seguridad de pod correcta.
 
-¿Está intentando controlar qué usuarios tienen acceso a {{site.data.keyword.containerlong_notm}}? Consulte [Asignación de acceso de clúster](cs_users.html#users) para establecer los permisos de IAM y de infraestructura.
+¿Está intentando controlar qué usuarios tienen acceso a {{site.data.keyword.containerlong_notm}}? Consulte [Asignación de acceso de clúster](cs_users.html#users) para establecer los permisos de {{site.data.keyword.Bluemix_notm}} IAM y de infraestructura.
 {: tip}
 
 **¿Hay políticas predeterminadas establecidas? ¿Qué puedo añadir?**</br>
-De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el controlador de admisiones `PodSecurityPolicy` con [recursos para la gestión de clústeres de {{site.data.keyword.IBM_notm}}](#ibm_psp) que no puede suprimir ni modificar. Tampoco puede inhabilitar el controlador de admisiones. 
+De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el controlador de admisiones `PodSecurityPolicy` con [recursos para la gestión de clústeres de {{site.data.keyword.IBM_notm}}](#ibm_psp) que no puede suprimir ni modificar. Tampoco puede inhabilitar el controlador de admisiones.
 
-Las acciones de pod no están bloqueadas de forma predeterminada. En su lugar, dos recursos de control de acceso basados en rol (RBAC) del clúster autorizan a todos los administradores, usuarios, servicios y nodos a crear pods privilegiados y sin privilegios. Si desea evitar que determinados usuarios creen o actualicen pods, puede [modificar estos recursos de RBAC o crear el suyo propio su propio](#customize_psp).
+Las acciones de pod no están bloqueadas de forma predeterminada. En su lugar, dos recursos de control de acceso basados en rol (RBAC) del clúster autorizan a todos los administradores, usuarios, servicios y nodos a crear pods privilegiados y sin privilegios. Se incluyen recursos de RBAC adicionales para la portabilidad con paquetes de {{site.data.keyword.Bluemix_notm}} privado que se utilizan para [despliegues híbridos](cs_hybrid.html#hybrid_iks_icp).
+
+Si desea evitar que determinados usuarios creen o actualicen pods, puede [modificar estos recursos de RBAC o crear el suyo propio su propio](#customize_psp).
 
 **¿Cómo funciona la autorización de políticas?**</br>
 Cuando crea, como usuario, un pod directamente y no utiliza un controlador, como por ejemplo un despliegue, las credenciales se validan con las políticas de seguridad de pod que tiene autorización para utilizar. Si ninguna política da soporte a los requisitos de seguridad de pod, el pod no se crea.
@@ -61,10 +66,12 @@ De forma predeterminada, el clúster contiene los siguientes recursos de RBAC qu
 
 Puede modificar estos roles de RBAC para eliminar o añadir administradores, usuarios, servicios o nodos a la política.
 
-Antes de empezar: 
+Antes de empezar:
 *  [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 *  Comprende cómo se trabaja con los roles de RBAC. Para obtener más información, consulte [Autorización de usuarios con roles de RBAC personalizados de Kubernetes](cs_users.html#rbac) o la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
-*  **Nota**: si modifica la configuración predeterminada, puede evitar acciones de clúster importantes, como despliegues de pod o actualizaciones de clúster. Pruebe sus cambios en un clúster que no sea de producción y en el que no confíen otros equipos.
+
+Si modifica la configuración predeterminada, puede evitar acciones de clúster importantes, como despliegues de pod o actualizaciones de clúster. Pruebe sus cambios en un clúster que no sea de producción y en el que no confíen otros equipos.
+{: important}
 
 **Para modificar los recursos de RBAC**:
 1.  Obtenga el nombre del enlace de rol de clúster de RBAC.
@@ -72,19 +79,19 @@ Antes de empezar:
     kubectl get clusterrolebinding
     ```
     {: pre}
-    
+
 2.  Descargue el enlace de rol de clúster como un archivo `.yaml` que puede editar localmente.
-    
+
     ```
     kubectl get clusterrolebinding privileged-psp-user -o yaml > privileged-psp-user.yaml
     ```
     {: pre}
-    
+
     Quizás desee guardar una copia de la política existente para poder recuperarla si la política modificada no ofrece los resultados esperados.
     {: tip}
-    
+
     **Ejemplo de archivo de enlace de rol de clúster**:
-    
+
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
@@ -113,11 +120,11 @@ Antes de empezar:
       name: system:authenticated
     ```
     {: codeblock}
-    
+
 3.  Edite el archivo `.yaml` de enlace de rol de clúster. Para saber lo que puede editar, revise la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). Acciones de ejemplo:
-    
-    *   **Cuentas de servicio**: es posible que desee autorizar cuentas de servicio para que los despliegues solio se puedan producir en espacios de nombres específicos. Por ejemplo, si limita el ámbito de la política para permitir acciones dentro del espacio de nombres `kube-system`, se pueden producir muchas acciones importantes como, por ejemplo, actualizaciones de clúster. Sin embargo, las acciones en otros espacios de nombres dejan de estar autorizadas. 
-    
+
+    *   **Cuentas de servicio**: es posible que desee autorizar cuentas de servicio para que los despliegues solio se puedan producir en espacios de nombres específicos. Por ejemplo, si limita el ámbito de la política para permitir acciones dentro del espacio de nombres `kube-system`, se pueden producir muchas acciones importantes como, por ejemplo, actualizaciones de clúster. Sin embargo, las acciones en otros espacios de nombres dejan de estar autorizadas.
+
         Para dejar que la política permita acciones en un espacio de nombres específico, cambie el valor `system:serviceaccounts` por `system:serviceaccount:<namespace>`.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
@@ -125,7 +132,7 @@ Antes de empezar:
           name: system:serviceaccount:kube-system
         ```
         {: codeblock}
-  
+
     *   **Usuarios**: es posible que desee eliminar la autorización para todos los usuarios autenticados para desplegar pods con acceso privilegiado. Elimine la siguiente entrada `system:authenticated`.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
@@ -140,7 +147,7 @@ Antes de empezar:
     kubectl apply -f privileged-psp-user.yaml
     ```
     {: pre}
-    
+
 5.  Verifique que el recurso se ha modificado.
 
     ```
@@ -161,7 +168,7 @@ Antes de empezar:
     kubectl delete clusterrolebinding privileged-psp-user
     ```
     {: pre}
-    
+
 3.  Verifique que el enlace de rol de clúster de RBAC ya no está en el clúster.
     ```
     kubectl get clusterrolebinding
@@ -170,7 +177,7 @@ Antes de empezar:
 
 </br>
 **Para crear su propia política de seguridad de pod**:</br>
-Para crear su propio recurso de política de seguridad de pod y autorizar a los usuarios con RBAC, revise la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). 
+Para crear su propio recurso de política de seguridad de pod y autorizar a los usuarios con RBAC, revise la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
 
 Asegúrese de que ha modificado las políticas existentes de modo que la nueva política que cree no entre en conflicto con la política existente. Por ejemplo, la política existente permite a los usuarios crear y actualizar pods privilegiados. Si crea una política que no permite a los usuarios crear o actualizar pods privilegiados, el conflicto entre la política existente y la nueva podría ocasionar resultados inesperados.
 
@@ -180,12 +187,18 @@ Asegúrese de que ha modificado las políticas existentes de modo que la nueva p
 El clúster de Kubernetes en {{site.data.keyword.containerlong_notm}} contiene las siguientes políticas de seguridad de pod y los recursos de RBAC relacionados para permitir que {{site.data.keyword.IBM_notm}} gestione correctamente el clúster.
 {: shortdesc}
 
-Los recursos de RBAC predeterminados `privileged-psp-user` y `restricted-psp-user` hacen referencia a las políticas de seguridad de pod definidas por {{site.data.keyword.IBM_notm}}. 
+Los recursos de RBAC predeterminados `PodSecurityPolicy` hacen referencia a las políticas de seguridad de pod definidas por {{site.data.keyword.IBM_notm}}.
 
 **Atención**: no debe suprimir ni modificar estos recursos.
 
 | Nombre | Espacio de nombres | Tipo | Finalidad |
 |---|---|---|---|
+| `ibm-anyuid-hostaccess-psp` | cluster-wide | `PodSecurityPolicy` | Política para la creación de pod de acceso de host completo. |
+| `ibm-anyuid-hostaccess-psp-user` | cluster-wide | `ClusterRole` | Rol de clúster que permite el uso de la política de seguridad de pod `ibm-anyuid-hostaccess-psp`. |
+| `ibm-anyuid-hostpath-psp` | cluster-wide | `PodSecurityPolicy` | Política para la creación de pod de acceso de vía de acceso de host. |
+| `ibm-anyuid-hostpath-psp-user` | cluster-wide | `ClusterRole` | Rol de clúster que permite el uso de la política de seguridad de pod `ibm-anyuid-hostpath-psp`. |
+| `ibm-anyuid-psp` | cluster-wide | `PodSecurityPolicy` | Política para la creación de cualquier pod ejecutable de UID/GID. |
+| `ibm-anyuid-psp-user` | cluster-wide | `ClusterRole` | Rol de clúster que permite el uso de la política de seguridad de pod `ibm-anyuid-psp`. |
 | `ibm-privileged-psp` | cluster-wide | `PodSecurityPolicy` | Política para la creación de pod con privilegios. |
 | `ibm-privileged-psp-user` | cluster-wide | `ClusterRole` | Rol de clúster que permite el uso de la política de seguridad de pod `ibm-privileged-psp`. |
 | `ibm-privileged-psp-user` | `kube-system` | `RoleBinding` | Permite a los administradores de clúster, cuentas de servicio y nodos utilizar la política de seguridad de pod `ibm-privileged-psp` en el espacio de nombres `kube-system`. |

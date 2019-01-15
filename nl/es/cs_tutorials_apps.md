@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -56,6 +59,7 @@ Los desarrolladores de software y administradores de la red que despliegan apps 
 ## Requisitos previos
 
 * [Guía de aprendizaje: Creación de clústeres de Kubernetes](cs_tutorials.html#cs_cluster_tutorial).
+* Instale el [plugin container-registry](/docs/services/Registry/index.html#registry_cli_install).
 
 
 ## Lección 1: Despliegue de apps de una sola instancia en clústeres de Kubernetes
@@ -89,7 +93,7 @@ Para desplegar la app:
 
 3. [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 
-5.  Inicie la sesión en la CLI de {{site.data.keyword.registryshort_notm}}. **Nota**: Asegúrese de que el plugin container-registry está [instalado](/docs/services/Registry/index.html#registry_cli_install).
+5.  Inicie la sesión en la CLI de {{site.data.keyword.registryshort_notm}}.
 
     ```
     ibmcloud cr login
@@ -232,7 +236,7 @@ dentro del rango 30000-32767. En este ejemplo, el NodePort es 30872.
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
         ```
         {: screen}
 
@@ -249,7 +253,7 @@ dicho URL en un navegador, verá un mensaje parecido al siguiente.
 
 11. [Inicie el panel de control de Kubernetes](cs_app.html#cli_dashboard).
 
-    Si selecciona su clúster en la interfaz gráfica de usuario de [{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), utilice el botón del **Panel de control de Kubernetes** para iniciar el panel de control con una pulsación.
+    Si selecciona su clúster en la [consola de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), utilice el botón del **Panel de control de Kubernetes** para iniciar el panel de control con una pulsación.
     {: tip}
 
 12. En el separador **Cargas de trabajo**, verá los recursos que ha creado.
@@ -376,7 +380,7 @@ Tal como se define en el script de configuración, Kubernetes puede utilizar una
   ```
   {: screen}
 
-7.  Compruebe el estado del pod para supervisar el estado de la app en Kubernetes. Puede comprobar el estado en la CLI o en la GUI del panel de control de Kubernetes.
+7.  Compruebe el estado del pod para supervisar el estado de la app en Kubernetes. Puede comprobar el estado en la CLI o en el panel de control de Kubernetes.
 
     *  **Desde la CLI**: vea lo que sucede en los pods a medida que cambia su estado.
        ```
@@ -384,7 +388,7 @@ Tal como se define en el script de configuración, Kubernetes puede utilizar una
        ```
        {: pre}
 
-    *  **Desde la interfaz gráfica de usuario**:
+    *  **Desde el panel de control de Kubernetes**:
 
        1.  [Inicie el panel de control de Kubernetes](cs_app.html#cli_dashboard).
        2.  En el separador **Cargas de trabajo**, verá los recursos que ha creado. Desde este separador, puede renovar continuamente y ver que la comprobación de estado funciona. En la sección **Pods**, puede ver el número de veces que se han reiniciado los pods cuando se vuelven a crear los contenedores que contienen. Si recibe el siguiente error en el panel de control, este mensaje indica que la comprobación de estado ha detectado un problema. Espere unos minutos y vuelva a renovar. Verá el número de cambios de reinicio para cada pod.
@@ -525,8 +529,9 @@ En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un n
         ```
         {: codeblock}
 
-    2.  En la sección volumes del despliegue de watson, actualice el nombre del secreto de {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que ha creado en la guía de aprendizaje anterior. Si monta el secreto de Kubernetes como volumen en el despliegue, las credenciales de servicio de {{site.data.keyword.Bluemix_notm}} estarán disponibles para el contenedor que se ejecuta en el pod. Los componentes
-de la app {{site.data.keyword.watson}} de esta guía de aprendizaje están configurados para buscar las credenciales de servicio utilizando la vía de acceso de montaje del volumen.
+    2.  En la sección volumes del despliegue de watson, actualice el nombre del secreto de {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que ha creado en la guía de aprendizaje anterior. Al montar el secreto de Kubernetes como un volumen en el despliegue, establecerá la clave de API de
+{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) como disponible para el contenedor que se ejecuta en el pod. Los componentes
+de la app {{site.data.keyword.watson}} de esta guía de aprendizaje están configurados para buscar la clave de API utilizando la vía de acceso de montaje del volumen.
 
         ```
         volumes:

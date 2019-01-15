@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -34,13 +37,13 @@ Ingress es un servicio de Kubernetes que equilibra cargas de trabajo de tráfico
 Ingress consta de tres componentes:
 <dl>
 <dt>Recurso de Ingress</dt>
-<dd>Para exponer una app mediante Ingress, debe crear un servicio Kubernetes para la app y registrar este servicio con Ingress mediante la definición de un recurso de Ingress. El recurso de Ingress es un recurso de Kubernetes que define las reglas sobre cómo direccionar solicitudes de entrada para las apps. El recurso de Ingress también especifica la vía de acceso a los servicios de app, que se añaden a la ruta pública para formar un URL de app exclusivo, como por ejemplo `mycluster.us-south.containers.appdomain.cloud/myapp1`. <br></br>**Nota**: desde el 24 de mayo de 2018, el formato de subdominio de Ingress ha cambiado para nuevos clústeres. El nombre de región o de zona incluido en el nuevo formato de subdominio se genera en función de la zona en la que se ha creado el clúster. Si tiene dependencias de ejecución secuencial sobre nombres de dominio de app coherentes, puede utilizar su propio dominio personalizado en lugar del subdominio de Ingress que proporciona IBM.<ul><li>A todos los clústeres creados después del 24 de mayo 2018 se les asigna un subdominio en el nuevo formato, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>.</li><li>Los clústeres de una sola zona creados antes del 24 de mayo de 2018 continúan utilizando el subdominio asignado en el formato antiguo, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li><li>Si cambia un clúster de una sola zona creado antes del 24 de mayo de 2018 por uno multizona mediante la [adición de una zona al clúster](cs_clusters.html#add_zone) por primera vez, el clúster sigue utilizando el subdominio asignado en el formato antiguo, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>, y también se le asigna un subdominio en el nuevo formato, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>. Se puede utilizar cualquiera de los subdominios.</li></ul></br>**Clústeres multizona**: el recurso Ingress es global y solo se necesita un recurso Ingress por espacio de nombres para un clúster multizona.</dd>
+<dd>Para exponer una app mediante Ingress, debe crear un servicio Kubernetes para la app y registrar este servicio con Ingress mediante la definición de un recurso de Ingress. El recurso de Ingress es un recurso de Kubernetes que define las reglas sobre cómo direccionar solicitudes de entrada para las apps. El recurso de Ingress también especifica la vía de acceso a los servicios de app, que se añaden a la ruta pública para formar un URL de app exclusivo, como por ejemplo `mycluster.us-south.containers.appdomain.cloud/myapp1`.<p class="note">Desde el 24 de mayo de 2018, el formato de subdominio de Ingress ha cambiado para nuevos clústeres. El nombre de región o de zona incluido en el nuevo formato de subdominio se genera en función de la zona en la que se ha creado el clúster. Si tiene dependencias de ejecución secuencial sobre nombres de dominio de app coherentes, puede utilizar su propio dominio personalizado en lugar del subdominio de Ingress que proporciona IBM.<ul><li>A todos los clústeres creados después del 24 de mayo 2018 se les asigna un subdominio en el nuevo formato, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>.</li><li>Los clústeres de una sola zona creados antes del 24 de mayo de 2018 continúan utilizando el subdominio asignado en el formato antiguo, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li><li>Si cambia un clúster de una sola zona creado antes del 24 de mayo de 2018 por uno multizona mediante la [adición de una zona al clúster](cs_clusters.html#add_zone) por primera vez, el clúster sigue utilizando el subdominio asignado en el formato antiguo, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>, y también se le asigna un subdominio en el nuevo formato, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>. Se puede utilizar cualquiera de los subdominios.</li></ul></p>**Clústeres multizona**: el recurso Ingress es global y solo se necesita un recurso Ingress por espacio de nombres para un clúster multizona.</dd>
 <dt>Equilibrador de carga de aplicación (ALB)</dt>
 <dd>El equilibrador de carga de aplicación (ALB) es un equilibrador de carga externo que escucha solicitudes del servicio HTTP, HTTPS, TCP o UDP de entrada. Luego el ALB reenvía las solicitudes al pod de app adecuado de acuerdo con las reglas definidas en el recurso Ingress. Cuando se crea un clúster estándar, {{site.data.keyword.containerlong_notm}} crea automáticamente un ALB altamente disponible para el clúster y le asigna una ruta pública exclusiva. La ruta pública se enlaza a una dirección IP pública portátil que se suministra a la cuenta de infraestructura de IBM Cloud (SoftLayer) durante la creación del clúster. También se crea automáticamente un ALB privado predeterminado, pero no se habilita automáticamente.<br></br>**Clústeres multizona**: cuando añade una zona al clúster, se añade una subred pública portátil y se crea automáticamente un nuevo ALB público y se habilita en la subred de dicha zona. Todos los ALB públicos predeterminados del clúster comparten una ruta pública, pero tienen direcciones IP diferentes. También se crea automáticamente un ALB privado predeterminado en cada zona, pero no se habilita automáticamente.</dd>
 <dt>Equilibrador de carga multizona (MZLB)</dt>
 <dd><p>**Clústeres multizona**: cuando se crea un clúster multizona o se [añade una zona a un clúster de una sola zona](cs_clusters.html#add_zone), se crea y se despliega automáticamente un equilibrador de carga multizona (MZLB) de Cloudflare, de forma que exista 1 MZLB para cada región. El MZLB coloca las direcciones IP de los ALB detrás del mismo nombre de host y habilita las comprobaciones de estado en estas direcciones IP para determinar si están disponibles o no. Por ejemplo, si tiene nodos trabajadores en 3 zonas en la región EE.UU. este, el nombre de host `yourcluster.us-east.containers.appdomain.cloud` tiene 3 direcciones IP de ALB. El estado de MZLB comprueba la IP de ALB pública en cada zona de una región y mantiene actualizados los resultados de la búsqueda de DNS en función de estas comprobaciones de estado. Por ejemplo, si los ALB tienen las direcciones IP `1.1.1.1`, `2.2.2.2` y `3.3.3.3`, una operación normal de búsqueda de DNS del subdominio Ingress devuelve las 3 IP; el cliente accede a 1 de ellas de forma aleatoria. Si el ALB con la dirección IP `3.3.3.3` deja de estar disponible por cualquier motivo, por ejemplo debido a una anomalía de zona, la comprobación de estado de dicha zona falla, el MZLB elimina la IP fallida del nombre de host y la búsqueda de DNS devuelve sólo las IP de ALB `1.1.1.1` y `2.2.2.2` en buen estado. El subdominio tiene un tiempo de duración (TTL) de 30 segundos, de modo que, pasados 30 segundos, las nuevas apps cliente solo pueden acceder a una de las IP de ALB disponibles en buen estado.</p><p>En casos excepcionales, algunos solucionadores de DNS o apps cliente pueden continuar utilizando la IP de ALB en mal estado después del TTL de 30 segundos. Estas apps cliente pueden experimentar un tiempo de carga más largo hasta que la app cliente abandona la IP ` 3.3.3.3 ` e intenta conectarse a `1.1.1.1` o `2.2.2.2`. En función del navegador del cliente o de los valores de la app cliente, el retraso puede oscilar entre unos pocos segundos y un tiempo de espera TCP completo.</p>
 <p>MZLB solo equilibra la carga de los ALB públicos que utilizan los subdominios Ingress proporcionados por IBM. Si solo utiliza ALB privados, debe comprobar manualmente el estado de los ALB y actualizar los resultados de la búsqueda de DNS. Si utiliza ALB públicos que utilizan un dominio personalizado, puede incluir los ALB en el equilibrio de carga de MZLB creando un CNAME en la entrada DNS para reenviar las solicitudes desde el dominio personalizado al subdominio de Ingress proporcionado por IBM para el clúster.</p>
-<p><strong>Nota</strong>: si utiliza las políticas de red pre-DNAT de Calico para bloquear todo el tráfico entrante a los servicios de Ingress, también debe colocar en la lista blanca las <a href="https://www.cloudflare.com/ips/">IP IPv4 de Cloudflare <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> que se utilizan para comprobar el estado de sus ALB. Para ver los pasos a seguir para crear una política pre-DNAT de Calico para colocar estas IP en la lista blanca, consulte la Lección 3 de la <a href="cs_tutorials_policies.html#lesson3">guía de aprendizaje de la política de red de Calico</a>.</dd>
+<p class="note">Si utiliza las políticas de red pre-DNAT de Calico para bloquear todo el tráfico entrante a los servicios de Ingress, también debe colocar en la lista blanca las <a href="https://www.cloudflare.com/ips/">IP IPv4 de Cloudflare <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> que se utilizan para comprobar el estado de sus ALB. Para ver los pasos a seguir para crear una política pre-DNAT de Calico para colocar estas IP en la lista blanca, consulte la Lección 3 de la <a href="cs_tutorials_policies.html#lesson3">guía de aprendizaje de la política de red de Calico</a>.</p></dd>
 </dl>
 
 ### ¿Cómo llega a mi app una solicitud con Ingress en un clúster de una sola zona?
@@ -88,7 +91,7 @@ Antes de empezar a trabajar con Ingress, revise los siguientes requisitos previo
 
 **Requisitos previos para todas las configuraciones de Ingress:**
 - Ingress únicamente está disponible para los clústeres estándares y necesita al menos dos nodos trabajadores por zona para garantizar la alta disponibilidad y que se aplican actualizaciones periódicas.
-- Para configurar Ingress se necesita el rol de [**Administrador** de la plataforma IAM](cs_users.html#platform).
+- La configuración de Ingress requiere el rol de plataforma de {{site.data.keyword.Bluemix_notm}} IAM **Administrador**.
 
 **Requisitos previos para el uso de Ingress en clústeres multizona:**:
  - Si restringe el tráfico de red a los [nodos trabajadores de extremo](cs_edge.html), debe haber al menos 2 nodos trabajadores de extremo en cada zona para conseguir una alta disponibilidad de los pods Ingress. [Cree una agrupación de nodos trabajadores de extremo](cs_clusters.html#add_pool) que abarque todas las zonas del clúster y tenga como mínimo 2 nodos trabajadores por zona.
@@ -131,9 +134,8 @@ Para utilizar el mismo ALB de clúster para gestionar el tráfico a estas apps, 
 Ahora, ambos URL se resuelven al mismo dominio y, por lo tanto, el mismo ALB da servicio a ambos URL. Sin embargo, puesto que el recurso en el espacio de nombres de transferencia está registrado con el subdominio `stage`, el ALB de Ingress direcciona correctamente las solicitudes desde el URL `stage.domain.net/app3` únicamente a `app3`.
 
 {: #wildcard_tls}
-**Nota**:
-* El comodín de subdominio de Ingress que IBM proporciona, `*.<cluster_name>.<region>.containers.appdomain.cloud`, está registrado de forma predeterminada para su clúster. El certificado TLS proporcionado por IBM es un certificado comodín y se puede utilizar para el subdominio comodín.
-* Si desea utilizar un dominio personalizado, debe registrar el dominio personalizado como un dominio comodín como, por ejemplo, `*.custom_domain.net`. Para utilizar TLS, debe obtener un certificado comodín.
+El comodín de subdominio de Ingress que IBM proporciona, `*.<cluster_name>.<region>.containers.appdomain.cloud`, está registrado de forma predeterminada para su clúster. El certificado TLS proporcionado por IBM es un certificado comodín y se puede utilizar para el subdominio comodín. Si desea utilizar un dominio personalizado, debe registrar el dominio personalizado como un dominio comodín como, por ejemplo, `*.custom_domain.net`. Para utilizar TLS, debe obtener un certificado comodín.
+{: note}
 
 ### Varios dominios dentro del mismo espacio de nombres
 {: #multi-domains}
@@ -142,9 +144,8 @@ En un espacio de nombres individual, puede utilizar un dominio para acceder a to
 
 <img src="images/cs_ingress_single_ns_multi_subs.png" alt="Se necesita un recurso por espacio de nombres." style="border-style: none"/>
 
-**Nota**:
-* El comodín de subdominio de Ingress que IBM proporciona, `*.<cluster_name>.<region>.containers.appdomain.cloud`, está registrado de forma predeterminada para su clúster. El certificado TLS de Ingress proporcionado por IBM es un certificado comodín y se puede utilizar para el subdominio comodín.
-* Si desea utilizar un dominio personalizado, debe registrar el dominio personalizado como un dominio comodín como, por ejemplo, `*.custom_domain.net`. Para utilizar TLS, debe obtener un certificado comodín.
+El comodín de subdominio de Ingress que IBM proporciona, `*.<cluster_name>.<region>.containers.appdomain.cloud`, está registrado de forma predeterminada para su clúster. El certificado TLS proporcionado por IBM es un certificado comodín y se puede utilizar para el subdominio comodín. Si desea utilizar un dominio personalizado, debe registrar el dominio personalizado como un dominio comodín como, por ejemplo, `*.custom_domain.net`. Para utilizar TLS, debe obtener un certificado comodín.
+{: note}
 
 <br />
 
@@ -249,7 +250,7 @@ Después de elegir el dominio de la app, elija si desea utilizar o no la termina
 
 El ALB equilibra carga de tráfico de red HTTP para las apps en su clúster. Para equilibrar también la carga de conexiones HTTPS entrantes, puede configurar el ALB para descifrar el tráfico de red y reenviar las solicitudes descifradas a las apps expuestas en su clúster.
 
-* Si utiliza el subdominio de Ingress proporcionado por IBM, puede utilizar el certificado TLS proporcionado por IBM. Los certificados TLS proporcionados por IBM están firmados por LetsEncrypt y están gestionados por completo por IBM. Los certificados caducan cada 90 días y se renuevan automáticamente 7 días antes de que caduquen. **Nota**: para obtener información sobre la certificación de TLS comodín, consulte [esta nota](#wildcard_tls).
+* Si utiliza el subdominio de Ingress proporcionado por IBM, puede utilizar el certificado TLS proporcionado por IBM. Los certificados TLS proporcionados por IBM están firmados por LetsEncrypt y están gestionados por completo por IBM. Los certificados caducan cada 90 días y se renuevan automáticamente 7 días antes de que caduquen. Para obtener información sobre la certificación de TLS comodín, consulte [esta nota](#wildcard_tls).
 * Si utiliza un dominio personalizado, puede utilizar su propio certificado TLS para gestionar la terminación TLS. Si tiene apps en un solo espacio de nombres, puede importar o crear un secreto TLS para el certificado en ese mismo espacio de nombres. Si tiene apps en varios espacios de nombres, importe o cree un secreto TLS para el certificado en el espacio de nombres `default` de forma que el ALB pueda acceder y utilizar el certificado en cada espacio de nombres. Para obtener información sobre la certificación de TLS comodín, consulte [esta nota](#wildcard_tls). **Nota**: los certificados TLS que contienen claves precompartidas (TLS-PSK) no están soportados.
 
 **Si utiliza el dominio Ingress proporcionado por IBM:**
@@ -278,7 +279,7 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 {: pre}
 
 Si no tiene un certificado TLS listo, siga estos pasos:
-1. Genere un certificado de la autoridad de certificados (CA) y una clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo. **Importante**: asegúrese de que el [CN ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://support.dnsimple.com/articles/what-is-common-name/) sea distinto para cada certificado.
+1. Genere un certificado de la autoridad de certificados (CA) y una clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo. Asegúrese de que el [CN ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://support.dnsimple.com/articles/what-is-common-name/) sea distinto para cada certificado.
 2. Convierta el cert y la clave a base 64.
    1. Codifique el cert y la clave en la base 64 y guarde el valor codificado en base 64 en un nuevo archivo.
       ```
@@ -327,7 +328,8 @@ Si no tiene un certificado TLS listo, siga estos pasos:
 Los recursos de Ingress definen las reglas de direccionamiento que los ALB utilizan para direccionar el tráfico a su servicio de app.
 {: shortdesc}
 
-**Nota:** Si el clúster tiene varios espacios de nombres donde se exponen las apps, se necesita un recurso de Ingress por espacio de nombres. Sin embargo, cada espacio de nombres debe utilizar un host diferente. Debe registrar un dominio comodín y especificar un subdominio diferente en cada recurso. Para obtener más información, consulte [Planificación de redes para uno o varios espacios de nombres](#multiple_namespaces).
+Si el clúster tiene varios espacios de nombres donde se exponen las apps, se necesita un recurso de Ingress por espacio de nombres. Sin embargo, cada espacio de nombres debe utilizar un host diferente. Debe registrar un dominio comodín y especificar un subdominio diferente en cada recurso. Para obtener más información, consulte [Planificación de redes para uno o varios espacios de nombres](#multiple_namespaces).
+{: note}
 
 1. Abra el editor que prefiera y cree un archivo de configuración de Ingress llamado, por ejemplo, `myingressresource.yaml`.
 
@@ -571,7 +573,7 @@ Para exponer apps que están fuera de su clúster al público:
         ```
         {: pre}
 
-3. Continúe con los pasos del apartado [Exposición de apps que están dentro de su clúster al público](#public_inside_2), empezando por el Paso 2.
+3. Continúe con los pasos de "Exposición de apps que están dentro de su clúster al público", [Paso 2: Seleccionar un dominio de app](#public_inside_2).
 
 <br />
 
@@ -643,7 +645,8 @@ Empiece desplegando sus apps y crear servicios de Kubernetes para exponerlos.
 Cuando se crea un clúster estándar, se crea un equilibrador de carga de aplicación (ALB) privado proporcionado por IBM en cada zona y se le asigna una dirección IP privada portátil y una ruta privada. Sin embargo, el ALB privado predeterminado de cada zona no se habilita automáticamente. Para utilizar el ALB privado predeterminado para el equilibrio de carga del tráfico de red privado para sus apps, primero debe habilitarlo con la dirección IP privada portátil proporcionada por IBM o con su propia dirección IP privada portátil.
 {:shortdesc}
 
-**Nota**: si ha utilizado el distintivo `--no-subnet` al crear el clúster, debe añadir una subred privada portátil o una subred gestionada por el usuario para poder habilitar el ALB privado. Para obtener más información, consulte [Solicitud de más subredes para el clúster](cs_subnets.html#request).
+Si ha utilizado el distintivo `--no-subnet` al crear el clúster, debe añadir una subred privada portátil o una subred gestionada por el usuario para poder habilitar el ALB privado. Para obtener más información, consulte [Solicitud de más subredes para el clúster](cs_subnets.html#request).
+{: note}
 
 **Para habilitar un ALB privado utilizando la dirección IP privada portátil asignada previamente y proporcionada por IBM:**
 
@@ -656,11 +659,11 @@ Cuando se crea un clúster estándar, se crea un equilibrador de carga de aplica
 
     El campo **Status** de los ALB privados tiene el valor _disabled_.
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
-    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
-    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   false     disabled   private   -               dal12
-    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
-    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    true      enabled    public    169.xx.xxx.xxx  dal12
+    ALB ID                                            Status     Type      ALB IP          Zone    Build
+    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   disabled   private   -               dal10   ingress:350/ingress-auth:192
+    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   disabled   private   -               dal12   ingress:350/ingress-auth:192
+    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
+    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
     ```
     {: screen}
     En los clústeres multizona, el sufijo numerado del ID del ALB indica el orden en el que se ha añadido el ALB.
@@ -714,9 +717,9 @@ Cuando se crea un clúster estándar, se crea un equilibrador de carga de aplica
 
     El campo **Status** del ALB privado es _disabled_.
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
+    ALB ID                                            Status     Type      ALB IP          Zone    Build
+    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   disabled   private   -               dal10   ingress:350/ingress-auth:192
+    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
     ```
     {: screen}
 
@@ -760,7 +763,7 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 {: pre}
 
 Si no tiene un certificado TLS listo, siga estos pasos:
-1. Genere un certificado de la autoridad de certificados (CA) y una clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo. **Importante**: asegúrese de que el [CN ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://support.dnsimple.com/articles/what-is-common-name/) sea distinto para cada certificado.
+1. Genere un certificado de la autoridad de certificados (CA) y una clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo. Asegúrese de que el [CN ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://support.dnsimple.com/articles/what-is-common-name/) sea distinto para cada certificado.
 2. Convierta el cert y la clave a base 64.
    1. Codifique el cert y la clave en la base 64 y guarde el valor codificado en base 64 en un nuevo archivo.
       ```
@@ -809,7 +812,8 @@ Si no tiene un certificado TLS listo, siga estos pasos:
 Los recursos de Ingress definen las reglas de direccionamiento que los ALB utilizan para direccionar el tráfico a su servicio de app.
 {: shortdesc}
 
-**Nota:** Si el clúster tiene varios espacios de nombres donde se exponen las apps, se necesita un recurso de Ingress por espacio de nombres. Sin embargo, cada espacio de nombres debe utilizar un host diferente. Debe registrar un dominio comodín y especificar un subdominio diferente en cada recurso. Para obtener más información, consulte [Planificación de redes para uno o varios espacios de nombres](#multiple_namespaces).
+Si el clúster tiene varios espacios de nombres donde se exponen las apps, se necesita un recurso de Ingress por espacio de nombres. Sin embargo, cada espacio de nombres debe utilizar un host diferente. Debe registrar un dominio comodín y especificar un subdominio diferente en cada recurso. Para obtener más información, consulte [Planificación de redes para uno o varios espacios de nombres](#multiple_namespaces).
+{: note}
 
 1. Abra el editor que prefiera y cree un archivo de configuración de Ingress llamado, por ejemplo, `myingressresource.yaml`.
 
@@ -1000,7 +1004,8 @@ De forma predeterminada, sólo los puertos 80 y 443 están expuestos en el ALB d
 
 2. Añada una sección <code>data</code> y especifique los puertos públicos `80`, `443`, y cualquier otro puerto que desee exponer de forma separada mediante un punto y coma (;).
 
-    **Importante**: De forma predeterminada, los puertos 80 y 443 están abiertos. Si desea mantener los puertos 80 y 443 abiertos, también debe incluirlos, además de cualquier otro puerto que especifique en el campo `public-ports`. Los puertos que no se especifiquen, permanecerán cerrados. Si ha habilitado un ALB privado, también debe especificar los puertos que desea mantener abiertos en el campo `private-ports`.
+    De forma predeterminada, los puertos 80 y 443 están abiertos. Si desea mantener los puertos 80 y 443 abiertos, también debe incluirlos, además de cualquier otro puerto que especifique en el campo `public-ports`. Los puertos que no se especifiquen, permanecerán cerrados. Si ha habilitado un ALB privado, también debe especificar los puertos que desea mantener abiertos en el campo `private-ports`.
+    {: important}
 
     ```
     apiVersion: v1
@@ -1047,7 +1052,8 @@ De forma predeterminada, la dirección IP de origen de la solicitud de cliente n
 
 Para conservar la dirección IP de origen original de la solicitud de cliente, puede [habilitar la conservación de IP de origen ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer). Conservar la dirección IP del cliente es útil, por ejemplo, cuando los servidores de apps tienen que aplicar políticas de control de acceso y seguridad.
 
-**Nota**: si [inhabilita un ALB](cs_cli_reference.html#cs_alb_configure), cualquier cambio de IP de origen que realice en el servicio del equilibrador de carga que exponga el ALB se perderá. Cuando vuelva a habilitar el ALB, debe volver a habilitar la IP de origen.
+Si [inhabilita un ALB](cs_cli_reference.html#cs_alb_configure), cualquier cambio de IP de origen que realice en el servicio del equilibrador de carga que exponga el ALB se perderá. Cuando vuelva a habilitar el ALB, debe volver a habilitar la IP de origen.
+{: note}
 
 Para habilitar la conservación de IP de origen, edite el servicio del equilibrador de carga que expone un ALB de Ingress:
 
@@ -1135,7 +1141,8 @@ Habilite los protocolos SSL y cifrados a nivel HTTP global editando el mapa de c
 
 De forma predeterminada, el protocolo TLS 1.2 se utiliza para todas las configuraciones de Ingress que utilizan el dominio proporcionado por IBM. Siga estos pasos para cambiar este valor predeterminado para utilizar en su lugar los protocolos TLS 1.1 o 1.0.
 
-**Nota**: Cuando se especifican los protocolos habilitados para todos los hosts, los parámetros TLSv1.1 y TLSv1.2 (1.1.13, 1.0.12) solo funcionan cuando se utiliza OpenSSL 1.0.1 o superior. El parámetro TLSv1.3 (1.13.0) sólo funciona cuando se utiliza OpenSSL 1.1.1 creado con soporte de TLSv1.3.
+Cuando se especifican los protocolos habilitados para todos los hosts, los parámetros TLSv1.1 y TLSv1.2 (1.1.13, 1.0.12) solo funcionan cuando se utiliza OpenSSL 1.0.1 o superior. El parámetro TLSv1.3 (1.13.0) sólo funciona cuando se utiliza OpenSSL 1.1.1 creado con soporte de TLSv1.3.
+{: note}
 
 Para editar el mapa de configuración para habilitar los cifrados y los protocolos SSL:
 

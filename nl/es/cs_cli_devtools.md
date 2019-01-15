@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -168,8 +171,8 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks credentials-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
@@ -383,7 +386,7 @@ Cuando un usuario distinto realiza una acción en esta región que requiere inte
 
 Si necesita actualizar la clave de API que hay almacenada para una región, puede hacerlo mediante la ejecución del mandato [ibmcloud ks api-key-reset](#cs_api_key_reset). Este mandato requiere la política de acceso de administrador de {{site.data.keyword.containerlong_notm}} y almacena la clave de API del usuario que ejecuta este mandato en la cuenta.
 
-**Nota:** la clave de API que se devuelve en este mandato no se puede utilizar si las credenciales de infraestructura de IBM Cloud (SoftLayer) se han establecido manualmente mediante el mandato [ibmcloud ks credentials-set](#cs_credentials_set).
+**Nota:** la clave de API que se devuelve en este mandato no se puede utilizar si las credenciales de infraestructura de IBM Cloud (SoftLayer) se han establecido manualmente mediante el mandato [ibmcloud ks credential-set](#cs_credentials_set).
 
 <strong>Opciones del mandato</strong>:
 
@@ -414,7 +417,7 @@ Sustituya la clave de API IAM actual en una región de {{site.data.keyword.conta
 
 Este mandato requiere la política de acceso de administrador de {{site.data.keyword.containerlong_notm}} y almacena la clave de API del usuario que ejecuta este mandato en la cuenta. La clave de API IAM es necesaria para pedir infraestructura del portafolio de infraestructura de IBM Cloud (SoftLayer). Una vez almacenada, la clave de API se utiliza para cada acción en una región que requiere permisos de infraestructura, con independencia del usuario que ejecute este mandato. Para obtener más información sobre cómo funcionan las claves de API IAM, consulte el [mandato `ibmcloud ks api-key-info`](#cs_api_key_info).
 
-**Importante:** Antes de utilizar este mandato, asegúrese de que el usuario que lo ejecuta tiene los [permisos de infraestructura de IBM Cloud (SoftLayer) e {{site.data.keyword.containerlong_notm}}](cs_users.html#users) necesarios.
+**Importante:** Antes de utilizar este mandato, asegúrese de que el usuario que lo ejecuta tiene los [permisos de infraestructura de IBM Cloud (SoftLayer) y de {{site.data.keyword.containerlong_notm}}](cs_users.html#users) necesarios.
 
 <strong>Opciones del mandato</strong>:
 
@@ -896,21 +899,23 @@ Ver información sobre un clúster de la organización.
 **Salida de ejemplo**:
 
   ```
-  Name:        my_cluster
-  ID:          abc1234567
-  State:       normal
-  Trust ready: false
-  Created:     2018-01-01T17:19:28+0000
-  Zone:        dal10
-  Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Master Location: Dallas
-  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
-  Ingress secret:    my_cluster
-  Workers:      3
-  Worker Zones: dal10
-  Version:      1.11.3
-  Owner Email:  name@example.com
+  Name:                 my_cluster
+  ID:                   abc1234567
+  State:                normal
+  Trust ready:          false
+  Created:              2018-01-01T17:19:28+0000
+  Zone:                 dal10
+  Master URL:           https://169.xx.xxx.xxx:xxxxx
+  Master Location:      Dallas
+  Ingress subdomain:    my_cluster.us-south.containers.appdomain.cloud
+  Ingress secret:       my_cluster
+  Workers:              3
+  Worker Zones:         dal10
+  Version:              1.12.3
+  Owner:                name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Resource Group ID:    a8a12accd63b437bbd6d58fb6a462ca7
+  Resource Group Name:  Default
 
   Addons
   Name                   Enabled
@@ -1652,7 +1657,7 @@ Visualice el estado de todos los ALB de un clúster. Si no se devuelve ningún I
 ## Mandatos de infraestructura
 {: #infrastructure_commands}
 
-### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 Defina las credenciales de cuenta de infraestructura de IBM Cloud (SoftLayer) para su cuenta de {{site.data.keyword.containerlong_notm}}.
@@ -1663,7 +1668,7 @@ Si las credenciales de infraestructura de IBM Cloud (SoftLayer) se establecen ma
 
 No puede definir varias credenciales para una cuenta de {{site.data.keyword.containerlong_notm}}. Cada cuenta de {{site.data.keyword.containerlong_notm}} está vinculada a un portafolio de infraestructura de IBM Cloud (SoftLayer).
 
-**Importante:** Antes de utilizar este mandato, asegúrese de que el usuario cuyas credenciales se utilizan tiene los [permisos de infraestructura de IBM Cloud (SoftLayer) e {{site.data.keyword.containerlong_notm}}](cs_users.html#users) necesarios.
+**Importante:** Antes de utilizar este mandato, asegúrese de que el usuario cuyas credenciales se utilizan tiene los [permisos de infraestructura de IBM Cloud (SoftLayer) y de {{site.data.keyword.containerlong_notm}}](cs_users.html#users) necesarios.
 
 <strong>Opciones del mandato</strong>:
 
@@ -1708,12 +1713,12 @@ No puede definir varias credenciales para una cuenta de {{site.data.keyword.cont
 **Ejemplo**:
 
   ```
-  ibmcloud ks credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+  ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
 
-### ibmcloud ks credentials-unset
+### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
 Elimine las credenciales de cuenta de infraestructura de IBM Cloud (SoftLayer) de su cuenta de {{site.data.keyword.containerlong_notm}}.
@@ -1730,7 +1735,7 @@ Una vez que elimina las credenciales, la [clave de API IAM](#cs_api_key_info) se
 **Ejemplo**:
 
   ```
-  ibmcloud ks credentials-unset
+  ibmcloud ks credential-unset
   ```
   {: pre}
 
@@ -2792,7 +2797,7 @@ Visualiza los detalles de una agrupación de trabajadores.
   Workers per zone:   3
   Machine type:       b2c.4x16.encrypted
   Labels:             -
-  Version:            1.10.8_1512
+  Version:            1.10.11_1512
   ```
   {: screen}
 
@@ -3008,4 +3013,3 @@ Antes de eliminar una zona, asegúrese de que tiene suficientes nodos trabajador
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
-  

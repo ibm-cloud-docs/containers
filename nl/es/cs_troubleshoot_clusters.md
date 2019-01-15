@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -63,9 +66,9 @@ El clúster no se ha podido configurar con el registro. Asegúrese de que tiene 
 
 {: tsCauses}
 No tiene los permisos correctos para crear un clúster. Necesita los permisos siguientes para crear un clúster:
-*  Rol de **superusuario** para la infraestructura de IBM Cloud (SoftLayer).
-*  Rol de **administrador** de la gestión de la plataforma para {{site.data.keyword.containerlong_notm}}.
-*  Rol de **administrador** de la gestión de la plataforma para {{site.data.keyword.registrylong_notm}}.
+*  Rol de **Superusuario** para la infraestructura de IBM Cloud (SoftLayer).
+*  Rol de gestión de la plataforma de **Administrador** para {{site.data.keyword.containerlong_notm}} a nivel de cuenta.
+*  Rol de gestión de la plataforma de **Administrador** para {{site.data.keyword.registrylong_notm}} a nivel de cuenta. No limite las políticas para {{site.data.keyword.registryshort_notm}} a nivel de grupo de recursos. Si ha empezado a utilizar {{site.data.keyword.registrylong_notm}} antes del 4 de octubre de 2018, asegúrese de [habilitar la imposición de políticas de {{site.data.keyword.Bluemix_notm}} IAM](/docs/services/Registry/registry_users.html#existing_users).
 
 En el caso de errores relacionados con la infraestructura, las cuentas de Pago según uso de {{site.data.keyword.Bluemix_notm}} creadas después de haber enlazado una cuenta automática ya se han configurado con acceso a la infraestructura de IBM Cloud (SoftLayer). Es posible adquirir recursos de la infraestructura para el clúster sin configuración adicional. Si tiene una cuenta de Pago según uso válida y recibe este mensaje de error, es posible que no esté utilizando las credenciales de cuenta de infraestructura de IBM Cloud (SoftLayer) correctas para acceder a los recursos de la infraestructura.
 
@@ -78,9 +81,9 @@ Si utiliza una infraestructura de IBM Cloud (SoftLayer) distinta para suministra
 {: tsResolve}
 El propietario de la cuenta debe configurar correctamente las credenciales de la cuenta de infraestructura. Las credenciales dependen del tipo de cuenta de infraestructura que esté utilizando.
 
-1.  Verifique que tiene acceso a una cuenta de infraestructura. Inicie una sesión en la [consola de {{site.data.keyword.Bluemix_notm}}![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/) y, desde el menú emergente, pulse **Infraestructura**. Si ve el panel de control de la infraestructura, significa que tiene acceso a una cuenta de infraestructura.
+1.  Verifique que tiene acceso a una cuenta de infraestructura. Inicie una sesión en la [consola de {{site.data.keyword.Bluemix_notm}}![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/) y, desde el menú ![Icono de menú](../icons/icon_hamburger.svg "Icono de menú"), pulse **Infraestructura**. Si ve el panel de control de la infraestructura, significa que tiene acceso a una cuenta de infraestructura.
 2.  Compruebe si el clúster utiliza una cuenta de infraestructura distinta de la que se suministra con la cuenta de Pago según uso.
-    1.  En el menú emergente, pulse **Contenedores > Clústeres**.
+    1.  En el menú ![Icono de menú](../icons/icon_hamburger.svg "Icono de menú"), pulse **Contenedores > Clústeres**.
     2.  En la tabla, seleccione el clúster.
     3.  En el separador **Visión general**, compruebe si hay un campo **Usuario de infraestructura**.
         * Si no ve el campo **Usuario de infraestructura**, tiene una cuenta de Pago según uso enlazada que utiliza las mismas credenciales para las cuentas de infraestructura y de plataforma.
@@ -103,7 +106,7 @@ Cuando ejecuta los mandatos `ibmcloud`, `kubectl` o `calicoctl` desde la CLI, fa
 Puede que tenga políticas de red corporativas que impidan el acceso desde el sistema local a los puntos finales públicos mediante proxies o cortafuegos.
 
 {: tsResolve}
-[Permita el acceso TCP para que funciones los mandatos de CLI](cs_firewall.html#firewall). Esta tarea precisa de la [política de acceso de administrador](cs_users.html#access_policies). Verifique su [política de acceso](cs_users.html#infra_access) actual.
+[Permita el acceso TCP para que funciones los mandatos de CLI](cs_firewall.html#firewall_bx). Esta tarea requiere el rol de [**Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para el clúster.
 
 
 ## El cortafuegos impide que el clúster se conecte a recursos
@@ -147,7 +150,7 @@ Si el proxy kubectl se ejecuta correctamente pero el panel de control no está d
 Es posible que tenga otro cortafuegos configurado o que se hayan personalizado los valores existentes del cortafuegos en la cuenta de infraestructura de IBM Cloud (SoftLayer). {{site.data.keyword.containerlong_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el maestro de Kubernetes y viceversa. Otro motivo puede ser que los nodos trabajadores están bloqueados en un bucle de recarga.
 
 {: tsResolve}
-[Permita que el clúster acceda a los recursos de infraestructura y a otros servicios](cs_firewall.html#firewall_outbound). Esta tarea precisa de la [política de acceso de administrador](cs_users.html#access_policies). Verifique su [política de acceso](cs_users.html#infra_access) actual.
+[Permita que el clúster acceda a los recursos de infraestructura y a otros servicios](cs_firewall.html#firewall_outbound). Esta tarea requiere el rol de [**Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para el clúster.
 
 <br />
 
@@ -162,7 +165,7 @@ Es posible que tenga otro cortafuegos configurado o que se hayan personalizado l
 
 
 {: tsCauses}
-En {{site.data.keyword.Bluemix_notm}}, cada recurso debe estar en un grupo de recursos. Por ejemplo, es posible que el clúster ` mycluster` exista en el grupo de recursos `default`. Cuando el propietario de la cuenta le da acceso a los recursos asignándole un rol en la plataforma IAM, el acceso puede ser para un recurso específico o para el grupo de recursos. Cuando se le da acceso a un recurso específico, no tiene acceso al grupo de recursos. En este caso, no es necesario que tenga como destino un grupo de recursos para trabajar con los clústeres a los que tiene acceso. Si tiene como destino un grupo de recursos distinto al del grupo en el que se encuentra el clúster, las acciones sobre dicho clúster pueden fallar. Por el contrario, si se le da acceso a un recurso como parte de su acceso a un grupo de recursos, debe elegir como destino un grupo de recursos para poder trabajar con un clúster de dicho grupo. Si no elige como destino de la sesión de CLI el grupo de recursos en el que se encuentra el clúster, las acciones sobre dicho clúster pueden fallar.
+En {{site.data.keyword.Bluemix_notm}}, cada recurso debe estar en un grupo de recursos. Por ejemplo, es posible que el clúster ` mycluster` exista en el grupo de recursos `default`. Cuando el propietario de la cuenta le da acceso a los recursos asignándole un rol en la plataforma {{site.data.keyword.Bluemix_notm}} IAM, el acceso puede ser para un recurso específico o para el grupo de recursos. Cuando se le da acceso a un recurso específico, no tiene acceso al grupo de recursos. En este caso, no es necesario que tenga como destino un grupo de recursos para trabajar con los clústeres a los que tiene acceso. Si tiene como destino un grupo de recursos distinto al del grupo en el que se encuentra el clúster, las acciones sobre dicho clúster pueden fallar. Por el contrario, si se le da acceso a un recurso como parte de su acceso a un grupo de recursos, debe elegir como destino un grupo de recursos para poder trabajar con un clúster de dicho grupo. Si no elige como destino de la sesión de CLI el grupo de recursos en el que se encuentra el clúster, las acciones sobre dicho clúster pueden fallar.
 
 Si no encuentra o no puede trabajar con un clúster, es posible que esté experimentando uno de los problemas siguientes:
 * Tiene acceso al clúster y al grupo de recursos en el que se encuentra el clúster, pero la sesión de CLI no tiene como destino el grupo de recursos en el que se encuentra el clúster.
@@ -253,7 +256,7 @@ Para comprobar sus permisos de acceso de usuario:
         ibmcloud target -g none
         ```
         {: pre}
-        **Nota**: este mandato falla porque no existe ningún grupo de recursos llamado `none`. Sin embargo, el grupo de recursos actual automáticamente deja de ser destino cuando el mandato falla.
+        Este mandato falla porque no existe ningún grupo de recursos llamado `none`. Sin embargo, el grupo de recursos actual automáticamente deja de ser destino cuando el mandato falla.
 
       2. Elija el clúster como destino.
         ```
@@ -262,13 +265,13 @@ Para comprobar sus permisos de acceso de usuario:
         {: pre}
 
     * Si no tiene acceso al clúster:
-        1. Solicite al propietario de la cuenta que le asigne un [rol en la plataforma IAM](cs_users.html#platform) para dicho clúster.
+        1. Solicite al propietario de la cuenta que le asigne un [rol de plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para dicho clúster.
         2. No elija como destino un grupo de recursos. Si ya ha elegido como destino un grupo de recursos, elimínelo como destino:
           ```
           ibmcloud target -g none
           ```
           {: pre}
-          **Nota**: este mandato falla porque no existe ningún grupo de recursos llamado `none`. Sin embargo, el grupo de recursos actual automáticamente deja de ser destino cuando el mandato falla.
+          Este mandato falla porque no existe ningún grupo de recursos llamado `none`. Sin embargo, el grupo de recursos actual automáticamente deja de ser destino cuando el mandato falla.
         3. Elija el clúster como destino.
           ```
           ibmcloud ks cluster-config <cluster_name_or_ID>
@@ -335,7 +338,7 @@ Es posible que el clúster se suministre en una cuenta de infraestructura de IBM
 Tenga en cuenta el caso de ejemplo siguiente para entender cómo se pueden quedar huérfanas los clústeres.
 1.  Tiene una cuenta de pago según uso de {{site.data.keyword.Bluemix_notm}}.
 2.  Crea un clúster llamado `Cluster1`. Los nodos trabajadores y otros recursos de la infraestructura se suministran en la cuenta de infraestructura que viene con su cuenta de pago según uso.
-3.  Más adelante, averigua que su equipo utiliza una cuenta de infraestructura de IBM Cloud (SoftLayer) heredada o compartida. Utiliza el mandato `ibmcloud ks credentials-set` para cambiar las credenciales de la infraestructura de IBM Cloud (SoftLayer) para utilizar la cuenta del equipo.
+3.  Más adelante, averigua que su equipo utiliza una cuenta de infraestructura de IBM Cloud (SoftLayer) heredada o compartida. Utiliza el mandato `ibmcloud ks credential-set` para cambiar las credenciales de la infraestructura de IBM Cloud (SoftLayer) para utilizar la cuenta del equipo.
 4.  Crea otro clúster llamado `Cluster2`. Los nodos trabajadores y otros recursos de la infraestructura se suministran en la cuenta de infraestructura del equipo.
 5.  Observa que `Cluster1` necesita una actualización del nodo trabajador, o una recarga del nodo trabajador o simplemente desea limpiarlo antes de suprimirlo. Sin embargo, como `Cluster1` se ha suministrado en otra cuenta de infraestructura, no puede modificar sus recursos de la infraestructura. `Cluster1` es huérfano.
 6.  Sigue los pasos de resolución de la sección siguiente, pero no restablece las credenciales de la infraestructura en la cuenta de equipo. Puede suprimir `Cluster1`, pero ahora `Cluster2` es huérfano.
@@ -345,23 +348,24 @@ Tenga en cuenta el caso de ejemplo siguiente para entender cómo se pueden queda
 
 {: tsResolve}
 1.  Compruebe qué cuenta de infraestructura utiliza la región en la que está actualmente el clúster para suministrar clústeres.
-    1.  Inicie una sesión en la [GUI de clústeres de {{site.data.keyword.containerlong_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://console.bluemix.net/containers-kubernetes/clusters).
+    1.  Inicie una sesión en la [consola de clústeres de {{site.data.keyword.containerlong_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/containers-kubernetes/clusters).
     2.  En la tabla, seleccione el clúster.
     3.  En el separador **Visión general**, compruebe si hay un campo **Usuario de infraestructura**. Este campo le ayuda a determinar si la cuenta de {{site.data.keyword.containerlong_notm}} utiliza una cuenta de infraestructura distinta de la predeterminada.
         * Si no ve el campo **Usuario de infraestructura**, tiene una cuenta de Pago según uso enlazada que utiliza las mismas credenciales para las cuentas de infraestructura y de plataforma. Es posible que el clúster que no se puede modificar se suministre en una cuenta de infraestructura distinta.
         * Si ve un campo **Usuario de infraestructura**, significa que utiliza una cuenta de infraestructura distinta de la que se ha suministrado con la cuenta de Pago según uso. Estas credenciales distintas se aplican a todos los clústeres de la región. Es posible que el clúster que no se puede modificar se suministre en su cuenta de pago según uso o en una cuenta de infraestructura distinta.
 2.  Compruebe qué cuenta de infraestructura se ha utilizado para suministrar el clúster.
     1.  En el separador **Nodos trabajadores**, seleccione un nodo trabajador y anote su **ID**.
-    2.  Abra el menú expandible y pulse **Infraestructura**.
-    3.  En el menú de la infraestructura, pulse **Dispositivos > Lista de dispositivos**.
+    2.  Abra el menú ![Icono de menú](../icons/icon_hamburger.svg "Icono de menú") y pulse **Infraestructura**.
+    3.  En el panel de navegación de infraestructura, pulse **Dispositivos > Lista de dispositivos**.
     4.  Busque el ID de nodo trabajador que ha anotado anteriormente.
     5.  Si no encuentra el ID del nodo trabajador, significa que el nodo trabajador no se suministra en esta cuenta de infraestructura. Cambie a otra cuenta de infraestructura y vuélvalo a intentar.
-3.  Utilice el [mandato](cs_cli_reference.html#cs_credentials_set) `ibmcloud ks credentials-set` para cambiar las credenciales de la infraestructura por la cuenta en la que se han suministrado los nodos trabajadores del clúster, que encontrará en el paso anterior.
-    **Nota**: si ya no tiene acceso y no puede obtener las credenciales de la infraestructura, debe abrir una incidencia de soporte de {{site.data.keyword.Bluemix_notm}} para eliminar el clúster huérfano.
+3.  Utilice el [mandato](cs_cli_reference.html#cs_credentials_set) `ibmcloud ks credential-set` para cambiar las credenciales de la infraestructura por la cuenta en la que se han suministrado los nodos trabajadores del clúster, que encontrará en el paso anterior.
+    Si ya no tiene acceso y no puede obtener las credenciales de la infraestructura, debe abrir un caso de soporte de {{site.data.keyword.Bluemix_notm}} para eliminar el clúster huérfano.
+    {: note}
 4.  [Suprima el clúster](cs_clusters.html#remove).
 5.  Si lo desea, restablezca las credenciales de la infraestructura de la cuenta anterior. Tenga en cuenta que si ha creado clústeres con una cuenta de infraestructura distinta de la cuenta a la que conmuta, es posible que deje huérfanos dichos clústeres.
-    * Para establecer las credenciales en otra cuenta de infraestructura, utilice el [mandato](cs_cli_reference.html#cs_credentials_set) `ibmcloud ks credentials-set`.
-    * Para utilizar las credenciales predeterminadas que se suministran con la cuenta de pago según uso de {{site.data.keyword.Bluemix_notm}}, utilice el [mandato](cs_cli_reference.html#cs_credentials_unset) `ibmcloud ks credentials-unset`.
+    * Para establecer las credenciales en otra cuenta de infraestructura, utilice el [mandato](cs_cli_reference.html#cs_credentials_set) `ibmcloud ks credential-set`.
+    * Para utilizar las credenciales predeterminadas que se suministran con la cuenta de pago según uso de {{site.data.keyword.Bluemix_notm}}, utilice el [mandato](cs_cli_reference.html#cs_credentials_unset) `ibmcloud ks credential-unset`.
 
 <br />
 
@@ -448,7 +452,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: screen}
 
 {: tsCauses}
-Para enlazar servicios a un clúster, debe tener el rol de usuario desarrollador de Cloud Foundry para el espacio de nombres donde se ha suministrado la instancia de servicio. Además, debe tener acceso de editor de IAM a {{site.data.keyword.containerlong}}. Para acceder a la instancia de servicio, debe haber iniciado una sesión en el espacio en el que se ha suministrado la instancia de servicio.
+Para enlazar servicios a un clúster, debe tener el rol de usuario desarrollador de Cloud Foundry para el espacio de nombres donde se ha suministrado la instancia de servicio. Además, debe tener acceso de editor de {{site.data.keyword.Bluemix_notm}} IAM a {{site.data.keyword.containerlong}}. Para acceder a la instancia de servicio, debe haber iniciado una sesión en el espacio en el que se ha suministrado la instancia de servicio.
 
 {: tsResolve}
 
@@ -484,7 +488,7 @@ Para enlazar servicios a un clúster, debe tener el rol de usuario desarrollador
 
 4. Espere unos minutos y, a continuación, deje que el usuario intente enlazar el servicio de nuevo.
 
-5. Si esto no resuelve el problema, entonces los permisos de IAM no están sincronizados y no podrá resolver el problema usted mismo. [Póngase en contacto con el equipo de soporte de IBM](/docs/get-support/howtogetsupport.html#getting-customer-support) abriendo una incidencia de soporte. Asegúrese de proporcionar el ID de clúster, el ID de usuario y el ID de instancia de servicio.
+5. Si esto no resuelve el problema, entonces los permisos de {{site.data.keyword.Bluemix_notm}} IAM no están sincronizados y no podrá resolver el problema usted mismo. [Póngase en contacto con el equipo de soporte de IBM](/docs/get-support/howtogetsupport.html#getting-customer-support) abriendo un caso de soporte. Asegúrese de proporcionar el ID de clúster, el ID de usuario y el ID de instancia de servicio.
    1. Recupere el ID de clúster.
       ```
       ibmcloud ks clusters
@@ -513,7 +517,7 @@ Este servicio no admite la creación de claves
 {: screen}
 
 {: tsCauses}
-Algunos servicios de {{site.data.keyword.Bluemix_notm}}, como {{site.data.keyword.keymanagementservicelong}} no admiten la creación de credenciales de servicio, también conocidas como claves de servicio. Si no se admiten las claves de servicio, el servicio no se puede enlazar a un clúster. Para consultar una lista de servicios que admiten la creación de claves de servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#accser_external).
+Algunos servicios de {{site.data.keyword.Bluemix_notm}}, como {{site.data.keyword.keymanagementservicelong}} no admiten la creación de credenciales de servicio, también conocidas como claves de servicio. Si no se admiten las claves de servicio, el servicio no se puede enlazar a un clúster. Para consultar una lista de servicios que admiten la creación de claves de servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.Bluemix_notm}}](/docs/resources/connect_external_app.html#externalapp).
 
 {: tsResolve}
 Para integrar servicios que no admiten claves de servicio, compruebe si el servicio proporciona una API que puede utilizar para acceder al servicio directamente desde la app. Por ejemplo, si desea utilizar {{site.data.keyword.keymanagementservicelong}}, consulte la [Referencia de API ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/apidocs/kms?language=curl).
@@ -562,8 +566,8 @@ Actualice manualmente la referencia a la dirección IP privada de modo que apunt
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.8
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.8
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.11
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.11
   ```
   {: screen}
 
@@ -671,7 +675,7 @@ Si este clúster ya existe:
 *  Es posible que el pod haya superado una solicitud o límite de recursos.
 
 {: tsResolve}
-Esta tarea precisa de la [política de acceso de administrador](cs_users.html#access_policies). Verifique su [política de acceso](cs_users.html#infra_access) actual.
+Esta tarea requiere el [rol de **Administrador**](cs_users.html#platform) de la plataforma {{site.data.keyword.Bluemix_notm}} IAM para el clúster.
 
 Si acaba de crear el clúster de Kubernetes, ejecute el siguiente mandato y espere que se hayan inicializado los nodos trabajadores.
 
@@ -884,20 +888,15 @@ Para resolver el problema del diagrama de Helm:
 {: shortdesc}
 
 -  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plug-ins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
-
 -   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/bluemix/support/#status).
 -   Publique una pregunta en [{{site.data.keyword.containerlong_notm}}Slack ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
-
     Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
     {: tip}
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
-
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containerlong_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
     -   Para las preguntas relativas a las instrucciones de inicio y el servicio, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
     Consulte [Obtención de ayuda](/docs/get-support/howtogetsupport.html#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
-
--   Póngase en contacto con el soporte de IBM abriendo una incidencia. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
-{: tip}
+-   Póngase en contacto con el soporte de IBM abriendo un caso. Para obtener información sobre cómo abrir un caso de soporte de IBM, o sobre los niveles de soporte y las gravedades de los casos, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`.
+{: tip}
 

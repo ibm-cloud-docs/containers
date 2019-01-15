@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -28,8 +31,9 @@ En estos casos de uso se muestra cómo pueden aprovechar las cargas de trabajo d
 {: #uc_data-share}
 
 Un ejecutivo de línea de negocio (LOB) necesita aumentar los canales de ventas, pero el sistema de ventas al por menor se limita a un centro de datos local. La competencia tiene asociados globales para realizar ventas cruzadas y ascendentes de sus productos: tanto en tiendas físicas como en sitios en línea. 
+{: shortdesc}
 
-Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} proporciona un ecosistema de nube pública cuyos contenedores permiten a otros asociados y a participantes externos desarrollar conjuntamente apps y datos a través de las API. Ahora que el sistema minorista está en la nube pública, las API también simplifican la compartición de datos y agilizan el desarrollo de nuevas aplicaciones. Los despliegues de apps aumentan cuando los desarrolladores pueden experimentar con facilidad, enviando cambios a los sistemas de desarrollo y de prueba rápidamente con cadenas de herramientas. 
+Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} proporciona un ecosistema de nube pública cuyos contenedores permiten a otros asociados y a participantes externos desarrollar conjuntamente apps y datos a través de las API. Ahora que el sistema minorista está en la nube pública, las API también simplifican la compartición de datos y agilizan el desarrollo de nuevas apps. Los despliegues de apps aumentan cuando los desarrolladores pueden experimentar con facilidad, enviando cambios a los sistemas de desarrollo y de prueba rápidamente con cadenas de herramientas. 
 
 {{site.data.keyword.containerlong_notm}} y tecnologías clave:
 * [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](cs_clusters_planning.html#shared_dedicated_node)
@@ -54,7 +58,7 @@ La solución consta de estos componentes principales:
 * VENTAS CRUZADAS Y ASCENDENTES: app que descubren oportunidades de ventas cruzadas y ascendentes con API que se pueden utilizar en diversas apps de comercio electrónico y para dispositivos móviles
 * ENTORNO DE DESARROLLO: clúster de Kubernetes para sistemas de desarrollo, prueba y producción que aumentan la colaboración y la compartición de datos entre el minorista y sus asociados
 
-Para que el minorista trabaje con asociados globales, las API de inventario requieren cambios para que se ajusten a las preferencias de idioma y de mercado de cada región. {{site.data.keyword.containerlong_notm}} ofrece cobertura en varias regiones, que incluyen Norteamérica, Europa, Asia y Australia, de modo que las API reflejen las necesidades de cada país y con baja latencia.
+Para que el minorista trabaje con asociados globales, las API de inventario requieren cambios para que se ajusten a las preferencias de idioma y de mercado de cada región. {{site.data.keyword.containerlong_notm}} ofrece cobertura en varias regiones, que incluyen Norteamérica, Europa, Asia y Australia, de modo que las API reflejen las necesidades de cada país y se garantice una latencia baja para las llamadas de API.
 
 Otro requisito es que los datos de inventario se deben poder compartir con los clientes de los asociados y de la empresa. Con las API de inventario, los desarrolladores pueden mostrar información en apps, como apps de inventario móvil o soluciones de comercio electrónico en la web. Los desarrolladores también están ocupados con la creación y el mantenimiento del sitio de comercio electrónico primario. En resumen, tienen que centrarse en la codificación en lugar de en gestionar la infraestructura. 
 
@@ -100,7 +104,7 @@ Solución técnica:
 * {{site.data.keyword.containerlong_notm}} facilita el despliegue y restablecimiento de apps; se despliegan apps adaptadas para campañas de pruebas mediante el direccionamiento inteligente y el equilibrio de carga de Istio. 
 
 **Resultados**
-* Los microservicios reducen significativamente el tiempo de entrega de parches, correcciones de errores y funciones nuevas. El desarrollo de WW inicial es rápido y se ofrecen actualizaciones frecuentes (hasta 40 veces por semana).
+* Los microservicios reducen significativamente el tiempo de entrega de parches, correcciones de errores y funciones nuevas. El desarrollo inicial en todo el mundo es rápido y se ofrecen actualizaciones frecuentes (hasta 40 veces por semana).
 * El minorista y sus asociados tienen acceso inmediato a las planificaciones de disponibilidad de inventario y de entrega, utilizando las API. 
 * Con {{site.data.keyword.containerlong_notm}} y las herramientas CI y CD de IBM, las versiones A-B de las apps están listas para las campañas de pruebas. 
 * {{site.data.keyword.containerlong_notm}} proporciona un cálculo escalable, de modo que las cargas de trabajo de API de inventario y ventas cruzadas pueden crecer durante periodos de alto volumen del año, como por ejemplo las vacaciones de otoño. 
@@ -109,6 +113,7 @@ Solución técnica:
 {: #uc_grocer}
 
 Un director de marketing (CMO) necesita aumentar el tráfico de clientes en un 20 % en las tiendas convirtiendo las tiendas en un activo diferenciador. Las grandes superficies y los minoristas en línea le están robando ventas. Paralelamente, el CMO tiene que reducir el inventario sin rebajas porque mantener el inventario demasiado tiempo paraliza el capital.
+{: shortdesc}
 
 Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} facilita el aumento de la capacidad de cálculo, con lo cual los desarrolladores pueden añadir rápidamente servicios de analítica de nube para obtener información valiosa sobre el comportamiento de las ventas y la capacidad de adaptación al mercado digital. 
 
@@ -147,7 +152,7 @@ La analítica de redes sociales con Watson Discovery (datos sobre personalidad y
 
 La app móvil de fidelización proporciona información de personalización detallada, especialmente cuando los clientes utilizan sus funciones de compartición en redes social, como por ejemplo para publicar recetas.
 
-Además de la app móvil, los desarrolladores están ocupados con la creación y el mantenimiento de la aplicación de fidelización existente, que está vinculada a los tradicionales cupones de caja. En resumen, tienen que centrarse en la codificación en lugar de en gestionar la infraestructura. Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
+Además de la app móvil, los desarrolladores están ocupados con la creación y el mantenimiento de la app de fidelización existente, que está vinculada a los tradicionales cupones de caja. En resumen, tienen que centrarse en la codificación en lugar de en gestionar la infraestructura. Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
 * Gestión de nodo maestro de Kubernetes, IaaS y componentes operativos, como Ingress y almacenamiento
 * Supervisión del estado y la recuperación de los nodos trabajadores
 * Suministro de cálculo global, para que los desarrolladores no sean los responsables de configurar la infraestructura en los centros de datos

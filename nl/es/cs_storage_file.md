@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -30,7 +33,12 @@ lastupdated: "2018-10-25"
 
 Cada clase de almacenamiento especifica el tipo de almacenamiento de archivos que suministra, incluidos tamaño disponible, IOPS, sistema de archivos y política de retención.  
 
-**Importante:** asegúrese de elegir la configuración de almacenamiento cuidadosamente para tener suficiente capacidad para almacenar los datos. Después de suministrar un tipo específico de almacenamiento utilizando una clase de almacenamiento, no puede cambiar tamaño, tipo, IOPS ni política de retención del dispositivo de almacenamiento. Si necesita más almacenamiento o almacenamiento con otra configuración, debe [crear una nueva instancia de almacenamiento y copiar los datos](cs_storage_basics.html#update_storageclass) de la instancia de almacenamiento antigua en la nueva.
+Después de suministrar un tipo específico de almacenamiento utilizando una clase de almacenamiento, no puede cambiar el tipo ni la política de retención del dispositivo de almacenamiento. No obstante, puede [cambiar el tamaño y las IOPS](#change_storage_configuration) si desea aumentar el rendimiento y la capacidad de almacenamiento. Para cambiar el tipo y la política de retención del almacenamiento, debe [crear una nueva instancia de almacenamiento y copiar los datos](cs_storage_basics.html#update_storageclass) de la instancia de almacenamiento anterior a la nueva.
+{: important}
+
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+
+Para elegir una configuración de almacenamiento:
 
 1. Obtenga una lista de las clases de almacenamiento disponibles en {{site.data.keyword.containerlong}}.
     ```
@@ -63,8 +71,8 @@ Cada clase de almacenamiento especifica el tipo de almacenamiento de archivos qu
    {: tip}
 
 3. Elija el tipo de almacenamiento de archivos que desea suministrar.
-   - **Clases de almacenamiento de bronce, plata y oro:** estas clases de almacenamiento suministran [almacenamiento resistente ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://knowledgelayer.softlayer.com/topic/endurance-storage). El almacenamiento resistente le permite elegir el tamaño del almacenamiento en gigabytes en los niveles de IOPS predefinidos.
-   - **Clase de almacenamiento personalizada:** esta clase de almacenamiento contiene [almacenamiento de rendimiento ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo") ](https://knowledgelayer.softlayer.com/topic/performance-storage). Con el almacenamiento de rendimiento, tiene más control sobre el tamaño del almacenamiento y de IOPS.
+   - **Clases de almacenamiento de bronce, plata y oro:** estas clases de almacenamiento suministran [almacenamiento resistente](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers). El almacenamiento resistente le permite elegir el tamaño del almacenamiento en gigabytes en los niveles de IOPS predefinidos.
+   - **Clase de almacenamiento personalizada:** esta clase de almacenamiento contiene [almacenamiento de rendimiento](/docs/infrastructure/FileStorage/index.html#provisioning-with-performance). Con el almacenamiento de rendimiento, tiene más control sobre el tamaño del almacenamiento y de IOPS.
 
 4. Elija el tamaño e IOPS para el almacenamiento de archivos. El tamaño y el número de IOPS definen el número total de IOPS (operaciones de entrada/salida por segundo), lo que sirve como indicador de la rapidez del almacenamiento. Cuantas más IOPS tenga el almacenamiento, más rápido se procesarán las operaciones de entrada y salida.
    - **Clases de almacenamiento de bronce, plata y oro:** estas clases de almacenamiento se suministran con un número fijo de IOPS por gigabytes y se suministran en discos duros SSD. El número total de IOPS depende del tamaño del almacenamiento que elija. Puede seleccionar cualquier número entero de gigabytes comprendido dentro del rango de tamaño permitido, como por ejemplo 20 Gi, 256 Gi o 11854 Gi. Para determinar el número total de IOPS, debe multiplicar IOPS por el tamaño seleccionado. Por ejemplo, si selecciona un tamaño de almacenamiento de archivos de 1000 Gi en la clase de almacenamiento de plata que se suministra con 4 IOPS por GB, el almacenamiento tendrá un total de 4000 IOPS.
@@ -151,7 +159,8 @@ Cada clase de almacenamiento especifica el tipo de almacenamiento de archivos qu
    - Si desea que el PV, los datos y el dispositivo físico de almacenamiento de archivos se supriman cuando suprima la PVC, elija una clase de almacenamiento sin la opción `retain`. **Nota**: si tiene una cuenta dedicada, seleccione una clase de almacenamiento sin la opción `retain` para evitar volúmenes huérfanos en la infraestructura de IBM Cloud (SoftLayer).
 
 6. Decida si desea que se le facture por horas o por meses. Consulte las [tarifas ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing) para obtener más información. De forma predeterminada, todos los dispositivos de almacenamiento de archivos se suministran con un tipo de facturación por hora.
-   **Nota: ** si selecciona el tipo de facturación mensual, cuando elimine el almacenamiento persistente seguirá pagando el cargo mensual por el mismo, aunque solo lo haya utilizado durante un breve periodo de tiempo.
+   Si selecciona el tipo de facturación mensual, cuando elimine el almacenamiento persistente seguirá pagando el cargo mensual por el mismo, aunque solo lo haya utilizado durante un breve periodo de tiempo.
+   {: note}
 
 <br />
 
@@ -166,8 +175,6 @@ Cree una reclamación de volumen persistente (PVC) para [suministrar de forma di
 Antes de empezar:
 - Si tiene un cortafuegos, [permita el acceso de salida](cs_firewall.html#pvc) para los rangos de IP de la infraestructura de IBM Cloud (SoftLayer) de las zonas en las que están en los clústeres, de modo que pueda crear las PVC.
 - [Decida si desea utilizar una clase de almacenamiento predefinida](#predefined_storageclass) o crear una [clase de almacenamiento personalizada](#custom_storageclass).
-
-  **Nota:** si tiene un clúster multizona, la zona en la que se suministra el almacenamiento se selecciona en una iteración cíclica para equilibrar las solicitudes de volumen de forma uniforme entre todas las zonas. Si desea especificar la zona para el almacenamiento, cree en primer lugar una [clase de almacenamiento personalizada](#multizone_yaml). A continuación, siga los pasos de este tema para suministrar almacenamiento utilizando la clase de almacenamiento personalizada.
 
 ¿Desea desplegar almacenamiento de archivos en un conjunto con estado? Consulte [Utilización del almacenamiento de archivos en un conjunto con estado](#file_statefulset) para obtener más información.
 {: tip}
@@ -188,6 +195,8 @@ Para añadir almacenamiento de archivos:
            volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
          labels:
            billingType: "monthly"
+           region: us-south
+           zone: dal13
        spec:
          accessModes:
            - ReadWriteMany
@@ -209,6 +218,8 @@ Para añadir almacenamiento de archivos:
            volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
          labels:
            billingType: "hourly"
+           region: us-south
+           zone: dal13
        spec:
          accessModes:
            - ReadWriteMany
@@ -230,12 +241,22 @@ Para añadir almacenamiento de archivos:
        <td>Escriba el nombre de la PVC.</td>
        </tr>
        <tr>
-       <td><code>metadata.annotations</code></td>
-       <td>El nombre de la clase de almacenamiento que desea utilizar para suministrar almacenamiento de archivos. </br> Si no especifica ninguna clase de almacenamiento, el PV se crea con la clase de almacenamiento predeterminada <code>ibmc-file-bronze</code><p>**Sugerencia:** Si desea cambiar la clase de almacenamiento predeterminada, ejecute <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> y sustituya <code>&lt;storageclass&gt;</code> con el nombre de la clase de almacenamiento.</p></td>
+       <td><code>metadata.annotations.</code></br><code>volume.beta.kubernetes.io/</code></br><code>storage-class</code></td>
+       <td>El nombre de la clase de almacenamiento que desea utilizar para suministrar almacenamiento de archivos. </br> Si no especifica ninguna clase de almacenamiento, el PV se crea con la clase de almacenamiento predeterminada <code>ibmc-file-bronze</code>. </br></br><strong>Sugerencia:</strong> Si desea cambiar la clase de almacenamiento predeterminada, ejecute <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> y sustituya <code>&lt;storageclass&gt;</code> con el nombre de la clase de almacenamiento.</td>
        </tr>
        <tr>
          <td><code>metadata.labels.billingType</code></td>
           <td>Especifique la frecuencia con la que desea que se calcule la factura de almacenamiento, los valores son "monthly" o "hourly". Si no especifica ningún tipo de facturación, el almacenamiento se suministre con el tipo de facturación por hora. </td>
+       </tr>
+       <tr>
+       <td><code>metadata.labels.region</code></td>
+       <td>Opcional: Especifique la región en la que desea suministrar el almacenamiento de archivos. Para conectarse al almacenamiento, cree el almacenamiento en la misma región en la que se encuentre el clúster. Si especifica la región, también debe especificar una zona. Si no especifica una región, o si la región especificada no se encuentra, el almacenamiento se crea en la misma región que el clúster. </br></br><strong>Sugerencia: </strong>en lugar de especificar la región y la zona en la PVC, también puede especificar estos valores en una [clase de almacenamiento personalizada](#multizone_yaml). A continuación, utilice la clase de almacenamiento en la sección <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> de la PVC. Si se especifican la región y la zona en la clase de almacenamiento y la PVC, los valores de la PVC tendrán prioridad. </td>
+       </tr>
+       <tr>
+       <td><code>metadata.labels.zone</code></td>
+       <td>Opcional: Especifique la zona en la que desea suministrar el almacenamiento de archivos. Para utilizar el almacenamiento en una app, cree el almacenamiento en la misma zona en la que se encuentra el nodo trabajador. Para ver la zona del nodo trabajador, ejecute
+<code>ibmcloud ks workers --cluster &lt;cluster_name_or_ID&gt;</code> y revise la columna <strong>Zone</strong> de la salida de la CLI. Si especifica la zona, también debe especificar una región. Si no especifica una zona o si la zona especificada no se encuentra en un clúster multizona, la zona se selecciona en una iteración cíclica. </br></br><strong>Sugerencia: </strong>en lugar de especificar la región y la zona en la PVC, también puede especificar estos valores en una [clase de almacenamiento personalizada](#multizone_yaml). A continuación, utilice la clase de almacenamiento en la sección <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> de la PVC. Si se especifican la región y la zona en la clase de almacenamiento y la PVC, los valores de la PVC tendrán prioridad.
+</td>
        </tr>
        <tr>
        <td><code>spec.accessMode</code></td>
@@ -243,7 +264,7 @@ Para añadir almacenamiento de archivos:
        </tr>
        <tr>
        <td><code>spec.resources.requests.storage</code></td>
-       <td>Indique el tamaño del almacenamiento de archivos, en gigabytes (Gi). </br></br><strong>Nota:</strong> una vez suministrado el almacenamiento, no puede cambiar el tamaño del almacenamiento de archivos. Asegúrese de especificar un tamaño que coincida con la cantidad de datos que desea almacenar. </td>
+       <td>Indique el tamaño del almacenamiento de archivos, en gigabytes (Gi). Una vez suministrado el almacenamiento, no puede cambiar el tamaño del almacenamiento de archivos. Asegúrese de especificar un tamaño que coincida con la cantidad de datos que desea almacenar.</td>
        </tr>
        <tr>
        <td><code>spec.resources.requests.iops</code></td>
@@ -403,7 +424,9 @@ Para añadir almacenamiento de archivos:
 
 Si dispone de un dispositivo de almacenamiento físico existente que desea utilizar en el clúster, puede crear manualmente el PV y la PVC para [suministrar de forma estática](cs_storage_basics.html#static_provisioning) el almacenamiento.
 
-Antes de empezar, asegúrese de que tiene al menos un nodo trabajador en la misma zona que la instancia de almacenamiento de archivos existente.
+Antes de empezar:
+- Asegúrese de que tiene al menos un nodo trabajador en la misma zona que la instancia de almacenamiento de archivos existente.
+- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 
 ### Paso 1: Preparación del almacenamiento existente.
 
@@ -448,7 +471,8 @@ Para utilizar el almacenamiento existente en un clúster distinto de aquel en el
 **Para el almacenamiento persistente que se ha suministrado fuera del clúster:** </br>
 Si desea utilizar el almacenamiento existente que ha suministrado anteriormente, pero nunca antes se ha utilizado en el clúster, debe hacer que el almacenamiento esté disponible en la misma subred que los nodos trabajadores.
 
-**Nota**: si tiene una cuenta dedicada, debe [abrir una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Si tiene una cuenta dedicada, debe [abrir un caso de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+{: note}
 
 1.  {: #external_storage}En el [portal de la infraestructura de IBM Cloud (SoftLayer)![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://control.bluemix.net/), pulse **Almacenamiento**.
 2.  Pulse **Almacenamiento de archivos** y, en el menú **Acciones**, seleccione **Autorizar host**.
@@ -589,16 +613,17 @@ Ha creado correctamente un PV y lo ha enlazado a una PVC. Ahora los usuarios del
 ## Utilización del almacenamiento de archivos en un conjunto con estado
 {: #file_statefulset}
 
-Si tiene una aplicación con estado como, por ejemplo, una base de datos, puede crear conjuntos con estado que utilicen el almacenamiento de archivos para almacenar los datos de la aplicación. Como alternativa, puede utilizar una base de datos como servicio de {{site.data.keyword.Bluemix_notm}} y almacenar los datos en la nube.
+Si tiene una app con estado como, por ejemplo, una base de datos, puede crear conjuntos con estado que utilicen el almacenamiento de archivos para almacenar los datos de la app. Como alternativa, puede utilizar una base de datos como servicio de {{site.data.keyword.Bluemix_notm}} y almacenar los datos en la nube.
 {: shortdesc}
 
 **¿Qué debo tener en cuenta cuando añada almacenamiento de archivos a un conjunto con estado?** </br>
 Para añadir almacenamiento a un conjunto con estado, debe especificar la configuración del almacenamiento en la sección `volumeClaimTemplates` del archivo YAML del conjunto con estado. `volumeClaimTemplates` constituye la base para el PVC y puede incluir la clase de almacenamiento y el tamaño o IOPS del almacenamiento de archivos que desea suministrar. Sin embargo, si desea incluir etiquetas en `volumeClaimTemplates`, Kubernetes no incluye estas etiquetas al crear el PVC. En su lugar, debe añadir las etiquetas directamente al conjunto con estado.
 
-**Importante:** no se pueden desplegar dos conjuntos con estado al mismo tiempo. Si intenta crear un conjunto con estado antes de que otro se despliegue por completo, el despliegue de su conjunto con estado puede dar lugar a resultados inesperados.
+No se pueden desplegar dos conjuntos con estado al mismo tiempo. Si intenta crear un conjunto con estado antes de que otro se despliegue por completo, el despliegue de su conjunto con estado puede dar lugar a resultados inesperados.
+{: important}
 
 **¿Cómo se crea un conjunto con estado en una zona específica?** </br>
-En un clúster multizona, puede especificar la zona y la región en las que desea crear el conjunto con estado en la sección `spec.selector.matchLabels` y en la sección `spec.template.metadata.labels` del archivo YAML del conjunto con estado. Como alternativa, puede añadir estas etiquetas a una [clase de almacenamiento personalizada](cs_storage_basics.html#customized_storageclass) y utilizar esta clase de almacenamiento en la sección `volumeClaimTemplates` de su conjunto con estado. 
+En un clúster multizona, puede especificar la zona y la región en las que desea crear el conjunto con estado en la sección `spec.selector.matchLabels` y en la sección `spec.template.metadata.labels` del archivo YAML del conjunto con estado. Como alternativa, puede añadir estas etiquetas a una [clase de almacenamiento personalizada](cs_storage_basics.html#customized_storageclass) y utilizar esta clase de almacenamiento en la sección `volumeClaimTemplates` de su conjunto con estado.
 
 **¿Qué opciones tengo para añadir almacenamiento de archivos a un conjunto con estado?** </br>
 Si desea crear automáticamente el PVC al crear el conjunto con estado, utilice el [suministro dinámico](#dynamic_statefulset). También puede optar por [realizar un suministro previo de los PVC o utilizar PVC existentes](#static_statefulset) con su conjunto con estado.  
@@ -791,7 +816,7 @@ Cuando [suministre dinámicamente los PVC al crear el conjunto con estado](#dyna
 
 Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 
-1. Siga los pasos del 1 al 3 de la sección [Adición de almacenamiento de archivos a aplicaciones](#add_file) para crear un PVC para cada réplica del conjunto con estado. Asegúrese de crear el PVC con un nombre que siga el formato siguiente: `<volume_name>-<statefulset_name>-<replica_number>`.
+1. Siga los pasos del 1 al 3 de la sección [Adición de almacenamiento de archivos a apps](#add_file) para crear un PVC para cada réplica del conjunto con estado. Asegúrese de crear el PVC con un nombre que siga el formato siguiente: `<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`**: utilice el nombre que desea especificar en la sección `spec.volumeClaimTemplates.metadata.name`
 del conjunto con estado, como por ejemplo `nginxvol`.
    - **`<statefulset_name>`**: utilice el nombre que desea especificar en la sección ` metadata.name` del conjunto con estado, como por ejemplo `nginx_statefulset`.
@@ -804,7 +829,8 @@ del conjunto con estado, como por ejemplo `nginxvol`.
    - **`metadata.name`**: utilice el `<statefulset_name>` que ha utilizado en el paso anterior.
    - **`spec.replicas`**: escriba el número de réplicas que desea crear para el conjunto con estado. El número de réplicas debe ser igual al número de PVC que ha creado anteriormente.
 
-   **Nota:** si ha creado los PVC en diferentes zonas, no incluya una etiqueta de región o zona en el conjunto con estado.
+   Si ha creado los PVC en diferentes zonas, no incluya una etiqueta de región o zona en el conjunto con estado.
+   {: note}
 
 3. Verifique que los PVC se utilizan en los pods de réplica del conjunto con estado.
    1. Obtenga una lista de pods en el clúster. Identifique los pods que pertenecen a su conjunto con estado.
@@ -837,6 +863,143 @@ del conjunto con estado, como por ejemplo `nginxvol`.
 <br />
 
 
+## Cambio del tamaño e IOPS del dispositivo de almacenamiento existente
+{: #change_storage_configuration}
+
+Si desea aumentar la capacidad de almacenamiento o el rendimiento, puede modificar el volumen existente. 
+{: shortdesc}
+
+Para ver preguntas sobre la facturación y encontrar los pasos sobre cómo utilizar la consola de
+{{site.data.keyword.Bluemix_notm}} para modificar el almacenamiento, consulte
+[Ampliación de la capacidad de compartición de archivos](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity). 
+{: tip}
+
+1. Liste las PVC del clúster y tome nota del nombre del PV asociado en la columna **VOLUME**. 
+   ```
+   kubectl get pvc
+   ```
+   {: pre}
+   
+   Salida de ejemplo: 
+   ```
+   NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-file-bronze    147d
+   ```
+   {: screen}
+   
+2. Recupere los valores de **StorageType**, **volumeId** y **server** del almacenamiento de archivos físico asociado con la PVC mostrando una lista de los detalles del PV al que está vinculada la PVC. Sustituya `<pv_name>` por el nombre del PV que ha recuperado en el paso anterior. El tipo de almacenamiento, ID de volumen y nombre de servidor se muestran en la sección
+**Labels** de la salida de la CLI. 
+   ```
+   kubectl describe pv <pv_name>
+   ```
+   {: pre}
+   
+   Salida de ejemplo: 
+   ```
+   Name:            pvc-4b62c704-5f77-11e8-8a75-b229c11ba64a
+   Labels:          CapacityGb=20
+                    Datacenter=dal10
+                    Iops=2
+                    StorageType=ENDURANCE
+                    Username=IBM02SEV1543159_6
+                    billingType=hourly
+                    failure-domain.beta.kubernetes.io/region=us-south
+                    failure-domain.beta.kubernetes.io/zone=dal10
+                    path=IBM01SEV1234567_8ab12t
+                    server=fsf-dal1001g-fz.adn.networklayer.com
+                    volumeId=12345678
+   ...
+   ```
+   {: screen}
+
+3. Modifique el tamaño o las IOPS del volumen en su cuenta de infraestructura de IBM Cloud (SoftLayer). 
+
+   Ejemplo para almacenamiento de rendimiento: 
+   ```
+   ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-iops <iops>
+   ```
+   {: pre}
+   
+   Ejemplo para almacenamiento resistente: 
+   ```
+   ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-tier <iops>
+   ```
+   {: pre}
+   
+   <table>
+   <caption>Explicación de los componentes del mandato</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>&lt;volume_ID&gt;</code></td>
+   <td>Especifique el ID del volumen que ha recuperado anteriormente.</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-size&gt;</code></td>
+   <td>Especifique el nuevo tamaño del volumen en gigabytes (Gi). Para ver qué valores son válidos, consulte
+[Cómo decidir la configuración del almacenamiento de archivos](#predefined_storageclass). El tamaño que especifique debe ser mayor o igual que el tamaño actual del volumen. Si no especifica un tamaño nuevo, se utilizará el tamaño actual del volumen. </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-iops&gt;</code></td>
+   <td>Solo para el almacenamiento de rendimiento. Especifique el nuevo número de IOPS que desee. Para ver qué valores de IOPS son válidos, consulte
+[Cómo decidir la configuración del almacenamiento de archivos](#predefined_storageclass). Si no especifica las IOPS, se utilizará el valor de IOPS actual. <p class="note">Si la proporción original de IOPS/GB del volumen es menor que 0,3, la nueva proporción de IOPS/GB debe ser menor que 0,3. Si la proporción original de IOPS/GB del volumen es mayor o igual que 0,3, la nueva proporción de IOPS/GB del volumen debe ser mayor o igual que 0,3.</p> </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-tier&gt;</code></td>
+   <td>Solo para el almacenamiento resistente. Especifique el nuevo número de IOPS por GB que desee. Para ver qué valores de IOPS son válidos, consulte
+[Cómo decidir la configuración del almacenamiento de archivos](#predefined_storageclass). Si no especifica las IOPS, se utilizará el valor de IOPS actual. <p class="note">Si la proporción original de IOPS/GB del volumen es menor que 0,25, la nueva proporción de IOPS/GB debe ser menor que 0,25. Si la proporción original de IOPS/GB del volumen es mayor o igual que 0,25, la nueva proporción de IOPS/GB del volumen debe ser mayor o igual que 0,25.</p> </td>
+   </tr>
+   </tbody>
+   </table>
+   
+   Salida de ejemplo: 
+   ```
+   El pedido 31020713 se ha realizado correctamente.
+   > Almacenamiento como un servicio
+
+   > 40 GB
+
+   > 2 IOPS por GB
+
+   > 20 GB de espacio de almacenamiento (espacio para instantáneas)
+
+   Puede ejecutar 'ibmcloud sl file volume-list --order 12345667' para encontrar este volumen de archivo después de que esté listo.
+   ```
+   {: screen}
+   
+4. Si ha cambiado el tamaño del volumen y utiliza el volumen en un pod, inicie sesión en el pod para verificar el nuevo tamaño. 
+   1. Obtenga una lista de todos los pods que utilizan PVC.
+      ```
+      kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+      ```
+      {: pre}
+      
+      Los pods se devuelven con el formato: `<pod_name>: <pvc_name>`. 
+   2. Inicie una sesión en el pod. 
+      ```
+      kubectl exec -it <pod_name> bash
+      ```
+      {: pre}
+      
+   3. Muestre las estadísticas de uso de disco y busque la vía de acceso de servidor del volumen que ha recuperado anteriormente. 
+      ```
+      df -h
+      ```
+      {: pre}
+      
+      Salida de ejemplo: 
+      ```
+      Filesystem                                                      Size  Used Avail Use% Mounted on
+      overlay                                                          99G  4.8G   89G   6% /
+      tmpfs                                                            64M     0   64M   0% /dev
+      tmpfs                                                           7.9G     0  7.9G   0% /sys/fs/cgroup
+      fsf-dal1001g-fz.adn.networklayer.com:/IBM01SEV1234567_6/data01   40G     0   40G   0% /myvol
+      ```
+      {: screen}
+   
+
 ## Cambio de la versión predeterminada de NFS
 {: #nfs_version}
 
@@ -845,7 +1008,8 @@ La versión del almacenamiento de archivos determina el protocolo que se utiliza
 
 Para cambiar la versión predeterminada de NFS, puede crear una nueva clase de almacenamiento para suministrar de forma dinámica el almacenamiento de archivos en su clúster o elegir cambiar un PV existente que esté montado en el pod.
 
-**Importante:** para aplicar las últimas actualizaciones de seguridad y para un mejor rendimiento, utilice la versión de NFS predeterminada y no cambie a una versión anterior de NFS.
+Para aplicar las últimas actualizaciones de seguridad y para un mejor rendimiento, utilice la versión de NFS predeterminada y no cambie a una versión anterior de NFS.
+{: important}
 
 **Para crear una clase de almacenamiento personalizada con la versión deseada de NFS: **
 1. Cree una [clase de almacenamiento personalizada](#nfs_version_class) con la versión de NFS que desea suministrar.
@@ -935,12 +1099,11 @@ Consulte las opciones siguientes de copia de seguridad y restauración para el a
 
 <dl>
   <dt>Configurar instantáneas periódicas</dt>
-  <dd><p>Puede [configurar instantáneas periódicas para el almacenamiento de archivos](/docs/infrastructure/FileStorage/snapshots.html), que son imágenes de solo lectura que capturan el estado de la instancia en un punto en el tiempo. Para almacenar la instantánea, debe solicitar espacio de instantáneas en el almacenamiento de archivos. Las instantáneas se almacenan en la instancia de almacenamiento existente dentro de la misma zona. Puede restaurar datos desde una instantánea si un usuario elimina accidentalmente datos importantes del volumen. <strong>Nota</strong>: si tiene una cuenta dedicada, debe [abrir una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).</br></br> <strong>Para crear una instantánea para su volumen: </strong><ol><li>[Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).</li><li>Inicie una sesión en la CLI de `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
-    </code></pre></li><li>Liste los PV en su clúster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenga los detalles de los PV para los que desea crear espacio de instantáneas y anote el ID de volumen, el tamaño y las IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> Encontrará el ID de volumen, el tamaño y las IOPS en la sección <strong>Labels</strong> de la salida de la CLI. </li><li>Cree el tamaño de instantánea para el volumen existente con los parámetros que ha recuperado en el paso anterior. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Espere a que se haya creado el tamaño de la instantánea. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>El tamaño de la instantánea se suministra de forma correcta cuando el valor de <strong>Snapshot Size (GB)</strong> en la salida de la CLI pasa de 0 al tamaño solicitado. </li><li>Cree la instantánea para el volumen y anote el ID de la instantánea que se crea para usted. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verifique que la instantánea se haya creado correctamente. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Para restaurar los datos desde una instantánea en un volumen existente: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
+  <dd><p>Puede [configurar instantáneas periódicas para el almacenamiento de archivos](/docs/infrastructure/FileStorage/snapshots.html), que son imágenes de solo lectura que capturan el estado de la instancia en un punto en el tiempo. Para almacenar la instantánea, debe solicitar espacio de instantáneas en el almacenamiento de archivos. Las instantáneas se almacenan en la instancia de almacenamiento existente dentro de la misma zona. Puede restaurar datos desde una instantánea si un usuario elimina accidentalmente datos importantes del volumen. <p class="note">Si tiene una cuenta dedicada, debe [abrir un caso de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).</p></br> <strong>Para crear una instantánea para su volumen: </strong><ol><li>[Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).</li><li>Inicie una sesión en la CLI de `ibmcloud sl`. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>Liste los PV en su clúster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenga los detalles de los PV para los que desea crear espacio de instantáneas y anote el ID de volumen, el tamaño y las IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> Encontrará el ID de volumen, el tamaño y las IOPS en la sección <strong>Labels</strong> de la salida de la CLI. </li><li>Cree el tamaño de instantánea para el volumen existente con los parámetros que ha recuperado en el paso anterior. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Espere a que se haya creado el tamaño de la instantánea. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>El tamaño de la instantánea se suministra de forma correcta cuando el valor de <strong>Snapshot Size (GB)</strong> en la salida de la CLI pasa de 0 al tamaño solicitado. </li><li>Cree la instantánea para el volumen y anote el ID de la instantánea que se crea para usted. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verifique que la instantánea se haya creado correctamente. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Para restaurar los datos desde una instantánea en un volumen existente: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Realice una réplica de las instantáneas en otra zona</dt>
  <dd><p>Para proteger los datos ante un error de la zona, puede [replicar instantáneas](/docs/infrastructure/FileStorage/replication.html#replicating-data) en una instancia de almacenamiento de archivos configurada en otra zona. Los datos únicamente se pueden replicar desde el almacenamiento primario al almacenamiento de copia de seguridad. No puede montar una instancia replicada de almacenamiento de archivos en un clúster. Cuando el almacenamiento primario falla, puede establecer de forma manual el almacenamiento de copia de seguridad replicado para que sea el primario. A continuación, puede montarla en el clúster. Una vez restaurado el almacenamiento primario, puede restaurar los datos del almacenamiento de copia de seguridad. <strong>Nota</strong>: si tiene una cuenta dedicada, no puede replicar instantáneas en otra zona.</p></dd>
  <dt>Duplicar almacenamiento</dt>
- <dd><p>Puede [duplicar la instancia de almacenamiento de archivos](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage) en la misma zona que la instancia de almacenamiento original. La instancia duplicada tiene los mismos datos que la instancia de almacenamiento original en el momento de duplicarla. A diferencia de las réplicas, utilice los duplicados como una instancia de almacenamiento independiente de la original. Para duplicar, primero [configure instantáneas para el volumen](/docs/infrastructure/FileStorage/snapshots.html). <strong>Nota</strong>: si tiene una cuenta dedicada, debe <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">abrir una incidencia de soporte</a>.</p></dd>
+ <dd><p>Puede [duplicar la instancia de almacenamiento de archivos](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage) en la misma zona que la instancia de almacenamiento original. La instancia duplicada tiene los mismos datos que la instancia de almacenamiento original en el momento de duplicarla. A diferencia de las réplicas, utilice los duplicados como una instancia de almacenamiento independiente de la original. Para duplicar, primero [configure instantáneas para el volumen](/docs/infrastructure/FileStorage/snapshots.html). <strong>Nota</strong>: Si tiene una cuenta dedicada, debe <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">abrir un caso de soporte</a>.</p></dd>
   <dt>Haga copia de seguridad de los datos en {{site.data.keyword.cos_full}}</dt>
   <dd><p>Puede utilizar la [**imagen ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) para utilizar un pod de copia de seguridad y restauración en el clúster. Este pod contiene un script para ejecutar una copia de seguridad puntual o periódico para cualquier reclamación de volumen persistente (PVC) en el clúster. Los datos se almacenan en la instancia de {{site.data.keyword.cos_full}} que ha configurado en una zona.</p>
   <p>Para aumentar la alta disponibilidad de los datos y proteger la app ante un error de la zona, configure una segunda instancia de {{site.data.keyword.cos_full}} y replique los datos entre las zonas. Si necesita restaurar datos desde la instancia de {{site.data.keyword.cos_full}}, utilice el script de restauración que se proporciona con la imagen.</p></dd>
@@ -977,7 +1140,7 @@ Consulte las opciones siguientes de copia de seguridad y restauración para el a
 </tr>
 <tr>
 <td>Tipo</td>
-<td>[Almacenamiento resistente ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Almacenamiento resistente](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>Sistema de archivos</td>
@@ -1023,7 +1186,7 @@ Consulte las opciones siguientes de copia de seguridad y restauración para el a
 </tr>
 <tr>
 <td>Tipo</td>
-<td>[Almacenamiento resistente ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Almacenamiento resistente](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>Sistema de archivos</td>
@@ -1068,7 +1231,7 @@ Consulte las opciones siguientes de copia de seguridad y restauración para el a
 </tr>
 <tr>
 <td>Tipo</td>
-<td>[Almacenamiento resistente ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Almacenamiento resistente](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>Sistema de archivos</td>
@@ -1113,7 +1276,7 @@ Consulte las opciones siguientes de copia de seguridad y restauración para el a
 </tr>
 <tr>
 <td>Tipo</td>
-<td>[Rendimiento ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://knowledgelayer.softlayer.com/topic/performance-storage)</td>
+<td>[Rendimiento](/docs/infrastructure/FileStorage/index.html#provisioning-with-performance)</td>
 </tr>
 <tr>
 <td>Sistema de archivos</td>

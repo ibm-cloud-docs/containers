@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -77,37 +80,35 @@ Revise los siguientes motivos por los que no aparecen sus registros del clúster
 
 Para probar los cambios que ha realizado durante la resolución de problemas, puede desplegar *Noisy*, un pod de ejemplo que produce varios sucesos de registro, en un nodo trabajador en el clúster.
 
-  1. Para el clúster en el que desea comenzar a generar registros: [Inicie la sesión en la cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 
-  2. Cree el archivo de configuración `deploy-noisy.yaml`.
-
-      ```
-      apiVersion: v1
+1. Cree el archivo de configuración `deploy-noisy.yaml`.
+    ```
+    apiVersion: v1
       kind: Pod
       metadata:
         name: noisy
       spec:
         containers:
-        - name: noisy
+      - name: noisy
           image: ubuntu:16.04
           command: ["/bin/sh"]
           args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
           imagePullPolicy: "Always"
-        ```
-        {: codeblock}
+      ```
+      {: codeblock}
 
-  3. Ejecute el archivo de configuración en el contexto del clúster.
+2. Ejecute el archivo de configuración en el contexto del clúster.
+    ```
+    kubectl apply -f noisy.yaml
+    ```
+    {:pre}
 
-        ```
-        kubectl apply -f noisy.yaml
-        ```
-        {:pre}
-
-  4. Después de unos minutos, verá los registros en el panel. Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster. Si ha especificado un espacio durante la creación del clúster, vaya al espacio.
-      - EE.UU. sur y EE.UU. este: https://logging.ng.bluemix.net
-      - RU sur: https://logging.eu-gb.bluemix.net
-      - UE central: https://logging.eu-fra.bluemix.net
-      - AP sur: https://logging.au-syd.bluemix.net
+3. Después de unos minutos, verá los registros en el panel. Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster. Si ha especificado un espacio durante la creación del clúster, vaya al espacio.
+    - EE.UU. sur y EE.UU. este: https://logging.ng.bluemix.net
+    - RU sur: https://logging.eu-gb.bluemix.net
+    - UE central: https://logging.eu-fra.bluemix.net
+    - AP sur: https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -139,20 +140,15 @@ Suprima el pod `kube-dashboard` para forzar un reinicio. El pod se volverá a cr
 {: shortdesc}
 
 -  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plug-ins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
-
 -   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/bluemix/support/#status).
 -   Publique una pregunta en [{{site.data.keyword.containerlong_notm}}Slack ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
-
     Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
     {: tip}
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
-
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containerlong_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
     -   Para las preguntas relativas a las instrucciones de inicio y el servicio, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
     Consulte [Obtención de ayuda](/docs/get-support/howtogetsupport.html#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
-
--   Póngase en contacto con el soporte de IBM abriendo una incidencia. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
-{: tip}
+-   Póngase en contacto con el soporte de IBM abriendo un caso. Para obtener información sobre cómo abrir un caso de soporte de IBM, o sobre los niveles de soporte y las gravedades de los casos, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`.
+{: tip}
 

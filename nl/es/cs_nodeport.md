@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -45,7 +48,8 @@ El siguiente diagrama muestra cómo se dirige la comunicación desde Internet a 
 
 4. La solicitud se reenvía a la dirección IP privada del pod en el que se ha desplegado la app. Si se despliegan varias instancias de app en el clúster, el servicio NodePort direcciona las solicitudes entre los pods de app.
 
-**Nota:** La dirección IP pública del nodo trabajador no es permanente. Cuando un nodo trabajador se elimina o se vuelve a crear, se le asigna una nueva dirección IP pública. Puede utilizar el servicio NodePort para probar el acceso público para la app o cuando se necesita acceso público solo durante un breve periodo de tiempo. Si necesita una dirección IP pública estable y más disponibilidad para el servicio, exponga la app utilizando un [servicio LoadBalancer](cs_loadbalancer.html) o [Ingress](cs_ingress.html).
+La dirección IP pública del nodo trabajador no es permanente. Cuando un nodo trabajador se elimina o se vuelve a crear, se le asigna una nueva dirección IP pública. Puede utilizar el servicio NodePort para probar el acceso público para la app o cuando se necesita acceso público solo durante un breve periodo de tiempo. Si necesita una dirección IP pública estable y más disponibilidad para el servicio, exponga la app utilizando un [servicio LoadBalancer](cs_loadbalancer.html) o [Ingress](cs_ingress.html).
+{: note}
 
 <br />
 
@@ -58,7 +62,10 @@ Puede exponer la app como servicio de Kubernetes de tipo NodePort para clústere
 
 Si todavía no tiene una app lista, puede utilizar una app de ejemplo de Kubernetes denominada [Guestbook ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml).
 
-1.  En el archivo de configuración de la app, defina una sección de [servicio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/services-networking/service/). **Nota**: Para el ejemplo Guestbook, existe una sección de servicio frontal en el archivo de configuración. Para que la app Guestbook esté disponible externamente, añada el tipo de NodePort y un NodePort comprendido entre 30000 y 32767 a la sección de servicio frontal.
+1.  En el archivo de configuración de la app, defina una sección de [servicio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/services-networking/service/).
+
+    Para el ejemplo Guestbook, existe una sección de servicio frontal en el archivo de configuración. Para que la app Guestbook esté disponible externamente, añada el tipo de NodePort y un NodePort comprendido entre 30000 y 32767 a la sección de servicio frontal.
+    {: tip}
 
     Ejemplo:
 
@@ -156,7 +163,9 @@ Cuando se despliegue la app, puede utilizar la dirección IP pública de cualqui
     ```
     {: screen}
 
-    En este ejemplo, el NodePort es `30872`.</br>
-    **Nota:** Si la sección **Endpoints** visualiza `<none>`, compruebe los `<selectorkey>` y `<selectorvalue>` que utiliza en la sección `spec.selector` del servicio NodePort. Asegúrese de que son los mismos que el par _clave/valor_ que utilizó en la sección `spec.template.metadata.labels` de su yaml de despliegue.
+    En este ejemplo, el NodePort es `30872`.
+
+    Si la sección **Endpoints** visualiza `<none>`, compruebe los `<selectorkey>` y `<selectorvalue>` que utiliza en la sección `spec.selector` del servicio NodePort. Asegúrese de que son los mismos que el par _clave/valor_ que utilizó en la sección `spec.template.metadata.labels` de su yaml de despliegue.
+    {: note}
 
 3.  Forme el URL con el NodePort y las direcciones IP del nodo trabajador. Ejemplo: `http://192.0.2.23:30872`

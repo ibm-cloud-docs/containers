@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -29,8 +32,9 @@ En estos casos de uso se muestra cómo pueden aprovechar las cargas de trabajo d
 {: #uc_shipping}
 
 Un ejecutivo de TI dispone de sistemas de direccionamiento y de planificación de envíos a nivel mundial con los que interactúan sus asociados. Los asociados necesitan información de última hora de estos sistemas que acceden a datos de dispositivos IoT. Sin embargo, estos sistemas no podían escalarse en todo el mundo y ofrecer la alta disponibilidad necesaria.
+{: shortdesc}
  
- Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} permite escalar las apps contenerizadas con una disponibilidad del 99,999 % para satisfacer las crecientes demandas. Se producen despliegues de apps 40 veces al día cuando los desarrolladores pueden experimentar con facilidad, enviando cambios a los sistemas de desarrollo y de prueba rápidamente. La plataforma IoT facilita el acceso a los datos de IoT. 
+Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} permite escalar las apps contenerizadas con una disponibilidad del 99,999 % para satisfacer las crecientes demandas. Se producen despliegues de apps 40 veces al día cuando los desarrolladores pueden experimentar con facilidad, enviando cambios a los sistemas de desarrollo y de prueba rápidamente. La plataforma IoT facilita el acceso a los datos de IoT. 
  
 Tecnologías clave:    
 * [Multiregiones para el ecosistema de asociados ](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)
@@ -117,6 +121,7 @@ Solución técnica:
 {: #uc_airline}
 
 Un ejecutivo de RR.HH. (CHRO) necesita un nuevo sitio de beneficios de RR.HH. con un chatbot innovador, pero con sus herramientas de desarrollo y su plataforma actuales el tiempo que se tarda en activar las apps es demasiado largo. Esta situación incluye esperas largas para la adquisición de hardware.
+{: shortdesc}
 
 Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} agiliza y simplifica el desarrollo de cálculo. Los desarrolladores pueden experimentar fácilmente, impulsando cambios en los sistemas de desarrollo y prueba rápidamente con las cadenas de herramientas abiertas. Sus herramientas tradicionales de desarrollo de software adquieren un nuevo impulso cuando se incorpora IBM Watson Assistant. El nuevo sitio de beneficios se creó en menos de 3 semanas.
 
@@ -131,7 +136,7 @@ Tecnologías clave:
 * Se esperaba que las características interactivas, como un chatbot, ayudaran a comunicar las nuevas políticas de RR.HH. a los empleados existentes.
 * Debido al crecimiento del número de empleados, el tráfico del sitio está aumentando, pero su presupuesto de infraestructura sigue siendo el mismo. 
 * El equipo de RR.HH. tuvo que moverse más rápido: desplegar las nuevas funciones del sitio rápidamente y publicar cambios de última hora en los beneficios con frecuencia. 
-* El periodo de inscripción dura dos semanas, por lo que no se tolera tiempo de inactividad para la nueva aplicación.
+* El periodo de inscripción dura dos semanas, por lo que no se tolera tiempo de inactividad para la nueva app.
 
 **La solución**
 
@@ -154,7 +159,7 @@ El desarrollo acelerado constituye una victoria clave para el ejecutivo de RR.HH
 
 Con {{site.data.keyword.containerlong_notm}}, pasaron de un hardware sobredimensionado en un centro de datos privado a un cálculo personalizable que reduce las operaciones de TI, el mantenimiento y la energía. Para alojar el sitio de recursos humanos, pudieron diseñar fácilmente clústeres de Kubernetes que se ajustaran a sus necesidades de CPU, RAM y almacenamiento. Otro factor para reducir los costes de personal es que IBM gestiona Kubernetes, de modo que los desarrolladores se pueden centrar en ofrecer a los empleados una mejor experiencia para inscribirse en los beneficios ofrecidos.
 
-{{site.data.keyword.containerlong_notm}} proporciona recursos de cálculo escalables y los paneles de control de DevOps asociados para crear, escalar y eliminar servicios según demanda. Mediante el uso de la tecnología de contenedores estándar del sector, se pueden desarrollar apps rápidamente y se pueden compartir entre los entornos de desarrollo, prueba y producción. Esta configuración proporciona la ventaja inmediata de la escalabilidad. Gracias al despliegue de Kubernetes y a los objetos de tiempo de ejecución, el equipo de RR.HH. puede supervisar y gestionar las actualizaciones de las apps de forma fiable. También pueden duplicar y escalar las apps mediante el uso de reglas definidas y el orquestador automático de Kubernetes.
+{{site.data.keyword.containerlong_notm}} proporciona recursos de cálculo escalables y los paneles de control de DevOps asociados para crear, escalar y eliminar apps y servicios según demanda. Mediante el uso de la tecnología de contenedores estándar del sector, se pueden desarrollar apps rápidamente y se pueden compartir entre los entornos de desarrollo, prueba y producción. Esta configuración proporciona la ventaja inmediata de la escalabilidad. Gracias al despliegue de Kubernetes y a los objetos de tiempo de ejecución, el equipo de RR.HH. puede supervisar y gestionar las actualizaciones de las apps de forma fiable. También pueden duplicar y escalar las apps mediante el uso de reglas definidas y el orquestador automático de Kubernetes.
 
 **Paso 1: Contenedores, microservicios y Garage Method**
 * Las apps se organizan en un conjunto de microservicios cooperativos que se ejecuten en {{site.data.keyword.containerlong_notm}}. La arquitectura representa las áreas funcionales de la app con más problemas de calidad.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,11 +13,14 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
- 
+
 
 
 # Resolución de problemas del almacenamiento del clúster
@@ -350,7 +353,7 @@ Actualice el sistema de archivos en el PV existente de `ext4` a `XFS`.
 {: #cos_helm_fails}
 
 {: tsSymptoms}
-Cuando instala el plugin `ibmc` Helm de {{site.data.keyword.cos_full_notm}}, la instalación falla con el error siguiente: 
+Cuando instala el plugin `ibmc` Helm de {{site.data.keyword.cos_full_notm}}, la instalación falla con el error siguiente:
 ```
 Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
 ```
@@ -360,13 +363,13 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 Cuando se instala el plugin `ibmc` Helm, se crea un enlace simbólico desde el directorio `./helm/plugins/helm-ibmc` al directorio donde se encuentra el plugin `ibmc` Helm en el sistema local, que normalmente se encuentra en `./ibmcloud-object-storage-plugin/helm-ibmc`. Cuando se elimina el plugin `ibmc` Helm del sistema local o se mueve el directorio del plugin `ibmc` a una ubicación distinta, el enlace simbólico no se elimina.
 
 {: tsResolve}
-1. Elimine el plugin Helm de {{site.data.keyword.cos_full_notm}}. 
+1. Elimine el plugin Helm de {{site.data.keyword.cos_full_notm}}.
    ```
    rm -rf ~/.helm/plugins/helm-ibmc
    ```
    {: pre}
-   
-2. [Instale {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos). 
+
+2. [Instale {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos).
 
 <br />
 
@@ -375,33 +378,35 @@ Cuando se instala el plugin `ibmc` Helm, se crea un enlace simbólico desde el d
 {: #cos_secret_access_fails}
 
 {: tsSymptoms}
-Cuando se crea la PVC o se despliega un pod que monta la PVC, la creación o el despliegue fallan. 
+Cuando se crea la PVC o se despliega un pod que monta la PVC, la creación o el despliegue fallan.
 
-- Mensaje de error de ejemplo para un error de creación de PVC: 
+- Mensaje de error de ejemplo para un error de creación de PVC:
   ```
   pvc-3:1b23159vn367eb0489c16cain12345:cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
   ```
   {: screen}
 
-- Mensaje de error de ejemplo para un error de creación de pod: 
+- Mensaje de error de ejemplo para un error de creación de pod:
   ```
   persistentvolumeclaim "pvc-3" not found (repeated 3 times)
   ```
   {: screen}
-  
+
 {: tsCauses}
-El secreto de Kubernetes donde se almacenan las credenciales de servicio de {{site.data.keyword.cos_full_notm}}, la PVC y el pod no están en el mismo espacio de nombres de Kubernetes. Cuando se despliega el secreto en un espacio de nombres distinto que la PVC o el pod, no se puede acceder al secreto. 
+El secreto de Kubernetes donde se almacenan las credenciales de servicio de {{site.data.keyword.cos_full_notm}}, la PVC y el pod no están en el mismo espacio de nombres de Kubernetes. Cuando se despliega el secreto en un espacio de nombres distinto que la PVC o el pod, no se puede acceder al secreto.
 
 {: tsResolve}
-1. Liste los secretos del clúster y revise el espacio de nombres de Kubernetes en el que se ha creado el secreto de Kubernetes para la instancia de servicio de {{site.data.keyword.cos_full_notm}}. El secreto debe mostrar `ibm/ibmc-s3fs` como **Tipo**. 
+
+
+1. Liste los secretos del clúster y revise el espacio de nombres de Kubernetes en el que se ha creado el secreto de Kubernetes para la instancia de servicio de {{site.data.keyword.cos_full_notm}}. El secreto debe mostrar `ibm/ibmc-s3fs` como **Tipo**.
    ```
    kubectl get secrets --all-namespaces
    ```
    {: pre}
-   
-2. Compruebe el archivo de configuración YAML para la PVC y el pod para verificar que ha utilizado el mismo espacio de nombres. Si desea desplegar un pod en un espacio de nombres distinto al del secreto, [cree otro secreto](cs_storage_cos.html#create_cos_secret) en el espacio de nombres deseado. 
-   
-3. Cree la PVC o despliegue el pod en el espacio de nombres deseado. 
+
+2. Compruebe el archivo de configuración YAML para la PVC y el pod para verificar que ha utilizado el mismo espacio de nombres. Si desea desplegar un pod en un espacio de nombres distinto al del secreto, [cree otro secreto](cs_storage_cos.html#create_cos_secret) en el espacio de nombres deseado.
+
+3. Cree la PVC o despliegue el pod en el espacio de nombres deseado.
 
 <br />
 
@@ -410,7 +415,7 @@ El secreto de Kubernetes donde se almacenan las credenciales de servicio de {{si
 {: #cred_failure}
 
 {: tsSymptoms}
-Cuando crea la PVC, ve un mensaje de error similar a uno de los siguientes: 
+Cuando crea la PVC, ve un mensaje de error similar a uno de los siguientes:
 
 ```
 SignatureDoesNotMatch: The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. For more information, see REST Authentication and SOAP Authentication for details.
@@ -418,7 +423,7 @@ SignatureDoesNotMatch: The request signature we calculated does not match the si
 {: screen}
 
 ```
-AccessDenied: Access Denied status code: 403 
+AccessDenied: Access Denied status code: 403
 ```
 {: screen}
 
@@ -432,22 +437,22 @@ Las credenciales de servicio de {{site.data.keyword.cos_full_notm}} que utiliza 
 
 {: tsResolve}
 1. En la navegación de la página de detalles de servicio, pulse **Credenciales de servicio**.
-2. Busque las credenciales y, a continuación, pulse **Ver credenciales**. 
-3. Verifique que utiliza el valor correcto de **access_key_id** y **secret_access_key** en el secreto de Kubernetes. Si no es así, actualice el secreto de Kubernetes. 
-   1. Obtenga el YAML que ha utilizado para crear el secreto. 
+2. Busque las credenciales y, a continuación, pulse **Ver credenciales**.
+3. Verifique que utiliza el valor correcto de **access_key_id** y **secret_access_key** en el secreto de Kubernetes. Si no es así, actualice el secreto de Kubernetes.
+   1. Obtenga el YAML que ha utilizado para crear el secreto.
       ```
       kubectl get secret <secret_name> -o yaml
       ```
       {: pre}
-      
-   2. Actualice los valores de **access_key_id** y **secret_access_key**. 
-   3. Actualice el secreto. 
+
+   2. Actualice los valores de **access_key_id** y **secret_access_key**.
+   3. Actualice el secreto.
       ```
       kubectl apply -f secret.yaml
       ```
       {: pre}
-      
-4. En la sección **iam_role_crn**, verifique que tiene el rol de `Escritor` o `Gestor`. Si no tiene el rol correcto, debe [crear nuevas credenciales de servicio de {{site.data.keyword.cos_full_notm}} con el permiso correcto](cs_storage_cos.html#create_cos_service). A continuación, actualice el secreto existente o [cree un nuevo secreto](cs_storage_cos.html#create_cos_secret) con las nuevas credenciales de servicio. 
+
+4. En la sección **iam_role_crn**, verifique que tiene el rol de `Escritor` o `Gestor`. Si no tiene el rol correcto, debe [crear nuevas credenciales de servicio de {{site.data.keyword.cos_full_notm}} con el permiso correcto](cs_storage_cos.html#create_cos_service). A continuación, actualice el secreto existente o [cree un nuevo secreto](cs_storage_cos.html#create_cos_secret) con las nuevas credenciales de servicio.
 
 <br />
 
@@ -455,7 +460,7 @@ Las credenciales de servicio de {{site.data.keyword.cos_full_notm}} que utiliza 
 ## Almacenamiento de objetos: no se puede acceder a un grupo existente
 
 {: tsSymptoms}
-Cuando se crea la PVC, no se puede acceder al grupo de {{site.data.keyword.cos_full_notm}}. Aparece un mensaje de error similar al siguiente: 
+Cuando se crea la PVC, no se puede acceder al grupo de {{site.data.keyword.cos_full_notm}}. Aparece un mensaje de error similar al siguiente:
 
 ```
 Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:1b2345678b69175abc98y873e2:cannot access bucket <bucket_name>: NotFound: Not Found
@@ -463,13 +468,13 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: screen}
 
 {: tsCauses}
-Es posible que haya utilizado la clase de almacenamiento errónea para acceder al grupo, o que haya intentado acceder a un grupo que no ha creado. 
+Es posible que haya utilizado la clase de almacenamiento errónea para acceder al grupo, o que haya intentado acceder a un grupo que no ha creado.
 
 {: tsResolve}
-1. Desde el [panel de control de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/dashboard/apps), seleccione la instancia de servicio de {{site.data.keyword.cos_full_notm}}. 
-2. Seleccione **Grupos**. 
-3. Revise la información de **Clase** y **Ubicación** para el grupo existente. 
-4. Elija la [clase de almacenamiento](cs_storage_cos.html#storageclass_reference) adecuada. 
+1. Desde el [panel de control de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/dashboard/apps), seleccione la instancia de servicio de {{site.data.keyword.cos_full_notm}}.
+2. Seleccione **Grupos**.
+3. Revise la información de **Clase** y **Ubicación** para el grupo existente.
+4. Elija la [clase de almacenamiento](cs_storage_cos.html#storageclass_reference) adecuada.
 
 <br />
 
@@ -478,25 +483,25 @@ Es posible que haya utilizado la clase de almacenamiento errónea para acceder a
 {: #cos_nonroot_access}
 
 {: tsSymptoms}
-Ha subido archivos a la instancia de servicio de {{site.data.keyword.cos_full_notm}} utilizando la GUI o la API REST. Cuando intenta acceder a estos archivos con un usuario no root que ha definido con `runAsUser` en el despliegue de la app, se deniega el acceso a los archivos. 
+Ha subido archivos a la instancia de servicio de {{site.data.keyword.cos_full_notm}} utilizando la consola o la API REST. Cuando intenta acceder a estos archivos con un usuario no root que ha definido con `runAsUser` en el despliegue de la app, se deniega el acceso a los archivos.
 
 {: tsCauses}
-En Linux, un archivo o un directorio tienen 3 grupos de acceso: `Owner`, `Group` y `Other`. Cuando sube un archivo a {{site.data.keyword.cos_full_notm}} mediante la GUI o la API REST, se eliminan los permisos de `Owner`, `Group` y `Other`. El permiso de cada archivo tiene el aspecto siguiente: 
+En Linux, un archivo o un directorio tienen 3 grupos de acceso: `Owner`, `Group` y `Other`. Cuando sube un archivo a {{site.data.keyword.cos_full_notm}} mediante la consola o la API REST, se eliminan los permisos de `Owner`, `Group` y `Other`. El permiso de cada archivo tiene el aspecto siguiente:
 
 ```
 d--------- 1 root root 0 Jan 1 1970 <file_name>
 ```
 {: screen}
 
-Cuando carga un archivo utilizando el plugin de {{site.data.keyword.cos_full_notm}}, los permisos para el archivo se conservan y no se modifican. 
+Cuando carga un archivo utilizando el plugin de {{site.data.keyword.cos_full_notm}}, los permisos para el archivo se conservan y no se modifican.
 
 {: tsResolve}
-Para acceder al archivo con un usuario no root, el usuario no root debe tener permisos de lectura y escritura en el archivo. Para cambiar el permiso de un archivo como parte del despliegue del pod, es necesaria una operación de escritura. {{site.data.keyword.cos_full_notm}} no está diseñado para cargas de trabajo de escritura. La actualización de permisos durante el despliegue de pod puede impedir que el pod pase a un estado `En ejecución`. 
+Para acceder al archivo con un usuario no root, el usuario no root debe tener permisos de lectura y escritura en el archivo. Para cambiar el permiso de un archivo como parte del despliegue del pod, es necesaria una operación de escritura. {{site.data.keyword.cos_full_notm}} no está diseñado para cargas de trabajo de escritura. La actualización de permisos durante el despliegue de pod puede impedir que el pod pase a un estado `En ejecución`.
 
-Para resolver este problema, antes de montar la PVC en el pod de la app, cree otro pod para establecer el permiso correcto para el usuario no root. 
+Para resolver este problema, antes de montar la PVC en el pod de la app, cree otro pod para establecer el permiso correcto para el usuario no root.
 
-1. Compruebe los permisos de los archivos en el grupo. 
-   1. Cree un archivo de configuración para el pod `test-permission` y nombre el archivo `test-permission.yaml`. 
+1. Compruebe los permisos de los archivos en el grupo.
+   1. Cree un archivo de configuración para el pod `test-permission` y nombre el archivo `test-permission.yaml`.
       ```
       apiVersion: v1
       kind: Pod
@@ -515,38 +520,38 @@ Para resolver este problema, antes de montar la PVC en el pod de la app, cree ot
             claimName: <pvc_name>
       ```
       {: codeblock}
-        
-   2. Cree el pod `test-permission`. 
+
+   2. Cree el pod `test-permission`.
       ```
       kubectl apply -f test-permission.yaml
       ```
       {: pre}
-      
-   3. Inicie una sesión en el pod. 
+
+   3. Inicie una sesión en el pod.
       ```
       kubectl exec test-permission -it bash
       ```
       {: pre}
-   
-   4. Vaya a la vía de acceso de montaje y liste los permisos de los archivos. 
+
+   4. Vaya a la vía de acceso de montaje y liste los permisos de los archivos.
       ```
       cd test && ls -al
       ```
       {: pre}
-      
-      Salida de ejemplo: 
+
+      Salida de ejemplo:
       ```
       d--------- 1 root root 0 Jan 1 1970 <file_name>
       ```
       {: screen}
-      
-2. Suprima el pod. 
+
+2. Suprima el pod.
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-      
-3. Cree un archivo de configuración para el pod que utilice para corregir los permisos de los archivos y denomínelo `fix-permission.yaml`. 
+
+3. Cree un archivo de configuración para el pod que utilice para corregir los permisos de los archivos y denomínelo `fix-permission.yaml`.
    ```
    apiVersion: v1
    kind: Pod
@@ -568,61 +573,62 @@ Para resolver este problema, antes de montar la PVC en el pod de la app, cree ot
          claimName: <pvc_name>
     ```
     {: codeblock}
-    
-3. Cree el pod `fix-permission`. 
+
+3. Cree el pod `fix-permission`.
    ```
    kubectl apply -f fix-permission.yaml
    ```
    {: pre}
-   
+
 4. Espere a que el pod pase al estado `Completed`.  
    ```
    kubectl get pod fix-permission
    ```
    {: pre}
 
-5. Suprima el pod `fix-permission`. 
+5. Suprima el pod `fix-permission`.
    ```
    kubectl delete pod fix-permission
    ```
-   {: pre} 
-   
-5. Vuelva a crear el pod `test-permission` que ha utilizado anteriormente para comprobar los permisos. 
+   {: pre}
+
+5. Vuelva a crear el pod `test-permission` que ha utilizado anteriormente para comprobar los permisos.
    ```
    kubectl apply -f test-permission.yaml
    ```
    {: pre}
-   
-5. Verifique que los permisos de los archivos se han actualizado. 
-   1. Inicie una sesión en el pod. 
+
+5. Verifique que los permisos de los archivos se han actualizado.
+   1. Inicie una sesión en el pod.
       ```
       kubectl exec test-permission -it bash
       ```
       {: pre}
-   
-   2. Vaya a la vía de acceso de montaje y liste los permisos de los archivos. 
+
+   2. Vaya a la vía de acceso de montaje y liste los permisos de los archivos.
       ```
       cd test && ls -al
       ```
       {: pre}
 
-      Salida de ejemplo: 
+      Salida de ejemplo:
       ```
       -rwxrwx--- 1 <nonroot_userID> root 6193 Aug 21 17:06 <file_name>
       ```
       {: screen}
-      
-6. Suprima el pod `test-permission`. 
+
+6. Suprima el pod `test-permission`.
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-   
-7. Monte la PVC en la app con el usuario no root. 
 
-   **Importante:** defina el usuario no root como `runAsUser` sin establecer `fsGroup` en el YAML de despliegue al mismo tiempo. Al establecer `fsGroup`, se provoca que el plugin de {{site.data.keyword.cos_full_notm}} actualice los permisos de grupo para todos los archivos de un grupo cuando se despliega el pod. La actualización de los permisos es una operación de escritura y puede impedir que el pod pase a un estado `En ejecución`. 
+7. Monte la PVC en la app con el usuario no root.
 
-Después de establecer los permisos de archivo correctos en la instancia de servicio de {{site.data.keyword.cos_full_notm}}, no cargue archivos utilizando la GUI ni la API REST. Utilice el plugin de {{site.data.keyword.cos_full_notm}} para añadir archivos a la instancia de servicio. 
+   Defina el usuario no root como `runAsUser` sin establecer `fsGroup` en el YAML de despliegue al mismo tiempo. Al establecer `fsGroup`, se provoca que el plugin de {{site.data.keyword.cos_full_notm}} actualice los permisos de grupo para todos los archivos de un grupo cuando se despliega el pod. La actualización de los permisos es una operación de escritura y puede impedir que el pod pase a un estado `En ejecución`.
+   {: important}
+
+Después de establecer los permisos de archivo correctos en la instancia de servicio de {{site.data.keyword.cos_full_notm}}, no cargue archivos utilizando la consola ni la API REST. Utilice el plugin de {{site.data.keyword.cos_full_notm}} para añadir archivos a la instancia de servicio.
 {: tip}
 
 <br />
@@ -637,20 +643,15 @@ Después de establecer los permisos de archivo correctos en la instancia de serv
 {: shortdesc}
 
 -  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plug-ins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
-
 -   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/bluemix/support/#status).
 -   Publique una pregunta en [{{site.data.keyword.containerlong_notm}}Slack ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
-
     Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
     {: tip}
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
-
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containerlong_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
     -   Para las preguntas relativas a las instrucciones de inicio y el servicio, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
     Consulte [Obtención de ayuda](/docs/get-support/howtogetsupport.html#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
-
--   Póngase en contacto con el soporte de IBM abriendo una incidencia. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
-{: tip}
+-   Póngase en contacto con el soporte de IBM abriendo un caso. Para obtener información sobre cómo abrir un caso de soporte de IBM, o sobre los niveles de soporte y las gravedades de los casos, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
 Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`.
+{: tip}
 

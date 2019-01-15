@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -42,7 +45,9 @@ Esta guía de aprendizaje está destinada a los desarrolladores de app de Cloud 
 - [Cree un registro de imágenes privadas en {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
 - [Cree un clúster](cs_clusters.html#clusters_ui).
 - [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure).
-- [Asegúrese de que tiene los roles de plataforma **Editor**, **Operador** o **Administrador**](cs_users.html#add_users_cli).
+- Asegúrese de tener las políticas de acceso de {{site.data.keyword.Bluemix_notm}} IAM siguientes para
+{{site.data.keyword.containerlong_notm}}:
+    - [Cualquier rol de plataforma](cs_users.html#platform)
 - [Obtenga más información sobre la terminología de Docker y Kubernetes](cs_tech.html).
 
 
@@ -74,7 +79,7 @@ Obtenga su código ya listo para ser utilizado. ¿Aún no tiene un código? Pued
 
     Puesto que la app se despliega, se visualizan instrucciones para descargar, modificar y redesplegar su app con la interfaz de línea de mandatos.
 
-    c. En el paso 1 de la GUI, pulse **DESCARGAR CÓDIGO DE INICIADOR**.
+    c. En el paso 1 de las instrucciones de la consola, pulse **DESCARGAR CÓDIGO DE INICIADOR**.
 
     d. Extraiga el archivo .zip y guarde su contenido en su directorio `cf-py`.
 
@@ -262,7 +267,7 @@ Despliegue su app como un contenedor en un clúster de Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
     ```
     {: screen}
 
@@ -272,7 +277,7 @@ Despliegue su app como un contenedor en un clúster de Kubernetes.
 
 5.  [Inicie el panel de control de Kubernetes](cs_app.html#cli_dashboard).
 
-    Si selecciona su clúster en la interfaz gráfica de usuario de [{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), utilice el botón del **Panel de control de Kubernetes** para iniciar el panel de control con una pulsación.
+    Si selecciona su clúster en la [consola de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), utilice el botón del **Panel de control de Kubernetes** para iniciar el panel de control con una pulsación.
     {: tip}
 
 6. En el separador **Cargas de trabajo**, verá los recursos que ha creado.

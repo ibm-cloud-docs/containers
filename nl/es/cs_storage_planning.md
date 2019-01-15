@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -22,57 +25,60 @@ lastupdated: "2018-10-25"
 ## Elección de una solución de almacenamiento
 {: #choose_storage_solution}
 
-Antes de decidir qué tipo de almacenamiento es la solución adecuada para usted, debe conocer los requisitos de la app, el tipo de datos que desea almacenar y la frecuencia con la que desea acceder a estos datos. 
+Antes de decidir qué tipo de almacenamiento es la solución adecuada para usted, debe conocer los requisitos de la app, el tipo de datos que desea almacenar y la frecuencia con la que desea acceder a estos datos.
 {: shortdesc}
 
-1. Decida si sus datos deben estar permanentemente almacenados o si se pueden eliminar en un momento determinado. 
-   - **Almacenamiento persistente:** los datos deben seguir disponibles aunque se eliminen el contenedor, el nodo trabajador o el clúster. Utilice el almacenamiento persistente en los siguientes casos de ejemplo: 
+1. Decida si sus datos deben estar permanentemente almacenados o si se pueden eliminar en un momento determinado.
+   - **Almacenamiento persistente:** los datos deben seguir disponibles aunque se eliminen el contenedor, el nodo trabajador o el clúster. Utilice el almacenamiento persistente en los siguientes casos de ejemplo:
        - Apps con estado
        - Datos de actividad principal
        - Datos que deben estar disponibles debido a requisitos legales, como por ejemplo un periodo de retención definido
-       - Auditoría 
+       - Auditoría
        - Datos a los que se debe acceder y compartir en varias instancias de app
-   - **Almacenamiento no persistente:** los datos se pueden eliminar cuando el contenedor, el nodo trabajador o el clúster se eliminan. El almacenamiento no persistente se suele utilizar para la información de registro, como registros del sistema o registros de contenedor, pruebas de desarrollo o cuando se desea acceder a datos desde el sistema de archivos del host. Para consultar la descripción general de las opciones de almacenamiento no persistente disponibles, consulte [Comparación de opciones de almacenamiento no persistente](#non_persistent_overview). 
+   - **Almacenamiento no persistente:** los datos se pueden eliminar cuando el contenedor, el nodo trabajador o el clúster se eliminan. El almacenamiento no persistente se suele utilizar para la información de registro, como registros del sistema o registros de contenedor, pruebas de desarrollo o cuando se desea acceder a datos desde el sistema de archivos del host. Para consultar la descripción general de las opciones de almacenamiento no persistente disponibles, consulte [Comparación de opciones de almacenamiento no persistente](#non_persistent_overview).
 
 2. Si debe guardar sus datos de forma permanente, analice si la app requiere un tipo específico de almacenamiento. Cuando se utiliza una app existente, la app puede estar diseñada para almacenar datos de una de las siguientes formas:  
-   - **En un sistema de archivos:** los datos de pueden almacenar como archivo en un directorio. Por ejemplo, puede almacenar este archivo en el disco duro local. Algunas apps requieren que los datos se almacenen en un sistema de archivos específico, como por ejemplo `nfs` o `ext4`, para optimizar el almacén de datos y alcanzar los objetivos de rendimiento. 
-   - **En una base de datos:** los datos se deben almacenar en una base de datos que sigue un esquema específico. Algunas apps incluyen una interfaz de base de datos que puede utilizar para almacenar los datos. Por ejemplo, WordPress está optimizada para almacenar datos en una base de datos MySQL. En estos casos, el tipo de almacenamiento se selecciona por usted. 
-   
-3. Si la app no tiene limitación en el tipo de almacenamiento que debe utilizar, determine el tipo de datos que desea almacenar. 
-   - **Datos estructurados:** datos que se pueden almacenar en una base de datos relacional donde tiene una tabla con columnas y filas. Los datos de las tablas se pueden conectar utilizando claves, y normalmente es fácil acceder debido al modelo de datos predefinido. Por ejemplo, números de teléfono, números de cuenta, números de seguridad social o códigos postales. 
+   - **En un sistema de archivos:** los datos de pueden almacenar como archivo en un directorio. Por ejemplo, puede almacenar este archivo en el disco duro local. Algunas apps requieren que los datos se almacenen en un sistema de archivos específico, como por ejemplo `nfs` o `ext4`, para optimizar el almacén de datos y alcanzar los objetivos de rendimiento.
+   - **En una base de datos:** los datos se deben almacenar en una base de datos que sigue un esquema específico. Algunas apps incluyen una interfaz de base de datos que puede utilizar para almacenar los datos. Por ejemplo, WordPress está optimizada para almacenar datos en una base de datos MySQL. En estos casos, el tipo de almacenamiento se selecciona por usted.
+
+3. Si la app no tiene limitación en el tipo de almacenamiento que debe utilizar, determine el tipo de datos que desea almacenar.
+   - **Datos estructurados:** datos que se pueden almacenar en una base de datos relacional donde tiene una tabla con columnas y filas. Los datos de las tablas se pueden conectar utilizando claves, y normalmente es fácil acceder debido al modelo de datos predefinido. Por ejemplo, números de teléfono, números de cuenta, números de seguridad social o códigos postales.
    - **Datos semiestructurados:** datos que no caben en una base de datos relacional, pero que incluyen algunas propiedades organizativas que se pueden utilizar para leer y analizar estos datos con más facilidad. Por ejemplo, archivos de lenguaje de códigos, como CSV, XML o JSON.  
-   - **Datos no estructurados:** datos que no siguen un patrón organizativo y que es tan complejo que no puede almacenarlos en una base de datos relacional con modelos de datos predefinidos. Para acceder a estos datos, necesita herramientas y software avanzados. Por ejemplo, mensajes de correo electrónico, vídeos, fotos, archivos de audio, presentaciones, datos de los medios de comunicación sociales o páginas web. 
+   - **Datos no estructurados:** datos que no siguen un patrón organizativo y que es tan complejo que no puede almacenarlos en una base de datos relacional con modelos de datos predefinidos. Para acceder a estos datos, necesita herramientas y software avanzados. Por ejemplo, mensajes de correo electrónico, vídeos, fotos, archivos de audio, presentaciones, datos de los medios de comunicación sociales o páginas web.
 
-   Si tiene datos estructurados y no estructurados, intente almacenar cada tipo de datos por separado en una solución de almacenamiento que se ha diseñado para este tipo de datos. El uso de una solución de almacenamiento adecuada para el tipo de datos facilita el acceso a los datos y aporta ventajas de rendimiento, escalabilidad, durabilidad y coherencia. 
+   Si tiene datos estructurados y no estructurados, intente almacenar cada tipo de datos por separado en una solución de almacenamiento que se ha diseñado para este tipo de datos. El uso de una solución de almacenamiento adecuada para el tipo de datos facilita el acceso a los datos y aporta ventajas de rendimiento, escalabilidad, durabilidad y coherencia.
    {: tip}
-   
+
 4. Analice cómo desea acceder a los datos. Las soluciones de almacenamiento suelen estar diseñadas y optimizadas para admitir operaciones de lectura o escritura.  
-   - **Sólo lectura:** los datos son de sólo lectura. No desea escribir ni cambiar los datos. 
-   - **Lectura y escritura:** desea leer, escribir y cambiar los datos. Para los datos que se leen y se escriben, es importante saber si las operaciones presentan mucha actividad de lectura, mucha actividad de escritura o una actividad equilibrada. 
-   
-4. Determine la frecuencia a la que se accede a los datos. Conocer la frecuencia del acceso a datos permite saber el rendimiento que se necesita para el almacenamiento. Por ejemplo, los datos a los que se accede con frecuencia suelen residir en el almacenamiento rápido. 
-   - **Datos calientes:** datos a los que se accede con frecuencia. Las apps web o móviles son ejemplos habituales de este caso. 
-   - **Datos fríos o templados:** datos a los que se accede con poca frecuencia, como una vez al mes o menos. El archivado, la retención de datos a corto plazo o la recuperación tras desastre son ejemplos habituales de este caso. 
-   - **Datos fríos: ** datos a los que se accede con muy poca frecuencia o nunca. Los archivados, las copias de seguridad a largo plazo o los datos históricos son ejemplos habituales de este caso. 
-   - **Datos bloqueados: ** datos a los que no se accede y que se deben conservar por razones legales. 
+   - **Sólo lectura:** los datos son de sólo lectura. No desea escribir ni cambiar los datos.
+   - **Lectura y escritura:** desea leer, escribir y cambiar los datos. Para los datos que se leen y se escriben, es importante saber si las operaciones presentan mucha actividad de lectura, mucha actividad de escritura o una actividad equilibrada.
 
-   Si no puede prever la frecuencia o esta no sigue un patrón estricto, determine si las cargas de trabajo presentan mucha actividad de lectura, mucha actividad de escritura o una actividad equilibrada. A continuación, busque la opción de almacenamiento que se ajuste a su carga de trabajo e investigue qué nivel de almacenamiento le proporciona la flexibilidad que necesita. Por ejemplo, {{site.data.keyword.containerlong_notm}} proporciona una clase de almacenamiento `flexible` que tiene en cuenta la frecuencia con la que se accede a los datos en un mes y se basa en esta medida para optimizar la facturación mensual. 
+4. Determine la frecuencia a la que se accede a los datos. Conocer la frecuencia del acceso a datos permite saber el rendimiento que se necesita para el almacenamiento. Por ejemplo, los datos a los que se accede con frecuencia suelen residir en el almacenamiento rápido.
+   - **Datos calientes:** datos a los que se accede con frecuencia. Las apps web o móviles son ejemplos habituales de este caso.
+   - **Datos fríos o templados:** datos a los que se accede con poca frecuencia, como una vez al mes o menos. El archivado, la retención de datos a corto plazo o la recuperación tras desastre son ejemplos habituales de este caso.
+   - **Datos fríos: ** datos a los que se accede con muy poca frecuencia o nunca. Los archivados, las copias de seguridad a largo plazo o los datos históricos son ejemplos habituales de este caso.
+   - **Datos bloqueados: ** datos a los que no se accede y que se deben conservar por razones legales.
+
+   Si no puede prever la frecuencia o esta no sigue un patrón estricto, determine si las cargas de trabajo presentan mucha actividad de lectura, mucha actividad de escritura o una actividad equilibrada. A continuación, busque la opción de almacenamiento que se ajuste a su carga de trabajo e investigue qué nivel de almacenamiento le proporciona la flexibilidad que necesita. Por ejemplo, {{site.data.keyword.cos_full_notm}} proporciona una clase de almacenamiento `flexible` que tiene en cuenta la frecuencia con la que se accede a los datos en un mes y se basa en esta medida para optimizar la facturación mensual.
    {: tip}
- 
-5. Investigue si los datos se deben compartir entre varias instancias de app, zonas o regiones. 
-   - **Acceso en varios pods:** si utiliza volúmenes persistentes de Kubernetes para acceder al almacenamiento, puede determinar el número de pods que pueden montar el volumen al mismo tiempo. Hay algunas soluciones de almacenamiento, como el almacenamiento en bloque, a las que solo puede acceder un pod al mismo tiempo. Otras soluciones de almacenamiento le permiten compartir el mismo volumen en varios pods. 
-   - **Acceso en varias zonas y regiones:** puede que necesite que los datos sean accesibles desde varias zonas o regiones. Algunas soluciones de almacenamiento, como el almacenamiento de archivos y en bloque, son específicas del centro de datos y no se pueden compartir entre varias zonas en una configuración de clúster multizona. 
 
-6. Conozca otras características de almacenamiento que afectan a su elección. 
-   - **Coherencia:** la garantía de que una operación de lectura devuelva la última versión de un archivo. Las soluciones de almacenamiento pueden proporcionar una `coherencia potente` cuando se garantiza que siempre se recibirá la última versión de un archivo, o una `coherencia eventual` cuando puede que la operación de lectura no devuelva la última versión. La coherencia eventual se suele dar en sistemas distribuidos geográficamente, donde una operación de escritura primero se debe replicar en todas las instancias. 
-   - **Rendimiento:** el tiempo que se tarda en completar una operación de lectura o escritura. 
-   - **Durabilidad:** la garantía de que una operación de escritura que se confirme en el almacenamiento sobreviva permanentemente y no se dañe ni se pierda, aunque se graben gigabytes o terabytes de datos en el almacenamiento de una sola vez. 
-   - **Resiliencia:** la capacidad de recuperarse de una interrupción y continuar con las operaciones, aunque haya fallado un componente de hardware o de software. Por ejemplo, el almacenamiento físico experimenta una interrupción de alimentación, un corte de red o queda destruido durante una catástrofe natural. 
-   - **Disponibilidad:** la capacidad de proporcionar acceso a los datos, incluso si un centro de datos o una región no están disponibles. La disponibilidad de los datos se consigue normalmente añadiendo redundancia y configurando mecanismos de migración tras error. 
-   - **Escalabilidad:** la capacidad de ampliar la capacidad y personalizar el rendimiento en función de sus necesidades. 
-   - **Cifrado:** el enmascaramiento de datos para evitar la visibilidad cuando un usuario no autorizado accede a los datos. 
+5. Investigue si los datos se deben compartir entre varias instancias de app, zonas o regiones.
+   - **Acceso en varios pods:** si utiliza volúmenes persistentes de Kubernetes para acceder al almacenamiento, puede determinar el número de pods que pueden montar el volumen al mismo tiempo. Hay algunas soluciones de almacenamiento, como el almacenamiento en bloque, a las que solo puede acceder un pod al mismo tiempo. Otras soluciones de almacenamiento le permiten compartir el mismo volumen en varios pods.
+   - **Acceso en varias zonas y regiones:** puede que necesite que los datos sean accesibles desde varias zonas o regiones. Algunas soluciones de almacenamiento, como el almacenamiento de archivos y en bloque, son específicas del centro de datos y no se pueden compartir entre varias zonas en una configuración de clúster multizona.
    
-7. [Revise las soluciones de almacenamiento persistente disponibles](#persistent_storage_overview) y elija la solución que mejor se adapte a sus requisitos de datos y app. 
+   Si desea hacer que sus datos sean accesibles a través de zonas y regiones, asegúrese de consultar a su departamento legal para verificar que los datos se puedan almacenar en varias zonas o en otro país. 
+   {: note}
+
+6. Conozca otras características de almacenamiento que afectan a su elección.
+   - **Coherencia:** la garantía de que una operación de lectura devuelva la última versión de un archivo. Las soluciones de almacenamiento pueden proporcionar una `coherencia potente` cuando se garantiza que siempre se recibirá la última versión de un archivo, o una `coherencia eventual` cuando puede que la operación de lectura no devuelva la última versión. La coherencia eventual se suele dar en sistemas distribuidos geográficamente, donde una operación de escritura primero se debe replicar en todas las instancias.
+   - **Rendimiento:** el tiempo que se tarda en completar una operación de lectura o escritura.
+   - **Durabilidad:** la garantía de que una operación de escritura que se confirme en el almacenamiento sobreviva permanentemente y no se dañe ni se pierda, aunque se graben gigabytes o terabytes de datos en el almacenamiento de una sola vez.
+   - **Resiliencia:** la capacidad de recuperarse de una interrupción y continuar con las operaciones, aunque haya fallado un componente de hardware o de software. Por ejemplo, el almacenamiento físico experimenta una interrupción de alimentación, un corte de red o queda destruido durante una catástrofe natural.
+   - **Disponibilidad:** la capacidad de proporcionar acceso a los datos, incluso si un centro de datos o una región no están disponibles. La disponibilidad de los datos se consigue normalmente añadiendo redundancia y configurando mecanismos de migración tras error.
+   - **Escalabilidad:** la capacidad de ampliar la capacidad y personalizar el rendimiento en función de sus necesidades.
+   - **Cifrado:** el enmascaramiento de datos para evitar la visibilidad cuando un usuario no autorizado accede a los datos.
+
+7. [Revise las soluciones de almacenamiento persistente disponibles](#persistent_storage_overview) y elija la solución que mejor se adapte a sus requisitos de datos y app.
 
 ## Comparación de opciones de almacenamiento no persistente
 {: #non_persistent_overview}
@@ -118,7 +124,7 @@ La siguiente imagen muestra las opciones de datos no persistentes disponibles en
 </tr>
 <tr>
 <td style="text-align:left">Rendimiento</td>
-<td style="text-align:left">Alto</td>
+<td style="text-align:left">Alta</td>
 <td style="text-align:left">Alto con baja latencia al utilizar SSD</td>
 </tr>
 <tr>
@@ -160,13 +166,14 @@ La siguiente imagen muestra las opciones de datos no persistentes disponibles en
 </table>
 
 
+
 ## Comparación de opciones de almacenamiento persistente
 {: #persistent_storage_overview}
 
-Utilice las opciones de almacenamiento persistente para los datos que desee conservar de forma permanente, aunque se eliminen el contenedor, el nodo trabajador o el clúster. 
+Utilice las opciones de almacenamiento persistente para los datos que desee conservar de forma permanente, aunque se eliminen el contenedor, el nodo trabajador o el clúster.
 {: shortdesc}
 
-**Nota:** las opciones de almacenamiento persistente de datos solo están disponibles para clústeres estándares. 
+Las opciones de almacenamiento persistente de datos solo están disponibles para clústeres estándares.
 
 ¿Quiere conectar el clúster a una base de datos local en su lugar? Consulte [Configuración de la conectividad VPN en el clúster](cs_vpn.html#vpn).
 {: tip}
@@ -284,3 +291,7 @@ La imagen siguiente muestra las opciones que tiene en {{site.data.keyword.contai
 </tr>
 </tbody>
 </table>
+
+
+
+

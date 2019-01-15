@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -73,14 +76,14 @@ utilizando a cadena de herramientas. Para obtener información sobre la configur
 <tbody>
 <tr>
 <td>CoScale</td>
-<td>Supervise los nodos trabajadores, contenedores, conjuntos de réplicas, controladores de réplicas y servicios con <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Supervisión de {{site.data.keyword.containerlong_notm}} con CoScale <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+<td>Supervise los nodos trabajadores, contenedores, conjuntos de réplicas, controladores de réplicas y servicios con <a href="https://www.newrelic.com/coscale" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Supervisión de {{site.data.keyword.containerlong_notm}} con CoScale <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
 </tr>
 <tr>
 <td>Datadog</td>
 <td>Supervise el clúster y visualice las métricas de rendimiento de las aplicaciones y la infraestructura con <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Supervisión de {{site.data.keyword.containerlong_notm}} con Datadog <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
 </tr>
 <tr>
-<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>{{site.data.keyword.cloudaccesstrailfull}}</td>
 <td>Supervise la actividad administrativa realizada en el clúster mediante el análisis de registros a través de Grafana. Para obtener más información sobre el servicio, consulte la documentación de [Activity Tracker](/docs/services/cloud-activity-tracker/index.html). Para obtener más información sobre los tipos de sucesos de los que puede realizar un seguimiento, consulte [sucesos de Activity Tracker](cs_at_events.html).</td>
 </tr>
 <tr>
@@ -88,8 +91,18 @@ utilizando a cadena de herramientas. Para obtener información sobre la configur
 <td>Amplíe las funciones de recopilación de registros, retención y búsqueda con {{site.data.keyword.loganalysisfull_notm}}. Para obtener más información, consulte <a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">Habilitación de la recopilación automática de registros de clúster <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
 </tr>
 <tr>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>Añada prestaciones de gestión de registros al clúster desplegando LogDNA como servicio de terceros en sus nodos trabajadores para gestionar registros de sus contenedores de pod. Para obtener más información, consulte
+[Gestión de registros de clúster de Kubernetes con {{site.data.keyword.loganalysisfull_notm}} con LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
+</tr>
+<tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
-<td>Amplíe las funciones de retención y recopilación de métricas definiendo reglas y alertas con {{site.data.keyword.monitoringlong_notm}}. Para obtener más información, consulte <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Analizar métricas en Grafana para una app desplegada en un clúster de Kubernetes <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+<td>Amplíe las funciones de retención y recopilación de métricas definiendo reglas y alertas con {{site.data.keyword.monitoringlong_notm}}. Para obtener más información, consulte <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Analizar métricas en Grafana para una app desplegada en un clúster de Kubernetes <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>Obtenga visibilidad operativa en el rendimiento y estado de las apps mediante el despliegue de Sysdig como servicio de terceros en sus nodos trabajadores para reenviar métricas a {{site.data.keyword.monitoringlong}}. Para obtener más información, consulte
+[Análisis de métricas para una app desplegada en un clúster de Kubernetes](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Nota**: si utiliza {{site.data.keyword.mon_full_notm}} con clústeres que ejecutan Kubernetes versión 1.11 o posterior, no se recopilan todas las métricas de contenedor, ya que actualmente Sysdig no tiene soporte para `containerd`.</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -125,7 +138,7 @@ utilizando a cadena de herramientas. Para obtener información sobre la configur
 ## Servicios de seguridad
 {: #security_services}
 
-¿Desea obtener una visión completa de cómo integrar los servicios de seguridad de {{site.data.keyword.Bluemix_notm}} en su clúster? Consulte la [guía de aprendizaje sobre cómo aplicar seguridad de extremo a extremo a una aplicación de nube](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application).
+¿Desea obtener una visión completa de cómo integrar los servicios de seguridad de {{site.data.keyword.Bluemix_notm}} en su clúster? Consulte la [guía de aprendizaje sobre cómo aplicar seguridad de extremo a extremo a una aplicación de nube](/docs/tutorials/cloud-e2e-security.html).
 {: shortdesc}
 
 <table summary="Resumen de las características de accesibilidad">
@@ -139,7 +152,7 @@ utilizando a cadena de herramientas. Para obtener información sobre la configur
 <tbody>
   <tr id="appid">
     <td>{{site.data.keyword.appid_full}}</td>
-    <td>Añada un nivel de seguridad a sus apps con [{{site.data.keyword.appid_short}}](/docs/services/appid/index.html#gettingstarted) requiriendo a los usuarios que inicien sesión. Para autenticar solicitudes HTTP/HTTPS de API o web para la app, puede integrar {{site.data.keyword.appid_short_notm}} con el servicio Ingress mediante la [{{site.data.keyword.appid_short_notm}} anotación de Ingress de autenticación](cs_annotations.html#appid-auth).</td>
+    <td>Añada un nivel de seguridad a sus apps con [{{site.data.keyword.appid_short}}](/docs/services/appid/index.html#gettingstarted) requiriendo a los usuarios que inicien sesión. Para autenticar solicitudes HTTP/HTTPS de API o web para la app, puede integrar {{site.data.keyword.appid_short_notm}} con el servicio Ingress mediante la [anotación de Ingress de autenticación de {{site.data.keyword.appid_short_notm}}](cs_annotations.html#appid-auth).</td>
   </tr>
 <tr>
 <td>Aqua Security</td>
@@ -185,7 +198,7 @@ utilizando a cadena de herramientas. Para obtener información sobre la configur
 <tbody>
 <tr>
   <td>Heptio Ark</td>
-  <td>Utilice <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para hacer copias de seguridad y restauración de volúmenes persistentes y recursos de clúster. Para obtener más información, consulte <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">Casos de uso para migración de clústeres y recuperación ante desastres <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> de Heptio Ark.</td>
+  <td>Utilice <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para hacer copias de seguridad y restauración de volúmenes persistentes y recursos de clúster. Para obtener más información, consulte <a href="https://github.com/heptio/ark/blob/release-0.9/docs/use-cases.md" target="_blank">Casos de uso para migración de clústeres y recuperación ante desastres <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> de Heptio Ark.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -213,12 +226,20 @@ utilizando a cadena de herramientas. Para obtener información sobre la configur
 Añada servicios de {{site.data.keyword.Bluemix_notm}} para mejorar el clúster de Kubernetes con prestaciones adicionales en áreas como, por ejemplo, Watson AI, datos, seguridad e Internet de las cosas (IoT).
 {:shortdesc}
 
-**Importante:** sólo puede enlazar servicios que admitan claves de servicio. Para consultar una lista de servicios que admiten claves de servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#accser_external).
+Sólo puede enlazar servicios que admitan claves de servicio. Para consultar una lista de servicios que admiten claves de servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.Bluemix_notm}}](/docs/resources/connect_external_app.html#externalapp).
+{: note}
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+Antes de empezar:
+- Asegúrese de que tiene los roles siguientes:
+    - [Rol de servicio de {{site.data.keyword.Bluemix_notm}} IAM
+Editor o Administrador](cs_users.html#platform) para el clúster.
+    - El [rol **Desarrollador** de Cloud Foundry](/docs/iam/mngcf.html#mngcf) para el espacio que desea utilizar
+- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 
 Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
-1. [Cree una instancia del servicio {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance). </br></br>**Nota:**<ul><li>Algunos servicios de {{site.data.keyword.Bluemix_notm}} solo están disponibles en determinadas regiones. Puede enlazar un servicio con el clúster sólo si el servicio está disponible en la misma región que el clúster. Además, si desea crear una instancia de servicio en la zona de Washington DC, debe utilizar la CLI.</li><li>Debe crear la instancia de servicio en el mismo grupo de recursos que el clúster. Un recurso solo se puede crear en un grupo de recursos que no se puede cambiar después.</li></ul>
+1. [Cree una instancia del servicio {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
+    * Algunos servicios de {{site.data.keyword.Bluemix_notm}} solo están disponibles en determinadas regiones. Puede enlazar un servicio con el clúster sólo si el servicio está disponible en la misma región que el clúster. Además, si desea crear una instancia de servicio en la zona de Washington DC, debe utilizar la CLI.
+    * Debe crear la instancia de servicio en el mismo grupo de recursos que el clúster. Un recurso solo se puede crear en un grupo de recursos que no se puede cambiar después.
 
 2. Compruebe el tipo de servicio que ha creado y tome nota del **Nombre** de la instancia de servicio.
    - **Servicios de Cloud Foundry:**
@@ -234,7 +255,7 @@ Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
      ```
      {: screen}
 
-  - **Servicios habilitados para IAM:**
+  - **{{site.data.keyword.Bluemix_notm}}Servicios habilitados para IAM:**
      ```
      ibmcloud resource service-instances
      ```
@@ -249,7 +270,7 @@ Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
 
    También puede ver los distintos tipos de servicio en el panel de control como **Servicios de Cloud Foundry** y **Servicios**.
 
-3. Para los servicios habilitados para IAM, cree un alias de Cloud Foundry, de modo que pueda enlazar este servicio con el clúster. Si el servicio ya es un servicio de Cloud Foundry, este paso no es necesario y puede continuar con el paso siguiente.
+3. Para los servicios habilitados para {{site.data.keyword.Bluemix_notm}} IAM, cree un alias de Cloud Foundry, de modo que pueda enlazar este servicio con el clúster. Si el servicio ya es un servicio de Cloud Foundry, este paso no es necesario y puede continuar con el paso siguiente.
    1. Defina una organización y un espacio de Cloud Foundry como objetivo.
       ```
       ibmcloud target --cf
@@ -269,19 +290,12 @@ Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
       {: pre}
 
 4. Identifique el espacio de nombres del clúster que desea utilizar para añadir el servicio. Puede elegir entre las siguientes opciones.
-   - Obtenga una lista de los espacios de nombres existentes y elija el espacio de nombres que desea utilizar.
      ```
      kubectl get namespaces
      ```
      {: pre}
 
-   - Cree un espacio de nombres en el clúster.
-     ```
-     kubectl create namespace <namespace_name>
-     ```
-     {: pre}
-
-5.  Añada el servicio al clúster. Para los servicios habilitados para IAM, asegúrese de utilizar el alias de Cloud Foundry que ha creado anteriormente.
+5.  Añada el servicio al clúster. Para los servicios habilitados para {{site.data.keyword.Bluemix_notm}} IAM, asegúrese de utilizar el alias de Cloud Foundry que ha creado anteriormente.
     ```
     ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
@@ -716,7 +730,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
 {: #helm_links}
 
 * Para utilizar el diagrama de Helm de strongSwan, consulte [Configuración de la conectividad de VPN con el diagrama de Helm del servicio VPN IPSec de strongSwan](cs_vpn.html#vpn-setup).
-* Consulte los diagramas de Helm disponibles que puede utilizar con {{site.data.keyword.Bluemix_notm}} en la GUI del [catálogo de diagramas de Helm ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) GUI.
+* Consulte los diagramas de Helm disponibles que puede utilizar con {{site.data.keyword.Bluemix_notm}} en [catálogo de diagramas de Helm ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) en la consola.
 * Obtenga más información sobre los mandatos Helm que se utilizan para configurar y gestionar diagramas de Helm en la <a href="https://docs.helm.sh/helm/" target="_blank">documentación de Helm <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.
 * Obtenga más información sobre cómo [aumentar la velocidad del despliegue con diagramas de Helm de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 

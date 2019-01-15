@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,52 +13,59 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Regiones y zonas
 {: #regions-and-zones}
 
-Una región es una ubicación geográfica específica en la que puede desplegar apps, servicios y otros recursos de {{site.data.keyword.Bluemix}}. Las [regiones de {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) difieren de las [regiones de {{site.data.keyword.containerlong}}](#container_regions). Las regiones constan de una o más zonas, que son centros de datos físicos que alojan los recursos de cálculo, de red, de almacenamiento y los recursos relacionados con refrigeración y alimentación que alojan los servicios y las aplicaciones. Las zonas están aisladas unas de otras, lo que garantiza que no haya un punto único de error compartido. 
+Una región es una ubicación geográfica específica en la que puede desplegar apps, servicios y otros recursos de {{site.data.keyword.Bluemix}}. Las [regiones de {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) difieren de las [regiones de {{site.data.keyword.containerlong}}](#container_regions). Las regiones constan de una o más zonas, que son centros de datos físicos que alojan los recursos de cálculo, de red, de almacenamiento y los recursos relacionados con refrigeración y alimentación que alojan los servicios y las aplicaciones. Las zonas están aisladas unas de otras, lo que garantiza que no haya un punto único de error compartido.
 {:shortdesc}
-
-{{site.data.keyword.Bluemix_notm}} está ubicado en todo el mundo. Los servicios de {{site.data.keyword.Bluemix_notm}} pueden estar disponibles a nivel global o dentro de una región específica. Cuando se crea un clúster de Kubernetes en {{site.data.keyword.containerlong_notm}}, sus recursos permanecen en la región en la que se despliega el clúster. 
-
-**Nota**: Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
 
 ![Regiones y zonas de {{site.data.keyword.containerlong_notm}}](images/regions-mz.png)
 
 _Regiones y zonas de {{site.data.keyword.containerlong_notm}}_
 
-Las regiones soportadas de {{site.data.keyword.containerlong_notm}} son las siguientes:
-* AP norte (solo clústeres estándares)
-* AP sur
-* UE central
-* RU sur
-* EE.UU. este (solo clústeres estándares)
-* EE.UU. sur
+{{site.data.keyword.Bluemix_notm}} está ubicado en todo el mundo. Los servicios de {{site.data.keyword.Bluemix_notm}} pueden estar disponibles a nivel global o dentro de una región específica. Cuando se crea un clúster de Kubernetes en {{site.data.keyword.containerlong_notm}}, sus recursos permanecen en la región en la que se despliega el clúster.
+
+Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
+{: note}
+
+| Región de {{site.data.keyword.containerlong_notm}} | Ubicación de {{site.data.keyword.Bluemix_notm}} correspondiente |
+| --- | --- |
+| AP norte (solo clústeres estándares) | Tokio |
+| AP sur | Sídney |
+| UE central | Frankfurt |
+| RU sur | Londres |
+| EE.UU. este (solo clústeres estándares) | Washington DC |
+| EE.UU. sur | Dallas |
+{: caption="Tabla: regiones admitidas del servicio de Kubernetes y ubicaciones correspondientes de IBM Cloud." caption-side="top"}
 
 <br />
 
 
-## Regiones de {{site.data.keyword.Bluemix_notm}}
+## Ubicaciones en {{site.data.keyword.Bluemix_notm}}
 {: #bluemix_regions}
 
-Puede organizar los recursos entre servicios de {{site.data.keyword.Bluemix_notm}} mediante regiones de {{site.data.keyword.Bluemix_notm}}. Por ejemplo, puede crear un clúster de Kubernetes utilizando una imagen de Docker privada almacenada en {{site.data.keyword.registryshort_notm}} de la misma región.
+Puede organizar sus recursos entre servicios de {{site.data.keyword.Bluemix_notm}} utilizando ubicaciones de
+{{site.data.keyword.Bluemix_notm}}, también conocidas como regiones. Por ejemplo, puede crear un clúster de Kubernetes utilizando una imagen de Docker privada almacenada en {{site.data.keyword.registryshort_notm}} de la misma ubicación.
 {:shortdesc}
 
-Para comprobar la región de {{site.data.keyword.Bluemix_notm}} en la que está actualmente, ejecute `ibmcloud info` y revise el campo **Región**.
+Para comprobar la ubicación de {{site.data.keyword.Bluemix_notm}} en la que está actualmente, ejecute `ibmcloud info` y revise el campo **Región**.
 
-Se puede acceder a las regiones de {{site.data.keyword.Bluemix_notm}} especificando el punto final de API cuando se inicia la sesión. Si no especifica ninguna región, la sesión se iniciará automáticamente en la región más cercana.
+Se puede acceder a las ubicaciones de {{site.data.keyword.Bluemix_notm}} especificando el punto final de API cuando se inicia la sesión. Si no especifica ningún punto final de región, la sesión se iniciará automáticamente en la región más cercana.
 
 Por ejemplo, utilice los siguientes mandatos para iniciar una sesión en los puntos finales de API de región de {{site.data.keyword.Bluemix_notm}}:
 
-  * EE.UU. sur
+  * Dallas
       ```
       ibmcloud login -a api.ng.bluemix.net
       ```
       {: pre}
 
-  * EE.UU. este
+  * Washington DC
       ```
       ibmcloud login -a api.us-east.bluemix.net
       ```
@@ -70,13 +77,13 @@ Por ejemplo, utilice los siguientes mandatos para iniciar una sesión en los pun
       ```
       {: pre}
 
-  * Alemania
+  * Frankfurt
       ```
       ibmcloud login -a api.eu-de.bluemix.net
       ```
       {: pre}
 
-  * Reino Unido
+  * Londres
       ```
       ibmcloud login -a api.eu-gb.bluemix.net
       ```
@@ -91,7 +98,8 @@ Por ejemplo, utilice los siguientes mandatos para iniciar una sesión en los pun
 Mediante regiones de {{site.data.keyword.containerlong_notm}}, puede crear o acceder a clústeres de Kubernetes de una región distinta de la región de {{site.data.keyword.Bluemix_notm}} en la que ha iniciado la sesión. Los puntos finales de regiones de {{site.data.keyword.containerlong_notm}} hacen referencia específicamente a {{site.data.keyword.containerlong_notm}}, no a {{site.data.keyword.Bluemix_notm}} en general.
 {:shortdesc}
 
-**Nota**: Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
+Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
+{: note}
 
 Regiones de {{site.data.keyword.containerlong_notm}} soportadas:
   * AP norte (solo clústeres estándares)
@@ -145,8 +153,8 @@ Para ver la documentación sobre los mandatos de API, consulte [https://containe
 Las zonas son centros de datos físicos que están disponibles dentro de una región de {{site.data.keyword.Bluemix_notm}}. Las regiones son una herramienta conceptual para organizar zonas y pueden incluir zonas (centros de datos) en diferentes países. La tabla siguiente muestra las zonas disponibles por región.
 {:shortdesc}
 
-* **Ciudad metropolitana multizona**: los nodos trabajadores de los clústeres que se crean en una ciudad metropolitana multizona se pueden dispersar entre zonas.
-* **Ciudad de una sola zona**: los nodos trabajadores de los clústeres que se crean en una ciudad de una sola zona permanecen dentro de una zona. No puede dispersar los nodos trabajadores en varias zonas.
+* **Ciudad metropolitana multizona**: los nodos trabajadores de los clústeres que se crean en una ciudad metropolitana multizona se pueden dispersar entre zonas. Además, si crea un clúster de Kubernetes versión 1.10 o posterior en una ciudad metropolitana multizona, los maestros de alta disponibilidad se dispersarán en zonas.
+* **Ciudad de una sola zona**: los nodos trabajadores de los clústeres que se crean en una ciudad de una sola zona permanecen dentro de una zona. No puede dispersar los nodos trabajadores en varias zonas. El maestro de alta disponibilidad incluye tres réplicas en hosts independientes, pero no se dispersan en zonas.
 
 <table summary="En la tabla se muestran las zonas disponibles por regiones. Las filas se leen de izquierda a derecha; la región está en la columna uno, las ciudades metropolitanas multizona en la dos y las ciudades de una sola zona en la tres.">
 <caption>Ciudades de una sola zona y multizona disponibles por región.</caption>
@@ -159,7 +167,8 @@ Las zonas son centros de datos físicos que están disponibles dentro de una reg
     <tr>
       <td>AP norte</td>
       <td>Tokio: tok02, tok04, tok05</td>
-      <td><p>Hong Kong R.A.E. de la RPC: hkg02</p>
+      <td><p>Chennai: che01</p>
+      <p>Hong Kong R.A.E. de la RPC: hkg02</p>
       <p>Seúl: seo01</p>
       <p>Singapur: sng01</p></td>
     </tr>
@@ -180,7 +189,8 @@ Las zonas son centros de datos físicos que están disponibles dentro de una reg
     </tr>
     <tr>
       <td>RU sur</td>
-      <td>Londres: lon04, lon05, lon06<br><br>**Nota**: lon05 sustituye a lon02. Los clústeres nuevos deben utilizar lon05.</td>
+      <td>Londres: lon04, lon05, lon06 **Nota**: lon05 sustituye a lon02. Los clústeres nuevos deben utilizar lon05, y únicamente lon05 admite que los maestros de alta disponibilidad se dispersen en zonas.</td>
+      <td></td>
     </tr>
     <tr>
       <td>EE.UU. este</td>

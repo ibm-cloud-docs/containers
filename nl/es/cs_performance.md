@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,30 +13,33 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Ajuste del rendimiento
 {: #kernel}
 
-Si tiene requisitos de optimización de rendimiento específicos, puede cambiar los valores predeterminados para los parámetros `sysctl` del kernel de Linux en los nodos trabajadores y los espacios de nombres de red de pod en {{site.data.keyword.containerlong}}.
+Si tiene requisitos de optimización de rendimiento específicos, puede cambiar los valores predeterminados para algunos componentes de clúster en {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Los nodos trabajadores se suministran automáticamente con un rendimiento optimizado de kernel, pero puede cambiar los valores predeterminados aplicando un `DaemonSet` personalizado al clúster. El daemonset altera los valores de todos los nodos trabajadores existentes y aplica los valores a los nuevos nodos trabajadores que se suministran en el clúster. Los pods no se ven afectados.
-
-Para optimizar los valores del kernel para los pods de app, puede insertar un initContainer en el YAML de `pod/ds/rs/deployment` para cada despliegue. El initContainer se añade a cada despliegue de app que se encuentra en el espacio de nombres de red de pod para el que desea optimizar el rendimiento.
-
-Por ejemplo, en los ejemplos de las secciones siguientes se cambia el número máximo predeterminado de conexiones permitidas en el entorno mediante el valor `net.core.somaxconn` y el rango de puertos efímeros a través del valor `net.ipv4.ip_local_port_range`.
-
-**Aviso**: si decide cambiar los valores predeterminados del parámetro de kernel, lo hace por su cuenta y riesgo. Usted es el responsable de ejecutar pruebas en cualquier configuración modificada y de cualquier interrupción potencial ocasionada por los valores modificados en el entorno.
+Si decide cambiar los valores predeterminados, lo hace por su cuenta y riesgo. Usted es el responsable de ejecutar pruebas en cualquier configuración modificada y de cualquier interrupción potencial ocasionada por los valores modificados en el entorno.
+{: important}
 
 ## Optimización del rendimiento del nodo trabajador
 {: #worker}
 
-Aplique un [daemonset ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) para cambiar los parámetros de kernel en el host de nodo trabajador.
+Si tiene requisitos de optimización de rendimiento específicos, puede cambiar los valores predeterminados para los parámetros `sysctl` del kernel de Linux en los nodos trabajadores.
+{: shortdesc}
 
-**Nota**: debe tener el [rol de acceso de administrador](cs_users.html#access_policies) para ejecutar el initContainer de ejemplo con privilegios. Después de inicializar los contenedores para los despliegues, se descartarán los privilegios.
+Los nodos trabajadores se suministran automáticamente con el rendimiento optimizado del kernel, pero puede cambiar los valores predeterminados aplicando un objeto de [`DaemonSet` de Kubernetes
+![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) al clúster. El daemonset altera los valores de todos los nodos trabajadores existentes y aplica los valores a los nuevos nodos trabajadores que se suministran en el clúster. Los pods no se ven afectados.
 
-1. Guarde el daemonset siguiente en un archivo denominado `worker-node-kernel-settings.yaml`. En la sección `spec.template.spec.initContainers`, añada los campos y valores de los parámetros de `sysctl` que desea ajustar. En este ejemplo, el daemonset cambia los valores de los parámetros `net.core.somaxconn` y `net.ipv4.ip_local_port_range`.
+Debe tener el rol de [**Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para el clúster para ejecutar el initContainer privilegiado de ejemplo. Después de inicializar los contenedores para los despliegues, se descartarán los privilegios.
+{: note}
+
+1. Guarde el daemonset siguiente en un archivo denominado `worker-node-kernel-settings.yaml`. En la sección `spec.template.spec.initContainers`, añada los campos y valores de los parámetros de `sysctl` que desea ajustar. Este daemonset de ejemplo cambia el número máximo predeterminado de conexiones permitidas en el entorno mediante el valor `net.core.somaxconn` y el rango de puertos efímeros a través del valor `net.ipv4.ip_local_port_range`.
     ```
     apiVersion: extensions/v1beta1
     kind: DaemonSet
@@ -115,12 +118,14 @@ Para revertir los parámetros de `sysctl` de los nodos trabajadores a los valore
 ## Optimización del rendimiento de pod
 {: #pod}
 
-Si tiene demandas de carga de trabajo específicas, puede aplicar un parche de [initContainer ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) para cambiar los parámetros de kernel de los pods de app.
+Si tiene demandas de carga de trabajo de rendimiento específicas, puede cambiar los valores predeterminados para los parámetros `sysctl` del kernel de Linux en los espacios de nombres de red de pod.
 {: shortdesc}
 
-**Nota**: debe tener el [rol de acceso de administrador](cs_users.html#access_policies) para ejecutar el initContainer de ejemplo con privilegios. Después de inicializar los contenedores para los despliegues, se descartarán los privilegios.
+Para optimizar los valores del kernel para los pods de app, puede insertar un parche [initContainer ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) en el YAML de `pod/ds/rs/deployment` para cada despliegue. El initContainer se añade a cada despliegue de app que se encuentra en el espacio de nombres de red de pod para el que desea optimizar el rendimiento.
 
-1. Guarde el siguiente parche de initContainer en un archivo denominado `pod-patch.yaml` y añada los campos y los valores de los parámetros de `sysctl` que desea ajustar. En este ejemplo, initContainer cambia los valores de los parámetros `net.core.somaxconn` y `net.ipv4.ip_local_port_range`.
+Antes de empezar, asegúrese de tener el rol de [**Administrador** de la plataforma {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para el clúster para poder ejecutar el initContainer privilegiado de ejemplo. Después de inicializar los contenedores para los despliegues, se descartarán los privilegios.
+
+1. Guarde el siguiente parche de initContainer en un archivo denominado `pod-patch.yaml` y añada los campos y los valores de los parámetros de `sysctl` que desea ajustar. Este initContainer de ejemplo cambia el número máximo predeterminado de conexiones permitidas en el entorno mediante el valor `net.core.somaxconn` y el rango de puertos efímeros a través del valor `net.ipv4.ip_local_port_range`.
     ```
     spec:
       template:
@@ -146,3 +151,79 @@ Si tiene demandas de carga de trabajo específicas, puede aplicar un parche de [
     {: pre}
 
 3. Si ha cambiado el valor `net.core.somaxconn` en los valores de kernel, la mayoría de las apps pueden utilizar automáticamente el valor actualizado. Sin embargo, es posible que en algunas apps se deba cambiar manualmente el valor correspondiente en el código de la app para que coincida con el valor del kernel. Por ejemplo, si va a ajustar el rendimiento de un pod en el que se ejecuta una app NGINX, debe cambiar el valor del campo `backlog` en el código de la app NGINX para que coincida. Para obtener más información, consulte esta [publicación del blog sobre NGINX ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.nginx.com/blog/tuning-nginx/).
+
+<br />
+
+
+## Ajuste de recursos del proveedor de métricas de clúster
+{: #metrics}
+
+Las configuraciones del proveedor de métricas del clúster (`metrics-server` en Kubernetes 1.12 y posterior, o
+`heapster` en versiones anteriores) están optimizadas para clústeres con 30 pods o menos por cada nodo trabajador. Si el clúster tiene más pods por cada nodo trabajador, es posible que el contenedor principal del proveedor de métricas
+`metrics-server` o `heapster` para el pod se reinicie con frecuencia con un mensaje de error como
+`OOMKilled`.
+
+El pod del proveedor de métricas también tiene un contenedor `nanny` que escala las solicitudes de recursos y límites del contenedor principal de `metrics-server` o `heapster` en respuesta al número de nodos trabajadores del clúster. Puede cambiar los recursos predeterminados editando el mapa de configuración del proveedor de métricas.
+
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+
+1.  Abra el archivo YAML del mapa de configuración del proveedor de métricas de clúster.
+    *  Para `metrics-server`:
+       ```
+       kubectl get configmap metrics-server-config -n kube-system -o yaml
+       ```
+       {: pre}
+    *  Para `heapster`:
+       ```
+       kubectl get configmap heapster-config -n kube-system -o yaml
+       ```
+       {: pre}
+    Salida de ejemplo:
+    ```
+    apiVersion: v1
+    data:
+      NannyConfiguration: |-
+        apiVersion: nannyconfig/v1alpha1
+        kind: NannyConfiguration
+    kind: ConfigMap
+    metadata:
+      annotations:
+        armada-service: cruiser-kube-addons
+        version: --
+      creationTimestamp: 2018-10-09T20:15:32Z
+      labels:
+        addonmanager.kubernetes.io/mode: EnsureExists
+        kubernetes.io/cluster-service: "true"
+      name: heapster-config
+      namespace: kube-system
+      resourceVersion: "526"
+      selfLink: /api/v1/namespaces/kube-system/configmaps/heapster-config
+      uid: 11a1aaaa-bb22-33c3-4444-5e55e555e555
+    ```
+    {: screen}
+
+2.  Añada el campo `memoryPerNode` al mapa de configuración en la sección
+`data.NannyConfiguration`. El valor predeterminado para `metrics-server` y `heapster` está establecido en `4Mi`.
+    ```
+    apiVersion: v1
+    data:
+      NannyConfiguration: |-
+        apiVersion: nannyconfig/v1alpha1
+        kind: NannyConfiguration
+        memoryPerNode: 5Mi
+    kind: ConfigMap
+    ...
+    ```
+    {: codeblock}
+
+3.  Aplique los cambios.
+    ```
+    kubectl apply -f heapster-config.yaml
+    ```
+    {: pre}
+
+4.  Supervise los pods del proveedor de métricas para ver si los contenedores siguen reiniciándose debido a un mensaje de error
+`OOMKilled`. Si es así, repita estos pasos y aumente el tamaño de `memoryPerNode` hasta que el pod sea estable.
+
+¿Desea ajustar más valores? Consulte los [documentos de configuración del redimensionador de complementos de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration) para obtener más ideas.
+{: tip}

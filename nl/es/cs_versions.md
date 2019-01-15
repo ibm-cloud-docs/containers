@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,12 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -27,14 +33,13 @@ lastupdated: "2018-10-25"
 {:shortdesc}
 
 **Versiones soportadas de Kubernetes**:
-
-- Más reciente: 1.11.3
-- Predeterminada: 1.10.8
-- Otras: 1.9.10
+- Más reciente: 1.12.3
+- Predeterminada: 1.10.11
+- Otras: 1.11.5
 
 </br>
 
-**Versiones en desuso**: cuando los clústeres se ejecutan en una versión en desuso de Kubernetes, tiene 30 días para revisar y actualizar a una versión soportada de Kubernetes antes de que la versión deje de estar soportada. Durante el periodo de desuso, el clúster sigue recibiendo soporte completo. Sin embargo, no puede crear nuevos clústeres que utilicen la versión en desuso.
+**Versiones en desuso**: cuando los clústeres se ejecutan en una versión en desuso de Kubernetes, tiene 30 días para revisar y actualizar a una versión soportada de Kubernetes antes de que la versión deje de estar soportada. Durante el periodo de desuso, el clúster sigue siendo funcional, pero es posible que necesite actualizaciones a un release con soporte para arreglar vulnerabilidades de seguridad. No puede crear nuevos clústeres que utilicen la versión en desuso.
 
 **Versiones no soportadas**: si está ejecutando clústeres con una versión de Kubernetes que no esté soportada, revise las posibles repercusiones de las actualizaciones y luego [actualice el clúster](cs_cluster_update.html#update) inmediatamente para continuar recibiendo importantes actualizaciones de seguridad y soporte.
 *  **Atención**: si espera hasta que el clúster esté tres o más versiones por detrás de una versión soportada, deberá forzar la actualización, lo que podría provocar resultados o errores inesperados.
@@ -53,7 +58,7 @@ kubectl version  --short | grep -i server
 Salida de ejemplo:
 
 ```
-Server Version: v1.10.8+IKS
+Server Version: v1.10.11+IKS
 ```
 {: screen}
 
@@ -73,18 +78,18 @@ El clúster de Kubernetes tiene tres tipos de actualizaciones: mayores, menores 
 
 A medida que las actualizaciones pasan a estar disponibles, se le notifica cuando visualiza información sobre los nodos trabajadores, por ejemplo con los mandatos `ibmcloud ks workers <cluster>` o `ibmcloud ks worker-get <cluster> <worker>`.
 -  **Actualizaciones menores y mayores**: En primer lugar, [actualice el nodo maestro](cs_cluster_update.html#master) y, a continuación, [actualice los nodos trabajadores](cs_cluster_update.html#worker_node).
-   - De forma predeterminada, no es posible actualizar un maestro de Kubernetes tres o más versiones menores al mismo tiempo. Por ejemplo, si el maestro actual es de la versión 1.7 y desea actualizar a 1.10, primero se debe actualizar a la versión 1.9. Puede forzar la actualización para continuar, pero actualizar más de dos versiones menores puede provocar resultados o errores imprevistos.
+   - De forma predeterminada, no es posible actualizar un maestro de Kubernetes tres o más versiones menores al mismo tiempo. Por ejemplo, si el maestro actual es de la versión 1.9 y desea actualizar a 1.12, primero se debe actualizar a la versión 1.10. Puede forzar la actualización para continuar, pero actualizar más de dos versiones menores puede provocar resultados o errores imprevistos.
    - Si utiliza una versión de CLI `kubectl` que coincide al menos con la versión `major.minor` de los clústeres, puede experimentar resultados inesperados. Mantenga actualizadas las [versiones de la CLI](cs_cli_install.html#kubectl) y el clúster de Kubernetes.
--  **Actualizaciones de parches**: los cambios entre parches están documentados en el [Registro de cambios de versión](cs_versions_changelog.html). A medida que las actualizaciones estén disponibles, se le notificará cuando visualice información sobre los nodos trabajadores y maestro en la GUI o CLI, como por ejemplo con los siguientes mandatos: `ibmcloud ks clusters`, `cluster-get`, `workers` o `worker-get`.
-   - **Parches de nodos trabajadores**: compruebe mensualmente si hay una actualización disponible, y utilice el [mandato](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` o el [mandato](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` para aplicar estos parches de sistema operativo y de seguridad.
+-  **Actualizaciones de parches**: los cambios entre parches están documentados en el [Registro de cambios de versión](cs_versions_changelog.html). A medida que las actualizaciones estén disponibles, se le notificará cuando visualice información sobre los nodos trabajadores y maestro en la CLI o consola de {{site.data.keyword.Bluemix_notm}}, como por ejemplo con los siguientes mandatos: `ibmcloud ks clusters`, `cluster-get`, `workers` o `worker-get`.
+   - **Parches de nodos trabajadores**: compruebe mensualmente si hay una actualización disponible, y utilice el [mandato](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` o el [mandato](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` para aplicar estos parches de sistema operativo y de seguridad. Tenga en cuenta que, durante una actualización o recarga, se creará de nuevo la imagen de la máquina del nodo trabajador y se suprimirán los datos si no se [almacenan fuera del nodo trabajador](cs_storage_planning.html#persistent_storage_overview).
    - **Parches maestros**: los parches maestros se aplican automáticamente durante el curso de varios días, por lo que una versión de parche maestro podría aparecer como disponible antes de que se aplique a su nodo maestro. La automatización de actualizaciones también pasa por alto los clústeres que están en un estado no saludable o que tienen operaciones actualmente en curso. Ocasionalmente, IBM podría inhabilitar las actualizaciones automáticas para un fixpack maestro específico, tal como se indica en el registro de cambios, como un parche que solo sea necesario si se actualiza un nodo maestro de una versión menor a otra. En cualquiera de estos casos, puede utilizar de forma segura el [mandato](cs_cli_reference.html#cs_cluster_update) `ibmcloud ks cluster-update` por su cuenta sin esperar a que se aplique la automatización de la actualización.
 
 </br>
 
 Esta información resume las actualizaciones que pueden tener un probable impacto sobre las apps desplegadas al actualizar un clúster a una nueva versión desde la versión anterior.
--  [Acciones de migración](#cs_v111) de la versión 1.11.
--  [Acciones de migración](#cs_v110) de la versión 1.10.
--  [Acciones de migración](#cs_v19) de la versión 1.9.
+-  [Acciones de preparación](#cs_v112) de la versión 1.12.
+-  [Acciones de preparación](#cs_v111) de la versión 1.11.
+-  [Acciones de preparación](#cs_v110) de la versión 1.10.
 -  [Archivo](#k8s_version_archive) de versiones no soportadas o en desuso.
 
 <br/>
@@ -95,17 +100,138 @@ Para ver una lista completa de cambios, revise la siguiente información:
 
 </br>
 
+## Versión 1.12
+{: #cs_v112}
+
+<p><img src="images/certified_kubernetes_1x12.png" style="padding-right: 10px;" align="left" alt="Este identificador indica la certificación de Kubernetes versión 1.12 para IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} es un producto Kubernetes certificado para la versión 1.12 bajo el programa CNCF de certificación de conformidad de software Kubernetes. _Kubernetes® es una marca registrada de The Linux Foundation en Estados Unidos y en otros países, y se utiliza de acuerdo con una licencia de The Linux Foundation._</p>
+
+Revise los cambios que puede necesitar hacer cuando vaya a actualizar de la versión anterior de Kubernetes a la versión 1.12.
+{: shortdesc}
+
+### Actualización antes de maestro
+{: #112_before}
+
+En la tabla siguiente se muestran las acciones que debe llevar a cabo antes de actualizar el maestro de Kubernetes. 
+{: shortdesc}
+
+<table summary="Actualizaciones de Kubernetes para la versión 1.12">
+<caption>Cambios necesarios antes de actualizar el maestro a Kubernetes 1.12</caption>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Servidor de métricas de Kubernetes</td>
+<td>Si actualmente tiene el `metric-server` de Kubernetes desplegado en el clúster, debe eliminar el `metric-server` antes de actualizar el clúster a Kubernetes 1.12. Esta eliminación evita conflictos con el `metric-server` que se despliega durante la actualización.</td>
+</tr>
+<tr>
+<td>Enlaces de rol para la cuenta de servicio `default` de `kube-system`</td>
+<td>La cuenta de servicio `default` de `kube-system` ya no tiene acceso **cluster-admin** a la API de Kubernetes. Si despliega características o complementos como [Helm](cs_integrations.html#helm) que requieran acceso a los procesos del clúster, configure una [cuenta de servicio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/). Si necesita tiempo para crear y configurar cuentas de servicio individuales con los permisos adecuados, puede otorgar temporalmente el rol **cluster-admin** con el enlace de rol de clúster siguiente: `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
+</tr>
+</tbody>
+</table>
+
+### Actualización después de nodo maestro
+{: #112_after}
+
+En la tabla siguiente se muestran las acciones que debe llevar a cabo después de actualizar el maestro de Kubernetes. 
+{: shortdesc}
+
+<table summary="Actualizaciones de Kubernetes para la versión 1.12">
+<caption>Cambios necesarios después de actualizar el nodo maestro a Kubernetes 1.12</caption>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API de Kubernetes `apps/v1`</td>
+<td>La API de Kubernetes `apps/v1` sustituye a las API `extensions`, `apps/v1beta1` y `apps/v1alpha`. El proyecto Kubernetes está poniendo en desuso y eliminando gradualmente el soporte para las API anteriores del `apiserver` de Kubernetes y el cliente `kubectl`.<br><br>Debe actualizar todos los campos `apiVersion` de YAML para que utilicen `apps/v1`. Además, revise los [Documentos de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) para ver si existen cambios relacionados con `apps/v1`, como el siguiente.
+<ul><li>Después de crear un despliegue, el campo `.spec.selector` es inmutable.</li>
+<li>El campo `.spec.rollbackTo` está en desuso. En su lugar, utilice el mandato `kubectl rollout undo`.</li></ul></td>
+</tr>
+<tr>
+<td>CoreDNS disponible como proveedor DNS de clúster</td>
+<td>El proyecto Kubernetes está en proceso de transición para dar soporte a CoreDNS en lugar de hacerlo al DNS de Kubernetes actual (KubeDNS). En la versión 1.12, el DNS de clúster predeterminado sigue siendo KubeDNS, pero puede [optar por utilizar CoreDNS](cs_cluster_update.html#dns).</td>
+</tr>
+<tr>
+<td>`kubectl apply --force`</td>
+<td>Ahora, al forzar una acción de aplicación (`kubectl apply --force`) sobre recursos que no se pueden actualizar, como campos inmutables en archivos YAML, los recursos se vuelven a crear en su lugar. Si sus scripts se basan en el comportamiento anterior, actualícelos.</td>
+</tr>
+<tr>
+<td>`kubectl logs --interactive`</td>
+<td>Ya no hay soporte para el distintivo `--interactive` en `kubectl logs`. Actualice cualquier automatización que utilice este distintivo.</td>
+</tr>
+<tr>
+<td>`kubectl patch`</td>
+<td>Si el mandato `patch` no tiene ningún cambio como resultado (parche redundante), el mandato ya no sale con un código de retorno de `1`. Si sus scripts se basan en el comportamiento anterior, actualícelos.</td>
+</tr>
+<tr>
+<td>`kubectl version -c`</td>
+<td>Ya no hay soporte para el distintivo de sintaxis abreviada `-c`. En su lugar, utilice el distintivo completo `--client`. Actualice cualquier automatización que utilice este distintivo.</td>
+</tr>
+<tr>
+<td>`kubectl wait`</td>
+<td>Si no se encuentra ningún selector coincidente, ahora el mandato imprime un mensaje de error y sale con un código de retorno de `1`. Si sus scripts se basan en el comportamiento anterior, actualícelos.</td>
+</tr>
+<tr>
+<td>kubelet cAdvisor port</td>
+<td>La interfaz de usuario web de [Container Advisor (cAdvisor) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/google/cadvisor) que utilizaba Kubelet al iniciar el `--cadvisor-port` se ha eliminado de Kubernetes 1.12. Si aún tiene la necesidad de ejecutar cAdvisor, [despliegue cAdvisor como un conjunto de daemons ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/google/cadvisor/tree/master/deploy/kubernetes).<br><br>En el conjunto de daemons, especifique la sección de puertos para que se pueda acceder a cAdvisor a través de
+`http://node-ip:4194`, según se indica a continuación. Tenga en cuenta que los pods de cAdvisor fallarán hasta que los nodos trabajadores se actualicen a 1.12, debido a que las versiones anteriores de Kubelet utilizan el puerto de host 4194 para cAdvisor.
+<pre class="screen"><code>ports:
+          - name: http
+            containerPort: 8080
+            hostPort: 4194
+            protocol: TCP</code></pre></td>
+</tr>
+<tr>
+<td>Panel de control de Kubernetes</td>
+<td>Si accede al panel de control a través de `kubectl proxy`, se elimina el botón **OMITIR** de la página de inicio de sesión. En su lugar, utilice una **Señal** para iniciar sesión.</td>
+</tr>
+<tr>
+<td id="metrics-server">Servidor de métricas de Kubernetes</td>
+<td>El servidor de métricas de Kubernetes sustituye a Kubernetes Heapster (en desuso desde la versión 1.8 de Kubernetes) como proveedor de métricas de clúster. Si ejecuta más de 30 pods por nodo trabajador en el clúster, [ajuste la configuración de `metrics-server` por motivos de rendimiento](cs_performance.html#metrics).
+<p>El panel de control de Kubernetes no funciona con el `metrics-server`. Si desea mostrar métricas en un panel de control, elija una de las opciones siguientes.</p>
+<ul><li>[Configure Grafana para analizar métricas](/docs/services/cloud-monitoring/tutorials/container_service_metrics.html#container_service_metrics) utilizando el Panel de control de supervisión del clúster.</li>
+<li>Despliegue [Heapster ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/heapster) en el clúster.
+<ol><li>Copie los archivos [YAML ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/heapster-rbac.yaml) `heapster-rbac`, [YAML ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-service.yaml) `heapster-service` y [YAML ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-controller.yaml) `heapster-controller`.</li>
+<li>Edite el archivo YAML `heapster-controller` sustituyendo las series siguientes.
+<ul><li>Sustituya `{{ nanny_memory }}` por `90Mi`</li>
+<li>Sustituya `{{ base_metrics_cpu }}` por `80m`</li>
+<li>Sustituya `{{ metrics_cpu_per_node }}` por `0.5m`</li>
+<li>Sustituya `{{ base_metrics_memory }}` por `140Mi`</li>
+<li>Sustituya `{{ metrics_memory_per_node }}` por `4Mi`</li>
+<li>Sustituya `{{ heapster_min_cluster_size }}` por `16`</li></ul></li>
+<li>Aplique los archivos YAML `heapster-rbac`, `heapster-service` y `heapster-controller` al clúster ejecutando el mandato `kubectl apply -f`.</li></ol></li></ul></td>
+</tr>
+<tr>
+<td>API de Kubernetes `rbac.authorization.k8s.io/v1`</td>
+<td>La API de Kubernetes `rbac.authorization.k8s.io/v1` (soportada desde Kubernetes 1.8) va a sustituir a las API `rbac.authorization.k8s.io/v1alpha1` y `rbac.authorization.k8s.io/v1beta1`. Ya no puede crear objetos RBAC como roles o enlaces de rol con la API `v1alpha` no soportada. Los objetos RBAC existentes se convierten a la API `v1`.</td>
+</tr>
+</tbody>
+</table>
+
 ## Versión 1.11
 {: #cs_v111}
 
 <p><img src="images/certified_kubernetes_1x11.png" style="padding-right: 10px;" align="left" alt="Este distintivo indica la certificación de Kubernetes versión 1.11 para IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} es un producto certificado para Kubernetes versión 1.11 bajo el programa CNCF Kubernetes Software Conformance Certification. _Kubernetes® es una marca registrada de The Linux Foundation en Estados Unidos y en otros países, y se utiliza de acuerdo con una licencia de The Linux Foundation._</p>
 
 Revise los cambios que puede necesitar hacer cuando vaya a actualizar de la versión anterior de Kubernetes a la versión 1.11.
+{: shortdesc}
 
-**Importante**: para poder actualizar correctamente de la versión 1.9 o anterior de Kubertenes a la versión 1.11, debe seguir los pasos que se indican en [Preparación para actualizar a Calico v3](#111_calicov3).
+Para poder actualizar correctamente de la versión 1.9 o anterior de Kubernetes a la versión 1.11, debe seguir los pasos que se indican en [Preparación para actualizar a Calico v3](#111_calicov3).
+{: important}
 
 ### Actualización antes de maestro
 {: #111_before}
+
+En la tabla siguiente se muestran las acciones que debe llevar a cabo antes de actualizar el maestro de Kubernetes. 
+{: shortdesc}
 
 <table summary="Actualizaciones de Kubernetes para la versión 1.11">
 <caption>Cambios necesarios antes de actualizar el maestro a Kubernetes 1.11</caption>
@@ -117,8 +243,21 @@ Revise los cambios que puede necesitar hacer cuando vaya a actualizar de la vers
 </thead>
 <tbody>
 <tr>
-<td>nuevo tiempo de ejecución de contenedor de Kubernetes `containerd`</td>
-<td><strong>Importante</strong>: `containerd` sustituye a Docker como el nuevo tiempo de ejecución de contenedor para Kubernetes. Para conocer las acciones que debe llevar a cabo, consulte [Migración a `containerd` como tiempo de ejecución de contenedor](#containerd).</td>
+<td>Configuración de alta disponibilidad (HA) del maestro del clúster</td>
+<td>Se ha actualizado la configuración del maestro del clúster para aumentar la alta disponibilidad (HA). Los clústeres tienen ahora tres réplicas del maestro de Kubernetes que se configuran con cada maestro desplegado en hosts físicos independientes. Además, si el clúster está en una zona con capacidad multizona, los maestros se distribuyen entre las zonas.<br><br>Para ver las acciones que debe realizar, consulte [Actualización a maestros de clúster de alta disponibilidad](#ha-masters). Estas acciones preparatorias se aplican:<ul>
+<li>Si tiene un cortafuegos o políticas de red Calico personalizadas.</li>
+<li>Si utiliza los puertos de host `2040` o `2041` en sus nodos trabajadores.</li>
+<li>Si ha utilizado la dirección IP del maestro del clúster para el acceso al maestro dentro del clúster.</li>
+<li>Si tiene una automatización que llama a la API o a la CLI de Calico (`calicoctl`), como para crear políticas de Calico.</li>
+<li>Si utiliza políticas de red de Kubernetes o Calico para controlar el acceso de salida de pod al maestro.</li></ul></td>
+</tr>
+<tr>
+<td>Nuevo tiempo de ejecución de contenedor de Kubernetes `containerd`</td>
+<td><p class="important">`containerd` sustituye a Docker como el nuevo tiempo de ejecución de contenedor para Kubernetes. Para conocer las acciones que debe llevar a cabo, consulte [Actualización a `containerd` como tiempo de ejecución de contenedor](#containerd).</p></td>
+</tr>
+<tr>
+<td>Cifrado de datos en etcd</td>
+<td>Anteriormente, los datos de etcd se almacenaban en una instancia de almacenamiento de archivos NFS del maestro que se cifraba en reposo. Ahora, los datos de etcd se almacenan en el disco local del maestro y se realiza una copia de seguridad en {{site.data.keyword.cos_full_notm}}. Los datos se cifran durante el tránsito a {{site.data.keyword.cos_full_notm}} y en reposo. No obstante, los datos de etcd en el disco local del maestro no se cifran. Si desea que se cifren los datos de etcd locales del maestro, [habilite {{site.data.keyword.keymanagementservicelong_notm}} en el clúster](cs_encrypt.html#keyprotect).</td>
 </tr>
 <tr>
 <td>Propagación de montaje de volumen de contenedor de Kubernetes</td>
@@ -126,13 +265,16 @@ Revise los cambios que puede necesitar hacer cuando vaya a actualizar de la vers
 </tr>
 <tr>
 <td>Deserializador JSON del servidor de API de Kubernetes</td>
-<td>El deserializador JSON del servidor de API de Kubernetes ahora es sensible a las mayúsculas y minúsculas. Este cambio restaura el comportamiento que existía en Kubernetes versión 1.7 y anteriores. Si las definiciones de recursos JSON utilizan mayúsculas y minúsculas de forma incorrecta, actualícelas. <br><br>**Nota**: solo se ven afectadas las solicitudes directas de servidor de API de Kubernetes. En la CLI de `kubectl` se han seguido aplicando claves sensibles a las mayúsculas y minúsculas en la versión 1.7 y posteriores de Kubernetes, por lo que si gestiona sus recursos exclusivamente con `kubectl`, no se ve afectado.</td>
+<td>El deserializador JSON del servidor de API de Kubernetes ahora es sensible a las mayúsculas y minúsculas. Este cambio restaura el comportamiento que existía en Kubernetes versión 1.7 y anteriores. Si las definiciones de recursos JSON utilizan mayúsculas y minúsculas de forma incorrecta, actualícelas. <br><br>Solo se ven afectadas las solicitudes directas de servidor de API de Kubernetes. En la CLI de `kubectl` se han seguido aplicando claves sensibles a las mayúsculas y minúsculas en la versión 1.7 y posteriores de Kubernetes, por lo que si gestiona sus recursos exclusivamente con `kubectl`, no se ve afectado.</td>
 </tr>
 </tbody>
 </table>
 
 ### Actualización después de nodo maestro
 {: #111_after}
+
+En la tabla siguiente se muestran las acciones que debe llevar a cabo después de actualizar el maestro de Kubernetes. 
+{: shortdesc}
 
 <table summary="Actualizaciones de Kubernetes para la versión 1.11">
 <caption>Cambios necesarios después de actualizar el nodo maestro a Kubernetes 1.11</caption>
@@ -171,7 +313,167 @@ El directorio de registro de contenedor ha cambiado de `/var/lib/docker/` a `/va
 </tbody>
 </table>
 
-### Migración a `containerd` como tiempo de ejecución del contenedor
+### Actualización a maestros de clúster de alta disponibilidad en Kubernetes 1.11
+{: #ha-masters}
+
+Para clústeres que ejecutan Kubernetes versión [1.10.8_1530](#110_ha-masters), 1.11.3_1531, o posterior, se ha actualizado la configuración del maestro del clúster para aumentar la alta disponibilidad (HA). Los clústeres tienen ahora tres réplicas del maestro de Kubernetes que se configuran con cada maestro desplegado en hosts físicos independientes. Además, si el clúster está en una zona con capacidad multizona, los maestros se distribuyen entre las zonas.
+{: shortdesc}
+
+Al actualizar el clúster a esta versión de Kubernetes desde la versión 1.9 o un parche anterior de 1.10 o 1.11, deberá realizar estos pasos de preparación. Para darle tiempo, las actualizaciones automáticas del maestro se inhabilitan temporalmente. Para obtener más información y la línea de tiempo, consulte la [publicación de blog de maestro de alta disponibilidad](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
+{: tip}
+
+Revise las situaciones siguientes en las que debe realizar cambios para aprovechar al máximo la configuración de maestro de alta disponibilidad:
+* Si tiene un cortafuegos o políticas de red Calico personalizadas.
+* Si utiliza los puertos de host `2040` o `2041` en sus nodos trabajadores.
+* Si ha utilizado la dirección IP del maestro del clúster para el acceso al maestro dentro del clúster.
+* Si tiene una automatización que llama a la API o a la CLI de Calico (`calicoctl`), como para crear políticas de Calico.
+* Si utiliza políticas de red de Kubernetes o Calico para controlar el acceso de salida de pod al maestro.
+
+<br>
+**Actualización del cortafuegos o las políticas de red de host de Calico personalizadas para maestros de alta disponibilidad**:</br>
+{: #ha-firewall}
+Si utiliza un cortafuegos o políticas de red de host de Calico personalizadas para controlar la salida de sus nodos trabajadores, permita el tráfico de salida con los puertos y direcciones IP para todas las zonas que estén dentro de la región en la que se encuentra el clúster. Consulte [Cómo permitir al clúster acceder a recursos de infraestructura y otros servicios](cs_firewall.html#firewall_outbound).
+
+<br>
+**Reserva de los puertos de host `2040` y `2041` en los nodos trabajadores**:</br>
+{: #ha-ports}
+Para permitir el acceso al maestro de clúster en una configuración de alta disponibilidad, debe dejar los puertos de host `2040` y `2041` disponibles en todos los nodos trabajadores.
+* Actualice los pods que tengan `hostPort` establecido en `2040` o `2041` para que utilicen puertos distintos.
+* Actualice los pods que tengan `hostNetwork` establecido en `true` que estén a la escucha en los puertos `2040` o `2041` para que utilicen puertos distintos.
+
+Para comprobar si los pods están utilizando actualmente los puertos `2040` o `2041`, ejecute el mandato siguiente con su clúster como objetivo.
+
+```
+kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+```
+{: pre}
+
+<br>
+**Uso del dominio o IP del clúster del servicio `kubernetes` para el acceso al maestro dentro del clúster**:</br>
+{: #ha-incluster}
+Para acceder al maestro de clúster en una configuración de alta disponibilidad desde dentro del clúster, utilice una de las opciones siguientes:
+* La dirección IP del clúster del servicio `kubernetes`, cuyo valor predeterminado es `https://172.21.0.1`
+* El nombre de dominio del servicio `kubernetes`, cuyo valor predeterminado es `https://kubernetes.default.svc.cluster.local`
+
+Si ha utilizado anteriormente la dirección IP del maestro de clúster, este método seguirá funcionando. Sin embargo, para obtener una disponibilidad mejorada, actualice para utilizar la dirección IP o el nombre de dominio del clúster del servicio `kubernetes`.
+
+<br>
+**Configuración de Calico para el acceso fuera del clúster al maestro con una configuración de alta disponibilidad**:</br>
+{: #ha-outofcluster}
+Los datos que se almacenan en el mapa de configuración `calico-config` del espacio de nombres `kube-system` se han modificado para dar soporte a la configuración de maestro de alta disponibilidad. En concreto, el valor de `etcd_endpoints` solo tiene ahora soporte para el acceso dentro del clúster. El uso de este valor para configurar la CLI de Calico para acceder desde fuera del clúster ya no funciona.
+
+En su lugar, utilice los datos almacenados en el mapa de configuración `cluster-info` del espacio de nombres `kube-system`. En concreto, utilice los valores de `etcd_host` y `etcd_port` para configurar el punto final para la [Calico CLI](cs_network_policy.html#cli_install) para acceder al maestro con la configuración de alta disponibilidad desde fuera del clúster.
+
+<br>
+**Actualización de las políticas de red de Kubernetes o Calico**:</br>
+{: #ha-networkpolicies}
+Necesitará llevar a cabo acciones adicionales si utiliza [políticas de red de Kubernetes o Calico](cs_network_policy.html#network_policies) para controlar el acceso de salida de pod al maestro de clúster y actualmente utiliza:
+*  La dirección IP del clúster del servicio Kubernetes, que puede obtener ejecutando `kubectl get service kubernetes -o yaml | grep clusterIP`.
+*  El nombre de dominio del servicio Kubernetes, cuyo valor predeterminado es `https://kubernetes.default.svc.cluster.local`.
+*  La dirección IP del maestro de clúster, que puede obtener ejecutando `kubectl cluster-info | grep Kubernetes`.
+
+Los pasos siguientes describen cómo actualizar las políticas de red de Kubernetes. Para actualizar las políticas de red de Calico, repita estos pasos con algunos cambios de sintaxis de política menores y `calicoctl` para buscar impactos en las políticas.
+{: note}
+
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+
+1.  Obtenga la dirección IP del maestro de clúster.
+    ```
+    kubectl cluster-info | grep Kubernetes
+    ```
+    {: pre}
+
+2.  Busque impactos en las políticas de red de Kubernetes. Si no se devuelve ningún YAML, el clúster no se ve afectado y no necesita realizar cambios adicionales.
+    ```
+    kubectl get networkpolicies --all-namespaces -o yaml | grep <cluster-master-ip>
+    ```
+    {: pre}
+
+3.  Revise el YAML. Por ejemplo, si el clúster utiliza la política de red de Kubernetes siguiente para permitir que los pods del espacio de nombres `default` puedan acceder al maestro de clúster a través de la dirección IP del clúster del servicio `kubernetes` o de la dirección IP del maestro de clúster, deberá actualizar la política.
+    ```
+    apiVersion: extensions/v1beta1
+    kind: NetworkPolicy
+    metadata:
+      name: all-master-egress
+      namespace: default
+    spec:
+      egress:
+      # Allow access to cluster master using kubernetes service cluster IP address
+      # or domain name or cluster master IP address.
+      - ports:
+        - protocol: TCP
+        to:
+        - ipBlock:
+            cidr: 161.202.126.210/32
+      # Allow access to Kubernetes DNS in order to resolve the kubernetes service
+      # domain name.
+      - ports:
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
+      podSelector: {}
+      policyTypes:
+      - Egress
+    ```
+    {: screen}
+
+4.  Revise la política de red de Kubernetes para permitir la salida para la dirección IP `172.20.0.1` del proxy maestro dentro del clúster. Por ahora, guarde la dirección IP del maestro de clúster. Por ejemplo, el ejemplo anterior de política de red cambia a lo siguiente.
+
+    Si ha configurado anteriormente las políticas de salida para abrir solo la dirección IP y el puerto para el único maestro de Kubernetes, utilice ahora el rango de direcciones IP 172.20.0.1/32 y el puerto 2040 del proxy maestro dentro del clúster.
+    {: tip}
+
+    ```
+    apiVersion: extensions/v1beta1
+    kind: NetworkPolicy
+    metadata:
+      name: all-master-egress
+      namespace: default
+    spec:
+      egress:
+      # Allow access to cluster master using kubernetes service cluster IP address
+      # or domain name.
+      - ports:
+        - protocol: TCP
+        to:
+        - ipBlock:
+            cidr: 172.20.0.1/32
+        - ipBlock:
+            cidr: 161.202.126.210/32
+      # Allow access to Kubernetes DNS in order to resolve the kubernetes service domain name.
+      - ports:
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
+      podSelector: {}
+      policyTypes:
+      - Egress
+    ```
+    {: screen}
+
+5.  Aplique la política de red revisada al clúster.
+    ```
+    kubectl apply -f all-master-egress.yaml
+    ```
+    {: pre}
+
+6.  Después de completar todas las [acciones de preparación](#ha-masters) (incluyendo estos pasos), [actualice el maestro de clúster](cs_cluster_update.html#master) al fixpack de maestro de alta disponibilidad.
+
+7.  Una vez completada la actualización, elimine la dirección IP del maestro de clúster de la política de red. Por ejemplo, a partir de la política de red anterior, elimine las líneas siguientes y, a continuación, vuelva a aplicar la política.
+
+    ```
+    - ipBlock:
+        cidr: 161.202.126.210/32
+    ```
+    {: screen}
+
+    ```
+    kubectl apply -f all-master-egress.yaml
+    ```
+    {: pre}
+
+### Actualización a `containerd` como tiempo de ejecución del contenedor
 {: #containerd}
 
 Para clústeres que ejecutan la versión 1.11 o posterior, `containerd` sustituye a Docker como el nuevo tiempo de ejecución de contenedor para Kubernetes, para mejorar el rendimiento. Si sus pods se basan en Docker como tiempo de ejecución de contenedor de Kubernetes, debe actualizarlos para que gestionen `containerd` como tiempo de ejecución de contenedor. Para obtener más información, consulte el [anuncio de containerd de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/blog/2018/05/24/kubernetes-containerd-integration-goes-ga/).
@@ -179,12 +481,14 @@ Para clústeres que ejecutan la versión 1.11 o posterior, `containerd` sustituy
 
 **¿Cómo puedo saber si mis apps se basan en `docker` en lugar de en `containerd`? **<br>
 Ejemplos de situaciones en las que es posible que se base en Docker como tiempo de ejecución de contenedor:
-*  Si accede al motor de Docker o a la API directamente utilizando contenedores con privilegios, actualice los pods para admitir `containerd` como tiempo de ejecución.
-*  Algunos complementos de terceros como, por ejemplo, las herramientas de registro y supervisión, que se instalan en el clúster, pueden basarse en el motor de Docker. Consulte con el proveedor para asegurarse de que las herramientas son compatibles con `containerd`.
+*  Si accede al motor de Docker o a la API directamente utilizando contenedores con privilegios, actualice los pods para admitir `containerd` como tiempo de ejecución. Por ejemplo, puede llamar directamente al socket de Docker para iniciar contenedores o realizar otras operaciones de Docker. El socket de Docker ha cambiado de `/var/run/docker.sock` a `/run/containerd/containerd.sock`. El protocolo utilizado en el socket `containerd` es ligeramente distinto al de Docker. Intente actualizar la app al socket `containerd`. Si desea seguir utilizando el socket de Docker, investigue el uso de [Docker-inside-Docker (DinD) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://hub.docker.com/_/docker/).
+*  Algunos complementos de terceros como, por ejemplo, las herramientas de registro y supervisión, que se instalan en el clúster, pueden basarse en el motor de Docker. Consulte con el proveedor para asegurarse de que las herramientas son compatibles con containerd. Los casos de uso posibles incluyen:
+   - La herramienta de registro podría utilizar el directorio `/var/log/pods/<pod_uuid>/<container_name>/*.log` del contenedor `stderr/stdout` para acceder a los registros. En Docker, este directorio es un enlace simbólico a `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log`, mientras que en `containerd` acceder al directorio directamente sin un enlace simbólico.
+   - La herramienta de supervisión accede al socket de Docker directamente. El socket de Docker ha cambiado de `/var/run/docker.sock` a `/run/containerd/containerd.sock`.
 
 <br>
 
-**Además de la dependencia en el tiempo de ejecución, ¿tengo que realizar otras acciones de migración?**<br>
+**Además de la dependencia en el tiempo de ejecución, ¿tengo que realizar otras acciones de preparación?**<br>
 
 **Herramienta de manifiesto**: si imágenes de varias plataformas que se han creado con la herramienta experimental `docker manifest` [![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/edge/engine/reference/commandline/manifest/) antes de Docker versión 18.06, no puede extraer la imagen de DockerHub utilizando `containerd`.
 
@@ -207,9 +511,11 @@ En general, los procesos de despliegue de contenedor no cambian. Todavía puede 
 ### Preparación para actualizar a Calico v3
 {: #111_calicov3}
 
-**Importante**: si está actualizando un clúster de la versión 1.9 o anterior de Kubernetes a la versión 1.11, prepárese para la actualización de Calico v3 antes de actualizar el nodo maestro. Durante la actualización del nodo maestro a Kubernetes v1.11, los nuevos pods y las nuevas políticas de red de Calico o Kubernetes no se planifican. La cantidad de tiempo que la actualización impide nuevas planificaciones varía. En pequeños clústeres podría llevar unos minutos, con unos minutos adicionales por cada 10 nodos. Los pods y las políticas de red existentes continuarán en ejecución.
+Si está actualizando un clúster de la versión 1.9 o anterior de Kubernetes a la versión 1.11, prepárese para la actualización de Calico v3 antes de actualizar el nodo maestro. Durante la actualización del nodo maestro a Kubernetes v1.11, los nuevos pods y las nuevas políticas de red de Calico o Kubernetes no se planifican. La cantidad de tiempo que la actualización impide nuevas planificaciones varía. En pequeños clústeres podría llevar unos minutos, con unos minutos adicionales por cada 10 nodos. Los pods y las políticas de red existentes continuarán en ejecución.
+{: shortdesc}
 
-**Nota**: si actualiza un clúster de Kubernetes versión 1.10 a la versión 1.11, omita estos pasos porque ya los ha realizado al actualizar a la versión 1.10.
+Si actualiza un clúster de Kubernetes versión 1.10 a la versión 1.11, omita estos pasos porque ya los ha realizado al actualizar a la versión 1.10.
+{: note}
 
 Antes de empezar, el maestro del clúster y todos los nodos trabajadores deben estar ejecutándose con Kubernetes versión 1.8 o 1.9, y deben tener como mínimo un nodo trabajador.
 
@@ -219,7 +525,13 @@ Antes de empezar, el maestro del clúster y todos los nodos trabajadores deben e
     ```
     {: pre}
 
-2.  Si hay algún pod que no esté en el estado **En ejecución**, suprima el pod y espere hasta que esté en el estado **En ejecución** antes de continuar.
+2.  Si hay algún pod que no esté en el estado **En ejecución**, suprima el pod y espere hasta que esté en el estado **En ejecución** antes de continuar. Si el pod no vuelve a un estado **En ejecución**:
+    1.  Compruebe el **Estado (State)** y el **Estatus (Status)** del nodo trabajador.
+        ```
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  Si el estado del nodo trabajador no es **Normal**, siga los pasos de [Depuración de nodos trabajadores](cs_troubleshoot.html#debug_worker_nodes). Por ejemplo, un estado **Crítico** o **Desconocido** se resuelve con frecuencia [volviendo a cargar el nodo trabajador](cs_cli_reference.html#cs_worker_reload).
 
 3.  Si genera automáticamente políticas de Calico u otros recursos de Calico, actualice su herramienta de automatización para generar estos recursos con la [sintaxis de Calico v3 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/).
 
@@ -236,13 +548,18 @@ Antes de empezar, el maestro del clúster y todos los nodos trabajadores deben e
 <p><img src="images/certified_kubernetes_1x10.png" style="padding-right: 10px;" align="left" alt="Este distintivo indica la certificación de Kubernetes versión 1.10 para IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} es un producto certificado para Kubernetes versión 1.10 bajo el programa CNCF Kubernetes Software Conformance Certification. _Kubernetes® es una marca registrada de The Linux Foundation en Estados Unidos y en otros países, y se utiliza de acuerdo con una licencia de The Linux Foundation._</p>
 
 Revise los cambios que puede necesitar hacer cuando vaya a actualizar de la versión anterior de Kubernetes a la versión 1.10.
+{: shortdesc}
 
-**Importante**: Antes de poder actualizar de forma satisfactoria a Kubernetes 1.10, debe seguir los pasos que se indican en [Preparación para actualizar a Calico v3](#110_calicov3).
+Antes de poder actualizar de forma satisfactoria a Kubernetes 1.10, debe seguir los pasos que se indican en [Preparación para actualizar a Calico v3](#110_calicov3).
+{: important}
 
 <br/>
 
 ### Actualización antes de maestro
 {: #110_before}
+
+En la tabla siguiente se muestran las acciones que debe llevar a cabo antes de actualizar el maestro de Kubernetes. 
+{: shortdesc}
 
 <table summary="Actualizaciones de Kubernetes para la versión 1.10">
 <caption>Cambios necesarios antes de actualizar el maestro a Kubernetes 1.10</caption>
@@ -256,6 +573,15 @@ Revise los cambios que puede necesitar hacer cuando vaya a actualizar de la vers
 <tr>
 <td>Calico v3</td>
 <td>La actualización a Kubernetes versión 1.10 también actualiza Calico desde la v2.6.5 a v3.1.1. <strong>Importante</strong>: Antes de poder actualizar de forma satisfactoria a Kubernetes v1.10, debe seguir los pasos que se indican en [Preparación para actualizar a Calico v3](#110_calicov3).</td>
+</tr>
+<tr>
+<td>Configuración de alta disponibilidad (HA) del maestro del clúster</td>
+<td>Se ha actualizado la configuración del maestro del clúster para aumentar la alta disponibilidad (HA). Los clústeres tienen ahora tres réplicas del maestro de Kubernetes que se configuran con cada maestro desplegado en hosts físicos independientes. Además, si el clúster está en una zona con capacidad multizona, los maestros se distribuyen entre las zonas.<br><br>Para ver las acciones que debe realizar, consulte [Actualización a maestros de clúster de alta disponibilidad](#110_ha-masters). Estas acciones preparatorias se aplican:<ul>
+<li>Si tiene un cortafuegos o políticas de red Calico personalizadas.</li>
+<li>Si utiliza los puertos de host `2040` o `2041` en sus nodos trabajadores.</li>
+<li>Si ha utilizado la dirección IP del maestro del clúster para el acceso al maestro dentro del clúster.</li>
+<li>Si tiene una automatización que llama a la API o a la CLI de Calico (`calicoctl`), como para crear políticas de Calico.</li>
+<li>Si utiliza políticas de red de Kubernetes o Calico para controlar el acceso de salida de pod al maestro.</li></ul></td>
 </tr>
 <tr>
 <td>Política de red del panel de control de Kubernetes</td>
@@ -279,6 +605,9 @@ Revise los cambios que puede necesitar hacer cuando vaya a actualizar de la vers
 ### Actualización después de nodo maestro
 {: #110_after}
 
+En la tabla siguiente se muestran las acciones que debe llevar a cabo después de actualizar el maestro de Kubernetes. 
+{: shortdesc}
+
 <table summary="Actualizaciones de Kubernetes para la versión 1.10">
 <caption>Cambios necesarios después de actualizar el nodo maestro a Kubernetes 1.10</caption>
 <thead>
@@ -301,9 +630,13 @@ Revise los cambios que puede necesitar hacer cuando vaya a actualizar de la vers
 <td>Ahora al utilizar el mandato <code>kubectl port-forward</code>, ya no se dará soporte al distintivo <code>-p</code>. Si sus scripts se basan en el comportamiento anterior, actualícelos sustituyendo el distintivo <code>-p</code> con el nombre de pod.</td>
 </tr>
 <tr>
+<td>Distintivo `kubectl --show-all, -a`</td>
+<td>El distintivo `--show-all, -a`, que solo se aplica a mandatos de pod legibles (no a llamadas de API), está en desuso y no tiene soporte en versiones posteriores. El distintivo se utiliza para mostrar pods en un estado terminal. Para realizar un seguimiento de la información acerca de contenedores y apps terminadas, [configure el reenvío de registros en el clúster](cs_health.html#health).</td>
+</tr>
+<tr>
 <td>Volúmenes de datos de API de solo lectura</td>
 <td>Ahora se montan como de solo lectura los volúmenes proyectados, `secret`, `configMap` y `downwardAPI`.
-Con anterioridad, las apps podían escribir datos en estos volúmenes que el sistema podía revertir de forma automática. Esta acción de migración es necesaria para corregir la vulnerabilidad de seguridad [CVE-2017-1002102![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
+Con anterioridad, las apps podían escribir datos en estos volúmenes que el sistema podía revertir de forma automática. Este cambio es necesario para arreglar la vulnerabilidad de seguridad [CVE-2017-1002102![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
 Si sus apps se basaban en este comportamiento inseguro anterior, modifíquelas en consecuencia.</td>
 </tr>
 <tr>
@@ -313,12 +646,174 @@ Si sus apps se basaban en este comportamiento inseguro anterior, modifíquelas e
 </tbody>
 </table>
 
+### Actualización a maestros de clúster de alta disponibilidad en Kubernetes 1.10
+{: #110_ha-masters}
+
+Para clústeres que ejecutan Kubernetes versión 1.10.8_1530, [1.11.3_1531](#ha-masters), o posterior, se ha actualizado la configuración del maestro del clúster para aumentar la alta disponibilidad (HA). Los clústeres tienen ahora tres réplicas del maestro de Kubernetes que se configuran con cada maestro desplegado en hosts físicos independientes. Además, si el clúster está en una zona con capacidad multizona, los maestros se distribuyen entre las zonas.
+{: shortdesc}
+
+Al actualizar el clúster a esta versión de Kubernetes desde la versión 1.9 o un parche anterior de 1.10, deberá realizar estos pasos de preparación. Para darle tiempo, las actualizaciones automáticas del maestro se inhabilitan temporalmente. Para obtener más información y la línea de tiempo, consulte la [publicación de blog de maestro de alta disponibilidad](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/).
+{: tip}
+
+Revise las situaciones siguientes en las que debe realizar cambios para aprovechar al máximo la configuración de maestro de alta disponibilidad:
+* Si tiene un cortafuegos o políticas de red Calico personalizadas.
+* Si utiliza los puertos de host `2040` o `2041` en sus nodos trabajadores.
+* Si ha utilizado la dirección IP del maestro del clúster para el acceso al maestro dentro del clúster.
+* Si tiene una automatización que llama a la API o a la CLI de Calico (`calicoctl`), como para crear políticas de Calico.
+* Si utiliza políticas de red de Kubernetes o Calico para controlar el acceso de salida de pod al maestro.
+
+<br>
+**Actualización del cortafuegos o las políticas de red de host de Calico personalizadas para maestros de alta disponibilidad**:</br>
+{: #110_ha-firewall}
+Si utiliza un cortafuegos o políticas de red de host de Calico personalizadas para controlar la salida de sus nodos trabajadores, permita el tráfico de salida con los puertos y direcciones IP para todas las zonas que estén dentro de la región en la que se encuentra el clúster. Consulte [Cómo permitir al clúster acceder a recursos de infraestructura y otros servicios](cs_firewall.html#firewall_outbound).
+
+<br>
+**Reserva de los puertos de host `2040` y `2041` en los nodos trabajadores**:</br>
+{: #110_ha-ports}
+Para permitir el acceso al maestro de clúster en una configuración de alta disponibilidad, debe dejar los puertos de host `2040` y `2041` disponibles en todos los nodos trabajadores.
+* Actualice los pods que tengan `hostPort` establecido en `2040` o `2041` para que utilicen puertos distintos.
+* Actualice los pods que tengan `hostNetwork` establecido en `true` que estén a la escucha en los puertos `2040` o `2041` para que utilicen puertos distintos.
+
+Para comprobar si los pods están utilizando actualmente los puertos `2040` o `2041`, ejecute el mandato siguiente con su clúster como objetivo.
+
+```
+kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+```
+{: pre}
+
+<br>
+**Uso del dominio o IP del clúster del servicio `kubernetes` para el acceso al maestro dentro del clúster**:</br>
+{: #110_ha-incluster}
+Para acceder al maestro de clúster en una configuración de alta disponibilidad desde dentro del clúster, utilice una de las opciones siguientes:
+* La dirección IP del clúster del servicio `kubernetes`, cuyo valor predeterminado es `https://172.21.0.1`
+* El nombre de dominio del servicio `kubernetes`, cuyo valor predeterminado es `https://kubernetes.default.svc.cluster.local`
+
+Si ha utilizado anteriormente la dirección IP del maestro de clúster, este método seguirá funcionando. Sin embargo, para obtener una disponibilidad mejorada, actualice para utilizar la dirección IP o el nombre de dominio del clúster del servicio `kubernetes`.
+
+<br>
+**Configuración de Calico para el acceso fuera del clúster al maestro con una configuración de alta disponibilidad**:</br>
+{: #110_ha-outofcluster}
+Los datos que se almacenan en el mapa de configuración `calico-config` del espacio de nombres `kube-system` se han modificado para dar soporte a la configuración de maestro de alta disponibilidad. En concreto, el valor de `etcd_endpoints` solo tiene ahora soporte para el acceso dentro del clúster. El uso de este valor para configurar la CLI de Calico para acceder desde fuera del clúster ya no funciona.
+
+En su lugar, utilice los datos almacenados en el mapa de configuración `cluster-info` del espacio de nombres `kube-system`. En concreto, utilice los valores de `etcd_host` y `etcd_port` para configurar el punto final para la [Calico CLI](cs_network_policy.html#cli_install) para acceder al maestro con la configuración de alta disponibilidad desde fuera del clúster.
+
+<br>
+**Actualización de las políticas de red de Kubernetes o Calico**:</br>
+{: #110_ha-networkpolicies}
+Necesitará llevar a cabo acciones adicionales si utiliza [políticas de red de Kubernetes o Calico](cs_network_policy.html#network_policies) para controlar el acceso de salida de pod al maestro de clúster y actualmente utiliza:
+*  La dirección IP del clúster del servicio Kubernetes, que puede obtener ejecutando `kubectl get service kubernetes -o yaml | grep clusterIP`.
+*  El nombre de dominio del servicio Kubernetes, cuyo valor predeterminado es `https://kubernetes.default.svc.cluster.local`.
+*  La dirección IP del maestro de clúster, que puede obtener ejecutando `kubectl cluster-info | grep Kubernetes`.
+
+Los pasos siguientes describen cómo actualizar las políticas de red de Kubernetes. Para actualizar las políticas de red de Calico, repita estos pasos con algunos cambios de sintaxis de política menores y `calicoctl` para buscar impactos en las políticas.
+{: note}
+
+Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
+
+1.  Obtenga la dirección IP del maestro de clúster.
+    ```
+    kubectl cluster-info | grep Kubernetes
+    ```
+    {: pre}
+
+2.  Busque impactos en las políticas de red de Kubernetes. Si no se devuelve ningún YAML, el clúster no se ve afectado y no necesita realizar cambios adicionales.
+    ```
+    kubectl get networkpolicies --all-namespaces -o yaml | grep <cluster-master-ip>
+    ```
+    {: pre}
+
+3.  Revise el YAML. Por ejemplo, si el clúster utiliza la política de red de Kubernetes siguiente para permitir que los pods del espacio de nombres `default` puedan acceder al maestro de clúster a través de la dirección IP del clúster del servicio `kubernetes` o de la dirección IP del maestro de clúster, deberá actualizar la política.
+    ```
+    apiVersion: extensions/v1beta1
+    kind: NetworkPolicy
+    metadata:
+      name: all-master-egress
+      namespace: default
+    spec:
+      egress:
+      # Allow access to cluster master using kubernetes service cluster IP address
+      # or domain name or cluster master IP address.
+      - ports:
+        - protocol: TCP
+        to:
+        - ipBlock:
+            cidr: 161.202.126.210/32
+      # Allow access to Kubernetes DNS in order to resolve the kubernetes service
+      # domain name.
+      - ports:
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
+      podSelector: {}
+      policyTypes:
+      - Egress
+    ```
+    {: screen}
+
+4.  Revise la política de red de Kubernetes para permitir la salida para la dirección IP `172.20.0.1` del proxy maestro dentro del clúster. Por ahora, guarde la dirección IP del maestro de clúster. Por ejemplo, el ejemplo anterior de política de red cambia a lo siguiente.
+
+    Si ha configurado anteriormente las políticas de salida para abrir solo la dirección IP y el puerto para el único maestro de Kubernetes, utilice ahora el rango de direcciones IP 172.20.0.1/32 y el puerto 2040 del proxy maestro dentro del clúster.
+    {: tip}
+
+    ```
+    apiVersion: extensions/v1beta1
+    kind: NetworkPolicy
+    metadata:
+      name: all-master-egress
+      namespace: default
+    spec:
+      egress:
+      # Allow access to cluster master using kubernetes service cluster IP address
+      # or domain name.
+      - ports:
+        - protocol: TCP
+        to:
+        - ipBlock:
+            cidr: 172.20.0.1/32
+        - ipBlock:
+            cidr: 161.202.126.210/32
+      # Allow access to Kubernetes DNS in order to resolve the kubernetes service domain name.
+      - ports:
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
+      podSelector: {}
+      policyTypes:
+      - Egress
+    ```
+    {: screen}
+
+5.  Aplique la política de red revisada al clúster.
+    ```
+    kubectl apply -f all-master-egress.yaml
+    ```
+    {: pre}
+
+6.  Después de completar todas las [acciones de preparación](#ha-masters) (incluyendo estos pasos), [actualice el maestro de clúster](cs_cluster_update.html#master) al fixpack de maestro de alta disponibilidad.
+
+7.  Una vez completada la actualización, elimine la dirección IP del maestro de clúster de la política de red. Por ejemplo, a partir de la política de red anterior, elimine las líneas siguientes y, a continuación, vuelva a aplicar la política.
+
+    ```
+    - ipBlock:
+        cidr: 161.202.126.210/32
+    ```
+    {: screen}
+
+    ```
+    kubectl apply -f all-master-egress.yaml
+    ```
+    {: pre}
+
 ### Preparación para actualizar a Calico v3
 {: #110_calicov3}
 
 Antes de empezar, el maestro del clúster y todos los nodos trabajadores deben estar ejecutándose con Kubernetes versión 1.8 o posterior, y deben tener como mínimo un nodo trabajador.
+{: shortdesc}
 
-**Importante**: Prepárese para la actualización a Calico v3 antes de actualizar el maestro. Durante la actualización del maestro a Kubernetes v1.10, los nuevos pods y las nuevas políticas de red de Calico o Kubernetes no se planifican. La cantidad de tiempo que la actualización impide nuevas planificaciones varía. En pequeños clústeres podría llevar unos minutos, con unos minutos adicionales por cada 10 nodos. Los pods y las políticas de red existentes continuarán en ejecución.
+Prepárese para la actualización a Calico v3 antes de actualizar el maestro. Durante la actualización del maestro a Kubernetes v1.10, los nuevos pods y las nuevas políticas de red de Calico o Kubernetes no se planifican. La cantidad de tiempo que la actualización impide nuevas planificaciones varía. En pequeños clústeres podría llevar unos minutos, con unos minutos adicionales por cada 10 nodos. Los pods y las políticas de red existentes continuarán en ejecución.
+{: important}
 
 1.  Verifique que el estado de los pods de Calico es correcto.
     ```
@@ -326,7 +821,13 @@ Antes de empezar, el maestro del clúster y todos los nodos trabajadores deben e
     ```
     {: pre}
 
-2.  Si hay algún pod que no esté en el estado **En ejecución**, suprima el pod y espere hasta que esté en el estado **En ejecución** antes de continuar.
+2.  Si hay algún pod que no esté en el estado **En ejecución**, suprima el pod y espere hasta que esté en el estado **En ejecución** antes de continuar. Si el pod no vuelve a un estado **En ejecución**:
+    1.  Compruebe el **Estado (State)** y el **Estatus (Status)** del nodo trabajador.
+        ```
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  Si el estado del nodo trabajador no es **Normal**, siga los pasos de [Depuración de nodos trabajadores](cs_troubleshoot.html#debug_worker_nodes). Por ejemplo, un estado **Crítico** o **Desconocido** se resuelve con frecuencia [volviendo a cargar el nodo trabajador](cs_cli_reference.html#cs_worker_reload).
 
 3.  Si genera automáticamente políticas de Calico u otros recursos de Calico, actualice su herramienta de automatización para generar estos recursos con la [sintaxis de Calico v3 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/).
 
@@ -337,17 +838,27 @@ Antes de empezar, el maestro del clúster y todos los nodos trabajadores deben e
 <br />
 
 
-## Versión 1.9
+## Archivo
+{: #k8s_version_archive}
+
+Obtenga una visión general de las versiones de Kubernetes que no se admiten en {{site.data.keyword.containerlong_notm}}. 
+{: shortdesc}
+
+### Versión 1.9 (en desuso, sin soporte desde el 27 de diciembre de 2018)
 {: #cs_v19}
 
 <p><img src="images/certified_kubernetes_1x9.png" style="padding-right: 10px;" align="left" alt="Este identificador indica la certificación de Kubernetes versión 1.9 para IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} es un producto Kubernetes certificado para la versión 1.9 bajo el programa CNCF de certificación de conformidad de software Kubernetes. _Kubernetes® es una marca registrada de The Linux Foundation en Estados Unidos y en otros países, y se utiliza de acuerdo con una licencia de The Linux Foundation._</p>
 
 Revise los cambios que puede necesitar hacer cuando vaya a actualizar de la versión anterior de Kubernetes a 1.9.
+{: shortdesc}
 
 <br/>
 
 ### Actualización antes de maestro
 {: #19_before}
+
+En la tabla siguiente se muestran las acciones que debe llevar a cabo antes de actualizar el maestro de Kubernetes. 
+{: shortdesc}
 
 <table summary="Actualizaciones de Kubernetes para la versión 1.9">
 <caption>Cambios necesarios antes de actualizar el maestro a Kubernetes 1.9</caption>
@@ -367,6 +878,9 @@ Revise los cambios que puede necesitar hacer cuando vaya a actualizar de la vers
 
 ### Actualización después de nodo maestro
 {: #19_after}
+
+En la tabla siguiente se muestran las acciones que debe llevar a cabo después de actualizar el maestro de Kubernetes. 
+{: shortdesc}
 
 <table summary="Actualizaciones de Kubernetes para la versión 1.9">
 <caption>Cambios necesarios después de actualizar el maestro a Kubernetes 1.9</caption>
@@ -393,7 +907,7 @@ Antes, la operación fallaba y se mostraba el mensaje de error `No se ha encontr
 <tr>
 <td>Volúmenes de datos de API de solo lectura</td>
 <td>Ahora se montan como de solo lectura los volúmenes proyectados, `secret`, `configMap` y `downwardAPI`.
-Con anterioridad, las apps podían escribir datos en estos volúmenes que el sistema podía revertir de forma automática. Esta acción de migración es necesaria para corregir la vulnerabilidad de seguridad [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
+Con anterioridad, las apps podían escribir datos en estos volúmenes que el sistema podía revertir de forma automática. Este cambio es necesario para arreglar la vulnerabilidad de seguridad [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
 Si sus apps se basaban en este comportamiento inseguro anterior, modifíquelas en consecuencia.</td>
 </tr>
 <tr>
@@ -411,17 +925,11 @@ Si se devuelve `Action required`, modifique las tolerancias de pod en consonanci
 </tbody>
 </table>
 
-<br />
-
-
-
-## Archivo
-{: #k8s_version_archive}
-
 ### Versión 1.8 (no soportada)
 {: #cs_v18}
 
 A partir del 22 de septiembre de 2018, se deja de dar soporte a los clústeres de {{site.data.keyword.containerlong_notm}} que ejecutan [la versión 1.8 de Kubernetes](cs_versions_changelog.html#changelog_archive). Los clústeres de la versión 1.8 no pueden recibir actualizaciones de seguridad ni soporte a menos que se actualicen a la siguiente versión más reciente ([Kubernetes 1.9](#cs_v19)).
+{: shortdesc}
 
 [Revise el impacto potencial](cs_versions.html#cs_versions) de cada actualización de versión de Kubernetes y luego [actualice los clústeres](cs_cluster_update.html#update) inmediatamente al menos a la versión 1.9.
 
@@ -429,6 +937,7 @@ A partir del 22 de septiembre de 2018, se deja de dar soporte a los clústeres d
 {: #cs_v17}
 
 A partir del 21 de junio de 2018, se deja de dar soporte a los clústeres de {{site.data.keyword.containerlong_notm}} que ejecutan [la versión 1.7 de Kubernetes](cs_versions_changelog.html#changelog_archive). Los clústeres de la versión 1.7 no pueden recibir actualizaciones de seguridad ni soporte a menos que se actualicen a la siguiente versión más reciente ([Kubernetes 1.9](#cs_v19)).
+{: shortdesc}
 
 [Revise el impacto potencial](cs_versions.html#cs_versions) de cada actualización de versión de Kubernetes y luego [actualice los clústeres](cs_cluster_update.html#update) inmediatamente al menos a la versión 1.9.
 
@@ -436,5 +945,6 @@ A partir del 21 de junio de 2018, se deja de dar soporte a los clústeres de {{s
 {: #cs_v1-5}
 
 A partir del 4 de abril de 2018, se deja de dar soporte a los clústeres de {{site.data.keyword.containerlong_notm}} que ejecutan [la versión 1.5 de Kubernetes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md). Los clústeres de la versión 1.5 no pueden recibir actualizaciones de seguridad ni soporte.
+{: shortdesc}
 
-Para continuar ejecutando las apps en {{site.data.keyword.containerlong_notm}}, [cree un nuevo clúster](cs_clusters.html#clusters) y [migre las apps](cs_app.html#app) al clúster.
+Para seguir ejecutando sus apps en {{site.data.keyword.containerlong_notm}}, [cree un clúster nuevo](cs_clusters.html#clusters) y [despliegue sus apps](cs_app.html#app) en el nuevo clúster.

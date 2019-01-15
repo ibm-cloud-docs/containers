@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Configuración de la prioridad de pod
@@ -35,7 +38,7 @@ En general, los pods pendientes que tienen una prioridad más alta se planifican
 
 Si no especifica una prioridad para el despliegue de pod, el valor predeterminado se establece en la clase de prioridad que se establece como `globalDefault`. Si no dispone de una clase de prioridad `globalDefault`, la prioridad predeterminada para todos los pods es cero (` 0 `). De forma predeterminada, {{site.data.keyword.containerlong_notm}} no establece un valor `globalDefault`, por lo que la prioridad predeterminada de pod es cero.
 
-Piense en los casos de ejemplo de la figura siguiente. **Importante**: como puede ver, debe comprender cómo funcionan conjuntamente la prioridad de pod y el planificador para colocar pods priorizados en nodos de trabajador con recursos disponibles. De lo contrario, los pods de prioridad alta del clúster pueden quedar pendientes, al mismo tiempo que se eliminan pods existentes, como en el caso de ejemplo 3.
+Para entender cómo la prioridad de pod y el planificador trabajan juntos, tenga en cuenta los casos de ejemplo de la figura siguiente. Debe colocar los pods priorizados en nodos trabajadores con recursos disponibles. De lo contrario, los pods de prioridad alta del clúster pueden quedar pendientes, al mismo tiempo que se eliminan pods existentes, como en el caso de ejemplo 3.
 
 _Figura: casos de ejemplo de prioridad de pod_
 ![Casos de ejemplo de prioridad de pod](images/pod-priority.png)
@@ -48,13 +51,20 @@ _Figura: casos de ejemplo de prioridad de pod_
 **¿Puedo inhabilitar el controlador de admisión de prioridad de pod?**</br>
 No. Si no desea utilizar la prioridad de pod, no establezca un valor `globalDefault` ni incluya una clase de prioridad en los despliegues de pod. Cada pod se establece de forma predeterminada en cero, excepto los pods críticos del clúster que IBM despliega con las [clases de prioridad predeterminadas](#default_priority_class). Puesto que la prioridad de pod es relativa, esta configuración básica garantiza que se prioricen los pods críticos del clúster para los recursos, y planifica cualquier otro pod siguiendo las políticas de planificación existentes que tiene aplicadas.
 
+**¿Cómo afectan las cuotas de recursos a la prioridad de pod?**</br>
+Puede utilizar la prioridad de pod junto con las cuotas de recursos, incluyendo
+[ámbitos de cuota ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) para clústeres que ejecutan Kubernetes 1.12 o posterior. Con ámbitos de cuotas, puede configurar las cuotas de recursos para que tengan en cuenta la prioridad de pod. Los pods de mayor prioridad pueden llegar a consumir recursos del sistema que están limitados por la cuota de recursos antes que los pods de menor prioridad.
+
 ## Clases de prioridad predeterminadas
 {: #default_priority_class}
 
-Los clústeres de {{site.data.keyword.containerlong_notm}} vienen con algunas clases de prioridad de forma predeterminada. **Importante**: no modifique las clases predeterminadas, que se utilizan para gestionar correctamente el clúster. Puede utilizar estas clases en los despliegues de apps o [crear sus propias clases de prioridad](#create_priority_class).
+Los clústeres de {{site.data.keyword.containerlong_notm}} vienen con algunas clases de prioridad de forma predeterminada.
 {: shortdesc}
 
-En la tabla siguiente se describen las clases de prioridad que se encuentran en el clúster de forma predeterminada y para qué se utilizan. 
+No modifique las clases predeterminadas, que se utilizan para gestionar correctamente el clúster. Puede utilizar estas clases en los despliegues de apps o [crear sus propias clases de prioridad](#create_priority_class).
+{: important}
+
+En la tabla siguiente se describen las clases de prioridad que se encuentran en el clúster de forma predeterminada y para qué se utilizan.
 
 | Nombre | Establecida por | Valor de prioridad | Finalidad |
 |---|---|---|
@@ -80,22 +90,24 @@ Antes de empezar:
 * [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 * [Cree](cs_clusters.html#clusters_ui) o [actualice](cs_cluster_update.html#update) su clúster a Kubernetes versión 1.11 o posterior.
 
+Para utilizar una clase de prioridad:
+
 1.  Opcional: utilice una clase de prioridad existente como plantilla para la nueva clase.
-    
+
     1.  Obtenga una lista de las clases de prioridad existentes.
-        
+
         ```
         kubectl get priorityclasses
         ```
         {: pre}
-        
+
     2.  Elija la clase de prioridad que desea copiar y cree un archivo YAML local.
-    
+
         ```
         kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
         ```
         {: pre}
-        
+
 2.  Cree el archivo YAML de clase de prioridad.
 
     ```yaml
@@ -108,7 +120,7 @@ Antes de empezar:
     description: "Use this class for XYZ service pods only."
     ```
     {: codeblock}
-    
+
     <table>
     <caption>Visión general de los componentes del archivo YAML</caption>
     <thead>
@@ -132,7 +144,7 @@ Antes de empezar:
     <td><code>description</code></td>
     <td>Opcional: indique a los usuarios para qué se utiliza esta clase de prioridad. Encierre la serie entre comillas (`""`).</td>
     </tr></tbody></table>
-    
+
 3.  Cree la clase de prioridad en el clúster.
 
     ```
@@ -164,14 +176,14 @@ Para asignar prioridad a los pods:
 
 1.  Compruebe la importancia de otros pods desplegados para poder seleccionar la clase de prioridad adecuada para los pods en relación con los que ya se han desplegado.
 
-    1.  Consulte las clases de prioridad que utilizan otros pods en el espacio de nombres. 
-        
+    1.  Consulte las clases de prioridad que utilizan otros pods en el espacio de nombres.
+
         ```
         kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
         ```
         {: pre}
-        
-    2.  Obtenga los detalles de la clase de prioridad y anote el número del **valor**. Los pods con números más altos se priorizan antes que los pods con números más bajos. Repita este paso para todas las clases de prioridad que desee consultar.
+
+    2.  Obtenga los detalles de la clase de prioridad y anote el número del **valor**. Los pods con números más altos se priorizan antes que los pods con números más bajos. Repita este paso para todas las clases de prioridad que desee revisar.
 
         ```
         kubectl describe priorityclass <priorityclass_name>
@@ -184,7 +196,7 @@ Para asignar prioridad a los pods:
     kubectl get priorityclasses
     ```
     {: pre}
-    
+
 3.  En la especificación de pod, añada el campo `priorityClassName` con el nombre de la clase de prioridad que ha recuperado en el paso anterior.
 
     ```yaml

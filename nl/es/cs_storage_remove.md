@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -33,15 +36,14 @@ Depende. Cuando se suprime un clúster, se suprimen la PVC y el PV. Sin embargo,
 **¿Puedo suprimir la PVC para eliminar todo mi almacenamiento?**</br>
 A veces. Si [cree el almacenamiento persistente de forma dinámica](cs_storage_basics.html#dynamic_provisioning) y seleccione una clase de almacenamiento sin la opción `retain` en su nombre, cuando suprima la PVC, también se suprimirán el PV y la instancia de almacenamiento de la infraestructura de IBM Cloud (SoftLayer).
 
-En los demás casos, siga las instrucciones para comprobar el estado de su PVC, PV y del dispositivo de almacenamiento físico y suprímalos por separado si hace falta. 
+En los demás casos, siga las instrucciones para comprobar el estado de su PVC, PV y del dispositivo de almacenamiento físico y suprímalos por separado si hace falta.
 
 **¿Se me seguirá cobrando el almacenamiento después de que lo suprima?**</br>
 Depende de lo que suprima y del tipo de facturación. Si suprime la PVC y el PV, pero no la instancia de la cuenta de infraestructura de IBM Cloud (SoftLayer), dicha instancia seguirá existiendo y se le facturará por ella. Debe suprimir todo para evitar cargos. Además, cuando especifique el tipo de facturación (`billingType`) en el PVC, puede elegir por hora (`hourly`) o mensual (`monthly`). Si elige `monthly`, la instancia se facturará mensualmente. Cuando se suprime la instancia, se le facturará durante el resto del mes.
 
 
-**Importante**:
-* Cuando se limpia el almacenamiento persistente, se suprimen todos los datos almacenados en el mismo. Si necesita una copia de los datos, realice una copia de seguridad del [almacenamiento de archivos](cs_storage_file.html#backup_restore) o del [almacenamiento en bloque](cs_storage_block.html#backup_restore).
-* Si utiliza una cuenta de {{site.data.keyword.Bluemix_dedicated}}, debe solicitar la supresión de volúmenes [abriendo una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+<p class="important">Cuando se limpia el almacenamiento persistente, se suprimen todos los datos almacenados en el mismo. Si necesita una copia de los datos, realice una copia de seguridad del [almacenamiento de archivos](cs_storage_file.html#backup_restore) o del [almacenamiento en bloque](cs_storage_block.html#backup_restore).</br>
+</br>Si utiliza una cuenta de {{site.data.keyword.Bluemix_dedicated}}, debe solicitar la supresión de volúmenes [abriendo un caso de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).</p>
 
 Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](cs_cli_install.html#cs_cli_configure).
 
@@ -61,75 +63,74 @@ Para limpiar los datos persistentes:
     claim-file-silve      Bound     pvc-1efef0ba-0c48-11e8-968a-f6612bb731fb   24Gi       RWX           ibmc-file-silver        83d
     ```
     {: screen}
-    
-2. Revise los valores **ReclaimPolicy** y **billingType** para la clase de almacenamiento. 
+
+2. Revise los valores **ReclaimPolicy** y **billingType** para la clase de almacenamiento.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
    {: pre}
-   
-   Si la política de reclamación indica `Delete`, el PV y el almacenamiento físico se eliminan cuando se elimina la PVC. Si la política de reclamación indica `Retain`, o si ha suministrado el almacenamiento sin una clase de almacenamiento, el PV y el almacenamiento físico no se eliminan cuando se elimina la PVC. Debe eliminar la PVC, el PV y el almacenamiento físico por separado. 
-   
-   **Importante:** si el almacenamiento se carga de forma mensual, se le facturará todo el mes, aunque elimine el almacenamiento antes de que finalice el ciclo de facturación. 
-   
-3. Elimine los pods que montan la PVC. 
-   1. Obtenga una lista de los pods que montan la PVC. 
+
+   Si la política de reclamación indica `Delete`, el PV y el almacenamiento físico se eliminan cuando se elimina la PVC. Si la política de reclamación indica `Retain`, o si ha suministrado el almacenamiento sin una clase de almacenamiento, el PV y el almacenamiento físico no se eliminan cuando se elimina la PVC. Debe eliminar la PVC, el PV y el almacenamiento físico por separado.
+
+   Si el almacenamiento se carga de forma mensual, se le facturará todo el mes, aunque elimine el almacenamiento antes de que finalice el ciclo de facturación.
+   {: important}
+
+3. Elimine los pods que montan la PVC.
+   1. Obtenga una lista de los pods que montan la PVC.
       ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
       ```
       {: pre}
-    
+
       Salida de ejemplo:
       ```
       blockdepl-12345-prz7b:	claim1-block-bronze  
       ```
       {: screen}
-    
-      Si no se devuelve ningún pod en la salida de la CLI, significa que no tiene ningún pod que utilice la PVC. 
-    
-   2. Elimine el pod que utiliza la PVC. Si el pod forma parte de un despliegue, elimine el despliegue. 
+
+      Si no se devuelve ningún pod en la salida de la CLI, significa que no tiene ningún pod que utilice la PVC.
+
+   2. Elimine el pod que utiliza la PVC. Si el pod forma parte de un despliegue, elimine el despliegue.
       ```
       kubectl delete pod <pod_name>
       ```
       {: pre}
-      
-   3. Verifique que el pod se ha eliminado. 
+
+   3. Verifique que el pod se ha eliminado.
       ```
       kubectl get pods
       ```
       {: pre}
-   
-4. Elimine la PVC. 
+
+4. Elimine la PVC.
    ```
    kubectl delete pvc <pvc_name>
    ```
    {: pre}
-   
-5. Revise el estado de su PV. Utilice el nombre del PV que ha recuperado antes como recuperó como **VOLUME**. 
+
+5. Revise el estado de su PV. Utilice el nombre del PV que ha recuperado antes como recuperó como **VOLUME**.
    ```
    kubectl get pv <pv_name>
    ```
    {: pre}
-   
-   Cuando se elimina la PVC, se libera el PV vinculado a la PVC. En función de cómo haya suministrado el almacenamiento, el PV entra en estado `Deleting` si el PV se suprime automáticamente o en estado `Released` si debe suprimir manualmente el PV. 
-   
-   **Nota**: para los PV que se suprimen automáticamente, el estado puede indicar brevemente `Released` antes de que se suprima. Vuelva a ejecutar el mandato después de unos minutos para ver si se ha eliminado el PV.
-   
-6. Si su PV no se ha suprimido, elimine manualmente el PV. 
+
+   Cuando se elimina la PVC, se libera el PV vinculado a la PVC. En función de cómo haya suministrado el almacenamiento, el PV entra en estado `Deleting` si el PV se suprime automáticamente o en estado `Released` si debe suprimir manualmente el PV. **Nota**: para los PV que se suprimen automáticamente, el estado puede indicar brevemente `Released` antes de que se suprima. Vuelva a ejecutar el mandato después de unos minutos para ver si se ha eliminado el PV.
+
+6. Si su PV no se ha suprimido, elimine manualmente el PV.
    ```
    kubectl delete pv <pv_name>
    ```
    {: pre}
-   
-7. Verifique que el PV se ha eliminado. 
+
+7. Verifique que el PV se ha eliminado.
    ```
    kubectl get pv
    ```
    {: pre}
-   
-8. {: #sl_delete_storage}Obtenga una lista de la instancia de almacenamiento físico a la que apuntaba su PV y anote el **id** de la instancia de almacenamiento físico. 
 
-   **Almacenamiento de archivos:** 
+8. {: #sl_delete_storage}Obtenga una lista de la instancia de almacenamiento físico a la que apuntaba su PV y anote el **id** de la instancia de almacenamiento físico.
+
+   **Almacenamiento de archivos:**
    ```
    ibmcloud sl file volume-list --columns id  --columns notes | grep <pv_name>
    ```
@@ -139,17 +140,17 @@ Para limpiar los datos persistentes:
    ibmcloud sl block volume-list --columns id --columns notes | grep <pv_name>
    ```
    {: pre}
-     
-   Si ha eliminado el clúster y no puede recuperar el nombre del PV, sustituya `grep <pv_name>` por `grep <cluster_id>` para obtener una lista de todos los dispositivos de almacenamiento asociados al clúster. 
+
+   Si ha eliminado el clúster y no puede recuperar el nombre del PV, sustituya `grep <pv_name>` por `grep <cluster_id>` para obtener una lista de todos los dispositivos de almacenamiento asociados al clúster.
    {: tip}
-     
-   Salida de ejemplo: 
+
+   Salida de ejemplo:
    ```
    id         notes
-   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z 
+   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z
    ```
    {: screen}
-     
+
    Visión general de la información del campo **Notes**:
    *  **`:`**: un signo de dos puntos (`:`) separata información.
    *  **` ibmcloud-block-storage-plugin-7566ccb8d-44nff`**: el plugin de almacenamiento que utiliza el clúster.
@@ -158,31 +159,30 @@ Para limpiar los datos persistentes:
    *  **`Performance`**: el tipo de almacenamiento de archivos o en bloque, que puede ser `Endurance` o `Performance`.
    *  **`mypvc`**: el nombre de la PVC asociada a la instancia de almacenamiento.
    *  **`pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z`**: el PV asociado a la instancia de almacenamiento.
-     
-9. Elimine la instancia de almacenamiento físico. 
-   
+
+9. Elimine la instancia de almacenamiento físico.
+
    **Almacenamiento de archivos:**
    ```
    ibmcloud sl file volume-cancel <filestorage_id>
    ```
    {: pre}
-   
+
    **Almacenamiento en bloque:**
    ```
    ibmcloud sl block volume-cancel <blockstorage_id>
    ```
    {: pre}
-     
-9. Verifique que se ha eliminado la instancia de almacenamiento físico. **Nota**: el proceso de supresión puede tardar unos días en completarse. 
 
-   **Almacenamiento de archivos:** 
+9. Verifique que se ha eliminado la instancia de almacenamiento físico. Tenga en cuenta que el proceso de supresión puede tardar unos días en completarse.
+
+   **Almacenamiento de archivos:**
    ```
-   ibmcloud sl file volume-list 
+   ibmcloud sl file volume-list
    ```
    {: pre}
    **Almacenamiento en bloque:**
    ```
-   ibmcloud sl block volume-list 
+   ibmcloud sl block volume-list
    ```
    {: pre}
- 

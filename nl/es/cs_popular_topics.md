@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -24,11 +27,80 @@ lastupdated: "2018-10-25"
 Manténgase al día con lo que está pasando con {{site.data.keyword.containerlong}}. Explore las nuevas características, obtenga consejos o conozca temas populares que otros desarrolladores ahora mismo han encontrado útiles.
 {:shortdesc}
 
+## Temas populares en diciembre de 2018
+{: #dec18}
+
+<table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
+<caption>Temas populares para contenedores y clústeres de Kubernetes en diciembre de 2018</caption>
+<thead>
+<th>Fecha</th>
+<th>Título</th>
+<th>Descripción</th>
+</thead>
+<tbody>
+<tr>
+<td>6 de diciembre</td>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>Obtenga visibilidad operativa en el rendimiento y estado de las apps mediante el despliegue de Sysdig como servicio de terceros en sus nodos trabajadores para reenviar métricas a {{site.data.keyword.monitoringlong}}. Para obtener más información, consulte
+[Análisis de métricas para una app desplegada en un clúster de Kubernetes](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Nota**: si utiliza {{site.data.keyword.mon_full_notm}} con clústeres que ejecutan Kubernetes versión 1.11 o posterior, no se recopilan todas las métricas de contenedor, ya que actualmente Sysdig no tiene soporte para `containerd`.</td>
+</tr>
+</tbody></table>
+
+## Temas populares en noviembre de 2018
+{: #nov18}
+
+<table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
+<caption>Temas populares para contenedores y clústeres de Kubernetes en noviembre de 2018</caption>
+<thead>
+<th>Fecha</th>
+<th>Título</th>
+<th>Descripción</th>
+</thead>
+<tbody>
+<tr>
+<td>29 de noviembre</td>
+<td>[Zona disponible en Chennai](cs_regions.html)</td>
+<td>Se da la bienvenida a Chennai, India, como una nueva zona para clústeres en la región AP norte. Si tiene un cortafuegos, [abra los puertos del cortafuegos](cs_firewall.html#firewall) para esta zona y para las otras dentro de la región en la que se encuentra el clúster.</td>
+</tr>
+<tr>
+<td>27 de noviembre</td>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>Añada prestaciones de gestión de registros al clúster desplegando LogDNA como servicio de terceros en sus nodos trabajadores para gestionar registros de sus contenedores de pod. Para obtener más información, consulte
+[Gestión de registros de clúster de Kubernetes con {{site.data.keyword.loganalysisfull_notm}} con LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
+</tr>
+<tr>
+<td>7 de noviembre</td>
+<td>Equilibrador de carga 2.0 (beta)</td>
+<td>Ahora puede elegir entre el [equilibrador de carga 1.0 o 2.0](cs_loadbalancer.html#planning_ipvs) para exponer de forma segura sus apps de clúster al público.</td>
+</tr>
+<tr>
+<td>7 de noviembre</td>
+<td>Kubernetes versión 1.12 está disponible</td>
+<td>Ahora, puede actualizar o crear clústeres que ejecuten [Kubernetes versión 1.12](cs_versions.html#cs_v112). Los clústeres de la versión 1.12 se suministran con maestros de Kubernetes de alta disponibilidad de forma predeterminada.</td>
+</tr>
+<tr>
+<td>7 de noviembre</td>
+<td>Maestros de alta disponibilidad en clústeres que ejecutan Kubernetes versión 1.10</td>
+<td>Los maestros de alta disponibilidad están disponibles en clústeres que ejecutan Kubernetes versión 1.10. Todas las ventajas descritas en la entrada anterior para los clústeres 1.11 se aplican a los clústeres 1.10, así como los [pasos de preparación](cs_versions.html#110_ha-masters) que debe llevar a cabo.</td>
+</tr>
+<tr>
+<td>1 de noviembre</td>
+<td>Maestros de alta disponibilidad en clústeres que ejecutan Kubernetes versión 1.11</td>
+<td>En una única zona, el maestro está altamente disponible e incluye réplicas en hosts físicos independientes para que el servidor de API de Kubernetes, etcd, el planificador y el gestor de controladores puedan protegerse frente a una interrupción como, por ejemplo, la actualización del clúster. Si el clúster está en una zona con capacidad multizona, el maestro de alta disponibilidad se distribuye también en zonas para ayudar a protegerse frente a un fallo zonal.<br>Para ver las acciones que debe realizar, consulte
+[Actualización a maestros de clúster de alta disponibilidad](cs_versions.html#ha-masters). Estas acciones preparatorias se aplican:<ul>
+<li>Si tiene un cortafuegos o políticas de red Calico personalizadas.</li>
+<li>Si utiliza los puertos de host `2040` o `2041` en sus nodos trabajadores.</li>
+<li>Si ha utilizado la dirección IP del maestro del clúster para el acceso al maestro dentro del clúster.</li>
+<li>Si tiene una automatización que llama a la API o a la CLI de Calico (`calicoctl`), como para crear políticas de Calico.</li>
+<li>Si utiliza políticas de red de Kubernetes o Calico para controlar el acceso de salida de pod al maestro.</li></ul></td>
+</tr>
+</tbody></table>
+
 ## Temas populares en octubre de 2018
 {: #oct18}
 
 <table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
-<caption>Temas populares para contenedores y clústeres de Kubernetes en agosto de 2018</caption>
+<caption>Temas populares para contenedores y clústeres de Kubernetes en octubre de 2018</caption>
 <thead>
 <th>Fecha</th>
 <th>Título</th>
@@ -53,7 +125,7 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 <tr>
 <td>4 de octubre</td>
 <td>Ahora [ {{site.data.keyword.registrylong}} está integrado con {{site.data.keyword.Bluemix_notm}} Identity and Access Management](/docs/services/Registry/iam.html#iam)</td>
-<td>Puede utilizar IAM para controlar el acceso a los recursos de registro, como la extracción, el envío y la creación de imágenes. Cuando se crea un clúster, también se crea una señal de registro para que el clúster pueda trabajar con el registro. Por lo tanto, necesita el rol de gestión de la plataforma de **Administrador** para crear un clúster. Para habilitar IAM para su cuenta de registro, consulte [Habilitación de la imposición de políticas para los usuarios existentes](/docs/services/Registry/registry_users.html#existing_users).</td>
+<td>Puede utilizar {{site.data.keyword.Bluemix_notm}} IAM para controlar el acceso a los recursos de registro, como la extracción, el envío y la creación de imágenes. Cuando se crea un clúster, también se crea una señal de registro para que el clúster pueda trabajar con el registro. Por lo tanto, necesita el rol de gestión de la plataforma de **Administrador** de registro a nivel de cuenta para crear un clúster. Para habilitar {{site.data.keyword.Bluemix_notm}} IAM para su cuenta de registro, consulte [Habilitación de la imposición de políticas para los usuarios existentes](/docs/services/Registry/registry_users.html#existing_users).</td>
 </tr>
 <tr>
 <td>1 de octubre</td>
@@ -66,7 +138,7 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 {: #sept18}
 
 <table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
-<caption>Temas populares para contenedores y clústeres de Kubernetes en agosto de 2018</caption>
+<caption>Temas populares para contenedores y clústeres de Kubernetes en septiembre de 2018</caption>
 <thead>
 <th>Fecha</th>
 <th>Título</th>
@@ -190,8 +262,8 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 </tr>
 <tr>
 <td>01 de mayo</td>
-<td>[Despliegue del panel de control de Kubernetes desde la GUI](cs_app.html#cli_dashboard)</td>
-<td>¿Alguna vez ha deseado acceder al panel de control de Kubernetes con una sola pulsación? Pruebe el botón **Panel de control de Kubernetes** en la interfaz gráfica de usuario de {{site.data.keyword.Bluemix_notm}}.</td>
+<td>[Despliegue del panel de control de Kubernetes desde la consola](cs_app.html#cli_dashboard)</td>
+<td>¿Alguna vez ha deseado acceder al panel de control de Kubernetes con una sola pulsación? Pruebe el botón **Panel de control de Kubernetes** en la consola de {{site.data.keyword.Bluemix_notm}}.</td>
 </tr>
 </tbody></table>
 
@@ -282,7 +354,7 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 </tr>
 <tr>
 <td>23 de febrero</td>
-<td>Vea la interfaz de usuario web para los [registros](cs_health.html#view_logs) y las [métricas](cs_health.html#view_metrics)</td>
+<td>Vea la consola web para los [registros](cs_health.html#view_logs) y las [métricas](cs_health.html#view_metrics)</td>
 <td>Vea fácilmente los datos de registros y métricas del clúster y sus componentes con una mejor interfaz de usuario web. Consulte la página de detalles de clúster para el acceso.</td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -25,8 +28,8 @@ Diversos de casos de uso muestran las ventajas de los servicios {{site.data.keyw
 * IA y machine learning
 * Datos y almacenamiento
 * DevOps
-
 {: shortdesc}
+
 <table summary="En la tabla se muestran los casos de uso. Las filas se deben leer de izquierda a derecha; la columna uno contiene iconos que representan cada sector y la columna dos las descripciones.">
 <caption>Casos de uso</caption>
   <thead>

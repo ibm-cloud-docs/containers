@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,7 +50,7 @@ Revise las responsabilidades que comparte con IBM para gestionar sus clústeres.
 - [Adición o eliminación de capacidad de clúster mediante el redimensionamiento de las agrupaciones de nodos trabajadores](cs_clusters.html#add_workers)
 - [Habilitación de la expansión de VLAN y mantenimiento del equilibrio de las agrupaciones de nodos trabajadores multizona entre zonas](cs_clusters_planning.html#ha_clusters)
 - [Crear VLAN públicas y privadas en la infraestructura de IBM Cloud (SoftLayer) para el aislamiento de la red del clúster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Garantizar que todos los nodos trabajadores tienen conectividad de red con el URL maestro de Kubernetes](cs_firewall.html#firewall) <p>**Nota**: Si un trabajador tiene VLAN tanto públicas como privadas, se configura la conectividad de red. Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red. Para obtener más información, consulte [Planificación de redes de clúster solo privado](cs_network_cluster.html#private_vlan). </p>
+- [Garantizar que todos los nodos trabajadores tienen conectividad de red con el URL maestro de Kubernetes](cs_firewall.html#firewall) <p class="note">Si un trabajador tiene VLAN tanto públicas como privadas, se configura la conectividad de red. Si los nodos trabajadores únicamente se configuran con una VLAN privada, debe configurar una solución alternativa para la conectividad de red. Para obtener más información, consulte [Planificación de redes de clúster solo privado](cs_network_cluster.html#private_vlan). </p>
 - [La actualización del maestro kube-apiserver cuando haya disponibles actualizaciones de versión de Kubernetes](cs_cluster_update.html#master)
 - [Mantenimiento actualizado de nodos trabajadores para versiones mayores, menores y parches](cs_cluster_update.html#worker_node)
 - [Recuperar nodos trabajadores con problemas ejecutando los mandatos `kubectl`, tales como `cordon` o `drain`, y ejecutando los mandatos `ibmcloud ks`, tales como `reboot`, `reload` o `delete`](cs_cli_reference.html#cs_worker_reboot)
