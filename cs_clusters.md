@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-10"
+lastupdated: "2019-01-15"
 
 ---
 
@@ -198,7 +198,6 @@ To create a cluster:
       {: pre}
 
     4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
-
 
 4.  Create a cluster. Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
 
