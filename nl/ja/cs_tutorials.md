@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -50,20 +53,22 @@ lastupdated: "2018-10-25"
 ## 前提条件
 
 -  [クラスター作成の準備](cs_clusters.html#cluster_prepare)に必要な手順を確認します。
--  作業を行うクラスター・スペース内の[**「開発者」**の Cloud Foundry 役割](/docs/iam/mngcf.html#mngcf)。
+-  以下のアクセス・ポリシーがあることを確認します。
+    - {{site.data.keyword.containerlong_notm}} に対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)
+    -  作業を行うクラスター・スペース内の[**開発者**の Cloud Foundry 役割](/docs/iam/mngcf.html#mngcf)
 
 
 ## レッスン 1: クラスターを作成して CLI をセットアップする
 {: #cs_cluster_tutorial_lesson1}
 
-GUI 内に Kubernetes クラスターを作成して必要な CLI をインストールします。
+{{site.data.keyword.Bluemix_notm}} コンソール内に Kubernetes クラスターを作成して必要な CLI をインストールします。
 {: shortdesc}
 
 **クラスターを作成するには、以下のようにします。**
 
 クラスターがプロビジョンされるまでには数分かかることがあるため、CLI をインストールする前にクラスターを作成します。
 
-1.  [GUI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) で、1 つのワーカー・ノードがある 1 つのワーカー・プールを持つフリー・クラスターまたは標準クラスターを作成します。
+1.  [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) で、1 つのワーカー・ノードがある 1 つのワーカー・プールを持つフリー・クラスターまたは標準クラスターを作成します。
 
     [CLI でクラスター](cs_clusters.html#clusters_cli)を作成することもできます。
     {: tip}
@@ -88,13 +93,13 @@ GUI 内に Kubernetes クラスターを作成して必要な CLI をインス�
     {: pre}
 
 5.  クラスターにアプリをデプロイするには、[Kubernetes CLI をインストールします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するには、接頭部 `kubectl` を使用します。
-    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containerlong_notm}} のデフォルト Kubernetes バージョンは 1.10.8 です。
+    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containerlong_notm}} のデフォルト Kubernetes バージョンは 1.10.11 です。
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe)
 
           **ヒント:** Windows を使用している場合、Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
 
@@ -157,9 +162,10 @@ GUI 内に Kubernetes クラスターを作成して必要な CLI をインス�
     ```
     {: pre}
 
-    **注:** フェデレーテッド ID がある場合、`--sso` フラグを使用してログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。
+    フェデレーテッド ID がある場合、`--sso` フラグを使用してログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。
+    {: tip}
 
-2.  `default` 以外のリソース・グループ内にクラスターがある場合は、そのリソース・グループをターゲットとして設定します。
+2.  `default` 以外のリソース・グループ内にクラスターがある場合は、そのリソース・グループをターゲットとして設定します。 各クラスターが属するリソース・グループを表示するには、`ibmcloud ks clusters` を実行します。
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -187,7 +193,7 @@ GUI 内に Kubernetes クラスターを作成して必要な CLI をインス�
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.11
     ```
     {: screen}
 
@@ -243,8 +249,8 @@ CLI で Kubernetes クラスターのコンテキストを設定します。
     出力例:
 
     ```
-    Client Version: v1.10.8
-    Server Version: v1.10.8
+    Client Version: v1.10.11
+    Server Version: v1.10.11
     ```
     {: screen}
 
@@ -256,7 +262,8 @@ CLI で Kubernetes クラスターのコンテキストを設定します。
 
 1.  {{site.data.keyword.toneanalyzershort}} サービスを {{site.data.keyword.Bluemix_notm}} アカウントに追加します。 <service_name> をサービス・インスタンスの名前に置き換えます。
 
-    **注:** {{site.data.keyword.toneanalyzershort}} サービスをアカウントに追加すると、そのサービスが無料ではないことを示すメッセージが表示されます。 API 呼び出しを制限している場合には、このチュートリアルによって {{site.data.keyword.watson}} サービスからの課金は発生しません。 [{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} サービスの料金情報を確認します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/catalog/services/tone-analyzer)。
+    {{site.data.keyword.toneanalyzershort}} サービスをアカウントに追加すると、そのサービスが無料ではないことを示すメッセージが表示されます。 API 呼び出しを制限している場合には、このチュートリアルによって {{site.data.keyword.watson}} サービスからの課金は発生しません。 [{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} サービスの料金情報を確認します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/catalog/services/tone-analyzer)。
+    {: note}
 
     ```
     ibmcloud service create tone_analyzer standard <service_name>
@@ -281,7 +288,7 @@ CLI で Kubernetes クラスターのコンテキストを設定します。
     ```
     {: screen}
 
-3.  クラスターの名前空間内に Kubernetes シークレットが作成されたことを確認します。 すべての {{site.data.keyword.Bluemix_notm}} サービスは、ユーザー名、パスワード、コンテナーがアクセスするために使用する URL など、機密情報を含む JSON ファイルによって定義されます。 この情報を安全に保管するために、Kubernetes シークレットが使用されます。 この例では、アカウントにプロビジョンされる、{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} にアクセスするための資格情報がシークレットに格納されます。
+3.  クラスターの名前空間内に Kubernetes シークレットが作成されたことを確認します。 すべての {{site.data.keyword.Bluemix_notm}} サービスは、 {{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) の API キーや、コンテナーがアクセスするために使用する URL などの機密情報を含む、 JSON ファイルによって定義されます。 この情報を安全に保管するために、Kubernetes シークレットが使用されます。 この例では、アカウントにプロビジョンされた {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} インスタンスにアクセスするための API キーがシークレットに格納されます。
 
     ```
     kubectl get secrets --namespace=default

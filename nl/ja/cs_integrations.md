@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -72,14 +75,14 @@ lastupdated: "2018-10-25"
 <tbody>
 <tr>
 <td>CoScale</td>
-<td><a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、ワーカー・ノード、コンテナー、レプリカ・セット、レプリケーション・コントローラー、サービスをモニターします。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+<td><a href="https://www.newrelic.com/coscale" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、ワーカー・ノード、コンテナー、レプリカ・セット、レプリケーション・コントローラー、サービスをモニターします。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
 <td>Datadog</td>
 <td><a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、クラスターをモニターし、インフラストラクチャーとアプリケーションのパフォーマンス・メトリックを表示します。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
-<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>{{site.data.keyword.cloudaccesstrailfull}}</td>
 <td>Grafana を使用してログを分析し、クラスター内で実行された管理アクティビティーをモニターします。 このサービスについて詳しくは、[Activity Tracker](/docs/services/cloud-activity-tracker/index.html) の資料を参照してください。 追跡できるイベントのタイプについて詳しくは、[Activity Tracker イベント](cs_at_events.html)を参照してください。</td>
 </tr>
 <tr>
@@ -87,8 +90,16 @@ lastupdated: "2018-10-25"
 <td>{{site.data.keyword.loganalysisfull_notm}} を使用して、ログの収集、保存、検索の機能を拡張します。 詳しくは、<a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">クラスター・ログの自動収集の有効化 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>LogDNA をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、ポッド・コンテナーのログを管理することで、ログ管理機能をクラスターに追加できます。詳しくは、[{{site.data.keyword.loganalysisfull_notm}} with LogDNA による Kubernetes クラスター・ログの管理](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube) を参照してください。</td>
+</tr>
+<tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
-<td>{{site.data.keyword.monitoringlong_notm}} を使用してルールとアラートを定義して、メトリックの収集と保存の機能を拡張します。 詳しくは、<a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Kubernetes クラスターにデプロイされたアプリに関する Grafana でのメトリックの分析 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+<td>{{site.data.keyword.monitoringlong_notm}} を使用してルールとアラートを定義して、メトリックの収集と保存の機能を拡張します。 詳しくは、<a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Kubernetes クラスターにデプロイされたアプリに関する Grafana でのメトリックの分析 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)を参照してください。**注**: Kubernetes バージョン 1.11 以降を実行するクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、Sysdig は現在 `containerd` をサポートしていないため、すべてのコンテナー・メトリックが収集されるわけではありません。</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -124,7 +135,7 @@ lastupdated: "2018-10-25"
 ## セキュリティー・サービス
 {: #security_services}
 
-{{site.data.keyword.Bluemix_notm}} セキュリティー・サービスをクラスターと統合する方法の包括的な説明が必要ですか? [Apply end-to-end security to a cloud application チュートリアル](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application)を確認してください。
+{{site.data.keyword.Bluemix_notm}} セキュリティー・サービスをクラスターと統合する方法の包括的な説明が必要ですか? [Apply end-to-end security to a cloud application チュートリアル](/docs/tutorials/cloud-e2e-security.html)を確認してください。
 {: shortdesc}
 
 <table summary="アクセシビリティーについての要約">
@@ -154,7 +165,7 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
-  <td>{{site.data.keyword.keymanagementserviceshort}} を有効にして、クラスター内にある Kubernetes シークレットを暗号化します。Kubernetes シークレットを暗号化すると、許可されていないユーザーがクラスターの機密情報にアクセスできなくなります。<br>セットアップするには、<a href="cs_encrypt.html#keyprotect">{{site.data.keyword.keymanagementserviceshort}} を使用した Kubernetes シークレットの暗号化</a>を参照してください。<br>詳しくは、<a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+  <td>{{site.data.keyword.keymanagementserviceshort}} を有効にして、クラスター内にある Kubernetes シークレットを暗号化します。 Kubernetes シークレットを暗号化すると、許可されていないユーザーがクラスターの機密情報にアクセスできなくなります。<br>セットアップするには、<a href="cs_encrypt.html#keyprotect">{{site.data.keyword.keymanagementserviceshort}} を使用した Kubernetes シークレットの暗号化</a>を参照してください。<br>詳しくは、<a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -184,7 +195,7 @@ lastupdated: "2018-10-25"
 <tbody>
 <tr>
   <td>Heptio Ark</td>
-  <td><a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、クラスター・リソースと永続ボリュームのバックアップとリストアを実行できます。 詳しくは、Heptio Ark の <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+  <td><a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、クラスター・リソースと永続ボリュームのバックアップとリストアを実行できます。 詳しくは、Heptio Ark の <a href="https://github.com/heptio/ark/blob/release-0.9/docs/use-cases.md" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -212,12 +223,19 @@ lastupdated: "2018-10-25"
 {{site.data.keyword.Bluemix_notm}} サービスを追加して、Watson AI、データ、セキュリティー、モノのインターネット (IoT) などの領域の追加機能によって Kubernetes クラスターを拡張します。
 {:shortdesc}
 
-**重要:** サービス・キーをサポートするサービスのみをバインドできます。 サービス・キーをサポートするサービスのリストを確認するには、[{{site.data.keyword.Bluemix_notm}} サービスを使用するための外部アプリの使用可能化](/docs/apps/reqnsi.html#accser_external)を参照してください。
+サービス・キーをサポートするサービスのみをバインドできます。サービス・キーをサポートするサービスのリストを確認するには、[{{site.data.keyword.Bluemix_notm}} サービスを使用するための外部アプリの使用可能化](/docs/resources/connect_external_app.html#externalapp)を参照してください。
+{: note}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。
+- 以下の役割があることを確認してください。
+    - クラスターに対する[**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](cs_users.html#platform)。
+    - 使用するスペースに対する[**開発者**の Cloud Foundry 役割](/docs/iam/mngcf.html#mngcf)。
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 クラスターに {{site.data.keyword.Bluemix_notm}} サービスを追加するには、以下の手順を実行します。
-1. [{{site.data.keyword.Bluemix_notm}} サービスのインスタンスを作成します](/docs/apps/reqnsi.html#req_instance)。 </br></br>**注:**<ul><li>一部の {{site.data.keyword.Bluemix_notm}} サービスは、選択された地域でのみ使用可能です。 サービスがクラスターと同じ地域で使用可能な場合にのみ、サービスをクラスターにバインドできます。 さらに、ワシントン DC ゾーンでサービス・インスタンスを作成する場合は、CLI を使用する必要があります。</li><li>クラスターと同じリソース・グループにサービス・インスタンスを作成する必要があります。リソースは 1 つのリソース・グループにしか作成できず、その後にリソース・グループを変更することはできません。</li></ul>
+1. [{{site.data.keyword.Bluemix_notm}} サービスのインスタンスを作成します](/docs/apps/reqnsi.html#req_instance)。
+    * 一部の {{site.data.keyword.Bluemix_notm}} サービスは、選択された地域でのみ使用可能です。 サービスがクラスターと同じ地域で使用可能な場合にのみ、サービスをクラスターにバインドできます。 さらに、ワシントン DC ゾーンでサービス・インスタンスを作成する場合は、CLI を使用する必要があります。
+    * クラスターと同じリソース・グループにサービス・インスタンスを作成する必要があります。 リソースは 1 つのリソース・グループにしか作成できず、その後にリソース・グループを変更することはできません。
 
 2. 作成したサービスのタイプを確認し、サービス・インスタンスの**名前**をメモします。
    - **Cloud Foundry サービス:**
@@ -233,7 +251,7 @@ lastupdated: "2018-10-25"
      ```
      {: screen}
 
-  - **IAM 対応サービス:**
+  - **{{site.data.keyword.Bluemix_notm}}IAM 対応サービス:**
      ```
      ibmcloud resource service-instances
      ```
@@ -248,7 +266,7 @@ lastupdated: "2018-10-25"
 
    ダッシュボードに異なるサービス・タイプが**「Cloud Foundry サービス」**および**「サービス」**として表示される場合もあります。
 
-3. IAM 対応サービスの場合は、このサービスをクラスターにバインドできるように Cloud Foundry 別名を作成します。 サービスが既に Cloud Foundry サービスである場合、このステップは不要です。次のステップに進むことができます。
+3. {{site.data.keyword.Bluemix_notm}} IAM 対応サービスの場合は、このサービスをクラスターにバインドできるように Cloud Foundry 別名を作成します。 サービスが既に Cloud Foundry サービスである場合、このステップは不要です。次のステップに進むことができます。
    1. Cloud Foundry の組織およびスペースをターゲットにします。
       ```
       ibmcloud target --cf
@@ -268,19 +286,12 @@ lastupdated: "2018-10-25"
       {: pre}
 
 4. サービスを追加するために使用するクラスターの名前空間を識別します。 次のいずれかのオプションを選択します。
-   - 既存の名前空間をリストして、使用する名前空間を選択します。
      ```
      kubectl get namespaces
      ```
      {: pre}
 
-   - クラスターに名前空間を作成します。
-     ```
-     kubectl create namespace <namespace_name>
-     ```
-     {: pre}
-
-5.  サービスをクラスターに追加します。 IAM 対応サービスの場合は、前に作成した Cloud Foundry 別名を使用します。
+5.  サービスをクラスターに追加します。 {{site.data.keyword.Bluemix_notm}} IAM 対応サービスの場合は、前に作成した Cloud Foundry 別名を使用します。
     ```
     ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
@@ -356,7 +367,7 @@ lastupdated: "2018-10-25"
 {: tip}
 
 始める前に
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 - [{{site.data.keyword.Bluemix_notm}} サービスをクラスターに追加します](#adding_cluster)。
 
 ### シークレットをボリュームとしてポッドにマウントする
@@ -645,11 +656,11 @@ Kubernetes シークレットのサービス資格情報およびその他のキ
 
 Helm チャートを {{site.data.keyword.containerlong_notm}} で使用する前に、クラスターに Helm インスタンスをインストールして初期化する必要があります。 その後、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを Helm インスタンスに追加できます。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 1. <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> をインストールします。
 
-2. **重要**: クラスターのセキュリティーを維持するため、[{{site.data.keyword.Bluemix_notm}} `kube-samples` リポジトリー](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml)から以下の `.yaml` ファイルを適用することによって、Tiller のサービス・アカウントを `kube-system` 名前空間に作成し、`tiller-deploy` ポッドに対する Kubernetes RBAC クラスター役割バインディングを作成します。**注**: `kube-system` 名前空間のサービス・アカウントとクラスター役割バインディングを使用して Tiller をインストールするには、[`cluster-admin` 役割](cs_users.html#access_policies)が必要です。
+2. **重要**: クラスターのセキュリティーを維持するため、[{{site.data.keyword.Bluemix_notm}} `kube-samples` リポジトリー](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml)から以下の `.yaml` ファイルを適用することによって、Tiller のサービス・アカウントを `kube-system` 名前空間に作成し、`tiller-deploy` ポッドに対する Kubernetes RBAC クラスター役割バインディングを作成します。 **注**: `kube-system` 名前空間のサービス・アカウントとクラスター役割バインディングを使用して Tiller をインストールするには、[`cluster-admin` 役割](cs_users.html#access_policies)が必要です。
     ```
     kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml
     ```
@@ -715,7 +726,7 @@ Helm チャートを {{site.data.keyword.containerlong_notm}} で使用する前
 {: #helm_links}
 
 * strongSwan Helm チャートを使用するには、[strongSwan IPSec VPN サービスの Helm Chart を使用した VPN 接続のセットアップ](cs_vpn.html#vpn-setup)を参照してください。
-* [Helm チャートのカタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) GUI で、{{site.data.keyword.Bluemix_notm}} で使用可能な Helm チャートを参照します。
+* コンソールの [Helm チャートのカタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) で、{{site.data.keyword.Bluemix_notm}} で使用可能な Helm チャートを確認します。
 * Helm チャートのセットアップと管理に使用する Helm コマンドについて詳しくは、<a href="https://docs.helm.sh/helm/" target="_blank">Helm の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。
 * Kubernetes Helm チャートを使用して開発速度を上げる方法について詳しくは、[こちら ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/) を参照してください。
 
@@ -729,7 +740,7 @@ Weave Scope は、Kubernetes クラスター内のリソース (サービス、�
 
 -   クラスター情報を公共のインターネットに公開しないようにしてください。 安全に Weave Scope をデプロイして Web ブラウザーからローカル・アクセスするには、以下の手順を実行します。
 -   標準クラスターがまだない場合は、[標準クラスターを作成します](cs_clusters.html#clusters_ui)。 Weave Scope は、アプリでは特に、CPU の負荷が大きくなります。 フリー・クラスターではなく、比較的大規模な標準クラスターで Weave Scope を実行してください。
--   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+-   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 
 Weave Scope をクラスターで使用するには、以下のようにします。

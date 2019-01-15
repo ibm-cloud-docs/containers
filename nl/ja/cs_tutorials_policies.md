@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -21,6 +24,7 @@ lastupdated: "2018-10-25"
 {: #policy_tutorial}
 
 デフォルトで、Kubernetes の NodePort、LoadBalancer、Ingress の各サービスは、パブリックとプライベートのすべてのクラスター・ネットワーク・インターフェースでアプリを使用可能にします。 デフォルトの `allow-node-port-dnat` Calico ポリシーでは、ノード・ポート、ロード・バランサー、Ingress の各サービスから、それらのサービスが公開しているアプリ・ポッドへの着信トラフィックが許可されます。 Kubernetes は宛先ネットワーク・アドレス変換 (DNAT) を使用してサービス要求を正しいポッドに転送します。
+{: shortdesc}
 
 ただし、セキュリティー上の理由から、特定のソース IP アドレスからのネットワーク・サービスへのトラフィックのみを許可する必要がある場合があります。 [Calico Pre-DNAT ポリシー![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat)を使用して、特定の IP アドレスのトラフィックをホワイトリストまたはブラックリストに入れることができます。 Pre-DNAT ポリシーは、Kubernetes がポッドにトラフィックを転送するために通常の DNAT を使用する前に適用されるため、指定されたトラフィックがアプリに到達することを防止します。 Calico Pre-DNAT ポリシーを作成する場合、ソース IP アドレスをホワイトリストまたはブラックリストに入れるかどうかを選択します。 ほとんどのシナリオでは、ホワイトリスティングによって、既知の許可されたソース IP アドレスからのトラフィックを除くすべてのトラフィックがブロックされるので、最も安全な構成が提供されます。 通常、ブラックリスティングは、少数の IP アドレスからの攻撃を防ぐようなシナリオでのみ有用です。
 
@@ -40,10 +44,11 @@ lastupdated: "2018-10-25"
 
 ## 前提条件
 
-- [バージョン 1.10 クラスターを作成する](cs_clusters.html#clusters_ui)か、または[既存のクラスターをバージョン 1.10 に更新します](cs_versions.html#cs_v110)。 このチュートリアルでは、Kubernetes バージョン 1.10 以降のクラスターで、3.1.1 Calico CLI および Calico v3 ポリシー構文を使用する必要があります。
+- [バージョン 1.10 以降のクラスターを作成する](cs_clusters.html#clusters_ui)か、または[既存のクラスターをバージョン 1.10 に更新します](cs_versions.html#cs_v110)。このチュートリアルでは、Kubernetes バージョン 1.10 以降のクラスターで、3.3.1 Calico CLI および Calico v3 ポリシー構文を使用する必要があります。
 - [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
 - [Calico CLI をインストールして構成します](cs_network_policy.html#1.10_install)。
-- [**Editor**、**Operator**、または **Administrator** のプラットフォーム役割があることを確認します](cs_users.html#add_users_cli)。
+- {{site.data.keyword.containerlong_notm}}に対する以下の {{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシーがあることを確認します。
+    - [任意のプラットフォーム役割](cs_users.html#platform)
 
 <br />
 
@@ -54,7 +59,10 @@ lastupdated: "2018-10-25"
 最初のレッスンでは、複数の IP アドレスとポートからアプリがどのように公開されるか、パブリック・トラフィックがクラスターにどのように着信するかを示します。
 {: shortdesc}
 
-チュートリアルを通じて使用するサンプル Web サーバー・アプリのデプロイから開始します。 `echoserver` Web サーバーでは、クライアントからクラスターへの接続に関するデータが表示され、PR 会社のクラスターへのアクセスをテストできます。 次に、ロード・バランサー・サービスを作成して、アプリを公開します。 ロード・バランサー・サービスにより、ロード・バランサー・サービス IP アドレスとワーカー・ノードのノード・ポートの両方でアプリが使用可能になります。
+チュートリアルを通じて使用するサンプル Web サーバー・アプリのデプロイから開始します。 `echoserver` Web サーバーでは、クライアントからクラスターへの接続に関するデータが表示され、PR 会社のクラスターへのアクセスをテストできます。 次に、ロード・バランサー 2.0 サービスを作成して、アプリを公開します。 ロード・バランサー 2.0 サービスにより、ロード・バランサー・サービス IP アドレスとワーカー・ノードのノード・ポートの両方でアプリが使用可能になります。
+
+代わりに [Ingress アプリケーション・ロード・バランサー (ALB)](cs_ingress.html) を使用しますか? ステップ 3 と 4 のロード・バランサーの作成をスキップしてください。代わりに、`ibmcloud ks albs --cluster <cluster_name>` を実行して ALB のパブリック IP を取得し、それらの IP をチュートリアルの `<loadbalancer_IP>` の代わりに常に使用してください。
+{: tip}
 
 以下のイメージは、レッスン 1 の終了時に、Web サーバー・アプリがパブリック・ノード・ポートとパブリック・ロード・バランサーによってインターネットにどのように公開されるかを示しています。
 
@@ -81,7 +89,7 @@ lastupdated: "2018-10-25"
     ```
     {: screen}
 
-3. アプリをパブリック・インターネットに公開するには、テキスト・エディターで `webserver-lb.yaml` というロード・バランサー・サービス構成ファイルを作成します。
+3. アプリをパブリック・インターネットに公開するには、テキスト・エディターで `webserver-lb.yaml` というロード・バランサー 2.0 サービス構成ファイルを作成します。
     ```
     apiVersion: v1
     kind: Service
@@ -89,16 +97,18 @@ lastupdated: "2018-10-25"
       labels:
         run: webserver
       name: webserver-lb
+      annotations:
+        service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
     spec:
-      externalTrafficPolicy: Cluster
+      type: LoadBalancer
+      selector:
+        run: webserver
       ports:
       - name: webserver-port
         port: 80
         protocol: TCP
         targetPort: 8080
-      selector:
-        run: webserver
-      type: LoadBalancer
+      externalTrafficPolicy: Local
     ```
     {: codeblock}
 
@@ -157,7 +167,7 @@ lastupdated: "2018-10-25"
 
 6. ノード・ポートによってコンピューターから公開されたアプリにパブリック・アクセスできることを確認します。 ロード・バランサー・サービスにより、ロード・バランサー・サービス IP アドレスとワーカー・ノードのノード・ポートの両方でアプリが使用可能になります。
 
-    1. ロード・バランサーがワーカー・ノードに割り当てたノード・ポートを取得します。ノード・ポートの範囲は 30000 から 32767 までです。
+    1. ロード・バランサーがワーカー・ノードに割り当てたノード・ポートを取得します。 ノード・ポートの範囲は 30000 から 32767 までです。
         ```
         kubectl get svc -o wide
         ```
@@ -179,9 +189,9 @@ lastupdated: "2018-10-25"
         出力例:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
         ```
         {: screen}
 
@@ -226,7 +236,7 @@ lastupdated: "2018-10-25"
 
 PR 会社のクラスターを保護するには、アプリを公開しているロード・バランサー・サービスとノード・ポートの両方へのパブリック・アクセスをブロックする必要があります。 まず、ノード・ポートへのアクセスをブロックします。 以下のイメージは、レッスン 2 の終了時に、トラフィックがどのようにロード・バランサーに許可され、ノード・ポートには許可されないかを示しています。
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="レッスン 2 の最後に、パブリック・ロード・バランサーのみによって Web サーバー・アプリがインターネットに公開されます。" style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="レッスン 2 の最後に、パブリック・ロード・バランサーのみによって Web サーバー・アプリがインターネットに公開されます。" style="width:425px; border-style: none"/>
 
 1. テキスト・エディターで、`deny-nodeports.yaml` という上位の Pre-DNAT ポリシーを作成し、すべてのソース IP からのノード・ポートへの着信 TCP および UDP トラフィックを拒否します。
     ```
@@ -236,6 +246,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
       name: deny-nodeports
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
             destination:
@@ -249,7 +260,6 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
           - 30000:32767
         protocol: UDP
         source: {}
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 1100
       types:
@@ -289,13 +299,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
     ```
     {: screen}
 
-4. 前のレッスンで作成したロード・バランサーの externalTrafficPolicy を `Cluster` から `Local` に変更します。 `Local` によって、次のステップでロード・バランサーの外部 IP に対して curl を実行したときに、システムのソース IP が保持されます。
-    ```
-    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
-    ```
-    {: pre}
-
-5. メモの値を使用して、まだロード・バランサー外部 IP アドレスにパブリック・アクセスできることを確認します。
+4. メモの値を使用して、まだロード・バランサー外部 IP アドレスにパブリック・アクセスできることを確認します。
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -326,7 +330,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
     {: screen}
     出力の `Request Information` セクションのソース IP アドレスに注意してください (この例では、`client_address=1.1.1.1`)。 ソース IP アドレスは、curl の実行に使用しているシステムのパブリック IP です。 それ以外の場合、プロキシーまたは VPN を介してインターネットに接続している場合は、プロキシーまたは VPN がシステムの実際の IP アドレスを不明瞭にしている可能性があります。 いずれの場合も、ロード・バランサーはシステムのソース IP アドレスをクライアント IP アドレスとして認識します。
 
-6. 後のレッスンで使用するために、システムのソース IP アドレス (前のステップの出力では `client_address=1.1.1.1`) をメモにコピーします。
+5. 後のレッスンで使用するために、システムのソース IP アドレス (前のステップの出力では `client_address=1.1.1.1`) をメモにコピーします。
 
 この時点で、アプリはパブリック・ロード・バランサー・ポートからのみパブリック・インターネットに公開されています。 パブリック・ノード・ポートへのトラフィックはブロックされています。 不要なトラフィックからクラスターを部分的にロックしました。
 
@@ -339,9 +343,10 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
 {: shortdesc}
 
 最初に、ノード・ポートに加えて、アプリを公開しているロード・バランサーへのすべての着信トラフィックをブロックする必要があります。 その後、システムの IP アドレスをホワイトリストに入れるポリシーを作成できます。 レッスン 3 の終了時に、パブリック・ノード・ポートおよびロード・バランサーへのすべてのトラフィックはブロックされ、ホワイトリストにあるシステム IP からのトラフィックのみ許可されます。
-<img src="images/cs_tutorial_policies_L3.png" width="600" alt="Web サーバー・アプリはパブリック・ロード・バランサーによって、システム IP のみに公開されます。" style="width:600px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L3.png" width="550" alt="Web サーバー・アプリはパブリック・ロード・バランサーによって、システム IP のみに公開されます。" style="width:500px; border-style: none"/>
 
 1. テキスト・エディターで、`deny-lb-port-80.yaml` という上位の Pre-DNAT ポリシーを作成し、すべてのソース IP からのロード・バランサー IP アドレスとポートへの着信 TCP および UDP トラフィックを拒否します。 メモしたロード・バランサー・パブリック IP アドレスに `<loadbalancer_IP>` を置き換えます。
+
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -349,6 +354,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
       name: deny-lb-port-80
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
         destination:
@@ -366,9 +372,8 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
           - 80
         protocol: UDP
         source: {}
-      preDNAT: true
       selector: ibm.role=='worker_public'
-      order: 1100
+      order: 800
       types:
       - Ingress
     ```
@@ -403,6 +408,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
       name: whitelist
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Allow
         destination:
@@ -414,7 +420,6 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
         source:
           nets:
           - <client_address>/32
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 500
       types:
@@ -459,7 +464,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
 前のレッスンでは、すべてのトラフィックをブロックし、いくつかの IP のみをホワイトリストに入れました。 このシナリオは、制御されたいくつかのソース IP アドレスのみにアクセスを制限するようなテスト目的の場合によく機能します。 ただし、PR 会社のアプリは広く公開される必要のあるものです。 少数の IP アドレスで見られる異常なトラフィックを除き、すべてのトラフィックが許可される必要があります。 ブラックリスティングは、少数の IP アドレスからの攻撃を防ぐ場合に役立つため、このようなシナリオで有用です。
 
 このレッスンでは、所有するシステムのソース IP アドレスからのトラフィックをブロックすることにより、ブラックリストをテストします。 レッスン 4 の終了時に、パブリック・ノード・ポートへのすべてのトラフィックがブロックされ、パブリック・ロード・バランサーへのすべてのトラフィックが許可されます。 ブラックリストに入れたシステム IP からのロード・バランサーへのトラフィックのみブロックされます。
-<img src="images/cs_tutorial_policies_L4.png" width="600" alt="Web サーバー・アプリは、パブリック・ロード・バランサーによってインターネットに公開されます。システム IP からのトラフィックのみブロックされます。" style="width:600px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web サーバー・アプリは、パブリック・ロード・バランサーによってインターネットに公開されます。システム IP からのトラフィックのみブロックされます。" style="width:550px; border-style: none"/>
 
 1. 前のレッスンで作成したホワイトリスト・ポリシーをクリーンアップします。
     - Linux:
@@ -484,7 +489,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
 
     すべてのソース IP からのロード・バランサー IP アドレスとポートへの着信 TCP および UDP トラフィックが再度許可されます。
 
-2. システムのソース IP アドレスからロード・バランサーの IP アドレスおよびポートへのすべての着信 TCP および UDP トラフィックを拒否するには、テキスト・エディターで `deny-lb-port-80.yaml` という下位の pre-DNAT ポリシーを作成します。メモの値を使用して、`<loadbalancer_IP>` をロード・バランサーのパブリック IP アドレスに置き換え、`<client_address>` をシステムのソース IP のパブリック IP アドレスに置き換えます。
+2. システムのソース IP アドレスからロード・バランサーの IP アドレスおよびポートへのすべての着信 TCP および UDP トラフィックを拒否するには、テキスト・エディターで `blacklist.yaml` という下位の pre-DNAT ポリシーを作成します。 メモの値を使用して、`<loadbalancer_IP>` をロード・バランサーのパブリック IP アドレスに置き換え、`<client_address>` をシステムのソース IP のパブリック IP アドレスに置き換えます。
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -492,6 +497,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
       name: blacklist
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
         destination:
@@ -513,7 +519,6 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
         source:
           nets:
           - <client_address>/32
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 500
       types:

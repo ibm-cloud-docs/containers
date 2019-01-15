@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,11 +13,14 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
- 
+
 
 
 # クラスターのストレージのトラブルシューティング
@@ -89,7 +92,7 @@ Helm チャートを使用してイメージをデプロイする場合は、ini
 デプロイメントに [init コンテナー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) を指定すると、Dockerfile に指定された非 root ユーザーに、コンテナー内のボリューム・マウント・パスに対する書き込み権限を付与できます。 init コンテナーは、アプリ・コンテナーが開始される前に開始されます。 init コンテナーは、コンテナーの内部にボリューム・マウント・パスを作成し、そのマウント・パスを正しい (非 root) ユーザーが所有するように変更してから、クローズします。 その後、マウント・パスに書き込む必要がある非 root ユーザーでアプリ・コンテナーが開始されます。 パスは既に非 root ユーザーによって所有されているため、マウント・パスへの書き込みは成功します。 init コンテナーを使用したくない場合は、Dockerfile を変更して、非 root ユーザーに NFS ファイル・ストレージへのアクセス権限を追加できます。
 
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 1.  アプリの Dockerfile を開き、ボリューム・マウント・パスに対する書き込み権限を付与するユーザーのユーザー ID (UID) とグループ ID (GID) を取得します。 Jenkins Dockerfile の例では、情報は以下のとおりです。
     - UID: `1000`
@@ -350,7 +353,7 @@ PV は正常に作成され、既存のブロック・ストレージ・イン�
 {: #cos_helm_fails}
 
 {: tsSymptoms}
-{{site.data.keyword.cos_full_notm}} `ibmc` Helm プラグインをインストールすると、インストールが失敗し、以下のエラーが発生します。 
+{{site.data.keyword.cos_full_notm}} `ibmc` Helm プラグインをインストールすると、インストールが失敗し、以下のエラーが発生します。
 ```
 Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
 ```
@@ -360,13 +363,13 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 `ibmc` Helm プラグインがインストールされると、`./helm/plugins/helm-ibmc` ディレクトリーから、`ibmc` Helm プラグインがローカル・システムに置かれているディレクトリー (通常は `./ibmcloud-object-storage-plugin/helm-ibmc` にあります) へのシンボリック・リンクが作成されます。 ローカル・システムから `ibmc` Helm プラグインを削除するか、または `ibmc` Helm プラグイン・ディレクトリーを別の場所に移動すると、シンボリック・リンクは削除されません。
 
 {: tsResolve}
-1. {{site.data.keyword.cos_full_notm}} Helm プラグインを削除します。 
+1. {{site.data.keyword.cos_full_notm}} Helm プラグインを削除します。
    ```
    rm -rf ~/.helm/plugins/helm-ibmc
    ```
    {: pre}
-   
-2. [{{site.data.keyword.cos_full_notm}} をインストールします](cs_storage_cos.html#install_cos)。 
+
+2. [{{site.data.keyword.cos_full_notm}} をインストールします](cs_storage_cos.html#install_cos)。
 
 <br />
 
@@ -375,33 +378,35 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 {: #cos_secret_access_fails}
 
 {: tsSymptoms}
-PVC を作成するか、PVC をマウントするポッドをデプロイすると、作成またはデプロイメントが失敗します。 
+PVC を作成するか、PVC をマウントするポッドをデプロイすると、作成またはデプロイメントが失敗します。
 
-- PVC の作成が失敗した場合のエラー・メッセージの例: 
+- PVC の作成が失敗した場合のエラー・メッセージの例:
   ```
   pvc-3:1b23159vn367eb0489c16cain12345:cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
   ```
   {: screen}
 
-- ポッドの作成が失敗した場合のエラー・メッセージの例: 
+- ポッドの作成が失敗した場合のエラー・メッセージの例:
   ```
   persistentvolumeclaim "pvc-3" not found (repeated 3 times)
   ```
   {: screen}
-  
+
 {: tsCauses}
-{{site.data.keyword.cos_full_notm}} サービス資格情報を保管する Kubernetes シークレット、PVC、およびポッドのすべてが、同じ Kubernetes 名前空間に含まれていません。 シークレットが PVC またはポッドとは異なる名前空間にデプロイされた場合、そのシークレットにはアクセスできません。 
+{{site.data.keyword.cos_full_notm}} サービス資格情報を保管する Kubernetes シークレット、PVC、およびポッドのすべてが、同じ Kubernetes 名前空間に含まれていません。 シークレットが PVC またはポッドとは異なる名前空間にデプロイされた場合、そのシークレットにはアクセスできません。
 
 {: tsResolve}
-1. クラスター内のシークレットをリストし、{{site.data.keyword.cos_full_notm}} サービス・インスタンスの Kubernetes シークレットが作成される Kubernetes 名前空間を確認します。 シークレットには、`ibm/ibmc-s3fs` が **Type** として表示される必要があります。 
+
+
+1. クラスター内のシークレットをリストし、{{site.data.keyword.cos_full_notm}} サービス・インスタンスの Kubernetes シークレットが作成される Kubernetes 名前空間を確認します。 シークレットには、`ibm/ibmc-s3fs` が **Type** として表示される必要があります。
    ```
    kubectl get secrets --all-namespaces
    ```
    {: pre}
-   
-2. ご使用の PVC およびポッドの YAML 構成ファイルを確認して、同じ名前空間を使用したことを確認します。 シークレットが存在する名前空間とは異なる名前空間にポッドをデプロイする場合は、目的の名前空間に[別のシークレットを作成](cs_storage_cos.html#create_cos_secret)します。 
-   
-3. 目的の名前空間に PVC を作成するか、ポッドをデプロイします。 
+
+2. ご使用の PVC およびポッドの YAML 構成ファイルを確認して、同じ名前空間を使用したことを確認します。 シークレットが存在する名前空間とは異なる名前空間にポッドをデプロイする場合は、目的の名前空間に[別のシークレットを作成](cs_storage_cos.html#create_cos_secret)します。
+
+3. 目的の名前空間に PVC を作成するか、ポッドをデプロイします。
 
 <br />
 
@@ -410,7 +415,7 @@ PVC を作成するか、PVC をマウントするポッドをデプロイする
 {: #cred_failure}
 
 {: tsSymptoms}
-PVC を作成すると、次のいずれかのようなエラー・メッセージが表示されます。 
+PVC を作成すると、次のいずれかのようなエラー・メッセージが表示されます。
 
 ```
 SignatureDoesNotMatch: The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. For more information, see REST Authentication and SOAP Authentication for details.
@@ -418,7 +423,7 @@ SignatureDoesNotMatch: The request signature we calculated does not match the si
 {: screen}
 
 ```
-AccessDenied: Access Denied status code: 403 
+AccessDenied: Access Denied status code: 403
 ```
 {: screen}
 
@@ -432,22 +437,22 @@ CredentialsEndpointError: failed to load credentials
 
 {: tsResolve}
 1. サービス詳細ページのナビゲーションで、**「サービス資格情報」**をクリックします。
-2. 資格情報を見つけて、**「資格情報の表示」**をクリックします。 
-3. Kubernetes シークレットで正しい **access_key_id** と **secret_access_key** を使用していることを確認します。 そうでない場合は、Kubernetes シークレットを更新します。 
-   1. シークレットの作成に使用した YAML を取得します。 
+2. 資格情報を見つけて、**「資格情報の表示」**をクリックします。
+3. Kubernetes シークレットで正しい **access_key_id** と **secret_access_key** を使用していることを確認します。 そうでない場合は、Kubernetes シークレットを更新します。
+   1. シークレットの作成に使用した YAML を取得します。
       ```
       kubectl get secret <secret_name> -o yaml
       ```
       {: pre}
-      
-   2. **access_key_id** と **secret_access_key** を更新します。 
-   3. シークレットを更新します。 
+
+   2. **access_key_id** と **secret_access_key** を更新します。
+   3. シークレットを更新します。
       ```
       kubectl apply -f secret.yaml
       ```
       {: pre}
-      
-4. **iam_role_crn** セクションで、`Writer` または `Manager` の役割があることを確認します。 正しい役割を持っていない場合は、[正しい権限で新しい {{site.data.keyword.cos_full_notm}} サービス資格情報を作成する](cs_storage_cos.html#create_cos_service)必要があります。 その後、新しいサービス資格情報を使用して既存のシークレットを更新するか、[新しいシークレットを作成](cs_storage_cos.html#create_cos_secret)します。 
+
+4. **iam_role_crn** セクションで、`Writer` または `Manager` の役割があることを確認します。 正しい役割を持っていない場合は、[正しい権限で新しい {{site.data.keyword.cos_full_notm}} サービス資格情報を作成する](cs_storage_cos.html#create_cos_service)必要があります。 その後、新しいサービス資格情報を使用して既存のシークレットを更新するか、[新しいシークレットを作成](cs_storage_cos.html#create_cos_secret)します。
 
 <br />
 
@@ -455,7 +460,7 @@ CredentialsEndpointError: failed to load credentials
 ## オブジェクト・ストレージ: 既存のバケットにアクセスできない
 
 {: tsSymptoms}
-PVC を作成すると、{{site.data.keyword.cos_full_notm}} のバケットにアクセスできません。 次のようなエラー・メッセージが表示されます。 
+PVC を作成すると、{{site.data.keyword.cos_full_notm}} のバケットにアクセスできません。 次のようなエラー・メッセージが表示されます。
 
 ```
 Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:1b2345678b69175abc98y873e2:cannot access bucket <bucket_name>: NotFound: Not Found
@@ -463,13 +468,13 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: screen}
 
 {: tsCauses}
-既存のバケットへのアクセスに正しくないストレージ・クラスを使用したか、作成しなかったバケットにアクセスしようとした可能性があります。 
+既存のバケットへのアクセスに正しくないストレージ・クラスを使用していたか、作成していないバケットにアクセスしようとした可能性があります。
 
 {: tsResolve}
-1. [{{site.data.keyword.Bluemix_notm}} ダッシュボード ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/dashboard/apps) から、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを選択します。 
-2. **「バケット」**を選択します。 
-3. 既存のバケットの**クラス**および**場所**の情報を確認します。 
-4. 該当する[ストレージ・クラス](cs_storage_cos.html#storageclass_reference)を選択します。 
+1. [{{site.data.keyword.Bluemix_notm}} ダッシュボード ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/dashboard/apps) から、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを選択します。
+2. **「バケット」**を選択します。
+3. 既存のバケットの**クラス**および**場所**の情報を確認します。
+4. 該当する[ストレージ・クラス](cs_storage_cos.html#storageclass_reference)を選択します。
 
 <br />
 
@@ -478,25 +483,25 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: #cos_nonroot_access}
 
 {: tsSymptoms}
-GUI または REST API を使用して、{{site.data.keyword.cos_full_notm}} サービス・インスタンスにファイルをアップロードしました。 アプリ・デプロイメントで `runAsUser` で定義した非 root ユーザーを使用してこれらのファイルにアクセスしようとすると、ファイルへのアクセスは拒否されます。 
+コンソールまたは REST API を使用して、{{site.data.keyword.cos_full_notm}} サービス・インスタンスにファイルをアップロードしました。 アプリ・デプロイメントで `runAsUser` で定義した非 root ユーザーを使用してこれらのファイルにアクセスしようとすると、ファイルへのアクセスは拒否されます。
 
 {: tsCauses}
-Linux では、ファイルまたはディレクトリーには `Owner`、`Group`、および `Other` の 3 つのアクセス・グループがあります。 GUI または REST API を使用してファイルを {{site.data.keyword.cos_full_notm}} にアップロードする場合、`Owner`、`Group`、および `Other` の権限が削除されます。 各ファイルの権限は、以下のようになります。 
+Linux では、ファイルまたはディレクトリーには `Owner`、`Group`、および `Other` の 3 つのアクセス・グループがあります。 コンソールまたは REST API を使用してファイルを {{site.data.keyword.cos_full_notm}} にアップロードする場合、`Owner`、`Group`、および `Other` の権限が削除されます。 各ファイルの権限は、以下のようになります。
 
 ```
 d--------- 1 root root 0 Jan 1 1970 <file_name>
 ```
 {: screen}
 
-{{site.data.keyword.cos_full_notm}} プラグインを使用してファイルをアップロードすると、ファイルの権限が保持され、変更されません。 
+{{site.data.keyword.cos_full_notm}} プラグインを使用してファイルをアップロードすると、ファイルの権限が保持され、変更されません。
 
 {: tsResolve}
-非 root ユーザーとしてファイルにアクセスするために、非 root ユーザーには、そのファイルに対する読み取り権限と書き込み権限が必要です。 ポッドのデプロイメントの一部としてファイルに対するアクセス権を変更するには、書き込み操作が必要です。 {{site.data.keyword.cos_full_notm}} は、書き込みワークロード用には設計されていません。 ポッドのデプロイメント中に権限を更新すると、ポッドが `Running` 状態にならない場合があります。 
+非 root ユーザーとしてファイルにアクセスするために、非 root ユーザーには、そのファイルに対する読み取り権限と書き込み権限が必要です。 ポッドのデプロイメントの一部としてファイルに対するアクセス権を変更するには、書き込み操作が必要です。 {{site.data.keyword.cos_full_notm}} は、書き込みワークロード用には設計されていません。 ポッドのデプロイメント中に権限を更新すると、ポッドが `Running` 状態にならない場合があります。
 
-この問題を解決するには、PVC をアプリ・ポッドにマウントする前に、別のポッドを作成して非 root ユーザーに正しい権限を設定します。 
+この問題を解決するには、PVC をアプリ・ポッドにマウントする前に、別のポッドを作成して非 root ユーザーに正しい権限を設定します。
 
-1. バケット内のファイルのアクセス権を確認します。 
-   1. `test-permission` ポッドの構成ファイルを作成し、ファイルに `test-permission.yaml` という名前を付けます。 
+1. バケット内のファイルのアクセス権を確認します。
+   1. `test-permission` ポッドの構成ファイルを作成し、ファイルに `test-permission.yaml` という名前を付けます。
       ```
       apiVersion: v1
       kind: Pod
@@ -515,38 +520,38 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
             claimName: <pvc_name>
       ```
       {: codeblock}
-        
-   2. `test-permission` ポッドを作成します。 
+
+   2. `test-permission` ポッドを作成します。
       ```
       kubectl apply -f test-permission.yaml
       ```
       {: pre}
-      
-   3. ポッドにログインします。 
+
+   3. ポッドにログインします。
       ```
       kubectl exec test-permission -it bash
       ```
       {: pre}
-   
-   4. マウント・パスにナビゲートし、ファイルのアクセス権をリストします。 
+
+   4. マウント・パスにナビゲートし、ファイルのアクセス権をリストします。
       ```
       cd test && ls -al
       ```
       {: pre}
-      
-      出力例: 
+
+      出力例:
       ```
       d--------- 1 root root 0 Jan 1 1970 <file_name>
       ```
       {: screen}
-      
-2. ポッドを削除します。 
+
+2. ポッドを削除します。
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-      
-3. ファイルのアクセス権を修正するために使用するポッドの構成ファイルを作成し、`fix-permission.yaml` という名前を付けます。 
+
+3. ファイルのアクセス権を修正するために使用するポッドの構成ファイルを作成し、`fix-permission.yaml` という名前を付けます。
    ```
    apiVersion: v1
    kind: Pod
@@ -568,61 +573,62 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
          claimName: <pvc_name>
     ```
     {: codeblock}
-    
-3. `fix-permission` ポッドを作成します。 
+
+3. `fix-permission` ポッドを作成します。
    ```
    kubectl apply -f fix-permission.yaml
    ```
    {: pre}
-   
+
 4. ポッドが `Completed` 状態になるまで待機します。  
    ```
    kubectl get pod fix-permission
    ```
    {: pre}
 
-5. `fix-permission` ポッドを削除します。 
+5. `fix-permission` ポッドを削除します。
    ```
    kubectl delete pod fix-permission
    ```
-   {: pre} 
-   
-5. 以前に使用した `test-permission` ポッドを再作成して、アクセス権を確認します。 
+   {: pre}
+
+5. 以前に使用した `test-permission` ポッドを再作成して、アクセス権を確認します。
    ```
    kubectl apply -f test-permission.yaml
    ```
    {: pre}
-   
-5. ファイルのアクセス権が更新されていることを確認します。 
-   1. ポッドにログインします。 
+
+5. ファイルのアクセス権が更新されていることを確認します。
+   1. ポッドにログインします。
       ```
       kubectl exec test-permission -it bash
       ```
       {: pre}
-   
-   2. マウント・パスにナビゲートし、ファイルのアクセス権をリストします。 
+
+   2. マウント・パスにナビゲートし、ファイルのアクセス権をリストします。
       ```
       cd test && ls -al
       ```
       {: pre}
 
-      出力例: 
+      出力例:
       ```
       -rwxrwx--- 1 <nonroot_userID> root 6193 Aug 21 17:06 <file_name>
       ```
       {: screen}
-      
-6. `test-permission` ポッドを削除します。 
+
+6. `test-permission` ポッドを削除します。
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-   
-7. 非 root ユーザーとしてアプリに PVC をマウントします。 
 
-   **重要:** デプロイメント YAML で同時に `fsGroup` を設定することなく、非 root ユーザーを `runAsUser` として定義します。 `fsGroup` を設定すると、ポッドのデプロイ時に、{{site.data.keyword.cos_full_notm}} プラグインによるバケット内のすべてのファイルのグループ権限の更新がトリガーされます。 権限の更新は書き込み操作であり、これによってポッドが `Running` 状態にならない場合があります。 
+7. 非 root ユーザーとしてアプリに PVC をマウントします。
 
-{{site.data.keyword.cos_full_notm}} サービス・インスタンスで正しいファイルのアクセス権を設定した後は、GUI または REST API を使用してファイルをアップロードしないでください。 {{site.data.keyword.cos_full_notm}} プラグインを使用して、サービス・インスタンスにファイルを追加します。 
+   デプロイメント YAML で同時に `fsGroup` を設定することなく、非 root ユーザーを `runAsUser` として定義します。 `fsGroup` を設定すると、ポッドのデプロイ時に、{{site.data.keyword.cos_full_notm}} プラグインによるバケット内のすべてのファイルのグループ権限の更新がトリガーされます。 権限の更新は書き込み操作であり、これによってポッドが `Running` 状態にならない場合があります。
+   {: important}
+
+{{site.data.keyword.cos_full_notm}} サービス・インスタンスで正しいファイルのアクセス権を設定した後は、コンソールまたは REST API を使用してファイルをアップロードしないでください。 {{site.data.keyword.cos_full_notm}} プラグインを使用して、サービス・インスタンスにファイルを追加します。
 {: tip}
 
 <br />
@@ -637,20 +643,15 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
 {: shortdesc}
 
 -  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
-
 -   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページを確認します![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status)。
 -   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
-
     {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
     {: tip}
 -   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
-
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
     フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support/howtogetsupport.html#using-avatar)を参照してください。
-
--   チケットを開いて、IBM サポートに連絡してください。 IBM サポート・チケットを開く方法や、サポート・レベルとチケットの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
-
-{: tip}
+-   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
 問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。
+{: tip}
 

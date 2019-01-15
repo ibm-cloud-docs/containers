@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -23,7 +26,8 @@ lastupdated: "2018-10-25"
 Ingress アプリケーション・ロード・バランサー (ALB) に機能を追加するため、Ingress リソースにメタデータとしてアノテーションを指定できます。
 {: shortdesc}
 
-**重要**: アノテーションを使用する前に、『[Ingress を使用してアプリを公開する](cs_ingress.html)』の手順に従い、Ingress サービス構成を適切にセットアップしてください。 基本構成で Ingress ALB をセットアップしたら、Ingress リソース・ファイルにアノテーションを追加して機能を拡張できます。
+アノテーションを使用する前に、『[Ingress を使用してアプリを公開する](cs_ingress.html)』の手順に従い、Ingress サービス構成を適切にセットアップしてください。 基本構成で Ingress ALB をセットアップしたら、Ingress リソース・ファイルにアノテーションを追加して機能を拡張できます。
+{: note}
 
 <table>
 <caption>一般的なアノテーション</caption>
@@ -144,7 +148,7 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
   <tr>
   <td><a href="#appid-auth">{{site.data.keyword.appid_short}} 認証</a></td>
   <td><code>appid-auth</code></td>
-  <td>{{site.data.keyword.appid_full_notm}} を使用して、アプリの認証を行います。</td>
+  <td>{{site.data.keyword.appid_full}} を使用して、アプリの認証を行います。</td>
   </tr>
   <tr>
   <td><a href="#custom-port">カスタムの HTTP および HTTPS ポート</a></td>
@@ -308,7 +312,7 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
 
 <dl>
 <dt>説明</dt>
-<dd>外部サービスへのパス定義を追加します。 このアノテーションは、バックエンド・サービスの代わりに外部サービスでアプリを実行する場合にのみ使用します。 このアノテーションを使用して外部サービス経路を作成する場合、併用できるのは、`client-max-body-size`、`proxy-read-timeout`、`proxy-connect-timeout`、`proxy-buffering` の各アノテーションのみです。 その他のアノテーションは、`proxy-external-service` と併用できません。<br><br><strong>注</strong>: 単一のサービスとパスに、複数のホストを指定することはできません。
+<dd>外部サービスへのパス定義を追加します。 このアノテーションは、バックエンド・サービスの代わりに外部サービスでアプリを実行する場合にのみ使用します。 このアノテーションを使用して外部サービス経路を作成する場合、併用できるのは、`client-max-body-size`、`proxy-read-timeout`、`proxy-connect-timeout`、`proxy-buffering` の各アノテーションのみです。 その他のアノテーションは、`proxy-external-service` と併用できません。<p class="note">単一のサービスとパスに、複数のホストを指定することはできません。</p>
 </dd>
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
@@ -369,7 +373,7 @@ ALB が要求 URI とアプリ・パスを突き合わせる方法を変更し�
 
 <dl>
 <dt>説明</dt>
-<dd>デフォルトでは、ALB はアプリが listen するパスを接頭部として処理します。 ALB がアプリへの要求を受け取ると、ALB は、要求 URI の先頭に一致するパス (接頭部として指定) があるか Ingress リソースを検査します。 一致するものが見つかった場合、要求は、アプリがデプロイされているポッドの IP アドレスに転送されます。<br><br>`location-modifier` アノテーションは、ロケーション・ブロックの構成を変更することによって、ALB が一致を検索する方法を変更します。 ロケーション・ブロックは、アプリ・パスに対する要求の処理方法を決定します。<br><br><strong>注</strong>: 正規表現 (regex) パスを処理するには、このアノテーションが必要です。</dd>
+<dd>デフォルトでは、ALB はアプリが listen するパスを接頭部として処理します。 ALB がアプリへの要求を受け取ると、ALB は、要求 URI の先頭に一致するパス (接頭部として指定) があるか Ingress リソースを検査します。 一致するものが見つかった場合、要求は、アプリがデプロイされているポッドの IP アドレスに転送されます。<br><br>`location-modifier` アノテーションは、ロケーション・ブロックの構成を変更することによって、ALB が一致を検索する方法を変更します。 ロケーション・ブロックは、アプリ・パスに対する要求の処理方法を決定します。<p class="note">正規表現 (regex) パスを処理するには、このアノテーションが必要です。</p></dd>
 
 <dt>サポートされる修飾子</dt>
 <dd>
@@ -470,11 +474,14 @@ metadata:
 name: myingress
 annotations:
   ingress.bluemix.net/location-snippets: |
-    serviceName=&lt;myservice&gt;
+    serviceName=&lt;myservice1&gt;
     # Example location snippet
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
+    &lt;EOS&gt;
+    serviceName=&lt;myservice2&gt;
+    proxy_set_header Authorization "";
     &lt;EOS&gt;
 spec:
 tls:
@@ -502,7 +509,7 @@ rules:
 </tr>
 <tr>
 <td>ロケーション・スニペット</td>
-<td>指定したサービスに使用する構成スニペットを指定します。 このサンプル・スニペットは、プロキシー要求バッファリングをオフにして、ログの再書き込みをオンにし、要求を <code>myservice</code> サービスに転送するときに追加ヘッダーを設定するように、ロケーション・ブロックを構成しています。</td>
+<td>指定したサービスに使用する構成スニペットを指定します。 <code>myservice1</code> サービスのサンプル・スニペットでは、プロキシー要求バッファリングをオフにし、ログの再書き込みをオンにし、要求をサービスに転送するときに追加ヘッダーを設定するようにロケーション・ブロックを構成しています。<code>myservice2</code> サービスのサンプル・スニペットでは、空の <code>Authorization</code> ヘッダーを設定しています。すべてのロケーション・スニペットは、値 <code>&lt;EOS&gt;</code> で終わる必要があります。</td>
 </tr>
 </tbody></table>
 </dd>
@@ -569,7 +576,7 @@ rules:
 ### 再書き込みパス (rewrite-path)
 {: #rewrite-path}
 
-ALB ドメイン・パスへの着信ネットワーク・トラフィックを、バックエンド・アプリケーションが listen する別のパスにルーティングできます。
+ALB ドメイン・パスへの着信ネットワーク・トラフィックを、バックエンド・アプリが listen する別のパスにルーティングできます。
 {:shortdesc}
 
 <dl>
@@ -686,7 +693,7 @@ rules:
 <dd>
 このアノテーションは、TCP ストリーム・ワークロードを実行するアプリに使用します。
 
-<p>**注:** ALB はパススルー・モードで動作し、トラフィックをバックエンド・アプリに転送します。 この場合、SSL 終端はサポートされません。 TLS 接続は終了せず、何もしないで通過します。</p>
+<p class="note">ALB はパススルー・モードで動作し、トラフィックをバックエンド・アプリに転送します。 この場合、SSL 終端はサポートされません。 TLS 接続は終了せず、何もしないで通過します。</p>
 </dd>
 
 
@@ -699,7 +706,7 @@ kind: Ingress
 metadata:
 name: myingress
 annotations:
-  ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; [servicePort=&lt;service_port&gt;]"
+  ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
 spec:
   tls:
   - hosts:
@@ -730,7 +737,7 @@ spec:
   </tr>
   <tr>
   <td><code>servicePort</code></td>
-  <td>このパラメーターはオプションです。 指定した場合、トラフィックがバックエンド・アプリに送信される前に、ポートはこの値に置き換えられます。 指定しない場合、ポートは Ingress ポートと同じままです。</td>
+  <td>このパラメーターはオプションです。 指定した場合、トラフィックがバックエンド・アプリに送信される前に、ポートはこの値に置き換えられます。 指定しない場合、ポートは Ingress ポートと同じままです。 このパラメーターを設定したくない場合は、構成から削除してかまいません。</td>
   </tr>
   </tbody></table>
 
@@ -746,7 +753,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>ALB の構成マップを開きます。
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>TCP ポートを構成マップに追加します。 <code>&lt;port&gt;</code> を、開く TCP ポートに置き換えます。 <b>注</b>: デフォルトでは、ポート 80 とポート 443 が開いています。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、<a href="cs_ingress.html#opening_ingress_ports">Ingress ALB でポートを開く</a>を参照してください。
+<li>TCP ポートを構成マップに追加します。 <code>&lt;port&gt;</code> を、開く TCP ポートに置き換えます。<p class="note">デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、<a href="cs_ingress.html#opening_ingress_ports">Ingress ALB でポートを開く</a>を参照してください。</p>
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -778,6 +785,9 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 
 ## 接続アノテーション
 {: #connection}
+
+接続アノテーションでは、ALB がバックエンド・アプリおよびアップストリーム・サーバーに接続する方法を変更したり、アプリケーションまたはサーバーが使用不可と見なされるまでのタイムアウトやキープアライブ接続の最大数を設定したりできます。
+{: shortdesc}
 
 ### 接続タイムアウトおよび読み取りタイムアウトのカスタマイズ (proxy-connect-timeout、proxy-read-timeout)
 {: #proxy-connect-timeout}
@@ -830,7 +840,7 @@ rules:
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>バックエンド・アプリに接続されるのを待機する秒数または分数 (例: <code>65s</code> または <code>1m</code>)。 <strong>注:</strong> 接続タイムアウトは、75 秒より長くできません。</td>
+ <td>バックエンド・アプリに接続されるのを待機する秒数または分数 (例: <code>65s</code> または <code>1m</code>)。 接続タイムアウトは、75 秒より長くできません。</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
@@ -931,8 +941,8 @@ spec:
  tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+  secretName: mytlssecret
+rules:
  - host: mydomain
    http:
      paths:
@@ -972,7 +982,7 @@ ALB が要求を次のアップストリーム・サーバーに渡すことが�
 <dl>
 <dt>説明</dt>
 <dd>
-Ingress ALB は、クライアント・アプリとユーザー・アプリの間のプロキシーとして機能します。 一部のアプリの構成では、ALB からの着信クライアント要求を処理する複数のアップストリーム・サーバーが必要です。 ALB で使用するプロキシー・サーバーが、アプリで使用するアップストリーム・サーバーとの接続を確立できない場合があります。 その場合、ALB は次のアップストリーム・サーバーとの接続を確立して、要求を代わりに渡すことができます。 `proxy-next-upstream-config` アノテーションを使用すると、ALB が要求を次のアップストリーム・サーバーに渡そうと試行するケース、期間、回数を設定できます。<br><br><strong>注</strong>: `proxy-next-upstream-config` を使用する場合は必ずタイムアウトが構成されるため、このアノテーションに `timeout=true` は追加しないでください。
+Ingress ALB は、クライアント・アプリとユーザー・アプリの間のプロキシーとして機能します。 一部のアプリの構成では、ALB からの着信クライアント要求を処理する複数のアップストリーム・サーバーが必要です。 ALB で使用するプロキシー・サーバーが、アプリで使用するアップストリーム・サーバーとの接続を確立できない場合があります。 その場合、ALB は次のアップストリーム・サーバーとの接続を確立して、要求を代わりに渡すことができます。 `proxy-next-upstream-config` アノテーションを使用すると、ALB が要求を次のアップストリーム・サーバーに渡そうと試行するケース、期間、回数を設定できます。<p class="note">`proxy-next-upstream-config` を使用する場合は必ずタイムアウトが構成されるため、このアノテーションに `timeout=true` は追加しないでください。</p>
 </dd>
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
@@ -1300,10 +1310,13 @@ spec:
 ## HTTPS および TLS/SSL 認証アノテーション
 {: #https-auth}
 
+HTTPS および TLS/SSL 認証アノテーションでは、ALB に HTTPS トラフィックを構成したり、デフォルトの HTTPS ポートを変更したり、バックエンド・アプリに送信されるトラフィックの SSL 暗号化を有効にしたり、相互認証をセットアップしたりできます。
+{: shortdesc}
+
 ### {{site.data.keyword.appid_short_notm}} 認証 (appid-auth)
 {: #appid-auth}
 
-{{site.data.keyword.appid_full_notm}} を使用して、アプリケーションの認証を行います。
+{{site.data.keyword.appid_full_notm}} を使用して、アプリの認証を行います。
 {:shortdesc}
 
 <dl>
@@ -1311,11 +1324,11 @@ spec:
 <dd>
 {{site.data.keyword.appid_short_notm}} を使用して、Web または API の HTTP /HTTPS 要求を認証します。
 
-<p>要求タイプを <code>web</code> に設定すると、{{site.data.keyword.appid_short_notm}} アクセス・トークンを含む Web 要求が検証されます。 トークンの検証が失敗すると、Web 要求は拒否されます。 要求にアクセス・トークンが含まれていない場合、要求は {{site.data.keyword.appid_short_notm}} ログイン・ページにリダイレクトされます。 <strong>注</strong>: {{site.data.keyword.appid_short_notm}} Web 認証が機能するためには、ユーザーのブラウザーで Cookie を有効にする必要があります。</p>
+<p>要求タイプを <code>web</code> に設定すると、{{site.data.keyword.appid_short_notm}} アクセス・トークンを含む Web 要求が検証されます。 トークンの検証が失敗すると、Web 要求は拒否されます。 要求にアクセス・トークンが含まれていない場合、要求は {{site.data.keyword.appid_short_notm}} ログイン・ページにリダイレクトされます。 {{site.data.keyword.appid_short_notm}} Web 認証が機能するためには、ユーザーのブラウザーで Cookie を有効にする必要があります。</p>
 
 <p>要求タイプを <code>api</code> に設定すると、{{site.data.keyword.appid_short_notm}} アクセス・トークンを含む API 要求が検証されます。 要求にアクセス・トークンが含まれていない場合、「<code>401 : Unauthorized</code>」というエラー・メッセージがユーザーに返されます。</p>
 
-<p>**注**: セキュリティー上の理由から、{{site.data.keyword.appid_short_notm}} 認証は、TLS/SSL が有効化されているバックエンドのみをサポートします。</p>
+<p class="note">セキュリティー上の理由から、{{site.data.keyword.appid_short_notm}} 認証は、TLS/SSL が有効化されているバックエンドのみをサポートします。</p>
 </dd>
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
@@ -1367,13 +1380,12 @@ spec:
 </dd>
 <dt>使用法</dt></dl>
 
-アプリケーションは認証に {{site.data.keyword.appid_short_notm}} を使用するため、{{site.data.keyword.appid_short_notm}} インスタンスをプロビジョンし、有効なリダイレクト URI をインスタンスに構成し、インスタンスをクラスターにバインドしてバインド・シークレットを生成する必要があります。
+アプリは認証に {{site.data.keyword.appid_short_notm}} を使用するため、{{site.data.keyword.appid_short_notm}} インスタンスをプロビジョンし、有効なリダイレクト URI をインスタンスに構成し、インスタンスをクラスターにバインドしてバインド・シークレットを生成する必要があります。
 
 1. 既存の {{site.data.keyword.appid_short_notm}} インスタンスを選択するか、新しいインスタンスを作成します。
     * 既存のインスタンスを使用する場合、サービス・インスタンス名にスペースが含まれていないことを確認します。 スペースを削除する場合、サービス・インスタンス名の隣にある「オプション (詳細)」メニューを選択し、「**サービスの名前変更**」を選びます。
     * [新しい {{site.data.keyword.appid_short_notm}} インスタンスをプロビジョンするには、以下のようにします。](https://console.bluemix.net/catalog/services/app-id)
-        1. 自動入力による**サービス名**を、サービス・インスタンスを表す固有の名前に置き換えます。
-            **重要**: サービス・インスタンス名にスペースを含めることはできません。
+        1. 自動入力による**サービス名**を、サービス・インスタンスを表す固有の名前に置き換えます。 サービス・インスタンス名にスペースを含めることはできません。
         2. クラスターのデプロイ先と同じ地域を選択します。
         3. **「作成」**をクリックします。
 2. アプリのリダイレクト URL を追加します。 リダイレクト URL は、アプリのコールバック・エンドポイントです。 フィッシング攻撃を防止するため、アプリ ID では、リダイレクト URL のホワイトリストを使用して要求 URL が検証されます。
@@ -1418,7 +1430,7 @@ HTTP (ポート 80) および HTTPS (ポート 443) ネットワーク・トラ�
 
 <dl>
 <dt>説明</dt>
-<dd>デフォルトで、Ingress ALB は、ポート 80 上の着信 HTTP ネットワーク・トラフィックとポート 443 上の着信 HTTPS ネットワーク・トラフィックを listen するように構成されています。 ALB ドメインのセキュリティーを強化するため、または HTTPS ポートだけを有効にするために、デフォルト・ポートを変更できます。<p><strong>注</strong>: ポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](cs_ingress.html#opening_ingress_ports)、そのポートを [`mutual-auth` アノテーション](#mutual-auth)で指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。</p></dd>
+<dd>デフォルトで、Ingress ALB は、ポート 80 上の着信 HTTP ネットワーク・トラフィックとポート 443 上の着信 HTTPS ネットワーク・トラフィックを listen するように構成されています。 ALB ドメインのセキュリティーを強化するため、または HTTPS ポートだけを有効にするために、デフォルト・ポートを変更できます。<p class="note">ポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](cs_ingress.html#opening_ingress_ports)、そのポートを [`mutual-auth` アノテーション](#mutual-auth)で指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。</p></dd>
 
 
 <dt>サンプル Ingress リソース YAML</dt>
@@ -1435,8 +1447,8 @@ spec:
  tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+  secretName: mytlssecret
+rules:
  - host: mydomain
    http:
      paths:
@@ -1457,7 +1469,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>着信 HTTP または HTTPS ネットワーク・トラフィックに使用するポート番号を入力します。  <p><strong>注:</strong> HTTP または HTTPS 用にカスタム・ポートを指定した場合、デフォルト・ポートは、HTTP と HTTPS のどちらに対しても有効ではなくなります。 例えば、HTTPS のデフォルト・ポートを 8443 に変更し、HTTP ではデフォルト・ポートを使用する場合、それらの両方に対して次のようにカスタム・ポートを設定する必要があります。<code>custom-port: "protocol=http port=80; protocol=https port=8443"</code></p></td>
+ <td>着信 HTTP または HTTPS ネットワーク・トラフィックに使用するポート番号を入力します。  <p class="note">HTTP または HTTPS 用にカスタム・ポートを指定した場合、デフォルト・ポートは、HTTP と HTTPS のどちらに対しても有効ではなくなります。 例えば、HTTPS のデフォルト・ポートを 8443 に変更し、HTTP ではデフォルト・ポートを使用する場合、それらの両方に対して次のようにカスタム・ポートを設定する必要があります。<code>custom-port: "protocol=http port=80; protocol=https port=8443"</code></p></td>
  </tr>
  </tbody></table>
 
@@ -1473,7 +1485,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>ALB の構成マップを開きます。
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>非デフォルトの HTTP および HTTPS ポートを構成マップに追加します。 &lt;port&gt; を、開く HTTP または HTTPS のポートに置き換えます。 <b>注</b>: デフォルトでは、ポート 80 とポート 443 が開いています。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、<a href="cs_ingress.html#opening_ingress_ports">Ingress ALB でポートを開く</a>を参照してください。
+<li>非デフォルトの HTTP および HTTPS ポートを構成マップに追加します。 &lt;port&gt; を、開く HTTP または HTTPS のポートに置き換えます。<p class="note">デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、<a href="cs_ingress.html#opening_ingress_ports">Ingress ALB でポートを開く</a>を参照してください。</p>
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1531,8 +1543,8 @@ spec:
  tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+  secretName: mytlssecret
+rules:
  - host: mydomain
    http:
      paths:
@@ -1624,13 +1636,13 @@ ALB の相互認証を構成します。
 <dt>説明</dt>
 <dd>
 Ingress ALB のダウンストリーム・トラフィックの相互認証を構成します。 外部クライアントはサーバーを認証し、サーバーもクライアントを認証します。どちらも証明書が使用されます。 相互認証は、証明書ベース認証とも双方向認証とも呼ばれます。</br></br>
-クライアントと Ingress ALB との間の SSL 終端には、`mutual-auth` アノテーションを使用します。Ingress ALB とバックエンド・アプリケーションとの間の SSL 終端には、[`ssl-services` アノテーション](#ssl-services)を使用します。
+クライアントと Ingress ALB との間の SSL 終端には、`mutual-auth` アノテーションを使用します。 Ingress ALB とバックエンド・アプリとの間の SSL 終端には、[`ssl-services` アノテーション](#ssl-services)を使用します。
 </dd>
 
 <dt>前提条件</dt>
 <dd>
 <ul>
-<li>必要な <code>ca.crt</code> が含まれた有効な相互認証シークレットが必要です。 相互認証シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li>
+<li>必要な <code>client.crt</code> が含まれた有効な相互認証シークレットが必要です。 相互認証シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li>
 <li>443 以外のポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](cs_ingress.html#opening_ingress_ports)、そのポートをこのアノテーションで指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。</li>
 </ul>
 </dd>
@@ -1685,22 +1697,21 @@ spec:
 **相互認証シークレットを作成するには、次のようにします。**
 
 1. 次のいずれかの方法で鍵と証明書を生成します。
-    * 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。
-      **重要**: 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
+    * 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
     * テストのために、OpenSSL を使用して自己署名証明書を作成することができます。 詳しくは、この[自己署名 SSL 証明書 チュートリアル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.akadia.com/services/ssh_test_certificate.html) を参照してください。
-        1. `ca.key` を作成します。
+        1. `client.key` を作成します。
             ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. 鍵を使用して、`ca.crt` を作成します。
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
+            openssl genrsa -out client.key 1024
             ```
             {: pre}
-        3. `ca.crt` を使用して、自己署名証明書を作成します。
+        2. 鍵を使用して、`client.crt` を作成します。
             ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            openssl req -new -x509 -key client.key -out client.crt
+            ```
+            {: pre}
+        3. `client.crt` を使用して、自己署名証明書を作成します。
+            ```
+            openssl x509 -req -in example.org.csr -CA client.crt -CAkey client.key -CAcreateserial -out example.org.crt
             ```
             {: pre}
 2. [証明書を base-64 に変換します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.base64encode.org/)。
@@ -1712,7 +1723,7 @@ spec:
        name: ssl-my-test
      type: Opaque
      data:
-       ca.crt: <ca_certificate>
+       client.crt: <ca_certificate>
      ```
      {: codeblock}
 4. 証明書を Kubernetes シークレットとして作成します。
@@ -1734,9 +1745,9 @@ HTTPS 要求を許可し、アップストリーム・アプリへのトラフ�
 <dl>
 <dt>説明</dt>
 <dd>
-Ingress リソース構成に TLS セクションが含まれている場合、Ingress ALB はアプリに対する HTTPS で保護された URL 要求を処理できます。 ただし、ALB は、TLS 終端を処理し、アプリにトラフィックを転送する前に要求を復号します。 HTTPS プロトコルを必要とするアプリがあり、トラフィックの暗号化を維持する必要がある場合は、`ssl-services` アノテーションを使用して、ALB のデフォルトの TLS 終端を無効にします。 ALB は、TLS 接続を終了し、バックエンド・アプリにトラフィックを送信する前に SSL を再暗号化します。</br></br>
-また、バックエンド・アプリで TLS を処理することができ、さらにセキュリティーを追加する場合は、シークレットに含まれる証明書を提供することによって片方向認証または相互認証を追加できます。</br></br>
-Ingress ALB とバックエンド・アプリケーションとの間の SSL 終端には、`ssl-services` アノテーションを使用します。クライアントと Ingress ALB との間の SSL 終端には、[`mutual-auth` アノテーション](#mutual-auth)を使用します。</dd>
+Ingress リソース構成に TLS セクションが含まれている場合、Ingress ALB はアプリに対する HTTPS で保護された URL 要求を処理できます。 デフォルトでは、ALB は、TLS 終端処理を実行して要求を復号してから、HTTP プロトコルを使用してトラフィックをアプリに転送します。HTTPS プロトコルを必要とするアプリケーションがあり、トラフィックを暗号化する必要がある場合は、`ssl-services` アノテーションを使用してください。`ssl-services` アノテーションを使用すると、ALB は、外部 TLS 接続を終端した後に、ALB とアプリ・ポッドの間に新たに SSL 接続を作成します。トラフィックは再び暗号化された後にアップストリームのポッドに送信されます。</br></br>
+バックエンド・アプリが TLS を処理できる場合に、さらにセキュリティーを強化するために、シークレットに格納した証明書を提供して片方向認証または相互認証を追加することができます。</br></br>
+Ingress ALB とバックエンド・アプリの間の SSL 終端には、`ssl-services` アノテーションを使用します。クライアントと Ingress ALB の間の SSL 終端には、[`mutual-auth` アノテーション](#mutual-auth)を使用します。 </dd>
 
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
@@ -1781,7 +1792,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>バックエンド・アプリで TLS を処理することができ、さらにセキュリティーを追加する場合は、<code>&lt;<em>service-ssl-secret</em>&gt;</code> をサービスの片方向認証または相互認証のシークレットに置き換えます。<ul><li>片方向認証シークレットを提供する場合、値にはアップストリーム・サーバーの <code>trusted.crt</code> が含まれている必要があります。 片方向シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li><li>相互認証シークレットを提供する場合、値にはアプリが必要とするクライアントの必須 <code>ca.crt</code> および <code>ca.key</code> が含まれている必要があります。 相互認証シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li></ul><strong>警告</strong>: シークレットを提供しない場合、非セキュアな接続が許可されます。 接続のテスト中で、証明書の準備ができていない場合や、証明書が期限切れになっていて、非セキュアな接続を許可する場合には、シークレットの省略を選択する可能性があります。</td>
+  <td>バックエンド・アプリで TLS を処理することができ、さらにセキュリティーを追加する場合は、<code>&lt;<em>service-ssl-secret</em>&gt;</code> をサービスの片方向認証または相互認証のシークレットに置き換えます。<ul><li>片方向認証シークレットを提供する場合、値にはアップストリーム・サーバーの <code>trusted.crt</code> が含まれている必要があります。 片方向シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li><li>相互認証シークレットを提供する場合、値にはアプリが必要とするクライアントの必須 <code>client.crt</code> および <code>client.key</code> が含まれている必要があります。 相互認証シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。</li></ul><p class="important">シークレットを提供しない場合、非セキュアな接続が許可されます。 接続のテスト中で、証明書の準備ができていない場合や、証明書が期限切れになっていて、非セキュアな接続を許可する場合には、シークレットの省略を選択する可能性があります。</p></td>
   </tr>
   </tbody></table>
 
@@ -1803,7 +1814,10 @@ spec:
        trusted.crt: <ca_certificate>
      ```
      {: codeblock}
-     **注**: アップストリーム・トラフィックの相互認証も実施する場合は、データ・セクションに `trusted.crt` に加えて `client.crt` と `client.key` を指定できます。
+
+     アップストリーム・トラフィックの相互認証も実施する場合は、データ・セクションに `trusted.crt` に加えて `client.crt` と `client.key` を指定できます。
+     {: tip}
+
 4. 証明書を Kubernetes シークレットとして作成します。
      ```
      kubectl create -f ssl-my-test
@@ -1814,22 +1828,21 @@ spec:
 **相互認証シークレットを作成するには、次のようにします。**
 
 1. 次のいずれかの方法で鍵と証明書を生成します。
-    * 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。
-      **重要**: 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
+    * 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
     * テストのために、OpenSSL を使用して自己署名証明書を作成することができます。 詳しくは、この[自己署名 SSL 証明書 チュートリアル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.akadia.com/services/ssh_test_certificate.html) を参照してください。
-        1. `ca.key` を作成します。
+        1. `client.key` を作成します。
             ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. 鍵を使用して、`ca.crt` を作成します。
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
+            openssl genrsa -out client.key 1024
             ```
             {: pre}
-        3. `ca.crt` を使用して、自己署名証明書を作成します。
+        2. 鍵を使用して、`client.crt` を作成します。
             ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            openssl req -new -x509 -key client.key -out client.crt
+            ```
+            {: pre}
+        3. `client.crt` を使用して、自己署名証明書を作成します。
+            ```
+            openssl x509 -req -in example.org.csr -CA client.crt -CAkey client.key -CAcreateserial -out example.org.crt
             ```
             {: pre}
 2. [証明書を base-64 に変換します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.base64encode.org/)。
@@ -1841,7 +1854,7 @@ spec:
        name: ssl-my-test
      type: Opaque
      data:
-       ca.crt: <ca_certificate>
+       client.crt: <ca_certificate>
      ```
      {: codeblock}
 4. 証明書を Kubernetes シークレットとして作成します。
@@ -1856,6 +1869,9 @@ spec:
 ## Istio アノテーション
 {: #istio-annotations}
 
+Istio アノテーションを使用すると、着信トラフィックを Istio 管理対象サービスに転送できます。
+{: shortdesc}
+
 ### Istio サービス (istio-services)
 {: #istio-services}
 
@@ -1865,8 +1881,7 @@ Istio 管理対象サービスにトラフィックを転送します。
 <dl>
 <dt>説明</dt>
 <dd>
-<strong>注</strong>: このアノテーションが機能するのは、Istio 0.7 以前の場合のみです。
-<br>Istio 管理対象サービスがある場合は、クラスター ALB を使用して HTTP/HTTPS 要求を Istio Ingress コントローラーに転送できます。 Istio Ingress コントローラーは、要求をアプリ・サービスに転送します。 トラフィックを転送するには、クラスター ALB と Istio Ingress コントローラーの両方の Ingress リソースを変更する必要があります。
+<p class="note">このアノテーションが機能するのは、Istio 0.7 以前の場合のみです。</p>Istio 管理対象サービスがある場合は、クラスター ALB を使用して HTTP/HTTPS 要求を Istio Ingress コントローラーに転送できます。 Istio Ingress コントローラーは、要求をアプリ・サービスに転送します。 トラフィックを転送するには、クラスター ALB と Istio Ingress コントローラーの両方の Ingress リソースを変更する必要があります。
 <br><br>クラスター ALB の Ingress リソースで、以下を行う必要があります。
   <ul>
     <li>`istio-services` アノテーションを指定する</li>
@@ -2047,6 +2062,8 @@ spec:
 ## プロキシー・バッファー・アノテーション
 {: #proxy-buffer}
 
+Ingress ALB は、バックエンド・アプリとクライアント Web ブラウザーの間のプロキシーとして機能します。 プロキシー・バッファー・アノテーションを使用すると、データ・パケットの送受信時に ALB でデータをバッファーに入れる方法を構成できます。  
+{: shortdesc}
 
 ### クライアント応答データのバッファリング (proxy-buffering)
 {: #proxy-buffering}
@@ -2076,8 +2093,8 @@ spec:
  tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+  secretName: mytlssecret
+rules:
  - host: mydomain
    http:
      paths:
@@ -2117,7 +2134,8 @@ ALB 用のプロキシー・バッファーの数とサイズを構成します�
 <dl>
 <dt>説明</dt>
 <dd>
-プロキシー・サーバーからの単一の接続に対して、応答を読み取るバッファーの数とサイズを設定します。 特定のサービスが指定されていなければ、Ingress ホスト内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE number=2 size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>number=2 size=1k</code> という構成を指定した場合は、Ingress ホスト内のすべてのサービスに 1k が適用されます。
+プロキシー・サーバーからの単一の接続に対して、応答を読み取るバッファーの数とサイズを設定します。 特定のサービスが指定されていなければ、Ingress ホスト内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE number=2 size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>number=2 size=1k</code> という構成を指定した場合は、Ingress ホスト内のすべてのサービスに 1k が適用されます。</br>
+<p class="tip">`upstream sent too big header while reading response header from upstream` というエラー・メッセージを受け取った場合は、バックエンドのアップストリーム・サーバーが、デフォルトの制限より大きいヘッダー・サイズを送信しました。<code>proxy-buffers</code> と [<code>proxy-buffer-size</code>](#proxy-buffer-size) の両方のサイズを大きくしてください。</p>
 </dd>
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
@@ -2132,8 +2150,8 @@ spec:
  tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+  secretName: mytlssecret
+rules:
  - host: mydomain
    http:
      paths:
@@ -2194,8 +2212,8 @@ spec:
  tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+  secretName: mytlssecret
+rules:
  - host: mydomain
    http:
      paths:
@@ -2255,8 +2273,8 @@ spec:
  tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+  secretName: mytlssecret
+rules:
  - host: mydomain
    http:
      paths:
@@ -2291,8 +2309,14 @@ spec:
 ## 要求/応答アノテーション
 {: #request-response}
 
+要求/応答アノテーションを使用すると、クライアント要求およびサーバー要求のヘッダー情報を追加または削除したり、クライアントが送信できる本体のサイズを変更したりできます。
+{: shortdesc}
+
 ### ホスト・ヘッダーへのサーバー・ポートの追加 (add-host-port)
 {: #add-host-port}
+
+クライアント要求にサーバー・ポートを追加してからバックエンド・アプリに転送します。
+{: shortdesc}
 
 <dl>
 <dt>説明</dt>
@@ -2312,8 +2336,8 @@ spec:
  tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+  secretName: mytlssecret
+rules:
  - host: mydomain
    http:
      paths:
@@ -2352,23 +2376,16 @@ spec:
 <dl>
 <dt>説明</dt>
 <dd>Ingress ALB は、クライアント・アプリとバックエンド・アプリの間のプロキシーとして機能します。 ALB に送信されたクライアント要求は、処理 (プロキシー処理) され、新しい要求に入れられた後に、バックエンド・アプリに送信されます。 同様に、ALB に送信されたバックエンド・アプリ応答も処理 (プロキシー処理) され、新しい応答に入れられた後に、クライアントに送信されます。 要求または応答のプロキシー処理によって、クライアントまたはバックエンド・アプリから最初に送信された HTTP ヘッダー情報 (ユーザー名など) は削除されます。
-
 <br><br>
-バックエンド・アプリに HTTP ヘッダー情報が必要な場合は、<code>proxy-add-headers</code> アノテーションを使用して、ALB がクライアント要求をバックエンド・アプリに転送する前に、ヘッダー情報をクライアント要求に追加できます。
+バックエンド・アプリに HTTP ヘッダー情報が必要な場合は、<code>proxy-add-headers</code> アノテーションを使用して、ALB がクライアント要求をバックエンド・アプリに転送する前に、ヘッダー情報をクライアント要求に追加できます。 クライアント Web アプリに HTTP ヘッダー情報が必要な場合は、<code>response-add-headers</code> アノテーションを使用して、ALB が応答をクライアント Web アプリに転送する前に、ヘッダー情報を応答に追加できます。<br>
 
-<br>
 <ul><li>例えば、要求がアプリに転送される前に、次の X-Forward ヘッダー情報を要求に追加する必要があるとします。
-
 <pre class="screen">
 <code>proxy_set_header Host $host;
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
-
-</li>
-
-<li>X-Forward ヘッダー情報をアプリに送信される要求に追加するには、`proxy-add-headers` アノテーションを以下のように使用します。
-
+X-Forward ヘッダー情報をアプリに送信される要求に追加するには、`proxy-add-headers` アノテーションを以下のように使用します。
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
   serviceName=&lt;myservice1&gt; {
@@ -2377,10 +2394,10 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
-
-</li></ul><br>
-
-クライアント Web アプリに HTTP ヘッダー情報が必要な場合は、<code>response-add-headers</code> アノテーションを使用して、ALB が応答をクライアント Web アプリに転送する前に、ヘッダー情報を応答に追加できます。</dd>
+</li></ul>
+</br>
+<p class="tip"><code>response-add-headers</code> アノテーションでは、すべてのサービスに対するグローバル・ヘッダーはサポートされません。サーバー・レベルですべてのサービスの応答にヘッダーを追加するには、[<code>server-snippets</code> アノテーション](#server-snippets)を使用してください。</p>
+</dd>
 
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
@@ -2526,7 +2543,7 @@ spec:
 </br></br>
 本体サイズが 1 M バイトを超えるクライアント要求が想定されるために、最大本体サイズを引き上げたい場合があります。 例えば、クライアントが大きなファイルをアップロードできるようにしたい場合があります。 要求本体の最大サイズを引き上げると、要求を受信するまでクライアントへの接続を開いておかなければならないため、ALB のパフォーマンスに影響を及ぼす可能性があります。
 </br></br>
-<strong>注:</strong> 一部のクライアント Web ブラウザーは、HTTP 応答 413 のメッセージを正しく表示できません。</dd>
+<p class="note">一部のクライアント Web ブラウザーは、HTTP 応答 413 のメッセージを正しく表示できません。</p></dd>
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
 
@@ -2541,8 +2558,8 @@ spec:
  tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+  secretName: mytlssecret
+rules:
  - host: mydomain
    http:
      paths:
@@ -2559,7 +2576,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>クライアント応答本体の最大サイズ。 例えば、最大サイズを 200 M バイトに設定するには、<code>200m</code> と定義します。  <strong>注:</strong> サイズを 0 に設定すると、クライアント要求の本体サイズの検査を無効にすることができます。</td>
+ <td>クライアント応答本体の最大サイズ。 例えば、最大サイズを 200 M バイトに設定するには、<code>200m</code> と定義します。 サイズを 0 に設定すると、クライアント要求の本体サイズの検査を無効にすることができます。</td>
  </tr>
  </tbody></table>
 
@@ -2592,8 +2609,8 @@ spec:
  tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+  secretName: mytlssecret
+rules:
  - host: mydomain
    http:
      paths:
@@ -2614,8 +2631,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>ラージ・クライアント要求ヘッダーを読み取るバッファーの最大サイズ。 例えば、16 キロバイトに設定するには、<code>16k</code> と定義します。
-   <strong>注:</strong> サイズの末尾は、キロバイトの場合は <code>k</code>、メガバイトの場合は <code>m</code> でなければなりません。</td>
+ <td>ラージ・クライアント要求ヘッダーを読み取るバッファーの最大サイズ。 例えば、16 キロバイトに設定するには、<code>16k</code> と定義します。 サイズの末尾は、キロバイトの場合は <code>k</code>、メガバイトの場合は <code>m</code> でなければなりません。</td>
  </tr>
 </tbody></table>
 </dd>
@@ -2627,6 +2643,8 @@ spec:
 ## サービス制限アノテーション
 {: #service-limit}
 
+サービス制限アノテーションでは、デフォルトの要求処理速度および単一の IP アドレスから受け入れる接続の数を変更できます。
+{: shortdesc}
 
 ### グローバルな速度制限 (global-rate-limit)
 {: #global-rate-limit}

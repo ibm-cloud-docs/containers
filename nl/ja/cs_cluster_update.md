@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,9 +13,10 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
-
-
 
 
 
@@ -32,7 +33,7 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 {:shortdesc}
 
 **マスターの更新が必要になったことがわかる方法はありますか?**</br>
-更新プログラムが利用可能になると、GUI と CLI で通知されます。また、[サポートされるバージョン](cs_versions.html)のページをチェックすることもできます。
+更新プログラムが利用可能になると、{{site.data.keyword.Bluemix_notm}} コンソールと CLI で通知されます。また、[サポートされるバージョン](cs_versions.html)のページをチェックすることもできます。
 
 **マスターのバージョンは最新のバージョンよりいくつ古いものまでサポートされますか?**</br>
 一般に IBM は常に 3 つのバージョンの Kubernetes をサポートします。 Kubernetes API サーバーは、最大で現行バージョンより 2 つ先のバージョンに更新できます。
@@ -42,10 +43,17 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 サポートされない Kubernetes バージョンがクラスターで実行されている場合は、更新を強制する必要がある場合があります。 したがって、動作への影響を避けるために、クラスターを最新の状態に保ってください。
 
 **ワーカー・ノードをマスターよりも新しいバージョンにすることはできますか?**</br>
-いいえ。まずは、[マスターを更新](#update_master)して最新の Kubernetes バージョンにしてください。 その後に、クラスター内の[ワーカー・ノードを更新](#worker_node)してください。 マスターとは異なり、ワーカーはパッチ・バージョンごとに更新する必要があります。
+いいえ。まずは、[マスターを更新](#update_master)して最新の Kubernetes バージョンにしてください。 その後に、クラスター内の[ワーカー・ノードを更新](#worker_node)してください。
+
+**パッチの更新はどのように適用されますか?**</br>
+デフォルトでは、マスターのパッチ更新は数日にわたって自動的に適用されます。そのため、まだマスターに適用されていないパッチ・バージョンが、使用可能なバージョンとして表示されることがあります。また、更新の自動化では、正常な状態でないクラスターや現在進行中の操作があるクラスターはスキップされます。 必要に応じて、IBM は特定のマスターのフィックスパック (マスターが 1 つ前のマイナー・バージョンから更新される場合にのみ必要なパッチなど) に対して、自動更新を無効にする場合があります。 どのような場合でも、[バージョンの変更ログを参照](cs_versions_changelog.html)して影響がないか確認したら、自動更新が適用されるのを待たずに、`ibmcloud ks cluster-update` [コマンド](cs_cli_reference.html#cs_cluster_update)を適切に使用してお客様自身で更新することができます。
+
+マスターとは異なり、ワーカーはパッチ・バージョンごとに更新する必要があります。
 
 **マスターの更新中はどのような状況になりますか?**</br>
-Kubernetes API サーバーを更新する際、API サーバーは約 5 分間から 10 分間ダウンします。 更新中、クラスターにアクセスすることも変更することもできません。 ただし、クラスター・ユーザーがデプロイしたワーカー・ノード、アプリ、リソースは変更されず、引き続き実行されます。
+Kubernetes バージョン 1.11 以降を実行するクラスターのマスターは、レプリカ・マスター・ポッドが 3 つあるので高可用性です。使用不可のマスター・ポッドが一度に 1 つだけになるようにローリング更新が行われます。2 つのインスタンスが稼働しているので、更新中もクラスターにアクセスして変更することができます。ワーカー・ノード、アプリ、リソースは実行され続けます。
+
+これより前のバージョンの Kubernetes を実行するクラスターの場合は、Kubernetes API サーバーを更新するときに、API サーバーが 5 分から 10 分ほどダウンします。更新中、クラスターにアクセスすることも変更することもできません。 ただし、クラスター・ユーザーがデプロイしたワーカー・ノード、アプリ、リソースは変更されず、引き続き実行されます。
 
 **更新はロールバックできますか?**</br>
 いいえ。更新プロセスが開始されたら、クラスターを前のバージョンにロールバックすることはできません。 必ず、テスト・クラスターを使用し、手順に従って潜在する問題に対処してから、実動マスターを更新してください。
@@ -58,11 +66,13 @@ Kubernetes API サーバーを更新する際、API サーバーは約 5 分間�
 図 1. Kubernetes マスター更新プロセスの図
 
 {: #update_master}
+始める前に、[**オペレーター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)があることを確認してください。
+
 Kubernetes マスターの_メジャー_・バージョンまたは_マイナー_・バージョンを更新するには、次のようにします。
 
 1.  [Kubernetes の変更点](cs_versions.html)を確認し、『_マスターの前に行う更新_』というマークのある更新を実行します。
 
-2.  GUI を使用するか CLI `ibmcloud ks cluster-update` [コマンド](cs_cli_reference.html#cs_cluster_update)を実行して、Kubernetes API サーバーと、関連する Kubernetes マスター・コンポーネントを更新します。
+2.  {{site.data.keyword.Bluemix_notm}} コンソールを使用するか CLI `ibmcloud ks cluster-update` [コマンド](cs_cli_reference.html#cs_cluster_update)を実行して、Kubernetes API サーバーと、関連する Kubernetes マスター・コンポーネントを更新します。
 
 3.  数分待ってから、更新が完了したことを確認します。 {{site.data.keyword.Bluemix_notm}} ダッシュボードで Kubernetes API サーバーのバージョンを確認するか、`ibmcloud ks clusters` を実行します。
 
@@ -79,15 +89,6 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 ワーカー・ノードの更新を促す通知を受信する場合があります。 これは何を意味しているでしょうか。 セキュリティー更新とパッチが Kubernetes API サーバーと他の Kubernetes マスター・コンポーネントに適用されたので、ワーカー・ノードを同期する必要があります。
 {: shortdesc}
 
-開始前に、以下のことを行います。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
-- [Kubernetes マスターを更新します](#master)。 ワーカー・ノードの Kubernetes バージョンを、Kubernetes マスターで実行される Kubernetes API サーバーのバージョンより高くすることはできません。
-- [Kubernetes の変更](cs_versions.html)の『_マスターの後に行う更新_』に記載されている変更作業を行います。
-- パッチの更新を適用する場合は、[Kubernetes バージョンの変更ログ](cs_versions_changelog.html#changelog)を確認してください。 </br>
-
-**注意**: ワーカー・ノードを更新すると、アプリとサービスにダウン時間が発生する可能性があります。 データは、[ポッドの外部に保管](cs_storage_planning.html#persistent_storage_overview)されていない場合、削除されます。
-
-
 **更新中、アプリはどのような状況になりますか?**</br>
 更新対象のワーカー・ノード上でデプロイメントの一部として実行しているアプリは、クラスター内のその他のワーカー・ノードにスケジュール変更されます。 別のワーカー・プール内のワーカー・ノードにスケジュールされたり、スタンドアロン・ワーカー・ノードがある場合はそのノードにアプリがスケジュールされたりすることもあります。 アプリのダウン時間を回避するには、ワークロードに対応できるだけの十分な容量がクラスター内になければなりません。
 
@@ -99,7 +100,17 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 **構成マップを定義しない場合はどうなりますか?**</br>
 構成マップを定義しない場合は、デフォルトが使用されます。 デフォルトでは、更新処理中、クラスターごとに全ワーカー・ノードの最大 20% が使用不可になります。
 
-構成マップを作成してワーカー・ノードを更新するには、以下のようにします。
+**始める前に**:
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+- [Kubernetes マスターを更新します](#master)。 ワーカー・ノードの Kubernetes バージョンを、Kubernetes マスターで実行される Kubernetes API サーバーのバージョンより高くすることはできません。
+- [Kubernetes の変更](cs_versions.html)の『_マスターの後に行う更新_』に記載されている変更作業を行います。
+- パッチの更新を適用する場合は、[Kubernetes バージョンの変更ログ](cs_versions_changelog.html#changelog)を確認してください。
+- [**オペレーター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)があることを確認してください。</br>
+
+ワーカー・ノードを更新すると、アプリとサービスにダウン時間が発生する可能性があります。 ワーカー・ノード・マシンが再イメージ化されるので、[ポッドの外部に保管](cs_storage_planning.html#persistent_storage_overview)していないデータは削除されます。
+{: important}
+
+**構成マップを作成してワーカー・ノードを更新するには、以下のようにします。**
 
 1.  使用可能なワーカー・ノードのリストを表示し、それらのプライベート IP アドレスをメモします。
 
@@ -139,7 +150,8 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 
 3. 構成マップを作成し、ワーカー・ノードの非可用性ルールを定義します。 以下の例は、`zonecheck.json`、`regioncheck.json`、`defaultcheck.json`、チェック・テンプレートの 4 つのチェックを示します。 これらのチェックの例を使用して、特定のゾーン (`zonecheck.json`) または地域 (`regioncheck.json`) 内のワーカー・ノードや、構成マップ内に定義したチェックと一致しないすべてのワーカー・ノード (`defaultcheck.json`) に対するルールを定義できます。 独自のチェックを作成するには、チェック・テンプレートを使用します。 どのチェックでも、ワーカー・ノードを指定するには、前述の手順で取得したワーカー・ノード・ラベルのいずれかを選択する必要があります。  
 
-   **注:** どのチェックでも、<code>NodeSelectorKey</code> と <code>NodeSelectorValue</code> に値を 1 つだけ設定できます。 複数の地域、ゾーン、またはその他のワーク・ノード・ラベルに対するルールを設定する場合は、新しいチェックを作成します。 構成マップ内に最大 10 個のチェックを定義します。 それ以上チェックを追加しても無視されます。
+   どのチェックでも、<code>NodeSelectorKey</code> と <code>NodeSelectorValue</code> に値を 1 つだけ設定できます。 複数の地域、ゾーン、またはその他のワーク・ノード・ラベルに対するルールを設定する場合は、新しいチェックを作成します。 構成マップ内に最大 10 個のチェックを定義します。 それ以上チェックを追加しても無視されます。
+   {: note}
 
    例:
    ```
@@ -173,7 +185,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
         "NodeSelectorValue": "<node_selector_value>"
       }
    ```
-   {:pre}
+   {: codeblock}
 
    <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はパラメーター、2 列目は対応する説明です。">
    <caption>ConfigMap コンポーネント</caption>
@@ -257,11 +269,9 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 {: shortdesc}
 
 開始前に、以下のことを行います。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 - ワーカー・ノードにデータを保管している場合、[ワーカー・ノードの外部に保管](cs_storage_planning.html#persistent_storage_overview)されていなければデータは削除されます。
-
-
-**注意**: ワーカー・ノードを更新すると、アプリとサービスにダウン時間が発生する可能性があります。 データは、[ポッドの外部に保管](cs_storage_planning.html#persistent_storage_overview)されていない場合、削除されます。
+- [**オペレーター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)があることを確認してください。
 
 1. 使用可能なワーカー・ノードのリストを表示し、それらのプライベート IP アドレスをメモします。
    - **ワーカー・プール内のワーカー・ノードの場合**:
@@ -367,15 +377,20 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 ## クラスター・アドオンの更新
 {: #addons}
 
-{{site.data.keyword.containerlong_notm}} クラスターにはロギング用の Fluentd などの**アドオン**が付属していて、クラスターのプロビジョン時に自動的にインストールされます。 これらのアドオンは、マスターやワーク・ノードとは別に更新しなければなりません。
+{{site.data.keyword.containerlong_notm}} クラスターにはロギング用の Fluentd などのアドオンが付属していて、クラスターのプロビジョン時に自動的にインストールされます。 デフォルトでは、これらのアドオンは IBM によって自動的に更新されます。ただし、一部のアドオンは、自動更新を無効にして、マスター・ノードおよびワーカー・ノードとは別に手動で更新することができます。
 {: shortdesc}
 
-**クラスターとは別に更新する必要があるデフォルトのアドオンは何ですか?**
+**クラスターと別に更新できるデフォルトのアドオンは何ですか?**</br>
+必要に応じて、以下のアドオンの自動更新を無効にできます。
 * [ロギング用の Fluentd](#logging)
+* [Ingress アプリケーション・ロード・バランサー](#alb)
 
-**更新する必要がない、変更できないアドオンはありますか?**</br>
-はい、あります。クラスターは、以下の管理対象アドオンと、変更できない関連リソースとともにデプロイされます。 これらのデプロイメント・アドオンのいずれかを変更しようとした場合、それらのオリジナル設定が定期的な間隔でリストアされます。
+**クラスターと別には更新できないアドオンはありますか?**</br>
 
+はい。 クラスターは以下の管理対象アドオンと関連リソースと共にデプロイされます。パフォーマンス上の特定の効果を目的としてポッドをスケーリングする場合や構成マップを編集する場合を除き、これらを変更することはできません。これらのデプロイメント・アドオンのいずれかを変更しようとした場合、それらのオリジナル設定が定期的な間隔でリストアされます。
+
+* `coredns`
+* `coredns-autoscaler`
 * `heapster`
 * `ibm-file-plugin`
 * `ibm-storage-watcher`
@@ -383,6 +398,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 * `kube-dns-amd64`
 * `kube-dns-autoscaler`
 * `kubernetes-dashboard`
+* `metrics-server`
 * `vpn`
 
 これらのリソースは、`addonmanager.kubernetes.io/mode: Reconcile` ラベルを使用することで表示できます。 以下に例を示します。
@@ -395,33 +411,117 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 **デフォルト以外のアドオンをインストールできますか?**</br>
 はい。 {{site.data.keyword.containerlong_notm}} には、クラスターに機能を追加するために選択できるアドオンが他にもあります。 例えば、[Helm チャートを使用](cs_integrations.html#helm)して [Block Storage プラグイン](cs_storage_block.html#install_block)、[Istio](cs_tutorials_istio.html#istio_tutorial)、[strongSwan VPN](cs_vpn.html#vpn-setup) をインストールできます。 以下の手順に従って Helm チャートを更新し、各アドオンを個々に更新する必要があります。
 
-### ロギング用の Fluentd
+### ロギング用 Fluentd アドオンの自動更新の管理
 {: #logging}
 
 ロギングやフィルター構成に変更を加えるには、Fluentd アドオンが最新バージョンでなければなりません。 デフォルトでは、このアドオンに対する自動更新が有効になっています。
 {: shortdesc}
 
-`ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [コマンド](cs_cli_reference.html#cs_log_autoupdate_get)を実行して、自動更新が有効になっているかどうかを確認できます。
+Fluentd アドオンの自動更新は、以下の方法で管理できます。**注**: 以下のコマンドを実行するには、クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)が必要です。
 
-自動更新を無効にするには、`ibmcloud ks logging-autoupdate-disable` [コマンド](cs_cli_reference.html#cs_log_autoupdate_disable)を実行します。
+* `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [コマンド](cs_cli_reference.html#cs_log_autoupdate_get)を実行して、自動更新が有効になっているかどうかを確認します。
+* `ibmcloud ks logging-autoupdate-disable` [コマンド](cs_cli_reference.html#cs_log_autoupdate_disable)を実行して、自動更新を無効にします。
+* 自動更新を無効にしたのに構成変更が必要になったという場合は、以下の 2 つの選択肢があります。
+    * Fluentd ポッドの自動更新をオンにします。
+        ```
+        ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    * `--force-update` オプションを指定したロギング・コマンドを使用して、一回限りの更新を強制実行します。 **注**: ポッドが最新バージョンの Fluentd アドオンに更新されますが、それ以降、Fluentd が自動更新されることはありません。
+        コマンド例:
 
-自動更新が無効になっている場合に、構成に変更を加えるには、2 つの選択肢があります。
+        ```
+        ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
+        ```
+        {: pre}
 
-*  Fluentd ポッドの自動更新をオンにします。
+### Ingress ALB アドオンの自動更新の管理
+{: #alb}
 
+Ingress アプリケーション・ロード・バランサー (ALB) アドオンを更新するタイミングを制御してください。
+{: shortdesc}
+
+ALB アドオンが更新されると、すべての ALB ポッド内の `nginx-ingress` コンテナーと `ingress-auth` コンテナーが最新のビルド・バージョンに更新されます。デフォルトでは、このアドオンに対する自動更新が有効になっています。 更新はローリング方式で行われるので、Ingress ALB にダウン時間は発生しません。
+
+自動更新を無効にした場合は、お客様がアドオンを更新する必要があります。更新プログラムが利用可能になると、`ibmcloud ks albs` コマンドまたは `alb-autoupdate-get` コマンドを実行したときに CLI で通知されます。
+
+お客様がクラスターの Kubernetes のメジャー・バージョンまたはマイナー・バージョンを更新した場合、IBM は Ingress デプロイメントに対して必要な変更を自動的に行いますが、Ingress ALB アドオンのビルド・バージョンは変更しません。お客様が、最新の Kubernetes バージョンと Ingress ALB アドオン・イメージの適合性を確認する必要があります。
+{: note}
+
+開始前に、以下のことを行います。
+
+1. ALB が実行中であることを確認します。
     ```
-    ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
+    ibmcloud ks albs
     ```
     {: pre}
 
-*  `--force-update` オプションを指定したロギング・コマンドを使用して、一回限りの更新を強制実行します。 **注**: ポッドが最新バージョンの Fluentd アドオンに更新されますが、それ以降、Fluentd が自動更新されることはありません。
-
-    コマンド例:
-
+2. Ingress ALB アドオンの自動更新の状況を確認します。
     ```
-    ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
+    ibmcloud ks alb-autoupdate-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
+
+    自動更新が有効になっている場合の出力例:
+    ```
+    Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
+    OK
+    Automatic updates of the ALB pods are enabled in cluster mycluster
+    ALBs are at the latest version in cluster mycluster
+    ```
+    {: screen}
+
+    自動更新が無効になっている場合の出力例:
+    ```
+    Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
+    OK
+    Automatic updates of the ALB pods are disabled in cluster mycluster
+    ALBs are not at the latest version in cluster mycluster. To view the current version, run 'ibmcloud ks albs'.
+    ```
+    {: screen}
+
+3. ALB ポッドの現在の **ビルド**・バージョンを確認します。
+    ```
+    ibmcloud ks albs --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    出力例:
+    ```
+    ALB ID                                            Status    Type      ALB IP         Zone    Build
+    private-crb110acca09414e88a44227b87576ceea-alb1   enabled   private   10.130.5.78    mex01   ingress:350/ingress-auth:192*
+    public-crb110acca09414e88a44227b87576ceea-alb1    enabled   public    169.57.1.110   mex01   ingress:350/ingress-auth:192*
+
+    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://console.bluemix.net/docs/containers/cs_cluster_update.html#alb
+    ```
+    {: screen}
+
+Ingress ALB アドオンの自動更新は、以下の方法で管理できます。**注**: 以下のコマンドを実行するには、クラスターに対する[**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)が必要です。
+* 自動更新を無効にします。
+    ```
+    ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+* Ingress ALB アドオンを手動で更新します。
+    1. 更新プログラムが利用可能である場合にアドオンを更新するには、まず、[最新バージョンの Ingress ALB アドオンの変更ログ](cs_versions_addons.html#alb_changelog)を参照し、障害をもたらす可能性のある変更がないか確認します。
+    2. 一回限りの ALB ポッド更新を強制実行します。クラスター内のすべての ALB ポッドが最新のビルド・バージョンに更新されます。個々の ALB を更新したり、どのビルドにアドオンを更新するかを選択したりすることはできません。自動更新は無効のままです。
+```
+        ibmcloud ks alb-update --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+* ALB ポッドが最近更新されたが、ALB のカスタム構成が最新ビルドの影響を受けているという場合は、ALB ポッドが以前実行していたビルドに更新をロールバックできます。**注**: 更新をロールバックした後、ALB ポッドの自動更新は無効になります。
+    ```
+    ibmcloud ks alb-rollback --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+* 自動更新を再び有効にします。次のビルドが使用可能になるたびに、ALB ポッドは自動的に最新ビルドに更新されます。
+```
+        ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+<br />
+
 
 ## スタンドアロン・ワーカー・ノードからワーカー・プールへの更新
 {: #standalone_to_workerpool}
@@ -431,13 +531,16 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 
 ワーカー・プールを使用すると、ワーカー・ノードをゾーン間に均等に分散させて、バランスが取れたクラスターを構築できます。 バランスが取れたクラスターは、可用性と障害に対する回復力が高くなります。 ゾーンからワーカー・ノードを削除した場合は、ワーカー・プールのバランスを再調整し、そのゾーンに新しいワーカー・ノードを自動的にプロビジョンできます。 ワーカー・プールを使用して、すべてのワーカー・ノードに Kubernetes バージョン更新をインストールすることもできます。  
 
-**重要:** 複数ゾーン・クラスターが使用可能になる前にクラスターを作成した場合、ワーカー・ノードはスタンドアロンのままです。自動的にワーカー・プールにグループ化されることはありません。 ワーカー・プールを使用するには、これらのクラスターを更新しなければなりません。 更新しないと、単一ゾーン・クラスターを複数ゾーン・クラスターに変更できません。
+複数ゾーン・クラスターが使用可能になる前にクラスターを作成した場合、ワーカー・ノードはスタンドアロンのままです。自動的にワーカー・プールにグループ化されることはありません。 ワーカー・プールを使用するには、これらのクラスターを更新しなければなりません。 更新しないと、単一ゾーン・クラスターを複数ゾーン・クラスターに変更できません。
+{: important}
 
 以下の図に、スタンドアロン・ワーカー・ノードからワーカー・プールに移行した場合のクラスターのセットアップの変化を示しています。
 
 <img src="images/cs_cluster_migrate.png" alt="スタンドアロン・ワーカー・ノードからワーカー・プールへのクラスターの更新" width="600" style="width:600px; border-style: none"/>
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。
+- クラスターに対する[**オペレーター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)があることを確認してください。
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 1. クラスター内の既存のスタンドアロン・ワーカー・ノードをリストし、**ID**、**マシン・タイプ**、**プライベート IP** をメモします。
    ```
@@ -521,3 +624,110 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 
 **次の作業** </br>
 ワーカー・プールを使用するようにクラスターを更新したので、クラスターにさらにゾーンを追加して可用性を向上させることができます。 クラスターに追加するゾーンの数を増やすと、クラスターが単一ゾーン・クラスターから[複数ゾーン・クラスター](cs_clusters_planning.html#ha_clusters)に変更されます。 単一ゾーン・クラスターを複数ゾーン・クラスターに変更すると、Ingress ドメインが `<cluster_name>.<region>.containers.mybluemix.net` から `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` に変更されます。 既存の Ingress ドメインはまだ有効で、要求をアプリに送信するのに使用できます。
+
+<br />
+
+
+## クラスターの DNS プロバイダーを CoreDNS に設定する
+{: #dns}
+
+クラスター内の各サービスには、DNS 要求を解決するためにクラスターの DNS プロバイダーが登録するドメイン・ネーム・システム (DNS) 名が割り当てられます。デフォルトのクラスターの DNS プロバイダーは Kubernetes DNS (KubeDNS) です。ただし、Kubernetes バージョン 1.12 以降を実行するクラスターの場合は、代わりに [CoreDNS ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/) を使用することを選択できます。Kubernetes プロジェクトは KubeDNS を CoreDNS に置き換える方向に動いているので、CoreDNS を初期導入として使用することも、潜在的な影響を調べるために使用することもできます。サービスおよびポッドの DNS について詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) を参照してください。
+{: shortdesc}
+
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+
+1.  現在のクラスターの DNS プロバイダーを調べます。次の例では、KubeDNS が現在のクラスターの DNS プロバイダーです。
+    ```
+    kubectl cluster-info
+    ```
+    {: pre}
+
+    出力例:
+    ```
+    ...
+    KubeDNS is running at https://c2.us-south.containers.cloud.ibm.com:20190/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+    ...
+    ```
+    {: screen}
+2.  CoreDNS をクラスターの DNS プロバイダーとして設定します。
+
+    1.  **オプション**: `kube-system` 名前空間で `kube-dns` 構成マップをカスタマイズした場合は、`kube-system` 名前空間の `coredns` 構成マップにカスタマイズを移行します。`kube-dns` 構成マップと `coredns` 構成マップは構文が異なることに注意してください。例については、CoreDNS の資料の [Installing CoreDNS via Kubeadm ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) を参照してください。
+
+    2.  KubeDNS autoscaler デプロイメントをスケールダウンします。
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
+        ```
+        {: pre}
+
+    3.  ポッドが削除されるまで、確認しながら待機します。
+        ```
+        kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
+        ```
+        {: pre}
+
+    4.  KubeDNS デプロイメントをスケールダウンします。
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
+        ```
+        {: pre}
+
+    5.  CoreDNS autoscaler デプロイメントをスケールアップします。
+        ```
+        kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
+        ```
+        {: pre}
+
+    6.  CoreDNS のクラスター DNS サービスにラベルとアノテーションを付けます。
+        ```
+        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port=9153
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape=true
+        ```
+        {: pre}
+3.  **オプション**: クラスターの DNS プロバイダーを KubeDNS に戻すには、上記の手順を逆に行います。
+
+    1.  **オプション**: `kube-system` 名前空間で `coredns` 構成マップをカスタマイズした場合は、`kube-system` 名前空間の `kube-dns` 構成マップにカスタマイズを移行します。`kube-dns` 構成マップと `coredns` 構成マップは構文が異なることに注意してください。例については、CoreDNS の資料の [Installing CoreDNS via Kubeadm ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) を参照してください。
+
+    2.  CoreDNS autoscaler デプロイメントをスケールダウンします。
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
+        ```
+        {: pre}
+
+    3.  ポッドが削除されるまで、確認しながら待機します。
+        ```
+        kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
+        ```
+        {: pre}
+
+    4.  CoreDNS デプロイメントをスケールダウンします。
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 coredns
+        ```
+        {: pre}
+
+    5.  KubeDNS autoscaler デプロイメントをスケールアップします。
+        ```
+        kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
+        ```
+        {: pre}
+
+    6.  KubeDNS のクラスター DNS サービスにラベルとアノテーションを付けます。
+        ```
+        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port-
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape-
+        ```
+        {: pre}

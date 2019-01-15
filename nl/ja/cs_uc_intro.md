@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -21,12 +24,12 @@ lastupdated: "2018-10-25"
 # ユース・ケースの概要
 {: #cs_uc_intro}
 
-{{site.data.keyword.containerlong_notm}} と {{site.data.keyword.Bluemix_notm}} サービスを一緒に使用した場合の強みをさまざまなユース・ケースで示します。これらの事例では、複数の業種とワークロードのタイプに焦点を当てています。各ユース・ケースは特定の業種の視点で示されていますが、ワークロードはさまざまな業種で典型的なものです。以下のようなワークロードのテーマについて説明しています。
+{{site.data.keyword.containerlong_notm}} と {{site.data.keyword.Bluemix_notm}} サービスを一緒に使用した場合の強みをさまざまなユース・ケースで示します。 これらの事例では、複数の業種とワークロードのタイプに焦点を当てています。 各ユース・ケースは特定の業種の視点で示されていますが、ワークロードはさまざまな業種で典型的なものです。 以下のようなワークロードのテーマについて説明しています。
 * AI と機械学習
 * データとストレージ
 * DevOps
-
 {: shortdesc}
+
 <table summary="この表はユース・ケースを示しています。行は左から右に読み、1 列目に各業種を表すアイコン、2 列目に説明があります。">
 <caption>ユース・ケース</caption>
   <thead>

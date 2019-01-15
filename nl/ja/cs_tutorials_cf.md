@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -41,7 +44,8 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 - [プライベート・イメージ・レジストリーを {{site.data.keyword.registrylong_notm}} に作成します](../services/Registry/index.html)。
 - [クラスターを作成します](cs_clusters.html#clusters_ui)。
 - [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
-- [**Editor**、**Operator**、または **Administrator** のプラットフォーム役割があることを確認します](cs_users.html#add_users_cli)。
+- {{site.data.keyword.containerlong_notm}}に対する以下の {{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシーがあることを確認します。
+    - [任意のプラットフォーム役割](cs_users.html#platform)
 - [Docker および Kubernetes の用語について学習します](cs_tech.html)。
 
 
@@ -73,7 +77,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     アプリをデプロイすると、「コマンド・ライン・インターフェースでアプリをダウンロード、変更、および再デプロイする」ための指示が表示されます。
 
-    c. GUI の指示のステップ 1 で、**「スターター・コードをダウンロードする」**をクリックします。
+    c. コンソールの指示のステップ 1 で、**「スターター・コードをダウンロードする」**をクリックします。
 
     d. .zip ファイルを解凍し、その内容を `cf-py` ディレクトリーに保存します。
 
@@ -259,7 +263,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
     ```
     {: screen}
 
@@ -269,7 +273,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
 5.  [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。
 
-    [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
+    [{{site.data.keyword.Bluemix_notm}} コンソール](https://console.bluemix.net/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
     {: tip}
 
 6. **「ワークロード」**タブで、作成したリソースを表示します。

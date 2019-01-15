@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -28,10 +31,13 @@ lastupdated: "2018-10-25"
 
 クラスターでアプリ用の Ingress リソースを作成して、アプリをパブリックに公開しました。 ただし、ALB のパブリック IP アドレスまたはサブドメインを介してアプリに接続しようとすると、接続が失敗するか、タイムアウトになります。 以下のセクションのステップは、Ingress のセットアップのデバッグに役立ちます。
 
-1 つのホストは、必ず 1 つの Ingress リソースだけに定義するようにしてください。1 つのホストが複数の Ingress リソースに定義された場合、ALB はトラフィックを正しく転送しないことがあり、その場合エラーが発生する場合があります。
+1 つのホストは、必ず 1 つの Ingress リソースだけに定義するようにしてください。 1 つのホストが複数の Ingress リソースに定義された場合、ALB はトラフィックを正しく転送しないことがあり、その場合エラーが発生する場合があります。
 {: tip}
 
-## ステップ 1: Ingress デプロイメントと ALB ポッドのログでのエラー・メッセージの確認
+始めに、以下の [{{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシー](cs_users.html#platform)があることを確認してください。
+  - クラスターに対する**エディター**または**管理者**のプラットフォーム役割 
+
+## ステップ 1: Ingress デプロイメントと ALB ポッドのログでエラー・メッセージを確認する
 {: #errors}
 
 まず、Ingress リソースのデプロイメント・イベントと ALB ポッドのログでエラー・メッセージを確認します。 これらのエラー・メッセージは、障害の根本原因を探して、次のセクションで Ingress のセットアップをさらにデバッグするのに役立ちます。
@@ -107,7 +113,7 @@ lastupdated: "2018-10-25"
 
     4. ALB ログでエラー・メッセージを確認します。
 
-## ステップ 2: ALB サブドメインおよびパブリック IP アドレスの ping
+## ステップ 2: ALB サブドメインとパブリック IP アドレスに ping する
 {: #ping}
 
 Ingress サブドメインと ALB のパブリック IP アドレスの可用性を確認します。
@@ -122,11 +128,11 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     `dal10` および `dal13` のワーカー・ノードを持つ複数ゾーン・クラスターの出力例:
 
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone   
-    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -                dal13   
-    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -                dal10   
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13   
-    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222    dal10  
+    ALB ID                                            Status     Type      ALB IP           Zone    Build
+    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
+    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
     ```
     {: screen}
 
@@ -134,7 +140,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 
 2. ALB IP の正常性を確認します。
 
-    * 単一ゾーン・クラスターと複数ゾーン・クラスターの場合: 各 ALB が正常にパケットを受信できるように、各パブリック ALB の IP アドレスを ping します。 注: プライベート ALB を使用している場合は、プライベート・ネットワークからのみ IP アドレスを ping できます。
+    * 単一ゾーン・クラスターと複数ゾーン・クラスターの場合: 各 ALB が正常にパケットを受信できるように、各パブリック ALB の IP アドレスを ping します。 プライベート ALB を使用している場合は、プライベート・ネットワークからのみ IP アドレスを ping できます。
         ```
         ping <ALB_IP>
         ```
@@ -143,7 +149,8 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
         * CLI がタイムアウトを返し、ワーカー・ノードを保護するカスタム・ファイアウォールがある場合は、[ファイアウォール](cs_troubleshoot_clusters.html#cs_firewall)で ICMP を許可していることを確認します。
         * ping をブロックしているファイアウォールがなく、引き続き ping がタイムアウトになる場合は、[ALB ポッドの状況を確認](#check_pods)します。
 
-    * 複数ゾーン・クラスターのみの場合: MZLB ヘルス・チェックを使用して、ALB IP の状況を確認できます。 MZLB について詳しくは、[複数ゾーン・ロード・バランサー (MZLB)](cs_ingress.html#planning) を参照してください。 **注**: MZLB ヘルス・チェックは、`<cluster_name>.<region_or_zone>.containers.appdomain.cloud` の形式の新しい Ingress サブドメインを持つクラスターのみに使用できます。 クラスターでまだ `<cluster_name>.<region>.containers.mybluemix.net` の古い形式を使用している場合は、[単一ゾーン・クラスターを複数ゾーンに変換](cs_clusters.html#add_zone)します。 クラスターに新しい形式のサブドメインが割り当てられますが、古いサブドメイン形式も引き続き使用できます。 別の方法として、新しいサブドメイン形式が自動的に割り当てられた新しいクラスターを注文することもできます。
+    * 複数ゾーン・クラスターのみの場合: MZLB ヘルス・チェックを使用して、ALB IP の状況を確認できます。 MZLB について詳しくは、[複数ゾーン・ロード・バランサー (MZLB)](cs_ingress.html#planning) を参照してください。 MZLB ヘルス・チェックは、`<cluster_name>.<region_or_zone>.containers.appdomain.cloud` の形式の新しい Ingress サブドメインを持つクラスターのみに使用できます。クラスターでまだ `<cluster_name>.<region>.containers.mybluemix.net` の古い形式を使用している場合は、[単一ゾーン・クラスターを複数ゾーンに変換](cs_clusters.html#add_zone)します。 クラスターに新しい形式のサブドメインが割り当てられますが、古いサブドメイン形式も引き続き使用できます。 別の方法として、新しいサブドメイン形式が自動的に割り当てられた新しいクラスターを注文することもできます。
+
     以下の HTTP cURL コマンドは、`albhealth` ホストを使用します。このホストは、{{site.data.keyword.containerlong_notm}} によって構成され、ALB IP の `healthy` または `unhealthy` の状況を返します。
         ```
         curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
@@ -184,7 +191,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: screen}
 
-## ステップ 3: ドメイン・マッピングおよび Ingress リソース構成の確認
+## ステップ 3: ドメイン・マッピングと Ingress リソース構成を確認する
 {: #config}
 
 1. カスタム・ドメインを使用する場合は、DNS プロバイダーを使用してカスタム・ドメインを IBM 提供のサブドメインまたは ALB のパブリック IP アドレスにマップしていることを確認します。 IBM では IBM サブドメインに対する自動ヘルス・チェックを提供しており、障害のある IP がすべて DNS 応答から削除されるため、CNAME の使用がお勧めされることに注意してください。
@@ -221,7 +228,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
     ```
     {: pre}
 
-    1. 1 つのホストは、必ず 1 つの Ingress リソースだけに定義するようにしてください。1 つのホストが複数の Ingress リソースに定義された場合、ALB はトラフィックを正しく転送しないことがあり、その場合エラーが発生する場合があります。
+    1. 1 つのホストは、必ず 1 つの Ingress リソースだけに定義するようにしてください。 1 つのホストが複数の Ingress リソースに定義された場合、ALB はトラフィックを正しく転送しないことがあり、その場合エラーが発生する場合があります。
 
     2. サブドメインと TLS 証明書が正しいことを確認します。 IBM 提供の Ingress サブドメインと TLS 証明書を見つけるには、`ibmcloud ks cluster-get <cluster_name_or_ID>` を実行します。
 
@@ -248,8 +255,8 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 
     例えば、到達不能な IP `169.62.196.238` は、ALB `public-cr24a9f2caf6554648836337d240064935-alb1` に属しています。
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13
+    ALB ID                                            Status     Type      ALB IP           Zone   Build
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
     ```
     {: screen}
 
@@ -387,20 +394,15 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 {: shortdesc}
 
 -  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
-
 -   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページを確認します![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status)。
 -   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
-
     {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
     {: tip}
 -   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
-
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
     フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support/howtogetsupport.html#using-avatar)を参照してください。
-
--   チケットを開いて、IBM サポートに連絡してください。 IBM サポート・チケットを開く方法や、サポート・レベルとチケットの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
-
-{: tip}
+-   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
 問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。
+{: tip}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # ポッドの優先度の設定
@@ -35,7 +38,7 @@ Kubernetes のポッドの優先度と回避により、ポッドの相対的な
 
 ポッドのデプロイメントに優先度を指定しない場合、デフォルトは `globalDefault` として設定される優先度クラスに設定されます。 `globalDefault` 優先度クラスがない場合、すべてのポッドのデフォルトの優先度はゼロ (`0`) になります。 デフォルトでは、{{site.data.keyword.containerlong_notm}} は `globalDefault` を設定しないため、ポッドのデフォルトの優先度はゼロになります。
 
-以下の図のシナリオを考えてみます。 **重要**: ご覧のように、ポッドの優先度とスケジューラーを一緒に使用することにより、使用可能なリソースを持つワーカー・ノード上に、優先度付けされたポッドが配置される仕組みを理解する必要があります。 理解をしていないと、シナリオ 3 のように、クラスター内の高優先度のポッドが保留状態のままになり、それと同時に既存のポッドが削除されることがあります。
+ポッドの優先度とスケジューラーがどのように機能するかを理解するために、以下の図のシナリオについて考えみましょう。使用可能なリソースが存在するワーカー・ノードには、優先するポッドを配置する必要があります。そうでない場合は、シナリオ 3 のように、既存のポッドが削除されたときにクラスターの優先度の高いポッドが保留状態で残ることがあります。
 
 _図: ポッドの優先度のシナリオ_ ![ポッドの優先度のシナリオ](images/pod-priority.png)
 1.  優先度が高、中、低の 3 つのポッドが、スケジュール保留中です。 スケジューラーは、3 つのすべてのポッドのためのスペースがある使用可能なワーカー・ノードを見つけ、高優先度のポッドが先にスケジュールされるように優先度の順にポッドをスケジュールします。
@@ -47,13 +50,19 @@ _図: ポッドの優先度のシナリオ_ ![ポッドの優先度のシナリ�
 **ポッドの優先度のアドミッション・コントローラーを無効にできるかどうか**</br>
 いいえ。ポッドの優先度を使用しない場合は、`globalDefault` を設定したりポッドのデプロイメントに優先度クラスを含めたりしないでください。 IBM が[デフォルトの優先度クラス](#default_priority_class)を使用してデプロイするクラスターに不可欠なポッドを除き、すべてのポッドのデフォルトはゼロです。 ポッドの優先度は相対的であるため、この基本セットアップにより、クラスターに不可欠なポッドがリソースについて優先度付けされ、配置されている既存のスケジューリング・ポリシーに従ってその他のポッドがスケジュールされます。
 
+**リソース割り当てがポッドの優先度に与える影響**</br>
+ポッドの優先度は、リソース割り当て (Kubernetes 1.12 以降を実行するクラスター用の[割り当てスコープ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) を含む) と組み合わせて使用できます。割り当てスコープを使用すると、ポッドの優先度を考慮してリソース割り当てを設定できます。優先度の高いポッドは、優先度の低いポッドより先に、リソース割り当てによって制限されているシステム・リソースを消費できます。
+
 ## デフォルトの優先度クラスについて
 {: #default_priority_class}
 
-{{site.data.keyword.containerlong_notm}} クラスターには、デフォルトでいくつかの優先度クラスが用意されています。 **重要**: デフォルトのクラスを変更しないでください。これらは、クラスターを正しく管理するために使用されています。 アプリ・デプロイメントでこれらのクラスを使用するか、または[独自の優先度クラスを作成](#create_priority_class)することができます。
+{{site.data.keyword.containerlong_notm}} クラスターには、デフォルトでいくつかの優先度クラスが用意されています。
 {: shortdesc}
 
-以下の表では、デフォルトでクラスター内にある優先度クラス、およびそれらの使用目的について説明します。 
+デフォルトのクラスを変更しないでください。これらは、クラスターを正しく管理するために使用されています。 アプリ・デプロイメントでこれらのクラスを使用するか、または[独自の優先度クラスを作成](#create_priority_class)することができます。
+{: important}
+
+以下の表では、デフォルトでクラスター内にある優先度クラス、およびそれらの使用目的について説明します。
 
 | 名前 | 設定元 | 優先度の値 | 目的 |
 |---|---|---|
@@ -76,25 +85,27 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始前に、以下のことを行います。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 * Kubernetes バージョン 1.11 以降のクラスターを[作成](cs_clusters.html#clusters_ui)するか、またはクラスターを Kubernetes バージョン 1.11 以降に[更新](cs_cluster_update.html#update)します。
 
+優先度クラスを使用する場合:
+
 1.  オプション: 既存の優先度クラスを新規クラスのテンプレートとして使用します。
-    
+
     1.  既存の優先度クラスをリストします。
-        
+
         ```
         kubectl get priorityclasses
         ```
         {: pre}
-        
+
     2.  コピーする優先度クラスを選択し、ローカル YAML ファイルを作成します。
-    
+
         ```
         kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
         ```
         {: pre}
-        
+
 2.  優先度クラス YAML ファイルを作成します。
 
     ```yaml
@@ -107,7 +118,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     description: "Use this class for XYZ service pods only."
     ```
     {: codeblock}
-    
+
     <table>
     <caption>YAML ファイルの構成要素について</caption>
     <thead>
@@ -131,7 +142,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     <td><code>description</code></td>
     <td>オプション: ユーザーにその優先度クラスを使用する理由を通知します。 ストリングを引用符 (`""`) で囲みます。</td>
     </tr></tbody></table>
-    
+
 3.  クラスター内に優先度クラスを作成します。
 
     ```
@@ -155,7 +166,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始前に、以下のことを行います。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 * Kubernetes バージョン 1.11 以降のクラスターを[作成](cs_clusters.html#clusters_ui)するか、またはクラスターを Kubernetes バージョン 1.11 以降に[更新](cs_cluster_update.html#update)します。
 * 優先度によって既存のポッドが回避され、クラスターのリソースの消費方法に影響を与える可能性があるため、[優先度スケジューリングの仕組みを理解](#priority_scheduling)します。
 
@@ -163,13 +174,13 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 
 1.  既にデプロイされているものとの関連でポッドの正しい優先度クラスを選択できるように、他のデプロイ済みポッドの重要度を確認します。
 
-    1.  名前空間内の他のポッドが使用する優先度クラスを表示します。 
-        
+    1.  名前空間内の他のポッドが使用する優先度クラスを表示します。
+
         ```
         kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
         ```
         {: pre}
-        
+
     2.  優先度クラスの詳細を取得し、**value** の数値をメモします。 数値がより大きいポッドには、数値が小さいポッドの前の優先度が付けられます。 確認する優先度クラスごとに、このステップを繰り返します。
 
         ```
@@ -183,7 +194,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     kubectl get priorityclasses
     ```
     {: pre}
-    
+
 3.  ポッドの仕様で、前のステップで取得した優先度クラスの名前を持つ `priorityClassName` フィールドを追加します。
 
     ```yaml

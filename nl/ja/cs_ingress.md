@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -34,13 +37,13 @@ Ingress は、パブリック要求またはプライベート要求をアプリ
 Ingress は、以下の 3 つのコンポーネントで構成されています。
 <dl>
 <dt>Ingress リソース</dt>
-<dd>Ingress を使用してアプリを公開するには、アプリ用に Kubernetes サービスを作成し、Ingress リソースを定義してそのサービスを Ingress に登録する必要があります。 Ingress リソースは、アプリに対する着信要求を転送する方法についてのルールを定義する Kubernetes リソースです。 また、Ingress リソースによってアプリ・サービスへのパスも指定します。このパスがパブリック経路に付加されて、アプリの固有 URL が形成されます。例えば、`mycluster.us-south.containers.appdomain.cloud/myapp1` のようになります。 <br></br>**注**: 2018 年 5 月 24 日に、新しいクラスターの Ingress サブドメイン形式が変更されました。 新しいサブドメイン形式に含まれる地域名またはゾーン名は、クラスターが作成されたゾーンに基づいて生成されます。 一貫したアプリのドメイン名にパイプラインが依存している場合は、IBM 提供の Ingress サブドメインの代わりに独自のカスタム・ドメインを使用できます。<ul><li>2018 年 5 月 24 日以降に作成されたすべてのクラスターには、新しい形式 <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code> のサブドメインが割り当てられます。</li><li>2018 年 5 月 24 日より前に作成された単一ゾーン・クラスターは、古い形式 <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code> で割り当てられたサブドメインを引き続き使用します。</li><li>初めて[ゾーンをクラスターに追加](cs_clusters.html#add_zone)して、2018 年 5 月 24 日より前に作成された単一ゾーン・クラスターを複数ゾーンに変更した場合も、古い形式 <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code> で割り当てられたサブドメインが使用されますが、新しい形式 <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code> のサブドメインも割り当てられます。 どちらのサブドメインも使用できます。</li></ul></br>**複数ゾーン・クラスター**: Ingress リソースはグローバルであるため、複数ゾーン・クラスターでは名前空間ごとに 1 つだけ必要になります。</dd>
+<dd>Ingress を使用してアプリを公開するには、アプリ用に Kubernetes サービスを作成し、Ingress リソースを定義してそのサービスを Ingress に登録する必要があります。 Ingress リソースは、アプリに対する着信要求を転送する方法についてのルールを定義する Kubernetes リソースです。 また、Ingress リソースによってアプリ・サービスへのパスも指定します。このパスがパブリック経路に付加されて、アプリの固有 URL が形成されます。例えば、`mycluster.us-south.containers.appdomain.cloud/myapp1` のようになります。<p class="note">2018 年 5 月 24 日に、新しいクラスターの Ingress サブドメイン形式が変更されました。 新しいサブドメイン形式に含まれる地域名またはゾーン名は、クラスターが作成されたゾーンに基づいて生成されます。 一貫したアプリのドメイン名にパイプラインが依存している場合は、IBM 提供の Ingress サブドメインの代わりに独自のカスタム・ドメインを使用できます。<ul><li>2018 年 5 月 24 日以降に作成されたすべてのクラスターには、新しい形式 <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code> のサブドメインが割り当てられます。</li><li>2018 年 5 月 24 日より前に作成された単一ゾーン・クラスターは、古い形式 <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code> で割り当てられたサブドメインを引き続き使用します。</li><li>初めて[ゾーンをクラスターに追加](cs_clusters.html#add_zone)して、2018 年 5 月 24 日より前に作成された単一ゾーン・クラスターを複数ゾーンに変更した場合も、古い形式 <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code> で割り当てられたサブドメインが使用されますが、新しい形式 <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code> のサブドメインも割り当てられます。 どちらのサブドメインも使用できます。</li></ul></p>**複数ゾーン・クラスター**: Ingress リソースはグローバルであるため、複数ゾーン・クラスターでは名前空間ごとに 1 つだけ必要になります。</dd>
 <dt>アプリケーション・ロード・バランサー (ALB)</dt>
 <dd>アプリケーション・ロード・バランサー (ALB) は、着信 HTTP、HTTPS、TCP、または UDP サービス要求を listen する外部ロード・バランサーです。 そして、ALB は Ingress リソースで定義されたルールに従って、要求を適切なアプリ・ポッドに転送します。 標準クラスターを作成すると、{{site.data.keyword.containerlong_notm}} がそのクラスター用に可用性の高い ALB を自動で作成し、固有のパブリック経路を割り当てます。 パブリック経路は、クラスター作成時にお客様の IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされたポータブル・パブリック IP アドレスにリンクされます。 デフォルトのプライベート ALB も自動的に作成されますが、自動的に有効になるわけではありません。<br></br>**複数ゾーン・クラスター**: ゾーンをクラスターに追加すると、ポータブル・パブリック・サブネットが追加され、新しいパブリック ALB が自動的に作成されて、そのゾーンのサブネットで有効にされます。 クラスター内のデフォルトのすべてのパブリック ALB は 1 つのパブリック経路を共有しますが、異なる IP アドレスを持っています。 各ゾーンにデフォルトのプライベート ALB も自動的に作成されますが、自動的に有効になるわけではありません。</dd>
 <dt>複数ゾーン・ロード・バランサー (MZLB)</dt>
 <dd><p>**複数ゾーン・クラスター**: 複数ゾーン・クラスターの作成、または[単一ゾーン・クラスターへのゾーンの追加](cs_clusters.html#add_zone)を行うと、必ず、Cloudflare 複数ゾーン・ロード・バランサー (MZLB) が自動的に作成され、地域ごとに 1 つの MZLB が存在するようにデプロイされます。 MZLB は、ALB の IP アドレスを同じホスト名の背後に配置し、これらの IP アドレスが使用可能かどうかを判別するためにこれらのアドレスに対してヘルス・チェックを有効にします。 例えば、米国東部地域の 3 つのゾーンにワーカー・ノードがある場合、ホスト名 `yourcluster.us-east.containers.appdomain.cloud` には 3 つの ALB IP アドレスがあります。 MZLB は、地域の各ゾーンのパブリック ALB IP をヘルス・チェックし、そのヘルス・チェックに基づいて DNS 参照の結果を最新の状態に保ちます。 例えば、ALB の IP アドレスが `1.1.1.1`、`2.2.2.2`、`3.3.3.3` である場合、Ingress サブドメインの DNS 参照の通常の動作では、3 つの IP がすべて返され、クライアントはそのうちの 1 つにランダムにアクセスします。 IP アドレスが `3.3.3.3` の ALB がゾーンの障害などの理由で使用不可になると、そのゾーンのヘルス・チェックが失敗し、MZLB は障害のある IP をホスト名から削除し、DNS 参照では正常な `1.1.1.1` および `2.2.2.2` の ALB IP のみが返されます。 サブドメインの存続時間 (TTL) は 30 秒であるため、30 秒後に新しいクライアント・アプリは使用可能で正常な ALB IP の 1 つにのみアクセスできます。</p><p>まれに、一部の DNS リゾルバーまたはクライアント・アプリが、30 秒の TTL の後に、正常でない ALB IP を使用し続けることがあります。 これらのクライアント・アプリは、クライアント・アプリが `3.3.3.3` IP を破棄して `1.1.1.1` または `2.2.2.2` への接続を試みるまで、ロード時間が長くなる可能性があります。 クライアント・ブラウザーまたはクライアント・アプリの設定によっては、遅延が数秒からフル TCP タイムアウトの範囲になることがあります。</p>
 <p>MZLB は、IBM 提供の Ingress サブドメインのみを使用するパブリック ALB に対してロード・バランシングを行います。 プライベート ALB のみを使用する場合、ALB のヘルスを手動で検査し、DNS 参照の結果を更新する必要があります。 カスタム・ドメインを使用するパブリック ALB を使用する場合は、DNS エントリーに CNAME を作成して、カスタム・ドメインからクラスターの IBM 提供の Ingress サブドメインに要求を転送することで、MZLB ロード・バランシングにパブリック ALB を含めることができます。</p>
-<p><strong>注</strong>: Calico preDNAT ネットワーク・ポリシーを使用して Ingress サービスへのすべての着信トラフィックをブロックする場合は、ALB のヘルス・チェックに使用される <a href="https://www.cloudflare.com/ips/">Cloudflare の IPv4 IP<img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> をホワイトリストに登録する必要があります。 Calico preDNAT ポリシーを作成してこれらの IP をホワイトリストに登録する手順については、<a href="cs_tutorials_policies.html#lesson3">Calico ネットワーク・ポリシー・チュートリアル</a>のレッスン 3 を参照してください。</dd>
+<p class="note">Calico preDNAT ネットワーク・ポリシーを使用して Ingress サービスへのすべての着信トラフィックをブロックする場合は、ALB のヘルス・チェックに使用される <a href="https://www.cloudflare.com/ips/">Cloudflare の IPv4 IP<img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> をホワイトリストに登録する必要があります。 Calico preDNAT ポリシーを作成してこれらの IP をホワイトリストに登録する手順については、<a href="cs_tutorials_policies.html#lesson3">Calico ネットワーク・ポリシー・チュートリアル</a>のレッスン 3 を参照してください。</p></dd>
 </dl>
 
 ### 単一ゾーン・クラスターで Ingress を使用して要求をアプリに届ける方法
@@ -88,7 +91,7 @@ Ingress の使用を開始する前に、以下の前提条件を確認してく
 
 **すべての Ingress 構成の前提条件:**
 - Ingress は標準クラスターでのみ使用可能です。高可用性を確保して定期的に更新を適用するために、ゾーンごとにワーカー・ノードが 2 つ以上必要です。
-- Ingress のセットアップには、[**管理者**の IAM プラットフォーム役割](cs_users.html#platform)が必要です。
+- Ingress のセットアップには、**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割が必要です。
 
 **複数ゾーン・クラスターで Ingress を使用するための前提条件**:
  - ネットワーク・トラフィックを[エッジ・ワーカー・ノード](cs_edge.html)に制限する場合、Ingress ポッドの高可用性を確保するために、少なくとも 2 つのエッジ・ワーカー・ノードを各ゾーンで有効にする必要があります。 クラスター内のすべてのゾーンにまたがり、ゾーンごとにワーカー・ノードを 2 つ以上持つ[エッジ・ワーカー・ノード・プールを作成します](cs_clusters.html#add_pool)。
@@ -132,9 +135,8 @@ Ingress の使用を開始する前に、以下の前提条件を確認してく
 これで、両方の URL が同じドメインに解決され、同じ ALB のサービスを受けるようになります。 しかし、ステージング用名前空間のリソースは `stage` サブドメインに登録されるので、Ingress ALB は、`stage.domain.net/app3` URL からの要求を `app3` だけに正しくルーティングします。
 
 {: #wildcard_tls}
-**注:**
-* デフォルトでは、クラスターに対し、IBM 提供の Ingress サブドメイン・ワイルドカード `*.<cluster_name>.<region>.containers.appdomain.cloud` が登録されます。 IBM 提供の TLS 証明書はワイルドカード証明書ですので、ワイルドカード・サブドメインに使用できます。
-* カスタム・ドメインを使用する場合は、カスタム・ドメインを `*.custom_domain.net` などのワイルドカード・ドメインとして登録する必要があります。 TLS を使用するには、ワイルドカード証明書を取得する必要があります。
+デフォルトでは、クラスターに対し、IBM 提供の Ingress サブドメイン・ワイルドカード `*.<cluster_name>.<region>.containers.appdomain.cloud` が登録されます。 IBM 提供の TLS 証明書はワイルドカード証明書ですので、ワイルドカード・サブドメインに使用できます。 カスタム・ドメインを使用する場合は、カスタム・ドメインを `*.custom_domain.net` などのワイルドカード・ドメインとして登録する必要があります。 TLS を使用するには、ワイルドカード証明書を取得する必要があります。
+{: note}
 
 ### 1 つの名前空間の中で複数のドメインを使用する場合
 {: #multi-domains}
@@ -143,9 +145,8 @@ Ingress の使用を開始する前に、以下の前提条件を確認してく
 
 <img src="images/cs_ingress_single_ns_multi_subs.png" alt="名前空間あたり 1 つのリソースが必要。" style="border-style: none"/>
 
-**注:**
-* デフォルトでは、クラスターに対し、IBM 提供の Ingress サブドメイン・ワイルドカード `*.<cluster_name>.<region>.containers.appdomain.cloud` が登録されます。 IBM 提供の Ingress TLS 証明書はワイルドカード証明書ですので、ワイルドカード・サブドメインに使用できます。
-* カスタム・ドメインを使用する場合は、カスタム・ドメインを `*.custom_domain.net` などのワイルドカード・ドメインとして登録する必要があります。 TLS を使用するには、ワイルドカード証明書を取得する必要があります。
+デフォルトでは、クラスターに対し、IBM 提供の Ingress サブドメイン・ワイルドカード `*.<cluster_name>.<region>.containers.appdomain.cloud` が登録されます。 IBM 提供の TLS 証明書はワイルドカード証明書ですので、ワイルドカード・サブドメインに使用できます。 カスタム・ドメインを使用する場合は、カスタム・ドメインを `*.custom_domain.net` などのワイルドカード・ドメインとして登録する必要があります。 TLS を使用するには、ワイルドカード証明書を取得する必要があります。
+{: note}
 
 <br />
 
@@ -159,7 +160,7 @@ Ingress の使用を開始する前に、以下の前提条件を確認してく
 開始前に、以下のことを行います。
 
 * Ingress の[前提条件](#config_prereqs)を確認します。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 ### ステップ 1: アプリをデプロイしてアプリ・サービスを作成する
 {: #public_inside_1}
@@ -221,7 +222,7 @@ IBM 提供のドメイン (`mycluster-12345.us-south.containers.appdomain.cloud/
 
 **IBM 提供の Ingress ドメインを使用する場合:**
 
-IBM 提供のドメインを取得します。_&lt;cluster_name_or_ID&gt;_ を、アプリがデプロイされているクラスターの名前に置き換えます。
+IBM 提供のドメインを取得します。 _&lt;cluster_name_or_ID&gt;_ を、アプリがデプロイされているクラスターの名前に置き換えます。
 ```
 ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
 ```
@@ -250,12 +251,12 @@ Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
 
 ALB は、HTTP ネットワーク・トラフィックをクラスター内のアプリに振り分けてロード・バランシングを行います。 着信 HTTPS 接続のロード・バランシングも行う場合は ALB でその機能を構成できます。つまり、ネットワーク・トラフィックを復号し、復号した要求をクラスター内で公開されているアプリに転送するように構成します。
 
-* IBM 提供の Ingress サブドメインを使用する場合は、IBM 提供の TLS 証明書を使用できます。 IBM 提供の TLS 証明書は、LetsEncrypt によって署名され、IBM によって完全に管理されます。 証明書の有効期間は 90 日で、有効期限が切れる 7 日前に自動的に更新されます。 **注**: ワイルドカードの TLS 証明書については、[この注記](#wildcard_tls)を参照してください。
+* IBM 提供の Ingress サブドメインを使用する場合は、IBM 提供の TLS 証明書を使用できます。 IBM 提供の TLS 証明書は、LetsEncrypt によって署名され、IBM によって完全に管理されます。 証明書の有効期間は 90 日で、有効期限が切れる 7 日前に自動的に更新されます。 ワイルドカードの TLS 証明書については、[この注記](#wildcard_tls)を参照してください。
 * カスタム・ドメインを使用する場合は、独自の TLS 証明書を使用して TLS 終端を管理できます。 1 つの名前空間にのみアプリがある場合は、その同じ名前空間に、証明書に対する TLS シークレットをインポートまたは作成できます。 複数の名前空間にアプリがある場合は、どの名前空間でも ALB が証明書にアクセスして使用できるように、`default` 名前空間の証明書に対して TLS シークレットをインポートまたは作成します。 ワイルドカードの TLS 証明書については、[この注記](#wildcard_tls)を参照してください。 **注**: 事前共有鍵 (TLS-PSK) を含む TLS 証明書はサポートされていません。
 
 **IBM 提供の Ingress ドメインを使用する場合:**
 
-クラスター用に IBM 提供の TLS シークレットを取得します。_&lt;cluster_name_or_ID&gt;_ を、アプリがデプロイされているクラスターの名前に置き換えます。
+クラスター用に IBM 提供の TLS シークレットを取得します。 _&lt;cluster_name_or_ID&gt;_ を、アプリがデプロイされているクラスターの名前に置き換えます。
 ```
 ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
 ```
@@ -279,7 +280,7 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 {: pre}
 
 TLS 証明書の準備ができていない場合は、以下の手順に従ってください。
-1. 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。 **重要**: 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
+1. 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
 2. 証明書と鍵を base-64 に変換します。
    1. 証明書と鍵を base-64 にエンコードし、base-64 エンコード値を新しいファイルに保存します。
       ```
@@ -328,7 +329,8 @@ TLS 証明書の準備ができていない場合は、以下の手順に従っ�
 Ingress リソースは、ALB がトラフィックをアプリ・サービスにルーティングするために使用するルーティング・ルールを定義します。
 {: shortdesc}
 
-**注:** クラスター内の複数の名前空間でアプリを公開する場合は、名前空間ごとに 1 つの Ingress リソースが必要になります。 ただし、各名前空間で別々のホストを使用する必要があります。 ワイルドカード・ドメインを登録し、各リソースで別々のサブドメインを指定しなければなりません。 詳しくは、[1 つの名前空間を使用する場合と複数の名前空間を使用する場合のネットワーキングの計画](#multiple_namespaces)を参照してください。
+クラスター内の複数の名前空間でアプリを公開する場合は、名前空間ごとに 1 つの Ingress リソースが必要になります。 ただし、各名前空間で別々のホストを使用する必要があります。 ワイルドカード・ドメインを登録し、各リソースで別々のサブドメインを指定しなければなりません。 詳しくは、[1 つの名前空間を使用する場合と複数の名前空間を使用する場合のネットワーキングの計画](#multiple_namespaces)を参照してください。
+{: note}
 
 1. 任意のエディターを開き、`myingressresource.yaml` などの名前の Ingress 構成ファイルを作成します。
 
@@ -487,7 +489,7 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 
 * Ingress の[前提条件](#config_prereqs)を確認します。
 * クラスター・ロード・バランシングに含めようとしている外部アプリに、パブリック IP アドレスを使用してアクセスできることを確認します。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 クラスター外のアプリをパブリックに公開するには、以下のようにします。
 
@@ -572,7 +574,7 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
         ```
         {: pre}
 
-3. [アプリ・ドメインを選択する](#public_inside_2)手順のステップ 2 から続けます。
+3. 『クラスター内のアプリをパブリックに公開する』の手順の『[ステップ 2: アプリ・ドメインを選択する](#public_inside_2)』に進みます。
 
 <br />
 
@@ -644,7 +646,8 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 標準クラスターを作成した場合は、ワーカー・ノードが存在する各ゾーンに IBM 提供のプライベート・アプリケーション・ロード・バランサー (ALB) が作成され、ポータブル・プライベート IP アドレスとプライベート経路を割り当てられます。 ただし、各ゾーンのデフォルトのプライベート ALB は自動的には有効になりません。 デフォルトのプライベート ALB でプライベート・ネットワーク・トラフィックをアプリに振り分けてロード・バランシングを行うには、まず IBM 提供のポータブル・プライベート IP アドレスを使用するか、独自のポータブル・プライベート IP アドレスを使用して、プライベート ALB を有効にする必要があります。
 {:shortdesc}
 
-**注**: クラスターを作成したときに `--no-subnet` フラグを使用した場合、プライベート ALB を有効にするには、その前にポータブル・プライベート・サブネットまたはユーザー管理サブネットを追加する必要があります。 詳しくは、[クラスターのその他のサブネットの要求](cs_subnets.html#request)を参照してください。
+クラスターを作成したときに `--no-subnet` フラグを使用した場合、プライベート ALB を有効にするには、その前にポータブル・プライベート・サブネットまたはユーザー管理サブネットを追加する必要があります。 詳しくは、[クラスターのその他のサブネットの要求](cs_subnets.html#request)を参照してください。
+{: note}
 
 **IBM 提供の事前割り当てポータブル・プライベート IP アドレスを使用してデフォルトのプライベート ALB を有効にするには、以下のようにします。**
 
@@ -657,11 +660,11 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 
     プライベート ALB の**「Status」**フィールドは「_disabled_」になっています。
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
-    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
-    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   false     disabled   private   -               dal12
-    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
-    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    true      enabled    public    169.xx.xxx.xxx  dal12
+    ALB ID                                            Status     Type      ALB IP          Zone    Build
+    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   disabled   private   -               dal10   ingress:350/ingress-auth:192
+    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   disabled   private   -               dal12   ingress:350/ingress-auth:192
+    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
+    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
     ```
     {: screen}
     複数ゾーン・クラスターでは、ALB ID の接尾部の番号は、ALB が追加された順序を示しています。
@@ -715,9 +718,9 @@ Ingress を介したアプリへの接続に問題が発生していますか? [
 
     プライベート ALB の**「Status」**フィールドは_「disabled」_になっています。
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
+    ALB ID                                            Status     Type      ALB IP          Zone    Build
+    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   disabled   private   -               dal10   ingress:350/ingress-auth:192
+    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
     ```
     {: screen}
 
@@ -761,7 +764,7 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 {: pre}
 
 TLS 証明書の準備ができていない場合は、以下の手順に従ってください。
-1. 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。 **重要**: 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
+1. 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。 証明書ごとに異なる [CN ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
 2. 証明書と鍵を base-64 に変換します。
    1. 証明書と鍵を base-64 にエンコードし、base-64 エンコード値を新しいファイルに保存します。
       ```
@@ -810,7 +813,8 @@ TLS 証明書の準備ができていない場合は、以下の手順に従っ�
 Ingress リソースは、ALB がトラフィックをアプリ・サービスにルーティングするために使用するルーティング・ルールを定義します。
 {: shortdesc}
 
-**注:** クラスター内の複数の名前空間でアプリを公開する場合は、名前空間ごとに 1 つの Ingress リソースが必要になります。 ただし、各名前空間で別々のホストを使用する必要があります。 ワイルドカード・ドメインを登録し、各リソースで別々のサブドメインを指定しなければなりません。 詳しくは、[1 つの名前空間を使用する場合と複数の名前空間を使用する場合のネットワーキングの計画](#multiple_namespaces)を参照してください。
+クラスター内の複数の名前空間でアプリを公開する場合は、名前空間ごとに 1 つの Ingress リソースが必要になります。 ただし、各名前空間で別々のホストを使用する必要があります。 ワイルドカード・ドメインを登録し、各リソースで別々のサブドメインを指定しなければなりません。 詳しくは、[1 つの名前空間を使用する場合と複数の名前空間を使用する場合のネットワーキングの計画](#multiple_namespaces)を参照してください。
+{: note}
 
 1. 任意のエディターを開き、`myingressresource.yaml` などの名前の Ingress 構成ファイルを作成します。
 
@@ -1001,7 +1005,8 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
 
 2. <code>data</code> セクションを追加し、パブリック・ポート `80` および `443` と、公開する他のポートをセミコロン (;) で区切って指定します。
 
-    **重要**: デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他のポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 指定しないポートは閉じられます。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。
+    デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他のポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 指定しないポートは閉じられます。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。
+    {: important}
 
     ```
     apiVersion: v1
@@ -1048,7 +1053,8 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
 
 クライアント要求の元のソース IP アドレスを保持するには、[ソース IP の保持を有効にします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)。 クライアントの IP を保持すると、例えば、アプリ・サーバーがセキュリティーやアクセス制御ポリシーを適用する必要がある場合などに役に立ちます。
 
-**注**: [ALB を無効にした](cs_cli_reference.html#cs_alb_configure)場合、ALB を公開するロード・バランサー・サービスに対して行ったソース IP の変更はすべて失われます。 ALB を再度有効にする場合、ソース IP を再度有効にする必要があります。
+[ALB を無効にした](cs_cli_reference.html#cs_alb_configure)場合、ALB を公開するロード・バランサー・サービスに対して行ったソース IP の変更はすべて失われます。 ALB を再度有効にする場合、ソース IP を再度有効にする必要があります。
+{: note}
 
 ソース IP の保持を有効にするには、Ingress ALB を公開するロード・バランサー・サービスを編集します。
 
@@ -1136,7 +1142,8 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
 
 デフォルトでは、IBM 提供のドメインを使用するすべての Ingress 構成で TLS 1.2 プロトコルが使用されます。 デフォルトをオーバーライドして TLS 1.1 か 1.0 のプロトコルを使用する場合は、以下の手順を実行します。
 
-**注**: すべてのホストで有効なプロトコルを指定する場合、TLSv1.1 および TLSv1.2 パラメーター (1.1.13、1.0.12) は、OpenSSL 1.0.1 以上が使用されている場合にのみ使用できます。 TLSv1.3 パラメーター (1.13.0) は、TLSv1.3 対応版の OpenSSL 1.1.1 が使用されている場合にのみ使用できます。
+すべてのホストで有効なプロトコルを指定する場合、TLSv1.1 および TLSv1.2 パラメーター (1.1.13、1.0.12) は、OpenSSL 1.0.1 以上が使用されている場合にのみ使用できます。 TLSv1.3 パラメーター (1.13.0) は、TLSv1.3 対応版の OpenSSL 1.1.1 が使用されている場合にのみ使用できます。
+{: note}
 
 構成マップを編集して SSL プロトコルおよび暗号を有効にするには、以下のようにします。
 

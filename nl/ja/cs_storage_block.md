@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -29,10 +32,10 @@ lastupdated: "2018-10-25"
 ブロック・ストレージ用に事前定義されたストレージ・クラスをセットアップするには、{{site.data.keyword.Bluemix_notm}} Block Storage プラグインと Helm チャートをインストールします。 これらのストレージ・クラスを使用すると、アプリ用にブロック・ストレージをプロビジョンするための PVC を作成できます。
 {: shortdesc}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 1. ワーカー・ノードで、ご使用のマイナー・バージョンに対する最新パッチが適用されていることを確認します。 
-   1. ワーカー・ノードの現在のパッチ・バージョンをリストします。
+   1. ワーカー・ノードの現在のパッチ・バージョンをリストします。 
       ```
       ibmcloud ks workers --cluster <cluster_name_or_ID>
       ```
@@ -42,7 +45,7 @@ lastupdated: "2018-10-25"
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.9.10_1523* 
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.10.11_1523* 
       ```
       {: screen}
       
@@ -50,19 +53,26 @@ lastupdated: "2018-10-25"
       
    2. [version changelog](cs_versions_changelog.html#changelog) を参照して、最新のパッチ・バージョンに含まれる変更内容を確認してください。 
    
-   3. ワーカー・ノードを再ロードして、最新のパッチ・バージョンを適用します。[ibmcloud ks worker-reload コマンド](cs_cli_reference.html#cs_worker_reload)の説明に従って、ワーカー・ノード上で実行されているポッドを安全な方法でスケジュール変更した後に、ワーカー・ノードを再ロードしてください。
+   3. ワーカー・ノードを再ロードして、最新のパッチ・バージョンを適用します。 [ibmcloud ks worker-reload コマンド](cs_cli_reference.html#cs_worker_reload)の説明に従って、ワーカー・ノード上で実行されているポッドを安全な方法でスケジュール変更した後に、ワーカー・ノードを再ロードしてください。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](cs_storage_planning.html#persistent_storage_overview)していないデータは削除されることに注意してください。
 
-2. [手順](cs_integrations.html#helm)に従って、ローカル・マシンに Helm クライアントをインストールし、クラスターに Helm サーバー (tiller) をインストールし、{{site.data.keyword.Bluemix_notm}} Block Storage プラグインを使用するクラスターに {{site.data.keyword.Bluemix_notm}} Helm チャート・リポジトリーを追加します。
+2. この[手順](cs_integrations.html#helm)に従って、ローカル・マシンに Helm クライアントをインストールし、Helm サーバー (tiller) をクラスターにインストールします。
 
-   **重要:** Helm バージョン 2.9 以降を使用している場合は、[サービス・アカウント](cs_integrations.html#helm)を使用して tiller をインストールしていることを確認してください。
+   Helm バージョン 2.9 以降を使用している場合は、[サービス・アカウント](cs_integrations.html#helm)を使用して tiller をインストールしていることを確認してください。
+   {: important}
+   
+3. {{site.data.keyword.Bluemix_notm}} Block Storage プラグインを使用するクラスターに {{site.data.keyword.Bluemix_notm}} Helm チャート・リポジトリーを追加します。
+   ```
+   helm repo add ibm  https://registry.bluemix.net/helm/ibm
+   ```
+   {: pre}
 
-3. Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
+4. Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
    ```
    helm repo update
    ```
    {: pre}
 
-4. {{site.data.keyword.Bluemix_notm}} Block Storage プラグインをインストールします。 このプラグインをインストールすると、事前定義されたブロック・ストレージ・クラスがクラスターに追加されます。
+5. {{site.data.keyword.Bluemix_notm}} Block Storage プラグインをインストールします。 このプラグインをインストールすると、事前定義されたブロック・ストレージ・クラスがクラスターに追加されます。
    ```
    helm install ibm/ibmcloud-block-storage-plugin
    ```
@@ -112,7 +122,7 @@ lastupdated: "2018-10-25"
    ```
    {: screen}
 
-5. 正常にインストールされたことを確認します。
+6. 正常にインストールされたことを確認します。
    ```
    kubectl get pod -n kube-system | grep block
    ```
@@ -127,7 +137,7 @@ lastupdated: "2018-10-25"
 
    1 つの `ibmcloud-block-storage-plugin` ポッドと 1 つ以上の `ibmcloud-block-storage-driver` ポッドが表示されたら、インストールは成功しています。 `ibmcloud-block-storage-driver` ポッドの数は、クラスター内のワーカー・ノードの数と等しくなります。 すべてのポッドが **Running** 状態である必要があります。
 
-6. ブロック・ストレージのストレージ・クラスがクラスターに追加されたことを確認します。
+7. ブロック・ストレージのストレージ・クラスがクラスターに追加されたことを確認します。
    ```
    kubectl get storageclasses | grep block
    ```
@@ -146,7 +156,7 @@ lastupdated: "2018-10-25"
    ```
    {: screen}
 
-7. ブロック・ストレージをプロビジョンするすべてのクラスターに対して、上記の手順を繰り返します。
+8. ブロック・ストレージをプロビジョンするすべてのクラスターに対して、上記の手順を繰り返します。
 
 これで、アプリ用にブロック・ストレージをプロビジョンするための [PVC の作成](#add_block)に進むことができます。
 
@@ -155,7 +165,7 @@ lastupdated: "2018-10-25"
 既存の {{site.data.keyword.Bluemix_notm}} Block Storage プラグインを最新バージョンにアップグレードできます。
 {: shortdesc}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 1. Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
    ```
@@ -198,10 +208,11 @@ lastupdated: "2018-10-25"
 クラスターで {{site.data.keyword.Bluemix_notm}} Block Storage をプロビジョンして使用する必要がない場合は、Helm チャートをアンインストールできます。
 {: shortdesc}
 
-**注:** このプラグインを削除しても、既存の PVC、PV、データは削除されません。 このプラグインを削除すると、関連するすべてのポッドとデーモン・セットがクラスターから削除されます。 このプラグインを削除した後は、新しいブロック・ストレージをクラスターにプロビジョンしたり、既存のブロック・ストレージの PVC と PV を使用したりできません。
+このプラグインを削除しても、既存の PVC、PV、データは削除されません。 このプラグインを削除すると、関連するすべてのポッドとデーモン・セットがクラスターから削除されます。 このプラグインを削除した後は、新しいブロック・ストレージをクラスターにプロビジョンしたり、既存のブロック・ストレージの PVC と PV を使用したりできません。
+{: important}
 
 開始前に、以下のことを行います。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 - ブロック・ストレージを使用する PVC と PV がクラスターにないことを確認してください。
 
 プラグインを削除するには、以下のようにします。
@@ -250,7 +261,8 @@ lastupdated: "2018-10-25"
 
 ストレージ・クラスごとに、プロビジョンされるブロック・ストレージのタイプ (使用可能なサイズ、IOPS、ファイル・システム、保存ポリシーなど) が指定されています。  
 
-**重要:** データを保管できる十分な容量が得られるように、ストレージ構成は慎重に選択してください。 ストレージ・クラスを使用して特定のタイプのストレージをプロビジョンした後に、ストレージ・デバイスのサイズ、タイプ、IOPS、保存ポリシーを変更することはできません。 さらに容量が必要になった場合や、別の構成のストレージが必要になった場合は、[新規ストレージ・インスタンスを作成し、前のストレージ・インスタンスから新規ストレージ・インスタンスにデータをコピー](cs_storage_basics.html#update_storageclass)する必要があります。
+データを保管できる十分な容量が得られるように、ストレージ構成は慎重に選択してください。 ストレージ・クラスを使用して特定のタイプのストレージをプロビジョンした後に、ストレージ・デバイスのサイズ、タイプ、IOPS、保存ポリシーを変更することはできません。 さらに容量が必要になった場合や、別の構成のストレージが必要になった場合は、[新規ストレージ・インスタンスを作成し、前のストレージ・インスタンスから新規ストレージ・インスタンスにデータをコピー](cs_storage_basics.html#update_storageclass)する必要があります。
+{: important}
 
 1. {{site.data.keyword.containerlong}} で使用可能なストレージ・クラスをリストします。
     ```
@@ -283,8 +295,8 @@ lastupdated: "2018-10-25"
    {: tip}
 
 3. プロビジョンするブロック・ストレージのタイプを選択します。
-   - **ブロンズ、シルバー、ゴールドのストレージ・クラス:** これらのストレージ・クラスは、[エンデュランス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/endurance-storage) をプロビジョンします。 エンデュランス・ストレージの場合、事前定義された IOPS ティアでストレージのサイズ (ギガバイト単位) を選択できます。
-   - **カスタム・ストレージ・クラス:** このストレージ・クラスは、[パフォーマンス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/performance-storage) をプロビジョンします。 パフォーマンス・ストレージの場合は、より柔軟にストレージのサイズと IOPS を選択できます。
+   - **ブロンズ、シルバー、ゴールドのストレージ・クラス:** これらのストレージ・クラスは[エンデュランス・ストレージ](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)をプロビジョンします。 エンデュランス・ストレージの場合、事前定義された IOPS ティアでストレージのサイズ (ギガバイト単位) を選択できます。
+   - **カスタム・ストレージ・クラス:** このストレージ・クラスは[パフォーマンス・ストレージ](/docs/infrastructure/BlockStorage/index.html#provisioning-with-performance)をプロビジョンします。 パフォーマンス・ストレージの場合は、より柔軟にストレージのサイズと IOPS を選択できます。
 
 4. ブロック・ストレージのサイズと IOPS を選択します。 IOPS のサイズと数値によって、合計 IOPS (1 秒あたりの入出力操作数) が決まります。これは、ストレージの速度を示す指標となります。 ストレージの合計 IOPS が多いほど、読み取り/書き込み操作の処理が高速になります。
    - **ブロンズ、シルバー、ゴールドのストレージ・クラス:** これらのストレージ・クラスは、1 ギガバイトあたりの IOPS 数が固定されていて、SSD ハード・ディスクにプロビジョンされます。 合計の IOPS 数は、選択したストレージのサイズによって決まります。 指定可能なサイズの範囲内で、任意の整数のギガバイト (20 Gi、256 Gi、11854 Gi など) を選択できます。 合計 IOPS 数を求めるには、選択したサイズと IOPS を乗算します。 例えば、4 IOPS/GB のシルバー・ストレージ・クラスで、1000Gi のブロック・ストレージ・サイズを選択すると、ストレージの合計 IOPS は 4000 になります。  
@@ -382,7 +394,8 @@ lastupdated: "2018-10-25"
 ブロック・ストレージをクラスターに[動的にプロビジョン](cs_storage_basics.html#dynamic_provisioning)するために、永続ボリューム請求 (PVC) を作成します。 動的プロビジョニングでは、対応する永続ボリューム (PV) が自動的に作成され、IBM Cloud インフラストラクチャー (SoftLayer) アカウントで実際のストレージ・デバイスが注文されます。
 {:shortdesc}
 
-**重要**: ブロック・ストレージは、`ReadWriteOnce` アクセス・モードです。 これは、一度にクラスター内の 1 つのワーカー・ノードの 1 つのポッドにのみマウントできます。
+ブロック・ストレージは、`ReadWriteOnce` アクセス・モードです。 これは、一度にクラスター内の 1 つのワーカー・ノードの 1 つのポッドにのみマウントできます。
+{: note}
 
 開始前に、以下のことを行います。
 - ファイアウォールがある場合は、クラスターのあるゾーンの IBM Cloud インフラストラクチャー (SoftLayer) の IP 範囲に[発信アクセスを許可](cs_firewall.html#pvc)し、PVC を作成できるようにします。
@@ -463,15 +476,15 @@ lastupdated: "2018-10-25"
        </tr>
        <tr>
        <td><code>metadata.labels.region</code></td>
-       <td>ブロック・ストレージをプロビジョンする地域を指定します。 地域を指定する場合は、ゾーンも指定する必要があります。 地域を指定しなかった場合、または指定した地域が見つからなかった場合、ストレージはクラスターと同じ地域に作成されます。 </br><strong>注:</strong> このオプションは、IBM Cloud Block Storage プラグインのバージョン 1.0.1 以上でのみサポートされます。 複数ゾーン・クラスターを使用している場合、これより古いバージョンのプラグインでは、ボリューム要求をすべてのゾーン間で均等に分散させるために、ストレージは、ラウンドロビン・ベースで選択されたゾーンにプロビジョンされます。 ストレージのゾーンを指定するには、まず、[カスタマイズしたストレージ・クラス](#multizone_yaml)を作成します。 それから、カスタマイズしたストレージ・クラスを使用して PVC を作成します。</td>
+       <td>ブロック・ストレージをプロビジョンする地域を指定します。 地域を指定する場合は、ゾーンも指定する必要があります。 地域を指定しなかった場合、または指定した地域が見つからなかった場合、ストレージはクラスターと同じ地域に作成されます。 <p class="note">このオプションは、IBM Cloud Block Storage プラグインのバージョン 1.0.1 以上でのみサポートされます。 複数ゾーン・クラスターを使用している場合、これより古いバージョンのプラグインでは、ボリューム要求をすべてのゾーン間で均等に分散させるために、ストレージは、ラウンドロビン・ベースで選択されたゾーンにプロビジョンされます。 ストレージのゾーンを指定するには、まず、[カスタマイズしたストレージ・クラス](#multizone_yaml)を作成します。 それから、カスタマイズしたストレージ・クラスを使用して PVC を作成します。</p></td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
-	<td>ブロック・ストレージをプロビジョンするゾーンを指定します。 ゾーンを指定する場合は、地域も指定する必要があります。 ゾーンを指定しなかった場合、または指定したゾーンが複数ゾーン・クラスターで見つからなかった場合、ゾーンはラウンドロビン・ベースで選択されます。 </br><strong>注:</strong> このオプションは、IBM Cloud Block Storage プラグインのバージョン 1.0.1 以上でのみサポートされます。 複数ゾーン・クラスターを使用している場合、これより古いバージョンのプラグインでは、ボリューム要求をすべてのゾーン間で均等に分散させるために、ストレージは、ラウンドロビン・ベースで選択されたゾーンにプロビジョンされます。 ストレージのゾーンを指定するには、まず、[カスタマイズしたストレージ・クラス](#multizone_yaml)を作成します。 それから、カスタマイズしたストレージ・クラスを使用して PVC を作成します。</td>
+	<td>ブロック・ストレージをプロビジョンするゾーンを指定します。 ゾーンを指定する場合は、地域も指定する必要があります。 ゾーンを指定しなかった場合、または指定したゾーンが複数ゾーン・クラスターで見つからなかった場合、ゾーンはラウンドロビン・ベースで選択されます。 <p class="note">このオプションは、IBM Cloud Block Storage プラグインのバージョン 1.0.1 以上でのみサポートされます。 複数ゾーン・クラスターを使用している場合、これより古いバージョンのプラグインでは、ボリューム要求をすべてのゾーン間で均等に分散させるために、ストレージは、ラウンドロビン・ベースで選択されたゾーンにプロビジョンされます。 ストレージのゾーンを指定するには、まず、[カスタマイズしたストレージ・クラス](#multizone_yaml)を作成します。 それから、カスタマイズしたストレージ・クラスを使用して PVC を作成します。</p></td>
 	</tr>
         <tr>
         <td><code>spec.resources.requests.storage</code></td>
-        <td>ブロック・ストレージのサイズをギガバイト (Gi) 単位で入力します。 </br></br><strong>注:</strong> ストレージがプロビジョンされた後は、ブロック・ストレージのサイズを変更できません。 保管するデータの量に一致するサイズを指定してください。 </td>
+        <td>ブロック・ストレージのサイズをギガバイト (Gi) 単位で入力します。 ストレージがプロビジョンされた後は、ブロック・ストレージのサイズを変更できません。 保管するデータの量に一致するサイズを指定してください。 </td>
         </tr>
         <tr>
         <td><code>spec.resources.requests.iops</code></td>
@@ -825,19 +838,20 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ## ステートフル・セットでのブロック・ストレージの使用
 {: #block_statefulset}
 
-データベースなどのステートフルなアプリがある場合は、そのアプリのデータを保管するために、ブロック・ストレージを使用するステートフル・セットを作成することができます。別の方法として、{{site.data.keyword.Bluemix_notm}} Database as a Service を使用し、クラウドにデータを保管することもできます。
+データベースなどのステートフルなアプリがある場合は、そのアプリのデータを保管するために、ブロック・ストレージを使用するステートフル・セットを作成することができます。 別の方法として、{{site.data.keyword.Bluemix_notm}} Database as a Service を使用し、クラウドにデータを保管することもできます。
 {: shortdesc}
 
-**ブロック・ストレージをステートフル・セットに追加する場合、どんな点に留意する必要がありますか?**</br>
-ストレージをステートフル・セットに追加するには、ステートフル・セット YAML の `volumeClaimTemplates` セクションでストレージ構成を指定します。`volumeClaimTemplates` は、PVC の基礎となるもので、プロビジョンするブロック・ストレージのストレージ・クラスとサイズ (または IOPS) を含めることができます。ただし、`volumeClaimTemplates` にラベルを含める場合、Kubernetes による PVC の作成時にそれらのラベルは組み込まれません。その代わりに、自分で直接、それらのラベルをステートフル・セットに追加する必要があります。
+**ブロック・ストレージをステートフル・セットに追加する場合、どんな点に留意する必要がありますか?** </br>
+ストレージをステートフル・セットに追加するには、ステートフル・セット YAML の `volumeClaimTemplates` セクションでストレージ構成を指定します。 `volumeClaimTemplates` は、PVC の基礎となるもので、プロビジョンするブロック・ストレージのストレージ・クラスとサイズ (または IOPS) を含めることができます。 ただし、`volumeClaimTemplates` にラベルを含める場合、Kubernetes による PVC の作成時にそれらのラベルは組み込まれません。 その代わりに、自分で直接、それらのラベルをステートフル・セットに追加する必要があります。
 
-**重要:** 2 つのステートフル・セットを同時にデプロイすることはできません。1 つのステートフル・セットが完全にデプロイされる前に別のステートフル・セットを作成しようとすると、ステートフル・セットのデプロイメントが予期しない結果となる可能性があります。
+2 つのステートフル・セットを同時にデプロイすることはできません。 1 つのステートフル・セットが完全にデプロイされる前に別のステートフル・セットを作成しようとすると、ステートフル・セットのデプロイメントが予期しない結果となる可能性があります。
+{: important}
 
-**ステートフル・セットをどのように特定のゾーンに作成できますか?**</br>
-複数ゾーン・クラスターでは、ステートフル・セット YAML の `spec.selector.matchLabels` および `spec.template.metadata.labels` セクションで、ステートフル・セットを作成するゾーンと地域を指定することができます。あるいは、それらのラベルを[カスタマイズ・ストレージ・クラス](cs_storage_basics.html#customized_storageclass)に追加し、このストレージ・クラスをステートフル・セットの `volumeClaimTemplates` セクションで使用することもできます。 
+**ステートフル・セットをどのように特定のゾーンに作成できますか?** </br>
+複数ゾーン・クラスターでは、ステートフル・セット YAML の `spec.selector.matchLabels` および `spec.template.metadata.labels` セクションで、ステートフル・セットを作成するゾーンと地域を指定することができます。 あるいは、それらのラベルを[カスタマイズ・ストレージ・クラス](cs_storage_basics.html#customized_storageclass)に追加し、このストレージ・クラスをステートフル・セットの `volumeClaimTemplates` セクションで使用することもできます。
 
-**ステートフル・セットにブロック・ストレージを追加するときに選択できるどんなオプションがありますか?**</br>
-ステートフル・セットを作成するときに PVC を自動的に作成する場合は、[動的プロビジョニング](#dynamic_statefulset)を使用します。また、ステートフル・セットで使用するために [PVC を事前プロビジョンするか、既存の PVC を使用する](#static_statefulset)こともできます。  
+**ステートフル・セットにブロック・ストレージを追加するときに選択できるどんなオプションがありますか?** </br>
+ステートフル・セットを作成するときに PVC を自動的に作成する場合は、[動的プロビジョニング](#dynamic_statefulset)を使用します。 また、ステートフル・セットで使用するために [PVC を事前プロビジョンするか、既存の PVC を使用する](#static_statefulset)こともできます。  
 
 ### ステートフル・セットの作成時に PVC を動的にプロビジョンする
 {: #dynamic_statefulset}
@@ -845,9 +859,9 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 このオプションは、ステートフル・セットを作成するときに PVC を自動的に作成する場合に使用します。
 {: shortdesc}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
-1. クラスターにある既存のすべてのステートフル・セットが完全にデプロイ済みであることを確認します。デプロイ中のステートフル・セットがある場合は、ステートフル・セットの作成を開始できません。予期しない結果が生じるのを避けるため、クラスター内のすべてのステートフル・セットが完全にデプロイされるまで待つ必要があります。
+1. クラスターにある既存のすべてのステートフル・セットが完全にデプロイ済みであることを確認します。 デプロイ中のステートフル・セットがある場合は、ステートフル・セットの作成を開始できません。 予期しない結果が生じるのを避けるため、クラスター内のすべてのステートフル・セットが完全にデプロイされるまで待つ必要があります。
    1. クラスター内の既存のステートフル・セットをリストします。
       ```
       kubectl get statefulset --all-namespaces
@@ -889,9 +903,9 @@ PV が正常に作成され、PVC にバインドされました。 これで、
       ```
       {: screen}
 
-      CLI 出力の **Replicas** セクションに示されたレプリカの数が、**Pods Status** セクションの **Running** ポッドの数と等しい場合は、ステートフル・セットが完全にデプロイ済みです。ステートフル・セットがまだ完全にデプロイされていない場合は、デプロイメントが完了するまで待ってから、次に進んでください。
+      CLI 出力の **Replicas** セクションに示されたレプリカの数が、**Pods Status** セクションの **Running** ポッドの数と等しい場合は、ステートフル・セットが完全にデプロイ済みです。 ステートフル・セットがまだ完全にデプロイされていない場合は、デプロイメントが完了するまで待ってから、次に進んでください。
 
-3. ステートフル・セットと、そのステートフル・セットを公開するために使用するサービスに関する、構成ファイルを作成します。下記の例は、3 つのレプリカを伴うステートフル・セットとして nginx をデプロイする方法を示しています。レプリカごとに、`ibmc-block-retain-bronze` ストレージ・クラスで定義された仕様に基づいて、20 ギガバイトのブロック・ストレージ・デバイスがプロビジョンされます。すべてのストレージ・デバイスは `dal10` ゾーンでプロビジョンされます。ブロック・ストレージは他のゾーンからアクセスできないため、ステートフル・セットのすべてのレプリカも、`dal10` に配置されたワーカー・ノードにデプロイされます。
+3. ステートフル・セットと、そのステートフル・セットを公開するために使用するサービスに関する、構成ファイルを作成します。 下記の例は、3 つのレプリカを伴うステートフル・セットとして nginx をデプロイする方法を示しています。 レプリカごとに、`ibmc-block-retain-bronze` ストレージ・クラスで定義された仕様に基づいて、20 ギガバイトのブロック・ストレージ・デバイスがプロビジョンされます。 すべてのストレージ・デバイスは `dal10` ゾーンでプロビジョンされます。 ブロック・ストレージは他のゾーンからアクセスできないため、ステートフル・セットのすべてのレプリカも、`dal10` に配置されたワーカー・ノードにデプロイされます。
 
    ```
    apiVersion: v1
@@ -962,35 +976,35 @@ PV が正常に作成され、PVC にバインドされました。 これで、
     <tbody>
     <tr>
     <td style="text-align:left"><code>metadata.name</code></td>
-    <td style="text-align:left">ステートフル・セットに対する名前を入力します。 入力した名前が使用されて、PVC の名前が次の形式で作成されます: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>。</td>
+    <td style="text-align:left">ステートフル・セットに対する名前を入力します。 入力した名前が使用されて、PVC の名前が次の形式で作成されます: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>。 </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.serviceName</code></td>
-    <td style="text-align:left">ステートフル・セットを公開するために使用するサービスの名前を入力します。</td>
+    <td style="text-align:left">ステートフル・セットを公開するために使用するサービスの名前を入力します。 </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.replicas</code></td>
-    <td style="text-align:left">ステートフル・セットのレプリカの数を入力します。</td>
+    <td style="text-align:left">ステートフル・セットのレプリカの数を入力します。 </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.podManagementPolicy</code></td>
-    <td style="text-align:left">ステートフル・セットで使用するポッド管理ポリシーを入力します。次のいずれかのオプションを選択します。<ul><li><strong>OrderedReady: </strong>このオプションを指定すると、ステートフル・セット・レプリカが 1 つずつデプロイされます。例えば、3 つのレプリカを指定した場合、Kubernetes は 1 番目のレプリカの PVC を作成し、PVC がバインドされるまで待機し、ステートフル・セット・レプリカをデプロイし、PVC をレプリカにマウントします。このデプロイメントが完了したら、2 番目のレプリカがデプロイされます。このオプションについて詳しくは、[OrderedReady Pod Management ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management) を参照してください。</li><li><strong>Parallel: </strong>このオプションを指定すると、ステートフル・セット・レプリカのすべてのデプロイメントが同時に開始します。アプリでレプリカの並行デプロイメントをサポートしている場合は、このオプションを使用して、PVC とステートフル・セット・レプリカをデプロイする時間を節約してください。</li></ul></td>
+    <td style="text-align:left">ステートフル・セットで使用するポッド管理ポリシーを入力します。 次のいずれかのオプションを選択します。 <ul><li><strong>OrderedReady: </strong>このオプションを指定すると、ステートフル・セット・レプリカが 1 つずつデプロイされます。 例えば、3 つのレプリカを指定した場合、Kubernetes は 1 番目のレプリカの PVC を作成し、PVC がバインドされるまで待機し、ステートフル・セット・レプリカをデプロイし、PVC をレプリカにマウントします。 このデプロイメントが完了したら、2 番目のレプリカがデプロイされます。 このオプションについて詳しくは、[OrderedReady Pod Management ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management) を参照してください。 </li><li><strong>Parallel: </strong>このオプションを指定すると、ステートフル・セット・レプリカのすべてのデプロイメントが同時に開始します。 アプリでレプリカの並行デプロイメントをサポートしている場合は、このオプションを使用して、PVC とステートフル・セット・レプリカをデプロイする時間を節約してください。 </li></ul></td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
-    <td style="text-align:left">ステートフル・セットと PVC に含めるすべてのラベルを入力します。ステートフル・セットの <code>volumeClaimTemplates</code> に含めたラベルは、Kubernetes によって認識されません。含めることができるサンプル・ラベルには次のものがあります。<ul><li><code><strong>region</strong></code> および <code><strong>zone</strong></code>: ステートフル・セット・レプリカと PVC のすべてを、1 つの特定のゾーンに作成する場合は、これらのラベルを両方とも追加します。また、使用するストレージ・クラスでゾーン (zone) と地域 (region) を指定することもできます。ゾーンと地域を指定せず、複数ゾーン・クラスターを使用している場合、ボリューム要求をすべてのゾーン間で均等に分散させるために、ストレージは、ラウンドロビン・ベースで選択されたゾーンにプロビジョンされます。</li><li><code><strong>billingType</strong></code>: PVC で使用する課金タイプを入力します。<code>hourly</code> または <code>monthly</code> のいずれかを選択します。このラベルを指定しない場合、すべての PVC が時間単位 (hourly) の課金タイプで作成されます。</li></ul></td>
+    <td style="text-align:left">ステートフル・セットと PVC に含めるすべてのラベルを入力します。 ステートフル・セットの <code>volumeClaimTemplates</code> に含めたラベルは、Kubernetes によって認識されません。 含めることができるサンプル・ラベルには次のものがあります。 <ul><li><code><strong>region</strong></code> および <code><strong>zone</strong></code>: ステートフル・セット・レプリカと PVC のすべてを、1 つの特定のゾーンに作成する場合は、これらのラベルを両方とも追加します。 また、使用するストレージ・クラスでゾーン (zone) と地域 (region) を指定することもできます。 ゾーンと地域を指定せず、複数ゾーン・クラスターを使用している場合、ボリューム要求をすべてのゾーン間で均等に分散させるために、ストレージは、ラウンドロビン・ベースで選択されたゾーンにプロビジョンされます。</li><li><code><strong>billingType</strong></code>: PVC で使用する課金タイプを入力します。 <code>hourly</code> または <code>monthly</code> のいずれかを選択します。 このラベルを指定しない場合、すべての PVC が時間単位 (hourly) の課金タイプで作成されます。 </li></ul></td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.metadata.labels</code></td>
-    <td style="text-align:left"><code>spec.selector.matchLabels</code> セクションに追加したラベルと同じラベルを入力します。</td>
+    <td style="text-align:left"><code>spec.selector.matchLabels</code> セクションに追加したラベルと同じラベルを入力します。 </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-    <td style="text-align:left">使用するストレージ・クラスを入力します。既存のストレージ・クラスをリストするには、<code>kubectl get storageclasses | grep block</code> を実行します。ストレージ・クラスを指定しなかった場合は、クラスターで設定されているデフォルト・ストレージ・クラスを使用して PVC が作成されます。ブロック・ストレージを使用してステートフル・セットがプロビジョンされるようにするために、デフォルト・ストレージ・クラスで <code>ibm.io/ibmc-block</code> プロビジョナーが使用されていることを確認してください。</td>
+    <td style="text-align:left">使用するストレージ・クラスを入力します。 既存のストレージ・クラスをリストするには、<code>kubectl get storageclasses | grep block</code> を実行します。 ストレージ・クラスを指定しなかった場合は、クラスターで設定されているデフォルト・ストレージ・クラスを使用して PVC が作成されます。 ブロック・ストレージを使用してステートフル・セットがプロビジョンされるようにするために、デフォルト・ストレージ・クラスで <code>ibm.io/ibmc-block</code> プロビジョナーが使用されていることを確認してください。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
-    <td style="text-align:left">ボリュームの名前を入力します。 <code>spec.containers.volumeMount.name</code> セクションで定義した名前と同じ名前を使用します。ここに入力した名前が使用されて、PVC の名前が次の形式で作成されます: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>。</td>
+    <td style="text-align:left">ボリュームの名前を入力します。 <code>spec.containers.volumeMount.name</code> セクションで定義した名前と同じ名前を使用します。 ここに入力した名前が使用されて、PVC の名前が次の形式で作成されます: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>。 </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.storage</code></td>
@@ -998,7 +1012,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.iops</code></td>
-    <td style="text-align:left">[パフォーマンス・ストレージ](#predefined_storageclass)をプロビジョンする場合は、IOPS 数を入力します。エンデュランス・ストレージ・クラスを使用することにして IOPS 数を指定した場合は、IOPS 数が無視されます。その代わりに、そのストレージ・クラスで指定されている IOPS が使用されます。</td>
+    <td style="text-align:left">[パフォーマンス・ストレージ](#predefined_storageclass)をプロビジョンする場合は、IOPS 数を入力します。 エンデュランス・ストレージ・クラスを使用することにして IOPS 数を指定した場合は、IOPS 数が無視されます。 その代わりに、そのストレージ・クラスで指定されている IOPS が使用されます。  </td>
     </tr>
     </tbody></table>
 
@@ -1014,7 +1028,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
    ```
    {: pre}
 
-   PVC の現在の状況を確認するには、`kubectl get pvc` を実行します。PVC の名前は `<volume_name>-<statefulset_name>-<replica_number>` というフォーマットになります。
+   PVC の現在の状況を確認するには、`kubectl get pvc` を実行します。 PVC の名前は `<volume_name>-<statefulset_name>-<replica_number>` というフォーマットになります。
    {: tip}
 
 ### ステートフル・セットの作成前に PVC を事前プロビジョンする
@@ -1023,23 +1037,24 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ステートフル・セットを作成する前に PVC を事前プロビジョンするか、既存の PVC をステートフル・セットで使用することができます。
 {: shortdesc}
 
-[ステートフル・セットの作成時に PVC を動的にプロビジョンする](#dynamic_statefulset)場合は、ステートフル・セット YAML ファイルで使用した値に基づいて、PVC の名前が割り当てられます。ステートフル・セットによって既存の PVC が使用されるようにするには、PVC の名前が、動的プロビジョニングを使用する場合に自動的に作成される名前と一致していなければなりません。
+[ステートフル・セットの作成時に PVC を動的にプロビジョンする](#dynamic_statefulset)場合は、ステートフル・セット YAML ファイルで使用した値に基づいて、PVC の名前が割り当てられます。 ステートフル・セットによって既存の PVC が使用されるようにするには、PVC の名前が、動的プロビジョニングを使用する場合に自動的に作成される名前と一致していなければなりません。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
-1. [アプリへのブロック・ストレージの追加](#add_block)のステップ 1 から 3 に従って、それぞれのステートフル・セット・レプリカのために PVC を作成します。作成する PVC の名前は、必ず次のフォーマットに従ったものにしてください: `<volume_name>-<statefulset_name>-<replica_number>`。
+1. [アプリへのブロック・ストレージの追加](#add_block)のステップ 1 から 3 に従って、それぞれのステートフル・セット・レプリカのために PVC を作成します。 作成する PVC の名前は、必ず次のフォーマットに従ったものにしてください: `<volume_name>-<statefulset_name>-<replica_number>`。
    - **`<volume_name>`**: ステートフル・セットの `spec.volumeClaimTemplates.metadata.name` セクションで指定する名前を使用します (例: `nginxvol`)。
    - **`<statefulset_name>`**: ステートフル・セットの `metadata.name` セクションで指定する名前を使用します (例: `nginx_statefulset`)。
    - **`<replica_number>`**: 0 から始まる、レプリカの番号を入力します。
 
    例えば、3 つのステートフル・セット・レプリカを作成する必要がある場合は、次の名前を使用して 3 つの PVC を作成します: `nginxvol-nginx_statefulset-0`、`nginxvol-nginx_statefulset-1`、`nginxvol-nginx_statefulset-2`。  
 
-2. [ステートフル・セットの作成時に PVC を動的にプロビジョンする](#dynamic_statefulset)のステップに従って、ステートフル・セットを作成します。ステートフル・セット仕様における PVC 名の値を必ず使用してください。
+2. [ステートフル・セットの作成時に PVC を動的にプロビジョンする](#dynamic_statefulset)のステップに従って、ステートフル・セットを作成します。 ステートフル・セット仕様における PVC 名の値を必ず使用してください。
    - **`spec.volumeClaimTemplates.metadata.name`**: 前のステップで使用した `<volume_name>` を入力します。
    - **`metadata.name`**: 前のステップで使用した `<statefulset_name>` を入力します。
-   - **`spec.replicas`**: 作成するステートフル・セット・レプリカの数を入力します。レプリカの数は、先ほど作成した PVC の数と等しくなければなりません。
+   - **`spec.replicas`**: 作成するステートフル・セット・レプリカの数を入力します。 レプリカの数は、先ほど作成した PVC の数と等しくなければなりません。
 
-   **注:** PVC を別々のゾーンに作成した場合、ステートフル・セットに地域またはゾーンのラベルを含めないでください。
+   PVC を別々のゾーンに作成した場合、ステートフル・セットに地域またはゾーンのラベルを含めないでください。
+   {: note}
 
 3. PVC がステートフル・セット・レプリカ・ポッドで使用されることを確認します。
    1. クラスター内のポッドをリストします。 ステートフル・セットに属するポッドを確認します。
@@ -1048,7 +1063,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
       ```
       {: pre}
 
-   2. 既存の PVC がステートフル・セット・レプリカにマウントされていることを確認します。CLI 出力の **Volumes** セクションで **ClaimName** を確認してください。
+   2. 既存の PVC がステートフル・セット・レプリカにマウントされていることを確認します。 CLI 出力の **Volumes** セクションで **ClaimName** を確認してください。
       ```
       kubectl describe pod <pod_name>
       ```
@@ -1072,6 +1087,162 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 <br />
 
 
+## 既存のストレージ・デバイスのサイズと IOPS の変更
+{: #change_storage_configuration}
+
+ストレージ容量またはパフォーマンスを向上させるために既存のボリュームを変更することができます。
+{: shortdesc}
+
+課金方法について不明な点がある場合や、{{site.data.keyword.Bluemix_notm}} コンソールを使用してストレージを変更する手順を調べたい場合は、[ブロック・ストレージ容量の拡張](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity)を参照してください。{{site.data.keyword.Bluemix_notm}} コンソールを使用してストレージを変更する場合は、このトピックのステップ 4 から 7 までを実行して、変更を行う必要があります。
+{: tip}
+
+1. クラスターの PVC をリストし、**VOLUME** 列に表示される関連 PV の名前をメモします。 
+   ```
+   kubectl get pvc
+   ```
+   {: pre}
+   
+   出力例: 
+   ```
+   NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
+   ```
+   {: screen}
+   
+2. PVC がバインドされている PV の詳細をリストして、PVC に関連付けられている物理ファイル・ストレージの **VolumeID** および **StorageType** を取得します。 `<pv_name>` を前のステップで取得した PV の名前に置き換えてください。**Labels** セクションにストレージ・タイプが表示され、CLI 出力の「**Source**」>「**Options**」セクションにボリューム ID が表示されます。 
+   ```
+   kubectl describe pv <pv_name>
+   ```
+   {: pre}
+   
+   出力例: 
+   ```
+   Name:            pvc-c1839152-c333-11e8-b6a8-46ad53f2579a
+   Labels:          CapacityGb=24
+                    Datacenter=dal13
+                    IOPS=4
+                    StorageType=Endurance
+                    billingType=hourly
+                    failure-domain.beta.kubernetes.io/region=us-south
+                    failure-domain.beta.kubernetes.io/zone=dal13
+                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
+   ...
+   Source:
+       Type:       FlexVolume (a generic volume resource that is provisioned/attached using an exec based plugin)
+       Driver:     ibm/ibmc-block
+       FSType:     ext4
+       SecretRef:  <nil>
+       ReadOnly:   false
+       Options:    map[volumeName:pvc-c1839152-c333-11e8-b6a8-46ad53f2579a Lun:1 TargetPortal:161.26.114.56 VolumeID:51889685]
+   ...
+   ```
+   {: screen}
+
+3. IBM Cloud インフラストラクチャー (SoftLayer) アカウントでボリュームのサイズまたは IOPS を変更します。 
+
+   パフォーマンス・ストレージの例: 
+   ```
+   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-iops <iops>
+   ```
+   {: pre}
+   
+   エンデュランス・ストレージの例: 
+   ```
+   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-tier <iops>
+   ```
+   {: pre}
+   
+   <table>
+   <caption>コマンドのコンポーネントについて</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>&lt;volume_ID&gt;</code></td>
+   <td>前に取得したボリュームの ID を入力します。</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-size&gt;</code></td>
+   <td>ボリュームの新しいサイズをギガバイト (Gi) 単位で入力します。 有効なサイズについては、[ブロック・ストレージ構成の決定](#predefined_storageclass)を参照してください。 入力するサイズは、ボリュームの現行サイズ以上でなければなりません。 新しいサイズを指定しない場合、ボリュームの現行サイズが使用されます。</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-iops&gt;</code></td>
+   <td>パフォーマンス・ストレージのみ。 必要な新しい IOPS 数を入力します。 有効な IOPS については、[ブロック・ストレージ構成の決定](#predefined_storageclass)を参照してください。 IOPS を指定しない場合は、現在の IOPS が使用されます。<p class="note">ボリュームの元の IOPS/GB 率が 0.3 未満の場合、新しい IOPS/GB 率も 0.3 未満にする必要があります。 ボリュームの元の IOPS/GB 率が 0.3 以上の場合、ボリュームの新しい IOPS/GB 率も 0.3 以上にする必要があります。</p> </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-tier&gt;</code></td>
+   <td>エンデュランス・ストレージのみ。 必要な新しい IOPS 数/GB を入力します。 有効な IOPS については、[ブロック・ストレージ構成の決定](#predefined_storageclass)を参照してください。 IOPS を指定しない場合は、現在の IOPS が使用されます。<p class="note">ボリュームの元の IOPS/GB 率が 0.25 未満の場合、新しい IOPS/GB 率も 0.25 未満にする必要があります。 ボリュームの元の IOPS/GB 率が 0.25 以上の場合、ボリュームの新しい IOPS/GB 率も 0.25 以上にする必要があります。</p> </td>
+   </tr>
+   </tbody>
+   </table>
+   
+   出力例: 
+   ```
+   Order 31020713 was placed successfully!.
+   > Storage as a Service
+
+   > 40 GBs
+
+   > 2 IOPS per GB
+
+   > 20 GB Storage Space (Snapshot Space)
+
+   You may run 'ibmcloud sl block volume-list --order 12345667' to find this block volume after it is ready.
+   ```
+   {: screen}
+   
+4. PV 構成にパッチを適用して、`autofix-resizefs` アノテーションを追加します。 このアノテーションは、ボリュームがポッドにマウントされるときに、ファイル・システムのサイズを自動的に変更します。  
+   ```
+   kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
+   ```
+   {: pre}
+   
+5. PVC を使用するすべてのポッドをリストします。 
+   ```
+   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+   ```
+   {: pre}
+   
+   ポッドは、`<pod_name>: <pvc_name>` の形式で返されます。 
+   
+6. PVC を使用しているポッドがある場合は、ポッドを削除して Kubernetes にポッドを再作成させることで、ポッドを再始動します。 Kubernetes デプロイメントまたはレプリカ・セットを使用せずにポッドを作成していた場合は、ポッドを削除した後に自分で再作成する必要があります。 ポッドの作成に使用された YAML ファイルを取得するには、`kubectl get pod <pod_name> -o yaml >pod.yaml` を実行します。
+   {: tip}
+   ```
+   kubectl delete pod <pod_name>
+   ```
+   {: pre}
+   
+7. ボリュームのサイズを変更した場合は、ポッドにログインして新しいサイズを確認します。 
+   1. ボリュームにアクセスするために、ポッドで使用したボリューム・マウント・パスを取得します。
+      ```
+      kubectl describe pod <pod_name>
+      ```
+      {: pre}
+      
+      ボリューム・マウント・パスは、CLI 出力の **Containers** > **block** > **Mounts** セクションに表示されます。
+   2. ポッドにログインします。 
+      ```
+      kubectl exec -it <pod_name> bash
+      ```
+      {: pre}
+      
+   3. ディスク使用量の統計を表示し、前に取得したボリュームのマウント・パスを見つけます。 **Size** 列にボリュームの新しいサイズが表示されていることを確認します。
+      ```
+      df -h
+      ```
+      {: pre}
+      
+      出力例: 
+      ```
+      Filesystem                                     Size  Used Avail Use% Mounted on
+      overlay                                         99G  3.2G   91G   4% /
+      tmpfs                                           64M     0   64M   0% /dev
+      tmpfs                                          7.9G     0  7.9G   0% /sys/fs/cgroup
+      /dev/mapper/3600a098038304471562b4c4743384e4d   40G   44M   23G   1% /test
+      ```
+      {: screen}
+
 
 ## データのバックアップとリストア
 {: #backup_restore}
@@ -1082,18 +1253,18 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 
 <dl>
   <dt>定期的なスナップショットをセットアップする</dt>
-  <dd><p>[ブロック・ストレージの定期的なスナップショットをセットアップ](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)できます。スナップショットとは、特定の時点のインスタンスの状態をキャプチャーした読み取り専用のイメージです。 スナップショットを保管するには、ブロック・ストレージでスナップショット・スペースを要求する必要があります。 スナップショットは、同じゾーン内の既存のストレージ・インスタンスに保管されます。 ユーザーが誤って重要なデータをボリュームから削除した場合に、スナップショットからデータをリストアできます。 <strong>注</strong>: 専用アカウントがある場合は、<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">サポート・チケットを開く</a>必要があります。</br></br> <strong>ボリュームのスナップショットを作成するには、以下のようにします。</strong><ol><li>[アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。</li><li>`ibmcloud sl` CLI にログインします。 <pre class="pre"><code>    ibmcloud sl init
-    </code></pre></li><li>クラスター内の既存の PV をリストします。 <pre class="pre"><code>kubectl get pv</code></pre></li><li>スナップショット・スペースを作成する PV の詳細を取得し、ボリューム ID、サイズ、および IOPS をメモします。 <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> サイズと IOPS は CLI 出力の <strong>Labels</strong> セクションに表示されます。 ボリューム ID は、CLI 出力の <code>ibm.io/network-storage-id</code> アノテーションで確認します。 </li><li>前のステップで取得したパラメーターを使用して、既存のボリュームのスナップショット・サイズを作成します。 <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>スナップショット・サイズが作成されるまで待ちます。 <pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>CLI 出力の <strong>Snapshot Size (GB)</strong> が 0 から注文したサイズに変更されていれば、スナップショット・サイズは正常にプロビジョンされています。</li><li>ボリュームのスナップショットを作成し、作成されたスナップショットの ID をメモします。 <pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>スナップショットが正常に作成されたことを確認します。 <pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>スナップショットから既存のボリュームにデータをリストアするには、以下のようにします。</strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
+  <dd><p>[ブロック・ストレージの定期的なスナップショットをセットアップ](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)できます。スナップショットとは、特定の時点のインスタンスの状態をキャプチャーした読み取り専用のイメージです。 スナップショットを保管するには、ブロック・ストレージでスナップショット・スペースを要求する必要があります。 スナップショットは、同じゾーン内の既存のストレージ・インスタンスに保管されます。 ユーザーが誤って重要なデータをボリュームから削除した場合に、スナップショットからデータをリストアできます。 <strong>注</strong>: 専用アカウントがある場合は、<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">サポート・ケースを開く</a>必要があります。</br></br> <strong>ボリュームのスナップショットを作成するには、以下のようにします。</strong><ol><li>[アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。</li><li>`ibmcloud sl` CLI にログインします。 <pre class="pre"><code>    ibmcloud sl init
+    </code></pre></li><li>クラスター内の既存の PV をリストします。 <pre class="pre"><code>kubectl get pv</code></pre></li><li>スナップショット・スペースを作成する PV の詳細を取得し、ボリューム ID、サイズ、および IOPS をメモします。 <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> サイズと IOPS は CLI 出力の <strong>Labels</strong> セクションに表示されます。 ボリューム ID は、CLI 出力の <code>ibm.io/network-storage-id</code> アノテーションで確認します。 </li><li>前のステップで取得したパラメーターを使用して、既存のボリュームのスナップショット・サイズを作成します。 <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>スナップショット・サイズが作成されるまで待ちます。 <pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>CLI 出力の <strong>Snapshot Size (GB)</strong> が 0 から注文したサイズに変更されていれば、スナップショット・サイズは正常にプロビジョンされています。 </li><li>ボリュームのスナップショットを作成し、作成されたスナップショットの ID をメモします。 <pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>スナップショットが正常に作成されたことを確認します。 <pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>スナップショットから既存のボリュームにデータをリストアするには、以下のようにします。</strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>スナップショットを別のゾーンにレプリケーションする</dt>
  <dd><p>ゾーンの障害からデータを保護するために、別のゾーンにセットアップしたブロック・ストレージのインスタンスに[スナップショットをレプリケーション](/docs/infrastructure/BlockStorage/replication.html#replicating-data)することができます。 データは、1 次ストレージからバックアップ・ストレージにのみレプリケーションできます。 レプリケーションされたブロック・ストレージのインスタンスを、クラスターにマウントすることはできません。 1 次ストレージに障害が発生した場合には、レプリケーションされたバックアップ・ストレージを 1 次ストレージに手動で設定できます。 すると、そのファイル共有をクラスターにマウントできます。 1 次ストレージがリストアされたら、バックアップ・ストレージからデータをリストアできます。 <strong>注</strong>: 専用アカウントがある場合は、スナップショットを別のゾーンに複製することはできません。</p></dd>
  <dt>ストレージを複製する</dt>
- <dd><p>元のストレージ・インスタンスと同じゾーンに、[ブロック・ストレージ・インスタンスを複製](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume)できます。 複製インスタンスのデータは、それを作成した時点の元のストレージ・インスタンスと同じです。 レプリカとは異なり、複製インスタンスは、元のインスタンスから独立したストレージ・インスタンスとして使用します。 複製するには、まず、ボリュームのスナップショットをセットアップします。 <strong>注</strong>: 専用アカウントがある場合は、<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">サポート・チケットを開く</a>必要があります。</p></dd>
+ <dd><p>元のストレージ・インスタンスと同じゾーンに、[ブロック・ストレージ・インスタンスを複製](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume)できます。 複製インスタンスのデータは、それを作成した時点の元のストレージ・インスタンスと同じです。 レプリカとは異なり、複製インスタンスは、元のインスタンスから独立したストレージ・インスタンスとして使用します。 複製するには、まず、ボリュームのスナップショットをセットアップします。 <strong>注</strong>: 専用アカウントがある場合は、<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">サポート・ケースを開く</a>必要があります。</p></dd>
   <dt>{{site.data.keyword.cos_full}} にデータをバックアップする</dt>
-  <dd><p>[**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) を使用して、クラスター内にバックアップとリストアのポッドをスピンアップできます。 このポッドには、クラスター内の任意の永続ボリューム請求 (PVC) のために 1 回限りのバックアップまたは定期バックアップを実行するスクリプトが含まれています。 データは、ゾーンにセットアップした {{site.data.keyword.cos_full}} インスタンスに保管されます。</p><strong>注:</strong> ブロック・ストレージは、RWO アクセス・モードでマウントされます。 このアクセスでは、一度に 1 つのポッドしかブロック・ストレージにマウントできません。 データをバックアップするには、ストレージからアプリ・ポッドをアンマウントし、バックアップ・ポッドにマウントしてデータをバックアップしてから、アプリ・ポッドに再マウントする必要があります。 </br></br>
+  <dd><p>[**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) を使用して、クラスター内にバックアップとリストアのポッドをスピンアップできます。 このポッドには、クラスター内の任意の永続ボリューム請求 (PVC) のために 1 回限りのバックアップまたは定期バックアップを実行するスクリプトが含まれています。 データは、ゾーンにセットアップした {{site.data.keyword.cos_full}} インスタンスに保管されます。</p><p class="note">ブロック・ストレージは、RWO アクセス・モードでマウントされます。 このアクセスでは、一度に 1 つのポッドしかブロック・ストレージにマウントできません。 データをバックアップするには、ストレージからアプリ・ポッドをアンマウントし、バックアップ・ポッドにマウントしてデータをバックアップしてから、アプリ・ポッドに再マウントする必要があります。 </p>
 データを可用性をさらに高め、アプリをゾーン障害から保護するには、2 つ目の {{site.data.keyword.cos_short}} インスタンスをセットアップして、ゾーン間でデータを複製します。 {{site.data.keyword.cos_short}} インスタンスからデータをリストアする必要がある場合は、イメージに付属するリストア・スクリプトを使用します。</dd>
 <dt>ポッドおよびコンテナーとの間でデータをコピーする</dt>
 <dd><p>`kubectl cp` [コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) を使用して、クラスター内のポッドまたは特定のコンテナーとの間でファイルとディレクトリーをコピーできます。</p>
-<p>開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。 <code>-c</code> を使用してコンテナーを指定しない場合、コマンドはポッド内で最初に使用可能なコンテナーを使用します。</p>
+<p>開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。 <code>-c</code> を使用してコンテナーを指定しない場合、コマンドはポッド内で最初に使用可能なコンテナーを使用します。</p>
 <p>このコマンドは、以下のようにさまざまな方法で使用できます。</p>
 <ul>
 <li>ローカル・マシンからクラスター内のポッドにデータをコピーする: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
@@ -1124,7 +1295,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 </tr>
 <tr>
 <td>タイプ</td>
-<td>[エンデュランス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[エンデュランス・ストレージ](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>ファイル・システム</td>
@@ -1170,7 +1341,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 </tr>
 <tr>
 <td>タイプ</td>
-<td>[エンデュランス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[エンデュランス・ストレージ](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>ファイル・システム</td>
@@ -1215,7 +1386,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 </tr>
 <tr>
 <td>タイプ</td>
-<td>[エンデュランス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[エンデュランス・ストレージ](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>ファイル・システム</td>
@@ -1260,7 +1431,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 </tr>
 <tr>
 <td>タイプ</td>
-<td>[パフォーマンス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/performance-storage)</td>
+<td>[パフォーマンス](/docs/infrastructure/BlockStorage/index.html#provisioning-with-performance)</td>
 </tr>
 <tr>
 <td>ファイル・システム</td>
@@ -1294,14 +1465,15 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 カスタマイズされたストレージ・クラスを作成し、PVC でそのストレージ・クラスを使用することができます。
 {: shortdesc}
 
-{{site.data.keyword.containerlong_notm}} では、特定の層と構成のブロック・ストレージをプロビジョンするための、[事前定義ストレージ・クラス](#storageclass_reference)が用意されています。状況に応じて、それらの事前定義ストレージ・クラスではカバーされない、異なる構成のストレージをプロビジョンすることができます。このトピックの例では、カスタマイズ・ストレージ・クラスのサンプルを示します。
+{{site.data.keyword.containerlong_notm}} では、特定の層と構成のブロック・ストレージをプロビジョンするための、[事前定義ストレージ・クラス](#storageclass_reference)が用意されています。 状況に応じて、それらの事前定義ストレージ・クラスではカバーされない、異なる構成のストレージをプロビジョンすることができます。 このトピックの例では、カスタマイズ・ストレージ・クラスのサンプルを示します。
 
-カスタマイズ・ストレージ・クラスを作成するには、[ストレージ・クラスのカスタマイズ](cs_storage_basics.html#customized_storageclass)を参照してください。それから、[カスタマイズ・ストレージ・クラスを PVC で使用](#add_block)します。
+カスタマイズ・ストレージ・クラスを作成するには、[ストレージ・クラスのカスタマイズ](cs_storage_basics.html#customized_storageclass)を参照してください。 それから、[カスタマイズ・ストレージ・クラスを PVC で使用](#add_block)します。
 
 ### 複数ゾーン・クラスターのゾーンを指定する
 {: #multizone_yaml}
 
-**注:** {{site.data.keyword.Bluemix_notm}} Block Storage プラグインのバージョン 1.0.0 を使用する場合、または特定のゾーンで[ブロック・ストレージを静的にプロビジョンする](#existing_block)場合には、カスタマイズ・ストレージ・クラスを使用します。その他の場合は、[PVC で直接ゾーンを指定してください](#add_block)。  
+{{site.data.keyword.Bluemix_notm}} Block Storage プラグインのバージョン 1.0.0 を使用する場合、または特定のゾーンで[ブロック・ストレージを静的にプロビジョンする](#existing_block)場合には、カスタマイズ・ストレージ・クラスを使用します。 その他の場合は、[PVC で直接ゾーンを指定してください](#add_block)。
+{: note}
 
 次の `.yaml` ファイルでカスタマイズしているストレージ・クラスは、非 retain の `ibm-block-silver` ストレージ・クラスに基づいています。`type` は `"Endurance"`、`iopsPerGB` は `4`、`sizeRange` は `"[20-12000]Gi"`、`reclaimPolicy` の設定は `"Delete"` です。 ゾーンは `dal12` と指定しています。 各項目に指定可能な値を選択するときには、`ibmc` ストレージ・クラスについての前述の情報が参考になります。 </br>
 

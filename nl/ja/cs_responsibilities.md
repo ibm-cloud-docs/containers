@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,7 +50,7 @@ lastupdated: "2018-10-25"
 - [ワーカー・プールのサイズを変更することで、クラスターの容量を追加または削除する](cs_clusters.html#add_workers)
 - [VLAN のスパンニングを有効にし、ゾーン間で複数ゾーン・ワーカー・プールのバランスを維持する](cs_clusters_planning.html#ha_clusters)
 - [クラスターのネットワーク分離のために IBM Cloud インフラストラクチャー (SoftLayer) でパブリック VLAN とプライベート VLAN を作成する ](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [すべてのワーカー・ノードに、Kubernetes マスター URL へのネットワーク接続を設定する](cs_firewall.html#firewall) <p>**注**: ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。 詳しくは、[プライベート専用クラスター・ネットワーキングの計画](cs_network_cluster.html#private_vlan)を参照してください。 </p>
+- [すべてのワーカー・ノードに、Kubernetes マスター URL へのネットワーク接続を設定する](cs_firewall.html#firewall) <p class="note">ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 ワーカー・ノードにプライベート VLAN だけをセットアップする場合は、代わりのネットワーク接続ソリューションを構成する必要があります。 詳しくは、[プライベート専用クラスター・ネットワーキングの計画](cs_network_cluster.html#private_vlan)を参照してください。 </p>
 - [Kubernetes バージョンの更新が利用可能になったら、マスター kube-apiserver を更新する](cs_cluster_update.html#master)
 - [ワーカー・ノードをメジャー・バージョン、マイナー・バージョン、およびパッチ・バージョンについて常に最新の状態に保持する](cs_cluster_update.html#worker_node)
 - [トラブルが発生したワーカー・ノードをリカバリーする。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`ibmcloud ks` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](cs_cli_reference.html#cs_worker_reboot)

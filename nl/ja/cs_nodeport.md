@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -44,7 +47,8 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
 
 4. 要求が、アプリがデプロイされたポッドのプライベート IP アドレスに転送されます。 複数のアプリ・インスタンスがクラスターにデプロイされている場合、NodePort サービスは、アプリ・ポッド間で要求をルーティングします。
 
-**注:** ワーカー・ノードのパブリック IP アドレスは永続的なアドレスではありません。 ワーカー・ノードが削除されたり再作成されたりすると、新しいパブリック IP アドレスがワーカー・ノードに割り当てられます。 NodePort サービスは、アプリのパブリック・アクセスをテストする場合や、パブリック・アクセスが短期間だけ必要な場合に使用できます。 安定的なパブリック IP アドレスによってサービスの可用性を高める必要がある場合は、[LoadBalancer サービス](cs_loadbalancer.html)または [Ingress](cs_ingress.html) を使用してアプリを公開してください。
+ワーカー・ノードのパブリック IP アドレスは永続的なアドレスではありません。 ワーカー・ノードが削除されたり再作成されたりすると、新しいパブリック IP アドレスがワーカー・ノードに割り当てられます。 NodePort サービスは、アプリのパブリック・アクセスをテストする場合や、パブリック・アクセスが短期間だけ必要な場合に使用できます。 安定的なパブリック IP アドレスによってサービスの可用性を高める必要がある場合は、[LoadBalancer サービス](cs_loadbalancer.html)または [Ingress](cs_ingress.html) を使用してアプリを公開してください。
+{: note}
 
 <br />
 
@@ -57,7 +61,10 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
 
 まだアプリの準備ができていない場合は、[Guestbook ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml) という名前の Kubernetes サンプル・アプリを使用できます。
 
-1.  アプリの構成ファイルで、[service ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/service/) セクションを定義します。 **注**: Guestbook サンプルで、フロントエンド・サービス・セクションは構成ファイル内に存在しています。 Guestbook アプリを外部で使用できるようにするには、NodePort タイプと、30000 から 32767 の範囲の NodePort をフロントエンド・サービス・セクションに追加します。
+1.  アプリの構成ファイルで、[service ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/service/) セクションを定義します。
+
+    Guestbook サンプルで、フロントエンド・サービス・セクションは構成ファイル内に存在しています。 Guestbook アプリを外部で使用できるようにするには、NodePort タイプと、30000 から 32767 の範囲の NodePort をフロントエンド・サービス・セクションに追加します。
+    {: tip}
 
     例:
 
@@ -113,7 +120,7 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
 
 **次の作業:**
 
-アプリをデプロイする時に、いずれかのワーカー・ノードのパブリック IP アドレスと NodePort を使用して、ブラウザーでそのアプリにアクセスするためのパブリック URL を作成できます。 ワーカー・ノードをプライベート VLAN にのみ接続した場合は、プライベート NodePort サービスが作成されているので、q ワーカー・ノードのプライベート IP アドレスを使用してアクセスできます。
+アプリをデプロイする時に、いずれかのワーカー・ノードのパブリック IP アドレスと NodePort を使用して、ブラウザーでそのアプリにアクセスするためのパブリック URL を作成できます。 ワーカー・ノードをプライベート VLAN にのみ接続した場合は、プライベート NodePort サービスが作成されているので、ワーカー・ノードのプライベート IP アドレスを使用してアクセスできます。
 
 1.  クラスター内のワーカー・ノードのパブリック IP アドレスを取得します。 プライベート・ネットワーク上のワーカー・ノードにアクセスする場合は、代わりにプライベート IP アドレスを取得してください。
 
@@ -155,7 +162,9 @@ NodePort タイプの Kubernetes サービスを作成してアプリを公開�
     ```
     {: screen}
 
-    この例では、NodePort は `30872` です。</br>
-    **注:** **Endpoints** セクションに `<none>` と示されている場合は、`<selectorkey>` および `<selectorvalue>` を確認してください。これは、NodePort サービスの `spec.selector` セクションで使用します。 これが、デプロイメント yaml の `spec.template.metadata.labels` セクションで使用した_キーと値_ のペアと同じであることを確認してください。
+    この例では、NodePort は `30872` です。
+
+    **Endpoints** セクションに `<none>` と表示される場合は、NodePort サービスの `spec.selector` セクションで使用している `<selectorkey>` および `<selectorvalue>` を確認してください。これが、デプロイメント yaml の `spec.template.metadata.labels` セクションで使用した_キーと値_ のペアと同じであることを確認してください。
+    {: note}
 
 3.  ワーカー・ノードの IP アドレスの 1 つと NodePort を使用して URL を作成します。 例: `http://192.0.2.23:30872`

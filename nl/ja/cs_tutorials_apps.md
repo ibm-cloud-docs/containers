@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -56,6 +59,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 ## 前提条件
 
 * [チュートリアル: Kubernetes クラスターの作成](cs_tutorials.html#cs_cluster_tutorial)
+* [container-registry プラグイン](/docs/services/Registry/index.html#registry_cli_install)をインストールします。
 
 
 ## レッスン 1: アプリの 1 つのインスタンスを Kubernetes クラスターにデプロイする
@@ -87,9 +91,9 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
     ```
     {: pre}
 
-3. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+3. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
-5.  {{site.data.keyword.registryshort_notm}} CLI にログインします。 **注**: container-registry プラグインが[インストールされている](/docs/services/Registry/index.html#registry_cli_install)ことを確認してください。
+5.  {{site.data.keyword.registryshort_notm}} CLI にログインします。
 
     ```
     ibmcloud cr login
@@ -230,7 +234,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
         ```
         {: screen}
 
@@ -246,7 +250,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 
 11. [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。
 
-    [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
+    [{{site.data.keyword.Bluemix_notm}} コンソール](https://console.bluemix.net/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
     {: tip}
 
 12. **「ワークロード」**タブで、作成したリソースを表示します。
@@ -373,7 +377,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
   ```
   {: screen}
 
-7.  ポッドの状況を確認して、Kubernetes のアプリの正常性をモニターします。 この状況は、CLI または Kubernetes ダッシュボード GUI で確認できます。
+7.  ポッドの状況を確認して、Kubernetes のアプリの正常性をモニターします。 この状況は、CLI または Kubernetes ダッシュボードで確認できます。
 
     *  **CLI を使用する場合**: 状況が変更されるときに、ポッドに何が起こっているのかを確認します。
        ```
@@ -381,7 +385,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
        ```
        {: pre}
 
-    *  **GUI を使用する場合**:
+    *  **Kubernetes ダッシュボードを使用する場合**:
 
        1.  [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。
        2.  **「ワークロード」**タブで、作成したリソースを表示します。 このタブから、ヘルス・チェックの作動状況を継続的にリフレッシュして確認できます。 **「ポッド (Pods)」**セクションには、ポッド内のコンテナーの再作成時にポッドが再始動した回数が表示されます。 ダッシュボードで以下のエラー・メッセージがキャッチされた場合は、ヘルス・チェックで問題が検出されています。 数分待ってから再度リフレッシュしてみてください。 各ポッドの再始動回数が変わっているはずです。
@@ -522,7 +526,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: codeblock}
 
-    2.  watson デプロイメントの volumes セクションで、前のチュートリアルで作成した {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットの名前を更新します。 Kubernetes シークレットをボリュームとしてデプロイメントにマウントすると、{{site.data.keyword.Bluemix_notm}} サービスの資格情報を、ポッドで実行されるコンテナーから使用できるようになります。 このチュートリアルの {{site.data.keyword.watson}} アプリ・コンポーネントは、ボリューム・マウント・パスを使用してサービス資格情報を検索するように構成されています。
+    2.  watson デプロイメントの volumes セクションで、前のチュートリアルで作成した {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットの名前を更新します。 Kubernetes シークレットをボリュームとしてデプロイメントにマウントすると、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) の API キーを、ポッドで実行されるコンテナーから使用できるようになります。このチュートリアルの {{site.data.keyword.watson}} アプリ・コンポーネントは、ボリューム・マウント・パスを使用して API キーを検索するように構成されています。
 
         ```
         volumes:

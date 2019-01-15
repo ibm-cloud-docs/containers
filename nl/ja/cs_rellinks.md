@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -26,15 +29,15 @@ lastupdated: "2018-10-25"
 
 **一般**
 
-- [クラスター用の料金カリキュレーター ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
+- [クラスターのコスト見積もりツール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
 
 <br />
 
 
 **REST API**
 
-- [クラスター用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger)
-- [クラスター用の REST API JSON ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api-json)
+- [クラスター用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api/)
+- [クラスター用の REST API JSON ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api/swagger.json)
 - [クラスターでのロギング用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [クラスターでの Ingress アプリケーション・ロード・バランサーの管理用 REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 
@@ -74,7 +77,7 @@ lastupdated: "2018-10-25"
 
 **用語集**
 
-- [{{site.data.keyword.Bluemix_notm}} 用語集](/docs/overview/glossary/index.html#glossary)
+- [{{site.data.keyword.Bluemix_notm}} 用語集](/docs/overview/glossary/glossary.html#glossary)
 - [Kubernetes 用語集![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Docker 用語集![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/glossary/)
 
@@ -85,7 +88,8 @@ lastupdated: "2018-10-25"
 {: #registry}
 
 - [{{site.data.keyword.registryshort_notm}} の資料](/docs/services/Registry/index.html)
-- [REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://registry.ng.bluemix.net/api/doc/)
+- [{{site.data.keyword.registryshort_notm}}REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/apidocs/container-registry)
+- [脆弱性アドバイザー REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/apidocs/container-registry/va)
 
 <br />
 
@@ -93,7 +97,7 @@ lastupdated: "2018-10-25"
 ## フォローする
 {: #follow}
 
-- [Twitter ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://twitter.com/hashtag/ibmcontainers)
+- [Twitter ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://twitter.com/hashtag/IKS)
 - [Developers Community の記事 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/tag/containers/)
 - [Microservices.TV ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/tv/microservices/)
 

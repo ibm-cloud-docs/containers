@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,15 +50,15 @@ Kubernetes クラスターで稼動する Docker コンテナーに可用性の�
 **始める前に**
 
 自分に合った [{{site.data.keyword.Bluemix_notm}} アカウント](https://console.bluemix.net/registration/)・タイプを取得します。
-* **従量課金またはサブスクリプション**: 無料のトライアル・クラスターを作成できます。 IBM Cloud インフラストラクチャー (SoftLayer) リソースをプロビジョンして、標準クラスターで作成して使用することもできます。
-* **ライト**: 無料クラスターも標準クラスターも作成できません。 従量課金またはサブスクリプションに[アカウントをアップグレード](/docs/account/account_faq.html#changeacct)してください。
+* **有料 (従量課金またはサブスクリプション)**: 無料のトライアル・クラスターを作成できます。IBM Cloud インフラストラクチャー (SoftLayer) リソースをプロビジョンして、標準クラスターで作成して使用することもできます。
+* **ライト**: 無料クラスターも標準クラスターも作成できません。 有料アカウントに[アカウントをアップグレード](/docs/account/account_faq.html#changeacct)してください。
 * **トライアル (教育目的)**: 無料クラスターを 1 つ作成し、サービスに慣れるために 30 日間使用できます。
 
 フリー・クラスターを作成するには、以下のようにします。
 
-1.  [{{site.data.keyword.Bluemix_notm}} **カタログ** ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/catalog/?category=containers) で、**「{{site.data.keyword.containerlong_notm}}」**を選択し、**「作成」**をクリックします。 クラスター構成ページが開きます。 デフォルトでは、**「フリー・クラスター (Free cluster)」**が選択されています。
+1.  [{{site.data.keyword.Bluemix_notm}} **カタログ** ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/catalog/?category=containers) で、**「{{site.data.keyword.containershort_notm}}」**を選択し、**「作成」**をクリックします。 クラスター構成ページが開きます。 デフォルトでは、**「フリー・クラスター (Free cluster)」**が選択されています。
 
-2. 固有の名前をクラスターに付けます。
+2.  固有の名前をクラスターに付けます。
 
 3.  **「クラスターの作成」**をクリックします。 ワーカー・ノードを 1 つ含むワーカー・プールが作成されます。 ワーカー・ノードがプロビジョンするまでに数分かかることがありますが、「**ワーカー・ノード**」タブで進行状況を確認できます。 状況が `Ready` になったら、クラスターを使い始めることができます。
 

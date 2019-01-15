@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -24,11 +27,77 @@ lastupdated: "2018-10-25"
 {{site.data.keyword.containerlong}} の最新情報を確認しましょう。 知っておくべき新機能、試してみたい便利な方法、他の開発者が役に立つと感じている、よく閲覧されたトピックをご覧ください。
 {:shortdesc}
 
+## 2018 年 12 月によく閲覧されたトピック
+{: #dec18}
+
+<table summary="この表には、よく閲覧されたトピックを示しています。行は左から右に読みます。1 列目は日付、2 列目は機能のタイトル、3 列目は説明です。">
+<caption>2018 年 12 月によく閲覧されたコンテナーと Kubernetes クラスターについてのトピック</caption>
+<thead>
+<th>日</th>
+<th>タイトル</th>
+<th>説明</th>
+</thead>
+<tbody>
+<tr>
+<td>12 月 6 日</td>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)を参照してください。**注**: Kubernetes バージョン 1.11 以降を実行するクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、Sysdig は現在 `containerd` をサポートしていないため、すべてのコンテナー・メトリックが収集されるわけではありません。</td>
+</tr>
+</tbody></table>
+
+## 2018 年 11 月によく閲覧されたトピック
+{: #nov18}
+
+<table summary="この表には、よく閲覧されたトピックを示しています。行は左から右に読みます。1 列目は日付、2 列目は機能のタイトル、3 列目は説明です。">
+<caption>2018 年 11 月によく閲覧されたコンテナーと Kubernetes クラスターについてのトピック</caption>
+<thead>
+<th>日</th>
+<th>タイトル</th>
+<th>説明</th>
+</thead>
+<tbody>
+<tr>
+<td>11 月 29 日</td>
+<td>[チェンナイのゾーンの提供開始](cs_regions.html)</td>
+<td>北アジア太平洋地域のクラスターの新しいゾーンとして、インドのチェンナイが追加されました。ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のゾーンに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
+</tr>
+<tr>
+<td>11 月 27 日</td>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>LogDNA をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、ポッド・コンテナーのログを管理することで、ログ管理機能をクラスターに追加できます。詳しくは、[{{site.data.keyword.loganalysisfull_notm}} with LogDNA による Kubernetes クラスター・ログの管理](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube) を参照してください。</td>
+</tr>
+<tr>
+<td>11 月 7 日</td>
+<td>ロード・バランサー 2.0 (ベータ)</td>
+<td>クラスター・アプリをパブリックに安全に公開するために、[ロード・バランサー 1.0 と 2.0](cs_loadbalancer.html#planning_ipvs) の間で選択できるようになりました。</td>
+</tr>
+<tr>
+<td>11 月 7 日</td>
+<td>Kubernetes バージョン 1.12 の提供開始</td>
+<td>[Kubernetes バージョン  1.12](cs_versions.html#cs_v112) を実行するクラスターに更新またはこれを作成できるようになりました。1.12 クラスターの Kubernetes マスターは、デフォルトで高可用性です。</td>
+</tr>
+<tr>
+<td>11 月 7 日</td>
+<td>Kubernetes バージョン 1.10 を実行するクラスターの高可用性マスター</td>
+<td>Kubernetes バージョン 1.10 を実行するクラスターで高可用性マスターを使用できます。1.11 クラスターに関する過去の情報で説明されているすべてのメリットが 1.10 クラスターに適用されます。また、実行する必要がある[準備手順](cs_versions.html#110_ha-masters)も適用されます。</td>
+</tr>
+<tr>
+<td>11 月 1 日</td>
+<td>Kubernetes バージョン 1.11 を実行するクラスターの高可用性マスター</td>
+<td>単一ゾーンのマスターは高可用性です。クラスター更新時などの停止を防ぐために、Kubernetes API サーバー、etcd、スケジューラー、およびコントローラー・マネージャー用に別々の物理ホスト上にレプリカが配置されます。クラスターが複数ゾーン対応ゾーンにある場合は、高可用性マスターも複数ゾーンに分散されるので、ゾーン障害から保護されます。<br>実行する必要があるアクションについては、[高可用性クラスター・マスターへの更新](cs_versions.html#ha-masters)を参照してください。これらの準備アクションは、以下の場合に適用されます。<ul>
+<li>ファイアウォールまたはカスタム Calico ネットワーク・ポリシーがある場合。</li>
+<li>ワーカー・ノードでホスト・ポート `2040` または `2041` を使用している場合。</li>
+<li>マスターへのクラスター内アクセス用にクラスターのマスター IP アドレスを使用していた場合。</li>
+<li>Calico ポリシーの作成などのために、Calico API または CLI (`calicoctl`) を呼び出す自動化機能がある場合。</li>
+<li>Kubernetes または Calico ネットワーク・ポリシーを使用して、ポッドからマスターへの発信アクセスを制御している場合。</li></ul></td>
+</tr>
+</tbody></table>
+
 ## 2018 年 10 月によく閲覧されたトピック
 {: #oct18}
 
 <table summary="この表には、よく閲覧されたトピックを示しています。行は左から右に読みます。1 列目は日付、2 列目は機能のタイトル、3 列目は説明です。">
-<caption>2018 年 8 月によく閲覧されたコンテナーと Kubernetes クラスターについてのトピック</caption>
+<caption>2018 年 10 月によく閲覧されたコンテナーと Kubernetes クラスターについてのトピック</caption>
 <thead>
 <th>日</th>
 <th>タイトル</th>
@@ -38,12 +107,12 @@ lastupdated: "2018-10-25"
 <tr>
 <td>10 月 25 日</td>
 <td>[ミラノでゾーンが使用可能に](cs_regions.html)</td>
-<td>中欧地域の有料クラスターの新しいゾーンとして、イタリアのミラノが加わりました。これまでミラノは、無料クラスターでのみ使用可能でした。ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のゾーンに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
+<td>中欧地域の有料クラスターの新しいゾーンとして、イタリアのミラノが加わりました。 これまでミラノは、無料クラスターでのみ使用可能でした。 ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のゾーンに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
 </tr>
 <tr>
 <td>10 月 22 日</td>
 <td>[新しいロンドン複数ゾーン・ロケーション `lon05`](cs_regions.html#zones)</td>
-<td>複数ゾーンの大都市ロンドンは、`lon02` ゾーンから、新しい `lon05` ゾーンに置き換えられました。これは、`lon02` より多くのインフラストラクチャー・リソースを備えています。新しい複数ゾーン・クラスターを作成するときは、`lon05` を使用してください。`lon02` を使用した既存のクラスターもサポートされますが、新しい複数ゾーン・クラスターでは代わりに `lon05` を使用する必要があります。</td>
+<td>複数ゾーンの大都市ロンドンは、`lon02` ゾーンから、新しい `lon05` ゾーンに置き換えられました。これは、`lon02` より多くのインフラストラクチャー・リソースを備えています。 新しい複数ゾーン・クラスターを作成するときは、`lon05` を使用してください。 `lon02` を使用した既存のクラスターもサポートされますが、新しい複数ゾーン・クラスターでは代わりに `lon05` を使用する必要があります。</td>
 </tr>
 <tr>
 <td>10 月 5 日</td>
@@ -53,12 +122,12 @@ lastupdated: "2018-10-25"
 <tr>
 <td>10 月 4 日</td>
 <td>[{{site.data.keyword.registrylong}} が {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam) と統合される</td>
-<td>IAM を使用して、レジストリー・リソースへのアクセス (イメージのプル、プッシュ、作成など) を制御できます。クラスターを作成するときに、レジストリー・トークンも作成することによって、クラスターがレジストリーと連携できるようにします。したがって、クラスターを作成するには、レジストリー**管理者**のプラットフォーム管理役割が必要です。ご使用のレジストリー・アカウントで IAM を有効にするには、[Enabling policy enforcement for existing users](/docs/services/Registry/registry_users.html#existing_users) を参照してください。</td>
+<td>{{site.data.keyword.Bluemix_notm}} IAM を使用して、レジストリー・リソースへのアクセス (イメージのプル、プッシュ、作成など) を制御できます。 クラスターを作成するときに、レジストリー・トークンも作成することによって、クラスターがレジストリーと連携できるようにします。 したがって、クラスターを作成するには、アカウント・レベルのレジストリーの**管理者**のプラットフォーム管理役割が必要です。ご使用のレジストリー・アカウントで {{site.data.keyword.Bluemix_notm}} IAM を有効にするには、[Enabling policy enforcement for existing users](/docs/services/Registry/registry_users.html#existing_users) を参照してください。</td>
 </tr>
 <tr>
 <td>10 月 1 日</td>
 <td>[リソース・グループ](cs_users.html#resource_groups)</td>
-<td>リソース・グループを使用すると、{{site.data.keyword.Bluemix_notm}} リソースをパイプライン、部門、その他のグループに分離して、アクセス権限の割り当てや使用量の課金に役立てることができます。{{site.data.keyword.containerlong_notm}} は、`default` グループや、自分で作成した他のリソース・グループでのクラスターの作成をサポートするようになりました。</td>
+<td>リソース・グループを使用すると、{{site.data.keyword.Bluemix_notm}} リソースをパイプライン、部門、その他のグループに分離して、アクセス権限の割り当てや使用量の課金に役立てることができます。 {{site.data.keyword.containerlong_notm}} は、`default` グループや、自分で作成した他のリソース・グループでのクラスターの作成をサポートするようになりました。</td>
 </tr>
 </tbody></table>
 
@@ -66,7 +135,7 @@ lastupdated: "2018-10-25"
 {: #sept18}
 
 <table summary="この表には、よく閲覧されたトピックを示しています。行は左から右に読みます。1 列目は日付、2 列目は機能のタイトル、3 列目は説明です。">
-<caption>2018 年 8 月によく閲覧されたコンテナーと Kubernetes クラスターについてのトピック</caption>
+<caption>2018 年 9 月によく閲覧されたコンテナーと Kubernetes クラスターについてのトピック</caption>
 <thead>
 <th>日</th>
 <th>タイトル</th>
@@ -77,7 +146,7 @@ lastupdated: "2018-10-25"
 <td>9 月 25 日</td>
 <td>[新しいゾーンが使用可能に](cs_regions.html)</td>
 <td>アプリのデプロイ先として選択できるオプションが増えました。
-<ul><li>サンノゼが、米国南部地域の 2 つの新しいゾーン `sjc03` および `sjc04` として加わりました。ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のロケーションに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</li>
+<ul><li>サンノゼが、米国南部地域の 2 つの新しいゾーン `sjc03` および `sjc04` として加わりました。 ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のロケーションに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</li>
 <li>北アジア太平洋地域の東京で、2 つの新しい `tok04` および `tok05` ゾーンを使用して、[複数ゾーン・クラスターを作成](cs_clusters_planning.html#multizone)できるようになりました。</li></ul></td>
 </tr>
 <tr>
@@ -190,8 +259,8 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
 <td>5 月 1 日</td>
-<td>[GUI からの Kubernetes ダッシュボードのデプロイ](cs_app.html#cli_dashboard)</td>
-<td>ワンクリックで Kubernetes ダッシュボードにアクセスしたいと思ったことはありませんか。 {{site.data.keyword.Bluemix_notm}} GUI の**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンをお試しください。</td>
+<td>[コンソールからの Kubernetes ダッシュボードのデプロイ](cs_app.html#cli_dashboard)</td>
+<td>ワンクリックで Kubernetes ダッシュボードにアクセスしたいと思ったことはありませんか。 {{site.data.keyword.Bluemix_notm}} コンソールの**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンをお試しください。</td>
 </tr>
 </tbody></table>
 
@@ -282,7 +351,7 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
 <td>2 月 23 日</td>
-<td>Web UI での[ロギング](cs_health.html#view_logs)および[メトリック](cs_health.html#view_metrics)の表示</td>
+<td>Web コンソールでの[ロギング](cs_health.html#view_logs)および[メトリック](cs_health.html#view_metrics)の表示</td>
 <td>改善された Web UI を使用して、クラスターとそのコンポーネントのログとメトリック・データを簡単に表示できます。 アクセス方法については、クラスターの詳細ページを参照してください。</td>
 </tr>
 <tr>

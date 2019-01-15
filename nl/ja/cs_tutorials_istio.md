@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -41,8 +44,8 @@ lastupdated: "2018-10-25"
 
 ## 前提条件
 
--  [IBM Cloud CLI、{{site.data.keyword.containerlong_notm}} プラグイン、および Kubernetes CLI をインストールします](cs_cli_install.html#cs_cli_install_steps)。 Istio には Kubernetes バージョン 1.9 以上が必要です。 必ず、ご使用のクラスターの Kubernetes バージョンに一致する `kubectl` CLI バージョンをインストールしてください。
--  [Kubernetes バージョン 1.9 以降を実行するクラスターを作成](cs_clusters.html#clusters_cli)するか、[既存のクラスターをバージョン 1.9 に更新](cs_versions.html#cs_v19)します。
+-  [IBM Cloud CLI、{{site.data.keyword.containerlong_notm}} プラグイン、および Kubernetes CLI をインストールします](cs_cli_install.html#cs_cli_install_steps)。 必ず、ご使用のクラスターの Kubernetes バージョンに一致する `kubectl` CLI バージョンをインストールしてください。
+-  [クラスターを作成します](cs_clusters.html#clusters_cli)。 
 -  [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
 
 ## レッスン 1: Istio をダウンロードしてインストールする

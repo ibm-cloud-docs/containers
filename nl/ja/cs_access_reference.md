@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 
 ---
@@ -14,6 +14,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # ユーザー・アクセス許可
@@ -21,27 +24,30 @@ lastupdated: "2018-10-25"
 
 
 
-[クラスター許可を割り当てる](cs_users.html)とき、ユーザーにどの役割を割り当てる必要があるか判断が難しい場合があります。以下のセクションの表を使用して、{{site.data.keyword.containerlong}} で一般的な作業を実行するために最低限必要な許可レベルを判別してください。
+[クラスター許可を割り当てる](cs_users.html)とき、ユーザーにどの役割を割り当てる必要があるか判断が難しい場合があります。 以下のセクションの表を使用して、{{site.data.keyword.containerlong}} で一般的な作業を実行するために最低限必要な許可レベルを判別してください。
 {: shortdesc}
 
-## IAM プラットフォームと Kubernetes RBAC
+## {{site.data.keyword.Bluemix_notm}} IAM プラットフォームと Kubernetes RBAC
 {: #platform}
 
-{{site.data.keyword.containerlong_notm}} は、{{site.data.keyword.Bluemix_notm}} の IAM (ID およびアクセス管理) 役割を使用するように構成されています。IAM プラットフォーム役割によって、クラスターでユーザーが実行できるアクションが決まります。IAM プラットフォーム役割が割り当てられたユーザーには必ず、デフォルトの名前空間での対応する Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。さらに、IAM プラットフォーム役割により、ユーザーの基本的なインフラストラクチャー許可が自動的に設定されます。IAM ポリシーを設定するには、[IAM プラットフォーム許可の割り当て](cs_users.html#platform)を参照してください。RBAC 役割について詳しくは、[RBAC 許可の割り当て](cs_users.html#role-binding)を参照してください。
+{{site.data.keyword.containerlong_notm}} は、{{site.data.keyword.Bluemix_notm}} の IAM (ID およびアクセス管理) 役割を使用するように構成されています。 {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割によって、クラスターでユーザーが実行できるアクションが決まります。 プラットフォーム役割が割り当てられたユーザーには必ず、デフォルトの名前空間での対応する Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。 さらに、プラットフォーム役割により、ユーザーの基本的なインフラストラクチャー許可が自動的に設定されます。 ポリシーを設定するには、[{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム許可の割り当て](cs_users.html#platform)を参照してください。RBAC 役割について詳しくは、[RBAC 許可の割り当て](cs_users.html#role-binding)を参照してください。
+{: shortdesc}
 
-次の表は、各 IAM プラットフォーム役割によって付与されるクラスター管理許可と、対応する RBAC 役割での Kubernetes リソース許可を示しています。
+次の表は、各プラットフォーム役割によって付与されるクラスター管理許可と、対応する RBAC 役割での Kubernetes リソース許可を示しています。
 
-<table>
-  <tr>
-    <th>IAM プラットフォーム役割</th>
+<table summary="この表は、IAM プラットフォーム役割でのユーザー許可と、対応する RBAC ポリシーを示しています。行は左から右へ読みます。1 列目は IAM プラットフォーム役割、2 列目はクラスター許可、3 列目は対応する RBAC 役割です。">
+<caption>プラットフォーム別のクラスター管理許可と RBAC 役割</caption>
+<thead>
+    <th>プラットフォームの役割</th>
     <th>クラスター管理許可</th>
     <th>対応する RBAC 役割とリソース許可</th>
-  </tr>
+</thead>
+<tbody>
   <tr>
     <td>**Viewer**</td>
     <td>
       クラスター:<ul>
-        <li>リソース・グループおよび地域の IAM API キーの所有者の名前と E メール・アドレスの表示</li>
+        <li>リソース・グループおよび地域の {{site.data.keyword.Bluemix_notm}} IAM API キーの所有者の名前と E メール・アドレスの表示</li>
         <li>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするために {{site.data.keyword.Bluemix_notm}} アカウントで複数の異なる資格情報を使用する場合は、インフラストラクチャー・ユーザー名の表示</li>
         <li>すべてのクラスター、ワーカー・ノード、ワーカー・プール、クラスター内のサービス、Webhook のリスト表示または詳細の表示</li>
         <li>インフラストラクチャー・アカウントの VLAN スパンニング状況の表示</li>
@@ -106,7 +112,7 @@ lastupdated: "2018-10-25"
         <li>{{site.data.keyword.keymanagementservicefull}} を使用した Kubernetes シークレットの暗号化</li>
         <li>リンクされた IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントの API キーの設定</li>
         <li>別の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントのインフラストラクチャー資格情報の設定、表示、削除</li>
-        <li>このアカウントに属する他の既存ユーザーの IAM プラットフォーム役割の割り当てと変更</li>
+        <li>このアカウントに属する他の既存ユーザーの {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割の割り当てと変更</li>
         <li>すべての地域のすべての {{site.data.keyword.containerlong_notm}} インスタンス (クラスター) に対して設定された場合: このアカウントに属する使用可能なすべての VLAN のリスト表示</ul>
       ロギング:<ul>
         <li>`kube-audit` タイプのログ転送構成の作成と更新</li>
@@ -116,7 +122,7 @@ lastupdated: "2018-10-25"
         <li>クラスター内のすべての ALB シークレットのリスト表示または詳細の表示</li>
         <li>{{site.data.keyword.cloudcerts_long_notm}} インスタンスから ALB への証明書のデプロイ</li>
         <li>クラスター内の ALB シークレットの更新または削除</li></ul>
-      <strong>注</strong>: マシン、VLAN、サブネットなどのリソースを作成するには、管理者ユーザーに**スーパーユーザー**・インフラストラクチャー役割が必要です。
+      <p class="note">マシン、VLAN、サブネットなどのリソースを作成するには、管理者ユーザーに**スーパーユーザー**・インフラストラクチャー役割が必要です。</p>
     </td>
     <td><code>ibm-admin</code> クラスター役割バインディングによって <code>cluster-admin</code> クラスター役割が適用され、以下の許可が付与されます。
       <ul><li>すべての名前空間内にあるリソースに対する読み取り/書き込みアクセス</li>
@@ -125,6 +131,7 @@ lastupdated: "2018-10-25"
       <li>アプリをだれでも利用できるようにする Ingress リソースを作成する</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 
@@ -132,15 +139,18 @@ lastupdated: "2018-10-25"
 ## Cloud Foundry の役割
 {: #cloud-foundry}
 
-Cloud Foundry の役割は、このアカウントに属する組織およびスペースにアクセス権限を付与します。{{site.data.keyword.Bluemix_notm}} の Cloud Foundry ベースのサービスのリストを表示するには、`ibmcloud service list` を実行します。詳しくは、IAM 資料に記載されている、使用可能なすべての[組織およびスペース役割](/docs/iam/cfaccess.html)、または [Cloud Foundry アクセス権限を管理する](/docs/iam/mngcf.html)ためのステップを参照してください。
+Cloud Foundry の役割は、このアカウントに属する組織およびスペースにアクセス権限を付与します。 {{site.data.keyword.Bluemix_notm}} の Cloud Foundry ベースのサービスのリストを表示するには、`ibmcloud service list` を実行します。 詳しくは、{{site.data.keyword.Bluemix_notm}} IAM 資料に記載されている、使用可能なすべての[組織およびスペース役割](/docs/iam/cfaccess.html)、または [Cloud Foundry アクセス権限を管理する](/docs/iam/mngcf.html)ためのステップを参照してください。
+{: shortdesc}
 
 次の表は、クラスター・アクション許可に必要な Cloud Foundry 役割を示しています。
 
-<table>
-  <tr>
+<table summary="次の表は、Cloud Foundry でのユーザー許可を示しています。行は左から右へ読みます。1 列目は Cloud Foundry 役割、2 列目はクラスター許可です。">
+  <caption>Cloud Foundry 役割別のクラスター管理許可</caption>
+  <thead>
     <th>Cloud Foundry 役割</th>
     <th>クラスター管理許可</th>
-  </tr>
+  </thead>
+  <tbody>
   <tr>
     <td>スペースの役割: 管理者</td>
     <td>{{site.data.keyword.Bluemix_notm}} スペースに対するユーザー・アクセスを管理する</td>
@@ -153,12 +163,14 @@ Cloud Foundry の役割は、このアカウントに属する組織およびス
       <li>クラスターのログ転送構成からのログをスペース・レベルで表示する</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 ## インフラストラクチャー役割
 {: #infra}
 
-**注**: **スーパーユーザー**・インフラストラクチャー・アクセス役割を持つユーザーが[地域とリソース・グループの API キーを設定する](cs_users.html#api_key)と、このアカウントに属する他のユーザーのインフラストラクチャー許可が IAM プラットフォーム役割によって設定されます。他のユーザーの IBM Cloud インフラストラクチャー (SoftLayer) 許可を編集する必要はありません。API キーを設定するユーザーに**スーパーユーザー**を割り当てることができない場合のみ、次の表を使用して、ユーザーの IBM Cloud インフラストラクチャー (SoftLayer) 許可をカスタマイズしてください。詳しくは、[インフラストラクチャー許可のカスタマイズ](cs_users.html#infra_access)を参照してください。
+**スーパーユーザー**・インフラストラクチャー・アクセス役割を持つユーザーが[地域とリソース・グループの API キーを設定する](cs_users.html#api_key)と、このアカウントに属する他のユーザーのインフラストラクチャー許可が {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割によって設定されます。 他のユーザーの IBM Cloud インフラストラクチャー (SoftLayer) 許可を編集する必要はありません。 API キーを設定するユーザーに**スーパーユーザー**を割り当てることができない場合のみ、次の表を使用して、ユーザーの IBM Cloud インフラストラクチャー (SoftLayer) 許可をカスタマイズしてください。 詳しくは、[インフラストラクチャー許可のカスタマイズ](cs_users.html#infra_access)を参照してください。
+{: shortdesc}
 
 次の表は、一般的な作業グループを完了するために必要なインフラストラクチャー許可を示しています。
 

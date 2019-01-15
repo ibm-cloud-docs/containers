@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -144,11 +147,11 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>OpenVPN サーバーは、マスターをワーカー・ノードに安全に接続するために OpenVPN クライアントと連携します。 この接続では、kubectl exec、attach、logs、および proxy をサポートします。</td>
+    <td>OpenVPN サーバーは、マスターをワーカー・ノードに安全に接続するために OpenVPN クライアントと連携します。 この接続は、ポッドやサービスに対する `apiserver proxy` 呼び出しと、kubelet に対する `kubectl exec`、`attach`、`logs` 呼び出しをサポートしています。</td>
     </tr>
     <tr>
     <td>etcd</td>
-    <td>etcd は、クラスターのすべての Kubernetes リソース (サービス、デプロイメント、ポッドなど) の状態を保管する、可用性の高いキー値ストアです。 etcd のデータは、IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。</td>
+    <td>etcd は、クラスターのすべての Kubernetes リソース (サービス、デプロイメント、ポッドなど) の状態を保管する、可用性の高いキー値ストアです。 etcd 内のデータは、IBM が管理する暗号化ストレージ・インスタンスにバックアップされます。</td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -170,19 +173,34 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     </thead>
     <tbody>
     <tr>
+    <td>ibm-master-proxy</td>
+    <td>kube-system</td>
+    <td>Kubernetes バージョン 1.10 以降を実行するクラスターでは、`ibm-master-proxy` が、ワーカー・ノードからの要求を、可用性の高い複数のマスター・レプリカの各 IP アドレスに転送します。単一ゾーン・クラスターのマスターの場合は、別々のホスト上に 3 つのレプリカが存在しますが、マスターの IP アドレスとドメイン名は 1 つです。複数ゾーン対応ゾーンにあるクラスターの場合、マスターの 3 つのレプリカがゾーン間に分散されます。そのため、ドメイン・ネームはクラスター・マスター全体で 1 つですが、IP アドレスはマスターごとに独自のものが登録されます。</td>
+    </tr>
+    <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>OpenVPN クライアントは、マスターをワーカー・ノードに安全に接続するために OpenVPN サーバーと連携します。 この接続では、kubectl exec、attach、logs、および proxy をサポートします。</td>
+    <td>OpenVPN クライアントは、マスターをワーカー・ノードに安全に接続するために OpenVPN サーバーと連携します。 この接続は、ポッドやサービスに対する `apiserver proxy` 呼び出しと、kubelet に対する `kubectl exec`、`attach`、`logs` 呼び出しをサポートしています。</td>
     </tr>
     <tr>
-    <td>calico-policy-controller</td>
+    <td>kubelet</td>
     <td>kube-system</td>
-    <td>Calico ポリシー・コントローラーは、インバウンドとアウトバウンドのネットワーク・トラフィックが設定されたネットワーク・ポリシーに準拠しているか監視します。 トラフィックがクラスター内で許可されていない場合は、クラスターへのアクセスはブロックされます。 Calico ポリシー・コントローラーは、クラスターのネットワーク・ポリシーを作成および設定するためにも使用されます。</td>
+    <td>kubelet は、ワーカー・ノードごとに実行されるポッドで、ワーカー・ノードで実行される各ポッドの正常性のモニタリングと、Kubernetes API サーバーが送信するイベントの監視を行うポッドです。 イベントに基づいて、kubelet は、ポッドを作成または削除し、Liveness Probe と Readiness Probe を確保し、Kubernetes API サーバーに応答としてポッドの状況を報告します。</td>
     </tr>
     <tr>
-    <td>ストレージ・プロバイダー</td>
+    <td>kube-dns</td>
     <td>kube-system</td>
-    <td>すべてのクラスターは、ファイル・ストレージをプロビジョンするために、それぞれプラグインを使用してセットアップされます。 ブロック・ストレージなどの他のアドオンのインストールを選択できます。</td>
+    <td>Kubernetes DNS は、クラスター上の DNS のポッドとサービスをスケジュールします。 コンテナーは、DNS サービスの IP を自動的に使用して、そのコンテナーによる他のポッドとサービスの検索で DNS 名を解決します。</td>
+    </tr>
+    <tr>
+    <td>calico</td>
+    <td>kube-system</td>
+    <td>Calico はクラスターのネットワーク・ポリシーを管理し、以下のようないくつかのコンポーネントで構成されています。
+    <ul>
+    <li>**calico-cni**: Calico コンテナー・ネットワーク・インターフェース (CNI) では、コンテナーのネットワーク接続を管理し、コンテナーが削除される際に割り振られているリソースを削除します。</li>
+    <li>**calico-ipam**: Calico IPAM は、コンテナーの IP アドレス割り当てを管理します。</li>
+    <li>**calico-node**: Calico ノードは、Calico が含まれたネットワーキング・コンテナーに必要な各種コンポーネントをバンドルしてまとめるコンテナーです。</li>
+    <li>**calico-policy-controller**: Calico ポリシー・コントローラーは、インバウンドとアウトバウンドのネットワーク・トラフィックが設定されたネットワーク・ポリシーに準拠しているか監視します。 トラフィックがクラスター内で許可されていない場合は、クラスターへのアクセスはブロックされます。 Calico ポリシー・コントローラーは、クラスターのネットワーク・ポリシーを作成および設定するためにも使用されます。</li></ul></td>
     </tr>
     <tr>
     <td>kube-proxy</td>
@@ -192,12 +210,7 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>Kubernetes ダッシュボードは、クラスター内で実行中のアプリケーションとクラスターをユーザーが管理およびトラブルシューティングできるようにする Web ベースの UI です。</td>
-    </tr>
-    <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>Kubernetes DNS は、クラスター上の DNS のポッドとサービスをスケジュールします。 コンテナーは、DNS サービスの IP を自動的に使用して、そのコンテナーによる他のポッドとサービスの検索で DNS 名を解決します。</td>
+    <td>Kubernetes ダッシュボードは、クラスター内で実行中のアプリケーションとクラスターをユーザーが管理およびトラブルシューティングできるようにする Web ベースの GUI です。</td>
     </tr>
     <tr>
     <td>heapster</td>
@@ -205,19 +218,19 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     <td>Heapster は、モニタリングとイベント・データのクラスター全体の統合機能です。 Heapster ポッドは、クラスター内のすべてのノードを検出し、各ノードの kubelet から使用量情報を照会します。 Kubernetes ダッシュボードに各種使用状況グラフがあります。</td>
     </tr>
     <tr>
-    <td>calico-node</td>
+    <td>Ingress ALB</td>
     <td>kube-system</td>
-    <td>Calico ノードは、Calico が含まれたネットワーキング・コンテナーに必要な各種コンポーネントをバンドルしてまとめるコンテナーです。</td>
+    <td>Ingress は、パブリック要求またはプライベート要求をクラスター内の複数のアプリに転送することで、クラスター内のネットワーク・トラフィックのワークロードのバランスを取るために使用できる Kubernetes サービスです。 パブリック・ネットワークまたはプライベート・ネットワークを介してアプリを公開するには、Ingress リソースを作成して、Ingress アプリケーション・ロード・バランサー (ALB) にアプリを登録する必要があります。 これにより、単一の URL または IP アドレスを使用して、複数のアプリケーションへのアクセスが可能になります。</td>
+    </tr>
+    <tr>
+    <td>ストレージ・プロバイダー</td>
+    <td>kube-system</td>
+    <td>すべてのクラスターは、ファイル・ストレージをプロビジョンするために、それぞれプラグインを使用してセットアップされます。 ブロック・ストレージなどの他のアドオンのインストールを選択できます。</td>
     </tr>
     <tr>
     <td>ロギングおよびメトリック</td>
     <td>ibm-system</td>
     <td>統合された {{site.data.keyword.loganalysislong_notm}} サービスと {{site.data.keyword.monitoringlong_notm}} サービスを使用して、ログとメトリックを処理する際に収集および保存の機能を拡張できます。</td>
-    </tr>
-    <tr>
-    <td>Ingress ALB</td>
-    <td>ibm-system</td>
-    <td>Ingress は、パブリック要求またはプライベート要求をクラスター内の複数のアプリに転送することで、クラスター内のネットワーク・トラフィックのワークロードのバランスを取るために使用できる Kubernetes サービスです。 パブリック・ネットワークまたはプライベート・ネットワークを介してアプリを公開するには、Ingress リソースを作成して、Ingress アプリケーション・ロード・バランサー (ALB) にアプリを登録する必要があります。 これにより、単一の URL または IP アドレスを使用して、複数のアプリケーションへのアクセスが可能になります。</td>
     </tr>
     <tr>
     <td>ロード・バランサー</td>
@@ -228,21 +241,6 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
     <td>アプリ・ポッドとアプリ・サービス</td>
     <td>default</td>
     <td><code>default</code> 名前空間または作成した名前空間では、ポッドおよびサービスにアプリをデプロイして、それらのポッドと通信することができます。</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>該当なし</td>
-    <td>Calico コンテナー・ネットワーク・インターフェース (CNI) では、コンテナーのネットワーク接続を管理し、コンテナーが削除される際に割り振られているリソースを削除します。</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>該当なし</td>
-    <td>Calico IPAM は、コンテナーの IP アドレス割り当てを管理します。</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>該当なし</td>
-    <td>kubelet は、ワーカー・ノードごとに実行されるポッドで、ワーカー・ノードで実行される各ポッドの正常性のモニタリングと、Kubernetes API サーバーが送信するイベントの監視を行うポッドです。 イベントに基づいて、kubelet は、ポッドを作成または削除し、Liveness Probe と Readiness Probe を確保し、Kubernetes API サーバーに応答としてポッドの状況を報告します。</td>
     </tr>
     </tbody></table></dd>
 </dl>

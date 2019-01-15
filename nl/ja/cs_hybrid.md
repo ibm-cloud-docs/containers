@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,13 +13,16 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 
 
-# {{site.data.keyword.Bluemix_notm}} Private での {{site.data.keyword.containerlong_notm}} の使用
+# ハイブリッド・クラウド
 {: #hybrid_iks_icp}
 
 {{site.data.keyword.Bluemix}} Private アカウントがある場合は、そのアカウントを使用して {{site.data.keyword.containerlong}} を含む上質な {{site.data.keyword.Bluemix_notm}} サービスをご利用いただけます。 詳しくは、[{{site.data.keyword.Bluemix_notm}} Private および IBM Public Cloud![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") でのハイブリッド・エクスペリエンス](http://ibm.biz/hybridJune2018)に関するブログを参照してください。
@@ -34,7 +37,7 @@ lastupdated: "2018-10-25"
 {: shortdesc}
 
 1.  {{site.data.keyword.containerlong}} がある標準クラスターを {{site.data.keyword.Bluemix_notm}} Public に作成するか、または既存のクラスターを使用します。 クラスターを作成するには、以下のいずれかのオプションを選択します。 
-    - [GUI から標準クラスターを作成します](cs_clusters.html#clusters_ui)。 
+    - [コンソールから標準クラスターを作成します](cs_clusters.html#clusters_ui)。 
     - [CLI から標準クラスターを作成します](cs_clusters.html#clusters_cli)。 
     - [クラウド自動化マネージャー (CAM) を使用して、事前定義テンプレート![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html) を使ってクラスターを作成します。 CAM を使用してクラスターをデプロイすると、Helm tiller が自動的にインストールされます。
 

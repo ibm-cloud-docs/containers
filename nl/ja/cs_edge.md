@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -36,10 +39,10 @@ lastupdated: "2018-10-25"
 
 開始前に、以下のことを行います。
 
-- [標準クラスターを作成します。](cs_clusters.html#clusters_cli)
-- クラスターに 1 つ以上のパブリック VLAN があることを確認してください。 エッジ・ワーカー・ノードは、プライベート VLAN だけがあるクラスターには使用できません。
-- クラスター内のすべてのゾーンにかかる[新しいワーカー・プールを作成](cs_clusters.html#add_pool)し、ゾーンごとに少なく少なくとも 2 つのワーカーがあるようにします。
-- [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。
+1. いずれかの {{site.data.keyword.Bluemix_notm}} IAM [プラットフォーム役割](cs_users.html#platform)があることを確認してください。
+2. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+3. クラスターに 1 つ以上のパブリック VLAN があることを確認してください。 エッジ・ワーカー・ノードは、プライベート VLAN だけがあるクラスターには使用できません。
+4. クラスター内のすべてのゾーンにかかる[新しいワーカー・プールを作成](cs_clusters.html#add_pool)し、ゾーンごとに少なく少なくとも 2 つのワーカーがあるようにします。
 
 ワーカー・ノードにエッジ・ノードとしてラベル付けするには、以下のようにします。
 
@@ -64,7 +67,7 @@ lastupdated: "2018-10-25"
   ```
   {: pre}
 
-  出力から、**TYPE** が **LoadBalancer** になっているサービスを探します。各ロード・バランサー・サービスの **Namespace** と **Name** をメモします。例えば、以下の出力には 3 つのロード・バランサー・サービスがあります。`default` 名前空間内のロード・バランサー `webserver-lb` と、`kube-system` 名前空間内の Ingress ALB `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` と `public-crdf253b6025d64944ab99ed63bb4567b6-alb2` です。
+  出力から、**TYPE** が **LoadBalancer** になっているサービスを探します。 各ロード・バランサー・サービスの **Namespace** と **Name** をメモします。 例えば、以下の出力には 3 つのロード・バランサー・サービスがあります。`default` 名前空間内のロード・バランサー `webserver-lb` と、`kube-system` 名前空間内の Ingress ALB `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` と `public-crdf253b6025d64944ab99ed63bb4567b6-alb2` です。
 
   ```
   NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE
@@ -78,7 +81,7 @@ lastupdated: "2018-10-25"
   ```
   {: screen}
 
-4. 直前のステップで得られた出力を使用して、ロード・バランサーと Ingress ALB ごとに以下のコマンドを実行します。このコマンドは、ロード・バランサーや Ingress ALB をエッジ・ワーカー・ノードに再デプロイします。再デプロイする必要があるのは、パブリック・ロード・バランサーまたは ALB だけです。
+4. 直前のステップで得られた出力を使用して、ロード・バランサーと Ingress ALB ごとに以下のコマンドを実行します。 このコマンドは、ロード・バランサーや Ingress ALB をエッジ・ワーカー・ノードに再デプロイします。 再デプロイする必要があるのは、パブリック・ロード・バランサーまたは ALB だけです。
 
   ```
   kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
@@ -105,6 +108,7 @@ lastupdated: "2018-10-25"
 
 `dedicated=edge` 耐障害性の使用は、すべてのロード・バランサーと Ingress サービスが、ラベルの付けられたワーカー・ノードにのみデプロイされることを意味します。 ただし、他のワークロードがエッジ・ワーカー・ノード上で実行されてワーカー・ノードのリソースを消費することがないようにするため、[Kubernetes テイント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) を使用する必要があります。
 
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 
 1. `dedicated=edge` ラベルの付いたワーカー・ノードをすべてリストします。
 
@@ -121,4 +125,4 @@ lastupdated: "2018-10-25"
   {: pre}
   これで、`dedicated=edge` 耐障害性のあるポッドだけがエッジ・ワーカー・ノードにデプロイされます。
 
-3. [ロード・バランサー・サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。 着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。
+3. [ロード・バランサー 1.0 サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、エッジ・ワーカー・ノードにアプリ・ポッドをスケジュールするようにしてください。 着信要求を受信するには、アプリ・ポッドをエッジ・ノードにスケジュールする必要があります。

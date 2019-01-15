@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -76,7 +79,8 @@ Docker Hub などのパブリック・レジストリーは、Docker および K
 
 コンテナー化アプリのデプロイ時に Kubernetes クラスターがトークンにアクセスできるように、各トークンは Kubernetes の `imagePullSecret` 内に保管されている必要があります。 クラスターが作成されると、{{site.data.keyword.containerlong_notm}} により、グローバル・レジストリー (IBM 提供のパブリック・イメージ) および地域レジストリーのトークンが Kubernetes イメージ・プル・シークレット内に自動的に保管されます。 イメージ・プル・シークレットは、`default` Kubernetes 名前空間、その名前空間の `ServiceAccount` 内のデフォルトのシークレット・リスト、`kube-system` 名前空間に追加されます。
 
-**注:** この初期セットアップを使用すると、{{site.data.keyword.Bluemix_notm}} アカウントの名前空間にある任意のイメージのコンテナーを、クラスターの **default** 名前空間にデプロイできます。 クラスターのその他の名前空間にコンテナーをデプロイする場合や、別の {{site.data.keyword.Bluemix_notm}} 地域か別の {{site.data.keyword.Bluemix_notm}} アカウントに保管されているイメージを使用する場合は、その[クラスター用に独自の imagePullSecret を作成](#other)する必要があります。
+この初期セットアップを使用すると、{{site.data.keyword.Bluemix_notm}} アカウントの名前空間にある任意のイメージのコンテナーを、クラスターの **default** 名前空間にデプロイできます。 クラスターのその他の名前空間にコンテナーをデプロイする場合や、別の {{site.data.keyword.Bluemix_notm}} 地域か別の {{site.data.keyword.Bluemix_notm}} アカウントに保管されているイメージを使用する場合は、その[クラスター用に独自の imagePullSecret を作成](#other)する必要があります。
+{: note}
 
 レジストリー資格情報の安全性をさらに高めたいですか? クラスター管理者に連絡してクラスター内の [{{site.data.keyword.keymanagementservicefull}} を有効にして](cs_encrypt.html#keyprotect)もらい、レジストリー資格情報を保管する `imagePullSecret` などの、クラスター内の Kubernetes シークレットを暗号化します。
 {: tip}
@@ -190,7 +194,7 @@ ImagePullSecrets は、それらが作成された対象の Kubernetes 名前空
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
-   
+
    ```
    kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
@@ -349,7 +353,7 @@ imagePullSecret を作成するには、以下のようにします。
 * [Kubernetes サービス・アカウントに imagePullSecret を保管する](#store_imagePullSecret): 選択した Kubernetes 名前空間にデプロイするためにレジストリー内のイメージへのアクセス権限を付与する場合は、このオプションを使用します。
 
 開始前に、以下のことを行います。
-* [他のレジストリー、Kubernetes 名前空間、{{site.data.keyword.Bluemix_notm}} 地域、またはアカウントのイメージにアクセスするために imagePullSecret を作成します](#other)。
+* 他のレジストリー、Kubernetes 名前空間、{{site.data.keyword.Bluemix_notm}} 地域、またはアカウントのイメージにアクセスするために　[imagePullSecret を作成します](#other)。
 * [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
 
 ### ポッド・デプロイメントで `imagePullSecret` を参照する

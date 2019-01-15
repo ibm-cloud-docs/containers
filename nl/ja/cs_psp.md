@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,13 +13,16 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # ポッド・セキュリティー・ポリシーの構成
 {: #psp}
 
 [ポッド・セキュリティー・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) により、
-{{site.data.keyword.containerlong}} のポッドの作成および更新をユーザーに許可するポリシーを構成できます。 Kubernetes バージョン 1.10.3、1.9.8、1.8.13 以降のフィックスパックを実行するクラスターは、これらのポリシーを適用する `PodSecurityPolicy` アドミッション・コントローラーをサポートします。 
+{{site.data.keyword.containerlong}} のポッドの作成および更新をユーザーに許可するポリシーを構成できます。 Kubernetes バージョン 1.10.3、1.9.8、1.8.13 以降のフィックスパックを実行するクラスターは、これらのポリシーを適用する `PodSecurityPolicy` アドミッション・コントローラーをサポートします。
 {: shortdesc}
 
 古いバージョンの Kubernetes を使用していますか? 今日こそ[クラスターを更新](cs_cluster_update.html)してください。
@@ -30,13 +33,15 @@ lastupdated: "2018-10-25"
 
 `PodSecurityPolicy` アドミッション・コントローラーにより、クラスター管理者が[ポリシーを許可](#customize_psp)しないとポッドは作成できません。 ポッド・セキュリティー・ポリシーをセットアップすると意図しない副次的影響が生じる可能性があるため、ポリシーを変更した後は、必ず、デプロイメントをテストしてください。 アプリをデプロイするには、ポッドをデプロイするために必要なポッド・セキュリティー・ポリシーで、ユーザーおよびサービス・アカウントをすべて許可しておく必要があります。 例えば、[Helm](cs_integrations.html#helm_links) を使用してアプリをインストールするには、Helm tiller コンポーネントがポッドを作成するので、ポッド・セキュリティー・ポリシーで正しい許可を受けておく必要があります。
 
-{{site.data.keyword.containerlong_notm}} にアクセスするユーザーを制御しようとしていますか? [クラスター・アクセス権限の割り当て](cs_users.html#users)を参照して、IAM とインフラストラクチャーの権限を設定してください。
+{{site.data.keyword.containerlong_notm}} にアクセスするユーザーを制御しようとしていますか? [クラスター・アクセス権限の割り当て](cs_users.html#users)を参照して、{{site.data.keyword.Bluemix_notm}} IAM とインフラストラクチャーの権限を設定してください。
 {: tip}
 
 **デフォルトで設定されているポリシーはあります? 何を追加できますか? **</br>
-デフォルトで、{{site.data.keyword.containerlong_notm}} は、削除も変更もできない [{{site.data.keyword.IBM_notm}} クラスター管理のためのリソース](#ibm_psp)を `PodSecurityPolicy` アドミッション・コントローラーに構成しています。 アドミッション・コントローラーを無効にすることもできません。 
+デフォルトで、{{site.data.keyword.containerlong_notm}} は、削除も変更もできない [{{site.data.keyword.IBM_notm}} クラスター管理のためのリソース](#ibm_psp)を `PodSecurityPolicy` アドミッション・コントローラーに構成しています。 アドミッション・コントローラーを無効にすることもできません。
 
-デフォルトでは、ポッド操作はロックされていません。 代わりに、クラスターには役割ベース・アクセス制御 (RBAC) のリソースが 2 つあり、これらのリソースにより、すべての管理者、ユーザー、サービス、ノードに特権ポッドと非特権ポッドの作成が許可されています。 特定のユーザーにポッドの作成または更新を禁止したい場合は、[これらの RBAC リソースを変更するか、独自のリソースを作成する](#customize_psp)ことができます。
+デフォルトでは、ポッド操作はロックされていません。 代わりに、クラスターには役割ベース・アクセス制御 (RBAC) のリソースが 2 つあり、これらのリソースにより、すべての管理者、ユーザー、サービス、ノードに特権ポッドと非特権ポッドの作成が許可されています。 [ハイブリッド・デプロイメント](cs_hybrid.html#hybrid_iks_icp)に使用される {{site.data.keyword.Bluemix_notm}} Private パッケージの移植性のために、追加の RBAC リソースが含められています。
+
+特定のユーザーにポッドの作成または更新を禁止したい場合は、[これらの RBAC リソースを変更するか、独自のリソースを作成する](#customize_psp)ことができます。
 
 **ポリシー許可はどのように機能しますか?**</br>
 ユーザーがデプロイメントなどのコントローラーを使用するのではなく直接ポッドを作成する場合は、ユーザーの資格情報が、そのユーザーに使用許可を与えられているポッド・セキュリティー・ポリシーに照らして検証されます。 ポッド・セキュリティー要件をサポートするポリシーがない場合、ポッドは作成されません。
@@ -63,10 +68,12 @@ lastupdated: "2018-10-25"
 
 これらの RBAC ロールを変更して、管理者、ユーザー、サービス、またはノードを、ポリシーから削除したりポリシーに追加したりできます。
 
-開始前に、以下のことを行います。 
-*  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
+開始前に、以下のことを行います。
+*  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。
 *  RBAC 役割の使用方法を理解します。 詳しくは、[カスタム Kubernetes RBAC 役割によるユーザーの許可](cs_users.html#rbac)または [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview) を参照してください。
-*  **注**: デフォルト構成を変更すると、ポッドのデプロイメントやクラスターの更新などの重要なクラスター操作を禁止できます。 他のチームが依存していない非実稼働クラスターで変更内容をテストしてください。
+
+デフォルト構成を変更すると、ポッドのデプロイメントやクラスターの更新などの重要なクラスター操作を禁止できます。 他のチームが依存していない非実稼働クラスターで変更内容をテストしてください。
+{: important}
 
 **RBAC リソースを変更するには**:
 1.  RBAC クラスター役割バインディングの名前を確認します。
@@ -74,19 +81,19 @@ lastupdated: "2018-10-25"
     kubectl get clusterrolebinding
     ```
     {: pre}
-    
+
 2.  ローカルで編集できる `.yaml` ファイルとして、クラスター役割バインディングをダウンロードします。
-    
+
     ```
     kubectl get clusterrolebinding privileged-psp-user -o yaml > privileged-psp-user.yaml
     ```
     {: pre}
-    
+
     既存のポリシーのコピーを保存しておくと、変更したポリシーによって予期しない結果になった場合に復元することができます。
     {: tip}
-    
+
     **クラスター役割バインディング・ファイルの例**:
-    
+
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
@@ -115,11 +122,11 @@ lastupdated: "2018-10-25"
       name: system:authenticated
     ```
     {: codeblock}
-    
+
 3.  クラスター役割バインディング `.yaml` ファイルを編集します。 編集できる内容を理解するには、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) を参照してください。 操作の例:
-    
-    *   **サービス・アカウント**: サービス・アカウントを許可して、特定の名前空間でのみデプロイメントが行われるようにすることができます。 例えば、`kube-system` 名前空間での操作を許可するようにポリシーの有効範囲を設定した場合、クラスターの更新などの多くの重要な操作が実行可能です。 しかし、その他の名前空間での操作は許可されなくなります。 
-    
+
+    *   **サービス・アカウント**: サービス・アカウントを許可して、特定の名前空間でのみデプロイメントが行われるようにすることができます。 例えば、`kube-system` 名前空間での操作を許可するようにポリシーの有効範囲を設定した場合、クラスターの更新などの多くの重要な操作が実行可能です。 しかし、その他の名前空間での操作は許可されなくなります。
+
         特定の名前空間での操作を許可するようにポリシーの有効範囲を設定するには、`system:serviceaccounts` を `system:serviceaccount に変更します。<namespace>`.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
@@ -127,7 +134,7 @@ lastupdated: "2018-10-25"
           name: system:serviceaccount:kube-system
         ```
         {: codeblock}
-  
+
     *   **ユーザー**: 特権アクセスを持つポッドをデプロイする許可を、すべての認証済みユーザーから取り消すことができます。 以下の `system:authenticated` という入力値を削除してください。
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
@@ -142,7 +149,7 @@ lastupdated: "2018-10-25"
     kubectl apply -f privileged-psp-user.yaml
     ```
     {: pre}
-    
+
 5.  リソースが変更されたことを確認します。
 
     ```
@@ -163,7 +170,7 @@ lastupdated: "2018-10-25"
     kubectl delete clusterrolebinding privileged-psp-user
     ```
     {: pre}
-    
+
 3.  RBAC クラスター役割バインディングがクラスター内に存在しなくなったことを確認します。
     ```
     kubectl get clusterrolebinding
@@ -172,7 +179,7 @@ lastupdated: "2018-10-25"
 
 </br>
 **独自のポッド・セキュリティー・ポリシーを作成するには**:</br>
-独自のポッド・セキュリティー・ポリシーのリソースを作成し、RBAC を使用してユーザーを許可する方法については、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) を参照してください。 
+独自のポッド・セキュリティー・ポリシーのリソースを作成し、RBAC を使用してユーザーを許可する方法については、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) を参照してください。
 
 既存のポリシーを変更する場合は、作成した新しいポリシーが既存のポリシーと矛盾しないようにしてください。 例えば、既存のポリシーが特権ポッドの作成と更新をユーザーに許可しているとします。 特権ポッドの作成または更新をユーザーに許可しないポリシーを作成した場合は、既存のポリシーと新しいポリシーの矛盾が原因で、予期しない結果になる可能性があります。
 
@@ -182,12 +189,18 @@ lastupdated: "2018-10-25"
 {{site.data.keyword.containerlong_notm}} の Kubernetes クラスターには、{{site.data.keyword.IBM_notm}} がクラスターを正しく管理できるようにするために、以下のポッド・セキュリティー・ポリシーおよび関連 RBAC リソースが含まれています。
 {: shortdesc}
 
-デフォルトの RBAC リソースである `privileged-psp-user` および `restricted-psp-user` は、{{site.data.keyword.IBM_notm}} によって設定されたポッド・セキュリティー・ポリシーを指しています。 
+デフォルトの `PodSecurityPolicy` リソースは、{{site.data.keyword.IBM_notm}} によって設定されるポッド・セキュリティー・ポリシーを参照します。
 
 **注意**: これらのリソースは削除も変更もしないでください。
 
 | 名前 | 名前空間 | タイプ | 目的 |
 |---|---|---|---|
+| `ibm-anyuid-hostaccess-psp` | クラスター全体 | `PodSecurityPolicy` | フル・ホスト・アクセスのポッド作成用のポリシー。 |
+| `ibm-anyuid-hostaccess-psp-user` | クラスター全体 | `ClusterRole` | `ibm-anyuid-hostaccess-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
+| `ibm-anyuid-hostpath-psp` | クラスター全体 | `PodSecurityPolicy` | ホストパス・アクセスのポッド作成用のポリシー。 |
+| `ibm-anyuid-hostpath-psp-user` | クラスター全体 | `ClusterRole` | `ibm-anyuid-hostpath-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
+| `ibm-anyuid-psp` | クラスター全体 | `PodSecurityPolicy` | UID/GID 実行可能ファイルのポッド作成用のポリシー。 |
+| `ibm-anyuid-psp-user` | クラスター全体 | `ClusterRole` | `ibm-anyuid-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
 | `ibm-privileged-psp` | クラスター全体 | `PodSecurityPolicy` | 特権ポッドの作成のポリシー。 |
 | `ibm-privileged-psp-user` | クラスター全体 | `ClusterRole` | `ibm-privileged-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
 | `ibm-privileged-psp-user` | `kube-system` | `RoleBinding` | クラスター管理者、サービス・アカウント、ノードに、`kube-system` 名前空間での `ibm-privileged-psp` ポッド・セキュリティー・ポリシーの使用を許可します。 |

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -83,7 +86,7 @@ lastupdated: "2018-10-25"
    ```
    {: pre}
 
-2. `default` 以外のリソース・グループ内にクラスターがある場合は、そのリソース・グループをターゲットとして設定します。**注**: リソース・グループに対する[**ビューアー**以上の役割](cs_users.html#platform)が必要です。
+2. `default` 以外のリソース・グループ内にクラスターがある場合は、そのリソース・グループをターゲットとして設定します。 各クラスターが属するリソース・グループを表示するには、`ibmcloud ks clusters` を実行します。**注**: リソース・グループに対する[**ビューアー**以上の役割](cs_users.html#platform)が必要です。
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -113,7 +116,7 @@ lastupdated: "2018-10-25"
    出力例:
    ```
    ...
-   Master URL:		https://169.xx.xxx.xxx:31142
+   Master URL:		https://c3.<region>.containers.cloud.ibm.com
    ...
    ```
    {: screen}
@@ -129,7 +132,7 @@ lastupdated: "2018-10-25"
 
    コマンド例:
    ```
-   curl --insecure https://169.xx.xxx.xxx:31142/version
+   curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
    ```
    {: pre}
 
@@ -190,7 +193,10 @@ lastupdated: "2018-10-25"
     {: pre}
 
 2.  ソースの _<each_worker_node_publicIP>_ から、宛先の TCP/UDP ポート (20000 から 32767 までの範囲とポート 443) への発信ネットワーク・トラフィックと、以下の IP アドレスとネットワーク・グループへの発信ネットワーク・トラフィックを許可します。 ローカル・マシンから公共のインターネットのエンドポイントへのアクセスが企業ファイアウォールによって禁止されている場合は、ソースのワーカー・ノードとローカル・マシンの両方で以下のステップを実行します。
-    - **重要**: ブートストラッピング・プロセスの際にロードのバランスを取るため、地域内のすべてのゾーンのために、ポート 443 への発信トラフィックを許可する必要があります。 例えば、クラスターが米国南部にある場合、各ワーカー・ノードのパブリック IP からすべてのゾーン (dal10、dal12、dal13) の IP アドレスのポート 443 へのトラフィックを許可する必要があります。
+
+    ブートストラッピング・プロセスの際にロードのバランスを取るため、地域内のすべてのゾーンのために、ポート 443 への発信トラフィックを許可する必要があります。 例えば、クラスターが米国南部にある場合、各ワーカー・ノードのパブリック IP からすべてのゾーンの IP アドレスのポート 443 へのトラフィックを許可する必要があります。
+    {: important}
+
     <table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
     <caption>発信トラフィック用に開く IP アドレス</caption>
         <thead>
@@ -201,33 +207,33 @@ lastupdated: "2018-10-25"
       <tbody>
         <tr>
           <td>北アジア太平洋地域</td>
-          <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-          <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+          <td>che01<br>hkg02<br>seo01<br>sng01<br>tok02、tok04、tok05</td>
+          <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210、128.168.71.117、165.192.69.69</code></td>
          </tr>
         <tr>
            <td>南アジア太平洋地域</td>
-           <td>mel01<br>syd01<br>syd04</td>
-           <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19、130.198.66.34</code></td>
+           <td>mel01<br>syd01、syd04</td>
+           <td><code>168.1.97.67</code><br><code>168.1.8.195、130.198.66.26、168.1.12.98、130.198.64.19</code></td>
         </tr>
         <tr>
            <td>中欧</td>
-           <td>ams03<br>fra02<br>mil01<br>osl01<br>par01</td>
-           <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149、159.8.98.170</code></td>
+           <td>ams03<br>mil01<br>osl01<br>par01<br>fra02、fra04、fra05</td>
+           <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149、159.8.98.170</code><br><code>169.50.56.174、161.156.65.42、149.81.78.114</code></td>
           </tr>
         <tr>
           <td>英国南部</td>
-          <td>lon02<br>lon04</td>
-          <td><code>159.122.242.78</code><br><code>158.175.65.170、158.175.74.170、158.175.76.2</code></td>
+          <td>lon02、lon04、lon05、lon06</td>
+          <td><code>159.122.242.78、158.175.111.42、158.176.94.26、159.122.224.242、158.175.65.170、158.176.95.146</code></td>
         </tr>
         <tr>
           <td>米国東部</td>
-           <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
-           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+           <td>mon01<br>tor01<br>wdc04、wdc06、wdc07</td>
+           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.63.88.186、169.60.73.142、169.61.109.34、169.63.88.178、169.60.101.42、169.61.83.62</code></td>
         </tr>
         <tr>
           <td>米国南部</td>
-          <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01<br>sjc03<br>sjc04</td>
-          <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code></td>
+          <td>hou02<br>sao01<br>sjc03<br>sjc04<br>dal10、dal12、dal13</td>
+          <td><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><code>169.46.7.238、169.48.230.146、169.61.29.194、169.46.110.218、169.47.70.10、169.62.166.98、169.48.143.218、169.61.177.2、169.60.128.2</code></td>
         </tr>
         </tbody>
       </table>
@@ -247,12 +253,12 @@ lastupdated: "2018-10-25"
         <tr>
           <td>{{site.data.keyword.containerlong_notm}} 地域間のグローバル・レジストリー</td>
           <td>registry.bluemix.net</td>
-          <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
+          <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29></code></td>
         </tr>
         <tr>
           <td>北アジア太平洋地域、南アジア太平洋地域</td>
           <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></td>
         </tr>
         <tr>
           <td>中欧</td>
@@ -262,7 +268,7 @@ lastupdated: "2018-10-25"
          <tr>
           <td>英国南部</td>
           <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
          </tr>
          <tr>
           <td>米国東部、米国南部</td>
@@ -273,10 +279,11 @@ lastupdated: "2018-10-25"
       </table>
 </p>
 
-4. オプション: ワーカー・ノードから {{site.data.keyword.monitoringlong_notm}} サービスと {{site.data.keyword.loganalysislong_notm}} サービスへの発信ネットワーク・トラフィックを許可します。
-    - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
-    - <em>&lt;monitoring_public_IP&gt;</em> は、トラフィックを許可するモニタリング地域のすべてのアドレスに置き換えます。
-      <p><table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
+4.  オプション: ワーカー・ノードから {{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、および LogDNA サービスへの発信ネットワーク・トラフィックを許可します。
+    *   **{{site.data.keyword.monitoringlong_notm}}**:
+        <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_public_IP&gt;</pre>
+        <em>&lt;monitoring_public_IP&gt;</em> は、トラフィックを許可するモニタリング地域のすべてのアドレスに置き換えます。
+        <p><table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
   <caption>モニター・トラフィック用に開く IP アドレス</caption>
         <thead>
         <th>{{site.data.keyword.containerlong_notm}} 地域</th>
@@ -303,9 +310,10 @@ lastupdated: "2018-10-25"
         </tbody>
       </table>
 </p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
-    - <em>&lt;logging_public_IP&gt;</em> は、トラフィックを許可するロギング地域のすべてのアドレスに置き換えます。
-      <p><table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
+    *   **{{site.data.keyword.loganalysislong_notm}}**:
+        <pre class="screen">TCP port 443, port 9091 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logging_public_IP&gt;</pre>
+        <em>&lt;logging_public_IP&gt;</em> は、トラフィックを許可するロギング地域のすべてのアドレスに置き換えます。
+        <p><table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
 <caption>ロギング・トラフィック用に開く IP アドレス</caption>
         <thead>
         <th>{{site.data.keyword.containerlong_notm}} 地域</th>
@@ -317,7 +325,7 @@ lastupdated: "2018-10-25"
             <td>米国東部、米国南部</td>
             <td>ingest.logging.ng.bluemix.net</td>
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-           </tr>
+          </tr>
           <tr>
            <td>英国南部</td>
            <td>ingest.logging.eu-gb.bluemix.net</td>
@@ -336,13 +344,15 @@ lastupdated: "2018-10-25"
          </tbody>
        </table>
 </p>
+    *   **{{site.data.keyword.la_full_notm}}**:
+        <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
+        `<logDNA_public_IP>` は [LogDNA IP アドレス](/docs/services/Log-Analysis-with-LogDNA/network.html#ips)に置き換えます。
 
 5. ロード・バランサー・サービスを使用している場合は、VRRP プロトコルを使用するすべてのトラフィックが、パブリック・インターフェースおよびプライベート・インターフェースでのワーカー・ノード間で許可されることを確認します。 {{site.data.keyword.containerlong_notm}} では、パブリック・ロード・バランサーおよびプライベート・ロード・バランサーの IP アドレスを管理するために VRRP プロトコルが使用されます。
 
-6. {: #pvc}データ・ストレージの永続ボリューム請求を作成するには、クラスターのあるゾーンの [IBM Cloud インフラストラクチャー (SoftLayer) IP アドレス](/docs/infrastructure/hardware-firewall-dedicated/ips.html#ibm-cloud-ip-ranges)に対して、ファイアウォールを介した発信アクセスを許可します。
-    - クラスターのゾーンを確認するには、`ibmcloud ks clusters` を実行します。
-    - [**フロントエンド (パブリック) ネットワーク**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network)と[**バックエンド (プライベート) ネットワーク**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)の両方の IP 範囲へのアクセスを許可します。
-    - **バックエンド (プライベート) ネットワーク**には、`dal01` のゾーン (データ・センター) を追加する必要があることに注意してください。
+6. {: #pvc}データ・ストレージの永続ボリューム請求を作成するには、ファイアウォールを介した IBM Cloud インフラストラクチャー (SoftLayer) への発信アクセスを許可します。
+    - プロビジョニング要求を開始できるように、IBM Cloud インフラストラクチャー (SoftLayer) API エンドポイントへのアクセスを許可します (`TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`)。
+    - [**フロントエンド (パブリック) ネットワーク**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network)と[**バックエンド (プライベート) ネットワーク**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)の両方について、クラスターがあるゾーンの IBM Cloud インフラストラクチャー (SoftLayer) IP 範囲へのアクセスを許可します。クラスターのゾーンを確認するには、`ibmcloud ks clusters` を実行します。
 
 <br />
 
@@ -354,7 +364,7 @@ lastupdated: "2018-10-25"
 {:shortdesc}
 
 1. ワーカー・ノード間のすべてのトラフィックを許可します。
-    1. パブリック・インターフェースとプライベート・インターフェース上のワーカー・ノード間の TCP、UDP、VRRP、IPEncap トラフィックをすべて許可します。{{site.data.keyword.containerlong_notm}} では、プライベート・ロード・バランサーの IP アドレスを管理するために VRRP プロトコルが使用され、サブネットをまたぐポッド間トラフィックを許可するために IPEncap プロトコルが使用されます。
+    1. パブリック・インターフェースとプライベート・インターフェース上のワーカー・ノード間の TCP、UDP、VRRP、IPEncap トラフィックをすべて許可します。 {{site.data.keyword.containerlong_notm}} では、プライベート・ロード・バランサーの IP アドレスを管理するために VRRP プロトコルが使用され、サブネットをまたぐポッド間トラフィックを許可するために IPEncap プロトコルが使用されます。
     2. Calico ポリシーを使用している場合や、複数ゾーン・クラスターの各ゾーンにファイアウォールがある場合は、ファイアウォールによってワーカー・ノード間の通信がブロックされることがあります。 ワーカーのポート、ワーカーのプライベート IP アドレス、または Calico ワーカー・ノード・ラベルを使用して、クラスター内のすべてのワーカー・ノードを相互に開く必要があります。
 
 2. IBM Cloud インフラストラクチャー (SoftLayer) のプライベート IP の範囲を許可して、クラスター内にワーカー・ノードを作成できるようにします。
