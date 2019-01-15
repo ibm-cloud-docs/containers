@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -26,7 +29,7 @@ lastupdated: "2018-10-25"
 ## 在您的叢集裡安裝 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式
 {: #install_block}
 
-安裝 {{site.data.keyword.Bluemix_notm}}Block Storage 外掛程式與 Helm 圖表，以設定區塊儲存空間的預先定義儲存空間類別。您可以使用這些儲存空間類別來建立 PVC ，以佈建應用程式的區塊儲存空間。
+安裝 {{site.data.keyword.Bluemix_notm}}Block Storage 外掛程式與 Helm 圖表，以設定區塊儲存空間的預先定義儲存空間類別。您可以使用這些儲存空間類別來建立 PVC，以佈建應用程式的區塊儲存空間。
 {: shortdesc}
 
 開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
@@ -42,7 +45,7 @@ lastupdated: "2018-10-25"
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.9.10_1523* 
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.10.11_1523* 
       ```
       {: screen}
       
@@ -50,19 +53,27 @@ lastupdated: "2018-10-25"
       
    2. 檢閱[版本變更日誌](cs_versions_changelog.html#changelog)，以尋找最新修補程式版本所包括的變更。 
    
-   3. 重新載入您的工作者節點，以套用最新的修補程式版本。在重新載入您的工作者節點之前，請遵循 [ibmcloud ks worker-reload 指令](cs_cli_reference.html#cs_worker_reload)中的指示，以在您的工作者節點上正常地重新排程所有執行中 Pod。
+   3. 重新載入您的工作者節點，以套用最新的修補程式版本。在重新載入您的工作者節點之前，請遵循 [ibmcloud ks worker-reload 指令](cs_cli_reference.html#cs_worker_reload)中的指示，以在您的工作者節點上正常地重新排程所有執行中 Pod。請注意，在重新載入期間，會使用最新的映像檔更新您的工作者節點機器，而且如果資料不是[儲存在工作者節點之外](cs_storage_planning.html#persistent_storage_overview)即會被刪除。
 
-2. 遵循[指示](cs_integrations.html#helm)，將 Helm 用戶端安裝在您的本端機器上、將 Helm 伺服器 (tiller) 安裝在您的叢集中，並且將 {{site.data.keyword.Bluemix_notm}} Helm 圖表儲存庫新增至您要在其中使用 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式的叢集中。
 
-   **重要事項：**如果您使用的是 Helm 2.9 版或更新版本，請確定您已使用[服務帳戶](cs_integrations.html#helm)來安裝 tiller。
+2. 遵循[指示](cs_integrations.html#helm)，將 Helm 用戶端安裝在本端機器上，並將 Helm 伺服器 (tiller) 安裝在叢集中。
 
-3. 更新 Helm 報告，以擷取此儲存庫中所有 Helm 圖表的最新版本。
+   如果您使用 Helm 2.9 版或更高版本，請確定已使用[服務帳戶](cs_integrations.html#helm)來安裝 tiller。
+   {: important}
+   
+3. 將 {{site.data.keyword.Bluemix_notm}} Helm 圖表儲存庫新增至您要在其中使用 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式的叢集。
+   ```
+   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   ```
+   {: pre}
+
+4. 更新 Helm 報告，以擷取此儲存庫中所有 Helm 圖表的最新版本。
    ```
    helm repo update
    ```
    {: pre}
 
-4. 安裝 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式。安裝外掛程式時，會將預先定義的區塊儲存空間類別新增至叢集。
+5. 安裝 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式。安裝外掛程式時，會將預先定義的區塊儲存空間類別新增至叢集。
    ```
    helm install ibm/ibmcloud-block-storage-plugin
    ```
@@ -112,7 +123,7 @@ lastupdated: "2018-10-25"
    ```
    {: screen}
 
-5. 驗證安裝是否成功。
+6. 驗證安裝是否成功。
    ```
    kubectl get pod -n kube-system | grep block
    ```
@@ -127,7 +138,7 @@ lastupdated: "2018-10-25"
 
    當您看到一個 `ibmcloud-block-storage-plugin` Pod 及一個以上 `ibmcloud-block-storage-driver` Pod 時，安裝即成功。`ibmcloud-block-storage-driver` Pod 的數目等於叢集裡的工作者節點數目。所有 Pod 都必須處於 **Running** 狀況。
 
-6. 驗證區塊儲存空間的儲存空間類別是否已新增至叢集。
+7. 驗證區塊儲存空間的儲存空間類別是否已新增至叢集。
    ```
    kubectl get storageclasses | grep block
    ```
@@ -146,7 +157,7 @@ lastupdated: "2018-10-25"
    ```
    {: screen}
 
-7. 對於您要在其中佈建區塊儲存空間的每一個叢集重複這些步驟。
+8. 對於您要在其中佈建區塊儲存空間的每一個叢集重複這些步驟。
 
 現在，您可以繼續[建立一個 PVC](#add_block)，佈建應用程式的區塊儲存空間。
 
@@ -198,7 +209,8 @@ lastupdated: "2018-10-25"
 如果您不想要在叢集裡佈建及使用 {{site.data.keyword.Bluemix_notm}} Block Storage，則可以解除安裝 Helm 圖表。
 {: shortdesc}
 
-**附註：**移除外掛程式不會移除現有的 PVC、PV 或資料。移除外掛程式時，會從叢集裡移除所有相關的 Pod 及常駐程式集。在移除外掛程式之後，您無法針對叢集佈建新的區塊儲存空間，也無法使用現有的區塊儲存空間 PVC 及 PV。
+移除外掛程式不會移除現有的 PVC、PV 或資料。移除外掛程式時，會從叢集裡移除所有相關的 Pod 及常駐程式集。在移除外掛程式之後，您無法針對叢集佈建新的區塊儲存空間，也無法使用現有的區塊儲存空間 PVC 及 PV。
+{: important}
 
 開始之前：
 - [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
@@ -250,7 +262,8 @@ lastupdated: "2018-10-25"
 
 每個儲存空間類別都會指定您佈建的區塊儲存空間類型，包括可用的大小、IOPS、檔案系統及保留原則。  
 
-**重要事項：**請務必小心選擇您的儲存空間配置，使其具有足夠的容量來儲存您的資料。在使用儲存空間類別佈建特定類型的儲存空間之後，您就無法變更儲存裝置的大小、類型、IOPS 或保留原則。如果您需要更多儲存空間或具有不同配置的儲存空間，則必須[建立新的儲存空間實例，並將資料](cs_storage_basics.html#update_storageclass)從舊的儲存空間實例複製到新的儲存空間實例。
+請務必小心選擇您的儲存空間配置，使其具有足夠的容量來儲存您的資料。在使用儲存空間類別佈建特定類型的儲存空間之後，您就無法變更儲存裝置的大小、類型、IOPS 或保留原則。如果您需要更多儲存空間或具有不同配置的儲存空間，則必須[建立新的儲存空間實例，並將資料](cs_storage_basics.html#update_storageclass)從舊的儲存空間實例複製到新的儲存空間實例。
+{: important}
 
 1. 列出 {{site.data.keyword.containerlong}} 中可用的儲存空間類別。
     ```
@@ -283,8 +296,8 @@ lastupdated: "2018-10-25"
    {: tip}
 
 3. 選擇您要佈建的區塊儲存空間的類型。
-   - **銅級、銀級和金級儲存空間類別：**這些儲存空間類別會佈建[耐久性儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/endurance-storage)。耐久性儲存空間可讓您在預先定義的 IOPS 層級選擇儲存空間的大小（以 GB 為單位）。
-   - **自訂儲存空間類別：**此儲存空間類別會佈建[效能儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/performance-storage)。使用效能儲存空間，您更能控制儲存空間大小及 IOPS。
+   - **銅級、銀級和金級儲存空間類別：**這些儲存空間類別會佈建[耐久性儲存空間](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)。耐久性儲存空間可讓您在預先定義的 IOPS 層級選擇儲存空間的大小（以 GB 為單位）。
+   - **自訂儲存空間類別：**此儲存空間類別會佈建[效能儲存空間](/docs/infrastructure/BlockStorage/index.html#provisioning-with-performance)。使用效能儲存空間，您更能控制儲存空間大小及 IOPS。
 
 4. 選擇區塊儲存空間的大小及 IOPS。大小及 IOPS 數目定義 IOPS（每秒的輸入/輸出作業數）總數，此 IOPS 可作為儲存空間有多快的指示器。您的儲存空間的 IOPS 總數越大，其處理讀取及寫入作業的速度就越快。
    - **銅級、銀級和金級儲存空間類別：**這些儲存空間類別隨附每 GB 固定數目的 IOPS，並佈建在 SSD 硬碟上。IOPS 總數取決於您選擇的儲存空間大小。您可以選取所容許大小範圍內的任何整數的 GB 大小，例如 20 Gi、256 Gi 或 11854 Gi。若要決定 IOPS 總數，您必須將 IOPS 乘以選取的大小。例如，如果您在隨附每 GB 4 個 IOPS 的銀級儲存空間類別中選取 1000Gi 區塊儲存空間大小，則您的儲存空間總共有 4000 個 IOPS。  
@@ -382,7 +395,8 @@ lastupdated: "2018-10-25"
 建立持續性磁區要求 (PVC)，為叢集[動態佈建](cs_storage_basics.html#dynamic_provisioning)區塊儲存空間。動態佈建會自動建立相符的持續性磁區 (PV)，並以 IBM Cloud 基礎架構 (SoftLayer) 帳戶訂購實際的儲存裝置。
 {:shortdesc}
 
-**重要事項**：區塊儲存空間隨附一個 `ReadWriteOnce` 存取模式。您一次只能將它裝載到叢集裡一個工作者節點上的一個 Pod。
+區塊儲存空間隨附一個 `ReadWriteOnce` 存取模式。您一次只能將它裝載到叢集中一個工作者節點上的一個 Pod。
+{: note}
 
 開始之前：
 - 如果您有防火牆，請對叢集所在區域的 IBM Cloud 基礎架構 (SoftLayer) IP 範圍[容許進行 Egress 存取](cs_firewall.html#pvc)，這樣您才可以建立 PVC。
@@ -461,15 +475,15 @@ lastupdated: "2018-10-25"
        </tr>
        <tr>
        <td><code>metadata.labels.region</code></td>
-       <td>指定您要在其中佈建區塊儲存空間的地區。如果指定地區，則也須指定區域。如果未指定地區或找不到指定的地區，則會在與叢集相同的地區中建立儲存空間。</br><strong>附註：</strong>僅 IBM Cloud Block Storage 外掛程式 1.0.1 版或更新版本支援此選項。對於較舊的外掛程式版本，如果您有多區域叢集，則會根據循環式基準選取儲存空間佈建所在的區域，以在所有區域均勻地平衡磁區要求。如果要為您的儲存空間指定區域，請先建立[自訂的儲存空間類別](#multizone_yaml)。然後，使用自訂的儲存空間類別建立 PVC。</td>
+       <td>指定您要在其中佈建區塊儲存空間的地區。如果指定地區，則也須指定區域。如果未指定地區或找不到指定的地區，則會在與叢集相同的地區中建立儲存空間。<p class="note">僅 IBM Cloud Block Storage 外掛程式 1.0.1 版或更新版本支援此選項。對於較舊的外掛程式版本，如果您有多區域叢集，則會根據循環式基準選取儲存空間佈建所在的區域，以在所有區域均勻地平衡磁區要求。如果要為您的儲存空間指定區域，請先建立[自訂的儲存空間類別](#multizone_yaml)。然後，使用自訂的儲存空間類別建立 PVC。</p></td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
-	<td>指定您要在其中佈建區塊儲存空間的區域。如果指定區域，則也須指定地區。如果未指定區域或找不到指定的區域，則會根據循環式基準選取區域。</br><strong>附註：</strong>僅 IBM Cloud Block Storage 外掛程式 1.0.1 版或更新版本支援此選項。對於較舊的外掛程式版本，如果您有多區域叢集，則會根據循環式基準選取儲存空間佈建所在的區域，以在所有區域均勻地平衡磁區要求。如果要為您的儲存空間指定區域，請先建立[自訂的儲存空間類別](#multizone_yaml)。然後，使用自訂的儲存空間類別建立 PVC。</td>
+	<td>指定您要在其中佈建區塊儲存空間的區域。如果指定區域，則也須指定地區。如果未指定區域或找不到指定的區域，則會根據循環式基準選取區域。<p class="note">僅 IBM Cloud Block Storage 外掛程式 1.0.1 版或更新版本支援此選項。對於較舊的外掛程式版本，如果您有多區域叢集，則會根據循環式基準選取儲存空間佈建所在的區域，以在所有區域均勻地平衡磁區要求。如果要為您的儲存空間指定區域，請先建立[自訂的儲存空間類別](#multizone_yaml)。然後，使用自訂的儲存空間類別建立 PVC。</p></td>
 	</tr>
         <tr>
         <td><code>spec.resources.requests.storage</code></td>
-        <td>輸入區塊儲存空間大小，以 GB 為單位 (Gi)。</br></br><strong>附註：</strong>在佈建儲存空間之後，您無法變更區塊儲存空間的大小。請確定指定符合您要儲存的資料量的大小。</td>
+        <td>輸入區塊儲存空間大小，以 GB 為單位 (Gi)。在佈建儲存空間之後，您無法變更區塊儲存空間的大小。請確定指定符合您要儲存的資料量的大小。</td>
         </tr>
         <tr>
         <td><code>spec.resources.requests.iops</code></td>
@@ -828,10 +842,11 @@ lastupdated: "2018-10-25"
 **將區塊儲存空間新增至有狀態集時，需要注意的事項為何？** </br>
 若要將儲存空間新增至有狀態集，您可以在有狀態集 YAML 的 `volumeClaimTemplates` 區段中指定儲存空間配置。`volumeClaimTemplates` 是您 PVC 的基礎，可以包括儲存空間類別以及您要佈建的區塊儲存空間大小或 IOPS。不過，如果您要在 `volumeClaimTemplates` 中包括標籤，則在建立 PVC 時，Kubernetes 不會包括這些標籤。相反地，您必須將標籤直接新增至有狀態集。
 
-**重要事項：**您無法同時部署兩個有狀態集。如果您嘗試在完整部署不同的有狀態集之前建立有狀態集，則有狀態集的部署可能會導致非預期的結果。
+您無法同時部署兩個有狀態集。如果您嘗試在完整部署不同的有狀態集之前建立有狀態集，則有狀態集的部署可能會導致非預期的結果。
+{: important}
 
 **如何在特定區域中建立有狀態集？** </br>
-在多區域叢集中，您可以指定要在有狀態集 YAML 的 `spec.selector.matchLabels` 及 `spec.template.metadata.labels` 區段中建立有狀態集的區域及地區。或者，您也可以將這些標籤新增至[自訂的儲存空間類別](cs_storage_basics.html#customized_storageclass)，並在有狀態集的 `volumeClaimTemplates` 區段中使用此儲存空間類別。 
+在多區域叢集中，您可以指定要在有狀態集 YAML 的 `spec.selector.matchLabels` 及 `spec.template.metadata.labels` 區段中建立有狀態集的區域及地區。或者，您也可以將這些標籤新增至[自訂的儲存空間類別](cs_storage_basics.html#customized_storageclass)，並在有狀態集的 `volumeClaimTemplates` 區段中使用此儲存空間類別。
 
 **將區塊儲存空間新增至有狀態集時有哪些選擇？** </br>
 如果您要在建立有狀態集時自動建立 PVC，請使用[動態佈建](#dynamic_statefulset)。您也可以選擇使用有狀態集來[預先佈建 PVC 或使用現有 PVC](#static_statefulset)。  
@@ -1036,7 +1051,8 @@ lastupdated: "2018-10-25"
    - **`metadata.name`**：輸入您在前一個步驟中所使用的 `<statefulset_name>`。
    - **`spec.replicas`**：輸入您要針對有狀態集建立的抄本數目。抄本數目必須等於您先前所建立的 PVC 數目。
 
-   **附註：**如果您已在不同的區域中建立 PVC，請不要在有狀態集中併入地區或區域標籤。
+   如果您已在不同的區域中建立 PVC，請不要在有狀態集中併入地區或區域標籤。
+   {: note}
 
 3. 驗證已在有狀態集抄本 Pod 中使用 PVC。
    1. 列出叢集裡的 Pod。識別屬於有狀態集的 Pod。
@@ -1069,6 +1085,162 @@ lastupdated: "2018-10-25"
 <br />
 
 
+## 變更現有儲存裝置的大小及 IOPS
+{: #change_storage_configuration}
+
+如果您要增加儲存空間容量或效能，則可以修改現有磁區。
+{: shortdesc}
+
+如需計費的相關問題，以及尋找如何使用 {{site.data.keyword.Bluemix_notm}} 主控台來修改儲存空間的步驟，請參閱[擴充 Block Storage 容量](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity)。如果您使用 {{site.data.keyword.Bluemix_notm}} 主控台來修改儲存空間，則必須遵循本主題中的步驟 4-7 來完成修改。
+{: tip}
+
+1. 列出叢集中的 PVC，並記下 **VOLUME** 直欄中關聯 PV 的名稱。 
+   ```
+   kubectl get pvc
+   ```
+   {: pre}
+   
+   輸出範例： 
+   ```
+   NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
+   ```
+   {: screen}
+   
+2. 列出 PVC 所連結之 PV 的詳細資料，以擷取與 PVC 相關聯之實體檔案儲存空間的 **VolumeID** 及 **StorageType**。將 `<pv_name>` 取代為您在前一個步驟中擷取的 PV 名稱。儲存空間類型會顯示在 **Labels** 區段中，而磁區 ID 則會顯示在 CLI 輸出的 **Source** > **Options** 區段中。 
+   ```
+   kubectl describe pv <pv_name>
+   ```
+   {: pre}
+   
+   輸出範例： 
+   ```
+   Name:            pvc-c1839152-c333-11e8-b6a8-46ad53f2579a
+   Labels:          CapacityGb=24
+                    Datacenter=dal13
+                    IOPS=4
+                    StorageType=Endurance
+                    billingType=hourly
+                    failure-domain.beta.kubernetes.io/region=us-south
+                    failure-domain.beta.kubernetes.io/zone=dal13
+                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
+   ...
+   Source:
+       Type:       FlexVolume (a generic volume resource that is provisioned/attached using an exec based plugin)
+       Driver:     ibm/ibmc-block
+       FSType:     ext4
+       SecretRef:  <nil>
+       ReadOnly:   false
+       Options:    map[volumeName:pvc-c1839152-c333-11e8-b6a8-46ad53f2579a Lun:1 TargetPortal:161.26.114.56 VolumeID:51889685]
+   ...
+   ```
+   {: screen}
+
+3. 修改 IBM Cloud 基礎架構 (SoftLayer) 帳戶中磁區的大小或 IOPS。 
+
+   效能儲存空間的範例： 
+   ```
+   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-iops <iops>
+   ```
+   {: pre}
+   
+   耐久性儲存空間的範例： 
+   ```
+   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-tier <iops>
+   ```
+   {: pre}
+   
+   <table>
+   <caption>瞭解指令的元件</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>&lt;volume_ID&gt;</code></td>
+   <td>輸入您先前擷取的磁區 ID。</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-size&gt;</code></td>
+   <td>以 GB 為單位輸入磁區的新大小。如需有效的大小，請參閱[決定區塊儲存空間配置](#predefined_storageclass)。您輸入的大小必須大於或等於磁區的現行大小。如果您未指定新大小，則會使用磁區的現行大小。</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-iops&gt;</code></td>
+   <td>僅限效能儲存空間。輸入您想要的新 IOPS 數。如需有效的 IOPS，請參閱[決定區塊儲存空間配置](#predefined_storageclass)。如果您未指定 IOPS，則會使用現行 IOPS。<p class="note">如果磁區的原始 IOPS/GB 比例小於 0.3，則新的 IOPS/GB 比例必須小於 0.3。如果磁區的原始 IOPS/GB 比例大於或等於 0.3，則磁區的新 IOPS/GB 比例必須大於或等於 0.3。</p> </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-tier&gt;</code></td>
+   <td>僅限耐久性儲存空間。輸入您想要的每 GB 新 IOPS 數。如需有效的 IOPS，請參閱[決定區塊儲存空間配置](#predefined_storageclass)。如果您未指定 IOPS，則會使用現行 IOPS。<p class="note">如果磁區的原始 IOPS/GB 比例小於 0.25，則新的 IOPS/GB 比例必須小於 0.25。如果磁區的原始 IOPS/GB 比例大於或等於 0.25，則磁區的新 IOPS/GB 比例必須大於或等於 0.25。</p> </td>
+   </tr>
+   </tbody>
+   </table>
+   
+   輸出範例： 
+   ```
+   Order 31020713 was placed successfully!.
+   > Storage as a Service
+
+   > 40 GBs
+
+   > 2 IOPS per GB
+
+   > 20 GB Storage Space (Snapshot Space)
+
+   You may run 'ibmcloud sl block volume-list --order 12345667' to find this block volume after it is ready.
+   ```
+   {: screen}
+   
+4. 修補 PV 配置以新增 `autofix-resizefs` 註釋。當磁區裝載至 Pod 時，此註釋會自動調整檔案系統的大小。  
+   ```
+   kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
+   ```
+   {: pre}
+   
+5. 列出所有使用 PVC 的 Pod。 
+   ```
+   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+   ```
+   {: pre}
+   
+   Pod 會以下列格式傳回：`<pod_name>: <pvc_name>`。 
+   
+6. 如果您具有使用 PVC 的 Pod，請藉由移除 Pod 並讓 Kubernetes 重建它，來重新啟動 Pod。如果您已建立 Pod，而且未使用 Kubernetes 部署或抄本集，則在移除 Pod 之後，必須予以重建。若要擷取用來建立 Pod 的 YAML 檔案，請執行 `kubectl get pod <pod_name> -o yaml >pod.yaml`。
+   {: tip}
+   ```
+   kubectl delete pod <pod_name>
+   ```
+   {: pre}
+   
+7. 如果您已變更磁區的大小，請登入 Pod 以驗證新的大小。 
+   1. 取得您在 Pod 中使用的磁區裝載路徑，以存取您的磁區。
+      ```
+      kubectl describe pod <pod_name>
+      ```
+      {: pre}
+      
+      磁區裝載路徑會顯示在 CLI 輸出的 **Containers** > **block** > **Mounts** 區段中。
+   2. 登入 Pod。
+      ```
+      kubectl exec -it <pod_name> bash
+      ```
+      {: pre}
+      
+   3. 顯示磁碟用量統計資料，並尋找您先前擷取之磁區的裝載路徑。驗證 **Size** 直欄顯示磁區的新大小。
+      ```
+      df -h
+      ```
+      {: pre}
+      
+      輸出範例：
+      ```
+      Filesystem                                     Size  Used Avail Use% Mounted on
+      overlay                                         99G  3.2G   91G   4% /
+      tmpfs                                           64M     0   64M   0% /dev
+      tmpfs                                          7.9G     0  7.9G   0% /sys/fs/cgroup
+      /dev/mapper/3600a098038304471562b4c4743384e4d   40G   44M   23G   1% /test
+      ```
+      {: screen}
+
 
 ## 備份及還原資料
 {: #backup_restore}
@@ -1080,14 +1252,14 @@ lastupdated: "2018-10-25"
 
 <dl>
   <dt>設定定期 Snapshot</dt>
-  <dd><p>您可以[針對區塊儲存空間設定定期 Snapshot](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)，這是唯讀映像檔，會擷取實例在某個時間點的狀況。若要儲存 Snapshot，您必須在區塊儲存空間上要求 Snapshot 空間。Snapshot 儲存於相同區域內的現有儲存空間實例上。如果使用者不小心從磁區移除重要資料，您可以從 Snapshot 還原資料。<strong>附註</strong>：如果您有「專用」帳戶，則必須<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">開立支援問題單</a>。</br></br> <strong>若要建立磁區的 Snapshot，請執行下列動作：</strong><ol><li>[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。</li><li>登入 `ibmcloud sl` CLI。<pre class="pre"><code>    ibmcloud sl init
+  <dd><p>您可以[針對區塊儲存空間設定定期 Snapshot](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)，這是唯讀映像檔，會擷取實例在某個時間點的狀況。若要儲存 Snapshot，您必須在區塊儲存空間上要求 Snapshot 空間。Snapshot 儲存於相同區域內的現有儲存空間實例上。如果使用者不小心從磁區移除重要資料，您可以從 Snapshot 還原資料。<strong>附註</strong>：如果您有「專用」帳戶，則必須<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">開立支援案例</a>。</br></br> <strong>若要建立磁區的 Snapshot，請執行下列動作：</strong><ol><li>[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。</li><li>登入 `ibmcloud sl` CLI。<pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>列出叢集裡的現有 PV。<pre class="pre"><code>kubectl get pv</code></pre></li><li>取得您要建立 Snapshot 空間之 PV 的詳細資料，並記下磁區 ID、大小及 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> CLI 輸出的 <strong>Labels</strong> 區段中會顯示大小及 IOPS。若要尋找磁區 ID，請檢閱 CLI 輸出的 <code>ibm.io/network-storage-id</code> 註釋。</li><li>使用您在前一個步驟中擷取的參數，建立現有磁區的 Snapshot 大小。<pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>等待要建立的 Snapshot 大小。<pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>CLI 輸出中的 <strong>Snapshot Size (GB)</strong> 從 0 變更為您所訂購的大小時，即已順利佈建 Snapshot 大小。</li><li>為您的磁區建立 Snapshot，並記下為您建立的 Snapshot ID。<pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>驗證已順利建立 Snapshot。<pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>若要將資料從 Snapshot 還原至現有磁區，請執行下列動作：</strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>將 Snapshot 抄寫至另一個區域</dt>
  <dd><p>若要在發生區域失敗時保護資料，您可以[將 Snapshot 抄寫](/docs/infrastructure/BlockStorage/replication.html#replicating-data)至另一個區域中設定的區塊儲存空間實例。資料只能從主要儲存空間抄寫至備份儲存空間。您無法將抄寫的區塊儲存空間實例裝載至叢集。當主要儲存空間失敗時，您可以手動將抄寫的備份儲存空間設為主要儲存空間。然後，您可以將它裝載至叢集。還原主要儲存空間之後，您可以從備份儲存空間中還原資料。<strong>附註</strong>：如果您有「專用」帳戶，則無法將 Snapshot 抄寫至另一個區域。</p></dd>
  <dt>複製儲存空間</dt>
- <dd><p>您可以在與原始儲存空間實例相同的區域中[複製區塊儲存空間實例](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume)。在建立複本的時間點，複本具有與原始儲存空間實例相同的資料。與抄本不同，請使用複本作為獨立於原始儲存空間實例外的儲存空間實例。若要複製，請先設定磁區的 Snapshot。<strong>附註</strong>：如果您有「專用」帳戶，則必須<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">開立支援問題單</a>。</p></dd>
+ <dd><p>您可以在與原始儲存空間實例相同的區域中[複製區塊儲存空間實例](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume)。在建立複本的時間點，複本具有與原始儲存空間實例相同的資料。與抄本不同，請使用複本作為獨立於原始儲存空間實例外的儲存空間實例。若要複製，請先設定磁區的 Snapshot。<strong>附註</strong>：如果您有「專用」帳戶，則必須<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">開立支援案例</a>。</p></dd>
   <dt>將資料備份至 {{site.data.keyword.cos_full}}</dt>
-  <dd><p>您可以使用 [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)，在叢集裡啟動一個備份及還原 Pod。這個 Pod 包含一個 Script，它會針對叢集裡的任何持續性磁區要求 (PVC) 執行一次性或定期備份。資料會儲存在您於區域中設定的 {{site.data.keyword.cos_full}} 實例中。</p><strong>附註：</strong>區塊儲存空間是以 RWO 存取模式進行裝載。此存取容許一次僅將一個 Pod 裝載至區塊儲存空間。若要備份您的資料，您必須從儲存空間中卸載應用程式、將它裝載至備份 Pod、備份資料，並將儲存空間重新裝載至應用程式 Pod。</br></br>
+  <dd><p>您可以使用 [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)，在叢集裡啟動一個備份及還原 Pod。這個 Pod 包含一個 Script，它會針對叢集裡的任何持續性磁區要求 (PVC) 執行一次性或定期備份。資料會儲存在您於區域中設定的 {{site.data.keyword.cos_full}} 實例中。</p><p class="note">區塊儲存空間是以 RWO 存取模式進行裝載。此存取容許一次僅將一個 Pod 裝載至區塊儲存空間。若要備份您的資料，您必須從儲存空間中卸載應用程式、將它裝載至備份 Pod、備份資料，並將儲存空間重新裝載至應用程式 Pod。</p>
 若要讓資料有更高的可用性，並在發生區域失敗時保護應用程式，請設定第二個 {{site.data.keyword.cos_short}} 實例，並在區域之間抄寫資料。如果您需要從 {{site.data.keyword.cos_short}} 實例還原資料，請使用隨該映像檔所提供的還原 Script。</dd>
 <dt>在 Pod 與容器之間複製資料</dt>
 <dd><p>您可以使用 `kubectl cp` [指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/#cp)，在叢集的 Pod 或特定容器之間複製檔案及目錄。</p>
@@ -1122,7 +1294,7 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
 <td>類型</td>
-<td>[耐久性儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[耐久性儲存空間](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>檔案系統</td>
@@ -1168,7 +1340,7 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
 <td>類型</td>
-<td>[耐久性儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[耐久性儲存空間](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>檔案系統</td>
@@ -1213,7 +1385,7 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
 <td>類型</td>
-<td>[耐久性儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[耐久性儲存空間](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>檔案系統</td>
@@ -1258,7 +1430,7 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
 <td>類型</td>
-<td>[效能 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/performance-storage)</td>
+<td>[效能](/docs/infrastructure/BlockStorage/index.html#provisioning-with-performance)</td>
 </tr>
 <tr>
 <td>檔案系統</td>
@@ -1300,7 +1472,8 @@ lastupdated: "2018-10-25"
 ### 指定多區域叢集的區域
 {: #multizone_yaml}
 
-**附註：**如果您使用 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式 1.0.0 版，或您要在特定區域中[靜態佈建區塊儲存空間](#existing_block)，請使用自訂的儲存空間類別。在所有其他情況下，請[直接在 PVC 中指定區域](#add_block)。  
+如果您使用 {{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式 1.0.0 版，或您要在特定區域中[靜態佈建區塊儲存空間](#existing_block)，請使用自訂的儲存空間類別。在所有其他情況下，請[直接在 PVC 中指定區域](#add_block)。
+{: note}
 
 下列 `.yaml` 檔案自訂以 `ibm-block-silver` 非保留儲存空間類別為基礎的儲存空間類別：`type` 為 `"Endurance"`、`iopsPerGB` 為 `4`、`sizeRange` 為 `"[20-12000]Gi"`，而 `reclaimPolicy` 設為 `"Delete"`。區域指定為 `dal12`。您可以檢閱有關 `ibmc` 儲存空間類別的前述資訊，來協助您選擇這些項目可接受的值</br>
 
@@ -1330,31 +1503,31 @@ reclaimPolicy: "Delete"
 下列範例建立一個名為 `ibmc-block-custom-xfs` 的儲存空間類別，其使用 `XFS` 檔案系統佈建效能區塊儲存空間。
 
 ```
-   apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
-     name: ibmc-block-custom-xfs
-     labels:
-       addonmanager.kubernetes.io/mode: Reconcile
-   provisioner: ibm.io/ibmc-block
-   parameters:
-     type: "Performance"
-     sizeIOPSRange: |-
-       [20-39]Gi:[100-1000]
-       [40-79]Gi:[100-2000]
-       [80-99]Gi:[100-4000]
-       [100-499]Gi:[100-6000]
-       [500-999]Gi:[100-10000]
-       [1000-1999]Gi:[100-20000]
-       [2000-2999]Gi:[200-40000]
-       [3000-3999]Gi:[200-48000]
-       [4000-7999]Gi:[300-48000]
-       [8000-9999]Gi:[500-48000]
-       [10000-12000]Gi:[1000-48000]
-     fsType: "xfs"
-     reclaimPolicy: "Delete"
-     classVersion: "2"
-   ```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ibmc-block-custom-xfs
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+provisioner: ibm.io/ibmc-block
+parameters:
+  type: "Performance"
+  sizeIOPSRange: |-
+    [20-39]Gi:[100-1000]
+    [40-79]Gi:[100-2000]
+    [80-99]Gi:[100-4000]
+    [100-499]Gi:[100-6000]
+    [500-999]Gi:[100-10000]
+    [1000-1999]Gi:[100-20000]
+    [2000-2999]Gi:[200-40000]
+    [3000-3999]Gi:[200-48000]
+    [4000-7999]Gi:[300-48000]
+    [8000-9999]Gi:[500-48000]
+    [10000-12000]Gi:[1000-48000]
+  fsType: "xfs"
+  reclaimPolicy: "Delete"
+  classVersion: "2"
+```
 {: codeblock}
 
 <br />

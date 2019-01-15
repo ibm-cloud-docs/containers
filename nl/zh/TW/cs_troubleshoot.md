@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -44,7 +47,7 @@ lastupdated: "2018-10-25"
 
 2.  檢閱叢集的 `State`。如果叢集處於 **Critical**、**Delete failed** 或 **Warning** 狀況，或停留在 **Pending** 狀況很長一段時間，請開始[針對工作者節點進行除錯](#debug_worker_nodes)。
 
-    <table summary="每個表格列都應該從左到右閱讀，第一欄為叢集狀況，第二欄則為說明。">
+    <table summary="每個表格列都應該從左到右閱讀，第一欄為叢集狀態，第二欄則為說明。">
     <caption>叢集狀況</caption>
    <thead>
    <th>叢集狀況</th>
@@ -53,7 +56,7 @@ lastupdated: "2018-10-25"
    <tbody>
 <tr>
    <td>Aborted</td>
-   <td>在部署 Kubernetes 主節點之前，使用者要求刪除叢集。叢集刪除完成之後，即會從儀表板移除該叢集。如果叢集停留在此狀況很長一段時間，請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](cs_troubleshoot.html#ts_getting_help)。</td>
+   <td>在部署 Kubernetes 主節點之前，使用者要求刪除叢集。叢集刪除完成之後，即會從儀表板移除該叢集。如果叢集停留在此狀況很長一段時間，請開立 [{{site.data.keyword.Bluemix_notm}} 支援案例](cs_troubleshoot.html#ts_getting_help)。</td>
    </tr>
  <tr>
      <td>Critical</td>
@@ -65,7 +68,7 @@ lastupdated: "2018-10-25"
    </tr>
    <tr>
      <td>Deleted</td>
-     <td>叢集已刪除，但尚未從儀表板移除。如果叢集停留在此狀況很長一段時間，請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](cs_troubleshoot.html#ts_getting_help)。</td>
+     <td>叢集已刪除，但尚未從儀表板移除。如果叢集停留在此狀況很長一段時間，請開立 [{{site.data.keyword.Bluemix_notm}} 支援案例](cs_troubleshoot.html#ts_getting_help)。</td>
    </tr>
    <tr>
    <td>Deleting</td>
@@ -73,7 +76,7 @@ lastupdated: "2018-10-25"
    </tr>
    <tr>
      <td>Deploy failed</td>
-     <td>無法完成 Kubernetes 主節點的部署。您無法解決此狀況。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](cs_troubleshoot.html#ts_getting_help)，與 IBM Cloud 支援中心聯絡。</td>
+     <td>無法完成 Kubernetes 主節點的部署。您無法解決此狀況。請開立 [{{site.data.keyword.Bluemix_notm}} 支援案例](cs_troubleshoot.html#ts_getting_help)，以與 IBM Cloud 支援中心聯絡。</td>
    </tr>
      <tr>
        <td>Deploying</td>
@@ -81,7 +84,7 @@ lastupdated: "2018-10-25"
       </tr>
       <tr>
        <td>Normal</td>
-       <td>叢集裡的所有工作者節點都已開始執行。您可以存取叢集，並將應用程式部署至叢集。此狀況被視為健全，您不需要採取動作。**附註**：雖然工作者節點可能是正常的，但可能仍需注意其他的基礎架構資源（例如[網路](cs_troubleshoot_network.html)和[儲存空間](cs_troubleshoot_storage.html)）。</td>
+       <td>叢集裡的所有工作者節點都已開始執行。您可以存取叢集，並將應用程式部署至叢集。此狀態被視為健全，您不需要採取動作。<p class="note">雖然工作者節點可能是正常的，但也可能需要注意其他的基礎架構資源（例如[網路](cs_troubleshoot_network.html)和[儲存空間](cs_troubleshoot_storage.html)）。</p></td>
     </tr>
       <tr>
        <td>Pending</td>
@@ -89,7 +92,7 @@ lastupdated: "2018-10-25"
      </tr>
    <tr>
      <td>Requested</td>
-     <td>已傳送要建立叢集和訂購 Kubernetes 主節點和工作者節點之基礎架構的要求。當開始部署叢集時，叢集狀況會變更為 <code>Deploying</code>。如果叢集停留在 <code>Requested</code> 狀況很長一段時間，請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](cs_troubleshoot.html#ts_getting_help)。</td>
+     <td>已傳送要建立叢集和訂購 Kubernetes 主節點和工作者節點之基礎架構的要求。當開始部署叢集時，叢集狀況會變更為 <code>Deploying</code>。如果叢集停留在 <code>Requested</code> 狀況很長一段時間，請開立 [{{site.data.keyword.Bluemix_notm}} 支援案例](cs_troubleshoot.html#ts_getting_help)。</td>
    </tr>
    <tr>
      <td>Updating</td>
@@ -103,7 +106,10 @@ lastupdated: "2018-10-25"
  </table>
 
 
-**附註**：[Kubernetes 主節點](cs_tech.html#architecture)是讓叢集保持運行的主要元件。主節點將叢集資源及其配置儲存在 etcd 資料庫中，作為叢集的單點真實資料 (SPOT)。Kubernetes API 伺服器是從工作者節點到主節點之所有叢集管理要求的主要進入點，或您要與叢集資源互動時。<br><br>如果發生主節點失敗，則工作負載會繼續在工作者節點上執行，但無法使用 `kubectl` 指令來使用叢集資源，或檢視叢集性能，直到備份主節點中的 Kubernetes API 伺服器為止。如果 Pod 在主節點中斷期間關閉，則除非工作者節點再次到達 Kubernetes API 伺服器，否則無法重新排定 Pod。<br><br>在主節點中斷期間，您仍然可以針對 {{site.data.keyword.containerlong_notm}} API 執行 `ibmcloud ks` 指令，以使用您的基礎架構資源（例如工作者節點或 VLAN）。如果您透過在叢集中新增或移除工作者節點來變更現行叢集配置，則除非備份主節點，否則您的變更不會發生。**附註**：在主節點中斷期間，請不要將工作者節點重新啟動或重新開機。此動作會從您的工作者節點中移除 Pod。因為 Kubernetes API 伺服器無法使用，所以無法將 Pod 重新排定至叢集中的其他工作者節點。
+[Kubernetes 主節點](cs_tech.html#architecture)是保持叢集運作的主要元件。主節點將叢集資源及其配置儲存在 etcd 資料庫中，作為叢集的單點真實資料 (SPOT)。Kubernetes API 伺服器是從工作者節點到主節點之所有叢集管理要求的主要進入點，或您要與叢集資源互動時。<br><br>如果發生主節點失敗，則工作負載會繼續在工作者節點上執行，但無法使用 `kubectl` 指令來使用叢集資源，或檢視叢集性能，直到備份主節點中的 Kubernetes API 伺服器為止。如果 Pod 在主節點中斷期間關閉，則除非工作者節點再次到達 Kubernetes API 伺服器，否則無法重新排定 Pod。<br><br>在主節點中斷期間，您仍然可以針對 {{site.data.keyword.containerlong_notm}} API 執行 `ibmcloud ks` 指令，以使用您的基礎架構資源（例如工作者節點或 VLAN）。如果您透過在叢集中新增或移除工作者節點來變更現行叢集配置，則除非備份主節點，否則您的變更不會發生。
+
+在主節點中斷期間，請不要將工作者節點重新啟動或重新開機。此動作會從您的工作者節點中移除 Pod。因為 Kubernetes API 伺服器無法使用，所以無法將 Pod 重新排程至叢集中的其他工作者節點。
+{: important}
 
 
 <br />
@@ -169,7 +175,7 @@ lastupdated: "2018-10-25"
       </tr>
       <tr>
        <td>Unknown</td>
-       <td>因下列其中一個原因而無法聯繫 Kubernetes 主節點：<ul><li>您已要求更新 Kubernetes 主節點。在更新期間，無法擷取工作者節點的狀況。</li><li>您可能有另一個防火牆保護工作者節點，或最近變更過防火牆設定。{{site.data.keyword.containerlong_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。如需相關資訊，請參閱[防火牆阻止工作者節點連接](cs_troubleshoot_clusters.html#cs_firewall)。</li><li>Kubernetes 主節點已關閉。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](#ts_getting_help)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</li></ul></td>
+       <td>因下列其中一個原因而無法聯繫 Kubernetes 主節點：<ul><li>您已要求更新 Kubernetes 主節點。在更新期間，無法擷取工作者節點的狀況。如果工作者節點即使在 Kubernetes 主節點順利更新之後仍長期處於此狀態，請嘗試[重新載入](cs_cli_reference.html#cs_worker_reload)工作者節點。</li><li>您可能有另一個防火牆保護工作者節點，或最近變更過防火牆設定。{{site.data.keyword.containerlong_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。如需相關資訊，請參閱[防火牆阻止工作者節點連接](cs_troubleshoot_clusters.html#cs_firewall)。</li><li>Kubernetes 主節點已關閉。請開立 [{{site.data.keyword.Bluemix_notm}} 支援案例](#ts_getting_help)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</li></ul></td>
   </tr>
      <tr>
         <td>Warning</td>
@@ -207,7 +213,7 @@ lastupdated: "2018-10-25"
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：您的帳戶目前被禁止訂購「運算實例」。</td>
-        <td>您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶可能無法訂購運算資源。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](#ts_getting_help)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</td>
+        <td>您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶可能無法訂購運算資源。請開立 [{{site.data.keyword.Bluemix_notm}} 支援案例](#ts_getting_help)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</td>
       </tr>
       <tr>
       <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：無法下訂單。<br><br>
@@ -217,11 +223,11 @@ lastupdated: "2018-10-25"
       <li>若為單一區域叢集，請在不同的區域中建立叢集。若為多區域叢集，請將區域新增至叢集。</li>
       <li>為您 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的工作者節點，指定不同的公用及專用 VLAN 配對。對於工作者節點儲存區中的工作者節點，您可以使用 <code>ibmcloud ks zone-network-set</code> [指令](cs_cli_reference.html#cs_zone_network_set)。</li>
       <li>與您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶管理員聯絡，以驗證您未超出帳戶限制（例如廣域配額）。</li>
-      <li>開啟 [IBM Cloud 基礎架構 (SoftLayer) 支援問題單](#ts_getting_help)</li></ul></td>
+      <li>開立 [IBM Cloud 基礎架構 (SoftLayer) 支援案例](#ts_getting_help)</li></ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：無法取得 ID 為 &lt;vlan id&gt; 的網路 VLAN。</td>
-        <td>無法佈建工作者節點，因為因下列其中一個原因而找不到選取的 VLAN ID：<ul><li>您可能已指定 VLAN 號碼，而非 VLAN ID。VLAN 號碼的長度是 3 或 4 位數，而 VLAN ID 的長度是 7 位數。執行 <code>ibmcloud ks vlans &lt;zone&gt;</code>，以擷取 VLAN ID。<li>VLAN ID 可能未與您使用的 IBM Cloud 基礎架構 (SoftLayer) 帳戶相關聯。執行 <code>ibmcloud ks vlans &lt;zone&gt;</code>，以列出帳戶的可用 VLAN ID。若要變更 IBM Cloud 基礎架構 (SoftLayer) 帳戶，請參閱 [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set)。</ul></td>
+        <td>無法佈建工作者節點，因為因下列其中一個原因而找不到選取的 VLAN ID：<ul><li>您可能已指定 VLAN 號碼，而非 VLAN ID。VLAN 號碼的長度是 3 或 4 位數，而 VLAN ID 的長度是 7 位數。執行 <code>ibmcloud ks vlans &lt;zone&gt;</code>，以擷取 VLAN ID。<li>VLAN ID 可能未與您使用的 IBM Cloud 基礎架構 (SoftLayer) 帳戶相關聯。執行 <code>ibmcloud ks vlans &lt;zone&gt;</code>，以列出帳戶的可用 VLAN ID。若要變更 IBM Cloud 基礎架構 (SoftLayer) 帳戶，請參閱 [`ibmcloud ks credential-set`](cs_cli_reference.html#cs_credentials_set)。</ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation：針對此訂單提供的位置無效。(HTTP 500)</td>
@@ -240,7 +246,7 @@ lastupdated: "2018-10-25"
      </tr>
       <tr>
   <td>無法建立 IMS 入口網站記號，因為沒有 IMS 帳戶鏈結至選取的 BSS 帳戶</br></br>找不到提供的使用者，或使用者非作用中</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus：使用者帳戶目前為 cancel_pending。</br></br>等待使用者看見機器</td>
-  <td>用來存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰擁有者沒有執行此動作的必要許可權，或可能處於擱置刪除狀態。</br></br><strong>身為使用者</strong>，請遵循下列步驟：<ol><li>如果您可以存取多個帳戶，請確定您已登入想要使用 {{site.data.keyword.containerlong_notm}} 的帳戶。</li><li>執行 <code>ibmcloud ks api-key-info</code>，以檢視用來存取 IBM Cloud 基礎架構 (SoftLayer) 組合的現行 API 金鑰擁有者。</li><li>執行 <code>ibmcloud account list</code>，以檢視您目前使用的 {{site.data.keyword.Bluemix_notm}} 帳戶的擁有者。</li><li>請聯絡 {{site.data.keyword.Bluemix_notm}} 帳戶的擁有者，並報告 API 金鑰擁有者對 IBM Cloud 基礎架構 (SoftLayer) 的許可權不足，或可能處於擱置刪除狀態。</li></ol></br><strong>身為帳戶擁有者</strong>，請遵循下列步驟：<ol><li>請檢閱 [IBM Cloud 基礎架構 (SoftLayer) 中的必要許可權](cs_users.html#infra_access)，以執行先前失敗的動作。</li><li>修正 API 金鑰擁有者的許可權，或使用 [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 指令來建立新的 API 金鑰。</li><li>如果您或另一位帳戶管理者在您的帳戶中手動設定 IBM Cloud 基礎架構 (SoftLayer) 認證，請執行 [<code>ibmcloud ks credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) 來移除您帳戶中的認證。</li></ol></td>
+  <td>用來存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰擁有者沒有執行此動作的必要許可權，或可能處於擱置刪除狀態。</br></br><strong>身為使用者</strong>，請遵循下列步驟：<ol><li>如果您可以存取多個帳戶，請確定您已登入想要使用 {{site.data.keyword.containerlong_notm}} 的帳戶。</li><li>執行 <code>ibmcloud ks api-key-info</code>，以檢視用來存取 IBM Cloud 基礎架構 (SoftLayer) 組合的現行 API 金鑰擁有者。</li><li>執行 <code>ibmcloud account list</code>，以檢視您目前使用的 {{site.data.keyword.Bluemix_notm}} 帳戶的擁有者。</li><li>請聯絡 {{site.data.keyword.Bluemix_notm}} 帳戶的擁有者，並報告 API 金鑰擁有者對 IBM Cloud 基礎架構 (SoftLayer) 的許可權不足，或可能處於擱置刪除狀態。</li></ol></br><strong>身為帳戶擁有者</strong>，請遵循下列步驟：<ol><li>請檢閱 [IBM Cloud 基礎架構 (SoftLayer) 中的必要許可權](cs_users.html#infra_access)，以執行先前失敗的動作。</li><li>修正 API 金鑰擁有者的許可權，或使用 [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 指令來建立新的 API 金鑰。</li><li>如果您或另一位帳戶管理者在您的帳戶中手動設定 IBM Cloud 基礎架構 (SoftLayer) 認證，請執行 [<code>ibmcloud ks credential-unset</code>](cs_cli_reference.html#cs_credentials_unset) 來移除您帳戶中的認證。</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -256,6 +262,8 @@ lastupdated: "2018-10-25"
 {: #debug_apps}
 
 請檢閱您既有的選項以進行應用程式部署除錯，並找出失敗的主要原因。
+
+
 
 1. 執行 `describe` 指令，以尋找服務或部署資源中的異常狀況。
 
@@ -301,19 +309,12 @@ lastupdated: "2018-10-25"
 {: shortdesc}
 
 -  在終端機中，有 `ibmcloud` CLI 及外掛程式的更新可用時，就會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
-
 -   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/bluemix/support/#status)。
--   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。
-
-如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
+-   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
     {: tip}
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
-
     -   如果您在使用 {{site.data.keyword.containerlong_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
     -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
-
--   開立問題單以與 IBM 支援中心聯絡。若要瞭解開立 IBM 支援問題單或是支援層次與問題單嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。
-
+-   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
 {: tip}
-當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
 

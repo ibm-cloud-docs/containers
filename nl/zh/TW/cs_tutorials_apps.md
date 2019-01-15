@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -56,6 +59,7 @@ lastupdated: "2018-10-25"
 ## 必要條件
 
 * [指導教學：建立 Kubernetes 叢集](cs_tutorials.html#cs_cluster_tutorial)。
+* 安裝 [container-registry plug-in](/docs/services/Registry/index.html#registry_cli_install)。
 
 
 ## 課程 1：將單一實例應用程式部署至 Kubernetes 叢集
@@ -90,7 +94,7 @@ lastupdated: "2018-10-25"
 
 3. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 
-5.  登入 {{site.data.keyword.registryshort_notm}} CLI。**附註**：確定已[安裝](/docs/services/Registry/index.html#registry_cli_install) container-registry 外掛程式。
+5.  登入 {{site.data.keyword.registryshort_notm}} CLI。
 
     ```
     ibmcloud cr login
@@ -231,7 +235,7 @@ lastupdated: "2018-10-25"
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
         ```
         {: screen}
 
@@ -247,7 +251,7 @@ lastupdated: "2018-10-25"
 
 11. [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
 
-    如果您在 [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/) 中選取叢集，則可以使用 **Kubernetes 儀表板**按鈕，透過按一下來啟動儀表板。
+    如果您在 [{{site.data.keyword.Bluemix_notm}} 主控台](https://console.bluemix.net/)中選取叢集，則可以使用 **Kubernetes 儀表板** 按鈕，透過按一下來啟動儀表板。
     {: tip}
 
 12. 在**工作負載**標籤中，您可以看到所建立的資源。
@@ -374,7 +378,7 @@ lastupdated: "2018-10-25"
   ```
   {: screen}
 
-7.  檢查您的 Pod 狀態，以監視您在 Kubernetes 中應用程式的性能。您可以從 CLI 或在 Kubernet 儀表板 GUI 中檢查狀態。
+7.  檢查您的 Pod 狀態，以監視您在 Kubernetes 中應用程式的性能。您可以從 CLI 或在 Kubernet 儀表板中檢查狀態。
 
     *  **從 CLI**：監視在 Pod 變更狀態時所發生的事情。
        ```
@@ -382,7 +386,7 @@ lastupdated: "2018-10-25"
        ```
        {: pre}
 
-    *  **從 GUI**：
+    *  **從 Kubernetes 儀表板中**：
 
        1.  [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。
        2.  在**工作負載**標籤中，您可以看到所建立的資源。在此標籤中，您可以反覆重新整理，並看到性能檢查正常運作中。在 **Pod** 區段中，您可以看到，當 Pod 中的容器重建時，Pod 重新啟動多少次。如果您正好在儀表板中捕捉到下列錯誤，此訊息表示性能檢查捕捉到問題。請給它幾分鐘時間，然後再重新整理。您會看到每一個 Pod 的重新啟動次數有所變更。
@@ -523,7 +527,7 @@ lastupdated: "2018-10-25"
         ```
         {: codeblock}
 
-    2.  在 watson 部署的 volumes 區段中，更新您在前一個指導教學中建立的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 密碼名稱。將 Kubernetes 密碼當作磁區裝載至您的部署，即可讓您 Pod 中執行的容器可使用 {{site.data.keyword.Bluemix_notm}} 服務認證。此指導教學中的 {{site.data.keyword.watson}} 應用程式元件已配置為使用磁區裝載路徑來查閱服務認證。
+    2.  在 watson 部署的 volumes 區段中，更新您在前一個指導教學中建立的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 密碼名稱。將 Kubernetes 密碼當作磁區裝載至您的部署，即可讓 Pod 中執行的容器可使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 金鑰。此指導教學中的 {{site.data.keyword.watson}} 應用程式元件已配置為使用磁區裝載路徑來查閱 API 金鑰。
 
         ```
         volumes:
@@ -613,8 +617,8 @@ lastupdated: "2018-10-25"
 1.  開啟執行中部署的配置詳細資料。
 
     ```
-    kubectl edit deployment/watson-talk-pod
-    ```
+        kubectl edit deployment/watson-talk-pod
+        ```
     {: pre}
 
     視您的作業系統而定，可能會開啟 vi 編輯器或文字編輯器。
@@ -660,11 +664,11 @@ lastupdated: "2018-10-25"
   輸出範例：
 
   ```
-deployment "watson-pod" deleted
-deployment "watson-talk-pod" deleted
-service "watson-service" deleted
-service "watson-talk-service" deleted
-```
+  deployment "watson-pod" deleted
+  deployment "watson-talk-pod" deleted
+  service "watson-service" deleted
+  service "watson-talk-service" deleted
+  ```
   {: screen}
 
   如果您不想要保留叢集，可以同時將它刪除。

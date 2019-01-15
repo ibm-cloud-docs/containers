@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -52,6 +55,7 @@ lastupdated: "2018-10-25"
 {: strongswan_limitations}
 
 在使用 strongSwan Helm 圖表之前，請檢閱下列考量及限制。
+{: shortdesc}
 
 * strongSwan Helm 圖表需要遠端 VPN 端點啟用 NAT 遍訪。除了預設 IPSec UDP 埠 500 外，NAT 遍訪還需要 UDP 埠 4500。這兩個 UDP 埠都需要容許通過配置的任何防火牆。
 * strongSwan Helm 圖表不支援以路徑為基礎的 IPSec VPN。
@@ -64,13 +68,18 @@ lastupdated: "2018-10-25"
 ## 配置 strongSwan Helm 圖表
 {: #vpn_configure}
 
+在安裝 strongSwan Helm 圖表之前，您必須決定 strongSwan 配置。
+{: shortdesc}
+
 開始之前：
 * [在內部部署資料中心安裝 IPSec VPN 閘道](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection)。
-* [建立標準叢集](cs_clusters.html#clusters_cli)。
 * [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 
 ### 步驟 1：取得 strongSwan Helm 圖表
 {: #strongswan_1}
+
+安裝 Helm 並取得 strongSwan Helm 圖表，以檢視可能的配置。
+{: shortdesc}
 
 1. [安裝叢集的 Helm，並將 {{site.data.keyword.Bluemix_notm}} 儲存庫新增至 Helm 實例](cs_integrations.html#helm)。
 
@@ -87,11 +96,12 @@ lastupdated: "2018-10-25"
 {: #strongswan_2}
 
 若要控制 VPN 連線的建立，請修改下列基本 IPSec 設定。
+{: shortdesc}
 
 如需每一個設定的相關資訊，請閱讀 `config.yaml` 檔案內提供的 Helm 圖表文件。
 {: tip}
 
-1. 如果您的內部部署 VPN 通道端點不支援使用 `ikev2` 作為起始設定連線的通訊協定，請將 `ipsec.keyexchange` 的值變更為 `ikev1` 或 `ike`。
+1. 如果您的內部部署 VPN 通道端點不支援使用 `ikev2` 作為起始設定連線的通訊協定，請將 `ipsec.keyexchange` 的值變更為 `ikev1`。
 2. 將 `ipsec.esp` 設為內部部署 VPN 通道端點用於連線之 ESP 加密及鑑別演算法的清單。
     * 如果將 `ipsec.keyexchange` 設為 `ikev1`，則必須指定此設定。
     * 如果將 `ipsec.keyexchange` 設為 `ikev2`，則此設定為選用項目。
@@ -120,7 +130,7 @@ lastupdated: "2018-10-25"
 
 若要建立入埠 VPN 連線，請修改下列設定：
 1. 驗證 `ipsec.auto` 已設為 `add`。
-2. 選用項目：將 `loadBalancerIP` 設為 strongSwan VPN 服務的可攜式公用 IP 位址。當您需要穩定的 IP 位址時（例如，當您必須指定允許哪些 IP 位址通過內部部署防火牆時），指定 IP 位址很有用。叢集必須至少有一個可用的公用「負載平衡器」IP 位址。[您可以查看可用的公用 IP 位址](cs_subnets.html#review_ip)或[釋放已使用的 IP 位址](cs_subnets.html#free)。<br>**附註**：
+2. 選用項目：將 `loadBalancerIP` 設為 strongSwan VPN 服務的可攜式公用 IP 位址。當您需要穩定的 IP 位址時（例如，當您必須指定允許哪些 IP 位址通過內部部署防火牆時），指定 IP 位址很有用。叢集必須至少有一個可用的公用「負載平衡器」IP 位址。[您可以查看可用的公用 IP 位址](cs_subnets.html#review_ip)或[釋放已使用的 IP 位址](cs_subnets.html#free)。
     * 如果將此設定保留空白，則會使用其中一個可用的可攜式公用 IP 位址。
     * 您也必須配置針對內部部署 VPN 端點上的叢集 VPN 端點選取的公用 IP 位址，或指派給它的公用 IP 位址。
 
@@ -129,10 +139,10 @@ lastupdated: "2018-10-25"
 2. 將 `remote.gateway` 設為遠端網路中內部部署 VPN 端點的公用 IP 位址。
 3. 為叢集 VPN 端點的 IP 位址選擇下列其中一個選項：
     * **叢集專用閘道的公用 IP 位址**：如果您的工作者節點僅連接至專用 VLAN，則出埠 VPN 要求會透過專用閘道來遞送，以到達網際網路。專用閘道的公用 IP 位址用於 VPN 連線。
-    * **strongSwan Pod 執行所在之工作者節點的公用 IP 位址**：如果 strongSwan Pod 執行所在的工作者節點已連接至公用 VLAN，則工作者節點的公用 IP 位址會用於 VPN 連線。<br>**附註**：
+    * **strongSwan Pod 執行所在之工作者節點的公用 IP 位址**：如果 strongSwan Pod 執行所在的工作者節點已連接至公用 VLAN，則工作者節點的公用 IP 位址會用於 VPN 連線。<br>
         * 如果 strongSwan Pod 已遭刪除，並重新排定至叢集裡的不同工作者節點，則 VPN 的公用 IP 位址會變更。遠端網路的內部部署 VPN 端點必須容許從任何叢集工作者節點的公用 IP 位址建立 VPN 連線。
         * 如果遠端 VPN 端點無法處理來自多個公用 IP 位址的 VPN 連線，請限制 strongSwan VPN Pod 部署至的節點。將 `nodeSelector` 設為特定工作者節點的 IP 位址或工作者節點標籤。例如，值 `kubernetes.io/hostname: 10.232.xx.xx` 容許 VPN Pod 僅部署至該工作者節點。`strongswan: vpn` 值將 VPN Pod 限制為只能在具有該標籤的任何工作者節點上執行。您可以使用任何工作者節點標籤。若要容許不同的工作者節點與不同的 Helm 圖表部署搭配使用，請使用 `strongswan: <release_name>`。如需高可用性，請至少選取兩個工作者節點。
-    * **strongSwan 服務的公用 IP 位址**：若要使用 strongSwan VPN 服務的 IP 位址來建立連線，請將 `connectUsingLoadBalancerIP` 設為 `true`。strongSwan 服務 IP 位址是您可在 `loadBalancerIP` 設定中指定的可攜式公用 IP 位址，或是自動指派給服務的可用可攜式公用 IP 位址。<br>**附註**：
+    * **strongSwan 服務的公用 IP 位址**：若要使用 strongSwan VPN 服務的 IP 位址來建立連線，請將 `connectUsingLoadBalancerIP` 設為 `true`。strongSwan 服務 IP 位址是您可在 `loadBalancerIP` 設定中指定的可攜式公用 IP 位址，或是自動指派給服務的可用可攜式公用 IP 位址。<br>
         * 如果您選擇使用 `loadBalancerIP` 設定來選取 IP 位址，則叢集必須至少具有一個可用的公用「負載平衡器」IP 位址。[您可以查看可用的公用 IP 位址](cs_subnets.html#review_ip)或[釋放已使用的 IP 位址](cs_subnets.html#free)。
         * 所有叢集工作者節點都必須位於相同的公用 VLAN 上。否則，您必須使用 `nodeSelector` 設定，以確保 VPN Pod 部署至與 `loadBalancerIP` 相同公用 VLAN 上的工作者節點。
         * 如果 `connectUsingLoadBalancerIP` 設為 `true`，且 `ipsec.keyexchange` 設為 `ikev1`，則您必須將 `enableServiceSourceIP` 設為 `true`。
@@ -146,19 +156,18 @@ lastupdated: "2018-10-25"
 1. 將一個以上叢集子網路的 CIDR 新增至 `local.subnet` 設定。您必須在內部部署 VPN 端點上配置本端子網路 CIDR。此清單可能包括下列子網路：  
     * Kubernetes Pod 子網路 CIDR：`172.30.0.0/16`。在所有叢集 Pod 與遠端網路子網路（列在 `remote.subnet` 設定中）中的任何主機之間，會啟用雙向通訊。如果基於安全考量，您必須防止任何 `remote.subnet` 主機存取叢集 Pod，請不要將 Kubernetes Pod 子網路新增至 `local.subnet` 設定。
     * Kubernetes 服務子網路 CIDR：`172.21.0.0/16`。服務 IP 位址會提供一種公開多個應用程式 Pod 的方法，而這些應用程式 Pod 是部署在單一 IP 後面的數個工作者節點上。
-    * 如果您的應用程式是由專用網路上的 NodePort 服務或專用 Ingress ALB 公開，請新增工作者節點的專用子網路 CIDR。藉由執行 `ibmcloud ks worker <cluster_name>`，來擷取工作者節點專用 IP 位址的前三個八位元組。比方說，如果它是 `10.176.48.xx`，請注意 `10.176.48`。接下來，執行下列指令，將 `<xxx.yyy.zz>` 取代為您先前擷取的八位元組，來取得工作者節點專用子網路 CIDR：`ibmcloud sl subnet list | grep <xxx.yyy.zzz>`。<br>**附註**：如果在新的專用子網路上新增工作者節點，則您必須將新的專用子網路 CIDR 新增至 `local.subnet` 設定及內部部署 VPN 端點。然後，必須重新啟動 VPN 連線。
-    * 如果您的應用程式是由專用網路上的 LoadBalancer 服務公開，請新增叢集的專用使用者管理子網路 CIDR。若要尋找這些值，請執行 `ibmcloud ks cluster-get <cluster_name> --showResources`。在 **VLANS** 區段中，請尋找 **Public** 值為 `false` 的 CIDR。<br>
-    **附註**：如果將 `ipsec.keyexchange` 設為 `ikev1`，則您只能指定一個子網路。不過，您可以使用 `localSubnetNAT` 設定，將多個叢集子網路結合成單一子網路。
+    * 如果您的應用程式是由專用網路上的 NodePort 服務或專用 Ingress ALB 公開，請新增工作者節點的專用子網路 CIDR。藉由執行 `ibmcloud ks worker <cluster_name>`，來擷取工作者節點專用 IP 位址的前三個八位元組。比方說，如果它是 `10.176.48.xx`，請注意 `10.176.48`。接下來，執行下列指令，將 `<xxx.yyy.zz>` 取代為您先前擷取的八位元組，來取得工作者節點專用子網路 CIDR：`ibmcloud sl subnet list | grep <xxx.yyy.zzz>`。**附註**：如果在新的專用子網路上新增工作者節點，則您必須將新的專用子網路 CIDR 新增至 `local.subnet` 設定及內部部署 VPN 端點。然後，必須重新啟動 VPN 連線。
+    * 如果您的應用程式是由專用網路上的 LoadBalancer 服務公開，請新增叢集的專用使用者管理子網路 CIDR。若要尋找這些值，請執行 `ibmcloud ks cluster-get <cluster_name> --showResources`。在 **VLANS** 區段中，請尋找 **Public** 值為 `false` 的 CIDR。**附註**：如果將 `ipsec.keyexchange` 設為 `ikev1`，則您只能指定一個子網路。不過，您可以使用 `localSubnetNAT` 設定，將多個叢集子網路結合成單一子網路。
 
 2. 選用項目：使用 `localSubnetNAT` 設定來重新對映叢集子網路。子網路的「網址轉換 (NAT)」能針對叢集網路與內部部署遠端網路之間的子網路衝突，提供暫行解決方法。您可以使用 NAT，將叢集的專用本端 IP 子網路、Pod 子網路 (172.30.0.0/16) 或 Pod 服務子網路 (172.21.0.0/16) 重新對映至不同的專用子網路。VPN 通道會看到重新對映的 IP 子網路，而非原始子網路。重新對映發生在封包透過 VPN 通道傳送之前，以及封包從 VPN 通道抵達之後。您可以透過 VPN 同時公開重新對映及未重新對映的子網路。若要啟用 NAT，您可以新增整個子網路或新增個別 IP 位址。
     * 如果您以格式 `10.171.42.0/24=10.10.10.0/24` 新增整個子網路，則重新對映是 1 對 1：內部網路子網路中的所有 IP 位址都會對映到外部網路子網路，反之亦然。
     * 如果您以格式 `10.171.42.17/32=10.10.10.2/32,10.171.42.29/32=10.10.10.3/32` 新增個別 IP 位址，則只有那些內部 IP 位址會對映到指定的外部 IP 位址。
 
-3. 2.2.0 版以及更新版本 strongSwan Helm 圖表的選用項目：藉由將 `enableSingleSourceIP` 設為 `true`，將所有叢集 IP 位址隱藏在單一 IP 位址之後。此選項為 VPN 連線提供其中一個最安全的配置，因為不允許從遠端網路回到叢集的任何連線。<br>**附註**：
+3. 2.2.0 版以及更新版本 strongSwan Helm 圖表的選用項目：藉由將 `enableSingleSourceIP` 設為 `true`，將所有叢集 IP 位址隱藏在單一 IP 位址之後。此選項為 VPN 連線提供其中一個最安全的配置，因為不允許從遠端網路回到叢集的任何連線。<br>
     * 此設定要求流經 VPN 連線的所有資料流程都必須是出埠流程，無論 VPN 連線是從叢集建立，還是從遠端網路建立。
     * `local.subnet` 必須僅設為某個 /32 子網路。
 
-4. 2.2.0 版以及更新版本 strongSwan Helm 圖表的選用項目：使用 `localNonClusterSubnet` 設定，讓 strongSwan 服務可將送入的要求從遠端網路遞送至存在於叢集以外的服務。<br>**附註**：
+4. 2.2.0 版以及更新版本 strongSwan Helm 圖表的選用項目：使用 `localNonClusterSubnet` 設定，讓 strongSwan 服務可將送入的要求從遠端網路遞送至存在於叢集以外的服務。<br>
     * 非叢集服務必須存在於相同的專用網路上，或工作者節點可以連接的專用網路上。
     * 非叢集工作者節點無法起始透過 VPN 連線送至遠端網路的資料流量，但非叢集節點可以是來自遠端網路的送入要求目標。
     * 您必須在 `local.subnet` 設定中列出非叢集子網路的 CIDR。
@@ -170,21 +179,59 @@ lastupdated: "2018-10-25"
 {: shortdesc}
 
 1. 將一個以上內部部署專用子網路的 CIDR 新增至 `remote.subnet` 設定。
-    <br>**附註**：如果將 `ipsec.keyexchange` 設為 `ikev1`，則您只能指定一個子網路。
-2. 2.2.0 版以及更新版本 strongSwan Helm 圖表的選用項目：使用 `remoteSubnetNAT` 設定來重新對映遠端網路子網路。子網路的「網址轉換 (NAT)」能針對叢集網路與內部部署遠端網路之間的子網路衝突，提供暫行解決方法。您可以使用 NAT，將遠端網路的 IP 子網路重新對映至不同的專用子網路。VPN 通道會看到重新對映的 IP 子網路，而非原始子網路。重新對映發生在封包透過 VPN 通道傳送之前，以及封包從 VPN 通道抵達之後。您可以透過 VPN 同時公開重新對映及未重新對映的子網路。
+    **附註**：如果將 `ipsec.keyexchange` 設為 `ikev1`，則您只能指定一個子網路。
+2. 2.2.0 版以及更新版本 strongSwan Helm 圖表的選用項目：使用 `remoteSubnetNAT` 設定來重新對映遠端網路子網路。子網路的「網址轉換 (NAT)」能針對叢集網路與內部部署遠端網路之間的子網路衝突，提供暫行解決方法。您可以使用 NAT，將遠端網路的 IP 子網路重新對映至不同的專用子網路。重新對映發生在封包透過 VPN 通道傳送之前。叢集中的 Pod 會看到重新對映的 IP 子網路，而非原始子網路。在 Pod 透過 VPN 通道傳回資料之前，重新對映的 IP 子網路會切換回遠端網路正在使用的實際子網路。您可以透過 VPN 同時公開重新對映及未重新對映的子網路。
 
-### 步驟 6：部署 Helm 圖表
+### 步驟 6（選用）：使用 Slack Webhook 整合啟用監視
 {: #strongswan_6}
+
+若要監視 strongSwan VPN 的狀態，您可以設定 Webhook 將 VPN 連線功能訊息自動張貼到 Slack 通道。
+{: shortdesc}
+
+1. 登入 Slack 工作區。
+
+2. 移至[送入的 WebHooks 應用程式頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks)。
+
+3. 按一下**要求安裝**。如果此應用程式未列示在 Slack 設定中，請聯絡 Slack 工作區擁有者。
+
+4. 在核准安裝要求之後，請按一下**新增配置**。
+
+5. 選擇 Slack 通道，或建立新通道以將 VPN 訊息傳送至其中。
+
+6. 複製所產生的 Webhook URL。此 URL 格式與下列類似：
+  ```
+  https://hooks.slack.com/services/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
+  ```
+  {: screen}
+
+7. 若要驗證已安裝 Slack Webhook，請執行下列指令，將測試訊息傳送至 Webhook URL：
+    ```
+    curl -X POST -H 'Content-type: application/json' -d '{"text":"VPN test message"}' <webhook_URL>
+    ```
+    {: pre}
+
+8. 移至您選擇的 Slack 通道，以驗證測試訊息已成功。
+
+9. 在 Helm 圖表的 `config.yaml` 檔案中，配置 Webhook 來監視您的 VPN 連線。
+    1. 將 `monitoring.enable` 變更為 `true`。
+    2. 在遠端子網路中，新增專用 IP 位址或 HTTP 端點，您想要確保它們可透過 `monitoring.privateIPs` 或 `monitoring.httpEndpoints` 的 VPN 連線來聯繫。例如，您可以將 `remote.privateIPtoPing` 設定中的 IP 新增至 `monitoring.privateIPs`。
+    3. 將 Webhook URL 新增至 `monitoring.slackWebhook`。
+    4. 視需要變更其他選用的 `monitoring` 設定。
+
+### 步驟 7：部署 Helm 圖表
+{: #strongswan_7}
+
+在您的叢集中，使用您先前選擇的配置來部署 Helm 圖表。
+{: shortdesc}
 
 1. 如果您需要配置其他進階設定，請遵循提供的文件以瞭解 Helm 圖表中的每一個設定。
 
-2. **重要事項**：如果您不需要 Helm 圖表中的設定，請在它前面加上 `#` 來註銷該內容。
-
 3. 儲存已更新的 `config.yaml` 檔案。
 
-4. 使用已更新的 `config.yaml` 檔案，將 Helm 圖表安裝至叢集。已更新的內容會儲存在圖表的 ConfigMap 中。
+4. 使用已更新的 `config.yaml` 檔案，將 Helm 圖表安裝至叢集。
 
-    **附註**：如果單一叢集裡有多個 VPN 部署，您可以選擇比 `vpn` 更具描述性的版本名稱，以避免命名衝突並區分您的部署。為了避免截斷版本名稱，請將版本名稱限制為 35 個字元以內。
+    如果單一叢集中有多個 VPN 部署，您可以選擇比 `vpn` 更具描述性的版本名稱，以避免命名衝突並區分您的部署。為了避免截斷版本名稱，請將版本名稱限制為 35 個字元以內。
+    {: tip}
 
     ```
     helm install -f config.yaml --name=vpn ibm/strongswan
@@ -237,12 +284,17 @@ lastupdated: "2018-10-25"
     ```
     {: screen}
 
-    **附註**：
+    * 當您嘗試使用 strongSwan Helm 圖表建立 VPN 連線功能時，有可能第一次的 VPN 狀態不是 `ESTABLISHED`。您可能需要檢查內部部署 VPN 端點設定，並數次變更配置檔，連線才會成功：
+        1. 執行 `helm delete --purge <release_name>`
+        2. 修正配置檔中不正確的值。
+        3. 執行 `helm install -f config.yaml --name=<release_name> ibm/strongswan`
+      您也可以在下一步執行其他檢查。
 
-    <ul>
-    <li>當您嘗試使用 strongSwan Helm 圖表建立 VPN 連線功能時，有可能第一次的 VPN 狀態不是 `ESTABLISHED`。您可能需要檢查內部部署 VPN 端點設定，並數次變更配置檔，連線才會成功：<ol><li>執行 `helm delete --purge <release_name>`</li><li>修正配置檔中不正確的值。</li><li>執行 `helm install -f config.yaml --name=<release_name> ibm/strongswan`</li></ol>您也可以在下一步執行其他檢查。</li>
-    <li>如果 VPN Pod 處於 `ERROR` 狀況，或持續當機並重新啟動，則可能是由於圖表的 ConfigMap 中 `ipsec.conf` 設定的參數驗證所造成。<ol><li>請執行 `kubectl logs -n $STRONGSWAN_POD`，檢查 strongSwan Pod 日誌中是否有任何驗證錯誤。</li><li>如果有驗證錯誤，請執行 `helm delete --purge <release_name>`<li>修正配置檔中不正確的值。</li><li>執行 `helm install -f config.yaml --name=<release_name> ibm/strongswan`</li></ol>如果叢集具有大量工作者節點，您也可以使用 `helm upgrade` 更快速地套用您的變更，而不要執行 `helm delete` 及 `helm install`。</li>
-    </ul>
+    * 如果 VPN Pod 處於 `ERROR` 狀況，或持續當機並重新啟動，則可能是由於圖表的 ConfigMap 中 `ipsec.conf` 設定的參數驗證所造成。
+        1. 執行 `kubectl logs $STRONGSWAN_POD`，檢查 strongSwan Pod 日誌以尋找任何驗證錯誤。
+        2. 如果有驗證錯誤，請執行 `helm delete --purge <release_name>`
+        3. 修正配置檔中不正確的值。
+        4. 執行 `helm install -f config.yaml --name=<release_name> ibm/strongswan`
 
 4. 您可以藉由執行內含在 strongSwan 圖表定義中的五個 Helm 測試，來進一步測試 VPN 連線功能。
 
@@ -252,7 +304,6 @@ lastupdated: "2018-10-25"
     {: pre}
 
     * 如果所有的測試都通過，您的 strongSwan VPN 連線便已順利設定。
-
     * 如果有任何測試失敗，請繼續下一步。
 
 5. 查看測試 Pod 的日誌，以檢視失敗測試的輸出。
@@ -262,7 +313,8 @@ lastupdated: "2018-10-25"
     ```
     {: pre}
 
-    **附註**：部分測試的需求是 VPN 配置中的選用設定。如果某些測試失敗，則根據您是否指定這些選用設定，失敗也許是可接受的。如需每一個測試及其失敗原因的相關資訊，請參閱下表。
+    部分測試的需求是 VPN 配置中的選用設定。如果某些測試失敗，則根據您是否指定這些選用設定，失敗也許是可接受的。如需每一個測試及其失敗原因的相關資訊，請參閱下表。
+    {: note}
 
     {: #vpn_tests_table}
     <table>
@@ -281,7 +333,7 @@ lastupdated: "2018-10-25"
     </tr>
     <tr>
     <td><code>vpn-strongswan-ping-remote-gw</code></td>
-    <td>對您在 <code>config.yaml</code> 檔案中配置的 <code>remote.gateway</code> 公用 IP 位址進行連線測試。此測試可能因下列原因而失敗：<ul><li>您未指定內部部署 VPN 閘道 IP 位址。如果 <code>ipsec.auto</code> 是設為 <code>start</code>，則需要 <code>remote.gateway</code> IP 位址。</li><li>VPN 連線沒有 <code>ESTABLISHED</code> 狀態。如需相關資訊，請參閱 <code>vpn-strongswan-check-state</code>。</li><li>VPN 連線功能是 <code>ESTABLISHED</code>，但 ICMP 封包遭到防火牆封鎖。</li></ul></td>
+    <td>對您在 <code>config.yaml</code> 檔案中配置的 <code>remote.gateway</code> 公用 IP 位址進行連線測試。如果 VPN 連線具有 <code>ESTABLISHED</code> 狀態，則您可以忽略此測試的結果。如果 VPN 連線沒有 <code>ESTABLISHED</code> 狀態，則此測試可能由於下列原因而失敗：<ul><li>您未指定內部部署 VPN 閘道 IP 位址。如果 <code>ipsec.auto</code> 是設為 <code>start</code>，則需要 <code>remote.gateway</code> IP 位址。</li><li>ICMP（連線測試）封包遭到防火牆封鎖。</li></ul></td>
     </tr>
     <tr>
     <td><code>vpn-strongswan-ping-remote-ip-1</code></td>
@@ -347,6 +399,135 @@ lastupdated: "2018-10-25"
 <br />
 
 
+## 依名稱空間或工作者節點限制 strongSwan VPN 資料流量
+{: #limit}
+
+如果您具有單一承租戶叢集，或者如果您具有可在承租戶之間共用叢集資源的多方承租戶叢集，則您可以[將每個 strongSwan 部署的 VPN 資料流量限制為特定名稱空間中的 Pod](#limit_namespace)。如果您具有叢集資源專用於承租戶的多方承租戶叢集，則您可以[將每個 strongSwan 部署的 VPN 資料流量限制為專用於每個承租戶的工作者節點](#limit_worker)。
+{: shortdesc}
+
+### 依名稱空間限制 strongSwan VPN 資料流量
+{: #limit_namespace}
+
+當您具有單一承租戶或多方承租戶叢集時，可以將 VPN 資料流量限制為僅在特定名稱空間中的 Pod。
+{: shortdesc}
+
+例如，假設您只要特定名稱空間 (`my-secure-namespace`) 中的 Pod 透過 VPN 傳送及接收資料。您不要其他名稱空間（例如 `kube-system`、`ibm-system` 或 `default`）中的 Pod 存取您的內部部署網路。若要將 VPN 資料流量限制為僅限 `my-secure-namespace`，您可以建立 Calico 廣域網路原則。
+
+在使用此解決方案之前，請檢閱下列考量及限制。
+* 您不需要將 strongSwan Helm 圖表部署到指定的名稱空間。strongSwan VPN Pod 及路徑 DaemonSet 可以部署至 `kube-system` 或任何其他名稱空間。如果 strongSwan VPN 未部署至指定的名稱空間，則 `vpn-strongswan-ping-remote-ip-1` Helm 測試會失敗。這是預期且可接受的失敗。此測試會從叢集中的 VPN Pod，對內部部署 VPN 閘道的 `remote.privateIPtoPing` 專用 IP 位址進行連線測試，而此 VPN Pod 不在可以直接存取遠端子網路的名稱空間中。不過，VPN Pod 仍然能夠將資料流量轉遞至名稱空間中對遠端子網路具有路徑的 Pod，而且資料流量仍然可以正確地流動。VPN 狀況仍是 `ESTABLISHED`，而且所指定之名稱空間中的 Pod 可以透過 VPN 進行連接。
+* 下列步驟中的 Calico 廣域網路原則不會防止使用主機網路的 Kubernetes Pod，透過 VPN 傳送及接收資料。使用主機網路配置 Pod 時，在 Pod 中執行的應用程式可以接聽其所在工作者節點的網路介面。這些主機網路 Pod 都可以存在於任何名稱空間中。若要判斷哪些 Pod 具有主機網路，請執行 `kubectl get pods --all-namespaces -o wide`，並尋找所有沒有 `172.30.0.0/16` Pod IP 位址的 Pod。如果您想要防止主機網路 Pod 透過 VPN 傳送及接收資料，您可以在 `values.yaml` 部署檔案中設定下列選項：`local.subnet: 172.30.0.0/16` 及 `enablePodSNAT: false`。這些配置設定會透過 VPN 連線將所有 Kubernetes Pod 公開至遠端網路。不過，只有位於所指定之安全名稱空間的 Pod 才能透過 VPN 進行聯繫。
+
+開始之前：
+* 建立或使用執行 Kuberneges 1.10 版或更新版本的叢集。
+* [部署 strongSwan Helm 圖表](#vpn_configure)，並[確保 VPN 連線功能運作正常](#vpn_test)。
+* [安裝並配置 Calico CLI](cs_network_policy.html#cli_install)。
+
+若要將 VPN 資料流量限制為特定名稱空間，請執行下列動作：
+
+1. 建立名為 `allow-nonvpn-outbound.yaml` 的 Calico 廣域網路原則。此原則容許所有名稱空間繼續將出埠資料流量傳送至所有目的地，但 strongSwan VPN 存取的遠端子網路除外。將 `<remote.subnet>` 取代為您在 Helm `values.yaml` 配置檔中指定的 `remote.subnet`。若要指定多個遠端子網路，請參閱 [Calico 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy)。
+    ```yaml
+    apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+      name: allow-non-vpn-outbound
+    spec:
+      selector: has(projectcalico.org/namespace)
+      egress:
+      - action: Allow
+        destination:
+          notNets:
+          - <remote.subnet>
+      order: 900
+      types:
+      - Egress
+    ```
+    {: codeblock}
+
+2. 套用原則。
+
+    ```
+    calicoctl apply -f allow-non-vpn-outbound.yaml --config=filepath/calicoctl.cfg
+    ```
+    {: pre}
+
+3. 建立另一個名為 `allow-vpn-from-namespace.yaml` 的 Calico 廣域網路原則。此原則僅容許指定的名稱空間將出埠資料流量傳送至 strongSwan VPN 存取的遠端子網路。將 `<namespace>` 取代為可以存取 VPN 的名稱空間，並將 `<remote.subnet>` 取代為您在 Helm `values.yaml` 配置檔中指定的 `remote.subnet`。若要指定多個名稱空間或遠端子網路，請參閱 [Calico 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy)。
+    ```yaml
+    apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+      name: allow-vpn-from-namespace
+    spec:
+      selector: projectcalico.org/namespace == "<namespace>"
+      egress:
+      - action: Allow
+        destination:
+          nets:
+          - <remote.subnet>
+      order: 900
+      types:
+      - Egress
+    ```
+    {: codeblock}
+
+4. 套用原則。
+
+    ```
+    calicoctl apply -f allow-vpn-from-namespace.yaml --config=filepath/calicoctl.cfg
+    ```
+    {: pre}
+
+5. 驗證已在叢集中建立廣域網路原則。
+    ```
+    calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
+    ```
+    {: pre}
+
+### 依工作者節點限制 strongSwan VPN 資料流量
+{: #limit_worker}
+
+在多方承租戶叢集中具有多個 strongSwan VPN 部署時，您可以將每個部署的 VPN 資料流量限制為專用於每個承租戶的特定工作者節點。
+{: shortdesc}
+
+部署 strongSwan Helm 圖表時，會建立 strongSwan VPN 部署。strongSwan VPN Pod 會部署至任何未污染的工作者節點。此外，還會建立 Kubernetes DaemonSet。此 DaemonSet 會自動將叢集中所有未污染之工作者節點上的路徑配置為每一個遠端子網路。strongSwan VPN Pod 會使用工作者節點上的路徑，將要求轉遞至內部部署網路中的遠端子網路。
+
+除非您在 `value.yaml` 檔案的 `tolerations` 設定中指定污染，否則路徑不會配置在污染的節點上。藉由污染工作者節點，您可以阻止在這些工作者節點上配置任何 VPN 路徑。然後，在 `tolerations` 設定中，您可以只針對您要在受污染工作者節點上允許的 VPN 部署指定污染。如此，某個承租戶的 Helm 圖表部署的 strongSwan VPN Pod 只會使用該承租戶的工作者節點上的路徑，透過 VPN 連線將資料流量轉遞至遠端子網路。
+
+在使用此解決方案之前，請檢閱下列考量及限制。
+* 依預設，Kubernetes 會將應用程式 Pod 放置在任何可用的未污染工作者節點上。若要確定此解決方案運作正常，每個承租戶首先必須確定，他們只針對正確的承租戶將其應用程式 Pod 部署至污染的工作者節點。此外，每個污染的工作者節點也都必須要有一個容錯，才能讓應用程式 Pod 放置在節點上。如需污染及容錯的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
+* 叢集資源可能未以最佳化方式使用，因為任一承租戶都無法將應用程式 Pod 放置在共用的未污染節點上。
+
+依工作者節點限制 strongSwan VPN 資料流量的下列步驟會使用此範例情境：假設您有一個多方承租戶 {{site.data.keyword.containerlong_notm}} 叢集，具有六個工作者節點。叢集支援承租戶 A 和承租戶 B。您以下列方式污染工作者節點：
+* 兩個工作者節點受到污染，因此只有承租戶 A Pod 才會排定在工作者節點上。
+* 兩個工作者節點受到污染，因此只有承租戶 B Pod 才會排定在工作者節點上。
+* 兩個工作者節點未受到污染，因為 strongSwan VPN Pod 及執行所在的負載平衡器 IP 至少需要 2 個工作者節點。
+
+若要將 VPN 資料流量限制為每個承租戶的污染節點，請執行下列動作：
+
+1. 若要在此範例中，將 VPN 資料流量限制為僅專用於承租戶 A 的工作者節點，您可以在 `values.yaml` 檔案中，針對承租戶 A strongSwan Helm 圖表指定下列 `toleration`：
+    ```
+    tolerations:
+     - key: dedicated
+       operator: "Equal"
+       value: "tenantA"
+       effect: "NoSchedule"
+    ```
+    {: codeblock}
+    此容忍容許路徑 DaemonSet 在兩個具有 `dedicated="tenantA"` 污染的工作者節點上執行，以及在兩個未污染的工作者節點上執行。此部署的 strongSwan VPN Pod 會在兩個未污染的工作者節點上執行。
+
+2. 若要在此範例中，將 VPN 資料流量限制為僅專用於承租戶 B 的工作者節點，您可以在 `values.yaml` 檔案中，針對承租戶 B strongSwan Helm 圖表指定下列 `toleration`：
+    ```
+    tolerations:
+     - key: dedicated
+       operator: "Equal"
+       value: "tenantB"
+       effect: "NoSchedule"
+    ```
+    {: codeblock}
+    此容忍容許路徑 DaemonSet 在兩個具有 `dedicated="tenantB"` 污染的工作者節點上執行，以及在兩個未污染的工作者節點上執行。此部署的 strongSwan VPN Pod 也會在兩個未污染的工作者節點上執行。
+
+<br />
+
+
 ## 升級 strongSwan Helm 圖表
 {: #vpn_upgrade}
 
@@ -360,75 +541,8 @@ lastupdated: "2018-10-25"
   ```
   {: pre}
 
-**重要事項**：strongSwan 2.0.0 Helm 圖表不適用於 Calico 第 3 版或 Kubernetes 1.10。[將叢集更新至 1.10](cs_versions.html#cs_v110) 之前，請將 strongSwan 更新至 2.2.0 Helm 圖表，其與 Calico 2.6 及 Kubernetes 1.8 及 1.9 舊版相容。
-
-將您的叢集更新為 Kubernetes 1.10？首先，務必刪除您的 strongSwan Helm 圖表。然後，在更新後，重新予以安裝。
+strongSwan 2.0.0 Helm 圖表不適用於 Calico 第 3 版或 Kubernetes 1.10。在[將叢集更新至 1.10](cs_versions.html#cs_v110) 之前，請先將 strongSwan 更新至 2.2.0 或更新版本的 Helm 圖表，其與 Calico 2.6 及 Kubernetes 1.9 舊版相容。接下來，刪除 strongSwan Helm 圖表。然後，在更新之後，您可以重新安裝圖表。
 {:tip}
-
-### 從 1.0.0 版升級
-{: #vpn_upgrade_1.0.0}
-
-由於在 1.0.0 版 Helm 圖表中使用的部分設定，您無法使用 `helm upgrade` 從 1.0.0 更新至最新版本。
-{:shortdesc}
-
-若要從 1.0.0 版升級，您必須刪除 1.0.0 圖表，並安裝最新版本：
-
-1. 刪除 1.0.0 Helm 圖表。
-
-    ```
-    helm delete --purge <release_name>
-    ```
-    {: pre}
-
-2. 將 strongSwan Helm 圖表的最新版本的預設配置設定儲存在本端 YAML 檔案中。
-
-    ```
-    helm inspect values ibm/strongswan > config.yaml
-    ```
-    {: pre}
-
-3. 更新配置檔，並儲存含有您所做變更的檔案。
-
-4. 使用已更新的 `config.yaml` 檔案，將 Helm 圖表安裝至叢集。
-
-    ```
-    helm install -f config.yaml --name=<release_name> ibm/strongswan
-    ```
-    {: pre}
-
-此外，1.0.0 中某些寫在程式中的 `ipsec.conf` 逾時設定，在未來版本中公開為可配置的內容。其中一些可配置的 `ipsec.conf` 逾時設定的名稱及預設值，也變更為更符合 strongSwan 標準。如果您要從 1.0.0 升級 Helm 圖表，且要保留 1.0.0 版的逾時設定預設值，請使用舊的預設值，將新設定新增至圖表配置檔中。
-
-
-
-  <table>
-  <caption>1.0.0 版與最新版本之間的 ipsec.conf 設定差異</caption>
-  <thead>
-  <th>1.0.0 設定名稱</th>
-  <th>1.0.0 預設值</th>
-  <th>最新版本設定名稱</th>
-  <th>最新版本預設值</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ikelifetime</code></td>
-  <td>60m</td>
-  <td><code>ikelifetime</code></td>
-  <td>3h</td>
-  </tr>
-  <tr>
-  <td><code>keylife</code></td>
-  <td>20m</td>
-  <td><code>lifetime</code></td>
-  <td>1h</td>
-  </tr>
-  <tr>
-  <td><code>rekeymargin</code></td>
-  <td>3m</td>
-  <td><code>margintime</code></td>
-  <td>9m</td>
-  </tr>
-  </tbody></table>
-
 
 ## 停用 strongSwan IPSec VPN 服務
 {: vpn_disable}
@@ -472,4 +586,5 @@ lastupdated: "2018-10-25"
 
 3. 若要使用 VRA 啟用 VPN 連線，請[在 VRA 上配置 VRRP](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp)。
 
-**附註**：如果您具有現有的路由器應用裝置，然後新增叢集，則不會在路由器應用裝置上配置針對叢集所訂購的新可攜式子網路。為了能夠使用網路服務，您必須[啟用 VLAN Spanning](cs_subnets.html#subnet-routing)，在相同 VLAN 上的子網路之間啟用遞送。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。
+如果您具有現有的路由器應用裝置，然後新增叢集，則系統不會在路由器應用裝置上配置針對該叢集所訂購的新可攜式子網路。為了能夠使用網路服務，您必須[啟用 VLAN Spanning](cs_subnets.html#subnet-routing)，在相同 VLAN 上的子網路之間啟用遞送。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。
+{: important}

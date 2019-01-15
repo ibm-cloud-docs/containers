@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -72,14 +75,14 @@ lastupdated: "2018-10-25"
 <tbody>
 <tr>
 <td>CoScale</td>
-<td>使用 <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來監視工作者節點、容器、抄本集、抄寫控制器及服務。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">使用 CoScale 監視 {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+<td>使用 <a href="https://www.newrelic.com/coscale" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來監視工作者節點、容器、抄本集、抄寫控制器及服務。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">使用 CoScale 監視 {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>Datadog</td>
 <td>使用 <a href="https://www.datadoghq.com/" target="_blank">Dataloadog <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來監視您的叢集，並檢視基礎架構和應用程式效能度量值。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">使用 Datadog 監視 {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
-<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>{{site.data.keyword.cloudaccesstrailfull}}</td>
 <td>透過 Grafana 分析日誌，來監視叢集裡所做的管理活動。如需服務的相關資訊，請參閱 [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) 文件。如需您可追蹤之事件類型的相關資訊，請參閱 [Activity Tracker 事件](cs_at_events.html)。</td>
 </tr>
 <tr>
@@ -87,8 +90,16 @@ lastupdated: "2018-10-25"
 <td>使用 {{site.data.keyword.loganalysisfull_notm}} 來擴充日誌收集、保留及搜尋能力。如需相關資訊，請參閱<a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">啟用叢集日誌的自動收集 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>將日誌管理功能新增至叢集，方法為將 LogDNA 作為協力廠商服務部署至工作者節點，以管理來自 Pod 容器的日誌。如需相關資訊，請參閱[使用 {{site.data.keyword.loganalysisfull_notm}} 搭配 LogDNA 來管理 Kubernetes 叢集日誌](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)。</td>
+</tr>
+<tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
 <td>使用 {{site.data.keyword.monitoringlong_notm}} 定義規則及警示，以擴充度量值收集和保留功能。如需相關資訊，請參閱<a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">針對已部署在 Kubernetes 叢集裡的應用程式，在 Grafana 中分析度量值 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>取得應用程式效能及性能的作業可見性，方法為將 Sysdig 作為協力廠商服務部署至工作者節點，以將度量轉遞至 {{site.data.keyword.monitoringlong}}。如需相關資訊，請參閱[分析在 Kubernetes 叢集中部署之應用程式的度量](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**附註**：如果您使用 {{site.data.keyword.mon_full_notm}} 與執行 Kubernets 1.11 版或更新版本的叢集搭配，則不會收集所有容器度量，因為 Syslig 目前不支援 `containerd`。</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -125,7 +136,7 @@ lastupdated: "2018-10-25"
 ## 安全服務
 {: #security_services}
 
-想要全面檢視如何整合 {{site.data.keyword.Bluemix_notm}} 安全服務與您的叢集嗎？請參閱[將端對端安全套用至雲端應用程式指導教學](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application)。
+想要全面檢視如何整合 {{site.data.keyword.Bluemix_notm}} 安全服務與您的叢集嗎？請參閱[將端對端安全套用至雲端應用程式指導教學](/docs/tutorials/cloud-e2e-security.html)。
 {: shortdesc}
 
 <table summary="可存取性摘要">
@@ -185,7 +196,7 @@ lastupdated: "2018-10-25"
 <tbody>
 <tr>
   <td>Heptio Ark</td>
-  <td>您可以使用 <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，來備份及還原叢集資源與持續性磁區。如需相關資訊，請參閱 Heptio Ark <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">災難回復及叢集移轉的使用案例 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+  <td>您可以使用 <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，來備份及還原叢集資源與持續性磁區。如需相關資訊，請參閱 Heptio Ark <a href="https://github.com/heptio/ark/blob/release-0.9/docs/use-cases.md" target="_blank">災難回復及叢集移轉的使用案例 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -213,12 +224,19 @@ lastupdated: "2018-10-25"
 新增 {{site.data.keyword.Bluemix_notm}} 服務以加強您的 Kubernetes 叢集，其在 Watson AI、資料、安全及物聯網 (IoT) 等方面有額外功能。
 {:shortdesc}
 
-**重要事項：**您只能連結支援服務金鑰的服務。若要找出支援服務金鑰的服務清單，請參閱[啟用外部應用程式以使用 {{site.data.keyword.Bluemix_notm}} 服務](/docs/apps/reqnsi.html#accser_external)。
+您只能連結支援服務金鑰的服務。若要找出支援服務金鑰的服務清單，請參閱[啟用外部應用程式以使用 {{site.data.keyword.Bluemix_notm}} 服務](/docs/resources/connect_external_app.html#externalapp)。
+{: note}
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+開始之前：
+- 確定您具有下列角色：
+    - 叢集的[**編輯者**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](cs_users.html#platform)。
+    - 您要使用之空間的[**開發人員** Cloud Foundry 角色](/docs/iam/mngcf.html#mngcf)
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 
 若要將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集中，請執行下列動作：
-1. [建立 {{site.data.keyword.Bluemix_notm}} 服務的實例](/docs/apps/reqnsi.html#req_instance)。</br></br>**附註：**<ul><li>部分 {{site.data.keyword.Bluemix_notm}} 服務僅特定地區才有提供。唯有與您的叢集相同的地區中有提供某服務時，您才可以將該服務連結至您的叢集。此外，如果您要在華盛頓特區中建立服務實例，則必須使用 CLI。</li><li>您必須在與叢集相同的資源群組中建立服務實例。只能在一個資源群組中建立一個資源，之後就無法進行變更。</li></ul>
+1. [建立 {{site.data.keyword.Bluemix_notm}} 服務的實例](/docs/apps/reqnsi.html#req_instance)。
+    * 部分 {{site.data.keyword.Bluemix_notm}} 服務僅特定地區才有提供。唯有與您的叢集相同的地區中有提供某服務時，您才可以將該服務連結至您的叢集。此外，如果您要在華盛頓特區中建立服務實例，則必須使用 CLI。
+    * 您必須在與叢集相同的資源群組中建立服務實例。只能在一個資源群組中建立一個資源，之後就無法進行變更。
 
 2. 請檢查您所建立的服務類型，並記下服務實例**名稱**。
    - **Cloud Foundry 服務：**
@@ -234,7 +252,7 @@ lastupdated: "2018-10-25"
      ```
      {: screen}
 
-  - **已啟用 IAM 的服務：**
+  - **{{site.data.keyword.Bluemix_notm}}已啟用 IAM 的服務：**
      ```
     ibmcloud resource service-instances
     ```
@@ -249,7 +267,7 @@ lastupdated: "2018-10-25"
 
    您也可以在儀表板中看到不同的服務類型：**Cloud Foundry 服務**和**服務**。
 
-3. 對於已啟用 IAM 的服務，請建立 Cloud Foundry 別名，以便將此服務連結至您的叢集。如果您的服務已經是 Cloud Foundry 服務，則不需要此步驟，您可以繼續下一步。
+3. 對於已啟用 {{site.data.keyword.Bluemix_notm}} IAM 的服務，請建立 Cloud Foundry 別名，以將此服務連結至您的叢集。如果您的服務已經是 Cloud Foundry 服務，則不需要此步驟，您可以繼續下一步。
    1. 鎖定一個 Cloud Foundry 組織和空間作為目標。
       ```
       ibmcloud target --cf
@@ -269,19 +287,12 @@ lastupdated: "2018-10-25"
       {: pre}
 
 4. 識別您要用來新增服務的叢集名稱空間。請選擇下列選項。
-   - 列出現有名稱空間，並選擇您要使用的名稱空間。
      ```
      kubectl get namespaces
      ```
      {: pre}
 
-   - 在叢集裡建立名稱空間。
-     ```
-     kubectl create namespace <namespace_name>
-     ```
-     {: pre}
-
-5.  將服務新增至叢集。對於已啟用 IAM 的服務，請務必使用您先前建立的 Cloud Foundry 別名。
+5.  將服務新增至叢集。對於已啟用 {{site.data.keyword.Bluemix_notm}} IAM 的服務，請務必使用您先前建立的 Cloud Foundry 別名。
     ```
     ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
@@ -716,7 +727,7 @@ lastupdated: "2018-10-25"
 {: #helm_links}
 
 * 若要使用 strongSwan Helm 圖表，請參閱[使用 strongSwan IPSec VPN 服務 Helm 圖表設定 VPN 連線功能](cs_vpn.html#vpn-setup)。
-* 在 [Helm 圖表型錄 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) GUI 中，檢視您可以與 {{site.data.keyword.Bluemix_notm}} 搭配使用的可用 Helm 圖表。
+* 在主控台的 [Helm 圖表型錄 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) 中，檢視您可以與 {{site.data.keyword.Bluemix_notm}} 搭配使用的可用 Helm 圖表。
 * 進一步瞭解 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 中有關用來設定及管理 Helm 圖表的 Helm 指令。
 * 進一步瞭解如何[使用 Kubernetes Helm 圖表來加快部署 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/)。
 

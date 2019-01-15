@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -72,7 +75,7 @@ Kubernetes API 伺服器及 etcd 是在 Kubernetes 主節點中執行的最容�
     <tr>
       <td>完整受管理及專用的 Kubernetes 主節點</td>
       <td><p>{{site.data.keyword.containerlong_notm}} 中的每個 Kubernetes 叢集都是由 IBM 透過 IBM 擁有的 IBM Cloud 基礎架構 (SoftLayer) 帳戶所管理的專用 Kubernetes 主節點予以控制。Kubernetes 主節點已設定下列未與其他 IBM 客戶共用的專用元件。</p>
-        <ul><li><strong>etcd data store：</strong>儲存叢集的所有 Kubernetes 資源（例如`服務`、`部署`及 `Pod`）。Kubernetes `ConfigMaps` 及 `Secrets` 是儲存為鍵值組的應用程式資料，因此，Pod 中執行的應用程式可以使用它們。etcd 中的資料會儲存在 IBM 所管理的已加密磁碟上，並且每日進行備份。傳送至 Pod 時，會透過 TLS 將資料加密，以確保資料保護及完整性。</li>
+        <ul><li><strong>etcd data store：</strong>儲存叢集的所有 Kubernetes 資源（例如`服務`、`部署`及 `Pod`）。Kubernetes `ConfigMaps` 及 `Secrets` 是儲存為鍵值組的應用程式資料，因此，Pod 中執行的應用程式可以使用它們。在執行 Kubernetes 1.10 版或更新版本的叢集中，etcd 中的資料會儲存在 Kubernetes 主節點的本端磁碟上，且會備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。您可以選擇在 Kubernetes 主節點的本端磁碟上針對 etcd 資料啟用加密，方法是針對叢集[啟用 {{site.data.keyword.keymanagementservicelong_notm}} 加密](cs_encrypt.html#encryption)。執行舊版 Kubernetes 之叢集的 Etcd 資料會儲存在由 IBM 管理的已加密磁碟上，並且每日進行備份。當 etcd 資料傳送至 Pod 時，會透過 TLS 將資料加密，以確保資料保護及完整性。</li>
           <li><strong>kube-apiserver：</strong>作為從工作者節點到 Kubernetes 主節點的所有叢集管理要求的主要進入點。kube-apiserver 會驗證及處理要求，並且可以讀取及寫入 etcd 資料儲存庫。</li>
           <li><strong>kube-scheduler：</strong>考量容量及效能需求、軟硬體原則限制、反親緣性規格及工作負載需求，以決定要在何處部署 Pod。如果找不到符合需求的工作者節點，則不會在叢集裡部署 Pod。</li>
           <li><strong>kube-controller-manager：</strong>負責監視抄本集，以及建立對應的 Pod 來達到想要的狀況。</li>
@@ -92,7 +95,7 @@ Kubernetes API 伺服器及 etcd 是在 Kubernetes 主節點中執行的最容�
     </tr>
     <tr>
       <td>精細存取控制</td>
-      <td>當您作為帳戶管理者時，可以使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)，來[授與其他使用者對 {{site.data.keyword.containerlong_notm}} 的存取權](cs_users.html#users)。IAM 提供與 {{site.data.keyword.Bluemix_notm}} 平台、{{site.data.keyword.containerlong_notm}} 及帳戶中所有資源的安全鑑別。設定適當的使用者角色和許可權，是限制誰可以存取您的資源以及限制使用者可在誤用合法許可權時執行之損壞的關鍵。</br></br>您可以從下列預先定義的使用者角色中進行選取，這些角色決定使用者可以執行的動作集：<ul><li><strong>平台角色：</strong>決定使用者可在 {{site.data.keyword.containerlong_notm}} 中執行的叢集和工作者節點相關動作。</li><li><strong>基礎架構角色：</strong>決定用來訂購、更新或移除基礎架構資源（例如工作者節點、VLAN 或子網站）的許可權。</li><li><strong>Kubernetes RBAC 角色：</strong>決定使用者可在獲授權存取叢集時執行的 `kubectl` 指令。會自動設定叢集之 default 名稱空間的 RBAC 角色。若要在其他名稱空間中使用相同的 RBAC 角色，您可以複製 default 名稱空間中的 RBAC 角色。</li></ul> </br> 您可以選擇[自訂基礎架構許可權](cs_users.html#infra_access)或[設定自己的 RBAC 角色](cs_users.html#rbac)來新增更精細的存取控制，而非使用預先定義的使用者角色。</td>
+      <td>當您作為帳戶管理者時，可以使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)，來[授與其他使用者對 {{site.data.keyword.containerlong_notm}} 的存取權](cs_users.html#users)。{{site.data.keyword.Bluemix_notm}} IAM 提供與 {{site.data.keyword.Bluemix_notm}} 平台、{{site.data.keyword.containerlong_notm}} 及帳戶中所有資源的安全鑑別。設定適當的使用者角色和許可權，是限制誰可以存取您的資源以及限制使用者可在誤用合法許可權時執行之損壞的關鍵。</br></br>您可以從下列預先定義的使用者角色中進行選取，這些角色決定使用者可以執行的動作集：<ul><li><strong>平台角色：</strong>決定使用者可在 {{site.data.keyword.containerlong_notm}} 中執行的叢集和工作者節點相關動作。</li><li><strong>基礎架構角色：</strong>決定用來訂購、更新或移除基礎架構資源（例如工作者節點、VLAN 或子網站）的許可權。</li><li><strong>Kubernetes RBAC 角色：</strong>決定使用者可在獲授權存取叢集時執行的 `kubectl` 指令。會自動設定叢集之 default 名稱空間的 RBAC 角色。若要在其他名稱空間中使用相同的 RBAC 角色，您可以複製 default 名稱空間中的 RBAC 角色。</li></ul> </br> 您可以選擇[自訂基礎架構許可權](cs_users.html#infra_access)或[設定自己的 RBAC 角色](cs_users.html#rbac)來新增更精細的存取控制，而非使用預先定義的使用者角色。</td>
     </tr>
     <tr>
       <td>許可控制器</td>
@@ -111,7 +114,7 @@ Kubernetes API 伺服器及 etcd 是在 Kubernetes 主節點中執行的最容�
       <li>ServiceAccount</li>
       <li>StorageObjectInUseProtection（Kubernetes 1.10 及更新版本）</li>
       <li>ValidatingAdmissionWebhook（Kubernetes 1.9 及更新版本）</li></ul></br>
-您可以[在叢集裡安裝您自己的許可控制器 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks)，或從 {{site.data.keyword.containerlong_notm}} 提供的選用許可控制器中進行選擇：<ul><li><strong>[容器映像檔安全強制執行程式](/docs/services/Registry/registry_security_enforce.html#security_enforce)：</strong>使用此許可控制器在叢集裡強制執行「漏洞警告器」原則，以封鎖部署有漏洞的映像檔。</li></ul></br><strong>附註：</strong>如果您已手動安裝許可控制器，而且不想再使用它們，請務必完全予以移除。如果未完全移除許可控制器，它們可能會封鎖您要在叢集上執行的所有動作。</td>
+您可以[在叢集裡安裝您自己的許可控制器 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks)，或從 {{site.data.keyword.containerlong_notm}} 提供的選用許可控制器中進行選擇：<ul><li><strong>[容器映像檔安全強制執行程式](/docs/services/Registry/registry_security_enforce.html#security_enforce)：</strong>使用此許可控制器在叢集裡強制執行「漏洞警告器」原則，以封鎖部署有漏洞的映像檔。</li></ul></br><p class="note">如果您已手動安裝許可控制器，而且不想再使用它們，請務必完全予以移除。如果未完全移除許可控制器，它們可能會封鎖您要在叢集上執行的所有動作。</p></td>
     </tr>
   </tbody>
 </table>
@@ -123,12 +126,18 @@ Kubernetes API 伺服器及 etcd 是在 Kubernetes 主節點中執行的最容�
 {: shortdesc}
 
 **誰擁有工作者節點？我要負責保護它的安全嗎？** </br>
-工作者節點的所有權取決於您建立的叢集類型。免費叢集裡的工作者節點會佈建至 IBM 所擁有的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。您可以將應用程式部署至工作者節點，但無法變更設定，或在工作者節點上安裝額外軟體。因為容量有限且 {{site.data.keyword.containerlong_notm}} 特性有限，所以請不要在免費叢集上執行正式作業工作負載。請考慮將標準叢集用於正式作業工作負載。</br> </br>
-標準叢集裡的工作者節點會佈建至與您的公用或專用 {{site.data.keyword.Bluemix_notm}} 帳戶相關聯的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。工作者節點為您的帳戶所專用，而且您負責向工作者節點要求及時更新，以確保工作者節點 OS 和 {{site.data.keyword.containerlong_notm}} 元件套用最新的安全更新及修補程式。</br></br><strong>重要事項：</strong>定期（例如每月）使用 <code>ibmcloud ks worker-update</code> [指令](cs_cli_reference.html#cs_worker_update)，將更新及安全修補程式部署至作業系統，以及更新 Kubernetes 版本。有可用的更新時，會在您檢視 GUI 或 CLI 中主節點及工作者節點的相關資訊時，使用如下指令通知您：<code>ibmcloud ks clusters</code> 或 <code>ibmcloud ks workers <cluster_name></code> 指令。
+工作者節點的所有權取決於您建立的叢集類型。免費叢集裡的工作者節點會佈建至 IBM 所擁有的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。您可以將應用程式部署至工作者節點，但無法變更設定，或在工作者節點上安裝額外軟體。因為容量有限且 {{site.data.keyword.containerlong_notm}} 特性有限，所以請不要在免費叢集上執行正式作業工作負載。請考量將標準叢集用於正式作業工作負載。
+
+標準叢集裡的工作者節點會佈建至與您的公用或專用 {{site.data.keyword.Bluemix_notm}} 帳戶相關聯的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。工作者節點為您的帳戶所專用，而且您負責向工作者節點要求及時更新，以確保工作者節點 OS 和 {{site.data.keyword.containerlong_notm}} 元件套用最新的安全更新及修補程式。
+
+定期（例如每月）使用 `ibmcloud ks worker-update` [指令](cs_cli_reference.html#cs_worker_update)，將更新及安全修補程式部署至作業系統，以及更新 Kubernetes 版本。有可用的更新時，會在您檢視 {{site.data.keyword.Bluemix_notm}} 主控台或 CLI 中主節點及工作者節點的相關資訊時，使用如下指令通知您：`ibmcloud ks clusters` 或 `ibmcloud ks workers <cluster_name>`。
+{: important}
 
 **工作者節點設定是什麼樣子？**</br>
-下圖顯示針對每個工作者節點所設定的元件，用於保護工作者節點免於惡意攻擊。</br></br>
-**附註：**此映像檔不包括可確保進出工作者節點之端對端通訊安全的元件。如需相關資訊，請參閱[網路安全](#network)。
+下圖顯示針對每個工作者節點所設定的元件，用於保護工作者節點免於惡意攻擊。
+
+此映像檔不包括可確保進出工作者節點之端對端通訊安全的元件。如需相關資訊，請參閱[網路安全](#network)。
+{: note}
 
 <img src="images/cs_worker_setup.png" width="600" alt="工作者節點設定（排除網路安全）" style="width:600px; border-style: none"/>
 
@@ -139,7 +148,7 @@ Kubernetes API 伺服器及 etcd 是在 Kubernetes 主節點中執行的最容�
   <th>說明</th>
   </thead>
   <tbody>
-    <tr><td>符合 CIS 標準的 Linux 映像檔</td><td>每個工作者節點都已設定 Ubuntu 作業系統，而此作業系統實作 Center of Internet Security (CIS) 所發佈的基準性能測試。機器的使用者或擁有者無法變更 Ubuntu 作業系統。若要檢閱現行 Ubuntu 版本，請執行 <code>kibbectl get nodes -o wide</code>。IBM 與內部及外部安全顧問團隊合作，解決潛在的安全規範漏洞。作業系統的安全更新和修補程式是透過 {{site.data.keyword.containerlong_notm}} 所提供，並且必須由使用者安裝，才能確保工作者節點的安全。</br></br><strong>重要事項：</strong>{{site.data.keyword.containerlong_notm}} 使用 Ubuntu Linux Kernel 來表示工作者節點。您可以根據 {{site.data.keyword.containerlong_notm}} 中的任何 Linux 發行套件，來執行容器。如果您的容器映像檔供應商支援要在 Ubuntu Linux 核心上執行的容器映像檔，請向容器映像檔供應商進行驗證。</td></tr>
+    <tr><td>符合 CIS 標準的 Linux 映像檔</td><td>每個工作者節點都已設定 Ubuntu 作業系統，而此作業系統實作 Center of Internet Security (CIS) 所發佈的基準性能測試。機器的使用者或擁有者無法變更 Ubuntu 作業系統。若要檢閱現行 Ubuntu 版本，請執行 <code>kibbectl get nodes -o wide</code>。IBM 與內部及外部安全顧問團隊合作，解決潛在的安全規範漏洞。作業系統的安全更新和修補程式是透過 {{site.data.keyword.containerlong_notm}} 所提供，並且必須由使用者安裝，才能確保工作者節點的安全。<p class="important">{{site.data.keyword.containerlong_notm}}使用 Ubuntu Linux Kernel 來表示工作者節點。您可以根據 {{site.data.keyword.containerlong_notm}} 中的任何 Linux 發行套件，來執行容器。如果您的容器映像檔供應商支援要在 Ubuntu Linux 核心上執行的容器映像檔，請向容器映像檔供應商進行驗證。</p></td></tr>
     <tr>
     <td>由 Site Reliability Engineer (SRE) 持續監視</td>
     <td>IBM Site Reliability Engineer (SRE) 會持續監視工作者節點上所安裝的 Linux 映像檔，以偵測漏洞及安全規範問題。為了解決漏洞，SRE 會建立工作者節點的安全修補程式及修正套件。請務必在這些修補程式可用時予以套用，以確保工作者節點及您在其上執行之應用程式的安全環境。</td>
@@ -155,13 +164,13 @@ Kubernetes API 伺服器及 etcd 是在 Kubernetes 主節點中執行的最容�
 <tr>
   <td id="trusted_compute">授信運算的選項</td>
     <td>當您在支援「授信運算」的裸機上部署叢集時，可以[啟用信任](cs_cli_reference.html#cs_cluster_feature_enable)。在支援「授信運算」的叢集裡的每一個裸機工作者節點上（包括您新增至該叢集的未來節點），已啟用「授信平台模組 (TPM)」晶片。因此，啟用信任之後，以後您就無法針對叢集予以停用。信任伺服器會部署在主節點上，且信任代理程式會作為 Pod 部署在工作者節點上。當工作者節點啟動時，信任代理程式 Pod 會監視處理程序的每一個階段。<p>硬體位於信任伺服器根目錄，它使用 TPM 來傳送測量。TPM 會產生加密金鑰，用來保護整個處理程序中的測量資料的傳輸。信任代理程式會將啟動處理程序中的每一個元件的測量傳遞至信任伺服器：從與 TPM 硬體互動的 BIOS 韌體到開機載入器和 OS 核心。然後，授信代理程式會比較這些測量與授信伺服器中的期望值，以認證啟動是否有效。「授信運算」處理程序不會監視工作者節點中的其他 Pod，例如應用程式。</p><p>例如，如果未獲授權的使用者獲得對系統的存取權，並使用額外的邏輯來修改 OS 核心以收集資料，則信任代理程式會偵測到此變更，並將節點標示為不信任。使用「授信運算」，您可以驗證工作者節點免於遭到竄改。</p>
-    <p><strong>附註</strong>：「授信運算」適用於選取裸機機器類型。例如，`mgXc` GPU 特性不支援「授信運算」。</p>
+    <p class="note">「授信運算」可用於選取裸機的機型。例如，`mgXc` GPU 特性不支援「授信運算」。</p>
     <p><img src="images/trusted_compute.png" alt="裸機叢集的授信運算" width="480" style="width:480px; border-style: none"/></p></td>
   </tr>
     <tr>
   <td id="encrypted_disk">加密磁碟</td>
     <td>依預設，每個工作者節點都會佈建兩個本端 SSD 加密資料分割區。第一個分割區包含用來啟動工作者節點且未加密的核心映像檔。第二個分割區會保留容器檔案系統，並使用 LUKS 加密金鑰解除鎖定。每個 Kubernetes 叢集裡的每一個工作者節點都有由 {{site.data.keyword.containerlong_notm}} 所管理的專屬唯一 LUKS 加密金鑰。當您建立叢集或將工作者節點新增至現有叢集時，會安全地取回金鑰，然後在解除鎖定已加密磁碟之後予以捨棄。
-  </br></br><strong>附註：</strong>加密可能會影響磁碟 I/O 效能。對於需要高效能磁碟 I/O 的工作負載，請測試已啟用及停用加密的叢集，以協助您決定是否關閉加密。</td>
+  <p class="note">加密可能會影響磁碟 I/O 效能。對於需要高效能磁碟 I/O 的工作負載，請測試已啟用及停用加密的叢集，以協助您決定是否關閉加密。</p></td>
       </tr>
     <tr>
       <td>專家級 AppArmor 原則</td>
@@ -190,7 +199,7 @@ Kubernetes API 伺服器及 etcd 是在 Kubernetes 主節點中執行的最容�
 網路區隔說明將網路分成多個子網路的方式。您可以將可供組織中特定群組存取的應用程式及相關資料分組在一起。在某個子網路中執行的應用程式無法查看或存取另一個子網路中的應用程式。網路區隔也會限制提供給內部人員或協力廠商軟體的存取權，並且可以限制惡意活動的範圍。   
 
 {{site.data.keyword.containerlong_notm}} 提供 IBM Cloud 基礎架構 (SoftLayer) VLAN，確保工作者節點上的優質網路效能及網路隔離。VLAN 會配置一組工作者節點及 Pod，就像它們已連接至相同的實體佈線。
-VLAN 為您的 {{site.data.keyword.Bluemix_notm}} 帳戶所專用，不會在 IBM 客戶之間共用。如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。
+VLAN 為您的 {{site.data.keyword.Bluemix_notm}} 帳戶所專用，不會在 IBM 客戶之間共用。如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。
 
 VLAN Spanning 是一種 {{site.data.keyword.Bluemix_notm}} 帳戶設定，可以將它開啟或關閉。開啟時，您帳戶中的所有叢集都可以看到彼此並互相交談。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](cs_cli_reference.html#cs_vlan_spanning_get)。雖然在某些情境下這可能十分用，但 VLAN Spanning 會移除叢集的網路區隔。
 
@@ -363,8 +372,10 @@ Kubernetes 名稱空間這種方式使用虛擬方式分割叢集，並隔離部
 - **ibm-cloud-cert：**此名稱空間用於與 {{site.data.keyword.cloudcerts_long_notm}} 相關的資源。
 - **kube-public：**所有使用者都可以存取此名稱空間，即使他們未經過叢集鑑別。將資源部署至此名稱空間時請注意，因為您可能會讓叢集面臨洩露風險。
 
-叢集管理者可以在叢集裡設定其他名稱空間，並且根據他們的需求進行自訂。</br></br>
-**重要事項：**針對您在叢集裡的每個名稱空間，請務必設定適當的 [RBAC 原則](cs_users.html#rbac)以限制存取此名稱空間、控制已部署的項目，以及設定適當的[資源配額 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 及[限制範圍 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/)。  
+叢集管理者可以在叢集裡設定其他名稱空間，並且根據他們的需求進行自訂。
+
+針對您在叢集中的每個名稱空間，請務必設定適當的 [RBAC 原則](cs_users.html#rbac)以限制存取此名稱空間、控制已部署的項目，以及設定適當的[資源配額 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 及[限制範圍 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/)。
+{: important}
 
 **應該設定單一承租戶還是多方承租戶叢集？** </br>
 在單一承租戶叢集中，您會針對必須在叢集中執行工作負載的每組人員建立一個叢集。通常，此團隊負責管理叢集，以及適當地配置與保護其安全。多方承租戶叢集會使用多個名稱空間來隔離承租戶及其工作負載。
@@ -381,14 +392,14 @@ Kubernetes 名稱空間這種方式使用虛擬方式分割叢集，並隔離部
 - **運算資源限制：**若要確保每個團隊都有所需的資源可以部署服務以及在叢集裡執行應用程式，您必須設定每個名稱空間的[資源配額](https://kubernetes.io/docs/concepts/policy/resource-quotas/)。資源配額決定名稱空間的部署限制項，例如您可以部署的 Kubernetes 資源數目，以及可供那些資源耗用的 CPU 和記憶體數量。設定配額之後，使用者必須在其部署中包括資源要求和限制。
 - **共用叢集資源：**如果您在某個叢集裡執行多個承租戶，則會跨承租戶共用部分叢集資源（例如 Ingress 應用程式負載平衡器或可用的可攜式 IP 位址）。如果較小的服務必須根據叢集裡的大型服務才能完成，則可能很難使用共用資源。
 - **更新：**一次只能執行一個 Kubernetes API 版本。所有在叢集裡執行的應用程式都必須符合現行 Kubernetes API 版本，與擁有應用程式的團隊無關。當您要更新叢集時，必須確保所有團隊都準備好切換至新的 Kubernetes API 版本，以及更新應用程式來使用新的 Kubernetes API 版本。這也表示個別團隊對他們要執行的 Kubernetes API 版本的控制較低。
-- **叢集設定變更：**如果您要變更叢集設定，或移轉至新的工作者節點，則必須跨承租戶推出這項變更。這項推出需要的核對及測試高於單一承租戶叢集。
+- **叢集設定變更：**如果您要變更叢集設定，或將工作負載重新排程至新的工作者節點，則必須跨承租戶推出這項變更。這項推出需要的核對及測試高於單一承租戶叢集。
 - **通訊處理程序：**當您管理多個承租戶時，請考慮設定通訊處理程序，讓承租戶知道叢集發生問題時或需要其服務的更多資源時要前往的位置。此通訊處理程序也包括通知承租戶有關叢集設定或計劃更新中的所有變更。
 
 **我還能做什麼來保護容器？**
 
 |安全特性|說明|
 |-------|----------------------------------|
-|限制特許容器數目|在與其他處理程序隔離的運算主機上，容器會以不同的 Linux 處理程序執行。雖然使用者在容器內部有 root 存取權，但是會限制此使用者在容器外部的許可權來保護其他 Linux 處理程序、主機檔案系統及主機裝置。部分應用程式需要存取主機檔案系統或進階許可權，才能正常執行。您可以使用特許模式來執行容器，以容許容器具有與運算主機上執行之處理程序相同的存取權。</br></br> <strong>重要事項：</strong>請謹記，在特許容器受損時，特許容器可能會對叢集和基礎運算主機造成重大損壞。請嘗試限制以特許模式執行的容器數目，並考慮變更應用程式的配置，讓應用程式可以在沒有進階許可權的情況下執行。如果您要封鎖特許容器，使其無法在叢集裡執行，請考慮設定自訂 [Pod 安全原則](cs_psp.html#customize_psp)。|
+|限制特許容器數目|在與其他處理程序隔離的運算主機上，容器會以不同的 Linux 處理程序執行。雖然使用者在容器內部有 root 存取權，但是會限制此使用者在容器外部的許可權來保護其他 Linux 處理程序、主機檔案系統及主機裝置。部分應用程式需要存取主機檔案系統或進階許可權，才能正常執行。您可以使用特許模式來執行容器，以容許容器具有與運算主機上執行之處理程序相同的存取權。<p class="important">請謹記，特許容器若受損，可能會對叢集和基礎運算主機造成重大損壞。請嘗試限制以特許模式執行的容器數目，並考慮變更應用程式的配置，讓應用程式可以在沒有進階許可權的情況下執行。如果您要封鎖特許容器，使其無法在叢集裡執行，請考慮設定自訂 [Pod 安全原則](cs_psp.html#customize_psp)。</p>|
 |設定容器的 CPU 及記憶體限制|每個容器都需要特定 CPU 及記憶體量，才能適當地開始及繼續執行。您可以定義容器的 [Kubernetes 資源要求及資源限制 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)，以限制容器可使用的 CPU 及記憶體量。如果未設定 CPU 及記憶體的限制，而且容器忙碌，則容器會使用所有可用的資源。這項大量使用資源可能會影響工作者節點上沒有足夠資源可適當開始或執行的其他容器，並讓工作者節點面臨拒絕服務攻擊的風險。|
 |將 OS 安全設定套用至 Pod|您可以將 [<code>securityContext</code> 區段 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) 新增至 Pod 部署，以將 Linux 特定安全設定套用至 Pod 或 Pod 內部的特定容器。安全設定包括控制在容器內部執行 Script 的使用者 ID 及群組 ID（例如進入點 Script），或擁有磁區裝載路徑的使用者 ID 及群組 ID。</br></br><strong>提示：</strong>如果您要使用 <code>securityContext</code> 來設定 <code>runAsUser</code> 使用者 ID 或 <code>fsGroup</code> 群組 ID，請考慮在[建立持續性儲存空間](cs_storage_block.html#add_block)時使用區塊儲存空間。NFS 儲存空間不支援 <code>fsGroup</code>，而且必須在容器層次設定 <code>runAsUser</code>，而非 Pod 層次。|
 {: caption="其他安全保護" caption-side="top"}

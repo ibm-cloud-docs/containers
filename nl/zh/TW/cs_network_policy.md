@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -37,7 +40,7 @@ lastupdated: "2018-10-25"
   </li>
   </ul>
 
-Calico 透過在 Kubernetes 工作者節點上設定 Linux iptables 規則，來強制執行這些原則（包括任何會自動轉換為 Calico 原則的 Kubernetes 網路原則）。iptables 規則作為工作者節點的防火牆，以定義網路資料流量必須符合才能轉遞至目標資源的特徵。
+Calico 藉由在 Kubernetes 工作者節點上設定 Linux Iptables 規則，來強制執行這些原則（包括任何會自動轉換為 Calico 原則的 Kubernetes 網路原則）。iptables 規則作為工作者節點的防火牆，以定義網路資料流量必須符合才能轉遞至目標資源的特徵。
 
 若要使用 Ingress 及負載平衡器服務，請使用 Calico 及 Kubernetes 原則來管理進出叢集的網路資料流量。請不要使用 IBM Cloud 基礎架構 (SoftLayer) [安全群組](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups)。IBM Cloud 基礎架構 (SoftLayer) 安全群組會套用至單一虛擬伺服器的網路介面，以過濾 Hypervisor 層次的資料流量。不過，安全群組不支援 VRRP 通訊協定，而 {{site.data.keyword.containerlong_notm}} 使用此通訊協定來管理負載平衡器 IP 位址。如果沒有 VRRP 通訊協定可以管理負載平衡器 IP，則 Ingress 及負載平衡器服務無法正常運作。
 {: tip}
@@ -55,7 +58,8 @@ Calico 透過在 Kubernetes 工作者節點上設定 Linux iptables 規則，來
 
 檢閱下列自動套用至叢集的預設 Calico 網路原則。
 
-**重要事項：**除非您完全瞭解原則，否則請不要移除套用至主機端點的原則。確定您不需要原則所容許的資料流量。
+除非您完全瞭解原則，否則請不要移除套用至主機端點的原則。確定您不需要原則所容許的資料流量。
+{: important}
 
  <table summary="表格中的第一列跨越兩個直欄。請由左至右閱讀其餘的列，第一欄為伺服器區域，第二欄則為要符合的 IP 位址。">
  <caption>每一個叢集的預設 Calico 原則</caption>
@@ -77,7 +81,7 @@ Calico 透過在 Kubernetes 工作者節點上設定 Linux iptables 規則，來
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>容許將節點埠、負載平衡器及 Ingress 服務資料流量送入至那些服務公開的 Pod。<strong>附註</strong>：您不需要指定公開的埠，因為 Kubernetes 會使用目的地網址轉譯 (DNAT) 將服務要求轉遞至正確的 Pod。該轉遞是在 iptables 套用主機端點原則之前進行。</td>
+      <td>容許將節點埠、負載平衡器及 Ingress 服務資料流量送入至那些服務公開的 Pod。<strong>附註</strong>：您不需要指定公開的埠，因為 Kubernetes 會使用目的地網址轉譯 (DNAT) 將服務要求轉遞至正確的 Pod。該轉遞是在 Iptables 套用主機端點原則之前執行。</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
@@ -100,7 +104,7 @@ Calico 透過在 Kubernetes 工作者節點上設定 Linux iptables 規則，來
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td><b>僅限在 Kubernetes 1.10 版</b>（於 <code>kube-system</code> 名稱空間中提供）：封鎖所有 Pod 存取「Kubernetes 儀表板」。此原則不會影響從 {{site.data.keyword.Bluemix_notm}} 使用者介面，或使用 <code>kubectl proxy</code> 存取儀表板。如果 Pod 需要存取儀表板，請在名稱空間中部署具有 <code>kubernetes-dashboard-policy: allow</code> 標籤的 Pod。</td>
+  <td><b>僅限在 Kubernetes 1.10 版或更新版本</b>（於 <code>kube-system</code> 名稱空間中提供）：封鎖所有 Pod 存取「Kubernetes 儀表板」。此原則不會影響從 {{site.data.keyword.Bluemix_notm}} 主控台，或使用 <code>kubectl proxy</code> 存取儀表板。如果 Pod 需要存取儀表板，請在名稱空間中部署具有 <code>kubernetes-dashboard-policy: allow</code> 標籤的 Pod。</td>
  </tr>
 </tbody>
 </table>
@@ -117,12 +121,12 @@ Calico 透過在 Kubernetes 工作者節點上設定 Linux iptables 規則，來
 CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes 版本而不同。若要安裝並配置 Calico CLI，請根據您的叢集版本按一下下列其中一個鏈結：
 
 * [Kubernetes 1.10 版或更新版本的叢集](#1.10_install)
-* [Kubernetes 1.9 版或更早版本的叢集](#1.9_install)
+* [Kubernetes 1.9 版或更早版本的叢集（已淘汰）](#1.9_install)
 
 在您將叢集從 Kubernetes 1.9 版或更早版本更新至 1.10 版或更新版本之前，請檢閱[準備更新至 Calico 第 3 版](cs_versions.html#110_calicov3)。
 {: tip}
 
-### 針對執行 Kubernets 1.10 版或更新版本的叢集，安裝並配置 3.1.1 版 Calico CLI
+### 針對執行 Kubernets 1.10 版或更新版本的叢集，安裝並配置 3.3.1 版 Calico CLI
 {: #1.10_install}
 
 1. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
@@ -151,7 +155,7 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
         ```
         {: pre}
 
-4. [下載 Calico CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/projectcalico/calicoctl/releases/tag/v3.1.1)。
+4. [下載 Calico CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/projectcalico/calicoctl/releases/tag/v3.3.1)。
 
     如果您使用的是 OSX，請下載 `-darwin-amd64` 版本。如果您使用的是 Windows，請將 Calico CLI 安裝在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。請務必將檔案儲存為 `calicoctl.exe`。
     {: tip}
@@ -208,8 +212,11 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
       {: screen}
 
 
-### 針對執行 Kubernets 1.9 版或更早版本的叢集，安裝並配置 1.6.3 版 Calico CLI
+### 針對執行 Kubernets 1.9 版或更早版本的叢集（已淘汰），安裝並配置 1.6.3 版 Calico CLI
 {: #1.9_install}
+
+Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不支援舊版 Kubernet。請盡快[更新](cs_cluster_update.html#update)或[建立](cs_clusters.html#clusters)執行[支援版本](cs_versions.html#cs_versions)的叢集。
+{: note}
 
 1. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
 
@@ -227,7 +234,7 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
 3. 若為 OSX 及 Linux 使用者，請完成下列步驟。
     1. 將執行檔移至 _/usr/local/bin_ 目錄。
         - Linux：
-      ```
+          ```
           mv filepath/calicoctl /usr/local/bin/calicoctl
           ```
           {: pre}
@@ -378,10 +385,10 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
 CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes 版本而不同。若要安裝並配置 Calico CLI，請根據您的叢集版本按一下下列其中一個鏈結：
 
 * [Kubernetes 1.10 版或更新版本的叢集](#1.10_examine_policies)
-* [Kubernetes 1.9 版或更早版本的叢集](#1.9_examine_policies)
+* [Kubernetes 1.9 版或更早版本的叢集（已淘汰）](#1.9_examine_policies)
 
-在您將叢集從 Kubernetes 1.9 版或更早版本更新至 1.10 版或更新版本之前，請檢閱[準備更新至 Calico 第 3 版](cs_versions.html#110_calicov3)。
-{: tip}
+Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不支援舊版 Kubernet。請盡快[更新](cs_cluster_update.html#update)或[建立](cs_clusters.html#clusters)執行[支援版本](cs_versions.html#cs_versions)的叢集。在您將叢集從 Kubernetes 1.9 版或更早版本更新至 1.10 版或更新版本之前，請檢閱[準備更新至 Calico 第 3 版](cs_versions.html#110_calicov3)。
+{: note}
 
 ### 檢視執行 Kubernetes 1.10 版或更新版本之叢集裡的網路原則
 {: #1.10_examine_policies}
@@ -424,8 +431,11 @@ Linux 和 Mac 使用者不需要在 `calicoctl` 指令中包括 `--config=filepa
     ```
     {: pre}
 
-### 檢視執行 Kubernetes 1.9 版或更早版本之叢集裡的網路原則
+### 檢視執行 Kubernetes 1.9 版或更早版本之叢集（已淘汰）中的網路原則
 {: #1.9_examine_policies}
+
+Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不支援舊版 Kubernet。請盡快[更新](cs_cluster_update.html#update)或[建立](cs_clusters.html#clusters)執行[支援版本](cs_versions.html#cs_versions)的叢集。
+{: note}
 
 Linux 使用者不需要在 `calicoctl` 指令中包括 `--config=filepath/calicoctl.cfg` 旗標。
 {: tip}
@@ -469,7 +479,16 @@ Linux 使用者不需要在 `calicoctl` 指令中包括 `--config=filepath/calic
 
 若要建立 Kubernetes 網路原則，請參閱 [Kubernetes 網路原則文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/network-policies/)。
 
-若要建立 Calico 原則，請使用下列步驟。
+若要建立 Calico 原則，請使用下列步驟。CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes 版本而不同。根據您的叢集版本，按一下下列其中一個鏈結：
+
+* [Kubernetes 1.10 版或更新版本的叢集](#1.10_create_new)
+* [Kubernetes 1.9 版或更早版本的叢集（已淘汰）](#1.9_create_new)
+
+Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不支援舊版 Kubernet。請盡快[更新](cs_cluster_update.html#update)或[建立](cs_clusters.html#clusters)執行[支援版本](cs_versions.html#cs_versions)的叢集。在您將叢集從 Kubernetes 1.9 版或更早版本更新至 1.10 版或更新版本之前，請檢閱[準備更新至 Calico 第 3 版](cs_versions.html#110_calicov3)。
+{: tip}
+
+### 在執行 Kubernetes 1.10 版或更新版本的叢集裡新增 Calico 原則
+{: #1.10_create_new}
 
 開始之前：
 1. [安裝並配置 Calico CLI。](#cli_install)
@@ -479,18 +498,7 @@ Linux 使用者不需要在 `calicoctl` 指令中包括 `--config=filepath/calic
     ```
     {: pre}
 
-CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes 版本而不同。根據您的叢集版本，按一下下列其中一個鏈結：
-
-* [Kubernetes 1.10 版或更新版本的叢集](#1.10_create_new)
-* [Kubernetes 1.9 版或更早版本的叢集](#1.9_create_new)
-
-在您將叢集從 Kubernetes 1.9 版或更早版本更新至 1.10 版或更新版本之前，請檢閱[準備更新至 Calico 第 3 版](cs_versions.html#110_calicov3)。
-{: tip}
-
-### 在執行 Kubernetes 1.10 版或更新版本的叢集裡新增 Calico 原則
-{: #1.10_create_new}
-
-1. 定義您的 Calico [網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) 或 [廣域網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy)，方法為建立配置 Script (`.yaml`)。這些配置檔包含選取器，其說明這些原則適用的 Pod、名稱空間或主機。請參閱這些 [Calico 原則範例 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)，以協助您建立自己的原則。**附註**：Kubernetes 1.10 版或更新版本的叢集必須使用 Calico 第 3 版原則語法。
+1. 定義您的 Calico [網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) 或 [廣域網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy)，方法為建立配置 Script (`.yaml`)。這些配置檔包含選取器，其說明這些原則適用的 Pod、名稱空間或主機。請參閱這些 [Calico 原則範例 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)，以協助您建立自己的原則。請注意，Kubernetes 1.10 版或更新版本的叢集必須使用 Calico 第 3 版原則語法。
 
 2. 將原則套用至叢集。
     - Linux 及 OS X：
@@ -507,10 +515,21 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
       ```
       {: pre}
 
-### 在執行 Kubernetes 1.9 版或更早版本的叢集裡新增 Calico 原則
+### 在執行 Kubernetes 1.9 版或更早版本的叢集（已淘汰）中新增 Calico 原則
 {: #1.9_create_new}
 
-1. 定義您的 [Calico 網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)，方法為建立配置 Script (`.yaml`)。這些配置檔包含選取器，其說明這些原則適用的 Pod、名稱空間或主機。請參閱這些 [Calico 原則範例 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy)，以協助您建立自己的原則。**附註**：Kubernetes 1.9 版或更早版本的叢集必須使用 Calico 第 2 版原則語法。
+Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不支援舊版 Kubernet。請盡快[更新](cs_cluster_update.html#update)或[建立](cs_clusters.html#clusters)執行[支援版本](cs_versions.html#cs_versions)的叢集。
+{: note}
+
+開始之前：
+1. [安裝並配置 Calico CLI。](#cli_install)
+2. [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `ibmcloud ks cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括可存取基礎架構組合以及在工作者節點上執行 Calico 指令的金鑰。
+    ```
+    ibmcloud ks cluster-config <cluster_name> --admin
+    ```
+    {: pre}
+
+1. 定義您的 [Calico 網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)，方法為建立配置 Script (`.yaml`)。這些配置檔包含選取器，其說明這些原則適用的 Pod、名稱空間或主機。請參閱這些 [Calico 原則範例 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy)，以協助您建立自己的原則。請注意，Kubernetes 1.9 版或更早版本的叢集必須使用 Calico 第 2 版原則語法。
 
 
 2. 將原則套用至叢集。
@@ -537,7 +556,7 @@ CLI 配置及原則的 Calico 版本相容性會根據您叢集的 Kubernetes �
 [依預設](#default_policy)，Kubernetes NodePort 及 LoadBalancer 服務的設計是要讓您的應用程式能夠在所有公用和專用叢集介面上使用。不過，您可以根據資料流量來源或目的地，使用 Calico 原則來封鎖對您服務的送入資料流量。
 {:shortdesc}
 
-預設的 Kubernetes 及 Calico 原則很難套用來保護 Kubernetes NodePort 和 LoadBalancer 服務，這是針對這些服務產生之 DNAT iptables 規則的緣故。不過，DNAT 前原則可防止指定的資料流量到達您的應用程式，因為它們會在 Kubernetes 使用一般 DNAT 將資料流量轉遞至 Pod 之前產生並套用 iptables 原則。
+預設的 Kubernetes 及 Calico 原則很難套用來保護 Kubernetes NodePort 和 LoadBalancer 服務，這是由於針對這些服務產生之 DNAT Iptables 規則。不過，DNAT 前原則可防止指定的資料流量到達您的應用程式，因為它們會在 Kubernetes 使用一般 DNAT 將資料流量轉遞至 Pod 之前產生並套用 Iptables 原則。
 
 Calico DNAT 前網路原則的一些常見用途：
 
@@ -783,7 +802,7 @@ spec:
 
 資料流量現在可以從 finance 微服務流向 accounts Srv1 後端。accounts Srv1 後端可以回應 finance 微服務，但無法建立反向資料流量連線。
 
-**附註**：您無法容許來自另一個名稱空間中特定應用程式 Pod 的資料流量，因為無法結合 `podSelector` 及 `namespaceSelector`。在此範例中，允許來自 finance 名稱空間中所有微服務的所有資料流量。
+在此範例中，允許來自 finance 名稱空間中所有微服務的所有資料流量。您無法容許來自另一個名稱空間中特定應用程式 Pod 的資料流量，因為無法結合 `podSelector` 及 `namespaceSelector`。
 
 ## 記載被拒絕的資料流量
 {: #log_denied}
@@ -827,7 +846,7 @@ spec:
         kubectl apply -f <policy_name>.yaml
         ```
         {: pre}
-        Kubernetes 原則會自動轉換為 Calico NetworkPolicy，以便 Calico 可以將其套用為 iptables 規則。
+        Kubernetes 原則會自動轉換為 Calico NetworkPolicy，所以 Calico 可以將其套用為 Iptables 規則。
 
     * 若要套用 Calico 原則：
         ```
@@ -860,7 +879,7 @@ spec:
         ```
     {: screen}
 
-4. 若要記載您先前建立的 Calico 原則所拒絕的所有資料流量，請建立一個名稱為 `log-denied-packets` 的 Calico NetworkPolicy。例如，使用下列原則來記載您在步驟 1 定義的網路原則所拒絕的所有封包。日誌原則會使用與範例 `access-nginx` 原則相同的 Pod 選取器，而將此原則新增至 Calico iptables 規則鏈。透過使用更高的順序號碼（例如 `3000`），您可確保將此規則新增至 iptables 規則鏈的結尾。來自 "run=access" Pod 的任何要求封包若符合 `access-nginx` 原則規則，即為 "run=nginx" Pod 所接受。但是，當來自任何其他來源的封包嘗試符合低順序 `access-nginx` 原則規則時，就會遭到拒絕。之後，這些封包會嘗試符合高順序 `log-denied-packets` 原則規則。`log-denied-packets` 會記載所有到達它的封包，因此只會記載 "run=nginx" Pod 所拒絕的封包。在記載封包的嘗試之後，即捨棄封包。
+4. 若要記載您先前建立的 Calico 原則所拒絕的所有資料流量，請建立一個名稱為 `log-denied-packets` 的 Calico NetworkPolicy。例如，使用下列原則來記載您在步驟 1 定義的網路原則所拒絕的所有封包。日誌原則會使用與範例 `access-nginx` 原則相同的 Pod 選取器，而將此原則新增至 Calico Iptables 規則鏈。透過使用更高的順序號碼（例如 `3000`），您可確保將此規則新增至 Iptables 規則鏈的尾端。來自 "run=access" Pod 的任何要求封包若符合 `access-nginx` 原則規則，即為 "run=nginx" Pod 所接受。但是，當來自任何其他來源的封包嘗試符合低順序 `access-nginx` 原則規則時，就會遭到拒絕。之後，這些封包會嘗試符合高順序 `log-denied-packets` 原則規則。`log-denied-packets` 會記載所有到達它的封包，因此只會記載 "run=nginx" Pod 所拒絕的封包。在記載封包的嘗試之後，即捨棄封包。
     ```
     apiVersion: projectcalico.org/v3
     kind: NetworkPolicy
@@ -886,7 +905,7 @@ spec:
     <tbody>
     <tr>
      <td><code>types</code></td>
-     <td>這個 <code>Ingress</code> 原則套用至所有送入的資料流量要求。<strong>附註：</strong>值 <code>Ingress</code> 是所有送入的資料流量的通稱，而不是僅指來自於 IBM Ingress ALB 的資料流量。</td>
+     <td>這個 <code>Ingress</code> 原則套用至所有送入的資料流量要求。值 <code>Ingress</code> 是所有送入的資料流量的通稱，而不是僅指來自於 IBM Ingress ALB 的資料流量。</td>
     </tr>
      <tr>
       <td><code>ingress</code></td>
@@ -894,11 +913,11 @@ spec:
      </tr>
      <tr>
       <td><code>selector</code></td>
-      <td>請將 &lt;selector&gt; 取代為您在步驟 1 的 Calico 原則中使用於 `spec.selector` 欄位的相同選取器，或您在步驟 3 中針對 Kubernetes 原則而在 Calico 語法中找到的選取器。例如，使用選取器 <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>，此原則的規則會新增至與步驟 1 的 <code>access-nginx</code> 範例網路原則規則相同的 iptables 鏈。此原則僅適用於使用相同 Pod 選取器標籤的 Pod 的送入網路資料流量。</td>
+      <td>請將 &lt;selector&gt; 取代為您在步驟 1 的 Calico 原則中使用於 `spec.selector` 欄位的相同選取器，或您在步驟 3 中針對 Kubernetes 原則而在 Calico 語法中找到的選取器。例如，使用選取器 <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>，此原則的規則即會新增至與步驟 1 的 <code>access-nginx</code> 範例網路原則規則相同的 Iptables 鏈。此原則僅適用於使用相同 Pod 選取器標籤的 Pod 的送入網路資料流量。</td>
      </tr>
      <tr>
       <td><code>order</code></td>
-      <td>Calico 原則含有順序可判定其何時套用至送入的要求封包。會先套用含有低順序的原則（例如 <code>1000</code>）。會在較低順序的原則之後套用較高順序的原則。例如，具有非常高順序的原則（例如 <code>3000</code>），實際上會在套用所有較低順序的原則之後最後套用。</br></br>送入的要求封包會經過 iptables 規則鏈，並嘗試先符合較低順序原則的規則。如果封包符合任何規則，則接受封包。不過，如果封包不符合任何規則，它會抵達 iptables 規則鏈中具有最高順序的最後一個規則。若要確定這是規則鏈中的最後一個原則，請使用較高順序，例如 <code>3000</code>，而不是您在步驟 1 建立的原則。</td>
+      <td>Calico 原則含有順序可判定其何時套用至送入的要求封包。會先套用含有低順序的原則（例如 <code>1000</code>）。會在較低順序的原則之後套用較高順序的原則。例如，具有非常高順序的原則（例如 <code>3000</code>），實際上會在套用所有較低順序的原則之後最後套用。</br></br>送入的要求封包會經過 Iptables 規則鏈，並嘗試先符合較低順序原則的規則。如果封包符合任何規則，則接受封包。不過，如果封包不符合任何規則，它會抵達 Iptables 規則鏈中具有最高順序的最後一個規則。若要確定這是規則鏈中的最後一個原則，請使用較高順序，例如 <code>3000</code>，而不是您在步驟 1 建立的原則。</td>
      </tr>
     </tbody>
     </table>

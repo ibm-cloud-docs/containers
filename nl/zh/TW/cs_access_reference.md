@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 
 ---
@@ -14,6 +14,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 使用者存取許可權
@@ -24,24 +27,27 @@ lastupdated: "2018-10-25"
 當您[指派叢集許可權](cs_users.html)時，很難判斷您需要指派給使用者的角色。使用下列各節中的表格，來判定在 {{site.data.keyword.containerlong}} 中執行一般作業所需的最低許可權層次。
 {: shortdesc}
 
-## IAM 平台與 Kubernetes RBAC
+## {{site.data.keyword.Bluemix_notm}} IAM 平台與 Kubernetes RBAC
 {: #platform}
 
-{{site.data.keyword.containerlong_notm}} 會配置為使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 角色。IAM 平台角色決定使用者可對叢集執行的動作。獲指派 IAM 平台角色的每個使用者，也會在預設名稱空間中，自動獲指派對應的 Kubernetes 角色型存取控制 (RBAC) 角色。此外， IAM 平台角色會自動設定使用者的基本基礎架構許可權。若要設定 IAM 原則，請參閱[指派 IAM 平台許可權](cs_users.html#platform)。若要進一步瞭解 RBAC 角色，請參閱[指派 RBAC 許可權](cs_users.html#role-binding)。
+{{site.data.keyword.containerlong_notm}} 會配置為使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 角色。{{site.data.keyword.Bluemix_notm}} IAM 平台角色決定使用者可對叢集執行的動作。獲指派平台角色的每位使用者，也會在預設名稱空間中，自動獲指派對應的 Kubernetes 角色型存取控制 (RBAC) 角色。此外，平台角色會自動設定使用者的基本基礎架構許可權。若要設定原則，請參閱[指派 {{site.data.keyword.Bluemix_notm}} IAM 平台許可權](cs_users.html#platform)。若要進一步瞭解 RBAC 角色，請參閱[指派 RBAC 許可權](cs_users.html#role-binding)。
+{: shortdesc}
 
-下表顯示每一個 IAM 平台角色所授與的叢集管理許可權，以及對應 RBAC 角色的 Kubernetes 資源許可權。
+下表顯示每一個平台角色所授與的叢集管理許可權，以及對應 RBAC 角色的 Kubernetes 資源許可權。
 
-<table>
-  <tr>
-    <th>IAM 平台角色</th>
+<table summary="此表格顯示 IAM 平台角色的使用者許可權，以及對應的 RBAC 原則。列應該從左到右閱讀，第一欄為 IAM 平台角色，第二欄為叢集許可權，第三欄為對應的 RBAC 角色。">
+<caption>依平台及 RBAC 角色的叢集管理許可權</caption>
+<thead>
+    <th>平台角色</th>
     <th>叢集管理許可權</th>
     <th>對應的 RBAC 角色和資源許可權</th>
-  </tr>
+</thead>
+<tbody>
   <tr>
     <td>**檢視者**</td>
     <td>
       叢集：<ul>
-        <li>檢視資源群組及地區之 IAM API 金鑰擁有者的名稱及電子郵件位址。</li>
+        <li>檢視資源群組及地區之 {{site.data.keyword.Bluemix_notm}} IAM API 金鑰擁有者的名稱及電子郵件位址。</li>
         <li>如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶使用不同的認證來存取 IBM Cloud 基礎架構 (SoftLayer) 組合，請檢視基礎架構使用者名稱</li>
         <li>全部列出或檢視叢集、工作者節點、工作者節點儲存區、叢集中服務，以及 Webhook 的詳細資料</li>
         <li>檢視基礎架構帳戶的 VLAN Spanning 狀態</li>
@@ -106,7 +112,7 @@ lastupdated: "2018-10-25"
         <li>使用 {{site.data.keyword.keymanagementservicefull}} 來加密 Kubernetes 密碼</li>
         <li>設定 {{site.data.keyword.Bluemix_notm}} 帳戶的 API 金鑰，以存取鏈結的 IBM Cloud 基礎架構 (SoftLayer) 組合</li>
         <li>設定、檢視及移除 {{site.data.keyword.Bluemix_notm}} 帳戶的基礎架構認證，以存取不同的 IBM Cloud 基礎架構 (SoftLayer) 組合</li>
-        <li>指派及變更帳戶中其他現有使用者的 IAM 平台角色</li>
+        <li>指派及變更帳戶中其他現有使用者的 {{site.data.keyword.Bluemix_notm}} IAM 平台角色</li>
         <li>針對所有地區中的所有 {{site.data.keyword.containerlong_notm}} 實例（叢集）設定時：列出帳戶中所有可用的 VLAN</ul>
       記載：<ul>
         <li>建立及更新類型 `kube-audit` 的日誌轉遞配置</li>
@@ -116,7 +122,8 @@ lastupdated: "2018-10-25"
         <li>全部列出或檢視叢集中 ALB 密碼的詳細資料</li>
         <li>將 {{site.data.keyword.cloudcerts_long_notm}} 實例中的憑證部署至 ALB</li>
         <li>更新或移除叢集中的 ALB 密碼</li></ul>
-      <strong>附註</strong>：若要建立機器、VLAN 及子網路這類資源，「管理者」使用者需要**超級使用者**基礎架構角色。</td>
+      <p class="note">若要建立機器、VLAN 及子網路這類資源，「管理者」使用者需要**超級使用者**基礎架構角色。</p>
+    </td>
     <td><code>cluster-admin</code> 叢集角色是由 <code>ibm-admin</code> 叢集角色連結所套用，提供下列許可權：
       <ul><li>每個名稱空間中資源的讀寫存取</li>
       <li>建立名稱空間內的 RBAC 角色</li>
@@ -124,6 +131,7 @@ lastupdated: "2018-10-25"
       <li>建立 Ingress 資源，讓應用程式公開可用</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 
@@ -131,15 +139,18 @@ lastupdated: "2018-10-25"
 ## Cloud Foundry 角色
 {: #cloud-foundry}
 
-Cloud Foundry 角色授與帳戶內組織及空間的存取權。若要查看 {{site.data.keyword.Bluemix_notm}} 中的 Cloud Foundry 型服務清單，請執行 `ibmcloud service list`。若要進一步瞭解，請參閱 IAM 文件中的所有可用[組織和空間角色](/docs/iam/cfaccess.html)或[管理 Cloud Foundry 存取](/docs/iam/mngcf.html)的步驟。
+Cloud Foundry 角色授與帳戶內組織及空間的存取權。若要查看 {{site.data.keyword.Bluemix_notm}} 中的 Cloud Foundry 型服務清單，請執行 `ibmcloud service list`。若要進一步瞭解，請參閱 {{site.data.keyword.Bluemix_notm}} IAM 文件中的所有可用[組織和空間角色](/docs/iam/cfaccess.html)或[管理 Cloud Foundry 存取](/docs/iam/mngcf.html)的步驟。
+{: shortdesc}
 
 下表顯示叢集動作許可權所需的 Cloud Foundry 角色。
 
-<table>
-  <tr>
+<table summary="此表格顯示 Cloud Foundry 的使用者許可權。列應該從左到右閱讀，第一欄為 Cloud Foundry 角色，第二欄為叢集許可權。">
+  <caption>依 Cloud Foundry 角色的叢集管理許可權</caption>
+  <thead>
     <th>Cloud Foundry 角色</th>
     <th>叢集管理許可權</th>
-  </tr>
+  </thead>
+  <tbody>
   <tr>
     <td>空間角色：管理員</td>
     <td>管理使用者存取 {{site.data.keyword.Bluemix_notm}} 空間</td>
@@ -152,12 +163,14 @@ Cloud Foundry 角色授與帳戶內組織及空間的存取權。若要查看 {{
       <li>檢視來自空間層次之叢集日誌轉遞配置的日誌</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 ## 基礎架構角色
 {: #infra}
 
-**附註**：當具有**超級使用者**基礎架構存取角色的使用者[設定地區和資源群組的 API 金鑰](cs_users.html#api_key)時，帳戶中其他使用者的基礎架構許可權是由 IAM 平台角色設定。您不需要編輯其他使用者的 IBM Cloud 基礎架構 (SoftLayer) 許可權。只有在您無法將**超級使用者**指派給設定 API 金鑰的使用者時，才會使用下表來自訂使用者的 IBM Cloud 基礎架構 (SoftLayer) 許可權。如需相關資訊，請參閱[ 自訂基礎架構許可權](cs_users.html#infra_access)。
+當具有**超級使用者**基礎架構存取角色的使用者[設定地區和資源群組的 API 金鑰](cs_users.html#api_key)時，帳戶中其他使用者的基礎架構許可權是由 {{site.data.keyword.Bluemix_notm}} IAM 平台角色設定。您不需要編輯其他使用者的 IBM Cloud 基礎架構 (SoftLayer) 許可權。只有在您無法將**超級使用者**指派給設定 API 金鑰的使用者時，才會使用下表來自訂使用者的 IBM Cloud 基礎架構 (SoftLayer) 許可權。如需相關資訊，請參閱[ 自訂基礎架構許可權](cs_users.html#infra_access)。
+{: shortdesc}
 
 下表顯示完成一般作業群組所需的基礎架構許可權。
 

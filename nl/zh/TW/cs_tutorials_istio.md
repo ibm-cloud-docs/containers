@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -41,8 +44,8 @@ lastupdated: "2018-10-25"
 
 ## 必要條件
 
--  [安裝 IBM Cloud CLI、{{site.data.keyword.containerlong_notm}} 外掛程式及 Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps)。Istio 需要 Kubernetes 1.9 版或以上版本。請務必安裝符合叢集之 Kubernetes 版本的 `kubectl` CLI 版本。
--  [建立執行 Kubernetes 1.9 版或更新版本](cs_clusters.html#clusters_cli)的叢集，或[將現有叢集更新至 1.9 版](cs_versions.html#cs_v19)。
+-  [安裝 IBM Cloud CLI、{{site.data.keyword.containerlong_notm}} 外掛程式及 Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps)。請務必安裝符合叢集之 Kubernetes 版本的 `kubectl` CLI 版本。
+-  [建立叢集](cs_clusters.html#clusters_cli)。 
 -  [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
 
 ## 課程 1：下載並安裝 Istio

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -25,8 +28,8 @@ lastupdated: "2018-10-25"
 * AI 及機器學習
 * 資料及儲存空間
 * DevOps
-
 {: shortdesc}
+
 <table summary="此表格顯示使用案例。列應該從左到右閱讀，第一欄為代表每個產業的圖示，而第二欄為說明。">
 <caption>使用案例</caption>
   <thead>

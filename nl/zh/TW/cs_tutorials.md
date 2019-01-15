@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -34,7 +37,7 @@ lastupdated: "2018-10-25"
 -   建立一個叢集，其包含一個具有 1 個工作者節點的工作者節點儲存區。
 -   安裝 CLI 來執行 [Kubernetes 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)，以及管理 {{site.data.keyword.registrylong_notm}} 中的 Docker 映像檔。
 -   在 {{site.data.keyword.registrylong_notm}} 中建立專用映像檔儲存庫，以儲存您的映像檔。
--   將 {{site.data.keyword.toneanalyzershort}} 服務新增至叢集，讓叢集裡的任何應用程式都可以使用該服務。
+-   將 {{site.data.keyword.toneanalyzershort}} 服務新增至叢集，讓叢集中的任何應用程式都可以使用該服務。
 
 
 ## 所需時間
@@ -50,20 +53,22 @@ lastupdated: "2018-10-25"
 ## 必要條件
 
 -  請查看您需要採取以[準備建立叢集](cs_clusters.html#cluster_prepare)的步驟。
--  叢集空間中您要使用的[**開發人員** Cloud Foundry 角色](/docs/iam/mngcf.html#mngcf)。
+-  確定您具有下列存取原則：
+    - {{site.data.keyword.containerlong_notm}} 的[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)
+    -  叢集空間中您要使用的 [**Developer** Cloud Foundry 角色](/docs/iam/mngcf.html#mngcf)
 
 
 ## 課程 1：建立叢集並設定 CLI
 {: #cs_cluster_tutorial_lesson1}
 
-在 GUI 中建立 Kubernetes 叢集，並安裝必要的 CLI。
+在 {{site.data.keyword.Bluemix_notm}} 主控台中建立 Kubernetes 叢集，並安裝必要的 CLI。
 {: shortdesc}
 
 **建立叢集**
 
 因為需要幾分鐘的時間進行佈建，所以請先建立叢集，再安裝 CLI。
 
-1.  [在 GUI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) 中，建立一個免費或標準叢集，其包含一個具有 1 個工作者節點的工作者節點儲存區。
+1.  [在 {{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) 中，建立一個免費或標準叢集，其包含一個具有 1 個工作者節點的工作者節點儲存區。
 
     您也可以[在 CLI 中建立叢集](cs_clusters.html#clusters_cli)。
     {: tip}
@@ -88,13 +93,13 @@ lastupdated: "2018-10-25"
     {: pre}
 
 5.  若要將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。若要使用 Kubernetes CLI 來執行指令，請使用字首 `kubectl`。
-    1.  如需完整的功能相容性，請下載與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containerlong_notm}} 預設 Kubernetes 版本為 1.10.8。
+    1.  如需完整的功能相容性，請下載與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containerlong_notm}} 預設 Kubernetes 版本為 1.10.11。
 
-        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl)
+        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
 
-        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl)
+        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl)
 
-        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe)
+        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe)
 
           **提示：**如果您使用的是 Windows，請在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中安裝 Kubernetes CLI。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。
 
@@ -157,9 +162,10 @@ lastupdated: "2018-10-25"
     ```
     {: pre}
 
-    **附註：**如果您具有聯合 ID，請使用 `--sso` 旗標來登入。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。
+    如果您具有聯合 ID，請使用 `--sso` 旗標來登入。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。
+    {: tip}
 
-2.  如果叢集位於 `default` 以外的資源群組中，請將目標設為該資源群組。
+2.  如果叢集位於 `default` 以外的資源群組中，請將目標設為該資源群組。若要查看每一個叢集所屬的資源群組，請執行 `ibmcloud ks clusters`。
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -187,7 +193,7 @@ lastupdated: "2018-10-25"
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.11
     ```
     {: screen}
 
@@ -199,7 +205,7 @@ lastupdated: "2018-10-25"
 
 每次登入 {{site.data.keyword.containerlong}} CLI 以使用叢集時，您都必須執行這些指令，以將叢集配置檔的路徑設為階段作業變數。Kubernetes CLI 會使用此變數來尋找與 {{site.data.keyword.Bluemix_notm}} 中的叢集連接所需的本端配置檔及憑證。
 
-1.  讓指令去設定環境變數，並下載 Kubernetes 配置檔。
+1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
 
     ```
     ibmcloud ks cluster-config <cluster_name_or_ID>
@@ -243,8 +249,8 @@ lastupdated: "2018-10-25"
     輸出範例：
 
     ```
-    Client Version: v1.10.8
-    Server Version: v1.10.8
+    Client Version: v1.10.11
+    Server Version: v1.10.11
     ```
     {: screen}
 
@@ -256,7 +262,8 @@ lastupdated: "2018-10-25"
 
 1.  將 {{site.data.keyword.toneanalyzershort}} 服務新增至 {{site.data.keyword.Bluemix_notm}} 帳戶。將 <service_name> 取代為您服務實例的名稱。
 
-    **附註：**當您將 {{site.data.keyword.toneanalyzershort}} 服務新增至帳戶時，會顯示一則訊息指出該服務並非免費。如果您限制 API 呼叫，則此指導教學不會引起 {{site.data.keyword.watson}} 服務的費用。[請檢閱 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服務的定價資訊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/catalog/services/tone-analyzer)。
+    當您將 {{site.data.keyword.toneanalyzershort}} 服務新增至帳戶時，會顯示一則訊息指出該服務並非免費。如果您限制 API 呼叫，則此指導教學不會引起 {{site.data.keyword.watson}} 服務的費用。[請檢閱 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服務的定價資訊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/catalog/services/tone-analyzer)。
+    {: note}
 
     ```
     ibmcloud service create tone_analyzer standard <service_name>
@@ -281,7 +288,7 @@ lastupdated: "2018-10-25"
     ```
     {: screen}
 
-3.  驗證已在叢集名稱空間中建立 Kubernetes 密碼。包括機密資訊（例如，容器用來存取的使用者名稱、密碼及 URL）的 JSON 檔案會定義每個 {{site.data.keyword.Bluemix_notm}} 服務。為了安全地儲存此資訊，因此使用了 Kubernetes 密碼。在此範例中，密碼包括可用來存取帳戶中所佈建 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 實例的認證。
+3.  驗證已在叢集名稱空間中建立 Kubernetes 密碼。包括機密資訊（例如，{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 金鑰，以及容器用來取得存取權的 URL）的 JSON 檔案會定義每個 {{site.data.keyword.Bluemix_notm}} 服務。為了安全地儲存此資訊，因此使用了 Kubernetes 密碼。在此範例中，密碼包括可用於存取帳戶中所佈建 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 實例的 API 金鑰。
 
     ```
     kubectl get secrets --namespace=default

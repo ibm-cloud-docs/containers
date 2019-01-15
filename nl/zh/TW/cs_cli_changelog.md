@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -26,7 +29,7 @@ lastupdated: "2018-10-25"
 
 如需每一個 CLI 外掛程式版本的變更摘要，請參閱下表。
 
-<table summary=" {{site.data.keyword.containerlong_notm}} CLI 外掛程式的變更日誌">
+<table summary="{{site.data.keyword.containerlong_notm}} CLI 外掛程式的版本變更概觀">
 <caption>{{site.data.keyword.containerlong_notm}} CLI 外掛程式的變更日誌</caption>
 <thead>
 <tr>
@@ -36,6 +39,35 @@ lastupdated: "2018-10-25"
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.1.654</td>
+<td>2018 年 12 月 5 日</td>
+<td>更新文件和翻譯。</td>
+</tr>
+<tr>
+<td>0.1.638</td>
+<td>2018 年 11 月 15 日</td>
+<td>
+<ul><li>新增 [<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh) 指令。</li>
+<li>將資源群組名稱新增至 <code>ibmcloud ks cluster-get</code> 和 <code>ibmcloud ks clusters</code> 的輸出。</li></ul>
+</td>
+</tr>
+<tr>
+<td>0.1.635</td>
+<td>2018 年 11 月 6 日</td>
+<td>新增 [<code>ibmcloud ks alb-autoupdate-disable</code>](cs_cli_reference.html#cs_alb_autoupdate_disable)、[<code>ibmcloud ks alb-autoupdate-enable</code>](cs_cli_reference.html#cs_alb_autoupdate_enable)、[<code>ibmcloudks alb-autoupdate-get</code>](cs_cli_reference.html#cs_alb_autoupdate_get)、[<code>ibmcloud ks alb-rollback</code>](cs_cli_reference.html#cs_alb_rollback) 和 [<code>ibmcloud ks alb-update</code>](cs_cli_reference.html#cs_alb_update) 指令，用於管理 Ingress ALB 叢集附加程式的自動更新。
+</td>
+</tr>
+<tr>
+<td>0.1.621</td>
+<td>2018 年 10 月 30 日</td>
+<td><ul>
+<li>新增 [<code>ibmcloud ks credential-get</code> 指令](cs_cli_reference.html#cs_credential_get)。</li>
+<li>將 <code>storage</code> 日誌來源的支援新增至所有叢集記載指令。如需相關資訊，請參閱<a href="cs_health.html#logging">瞭解叢集和應用程式日誌轉遞</a>。</li>
+<li>將 `--network` 旗標新增至 [<code>ibmcloud k cluster-config</code> 指令](cs_cli_reference.html#cs_cluster_config)，其會下載 Calico 配置檔以執行所有 Calico 指令。</li>
+<li>次要錯誤修正程式及重構</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.1.593</td>
 <td>2018 年 10 月 10 日</td>

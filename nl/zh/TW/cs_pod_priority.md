@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 設定 Pod 優先順序
@@ -35,7 +38,7 @@ lastupdated: "2018-10-25"
 
 如果您沒有為 Pod 部署指定優先順序，則預設值是設為 `globalDefault` 優先順序等級。如果您沒有 `globalDefault` 優先順序等級，則所有 Pod 的預設優先順序都是零 (`0`)。依預設，{{site.data.keyword.containerlong_notm}} 不會設定 `globalDefault`，因此 Pod 預設優先順序為零。
 
-請考量下圖中的情境。**重要事項**：誠如您所見，您需要瞭解 Pod 優先順序及排程器如何一起運作，將具有優先順序的 Pod 放在具有可用資源的工作者節點上。否則，在移除現有 Pod 的同時，叢集中的高優先順序 Pod 可以保持擱置狀態，如「情境 3」所示。
+若要瞭解 Pod 優先順序與排程器如何一起運作，請考量下圖中的情境。您必須在具有可用資源的工作者節點上放置已設定優先順序的 Pod。否則，在移除現有 Pod 的同時，叢集中的高優先順序 Pod 可能保持擱置狀態，如「情境 3」所示。
 
 _圖：Pod 優先順序情境_![Pod 優先順序情境](images/pod-priority.png)
 1.  具有高、中、低優先順序的三個 Pod 擱置排程。排程器會尋找有空間給所有 3 個 Pod 的可用工作者節點，並依優先順序排程它們，優先順序最高的 Pod 先排。
@@ -45,15 +48,21 @@ _圖：Pod 優先順序情境_![Pod 優先順序情境](images/pod-priority.png)
 **如需相關資訊**：請參閱有關 [Pod 優先順序及先占 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/)的 Kubernetes 文件。
 
 **我可以停用 Pod 優先順序許可控制器嗎？**</br>
-不必。若您不想要使用 Pod 優先順序，則不要設定 `globalDefault` 或在 Pod 部署中包含優先順序等級。除了 IBM 使用[預設優先順序等級](#default_priority_class)部署的叢集重要 Pod 之外，每個 Pod 都預設為零。因為 Pod 優先順序是相對的，所以此基本設定確保叢集重要 Pod 已針對資源設定了優先順序，並遵循您已設定的現有排程原則來排程任何其他 Pod。
+否。如果您不想要使用 Pod 優先順序，則不要設定 `globalDefault` 或在 Pod 部署中包含優先順序等級。除了 IBM 使用[預設優先順序等級](#default_priority_class)部署的叢集重要 Pod 之外，每個 Pod 都預設為零。因為 Pod 優先順序是相對的，所以此基本設定確保叢集重要 Pod 已針對資源設定了優先順序，並遵循您已設定的現有排程原則來排程任何其他 Pod。
+
+**資源配額如何影響 Pod 優先順序？**</br>
+您可以針對執行 Kubernetes 1.12 或更新版本的叢集，搭配使用 Pod 優先順序與資源配額，包括[配額範圍 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes)。使用配額範圍，您可以將資源配額設為帳戶，以取得 Pod 優先順序。較高優先順序的 Pod 會在較低優先順序的 Pod 之前，開始耗用資源配額所限制的系統資源。
 
 ## 瞭解預設優先順序等級
 {: #default_priority_class}
 
-依預設，您的 {{site.data.keyword.containerlong_notm}} 叢集具有一些優先順序等級。**重要事項**：請勿修改預設等級，其係用來正確管理您的叢集。您可以在應用程式部署中使用這些等級，或[建立您自己的優先順序等級](#create_priority_class)。
+依預設，您的 {{site.data.keyword.containerlong_notm}} 叢集具有一些優先順序等級。
 {: shortdesc}
 
-下表說明依預設存在於您叢集中的優先順序等級及其使用原因。 
+請不要修改預設等級，其係用來正確管理您的叢集。您可以在應用程式部署中使用這些等級，或[建立您自己的優先順序等級](#create_priority_class)。
+{: important}
+
+下表說明依預設存在於您叢集中的優先順序等級及其使用原因。
 
 |名稱| 設定者 | 優先順序值 | 用途 |
 |---|---|---|
@@ -79,22 +88,24 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 * [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 * [建立](cs_clusters.html#clusters_ui)或[更新](cs_cluster_update.html#update)您的叢集至 Kubernetes 1.11 版或更新版本。
 
+若要使用優先順序等級，請執行下列動作：
+
 1.  選用項目：使用現有的優先順序等級作為新等級的範本。
-    
+
     1.  列出現有的優先順序等級。
-        
+
         ```
         kubectl get priorityclasses
         ```
         {: pre}
-        
+
     2.  選擇您要複製的優先順序等級，並建立本端 YAML 檔案。
-    
+
         ```
         kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
         ```
         {: pre}
-        
+
 2.  建立優先順序等級 YAML 檔案。
 
     ```yaml
@@ -107,7 +118,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     description: "Use this class for XYZ service pods only."
     ```
     {: codeblock}
-    
+
     <table>
     <caption>瞭解 YAML 檔案元件</caption>
     <thead>
@@ -131,7 +142,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     <td><code>description</code></td>
     <td>選用項目：告訴使用者為何要使用此優先順序等級。請使用引號 (`""`) 括住字串。</td>
     </tr></tbody></table>
-    
+
 3.  在叢集中建立優先順序等級。
 
     ```
@@ -163,13 +174,13 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 
 1.  檢查其他已部署的 Pod 的重要性，這樣您就可以衡量與已部署的 Pod 的關係，為您的 Pod 選擇正確的優先順序等級。
 
-    1.  檢視名稱空間中的其他 Pod 使用的優先順序等級。 
-        
+    1.  檢視名稱空間中的其他 Pod 使用的優先順序等級。
+
         ```
         kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
         ```
         {: pre}
-        
+
     2.  取得優先順序等級的詳細資料，並記下 **value** 數字。具有較高數字的 Pod 的優先順序是在具有較低數字的 Pod 之前。對於您想要檢閱的每一個優先順序等級重複此步驟。
 
         ```
@@ -183,7 +194,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     kubectl get priorityclasses
     ```
     {: pre}
-    
+
 3.  在您的 Pod 規格中，把您在前一個步驟擷取的優先順序等級的名稱新增至 `priorityClassName` 欄位中。
 
     ```yaml

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -24,11 +27,77 @@ lastupdated: "2018-10-25"
 掌握 {{site.data.keyword.containerlong}} 中發生的情況。瞭解要探索的新特性、要試用的訣竅，或其他開發人員目前發現很有用的一些熱門主題。
 {:shortdesc}
 
+## 2018 年 12 月的熱門主題
+{: #dec18}
+
+<table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
+<caption>2018 年 12 月關於容器及 Kubernetes 叢集的熱門主題</caption>
+<thead>
+<th>日期</th>
+<th>標題</th>
+<th>說明</th>
+</thead>
+<tbody>
+<tr>
+<td>12 月 6 日</td>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>取得應用程式效能及性能的作業可見性，方法為將 Sysdig 作為協力廠商服務部署至工作者節點，以將度量轉遞至 {{site.data.keyword.monitoringlong}}。如需相關資訊，請參閱[分析在 Kubernetes 叢集中部署之應用程式的度量](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**附註**：如果您使用 {{site.data.keyword.mon_full_notm}} 與執行 Kubernets 1.11 版或更新版本的叢集搭配，則不會收集所有容器度量，因為 Syslig 目前不支援 `containerd`。</td>
+</tr>
+</tbody></table>
+
+## 2018 年 11 月的熱門主題
+{: #nov18}
+
+<table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
+<caption>2018 年 11 月關於容器及 Kubernetes 叢集的熱門主題</caption>
+<thead>
+<th>日期</th>
+<th>標題</th>
+<th>說明</th>
+</thead>
+<tbody>
+<tr>
+<td>11 月 29 日</td>
+<td>[清奈現在為可用區域](cs_regions.html)</td>
+<td>歡迎印度清奈成為亞太地區北部地區中的叢集新區域。如果您有防火牆，務必針對此區域以及您叢集所在地區內的其他區域[開啟防火牆埠](cs_firewall.html#firewall)。</td>
+</tr>
+<tr>
+<td>11 月 27 日</td>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>將日誌管理功能新增至叢集，方法為將 LogDNA 作為協力廠商服務部署至工作者節點，以管理來自 Pod 容器的日誌。如需相關資訊，請參閱[使用 {{site.data.keyword.loganalysisfull_notm}} 搭配 LogDNA 來管理 Kubernetes 叢集日誌](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)。</td>
+</tr>
+<tr>
+<td>11 月 7 日</td>
+<td>負載平衡器 2.0（測試版）</td>
+<td>現在，您可以在[負載平衡器 1.0 或 2.0](cs_loadbalancer.html#planning_ipvs) 之間進行選擇，以安全地將叢集應用程式公開給大眾使用。</td>
+</tr>
+<tr>
+<td>11 月 7 日</td>
+<td>提供 Kubernetes 1.12 版</td>
+<td>現在，您可以更新或建立執行 [Kubernetes 1.12 版](cs_versions.html#cs_v112)的叢集！依預設，1.12 叢集隨附高可用性 Kibernetes 主節點。</td>
+</tr>
+<tr>
+<td>11 月 7 日</td>
+<td>執行 Kubernetes 1.10 版之叢集中的高可用性主節點</td>
+<td>高可用性主節點適用於執行 Kubernetes 1.10 版的叢集！在 1.11 叢集的先前項目中所述的所有好處都適用於 1.10 叢集，您必須採取的[準備步驟](cs_versions.html#110_ha-masters)也同時適用。</td>
+</tr>
+<tr>
+<td>11 月 1 日</td>
+<td>執行 Kubernetes 1.11 版之叢集中的高可用性主節點</td>
+<td>在單一區域中，您的主節點具有高可用性，且會在個別實體主機上包含 Kubernetes API 伺服器、etcd、排程器及控制器管理程式的抄本，來防範在叢集更新這類期間發生運作中斷。如果您的叢集是在具有多區域功能的區域中，則您的高可用性主節點也會分散在各個區域之中，以協助防範區域失敗。<br>如需您必須採取的動作，請參閱[更新為高可用性叢集主節點](cs_versions.html#ha-masters)。這些準備動作適用下列情況：<ul>
+<li>如果您具有防火牆或自訂 Calico 網路原則。</li>
+<li>如果您是在工作者節點上使用主機埠 `2040` 或 `2041`。</li>
+<li>如果您已使用叢集主節點 IP 位址，對主節點進行叢集內存取。</li>
+<li>如果您具有呼叫 Calico API 或 CLI (`calictl`) 的自動化，例如，建立 Calico 原則。</li>
+<li>如果您使用 Kubernetes 或 Calico 網路原則，來控制對主節點的 Pod Egress 存取。</li></ul></td>
+</tr>
+</tbody></table>
+
 ## 2018 年 10 月的熱門主題
 {: #oct18}
 
 <table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
-<caption>2018 年 8 月關於容器及 Kubernetes 叢集的熱門主題</caption>
+<caption>2018 年 10 月關於容器及 Kubernetes 叢集的熱門主題</caption>
 <thead>
 <th>日期</th>
 <th>標題</th>
@@ -53,7 +122,7 @@ lastupdated: "2018-10-25"
 <tr>
 <td>10 月 4 日</td>
 <td>[{{site.data.keyword.registrylong}} 現在會與 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 整合](/docs/services/Registry/iam.html#iam)</td>
-<td>您可以使用 IAM 來控制對登錄資源（例如取回、推送及建置映像檔）的存取權。當您建立叢集時，也會建立登錄記號，讓叢集可以使用您的登錄。因此，您需要登錄**管理者**平台管理角色，才能建立叢集。若要啟用登錄帳戶的 IAM，請參閱[啟用現有使用者的原則強制執行](/docs/services/Registry/registry_users.html#existing_users)。</td>
+<td>您可以使用 {{site.data.keyword.Bluemix_notm}} IAM 來控制對登錄資源（例如取回、推送及建置映像檔）的存取權。當您建立叢集時，也會建立登錄記號，讓叢集可以使用您的登錄。因此，您需要帳戶層次登錄**管理者**平台管理角色，才能建立叢集。若要啟用登錄帳戶的 {{site.data.keyword.Bluemix_notm}} IAM，請參閱[啟用現有使用者的原則強制執行](/docs/services/Registry/registry_users.html#existing_users)。</td>
 </tr>
 <tr>
 <td>10 月 1 日</td>
@@ -66,7 +135,7 @@ lastupdated: "2018-10-25"
 {: #sept18}
 
 <table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
-<caption>2018 年 8 月關於容器及 Kubernetes 叢集的熱門主題</caption>
+<caption>2018 年 9 月關於容器及 Kubernetes 叢集的熱門主題</caption>
 <thead>
 <th>日期</th>
 <th>標題</th>
@@ -190,8 +259,8 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
 <td>5 月 1 日</td>
-<td>[從 GUI 部署 Kubernetes 儀表板](cs_app.html#cli_dashboard)</td>
-<td>您是否曾想要利用按一下滑鼠來存取 Kubernetes 儀表板？請查看 {{site.data.keyword.Bluemix_notm}} GUI 中的 **Kubernetes 儀表板**按鈕。</td>
+<td>[從主控台部署 Kubernetes 儀表板](cs_app.html#cli_dashboard)</td>
+<td>您是否曾想要利用按一下滑鼠來存取 Kubernetes 儀表板？請查看 {{site.data.keyword.Bluemix_notm}} 主控台中的 **Kubernetes 儀表板**按鈕。</td>
 </tr>
 </tbody></table>
 
@@ -282,7 +351,7 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
 <td>2 月 23 日</td>
-<td>檢視 Web 使用者介面中的[記載](cs_health.html#view_logs)及[度量值](cs_health.html#view_metrics)</td>
+<td>檢視 Web 主控台中的[記載](cs_health.html#view_logs)及[度量值](cs_health.html#view_metrics)</td>
 <td>使用改良的 Web 使用者介面，輕鬆檢視叢集和其元件的日誌及度量值資料。請參閱叢集詳細資料頁面來進行存取。</td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -30,7 +33,12 @@ lastupdated: "2018-10-25"
 
 每個儲存空間類別都指定您佈建的檔案儲存空間類型，包括可用的大小、IOPS、檔案系統及保留原則。  
 
-**重要事項：**請務必小心選擇您的儲存空間配置，使其具有足夠的容量來儲存您的資料。在使用儲存空間類別佈建特定類型的儲存空間之後，您就無法變更儲存裝置的大小、類型、IOPS 或保留原則。如果您需要更多儲存空間或具有不同配置的儲存空間，則必須[建立新的儲存空間實例，並將資料](cs_storage_basics.html#update_storageclass)從舊的儲存空間實例複製到新的儲存空間實例。
+在使用儲存空間類別佈建特定類型的儲存空間之後，您就無法變更儲存裝置的類型或保留原則。不過，如果想要增加您的儲存空間容量及效能，您可以[變更大小及 IOPS](#change_storage_configuration)。若要變更儲存空間的類型及保留原則，您必須[建立新的儲存空間實例，並將資料](cs_storage_basics.html#update_storageclass)從舊的儲存空間實例複製到新的儲存空間實例。
+{: important}
+
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+
+若要決定儲存空間配置，請執行下列動作：
 
 1. 列出 {{site.data.keyword.containerlong}} 中可用的儲存空間類別。
     ```
@@ -63,8 +71,8 @@ lastupdated: "2018-10-25"
    {: tip}
 
 3. 選擇您要佈建的檔案儲存空間類型。
-   - **銅級、銀級和金級儲存空間類別：**這些儲存空間類別會佈建[耐久性儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/endurance-storage)。耐久性儲存空間可讓您在預先定義的 IOPS 層級選擇儲存空間的大小（以 GB 為單位）。
-   - **自訂儲存空間類別：**此儲存空間類別會佈建[效能儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/performance-storage)。使用效能儲存空間，您更能控制儲存空間大小及 IOPS。
+   - **銅級、銀級和金級儲存空間類別：**這些儲存空間類別會佈建[耐久性儲存空間](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers)。耐久性儲存空間可讓您在預先定義的 IOPS 層級選擇儲存空間的大小（以 GB 為單位）。
+   - **自訂儲存空間類別：**此儲存空間類別會佈建[效能儲存空間](/docs/infrastructure/FileStorage/index.html#provisioning-with-performance)。使用效能儲存空間，您更能控制儲存空間大小及 IOPS。
 
 4. 選擇檔案儲存空間的大小及 IOPS。大小及 IOPS 數目定義 IOPS（每秒的輸入/輸出作業數）總數，此 IOPS 可作為儲存空間有多快的指示器。您的儲存空間的 IOPS 總數越大，其處理讀取及寫入作業的速度就越快。
    - **銅級、銀級和金級儲存空間類別：**這些儲存空間類別隨附每 GB 固定數目的 IOPS，並佈建在 SSD 硬碟上。IOPS 總數取決於您選擇的儲存空間大小。您可以選取所容許大小範圍內的任何整數的 GB 大小，例如 20 Gi、256 Gi 或 11854 Gi。若要決定 IOPS 總數，您必須將 IOPS 乘以選取的大小。例如，如果您在隨附每 GB 4 個 IOPS 的銀級儲存空間類別中選取 1000Gi 檔案儲存空間大小，則您的儲存空間總共有 4000 個 IOPS。
@@ -151,7 +159,8 @@ lastupdated: "2018-10-25"
    - 如果要保留資料，則請選擇 `retain` 儲存空間類別。當您刪除 PVC 時，只會刪除 PVC。PV、IBM Cloud 基礎架構 (SoftLayer) 帳戶中的實體儲存裝置，以及您的資料仍然存在。若要收回儲存空間，並再次在您的叢集裡使用它，您必須移除 PV，並遵循[使用現有檔案儲存空間](#existing_file)的步驟。
    - 如果您想要在刪除 PVC 時一併刪除 PV、資料及實體檔案儲存裝置，請選擇沒有 `retain` 的儲存空間類別。**附註**：如果您有「專用」帳戶，請選擇沒有 `retain` 的儲存空間類別，以防止 IBM Cloud 基礎架構 (SoftLayer) 中的孤立磁區。
 
-6. 選擇您要按小時還是按月計費。如需相關資訊，請檢查[定價 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/file-storage/pricing)。依預設，所有檔案儲存裝置都是搭配每小時計費類型進行佈建。**附註：**如果您選擇每月計費類型，則移除持續性儲存空間時，仍須支付一個月的費用，即使您只是短時間使用。
+6. 選擇您要按小時還是按月計費。如需相關資訊，請檢查[定價 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/file-storage/pricing)。依預設，所有檔案儲存裝置都是搭配每小時計費類型進行佈建。如果您選擇按月計費類型，則移除持續性儲存空間時，仍然需要支付它的一個月費用，即使您只是短時間使用也是一樣。
+   {: note}
 
 <br />
 
@@ -166,8 +175,6 @@ lastupdated: "2018-10-25"
 開始之前：
 - 如果您有防火牆，請對叢集所在區域的 IBM Cloud 基礎架構 (SoftLayer) IP 範圍[容許進行 Egress 存取](cs_firewall.html#pvc)，這樣您才可以建立 PVC。
 - [決定預先定義的儲存空間類別](#predefined_storageclass)或建立[自訂的儲存空間類別](#custom_storageclass)。
-
-  **附註：**如果您有多區域叢集，則會根據循環式基準選取儲存空間佈建所在的區域，以在所有區域均勻地平衡磁區要求。如果要為您的儲存空間指定區域，請先建立[自訂的儲存空間類別](#multizone_yaml)。然後，遵循本主題中的步驟，使用自訂的儲存空間類別來佈建儲存空間。
 
 希望在有狀態集中部署檔案儲存空間嗎？如需相關資訊，請參閱[在有狀態集中使用檔案儲存空間](#file_statefulset)。
 {: tip}
@@ -187,6 +194,8 @@ lastupdated: "2018-10-25"
            volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
          labels:
            billingType: "monthly"
+           region: us-south
+           zone: dal13
        spec:
          accessModes:
            - ReadWriteMany
@@ -207,6 +216,8 @@ lastupdated: "2018-10-25"
            volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
          labels:
            billingType: "hourly"
+           region: us-south
+           zone: dal13
        spec:
          accessModes:
            - ReadWriteMany
@@ -228,12 +239,20 @@ lastupdated: "2018-10-25"
        <td>輸入 PVC 名稱。</td>
        </tr>
        <tr>
-       <td><code>metadata.annotations</code></td>
-       <td>您要用來佈建檔案儲存空間之儲存空間類別的名稱。</br> 如果您未指定儲存空間類別，則會建立預設儲存空間類別為 <code>ibmc-file-bronze</code> 的 PV。<p>**提示：**如果您要變更預設儲存空間類別，請執行 <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code>，並將 <code>&lt;storageclass&gt;</code> 取代為儲存空間類別的名稱。</p></td>
+       <td><code>metadata.annotations.</code></br><code>volume.beta.kubernetes.io/</code></br><code>storage-class</code></td>
+       <td>您要用來佈建檔案儲存空間之儲存空間類別的名稱。</br> 如果您未指定儲存空間類別，則會建立預設儲存空間類別為 <code>ibmc-file-bronze</code> 的 PV。</br></br><strong>提示：</strong>如果您要變更預設儲存空間類別，請執行 <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code>，並將 <code>&lt;storageclass&gt;</code> 取代為儲存空間類別的名稱。</td>
        </tr>
        <tr>
          <td><code>metadata.labels.billingType</code></td>
           <td>指定計算儲存空間費用的頻率為 "monthly" 或 "hourly"。如果未指定計費類型，則會佈建計費類型為每小時的儲存空間。</td>
+       </tr>
+       <tr>
+       <td><code>metadata.labels.region</code></td>
+       <td>選用項目：指定您要在其中佈建檔案儲存空間的地區。若要連接至儲存空間，請在叢集所在的相同地區中建立儲存空間。如果指定地區，則也須指定區域。如果未指定地區或找不到指定的地區，則會在與叢集相同的地區中建立儲存空間。</br></br><strong>提示：</strong>您也可以在[自訂的儲存空間類別](#multizone_yaml)中指定這些值，而不是在 PVC 中指定地區及區域。然後，在 PVC 的 <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> 區段中使用您的儲存空間類別。如果在儲存空間類別和 PVC 中指定了地區和區域，則會優先採用 PVC 中的值。</td>
+       </tr>
+       <tr>
+       <td><code>metadata.labels.zone</code></td>
+       <td>選用項目：指定您要在其中佈建檔案儲存空間的區域。若要在應用程式中使用儲存空間，請在工作者節點所在的相同區域中建立儲存空間。若要檢視工作者節點的區域，請執行 <code>ibmcloud ks workers --cluster &lt;cluster_name_or_ID&gt;</code>，並檢閱 CLI 輸出中的 <strong>Zone</strong> 直欄。如果指定區域，則也須指定地區。如果未指定區域或找不到指定的區域，則會根據循環式基準選取區域。</br></br><strong>提示：</strong>您也可以在[自訂的儲存空間類別](#multizone_yaml)中指定這些值，而不是在 PVC 中指定地區及區域。然後，在 PVC 的 <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> 區段中使用您的儲存空間類別。如果在儲存空間類別和 PVC 中指定了地區和區域，則會優先採用 PVC 中的值。</td>
        </tr>
        <tr>
        <td><code>spec.accessMode</code></td>
@@ -241,7 +260,7 @@ lastupdated: "2018-10-25"
        </tr>
        <tr>
        <td><code>spec.resources.requests.storage</code></td>
-       <td>輸入檔案儲存空間大小，以 GB 為單位 (Gi)。</br></br><strong>附註：</strong>在佈建儲存空間之後，您無法變更檔案儲存空間的大小。請確定指定符合您要儲存的資料量的大小。</td>
+       <td>輸入檔案儲存空間大小，以 GB 為單位 (Gi)。在佈建儲存空間之後，您就無法變更檔案儲存空間的大小。請確定指定符合您要儲存的資料量的大小。</td>
        </tr>
        <tr>
        <td><code>spec.resources.requests.iops</code></td>
@@ -401,7 +420,9 @@ apiVersion: apps/v1beta1
 
 如果您具有想要在叢集裡使用的現有實體儲存裝置，則可以手動建立 PV 及 PVC，以[靜態佈建](cs_storage_basics.html#static_provisioning)儲存空間。
 
-開始之前，請確定您至少具有一個工作者節點，存在於與現有檔案儲存空間實例相同的區域中。
+開始之前：
+- 請確定您至少具有一個工作者節點，存在於與現有檔案儲存空間實例相同的區域中。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 
 ### 步驟1：準備現有的儲存空間。
 
@@ -446,7 +467,8 @@ apiVersion: apps/v1beta1
 **若為在叢集外佈建的持續性儲存空間：** </br>
 如果您想要使用先前佈建、但之前從未在叢集裡使用的現有儲存空間，您必須讓儲存空間可在與工作者節點相同的子網路中使用。
 
-**附註**：如果您有「專用」帳戶，則必須[開立支援問題單](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+如果您有「專用」帳戶，則必須[開立支援案例](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+{: note}
 
 1.  {: #external_storage}從 [IBM Cloud 基礎架構 (SoftLayer) 入口網站 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://control.bluemix.net/) 中，按一下**儲存空間**。
 2.  按一下**檔案儲存空間**，並從**動作**功能表中選取**授權主機**。
@@ -592,10 +614,11 @@ apiVersion: apps/v1beta1
 **將檔案儲存空間新增至有狀態集時，需要注意的事項為何？** </br>
 若要將儲存空間新增至有狀態集，您可以在有狀態集 YAML 的 `volumeClaimTemplates` 區段中指定儲存空間配置。`volumeClaimTemplates` 是您 PVC 的基礎，可以包括儲存空間類別以及您要佈建的檔案儲存空間大小或 IOPS。不過，如果您要在 `volumeClaimTemplates` 中包括標籤，則在建立 PVC 時，Kubernetes 不會包括這些標籤。相反地，您必須將標籤直接新增至有狀態集。
 
-**重要事項：**您無法同時部署兩個有狀態集。如果您嘗試在完整部署不同的有狀態集之前建立有狀態集，則有狀態集的部署可能會導致非預期的結果。
+您無法同時部署兩個有狀態集。如果您嘗試在完整部署不同的有狀態集之前建立有狀態集，則有狀態集的部署可能會導致非預期的結果。
+{: important}
 
 **如何在特定區域中建立有狀態集？** </br>
-在多區域叢集中，您可以指定要在有狀態集 YAML 的 `spec.selector.matchLabels` 及 `spec.template.metadata.labels` 區段中建立有狀態集的區域及地區。或者，您也可以將這些標籤新增至[自訂的儲存空間類別](cs_storage_basics.html#customized_storageclass)，並在有狀態集的 `volumeClaimTemplates` 區段中使用此儲存空間類別。 
+在多區域叢集中，您可以指定要在有狀態集 YAML 的 `spec.selector.matchLabels` 及 `spec.template.metadata.labels` 區段中建立有狀態集的區域及地區。或者，您也可以將這些標籤新增至[自訂的儲存空間類別](cs_storage_basics.html#customized_storageclass)，並在有狀態集的 `volumeClaimTemplates` 區段中使用此儲存空間類別。
 
 **將檔案儲存空間新增至有狀態集時有哪些選擇？** </br>
 如果您要在建立有狀態集時自動建立 PVC，請使用[動態佈建](#dynamic_statefulset)。您也可以選擇使用有狀態集來[預先佈建 PVC 或使用現有 PVC](#static_statefulset)。  
@@ -800,11 +823,11 @@ apiVersion: apps/v1beta1
    - **`metadata.name`**：輸入您在前一個步驟中所使用的 `<statefulset_name>`。
    - **`spec.replicas`**：輸入您要針對有狀態集建立的抄本數目。抄本數目必須等於您先前所建立的 PVC 數目。
 
-   **附註：**如果您已在不同的區域中建立 PVC，請不要在有狀態集中併入地區或區域標籤。
+   如果您已在不同的區域中建立 PVC，請不要在有狀態集中併入地區或區域標籤。
+   {: note}
 
 3. 驗證已在有狀態集抄本 Pod 中使用 PVC。
-   1. 列出叢集裡的 Pod。
-        識別屬於有狀態集的 Pod。
+   1. 列出叢集裡的 Pod。識別屬於有狀態集的 Pod。
       ```
       kubectl get pods
       ```
@@ -812,12 +835,12 @@ apiVersion: apps/v1beta1
 
    2. 驗證現有 PVC 已裝載至有狀態集抄本。請檢閱 CLI 輸出之 **Volumes** 區段中的 **ClaimName**。
       ```
-        kubectl describe pod <pod_name>
-        ```
+      kubectl describe pod <pod_name>
+      ```
       {: pre}
 
       輸出範例：
-    ```
+      ```
       Name:           nginx-0
       Namespace:      default
       Node:           10.xxx.xx.xxx/10.xxx.xx.xxx
@@ -834,6 +857,137 @@ apiVersion: apps/v1beta1
 <br />
 
 
+## 變更現有儲存裝置的大小及 IOPS
+{: #change_storage_configuration}
+
+如果您要增加儲存空間容量或效能，則可以修改現有磁區。
+{: shortdesc}
+
+如需計費的相關問題，以及尋找如何使用 {{site.data.keyword.Bluemix_notm}} 主控台來修改儲存空間的步驟，請參閱[擴充檔案共用容量](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity)。
+{: tip}
+
+1. 列出叢集中的 PVC，並記下 **VOLUME** 直欄中關聯 PV 的名稱。 
+   ```
+   kubectl get pvc
+   ```
+   {: pre}
+   
+   輸出範例： 
+   ```
+   NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-file-bronze    147d
+   ```
+   {: screen}
+   
+2. 列出 PVC 所連結之 PV 的詳細資料，以擷取與 PVC 相關聯之實體檔案儲存空間的 **StorageType**、**volumeId** 及 **server**。將 `<pv_name>` 取代為您在前一個步驟中擷取的 PV 名稱。儲存空間類型、磁區 ID 及伺服器名稱會顯示在 CLI 輸出的 **Labels** 區段中。 
+   ```
+   kubectl describe pv <pv_name>
+   ```
+   {: pre}
+   
+   輸出範例： 
+   ```
+   Name:            pvc-4b62c704-5f77-11e8-8a75-b229c11ba64a
+   Labels:          CapacityGb=20
+                    Datacenter=dal10
+                    Iops=2
+                    StorageType=ENDURANCE
+                    Username=IBM02SEV1543159_6
+                    billingType=hourly
+                    failure-domain.beta.kubernetes.io/region=us-south
+                    failure-domain.beta.kubernetes.io/zone=dal10
+                    path=IBM01SEV1234567_8ab12t
+                    server=fsf-dal1001g-fz.adn.networklayer.com
+                    volumeId=12345678
+   ...
+   ```
+   {: screen}
+
+3. 修改 IBM Cloud 基礎架構 (SoftLayer) 帳戶中磁區的大小或 IOPS。 
+
+   效能儲存空間的範例： 
+   ```
+   ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-iops <iops>
+   ```
+   {: pre}
+   
+   耐久性儲存空間的範例： 
+   ```
+   ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-tier <iops>
+   ```
+   {: pre}
+   
+   <table>
+   <caption>瞭解指令的元件</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>&lt;volume_ID&gt;</code></td>
+   <td>輸入您先前擷取的磁區 ID。</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-size&gt;</code></td>
+   <td>以 GB 為單位輸入磁區的新大小。如需有效的大小，請參閱[決定檔案儲存空間配置](#predefined_storageclass)。您輸入的大小必須大於或等於磁區的現行大小。如果您未指定新大小，則會使用磁區的現行大小。</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-iops&gt;</code></td>
+   <td>僅限效能儲存空間。輸入您想要的新 IOPS 數。如需有效的 IOPS，請參閱[決定檔案儲存空間配置](#predefined_storageclass)。如果您未指定 IOPS，則會使用現行 IOPS。<p class="note">如果磁區的原始 IOPS/GB 比例小於 0.3，則新的 IOPS/GB 比例必須小於 0.3。如果磁區的原始 IOPS/GB 比例大於或等於 0.3，則磁區的新 IOPS/GB 比例必須大於或等於 0.3。</p> </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-tier&gt;</code></td>
+   <td>僅限耐久性儲存空間。輸入您想要的每 GB 新 IOPS 數。如需有效的 IOPS，請參閱[決定檔案儲存空間配置](#predefined_storageclass)。如果您未指定 IOPS，則會使用現行 IOPS。<p class="note">如果磁區的原始 IOPS/GB 比例小於 0.25，則新的 IOPS/GB 比例必須小於 0.25。如果磁區的原始 IOPS/GB 比例大於或等於 0.25，則磁區的新 IOPS/GB 比例必須大於或等於 0.25。</p> </td>
+   </tr>
+   </tbody>
+   </table>
+   
+   輸出範例： 
+   ```
+   Order 31020713 was placed successfully!.
+   > Storage as a Service
+
+   > 40 GBs
+
+   > 2 IOPS per GB
+
+   > 20 GB Storage Space (Snapshot Space)
+
+   You may run 'ibmcloud sl file volume-list --order 12345667' to find this file volume after it is ready.
+   ```
+   {: screen}
+   
+4. 如果您已變更磁區的大小，並使用 Pod 中的磁區，請登入 Pod 以驗證新的大小。 
+   1. 列出所有使用 PVC 的 Pod。
+      ```
+      kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+      ```
+      {: pre}
+      
+      Pod 會以下列格式傳回：`<pod_name>: <pvc_name>`. 
+   2. 登入 Pod。
+      ```
+      kubectl exec -it <pod_name> bash
+      ```
+      {: pre}
+      
+   3. 顯示磁碟用量統計資料，並尋找您先前擷取之磁區的伺服器路徑。
+      ```
+      df -h
+      ```
+      {: pre}
+      
+      輸出範例：
+    ```
+      Filesystem                                                      Size  Used Avail Use% Mounted on
+      overlay                                                          99G  4.8G   89G   6% /
+      tmpfs                                                            64M     0   64M   0% /dev
+      tmpfs                                                           7.9G     0  7.9G   0% /sys/fs/cgroup
+      fsf-dal1001g-fz.adn.networklayer.com:/IBM01SEV1234567_6/data01   40G     0   40G   0% /myvol
+      ```
+      {: screen}
+   
+
 ## 變更預設 NFS 版本
 {: #nfs_version}
 
@@ -842,7 +996,8 @@ apiVersion: apps/v1beta1
 
 若要變更預設 NFS 版本，您可以建立新的儲存空間類別，以在叢集裡動態佈建檔案儲存空間，或選擇變更已裝載至 Pod 的現有 PV。
 
-**重要事項：**若要套用最新的安全更新項目，並提高效能，請使用預設 NFS 版本，而且不要變更為較舊的 NFS 版本。
+若要套用最新的安全更新項目，並提高效能，請使用預設 NFS 版本，而且不要變更為較舊的 NFS 版本。
+{: important}
 
 **若要建立具有所需 NFS 版本的自訂儲存空間類別，請執行下列動作：**
 1. 使用您要佈建的 NFS 版本來建立[自訂的儲存空間類別](#nfs_version_class)。
@@ -854,8 +1009,8 @@ apiVersion: apps/v1beta1
 
 3. 驗證已建立自訂的儲存空間類別。
    ```
-    kubectl get storageclasses
-    ```
+   kubectl get storageclasses
+   ```
    {: pre}
 
 4. 使用自訂的儲存空間類別來佈建[檔案儲存空間](#add_file)。
@@ -864,11 +1019,11 @@ apiVersion: apps/v1beta1
 
 1. 取得您要在其中變更 NFS 版本之檔案儲存空間的 PV，並記下 PV 的名稱。
    ```
-    kubectl get pv
-    ```
+   kubectl get pv
+   ```
    {: pre}
 
-2. 將註釋新增至 PV。請將 `<version_number>` 取代為您要使用的 NFS 版本。例如，若要變更為 NFS 3.0 版，請輸入 **3**。  
+2. 將註釋新增至 PV。將 `<version_number>` 取代為您要使用的 NFS 版本。例如，若要變更為 NFS 3.0 版，請輸入 **3**。  
    ```
    kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"volume.beta.kubernetes.io/mount-options":"vers=<version_number>"}}}'
    ```
@@ -932,12 +1087,12 @@ apiVersion: apps/v1beta1
 
 <dl>
   <dt>設定定期 Snapshot</dt>
-  <dd><p>您可以[針對檔案儲存空間設定定期 Snapshot](/docs/infrastructure/FileStorage/snapshots.html)，這是唯讀映像檔，會擷取實例在某個時間點的狀況。若要儲存 Snapshot，您必須在檔案儲存空間上要求 Snapshot 空間。Snapshot 儲存於相同區域內的現有儲存空間實例上。如果使用者不小心從磁區移除重要資料，您可以從 Snapshot 還原資料。<strong>附註</strong>：如果您有「專用」帳戶，則必須[開立支援問題單](/docs/get-support/howtogetsupport.html#getting-customer-support)。</br></br> <strong>若要建立磁區的 Snapshot，請執行下列動作：</strong><ol><li>[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。</li><li>登入 `ibmcloud sl` CLI。<pre class="pre"><code>    ibmcloud sl init
+  <dd><p>您可以[針對檔案儲存空間設定定期 Snapshot](/docs/infrastructure/FileStorage/snapshots.html)，這是唯讀映像檔，會擷取實例在某個時間點的狀況。若要儲存 Snapshot，您必須在檔案儲存空間上要求 Snapshot 空間。Snapshot 儲存於相同區域內的現有儲存空間實例上。如果使用者不小心從磁區移除重要資料，您可以從 Snapshot 還原資料。<p class="note">：如果您有「專用」帳戶，則必須[開立支援案例](/docs/get-support/howtogetsupport.html#getting-customer-support)。</p></br> <strong>若要建立磁區的 Snapshot，請執行下列動作：</strong><ol><li>[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。</li><li>登入 `ibmcloud sl` CLI。<pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>列出叢集裡的現有 PV。<pre class="pre"><code>kubectl get pv</code></pre></li><li>取得您要建立 Snapshot 空間之 PV 的詳細資料，並記下磁區 ID、大小及 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 可在 CLI 輸出的 <strong>Labels</strong> 區段中找到磁區 ID、大小及 IOPS。</li><li>使用您在前一個步驟中擷取的參數，建立現有磁區的 Snapshot 大小。<pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>等待要建立的 Snapshot 大小。<pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>CLI 輸出中的 <strong>Snapshot Size (GB)</strong> 從 0 變更為您所訂購的大小時，即已順利佈建 Snapshot 大小。</li><li>為您的磁區建立 Snapshot，並記下為您建立的 Snapshot ID。<pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>驗證已順利建立 Snapshot。<pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>若要將資料從 Snapshot 還原至現有磁區，請執行下列動作：</strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>將 Snapshot 抄寫至另一個區域</dt>
  <dd><p>若要在發生區域故障時保護資料，您可以[將 Snapshot 抄寫](/docs/infrastructure/FileStorage/replication.html#replicating-data)至另一個區域中設定的檔案儲存空間實例。資料只能從主要儲存空間抄寫至備份儲存空間。您無法將抄寫的檔案儲存空間實例裝載至叢集。當主要儲存空間失敗時，您可以手動將抄寫的備份儲存空間設為主要儲存空間。然後，您可以將它裝載至叢集。還原主要儲存空間之後，您可以從備份儲存空間中還原資料。<strong>附註</strong>：如果您有「專用」帳戶，則無法將 Snapshot 抄寫至另一個區域。</p></dd>
  <dt>複製儲存空間</dt>
- <dd><p>您可以在與原始儲存空間實例相同的區域中[複製檔案儲存空間實例](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)。在建立複本的時間點，複本具有與原始儲存空間實例相同的資料。與抄本不同，請使用複本作為獨立於原始儲存空間實例外的儲存空間實例。若要複製，請先[設定磁區的 Snapshot](/docs/infrastructure/FileStorage/snapshots.html)。<strong>附註</strong>：如果您有「專用」帳戶，則必須<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">開立支援問題單</a>。</p></dd>
+ <dd><p>您可以在與原始儲存空間實例相同的區域中[複製檔案儲存空間實例](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)。在建立複本的時間點，複本具有與原始儲存空間實例相同的資料。與抄本不同，請使用複本作為獨立於原始儲存空間實例外的儲存空間實例。若要複製，請先[設定磁區的 Snapshot](/docs/infrastructure/FileStorage/snapshots.html)。<strong>附註</strong>：如果您有「專用」帳戶，則必須<a href="/docs/get-support/howtogetsupport.html#getting-customer-support">開立支援案例</a>。</p></dd>
   <dt>將資料備份至 {{site.data.keyword.cos_full}}</dt>
   <dd><p>您可以使用 [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)，在叢集裡啟動一個備份及還原 Pod。這個 Pod 包含一個 Script，它會針對叢集裡的任何持續性磁區要求 (PVC) 執行一次性或定期備份。資料會儲存在您於區域中設定的 {{site.data.keyword.cos_full}} 實例中。</p>
   <p>若要讓資料有更高的可用性，並在發生區域故障時保護應用程式，請設定第二個 {{site.data.keyword.cos_full}} 實例，並在區域之間抄寫資料。如果您需要從 {{site.data.keyword.cos_full}} 實例還原資料，請使用隨該映像檔所提供的還原 Script。</p></dd>
@@ -974,7 +1129,7 @@ apiVersion: apps/v1beta1
 </tr>
 <tr>
 <td>類型</td>
-<td>[耐久性儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[耐久性儲存空間](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>檔案系統</td>
@@ -1020,7 +1175,7 @@ apiVersion: apps/v1beta1
 </tr>
 <tr>
 <td>類型</td>
-<td>[耐久性儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[耐久性儲存空間](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>檔案系統</td>
@@ -1065,7 +1220,7 @@ apiVersion: apps/v1beta1
 </tr>
 <tr>
 <td>類型</td>
-<td>[耐久性儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[耐久性儲存空間](/docs/infrastructure/FileStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>檔案系統</td>
@@ -1110,7 +1265,7 @@ apiVersion: apps/v1beta1
 </tr>
 <tr>
 <td>類型</td>
-<td>[效能 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/performance-storage)</td>
+<td>[效能](/docs/infrastructure/FileStorage/index.html#provisioning-with-performance)</td>
 </tr>
 <tr>
 <td>檔案系統</td>

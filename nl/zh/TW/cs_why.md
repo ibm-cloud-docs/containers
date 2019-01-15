@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -34,6 +37,7 @@ lastupdated: "2018-10-25"
 |-------|-----------|
 |具有運算、網路及儲存空間基礎架構隔離的單一承租戶 Kubernetes 叢集|<ul><li>建立符合組織需求的專屬自訂基礎架構。</li><li>使用 IBM Cloud 基礎架構 (SoftLayer) 所提供的資源，來佈建專用且受保護的 Kubernetes 主節點、工作者節點、虛擬網路及儲存空間。</li><li>完全受管理的 Kubernetes 主節點，它持續由 {{site.data.keyword.IBM_notm}} 監視及更新，以保持叢集可供使用。</li><li>可以選擇使用「授信運算」將工作者節點佈建為裸機伺服器。</li><li>儲存持續性資料、在 Kubernetes Pod 之間共用資料，以及在需要時使用整合且安全的磁區服務來還原資料。</li><li>獲得所有原生 Kubernetes API 的完整支援的好處。</li></ul>|
 |增加高可用性的多區域叢集 | <ul><li>使用工作者節點儲存區，輕鬆地管理相同機型（CPU、記憶體、虛擬或實體）的工作者節點。</li><li>保護區域免於失敗，方法為將節點平均地分佈在精選的多個區域，並對您的應用程式使用反親緣性 Pod 部署。</li><li>使用多區域叢集，而非複製個別叢集裡的資源來降低成本。</li><li>受益於使用多區域負載平衡器 (MZLB) 跨應用程式進行自動負載平衡，而此負載平衡器是在叢集的每一個區域中自動為您設定的。</li></ul>|
+|高可用性主節點 | <ul>可在執行 Kubernetes 1.10 版或更新版本的叢集中使用。<li>例如在主節點更新期間減少叢集關閉時間，而高可用性主節點會在您建立叢集時自動佈建。</li><li>將您的主節點分散在[多區域叢集](cs_clusters_planning.html#multizone)的各區域之中，以保護您的叢集免於發生區域失敗。</li></ul> |
 |「漏洞警告器」的映像檔安全規範|<ul><li>在我們保護的 Docker 專用映像檔登錄中設定您自己的儲存庫，而組織中的所有使用者都會在這裡儲存及共用映像檔。</li><li>受益於自動掃描專用 {{site.data.keyword.Bluemix_notm}} 登錄中的映像檔。</li><li>檢閱映像檔中所用作業系統特有的建議，來修正潛在漏洞。</li></ul>|
 |叢集性能的持續監視|<ul><li>使用叢集儀表板，快速查看及管理叢集、工作者節點及容器部署的性能。</li><li>使用 {{site.data.keyword.monitoringlong}} 來尋找詳細的耗用度量值，並快速擴展叢集以符合工作負載。</li><li>使用 {{site.data.keyword.loganalysislong}} 來檢閱記載資訊，以查看詳細的叢集活動。</li></ul>|
 |安全地將應用程式公開給大眾使用|<ul><li>選擇公用 IP 位址、{{site.data.keyword.IBM_notm}} 所提供的路徑，或您自己的自訂網域，以從網際網路存取叢集裡的服務。</li></ul>|
@@ -108,6 +112,8 @@ lastupdated: "2018-10-25"
 |[工作者節點上用於非持續性儲存空間的磁碟空間](cs_storage_planning.html#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 | [能夠在每個 {{site.data.keyword.containerlong_notm}} 地區中建立叢集](cs_regions.html) | | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> |
 |[增加應用程式高可用性的多區域叢集](cs_clusters_planning.html#multizone) | |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+| 更高可用性的已抄寫主節點（Kubernetes 1.10 或更新版本）| | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> |
+|[增加容量之工作者節點的可擴充數目](cs_app.html#app_scaling)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[含磁區的持續性 NFS 檔案型儲存空間](cs_storage_file.html#file_storage)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[負載平衡器服務對於穩定 IP 位址的公用或專用網路應用程式存取](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[Ingress 服務對於穩定 IP 位址及可自訂 URL 的公用網路應用程式存取](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
@@ -119,6 +125,8 @@ lastupdated: "2018-10-25"
 {: caption="免費及標準叢集的性質" caption-side="top"}
 
 <br />
+
+
 
 
 ## 定價及計費
@@ -133,7 +141,7 @@ lastupdated: "2018-10-25"
 **如何檢查計費及用量？**<br>
 若要檢查用量及預估總計，請參閱[檢視用量](/docs/billing-usage/viewing_usage.html#viewingusage)。
 
-如果您鏈結 {{site.data.keyword.Bluemix_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則會收到合併帳單。如需相關資訊，請參閱[已鏈結帳戶的合併帳單](/docs/billing-usage/linking_accounts.html#unifybillaccounts)。
+如果您鏈結 {{site.data.keyword.Bluemix_notm}} 及 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則會收到合併帳單。如需相關資訊，請參閱[已鏈結帳戶的合併帳單](/docs/customer-portal/linking_accounts.html#unifybillaccounts)。
 
 **基於計費用途，可以依團隊或部門將雲端資源分組嗎？**<br>
 您可以[使用資源群組](/docs/resources/bestpractice_rgs.html#bp_resourcegroups)，將您的 {{site.data.keyword.Bluemix_notm}} 資源（包括叢集）組織成數個群組，以組織計費。
@@ -178,7 +186,7 @@ lastupdated: "2018-10-25"
   <p>如需機器規格的詳細資料，請參閱[工作者節點的可用硬體](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)。</p></dd>
 
 <dt id="bandwidth">公用頻寬</dt>
-  <dd><p>頻寬指的是入埠及出埠網路資料流量的公用資料傳送，即進出全球資料中心之 {{site.data.keyword.Bluemix_notm}} 資源的網路資料流量。公用頻寬是按每 GB 收費。您可以檢閱現行頻寬摘要，方法是登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://console.bluemix.net/)，並從功能表中選取**基礎架構**，然後選取**網路 > 頻寬 > 摘要**頁面。
+  <dd><p>頻寬指的是入埠及出埠網路資料流量的公用資料傳送，即進出全球資料中心之 {{site.data.keyword.Bluemix_notm}} 資源的網路資料流量。公用頻寬是按每 GB 收費。您可以檢閱現行頻寬摘要，方法是登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://console.bluemix.net/)，並從功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示") 中選取**基礎架構**，然後選取**網路 > 頻寬 > 摘要**頁面。
   <p>檢閱下列影響公用頻寬費用的因素：</p>
   <ul><li><strong>位置</strong>：與使用工作者節點相同，費用會視資源部署所在的區域而不同。</li>
   <li><strong>已包括頻寬或隨收隨付制</strong>：您的工作者節點機器可能會隨附每個月出埠網路的特定配置（例如 250GB 用於 VM 或 500GB 用於裸機）。或者，根據 GB 用量，配置可能是「隨收隨付制」。</li>

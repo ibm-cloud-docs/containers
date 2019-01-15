@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -145,11 +148,11 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>OpenVPN 伺服器會使用 OpenVPN 用戶端，將主節點安全地連接至工作者節點。此連線支援 kubectl exec、attach、logs 及 apiserver proxy。</td>
+    <td>OpenVPN 伺服器會使用 OpenVPN 用戶端，將主節點安全地連接至工作者節點。此連線支援對 Pod 及服務的 `apiserver proxy` 呼叫，以及對 kubelet 的 `kubectl exec`、`attach` 及 `logs` 呼叫。</td>
     </tr>
     <tr>
     <td>etcd</td>
-    <td>etcd 是高度可用的金鑰值儲存庫，其中儲存叢集的所有 Kubernetes 資源（例如服務、部署及 Pod）的狀況。etcd 中的資料會儲存在 IBM 所管理的已加密磁碟上，並且每日進行備份。</td>
+    <td>etcd 是高度可用的金鑰值儲存庫，其中儲存叢集的所有 Kubernetes 資源（例如服務、部署及 Pod）的狀況。etd 中的資料會備份至 IBM 管理的已加密儲存空間實例。</td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -171,19 +174,34 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     </thead>
     <tbody>
     <tr>
+    <td>ibm-master-proxy</td>
+    <td>kube-system</td>
+    <td>對於執行 Kubernetes 1.10 版或更新版本的叢集，`ibm-master-proxy` 會將工作者節點中的要求轉遞至高可用性主節點抄本的 IP 位址。在單一區域叢集中，主節點在個別主機上具有三個抄本，搭配一個主節點 IP 位址及網域名稱。對於具有多區域功能之區域中的叢集，主節點具有三個分散在各區域之中的抄本。因此，每一個主節點都有向 DNS 登錄的專屬 IP 位址，搭配一個用於整個叢集主節點的網域名稱。</td>
+    </tr>
+    <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>OpenVPN 用戶端會使用 OpenVPN 伺服器，將主節點安全地連接至工作者節點。此連線支援 kubectl exec、attach、logs 及 apiserver proxy。</td>
+    <td>OpenVPN 用戶端會使用 OpenVPN 伺服器，將主節點安全地連接至工作者節點。此連線支援對 Pod 及服務的 `apiserver proxy` 呼叫，以及對 kubelet 的 `kubectl exec`、`attach` 及 `logs` 呼叫。</td>
     </tr>
     <tr>
-    <td>calico-policy-controller</td>
+    <td>kubelet</td>
     <td>kube-system</td>
-    <td>Calico 原則控制器會監看入埠及出埠網路資料流量是否遵循已設定的網路原則。如果叢集裡不容許資料流量，則對叢集的存取會遭到封鎖。Calico 原則控制器也用來建立及設定叢集的網路原則。</td>
+    <td>kubelet 是在每個工作者節點上執行的 Pod，負責監視在工作者節點上執行之 Pod 的性能，以及監看 Kubernetes API 伺服器傳送的事件。根據這些事件，kubelet 會建立或移除 Pod、確保存活性及就緒探測，以及向 Kubernetes API 伺服器回報 Pod 的狀態。</td>
     </tr>
     <tr>
-    <td>儲存空間提供者</td>
+    <td>kube-dns</td>
     <td>kube-system</td>
-    <td>每個叢集都會設定一個外掛程式，以佈建檔案儲存空間。您可以選擇安裝其他附加程式，例如區塊儲存空間。</td>
+    <td>Kubernetes DNS 會在叢集上排定 DNS Pod 及服務。容器在搜尋其他 Pod 及服務時，會自動使用 DNS 服務的 IP 來解析 DNS 名稱。</td>
+    </tr>
+    <tr>
+    <td>calico</td>
+    <td>kube-system</td>
+    <td>Calico 會管理叢集的網路原則，並包含一些元件，如下所示。
+    <ul>
+    <li>**calico-cni**：Calico 容器網路介面 (CNI) 可以管理容器的網路連線功能，並在刪除容器時移除已配置的資源。</li>
+    <li>**calico-ipam**：Calico IPAM 可管理容器的 IP 位址指派。</li>
+    <li>**calico-node**：Calico 節點是一種容器，它會將透過網路連接容器與 Calico 所需的各種元件組合在一起。</li>
+    <li>**calico-policy-controller**：Calico 原則控制器會監看入埠及出埠網路資料流量是否遵循已設定的網路原則。如果叢集裡不容許資料流量，則對叢集的存取會遭到封鎖。Calico 原則控制器也用來建立及設定叢集的網路原則。</li></ul></td>
     </tr>
     <tr>
     <td>kube-proxy</td>
@@ -193,12 +211,7 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>Kubernetes 儀表板是 Web 型使用者介面，容許使用者管理及疑難排解叢集和叢集裡執行的應用程式。</td>
-    </tr>
-    <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>Kubernetes DNS 會在叢集上排定 DNS Pod 及服務。容器在搜尋其他 Pod 及服務時，會自動使用 DNS 服務的 IP 來解析 DNS 名稱。</td>
+    <td>Kubernetes 儀表板是 Web 型 GUI，容許使用者管理及疑難排解叢集和叢集中執行的應用程式。</td>
     </tr>
     <tr>
     <td>heapster</td>
@@ -206,19 +219,19 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <td>Heapster 是監視及事件資料的全叢集聚集器。Heapster Pod 會探索叢集裡的所有節點，並從每一個節點的 kubelet 查詢用量資訊。您可以在 Kubernetes 儀表板中找到使用率圖形。</td>
     </tr>
     <tr>
-    <td>calico-node</td>
+    <td>Ingress ALB</td>
     <td>kube-system</td>
-    <td>Calico 節點是一種容器，它會將透過網路連接容器與 Calico 所需的各種元件組合在一起。</td>
+    <td>Ingress 是一種 Kubernetes 服務，可用來將公用或專用要求轉遞給叢集裡的多個應用程式，以平衡叢集裡的網路資料流量工作負載。若要透過公用及專用網路來公開您的應用程式，您必須建立 Ingress 資源，向 Ingress 應用程式負載平衡器 (ALB) 登錄您的應用程式。然後，便可以使用單一 URL 或 IP 位址來存取多個應用程式。</td>
+    </tr>
+    <tr>
+    <td>儲存空間提供者</td>
+    <td>kube-system</td>
+    <td>每個叢集都會設定一個外掛程式，以佈建檔案儲存空間。您可以選擇安裝其他附加程式，例如區塊儲存空間。</td>
     </tr>
     <tr>
     <td>記載及測量</td>
     <td>ibm-system</td>
     <td>您可以使用整合式 {{site.data.keyword.loganalysislong_notm}} 及 {{site.data.keyword.monitoringlong_notm}} 服務，在使用日誌及度量值時，擴展您的收集和保留功能。</td>
-    </tr>
-    <tr>
-    <td>Ingress ALB</td>
-    <td>ibm-system</td>
-    <td>Ingress 是一種 Kubernetes 服務，可用來將公用或專用要求轉遞給叢集裡的多個應用程式，以平衡叢集裡的網路資料流量工作負載。若要透過公用及專用網路來公開您的應用程式，您必須建立 Ingress 資源，向 Ingress 應用程式負載平衡器 (ALB) 登錄您的應用程式。然後，便可以使用單一 URL 或 IP 位址來存取多個應用程式。</td>
     </tr>
     <tr>
     <td>負載平衡器</td>
@@ -229,21 +242,6 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <td>應用程式 Pod 及服務</td>
     <td>default</td>
     <td>在 <code>default</code> 名稱空間或在您建立的名稱空間中，您可以在 Pod 及服務中部署應用程式，以便與那些 Pod 進行通訊。</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>n/a</td>
-    <td>Calico 容器網路介面 (CNI) 可以管理容器的網路連線功能，並在刪除容器時移除已配置的資源。</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>n/a</td>
-    <td>Calico IPAM 可管理容器的 IP 位址指派。</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>n/a</td>
-    <td>kubelet 是在每個工作者節點上執行的 Pod，負責監視在工作者節點上執行之 Pod 的性能，以及監看 Kubernetes API 伺服器傳送的事件。根據這些事件，kubelet 會建立或移除 Pod、確保存活性及就緒探測，以及向 Kubernetes API 伺服器回報 Pod 的狀態。</td>
     </tr>
     </tbody></table></dd>
 </dl>

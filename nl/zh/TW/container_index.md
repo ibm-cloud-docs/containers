@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -48,15 +51,15 @@ lastupdated: "2018-10-25"
 **開始之前**
 
 取得您所適用的 [{{site.data.keyword.Bluemix_notm}} 帳戶](https://console.bluemix.net/registration/)類型：
-* **隨收隨付制或訂閱**：您可以建立免費試用叢集。您也可以佈建要在標準叢集裡建立及使用的 IBM Cloud 基礎架構 (SoftLayer) 資源。
-* **精簡**：您無法建立免費或標準叢集。[升級帳戶](/docs/account/account_faq.html#changeacct)至「隨收隨付制」或「訂閱」。
+* **計費（隨收隨付制或訂閱）**：您可以建立免費試用叢集。您也可以佈建要在標準叢集裡建立及使用的 IBM Cloud 基礎架構 (SoftLayer) 資源。
+* **精簡**：您無法建立免費或標準叢集。請[升級帳戶](/docs/account/account_faq.html#changeacct)至計費帳戶。
 * **試用（適用於教育目的）**：您可以建立一個可使用 30 天的免費叢集，以熟悉服務。
 
 若要建立免費叢集，請執行下列動作：
 
-1.  在 [{{site.data.keyword.Bluemix_notm}} **型錄** ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/catalog/?category=containers) 中，選取 **{{site.data.keyword.containerlong_notm}}**，然後按一下**建立**。即會開啟叢集配置頁面。依預設，會選取**免費叢集**。
+1.  在 [{{site.data.keyword.Bluemix_notm}} **型錄** ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/catalog/?category=containers) 中，選取 **{{site.data.keyword.containershort_notm}}**，然後按一下**建立**。即會開啟叢集配置頁面。依預設，會選取**免費叢集**。
 
-2. 為叢集提供唯一名稱。
+2.  為叢集提供唯一名稱。
 
 3.  按一下**建立叢集**。建立的工作者節點儲存區包含 1 個工作者節點。工作者節點可能需要幾分鐘的時間進行佈建，但您可以在**工作者節點**標籤中看到進度。當狀態達到`備妥`時，您可以開始使用您的叢集！
 

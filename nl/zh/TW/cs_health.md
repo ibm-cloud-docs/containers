@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -21,6 +24,9 @@ lastupdated: "2018-10-25"
 
 在 {{site.data.keyword.containerlong}} 中設定記載及監視，以協助對問題進行疑難排解，以及改善 Kubernetes 叢集和應用程式的性能和效能。
 {: shortdesc}
+
+正在尋找您可以新增至叢集的其他 {{site.data.keyword.Bluemix_notm}} 或協力廠商記載服務嗎？請參閱[記載及監視整合](cs_integrations.html#health_services)，包括[搭配 LogDNA 的 {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)。
+{: note}
 
 ## 瞭解叢集和應用程式日誌轉遞
 {: #logging}
@@ -50,6 +56,17 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
 2. `container`：執行中容器所記載的資訊。</br>**路徑**：所有寫入至 `STDOUT` 或 `STDERR` 的項目。
 
 3. `application`：在應用程式層次發生的事件的相關資訊。這可能是發生事件的通知（例如成功登入）、儲存的警告，或可在應用程式層次執行的其他作業。</br>**路徑**：您可以設定將日誌轉遞至其中的路徑。不過，若要傳送日誌，您必須在記載配置中使用絕對路徑，否則無法讀取日誌。如果您的路徑已裝載至工作者節點，則可能已建立一個符號鏈結。範例：如果指定的路徑是 `/usr/local/spark/work/app-0546/0/stderr`，但實際上日誌是移至 `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`，則無法讀取日誌。
+
+4. `storage`：在叢集中設定之持續性儲存空間的相關資訊。儲存空間日誌可協助您設定問題判斷儀表板及警示，作為 DevOps 管線及正式作業版本的一部分。**附註**：`/var/log/kelbet.log` 和 `/var/log/syslog` 路徑也包含儲存空間日誌，但這些路徑中的日誌是由 `kubernetes` 和 `worker` 日誌來源收集的。</br>**路徑**：
+    * `/var/log/ibmc-s3fs.log`
+    * `/var/log/ibmc-block.log`
+
+  **Pod**：
+    * `portworx-***`
+    * `ibmcloud-block-storage-attacher-***`
+    * `ibmcloud-block-storage-driver-***`
+    * `ibmcloud-block-storage-plugin-***`
+    * `ibmcloud-object-storage-plugin-***`
 
 5. `kubernetes`：來自 kubelet、kube-proxy 以及在工作者節點的 kube-system 名稱空間中所發生之其他 Kubernetes 事件的資訊。</br>**路徑**：
     * `/var/log/kubelet.log`
@@ -83,7 +100,7 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
     </tr>
     <tr>
       <td><code><em>--log_source</em></code></td>
-      <td>您要從中轉遞日誌的來源。接受值為 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code> 及 <code>kube-audit</code>。此引數支援以逗點區隔的日誌來源（要套用其配置）清單。如果您未提供日誌來源，則會建立 <code>container</code> 及 <code>ingress</code> 日誌來源的記載配置。</td>
+      <td>您要從中轉遞日誌的來源。接受值為 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code>、<code>storage</code> 及 <code>kube-audit</code>。此引數支援以逗點區隔的日誌來源（要套用其配置）清單。如果您未提供日誌來源，則會建立 <code>container</code> 及 <code>ingress</code> 日誌來源的記載配置。</td>
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>
@@ -151,10 +168,10 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
 ## 配置日誌轉遞
 {: #configuring}
 
-您可以透過 GUI 或 CLI 來配置 {{site.data.keyword.containerlong_notm}} 的記載。
+您可以透過主控台或 CLI 來配置 {{site.data.keyword.containerlong_notm}} 的記載。
 {: shortdesc}
 
-### 使用 GUI 啟用日誌轉遞
+### 使用 {{site.data.keyword.Bluemix_notm}} 主控台啟用日誌轉遞
 {: #enable-forwarding-ui}
 
 您可以在 {{site.data.keyword.containerlong_notm}} 儀表板中配置日誌轉遞。可能需要一些時間才能完成此處理程序，因此，如果您未立即看到日誌，請嘗試等待幾分鐘，然後再重新檢查。
@@ -177,22 +194,24 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
 
 **將日誌轉遞至 IBM**
 
-1.  若為日誌來源所在的叢集：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
-
-    如果您使用「專用」帳戶，則必須登入公用 {{site.data.keyword.cloud_notm}} 端點，並將您的公用組織及空間設為目標，才能啟用日誌轉遞。
-  {: tip}
-
-2. 驗證許可權。如果您已在建立叢集或記載配置時指定空間，則帳戶擁有者及 {{site.data.keyword.containerlong_notm}} API 金鑰擁有者都需要有該空間的「管理員」、「開發人員」或「審核員」[許可權](cs_users.html#access_policies)。
-  * 如果您不知道 {{site.data.keyword.containerlong_notm}} API 金鑰擁有者是誰，請執行下列指令。
+1. 驗證許可權。
+    1. 確定您具有[**編輯者**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
+    2. 如果您在建立叢集時指定了一個空間，則您和 {{site.data.keyword.containerlong_notm}} API 金鑰擁有者都需要有該空間的[**開發人員** Cloud Foundry 角色](/docs/iam/mngcf.html)。
+      * 如果您不知道 {{site.data.keyword.containerlong_notm}} API 金鑰擁有者是誰，請執行下列指令。
       ```
       ibmcloud ks api-key-info <cluster_name>
       ```
-      {: pre}
-  * 若要立即套用您所做的全部變更，請執行下列指令。
+          {: pre}
+      * 若要立即套用您所做的全部變更，請執行下列指令。
       ```
       ibmcloud ks logging-config-refresh <cluster_name>
       ```
-      {: pre}
+          {: pre}
+
+2.  若為日誌來源所在的叢集：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+
+    如果您使用「專用」帳戶，則必須登入公用 {{site.data.keyword.cloud_notm}} 端點，並將您的公用組織及空間設為目標，才能啟用日誌轉遞。
+  {: tip}
 
 3. 建立日誌轉遞配置。
     ```
@@ -231,17 +250,19 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
 
 **透過 `udp` 或 `tcp` 通訊協定，將日誌轉遞至您自己的伺服器**
 
-1. 若要將日誌轉遞至 syslog，請以下列兩種方式之一來設定接受 syslog 通訊協定的伺服器：
+1. 確定您具有[**編輯者**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
+
+2. 若為日誌來源所在的叢集：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。**附註**：如果您是使用「專用」帳戶，則必須登入公用 {{site.data.keyword.cloud_notm}} 端點，並將您的公用組織及空間設為目標，才能啟用日誌轉遞。
+
+3. 若要將日誌轉遞至 syslog，請以下列兩種方式之一來設定接受 syslog 通訊協定的伺服器：
   * 設定並管理自己的伺服器，或讓提供者為您管理。如果提供者為您管理伺服器，請從記載提供者取得記載端點。
 
-  * 從容器執行 syslog。例如，您可以使用此[部署 .yaml 檔案![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)，來提取在 Kubernet 叢集裡執行容器的 Docker 公用映像檔。映像檔會發佈公用叢集 IP 位址上的埠 `514`，並使用這個公用叢集 IP 位址來配置 syslog 主機。
+  * 從容器執行 syslog。例如，您可以使用此[部署 .yaml 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)，來提取在叢集中執行容器的 Docker 公用映像檔。映像檔會發佈公用叢集 IP 位址上的埠 `514`，並使用這個公用叢集 IP 位址來配置 syslog 主機。
 
   您可以移除 syslog 字首，以將日誌看成有效的 JSON。若要這樣做，請將下列程式碼新增至 rsyslog 伺服器執行所在之 <code>etc/rsyslog.conf</code> 檔案的頂端：<code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
   {: tip}
 
-2. 若為日誌來源所在的叢集：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。**附註**：如果您是使用「專用」帳戶，則必須登入公用 {{site.data.keyword.cloud_notm}} 端點，並將您的公用組織及空間設為目標，才能啟用日誌轉遞。
-
-3. 建立日誌轉遞配置。
+4. 建立日誌轉遞配置。
     ```
     ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
     ```
@@ -256,22 +277,24 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
 下列步驟是一般指示。在正式作業環境中使用容器之前，請確定符合您需要的全部安全需求。
 {: tip}
 
-1. 以下列兩種方式之一來設定接受 syslog 通訊協定的伺服器：
+1. 確定您具有[**編輯者**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
+
+2. 若為日誌來源所在的叢集：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。**附註**：如果您是使用「專用」帳戶，則必須登入公用 {{site.data.keyword.cloud_notm}} 端點，並將您的公用組織及空間設為目標，才能啟用日誌轉遞。
+
+3. 以下列兩種方式之一來設定接受 syslog 通訊協定的伺服器：
   * 設定並管理自己的伺服器，或讓提供者為您管理。如果提供者為您管理伺服器，請從記載提供者取得記載端點。
 
-  * 從容器執行 syslog。例如，您可以使用此[部署 .yaml 檔案![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)，來提取在 Kubernet 叢集裡執行容器的 Docker 公用映像檔。映像檔會發佈公用叢集 IP 位址上的埠 `514`，並使用這個公用叢集 IP 位址來配置 syslog 主機。您需要注入相關的「憑證管理中心」及伺服器端憑證，並更新 `syslog.conf` 來啟用伺服器上的 `tls`。
+  * 從容器執行 syslog。例如，您可以使用此[部署 .yaml 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)，來提取在叢集中執行容器的 Docker 公用映像檔。映像檔會發佈公用叢集 IP 位址上的埠 `514`，並使用這個公用叢集 IP 位址來配置 syslog 主機。您需要注入相關的「憑證管理中心」及伺服器端憑證，並更新 `syslog.conf` 來啟用伺服器上的 `tls`。
 
-2. 將「憑證管理中心憑證」儲存至名為 `ca-cert` 的檔案。它必須是該確切名稱。
+4. 將「憑證管理中心憑證」儲存至名為 `ca-cert` 的檔案。它必須是該確切名稱。
 
-3. 在 `ca-cert` 檔案的 `kube-system` 名稱空間中，建立密碼。當您建立記載配置時，將使用密碼名稱作為 `--ca-cert` 旗標。
+5. 在 `ca-cert` 檔案的 `kube-system` 名稱空間中，建立密碼。當您建立記載配置時，將使用密碼名稱作為 `--ca-cert` 旗標。
     ```
     kubectl -n kube-system create secret generic --from-file=ca-cert
     ```
     {: pre}
 
-4. 若為日誌來源所在的叢集：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。**附註**：如果您是使用「專用」帳戶，則必須登入公用 {{site.data.keyword.cloud_notm}} 端點，並將您的公用組織及空間設為目標，才能啟用日誌轉遞。
-
-3. 建立日誌轉遞配置。
+6. 建立日誌轉遞配置。
     ```
     ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
     ```
@@ -463,7 +486,8 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
 * 預設審核原則目前用於所有具有此記載配置的叢集。
 * 目前不支援過濾器。
 * 每個叢集只能有一個 `kube-audit` 配置，但是您可以建立記載配置及 Webhook，將日誌轉遞至 {{site.data.keyword.loganalysisshort_notm}} 和外部伺服器。
-{: tip}
+
+* 您必須具有叢集的[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
 
 
 ### 將審核日誌傳送至 {{site.data.keyword.loganalysisshort_notm}}
@@ -647,15 +671,15 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
 **開始之前**
 
 * 從 {{site.data.keyword.Bluemix_notm}} 型錄[佈建 {{site.data.keyword.cos_short}} 的實例](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage)。
-* 確定您對所使用的叢集具有[ **管理者 IAM 平台角色](cs_users.html#platform)。
+* 確定您具有叢集的[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
 
 **建立 Snapshot**
 
-1. 透過 GUI 遵循[此入門指導教學](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets)來建立「物件儲存空間」儲存區。
+1. 透過 {{site.data.keyword.Bluemix_notm}} 主控台遵循[此入門指導教學](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets)來建立 Object Storage 儲存區。
 
 2. 在已建立的儲存區中產生 [HMAC 服務認證](/docs/services/cloud-object-storage/iam/service-credentials.html)。
   1. 在 {{site.data.keyword.cos_short}} 儀表板的**服務認證**標籤中，按一下**新建認證**。
-  2. 將`撰寫者` IAM 角色提供給 HMAC 認證。
+  2. 將 HMAC 認證提供給`撰寫者`服務角色。
   3. 在**新增線型配置參數**欄位中，指定 `{"HMAC":true}`。
 
 3. 透過 CLI，要求主要日誌的 Snapshot。
@@ -676,7 +700,7 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
   ```
   {: screen}
 
-4. 檢查要求的狀態。可能需要一些時間 Snapshot 才能完成，但您可以查看要求是否順利完成。您可以在回應中找到包含主要日誌的檔案名稱，並使用 {{site.data.keyword.Bluemix_notm}} 使用者介面來下載此檔案。
+4. 檢查要求的狀態。可能需要一些時間 Snapshot 才能完成，但您可以查看要求是否順利完成。您可以在回應中找到包含主要日誌的檔案名稱，並使用 {{site.data.keyword.Bluemix_notm}} 主控台來下載此檔案。
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
@@ -707,7 +731,7 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
 
 <dl>
   <dt>{{site.data.keyword.Bluemix_notm}} 中的叢集詳細資料頁面</dt>
-    <dd>{{site.data.keyword.containerlong_notm}} 提供叢集性能及容量以及叢集資源用量的相關資訊。您可以使用此 GUI 來橫向擴充叢集、使用持續性儲存空間，以及透過 {{site.data.keyword.Bluemix_notm}} 服務連結將更多功能新增至叢集。若要檢視叢集詳細資料頁面，請移至 **{{site.data.keyword.Bluemix_notm}} 儀表板**，然後選取一個叢集。</dd>
+    <dd>{{site.data.keyword.containerlong_notm}} 提供叢集性能及容量以及叢集資源用量的相關資訊。您可以使用此主控台來橫向擴充叢集、使用持續性儲存空間，以及透過 {{site.data.keyword.Bluemix_notm}} 服務連結將更多功能新增至叢集。若要檢視叢集詳細資料頁面，請移至 **{{site.data.keyword.Bluemix_notm}} 儀表板**，然後選取一個叢集。</dd>
   <dt>Kubernetes 儀表板</dt>
     <dd>Kubernetes 儀表板是一種管理 Web 介面，您可以在此介面中檢閱工作者節點的性能、尋找 Kubernetes 資源、部署容器化應用程式，以及使用記載和監視資訊對應用程式進行疑難排解。如需如何存取 Kubernetes 儀表板的相關資訊，請參閱[啟動 {{site.data.keyword.containerlong_notm}} 的 Kubernetes 儀表板](cs_app.html#cli_dashboard)。</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
@@ -739,6 +763,8 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
         </tbody>
       </table>
  </dd>
+  <dt>{{site.data.keyword.mon_full_notm}}</dt>
+  <dd>取得應用程式效能及性能的作業可見性，方法為將 Sysdig 作為協力廠商服務部署至工作者節點，以將度量轉遞至 {{site.data.keyword.monitoringlong}}。如需相關資訊，請參閱[分析在 Kubernetes 叢集中部署之應用程式的度量](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**附註**：{{site.data.keyword.mon_full_notm}} 不支援 `containerd` 容器運行環境。使用 {{site.data.keyword.mon_full_notm}} 與 1.11 版或更新版本的叢集搭配時，不會收集所有容器度量。</dd>
 </dl>
 
 若要避免在使用內建的度量服務時發生衝突，請確定資源群組和地區之中的叢集都具有唯一名稱。
@@ -764,9 +790,13 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
 
 「自動回復」系統會使用各種檢查來查詢工作者節點性能狀態。如果「自動回復」根據配置的檢查，偵測到性能不佳的工作者節點，則「自動回復」會觸發更正動作，如在工作者節點上重新載入 OS。一次只有一個工作者節點進行一個更正動作。工作者節點必須先順利完成更正動作，然後任何其他工作者節點才能進行更正動作。如需相關資訊，請參閱此[自動回復部落格文章 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。
 </br> </br>
-**附註**：「自動回復」至少需要一個性能良好的節點，才能正常運作。只在具有兩個以上工作者節點的叢集中，配置具有主動檢查的「自動回復」。
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+「自動回復」至少需要一個性能良好的節點，才能正常運作。只在具有兩個以上工作者節點的叢集中，配置具有主動檢查的「自動回復」。
+{: note}
+
+開始之前：
+- 確定您具有[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
+- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 
 1. [安裝叢集的 Helm，並將 {{site.data.keyword.Bluemix_notm}} 儲存庫新增至 Helm 實例](cs_integrations.html#helm)。
 

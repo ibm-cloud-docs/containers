@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -21,6 +24,7 @@ lastupdated: "2018-10-25"
 {: #policy_tutorial}
 
 依預設，Kubernetes NodePort、LoadBalancer 及 Ingress 服務可讓您的應用程式能夠在所有公用及專用叢集網路介面上使用。`allow-node-port-dnat` 預設 Calico 原則允許將送入的資料流量從節點埠、負載平衡器及 Ingress 服務傳送至那些服務所公開的應用程式 Pod。Kubernetes 會使用目的地網址轉譯 (DNAT) 將服務要求轉遞至正確的 Pod。
+{: shortdesc}
 
 不過，基於安全理由，您可能需要只容許從特定來源 IP 位址到網路服務的資料流量。您可以使用 [Calico DNAT 前原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat)，將來自或送至特定 IP 位址的資料流量列入白名單或黑名單。DNAT 前原則可防止指定的資料流量到達您的應用程式，因為在 Kubernetes 使用一般 DNAT 將資料流量轉遞至 Pod 之前，已套用這些原則。建立 Calico DNAT 前原則時，您可以選擇是否要將來源 IP 位址列入白名單或黑名單。對於大部分情境，白名單提供最安全的配置，因為除了來自已知允許之來源 IP 位址的資料流量外，所有資料流量都會遭到封鎖。黑名單通常只用於如下的情境：防止來自小型 IP 位址集的攻擊。
 
@@ -40,10 +44,11 @@ lastupdated: "2018-10-25"
 
 ## 必要條件
 
-- [建立 1.10 版叢集](cs_clusters.html#clusters_ui)或[將現有叢集更新為 1.10 版](cs_versions.html#cs_v110)。若要在本指導教學中使用 3.1.1 Calico CLI 及 Calico 第 3 版原則語法，則需要有 Kubernetes 1.10 版或更新版本的叢集。
+- [建立 1.10 版或更新版本的叢集](cs_clusters.html#clusters_ui)或[將現有叢集更新為 1.10 版](cs_versions.html#cs_v110)。若要在本指導教學中使用 3.3.1 Calico CLI 及 Calico 第 3 版原則語法，則需要有 Kubernetes 1.10 版或更新版本的叢集。
 - [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
 - [安裝並配置 Calico CLI](cs_network_policy.html#1.10_install)。
-- [確定您具有**編輯器**、**運算子**或**管理者**平台角色](cs_users.html#add_users_cli)。
+- 確定您具有 {{site.data.keyword.containerlong_notm}} 的下列 {{site.data.keyword.Bluemix_notm}} IAM 存取原則：
+    - [任何平台角色](cs_users.html#platform)
 
 <br />
 
@@ -54,7 +59,10 @@ lastupdated: "2018-10-25"
 第一課告訴您如何從多個 IP 位址及埠公開您的應用程式，以及公用資料流量是從哪裡進入您的叢集。
 {: shortdesc}
 
-開始部署要在整個指導教學中使用的範例 Web 伺服器應用程式。`echoserver` Web 伺服器會顯示有關建立用戶端與叢集之連線的資料，並讓您測試對公關公司叢集的存取。然後，藉由建立負載平衡器服務來公開應用程式。負載平衡器服務可讓您的應用程式透過負載平衡器服務 IP 位址及工作者節點的節點埠提供使用。
+開始部署要在整個指導教學中使用的範例 Web 伺服器應用程式。`echoserver` Web 伺服器會顯示有關建立用戶端與叢集之連線的資料，並讓您測試對公關公司叢集的存取。然後，藉由建立負載平衡器 2.0 服務來公開應用程式。負載平衡器 2.0 服務可讓您的應用程式透過負載平衡器服務 IP 位址及工作者節點的節點埠提供使用。
+
+想要改用 [Ingress 應用程式負載平衡器 (ALB)](cs_ingress.html) 嗎？請跳過步驟 3 和 4 中的負載平衡器建立作業。改為執行 `ibmcloud ks albs --cluster <cluster_name>`，以取得 ALB 的公用 IP，並在整個指導教學中使用這些 IP 來取代 `<loadbalancer_IP>。`
+{: tip}
 
 下圖顯示在第 1 課結束時如何藉由公用節點埠及公用負載平衡器，在網際網路公開 Web 伺服器應用程式：
 
@@ -68,8 +76,8 @@ lastupdated: "2018-10-25"
 
 2. 驗證 Web 伺服器應用程式 Pod 的 **STATUS** 為 `Running`。
     ```
-        kubectl get pods -o wide
-        ```
+    kubectl get pods -o wide
+    ```
     {: pre}
 
     輸出範例：
@@ -81,7 +89,7 @@ lastupdated: "2018-10-25"
     ```
     {: screen}
 
-3. 若要在公用網際網路公開應用程式，請在文字編輯器中建立一個稱為 `webserver-lb.yaml` 的負載平衡器服務配置檔。
+3. 若要在公用網際網路公開應用程式，請在文字編輯器中建立一個稱為 `webserver-lb.yaml` 的負載平衡器 2.0 服務配置檔。
     ```
     apiVersion: v1
     kind: Service
@@ -89,16 +97,18 @@ lastupdated: "2018-10-25"
       labels:
         run: webserver
       name: webserver-lb
+      annotations:
+        service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
     spec:
-      externalTrafficPolicy: Cluster
+      type: LoadBalancer
+      selector:
+        run: webserver
       ports:
       - name: webserver-port
         port: 80
         protocol: TCP
         targetPort: 8080
-      selector:
-        run: webserver
-      type: LoadBalancer
+      externalTrafficPolicy: Local
     ```
     {: codeblock}
 
@@ -179,9 +189,9 @@ lastupdated: "2018-10-25"
         輸出範例：
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
         ```
         {: screen}
 
@@ -226,7 +236,7 @@ lastupdated: "2018-10-25"
 
 若要保護公關公司的叢集，您必須封鎖對公開您應用程式之負載平衡器服務及節點埠兩者的公開存取。首先，封鎖對節點埠的存取。下圖顯示在第 2 課結束時如何允許資料流量傳送至負載平衡器，但不傳送至節點埠：
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="在第 2 課結束時，只有公用負載平衡器才能在網際網路公開 Web 伺服器應用程式。" style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="在第 2 課結束時，僅會透過公用負載平衡器將 Web 伺服器應用程式公開至網際網路。" style="width:425px; border-style: none"/>
 
 1. 在文字編輯器中，建立一個稱為 `deny-nodeports.yaml` 的高階 DNAT 前原則，來拒絕將 TCP 及 UDP 資料流量從任何來源 IP 送入所有節點埠。
     ```
@@ -236,6 +246,7 @@ lastupdated: "2018-10-25"
       name: deny-nodeports
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
             destination:
@@ -249,12 +260,11 @@ lastupdated: "2018-10-25"
           - 30000:32767
         protocol: UDP
         source: {}
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 1100
       types:
       - Ingress
-        ```
+    ```
     {: codeblock}
 
 2. 套用原則。
@@ -289,13 +299,7 @@ lastupdated: "2018-10-25"
     ```
     {: screen}
 
-4. 將您在前一課中建立之負載平衡器的 externalTrafficPolicy 從 `Cluster` 變更為 `Local`。`Local` 確保在下一步您對負載平衡器的外部 IP 進行 Crul 處理時，會保留系統的來源 IP。
-    ```
-    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
-    ```
-    {: pre}
-
-5. 使用來自提要的值，驗證您仍然可以公開存取負載平衡器外部 IP 位址。
+4. 使用來自提要的值，驗證您仍然可以公開存取負載平衡器外部 IP 位址。
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -326,7 +330,7 @@ lastupdated: "2018-10-25"
     {: screen}
     在輸出的 `Request Information` 區段中，注意來源 IP 位址為：例如，`client_address=1.1.1.1`。來源 IP 位址是您要用來執行 Curl 之系統的公用 IP。否則，如果您是透過 Proxy 或 VPN 連接至網際網路，則 Proxy 或 VPN 可能會遮蔽系統的實際 IP 位址。在任一情況下，負載平衡器會將您系統的來源 IP 位址看成用戶端 IP 位址。
 
-6. 將您系統的來源 IP 位址（前一個步驟輸出中的 `client_address=1.1.1.1`）複製到您的提要，以在稍後課桯中使用。
+5. 將您系統的來源 IP 位址（前一個步驟輸出中的 `client_address=1.1.1.1`）複製到您的提要，以在稍後課桯中使用。
 
 太棒了！此時，只會從公用負載平衡器埠，在公用網際網路公開您的應用程式。送入公用節點埠的資料流量會遭到封鎖。您已局部鎖定叢集，不准不需要的資料流量送入其中。
 
@@ -339,9 +343,10 @@ lastupdated: "2018-10-25"
 {: shortdesc}
 
 首先，除了節點埠之外，您必須封鎖所有資料流量送入公開應用程式的負載平衡器。然後，您可以建立一個原則，將系統的 IP 位址列入白名單。在第 3 課結束時，將封鎖所有送至公用節點埠及負載平衡器的資料流量，而且僅容許來自列入白名單之系統 IP 的資料流量：
-<img src="images/cs_tutorial_policies_L3.png" width="600" alt="Web 伺服器應用程式僅由公用負載平衡器在您的系統 IP 公開。" style="width:600px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L3.png" width="550" alt="Web 伺服器應用程式僅由公用負載平衡器在您的系統 IP 公開。" style="width:500px; border-style: none"/>
 
 1. 在文字編輯器中，建立一個稱為 `deny-lb-port-80.yaml` 的高階 DNAT 前原則，來拒絕將 TCP 及 UDP 資料流量從任何來源 IP 送入負載平衡器 IP 位址及埠。將 `<loadbalancer_IP>` 取代為來自提要的負載平衡器公用 IP 位址。
+
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -349,6 +354,7 @@ lastupdated: "2018-10-25"
       name: deny-lb-port-80
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
         destination:
@@ -366,12 +372,11 @@ lastupdated: "2018-10-25"
           - 80
         protocol: UDP
         source: {}
-      preDNAT: true
       selector: ibm.role=='worker_public'
-      order: 1100
+      order: 800
       types:
       - Ingress
-        ```
+    ```
     {: codeblock}
 
 2. 套用原則。
@@ -403,6 +408,7 @@ lastupdated: "2018-10-25"
       name: whitelist
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Allow
         destination:
@@ -414,12 +420,11 @@ lastupdated: "2018-10-25"
         source:
           nets:
           - <client_address>/32
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 500
       types:
       - Ingress
-        ```
+    ```
     {: codeblock}
 
 5. 套用原則。
@@ -459,7 +464,7 @@ lastupdated: "2018-10-25"
 在前一課中，您已封鎖所有資料流量，並只將少數 IP 列入白名單。當您想要限制只存取少數受管制的來源 IP 位址時，該情境適用於測試目的。不過，公關公司具有需要大眾可以廣泛使用的應用程式。您需要確定允許所有資料流量，但您從少數 IP 位址看到的不尋常資料流量除外。黑名單有助於這類情境，因為它可以協助您防止來自小型 IP 位址集的攻擊。
 
 在本課程中，您將藉由封鎖來自您自己系統之來源 IP 位址的資料流量，來測試黑名單。在第 4 課結束時，將封鎖所有送至公用節點埠的資料流量，而且將容許所有送至公用負載平衡器的資料流量。只會封鎖從列入黑名單之系統 IP 送至負載平衡器的資料流量：
-<img src="images/cs_tutorial_policies_L4.png" width="600" alt="Web 伺服器應用程式是由公用負載平衡器在網際網路公開。只封鎖來自您系統 IP 的資料流量。" style="width:600px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web 伺服器應用程式是由公用負載平衡器在網際網路公開。只封鎖來自您系統 IP 的資料流量。" style="width:550px; border-style: none"/>
 
 1. 清除您在前一課中建立的白名單原則。
     
@@ -485,7 +490,7 @@ lastupdated: "2018-10-25"
 
     現有，再次允許將所有 TCP 及 UDP 資料流量從任何來源 IP 送入負載平衡器 IP 位址及埠。
 
-2. 若要拒絕將所有 TCP 及 UDP 資料流量從您系統的來源 IP 位址送入負載平衡器 IP 位址及埠，請在文字編輯器中建立一個稱為 `deny-lb-port-80.yaml` 的低階 DNAT 前原則。使用來自提要的值，將 `<loadbalancer_IP>` 取代為負載平衡器的公用 IP 位址，並將 `<client_address>` 取代為系統來源 IP 的公用 IP 位址。
+2. 若要拒絕將所有 TCP 及 UDP 資料流量從您系統的來源 IP 位址送入負載平衡器 IP 位址及埠，請在文字編輯器中建立一個稱為 `blacklist.yaml` 的低階 DNAT 前原則。使用來自提要的值，將 `<loadbalancer_IP>` 取代為負載平衡器的公用 IP 位址，並將 `<client_address>` 取代為系統來源 IP 的公用 IP 位址。
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -493,6 +498,7 @@ lastupdated: "2018-10-25"
       name: blacklist
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
         destination:
@@ -514,7 +520,6 @@ lastupdated: "2018-10-25"
         source:
           nets:
           - <client_address>/32
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 500
       types:

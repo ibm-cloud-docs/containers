@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -70,8 +73,8 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
 {: tsCauses}
 您沒有建立叢集的正確許可權。您需要有下列許可權才能建立叢集：
 *  IBM Cloud 基礎架構 (SoftLayer) 的**超級使用者**角色。
-*  {{site.data.keyword.containerlong_notm}} 的**管理者**平台管理角色。
-*  {{site.data.keyword.registrylong_notm}} 的**管理者**平台管理角色。
+*  帳戶層次中 {{site.data.keyword.containerlong_notm}} 的**管理者**平台管理角色。
+*  帳戶層次中 {{site.data.keyword.registrylong_notm}} 的**管理者**平台管理角色。請不要將 {{site.data.keyword.registryshort_notm}} 的原則限制為資源群組層次。如果您在 2018 年 10 月 4 日之前開始使用 {{site.data.keyword.registrylong_notm}}，請確定您[啟用 {{site.data.keyword.Bluemix_notm}} IAM 原則強制執行](/docs/services/Registry/registry_users.html#existing_users)。
 
 對於基礎架構相關錯誤，在啟用自動帳戶鏈結之後所建立的 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶已設定為具有 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權。您可以購買叢集的基礎架構資源，而不需要進行額外配置。
 如果您具有一個有效的「隨收隨付制」帳戶，並收到此錯誤訊息，則可能未使用正確的 IBM Cloud 基礎架構 (SoftLayer) 帳戶來存取基礎架構資源。
@@ -85,9 +88,9 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
 {: tsResolve}
 帳戶擁有者必須適當地設定基礎架構認證帳戶。認證取決於您所使用的基礎架構帳戶類型。
 
-1.  驗證您可以存取基礎架構帳戶。登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/)，然後從可展開的功能表中，按一下**基礎架構**。如果您看到基礎架構儀表板，則可以存取基礎架構帳戶。
+1.  驗證您可以存取基礎架構帳戶。登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/)，然後從功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示") 中，按一下**基礎架構**。如果您看到基礎架構儀表板，則可以存取基礎架構帳戶。
 2.  檢查您的叢集是否使用不同的基礎架構帳戶，而不是「隨收隨付制」帳戶隨附的基礎架構帳戶。
-    1.  從可展開的功能表中，按一下**容器 > 叢集**。
+    1.  從功能表  ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示") 中，按一下**容器 > 叢集**。
     2.  從表格中，選取您的叢集。
     3.  在**概觀**標籤中，檢查**基礎架構使用者**欄位。
         * 如果您看不到**基礎架構使用者**欄位，表示您的已鏈結「隨收隨付制」帳戶會將相同的認證用於基礎架構及平台帳戶。
@@ -110,7 +113,7 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
 您的組織網路原則可能會導致無法透過 Proxy 或防火牆從本端系統存取公用端點。
 
 {: tsResolve}
-[容許 TCP 存取以讓 CLI 指令運作](cs_firewall.html#firewall)。此作業需要[管理者存取原則](cs_users.html#access_policies)。請驗證您的現行[存取原則](cs_users.html#infra_access)。
+[容許 TCP 存取以讓 CLI 指令運作](cs_firewall.html#firewall_bx)。此作業需要叢集的[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
 
 
 ## 防火牆阻止叢集連接至資源
@@ -154,7 +157,7 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
 您可能已在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中設定另一個防火牆，或自訂現有防火牆設定。{{site.data.keyword.containerlong_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。另一個原因可能是工作者節點停留在重新載入的迴圈中。
 
 {: tsResolve}
-[容許叢集存取基礎架構資源及其他服務](cs_firewall.html#firewall_outbound)。此作業需要[管理者存取原則](cs_users.html#access_policies)。請驗證您的現行[存取原則](cs_users.html#infra_access)。
+[容許叢集存取基礎架構資源及其他服務](cs_firewall.html#firewall_outbound)。此作業需要叢集的[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)。
 
 <br />
 
@@ -169,7 +172,7 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
 
 
 {: tsCauses}
-在 {{site.data.keyword.Bluemix_notm}} 中，每個資源都必須位於資源群組中。例如，叢集 `mycluster` 可能存在於 `default` 資源群組中。當帳戶擁有者藉由向您指派 IAM 平台角色來將資源存取權授與您時，該存取權可以是資源特有的或屬於資源群組。當您獲授與特定資源的存取權時，則無法存取資源群組。在此情況下，您不需要將目標設為資源群組，即可使用您可以存取的叢集。如果您的目標資源群組與叢集所在的群組不同，則該叢集的動作可能會失敗。反之，當您在存取資源群組過程中獲授與資源的存取權時，必須將目標設為資源群組，才能使用該群組中的叢集。如果您未將 CLI 階段作業的目標設為叢集所在的資源群組，則該叢集的動作可能會失敗。
+在 {{site.data.keyword.Bluemix_notm}} 中，每個資源都必須位於資源群組中。例如，叢集 `mycluster` 可能存在於 `default` 資源群組中。當帳戶擁有者藉由向您指派 {{site.data.keyword.Bluemix_notm}} IAM 平台角色來將資源存取權授與您時，該存取權可以是資源特有的或屬於資源群組。當您獲授與特定資源的存取權時，則無法存取資源群組。在此情況下，您不需要將目標設為資源群組，即可使用您可以存取的叢集。如果您的目標資源群組與叢集所在的群組不同，則該叢集的動作可能會失敗。反之，當您在存取資源群組過程中獲授與資源的存取權時，必須將目標設為資源群組，才能使用該群組中的叢集。如果您未將 CLI 階段作業的目標設為叢集所在的資源群組，則該叢集的動作可能會失敗。
 
 如果您找不到或無法使用叢集，則可能遭遇下列其中一個問題：
 * 您可以存取叢集及叢集所在的資源群組，但 CLI 階段作業的目標不是叢集所在的資源群組。
@@ -260,7 +263,7 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
         ibmcloud target -g none
         ```
         {: pre}
-        **附註**：此指令失敗，因為沒有名為 `none` 的資源群組。不過，指令失敗時，會自動取消將現行資源群組設為目標。
+        此指令失敗，因為沒有名為 `none` 的資源群組。不過，指令失敗時，會自動取消將現行資源群組設為目標。
 
       2. 將目標設為叢集。
         ```
@@ -269,13 +272,13 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
         {: pre}
 
     * 如果您沒有叢集的存取權，請執行下列動作：
-        1. 要求帳戶擁有者將該叢集的 [IAM 平台角色](cs_users.html#platform)指派給您。
+        1. 要求帳戶擁有者將該叢集的 [{{site.data.keyword.Bluemix_notm}}IAM 平台角色](cs_users.html#platform)指派給您。
         2. 不要將資源群組設為目標。如果您已將資源群組設為目標，則請取消將它設為目標：
-        ```
+          ```
           ibmcloud target -g none
           ```
           {: pre}
-          **附註**：此指令失敗，因為沒有名為 `none` 的資源群組。不過，指令失敗時，會自動取消將現行資源群組設為目標。
+          此指令失敗，因為沒有名為 `none` 的資源群組。不過，指令失敗時，會自動取消將現行資源群組設為目標。
         3. 將目標設為叢集。
           ```
           ibmcloud ks cluster-config <cluster_name_or_ID>
@@ -342,7 +345,7 @@ Instance ID inconsistent with worker records
 請考量下列情境，以瞭解叢集如何變成孤立的。
 1.  您具有 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶。
 2.  您建立名為 `Cluster1` 的叢集。工作者節點及其他基礎架構資源佈建至「隨收隨付制」帳戶隨附的基礎架構帳戶。
-3.  稍後，您發現您的團隊使用舊式或共用的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。您使用 `ibmcloud ks credentials-set` 指令，將 IBM Cloud 基礎架構 (SoftLayer) 認證變更為使用您的團隊帳戶。
+3.  稍後，您發現您的團隊使用舊式或共用的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。您使用 `ibmcloud ks credential-set` 指令，將 IBM Cloud 基礎架構 (SoftLayer) 認證變更為使用您的團隊帳戶。
 4.  您建立另一個名為 `Cluster2` 的叢集。工作者節點及其他基礎架構資源佈建至團隊基礎架構帳戶。
 5.  您注意到 `Cluster1` 需要工作者節點更新、工作者節點重新載入，或您只想要藉由刪除它來予以清除。不過，因為 `Cluster1` 佈建至不同的基礎架構帳戶，所以您無法修改其基礎架構資源。`Cluster1` 是孤立的。
 6.  您遵循下節中的解決步驟，但未將基礎架構認證設回團隊帳戶。您可以刪除 `Cluster1`，但現在 `Cluster2` 是孤立的。
@@ -352,23 +355,24 @@ Instance ID inconsistent with worker records
 
 {: tsResolve}
 1.  檢查您叢集所在的地區目前使用哪個基礎架構帳戶來佈建叢集。
-    1.  登入 [{{site.data.keyword.containerlong_notm}} 叢集 GUI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/clusters)。
+    1.  登入 [{{site.data.keyword.containerlong_notm}} 叢集主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/clusters)。
     2.  從表格中，選取您的叢集。
     3.  在**概觀**標籤中，檢查**基礎架構使用者**欄位。此欄位可協助您判斷 {{site.data.keyword.containerlong_notm}} 帳戶是否使用與預設值不同的基礎架構帳戶。
         * 如果您看不到**基礎架構使用者**欄位，表示您的已鏈結「隨收隨付制」帳戶會將相同的認證用於基礎架構及平台帳戶。無法修改的叢集可能佈建至不同的基礎架構帳戶。
         * 如果您看到**基礎架構使用者**欄位，表示使用不同的基礎架構帳戶，而不是「隨收隨付制」帳戶隨附的基礎架構帳戶。這些不同的認證適用於地區內的所有叢集。無法修改的叢集可能佈建至「隨收隨付制」或不同的基礎架構帳戶。
 2.  檢查已使用哪個基礎架構帳戶來佈建叢集。
     1.  在**工作者節點**標籤中，選取工作者節點，並記下其 **ID**。
-    2.  開啟可展開的功能表，然後按一下**基礎架構**。
-    3.  從基礎架構功能表中，按一下**裝置 > 裝置清單**。
+    2.  開啟功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示")，然後按一下**基礎架構**。
+    3.  從基礎架構導覽窗格中，按一下**裝置 > 裝置清單**。
     4.  搜尋您先前記下的工作者節點 ID。
     5.  如果您找不到工作者節點 ID，則未將工作者節點佈建至此基礎架構帳戶。請切換至不同的基礎架構帳戶，然後再試一次。
-3.  使用 `ibmcloud ks credentials-set` [指令](cs_cli_reference.html#cs_credentials_set)，將基礎架構認證變更為在其中佈建叢集工作者節點的帳戶，而您可以在前一個步驟找到此帳戶。
-    **附註**：如果您無法再存取而且無法取得基礎架構認證，則必須開立 {{site.data.keyword.Bluemix_notm}} 支援問題單以移除孤立叢集。
+3.  使用 `ibmcloud ks credential-set` [指令](cs_cli_reference.html#cs_credentials_set)，將基礎架構認證變更為在其中佈建叢集工作者節點的帳戶，而您可以在前一個步驟找到此帳戶。
+    如果您無法再存取而且無法取得基礎架構認證，則必須開立 {{site.data.keyword.Bluemix_notm}} 支援案例以移除孤立叢集。
+    {: note}
 4.  [刪除叢集](cs_clusters.html#remove)。
 5.  如果想要的話，請將基礎架構認證重設為前一個帳戶。請注意，如果您建立叢集所用的基礎架構帳戶與您切換至的帳戶不同，則可能會孤立那些叢集。
-    * 若要將認證設為不同的基礎架構帳戶，請使用 `ibmcloud ks credentials-set` [指令](cs_cli_reference.html#cs_credentials_set)。
-    * 若要使用 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶隨附的預設認證，請使用 `ibmcloud ks credentials-unset` [指令](cs_cli_reference.html#cs_credentials_unset)。
+    * 若要將認證設為不同的基礎架構帳戶，請使用 `ibmcloud ks credential-set` [指令](cs_cli_reference.html#cs_credentials_set)。
+    * 若要使用 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶隨附的預設認證，請使用 `ibmcloud ks credential-unset` [指令](cs_cli_reference.html#cs_credentials_unset)。
 
 <br />
 
@@ -455,7 +459,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: screen}
 
 {: tsCauses}
-若要將服務連結至叢集，您必須具有佈建服務實例之空間的 Cloud Foundry 開發人員使用者角色。此外，您還必須具有 {{site.data.keyword.containerlong}} 的「IAM 編輯者」存取權。若要存取服務實例，您必須登入佈建服務實例的空間。
+若要將服務連結至叢集，您必須具有佈建服務實例之空間的 Cloud Foundry 開發人員使用者角色。此外，您還必須對 {{site.data.keyword.containerlong}} 具有 {{site.data.keyword.Bluemix_notm}} IAM「編輯者」平台存取權。若要存取服務實例，您必須登入佈建服務實例的空間。
 
 {: tsResolve}
 
@@ -491,7 +495,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 
 4. 等待幾分鐘，然後讓使用者嘗試重新連結服務。
 
-5. 如果這樣做無法解決問題，則 IAM 許可權會不同步，且您無法自行解決問題。開立支援問題單，以[與 IBM 支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。請務必提供叢集 ID、使用者 ID 及服務實例 ID。
+5. 如果這樣做無法解決問題，則 {{site.data.keyword.Bluemix_notm}} IAM 許可權會不同步，且您無法自行解決問題。請開立支援案例，以[與 IBM 支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。請務必提供叢集 ID、使用者 ID 及服務實例 ID。
    1. 擷取叢集 ID。
       ```
       ibmcloud ks clusters
@@ -520,7 +524,7 @@ This service doesn't support creation of keys
 {: screen}
 
 {: tsCauses}
-{{site.data.keyword.Bluemix_notm}} 中的部分服務（例如 {{site.data.keyword.keymanagementservicelong}}）不支援建立服務認證（也稱為服務金鑰）。如果不支援服務金鑰，則服務無法連結至叢集。若要尋找支援建立服務金鑰的服務清單，請參閱[啟用外部應用程式以使用 {{site.data.keyword.Bluemix_notm}} 服務](/docs/apps/reqnsi.html#accser_external)。
+{{site.data.keyword.Bluemix_notm}} 中的部分服務（例如 {{site.data.keyword.keymanagementservicelong}}）不支援建立服務認證（也稱為服務金鑰）。如果不支援服務金鑰，則服務無法連結至叢集。若要尋找支援建立服務金鑰的服務清單，請參閱[啟用外部應用程式以使用 {{site.data.keyword.Bluemix_notm}} 服務](/docs/resources/connect_external_app.html#externalapp)。
 
 {: tsResolve}
 若要整合不支援服務金鑰的服務，請確認服務是否提供您可用來從應用程式直接存取服務的 API。例如，如果您要使用 {{site.data.keyword.keymanagementservicelong}}，請參閱 [API 參考資料 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/apidocs/kms?language=curl)。
@@ -569,8 +573,8 @@ This service doesn't support creation of keys
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.8
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.8
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.11
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.11
   ```
   {: screen}
 
@@ -678,7 +682,7 @@ unable to validate against any pod security policy
 *  Pod 可能已超出資源要求或限制。
 
 {: tsResolve}
-此作業需要[管理者存取原則](cs_users.html#access_policies)。請驗證您的現行[存取原則](cs_users.html#infra_access)。
+此作業需要叢集的 {{site.data.keyword.Bluemix_notm}} IAM [**管理者**平台角色](cs_users.html#platform)。
 
 如果您才剛剛建立 Kubernetes 叢集，請執行下列指令，並等待起始設定工作者節點。
 
@@ -891,19 +895,12 @@ Pod 順利部署至叢集，但容器未啟動。
 {: shortdesc}
 
 -  在終端機中，有 `ibmcloud` CLI 及外掛程式的更新可用時，就會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
-
 -   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/bluemix/support/#status)。
--   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。
-
-    如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
+-   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
     {: tip}
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
-
     -   如果您在使用 {{site.data.keyword.containerlong_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
     -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
-
--   開立問題單以與 IBM 支援中心聯絡。若要瞭解開立 IBM 支援問題單或是支援層次與問題單嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。
-
+-   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
 {: tip}
-當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
 

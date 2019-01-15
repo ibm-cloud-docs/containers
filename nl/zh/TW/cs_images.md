@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -77,7 +80,8 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
 
 當您部署容器化應用程式時，每個記號必須儲存在 Kubernetes `imagePullSecret` 中，才能供 Kubernetes 叢集存取。建立叢集時，{{site.data.keyword.containerlong_notm}} 會自動將全球（IBM 提供之公用映像檔）與地區登錄的記號儲存在 Kubernetes 映像檔取回密碼中。映像檔取回密碼會新增至 `default` Kubernetes 名稱空間、該名稱空間的 `ServiceAccount` 中的預設密碼清單，以及 `kube-system` 名稱空間。
 
-**附註：**使用此起始設定，即可將容器從 {{site.data.keyword.Bluemix_notm}} 帳戶之名稱空間中可用的任何映像檔，部署至叢集的 **default** 名稱空間。若要將容器部署至叢集的其他名稱空間，或者若要使用儲存在另一個 {{site.data.keyword.Bluemix_notm}} 地區或另一個 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔，則必須[為叢集建立您自己的 imagePullSecret](#other)。
+使用此起始設定，即可將容器從 {{site.data.keyword.Bluemix_notm}} 帳戶之名稱空間中可用的任何映像檔，部署至叢集的 **default** 名稱空間。若要將容器部署至叢集的其他名稱空間，或者若要使用儲存在另一個 {{site.data.keyword.Bluemix_notm}} 地區或另一個 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔，則必須[為叢集建立您自己的 imagePullSecret](#other)。
+{: note}
 
 想要讓您的登錄認證更加安全嗎？請要求叢集管理者在您的叢集中[啟用 {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect)，以加密叢集中的 Kubernetes 密碼，例如儲存登錄認證的 `imagePullSecret`。
 {: tip}
@@ -191,7 +195,7 @@ ImagePullSecret 僅適用於建立它們的 Kubernetes 名稱空間。請針對�
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
-   
+
    ```
    kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
@@ -269,10 +273,11 @@ ImagePullSecret 僅適用於建立它們的 Kubernetes 名稱空間。請針對�
     </tr>
     </tbody></table>
 
-6.  驗證已順利建立密碼。將 <em>&lt;kubernetes_namespace&gt;</em> 取代為已在其中建立 imagePullSecret 的名稱空間。
+6.  驗證已順利建立 Secret。
+    將 <em>&lt;kubernetes_namespace&gt;</em> 取代為已在其中建立 imagePullSecret 的名稱空間。
 
     ```
-    kubectl get secrets --namespace <kubernetes_namespace>
+kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
@@ -291,10 +296,10 @@ ImagePullSecret 僅適用於建立它們的 Kubernetes 名稱空間。請針對�
 
 若要建立 imagePullSecret，請執行下列動作：
 
-1.  建立用來儲存專用登錄認證的 Kubernetes Secret。
+1.  建立用來儲存專用登錄認證的 Kubernetes 密碼。
 
     ```
-    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
+kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
     ```
     {: pre}
 
@@ -306,7 +311,7 @@ ImagePullSecret 僅適用於建立它們的 Kubernetes 名稱空間。請針對�
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td>必要。您要使用 Secret 並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
+    <td>必要。您要使用密碼並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
@@ -326,14 +331,14 @@ ImagePullSecret 僅適用於建立它們的 Kubernetes 名稱空間。請針對�
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>必要。如果您有 Docker 電子郵件位址，請輸入它。否則，請輸入虛構的電子郵件位址，例如 a@b.c。此電子郵件是建立 Kubernetes Secret 的必要項目，但在建立之後就不再使用。</td>
+    <td>必要。如果您有 Docker 電子郵件位址，請輸入它。否則，請輸入虛構的電子郵件位址，例如 a@b.c。此電子郵件是建立 Kubernetes 密碼的必要項目，但在建立之後就不再使用。</td>
     </tr>
     </tbody></table>
 
-2.  驗證已順利建立 Secret。將 <em>&lt;kubernetes_namespace&gt;</em> 取代為已建立 imagePullSecret 的名稱空間的名稱。
+2.  驗證已順利建立密碼。將 <em>&lt;kubernetes_namespace&gt;</em> 取代為已建立 imagePullSecret 的名稱空間的名稱。
 
     ```
-    kubectl get secrets --namespace <kubernetes_namespace>
+kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
@@ -421,10 +426,10 @@ ImagePullSecret 僅適用於建立它們的 Kubernetes 名稱空間。請針對�
     </tbody></table>
 
 3.  儲存變更。
-4.  在叢集裡建立部署。
+4.  在叢集中建立部署。
     ```
-   kubectl apply -f mypod.yaml
-   ```
+    kubectl apply -f mypod.yaml
+    ```
     {: pre}
 
 ### 在所選取名稱空間的 Kubernetes 服務帳戶中儲存 imagePullSecret
@@ -482,7 +487,7 @@ ImagePullSecret 僅適用於建立它們的 Kubernetes 名稱空間。請針對�
    ```
    {: codeblock}
 
-5. 在叢集裡建立部署。
+5. 在叢集中建立部署。
    ```
    kubectl apply -f mypod.yaml
    ```

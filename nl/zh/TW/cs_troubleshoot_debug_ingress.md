@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -30,6 +33,9 @@ lastupdated: "2018-10-25"
 
 確定您只在一個 Ingress 資源中定義主機。如果在多個 Ingress 資源中定義一個主機，則 ALB 可能不會適當地轉遞資料流量，而且您可能會遭遇錯誤。
 {: tip}
+
+開始之前，請確定您具有下列 [{{site.data.keyword.Bluemix_notm}} IAM 存取原則](cs_users.html#platform)：
+  - 叢集的**編輯者**或**管理者**平台角色
 
 ## 步驟 1：檢查 Ingress 部署及 ALB Pod 日誌中的錯誤訊息
 {: #errors}
@@ -121,11 +127,11 @@ lastupdated: "2018-10-25"
     `dal10` 及 `dal13` 中具有工作者節點之多區域叢集的範例輸出：
 
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone   
-    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -                dal13   
-    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -                dal10   
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13   
-    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222    dal10  
+    ALB ID                                            Status     Type      ALB IP           Zone    Build
+    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
+    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
     ```
     {: screen}
 
@@ -133,7 +139,7 @@ lastupdated: "2018-10-25"
 
 2. 檢查 ALB IP 的性能。
 
-    * 對於單一區域叢集及多區域叢集：連線測試每個公用 ALB 的 IP 位址，以確保每個 ALB 都能夠順利接收封包。附註：如果您使用專用 ALB，則只能從專用網路連線測試其 IP 位址。
+    * 對於單一區域叢集及多區域叢集：連線測試每個公用 ALB 的 IP 位址，以確保每個 ALB 都能夠順利接收封包。如果您使用專用 ALB，則只能從專用網路連線測試其 IP 位址。
         ```
         ping <ALB_IP>
         ```
@@ -142,14 +148,16 @@ lastupdated: "2018-10-25"
         * 如果 CLI 傳回逾時，而且您有保護工作者節點的自訂防火牆，請確定[防火牆](cs_troubleshoot_clusters.html#cs_firewall)中容許 ICMP。
         * 如果沒有任何防火牆封鎖連線測試，但連線測試仍然執行逾時，則請[檢查 ALB Pod 的狀態](#check_pods)。
 
-    * 僅限多區域叢集：您可以使用 MZLB 性能檢查來判斷您 ALB IP 的狀態。如需 MZLB 的相關資訊，請參閱[多區域負載平衡器 (MZLB)](cs_ingress.html#planning)。**附註**：MZLB 性能檢查僅適用於格式為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 之新 Ingress 子網域的叢集。如果您的叢集仍然使用舊格式 `<cluster_name>.<region>.containers.mybluemix.net`，則請[將單一區域叢集轉換成多區域](cs_clusters.html#add_zone)。您的叢集獲指派具有新格式的子網域，但也可以繼續使用較舊的子網域格式。或者，您可以訂購自動獲指派新子網域格式的新叢集。下列 HTTP cURL 指令使用 `albhealth` 主機，其由 {{site.data.keyword.containerlong_notm}} 配置成傳回 ALB IP 的 `healthy` 或 `unhealthy` 狀態。
+    * 僅限多區域叢集：您可以使用 MZLB 性能檢查來判斷您 ALB IP 的狀態。如需 MZLB 的相關資訊，請參閱[多區域負載平衡器 (MZLB)](cs_ingress.html#planning)。MZLB 性能檢查僅適用於格式為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 之新 Ingress 子網域的叢集。如果您的叢集仍然使用舊格式 `<cluster_name>.<region>.containers.mybluemix.net`，則請[將單一區域叢集轉換成多區域](cs_clusters.html#add_zone)。您的叢集獲指派具有新格式的子網域，但也可以繼續使用較舊的子網域格式。或者，您可以訂購自動獲指派新子網域格式的新叢集。
+
+    下列 HTTP cURL 指令使用 `albhealth` 主機，其由 {{site.data.keyword.containerlong_notm}} 配置成傳回 ALB IP 的 `healthy` 或 `unhealthy` 狀態。
         ```
-        curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+                curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
         ```
         {: pre}
 
         輸出範例：
-        ```
+    ```
         healthy
         ```
         {: screen}
@@ -246,8 +254,8 @@ lastupdated: "2018-10-25"
 
     例如，無法連接的 IP `169.62.196.238` 屬於 ALB `public-cr24a9f2caf6554648836337d240064935-alb1`：
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13
+    ALB ID                                            Status     Type      ALB IP           Zone   Build
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
     ```
     {: screen}
 
@@ -385,19 +393,12 @@ lastupdated: "2018-10-25"
 {: shortdesc}
 
 -  在終端機中，有 `ibmcloud` CLI 及外掛程式的更新可用時，就會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
-
 -   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/bluemix/support/#status)。
--   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。
-
-    如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
+-   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
     {: tip}
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
-
     -   如果您在使用 {{site.data.keyword.containerlong_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
     -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
-
--   開立問題單以與 IBM 支援中心聯絡。若要瞭解開立 IBM 支援問題單或是支援層次與問題單嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。
-
+-   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
 {: tip}
-當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -74,39 +77,37 @@ lastupdated: "2018-10-25"
   </tbody>
 </table>
 
-若要測試您在疑難排解期間所做的變更，您可以在叢集裡的工作者節點上部署 *Noisy*，這是可以產生數個日誌事件的範例 Pod。
+若要測試您在疑難排解期間所做的變更，可以將 *Noisy*（這是可以產生數個日誌事件的範例 Pod）部署至叢集中的工作者節點。
 
-  1. 若為您要在其中開始產生日誌的叢集：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
+開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 
-  2. 建立 `deploy-noisy.yaml` 配置檔。
-
+1. 建立 `deploy-noisy.yaml` 配置檔。
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: noisy
+    spec:
+      containers:
+      - name: noisy
+        image: ubuntu:16.04
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
+        imagePullPolicy: "Always"
       ```
-apiVersion: v1
-      kind: Pod
-      metadata:
-        name: noisy
-      spec:
-        containers:
-        - name: noisy
-          image: ubuntu:16.04
-          command: ["/bin/sh"]
-          args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
-          imagePullPolicy: "Always"
-        ```
-        {: codeblock}
+      {: codeblock}
 
-  3. 在叢集的環境定義中執行配置檔。
+2. 在叢集的環境定義中執行配置檔。
+    ```
+    kubectl apply -f noisy.yaml
+    ```
+    {:pre}
 
-        ```
-        kubectl apply -f noisy.yaml
-        ```
-        {:pre}
-
-  4. 幾分鐘之後，您可以在 Kibana 儀表板中檢視日誌。若要存取 Kibana 儀表板，請移至下列其中一個 URL，然後選取您建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您在建立叢集時指定了空間，請改為移至該空間。
-      - 美國南部及美國東部：https://logging.ng.bluemix.net
-      - 英國南部：https://logging.eu-gb.bluemix.net
-      - 歐盟中部：https://logging.eu-fra.bluemix.net
-      - 亞太地區南部：https://logging.au-syd.bluemix.net
+3. 幾分鐘之後，您可以在 Kibana 儀表板中檢視日誌。若要存取 Kibana 儀表板，請移至下列其中一個 URL，然後選取您建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您在建立叢集時指定了空間，請改為移至該空間。
+    - 美國南部及美國東部：https://logging.ng.bluemix.net
+    - 英國南部：https://logging.eu-gb.bluemix.net
+    - 歐盟中部：https://logging.eu-fra.bluemix.net
+    - 亞太地區南部：https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -138,19 +139,12 @@ apiVersion: v1
 {: shortdesc}
 
 -  在終端機中，有 `ibmcloud` CLI 及外掛程式的更新可用時，就會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
-
 -   若要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，請[檢查 {{site.data.keyword.Bluemix_notm}} 狀態頁面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/bluemix/support/#status)。
--   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。
-
-    如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
+-   將問題張貼到 [{{site.data.keyword.containerlong_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。    如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
     {: tip}
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
-
     -   如果您在使用 {{site.data.keyword.containerlong_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
     -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
-
--   開立問題單以與 IBM 支援中心聯絡。若要瞭解開立 IBM 支援問題單或是支援層次與問題單嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。
-
+-   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
 {: tip}
-當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。
 

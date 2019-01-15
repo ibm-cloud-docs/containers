@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,7 +50,7 @@ lastupdated: "2018-10-25"
 - [調整工作者節點儲存區的大小，以新增或移除叢集容量](cs_clusters.html#add_workers)
 - [啟用 VLAN Spanning，讓多區域工作者節點儲存區在各區域之間保持平衡](cs_clusters_planning.html#ha_clusters)
 - [在 IBM Cloud 基礎架構 (SoftLayer) 建立公用及專用 VLAN，以進行叢集的網路隔離](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [確保所有工作者節點都具有 Kubernetes 主節點 URL 的網路連線功能](cs_firewall.html#firewall) <p>**附註**：如果工作者節點同時具有公用和專用 VLAN，則已配置網路連線功能。如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅限專用叢集網路](cs_network_cluster.html#private_vlan)。</p>
+- [確保所有工作者節點都具有 Kubernetes 主節點 URL 的網路連線功能](cs_firewall.html#firewall) <p class="note">如果工作者節點同時具有公用和專用 VLAN，則已配置網路連線功能。如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅限專用叢集網路](cs_network_cluster.html#private_vlan)。</p>
 - [當 Kubernetes 版本更新可用時，更新主節點 kube-apiserver](cs_cluster_update.html#master)
 - [讓工作者節點保持最新的主要、次要及修補程式版本](cs_cluster_update.html#worker_node)
 - [回復發生問題的工作者節點，方法為執行 `kubectl` 指令（例如 `cordon` 或 `drain`），以及執行 `ibmcloud ks` 指令（例如 `reboot`、`reload` 或 `delete`）](cs_cli_reference.html#cs_worker_reboot)

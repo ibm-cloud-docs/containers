@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -29,8 +32,9 @@ lastupdated: "2018-10-25"
 {: #uc_shipping}
 
 IT Exec 具有夥伴與之互動的全球船隻路線及排程系統。夥伴需要這些存取 IoT 裝置資料之系統中的最新資訊。但是，這些系統無法使用足夠的 HA 擴充到全球。
+{: shortdesc}
  
- 為何要使用 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 會使用五個 9s 可用性來調整容器化應用程式，以符合不斷成長的需求。如果「開發人員」可輕鬆地進行實驗，並將變更快速推送至「開發」及「測試」系統，則應用程式部署每天會發生 40 次。IoT Platform 可讓您輕鬆地存取 IoT 資料。 
+為何要使用 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 會使用五個 9s 可用性來調整容器化應用程式，以符合不斷成長的需求。如果「開發人員」可輕鬆地進行實驗，並將變更快速推送至「開發」及「測試」系統，則應用程式部署每天會發生 40 次。IoT Platform 可讓您輕鬆地存取 IoT 資料。 
  
 重要技術：    
 * [夥伴生態系統的多地區](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)
@@ -117,6 +121,7 @@ IoT 裝置會串流處理 {{site.data.keyword.messagehub_full}} 配送至地區�
 {: #uc_airline}
 
 HR Exec (CHRO) 需要具有創新聊天機器人的新 HR 權益網站，但現行「開發」工具及平台平均要有較久的時間，應用程式才能上線。此狀況包括長期等待硬體採購。
+{: shortdesc}
 
 為何要使用 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 提供輕鬆地啟動運算。然後，「開發人員」可以輕鬆地進行實驗，並使用開放式工具鏈將變更快速推送至「開發」及「測試」系統。他們的傳統軟體開發工具會在加入 IBM Watson Assistant 時得到提升。新的權益網站是在 3 週內建立。
 

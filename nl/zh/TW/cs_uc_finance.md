@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -27,7 +30,8 @@ lastupdated: "2018-10-25"
 ## 抵押貸款公司刪減成本並加速合規性
 {: #uc_mortgage}
 
-房貸公司的「風險管理副總裁」每天都要處理 7 千萬筆記錄，但內部部署系統的速度緩慢，也不精確。IT 費用會急速增加，因為硬體會快速失效而且未完全利用。他們等待硬體佈建時，其合規性會變慢。 
+房貸公司的「風險管理副總裁」每天都要處理 7 千萬筆記錄，但內部部署系統的速度緩慢，也不精確。IT 費用會急速增加，因為硬體會快速失效而且未完全利用。他們等待硬體佈建時，其合規性會變慢。
+{: shortdesc}
 
 為何要使用 {{site.data.keyword.Bluemix_notm}}：若要改善風險分析，該公司會查看 {{site.data.keyword.containerlong_notm}} 及 IBM Cloud Analytic 服務以降低成本、增加全球可用性，最後加速合規性。在多個地區中使用 {{site.data.keyword.containerlong_notm}}，可以在全球容器化及部署其分析應用程式，並改善可用性及處理當地法規。這些部署透過已是 {{site.data.keyword.containerlong_notm}} 一部分的熟悉開放程式碼工具予以加速。
 
@@ -92,6 +96,7 @@ lastupdated: "2018-10-25"
 {: #uc_payment_tech}
 
 Development Exec 的「開發人員」使用可關閉原型的內部部署傳統工具，同時等待硬體採購。
+{: shortdesc}
 
 為何要使用 {{site.data.keyword.Bluemix_notm}}：{{site.data.keyword.containerlong_notm}} 使用開放程式碼標準技術來提供啟動運算。公司移至 {{site.data.keyword.containerlong_notm}} 之後，「開發人員」可以存取 DevOps 友善的工具（例如可攜式及輕鬆共用的容器）。
 
@@ -147,7 +152,7 @@ Development Exec 在動態支付產業面臨許多挑戰。法規、消費者行
 **步驟 1：提升及轉移至安全運算**
 * 管理高度敏感資料的應用程式可以在於「裸機」上執行以進行「授信運算」的 {{site.data.keyword.containerlong_notm}} 上重新管理。「授信運算」可以驗證基礎硬體未遭到竄改。 
 * 將虛擬機器映像檔移轉至在公用 {{site.data.keyword.Bluemix_notm}} 的 {{site.data.keyword.containerlong_notm}} 中執行的容器映像檔。
-* 從該核心，「漏洞警告器」提供已知惡意軟體的映像檔、原則、容器及套件掃描漏洞掃描。 
+* 從該核心中，「漏洞警告器」提供已知惡意軟體的映像檔、原則、容器及套件漏洞掃描。 
 * 專用資料中心/內部部署資本成本會大幅減少，並取代為根據工作負載需求調整的公用電腦模型。
 
 **步驟 2：現有支付系統後端的作業及連線**

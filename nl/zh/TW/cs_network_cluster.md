@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 規劃叢集內網路及專用網路
@@ -78,7 +81,7 @@ lastupdated: "2018-10-25"
 **為何我可能使用此設定？**
 
 * 您有一個應用程式必須可供單一區域叢集中的公用網際網路存取。
-* 您有一個應用程式必須可供多區域叢集中的公用網際網路存取。因為您必須啟用 [VLAN Spanning](cs_subnets.html#subnet-routing) 來建立多區域叢集，叢集才可以與連接至相同 IBM Cloud 帳戶中之任何專用 VLAN 的其他系統進行通訊。**附註**：若要在專用網路上隔離多區域叢集，請使用 [Calico 網路原則](cs_network_policy.html#isolate_workers)。
+* 您有一個應用程式必須可供多區域叢集中的公用網際網路存取。因為您必須啟用 [VLAN Spanning](cs_subnets.html#subnet-routing) 來建立多區域叢集，叢集才可以與連接至相同 IBM Cloud 帳戶中之任何專用 VLAN 的其他系統進行通訊。若要在專用網路上隔離多區域叢集，您可以使用 [Calico 網路原則](cs_network_policy.html#isolate_workers)。
 
 **我要管理叢集的公用和專用存取權時有哪些選項？**
 </br>下列各節說明跨越 {{site.data.keyword.containerlong_notm}} 的功能，您可以使用這些功能來設定連接至公用及專用 VLAN 之叢集的網路功能。
@@ -183,7 +186,7 @@ lastupdated: "2018-10-25"
 * 所有工作者節點與主節點之間的自動連線。您必須透過[配置閘道應用裝置](#private_vlan_gateway)來提供此連線。
 
 **為何我可能使用此設定？**
-</br>您具有特定的安全需求或需要建立自訂網路原則及遞送規則，以提供專用網路安全。**附註**：使用閘道應用裝置會產生個別費用。如需詳細資料，請參閱[文件](/docs/infrastructure/fortigate-10g/explore-firewalls.html)。
+</br>您具有特定的安全需求或需要建立自訂網路原則及遞送規則，以提供專用網路安全。請注意，使用閘道應用裝置會產生個別費用。如需詳細資料，請參閱[文件](/docs/infrastructure/fortigate-10g/explore-firewalls.html)。
 
 **我要管理叢集的公用和專用存取權時有哪些選項？**
 </br>下列各節說明跨越 {{site.data.keyword.containerlong_notm}} 的功能，您可以使用這些功能來設定連接至僅限專用 VLAN 之叢集的網路功能。
@@ -193,10 +196,8 @@ lastupdated: "2018-10-25"
 
 如果工作者節點是設定為僅限專用 VLAN，則您必須針對工作者節點與主節點之間的網路連線功能配置替代方案。您可以使用自訂網路原則來設定防火牆，以提供標準叢集的專用網路安全，以及偵測及重新修補網路侵入。例如，您可能選擇設定 [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) 或 [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) 作為防火牆，並且封鎖不想要的資料流量。當您設定防火牆時，也必須針對每一個地區[開啟必要埠及 IP 位址](cs_firewall.html#firewall_outbound)，讓主節點與工作者節點可以進行通訊。
 
-**附註**：如果您具有現有的路由器應用裝置，然後新增叢集，則系統不會在路由器應用裝置上配置針對該叢集所訂購的新可攜式子網路。為了能夠使用網路服務，您必須[啟用 VLAN Spanning](cs_subnets.html#vra-routing)，在相同 VLAN 上的子網路之間啟用遞送。
-
-若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](cs_cli_reference.html#cs_vlan_spanning_get)。
-{: tip}
+如果您具有現有的路由器應用裝置，然後新增叢集，則系統不會在路由器應用裝置上配置針對該叢集所訂購的新可攜式子網路。為了能夠使用網路服務，您必須[啟用 VLAN Spanning](cs_subnets.html#vra-routing)，在相同 VLAN 上的子網路之間啟用遞送。
+{: important}
 
 ### 使用專用網路服務公開應用程式
 {: #private_vlan_services}

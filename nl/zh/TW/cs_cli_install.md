@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -58,13 +61,14 @@ lastupdated: "2018-10-25"
     ```
     {: pre}
 
-    **附註：**如果您具有聯合 ID，請使用 `ibmcloud login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
+    如果您具有聯合 ID，請使用 `ibmcloud login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
+    {: tip}
 
 3.  若要建立 Kubernetes 叢集，以及管理工作者節點，請安裝 {{site.data.keyword.containerlong_notm}} 外掛程式。使用 {{site.data.keyword.containerlong_notm}} 外掛程式來執行指令的字首是 `ibmcloud ks`。
 
     ```
-ibmcloud plugin install container-service
-```
+    ibmcloud plugin install container-service
+    ```
     {: pre}
 
     若要驗證已適當安裝外掛程式，請執行下列指令：
@@ -78,11 +82,14 @@ ibmcloud plugin install container-service
 
 4.  {: #kubectl}若要檢視本端版本的 Kubernetes 儀表板，以及將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。使用 Kubernetes CLI 來執行指令的字首是 `kubectl`。
 
-    1.  下載與您計劃使用的 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。現行 {{site.data.keyword.containerlong_notm}} 預設 Kubernetes 版本為 1.10.8。**附註**：如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集及 CLI 版本保持最新。
+    1.  下載與您計劃使用的 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。現行 {{site.data.keyword.containerlong_notm}} 預設 Kubernetes 版本為 1.10.11。
 
-        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl)
-        - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl)
-        - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe)
+        如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集和 CLI 版本保持最新。
+        {: note}
+
+        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
+        - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl)
+        - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe)
 
     2.  **若為 OSX 及 Linux**：請完成下列步驟。
         1.  將執行檔移至 `/usr/local/bin` 目錄。
@@ -138,7 +145,7 @@ ibmcloud plugin install container-service
 -   [`ibmcloud` 指令](../cli/reference/ibmcloud/bx_cli.html#ibmcloud_cli)
 -   [`ibmcloud ks` 指令](cs_cli_reference.html#cs_cli_reference)
 -   [`kubectl` 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)
--   [`ibmcloud cr` 指令](/docs/cli/plugins/registry/index.html)
+-   [`ibmcloud cr` 指令](/docs/container-registry-cli-plugin/container-registry-cli.html#containerregcli)
 
 <br />
 
@@ -179,10 +186,14 @@ ibmcloud plugin install container-service
 您可以使用 Kubernetes CLI 隨附的指令來管理 {{site.data.keyword.Bluemix_notm}} 中的叢集。
 {:shortdesc}
 
-支援 Kubernetes 1.10.8 中所有可用的 `kubectl` 指令與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
+支援 Kubernetes 1.10.11 中所有可用的 `kubectl` 指令與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
 
 
-您必須先[安裝必要的 CLI](#cs_cli_install) 及[建立叢集](cs_clusters.html#clusters_cli)，才能執行 `kubectl` 指令。
+在可以執行 `kkbectl` 指令之前，請執行下列動作：
+* [安裝必要的 CLI](#cs_cli_install)。
+* [建立叢集](cs_clusters.html#clusters_cli)。
+
+若要使用 `kubectl` 指令，請執行下列動作：
 
 1.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[包括 API 端點](cs_regions.html#bluemix_regions)。
 
@@ -191,26 +202,31 @@ ibmcloud plugin install container-service
     ```
     {: pre}
 
-    **附註：**如果您具有聯合 ID，請使用 `ibmcloud login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
+    如果您具有聯合 ID，請使用 `ibmcloud login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
+    {: tip}
 
 2.  選取 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您被指派到多個 {{site.data.keyword.Bluemix_notm}} 組織，請選取在其中建立叢集的組織。叢集是組織特有的，但與 {{site.data.keyword.Bluemix_notm}} 空間無關。因此，您不需要選取空間。
 
-3. 若要建立及使用非 default 資源群組中的叢集，請將目標設為該資源群組。**附註**：您必須對資源群組具有[**檢視者**存取權](cs_users.html#platform)。
+3.  若要建立及使用非 default 資源群組中的叢集，請將目標設為該資源群組。若要查看每一個叢集所屬的資源群組，請執行 `ibmcloud ks clusters`。**附註**：您必須對資源群組具有[**檢視者**存取權](cs_users.html#platform)。
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {: pre}
 
-3.  若要在先前所選取 {{site.data.keyword.Bluemix_notm}} 地區以外的地區中建立或存取 Kubernetes 叢集，請執行 `ibmcloud ks region-set`。
+4.  若要在先前所選取 {{site.data.keyword.Bluemix_notm}} 地區以外的地區中建立或存取 Kubernetes 叢集，請將此地區設為目標。
+    ```
+    ibmcloud ks region-set
+    ```
+    {: pre}
 
-4.  列出帳戶中的所有叢集，以取得叢集的名稱。
+5.  列出帳戶中的所有叢集，以取得叢集的名稱。
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-5.  將您建立的叢集設為此階段作業的環境定義。請在您每次使用叢集時，完成下列配置步驟。
+6.  將您建立的叢集設為此階段作業的環境定義。請在您每次使用叢集時，完成下列配置步驟。
     1.  讓指令設定環境變數，並下載 Kubernetes 配置檔。
 
         ```
@@ -237,8 +253,8 @@ ibmcloud plugin install container-service
         範例：
 
         ```
-          echo $KUBECONFIG
-          ```
+        echo $KUBECONFIG
+        ```
         {: pre}
 
         輸出：
@@ -247,7 +263,7 @@ ibmcloud plugin install container-service
         ```
         {: screen}
 
-6.  檢查 Kubernetes CLI 伺服器版本，驗證叢集已適當地執行 `kubectl` 指令。
+7.  檢查 Kubernetes CLI 伺服器版本，驗證叢集已適當地執行 `kubectl` 指令。
 
     ```
     kubectl version  --short
@@ -257,8 +273,8 @@ ibmcloud plugin install container-service
     輸出範例：
 
     ```
-    Client Version: v1.10.8
-    Server Version: v1.10.8
+    Client Version: v1.10.11
+    Server Version: v1.10.11
     ```
     {: screen}
 
@@ -280,7 +296,7 @@ ibmcloud plugin install container-service
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 0.8.0 版或更新版本
 -   {{site.data.keyword.containerlong_notm}} 外掛程式
--   Kubernetes CLI 1.10.8 版或更新版本
+-   Kubernetes CLI 1.10.11 版或更新版本
 -   {{site.data.keyword.registryshort_notm}} 外掛程式
 
 <br>
@@ -297,14 +313,15 @@ ibmcloud plugin install container-service
     ```
     {: pre}
 
-     **附註：**如果您具有聯合 ID，請使用 `ibmcloud login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
+     如果您具有聯合 ID，請使用 `ibmcloud login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
+    {: tip}
 
 3.  更新 {{site.data.keyword.containerlong_notm}} 外掛程式。
     1.  從 {{site.data.keyword.Bluemix_notm}} 外掛程式儲存庫中安裝更新。
 
         ```
-ibmcloud plugin update container-service
-```
+        ibmcloud plugin update container-service
+        ```
         {: pre}
 
     2.  執行下列指令，並檢查已安裝的外掛程式清單，以驗證外掛程式安裝。
@@ -357,7 +374,7 @@ ibmcloud plugin update container-service
 -   {{site.data.keyword.containerlong_notm}} 外掛程式
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} 外掛程式
-<br>
+
 若要解除安裝 CLI，請執行下列動作：
 
 1.  解除安裝 {{site.data.keyword.containerlong_notm}} 外掛程式。
@@ -394,10 +411,10 @@ ibmcloud plugin update container-service
 
 {{site.data.keyword.containerlong_notm}} API 需要標頭資訊，您必須在 API 要求中提供它，且它會視您要使用的 API 而變。若要判斷 API 所需的標頭資訊，請參閱 [{{site.data.keyword.containerlong_notm}} API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://us-south.containers.bluemix.net/swagger-api)。
 
+若要向 {{site.data.keyword.containerlong_notm}} 進行鑑別，您必須提供以 {{site.data.keyword.Bluemix_notm}} 認證產生且包含建立叢集所在 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 記號。取決於您向 {{site.data.keyword.Bluemix_notm}} 進行鑑別的方式，您可以在下列選項之間進行選擇，以自動建立 {{site.data.keyword.Bluemix_notm}} IAM 記號。
+
 您也可以使用 [API Swagger JSON 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.bluemix.net/swagger-api-json) 來產生可在自動化工作期間與 API 互動的用戶端。
 {: tip}
-
-**附註：**若要向 {{site.data.keyword.containerlong_notm}} 進行鑑別，您必須提供以 {{site.data.keyword.Bluemix_notm}} 認證產生且包含建立叢集所在 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的 Identity and Access Management (IAM) 記號。根據您向 {{site.data.keyword.Bluemix_notm}} 進行鑑別的方式，您可以在下列選項之間進行選擇，以自動建立 IAM 記號。
 
 <table>
 <caption>ID 類型和選項</caption>
@@ -408,16 +425,16 @@ ibmcloud plugin update container-service
 <tbody>
 <tr>
 <td>未聯合 ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 使用者名稱及密碼：</strong>您可以遵循本主題的步驟，以便完全自動建立 IAM 存取記號。</li>
-<li><strong>產生 {{site.data.keyword.Bluemix_notm}} API 金鑰：</strong>作為使用 {{site.data.keyword.Bluemix_notm}} 使用者名稱和密碼的替代方案，您可以<a href="../iam/apikeys.html#manapikey" target="_blank">使用 {{site.data.keyword.Bluemix_notm}} API 金鑰</a> {{site.data.keyword.Bluemix_notm}} API 金鑰相依於為其產生金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶。您無法將 {{site.data.keyword.Bluemix_notm}} API 金鑰與不同帳戶 ID 結合在相同 IAM 記號中。若要存取使用您 {{site.data.keyword.Bluemix_notm}} API 金鑰根據帳戶以外之帳戶建立的叢集，您必須登入帳戶才能產生新的 API 金鑰。</li></ul></tr>
+<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 使用者名稱及密碼：</strong>您可以遵循本主題的步驟，以完全自動建立 {{site.data.keyword.Bluemix_notm}} IAM 存取記號。</li>
+<li><strong>產生 {{site.data.keyword.Bluemix_notm}} API 金鑰：</strong>作為使用 {{site.data.keyword.Bluemix_notm}} 使用者名稱和密碼的替代方案，您可以<a href="../iam/apikeys.html#manapikey" target="_blank">使用 {{site.data.keyword.Bluemix_notm}} API 金鑰</a> {{site.data.keyword.Bluemix_notm}} API 金鑰相依於為其產生金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶。您無法將 {{site.data.keyword.Bluemix_notm}} API 金鑰與不同帳戶 ID 結合在相同的 {{site.data.keyword.Bluemix_notm}} IAM 記號中。若要存取使用您 {{site.data.keyword.Bluemix_notm}} API 金鑰根據帳戶以外之帳戶建立的叢集，您必須登入帳戶才能產生新的 API 金鑰。</li></ul></tr>
 <tr>
 <td>聯合 ID</td>
-<td><ul><li><strong>產生 {{site.data.keyword.Bluemix_notm}} API 金鑰：</strong><a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 金鑰</a>金鑰相依於為其產生金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶。您無法將 {{site.data.keyword.Bluemix_notm}} API 金鑰與不同帳戶 ID 結合在相同 IAM 記號中。若要存取使用您 {{site.data.keyword.Bluemix_notm}} API 金鑰根據帳戶以外之帳戶建立的叢集，您必須登入帳戶才能產生新的 API 金鑰。</li><li><strong>使用一次性密碼：</strong>如果使用一次性密碼來向 {{site.data.keyword.Bluemix_notm}} 進行鑑別，則無法完全自動建立 IAM 記號，因為擷取一次性密碼需要與 Web 瀏覽器進行手動互動。若要完全自動建立 IAM 記號，您必須改為建立一個 {{site.data.keyword.Bluemix_notm}} API 金鑰。</ul></td>
+<td><ul><li><strong>產生 {{site.data.keyword.Bluemix_notm}} API 金鑰：</strong><a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 金鑰</a>金鑰相依於為其產生金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶。您無法將 {{site.data.keyword.Bluemix_notm}} API 金鑰與不同帳戶 ID 結合在相同的 {{site.data.keyword.Bluemix_notm}} IAM 記號中。若要存取使用您 {{site.data.keyword.Bluemix_notm}} API 金鑰根據帳戶以外之帳戶建立的叢集，您必須登入帳戶才能產生新的 API 金鑰。</li><li><strong>使用一次性密碼：</strong>如果您使用一次性密碼來向 {{site.data.keyword.Bluemix_notm}} 進行鑑別，則無法完全自動建立 {{site.data.keyword.Bluemix_notm}} IAM 記號，因為擷取一次性密碼需要與 Web 瀏覽器進行手動互動。若要完全自動建立 {{site.data.keyword.Bluemix_notm}} IAM 記號，您必須改為建立一個 {{site.data.keyword.Bluemix_notm}} API 金鑰。</ul></td>
 </tr>
 </tbody>
 </table>
 
-1.  建立 IAM Identity and Access Management 存取記號。要求中包含的內文資訊會根據您使用的 {{site.data.keyword.Bluemix_notm}} 鑑別方法而有所不同。請取代下列值：
+1.  建立 {{site.data.keyword.Bluemix_notm}} IAM 存取記號。要求中包含的內文資訊會根據您使用的 {{site.data.keyword.Bluemix_notm}} 鑑別方法而有所不同。請取代下列值：
   - _&lt;username&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 使用者名稱。
   - _&lt;password&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 密碼。
   - _&lt;api_key&gt;_：您的 {{site.data.keyword.Bluemix_notm}} API 金鑰。
@@ -497,9 +514,9 @@ ibmcloud plugin update container-service
     ```
     {: screen}
 
-    您可以在 API 輸出的 **access_token** 欄位中找到 IAM 記號。請記下 IAM 記號，以在接下來的步驟中擷取其他標頭資訊。
+    您可以在 API 輸出的 **access_token** 欄位中找到 {{site.data.keyword.Bluemix_notm}} IAM 記號。請記下 {{site.data.keyword.Bluemix_notm}} IAM 記號，以在接下來的步驟中擷取其他標頭資訊。
 
-2.  擷取建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。將 _&lt;iam_token&gt;_ 取代為您在前一個步驟中所擷取的 IAM 記號。
+2.  擷取建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。將 _&lt;iam_token&gt;_ 取代為您在前一個步驟中所擷取的 {{site.data.keyword.Bluemix_notm}} IAM 記號。
 
     ```
     GET https://accountmanagement.<region>.bluemix.net/v1/accounts
@@ -544,9 +561,10 @@ ibmcloud plugin update container-service
 
     您可以在 API 輸出的 **resources/metadata/guid** 欄位中找到 {{site.data.keyword.Bluemix_notm}} 帳戶的 ID。
 
-3.  產生包含 {{site.data.keyword.Bluemix_notm}} 認證及建立叢集所在帳戶 ID 的新 IAM 記號。將 _&lt;account_ID&gt;_ 取代為您在前一個步驟中所擷取的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。
+3.  產生包含 {{site.data.keyword.Bluemix_notm}} 認證及建立叢集所在帳戶 ID 的新 {{site.data.keyword.Bluemix_notm}} IAM 記號。將 _&lt;account_ID&gt;_ 取代為您在前一個步驟中所擷取的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。
 
-    **附註：**如果您是使用 {{site.data.keyword.Bluemix_notm}} API 金鑰，則必須使用為其建立 API 金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。若要存取其他帳戶中的叢集，請登入此帳戶，並建立以此帳戶為基礎的 {{site.data.keyword.Bluemix_notm}} API 金鑰。
+    如果您是使用 {{site.data.keyword.Bluemix_notm}} API 金鑰，則必須使用為其建立 API 金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。若要存取其他帳戶中的叢集，請登入此帳戶，並建立以此帳戶為基礎的 {{site.data.keyword.Bluemix_notm}} API 金鑰。
+    {: note}
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
@@ -622,7 +640,7 @@ ibmcloud plugin update container-service
     ```
     {: screen}
 
-    您可以在 **access_token** 中找到 IAM 記號，並且在 **refresh_token** 中找到 IAM 重新整理記號。
+    您可以在 **access_token** 中找到 {{site.data.keyword.Bluemix_notm}} IAM 記號，並且在 **refresh_token** 中找到重新整理記號。
 
 4.  列出帳戶中的所有 Kubernetes 叢集。使用您在先前步驟中所擷取的資訊，以建置標頭資訊。
 
@@ -651,31 +669,31 @@ ibmcloud plugin update container-service
 <br />
 
 
-## 重新整理 IAM 存取記號及取得新的重新整理記號
+## 使用 API 重新整理 {{site.data.keyword.Bluemix_notm}} IAM 存取記號，並取得新的重新整理記號
 {: #cs_api_refresh}
 
-每個透過 API 發出的 IAM Identity and Access Management 存取記號都會在一個小時後到期。您必須定期重新整理存取記號，以確保 {{site.data.keyword.Bluemix_notm}} API 的存取權。您可以使用相同的步驟來取得新的重新整理記號。
+每個透過 API 發出的 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 存取記號都會在一個小時後到期。您必須定期重新整理存取記號，以確保 {{site.data.keyword.Bluemix_notm}} API 的存取權。您可以使用相同的步驟來取得新的重新整理記號。
 {:shortdesc}
 
-開始之前，請確定您有可用來要求新存取記號的 IAM 重新整理記號或 {{site.data.keyword.Bluemix_notm}} API 金鑰。
+開始之前，請確定您有可用來要求新存取記號的 {{site.data.keyword.Bluemix_notm}} IAM 重新整理記號或 {{site.data.keyword.Bluemix_notm}} API 金鑰。
 - **重新整理記號：**請遵循[使用 {{site.data.keyword.Bluemix_notm}} API 自動化叢集建立及管理處理程序](#cs_api)中的指示。
 - **API 金鑰：**如下所示，擷取 [{{site.data.keyword.Bluemix_notm}} ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/) API 金鑰。
    1. 從功能表列中，按一下**管理** > **安全** > **平台 API 金鑰**。
    2. 按一下**建立**。
    3. 輸入 API 金鑰的**名稱**和**說明**，然後按一下**建立**。
    4. 按一下**顯示**來查看為您產生的 API 金鑰。
-   5. 複製 API 金鑰，以便您可以用它來擷取新的 IAM 存取記號。
+   5. 複製 API 金鑰，您可以用它來擷取新的 {{site.data.keyword.Bluemix_notm}} IAM 存取記號。
 
-如果您想要建立 IAM 記號，或想要取得新的重新整理記號，請使用下列步驟。
+如果您想要建立 {{site.data.keyword.Bluemix_notm}} IAM 記號，或想要取得新的重新整理記號，請使用下列步驟。
 
-1.  使用重新整理記號或 {{site.data.keyword.Bluemix_notm}} API 金鑰來產生新的 IAM 存取記號。
+1.  使用重新整理記號或 {{site.data.keyword.Bluemix_notm}} API 金鑰來產生新的 {{site.data.keyword.Bluemix_notm}} IAM 存取記號。
     ```
     POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 
     <table summary="新 IAM 記號的輸入參數">
-     <caption>新 IAM 記號的輸入參數</caption>
+     <caption>新 {{site.data.keyword.Bluemix_notm}} IAM 記號的輸入參數</caption>
     <thead>
     <th>輸入參數</th>
     <th>值</th>
@@ -722,6 +740,19 @@ ibmcloud plugin update container-service
     ```
     {: screen}
 
-    您可以在 API 輸出的 **access_token** 欄位中尋找新的 IAM 記號，並 **refresh_token** 欄位中尋找 IAM 重新整理記號。
+    您可以在 API 輸出的 **access_token** 欄位中找到新的 {{site.data.keyword.Bluemix_notm}} IAM 記號，並在 **refresh_token** 欄位中找到重新整理記號。
 
-2.  使用前一個步驟中的記號，繼續使用 [{{site.data.keyword.containerlong_notm}} API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://us-south.containers.bluemix.net/swagger-api)。
+2.  使用前一個步驟中的記號，繼續使用 [{{site.data.keyword.containerlong_notm}} API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.bluemix.net/swagger-api)。
+
+<br />
+
+
+## 使用 CLI 重新整理 {{site.data.keyword.Bluemix_notm}} IAM 存取記號，並取得新的重新整理記號
+{: #cs_cli_refresh}
+
+當您啟動新的 CLI 階段作業時，或如果現行 CLI 階段作業在 24 小時後到期，您必須執行 `ibmcloud ks cluster-config <cluster_name>`，來設定叢集的環境定義。當您使用此指令來設定叢集的環境定義時，會下載 Kubernetes 叢集的 `kubeconfig` 檔案。此外，會發出 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) ID 記號及重新整理記號，以提供鑑別。
+{: shortdesc}
+
+**ID 記號**：每個透過 CLI 發出的 IAM ID 記號都會在一個小時後到期。當 ID 記號到期時，會將重新整理記號傳送至記號提供者，以重新整理 ID 記號。您的鑑別會重新整理，而且您可以繼續針對叢集執行指令。
+
+**重新整理記號**：重新整理記號每隔 30 天到期。如果重新整理記號過期，則無法重新整理 ID 記號，而且您無法在 CLI 中繼續執行指令。您可以執行 `ibmcloud ks cluster-config <cluster_name>`，來取得新的重新整理記號。此指令也會重新整理您的 ID 記號。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -36,6 +39,9 @@ lastupdated: "2018-10-25"
 
 ## 尋找事件的資訊
 {: #kube-find}
+
+您可以在 Kibana 儀表板中查看日誌，以監視叢集中的活動。
+{: shortdesc}
 
 若要監視管理活動，請執行下列動作：
 
@@ -78,7 +84,7 @@ lastupdated: "2018-10-25"
 <td><code>containers-kubernetes.cluster.delete</code></td>
 <td>已刪除叢集。</td></tr><tr>
 <td><code>containers-kubernetes.cluster-feature.enable</code></td>
-<td>已在叢集上啟用適用於裸機工作者節點的「授信運算」這類功能。</td></tr><tr>
+<td>已在叢集上啟用適用於裸機工作者節點的「授信運算」這類特性。</td></tr><tr>
 <td><code>containers-kubernetes.cluster.get</code></td>
 <td>已檢視叢集資訊。</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.create</code></td>
