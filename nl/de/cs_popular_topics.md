@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -24,11 +27,77 @@ lastupdated: "2018-10-25"
 Bleiben Sie auf dem neuesten Stand bei den Entwicklungen für {{site.data.keyword.containerlong}}. Erfahren Sie mehr zu neuen Features, zu verschiedenen Tricks und einigen beliebten Themen, die andere Entwickler aktuell nützlich finden.
 {:shortdesc}
 
+## Beliebte Themen im Dezember 2018
+{: #dec18}
+
+<table summary="Die Tabelle zeigt beliebte Themen. Die Zeilen sind von links nach rechts zu lesen. In Spalte 1 finden Sie das Datum, den Titel der Funktion in Zeile 2 und eine Beschreibung in Zeile 3.">
+<caption>Beliebte Themen im Bereich Container und Kubernetes-Cluster im Dezember 2018</caption>
+<thead>
+<th>Datum</th>
+<th>Titel</th>
+<th>Beschreibung</th>
+</thead>
+<tbody>
+<tr>
+<td>6. Dezember</td>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>Gewinnen Sie betriebliche Einblicke in die Leistung und den Allgemeinzustand Ihrer Apps, indem Sie Sysdig als Drittanbieterservice auf Ihren Workerknoten bereitstellen, um Metriken an {{site.data.keyword.monitoringlong}} weiterzuleiten. Weitere Informationen finden Sie unter [Metriken für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Hinweis**: Wenn Sie {{site.data.keyword.mon_full_notm}} mit Clustern verwenden, auf denen Kubernetes Version 1.11 oder höher ausgeführt wird, werden nicht alle Containermetriken erfasst, da Sysdig derzeit `containerd` nicht unterstützt. </td>
+</tr>
+</tbody></table>
+
+## Beliebte Themen im November 2018
+{: #nov18}
+
+<table summary="Die Tabelle zeigt beliebte Themen. Die Zeilen sind von links nach rechts zu lesen. In Spalte 1 finden Sie das Datum, den Titel der Funktion in Zeile 2 und eine Beschreibung in Zeile 3.">
+<caption>Beliebte Themen im Bereich Container und Kubernetes-Cluster im November 2018</caption>
+<thead>
+<th>Datum</th>
+<th>Titel</th>
+<th>Beschreibung</th>
+</thead>
+<tbody>
+<tr>
+<td>29. November</td>
+<td>[Zone in Chennai verfügbar](cs_regions.html)</td>
+<td>Chennai in Indien ist eine neue Zone für Cluster in der Region 'Asien-Pazifik (Norden)'. Wenn Sie über eine Firewall verfügen, stellen Sie sicher, dass Sie [die Firewall-Ports](cs_firewall.html#firewall) für diese Zone und die anderen Zonen in der Region öffnen, in der sich Ihr Cluster befindet.</td>
+</tr>
+<tr>
+<td>27. November</td>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>Fügen Sie Ihrem Cluster Protokollmanagementfunktionen hinzu, indem Sie LogDNA als Drittanbieterservice auf Ihren Workerknoten implementieren, um Protokolle aus Ihren Pod-Containern zu verwalten. Weitere Informationen finden Sie unter [Kubernetes-Clusterprotokolle mit {{site.data.keyword.loganalysisfull_notm}} und LogDNA verwalten](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube). </td>
+</tr>
+<tr>
+<td>7. November</td>
+<td>Lastausgleichsfunktion der Version 2.0 (Beta)</td>
+<td>Sie können jetzt zwischen einer [Lastausgleichsfunktion der Version 1.0 oder 2.0](cs_loadbalancer.html#planning_ipvs) wählen, um Ihre Cluster-Apps sicher öffentlich zugänglich zu machen. </td>
+</tr>
+<tr>
+<td>7. November</td>
+<td>Kubernetes Version 1.12 verfügbar</td>
+<td>Sie können jetzt Cluster aktualisieren oder erstellen, die [Kubernetes Version 1.12](cs_versions.html#cs_v112) ausführen! Cluster der Version 1.12 werden standardmäßig mit hoch verfügbaren Kubernetes-Mastern bereitgestellt. </td>
+</tr>
+<tr>
+<td>7. November</td>
+<td>Hoch verfügbare Master in Clustern, die Kubernetes Version 1.10 ausführen</td>
+<td>Hoch verfügbare Master sind für Cluster verfügbar, die Kubernetes Version 1.10 ausführen! Alle im vorherigen Eintrag für Cluster der Version 1.11 beschriebenen Vorteile gelten auch für Cluster der Version 1.10. Dies gilt auch für die [Vorbereitungsschritte](cs_versions.html#110_ha-masters), die Sie ausführen müssen. </td>
+</tr>
+<tr>
+<td>1. November</td>
+<td>Hoch verfügbare Master in Clustern, die Kubernetes Version 1.11 ausführen</td>
+<td>In einer Einzelzone ist Ihr Master hochverfügbar und umfasst Replikate auf separaten physischen Hosts für Ihren Kubernetes-API-Server, für 'etcd', für Ihren Scheduler und Ihren Controller-Manager, um beispielsweise vor Ausfällen während der Aktualisierung eines Clusters zu schützen. Wenn sich Ihr Cluster in einer mehrzonenfähigen Zone befindet, wird Ihr hoch verfügbarer Master über Zonen verteilt, um besser vor einem Zonenausfall zu schützen. <br>Informationen zu den Aktionen, die Sie ausführen müssen, finden Sie unter [Aktualisierung auf hoch verfügbare Cluster-Master](cs_versions.html#ha-masters). Diese Vorbereitungsaktionen finden Anwendung: <ul>
+<li>Wenn Sie über eine Firewall oder über angepasste Calico-Netzrichtlinien verfügen. </li>
+<li>Wenn Sie die Host-Ports `2040` oder `2041` auf Ihren Workerknoten verwenden. </li>
+<li>Wenn Sie die IP-Adresse des Cluster-Masters für den clusterinternen Zugriff auf den Master verwendet haben. </li>
+<li>Wenn eine Automatisierung vorhanden ist, die die Calico-API oder -CLI (`calicoctl`) aufruft, z. B. um Calico-Richtlinien zu erstellen. </li>
+<li>Wenn Sie Kubernetes- oder Calico-Netzrichtlinien zum Steuern des Pod-Egress-Zugriffs auf den Master verwenden. </li></ul></td>
+</tr>
+</tbody></table>
+
 ## Beliebte Themen im Oktober 2018
 {: #oct18}
 
 <table summary="Die Tabelle zeigt beliebte Themen. Die Zeilen sind von links nach rechts zu lesen. In Spalte 1 finden Sie das Datum, den Titel der Funktion in Zeile 2 und eine Beschreibung in Zeile 3.">
-<caption>Beliebte Themen im Bereich Container und Kubernetes-Cluster im August 2018</caption>
+<caption>Beliebte Themen im Bereich Container und Kubernetes-Cluster im Oktober 2018</caption>
 <thead>
 <th>Datum</th>
 <th>Titel</th>
@@ -53,7 +122,7 @@ Bleiben Sie auf dem neuesten Stand bei den Entwicklungen für {{site.data.keywor
 <tr>
 <td>04. Oktober</td>
 <td>[{{site.data.keyword.registrylong}} ist jetzt in {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam) integriert.</td>
-<td>Sie können IAM zum Steuern des Zugriffs auf Registrierungsressourcen verwenden, zum Beispiel zum Extrahieren, Hinzufügen oder Erstellen von Images. Wenn Sie einen Cluster erstellen, erstellen Sie auch ein Registry-Token, damit der Cluster mit der Registry arbeiten kann. Somit benötigen Sie die Plattformmanagementrolle **Administrator** zum Erstellen eines Clusters. Informationen zum Aktivieren von IAM für ein Registry-Konto finden Sie unter [Richtliniendurchsetzung für vorhandene Benutzer aktivieren](/docs/services/Registry/registry_users.html#existing_users).</td>
+<td>Sie können {{site.data.keyword.Bluemix_notm}} IAM zum Steuern des Zugriffs auf Registrierungsressourcen verwenden, zum Beispiel zum Extrahieren, Hinzufügen oder Erstellen von Images. Wenn Sie einen Cluster erstellen, erstellen Sie auch ein Registry-Token, damit der Cluster mit der Registry arbeiten kann. Somit benötigen Sie die Plattformmanagementrolle **Administrator** der Registry auf Kontoebene zum Erstellen eines Clusters. Informationen zum Aktivieren von {{site.data.keyword.Bluemix_notm}} IAM für ein Registry-Konto finden Sie unter [Richtliniendurchsetzung für vorhandene Benutzer aktivieren](/docs/services/Registry/registry_users.html#existing_users). </td>
 </tr>
 <tr>
 <td>01. Oktober</td>
@@ -66,7 +135,7 @@ Bleiben Sie auf dem neuesten Stand bei den Entwicklungen für {{site.data.keywor
 {: #sept18}
 
 <table summary="Die Tabelle zeigt beliebte Themen. Die Zeilen sind von links nach rechts zu lesen. In Spalte 1 finden Sie das Datum, den Titel der Funktion in Zeile 2 und eine Beschreibung in Zeile 3.">
-<caption>Beliebte Themen im Bereich Container und Kubernetes-Cluster im August 2018</caption>
+<caption>Beliebte Themen im Bereich Container und Kubernetes-Cluster im September 2018</caption>
 <thead>
 <th>Datum</th>
 <th>Titel</th>
@@ -191,8 +260,8 @@ Pod-Sicherheitsrichtlinien konfigurieren, um zu festzulegen, wer Pods in {{site.
 </tr>
 <tr>
 <td>1. Mai</td>
-<td>[Kubernetes-Dashboard über die GUI bereitstellen](cs_app.html#cli_dashboard)</td>
-<td>Wollten Sie schon immer einmal mit nur einem Klick auf das Kubernetes-Dashboard zugreifen? Sehen Sie sich dazu die Schaltfläche **Kubernetes-Dashboard** in der {{site.data.keyword.Bluemix_notm}}-GUI genauer an.</td>
+<td>[Kubernetes-Dashboard über die Konsole bereitstellen](cs_app.html#cli_dashboard)</td>
+<td>Wollten Sie schon immer einmal mit nur einem Klick auf das Kubernetes-Dashboard zugreifen? Sehen Sie sich dazu die Schaltfläche **Kubernetes-Dashboard** in der {{site.data.keyword.Bluemix_notm}}-Konsole genauer an. </td>
 </tr>
 </tbody></table>
 
@@ -283,7 +352,7 @@ Pod-Sicherheitsrichtlinien konfigurieren, um zu festzulegen, wer Pods in {{site.
 </tr>
 <tr>
 <td>23. Februar</td>
-<td>Suchen Sie in der Webbenutzerschnittstelle nach [Protokollierung](cs_health.html#view_logs) und [Messwerten](cs_health.html#view_metrics)</td>
+<td>In der Webkonsole nach [Protokollierung](cs_health.html#view_logs) und [Messwerten](cs_health.html#view_metrics) suchen</td>
 <td>Sie können Protokolle und Messwerte mit einer verbesserten Webbenutzerschnittstelle bequem in Ihrem Cluster und seinen Komponenten anzeigen. Auf der Detailseite des Clusters finden Sie Informationen zum Zugriff.</td>
 </tr>
 <tr>

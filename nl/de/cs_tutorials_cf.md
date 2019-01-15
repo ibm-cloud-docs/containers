@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -41,7 +44,8 @@ Dieses Lernprogramm richtet sich an Entwickler von Cloud Foundry-Apps.
 - [Erstellen Sie eine private Image-Registry in {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
 - [Erstellen Sie einen Cluster](cs_clusters.html#clusters_ui).
 - [Geben Sie als Ziel Ihrer CLI den Cluster an](cs_cli_install.html#cs_cli_configure).
-- [Stellen Sie sicher, dass Sie die Plattformrolle **Bearbeiter**, **Operator** oder **Administrator** haben](cs_users.html#add_users_cli).
+- Stellen Sie sicher, dass Sie über die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien für {{site.data.keyword.containerlong_notm}} verfügen: 
+    - [Beliebige Plattformrolle](cs_users.html#platform)
 - [Lernen Sie die Docker- und Kubernetes-Terminologie kennen](cs_tech.html).
 
 
@@ -73,7 +77,7 @@ Bereiten Sie Ihren Code vor. Sie haben noch keinen Code? Sie können den in dies
 
     Während die App bereitgestellt wird, werden Anweisungen für das Herunterladen, Ändern und erneute Bereitstellen Ihrer App mithilfe der Befehlszeilenschnittstelle angezeigt.
 
-    c. Klicken Sie in Schritt 1 in den GUI-Anweisungen auf **STARTER-CODE HERUNTERLADEN**.
+    c. Klicken Sie in Schritt 1 in den Konsolenanweisungen auf **STARTER-CODE HERUNTERLADEN**. 
 
     d. Extrahieren Sie die ZIP-Datei und speichern Sie ihren Inhalt in Ihrem Verzeichnis `cf-py`.
 
@@ -259,7 +263,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
     ```
     {: screen}
 
@@ -269,7 +273,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 
 5.  [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
 
-    Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-GUI](https://console.bluemix.net/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
+    Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://console.bluemix.net/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
     {: tip}
 
 6. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt.

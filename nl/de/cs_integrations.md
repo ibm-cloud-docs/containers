@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,12 +13,15 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
 
 
-# Integration von Services
+# Services integrieren
 {: #integrations}
 
 Sie können verschiedene externe Services und Katalogservices mit einem Kubernetes-Standardcluster in {{site.data.keyword.containerlong}} verwenden.
@@ -72,14 +75,14 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 <tbody>
 <tr>
 <td>CoScale</td>
-<td>Überwachen Sie Workerknoten, Container, Replikatgruppen, Replikationscontroller und Services mit <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td>Überwachen Sie Workerknoten, Container, Replikatgruppen, Replikationscontroller und Services mit <a href="https://www.newrelic.com/coscale" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
 <td>Datadog</td>
 <td>Überwachen Sie Ihren Cluster und zeigen Sie Metriken für die Infrastruktur- und Anwendungsleistung mit <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> an. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
-<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>{{site.data.keyword.cloudaccesstrailfull}}</td>
 <td>Überwachen Sie die in Ihrem Cluster vorgenommenen Verwaltungsaktivitäten, indem Sie die Protokolle über Grafana analysieren. Weitere Informationen zum Service finden Sie in der Dokumentation zu [Activity Tracker](/docs/services/cloud-activity-tracker/index.html). Weitere Informationen zu den Typen von Ereignissen, die Sie überwachen können, finden Sie im Abschnitt [Activity Tracker-Ereignisse](cs_at_events.html).</td>
 </tr>
 <tr>
@@ -87,8 +90,16 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 <td>Erweitern Sie Ihre Protokollerfassungs-, Aufbewahrungs- und Suchmöglichkeiten mit {{site.data.keyword.loganalysisfull_notm}}. Weitere Informationen finden Sie unter <a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">Automatische Erfassung von Clusterprotokollen aktivieren<img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>Fügen Sie Ihrem Cluster Protokollmanagementfunktionen hinzu, indem Sie LogDNA als Drittanbieterservice auf Ihren Workerknoten implementieren, um Protokolle aus Ihren Pod-Containern zu verwalten. Weitere Informationen finden Sie unter [Kubernetes-Clusterprotokolle mit {{site.data.keyword.loganalysisfull_notm}} und LogDNA verwalten](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube). </td>
+</tr>
+<tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
-<td>Erweitern Sie Ihre Erfassungs- und Aufbewahrungsmöglichkeiten für Metriken, indem Sie Regeln und Alerts mit {{site.data.keyword.monitoringlong_notm}} definieren. Weitere Informationen finden Sie unter <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Metriken in Grafana für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde<img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td>Erweitern Sie Ihre Erfassungs- und Aufbewahrungsmöglichkeiten für Metriken, indem Sie Regeln und Alerts mit {{site.data.keyword.monitoringlong_notm}} definieren. Weitere Informationen finden Sie unter <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Metriken in Grafana für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde<img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>Gewinnen Sie betriebliche Einblicke in die Leistung und den Allgemeinzustand Ihrer Apps, indem Sie Sysdig als Drittanbieterservice auf Ihren Workerknoten bereitstellen, um Metriken an {{site.data.keyword.monitoringlong}} weiterzuleiten. Weitere Informationen finden Sie unter [Metriken für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Hinweis**: Wenn Sie {{site.data.keyword.mon_full_notm}} mit Clustern verwenden, auf denen Kubernetes Version 1.11 oder höher ausgeführt wird, werden nicht alle Containermetriken erfasst, da Sysdig derzeit `containerd` nicht unterstützt. </td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -124,7 +135,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 ## Sicherheitsservices
 {: #security_services}
 
-Möchten Sie einen umfassenden Überblick über die Integration von {{site.data.keyword.Bluemix_notm}}-Sicherheitsservices im Cluster? Überprüfen Sie die Informationen im [Lernprogramm zum Anwenden durchgängiger Sicherheit in einer Cloudanwendung](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application).
+Möchten Sie einen umfassenden Überblick über die Integration von {{site.data.keyword.Bluemix_notm}}-Sicherheitsservices im Cluster? Überprüfen Sie die Informationen im [Lernprogramm zum Anwenden durchgängiger Sicherheit in einer Cloudanwendung](/docs/tutorials/cloud-e2e-security.html).
 {: shortdesc}
 
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
@@ -154,7 +165,7 @@ Möchten Sie einen umfassenden Überblick über die Integration von {{site.data.
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
-  <td>Verschlüsseln Sie die geheimen Kubernetes-Schlüssel im Cluster durch die Aktivierung von {{site.data.keyword.keymanagementserviceshort}}. Das Verschlüsseln der geheimen Kubernetes-Schlüssel verhindert, dass nicht berechtigte Benutzer auf sensible Clusterinformationen zugreifen können. <br>Informationen zum Einrichten finden Sie in <a href="cs_encrypt.html#keyprotect">Geheime Kubernetes-Schlüssel mit {{site.data.keyword.keymanagementserviceshort}} verschlüsseln</a>.<br>Weitere Informationen finden Sie in der <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
+  <td>Verschlüsseln Sie die geheimen Kubernetes-Schlüssel im Cluster durch die Aktivierung von {{site.data.keyword.keymanagementserviceshort}}. Das Verschlüsseln der geheimen Kubernetes-Schlüssel verhindert, dass nicht berechtigte Benutzer auf sensible Clusterinformationen zugreifen können.<br>Informationen zum Einrichten finden Sie in <a href="cs_encrypt.html#keyprotect">Geheime Kubernetes-Schlüssel mit {{site.data.keyword.keymanagementserviceshort}} verschlüsseln</a>.<br>Weitere Informationen finden Sie in der <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -184,7 +195,7 @@ Möchten Sie einen umfassenden Überblick über die Integration von {{site.data.
 <tbody>
 <tr>
   <td>Heptio Ark</td>
-  <td>Sie können <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> verwenden, um Clusterressourcen und PVs (Persistent Volumes) zu sichern und wiederherzustellen. Weitere Informationen finden Sie in der Heptio Ark-Veröffentlichung zu <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">Anwendungsfällen für Disaster-Recovery und Clustermigration <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
+  <td>Sie können <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> verwenden, um Clusterressourcen und PVs (Persistent Volumes) zu sichern und wiederherzustellen. Weitere Informationen finden Sie in der Heptio Ark-Veröffentlichung zu <a href="https://github.com/heptio/ark/blob/release-0.9/docs/use-cases.md" target="_blank">Anwendungsfällen für Disaster-Recovery und Clustermigration <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -212,12 +223,19 @@ Möchten Sie einen umfassenden Überblick über die Integration von {{site.data.
 Fügen Sie {{site.data.keyword.Bluemix_notm}}-Services hinzu, um Ihren Kubernetes-Cluster mit zusätzlichen Funktionen in Bereichen wie Watson AI, Daten, Sicherheit und Internet of Things (IoT) zu erweitern.
 {:shortdesc}
 
-**Wichtig:** Sie können nur Services binden, die Serviceschlüssel unterstützen. Eine Liste mit Services, die Serviceschlüssel unterstützen, finden Sie im Abschnitt [Externen Apps die Verwendung von {{site.data.keyword.Bluemix_notm}}-Services ermöglichen](/docs/apps/reqnsi.html#accser_external).
+Sie können nur Services binden, die Serviceschlüssel unterstützen. Eine Liste mit Services, die Serviceschlüssel unterstützen, finden Sie im Abschnitt [Externen Apps die Verwendung von {{site.data.keyword.Bluemix_notm}}-Services ermöglichen](/docs/resources/connect_external_app.html#externalapp).
+{: note}
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
+Vorbemerkungen:
+- Stellen Sie sicher, dass Sie die folgenden Rollen innehaben: 
+    - [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Editor** oder **Administrator**](cs_users.html#platform) für den Cluster. 
+    - [Cloud Foundry-Rolle **Entwickler**](/docs/iam/mngcf.html#mngcf) für den Bereich, den Sie verwenden möchten. 
+- [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
 Gehen Sie wie folgt vor, um einen {{site.data.keyword.Bluemix_notm}}-Service zu Ihrem Cluster hinzuzufügen:
-1. [Erstellen Sie eine Instanz des {{site.data.keyword.Bluemix_notm}}-Service](/docs/apps/reqnsi.html#req_instance). </br></br>**Hinweis:**<ul><li> Bestimmte {{site.data.keyword.Bluemix_notm}}-Services sind nur in ausgewählten Regionen verfügbar. Sie können einen Service nur an Ihren Cluster binden, wenn der Service in derselben Region wie Ihr Cluster verfügbar ist. Wenn Sie eine Serviceinstanz in der Zone 'Washington DC' erstellen wollen, müssen Sie außerdem die CLI verwenden.</li><li>Sie müssen die Serviceinstanz in derselben Ressourcengruppe wie den Cluster erstellen. Eine Ressource kann in nur einer Ressourcengruppe erstellt werden; eine Änderung ist danach nicht mehr möglich.</li></ul>
+1. [Erstellen Sie eine Instanz des {{site.data.keyword.Bluemix_notm}}-Service](/docs/apps/reqnsi.html#req_instance).
+    * Bestimmte {{site.data.keyword.Bluemix_notm}}-Services sind nur in ausgewählten Regionen verfügbar. Sie können einen Service nur an Ihren Cluster binden, wenn der Service in derselben Region wie Ihr Cluster verfügbar ist. Wenn Sie eine Serviceinstanz in der Zone 'Washington DC' erstellen wollen, müssen Sie außerdem die CLI verwenden.
+    * Sie müssen die Serviceinstanz in derselben Ressourcengruppe wie den Cluster erstellen. Eine Ressource kann in nur einer Ressourcengruppe erstellt werden; eine Änderung ist danach nicht mehr möglich.
 
 2. Überprüfen Sie den Servicetyp, den Sie erstellt haben, und notieren Sie die Serviceinstanz **Name**.
    - **Cloud Foundry-Services:**
@@ -233,7 +251,7 @@ Gehen Sie wie folgt vor, um einen {{site.data.keyword.Bluemix_notm}}-Service zu 
      ```
      {: screen}
 
-  - **IAM-fähige Services:**
+  - **{{site.data.keyword.Bluemix_notm}}IAM-fähige Services:**
      ```
      ibmcloud resource service-instances
      ```
@@ -248,7 +266,7 @@ Gehen Sie wie folgt vor, um einen {{site.data.keyword.Bluemix_notm}}-Service zu 
 
    Sie können die verschiedenen Servicetypen auch in Ihrem Dashboard als **Cloud Foundry Services** und **Services** sehen.
 
-3. Erstellen Sie für IAM-fähige Services einen Cloud Foundry-Aliasnamen, sodass Sie diesen Service an Ihren Cluster binden können. Wenn es sich bei Ihrem Service bereits um einen Cloud Foundry-Service handelt, ist dieser Schritt nicht erforderlich und Sie können mit dem nächsten Schritt fortfahren.
+3. Erstellen Sie für {{site.data.keyword.Bluemix_notm}} IAM-fähige Services einen Cloud Foundry-Aliasnamen, sodass Sie diesen Service an Ihren Cluster binden können. Wenn es sich bei Ihrem Service bereits um einen Cloud Foundry-Service handelt, ist dieser Schritt nicht erforderlich und Sie können mit dem nächsten Schritt fortfahren.
    1. Wählen Sie eine Cloud Foundry-Organisation und einen Cloud Foundry-Bereich als Ziel aus.
       ```
       ibmcloud target --cf
@@ -268,19 +286,12 @@ Gehen Sie wie folgt vor, um einen {{site.data.keyword.Bluemix_notm}}-Service zu 
       {: pre}
 
 4. Geben Sie den Clusternamensbereich an, den Sie verwenden wollen, um Ihren Service hinzuzufügen. Wählen Sie eine der folgenden Optionen aus.
-   - Lassen Sie eine Liste der vorhandenen Namensbereiche anzeigen und wählen Sie einen Namensbereich aus, den Sie verwenden wollen.
      ```
      kubectl get namespaces
      ```
      {: pre}
 
-   - Erstellen Sie einen Namensbereich in Ihrem Cluster.
-     ```
-     kubectl create namespace <name_des_namensbereichs>
-     ```
-     {: pre}
-
-5.  Fügen Sie den Service zu Ihrem Cluster hinzu. Stellen Sie bei IAM-fähigen Services sicher, dass Sie den Cloud Foundry-Aliasnamen verwenden, den Sie zuvor erstellt haben.
+5.  Fügen Sie den Service zu Ihrem Cluster hinzu. Stellen Sie bei {{site.data.keyword.Bluemix_notm}} IAM-fähigen Services sicher, dass Sie den Cloud Foundry-Aliasnamen verwenden, den Sie zuvor erstellt haben.
     ```
     ibmcloud ks cluster-service-bind <clustername_oder_-id> <namensbereich> <serviceinstanzname>
     ```
@@ -290,10 +301,10 @@ Gehen Sie wie folgt vor, um einen {{site.data.keyword.Bluemix_notm}}-Service zu 
 
     Beispielausgabe:
     ```
-    ibmcloud ks cluster-service-bind mein_cluster mein_namensbereich cleardb
+    ibmcloud ks cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
-    Namespace:	mein_namensbereich
+    Namespace:	mynamespace
     Secret name:     binding-<serviceinstanzname>
     ```
     {: screen}
@@ -649,7 +660,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 
 1. Installieren Sie die <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm-CLI <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.
 
-2. **Wichtig**: Erstellen Sie zur Gewährleistung der Clustersicherheit ein Servicekonto für Tiller im Namensbereich `kube-system` und eine RBAC-Clusterrollenbindung für Kubernetes für den Pod `tiller-deploy`; verwenden Sie hierzu die folgende `.yaml`-Datei aus dem [{{site.data.keyword.Bluemix_notm}}-Repository `kube-samples`](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml).**Hinweis**: Wenn Sie Tiller mit dem Servicekonto und der Cluster-Rollenbindung im Namensbereich `kube-system` installieren möchten, müssen Sie über die Rolle [`cluster-admin`](cs_users.html#access_policies) verfügen.
+2. **Wichtig**: Erstellen Sie zur Gewährleistung der Clustersicherheit ein Servicekonto für Tiller im Namensbereich `kube-system` und eine RBAC-Clusterrollenbindung für Kubernetes für den Pod `tiller-deploy`; verwenden Sie hierzu die folgende `.yaml`-Datei aus dem [{{site.data.keyword.Bluemix_notm}}-Repository `kube-samples`](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml). **Hinweis**: Wenn Sie Tiller mit dem Servicekonto und der Cluster-Rollenbindung im Namensbereich `kube-system` installieren möchten, müssen Sie über die Rolle [`cluster-admin`](cs_users.html#access_policies) verfügen.
     ```
     kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml
     ```
@@ -715,7 +726,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 {: #helm_links}
 
 * Informationen zur Verwendung von StrongSwan finden Sie unter [Einrichtung von VPN-Konnektivität mit dem Helm-Diagramm des StrongSwan-IPSec-VPN-Service](cs_vpn.html#vpn-setup).
-* Zeigen Sie verfügbare Helm-Diagramme an, die Sie mit {{site.data.keyword.Bluemix_notm}} in der GUI des [Helm-Diagrammkatalogs![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) verwenden können.
+* Zeigen Sie verfügbare Helm-Diagramme an, die Sie mit {{site.data.keyword.Bluemix_notm}} im [Helm-Diagrammkatalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) in der Konsole verwenden können. 
 * Weitere Informationen zu den Helm-Befehlen zum Konfigurieren und Verwalten von Helm-Diagrammen finden Sie in der <a href="https://docs.helm.sh/helm/" target="_blank">Helm-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.
 * Über den folgenden Link finden Sie weitere Informationen zur Vorgehensweise bei der [Erhöhung der Bereitstellungsgeschwindigkeit mit Kubernetes-Helm-Diagrammen![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 

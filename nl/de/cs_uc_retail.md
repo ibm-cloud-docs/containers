@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -28,8 +31,9 @@ Anhand der folgenden Anwendungsfälle wird hervorgehoben, wie Workloads in {{sit
 {: #uc_data-share}
 
 Der Leiter eines Geschäftsbereichs muss die Anzahl der Vertriebskanäle erhöhen, das Einzelhandelssystem ist jedoch in einem lokalen Rechenzentrum isoliert. Die Konkurrenz verfügt über globale Partner für das Cross-Selling und Up-Selling ihrer Produkte: traditionell und online. 
+{: shortdesc}
 
-Warum {{site.data.keyword.cloud_notm}}: Von {{site.data.keyword.containerlong_notm}} wird ein Ökosystem in der öffentlichen Cloud bereitgestellt, in dem neue Partner und weitere externe Player über Container mithilfe von APIs gemeinsam Apps und Daten entwickeln können. Sobald sich das Einzelhandelssystem in der öffentlichen Cloud befindet, wird die gemeinsame Datennutzung optimiert und Entwicklung neuer Apps beschleunigt. Die Bereitstellungen der Apps nehmen zu, wenn die Entwickler ohne großen Aufwand experimentieren und mit Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen.  
+Warum {{site.data.keyword.cloud_notm}}: Von {{site.data.keyword.containerlong_notm}} wird ein Ökosystem in der öffentlichen Cloud bereitgestellt, in dem neue Partner und weitere externe Player über Container mithilfe von APIs gemeinsam Apps und Daten entwickeln können. Sobald sich das Einzelhandelssystem in der öffentlichen Cloud befindet, wird die gemeinsame Datennutzung optimiert und Entwicklung neuer Apps beschleunigt. Die Bereitstellungen der Apps nehmen zu, wenn die Entwickler ohne großen Aufwand experimentieren und mit Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen. 
 
 {{site.data.keyword.containerlong_notm}} und Schlüsseltechnologien:
 * [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](cs_clusters_planning.html#shared_dedicated_node)
@@ -38,7 +42,7 @@ Warum {{site.data.keyword.cloud_notm}}: Von {{site.data.keyword.containerlong_no
 
 **Einzelhandelsunternehmen nutzt Daten mithilfe von APIs gemeinsam mit globalen Partnern zur Stärkung des Omni-Channel-Vertriebs**
 
-* Der Einzelhändler unterliegt einem sehr starken Wettbewerbsdruck. Zum einen muss der Einzehhändler dafür sorgen, dass die Übergänge zu neuen Produkten und Vertriebswegen für den Kunden nicht allzu komplex erscheinen. So muss zum Beispiel die Differenzierung der Produkte verbessert werden. Zum anderen muss es für die Kunden einfacher sein, zwischen den Marken hin- und herzuwechseln.
+* Der Einzelhändler unterliegt einem sehr starken Wettbewerbsdruck. Zum einen muss der Einzelhändler dafür sorgen, dass die Übergänge zu neuen Produkten und Vertriebswegen für den Kunden nicht allzu komplex erscheinen. So muss zum Beispiel die Differenzierung der Produkte verbessert werden. Zum anderen muss es für die Kunden einfacher sein, zwischen den Marken hin- und herzuwechseln.
 * Diese Möglichkeit zum Wechseln zwischen den Marken bedeutet, dass für das gesamte Einzelhandelssystem Verbindungen zu den jeweiligen Partnern erforderlich sind. Außerdem kann die Cloud einen zusätzlichen Wert durch den Kontakt zu Partnern, Kunden und anderen externen Playern mit sich bringen. 
 * Extrem umsatzstarke Benutzertermine wie der schwarze Freitag (Black Friday) sind eine enorme Belastung für Onlinesysteme und zwingen das Einzelhandelsunternehmen zur Bereitstellung zusätzlicher Recheninfrastruktur. 
 * Die Entwickler des Einzelhandelsunternehmens mussten ständig Apps weiterentwickeln, aber die traditionellen Tools verlangsamten ihre Fähigkeit, Aktualisierungen und Funktionen häufig bereitzustellen, besonders dann, wenn sie mit Partnerteams zusammenarbeiten.  
@@ -54,7 +58,7 @@ Die Lösung besteht aus den folgenden wichtigen Bestandteilen:
 * Cross-Selling und Up-Selling: Eine App, von der Gelegenheiten für Cross-Selling und Up-Selling mit APIs bereitgestellt werden, die in unterschiedlichen E-Commerce-Apps und mobilen Apps verwendet werden kann
 * Entwicklungsumgebung: Kubernetes-Cluster für Entwicklungs-, Test- und Produktionssysteme verbessern die Zusammenarbeit und gemeinsame Datennutzung zwischen dem Einzelhandelsunternehmen und seinen Partnern
 
-Damit das Einzelhandelsunternehmen mit globalen Partnern zusammenarbeiten kann, müssen an den APIs für den Lagerbestand Änderungen vorgenommen werden, damit die Sprache und die Marktvorgaben für jede einzelne Region angepasst werden können. {{site.data.keyword.containerlong_notm}} bietet eine Abdeckung in mehreren Regionen, darunter Nordamerika, Europa, Asien und Australien; hierbei spiegeln die APIs die Bedürfnisse der einzelnen Länder wieder und die Latenzzeit ist gering.
+Damit das Einzelhandelsunternehmen mit globalen Partnern zusammenarbeiten kann, müssen an den APIs für den Lagerbestand Änderungen vorgenommen werden, damit die Sprache und die Marktvorgaben für jede einzelne Region angepasst werden können. {{site.data.keyword.containerlong_notm}} bietet eine Abdeckung in mehreren Regionen, darunter Nordamerika, Europa, Asien und Australien; hierbei spiegeln die APIs die Bedürfnisse der einzelnen Länder wieder und stellen eine kurze Latenzzeit für API-Aufrufe sicher. 
 
 Eine weitere Voraussetzung ist, dass die gemeinsame Nutzung der Bestandsdaten mit den Kunden der Partner und des Unternehmens möglich ist. Mit den APIs für die Bestandsdaten können die Entwickler Informationen in Apps bereitstellen, zum Beispiel als mobile Bestandsdaten-Apps oder E-Commerce-Lösungen für das World Wide Web. Die Entwickler sind auch mit dem Aufbau und der Pflege der primären E-Commerce-Site beschäftigt. Somit müssen sie sich auf die Codierung und nicht auf die Verwaltung der Infrastruktur konzentrieren. 
 
@@ -69,7 +73,7 @@ Darüber hinaus wird die Protokollierung und Überwachung der API-Microservices,
 
 **Lösungsmodell**
 
-Bedarfsgerechte Rechenkapazität, Speicherkapazität und ein Ereignismanagement, das nach Bedarf in einer öffentlichen Cloud mit Zugriff auf die Bestandsdaten auf der ganzen Welt ausgeführt wird.  
+Bedarfsgerechte Rechenkapazität, Speicherkapazität und ein Ereignismanagement, das nach Bedarf in einer öffentlichen Cloud mit Zugriff auf die Bestandsdaten auf der ganzen Welt ausgeführt wird. 
 
 Technische Lösung:
 * {{site.data.keyword.containerlong_notm}}
@@ -100,7 +104,7 @@ Technische Lösung:
 * {{site.data.keyword.containerlong_notm}} bietet eine einfache Durchführung von Rollouts und Rollbacks für die Apps; angepasste Apps werden unter Verwendung des intelligenten Routings und Lastausgleichs von Istio zum Testen von Kampagnen bereitgestellt. 
 
 **Ergebnisse**
-* Mit Microservices wird die Bereitstellungszeit für Patches, Fehlerkorrekturen und neue Funktionen erheblich reduziert. Die erstmalige weltweite Entwicklung verläuft schnell und Aktualisierungen werden bis zu 40 Mal pro Woche bereitgestellt.
+* Mit Microservices wird die Bereitstellungszeit für Patches, Fehlerkorrekturen und neue Funktionen erheblich reduziert. Die erstmalige weltweite Entwicklung verläuft schnell und Aktualisierungen werden bis zu 40 Mal pro Woche bereitgestellt. 
 * Der Einzelhändler und seine Partner verfügen mithilfe von APIs über direkten Zugriff auf die Bestandsverfügbarkeit und Bereitstellungszeitpläne. 
 * Mit {{site.data.keyword.containerlong_notm}} und den IBM CI/CD-Tools können Kampagnen mit A-B-Versionen der Apps getestet werden. 
 * {{site.data.keyword.containerlong_notm}} bietet eine skalierbare Rechenleistung, sodass die Workloads für Lagerbestand und Cross-Selling in Zeiträumen mit hohem Umsatz zunehmen können, zum Beispiel in den Herbstferien. 
@@ -109,6 +113,7 @@ Technische Lösung:
 {: #uc_grocer}
 
 Ein Chief Marketing Officer (CMO) muss das Kundenaufkommen in den Geschäften durch Betonung des Einkaufserlebnisses in den Geschäften um 20 % steigern. Der Umsatz verlagert sich zunehmend zu großen Mitbewerbern aus dem Einzelhandel und dem Online-Einzelhandel. Gleichzeitig muss der CMO den Lagerbestand ohne Preisabschläge reduzieren, da eine zu lange Lagerhaltung Millionen an Kapital bindet.
+{: shortdesc}
 
 Warum {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} bietet leicht bereitzustellende Rechenkapazität, mit deren Hilfe Entwickler schnell Cloud Analytics-Services für Erkenntnisse zum Einkaufsverhalten und der Anpassungsfähigkeit des digitalen Markts hinzufügen können. 
 

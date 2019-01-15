@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -56,6 +59,7 @@ Softwareentwickler und Netzadministratoren, die erstmalig eine App in einem Kube
 ## Voraussetzungen
 
 * [Lernprogramm: Kubernetes-Cluster erstellen](cs_tutorials.html#cs_cluster_tutorial).
+* Installieren Sie das [Plug-in 'container-registry'](/docs/services/Registry/index.html#registry_cli_install). 
 
 
 ## Lerneinheit 1: Einzelinstanz-Apps auf Kubernetes-Clustern bereitstellen
@@ -89,7 +93,7 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
 
 3. [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
-5.  Melden Sie sich an der {{site.data.keyword.registryshort_notm}}-CLI an. **Hinweis**: Stellen Sie sicher, dass das Plug-in 'container-registry' [installiert](/docs/services/Registry/index.html#registry_cli_install) ist.
+5.  Melden Sie sich an der {{site.data.keyword.registryshort_notm}}-CLI an.
 
     ```
     ibmcloud cr login
@@ -219,8 +223,8 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
     2.  Rufen Sie die öffentliche IP-Adresse für den Workerknoten im Cluster ab.
 
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
-        ```
+            ibmcloud ks workers <clustername_oder_-id>
+            ```
         {: pre}
 
         Beispielausgabe:
@@ -230,7 +234,7 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
         ```
         {: screen}
 
@@ -247,7 +251,7 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
 
 11. [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
 
-    Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-GUI](https://console.bluemix.net/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
+    Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://console.bluemix.net/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
     {: tip}
 
 12. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt.
@@ -374,7 +378,7 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
   ```
   {: screen}
 
-7.  Überprüfen Sie Ihren Podstatus, um den Zustand Ihrer App in Kubernetes zu überwachen. Sie können den Status über die CLI oder über die Kubernetes-Dashboard-GUI überprüfen.
+7.  Überprüfen Sie Ihren Podstatus, um den Zustand Ihrer App in Kubernetes zu überwachen. Sie können den Status über die CLI oder im Kubernetes-Dashboard überprüfen. 
 
     *  **Über die CLI**: Beobachten Sie, was mit Ihren Pods geschieht, während sich ihr Status ändert.
        ```
@@ -382,7 +386,7 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
        ```
        {: pre}
 
-    *  **Über die GUI**:
+    *  **Im Kubernetes-Dashboard**:
 
        1.  [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard).
        2.  Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt. Von dieser Registerkarte aus können Sie die Anzeige fortlaufend aktualisieren lassen und sicherstellen, dass die Statusprüfung ordnungsgemäß funktioniert. Im Abschnitt **Pods** wird angegeben, wie häufig die Pods erneut gestartet werden, wenn die in ihnen enthaltenen Container erneut erstellt werden. Falls Sie per Zufall den folgenden Fehler im Dashboard abfangen, so beachten Sie, das diese Nachricht darauf hinweist, dass bei der Statusprüfung ein Problem festgestellt wurde. Warten Sie einige Minuten ab und aktualisieren Sie dann die Anzeige erneut. Sie können erkennen, dass die Anzahl von Neustarts für jeden Pod variiert.
@@ -527,10 +531,7 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         {: codeblock}
 
     2.  Aktualisieren Sie im Datenträgerabschnitt der Watson-Bereitstellung den Namen des geheimen Schlüssels
-für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den Sie im vorherigen Lernprogramm erstellt haben. Wenn Sie den geheimen Kubernetes-Schlüssel als Datenträger an Ihre Bereitstellung anhängen, stellen Sie die
-{{site.data.keyword.Bluemix_notm}}-Serviceberechtigungsnachweise
-dem Container zur Verfügung, der in Ihrem Pod ausgeführt wird. Die {{site.data.keyword.watson}}-App-Komponenten in diesem Lernprogramm sind so konfiguriert, dass sie die
-Serviceberechtigungsnachweise unter Verwendung des Datenträgermountpfads suchen.
+für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den Sie im vorherigen Lernprogramm erstellt haben. Wenn Sie den geheimen Kubernetes-Schlüssel als Datenträger an Ihre Bereitstellung anhängen, stellen Sie den {{site.data.keyword.Bluemix_notm}} IAM-API-Schüssel (Identity and Access Management) dem Container zur Verfügung, der in Ihrem Pod ausgeführt wird. Die {{site.data.keyword.watson}}-App-Komponenten in diesem Lernprogramm sind so konfiguriert, dass sie den API-Schlüssel unter Verwendung des Datenträgermountpfads suchen. 
 
         ```
         volumes:

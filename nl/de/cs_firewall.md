@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -29,7 +32,7 @@ lastupdated: "2018-10-25"
 * [Ausführen von `calicoctl`-Befehlen](#firewall_calicoctl) aus Ihrem lokalen System, wenn die Netzrichtlinien eines Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
 * [Zulassen der Kommunikation zwischen dem Kubernetes-Master und den Workerknoten](#firewall_outbound), wenn entweder eine Firewall für die Workerknoten eingerichtet wurde oder wenn die Firewalleinstellungen in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) angepasst wurden.
 * [Zulassen, dass der Cluster über eine Firewall im privaten Netz auf die Ressourcen zugreift](#firewall_private).
-* [Zugreifen auf den NodePort-Service, Service für die Lastausgleichsfunktion oder Ingress-Service von außerhalb des Clusters](#firewall_inbound).
+* [Zugreifen auf den NodePort-Service, Lastausgleichsservice oder Ingress-Service von außerhalb des Clusters](#firewall_inbound).
 
 <br />
 
@@ -83,9 +86,9 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
    ```
    {: pre}
 
-2. Wenn sich der Cluster in einer anderen Ressourcengruppe als `default` befindet, geben Sie diese Ressourcengruppe als Ziel an. **Anmerkung:** Sie müssen mindestens über die [Rolle **Anzeigeberechtigter**](cs_users.html#platform) für die Ressourcengruppe verfügen.
+2. Wenn sich der Cluster in einer anderen Ressourcengruppe als `default` befindet, geben Sie diese Ressourcengruppe als Ziel an. Um die Ressourcengruppen anzuzeigen, zu denen die einzelnen Cluster gehören, führen Sie `ibmcloud ks clusters` aus. **Hinweis:** Sie müssen mindestens über die [Rolle **Anzeigeberechtigter**](cs_users.html#platform) für die Ressourcengruppe verfügen.
    ```
-   ibmcloud target -g <resource_group_name>
+   ibmcloud target -g <ressourcengruppenname>
    ```
    {: pre}
 
@@ -113,7 +116,7 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
    Beispielausgabe:
    ```
    ...
-   Master URL:		https://169.xx.xxx.xxx:31142
+   Master URL:		https://c3.<region>.containers.cloud.ibm.com
    ...
    ```
    {: screen}
@@ -129,7 +132,7 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
 
    Beispielbefehl:
    ```
-   curl --insecure https://169.xx.xxx.xxx:31142/version
+   curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
    ```
    {: pre}
 
@@ -190,7 +193,10 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
     {: pre}
 
 2.  Ermöglichen Sie Netzverkehr von der Quelle _<öffentliche_IP_für_jeden_workerknoten>_ zum Ziel-TCP/UDP-Portbereich 20000-32767 und zum Port 443 sowie für die folgenden IP-Adressen und Netzgruppen. Wenn Ihre Unternehmensfirewall verhindert, dass Ihr lokales System auf öffentliche Internetendpunkte zugreifen kann, führen Sie diesen Schritt sowohl für Ihre Quellen-Workerknoten als auch für Ihr lokales System aus.
-    - **Wichtig**: Sie müssen den ausgehenden Datenverkehr am Port 443 für alle Zonen in der Region zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn sich Ihr Cluster beispielsweise in den USA (Süden) befindet, dann müssen Sie den Datenverkehr von den öffentlichen IPs jedes Ihrer Workerknoten an Port 443 der IP-Adresse für alle Zonen (dal10, dal12, dal13) zulassen.
+
+    Sie müssen den ausgehenden Datenverkehr am Port 443 für alle Zonen in der Region zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn sich Ihr Cluster beispielsweise in den USA (Süden) befindet, dann müssen Sie den Datenverkehr von den öffentlichen IPs jedes Ihrer Workerknoten an Port 443 der IP-Adresse für alle Zonen zulassen.
+    {: important}
+
     <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
     <caption>Zu öffnende IP-Adressen für abgehenden Datenverkehr</caption>
         <thead>
@@ -201,33 +207,33 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       <tbody>
         <tr>
           <td>Asien-Pazifik (Norden)</td>
-          <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-          <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+          <td>che01<br>hkg02<br>seo01<br>sng01<br>tok02, tok04, tok05</td>
+          <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210, 128.168.71.117, 165.192.69.69</code></td>
          </tr>
         <tr>
            <td>Asien-Pazifik (Süden)</td>
-           <td>mel01<br>syd01<br>syd04</td>
-           <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19, 130.198.66.34</code></td>
+           <td>mel01<br>syd01, syd04</td>
+           <td><code>168.1.97.67</code><br><code>168.1.8.195, 130.198.66.26, 168.1.12.98, 130.198.64.19</code></td>
         </tr>
         <tr>
            <td>Mitteleuropa</td>
-           <td>ams03<br>fra02<br>mil01<br>osl01<br>par01</td>
-           <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+           <td>ams03<br>mil01<br>osl01<br>par01<br>fra02, fra04, fra05</td>
+           <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code><br><code>169.50.56.174, 161.156.65.42, 149.81.78.114</code></td>
           </tr>
         <tr>
           <td>Vereinigtes Königreich (Süden)</td>
-          <td>lon02<br>lon04</td>
-          <td><code>159.122.242.78</code><br><code>158.175.65.170, 158.175.74.170, 158.175.76.2</code></td>
+          <td>lon02, lon04, lon05, lon06</td>
+          <td><code>159.122.242.78, 158.175.111.42, 158.176.94.26, 159.122.224.242, 158.175.65.170, 158.176.95.146</code></td>
         </tr>
         <tr>
           <td>Vereinigte Staaten (Osten)</td>
-           <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
-           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+           <td>mon01<br>tor01<br>wdc04, wdc06, wdc07</td>
+           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.63.88.186, 169.60.73.142, 169.61.109.34, 169.63.88.178, 169.60.101.42, 169.61.83.62</code></td>
         </tr>
         <tr>
           <td>Vereinigte Staaten (Süden)</td>
-          <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01<br>sjc03<br>sjc04</td>
-          <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code></td>
+          <td>hou02<br>sao01<br>sjc03<br>sjc04<br>dal10,dal12,dal13</td>
+          <td><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><code>169.46.7.238, 169.48.230.146, 169.61.29.194, 169.46.110.218, 169.47.70.10, 169.62.166.98, 169.48.143.218, 169.61.177.2, 169.60.128.2</code></td>
         </tr>
         </tbody>
       </table>
@@ -247,12 +253,12 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
         <tr>
           <td>Über {{site.data.keyword.containerlong_notm}}-Regionen hinweg verfügbare globale Registry</td>
           <td>registry.bluemix.net</td>
-          <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
+          <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29></code></td>
         </tr>
         <tr>
           <td>Asien-Pazifik (Norden), Asien-Pazifik (Süden)</td>
           <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></td>
         </tr>
         <tr>
           <td>Mitteleuropa</td>
@@ -262,7 +268,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
          <tr>
           <td>Vereinigtes Königreich (Süden)</td>
           <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
          </tr>
          <tr>
           <td>Vereinigte Staaten (Osten), Vereinigte Staaten (Süden)</td>
@@ -273,10 +279,11 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       </table>
 </p>
 
-4. Optional: Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.monitoringlong_notm}} und die {{site.data.keyword.loganalysislong_notm}}-Services:
-    - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
-    - Ersetzen Sie <em>&lt;monitoring_public_IP&gt;</em> durch alle Adressen für die Überwachungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
-      <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
+4.  Optional: Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, und LogDNA-Services: 
+    *   **{{site.data.keyword.monitoringlong_notm}}**:
+        <pre class="screen">TCP port 443, port 9095 FROM &lt;öffentliche_ip_jedes_workerknotens&gt; TO &lt;öffentliche_ip_der_überwachung&gt;</pre>
+        Ersetzen Sie <em>&lt;öffentliche_ip_der_überwachung&gt;</em> durch alle Adressen für die Überwachungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
+        <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
   <caption>Zu öffnende IP-Adressen für die Überwachung von Datenverkehr</caption>
         <thead>
         <th>{{site.data.keyword.containerlong_notm}}-Region</th>
@@ -303,9 +310,10 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
         </tbody>
       </table>
 </p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
-    - Ersetzen Sie <em>&lt;logging_public_IP&gt;</em> durch alle Adressen für die Protokollierungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
-      <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
+    *   **{{site.data.keyword.loganalysislong_notm}}**:
+        <pre class="screen">TCP port 443, port 9091 FROM &lt;öffentliche_ip_jedes_workerknotens&gt; TO &lt;öffentliche_ip_der_protokollierung&gt;</pre>
+        Ersetzen Sie <em>&lt;öffentliche_ip_der_protokollierung&gt;</em> durch alle Adressen für die Protokollierungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
+        <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
 <caption>Zu öffnende IP-Adressen für die Protokollierung von Datenverkehr</caption>
         <thead>
         <th>{{site.data.keyword.containerlong_notm}}-Region</th>
@@ -317,7 +325,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
             <td>Vereinigte Staaten (Osten), Vereinigte Staaten (Süden)</td>
             <td>ingest.logging.ng.bluemix.net</td>
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-           </tr>
+          </tr>
           <tr>
            <td>Vereinigtes Königreich (Süden)</td>
            <td>ingest.logging.eu-gb.bluemix.net</td>
@@ -336,13 +344,15 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
          </tbody>
        </table>
 </p>
+    *   **{{site.data.keyword.la_full_notm}}**:
+        <pre class="screen">TCP port 443, port 80 FROM &lt;öffentliche_ip_jedes_workerknotens&gt; TO &lt;öffentliche_logDNA-ip&gt;</pre>
+        Ersetzen Sie `<öffentliche_logDNA_ip>` durch die [LogDNA-IP-Adressen](/docs/services/Log-Analysis-with-LogDNA/network.html#ips). 
 
 5. Wenn Sie Services der Lastausgleichsfunktion verwenden, müssen Sie sicherstellen, dass der gesamte Datenverkehr, der das VRRP-Protokoll verwendet, zwischen Workerknoten auf öffentlichen und privaten Schnittstellen zulässig ist. {{site.data.keyword.containerlong_notm}} verwendet das VRRP-Protokoll, um IP-Adressen für öffentliche und private Lastausgleichsfunktionen zu verwalten.
 
-6. {: #pvc}Um Persistent Volume Claims für Datenspeicher zu erstellen, lassen Sie Egress-Zugriff über Ihre Firewall für die [IP-Adressen der IBM Cloud-Infrastruktur (SoftLayer)](/docs/infrastructure/hardware-firewall-dedicated/ips.html#ibm-cloud-ip-ranges) der Zone zu, in der sich Ihr Cluster befindet.
-    - Um die Zone des Clusters zu ermitteln, führen Sie `ibmcloud ks clusters` aus.
-    - Ermöglichen Sie Zugriff auf den IP-Bereich des [**(öffentlichen) Front-End-Netzes**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) und des [**privaten Back-End-Netzes**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network).
-    - Beachten Sie, dass Sie die Zone `dal01` (Rechenzentrum) für das **(private) Back-End-Netz** hinzufügen müssen.
+6. {: #pvc}Um Persistent Volume Claims für Datenspeicher zu erstellen, lassen Sie Egress-Zugriff über Ihre Firewall auf die IBM Cloud-Infrastruktur (SoftLayer) zu: 
+    - Lassen Sie Zugriff auf den API-Endpunkt der IBM Cloud-Infrastruktur (SoftLayer) zu, um das Bereitstellen von Anforderungen zu initialisieren: `TCP port 443 FROM <öffentliche_ip_jedes_workerknotens> TO 66.228.119.120`.
+    - Lassen Sie Zugriff auf den IP-Bereich der IBM Cloud-Infrastruktur (SoftLayer) für die Zone zu, in der sich Ihr Cluster befindet - sowohl für das [**(öffentliche) Front-End-Netz**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) als auch für das [**(private) Back-End-Netz**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network). Um die Zone des Clusters zu ermitteln, führen Sie `ibmcloud ks clusters` aus.
 
 <br />
 
@@ -382,7 +392,7 @@ Sie können eingehenden Zugriff auf NodePort-, LoadBalancer- und Ingress-Service
 <dl>
   <dt>NodePort-Service</dt>
   <dd>Öffnen Sie den Port, den Sie bei der Bereitstellung des Service an den öffentlichen IP-Adressen für alle Workerknoten konfiguriert haben, mit denen Datenverkehr möglich sein soll. Führen Sie `kubectl get svc` aus, um den Port zu suchen. Der Port liegt im Bereich 20000-32000.<dd>
-  <dt>Service für die Lastausgleichsfunktion</dt>
+  <dt>Lastausgleichsservice</dt>
   <dd>Öffnen Sie den Port, den Sie bei der Bereitstellung des LoadBalancer-Service an der öffentlichen IP-Adresse konfiguriert haben.</dd>
   <dt>Ingress</dt>
   <dd>Öffnen Sie Port 80 für HTTP oder Port 443 für HTTPS an der IP-Adresse für die Ingress-Lastausgleichsfunktion für Anwendungen.</dd>

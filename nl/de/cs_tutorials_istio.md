@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -41,8 +44,8 @@ Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipie
 
 ## Voraussetzungen
 
--  [Installieren Sie die IBM Cloud-CLI, das {{site.data.keyword.containerlong_notm}}-Plug-in und die Kubernetes-CLI](cs_cli_install.html#cs_cli_install_steps). Für Istio ist Kubernetes Version 1.9 oder höher erforderlich. Stellen Sie sicher, dass Sie die CLI-Version von `kubectl` installieren, die der Kubernetes-Version Ihres Clusters entspricht.
--  [Erstellen Sie einen Cluster, auf dem Kubernetes Version 1.9 oder höher ausgeführt wird](cs_clusters.html#clusters_cli), oder [aktualisieren Sie einen vorhandenen Cluster auf Version 1.9](cs_versions.html#cs_v19).
+-  [Installieren Sie die IBM Cloud-CLI, das {{site.data.keyword.containerlong_notm}}-Plug-in und die Kubernetes-CLI](cs_cli_install.html#cs_cli_install_steps). Stellen Sie sicher, dass Sie die CLI-Version von `kubectl` installieren, die der Kubernetes-Version Ihres Clusters entspricht.
+-  [Erstellen Sie einen Cluster](cs_clusters.html#clusters_cli).  
 -  [Richten Sie die CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure).
 
 ## Lerneinheit 1: Istio herunterladen und installieren
@@ -260,5 +263,5 @@ Wenn Sie die Arbeit mit Istio abgeschlossen haben und Istio nicht [weiter erkund
 * Weitere Anleitungen zur Verwendung von Istio finden Sie in der [Istio-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/).
     * [Intelligentes Routing ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/docs/guides/intelligent-routing.html): In diesem Beispiel wird die Verwendung der verschiedenen Funktionen zur Verwaltung des Datenverkehrs in Istio aufgezeigt, um in BookInfo Datenverkehr an eine bestimmte Version der Mikroservices für Rezensionen und Bewertungen weiterzuleiten.
     * [Intelligentes Routing ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/docs/guides/telemetry.html): In diesem Beispiel wird die Verwendung der verschiedenen Funktionen zur Verwaltung des Datenverkehrs in Istio aufgezeigt, um in BookInfo Datenverkehr an eine bestimmte Version der Mikroservices für Rezensionen und Bewertungen weiterzuleiten.
-* Belegen Sie die [Kognitive Klasse: Einführung in Mikroservices mit Istio und IBM Cloud Kubernetes-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/). **Anmerkung**: Sie können den Abschnitt zur Istio-Installation in diesem Kurs überspringen.
+* Belegen Sie die [Kognitive Klasse: Einführung in Mikroservices mit Istio und IBM Cloud Kubernetes-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/). **Hinweis**: Sie können den Abschnitt zur Istio-Installation in diesem Kurs überspringen.
 * Sehen Sie sich diesen Blogbeitrag zur Verwendung von [Vistio ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) an, um Ihr Istio-Servicenetz zu visualisieren.

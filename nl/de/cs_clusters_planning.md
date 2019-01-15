@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -53,6 +56,10 @@ Ja, wenn sich der Cluster in einer der [ unterstützten Metropolen mit mehreren 
 **Muss ich Mehrzonencluster verwenden?**</br>
 Nein. Sie können so viele Einzelzonencluster erstellen, wie Sie möchten. Möglicherweise bevorzugen Sie tatsächlich Einzelzonencluster für ein vereinfachtes Management oder für den Fall, dass Ihr Cluster sich in einer bestimmten [Stadt mit einer einzigen Zone](cs_regions.html#zones) befinden muss.
 
+**Kann ich einen hoch verfügbaren Master in einer Einzelzone haben?**</br>
+Ja, mit Clustern, auf denen Kubernetes Version 1.10 oder höher ausgeführt wird. In einer Einzelzone ist Ihr Master hoch verfügbar und umfasst Replikate auf separaten physischen Hosts für Ihren Kubernetes-API-Server, für 'etcd', für Ihren Scheduler und Ihren Controller-Manager, um beispielsweise vor Ausfällen während der Aktualisierung eines Masters zu schützen. Für den Schutz vor einem Zonenausfall können Sie Folgendes tun: 
+* [Erstellen Sie einen Cluster in einer mehrzonenfähigen Zone](cs_clusters_planning.html#multizone), wobei sich der Master über mehrere Zonen erstreckt. 
+* [Erstellen Sie mehrere Cluster](#multiple_clusters) und verbinden Sie sie mit einer globalen Lastausgleichsfunktion. 
 
 ## Mehrzonencluster
 {: #multizone}
@@ -64,7 +71,7 @@ Mit {{site.data.keyword.containerlong}} können Sie Mehrzonencluster erstellen. 
 Bei einem Worker-Pool handelt es sich um eine Sammlung von Workerknoten mit derselben Version, wie Maschinentyp, CPU und Speicher. Wenn Sie einen Cluster erstellen, wird automatisch ein Worker-Pool für Sie erstellt. Sie können neue `ibmcloud ks worker-pool`-Befehle verwenden, um die Workerknoten in Ihrem Pool über Zonen zu verteilen, Workerknoten zum Pool hinzuzufügen oder Workerknoten zu aktualisieren.
 
 **Kann ich noch eigenständige Workerknoten verwenden?**</br>
-Das bisherige Cluster-Setup mit eigenständigen Workerknoten wird zwar noch unterstützt, jedoch nicht mehr weiterentwickelt. Stellen Sie sicher, dass Sie [einen Worker-Pool zu Ihrem Cluster hinzufügen](cs_clusters.html#add_pool) und anschließend [zur Verwendung von Worker-Pools migrieren](cs_cluster_update.html#standalone_to_workerpool), um Ihre Workerknoten anstelle von eigenständigen Workerknoten zu organisieren.
+Das bisherige Cluster-Setup mit eigenständigen Workerknoten wird zwar noch unterstützt, jedoch nicht mehr weiterentwickelt. Stellen Sie sicher, dass Sie [einen Worker-Pool zu Ihrem Cluster hinzufügen](cs_clusters.html#add_pool) und anschließend anstelle von eigenständigen Workerknoten [Worker-Pools verwenden](cs_cluster_update.html#standalone_to_workerpool), um Ihre Workerknoten zu organisieren. 
 
 **Kann ich einen Einzelzonencluster in einen Mehrzonencluster konvertieren?**</br>
 Ja, wenn sich der Cluster in einer der [ unterstützten Metropolen mit mehreren Zonen](cs_regions.html#zones) befindet. Weitere Informationen finden Sie im Abschnitt [Von eigenständigen Workerknoten auf Worker-Pools aktualisieren](cs_cluster_update.html#standalone_to_workerpool).
@@ -73,8 +80,7 @@ Ja, wenn sich der Cluster in einer der [ unterstützten Metropolen mit mehreren 
 ### Ich möchte mehr über die Mehrzonenclusterkonfiguration erfahren
 {: #mz_setup}
 
-<img src="images/cs_cluster_multizone.png" alt="Hochverfügbarkeit für Mehrzonencluster" width="500" style="width:500px; border-style: none"/>
-
+<img src="images/cs_cluster_multizone-ha.png" alt="Hochverfügbarkeit für Mehrzonencluster" width="500" style="width:500px; border-style: none"/>
 
 Sie können zusätzliche Zonen zu Ihrem Cluster hinzufügen, um die Workerknoten in den Worker-Pools über mehrere Zonen in einer Region zu replizieren. Mehrzonencluster sind so konzipiert, dass die Pods gleichmäßig auf die Workerknoten und Zonen verteilt werden, um die Verfügbarkeit und Wiederherstellung nach einem Ausfall zu gewährleisten. Wenn die Workerknoten nicht gleichmäßig über die Zonen verteilt sind oder die Kapazität in einer der Zonen nicht ausreicht, kann der Kubernetes-Scheduler möglicherweise nicht alle angeforderten Pods planen. Daher können Pods in den Status **Anstehend** wechseln, bis eine ausreichende Kapazität verfügbar ist. Wenn Sie das Standardverhalten ändern möchten, damit der Kubernetes-Scheduler Pods in Zonen optimal verteilen kann, verwenden Sie die [Pod-Affinitätsrichtlinie](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
 
@@ -87,10 +93,13 @@ Angenommen, Sie benötigen einen Workerknoten mit sechs Kernen, um die Arbeitsla
 - **Ressourcen auf drei Zonen verteilen:** Mit dieser Option stellen Sie drei Kerne pro Zone bereit, wodurch Sie eine Gesamtkapazität von neun Kernen erhalten. Um Ihre Arbeitslast verarbeiten zu können, müssen zwei Zonen gleichzeitig aktiv sein. Wenn eine Zone nicht verfügbar ist, können die anderen beiden Zonen die Arbeitslast verarbeiten. Wenn zwei Zonen nicht verfügbar sind, können die drei verbleibenden Kerne die Arbeitslast übernehmen. Durch die Bereitstellung von drei Kernen pro Zone können Sie mit kleineren Maschinen arbeiten und gleichzeitig die Kosten senken.</br>
 
 **Wie wird mein Kubernetes-Master eingerichtet?** </br>
-Ein Mehrzonencluster wird mit einem einzigen Kubernetes-Master eingerichtet, der im selben Metrobereich wie die Worker bereitgestellt wird. Wenn sich die Worker beispielsweise in einer oder mehreren Zonen des Typs `dal10`, `dal12` oder `dal13` befinden, befindet sich der Master in der Metropole 'Dallas' mit mehreren Zonen.
+Ein Mehrzonencluster wird mit einem einzigen oder hoch verfügbaren Kubernetes-Master (in Kubernetes 1.10 oder höher) eingerichtet, der im selben Metrobereich wie die Worker bereitgestellt wird. Darüber hinaus erstrecken sich hoch verfügbare Master über mehrere Zonen, wenn Sie einen Mehrzonencluster erstellen. Wenn sich der Cluster beispielsweise in den Zonen `dal10`, `dal12` oder `dal13` befindet, erstreckt sich der Master über alle Zonen in der Metropole mit mehreren Zonen 'Dallas'. 
 
 **Was passiert, wenn der Kubernetes-Master nicht mehr verfügbar ist?** </br>
-Der [Kubernetes-Master](cs_tech.html#architecture) ist die Hauptkomponente, die den Cluster betriebsbereit hält. Der Master speichert Clusterressourcen und ihre Konfigurationen in der etcd-Datenbank, die als Single Point of Truth für Ihren Cluster dient. Der Kubernetes-API-Server dient als Haupteinstiegspunkt für alle Anforderungen der Clusterverwaltung von den Workerknoten zum Master oder wenn Sie mit Ihren Clusterressourcen interagieren möchten.<br><br>Wenn ein Masterausfall auftritt, werden Ihre Workloads weiterhin auf den Workerknoten ausgeführt, Sie können jedoch erst wieder `kubectl`-Befehle verwenden, um mit Ihren Clusterressourcen zu arbeiten oder den Clusterzustand anzuzeigen, wenn der Kubernetes-API-Server im Master wieder betriebsbereit ist. Wenn ein Pod während des Ausfalls des Masters inaktiv ist, kann der Pod erst wieder ausgeführt werden, wenn der Workerknoten den Kubernetes-API-Server wieder erreichen kann.<br><br>Während eines Masterausfalls können Sie `ibmcloud ks`-Befehle weiterhin für die {{site.data.keyword.containerlong_notm}}-API ausführen, um mit Ihren Infrastrukturressourcen zu arbeiten (z. B. Workerknoten oder VLANs). Wenn Sie die aktuelle Clusterkonfiguration ändern, indem Sie Workerknoten zum Cluster hinzufügen oder aus ihm entfernen, werden die Änderungen erst wirksam, wenn der Master wieder betriebsbereit ist. **Hinweis**: Ein Workerknoten darf während eines Masterausfalls nicht neu gestartet werden. Durch diese Aktion werden die Pods aus dem Workerknoten entfernt. Da der Kubernetes-API-Server nicht verfügbar ist, können die Pods nicht auf andere Workerknoten im Cluster umgestellt werden.
+Der [Kubernetes-Master](cs_tech.html#architecture) ist die Hauptkomponente, die den Cluster betriebsbereit hält. Der Master speichert Clusterressourcen und ihre Konfigurationen in der etcd-Datenbank, die als Single Point of Truth für Ihren Cluster dient. Der Kubernetes-API-Server dient als Haupteinstiegspunkt für alle Anforderungen der Clusterverwaltung von den Workerknoten zum Master oder wenn Sie mit Ihren Clusterressourcen interagieren möchten.<br><br>Wenn ein Masterausfall auftritt, werden Ihre Workloads weiterhin auf den Workerknoten ausgeführt, Sie können jedoch erst wieder `kubectl`-Befehle verwenden, um mit Ihren Clusterressourcen zu arbeiten oder den Clusterzustand anzuzeigen, wenn der Kubernetes-API-Server im Master wieder betriebsbereit ist. Wenn ein Pod während des Ausfalls des Masters inaktiv ist, kann der Pod erst wieder ausgeführt werden, wenn der Workerknoten den Kubernetes-API-Server wieder erreichen kann.<br><br>Während eines Masterausfalls können Sie `ibmcloud ks`-Befehle weiterhin für die {{site.data.keyword.containerlong_notm}}-API ausführen, um mit Ihren Infrastrukturressourcen zu arbeiten (z. B. Workerknoten oder VLANs). Wenn Sie die aktuelle Clusterkonfiguration ändern, indem Sie Workerknoten zum Cluster hinzufügen oder aus ihm entfernen, werden die Änderungen erst wirksam, wenn der Master wieder betriebsbereit ist.
+
+Ein Workerknoten darf während eines Masterausfalls nicht neu gestartet werden. Durch diese Aktion werden die Pods aus dem Workerknoten entfernt. Da der Kubernetes-API-Server nicht verfügbar ist, können die Pods nicht auf andere Workerknoten im Cluster umgestellt werden.
+{: important}
 
 
 Um Ihren Cluster vor einem Ausfall des Kubernetes-Masters oder in Regionen zu schützen, in denen Mehrzonencluster nicht verfügbar sind, können Sie [mehrere Cluster einrichten und diese mit einer globalen Lastausgleichsfunktion verbinden](#multiple_clusters).
@@ -103,7 +112,7 @@ Sie können Ihre Apps über eine Ingress-Lastausgleichsfunktion für Anwendungen
 
 - **Ingress-Lastausgleichsfunktion für Anwendungen (ALB):** Standardmäßig werden öffentliche ALBs automatisch in jeder Zone in Ihrem Cluster erstellt und aktiviert. Außerdem wird auch automatisch eine Cloudflare-Lastausgleichsfunktion für mehrere Zonen (Multizone Load Balancer, MZLB) für Ihren Cluster erstellt und bereitgestellt, sodass eine MZLB für jede Region vorhanden ist. Die MZLB stellt die IP-Adressen Ihrer ALBs hinter denselben Hostnamen und aktiviert die Zustandsprüfungen für diese IP-Adressen, um zu ermitteln, ob sie verfügbar sind oder nicht. Wenn Sie beispielsweise Workerknoten in drei (3) Zonen in der Region 'Vereinigte Staaten (Osten)' haben, hat der Hostname `yourcluster.us-east.containers.appdomain.cloud` drei ALB-IP-Adressen. Der MZLB-Status überprüft die öffentliche ALB-IP in jeder Zone des Clusters und hält die Ergebnisse der DNS-Suche auf der Basis dieser Zustandsprüfungen aktualisiert. Weitere Informationen finden Sie im Abschnitt [Komponenten und Architektur von Ingress](cs_ingress.html#planning).
 
-- **Lastenausgleichsservices:** Lastenausgleichsservices werden nur in einer Zone konfiguriert. Eingehende Anforderungen an Ihre App werden von dieser einen Zone an alle App-Instanzen in anderen Zonen weitergeleitet. Wenn diese Zone nicht mehr verfügbar ist, ist Ihre App möglicherweise nicht über das Internet erreichbar. Um einem Ausfall einer einzelnen Zone gerecht zu werden, können Sie zusätzliche LoadBalancer-Services in weiteren Zonen einrichten. Weitere Informationen finden Sie im Abschnitt zu den hoch verfügbaren [LoadBalancer-Services](cs_loadbalancer.html#multi_zone_config).
+- **Lastausgleichsservices:** Lastausgleichsservices werden nur in einer Zone konfiguriert. Eingehende Anforderungen an Ihre App werden von dieser einen Zone an alle App-Instanzen in anderen Zonen weitergeleitet. Wenn diese Zone nicht mehr verfügbar ist, ist Ihre App möglicherweise nicht über das Internet erreichbar. Um einem Ausfall einer einzelnen Zone gerecht zu werden, können Sie zusätzliche LoadBalancer-Services in weiteren Zonen einrichten. Weitere Informationen finden Sie im Abschnitt zu den hoch verfügbaren [LoadBalancer-Services](cs_loadbalancer.html#multi_zone_config).
 
 **Kann ich persistenten Speicher für meinen Mehrzonencluster einrichten?**</br>
 Verwenden Sie für hoch verfügbaren persistenten Speicher einen Cloud-Service wie [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
@@ -123,7 +132,7 @@ Wenn Sie [Ihren Mehrzonencluster mit der CLI erstellen](cs_clusters.html#cluster
 
 Mit der Einführung von Worker-Pools können Sie eine neue Gruppe von APIs und Befehlen zum Verwalten des Clusters verwenden. Sie finden diese neuen Befehle auf der [Seite mit der CLI-Dokumentation](cs_cli_reference.html#cs_cli_reference). In Ihrem Terminal können Sie sie durch Ausführen des Befehls `ibmcloud ks help` anzeigen.
 
-In der folgenden Tabelle werden die alten und neuen Methoden für einige allgemeine Aktionen dern Clusterverwaltung miteinander verglichen.
+In der folgenden Tabelle werden die alten und neuen Methoden für einige allgemeine Aktionen der Clusterverwaltung miteinander verglichen.
 <table summary="Die Tabelle enthält die Beschreibung der neuen Vorgehensweisen zum Ausführen von Mehrzonenbefehlen. Die Tabellenzeilen enthalten von links nach rechts die Beschreibung in der ersten Spalte, die alte Vorgehensweise in der zweiten Spalte und die neue Vorgehensweise für Worker-Pools mit mehreren Zonen in der dritten Spalte.">
 <caption>Neue Methoden für Befehle für Worker-Pools mit mehreren Zonen.</caption>
   <thead>
@@ -134,7 +143,7 @@ In der folgenden Tabelle werden die alten und neuen Methoden für einige allgeme
   <tbody>
     <tr>
     <td>Hinzufügen von Workerknoten zum Cluster.</td>
-    <td><strong>Veraltet</strong>: <code>ibmcloud ks worker-add</code> zum Hinzufügen eigenständiger Workerknoten.</td>
+    <td><p class="deprecated"><code>ibmcloud ks worker-add</code> zum Hinzufügen eigenständiger Workerknoten. </p></td>
     <td><ul><li>Um andere Maschinentypen als Ihren vorhandenen Pool hinzuzufügen, erstellen Sie einen neuen Worker-Pool: [Befehl <code>ibmcloud ks worker-pool-create</code>](cs_cli_reference.html#cs_worker_pool_create).</li>
     <li>Wenn Sie Workerknoten zu einem vorhandenen Pool hinzufügen möchten, ändern Sie die Anzahl der Knoten pro Zone im Pool: [Befehl <code>ibmcloud ks worker-pool-resize</code>](cs_cli_reference.html#cs_worker_pool_resize).</li></ul></td>
     </tr>
@@ -146,7 +155,7 @@ In der folgenden Tabelle werden die alten und neuen Methoden für einige allgeme
     </tr>
     <tr>
     <td>Verwenden Sie ein neues VLAN für Workerknoten.</td>
-    <td><strong>Veraltet</strong>: Fügen Sie einen neuen Workerknoten hinzu, der das neue private oder öffentliche VLAN verwendet: <code>ibmcloud ks worker-add</code>.</td>
+    <td><p class="deprecated">Fügen Sie einen neuen Workerknoten hinzu, der das neue private oder öffentliche VLAN verwendet: <code>ibmcloud ks worker-add</code>. </p></td>
     <td>Legen Sie den Worker-Pool so fest, dass er ein anderes öffentliches oder privates VLAN als zuvor verwendet: [Befehl <code>ibmcloud ks zone-network-set</code>](cs_cli_reference.html#cs_zone_network_set).</td>
     </tr>
   </tbody>
@@ -172,7 +181,7 @@ Sie können mehrere Cluster in verschiedenen Regionen eines geografischen Stando
 
 1. [Erstellen Sie Cluster](cs_clusters.html#clusters) in mehreren Zonen oder Regionen.
 2. Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer).
-3. Stellen Sie in jedem Cluster Ihre App mit einer [Lastausgleichsfunktion für Anwendungen (ALB)](cs_ingress.html#ingress_expose_public) oder einem [LoadBalancer-Service](cs_loadbalancer.html#config) bereit.
+3. Stellen Sie in jedem Cluster Ihre App mit einer [Lastausgleichsfunktion für Anwendungen (ALB)](cs_ingress.html#ingress_expose_public) oder einem [LoadBalancer-Service](cs_loadbalancer.html) bereit.
 4. Listen Sie für jeden Cluster die öffentlichen IP-Adressen für Ihre ALBs oder LoadBalancer-Services auf.
    - Gehen Sie wie folgt vor, um die IP-Adresse aller öffentlichen aktivierten ALBs in Ihrem Cluster aufzulisten:
      ```
@@ -210,7 +219,9 @@ Sie können mehrere Cluster in verschiedenen Regionen eines geografischen Stando
 Wenn Sie den Cluster sperren möchten, um privaten Datenverkehr über das private VLAN zu ermöglichen, den öffentlichen Datenverkehr über das öffentliche VLAN aber zu blockieren, können Sie [den Cluster unter Verwendung von Calico-Netzrichtlinien vor öffentlichem Zugriff schützen](cs_network_cluster.html#both_vlans_private_services). Diese Calico-Netzrichtlinien vermeiden nicht die Kommunikation der Workerknoten mit dem Master. Sie können auch die Anfälligkeit für Sicherheitslücken im Cluster begrenzen, ohne den öffentlichen Datenverkehr durch das [Isolieren von Workloads im Netzbetrieb zu Edge-Workerknoten](cs_edge.html) zu sperren.
 
 Wenn Sie einen Cluster erstellen möchten, der nur über Zugriff auf ein privates VLAN verfügt, können Sie einen privaten Einzelzonen- oder Mehrzonencluster erstellen. Wenn Ihre Workerknoten jedoch nur mit einem privaten VLAN verbunden sind, können die Workerknoten nicht automatisch eine Verbindung zum Master herstellen. Sie müssen eine Gateway-Appliance konfigurieren, um die Netzkonnektivität zwischen den Workerknoten und dem Master bereitzustellen.
-**Hinweis**: Sie können einen Cluster, der mit einem öffentlichen und privaten VLAN verbunden ist, nicht in einen ausschließlich privaten Cluster konvertieren. Durch das Entfernen aller öffentlichen VLANs aus einem Cluster werden mehrere Clusterkomponenten gestoppt. Sie müssen einen neuen Cluster anhand der folgenden Schritte erstellen.
+
+Sie können einen Cluster, der mit einem öffentlichen und privaten VLAN verbunden ist, nicht in einen ausschließlich privaten Cluster konvertieren. Durch das Entfernen aller öffentlichen VLANs aus einem Cluster werden mehrere Clusterkomponenten gestoppt. Sie müssen einen neuen Cluster anhand der folgenden Schritte erstellen.
+{: note}
 
 Gehen Sie wie folgt vor, wenn Sie einen Cluster erstellen möchten, der nur über Zugriff auf ein privates VLAN verfügt:
 
@@ -240,7 +251,7 @@ Wenn Sie einen Standardcluster in {{site.data.keyword.Bluemix_notm}} erstellen, 
 
 ![Hardwaresystemerweiterungen für Workerknoten in einem Standardcluster](images/cs_clusters_hardware.png)
 
-Wenn Sie mehr als einen Typ des Workerknotens benötigen, müssen Sie für jeden Typ einen Worker-Pool erstellen. Wenn Sie einen kostenlosen Cluster erstellen, wird Ihr Workerknoten automatisch als gemeinsam genutzter, virtueller Knoten im Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. Berücksichtigen Sie bei Ihrer Planung [das Limit des Mindestschwellenwerts für den Workerknoten](#resource_limit_node) von 10 % der Gesamtspeicherkapazität.
+Wenn Sie mehr als einen Typ des Workerknotens benötigen, müssen Sie für jeden Typ einen Worker-Pool erstellen. Wenn Sie einen kostenlosen Cluster erstellen, wird Ihr Workerknoten automatisch als gemeinsam genutzter, virtueller Knoten im Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. In Standardclustern können Sie den Typ der Maschine auswählen, der sich am besten für Ihre Workload eignet. Berücksichtigen Sie bei Ihrer Planung die [Reserven für Workerknotenressourcen](#resource_limit_node) bei der Gesamt-CPU und der Speicherkapazität. 
 
 Sie können Cluster mithilfe der [Konsolen-UI](cs_clusters.html#clusters_ui) oder mithilfe der [CLI](cs_clusters.html#clusters_cli) bereitstellen.
 
@@ -345,12 +356,13 @@ Sie können Ihre Workerknoten als physischen Single-Tenant-Server bereitstellen,
 Mit Bare-Metal haben Sie direkten Zugriff auf die physischen Ressourcen auf der Maschine, wie z. B. Speicher oder CPU. Durch diese Konfiguration wird der Hypervisor der virtuellen Maschine entfernt, der physische Ressourcen zu virtuellen Maschinen zuordnet, die auf dem Host ausgeführt werden. Stattdessen sind alle Ressourcen der Bare-Metal-Maschine ausschließlich dem Worker gewidmet, also müssen Sie sich keine Sorgen machen, dass "lärmende Nachbarn" Ressourcen gemeinsam nutzen oder die Leistung verlangsamen. Physische Maschinentypen verfügen über einen größeren lokalen Speicher als virtuelle und einige verfügen zudem über RAID zur Steigerung der Datenverfügbarkeit. Der lokale Speicher auf dem Workerknoten ist nur für die kurzfristige Verarbeitung vorgesehen; die primäre und die sekundäre Platte werden gelöscht, wenn Sie den Workerknoten aktualisieren oder erneut laden. Informationen zu persistenten Speicherlösungen finden Sie im Abschnitt [Persistenten Hochverfügbarkeitsspeicher planen](cs_storage_planning.html#storage_planning).
 
 **Bietet mir Bare-Metal mehr Möglichkeiten als VMs - abgesehen von besseren Spezifikationen für die Leistung?**</br>
-Ja. Mit Bare-Metal haben Sie die Möglichkeit, Trusted Compute zu aktivieren, um Ihre Workerknoten auf Manipulation zu überprüfen. Wenn Sie Trusted Compute während der Clustererstellung nicht aktivieren, dies jedoch später nachholen möchten, können Sie den [Befehl](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable` verwenden. Nachdem Sie Trusted Compute aktiviert haben, können Sie es später nicht mehr inaktivieren. Sie können einen neuen Cluster ohne Trusted Compute erstellen. Weitere Informationen zur Funktionsweise von Trusted Compute während des Startprozesses für den Knoten finden Sie in [{{site.data.keyword.containerlong_notm}} mit Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute ist nur auf Clustern mit Kubernetes Version 1.9 oder höher verfügbar, die bestimmte Bare-Metal-Maschinentypen aufweisen. Bei der Ausführung des [Befehls `ibmcloud ks machine-types <zone>`](cs_cli_reference.html#cs_machine_types) können Sie im Feld **Trustable** ablesen, welche Maschinen Trusted Compute unterstützen. Beispielsweise unterstützen die GPU-Typen `mgXc` Trusted Compute nicht.
+Ja. Mit Bare-Metal haben Sie die Möglichkeit, Trusted Compute zu aktivieren, um Ihre Workerknoten auf Manipulation zu überprüfen. Wenn Sie Trusted Compute während der Clustererstellung nicht aktivieren, dies jedoch später nachholen möchten, können Sie den [Befehl](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable` verwenden. Nachdem Sie Trusted Compute aktiviert haben, können Sie es später nicht mehr inaktivieren. Sie können einen neuen Cluster ohne Trusted Compute erstellen. Weitere Informationen zur Funktionsweise von Trusted Compute während des Startprozesses für den Knoten finden Sie in [{{site.data.keyword.containerlong_notm}} mit Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute ist für bestimmte Bare-Metal-Maschinentypen verfügbar. Bei der Ausführung des [Befehls `ibmcloud ks machine-types <zone>`](cs_cli_reference.html#cs_machine_types) können Sie im Feld **Trustable** ablesen, welche Maschinen Trusted Compute unterstützen. Beispielsweise unterstützen die GPU-Typen `mgXc` Trusted Compute nicht.
 
 **Bare-Metal scheint nur Vorteile zu bieten. Was sollte mich davon abhalten, diese Lösung zu bestellen?**</br>
 Die Nutzung von Bare-Metal-Servern ist teurer als die Nutzung virtueller Server. Bare-Metal-Server eignen sich für Hochleistungsanwendungen, die mehr Ressourcen und mehr Hoststeuerung benötigen.
 
-**Wichtig**: Die Abrechnung für Bare-Metal-Server erfolgt monatlich. Wenn Sie einen Bare-Metal-Server vor Monatsende stornieren, werden Ihnen die Kosten bis zum Ende dieses Monats belastet. Das Buchen und Stornieren von Bare-Metal-Servern ist ein manueller Prozess in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer). Er kann länger als einen Geschäftstag dauern.
+Die Abrechnung für Bare-Metal-Server erfolgt monatlich. Wenn Sie einen Bare-Metal-Server vor Monatsende stornieren, werden Ihnen die Kosten bis zum Ende dieses Monats belastet. Das Buchen und Stornieren von Bare-Metal-Servern ist ein manueller Prozess in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer). Er kann länger als einen Geschäftstag dauern.
+{: important}
 
 **Welche Bare-Metal-Typen kann ich bestellen?**</br>
 Maschinentypen variieren je nach Zone. Um die in Ihrer Zone verfügbaren Maschinentypen anzuzeigen, führen Sie den Befehl `ibmcloud ks machine-types <zone>` aus. Sie können außerdem die verfügbaren [VM](#vm)- oder [SDS](#sds)-Maschinentypen ansehen.
@@ -428,9 +440,9 @@ SDS-Typen (SDS = Software-Defined Storage) sind physische Maschinen, die mit ein
 
 **Wann verwende ich SDS-Typen?**</br>
 Normalerweise verwenden Sie SDS-Maschinen in den folgenden Fällen:
-*  Wenn Sie ein SDS-Add-on für den Cluster verwenden, müssen Sie eine SDS-Maschine verwenden.
+*  Wenn Sie ein SDS-Add-on für den Cluster verwenden, verwenden Sie eine SDS-Maschine. 
 *  Wenn Ihre App ein [StatefulSet ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) ist, das lokalen Speicher voraussetzt, können Sie SDS-Maschinen verwenden und [lokale Kubernetes-PVs (Beta) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/) einrichten.
-*  Möglicherweise haben Sie angepasste Apps oder Cluster-Add-ons, die SDS oder lokalen Speicher erfordern. Wenn Sie z. B. logDNA verwenden möchten, müssen Sie einen SDS-Maschinentyp verwenden.
+*  Möglicherweise verfügen Sie über angepasste Apps, die zusätzlichen unformatierten lokalen Speicher erfordern. 
 
 Informationen zu weiteren Speicherlösungen finden Sie im Abschnitt [Persistenten Hochverfügbarkeitsspeicher planen](cs_storage_planning.html#storage_planning).
 
@@ -486,17 +498,105 @@ Wählen Sie einen Maschinentyp mit der richtigen Speicherkonfiguration aus, um I
 </tbody>
 </table>
 
-## Speicherbegrenzung für Workerknoten
+## Reserven für Workerknotenressourcen
 {: #resource_limit_node}
 
-{{site.data.keyword.containerlong_notm}} legt für jeden Workerknoten eine Speicherbegrenzung fest. Wenn Pods, die auf einem Workerknoten ausgeführt werden, diese Speicherbegrenzung überschreiten, werden die Pods entfernt. In Kubernetes wird diese Begrenzung als [harte Räumungsschwelle ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds) bezeichnet.
+{{site.data.keyword.containerlong_notm}} legt Reserven für Rechenressourcen fest, die die verfügbaren Rechenressourcen auf den einzelnen Workerknoten begrenzen. Reservierte Speicher- und CPU-Ressourcen können von Pods auf dem Workerknoten nicht verwendet werden. Auf diese Weise werden die zuordnungsfähigen Ressourcen auf den Workerknoten reduziert. Wenn Sie ursprünglich Pods bereitstellen, der Workerknoten aber nicht über ausreichend zuordnungsfähige Ressourcen verfügt, schlägt die Bereitstellung fehl. Und wenn Pods das Limit für Workerknotenressourcen überschreiten, werden die Pods entfernt. In Kubernetes wird dieses Limit als [harte Räumungsschwelle ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds) bezeichnet.
 {:shortdesc}
 
-Wenn Ihre Pods häufig entfernt werden, fügen Sie zusätzliche Workerknoten zu Ihrem Cluster hinzu oder legen Sie [Ressourcenbegrenzungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) für die Pods fest.
+Wenn weniger CPU oder Speicher verfügbar ist als der Workerknoten reserviert, beginnt Kubernetes damit, Pods zu entfernen, um ausreichend Rechenressourcen verfügbar zu machen. Wenn ein anderer Workerknoten verfügbar ist, wird die Planung für die Pods auf diesem Workerknoten neu erstellt. Wenn Ihre Pods häufig entfernt werden, fügen Sie zusätzliche Workerknoten zu Ihrem Cluster hinzu oder legen Sie [Ressourcenbegrenzungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) für die Pods fest. 
 
-**Jede Maschine hat einen Mindestschwellenwert, der 10 % der Gesamtspeicherkapazität entspricht**. Wenn weniger Speicher auf dem Workerknoten als der zulässige Mindestschwellenwert verfügbar ist, entfernt Kubernetes den Pod sofort. Wenn ein anderer Workerknoten verfügbar ist, wird die Planung für den Pod auf diesem Workerknoten neu erstellt. Wenn Sie beispielsweise mit einer virtuellen Maschine des Typs `b2c.4x16` arbeiten, ist die Gesamtspeicherkapazität dieser Maschine 16 GB. Wenn weniger als 1600 MB (10 %) Speicher verfügbar ist, können neue Pods nicht auf diesem Workerknoten terminiert werden, sondern werden auf einem anderen Workerknoten terminiert. Wenn kein anderer Workerknoten verfügbar ist, können die neuen Workerknoten nicht terminiert werden.
+Welche Ressourcen auf Ihrem Workerknoten reserviert werden, hängt von der Menge an CPU und Speicher ab, mit der Ihr Workerknoten geliefert wird. {{site.data.keyword.containerlong_notm}} definiert die Speicher- und CPU-Ebenen wie in der folgenden Tabelle dargestellt. Wenn Ihr Workerknoten über Rechenressourcen in mehreren Ebenen verfügt, wird ein Prozentsatz der CPU- und Speicherressourcen für jede Ebene reserviert. 
 
-Um zu sehen, wie viel Speicher auf dem Workerknoten belegt ist, führen Sie [`kubectl top node ` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/kubectl/overview/#top) aus.
+Um zu sehen, wie viele Rechenressourcen derzeit auf dem Workerknoten verwendet werden, führen Sie [`kubectl top node` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/kubectl/overview/#top) aus. {: tip}
+
+<table summary="Für Workerknoten reservierter Speicher nach Ebene">
+<caption>Für Workerknoten reservierter Speicher nach Ebene</caption>
+<thead>
+<tr>
+  <th>Speicherebene</th>
+  <th>% oder Menge reserviert</th>
+  <th>`b2c.4x16` Workerknoten (16 GB), Beispiel</th>
+  <th>`mg1c.28x256` Workerknoten (256 GB), Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Die ersten 16 GB (0-16 GB)</td>
+  <td>10 % des Speichers</td>
+  <td>1,6 GB</td>
+  <td>1,6 GB</td>
+</tr>
+<tr>
+  <td>Die nächsten 112 GB (17-128 GB)</td>
+  <td>6 % des Speichers</td>
+  <td>n.z.</td>
+  <td>6,72 GB</td>
+</tr>
+<tr>
+  <td>Die verbleibenden GB (129 GB+)</td>
+  <td>2 % des Speichers</td>
+  <td>n.z.</td>
+  <td>2,54 GB</td>
+</tr>
+<tr>
+  <td>Zusätzliche Reserve für [`kubelet`-Entfernung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
+  <td>100 MB</td>
+  <td>100 MB (unstrukturierte Menge)</td>
+  <td>100 MB (unstrukturierte Menge)</td>
+</tr>
+<tr>
+  <td>**Insgesamt reserviert**</td>
+  <td>**(variiert)**</td>
+  <td>**1,7 GB von insgesamt 16 GB**</td>
+  <td>**10,96 GB von insgesamt 256 GB**</td>
+</tr>
+</tbody>
+</table>
+
+<table summary="Für Workerknoten reservierte CPU nach Ebene">
+<caption>Für Workerknoten reservierte CPU nach Ebene</caption>
+<thead>
+<tr>
+  <th>CPU-Ebene</th>
+  <th>% reserviert</th>
+  <th>`b2c.4x16` Workerknoten (4 Cores), Beispiel</th>
+  <th>`mg1c.28x256` Workerknoten (28 Cores), Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Erster Core (Core 1)</td>
+  <td>6 % Cores</td>
+  <td>0,06 Cores</td>
+  <td>0,06 Cores</td>
+</tr>
+<tr>
+  <td>Die nächsten 2 Cores (Cores 2-3)</td>
+  <td>1 % Cores</td>
+  <td>0,02 Cores</td>
+  <td>0,02 Cores</td>
+</tr>
+<tr>
+  <td>Die nächsten 2 Cores (Cores 4-5)</td>
+  <td>0,5 % Cores</td>
+  <td>0,005 Cores</td>
+  <td>0,01 Cores</td>
+</tr>
+<tr>
+  <td>Die verbleibenden Cores (Cores 6+)</td>
+  <td>0,25 % Cores</td>
+  <td>n.z.</td>
+  <td>0,0575 Cores</td>
+</tr>
+<tr>
+  <td>**Insgesamt reserviert**</td>
+  <td>**(variiert)**</td>
+  <td>**0,085 Cores von insgesamt 4 Cores**</td>
+  <td>**0,1475 Cores von insgesamt 28 Cores**</td>
+</tr>
+</tbody>
+</table>
 
 ## Automatische Wiederherstellung für Ihren Workerknoten
 {: #autorecovery}

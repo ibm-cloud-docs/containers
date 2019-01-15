@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -144,12 +147,11 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>Der OpenVPN-Server arbeitet mit dem OpenVPN-Client zusammen, um den Master sicher mit dem Workerknoten zu verbinden. Diese Verbindung unterstützt 'kubectl exec', 'attach', 'logs' und 'apiserver proxy'.</td>
+    <td>Der OpenVPN-Server arbeitet mit dem OpenVPN-Client zusammen, um den Master sicher mit dem Workerknoten zu verbinden. Diese Verbindung unterstützt `apiserver proxy`-Aufrufe für Ihre Pods und Services sowie `kubectl exec`-, `attach`- und `logs`-Aufrufe für 'kubelet'. </td>
     </tr>
     <tr>
     <td>etcd</td>
-    <td>'etcd' ist ein hoch verfügbarer Schlüsselwertspeicher, in dem der Status aller Kubernetes-Ressourcen eines Clusters gespeichert ist, wie z. B. von Services, Implementierungen und Pods. Daten in 'etcd' werden auf einem verschlüsselten
-Datenträger gespeichert, der von IBM verwaltet wird.</td>
+    <td>'etcd' ist ein hoch verfügbarer Schlüsselwertspeicher, in dem der Status aller Kubernetes-Ressourcen eines Clusters gespeichert ist, wie z. B. von Services, Implementierungen und Pods. Daten in 'etcd' werden in einer verschlüsselten Speicherinstanz gesichert, die von IBM verwaltet wird. </td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -171,19 +173,34 @@ Datenträger gespeichert, der von IBM verwaltet wird.</td>
     </thead>
     <tbody>
     <tr>
+    <td>ibm-master-proxy</td>
+    <td>kube-system</td>
+    <td>Für Cluster, auf denen Kubernetes Version 1.10 oder höher ausgeführt wird, leitet `ibm-master-proxy` Anforderungen vom Workerknoten an die IP-Adressen der hoch verfügbaren Master-Replikate weiter. In Einzelzonenclustern verfügt der Master über drei Replikate auf separaten Hosts mit einer Master-IP-Adresse und einem Domänennamen. Für Cluster in einer mehrzonenfähigen Zone verfügt der Master über drei Replikate, die über Zonen verteilt sind. Jeder Master hat hier seine eigene IP-Adresse, die bei DNS registriert ist, und einen Domänennamen für den gesamten Cluster-Master. </td>
+    </tr>
+    <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>Der OpenVPN-Client arbeitet mit dem OpenVPN-Server zusammen, um den Master sicher mit dem Workerknoten zu verbinden. Diese Verbindung unterstützt 'kubectl exec', 'attach', 'logs' und 'apiserver proxy'.</td>
+    <td>Der OpenVPN-Client arbeitet mit dem OpenVPN-Server zusammen, um den Master sicher mit dem Workerknoten zu verbinden. Diese Verbindung unterstützt `apiserver proxy`-Aufrufe für Ihre Pods und Services sowie `kubectl exec`-, `attach`- und `logs`-Aufrufe für 'kubelet'. </td>
     </tr>
     <tr>
-    <td>calico-policy-controller</td>
+    <td>kubelet</td>
     <td>kube-system</td>
-    <td>Der Richtliniencontroller von Calico überwacht den eingehenden und ausgehenden Netzverkehr auf Konformität mit festgelegten Netzrichtlinien. Wenn der Datenverkehr im Cluster nicht zulässig ist, wird der Zugriff auf den Cluster blockiert. Der Richtliniencontroller von Calico wird auch verwendet, um Netzrichtlinien für einen Cluster zu erstellen und festzulegen.</td>
+    <td>Das 'kubelet' ist ein Pod, der auf allen Workerknoten ausgeführt wird und der für die Überwachung des Zustands der Pods verantwortlich ist, die auf dem Workerknoten aktiv sind, und für die Überwachung der Ereignisse, die der Kubernetes-API-Server sendet. Das 'kubelet' erstellt oder entfernt auf der Basis der Ereignisse Pods, stellt Aktivitäts- und Bereitschaftsprüfungen sicher und meldet dem Kubernetes-API-Server den Zustand der Pods.</td>
     </tr>
     <tr>
-    <td>Storage Provider</td>
+    <td>kube-dns</td>
     <td>kube-system</td>
-    <td>Jeder Cluster ist mit einem Plug-in für die Bereitstellung von Dateispeicher konfiguriert. Sie können auswählen, weitere Add-ons zu installieren, wie z. B. Block Storage.</td>
+    <td>Der Kubernetes-DNS plant einen DNS-Pod und -Service im Cluster. Container verwenden automatisch die IP des DNS-Service, um DNS-Namen bei der Suche nach weiteren Pods und Services aufzulösen.</td>
+    </tr>
+    <tr>
+    <td>calico</td>
+    <td>kube-system</td>
+    <td>Calico verwaltet die Netzrichtlinien für Ihren Cluster und besteht aus den folgenden Komponenten.
+<ul>
+    <li>**calico-cni**: Die Container-Netzschnittstelle (CNI – Container Network Interface) von Calico verwaltet die Netzkonnektivität von Containern und entfernt zugeordnete Ressourcen, wenn ein Container gelöscht wird. </li>
+    <li>**calico-ipam**: Die IP-Adressverwaltung von Calico (IPAM – IP Address Management) verwaltet die Zuordnung von IP-Adressen zu Containern. </li>
+    <li>**calico-node**: Der Calico-Knoten ist ein Container, der die verschiedenen Komponenten bündelt, die für die Vernetzung von Containern mit Calico erforderlich sind. </li>
+    <li>**calico-policy-controller**: Der Richtliniencontroller von Calico überwacht den eingehenden und ausgehenden Netzverkehr auf Konformität mit festgelegten Netzrichtlinien. Wenn der Datenverkehr im Cluster nicht zulässig ist, wird der Zugriff auf den Cluster blockiert. Der Richtliniencontroller von Calico wird auch verwendet, um Netzrichtlinien für einen Cluster zu erstellen und festzulegen.</li></ul></td>
     </tr>
     <tr>
     <td>kube-proxy</td>
@@ -193,12 +210,7 @@ Datenträger gespeichert, der von IBM verwaltet wird.</td>
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>Das Kubernetes-Dashboard ist eine webbasierte Benutzerschnittstelle, die es Benutzern ermöglicht, den Cluster und die Anwendungen, die im Cluster ausgeführt werden, zu verwalten und auftretende Fehler zu beheben.</td>
-    </tr>
-    <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>Der Kubernetes-DNS plant einen DNS-Pod und -Service im Cluster. Container verwenden automatisch die IP des DNS-Service, um DNS-Namen bei der Suche nach weiteren Pods und Services aufzulösen.</td>
+    <td>Das Kubernetes-Dashboard ist eine webbasierte Benutzerschnittstelle, die es Benutzern ermöglicht, den Cluster und die Anwendungen, die im Cluster ausgeführt werden, zu verwalten und auftretende Fehler zu beheben. </td>
     </tr>
     <tr>
     <td>heapster</td>
@@ -206,19 +218,19 @@ Datenträger gespeichert, der von IBM verwaltet wird.</td>
     <td>Heapster ist ein clusterweiter Aggregator von Überwachungs- und Ereignisdaten. Der Heapster-Pod erkennt alle Knoten im Cluster und fragt bei den Kubelets der einzelnen Knoten die Nutzungsinformationen ab. Sie finden Nutzungsdiagramme im Kubernetes-Dashboard.</td>
     </tr>
     <tr>
-    <td>calico-node</td>
+    <td>Ingress-ALB</td>
     <td>kube-system</td>
-    <td>Der Calico-Knoten ist ein Container, der die verschiedenen Komponenten bündelt, die für die Vernetzung von Containern mit Calico erforderlich sind.</td>
+    <td>Ingress ist ein Kubernetes-Service, den Sie verwenden können, um Netzverkehr-Workloads in Ihrem Cluster auszugleichen, indem Sie öffentliche oder private Anforderungen an mehrere Apps in Ihrem Cluster weiterleiten. Um Ihre Apps über das öffentliche oder private Netz zugänglich zu machen, müssen Sie eine Ingress-Ressource erstellen, um Ihre Apps für die Ingress-ALB (ALB – Application Load Balancer, Lastausgleichsfunktion für Anwendungen) zu registrieren. Es kann dann mithilfe einer einzigen URL- oder IP-Adresse auf mehrere Apps zugegriffen werden.</td>
+    </tr>
+    <tr>
+    <td>Storage Provider</td>
+    <td>kube-system</td>
+    <td>Jeder Cluster ist mit einem Plug-in für die Bereitstellung von Dateispeicher konfiguriert. Sie können auswählen, weitere Add-ons zu installieren, wie z. B. Blockspeicher.</td>
     </tr>
     <tr>
     <td>Protokollierung und Metriken</td>
     <td>ibm-system</td>
     <td>Sie können die integrierten Services {{site.data.keyword.loganalysislong_notm}} und {{site.data.keyword.monitoringlong_notm}} verwenden, um Ihre Erfassungs- und Aufbewahrungsmöglichkeiten bei der Arbeit mit Protokollen und Metriken zu erweitern.</td>
-    </tr>
-    <tr>
-    <td>Ingress-ALB</td>
-    <td>ibm-system</td>
-    <td>Ingress ist ein Kubernetes-Service, den Sie verwenden können, um Netzverkehr-Workloads in Ihrem Cluster auszugleichen, indem Sie öffentliche oder private Anforderungen an mehrere Apps in Ihrem Cluster weiterleiten. Um Ihre Apps über das öffentliche oder private Netz zugänglich zu machen, müssen Sie eine Ingress-Ressource erstellen, um Ihre Apps für die Ingress-ALB (ALB – Application Load Balancer, Lastausgleichsfunktion für Anwendungen) zu registrieren. Es kann dann mithilfe einer einzigen URL- oder IP-Adresse auf mehrere Apps zugegriffen werden.</td>
     </tr>
     <tr>
     <td>Lastausgleichsfunktion</td>
@@ -229,21 +241,6 @@ Datenträger gespeichert, der von IBM verwaltet wird.</td>
     <td>App-Pods und -Services</td>
     <td>default</td>
     <td>Im Namensbereich <code>default</code> oder in von Ihnen erstellten Namensbereichen können Sie Apps in Pods und Services bereitstellen, damit Sie mit diesen Pods kommunizieren können.</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>Nicht zutreffend</td>
-    <td>Die Container-Netzschnittstelle (CNI – Container Network Interface) von Calico verwaltet die Netzkonnektivität von Containern und entfernt zugeordnete Ressourcen, wenn ein Container gelöscht wird.</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>Nicht zutreffend</td>
-    <td>Die IP-Adressverwaltung von Calico (IPAM – IP Address Management) verwaltet die Zuordnung von IP-Adressen zu Containern.</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>Nicht zutreffend</td>
-    <td>Das 'kubelet' ist ein Pod, der auf allen Workerknoten ausgeführt wird und der für die Überwachung des Zustands der Pods verantwortlich ist, die auf dem Workerknoten aktiv sind, und für die Überwachung der Ereignisse, die der Kubernetes-API-Server sendet. Das 'kubelet' erstellt oder entfernt auf der Basis der Ereignisse Pods, stellt Aktivitäts- und Bereitschaftsprüfungen sicher und meldet dem Kubernetes-API-Server den Zustand der Pods.</td>
     </tr>
     </tbody></table></dd>
 </dl>

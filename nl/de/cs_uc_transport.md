@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -29,8 +32,9 @@ Anhand der folgenden Anwendungsfälle wird hervorgehoben, wie Workloads in {{sit
 {: #uc_shipping}
 
 Eine IT-Führungskraft ist für die weltweiten Streckenführungs- und Planungssysteme verantwortlich, mit denen die Partner interagieren. Die Partner benötigen von diesen Systemen, die auf IoT-Einheitendaten zugreifen, zeitnahe Informationen. Die Hochverfügbarkeit für diese Systeme konnte jedoch nicht weltweit skaliert werden.
+{: shortdesc}
  
- Warum {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} skaliert containerisierte Apps mit extrem hoher Verfügbarkeit, um dem wachsenden Bedarf gerecht zu werden. Die App-Bereitstellungen werden 40 Mal pro Tag durchgeführt zu, wenn die Entwickler ohne großen Aufwand experimentieren; auf diese Art werden Änderungen schnell zu Bereitstellungs- und Testsystemen hinzugefügt. Die IoT-Plattform erleichtert den Zugriff auf IoT-Daten. 
+Warum {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} skaliert containerisierte Apps mit extrem hoher Verfügbarkeit, um dem wachsenden Bedarf gerecht zu werden. Die App-Bereitstellungen werden 40 Mal pro Tag durchgeführt zu, wenn die Entwickler ohne großen Aufwand experimentieren; auf diese Art werden Änderungen schnell zu Bereitstellungs- und Testsystemen hinzugefügt. Die IoT-Plattform erleichtert den Zugriff auf IoT-Daten. 
  
 Schlüsseltechnologien:    
 * [Mehrere Regionen für Partnernetzwerk](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)
@@ -117,6 +121,7 @@ Technische Lösung:
 {: #uc_airline}
 
 Ein Chief Human Resources Officer (CHRO) benötigt eine neue Human Resources-Site für Mitarbeiterleistungen mit einem innovativen Chatbot, aufgrund der derzeitigen Entwicklungstools und der momentanen Plattform dauert es jedoch lange, bis die Apps bereitgestellt werden können. Hinzu kommen lange Wartezeiten für die Beschaffung der Hardware.
+{: shortdesc}
 
 Warum {{site.data.keyword.cloud_notm}}: Mit {{site.data.keyword.containerlong_notm}} kann die Rechenleistung in kurzer Zeit bereitgestellt werden. Somit können die Entwickler ohne großen Aufwand experimentieren und mit offenen Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen. Die Arbeit mit ihren herkömmlichen Softwareentwicklungstools verläuft deutlich schneller, wenn sie IBM Watson Assistant hinzufügen. Die neue Leistungsseite wurde in weniger als 3 Wochen erstellt.
 
@@ -150,7 +155,7 @@ Technische Lösung:
 * IBM Cloud Logging and Monitoring
 * {{site.data.keyword.SecureGatewayfull}}
 
-Für CHRO ist die beschleunigte Entwicklung eine bedeutende Verbesserung. Das Team beginnt zunächst damit, die Apps zu containerisieren und in die Cloud zu stellen. Durch die Verwendung moderner Container können die Entwickler ohne großen Aufwand mit dem Node.js-SDK experimentieren und Änderungen zu Bereitstellungs- und Testsystemen mit Push-Operationen hinzufügen, die mit separaten Clustern horizontal skaliert werden. Diese Push-Operationen wurden mit offenen Toolchains und {{site.data.keyword.contdelivery_full}} automatisiert. Die Aktualisierung der Human Resources-Site zieht sich nicht mehr in langsamen, fehlerträchtigen Erstellungsprozessen hin. Schrittweise Aktualisierungen können für die Site täglich oder sogar noch häufiger bereitgestellt werden. Darüber hinaus ist die Protokollierung und Überwachung der Human Resources-Site schnell integriert, insbesondere in Bezug auf die Art und Weise, wie von der Site personalisierte Daten aus Back-End-Leistungssystemen extrahiert werden. Die Entwickler verschwenden ihre Zeit nicht mit dem Erstellen komplexer Protokollierungssysteme, nur um in der Lage zu sein, Fehler in den aktiven Systemen zu beheben. 
+Für CHRO ist die beschleunigte Entwicklung eine bedeutende Verbesserung. Das Team beginnt zunächst damit, die Apps zu containerisieren und in die Cloud zu stellen. Durch die Verwendung moderner Container können die Entwickler ohne großen Aufwand mit dem Node.js-SDK experimentieren und Änderungen zu Bereitstellungs- und Testsystemen mit Push-Operationen hinzufügen, die mit separaten Clustern horizontal skaliert werden. Diese Push-Operationen wurden mit offenen Toolchains und {{site.data.keyword.contdelivery_full}} automatisiert. Die Aktualisierung der Human Resources-Site zieht sich nicht mehr in langsamen, fehlerträchtigen Erstellungsprozessen hin. Schrittweise Aktualisierungen können für die Site täglich oder sogar noch häufiger bereitgestellt werden.  Darüber hinaus ist die Protokollierung und Überwachung der Human Resources-Site schnell integriert, insbesondere in Bezug auf die Art und Weise, wie von der Site personalisierte Daten aus Back-End-Leistungssystemen extrahiert werden. Die Entwickler verschwenden ihre Zeit nicht mit dem Erstellen komplexer Protokollierungssysteme, nur um in der Lage zu sein, Fehler in den aktiven Systemen zu beheben.
 
 Mit {{site.data.keyword.containerlong_notm}} wurde die überdimensionierte Hardware in einem privaten Rechenzentrum durch anpassbare Rechenleistung ersetzt, wodurch der IT-Betrieb, die Wartung und die Energiekosten reduziert wurden. Zum Hosten der Human Resources-Site konnten ohne großen Aufwand Kubernetes-Cluster entworfen werden, die an die Anforderungen an CPU, RAM und Speicher angepasst wurden. Ein weiterer Faktor für niedrigere Personalkosten ist die Tatsache, dass Kubernetes von IBM verwaltet wird, sodass sich die Entwickler auf die Bereitstellung einer besseren Mitarbeitererfahrung für die Antragsverarbeitung konzentrieren kann.
 

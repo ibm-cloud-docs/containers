@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,13 +13,16 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Pod-Sicherheitsrichtlinien konfigurieren
 {: #psp}
 
 Mit [Pod-Sicherheitsrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) können Sie
-Richtlinien konfigurieren, um anzugeben, wer Pods in {{site.data.keyword.containerlong}} erstellen und aktualisieren darf. Cluster, die die Kubernetes-Versionen 1.10.3, 1.9.8 und 1.8.13 oder spätere Fixpacks ausführen, unterstützen den Zugangscontroller `PodSecurityPolicy`, der diese Richtlinien durchsetzt. 
+Richtlinien konfigurieren, um anzugeben, wer Pods in {{site.data.keyword.containerlong}} erstellen und aktualisieren darf. Cluster, die die Kubernetes-Versionen 1.10.3, 1.9.8 und 1.8.13 oder spätere Fixpacks ausführen, unterstützen den Zugangscontroller `PodSecurityPolicy`, der diese Richtlinien durchsetzt.
 {: shortdesc}
 
 Sie verwenden eine ältere Version von Kubernetes? [Aktualisieren Sie Ihren Cluster](cs_cluster_update.html) noch heute.
@@ -30,13 +33,15 @@ Als Clusteradministrator möchten Sie steuern, was in Ihrem Cluster passiert, in
 
 Mit dem Zugangscontroller `PodSecurityPolicy` können Pods erst nach der [Autorisierung von Richtlinien](#customize_psp) erstellt werden. Die Konfiguration von Pod-Sicherheitsrichtlinien kann unbeabsichtigte Nebeneffekte haben. Deshalb sollten Sie eine Implementierung nach dem Ändern der Richtlinie testen. Um Apps bereitstellen zu können, müssen die entsprechenden Benutzer- und Servicekonten alle durch die Pod-Sicherheitsrichtlinien autorisiert sein, die für die Bereitstellung von Pods erforderlich sind. Wenn Sie beispielsweise Apps mithilfe von [Helm](cs_integrations.html#helm_links) installieren, werden durch die Tiller-Komponente von Helm Pods erstellt. Sie müssen daher über die Autorisierung der richtigen Pod-Sicherheitsrichtlinie verfügen.
 
-Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containerlong_notm}} haben? Informationen zum Festlegen von IAM- und Infrastrukturberechtigungen finden Sie im Abschnitt [Clusterzugriff zuweisen](cs_users.html#users).
+Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containerlong_notm}} haben? Informationen zum Festlegen von {{site.data.keyword.Bluemix_notm}} IAM- und Infrastrukturberechtigungen finden Sie im Abschnitt [Clusterzugriff zuweisen](cs_users.html#users).
 {: tip}
 
 **Gibt es Richtlinien, die standardmäßig festgelegt werden? Was kann ich hinzufügen?**</br>
-Standardmäßig konfiguriert {{site.data.keyword.containerlong_notm}} den Zugangscontroller `PodSecurityPolicy` mit [Ressourcen für die {{site.data.keyword.IBM_notm}} Clusterverwaltung](#ibm_psp), den Sie nicht löschen oder ändern können. Sie können den Zugangscontroller auch nicht inaktivieren. 
+Standardmäßig konfiguriert {{site.data.keyword.containerlong_notm}} den Zugangscontroller `PodSecurityPolicy` mit [Ressourcen für die {{site.data.keyword.IBM_notm}} Clusterverwaltung](#ibm_psp), den Sie nicht löschen oder ändern können. Sie können den Zugangscontroller auch nicht inaktivieren.
 
-Pod-Aktionen sind standardmäßig nicht gesperrt. Stattdessen autorisieren zwei rollenbasierte Zugriffssteuerungsressourcen (RBAC, Role-Based Access Control) im Cluster alle Administratoren, Benutzer, Services und Knoten, um privilegierte und nicht privilegierte Pods zu erstellen. Wenn Sie bestimmte Benutzer daran hindern möchten, Pods zu erstellen oder zu aktualisieren, können Sie [diese RBAC-Ressourcen ändern oder eigene Ressourcen erstellen](#customize_psp).
+Pod-Aktionen sind standardmäßig nicht gesperrt. Stattdessen autorisieren zwei rollenbasierte Zugriffssteuerungsressourcen (RBAC, Role-Based Access Control) im Cluster alle Administratoren, Benutzer, Services und Knoten, um privilegierte und nicht privilegierte Pods zu erstellen. Zusätzliche RBAC-Ressourcen sind für die Portierbarkeit mit privaten {{site.data.keyword.Bluemix_notm}}-Paketen eingeschlossen, die für [Hybridbereitstellungen](cs_hybrid.html#hybrid_iks_icp) verwendet werden. 
+
+Wenn Sie bestimmte Benutzer daran hindern möchten, Pods zu erstellen oder zu aktualisieren, können Sie [diese RBAC-Ressourcen ändern oder eigene Ressourcen erstellen](#customize_psp).
 
 **Wie funktioniert die Richtlinienautorisierung?**</br>
 Wenn Sie als Benutzer einen Pod direkt erstellen und nicht über einen Controller (z. B. eine Bereitstellung), werden Ihre Berechtigungsnachweise anhand der Pod-Sicherheitsrichtlinien, die Sie verwenden können, geprüft. Wenn keine Richtlinie die Pod-Sicherheitsanforderungen unterstützt, wird der Pod nicht erstellt.
@@ -65,10 +70,12 @@ Richtlinien können Benutzer privilegierte und nicht privilegierte (eingeschrän
 
 Sie können diese RBAC-Rollen ändern, um Administratoren, Benutzer, Services oder Knoten zu der Richtlinie hinzuzufügen oder aus ihr zu entfernen.
 
-Vorbemerkungen: 
+Vorbemerkungen:
 *  [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 *  Verstehen Sie die Funktionsweise von RBAC-Rollen. Weitere Informationen hierzu finden Sie im Abschnitt [Benutzer mit angepassten Kubernetes-RBAC-Rollen berechtigen](cs_users.html#rbac) oder in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
-*  **Hinweis**: Wenn Sie die Standardkonfiguration ändern, können Sie wichtige Clusteraktionen, wie Podbereitstellungen oder Clusteraktualisierungen, verhindern. Testen Sie Ihre Änderungen in einem Cluster, der sich nicht in einer Produktionsumgebung befindet und für andere Teams nicht wichtig ist.
+
+Wenn Sie die Standardkonfiguration ändern, können Sie wichtige Clusteraktionen, wie Podbereitstellungen oder Clusteraktualisierungen, verhindern. Testen Sie Ihre Änderungen in einem Cluster, der sich nicht in einer Produktionsumgebung befindet und für andere Teams nicht wichtig ist.
+{: important}
 
 **Gehen Sie wie folgt vor, um die RBAC-Ressourcen zu ändern**:
 1.  Rufen Sie den Namen der RBAC-Clusterrollenbindung ab.
@@ -76,19 +83,19 @@ Vorbemerkungen:
     kubectl get clusterrolebinding
     ```
     {: pre}
-    
+
 2.  Laden Sie die Clusterrollenbindung als eine `.yaml`-Datei herunter, die Sie lokal bearbeiten können.
-    
+
     ```
     kubectl get clusterrolebinding privileged-psp-user -o yaml > privileged-psp-user.yaml
     ```
     {: pre}
-    
+
     Sie können eine Kopie der vorhandenen Richtlinie speichern, damit Sie zu dieser zurückkehren können, falls die geänderte Richtlinie zu unerwarteten Ergebnissen führt.
     {: tip}
-    
+
     **Beispiel für eine Clusterrollenbindungsdatei**:
-    
+
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
@@ -117,11 +124,11 @@ Vorbemerkungen:
       name: system:authenticated
     ```
     {: codeblock}
-    
+
 3.  Bearbeiten Sie die `.yaml`-Datei der Clusterrollenbindung. Informationen darüber, was Sie bearbeiten können, finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). Beispielaktionen:
-    
-    *   **Servicekonten**: Sie können Servicekonten autorisieren, damit Bereitstellungen nur in bestimmten Namensbereichen ausgeführt werden können. Wenn Sie z. B. die Richtlinie so definieren, dass Aktionen innerhalb des Namensbereichs `kube-system` zulässig sind, können viele wichtige Aktionen, wie Clusteraktualisierungen, durchgeführt werden. Aktionen in anderen Namensbereichen sind jedoch nicht mehr autorisiert. 
-    
+
+    *   **Servicekonten**: Sie können Servicekonten autorisieren, damit Bereitstellungen nur in bestimmten Namensbereichen ausgeführt werden können. Wenn Sie z. B. die Richtlinie so definieren, dass Aktionen innerhalb des Namensbereichs `kube-system` zulässig sind, können viele wichtige Aktionen, wie Clusteraktualisierungen, durchgeführt werden. Aktionen in anderen Namensbereichen sind jedoch nicht mehr autorisiert.
+
         Um die Richtlinie so definieren, dass Aktionen in einem bestimmten Namensbereich zulässig sind, ändern Sie `system:serviceaccounts` in `system:serviceaccount:<namespace>`.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
@@ -129,7 +136,7 @@ Vorbemerkungen:
           name: system:serviceaccount:kube-system
         ```
         {: codeblock}
-  
+
     *   **Benutzer**: Sie möchten beispielsweise die Berechtigung für alle authentifizierten Benutzer entfernen, um Pods mit privilegiertem Zugriff bereitzustellen. Entfernen Sie den folgenden Eintrag des Typs `system:authenticated`.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
@@ -144,7 +151,7 @@ Vorbemerkungen:
     kubectl apply -f privileged-psp-user.yaml
     ```
     {: pre}
-    
+
 5.  Überprüfen Sie, ob die Ressource geändert wurde.
 
     ```
@@ -165,7 +172,7 @@ Vorbemerkungen:
     kubectl delete clusterrolebinding privileged-psp-user
     ```
     {: pre}
-    
+
 3.  Stellen Sie sicher, dass die RBAC-Clusterrollenbindung nicht mehr in Ihrem Cluster enthalten ist.
     ```
     kubectl get clusterrolebinding
@@ -174,7 +181,7 @@ Vorbemerkungen:
 
 </br>
 **Gehen Sie wie folgt vor, um Ihre eigene Pod-Sicherheitsrichtlinie zu erstellen**:</br>
-Informationen darüber, wie Sie Ihre eigene Ressource für die Pod-Sicherheitsrichtlinie erstellen und Benutzer mit RBAC berechtigen, finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). 
+Informationen darüber, wie Sie Ihre eigene Ressource für die Pod-Sicherheitsrichtlinie erstellen und Benutzer mit RBAC berechtigen, finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
 
 Stellen Sie sicher, dass Sie die vorhandenen Richtlinien so geändert haben, dass die neue Richtlinie, die Sie erstellen, nicht mit der vorhandenen Richtlinie in Konflikt steht. Die vorhandene Richtlinie ermöglicht es Benutzern beispielsweise, privilegierte Pods zu erstellen und zu aktualisieren. Wenn Sie eine Richtlinie erstellen, die es Benutzern nicht erlaubt, privilegierte Pods zu erstellen oder zu aktualisieren, kann der Konflikt zwischen der vorhandenen und der neuen Richtlinie zu unerwarteten Ergebnissen führen.
 
@@ -185,13 +192,19 @@ Ihr Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} enthält die 
 Pod-Sicherheitsrichtlinien und zugehörigen RBAC-Ressourcen, damit {{site.data.keyword.IBM_notm}} Ihren Cluster ordnungsgemäß verwalten kann.
 {: shortdesc}
 
-Die RBAC-Standardressourcen `privileged-psp-user` und `restricted-psp-user` beziehen sich auf die von {{site.data.keyword.IBM_notm}} festgelegten Pod-Sicherheitsrichtlinien. 
+Die `PodSecurityPolicy`-Standardressourcen beziehen sich auf die von {{site.data.keyword.IBM_notm}} festgelegten Pod-Sicherheitsrichtlinien. 
 
 **Achtung**: Sie dürfen diese Ressourcen nicht löschen oder ändern.
 
 | Name | Namensbereich | Typ | Zweck |
 |---|---|---|---|
-| `ibm-privileged-psp` | cluster-wide | `PodSecurityPolicy` | Richtlinie für privilegierte Pod-Erstellung. |
+| `ibm-anyuid-hostaccess-psp` | cluster-wide | `PodSecurityPolicy` | Richtlinie für die Pod-Erstellung mit umfassendem Hostzugriff. |
+| `ibm-anyuid-hostaccess-psp-user` | cluster-wide | `ClusterRole` | Clusterrolle, die die Verwendung der Pod-Sicherheitsrichtlinie `ibm-anyuid-hostaccess-psp` ermöglicht. |
+| `ibm-anyuid-hostpath-psp` | cluster-wide | `PodSecurityPolicy` | Richtlinie für die Pod-Erstellung mit Hostpfadzugriff. |
+| `ibm-anyuid-hostpath-psp-user` | cluster-wide | `ClusterRole` | Clusterrolle, die die Verwendung der Pod-Sicherheitsrichtlinie `ibm-anyuid-hostpath-psp` ermöglicht. |
+| `ibm-anyuid-psp` | cluster-wide | `PodSecurityPolicy` | Richtlinie für die über UID/GUID ausführbare Pod-Erstellung. |
+| `ibm-anyuid-psp-user` | cluster-wide | `ClusterRole` | Clusterrolle, die die Verwendung der Pod-Sicherheitsrichtlinie `ibm-anyuid-psp` ermöglicht. |
+| `ibm-privileged-psp` | cluster-wide | `PodSecurityPolicy` | Richtlinie für die privilegierte Pod-Erstellung. |
 | `ibm-privileged-psp-user` | cluster-wide | `ClusterRole` | Clusterrolle, die die Verwendung der Sicherheitsrichtlinie `ibm-privileged-psp` ermöglicht. |
 | `ibm-privileged-psp-user` | `kube-system` | `RoleBinding` | Ermöglicht Clusteradministratoren, Servicekonten und Knoten die Verwendung der Sicherheitsrichtlinie `ibm-privileged-psp` im Namensbereich `kube-system`. |
 | `ibm-privileged-psp-user` | `ibm-system` | `RoleBinding` | Ermöglicht Clusteradministratoren, Servicekonten und Knoten die Verwendung der Sicherheitsrichtlinie `ibm-privileged-psp` im Namensbereich `ibm-system`. |

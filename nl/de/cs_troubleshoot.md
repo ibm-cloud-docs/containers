@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -53,7 +56,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
    <tbody>
 <tr>
    <td>Aborted (Abgebrochen)</td>
-   <td>Das Löschen des Clusters wird vom Benutzer angefordert, bevor der Kubernetes Master bereitgestellt ist. Nachdem das Löschen des Clusters abgeschlossen ist, wird der Cluster aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](cs_troubleshoot.html#ts_getting_help).</td>
+   <td>Das Löschen des Clusters wird vom Benutzer angefordert, bevor der Kubernetes Master bereitgestellt ist. Nachdem das Löschen des Clusters abgeschlossen ist, wird der Cluster aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
  <tr>
      <td>Critical (Kritisch)</td>
@@ -65,7 +68,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
    </tr>
    <tr>
      <td>Deleted (Gelöscht)</td>
-     <td>Der Cluster wird gelöscht, aber noch nicht aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](cs_troubleshoot.html#ts_getting_help). </td>
+     <td>Der Cluster wird gelöscht, aber noch nicht aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
    <tr>
    <td>Deleting (Löschen)</td>
@@ -73,7 +76,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
    </tr>
    <tr>
      <td>Deploy failed (Bereitstellung fehlgeschlagen)</td>
-     <td>Die Bereitstellung des Kubernetes-Masters konnte nicht abgeschlossen werden. Sie können diesen Status nicht auflösen. Wenden Sie sich an den Support für IBM Cloud, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](cs_troubleshoot.html#ts_getting_help) öffnen.</td>
+     <td>Die Bereitstellung des Kubernetes-Masters konnte nicht abgeschlossen werden. Sie können diesen Status nicht auflösen. Wenden Sie sich an den Support für IBM Cloud, indem Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](cs_troubleshoot.html#ts_getting_help) öffnen. </td>
    </tr>
      <tr>
        <td>Deploying (Wird bereitgestellt)</td>
@@ -81,7 +84,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
       </tr>
       <tr>
        <td>Normal</td>
-       <td>Alle Workerknoten in einem Cluster sind betriebsbereit. Sie können auf den Cluster zugreifen und Apps auf dem Cluster bereitstellen. Dieser Status wird als einwandfreier Zustand betrachtet und erfordert keine Aktion von Ihnen. **Hinweis**: Auch wenn die Workerknoten ordnungsgemäß funktionieren, bedürfen andere Infrastrukturressourcen wie [Netz](cs_troubleshoot_network.html) und [Speicher](cs_troubleshoot_storage.html) möglicherweise Ihrer Aufmerksamkeit.</td>
+       <td>Alle Workerknoten in einem Cluster sind betriebsbereit. Sie können auf den Cluster zugreifen und Apps auf dem Cluster bereitstellen. Dieser Status wird als einwandfreier Zustand betrachtet und erfordert keine Aktion von Ihnen.<p class="note">Auch wenn die Workerknoten ordnungsgemäß funktionieren, bedürfen andere Infrastrukturressourcen wie [Netz](cs_troubleshoot_network.html) und [Speicher](cs_troubleshoot_storage.html) möglicherweise Ihrer Aufmerksamkeit. </p></td>
     </tr>
       <tr>
        <td>Pending (Anstehend)</td>
@@ -89,7 +92,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
      </tr>
    <tr>
      <td>Requested (Angefordert)</td>
-     <td>Eine Anforderung zum Erstellen des Clusters und zum Bestellen der Infrastruktur für die Kubernetes Master- und Workerknoten wird gesendet. Wenn die Bereitstellung des Clusters gestartet wird, ändert sich der Clusterstatus in <code>Deploying</code> (Wird bereitgestellt). Wenn Ihr Cluster lange Zeit im Status <code>Requested</code> (Angefordert) blockiert ist, öffnen Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](cs_troubleshoot.html#ts_getting_help). </td>
+     <td>Eine Anforderung zum Erstellen des Clusters und zum Bestellen der Infrastruktur für die Kubernetes Master- und Workerknoten wird gesendet. Wenn die Bereitstellung des Clusters gestartet wird, ändert sich der Clusterstatus in <code>Deploying</code> (Wird bereitgestellt). Wenn Ihr Cluster lange Zeit im Status <code>Requested</code> (Angefordert) blockiert ist, öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
    <tr>
      <td>Updating (Aktualisierung)</td>
@@ -103,7 +106,10 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
  </table>
 
 
-**Hinweis**: Der [Kubernetes-Master](cs_tech.html#architecture) ist die Hauptkomponente, die den Cluster betriebsbereit hält. Der Master speichert Clusterressourcen und ihre Konfigurationen in der etcd-Datenbank, die als Single Point of Truth für Ihren Cluster dient. Der Kubernetes-API-Server dient als Haupteinstiegspunkt für alle Anforderungen der Clusterverwaltung von den Workerknoten zum Master oder wenn Sie mit Ihren Clusterressourcen interagieren möchten.<br><br>Wenn ein Masterausfall auftritt, werden Ihre Workloads weiterhin auf den Workerknoten ausgeführt, Sie können jedoch erst wieder `kubectl`-Befehle verwenden, um mit Ihren Clusterressourcen zu arbeiten oder den Clusterzustand anzuzeigen, wenn der Kubernetes-API-Server im Master wieder betriebsbereit ist. Wenn ein Pod während des Ausfalls des Masters inaktiv ist, kann der Pod erst wieder ausgeführt werden, wenn der Workerknoten den Kubernetes-API-Server wieder erreichen kann.<br><br>Während eines Masterausfalls können Sie `ibmcloud ks`-Befehle weiterhin für die {{site.data.keyword.containerlong_notm}}-API ausführen, um mit Ihren Infrastrukturressourcen zu arbeiten (z. B. Workerknoten oder VLANs). Wenn Sie die aktuelle Clusterkonfiguration ändern, indem Sie Workerknoten zum Cluster hinzufügen oder aus ihm entfernen, werden die Änderungen erst wirksam, wenn der Master wieder betriebsbereit ist. **Hinweis**: Ein Workerknoten darf während eines Masterausfalls nicht neu gestartet werden. Durch diese Aktion werden die Pods aus dem Workerknoten entfernt. Da der Kubernetes-API-Server nicht verfügbar ist, können die Pods nicht auf andere Workerknoten im Cluster umgestellt werden.
+Der [Kubernetes-Master](cs_tech.html#architecture) ist die Hauptkomponente, die den Cluster betriebsbereit hält. Der Master speichert Clusterressourcen und ihre Konfigurationen in der etcd-Datenbank, die als Single Point of Truth für Ihren Cluster dient. Der Kubernetes-API-Server dient als Haupteinstiegspunkt für alle Anforderungen der Clusterverwaltung von den Workerknoten zum Master oder wenn Sie mit Ihren Clusterressourcen interagieren möchten.<br><br>Wenn ein Masterausfall auftritt, werden Ihre Workloads weiterhin auf den Workerknoten ausgeführt, Sie können jedoch erst wieder `kubectl`-Befehle verwenden, um mit Ihren Clusterressourcen zu arbeiten oder den Clusterzustand anzuzeigen, wenn der Kubernetes-API-Server im Master wieder betriebsbereit ist. Wenn ein Pod während des Ausfalls des Masters inaktiv ist, kann der Pod erst wieder ausgeführt werden, wenn der Workerknoten den Kubernetes-API-Server wieder erreichen kann.<br><br>Während eines Masterausfalls können Sie `ibmcloud ks`-Befehle weiterhin für die {{site.data.keyword.containerlong_notm}}-API ausführen, um mit Ihren Infrastrukturressourcen zu arbeiten (z. B. Workerknoten oder VLANs). Wenn Sie die aktuelle Clusterkonfiguration ändern, indem Sie Workerknoten zum Cluster hinzufügen oder aus ihm entfernen, werden die Änderungen erst wirksam, wenn der Master wieder betriebsbereit ist.
+
+Ein Workerknoten darf während eines Masterausfalls nicht neu gestartet werden. Durch diese Aktion werden die Pods aus dem Workerknoten entfernt. Da der Kubernetes-API-Server nicht verfügbar ist, können die Pods nicht auf andere Workerknoten im Cluster umgestellt werden.
+{: important}
 
 
 <br />
@@ -122,7 +128,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
   ```
   {: pre}
 
-2.  Überprüfen Sie die Felder für `Zustand` und `Status` für jeden Workerknoten in Ihrer CLI-Ausgabe.
+2.  Überprüfen Sie die Felder `State` (Zustand) und `Status` für jeden Workerknoten in Ihrer CLI-Ausgabe.
 
   <table summary="Jede Tabellenzeile sollte von links nach rechts gelesen werden, wobei der Clusterstatus in der ersten Spalte und eine Beschreibung in der zweiten Spalte angegeben ist.">
   <caption>Status des Workerknotens</caption>
@@ -170,7 +176,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
       </tr>
       <tr>
        <td>Unknown (Unbekannt)</td>
-       <td>Der Kubernetes-Master ist aus einem der folgenden Gründe nicht erreichbar:<ul><li>Sie haben ein Update Ihres Kubernetes-Masters angefordert. Der Status des Workerknotens kann während des Updates nicht abgerufen werden.</li><li>Sie haben möglicherweise eine weitere Firewall, die Ihre Workerknoten schützt, oder Sie haben die Firewalleinstellungen kürzlich geändert. {{site.data.keyword.containerlong_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Weitere Informationen finden Sie in [Firewall verhindert Verbindung für Workerknoten](cs_troubleshoot_clusters.html#cs_firewall).</li><li>Der Kubernetes-Master ist inaktiv. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](#ts_getting_help) öffnen.</li></ul></td>
+       <td>Der Kubernetes-Master ist aus einem der folgenden Gründe nicht erreichbar:<ul><li>Sie haben ein Update Ihres Kubernetes-Masters angefordert. Der Status des Workerknotens kann während des Updates nicht abgerufen werden. Wenn der Workerknoten auch nach einer erfolgreichen Aktualisierung des Kubernetes-Masters für längere Zeit in diesem Status verbleibt, versuchen Sie, den Workerknoten [erneut zu laden](cs_cli_reference.html#cs_worker_reload). </li><li>Sie haben möglicherweise eine weitere Firewall, die Ihre Workerknoten schützt, oder Sie haben die Firewalleinstellungen kürzlich geändert. {{site.data.keyword.containerlong_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Weitere Informationen finden Sie in [Firewall verhindert Verbindung für Workerknoten](cs_troubleshoot_clusters.html#cs_firewall).</li><li>Der Kubernetes-Master ist inaktiv. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](#ts_getting_help) öffnen. </li></ul></td>
   </tr>
      <tr>
         <td>Warning (Warnung)</td>
@@ -208,7 +214,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Your account is currently prohibited from ordering 'Computing Instances'.</td>
-        <td>Mit Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) können Sie möglicherweise keine Rechenressourcen bestellen. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](#ts_getting_help) öffnen.</td>
+        <td>Mit Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) können Sie möglicherweise keine Rechenressourcen bestellen. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](#ts_getting_help) öffnen. </td>
       </tr>
       <tr>
       <td>{{site.data.keyword.Bluemix_notm}} infrastructure exception: Could not place order.<br><br>
@@ -217,12 +223,12 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
       <ul><li>Die Verfügbarkeit der Infrastrukturressourcen kann in den einzelnen Zonen variieren. Warten Sie ein paar Minuten und versuchen Sie es erneut.</li>
       <li>Für einen Einzelzonencluster erstellen Sie den Cluster in einer anderen Zone. Für einen Mehrzonencluster fügen Sie eine Zone zu dem Cluster hinzu.</li>
       <li>Geben Sie ein anderes Paar aus öffentlichen und privaten VLANs für Ihre Workerknoten in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) an. Für Workerknoten, die sich in einem Worker-Pool befinden, können Sie den [Befehl](cs_cli_reference.html#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code> verwenden.</li>
-      <li>Wenden Sie sich an den Manager des IBM Cloud-Infrastrukturkontos (SoftLayer), um sicherzustellen, dass Sie keine Kontobegrenzung (z. B. ein globales Kontingent) überschreiten.</li>
-      <li>Öffnen Sie ein Support-Ticket für die [IBM Cloud-Infrastruktur (SoftLayer)](#ts_getting_help).</li></ul></td>
+      <li>Wenden Sie sich an den Manager des IBM Cloud-Infrastrukturkontos (SoftLayer), um sicherzustellen, dass Sie keine Kontobegrenzung (z. B. eine globale Quote) überschreiten.</li>
+      <li>Öffnen Sie einen Supportfall für die [IBM Cloud-Infrastruktur (SoftLayer)](#ts_getting_help). </li></ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: &lt;vlan-id&gt;.</td>
-        <td>Ihr Workerknoten konnte nicht bereitgestellt werden, weil die ausgewählte VLAN-ID aus einem der folgenden Gründe nicht gefunden werden konnte:<ul><li>Möglicherweise haben Sie statt der VLAN-ID die VLAN-Nummer angegeben. Die VLAN-Nummer umfasst 3 oder 4 Ziffern, während die VLAN-ID 7 Stellen hat. Führen Sie <code>ibmcloud ks vlans &lt;zone&gt;</code> aus, um die VLAN-ID abzurufen.<li>Möglicherweise ist die VLAN-ID nicht dem von Ihnen verwendeten Konto von IBM Cloud Infrastructure (SoftLayer) zugeordnet. Führen Sie <code>ibmcloud ks vlans &lt;zone&gt;</code> aus, um verfügbare VLAN-IDs für Ihr Konto aufzulisten. Um das Konto der IBM Cloud-Infrastruktur (SoftLayer) zu ändern, lesen Sie die Informationen unter [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set) lesen. </ul></td>
+        <td>Ihr Workerknoten konnte nicht bereitgestellt werden, weil die ausgewählte VLAN-ID aus einem der folgenden Gründe nicht gefunden werden konnte:<ul><li>Möglicherweise haben Sie statt der VLAN-ID die VLAN-Nummer angegeben. Die VLAN-Nummer umfasst 3 oder 4 Ziffern, während die VLAN-ID 7 Stellen hat. Führen Sie <code>ibmcloud ks vlans &lt;zone&gt;</code> aus, um die VLAN-ID abzurufen.<li>Möglicherweise ist die VLAN-ID nicht dem von Ihnen verwendeten Konto von IBM Cloud Infrastructure (SoftLayer) zugeordnet. Führen Sie <code>ibmcloud ks vlans &lt;zone&gt;</code> aus, um verfügbare VLAN-IDs für Ihr Konto aufzulisten. Um das Konto der IBM Cloud-Infrastruktur (SoftLayer) zu ändern, lesen Sie die Informationen unter [`ibmcloud ks credential-set`](cs_cli_reference.html#cs_credentials_set) lesen. </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
@@ -242,7 +248,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
      </tr>
       <tr>
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
-  <td>Der Eigner des API-Schlüssels, der für den Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) verwendet wird, verfügt nicht über die erforderlichen Berechtigungen zum Ausführen der Aktion oder es steht die Löschung der Berechtigungen an.</br></br><strong>Als Benutzer</strong> führen Sie diese Schritte aus: <ol><li>Wenn Sie Zugriff auf mehrere Konten haben, stellen Sie sicher, dass Sie bei dem Konto angemeldet sind, in dem Sie mit {{site.data.keyword.containerlong_notm}} arbeiten möchten. </li><li>Führen Sie den Befehl <code>ibmcloud ks api-key-info</code> aus, um den aktuellen Eigner des API-Schlüssels anzuzeigen, der für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verwendet wird. </li><li>Führen Sie den Befehl <code>ibmcloud account list</code> aus, um den Eigner des {{site.data.keyword.Bluemix_notm}}-Kontos anzuzeigen, das Sie aktuell verwenden. </li><li>Kontaktieren Sie den Eigner des {{site.data.keyword.Bluemix_notm}}-Kontos und melden Sie, dass der Eigner des API-Schlüssels nicht über ausreichende Berechtigungen in IBM Cloud Infrastructure (SoftLayer) verfügt oder dass die Löschung der Berechtigungen ansteht. </li></ol></br><strong>Als Kontoeigner</strong>, führen Sie diese Schritte aus: <ol><li>Überprüfen Sie die [erforderlichen Berechtigungen in IBM Cloud Infrastructure (SoftLayer)](cs_users.html#infra_access), um die Aktion auszuführen, die zuvor fehlgeschlagen ist. </li><li>Korrigieren Sie die Berechtigungen des API-Schlüsseleigners oder erstellen Sie mithilfe des Befehls [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) einen neuen API-Schlüssel. </li><li>Wenn durch Sie oder einen anderen Kontoadministrator Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) manuell in Ihrem Konto definiert wurden, führen Sie den Befehl [<code>ibmcloud ks credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) aus, um die Berechtigungsnachweise aus Ihrem Konto zu entfernen.</li></ol></td>
+  <td>Der Eigner des API-Schlüssels, der für den Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) verwendet wird, verfügt nicht über die erforderlichen Berechtigungen zum Ausführen der Aktion oder es steht die Löschung der Berechtigungen an.</br></br><strong>Als Benutzer</strong> führen Sie diese Schritte aus: <ol><li>Wenn Sie Zugriff auf mehrere Konten haben, stellen Sie sicher, dass Sie bei dem Konto angemeldet sind, in dem Sie mit {{site.data.keyword.containerlong_notm}} arbeiten möchten. </li><li>Führen Sie den Befehl <code>ibmcloud ks api-key-info</code> aus, um den aktuellen Eigner des API-Schlüssels anzuzeigen, der für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verwendet wird. </li><li>Führen Sie den Befehl <code>ibmcloud account list</code> aus, um den Eigner des {{site.data.keyword.Bluemix_notm}}-Kontos anzuzeigen, das Sie aktuell verwenden. </li><li>Kontaktieren Sie den Eigner des {{site.data.keyword.Bluemix_notm}}-Kontos und melden Sie, dass der Eigner des API-Schlüssels nicht über ausreichende Berechtigungen in IBM Cloud Infrastructure (SoftLayer) verfügt oder dass die Löschung der Berechtigungen ansteht. </li></ol></br><strong>Als Kontoeigner</strong>, führen Sie diese Schritte aus: <ol><li>Überprüfen Sie die [erforderlichen Berechtigungen in IBM Cloud Infrastructure (SoftLayer)](cs_users.html#infra_access), um die Aktion auszuführen, die zuvor fehlgeschlagen ist. </li><li>Korrigieren Sie die Berechtigungen des API-Schlüsseleigners oder erstellen Sie mithilfe des Befehls [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) einen neuen API-Schlüssel. </li><li>Wenn durch Sie oder einen anderen Kontoadministrator Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) manuell in Ihrem Konto definiert wurden, führen Sie den Befehl [<code>ibmcloud ks credential-unset</code>](cs_cli_reference.html#cs_credentials_unset) aus, um die Berechtigungsnachweise aus Ihrem Konto zu entfernen.</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -258,6 +264,8 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
 {: #debug_apps}
 
 Informieren Sie sich über die Optionen, die Ihnen für das Debuggen Ihrer App-Bereitstellungen und zum Eingrenzen der jeweiligen Fehlerquelle zur Verfügung stehen.
+
+
 
 1. Suchen Sie nach Unregelmäßigkeiten in den Service- oder Bereitstellungsressourcen, indem Sie den Befehl `describe` ausführen.
 
@@ -303,22 +311,16 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
 -  Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
-
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
 -   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containerlong_notm}}-Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
-
     Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
     {: tip}
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
-
     -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
-
--   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
+-   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support). Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 {: tip}
-Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 

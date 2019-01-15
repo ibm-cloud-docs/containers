@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,7 +50,7 @@ Informieren Sie sich über die Zuständigkeiten, die Sie gemeinsam mit IBM bei d
 - [Hinzufügen oder Entfernen von Clusterkapazitäten durch Ändern der Größe von Worker-Pools](cs_clusters.html#add_workers)
 - [Aktivieren des VLAN-Spannings und Beibehalten des zonenübergreifenden Ausgleichs bei Mehrzonen-Worker-Pools](cs_clusters_planning.html#ha_clusters)
 - [Erstellen öffentlicher und privater VLANs in der IBM Cloud-Infrastruktur (SoftLayer) zur Netzisolation Ihres Clusters](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Sicherstellen der Netzkonnektivität zur Kubernetes-Master-URL für alle Workerknoten](cs_firewall.html#firewall) <p>**Hinweis**: Wenn ein Workerknoten sowohl über öffentliche als auch private VLANs verfügt, dann ist die Netzkonnektivität konfiguriert. Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie unter [Ausschließlich private Clusternetze planen](cs_network_cluster.html#private_vlan). </p>
+- [Sicherstellen der Netzkonnektivität zur Kubernetes-Master-URL für alle Workerknoten](cs_firewall.html#firewall) <p class="note">Wenn ein Workerknoten sowohl über öffentliche als auch private VLANs verfügt, dann ist die Netzkonnektivität konfiguriert. Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie unter [Ausschließlich private Clusternetze planen](cs_network_cluster.html#private_vlan). </p>
 - [Aktualisieren des Master-'kube-apiserver', wenn Kubernetes-Versionsaktualisierungen verfügbar sind](cs_cluster_update.html#master)
 - [Aktualisieren der Workerknoten auf Haupt-, Neben- und Patchversionen](cs_cluster_update.html#worker_node)
 - [Wiederherstellen von fehlerhaften Workerknoten durch Ausführen der geeigneten `kubectl`-Befehle (z. B. `cordon` oder `drain`) und durch Ausführen der geeigneten `ibmcloud ks`-Befehle (z. B. `reboot`, `reload` oder `delete`](cs_cli_reference.html#cs_worker_reboot))

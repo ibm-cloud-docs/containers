@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -77,7 +80,8 @@ Wenn Sie einen Cluster erstellen, werden automatisch nicht ablaufende Registry-T
 
 Jedes Token muss in einem `imagePullSecret` von Kubernetes gespeichert sein, damit ein Kubernetes-Cluster darauf zugreifen kann, wenn Sie eine containerisierte App bereitstellen. Bei der Erstellung Ihres Clusters werden die Tokens für die globale Registry (mit den von IBM bereitgestellten öffentlichen Images) von {{site.data.keyword.containerlong_notm}} automatisch in geheimen Schlüsseln für Image-Pull-Operationen (imagePullSecrets) in Kubernetes gespeichert. Diese geheimen Schlüssel für Image-Pull-Operationen werden dem `standardmäßigen` Kubernetes-Namensbereich (default), der Standardliste mit geheimen Schlüsseln im Servicekonto (`ServiceAccount`) für diesen Namensbereich und dem Namensbereich `kube-system` hinzugefügt.
 
-**Hinweis:** Bei dieser anfänglichen Konfiguration können Sie Container aus allen Images, die in einem Namensbereich in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verfügbar sind, im **Standardnamensbereich** Ihres Clusters bereitstellen. Um einen Container in anderen Namensbereichen Ihres Clusters bereitstellen oder ein Image verwenden zu können, das in einer {{site.data.keyword.Bluemix_notm}}-Region oder in einem anderen {{site.data.keyword.Bluemix_notm}}-Konto gespeichert ist, müssen Sie [Ihr eigenes imagePullSecret für Ihren Cluster erstellen](#other).
+Bei dieser anfänglichen Konfiguration können Sie Container aus allen Images, die in einem Namensbereich in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verfügbar sind, im **Standardnamensbereich** Ihres Clusters bereitstellen. Um einen Container in anderen Namensbereichen Ihres Clusters bereitstellen oder ein Image verwenden zu können, das in einer {{site.data.keyword.Bluemix_notm}}-Region oder in einem anderen {{site.data.keyword.Bluemix_notm}}-Konto gespeichert ist, müssen Sie [Ihr eigenes imagePullSecret für Ihren Cluster erstellen](#other).
+{: note}
 
 Sollen die Berechtigungsnachweise der Registrys noch sicherer werden? Wenden Sie sich zur [Aktivierung von {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect) im Cluster an Ihren Clusteradministrator, damit geheime Kubernetes-Schlüssel im Cluster verschlüsselt werden, zum Beispiel `imagePullSecret` zum Speichern der Berechtigungsnachweise von Registrys.
 {: tip}
@@ -187,12 +191,12 @@ Sie können das imagePullSecret, das automatisch für den Kubernetes-Standardnam
    ```
    {: pre}
 
-3. Kopieren Sie das imagePullSecrets aus dem Namensbereich `default` in den Namensbereich Ihrer Wahl. Die neuen imagePullSecrets heißen `bluemix-<namespace_name>-secret-regional` und `bluemix-<namespace_name>-secret-international`.
+3. Kopieren Sie das imagePullSecrets aus dem Namensbereich `default` in den Namensbereich Ihrer Wahl. Die neuen 'imagePullSecrets' heißen `bluemix-<name_des_namensbereichs>-secret-regional` und `bluemix-<namespace_name>-secret-international`. 
    ```
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<name_des_namensbereichs>/g' | kubectl -n <name_des_namensbereichs> create -f -
    ```
    {: pre}
-   
+
    ```
    kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<name_des_namensbereichs>/g' | kubectl -n <name_des_namensbereichs> create -f -
    ```
@@ -307,7 +311,7 @@ Gehen Sie wie folgt vor, um ein imagePullSecret zu erstellen:
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes-namensbereich&gt;</em></code></td>
-    <td>Erforderlich. Der Kubernetes-Namensbereich Ihres Clusters, in dem Sie den geheimen Schlüssel verwenden und Container bereitstellen möchten. Führen Sie <code>kubectl get namespaces</code>, um alle Namensbereiche in Ihrem Cluster aufzulisten.</td>
+    <td>Erforderlich. Der Kubernetes-Namensbereich Ihres Clusters, in dem Sie den geheimen Schlüssel verwenden und Container bereitstellen möchten. Führen Sie <code>kubectl get namespaces</code> aus, um alle Namensbereiche in Ihrem Cluster aufzulisten. </td>
     </tr>
     <tr>
     <td><code><em>&lt;name_des_geheimen_schlüssels&gt;</em></code></td>
@@ -465,7 +469,7 @@ Jeder Namensbereich hat ein Kubernetes-Servicekonto namens `default`. Sie könne
    Namespace:           <name_des_namensbereichs>
    Labels:              <none>
    Annotations:         <none>
-   Image pull secrets:  bluemix-namespace_name-secret-regional
+   Image pull secrets:  bluemix-name_des_namensbereichs-secret-regional
    Mountable secrets:   default-token-sh2dx
    Tokens:              default-token-sh2dx
    Events:              <none>

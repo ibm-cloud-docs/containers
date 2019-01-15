@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -20,7 +23,7 @@ lastupdated: "2018-10-25"
 # Warum {{site.data.keyword.containerlong_notm}}?
 {: #cs_ov}
 
-{{site.data.keyword.containerlong}} bietet durch die Kombination von Docker-Containern, der Kubernetes-Technologie, einer intuitiven Benutzererfahrung und integrierter Sicherheit und Isolation leistungsfähige Tools, um die Bereitstellung, den Betrieb, das Skalieren und die Überwachung von containerisierten Apps in einem Cluster aus Rechenhosts zu automatisieren. Zertifizierungsinformationen finden Sie unter [Compliance in {{site.data.keyword.Bluemix_notm}} [Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")(https://www.ibm.com/cloud/compliance)].
+{{site.data.keyword.containerlong}} bietet durch die Kombination von Docker-Containern, der Kubernetes-Technologie, einer intuitiven Benutzererfahrung und integrierter Sicherheit und Isolation leistungsfähige Tools, um die Bereitstellung, den Betrieb, das Skalieren und die Überwachung von containerisierten Apps in einem Cluster aus Rechenhosts zu automatisieren. Zertifizierungsinformationen finden Sie unter [Compliance in {{site.data.keyword.Bluemix_notm}} ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/compliance).
 {:shortdesc}
 
 
@@ -34,6 +37,7 @@ Cluster werden auf Rechenhosts bereitgestellt, die native Kubernetes-Funktionali
 |-------|-----------|
 |Single-Tenant-Kubernetes-Cluster mit Isolation der Rechen-, Netz- und Speicherinfrastruktur|<ul><li>Erstellen Sie Ihre eigene angepasste Infrastruktur, die den Anforderungen Ihrer Organisation entspricht.</li><li>Ermöglicht die Einrichtung eines dedizierten und geschützten Kubernetes-Masters sowie von Workerknoten, virtuellen Netzen und Speicher unter Nutzung der von IBM Cloud Infrastructure (SoftLayer) bereitgestellten Ressourcen.</li><li>Der komplett verwaltete Kubernetes-Master, der kontinuierlich von {{site.data.keyword.IBM_notm}} überwacht und aktualisiert wird, um Ihren Cluster verfügbar zu halten.</li><li>Option zum Bereitstellen von Workerknoten als Bare-Metal-Server mit Trusted Compute.</li><li>Ermöglicht das Speichern persistenter Daten, die gemeinsame Nutzung von Daten durch Kubernetes-Pods und bei Bedarf die Wiederherstellung von Daten mit dem integrierten und sicheren Datenträgerservice.</li><li>Bietet volle Unterstützung für alle nativen Kubernetes-APIs.</li></ul>|
 | Mehrzonencluster zur Verstärkung der Hochverfügbarkeit | <ul><li>Workerknoten desselben Maschinentyps (CPU, Speicher, virtuell oder physisch) können einfach mit Worker-Pools verwaltet werden.</li><li>Schutz gegen Zonenausfälle, indem Knoten gleichmäßig über ausgewählte Zonen verteilt werden und indem für Ihre Apps Podbereitstellungen mit Anti-Affinität verwendet werden.</li><li>Verringern Sie Ihre Kosten, indem Sie Mehrzonencluster verwenden, anstatt die Ressourcen in einem separaten Cluster zu duplizieren.</li><li>Profitieren Sie von dem App-übergreifenden automatischen Lastausgleich durch die 'Lastausgleichsfunktion für mehrere Zonen', die für Sie in jeder Zone des Clusters automatisch eingerichtet wird.</li></ul>|
+| Hoch verfügbare Master | <ul>Verfügbar in Clustern, auf denen Kubernetes Version 1.10 oder höher ausgeführt wird. <li>Reduzieren Sie Clusterausfallzeiten, beispielsweise während Aktualisierungen des Masters, mithilfe von hoch verfügbaren Mastern, die beim Erstellen eines Clusters automatisch bereitgestellt werden. </li><li>Verteilen Sie Ihre Master über mehrere Zonen in einem [Mehrzonencluster](cs_clusters_planning.html#multizone), um Ihren Cluster vor Zonenausfällen zu schützen.</li></ul> |
 |Einhaltung von Sicherheitsbestimmungen für Images mit Vulnerability Advisor|<ul><li>Richten Sie Ihr eigenes Repository in unserer geschützten privaten Docker-Image-Registry ein, in der Images gespeichert und von allen Benutzern der Organisation gemeinsam genutzt werden.</li><li>Profitieren Sie durch das automatische Scannen von Images in Ihrer privaten {{site.data.keyword.Bluemix_notm}}-Registry.</li><li>Ermöglicht die Überprüfung von Empfehlungen für das im Image verwendete Betriebssystem, um potenzielle Schwachstellen zu beheben.</li></ul>|
 |Kontinuierliche Überwachung des Clusterzustands|<ul><li>Über das Cluster-Dashboard können Sie den Zustand Ihrer Cluster, Workerknoten und Containerbereitstellungen rasch anzeigen und verwalten.</li><li>Ermöglicht die Feststellung detaillierter Metriken zur Auslastung mit {{site.data.keyword.monitoringlong}} und die rasche Erweiterung des Clusters als Reaktion auf die Arbeitslast.</li><li>Stellt detaillierte Protokollinformationen zu Clusteraktivitäten über den {{site.data.keyword.loganalysislong}} bereit.</li></ul>|
 |Sichere Offenlegung von Apps gegenüber der Allgemeinheit|<ul><li>Sie haben die Auswahl zwischen einer öffentlichen IP-Adresse, einer von {{site.data.keyword.IBM_notm}} bereitgestellten Route oder Ihrer eigenen angepassten Domäne, um aus dem Internet auf Services in Ihrem Cluster zuzugreifen.</li></ul>|
@@ -108,6 +112,8 @@ Wenn Sie einen kostenlosen Cluster haben und ein Upgrade auf einen Standardclust
 |[Plattenspeicher auf Workerknoten für nicht persistenten Speicher](cs_storage_planning.html#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 | [Möglichkeit zum Erstellen eines Clusters in jeder {{site.data.keyword.containerlong_notm}}-Region](cs_regions.html) | | <img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" /> |
 |[Mehrzonencluster zur Verstärkung der Hochverfügbarkeit](cs_clusters_planning.html#multizone) | |<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
+| Replizierte Master für höhere Verfügbarkeit (Kubernetes 1.10 oder höher) | | <img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" /> |
+|[Skalierbare Anzahl von Workerknoten zur Steigerung der Kapazität](cs_app.html#app_scaling)| |<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Persistenter NFS-dateibasierter Speicher mit Datenträgern](cs_storage_file.html#file_storage)| |<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Öffentlicher oder privater App-Zugriff auf eine stabile IP-Adresse durch einen Lastausgleichsservice](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Öffentlicher App-Zugriff auf eine stabile IP-Adresse und eine anpassbare URL durch einen Ingress-Service](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
@@ -119,6 +125,8 @@ Wenn Sie einen kostenlosen Cluster haben und ein Upgrade auf einen Standardclust
 {: caption="Merkmale von kostenlosen Clustern und Standardclustern" caption-side="top"}
 
 <br />
+
+
 
 
 ## Preisstruktur und Abrechnung
@@ -133,7 +141,7 @@ Wenn Sie einen kostenlosen Cluster haben und ein Upgrade auf einen Standardclust
 **Wie kann ich meine Abrechnung und Nutzung überprüfen?**<br>
 Informationen zur Nutzung und den geschätzten Gesamtbeträgen finden Sie unter [Nutzung anzeigen](/docs/billing-usage/viewing_usage.html#viewingusage).
 
-Wenn Sie das {{site.data.keyword.Bluemix_notm}}-Konto und das IBM Cloud-Infrastrukturkonto (SoftLayer) miteinander verknüpfen, erhalten Sie eine konsolidierte Abrechnung; weitere Informationen finden Sie unter [Konsolidierte Rechnungsstellung für verknüpfte Konten](/docs/billing-usage/linking_accounts.html#unifybillaccounts).
+Wenn Sie das {{site.data.keyword.Bluemix_notm}}-Konto und das IBM Cloud-Infrastrukturkonto (SoftLayer) miteinander verknüpfen, erhalten Sie eine konsolidierte Abrechnung; weitere Informationen finden Sie unter [Konsolidierte Rechnungsstellung für verknüpfte Konten](/docs/customer-portal/linking_accounts.html#unifybillaccounts).
 
 **Kann ich meine Cloudressourcen zu Abrechnungszwecken nach Teams oder Abteilungen zusammenfassen?**<br>
 Sie können [Ressourcengruppen verwenden](/docs/resources/bestpractice_rgs.html#bp_resourcegroups), um {{site.data.keyword.Bluemix_notm}}-Ressourcen, einschließlich Cluster, zur Verwaltung der Abrechnung in Gruppen zusammenzufassen.
@@ -178,11 +186,11 @@ Mit {{site.data.keyword.containerlong_notm}}-Clustern können Sie die Rechen-, N
   <p>Details zu den Maschinenspezifikationen finden Sie unter [Verfügbare Hardware für Workerknoten](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).</p></dd>
 
 <dt id="bandwidth">Öffentliche Bandbreite</dt>
-  <dd><p>Die Bandbreite bezieht sich auf die öffentliche Datenübertragung des eingehenden und abgehenden Netzverkehrs, sowohl zu als auch von den {{site.data.keyword.Bluemix_notm}}-Ressourcen in den Rechenzentren auf der ganzen Welt. Die öffentliche Bandbreite wird nach Gb berechnet. Wenn Sie Ihre aktuelle Zusammenfassung der Bandbreite überprüfen möchten, melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://console.bluemix.net/) an, wählen Sie im Menü **Infrastruktur** aus und wählen Sie anschließend die Seite **Netz > Bandbreite > Zusammenfassung** aus.
+  <dd><p>Die Bandbreite bezieht sich auf die öffentliche Datenübertragung des eingehenden und abgehenden Netzverkehrs, sowohl zu als auch von den {{site.data.keyword.Bluemix_notm}}-Ressourcen in den Rechenzentren auf der ganzen Welt. Die öffentliche Bandbreite wird nach Gb berechnet. Wenn Sie Ihre aktuelle Zusammenfassung der Bandbreite überprüfen möchten, melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://console.bluemix.net/) an, wählen Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") **Infrastruktur** aus und wählen Sie anschließend die Seite **Netz > Bandbreite > Zusammenfassung** aus.
   <p>Überprüfen Sie die folgenden Faktoren, die sich auf die Gebühren für die öffentliche Bandbreite auswirken:</p>
   <ul><li><strong>Standort</strong>: Wie bei den Workerknoten variieren die Gebühren in Abhängigkeit von der Zone, in der die Ressourcen bereitgestellt werden.</li>
   <li><strong>Inklusive Bandbreite oder nutzungsabhängig</strong>: Die Workerknotenmaschinen können mit einer bestimmten Zuordnung für abgehende Netze pro Monat bereitgestellt werden, zum Beispiel 250 Gb für virtuelle Maschinen oder 500 Gb für Bare-Metal-Maschinen. Alternativ wird auch eine nutzungsabhängig Zuordnung auf der Basis der Gb-Nutzung bereitgestellt.</li>
-  <li><strong>Gestaffelte Pakete</strong>: Sobald eine inklusive Bandbreite überschritten wird, wird die Abrechnung nach einem gestaffelten Nutzungsschema ausgeführt, das abhängig vom Standort variiert. Wenn Sie das Kontingent für die Staffelung überschreiten, wird möglicherweise auch eine Standarddatenübertragungsgebühr abgerechnet.</li></ul>
+  <li><strong>Gestaffelte Pakete</strong>: Sobald eine inklusive Bandbreite überschritten wird, wird die Abrechnung nach einem gestaffelten Nutzungsschema ausgeführt, das abhängig vom Standort variiert. Wenn Sie die Quote für die Staffelung überschreiten, wird möglicherweise auch eine Standarddatenübertragungsgebühr abgerechnet. </li></ul>
   <p>Weitere Informationen finden Sie in [Bandbreitenpakete ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/bandwidth).</p></dd>
 
 <dt id="subnets">IP-Teilnetzadressen</dt>

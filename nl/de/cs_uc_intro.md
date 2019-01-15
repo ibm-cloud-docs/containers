@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -25,8 +28,8 @@ In einer Reihe unterschiedlicher Anwendungsfälle werden die Stärken von {{site
 * Künstliche Intelligenz und maschinelles Lernen
 * Daten und Speicher
 * DevOps
-
 {: shortdesc}
+
 <table summary="In der Tabelle sind die Anwendungsfälle aufgeführt. Die Zeilen sind von links nach rechts zu lesen; die Symbole in Zeile eins stehen für die jeweilige Branche, die Beschreibung befindet sich in Spalte zwei.">
 <caption>Anwendungsfälle</caption>
   <thead>

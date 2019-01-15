@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -58,7 +61,7 @@ Beim Zugriff auf das Kibana-Dashboard werden Ihre Protokolle nicht angezeigt.
     <td>Informationen darüber, wie Sie den Status des Clusters überprüfen können, finden Sie unter <a href="cs_troubleshoot.html#debug_clusters">Cluster debuggen</a>.</td>
   </tr>
   <tr>
-    <td>Das Kontingent für den Protokollspeicher ist erschöpft.</td>
+    <td>Die Quote für den Protokollspeicher ist erschöpft.</td>
     <td>Informationen darüber, wie Sie die Protokollspeichergrenze erhöhen können, finden Sie in der <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html">{{site.data.keyword.loganalysislong_notm}}-Dokumentation</a>.</td>
   </tr>
   <tr>
@@ -75,39 +78,37 @@ Beim Zugriff auf das Kibana-Dashboard werden Ihre Protokolle nicht angezeigt.
   </tbody>
 </table>
 
-Um Änderungen zu testen, die Sie während der Fehlerbehebung vorgenommen haben, können Sie *Noisy* auf einem Workerknoten in Ihrem Cluster bereitstellen. Dabei handelt es sich um einen Beispiel-Pod, der mehrere Protokollereignisse generiert.
+Um Änderungen zu testen, die Sie während der Fehlerbehebung vorgenommen haben, können Sie *Noisy* auf einem Workerknoten in Ihrem Cluster bereitstellen. Dabei handelt es sich um einen Beispiel-Pod, der mehrere Protokollereignisse generiert. 
 
-  1. Für den Cluster, in dem mit dem Erstellen der Protokolle begonnen werden soll: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
-  2. Erstellen Sie die Konfigurationsdatei `deploy-noisy.yaml`.
-
-      ```
-      apiVersion: v1
+1. Erstellen Sie die Konfigurationsdatei `deploy-noisy.yaml`.
+    ```
+    apiVersion: v1
       kind: Pod
       metadata:
         name: noisy
       spec:
         containers:
-        - name: noisy
+      - name: noisy
           image: ubuntu:16.04
           command: ["/bin/sh"]
           args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
           imagePullPolicy: "Always"
-        ```
-        {: codeblock}
+      ```
+      {: codeblock}
 
-  3. Führen Sie die Konfigurationsdatei in dem Kontext des Clusters aus.
+2. Führen Sie die Konfigurationsdatei in dem Kontext des Clusters aus.
+    ```
+    kubectl apply -f noisy.yaml
+    ```
+    {:pre}
 
-        ```
-        kubectl apply -f noisy.yaml
-        ```
-        {:pre}
-
-  4. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.
-      - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://logging.ng.bluemix.net
-      - Vereinigtes Königreich (Süden): https://logging.eu-gb.bluemix.net
-      - Mitteleuropa: https://logging.eu-fra.bluemix.net
-      - Asiatisch-pazifischer Raum (Süden): https://logging.au-syd.bluemix.net
+3. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.
+    - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://logging.ng.bluemix.net
+    - Vereinigtes Königreich (Süden): https://logging.eu-gb.bluemix.net
+    - Mitteleuropa: https://logging.eu-fra.bluemix.net
+    - Asiatisch-pazifischer Raum (Süden): https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -139,22 +140,16 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
 -  Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
-
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
 -   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containerlong_notm}}-Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
-
     Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
     {: tip}
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
-
     -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
-
--   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
+-   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support). Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 {: tip}
-Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 

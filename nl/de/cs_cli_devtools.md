@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -168,8 +171,8 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks credentials-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
@@ -383,7 +386,7 @@ Wenn ein anderer Benutzer eine Aktion in dieser Region ausführt, die eine Inter
 
 Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der für eine Region gespeichert ist, können Sie dies tun, indem Sie den Befehl [ibmcloud ks api-key-reset](#cs_api_key_reset) ausführen. Dieser Befehl erfordert die {{site.data.keyword.containerlong_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto.
 
-**Tipp:** Der API-Schlüssel, der in diesem Befehl zurückgegeben wird, wird möglicherweise nicht verwendet, wenn die Berechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) manuell mithilfe des Befehls [ibmcloud ks credentials-set](#cs_credentials_set) festgelegt wurden.
+**Tipp:** Der API-Schlüssel, der in diesem Befehl zurückgegeben wird, wird möglicherweise nicht verwendet, wenn die Berechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) manuell mithilfe des Befehls [ibmcloud ks credential-set](#cs_credentials_set) festgelegt wurden. 
 
 <strong>Befehlsoptionen</strong>:
 
@@ -896,21 +899,23 @@ Anzeigen von Informationen zu einem Cluster in Ihrer Organisation.
 **Beispielausgabe**:
 
   ```
-  Name:        my_cluster
-  ID:          abc1234567
-  State:       normal
-  Trust ready: false
-  Created:     2018-01-01T17:19:28+0000
-  Zone:        dal10
-  Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Master Location: Dallas
-  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
-  Ingress secret:    my_cluster
-  Workers:      3
-  Worker Zones: dal10
-  Version:      1.11.3
-  Owner Email:  name@example.com
+  Name:                 mein_cluster
+  ID:                   abc1234567
+  State:                normal
+  Trust ready:          false
+  Created:              2018-01-01T17:19:28+0000
+  Zone:                 dal10
+  Master URL:           https://169.xx.xxx.xxx:xxxxx
+  Master Location:      Dallas
+  Ingress subdomain:    mein_cluster.us-south.containers.appdomain.cloud
+  Ingress secret:       mein_cluster
+  Workers:              3
+  Worker Zones:         dal10
+  Version:              1.12.3
+  Owner:                name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Resource Group ID:    a8a12accd63b437bbd6d58fb6a462ca7
+  Resource Group Name:  Default
 
   Addons
   Name                   Enabled
@@ -1070,7 +1075,7 @@ Hinzufügen eines {{site.data.keyword.Bluemix_notm}}-Service zu einem Cluster. U
   {: pre}
 
 
-### ibmcloud ks cluster-service-unbind CLUSTER KUBERNETES-NAMENSBEREIC GUID_DER_SERVICEINSTANZ [-s]
+### ibmcloud ks cluster-service-unbind CLUSTER KUBERNETES-NAMENSBEREICH GUID_DER_SERVICEINSTANZ [-s]
 {: #cs_cluster_service_unbind}
 
 Entfernen eines {{site.data.keyword.Bluemix_notm}}-Service aus einem Cluster.
@@ -1088,7 +1093,7 @@ schlägt er fehl, weil die Serviceberechtigungsnachweise nicht gefunden werden k
    <dd>Der Name des Kubernetes-Namensbereichs. Dieser Wert ist erforderlich.</dd>
 
    <dt><code><em>GUID_DER_SERVICEINSTANZ</em></code></dt>
-   <dd>Die ID der {{site.data.keyword.Bluemix_notm}}-Serviceinstanz, die Sie entfernen möchten. Führen Sie `ibmcloud ks cluster-services <cluster_name_or_ID>` aus, um die ID der Serviceinstanz abzurufen. Dieser Wert ist erforderlich.</dd>
+   <dd>Die ID der {{site.data.keyword.Bluemix_notm}}-Serviceinstanz, die Sie entfernen möchten. Führen Sie `ibmcloud ks cluster-services <clustername_oder_-id>` aus, um die ID der Serviceinstanz abzurufen. Dieser Wert ist erforderlich.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Die Tagesnachricht wird nicht angezeigt oder es werden keine Erinnerungen aktualisiert. Dieser Wert ist optional.</dd>
@@ -1145,7 +1150,7 @@ Nachdem Sie [den Container-Scanner installiert haben](/docs/services/va/va_index
 <dl>
 <dt><code>CONTAINER-ID</code></dt>
 <dd><p>Die ID des Containers. Dieser Wert ist erforderlich.</p>
-<p>Gehen Sie wie folgt vor, um nach der ID Ihres Containers zu suchen:<ol><li>[Richten Sie die Kubernetes-CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure).</li><li>Listen Sie Ihre Pods auf, indem Sie `kubectl get pods` ausführen.</li><li>Suchen Sie nach dem Feld **Container-ID** in der Ausgabe des Befehls `kubectl describe pod <pod_name>`. Beispiel: `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Entfernen Sie das Präfix `docker://` aus der ID, bevor Sie die Container-ID für den Befehl `ibmcloud ks va` verwenden. Beispiel: `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+<p>Gehen Sie wie folgt vor, um nach der ID Ihres Containers zu suchen:<ol><li>[Richten Sie die Kubernetes-CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure).</li><li>Listen Sie Ihre Pods auf, indem Sie `kubectl get pods` ausführen.</li><li>Suchen Sie nach dem Feld **Container ID** in der Ausgabe des Befehls `kubectl describe pod <podname>` zurückgegeben wird. Beispiel: `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Entfernen Sie das Präfix `docker://` aus der ID, bevor Sie die Container-ID für den Befehl `ibmcloud ks va` verwenden. Beispiel: `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
 <dd><p>Erweitern Sie die Befehlsausgabe, um mehr Korrekturinformationen für anfällige Pakete anzuzeigen. Dieser Wert ist optional.</p>
@@ -1656,7 +1661,7 @@ Anzeigen des Status aller Lastausgleichsfunktionen für Anwendungen (ALBs) in ei
 ## Befehle für die Infrastruktur
 {: #infrastructure_commands}
 
-### ibmcloud ks credentials-set --infrastructure-api-key API-SCHLÜSSEL --infrastructure-username BENUTZERNAME [-s]
+### ibmcloud ks credential-set --infrastructure-api-key API-SCHLÜSSEL --infrastructure-username BENUTZERNAME [-s]
 {: #cs_credentials_set}
 
 Festlegen von Berechtigungsnachweisen für das Konto der IBM Cloud-Infrastruktur (SoftLayer) für Ihr {{site.data.keyword.containerlong_notm}}-Konto.
@@ -1712,12 +1717,12 @@ Sie können nicht mehrere Berechtigungsnachweise für ein {{site.data.keyword.co
 **Beispiel**:
 
   ```
-  ibmcloud ks credentials-set --infrastructure-api-key <api-schlüssel> --infrastructure-username dbmanager
+  ibmcloud ks credential-set --infrastructure-api-key <api-schlüssel> --infrastructure-username dbmanager
   ```
   {: pre}
 
 
-### ibmcloud ks credentials-unset
+### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
 Entfernen Sie die Kontoberechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) aus Ihrem {{site.data.keyword.containerlong_notm}}-Konto.
@@ -1734,7 +1739,7 @@ Nachdem Sie die Berechtigungsnachweise entfernt haben, wird der [IAM-API-Schlüs
 **Beispiel**:
 
   ```
-  ibmcloud ks credentials-unset
+  ibmcloud ks credential-unset
   ```
   {: pre}
 
@@ -1960,7 +1965,7 @@ Löschen einer Protokollweiterleitungskonfiguration oder aller Protokollierungsk
   {: pre}
 
 
-### ibmcloud ks logging-config-update CLUSTER --id PROTOKOLLKONFIGURATIONS-ID --type PROTOKOLLTYP  [--namespace NAMNESBEREICH][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port PROTOKOLLSERVER-PORT][--space CLUSTER_SPACE] [--org CLUSTERORG][--app-paths PATH] [--app-containers PFAD][--json] [--skipValidation][-s]
+### ibmcloud ks logging-config-update CLUSTER --id PROTOKOLLKONFIGURATIONS-ID --type PROTOKOLLTYP  [--namespace NAMENSBEREICH][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port PROTOKOLLSERVER-PORT][--space CLUSTER_SPACE] [--org CLUSTERORG][--app-paths PATH] [--app-containers PFAD][--json] [--skipValidation][-s]
 {: #cs_logging_update}
 
 Aktualisieren Sie die Details einer Protokollweiterleitungskonfiguration.
@@ -2452,7 +2457,7 @@ Stellen Sie, bevor Sie einen Warmstart für Ihren Workerknoten durchführen, sic
    ```
    kubectl get nodes
    ```
-   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `ibmcloud ks workers <cluster_name_or_ID>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
+   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `ibmcloud ks workers <clustername_oder_-id>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
 2. Markieren Sie den Workerknoten in einem Prozess, der als Abriegelung oder "Cordoning" bezeichnet wird, als nicht planbar ("unschedulable"). Wenn Sie einen Workerknoten abriegeln, ist er für die künftige Pod-Planung nicht mehr verfügbar. Verwenden Sie den **Namen** des Workerknotens, den Sie im vorherigen Schritt erhalten haben.
    ```
    kubectl cordon <workername>
@@ -2471,7 +2476,7 @@ Stellen Sie, bevor Sie einen Warmstart für Ihren Workerknoten durchführen, sic
     ```
     {: pre}
     Dieser Prozess kann einige Minuten dauern.
- 5. Führen Sie einen Warmstart für den Workerknoten durch. Verwenden Sie die Worker-ID, die vom Befehl `ibmcloud ks workers <cluster_name_or_ID>` zurückgegeben wird.
+ 5. Führen Sie einen Warmstart für den Workerknoten durch. Verwenden Sie die Worker-ID, die vom Befehl `ibmcloud ks workers <clustername_oder_-id>` zurückgegeben wird.
     ```
     ibmcloud ks worker-reboot <clustername_oder_-id> <workername_oder_-id>
     ```
@@ -2525,7 +2530,7 @@ Stellen Sie, bevor Sie Ihren Workerknoten erneut laden, sicher, dass die Pods er
    ```
    kubectl get nodes
    ```
-   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `ibmcloud ks workers <cluster_name_or_ID>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
+   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `ibmcloud ks workers <clustername_oder_-id>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
 2. Markieren Sie den Workerknoten in einem Prozess, der als Abriegelung oder "Cordoning" bezeichnet wird, als nicht planbar ("unschedulable"). Wenn Sie einen Workerknoten abriegeln, ist er für die künftige Pod-Planung nicht mehr verfügbar. Verwenden Sie den **Namen** des Workerknotens, den Sie im vorherigen Schritt erhalten haben.
    ```
    kubectl cordon <workername>
@@ -2544,7 +2549,7 @@ Stellen Sie, bevor Sie Ihren Workerknoten erneut laden, sicher, dass die Pods er
     ```
     {: pre}
     Dieser Prozess kann einige Minuten dauern.
- 5. Laden Sie den Workerknoten erneut. Verwenden Sie die Worker-ID, die vom Befehl `ibmcloud ks workers <cluster_name_or_ID>` zurückgegeben wird.
+ 5. Laden Sie den Workerknoten erneut. Verwenden Sie die Worker-ID, die vom Befehl `ibmcloud ks workers <clustername_oder_-id>` zurückgegeben wird.
     ```
     ibmcloud ks worker-reload <clustername_oder_-id> <workername_oder_-id>
     ```
@@ -2591,7 +2596,7 @@ Stellen Sie, bevor Sie Ihren Workerknoten entfernen, sicher, dass die Pods erneu
    ```
    kubectl get nodes
    ```
-   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `ibmcloud ks workers <cluster_name_or_ID>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
+   Der **Name**, der in diesem Befehl zurückgegeben wird, ist die private IP-Adresse, die Ihrem Workerknoten zugewiesen ist. Weitere Informationen zu Ihrem Workerknoten finden Sie, wenn Sie den Befehl `ibmcloud ks workers <clustername_oder_-id>` ausführen und nach dem Workerknoten mit derselben **privaten IP**-Adresse suchen.
 2. Markieren Sie den Workerknoten in einem Prozess, der als Abriegelung oder "Cordoning" bezeichnet wird, als nicht planbar ("unschedulable"). Wenn Sie einen Workerknoten abriegeln, ist er für die künftige Pod-Planung nicht mehr verfügbar. Verwenden Sie den **Namen** des Workerknotens, den Sie im vorherigen Schritt erhalten haben.
    ```
    kubectl cordon <workername>
@@ -2610,7 +2615,7 @@ Stellen Sie, bevor Sie Ihren Workerknoten entfernen, sicher, dass die Pods erneu
    ```
    {: pre}
    Dieser Prozess kann einige Minuten dauern.
-5. Entfernen Sie den Workerknoten. Verwenden Sie die Worker-ID, die vom Befehl `ibmcloud ks workers <cluster_name_or_ID>` zurückgegeben wird.
+5. Entfernen Sie den Workerknoten. Verwenden Sie die Worker-ID, die vom Befehl `ibmcloud ks workers <clustername_oder_-id>` zurückgegeben wird.
    ```
    ibmcloud ks worker-rm <clustername_oder_-id> <workername_oder_-id>
    ```
@@ -2698,7 +2703,7 @@ Anzeigen einer Liste der Workerknoten und ihres jeweiligen Status in einem Clust
    <dd>Der Name oder die ID des Clusters für die verfügbaren Workerknoten. Dieser Wert ist erforderlich.</dd>
 
    <dt><code>--worker-pool <em>POOL</em></code></dt>
-   <dd>Zeigt nur die Workerknoten an, die zum Worker-Pool gehören. Führen Sie den Befehl `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>` aus, um verfügbare Worker-Pools aufzulisten. Dieser Wert ist optional.</dd>
+   <dd>Zeigt nur die Workerknoten an, die zum Worker-Pool gehören. Führen Sie den Befehl `ibmcloud ks worker-pools --cluster <clustername_oder_-id>` aus, um verfügbare Worker-Pools aufzulisten. Dieser Wert ist optional.</dd>
 
    <dt><code>--show-deleted</code></dt>
    <dd>Zeigen Sie Workerknoten an, die aus dem Cluster gelöscht wurden, und den Grund für das Löschen. Dieser Wert ist optional.</dd>
@@ -2770,7 +2775,7 @@ Zeigen Sie die Details eines Worker-Pools an.
 
 <dl>
   <dt><code>--worker-pool <em>WORKER-POOL</em></code></dt>
-    <dd>Der Name des Workerknoten-Pools, für den die Details angezeigt werden sollen. Führen Sie den Befehl `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>` aus, um verfügbare Worker-Pools aufzulisten. Dieser Wert ist erforderlich.</dd>
+    <dd>Der Name des Workerknoten-Pools, für den die Details angezeigt werden sollen. Führen Sie den Befehl `ibmcloud ks worker-pools --cluster <clustername_oder_-id>` aus, um verfügbare Worker-Pools aufzulisten. Dieser Wert ist erforderlich.</dd>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>Der Name oder die ID des Clusters, in dem sich der Worker-Pool befindet. Dieser Wert ist erforderlich.</dd>
 </dl>
@@ -2785,15 +2790,15 @@ Zeigen Sie die Details eines Worker-Pools an.
 **Beispielausgabe**:
 
   ```
-  Name:               pool
-  ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g
-  State:              active
-  Hardware:           shared
-  Zones:              dal10,dal12
-  Workers per zone:   3
-  Machine type:       b2c.4x16.encrypted
-  Labels:             -
-  Version:            1.10.8_1512
+  Name:               pool   
+  ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g   
+  State:              active   
+  Hardware:           shared   
+  Zones:              dal10,dal12   
+  Workers per zone:   3   
+  Machine type:       b2c.4x16.encrypted   
+  Labels:             -   
+  Version:            1.10.11_1512
   ```
   {: screen}
 
@@ -3009,4 +3014,3 @@ Bevor Sie eine Zone entfernen, stellen Sie sicher, dass genügend Workerknoten i
   ibmcloud ks zone-rm --zone dal10 --cluster mein_cluster
   ```
   {: pre}
-  

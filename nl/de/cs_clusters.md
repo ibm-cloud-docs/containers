@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,7 +13,11 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
+{:gif: data-image-type='gif'}
 
 
 # Cluster und Workerknoten einrichten
@@ -34,11 +38,11 @@ Die Liste besteht aus zwei Teilen:
 ### Kontoebene
 {: #prepare_account_level}
 
-1.  [Erstellen Sie ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto oder -Abonnementkonto oder führen Sie eine entsprechende Aktualisierung auf ein solches Konto durch](https://console.bluemix.net/registration/).
+1.  [Erstellen Sie ein belastbares Konto oder führen Sie für Ihr Konto ein Upgrade auf ein belastbares Konto durch ({{site.data.keyword.Bluemix_notm}}nutzungsabhängig oder Abonnement)](https://console.bluemix.net/registration/). 
 2.  [Konfigurieren Sie einen {{site.data.keyword.containerlong_notm}}-API-Schlüssel](cs_users.html#api_key) in den Regionen, in denen Sie Cluster erstellen möchten. Ordnen Sie den API-Schlüssel den entsprechenden Berechtigungen zum Erstellen von Clustern hinzu:
     *  Die Rolle **Superuser** für die IBM Cloud-Infrastruktur (SoftLayer).
-    *  Die Plattformmanagementrolle **Administrator** für {{site.data.keyword.containerlong_notm}}
-    *  Die Plattformmanagementrolle **Administrator** für {{site.data.keyword.registrylong_notm}}
+    *  Die Plattformmanagementrolle **Administrator** für {{site.data.keyword.containerlong_notm}} auf Kontoebene. 
+    *  Die Plattformmanagementrolle **Administrator** für {{site.data.keyword.registrylong_notm}} auf Kontoebene. 
 
     Sind Sie der Kontoeigner? Sie verfügen bereits über die erforderlichen Berechtigungen. Wenn Sie einen Cluster erstellen, wird der API-Schlüssel für diese Region und Ressourcengruppe mit den Berechtigungsnachweisen festgelegt.
     {: tip}
@@ -46,7 +50,7 @@ Die Liste besteht aus zwei Teilen:
 3.  Wenn vom Konto mehrere Ressourcengruppen verwendet werden, ermitteln Sie die Strategie Ihres Kontos für die [Verwaltung von Ressourcengruppen](cs_users.html#resource_groups). 
     *  Der Cluster wird in der Ressourcengruppe erstellt, die Sie während der Anmeldung an {{site.data.keyword.Bluemix_notm}} als Ziel angeben. Wenn Sie keine Ressourcengruppe als Ziel angeben, wird automatisch die Standardressourcengruppe als Ziel verwendet.
     *  Wenn Sie einen Cluster in einer anderen Ressourcengruppe als der Standardressourcengruppe erstellen möchten, benötigen Sie mindestens die Rolle **Anzeigeberechtigter** für die Ressourcengruppe. Falls Sie über keine Rolle für die Ressourcengruppe verfügen, aber ein **Administrator** für den Service in der Ressourcengruppe sind, wird der Cluster in der Standardressourcengruppe erstellt.
-    *  Die Ressourcengruppe eines Clusters kann nicht geändert werden. Der Cluster kann nur in andere {{site.data.keyword.Bluemix_notm}}-Services integriert werden, die sich in derselben Ressourcengruppe befinden.
+    *  Die Ressourcengruppe eines Clusters kann nicht geändert werden. Der Cluster kann nur in andere {{site.data.keyword.Bluemix_notm}}-Services integriert werden, die sich in derselben Ressourcengruppe befinden oder in Services, die keine Ressourcengruppen unterstützen, z. B. {{site.data.keyword.registrylong_notm}}. 
     *  Wenn Sie beabsichtigen, [{{site.data.keyword.monitoringlong_notm}} für Metriken](cs_health.html#view_metrics) zu verwenden, planen Sie, dem Cluster einen Namen zu geben, der in allen Ressourcengruppen und Regionen des Kontos eindeutig ist, um Konflikte bei Metriknamen zu vermeiden.
     * Falls Sie über ein {{site.data.keyword.Bluemix_dedicated}}-Konto verfügen, müssen Sie nur in der Standardressourcengruppe Cluster erstellen.
 4.  Aktivieren Sie das VLAN-Spanning. Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie [VLAN-Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](cs_users.html#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitte, diese zu aktivieren. Um zu prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Wenn Sie {{site.data.keyword.BluDirectLink}} verwenden, müssen Sie stattdessen eine [ VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf) verwenden. Um VRF zu aktivieren, wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer).
@@ -57,72 +61,80 @@ Die Liste besteht aus zwei Teilen:
 1.  Stellen Sie sicher, dass Sie über die Plattformrolle **Administrator** für {{site.data.keyword.containerlong_notm}} verfügen.
     1.  Klicken Sie in der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://console.bluemix.net/) auf **Verwalten > Konto > Benutzer**.
     2.  Wählen Sie sich in der Tabelle selbst aus.
-    3.  Bestätigen Sie in der Registerkarte **Zugriffsrichtlinien**, dass Ihre **Rolle** **Administrator** ist. Sie können **Administrator** für alle Ressourcen im Konto oder zumindest für {{site.data.keyword.containershort_notm}} sein. **Anmerkung:** Falls Sie über die Rolle **Administrator** für {{site.data.keyword.containershort_notm}} nur in einer Ressourcengruppe oder Region und nicht im gesamten Konto verfügen, müssen Sie mindestens auf Kontoebene über die Rolle **Anzeigeberechtigter** verfügen, um die VLANs des Kontos anzeigen zu können.
+    3.  Bestätigen Sie in der Registerkarte **Zugriffsrichtlinien**, dass Ihre **Rolle** **Administrator** ist. Sie können **Administrator** für alle Ressourcen im Konto oder zumindest für {{site.data.keyword.containershort_notm}} sein. **Hinweis:** Falls Sie über die Rolle **Administrator** für {{site.data.keyword.containershort_notm}} nur in einer Ressourcengruppe oder Region und nicht im gesamten Konto verfügen, müssen Sie mindestens auf Kontoebene über die Rolle **Anzeigeberechtigter** verfügen, um die VLANs des Kontos anzeigen zu können.
 2.  Entscheiden Sie sich zwischen einem [kostenlosen Cluster und einem Standardcluster](cs_why.html#cluster_types). Sie können einen kostenlosen Cluster erstellen, um 30 Tage lang einige der Leistungsmerkmale zu testen. Oder Sie können umfassend anpassbare Standardcluster mit Ihrer gewünschten Hardwareisolation erstellen. Erstellen Sie einen Standardcluster, um weitere Vorteile nutzen zu können und die Clusterleistung besser steuern zu können.
 3.  [Planen Sie die Konfiguration des Clusters.](cs_clusters_planning.html#plan_clusters)
-    *  Entscheiden Sie, ob ein Cluster aus einer [einzelnen Zone](cs_clusters_planning.html#single_zone) oder aus [mehreren Zonen](cs_clusters_planning.html#multizone) erstellt werden soll. Beachten Sie, dass Cluster aus mehreren Zonen nur an ausgewählten Standorten verfügbar sind.
+    *  Entscheiden Sie, ob ein Cluster aus einer [einzelnen Zone](cs_clusters_planning.html#single_zone) oder aus [mehreren Zonen](cs_clusters_planning.html#multizone) erstellt werden soll. Beachten Sie, dass Cluster aus mehreren Zonen nur an ausgewählten Standorten verfügbar sind. 
     *  Wenn Sie einen Cluster erstellen möchten, der nicht öffentlich zugänglich ist, überprüfen Sie die zusätzlichen [Schritte für private Cluster](cs_clusters_planning.html#private_clusters).
     *  Wählen Sie den Typ der [Hardware und Isolation](cs_clusters_planning.html#shared_dedicated_node) aus, den Sie für die Workerknoten des Clusters verwenden möchten; entscheiden Sie hierbei auch, ob virtuelle Maschinen oder Bare-Metal-Maschinen verwendet werden sollen.
-4.  Für Standardcluster können Sie [die Kosten mit dem Preisrechner ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") ](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes) schätzen.**Anmerkung:** Weitere Informationen zu Gebühren, die möglicherweise nicht in den Schätzungen berücksichtigt werden, finden Sie in [Preisstruktur und Abrechnung](cs_why.html#pricing).
+4.  Für Standardcluster können Sie [die Kosten mit dem Kostenschätzer ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") ](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes) schätzen. Weitere Informationen zu Gebühren, die möglicherweise nicht in den Schätzungen berücksichtigt werden, finden Sie unter [Preisstruktur und Abrechnung](cs_why.html#pricing). 
 <br>
 <br>
 
 **Womit möchten Sie fortfahren? **
-* [Cluster über die GUI erstellen](#clusters_ui)
-* [Cluster über die CLI erstellen](#clusters_cli)
+* [Cluster über die {{site.data.keyword.Bluemix_notm}}-Konsole erstellen](#clusters_ui)
+* [Cluster über die {{site.data.keyword.Bluemix_notm}}-CLI erstellen](#clusters_cli)
 
-## Cluster über die GUI erstellen
+## Cluster über die {{site.data.keyword.Bluemix_notm}}-Konsole erstellen
 {: #clusters_ui}
 
 Der Zweck des Kubernetes-Clusters besteht darin, eine Gruppe von Ressourcen, Knoten, Netzen und Speichereinheiten zu definieren, die die Hochverfügbarkeit von Apps sicherstellen. Bevor Sie eine App bereitstellen können, müssen Sie zunächst einen Cluster erstellen und die Definitionen für die Workerknoten in diesem Cluster festlegen.
 {:shortdesc}
 
-Überprüfen Sie vor dem Beginn die Schritte, die Sie zur [Vorbereitung der Erstellung eines Clusters](#cluster_prepare) ausführen müssen.
+### Kostenlosen Cluster erstellen
+{: #clusters_ui_free}
 
-**Gehen Sie wie folgt vor, um einen kostenlosen Cluster zu erstellen**
+Sie können sich mit Ihrem kostenlosen Cluster mit der Funktionsweise von {{site.data.keyword.containerlong_notm}} vertraut machen. Mit kostenlosen Clustern können Sie die Terminologie kennenlernen, das Lernprogramm ausführen und sich mit der Anwendung vertraut machen, bevor Sie den Sprung zu Standardclustern auf Produktebene wagen. Auch bei einem belastbaren Konto erhalten Sie einen kostenlosen Cluster. 
 
-Sie können sich mit Ihrem kostenlosen Cluster mit der Funktionsweise von {{site.data.keyword.containerlong_notm}} vertraut machen. Mit kostenlosen Clustern können Sie die Terminologie kennenlernen, das Lernprogramm ausführen und sich mit der Anwendung vertraut machen, bevor Sie den Sprung zu Standardclustern auf Produktebene wagen. Auch bei einem nutzungsabhängigen Konto oder einem Abonnementkonto erhalten Sie einen kostenlosen Cluster. **Hinweis**: Kostenlose Cluster sind 30 Tage lang gültig. Nach Ablauf dieser Zeit verfällt der Cluster und der Cluster und seine Daten werden gelöscht. Die gelöschten Daten werden nicht von {{site.data.keyword.Bluemix_notm}} gesichert und können nicht wiederhergestellt werden. Stellen Sie sicher, dass alle wichtigen Daten gesichert werden.
+Kostenlose Cluster sind 30 Tage lang gültig. Nach Ablauf dieser Zeit verfällt der Cluster und der Cluster und seine Daten werden gelöscht. Die gelöschten Daten werden nicht von {{site.data.keyword.Bluemix_notm}} gesichert und können nicht wiederhergestellt werden. Stellen Sie sicher, dass alle wichtigen Daten gesichert werden.
+{: note}
 
-1. Wählen Sie im Katalog die Option **{{site.data.keyword.containerlong_notm}}** aus.
+1. [Bereiten Sie sich darauf vor, einen Cluster zu erstellen](#cluster_prepare), damit Sie über das richtige {{site.data.keyword.Bluemix_notm}}-Konto-Setup und die korrekten Benutzerberechtigungen verfügen, und treffen Sie eine Entscheidung bezüglich des Cluster-Setups und der Ressourcengruppe, die Sie verwenden möchten. 
 
-2. Wählen Sie eine Region aus, in der Ihr Cluster bereitgestellt werden soll. **Hinweis**: Sie können keine kostenlosen Cluster in den Regionen 'Vereinigte Staaten (Osten)' oder 'Asien-Pazifik (Norden)' und den entsprechenden Zonen erstellen.
+2. Wählen Sie im [Katalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/catalog/?category=containers) den Eintrag **{{site.data.keyword.containershort_notm}}** aus, um ein Cluster zu erstellen. 
 
-3. Wählen Sie den **kostenlosen** Clusterplan aus.
+3. Wählen Sie aus, wo Ihr Cluster bereitgestellt werden soll. **Hinweis**: Sie können keine kostenlosen Cluster an den Standorten 'Washington DC (Vereinigte Staaten (Osten))' oder 'Tokio (Asien/Pazifik (Norden))' erstellen. 
 
-4. Geben Sie Ihrem Cluster einen Namen. Der Name muss mit einem Buchstaben beginnen, darf Buchstaben, Ziffern und den Bindestrich (-) enthalten und darf maximal 35 Zeichen lang sein. Der vollständig qualifizierte Domänenname für die Ingress-Unterdomäne setzt sich aus dem Clusternamen und der Region zusammen, in der der Cluster bereitgestellt wird. Um sicherzustellen, dass die Ingress-Unterdomäne innerhalb einer Region eindeutig ist, wird der Clustername möglicherweise abgeschnitten und es wird ein beliebiger Wert innerhalb des Ingress-Domänennamens angehängt.
+4. Wählen Sie den **kostenlosen** Clusterplan aus.
+
+5. Geben Sie Ihrem Cluster einen Namen. Der Name muss mit einem Buchstaben beginnen, darf Buchstaben, Ziffern und den Bindestrich (-) enthalten und darf maximal 35 Zeichen lang sein. Der vollständig qualifizierte Domänenname für die Ingress-Unterdomäne setzt sich aus dem Clusternamen und der Region zusammen, in der der Cluster bereitgestellt wird. Um sicherzustellen, dass die Ingress-Unterdomäne innerhalb einer Region eindeutig ist, wird der Clustername möglicherweise abgeschnitten und es wird ein beliebiger Wert innerhalb des Ingress-Domänennamens angehängt.
 
 
-5. Klicken Sie auf **Cluster einrichten**. Standardmäßig wird ein Worker-Pool mit einem Workerknoten erstellt. Auf der Registerkarte **Workerknoten** können Sie den Fortschritt der Bereitstellung des Workerknotens überprüfen. Nach Abschluss der Bereitstellung können Sie auf der Registerkarte **Übersicht** sehen, dass Ihr Cluster bereit ist.
+6. Klicken Sie auf **Cluster einrichten**. Standardmäßig wird ein Worker-Pool mit einem Workerknoten erstellt. Auf der Registerkarte **Workerknoten** können Sie den Fortschritt der Bereitstellung des Workerknotens überprüfen. Nach Abschluss der Bereitstellung können Sie auf der Registerkarte **Übersicht** sehen, dass Ihr Cluster bereit ist.
 
     Wenn die eindeutige ID oder der Domänenname geändert wird, die/der während der Erstellung zugeordnet wird, kann der Kubernetes-Master Ihren Cluster nicht mehr verwalten.
     {: tip}
 
 </br>
 
-**Gehen Sie wie folgt vor, um einen Standardcluster zu erstellen**:
+### Standardcluster erstellen
+{: #clusters_ui_standard}
 
-1. Wählen Sie im Katalog die Option **{{site.data.keyword.containershort_notm}}** aus.
+1. [Bereiten Sie sich darauf vor, einen Cluster zu erstellen](#cluster_prepare), damit Sie über das richtige {{site.data.keyword.Bluemix_notm}}-Konto-Setup und die korrekten Benutzerberechtigungen verfügen, und treffen Sie eine Entscheidung bezüglich des Cluster-Setups und der Ressourcengruppe, die Sie verwenden möchten. 
 
-2. Wählen Sie eine Ressourcengruppe aus, in der der Cluster erstellt werden soll.
-  **Anmerkung**:
+2. Wählen Sie im [Katalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/catalog/?category=containers) den Eintrag **{{site.data.keyword.containershort_notm}}** aus, um ein Cluster zu erstellen. 
+
+3. Wählen Sie eine Ressourcengruppe aus, in der der Cluster erstellt werden soll.
+  **Hinweis**:
     * Ein Cluster kann nur in einer Ressourcengruppe erstellt werden; nach der Erstellung des Clusters kann seine Ressourcengruppe nicht geändert werden.
     * In der Standardressourcengruppe werden automatisch freie Cluster erstellt.
     * Wenn Sie Cluster in einer anderen Ressourcengruppe als der Standardressourcengruppe erstellen möchten, müssen Sie mindestens über die [Rolle **Anzeigeberechtigter**](cs_users.html#platform) für die Ressourcengruppe verfügen.
 
-2. Wählen Sie eine Region aus, in der Ihr Cluster bereitgestellt werden soll. Wählen Sie die Region aus, die Ihrem Standort am nächsten ist, um eine optimale Leistung zu erhalten. Wenn Sie eine Zone auswählen, die sich außerhalb Ihres Landes befindet, müssen Sie daran denken, dass Sie vor dem Speichern der Daten möglicherweise eine entsprechende Berechtigung benötigen.
+4. Wählen Sie einen [{{site.data.keyword.Bluemix_notm}}-Standort](cs_regions.html#regions-and-zones) aus, an dem Ihr Cluster bereitgestellt werden soll. Wählen Sie den Standort aus, der Ihrem Standort am nächsten ist, um eine optimale Leistung zu erhalten. Wenn Sie eine Zone auswählen, die sich außerhalb Ihres Landes befindet, müssen Sie daran denken, dass Sie vor dem Speichern der Daten möglicherweise eine entsprechende Berechtigung benötigen.
 
-3. Wählen Sie den **Standard**-Cluster-Plan aus. Bei einem Standardcluster erhalten Sie Zugriff auf Features wie beispielsweise mehrere Workerknoten für eine hoch verfügbare Umgebung.
+5. Wählen Sie den **Standard**-Cluster-Plan aus. Bei einem Standardcluster erhalten Sie Zugriff auf Features wie beispielsweise mehrere Workerknoten für eine hoch verfügbare Umgebung.
 
-4. Geben Sie Ihre Zonendetails ein.
+6. Geben Sie Ihre Zonendetails ein.
 
     1. Wählen Sie für die Verfügbarkeit die Option für **Einzelzonencluster** oder **Mehrzonencluster** aus. In einem Mehrzonencluster wird der Masterknoten in einer auf mehrere Zonen ausgelegten Zone bereitgestellt und die Ressourcen Ihres Clusters werden auf mehrere Zonen verteilt. Ihre Auswahl kann durch die Region begrenzt werden.
 
     2. Wählen Sie die Zonen aus, in denen der Cluster als Host für den Cluster verwendet werden soll. Sie müssen mindestens eine Zone auswählen, können jedoch so viele Zonen auswählen, wie Sie möchten. Wenn Sie mehr als eine Zone auswählen, werden die Workerknoten auf die Zonen verteilt, die Sie auswählen, wodurch eine höhere Verfügbarkeit erzielt werden kann. Wenn Sie nur eine Zone auswählen, [fügen Sie Zonen zu Ihrem Cluster hinzu](#add_zone), nachdem dieser erstellt wurde.
 
-    3. Wählen Sie ein öffentliches VLAN (optional) und ein privates VLAN (erforderlich) in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) aus. Workerknoten kommunizieren miteinander, indem sie das private VLAN verwenden. Um mit dem Kubernetes-Master kommunizieren zu können, müssen Sie die öffentliche Konnektivität für Ihren Workerknoten konfigurieren.  Wenn Sie in dieser Zone kein privates oder öffentliches VLAN haben, geben Sie diese Option nicht an. Ein privates und ein öffentliches VLAN werden automatisch für Sie erstellt. Wenn Sie über vorhandene VLANs verfügen und kein öffentliches VLAN angeben, sollten Sie eine Firewall konfigurieren, z. B. eine [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about). Sie können dasselbe VLAN für mehrere Cluster verwenden.
-        **Hinweis**: Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie unter [Ausschließlich private Clusternetze planen](cs_network_cluster.html#private_vlan).
+    3. Wählen Sie ein öffentliches VLAN (optional) und ein privates VLAN (erforderlich) in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) aus. Workerknoten kommunizieren miteinander, indem sie das private VLAN verwenden. Um mit dem Kubernetes-Master kommunizieren zu können, müssen Sie die öffentliche Konnektivität für Ihren Workerknoten konfigurieren.  Wenn Sie in dieser Zone kein privates oder öffentliches VLAN haben, geben Sie diese Option nicht an. Ein privates und ein öffentliches VLAN werden automatisch für Sie erstellt. Wenn Sie über vorhandene VLANs verfügen und kein öffentliches VLAN angeben, sollten Sie eine Firewall konfigurieren, z. B. eine [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about-the-vra). Sie können dasselbe VLAN für mehrere Cluster verwenden.
+        Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie unter [Ausschließlich private Clusternetze planen](cs_network_cluster.html#private_vlan).
+        {: note}
 
-5. Konfigurieren Sie Ihren Standard-Worker-Pool. Worker-Pools sind Gruppen von Workerknoten, die dieselbe Konfiguration aufweisen. Sie können auch noch zu einem späteren Zeitpunkt weitere Worker-Pools hinzufügen.
+7. Konfigurieren Sie Ihren Standard-Worker-Pool. Worker-Pools sind Gruppen von Workerknoten, die dieselbe Konfiguration aufweisen. Sie können auch noch zu einem späteren Zeitpunkt weitere Worker-Pools hinzufügen.
 
     1. Wählen Sie einen Typ von Hardwareisolation aus. Virtuell wird auf Stundenbasis berechnet und Bare-Metal wird monatlich in Rechnung gestellt.
 
@@ -130,7 +142,7 @@ Sie können sich mit Ihrem kostenlosen Cluster mit der Funktionsweise von {{site
 
         - **Virtuell - Gemeinsam genutzt**: Infrastrukturressourcen wie der Hypervisor und physische Hardware werden von Ihnen und anderen IBM Kunden gemeinsam genutzt, aber jeder Workerknoten ist ausschließlich für Sie zugänglich. Obwohl diese Option in den meisten Fällen ausreicht und kostengünstiger ist, sollten Sie die Leistungs- und Infrastrukturanforderungen anhand der Richtlinien Ihres Unternehmens prüfen.
 
-        - **Bare-Metal**: Bare-Metal-Server werden monatlich abgerechnet und durch manuelle Interaktion mit der IBM Cloud-Infrastructure (SoftLayer) bereitgestellt, daher kann die Ausführung mehr als einen Arbeitstag dauern. Bare-Metal-Server eignen sich am besten für Hochleistungsanwendungen, die mehr Ressourcen und Hoststeuerung erfordern. Für Cluster, auf denen Kubernetes Version 1.9 oder höher ausgeführt wird, können Sie auch auswählen, dass [Trusted Compute](cs_secure.html#trusted_compute) aktiviert wird, um Ihre Workerknoten auf Manipulation zu überprüfen. Trusted Compute ist für ausgewählte Bare-Metal-Maschinentypen verfügbar. Beispielsweise unterstützen die GPU-Typen `mgXc` Trusted Compute nicht. Wenn Sie Trusted Compute während der Clustererstellung nicht aktivieren, dies jedoch später nachholen möchten, können Sie den [Befehl](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable` verwenden. Nachdem Sie Trusted Compute aktiviert haben, können Sie es später nicht mehr inaktivieren.
+        - **Bare-Metal**: Bare-Metal-Server werden monatlich abgerechnet und durch manuelle Interaktion mit der IBM Cloud-Infrastructure (SoftLayer) bereitgestellt, daher kann die Ausführung mehr als einen Arbeitstag dauern. Bare-Metal-Server eignen sich am besten für Hochleistungsanwendungen, die mehr Ressourcen und Hoststeuerung erfordern. Sie können auch [Trusted Compute](cs_secure.html#trusted_compute) aktivieren, um Ihre Workerknoten auf Manipulation zu überprüfen. Trusted Compute ist für ausgewählte Bare-Metal-Maschinentypen verfügbar. Beispielsweise unterstützen die GPU-Typen `mgXc` Trusted Compute nicht. Wenn Sie Trusted Compute während der Clustererstellung nicht aktivieren, dies jedoch später nachholen möchten, können Sie den [Befehl](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable` verwenden. Nachdem Sie Trusted Compute aktiviert haben, können Sie es später nicht mehr inaktivieren.
 
         Stellen Sie sicher, dass Sie eine Bare-Metal-Maschine bereitstellen wollen. Da die Abrechnung monatlich erfolgt, wird Ihnen ein voller Monat auch dann berechnet, wenn Sie versehentlich bestellen und sofort danach Ihre Bestellung wieder stornieren.
         {:tip}
@@ -139,11 +151,11 @@ Sie können sich mit Ihrem kostenlosen Cluster mit der Funktionsweise von {{site
 
     3. Geben Sie die Anzahl der Workerknoten an, die Sie im Cluster benötigen. Die von Ihnen eingegebene Anzahl der Worker wird über die Anzahl der von Ihnen ausgewählten Zonen repliziert. Wenn Sie beispielsweise über zwei Zonen verfügen und drei Workerknoten auswählen, bedeutet das, dass sechs Knoten bereitgestellt werden und drei Knoten in jeder Zone vorhanden sind.
 
-6. Geben Sie dem Cluster einen eindeutigen Namen. **Hinweis**: Wenn die eindeutige ID oder der Domänenname geändert wird, die/der während der Erstellung zugeordnet wird, kann der Kubernetes-Master Ihren Cluster nicht mehr verwalten.
+8. Geben Sie dem Cluster einen eindeutigen Namen. **Hinweis**: Wenn die eindeutige ID oder der Domänenname geändert wird, die/der während der Erstellung zugeordnet wird, kann der Kubernetes-Master Ihren Cluster nicht mehr verwalten.
 
-7. Wählen Sie die Kubernetes-API-Serverversion für den Cluster-Masterknoten aus.
+9. Wählen Sie die Kubernetes-API-Serverversion für den Cluster-Masterknoten aus.
 
-8. Klicken Sie auf **Cluster einrichten**. Ein Worker-Pool wird mit der Anzahl der Worker erstellt, die Sie angegeben haben. Auf der Registerkarte **Workerknoten** können Sie den Fortschritt der Bereitstellung des Workerknotens überprüfen. Nach Abschluss der Bereitstellung können Sie auf der Registerkarte **Übersicht** sehen, dass Ihr Cluster bereit ist.
+10. Klicken Sie auf **Cluster einrichten**. Ein Worker-Pool wird mit der Anzahl der Worker erstellt, die Sie angegeben haben. Auf der Registerkarte **Workerknoten** können Sie den Fortschritt der Bereitstellung des Workerknotens überprüfen. Nach Abschluss der Bereitstellung können Sie auf der Registerkarte **Übersicht** sehen, dass Ihr Cluster bereit ist.
 
 **Womit möchten Sie fortfahren? **
 
@@ -159,19 +171,19 @@ Wenn der Cluster betriebsbereit ist, können Sie sich mit den folgenden Tasks ve
 <br />
 
 
-## Cluster über die CLI erstellen
+## Cluster über die {{site.data.keyword.Bluemix_notm}}-CLI erstellen
 {: #clusters_cli}
 
 Der Zweck des Kubernetes-Clusters besteht darin, eine Gruppe von Ressourcen, Knoten, Netzen und Speichereinheiten zu definieren, die die Hochverfügbarkeit von Apps sicherstellen. Bevor Sie eine App bereitstellen können, müssen Sie zunächst einen Cluster erstellen und die Definitionen für die Workerknoten in diesem Cluster festlegen.
 {:shortdesc}
 
-Vorbemerkungen:
-* Überprüfen Sie die Schritte, die Sie zur [Vorbereitung der Erstellung eines Clusters](#cluster_prepare) ausführen müssen.
-* Installieren Sie die {{site.data.keyword.Bluemix_notm}}-CLI sowie das [{{site.data.keyword.containerlong_notm}}-Plug-in](cs_cli_install.html#cs_cli_install).
+Installieren Sie zunächst die {{site.data.keyword.Bluemix_notm}}-CLI und das [{{site.data.keyword.containerlong_notm}}-Plug-in](cs_cli_install.html#cs_cli_install). 
 
-Gehen Sie wie folgt vor, um einen Cluster zu erstellen:
+Gehen Sie wie folgt vor, um einen Cluster zu erstellen: 
 
-1.  Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an.
+1. [Bereiten Sie sich darauf vor, einen Cluster zu erstellen](#cluster_prepare), damit Sie über das richtige {{site.data.keyword.Bluemix_notm}}-Konto-Setup und die korrekten Benutzerberechtigungen verfügen, und treffen Sie eine Entscheidung bezüglich des Cluster-Setups und der Ressourcengruppe, die Sie verwenden möchten. 
+
+2.  Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an.
 
     1.  Melden Sie sich an und geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden.
 
@@ -180,28 +192,27 @@ Gehen Sie wie folgt vor, um einen Cluster zu erstellen:
         ```
         {: pre}
 
-        **Hinweis:** Falls Sie über eine eingebundene ID verfügen, geben Sie `ibmcloud login --sso` ein, um sich an der Befehlszeilenschnittstelle von {{site.data.keyword.Bluemix_notm}} anzumelden. Geben Sie Ihren Benutzernamen ein und verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen Kenncode abzurufen. Bei Verwendung einer eingebundenen ID schlägt die Anmeldung ohne die Option `--sso` fehl, mit der Option `--sso` ist sie erfolgreich.
+        Falls Sie über eine eingebundene ID verfügen, geben Sie `ibmcloud login --sso` ein, um sich an der Befehlszeilenschnittstelle von {{site.data.keyword.Bluemix_notm}} anzumelden. Geben Sie Ihren Benutzernamen ein und verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen Kenncode abzurufen. Bei Verwendung einer eingebundenen ID schlägt die Anmeldung ohne die Option `--sso` fehl, mit der Option `--sso` ist sie erfolgreich.
+        {: tip}
 
     2. Wenn Sie über mehrere {{site.data.keyword.Bluemix_notm}}-Konten verfügen, dann wählen Sie das Konto aus, unter dem Sie Ihren Kubernetes-Cluster erstellen wollen.
 
     3.  Wenn Sie Cluster in einer Ressourcengruppe erstellen möchten, die nicht mit der Standardressourcengruppe identisch ist, geben Sie die entsprechende Ressourcengruppe als Ziel an.
-      **Anmerkung**:
+      **Hinweis**:
         * Ein Cluster kann nur in einer Ressourcengruppe erstellt werden; nach der Erstellung des Clusters kann seine Ressourcengruppe nicht geändert werden.
         * Sie müssen mindestens über die [Rolle **Anzeigeberechtigter**](cs_users.html#platform) für die Ressourcengruppe verfügen.
         * In der Standardressourcengruppe werden automatisch freie Cluster erstellt.
       ```
-      ibmcloud target -g <resource_group_name>
+      ibmcloud target -g <ressourcengruppenname>
       ```
       {: pre}
 
     4.  Wenn Sie Kubernetes-Cluster in einer anderen Region als der von Ihnen zuvor ausgewählten {{site.data.keyword.Bluemix_notm}}-Region erstellen oder auf diese Cluster zugreifen möchten, führen Sie `ibmcloud ks region-set` aus.
 
 
-3.  Erstellen Sie einen Cluster. **Hinweis**: Standardcluster können in jeder Region und jeder verfügbaren Zone erstellt werden. Kostenlose Cluster können nicht in den Regionen 'Vereinigte Staaten (Osten)' oder 'Asien-Pazifik (Norden)' und den entsprechenden Zonen erstellt werden und Sie können die Zone nicht auswählen.
+4.  Erstellen Sie einen Cluster. Standardcluster können in jeder Region und jeder verfügbaren Zone erstellt werden. Kostenlose Cluster können nicht in den Regionen 'Vereinigte Staaten (Osten)' oder 'Asien-Pazifik (Norden)' und den entsprechenden Zonen erstellt werden und Sie können die Zone nicht auswählen.
 
-    1.  **Standardcluster**: Überprüfen Sie, welche Zonen verfügbar sind. Welche Zonen angezeigt werden, hängt von der {{site.data.keyword.containerlong_notm}}-Region ab, bei der Sie angemeldet sind.
-
-        **Hinweis**: Damit sich Ihr Cluster über Zonen erstreckt, müssen Sie den Cluster in einer [mehrzonenfähigen Zone](cs_regions.html#zones) erstellen.
+    1.  **Standardcluster**: Überprüfen Sie, welche Zonen verfügbar sind. Welche Zonen angezeigt werden, hängt von der {{site.data.keyword.containerlong_notm}}-Region ab, bei der Sie angemeldet sind. Damit sich Ihr Cluster über Zonen erstreckt, müssen Sie den Cluster in einer [mehrzonenfähigen Zone](cs_regions.html#zones) erstellen.
 
         ```
         ibmcloud ks zones
@@ -213,7 +224,7 @@ Gehen Sie wie folgt vor, um einen Cluster zu erstellen:
         -  Zeigen Sie das Feld **Servertyp** an, um zwischen virtuellen oder physischen Maschinen (Bare-Metal-Maschinen) auszuwählen.
         -  **Virtuell**: Die Abrechnung erfolgt stündlich. Virtuelle Maschinen werden auf gemeinsam genutzter oder dedizierter Hardware bereitgestellt.
         -  **Physisch**: Die Abrechnung erfolgt monatlich. Bare-Metal-Server werden durch manuelle Interaktion mit der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt, daher kann die Ausführung mehr als einen Arbeitstag dauern. Bare-Metal-Server eignen sich am besten für Hochleistungsanwendungen, die mehr Ressourcen und Hoststeuerung erfordern.
-        - **Physische Maschinen mit Trusted Compute**: Für Bare-Metal-Cluster, auf denen Kubernetes Version 1.9 oder höher ausgeführt wird, können Sie auch auswählen, dass [Trusted Compute](cs_secure.html#trusted_compute) aktiviert wird, um Ihre Bare-Metal-Workerknoten auf Manipulation zu überprüfen. Trusted Compute ist für ausgewählte Bare-Metal-Maschinentypen verfügbar. Beispielsweise unterstützen die GPU-Typen `mgXc` Trusted Compute nicht. Wenn Sie Trusted Compute während der Clustererstellung nicht aktivieren, dies jedoch später nachholen möchten, können Sie den [Befehl](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable` verwenden. Nachdem Sie Trusted Compute aktiviert haben, können Sie es später nicht mehr inaktivieren.
+        - **Physische Maschinen mit Trusted Compute**: Sie können auch auswählen, dass [Trusted Compute](cs_secure.html#trusted_compute) aktiviert wird, um Ihre Bare-Metal-Workerknoten auf Manipulation zu überprüfen. Trusted Compute ist für ausgewählte Bare-Metal-Maschinentypen verfügbar. Beispielsweise unterstützen die GPU-Typen `mgXc` Trusted Compute nicht. Wenn Sie Trusted Compute während der Clustererstellung nicht aktivieren, dies jedoch später nachholen möchten, können Sie den [Befehl](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable` verwenden. Nachdem Sie Trusted Compute aktiviert haben, können Sie es später nicht mehr inaktivieren.
         -  **Maschinentypen**: Um zu entscheiden, welcher Maschinentyp implementiert werden soll, überprüfen Sie die Kombination aus Kern, Hauptspeicher und Speicher der [verfügbaren Hardware für Workerknoten](cs_clusters_planning.html#shared_dedicated_node). Nachdem Sie den Cluster erstellt haben, können Sie verschiedene physische oder virtuelle Maschinentypen hinzufügen, indem Sie [einen Worker-Pool hinzufügen](#add_pool).
 
            Stellen Sie sicher, dass Sie eine Bare-Metal-Maschine bereitstellen wollen. Da die Abrechnung monatlich erfolgt, wird Ihnen ein voller Monat auch dann berechnet, wenn Sie versehentlich bestellen und sofort danach Ihre Bestellung wieder stornieren.
@@ -270,7 +281,7 @@ Gehen Sie wie folgt vor, um einen Cluster zu erstellen:
         </tr>
         <tr>
         <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-        <td>**Standardcluster**: Ersetzen Sie <em>&lt;zone&gt;</em> durch die {{site.data.keyword.Bluemix_notm}}-Zonen-ID, für die Sie den Cluster erstellen möchten. Verfügbare Zonen hängen von der {{site.data.keyword.containerlong_notm}}-Region ab, bei der Sie angemeldet sind.<br></br>**Hinweis**: Die Cluster-Workerknoten werden in dieser Zone bereitgestellt. Damit sich Ihr Cluster über Zonen erstreckt, müssen Sie den Cluster in einer [mehrzonenfähigen Zone](cs_regions.html#zones) erstellen. Nachdem der Cluster erstellt wurde, können Sie [eine Zone zum Cluster hinzufügen](#add_zone).</td>
+        <td>**Standardcluster**: Ersetzen Sie <em>&lt;zone&gt;</em> durch die {{site.data.keyword.Bluemix_notm}}-Zonen-ID, für die Sie den Cluster erstellen möchten. Verfügbare Zonen hängen von der {{site.data.keyword.containerlong_notm}}-Region ab, bei der Sie angemeldet sind.<p class="note">Die Cluster-Workerknoten werden in dieser Zone bereitgestellt. Damit sich Ihr Cluster über Zonen erstreckt, müssen Sie den Cluster in einer [mehrzonenfähigen Zone](cs_regions.html#zones) erstellen. Nachdem der Cluster erstellt wurde, können Sie [eine Zone zum Cluster hinzufügen](#add_zone).</p></td>
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;maschinentyp&gt;</em></code></td>
@@ -284,13 +295,14 @@ Gehen Sie wie folgt vor, um einen Cluster zu erstellen:
         <td><code>--public-vlan <em>&lt;öffentliche_vlan-id&gt;</em></code></td>
         <td><ul>
           <li>**Kostenlose Cluster**: Sie müssen kein öffentliches VLAN definieren. Ihr kostenloser Cluster wird automatisch mit einem öffentlichen VLAN von IBM verbunden.</li>
-          <li>**Standardcluster**: Wenn für diese Zone bereits ein öffentliches VLAN in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) eingerichtet ist, geben Sie die ID des öffentlichen VLAN ein. Wenn Sie Ihre Workerknoten nur mit einem private VLAN verbinden möchten, geben Sie diese Option nicht an. **Hinweis**: Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie unter [Ausschließlich private Clusternetze planen](cs_network_cluster.html#private_vlan).<br/><br/>
-          <strong>Hinweis</strong>: Private VLAN-Router beginnen immer mit <code>bcr</code> (Back-End-Router) und öffentliche VLAN-Router immer mit <code>fcr</code> (Front-End-Router). Wenn Sie einen Cluster erstellen und die öffentlichen und privaten VLANs angeben, müssen die Zahlen- und Buchstabenkombinationen nach diesen Präfixen übereinstimmen.</li>
+          <li>**Standardcluster**: Wenn für diese Zone bereits ein öffentliches VLAN in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) eingerichtet ist, geben Sie die ID des öffentlichen VLAN ein. Wenn Sie Ihre Workerknoten nur mit einem private VLAN verbinden möchten, geben Sie diese Option nicht an.
+          <p>Private VLAN-Router beginnen immer mit <code>bcr</code> (Back-End-Router) und öffentliche VLAN-Router immer mit <code>fcr</code> (Front-End-Router). Wenn Sie einen Cluster erstellen und die öffentlichen und privaten VLANs angeben, müssen die Zahlen- und Buchstabenkombinationen nach diesen Präfixen übereinstimmen.</p>
+          <p class="note">Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität konfigurieren. Weitere Informationen finden Sie unter [Ausschließlich private Clusternetze planen](cs_network_cluster.html#private_vlan).</p></li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan-id&gt;</em></code></td>
-        <td><ul><li>**Kostenlose Cluster**: Sie müssen kein privates VLAN definieren. Ihr kostenloser Cluster wird automatisch mit einem privaten VLAN von IBM verbunden.</li><li>**Standardcluster**: Wenn für diese Zone bereits ein privates VLAN in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) eingerichtet ist, geben Sie die ID des privaten VLAN ein. Wenn Sie noch nicht über ein privates VLAN für dieses Konto verfügen, geben Sie diese Option nicht an. {{site.data.keyword.containerlong_notm}} erstellt automatisch ein privates VLAN für Sie.<br/><br/><strong>Hinweis</strong>: Private VLAN-Router beginnen immer mit <code>bcr</code> (Back-End-Router) und öffentliche VLAN-Router immer mit <code>fcr</code> (Front-End-Router). Wenn Sie einen Cluster erstellen und die öffentlichen und privaten VLANs angeben, müssen die Zahlen- und Buchstabenkombinationen nach diesen Präfixen übereinstimmen.</li></ul></td>
+        <td><ul><li>**Kostenlose Cluster**: Sie müssen kein privates VLAN definieren. Ihr kostenloser Cluster wird automatisch mit einem privaten VLAN von IBM verbunden.</li><li>**Standardcluster**: Wenn für diese Zone bereits ein privates VLAN in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) eingerichtet ist, geben Sie die ID des privaten VLAN ein. Wenn Sie noch nicht über ein privates VLAN für dieses Konto verfügen, geben Sie diese Option nicht an. {{site.data.keyword.containerlong_notm}} erstellt automatisch ein privates VLAN für Sie.<p>Private VLAN-Router beginnen immer mit <code>bcr</code> (Back-End-Router) und öffentliche VLAN-Router immer mit <code>fcr</code> (Front-End-Router). Wenn Sie einen Cluster erstellen und die öffentlichen und privaten VLANs angeben, müssen die Zahlen- und Buchstabenkombinationen nach diesen Präfixen übereinstimmen.</p></li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -316,24 +328,22 @@ Gehen Sie wie folgt vor, um einen Cluster zu erstellen:
         </tr>
         </tbody></table>
 
-4.  Prüfen Sie, ob die Erstellung des Clusters angefordert wurde.
+5.  Prüfen Sie, ob die Erstellung des Clusters angefordert wurde. Bei virtuellen Maschinen kann es einige Minuten dauern, bis die Workerknotenmaschinen angewiesen werden und der Cluster in Ihrem Konto eingerichtet und bereitgestellt wird. Physische Bare-Metal-Maschinen werden durch einen manuelle Interaktion mit der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt, daher kann die Ausführung mehr als einen Arbeitstag dauern.
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-    **Hinweis:** Bei virtuellen Maschinen kann es einige Minuten dauern, bis die Workerknotenmaschinen angewiesen werden und der Cluster in Ihrem Konto eingerichtet und bereitgestellt wird. Physische Bare-Metal-Maschinen werden durch einen manuelle Interaktion mit der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt, daher kann die Ausführung mehr als einen Arbeitstag dauern.
-
     Nach Abschluss der Bereitstellung Ihres Clusters wird der Status des Clusters in **deployed** (bereitgestellt) geändert.
 
     ```
-    Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.8
+    Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
+    mein_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.11      Default
     ```
     {: screen}
 
-5.  Überprüfen Sie den Status der Workerknoten.
+6.  Überprüfen Sie den Status der Workerknoten.
 
     ```
     ibmcloud ks workers <clustername_oder_-id>
@@ -342,15 +352,16 @@ Gehen Sie wie folgt vor, um einen Cluster zu erstellen:
 
     Wenn die Workerknoten bereit sind, wechselt der Zustand (State) zu **Normal**, während für den Status die Angabe **Bereit** angezeigt wird. Wenn der Knotenstatus **Bereit** lautet, können Sie auf den Cluster zugreifen.
 
-    **Hinweis:** Jedem Workerknoten werden eine eindeutige Workerknoten-ID und ein Domänenname zugewiesen, die nach der Erstellung des Clusters nicht manuell geändert werden dürfen. Wenn die ID oder der Domänenname geändert wird, kann der Kubernetes-Master Ihren Cluster nicht mehr verwalten.
+    Jedem Workerknoten werden eine eindeutige Workerknoten-ID und ein Domänenname zugewiesen, die nach dem Erstellen des Clusters nicht manuell geändert werden dürfen. Wenn die ID oder der Domänenname geändert wird, kann der Kubernetes-Master Ihren Cluster nicht mehr verwalten.
+    {: important}
 
     ```
-    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.8
+    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.10.11      Default
     ```
     {: screen}
 
-6.  Legen Sie den von Ihnen erstellten Cluster als Kontext für diese Sitzung fest. Führen Sie diese Konfigurationsschritte jedes Mal aus, wenn Sie mit Ihrem Cluster arbeiten.
+7.  Legen Sie den von Ihnen erstellten Cluster als Kontext für diese Sitzung fest. Führen Sie diese Konfigurationsschritte jedes Mal aus, wenn Sie mit Ihrem Cluster arbeiten.
     1.  Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter.
 
         ```
@@ -385,7 +396,7 @@ Gehen Sie wie folgt vor, um einen Cluster zu erstellen:
         ```
         {: screen}
 
-7.  Starten Sie Ihr Kubernetes-Dashboard über den Standardport `8001`.
+8.  Starten Sie Ihr Kubernetes-Dashboard über den Standardport `8001`.
     1.  Legen Sie die Standardportnummer für den Proxy fest.
 
         ```
@@ -430,8 +441,8 @@ Wenn Sie einen Cluster erstellen, werden die Workerknoten in einem Worker-Pool b
 Wenn Sie über einen Mehrzonencluster verfügen, müssen seine Workerknotenressourcen ausgeglichen sein. Stellen Sie sicher, dass alle Worker-Pools über dieselben Zonen verteilt sind und fügen Sie Worker hinzu oder entfernen Sie sie, indem Sie die Größe der Pools ändern, anstatt einzelne Knoten hinzuzufügen.
 {: tip}
 
-In den folgenden Abschnitten erfahren Sie, wie Sie:
-  * [Workerknoten durch Ändern der Größe eines vorhandenen Worker-Pools in Ihrem Cluster hinzufügen](#resize_pool)
+Bevor Sie beginnen, stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Operator** oder **Administrator** innehaben. Wählen Sie dann einen der folgenden Abschnitte aus: 
+  * [Workerknoten durch Ändern der Größe eines vorhandenen Worker-Pools in Ihrem Cluster hinzufügen](#resize_pool)(cs_users.html#platform)]
   * [Workerknoten durch Hinzufügen eines Worker-Pools zu Ihrem Cluster hinzufügen](#add_pool)
   * [Eine Zone zu Ihrem Cluster hinzufügen und die Workerknoten in den Worker-Pools über mehrere Zonen replizieren](#add_zone)
   * [Einen eigenständigen Workerknoten zu einem Cluster hinzufügen (veraltet)](#standalone)
@@ -486,9 +497,9 @@ Bei Bare-Metal-Worker-Pools sollten Sie beachten, dass die Rechnungsstellung mon
 Sie können Workerknoten zu Ihrem Cluster hinzufügen, indem Sie einen neuen Worker-Pool erstellen.
 {:shortdesc}
 
-1. Wählen Sie die **Workerzonen** im Cluster aus, in denen Sie die Workerknoten im Worker-Pool bereitstellen möchten. Wenn Sie die Workerknoten in einem vorhandenen Worker-Pool auf mehrere Zonen verteilen möchten, wählen Sie eine Zone aus oder [fügen Sie eine neue Zone](#add_zone) zu einem [mehrzonenfähigen](cs_regions.html#zones) Cluster hinzu. Verfügbare Zonen können Sie durch Ausführen von `ibmcloud ks zones` auflisten.
+1. Rufen Sie die **Workerzonen** Ihres Clusters ab und wählen Sie die Zone aus, in der Sie die Workerknoten in Ihrem Workerpool bereitstellen möchten. Wenn Sie über ein Einzelzonencluster verfügen, müssen Sie die Zone verwenden, die im Feld **Workerzonen** angegeben ist. Bei Mehrzonenclustern können Sie eine der vorhandenen **Workerzonen** Ihres Clusters auswählen oder eine der [Metropolen mit mehreren Zonen](cs_regions.html#zones) für die Region hinzufügen, in der sich Ihr Cluster befindet. Verfügbare Zonen können Sie durch Ausführen von `ibmcloud ks zones` auflisten.
    ```
-   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster-get --cluster <clustername_oder_-id>
    ```
    {: pre}
 
@@ -514,7 +525,7 @@ Sie können Workerknoten zu Ihrem Cluster hinzufügen, indem Sie einen neuen Wor
 
 4. Erstellen Sie einen Worker-Pool. Falls Sie einen Bare-Metal-Worker-Pool bereitstellen, geben Sie `--hardware dedicated` an.
    ```
-   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone> --hardware <dedicated_or_shared>
+   ibmcloud ks worker-pool-create --name <poolname> --cluster <clustername_oder_-id> --machine-type <maschinentyp> --size-per-zone <anzahl_der_worker_pro_zone> --hardware <dediziert_oder_gemeinsam_genutzt>
    ```
    {: pre}
 
@@ -526,7 +537,7 @@ Sie können Workerknoten zu Ihrem Cluster hinzufügen, indem Sie einen neuen Wor
 
 6. Standardmäßig wird durch das Hinzufügen eines Worker-Pools ein Pool ohne Zonen erstellt. Um Workerknoten in einer Zone bereitzustellen, müssen Sie die Zonen zum Worker-Pool hinzufügen, die Sie vorher abgerufen haben. Wenn Sie die Workerknoten auf mehrere Zonen verteilen möchten, wiederholen Sie diesen Befehl für jede einzelne Zone.  
    ```
-   ibmcloud ks zone-add --zone <zone> --cluster <clustername_oder_-id> --worker-pools <poolname> --private-vlan <private_vlan-id> --public-vlan <public_vlan-id>
+   ibmcloud ks zone-add --zone <zone> --cluster <clustername_oder_-id> --worker-pools <poolname> --private-vlan <private_vlan-id> --public-vlan <öffentliche_vlan-id>
    ```
    {: pre}
 
@@ -552,7 +563,7 @@ Sie können Ihren Cluster über mehrere Zonen in einer Region verteilen, indem S
 
 Wenn Sie eine Zone zu einem Worker-Pool hinzufügen, werden die in Ihrem Worker-Pool definierten Workerknoten in der neuen Zone bereitgestellt und für die zukünftige Planung von Arbeitslasten berücksichtigt. {{site.data.keyword.containerlong_notm}} fügt automatisch die Bezeichnung `failure-domain.beta.kubernetes.io/region` für die Region und die Bezeichnung `failure-domain.beta.kubernetes.io/zone` für die Zone für jeden Workerknoten hinzu. Der Kubernetes-Scheduler verwendet diese Bezeichnungen, um Pods auf Zonen innerhalb derselben Region zu verteilen.
 
-**Hinweis**: Wenn Sie über mehrere Worker-Pools in Ihrem Cluster verfügen, fügen Sie die Zone zu allen Pools hinzu, sodass die Workerknoten gleichmäßig über den Cluster hinweg verteilt sind.
+Wenn Sie über mehrere Worker-Pools in Ihrem Cluster verfügen, fügen Sie die Zone zu allen Pools hinzu, sodass die Workerknoten gleichmäßig über den Cluster hinweg verteilt sind. 
 
 Vorbemerkungen:
 *  Wenn Sie eine Zone zu Ihrem Worker-Pool hinzufügen möchten, muss sich Ihr Worker-Pool in einer [mehrzonenfähigen Zone](cs_regions.html#zones) befinden. Wenn sich der Worker-Pool nicht in einer solchen Zone befindet, sollten Sie [einen neuen Worker-Pool erstellen](#add_pool).
@@ -578,7 +589,10 @@ Gehen Sie wie folgt vor, um eine Zone mit Workerknoten zum Worker-Pool hinzuzuf�
    ```
    {: pre}
 
-4. Fügen Sie die Zone zu Ihrem Worker-Pool hinzu. Wenn Sie mehrere Worker-Pools haben, fügen Sie die Zone allen Worker-Pools hinzu, sodass Ihr Cluster in allen Zonen ausgeglichen ist. Ersetzen Sie `<pool1_id_or_name,pool2_id_or_name,...>` mit den Namen aller Worker-Pools in einer durch Kommas getrennten Liste. </br>**Hinweis:** Es muss ein privates und ein öffentliches VLAN vorhanden sein, bevor Sie eine Zone zu mehreren Worker-Pools hinzufügen können. Wenn Sie nicht über ein privates und ein öffentliches VLAN in dieser Zone verfügen, fügen Sie zuerst die Zone zu einem Worker-Pool hinzu, sodass ein privates und ein öffentliches VLAN für Sie erstellt wird. Anschließend können Sie die Zone zu anderen Worker-Pools hinzufügen, indem Sie das private und das öffentliche VLAN angeben, das für Sie erstellt wurde.
+4. Fügen Sie die Zone zu Ihrem Worker-Pool hinzu. Wenn Sie mehrere Worker-Pools haben, fügen Sie die Zone allen Worker-Pools hinzu, sodass Ihr Cluster in allen Zonen ausgeglichen ist. Ersetzen Sie `<pool1_id_or_name,pool2_id_or_name,...>` mit den Namen aller Worker-Pools in einer durch Kommas getrennten Liste.
+
+    Es muss ein privates und ein öffentliches VLAN vorhanden sein, bevor Sie eine Zone zu mehreren Worker-Pools hinzufügen können. Wenn Sie nicht über ein privates und ein öffentliches VLAN in dieser Zone verfügen, fügen Sie zuerst die Zone zu einem Worker-Pool hinzu, sodass ein privates und ein öffentliches VLAN für Sie erstellt wird. Anschließend können Sie die Zone zu anderen Worker-Pools hinzufügen, indem Sie das private und das öffentliche VLAN angeben, das für Sie erstellt wurde.
+    {: note}
 
    Wenn Sie verschiedene VLANs für unterschiedliche Worker-Pools verwenden möchten, wiederholen Sie diesen Befehl für jedes VLAN und die entsprechenden Worker-Pools. Alle neuen Workerknoten werden den von Ihnen angegebenen VLANs hinzugefügt, die VLANs für alle vorhandenen Workerknoten werden jedoch nicht geändert.
    {: tip}
@@ -611,6 +625,7 @@ Gehen Sie wie folgt vor, um eine Zone mit Workerknoten zum Worker-Pool hinzuzuf�
     Owner:                  owner@email.com
     Monitoring Dashboard:   ...
     Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
+    Resource Group Name:    Default
     ```
     {: screen}  
 
@@ -618,9 +633,10 @@ Gehen Sie wie folgt vor, um eine Zone mit Workerknoten zum Worker-Pool hinzuzuf�
 {: #standalone}
 
 Wenn Sie über einen Cluster verfügen, der vor der Einführung von Worker-Pools erstellt wurde, können Sie die veralteten Befehle verwenden, um eigenständige Workerknoten hinzuzufügen.
-{: shortdesc}
+{: deprecated}
 
-**Hinweis:** Wenn Sie über einen Cluster verfügen, der nach der Einführung von Worker-Pools erstellt wurde, können Sie keine eigenständigen Workerknoten hinzufügen. Stattdessen können Sie [einen Worker-Pool erstellen](#add_pool), [die Größe eines vorhandenen Worker-Pools ändern](#resize_pool) oder [eine Zone zu einem Worker-Pool hinzufügen](#add_zone), um Workerknoten zu Ihrem Cluster hinzuzufügen.
+Wenn Sie über einen Cluster verfügen, der nach der Einführung von Worker-Pools erstellt wurde, können Sie keine eigenständigen Workerknoten hinzufügen. Stattdessen können Sie [einen Worker-Pool erstellen](#add_pool), [die Größe eines vorhandenen Worker-Pools ändern](#resize_pool) oder [eine Zone zu einem Worker-Pool hinzufügen](#add_zone), um Workerknoten zu Ihrem Cluster hinzuzufügen.
+{: note}
 
 1. Listen Sie die verfügbaren Zonen auf und wählen Sie die Zone aus, in der Sie Workerknoten hinzufügen möchten.
    ```
@@ -660,7 +676,7 @@ Wenn Sie über einen Cluster verfügen, der vor der Einführung von Worker-Pools
 Überprüfen Sie den Status eines Kubernetes-Clusters, um Informationen zur Verfügbarkeit und Kapazität des Clusters sowie zu möglichen Problemen, die aufgetreten sein können, zu erhalten.
 {:shortdesc}
 
-Wenn Sie Informationen zu einem bestimmten Cluster anzeigen möchten, z. B. Zonen, Master-URL, Ingress-Unterdomäne, Version, Eigner und Überwachungsdashboard, verwenden Sie den [Befehl `ibmcloud ks cluster-get <cluster_name_or_ID>`](cs_cli_reference.html#cs_cluster_get). Schließen Sie das Flag `--showResources` ein, um weitere Clusterressourcen, wie z. B. Add-ons für Speicherpods oder Teilnetz-VLANs für öffentliche und private IPs anzuzeigen.
+Wenn Sie Informationen zu einem bestimmten Cluster anzeigen möchten, z. B. Zonen, Master-URL, Ingress-Unterdomäne, Version, Eigner und Überwachungsdashboard, verwenden Sie den [Befehl `ibmcloud ks cluster-get <clustername_oder_-id>`](cs_cli_reference.html#cs_cluster_get). Schließen Sie das Flag `--showResources` ein, um weitere Clusterressourcen, wie z. B. Add-ons für Speicherpods oder Teilnetz-VLANs für öffentliche und private IPs anzuzeigen.
 
 Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud ks clusters` ausführen. Der Status wird im entsprechenden **Statusfeld** angezeigt. Informationen zum Beheben von Fehlern bei Clustern und Workerknoten finden Sie im Abschnitt [Fehlerbehebung bei Clustern](cs_troubleshoot.html#debug_clusters).
 
@@ -673,7 +689,7 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
    <tbody>
 <tr>
    <td>Aborted (Abgebrochen)</td>
-   <td>Das Löschen des Clusters wird vom Benutzer angefordert, bevor der Kubernetes Master bereitgestellt ist. Nachdem das Löschen des Clusters abgeschlossen ist, wird der Cluster aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](cs_troubleshoot.html#ts_getting_help).</td>
+   <td>Das Löschen des Clusters wird vom Benutzer angefordert, bevor der Kubernetes Master bereitgestellt ist. Nachdem das Löschen des Clusters abgeschlossen ist, wird der Cluster aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
  <tr>
      <td>Critical (Kritisch)</td>
@@ -685,7 +701,7 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
    </tr>
    <tr>
      <td>Deleted (Gelöscht)</td>
-     <td>Der Cluster wird gelöscht, aber noch nicht aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](cs_troubleshoot.html#ts_getting_help). </td>
+     <td>Der Cluster wird gelöscht, aber noch nicht aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
    <tr>
    <td>Deleting (Löschen)</td>
@@ -693,7 +709,7 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
    </tr>
    <tr>
      <td>Deploy failed (Bereitstellung fehlgeschlagen)</td>
-     <td>Die Bereitstellung des Kubernetes-Masters konnte nicht abgeschlossen werden. Sie können diesen Status nicht auflösen. Wenden Sie sich an den Support für IBM Cloud, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](cs_troubleshoot.html#ts_getting_help) öffnen.</td>
+     <td>Die Bereitstellung des Kubernetes-Masters konnte nicht abgeschlossen werden. Sie können diesen Status nicht auflösen. Wenden Sie sich an den Support für IBM Cloud, indem Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](cs_troubleshoot.html#ts_getting_help) öffnen. </td>
    </tr>
      <tr>
        <td>Deploying (Wird bereitgestellt)</td>
@@ -701,7 +717,7 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
       </tr>
       <tr>
        <td>Normal</td>
-       <td>Alle Workerknoten in einem Cluster sind betriebsbereit. Sie können auf den Cluster zugreifen und Apps auf dem Cluster bereitstellen. Dieser Status wird als einwandfreier Zustand betrachtet und erfordert keine Aktion von Ihnen. **Hinweis**: Auch wenn die Workerknoten ordnungsgemäß funktionieren, bedürfen andere Infrastrukturressourcen wie [Netz](cs_troubleshoot_network.html) und [Speicher](cs_troubleshoot_storage.html) möglicherweise Ihrer Aufmerksamkeit.</td>
+       <td>Alle Workerknoten in einem Cluster sind betriebsbereit. Sie können auf den Cluster zugreifen und Apps auf dem Cluster bereitstellen. Dieser Status wird als einwandfreier Zustand betrachtet und erfordert keine Aktion von Ihnen.<p class="note">Auch wenn die Workerknoten ordnungsgemäß funktionieren, bedürfen andere Infrastrukturressourcen wie [Netz](cs_troubleshoot_network.html) und [Speicher](cs_troubleshoot_storage.html) möglicherweise Ihrer Aufmerksamkeit. </p></td>
     </tr>
       <tr>
        <td>Pending (Anstehend)</td>
@@ -709,7 +725,7 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
      </tr>
    <tr>
      <td>Requested (Angefordert)</td>
-     <td>Eine Anforderung zum Erstellen des Clusters und zum Bestellen der Infrastruktur für die Kubernetes Master- und Workerknoten wird gesendet. Wenn die Bereitstellung des Clusters gestartet wird, ändert sich der Clusterstatus in <code>Deploying</code> (Wird bereitgestellt). Wenn Ihr Cluster lange Zeit im Status <code>Requested</code> (Angefordert) blockiert ist, öffnen Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](cs_troubleshoot.html#ts_getting_help). </td>
+     <td>Eine Anforderung zum Erstellen des Clusters und zum Bestellen der Infrastruktur für die Kubernetes Master- und Workerknoten wird gesendet. Wenn die Bereitstellung des Clusters gestartet wird, ändert sich der Clusterstatus in <code>Deploying</code> (Wird bereitgestellt). Wenn Ihr Cluster lange Zeit im Status <code>Requested</code> (Angefordert) blockiert ist, öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](cs_troubleshoot.html#ts_getting_help). </td>
    </tr>
    <tr>
      <td>Updating (Aktualisierung)</td>
@@ -729,43 +745,45 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
 ## Cluster entfernen
 {: #remove}
 
-Kostenlose Cluster und Standardcluster, die mit einem nutzungsabhängigen Konto erstellt wurden, müssen manuell entfernt werden, wenn sie nicht mehr benötigt werden, damit sie nicht länger Ressourcen verbrauchen.
+Kostenlose Cluster und Standardcluster, die mit einem belastbaren Konto erstellt wurden, müssen manuell entfernt werden, wenn sie nicht mehr benötigt werden, damit sie nicht länger Ressourcen verbrauchen.
 {:shortdesc}
 
-**Warnung:**
-  - In Ihrem persistenten Speicher werden keine Sicherungen Ihres Clusters oder Ihrer Daten erstellt. Das Löschen des Clusters oder persistenten Speichers kann nicht rückgängig gemacht werden.
-  - Wenn Sie einen Cluster entfernen, entfernen Sie auch alle Teilnetze, die automatisch bereitgestellt wurden, als Sie den Cluster erstellt haben, und solche, die Sie mithilfe des Befehls `ibmcloud ks cluster-subnet-create` erstellt haben. Wenn Sie jedoch vorhandene Teilnetze manuell mithilfe des Befehls `ibmcloud ks cluster-subnet-add command` zu Ihrem Cluster hinzugefügt haben, werden diese Teilnetze nicht aus Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) entfernt und können in anderen Clustern wiederverwendet werden.
+<p class="important">
+In Ihrem persistenten Speicher werden keine Sicherungen Ihres Clusters oder Ihrer Daten erstellt. Das Löschen des Clusters oder persistenten Speichers kann nicht rückgängig gemacht werden.</br>
+</br>Wenn Sie einen Cluster entfernen, entfernen Sie auch alle Teilnetze, die automatisch bereitgestellt wurden, als Sie den Cluster erstellt haben, und solche, die Sie mithilfe des Befehls `ibmcloud ks cluster-subnet-create` erstellt haben. Wenn Sie jedoch vorhandene Teilnetze manuell mithilfe des Befehls `ibmcloud ks cluster-subnet-add command` zu Ihrem Cluster hinzugefügt haben, werden diese Teilnetze nicht aus Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) entfernt und können in anderen Clustern wiederverwendet werden.</p>
 
 Vorbemerkungen:
 * Notieren Sie sich Ihre Cluster-ID. Möglicherweise benötigen Sie die Cluster-ID, um zugehörige Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) zu untersuchen und zu entfernen, die nicht automatisch mit Ihrem Cluster gelöscht werden.
 * Wenn Sie die Daten in Ihrem persistenten Speicher löschen möchten, [sollten Sie mit den Löschoptionen vertraut sein](cs_storage_remove.html#cleanup).
+* Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** innehaben. 
 
 Gehen Sie wie folgt vor, um einen Cluster zu entfernen:
 
--   Vorgehensweise bei Verwendung der {{site.data.keyword.Bluemix_notm}}-GUI:
-    1.  Wählen Sie Ihren Cluster aus und klicken Sie im Menü **Weitere Aktionen...** auf **Löschen**.
+-   Vorgehensweise bei Verwendung der {{site.data.keyword.Bluemix_notm}}-Konsole: 
+    1.  Wählen Sie Ihren Cluster aus und klicken Sie im Menü Weitere Aktionen... auf Löschen.
 
 -   Vorgehensweise bei Verwendung der {{site.data.keyword.Bluemix_notm}}-CLI:
     1.  Listen Sie die verfügbaren Cluster auf.
 
-        ```
+        
         ibmcloud ks clusters
         ```
         {: pre}
 
     2.  Löschen Sie den Cluster.
 
-        ```
+        
         ibmcloud ks cluster-rm <clustername_oder_-id>
         ```
         {: pre}
 
     3.  Befolgen Sie die Eingabeaufforderungen und wählen Sie aus, ob Clusterressourcen, darunter Container, Pods, gebundene Services, persistenter Speicher und geheime Schlüssel, gelöscht werden sollen.
-      - **Persistenter Speicher**: Persistenter Speicher stellt Hochverfügbarkeit für Ihre Daten bereit. Wenn Sie mithilfe einer [vorhandenen Dateifreigabe](cs_storage_file.html#existing_file) einen Persistent Volume Claim (PVC) erstellt haben, dann können Sie beim Löschen des Clusters die Dateifreigabe nicht löschen. Sie müssen die Dateifreigabe zu einem späteren Zeitpunkt manuell aus Ihrem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) löschen.
+      - Persistenter Speicher: Persistenter Speicher stellt Hochverfügbarkeit für Ihre Daten bereit. Wenn Sie mithilfe einer [vorhandenen Dateifreigabe](cs_storage_file.html#existing_file)(cs_users.html#platform)] einen Persistent Volume Claim (PVC) erstellt haben, dann können Sie beim Löschen des Clusters die Dateifreigabe nicht löschen. Sie müssen die Dateifreigabe zu einem späteren Zeitpunkt manuell aus Ihrem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) löschen.
 
-          **Hinweis**: Bedingt durch den monatlichen Abrechnungszyklus kann ein Persistent Volume Claim (PVC) nicht am letzten Tag des Monats gelöscht werden. Wenn Sie den Persistent Volume Claim am letzten Tag des Monats entfernen, verbleibt die Löschung bis zum Beginn des nächsten Monats in einem anstehenden Zustand.
+          Bedingt durch den monatlichen Abrechnungszyklus kann ein Persistent Volume Claim (PVC) nicht am letzten Tag des Monats gelöscht werden. Wenn Sie den Persistent Volume Claim am letzten Tag des Monats entfernen, verbleibt die Löschung bis zum Beginn des nächsten Monats in einem anstehenden Zustand.
+          {: note}
 
 Nächste Schritte:
 - Nachdem ein Cluster nicht länger in der Liste verfügbarer Cluster enthalten ist, wenn Sie den Befehl `ibmcloud ks clusters` ausführen, können Sie den Namen eines entfernten Clusters wiederverwenden.
 - Wenn Sie die Teilnetze behalten, können Sie [sie in einem neuen Cluster wiederverwenden](cs_subnets.html#custom) oder manuell zu einem späteren Zeitpunkt aus dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) löschen.
-- Wenn Sie den persistenten Speicher beibehalten haben, können Sie den [Speicher](cs_storage_remove.html#cleanup) später über das Dashboard der IBM Cloud-Infrastruktur (SoftLayer) in der {{site.data.keyword.Bluemix_notm}}-GUI löschen.
+- Wenn Sie den persistenten Speicher beibehalten haben, können Sie den [Speicher](cs_storage_remove.html#cleanup) später über das Dashboard der IBM Cloud-Infrastruktur (SoftLayer) in der {{site.data.keyword.Bluemix_notm}}-Konsole löschen. 

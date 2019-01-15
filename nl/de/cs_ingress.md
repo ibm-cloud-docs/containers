@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -34,14 +37,14 @@ Ingress ist ein Kubernetes-Service, der Netzverkehr-Workloads in Ihrem Cluster a
 Ingress besteht aus drei Komponenten:
 <dl>
 <dt>Ingress-Ressource</dt>
-<dd>Um eine App über Ingress zugänglich zu machen, müssen Sie einen Kubernetes-Service für Ihre App erstellen und diesen Service bei Ingress registrieren, indem Sie eine Ingress-Ressource definieren. Die Ingress-Ressource ist eine Kubernetes-Ressource, die die Regeln für die Weiterleitung eingehender Anforderungen für Apps definiert. Die Ingress-Ressource gibt auch den Pfad zu Ihren App-Services an, die an die öffentliche Route angehängt werden, um eine eindeutige App-URL zu bilden, z. B. `mycluster.us-south.containers.appdomain.cloud/myapp1`. <br></br>**Hinweis**: Seit dem 24. Mai 2018 gibt es ein anderes Ingress-Unterdomänenformat für neue Cluster. Der in dem neuen Subdomänenformat enthaltene Bereich oder Zonenname wird basierend auf der Zone generiert, in der der Cluster erstellt wurde. Wenn Pipeline-Abhängigkeiten für konsistente App-Domänennamen bestehen, können Sie anstelle der von IBM bereitgestellten Ingress-Unterdomäne Ihre eigene angepasste Domäne verwenden.<ul><li>Allen Clustern, die nach dem 24. Mai 2018 erstellt wurden, wird eine Unterdomäne im neuen Format <code>&lt;clustername&gt;.&lt;region_oder_zone&gt;.containers.appdomain.cloud</code> zugeordnet.</li><li>Einzelzonencluster, die vor dem 24. Mai 2018 erstellt wurden, verwenden weiterhin die zugeordnete Unterdomäne im alten Format <code>&lt;clustername&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li><li>Wenn Sie einen Einzelzonencluster, der vor dem 24. Mai 2018 erstellt wurde, in einen Mehrzonencluster ändern, indem Sie zum ersten Mal [eine Zone zum Cluster hinzufügen](cs_clusters.html#add_zone), verwendet der Cluster weiterhin die zugeordnete Unterdomäne im alten Format
-<code>&lt;clusternname&gt;.&lt;region&gt;.containers.mybluemix.net</code>. Außerdem wird dem Cluster eine Unterdomäne im neuen Format <code>&lt;clustername&gt;.&lt;region_oder_zone&gt;.containers.appdomain.cloud</code> zugewiesen. Es können beide Unterdomänen verwendet werden.</li></ul></br>**Mehrzonencluster**: Die Ingress-Ressource ist global und es ist nur eine Ingress-Ressource pro Namensbereich für einen Mehrzonencluster erforderlich.</dd>
+<dd>Um eine App über Ingress zugänglich zu machen, müssen Sie einen Kubernetes-Service für Ihre App erstellen und diesen Service bei Ingress registrieren, indem Sie eine Ingress-Ressource definieren. Die Ingress-Ressource ist eine Kubernetes-Ressource, die die Regeln für die Weiterleitung eingehender Anforderungen für Apps definiert. Die Ingress-Ressource gibt auch den Pfad zu Ihren App-Services an, die an die öffentliche Route angehängt werden, um eine eindeutige App-URL zu bilden, z. B. `mycluster.us-south.containers.appdomain.cloud/myapp1`.<p class="note">Seit dem 24. Mai 2018 gibt es ein anderes Ingress-Unterdomänenformat für neue Cluster. Der in dem neuen Unterdomänenformat enthaltene Bereich oder Zonenname wird basierend auf der Zone generiert, in der der Cluster erstellt wurde. Wenn Pipeline-Abhängigkeiten für konsistente App-Domänennamen bestehen, können Sie anstelle der von IBM bereitgestellten Ingress-Unterdomäne Ihre eigene angepasste Domäne verwenden.<ul><li>Allen Clustern, die nach dem 24. Mai 2018 erstellt wurden, wird eine Unterdomäne im neuen Format <code>&lt;clustername&gt;.&lt;region_oder_zone&gt;.containers.appdomain.cloud</code> zugeordnet.</li><li>Einzelzonencluster, die vor dem 24. Mai 2018 erstellt wurden, verwenden weiterhin die zugeordnete Unterdomäne im alten Format <code>&lt;clustername&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li><li>Wenn Sie einen Einzelzonencluster, der vor dem 24. Mai 2018 erstellt wurde, in einen Mehrzonencluster ändern, indem Sie zum ersten Mal [eine Zone zum Cluster hinzufügen](cs_clusters.html#add_zone), verwendet der Cluster weiterhin die zugeordnete Unterdomäne im alten Format
+<code>&lt;clustername&gt;.&lt;region&gt;.containers.mybluemix.net</code>. Außerdem wird dem Cluster eine Unterdomäne im neuen Format <code>&lt;clustername&gt;.&lt;region_oder_zone&gt;.containers.appdomain.cloud</code> zugewiesen. Es können beide Unterdomänen verwendet werden.</li></ul></p>**Mehrzonencluster**: Die Ingress-Ressource ist global und es ist nur eine Ingress-Ressource pro Namensbereich für einen Mehrzonencluster erforderlich.</dd>
 <dt>Lastausgleichsfunktion für Anwendungen (ALB)</dt>
-<dd>Die Lastausgleichsfunktion für Anwendungen (ALB) ist eine externe Lastausgleichsfunktion, die für eingehende HTTP-, HTTPS-, TCP- oder UDP-Service-Anforderungen empfangsbereit ist. Die ALB leitet Anforderungen gemäß den Regeln, die in der Ingress-Ressource definiert sind, an den entsprechenden App-Pod weiter. Wenn Sie einen Standardcluster erstellen, erstellt {{site.data.keyword.containerlong_notm}} automatisch eine hochverfügbare ALB für Ihre Cluster und ordnet ihnen eine eindeutige öffentliche Route zu. Die öffentliche Route ist mit einer portierbaren öffentlichen IP-Adresse verknüpft, die bei der Erstellung des Clusters in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) eingerichtet wird. Es wird zwar auch eine private Standard-ALB (Lastausgleichsfunktion für Anwendungen) erstellt, diese wird jedoch nicht automatisch aktiviert.<br></br>**Mehrzonencluster**: Wenn Sie eine Zone zu Ihrem Cluster hinzufügen, wird ein portierbares öffentliches Teilnetz hinzugefügt und eine neue öffentliche ALB automatisch erstellt und im Teilnetz in dieser Zone aktiviert. Alle standardmäßigen öffentlichen Standard-ALBs (Lastausgleichsfunktionen für Anwendungen) in Ihrem Cluster verwenden eine öffentliche Route, haben aber eine andere IP-Adresse. Es wird zwar auch eine private Standard-ALB in jeder Zone erstellt, diese wird jedoch nicht automatisch aktiviert.</dd>
+<dd>Die Lastausgleichsfunktion für Anwendungen (ALB) ist eine externe Lastausgleichsfunktion, die für eingehende HTTP-, HTTPS-, TCP- oder UDP-Service-Anforderungen empfangsbereit ist. Die ALB leitet Anforderungen gemäß den Regeln, die in der Ingress-Ressource definiert sind, an den entsprechenden App-Pod weiter. Wenn Sie einen Standardcluster erstellen, erstellt {{site.data.keyword.containerlong_notm}} automatisch eine hoch verfügbare ALB für Ihre Cluster und ordnet ihnen eine eindeutige öffentliche Route zu. Die öffentliche Route ist mit einer portierbaren öffentlichen IP-Adresse verknüpft, die bei der Erstellung des Clusters in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) eingerichtet wird. Es wird zwar auch eine private Standard-ALB (Lastausgleichsfunktion für Anwendungen) erstellt, diese wird jedoch nicht automatisch aktiviert.<br></br>**Mehrzonencluster**: Wenn Sie eine Zone zu Ihrem Cluster hinzufügen, wird ein portierbares öffentliches Teilnetz hinzugefügt und eine neue öffentliche ALB automatisch erstellt und im Teilnetz in dieser Zone aktiviert. Alle standardmäßigen öffentlichen Standard-ALBs (Lastausgleichsfunktionen für Anwendungen) in Ihrem Cluster verwenden eine öffentliche Route, haben aber eine andere IP-Adresse. Es wird zwar auch eine private Standard-ALB in jeder Zone erstellt, diese wird jedoch nicht automatisch aktiviert.</dd>
 <dt>Lastausgleichsfunktion für mehrere Zonen (MZLB)</dt>
-<dd><p>**Mehrzonencluster**: Wenn Sie einen Mehrzonencluster erstellen oder [ eine Zone zu einem Einzelzonencluster hinzufügen](cs_clusters.html#add_zone), wird automatisch eine Cloudflare-MZLB (Multizone Load Balancer) erstellt und bereitgestellt, sodass eine (1) MZLB für jede Region vorhanden ist. Die MZLB stellt die IP-Adressen Ihrer ALBs hinter denselben Hostnamen und aktiviert die Zustandsprüfungen für diese IP-Adressen, um zu ermitteln, ob sie verfügbar sind oder nicht. Wenn Sie beispielsweise Workerknoten in drei (3) Zonen in der Region 'Vereinigte Staaten (Osten)' haben, hat der Hostname `yourcluster.us-east.containers.appdomain.cloud` drei ALB-IP-Adressen. Der MZLB-Status überprüft die öffentliche ALB-IP in jeder Zone des Clusters und hält die Ergebnisse der DNS-Suche auf der Basis dieser Zustandsprüfungen aktualisiert. Wenn Ihre ALBs beispielsweise die IP-Adressen `1.1.1.1`, `2.2.2.2` und `3.3.3.3` haben, gibt eine normale Operation der DNS-Suche in Ihrer Ingress-Subdomäne alle drei IPs zurück, von denen der Client auf eine zufällig zugreift. Wenn die ALB mit der IP-Adresse `3.3.3.3` aus irgendeinem Grund nicht verfügbar ist, z. B. wegen eines Zonenfehlers, schlägt die Zustandsprüfung für diese Zone fehl, die MZLB entfernt die fehlgeschlagene IP-Adresse aus dem Hostnamen und die DNS-Suche gibt nur die einwandfreien ALB-IPs `1.1.1.1` und `2.2.2.2` zurück. Die Unterdomäne hat eine Lebensdauer von 30 Sekunden (TTL, Time to live). Nach 30 Sekunden können neue Client-Apps nur auf eine der verfügbaren, einwandfreien ALB-IPs zugreifen.</p><p>In seltenen Fällen können manche DNS-Resolver oder Client-Apps nach dem Intervall von 30 Sekunden weiterhin die nicht einwandfreie ALB-IP verwenden. Diese Client-Apps können eine längere Ladezeit aufweisen, bis die Clientanwendung die IP-Adresse `3.3.3.3` verlässt und versucht, eine Verbindung zu `1.1.1.1` oder `2.2.2.2` herzustellen. Je nach Client-Browser- oder Client-App-Einstellungen kann die Verzögerung von einigen Sekunden bis zu einem vollständigen TCP-Zeitlimitintervall reichen.</p>
-<p>Die MZLB führt einen Lastausgleich für öffentliche ALBs durch, die die von IBM bereitgestellte Ingress-Subdomäne verwenden. Wenn Sie nur private ALBs verwenden, müssen Sie den Status der ALBs manuell überprüfen und die Ergebnisse der DNS-Suche aktualisieren. Wenn Sie öffentliche ALBs verwenden, die eine angepasste Domäne verwenden, können Sie die ALBs in den Lastausgleich für MZLB aufnehmen, indem Sie einen CNAME in Ihrem DNS-Eintrag erstellen, um Anforderungen von Ihrer angepassten Domäne an die von IBM bereitgestellte Ingress-Subdomäne für Ihren Cluster weiterzuleiten.</p>
-<p><strong>Hinweis:</strong> Wenn Sie die preDNAT-Netzrichtlinien von Calico verwenden, um den gesamten eingehenden Datenverkehr zu Ingress-Services zu blockieren, müssen Sie auch die <a href="https://www.cloudflare.com/ips/">Cloudflare-IPv4-IPs <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>, die zur Überprüfung des Status Ihrer ALBs verwendet werden, in die Whitelist stellen. Informationen zum Erstellen einer Calico-preDNAT-Richtlinie für die Whitelist für diese IPs finden Sie in der Lerneinheit 3 des <a href="cs_tutorials_policies.html#lesson3">Lernprogramms zur Calico-Netzrichtlinie</a>.</dd>
+<dd><p>**Mehrzonencluster**: Wenn Sie einen Mehrzonencluster erstellen oder [ eine Zone zu einem Einzelzonencluster hinzufügen](cs_clusters.html#add_zone), wird automatisch eine Cloudflare-MZLB (Multizone Load Balancer) erstellt und bereitgestellt, sodass eine (1) MZLB für jede Region vorhanden ist. Die MZLB stellt die IP-Adressen Ihrer ALBs hinter denselben Hostnamen und aktiviert die Zustandsprüfungen für diese IP-Adressen, um zu ermitteln, ob sie verfügbar sind oder nicht. Wenn Sie beispielsweise Workerknoten in drei (3) Zonen in der Region 'Vereinigte Staaten (Osten)' haben, hat der Hostname `yourcluster.us-east.containers.appdomain.cloud` drei ALB-IP-Adressen. Der MZLB-Status überprüft die öffentliche ALB-IP in jeder Zone des Clusters und hält die Ergebnisse der DNS-Suche auf der Basis dieser Zustandsprüfungen aktualisiert. Wenn Ihre ALBs beispielsweise die IP-Adressen `1.1.1.1`, `2.2.2.2` und `3.3.3.3` haben, gibt eine normale Operation der DNS-Suche in Ihrer Ingress-Unterdomäne alle drei IPs zurück, von denen der Client auf eine zufällig zugreift. Wenn die ALB mit der IP-Adresse `3.3.3.3` aus irgendeinem Grund nicht verfügbar ist, z. B. wegen eines Zonenfehlers, schlägt die Zustandsprüfung für diese Zone fehl, die MZLB entfernt die fehlgeschlagene IP-Adresse aus dem Hostnamen und die DNS-Suche gibt nur die einwandfreien ALB-IPs `1.1.1.1` und `2.2.2.2` zurück. Die Unterdomäne hat eine Lebensdauer von 30 Sekunden (TTL, Time to live). Nach 30 Sekunden können neue Client-Apps nur auf eine der verfügbaren, einwandfreien ALB-IPs zugreifen.</p><p>In seltenen Fällen können manche DNS-Resolver oder Client-Apps nach dem Intervall von 30 Sekunden weiterhin die nicht einwandfreie ALB-IP verwenden. Diese Client-Apps können eine längere Ladezeit aufweisen, bis die Clientanwendung die IP-Adresse `3.3.3.3` verlässt und versucht, eine Verbindung zu `1.1.1.1` oder `2.2.2.2` herzustellen. Je nach Client-Browser- oder Client-App-Einstellungen kann die Verzögerung von einigen Sekunden bis zu einem vollständigen TCP-Zeitlimitintervall reichen.</p>
+<p>Die MZLB führt einen Lastausgleich für öffentliche ALBs durch, die die von IBM bereitgestellte Ingress-Unterdomäne verwenden. Wenn Sie nur private ALBs verwenden, müssen Sie den Status der ALBs manuell überprüfen und die Ergebnisse der DNS-Suche aktualisieren. Wenn Sie öffentliche ALBs verwenden, die eine angepasste Domäne verwenden, können Sie die ALBs in den Lastausgleich für MZLB aufnehmen, indem Sie einen CNAME in Ihrem DNS-Eintrag erstellen, um Anforderungen von Ihrer angepassten Domäne an die von IBM bereitgestellte Ingress-Unterdomäne für Ihren Cluster weiterzuleiten.</p>
+<p class="note">Wenn Sie die preDNAT-Netzrichtlinien von Calico verwenden, um den gesamten eingehenden Datenverkehr zu Ingress-Services zu blockieren, müssen Sie auch die <a href="https://www.cloudflare.com/ips/">Cloudflare-IPv4-IPs <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>, die zur Überprüfung des Status Ihrer ALBs verwendet werden, in die Whitelist stellen. Informationen zum Erstellen einer Calico-preDNAT-Richtlinie für die Whitelist für diese IPs finden Sie in der Lerneinheit 3 des <a href="cs_tutorials_policies.html#lesson3">Lernprogramms zur Calico-Netzrichtlinie</a>.</p></dd>
 </dl>
 
 ### Wie kann eine Anforderung mithilfe von Ingress in einem Einzelzonencluster in meine App gelangen?
@@ -89,7 +92,7 @@ Bevor Sie mit der Verwendung mit Ingress beginnen, überprüfen Sie die folgende
 
 **Voraussetzungen für alle Ingress-Konfigurationen:**
 - Ingress ist nur für Standardcluster verfügbar und erfordert mindestens zwei Workerknoten pro Zone, um eine hohe Verfügbarkeit und regelmäßige Aktualisierungen zu gewährleisten.
-- Für die Einrichtung von Ingress ist die IAM-Plattformrolle [**Administrator** erforderlich](cs_users.html#platform).
+- Für die Einrichtung von Ingress ist die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Administrator** erforderlich. 
 
 **Voraussetzungen für die Verwendung von Ingress in Mehrzonenclustern**:
  - Wenn Sie den Datenaustausch im Netz auf [Edge-Workerknoten](cs_edge.html) beschränken möchten, müssen in jeder Zone mindestens zwei Edge-Workerknoten für die Hochverfügbarkeit von Ingress-Pods aktiviert werden. [Erstellen Sie einen Worker-Pool für Edge-Workerknoten](cs_clusters.html#add_pool), der sich über alle Zonen im Cluster erstreckt und mindestens zwei Workerknoten pro Zone aufweist.
@@ -133,9 +136,8 @@ Um dieselbe Cluster-ALB zum Verwalten von Datenverkehr für diese Apps zu verwen
 Jetzt werden beide URLs für dieselbe Domäne aufgelöst und daher beide von derselben Lastausgleichsfunktion für Anwendungen (ALB) bedient. Da jedoch die Ressource im Namensbereich für das Staging mit der Unterdomäne `stage` registriert ist, leitet die Ingress-Lastausgleichsfunktion für Anwendungen (ALB) Anforderungen ordnungsgemäß von der URL `stage.domain.net/app3` nur an `app3` weiter.
 
 {: #wildcard_tls}
-**Hinweis**:
-* Der von IBM bereitgestellte Platzhalter für die Ingress-Unterdomäne (`*.<cluster_name>.<region>.containers.appdomain.cloud`) wird standardmäßig für Ihren Cluster registriert. Das von IBM bereitgestellte TLS-Zertifikat ist ein Platzhalterzertifikat und kann für die Platzhalterunterdomäne verwendet werden.
-* Wenn Sie eine angepasste Domäne verwenden möchten, müssen Sie diese als eine Platzhalterdomäne, wie `*.custom_domain.net`, registrieren. Um TLS verwenden zu können, müssen Sie ein Platzhalterzertifikat abrufen.
+Der von IBM bereitgestellte Platzhalter für die Ingress-Unterdomäne (`*.<cluster_name>.<region>.containers.appdomain.cloud`) wird standardmäßig für Ihren Cluster registriert. Das von IBM bereitgestellte TLS-Zertifikat ist ein Platzhalterzertifikat und kann für die Platzhalterunterdomäne verwendet werden. Wenn Sie eine angepasste Domäne verwenden möchten, müssen Sie diese als eine Platzhalterdomäne, wie `*.custom_domain.net`, registrieren. Um TLS verwenden zu können, müssen Sie ein Platzhalterzertifikat abrufen.
+{: note}
 
 ### Mehrere Domänen in einem Namensbereich
 {: #multi-domains}
@@ -144,9 +146,8 @@ In einem einzelnen Namensbereich können Sie über eine Domäne auf alle Apps in
 
 <img src="images/cs_ingress_single_ns_multi_subs.png" alt="Pro Namensbereich ist eine Ressource erforderlich." style="border-style: none"/>
 
-**Hinweis**:
-* Der von IBM bereitgestellte Platzhalter für die Ingress-Unterdomäne (`*.<cluster_name>.<region>.containers.appdomain.cloud`) wird standardmäßig für Ihren Cluster registriert. Das von IBM bereitgestellte Ingress-TLS-Zertifikat ist ein Platzhalterzertifikat und kann für die Platzhalterunterdomäne verwendet werden.
-* Wenn Sie eine angepasste Domäne verwenden möchten, müssen Sie diese als eine Platzhalterdomäne, wie `*.custom_domain.net`, registrieren. Um TLS verwenden zu können, müssen Sie ein Platzhalterzertifikat abrufen.
+Der von IBM bereitgestellte Platzhalter für die Ingress-Unterdomäne (`*.<cluster_name>.<region>.containers.appdomain.cloud`) wird standardmäßig für Ihren Cluster registriert. Das von IBM bereitgestellte TLS-Zertifikat ist ein Platzhalterzertifikat und kann für die Platzhalterunterdomäne verwendet werden. Wenn Sie eine angepasste Domäne verwenden möchten, müssen Sie diese als eine Platzhalterdomäne, wie `*.custom_domain.net`, registrieren. Um TLS verwenden zu können, müssen Sie ein Platzhalterzertifikat abrufen.
+{: note}
 
 <br />
 
@@ -251,7 +252,7 @@ Legen Sie nach der Auswahl der App-Domäne fest, ob die TLS-Terminierung verwend
 
 Die Lastausgleichsfunktion für Anwendungen verteilt die Lasten des HTTP-Netzverkehrs auf die Apps in Ihrem Cluster. Um auch einen Lastausgleich für eingehende HTTPS-Verbindungen durchführen zu können, können Sie die Lastausgleichsfunktion so konfigurieren, dass der Netzverkehr entschlüsselt und die entschlüsselte Anforderung an die Apps weitergeleitet wird, die in Ihrem Cluster zugänglich sind.
 
-* Wenn Sie die von IBM bereitgestellte Ingress-Unterdomäne verwenden, können Sie das von IBM bereitgestellte TLS-Zertifikat verwenden. Von IBM bereitgestellte TLS-Zertifikate sind von LetsEncrypt signiert und werden vollständig von IBM verwaltet. Die Zertifikate laufen alle 90 Tage ab und werden automatisch sieben Tage vor Ablauf der Gültigkeit verlängert. **Hinweis**: Weitere Informationen zur TLS-Zertifizierung mit Platzhalterzeichen finden Sie in [diesem Hinweis](#wildcard_tls).
+* Wenn Sie die von IBM bereitgestellte Ingress-Unterdomäne verwenden, können Sie das von IBM bereitgestellte TLS-Zertifikat verwenden. Von IBM bereitgestellte TLS-Zertifikate sind von LetsEncrypt signiert und werden vollständig von IBM verwaltet. Die Zertifikate laufen alle 90 Tage ab und werden automatisch sieben Tage vor Ablauf der Gültigkeit verlängert. Weitere Informationen zur TLS-Zertifizierung mit Platzhalterzeichen finden Sie in [diesem Hinweis](#wildcard_tls).
 * Wenn Sie eine angepasste Domäne verwenden, können Sie Ihr eigenes TLS-Zertifikat zum Verwalten der TLS-Terminierung nutzen. Wenn nur Apps in einem einzigen Namensbereich vorhanden sind, können Sie einen TLS-Schlüssel für das Zertifikat in diesem Namensbereich importieren oder erstellen. Wenn Sie über Apps in mehreren Namensbereichen verfügen, importieren oder erstellen Sie im Namensbereich `default` einen geheimen TLS-Schlüssel für das Zertifikat, damit die ALB auf das Zertifikat in jedem Namensbereich zugreifen und es verwenden kann. Weitere Informationen zur TLS-Zertifizierung mit Platzhalterzeichen finden Sie in [diesem Hinweis](#wildcard_tls). **Hinweis**: TLS-Zertifikate, die vorab verteilte Schlüssel enthalten (TLS-PSK) werden nicht unterstützt.
 
 **Wenn Sie die von IBM bereitgestellte Ingress-Domäne verwenden:**
@@ -280,7 +281,7 @@ ibmcloud ks alb-cert-deploy --secret-name <name_des_geheimen_schlüssels> --clus
 {: pre}
 
 Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
-1. Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. **Wichtig**: Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
+1. Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist. 
 2. Konvertieren Sie das Zertifikat und den Schlüssel in Base-64.
    1. Verschlüsseln Sie das Zertifikat und den Schlüssel in Base-64 und speichern Sie den mit Base-64 verschlüsselten Wert in einer neuen Datei.
       ```
@@ -329,7 +330,8 @@ Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
 Ingress-Ressourcen definieren die Routing-Regeln, mit der die Lastausgleichsfunktion für Anwendungen Datenverkehr an Ihren App-Service weiterleitet.
 {: shortdesc}
 
-**Hinweis:** Wenn der Cluster mehrere Namensbereiche aufweist, in denen Apps zugänglich gemacht werden, ist pro Namensbereich eine Ingress-Ressource erforderlich. Jeder Namensbereich muss jedoch einen anderen Host verwenden. Sie müssen eine Platzhalterdomäne registrieren und in jeder Ressource eine andere Unterdomäne angeben. Weitere Informationen finden Sie in [Netzbetrieb für einen einzelnen oder mehrere Namensbereiche planen](#multiple_namespaces).
+Wenn der Cluster mehrere Namensbereiche aufweist, in denen Apps zugänglich gemacht werden, ist pro Namensbereich eine Ingress-Ressource erforderlich. Jeder Namensbereich muss jedoch einen anderen Host verwenden. Sie müssen eine Platzhalterdomäne registrieren und in jeder Ressource eine andere Unterdomäne angeben. Weitere Informationen finden Sie in [Netzbetrieb für einen einzelnen oder mehrere Namensbereiche planen](#multiple_namespaces).
+{: note}
 
 1. Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myingressresource.yaml` (Beispiel).
 
@@ -573,7 +575,7 @@ Gehen Sie wie folgt vor, um Apps außerhalb Ihres Clusters öffentlich zugängli
         ```
         {: pre}
 
-3. Fahren Sie mit den Schritten in [Apps in Ihrem Cluster öffentlich zugänglich machen](#public_inside_2) fort und beginnen Sie dort mit Schritt 2.
+3. Fahren Sie mit den Schritten unter "Apps in Ihrem Cluster öffentlich zugänglich machen" fort, [Schritt 2: App-Domäne auswählen](#public_inside_2). 
 
 <br />
 
@@ -645,7 +647,8 @@ Stellen Sie als Erstes Ihre Apps bereit und erstellen Sie Kubernetes-Services un
 Wenn Sie einen Standardcluster erstellen, wird in jeder Zone mit Workerknoten eine von IBM bereitgestellte private Lastausgleichsfunktion für Anwendungen (ALB) erstellt, der eine portierbare öffentliche IP-Adresse und eine private Route zugewiesen ist. Die private Standard-ALB in jeder Zone wird jedoch nicht automatisch aktiviert. Um mit der privaten Standard-ALB privaten Netzdatenverkehr auf Ihre Apps zu verteilen, müssen Sie sie zunächst entweder mit der von IBM bereitgestellten, portierbaren privaten IP-Adresse oder mit Ihrer eigenen portierbaren privaten IP-Adresse aktivieren.
 {:shortdesc}
 
-**Hinweis**: Wenn Sie beim Erstellen des Clusters das Flag `--no-subnet` verwendet haben, müssen Sie ein portierbares privates Teilnetz oder ein durch einen Benutzer verwaltetes Teilnetz hinzufügen, bevor Sie die private Lastausgleichsfunktion für Anwendungen (ALB) aktivieren können. Weitere Informationen finden Sie im Abschnitt [Weitere Teilnetze für Ihren Cluster anfordern](cs_subnets.html#request).
+Wenn Sie beim Erstellen des Clusters das Flag `--no-subnet` verwendet haben, müssen Sie ein portierbares privates Teilnetz oder ein durch einen Benutzer verwaltetes Teilnetz hinzufügen, bevor Sie die private Lastausgleichsfunktion für Anwendungen (ALB) aktivieren können. Weitere Informationen finden Sie im Abschnitt [Weitere Teilnetze für Ihren Cluster anfordern](cs_subnets.html#request).
+{: note}
 
 **Gehen Sie wie folgt vor, um eine private Standard-ALB mit der zuvor zugewiesenen, durch IBM bereitgestellten portierbaren privaten IP-Adresse zu aktivieren:**
 
@@ -658,11 +661,11 @@ Wenn Sie einen Standardcluster erstellen, wird in jeder Zone mit Workerknoten ei
 
     Das Feld **Status** für private ALBs ist inaktiviert (_disabled_).
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
-    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
-    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   false     disabled   private   -               dal12
-    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
-    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    true      enabled    public    169.xx.xxx.xxx  dal12
+    ALB ID                                            Status     Type      ALB IP          Zone    Build
+    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   disabled   private   -               dal10   ingress:350/ingress-auth:192
+    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   disabled   private   -               dal12   ingress:350/ingress-auth:192
+    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
+    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
     ```
     {: screen}
     In Mehrzonenclustern gibt das nummerierte Suffix in der ALB-ID die Reihenfolge an, in der die ALB hinzugefügt wurde.
@@ -716,9 +719,9 @@ Wenn Sie einen Standardcluster erstellen, wird in jeder Zone mit Workerknoten ei
 
     Das Feld **Status** für die private ALB ist inaktiviert (_disabled_).
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
+    ALB ID                                            Status     Type      ALB IP          Zone    Build
+    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   disabled   private   -               dal10   ingress:350/ingress-auth:192
+    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
     ```
     {: screen}
 
@@ -762,7 +765,7 @@ ibmcloud ks alb-cert-deploy --secret-name <name_des_geheimen_schlüssels> --clus
 {: pre}
 
 Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
-1. Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. **Wichtig**: Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
+1. Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist. 
 2. Konvertieren Sie das Zertifikat und den Schlüssel in Base-64.
    1. Verschlüsseln Sie das Zertifikat und den Schlüssel in Base-64 und speichern Sie den mit Base-64 verschlüsselten Wert in einer neuen Datei.
       ```
@@ -811,7 +814,8 @@ Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
 Ingress-Ressourcen definieren die Routing-Regeln, mit der die Lastausgleichsfunktion für Anwendungen Datenverkehr an Ihren App-Service weiterleitet.
 {: shortdesc}
 
-**Anmerkung:** Wenn Ihr Cluster mehrere Namensbereiche aufweist, in denen Apps zugänglich gemacht werden, ist pro Namensbereich eine Ingress-Ressource erforderlich. Jeder Namensbereich muss jedoch einen anderen Host verwenden. Sie müssen eine Platzhalterdomäne registrieren und in jeder Ressource eine andere Unterdomäne angeben. Weitere Informationen finden Sie in [Netzbetrieb für einen einzelnen oder mehrere Namensbereiche planen](#multiple_namespaces).
+Wenn der Cluster mehrere Namensbereiche aufweist, in denen Apps zugänglich gemacht werden, ist pro Namensbereich eine Ingress-Ressource erforderlich. Jeder Namensbereich muss jedoch einen anderen Host verwenden. Sie müssen eine Platzhalterdomäne registrieren und in jeder Ressource eine andere Unterdomäne angeben. Weitere Informationen finden Sie in [Netzbetrieb für einen einzelnen oder mehrere Namensbereiche planen](#multiple_namespaces).
+{: note}
 
 1. Öffnen Sie Ihren bevorzugten Editor und erstellen Sie eine Ingress-Konfigurationsdatei namens `myingressresource.yaml` (Beispiel).
 
@@ -1002,7 +1006,8 @@ Standardmäßig sind nur die Ports 80 und 443 für die Ingress-ALB (Lastausgleic
 
 2. Fügen Sie den Abschnitt <code>data</code> hinzu und geben Sie die öffentlichen Ports `80`, `443` und allen weiteren Ports, die Sie öffentlich zugänglich machen möchten, durch Semikolons getrennt an.
 
-    **Wichtig**: Standardmäßig sind Port 80 und 443 geöffnet. Wenn Port 80 und 443 geöffnet bleiben sollen, müssen Sie sie neben allen anderen TCP-Ports einschließen, die Sie im Feld `public-ports` angegeben haben. Ein Port, der nicht angegeben wird, wird geschlossen. Wenn Sie eine private Lastausgleichsfunktion für Anwendungen aktiviert haben, müssen Sie auch alle Ports im Feld `private-ports` angeben, die geöffnet bleiben sollen.
+    Standardmäßig sind Port 80 und 443 geöffnet. Wenn Port 80 und 443 geöffnet bleiben sollen, müssen Sie sie neben allen anderen TCP-Ports einschließen, die Sie im Feld `public-ports` angegeben haben. Ein Port, der nicht angegeben wird, wird geschlossen. Wenn Sie eine private Lastausgleichsfunktion für Anwendungen aktiviert haben, müssen Sie auch alle Ports im Feld `private-ports` angeben, die geöffnet bleiben sollen.
+    {: important}
 
     ```
     apiVersion: v1
@@ -1049,7 +1054,8 @@ Standardmäßig wird die Quellen-IP-Adresse der Clientanforderung nicht beibehal
 
 Um die ursprüngliche Quellen-IP-Adresse der Clientanforderung beizubehalten, können Sie die [das Beibehalten der Quellen-IP aktivieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer). Das Beibehalten der IP des Clients ist nützlich, z. B. wenn App-Server Sicherheits- und Zugriffssteuerungsrichtlinien genügen müssen.
 
-**Hinweis**: Wenn Sie [eine ALB inaktivieren](cs_cli_reference.html#cs_alb_configure), gehen alle Änderungen an der Quellen-IP, die Sie an dem LoadBalancer-Service vornehmen, der die ALB bereitstellt, verloren. Wenn Sie die ALB erneut aktivieren, müssen Sie auch die Quellen-IP erneut aktivieren.
+Wenn Sie [eine ALB inaktivieren](cs_cli_reference.html#cs_alb_configure), gehen alle Änderungen an der Quellen-IP, die Sie an dem LoadBalancer-Service vornehmen, der die ALB bereitstellt, verloren. Wenn Sie die ALB erneut aktivieren, müssen Sie auch die Quellen-IP erneut aktivieren.
+{: note}
 
 Um die Beibehaltung der Quellen-IP zu aktivieren, bearbeiten Sie den LoadBalancer-Service, der eine Ingress-ALB bereitstellt:
 
@@ -1137,7 +1143,8 @@ Aktivieren Sie SSL-Protokolle und -Verschlüsselungen auf der globalen HTTP-Eben
 
 Standardmäßig wird das TLS 1.2-Protokoll für alle Ingress-Konfigurationen verwendet, die die von IBM bereitgestellte Domäne verwenden. Sie können den Standardwert überschreiben, um stattdessen das TLS 1.1- oder 1.0-Protokoll zu verwenden, indem Sie die folgenden Schritte durchführen.
 
-**Hinweis**: Wenn Sie die aktivierten Protokolle für alle Hosts angeben, funktionieren die Parameter TLSv1.1 und TLSv1.2 (1.1.13, 1.0.12) nur wenn OpenSSL 1.0.1 oder eine höhere Version verwendet wird. Der Parameter TLSv1.3 (1.13.0) funktioniert nur, wenn OpenSSL 1.1.1 mit der Unterstützung von TLSv1.3 erstellt und dann verwendet wird.
+Wenn Sie die aktivierten Protokolle für alle Hosts angeben, funktionieren die Parameter TLSv1.1 und TLSv1.2 (1.1.13, 1.0.12) nur wenn OpenSSL 1.0.1 oder eine höhere Version verwendet wird. Der Parameter TLSv1.3 (1.13.0) funktioniert nur, wenn OpenSSL 1.1.1 mit der Unterstützung von TLSv1.3 erstellt und dann verwendet wird.
+{: note}
 
 Gehen Sie wie folgt vor, um die Konfigurationszuordnung zu bearbeiten und SSL-Protokolle und Verschlüsselungen zu aktivieren.
 

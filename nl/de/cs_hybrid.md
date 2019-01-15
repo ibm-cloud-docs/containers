@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,13 +13,16 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 
 
-# {{site.data.keyword.containerlong_notm}} mit {{site.data.keyword.Bluemix_notm}} Private verwenden
+# Hybrid-Cloud
 {: #hybrid_iks_icp}
 
 Wenn Sie über ein {{site.data.keyword.Bluemix}} Private-Konto verfügen, können Sie dies mit ausgewählten {{site.data.keyword.Bluemix_notm}}-Services, einschließlich {{site.data.keyword.containerlong}}, verwenden. Weitere Informationen finden Sie im Blog zu [Hybrid-Erweiterungen in {{site.data.keyword.Bluemix_notm}} Private und IBM Public Cloud![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://ibm.biz/hybridJune2018).
@@ -34,7 +37,7 @@ Stellen Sie die VPN-Verbindung zwischen dem öffentlichen Kubernetes-Cluster und
 {: shortdesc}
 
 1.  Erstellen Sie einen Standardcluster mit {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_notm}} Public oder verwenden Sie einen vorhandenen Cluster. Wenn Sie einen Cluster erstellen möchten, wählen Sie zwischen den folgenden Optionen: 
-    - [Erstellen Sie einen Standardcluster über die GUI](cs_clusters.html#clusters_ui). 
+    - [Erstellen Sie einen Standardcluster über die Konsole](cs_clusters.html#clusters_ui). 
     - [Erstellen Sie einen Standardcluster über die CLI](cs_clusters.html#clusters_cli). 
     - [Verwenden Sie Cloud Automation Manager (CAM), um einen Cluster zu erstellen, indem Sie eine vordefinierte Vorlage verwenden ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). Wenn Sie einen Cluster mit CAM bereitstellen, wird Tiller für Helm automatisch für Sie installiert.
 

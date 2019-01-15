@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -30,6 +33,9 @@ Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie eine Ingress-Resso
 
 Stellen Sie sicher, dass Sie einen Host in nur einer Ingress-Ressource definieren. Wenn ein Host in mehreren Ingress-Ressourcen definiert ist, leitet die Lastausgleichsfunktion für Anwendungen den Datenverkehr möglicherweise nicht ordnungsgemäß weiter und es können Fehler auftreten.
 {: tip}
+
+Stellen Sie zunächst sicher, dass Sie über die folgenden [{{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien](cs_users.html#platform) verfügen: 
+  - Plattformrolle **Editor** oder **Administrator** für den Cluster
 
 ## Schritt 1: Ingress-Bereitstellung und Pod-Protokolle der Lastausgleichsfunktion für Anwendungen auf Fehlernachrichten überprüfen
 {: #errors}
@@ -122,11 +128,11 @@ Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung 
     Beispielausgabe für einen Mehrzonencluster mit Workerknoten in `dal10` und `dal13`:
 
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone   
-    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -                dal13   
-    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -                dal10   
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13   
-    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222    dal10  
+    ALB ID                                            Status     Type      ALB IP           Zone    Build
+    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
+    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
     ```
     {: screen}
 
@@ -134,7 +140,7 @@ Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung 
 
 2. Überprüfen Sie den Zustand Ihrer ALB-IPs.
 
-    * Für Einzelzonencluster und Mehrzonencluster: Überprüfen Sie die IP-Adresse jeder öffentlichen ALB, um sicherzustellen, dass jede ALB erfolgreich Pakete empfangen kann. Hinweis: Wenn Sie private ALBs verwenden, können Sie deren IP-Adressen nur über das private Netz mit Ping überprüfen.
+    * Für Einzelzonencluster und Mehrzonencluster: Überprüfen Sie die IP-Adresse jeder öffentlichen ALB, um sicherzustellen, dass jede ALB erfolgreich Pakete empfangen kann. Wenn Sie private ALBs verwenden, können Sie deren IP-Adressen nur über das private Netz mit Ping überprüfen.
         ```
         ping <ip_der_lastausgleichsfunktion_für_anwendungen>
         ```
@@ -143,7 +149,8 @@ Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung 
         * Wenn die CLI ein Zeitlimit zurückgibt und Sie über eine angepasste Firewall verfügen, die Ihre Workerknoten schützt, stellen Sie sicher, dass Ihre [Firewall](cs_troubleshoot_clusters.html#cs_firewall) ICMP zulässt.
         * Wenn keine Firewall vorhanden ist, die die Pingsignale blockiert, und die Pingsignale weiterhin das Zeitlimit überschreiten, müssen Sie den [Status der ALB-Pods überprüfen](#check_pods).
 
-    * Nur bei Mehrzonenclustern: Sie können die MZLB-Zustandsprüfung verwenden, um den Status Ihrer ALB-IPs zu ermitteln. Weitere Informationen zur MZLB finden Sie unter [Lastausgleichsfunktion für mehrere Zonen (MZLB)](cs_ingress.html#planning). **Hinweis**: Die MZLB-Zustandsprüfung ist nur für Cluster verfügbar, die über die neue Ingress-Unterdomäne im Format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` verfügen. Wenn Ihr Cluster noch das ältere Format von `<cluster_name>.<region>.containers.mybluemix.net` verwendet, müssen Sie Ihren [Einzelzonencluster in einen Mehrzonencluster konvertieren](cs_clusters.html#add_zone). Ihrem Cluster wird eine Unterdomäne mit dem neuen Format zugewiesen, er kann aber auch weiterhin das ältere Unterdomänenformat verwenden. Alternativ können Sie einen neuen Cluster bestellen, dem automatisch das neue Unterdomänenformat zugeordnet wird.
+    * Nur bei Mehrzonenclustern: Sie können die MZLB-Zustandsprüfung verwenden, um den Status Ihrer ALB-IPs zu ermitteln. Weitere Informationen zur MZLB finden Sie unter [Lastausgleichsfunktion für mehrere Zonen (MZLB)](cs_ingress.html#planning). Die MZLB-Zustandsprüfung ist nur für Cluster verfügbar, die über die neue Ingress-Unterdomäne im Format `<clustername>.<region_oder_zone>.containers.appdomain.cloud` verfügen. Wenn Ihr Cluster noch das ältere Format von `<cluster_name>.<region>.containers.mybluemix.net` verwendet, müssen Sie Ihren [Einzelzonencluster in einen Mehrzonencluster konvertieren](cs_clusters.html#add_zone). Ihrem Cluster wird eine Unterdomäne mit dem neuen Format zugewiesen, er kann aber auch weiterhin das ältere Unterdomänenformat verwenden. Alternativ können Sie einen neuen Cluster bestellen, dem automatisch das neue Unterdomänenformat zugeordnet wird.
+
     Der folgende HTTP-cURL-Befehl verwendet den Host `albhealth`, der von {{site.data.keyword.containerlong_notm}} so konfiguriert wird, dass er entweder den Status `healthy` oder den Status `unhealthy` für eine ALB-IP zurückgibt.
         ```
         curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
@@ -223,7 +230,7 @@ Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung 
 
     1. Stellen Sie sicher, dass Sie einen Host in nur einer Ingress-Ressource definieren. Wenn ein Host in mehreren Ingress-Ressourcen definiert ist, leitet die Lastausgleichsfunktion für Anwendungen den Datenverkehr möglicherweise nicht ordnungsgemäß weiter und es können Fehler auftreten.
 
-    2. Prüfen Sie, ob die Unterdomäne und das TLS-Zertifikat korrekt sind. Um die von IBM bereitgestellte Ingress-Unterdomäne und das TLS-Zertifikat zu finden, führen Sie den Befehl `ibmcloud ks cluster-get <cluster_name_or_ID>` aus.
+    2. Prüfen Sie, ob die Unterdomäne und das TLS-Zertifikat korrekt sind. Um die von IBM bereitgestellte Ingress-Unterdomäne und das TLS-Zertifikat zu finden, führen Sie den Befehl `ibmcloud ks cluster-get <clustername_oder_-id>` aus.
 
     3.  Stellen Sie sicher, dass Ihre App denselben Pfad überwacht, der im Abschnitt **path** von Ingress konfiguriert ist. Wenn Ihre App so eingerichtet ist, dass sie den Rootpfad überwacht, verwenden Sie `/` als Pfad. Wenn der für diesen Pfad eingehende Datenverkehr an einen anderen Pfad weitergeleitet werden muss, an dem Ihre App empfangsbereit ist, verwenden Sie die Annotation [rewrite-path](cs_annotations.html#rewrite-path).
 
@@ -248,8 +255,8 @@ Beispiel: Angenommen, Sie haben einen Mehrzonencluster in zwei Zonen und die bei
 
     Beispiel: Die nicht erreichbare IP `169.62.196.238` gehört zu der ALB `public-cr24a9f2caf6554648836337d240064935-alb1`:
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13
+    ALB ID                                            Status     Type      ALB IP           Zone   Build
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
     ```
     {: screen}
 
@@ -387,20 +394,14 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
 -  Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
-
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
 -   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containerlong_notm}}-Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
-
     Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
     {: tip}
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
-
     -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
-
--   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
+-   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support). Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 {: tip}
-Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -24,7 +27,7 @@ Damit Speicherinformationen besser gefunden werden, wurden die Speicherthemen, d
 *  [Vorhandenen Blockspeicher in Ihrem Cluster verwenden](cs_storage_block.html#existing_block)
 *  NFS-Dateispeicher oder -Blockspeicher zu Apps hinzufügen
     * [File Storage](cs_storage_file.html#add_file)
-    * [Block Storage](cs_storage_block.html#add_block)
+    * [Blockspeicher](cs_storage_block.html#add_block)
 *  [Speicherklasse für XFS-Blockspeicher anpassen](cs_storage_block.html#custom_storageclass)
 *  [Standardversion der des NFS-Dateispeichers ändern](cs_storage_file.html#nfs_version)
 *  [NFS-Speicher und persistenten Blockspeicher in Mehrzonenclustern konfigurieren](cs_storage_basics.html#multizone)
@@ -32,5 +35,5 @@ Damit Speicherinformationen besser gefunden werden, wurden die Speicherthemen, d
 *  [{{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in in Ihrem Cluster installieren](cs_storage_block.html#install_block)
 *  Lösungen zum Sichern und Wiederherstellen für NFS-Dateifreigaben und Blockspeicher konfigurieren
     * [File Storage](cs_storage_file.html#backup_restore)
-    * [Block Storage](cs_storage_block.html#backup_restore)
+    * [Blockspeicher](cs_storage_block.html#backup_restore)
 *  [Persistenten NFS-Dateispeicher und Blockspeicher bereinigen](cs_storage_remove.html#cleanup)

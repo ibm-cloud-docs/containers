@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -23,27 +26,511 @@ lastupdated: "2018-10-25"
 Zeigen Sie Informationen zu Versionsänderungen für Hauptversions-, Nebenversions- und Patchaktualisierungen an, die für Ihre {{site.data.keyword.containerlong}}-Kubernetes-Cluster verfügbar sind. Diese Änderungen umfassen Updates für Kubernetes und {{site.data.keyword.Bluemix_notm}} Provider-Komponenten.
 {:shortdesc}
 
-Weitere Informationen zu Hauptversionen, Nebenversionen und Patchversionen sowie Migrationsaktionen zwischen Nebenversionen finden Sie unter [Kubernetes-Versionen](cs_versions.html).
+Weitere Informationen zu Hauptversionen, Nebenversionen und Patchversionen sowie Vorbereitungsaktionen zwischen Nebenversionen finden Sie unter [Kubernetes-Versionen](cs_versions.html).
 {: tip}
 
 Weitere Informationen zu Änderungen seit der vorherigen Version finden Sie in den Änderungsprotokollen.
--  Version 1.11 [changelog](#111_changelog).
+-  Version 1.12, [Änderungsprotokoll](#112_changelog).
+-  Version 1.11, [Änderungsprotokoll](#111_changelog).
 -  Version 1.10, [Änderungsprotokoll](#110_changelog).
--  Version 1.9, [Änderungsprotokoll](#19_changelog).
 -  [Archiv](#changelog_archive) der Änderungsprotokolle veralteter oder nicht unterstützter Versionen.
 
-**Anmerkung**: Manche Änderungsprotokolle sind für _Fixpacks für Workerknoten_ konzipiert und können nur auf Workerknoten angewendet werden. Sie müssen [diese Patches anwenden](cs_cli_reference.html#cs_worker_update), um die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicherzustellen. Manche Änderungsprotokolle sind für _Master-Fixpacks_ konzipiert und können nur auf den Cluster-Master angewendet werden. Es kann vorkommen, dass Master-Fixpacks nicht automatisch angewendet werden. Sie können [sie manuell anwenden](cs_cli_reference.html#cs_cluster_update). Weitere Informationen zu Patchtypen finden Sie unter [Aktualisierungstypen](cs_versions.html#update_types).
+Manche Änderungsprotokolle sind für _Fixpacks für Workerknoten_ konzipiert und können nur auf Workerknoten angewendet werden. Sie müssen [diese Patches anwenden](cs_cli_reference.html#cs_worker_update), um die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicherzustellen. Manche Änderungsprotokolle sind für _Master-Fixpacks_ konzipiert und können nur auf den Cluster-Master angewendet werden. Es kann vorkommen, dass Master-Fixpacks nicht automatisch angewendet werden. Sie können [sie manuell anwenden](cs_cli_reference.html#cs_cluster_update). Weitere Informationen zu Patchtypen finden Sie unter [Aktualisierungstypen](cs_versions.html#update_types).
+{: note}
 
 </br>
+
+## Version 1.12, Änderungsprotokoll
+{: #112_changelog}
+
+Überprüfen Sie das Änderungsprotokoll der Version 1.12.
+{: shortdesc}
+
+### Änderungsprotokoll für 1.12.3_1531, veröffentlicht am 5. Dezember 2018
+{: #1123_1531}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.12.3_1531 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.12.2_1530 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.12.2_1530</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>Version 1.12.2-68</td>
+<td>Version 1.12.3-91</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.12.3 aktualisiert. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Version 1.12.2</td>
+<td>Version 1.12.3</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.3). Die Aktualisierung behebt [CVE-2018-1002105 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/issues/71411). </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.12.2_1530, veröffentlicht am 4. Dezember 2018
+{: #1122_1530}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.12.2_1530 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.12.2_1529 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.12.2_1529</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ressourcenauslastung von Workerknoten</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'containerd' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](cs_clusters_planning.html#resource_limit_node). </td>
+</tr>
+</tbody>
+</table>
+
+
+
+### Änderungsprotokoll für 1.12.2_1529, veröffentlicht am 27. November 2018
+{: #1122_1529}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.12.2_1529 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.12.2_1528 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.12.2_1528</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>Version 3.2.1</td>
+<td>Version 3.3.1</td>
+<td>Werfen Sie einen Blick auf die [Calico-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/releases/#v331). Die Aktualisierung behebt [Tigera Technical Advisory TTA-2018-001 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.projectcalico.org/security-bulletins/). </td>
+</tr>
+<tr>
+<td>Cluster-DNS-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Es wurde ein Fehler behoben, der dazu führen konnte, dass sowohl die Kubernetes-DNS- als auch die CoreDNS-Pods nach der Clustererstellung oder nach Aktualisierungsoperationen ausgeführt werden. </td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>Version 1.2.0</td>
+<td>Version 1.1.5</td>
+<td>Lesen Sie die [containerd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/containerd/containerd/releases/tag/v1.1.5). 'containerd' wurde aktualisiert, um einen Deadlock zu beheben, der verhindern kann, dass [Pods beendet werden ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/containerd/containerd/issues/2744). </td>
+</tr>
+<tr>
+<td>OpenVPN-Client und -Server</td>
+<td>2.4.4-r1-6</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>Das Image für [CVE-2018-0732 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) und [CVE-2018-0737 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) wurde aktualisiert. </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.12.2_1528, veröffentlicht am 19. November 2018
+{: #1122_1528}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.12.2_1528 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.12.2_1527 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.12.2_1527</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>Workerknoten-Images mit Kernelaktualisierung für [CVE-2018-7755 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog) wurden aktualisiert. </td>
+</tr>
+</tbody>
+</table>
+
+
+### Änderungsprotokoll für 1.12.2_1527, veröffentlicht am 7. November 2018
+{: #1122_1527}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.12.2_1527 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.3_1533 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.3_1533</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>`calico-*`-Calico-Pods im Namensbereich `kube-system` legen jetzt CPU- und Speicherressourcenanforderungen für alle Container fest. </td>
+</tr>
+<tr>
+<td>Cluster-DNS-Provider</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Kubernetes-DNS (KubeDNS) bleibt der Standard-Cluster-DNS-Provider. Sie haben jetzt aber die Möglichkeit, den [Cluster-DNS-Provider in CoreDNS zu ändern](cs_cluster_update.html#dns). </td>
+</tr>
+<tr>
+<td>Provider von Clustermetriken</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Der Kubernetes-Metrik-Server ersetzt den Kubernetes-Heapster (veraltet seit Kubernetes-Version 1.8) als Provider von Clustermetriken. Aktionselemente finden Sie unter [der Vorbereitungsaktion `metrics-server`](cs_versions.html#metrics-server). </td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.4</td>
+<td>1.2.0</td>
+<td>Lesen Sie die [containerd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/containerd/containerd/releases/tag/v1.2.0).</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>n.z.</td>
+<td>1.2.2</td>
+<td>Lesen Sie die [CoreDNS-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/coredns/coredns/releases/tag/v1.2.2). </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Version 1.11.3</td>
+<td>Version 1.12.2</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.2). </td>
+</tr>
+<tr>
+<td>Kubernetes-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Es wurden drei neue IBM Pod-Sicherheitsrichtlinien und die ihnen zugeordneten Clusterrollen hinzugefügt. Weitere Informationen finden Sie unter [Erklärung der Standardressourcen für das IBM Cluster-Management](cs_psp.html#ibm_psp). </td>
+</tr>
+<tr>
+<td>Kubernetes-Dashboard</td>
+<td>Version 1.8.3</td>
+<td>Version 1.10.0</td>
+<td>Lesen Sie die [Releaseinformationen zum Kubernetes-Dashboard ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0). <br><br>
+Wenn Sie über `kubectl proxy` auf das Dashboard zugreifen, wird die Schaltfläche zum Überspringen (**SKIP**) von der Anmeldeseite entfernt. Verwenden Sie stattdessen ein **Token** für die Anmeldung. Außerdem können Sie jetzt die Anzahl von Kubernetes-Dashboard-Pods nach oben skalieren, indem Sie `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` ausführen. </td>
+</tr>
+<tr>
+<td>Kubernetes-DNS</td>
+<td>1.14.10</td>
+<td>1.14.13</td>
+<td>Lesen Sie die [Kubernetes-DNS-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/dns/releases/tag/1.14.13). </td>
+</tr>
+<tr>
+<td>Kubernetes-Metrik-Server</td>
+<td>n.z.</td>
+<td>Version 0.3.1</td>
+<td>Lesen Sie die [Releaseinformationen zum Kubernetes-Metrik-Server ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.1). </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>Version 1.11.3-118</td>
+<td>Versopm 1.12.2-68</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.12 aktualisiert. Zusätzliche Änderungen sind:
+<ul><li>Pods der Lastausgleichsfunktion (`ibm-cloud-provider-ip-*` im Namensbereich `ibm-system`) legen jetzt CPU- und Speicherressourcenanforderungen fest. </li>
+<li>Die Annotation `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` wird hinzugefügt, um das VLAN anzugeben, in dem der Lastausgleichsservice bereitgestellt ist. Um verfügbare VLANs in Ihrem Cluster anzuzeigen, führen Sie diesen Befehl aus: `ibmcloud ks vlans --zone <zone>`.</li>
+<li>Eine neue [Lastausgleichsfunktion 2.0](cs_loadbalancer.html#planning_ipvs) ist jetzt als Betaversion verfügbar. </li></ul></td>
+</tr>
+<tr>
+<td>OpenVPN-Clientkonfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Der OpenVPN-Client `vpn-* pod` im Namensbereich `kube-system` legt jetzt CPU- und Speicherressourcenanforderungen fest. </td>
+</tr>
+</tbody>
+</table>
 
 ## Version 1.11, Änderungsprotokoll
 {: #111_changelog}
 
-Überprüfen Sie die folgenden Änderungen.
+Überprüfen Sie das Änderungsprotokoll der Version 1.11. 
 
+### Änderungsprotokoll für 1.11.5_1537, veröffentlicht am 5. Dezember 2018
+{: #1115_1537}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.5_1537 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.4_1536 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.4_1536</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>Version 1.11.4-142</td>
+<td>Version 1.11.5-152</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.11.5 aktualisiert. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Version 1.11.4</td>
+<td>Version 1.11.5</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.5). Die Aktualisierung behebt [CVE-2018-1002105 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/issues/71411). </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.11.4_1536, veröffentlicht am 4. Dezember 2018
+{: #1114_1536}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.11.4_1536 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.4_1535 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.4_1535</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ressourcenauslastung von Workerknoten</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'containerd' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](cs_clusters_planning.html#resource_limit_node). </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für 1.11.4_1535, veröffentlicht am 27. November 2018
+{: #1114_1535}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.4_1535 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.3_1534 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.3_1534</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>Version 3.2.1</td>
+<td>Version 3.3.1</td>
+<td>Werfen Sie einen Blick auf die [Calico-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/releases/#v331). Die Aktualisierung behebt [Tigera Technical Advisory TTA-2018-001 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.projectcalico.org/security-bulletins/). </td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>Version 1.1.4</td>
+<td>Version 1.1.5</td>
+<td>Lesen Sie die [containerd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/containerd/containerd/releases/tag/v1.1.5). 'containerd' wurde aktualisiert, um einen Deadlock zu beheben, der verhindern kann, dass [Pods beendet werden ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/containerd/containerd/issues/2744). </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>Version 1.11.3-127</td>
+<td>Version 1.11.4-142</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.11.4 aktualisiert. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Version 1.11.3</td>
+<td>Version 1.11.4</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.4). </td>
+</tr>
+<tr>
+<td>OpenVPN-Client und -Server</td>
+<td>2.4.4-r1-6</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>Das Image für [CVE-2018-0732 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) und [CVE-2018-0737 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) wurde aktualisiert. </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.11.3_1534, veröffentlicht am 19. November 2018
+{: #1113_1534}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.11.3_1534 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.3_1533 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.3_1533</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>Workerknoten-Images mit Kernelaktualisierung für [CVE-2018-7755 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog) wurden aktualisiert. </td>
+</tr>
+</tbody>
+</table>
+
+
+### Änderungsprotokoll für 1.11.3_1533, veröffentlicht am 7. November 2018
+{: #1113_1533}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.3_1533 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.3_1531 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.3_1531</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aktualisierung der Hochverfügbarkeit des Cluster-Masters</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Aktualisierung auf hoch verfügbare Master für Cluster, die Zugangs-Webhooks (z. B. `initializerconfigurations`, `mutatingwebhookconfigurations` oder `validatingwebhookconfigurations`) verwenden, wurde korrigiert. Sie können diese Webhooks mit Helm-Diagrammen verwenden, z. B. für [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce). </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>Version 1.11.3-100</td>
+<td>Version 1.11.3-127</td>
+<td>Die Annotation `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` wurde hinzugefügt, um das VLAN anzugeben, in dem der Lastausgleichsservice bereitgestellt ist. Um verfügbare VLANs in Ihrem Cluster anzuzeigen, führen Sie diesen Befehl aus: `ibmcloud ks vlans --zone <zone>`.</td>
+</tr>
+<tr>
+<td>TPM-aktivierter Kernel</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Bare-Metal-Workerknoten mit TPM-Chips für Trusted Compute verwenden den Ubuntu-Standardkernel, bis die Vertrauensbeziehung eingerichtet ist. Wenn Sie die [Vertrauensbeziehung](cs_cli_reference.html#cs_cluster_feature_enable) in einem vorhandenen Cluster aktivieren, müssen Sie alle vorhandenen Bare-Metal-Workerknoten mit TPM-Chips [neu laden](cs_cli_reference.html#cs_worker_reload). Um zu prüfen, ob ein Bare-Metal-Workerknoten über einen TPM-Chip verfügt, werfen Sie einen Blick auf das Feld **Trustable**, nachdem Sie den [Befehl](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types --zone` ausgeführt haben. </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Master-Fixpack 1.11.3_1531, veröffentlicht am 1. November 2018
+{: #1113_1531_ha-master}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Master-Fixpack 1.11.3_1531 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.3_1527 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.3_1527</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster-Master</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Cluster-Master-Konfiguration wurde aktualisiert, um die Hochverfügbarkeit zu erhöhen. Cluster haben jetzt drei Kubernetes-Masterreplikate, die im Rahmen einer Hochverfügbarkeitskonfiguration eingerichtet werden, wobei jeder Master auf einem separaten physischen Host bereitgestellt wird. Und wenn sich Ihr Cluster in einer Zone mit mehreren Zonen befindet, werden die Master über Zonen verteilt. <br>Informationen zu den Aktionen, die Sie ausführen müssen, finden Sie unter [Aktualisierung auf hoch verfügbare Cluster-Master](cs_versions.html#ha-masters). Diese Vorbereitungsaktionen finden Anwendung: <ul>
+<li>Wenn Sie über eine Firewall oder über angepasste Calico-Netzrichtlinien verfügen. </li>
+<li>Wenn Sie die Host-Ports `2040` oder `2041` auf Ihren Workerknoten verwenden. </li>
+<li>Wenn Sie die IP-Adresse des Cluster-Masters für den clusterinternen Zugriff auf den Master verwendet haben. </li>
+<li>Wenn eine Automatisierung vorhanden ist, die die Calico-API oder -CLI (`calicoctl`) aufruft, z. B. um Calico-Richtlinien zu erstellen. </li>
+<li>Wenn Sie Kubernetes- oder Calico-Netzrichtlinien zum Steuern des Pod-Egress-Zugriffs auf den Master verwenden. </li></ul></td>
+</tr>
+<tr>
+<td>Hochverfügbarkeitsproxy des Cluster-Masters</td>
+<td>n.z.</td>
+<td>1.8.12-alpine</td>
+<td>Es wurde ein Pod `ibm-master-proxy-*` für den clientseitigen Lastausgleich auf allen Workerknoten hinzugefügt, sodass jeder Workerknotenclient Anforderungen an ein verfügbares Hochverfügbarkeitsmaster-Replikat weiterleiten kann. </td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>Version 3.2.18</td>
+<td>Version 3.3.1</td>
+<td>Werfen Sie einen Blick auf die [etcd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/coreos/etcd/releases/v3.3.1).</td>
+</tr>
+<tr>
+<td>Verschlüsseln von Daten in 'etcd'</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Bisher wurden 'etcd'-Daten in der NFS-Dateispeicherinstanz eines Masters gespeichert, in der ruhende Daten verschlüsselt werden. Jetzt werden 'etcd'-Daten auf der lokalen Platte des Masters gespeichert und in {{site.data.keyword.cos_full_notm}} gesichert. Daten werden während des Transits an {{site.data.keyword.cos_full_notm}} verschlüsselt und wenn sie ruhen. Die 'etcd'-Daten auf der lokalen Platte des Masters sind jedoch nicht verschlüsselt. Wenn die lokalen 'etcd'-Daten Ihres Masters verschlüsselt werden sollen, [aktivieren Sie {{site.data.keyword.keymanagementservicelong_notm}} in Ihrem Cluster](cs_encrypt.html#keyprotect). </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.11.3_1531, veröffentlicht am 26. Oktober 2018
+{: #1113_1531}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.11.3_1531 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.3_1525 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.3_1525</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Behandlung von Betriebssystem-Interrupts</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Der Systemdämon für Interruptanforderungen wurde durch einen leistungsfähigeren Interrupt-Handler ersetzt. </td>
+</tr>
+</tbody>
+</table>
 
 ### Änderungsprotokoll für Master-Fixpack 1.11.3_1527, veröffentlicht am 15. Oktober 2018
 {: #1113_1527}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Master-Fixpack 1.11.3_1527 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.11.3_1524 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.11.3_1524</caption>
@@ -74,6 +561,9 @@ Weitere Informationen zu Änderungen seit der vorherigen Version finden Sie in d
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.11.3_1525, veröffentlicht am 10. Oktober 2018
 {: #1113_1525}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.11.3_1525 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.11.3_1524 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.11.3_1524</caption>
 <thead>
@@ -103,6 +593,9 @@ Weitere Informationen zu Änderungen seit der vorherigen Version finden Sie in d
 
 ### Änderungsprotokoll für 1.11.3_1524, veröffentlicht am 2. Oktober 2018
 {: #1113_1524}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.3_1524 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.11.3_1521 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.11.3_1521</caption>
@@ -140,6 +633,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für 1.11.3_1521, veröffentlicht am 20. September 2018
 {: #1113_1521}
 
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.3_1521 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.11.2_1516 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.11.2_1516</caption>
 <thead>
@@ -155,7 +651,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>Version 1.11.2-71</td>
 <td>v1.11.3-91</td>
-<td>Wurde für die Unterstützung von Kubernetes 1.11.3 aktualisiert. </td>
+<td>Wurde für die Unterstützung von Kubernetes 1.11.3 aktualisiert.</td>
 </tr>
 <tr>
 <td>IBM File Storage-Klassen</td>
@@ -186,13 +682,13 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>Protokollrotation</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Anmerkung**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
+<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
 </tr>
 <tr>
 <td>Ablauf des Rootkennworts</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Anmerkung**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindern, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](cs_cli_reference.html#cs_worker_update) oder [erneut laden](cs_cli_reference.html#cs_worker_reload).</td>
+<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](cs_cli_reference.html#cs_worker_update) oder [erneut laden](cs_cli_reference.html#cs_worker_reload).</td>
 </tr>
 <tr>
 <td>Laufzeitkomponenten für Workerknoten (`kubelet`, `kube-proxy`, `containerd`)</td>
@@ -211,6 +707,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für 1.11.2_1516, veröffentlicht am 4. September 2018
 {: #1112_1516}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.2_1516 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.11.2_1514 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.11.2_1514</caption>
@@ -253,6 +752,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.11.2_1514, veröffentlicht am 23. August 2018
 {: #1112_1514}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.11.2_1514 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.11.2_1513 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.11.2_1513</caption>
 <thead>
@@ -282,6 +784,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für 1.11.2_1513, veröffentlicht am 14. August 2018
 {: #1112_1513}
 
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.2_1513 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.10.5_1518 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.5_1518</caption>
 <thead>
@@ -297,13 +802,13 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>containerd</td>
 <td>n.z.</td>
 <td>1.1.2</td>
-<td>`containerd` ersetzt Docker als neue Containerlaufzeit für Kubernetes. Werfen Sie einen Blick auf die [`containerd`-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/containerd/containerd/releases/tag/v1.1.2). Weitere Informationen zu den Maßnahmen, die Sie ergreifen müssen, finden Sie im Abschnitt zum [Migrieren auf `containerd` als Containerlaufzeit](cs_versions.html#containerd).</td>
+<td>`containerd` ersetzt Docker als neue Containerlaufzeit für Kubernetes. Werfen Sie einen Blick auf die [`containerd`-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/containerd/containerd/releases/tag/v1.1.2). Informationen zu den Aktionen, die Sie ausführen müssen, finden Sie unter [Aktualisieren auf `containerd` als Containerlaufzeit](cs_versions.html#containerd). </td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>`containerd` ersetzt Docker zur Verbesserung der Leistung als neue Containerlaufzeit für Kubernetes. Weitere Informationen zu den Maßnahmen, die Sie ergreifen müssen, finden Sie im Abschnitt zum [Migrieren auf `containerd` als Containerlaufzeit](cs_versions.html#containerd).</td>
+<td>`containerd` ersetzt Docker zur Verbesserung der Leistung als neue Containerlaufzeit für Kubernetes. Informationen zu den Aktionen, die Sie ausführen müssen, finden Sie unter [Aktualisieren auf `containerd` als Containerlaufzeit](cs_versions.html#containerd). </td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -334,7 +839,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>n.z.</td>
 <td>n.z.</td>
 <td>Aktualisierung der OpenID Connect-Konfiguration für den Kubernetes-API-Server zur Unterstützung von {{site.data.keyword.Bluemix_notm}} Identity and Access Management-Zugriffsgruppen. Der Option `--enable-admission-plugins` wurde `Priority` für den Kubernetes-API-Server des Clusters hinzugefügt und der Cluster wurde für die Unterstützung der Podpriorität konfiguriert. Weitere Informationen finden Sie unter:
-<ul><li>[IAM-Zugriffsgruppen](cs_users.html#rbac)</li>
+<ul><li>[{{site.data.keyword.Bluemix_notm}}IAM-Zugriffsgruppen](cs_users.html#rbac)</li>
 <li>[Podpriorität konfigurieren](cs_pod_priority.html#pod_priority)</li></ul></td>
 </tr>
 <tr>
@@ -358,10 +863,202 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ## Version 1.10, Änderungsprotokoll
 {: #110_changelog}
 
-Überprüfen Sie die folgenden Änderungen.
+Überprüfen Sie das Änderungsprotokoll der Version 1.10. 
+
+### Änderungsprotokoll für 1.10.11_1536, veröffentlicht am 4. Dezember 2018
+{: #11011_1536}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.11_1536 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.10.8_1532 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.10.8_1532</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>Version 3.2.1</td>
+<td>Version 3.3.1</td>
+<td>Werfen Sie einen Blick auf die [Calico-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/releases/#v331). Die Aktualisierung behebt [Tigera Technical Advisory TTA-2018-001 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.projectcalico.org/security-bulletins/). </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>Version 1.10.8-197</td>
+<td>Version 1.10.11-219</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.10.11 aktualisiert. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Version 1.10.8</td>
+<td>Version 1.10.11</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.11). Die Aktualisierung behebt [CVE-2018-1002105 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/issues/71411). </td>
+</tr>
+<tr>
+<td>OpenVPN-Client und -Server</td>
+<td>2.4.4-r1-6</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>Das Image für [CVE-2018-0732 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) und [CVE-2018-0737 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) wurde aktualisiert. </td>
+</tr>
+<tr>
+<td>Ressourcenauslastung von Workerknoten</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'docker' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](cs_clusters_planning.html#resource_limit_node). </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1532, veröffentlicht am 27. November 2018
+{: #1108_1532}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.8_1532 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.10.8_1531 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.10.8_1531</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>17.06.2</td>
+<td>18.06.1</td>
+<td>Lesen Sie die [Docker-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/engine/release-notes/#18061-ce). </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1531, veröffentlicht am 19. November 2018
+{: #1108_1531}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.8_1531 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.10.8_1530 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.10.8_1530</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>Workerknoten-Images mit Kernelaktualisierung für [CVE-2018-7755 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog) wurden aktualisiert. </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für 1.10.8_1530, veröffentlicht am 7. November 2018
+{: #1108_1530_ha-master}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.8_1530 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.10.8_1528 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.10.8_1528</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster-Master</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Cluster-Master-Konfiguration wurde aktualisiert, um die Hochverfügbarkeit zu erhöhen. Cluster haben jetzt drei Kubernetes-Masterreplikate, die im Rahmen einer Hochverfügbarkeitskonfiguration eingerichtet werden, wobei jeder Master auf einem separaten physischen Host bereitgestellt wird. Und wenn sich Ihr Cluster in einer Zone mit mehreren Zonen befindet, werden die Master über Zonen verteilt. <br>Informationen zu den Aktionen, die Sie ausführen müssen, finden Sie unter [Aktualisierung auf hoch verfügbare Cluster-Master](cs_versions.html#ha-masters). Diese Vorbereitungsaktionen finden Anwendung: <ul>
+<li>Wenn Sie über eine Firewall oder über angepasste Calico-Netzrichtlinien verfügen. </li>
+<li>Wenn Sie die Host-Ports `2040` oder `2041` auf Ihren Workerknoten verwenden. </li>
+<li>Wenn Sie die IP-Adresse des Cluster-Masters für den clusterinternen Zugriff auf den Master verwendet haben. </li>
+<li>Wenn eine Automatisierung vorhanden ist, die die Calico-API oder -CLI (`calicoctl`) aufruft, z. B. um Calico-Richtlinien zu erstellen. </li>
+<li>Wenn Sie Kubernetes- oder Calico-Netzrichtlinien zum Steuern des Pod-Egress-Zugriffs auf den Master verwenden. </li></ul></td>
+</tr>
+<tr>
+<td>Hochverfügbarkeitsproxy des Cluster-Masters</td>
+<td>n.z.</td>
+<td>1.8.12-alpine</td>
+<td>Es wurde ein Pod `ibm-master-proxy-*` für den clientseitigen Lastausgleich auf allen Workerknoten hinzugefügt, sodass jeder Workerknotenclient Anforderungen an ein verfügbares Hochverfügbarkeitsmaster-Replikat weiterleiten kann. </td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>Version 3.2.18</td>
+<td>Version 3.3.1</td>
+<td>Werfen Sie einen Blick auf die [etcd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/coreos/etcd/releases/v3.3.1).</td>
+</tr>
+<tr>
+<td>Verschlüsseln von Daten in 'etcd'</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Bisher wurden 'etcd'-Daten in der NFS-Dateispeicherinstanz eines Masters gespeichert, in der ruhende Daten verschlüsselt werden. Jetzt werden 'etcd'-Daten auf der lokalen Platte des Masters gespeichert und in {{site.data.keyword.cos_full_notm}} gesichert. Daten werden während des Transits an {{site.data.keyword.cos_full_notm}} verschlüsselt und wenn sie ruhen. Die 'etcd'-Daten auf der lokalen Platte des Masters sind jedoch nicht verschlüsselt. Wenn die lokalen 'etcd'-Daten Ihres Masters verschlüsselt werden sollen, [aktivieren Sie {{site.data.keyword.keymanagementservicelong_notm}} in Ihrem Cluster](cs_encrypt.html#keyprotect). </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>Version 1.10.8-172</td>
+<td>Version 1.10.8-197</td>
+<td>Die Annotation `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` wurde hinzugefügt, um das VLAN anzugeben, in dem der Lastausgleichsservice bereitgestellt ist. Um verfügbare VLANs in Ihrem Cluster anzuzeigen, führen Sie diesen Befehl aus: `ibmcloud ks vlans --zone <zone>`.</td>
+</tr>
+<tr>
+<td>TPM-aktivierter Kernel</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Bare-Metal-Workerknoten mit TPM-Chips für Trusted Compute verwenden den Ubuntu-Standardkernel, bis die Vertrauensbeziehung eingerichtet ist. Wenn Sie die [Vertrauensbeziehung](cs_cli_reference.html#cs_cluster_feature_enable) in einem vorhandenen Cluster aktivieren, müssen Sie alle vorhandenen Bare-Metal-Workerknoten mit TPM-Chips [neu laden](cs_cli_reference.html#cs_worker_reload). Um zu prüfen, ob ein Bare-Metal-Workerknoten über einen TPM-Chip verfügt, werfen Sie einen Blick auf das Feld **Trustable**, nachdem Sie den [Befehl](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types --zone` ausgeführt haben. </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1528, veröffentlicht am 26. Oktober 2018
+{: #1108_1528}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.8_1528 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.10.8_1527 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.10.8_1527</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Behandlung von Betriebssystem-Interrupts</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Der Systemdämon für Interruptanforderungen wurde durch einen leistungsfähigeren Interrupt-Handler ersetzt. </td>
+</tr>
+</tbody>
+</table>
 
 ### Änderungsprotokoll für Master-Fixpack 1.10.8_1527, veröffentlicht am 15. Oktober 2018
 {: #1108_1527}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Master-Fixpack 1.10.8_1527 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.10.8_1524 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.8_1524</caption>
@@ -391,6 +1088,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1525, veröffentlicht am 10. Oktober 2018
 {: #1108_1525}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.8_1525 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.10.8_1524 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.8_1524</caption>
@@ -422,6 +1122,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für 1.10.8_1524, veröffentlicht am 2. Oktober 2018
 {: #1108_1524}
 
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.8_1524 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.10.7_1520 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.7_1520</caption>
 <thead>
@@ -443,7 +1146,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>Kubernetes</td>
 <td>Version 1.10.7</td>
 <td>v1.10.8</td>
-<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.8). </td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.8).</td>
 </tr>
 <tr>
 <td>Automatische Kubernetes DNS-Skalierung</td>
@@ -470,6 +1173,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.10.7_1521, veröffentlicht am 20. September 2018
 {: #1107_1521}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.7_1521 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.10.7_1520 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.7_1520</caption>
 <thead>
@@ -485,7 +1191,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>Protokollrotation</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Anmerkung**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
+<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
 </tr>
 <tr>
 <td>Laufzeitkomponenten für Workerknoten (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -497,7 +1203,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>Ablauf des Rootkennworts</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Anmerkung**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](cs_cli_reference.html#cs_worker_update) oder [erneut laden](cs_cli_reference.html#cs_worker_reload).</td>
+<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](cs_cli_reference.html#cs_worker_update) oder [erneut laden](cs_cli_reference.html#cs_worker_reload).</td>
 </tr>
 <tr>
 <td>Systemd</td>
@@ -509,15 +1215,18 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>Docker</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Inaktiviert die Docker-Standard-Bridge, sodass der IP-Bereich `172.17.0.0/ 16` jetzt für private Routen verwendet wird. Wenn die Docker-Container in Workerknoten erstellt werden, weil `docker`-Befehle direkt auf dem Host ausgeführt werden oder weil ein Pod verwendet wird, von dem der Docker-Socket angehängt wird, wählen Sie eine der folgenden Optionen aus. <ul><li>Wenn Sie die externe Netzkonnektivität sicherstellen möchten, wenn Sie den Container erstellen, führen Sie `docker build --network host` aus.</li>
+<td>Inaktiviert die Docker-Standard-Bridge, sodass der IP-Bereich `172.17.0.0/ 16` jetzt für private Routen verwendet wird. Wenn die Docker-Container in Workerknoten erstellt werden, weil `docker`-Befehle direkt auf dem Host ausgeführt werden oder weil ein Pod verwendet wird, von dem der Docker-Socket angehängt wird, wählen Sie eine der folgenden Optionen aus.<ul><li>Wenn Sie die externe Netzkonnektivität sicherstellen möchten, wenn Sie den Container erstellen, führen Sie `docker build --network host` aus.</li>
 <li>Wenn Sie explizit ein Netz erstellen möchten, das beim Erstellen des Containers verwendet werden soll, führen Sie `docker network create` aus, und verwenden Sie anschließend dieses Netz.</li></ul>
-**Anmerkung**: Sind Abhängigkeiten vom Docker-Socket oder direkt von Docker vorhanden? [Migrieren Sie auf `containerd` anstatt auf `docker` als Containerlaufzeit](cs_versions.html#containerd), sodass die Cluster auf die Ausführung von Kubernetes Version 1.11 oder eine aktuellere Version vorbereitet sind.</td>
+**Hinweis**: Sind Abhängigkeiten vom Docker-Socket oder direkt von Docker vorhanden? [Aktualisieren Sie auf `containerd` anstatt auf `docker` als Containerlaufzeit](cs_versions.html#containerd), sodass die Cluster auf die Ausführung von Kubernetes Version 1.11 oder eine aktuellere Version vorbereitet sind. </td>
 </tr>
 </tbody>
 </table>
 
 ### Änderungsprotokoll für 1.10.7_1520, veröffentlicht am 4. September 2018
 {: #1107_1520}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.7_1520 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.10.5_1519 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.5_1519</caption>
@@ -540,7 +1249,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>Version 1.10.5-118</td>
 <td>Version 1.10.7-146</td>
-<td>Wurde für die Unterstützung von Kubernetes 1.10.7 aktualisiert. Darüber hinaus wurde die Cloud-Provider-Konfiguration geändert, um die Verarbeitung von Aktualisierungen der Services für die Lastausgleichsfunktion zu verbessern, wenn für `externalTrafficPolicy` der Wert `local` eingestellt ist.</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.10.7 aktualisiert. Darüber hinaus wurde die Cloud-Provider-Konfiguration geändert, um die Verarbeitung von Aktualisierungen der Services für die Lastausgleichsfunktion zu verbessern, wenn für `externalTrafficPolicy` der Wert `local` eingestellt ist. </td>
 </tr>
 <tr>
 <td>IBM File Storage-Plug-in</td>
@@ -565,6 +1274,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.10.5_1519, veröffentlicht am 23. August 2018
 {: #1105_1519}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.5_1519 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.10.5_1518 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.5_1518</caption>
@@ -596,6 +1308,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.10.5_1518, veröffentlicht am 13. August 2018
 {: #1105_1518}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.5_1518 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.10.5_1517 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.5_1517</caption>
 <thead>
@@ -618,6 +1333,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für 1.10.5_1517, veröffentlicht am 27. Juli 2018
 {: #1105_1517}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.5_1517 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.10.3_1514 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.3_1514</caption>
@@ -672,6 +1390,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.10.3_1514, veröffentlicht 3. Juli 2018
 {: #1103_1514}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.3_1514 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.10.3_1513 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.3_1513</caption>
 <thead>
@@ -696,6 +1417,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.10.3_1513, veröffentlicht 21. Juni 2018
 {: #1103_1513}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.3_1513 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.10.3_1512 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.3_1512</caption>
 <thead>
@@ -718,6 +1442,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für 1.10.3_1512, veröffentlicht 12. Juni 2018
 {: #1103_1512}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.3_1512 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.10.1_1510 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.1_1510</caption>
@@ -774,6 +1501,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.10.1_1510, veröffentlicht am 18. Mai 2018
 {: #1101_1510}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.1_1510 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.10.1_1509 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.1_1509</caption>
 <thead>
@@ -797,6 +1527,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten Fixpack 1.10.1_1509, veröffentlicht am 16. Mai 2018
 {: #1101_1509}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.1_1509 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.10.1_1508 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.10.1_1508</caption>
 <thead>
@@ -819,6 +1552,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für 1.10.1_1508, veröffentlicht am 1. Mai 2018
 {: #1101_1508}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.1_1508 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.9.7_1510 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.7_1510</caption>
@@ -879,13 +1615,178 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <br />
 
 
-## Version 1.9, Änderungsprotokoll
+## Archiv
+{: #changelog_archive}
+
+Nicht unterstützte Kubernetes-Versionen:
+*  [Version 1.9](#19_changelog)
+*  [Version 1.8](#18_changelog)
+*  [Version 1.7](#17_changelog)
+
+### Änderungsprotokoll der Version 1.9 (veraltet, nicht mehr unterstützt seit 27. Dezember 2018)
 {: #19_changelog}
 
-Überprüfen Sie die folgenden Änderungen.
+Überprüfen Sie das Änderungsprotokoll der Version 1.9. 
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1538, veröffentlicht am 4. Dezember 2018
+{: #1911_1538}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.11_1538 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.9.11_1537 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.9.11_1537</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ressourcenauslastung von Workerknoten</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'docker' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](cs_clusters_planning.html#resource_limit_node). </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1537, veröffentlicht am 27. November 2018
+{: #1911_1537}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.11_1537 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.9.11_1536 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.9.11_1536</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>17.06.2</td>
+<td>18.06.1</td>
+<td>Lesen Sie die [Docker-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/engine/release-notes/#18061-ce). </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für 1.9.11_1536, veröffentlicht am 19. November 2018
+{: #1911_1536}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.11_1536 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.9.10_1532 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.9.10_1532</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>Version 2.6.5</td>
+<td>Version 2.6.12</td>
+<td>Werfen Sie einen Blick auf die [Calico-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v2.6/releases/#v2612). Die Aktualisierung behebt [Tigera Technical Advisory TTA-2018-001 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.projectcalico.org/security-bulletins/). </td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>Workerknoten-Images mit Kernelaktualisierung für [CVE-2018-7755 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog) wurden aktualisiert. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Version 1.9.10</td>
+<td>Version 1.9.11</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.11). </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}}</td>
+<td>Version 1.9.10-219</td>
+<td>Version 1.9.11-249</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.9.11 aktualisiert. </td>
+</tr>
+<tr>
+<td>OpenVPN-Client und -Server</td>
+<td>2.4.4-r2</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>Das Image für [CVE-2018-0732 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) und [CVE-2018-0737 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) wurde aktualisiert. </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fix 1.9.10_1532, veröffentlicht am 7. November 2018
+{: #1910_1532}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.11_1532 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.9.10_1531 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.9.10_1531</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TPM-aktivierter Kernel</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Bare-Metal-Workerknoten mit TPM-Chips für Trusted Compute verwenden den Ubuntu-Standardkernel, bis die Vertrauensbeziehung eingerichtet ist. Wenn Sie die [Vertrauensbeziehung](cs_cli_reference.html#cs_cluster_feature_enable) in einem vorhandenen Cluster aktivieren, müssen Sie alle vorhandenen Bare-Metal-Workerknoten mit TPM-Chips [neu laden](cs_cli_reference.html#cs_worker_reload). Um zu prüfen, ob ein Bare-Metal-Workerknoten über einen TPM-Chip verfügt, werfen Sie einen Blick auf das Feld **Trustable**, nachdem Sie den [Befehl](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types --zone` ausgeführt haben. </td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1531, veröffentlicht am 26. Oktober 2018
+{: #1910_1531}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.10_1531 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.9.10_1530 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.9.10_1530</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Behandlung von Betriebssystem-Interrupts</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Der Systemdämon für Interruptanforderungen wurde durch einen leistungsfähigeren Interrupt-Handler ersetzt. </td>
+</tr>
+</tbody>
+</table>
 
 ### Änderungsprotokoll für Master-Fixpack 1.9.10_1530, veröffentlicht am 15. Oktober 2018
 {: #1910_1530}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.10_1530 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.9.10_1527 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.10_1527</caption>
@@ -909,6 +1810,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1528, veröffentlicht am 10. Oktober 2018
 {: #1910_1528}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.10_1528 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.9.10_1527 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.10_1527</caption>
@@ -940,6 +1844,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für 1.9.10_1527, veröffentlicht am 2. Oktober 2018
 {: #1910_1527}
 
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.10_1527 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.9.10_1523 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.10_1523</caption>
 <thead>
@@ -970,6 +1877,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1524, veröffentlicht am 20. September 2018
 {: #1910_1524}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.10_1524 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.9.10_1523 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.10_1523</caption>
 <thead>
@@ -985,7 +1895,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>Protokollrotation</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Anmerkung**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
+<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
 </tr>
 <tr>
 <td>Laufzeitkomponenten für Workerknoten (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -997,7 +1907,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>Ablauf des Rootkennworts</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Anmerkung**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindern, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](cs_cli_reference.html#cs_worker_update) oder [erneut laden](cs_cli_reference.html#cs_worker_reload).</td>
+<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](cs_cli_reference.html#cs_worker_update) oder [erneut laden](cs_cli_reference.html#cs_worker_reload).</td>
 </tr>
 <tr>
 <td>Systemd</td>
@@ -1009,15 +1919,18 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>Docker</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Inaktiviert die Docker-Standard-Bridge, sodass der IP-Bereich `172.17.0.0/ 16` jetzt für private Routen verwendet wird. Wenn die Docker-Container in Workerknoten erstellt werden, weil `docker`-Befehle direkt auf dem Host ausgeführt werden oder weil ein Pod verwendet wird, von dem der Docker-Socket angehängt wird, wählen Sie eine der folgenden Optionen aus. <ul><li>Wenn Sie die externe Netzkonnektivität sicherstellen möchten, wenn Sie den Container erstellen, führen Sie `docker build --network host` aus.</li>
+<td>Inaktiviert die Docker-Standard-Bridge, sodass der IP-Bereich `172.17.0.0/ 16` jetzt für private Routen verwendet wird. Wenn die Docker-Container in Workerknoten erstellt werden, weil `docker`-Befehle direkt auf dem Host ausgeführt werden oder weil ein Pod verwendet wird, von dem der Docker-Socket angehängt wird, wählen Sie eine der folgenden Optionen aus.<ul><li>Wenn Sie die externe Netzkonnektivität sicherstellen möchten, wenn Sie den Container erstellen, führen Sie `docker build --network host` aus.</li>
 <li>Wenn Sie explizit ein Netz erstellen möchten, das beim Erstellen des Containers verwendet werden soll, führen Sie `docker network create` aus, und verwenden Sie anschließend dieses Netz.</li></ul>
-**Anmerkung**: Sind Abhängigkeiten vom Docker-Socket oder direkt von Docker vorhanden? [Migrieren Sie auf `containerd` anstatt auf `docker` als Containerlaufzeit](cs_versions.html#containerd), sodass die Cluster auf die Ausführung von Kubernetes Version 1.11 oder eine aktuallere Version vorbereitet sind.</td>
+**Hinweis**: Sind Abhängigkeiten vom Docker-Socket oder direkt von Docker vorhanden? [Aktualisieren Sie auf `containerd` anstatt auf `docker` als Containerlaufzeit](cs_versions.html#containerd), sodass die Cluster auf die Ausführung von Kubernetes Version 1.11 oder eine aktuellere Version vorbereitet sind. </td>
 </tr>
 </tbody>
 </table>
 
 ### Änderungsprotokoll für 1.9.10_1523, veröffentlicht am 4. September 2018
 {: #1910_1523}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.10_1523 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.9.9_1522 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.9_1522</caption>
@@ -1034,7 +1947,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>Version 1.9.9-167</td>
 <td>Version 1.9.10-192</td>
-<td>Wurde für die Unterstützung von Kubernetes 1.9.10 aktualisiert. Darüber hinaus wurde die Cloud-Provider-Konfiguration geändert, um die Verarbeitung von Aktualisierungen für Lastausgleichsfunktionsservices zu verbessern, wenn für `externalTrafficPolicy` der Wert `local` eingestellt ist.</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.9.10 aktualisiert. Darüber hinaus wurde die Cloud-Provider-Konfiguration geändert, um die Verarbeitung von Aktualisierungen der Services für die Lastausgleichsfunktion zu verbessern, wenn für `externalTrafficPolicy` der Wert `local` eingestellt ist. </td>
 </tr>
 <tr>
 <td>IBM File Storage-Plug-in</td>
@@ -1059,6 +1972,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.9.9_1522, veröffentlicht am 23. August 2018
 {: #199_1522}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.9_1522 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.9.9_1521 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.9_1521</caption>
@@ -1090,6 +2006,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.9.9_1521, veröffentlicht am 13. August 2018
 {: #199_1521}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.9_1521 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.9.9_1520 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.9_1520</caption>
 <thead>
@@ -1112,6 +2031,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für 1.9.9_1520, veröffentlicht 27. Juli 2018
 {: #199_1520}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.9_1520 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.9.8_1517 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.8_1517</caption>
@@ -1160,6 +2082,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.9.8_1517, veröffentlicht am 3. Juli 2018
 {: #198_1517}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.8_1517 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.9.8_1516 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.8_1516</caption>
 <thead>
@@ -1184,6 +2109,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.9.8_1516, veröffentlicht am 21. Juni 2018
 {: #198_1516}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.8_1516 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.9.8_1515 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.8_1515</caption>
 <thead>
@@ -1206,6 +2134,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für 1.9.8_1515, veröffentlicht 19. Juni 2018
 {: #198_1515}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.8_1515 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.9.7_1513 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.7_1513</caption>
@@ -1249,6 +2180,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.9.7_1513, veröffentlicht am 11. Juni 2018
 {: #197_1513}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.7_1513 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.9.7_1512 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.7_1512</caption>
 <thead>
@@ -1271,6 +2205,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.9.7_1512, veröffentlicht am 18. Mai 2018
 {: #197_1512}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.7_1512 enthalten sind.
+{: shortdesc}
 
 <table summary="Seit Version 1.9.7_1511 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.7_1511</caption>
@@ -1295,6 +2232,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für Workerknoten Fixpack 1.9.7_1511, veröffentlicht am 16. Mai 2018
 {: #197_1511}
 
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.7_1511 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.9.7_1510 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.7_1510</caption>
 <thead>
@@ -1318,6 +2258,9 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 ### Änderungsprotokoll für 1.9.7_1510, veröffentlicht am 30. April 2018
 {: #197_1510}
 
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 enthalten sind.
+{: shortdesc}
+
 <table summary="Seit Version 1.9.3_1506 vorgenommene Änderungen">
 <caption>Änderungen seit Version 1.9.3_1506</caption>
 <thead>
@@ -1333,7 +2276,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>Kubernetes</td>
 <td>Version 1.9.3</td>
 <td>Version 1.9.7	</td>
-<td><p>Werfen Sie einen Blick auf die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7). Dieses Release befasst sich mit den Schwachstellen [CVE-2017-1002101 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) und [CVE-2017-1002102 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Anmerkung</strong>: `secret`, `configMap`, `downwardAPI` und projizierte Datenträger werden nun als schreibgeschützte Datenträger angehängt. Bisher konnten Apps Daten in diese Datenträger schreiben, aber das System konnte die Daten möglicherweise automatisch zurücksetzen. Wenn Ihre Apps das bisherige unsichere Verhalten erwarten, ändern Sie sie entsprechend.</p></td>
+<td><p>Werfen Sie einen Blick auf die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7). Dieses Release befasst sich mit den Schwachstellen [CVE-2017-1002101 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) und [CVE-2017-1002102 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Hinweis</strong>: `secret`, `configMap`, `downwardAPI` und projizierte Datenträger werden nun als schreibgeschützte Datenträger angehängt. Bisher konnten Apps Daten in diese Datenträger schreiben, aber das System konnte die Daten möglicherweise automatisch zurücksetzen. Wenn Ihre Apps das bisherige unsichere Verhalten erwarten, ändern Sie sie entsprechend.</p></td>
 </tr>
 <tr>
 <td>Kubernetes-Konfiguration</td>
@@ -1359,13 +2302,6 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <br />
 
 
-## Archiv
-{: #changelog_archive}
-
-Nicht unterstützte Kubernetes-Versionen:
-*  [Version 1.8](#18_changelog)
-*  [Version 1.7](#17_changelog)
-
 ### Änderungsprotokoll Version 1.8 (nicht unterstützt)
 {: #18_changelog}
 
@@ -1389,7 +2325,7 @@ Nicht unterstützte Kubernetes-Versionen:
 <td>Protokollrotation</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Anmerkung**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
+<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](cs_cli_reference.html#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](cs_cli_reference.html#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
 </tr>
 <tr>
 <td>Laufzeitkomponenten für Workerknoten (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -1401,7 +2337,7 @@ Nicht unterstützte Kubernetes-Versionen:
 <td>Ablauf des Rootkennworts</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Anmerkung**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindern, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](cs_cli_reference.html#cs_worker_update) oder [erneut laden](cs_cli_reference.html#cs_worker_reload).</td>
+<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](cs_cli_reference.html#cs_worker_update) oder [erneut laden](cs_cli_reference.html#cs_worker_reload).</td>
 </tr>
 <tr>
 <td>Systemd</td>
@@ -1689,7 +2625,8 @@ Nicht unterstützte Kubernetes-Versionen:
 <td>Kubernetes</td>
 <td>v1.8.8</td>
 <td>v1.8.11	</td>
-<td><p>Werfen Sie einen Blick auf die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11). Dieses Release befasst sich mit den Schwachstellen [CVE-2017-1002101 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) und [CVE-2017-1002102 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Anmerkung</strong>: `secret`, `configMap`, `downwardAPI` und projizierte Datenträger werden nun als schreibgeschützte Datenträger angehängt. Bisher konnten Apps Daten in diese Datenträger schreiben, aber das System konnte die Daten möglicherweise automatisch zurücksetzen. Wenn Ihre Apps das bisherige unsichere Verhalten erwarten, ändern Sie sie entsprechend.</p></td>
+<td><p>Werfen Sie einen Blick auf die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11). Dieses Release befasst sich mit den Schwachstellen [CVE-2017-1002101 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) und [CVE-2017-1002102 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p>`secret`, `configMap`, `downwardAPI` und projizierte Datenträger werden jetzt nur schreibgeschützt angehängt.
+Bisher konnten Apps Daten in diese Datenträger schreiben, aber das System konnte die Daten möglicherweise automatisch zurücksetzen. Wenn Ihre Apps das bisherige unsichere Verhalten erwarten, ändern Sie sie entsprechend.</p></td>
 </tr>
 <tr>
 <td>Containerimage anhalten</td>
@@ -1807,7 +2744,8 @@ Nicht unterstützte Kubernetes-Versionen:
 <td>Kubernetes</td>
 <td>v1.7.4</td>
 <td>v1.7.16	</td>
-<td><p>Werfen Sie einen Blick auf die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16). Dieses Release befasst sich mit den Schwachstellen [CVE-2017-1002101 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) und [CVE-2017-1002102 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p><strong>Anmerkung</strong>: `secret`, `configMap`, `downwardAPI` und projizierte Datenträger werden nun als schreibgeschützte Datenträger angehängt. Bisher konnten Apps Daten in diese Datenträger schreiben, aber das System konnte die Daten möglicherweise automatisch zurücksetzen. Wenn Ihre Apps das bisherige unsichere Verhalten erwarten, ändern Sie sie entsprechend.</p></td>
+<td><p>Werfen Sie einen Blick auf die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16). Dieses Release befasst sich mit den Schwachstellen [CVE-2017-1002101 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) und [CVE-2017-1002102 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p>`secret`, `configMap`, `downwardAPI` und projizierte Datenträger werden jetzt nur schreibgeschützt angehängt.
+Bisher konnten Apps Daten in diese Datenträger schreiben, aber das System konnte die Daten möglicherweise automatisch zurücksetzen. Wenn Ihre Apps das bisherige unsichere Verhalten erwarten, ändern Sie sie entsprechend.</p></td>
 </tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.7.4-133</td>

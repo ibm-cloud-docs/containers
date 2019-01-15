@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,11 +13,14 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
- 
+
 
 
 # Fehlerbehebung für Clusterspeicher
@@ -350,7 +353,7 @@ Aktualisieren Sie das Dateisystem im vorhandenen persistenten Datenträger von `
 {: #cos_helm_fails}
 
 {: tsSymptoms}
-Wenn Sie das Helm-Plug-in {{site.data.keyword.cos_full_notm}} `ibmc` installieren, schlägt die Installation mit dem folgenden Fehler fehl: 
+Wenn Sie das Helm-Plug-in {{site.data.keyword.cos_full_notm}} `ibmc` installieren, schlägt die Installation mit dem folgenden Fehler fehl:
 ```
 Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
 ```
@@ -360,13 +363,13 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 Bei der Installation des Helm-Plug-ins `ibmc` wird eine symbolische Verbindung aus dem Verzeichnis `./helm/plugins/helm-ibmc` zu dem Verzeichnis hergestellt, in dem sich das Helm-Plug-in `ibmc` auf Ihrem lokalen System befindet, das normalerweise in `./ibmcloud-object-storage-plugin/helm-ibmc` enthalten ist. Wenn Sie das Helm-Plug-in `ibmc` von Ihrem lokalen System entfernen oder das Helm-Plug-in-Verzeichnis `ibmc` an eine andere Position verschieben, wird die symbolische Verbindung nicht entfernt.
 
 {: tsResolve}
-1. Entfernen Sie das {{site.data.keyword.cos_full_notm}}-Helm-Plug-in. 
+1. Entfernen Sie das {{site.data.keyword.cos_full_notm}}-Helm-Plug-in.
    ```
    rm -rf ~/.helm/plugins/helm-ibmc
    ```
    {: pre}
-   
-2. [Installieren Sie {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos). 
+
+2. [Installieren Sie {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos).
 
 <br />
 
@@ -375,33 +378,35 @@ Bei der Installation des Helm-Plug-ins `ibmc` wird eine symbolische Verbindung a
 {: #cos_secret_access_fails}
 
 {: tsSymptoms}
-Wenn Sie Ihren PVC erstellen oder einen Pod bereitstellen, der den PVC anhängt, schlägt die Erstellung oder Bereitstellung fehl. 
+Wenn Sie Ihren PVC erstellen oder einen Pod bereitstellen, der den PVC anhängt, schlägt die Erstellung oder Bereitstellung fehl.
 
-- Beispielfehlernachricht für einen Fehler bei der PVC-Erstellung: 
+- Beispielfehlernachricht für einen Fehler bei der PVC-Erstellung:
   ```
   pvc-3:1b23159vn367eb0489c16cain12345:cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
   ```
   {: screen}
 
-- Beispielfehlernachricht für einen Fehler bei der Erstellung eines Pods: 
+- Beispielfehlernachricht für einen Fehler bei der Erstellung eines Pods:
   ```
   persistentvolumeclaim "pvc-3" not found (repeated 3 times)
   ```
   {: screen}
-  
+
 {: tsCauses}
-Der geheime Kubernetes-Schlüssel, in dem Sie Ihre {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise, den PVC und den Pod speichern, befinden sich nicht alle im selben Kubernetes-Namensbereich. Wenn der geheime Schlüssel in einem anderen Namensbereich bereitgestellt wird als Ihr PVC oder Pod, kann nicht auf den geheimen Schlüssel zugegriffen werden. 
+Der geheime Kubernetes-Schlüssel, in dem Sie Ihre {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise, den PVC und den Pod speichern, befinden sich nicht alle im selben Kubernetes-Namensbereich. Wenn der geheime Schlüssel in einem anderen Namensbereich bereitgestellt wird als Ihr PVC oder Pod, kann nicht auf den geheimen Schlüssel zugegriffen werden.
 
 {: tsResolve}
-1. Listen Sie die geheimen Schlüssel in Ihrem Cluster auf und überprüfen Sie den Kubernetes-Namensbereich, in dem der geheime Kubernetes-Schlüssel für Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz erstellt wird. Der geheime Schlüssel muss `ibm/ibmc-s3fs` als **Typ** aufweisen. 
+
+
+1. Listen Sie die geheimen Schlüssel in Ihrem Cluster auf und überprüfen Sie den Kubernetes-Namensbereich, in dem der geheime Kubernetes-Schlüssel für Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz erstellt wird. Der geheime Schlüssel muss `ibm/ibmc-s3fs` als **Typ** aufweisen.
    ```
    kubectl get secrets --all-namespaces
    ```
    {: pre}
-   
-2. Überprüfen Sie die YAML-Konfigurationsdatei auf Ihren PVC und Pod, um zu ermitteln, ob Sie denselben Namensbereich verwendet haben. Wenn Sie einen Pod in einem anderen Namensbereich als dem mit dem geheimen Schlüssel bereitstellen wollen, müssen Sie [einen weiteren geheimen Schlüssel](cs_storage_cos.html#create_cos_secret) im gewünschten Namensbereich erstellen. 
-   
-3. Erstellen Sie den PVC in dem gewünschten Namensbereich oder stellen Sie dort den Pod bereit. 
+
+2. Überprüfen Sie die YAML-Konfigurationsdatei auf Ihren PVC und Pod, um zu ermitteln, ob Sie denselben Namensbereich verwendet haben. Wenn Sie einen Pod in einem anderen Namensbereich als dem mit dem geheimen Schlüssel bereitstellen wollen, müssen Sie [einen weiteren geheimen Schlüssel](cs_storage_cos.html#create_cos_secret) im gewünschten Namensbereich erstellen.
+
+3. Erstellen Sie den PVC in dem gewünschten Namensbereich oder stellen Sie dort den Pod bereit.
 
 <br />
 
@@ -410,7 +415,7 @@ Der geheime Kubernetes-Schlüssel, in dem Sie Ihre {{site.data.keyword.cos_full_
 {: #cred_failure}
 
 {: tsSymptoms}
-Wenn Sie den PVC erstellen, wird eine Fehlernachricht ähnlich der folgenden angezeigt: 
+Wenn Sie den PVC erstellen, wird eine Fehlernachricht ähnlich der folgenden angezeigt:
 
 ```
 SignatureDoesNotMatch: The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. For more information, see REST Authentication and SOAP Authentication for details.
@@ -418,7 +423,7 @@ SignatureDoesNotMatch: The request signature we calculated does not match the si
 {: screen}
 
 ```
-AccessDenied: Access Denied status code: 403 
+AccessDenied: Access Denied status code: 403
 ```
 {: screen}
 
@@ -432,22 +437,22 @@ Die {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise, die Sie f
 
 {: tsResolve}
 1. Klicken Sie in der Navigation auf der Seite mit den Servicedetails auf **Serviceberechtigungsnachweise**.
-2. Suchen Sie nach Ihren Berechtigungsnachweisen und klicken Sie anschließend auf **Berechtigungsnachweise anzeigen**. 
-3. Stellen Sie sicher, dass die richtigen Werte für **access_key_id** und **secret_access_key** in Ihrem geheimen Kubernetes-Schlüssel enthalten sind. Falls dies nicht der Fall ist, aktualisieren Sie den geheimen Kubernetes-Schlüssel. 
-   1. Rufen Sie die YAML-Datei ab, die Sie zum Erstellen des geheimen Schlüssels verwendet haben. 
+2. Suchen Sie nach Ihren Berechtigungsnachweisen und klicken Sie anschließend auf **Berechtigungsnachweise anzeigen**.
+3. Stellen Sie sicher, dass die richtigen Werte für **access_key_id** und **secret_access_key** in Ihrem geheimen Kubernetes-Schlüssel enthalten sind. Falls dies nicht der Fall ist, aktualisieren Sie den geheimen Kubernetes-Schlüssel.
+   1. Rufen Sie die YAML-Datei ab, die Sie zum Erstellen des geheimen Schlüssels verwendet haben.
       ```
       kubectl get secret <geheimer_schlüssel> -o yaml
       ```
       {: pre}
-      
-   2. Aktualisieren Sie die Werte für **access_key_id** und **secret_access_key**. 
-   3. Aktualisieren Sie den geheimen Schlüssel. 
+
+   2. Aktualisieren Sie die Werte für **access_key_id** und **secret_access_key**.
+   3. Aktualisieren Sie den geheimen Schlüssel.
       ```
       kubectl apply -f secret.yaml
       ```
       {: pre}
-      
-4. Überprüfen Sie im Abschnitt **iam_role_crn**, ob Sie über die Rolle `Schreibberechtigter` oder `Manager` verfügen. Wenn Sie nicht über die richtige Rolle verfügen, müssen Sie [neue {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise mit den richtigen Berechtigungen erstellen](cs_storage_cos.html#create_cos_service). Aktualisieren Sie anschließend Ihren vorhandenen geheimen Schlüssel oder [erstellen Sie einen neuen geheimen Schlüssel](cs_storage_cos.html#create_cos_secret) mit Ihren neuen Serviceberechtigungsnachweisen. 
+
+4. Überprüfen Sie im Abschnitt **iam_role_crn**, ob Sie über die Rolle `Schreibberechtigter` oder `Manager` verfügen. Wenn Sie nicht über die richtige Rolle verfügen, müssen Sie [neue {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise mit den richtigen Berechtigungen erstellen](cs_storage_cos.html#create_cos_service). Aktualisieren Sie anschließend Ihren vorhandenen geheimen Schlüssel oder [erstellen Sie einen neuen geheimen Schlüssel](cs_storage_cos.html#create_cos_secret) mit Ihren neuen Serviceberechtigungsnachweisen.
 
 <br />
 
@@ -455,7 +460,7 @@ Die {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise, die Sie f
 ## Objektspeicher: Zugriff auf ein vorhandenes Bucket nicht möglich
 
 {: tsSymptoms}
-Wenn Sie den PVC erstellen, kann auf das Bucket in {{site.data.keyword.cos_full_notm}} nicht zugegriffen werden. Es wird eine Fehlernachricht ähnlich der folgenden angezeigt: 
+Wenn Sie den PVC erstellen, kann auf das Bucket in {{site.data.keyword.cos_full_notm}} nicht zugegriffen werden. Es wird eine Fehlernachricht ähnlich der folgenden angezeigt:
 
 ```
 Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:1b2345678b69175abc98y873e2:cannot access bucket <bucketname>: NotFound: Not Found
@@ -466,10 +471,10 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 Sie haben möglicherweise die falsche Speicherklasse verwendet, um auf das vorhandene Bucket zuzugreifen, oder Sie haben versucht, auf ein Bucket zuzugreifen, das Sie nicht erstellt haben. 
 
 {: tsResolve}
-1. Wählen Sie im [{{site.data.keyword.Bluemix_notm}}-Dashboard ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/dashboard/apps) Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz aus. 
-2. Wählen Sie **Buckets** aus. 
-3. Überprüfen Sie die Informationen zu **Klasse** und **Standort** für Ihr vorhandenes Bucket. 
-4. Wählen Sie die entsprechende [Speicherklasse](cs_storage_cos.html#storageclass_reference) aus. 
+1. Wählen Sie im [{{site.data.keyword.Bluemix_notm}}-Dashboard ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/dashboard/apps) Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz aus.
+2. Wählen Sie **Buckets** aus.
+3. Überprüfen Sie die Informationen zu **Klasse** und **Standort** für Ihr vorhandenes Bucket.
+4. Wählen Sie die entsprechende [Speicherklasse](cs_storage_cos.html#storageclass_reference) aus.
 
 <br />
 
@@ -478,25 +483,25 @@ Sie haben möglicherweise die falsche Speicherklasse verwendet, um auf das vorha
 {: #cos_nonroot_access}
 
 {: tsSymptoms}
-Sie haben Dateien über die GUI oder die REST-API auf Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz hochgeladen. Wenn Sie versuchen, auf diese Dateien als Benutzer ohne Rootberechtigung zuzugreifen, den Sie in der App-Bereitstellung mit `runAsUser` definiert haben, wird der Zugriff auf die Dateien verweigert. 
+Sie haben Dateien über die Konsole oder die REST-API in Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz hochgeladen. Wenn Sie versuchen, auf diese Dateien als Benutzer ohne Rootberechtigung zuzugreifen, den Sie in der App-Bereitstellung mit `runAsUser` definiert haben, wird der Zugriff auf die Dateien verweigert.
 
 {: tsCauses}
-Unter Linux hat eine Datei oder ein Verzeichnis drei Zugriffsgruppen: `Eigner`, `Gruppe` und `Andere`. Wenn Sie eine Datei über die GUI oder die REST-API in {{site.data.keyword.cos_full_notm}} hochladen, werden die Berechtigungen für `Eigner`, `Gruppe` und `Andere` entfernt. Die Berechtigung der einzelnen Dateien sieht wie folgt aus: 
+Unter Linux hat eine Datei oder ein Verzeichnis drei Zugriffsgruppen: `Eigner`, `Gruppe` und `Andere`. Wenn Sie eine Datei über die Konsole oder die REST-API in {{site.data.keyword.cos_full_notm}} hochladen, werden die Berechtigungen für `Eigner`, `Gruppe` und `Andere` entfernt. Die Berechtigung der einzelnen Dateien sieht wie folgt aus:
 
 ```
 d--------- 1 root root 0 Jan 1 1970 <dateiname>
 ```
 {: screen}
 
-Wenn Sie eine Datei mithilfe des {{site.data.keyword.cos_full_notm}}-Plug-ins hochladen, werden die Berechtigungen für die Datei beibehalten und nicht geändert. 
+Wenn Sie eine Datei mithilfe des {{site.data.keyword.cos_full_notm}}-Plug-ins hochladen, werden die Berechtigungen für die Datei beibehalten und nicht geändert.
 
 {: tsResolve}
-Um auf die Datei als Benutzer ohne Rootberechtigung zugreifen zu können, muss der Benutzer ohne Rootberechtigung über Lese- und Schreibberechtigungen für die Datei verfügen. Wenn Sie die Berechtigung für eine Datei im Rahmen Ihrer Podbereitstellung ändern, ist eine Schreiboperation erforderlich. {{site.data.keyword.cos_full_notm}} ist nicht für Schreibworkloads konzipiert. Durch die Aktualisierung der Berechtigungen während der Podbereitstellung kann verhindert werden, dass Ihr Pod in den Status `Aktiv` wechselt. 
+Um auf die Datei als Benutzer ohne Rootberechtigung zugreifen zu können, muss der Benutzer ohne Rootberechtigung über Lese- und Schreibberechtigungen für die Datei verfügen. Wenn Sie die Berechtigung für eine Datei im Rahmen Ihrer Podbereitstellung ändern, ist eine Schreiboperation erforderlich. {{site.data.keyword.cos_full_notm}} ist nicht für Schreibworkloads konzipiert. Durch die Aktualisierung der Berechtigungen während der Podbereitstellung kann verhindert werden, dass Ihr Pod in den Status `Aktiv` wechselt.
 
-Um dieses Problem zu beheben, müssen Sie vor dem Anhängen des PVC an Ihren App-Pod einen weiteren Pod erstellen, um die richtige Berechtigung für den Benutzer ohne Rootberechtigung festzulegen. 
+Um dieses Problem zu beheben, müssen Sie vor dem Anhängen des PVC an Ihren App-Pod einen weiteren Pod erstellen, um die richtige Berechtigung für den Benutzer ohne Rootberechtigung festzulegen.
 
-1. Überprüfen Sie die Berechtigungen Ihrer Dateien in Ihrem Bucket. 
-   1. Erstellen Sie eine Konfigurationsdatei für Ihren Pod `test-permission` und geben Sie der Datei den Namen `test-permission.yaml`. 
+1. Überprüfen Sie die Berechtigungen Ihrer Dateien in Ihrem Bucket.
+   1. Erstellen Sie eine Konfigurationsdatei für Ihren Pod `test-permission` und geben Sie der Datei den Namen `test-permission.yaml`.
       ```
       apiVersion: v1
       kind: Pod
@@ -515,38 +520,38 @@ Um dieses Problem zu beheben, müssen Sie vor dem Anhängen des PVC an Ihren App
             claimName: <pvc-name>
       ```
       {: codeblock}
-        
-   2. Erstellen Sie den Pod `test-permission`. 
+
+   2. Erstellen Sie den Pod `test-permission`.
       ```
       kubectl apply -f test-permission.yaml
       ```
       {: pre}
-      
-   3. Melden Sie sich beim Pod an. 
+
+   3. Melden Sie sich beim Pod an.
       ```
       kubectl exec test-permission -it bash
       ```
       {: pre}
-   
-   4. Navigieren Sie zu Ihrem Mountpfad und listen Sie die Berechtigungen für Ihre Dateien auf. 
+
+   4. Navigieren Sie zu Ihrem Mountpfad und listen Sie die Berechtigungen für Ihre Dateien auf.
       ```
       cd test && ls -al
       ```
       {: pre}
-      
-      Beispielausgabe: 
+
+      Beispielausgabe:
       ```
       d--------- 1 root root 0 Jan 1 1970 <dateiname>
       ```
       {: screen}
-      
-2. Löschen Sie den Pod. 
+
+2. Löschen Sie den Pod.
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-      
-3. Erstellen Sie eine Konfigurationsdatei für den Pod, die Sie verwenden, um die Berechtigungen Ihrer Dateien zu korrigieren, und geben Sie ihr den Namen `fix-permission.yaml`. 
+
+3. Erstellen Sie eine Konfigurationsdatei für den Pod, die Sie verwenden, um die Berechtigungen Ihrer Dateien zu korrigieren, und geben Sie ihr den Namen `fix-permission.yaml`.
    ```
    apiVersion: v1
    kind: Pod
@@ -568,61 +573,62 @@ Um dieses Problem zu beheben, müssen Sie vor dem Anhängen des PVC an Ihren App
          claimName: <pvc-name>
     ```
     {: codeblock}
-    
-3. Erstellen Sie den Pod `fix-permission`. 
+
+3. Erstellen Sie den Pod `fix-permission`.
    ```
    kubectl apply -f fix-permission.yaml
    ```
    {: pre}
-   
+
 4. Warten Sie, bis der Pod in den Status `Abgeschlossen` wechselt.  
    ```
    kubectl get pod fix-permission
    ```
    {: pre}
 
-5. Löschen Sie den Pod `fix-permission`. 
+5. Löschen Sie den Pod `fix-permission`.
    ```
    kubectl delete pod fix-permission
    ```
-   {: pre} 
-   
-5. Erstellen Sie wieder den Pod `test-permission`, den Sie zuvor verwendet haben, um die Berechtigungen zu überprüfen. 
+   {: pre}
+
+5. Erstellen Sie wieder den Pod `test-permission`, den Sie zuvor verwendet haben, um die Berechtigungen zu überprüfen.
    ```
    kubectl apply -f test-permission.yaml
    ```
    {: pre}
-   
-5. Stellen Sie sicher, dass die Berechtigungen für Ihre Dateien aktualisiert wurden. 
-   1. Melden Sie sich beim Pod an. 
+
+5. Stellen Sie sicher, dass die Berechtigungen für Ihre Dateien aktualisiert wurden.
+   1. Melden Sie sich beim Pod an.
       ```
       kubectl exec test-permission -it bash
       ```
       {: pre}
-   
-   2. Navigieren Sie zu Ihrem Mountpfad und listen Sie die Berechtigungen für Ihre Dateien auf. 
+
+   2. Navigieren Sie zu Ihrem Mountpfad und listen Sie die Berechtigungen für Ihre Dateien auf.
       ```
       cd test && ls -al
       ```
       {: pre}
 
-      Beispielausgabe: 
+      Beispielausgabe:
       ```
       -rwxrwx--- 1 <nicht-root-benutzer-id> root 6193 Aug 21 17:06 <dateiname>
       ```
       {: screen}
-      
-6. Löschen Sie den Pod `test-permission`. 
+
+6. Löschen Sie den Pod `test-permission`.
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-   
-7. Hängen Sie den PVC mit dem Benutzer ohne Rootberechtigung an die App an. 
 
-   **Wichtig:** Definieren Sie den Benutzer ohne Rootberechtigung als `runAsUser`, ohne gleichzeitig `fsGroup` in Ihrer YAML-Datei für die Bereitstellung zu definieren. Wenn Sie `fsGroup` festlegen, wird das {{site.data.keyword.cos_full_notm}}-Plug-in ausgelöst, das die Gruppenberechtigungen für alle Dateien in einem Bucket aktualisiert, wenn der Pod bereitgestellt wird. Das Aktualisieren der Berechtigungen ist eine Schreiboperation, die möglicherweise verhindert, dass Ihr Pod in den Status `Aktiv` wechselt. 
+7. Hängen Sie den PVC mit dem Benutzer ohne Rootberechtigung an die App an.
 
-Laden Sie keine Dateien über die GUI oder die REST-API hoch, wenn Sie die richtigen Dateiberechtigungen in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz festgelegt haben. Verwenden Sie das {{site.data.keyword.cos_full_notm}}-Plug-in, um Dateien zu Ihrer Serviceinstanz hinzuzufügen. 
+   Definieren Sie den Benutzer ohne Rootberechtigung als `runAsUser`, ohne gleichzeitig `fsGroup` in Ihrer YAML-Datei für die Bereitstellung zu definieren. Wenn Sie `fsGroup` festlegen, wird das {{site.data.keyword.cos_full_notm}}-Plug-in ausgelöst, das die Gruppenberechtigungen für alle Dateien in einem Bucket aktualisiert, wenn der Pod bereitgestellt wird. Das Aktualisieren der Berechtigungen ist eine Schreiboperation, die möglicherweise verhindert, dass Ihr Pod in den Status `Aktiv` wechselt.
+   {: important}
+
+Laden Sie keine Dateien über die Konsole oder die REST-API hoch, nachdem Sie die richtigen Dateiberechtigungen in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz festgelegt haben. Verwenden Sie das {{site.data.keyword.cos_full_notm}}-Plug-in, um Dateien zu Ihrer Serviceinstanz hinzuzufügen.
 {: tip}
 
 <br />
@@ -637,23 +643,17 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
 -  Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
-
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
 -   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containerlong_notm}}-Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
-
     Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
     {: tip}
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
-
     -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren
 finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
-
--   Wenden Sie sich an den IBM Support, indem Sie ein Ticket öffnen. Informationen zum Öffnen eines IBM Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
+-   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support). Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 {: tip}
-Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 

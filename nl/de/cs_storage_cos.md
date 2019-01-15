@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -22,47 +25,47 @@ lastupdated: "2018-10-25"
 ## Objektspeicher-Serviceinstanz erstellen
 {: #create_cos_service}
 
-Bevor Sie {{site.data.keyword.cos_full_notm}} in Ihrem Cluster verwenden können, müssen Sie eine {{site.data.keyword.cos_full_notm}}-Serviceinstanz in Ihrem Konto einrichten. 
+Bevor Sie {{site.data.keyword.cos_full_notm}} in Ihrem Cluster verwenden können, müssen Sie eine {{site.data.keyword.cos_full_notm}}-Serviceinstanz in Ihrem Konto einrichten.
 {: shortdesc}
 
 1. Stellen Sie eine {{site.data.keyword.cos_full_notm}}-Serviceinstanz bereit.
    1.  Öffnen Sie die [{{site.data.keyword.cos_full_notm}}-Katalogseite](https://console.bluemix.net/catalog/services/cloud-object-storage).
-   2.  Geben Sie einen Namen für Ihre Serviceinstanz ein (zum Beispiel `cos-backup`) und wählen Sie dieselbe Ressourcengruppe wie die aus, in der sich der Cluster befindet. Wenn Sie die Ressourcengruppe des Clusters anzeigen möchten, führen Sie den Befehl `[ bxcs] cluster-get -- cluster <cluster_name_or_ID>` aus.   
-   3.  Sehen Sie sich die [Planoptionen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) mit den Preisinformationen an und wählen Sie einen Plan aus. 
-   4.  Klicken Sie auf **Erstellen**. Die Seite mit den Servicedetails wird geöffnet. 
+   2.  Geben Sie einen Namen für Ihre Serviceinstanz ein (zum Beispiel `cos-backup`) und wählen Sie dieselbe Ressourcengruppe wie die aus, in der sich der Cluster befindet. Wenn Sie die Ressourcengruppe des Clusters anzeigen möchten, führen Sie den Befehl `[ bxcs] cluster-get -- cluster <clustername_oder_-id>` aus.   
+   3.  Sehen Sie sich die [Planoptionen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) mit den Preisinformationen an und wählen Sie einen Plan aus.
+   4.  Klicken Sie auf **Erstellen**. Die Seite mit den Servicedetails wird geöffnet.
 2. {: #service_credentials}Rufen Sie die {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise ab.
    1.  Klicken Sie in der Navigation auf der Seite mit den Servicedetails auf **Serviceberechtigungsnachweise**.
-   2.  Klicken Sie auf **Neuer Berechtigungsnachweis**. Ein Dialogfeld wird angezeigt. 
+   2.  Klicken Sie auf **Neuer Berechtigungsnachweis**. Ein Dialogfeld wird angezeigt.
    3.  Geben Sie einen Namen für Ihre Berechtigungsnachweise ein.
-   4.  Wählen Sie im Dropdown-Menü **Rolle** die Option `Schreibberechtigter` oder `Manager` aus. Wenn Sie `Leseberechtigter` auswählen, können Sie nicht die Berechtigungsnachweise verwenden, um Buckets in {{site.data.keyword.cos_full_notm}} zu erstellen und Daten zu schreiben. 
-   5.  Optional: Geben Sie `{"HMAC":true}` in **Inline-Konfigurationsparameter hinzufügen (optional):** ein, um zusätzliche HMAC-Berechtigungsnachweise für den {{site.data.keyword.cos_full_notm}}-Service zu erstellen. Durch die HMAC-Authentifizierung erhält die OAuth2-Authentifizierung eine zusätzliche Sicherheitsebene, da verhindert wird, dass verfallene oder zufällig erstellte OAuth2-Tokens verwendet werden. 
+   4.  Wählen Sie im Dropdown-Menü **Rolle** die Option `Schreibberechtigter` oder `Manager` aus. Wenn Sie `Leseberechtigter` auswählen, können Sie nicht die Berechtigungsnachweise verwenden, um Buckets in {{site.data.keyword.cos_full_notm}} zu erstellen und Daten zu schreiben.
+   5.  Optional: Geben Sie `{"HMAC":true}` in **Inline-Konfigurationsparameter hinzufügen (optional):** ein, um zusätzliche HMAC-Berechtigungsnachweise für den {{site.data.keyword.cos_full_notm}}-Service zu erstellen. Durch die HMAC-Authentifizierung erhält die OAuth2-Authentifizierung eine zusätzliche Sicherheitsebene, da verhindert wird, dass verfallene oder zufällig erstellte OAuth2-Tokens verwendet werden.
    6.  Klicken Sie auf **Hinzufügen**. Ihre neuen Berechtigungsnachweise werden in der Tabelle **Serviceberechtigungsnachweise** aufgelistet.
-   7.  Klicken Sie auf **Berechtigungsnachweise anzeigen**. 
-   8.  Notieren Sie sich den **apikey**, um OAuth2-Tokens für die Authentifizierung beim {{site.data.keyword.cos_full_notm}}-Service zu verwenden. Beachten Sie bei der HMAC-Authentifizierung im Abschnitt **cos_hmac_keys** die Angaben **access_key_id** und **secret_access_key**. 
-3. [Speichern Sie Ihre Serviceberechtigungsnachweise in einem geheimen Kubernetes-Schlüssel in dem Cluster](#create_cos_secret), um den Zugriff auf Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz zu ermöglichen. 
+   7.  Klicken Sie auf **Berechtigungsnachweise anzeigen**.
+   8.  Notieren Sie sich den **apikey**, um OAuth2-Tokens für die Authentifizierung beim {{site.data.keyword.cos_full_notm}}-Service zu verwenden. Beachten Sie bei der HMAC-Authentifizierung im Abschnitt **cos_hmac_keys** die Angaben **access_key_id** und **secret_access_key**.
+3. [Speichern Sie Ihre Serviceberechtigungsnachweise in einem geheimen Kubernetes-Schlüssel in dem Cluster](#create_cos_secret), um den Zugriff auf Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz zu ermöglichen.
 
 ## Geheimen Schlüssel für die Berechtigungsnachweise des Objektspeicherservice erstellen
 {: #create_cos_secret}
 
-Um auf Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz für das Lesen und Schreiben von Daten zugreifen zu können, müssen Sie die Serviceberechtigungsnachweise in einem geheimen Kubernetes-Schlüssel sicher speichern. Das {{site.data.keyword.cos_full_notm}}-Plug-in verwendet diese Berechtigungsnachweise für alle Lese- und Schreiboperationen in Ihrem Bucket. 
+Um auf Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz für das Lesen und Schreiben von Daten zugreifen zu können, müssen Sie die Serviceberechtigungsnachweise in einem geheimen Kubernetes-Schlüssel sicher speichern. Das {{site.data.keyword.cos_full_notm}}-Plug-in verwendet diese Berechtigungsnachweise für alle Lese- und Schreiboperationen in Ihrem Bucket.
 {: shortdesc}
 
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
-1. Rufen Sie **apikey** oder **access_key_id** und **secret_access_key** Ihrer [ {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise](#service_credentials) ab. 
+1. Rufen Sie **apikey** oder **access_key_id** und **secret_access_key** Ihrer [ {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise](#service_credentials) ab.
 
-2. Rufen Sie die **GUID** Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz ab. 
+2. Rufen Sie die **GUID** Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz ab.
    ```
-   ibmcloud resource service-instance <service_name> | grep GUID
+   ibmcloud resource service-instance <servicename> | grep GUID
    ```
    {: pre}
-  
-3. Codieren Sie die {{site.data.keyword.cos_full_notm}}-**GUID** und **apikey** oder **access_key_id** und **secret_access_key**, die Sie zuvor abgerufen haben, in base64 und notieren Sie alle Base64-codierten Werte. Wiederholen Sie diesen Befehl für jeden Parameter, um den codierten Base64-codierten Wert abzurufen. 
+
+3. Codieren Sie die {{site.data.keyword.cos_full_notm}}-**GUID** und **apikey** oder **access_key_id** und **secret_access_key**, die Sie zuvor abgerufen haben, in base64 und notieren Sie alle Base64-codierten Werte. Wiederholen Sie diesen Befehl für jeden Parameter, um den codierten Base64-codierten Wert abzurufen.
    ```
    echo -n "<schlüsselwert>" | base64
    ```
    {: pre}
-   
+
 4. Erstellen Sie eine Konfigurationsdatei, um Ihren geheimen Kubernetes-Schlüssel zu definieren.
 
    **Beispiel für die Verwendung des API-Schlüssels:**
@@ -75,10 +78,10 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
      namespace: <namensbereich>
    data:
      api-key: <base64-api-schlüssel>
-     service-instance-id: <base64-guid> 
+     service-instance-id: <base64-guid>
    ```
    {: codeblock}
-   
+
    **Beispiel für die Verwendung der HMAC-Authentifizierung:**
    ```
    apiVersion: v1
@@ -90,10 +93,10 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
    data:
      access-key: <base64-zugriffsschlüssel-id>
      secret-key: <geheimer_base64-zugriffsschlüssel>
-     service-instance-id: <base64-guid> 
+     service-instance-id: <base64-guid>
    ```
    {: codeblock}
-   
+
    <table>
    <caption>Erklärung der Komponenten der YAML-Datei</caption>
    <thead>
@@ -126,20 +129,20 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
    </tr>
    </tbody>
    </table>
-     
-5. Erstellen Sie den geheimen Schlüssel in Ihrem Cluster. 
+
+5. Erstellen Sie den geheimen Schlüssel in Ihrem Cluster.
    ```
    kubectl apply -f filepath/secret.yaml
    ```
    {: pre}
-   
-6. Stellen Sie sicher, dass der geheime Schlüssel in Ihrem Namensbereich erstellt wird. 
+
+6. Stellen Sie sicher, dass der geheime Schlüssel in Ihrem Namensbereich erstellt wird.
    ```
    kubectl get secret
    ```
    {: pre}
-   
-7. [Installieren Sie das {{site.data.keyword.cos_full_notm}}-Plug-in](#install_cos) oder, falls Sie das Plug-in bereits installiert haben, [entscheiden Sie über die Konfiguration]( #configure_cos) für Ihr {{site.data.keyword.cos_full_notm}}-Bucket. 
+
+7. [Installieren Sie das {{site.data.keyword.cos_full_notm}}-Plug-in](#install_cos) oder, falls Sie das Plug-in bereits installiert haben, [entscheiden Sie über die Konfiguration]( #configure_cos) für Ihr {{site.data.keyword.cos_full_notm}}-Bucket.
 
 ## IBM Cloud Object Storage-Plug-in installieren
 {: #install_cos}
@@ -147,13 +150,13 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 Installieren Sie das {{site.data.keyword.cos_full_notm}}-Plug-in mit einem Helm-Diagramm, um vordefinierte Speicherklassen für {{site.data.keyword.cos_full_notm}} einzurichten. Mit diesen Speicherklassen können Sie einen PVC zum Bereitstellen von {{site.data.keyword.cos_full_notm}} für Ihre Apps erstellen.
 {: shortdesc}
 
-Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen des {{site.data.keyword.cos_full_notm}}-Plug-ins? Weitere Informationen hierzu finden Sie in den Abschnitten [Plug-in aktualisieren](#update_cos_plugin) und [Plug-in entfernen](#remove_cos_plugin). 
+Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen des {{site.data.keyword.cos_full_notm}}-Plug-ins? Weitere Informationen hierzu finden Sie in den Abschnitten [Plug-in aktualisieren](#update_cos_plugin) und [Plug-in entfernen](#remove_cos_plugin).
 {: tip}
 
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
 1. Stellen Sie sicher, dass auf dem Workerknoten das neueste Patch für die Nebenversion angewendet wird. 
-   1. Listen Sie die aktuelle Patchversion der Workerknoten auf.
+   1. Listen Sie die aktuelle Patchversion der Workerknoten auf. 
       ```
       ibmcloud ks workers --cluster <clustername_oder_-id>
       ```
@@ -163,7 +166,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.9.10_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.10.11_1523* 
       ```
       {: screen}
       
@@ -171,50 +174,51 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
       
    2. Überprüfen Sie das [Versionsänderungsprotokoll](cs_versions_changelog.html#changelog) und suchen Sie nach Änderungen, die in der neuesten Patchversion enthalten sind. 
    
-   3. Wenden Sie die neueste Patchversion durch erneutes Laden des Workerknotens an. Gehen Sie gemäß den Anweisungen für den Befehl [ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) vor, um sorgfältig alle aktiven Pods auf dem Workerknoten erneut zu planen, bevor der Workerknoten erneut geladen wird.
+   3. Wenden Sie die neueste Patchversion durch erneutes Laden des Workerknotens an. Gehen Sie gemäß den Anweisungen für den Befehl [ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) vor, um sorgfältig alle aktiven Pods auf dem Workerknoten erneut zu planen, bevor der Workerknoten erneut geladen wird. Beachten Sie, dass Ihre Workerknotenmaschine während eines Neuladens mit dem neuen Image aktualisiert wird und dass dabei Daten gelöscht werden, die nicht [außerhalb des Workerknotens gespeichert sind](cs_storage_planning.html#persistent_storage_overview). 
 
 2. Führen Sie die [Anweisungen](cs_integrations.html#helm) aus, um den Helm-Client auf Ihrer lokalen Maschine zu installieren, installieren Sie den Helm-Server (tiller) in Ihrem Cluster und fügen Sie das {{site.data.keyword.Bluemix_notm}}-Repository für das Helm-Diagramm dem Cluster hinzu, in dem Sie das {{site.data.keyword.cos_full_notm}}-Plug-in verwenden wollen.
 
-    **Wichtig:** Wenn Sie Helm Version 2.9 oder höher verwenden, stellen Sie sicher, dass Sie Tiller mit einem [Servicekonto](cs_integrations.html#helm) installiert haben. 
-    
-3. Fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Repository zu Ihrem Cluster hinzu. 
+    Wenn Sie Helm Version 2.9 oder höher verwenden, stellen Sie sicher, dass Sie Tiller mit einem [Servicekonto](cs_integrations.html#helm) installiert haben.
+{: important}
+
+3. Fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Repository zu Ihrem Cluster hinzu.
    ```
    helm repo add ibm  https://registry.bluemix.net/helm/ibm
    ```
    {: pre}
-   
+
 4. Aktualisieren Sie das Helm-Repository, um die aktuelle Version aller Helm-Diagramme in diesem Repository abzurufen.
    ```
    helm repo update
    ```
    {: pre}
-   
-5. Laden Sie die Helm-Diagramme herunter und entpacken Sie die Diagramme im aktuellen Verzeichnis. 
+
+5. Laden Sie die Helm-Diagramme herunter und entpacken Sie die Diagramme im aktuellen Verzeichnis.
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
    {: pre}
 
-6. Wenn Sie eine Mac OS- oder Linux-Distribution verwenden, installieren Sie das {{site.data.keyword.cos_full_notm}}-Helm-Plug-in `ibmc`. Das Plug-in wird verwendet, um automatisch Ihre Clusterposition abzurufen und den API-Endpunkt für Ihre {{site.data.keyword.cos_full_notm}}-Buckets in Ihren Speicherklassen festzulegen. Wenn Sie Windows als Betriebssystem verwenden, fahren Sie mit dem nächsten Schritt fort. 
-   1. Installieren Sie das Helm-Plug-in. 
+6. Wenn Sie eine Mac OS- oder Linux-Distribution verwenden, installieren Sie das {{site.data.keyword.cos_full_notm}}-Helm-Plug-in `ibmc`. Das Plug-in wird verwendet, um automatisch Ihre Clusterposition abzurufen und den API-Endpunkt für Ihre {{site.data.keyword.cos_full_notm}}-Buckets in Ihren Speicherklassen festzulegen. Wenn Sie Windows als Betriebssystem verwenden, fahren Sie mit dem nächsten Schritt fort.
+   1. Installieren Sie das Helm-Plug-in.
       ```
       helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
       ```
       {: pre}
-      
-      Beispielausgabe: 
+
+      Beispielausgabe:
       ```
       Installed plugin: ibmc
       ```
       {: screen}
-    
-   2. Stellen Sie sicher, dass das Plug-in `ibmc` erfolgreich installiert wird. 
+
+   2. Stellen Sie sicher, dass das Plug-in `ibmc` erfolgreich installiert wird.
       ```
       helm ibmc --help
       ```
       {: pre}
-   
-      Beispielausgabe: 
+
+      Beispielausgabe:
       ```
       Install or upgrade Helm charts in IBM K8S Service
 
@@ -232,18 +236,18 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
     helm ibmc install ibm/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
       ```
       {: screen}
-   
-7. Optional: Begrenzen Sie den Zugriff des {{site.data.keyword.cos_full_notm}}-Plug-ins auf geheime Kubernetes-Schlüssel, die Ihre {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise enthalten Standardmäßig ist das Plug-in berechtigt, auf alle geheimen Kubernetes-Schlüssel in Ihrem Cluster zuzugreifen. 
-   1. [Erstellen Sie Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz](#create_cos_service). 
+
+7. Optional: Begrenzen Sie den Zugriff des {{site.data.keyword.cos_full_notm}}-Plug-ins auf geheime Kubernetes-Schlüssel, die Ihre {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise enthalten Standardmäßig ist das Plug-in berechtigt, auf alle geheimen Kubernetes-Schlüssel in Ihrem Cluster zuzugreifen.
+   1. [Erstellen Sie Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz](#create_cos_service).
    2. [Speichern Sie Ihre {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise in einem geheimen Kubernetes-Schlüssel](#create_cos_secret).
    3. Navigieren Sie zum Verzeichnis `templates` und listen Sie die verfügbaren Dateien auf.  
       ```
       cd ibmcloud-object-storage-plugin/templates && ls
       ```
       {: pre}
-   
-   4. Öffnen Sie die Datei `provisioner-sa.yaml` und suchen Sie nach der Clusterrollendefinition `ibmcloud-object-storage-secret-reader`. 
-   6. Fügen Sie den Namen des zuvor erstellten geheimen Schlüssels zur Liste der geheimen Schlüssel hinzu, auf die das Plug-in zugreifen kann (im Abschnitt `resourceNames`). 
+
+   4. Öffnen Sie die Datei `provisioner-sa.yaml` und suchen Sie nach der Clusterrollendefinition `ibmcloud-object-storage-secret-reader`.
+   6. Fügen Sie den Namen des zuvor erstellten geheimen Schlüssels zur Liste der geheimen Schlüssel hinzu, auf die das Plug-in zugreifen kann (im Abschnitt `resourceNames`).
       ```
       kind: ClusterRole
       apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -256,9 +260,9 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
         verbs: ["get"]
       ```
       {: codeblock}
-   7. Speichern Sie Ihre Änderungen. 
-   
-8. Installieren Sie das {{site.data.keyword.cos_full_notm}}-Plug-in. Wenn Sie das Plug-in installieren, werden vordefinierte Speicherklassen zu Ihrem Cluster hinzugefügt. 
+   7. Speichern Sie Ihre Änderungen.
+
+8. Installieren Sie das {{site.data.keyword.cos_full_notm}}-Plug-in. Wenn Sie das Plug-in installieren, werden vordefinierte Speicherklassen zu Ihrem Cluster hinzugefügt.
 
    - **Für Mac OS und Linux:**
      - Falls Sie den vorherigen Schritt übersprungen haben, führen Sie die Installation ohne Einschränkung für bestimmte geheime Kubernetes-Schlüssel durch.
@@ -266,13 +270,13 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
        helm ibmc install ibm/ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
-       
+
      - Falls Sie den vorherigen Schritt ausgeführt haben, führen Sie die Installation mit einer Einschränkung für bestimmte geheime Kubernetes-Schlüssel durch.
        ```
        helm ibmc install ./ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
-     
+
    - **Bei Windows:
     **
      1. Rufen Sie die Zone ab, in der der Cluster bereitgestellt wird, und speichern Sie die Zone in einer Umgebungsvariablen.
@@ -280,27 +284,27 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
         export DC_NAME=$(kubectl get cm cluster-info -n kube-system -o jsonpath='{.data.cluster-config\.json}' | grep datacenter | awk -F ': ' '{print $2}' | sed 's/\"//g' |sed 's/,//g')
         ```
         {: pre}
-        
+
      2. Stellen Sie sicher, dass die Umgebungsvariable festgelegt ist.
         ```
         printenv
         ```
         {: pre}
-        
-     3. Installieren Sie das Helm-Diagramm. 
+
+     3. Installieren Sie das Helm-Diagramm.
         - Falls Sie den vorherigen Schritt übersprungen haben, führen Sie die Installation ohne Einschränkung für bestimmte geheime Kubernetes-Schlüssel durch.
           ```
           helm install ibm/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
           ```
           {: pre}
-          
+
         - Falls Sie den vorherigen Schritt ausgeführt haben, führen Sie die Installation mit einer Einschränkung für bestimmte geheime Kubernetes-Schlüssel durch.
           ```
           helm install ./ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
           ```
           {: pre}
-         
-   Beispielausgabe: 
+
+   Beispielausgabe:
    ```
    Installing the Helm chart
    DC: dal10  Chart: ibm/ibmcloud-object-storage-plugin
@@ -362,28 +366,28 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
    Please refer Chart RELEASE.md to see the release details/fixes.
    ```
    {: screen}
-   
-8. Stellen Sie sicher, dass das Plug-in ordnungsgemäß installiert wurde. 
+
+8. Stellen Sie sicher, dass das Plug-in ordnungsgemäß installiert wurde.
    ```
    kubectl get pod -n kube-system -o wide | grep object
    ```
    {: pre}
-   
-   Beispielausgabe: 
+
+   Beispielausgabe:
    ```
    ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
    ibmcloud-object-storage-plugin-7c774d484b-pcnnx                   1/1       Running   0          2m
    ```
    {: screen}
-      
-   Die Installation ist erfolgreich, wenn ein Pod des Typs `ibmcloud-object-storage-plugin` und ein oder mehrere Pods des Typs `ibmcloud-object-storage-driver` angezeigt werden. Die Anzahl der Pods des Typs `ibmcloud-object-storage-driver` entspricht der Anzahl der Workerknoten in Ihrem Cluster. Alle Pods müssen den Status `Aktiv` aufweisen, damit das Plug-in ordnungsgemäß ausgeführt werden kann. Wenn die Pods fehlschlagen, führen Sie `kubectl describe pod -n kube-system <pod_name>` aus, um die eigentliche Ursache des Fehlers zu finden. 
-   
-9. Stellen Sie sicher, dass die Speicherklassen erfolgreich erstellt werden. 
+
+   Die Installation ist erfolgreich, wenn ein Pod des Typs `ibmcloud-object-storage-plugin` und ein oder mehrere Pods des Typs `ibmcloud-object-storage-driver` angezeigt werden. Die Anzahl der Pods des Typs `ibmcloud-object-storage-driver` entspricht der Anzahl der Workerknoten in Ihrem Cluster. Alle Pods müssen den Status `Aktiv` aufweisen, damit das Plug-in ordnungsgemäß ausgeführt werden kann. Wenn die Pods fehlschlagen, führen Sie `kubectl describe pod -n kube-system <pod_name>` aus, um die eigentliche Ursache des Fehlers zu finden.
+
+9. Stellen Sie sicher, dass die Speicherklassen erfolgreich erstellt werden.
    ```
    kubectl get storageclass | grep s3
    ```
    {: pre}
-      
+
    Beispielausgabe:
    ```
    ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
@@ -402,7 +406,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
    {: screen}
 
 10. Wiederholen Sie die Schritte für alle Cluster, bei denen Sie auf {{site.data.keyword.cos_full_notm}}-Buckets zugreifen möchten.
-      
+
 ### IBM Cloud Object Storage-Plug-in aktualisieren
 {: #update_cos_plugin}
 
@@ -419,19 +423,19 @@ Sie können ein Upgrade des vorhandenen {{site.data.keyword.cos_full_notm}}-Plug
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
-   
+
 3. Suchen Sie den Installationsnamen Ihres Helm-Diagramms.
    ```
    helm ls | grep ibmcloud-object-storage-plugin
    ```
    {: pre}
-   
-   Beispielausgabe: 
+
+   Beispielausgabe:
    ```
    <name_des_helm-diagramms> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
    ```
    {: screen}
-   
+
 4. Führen Sie ein Upgrade des {{site.data.keyword.cos_full_notm}}-Plug-ins auf die aktuelle Version durch.
    ```   
    helm ibmc upgrade <name_des_helm-diagramms> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
@@ -443,35 +447,36 @@ Sie können ein Upgrade des vorhandenen {{site.data.keyword.cos_full_notm}}-Plug
    kubectl rollout status deployment/ibmcloud-object-storage-plugin -n kube-system
    ```
    {: pre}
-   
-   Das Upgrade des Plug-ins wurde erfolgreich ausgeführt, wenn die Nachricht `deployment "ibmcloud-object-storage-plugin" successfully rolled out` in der CLI-Ausgabe angezeigt wird. 
-   
-6. Stellen Sie sicher, dass das Upgrade für `ibmcloud-object-storage-driver` erfolgreich durchgeführt wird. 
+
+   Das Upgrade des Plug-ins wurde erfolgreich ausgeführt, wenn die Nachricht `deployment "ibmcloud-object-storage-plugin" successfully rolled out` in der CLI-Ausgabe angezeigt wird.
+
+6. Stellen Sie sicher, dass das Upgrade für `ibmcloud-object-storage-driver` erfolgreich durchgeführt wird.
    ```
    kubectl rollout status ds/ibmcloud-object-storage-driver -n kube-system
    ```
    {: pre}
-   
-   Das Upgrade wurde erfolgreich ausgeführt, wenn die Nachricht `daemon set "ibmcloud-object-storage-driver" successfully rolled out` in der CLI-Ausgabe angezeigt wird. 
-   
-7. Stellen Sie sicher, dass sich die {{site.data.keyword.cos_full_notm}}-Pods im Status `Aktiv` befinden. 
+
+   Das Upgrade wurde erfolgreich ausgeführt, wenn die Nachricht `daemon set "ibmcloud-object-storage-driver" successfully rolled out` in der CLI-Ausgabe angezeigt wird.
+
+7. Stellen Sie sicher, dass sich die {{site.data.keyword.cos_full_notm}}-Pods im Status `Aktiv` befinden.
    ```
    kubectl get pods -n kube-system -o wide | grep object-storage
    ```
    {: pre}
-   
-  
+
+
 ### IBM Cloud Object Storage-Plug-in entfernen
 {: #remove_cos_plugin}
 
 Wenn Sie in Ihrem Cluster {{site.data.keyword.cos_full_notm}} nicht einrichten und verwenden möchten, können Sie die Helm-Diagramme deinstallieren.
 
-**Hinweis:** Durch das Entfernen des Plug-ins werden keine vorhandenen PVCs, PVs oder Daten entfernt. Wenn Sie das Plug-in entfernen, werden alle zugehörigen Pods und Dämongruppen aus Ihrem Cluster entfernt. Nachdem Sie das Plug-in entfernt haben, können Sie keinen neuen {{site.data.keyword.cos_full_notm}} für Ihren Cluster einrichten oder vorhandene PVCs und PVs verwenden, es sei denn, Sie konfigurieren Ihre App so, dass sie die {{site.data.keyword.cos_full_notm}}-API direkt verwendet. 
+Durch das Entfernen des Plug-ins werden keine vorhandenen PVCs, PVs oder Daten entfernt. Wenn Sie das Plug-in entfernen, werden alle zugehörigen Pods und Dämongruppen aus Ihrem Cluster entfernt. Nachdem Sie das Plug-in entfernt haben, können Sie keinen neuen {{site.data.keyword.cos_full_notm}} für Ihren Cluster einrichten oder vorhandene PVCs und PVs verwenden, es sei denn, Sie konfigurieren Ihre App so, dass sie die {{site.data.keyword.cos_full_notm}}-API direkt verwendet.
+{: important}
 
 Vorbereitende Schritte:
 
 - [Geben Sie als Ziel Ihrer CLI den Cluster an](cs_cli_install.html#cs_cli_configure).
-- Stellen Sie sicher, dass in Ihrem Cluster keine PVCs oder persistenten Datenträger vorhanden sind, die {{site.data.keyword.cos_full_notm}} verwenden. Um alle Pods aufzulisten, die einen bestimmten PVC anhängen, führen Sie folgenden Befehl aus: `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`. 
+- Stellen Sie sicher, dass in Ihrem Cluster keine PVCs oder persistenten Datenträger vorhanden sind, die {{site.data.keyword.cos_full_notm}} verwenden. Um alle Pods aufzulisten, die einen bestimmten PVC anhängen, führen Sie folgenden Befehl aus: `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`.
 
 Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
 
@@ -480,25 +485,25 @@ Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
    helm ls | grep ibmcloud-object-storage-plugin
    ```
    {: pre}
-   
+
    Beispielausgabe:
    ```
    <name_des_helm-diagramms> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
    ```
    {: screen}
-   
+
 2. Löschen Sie das {{site.data.keyword.cos_full_notm}}-Plug-in, indem Sie das Helm-Diagramm entfernen.
    ```
    helm delete --purge <name_des_helm-diagramms>
    ```
    {: pre}
-   
+
 3. Stellen Sie sicher, dass die {{site.data.keyword.cos_full_notm}}-Pods entfernt werden.
    ```
    kubectl get pod -n kube-system | grep object-storage
    ```
    {: pre}
-   
+
    Das Entfernen der Pods war erfolgreich, wenn in Ihrer CLI-Ausgabe keine Pods angezeigt werden.
 
 4. Stellen Sie sicher, dass die Speicherklassen entfernt werden.
@@ -506,31 +511,31 @@ Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
    kubectl get storageclasses | grep s3
    ```
    {: pre}
-   
+
    Das Entfernen der Speicherklassen war erfolgreich, wenn in Ihrer CLI-Ausgabe keine Speicherklassen angezeigt werden.
-   
-5. Wenn Sie Mac OS oder eine Linux-Distribution verwenden, entfernen Sie das Helm-Plug-in `ibmc`. Wenn Sie Windows verwenden, ist dieser Schritt nicht erforderlich. 
+
+5. Wenn Sie Mac OS oder eine Linux-Distribution verwenden, entfernen Sie das Helm-Plug-in `ibmc`. Wenn Sie Windows verwenden, ist dieser Schritt nicht erforderlich.
    1. Entfernen Sie das Plug-in `ibmc`.
       ```
       rm -rf ~/.helm/plugins/helm-ibmc
       ```
       {: pre}
-   
-   2. Stellen Sie sicher, dass das Plug-in `ibmc` entfernt wurde. 
+
+   2. Stellen Sie sicher, dass das Plug-in `ibmc` entfernt wurde.
       ```
       helm plugin list
       ```
       {: pre}
-   
-      Beispielausgabe: 
+
+      Beispielausgabe:
      ```
      NAME	VERSION	DESCRIPTION
      ```
      {: screen}
-   
-     Das Entfernen des Plug-ins `ibmc` war erfolgreich, wenn das Plug-in `ibmc` nicht in der CLI-Ausgabe aufgeführt ist. 
 
-   
+     Das Entfernen des Plug-ins `ibmc` war erfolgreich, wenn das Plug-in `ibmc` nicht in der CLI-Ausgabe aufgeführt ist.
+
+
 ## Entscheidung über Objektspeicherkonfiguration treffen
 {: #configure_cos}
 
@@ -541,8 +546,8 @@ Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
    kubectl get storageclasses | grep s3
    ```
    {: pre}
-   
-   Beispielausgabe: 
+
+   Beispielausgabe:
    ```
    ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
    ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
@@ -558,24 +563,24 @@ Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
    ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
    ```
    {: screen}
-   
-2. Wählen Sie eine Speicherklasse aus, die Ihren Datenzugriffsanforderungen entspricht. Die Speicherklasse bestimmt die [Preise ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") ](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) für die Speicherkapazität, die Lese- und Schreiboperationen und die Ausgangsbandbreite für ein Bucket. Welche Option für Ihr Szenario am besten geeignet ist, hängt davon ab, wie häufig Daten gelesen und in Ihre Serviceinstanz geschrieben werden. 
-   - **Standard**: Diese Option wird für Daten verwendet, auf die häufig zugegriffen wird ('Hot Data'). Gängige Anwendungsfälle sind Web-Apps oder Mobile Apps. 
-   - **Vault**: Diese Option wird für Workloads oder Daten verwendet, auf die selten zugegriffen wird - z. B. einmal im Monat oder weniger ('Cool Data'). Gängige Anwendungsfälle sind Archive, kurzfristige Datenaufbewahrung, Aufbewahrung digitaler Assets, Bandwechsel oder Disaster-Recovery. 
-   - **Cold**: Diese Option wird für Daten verwendet, auf die selten (alle 90 Tage oder weniger) zugegriffen wird, oder auf inaktive Daten ('Cold Data'). Gängige Anwendungsfälle sind Archive, langfristige Sicherung, Langzeitdaten, die Sie für Compliance-Zwecke aufbewahren, oder Workloads und Apps, auf die selten zugegriffen wird. 
+
+2. Wählen Sie eine Speicherklasse aus, die Ihren Datenzugriffsanforderungen entspricht. Die Speicherklasse bestimmt die [Preise ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") ](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) für die Speicherkapazität, die Lese- und Schreiboperationen und die Ausgangsbandbreite für ein Bucket. Welche Option für Ihr Szenario am besten geeignet ist, hängt davon ab, wie häufig Daten gelesen und in Ihre Serviceinstanz geschrieben werden.
+   - **Standard**: Diese Option wird für Daten verwendet, auf die häufig zugegriffen wird ('Hot Data'). Gängige Anwendungsfälle sind Web-Apps oder Mobile Apps.
+   - **Vault**: Diese Option wird für Workloads oder Daten verwendet, auf die selten zugegriffen wird - z. B. einmal im Monat oder weniger ('Cool Data'). Gängige Anwendungsfälle sind Archive, kurzfristige Datenaufbewahrung, Aufbewahrung digitaler Assets, Bandwechsel oder Disaster-Recovery.
+   - **Cold**: Diese Option wird für Daten verwendet, auf die selten (alle 90 Tage oder weniger) zugegriffen wird, oder auf inaktive Daten ('Cold Data'). Gängige Anwendungsfälle sind Archive, langfristige Sicherung, Langzeitdaten, die Sie für Compliance-Zwecke aufbewahren, oder Workloads und Apps, auf die selten zugegriffen wird.
    - **Flex**: Diese Option wird für Workloads und Daten verwendet, die keinem bestimmten Verwendungsmuster folgen, oder die zu groß sind, um ein Verwendungsmuster zu bestimmen oder vorherzusagen. **Tipp:** Sehen Sie sich diesen [Blog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/blogs/bluemix/2017/03/interconnect-2017-changing-rules-storage/) an, um mehr darüber zu erfahren, wie die Flex-Speicherklasse im Vergleich zu konventionellen Speicherschichten (Storage Tiers) funktioniert.   
-   
-3. Entscheiden Sie über die Ausfallsicherheit für die Daten, die in Ihrem Bucket gespeichert sind. 
+
+3. Entscheiden Sie über die Ausfallsicherheit für die Daten, die in Ihrem Bucket gespeichert sind.
    - **Cross-region**: Bei dieser Option werden Ihre Daten für höchste Verfügbarkeit über drei Regionen in einem geografischen Gebiet gespeichert. Wenn Sie über Workloads verfügen, die über Regionen verteilt sind, werden Anforderungen an den nächsten regionalen Endpunkt weitergeleitet. Der API-Endpunkt für das geografische Gebiet wird automatisch durch das Helm-Plug-in `ibmc` festgelegt, das Sie zuvor basierend auf dem Standort installiert haben, an dem sich Ihr Cluster befindet. Wenn sich Ihr Cluster beispielsweise in der Region `Vereinigte Staaten (Süden)` befindet, werden Ihre Speicherklassen zur Verwendung des API-Endpunkt `US GEO` für Ihre Buckets konfiguriert. Weitere Informationen finden Sie unter [Regionen und Endpunkte](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints).  
    - **Regional**: Mit dieser Option werden Ihre Daten über mehrere Zonen innerhalb einer Region repliziert. Wenn Sie Workloads haben, die sich in derselben Region befinden, stellen Sie eine geringere Latenz und eine bessere Leistung als bei einer regionsübergreifenden Konfiguration fest. Der regionale Endpunkt wird automatisch durch das Helm-Plug-in `ibm` festgelegt, das Sie zuvor basierend auf dem Standort installiert haben, an dem sich Ihr Cluster befindet. Wenn sich Ihr Cluster beispielsweise in der Region `Vereinigte Staaten (Süden)` befindet, wurden Ihre Speicherklassen zur Verwendung des API-Endpunkt `US South` für Ihre Buckets konfiguriert. Weitere Informationen finden Sie unter [Regionen und Endpunkte](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints).
-   
-4. Überprüfen Sie für die Speicherklasse die detaillierte {{site.data.keyword.cos_full_notm}}-Bucketkonfiguration. 
+
+4. Überprüfen Sie für die Speicherklasse die detaillierte {{site.data.keyword.cos_full_notm}}-Bucketkonfiguration.
    ```
    kubectl describe storageclass <name_der_speicherklasse>
    ```
    {: pre}
-   
-   Beispielausgabe: 
+
+   Beispielausgabe:
    ```
    Name:                  ibmc-s3fs-standard-cross-region
    IsDefaultClass:        No
@@ -589,7 +594,7 @@ Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
    Events:                <none>
    ```
    {: screen}
-   
+
    <table>
    <caption>Erklärung der Speicherklassendetails</caption>
    <thead>
@@ -610,7 +615,7 @@ Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
    </tr>
    <tr>
    <td><code>ibm.io/iam-endpoint</code></td>
-   <td>Der API-Endpunkt für Identity and Access Management (IAM). </td>
+   <td>Der API-Endpunkt für {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). </td>
    </tr>
    <tr>
    <td><code>ibm.io/kernel-cache</code></td>
@@ -622,7 +627,7 @@ Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
    </tr>
    <tr>
    <td><code>ibm.io/object-store-endpoint</code></td>
-   <td>Der API-Endpunkt, der für den Zugriff auf das Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz verwendet werden soll. Der Endpunkt wird automatisch auf der Basis der Region des Clusters festgelegt. </br></br><strong>Hinweis:</strong> Wenn Sie auf ein vorhandenes Bucket zugreifen möchten, das sich in einer anderen als der Region befindet, in der Ihr Cluster enthalten ist, müssen Sie eine [angepasste Speicherklasse](cs_storage_basics.html#customized_storageclass) erstellen und den API-Endpunkt für Ihr Bucket verwenden. </td>
+   <td>Der API-Endpunkt, der für den Zugriff auf das Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz verwendet werden soll. Der Endpunkt wird automatisch auf der Basis der Region des Clusters festgelegt. **Hinweis**: Wenn Sie auf ein vorhandenes Bucket zugreifen möchten, das sich in einer anderen als der Region befindet, in der Ihr Cluster enthalten ist, müssen Sie eine [angepasste Speicherklasse](cs_storage_basics.html#customized_storageclass) erstellen und den API-Endpunkt für Ihr Bucket verwenden. </td>
    </tr>
    <tr>
    <td><code>ibm.io/object-store-storage-class</code></td>
@@ -646,34 +651,35 @@ Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
    </tr>
    </tbody>
    </table>
-   
-   Weitere Informationen zu den einzelnen Speicherklassen finden Sie in der [Speicherklassenreferenz](#storageclass_reference). Wenn Sie einen der voreingestellten Werte ändern wollen, müssen Sie Ihre eigene [angepasste Speicherklasse](cs_storage_basics.html#customized_storageclass) erstellen. 
-   {: tip}
-   
-5. Entscheiden Sie sich für einen Namen für Ihr Bucket. Der Name eines Buckets muss in {{site.data.keyword.cos_full_notm}} eindeutig sein. Sie können auch angeben, dass ein Name für Ihr Bucket automatisch mithilfe des {{site.data.keyword.cos_full_notm}}-Plug-ins erstellt werden soll. Um Daten in einem Bucket zu organisieren, können Sie Unterverzeichnisse erstellen. 
 
-   **Hinweis:** Die Speicherklasse, die Sie zuvor ausgewählt haben, bestimmt die Preisgestaltung für das gesamte Bucket. Sie können für Unterverzeichnisse keine unterschiedlichen Speicherklassen definieren. Wenn Sie Daten mit unterschiedlichen Zugriffsanforderungen speichern möchten, sollten Sie das Erstellen mehrerer Buckets mithilfe mehrerer PVCs in Betracht ziehen. 
-   
+   Weitere Informationen zu den einzelnen Speicherklassen finden Sie in der [Speicherklassenreferenz](#storageclass_reference). Wenn Sie einen der voreingestellten Werte ändern wollen, müssen Sie Ihre eigene [angepasste Speicherklasse](cs_storage_basics.html#customized_storageclass) erstellen.
+   {: tip}
+
+5. Entscheiden Sie sich für einen Namen für Ihr Bucket. Der Name eines Buckets muss in {{site.data.keyword.cos_full_notm}} eindeutig sein. Sie können auch angeben, dass ein Name für Ihr Bucket automatisch mithilfe des {{site.data.keyword.cos_full_notm}}-Plug-ins erstellt werden soll. Um Daten in einem Bucket zu organisieren, können Sie Unterverzeichnisse erstellen.
+
+   Die Speicherklasse, die Sie zuvor ausgewählt haben, bestimmt die Preisgestaltung für das gesamte Bucket. Sie können für Unterverzeichnisse keine unterschiedlichen Speicherklassen definieren. Wenn Sie Daten mit unterschiedlichen Zugriffsanforderungen speichern möchten, sollten Sie das Erstellen mehrerer Buckets mithilfe mehrerer PVCs in Betracht ziehen.
+   {: note}
+
 6. Wählen Sie diese Option aus, wenn die Daten und das Bucket nach dem Löschen des Clusters oder des Persistent Volume Claim (PVC) beibehalten werden sollen. Wenn Sie den PVC löschen, wird der PV immer gelöscht. Sie können angeben, ob die Daten und das Bucket automatisch gelöscht werden sollen, wenn Sie den PVC löschen. Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz ist unabhängig von der Aufbewahrungsrichtlinie, die Sie für Ihre Daten ausgewählt haben, und wird nie entfernt, wenn Sie einen PVC löschen.
 
-Nachdem Sie sich nun für die gewünschte Konfiguration entschieden haben, können Sie [einen PVC erstellen](#add_cos), um {{site.data.keyword.cos_full_notm}} einzurichten. 
+Nachdem Sie sich nun für die gewünschte Konfiguration entschieden haben, können Sie [einen PVC erstellen](#add_cos), um {{site.data.keyword.cos_full_notm}} einzurichten.
 
 ## Objektspeicher zu Apps hinzufügen
 {: #add_cos}
 
-Sie können einen Persistent Volume Claim (PVC) erstellen, um {{site.data.keyword.cos_full_notm}} für Ihren Cluster einzurichten. 
+Sie können einen Persistent Volume Claim (PVC) erstellen, um {{site.data.keyword.cos_full_notm}} für Ihren Cluster einzurichten.
 {: shortdesc}
 
-Abhängig von den Einstellungen, die Sie im PVC auswählen, können Sie {{site.data.keyword.cos_full_notm}} auf folgende Weise einrichten: 
-- [Dynamische Einrichtung](cs_storage_basics.html#dynamic_provisioning): Wenn Sie den PVC erstellen, wird der entsprechende persistente Datenträger (Persistent Volume, PV) und das Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz automatisch erstellt. 
+Abhängig von den Einstellungen, die Sie im PVC auswählen, können Sie {{site.data.keyword.cos_full_notm}} auf folgende Weise einrichten:
+- [Dynamische Einrichtung](cs_storage_basics.html#dynamic_provisioning): Wenn Sie den PVC erstellen, wird der entsprechende persistente Datenträger (Persistent Volume, PV) und das Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz automatisch erstellt.
 - [Statische Einrichtung](cs_storage_basics.html#static_provisioning): Sie können auf ein vorhandenes Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz in Ihrem PVC verweisen. Wenn Sie den PVC erstellen, wird nur der übereinstimmende PV automatisch erstellt und mit vorhandenen Bucket in {{site.data.keyword.cos_full_notm}} verknüpft.
 
-Vorbereitende Schritte: 
+Vorbereitende Schritte:
 - [Erstellen Sie Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz und bereiten Sie sie vor](#create_cos_service).
 - [Erstellen Sie einen geheimen Schlüssel, um Ihre {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise](#create_cos_secret) zu speichern.
 - [Entscheiden Sie über die Konfiguration Ihres {{site.data.keyword.cos_full_notm}}](#configure_cos).
 
-Gehen Sie wie folgt vor, um {{site.data.keyword.cos_full_notm}} zu Ihrem Cluster hinzuzufügen: 
+Gehen Sie wie folgt vor, um {{site.data.keyword.cos_full_notm}} zu Ihrem Cluster hinzuzufügen:
 
 1. Erstellen Sie eine Konfigurationsdatei, um Ihren Persistent Volume Claim (PVC) zu definieren.
    ```
@@ -697,7 +703,7 @@ Gehen Sie wie folgt vor, um {{site.data.keyword.cos_full_notm}} zu Ihrem Cluster
          storage: 8Gi # Enter a fictitious value
    ```
    {: codeblock}
-   
+
    <table>
    <caption>Erklärung der Komponenten der YAML-Datei</caption>
    <thead>
@@ -714,7 +720,7 @@ Gehen Sie wie folgt vor, um {{site.data.keyword.cos_full_notm}} zu Ihrem Cluster
    </tr>
    <tr>
    <td><code>volume.beta.kubernetes.io/storage-class</code></td>
-   <td>Wählen Sie eine der beiden folgenden Optionen aus: <ul><li>Wenn <code>ibm.io/auto-create-bucket</code> auf <strong>true</strong> gesetzt ist, geben Sie die Speicherklasse ein, die Sie für das neue Bucket verwenden möchten. </li><li>Wenn <code>ibm.io/auto-create-bucket</code> auf <strong>false</strong> gesetzt ist, geben Sie die Speicherklasse ein, die Sie zum Erstellen des vorhandenen Buckets verwendet haben. </br></br>Wenn Sie das Bucket manuell in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz erstellt haben oder wenn Sie sich nicht an die von Ihnen verwendete Speicherklasse erinnern können, suchen Sie die Serviceinstanz im {{site.data.keyword.Bluemix}}-Dashboard und prüfen Sie die <strong>Klasse</strong> und den <strong>Standort</strong> Ihres vorhandenen Buckets. Verwenden Sie anschließend die entsprechende [Speicherklasse](#storageclass_reference). </br></br><strong>Hinweis:</strong> Der {{site.data.keyword.cos_full_notm}}-API-Endpunkt, der in Ihrer Speicherklasse definiert ist, basiert auf der Region, in der sich Ihr Cluster befindet. Wenn Sie auf ein Bucket zugreifen möchten, das sich in einer anderen als der Region befindet, in der Ihr Cluster enthalten ist, müssen Sie eine [angepasste Speicherklasse](cs_storage_basics.html#customized_storageclass) erstellen und den entsprechenden API-Endpunkt für Ihr Bucket verwenden. </li></ul>  </td>
+   <td>Wählen Sie eine der beiden folgenden Optionen aus: <ul><li>Wenn <code>ibm.io/auto-create-bucket</code> auf <strong>true</strong> gesetzt ist, geben Sie die Speicherklasse ein, die Sie für das neue Bucket verwenden möchten. </li><li>Wenn <code>ibm.io/auto-create-bucket</code> auf <strong>false</strong> gesetzt ist, geben Sie die Speicherklasse ein, die Sie zum Erstellen des vorhandenen Buckets verwendet haben. </br></br>Wenn Sie das Bucket manuell in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz erstellt haben oder wenn Sie sich nicht an die von Ihnen verwendete Speicherklasse erinnern können, suchen Sie die Serviceinstanz im {{site.data.keyword.Bluemix}}-Dashboard und prüfen Sie die <strong>Klasse</strong> und den <strong>Standort</strong> Ihres vorhandenen Buckets. Verwenden Sie anschließend die entsprechende [Speicherklasse](#storageclass_reference). <p class="note">Der {{site.data.keyword.cos_full_notm}}-API-Endpunkt, der in Ihrer Speicherklasse definiert ist, basiert auf der Region, in der sich Ihr Cluster befindet. Wenn Sie auf ein Bucket zugreifen möchten, das sich in einer anderen als der Region befindet, in der Ihr Cluster enthalten ist, müssen Sie eine [angepasste Speicherklasse](cs_storage_basics.html#customized_storageclass) erstellen und den entsprechenden API-Endpunkt für Ihr Bucket verwenden.</p></li></ul>  </td>
    </tr>
    <tr>
    <td><code>ibm.io/auto-create-bucket</code></td>
@@ -722,7 +728,7 @@ Gehen Sie wie folgt vor, um {{site.data.keyword.cos_full_notm}} zu Ihrem Cluster
    </tr>
    <tr>
    <td><code>ibm.io/auto-delete-bucket</code></td>
-   <td>Wählen Sie eine der beiden folgenden Optionen aus: <ul><li><strong>true</strong>: Ihre Daten, das Bucket und der PV werden automatisch entfernt, wenn Sie den PVC löschen. Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz bleibt bestehen und wird nicht gelöscht. Wenn Sie diese Option auf <strong>true</strong> setzen, müssen Sie <code>ibm.io/auto-create-bucket: true</code> und <code>ibm.io/bucket: ""</code> festlegen, sodass Ihr Bucket automatisch mit einem Namen im Format <code>tmp-s3fs-xxxx</code> erstellt wird. </li><li><strong>false</strong>: Wenn Sie den PVC löschen, wird der PV automatisch gelöscht, aber Ihre Daten und das Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz bleiben erhalten. Um auf Ihre Daten zugreifen zu können, müssen Sie einen neuen PVC mit dem Namen des vorhandenen Buckets erstellen. </li></ul> 
+   <td>Wählen Sie eine der beiden folgenden Optionen aus: <ul><li><strong>true</strong>: Ihre Daten, das Bucket und der PV werden automatisch entfernt, wenn Sie den PVC löschen. Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz bleibt bestehen und wird nicht gelöscht. Wenn Sie diese Option auf <strong>true</strong> setzen, müssen Sie <code>ibm.io/auto-create-bucket: true</code> und <code>ibm.io/bucket: ""</code> festlegen, sodass Ihr Bucket automatisch mit einem Namen im Format <code>tmp-s3fs-xxxx</code> erstellt wird. </li><li><strong>false</strong>: Wenn Sie den PVC löschen, wird der PV automatisch gelöscht, aber Ihre Daten und das Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz bleiben erhalten. Um auf Ihre Daten zugreifen zu können, müssen Sie einen neuen PVC mit dem Namen des vorhandenen Buckets erstellen. </li></ul>
    <tr>
    <td><code>ibm.io/bucket</code></td>
    <td>Wählen Sie eine der beiden folgenden Optionen aus: <ul><li>Wenn <code>ibm.io/auto-create-bucket</code> auf <strong>true</strong> gesetzt ist: Geben Sie den Namen des Buckets ein, das Sie in {{site.data.keyword.cos_full_notm}} erstellen möchten. Wenn zusätzlich <code>ibm.io/auto-delete-bucket</code> auf <strong>true</strong> gesetzt wird, müssen Sie dieses Feld leer lassen, um dem Bucket automatisch einen Namen im Format <code>tmp-s3fs-xxxx</code> zuzuweisen. Der Name muss in {{site.data.keyword.cos_full_notm}} eindeutig sein. </li><li>Wenn <code>ibm.io/auto-create-bucket</code> auf <strong>false</strong> gesetzt wird: Geben Sie den Namen des vorhandenen Buckets ein, auf das Sie im Cluster zugreifen möchten. </li></ul> </td>
@@ -742,27 +748,27 @@ Gehen Sie wie folgt vor, um {{site.data.keyword.cos_full_notm}} zu Ihrem Cluster
    </tbody>
    </table>
 
-2. Erstellen Sie den PVC. 
+2. Erstellen Sie den PVC.
    ```
    kubectl apply -f filepath/pvc.yaml
    ```
    {: pre}
-   
-3. Überprüfen Sie, ob Ihr PVC erstellt und an den PV gebunden wurde. 
+
+3. Überprüfen Sie, ob Ihr PVC erstellt und an den PV gebunden wurde.
    ```
    kubectl get pvc
    ```
    {: pre}
-   
-   Beispielausgabe: 
+
+   Beispielausgabe:
    ```
    NAME                  STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS                     AGE
    s3fs-test-pvc         Bound     pvc-b38b30f9-1234-11e8-ad2b-t910456jbe12   8Gi        RWO            ibmc-s3fs-standard-cross-region  1h
    ```
    {: screen}
-   
-4. Optional: Wenn Sie als Benutzer ohne Rootberechtigung auf Ihre Daten zugreifen möchten oder Dateien zu einem vorhandenen {{site.data.keyword.cos_full_notm}}-Bucket direkt über die GUI oder die API hinzugefügt haben, stellen Sie sicher, dass den [Dateien die richtige Berechtigung zugewiesen wird](cs_troubleshoot_storage.html#cos_nonroot_access), sodass Ihre App die Dateien nach Bedarf erfolgreich lesen und aktualisieren kann. 
-   
+
+4. Optional: Wenn Sie als Benutzer ohne Rootberechtigung auf Ihre Daten zugreifen möchten oder Dateien zu einem vorhandenen {{site.data.keyword.cos_full_notm}}-Bucket direkt über die Konsole oder die API hinzugefügt haben, stellen Sie sicher, dass den [Dateien die richtige Berechtigung zugewiesen wird](cs_troubleshoot_storage.html#cos_nonroot_access), sodass Ihre App die Dateien nach Bedarf erfolgreich lesen und aktualisieren kann. 
+
 4.  {: #app_volume_mount}Erstellen Sie zum Anhängen des persistenten Datenträgers an Ihre Bereitstellung eine `.yaml`-Konfigurationsdatei und geben Sie den Persistent Volume Claim (PVC) an, der den PV (Persistent Volume) bindet.
 
     ```
@@ -871,42 +877,41 @@ Gehen Sie wie folgt vor, um {{site.data.keyword.cos_full_notm}} zu Ihrem Cluster
         ReadOnly: false
      ```
      {: screen}
-     
-7. Stellen Sie sicher, dass Sie Daten in Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz schreiben können. 
-   1. Melden Sie sich bei dem Pod an, der Ihren PV anhängt. 
+
+7. Stellen Sie sicher, dass Sie Daten in Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz schreiben können.
+   1. Melden Sie sich bei dem Pod an, der Ihren PV anhängt.
       ```
       kubectl exec <podname> -it bash
       ```
       {: pre}
-       
-   2. Navigieren Sie zu Ihrem Datenträgermountpfad, den Sie in Ihrer App-Bereitstellung definiert haben. 
-   3. Erstellen Sie eine Textdatei. 
+
+   2. Navigieren Sie zu Ihrem Datenträgermountpfad, den Sie in Ihrer App-Bereitstellung definiert haben.
+   3. Erstellen Sie eine Textdatei.
       ```
-      echo "Dies ist ein Test" > test.txt 
+      echo "Dies ist ein Test" > test.txt
       ```
       {: pre}
-       
-   4. Navigieren Sie vom {{site.data.keyword.Bluemix}}-Dashboard zu Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz. 
-   5. Wählen Sie **Buckets** im Menü aus. 
-   6. Öffnen Sie Ihr Bucket und stellen Sie sicher, dass die von Ihnen erstellte Datei `test.txt` angezeigt wird. 
-   
+
+   4. Navigieren Sie vom {{site.data.keyword.Bluemix}}-Dashboard zu Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz.
+   5. Wählen Sie **Buckets** im Menü aus.
+   6. Öffnen Sie Ihr Bucket und stellen Sie sicher, dass die von Ihnen erstellte Datei `test.txt` angezeigt wird.
+
 
 ## Objektspeicher in statusabhängiger Gruppe verwenden
 {: #cos_statefulset}
 
 Wenn Sie über eine statusabhängige App wie zum Beispiel eine Datenbank verfügen, können Sie statusabhängige Gruppen erstellen, von denen {{site.data.keyword.cos_full_notm}} zum Speichern der App-Daten verwendet wird. Alternativ können Sie eine {{site.data.keyword.Bluemix_notm}}-Database as a Service verwenden, zum Beispiel {{site.data.keyword.cloudant_short_notm}}, und die Daten in der Cloud speichern.
 
-
-Vorbereitende Schritte: 
+Vorbereitende Schritte:
 - [Erstellen Sie Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz und bereiten Sie sie vor](#create_cos_service).
 - [Erstellen Sie einen geheimen Schlüssel, um Ihre {{site.data.keyword.cos_full_notm}}-Serviceberechtigungsnachweise](#create_cos_secret) zu speichern.
 - [Entscheiden Sie über die Konfiguration Ihres {{site.data.keyword.cos_full_notm}}](#configure_cos).
 
 Gehen Sie wie folgt vor, um eine statusabhängige Gruppe bereitzustellen, von der Objektspeicher verwendet wird
 
-1. Erstellen Sie eine Konfigurationsdatei für die statusabhängige Gruppe und den Service, den Sie verwenden, um die statusabhängige Gruppe zugänglich zu machen. In den folgenden Beispielen wird veranschaulicht, wie Ngingx als statusabhängige Gruppe mit drei Replikaten bereitgestellt wird; hierbei wird von jedem Replikat jeweils ein separates Bucket verwendet oder von allen Replikaten wird ein gemeinsames Bucket verwendet. 
+1. Erstellen Sie eine Konfigurationsdatei für die statusabhängige Gruppe und den Service, den Sie verwenden, um die statusabhängige Gruppe zugänglich zu machen. In den folgenden Beispielen wird veranschaulicht, wie Ngingx als statusabhängige Gruppe mit drei Replikaten bereitgestellt wird; hierbei wird von jedem Replikat jeweils ein separates Bucket verwendet oder von allen Replikaten wird ein gemeinsames Bucket verwendet.
 
-   **Beispiel für die Erstellung einer statusabhängigen Gruppe mit drei Replikaten, von denen ein separates Bucket verwendet wird**: 
+   **Beispiel für die Erstellung einer statusabhängigen Gruppe mit drei Replikaten, von denen ein separates Bucket verwendet wird**:
    ```
    apiVersion: v1
    kind: Service
@@ -968,7 +973,7 @@ Gehen Sie wie folgt vor, um eine statusabhängige Gruppe bereitzustellen, von de
    ```
    {: codeblock}
 
-   **Beispiel für die Erstellung einer statusabhängigen Gruppe mit 3 Replikaten, von denen dasselbe Bucket `mybucket` gemeinsam verwendet wird**: 
+   **Beispiel für die Erstellung einer statusabhängigen Gruppe mit 3 Replikaten, von denen dasselbe Bucket `mybucket` gemeinsam verwendet wird**:
    ```
    apiVersion: v1
    kind: Service
@@ -1029,8 +1034,8 @@ Gehen Sie wie folgt vor, um eine statusabhängige Gruppe bereitzustellen, von de
              storage: 1Gi
    ```
    {: codeblock}
-   
-   
+
+
    <table>
     <caption>Erklärung der Bestandteile einer YAML-Datei für eine statusabhängige Gruppe</caption>
     <thead>
@@ -1043,7 +1048,7 @@ Gehen Sie wie folgt vor, um eine statusabhängige Gruppe bereitzustellen, von de
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.serviceName</code></td>
-    <td style="text-align:left">Geben Sie den Namen des Service ein, der verwendet werden soll, um die statusabhängige Gruppe zugänglich zu machen.</td>
+    <td style="text-align:left">Geben Sie den Namen des Service ein, der verwendet werden soll, um die statusabhängige Gruppe zugänglich zu machen. </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.replicas</code></td>
@@ -1051,7 +1056,7 @@ Gehen Sie wie folgt vor, um eine statusabhängige Gruppe bereitzustellen, von de
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
-    <td style="text-align:left">Geben Sie alle Bezeichnungen ein, die Sie in die statusabhängige Gruppe und in den PVC einschließen möchten. Bezeichnungen, die Sie in <code>volumeClaimTemplates</code> der statusabhängigen Gruppe einschließen, werden von Kubernetes nicht erkannt. Stattdessen müssen Sie diese Bezeichnungen in den Abschnitten <code>spec.selector.matchLabels</code> und <code>spec.template.metadata.labels</code> der YAML-Daten für die statusabhängige Gruppe definieren. Wenn Sie sicherstellen möchten, dass alle Replikate einer statusabhängigen Gruppe in den Lastausgleich des Service einbezogen werden, schließen Sie dieselbe Bezeichnung, die Sie im Abschnitt <code>spec.selector</code> verwendet haben, in die YAML-Datei des Service ein.</td>
+    <td style="text-align:left">Geben Sie alle Bezeichnungen ein, die Sie in die statusabhängige Gruppe und in den PVC einschließen möchten. Bezeichnungen, die Sie in <code>volumeClaimTemplates</code> der statusabhängigen Gruppe einschließen, werden von Kubernetes nicht erkannt. Stattdessen müssen Sie diese Bezeichnungen in den Abschnitten <code>spec.selector.matchLabels</code> und <code>spec.template.metadata.labels</code> der YAML-Daten für die statusabhängige Gruppe definieren. Wenn Sie sicherstellen möchten, dass alle Replikate einer statusabhängigen Gruppe in den Lastausgleich des Service einbezogen werden, schließen Sie dieselbe Bezeichnung, die Sie im Abschnitt <code>spec.selector</code> verwendet haben, in die YAML-Datei des Service ein. </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.metadata.labels</code></td>
@@ -1059,7 +1064,7 @@ Gehen Sie wie folgt vor, um eine statusabhängige Gruppe bereitzustellen, von de
     </tr>
     <tr>
     <td><code>spec.template.spec.</code></br><code>terminationGracePeriodSeconds</code></td>
-    <td>Geben Sie die Anzahl der Sekunden ein, die <code>kubelet</code> zum ordnungsgemäßen Beenden des Pods zur Verfügung stehen sollen, von dem das Replikat der statusabhängigen Gruppe ausgeführt wird. Weitere Informationen finden Sie in [Pods löschen![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/#delete-pods).</td>
+    <td>Geben Sie die Anzahl der Sekunden ein, die <code>kubelet</code> zum ordnungsgemäßen Beenden des Pods zur Verfügung stehen sollen, von dem das Replikat der statusabhängigen Gruppe ausgeführt wird. Weitere Informationen finden Sie in [Pods löschen![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/#delete-pods). </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>metadata.name</code></td>
@@ -1071,11 +1076,11 @@ Gehen Sie wie folgt vor, um eine statusabhängige Gruppe bereitzustellen, von de
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/auto-delete-bucket</code></td>
-    <td>Wählen Sie eine der beiden folgenden Optionen aus: <ul><li><strong>true:</strong> Ihre Daten, das Bucket und der PV werden automatisch entfernt, wenn Sie den PVC löschen. Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz bleibt bestehen und wird nicht gelöscht. Wenn Sie diese Option auf 'true' setzen, müssen Sie <code>ibm.io/auto-create-bucket: true</code> und <code>ibm.io/bucket: ""</code> festlegen, sodass das Bucket automatisch mit einem Namen im Format <code>tmp-s3fs-xxxx</code> erstellt wird.</li><li><strong>false:</strong> Wenn Sie den PVC löschen, wird der PV automatisch gelöscht, aber Ihre Daten und das Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz bleiben erhalten. Um auf Ihre Daten zugreifen zu können, müssen Sie einen neuen PVC mit dem Namen des vorhandenen Buckets erstellen.</li></ul></td>
+    <td>Wählen Sie eine der beiden folgenden Optionen aus: <ul><li><strong>true:</strong> Ihre Daten, das Bucket und der PV werden automatisch entfernt, wenn Sie den PVC löschen. Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz bleibt bestehen und wird nicht gelöscht. Wenn Sie diese Option auf 'true' setzen, müssen Sie <code>ibm.io/auto-create-bucket: true</code> und <code>ibm.io/bucket: ""</code> festlegen, sodass das Bucket automatisch mit einem Namen im Format <code>tmp-s3fs-xxxx</code> erstellt wird. </li><li><strong>false:</strong> Wenn Sie den PVC löschen, wird der PV automatisch gelöscht, aber Ihre Daten und das Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz bleiben erhalten. Um auf Ihre Daten zugreifen zu können, müssen Sie einen neuen PVC mit dem Namen des vorhandenen Buckets erstellen.</li></ul></td>
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/bucket</code></td>
-    <td>Wählen Sie eine der beiden folgenden Optionen aus: <ul><li><strong>Wenn <code>ibm.io/auto-create-bucket</code> auf 'true' gesetzt ist:</strong> Geben Sie den Namen des Buckets ein, das Sie in {{site.data.keyword.cos_full_notm}} erstellen möchten. Wenn zusätzlich <code>ibm.io/auto-delete-bucket</code> auf <strong>true</strong> gesetzt wird, müssen Sie dieses Feld leer lassen, um dem Bucket automatisch einen Namen im Format 'tmp-s3fs-xxxx' zuzuweisen. Der Name muss in {{site.data.keyword.cos_full_notm}} eindeutig sein.</li><li><strong>Wenn <code>ibm.io/auto-create-bucket</code> auf 'false' gesetzt wird:</strong> Geben Sie den Namen des vorhandenen Buckets ein, auf das Sie im Cluster zugreifen möchten. </li></ul></td>
+    <td>Wählen Sie eine der beiden folgenden Optionen aus: <ul><li><strong>Wenn <code>ibm.io/auto-create-bucket</code> auf 'true' gesetzt ist:</strong> Geben Sie den Namen des Buckets ein, das Sie in {{site.data.keyword.cos_full_notm}} erstellen möchten. Wenn zusätzlich <code>ibm.io/auto-delete-bucket</code> auf <strong>true</strong> gesetzt wird, müssen Sie dieses Feld leer lassen, um dem Bucket automatisch einen Namen im Format 'tmp-s3fs-xxxx' zuzuweisen. Der Name muss in {{site.data.keyword.cos_full_notm}} eindeutig sein.</li><li><strong>Wenn <code>ibm.io/auto-create-bucket</code> auf 'false' gesetzt wird:</strong> Geben Sie den Namen des vorhandenen Buckets ein, auf das Sie im Cluster zugreifen möchten.</li></ul></td>
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/secret-name</code></td>
@@ -1083,11 +1088,11 @@ Gehen Sie wie folgt vor, um eine statusabhängige Gruppe bereitzustellen, von de
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-    <td style="text-align:left">Geben Sie die Speicherklasse ein, die Sie verwenden möchten. Wählen Sie eine der beiden folgenden Optionen aus: <ul><li><strong>Wenn <code>ibm.io/auto-create-bucket</code> auf 'true' gesetzt ist:</strong> Geben Sie die Speicherklasse ein, die Sie für das neue Bucket verwenden möchten. </li><li><strong>Wenn <code>ibm.io/auto-create-bucket</code> auf 'false' gesetzt ist:</strong> Geben Sie die Speicherklasse ein, die Sie zum Erstellen des vorhandenen Buckets verwendet haben. </li></ul></br>  Wenn Sie die vorhandenen Speicherklassen auflisten möchten, führen Sie <code>kubectl get storageclasses | grep s3</code> aus. Wenn Sie keine Speicherklasse angeben, wird der PVC mit der Standardspeicherklasse erstellt, die im Cluster festgelegt wurde. Stellen Sie sicher, dass von der Standardspeicherklasse der Bereitsteller <code>ibm.io/ibmc-s3fs</code> verwendet wird, damit die statusabhängige Gruppe mit Objektspeicher bereitgestellt wird.</td>
+    <td style="text-align:left">Geben Sie die Speicherklasse ein, die Sie verwenden möchten. Wählen Sie eine der beiden folgenden Optionen aus: <ul><li><strong>Wenn <code>ibm.io/auto-create-bucket</code> auf 'true' gesetzt ist:</strong> Geben Sie die Speicherklasse ein, die Sie für das neue Bucket verwenden möchten.</li><li><strong>Wenn <code>ibm.io/auto-create-bucket</code> auf 'false' gesetzt ist:</strong> Geben Sie die Speicherklasse ein, die Sie zum Erstellen des vorhandenen Buckets verwendet haben. </li></ul></br>  Wenn Sie die vorhandenen Speicherklassen auflisten möchten, führen Sie <code>kubectl get storageclasses | grep s3</code> aus. Wenn Sie keine Speicherklasse angeben, wird der PVC mit der Standardspeicherklasse erstellt, die im Cluster festgelegt wurde. Stellen Sie sicher, dass von der Standardspeicherklasse der Bereitsteller <code>ibm.io/ibmc-s3fs</code> verwendet wird, damit die statusabhängige Gruppe mit Objektspeicher bereitgestellt wird.</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>spec.storageClassName</code></td>
-    <td>Geben Sie dieselbe Speicherklasse ein, die Sie im Abschnitt <code>spec.volumeClaimTemplates.metadata.annotations.volume.beta.kubernetes.io/storage-class</code> der YAML-Datei der statusabhängigen Gruppe eingegeben haben. </td>
+    <td>Geben Sie dieselbe Speicherklasse ein, die Sie im Abschnitt <code>spec.volumeClaimTemplates.metadata.annotations.volume.beta.kubernetes.io/storage-class</code> der YAML-Datei der statusabhängigen Gruppe eingegeben haben.  </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.</code></br><code>resource.requests.storage</code></td>
@@ -1095,14 +1100,15 @@ Gehen Sie wie folgt vor, um eine statusabhängige Gruppe bereitzustellen, von de
     </tr>
     </tbody></table>
 
-    
+
 ## Daten sichern und wiederherstellen
 {: #backup_restore}
 
 {{site.data.keyword.cos_full_notm}} ist für eine hohe Lebensdauer Ihrer Daten konfiguriert und bietet so Schutz vor Datenverlust. Sie finden das SLA in den [ {{site.data.keyword.cos_full_notm}}-Servicebedingungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www-03.ibm.com/software/sla/sladb.nsf/sla/bm-7857-03).
 {: shortdesc}
 
-**Wichtig:** {{site.data.keyword.cos_full_notm}} stellt kein Versionsprotokoll für Ihre Daten zur Verfügung. Wenn Sie ältere Versionen Ihrer Daten aufbewahren und auf sie zugreifen müssen, müssen Sie Ihre App so einrichten, dass sie die Datenhistorie verwaltet, oder Sie müssen alternative Sicherungslösungen implementieren. Sie können Ihre {{site.data.keyword.cos_full_notm}}-Daten beispielsweise in der lokalen Datenbank speichern oder Bänder zur Archivierung Ihrer Daten verwenden. 
+{{site.data.keyword.cos_full_notm}} stellt kein Versionsprotokoll für Ihre Daten zur Verfügung. Wenn Sie ältere Versionen Ihrer Daten aufbewahren und auf sie zugreifen müssen, müssen Sie Ihre App so einrichten, dass sie die Datenhistorie verwaltet, oder Sie müssen alternative Sicherungslösungen implementieren. Sie können Ihre {{site.data.keyword.cos_full_notm}}-Daten beispielsweise in der lokalen Datenbank speichern oder Bänder zur Archivierung Ihrer Daten verwenden.
+{: note}
 
 ## Speicherklassenreferenz
 {: #storageclass_reference}

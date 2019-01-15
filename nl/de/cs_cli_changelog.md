@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -26,7 +29,7 @@ Informationen zum Installieren des CLI-Plug-ins finden Sie im Abschnitt [CLI ins
 
 In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Befehlszeilenschnittstelle (CLI) zusammengefasst.
 
-<table summary="Änderungsprotokoll für das {{site.data.keyword.containerlong_notm}}-CLI-Plug-in">
+<table summary="Übersicht über die Versionsänderungen für das {{site.data.keyword.containerlong_notm}}-CLI-Plug-in">
 <caption>Änderungsprotokoll für das {{site.data.keyword.containerlong_notm}}-CLI-Plug-in</caption>
 <thead>
 <tr>
@@ -36,6 +39,35 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.1.654</td>
+<td>5. Dezember 2018</td>
+<td>Aktualisieren der Dokumentation und Übersetzung.</td>
+</tr>
+<tr>
+<td>0.1.638</td>
+<td>15. November 2018</td>
+<td>
+<ul><li>Hinzufügen des Befehls [<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh). </li>
+<li>Hinzufügen des Namens der Ressourcengruppe zur Ausgabe von <code>ibmcloud ks cluster-get</code> und <code>ibmcloud ks clusters</code>. </li></ul>
+</td>
+</tr>
+<tr>
+<td>0.1.635</td>
+<td>6. November 2018</td>
+<td>Hinzufügen der Befehle [<code>ibmcloud ks alb-autoupdate-disable</code>](cs_cli_reference.html#cs_alb_autoupdate_disable), [<code>ibmcloud ks alb-autoupdate-enable</code>](cs_cli_reference.html#cs_alb_autoupdate_enable), [<code>ibmcloud ks alb-autoupdate-get</code>](cs_cli_reference.html#cs_alb_autoupdate_get), [<code>ibmcloud ks alb-rollback</code>](cs_cli_reference.html#cs_alb_rollback) und [<code>ibmcloud ks alb-update</code>](cs_cli_reference.html#cs_alb_update) für die Verwaltung von automatischen Aktualisierungen des Ingress-ALB-Cluster-Add-ons.
+</td>
+</tr>
+<tr>
+<td>0.1.621</td>
+<td>30. Oktober 2018</td>
+<td><ul>
+<li>Hinzufügen des [Befehls <code>ibmcloud ks credential-get</code>](cs_cli_reference.html#cs_credential_get). </li>
+<li>Hinzufügen von Unterstützung für die Protokollquelle <code>storage</code> zu allen Clusterprotokollierungsbefehlen. Weitere Informationen finden Sie unter <a href="cs_health.html#logging">Informationen zur Protokollweiterleitung für Cluster und Apps</a>. </li>
+<li>Hinzufügen des Flags `--network` zum [Befehl <code>ibmcloud ks cluster-config</code>](cs_cli_reference.html#cs_cluster_config), der die Calico-Konfigurationsdatei für die Ausführung aller Calico-Befehle herunterlädt. </li>
+<li>Kleinere Fehlerkorrekturen und Refactoring</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.1.593</td>
 <td>10. Oktober 2018</td>

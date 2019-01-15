@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -40,24 +43,24 @@ Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, inde
 ## Ausführen von Apps in Clustern planen
 {: #plan_apps}
 
-Stellen Sie sicher, dass die App für die Bereitstellung in {{site.data.keyword.containerlong_notm}} bereit ist.
-{:shortdesc}
+Bevor Sie eine App in einem {{site.data.keyword.containerlong_notm}}-Cluster bereitstellen, müssen Sie entscheiden, wie Sie Ihre App konfigurieren möchten, damit sie ordnungsgemäß aufgerufen und in andere Services in {{site.data.keyword.Bluemix_notm}} integriert werden kann. {:shortdesc}
 
 ### Welche Art von Kubernetes-Objekten kann ich für meine App erstellen?
 {: #object}
 
-Wenn Sie die YAML-Datei für die App vorbereiten, haben Sie viele Möglichkeiten, um die Verfügbarkeit, Leistung und Sicherheit der App zu erhöhen. So können Sie zum Beispiel anstelle eines einzelnen Pods ein Kubernetes-Controller-Objekt, wie z. B. eine Replikatgruppe, einen Job oder eine Dämongruppe, zu Verwaltung der Workload verwenden. Weitere Informationen zu Pods und Controllern finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). Eine Bereitstellung, von der eine Replikatgruppe von Pods verwaltet wird, ist ein gängiger Anwendungsfall für eine App.
+Wenn Sie die YAML-Datei für die App vorbereiten, haben Sie viele Möglichkeiten, um die Verfügbarkeit, Leistung und Sicherheit der App zu erhöhen. So können Sie zum Beispiel anstelle eines einzelnen Pods ein Kubernetes-Controller-Objekt, wie z. B. eine Replikatgruppe, einen Job oder eine Dämongruppe, zur Verwaltung der Workload verwenden. Weitere Informationen zu Pods und Controllern finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). Eine Bereitstellung, von der eine Replikatgruppe von Pods verwaltet wird, ist ein gängiger Anwendungsfall für eine App.
+{: shortdesc}
 
 Beispiel: Das Objekt `kind: Deployment` ist eine gute Möglichkeit zum Bereitstellen eines App-Pods, weil Sie damit eine Replikatgruppe für mehr Verfügbarkeit für die Pods angeben können.
 
 In der folgenden Tabelle wird beschrieben, warum es sinnvoll sein kann, abweichende Objekttypen für Kubernetes-Workloads zu erstellen.
 
-| Objekt | Beschreibung | 
+| Objekt | Beschreibung |
 | --- | --- |
 | [`Pod` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | Ein Pod ist die kleinste bereitstellbare Einheit für die Workloads und kann einen oder mehrere Container enthalten. ^Analog zu Containern sind Pods so konzipiert, dass sie gelöscht werden können; sie werden oft für Komponententests von Appfunktionen verwendet. Ziehen Sie in Betracht, die Pods zum Vermeiden von Ausfallzeiten für die App mit einem Kubernetes-Controller bereitzustellen, zum Beispiel als eine Bereitstellung. Eine Bereitstellung erleichtert die Verwaltung mehrerer Pods, Replikate, die Podskalierung, Rollouts usw. |
 | [`ReplicaSet` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | Mithilfe einer Replikatgruppe wird sichergestellt, dass mehrere Replikate des Pods ausgeführt werden und ein Pod neu geplant wird, wenn er heruntergefahren wird. Sie können eine Replikatgruppe erstellen, um zu testen, wie die Pod-Planung funktioniert; erstellen Sie jedoch eine Bereitstellung, um App-Aktualisierungen, Rollouts und Skalierungen zu verwalten. |
 | [`Deployment` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | Eine Bereitstellung ist ein Controller, von dem ein Pod oder eine [Replikatgruppe ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) der Pod-Vorlagen verwaltet wird. Sie können Pods oder Replikatgruppen ohne eine Bereitstellung zum Testen von App-Features erstellen. Verwenden Sie für eine Konfiguration auf Produktionsebene Bereitstellungen zum Verwalten von App-Aktualisierungen, Rollouts und Skalierungen. |
-| [`StatefulSet` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Analog zu einer Bereitstellung ist eine statusabhängige Gruppe ein Controller, von dem eine Replikatgruppe aus Pods verwaltet wird. Im Gegensatz zu einer Bereitstellung wird von einer statusabhängien Gruppe sichergestellt, dass der Pod über eine eindeutige Netzidentität verfügt, von der der Status für die erneute Planung verwaltet wird. Wenn Sie Workloads in der Cloud ausführen möchten, versuchen Sie, die App so zu gestalten, dass sie statusunabhängig ist, damit die Serviceinstanzen voneinander unabhängig sind und ohne Unterbrechung des Service fehlschlagen können. Manche Apps, wie zum Beispiel Datenbanken, müssen jedoch statusunabhängig sein. Ziehen Sie in solchen Fällen in Betracht, eine statusabhängige Gruppe zu erstellen und [Datei-](cs_storage_file.html#file_statefulset), [Block-](cs_storage_block.html#block_statefulset) oder [Objekt](cs_storage_cos.html#cos_statefulset)speicher als persistenten Speicher für die statusabhängige Gruppe zu verwenden. |
+| [`StatefulSet` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Analog zu einer Bereitstellung ist eine statusabhängige Gruppe ein Controller, von dem eine Replikatgruppe aus Pods verwaltet wird. Im Gegensatz zu einer Bereitstellung wird von einer statusabhängigen Gruppe sichergestellt, dass der Pod über eine eindeutige Netzidentität verfügt, von der der Status für die erneute Planung verwaltet wird. Wenn Sie Workloads in der Cloud ausführen möchten, versuchen Sie, die App so zu gestalten, dass sie statusunabhängig ist, damit die Serviceinstanzen voneinander unabhängig sind und ohne Unterbrechung des Service fehlschlagen können. Manche Apps, wie zum Beispiel Datenbanken, müssen jedoch statusunabhängig sein. Ziehen Sie in solchen Fällen in Betracht, eine statusabhängige Gruppe zu erstellen und [Datei-](cs_storage_file.html#file_statefulset), [Block-](cs_storage_block.html#block_statefulset) oder [Objekt](cs_storage_cos.html#cos_statefulset)speicher als persistenten Speicher für die statusabhängige Gruppe zu verwenden. |
 | [`DaemonSet` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | Verwenden Sie eine Dämongruppe (daemonset), wenn Sie denselben Pod auf jedem Workerknoten im Cluster ausführen müssen. Pods, die von einer Dämongruppe verwaltet werden, werden automatisch geplant, wenn ein Workerknoten zu einem Cluster hinzugefügt wird. Typische Anwendungsfälle sind unter anderem Protokollcollectors, zum Beispiel `logstash` oder `prometheus`, von denen Protokolle von jedem Workerknoten erfasst werden, um eine Übersicht über den Status eines Clusters oder einer App zu erhalten. |
 | [`Job` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | Von einem Job wird sichergestellt, dass mindestens ein Pod erfolgreich bis zum Abschluss ausgeführt wird. Sie können einen Job für Warteschlangen oder Stapeljobs verwenden, um die Parallelverarbeitung von getrennten, aber zusammengehörigen Arbeitselementen zu unterstützen, zum Beispiel eine bestimmte Anzahl an wiederzugebenden Frames, an zu versendenden E-Mails und zu konvertierenden Dateien. Wenn Sie planen möchten, dass ein Job an einem bestimmten Zeitpunkt ausgeführt werden soll, verwenden Sie hierfür einen [Cron-Job ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/).|
 {: caption="Typen der Objekte für Kubernetes-Workloads, die Sie erstellen können." caption-side="top"}
@@ -80,6 +83,7 @@ Beschreibungen zu allem, was in einer Bereitstellung enthalten sein kann, finden
 {: #variables}
 
 Wenn Sie Informationen zu Bereitstellungen hinzufügen möchten, anstatt feste Codierungen für die Daten in der YAML-Datei festzulegen, können Sie das Kubernetes-Objekt [`ConfigMap` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) oder [`Secret` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/secret/) verwenden.
+{: shortdesc}
 
 Wenn Sie eine Konfigurationszuordnung (ConfigMap) oder einen geheimen Schlüssel (Secret) verarbeiten möchten, müssen Sie diese bzw. diesen an den Pod anhängen. Die Konfigurationszuordnung bzw. der geheime Schlüssel wird mit dem Pod kurz vor der Ausführung des Pods kombiniert. Sie können Bereitstellungsspezifikationen und Images für viele Apps wiederverwenden, aber anschließend die angepassten Konfigurationszuordnungen und geheimen Schlüssel auslagern. Da besonders für geheime Schlüssel große Speichermengen auf dem lokalen Knoten erforderlich sein können, sollten Sie entsprechend planen.
 
@@ -106,32 +110,37 @@ Informationen hierzu finden Sie unter [Services zu Apps hinzufügen](cs_integrat
 
 ### Wie kann ich sicherstellen, dass meine App über die richtigen Ressourcen verfügt?
 Wenn Sie die [YAML-Datei für die App angeben](#app_yaml), können Sie Kubernetes-Funktionen zur Konfiguration der App hinzufügen, die der App das Abrufen der richtigen Ressourcen erleichtern. Insbesondere das [Festlegen von Ressourcengrenzen und -anforderungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) für jeden Container, der in der YAML-Datei definiert ist.
+{: shortdesc}
 
 Zusätzlich kann der Clusteradministrator Ressourcensteuerungen wie die folgenden einrichten, die sich auf die Bereitstellung auswirken.
-*  [Ressourcenkontingente ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+*  [Ressourcenquoten ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
 *  [Podpriorität](cs_pod_priority.html#pod_priority)
 
 ### Wie kann ich auf meine App zugreifen?
 Sie können privat auf die App im Cluster [mithilfe des Service `clusterIP` zugreifen](cs_network_cluster.html#planning).
+{: shortdesc}
 
 Wenn Sie die App öffentlich zugänglich machen möchten, haben Sie verschiedene Optionen, die vom Clustertyp abhängig sind.
 *  **Kostenloser Cluster:** Sie können Ihre App mithilfe des [NodePort-Service](cs_nodeport.html#nodeport) zugänglich machen.
-*  **Standardcluster:** Sie können Ihre App mithilfe des [NodePort-Service, Service für die Lastausgleichsfunktion oder Ingress-Service verfügbar machen](cs_network_planning.html#planning).
-*  **Cluster, der mit Calico privat verwendet wird:** Sie können Ihre App mithilfe des [NodePort-Service, Service für die Lastausgleichsfunktion oder Ingress-Service verfügbar machen](cs_network_planning.html#private_both_vlans). Sie müssen auch eine Calico-PreDNAT-Netzrichtlinie verwenden, um die öffentlichen Knotenports zu blockieren.
-*  **Standardcluster für ausschließlich privates VLAN:** Sie können Ihre App mithilfe des [NodePort-Service, Service für die Lastausgleichsfunktion oder Ingress-Service verfügbar machen](cs_network_planning.html#private_vlan). Sie müssen außerdem den Port für die private IP-Adresse des Service in der Firewall öffnen.
+*  **Standardcluster:** Sie können Ihre App mithilfe des [NodePort-Service, Lastausgleichsservice oder Ingress-Service verfügbar machen](cs_network_planning.html#planning).
+*  **Cluster, der mit Calico privat verwendet wird:** Sie können Ihre App mithilfe des [NodePort-Service, Lastausgleichsservice oder Ingress-Service verfügbar machen](cs_network_planning.html#private_both_vlans). Sie müssen auch eine Calico-PreDNAT-Netzrichtlinie verwenden, um die öffentlichen Knotenports zu blockieren.
+*  **Standardcluster für ausschließlich privates VLAN:** Sie können Ihre App mithilfe des [NodePort-Service, Lastausgleichsservice oder Ingress-Service verfügbar machen](cs_network_planning.html#private_vlan). Sie müssen außerdem den Port für die private IP-Adresse des Service in der Firewall öffnen.
 
 ### Wie kann ich den Status meiner App nach ihrer Bereitstellung überwachen?
 Sie können die {{site.data.keyword.Bluemix_notm}}-[Protokollierung und -Überwachung](cs_health.html#health) für den Cluster konfigurieren. Sie können auch einen [Protokollierungs- oder Überwachungsservice](cs_integrations.html#health_services) eines Drittanbieters integrieren.
+{: shortdesc}
 
 ### Wie kann ich dafür sorgen, dass meine App aktuell bleibt?
 Wenn Sie Apps als Reaktion auf die Workloadnutzung dynamisch hinzufügen und entfernen möchten, finden Sie weitere Informationen unter [Apps skalieren](cs_app.html#app_scaling).
+{: shortdesc}
 
 Informationen zum Verwalten von Aktualisierungen für eine App finden Sie unter [Laufende Bereitstellungen verwalten](cs_app.html#app_rolling).
 
 ### Wie kann ich steuern, wer Zugriff auf meine App-Bereitstellungen hat?
 Konto- und Clusteradministratoren können den Zugriff auf vielen unterschiedlichen Ebenen steuern: Cluster, Kubernetes-Namensbereich, Pod und Container.
+{: shortdesc}
 
-Mit IAM können Sie Berechtigungen zu einzelnen Benutzern, Gruppen oder Servicekonten auf der Clusterinstanzebene zuordnen. Sie können einen Bereich für den Clusterzugriff noch weiter definieren, indem Sie Benutzer auf bestimmte Namensbereiche im Cluster beschränken. Weitere Informationen finden Sie in [Clusterzugriff zuweisen](cs_users.html#users).
+Mit {{site.data.keyword.Bluemix_notm}} IAM können Sie Berechtigungen zu einzelnen Benutzern, Gruppen oder Servicekonten auf der Clusterinstanzebene zuordnen. Sie können einen Bereich für den Clusterzugriff noch weiter definieren, indem Sie Benutzer auf bestimmte Namensbereiche im Cluster beschränken. Weitere Informationen finden Sie in [Clusterzugriff zuweisen](cs_users.html#users).
 
 Wenn Sie den Zugriff auf Podebene steuern möchten, können Sie [Podsicherheitsrichtlinien mit Kubernetes-RBAC konfigurieren](cs_psp.html#psp).
 
@@ -159,6 +168,9 @@ Sie können auch [mehrere Cluster in verschiedenen Regionen mit einer globalen L
 ### Verfügbarkeit Ihrer App erhöhen
 {: #increase_availability}
 
+Ziehen Sie die folgenden Optionen zum Verbessern der Verfügbarkeit Ihrer App in Betracht.
+{: shortdesc}
+
 <dl>
   <dt>Bereitstellungen und Replikatgruppen zum Bereitstellen Ihrer App und deren Abhängigkeiten verwenden</dt>
     <dd><p>Eine Bereitstellung ist eine Kubernetes-Ressource, mit der Sie alle Komponenten Ihrer App und deren Abhängigkeiten deklarieren können. Bei Bereitstellungen müssen Sie nicht alle Schritte niederschreiben und können sich stattdessen auf Ihre App konzentrieren.</p>
@@ -175,7 +187,7 @@ Sie können auch [mehrere Cluster in verschiedenen Regionen mit einer globalen L
       </dd>
     </dd>
 <dt>Pods auf mehrere Zonen oder Regionen verteilen</dt>
-  <dd><p>Um Ihre App vor einem Zonenfehler zu schützen, können Sie mehrere Cluster in separaten Zonen erstellen oder Zonen zu einem Worker-Pool in einem Mehrzonencluster hinzufügen. Mehrzonencluster sind nur in [bestimmten Metro-Bereichen](cs_regions.html#zones) verfügbar, z. B. in Dallas. Wenn Sie mehrere Cluster in unterschiedlichen Zonen erstellen, müssen Sie [eine globale Lastausgleichsfunktion einrichten](cs_clusters_planning.html#multiple_clusters).</p>
+  <dd><p>Um Ihre App vor einem Zonenfehler zu schützen, können Sie mehrere Cluster in separaten Zonen erstellen oder Zonen zu einem Worker-Pool in einem Mehrzonencluster hinzufügen. Mehrzonencluster sind nur in [bestimmten Metropolbereichen](cs_regions.html#zones) verfügbar, z. B. in Dallas. Wenn Sie mehrere Cluster in unterschiedlichen Zonen erstellen, müssen Sie [eine globale Lastausgleichsfunktion einrichten](cs_clusters_planning.html#multiple_clusters).</p>
   <p>Wenn Sie eine Replikatgruppe verwenden und Anti-Affinität für Pods angeben, verteilt Kubernetes Ihre App-Pods auf die Knoten. Wenn sich die Knoten in mehreren Zonen befinden, werden die Pods auf diese Zonen verteilt, was die Verfügbarkeit für Ihre App erhöht. Wenn Sie Ihre Apps nur in einer einzigen Zone ausführen möchten, können Sie die Pod-Affinität konfigurieren oder einen Worker-Pool in einer Zone erstellen und kennzeichnen. Weitere Informationen finden Sie unter [Hochverfügbarkeit für Mehrzonencluster](cs_clusters_planning.html#ha_clusters).</p>
   <p><strong>Sind in einer Bereitstellung mit Mehrzonencluster meine App-Pods gleichmäßig über die Knoten hinweg verteilt?</strong></p>
   <p>Die Pods sind gleichmäßig über die Zonen verteilt, aber nicht immer über Knoten hinweg. Wenn Sie beispielsweise über einen Cluster mit einem Knoten in jeder der drei Zonen verfügen und eine Replikatgruppe von sechs Pods implementieren, erhält jeder Knoten zwei Pods. Wenn Sie jedoch über einen Cluster mit zwei Knoten in jeder der drei Zonen verfügen und eine Replikatgruppe von sechs Pods bereitstellen, sind für jede Zone zwei Pods geplant und es kann ein Pod pro Knoten geplant werden (oder auch nicht). Für mehr Kontrolle über die Zeitplanung können Sie [die Pod-Affinität festlegen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
@@ -224,8 +236,7 @@ metadata:
 <dt id="label">Bezeichnungen</dt>
   <dd><p>Mit Bezeichnungen können Sie verschiedene Ressourcentypen im Cluster mit demselben Paar des Typs `key: value` markieren. Anschließend können Sie den Selektor für die Übereinstimmung der Bezeichnung angeben, sodass Sie auf dieser Basis andere Ressourcen erstellen können. Wenn Sie die App öffentlich zugänglich machen möchten, müssen Sie eine Bezeichnung verwenden, die mit dem Selektor übereinstimmt, den Sie im Service angeben. Im Beispiel wird von der Bereitstellungsspezifikation die Vorlage verwendet, die mit der Bezeichnung `app: wasliberty` übereinstimmt.</p>
   <p>Sie können Objekte abrufen, die im Cluster gekennzeichnet sind, um zum Beispiel die Komponenten `staging` oder `production` anzuzeigen. Beispiel: Listen Sie alle Ressourcen mit der Bezeichnung `env: production` für alle Namensbereiche im Cluster auf. Beachten Sie, dass Sie Zugriff auf alle Namensbereiche benötigen, um diesen Befehl ausführen zu können.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
-  <ul><li>Weitere Informationen zu Bezeichnungen finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).
-</li>
+  <ul><li>Weitere Informationen zu Bezeichnungen finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</li>
   <li>Ein ausführlicheres Beispiel finden Sie unter [Apps für bestimmte Workerknoten mithilfe von Bezeichnungen bereitstellen](cs_app.html#node_affinity).</li></ul>
   <p><pre class="codeblock"><code>selector:
   matchLabels:
@@ -261,7 +272,7 @@ template:
   <p>Geben Sie das Image, das Sie für die Container verwenden möchten, die Position des Image und die Extrahierungsrichtlinie für das Image an. Wenn Sie keinen Image-Tag angeben, wird standardmäßig das Image mit dem Tag `latest` extrahiert.</p>
   <p>**Achtung**: Vermeiden Sie die Verwendung des neuesten Tags für Produktionsworkloads. Es kann vorkommen, dass Sie die Workload nicht mit dem neuesten Image getestet haben, wenn Sie ein öffentliches oder ein gemeinsames Repository verwenden, zum Beispiel Docker Hub oder {{site.data.keyword.registryshort_notm}}.</p>
   <p>Gehen Sie zum Beispiel zum Auflisten der Tags von öffentlichen IBM Images wie folgt vor:</p>
-  <ol><li>Wechseln Sie zur Region der globalen Registry. <pre class="pre"><code>ibmcloud cr region-set global</code></pre></li>
+  <ol><li>Wechseln Sie zur Region der globalen Registry.<pre class="pre"><code>ibmcloud cr region-set global</code></pre></li>
   <li>Listen Sie die IBM Images auf.<pre class="pre"><code>ibmcloud cr images --include-ibm</code></pre></li></ol>
   <p>Als Standardwert für `imagePullPolicy` ist `IfNotPresent` festgelegt, was bedeutet, dass das Image nur extrahiert wird, wenn es noch nicht lokal vorhanden ist. Wenn das Image bei jedem Start des Containers extrahiert werden soll, geben Sie `imagePullPolicy: Always` an.</p>
   <p><pre class="codeblock"><code>containers:
@@ -275,10 +286,10 @@ template:
 - containerPort: 9080</pre></code></p></dd>
 
 <dt id="resourcereq">Ressourcenanforderungen und -einschränkungen</dt>
-  <dd><p>Als Clusteradministrator können Sie sicherstellen, dass Teams, die einen Cluster gemeinsam nutzen, nicht mehr als einen akzeptablen Anteil an Rechenressourcen (Speicher und CPU) nutzen, wenn Sie ein [ResourceQuota-Objekt ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) für jeden Kubernetes-Namensbereich im Cluster erstellen. Wenn der Clusteradministrator ein Rechenressourcenkontingent definiert, müssen von jedem Container in der Bereitstellungsvorlage Ressourcenanforderungen und -begrenzungen für Speicher und CPU angegeben werden; andernfalls schlägt die Erstellung des Pods fehl.</p>
-  <p><ol><li>Überprüfen Sie, ob ein Ressourcenkontingent für einen Namensbereich festgelegt ist.<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
-  <li>Überprüfen Sie die Werte für die Größenbeschränkungen.<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
-  <p>Auch wenn kein Ressourcenkontingent festgelegt ist, können Sie Ressourcenanforderungen und -begrenzungen in die Bereitstellung einschließen, um die Verwaltung der Workerknotenressourcen zu verbessern. **Anmerkung:** Wenn ein Container seinen Grenzwert überschreitet, kann der Container erneut gestartet werden oder fehlschlagen. Wenn ein Container eine Anforderung überschreitet, wird sein Pod möglicherweise entfernt, falls diese Ressource für den Workerknoten knapp wird. Fehlerbehebungsinformationen finden Sie unter [Neustarts von Pods schlagen wiederholt fehl oder Pods werden unerwartet entfernt](cs_troubleshoot_clusters.html#pods_fail).</p>
+  <dd><p>Als Clusteradministrator können Sie sicherstellen, dass Teams, die einen Cluster gemeinsam nutzen, nicht mehr als einen akzeptablen Anteil an Rechenressourcen (Speicher und CPU) nutzen, wenn Sie ein [ResourceQuota-Objekt ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) für jeden Kubernetes-Namensbereich im Cluster erstellen. Wenn der Clusteradministrator eine Rechenressourcenquote definiert, müssen von jedem Container in der Bereitstellungsvorlage Ressourcenanforderungen und -begrenzungen für Speicher und CPU angegeben werden; andernfalls schlägt die Erstellung des Pods fehl.</p>
+  <p><ol><li>Überprüfen Sie, ob eine Ressourcenquote für einen Namensbereich festgelegt ist.<pre class="pre"><code>kubectl get quota --namespace=<namensbereich></code></pre></li>
+  <li>Überprüfen Sie die Werte für die Größenbeschränkungen.<pre class="pre"><code>kubectl describe quota <quotenname> --namespace=<namensbereich></code></pre></li></ol></p>
+  <p>Auch wenn keine Ressourcenquote festgelegt ist, können Sie Ressourcenanforderungen und -begrenzungen in die Bereitstellung einschließen, um die Verwaltung der Workerknotenressourcen zu verbessern.</p><p class="note">Wenn ein Container seinen Grenzwert überschreitet, kann der Container erneut gestartet werden oder fehlschlagen. Wenn ein Container eine Anforderung überschreitet, wird sein Pod möglicherweise entfernt, falls diese Ressource für den Workerknoten knapp wird. Fehlerbehebungsinformationen finden Sie unter [Neustarts von Pods schlagen wiederholt fehl oder Pods werden unerwartet entfernt](cs_troubleshoot_clusters.html#pods_fail).</p>
   <p>**Anforderung**: Die Mindestmenge der Ressource, die vom Scheduler für den zu verwendenden Container reserviert wird. Wenn die Menge mit dem Grenzwert übereinstimmt, wird die Anforderung garantiert. Wenn die Menge niedriger als die Grenzwert ist, wird die Anforderung auch garantiert, aber der Scheduler kann die Differenz zwischen der Anforderung und dem Grenzwert zum Erfüllen von Anforderungen für Ressourcen anderer Container verwenden.</p>
   <p>**Grenzwert**: Die maximale Menge der Ressource, die der Container verbrauchen kann. Wenn die Gesamtmenge der Ressourcen, die für die Container verwendet wird, die auf dem Workerknoten verfügbare Menge überschreitet, können Container entfernt werden, um Speicherplatz frei zu machen. Wenn Sie eine Entfernung verhindern möchten, legen Sie fest, dass die Ressourcenanforderung mit dem Grenzwert des Containers identisch ist. Wenn kein Grenzwert angegeben ist, ist der Standardwert die Kapazität des Workerknotens.</p>
   <p>Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
@@ -456,6 +467,7 @@ spec:
 {: #yaml-example}
 
 Im Folgenden finden Sie eine Kopie einer YAML-Bereitstellungsdatei, die [vorher Abschnitt für Abschnitt erläutert wurde](#app_yaml). Sie können die [YAML-Datei auch von GitHub herunterladen](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
+{: shortdesc}
 
 ```yaml
 apiVersion: apps/v1beta1
@@ -592,19 +604,22 @@ spec:
 ## Kubernetes-Dashboard starten
 {: #cli_dashboard}
 
-Öffnen Sie auf Ihrem lokalen System ein Kubernetes-Dashboard, um Informationen zu einem Cluster und seinen Workerknoten anzuzeigen. [In der GUI](#db_gui) können Sie über eine praktische Schaltfläche mit einem Mausklick auf das Dashboard zugreifen. [Bei der CLI](#db_cli) können Sie auf das Dashboard zugreifen oder die Schritte in einem Automatisierungsprozess wie für eine CI/CD-Pipeline verwenden.
+Öffnen Sie auf Ihrem lokalen System ein Kubernetes-Dashboard, um Informationen zu einem Cluster und seinen Workerknoten anzuzeigen. [In der {{site.data.keyword.Bluemix_notm}}-Konsole](#db_gui) können Sie über eine praktische Schaltfläche mit einem Mausklick auf das Dashboard zugreifen. [Bei der CLI](#db_cli) können Sie auf das Dashboard zugreifen oder die Schritte in einem Automatisierungsprozess wie für eine CI/CD-Pipeline verwenden.
 {:shortdesc}
 
+Sind in Ihrem Cluster so viele Ressourcen und Benutzer enthalten, dass das Kubernetes-Dashboard etwas langsam reagiert? Für Cluster, auf denen Kubernetes Version 1.12 oder höher ausgeführt wird, kann Ihr Clusteradministrator die Bereitstellung von `kubernetes-dashboard` skalieren, indem er `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` ausführt. {: tip}
+
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
+* [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
 Sie können den Standardport verwenden oder einen eigenen Port festlegen, um das Kubernetes-Dashboard für einen Cluster zu starten.
 
-**Kubernetes-Dashboard über die GUI starten**
+**Kubernetes-Dashboard über die {{site.data.keyword.Bluemix_notm}}-Konsole starten**
 {: #db_gui}
 
-1.  Melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-GUI](https://console.bluemix.net/) an.
-2.  Wählen Sie in Ihrem Profil in der Menüleiste das Konto aus, das Sie verwenden möchten.
-3.  Klicken Sie im Menü auf **Container**.
+1.  Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://console.bluemix.net/) an. 
+2.  Klicken Sie in der Menüleiste auf Ihren Benutzeravatar ![Avatarsymbol](../icons/i-avatar-icon.svg "Avatarsymbol") und wählen Sie das Konto aus, das Sie verwenden möchten. 
+3.  Klicken Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") auf **Kubernetes**. 
 4.  Klicken Sie auf der Seite **Cluster** auf den Cluster, auf den Sie zugreifen möchten.
 5.  Klicken Sie auf der Seite mit den Clusterdetails auf die Schaltfläche **Kubernetes-Dashboard**.
 
@@ -657,11 +672,13 @@ Wenn Sie die Arbeit im Kubernetes-Dashboard beendet haben, beenden Sie den Befeh
 <br />
 
 
-## Apps über die GUI bereitstellen
+## Apps über das Kubernetes-Dashboard bereitstellen
 {: #app_ui}
 
-Wenn Sie eine App über das Kubernetes-Dashboard in Ihrem Cluster bereitstellen, wird eine Bereitstellungsressource automatisch die Pods in Ihrem Cluster erstellen, aktualisieren und verwalten.
+Wenn Sie eine App über das Kubernetes-Dashboard in Ihrem Cluster bereitstellen, wird eine Bereitstellungsressource automatisch die Pods in Ihrem Cluster erstellen, aktualisieren und verwalten. Weitere Informationen zur Verwendung des Dashboards finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/).
 {:shortdesc}
+
+Sind in Ihrem Cluster so viele Ressourcen und Benutzer enthalten, dass das Kubernetes-Dashboard etwas langsam reagiert? Für Cluster, auf denen Kubernetes Version 1.12 oder höher ausgeführt wird, kann Ihr Clusteradministrator die Bereitstellung von `kubernetes-dashboard` skalieren, indem er `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` ausführt. {: tip}
 
 Vorbemerkungen:
 
@@ -715,7 +732,7 @@ Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
     ```
     {: pre}
 
-3.  Wenn Sie Ihre App mithilfe eines Knotenportservice, eines Lastenausgleichsservice oder Ingress öffentlich zugänglich gemacht haben, überprüfen Sie, dass Sie auf die App zugreifen können.
+3.  Wenn Sie Ihre App mithilfe eines Knotenportservice, eines Lastausgleichsservice oder Ingress öffentlich zugänglich gemacht haben, überprüfen Sie, dass Sie auf die App zugreifen können.
 
 <br />
 
@@ -757,12 +774,12 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
                   - key: workerPool
                     operator: In
                     values:
-                    - <worker_pool_name>
+                    - <worker-poolname>
     ...
     ```
     {: codeblock}
 
-    Im Abschnitt **affinity** der YAML-Beispieldatei ist `workerPool` der Schlüssel (`key`) und `<worker_pool_name>` der Wert (`value`).
+    Im Abschnitt **affinity** der YAML-Beispieldatei ist `workerPool` der Schlüssel (`key`) und `<worker-poolname>` der Wert (`value`).
 
 3. Wenden Sie die aktualisierte Bereitstellungskonfigurationsdatei an.
     ```
@@ -806,7 +823,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
         ```
         {: screen}
 
-        Wenn Sie eine App-Affinitätsregel basierend auf einem anderen Faktor erstellt haben, rufen Sie stattdessen diesen Wert ab. Wenn Sie beispielsweise überprüfen möchten, dass der App-Pod auf einem Workerknoten in einem bestimmten VLAN bereitgestellt wurde, sehen Sie sich das VLAN an, auf dem sich der Workerknoten befindet, indem Sie den Befehl `ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>` ausführen.
+        Wenn Sie eine App-Affinitätsregel basierend auf einem anderen Faktor erstellt haben, rufen Sie stattdessen diesen Wert ab. Wenn Sie beispielsweise überprüfen möchten, dass der App-Pod auf einem Workerknoten in einem bestimmten VLAN bereitgestellt wurde, sehen Sie sich das VLAN an, auf dem sich der Workerknoten befindet, indem Sie den Befehl `ibmcloud ks worker-get <clustername_oder_-id> <worker_ID>` ausführen.
         {: tip}
 
     4. Stellen Sie in der Ausgabe sicher, dass der Workerknoten mit der privaten IP-Adresse, die Sie im vorherigen Schritt angegeben haben, in diesem Worker-Pool implementiert ist.
@@ -829,7 +846,8 @@ Vorbemerkungen:
 Gehen Sie wie folgt vor, um eine Workload auf einer GPU-Maschine auszuführen:
 1.  Erstellen Sie eine YAML-Datei. In diesem Beispiel verwaltet eine YAML-Datei des Typs `Job` Stapelworkloads, die einen Pod mit kurzer Lebensdauer hervorbringen, der so lange ausgeführt wird, bis der Befehl, der ihn erfolgreich abschließen soll, beendet wird.
 
-    **Wichtig**: Bei GPU-Workloads müssen Sie immer einen Wert für das Feld `resources: limits: nvidia.com/gpu` in der YAML-Spezifikation bereitstellen.
+    Bei GPU-Workloads müssen Sie immer einen Wert für das Feld `resources: limits: nvidia.com/gpu` in der YAML-Spezifikation bereitstellen.
+{: note}
 
     ```yaml
     apiVersion: batch/v1
@@ -1030,7 +1048,7 @@ Schritte:
     Für Bereitstellungen mit einem höheren Grad an Komplexität ist gegebenenfalls die Erstellung einer [Konfigurationsdatei](#app_cli) erforderlich.
     {: tip}
 
-2.  Erstellen Sie einen automatischen Scaler und definieren Sie Ihre Richtlinie. Weitere Informationen zur Arbeit mit dem Befehl `kubectl autoscale` finden Sie in der [Dokumentation zu Kubernetes ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+2.  Erstellen Sie einen automatischen Scaler und definieren Sie Ihre Richtlinie. Weitere Informationen zur Arbeit mit dem Befehl `kubectl autoscale` finden Sie in der [Dokumentation zu Kubernetes ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <bereitstellungsname> --cpu-percent=<prozentsatz> --min=<mindestwert> --max=<höchstwert>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -33,15 +36,14 @@ Es kommt darauf an. Wenn Sie einen Cluster löschen, werden der PVC und der pers
 **Kann ich den PVC löschen, um meinen gesamten Speicher zu entfernen?**</br>
 Manchmal. Wenn Sie [den persistenten Speicher dynamisch erstellen](cs_storage_basics.html#dynamic_provisioning) und eine Speicherklasse wählen, die im Namen kein `retain` führt, werden beim Löschen des PVC auch der persistente Datenträger und die Instanz der IBM Cloud-Infrastruktur (SoftLayer) gelöscht.
 
-Führen Sie in allen anderen Fällen die Anweisungen zum Überprüfen des Status Ihres Persistent Volume Claim, des persistenten Datenträgers und der physischen Speichereinheit aus und löschen Sie sie, falls erforderlich, separat. 
+Führen Sie in allen anderen Fällen die Anweisungen zum Überprüfen des Status Ihres Persistent Volume Claim, des persistenten Datenträgers und der physischen Speichereinheit aus und löschen Sie sie, falls erforderlich, separat.
 
 **Fallen auch nach dem Löschen des Speichers Gebühren an?**</br>
 Dies hängt vom Abrechnungstyp sowie davon ab, welche Elemente Sie löschen. Wenn Sie den PVC und den persistenten Datenträger, aber nicht die Instanz in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) löschen, ist diese Instanz weiterhin vorhanden und Ihnen werden dafür Gebühren berechnet. Damit Ihnen keine Gebühren mehr berechnet werden, müssen Sie alles löschen. Wenn Sie außerdem im Persistent Volume Claim den Abrechnungstyp (`billingType`) angeben, können Sie zwischen einer Abrechnung auf Stundenbasis (`hourly`) und der monatlichen Abrechnung (`monthly`) wählen. Wenn Sie `monthly` auswählen, wird monatlich eine Abrechnung für Ihre Instanz erstellt. Wenn Sie die Instanz löschen, wird Ihnen der Rest des Monats in Rechnung gestellt.
 
 
-**Wichtig**:
-* Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](cs_storage_file.html#backup_restore) oder den [Blockspeicher](cs_storage_block.html#backup_restore) eine Sicherung ausführen.
-* Wenn Sie ein {{site.data.keyword.Bluemix_dedicated}}-Konto verwenden, müssen Sie die Datenträgerlöschung anfordern, indem Sie [ein Support-Ticket öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support).
+<p class="important">Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](cs_storage_file.html#backup_restore) oder den [Blockspeicher](cs_storage_block.html#backup_restore) eine Sicherung ausführen.</br>
+</br>Wenn Sie ein {{site.data.keyword.Bluemix_dedicated}}-Konto verwenden, müssen Sie die Datenträgerlöschung anfordern, indem Sie [einen Supportfall öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support). </p>
 
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
@@ -61,95 +63,93 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
     claim-file-silve      Bound     pvc-1efef0ba-0c48-11e8-968a-f6612bb731fb   24Gi       RWX           ibmc-file-silver        83d
     ```
     {: screen}
-    
-2. Überprüfen Sie für die Speicherklasse die Einstellungen für **ReclaimPolicy** und **billingType**. 
+
+2. Überprüfen Sie für die Speicherklasse die Einstellungen für **ReclaimPolicy** und **billingType**.
    ```
    kubectl describe storageclass <name_der_speicherklasse>
    ```
    {: pre}
-   
-   Wenn die Zurückforderungsrichtlinie `Delete` (Löschen) enthält, werden Ihr persistenter Datenträger und der physische Speicher entfernt, wenn Sie den Persistent Volume Claim entfernen. Wenn die Zurückforderungsrichtlinie `Retain` (Beibehalten) enthält oder Sie Ihren Speicher ohne Speicherklasse bereitgestellt haben, werden Ihr persistenter Datenträger und der physische Speicher nicht entfernt, wenn Sie den Persistent Volume Claim entfernen. Sie müssen den PVC, den persistenten Datenträger und den physischen Speicher separat voneinander entfernen. 
-   
-   **Wichtig:** Wenn Ihr Speicher monatlich berechnet wird, wird Ihnen der gesamte Monat auch dann in Rechnung gestellt, wenn Sie den Speicher vor Ende des Abrechnungszyklus entfernen. 
-   
-3. Entfernen Sie alle Pods, die den Persistent Volume Claim anhängen. 
-   1. Listen Sie die Pods auf, die den PVC anhängen. 
+
+   Wenn die Zurückforderungsrichtlinie `Delete` (Löschen) enthält, werden Ihr persistenter Datenträger und der physische Speicher entfernt, wenn Sie den Persistent Volume Claim entfernen. Wenn die Zurückforderungsrichtlinie `Retain` (Beibehalten) enthält oder Sie Ihren Speicher ohne Speicherklasse bereitgestellt haben, werden Ihr persistenter Datenträger und der physische Speicher nicht entfernt, wenn Sie den Persistent Volume Claim entfernen. Sie müssen den PVC, den persistenten Datenträger und den physischen Speicher separat voneinander entfernen.
+
+   Wenn Ihr Speicher monatlich berechnet wird, wird Ihnen der gesamte Monat auch dann in Rechnung gestellt, wenn Sie den Speicher vor Ende des Abrechnungszyklus entfernen. {: important}
+
+3. Entfernen Sie alle Pods, die den Persistent Volume Claim anhängen.
+   1. Listen Sie die Pods auf, die den PVC anhängen.
       ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc-name>"
       ```
       {: pre}
-    
+
       Beispielausgabe:
       ```
       blockdepl-12345-prz7b:	claim1-block-bronze  
       ```
       {: screen}
-    
-      Wenn in Ihrer CLI-Ausgabe kein Pod zurückgegeben wird, haben Sie keine Pods, die den PVC verwenden. 
-    
-   2. Entfernen Sie den Pod, der den PVC verwendet. Wenn der Pod Teil einer Bereitstellung ist, entfernen Sie die Bereitstellung. 
+
+      Wenn in Ihrer CLI-Ausgabe kein Pod zurückgegeben wird, haben Sie keine Pods, die den PVC verwenden.
+
+   2. Entfernen Sie den Pod, der den PVC verwendet. Wenn der Pod Teil einer Bereitstellung ist, entfernen Sie die Bereitstellung.
       ```
       kubectl delete pod <podname>
       ```
       {: pre}
-      
-   3. Überprüfen Sie, dass der Pod entfernt wurde. 
+
+   3. Überprüfen Sie, dass der Pod entfernt wurde.
       ```
       kubectl get pods
       ```
       {: pre}
-   
-4. Entfernen Sie den Persistent Volume Claim. 
+
+4. Entfernen Sie den Persistent Volume Claim.
    ```
    kubectl delete pvc <pvc-name>
    ```
    {: pre}
-   
-5. Überprüfen Sie den Status Ihres persistenten Datenträgers. Verwenden Sie den Namen des persistenten Datenträgers (PV), den Sie zuvor als **VOLUME** abgerufen haben. 
+
+5. Überprüfen Sie den Status Ihres persistenten Datenträgers. Verwenden Sie den Namen des persistenten Datenträgers (PV), den Sie zuvor als **VOLUME** abgerufen haben.
    ```
    kubectl get pv <pv-name>
    ```
    {: pre}
-   
-   Wenn Sie den PVC entfernen, wird der an den PVC gebundene persistente Datenträger freigegeben. Abhängig davon, wie Sie Ihren Speicher bereitgestellt haben, wird Ihr persistenter Datenträger bei automatischem Löschen in den Status `Deleting` (Wird gelöscht) oder bei manuellem Löschen in den Status `Released` (Freigegeben) versetzt. 
-   
-   **Anmerkung**: Bei automatisch zu löschenden persistenten Datenträgern kann vor dem Löschen kurzzeitig der Status `Released` angezeigt werden. Führen Sie den Befehl nach einigen Minuten erneut aus, um zu prüfen, ob der persistente Datenträger entfernt wurde.
-   
-6. Wenn der persistente Datenträger nicht entfernt wurde, entfernen Sie ihn manuell. 
+
+   Wenn Sie den PVC entfernen, wird der an den PVC gebundene persistente Datenträger freigegeben. Abhängig davon, wie Sie Ihren Speicher bereitgestellt haben, wird Ihr persistenter Datenträger bei automatischem Löschen in den Status `Deleting` (Wird gelöscht) oder bei manuellem Löschen in den Status `Released` (Freigegeben) versetzt. **Hinweis**: Bei automatisch zu löschenden persistenten Datenträgern kann vor dem Löschen kurzzeitig der Status `Released` angezeigt werden. Führen Sie den Befehl nach einigen Minuten erneut aus, um zu prüfen, ob der persistente Datenträger entfernt wurde.
+
+6. Wenn der persistente Datenträger nicht entfernt wurde, entfernen Sie ihn manuell.
    ```
    kubectl delete pv <pv-name>
    ```
    {: pre}
-   
-7. Überprüfen Sie, dass der persistente Datenträger entfernt wurde. 
+
+7. Überprüfen Sie, dass der persistente Datenträger entfernt wurde.
    ```
    kubectl get pv
    ```
    {: pre}
-   
-8. {: #sl_delete_storage}Listen Sie die physische Speicherinstanz auf, auf die Ihr persistenter Datenträger verwiesen hat, und notieren Sie die **id** der physischen Speicherinstanz. 
 
-   **File Storage:** 
+8. {: #sl_delete_storage}Listen Sie die physische Speicherinstanz auf, auf die Ihr persistenter Datenträger verwiesen hat, und notieren Sie die **id** der physischen Speicherinstanz.
+
+   **File Storage:**
    ```
    ibmcloud sl file volume-list --columns id  --columns notes | grep <pv-name>
    ```
    {: pre}
-   **Block Storage:**
+   **Blockspeicher:**
    ```
    ibmcloud sl block volume-list --columns id --columns notes | grep <pv-name>
    ```
    {: pre}
-     
-   Wenn Sie Ihren Cluster entfernt haben und den Namen des persistenten Datenträgers nicht abrufen können, ersetzen Sie `grep <pv_name>` durch `grep <cluster_id>`, um alle Speichereinheiten aufzulisten, die Ihrem Cluster zugeordnet sind. 
+
+   Wenn Sie Ihren Cluster entfernt haben und den Namen des persistenten Datenträgers nicht abrufen können, ersetzen Sie `grep <pv-name>` durch `grep <cluster-id>`, um alle Speichereinheiten aufzulisten, die Ihrem Cluster zugeordnet sind.
    {: tip}
-     
-   Beispielausgabe: 
+
+   Beispielausgabe:
    ```
    id         notes   
-   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z 
+   12345678   ibmcloud-block-storage-plugin-7566ccb8d-44nff:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Performance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z
    ```
    {: screen}
-     
+
    Erklärung der Informationen im Feld **Anmerkungen**:
    *  **`:`**: Die Informationen werden durch ein Semikolon (`:`) voneinander getrennt.
    *  **` ibmcloud-block-storage-plugin-7566ccb8d-44nff`**: Das Speicher-Plug-in, das der Cluster verwendet.
@@ -158,31 +158,30 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    *  **`Performance`**: Der Typ des Datei- oder Blockspeichers, entweder `Endurance` oder `Performance`.
    *  **`mypvc`**: Der Name des Persistent Volume Claim, der der Speicherinstanz zugeordnet ist.
    *  **`pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z`**: Der persistente Datenträger, der der Speicherinstanz zugeordnet ist.
-     
-9. Entfernen Sie die physische Speicherinstanz. 
-   
+
+9. Entfernen Sie die physische Speicherinstanz.
+
    **File Storage:**
    ```
    ibmcloud sl file volume-cancel <dateispeicher-id>
    ```
    {: pre}
-   
-   **Block Storage:**
+
+   **Blockspeicher:**
    ```
    ibmcloud sl block volume-cancel <blockspeicher-id>
    ```
    {: pre}
-     
-9. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. **Anmerkung:** Der Löschvorgang kann mehrere Tage andauern. 
 
-   **File Storage:** 
+9. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. Beachten Sie, dass der Löschvorgang mehrere Tage dauern kann. 
+
+   **File Storage:**
    ```
-   ibmcloud sl file volume-list 
-   ```
-   {: pre}
-   **Block Storage:**
-   ```
-   ibmcloud sl block volume-list 
+   ibmcloud sl file volume-list
    ```
    {: pre}
- 
+   **Blockspeicher:**
+   ```
+   ibmcloud sl block volume-list
+   ```
+   {: pre}

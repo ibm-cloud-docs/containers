@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,15 +50,15 @@ Und was ist ein Cluster? Ein Cluster ist eine Gruppe von Ressourcen, Knoten, Net
 **Vorbereitende Schritte**
 
 Rufen Sie den für Sie geeigneten [{{site.data.keyword.Bluemix_notm}}-Kontotyp](https://console.bluemix.net/registration/) ab:
-* **Nutzungsabhängiges Konto oder Abonnementkonto**: Sie können einen kostenlosen Testcluster erstellen. Sie können auch Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) für die Erstellung und Verwendung in Standardclustern bereitstellen.
-* **Lite**: Es ist nicht möglich, einen kostenlosen oder einen Standardcluster zu erstellen. [Aktualisieren Sie Ihr Konto](/docs/account/account_faq.html#changeacct) auf ein nutzungsabhängiges oder ein Abonnementkonto.
+* **Belastbar (nutzungsabhängig oder Abonnement)**: Sie können einen kostenlosen Testcluster erstellen. Sie können auch Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) für die Erstellung und Verwendung in Standardclustern bereitstellen.
+* **Lite**: Es ist nicht möglich, einen kostenlosen oder einen Standardcluster zu erstellen. [Aktualisieren Sie Ihr Konto](/docs/account/account_faq.html#changeacct) in ein belastbares Konto. 
 * **Testversion (zu Schulungszwecken)**: Sie können einen kostenlosen Cluster erstellen, den Sie 30 Tage lang verwenden können, um sich mit dem Service vertraut zu machen.
 
 Gehen Sie wie folgt vor, um einen kostenlosen Cluster zu erstellen:
 
-1.  Wählen Sie im [-{{site.data.keyword.Bluemix_notm}}-**Katalog** ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/catalog/?category=containers) die Option **{{site.data.keyword.containerlong_notm}}** aus und klicken Sie auf **Erstellen**. Es wird eine Seite für die Clusterkonfiguration geöffnet. Standardmäßig ist **Kostenloser Cluster** ausgewählt.
+1.  Wählen Sie im [{{site.data.keyword.Bluemix_notm}}-**Katalog** ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/catalog/?category=containers) den Eintrag **{{site.data.keyword.containershort_notm}}** aus und klicken Sie auf **Erstellen**. Es wird eine Seite für die Clusterkonfiguration geöffnet. Standardmäßig ist **Kostenloser Cluster** ausgewählt.
 
-2. Geben Sie dem Cluster einen eindeutigen Namen.
+2.  Geben Sie dem Cluster einen eindeutigen Namen.
 
 3.  Klicken Sie auf **Cluster erstellen**. Es wird ein Worker-Pool erstellt, der einen Workerknoten enthält. Die Bereitstellung des Workerknotens kann einige Minuten dauern, der Fortschritt wird jedoch auf der Registerkarte **Workerknoten** angezeigt. Wenn der Status `Bereit` lautet, können Sie anfangen, mit dem Cluster zu arbeiten!
 

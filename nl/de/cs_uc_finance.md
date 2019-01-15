@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -21,13 +24,14 @@ lastupdated: "2018-10-25"
 # Anwendungsfälle aus der Finanzdienstleistungsbranche für {{site.data.keyword.Bluemix_notm}}
 {: #cs_uc_finance}
 
-Anhand der folgenden Anwendungsfälle wird veranschaulicht, wie Workloads in {{site.data.keyword.containerlong_notm}} von den Vorteilen der hohen Verfügbarkeit, leistungsfähiger Rechenkapazität, einfacher Einrichtung der Cluster zur schnelleren Bereitstellung und der künstlichen Intelligenz von {{site.data.keyword.ibmwatson}} profitieren können.
+Anhand der folgenden Anwendungsfälle wird veranschaulicht, wie Workloads in {{site.data.keyword.containerlong_notm}} von den Vorteilen der hohen Verfügbarkeit, leistungsfähiger Rechenkapazität, einfacher Einrichtung der Cluster zur schnelleren Bereitstellung und der künstlichen Intelligenz von {{site.data.keyword.ibmwatson}} profitieren können. 
 {: shortdesc}
 
 ## Hypothekenbank friert Kosten ein und beschleunigt Einhaltung gesetzlicher Vorschriften
 {: #uc_mortgage}
 
 Der Risk Management VP eines Unternehmens für Wohnbauhypotheken ist für die Verarbeitung von 70 Millionen Datensätzen pro Tage verantwortlich, aber das lokale System ist langsam und auch ungenau. Die IT-Ausgaben sind deutlich gestiegen, weil die Hardware schnell veraltet war und nicht vollständig verwendet wurde. Während das Unternehmen auf die Bereitstellung der Hardware wartete, verlangsamte sich die Einhaltung der gesetzlicher Bestimmungen. 
+{: shortdesc}
 
 Warum {{site.data.keyword.Bluemix_notm}}: Zum Verbessern der Risikoanalyse setzte das Unternehmen auf {{site.data.keyword.containerlong_notm}} und IBM Cloud Analytics-Services, um die Kosten zu reduzieren, die weltweite Verfügbarkeit zu erhöhen und schließlich die Einhaltung gesetzlicher Bestimmungen zu beschleunigen. Bei Verwendung von {{site.data.keyword.containerlong_notm}} in mehreren Regionen können die Analyse-Apps containerisiert und auf dem gesamten Globus bereitgestellt werden, was die Verfügbarkeit verbessert und die Umsetzung lokaler Regelungen beschleunigt. Die Bereitstellungen werden mit gängigen Open-Source-Tools beschleunigt, die Bestandteil von {{site.data.keyword.containerlong_notm}} sind.
 
@@ -41,7 +45,7 @@ Warum {{site.data.keyword.Bluemix_notm}}: Zum Verbessern der Risikoanalyse setzt
 
 **Die Lösung**
 
-Das Unternehmen begann damit, die Analyse-Apps zu containerisieren und in die Cloud zu stellen. Damit waren die Hardwareprobleme schnell behoben. Ohne großen Aufwand konnten Kubernetes-Cluster entworfen werden, die den hohen Anforderungen an CPU, RAM, Speicher und Sicherheit entsprachen. Und wenn sich die Ergebnisse der Analyse-Apps ändern, kann ohne große Investitionen in die Hardware Rechenleistung hinzugefügt oder reduziert werden. Aufgrund der horizontalen Skalierung von {{site.data.keyword.containerlong_notm}} werden Apps mit der zunehmenden Anzahl der Datensätze skaliert, was zu schnelleren Berichten zur Einhaltung gesetzlicher Bestimmungen führt. Von {{site.data.keyword.containerlong_notm}} werden auf der ganzen Welt flexible Rechenressourcen bereitgestellt, die sicher sind und eine hohe Leistung zur gesamten Nutzung moderner Rechenressourcen bieten.
+Das Unternehmen begann damit, die Analyse-Apps zu containerisieren und in die Cloud zu stellen. Damit waren die Hardwareprobleme sehr schnell behoben. Ohne großen Aufwand konnten Kubernetes-Cluster entworfen werden, die den hohen Anforderungen an CPU, RAM, Speicher und Sicherheit entsprachen. Und wenn sich die Ergebnisse der Analyse-Apps ändern, kann ohne große Investitionen in die Hardware Rechenleistung hinzugefügt oder reduziert werden. Aufgrund der horizontalen Skalierung von {{site.data.keyword.containerlong_notm}} werden Apps mit der zunehmenden Anzahl der Datensätze skaliert, was zu schnelleren Berichten zur Einhaltung gesetzlicher Bestimmungen führt. Von {{site.data.keyword.containerlong_notm}} werden auf der ganzen Welt flexible Rechenressourcen bereitgestellt, die sicher sind und eine hohe Leistung zur gesamten Nutzung moderner Rechenressourcen bieten.
 
 Jetzt empfangen diese Apps Daten in einem hohen Volumen aus einem {{site.data.keyword.cloudant}}-Data-Warehouse. Durch den cloudbasierten Speicher in {{site.data.keyword.cloudant}} wird eine höhere Verfügbarkeit als auf einem lokalen System sichergestellt. Da die Verfügbarkeit von großer Bedeutung ist, werden die Apps in Rechenzentren auf der ganzen Welt bereitgestellt: zur Gewährleistung der Disaster-Recovery und Optimierung der Latenzzeit.
 
@@ -54,7 +58,11 @@ Außerdem wurden die Risikoanalyse und Einhaltung von Vorschriften beschleunigt.
 
 Die Probleme des Unternehmens sind jetzt die Skalierung und die Bereitstellungszeit. 
 
-Die aktuelle Umgebung ist über sieben Jahre alt, befindet sich vor Ort und wird durch begrenzte Rechenleistung, Speicherkapazität und E/A-Kapazität beeinträchtigt. Serveraktualisierungen sind kostenintensiv und ihre Durchführung ist langwierig. Die Aktualisierung der Software und der Apps verläuft nach einem inoffiziellen Prozess und ist nicht reproduzierbar. Die Programmierung des Grids für die Datenverarbeitung mit hoher Leistung ist schwierig. Die API ist für neue Entwickler, die ihre Arbeit gerade aufgenommen haben, zu komplex, und für die Arbeit ist nicht dokumentiertes Wissen erforderlich. Die Durchführung größerer App-Upgrades dauert zwischen sechs und neuen Monate. 
+Die aktuelle Umgebung ist über sieben Jahre alt, befindet sich vor Ort und wird durch begrenzte Rechenleistung, Speicherkapazität und E/A-Kapazität beeinträchtigt.
+Serveraktualisierungen sind kostenintensiv und ihre Durchführung ist langwierig. 
+Die Aktualisierung der Software und der Apps verläuft nach einem inoffiziellen Prozess und ist nicht reproduzierbar. 
+Die Programmierung des Grids für die Datenverarbeitung mit hoher Leistung ist schwierig. Die API ist für neue Entwickler, die ihre Arbeit gerade aufgenommen haben, zu komplex, und für die Arbeit ist nicht dokumentiertes Wissen erforderlich. 
+Die Durchführung größerer App-Upgrades dauert zwischen sechs und neuen Monate. 
 
 **Lösungsmodell: Bedarfsgerechte Rechenkapazität, Speicherkapazität und E/A-Services, die nach Bedarf in einer öffentlichen Cloud mit sicherem Zugriff auf die Unternehmensassets vor Ort ausgeführt werden**
 
@@ -91,6 +99,7 @@ Diese Lösung bietet den unmittelbaren Vorteil der Skalierbarkeit. Mithilfe der 
 {: #uc_payment_tech}
 
 In der Entwicklungsabteilung arbeiten Entwickler mit lokalen konventionellen Tools, was die Prototyperstellung verlangsamt, da sie auf die Bereitstellung der Hardware warten müssen.
+{: shortdesc}
 
 Warum {{site.data.keyword.Bluemix_notm}}: Bei Verwendung von {{site.data.keyword.containerlong_notm}} werden Berechnungen mit Open-Source-Standardtechnologien durchgeführt. Nach dem Wechsel des Unternehmens zu {{site.data.keyword.containerlong_notm}} können die Entwickler auf DevOps-kompatible Tools zugreifen, zum Beispiel portierbare und einfach gemeinsam nutzbare Container.
 
@@ -133,7 +142,7 @@ Technische Lösung:
 * IBM Cloud Logging and Monitoring
 * {{site.data.keyword.ibmwatson_notm}} for Financial Services
 
-Zunächst wurden die virtuellen Maschinen der Zahlungstools containerisiert und in die Cloud gestellt. Damit waren die Hardwareprobleme sehr schnell behoben. Ohne großen Aufwand konnten Kubernetes-Cluster entworfen werden, die den Anforderungen an CPU, RAM, Speicher und Sicherheit entsprachen. Und wenn an den Zahlungstools Änderungen vorgenommen werden müssen, kann ohne kostenintensive und langsame Hardwarekäufe Rechenleistung hinzugefügt oder reduziert werden.  
+Zunächst wurden die virtuellen Maschinen der Zahlungstools containerisiert und in die Cloud gestellt. Damit waren die Hardwareprobleme sehr schnell behoben. Ohne großen Aufwand konnten Kubernetes-Cluster entworfen werden, die den Anforderungen an CPU, RAM, Speicher und Sicherheit entsprachen. Und wenn an den Zahlungstools Änderungen vorgenommen werden müssen, kann ohne kostenintensive und langsame Hardwarekäufe Rechenleistung hinzugefügt oder reduziert werden. 
 
 Aufgrund der horizontalen Skalierung von {{site.data.keyword.containerlong_notm}} werden die Apps mit der zunehmenden Anzahl der Partner skaliert, was zu einem schnelleren Zuwachs führt. Von {{site.data.keyword.containerlong_notm}} werden auf der ganzen Welt flexible Rechenressourcen bereitgestellt, die für die gesamte Nutzung moderner Rechenressourcen hohe Sicherheit bieten. 
 
@@ -146,7 +155,7 @@ Sicherheit zuerst: Bei Verwendung von Bare-Metal für {{site.data.keyword.contai
 **Schritt 1: Lift-and-shift zum Sichern der Rechenleistung**
 * Apps, die hochsensible Daten verwalten, können in {{site.data.keyword.containerlong_notm}} mithilfe von Bare Metal für Trusted Compute ausgeführt werden. Mit Trusted Compute kann die zugrunde liegende Hardware auf Manipulationen überprüft werden. 
 * Migrieren Sie die Images der virtuellen Maschine auf Container-Images, die in {{site.data.keyword.containerlong_notm}} in der öffentlichen {{site.data.keyword.Bluemix_notm}}-Instanz ausgeführt werden.
-* Auf dieser Grundlage werden von Vulnerability Advisor Schwachstellensuchen für Images, Richtlinien, Container und Paketierung auf bekannte Malware durchgeführt. 
+* Auf dieser Grundlage werden von Vulnerability Advisor Schwachstellensuchen für Images, Richtlinien, Container und Paketierung auf bekannte Malware durchgeführt.  
 * Die Kosten für private Rechenzentren bzw. Investitionen vor Ort werden erheblich reduziert und durch ein Modell für Utility-Computing ersetzt, das abhängig vom Workloadbedarf skaliert wird.
 
 **Schritt 2: Operationen und Verbindungen zum Back-End vorhandener Zahlungssysteme**

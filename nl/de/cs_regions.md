@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,52 +13,58 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Regionen und Zonen
 {: #regions-and-zones}
 
-Eine Region ist ein bestimmter Standort, an dem Sie Apps, Services und andere {{site.data.keyword.Bluemix}}-Ressourcen bereitstellen können. [{{site.data.keyword.Bluemix_notm}}-Regionen](#bluemix_regions) unterscheiden sich von [{{site.data.keyword.containerlong}}-Regionen](#container_regions). Regionen bestehen aus einer oder mehreren Zonen, bei denen es sich um physische Rechenzentren handelt, in denen die Berechnungs-, Netz- und Speicherressourcen sowie die zugehörige Kühlung und Stromversorgung für Services und Anwendungen gehostet werden. Zonen sind isoliert voneinander, wodurch sichergestellt wird, dass es keinen gemeinsamen Fehlerpunkt gibt. 
+Eine Region ist ein bestimmter Standort, an dem Sie Apps, Services und andere {{site.data.keyword.Bluemix}}-Ressourcen bereitstellen können. [{{site.data.keyword.Bluemix_notm}}-Regionen](#bluemix_regions) unterscheiden sich von [{{site.data.keyword.containerlong}}-Regionen](#container_regions). Regionen bestehen aus einer oder mehreren Zonen, bei denen es sich um physische Rechenzentren handelt, in denen die Berechnungs-, Netz- und Speicherressourcen sowie die zugehörige Kühlung und Stromversorgung für Services und Anwendungen gehostet werden. Zonen sind isoliert voneinander, wodurch sichergestellt wird, dass es keinen gemeinsamen Fehlerpunkt gibt.
 {:shortdesc}
-
-{{site.data.keyword.Bluemix_notm}} wird weltweit gehostet. Die Services in {{site.data.keyword.Bluemix_notm}} sind möglicherweise global verfügbar, oder aber nur innerhalb einer bestimmten Region. Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} erstellen, verbleiben seine Ressourcen in der Region, in der Sie den Cluster bereitgestellt haben. 
-
-**Hinweis**: Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
 
 ![{{site.data.keyword.containerlong_notm}}-Regionen und -Zonen](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}}-Regionen und -Zonen_
 
-Folgende {{site.data.keyword.containerlong_notm}}-Regionen werden unterstützt:
-* Asien-Pazifik (nur Standardcluster)
-* Asien-Pazifik (Süden)
-* Mitteleuropa
-* Vereinigtes Königreich (Süden)
-* Vereinigte Staaten (Osten) (nur Standardcluster)
-* Vereinigte Staaten (Süden)
+{{site.data.keyword.Bluemix_notm}} wird weltweit gehostet. Die Services in {{site.data.keyword.Bluemix_notm}} sind möglicherweise global verfügbar, oder aber nur innerhalb einer bestimmten Region. Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} erstellen, verbleiben seine Ressourcen in der Region, in der Sie den Cluster bereitgestellt haben.
+
+Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
+{: note}
+
+| {{site.data.keyword.containerlong_notm}}-Region | Entspricht {{site.data.keyword.Bluemix_notm}}-Standort |
+| --- | --- |
+| Asien-Pazifik (nur Standardcluster) | Tokio |
+| Asien-Pazifik (Süden) | Sydney |
+| Mitteleuropa | Frankfurt |
+| Vereinigtes Königreich (Süden) | London |
+| Vereinigte Staaten (Osten) (nur Standardcluster) | Washington DC |
+| Vereinigte Staaten (Süden) | Dallas |
+{: caption="Tabelle: Unterstützte Kubernetes-Serviceregionen und entsprechende IBM Cloud-Standorte" caption-side="top"}
 
 <br />
 
 
-## Regionen in {{site.data.keyword.Bluemix_notm}}
+## Standorte in {{site.data.keyword.Bluemix_notm}}
 {: #bluemix_regions}
 
-Sie können Ihre Ressourcen übergreifend für die {{site.data.keyword.Bluemix_notm}}-Services organisieren, indem Sie die {{site.data.keyword.Bluemix_notm}}-Regionen verwenden. Sie können beispielsweise einen Kubernetes-Cluster mithilfe eines privaten Docker-Images erstellen, das in Ihrem {{site.data.keyword.registryshort_notm}} derselben Region gespeichert ist.
+Sie können Ihre Ressourcen übergreifend für die {{site.data.keyword.Bluemix_notm}}-Services organisieren, indem Sie die {{site.data.keyword.Bluemix_notm}}-Standorte, auch Regionen genannt, verwenden. Sie können beispielsweise einen Kubernetes-Cluster mithilfe eines privaten Docker-Images erstellen, das in Ihrem {{site.data.keyword.registryshort_notm}} an demselben Standort gespeichert ist.
 {:shortdesc}
 
-Um zu überprüfen, in welcher {{site.data.keyword.Bluemix_notm}}-Region Sie sich momentan befinden, müssen Sie den Befehl `ibmcloud info` ausführen und dann den Wert im Feld **Region** überprüfen.
+Um zu überprüfen, an welchem {{site.data.keyword.Bluemix_notm}}-Standort Sie sich momentan befinden, müssen Sie den Befehl `ibmcloud info` ausführen und dann den Wert im Feld **Region** überprüfen. 
 
-Auf {{site.data.keyword.Bluemix_notm}}-Regionen kann zugegriffen werden, indem bei der Anmeldung der API-Endpunkt angegeben wird. Wenn Sie keine Region angeben, werden Sie automatisch bei der nächstgelegenen Region angemeldet.
+Auf {{site.data.keyword.Bluemix_notm}}-Standorte kann zugegriffen werden, indem bei der Anmeldung der API-Endpunkt der Region angegeben wird. Wenn Sie keinen Regionsendpunkt angeben, werden Sie automatisch bei der nächstgelegenen Region angemeldet. 
 
 Beispielsweise können Sie die folgenden Befehle für die Anmeldung bei den API-Endpunkten der {{site.data.keyword.Bluemix_notm}}-Region verwenden:
 
-  * Vereinigte Staaten (Süden)
+  * Dallas
       ```
       ibmcloud login -a api.ng.bluemix.net
       ```
       {: pre}
 
-  * Vereinigte Staaten (Osten)
+  * Washington DC
       ```
       ibmcloud login -a api.us-east.bluemix.net
       ```
@@ -70,13 +76,13 @@ Beispielsweise können Sie die folgenden Befehle für die Anmeldung bei den API-
       ```
       {: pre}
 
-  * Deutschland
+  * Frankfurt
       ```
       ibmcloud login -a api.eu-de.bluemix.net
       ```
       {: pre}
 
-  * Vereinigtes Königreich
+  * London
       ```
       ibmcloud login -a api.eu-gb.bluemix.net
       ```
@@ -91,7 +97,8 @@ Beispielsweise können Sie die folgenden Befehle für die Anmeldung bei den API-
 Mithilfe von {{site.data.keyword.containerlong_notm}}-Regionen können Sie Kubernetes-Cluster erstellen oder auf Kubernetes-Cluster in einer Region zugreifen, die von der {{site.data.keyword.Bluemix_notm}}-Region abweicht, in der Sie angemeldet sind. Die Endpunkte für die {{site.data.keyword.containerlong_notm}}-Region verweisen speziell auf {{site.data.keyword.containerlong_notm}} und nicht auf {{site.data.keyword.Bluemix_notm}} im Allgemeinen.
 {:shortdesc}
 
-**Hinweis**: Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
+Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
+{: note}
 
 Unterstützte {{site.data.keyword.containerlong_notm}}-Regionen:
   * Asien-Pazifik (nur Standardcluster)
@@ -145,10 +152,10 @@ Die Dokumentation zu den API-Befehlen finden Sie unter [https://containers.bluem
 Zonen sind physische Rechenzentren, die in einer {{site.data.keyword.Bluemix_notm}}-Region verfügbar sind. Regionen sind ein konzeptionelles Hilfsmittel, um Zonen zu organisieren. Sie können Zonen (Rechenzentren) in verschiedenen Ländern umfassen. Die folgende Tabelle zeigt die pro Region verfügbaren Zonen.
 {:shortdesc}
 
-* **Metropole mit mehreren Zonen**: Workerknoten in Clustern, die in einer Metropole mit mehreren Zonen erstellt werden, können auf mehrere Zonen verteilt werden.
-* **Stadt mit einer einzelnen Zone**: Workerknoten in Clustern, die in einer Einzelzonenstadt erstellt werden, bleiben in einer Zone. Workerknoten können nicht über mehrere Zonen verteilt werden.
+* **Metropole mit mehreren Zonen**: Workerknoten in Clustern, die in einer Metropole mit mehreren Zonen erstellt werden, können auf mehrere Zonen verteilt werden. Darüber hinaus erstrecken sich die hochverfügbaren Master über mehrere Zonen, wenn Sie ein Cluster mit der Kubernetes-Version 1.0 oder höher in einer Metropole mit mehreren Zonen erstellen. 
+* **Stadt mit einer einzelnen Zone**: Workerknoten in Clustern, die in einer Einzelzonenstadt erstellt werden, bleiben in einer Zone. Workerknoten können nicht über mehrere Zonen verteilt werden. Der hoch verfügbare Master enthält drei Replikate auf separaten Hosts, erstreckt sich jedoch nicht über mehrere Zonen. 
 
-<table summary="Die Tabelle zeigt die nach Regionen verfügbaren Zonen. Die Tabellenzeilen enthalten von links nach rechts die Region in der ersten Spalte, die Metro-Städte mit mehreren Zonen in der zweiten Spalte und die Einzelzonenstädte in der dritten Spalte.">
+<table summary="Die Tabelle zeigt die nach Regionen verfügbaren Zonen. Die Tabellenzeilen enthalten von links nach rechts die Region in der ersten Spalte, die Metropolen mit mehreren Zonen in der zweiten Spalte und die Einzelzonenstädte in der dritten Spalte.">
 <caption>Verfügbare Städte mit einer und mehreren Zonen nach Region.</caption>
   <thead>
   <th>Region</th>
@@ -159,7 +166,8 @@ Zonen sind physische Rechenzentren, die in einer {{site.data.keyword.Bluemix_not
     <tr>
       <td>Asien-Pazifik (Norden)</td>
       <td>Tokio: tok02, tok04, tok05</td>
-      <td><p>Hongkong (Sonderverwaltungsregion der VR China): hkg02</p>
+      <td><p>Chennai: che01</p>
+      <p>Hongkong (Sonderverwaltungsregion der VR China): hkg02</p>
       <p>Seoul: seo01</p>
       <p>Singapur: sng01</p></td>
     </tr>
@@ -180,7 +188,8 @@ Zonen sind physische Rechenzentren, die in einer {{site.data.keyword.Bluemix_not
     </tr>
     <tr>
       <td>Vereinigtes Königreich (Süden)</td>
-      <td>London: lon04, lon05, lon06<br><br>**Hinweis:** lon02 wird durch lon05 ersetzt. Für neue Cluster muss lon05 verwendet werden.</td>
+      <td>London: lon04, lon05, lon06 **Hinweis:** lon02 wird durch lon05 ersetzt. Neue Cluster müssen lon05 verwenden, und nur lon05 unterstützt hoch verfügbare Master, die sich über mehrere Zonen erstrecken. </td>
+      <td></td>
     </tr>
     <tr>
       <td>Vereinigte Staaten (Osten)</td>
