@@ -279,7 +279,7 @@ When you create a standard virtual cluster, you must choose whether you want the
 
 Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.
 
-Some flavors are available for only one type of tenancy setup. For example, the `m3c` VMs are only available as `shared` tenancy setup.
+Some flavors are available for only one type of tenancy setup. For example, the `m2c` VMs are only available as `shared` tenancy setup.
 {: note}
 
 **What are the general features of VMs?**</br>
@@ -289,7 +289,7 @@ Virtual machines use local disk instead of storage area networking (SAN) for rel
 To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](cs_cluster_update.html#machine_type).
 
 **What virtual machine flavors are available?**</br>
-Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. For example, the `m3c` VMs are only available in the Dallas location (`dal10, dal12, dal13`). You can also review available [bare metal](#bm) or [SDS](#sds) machine types.
+Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. For example, the `m2c` VMs are only available in the Dallas location (`dal10, dal12, dal13`). You can also review available [bare metal](#bm) or [SDS](#sds) machine types.
 
 <table>
 <caption>Available virtual machine types in {{site.data.keyword.containerlong_notm}}.</caption>
@@ -352,32 +352,32 @@ Machine types vary by zone. To see the machine types available in your zone, run
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, m3c.8x64</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for light to mid-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m2c.8x64</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for light to mid-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
 <td>8 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m3c.16x128</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m2c.16x128</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
 <td>16 / 128GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m3c.30x240</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m2c.30x240</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
 <td>30 / 240GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m3c.48x384</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m2c.48x384</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
 <td>48 / 384GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m3c.56x448</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m2c.56x448</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
 <td>56 / 448GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m3c.64x512</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m2c.64x512</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
 <td>64 / 512GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
