@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -41,7 +44,8 @@ Ce tutoriel s'adresse aux développeurs d'applications Cloud Foundry.
 - [Créez un registre d'images privé dans {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
 - [Créez un cluster](cs_clusters.html#clusters_ui).
 - [Ciblez votre interface CLI sur le cluster](cs_cli_install.html#cs_cli_configure).
-- [Assurez-vous de disposer du rôle de plateforme **Editeur**, **Opérateur** ou **Administrateur**](cs_users.html#add_users_cli).
+- Vérifiez que vous disposez des règles d'accès {{site.data.keyword.Bluemix_notm}} IAM pour {{site.data.keyword.containerlong_notm}} :
+    - [N'importe quel rôle de plateforme](cs_users.html#platform)
 - [Familiarisez-vous avec la terminologie de Docker et Kubernetes](cs_tech.html).
 
 
@@ -73,7 +77,7 @@ Obtenez votre code prêt à l'emploi. Vous n'avez pas encore de code ? Vous pouv
 
     A mesure que l'application est déployée, sont affichées des instructions pour le téléchargement, la modification et le redéploiement de votre application avec l'interface de ligne de commande.
 
-    c. Dans l'étape 1 des instructions de l'interface graphique, cliquez sur **DOWNLOAD STARTER CODE**.
+    c. Dans l'étape 1 des instructions de la console, cliquez sur **DOWNLOAD STARTER CODE**.
 
     d. Extrayez le fichier .zip et sauvegardez son contenu dans le répertoire `cf-py`.
 
@@ -259,17 +263,17 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
     ```
     {: screen}
 
-    b. Ouvrez un navigateur et accédez à l'application via l'URL `http://<public_IP_address>:<NodePort>`. En utilisant les valeurs de l'exemple, l'URL est `http://169.xx.xxx.xxx:30872`. Vous pouvez communiquer cette URL à un collègue pour qu'il l'essaye, ou bien l'entrer dans le navigateur de votre téléphone portable pour constater que l'application est réellement accessible au public.
+    b. Ouvrez un navigateur et accédez à l'application via l'URL `http://<public_IP_address>:<NodePort>`. En utilisant les valeurs de l'exemple, l'URL est `http://169.xx.xxx.xxx:30872`. Vous pouvez communiquer cette URL à un collègue pour la tester, ou bien l'entrer dans le navigateur de votre téléphone portable pour constater que l'application est réellement accessible au public.
 
     <img src="images/python_flask.png" alt="Capture d'écran de l'application de conteneur boilerplate Python Flask déployée." />
 
 5.  [Lancez le tableau de bord Kubernetes](cs_app.html#cli_dashboard).
 
-    Si vous sélectionnez votre cluster dans l'interface graphique d'[{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), vous pouvez cliquer sur le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
+    Si vous sélectionnez votre cluster dans la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), vous pouvez cliquer sur le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
     {: tip}
 
 6. Vous pouvez examiner dans l'onglet **Charges de travail** les ressources que vous avez créées.

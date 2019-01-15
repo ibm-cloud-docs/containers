@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -36,6 +39,9 @@ Pour plus d'informations sur le fonctionnement de ce service, voir la [documenta
 
 ## Recherche d'informations pour les événements
 {: #kube-find}
+
+Vous pouvez surveiller les activités de votre cluster en examinant les journaux dans le tableau de bord Kibana.
+{: shortdesc}
 
 Pour surveiller les activités d'administration :
 
@@ -62,75 +68,75 @@ Consultez la liste suivante d'événements de gestion de cluster envoyés à {{s
 <th>Action</th>
 <th>Description</th></tr><tr>
 <td><code>containers-kubernetes.account-credentials.set</code></td>
-<td>Les données d'identification de l'infrastructure dans une région pour un groupe de ressources ont été définies.</td></tr><tr>
+<td>Les données d'identification de l'infrastructure dans une région pour un groupe de ressources sont définies.</td></tr><tr>
 <td><code>containers-kubernetes.account-credentials.unset</code></td>
-<td>La définition des données d'identification de l'infrastructure dans une région pour un groupe de ressources a été annulée.</td></tr><tr>
+<td>La définition des données d'identification de l'infrastructure dans une région pour un groupe de ressources est annulée.</td></tr><tr>
 <td><code>containers-kubernetes.alb.create</code></td>
-<td>Un équilibreur de charge d'application (ALB) Ingress a été créé.</td></tr><tr>
+<td>Un équilibreur de charge d'application (ALB) Ingress est créé.</td></tr><tr>
 <td><code>containers-kubernetes.alb.delete</code></td>
-<td>Un équilibreur de charge d'application (ALB) Ingress a été supprimé.</td></tr><tr>
+<td>Un équilibreur de charge d'application (ALB) Ingress est supprimé.</td></tr><tr>
 <td><code>containers-kubernetes.alb.get</code></td>
-<td>Les informations sur l'ALB Ingress ont été consultées.</td></tr><tr>
+<td>Les informations sur l'ALB Ingress sont consultées.</td></tr><tr>
 <td><code>containers-kubernetes.apikey.reset</code></td>
-<td>Une clé d'API a été réinitialisée pour une région et un groupe de ressources.</td></tr><tr>
+<td>Une clé d'API est réinitialisée pour une région et un groupe de ressources.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.create</code></td>
-<td>Un cluster a été créé.</td></tr><tr>
+<td>Un cluster est créé. </td></tr><tr>
 <td><code>containers-kubernetes.cluster.delete</code></td>
-<td>Un cluster a été supprimé.</td></tr><tr>
+<td>Un cluster est supprimé. </td></tr><tr>
 <td><code>containers-kubernetes.cluster-feature.enable</code></td>
-<td>Une fonction, telle que le calcul sécurisé pour les noeuds worker bare metal, a été activée sur un cluster.</td></tr><tr>
+<td>Une fonction, telle que le calcul sécurisé pour les noeuds worker bare metal, est activée sur un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.get</code></td>
-<td>Les informations sur le cluster ont été consultées.</td></tr><tr>
+<td>Les informations sur le cluster sont consultées.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.create</code></td>
-<td>Une configuration d'acheminement des journaux a été créée.</td></tr><tr>
+<td>Une configuration d'acheminement des journaux est créée.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.delete</code></td>
-<td>Une configuration d'acheminement des journaux a été supprimée.</td></tr><tr>
+<td>Une configuration d'acheminement des journaux est supprimée.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.get</code></td>
-<td>Les informations d'une configuration d'acheminement des journaux ont été consultées.</td></tr><tr>
+<td>Les informations d'une configuration d'acheminement des journaux sont consultées.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.update</code></td>
-<td>Une configuration d'acheminement des journaux a été mise à jour.</td></tr><tr>
+<td>Une configuration d'acheminement des journaux est mise à jour.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.refresh</code></td>
-<td>Une configuration d'acheminement des journaux a été actualisée.</td></tr><tr>
+<td>Une configuration d'acheminement des journaux est actualisée.</td></tr><tr>
 <td><code>containers-kubernetes.logging-filter.create</code></td>
-<td>Un filtre de consignation a été créé.</td></tr><tr>
+<td>Un filtre de consignation est créé.</td></tr><tr>
 <td><code>containers-kubernetes.logging-filter.delete</code></td>
-<td>Un filtre de consignation a été supprimé.</td></tr><tr>
+<td>Un filtre de consignation est supprimé.</td></tr><tr>
 <td><code>containers-kubernetes.logging-filter.get</code></td>
-<td>Les informations sur un filtre de consignation ont été consultées.</td></tr><tr>
+<td>Les informations sur un filtre de consignation sont consultées.</td></tr><tr>
 <td><code>containers-kubernetes.logging-filter.update</code></td>
-<td>Un filtre de consignation a été mis à jour.</td></tr><tr>
+<td>Un filtre de consignation est mis à jour.</td></tr><tr>
 <td><code>containers-kubernetes.logging-autoupdate.changed</code></td>
-<td>Le programme de mise à jour automatique du module complémentaire de consignation a été activé ou désactivé.</td></tr><tr>
+<td>Le programme de mise à jour automatique du module complémentaire de consignation est activé ou désactivé.</td></tr><tr>
 <td><code>containers-kubernetes.mzlb.create</code></td>
-<td>Un équilibreur de charge pour zones multiples a été créé.</td></tr><tr>
+<td>Un équilibreur de charge pour zones multiples est créé.</td></tr><tr>
 <td><code>containers-kubernetes.mzlb.delete</code></td>
-<td>Un équilibreur de charge pour zones multiples a été supprimé.</td></tr><tr>
+<td>Un équilibreur de charge pour zones multiples est supprimé.</td></tr><tr>
 <td><code>containers-kubernetes.service.bind</code></td>
-<td>Un service a été lié à un cluster.</td></tr><tr>
+<td>Un service est lié à un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.service.unbind</code></td>
-<td>Un service a été dissocié d'un cluster.</td></tr><tr>
+<td>Un service est dissocié d'un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.add</code></td>
-<td>Un sous-réseau existant de l'infrastructure IBM Cloud (SoftLayer) a été ajouté dans un cluster.</td></tr><tr>
+<td>Un sous-réseau existant de l'infrastructure IBM Cloud (SoftLayer) est ajouté dans un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.create</code></td>
-<td>Un sous-réseau a été créé.</td></tr><tr>
+<td>Un sous-réseau est créé. </td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.add</code></td>
-<td>Un sous-réseau géré par l'utilisateur a été ajouté dans un cluster.</td></tr><tr>
+<td>Un sous-réseau géré par l'utilisateur est ajouté dans un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.delete</code></td>
-<td>Un sous-réseau géré par l'utilisateur a été retiré d'un cluster.</td></tr><tr>
+<td>Un sous-réseau géré par l'utilisateur est retiré d'un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.version.update</code></td>
-<td>La version Kubernetes d'un noeud maître de cluster a été mise à jour.</td></tr><tr>
+<td>La version Kubernetes d'un noeud maître de cluster est mise à jour.</td></tr><tr>
 <td><code>containers-kubernetes.worker.create</code></td>
-<td>Un noeud worker a été créé.</td></tr><tr>
+<td>Un noeud worker est créé.</td></tr><tr>
 <td><code>containers-kubernetes.worker.delete</code></td>
-<td>Un noeud worker a été supprimé.</td></tr><tr>
+<td>Un noeud worker est supprimé.</td></tr><tr>
 <td><code>containers-kubernetes.worker.get</code></td>
-<td>Les informations sur un noeud worker ont été consultées.</td></tr><tr>
+<td>Les informations sur un noeud worker sont consultées.</td></tr><tr>
 <td><code>containers-kubernetes.worker.reboot</code></td>
-<td>Un noeud worker a été réarmorcé.</td></tr><tr>
+<td>Un noeud worker est réamorcé.</td></tr><tr>
 <td><code>containers-kubernetes.worker.reload</code></td>
-<td>Un noeud worker a été rechargé.</td></tr><tr>
+<td>Un noeud worker est rechargé.</td></tr><tr>
 <td><code>containers-kubernetes.worker.update</code></td>
-<td>Un noeud worker a été mis à jour.</td></tr>
+<td>Un noeud worker est mis à jour.</td></tr>
 </table>
 
 ## Suivi des événements d'audit de Kubernetes
@@ -148,95 +154,95 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
   </tr>
   <tr>
     <td><code>bindings.create</code></td>
-    <td>Une liaison a été créée.</td>
+    <td>Une liaison est créée.</td>
   </tr>
   <tr>
     <td><code>certificatesigningrequests.create</code></td>
-    <td>Une demande de signature de certificat a été créée.</td>
+    <td>Une demande de signature de certificat est créée.</td>
   </tr>
   <tr>
     <td><code>certificatesigningrequests.delete</code></td>
-    <td>Une demande de signature de certificat a été supprimée.</td>
+    <td>Une demande de signature de certificat est supprimée.</td>
   </tr>
   <tr>
     <td><code>certificatesigningrequests.patch</code></td>
-    <td>Un correctif a été appliqué à une demande de signature de certificat.</td>
+    <td>Un correctif est appliqué à une demande de signature de certificat.</td>
   </tr>
   <tr>
     <td><code>certificatesigningrequests.update</code></td>
-    <td>Une demande de signature de certificat a été mise à jour.</td>
+    <td>Une demande de signature de certificat est mise à jour.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.create</code></td>
-    <td>Une liaison de rôle de cluster a été créée.</td>
+    <td>Une liaison de rôle de cluster est créée.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.deleted</code></td>
-    <td>Une liaison de rôle de cluster a été supprimée.</td>
+    <td>Une liaison de rôle de cluster est supprimée.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.patched</code></td>
-    <td>Un correctif a été appliqué à une liaison de rôle de cluster.</td>
+    <td>Un correctif est appliqué à une liaison de rôle de cluster.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.updated</code></td>
-    <td>Une liaison de rôle de cluster a été mise à jour.</td>
+    <td>Une liaison de rôle de cluster est mise à jour.</td>
   </tr>
   <tr>
     <td><code>clusterroles.create</code></td>
-    <td>Un rôle de cluster a été créé.</td>
+    <td>Un rôle de cluster est créé.</td>
   </tr>
   <tr>
     <td><code>clusterroles.deleted</code></td>
-    <td>Un rôle de cluster a été supprimé.</td>
+    <td>Un rôle de cluster est supprimé.</td>
   </tr>
   <tr>
     <td><code>clusterroles.patched</code></td>
-    <td>Un correctif a été appliqué à un rôle de cluster.</td>
+    <td>Un correctif est appliqué à un rôle de cluster.</td>
   </tr>
   <tr>
     <td><code>clusterroles.updated</code></td>
-    <td>Un rôle de cluster a été mis à jour.</td>
+    <td>Un rôle de cluster est mis à jour.</td>
   </tr>
   <tr>
     <td><code>configmaps.create</code></td>
-    <td>Une mappe de configuration a été créée.</td>
+    <td>Une mappe de configuration est créée.</td>
   </tr>
   <tr>
     <td><code>configmaps.delete</code></td>
-    <td>Une mappe de configuration a été supprimée.</td>
+    <td>Une mappe de configuration est supprimée.</td>
   </tr>
   <tr>
     <td><code>configmaps.patch</code></td>
-    <td>Un correctif a été appliqué à une mappe de configuration.</td>
+    <td>Un correctif est appliqué à une mappe de configuration.</td>
   </tr>
   <tr>
     <td><code>configmaps.update</code></td>
-    <td>Une mappe de configuration a été mise à jour.</td>
+    <td>Une mappe de configuration est mise à jour.</td>
   </tr>
   <tr>
     <td><code>controllerrevisions.create</code></td>
-    <td>Une révision de contrôleur a été créée.</td>
+    <td>Une révision de contrôleur est créée.</td>
   </tr>
   <tr>
     <td><code>controllerrevisions.delete</code></td>
-    <td>Une révision de contrôleur a été supprimée.</td>
+    <td>Une révision de contrôleur est supprimée.</td>
   </tr>
   <tr>
     <td><code>controllerrevisions.patch</code></td>
-    <td>Un correctif a été appliqué à une révision de contrôleur.</td>
+    <td>Un correctif est appliqué à une révision de contrôleur.</td>
   </tr>
   <tr>
     <td><code>controllerrevisions.update</code></td>
-    <td>Une révision de contrôleur a été mise à jour.</td>
+    <td>Une révision de contrôleur est mise à jour.</td>
   </tr>
   <tr>
     <td><code>daemonsets.create</code></td>
-    <td>Un ensemble de démons a été créé.</td>
+    <td>Un ensemble de démons est créé.</td>
   </tr>
   <tr>
     <td><code>daemonsets.delete</code></td>
-    <td>Un ensemble de démons a été supprimé.</td>
+    <td>Un ensemble de démons est supprimé.</td>
   </tr>
   <tr>
     <td><code>daemonsets.patch</code></td>
@@ -244,478 +250,478 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
   </tr>
   <tr>
     <td><code>daemonsets.update</code></td>
-    <td>Un ensemble de démons a été mis à jour.</td>
+    <td>Un ensemble de démons est mis à jour.</td>
   </tr>
   <tr>
     <td><code>deployments.create</code></td>
-    <td>Un déploiement a été créé.</td>
+    <td>Un déploiement est créé.</td>
   </tr>
   <tr>
     <td><code>deployments.delete</code></td>
-    <td>Un déploiement a été supprimé.</td>
+    <td>Un déploiement est supprimé.</td>
   </tr>
   <tr>
     <td><code>deployments.patch</code></td>
-    <td>Un correctif a été appliqué à un déploiement.</td>
+    <td>Un correctif est appliqué à un déploiement.</td>
   </tr>
   <tr>
     <td><code>deployments.update</code></td>
-    <td>Un déploiement a été mis à jour.</td>
+    <td>Un déploiement est mis à jour.</td>
   </tr>
   <tr>
     <td><code>events.create</code></td>
-    <td>Un événement a été créé.</td>
+    <td>Un événement est créé.</td>
   </tr>
   <tr>
     <td><code>events.delete</code></td>
-    <td>Un événement a été supprimé.</td>
+    <td>Un événement est supprimé.</td>
   </tr>
   <tr>
     <td><code>events.patch</code></td>
-    <td>Un correctif a été appliqué à un événement.</td>
+    <td>Un correctif est appliqué à un événement.</td>
   </tr>
   <tr>
     <td><code>events.update</code></td>
-    <td>Un événement a été mis à jour.</td>
+    <td>Un événement est mis à jour.</td>
   </tr>
   <tr>
     <td><code>externaladmissionhookconfigurations.create</code></td>
-    <td>Dans Kubernetes version 1.8, une configuration de type externaladmissionhookconfiguration a été créée.</td>
+    <td>Dans Kubernetes version 1.8, une configuration de type externaladmissionhookconfiguration est créée.</td>
   </tr>
   <tr>
     <td><code>externaladmissionhookconfigurations.delete</code></td>
-    <td>Dans Kubernetes version 1.8, une configuration de type externaladmissionhookconfiguration a été supprimée.</td>
+    <td>Dans Kubernetes version 1.8, une configuration de type externaladmissionhookconfiguration est supprimée.</td>
   </tr>
   <tr>
     <td><code>externaladmissionhookconfigurations.patch</code></td>
-    <td>Dans Kubernetes version 1.8, un correctif a été appliqué à une configuration de type externaladmissionhookconfiguration.</td>
+    <td>Dans Kubernetes version 1.8, un correctif est appliqué à une configuration de type externaladmissionhookconfiguration.</td>
   </tr>
   <tr>
     <td><code>externaladmissionhookconfigurations.update</code></td>
-    <td>Dans Kubernetes version 1.8, une configuration de type externaladmissionhookconfiguration a été mise à jour.</td>
+    <td>Dans Kubernetes version 1.8, une configuration de type externaladmissionhookconfiguration est mise à jour.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.create</code></td>
-    <td>Une règle de mise à l'échelle de pod horizontale a été créée.</td>
+    <td>Une règle de mise à l'échelle de pod horizontale est créée.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.delete</code></td>
-    <td>Une règle de mise à l'échelle de pod horizontale a été supprimée.</td>
+    <td>Une règle de mise à l'échelle de pod horizontale est supprimée.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.patch</code></td>
-    <td>Un correctif a été appliqué à une règle de mise à l'échelle de pod horizontale.</td>
+    <td>Un correctif est appliqué à une règle de mise à l'échelle de pod horizontale.</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.update</code></td>
-    <td>Une règle de mise à l'échelle de pod horizontale a été mise à jour.</td>
+    <td>Une règle de mise à l'échelle de pod horizontale est mise à jour.</td>
   </tr>
   <tr>
     <td><code>ingresses.create</code></td>
-    <td>Un équilibreur de charge d'application (ALB) Ingress a été créé.</td>
+    <td>Un équilibreur de charge d'application (ALB) Ingress est créé.</td>
   </tr>
   <tr>
     <td><code>ingresses.delete</code></td>
-    <td>Un équilibreur de charge d'application (ALB) Ingress a été supprimé.</td>
+    <td>Un équilibreur de charge d'application (ALB) Ingress est supprimé.</td>
   </tr>
   <tr>
     <td><code>ingresses.patch</code></td>
-    <td>Un correctif a été appliqué à un équilibreur de charge d'application (ALB) Ingress.</td>
+    <td>Un correctif est appliqué à un équilibreur de charge d'application (ALB) Ingress.</td>
   </tr>
   <tr>
     <td><code>ingresses.update</code></td>
-    <td>Un équilibreur de charge d'application (ALB) Ingress a été mis à jour.</td>
+    <td>Un équilibreur de charge d'application (ALB) Ingress est mis à jour.</td>
   </tr>
   <tr>
     <td><code>jobs.create</code></td>
-    <td>Un travail a été créé.</td>
+    <td>Un travail est créé.</td>
   </tr>
   <tr>
     <td><code>jobs.delete</code></td>
-    <td>Un travail a été supprimé.</td>
+    <td>Un travail est supprimé.</td>
   </tr>
   <tr>
     <td><code>jobs.patch</code></td>
-    <td>Un correctif a été appliqué à un travail.</td>
+    <td>Un correctif est appliqué à un travail.</td>
   </tr>
   <tr>
     <td><code>jobs.update</code></td>
-    <td>Un travail a été mis à jour.</td>
+    <td>Un travail est mis à jour.</td>
   </tr>
   <tr>
     <td><code>localsubjectaccessreviews.create</code></td>
-    <td>Une révision d'accès de type LocalSubjectAccessReview a été créée.</td>
+    <td>Une révision d'accès de type LocalSubjectAccessReview est créée.</td>
   </tr>
   <tr>
     <td><code>limitranges.create</code></td>
-    <td>Une limite de plage a été créée.</td>
+    <td>Une limite de plage est créée.</td>
   </tr>
   <tr>
     <td><code>limitranges.delete</code></td>
-    <td>Une limite de plage a été supprimée.</td>
+    <td>Une limite de plage est supprimée.</td>
   </tr>
   <tr>
     <td><code>limitranges.patch</code></td>
-    <td>Un correctif a été appliqué à une limite de plage.</td>
+    <td>Un correctif est appliqué à une limite de plage.</td>
   </tr>
   <tr>
     <td><code>limitranges.update</code></td>
-    <td>Une limite de plage a été mise à jour.</td>
+    <td>Une limite de plage est mise à jour.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.create</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de mutation a été créée.</td>
+    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de mutation est créée.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.delete</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de mutation a été supprimée.</td>
+    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de mutation est supprimée.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.patch</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, un correctif a été appliqué à une configuration de webhook de mutation.</td>
+    <td>Dans Kubernetes version 1.9 et ultérieure, un correctif est appliqué à une configuration de webhook de mutation.</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.update</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de mutation a été mise à jour.</td>
+    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de mutation est mise à jour.</td>
   </tr>
   <tr>
     <td><code>namespaces.create</code></td>
-    <td>Un espace de nom a été créé.</td>
+    <td>Un espace de nom est créé.</td>
   </tr>
   <tr>
     <td><code>namespaces.delete</code></td>
-    <td>Un espace de nom a été supprimé.</td>
+    <td>Un espace de nom est supprimé.</td>
   </tr>
   <tr>
     <td><code>namespaces.patch</code></td>
-    <td>Un correctif a été appliqué à un espace de nom.</td>
+    <td>Un correctif est appliqué à un espace de nom.</td>
   </tr>
   <tr>
     <td><code>namespaces.update</code></td>
-    <td>Un espace de nom a été mis à jour.</td>
+    <td>Un espace de nom est mis à jour.</td>
   </tr>
   <tr>
     <td><code>networkpolicies.create</code></td>
-    <td>Une règle réseau a été créée.</td>
+    <td>Une règle réseau est créée.</td>
   </tr>
   <tr>
     <td><code>networkpolicies.delete</code></td>
-    <td>Une règle réseau a été supprimée.</td>
+    <td>Une règle réseau est supprimée.</td>
   </tr>
   <tr>
     <td><code>networkpolicies.patch</code></td>
-    <td>Un correctif a été appliqué à une règle réseau.</td>
+    <td>Un correctif est appliqué à une règle réseau.</td>
   </tr>
   <tr>
     <td><code>networkpolicies.update</code></td>
-    <td>Une règle réseau a été mise à jour.</td>
+    <td>Une règle réseau est mise à jour.</td>
   </tr>
   <tr>
     <td><code>nodes.create</code></td>
-    <td>Un noeud a été créé.</td>
+    <td>Un noeud est créé.</td>
   </tr>
   <tr>
     <td><code>nodes.delete</code></td>
-    <td>Un noeud a été supprimé.</td>
+    <td>Un noeud est supprimé.</td>
   </tr>
   <tr>
     <td><code>nodes.patch</code></td>
-    <td>Un correctif a été appliqué à un noeud.</td>
+    <td>Un correctif est appliqué à un noeud.</td>
   </tr>
   <tr>
     <td><code>nodes.update</code></td>
-    <td>Un noeud a été mis à jour.</td>
+    <td>Un noeud est mis à jour.</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.create</code></td>
-    <td>Une réservation de volume persistant a été créée.</td>
+    <td>Une réservation de volume persistant est créée.</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.delete</code></td>
-    <td>Une réservation de volume persistant a été supprimée.</td>
+    <td>Une réservation de volume persistant est supprimée.</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.patch</code></td>
-    <td>Un correctif a été appliqué à une réservation de volume persistant.</td>
+    <td>Un correctif est appliqué à une réservation de volume persistant.</td>
   </tr>
   <tr>
     <td><code>persistentvolumeclaims.update</code></td>
-    <td>Une réservation de volume persistant a été mise à jour.</td>
+    <td>Une réservation de volume persistant est mise à jour.</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.create</code></td>
-    <td>Un volume persistant a été créé.</td>
+    <td>Un volume persistant est créé.</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.delete</code></td>
-    <td>Un volume persistant a été supprimé.</td>
+    <td>Un volume persistant est supprimé.</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.patch</code></td>
-    <td>Un correctif a été appliqué à un volume persistant.</td>
+    <td>Un correctif est appliqué à un volume persistant.</td>
   </tr>
   <tr>
     <td><code>persistentvolumes.update</code></td>
-    <td>Un volume persistant a été mis à jour.</td>
+    <td>Un volume persistant est mis à jour.</td>
   </tr>
   <tr>
     <td><code>poddisruptionbudgets.create</code></td>
-    <td>Un objet poddisruptionbudget a été créé.</td>
+    <td>Un objet poddisruptionbudget est créé.</td>
   </tr>
   <tr>
     <td><code>poddisruptionbudgets.delete</code></td>
-    <td>Un objet poddisruptionbudget a été supprimé.</td>
+    <td>Un objet poddisruptionbudget est supprimé.</td>
   </tr>
   <tr>
     <td><code>poddisruptionbudgets.patch</code></td>
-    <td>Un correctif a été appliqué à un objet poddisruptionbudget.</td>
+    <td>Un correctif est appliqué à un objet poddisruptionbudget.</td>
   </tr>
   <tr>
     <td><code>poddisruptionbudgets.update</code></td>
-    <td>Un objet poddisruptionbudget a été mis à jour.</td>
+    <td>Un objet poddisruptionbudget est mis à jour.</td>
   </tr>
   <tr>
     <td><code>podpresets.create</code></td>
-    <td>Un paramètre de pod prédéfini a été créé.</td>
+    <td>Un paramètre de pod prédéfini est créé.</td>
   </tr>
   <tr>
     <td><code>podpresets.deleted</code></td>
-    <td>Un paramètre de pod prédéfini a été supprimé.</td>
+    <td>Un paramètre de pod prédéfini est supprimé.</td>
   </tr>
   <tr>
     <td><code>podpresets.patched</code></td>
-    <td>Un correctif a été appliqué à un paramètre de pod prédéfini.</td>
+    <td>Un correctif est appliqué à un paramètre de pod prédéfini.</td>
   </tr>
   <tr>
     <td><code>podpresets.updated</code></td>
-    <td>Un paramètre de pod prédéfini a été mis à jour.</td>
+    <td>Un paramètre de pod prédéfini est mis à jour.</td>
   </tr>
   <tr>
     <td><code>pods.create</code></td>
-    <td>Un pod a été créé.</td>
+    <td>Un pod est créé.</td>
   </tr>
   <tr>
     <td><code>pods.delete</code></td>
-    <td>Un pod a été supprimé.</td>
+    <td>Un pod est supprimé.</td>
   </tr>
   <tr>
     <td><code>pods.patch</code></td>
-    <td>Un correctif a été appliqué à un pod.</td>
+    <td>Un correctif est appliqué à un pod.</td>
   </tr>
   <tr>
     <td><code>pods.update</code></td>
-    <td>Un pod a été mis à jour.</td>
+    <td>Un pod est mis à jour.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>Pour Kubernetes version 1.10 et ultérieure, une politique de sécurité de pod a été créée.</td>
+    <td>Pour Kubernetes version 1.10 et ultérieure, une politique de sécurité de pod est créée.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>Pour Kubernetes version 1.10 et ultérieure, une politique de sécurité de pod a été supprimée.</td>
+    <td>Pour Kubernetes version 1.10 et ultérieure, une politique de sécurité de pod est supprimée.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>Pour Kubernetes version 1.10 et ultérieure, un correctif a été appliqué à une politique de sécurité de pod.</td>
+    <td>Pour Kubernetes version 1.10 et ultérieure, un correctif est appliqué à une politique de sécurité de pod.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>Pour Kubernetes version 1.10 et ultérieure, une politique de sécurité de pod a été mise à jour.</td>
+    <td>Pour Kubernetes version 1.10 et ultérieure, une politique de sécurité de pod est mise à jour.</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>
-    <td>Un modèle de pod a été créé.</td>
+    <td>Un modèle de pod est créé.</td>
   </tr>
   <tr>
     <td><code>podtemplates.delete</code></td>
-    <td>Un modèle de pod a été supprimé.</td>
+    <td>Un modèle de pod est supprimé.</td>
   </tr>
   <tr>
     <td><code>podtemplates.patch</code></td>
-    <td>Un correctif a été appliqué à un modèle de pod.</td>
+    <td>Un correctif est appliqué à un modèle de pod.</td>
   </tr>
   <tr>
     <td><code>podtemplates.update</code></td>
-    <td>Un modèle de pod a été mis à jour.</td>
+    <td>Un modèle de pod est mis à jour.</td>
   </tr>
   <tr>
     <td><code>replicasets.create</code></td>
-    <td>Un jeu de répliques a été créé.</td>
+    <td>Un jeu de répliques est créé.</td>
   </tr>
   <tr>
     <td><code>replicasets.delete</code></td>
-    <td>Un jeu de répliques a été supprimé.</td>
+    <td>Un jeu de répliques est supprimé.</td>
   </tr>
   <tr>
     <td><code>replicasets.patch</code></td>
-    <td>Un correctif a été appliqué à un jeu de répliques.</td>
+    <td>Un correctif est appliqué à un jeu de répliques.</td>
   </tr>
   <tr>
     <td><code>replicasets.update</code></td>
-    <td>Un jeu de répliques a été mis à jour.</td>
+    <td>Un jeu de répliques est mis à jour.</td>
   </tr>
   <tr>
     <td><code>replicationcontrollers.create</code></td>
-    <td>Un contrôleur de réplication a été créé.</td>
+    <td>Un contrôleur de réplication est créé.</td>
   </tr>
   <tr>
     <td><code>replicationcontrollers.delete</code></td>
-    <td>Un contrôleur de réplication a été supprimé.</td>
+    <td>Un contrôleur de réplication est supprimé.</td>
   </tr>
   <tr>
     <td><code>replicationcontrollers.patch</code></td>
-    <td>Un correctif a été appliqué à un contrôleur de réplication.</td>
+    <td>Un correctif est appliqué à un contrôleur de réplication.</td>
   </tr>
   <tr>
     <td><code>replicationcontrollers.update</code></td>
-    <td>Un contrôleur de réplication a été supprimé.</td>
+    <td>Un contrôleur de réplication est mis à jour.</td>
   </tr>
   <tr>
     <td><code>resourcequotas.create</code></td>
-    <td>Un quota de ressources a été créé.</td>
+    <td>Un quota de ressources est créé.</td>
   </tr>
   <tr>
     <td><code>resourcequotas.delete</code></td>
-    <td>Un quota de ressources a été supprimé.</td>
+    <td>Un quota de ressources est supprimé.</td>
   </tr>
   <tr>
     <td><code>resourcequotas.patch</code></td>
-    <td>Un correctif a été appliqué à un quota de ressources.</td>
+    <td>Un correctif est appliqué à un quota de ressources.</td>
   </tr>
   <tr>
     <td><code>resourcequotas.update</code></td>
-    <td>Un quota de ressources a été mis à jour.</td>
+    <td>Un quota de ressources est mis à jour.</td>
   </tr>
   <tr>
     <td><code>rolebindings.create</code></td>
-    <td>Une liaison de rôle a été créée.</td>
+    <td>Une liaison de rôle est créée.</td>
   </tr>
   <tr>
     <td><code>rolebindings.deleted</code></td>
-    <td>Une liaison de rôle a été supprimée.</td>
+    <td>Une liaison de rôle est supprimée.</td>
   </tr>
   <tr>
     <td><code>rolebindings.patched</code></td>
-    <td>Un correctif a été appliqué à une liaison de rôle.</td>
+    <td>Un correctif est appliqué à une liaison de rôle.</td>
   </tr>
   <tr>
     <td><code>rolebindings.updated</code></td>
-    <td>Une liaison de rôle a été mise à jour.</td>
+    <td>Une liaison de rôle est mise à jour.</td>
   </tr>
   <tr>
     <td><code>roles.create</code></td>
-    <td>Un rôle a été créé.</td>
+    <td>Un rôle est créé.</td>
   </tr>
   <tr>
     <td><code>roles.deleted</code></td>
-    <td>Un rôle a été supprimé.</td>
+    <td>Un rôle est supprimé.</td>
   </tr>
   <tr>
     <td><code>roles.patched</code></td>
-    <td>Un correctif à été appliqué à un rôle.</td>
+    <td>Un correctif est appliqué à un rôle.</td>
   </tr>
   <tr>
     <td><code>roles.updated</code></td>
-    <td>Un rôle a été mis à jour.</td>
+    <td>Un rôle est mis à jour.</td>
   </tr>
   <tr>
     <td><code>secrets.create</code></td>
-    <td>Une valeur confidentielle a été créée.</td>
+    <td>Une valeur confidentielle (secret) est créée.</td>
   </tr>
   <tr>
     <td><code>secrets.deleted</code></td>
-    <td>Une valeur confidentielle a été supprimée.</td>
+    <td>Une valeur confidentielle (secret) est supprimée.</td>
   </tr>
   <tr>
     <td><code>secrets.get</code></td>
-    <td>Une valeur confidentielle a été affichée.</td>
+    <td>Une valeur confidentielle (secret) est consultée.</td>
   </tr>
   <tr>
     <td><code>secrets.patch</code></td>
-    <td>Un correctif a été appliqué à une valeur confidentielle.</td>
+    <td>Un correctif est appliqué à une valeur confidentielle (secret).</td>
   </tr>
   <tr>
     <td><code>secrets.updated</code></td>
-    <td>Une valeur confidentielle a été mise à jour.</td>
+    <td>Une valeur confidentielle (secret) est mise à jour.</td>
   </tr>
   <tr>
     <td><code>selfsubjectaccessreviews.create</code></td>
-    <td>Une révision d'accès de type SelfSubjectAccessReview a été créée.</td>
+    <td>Une révision d'accès de type SelfSubjectAccessReview est créée.</td>
   </tr>
   <tr>
     <td><code>selfsubjectrulesreviews.create</code></td>
-    <td>Une révision d'accès de type SelfSubjectRulesReview a été créée.</td>
+    <td>Une révision d'accès de type SelfSubjectRulesReview est créée.</td>
   </tr>
   <tr>
     <td><code>subjectaccessreviews.create</code></td>
-    <td>Une révision d'accès de type SubjectAccessReview a été créée.</td>
+    <td>Une révision d'accès de type SubjectAccessReview est créée.</td>
   </tr>
   <tr>
     <td><code>serviceaccounts.create</code></td>
-    <td>Un compte de service a été créé.</td>
+    <td>Un compte de service est créé.</td>
   </tr>
   <tr>
     <td><code>serviceaccounts.deleted</code></td>
-    <td>Un compte de service a été supprimé.</td>
+    <td>Un compte de service est supprimé.</td>
   </tr>
   <tr>
     <td><code>serviceaccounts.patch</code></td>
-    <td>Un correctif a été appliqué à un compte de service.</td>
+    <td>Un correctif est appliqué à un compte de service.</td>
   </tr>
   <tr>
     <td><code>serviceaccounts.updated</code></td>
-    <td>Un compte de service a été mis à jour.</td>
+    <td>Un compte de service est mis à jour.</td>
   </tr>
   <tr>
     <td><code>services.create</code></td>
-    <td>Un service a été créé.</td>
+    <td>Un service est créé. </td>
   </tr>
   <tr>
     <td><code>services.deleted</code></td>
-    <td>Un service a été supprimé.</td>
+    <td>Un service est supprimé. </td>
   </tr>
   <tr>
     <td><code>services.patch</code></td>
-    <td>Un correctif a été appliqué à un service.</td>
+    <td>Un correctif est appliqué à un service.</td>
   </tr>
   <tr>
     <td><code>services.updated</code></td>
-    <td>Un service a été mis à jour.</td>
+    <td>Un service est mis à jour.</td>
   </tr>
   <tr>
     <td><code>statefulsets.create</code></td>
-    <td>Un ensemble avec état a été créé.</td>
+    <td>Un ensemble avec état est créé.</td>
   </tr>
   <tr>
     <td><code>statefulsets.delete</code></td>
-    <td>Un ensemble avec état a été supprimé.</td>
+    <td>Un ensemble avec état est supprimé.</td>
   </tr>
   <tr>
     <td><code>statefulsets.patch</code></td>
-    <td>Un correctif a été appliqué à un ensemble avec état.</td>
+    <td>Un correctif est appliqué à un ensemble avec état.</td>
   </tr>
   <tr>
     <td><code>statefulsets.update</code></td>
-    <td>Un ensemble avec état a été mis à jour.</td>
+    <td>Un ensemble avec état est mis à jour.</td>
   </tr>
   <tr>
     <td><code>tokenreviews.create</code></td>
-    <td>Un objet TokenReview a été créé.</td>
+    <td>Une révision de jeton est créée.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.create</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de validation a été créée.</td>
+    <td>Dans Kubernetes version 1.9 et ultérieure, une validation de configuration de webhook est créée.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.delete</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de validation a été supprimée.</td>
+    <td>Dans Kubernetes version 1.9 et ultérieure, une validation de configuration de webhook est supprimée.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.patch</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, un correctif a été appliqué à une configuration de webhook de validation.</td>
+    <td>Dans Kubernetes version 1.9 et ultérieure, un correctif a été appliqué à une validation de configuration de webhook.</td>
   </tr>
   <tr>
     <td><code>validatingwebhookconfigurations.update</code></td>
-    <td>Dans Kubernetes version 1.9 et ultérieure, une configuration de webhook de validation a été mise à jour.</td>
+    <td>Dans Kubernetes version 1.9 et ultérieure, une validation de configuration de webhook est mise à jour.</td>
   </tr>
 </table>

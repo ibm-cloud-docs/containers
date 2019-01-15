@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -40,24 +43,25 @@ Découvrez les étapes générales de déploiement d'applications en cliquant su
 ## Planification de l'exécution d'applications dans les clusters
 {: #plan_apps}
 
-Vérifiez que votre application est prête à être déployée sur {{site.data.keyword.containerlong_notm}}.
+Avant de déployer une application dans un cluster {{site.data.keyword.containerlong_notm}}, déterminez de quelle manière vous souhaitez configurer votre application pour qu'elle soit accessible correctement et puisse s'intégrer à d'autres services dans {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
 ### Quel type d'objets Kubernetes puis-je créer pour mon application ?
 {: #object}
 
 Lorsque vous préparez le fichier YAML de votre application, vous disposez de plusieurs options pour augmenter la disponibilité, les performances et la sécurité de l'application. Par exemple, au lieu d'un simple pod, vous pouvez utiliser un objet contrôleur Kubernetes pour gérer votre charge de travail, par exemple un jeu de répliques, un travail ou un ensemble de démons. Pour plus d'informations sur les pods et les contrôleurs, consultez la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). Un déploiement qui gère un jeu de répliques de pods est un cas d'utilisation courant d'application.
+{: shortdesc}
 
 Par exemple, un objet `kind: Deployment` est un bon choix pour déployer un pod d'application car avec cet objet, vous pouvez spécifier un jeu de répliques pour obtenir une disponibilité accrue pour vos pods.
 
 Le tableau suivant décrit les raisons pour lesquelles vous pourrez être amené à créer différents types d'objets de charge de travail Kubernetes.
 
-| Objet | Description | 
+| Objet | Description |
 | --- | --- |
 | [`Pod` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | Un pod est l'unité la plus petite que vous puissiez déployer pour vos charges de travail. Elle peut héberger un ou plusieurs conteneurs. Semblables aux conteneurs, les pods sont conçus pour pouvoir être supprimés et sont souvent utilisés à des fins de test unitaire de fonctions d'application. Pour éviter que votre application soit indisponible, envisagez de déployer les pods avec un contrôleur Kubernetes, par exemple un déploiement. Un déploiement vous aide à gérer plusieurs pods, répliques, mises à l'échelle, transferts, etc. |
 | [`ReplicaSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | Un jeu de réplique (ReplicaSet) permet d'assurer que plusieurs répliques de votre pod sont en cours d'exécution et replanifie un pod si un pod tombe en panne. Vous pouvez créer un jeu de répliques pour tester comment fonctionne la planification d'un pod, toutefois, pour gérer les mises à jour, les transferts et les mises à l'échelle, créez plutôt un déploiement à la place. |
 | [`Deployment` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | Un déploiement (Deployment) est un contrôleur qui gère un pod ou un [jeu de répliques ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) de modèles de pod. Vous pouvez créer des pods ou des jeux de répliques sans recourir à un déploiement pour tester des fonctions d'application. Pour une configuration au niveau production, utilisez des déploiements pour gérer les mises à jour, les transferts ou la mise à niveau des applications. |
-| [`StatefulSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Semblable aux déploiements, un objet Statefulset est un contrôleur qui gère un jeu de répliques de pods. Contrairement aux déploiements, un objet StatefulSet assure que votre pod a une identité unique sur le réseau et conserve son état lors d'une replanification. Lorsque vous voulez exécuter des charges de travail sur le cloud, essayez de concevoir votre application sans état pour que vos instances de service soient indépendantes les unes des autres et puissent échouer sans entraîner d'interruption de service. Cependant, certaines applications, telles que des bases de données, doivent être sans état. Dans ce cas, envisagez de créer un objet StatefulSet et utilisez un stockage de [fichiers](cs_storage_file.html#file_statefulset), un stockage [par blocs](cs_storage_block.html#block_statefulset) ou un stockage d'[objets](cs_storage_cos.html#cos_statefulset) comme stockage persistant pour l'objet StatefulSet. |
+| [`StatefulSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Semblable aux déploiements, un ensemble avec état (Statefulset) est un contrôleur qui gère un jeu de répliques de pods. Contrairement aux déploiements, un ensemble avec état assure que votre pod a une identité unique sur le réseau et conserve son état lors d'une replanification. Lorsque vous voulez exécuter des charges de travail sur le cloud, essayez de concevoir votre application sans état pour que vos instances de service soient indépendantes les unes des autres et puissent échouer sans entraîner d'interruption de service. Cependant, certaines applications, telles que des bases de données, doivent être sans état. Dans ce cas, envisagez de créer un ensemble avec état et utilisez un stockage de [fichiers](cs_storage_file.html#file_statefulset), un stockage [par blocs](cs_storage_block.html#block_statefulset) ou un stockage d'[objets](cs_storage_cos.html#cos_statefulset) comme stockage persistant pour votre ensemble avec état. |
 | [`DaemonSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | Utilisez un ensemble de démons (DaemonSet) lorsque vous devez exécuter le même pod sur tous les noeuds worker de votre cluster. Les pods gérés par un ensemble de démons (daemonset) sont automatiquement planifiés lorsqu'un noeud worker est ajouté dans un cluster. Les cas d'utilisation courants sont en principe les collecteurs de journaux, par exemple `logstash` ou `prometheus`, qui collectent les journaux à partir de tous les noeuds worker pour donner un aperçu de l'état de santé d'un cluster ou d'une application. |
 | [`Job` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | Un travail (Job) garantit que l'exécution d'un ou plusieurs pods se termine avec succès. Vous pouvez utiliser un travail pour les files d'attente ou les travaux par lots afin de prendre en charge le traitement parallèle d'éléments de travail distincts mais associés, par exemple un certain nombre de trames à restituer, de courriers électroniques à envoyer et de fichiers à convertir. Pour planifier l'exécution d'un travail à des périodes spécifiques, utilisez un [travail cron (Cron Job) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/).|
 {: caption="Types d'objets de charge de travail Kubernetes que vous pouvez créer." caption-side="top"}
@@ -80,6 +84,7 @@ Voir [Spécification des exigences relatives à votre application dans votre fic
 {: #variables}
 
 Pour ajouter des informations de variable à vos déploiements au lieu de coder en dur les données dans le fichier YAML, vous pouvez utiliser un objet Kubernetes [`ConfigMap` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) ou [`Secret` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/secret/).
+{: shortdesc}
 
 Pour consommer un objet ConfigMap ou Secret, vous devez le monter sur le pod. L'objet ConfigMap ou Secret est combiné au pod juste avant l'exécution du pod. Vous pouvez réutiliser une spécification et une image de déploiement sur de nombreuses applications, mais les échanger ensuite contre des objets ConfigMap et Secret personnalisés. Les objets Secret peuvent prendre beaucoup d'espace de stockage dans le noeud local, donc planifiez-les en conséquence.
 
@@ -106,6 +111,7 @@ Voir [Ajout de services à des applications](cs_integrations.html#adding_app).
 
 ### Comment m'assurer que mon application dispose des ressources adéquates ?
 Lorsque vous [spécifiez le fichier YAML de votre application](#app_yaml), vous pouvez ajouter des fonctionnalités Kubernetes à la configuration de votre application pour l'aider à acquérir les ressources appropriées. En particulier, [définissez les limites et les demandes de ressources ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) pour chaque conteneur défini dans votre fichier YAML.
+{: shortdesc}
 
 Par ailleurs, l'administrateur de votre cluster doit configurer des contrôles de ressources pouvant affecter le déploiement de votre application, par exemple :
 *  [Quotas de ressources ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
@@ -113,6 +119,7 @@ Par ailleurs, l'administrateur de votre cluster doit configurer des contrôles d
 
 ### Comment accéder à mon application ?
 Vous pouvez accéder à votre application en privé au sein du cluster en [utilisant un service `clusterIP`](cs_network_cluster.html#planning).
+{: shortdesc}
 
 Pour exposer votre application au public, vous disposez de différentes options en fonction de votre type de cluster.
 *  **Cluster gratuit** : vous pouvez exposer votre application en utilisant un [service NodePort](cs_nodeport.html#nodeport).
@@ -122,16 +129,19 @@ Pour exposer votre application au public, vous disposez de différentes options 
 
 ### Après avoir déployé mon application, comment en surveiller l'état de santé ?
 Vous pouvez configurer la [consignation et la surveillance](cs_health.html#health) {{site.data.keyword.Bluemix_notm}} pour votre cluster. Vous pouvez également choisir d'intégrer un [service de consignation ou de surveillance](cs_integrations.html#health_services) tiers.
+{: shortdesc}
 
 ### Comment maintenir mon application à jour ?
 Si vous voulez ajouter et supprimer des applications de manière dynamique par rapport à l'utilisation des charges de travail, voir [Mise à l'échelle des applications](cs_app.html#app_scaling).
+{: shortdesc}
 
 Si vous souhaitez gérer les mises à jour de votre application, voir [Gestion des déploiements en continu](cs_app.html#app_rolling).
 
 ### Comment contrôler qui a accès à mes déploiements d'application ?
 Les administrateurs de compte et de cluster peuvent contrôler l'accès à de nombreux niveaux distincts : le cluster, l'espace de nom Kubernetes, le pod et le conteneur.
+{: shortdesc}
 
-Avec IAM, vous pouvez affecter des droits à des utilisateurs individuels, des groupes ou des comptes de service au niveau de l'instance du cluster.  Vous pouvez davantage restreindre l'accès au cluster en limitant les utilisateurs à certains espaces de nom au sein du cluster. Pour plus d'informations, voir [Affectation d'accès au cluster](cs_users.html#users).
+Avec {{site.data.keyword.Bluemix_notm}} IAM, vous pouvez affecter des droits à des utilisateurs individuels, des groupes ou des comptes de service au niveau de l'instance du cluster.  Vous pouvez davantage restreindre l'accès au cluster en limitant les utilisateurs à certains espaces de nom au sein du cluster. Pour plus d'informations, voir [Affectation d'accès au cluster](cs_users.html#users).
 
 Pour contrôler l'accès au niveau du pod, vous pouvez [configurer des politiques de sécurité de pod avec Kubernetes RBAC](cs_psp.html#psp).
 
@@ -158,6 +168,9 @@ Vous pouvez également [connecter plusieurs clusters dans différentes régions 
 
 ### Augmentation de la disponibilité de votre application
 {: #increase_availability}
+
+Tenez compte des options suivantes pour une disponibilité accrue de votre application.
+{: shortdesc}
 
 <dl>
   <dt>Utilisez des déploiements et des jeux de répliques pour déployer votre application et ses dépendances</dt>
@@ -278,7 +291,7 @@ template:
   <dd><p>En tant qu'administrateur de cluster, vous pouvez vérifier que toutes les équipes partageant un cluster ne consomment pas plus que leur juste part de ressources de calcul (mémoire et processeur) en créant un [objet ResourceQuota ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) pour chaque espace de nom Kubernetes dans le cluster. Si l'administrateur du cluster définit un quota de ressources de calcul, chaque conteneur dans le modèle de déploiement doit spécifier des demandes et des limites de ressources pour la mémoire et le nombre de processeurs, autrement la création de pod échouera.</p>
   <p><ol><li>Vérifiez si un quota de ressources est défini pour un espace de nom.<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>Examinez quelles sont les limites du quota.<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
-  <p>Même si aucun quota de ressources n'est défini, vous pouvez inclure des demandes et des limites de ressources dans votre déploiement pour une meilleure gestion des ressources de noeuds worker. **Remarque** : si un conteneur dépasse ses limites, il peut être redémarré ou risque d'échouer. Si un conteneur dépasse une demande, son pod peut être expulsé si le noeud worker est à cours de la ressource demandée qui fait l'objet du dépassement. Pour obtenir les informations permettant de résoudre le problème, voir [Les pods ne parviennent pas à redémarrer à plusieurs reprises ou sont retirés de manière imprévisible](cs_troubleshoot_clusters.html#pods_fail).</p>
+  <p>Même si aucun quota de ressources n'est défini, vous pouvez inclure des demandes et des limites de ressources dans votre déploiement pour une meilleure gestion des ressources de noeuds worker.</p><p class="note">Si un conteneur dépasse ses limites, il peut être redémarré ou risque d'échouer. Si un conteneur dépasse une demande, son pod peut être expulsé si le noeud worker est à cours de la ressource demandée qui fait l'objet du dépassement. Pour obtenir les informations permettant de résoudre le problème, voir [Les pods ne parviennent pas à redémarrer à plusieurs reprises ou sont retirés de manière imprévisible](cs_troubleshoot_clusters.html#pods_fail).</p>
   <p>**Demande** : quantité minimale de ressources réservée par le planificateur à l'usage du conteneur. Si cette quantité est égale à la limite, la demande est assurée. Si la quantité est inférieure à la limite, la demande est toujours assurée mais le planificateur peut utiliser le différentiel entre la demande et la limite pour compléter les ressources d'autres conteneurs.</p>
   <p>**Limite** : quantité maximale de ressources pouvant être consommées par le conteneur. Si la quantité de ressources totale qui est utilisée sur les conteneurs dépasse la quantité disponible sur le noeud worker, les conteneurs peuvent être expulsés pour libérer de l'espace. Pour éviter cela, définissez la demande de ressources avec une valeur égale à la limite du conteneur. Si aucune limite n'est indiquée, la valeur par défaut correspond à la capacité du noeud worker.</p>
   <p>Pour plus d'informations, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
@@ -456,6 +469,7 @@ spec:
 {: #yaml-example}
 
 Voici une copie d'un fichier YAML de déploiement [explicité section par section précédemment](#app_yaml). Vous pouvez également [télécharger le fichier YAML à partir de GitHub](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
+{: shortdesc}
 
 ```yaml
 apiVersion: apps/v1beta1
@@ -592,19 +606,23 @@ spec:
 ## Lancement du tableau de bord Kubernetes
 {: #cli_dashboard}
 
-Ouvrez un tableau de bord Kubernetes sur votre système local pour consulter des informations sur un cluster et les noeuds worker associés. [Dans l'interface graphique](#db_gui), vous pouvez accéder au tableau de bord par simple clic sur un bouton. [Avec l'interface de ligne de commande (CLI)](#db_cli), vous pouvez accéder au tableau de bord ou utiliser les étapes d'un processus automatique, comme pour un pipeline CI/CD.
+Ouvrez un tableau de bord Kubernetes sur votre système local pour consulter des informations sur un cluster et les noeuds worker associés. [Dans la console {{site.data.keyword.Bluemix_notm}}](#db_gui), vous pouvez accéder au tableau de bord par simple clic sur un bouton. [Avec l'interface de ligne de commande (CLI)](#db_cli), vous pouvez accéder au tableau de bord ou utiliser les étapes d'un processus automatique, comme pour un pipeline CI/CD.
 {:shortdesc}
 
+Votre cluster comporte tellement de ressources et d'utilisateurs que votre tableau de bord Kubernetes est un peu lent ? Pour les clusters qui exécutent Kubernetes version 1.12 ou ultérieure, votre administrateur de cluster peut ajuster le déploiement de `kubernetes-dashboard` en exécutant la commande `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
+{: tip}
+
 Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 
 Vous pouvez utiliser le port par défaut ou définir votre propre port pour lancer le tableau de bord Kubernetes d'un cluster.
 
-**Lancement du tableau de bord Kubernetes à partir de l'interface graphique**
+**Lancement du tableau de bord Kubernetes à partir de la console {{site.data.keyword.Bluemix_notm}}**
 {: #db_gui}
 
-1.  Connectez-vous à l'[interface graphique {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/).
-2.  Dans le profil figurant dans la barre de menu, sélectionnez le compte que vous souhaitez utiliser.
-3.  Dans le menu, cliquez sur **Conteneurs**.
+1.  Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/).
+2.  Dans la barre de menu, cliquez sur l'avatar de l'utilisateur ![Icône Avatar](../icons/i-avatar-icon.svg "Icône Avatar") et sélectionnez le compte que vous souhaitez utiliser.
+3.  Dans le menu ![Icône de menu](../icons/icon_hamburger.svg "Icône de menu"), cliquez sur **Kubernetes**.
 4.  Sur la page **Clusters**, cliquez sur le cluster auquel vous souhaitez accéder.
 5.  Sur la page des détails du cluster, cliquez sur le bouton **Tableau de bord Kubernetes**.
 
@@ -657,11 +675,14 @@ Lorsque vous en avez terminé avec le tableau de bord Kubernetes, utilisez les t
 <br />
 
 
-## Déploiement d'applications depuis l'interface graphique
+## Déploiement d'applications avec le tableau de bord Kubernetes
 {: #app_ui}
 
-Lorsque vous déployez une application dans votre cluster à l'aide du tableau de bord Kubernetes, une ressource de déploiement crée, met à jour et gère automatiquement les pods dans votre cluster.
+Lorsque vous déployez une application dans votre cluster à l'aide du tableau de bord Kubernetes, une ressource de déploiement crée, met à jour et gère automatiquement les pods dans votre cluster. Pour plus d'informations sur l'utilisation du tableau de bord, voir [la documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/).
 {:shortdesc}
+
+Votre cluster comporte tellement de ressources et d'utilisateurs que votre tableau de bord Kubernetes est un peu lent ? Pour les clusters qui exécutent Kubernetes version 1.12 ou ultérieure, votre administrateur de cluster peut ajuster le déploiement de `kubernetes-dashboard` en exécutant la commande `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
+{: tip}
 
 Avant de commencer :
 
@@ -829,7 +850,8 @@ Avant de commencer :
 Pour exécuter une charge de travail sur une machine GPU :
 1.  Créez un fichier YAML. Dans cet exemple, un fichier YAML `Job` gère des charges de travail de type lots en créant un pod provisoire qui s'exécute jusqu'à ce que l'exécution de la commande planifiée soit terminée.
 
-    **Important** : Pour les charges de travail GPU, vous devez toujours indiquer la zone `resources: limits: nvidia.com/gpu` dans la spécification YAML.
+    Pour les charges de travail GPU, vous devez toujours indiquer la zone `resources: limits: nvidia.com/gpu` dans la spécification YAML.
+    {: note}
 
     ```yaml
     apiVersion: batch/v1
@@ -1030,7 +1052,7 @@ Etapes :
     Pour les déploiements plus complexes, vous devrez éventuellement créer un [fichier de configuration](#app_cli).
     {: tip}
 
-2.  Créez un service de mise à l'échelle automatique et définissez votre règle. Pour plus d'informations sur l'utilisation de la commande `kubectl autoscale`, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+2.  Créez un service de mise à l'échelle automatique et définissez votre règle. Pour plus d'informations sur l'utilisation de la commande `kubectl autoscale`, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>

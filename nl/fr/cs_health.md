@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -21,6 +24,9 @@ lastupdated: "2018-10-25"
 
 Configurez les fonctions de consignation et de surveillance dans {{site.data.keyword.containerlong}} pour vous aider à identifier et résoudre les incidents et améliorer l'état de santé et les performances de vos applications et clusters Kubernetes.
 {: shortdesc}
+
+Vous recherchez d'autres service de consignation {{site.data.keyword.Bluemix_notm}} ou tiers à ajouter dans votre cluster ? Consultez les rubriques [Intégration de services de consignation et de surveillance](cs_integrations.html#health_services), ainsi que [{{site.data.keyword.la_full_notm}} avec LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).
+{: note}
 
 ## Description de l'acheminement des journaux de cluster et d'application
 {: #logging}
@@ -50,6 +56,17 @@ Dans la figure suivante, vous pouvez voir l'emplacement des sources configurable
 2. `container` : informations consignées par un conteneur en cours d'exécution.</br>**Chemins** : tout chemin écrit dans `STDOUT` ou `STDERR`.
 
 3. `application` : informations sur les événements qui se produisent au niveau de l'application. Il peut s'agir d'une notification signalant un événement, par exemple une connexion établie, un avertissement concernant le stockage ou d'autres opérations pouvant être effectuées au niveau de l'application.</br>**Chemins** : vous pouvez définir les chemins vers lesquels sont acheminés les journaux. Toutefois, pour que les journaux soient envoyés, vous devez utiliser un chemin absolu dans votre configuration de consignation, autrement vos journaux ne pourront pas être lus. Si votre chemin est monté sur votre noeud worker, il peut avoir créé un lien symbolique. Exemple : si le chemin spécifié est `/usr/local/spark/work/app-0546/0/stderr` mais que les journaux sont acheminés vers `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`, ils ne pourront pas être lus.
+
+4. `storage` : informations sur le stockage persistant configuré dans votre cluster. Les journaux de stockage peuvent vous aider à configurer des tableaux de bord et des alertes pour identifier les problèmes, dans le cadre des éditions de production et pipeline DevOps. **Remarque** : les chemins `/var/log/kubelet.log` et `/var/log/syslog` contiennent également des journaux de stockage, mais les journaux de ces chemins sont collectés par les sources de journal `kubernetes` et `worker`.</br>**Chemins** :
+    * `/var/log/ibmc-s3fs.log`
+    * `/var/log/ibmc-block.log`
+
+  **Pods** :
+    * `portworx-***`
+    * `ibmcloud-block-storage-attacher-***`
+    * `ibmcloud-block-storage-driver-***`
+    * `ibmcloud-block-storage-plugin-***`
+    * `ibmcloud-object-storage-plugin-***`
 
 5. `kubernetes` : informations de kubelet, kube-proxy et en provenance d'autres événements Kubernetes qui se produisent dans l'espace de nom kube-system du noeud worker.</br>**Chemins** :
     * `/var/log/kubelet.log`
@@ -83,7 +100,7 @@ Le tableau suivant présente les différentes options dont vous disposez lors de
     </tr>
     <tr>
       <td><code><em>--log_source</em></code></td>
-      <td>Source depuis laquelle vous désirez acheminer les journaux. Valeurs admises : <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code> et <code>kube-audit</code>. Cet argument prend en charge une liste séparée par des virgules des sources de journal pour lesquelles appliquer la configuration. Si vous ne fournissez pas de source de journal, des configurations de consignation sont créées pour les sources de journal <code>container</code> et <code>ingress</code>.</td>
+      <td>Source depuis laquelle vous désirez acheminer les journaux. Valeurs admises : <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, <code>storage</code> et <code>kube-audit</code>. Cet argument prend en charge une liste séparée par des virgules des sources de journal pour lesquelles appliquer la configuration. Si vous ne fournissez pas de source de journal, des configurations de consignation sont créées pour les sources de journal <code>container</code> et <code>ingress</code>.</td>
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>
@@ -138,9 +155,9 @@ Le tableau suivant présente les différentes options dont vous disposez lors de
   </tbody>
 </table>
 
-**Suis-je responsable de conserver Fluentd à jour pour la consignation ?**
+**Suis-je chargé de conserver Fluentd pour la consignation à jour ?**
 
-Pour apporter des modifications dans vos configurations de consignation ou de filtrage, le module complémentaire de consignation Fluentd doit être au niveau de version le plus récent. Par défaut, des mises à jour automatiques de ce module sont activées. Pour désactiver les mises à jour automatiques, voir [Mise à jour de modules complémentaires de cluster : Fluentd utilisé pour la consignation](cs_cluster_update.html#logging).
+Pour apporter des modifications dans vos configurations de consignation ou de filtrage, le module complémentaire de consignation Fluentd doit être au niveau de version le plus récent. Par défaut, des mises à jour automatiques de ce module sont activées. Pour désactiver les mises à jour automatiques, voir [Mise à jour de modules complémentaires de cluster : Fluentd pour la consignation](cs_cluster_update.html#logging).
 
 **Puis-je utiliser ma propre solution de consignation ?**
 
@@ -152,10 +169,10 @@ Si vous avez des exigences particulières, vous pouvez configurer votre propre s
 ## Configuration de l'acheminement des journaux
 {: #configuring}
 
-Vous pouvez configurer la consignation pour {{site.data.keyword.containerlong_notm}} via l'interface graphique ou l'interface de ligne de commande (CLI).
+Vous pouvez configurer la consignation pour {{site.data.keyword.containerlong_notm}} via la console ou l'interface de ligne de commande (CLI).
 {: shortdesc}
 
-### Activation de l'acheminement des journaux avec l'interface graphique
+### Activation de l'acheminement des journaux avec la console {{site.data.keyword.Bluemix_notm}}
 {: #enable-forwarding-ui}
 
 Vous pouvez configurer le transfert des journaux dans le tableau de bord {{site.data.keyword.containerlong_notm}}. Ce processus peut prendre quelques minutes, donc si vous ne voyez pas les journaux immédiatement, patientez quelques minutes avant de revérifier.
@@ -178,22 +195,24 @@ Vous pouvez créer une configuration pour la consignation de cluster. Vous pouve
 
 **Acheminement des journaux à IBM**
 
-1.  Pour le cluster où se trouve la source de journal : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+1. Vérifiez les droits.
+    1. Assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Editeur** ou **Administrateur**](cs_users.html#platform).
+    2. Si vous avez indiqué un espace lors de la création du cluster, vous et le propriétaire de la clé d'API {{site.data.keyword.containerlong_notm}} devez disposer du [rôle Cloud Foundry **Développeur**](/docs/iam/mngcf.html) dans cet espace.
+      * Si vous ne savez pas qui est le propriétaire de la clé d'API {{site.data.keyword.containerlong_notm}}, exécutez la commande suivante.
+          ```
+          ibmcloud ks api-key-info <cluster_name>
+          ```
+          {: pre}
+      * Pour appliquer immédiatement les modifications que vous avez effectuées, exécutez la commande suivante.
+          ```
+          ibmcloud ks logging-config-refresh <cluster_name>
+          ```
+          {: pre}
+
+2.  Pour le cluster où se trouve la source de journal : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 
     Si vous utilisez un compte dédié, vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace publics afin d'activer l'acheminement des journaux.
     {: tip}
-
-2. Vérifiez les droits. Si vous avez indiqué un espace lors de la création du cluster ou de la configuration de consignation, le propriétaire du compte et le propriétaire de la clé d'API {{site.data.keyword.containerlong_notm}} doivent disposer des [droits](cs_users.html#access_policies) Responsable, Développeur ou Auditeur dans cet espace.
-  * Si vous ne savez pas qui est le propriétaire de la clé d'API {{site.data.keyword.containerlong_notm}}, exécutez la commande suivante.
-      ```
-      ibmcloud ks api-key-info <cluster_name>
-      ```
-      {: pre}
-  * Pour appliquer immédiatement les modifications que vous avez effectuées, exécutez la commande suivante.
-      ```
-      ibmcloud ks logging-config-refresh <cluster_name>
-      ```
-      {: pre}
 
 3. Créez une configuration d'acheminement des journaux.
     ```
@@ -232,17 +251,19 @@ Si vous disposez d'applications qui s'exécutent dans vos conteneurs qui ne peuv
 
 **Acheminement des journaux vers votre propre serveur via les protocoles `udp` ou `tcp`**
 
-1. Pour acheminer les journaux à syslog, configurez un serveur qui accepte un protocole syslog, en utilisant l'une de ces deux méthodes :
+1. Assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Editeur** ou **Administrateur**](cs_users.html#platform).
+
+2. Pour le cluster où se trouve la source de journal : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure). **Remarque** : si vous utilisez un compte dédié, vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace publics afin d'activer l'acheminement des journaux.
+
+3. Pour acheminer les journaux à syslog, configurez un serveur qui accepte un protocole syslog, en utilisant l'une de ces deux méthodes :
   * Configurer et gérer votre propre serveur ou confier la gestion du serveur à un fournisseur. Dans ce cas, obtenez le noeud final de consignation du fournisseur de consignation.
 
-  * Exécuter syslog à partir d'un conteneur. Par exemple, vous pouvez utiliser ce [fichier de déploiement .yaml ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) pour extraire une image publique Docker qui exécute un conteneur dans un cluster Kubernetes. L'image publie le port `514` sur l'adresse IP du cluster public et utilise cette adresse pour configurer l'hôte syslog.
+  * Exécuter syslog à partir d'un conteneur. Par exemple, vous pouvez utiliser ce [fichier de déploiement .yaml ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) pour extraire une image publique Docker qui exécute un conteneur dans votre cluster. L'image publie le port `514` sur l'adresse IP du cluster public et utilise cette adresse pour configurer l'hôte syslog.
 
   Vous pouvez voir vos journaux en tant que fichiers JSON valides en supprimant les préfixes syslog. Pour cela, ajoutez le code suivant au début de votre fichier <code>etc/rsyslog.conf</code> dans lequel s'exécute votre serveur rsyslog : <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
   {: tip}
 
-2. Pour le cluster où se trouve la source de journal : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure). **Remarque** : si vous utilisez un compte dédié, vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace publics afin d'activer l'acheminement des journaux.
-
-3. Créez une configuration d'acheminement des journaux.
+4. Créez une configuration d'acheminement des journaux.
     ```
     ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
     ```
@@ -257,22 +278,24 @@ Si vous disposez d'applications qui s'exécutent dans vos conteneurs qui ne peuv
 Les étapes suivantes sont des instructions générales. Avant d'utiliser le conteneur dans un environnement de production, veillez à ce que toutes les exigences en matière de sécurité soient remplies.
 {: tip}
 
-1. Configurez un serveur acceptant un protocole syslog de l'une des manières suivantes :
+1. Assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Editeur** ou **Administrateur**](cs_users.html#platform).
+
+2. Pour le cluster où se trouve la source de journal : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure). **Remarque** : si vous utilisez un compte dédié, vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace publics afin d'activer l'acheminement des journaux.
+
+3. Configurez un serveur acceptant un protocole syslog de l'une des manières suivantes :
   * Configurer et gérer votre propre serveur ou confier la gestion du serveur à un fournisseur. Dans ce cas, obtenez le noeud final de consignation du fournisseur de consignation.
 
-  * Exécuter syslog à partir d'un conteneur. Par exemple, vous pouvez utiliser ce [fichier de déploiement .yaml ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) pour extraire une image publique Docker qui exécute un conteneur dans un cluster Kubernetes. L'image publie le port `514` sur l'adresse IP du cluster public et utilise cette adresse pour configurer l'hôte syslog. Il vous faudra injecter les certificats de l'autorité de certification et les certificats côté serveur, ainsi que mettre à jour le fichier `syslog.conf` pour activer `tls` sur votre serveur.
+  * Exécuter syslog à partir d'un conteneur. Par exemple, vous pouvez utiliser ce [fichier de déploiement .yaml ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) pour extraire une image publique Docker qui exécute un conteneur dans votre cluster. L'image publie le port `514` sur l'adresse IP du cluster public et utilise cette adresse pour configurer l'hôte syslog. Il vous faudra injecter les certificats de l'autorité de certification et les certificats côté serveur, ainsi que mettre à jour le fichier `syslog.conf` pour activer `tls` sur votre serveur.
 
-2. Sauvegardez le certificat de l'autorité de certification dans un fichier nommé `ca-cert`. Ce nom précis doit être utilisé.
+4. Sauvegardez le certificat de l'autorité de certification dans un fichier nommé `ca-cert`. Ce nom précis doit être utilisé.
 
-3. Créez une valeur confidentielle (secret) dans l'espace de nom `kube-system` pour le fichier `ca-cert`. Lorsque vous créez la configuration de consignation, vous utiliserez le nom de cette valeur confidentielle pour l'indicateur `--ca-cert`.
+5. Créez une valeur confidentielle (secret) dans l'espace de nom `kube-system` pour le fichier `ca-cert`. Lorsque vous créez la configuration de consignation, vous utiliserez le nom de cette valeur confidentielle pour l'indicateur `--ca-cert`.
     ```
     kubectl -n kube-system create secret generic --from-file=ca-cert
     ```
     {: pre}
 
-4. Pour le cluster où se trouve la source de journal : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure). **Remarque** : si vous utilisez un compte dédié, vous devez vous connecter au noeud final {{site.data.keyword.cloud_notm}} public et cibler votre organisation et votre espace publics afin d'activer l'acheminement des journaux.
-
-3. Créez une configuration d'acheminement des journaux.
+6. Créez une configuration d'acheminement des journaux.
     ```
     ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
     ```
@@ -464,7 +487,7 @@ Pour plus d'informations sur les journaux d'audit Kubernetes, reportez-vous à l
 * Actuellement, une règle d'audit par défaut est utilisée pour tous les clusters avec cette configuration de consignation.
 * Les filtres ne sont pas pris en charge actuellement.
 * Il ne peut y avoir qu'une seule configuration `kube-audit` par cluster, mais vous pouvez transférer les journaux à {{site.data.keyword.loganalysisshort_notm}} et à un serveur externe en créant une configuration de consignation et un webhook.
-{: tip}
+* Vous devez disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur**](cs_users.html#platform) pour le cluster.
 
 
 ### Envoi des journaux d'audit à {{site.data.keyword.loganalysisshort_notm}}
@@ -648,15 +671,15 @@ Comme les journaux de serveur d'API Kubernetes sont automatiquement transmis, il
 **Avant de commencer**
 
 * [Mettez à disposition une instance ](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) d'{{site.data.keyword.cos_short}} dans le catalogue {{site.data.keyword.Bluemix_notm}}.
-* Assurez-vous de disposer du [rôle de plateforme IAM **Administrateur](cs_users.html#platform) pour le cluster avec lequel vous travaillez.
+* Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur**](cs_users.html#platform) pour le cluster.
 
 **Création d'un instantané**
 
-1. Créez un compartiment Object Storage via l'interface graphique en suivant [ce tutoriel de mise en route](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
+1. Créez un compartiment Object Storage via la console {{site.data.keyword.Bluemix_notm}} en suivant [ce tutoriel de mise en route](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets).
 
 2. Générez des [données d'identification de service HMAC](/docs/services/cloud-object-storage/iam/service-credentials.html) dans le compartiment que vous avez créé.
   1. Dans l'onglet **Données d'identification pour le service** du tableau de bord {{site.data.keyword.cos_short}}, cliquez sur **Nouvelles données d'identification**.
-  2. Attribuez le rôle IAM `Writer` aux données d'identification HMAC.
+  2. Attribuez le rôle de service `Writer` aux données d'identification HMAC.
   3. Dans la zone **Ajouter des paramètres de configuration en ligne**, indiquez `{"HMAC":true}`.
 
 3. A l'aide de l'interface de ligne de commande, faites une demande d'instantané de vos journaux de maître.
@@ -677,7 +700,7 @@ Comme les journaux de serveur d'API Kubernetes sont automatiquement transmis, il
   ```
   {: screen}
 
-4. Vérifiez le statut de votre demande. La création de l'instantané peut prendre un peu de temps, mais vous pouvez vérifier si l'exécution de votre demande est en train d'aboutir ou non. Vous pouvez obtenir le nom du fichier contenant les journaux du maître dans la réponse et utiliser l'interface utilisateur d'{{site.data.keyword.Bluemix_notm}} pour télécharger le fichier.
+4. Vérifiez le statut de votre demande. La création de l'instantané peut prendre un peu de temps, mais vous pouvez vérifier si l'exécution de votre demande est en train d'aboutir ou non. Vous pouvez obtenir le nom du fichier contenant les journaux de votre maître dans la réponse et utiliser la console {{site.data.keyword.Bluemix_notm}} pour télécharger le fichier.
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
@@ -708,7 +731,7 @@ Des métriques vous aident à surveiller l'état de santé et les performances d
 
 <dl>
   <dt>Page des informations détaillées sur le cluster dans {{site.data.keyword.Bluemix_notm}}</dt>
-    <dd>{{site.data.keyword.containerlong_notm}} fournit des informations sur l'état de santé et la capacité de votre cluster et sur l'utilisation de vos ressources de cluster. Vous pouvez utiliser cette page de l'interface graphique pour étendre votre cluster, gérer votre stockage persistant et ajouter des fonctionnalités supplémentaires à votre cluster via une liaison de service {{site.data.keyword.Bluemix_notm}}. Pour visualiser cette page, accédez à votre Tableau de bord **{{site.data.keyword.Bluemix_notm}}** et sélectionnez un cluster.</dd>
+    <dd>{{site.data.keyword.containerlong_notm}} fournit des informations sur l'état de santé et la capacité de votre cluster et sur l'utilisation de vos ressources de cluster. Vous pouvez utiliser cette console pour étendre votre cluster, gérer votre stockage persistant et ajouter des fonctionnalités supplémentaires à votre cluster via une liaison de service {{site.data.keyword.Bluemix_notm}}. Pour visualiser la page des détails du cluster, accédez à votre Tableau de bord **{{site.data.keyword.Bluemix_notm}}** et sélectionnez un cluster.</dd>
   <dt>Tableau de bord Kubernetes</dt>
     <dd>Le tableau de bord Kubernetes est une interface Web d'administration dans laquelle vous pouvez examiner l'état de santé de vos noeuds worker, rechercher des ressources Kubernetes, déployer des applications conteneurisées et résoudre les incidents liés aux applications avec les informations de consignation et de surveillance. Pour plus d'informations sur l'accès à votre tableau de bord Kubernetes, voir [Lancement du tableau de bord Kubernetes pour {{site.data.keyword.containerlong_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
@@ -740,6 +763,8 @@ Des métriques vous aident à surveiller l'état de santé et les performances d
         </tbody>
       </table>
  </dd>
+  <dt>{{site.data.keyword.mon_full_notm}}</dt>
+  <dd>Gagnez en visibilité opérationnelle sur les performances et l'état de santé de vos applications en déployant Sysdig en tant que service tiers sur vos noeuds worker pour transférer des métriques à {{site.data.keyword.monitoringlong}}. Pour plus d'informations, voir [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Remarque** : {{site.data.keyword.mon_full_notm}} ne prend pas en charge l'environnement d'exécution de conteneur `containerd`. Lorsque vous utilisez {{site.data.keyword.mon_full_notm}} avec des clusters de version 1.11 ou ultérieure, toutes les métriques de conteneur ne sont pas forcément collectées.</dd>
 </dl>
 
 Pour éviter tout conflit lorsque vous utilisez le service de métriques intégré, assurez-vous que les clusters dans les groupes de ressources et les régions ont des noms uniques.
@@ -764,9 +789,13 @@ Le système de reprise automatique d'{{site.data.keyword.containerlong_notm}} pe
 {: shortdesc}
 
 Le système de reprise automatique effectue diverses vérifications pour obtenir l'état de santé des noeuds worker. Si le système de reprise automatique détecte un mauvais état de santé d'un noeud worker d'après les vérifications configurées, il déclenche une mesure corrective (par exemple, un rechargement du système d'exploitation) sur le noeud worker. Un seul noeud worker à la fois fait l'objet d'une mesure corrective. La mesure corrective doit réussir sur le noeud worker pour que d'autre noeuds worker bénéficient d'une mesure corrective. Pour plus d'informations, reportez-vous à cet [article de blogue sur la reprise automatique ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).</br> </br>
-**Remarque** : le système de reprise automatique nécessite qu'au moins un noeud worker soit opérationnel pour fonctionner correctement. Configurez le système de reprise automatique avec des vérifications actives uniquement dans les clusters contenant au moins deux noeuds worker.
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+Le système de reprise automatique nécessite qu'au moins un noeud worker soit sain pour fonctionner correctement. Configurez le système de reprise automatique avec des vérifications actives uniquement dans les clusters contenant au moins deux noeuds worker.
+{: note}
+
+Avant de commencer :
+- Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur**](cs_users.html#platform).
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 
 1. [Installez Helm pour votre cluster et ajoutez le référentiel {{site.data.keyword.Bluemix_notm}} dans votre instance Helm](cs_integrations.html#helm).
 

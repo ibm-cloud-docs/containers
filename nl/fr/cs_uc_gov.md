@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -68,7 +71,7 @@ Le processus CI/CD est en grande partie automatisé avec {{site.data.keyword.con
 
 **Modèle de solution**
 
-Les outils de calcul, de stockage et d'API à la demande s'exécutent dans le cloud public avec un accès sécurisé aux sources de données locales en entrée et en sortie.  
+Les outils de calcul, de stockage et d'API à la demande s'exécutent dans le cloud public avec un accès sécurisé aux sources de données locales en entrée et en sortie. 
 
 Solution technique :
 * {{site.data.keyword.containerlong_notm}}
@@ -132,7 +135,7 @@ Ils créent alors un partenariat dédié aux solutions commerciales :
 
 Les développeurs ont commencé par déployer leurs applications dans des conteneurs avec {{site.data.keyword.containerlong_notm}}. Ils ont créé des clusters pour un environnement de développement partagé leur permettant de déployer rapidement des améliorations pour leurs applications. Les conteneurs permettent à chaque équipe de développement d'utiliser le langage qui leur convient.
 
-La sécurité d'abord : les responsables informatiques ont choisi la fonction de calcul sécurisé pour bare metal pour l'hébergement des clusters. Avec la technologie bare metal pour {{site.data.keyword.containerlong_notm}}, les charges de travail sensibles des douanes disposent désormais d'un isolement standard mais dans le cadre de la flexibilité du cloud public. La technologie bare metal fournit une fonction de calcul sécurisé qui peut vérifier que le matériel sous-jacent ne fait pas l'objet de falsification.  
+La sécurité d'abord : les responsables informatiques ont choisi la fonction de calcul sécurisé pour bare metal pour l'hébergement des clusters. Avec la technologie bare metal pour {{site.data.keyword.containerlong_notm}}, les charges de travail sensibles des douanes disposent désormais d'un isolement standard mais dans le cadre de la flexibilité du cloud public. La technologie bare metal fournit une fonction de calcul sécurisé qui peut vérifier que le matériel sous-jacent ne fait pas l'objet de falsification. 
 
 Comme la compagnie maritime envisage également d'établir un partenariat avec d'autres ports, la sécurité des applications est fondamentale. Les manifestes de transport maritime et les informations douanières sont des documents hautement confidentiels. Sur cette base sécuritaire, Vulnerability Advisor offre les fonctionnalités d'analyse suivantes : 
 * Analyses de vulnérabilité des images
@@ -167,8 +170,8 @@ Solution technique :
 * Les outils à haute disponibilité (HA) intégrés dans {{site.data.keyword.containerlong_notm}} équilibrent la charge de travail au sein de chaque région géographique, en incluant la réparation spontanée et l'équilibrage de charge.
 
 **Etape 3 : Partage des données**
-* {{site.data.keyword.cloudant}} est une base de données NoSQL moderne qui convient à toute une gamme de cas d'utilisation axés sur les données, du stockage et des requêtes de données de type clé-valeur aux documents complexes.  
-* Pour diminuer les requêtes adressées aux bases de données régionales, {{site.data.keyword.cloudant}} est utilisé pour mettre en cache les données de session de l'utilisateur couvrant plusieurs applications.  
+* {{site.data.keyword.cloudant}} est une base de données NoSQL moderne qui convient à toute une gamme de cas d'utilisation axés sur les données, du stockage et des requêtes de données de type clé-valeur aux documents complexes. 
+* Pour diminuer les requêtes adressées aux bases de données régionales, {{site.data.keyword.cloudant}} est utilisé pour mettre en cache les données de session de l'utilisateur couvrant plusieurs applications. 
 * Cette configuration améliore l'utilisation et les performances de l'application de front-end sur les différentes applications dans {{site.data.keyword.containershort}}.
 * Alors que les applications de noeuds worker dans {{site.data.keyword.containerlong_notm}} analysent les données locales et stockent les résultats dans {{site.data.keyword.cloudant}}, {{site.data.keyword.openwhisk}} réagit à tout changement et assainit automatiquement les données sur les flux de données entrants. 
 * De la même manière, les notifications d'expédition dans une région peuvent être déclenchées via des transferts de données de sorte que tous les clients en aval puissent accéder aux nouvelles données.

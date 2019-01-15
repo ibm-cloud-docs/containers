@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -22,57 +25,60 @@ lastupdated: "2018-10-25"
 ## Choix d'une solution de stockage
 {: #choose_storage_solution}
 
-Avant de décider du type de stockage qui vous convient le mieux, vous devez connaître les conditions requises par votre application, le type de données que vous souhaitez stocker et la fréquence à laquelle vous souhaitez accéder à ces données. 
+Avant de décider du type de stockage qui vous convient le mieux, vous devez connaître les conditions requises par votre application, le type de données que vous souhaitez stocker et la fréquence à laquelle vous souhaitez accéder à ces données.
 {: shortdesc}
 
-1. Déterminez si vos données doivent faire l'objet d'un stockage permanent ou si elles peuvent être retirées à moment donné. 
-   - **Stockage persistant :** vos données doivent toujours être disponibles, même en cas de retrait du conteneur, du noeud worker ou du cluster. Utilisez le stockage persistant dans les scénarios suivants : 
+1. Déterminez si vos données doivent faire l'objet d'un stockage permanent ou si elles peuvent être retirées à moment donné.
+   - **Stockage persistant :** vos données doivent toujours être disponibles, même en cas de retrait du conteneur, du noeud worker ou du cluster. Utilisez le stockage persistant dans les scénarios suivants :
        - Applications avec état
        - Données métier stratégiques
        - Données devant être toujours disponibles en raison des réglementations en vigueur, par exemple une période de conservation définie
-       - Audit 
+       - Audit
        - Données qui doivent être accessibles et partagées entre des instances d'application
-   - **Stockage non persistant :** vos données peuvent être retirées en cas de retrait du conteneur, du noeud worker ou du cluster. Ce type de stockage est utilisé en principe pour les informations de consignation, telles que les journaux système ou les journaux de conteneur, les tests de développement ou lorsque vous souhaitez accéder aux données à partir du système de fichiers de l'hôte. Pour obtenir une présentation des options de stockage non persistant disponibles, voir [Comparaison des options de stockage non persistant](#non_persistent_overview). 
+   - **Stockage non persistant :** vos données peuvent être retirées en cas de retrait du conteneur, du noeud worker ou du cluster. Ce type de stockage est utilisé en principe pour les informations de consignation, telles que les journaux système ou les journaux de conteneur, les tests de développement ou lorsque vous souhaitez accéder aux données à partir du système de fichiers de l'hôte. Pour obtenir une présentation des options de stockage non persistant disponibles, voir [Comparaison des options de stockage non persistant](#non_persistent_overview).
 
 2. Si vous devez conserver vos données, déterminez si votre application nécessite un type de stockage particulier. Lorsque vous utilisez une application existante, cette application peut être conçue pour stocker des données avec l'une des méthodes suivantes :  
-   - **Dans un système de fichiers :** les données peuvent être stockées sous forme de fichier dans un répertoire. Par exemple, vous pouvez stocker ce fichier sur votre disque dur local. Certaines applications nécessitent que les données soient stockées dans un système de fichiers spécifique, tel que `nfs` ou `ext4` afin d'optimiser le magasin de données et d'atteindre les objectifs en termes de performances. 
-   - **Dans une base de données :** les données doivent être stockées dans une base de données selon un schéma précis. Certaines applications sont fournies avec une interface de base de données que vous pouvez utiliser pour stocker vos données. Par exemple, WordPress est optimisé pour stocker des données dans une base de données MySQL. Dans ces cas de figure, le type de stockage est sélectionné pour vous. 
-   
-3. Si votre application n'a pas de restriction particulière sur le type de stockage que vous devez utiliser, déterminez le type de données que vous souhaitez stocker. 
-   - **Données structurées :** données que vous pouvez stocker dans une base de données relationnelle lorsque vous disposez d'une table avec des lignes et des colonnes. Les données dans les tables peuvent être connectées à l'aide de clés et sont en général faciles d'accès en raison d'un modèle de données prédéfini. Exemples : numéros de téléphone, numéros de sécurité sociale ou codes postaux. 
+   - **Dans un système de fichiers :** les données peuvent être stockées sous forme de fichier dans un répertoire. Par exemple, vous pouvez stocker ce fichier sur votre disque dur local. Certaines applications nécessitent que les données soient stockées dans un système de fichiers spécifique, tel que `nfs` ou `ext4` afin d'optimiser le magasin de données et d'atteindre les objectifs en termes de performances.
+   - **Dans une base de données :** les données doivent être stockées dans une base de données selon un schéma précis. Certaines applications sont fournies avec une interface de base de données que vous pouvez utiliser pour stocker vos données. Par exemple, WordPress est optimisé pour stocker des données dans une base de données MySQL. Dans ces cas de figure, le type de stockage est sélectionné pour vous.
+
+3. Si votre application n'a pas de restriction particulière sur le type de stockage que vous devez utiliser, déterminez le type de données que vous souhaitez stocker.
+   - **Données structurées :** données que vous pouvez stocker dans une base de données relationnelle lorsque vous disposez d'une table avec des lignes et des colonnes. Les données dans les tables peuvent être connectées à l'aide de clés et sont en général faciles d'accès en raison d'un modèle de données prédéfini. Exemples : numéros de téléphone, numéros de sécurité sociale ou codes postaux.
    - **Données semi-structurées :** données qui n'entrent pas dans le cadre d'une base de données relationnelle mais qui contiennent des propriétés organisationnelles que vous pouvez utiliser pour lire et analyser ces données plus facilement. Exemples : fichiers de langage de balisage, de type CSV, XML ou JSON.  
-   - **Données non structurées :** données qui ne suivent pas de modèle d'organisation particulier et dont le niveau de complexité est tel que vous ne pouvez pas les stocker dans une base de données relationnelle avec des modèles de données prédéfinis. Pour accéder à ces données, il vous faut des logiciels et des outils avancés. Exemples : messages électroniques, vidéos, photos, fichiers audio, présentations, données de réseaux sociaux ou pages Web. 
+   - **Données non structurées :** données qui ne suivent pas de modèle d'organisation particulier et dont le niveau de complexité est tel que vous ne pouvez pas les stocker dans une base de données relationnelle avec des modèles de données prédéfinis. Pour accéder à ces données, il vous faut des logiciels et des outils avancés. Exemples : messages électroniques, vidéos, photos, fichiers audio, présentations, données de réseaux sociaux ou pages Web.
 
-   Si vous disposez de données structurées et non structurées, essayez de stocker chacun de ces types de données séparément dans une solution de stockage conçue pour chaque type particulier. L'utilisation d'une solution de stockage adaptée à votre type de données facilite l'accès à vos données tout en vous offrant des avantages en termes de performances, d'évolutivité, de durabilité et de cohérence. 
+   Si vous disposez de données structurées et non structurées, essayez de stocker chacun de ces types de données séparément dans une solution de stockage conçue pour chaque type particulier. L'utilisation d'une solution de stockage adaptée à votre type de données facilite l'accès à vos données tout en vous offrant des avantages en termes de performances, d'évolutivité, de durabilité et de cohérence.
    {: tip}
-   
+
 4. Analysez le mode d'accès à vos données de votre choix. Les solutions de stockage sont en principe conçues et optimisées pour prendre en charge les opérations de lecture ou d'écriture.  
-   - **Lecture seule :** vos données sont en lecture seule. Vous ne voulez pas écrire ou modifier de données. 
-   - **Lecture et écriture :** vous voulez lire, écrire et modifier vos données. Pour les données lues et écrites, il est important de savoir si les opérations sont plutôt des opérations de lecture ou des opérations d'écriture ou si les deux types d'opérations sont équilibrés. 
-   
-4. Déterminez la fréquence d'accès à vos données. Connaître la fréquence d'accès aux données peut vous aider à appréhender les performances dont vous avez besoin pour votre stockage. Par exemple, les données à accès fréquent résident en principe sur du stockage rapide. 
-   - **Données les plus sollicitées :** données à accès fréquent. Les cas d'utilisation courants sont les applications Web ou mobiles. 
-   - **Données à accès moins ou moyennement fréquent :** données dont l'accès n'est pas très fréquent, par exemple une fois par mois ou moins. Les cas d'utilisation courants sont les archives, la conservation à court-terme des données ou la reprise après incident. 
-   - **Données à accès peu fréquent :** données dont l'accès est plutôt rare voire inexistant. Les cas d'utilisation courants sont les archives, les sauvegardes à long terme, les données d'historique. 
-   - **Données figées :** données auxquelles il n'y a pas d'accès et que vous devez conserver pour vous conformer à une réglementation. 
+   - **Lecture seule :** vos données sont en lecture seule. Vous ne voulez pas écrire ou modifier de données.
+   - **Lecture et écriture :** vous voulez lire, écrire et modifier vos données. Pour les données lues et écrites, il est important de savoir si les opérations sont plutôt des opérations de lecture ou des opérations d'écriture ou si les deux types d'opérations sont équilibrés.
 
-   Si vous ne pouvez pas prévoir la fréquence ou si la fréquence ne suit pas un modèle précis, déterminez si vos charges de travail sont plutôt destinées à être lues, écrites ou si leurs opérations de lecture et d'écriture sont équilibrées. Ensuite, examinez l'option de stockage qui convient à votre charge de travail et recherchez le niveau de stockage qui vous offre la flexibilité dont vous avez besoin. Par exemple, {{site.data.keyword.containerlong_notm}} fournit la classe de stockage `flex` qui prend en considération la fréquence d'accès aux données sur un mois et tient compte de cette mesure pour optimiser votre facturation mensuelle. 
+4. Déterminez la fréquence d'accès à vos données. Connaître la fréquence d'accès aux données peut vous aider à appréhender les performances dont vous avez besoin pour votre stockage. Par exemple, les données à accès fréquent résident en principe sur du stockage rapide.
+   - **Données les plus sollicitées :** données à accès fréquent. Les cas d'utilisation courants sont les applications Web ou mobiles.
+   - **Données à accès moins ou moyennement fréquent :** données dont l'accès n'est pas très fréquent, par exemple une fois par mois ou moins. Les cas d'utilisation courants sont les archives, la conservation à court-terme des données ou la reprise après incident.
+   - **Données à accès peu fréquent :** données dont l'accès est plutôt rare voire inexistant. Les cas d'utilisation courants sont les archives, les sauvegardes à long terme, les données d'historique.
+   - **Données figées :** données auxquelles il n'y a pas d'accès et que vous devez conserver pour vous conformer à une réglementation.
+
+   Si vous ne pouvez pas prévoir la fréquence ou si la fréquence ne suit pas un modèle précis, déterminez si vos charges de travail sont plutôt destinées à être lues, écrites ou si leurs opérations de lecture et d'écriture sont équilibrées. Ensuite, examinez l'option de stockage qui convient à votre charge de travail et recherchez le niveau de stockage qui vous offre la flexibilité dont vous avez besoin. Par exemple, {{site.data.keyword.cos_full_notm}} fournit la classe de stockage `flex` qui prend en considération la fréquence d'accès aux données sur un mois et tient compte de cette mesure pour optimiser votre facturation mensuelle.
    {: tip}
- 
-5. Déterminez si vos données doivent être partagées entre plusieurs instances d'application, plusieurs zones ou plusieurs régions. 
-   - **Accès entre les pods :** lorsque vous utilisez des volumes persistants Kubernetes pour accéder à votre stockage, vous pouvez déterminer le nombre de pods pouvant monter le volume en même temps. Certaines solutions de stockage, telles que le stockage par blocs, sont accessibles à un pod à la fois uniquement. D'autres solutions de stockage vous permettent de partager le même volume entre plusieurs pods. 
-   - **Accès entre les zones et les régions :** vos données devront parfois être accessibles entre plusieurs zones ou régions. Certaines solutions de stockage, par exemple le stockage de fichiers ou le stockage par blocs, sont spécifiques à un centre de données et ne peuvent pas être partagées entre plusieurs zones dans une configuration de cluster à zones multiples. 
 
-6. Familiarisez-vous avec d'autres caractéristiques de stockage pouvant influencer votre choix. 
-   - **Cohérence :** garantie qu'une opération de lecture renvoie la dernière version d'un fichier. Les solutions de stockage peuvent apporter une cohérence forte (`strong consistency`) qui vous garantit de recevoir la dernière version d'un fichier ou une cohérence finale (`eventual consistency`) lorsque l'opération de lecture ne garantit pas le renvoi de la dernière version. Vous obtenez souvent une cohérence finale dans les systèmes répartis géographiquement dans lesquels une opération d'écriture doit d'abord être répliquée sur toutes les instances. 
-   - **Performances :** temps nécessaire pour exécuter une opération de lecture ou d'écriture. 
-   - **Durabilité :** garantie qu'une opération d'écriture validée dans votre stockage survive de manière permanente sans subir de dommages ou de perte, même si les gigaoctets ou téraoctets de données sont écrits dans votre stockage au même moment. 
-   - **Résilience :** capacité de reprise après une panne en poursuivant les opérations, même en cas de défaillance d'un composant matériel ou logiciel. Par exemple, votre stockage physique subit une panne de courant, doit faire face à l'indisponibilité du réseau ou est supprimé suite à une catastrophe naturelle. 
-   - **Disponibilité :** capacité de fournir l'accès à vos données, même si un centre de données ou une région n'est pas disponible. La disponibilité de vos données est en principe assurée en ajoutant de la redondance et en configurant des mécanismes de basculement. 
-   - **Evolutivité :** possibilité d'augmenter la capacité et de personnaliser les performances en fonction de vos besoins. 
-   - **Chiffrement :** masquer les données permet d'empêcher leur visibilité en cas d'accès par un utilisateur non autorisé. 
+5. Déterminez si vos données doivent être partagées entre plusieurs instances d'application, plusieurs zones ou plusieurs régions.
+   - **Accès entre les pods :** lorsque vous utilisez des volumes persistants Kubernetes pour accéder à votre stockage, vous pouvez déterminer le nombre de pods pouvant monter le volume en même temps. Certaines solutions de stockage, telles que le stockage par blocs, sont accessibles à un pod à la fois uniquement. D'autres solutions de stockage vous permettent de partager le même volume entre plusieurs pods.
+   - **Accès entre les zones et les régions :** vos données devront parfois être accessibles entre plusieurs zones ou régions. Certaines solutions de stockage, par exemple le stockage de fichiers ou le stockage par blocs, sont spécifiques à un centre de données et ne peuvent pas être partagées entre plusieurs zones dans une configuration de cluster à zones multiples.
    
-7. [Passez en revue les solutions de stockage persistant](#persistent_storage_overview) et sélectionnez la solution qui convient le mieux aux besoins de votre application et de vos données. 
+   Si vous souhaitez rendre vos données accessibles dans les différentes zones ou régions, veillez à consulter votre service juridique pour vérifier que vos données peuvent être stockées dans plusieurs zones ou dans un autre pays.
+   {: note}
+
+6. Familiarisez-vous avec d'autres caractéristiques de stockage pouvant influencer votre choix.
+   - **Cohérence :** garantie qu'une opération de lecture renvoie la dernière version d'un fichier. Les solutions de stockage peuvent apporter une cohérence forte (`strong consistency`) qui vous garantit de recevoir la dernière version d'un fichier ou une cohérence finale (`eventual consistency`) lorsque l'opération de lecture ne garantit pas le renvoi de la dernière version. Vous obtenez souvent une cohérence finale dans les systèmes répartis géographiquement dans lesquels une opération d'écriture doit d'abord être répliquée sur toutes les instances.
+   - **Performances :** temps nécessaire pour exécuter une opération de lecture ou d'écriture.
+   - **Durabilité :** garantie qu'une opération d'écriture validée dans votre stockage survive de manière permanente sans subir de dommages ou de perte, même si les gigaoctets ou téraoctets de données sont écrits dans votre stockage au même moment.
+   - **Résilience :** capacité de reprise après une panne en poursuivant les opérations, même en cas de défaillance d'un composant matériel ou logiciel. Par exemple, votre stockage physique subit une panne de courant, doit faire face à l'indisponibilité du réseau ou est supprimé suite à une catastrophe naturelle.
+   - **Disponibilité :** capacité de fournir l'accès à vos données, même si un centre de données ou une région n'est pas disponible. La disponibilité de vos données est en principe assurée en ajoutant de la redondance et en configurant des mécanismes de basculement.
+   - **Evolutivité :** possibilité d'augmenter la capacité et de personnaliser les performances en fonction de vos besoins.
+   - **Chiffrement :** masquer les données permet d'empêcher leur visibilité en cas d'accès par un utilisateur non autorisé.
+
+7. [Passez en revue les solutions de stockage persistant](#persistent_storage_overview) et sélectionnez la solution qui convient le mieux aux besoins de votre application et de vos données.
 
 ## Comparaison des options de stockage non persistant
 {: #non_persistent_overview}
@@ -160,13 +166,14 @@ L'illustration suivante présente les options de stockage de données non persis
 </table>
 
 
+
 ## Comparaison des options de stockage persistant
 {: #persistent_storage_overview}
 
-Utilisez des options de stockage persistant pour toutes les données que vous souhaitez conserver de manière permanente, même en cas de retrait du conteneur, du noeud worker ou du cluster. 
+Utilisez des options de stockage persistant pour toutes les données que vous souhaitez conserver de manière permanente, même en cas de retrait du conteneur, du noeud worker ou du cluster.
 {: shortdesc}
 
-**Remarque :** les options de stockage persistant sont disponibles uniquement pour les clusters standard. 
+Les options de stockage persistant sont disponibles uniquement pour les clusters standard.
 
 Vous envisagez de connecter votre cluster à une base de données sur site à la place ? Voir [Configuration de la connectivité VPN dans votre cluster](cs_vpn.html#vpn).
 {: tip}
@@ -237,7 +244,7 @@ L'illustration suivante présente les options disponibles dans {{site.data.keywo
 <td style="text-align:left">Durabilité</td>
 <td style="text-align:left">Haute</td>
 <td style="text-align:left">Haute</td>
-<td style="text-align:left">Très hautes car les tranches de données sont réparties sur un cluster de noeuds
+<td style="text-align:left">Très haute car les tranches de données sont réparties sur un cluster de noeuds
 de stockage. Chaque noeud stocke uniquement une partie des données. </td>
 <td style="text-align:left">Haute</td>
 </tr>
@@ -285,3 +292,7 @@ de stockage. Chaque noeud stocke uniquement une partie des données. </td>
 </tr>
 </tbody>
 </table>
+
+
+
+

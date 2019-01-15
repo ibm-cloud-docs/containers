@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -77,37 +80,35 @@ Ci-dessous figurent les motifs pour lesquels les journaux de votre cluster peuve
 
 Pour tester les modifications apportées lors de la résolution des incidents, vous pouvez déployer l'exemple de pod *Noisy*, lequel génère plusieurs événements de journal sur un noeud worker dans votre cluster.
 
-  1. Pour le cluster dont vous souhaitez débuter la génération de journaux : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 
-  2. Créez le fichier de configuration `deploy-noisy.yaml`.
-
-      ```
-      apiVersion: v1
+1. Créez le fichier de configuration `deploy-noisy.yaml`.
+    ```
+    apiVersion: v1
       kind: Pod
       metadata:
         name: noisy
       spec:
         containers:
-        - name: noisy
+      - name: noisy
           image: ubuntu:16.04
           command: ["/bin/sh"]
           args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
           imagePullPolicy: "Always"
-        ```
-        {: codeblock}
+      ```
+      {: codeblock}
 
-  3. Exécutez le fichier de configuration dans le contexte de cluster.
+2. Exécutez le fichier de configuration dans le contexte de cluster.
+    ```
+    kubectl apply -f noisy.yaml
+    ```
+    {:pre}
 
-        ```
-        kubectl apply -f noisy.yaml
-        ```
-        {:pre}
-
-  4. Au bout de quelques minutes, vos journaux s'affichent dans le tableau de bord Kibana. Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster. Si vous avez spécifié un espace lors de la création du cluster, accédez à la place à cet espace.
-      - Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
-      - Sud du Royaume-Uni : https://logging.eu-gb.bluemix.net
-      - Europe centrale : https://logging.eu-fra.bluemix.net
-      - Asie-Pacifique sud : https://logging.au-syd.bluemix.net
+3. Au bout de quelques minutes, vos journaux s'affichent dans le tableau de bord Kibana. Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster. Si vous avez spécifié un espace lors de la création du cluster, accédez à la place à cet espace.
+    - Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
+    - Sud du Royaume-Uni : https://logging.eu-gb.bluemix.net
+    - Europe centrale : https://logging.eu-fra.bluemix.net
+    - Asie-Pacifique sud : https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -139,20 +140,15 @@ Vous avez encore des problèmes avec votre cluster ?
 {: shortdesc}
 
 -  Dans le terminal, vous êtes averti des mises à jour disponibles pour l'interface de ligne de commande `ibmcloud` et les plug-ins. Veillez à maintenir votre interface de ligne de commande à jour pour pouvoir utiliser l'ensemble des commandes et des indicateurs.
-
 -   Pour déterminer si {{site.data.keyword.Bluemix_notm}} est disponible, [consultez la page de statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/bluemix/support/#status).
 -   Publiez une question sur le site [{{site.data.keyword.containerlong_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
-
     Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.
     {: tip}
 -   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
-
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containerlong_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour toute question sur le service et les instructions de mise en route, utilisez le forum [IBM Developer Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
     Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar) pour plus d'informations sur l'utilisation des forums.
-
--   Contactez le support IBM en ouvrant un ticket de demande de service. Pour en savoir plus sur l'ouverture d'un ticket de demande de service IBM ou sur les niveaux de support disponibles et les gravités des tickets, voir la rubrique décrivant comment [contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
-
-{: tip}
+-   Contactez le support IBM en ouvrant un cas. Pour savoir comment ouvrir un cas de support IBM ou obtenir les niveaux de support et la gravité des cas, voir [Contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `ibmcloud ks clusters`.
+{: tip}
 

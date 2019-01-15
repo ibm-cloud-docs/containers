@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Planification des réseaux privés et en cluster
@@ -78,7 +81,7 @@ Par défaut, {{site.data.keyword.containerlong_notm}} configure votre cluster av
 **Pourquoi utiliser cette configuration ?**
 
 * Vous disposez d'une application qui doit être accessible à l'Internet public dans un cluster à zone unique.
-* Vous disposez d'une application qui doit être accessible à l'Internet public dans un cluster à zones multiples. Comme vous devez activer le [spanning VLAN](cs_subnets.html#subnet-routing) pour créer un cluster à zones multiples, le cluster peut communiquer avec d'autres systèmes connectés à un VLAN privé dans le même compte IBM Cloud. **Remarque** : pour isoler votre cluster à zones multiples sur le réseau privé, utilisez des [règles réseau Calico](cs_network_policy.html#isolate_workers).
+* Vous disposez d'une application qui doit être accessible à l'Internet public dans un cluster à zones multiples. Comme vous devez activer le [spanning VLAN](cs_subnets.html#subnet-routing) pour créer un cluster à zones multiples, le cluster peut communiquer avec d'autres systèmes connectés à un VLAN privé dans le même compte IBM Cloud. Pour isoler votre cluster à zones multiples sur le réseau privé, vous pouvez utiliser des [règles réseau Calico](cs_network_policy.html#isolate_workers).
 
 **Quelles sont mes options pour la gestion de l'accès public et privé à mon cluster ?**
 </br>Les sections suivantes décrivent les fonctions d'{{site.data.keyword.containerlong_notm}} que vous pouvez utiliser pour configurer les réseaux des clusters connectés à un VLAN public et un VLAN privé.
@@ -183,7 +186,7 @@ Vous pouvez opter pour la [création d'un cluster avec un VLAN privé uniquement
 * Une connexion automatique entre tous les noeuds worker et le maître. Vous devez fournir cette connexion en [configurant un dispositif de passerelle](#private_vlan_gateway).
 
 **Pourquoi utiliser cette configuration ?**
-</br>Vous avez des exigences spécifiques en matière de sécurité ou vous avez besoin de créer des règles réseau personnalisées et des règles de routage pour apporter une sécurité des réseaux dédiée. **Remarque** : l'utilisation d'un dispositif de passerelle est facturée séparément. Pour obtenir des détails, voir la [documentation](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
+</br>Vous avez des exigences spécifiques en matière de sécurité ou vous avez besoin de créer des règles réseau personnalisées et des règles de routage pour apporter une sécurité des réseaux dédiée. Notez que l'utilisation d'un dispositif de passerelle est facturée séparément. Pour obtenir des détails, voir la [documentation](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
 
 **Quelles sont mes options pour la gestion de l'accès public et privé à mon cluster ?**
 </br>Les sections suivantes décrivent les fonctions d'{{site.data.keyword.containerlong_notm}} que vous pouvez utiliser pour configurer les réseaux de clusters connectés à un VLAN privé uniquement.
@@ -193,10 +196,8 @@ Vous pouvez opter pour la [création d'un cluster avec un VLAN privé uniquement
 
 Si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez configurer une autre solution pour la connectivité du réseau entre vos noeuds worker et le maître. Vous pouvez mettre en place un pare-feu avec des règles réseau personnalisées afin d'assurer une sécurité réseau dédiée pour votre cluster standard et détecter et parer à des intrusions réseau. Par exemple, vous pouvez choisir de configurer un [dispositif de routeur virtuel](/docs/infrastructure/virtual-router-appliance/about.html) ou un [dispositif de sécurité Fortigate](/docs/infrastructure/fortigate-10g/about.html) qui fera office de pare-feu et bloquera le trafic indésirable. Lorsque vous configurez un pare-feu, vous devez également [ouvrir les ports et les adresses IP requis](cs_firewall.html#firewall_outbound) pour chaque région de manière à permettre au maître et aux noeuds worker de communiquer.
 
-**Remarque** : si vous disposez d'un dispositif de routage existant et que vous ajoutez ensuite un cluster, les nouveaux sous-réseaux portables commandés pour le cluster ne sont pas configurés sur ce dispositif. Pour utiliser les services de réseau, vous devez activer le routage entre les sous-réseaux sur le même VLAN en [activant la fonction Spanning VLAN](cs_subnets.html#vra-routing).
-
-Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-{: tip}
+Si vous avez un dispositif de routage et que vous ajoutez un cluster, les nouveaux sous-réseaux portables commandés pour le cluster ne sont pas configurés sur ce dispositif. Pour utiliser les services de réseau, vous devez activer le routage entre les sous-réseaux sur le même VLAN en [activant la fonction Spanning VLAN](cs_subnets.html#vra-routing).
+{: important}
 
 ### Exposition de vos applications avec des services de réseau privé
 {: #private_vlan_services}

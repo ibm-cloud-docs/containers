@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -32,7 +35,7 @@ Installez le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage avec une c
 Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 
 1. Vérifiez que votre noeud worker applique le correctif le plus récent pour votre édition. 
-   1. Répertoriez la version actuelle de correctif de vos noeuds worker.
+   1. Répertoriez la version actuelle de correctif de vos noeuds worker. 
       ```
       ibmcloud ks workers --cluster <cluster_name_or_ID>
       ```
@@ -42,7 +45,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.9.10_1523* 
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.10.11_1523* 
       ```
       {: screen}
       
@@ -50,19 +53,27 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
       
    2. Consultez le [journal des modifications de version](cs_versions_changelog.html#changelog) pour rechercher les modifications qui ont été apportées dans la dernière version de correctif. 
    
-   3. Appliquez la dernière version de correctif en rechargeant votre noeud worker. Suivez les instructions indiquées dans la [commande ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) pour replanifier correctement tous les pods en cours d'exécution sur votre noeud worker avant de le recharger.
+   3. Appliquez la dernière version de correctif en rechargeant votre noeud worker. Suivez les instructions indiquées dans la [commande ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) pour replanifier correctement tous les pods en cours d'exécution sur votre noeud worker avant de le recharger. Notez que durant le rechargement, la machine de votre noeud worker est mise à jour avec l'image la plus récente et les données sont supprimées si elles ne sont pas [stockées hors du noeud worker](cs_storage_planning.html#persistent_storage_overview).
 
-2. Suivez les [instructions](cs_integrations.html#helm) pour installer le client Helm sur votre machine locale, installer le serveur Helm (tiller) sur votre cluster et ajouter le référentiel de charte Helm {{site.data.keyword.Bluemix_notm}} dans le cluster où vous souhaitez utiliser le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage.
 
-   **Important :** si vous utilisez Helm version 2.9 ou ultérieure, assurez-vous d'avoir installé Tiller avec un [compte de service](cs_integrations.html#helm).
+2. Suivez les [instructions](cs_integrations.html#helm) pour installer le client Helm sur votre machine locale et installer le serveur Helm (Tiller) sur votre cluster.
 
-3. Mettez à jour le référentiel Helm pour extraire la dernière version de toutes les chartes Helm figurant dans ce référentiel.
+   Si vous utilisez Helm version 2.9 ou supérieure, assurez-vous d'avoir installé Tiller avec un [compte de service](cs_integrations.html#helm).
+   {: important}
+   
+3. Ajoutez le référentiel de la charte Helm {{site.data.keyword.Bluemix_notm}} dans le cluster dans lequel vous souhaitez utiliser le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage.
+   ```
+   helm repo add ibm  https://registry.bluemix.net/helm/ibm
+   ```
+   {: pre}
+
+4. Mettez à jour le référentiel Helm pour extraire la dernière version de toutes les chartes Helm figurant dans ce référentiel.
    ```
    helm repo update
    ```
    {: pre}
 
-4. Installez le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage. Lorsque vous installez ce plug-in, des classes de stockage par blocs prédéfinies sont ajoutées dans votre cluster.
+5. Installez le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage. Lorsque vous installez ce plug-in, des classes de stockage par blocs prédéfinies sont ajoutées dans votre cluster.
    ```
    helm install ibm/ibmcloud-block-storage-plugin
    ```
@@ -112,7 +123,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
    ```
    {: screen}
 
-5. Vérifiez que l'installation a abouti.
+6. Vérifiez que l'installation a abouti.
    ```
    kubectl get pod -n kube-system | grep block
    ```
@@ -127,7 +138,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 
    L'installation réussit lorsque vous voyez un pod `ibmcloud-block-storage-plugin` et un ou plusieurs pods `ibmcloud-block-storage-driver`. Le nombre de pods `ibmcloud-block-storage-driver` est égal au nombre de noeuds worker dans votre cluster. Tous les pods doivent être à l'état **Running**.
 
-6. Vérifiez que les classes de stockage pour le stockage par blocs ont été ajoutées dans votre cluster.
+7. Vérifiez que les classes de stockage pour le stockage par blocs ont été ajoutées dans votre cluster.
    ```
    kubectl get storageclasses | grep block
    ```
@@ -146,7 +157,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
    ```
    {: screen}
 
-7. Répétez ces étapes pour chaque cluster sur lequel vous souhaitez fournir du stockage par blocs.
+8. Répétez ces étapes pour chaque cluster sur lequel vous souhaitez fournir du stockage par blocs.
 
 Vous pouvez maintenant passer à la [création d'une réservation de volume persistant (PVC)](#add_block) pour mettre à disposition du stockage par blocs pour votre application.
 
@@ -198,7 +209,8 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 Si vous ne souhaitez pas mettre à disposition et utiliser {{site.data.keyword.Bluemix_notm}} Block Storage dans votre cluster, vous pouvez désinstaller la charte Helm.
 {: shortdesc}
 
-**Remarque :** le retrait du plug-in ne retire pas les réservations de volume persistant (PVC), les volumes persistants (PV) ou les données. Lorsque vous retirez le plug-in, tous les pods associés et les ensembles de démons sont retirés de votre cluster. Vous ne pouvez pas fournir de nouveau stockage par blocs pour votre cluster ou utiliser des réservations de volume persistant et des volumes persistant de stockage par blocs existants une fois le plug-in retiré.
+Le retrait du plug-in ne retire pas les réservations de volume persistant (PVC), les volumes persistants (PV) ou les données. Lorsque vous retirez le plug-in, tous les pods associés et les ensembles de démons sont retirés de votre cluster. Vous ne pouvez pas fournir de nouveau stockage par blocs pour votre cluster ou utiliser des réservations de volume persistant et des volumes persistants de stockage par blocs existants une fois le plug-in retiré.
+{: important}
 
 Avant de commencer :
 - [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
@@ -250,7 +262,8 @@ Pour supprimer le plug-in :
 
 Toutes les classes de stockage indiquent le type de stockage par blocs à mettre à disposition, y compris la taille disponible, les opérations d'entrée-sortie par seconde (IOPS), le système de fichiers, ainsi que la règle de conservation.  
 
-**Important :** choisissez votre configuration de stockage avec précaution pour disposer d'une capacité suffisante pour stocker vos données. Après avoir mis à disposition un type de stockage spécifique en utilisant une classe de stockage, vous ne pouvez plus modifier la taille, le type, IOPS ou la règle de conservation de l'unité de stockage. Si vous avez besoin de plus de stockage ou de stockage avec une configuration différente, vous devez [créer une nouvelle instance de stockage et copier les données](cs_storage_basics.html#update_storageclass) de l'ancienne instance de stockage sur la nouvelle.
+Choisissez votre configuration de stockage avec précaution afin de disposer d'une capacité suffisante pour stocker vos données. Après avoir mis à disposition un type de stockage spécifique en utilisant une classe de stockage, vous ne pouvez plus modifier la taille, le type, le nombre d'opérations d'entrée-sortie par seconde (IOPS) ou la règle de conservation de l'unité de stockage. Si vous avez besoin de plus de stockage ou de stockage avec une configuration différente, vous devez [créer une nouvelle instance de stockage et copier les données](cs_storage_basics.html#update_storageclass) de l'ancienne instance de stockage sur la nouvelle.
+{: important}
 
 1. Répertoriez les classes de stockage disponibles dans {{site.data.keyword.containerlong}}.
     ```
@@ -283,10 +296,10 @@ Toutes les classes de stockage indiquent le type de stockage par blocs à mettre
    {: tip}
 
 3. Sélectionnez le type de stockage par blocs que vous désirez mettre à disposition.
-   - **Classes de stockage Bronze, Silver et Gold :** ces classes de stockage mettent à disposition du [stockage Endurance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/endurance-storage). Le stockage Endurance vous permet de choisir la taille de stockage en gigaoctets à des niveaux d'opérations d'entrée-sortie par seconde prédéfinis.
-   - **Classe de stockage personnalisée :** cette classe de stockage met à disposition du [stockage Performance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/performance-storage). Avec le stockage Performance, vous disposez d'un contrôle accru sur la taille de stockage et les opérations d'entrée-sortie par seconde.
+   - **Classes de stockage Bronze, Silver et Gold :** ces classes de stockage mettent à disposition du [stockage Endurance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers). Le stockage Endurance vous permet de choisir la taille de stockage en gigaoctets à des niveaux d'opérations d'entrée-sortie par seconde prédéfinis.
+   - **Classe de stockage personnalisée :** cette classe de stockage met à disposition du [stockage Performance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-performance). Avec le stockage Performance, vous disposez d'un contrôle accru sur la taille de stockage et les opérations d'entrée-sortie par seconde.
 
-4. Choisissez la taille et la valeur des opérations d'entrée-sortie par seconde (IOPS) de votre stockage par blocs. La taille et le nombre d'IOPS définissent le nombre total d'IOPS (opérations d'entrée-sortie par seconde) qui sert d'indicateur pour mesurer la rapidité de votre stockage. Plus votre stockage comporte d'IOPS, plus il traite rapidement les opérations de lecture/écriture.
+4. Choisissez la taille et le nombre d'IOPS de votre stockage par blocs. La taille et le nombre d'IOPS définissent le nombre total d'IOPS (opérations d'entrée-sortie par seconde) qui sert d'indicateur pour mesurer la rapidité de votre stockage. Plus votre stockage comporte d'IOPS, plus il traite rapidement les opérations de lecture/écriture.
    - **Classes de stockage Bronze, Silver et Gold :** ces classes de stockage sont fournies avec un nombre fixe d'IOPS par gigaoctet et sont mises à disposition sur des disques durs SSD. Le nombre total d'IOPS dépend de la taille de stockage que vous choisissez. Vous pouvez sélectionner tout nombre entier représentant la taille en gigaoctets dans la plage de taille autorisée, par exemple 20 Gi, 256 Gi ou 11854 Gi. Pour déterminer le nombre total d'IOPS, vous devez multiplier les IOPS par la taille sélectionnée. Par exemple, si vous sélectionnez la taille de stockage 1000Gi dans la classe de stockage Silver fournie avec 4 IOPS par Go, vous disposerez d'un stockage avec au total 4000 IOPS.  
      <table>
          <caption>Tableau des plages de tailles de classe de stockage et nombre d'opérations d'entrée-sortie par seconde (IOPS) par gigaoctet</caption>
@@ -382,14 +395,15 @@ Toutes les classes de stockage indiquent le type de stockage par blocs à mettre
 Créez une réservation de volume persistant (PVC) pour le [provisionnement dynamique](cs_storage_basics.html#dynamic_provisioning) de stockage par blocs pour votre cluster. Le provisionnement dynamique crée automatiquement le volume persistant (PV) correspondant et commande l'unité de stockage réelle dans votre compte d'infrastructure IBM Cloud (SoftLayer).
 {:shortdesc}
 
-**Important** : le stockage par blocs est fourni avec un mode d'accès de type `ReadWriteOnce`. Vous ne pouvez le monter que sur un seul pod dans un seul noeud worker du cluster à la fois.
+Le stockage par blocs est fourni avec un mode d'accès de type `ReadWriteOnce`. Vous ne pouvez le monter que sur un seul pod dans un seul noeud worker du cluster à la fois.
+{: note}
 
 Avant de commencer :
 - Si vous disposez d'un pare-feu, [autorisez l'accès sortant](cs_firewall.html#pvc) pour les plages d'adresses IP de l'infrastructure IBM Cloud (SoftLayer) des zones dans lesquelles résident vos clusters, de manière à pouvoir créer des réservations de volume persistant (PVC).
 - Installez le [plug-in {{site.data.keyword.Bluemix_notm}} Block Storage](#install_block).
 - [Optez pour une classe de stockage prédéfinie](#predefined_storageclass) ou créez une [classe de stockage personnalisée](#custom_storageclass).
 
-Vous cherchez à déployer du stockage par blocs dans un ensemble avec état (StatefulSet) ? Voir [Utilisation du stockage par blocs dans un ensemble avec état](#block_statefulset) pour plus d'informations.
+Vous cherchez à déployer du stockage par blocs dans un ensemble avec état (StatefulSet) ? Voir [Utilisation de stockage par blocs dans un ensemble avec état](#block_statefulset) pour plus d'informations.
 {: tip}
 
 Pour ajouter du stockage par blocs :
@@ -463,15 +477,15 @@ Pour ajouter du stockage par blocs :
        </tr>
        <tr>
        <td><code>metadata.labels.region</code></td>
-       <td>Indiquez la région dans laquelle vous souhaitez mettre à disposition votre stockage par blocs. Si vous spécifiez la région, vous devez également indiquer une zone. Si vous n'indiquez pas de région, ou si la région indiquée est introuvable, le stockage est créé dans la même région que votre cluster. </br><strong>Remarque :</strong> cette option est uniquement prise en charge avec le plug-in IBM Cloud Block Storage version 1.0.1 ou supérieure. Pour les versions antérieures du plug-in, si vous disposez d'un cluster à zones multiples, la zone dans laquelle votre stockage est mis à disposition est sélectionnée en mode circulaire pour équilibrer les demandes de volume uniformément dans toutes les zones. Si vous souhaitez indiquer la zone destinée à votre stockage, créez d'abord une [classe de stockage personnalisée](#multizone_yaml). Créez ensuite une réservation de volume persistant (PVC) avec votre classe de stockage personnalisée.</td>
+       <td>Indiquez la région dans laquelle vous souhaitez mettre à disposition votre stockage par blocs. Si vous spécifiez la région, vous devez également indiquer une zone. Si vous n'indiquez pas de région, ou si la région indiquée est introuvable, le stockage est créé dans la même région que votre cluster. <p class="note">Cette option est uniquement prise en charge avec le plug-in IBM Cloud Block Storage version 1.0.1 ou supérieure. Pour les versions antérieures du plug-in, si vous disposez d'un cluster à zones multiples, la zone dans laquelle votre stockage est mis à disposition est sélectionnée en mode circulaire pour équilibrer les demandes de volume uniformément dans toutes les zones. Si vous souhaitez indiquer la zone destinée à votre stockage, créez d'abord une [classe de stockage personnalisée](#multizone_yaml). Créez ensuite une réservation de volume persistant (PVC) avec votre classe de stockage personnalisée.</p></td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
-	<td>Indiquez la zone dans laquelle vous souhaitez mettre à disposition votre stockage par blocs. Si vous spécifiez la zone, vous devez également indiquer une région. Si vous n'indiquez pas de zone, ou si la zone indiquée est introuvable dans un cluster à zones multiples, la zone est sélectionnée en mode circulaire. </br><strong>Remarque :</strong> cette option est uniquement prise en charge avec le plug-in IBM Cloud Block Storage version 1.0.1 ou supérieure. Pour les versions antérieures du plug-in, si vous disposez d'un cluster à zones multiples, la zone dans laquelle votre stockage est mis à disposition est sélectionnée en mode circulaire pour équilibrer les demandes de volume uniformément dans toutes les zones. Si vous souhaitez indiquer la zone destinée à votre stockage, créez d'abord une [classe de stockage personnalisée](#multizone_yaml). Créez ensuite une réservation de volume persistant (PVC) avec votre classe de stockage personnalisée.</td>
+	<td>Indiquez la zone dans laquelle vous souhaitez mettre à disposition votre stockage par blocs. Si vous spécifiez la zone, vous devez également indiquer une région. Si vous n'indiquez pas de zone, ou si la zone indiquée est introuvable dans un cluster à zones multiples, la zone est sélectionnée en mode circulaire. <p class="note">Cette option est uniquement prise en charge avec le plug-in IBM Cloud Block Storage version 1.0.1 ou supérieure. Pour les versions antérieures du plug-in, si vous disposez d'un cluster à zones multiples, la zone dans laquelle votre stockage est mis à disposition est sélectionnée en mode circulaire pour équilibrer les demandes de volume uniformément dans toutes les zones. Si vous souhaitez indiquer la zone destinée à votre stockage, créez d'abord une [classe de stockage personnalisée](#multizone_yaml). Créez ensuite une réservation de volume persistant (PVC) avec votre classe de stockage personnalisée.</p></td>
 	</tr>
         <tr>
         <td><code>spec.resources.requests.storage</code></td>
-        <td>Entrez la taille du stockage par blocs en gigaoctets (Gi). </br></br><strong>Remarque : </strong> une fois le stockage mis à disposition, vous ne pouvez plus modifier la taille de votre stockage par blocs. Veillez à indiquer une taille correspondant à la quantité de données que vous envisagez de stocker. </td>
+        <td>Entrez la taille du stockage par blocs en gigaoctets (Gi). Une fois le stockage mis à disposition, vous ne pouvez plus modifier la taille de votre stockage par blocs. Veillez à indiquer une taille correspondant à la quantité de données que vous envisagez de stocker. </td>
         </tr>
         <tr>
         <td><code>spec.resources.requests.iops</code></td>
@@ -576,7 +590,7 @@ Pour ajouter du stockage par blocs :
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>Chemin absolu du répertoire où est monté le volume dans le conteneur. Les données écrites dans le chemin de montage sont stockées sous le répertoire racine dans votre instance de stockage par blocs physique. Pour créer des répertoires dans cette instance, vous devez créer des sous-répertoires dans le chemin de montage. </td>
+    <td>Chemin absolu du répertoire où est monté le volume dans le conteneur. Les données écrites dans le chemin de montage sont stockées sous le répertoire racine dans votre instance de stockage par blocs physique. Pour créer des répertoires dans cette instance, vous devez créer des sous-répertoires dans le chemin de montage.</td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.name</code></td>
@@ -822,7 +836,7 @@ Vous venez de créer un objet PV que vous avez lié à une réservation PVC. Les
 
 
 
-## Utilisation de stockage par blocs dans un ensemble avec état
+## Utilisation de stockage par blocs dans un ensemble avec état (StatefulSet)
 {: #block_statefulset}
 
 Si vous disposez d'une application avec état, telle qu'une base de données, vous pouvez créer des ensembles avec état utilisant du stockage par blocs pour stocker les données de votre application. Sinon, vous pouvez utiliser {{site.data.keyword.Bluemix_notm}} DaaS (Database-as-a-Service) et stocker vos données dans le cloud.
@@ -831,10 +845,11 @@ Si vous disposez d'une application avec état, telle qu'une base de données, vo
 **De quoi dois-je tenir compte en ajoutant du stockage par blocs dans un ensemble avec état ?** </br>
 Pour ajouter du stockage dans un ensemble avec état, vous spécifiez la configuration de votre stockage dans la section `volumeClaimTemplates` du fichier YAML de l'ensemble avec état. La section `volumeClaimTemplates` constitue la base de votre réservation de volume persistant (PVC) et peut inclure la classe de stockage et la taille ou le nombre d'opérations d'entrée-sortie par seconde (IOPS) du stockage par blocs que vous souhaitez mettre à disposition. Cependant, si vous prévoyez d'ajouter des libellés (labels) dans la section `volumeClaimTemplates`, Kubernetes n'inclut pas ces libellés en créant la PVC. Vous devez les ajouter directement dans l'ensemble avec état à la place.
 
-**Important :** vous ne pouvez pas déployer deux ensembles avec état en même temps. Si vous essayez de créer un ensemble avec état avant le déploiement complet d'un autre ensemble, le déploiement de votre ensemble avec état peut entraîner des résultats imprévisibles.
+Vous ne pouvez pas déployer deux ensembles avec état en même temps. Si vous essayez de créer un ensemble avec état avant le déploiement complet d'un autre ensemble, le déploiement de votre ensemble avec état peut entraîner des résultats imprévisibles.
+{: important}
 
 **Comment créer mon ensemble avec état dans une zone spécifique ?** </br>
-Dans un cluster à zones multiples, vous pouvez spécifier la zone et la région dans lesquelles créer votre ensemble avec état dans les sections `spec.selector.matchLabels` et `spec.template.metadata.labels` du fichier YAML de votre ensemble avec état. Sinon, vous pouvez ajouter ces libellés dans une [classe de stockage personnalisée](cs_storage_basics.html#customized_storageclass) et utiliser cette classe de stockage dans la section `volumeClaimTemplates` de votre ensemble avec état. 
+Dans un cluster à zones multiples, vous pouvez spécifier la zone et la région dans lesquelles créer votre ensemble avec état dans les sections `spec.selector.matchLabels` et `spec.template.metadata.labels` du fichier YAML de votre ensemble avec état. Sinon, vous pouvez ajouter ces libellés dans une [classe de stockage personnalisée](cs_storage_basics.html#customized_storageclass) et utiliser cette classe de stockage dans la section `volumeClaimTemplates` de votre ensemble avec état.
 
 **Quelles sont les options possibles pour ajouter du stockage par blocs à un ensemble avec état ?** </br>
 Si vous souhaitez créer automatiquement votre PVC lorsque vous créez l'ensemble avec état, utilisez la [mise à disposition dynamique](#dynamic_statefulset). Vous pouvez également opter pour une [mise à disposition anticipée de vos PVC ou utiliser des PVC existantes](#static_statefulset) avec votre ensemble avec état.  
@@ -998,7 +1013,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.iops</code></td>
-    <td style="text-align:left">Pour mettre à disposition du [stockage Performance](#predefined_storageclass), entrez le nombre d'opérations d'entrée-sortie par seconde (IOPS). Si vous utilisez une classe de stockage endurance et que vous indiquez un nombre d'IOPS, le nombre d'IOPS est ignoré. Le nombre d'IOPS indiqué dans votre classe de stockage est utilisé à la place.  </td>
+    <td style="text-align:left">Pour mettre à disposition du [stockage Performance](#predefined_storageclass), entrez le nombre d'opérations d'entrée-sortie par seconde (IOPS). Si vous utilisez une classe de stockage Endurance et que vous indiquez un nombre d'IOPS, le nombre d'IOPS est ignoré. Le nombre d'IOPS indiqué dans votre classe de stockage est utilisé à la place.  </td>
     </tr>
     </tbody></table>
 
@@ -1039,7 +1054,8 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
    - **`metadata.name`** : entrez le nom de l'ensemble avec état (`<statefulset_name>`) que vous avez utilisé à l'étape précédente.
    - **`spec.replicas`** : entrez le nombre de répliques que vous souhaitez créer pour votre ensemble avec état. Le nombre de répliques doit être égal au nombre de PVC que vous avez créées précédemment.
 
-   **Remarque :** si vous avez créé vos PVC dans différentes zones, n'incluez pas de libellé de région ou de zone dans votre ensemble avec état.
+   Si vous avez créé vos PVC dans différentes zones, n'incluez pas de libellé de région ou de zone dans votre ensemble avec état.
+   {: note}
 
 3. Vérifiez que les PVC sont utilisées dans les pods de réplique de votre ensemble avec état.
    1. Affichez la liste des pods de votre cluster. Identifiez les pods appartenant à votre ensemble avec état.
@@ -1072,6 +1088,163 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 <br />
 
 
+## Modification de la taille et du nombre d'opérations d'entrée-sortie par seconde (IOPS) de votre unité de stockage
+{: #change_storage_configuration}
+
+Si vous envisagez d'augmenter la capacité de stockage ou les performances, vous pouvez modifier votre volume existant.
+{: shortdesc}
+
+Pour toute question concernant la facturation ou la procédure à suivre pour modifier votre stockage en utilisant la console {{site.data.keyword.Bluemix_notm}}, voir [Extension de la capacité de stockage par blocs](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). Si vous utilisez la console {{site.data.keyword.Bluemix_notm}} pour modifier votre stockage, vous devez suivre les étapes 4 à 7 de cette rubrique pour effectuer la modification.
+{: tip}
+
+1. Répertoriez les réservations de volume persistant (PVC) et notez le nom du volume persistant (PV) associé indiqué dans la colonne **VOLUME**. 
+   ```
+   kubectl get pvc
+   ```
+   {: pre}
+   
+   Exemple de sortie : 
+   ```
+   NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
+   ```
+   {: screen}
+   
+2. Extrayez l'ID du volume (**VolumeID**) et le type de stockage (**StorageType**) du stockage de fichiers physique associé à votre PVC en affichant les détails du volume persistant auquel est liée votre PVC. Remplacez `<pv_name>` par le nom du volume persistant que vous avez obtenu à l'étape précédente. Le type de stockage est affiché dans la section **Labels** et l'ID du volume dans la section **Source** > **Options** de la sortie de l'interface de ligne de commande. 
+   ```
+   kubectl describe pv <pv_name>
+   ```
+   {: pre}
+   
+   Exemple de sortie : 
+   ```
+   Name:            pvc-c1839152-c333-11e8-b6a8-46ad53f2579a
+   Labels:          CapacityGb=24
+                    Datacenter=dal13
+                    IOPS=4
+                    StorageType=Endurance
+                    billingType=hourly
+                    failure-domain.beta.kubernetes.io/region=us-south
+                    failure-domain.beta.kubernetes.io/zone=dal13
+                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
+   ...
+   Source:
+       Type:       FlexVolume (a generic volume resource that is provisioned/attached using an exec based plugin)
+       Driver:     ibm/ibmc-block
+       FSType:     ext4
+       SecretRef:  <nil>
+       ReadOnly:   false
+       Options:    map[volumeName:pvc-c1839152-c333-11e8-b6a8-46ad53f2579a Lun:1 TargetPortal:161.26.114.56 VolumeID:51889685]
+   ...
+   ```
+   {: screen}
+
+3. Modifiez la taille ou le nombre d'IOPS de votre volume dans votre compte d'infrastructure IBM Cloud (SoftLayer). 
+
+   Exemple pour du stockage Performance : 
+   ```
+   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-iops <iops>
+   ```
+   {: pre}
+   
+   Exemple pour du stockage Endurance : 
+   ```
+   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-tier <iops>
+   ```
+   {: pre}
+   
+   <table>
+   <caption>Description des composantes de la commande</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>&lt;volume_ID&gt;</code></td>
+   <td>Entrez l'ID du volume que vous avez récupéré précédemment.</td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-size&gt;</code></td>
+   <td>Entrez la nouvelle taille en gigaoctets (Gi) de votre volume. Pour obtenir les tailles valides, voir [Détermination de la configuration de stockage par blocs](#predefined_storageclass). La taille que vous entrez doit être supérieure ou égale à la taille actuelle de votre volume. Si vous n'indiquez pas de nouvelle taille, la taille actuelle du volume est utilisée. </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-iops&gt;</code></td>
+   <td>Pour du stockage Performance uniquement. Entrez le nouveau nombre d'IOPS de votre choix. Pour obtenir les nombres d'IOPS valides, voir [Détermination de la configuration de stockage par blocs](#predefined_storageclass). Si vous n'indiquez pas de nombre d'IOPS, le nombre d'IOPS actuel est utilisé. <p class="note">Si le rapport IOPS/Go d'origine du volume est inférieur à 0,3, le nouveau rapport IOPS/Go doit être inférieur à ratio 0,3. Si le rapport IOPS/Go d'origine du volume est supérieur ou égal à 0,3, le nouveau rapport IOPS/Go du volume doit être supérieur ou égal à 0,3.</p> </td>
+   </tr>
+   <tr>
+   <td><code>&lt;new-tier&gt;</code></td>
+   <td>Pour du stockage Endurance uniquement. Entrez le nouveau nombre d'IOPS par Go de votre choix. Pour obtenir les nombres d'IOPS valides, voir [Détermination de la configuration de stockage par blocs](#predefined_storageclass). Si vous n'indiquez pas de nombre d'IOPS, le nombre d'IOPS actuel est utilisé. <p class="note">Si le rapport IOPS/Go d'origine du volume est inférieur à 0,25, le nouveau rapport IOPS/Go doit être inférieur à 0,25. Si le rapport IOPS/Go d'origine du volume est supérieur ou égal à 0,25, le nouveau rapport IOPS/Go du volume doit être supérieur ou égal à 0,25.</p> </td>
+   </tr>
+   </tbody>
+   </table>
+   
+   Exemple de sortie : 
+   ```
+   Order 31020713 was placed successfully!.
+   > Storage as a Service
+
+   > 40 GBs
+
+   > 2 IOPS per GB
+
+   > 20 GB Storage Space (Snapshot Space)
+
+   You may run 'ibmcloud sl block volume-list --order 12345667' to find this block volume after it is ready.
+   ```
+   {: screen}
+   
+4. Corrigez la configuration du volume persistant pour ajouter l'annotation `autofix-resizefs`. Cette annotation redimensionne automatiquement le système de fichiers lorsque le volume est monté sur un pod.  
+   ```
+   kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
+   ```
+   {: pre}
+   
+5. Répertoriez tous les pods utilisant la réservation de volume persistant (PVC). 
+   ```
+   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+   ```
+   {: pre}
+   
+   Les pods sont renvoyés au format : `<pod_name>: <pvc_name>`. 
+   
+6. Si vous disposez d'un pod utilisant la PVC, redémarrez le pod en retirant le pod et en laissant Kubernetes le recréer. Si vous avez créé un pod sans utiliser un déploiement ou un jeu de répliques Kubernetes, il vous faudra recréer votre pod après l'avoir retiré.
+   Pour extraire le fichier YAML utilisé pour créer votre pod, exécutez la commande `kubectl get pod <pod_name> -o yaml >pod.yaml`. 
+   {: tip}
+   ```
+   kubectl delete pod <pod_name>
+   ```
+   {: pre}
+   
+7. Si vous avez modifié la taille de votre volume, connectez-vous à votre pod pour vérifier la nouvelle taille. 
+   1. Obtenez le chemin de montage du volume que vous avez utilisé dans votre pod pour accéder à votre volume.
+      ```
+      kubectl describe pod <pod_name>
+      ```
+      {: pre}
+      
+      Le chemin de montage du volume est affiché dans la section **Containers** > **block** > **Mounts** de la sortie de l'interface de ligne de commande.
+   2. Connectez-vous à votre pod. 
+      ```
+      kubectl exec -it <pod_name> bash
+      ```
+      {: pre}
+      
+   3. Affichez les statistiques d'utilisation du disque et recherchez le chemin de montage du volume que vous avez récupéré précédemment. Vérifiez que la colonne **Size** affiche la nouvelle taille de votre volume.
+      ```
+      df -h
+      ```
+      {: pre}
+      
+      Exemple de sortie : 
+      ```
+      Filesystem                                     Size  Used Avail Use% Mounted on
+      overlay                                         99G  3.2G   91G   4% /
+      tmpfs                                           64M     0   64M   0% /dev
+      tmpfs                                          7.9G     0  7.9G   0% /sys/fs/cgroup
+      /dev/mapper/3600a098038304471562b4c4743384e4d   40G   44M   23G   1% /test
+      ```
+      {: screen}
+
 
 ## Sauvegarde et restauration des données
 {: #backup_restore}
@@ -1082,14 +1255,14 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 
 <dl>
   <dt>Configurer la prise d'instantanés régulière</dt>
-  <dd><p>Vous pouvez [configurer la prise d'instantanés régulière de votre stockage par blocs](/docs/infrastructure/BlockStorage/snapshots.html#snapshots). Un instantané est une image en lecture seule qui capture l'état de l'instance à un moment donné. Pour stocker l'instantané, vous devez demander de l'espace d'image instantanée dans votre stockage par blocs. Les instantanés sont stockés dans l'instance de stockage existante figurant dans la même zone. Vous pouvez restaurer des données à partir d'un instantané si l'utilisateur supprime accidentellement des données importantes du volume. <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous devez <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">ouvrir un ticket de demande de service</a>.</br></br> <strong>Pour créer un instantané de votre volume :</strong><ol><li>[Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).</li><li>Connectez-vous à l'interface de ligne de commande `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>Vous pouvez [configurer la prise d'instantanés régulière de votre stockage par blocs](/docs/infrastructure/BlockStorage/snapshots.html#snapshots). Un instantané est une image en lecture seule qui capture l'état de l'instance à un moment donné. Pour stocker l'instantané, vous devez demander de l'espace d'image instantanée dans votre stockage par blocs. Les instantanés sont stockés dans l'instance de stockage existante figurant dans la même zone. Vous pouvez restaurer des données à partir d'un instantané si l'utilisateur supprime accidentellement des données importantes du volume. <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous devez <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">ouvrir un cas de support</a>.</br></br> <strong>Pour créer un instantané de votre volume :</strong><ol><li>[Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).</li><li>Connectez-vous à l'interface de ligne de commande `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>Répertoriez les volumes persistants (PV) existants dans votre cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenez les détails du volume persistant pour lequel vous voulez créer un espace d'instantané et notez l'ID du volume, la taille et le nombre d'entrées-sorties par seconde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> La taille et le nombre d'IOPS sont affichés dans la section <strong>Labels</strong> de la sortie de l'interface CLI. Pour trouver l'ID du volume, consultez l'annotation <code>ibm.io/network-storage-id</code> dans la sortie de l'interface CLI. </li><li>Créez la taille de l'instantané pour le volume existant avec les paramètres que vous avez récupérés à l'étape précédente. <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Attendez que la taille de l'instantané soit créée. <pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>La taille de l'instantané est mise à disposition lorsque la section <strong>Snapshot Size (GB)</strong> de la sortie de l'interface CLI passe de 0 à la taille que vous avez commandée. </li><li>Créez l'instantané de votre volume et notez l'ID de l'instantané qui a été créé pour vous. <pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Vérifiez que la création de l'instantané a abouti. <pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Pour restaurer les données d'un instantané sur un volume existant : </strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Répliquer les instantanés dans une autre zone</dt>
  <dd><p>Pour protéger vos données en cas de défaillance d'une zone, vous pouvez [répliquer des instantanés](/docs/infrastructure/BlockStorage/replication.html#replicating-data) sur une instance de stockage par blocs configurée dans une autre zone. Les données peuvent être répliquées du stockage principal uniquement vers le stockage de sauvegarde. Vous ne pouvez pas monter une instance de stockage par blocs répliquée dans un cluster. En cas de défaillance de votre stockage principal, vous pouvez manuellement définir votre stockage de sauvegarde répliqué comme stockage principal. Vous pouvez ensuite le monter sur votre cluster. Une fois votre stockage principal restauré, vous pouvez récupérer les données dans le stockage de sauvegarde. <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous ne pouvez pas répliquer des instantanés sur une autre zone.</p></dd>
  <dt>Dupliquer le stockage</dt>
- <dd><p>Vous pouvez [dupliquer votre instance de stockage par blocs](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume) dans la même zone que l'instance de stockage d'origine. Un doublon contient les mêmes données que l'instance de stockage d'origine au moment où vous créez le doublon. Contrairement aux répliques, le doublon s'utilise comme une instance de stockage indépendante de l'original. Pour effectuer la duplication, configurez d'abord des instantanés pour le volume. <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous devez <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">ouvrir un ticket de demande de service</a>.</p></dd>
+ <dd><p>Vous pouvez [dupliquer votre instance de stockage par blocs](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume) dans la même zone que l'instance de stockage d'origine. Un doublon contient les mêmes données que l'instance de stockage d'origine au moment où vous créez le doublon. Contrairement aux répliques, le doublon s'utilise comme une instance de stockage indépendante de l'original. Pour effectuer la duplication, configurez d'abord des instantanés pour le volume. <strong>Remarque</strong> : si vous disposez d'un compte Dedicated, vous devez <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">ouvrir un cas de support</a>.</p></dd>
   <dt>Sauvegarder les données dans {{site.data.keyword.cos_full}}</dt>
-  <dd><p>Vous pouvez utiliser l'[**image ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) pour constituer un pod de sauvegarde et de restauration dans votre cluster. Ce pod contient un script pour exécuter une sauvegarde unique ou régulière d'une réservation de volume persistant (PVC) dans votre cluster. Les données sont stockées dans votre instance {{site.data.keyword.cos_full}} que vous avez configurée dans une zone.</p><strong>Remarque :</strong> le stockage par blocs est monté avec un mode d'accès RWO. Ce type d'accès autorise uniquement le montage d'un pod à la fois sur le stockage par blocs. Pour sauvegarder vos données, vous devez démonter le pod d'application du stockage, le monter sur votre pod de sauvegarde, sauvegardez les données et monter à nouveau le stockage sur votre pod d'application. </br></br>
+  <dd><p>Vous pouvez utiliser l'[**image ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) pour constituer un pod de sauvegarde et de restauration dans votre cluster. Ce pod contient un script pour exécuter une sauvegarde unique ou régulière d'une réservation de volume persistant (PVC) dans votre cluster. Les données sont stockées dans votre instance {{site.data.keyword.cos_full}} que vous avez configurée dans une zone.</p><p class="note">Le stockage par blocs est monté avec un mode d'accès RWO. Ce type d'accès autorise uniquement le montage d'un pod à la fois sur le stockage par blocs. Pour sauvegarder vos données, vous devez démonter le pod d'application du stockage, le monter sur votre pod de sauvegarde, sauvegardez les données et monter à nouveau le stockage sur votre pod d'application. </p>
 Pour rendre vos données hautement disponibles et protéger votre application en cas de défaillance d'une zone, configurez une deuxième instance {{site.data.keyword.cos_short}} et répliquez les données entre les différentes zones. Si vous devez restaurer des données à partir de votre instance {{site.data.keyword.cos_short}}, utilisez le script de restauration fourni avec l'image.</dd>
 <dt>Copier les données depuis et vers des pods et des conteneurs</dt>
 <dd><p>Vous pouvez utiliser la [commande![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) `kubectl cp` pour copier des fichiers et des répertoires depuis et vers des pods ou des conteneurs spécifiques dans votre cluster.</p>
@@ -1124,7 +1297,7 @@ Pour rendre vos données hautement disponibles et protéger votre application en
 </tr>
 <tr>
 <td>Type</td>
-<td>[Stockage Endurance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Stockage Endurance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>Système de fichiers</td>
@@ -1170,7 +1343,7 @@ Pour rendre vos données hautement disponibles et protéger votre application en
 </tr>
 <tr>
 <td>Type</td>
-<td>[Stockage Endurance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Stockage Endurance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>Système de fichiers</td>
@@ -1215,7 +1388,7 @@ Pour rendre vos données hautement disponibles et protéger votre application en
 </tr>
 <tr>
 <td>Type</td>
-<td>[Stockage Endurance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/endurance-storage)</td>
+<td>[Stockage Endurance](/docs/infrastructure/BlockStorage/index.html#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>Système de fichiers</td>
@@ -1260,7 +1433,7 @@ Pour rendre vos données hautement disponibles et protéger votre application en
 </tr>
 <tr>
 <td>Type</td>
-<td>[Performance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/performance-storage)</td>
+<td>[Performances](/docs/infrastructure/BlockStorage/index.html#provisioning-with-performance)</td>
 </tr>
 <tr>
 <td>Système de fichiers</td>
@@ -1301,7 +1474,8 @@ Pour créer votre classe de stockage personnalisée, voir [Personnalisation d'un
 ### Spécification de zone pour les clusters à zones multiples
 {: #multizone_yaml}
 
-**Remarque :** utilisez la classe de stockage personnalisée si vous utilisez le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage version 1.0.0 ou pour [mettre à disposition du stockage par blocs de manière statique](#existing_block) dans une zone spécifique. Dans tous les autres cas, [indiquez la zone directement dans votre PVC](#add_block).  
+Utilisez la classe de stockage personnalisée avec le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage version 1.0.0 ou pour [mettre à disposition du stockage par blocs de manière statique](#existing_block) dans une zone spécifique. Dans tous les autres cas, [indiquez la zone directement dans votre PVC](#add_block).
+{: note}
 
 Le fichier `.yaml` suivant personnalise une classe de stockage basée sur la classe de stockage `ibm-block-silver` sans retain : le type `type` est `"Endurance"`, le nombre d'IOPS par gigaoctet (`iopsPerGB`) est `4`, la plage de tailles (`sizeRange`) est `"[20-12000]Gi"` et la règle de récupération (`reclaimPolicy`) est définie par `"Delete"`. La zone indiquée est `dal12`. Vous pouvez consulter les informations précédentes sur les classes de stockage `ibmc` pour vous aider à choisir des valeurs acceptables pour ces éléments. </br>
 

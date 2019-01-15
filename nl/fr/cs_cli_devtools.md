@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -168,8 +171,8 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks credentials-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
@@ -383,7 +386,7 @@ Lorsqu'un autre utilisateur effectue une action qui nécessite une interaction a
 
 Si vous constatez que la clé d'API stockée pour une région nécessite une mise à jour, vous pouvez le faire en exécutant la commande [ibmcloud ks api-key-reset](#cs_api_key_reset). Cette commande nécessite la règle d'accès admin {{site.data.keyword.containerlong_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte.
 
-**Astuce :** la clé d'API renvoyée par cette commande ne peut pas être utilisée si les données d'identification ont été définies manuellement à l'aide de la commande [ibmcloud ks credentials-set](#cs_credentials_set).
+**Astuce :** la clé d'API renvoyée par cette commande ne peut pas être utilisée si les données d'identification ont été définies manuellement à l'aide de la commande [ibmcloud ks credential-set](#cs_credentials_set).
 
 <strong>Options de commande</strong> :
 
@@ -414,7 +417,7 @@ Permet de remplacer la clé d'API IAM actuelle dans une région {{site.data.keyw
 
 Cette commande nécessite la règle d'accès admin {{site.data.keyword.containerlong_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte. La clé d'API IAM est nécessaire pour commander l'infrastructure depuis le portefeuille d'infrastructure IBM Cloud (SoftLayer). Une fois stockée, la clé d'API est utilisée pour toutes les actions dans une région qui nécessite des droits d'accès à l'infrastructure indépendamment de l'utilisateur qui exécute cette commande. Pour plus d'informations sur le mode de fonctionnement des clés d'API IAM, voir la [commande `ibmcloud ks api-key-info`](#cs_api_key_info).
 
-**Important** : avant d'utiliser cette commande, assurez-vous que l'utilisateur qui l'exécute dispose des droits [{{site.data.keyword.containerlong_notm}} et des droit de l'infrastructure IBM Cloud (SoftLayer)](cs_users.html#users) requis.
+**Important** : avant d'utiliser cette commande, assurez-vous que l'utilisateur qui l'exécute dispose des [droits {{site.data.keyword.containerlong_notm}} et des droits de l'infrastructure IBM Cloud (SoftLayer)](cs_users.html#users) requis.
 
 <strong>Options de commande</strong> :
 
@@ -896,21 +899,23 @@ Affichez des informations sur un cluster dans votre organisation.
 **Exemple de sortie** :
 
   ```
-  Name:        my_cluster
-  ID:          abc1234567
-  State:       normal
-  Trust ready: false
-  Created:     2018-01-01T17:19:28+0000
-  Zone:        dal10
-  Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Master Location: Dallas
-  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
-  Ingress secret:    my_cluster
-  Workers:      3
-  Worker Zones: dal10
-  Version:      1.11.3
-  Owner Email:  name@example.com
+  Name:                 my_cluster
+  ID:                   abc1234567
+  State:                normal
+  Trust ready:          false
+  Created:              2018-01-01T17:19:28+0000
+  Zone:                 dal10
+  Master URL:           https://169.xx.xxx.xxx:xxxxx
+  Master Location:      Dallas
+  Ingress subdomain:    my_cluster.us-south.containers.appdomain.cloud
+  Ingress secret:       my_cluster
+  Workers:              3
+  Worker Zones:         dal10
+  Version:              1.12.3
+  Owner:                name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Resource Group ID:    a8a12accd63b437bbd6d58fb6a462ca7
+  Resource Group Name:  Default
 
   Addons
   Name                   Enabled
@@ -1651,7 +1656,7 @@ Affichage du statut de tous les équilibreurs de charge ALB dans un cluster. Si 
 ## Commandes de l'infrastructure
 {: #infrastructure_commands}
 
-### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 Définissez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) pour votre compte {{site.data.keyword.containerlong_notm}}.
@@ -1707,12 +1712,12 @@ Vous ne pouvez pas définir plusieurs données d'identification pour un compte {
 **Exemple** :
 
   ```
-  ibmcloud ks credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+  ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
 
-### ibmcloud ks credentials-unset
+### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
 Supprimez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) de votre compte {{site.data.keyword.containerlong_notm}}.
@@ -1729,7 +1734,7 @@ Après avoir supprimé les données d'identification, la [clé d'API IAM](#cs_ap
 **Exemple** :
 
   ```
-  ibmcloud ks credentials-unset
+  ibmcloud ks credential-unset
   ```
   {: pre}
 
@@ -2788,7 +2793,7 @@ Affichez les détails d'un pool worker.
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.8_1512
+  Version:            1.10.11_1512
   ```
   {: screen}
 
@@ -3004,4 +3009,3 @@ Avant de supprimer une zone, assurez-vous de disposer d'un nombre de noeuds work
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
-  

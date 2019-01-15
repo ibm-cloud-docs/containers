@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -25,8 +28,8 @@ Toute une variété de cas d'utilisation témoigne de la puissance des services 
 * Intelligence artificielle (AI) et apprentissage automatique (ML)
 * Données et stockage
 * DevOps
-
 {: shortdesc}
+
 <table summary="Le tableau présente les cas d'utilisation. La lecture des lignes s'effectue de gauche à droite, avec des icônes représentant chaque secteur d'activité dans la première colonne et la description dans la deuxième colonne.">
 <caption>Cas d'utilisation</caption>
   <thead>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Définition d'une priorité de pod
@@ -35,7 +38,7 @@ En général, les pods en attente ayant une priorité plus élevée sont planifi
 
 Si vous n'indiquez pas de priorité pour le déploiement de vos pods, la valeur par défaut correspond à la classe de priorité définie par `globalDefault`. Si vous n'avez pas de classe de priorité `globalDefault`, la priorité par défaut pour tous les pods est zéro (`0`). Par défaut, {{site.data.keyword.containerlong_notm}} ne définit pas de classe `globalDefault`, par conséquent, la priorité par défaut des pods est zéro.
 
-Considérez les scénarios illustrés dans la figure suivante. **Important** : comme vous pouvez le constater, vous devez comprendre comment la priorité des pods et le planificateur interagissent pour positionner les pods dont les priorités sont définies sur les noeuds worker avec les ressources disponibles. Autrement, les pods de priorité élevée dans votre cluster peuvent rester en attente, tandis que des pods existants sont retirés, comme dans le scénario 3.
+Pour comprendre comment s'articulent la priorité des pods avec le planificateur, considérez les scénarios illustrés dans la figure suivante. Vous devez placer les pods dont la priorité est définie sur des noeuds worker avec des ressources disponibles. Autrement, les pods de priorité élevée dans votre cluster peuvent rester en attente, alors que des pods existants sont retirés au même moment, comme dans le scénario 3.
 
 _Figure : Scénarios illustrant la priorité des pods_
 ![Scénarios illustrant la priorité des pods](images/pod-priority.png)
@@ -48,13 +51,19 @@ _Figure : Scénarios illustrant la priorité des pods_
 **Puis-je désactiver le contrôleur d'admission de priorité de pod ?**</br>
 Non. Si vous ne souhaitez pas utiliser la priorité de pod, ne définissez pas de classe `globalDefault` ou ajoutez une classe de priorité dans les déploiements de vos pods. Tous les pods prennent la valeur zéro, sauf les pods essentiels pour le cluster qu'IBM déploie avec les [classes de priorité par défaut](#default_priority_class). Comme la priorité des pods est relative, cette configuration de base garantit que les pods essentiels pour le cluster sont prioritaires pour les ressources et planifie tous les autres pods suivant les règles de planification existantes en vigueur.
 
+**Comment les quotas de ressources affectent la priorité d'un pod ?**</br>
+Vous pouvez utiliser la priorité de pod en combinaison avec les quotas de ressources, notamment des [étendues de quotas (quota scopes) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) pour les clusters qui exécutent Kubernetes 1.12 ou version ultérieure. Avec les étendues de quotas, vous pouvez configurer vos quotas de ressources en fonction de la priorité des pods. Ainsi, les pods de priorité plus élevée consomment des ressources système limitées par le quota de ressources avant les pods de priorité plus faible.
+
 ## Description des classes de priorité par défaut
 {: #default_priority_class}
 
-Vos clusters {{site.data.keyword.containerlong_notm}} sont fournis avec des classes de priorité par défaut. **Important** : ne modifiez pas les classes par défaut qui sont utilisées pour gérer correctement votre cluster. Vous pouvez utiliser ces classes dans les déploiements de vos applications ou [créer vos propres classes de priorité](#create_priority_class).
+Vos clusters {{site.data.keyword.containerlong_notm}} sont fournis avec des classes de priorité par défaut.
 {: shortdesc}
 
-Le tableau suivant présente les classes de priorité fournies par défaut dans votre cluster et indique pourquoi elles sont utilisées. 
+Ne modifiez pas les classes par défaut qui sont utilisées pour gérer correctement votre cluster. Vous pouvez utiliser ces classes dans les déploiements de vos applications ou [créer vos propres classes de priorité](#create_priority_class).
+{: important}
+
+Le tableau suivant présente les classes de priorité fournies par défaut dans votre cluster et indique pourquoi elles sont utilisées.
 
 | Nom | Définie par | Valeur de priorité | Fonction |
 |---|---|---|
@@ -80,22 +89,24 @@ Avant de commencer :
 * [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 * [Créez](cs_clusters.html#clusters_ui) ou [mettez à jour](cs_cluster_update.html#update) votre cluster avec Kubernetes version 1.11 ou ultérieure.
 
+Pour utiliser une classe de priorité :
+
 1.  Facultatif : utilisez une classe de priorité existante comme modèle pour définir la nouvelle classe.
-    
+
     1.  Répertoriez les classes de priorité existantes.
-        
+
         ```
         kubectl get priorityclasses
         ```
         {: pre}
-        
+
     2.  Sélectionnez la classe de priorité que vous voulez copier et créez un fichier YAML local.
-    
+
         ```
         kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
         ```
         {: pre}
-        
+
 2.  Créez un fichier YAML pour votre classe de priorité.
 
     ```yaml
@@ -108,7 +119,7 @@ Avant de commencer :
     description: "Use this class for XYZ service pods only."
     ```
     {: codeblock}
-    
+
     <table>
     <caption>Description des composants du fichier YAML</caption>
     <thead>
@@ -132,7 +143,7 @@ Avant de commencer :
     <td><code>description</code></td>
     <td>Facultatif : informez les utilisateurs de la fonction de cette classe de priorité. Mettez cette chaîne entre guillemets (`""`).</td>
     </tr></tbody></table>
-    
+
 3.  Créez la classe de priorité dans votre cluster.
 
     ```
@@ -164,14 +175,14 @@ Pour affecter une priorité à vos pods :
 
 1.  Vérifiez l'importance des autres pods déployés pour que vous puissiez choisir la classe de priorité appropriée pour vos pods en fonction de ce qui est déjà déployé.
 
-    1.  Affichez les classes de priorité utilisées par les autres pods dans l'espace de nom. 
-        
+    1.  Affichez les classes de priorité utilisées par les autres pods dans l'espace de nom.
+
         ```
         kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
         ```
         {: pre}
-        
-    2.  Obtenez les caractéristiques de la classe de priorité et notez le nombre correspondant à sa **valeur**. Les pods ayant les nombres les plus élevés sont prioritaires par rapport aux pods avec des nombres plus faibles. Répétez cette étape pour chaque classe de priorité que vous désirez consulter.
+
+    2.  Obtenez les caractéristiques de la classe de priorité et notez le nombre correspondant à sa **valeur**. Les pods ayant les nombres les plus élevés sont prioritaires par rapport aux pods avec des nombres plus faibles. Répétez cette étape pour chaque classe de priorité que vous désirez passer en revue.
 
         ```
         kubectl describe priorityclass <priorityclass_name>
@@ -184,7 +195,7 @@ Pour affecter une priorité à vos pods :
     kubectl get priorityclasses
     ```
     {: pre}
-    
+
 3.  Dans votre spécification de pod, ajoutez la zone `priorityClassName` avec le nom de la classe de priorité que vous avez obtenue à l'étape précédente.
 
     ```yaml

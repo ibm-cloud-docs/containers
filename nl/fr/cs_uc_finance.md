@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -22,13 +25,14 @@ lastupdated: "2018-10-25"
 {: #cs_uc_finance}
 
 Ces cas d'utilisation mettent en évidence comment les charges de travail sur {{site.data.keyword.containerlong_notm}} peuvent
-tirer parti d'un calcul hautes performances à haute disponibilité, d'une rotation facile des clusters pour accélérer le développement et de l'intelligence artificielle (IA) avec {{site.data.keyword.ibmwatson}}.
+tirer parti d'un calcul hautes performances à haute disponibilité, d'une rotation facile des clusters pour accélérer le développement et de l'intelligence artificielle (IA) avec {{site.data.keyword.ibmwatson}}. 
 {: shortdesc}
 
 ## Une société hypothécaire réduit les coûts et accélère la conformité aux réglementations
 {: #uc_mortgage}
 
 Un responsable de la gestion des risques d'une société hypothécaire résidentielle traite 70 millions d'enregistrements par jour mais le système local s'est avéré à la fois lent et inexact. Les dépenses informatiques ont monté en flèche car le matériel est vite devenu obsolète sans avoir été rentabilisé. En attendant que le matériel soit remplacé, la société a pris du retard en terme de conformité aux réglementations. 
+{: shortdesc}
 
 Pourquoi {{site.data.keyword.Bluemix_notm}} ? Pour améliorer l'analyse des risques, cette société s'est tournée vers les services {{site.data.keyword.containerlong_notm}} et IBM Cloud Analytic pour réduire les coûts, augmenter la disponibilité à l'échelle internationale et enfin accélérer la conformité aux réglementations. Avec {{site.data.keyword.containerlong_notm}} dans plusieurs régions, ses applications d'analyse peuvent être conteneurisées et déployées dans le monde entier, améliorant ainsi la disponibilité et répondant aux réglementations locales. Ces déploiements sont accélérés grâce à des outils open source familiers, déjà intégrés dans {{site.data.keyword.containerlong_notm}}.
 
@@ -56,9 +60,9 @@ La société a pu accélérer sont traitement en matière d'analyse des risques 
 Le problème de la société à l'heure actuelle est de faire face au volume et au délai de livraison. 
 
 Son environnement actuel date de plus de 7 ans. Il s'agit d'un environnement local avec une capacité limitée en termes de calcul, de stockage et d'E-S.
-Les actualisations de serveur sont coûteuses et leur exécution prend beaucoup de temps.
-Les mises à jour de logiciels et d'applications suivent un processus informel et ne sont pas reproductibles.
-Le calcul à hautes performances réel est difficile à programmer. L'API est trop complexe pour les nouveaux développeurs qui viennent d'arriver et nécessitent des connaissances qui ne sont documentées nulle part.
+Les actualisations de serveur sont coûteuses et leur exécution prend beaucoup de temps. 
+Les mises à jour de logiciels et d'applications suivent un processus informel et ne sont pas reproductibles. 
+Le calcul à hautes performances réel est difficile à programmer. L'API est trop complexe pour les nouveaux développeurs qui viennent d'arriver et nécessitent des connaissances qui ne sont documentées nulle part. 
 Et l'exécution des mises à niveau des applications principales prend 6 à 9 mois. 
 
 **Modèle de solution : Services d'E-S, de stockage et de calcul à la demande s'exécutant dans un cloud public avec accès sécurisé aux actifs de l'entreprise locaux selon les besoins**
@@ -75,7 +79,7 @@ Et l'exécution des mises à niveau des applications principales prend 6 à 9 mo
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGateway}}
 
-{{site.data.keyword.containerlong_notm}} fournit des ressources de calcul évolutives et les tableaux de bord DevOps associés pour créer, mettre à l'échelle et supprimer des applications et des services à la demande. Avec des conteneurs conformes aux normes de l'industrie, les applications peuvent être redirigées dès le départ pour être hébergées sur {{site.data.keyword.containerlong_notm}} sans modifications d'architecture majeures.  
+{{site.data.keyword.containerlong_notm}} fournit des ressources de calcul évolutives et les tableaux de bord DevOps associés pour créer, mettre à l'échelle et supprimer des applications et des services à la demande. Avec des conteneurs conformes aux normes de l'industrie, les applications peuvent être redirigées dès le départ pour être hébergées sur {{site.data.keyword.containerlong_notm}} sans modifications d'architecture majeures. 
 
 Cette solution offre des avantages immédiats en termes d'évolutivité. En utilisant la gamme enrichie d'objets de déploiement et d'exécution de Kubernetes, la société hypothécaire est en mesure de surveiller et gérer les mises à niveau des applications en toute fiabilité. Elle peut également mettre à l'échelle et répliquer les applications qui utilisent des règles définies et l'orchestration automatique de Kubernetes.
 
@@ -96,6 +100,7 @@ Cette solution offre des avantages immédiats en termes d'évolutivité. En util
 {: #uc_payment_tech}
 
 Un responsable du développement dispose de développeurs qui utilisent des outils traditionnels locaux qui ralentissent le prototypage en attendant l'achat du matériel.
+{: shortdesc}
 
 Pourquoi {{site.data.keyword.Bluemix_notm}} ? {{site.data.keyword.containerlong_notm}} accélère les calculs en utilisant une technologie open source standard. Une fois que la société est passée à {{site.data.keyword.containerlong_notm}}, les développeurs ont eu accès à des outils DevOps conviviaux, comme des conteneurs portables et faciles à partager.
 
@@ -142,7 +147,7 @@ La société a commencé par conteneuriser les machines virtuelles des outils de
 
 Avec la mise à l'échelle horizontale d'{{site.data.keyword.containerlong_notm}}, les applications de la société s'adaptent à l'évolution du nombre de partenaires, accélérant ainsi la croissance. {{site.data.keyword.containerlong_notm}} fournit des ressources de calcul élastiques sécurisées dans le monde entier permettant d'utiliser la pleine capacité des ressources informatiques modernes. 
 
-Un développement accéléré est un facteur de réussite pour le responsable. Avec l'utilisation de conteneurs modernes, les développeurs peuvent conduire des tests dans les langages de leur choix et intégrer les changements dans des systèmes de développement et de test, répartis sur différents clusters. Ces intégrations sont automatiques avec des chaînes d'outils ouvertes et {{site.data.keyword.contdelivery_full}}. Les mises à jour d'outils ne sont plus confinées dans des processus de construction lents et susceptibles de comporter des erreurs. Les développeurs peuvent fournir des mises à jour incrémentielles à leurs outils, tous les jours, voire plus fréquemment.   
+Un développement accéléré est un facteur de réussite pour le responsable. Avec l'utilisation de conteneurs modernes, les développeurs peuvent conduire des tests dans les langages de leur choix et intégrer les changements dans des systèmes de développement et de test, répartis sur différents clusters. Ces intégrations sont automatiques avec des chaînes d'outils ouvertes et {{site.data.keyword.contdelivery_full}}. Les mises à jour d'outils ne sont plus confinées dans des processus de construction lents et susceptibles de comporter des erreurs. Les développeurs peuvent fournir des mises à jour incrémentielles à leurs outils, tous les jours, voire plus fréquemment. 
 
 Les fonctions de consignation et de surveillance des outils, notamment avec l'utilisation de l'intelligence artificielle de {{site.data.keyword.watson}}, sont rapidement intégrées dans le système. Les développeurs ne perdent plus de temps à construire des systèmes de consignation complexes, juste pour pouvoir identifier et résoudre les incidents de leurs systèmes de production. Un facteur clé pour réduire les coûts de personnel réside dans le fait qu'IBM gère Kubernetes, de sorte que les développeurs puissent se concentrer sur de meilleurs outils de paiement.
 
@@ -151,7 +156,7 @@ La sécurité avant tout : avec la technologie bare metal pour {{site.data.keywo
 **Etape 1 : Méthode "Lift and shift" pour sécuriser les calculs**
 * Les applications qui gèrent des données ultra-sensibles peuvent être redirigées pour être hébergées sur {{site.data.keyword.containerlong_notm}} qui s'exécute sur Bare Metal for Trusted Compute. La fonction de calcul sécurisé (Trusted Compute) peut vérifier que le matériel sous-jacent ne fait pas l'objet de falsification. 
 * Migration des images de machine virtuelle sur des images de conteneur qui s'exécutent sur {{site.data.keyword.containerlong_notm}} dans {{site.data.keyword.Bluemix_notm}} public.
-* Sur cette base, Vulnerability Advisor fournit des fonctionnalités d'analyse d'images, de règles, de conteneurs et de packages pour détecter les logiciels malveillants connus. 
+* Sur cette base, Vulnerability Advisor fournit des fonctionnalités d'analyse d'images, de règles, de conteneurs et de vulnérabilités liées aux packages pour détecter les logiciels malveillants connus. 
 * Les coûts liés à un centre de données privé ou aux dépenses locales sont considérablement réduits et remplacés par un modèle informatique à la demande qui évolue en fonction des exigences de la charge de travail.
 
 **Etape 2 : Opérations et connexions à des systèmes de paiement de back end existants**

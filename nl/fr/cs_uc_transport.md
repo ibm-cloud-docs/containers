@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -30,8 +33,9 @@ tirer parti des chaînes d'outils pour effectuer rapidement des mises à jour d'
 {: #uc_shipping}
 
 Un responsable informatique dispose de systèmes de routage et de planification pour les navires au niveau mondial, avec lesquels des partenaires peuvent interagir. Les partenaires nécessitent des informations à la minute près pour ces systèmes qui ont accès aux données de terminaux IoT. Mais ces systèmes n'étaient pas en mesure de s'adapter à l'échelle internationale avec une haute disponibilité suffisante.
+{: shortdesc}
  
- Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_notm}} adapte les applications conteneurisées en garantissant 99,999 % de disponibilité pour répondre aux exigences croissantes. Les déploiements d'application ont lieu 40 fois par jour lorsque les développeurs expérimentent l'application rapide et facile des changements dans des environnements de développement et de test. La plateforme IoT facilite l'accès aux données IoT. 
+Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_notm}} adapte les applications conteneurisées en garantissant 99,999 % de disponibilité pour répondre aux exigences croissantes. Les déploiements d'application ont lieu 40 fois par jour lorsque les développeurs expérimentent l'application rapide et facile des changements dans des environnements de développement et de test. La plateforme IoT facilite l'accès aux données IoT. 
  
 Technologies clés :    
 * [Ecosystème de partenaires dans plusieurs régions ](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)
@@ -118,6 +122,7 @@ Solution technique :
 {: #uc_airline}
 
 Un directeur des ressources humaines a besoin d'un nouveau site RH avec un agent conversationnel innovant, mais la plateforme utilisée et les outils de développement impliquent des délais relativement longs pour la mise en oeuvre des applications. Dans ce cas de figure, il y a beaucoup d'attente à la clé pour l'acquisition du matériel.
+{: shortdesc}
 
 Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_notm}} facilite le lancement des calculs. Les développeurs peuvent ensuite expérimenter facilement l'intégration rapide de changements dans des systèmes de développement et de test avec des chaînes d'outils ouvertes. Les outils de développement de logiciels traditionnels sont encore plus performants lorsqu'ils fonctionnent avec IBM Watson Assistant. Le nouveau site de prestations a pu voir le jour en moins de 3 semaines.
 
@@ -155,7 +160,7 @@ Un développement accéléré est un atout majeur pour le responsable RH. L'équ
 
 Avec {{site.data.keyword.containerlong_notm}}, ils passent d'un matériel sursollicité dans un centre de données privé à un calcul personnalisé qui réduit les opérations informatiques et la maintenance, et économise l'énergie. Pour héberger le site RH, ils peuvent aisément concevoir des clusters Kubernetes afin de satisfaire leurs besoins en termes d'UC, de mémoire RAM et de stockage. Un autre facteur permettant de réduire les coûts de personnel réside dans le fait qu'IBM gère Kubernetes, de sorte que les développeurs puissent se concentrer à apporter une meilleure expérience des employés dans le cadre de l'inscription aux prestations.
 
-{{site.data.keyword.containerlong_notm}} fournit des ressources de calcul évolutives et les tableaux de bord DevOps associés pour créer, mettre à l'échelle et supprimer des applications et des services à la demande. A l'aide de la technologie des conteneurs aux normes de l'industrie, les applications peuvent être facilement développées et partagées entre plusieurs environnements de développement, de test et de production. Cette configuration contribue à l'évolutivité immédiate. A l'aide d'une gamme enrichie d'objets de déploiement et d'exécution Kubernetes, l'équipe RH peut surveiller et gérer les mises à niveau des applications en toute fiabilité. Elle peut également répliquer et mettre à l'échelle les applications à l'aide de règles définies et de l'orchestration automatique de Kubernetes. 
+{{site.data.keyword.containerlong_notm}} fournit des ressources de calcul évolutives et les tableaux de bord DevOps associés pour créer, mettre à l'échelle et supprimer des applications et des services à la demande. A l'aide de la technologie des conteneurs aux normes de l'industrie, les applications peuvent être facilement développées et partagées entre plusieurs environnements de développement, de test et de production. Cette configuration contribue à l'évolutivité immédiate. A l'aide d'une gamme enrichie d'objets de déploiement et d'exécution Kubernetes, l'équipe RH peut surveiller et gérer les mises à niveau des applications en toute fiabilité. Elle peut également répliquer et mettre à l'échelle les applications à l'aide de règles définies et de l'orchestration automatique de Kubernetes.
 
 **Etape 1 : Conteneurs, microservices et Garage Method**
 * Les applications sont générées dans un ensemble de microservices coopératifs qui s'exécutent dans {{site.data.keyword.containerlong_notm}}. L'architecture représente les zones fonctionnelles de l'application présentant le plus de problèmes de qualité.

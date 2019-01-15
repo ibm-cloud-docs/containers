@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -56,6 +59,7 @@ Editeurs de logiciels et administrateurs réseau qui déploient une application 
 ## Conditions prérequises
 
 * [Tutoriel : Création de clusters Kubernetes](cs_tutorials.html#cs_cluster_tutorial).
+* Installez le [plug-in container-registry](/docs/services/Registry/index.html#registry_cli_install).
 
 
 ## Leçon 1 : Déploiement d'applications avec instance unique dans des clusters Kubernetes
@@ -89,7 +93,7 @@ Pour déployer l'application :
 
 3. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 
-5.  Connectez-vous à l'interface CLI de {{site.data.keyword.registryshort_notm}}. **Remarque** :  vérifiez que le plug-in container-registry est [installé](/docs/services/Registry/index.html#registry_cli_install).
+5.  Connectez-vous à l'interface de ligne de commande d'{{site.data.keyword.registryshort_notm}}.
 
     ```
     ibmcloud cr login
@@ -230,7 +234,7 @@ Pour déployer l'application :
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
         ```
         {: screen}
 
@@ -246,7 +250,7 @@ Pour déployer l'application :
 
 11. [Lancez le tableau de bord Kubernetes](cs_app.html#cli_dashboard).
 
-    Si vous sélectionnez votre cluster dans l'interface graphique d'[{{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), vous pouvez cliquer sur le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
+    Si vous sélectionnez votre cluster dans la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/), vous pouvez cliquer sur le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
     {: tip}
 
 12. Vous pouvez examiner dans l'onglet **Charges de travail** les ressources que vous avez créées.
@@ -373,15 +377,15 @@ Comme défini dans le script de configuration, Kubernetes peut utiliser une vér
   ```
   {: screen}
 
-7.  Vérifiez le statut de votre pod pour surveiller l'état de santé de votre application dans Kubernetes. Vous pouvez le faire à partir de l'interface de ligne de commande (CLI) ou dans l'interface graphique du tableau de bord Kubernetes.
+7.  Vérifiez le statut de votre pod pour surveiller l'état de santé de votre application dans Kubernetes. Vous pouvez le faire à partir de l'interface de ligne de commande (CLI) ou dans le tableau de bord Kubernetes.
 
-    *  **Dans l'interface CLI** : observez ce qui se passe pour vos pods lorsqu'ils changent de statut.
+    *  **A partir de l'interface CLI** : observez ce qui se passe pour vos pods lorsqu'ils changent de statut.
        ```
        kubectl get pods -o wide -w
        ```
        {: pre}
 
-    *  **A partir de l'interface graphique** :
+    *  **Dans le tableau de bord Kubernetes** :
 
        1.  [Lancez le tableau de bord Kubernetes](cs_app.html#cli_dashboard).
        2.  Vous pouvez examiner dans l'onglet **Charges de travail** les ressources que vous avez créées. Depuis cet onglet, vous pouvez actualiser l'écran continuellement et constater que le diagnostic d'intégrité opère. Dans la section **Pods**, vous pouvez observer combien de fois les pods sont redémarrés quand leurs conteneurs sont recréés. Si l'erreur ci-après s'affiche dans le tableau de bord, ce message indique que le diagnostic d'intégrité a identifié un problème. Patientez quelques minutes, puis actualisez à nouveau la page. Le nombre de tentatives de redémarrage pour chaque pod est affiché.
@@ -522,7 +526,7 @@ Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster co
         ```
         {: codeblock}
 
-    2.  Dans la section volumes du déploiement Watson, mettez à jour le nom de la clé confidentielle {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} avec celle que vous avez créée dans le tutoriel précédent. En montant la valeur confidentielle Kubernetes en tant que volume dans votre déploiement, vous mettez les données d'identification du service {{site.data.keyword.Bluemix_notm}} à disposition du conteneur exécuté dans votre pod. Les composants de l'application {{site.data.keyword.watson}} de ce tutoriel sont configurés pour rechercher les données d'identification du service à l'aide du chemin de montage du volume.
+    2.  Dans la section volumes du déploiement Watson, mettez à jour le nom de la clé confidentielle {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} avec celle que vous avez créée dans le tutoriel précédent. En montant la valeur confidentielle Kubernetes en tant que volume dans votre déploiement, vous rendez la clé d'API {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) disponible dans le conteneur qui s'exécute dans votre pod. Les composants de l'application {{site.data.keyword.watson}} de ce tutoriel sont configurés pour rechercher la clé d'API en utilisant le chemin de montage du volume.
 
         ```
         volumes:

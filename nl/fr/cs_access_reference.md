@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 
 ---
@@ -14,6 +14,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Droits d'accès des utilisateurs
@@ -24,24 +27,27 @@ lastupdated: "2018-10-25"
 Lorsque vous [affectez des droits pour un cluster](cs_users.html), il peut être difficile de déterminer le rôle à attribuer à un utilisateur. Utilisez les tableaux présentés dans les sections suivantes pour déterminer les droits minimum requis pour effectuer des tâches courantes dans {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-## Plateforme IAM et RBAC Kubernetes
+## Plateforme {{site.data.keyword.Bluemix_notm}} IAM et RBAC Kubernetes
 {: #platform}
 
-{{site.data.keyword.containerlong_notm}} est configuré pour utiliser des rôles Identity and Access Management (IAM) d'{{site.data.keyword.Bluemix_notm}}. Les rôles de plateforme IAM déterminent les actions que les utilisateurs peuvent effectuer sur un cluster. Tous les utilisateurs auxquels est affecté un rôle de plateforme IAM ont un rôle de contrôle d'accès basé sur les rôles (RBAC) Kubernetes correspondant qui leur est automatiquement affecté dans l'espace de nom par défaut. De plus, les rôles de plateforme IAM définissent automatiquement des droits d'infrastructure de base pour les utilisateurs. Pour définir des règles IAM, voir [Affectation de droits de plateforme IAM](cs_users.html#platform). Pour en savoir plus sur les rôles RBAC, voir [Affectation de droits RBAC](cs_users.html#role-binding).
+{{site.data.keyword.containerlong_notm}} est configuré pour utiliser des rôles {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). Les rôles de plateforme {{site.data.keyword.Bluemix_notm}} IAM déterminent les actions que les utilisateurs peuvent effectuer sur un cluster. Tous les utilisateurs auxquels est affecté un rôle de plateforme ont un rôle de contrôle d'accès basé sur les rôles (RBAC) Kubernetes correspondant qui leur est automatiquement affecté dans l'espace de nom par défaut. De plus, les rôles de plateforme définissent automatiquement des droits d'infrastructure de base pour les utilisateurs. Pour définir des règles IAM, voir [Affectation de droits de plateforme {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform). Pour en savoir plus sur les rôles RBAC, voir [Affectation de droits RBAC](cs_users.html#role-binding).
+{: shortdesc}
 
-Le tableau suivant présente les droits de gestion de cluster octroyés par chaque rôle de plateforme IAM et les droits sur les ressources Kubernetes des rôles RBAC correspondants.
+Le tableau suivant présente les droits de gestion de cluster octroyés par chaque rôle de plateforme et les droits sur les ressources Kubernetes des rôles RBAC correspondants.
 
-<table>
-  <tr>
-    <th>Rôle de plateforme IAM</th>
+<table summary="Le tableau présente les droits utilisateur pour les rôles de plateforme IAM et les règles RBAC correspondantes. La lecture des lignes s'effectue de gauche à droite, avec le rôle de plateforme IAM dans la première colonne, les droits du cluster dans la deuxième colonne et le rôle RBAC correspondant dans la troisième colonne.">
+<caption>Droits de gestion de cluster par plateforme et rôle RBAC</caption>
+<thead>
+    <th>Rôle de plateforme</th>
     <th>Droits de gestion de cluster</th>
     <th>Rôle RBAC correspondant et droits sur les ressources</th>
-  </tr>
+</thead>
+<tbody>
   <tr>
     <td>**Afficheur**</td>
     <td>
       Cluster :<ul>
-        <li>Afficher le nom et l'adresse e-mail du propriétaire de la clé d'API d'un groupe de ressources et d'une région</li>
+        <li>Afficher le nom et l'adresse e-mail du propriétaire de la clé d'API {{site.data.keyword.Bluemix_notm}} IAM d'un groupe de ressources et d'une région</li>
         <li>Si le compte {{site.data.keyword.Bluemix_notm}} utilise d'autres données d'identification pour accéder au portefeuille de l'infrastructure IBM Cloud (SoftLayer), afficher le nom de l'utilisateur de l'infrastructure</li>
         <li>Afficher tout ou les détails des clusters, des noeuds worker, des pools de noeuds worker, des services dans un cluster et des webhooks</li>
         <li>Afficher le statut de la fonction spanning VLAN pour le compte d'infrastructure</li>
@@ -51,7 +57,7 @@ Le tableau suivant présente les droits de gestion de cluster octroyés par chaq
       Consignation :<ul>
         <li>Afficher le noeud final de consignation par défaut correspondant à la région cible</li>
         <li>Afficher la liste ou les détails des configurations de filtrage et d'acheminement des journaux</li>
-        <li>Afficher le statut des mises à jour automatiques du module complémentaire Fluent</li></ul>
+        <li>Afficher le statut des mises à jour automatiques du module complémentaire Fluentd</li></ul>
       Ingress :<ul>
         <li>Afficher la liste ou les détails des équilibreurs de charge d'application (ALB) d'un cluster</li>
         <li>Afficher les types d'ALB pris en charge dans la région</li></ul>
@@ -106,7 +112,7 @@ Le tableau suivant présente les droits de gestion de cluster octroyés par chaq
         <li>Chiffrer des valeurs confidentielles (secrets) de Kubernetes à l'aide d'{{site.data.keyword.keymanagementservicefull}}</li>
         <li>Définir la clé d'API pour le compte {{site.data.keyword.Bluemix_notm}} afin d'accéder au portefeuille de l'infrastructure IBM Cloud (SoftLayer) lié</li>
         <li>Définir, afficher et retirer des données d'identification pour le compte {{site.data.keyword.Bluemix_notm}} afin d'accéder à un autre portefeuille de l'infrastructure IBM Cloud (SoftLayer)</li>
-        <li>Affecter et modifier des rôles de plateforme IAM pour d'autres utilisateurs existants dans le compte</li>
+        <li>Affecter et modifier des rôles de plateforme {{site.data.keyword.Bluemix_notm}} IAM pour d'autres utilisateurs existants dans le compte</li>
         <li>Lorsque ce rôle est défini pour toutes les instances {{site.data.keyword.containerlong_notm}} instances (clusters) dans toutes les régions : afficher tous les VLAN disponibles dans le compte</ul>
       Consignation :<ul>
         <li>Créer et mettre à jour des configurations d'acheminement des journaux de type `kube-audit`</li>
@@ -116,7 +122,7 @@ Le tableau suivant présente les droits de gestion de cluster octroyés par chaq
         <li>Afficher tout ou les détails des valeurs confidentielles (secrets) d'ALB dans un cluster</li>
         <li>Déployer un certificat depuis votre instance {{site.data.keyword.cloudcerts_long_notm}} vers un équilibreur de charge d'application (ALB)</li>
         <li>Mettre jour ou retirer des valeurs confidentielles d'ALB dans un cluster</li></ul>
-      <strong>Remarque</strong> : pour créer des ressources, telles que des machines, des VLAN et des sous-réseaux, les administrateurs requièrent le rôle d'infrastructure **Superutilisateur**.
+      <p class="note">Pour créer des ressources, telles que des machines, des VLAN et des sous-réseaux, les administrateurs requièrent le rôle d'infrastructure **Superutilisateur**.    </p>
     </td>
     <td>Le rôle de cluster <code>cluster-admin</code> est appliqué par la liaison de rôle de cluster <code>ibm-admin</code>, il fournit les droits suivants :
       <ul><li>Accès en lecture/écriture aux ressources dans tous les espaces de nom</li>
@@ -125,6 +131,7 @@ Le tableau suivant présente les droits de gestion de cluster octroyés par chaq
       <li>Créer une ressource Ingress qui rend les applications accessibles au public</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 
@@ -132,15 +139,18 @@ Le tableau suivant présente les droits de gestion de cluster octroyés par chaq
 ## Rôles Cloud Foundry
 {: #cloud-foundry}
 
-Les rôles Cloud Foundry octroient l'accès aux organisations et espaces figurant dans le compte. Pour afficher la liste des services Cloud Foundry dans {{site.data.keyword.Bluemix_notm}}, exécutez la commande `ibmcloud service list`. Pour en savoir plus, voir tous les [rôles d'organisation et d'espace](/docs/iam/cfaccess.html) ou la procédure à utiliser pour [gérer l'accès à Cloud Foundry](/docs/iam/mngcf.html) dans la documentation IAM.
+Les rôles Cloud Foundry octroient l'accès aux organisations et espaces figurant dans le compte. Pour afficher la liste des services Cloud Foundry dans {{site.data.keyword.Bluemix_notm}}, exécutez la commande `ibmcloud service list`. Pour en savoir plus, voir tous les [rôles d'organisation et d'espace](/docs/iam/cfaccess.html) disponibles ou la procédure à utiliser pour [gérer l'accès à Cloud Foundry](/docs/iam/mngcf.html) dans la documentation {{site.data.keyword.Bluemix_notm}} IAM.
+{: shortdesc}
 
 Le tableau suivant présente les rôles Cloud Foundry requis pour pouvoir effectuer des actions dans les clusters.
 
-<table>
-  <tr>
+<table summary="Le tableau présente les droits utilisateur pour Cloud Foundry. La lecture des lignes s'effectue de gauche à droite, avec le rôle Cloud Foundry dans la première colonne et les droits du cluster dans la deuxième colonne.">
+  <caption>Droits de gestion de cluster par rôle Cloud Foundry</caption>
+  <thead>
     <th>Rôle Cloud Foundry</th>
     <th>Droits de gestion de cluster</th>
-  </tr>
+  </thead>
+  <tbody>
   <tr>
     <td>Rôle d'espace : Responsable</td>
     <td>Gérer l'accès utilisateur à un espace {{site.data.keyword.Bluemix_notm}}</td>
@@ -153,12 +163,14 @@ Le tableau suivant présente les rôles Cloud Foundry requis pour pouvoir effect
       <li>Afficher les journaux à partir d'une configuration d'acheminement des journaux au niveau de l'espace</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 ## Rôles Infrastructure
 {: #infra}
 
-**Remarque** : lorsqu'un utilisateur avec le rôle d'accès Infrastructure **Superutilisateur** [définit la clé d'API pour une région et un groupe de ressources](cs_users.html#api_key), les droits d'infrastructure pour les autres utilisateurs du compte sont définis par des rôles de plateforme IAM. Vous n'avez pas besoin de modifier les droits de l'infrastructure IBM Cloud (SoftLayer) des autres utilisateurs. Utilisez uniquement le tableau suivant pour personnaliser les droits de l'infrastructure IBM Cloud (SoftLayer) des utilisateurs lorsque vous ne pouvez pas affecter le rôle **Superutilisateur** à l'utilisateur qui définit la clé d'API. Pour plus d'informations, voir [Personnalisation des droits Infrastructure](cs_users.html#infra_access).
+Lorsqu'un utilisateur avec le rôle d'accès Infrastructure **Superutilisateur** [définit la clé d'API pour une région et un groupe de ressources](cs_users.html#api_key), les droits d'infrastructure pour les autres utilisateurs du compte sont définis par des rôles de plateforme {{site.data.keyword.Bluemix_notm}} IAM. Vous n'avez pas besoin de modifier les droits de l'infrastructure IBM Cloud (SoftLayer) des autres utilisateurs. Utilisez uniquement le tableau suivant pour personnaliser les droits de l'infrastructure IBM Cloud (SoftLayer) des utilisateurs lorsque vous ne pouvez pas affecter le rôle **Superutilisateur** à l'utilisateur qui définit la clé d'API. Pour plus d'informations, voir [Personnalisation des droits Infrastructure](cs_users.html#infra_access).
+{: shortdesc}
 
 Le tableau suivant présente les droits requis pour effectuer des ensembles de tâches courantes.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,9 +13,10 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
-
-
 
 
 
@@ -32,7 +33,7 @@ Régulièrement, Kubernetes publie des [mises à jour principales, secondaires o
 {:shortdesc}
 
 **Comment savoir à quel moment effectuer la mise à jour du maître ?**</br>
-Dès que des mises à jour sont disponibles, vous recevez une notification dans l'interface graphique ou l'interface de ligne de commande, et vous pouvez également consulter la page des [versions prises en charge](cs_versions.html).
+Dès que des mises à jour sont disponibles, vous recevez une notification dans l'interface de ligne de commande et dans la console {{site.data.keyword.Bluemix_notm}}, et vous pouvez également consulter la page des [versions prises en charge](cs_versions.html).
 
 **Combien de versions peut avoir le maître derrière la version la plus récente ?**</br>
 En principe, IBM prend en charge 3 versions de Kubernetes à un moment donné. Vous ne pouvez pas mettre à jour le serveur d'API Kubernetes à une version deux fois supérieure à sa version actuelle.
@@ -42,10 +43,17 @@ Par exemple, si la version actuelle de votre serveur d'API Kubernetes est 1.7 et
 Si votre cluster s'exécute sur une version non prise en charge de Kubernetes, il vous faudra peut-être forcer la mise à jour. Par conséquent, maintenez votre cluster à jour pour éviter des répercussions opérationnelles.
 
 **Mes noeuds worker peuvent-ils s'exécuter avec une version ultérieure à celle du maître ?**</br>
-Non. Commencez par [mettre à jour le maître](#update_master) à la version de Kubernetes la plus récente. Ensuite, [mettez à jour les noeuds worker](#worker_node) dans votre cluster. Contrairement au maître, vous devez mettre à jour vos noeuds worker pour chaque version de correctif.
+Non. Commencez par [mettre à jour le maître](#update_master) à la version de Kubernetes la plus récente. Ensuite, [mettez à jour les noeuds worker](#worker_node) dans votre cluster.
+
+**Comment sont appliquées les mises à jour de correctif ?**</br>
+Par défaut, les correctifs du maître sont appliqués automatiquement sur plusieurs jours, de sorte que la version d'un correctif de maître s'affiche comme étant disponible avant d'être appliquée à votre maître. L'automatisation de la mise à jour ignore également les clusters qui ne sont pas dans un état sain ou dont les opérations sont encore en cours d'exécution. Occasionnellement, IBM peut désactiver les mises à jour automatiques pour un groupe de correctifs de maître spécifique, par exemple un correctif nécessaire uniquement si un maître est mis à jour d'une version secondaire à une autre. Pour chacun de ces cas de figure, vous pouvez [consulter le journal des modifications de version](cs_versions_changelog.html) pour en mesurer l'impact potentiel et choisir d'utiliser la [commande](cs_cli_reference.html#cs_cluster_update) `ibmcloud ks cluster-update` vous-même en toute sécurité sans attendre l'application de la mise à jour automatique.
+
+Contrairement au maître, vous devez mettre à jour vos noeuds worker pour chaque version de correctif.
 
 **Que se passe-t-il lors de la mise à jour du maître ?**</br>
-Lorsque vous mettez à jour le serveur d'API Kubernetes, il est indisponible durant 5 à 10 minutes environ. Pendant la mise à jour, vous ne pouvez ni accéder au cluster, ni le modifier. En revanche, les noeuds worker, les applications et les ressources que les utilisateurs du cluster ont déployés ne sont pas modifiés et poursuivent leur exécution.
+Dans les clusters qui exécutent Kubernetes version 1.11 ou ultérieure, la haute disponibilité de votre maître est assurée par trois pods avec des répliques du maître. Les pods de maître ont des mises à jour en continu, au cours desquelles un seul pod à la fois est indisponible. Deux instances sont opérationnelles pour que vous puissiez accéder au cluster et le modifier lors de la mise à jour. Vos noeuds worker, applications et ressources continuent à s'exécuter.
+
+Pour les clusters qui exécutent de versions antérieures de Kubernetes, lorsque vous mettez à jour le serveur d'API Kubernetes, celui-ci est indisponible durant 5 à 10 minutes environ. Pendant la mise à jour, vous ne pouvez ni accéder au cluster, ni le modifier. En revanche, les noeuds worker, les applications et les ressources que les utilisateurs du cluster ont déployés ne sont pas modifiés et poursuivent leur exécution.
 
 **Puis-je annuler la mise à jour effectuée ?**</br>
 Non, vous ne pouvez pas restaurer la version antérieure d'un cluster une fois le processus de mise à jour enclenché. Prenez soin d'utiliser un cluster de test et de suivre les instructions afin d'éviter des problèmes potentiels avant de mettre à jour votre maître en production.
@@ -58,11 +66,13 @@ Le diagramme suivant illustre la procédure que vous pouvez suivre pour mettre �
 Figure 1. Diagramme de la procédure de mise à jour du maître Kubernetes
 
 {: #update_master}
+Avant de commencer, assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](cs_users.html#platform).
+
 Pour mettre à jour la version _principale_ ou _secondaire_ du maître Kubernetes :
 
 1.  Passez en revue les [modifications de Kubernetes](cs_versions.html) et effectuez les mises à jour marquées _Mise à jour avant le maître_.
 
-2.  Mettez à jour le serveur d'API Kubernetes et les composants associés du maître Kubernetes en utilisant l'interface graphique ou en exécutant la [commande](cs_cli_reference.html#cs_cluster_update) `ibmcloud ks cluster-update` de l'interface CLI.
+2.  Mettez à jour le serveur d'API Kubernetes et les composants associés du maître Kubernetes en utilisant la console {{site.data.keyword.Bluemix_notm}} ou en exécutant la [commande](cs_cli_reference.html#cs_cluster_update) `ibmcloud ks cluster-update` de l'interface CLI.
 
 3.  Patientez quelques minutes, puis confirmez que la mise à jour est terminée. Examinez la version du serveur d'API Kubernetes sur le tableau de bord {{site.data.keyword.Bluemix_notm}} ou exécutez la commande `ibmcloud ks clusters`.
 
@@ -79,27 +89,28 @@ Lorsque la mise à jour du serveur d'API Kubernetes est terminée, vous pouvez m
 Vous avez reçu une notification vous invitant à mettre à jour vos noeuds worker. Qu'est-ce que cela signifie ? Comme les mises à jour de sécurité et les correctifs sont mis en place pour le serveur d'API Kubernetes et d'autres composants du maître Kubernetes, vous devez vérifier que les noeuds worker soient toujours synchronisés.
 {: shortdesc}
 
-Avant de commencer :
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
-- [Mettez à jour le maître Kubernetes](#master). La version Kubernetes du noeud worker ne peut pas être supérieure à celle du serveur d'API Kubernetes qui s'exécute sur votre maître Kubernetes.
-- Apportez toutes les modifications indiquées dans _Mise à jour après le maître_ sur la page des [modifications de Kubernetes](cs_versions.html).
-- Pour appliquer une mise à jour de module de correction, consultez le [journal des modifications de version de Kubernetes](cs_versions_changelog.html#changelog). </br>
-
-**Attention** : les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. Les données sont supprimées si elles ne sont pas [stockées hors du pool](cs_storage_planning.html#persistent_storage_overview).
-
-
 **Qu'advient-il de mes applications au cours d'une mise à jour ?**</br>
 Si vous exécutez des applications dans le cadre d'un déploiement sur des noeuds worker faisant l'objet d'une mise à jour, les applications sont replanifiées sur d'autres noeuds worker dans le cluster. Ces noeuds worker peuvent se trouver dans des pools de noeuds worker différents ou, si vous disposez de noeuds worker autonomes, les applications peuvent être planifiées sur ces noeuds. Pour éviter toute interruption d'application, vous devez veiller à ce que le cluster dispose d'une capacité suffisante pour traiter la charge de travail.
 
 **Comment contrôler le nombre de noeuds worker indisponibles à moment donné durant la mise à jour ?**
 Si vous avez besoin que tous vos noeuds worker soient opérationnels, envisagez de [redimensionner votre pool de noeuds worker](cs_cli_reference.html#cs_worker_pool_resize) ou d'[ajouter des noeuds worker autonomes](cs_cli_reference.html#cs_worker_add) pour ajouter des noeuds worker supplémentaires. Vous pourrez supprimer ces noeuds supplémentaires une fois la mise à jour terminée.
 
-De plus, vous pouvez créer une mappe de configuration (ConfigMap) Kubernetes qui indique le nombre maximal de noeuds worker pouvant être indisponibles à moment donné pendant la mise à jour. Les noeuds worker sont identifiés par leur libellé. Vous pouvez utiliser les libellés fournis par IBM ou des libellés personnalisés que vous avez ajouté au noeud worker.
+De plus, vous pouvez créer une mappe de configuration (ConfigMap) Kubernetes qui indique le nombre maximal de noeuds worker pouvant être indisponibles à moment donné pendant la mise à jour. Les noeuds worker sont identifiés par leur libellé. Vous pouvez utiliser les libellés fournis par IBM ou des libellés personnalisés que vous avez ajoutés au noeud worker.
 
 **Et si je n'envisage pas de définir une mappe de configuration ?**</br>
 Lorsque la mappe de configuration n'est pas définie, la valeur par défaut est utilisée. Par défaut, il peut y avoir au maximum 20% de noeuds worker indisponibles dans chaque cluster pendant le processus de mise à jour.
 
-Pour créer une mappe de configuration et mettre à jour des noeuds worker :
+**Avant de commencer** :
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+- [Mettez à jour le maître Kubernetes](#master). La version Kubernetes du noeud worker ne peut pas être supérieure à celle du serveur d'API Kubernetes qui s'exécute sur votre maître Kubernetes.
+- Apportez toutes les modifications indiquées dans _Mise à jour après le maître_ sur la page des [modifications de Kubernetes](cs_versions.html).
+- Pour appliquer une mise à jour de module de correction, consultez le [journal des modifications de version de Kubernetes](cs_versions_changelog.html#changelog).
+- Assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](cs_users.html#platform).</br>
+
+Les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. La machine de votre noeud worker est réimagée et les données sont supprimées si elles ne sont pas [stockées hors du pod](cs_storage_planning.html#persistent_storage_overview).
+{: important}
+
+**Pour créer une mappe de configuration et mettre à jour les noeuds worker** :
 
 1.  Affichez la liste des noeuds worker disponibles et notez leur adresse IP privée.
 
@@ -137,9 +148,10 @@ Pour créer une mappe de configuration et mettre à jour des noeuds worker :
    ```
    {: screen}
 
-3. Créez une mappe de configuration et définissez les règles d'indisponibilité applicables à vos noeuds worker. L'exemple suivant présente 4 vérifications : `zonecheck.json`, `regioncheck.json`, `defaultcheck.json` et un modèle de vérification. Vous pouvez utiliser ces exemples de vérification pour définir les règles de vos noeuds worker dans une zone spécifique (`zonecheck.json`), une région (`regioncheck.json`) ou pour tous les noeuds worker qui ne correspondent à aucune des vérifications que vous avez définies dans la mappe de configuration (`defaultcheck.json`). Utilisez le modèle de vérification pour créer votre propre vérification. Pour chaque vérification, vous devez choisir un des libellés de noeud worker obtenus à l'étape précédente pour identifier un noeud worker.  
+3. Créez une mappe de configuration et définissez les règles d'indisponibilité applicables à vos noeuds worker. L'exemple suivant présente 4 vérifications : `zonecheck.json`, `regioncheck.json`, `defaultcheck.json` et un modèle de vérification. Vous pouvez utiliser ces exemples de vérification pour définir les règles de vos noeuds worker dans une zone (`zonecheck.json`), une région (`regioncheck.json`) spécifiques, ou pour tous les noeuds worker qui ne correspondent à aucune des vérifications que vous avez définies dans la mappe de configuration (`defaultcheck.json`). Utilisez le modèle de vérification pour créer votre propre vérification. Pour chaque vérification, vous devez choisir un des libellés de noeud worker obtenus à l'étape précédente pour identifier un noeud worker.  
 
-   **Remarque :** pour chaque vérification, vous ne pouvez définir qu'une seule valeur pour <code>NodeSelectorKey</code> et <code>NodeSelectorValue</code>. Si vous souhaitez définir des règles pour plusieurs régions, zones ou d''autres libellés de noeud worker, créez une nouvelle vérification. Vous pouvez définir jusqu'à 10 vérifications dans une mappe de configuration. Si vous ajoutez d'autres vérifications, elles sont ignorées.
+   Pour chaque vérification, vous ne pouvez définir qu'une seule valeur pour <code>NodeSelectorKey</code> et <code>NodeSelectorValue</code>. Si vous souhaitez définir des règles pour plusieurs régions, zones ou d'autres libellés de noeud worker, créez une nouvelle vérification. Vous pouvez définir jusqu'à 10 vérifications dans une mappe de configuration. Si vous ajoutez d'autres vérifications, elles sont ignorées.
+   {: note}
 
    Exemple :
    ```
@@ -173,7 +185,7 @@ Pour créer une mappe de configuration et mettre à jour des noeuds worker :
         "NodeSelectorValue": "<node_selector_value>"
       }
    ```
-   {:pre}
+   {: codeblock}
 
    <table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, le paramètre figurant dans la première colonne et les descriptions correspondantes dans la deuxième colonne.">
    <caption>Composants de ConfigMap</caption>
@@ -259,9 +271,7 @@ Vous pouvez mettre à jour les types de machine de vos noeuds worker en ajoutant
 Avant de commencer :
 - [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 - Si vous stockez des données sur votre noeud worker, les données sont supprimées si elles ne sont pas [stockées hors du noeud worker](cs_storage_planning.html#persistent_storage_overview).
-
-
-**Attention** : les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. Les données sont supprimées si elles ne sont pas [stockées hors du pool](cs_storage_planning.html#persistent_storage_overview).
+- Assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](cs_users.html#platform).
 
 1. Affichez la liste des noeuds worker disponibles et notez leur adresse IP privée.
    - **Pour les noeuds worker figurant dans un pool de noeuds worker** :
@@ -364,18 +374,23 @@ Avant de commencer :
 
 7. Répétez ces étapes pour mettre à jour d'autres pools de noeuds worker ou d'autres noeuds worker autonomes sur différents types de machine.
 
-## Mise à jour de modules complémentaires de cluster
+## Mise à jour des modules complémentaires de cluster
 {: #addons}
 
-Votre cluster {{site.data.keyword.containerlong_notm}} est livré avec des **modules complémentaires**, par exemple Fluentd utilisé pour la consignation. Ces modules s'installent automatiquement lorsque vous mettez à disposition le cluster. Ils peuvent être mis à jour séparément du maître et des noeuds worker.
+Votre cluster {{site.data.keyword.containerlong_notm}} est livré avec des modules complémentaires, par exemple Fluentd pour la consignation. Ces modules s'installent automatiquement lorsque vous mettez à disposition le cluster. Par défaut, ces modules complémentaires sont automatiquement mis à jour par IBM. Cependant, vous pouvez désactiver les mises à jour automatiques pour certains modules complémentaires pour effectuer leur mise à jour manuellement indépendamment du maître et des noeuds worker.
 {: shortdesc}
 
-**Quels sont les modules complémentaires par défaut que je dois mettre à jour séparément du cluster ?**
-* [Fluentd utilisé pour la consignation](#logging)
+**Quels sont les modules complémentaires par défaut que je peux mettre à jour séparément du cluster ?**</br>
+Vous pouvez éventuellement désactiver les mises à jour automatiques des modules complémentaires suivants :
+* [Fluentd pour la consignation](#logging)
+* [Equilibreur de charge d'application (ALB) Ingress](#alb)
 
-**Existe-t-il des modules complémentaires que je n'ai pas besoin de mettre à jour et que je ne peux pas modifier ?**</br>
-Oui, votre cluster est déployé avec les modules complémentaires gérés suivants et les ressources associées qui ne sont pas modifiables. Si vous essayez de modifier l'un de ces modules de déploiement, les paramètres d'origine sont restaurés à intervalles réguliers.
+**Existe-t-il des modules impossibles à mettre à jour séparément du cluster ?**</br>
 
+Oui. Votre cluster est déployé avec les modules complémentaires gérés suivants et les ressources associées qui ne sont pas modifiables, sauf pour effectuer la mise à l'échelle des pods ou éditer des éléments configmap afin d'améliorer les performances. Si vous essayez de modifier l'un de ces modules de déploiement, les paramètres d'origine sont restaurés à intervalles réguliers.
+
+* `coredns`
+* `coredns-autoscaler`
 * `heapster`
 * `ibm-file-plugin`
 * `ibm-storage-watcher`
@@ -383,6 +398,7 @@ Oui, votre cluster est déployé avec les modules complémentaires gérés suiva
 * `kube-dns-amd64`
 * `kube-dns-autoscaler`
 * `kubernetes-dashboard`
+* `metrics-server`
 * `vpn`
 
 Vous pouvez afficher ces ressources en utilisant le libellé `addonmanager.kubernetes.io/mode: Reconcile`. Exemple :
@@ -395,33 +411,117 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 **Puis-je installer d'autres modules complémentaires que ceux par défaut ?**</br>
 Oui. {{site.data.keyword.containerlong_notm}} offre d'autres modules complémentaires que vous pouvez sélectionner pour ajouter des fonctionnalités à votre cluster. Par exemple, vous envisagerez peut-être d'[utiliser des chartes Helm](cs_integrations.html#helm) pour installer le [plug-in Block Storage](cs_storage_block.html#install_block), [Istio](cs_tutorials_istio.html#istio_tutorial) ou le [VPN strongSwan](cs_vpn.html#vpn-setup). Vous devez mettre à jour chacun de ces modules séparément en suivant les instructions de mise à jour des chartes Helm.
 
-### Fluentd utilisé pour la consignation
+### Gestion des mises à jour automatiques pour le module complémentaire Fluentd pour la consignation
 {: #logging}
 
 Pour modifier vos configurations de consignation ou de filtrage, le module Fluentd doit avoir le dernier niveau de version. Par défaut, les mises à jour automatiques sont activées pour ce module.
 {: shortdesc}
 
-Vous pouvez vérifier si les mises à jour automatiques sont activées en exécutant la [commande](cs_cli_reference.html#cs_log_autoupdate_get) `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>`.
+Vous pouvez gérer les mises à jour automatiques du module complémentaire Fluentd de plusieurs manières indiquées ci-après. **Remarque** : pour exécuter les commandes suivantes, vous devez disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur**](cs_users.html#platform) pour le cluster.
 
-Pour désactiver les mises à jour automatiques, exécutez la [commande](cs_cli_reference.html#cs_log_autoupdate_disable) `ibmcloud ks logging-autoupdate-disable`.
+* Vérifier si les mises à jour automatiques sont activées en exécutant la [commande](cs_cli_reference.html#cs_log_autoupdate_get) `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>`.
+* Désactiver les mises à jour automatiques en exécutant la [commande](cs_cli_reference.html#cs_log_autoupdate_disable) `ibmcloud ks logging-autoupdate-disable`.
+* Si les mises à jour automatiques sont désactivées et que vous devez effectuer une modification dans votre configuration, il y a deux options possibles :
+    * Activer les mises à jour automatiques pour vos pods Fluentd.
+        ```
+        ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    * Forcer une mise à jour unique lorsque vous utilisez une commande de consignation comportant l'option `--force-update`. **Remarque** : vos pods se mettent à jour à la version la plus récente du module complémentaire Fluentd, mais Fluentd ne se mettra plus à jour automatiquement par la suite.
+        Exemple de commande :
 
-Si les mises à jour automatiques sont désactivées et que vous devez effectuer une modification dans votre configuration, il y a deux options possibles :
+        ```
+        ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
+        ```
+        {: pre}
 
-*  Activer les mises à jour automatique pour vos pods Fluentd.
+### Gestion des mises à jour automatiques pour le module complémentaire ALB Ingress
+{: #alb}
 
+Contrôlez à quel moment doit s'effectuer la mise à jour de l'équilibreur de charge d'application (ALB) Ingress.
+{: shortdesc}
+
+Lorsque le module complémentaire ALB est mis à jour, les conteneurs `nginx-ingress` et `ingress-auth` figurant dans tous les pods d'ALB sont mis à jour à la dernière version. Par défaut, les mises à jour automatiques de ce module sont activées. Les mises à jour sont effectuées en continu de sorte que vos équilibreurs de charge ALB n'encourent jamais d'indisponibilité.
+
+Si vous désactivez les mises à jour automatiques, vous êtes chargé de mettre à jour ce module complémentaire. Dès que des mises à jour sont disponibles, vous en êtes averti dans l'interface de ligne de commande lorsque vous exécutez les commandes `ibmcloud ks albs` ou `alb-autoupdate-get`.
+
+Lorsque vous mettez à jour une version Kubernetes principale ou secondaire de votre cluster, IBM effectue les modifications nécessaires dans le déploiement Ingress, mais ne change pas la version de votre module complémentaire ALB Ingress. Vous êtes chargé de vérifier la compatibilité des dernières versions de Kubernetes et des images de votre module complémentaire ALB Ingress.
+{: note}
+
+Avant de commencer :
+
+1. Vérifiez que vos équilibreurs de charge ALB sont opérationnels.
     ```
-    ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
+    ibmcloud ks albs
     ```
     {: pre}
 
-*  Forcer une mise à jour unique lorsque vous utilisez une commande de consignation comportant l'option `--force-update`. **Remarque** : vos pods se mettent à jour à la version la plus récente du module complémentaire Fluentd, mais Fluentd ne se mettra plus à jour automatiquement par la suite.
-
-    Exemple de commande :
-
+2. Vérifiez le statut des mises à jour automatiques de votre module complémentaire ALB Ingress.
     ```
-    ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
+    ibmcloud ks alb-autoupdate-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
+
+    Exemple de sortie lorsque les mises à jour automatiques sont activées :
+    ```
+    Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
+    OK
+    Automatic updates of the ALB pods are enabled in cluster mycluster
+    ALBs are at the latest version in cluster mycluster
+    ```
+    {: screen}
+
+    Exemple de sortie lorsque les mises à jour automatiques sont désactivées :
+    ```
+    Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
+    OK
+    Automatic updates of the ALB pods are disabled in cluster mycluster
+    ALBs are not at the latest version in cluster mycluster. To view the current version, run 'ibmcloud ks albs'.
+    ```
+    {: screen}
+
+3. Vérifiez la version (**Build**) de vos pods ALB.
+    ```
+    ibmcloud ks albs --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Exemple de sortie :
+    ```
+    ALB ID                                            Status    Type      ALB IP         Zone    Build
+    private-crb110acca09414e88a44227b87576ceea-alb1   enabled   private   10.130.5.78    mex01   ingress:350/ingress-auth:192*
+    public-crb110acca09414e88a44227b87576ceea-alb1    enabled   public    169.57.1.110   mex01   ingress:350/ingress-auth:192*
+
+    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://console.bluemix.net/docs/containers/cs_cluster_update.html#alb
+    ```
+    {: screen}
+
+Vous pouvez gérer les mises à jour automatiques de votre module complémentaire ALB Ingress de plusieurs manières indiquées ci-après. **Remarque** : pour exécuter les commandes suivantes, vous devez disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Editeur** ou **Administrateur**](cs_users.html#platform) pour le cluster.
+* Désactivez les mises à jour automatiques.
+    ```
+    ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+* Mettez à jour manuellement votre module complémentaire ALB Ingress.
+    1. Si une mise à jour est disponible et que vous souhaitez mettre à jour le module complémentaire, consultez le [journal des modifications de la dernière version du module complémentaire ALB Ingress](cs_versions_addons.html#alb_changelog) pour vérifier les effets négatifs qu'elle pourrait avoir.
+    2. Forcez une mise à jour unique de vos pods ALB. Tous les pods ALB dans votre cluster sont mis à jour à la dernière version. Vous ne pouvez pas modifier un équilibreur de charge ALB individuel ou choisir la version à laquelle mettre à jour le module complémentaire. Les mises à jour automatiques restent désactivées.
+        ```
+        ibmcloud ks alb-update --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+* Si vos pods ALB ont été récemment mis à jour, mais qu'une configuration personnalisée de vos ALB est affectée par la dernière version, vous pouvez rétromigrer la mise à jour à la version que vos pods ALB utilisaient avant. **Remarque** : après avoir annulé une mise à jour, les mises à jour automatiques des pods ALB sont désactivées.
+    ```
+    ibmcloud ks alb-rollback --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+* Réactivez les mises à jour automatiques. Dès que la version suivante est disponible, les pods ALB sont automatiquement mis à jour à la dernière version.
+        ```
+        ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+<br />
+
 
 ## Mise à jour pour passer des noeuds worker autonomes aux pools de noeuds worker
 {: #standalone_to_workerpool}
@@ -431,13 +531,16 @@ Avec l'introduction des clusters à zones multiples, les noeuds worker avec la m
 
 Vous pouvez utiliser des pools de noeuds worker pour répartir vos noeuds worker uniformément entre les zones et réaliser un cluster équilibré. Les clusters équilibrés sont encore plus disponibles et offrent moins de défaillances. En cas de suppression d'un noeud worker dans une zone, vous pouvez rééquilibrer le pool de noeuds worker et insérer automatiquement de nouveaux noeuds worker dans cette zone. Les pools de noeuds worker sont également utilisés pour installer des mises à jour de version Kubernetes sur tous vos noeuds worker.  
 
-**Important :** si vous avez créé des clusters avant l'introduction des clusters à zones multiples, vos noeuds worker sont toujours autonomes et ne sont pas automatiquement regroupés dans les pools de noeuds worker. Vous devez mettre à jour ces clusters de sorte à utiliser des pools de noeuds worker. Si vous n'effectuez pas cette mise à jour, vous ne pourrez pas passer d'un cluster à zone unique à un cluster à zones multiples.
+Si vous avez créé des clusters avant l'introduction des clusters à zones multiples, vos noeuds worker sont toujours autonomes et ne sont pas automatiquement regroupés dans les pools de noeuds worker. Vous devez mettre à jour ces clusters de sorte à utiliser des pools de noeuds worker. Si vous n'effectuez pas cette mise à jour, vous ne pourrez pas passer d'un cluster à zone unique à un cluster à zones multiples.
+{: important}
 
 Examinez l'image suivante pour voir comment évolue la configuration de votre cluster lorsque vous passez des noeuds worker autonomes aux pools de noeuds worker.
 
 <img src="images/cs_cluster_migrate.png" alt="Mise à jour de votre cluster pour passer des noeuds worker autonomes aux pools de noeuds worker" width="600" style="width:600px; border-style: none"/>
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+Avant de commencer :
+- Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](cs_users.html#platform) pour le cluster.
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 
 1. Affichez la liste des noeuds worker autonomes de votre cluster et notez leur **ID**, **Type de machine** et **Adresse IP privée**.
    ```
@@ -521,3 +624,110 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 
 **Etape suivante ?** </br>
 Maintenant que vous avez mis à jour votre cluster pour utiliser des pools de noeuds worker, vous pouvez améliorer la disponibilité en ajoutant d'autres zones dans votre cluster. L'ajout de zones supplémentaires dans votre cluster, vous fait passer d'un cluster à zone unique à un [cluster à zones multiples](cs_clusters_planning.html#ha_clusters). Lorsque vous passez d'un cluster à zone unique à un cluster à zones multiples, votre domaine Ingress `<cluster_name>.<region>.containers.mybluemix.net` devient `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Le domaine Ingress existant est toujours valide et peut être utilisé pour envoyer des demandes à vos applications.
+
+<br />
+
+
+## Définition du fournisseur DNS avec CoreDNS
+{: #dns}
+
+Un nom DNS (Domain Name System) est affecté à chaque service et est enregistré par le fournisseur DNS de cluster pour résoudre les demandes DNS. Le fournisseur DNS de cluster par défaut est Kubernetes DNS (KubeDNS). Cependant, pour les clusters exécutant Kubernetes version 1.12 ou ultérieure, vous pouvez choisir d'utiliser [CoreDNS ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://coredns.io/) à la place. Vous pouvez utiliser CoreDNS en première utilisation ou pour en tester les impacts potentiels lors de la transition du projet Kubernetes pour passer de KubeDNS à CoreDNS. Pour plus d'informations sur DNS pour les services et les pods, voir [la documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
+{: shortdesc}
+
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+
+1.  Déterminez le fournisseur DNS de cluster actuel. Dans l'exemple suivant, il s'agit de KubeDNS.
+    ```
+    kubectl cluster-info
+    ```
+    {: pre}
+
+    Exemple de sortie :
+    ```
+    ...
+    KubeDNS is running at https://c2.us-south.containers.cloud.ibm.com:20190/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+    ...
+    ```
+    {: screen}
+2.  Définissez CoreDNS comme fournisseur DNS de cluster.
+
+    1.  **Facultatif** : si vous avez personnalisé l'élément configmap `kube-dns` dans l'espace de nom `kube-system`, transférez les personnalisations éventuelles dans l'élément configmap `coredns` dans l'espace de nom `kube-system`. Notez que la syntaxe est différente entre les éléments configmap `kube-dns` et `coredns`. Pour consulter un exemple, voir [Installing CoreDNS via Kubeadm ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) dans la documentation CoreDNS.
+
+    2.  Réduisez le déploiement de la mise à l'échelle automatique de KubeDNS.
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
+        ```
+        {: pre}
+
+    3.  Attendez que les pods soient supprimés.
+        ```
+        kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
+        ```
+        {: pre}
+
+    4.  Réduisez le déploiement de KubeDNS.
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
+        ```
+        {: pre}
+
+    5.  Augmentez le déploiement de la mise à l'échelle automatique de CoreDNS.
+        ```
+        kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
+        ```
+        {: pre}
+
+    6.  Labellisez et annotez le service DNS de cluster pour CoreDNS.
+        ```
+        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port=9153
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape=true
+        ```
+        {: pre}
+3.  **Facultatif** : inversez les étapes précédentes pour repasser au fournisseur DNS de cluster KubeDNS.
+
+    1.  **Facultatif** : si vous avez personnalisé l'élément configmap `coredns` dans l'espace de nom `kube-system`, transférez les personnalisations éventuelles dans l'élément configmap `kube-dns` dans l'espace de nom `kube-system`. Notez que la syntaxe est différente entre les éléments configmap `kube-dns` et `coredns`. Pour consulter un exemple, voir [Installing CoreDNS via Kubeadm ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) dans la documentation CoreDNS.
+
+    2.  Réduisez le déploiement de la mise à l'échelle automatique de CoreDNS.
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
+        ```
+        {: pre}
+
+    3.  Attendez que les pods soient supprimés.
+        ```
+        kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
+        ```
+        {: pre}
+
+    4.  Réduisez le déploiement de CoreDNS.
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 coredns
+        ```
+        {: pre}
+
+    5.  Augmentez le déploiement de la mise à l'échelle automatique de KubeDNS.
+        ```
+        kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
+        ```
+        {: pre}
+
+    6.  Labellisez et annotez le service DNS de cluster pour KubeDNS.
+        ```
+        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port-
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape-
+        ```
+        {: pre}

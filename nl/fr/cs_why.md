@@ -1,8 +1,8 @@
-﻿---
+---
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -20,7 +23,7 @@ lastupdated: "2018-10-25"
 # Pourquoi utiliser {{site.data.keyword.containerlong_notm}} ?
 {: #cs_ov}
 
-{{site.data.keyword.containerlong}} propose des outils puissants en combinant les conteneurs de Docker, la technologie de Kubernetes, une expérience utilisateur intuitive, ainsi qu'une sécurité et un isolement intégrés pour automatiser le déploiement, l'exploitation, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de calcul. Pour obtenir des informations sur la certification, voir [Compliance on the {{site.data.keyword.Bluemix_notm}} [Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/compliance).
+{{site.data.keyword.containerlong}} propose des outils puissants en combinant les conteneurs de Docker, la technologie de Kubernetes, une expérience utilisateur intuitive, ainsi qu'une sécurité et un isolement intégrés pour automatiser le déploiement, l'exploitation, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de calcul. Pour obtenir des informations sur la certification, voir [Compliance on the {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/compliance).
 {:shortdesc}
 
 
@@ -34,6 +37,7 @@ Les clusters sont déployés sur des hôtes de calcul qui fournissent des capaci
 |-------|-----------|
 |Clusters Kubernetes à service exclusif avec isolement de l'infrastructure de traitement, de réseau et de stockage|<ul><li>Créez votre propre infrastructure personnalisée afin de répondre aux besoins de votre organisation.</li><li>Allouez à un maître Kubernetes dédié et sécurisé, des noeuds worker, des réseaux virtuels et un espace de stockage en utilisant les ressources fournies par l'infrastructure IBM Cloud (SoftLayer).</li><li>Le maître Kubernetes entièrement géré est constamment surveillé et mis à jour par {{site.data.keyword.IBM_notm}} pour que votre cluster soit toujours disponible.</li><li>Option permettant de mettre à disposition des noeuds worker en tant que serveurs bare metal avec la fonction Calcul sécurisé.</li><li>Stockez les données persistantes, partagez les données entre les pods Kubernetes et restaurez les données en cas de besoin avec le service de volumes intégré et sécurisé.</li><li>Tirez parti de la prise en charge complète de toutes les API Kubernetes natives.</li></ul>|
 | Clusters à zones multiples pour une haute disponibilité accrue | <ul><li>Gérez facilement les noeuds worker d'un même type de machine (UC, mémoire, virtuelle ou physique) avec des pools de noeuds worker.</li><li>Protégez-vous en cas de défaillance d'une zone en répartissant les noeuds uniformément entre les différentes zones et en utilisant des déploiements de pod anti-affinité pour vos applications.</li><li>Réduisez les coûts en utilisant des clusters à zones multiples au lieu de dupliquer les ressources dans un cluster distinct.</li><li>Bénéficiez de l'équilibrage de charge automatique entre vos applications avec l'équilibreur de charge pour zones multiples (MZLB) configuré automatiquement pour vous dans chaque zone du cluster.</li></ul>|
+| Maîtres à haute disponibilité | <ul>Disponibles dans les clusters exécutant Kubernetes version 1.10 ou ultérieure.<li>Réduisez la durée d'indisponibilité du cluster, notamment lors de mise à jour du maître avec les maîtres à haute disponibilité mis à disposition automatiquement lorsque vous créez un cluster.</li><li>Répartissez vos maîtres entre les zones dans un [cluster à zones multiples](cs_clusters_planning.html#multizone) pour protéger votre cluster en cas de défaillance d'une zone.</li></ul> |
 |Conformité en matière de sécurité d'image avec Vulnerability Advisor|<ul><li>Configurez votre propre référentiel dans notre registre d'images privé Docker sécurisé où les images sont stockées et partagées par tous les utilisateurs dans l'organisation.</li><li>Tirez parti de l'analyse automatique des images dans votre registre {{site.data.keyword.Bluemix_notm}} privé.</li><li>Examinez les recommandations spécifiques au système d'exploitation utilisé dans l'image afin de corriger les vulnérabilités potentielles.</li></ul>|
 |Surveillance en continu de l'état de santé du cluster|<ul><li>Utilisez le tableau de bord du cluster pour déterminer rapidement et gérer l'état de santé de votre cluster, des noeuds worker et des déploiements de conteneurs.</li><li>Accédez à des métriques de consommation détaillées en utilisant {{site.data.keyword.monitoringlong}} et élargissez rapidement votre cluster pour répondre aux charges de travail.</li><li>Examinez les informations de consignation à l'aide d'{{site.data.keyword.loganalysislong}} pour voir les activités détaillées du cluster.</li></ul>|
 |Exposition sécurisée des applications au public|<ul><li>Sélectionnez une adresse IP publique, une route fournie par {{site.data.keyword.IBM_notm}} ou votre propre domaine personnalisé pour accéder à des services dans votre cluster depuis Internet.</li></ul>|
@@ -108,6 +112,8 @@ Si vous disposez d'un cluster gratuit et que vous souhaitez effectuer une mise �
 |[Espace disque sur le noeud worker pour stockage non persistant](cs_storage_planning.html#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 | [Possibilité de créer un cluster dans toutes les régions {{site.data.keyword.containerlong_notm}}](cs_regions.html) | | <img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" /> |
 |[Clusters à zones multiples pour une haute disponibilité accrue](cs_clusters_planning.html#multizone) | |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
+| Maîtres répliqués pour une haute disponibilité accrue (Kubernetes 1.10 ou version ultérieure) | | <img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" /> |
+|[Nombre de noeuds worker évolutif pour augmenter la capacité](cs_app.html#app_scaling)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Stockage de fichiers NFS persistant avec volumes](cs_storage_file.html#file_storage)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Accès à des applications réseau publiques ou privées par un service d'équilibreur de charge avec une adresse IP stable](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Accès à des applications réseau publiques par un service Ingress avec une adresse IP stable et une URL personnalisable](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
@@ -119,6 +125,8 @@ Si vous disposez d'un cluster gratuit et que vous souhaitez effectuer une mise �
 {: caption="Caractéristiques des clusters gratuits et standard" caption-side="top"}
 
 <br />
+
+
 
 
 ## Tarification et facturation
@@ -133,7 +141,7 @@ Examinez certaines questions qui reviennent souvent à propos de la tarification
 **Comment vérifier ma facturation et mon utilisation ?**<br>
 Pour vérifier votre utilisation et les totaux estimés, voir [Affichage de votre utilisation](/docs/billing-usage/viewing_usage.html#viewingusage).
 
-Si vous liez votre compte {{site.data.keyword.Bluemix_notm}} à votre compte d'infrastructure IBM Cloud (SoftLayer), vous recevez une facture consolidée. Pour plus d'informations, voir [Facturation en bloc pour des comptes liés](/docs/billing-usage/linking_accounts.html#unifybillaccounts).
+Si vous liez votre compte {{site.data.keyword.Bluemix_notm}} à votre compte d'infrastructure IBM Cloud (SoftLayer), vous recevez une facture consolidée. Pour plus d'informations, voir [Facturation en bloc pour des comptes liés](/docs/customer-portal/linking_accounts.html#unifybillaccounts).
 
 **Puis-je regrouper mes ressources de cloud par équipes ou par services pour la facturation ?**<br>
 Vous pouvez [utiliser des groupes de ressources](/docs/resources/bestpractice_rgs.html#bp_resourcegroups) afin de classer vos ressources {{site.data.keyword.Bluemix_notm}}, notamment les clusters, par groupes pour organiser la facturation.
@@ -171,14 +179,14 @@ Avec les clusters {{site.data.keyword.containerlong_notm}}, vous pouvez utiliser
   <p>Les <strong>machines virtuelles</strong> présentent une plus grande flexibilité, une durée de mise à disposition plus rapide et plus de fonctions de mise à l'échelle automatique qu'une machine bare metal, pour un meilleur rapport qualité-prix. Toutefois, les machines virtuelles offrent un avantage non négligeable en termes de performances par rapport aux spécifications bare metal, par exemple le débit en Gbit/s sur les réseaux, les seuils de mémoire et de RAM et les options de stockage. Tenez compte de ces facteurs qui ont un impact sur le coût de votre machine virtuelle :</p>
   <ul><li><strong>Matériel partagé ou dédié</strong> : si vous partagez le matériel sous-jacent de la machine virtuelle, le coût est inférieur à du matériel dédié, mais les ressources physiques ne sont pas dédiées à votre machine virtuelle.</li>
   <li><strong>Facturation à l'heure uniquement</strong> : la facturation à l'heure offre une plus grande flexibilité pour commander et annuler rapidement des machines virtuelles.
-  <li><strong>Plusieurs niveaux d'heures par mois</strong> : la facturation à l'heure est à plusieurs niveaux. Lorsque votre machine virtuelle est commandée pour un certain niveau d'heures au cours d'un mois, le coût horaire qui vous est facturé diminue. Les niveaux d'heures s'articulent comme suit : 0 à 150 heures, 151 à 290 heures, 291 à 540 heures et 541 heures et plus.</li></ul>
+  <li><strong>Plusieurs tranches horaires par mois</strong> : la facturation à l'heure est à plusieurs niveaux. Lorsque votre machine virtuelle est commandée pour un certain nombre d'heures par mois, le coût horaire qui vous est facturé diminue. Les tranches horaires s'articulent comme suit : 0 à 150 heures, 151 à 290 heures, 291 à 540 heures et 541 heures et plus.</li></ul>
   <p><strong>Les machines physiques (bare metal)</strong> offrent des avantages en termes de hautes performances pour les charges de travail, telles que les données, l'intelligence artificielle et les processeurs graphiques (GPU). De plus, toutes les ressources matérielles sont dédiées à vos charges de travail de sorte à éviter les "voisins bruyants". Tenez compte des facteurs suivants qui ont un impact sur le coût de votre machine bare metal :</p>
   <ul><li><strong>Facturation mensuelle uniquement</strong> : toutes les machines bare metal sont facturées au mois.</li>
   <li><strong>Traitement plus long des commandes</strong> :  comme la commande et l'annulation de serveurs bare metal sont réalisées par un processus manuel via votre compte d'infrastructure IBM Cloud (SoftLayer), l'exécution de ce processus peut prendre plus d'un jour ouvrable.</li></ul>
   <p>Pour obtenir des détails sur les spécifications des machines, voir [Matériel disponible pour les noeuds worker](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).</p></dd>
 
 <dt id="bandwidth">Bande passante publique</dt>
-  <dd><p>La bande passante désigne le transfert de données publiques du trafic réseau entrant et sortant, à destination et en provenance de ressources {{site.data.keyword.Bluemix_notm}} dans des centres de données situés dans le monde entier. La bande passante publique est facturée par Go. Vous pouvez consulter le récapitulatif de votre bande passante en vous connectant à la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/). Dans le menu, sélectionnez **Infrastructure** puis accédez à la page **Réseau > Bande passante > Récapitulatif**.
+  <dd><p>La bande passante désigne le transfert de données publiques du trafic réseau entrant et sortant, à destination et en provenance de ressources {{site.data.keyword.Bluemix_notm}} dans des centres de données situés dans le monde entier. La bande passante publique est facturée par Go. Vous pouvez consulter le récapitulatif de votre bande passante en vous connectant à la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/). Dans le menu ![Icône de menu](../icons/icon_hamburger.svg "Icône de menu"), sélectionnez **Infrastructure** puis accédez à la page **Réseau > Bande passante > Récapitulatif**.
   <p>Examinez les facteurs suivants qui ont une incidence sur les frais liés à la bande passante publique :</p>
   <ul><li><strong>Emplacement</strong> : comme pour les noeuds worker, les frais varient en fonction de la zone dans laquelle sont déployées vos ressources.</li>
   <li><strong>Bande passante incluse ou Paiement à la carte</strong> : les machines de vos noeuds worker peuvent être fournies avec une allocation de réseau sortant par mois, par exemple 250 Go pour les machines virtuelles ou 500 Go pour les machines bare metal. Ou bien, l'allocation peut être de type Paiement à la carte en fonction du nombre de Go utilisés.</li>

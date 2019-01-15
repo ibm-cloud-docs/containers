@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -23,6 +26,72 @@ lastupdated: "2018-10-25"
 
 Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}}. Découvrez les nouvelles fonctions à explorer, une astuce pour les expérimenter ou quelques rubriques populaires que d'autres développeurs jugent désormais utiles.
 {:shortdesc}
+
+## Rubriques les plus consultées en décembre 2018
+{: #dec18}
+
+<table summary="Ce tableau présente les rubriques les plus consultées. La lecture des lignes s'effectue de gauche à droite, avec la date indiquée dans la première colonne, le titre de la fonction dans la deuxième colonne et la description dans la troisième colonne.">
+<caption>Rubriques les plus consultées pour les conteneurs et les clusters Kubernetes en décembre 2018</caption>
+<thead>
+<th>Date</th>
+<th>Titre</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>6 décembre</td>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>Gagnez en visibilité opérationnelle sur les performances et l'état de santé de vos applications en déployant Sysdig en tant que service tiers sur vos noeuds worker pour transférer des métriques à {{site.data.keyword.monitoringlong}}. Pour plus d'informations, voir [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Remarque** : si vous utilisez {{site.data.keyword.mon_full_notm}} avec des clusters exécutant Kubernetes version 1.11 ou ultérieure, toutes les métriques ne sont pas collectées car Sysdig ne prend pas en charge `containerd` actuellement.</td>
+</tr>
+</tbody></table>
+
+## Rubriques les plus consultées en novembre 2018
+{: #nov18}
+
+<table summary="Ce tableau présente les rubriques les plus consultées. La lecture des lignes s'effectue de gauche à droite, avec la date indiquée dans la première colonne, le titre de la fonction dans la deuxième colonne et la description dans la troisième colonne.">
+<caption>Rubriques les plus consultées pour les conteneurs et les clusters Kubernetes en novembre 2018</caption>
+<thead>
+<th>Date</th>
+<th>Titre</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>29 novembre</td>
+<td>[Zone disponible dans Chennai](cs_regions.html)</td>
+<td>Bienvenue à Chennai en Inde, une nouvelle zone pour les clusters dans la zone Asie-Pacifique nord. Si vous disposez d'un pare-feu, veillez à [ouvrir les ports de pare-feu](cs_firewall.html#firewall) correspondant à cette zone et aux autres zones situées dans la région où se trouve votre cluster.</td>
+</tr>
+<tr>
+<td>27 novembre</td>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>Ajoutez des fonctionnalités de gestion de journaux à votre cluster en déployant LogDNA en tant que service tiers sur vos noeuds worker afin de gérer les journaux à partir de vos conteneurs de pod. Pour plus d'informations, voir [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
+</tr>
+<tr>
+<td>7 novembre</td>
+<td>Equilibreur de charge 2.0 (bêta)</td>
+<td>Vous pouvez désormais choisir entre un [équilibreur de charge 1.0 ou 2.0](cs_loadbalancer.html#planning_ipvs) pour exposer vos applications de cluster au public de manière sécurisée.</td>
+</tr>
+<tr>
+<td>7 novembre</td>
+<td>La version Kubernetes 1.12 est disponible</td>
+<td>Désormais, vous pouvez mettre à jour ou créer des clusters exécutant [Kubernetes version 1.12](cs_versions.html#cs_v112). Par défaut, les clusters 1.12 sont fournis avec des maîtres Kubernetes à haute disponibilité.</td>
+</tr>
+<tr>
+<td>7 novembre</td>
+<td>Maîtres à haute disponibilité dans les clusters exécutant Kubernetes version 1.10</td>
+<td>Des maîtres à haute disponibilité sont disponibles pour les clusters qui exécutent Kubernetes version 1.10. Tous les avantages décrits dans l'entrée précédente pour les clusters 1.11 s'appliquent aux clusters 1.10, ainsi que les [étapes de préparation](cs_versions.html#110_ha-masters) que vous devez suivre.</td>
+</tr>
+<tr>
+<td>1er novembre</td>
+<td>Maîtres à haute disponibilité dans les clusters exécutant Kubernetes version 1.11</td>
+<td>Dans une zone unique, votre maître est hautement disponible et comprend des répliques sur des hôtes physiques distincts pour le serveur d'API Kubernetes, le composant etcd, le planificateur et le gestionnaire de contrôleurs afin de les protéger en cas d'indisponibilité due par exemple à une mise à jour de cluster. Si votre cluster se trouve dans une zone compatible avec plusieurs zones, votre maître à haute disponibilité est également réparti sur plusieurs zones pour le protéger en cas de défaillance d'une zone.<br>Pour connaître les actions que vous devez effectuer, voir [Mise à jour des maîtres de cluster pour la haute disponibilité](cs_versions.html#ha-masters). Ces actions de préparation sont applicables dans les cas suivants :<ul>
+<li>Si vous disposez d'un pare-feu ou de règles réseau Calico personnalisées.</li>
+<li>Si vous utilisez les ports d'hôte `2040` ou `2041` sur vos noeuds worker.</li>
+<li>Si vous avez utilisé l'adresse IP du noeud maître du cluster pour accéder au maître depuis le cluster.</li>
+<li>Si vous disposez d'un processus automatique pour appeler l'API ou l'interface de ligne de commande Calico (`calicoctl`), par exemple pour créer des règles Calico.</li>
+<li>Si vous utilisez des règles réseau Kubernetes ou Calico pour contrôler l'accès du trafic sortant du pod vers le maître.</li></ul></td>
+</tr>
+</tbody></table>
 
 ## Rubriques les plus consultées en octobre 2018
 {: #oct18}
@@ -53,7 +122,7 @@ Tenez-vous au courant de ce qui se passe dans {{site.data.keyword.containerlong}
 <tr>
 <td>4 octobre</td>
 <td>[{{site.data.keyword.registrylong}} est désormais intégré à {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam)</td>
-<td>Vous pouvez utiliser IAM pour contrôler l'accès aux ressources de votre registre, par exemple pour extraire, envoyer et générer des images. Lorsque vous créez un cluster, vous créez également un jeton de registre pour que le cluster puisse utiliser votre registre. Par conséquent, vous avez besoin du rôle de gestion de plateforme **Administrateur** du registre pour créer un cluster. Pour activer IAM pour le compte de votre registre, voir la rubrique sur l'[activation de l'application des règles aux utilisateurs existants](/docs/services/Registry/registry_users.html#existing_users).</td>
+<td>Vous pouvez utiliser {{site.data.keyword.Bluemix_notm}} IAM pour contrôler l'accès aux ressources de votre registre, par exemple pour extraire, envoyer et générer des images. Lorsque vous créez un cluster, vous créez également un jeton de registre pour que le cluster puisse utiliser votre registre. Par conséquent, vous avez besoin du rôle de gestion de plateforme **Administrateur** du registre au niveau du compte pour créer un cluster. Pour activer {{site.data.keyword.Bluemix_notm}} IAM pour le compte de votre registre, voir la rubrique sur l'[activation de l'application des règles aux utilisateurs existants](/docs/services/Registry/registry_users.html#existing_users).</td>
 </tr>
 <tr>
 <td>1er octobre</td>
@@ -191,8 +260,8 @@ configurer des politiques de sécurité de pod pour autoriser certaines personne
 </tr>
 <tr>
 <td>1er mai</td>
-<td>[Déploiement du tableau de bord Kubernetes à partir de l'interface graphique](cs_app.html#cli_dashboard)</td>
-<td>Avez-vous déjà envisagé de pouvoir accéder au tableau de bord Kubernetes d'un seul clic ? Vérifiez la présence du bouton **Tableau de bord Kubernetes** dans l'interface graphique d'{{site.data.keyword.Bluemix_notm}}.</td>
+<td>[Déploiement du tableau de bord Kubernetes à partir de la console](cs_app.html#cli_dashboard)</td>
+<td>Avez-vous déjà envisagé de pouvoir accéder au tableau de bord Kubernetes d'un seul clic ? Vérifiez la présence du bouton **Tableau de bord Kubernetes** dans la console {{site.data.keyword.Bluemix_notm}}.</td>
 </tr>
 </tbody></table>
 
@@ -283,7 +352,7 @@ configurer des politiques de sécurité de pod pour autoriser certaines personne
 </tr>
 <tr>
 <td>23 février</td>
-<td>Affichage de l'interface utilisateur Web pour la [consignation](cs_health.html#view_logs) et les [métriques](cs_health.html#view_metrics)</td>
+<td>Affichage de la console Web pour la [consignation](cs_health.html#view_logs) et les [métriques](cs_health.html#view_metrics)</td>
 <td>Affichez facilement les données des journaux et des métriques sur votre cluster et ses composants avec une interface utilisateur Web améliorée. Consultez la page des détails de votre cluster pour savoir comment y accéder.</td>
 </tr>
 <tr>

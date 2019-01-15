@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -83,7 +86,7 @@ Pour autoriser l'accès à un cluster spécifique :
    ```
    {: pre}
 
-2. Si le cluster se trouve dans un autre groupe de ressources que `default`, ciblez ce groupe de ressources. **Remarque** : vous devez au moins disposer du [rôle **Afficheur**](cs_users.html#platform) pour le groupe de ressources.
+2. Si le cluster se trouve dans un autre groupe de ressources que `default`, ciblez ce groupe de ressources. Pour voir à quel groupe de ressources appartient chaque cluster, exécutez la commande `ibmcloud ks clusters`. **Remarque** : vous devez au moins disposer du [rôle **Afficheur**](cs_users.html#platform) pour le groupe de ressources.
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -113,7 +116,7 @@ Pour autoriser l'accès à un cluster spécifique :
    Exemple de sortie :
    ```
    ...
-   Master URL:		https://169.xx.xxx.xxx:31142
+   Master URL:		https://c3.<region>.containers.cloud.ibm.com
    ...
    ```
    {: screen}
@@ -129,7 +132,7 @@ Pour autoriser l'accès à un cluster spécifique :
 
    Exemple de commande :
    ```
-   curl --insecure https://169.xx.xxx.xxx:31142/version
+   curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
    ```
    {: pre}
 
@@ -190,7 +193,10 @@ Laissez votre cluster accéder aux services et aux ressources d'infrastructure d
     {: pre}
 
 2.  Autorisez le trafic entrant depuis la source _<each_worker_node_publicIP>_ vers la plage de ports de destination TCP/UDP 20000 à 32767 et le port 443, et les adresses IP et groupes de réseau suivants. Si un pare-feu d'entreprise empêche votre machine locale d'accéder à des noeuds finaux de l'Internet public, effectuez cette étape tant pour vos noeuds worker source que pour votre machine locale.
-    - **Important** : vous devez autoriser le trafic sortant vers le port 443 pour toutes les zones de la région afin d'équilibrer la charge lors du processus d'amorçage. Par exemple, si votre cluster se trouve au Sud des Etats-Unis, vous devez autoriser le trafic depuis les adresses IP publiques de chacun de vos noeuds worker sur le port 443 de l'adresse IP pour toutes les zones (dal10, dal12 et dal13).
+
+    Vous devez autoriser le trafic sortant vers le port 443 pour toutes les zones de la région afin d'équilibrer la charge lors du processus d'amorçage. Par exemple, si votre cluster se trouve au Sud des Etats-Unis, vous devez autoriser le trafic depuis les adresses IP publiques de chacun de vos noeuds worker sur le port 443 de l'adresse IP pour toutes les zones.
+    {: important}
+
     <table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième.">
     <caption>Adresses IP à ouvrir pour le trafic sortant</caption>
         <thead>
@@ -201,33 +207,33 @@ Laissez votre cluster accéder aux services et aux ressources d'infrastructure d
       <tbody>
         <tr>
           <td>Asie-Pacifique nord</td>
-          <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-          <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+          <td>che01<br>hkg02<br>seo01<br>sng01<br>tok02, tok04, tok05</td>
+          <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210, 128.168.71.117, 165.192.69.69</code></td>
          </tr>
         <tr>
            <td>Asie-Pacifique sud</td>
-           <td>mel01<br>syd01<br>syd04</td>
-           <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19, 130.198.66.34</code></td>
+           <td>mel01<br>syd01, syd04</td>
+           <td><code>168.1.97.67</code><br><code>168.1.8.195, 130.198.66.26, 168.1.12.98, 130.198.64.19</code></td>
         </tr>
         <tr>
            <td>Europe centrale</td>
-           <td>ams03<br>fra02<br>mil01<br>osl01<br>par01</td>
-           <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+           <td>ams03<br>mil01<br>osl01<br>par01<br>fra02, fra04, fra05</td>
+           <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code><br><code>169.50.56.174, 161.156.65.42, 149.81.78.114</code></td>
           </tr>
         <tr>
           <td>Sud du Royaume-Uni</td>
-          <td>lon02<br>lon04</td>
-          <td><code>159.122.242.78</code><br><code>158.175.65.170, 158.175.74.170, 158.175.76.2</code></td>
+          <td>lon02, lon04, lon05, lon06</td>
+          <td><code>159.122.242.78, 158.175.111.42, 158.176.94.26, 159.122.224.242, 158.175.65.170, 158.176.95.146</code></td>
         </tr>
         <tr>
           <td>Est des Etats-Unis</td>
-           <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
-           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+           <td>mon01<br>tor01<br>wdc04, wdc06, wdc07</td>
+           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.63.88.186, 169.60.73.142, 169.61.109.34, 169.63.88.178, 169.60.101.42, 169.61.83.62</code></td>
         </tr>
         <tr>
           <td>Sud des Etats-Unis</td>
-          <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01<br>sjc03<br>sjc04</td>
-          <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code></td>
+          <td>hou02<br>sao01<br>sjc03<br>sjc04<br>dal10,dal12,dal13</td>
+          <td><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><code>169.46.7.238, 169.48.230.146, 169.61.29.194, 169.46.110.218, 169.47.70.10, 169.62.166.98, 169.48.143.218, 169.61.177.2, 169.60.128.2</code></td>
         </tr>
         </tbody>
       </table>
@@ -247,12 +253,12 @@ Laissez votre cluster accéder aux services et aux ressources d'infrastructure d
         <tr>
           <td>Registre global entre les régions d'{{site.data.keyword.containerlong_notm}}</td>
           <td>registry.bluemix.net</td>
-          <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
+          <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29></code></td>
         </tr>
         <tr>
           <td>Asie-Pacifique nord, Asie-Pacifique sud</td>
           <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></td>
         </tr>
         <tr>
           <td>Europe centrale</td>
@@ -262,7 +268,7 @@ Laissez votre cluster accéder aux services et aux ressources d'infrastructure d
          <tr>
           <td>Sud du Royaume-Uni</td>
           <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
          </tr>
          <tr>
           <td>Est des Etats-Unis, Sud des Etats-Unis</td>
@@ -273,10 +279,11 @@ Laissez votre cluster accéder aux services et aux ressources d'infrastructure d
       </table>
 </p>
 
-4. Facultatif : autorisez le trafic réseau sortant depuis les noeuds worker vers les services {{site.data.keyword.monitoringlong_notm}} et {{site.data.keyword.loganalysislong_notm}} :
-    - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
-    - Remplacez <em>&lt;monitoring_public_IP&gt;</em> par toutes les adresses des régions de surveillance auxquelles vous voulez autoriser le trafic :
-      <p><table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième.">
+4.  Facultatif : autorisez le trafic réseau sortant depuis les noeuds worker vers les services {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}} et LogDNA :
+    *   **{{site.data.keyword.monitoringlong_notm}}**:
+        <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_public_IP&gt;</pre>
+        Remplacez <em>&lt;monitoring_public_IP&gt;</em> par toutes les adresses des régions de surveillance auxquelles vous voulez autoriser le trafic :
+        <p><table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième.">
   <caption>Adresses IP à ouvrir pour gérer le trafic</caption>
         <thead>
         <th>Région {{site.data.keyword.containerlong_notm}}</th>
@@ -303,9 +310,10 @@ Laissez votre cluster accéder aux services et aux ressources d'infrastructure d
         </tbody>
       </table>
 </p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
-    - Remplacez <em>&lt;logging_public_IP&gt;</em> par toutes les adresses des régions de consignation auxquelles vous voulez autoriser le trafic :
-      <p><table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième.">
+    *   **{{site.data.keyword.loganalysislong_notm}}**:
+        <pre class="screen">TCP port 443, port 9091 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logging_public_IP&gt;</pre>
+        Remplacez <em>&lt;logging_public_IP&gt;</em> par toutes les adresses des régions de consignation auxquelles vous voulez autoriser le trafic :
+        <p><table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième.">
 <caption>Adresses IP à ouvrir pour consigner le trafic</caption>
         <thead>
         <th>Région {{site.data.keyword.containerlong_notm}}</th>
@@ -317,7 +325,7 @@ Laissez votre cluster accéder aux services et aux ressources d'infrastructure d
             <td>Est des Etats-Unis, Sud des Etats-Unis</td>
             <td>ingest.logging.ng.bluemix.net</td>
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-           </tr>
+          </tr>
           <tr>
            <td>Sud du Royaume-Uni</td>
            <td>ingest.logging.eu-gb.bluemix.net</td>
@@ -336,13 +344,15 @@ Laissez votre cluster accéder aux services et aux ressources d'infrastructure d
          </tbody>
        </table>
 </p>
+    *   **{{site.data.keyword.la_full_notm}}**:
+        <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
+        Remplacez `<logDNA_public_IP>` par les [adresses IP LogDNA](/docs/services/Log-Analysis-with-LogDNA/network.html#ips).
 
 5. Si vous utilisez des services d'équilibreur de charge, vérifiez que tout le trafic utilisant le protocole VRRP est autorisé entre les noeuds worker sur les interfaces publiques et privées. {{site.data.keyword.containerlong_notm}} utilise le protocole VRRP pour gérer les adresses IP des équilibreurs de charge publics et privés.
 
-6. {: #pvc}Pour créer des réservations de volume persistant pour le stockage de données, permettez un accès sortant via votre pare-feu aux [adresses IP de l'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/hardware-firewall-dedicated/ips.html#ibm-cloud-ip-ranges) de la zone dans laquelle réside votre cluster.
-    - Pour savoir dans quelle zone se trouve votre cluster, exécutez la commande `ibmcloud ks clusters`.
-    - Autorisez l'accès à la plage d'adresses IP tant pour le réseau de front end public ([**Frontend (public) Network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network)) que pour le réseau de back end privé ([**Backend (private) Network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)).
-    - Notez que vous devez ajouter la zone (centre de données) `dal01` du réseau de back end privé (**Backend (private) Network**).
+6. {: #pvc}Pour créer des réservations de volume persistant pour le stockage de données, autorisez l'accès sortant via votre pare-feu vers l'infrastructure IBM Cloud (SoftLayer) :
+    - Autorisez l'accès au noeud final d'API de l'infrastructure IBM Cloud (SoftLayer) pour lancer les demandes de mise à disposition : `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
+    - Autorisez l'accès à la plage d'adresses IP de l'infrastructure IBM Cloud (SoftLayer) pour la zone dans laquelle se trouve votre cluster pour le [**réseau (public) de front end**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) et le [**réseau (privé) de back end**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network). Pour savoir dans quelle zone se trouve votre cluster, exécutez la commande `ibmcloud ks clusters`.
 
 <br />
 

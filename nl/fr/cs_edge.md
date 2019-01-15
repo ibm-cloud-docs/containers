@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -36,10 +39,10 @@ Ajoutez l'étiquette `dedicated=edge` à au moins deux noeuds worker sur chaque 
 
 Avant de commencer :
 
-- [Créez un cluster standard.](cs_clusters.html#clusters_cli)
-- Vérifiez que votre cluster dispose d'au moins un VLAN public. Les noeuds worker de périphérie ne sont pas disponibles pour les clusters avec VLAN privés uniquement.
-- [Créez un nouveau pool de noeuds worker](cs_clusters.html#add_pool) couvrant toutes le zones de votre cluster et comportant au moins 2 noeuds worker par zone.
-- [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure).
+1. Vérifiez que vous disposez d'un [rôle de plateforme](cs_users.html#platform) {{site.data.keyword.Bluemix_notm}} IAM.
+2. [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+3. Vérifiez que votre cluster dispose d'au moins un VLAN public. Les noeuds worker de périphérie ne sont pas disponibles pour les clusters avec VLAN privés uniquement.
+4. [Créez un nouveau pool de noeuds worker](cs_clusters.html#add_pool) couvrant toutes le zones de votre cluster et comportant au moins 2 noeuds worker par zone.
 
 Pour étiqueter des noeuds worker en tant que noeuds de périphérie :
 
@@ -105,6 +108,7 @@ Un avantage des noeuds worker de périphérie est le fait qu'ils peuvent être d
 
 La tolérance `dedicated=edge` implique que tous les services d'équilibreur de charge et Ingress sont déployés uniquement sur les noeuds worker étiquetés. Toutefois, pour empêcher d'autres charges de travail de s'exécuter sur des noeuds worker de périphérie et de consommer des ressources de noeud worker, vous devez utiliser une [annotation Kubernetes taints![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
 
 1. Répertoriez tous les noeuds worker avec l'étiquette `dedicated=edge`.
 
@@ -121,4 +125,4 @@ La tolérance `dedicated=edge` implique que tous les services d'équilibreur de 
   {: pre}
   Maintenant, seuls les pods ayant la tolérance `dedicated=edge` sont déployés sur vos noeuds worker de périphérie.
 
-3. Si vous choisissez d'[activer la conservation de l'adresse IP source pour un service d'équilibreur de charge ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assurez-vous que tous les pods d'application sont planifiés sur les noeuds worker de périphérie en [ajoutant l'affinité avec les noeuds de périphérie aux pods d'application](cs_loadbalancer.html#edge_nodes). Les pods d'application doivent être planifiés sur des noeuds de périphérie pour recevoir des demandes entrantes.
+3. Si vous choisissez d'[activer la conservation de l'adresse IP source pour un service d'équilibreur de charge 1.0 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assurez-vous que tous les pods d'application sont planifiés sur les noeuds worker de périphérie en [ajoutant l'affinité de noeud de périphérie aux pods d'application](cs_loadbalancer.html#edge_nodes). Les pods d'application doivent être planifiés sur des noeuds de périphérie pour recevoir des demandes entrantes.

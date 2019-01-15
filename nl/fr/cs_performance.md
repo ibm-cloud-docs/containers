@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,30 +13,32 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Optimisation des performances
 {: #kernel}
 
-Si vous avez des exigences spécifiques en termes d'optimisation des performances, vous pouvez modifier les paramètres par défaut `sysctl` du noyau Linux sur les noeuds worker et dans les espaces de nom de réseau de pods dans {{site.data.keyword.containerlong}}.
+Si vous avez des exigences spécifiques en termes d'optimisation des performances, vous pouvez modifier les paramètres par défaut de certains composants de cluster dans {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Les noeuds worker sont automatiquement mis à disposition avec des performances de noyau déjà optimisées, mais vous pouvez modifier les paramètres par défaut en appliquant un objet Kubernetes `DaemonSet` personnalisé à votre cluster. Cet objet modifie les paramètres de tous les noeuds worker existants et les applique aux nouveaux noeuds worker mis à disposition dans le cluster. Aucun pod n'est affecté.
-
-Pour optimiser les paramètres du noyau pour les pods d'application, vous pouvez insérer l'élément initContainer dans le fichier YAML `pod/ds/rs/deployment` pour chaque déploiement. L'élément initContainer est ajouté à chaque déploiement d'application figurant dans l'espace de nom du réseau de pods dont vous souhaitez optimiser les performances.
-
-Ainsi, les exemples dans les sections suivantes changent le nombre maximal de connexions autorisées dans l'environnement via le paramètre `net.core.somaxconn` et la plage de ports éphémères via le paramètre `net.ipv4.ip_local_port_range`.
-
-**Avertissement** : si vous choisissez de modifier les valeurs par défaut des paramètres du noyau, vous le faites à vos propres risques. Vous êtes responsable de l'exécution des tests sur les paramètres modifiés et de toute interruption potentielle qui serait provoquée par les paramètres modifiés dans votre environnement.
+Si vous choisissez de modifier les paramètres par défaut, vous le faites à vos propres risques. Vous êtes responsable de l'exécution des tests sur les paramètres modifiés et de toute interruption potentielle qui serait provoquée par les paramètres modifiés dans votre environnement.
+{: important}
 
 ## Optimisation des performances de noeud worker
 {: #worker}
 
-Appliquez un objet [DaemonSet ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) pour modifier les paramètres du noyau sur l'hôte du noeud worker.
+Si vous avez des exigences spécifiques en termes d'optimisation des performances, vous pouvez modifier les valeurs par défaut des paramètres `sysctl` du noyau Linux sur les noeuds worker.
+{: shortdesc}
 
-**Remarque** : vous devez disposer du [rôle d'accès Administrateur](cs_users.html#access_policies) pour exécuter  le modèle d'élément privilégié initContainer. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
+Les noeuds worker sont automatiquement mis à disposition avec des performances de noyau optimisées, mais vous pouvez modifier les paramètres par défaut en appliquant un objet [Kubernetes `DaemonSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) personnalisé dans votre cluster. Cet objet modifie les paramètres de tous les noeuds worker existants et les applique aux nouveaux noeuds worker mis à disposition dans le cluster. Aucun pod n'est affecté.
 
-1. Sauvegardez l'objet DaemonSet suivant dans un fichier nommé `worker-node-kernel-settings.yaml`. Dans la section `spec.template.spec.initContainers`, ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple d'objet DaemonSet modifie les valeurs des paramètres `net.core.somaxconn` et `net.ipv4.ip_local_port_range`.
+Vous devez disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur**](cs_users.html#platform) pour le cluster pour exécuter le modèle initContainer privilégié. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
+{: note}
+
+1. Sauvegardez l'objet DaemonSet suivant dans un fichier nommé `worker-node-kernel-settings.yaml`. Dans la section `spec.template.spec.initContainers`, ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple d'objet daemonset modifie le nombre maximal par défaut de connexions autorisées dans l'environnement via le paramètre `net.core.somaxconn` et la plage de ports éphémères via le paramètre `net.ipv4.ip_local_port_range`.
     ```
     apiVersion: extensions/v1beta1
     kind: DaemonSet
@@ -101,7 +103,7 @@ Appliquez un objet [DaemonSet ![Icône de lien externe](../icons/launch-glyph.sv
 
 Pour rétablir les valeurs par défaut des paramètres `sysctl` de vos noeuds worker, définis par {{site.data.keyword.containerlong_notm}} :
 
-1. Supprimer l'objet DaemonSet. Les éléments initContainers qui avaient appliqué les paramètres personnalisés sont supprimés.
+1. Supprimez l'objet DaemonSet. Les éléments initContainers qui avaient appliqué les paramètres personnalisés sont supprimés.
     ```
     kubectl delete ds kernel-optimization
     ```
@@ -115,12 +117,14 @@ Pour rétablir les valeurs par défaut des paramètres `sysctl` de vos noeuds wo
 ## Optimisation des performances de pod
 {: #pod}
 
-Si vous avez des exigences spécifiques en matière de charge de travail, vous pouvez appliquer un correctif [initContainer ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) pour modifier les paramètres du noyau pour les pods d'application.
+Si vous avez des exigences spécifiques en termes de charges de travail pour les performances, vous pouvez modifier les paramètres par défaut `sysctl` du noyau Linux dans les espaces de nom de réseau de pods.
 {: shortdesc}
 
-**Remarque** : vous devez disposer du [rôle d'accès Administrateur](cs_users.html#access_policies) pour exécuter  le modèle d'élément privilégié initContainer. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
+Pour optimiser les paramètres du noyau pour les pods d'application, vous pouvez insérer un correctif [initContainer ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) dans le fichier YAML `pod/ds/rs/deployment` pour chaque déploiement. L'élément initContainer est ajouté à chaque déploiement d'application figurant dans l'espace de nom du réseau de pods dont vous souhaitez optimiser les performances.
 
-1. Sauvegardez le correctif initContainer suivant dans un fichier nommé `pod-patch.yaml` et ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple de correctif initContainer modifie les valeurs des paramètres `net.core.somaxconn` et `net.ipv4.ip_local_port_range`.
+Avant de commencer, vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur**](cs_users.html#platform) pour le cluster pour exécuter l'exemple initContainer privilégié. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
+
+1. Sauvegardez le correctif initContainer suivant dans un fichier nommé `pod-patch.yaml` et ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple d'élément initContainer modifie le nombre maximal par défaut de connexions autorisées dans l'environnement via le paramètre `net.core.somaxconn` et la plage de ports éphémères via le paramètre `net.ipv4.ip_local_port_range`.
     ```
     spec:
       template:
@@ -146,3 +150,74 @@ Si vous avez des exigences spécifiques en matière de charge de travail, vous p
     {: pre}
 
 3. Si vous avez modifié la valeur `net.core.somaxconn` dans les paramètres du noyau, la plupart des applications peuvent utiliser automatiquement la valeur mise à jour. En revanche, certaines applications pourront nécessiter la modification manuelle de la valeur correspondante dans le code de votre application pour qu'elle corresponde à la valeur du noyau. Par exemple si vous optimisez les performances d'un pod dans lequel s'exécute une application NGINX, vous devez modifier la valeur de la zone `backlog` dans le code d'application NGINX pour qu'elle corresponde. Pour plus d'informations, reportez-vous à cet [article du blogue NGINX ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.nginx.com/blog/tuning-nginx/).
+
+<br />
+
+
+## Ajustement des ressources du fournisseur de métriques du cluster
+{: #metrics}
+
+Les configurations du fournisseur de métriques de votre cluster (`metrics-server` dans Kubernetes 1.12 et version ultérieure, ou `heapster` dans les versions antérieures) sont optimisées pour les clusters comportant un nombre inférieur ou égal à 30 pods par noeud worker. Si votre cluster comporte plus de pods par noeud worker, le conteneur principal du fournisseur de métriques `metrics-server` ou `heapster` pour le pod peut redémarrer fréquemment avec un message d'erreur de ce type : `OOMKilled`.
+
+Le pod du fournisseur de métriques comporte également un conteneur `nanny` pour la mise à l'échelle des demandes et des limites de ressources du conteneur principal de `metrics-server` ou `heapster` en réponse au nombre de noeuds worker dans le cluster. Vous pouvez modifier les ressources par défaut en éditant l'élément configmap du fournisseur de métriques.
+
+Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+
+1.  Ouvrez le fichier YAML correspondant à l'élément configmap du fournisseur de métriques du cluster.
+    *  Pour `metrics-server` :
+       ```
+       kubectl get configmap metrics-server-config -n kube-system -o yaml
+       ```
+       {: pre}
+    *  Pour `heapster` :
+       ```
+       kubectl get configmap heapster-config -n kube-system -o yaml
+       ```
+       {: pre}
+    Exemple de sortie :
+    ```
+    apiVersion: v1
+    data:
+      NannyConfiguration: |-
+        apiVersion: nannyconfig/v1alpha1
+        kind: NannyConfiguration
+    kind: ConfigMap
+    metadata:
+      annotations:
+        armada-service: cruiser-kube-addons
+        version: --
+      creationTimestamp: 2018-10-09T20:15:32Z
+      labels:
+        addonmanager.kubernetes.io/mode: EnsureExists
+        kubernetes.io/cluster-service: "true"
+      name: heapster-config
+      namespace: kube-system
+      resourceVersion: "526"
+      selfLink: /api/v1/namespaces/kube-system/configmaps/heapster-config
+      uid: 11a1aaaa-bb22-33c3-4444-5e55e555e555
+    ```
+    {: screen}
+
+2.  Ajoutez la zone `memoryPerNode` à l'élément configmap dans la section `data.NannyConfiguration`. La valeur par défaut pour `metrics-server` et `heapster` est définie sur `4Mi`.
+    ```
+    apiVersion: v1
+    data:
+      NannyConfiguration: |-
+        apiVersion: nannyconfig/v1alpha1
+        kind: NannyConfiguration
+        memoryPerNode: 5Mi
+    kind: ConfigMap
+    ...
+    ```
+    {: codeblock}
+
+3.  Appliquez vos modifications.
+    ```
+    kubectl apply -f heapster-config.yaml
+    ```
+    {: pre}
+
+4.  Surveillez les pods du fournisseur de métriques pour voir si les conteneurs continuent à redémarrer en raison d'un message d'erreur `OOMKilled`. Dans ce cas, répétez ces étapes en augmentant la taille de `memoryPerNode` jusqu'à ce que le pod soit stable.
+
+Vous voulez régler d'autres paramètres ? Consultez la [documentation sur la configuration du composant Addon Resizer de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration) pour en savoir plus.
+{: tip}

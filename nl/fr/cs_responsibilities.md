@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,7 +50,7 @@ Passez en revue les responsabilités que vous partagez avec IBM pour gérer vos 
 - [Ajouter ou retirer de la capacité d'un cluster en redimensionnant vos pools de noeuds worker](cs_clusters.html#add_workers)
 - [Activer la fonction Spanning VLAN et maintenir vos pools de noeuds worker à zones multiples équilibrés entre les différentes zones](cs_clusters_planning.html#ha_clusters)
 - [Créer des réseaux locaux virtuels (VLAN) publics et privés dans l'infrastructure IBM Cloud (SoftLayer) pour l'isolement réseau de votre cluster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Assurer que tous les noeuds worker ont une connectivité réseau avec l'URL du maître Kubernetes](cs_firewall.html#firewall) <p>**Remarque** : si un noeud worker comporte à la fois des VLAN public et privé, la connectivité réseau est configurée. Si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez configurer une autre solution pour la connectivité du réseau. Pour plus d'informations, voir [Planification des réseaux de cluster privés uniquement](cs_network_cluster.html#private_vlan). </p>
+- [Assurer que tous les noeuds worker ont une connectivité réseau avec l'URL du maître Kubernetes](cs_firewall.html#firewall) <p class="note">Si un noeud worker comporte à la fois des VLAN public et privé, la connectivité réseau est configurée. Si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez configurer une autre solution pour la connectivité du réseau. Pour plus d'informations, voir [Planification des réseaux de cluster privés uniquement](cs_network_cluster.html#private_vlan). </p>
 - [Mettre à jour le processus kube-apiserver du maître lorsque des mises à jour de la version Kubernetes sont disponibles](cs_cluster_update.html#master)
 - [Conserver les noeuds worker à jour sur les versions principale et secondaires, ainsi que les versions de correctif](cs_cluster_update.html#worker_node)
 - [Récupérer les noeuds worker problématiques en exécutant des commandes `kubectl`, comme `cordon` ou `drain`, et des commandes `ibmcloud ks`, comme `reboot`, `reload` ou `delete`](cs_cli_reference.html#cs_worker_reboot)

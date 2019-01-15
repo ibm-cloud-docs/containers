@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -44,7 +47,8 @@ Le diagramme suivant montre comment la communication est dirigée vers une appli
 
 4. La demande est transmise à l'adresse IP privée du pod sur lequel l'application est déployée. Si plusieurs instances d'application sont déployées dans le cluster, le service NodePort achemine les demandes entre les pods d'application.
 
-**Remarque :** l'adresse IP publique du noeud worker n'est pas permanente. Lorsqu'un noeud worker est supprimé ou recréé, une nouvelle adresse IP publique lui est affectée. Vous pouvez utiliser le service NodePort pour tester l'accès public à votre application ou lorsque l'accès public n'est nécessaire que pour un temps très bref. Si vous avez besoin d'une adresse IP publique stable et d'une plus grande disponibilité de votre service, exposez votre application en utilisant un [service LoadBalancer](cs_loadbalancer.html) ou [Ingress](cs_ingress.html).
+L'adresse IP publique du noeud worker n'est pas permanente. Lorsqu'un noeud worker est supprimé ou recréé, une nouvelle adresse IP publique lui est affectée. Vous pouvez utiliser le service NodePort pour tester l'accès public à votre application ou lorsque l'accès public n'est nécessaire que pour un temps très bref. Si vous avez besoin d'une adresse IP publique stable et d'une plus grande disponibilité de votre service, exposez votre application en utilisant un [service LoadBalancer](cs_loadbalancer.html) ou [Ingress](cs_ingress.html).
+{: note}
 
 <br />
 
@@ -57,7 +61,10 @@ Vous pouvez exposer votre application en tant que service Kubernetes NodePort po
 
 Si vous n'avez pas encore d'application prête, vous pouvez utiliser l'exemple d'application Kubernetes intitulé [Guestbook ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml).
 
-1.  Dans le fichier de configuration de votre application, définissez une section [service ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/service/). **Remarque** : dans l'exemple Guestbook, il existe une section de service front-end dans le fichier de configuration. Pour rendre l'application Guestbook disponible en externe, ajoutez le type NodePort et un port de noeud compris entre 30000 et 32767 dans la section de service front-end.
+1.  Dans le fichier de configuration de votre application, définissez une section [service ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/service/).
+
+    Dans l'exemple Guestbook, il existe une section de service front-end dans le fichier de configuration. Pour rendre l'application Guestbook disponible en externe, ajoutez le type NodePort et un port de noeud compris entre 30000 et 32767 dans la section de service front-end.
+    {: tip}
 
     Exemple :
 
@@ -155,7 +162,9 @@ Une fois l'application déployée, vous pouvez utiliser l'adresse IP publique de
     ```
     {: screen}
 
-    Dans cet exemple, la valeur de NodePort est `30872`.</br>
-    **Remarque :** si la section **Endpoints** affiche `<none>`, vérifiez les éléments `<selectorkey>` et `<selectorvalue>` que vous avez utilisés dans la section `spec.selector` du service NodePort. Assurez-vous qu'ils sont identiques à la paire _clé/valeur_ que vous avez utilisée à la section `spec.template.metadata.labels` de votre fichier YAML de déploiement.
+    Dans cet exemple, la valeur de NodePort est `30872`.
+
+    Si la section **Endpoints** affiche `<none>`, vérifiez la clé `<selectorkey>` et le port `<selectorvalue>` que vous avez utilisés dans la section `spec.selector` du service NodePort. Assurez-vous qu'ils sont identiques à la paire _clé/valeur_ que vous avez utilisée à la section `spec.template.metadata.labels` de votre fichier YAML de déploiement.
+    {: note}
 
 3.  Formez l'adresse URL avec l'une des adresses IP du noeud worker et la valeur de NodePort. Exemple : `http://192.0.2.23:30872`

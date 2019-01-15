@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,52 +13,58 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # Régions et zones
 {: #regions-and-zones}
 
-Une région est un emplacement géographique spécifique dans lequel vous pouvez déployer des applications, des services et d'autres ressources {{site.data.keyword.Bluemix}}. [Les régions {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sont différentes des [régions {{site.data.keyword.containerlong}}](#container_regions). Les régions se composent d'une ou de plusieurs zones, lesquelles correspondent à des centres de données physiques qui hébergent les ressources de calcul, les ressources réseau et les ressources de stockage, ainsi que les systèmes de refroidissement et les appareils électriques hébergeant les services et les applications. Les zones sont isolées les unes des autres pour garantir qu'aucun point de défaillance unique ne sera partagé. 
+Une région est un emplacement géographique spécifique dans lequel vous pouvez déployer des applications, des services et d'autres ressources {{site.data.keyword.Bluemix}}. [Les régions {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sont différentes des [régions {{site.data.keyword.containerlong}}](#container_regions). Les régions se composent d'une ou de plusieurs zones, lesquelles correspondent à des centres de données physiques qui hébergent les ressources de calcul, les ressources réseau et les ressources de stockage, ainsi que les systèmes de refroidissement et les appareils électriques hébergeant les services et les applications. Les zones sont isolées les unes des autres pour garantir qu'aucun point de défaillance unique ne sera partagé.
 {:shortdesc}
-
-{{site.data.keyword.Bluemix_notm}} est présent dans le monde entier. Les services au sein d'{{site.data.keyword.Bluemix_notm}} peuvent être disponibles partout ou dans une région spécifique. Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containerlong_notm}}, ses ressources restent dans la région dans laquelle vous avez déployé le cluster. 
-
-**Remarque** : vous pouvez créer des clusters standard dans toutes les régions {{site.data.keyword.containerlong_notm}} prises en charge. Les clusters gratuits ne sont disponibles que dans certaines régions.
 
 ![Régions et zones {{site.data.keyword.containerlong_notm}}](images/regions-mz.png)
 
 _Régions et zones {{site.data.keyword.containerlong_notm}}_
 
-Les régions {{site.data.keyword.containerlong_notm}} sont les suivantes :
-* Asie-Pacifique nord (clusters standard uniquement)
-* Asie-Pacifique sud
-* Europe centrale
-* Sud du Royaume-Uni
-* Est des Etats-Unis (clusters standard uniquement)
-* Sud des Etats-Unis
+{{site.data.keyword.Bluemix_notm}} est présent dans le monde entier. Les services au sein d'{{site.data.keyword.Bluemix_notm}} peuvent être disponibles partout ou dans une région spécifique. Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containerlong_notm}}, ses ressources restent dans la région dans laquelle vous avez déployé le cluster.
+
+Vous pouvez créer des clusters standard dans toutes les régions {{site.data.keyword.containerlong_notm}} prises en charge. Les clusters gratuits ne sont disponibles que dans certaines régions.
+{: note}
+
+| Région {{site.data.keyword.containerlong_notm}} | Emplacement {{site.data.keyword.Bluemix_notm}} correspondant |
+| --- | --- |
+| Asie-Pacifique nord (clusters standard uniquement) | Tokyo |
+| Asie-Pacifique sud | Sydney |
+| Europe centrale | Francfort |
+| Sud du Royaume-Uni | Londres |
+| Est des Etats-Unis (clusters standard uniquement) | Washington DC |
+| Sud des Etats-Unis | Dallas |
+{: caption="Tableau : Régions de Kubernetes Service prises en charge et emplacements IBM Cloud correspondants." caption-side="top"}
 
 <br />
 
 
-## Régions dans {{site.data.keyword.Bluemix_notm}}
+## Emplacements dans {{site.data.keyword.Bluemix_notm}}
 {: #bluemix_regions}
 
-Vous pouvez organiser vos ressources entre les services {{site.data.keyword.Bluemix_notm}} en utilisant des régions {{site.data.keyword.Bluemix_notm}}. Par exemple, vous pouvez créer un cluster Kubernetes en utilisant une image Docker privée stockée dans le service {{site.data.keyword.registryshort_notm}} de la même région.
+Vous pouvez organiser vos ressources entre les services {{site.data.keyword.Bluemix_notm}} en utilisant des emplacements {{site.data.keyword.Bluemix_notm}}, également appelés régions. Par exemple, vous pouvez créer un cluster Kubernetes en utilisant une image Docker privée stockée dans le service {{site.data.keyword.registryshort_notm}} au même emplacement.
 {:shortdesc}
 
-Pour vérifier dans quelle région {{site.data.keyword.Bluemix_notm}} vous vous trouvez, exécutez la commande `ibmcloud info` et consultez la zone **Region**.
+Pour vérifier à quel emplacement {{site.data.keyword.Bluemix_notm}} vous vous trouvez, exécutez la commande `ibmcloud info` et consultez la zone **Region**.
 
-Vous pouvez accéder aux régions {{site.data.keyword.Bluemix_notm}} en spécifiant le noeud final d'API utilisé lorsque vous vous êtes connecté. Si vous ne spécifiez pas de région, vous êtes automatiquement connecté à la région la plus proche de vous.
+Vous pouvez accéder aux emplacements {{site.data.keyword.Bluemix_notm}} en spécifiant le noeud final d'API de la région utilisé lorsque vous vous êtes connecté. Si vous ne spécifiez pas de noeud final de région, vous êtes automatiquement connecté à la région la plus proche de vous.
 
 Vous pouvez, par exemple, utiliser les commandes suivantes pour vous connecter aux noeuds finaux d'API des régions {{site.data.keyword.Bluemix_notm}} :
 
-  * Sud des Etats-Unis
+  * Dallas
       ```
       ibmcloud login -a api.ng.bluemix.net
       ```
       {: pre}
 
-  * Est des Etats-Unis
+  * Washington DC
       ```
       ibmcloud login -a api.us-east.bluemix.net
       ```
@@ -70,13 +76,13 @@ Vous pouvez, par exemple, utiliser les commandes suivantes pour vous connecter a
       ```
       {: pre}
 
-  * Allemagne
+  * Francfort
       ```
       ibmcloud login -a api.eu-de.bluemix.net
       ```
       {: pre}
 
-  * Royaume-Uni
+  * Londres
       ```
       ibmcloud login -a api.eu-gb.bluemix.net
       ```
@@ -91,7 +97,8 @@ Vous pouvez, par exemple, utiliser les commandes suivantes pour vous connecter a
 En utilisant des régions {{site.data.keyword.containerlong_notm}}, vous pouvez créer des clusters  Kubernetes ou y accéder dans une région différente de la région {{site.data.keyword.Bluemix_notm}} où vous êtes connecté. Les noeuds finaux de régions {{site.data.keyword.containerlong_notm}} se réfèrent spécifiquement au service {{site.data.keyword.containerlong_notm}}, et non pas à {{site.data.keyword.Bluemix_notm}} dans son ensemble.
 {:shortdesc}
 
-**Remarque** : vous pouvez créer des clusters standard dans toutes les régions {{site.data.keyword.containerlong_notm}} prises en charge. Les clusters gratuits ne sont disponibles que dans certaines régions.
+Vous pouvez créer des clusters standard dans toutes les régions {{site.data.keyword.containerlong_notm}} prises en charge. Les clusters gratuits ne sont disponibles que dans certaines régions.
+{: note}
 
 Régions {{site.data.keyword.containerlong_notm}} prises en charge :
   * Asie-Pacifique nord (clusters standard uniquement)
@@ -145,8 +152,8 @@ Pour afficher la documentation sur les commandes d'API, accédez à [https://con
 Les zones sont des centres de données physiques disponibles au sein d'une région {{site.data.keyword.Bluemix_notm}}. Les régions constituent un outil conceptuel permettant d'organiser les zones et peuvent inclure des zones (centres de données) dans différents pays. Le tableau suivant affiche les zones disponibles par région.
 {:shortdesc}
 
-* **Métropole à zones multiples** : les noeuds worker dans les clusters créés dans une métropole à zones multiples peuvent être répartis sur plusieurs zones.
-* **Ville à zone unique** : les noeuds worker créés dans une ville à zone unique restent dans cette zone. Vous ne pouvez pas les répartir entre plusieurs zones.
+* **Métropole à zones multiples** : les noeuds worker dans les clusters créés dans une métropole à zones multiples peuvent être répartis sur plusieurs zones. Par ailleurs, si vous créez un cluster Kubernetes de version 1.10 ou ultérieure dans une métropole à plusieurs zones, les maîtres à haute disponibilité sont répartis entre les zones.
+* **Ville à zone unique** : les noeuds worker créés dans une ville à zone unique restent dans cette zone. Vous ne pouvez pas les répartir entre plusieurs zones. Le maître à haute disponibilité comprend trois répliques sur des hôtes distincts, mais n'est pas réparti entre les zones.
 
 <table summary="Le tableau suivant présente les zones disponibles par régions. La lecture des lignes s'effectue de gauche à droite, avec la région dans la première colonne, les métropoles à zones multiples dans la deuxième colonne et les villes à zone unique dans la troisième colonne.">
 <caption>Zones uniques et zones multiples disponibles par région.</caption>
@@ -159,7 +166,8 @@ Les zones sont des centres de données physiques disponibles au sein d'une régi
     <tr>
       <td>Asie-Pacifique nord</td>
       <td>Tokyo : tok02, tok04, tok05</td>
-      <td><p>Hong Kong (région administrative spéciale) de la République populaire de Chine : hkg02</p>
+      <td><p>Chennai : che01</p>
+      <p>Hong Kong (région administrative spéciale) de la République populaire de Chine : hkg02</p>
       <p>Séoul : seo01</p>
       <p>Singapour : sng01</p></td>
     </tr>
@@ -180,7 +188,8 @@ Les zones sont des centres de données physiques disponibles au sein d'une régi
     </tr>
     <tr>
       <td>Sud du Royaume-Uni</td>
-      <td>Londres : lon04, lon05, lon06<br><br>**Remarque** : la zone lon05 remplace lon02. Les nouveaux clusters doivent utiliser lon05.</td>
+      <td>Londres : lon04, lon05, lon06. **Remarque** : lon05 remplace lon02. Les nouveaux clusters doivent utiliser lon05, et les maîtres à haute disponibilité répartis entre les zones ne sont pris en charge que dans lon05.</td>
+      <td></td>
     </tr>
     <tr>
       <td>Est des Etats-Unis</td>

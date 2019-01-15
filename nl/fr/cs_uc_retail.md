@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -29,6 +32,7 @@ tirer parti des fonctions d'analyse pour obtenir des connaissances sur le march�
 {: #uc_data-share}
 
 Un dirigeant dans ce secteur d'activité doit augmenter les canaux de distribution mais le système de distribution est confiné dans un centre de données local. La concurrence dispose de partenaires mondiaux pour les ventes croisées et les permutations des ventes à plus haute valeur unitaire de leurs marchandises, dans les magasins et sur les sites en ligne. 
+{: shortdesc}
 
 Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_notm}} offre un écosystème sur cloud public, dans lequel des conteneurs permettent à de nouveaux partenaires et à d'autres acteurs externes de développer ensemble des applications et des données à l'aide d'API. Comme ce système de distribution est sur le cloud public, les API rationalisent le partage des données et accélèrent le développement de nouvelles applications. Les déploiements d'applications augmentent lorsque les développeurs expérimentent l'intégration facile et rapide de changements dans les systèmes de développement et de test avec des chaînes d'outils. 
 
@@ -50,14 +54,14 @@ Une expérience d'achat plus intelligente est nécessaire pour fidéliser davant
 
 L'enseigne doit également fournir du contenu utile à ses clients, par exemple des informations sur les produits ou d'autres gammes de produit, des évaluations et une visibilité en temps réel du stock disponible. Et ces clients souhaitent en profiter en ligne et en magasin via leurs appareils mobiles personnels et les employés du magasin également équipés d'appareils mobiles.
 
-La solution consiste en trois composants principaux : 
+La solution est constituée des composants principaux suivants : 
 * INVENTAIRE : Application pour l'écosystème du partenaire qui consolide et communique son stock, notamment lors de l'introduction de nouveaux produits, en incluant des API réutilisables par les partenaires dans les applications B2B et de vente au détail
 * VENTES CROISEES ET INCITATIVES : Application qui met en avant les opportunités de ventes croisées et incitatives avec des API pouvant être utilisées dans différentes applications mobiles et d'e-commerce
 * ENVIRONNEMENT DE DEVELOPPEMENT : Les clusters Kubernetes pour les systèmes de développement, de test et de production augmentent la collaboration et le partage des données entre l'enseigne et ses partenaires
 
-Pour que l'enseigne puisse travailler avec des partenaires mondiaux, les API de gestion de stock doivent être modifiées pour répondre aux préférences du marché et de langue propres à chaque région. {{site.data.keyword.containerlong_notm}} offre une couverture dans plusieurs régions, notamment en Amérique du Nord, en Europe, en Asie et en Australie, pour que les API puissent répercuter les besoins de chaque pays avec des temps d'attente faibles.
+Pour que l'enseigne puisse travailler avec des partenaires mondiaux, les API de gestion de stock doivent être modifiées pour répondre aux préférences du marché et de langue propres à chaque région. {{site.data.keyword.containerlong_notm}} offre une couverture dans plusieurs régions, notamment en Amérique du Nord, en Europe, en Asie et en Australie, pour que les API puissent répercuter les besoins de chaque pays et assurer de faibles temps d'attente pour les appels d'API.
 
-Une autre condition requise est de pouvoir partager les données d'inventaire avec les clients des partenaires et de l'enseigne. Avec les API d'inventaire, les développeurs peuvent faire remonter les informations dans les applications, par exemple les applications mobiles d'inventaire ou les solutions Web d'e-commerce. Ils sont également chargés de construire et gérer le site d'e-commerce principal. En bref, ils doivent se focaliser sur le code au lieu de gérer l'infrastructure.  
+Une autre condition requise est de pouvoir partager les données d'inventaire avec les clients des partenaires et de l'enseigne. Avec les API d'inventaire, les développeurs peuvent faire remonter les informations dans les applications, par exemple les applications mobiles d'inventaire ou les solutions Web d'e-commerce. Ils sont également chargés de construire et gérer le site d'e-commerce principal. En bref, ils doivent se focaliser sur le code au lieu de gérer l'infrastructure. 
 
 C'est pourquoi ils ont choisi {{site.data.keyword.containerlong_notm}} car IBM simplifie la gestion de l'infrastructure :
 * Gestion du maître Kubernetes, de l'infrastructure sous forme de services (IaaS) et de composants fonctionnels, comme Ingress et les composants de stockage
@@ -110,6 +114,7 @@ Solution technique :
 {: #uc_grocer}
 
 Un directeur du marketing doit parvenir à augmenter la fréquentation des clients dans les magasins de 20 % en ajoutant un atout majeur à sa chaîne de magasins. La concurrence des grandes enseignes et les commerces en ligne font baisser les ventes. Au même moment, le directeur du marketing décide de réduire le stock sans faire de démarque car la conservation de stock sur une longue durée bloque des millions en terme de capital.
+{: shortdesc}
 
 Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_notm}} facilite le lancement de calculs supplémentaires, ce qui permet aux développeurs d'ajouter rapidement des services Cloud Analytics pour connaître le comportement des ventes et l'adaptabilité au marché numérique. 
 
@@ -130,12 +135,12 @@ Technologies clés :
 
 L'épicier a besoin d'une application pour accélérer sa conversion et stimuler la fréquentation de son magasin afin de susciter de nouvelles ventes et mettre en place un programme de fidélisation des clients sur une plateforme d'analyse dans le cloud réutilisable. L'expérience ciblée en magasin peut être un événement avec un prestataire de service ou un vendeur pour fidéliser les clients ou en attirer de nouveaux, en fonction du succès de cet événement. Le magasin et le partenaire offrent des avantages pour participer à l'événement et la possibilité d'acheter les produits dans le magasin ou auprès du partenaire.  
 
-Après l'événement, les clients sont orientés vers l'achat des produits nécessaires, et ils peuvent renouveler la démonstration eux-même par la suite. L'expérience client ciblée est mesurée avec des remboursements attractifs et l'inscription de nouveaux clients au programme de fidélité. La combinaison d'un événement marketing hyper-personnalisé et d'un outil pour assurer le suivi des achats en magasin peut faire en sorte que l'expérience ciblée soit suivie jusqu'à l'achat du produit. Toutes ces actions entraînent des conversions et une fréquentation plus élevée. 
+Après l'événement, les clients sont orientés vers l'achat des produits nécessaires, et ils peuvent renouveler la démonstration eux-même par la suite. L'expérience client ciblée est mesurée avec des remboursements attractifs et l'inscription de nouveaux clients au programme de fidélité. La combinaison d'un événement marketing hyper-personnalisé et d'un outil pour assurer le suivi des achats en magasin peut faire en sorte que l'expérience ciblée soit suivie jusqu'à l'achat du produit. Toutes ces actions entraînent des conversions et une fréquentation plus élevée.
 
 Prenons l'exemple d'un événement consistant à inviter un grand chef montrant comment réaliser une recette dans le magasin. Le magasin crée une motivation pour attirer du public. Par exemple, il offre un apéritif dans le restaurant du chef avec en plus la possibilité d'acheter les ingrédients nécessaires pour réaliser la recette (par exemple, une remise de 10 euros sur un panier d'achat de 100 euros).
 
 La solution est constituée des composants principaux suivants : 
-1. ANALYSE D'INVENTAIRE : les événements en magasin (recettes, liste d'ingrédients et emplacement des produits) sont conçus pour épuiser le stock qui a du mal à s'écouler.  
+1. ANALYSE D'INVENTAIRE : les événements en magasin (recettes, liste d'ingrédients et emplacement des produits) sont conçus pour épuiser le stock qui a du mal à s'écouler. 
 2. APPLICATION MOBILE DU PROGRAMME DE FIDELITE : cette application fournit le marketing ciblé avec des bons de réduction numériques, des listes de courses, les produits en stock (prix et disponibilité) sur une carte du magasin et le partage social.
 3. SOCIAL MEDIA ANALYTICS fournit la personnalisation en détectant les produits préférés des clients en termes de tendances, gastronomie, chefs et ingrédients. Les analyses associent les tendances régionales à l'activité d'une personne sur Twitter, Pinterest et Instagram. 
 4. OUTILS DE DEVELOPPEMENT CONVIVIAUX : ces outils accélèrent le développement de fonctions et la correction d'erreurs.

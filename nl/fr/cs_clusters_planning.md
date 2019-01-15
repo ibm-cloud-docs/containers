@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -53,6 +56,10 @@ Oui, à condition que le cluster se trouve dans l'une des [métropoles à zones 
 **Dois-je utiliser des clusters à zones multiples ?**</br>
 Non. Vous pouvez créer autant de clusters à zone unique que vous le souhaitez. En effet, vous pouvez même préférer des clusters à zone unique pour une gestion simplifiée ou si votre cluster doit résider dans une [ville à zone unique](cs_regions.html#zones).
 
+**Puis-je disposer d'un maître à haute disponibilité dans une zone unique ?**</br>
+Oui, avec les clusters exécutant Kubernetes version 1.10 ou ultérieure. Dans une zone unique, votre maître est hautement disponible et comprend des répliques sur des hôtes physiques distincts pour le serveur d'API Kubernetes, le composant etcd, le planificateur et le gestionnaire de contrôleurs afin de les protéger en cas d'indisponibilité due par exemple à une mise à jour du maître. Pour vous protéger en cas de défaillance d'une zone, vous pouvez :
+* [Créer un cluster dans une zone compatible avec plusieurs zones](cs_clusters_planning.html#multizone), dans laquelle le maître est réparti entre plusieurs zones.
+* [Créer plusieurs clusters](#multiple_clusters) et les connecter avec un équilibreur de charge global.
 
 ## Cluster à zones multiples
 {: #multizone}
@@ -64,7 +71,7 @@ Avec {{site.data.keyword.containerlong}}, vous avez la possibilité de créer de
 Un pool de noeuds worker est une collection de noeuds worker de même type, par exemple type de machine, UC et mémoire. Lorsque vous créez un cluster, un pool de noeuds worker par défaut est automatiquement créé pour vous. Pour répartir les noeuds worker de votre pool entre plusieurs zones, ajouter des noeuds worker dans le pool ou mettre à jour des noeuds worker, vous pouvez utiliser les nouvelles commandes `ibmcloud ks worker-pool`.
 
 **Puis-je continuer à utiliser des noeuds worker autonomes ?**</br>
-L'ancienne configuration de noeuds worker autonomes est prise en charge, mais elle est dépréciée. Veillez à [ajouter un pool de noeuds worker à votre cluster](cs_clusters.html#add_pool), puis [effectuer la migration pour utiliser des pools de noeuds worker](cs_cluster_update.html#standalone_to_workerpool) afin d'organiser vos noeuds worker au lieu d'utiliser des noeuds worker autonomes.
+L'ancienne configuration de noeuds worker autonomes est prise en charge, mais elle est dépréciée. Veillez à [ajouter un pool de noeuds worker à votre cluster](cs_clusters.html#add_pool), puis [utilisez des pools de noeuds worker](cs_cluster_update.html#standalone_to_workerpool) afin d'organiser vos noeuds worker au lieu d'utiliser des noeuds worker autonomes.
 
 **Puis-je convertir mon cluster à zone unique en cluster à zones multiples ?**</br>
 Oui, à condition que le cluster se trouve dans l'une des [métropoles à zones multiples prises en charge](cs_regions.html#zones). Voir [Mise à jour pour passer des noeuds worker autonomes aux pools de noeuds worker](cs_cluster_update.html#standalone_to_workerpool).
@@ -73,8 +80,7 @@ Oui, à condition que le cluster se trouve dans l'une des [métropoles à zones 
 ### Pouvez-vous m'en dire davantage sur la configuration d'un cluster à zones multiples ?
 {: #mz_setup}
 
-<img src="images/cs_cluster_multizone.png" alt="Haute disponibilité pour les clusters à zones multiples" width="500" style="width:500px; border-style: none"/>
-
+<img src="images/cs_cluster_multizone-ha.png" alt="Haute disponibilité pour les clusters à zones multiples" width="500" style="width:500px; border-style: none"/>
 
 Vous pouvez ajouter des zones supplémentaires dans votre cluster pour répliquer les noeuds worker de votre pool de noeuds worker sur plusieurs zones au sein d'une région. Les clusters à zones multiples sont conçus pour planifier de manière uniforme les pods sur les noeuds worker et les zones afin d'assurer la disponibilité et la reprise en cas d'incident. Si les noeuds worker ne sont pas répartis uniformément sur les zones ou si la capacité est insuffisante dans l'une des zones, le planificateur de Kubernetes risque de ne pas parvenir à planifier tous les pods demandés. Par conséquent, les pods peuvent passer à l'état **En attente** jusqu'à ce que la capacité suffisante soit disponible. Si vous souhaitez modifier le comportement par défaut pour que le planificateur de Kubernetes répartisse les pods entre les zones avec une meilleure distribution, utilisez la [règle d'affinité de pods](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
 
@@ -87,10 +93,13 @@ Supposons que vous ayez besoin d'un noeud worker à 6 coeurs pour traiter la cha
 - **Répartir les ressources sur 3 zones :** avec cette option, vous déployez 3 coeurs par zone, ce qui vous laisse une capacité totale de 9 coeurs. Pour gérer votre charge de travail, deux zones doivent être opérationnelles en même temps. Si l'une des zones est indisponible, les deux autres zones peuvent traiter votre charge de travail. Si deux zones sont indisponibles, il reste trois coeurs opérationnels pour traiter votre charge de travail. Le déploiement de 3 coeurs par zone signifie des machines plus petites et donc une réduction de coût pour vous.</br>
 
 **Comment est configuré le maître Kubernetes ?** </br>
-Un cluster à zones multiples est configuré avec un maître Kubernetes mis à disposition dans la même zone métropolitaine que les noeuds worker. Par exemple, si les noeuds worker se trouvent dans une ou plusieurs zones `dal10`, `dal12` ou `dal13`, le maître figure dans la métropole à zones multiples Dallas.
+Un cluster à zones multiples est configuré avec un maître Kubernetes unique ou à haute disponibilité (dans Kubernetes 1.10 ou version ultérieure) mis à disposition dans la même zone métropolitaine que les noeuds worker. De plus, si vous créez un cluster à zones multiples, les maîtres à haute disponibilité sont répartis entre les différentes zones. Par exemple, si le cluster est dans les zones `dal10`, `dal12` ou `dal13`, le maître est réparti dans chaque zone de la métropole à zones multiples Dallas.
 
 **Que se passe-t-il si le maître Kubernetes devient indisponible ?** </br>
-Le [maître Kubernetes](cs_tech.html#architecture) est le composant principal qui permet de garder votre cluster opérationnel. Le maître stocke les ressources du cluster et leurs configurations dans la base de données etcd qui assure le bon fonctionnement de votre cluster. Le serveur d'API Kubernetes correspond au point d'entrée principal pour toutes les demandes de gestion de cluster des noeuds worker au maître, ou lorsque vous souhaitez interagir avec les ressources de votre cluster.<br><br>En cas de défaillance du maître, vos charges de travail continuent à s'exécuter sur les noeuds worker, mais vous ne pouvez pas utiliser des commandes `kubectl` pour gérer les ressources de votre cluster ou afficher l'état de santé du cluster tant que le serveur d'API Kubernetes dans le maître n'est pas opérationnel. Si un pod tombe en panne lors d'une indisponibilité du maître, le pod ne peut pas être replanifié tant que le noeud worker n'a pas rétabli le contact avec le serveur d'API Kubernetes.<br><br>Lors d'une indisponibilité du maître, vous pouvez toujours exécuter des commandes `ibmcloud ks` pour l'API {{site.data.keyword.containerlong_notm}} pour gérer vos ressources d'infrastructure, telles que les noeuds worker ou les réseaux locaux virtuels (VLAN). Si vous modifiez la configuration actuelle du cluster en ajoutant ou en retirant des noeuds worker dans le cluster, vos modifications ne sont pas appliquées tant que le maître n'est pas opérationnel. **Remarque** : veillez à ne pas redémarrer ou réamorcer un noeud worker pendant la durée d'indisponibilité du maître. Cette action retire les pods de votre noeud worker. Comme le serveur d'API Kubernetes n'est pas disponible, les pods ne peuvent pas être replanifiés sur d'autres noeuds worker dans le cluster.
+Le [maître Kubernetes](cs_tech.html#architecture) est le composant principal qui permet de garder votre cluster opérationnel. Le maître stocke les ressources du cluster et leurs configurations dans la base de données etcd qui assure le bon fonctionnement de votre cluster. Le serveur d'API Kubernetes correspond au point d'entrée principal pour toutes les demandes de gestion de cluster des noeuds worker au maître, ou lorsque vous souhaitez interagir avec les ressources de votre cluster.<br><br>En cas de défaillance du maître, vos charges de travail continuent à s'exécuter sur les noeuds worker, mais vous ne pouvez pas utiliser des commandes `kubectl` pour gérer les ressources de votre cluster ou afficher l'état de santé du cluster tant que le serveur d'API Kubernetes dans le maître n'est pas opérationnel. Si un pod tombe en panne lors d'une indisponibilité du maître, le pod ne peut pas être replanifié tant que le noeud worker n'a pas rétabli le contact avec le serveur d'API Kubernetes.<br><br>Lors d'une indisponibilité du maître, vous pouvez toujours exécuter des commandes `ibmcloud ks` pour l'API {{site.data.keyword.containerlong_notm}} pour gérer vos ressources d'infrastructure, telles que les noeuds worker ou les réseaux locaux virtuels (VLAN). Si vous modifiez la configuration actuelle du cluster en ajoutant ou en retirant des noeuds worker dans le cluster, vos modifications ne sont pas appliquées tant que le maître n'est pas opérationnel.
+
+Ne pas redémarrer ou réamorcer un noeud worker pendant la durée d'indisponibilité du maître. Cette action retire les pods de votre noeud worker. Comme le serveur d'API Kubernetes n'est pas disponible, les pods ne peuvent pas être replanifiés sur d'autres noeuds worker dans le cluster.
+{: important}
 
 
 Pour protéger votre cluster en cas de défaillance du maître ou dans les régions où les clusters à zones multiples ne sont pas disponibles, vous pouvez [configurer plusieurs clusters et les connecter avec un équilibreur de charge global](#multiple_clusters).
@@ -115,7 +124,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 ```
 {: pre}
 
-**J'ai créé mon cluster à zones multiples. Pourquoi n'y a-t-il qu'une seule zone ? Comment ajouter ds zones à mon cluster ?**</br>
+**J'ai créé mon cluster à zones multiples. Pourquoi n'y a-t-il qu'une seule zone ? Comment ajouter des zones à mon cluster ?**</br>
 Si vous [créez votre cluster à zones multiples à l'aide de l'interface de ligne de commande](cs_clusters.html#clusters_cli), le cluster est créé, mais vous devez ajouter des zones au pool de noeuds worker pour finaliser le processus. Pour couvrir plusieurs zones, votre cluster doit figurer dans une [métropole à plusieurs zones](cs_regions.html#zones). Pour ajouter une zone à votre cluster et répartir les noeuds worker sur différentes zones, voir [Ajouter une zone dans votre cluster](cs_clusters.html#add_zone).
 
 ### Quels sont les changements par rapport à la façon dont je gère mes clusters actuellement ?
@@ -134,7 +143,7 @@ Le tableau suivant compare l'ancienne et la nouvelle méthode pour quelques acti
   <tbody>
     <tr>
     <td>Ajout de noeuds worker dans le cluster.</td>
-    <td><strong>Déprécié</strong> : commande <code>ibmcloud ks worker-add</code> pour ajouter des noeuds worker autonomes.</td>
+    <td><p class="deprecated"><code>ibmcloud ks worker-add</code> pour ajouter des noeuds worker autonomes.</p></td>
     <td><ul><li>Pour ajouter différents types de machine que votre pool existant, créez un nouveau pool de noeuds worker : [commande](cs_cli_reference.html#cs_worker_pool_create) <code>ibmcloud ks worker-pool-create</code>.</li>
     <li>Pour ajouter des noeuds worker à un pool existant, redimensionnez le nombre de noeuds par zone dans le pool : [commande](cs_cli_reference.html#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
     </tr>
@@ -146,7 +155,7 @@ Le tableau suivant compare l'ancienne et la nouvelle méthode pour quelques acti
     </tr>
     <tr>
     <td>Utilisation d'un nouveau VLAN pour les noeuds worker.</td>
-    <td><strong>Déprécié</strong> : ajoutez un nouveau noeud worker utilisant le nouveau VLAN privé ou public : <code>ibmcloud ks worker-add</code>.</td>
+    <td><p class="deprecated">Ajoutez un nouveau noeud worker utilisant le nouveau VLAN privé ou public : <code>ibmcloud ks worker-add</code>.</p></td>
     <td>Définissez le pool de noeuds worker pour l'utilisation d'un autre VLAN public ou privé que celui qui était utilisé auparavant : [commande](cs_cli_reference.html#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</td>
     </tr>
   </tbody>
@@ -166,13 +175,13 @@ Pour équilibrer votre charge de travail sur plusieurs clusters, vous devez conf
 De la même manière que vous utilisez [3 zones dans un cluster à zones multiples](#multizone), vous pouvez apporter une disponibilité accrue à votre application en configurant 3 clusters sur différentes zones. Vous pouvez également réduire les coûts en achetant des machines plus petites pour traiter votre charge de travail.
 
 **Et si je veux configurer plusieurs clusters dans différentes régions ?** </br>
-Vous pouvez configurer plusieurs clusters dans différentes régions d'une géolocalisation (par exemple Sud des Etats-Unis et Est des Etats-Unis) ou entre plusieurs géolocalisations (par exemple Sud des Etats-Unis et Europe centrale). Ces deux types de configuration offrent le même niveau de disponibilité pour votre application, mais ajoute également une certaine complexité quand il s'agit de partage et de réplication de données. Dans la plupart des cas, rester dans la même géolocalisation est largement suffisant. Mais si vos utilisateurs sont répartis à travers le monde, il vaut mieux configurer un cluster là où se trouvent vos utilisateurs, pour qu'ils ne soient pas confrontés à de longs délais d'attente lorsqu'ils envoient une demande à votre application.
+Vous pouvez configurer plusieurs clusters dans différentes régions d'une géolocalisation (par exemple Sud des Etats-Unis et Est des Etats-Unis) ou entre plusieurs géolocalisations (par exemple Sud des Etats-Unis et Europe centrale). Ces deux types de configuration offrent le même niveau de disponibilité pour votre application, mais ajoutent également une certaine complexité quand il s'agit de partage et de réplication de données. Dans la plupart des cas, rester dans la même géolocalisation est largement suffisant. Mais si vos utilisateurs sont répartis à travers le monde, il vaut mieux configurer un cluster là où se trouvent vos utilisateurs, pour qu'ils ne soient pas confrontés à de longs délais d'attente lorsqu'ils envoient une demande à votre application.
 
 **Pour configurer un équilibreur de charge global pour plusieurs clusters :**
 
 1. [Créez des clusters](cs_clusters.html#clusters) dans plusieurs zones ou régions.
 2. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Avec {{site.data.keyword.BluDirectLink}}, vous devez utiliser à la place une [fonction VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Pour activer la fonction VRF, contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer).
-3. Dans chaque cluster, exposez vos applications en utilisant un [équilibreur de charge d'application (ALB)](cs_ingress.html#ingress_expose_public) ou un [service d'équilibreur de charge](cs_loadbalancer.html#config).
+3. Dans chaque cluster, exposez vos applications en utilisant un [équilibreur de charge d'application (ALB)](cs_ingress.html#ingress_expose_public) ou un [service d'équilibreur de charge](cs_loadbalancer.html).
 4. Pour chaque cluster, répertoriez les adresses IP publiques pour vos équilibreurs de charge d'application et vos services d'équilibreur de charge.
    - Pour répertorier l'adresse IP de tous les équilibreurs de charge d'application publics présents dans votre cluster :
      ```
@@ -210,7 +219,9 @@ Par défaut, {{site.data.keyword.containerlong_notm}} configure votre cluster av
 Si vous souhaitez verrouiller votre cluster pour autoriser le trafic privé sur le VLAN privé et bloquer le trafic public sur le VLAN public, vous pouvez [protéger votre cluster de l'accès public avec des règles réseau Calico](cs_network_cluster.html#both_vlans_private_services). Ces règles réseau Calico n'empêchent pas vos noeuds worker de communiquer avec le maître. Vous pouvez également limiter la surface de vulnérabilité dans votre cluster sans bloquer le trafic public en [isolant les charges de travail réseau dans des noeuds worker de périphérie](cs_edge.html).
 
 Si vous envisagez de créer un cluster qui n'a accès qu'à un VLAN privé, vous pouvez créer un cluster privé à une ou plusieurs zones. Cependant, lorsque vos noeuds worker sont connectés uniquement à un VLAN privé, ils ne peuvent pas se connecter automatiquement au maître. Vous devez configurer un dispositif de passerelle pour assurer la connectivité du réseau entre les noeuds worker et le maître.
-**Remarque** : vous ne pouvez pas convertir un cluster connecté à un VLAN public et à un VLAN privé pour en faire un cluster strictement privé. Le retrait de tous les VLAN publics d'un cluster peut provoquer l'arrêt de plusieurs composants du cluster. Vous devez créer un cluster à l'aide de la procédure suivante.
+
+Vous ne pouvez pas convertir un cluster connecté à un VLAN public et à un VLAN privé pour en faire un cluster strictement privé. Le retrait de tous les VLAN publics d'un cluster peut provoquer l'arrêt de plusieurs composants du cluster. Vous devez créer un cluster à l'aide de la procédure suivante.
+{: note}
 
 Si vous souhaitez créer un cluster n'ayant accès qu'à un VLAN privé :
 
@@ -240,7 +251,7 @@ Lorsque vous créez un cluster standard dans {{site.data.keyword.Bluemix_notm}},
 
 ![Options du matériel pour les noeuds worker dans un cluster standard](images/cs_clusters_hardware.png)
 
-Si vous disposez de plusieurs versions de noeud worker, vous devez créer un pool de noeuds worker pour chaque version. Lorsque vous créez un cluster gratuit, votre noeud worker est automatiquement mis à disposition sous forme de noeud partagé virtuel dans le compte d'infrastructure IBM Cloud (SoftLayer). Lors de la planification, envisagez un [seuil minimal limite de noeuds worker](#resource_limit_node) équivalent à 10 % de la capacité mémoire totale.
+Si vous disposez de plusieurs versions de noeud worker, vous devez créer un pool de noeuds worker pour chaque version. Lorsque vous créez un cluster gratuit, votre noeud worker est automatiquement mis à disposition sous forme de noeud partagé virtuel dans le compte d'infrastructure IBM Cloud (SoftLayer). Dans les clusters standard, vous pouvez choisir le type de machine le mieux adapté à votre charge de travail. Lors de la planification, tenez compte des [réserves de ressources de noeud worker](#resource_limit_node) sur la capacité totale de mémoire et d'UC.
 
 Vous pouvez déployer des clusters en utilisant l'[interface utilisateur de la console](cs_clusters.html#clusters_ui) ou l'[interface CLI](cs_clusters.html#clusters_cli).
 
@@ -261,7 +272,7 @@ Lorsque vous créez un cluster virtuel standard, vous devez décider si vous sou
 * **Dans une configuration de matériel partagé à service partagé** : les ressources physiques (comme l'UC et la mémoire) sont partagées par toutes les machines virtuelles déployées sur le même matériel physique. Pour permettre à chaque machine virtuelle d'opérer indépendamment, un moniteur de machine virtuelle, également dénommé hyperviseur, segmente les ressources physiques en entités isolées et les alloue à une machine virtuelle en tant que ressources dédiées (isolement par hyperviseur).
 * **Dans une configuration de matériel dédié à service exclusif** : toutes les ressources physiques vous sont exclusivement dédiées. Vous pouvez déployer plusieurs noeuds worker en tant que machines virtuelles sur le même hôte physique. A l'instar de la configuration à service partagé, l'hyperviseur veille à ce que chaque noeud worker ait sa part des ressources physiques disponibles.
 
-Les noeuds partagés sont généralement moins coûteux que les noeuds dédiés, car les coûts du matériel sous-jacent sont partagés entre plusieurs clients. Toutefois, lorsque vous choisissez entre noeuds partagés et noeud dédiés, vous devriez contacter votre service juridique pour déterminer le niveau d'isolement de l'infrastructure et de conformité requis par votre environnement d'application.
+Les noeuds partagés sont généralement moins coûteux que les noeuds dédiés, car les coûts du matériel sous-jacent sont partagés entre plusieurs clients. Toutefois, lorsque vous choisissez entre noeuds partagés et noeud dédiés, n'hésitez pas à contacter votre service juridique pour déterminer le niveau d'isolement de l'infrastructure et de conformité requis par votre environnement d'application.
 
 **Quelles sont les fonctions générales des machines virtuelles ?**</br>
 Les machines virtuelles utilisent le disque local à la place d'un réseau SAN (Storage Area Network) pour plus de fiabilité. Un réseau SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Toutes les machines virtuelles sont fournies avec une vitesse réseau de 1000 Mbit/s, un stockage sur disque local principal de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local secondaire pour les données d'exécution de conteneur ou le `kubelet`. Le stockage local sur le noeud worker est conçu pour un traitement à court terme uniquement et le disque principal et le disque secondaire sont effacés lorsque vous mettez à jour ou rechargez le noeud worker. Pour les solutions de stockage persistant, voir [Planification de stockage persistant à haute disponibilité](cs_storage_planning.html#storage_planning).
@@ -345,12 +356,13 @@ Vous pouvez mettre à disposition votre noeud worker sous forme de serveur physi
 Le type bare metal vous permet d'accéder directement aux ressources physiques sur la machine, par exemple à la mémoire ou à l'UC. Cette configuration élimine l'hyperviseur de machine virtuelle qui alloue des ressources physiques aux machines virtuelles qui s'exécutent sur l'hôte. A la place, toutes les ressources d'une machine bare metal sont dédiées exclusivement au noeud worker, donc vous n'avez pas à vous soucier de "voisins gênants" partageant des ressources et responsables du ralentissement des performances. Les types de machine physique ont davantage de capacité de stockage local par rapport aux machines virtuelles et certaines disposent de disques RAID pour augmenter la disponibilité des données. Le stockage local sur le noeud worker est conçu pour un traitement à court terme uniquement et le disque principal et le disque secondaire sont effacés lorsque vous mettez à jour ou rechargez le noeud worker. Pour les solutions de stockage persistant, voir [Planification de stockage persistant à haute disponibilité](cs_storage_planning.html#storage_planning).
 
 **Hormis de meilleures spécifications en termes de performances, puis-je faire quelque chose avec une machine bare metal qui ne soit pas possible avec une machine virtuelle ?**</br>
-Oui. Avec une machine bare metal, vous avez la possibilité d'activer la fonction Calcul sécurisé (Trusted Compute) pour vérifier que vos noeuds worker ne font pas l'objet de falsification. Si vous n'activez pas cette fonction lors de la création du cluster mais souhaitez le faire ultérieurement, vous pouvez utiliser la [commande](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Après avoir activé cette fonction, vous ne pourrez plus la désactiver par la suite. Vous pouvez créer un nouveau cluster sans la fonction trust. Pour plus d'informations sur le mode de fonctionnement de la fonction de confiance (trust) lors du processus de démarrage du noeud, voir [{{site.data.keyword.containerlong_notm}} avec calcul sécurisé](cs_secure.html#trusted_compute). La fonction de calcul sécurisé est activée sur les clusters qui exécutent Kubernetes version 1.9 ou ultérieure et qui ont certains types de machine bare metal. Lorsque vous exécutez la [commande](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types <zone>`, vous pouvez voir les machines qui prennent en charge la fonction de confiance en examinant la zone **Trustable**. Par exemple, les versions GPU `mgXc` ne prennent pas en charge la fonction de calcul sécurisé.
+Oui. Avec une machine bare metal, vous avez la possibilité d'activer la fonction Calcul sécurisé (Trusted Compute) pour vérifier que vos noeuds worker ne font pas l'objet de falsification. Si vous n'activez pas cette fonction lors de la création du cluster mais souhaitez le faire ultérieurement, vous pouvez utiliser la [commande](cs_cli_reference.html#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Après avoir activé cette fonction, vous ne pourrez plus la désactiver par la suite. Vous pouvez créer un nouveau cluster sans la fonction trust. Pour plus d'informations sur le mode de fonctionnement de la fonction de confiance (trust) lors du processus de démarrage du noeud, voir [{{site.data.keyword.containerlong_notm}} avec calcul sécurisé](cs_secure.html#trusted_compute). La fonction de calcul sécurisé (Trusted Compute) est disponible pour certains types de machine bare metal. Lorsque vous exécutez la [commande](cs_cli_reference.html#cs_machine_types) `ibmcloud ks machine-types <zone>`, vous pouvez voir les machines qui prennent en charge la fonction de confiance en examinant la zone **Trustable**. Par exemple, les versions GPU `mgXc` ne prennent pas en charge la fonction de calcul sécurisé.
 
 **Bare metal, ça a l'air génial ! Qu'est-ce qui m'empêche de commander une machine de ce type dès maintenant ?**</br>
 Les serveurs bare metal sont plus chers que les serveurs virtuels et conviennent mieux aux applications à hautes performances qui nécessitent plus de ressources et de contrôle hôte.
 
-**Important** : les serveurs bare metal sont facturés au mois. Si vous annulez un serveur bare metal avant la fin du mois, vous êtes facturé jusqu'à la fin de ce mois. La commande et l'annulation de serveurs bare metal est un processus manuel qui s'effectue via votre compte d'infrastructure IBM Cloud (SoftLayer). Ce processus peut prendre plus d'un jour ouvrable.
+Les serveurs bare metal sont facturés au mois. Si vous annulez un serveur bare metal avant la fin du mois, vous êtes facturé jusqu'à la fin de ce mois. La commande et l'annulation de serveurs bare metal est un processus manuel qui s'effectue via votre compte d'infrastructure IBM Cloud (SoftLayer). Ce processus peut prendre plus d'un jour ouvrable.
+{: important}
 
 **Quelles versions bare metal puis-je commander ?**</br>
 Les types de machine varient en fonction de la zone. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Vous pouvez également passer en revue les types de machine [VM](#vm) ou [SDS](#sds).
@@ -428,9 +440,9 @@ Les versions SDS (Software-Defined Storage) sont des machines physiques mises à
 
 **Quand utiliser des versions SDS ?**</br>
 En général, vous utilisez les machines SDS dans les cas suivants :
-*  Si vous utilisez un module complémentaire SDS dans le cluster, vous devez utiliser une machine SDS.
+*  Si vous utilisez un module complémentaire SDS dans le cluster, utilisez une machine SDS.
 *  Si votre application est un objet [StatefulSet ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) qui nécessite un stockage local, vous pouvez utiliser des machines SDS et mettre à disposition des [volumes persistants locaux Kubernetes (bêta) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
-*  Vous pouvez disposer d'applications personnalisées ou de modules complémentaires de cluster qui nécessitent SDS ou du stockage local. Par exemple, si vous envisagez d'utiliser logDNA, vous devez utiliser un type de machine SDS.
+*  Vous disposez peut-être d'applications personnalisées qui nécessitent du stockage local brut supplémentaire.
 
 Pour d'autres solutions de stockage, voir [Planification de stockage persistant à haute disponibilité](cs_storage_planning.html#storage_planning).
 
@@ -486,17 +498,106 @@ Choisissez un type de machine avec la configuration de stockage adaptée à votr
 </tbody>
 </table>
 
-## Limite de mémoire des noeuds worker
+## Réserves de ressources de noeud worker
 {: #resource_limit_node}
 
-{{site.data.keyword.containerlong_notm}} définit une limite de mémoire sur chaque noeud worker. Lorsque des pods qui s'exécutent sur le noeud worker dépassent cette limite de mémoire, ils sont supprimés. Dans Kubernetes, cette limite est appelée [seuil d’éviction immédiate![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
+{{site.data.keyword.containerlong_notm}} définit des réserves de ressources de calcul qui limitent les ressources de calcul disponibles sur chaque noeud worker. Les ressources de mémoire et d'UC réservées ne peuvent pas être utilisées par des pods sur le noeud worker et réduisent les ressources pouvant être allouées sur chaque noeud worker. Lorsque vous commencez à déployer des pods, si le noeud worker ne dispose pas de ressources suffisantes pouvant être allouées, le déploiement échoue. De plus, si les pods dépassent la limite de ressources du noeud worker, les pods sont expulsés. Dans Kubernetes, cette limite est appelée [seuil d’éviction immédiate![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
 {:shortdesc}
 
-Si vos pods sont fréquemment supprimés, ajoutez des noeuds worker à votre cluster ou définissez des [limites de ressource![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) sur vos pods.
+S'il y a moins d'UC ou de mémoire disponible que les réserves de noeud worker, Kubernetes commence à expulser les pods pour restaurer suffisamment de ressources de calcul. Les pods sont replanifiés sur un autre noeud worker, le cas échéant. Si vos pods sont expulsés fréquemment, ajoutez d'autres noeuds worker à votre cluster ou définissez des [limites de ressources ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) sur vos pods.
 
-**Chaque machine comporte un seuil minimal équivalent à 10 % de sa capacité mémoire totale**. Lorsque la quantité de mémoire disponible sur le noeud worker est inférieure au seuil minimal autorisé, Kubernetes retire immédiatement le pod. Le pod est replanifié sur un autre noeud worker disponible. Par exemple si vous disposez d'une machine virtuelle `b2c.4x16`, sa capacité mémoire totale est de 16 Go. Si la mémoire disponible est inférieure à 1600 Mo (10%), il est impossible de planifier de nouveaux pods sur ce noeud worker et ils sont alors replanifiés sur un autre noeud. S'il n'y a pas d'autre noeud worker disponible, les nouveaux pods restent non planifiés.
+Les ressources réservées sur votre noeud worker dépendent de la quantité d'UC et de mémoire fournie avec votre noeud worker. {{site.data.keyword.containerlong_notm}} définit différents niveaux de mémoire et d'UC, comme indiqué dans les tableaux suivants. Si votre noeud worker est fourni avec des ressources de calcul à plusieurs niveaux, un pourcentage de vos ressources d'UC et de mémoire est réservé pour chaque niveau.
 
-Pour vérifier la quantité de mémoire utilisée sur un noeud worker, exécutez [`kubectl top node ` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
+Pour passer en revue la quantité de ressources de calcul actuellement utilisée sur votre noeud worker, exécutez la commande [`kubectl top node` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
+{: tip}
+
+<table summary="Réserves de mémoire de noeud worker par niveau.">
+<caption>Réserves de mémoire de noeud worker par niveau.</caption>
+<thead>
+<tr>
+  <th>Niveau mémoire</th>
+  <th>% ou quantité réservés</th>
+  <th>Exemple pour un noeud worker `b2c.4x16` (16 Go)</th>
+  <th>Exemple pour un noeud worker `mg1c.28x256` (256 Go)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>16 premiers Go (0 à 16 Go)</td>
+  <td>10 % de mémoire</td>
+  <td>1,6 Go</td>
+  <td>1,6 Go</td>
+</tr>
+<tr>
+  <td>112 Go suivants (17 à 128 Go)</td>
+  <td>6 % de mémoire</td>
+  <td>N/A</td>
+  <td>6,72 Go</td>
+</tr>
+<tr>
+  <td>Go restants (129 Go et +)</td>
+  <td>2 % de mémoire</td>
+  <td>N/A</td>
+  <td>2,54 Go</td>
+</tr>
+<tr>
+  <td>Réserve supplémentaire pour les règles d'[éviction avec `kubelet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
+  <td>100 Mo</td>
+  <td>100 Mo (montant fixe)</td>
+  <td>100 Mo (montant fixe)</td>
+</tr>
+<tr>
+  <td>**Total réservé**</td>
+  <td>**(variable)**</td>
+  <td>**1,7 Go sur un total de 16 Go**</td>
+  <td>**10,96 Go sur un total de 256 Go**</td>
+</tr>
+</tbody>
+</table>
+
+<table summary="Réserves d'UC de noeud worker par niveau.">
+<caption>Réserves d'UC de noeud worker par niveau.</caption>
+<thead>
+<tr>
+  <th>Niveau UC</th>
+  <th>% réservé</th>
+  <th>Exemple pour un noeud worker `b2c.4x16` (4 coeurs)</th>
+  <th>Exemple pour un noeud worker `mg1c.28x256` (28 coeurs)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Premier coeur (Coeur 1)</td>
+  <td>6 % des coeurs</td>
+  <td>0,06 coeur</td>
+  <td>0,06 coeur</td>
+</tr>
+<tr>
+  <td>2 coeurs suivants (coeurs 2 et 3)</td>
+  <td>1 % des coeurs</td>
+  <td>0,02 coeur</td>
+  <td>0,02 coeur</td>
+</tr>
+<tr>
+  <td>2 coeurs suivants (coeurs 4 et 5)</td>
+  <td>0,5 % des coeurs</td>
+  <td>0,005 coeur</td>
+  <td>0,01 coeur</td>
+</tr>
+<tr>
+  <td>Coeurs restants (6 coeurs et +)</td>
+  <td>0,25 % des coeurs</td>
+  <td>N/A</td>
+  <td>0,0575 coeur</td>
+</tr>
+<tr>
+  <td>**Total réservé**</td>
+  <td>**(variable)**</td>
+  <td>**0,085 coeur sur un total de 4 coeurs**</td>
+  <td>**0,1475 coeur sur un total de 28 coeurs**</td>
+</tr>
+</tbody>
+</table>
 
 ## Reprise automatique pour vos noeuds worker
 {: #autorecovery}

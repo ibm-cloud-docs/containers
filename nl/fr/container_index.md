@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,15 +50,15 @@ Qu'est-ce qu'un cluster ? Un cluster est un ensemble de ressources, de noeuds wo
 **Avant de commencer**
 
 Obtenez le type de [compte {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) qui vous convient :
-* **Paiement à la carte ou Abonnement** : vous pouvez créer un cluster d'essai gratuit. Vous pouvez également mettre à disposition des ressources d'infrastructure IBM Cloud (SoftLayer) pour les créer et les utiliser dans des clusters standard.
-* **Lite** : vous ne pouvez pas créer de cluster gratuit ou standard. [Effectuez une mise à niveau de votre compte](/docs/account/account_faq.html#changeacct) pour passer à un compte Paiement à la carte ou Abonnement.
+* **Facturable (Paiement à la carte ou Abonnement)** : vous pouvez créer un cluster d'essai gratuit. Vous pouvez également mettre à disposition des ressources d'infrastructure IBM Cloud (SoftLayer) pour les créer et les utiliser dans des clusters standard.
+* **Lite** : vous ne pouvez pas créer de cluster gratuit ou standard. [Effectuez la mise à niveau de votre compte](/docs/account/account_faq.html#changeacct) pour passer à un compte facturable.
 * **Essai (à des fins d'apprentissage)** : vous pouvez créer un cluster gratuit que vous pourrez utiliser pendant 30 jours pour vous familiariser avec le service.
 
 Pour créer un cluster gratuit :
 
-1.  Dans le [**catalogue** {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/catalog/?category=containers), sélectionnez **{{site.data.keyword.containerlong_notm}}** et cliquez sur **Créer**. La page de configuration du cluster s'ouvre. Par défaut, l'option **Cluster gratuit** est sélectionnée.
+1.  Dans le [**catalogue** {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/catalog/?category=containers), sélectionnez **{{site.data.keyword.containershort_notm}}** et cliquez sur **Créer**. La page de configuration du cluster s'ouvre. Par défaut, l'option **Cluster gratuit** est sélectionnée.
 
-2. Attribuez un nom unique à votre cluster.
+2.  Attribuez un nom unique à votre cluster.
 
 3.  Cliquez sur **Créer un cluster**. Un pool de noeuds worker contenant 1 noeud worker est créé. La mise à disposition du noeud worker peut prendre quelques minutes, et vous pouvez suivre la progression dans l'onglet **Noeuds worker**. Lorsque le statut passe à `Ready` vous pouvez commencer à travailler avec votre cluster.
 

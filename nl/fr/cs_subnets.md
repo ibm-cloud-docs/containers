@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -36,13 +39,14 @@ Lorsque vous créez un cluster, les noeuds worker du cluster sont connectés aut
 <dt>VLAN pour clusters gratuits</dt>
 <dd>Dans les clusters gratuits, les noeuds worker du cluster sont connectés par défaut à un réseau virtuel public et à un réseau privé virtuel dont IBM est le propriétaire. IBM contrôlant les VLAN, les sous-réseaux et les adresses IP, vous ne pouvez pas créer des clusters à zones multiples ni ajouter des sous-réseaux à votre cluster, et vous ne pouvez utiliser que des services NodePort pour exposer votre application.</dd>
 <dt>VLAN pour clusters standard</dt>
-<dd>Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud (SoftLayer). Pour tous les autres clusters que vous créez dans cette zone, vous pouvez réutiliser ces VLAN public et privé car les clusters à zones multiples peuvent partager des réseaux locaux virtuels.</br></br>Vous pouvez connecter vos noeuds worker à la fois à un VLAN public et au VLAN privé, ou seulement au VLAN privé. Si vous désirez connecter vos noeuds worker uniquement à un VLAN privé, vous pouvez utiliser l'ID d'un VLAN existant ou [créer un VLAN privé](/docs/cli/reference/ibmcloud/cli_vlan.html#ibmcloud-sl-vlan-create) et utiliser l'ID lors de la création du cluster.</dd></dl>
+<dd>Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud (SoftLayer). Pour tous les autres clusters que vous créez dans cette zone, vous devez spécifier la paire de VLAN que vous souhaitez utiliser dans cette zone. Vous pouvez réutiliser le même VLAN public et le même VLAN privé que vous avez créés pour vous car les VLAN peuvent être partagés par plusieurs clusters.</br></br>Vous pouvez connecter vos noeuds worker à la fois à un VLAN public et au VLAN privé, ou seulement au VLAN privé. Si vous désirez connecter vos noeuds worker uniquement à un VLAN privé, vous pouvez utiliser l'ID d'un VLAN existant ou [créer un VLAN privé](/docs/cli/reference/ibmcloud/cli_vlan.html#ibmcloud-sl-vlan-create) et utiliser l'ID lors de la création du cluster.</dd></dl>
 
 Pour voir les VLAN mis à disposition dans chaque zone pour votre compte, exécutez la commande `ibmcloud ks vlans <zone>.` Pour voir les VLAN sur lesquels un cluster est mis à disposition, exécutez la commande `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources` et recherchez la section **Subnet VLANs**.
 
-**Remarque **:
-* Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Avec {{site.data.keyword.BluDirectLink}}, vous devez utiliser à la place une [fonction VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Pour activer la fonction VRF, contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer).
-* L'infrastructure IBM Cloud (SoftLayer) gère les VLAN qui sont mis à disposition automatiquement lorsque vous créez votre premier cluster dans une zone. Si vous laissez un VLAN inactif, par exemple en supprimant tous les noeuds worker qui s'y trouvent, l'infrastructure IBM Cloud (SoftLayer) récupère ce VLAN. Par la suite, si vous avez besoin d'un nouveau VLAN, [contactez le support d'{{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#order-vlans).
+L'infrastructure IBM Cloud (SoftLayer) gère les VLAN qui sont mis à disposition automatiquement lorsque vous créez votre premier cluster dans une zone. Si vous laissez un VLAN inactif, par exemple en supprimant tous les noeuds worker qui s'y trouvent, l'infrastructure IBM Cloud (SoftLayer) récupère ce VLAN. Par la suite, si vous avez besoin d'un nouveau VLAN, [contactez le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans).
+
+Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Avec {{site.data.keyword.BluDirectLink}}, vous devez utiliser à la place une [fonction VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Pour activer la fonction VRF, contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer).
+{: important}
 
 ### Sous-réseaux et adresses IP
 {: #subnets_ips}
@@ -61,7 +65,8 @@ Les sous-réseaux suivants sont automatiquement mis à disposition sur les VLAN 
 
 Pour voir tous les sous-réseaux mis à disposition dans votre compte, exécutez la commande `ibmcloud ks subnets`. Pour voir les sous-réseaux portables publics et privés liés à un cluster, vous pouvez exécuter la commande `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources` et recherchez la section **Subnet VLANs**.
 
-**Remarque** : dans {{site.data.keyword.containerlong_notm}}, les VLAN sont limités à 40 sous-réseaux. Si vous atteignez cette limite, vérifiez d'abord si vous pouvez [réutiliser des sous-réseaux du VLAN pour créer d'autres clusters](#custom). Si vous avez besoin d'un nouveau VLAN, commandez-en un en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#order-vlans). Ensuite, [créez un cluster](cs_cli_reference.html#cs_cluster_create) qui utilise ce nouveau VLAN.
+Dans {{site.data.keyword.containerlong_notm}}, les VLAN sont limités à 40 sous-réseaux. Si vous atteignez cette limite, vérifiez d'abord si vous pouvez [réutiliser des sous-réseaux du VLAN pour créer d'autres clusters](#custom). Si vous avez besoin d'un nouveau VLAN, commandez-en un en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans). Ensuite, [créez un cluster](cs_cli_reference.html#cs_cluster_create) qui utilise ce nouveau VLAN.
+{: note}
 
 <br />
 
@@ -74,7 +79,8 @@ Lorsque vous créez un cluster standard, des sous-réseaux sont automatiquement 
 
 Utilisez cette option pour conserver des adresses IP statiques stables lors de création ou de suppression de clusters ou pour commander des blocs d'adresses IP plus importants.
 
-**Remarque :** les adresses IP publiques portables sont facturées au mois. Si vous retirez des adresses IP publiques portables après la mise en place de votre cluster, vous devez quand même payer les frais mensuels, même si vous ne les avez utilisées que brièvement.
+Les adresses IP publiques portables sont facturées au mois. Si vous retirez des adresses IP publiques portables après la mise en place de votre cluster, vous devez quand même payer les frais mensuels, même si vous ne les avez utilisées que brièvement.
+{: note}
 
 Avant de commencer :
 - [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
@@ -113,7 +119,7 @@ Pour utiliser un sous-réseau existant dans votre portefeuille d'infrastructure 
     Si vous avez oublié dans quelle zone se trouve le VLAN pour l'indicateur `--zone`, vous pouvez vérifier s'il figure dans une zone particulière en exécutant la commande `ibmcloud ks vlans <zone>`.
     {: tip}
 
-3.  Vérifiez que le cluster a été créé. **Remarque :** la commande des machines de noeud worker et la configuration et la mise à disposition du cluster dans votre compte peuvent prendre jusqu'à 15 minutes.
+3.  Vérifiez que le cluster a été créé. La commande des machines de noeud worker et la configuration et la mise à disposition du cluster dans votre compte peuvent prendre jusqu'à 15 minutes.
 
     ```
     ibmcloud ks clusters
@@ -123,8 +129,8 @@ Pour utiliser un sous-réseau existant dans votre portefeuille d'infrastructure 
     Lorsque la mise à disposition de votre cluster est terminée, la valeur de **State** passe à `deployed`.
 
     ```
-    Name         ID                                   State      Created          Workers   Zone   Version
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.10.8
+    Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.10.11      Default
     ```
     {: screen}
 
@@ -139,7 +145,7 @@ Pour utiliser un sous-réseau existant dans votre portefeuille d'infrastructure 
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.8
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.11
     ```
     {: screen}
 
@@ -211,7 +217,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
     ```
     {: pre}
 
-    **Remarque :** la création de ce service échoue car le maître Kubernetes ne parvient pas à localiser l'adresse IP de l'équilibreur de charge spécifié dans le fichier configmap Kubernetes. Lorsque vous exécutez cette commande, le message d'erreur s'affiche, ainsi que la liste des adresses IP publiques disponibles pour le cluster.
+    La création de ce service échoue car le maître Kubernetes ne parvient pas à localiser l'adresse IP de l'équilibreur de charge spécifié dans le fichier configmap Kubernetes. Lorsque vous exécutez cette commande, le message d'erreur s'affiche, ainsi que la liste des adresses IP publiques disponibles pour le cluster.
 
     ```
     Erreur sur l'équilibreur de charge cloud a8bfa26552e8511e7bee4324285f6a4a pour le service default/myservice portant l'UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: L'adresse IP 1.1.1.1 du fournisseur cloud demandée n'est pas disponible. Les adresses IP suivantes de fournisseur cloud sont disponibles : <list_of_IP_addresses>
@@ -251,9 +257,11 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 
 Par défaut, 4 adresses IP publiques portables et 4 adresses IP privées portables peuvent être utilisées pour exposer des applications individuelles sur le réseau public ou privé en [créant un service d'équilibreur de charge](cs_loadbalancer.html). Pour créer plus de 4 équilibreurs de charge publics ou 4 équilibreurs de charge privés, vous pouvez obtenir des adresses IP supplémentaires en ajoutant des sous-réseaux au cluster.
 
-**Remarque :**
-* Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin d'utiliser un sous-réseau avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containerlong_notm}}.
-* Les adresses IP publiques portables sont facturées au mois. Si vous retirez des adresses IP publiques portables après la mise à disposition de votre sous-réseau, vous devez quand même payer les frais mensuels, même si vous ne les avez utilisées que brièvement.
+Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin d'utiliser un sous-réseau avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containerlong_notm}}.
+{: important}
+
+Les adresses IP publiques portables sont facturées au mois. Si vous retirez des adresses IP publiques portables après la mise à disposition de votre sous-réseau, vous devez quand même payer les frais mensuels, même si vous ne les avez utilisées que brièvement.
+{: note}
 
 ### Ajout d'adresses IP portables en commandant d'autres sous-réseaux
 {: #request}
@@ -261,7 +269,11 @@ Par défaut, 4 adresses IP publiques portables et 4 adresses IP privées portabl
 Vous pouvez obtenir des adresses IP supplémentaires pour les services d'équilibreur de charge en créant un nouveau sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer) et en le rendant disponible pour le cluster que vous avez spécifié.
 {:shortdesc}
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+Avant de commencer :
+-  Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](cs_users.html#platform) pour le cluster.
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+
+Pour commander un sous-réseau :
 
 1. Provisionnez un nouveau sous-réseau.
 
@@ -286,7 +298,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td>Remplacez <code>&lt;subnet_size&gt;</code> par le nombre d'adresses IP que vous désirez ajouter depuis votre sous-réseau portable. Valeurs admises : 8, 16, 32 ou 64. <p>**Remarque :** lorsque vous ajoutez des adresses IP portables à votre sous-réseau, trois adresses IP sont utilisées pour les opérations de réseau interne au cluster. Vous ne pouvez pas utiliser ces trois adresses IP pour votre équilibreur de charge d'application ou pour créer un service d'équilibreur de charge. Par exemple, si vous demandez huit adresses IP publiques portables, vous pouvez en utiliser cinq pour exposer vos applications au public.</p> </td>
+    <td>Remplacez <code>&lt;subnet_size&gt;</code> par le nombre d'adresses IP que vous désirez ajouter depuis votre sous-réseau portable. Valeurs admises : 8, 16, 32 ou 64. <p class="note"> Lorsque vous ajoutez des adresses IP portables à votre sous-réseau, trois adresses IP sont utilisées pour les opérations de réseau internes au cluster. Vous ne pouvez pas utiliser ces trois adresses IP pour votre équilibreur de charge d'application ou pour créer un service d'équilibreur de charge. Par exemple, si vous demandez huit adresses IP publiques portables, vous pouvez en utiliser cinq pour exposer vos applications au public.</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
@@ -330,6 +342,9 @@ Conditions requises :
 Avant de commencer :
 - Configurez le routage du trafic réseau vers et depuis le sous-réseau externe.
 - Confirmez que vous disposez bien d'une connectivité VPN entre la passerelle réseau du centre de données sur site et le dispositif de routeur virtuel du réseau privé ou le service VPN strongSwan qui s'exécute dans votre cluster. Pour plus d'informations, voir [Configuration de la connectivité VPN](cs_vpn.html).
+-  Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](cs_users.html#platform) pour le cluster.
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+
 
 Pour ajouter un sous-réseau à partir d'un réseau sur site :
 
@@ -411,7 +426,7 @@ Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [co
 
 Lorsque vous créez un cluster, un sous-réseau portable public et un sous-réseau portable privé sont commandés sur les VLAN auxquels est connecté le cluster. Ces sous-réseaux fournissent les adresses IP des services réseau d'équilibreur de charge et d'Ingress.
 
-Cependant, si vous disposez déjà d'un dispositif de routage, tel qu'un [dispositif de routeur virtuel (VRA)](/docs/infrastructure/virtual-router-appliance/about.html#about), les sous-réseaux portables récemment ajoutés des VLAN auxquels est connecté le cluster, ne sont pas configurés sur le routeur. Pour utiliser des services réseau d'équilibreur de charge ou d'Ingress, vous devez vous assurer que les dispositifs réseau peuvent effectuer le routage entre les sous-réseaux sur le même VLAN en [activant la fonction Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+Cependant, si vous disposez déjà d'un dispositif de routage, tel qu'un [dispositif de routeur virtuel (VRA)](/docs/infrastructure/virtual-router-appliance/about.html#about-the-vra), les sous-réseaux portables récemment ajoutés des VLAN auxquels est connecté le cluster, ne sont pas configurés sur le routeur. Pour utiliser des services réseau d'équilibreur de charge ou d'Ingress, vous devez vous assurer que les dispositifs réseau peuvent effectuer le routage entre les sous-réseaux sur le même VLAN en [activant la fonction Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
 Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 {: tip}

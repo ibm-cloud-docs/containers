@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -76,7 +79,8 @@ Lorsque vous créez un cluster, des jetons de registre sans date d'expiration et
 
 Chaque jeton doit être stocké dans un élément Kubernetes `imagePullSecret` de sorte à être accessible à un cluster Kubernetes lorsque vous déployez une application conteneurisée. Lorsque votre cluster est créé, {{site.data.keyword.containerlong_notm}} stocke automatiquement les jetons pour le registre global (images publiques fournies par IBM) et pour les registres régionaux dans des valeurs confidentielles Kubernetes pour extraction d'images. Les valeurs confidentielles d'extraction d'images (imagePullSecret) sont ajoutées à l'espace nom Kubernetes nommé `default`, la liste par défaut des valeurs confidentielles dans l'élément `ServiceAccount` pour cet espace nom, et l'espace nom `kube-system`.
 
-**Remarque :** avec cette configuration initiale, vous pouvez déployer des conteneurs depuis n'importe quelle image disponible dans un espace de nom dans votre compte {{site.data.keyword.Bluemix_notm}} vers l'espace de nom nommé **default** de votre cluster. Pour déployer un conteneur dans d'autres espaces de nom de votre cluster ou utiliser une image stockée dans une autre région {{site.data.keyword.Bluemix_notm}}, ou dans un autre compte {{site.data.keyword.Bluemix_notm}}, vous devez [créer votre propre élément imagePullSecret pour votre cluster](#other).
+Avec cette configuration initiale, vous pouvez déployer des conteneurs depuis n'importe quelle image disponible dans un espace de nom dans votre compte {{site.data.keyword.Bluemix_notm}} vers l'espace de nom nommé **default** de votre cluster. Pour déployer un conteneur dans d'autres espaces de nom de votre cluster ou utiliser une image stockée dans une autre région {{site.data.keyword.Bluemix_notm}}, ou dans un autre compte {{site.data.keyword.Bluemix_notm}}, vous devez [créer votre propre élément imagePullSecret pour votre cluster](#other).
+{: note}
 
 Vous voulez sécuriser davantage les données d'identification de votre registre ? Demandez à l'administrateur de votre cluster d'[activer {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect) dans votre cluster pour chiffrer les valeurs confidentielles Kubernetes, telles que `imagePullSecret` qui stocke les données d'identification de votre registre.
 {: tip}
@@ -190,7 +194,7 @@ Vous pouvez copier l'élément imagePullSecret qui est créé automatiquement po
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
-   
+
    ```
    kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
@@ -227,7 +231,7 @@ Pour accéder à des images figurant dans d'autres régions ou comptes {{site.da
     ```
     {: pre}
 
-    La valeur de ce jeton est affichée dans la zone **Token** de votre sortie CLI.
+    La valeur de ce jeton est affichée dans la zone **Token** de la sortie de votre interface CLI.
 
 5.  Créez la valeur confidentielle Kubernetes pour stocker votre information de jeton.
 
