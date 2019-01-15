@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-08"
+lastupdated: "2019-01-15"
 
 ---
 
@@ -1178,7 +1178,7 @@ Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view availabl
 
    <dt><code>--service <em>SERVICE_INSTANCE_NAME</em></code></dt>
    <dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the name of your service instance, run <code>ibmcloud service list</code>. If more than one instance has the same name in the account, use the service instance ID instead of the name. To find the ID, run <code>ibmcloud service show <service instance name> --guid</code>. One of these values is required.</dd>
-   
+
    <dt><code>--role <em>IAM_ROLE</em></code></dt>
    <dd>The {{site.data.keyword.Bluemix_notm}} IAM role that you want the service key to have. The default value is the IAM service role `Writer`. Do not include this value if you are using an existing service key or for services that are not IAM-enabled, such as Cloud Foundry services.<br><br>
    To list available roles for the service, run `ibmcloud iam roles --service <service_name>`. The service name is the name of the service in the catalog which you can get by running `ibmcloud catalog search`.</dd>
