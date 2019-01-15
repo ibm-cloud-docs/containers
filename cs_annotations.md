@@ -415,9 +415,9 @@ Modify the way the ALB matches the request URI against the app path.
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
-annotations:
-  ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
+  name: myingress
+  annotations:
+    ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
 spec:
   tls:
   - hosts:
@@ -461,7 +461,11 @@ Add a custom location block configuration for a service.
 
 <dl>
 <dt>Description</dt>
-<dd>A server block is an nginx directive that defines the configuration for the ALB virtual server. A location block is an nginx directive defined within the server block. Location blocks define how Ingress processes the request URI, or the part of the request that comes after the domain name or IP address and port.<br><br>When a server block receives a request, the location block matches the URI to a path and the request is forwarded to the IP address of the pod where the app is deployed. By using the <code>location-snippets</code> annotation, you can modify how the location block forwards requests to particular services.<br><br>To modify the server block as a whole instead, see the <a href="#server-snippets">server-snippets</a> annotation.</dd>
+<dd>A server block is an NGINX directive that defines the configuration for the ALB virtual server. A location block is an NGINX directive defined within the server block. Location blocks define how Ingress processes the request URI, or the part of the request that comes after the domain name or IP address and port.<br><br>When a server block receives a request, the location block matches the URI to a path and the request is forwarded to the IP address of the pod where the app is deployed. By using the <code>location-snippets</code> annotation, you can modify how the location block forwards requests to particular services.<br><br>To modify the server block as a whole instead, see the <a href="#server-snippets">server-snippets</a> annotation.
+
+<p class="tip">To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: <code>kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-&lt;ingress_resource_name&gt;.conf</code></p>
+
+</dd>
 
 
 <dt>Sample Ingress resource YAML</dt>
@@ -471,31 +475,31 @@ Add a custom location block configuration for a service.
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
-annotations:
-  ingress.bluemix.net/location-snippets: |
-    serviceName=&lt;myservice1&gt;
-    # Example location snippet
-    proxy_request_buffering off;
-    rewrite_log on;
-    proxy_set_header "x-additional-test-header" "location-snippet-header";
-    &lt;EOS&gt;
-    serviceName=&lt;myservice2&gt;
-    proxy_set_header Authorization "";
-    &lt;EOS&gt;
+  name: myingress
+  annotations:
+    ingress.bluemix.net/location-snippets: |
+      serviceName=&lt;myservice1&gt;
+      # Example location snippet
+      proxy_request_buffering off;
+      rewrite_log on;
+      proxy_set_header "x-additional-test-header" "location-snippet-header";
+      &lt;EOS&gt;
+      serviceName=&lt;myservice2&gt;
+      proxy_set_header Authorization "";
+      &lt;EOS&gt;
 spec:
-tls:
-- hosts:
-  - mydomain
-  secretName: mytlssecret
-rules:
-- host: mydomain
-  http:
-    paths:
-    - path: /
-      backend:
-        serviceName: &lt;myservice&gt;
-        servicePort: 8080</code></pre>
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;myservice&gt;
+          servicePort: 8080</code></pre>
 
 <table>
 <caption>Understanding the annotation components</caption>
@@ -537,22 +541,22 @@ Choose a private ALB to route incoming requests instead of the public ALB.</dd>
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
-annotations:
-  ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;"
+  name: myingress
+  annotations:
+    ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;"
 spec:
-tls:
-- hosts:
-  - mydomain
-  secretName: mytlssecret
-rules:
-- host: mydomain
-  http:
-    paths:
-    - path: /
-      backend:
-        serviceName: myservice
-        servicePort: 8080</code></pre>
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 <table>
 <caption>Understanding the annotation components</caption>
@@ -635,7 +639,10 @@ Add a custom server block configuration.
 
 <dl>
 <dt>Description</dt>
-<dd>A server block is an nginx directive that defines the configuration for the ALB virtual server. By using the <code>server-snippets</code> annotation, you can modify how the ALB handles requests by providing a custom configuration snippet.</dd>
+<dd>A server block is an NGINX directive that defines the configuration for the ALB virtual server. By providing a custom configuration snippet in the <code>server-snippets</code> annotation, you can modify how the ALB handles requests at the server level.
+
+<p class="tip">To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: <code>kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-&lt;ingress_resource_name&gt;.conf</code</p>
+</dd>
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -644,27 +651,27 @@ Add a custom server block configuration.
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
-annotations:
-  ingress.bluemix.net/server-snippets: |
-    # Example snippet
-    location = /health {
-    return 200 'Healthy';
-    add_header Content-Type text/plain;
-    }
+  name: myingress
+  annotations:
+    ingress.bluemix.net/server-snippets: |
+      # Example snippet
+      location = /health {
+      return 200 'Healthy';
+      add_header Content-Type text/plain;
+      }
 spec:
-tls:
-- hosts:
-  - mydomain
-  secretName: mytlssecret
-rules:
-- host: mydomain
-  http:
-    paths:
-    - path: /
-      backend:
-        serviceName: &lt;myservice&gt;
-        servicePort: 8080</code></pre>
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;myservice&gt;
+          servicePort: 8080</code></pre>
 
 <table>
 <caption>Understanding the annotation components</caption>
@@ -875,22 +882,22 @@ Sets the maximum number of requests that can be served through one keepalive con
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
-annotations:
-  ingress.bluemix.net/keepalive-requests: "serviceName=&lt;myservice&gt; requests=&lt;max_requests&gt;"
+  name: myingress
+  annotations:
+    ingress.bluemix.net/keepalive-requests: "serviceName=&lt;myservice&gt; requests=&lt;max_requests&gt;"
 spec:
-tls:
-- hosts:
-  - mydomain
-  secretName: mytlssecret
-rules:
-- host: mydomain
-  http:
-    paths:
-    - path: /
-      backend:
-        serviceName: &lt;myservice&gt;
-        servicePort: 8080</code></pre>
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;myservice&gt;
+          servicePort: 8080</code></pre>
 
 <table>
 <caption>Understanding the annotation components</caption>
@@ -1655,9 +1662,9 @@ Use the `mutual-auth` annotation for SSL termination between the client and the 
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-name: myingress
-annotations:
-  ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
+  name: myingress
+  annotations:
+    ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
 spec:
   tls:
   - hosts:
