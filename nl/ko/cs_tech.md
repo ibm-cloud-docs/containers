@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -146,11 +149,11 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>OpenVPN  서버는 OpenVPN 클라이언트와 함께 작업하여 마스터를 작업자 노드에 안전하게 연결합니다. 이 연결에서는 kubectl exec, attach, logs 및 proxy를 지원합니다.</td>
+    <td>OpenVPN 서버는 OpenVPN 클라이언트와 함께 작업하여 마스터를 작업자 노드에 안전하게 연결합니다. 이 연결은 팟(Pod) 및 서비스에 대한 `apiserver proxy` 호출과 kubelet에 대한 `kubectl exec`, `attach` 및 `logs` 호출을 지원합니다. </td>
     </tr>
     <tr>
     <td>etcd</td>
-    <td>etcd는 서비스, 배치 및 팟(Pod) 등 클러스터의 모든 Kubernetes 리소스의 상태를 저장하는 고가용성의 키 값 저장소입니다. etcd의 데이터는 IBM에서 관리하고 매일 백업되는 암호화된 디스크에 저장됩니다.</td>
+    <td>etcd는 서비스, 배치 및 팟(Pod) 등 클러스터의 모든 Kubernetes 리소스의 상태를 저장하는 고가용성의 키 값 저장소입니다. etcd의 데이터는 IBM이 관리하는 암호화된 스토리지 인스턴스에 백업됩니다. </td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -173,19 +176,34 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     </thead>
     <tbody>
     <tr>
+    <td>ibm-master-proxy</td>
+    <td>kube-system</td>
+    <td>Kubernetes 버전 1.10 이상을 실행하는 클러스터의 경우, `ibm-master-proxy`는 작업자 노드의 요청을 고가용성 마스터 복제본의 IP 주소로 전달합니다. 단일 구역 클러스터에서 마스터에는 하나의 마스터 IP 주소와 도메인 이름을 지닌 별도 호스트의 3개 복제본이 있습니다. 다중 구역 가능 구역에 있는 클러스터의 경우, 마스터에는 구역 간에 전개된 3개의 복제본이 있습니다. 따라서 각각의 마스터에는 전체 클러스터 마스터에 대해 하나의 도메인 이름을 지닌 DNS에 등록된 자체 IP 주소가 있습니다. </td>
+    </tr>
+    <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>OpenVPN 클라이언트는 OpenVPN 서버와 함께 작업하여 마스터를 작업자 노드에 안전하게 연결합니다. 이 연결에서는 kubectl exec, attach, logs 및 proxy를 지원합니다.</td>
+    <td>OpenVPN 클라이언트는 OpenVPN 서버와 함께 작업하여 마스터를 작업자 노드에 안전하게 연결합니다. 이 연결은 팟(Pod) 및 서비스에 대한 `apiserver proxy` 호출과 kubelet에 대한 `kubectl exec`, `attach` 및 `logs` 호출을 지원합니다. </td>
     </tr>
     <tr>
-    <td>calico-policy-controller</td>
+    <td>kubelet</td>
     <td>kube-system</td>
-    <td>Calico 정책 제어기는 설정된 네트워크 정책을 준수하기 위해 인바운드 및 아웃바운드 네트워크 트래픽을 감시합니다. 트래픽이 클러스터에서 허용되지 않으면 클러스터에 대한 액세스가 차단됩니다. Calico 정책 제어기는 클러스터에 대한 네트워크 정책을 작성하고 설정하는 데도 사용됩니다.</td>
+    <td>kubelet는 모든 작업자 노드에서 실행되는 팟(Pod)이며, 작업자 노드에서 실행되는 팟(Pod)의 상태를 모니터하고 Kubernetes API 서버가 전송하는 이벤트를 감시하는 역할을 담당합니다. 이벤트를 기반으로, kubelet는 팟(Pod)을 작성 또는 제거하고 라이브 및 준비 프로브를 보장하며 팟(Pod)의 상태를 다시 Kubernetes API 서버에 보고합니다.</td>
     </tr>
     <tr>
-    <td>스토리지 제공자</td>
+    <td>kube-dns</td>
     <td>kube-system</td>
-    <td>모든 클러스터는 파일 스토리지를 프로비저닝하는 플러그인으로 설정되어 있습니다. 사용자는 기타 추가 기능(예: 블록 스토리지)의 설치를 선택할 수 있습니다.</td>
+    <td>Kubernetes DNS는 클러스터에서 DNS 팟(Pod) 및 서비스를 스케줄합니다. 컨테이너는 자동으로 DNS 서비스의 IP를 사용하여 기타 팟(Pod) 및 서비스에 대한 자체 검색에서 DNS 이름을 분석합니다.</td>
+    </tr>
+    <tr>
+    <td>calico</td>
+    <td>kube-system</td>
+    <td>Calico는 클러스터에 대한 네트워크 정책을 관리하고 다음과 같은 일부 컴포넌트를 구성합니다.
+    <ul>
+    <li>**calico-cni**: Calico 컨테이너 네트워크 인터페이스(CNI)는 컨테이너의 네트워크 연결을 관리하며 컨테이너가 삭제될 때 할당된 리소스를 제거합니다.</li>
+    <li>**calico-ipam**: Calico IPAM은 컨테이너에 대한 IP 주소 할당을 관리합니다. </li>
+    <li>**calico-node**: Calico 노드는 컨테이너를 Calico와 네트워크로 연결하는 데 필요한 다양한 컴포넌트를 함께 번들링하는 컨테이너입니다. </li>
+    <li>**calico-policy-controller**: Calico 정책 제어기는 설정된 네트워크 정책을 준수하기 위해 인바운드 및 아웃바운드 네트워크 트래픽을 감시합니다. 트래픽이 클러스터에서 허용되지 않으면 클러스터에 대한 액세스가 차단됩니다. Calico 정책 제어기는 클러스터에 대한 네트워크 정책을 작성하고 설정하는 데도 사용됩니다.</li></ul></td>
     </tr>
     <tr>
     <td>kube-proxy</td>
@@ -195,12 +213,7 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>Kubernetes 대시보드는 사용자가 클러스터에서 실행 중인 클러스터와 애플리케이션을 관리하고 이의 문제점을 해결할 수 있도록 하는 웹 기반 UI입니다.</td>
-    </tr>
-    <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>Kubernetes DNS는 클러스터에서 DNS 팟(Pod) 및 서비스를 스케줄합니다. 컨테이너는 자동으로 DNS 서비스의 IP를 사용하여 기타 팟(Pod) 및 서비스에 대한 자체 검색에서 DNS 이름을 분석합니다.</td>
+    <td>Kubernetes 대시보드는 사용자가 클러스터에서 실행 중인 애플리케이션과 클러스터를 관리하고 해당 문제점을 해결할 수 있도록 허용하는 웹 기반 GUI입니다. </td>
     </tr>
     <tr>
     <td>heapster</td>
@@ -208,19 +221,19 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     <td>Heapster는 모니터링 및 이벤트 데이터의 클러스터 전체 집계기입니다. Heapster 팟(Pod)은 클러스터의 모든 노드를 검색하고 각 노드의 kubelet에서 사용 정보를 조회합니다. Kubernetes 대시보드에서 이용 그래프를 찾을 수 있습니다.</td>
     </tr>
     <tr>
-    <td>calico-node</td>
+    <td>Ingress ALB</td>
     <td>kube-system</td>
-    <td>Calico 노드는 컨테이너를 Calico와 네트워크로 연결하는 데 필요한 다양한 컴포넌트를 함께 번들링하는 컨테이너입니다.</td>
+    <td>Ingress는 공용 또는 개인용 요청을 클러스터의 다중 앱에 전달함으로써 클러스터 내에서 네트워크 트래픽 워크로드의 밸런스를 유지하는 데 사용될 수 있는 Kubernetes 서비스입니다. 공용 또는 사설 네트워크를 통해 앱을 노출하려면 Ingress 리소스를 작성하여 Ingress 애플리케이션 로드 밸런서(ALB)에 앱을 등록해야 합니다. 그러면 단일 URL 또는 IP 주소를 사용하여 다중 앱에 액세스할 수 있습니다.</td>
+    </tr>
+    <tr>
+    <td>스토리지 제공자</td>
+    <td>kube-system</td>
+    <td>모든 클러스터는 파일 스토리지를 프로비저닝하는 플러그인으로 설정되어 있습니다. 사용자는 기타 추가 기능(예: 블록 스토리지)의 설치를 선택할 수 있습니다.</td>
     </tr>
     <tr>
     <td>로깅 및 메트릭</td>
     <td>ibm-system</td>
     <td>통합 {{site.data.keyword.loganalysislong_notm}} 및 {{site.data.keyword.monitoringlong_notm}} 서비스를 사용하여 로그 및 메트릭 관련 작업을 수행할 때 콜렉션 및 보유 기능을 확장할 수 있습니다.</td>
-    </tr>
-    <tr>
-    <td>Ingress ALB</td>
-    <td>ibm-system</td>
-    <td>Ingress는 공용 또는 개인용 요청을 클러스터의 다중 앱에 전달함으로써 클러스터 내에서 네트워크 트래픽 워크로드의 밸런스를 유지하는 데 사용될 수 있는 Kubernetes 서비스입니다. 공용 또는 사설 네트워크를 통해 앱을 노출하려면 Ingress 리소스를 작성하여 Ingress 애플리케이션 로드 밸런서(ALB)에 앱을 등록해야 합니다. 그러면 단일 URL 또는 IP 주소를 사용하여 다중 앱에 액세스할 수 있습니다.</td>
     </tr>
     <tr>
     <td>로드 밸런서</td>
@@ -231,21 +244,6 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     <td>앱 팟(Pod) 및 서비스</td>
     <td>default</td>
     <td><code>default</code> 네임스페이스나 사용자가 작성한 네임스페이스에서는 팟(Pod) 및 서비스에 앱을 배치하여 해당 팟(Pod)과 통신할 수 있습니다.</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>해당사항 없음</td>
-    <td>Calico 컨테이너 네트워크 인터페이스(CNI)는 컨테이너의 네트워크 연결을 관리하며 컨테이너가 삭제될 때 할당된 리소스를 제거합니다.</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>해당사항 없음</td>
-    <td>Calico IPAM은 컨테이너에 대한 IP 주소 할당을 관리합니다.</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>해당사항 없음</td>
-    <td>kubelet는 모든 작업자 노드에서 실행되는 팟(Pod)이며, 작업자 노드에서 실행되는 팟(Pod)의 상태를 모니터하고 Kubernetes API 서버가 전송하는 이벤트를 감시하는 역할을 담당합니다. 이벤트를 기반으로, kubelet는 팟(Pod)을 작성 또는 제거하고 라이브 및 준비 프로브를 보장하며 팟(Pod)의 상태를 다시 Kubernetes API 서버에 보고합니다.</td>
     </tr>
     </tbody></table></dd>
 </dl>

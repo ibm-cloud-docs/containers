@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,13 +13,16 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 
 
-# {{site.data.keyword.Bluemix_notm}} Private에서 {{site.data.keyword.containerlong_notm}} 사용
+# 하이브리드 클라우드
 {: #hybrid_iks_icp}
 
 {{site.data.keyword.Bluemix}} Private 계정이 있으면 {{site.data.keyword.containerlong}}를 포함하여 선택된 {{site.data.keyword.Bluemix_notm}} 서비스에서 이를 사용할 수 있습니다. 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} Private 및 IBM 퍼블릭 클라우드의 하이브리드 환경 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://ibm.biz/hybridJune2018)의 블로그를 참조하십시오.
@@ -34,7 +37,7 @@ lastupdated: "2018-10-25"
 {: shortdesc}
 
 1.  {{site.data.keyword.Bluemix_notm}} 퍼블릭의 {{site.data.keyword.containerlong}}에서 표준 클러스터를 작성하거나 기존 클러스터를 사용하십시오. 클러스터를 작성하려면 다음 옵션 중에서 선택하십시오. 
-    - [GUI에서 표준 클러스터를 작성](cs_clusters.html#clusters_ui)합니다. 
+    - [콘솔에서 표준 클러스터를 작성](cs_clusters.html#clusters_ui)합니다. 
     - [CLI에서 표준 클러스터를 작성](cs_clusters.html#clusters_cli)합니다. 
     - [CAM(Cloud Automation Manager)을 사용하여 사전 정의된 템플리트로 클러스터를 작성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html)합니다. CAM을 사용하여 클러스터를 배치하면 Helm Tiller가 사용자를 위해 자동으로 설치됩니다.
 
@@ -79,7 +82,7 @@ lastupdated: "2018-10-25"
            ```
            {: codeblock}
     
-        *  개인용 `local.id`는 공용 `remote.id`와 일치해야 하고 개인용 `remote.id`는  공용 `local.id`와 일치해야 하며 개인용 및 공용의 `preshared.secret` 값은 일치해야 한다는 점을 유념하십시오.
+        *  개인용 `local.id`는 공용 `remote.id`와 일치해야 하고 개인용 `remote.id`는 공용 `local.id`와 일치해야 하며 개인용 및 공용의 `preshared.secret` 값은 일치해야 한다는 점을 유념하십시오.
         
         이제 {{site.data.keyword.Bluemix_notm}} Private 클러스터에서 {{site.data.keyword.containerlong_notm}} 클러스터로의 연결을 시작할 수 있습니다.
 

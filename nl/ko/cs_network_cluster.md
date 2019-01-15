@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 클러스터 내 및 사설 네트워킹 계획
@@ -78,7 +81,7 @@ lastupdated: "2018-10-25"
 **왜 이 설정을 사용해야 합니까?**
 
 * 단일 구역 클러스터의 공용 인터넷에 액세스해야 하는 앱을 사용자가 보유합니다.
-* 다중 구역 클러스터의 공용 인터넷에 액세스해야 하는 앱을 사용자가 보유합니다. 다중 구역 클러스터를 작성하려면 [VLAN Spanning](cs_subnets.html#subnet-routing)을 사용으로 설정해야 하므로, 클러스터는 동일한 IBM Cloud 계정에서 사설 VLAN에 연결된 기타 시스템과 통신할 수 있습니다. **참고**: 사설 네트워크에서 다중 구역 클러스터를 분리하려면 [Calico 네트워크 정책](cs_network_policy.html#isolate_workers)을 사용하십시오.
+* 다중 구역 클러스터의 공용 인터넷에 액세스해야 하는 앱을 사용자가 보유합니다. 다중 구역 클러스터를 작성하려면 [VLAN Spanning](cs_subnets.html#subnet-routing)을 사용으로 설정해야 하므로, 클러스터는 동일한 IBM Cloud 계정에서 사설 VLAN에 연결된 기타 시스템과 통신할 수 있습니다. 사설 네트워크에서 다중 구역 클러스터를 분리하려면 [Calico 네트워크 정책](cs_network_policy.html#isolate_workers)을 사용할 수 있습니다. 
 
 **내 클러스터에 대한 공용 및 개인용 액세스를 관리하기 위한 내 옵션은 무엇입니까?**
 </br>다음 절에서는 공용 및 사설 VLAN에 연결된 클러스터에 대한 네트워킹 설정에 사용할 수 있는 {{site.data.keyword.containerlong_notm}}에서의 기능을 설명합니다.
@@ -123,7 +126,7 @@ lastupdated: "2018-10-25"
 **왜 이 설정을 사용해야 합니까?**
 
 * 사용자가 단일 구역 클러스터의 앱을 보유합니다. 오직 클러스터 내의 팟(Pod)에 또는 동일한 사설 VLAN에 연결된 기타 클러스터의 팟(Pod)에 앱을 노출하고자 합니다.
-* 사용자가 다중 구역 클러스터의 앱을 보유합니다. 오직 클러스터 내의 팟(Pod)에 또는 클러스터와 동일한 사설 VLAN에 연결된 기타 클러스터의 팟(Pod)에 앱을 노출하고자 합니다. 그러나 다중 구역 클러스터를 위해 [VLAN Spanning](cs_subnets.html#subnet-routing)을 사용으로 설정해야 하므로, 동일한 IBM Cloud 계정에서 사설 VLAN에 연결된 다른 시스템이 클러스터에 액세스할 수 있습니다. 다중 구역 클러스터는 다른 시스템으로부터 격리해야 합니다. 
+* 사용자가 다중 구역 클러스터의 앱을 보유합니다. 오직 클러스터 내의 팟(Pod)에 또는 클러스터와 동일한 사설 VLAN에 연결된 기타 클러스터의 팟(Pod)에 앱을 노출하고자 합니다. 그러나 다중 구역 클러스터를 위해 [VLAN Spanning](cs_subnets.html#subnet-routing)을 사용으로 설정해야 하므로, 동일한 IBM Cloud 계정에서 사설 VLAN에 연결된 다른 시스템이 클러스터에 액세스할 수 있습니다. 다중 구역 클러스터는 다른 시스템으로부터 격리해야 합니다.
 
 **내 클러스터에 대한 공용 및 개인용 액세스를 관리하기 위한 내 옵션은 무엇입니까?**</br>다음 절에서는 공용 및 사설 VLAN에 연결된 클러스터에 대한 공용 네트워킹의 잠금과 사설 전용 네트워킹의 설정에 사용할 수 있는 {{site.data.keyword.containerlong_notm}}에서의 기능을 설명합니다.
 
@@ -183,7 +186,7 @@ CLI에 `--private-only` 플래그를 포함하여 [사설 VLAN 전용 클러스�
 * 모든 작업자 노드와 마스터 간의 자동 연결. [게이트웨이 어플라이언스를 구성](#private_vlan_gateway)하여 이 연결을 제공해야 합니다.
 
 **왜 이 설정을 사용해야 합니까?**
-</br>사용자에게 특정 보안 요구사항이 있거나 사용자가 전용 네트워크 보안을 제공하기 위한 사용자 정의 네트워크 정책과 라우팅 규칙을 작성해야 합니다. **참고**: 게이트웨이 어플라이언스를 사용하면 별도의 비용이 발생합니다. 세부사항은 [문서](/docs/infrastructure/fortigate-10g/explore-firewalls.html)를 참조하십시오.
+</br>사용자에게 특정 보안 요구사항이 있거나 사용자가 전용 네트워크 보안을 제공하기 위한 사용자 정의 네트워크 정책과 라우팅 규칙을 작성해야 합니다. 참고로, 게이트웨이 어플라이언스를 사용하면 별도의 비용이 발생합니다. 세부사항은 [문서](/docs/infrastructure/fortigate-10g/explore-firewalls.html)를 참조하십시오.
 
 **내 클러스터에 대한 공용 및 개인용 액세스를 관리하기 위한 내 옵션은 무엇입니까?**
 </br>다음 절에서는 사설 VLAN에만 연결된 클러스터에 대한 네트워킹 설정에 사용할 수 있는 {{site.data.keyword.containerlong_notm}}에서의 기능을 설명합니다.
@@ -193,10 +196,8 @@ CLI에 `--private-only` 플래그를 포함하여 [사설 VLAN 전용 클러스�
 
 작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 작업자 노드와 마스터 간의 네트워크 연결에 대해 대체 솔루션을 구성해야 합니다. 사용자는 표준 클러스터에 대한 전용 네트워크 보안을 제공하고 네트워크 침입을 발견하여 이를 해결하기 위한 사용자 정의 네트워크 정책으로 방화벽을 설정할 수 있습니다. 예를 들어, 방화벽 역할을 수행하며 원하지 않는 트래픽을 차단하도록 [가상 라우터 어플라이언스](/docs/infrastructure/virtual-router-appliance/about.html) 또는 [Fortigate 보안 어플라이언스](/docs/infrastructure/fortigate-10g/about.html) 설정을 선택할 수 있습니다. 방화벽을 설정할 때 마스터와 작업자 노드가 통신할 수 있도록 각 지역의 [필수 포트와 IP 주소 공개](cs_firewall.html#firewall_outbound)도 해야 합니다.
 
-**참고**: 기존 라우터 어플라이언스가 있으며 클러스터를 추가하는 경우, 클러스터에 대해 주문된 새 포터블 서브넷은 라우터 어플라이언스에서 구성되어 있지 않습니다. 네트워크 서비스를 사용하려면 [VLAN Spanning을 사용으로 설정](cs_subnets.html#vra-routing)하여 동일한 VLAN의 서브넷 간에 라우팅을 사용하도록 설정해야 합니다.
-
-VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오.
-{: tip}
+기존 라우터 어플라이언스가 있으며 클러스터를 추가하는 경우에는 클러스터에 대해 주문된 새 포터블 서브넷이 라우터 어플라이언스에서 구성되지 않습니다. 네트워크 서비스를 사용하려면 [VLAN Spanning을 사용으로 설정](cs_subnets.html#vra-routing)하여 동일한 VLAN의 서브넷 간에 라우팅을 사용하도록 설정해야 합니다.
+{: important}
 
 ### 사설 네트워크 서비스에서 앱 노출
 {: #private_vlan_services}

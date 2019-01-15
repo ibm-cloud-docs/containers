@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -78,7 +81,8 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
 
 개별 토큰은 컨테이너화된 앱을 배치할 때 Kubernetes 클러스터에 액세스할 수 있도록 Kubernetes `imagePullSecret`에 저장되어야 합니다. 클러스터가 작성되면 {{site.data.keyword.containerlong_notm}}에서 Kubernetes 이미지 풀 시크릿의 글로벌(IBM 제공 공용 이미지) 및 지역 레지스트리에 대한 토큰을 자동으로 저장합니다. 이미지 풀 시크릿은 `기본` Kubernetes 네임스페이스, 해당 네임스페이스의 `ServiceAccount`에 있는 기본 시크릿 목록 및 `kube-system` 네임스페이스에 추가됩니다.
 
-**참고:** 이 초기 설정을 사용하면 {{site.data.keyword.Bluemix_notm}} 계정의 네임스페이스에서 사용할 수 있는 이미지에서 클러스터의 **기본** 네임스페이스로 컨테이너를 배치할 수 있습니다. 클러스터의 다른 네임스페이스로 컨테이너를 배치하거나 다른 {{site.data.keyword.Bluemix_notm}} 지역이나 다른 {{site.data.keyword.Bluemix_notm}} 계정에 저장된 이미지를 사용하려면 [클러스터에 대한 사용자 고유의 imagePullSecret을 작성](#other)해야 합니다.
+이 초기 설정을 사용하면 {{site.data.keyword.Bluemix_notm}} 계정의 네임스페이스에서 사용할 수 있는 이미지의 컨테이너를 클러스터의 **기본** 네임스페이스에 배치할 수 있습니다. 클러스터의 다른 네임스페이스로 컨테이너를 배치하거나 다른 {{site.data.keyword.Bluemix_notm}} 지역이나 다른 {{site.data.keyword.Bluemix_notm}} 계정에 저장된 이미지를 사용하려면 [클러스터에 대한 사용자 고유의 imagePullSecret을 작성](#other)해야 합니다.
+{: note}
 
 레지스트리 인증 정보를 더 안전하게 보호하려 하십니까? 클러스터에서 레지스트리 인증 정보를 저장하는 `imagePullSecret`과 같은 Kubernetes secret을 암호화하기 위해 클러스터 관리자에게 [{{site.data.keyword.keymanagementservicefull}}를 사용으로 설정](cs_encrypt.html#keyprotect)하도록 요청하십시오.
 {: tip}
@@ -192,7 +196,7 @@ ImagePullSecret은 사용하도록 지정된 Kubernetes 네임스페이스에만
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
-   
+
    ```
    kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```

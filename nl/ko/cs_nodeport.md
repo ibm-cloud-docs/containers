@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -44,7 +47,8 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 
 4. 앱이 배치된 팟(Pod)의 사설 IP 주소로 요청이 전달됩니다. 다중 앱 인스턴스가 클러스터에 배치되는 경우 NodePort 서비스는 앱 팟(Pod) 간의 요청을 라우팅합니다.
 
-**참고:** 작업자 노드의 공인 IP 주소는 영구적이지 않습니다. 작업자 노드가 제거되거나 다시 작성되면 새 공인 IP 주소가 작업자 노드에 지정됩니다. 앱에 대한 공용 액세스를 테스트하기 위해 또는 짧은 시간 동안에만 공용 액세스가 필요한 경우에 NodePort 서비스를 사용할 수 있습니다. 서비스에 대한 추가 가용성과 안정적인 공인 IP 주소가 필요한 경우에는 [LoadBalancer 서비스](cs_loadbalancer.html) 또는 [Ingress](cs_ingress.html)를 사용하여 앱을 노출하십시오.
+작업자 노드의 공인 IP 주소는 영구적이지 않습니다. 작업자 노드가 제거되거나 다시 작성되면 새 공인 IP 주소가 작업자 노드에 지정됩니다. 앱에 대한 공용 액세스를 테스트하기 위해 또는 짧은 시간 동안에만 공용 액세스가 필요한 경우에 NodePort 서비스를 사용할 수 있습니다. 서비스에 대한 추가 가용성과 안정적인 공인 IP 주소가 필요한 경우에는 [LoadBalancer 서비스](cs_loadbalancer.html) 또는 [Ingress](cs_ingress.html)를 사용하여 앱을 노출하십시오.
+{: note}
 
 <br />
 
@@ -57,7 +61,10 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 
 앱이 아직 없는 경우, [Guestbook ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml)이라는 Kubernetes 예제 앱을 사용할 수 있습니다.
 
-1.  앱의 구성 파일에서 [서비스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/services-networking/service/) 섹션을 정의하십시오. **참고**: Guestbook 예제의 경우 구성 파일에 프론트 엔드 서비스 섹션이 있습니다. Guestbook 앱을 외부에서 사용하려면 NodePort 유형과 30000 - 32767 범위의 NodePort를 프론트 엔드 서비스 섹션에 추가하십시오.
+1.  앱의 구성 파일에서 [서비스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/services-networking/service/) 섹션을 정의하십시오.
+
+    Guestbook 예제의 경우 구성 파일에 프론트 엔드 서비스 섹션이 있습니다. Guestbook 앱을 외부에서 사용하려면 NodePort 유형과 30000 - 32767 범위의 NodePort를 프론트 엔드 서비스 섹션에 추가하십시오.
+    {: tip}
 
     예:
 
@@ -114,7 +121,7 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 **다음에 수행할 작업:**
 
 앱이 배치된 경우에는 작업자 노드의 공인 IP 주소와 NodePort를 사용하여
-브라우저에서 앱에 액세스하기 위한 공용 URL을 구성할 수 있습니다. 작업자 노드가 사설 VLAN에만 연결된 경우, 사설 NodePort 서비스가 작성되었으며 이는 q 작업자 노드의 사설 IP 주소를 통해 액세스가 가능합니다.
+브라우저에서 앱에 액세스하기 위한 공용 URL을 구성할 수 있습니다. 작업자 노드가 사설 VLAN에만 연결된 경우에는 사설 NodePort 서비스가 작성되었으며 이는 작업자 노드의 사설 IP 주소를 통해 액세스가 가능합니다. 
 
 1.  클러스터의 작업자 노드에 대한 공인 IP 주소를 가져오십시오. 사설 네트워크의 작업자 노드에 액세스하려면 사설 IP 주소를 대신 가져오십시오.
 
@@ -156,7 +163,9 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
     ```
     {: screen}
 
-    이 예에서 NodePort는 `30872`입니다.</br>
-    **참고:** **Endpoints** 섹션에 `<none>`이 표시되는 경우 NodePort 서비스의 `spec.selector` 섹션에서 사용하는 `<selectorkey>` 및 `<selectorvalue>`를 확인하십시오. 배치 yaml의 `spec.template.metadata.labels` 섹션에서 사용한 _키/값_ 쌍과 동일해야 합니다.
+    이 예에서 NodePort는 `30872`입니다.
+
+    **엔드포인트** 섹션에서 `<none>`을 표시하면 `<selectorkey>` 및 `<selectorvalue>`(NodePort 서비스의 `spec.selector` 섹션에서 사용 중인)를 확인하십시오. 배치 yaml의 `spec.template.metadata.labels` 섹션에서 사용한 _키/값_ 쌍과 동일해야 합니다.
+    {: note}
 
 3.  NodePort 및 작업자 노드 IP 주소 중 하나로 URL을 구성하십시오. 예: `http://192.0.2.23:30872`

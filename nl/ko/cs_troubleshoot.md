@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -53,7 +56,7 @@ lastupdated: "2018-10-25"
    <tbody>
 <tr>
    <td>중단됨(Aborted)</td>
-   <td>Kubernetes 마스터가 배치되기 전에 사용자가 클러스터 삭제를 요청합니다. 클러스터 삭제가 완료된 후 대시보드에서 클러스터가 제거됩니다. 클러스터가 오랜 기간 동안 이 상태인 경우 [{{site.data.keyword.Bluemix_notm}} 지원 티켓](cs_troubleshoot.html#ts_getting_help)을 여십시오.</td>
+   <td>Kubernetes 마스터가 배치되기 전에 사용자가 클러스터 삭제를 요청합니다. 클러스터 삭제가 완료된 후 대시보드에서 클러스터가 제거됩니다. 클러스터가 오랜 기간 동안 이 상태인 경우에는 [{{site.data.keyword.Bluemix_notm}} 지원 케이스](cs_troubleshoot.html#ts_getting_help)를 여십시오. </td>
    </tr>
  <tr>
      <td>위험(Critical)</td>
@@ -65,7 +68,7 @@ lastupdated: "2018-10-25"
    </tr>
    <tr>
      <td>삭제됨(Deleted)</td>
-     <td>클러스터가 삭제되었으나 아직 대시보드에서 제거되지 않았습니다. 클러스터가 오랜 기간 동안 이 상태인 경우 [{{site.data.keyword.Bluemix_notm}} 지원 티켓](cs_troubleshoot.html#ts_getting_help)을 여십시오. </td>
+     <td>클러스터가 삭제되었으나 아직 대시보드에서 제거되지 않았습니다. 클러스터가 오랜 기간 동안 이 상태인 경우에는 [{{site.data.keyword.Bluemix_notm}} 지원 케이스](cs_troubleshoot.html#ts_getting_help)를 여십시오. </td>
    </tr>
    <tr>
    <td>삭제 중(Deleting)</td>
@@ -73,7 +76,7 @@ lastupdated: "2018-10-25"
    </tr>
    <tr>
      <td>배치에 실패함(Deploy failed)</td>
-     <td>Kubernetes 마스터의 배치를 완료하지 못했습니다. 이 상태를 해결할 수 없습니다. [{{site.data.keyword.Bluemix_notm}} 지원 티켓](cs_troubleshoot.html#ts_getting_help)을 열어 IBM Cloud 지원에 문의하십시오.</td>
+     <td>Kubernetes 마스터의 배치를 완료하지 못했습니다. 이 상태를 해결할 수 없습니다. [{{site.data.keyword.Bluemix_notm}} 지원 케이스](cs_troubleshoot.html#ts_getting_help)를 열어서 IBM Cloud 지원 팀에 문의하십시오.</td>
    </tr>
      <tr>
        <td>배치 중(Deploying)</td>
@@ -81,7 +84,7 @@ lastupdated: "2018-10-25"
       </tr>
       <tr>
        <td>정상(Normal)</td>
-       <td>클러스터의 모든 작업자 노드가 시작되어 실행 중입니다. 클러스터에 액세스하고 클러스터에 앱을 배치할 수 있습니다. 이 상태는 정상으로 간주되고 사용자의 조치가 필요하지 않습니다. **참고**: 작업자 노드가 정상이더라도 [네트워킹](cs_troubleshoot_network.html) 및 [스토리지](cs_troubleshoot_storage.html)와 같은 기타 인프라 리소스에는 여전히 문제가 있을 수 있습니다.</td>
+       <td>클러스터의 모든 작업자 노드가 시작되어 실행 중입니다. 클러스터에 액세스하고 클러스터에 앱을 배치할 수 있습니다. 이 상태는 정상으로 간주되고 사용자의 조치가 필요하지 않습니다.<p class="note">작업자 노드가 정상인 경우에도 [네트워킹](cs_troubleshoot_network.html) 및 [스토리지](cs_troubleshoot_storage.html)와 같은 기타 인프라 리소스에는 여전히 주의를 기울여야 합니다. </p></td>
     </tr>
       <tr>
        <td>보류 중(Pending)</td>
@@ -89,7 +92,7 @@ lastupdated: "2018-10-25"
      </tr>
    <tr>
      <td>요청됨(Requested)</td>
-     <td>클러스터 작성 및 Kubernetes 마스터 및 작업자 노드의 인프라 정렬에 대한 요청이 전송되었습니다. 클러스터의 배치가 시작되면 클러스터 상태가 <code>Deploying</code>으로 변경됩니다. 클러스터가 오랜 기간 동안 <code>Requested</code> 상태인 경우 [{{site.data.keyword.Bluemix_notm}} 지원 티켓](cs_troubleshoot.html#ts_getting_help)을 여십시오. </td>
+     <td>클러스터 작성 및 Kubernetes 마스터 및 작업자 노드의 인프라 정렬에 대한 요청이 전송되었습니다. 클러스터의 배치가 시작되면 클러스터 상태가 <code>Deploying</code>으로 변경됩니다. 클러스터가 오랜 기간 동안 <code>Requested</code> 상태인 경우에는 [{{site.data.keyword.Bluemix_notm}} 지원 케이스](cs_troubleshoot.html#ts_getting_help)를 여십시오. </td>
    </tr>
    <tr>
      <td>업데이트 중(Updating)</td>
@@ -103,7 +106,10 @@ lastupdated: "2018-10-25"
  </table>
 
 
-**참고**: [Kubernetes 마스터](cs_tech.html#architecture)는 클러스터의 시작과 실행을 유지하는 기본 컴포넌트입니다. 마스터는 클러스터에 대한 SPOT(Single Point of Truth) 역할을 하는 etcd 데이터베이스에 클러스터 리소스와 해당 구성을 저장합니다. Kubernetes API 서버는 마스터에 대한 작업자 노드의 모든 클러스터 관리 요청을 위한 기본 시작점입니다. 또는 클러스터 리소스와 상호 작용하고자 할 때의 시작점이기도 합니다.<br><br>마스터 장애 발생 시에 워크로드는 작업자 노드에서 계속 실행되지만, 마스터의 Kubernetes API 서버가 백업될 때까지는 사용자가 `kubectl` 명령을 사용하여 클러스터 리소스 관련 작업을 수행하거나 클러스터 상태를 확인할 수 없습니다. 마스터 가동 중단 중에 팟(Pod)이 중지되는 경우에는 작업자 노드가 다시 Kubernetes API 서버에 접속할 수 있을 때까지 팟(Pod)을 다시 스케줄할 수 없습니다.<br><br>마스터 가동 중단 중에도 사용자는 여전히 {{site.data.keyword.containerlong_notm}} API에 대해 `ibmcloud ks` 명령을 실행하여 인프라 리소스(예: 작업자 노드 또는 VLAN) 관련 작업을 수행할 수 있습니다. 작업자 노드를 클러스터에 추가하거나 이에서 제거하여 현재 클러스터 구성을 변경하는 경우에는 마스터가 백업될 때까지 변경사항이 발생하지 않습니다. **참고**: 마스터 가동 중단 중에는 작업자 노드를 다시 시작하거나 재부팅하지 마십시오. 이 조치를 수행하면 작업자 노드에서 팟(Pod)이 제거됩니다. Kubernetes API 서버가 사용 불가능하므로 클러스터의 다른 작업자 노드로 팟(Pod)을 다시 스케줄할 수 없습니다.
+[Kubernetes 마스터](cs_tech.html#architecture)는 클러스터가 시작하고 계속 실행되도록 하는 기본 컴포넌트입니다. 마스터는 클러스터에 대한 SPOT(Single Point of Truth) 역할을 하는 etcd 데이터베이스에 클러스터 리소스와 해당 구성을 저장합니다. Kubernetes API 서버는 마스터에 대한 작업자 노드의 모든 클러스터 관리 요청을 위한 기본 시작점입니다. 또는 클러스터 리소스와 상호 작용하고자 할 때의 시작점이기도 합니다.<br><br>마스터 장애 발생 시에 워크로드는 작업자 노드에서 계속 실행되지만, 마스터의 Kubernetes API 서버가 백업될 때까지는 사용자가 `kubectl` 명령을 사용하여 클러스터 리소스 관련 작업을 수행하거나 클러스터 상태를 확인할 수 없습니다. 마스터 가동 중단 중에 팟(Pod)이 중지되는 경우에는 작업자 노드가 다시 Kubernetes API 서버에 접속할 수 있을 때까지 팟(Pod)을 다시 스케줄할 수 없습니다.<br><br>마스터 가동 중단 중에도 사용자는 여전히 {{site.data.keyword.containerlong_notm}} API에 대해 `ibmcloud ks` 명령을 실행하여 인프라 리소스(예: 작업자 노드 또는 VLAN) 관련 작업을 수행할 수 있습니다. 작업자 노드를 클러스터에 추가하거나 이에서 제거하여 현재 클러스터 구성을 변경하는 경우에는 마스터가 백업될 때까지 변경사항이 발생하지 않습니다.
+
+마스터 가동 중단 중에는 작업자 노드를 다시 시작하거나 재부팅하지 마십시오. 이 조치를 수행하면 작업자 노드에서 팟(Pod)이 제거됩니다. Kubernetes API 서버가 사용 불가능하므로 클러스터의 다른 작업자 노드로 팟(Pod)을 다시 스케줄할 수 없습니다.
+{: important}
 
 
 <br />
@@ -170,7 +176,7 @@ lastupdated: "2018-10-25"
       </tr>
       <tr>
        <td>알 수 없음(Unknown)</td>
-       <td>다음 이유 중 하나로 인해 Kubernetes 마스터에 연결할 수 없습니다.<ul><li>Kubernetes 마스터의 업데이트를 요청했습니다. 업데이트 중에 작업자 노드의 상태를 검색할 수 없습니다.</li><li>작업자 노드를 보호 중이거나 최근에 방화벽 설정을 변경한 다른 방화벽이 있을 수 있습니다. {{site.data.keyword.containerlong_notm}}에서는 작업자 노드와 Kubernetes 마스터 간의 양방향 통신을 허용하기 위해 특정 IP 주소와 포트를 열도록 요구합니다. 자세한 정보는 [방화벽으로 인해 작업자 노드를 연결할 수 없음](cs_troubleshoot_clusters.html#cs_firewall)을 참조하십시오.</li><li>Kubernetes 마스터가 작동 중단되었습니다. [{{site.data.keyword.Bluemix_notm}} 지원 티켓](#ts_getting_help)을 열어 {{site.data.keyword.Bluemix_notm}} 지원에 문의하십시오.</li></ul></td>
+       <td>다음 이유 중 하나로 인해 Kubernetes 마스터에 연결할 수 없습니다.<ul><li>Kubernetes 마스터의 업데이트를 요청했습니다. 업데이트 중에 작업자 노드의 상태를 검색할 수 없습니다. Kubernetes 마스터가 성공적으로 업데이트된 후에도 작업자 노드가 오랜 기간 동안 이 상태인 경우에는 작업자 노드를 [다시 로드](cs_cli_reference.html#cs_worker_reload)해 보십시오. </li><li>작업자 노드를 보호 중이거나 최근에 방화벽 설정을 변경한 다른 방화벽이 있을 수 있습니다. {{site.data.keyword.containerlong_notm}}에서는 작업자 노드와 Kubernetes 마스터 간의 양방향 통신을 허용하기 위해 특정 IP 주소와 포트를 열도록 요구합니다. 자세한 정보는 [방화벽으로 인해 작업자 노드를 연결할 수 없음](cs_troubleshoot_clusters.html#cs_firewall)을 참조하십시오.</li><li>Kubernetes 마스터가 작동 중단되었습니다. [{{site.data.keyword.Bluemix_notm}} 지원 케이스](#ts_getting_help)을 열어서 {{site.data.keyword.Bluemix_notm}} 지원 팀에 문의하십시오.</li></ul></td>
   </tr>
      <tr>
         <td>경고(Warning)</td>
@@ -208,7 +214,7 @@ lastupdated: "2018-10-25"
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Your account is currently prohibited from ordering 'Computing Instances'.</td>
-        <td>IBM Cloud 인프라(SoftLayer) 계정이 컴퓨팅 리소스를 주문하지 못하게 제한되었을 수 있습니다. [{{site.data.keyword.Bluemix_notm}} 지원 티켓](#ts_getting_help)을 열어 {{site.data.keyword.Bluemix_notm}} 지원에 문의하십시오.</td>
+        <td>IBM Cloud 인프라(SoftLayer) 계정이 컴퓨팅 리소스를 주문하지 못하게 제한되었을 수 있습니다. [{{site.data.keyword.Bluemix_notm}} 지원 케이스](#ts_getting_help)을 열어서 {{site.data.keyword.Bluemix_notm}} 지원 팀에 문의하십시오.</td>
       </tr>
       <tr>
       <td>{{site.data.keyword.Bluemix_notm}} infrastructure exception: Could not place order.<br><br>
@@ -218,11 +224,11 @@ lastupdated: "2018-10-25"
       <li>단일 구역 클러스터의 경우에는 다른 구역에서 클러스터를 작성하십시오. 다중 구역 클러스터의 경우에는 클러스터에 구역을 추가하십시오.</li>
       <li>IBM Cloud 인프라(SoftLayer) 계정의 작업자 노드에 대해 다른 공용 및 사설 VLAN 쌍을 지정하십시오. 작업자 풀에 있는 작업자 노드의 경우에는 <code>ibmcloud ks zone-network-set</code> [명령](cs_cli_reference.html#cs_zone_network_set)을 사용할 수 있습니다.</li>
       <li>IBM Cloud 인프라(SoftLayer) 계정 관리자에게 문의하여 글로벌 할당량 등의 계정 한계를 초과하지 않는지 확인하십시오.</li>
-      <li>[IBM Cloud 인프라(SoftLayer) 지원 티켓](#ts_getting_help)을 여십시오.</li></ul></td>
+      <li>[IBM Cloud 인프라(SoftLayer) 지원 케이스](#ts_getting_help)를 여십시오. </li></ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: &lt;vlan id&gt;.</td>
-        <td>다음 이유 중 하나로 인해 선택된 VLAN ID를 찾을 수 없으므로 작업자 노드를 프로비저닝할 수 없습니다.<ul><li>VLAN ID가 아니라 VLAN 번호를 지정했을 수 있습니다. VLAN 번호는 3 또는 4자리 숫자이지만 VLAN ID는 7자리 숫자입니다. <code>ibmcloud ks vlans &lt;zone&gt;</code>을 실행하여 VLAN ID를 검색하십시오.<li>사용하는 IBM Cloud 인프라(SoftLayer) 계정과 VLAN ID가 연관되지 않았을 수 있습니다. <code>ibmcloud ks vlans &lt;zone&gt;</code>을 실행하여 계정에 대해 사용 가능한 VLAN ID를 나열하십시오. IBM Cloud 인프라(SoftLayer) 계정을 변경하려면 [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set)를 참조하십시오. </ul></td>
+        <td>다음 이유 중 하나로 인해 선택된 VLAN ID를 찾을 수 없으므로 작업자 노드를 프로비저닝할 수 없습니다.<ul><li>VLAN ID가 아니라 VLAN 번호를 지정했을 수 있습니다. VLAN 번호는 3 또는 4자리 숫자이지만 VLAN ID는 7자리 숫자입니다. <code>ibmcloud ks vlans &lt;zone&gt;</code>을 실행하여 VLAN ID를 검색하십시오.<li>사용하는 IBM Cloud 인프라(SoftLayer) 계정과 VLAN ID가 연관되지 않았을 수 있습니다. <code>ibmcloud ks vlans &lt;zone&gt;</code>을 실행하여 계정에 대해 사용 가능한 VLAN ID를 나열하십시오. IBM Cloud 인프라(SoftLayer) 계정을 변경하려면 [`ibmcloud ks credential-set`](cs_cli_reference.html#cs_credentials_set)를 참조하십시오. </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500).</td>
@@ -234,7 +240,7 @@ lastupdated: "2018-10-25"
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
         </br></br>
         The {{site.data.keyword.Bluemix_notm}} infrastructure credentials could not be validated.</td>
-        <td>IBM Cloud 인프라(SoftLayer) 포트폴리오에서 조치를 수행하는 데 필요한 권한이 없거나 잘못된 인프라 인증 정보를 사용 중입니다. [인프라 포트폴리오에 대한 액세스를 가능하게 하기 위한 API 키 설정](cs_users.html#api_key)을 참조하십시오. </td>
+        <td>IBM Cloud 인프라(SoftLayer) 포트폴리오에서 조치를 수행하는 데 필요한 권한이 없거나 잘못된 인프라 인증 정보를 사용 중입니다. [인프라 포트폴리오에 대한 액세스를 가능하게 하기 위한 API 키 설정](cs_users.html#api_key)을 참조하십시오.</td>
       </tr>
       <tr>
        <td>Worker unable to talk to {{site.data.keyword.containerlong_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
@@ -242,7 +248,7 @@ lastupdated: "2018-10-25"
      </tr>
       <tr>
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
-  <td>IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하는 데 사용되는 API 키의 소유자에 조치를 수행하는 데 필요한 권한이 없거나 삭제를 보류 중일 수 있습니다.</br></br><strong>사용자</strong>는 다음 단계를 수행하십시오. <ol><li>여러 계정에 대한 액세스 권한이 있는 경우 {{site.data.keyword.containerlong_notm}} 관련 작업을 수행하려는 계정에 로그인되어 있는지 확인하십시오. </li><li><code>ibmcloud ks api-key-info</code>를 실행하여 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하는 데 사용되는 현재 API 키 소유자를 보십시오. </li><li><code>ibmcloud account list</code>를 실행하여 현재 사용하는 {{site.data.keyword.Bluemix_notm}} 계정의 소유자를 보십시오. </li><li>{{site.data.keyword.Bluemix_notm}} 계정의 소유자에게 연락하여 API 키 소유자에게 IBM Cloud 인프라(SoftLayer)에 대한 충분한 권한이 없거나 삭제 보류 상태일 수 있음을 보고하십시오. </li></ol></br><strong>계정 소유자</strong>는 다음 단계를 수행하십시오. <ol><li>[IBM Cloud 인프라(SoftLayer)의 필수 권한](cs_users.html#infra_access)을 검토하여 이전에 실패한 조치를 수행하십시오. </li><li>[<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 명령을 사용하여 API 키 소유자의 권한을 수정하거나 새 API 키를 작성하십시오. </li><li>자신이나 다른 계정 관리자가 수동으로 계정의 IBM Cloud 인프라(SoftLayer) 인증 정보를 설정하는 경우에는 [<code>ibmcloud ks credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset)을 실행하여 계정에서 인증 정보를 제거하십시오.</li></ol></td>
+  <td>IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하는 데 사용되는 API 키의 소유자에 조치를 수행하는 데 필요한 권한이 없거나 삭제를 보류 중일 수 있습니다.</br></br><strong>사용자</strong>는 다음 단계를 수행하십시오. <ol><li>여러 계정에 대한 액세스 권한이 있는 경우 {{site.data.keyword.containerlong_notm}} 관련 작업을 수행하려는 계정에 로그인되어 있는지 확인하십시오. </li><li><code>ibmcloud ks api-key-info</code>를 실행하여 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하는 데 사용되는 현재 API 키 소유자를 보십시오. </li><li><code>ibmcloud account list</code>를 실행하여 현재 사용하는 {{site.data.keyword.Bluemix_notm}} 계정의 소유자를 보십시오. </li><li>{{site.data.keyword.Bluemix_notm}} 계정의 소유자에게 연락하여 API 키 소유자에게 IBM Cloud 인프라(SoftLayer)에 대한 충분한 권한이 없거나 삭제 보류 상태일 수 있음을 보고하십시오. </li></ol></br><strong>계정 소유자</strong>는 다음 단계를 수행하십시오. <ol><li>[IBM Cloud 인프라(SoftLayer)의 필수 권한](cs_users.html#infra_access)을 검토하여 이전에 실패한 조치를 수행하십시오. </li><li>[<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 명령을 사용하여 API 키 소유자의 권한을 수정하거나 새 API 키를 작성하십시오. </li><li>자신이나 다른 계정 관리자가 수동으로 계정의 IBM Cloud 인프라(SoftLayer) 인증 정보를 설정하는 경우에는 [<code>ibmcloud ks credential-unset</code>](cs_cli_reference.html#cs_credentials_unset)을 실행하여 계정에서 인증 정보를 제거하십시오. </li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -258,6 +264,8 @@ lastupdated: "2018-10-25"
 {: #debug_apps}
 
 앱 배치를 디버그해야 하는 옵션을 검토하고 실패의 근본 원인을 찾습니다.
+
+
 
 1. `describe` 명령을 실행하여 서비스 또는 배치 리소스의 비정상 항목을 찾으십시오.
 
@@ -303,20 +311,15 @@ lastupdated: "2018-10-25"
 {: shortdesc}
 
 -  터미널에서 `ibmcloud` CLI 및 플러그인에 대한 업데이트가 사용 가능한 시점을 사용자에게 알려줍니다. 사용 가능한 모든 명령과 플래그를 사용할 수 있도록 반드시 CLI를 최신 상태로 유지하십시오.
-
 -   {{site.data.keyword.Bluemix_notm}}가 사용 가능한지 확인하려면 [{{site.data.keyword.Bluemix_notm}} 상태 페이지를 확인 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/bluemix/support/#status)하십시오.
 -   [{{site.data.keyword.containerlong_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에 질문을 게시하십시오.
-
-{{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
+    {{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
     {: tip}
 -   포럼을 검토하여 다른 사용자에게도 동일한 문제가 발생하는지 여부를 확인하십시오. 포럼을 사용하여 질문을 할 때는 {{site.data.keyword.Bluemix_notm}} 개발 팀이 볼 수 있도록 질문에 태그를 지정하십시오.
-
     -   {{site.data.keyword.containerlong_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
     -   서비스 및 시작하기 지시사항에 대한 질문이 있으면 [IBM Developer Answers ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support/howtogetsupport.html#using-avatar)를 참조하십시오.
-
--   티켓을 열어 IBM 지원 센터에 문의하십시오. IBM 지원 티켓 열기 또는 지원 레벨 및 티켓 심각도에 대해 알아보려면 [지원 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
-
-{: tip}
+-   케이스를 열어서 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨과 케이스 심각도에 대해 알아보려면 [지원 팀에 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
 문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오.
+{: tip}
 

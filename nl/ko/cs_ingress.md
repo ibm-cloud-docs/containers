@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -34,13 +37,13 @@ Ingress는 공용 또는 개인용 요청을 앱에 전달함으로써 클러스
 Ingress는 다음 3개의 컴포넌트로 구성되어 있습니다.
 <dl>
 <dt>Ingress 리소스</dt>
-<dd>Ingress를 사용하여 앱을 노출시키려면 앱에 대한 Kubernetes 서비스를 작성하고 Ingress 리소스를 정의하여 Ingress에 이 서비스를 등록해야 합니다. Ingress 리소스는 앱에 대한 수신 요청을 라우팅하는 방법에 대한 규칙을 정의하는 Kubernetes 리소스입니다. Ingress 리소스는 공용 라우트에 추가되어 `mycluster.us-south.containers.appdomain.cloud/myapp1` 등의 고유 앱 URL을 작성하는 앱 서비스에 대한 경로도 지정합니다. <br></br>**참고**: 2018년 5월 24일부터 새 클라우드의 Ingress 하위 도메인 형식이 변경되었습니다. 새 하위 도메인 형식으로 포함된 지역 또는 구역 이름은 클러스터가 작성된 구역을 기반으로 생성됩니다. 일치하는 앱 도메인 이름에 대한 파이프라인 종속성이 있으면 IBM 제공 Ingress 하위 도메인 대신에 자체 사용자 정의 도메인을 사용할 수 있습니다.<ul><li>2018년 5월 24일 이후에 작성된 모든 클러스터에는 새 형식 <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>의 하위 도메인이 지정됩니다.</li><li>2018년 5월 24일 이전에 작성된 단일 구역 클러스터는 이전 형식 <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>의 지정된 하위 도메인을 계속 사용합니다.</li><li>처음으로 [클러스터에 구역을 추가](cs_clusters.html#add_zone)하여 2018년 5월 24일 이전에 작성된 단일 구역 클러스터를 다중 구역으로 변경하는 경우, 클러스터는 이전 형식 <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>의 지정된 하위 도메인을 계속 사용하며 이에는 새 형식 <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>의 하위 도메인도 역시 지정됩니다. 두 하위 도메인 중 하나를 사용할 수 있습니다.</li></ul></br>**다중 구역 클러스터**: Ingress 리소스는 글로벌하며, 다중 구역 클러스터의 네임스페이스당 하나의 Ingress 리소스만 필요합니다.</dd>
+<dd>Ingress를 사용하여 앱을 노출시키려면 앱에 대한 Kubernetes 서비스를 작성하고 Ingress 리소스를 정의하여 Ingress에 이 서비스를 등록해야 합니다. Ingress 리소스는 앱에 대한 수신 요청을 라우팅하는 방법에 대한 규칙을 정의하는 Kubernetes 리소스입니다. Ingress 리소스는 공용 라우트에 추가되어 `mycluster.us-south.containers.appdomain.cloud/myapp1` 등의 고유 앱 URL을 작성하는 앱 서비스에 대한 경로도 지정합니다.<p class="note">2018년 5월 24일 현재, 새 클라우드에 대해 Ingress 하위 도메인 형식이 변경되었습니다. 새 하위 도메인 형식으로 포함된 지역 또는 구역 이름은 클러스터가 작성된 구역을 기반으로 생성됩니다. 일치하는 앱 도메인 이름에 대한 파이프라인 종속성이 있으면 IBM 제공 Ingress 하위 도메인 대신에 자체 사용자 정의 도메인을 사용할 수 있습니다.<ul><li>2018년 5월 24일 이후에 작성된 모든 클러스터에는 새 형식 <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>의 하위 도메인이 지정됩니다.</li><li>2018년 5월 24일 이전에 작성된 단일 구역 클러스터는 이전 형식 <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>의 지정된 하위 도메인을 계속 사용합니다.</li><li>처음으로 [클러스터에 구역을 추가](cs_clusters.html#add_zone)하여 2018년 5월 24일 이전에 작성된 단일 구역 클러스터를 다중 구역으로 변경하는 경우, 클러스터는 이전 형식 <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>의 지정된 하위 도메인을 계속 사용하며 이에는 새 형식 <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>의 하위 도메인도 역시 지정됩니다. 두 하위 도메인 중 하나를 사용할 수 있습니다.</li></ul></p>**다중 구역 클러스터**: Ingress 리소스는 글로벌하며, 다중 구역 클러스터의 네임스페이스당 하나의 Ingress 리소스만 필요합니다.</dd>
 <dt>애플리케이션 로드 밸런서(ALB)</dt>
 <dd>애플리케이션 로드 밸런서(ALB)는 수신 HTTP, HTTPS, TCP 또는 UDP 서비스 요청을 청취하는 외부 로드 밸런서입니다. 그리고 ALB는 Ingress 리소스에 정의된 규칙에 따라 적합한 앱 팟(Pod)에 요청을 전달합니다. 표준 클러스터를 작성할 때 {{site.data.keyword.containerlong_notm}}에서 자동으로 클러스터용 고가용성 ALB를 작성하고 고유 공용 라우트를 ALB에 지정합니다. 공용 라우트는 클러스터 작성 중에 IBM Cloud 인프라(SoftLayer) 계정으로 프로비저닝된 포터블 공인 IP 주소에 링크됩니다. 기본 사설 ALB도 자동으로 작성되지만 자동으로 사용으로 설정되지는 않습니다.<br></br>**다중 구역 클러스터**: 클러스터에 구역을 추가하는 경우에는 포터블 공용 서브넷이 추가되며 새 공용 ALB가 해당 구역의 서브넷에서 자동으로 작성되고 사용으로 설정됩니다. 클러스터의 모든 기본 공용 ALB는 하나의 공용 라우트를 공유하지만 서로 다른 IP 주소를 보유합니다. 기본 사설 ALB 역시 각 구역에서 자동으로 작성되지만 자동으로 사용되도록 설정되지는 않습니다.</dd>
 <dt>다중 구역 로드 밸런서(MZLB)</dt>
 <dd><p>**다중 구역 클러스터**: 다중 구역 클러스터를 작성하거나 [단일 구역 클러스터에 구역을 추가](cs_clusters.html#add_zone)할 때마다 각 지역당 1개의 MZLB가 존재하도록 Cloudflare 다중 구역 로드 밸런서(MZLB)가 자동으로 작성되고 배치됩니다. MZLB는 동일한 호스트 이름 뒤에 사용자 ALB의 IP 주소를 지정하며, 이러한 IP 주소에 대한 상태 검사를 사용하여 사용 가능 여부를 판별합니다. 예를 들어, 미국 동부 지역의 3개 구역에 작업자 노드가 있으면 `yourcluster.us-east.containers.appdomain.cloud`에 3개의 ALB IP 주소가 있습니다. MZLB 상태는 지역의 각 구역에서 공용 ALB IP를 검사하며, 이러한 상태 검사를 기반으로 DNS 검색 결과가 지속적으로 업데이트되도록 합니다. 예를 들어, ALB의 IP 주소가 `1.1.1.1`, `2.2.2.2` 및 `3.3.3.3`인 경우에 Ingress 하위 도메인의 정상 오퍼레이션 DNS 검색은 모두 3개의 IP를 리턴하며 이 중에서 1개를 클라이언트가 무작위로 액세스합니다. IP 주소가 `3.3.3.3`인 ALB가 어떤 이유로든 사용 불가능하게 된 경우(예: 구역 장애로 인해), 해당 구역에 대한 상태 검사는 실패하며 MZLB는 호스트 이름에서 실패한 IP를 제거합니다. 그리고 DNS 검색은 정상적인 `1.1.1.1` 및 `2.2.2.2` ALB IP만 리턴합니다. 하위 도메인의 TTL(Time To Live)이 30초이므로, 30초 후에 새 클라이언트 앱은 사용 가능한 정상 ALB IP 중 하나에만 액세스할 수 있습니다.</p><p>드물지만 일부 DNS 분석기 또는 클라이언트 앱은 30초 TTL 이후에도 비정상 ALB IP를 계속 사용할 수 있습니다. 클라이언트 앱이 `3.3.3.3` IP를 포기하고 `1.1.1.1` 또는 `2.2.2.2`에 연결을 시도할 때까지 이러한 클라이언트 앱의 로드 시간은 보다 길어질 수 있습니다. 클라이언트 브라우저나 클라이언트 앱 설정에 따라, 지연 시간의 범위는 수 초에서 총 TCP 제한시간까지일 수 있습니다.</p>
 <p>MZLB는 IBM 제공 Ingress 하위 도메인만을 사용하는 공용 ALB에 대해 로드 밸런싱을 수행합니다. 사설 ALB만 사용하는 경우에는 수동으로 ALB의 상태를 확인하고 DNS 검색 결과를 업데이트해야 합니다. 사용자 정의 도메인을 사용하는 공용 ALB를 사용하는 경우, 사용자 정의 도메인의 요청을 클러스터의 IBM 제공 Ingress 하위 도메인으로 전달할 수 있도록 DNS 항목의 CNAME을 작성하여 MZLB 로드 밸런싱에 ALB를 포함할 수 있습니다.</p>
-<p><strong>참고</strong>: Calico 사전-DNAT 네트워크 정책을 사용하여 Ingress 서비스에 대한 모든 수신 트래픽을 차단하는 경우, ALB의 상태 검사에 사용되는 <a href="https://www.cloudflare.com/ips/">Cloudflare의 IPv4 IP <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a> 역시 화이트리스트에 추가해야 합니다. 이러한 IP를 화이트리스트에 추가하기 위한 Calico 사전-DNAT 정책의 작성 방법에 대한 단계를 알아보려면 <a href="cs_tutorials_policies.html#lesson3">Calico 네트워크 정책 튜토리얼</a>의 학습 3을 참조하십시오.</dd>
+<p class="note">Calico 사전-DNAT 네트워크 정책을 사용하여 Ingress 서비스에 대한 모든 수신 트래픽을 차단하는 경우, ALB의 상태 검사에 사용되는 <a href="https://www.cloudflare.com/ips/">Cloudflare의 IPv4 IP <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a> 역시 화이트리스트에 추가해야 합니다. 이러한 IP를 화이트리스트에 추가하기 위한 Calico 사전-DNAT 정책의 작성 방법에 대한 단계를 알아보려면 <a href="cs_tutorials_policies.html#lesson3">Calico 네트워크 정책 튜토리얼</a>의 학습 3을 참조하십시오.</p></dd>
 </dl>
 
 ### 단일 구역 클러스터에서 Ingress를 사용하여 요청이 내 앱에 도달하는 방법은 무엇입니까?
@@ -88,7 +91,7 @@ Ingress를 시작하기 전에 다음 전제조건을 검토하십시오.
 
 **모든 Ingress 구성에 대한 전제조건:**
 - Ingress는 표준 클러스터에만 사용 가능하고 고가용성을 보장할 수 있도록 구역당 최소한 2개의 작업자 노드를 요구하며 해당 주기적 업데이트가 적용됩니다.
-- Ingress를 설정하려면 [**Administrator** IAM 플랫폼 역할](cs_users.html#platform)이 필요합니다. 
+- Ingress를 설정하려면 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할이 필요합니다. 
 
 **다중 구역 클러스터에서 Ingress 사용을 위한 전제조건**:
  - [에지 작업자 노드](cs_edge.html)로 네트워크 트래픽을 제한하는 경우에는 Ingress 팟(Pod)의 고가용성을 위해 각 구역에서 최소한 2개의 에지 작업자 노드를 사용하도록 설정해야 합니다. 구역당 최소한 2개의 작업자 노드가 있으며 클러스터의 모든 구역에 전개된 [에지 노드 작업자 풀을 작성](cs_clusters.html#add_pool)하십시오.
@@ -132,9 +135,8 @@ Ingress를 시작하기 전에 다음 전제조건을 검토하십시오.
 이제 두 URL이 모두 동일한 도메인으로 해석되므로 둘 다 동일한 ALB에서 제공됩니다. 그러나 스테이징 네임스페이스의 리소스가 `stage` 하위 도메인에 등록되므로, Ingress ALB는 `stage.domain.net/app3` URL의 요청을 `app3`으로만 올바르게 라우팅합니다.
 
 {: #wildcard_tls}
-**참고**:
-* IBM 제공 Ingress 하위 도메인 와일드카드, `*.<cluster_name>.<region>.containers.appdomain.cloud`가 클러스터에 기본적으로 등록됩니다. IBM 제공 TLS 인증서는 와일드카드 인증서이며 와일드카드 하위 도메인에 사용될 수 있습니다.
-* 사용자 정의 도메인을 사용하려면 사용자 정의 도메인을 와일드카드 도메인(예: `*.custom_domain.net`)으로 등록해야 합니다. TLS를 사용하려면 와일드카드 인증서를 가져와야 합니다.
+IBM 제공 Ingress 하위 도메인 와일드카드, `*.<cluster_name>.<region>.containers.appdomain.cloud`가 클러스터에 기본적으로 등록됩니다. IBM 제공 TLS 인증서는 와일드카드 인증서이며 와일드카드 하위 도메인에 사용될 수 있습니다. 사용자 정의 도메인을 사용하려면 사용자 정의 도메인을 와일드카드 도메인(예: `*.custom_domain.net`)으로 등록해야 합니다. TLS를 사용하려면 와일드카드 인증서를 가져와야 합니다.
+{: note}
 
 ### 네임스페이스 내의 다중 도메인
 {: #multi-domains}
@@ -143,9 +145,8 @@ Ingress를 시작하기 전에 다음 전제조건을 검토하십시오.
 
 <img src="images/cs_ingress_single_ns_multi_subs.png" alt="네임스페이스당 하나의 리소스가 필요합니다. " style="border-style: none"/>
 
-**참고**:
-* IBM 제공 Ingress 하위 도메인 와일드카드, `*.<cluster_name>.<region>.containers.appdomain.cloud`가 클러스터에 기본적으로 등록됩니다. IBM 제공 Ingress TLS 인증서는 와일드카드 인증서이며 와일드카드 하위 도메인에 사용될 수 있습니다.
-* 사용자 정의 도메인을 사용하려면 사용자 정의 도메인을 와일드카드 도메인(예: `*.custom_domain.net`)으로 등록해야 합니다. TLS를 사용하려면 와일드카드 인증서를 가져와야 합니다.
+IBM 제공 Ingress 하위 도메인 와일드카드, `*.<cluster_name>.<region>.containers.appdomain.cloud`가 클러스터에 기본적으로 등록됩니다. IBM 제공 TLS 인증서는 와일드카드 인증서이며 와일드카드 하위 도메인에 사용될 수 있습니다. 사용자 정의 도메인을 사용하려면 사용자 정의 도메인을 와일드카드 도메인(예: `*.custom_domain.net`)으로 등록해야 합니다. TLS를 사용하려면 와일드카드 인증서를 가져와야 합니다.
+{: note}
 
 <br />
 
@@ -159,7 +160,7 @@ Ingress를 시작하기 전에 다음 전제조건을 검토하십시오.
 시작하기 전에:
 
 * Ingress [전제조건](#config_prereqs)을 검토하십시오.
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
+* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
 ### 1단계: 앱 배치 및 앱 서비스 작성
 {: #public_inside_1}
@@ -250,7 +251,7 @@ Ingress Secret:         <tls_secret>
 
 ALB는 클러스터의 앱에 대한 HTTP 네트워크 트래픽을 로드 밸런싱합니다. 수신 HTTPS 연결도 로드 밸런싱하려면 네트워크 트래픽을 복호화하고 클러스터에 노출된 앱으로 복호화된 요청을 전달하도록 ALB를 구성할 수 있습니다.
 
-* IBM 제공 Ingress 하위 도메인을 사용하는 경우에는 IBM 제공 TLS 인증서를 사용할 수 있습니다. IBM 제공 TLS 인증서는 LetsEncrypt에 의해 서명되고 IBM에 의해 완벽히 관리됩니다. 인증서는 90일마다 만료되며 만료되기 7일 전에 자동으로 갱신됩니다. **참고**: 와일드카드 TLS 인증에 대한 정보는 [이 참고](#wildcard_tls)를 참조하십시오.
+* IBM 제공 Ingress 하위 도메인을 사용하는 경우에는 IBM 제공 TLS 인증서를 사용할 수 있습니다. IBM 제공 TLS 인증서는 LetsEncrypt에 의해 서명되고 IBM에 의해 완벽히 관리됩니다. 인증서는 90일마다 만료되며 만료되기 7일 전에 자동으로 갱신됩니다. 와일드카드 TLS 인증에 대한 정보는 [이 참고](#wildcard_tls)를 참조하십시오.
 * 사용자 정의 도메인을 사용하는 경우에는 자체 TLS 인증서를 사용하여 TLS 종료를 관리할 수 있습니다. 오직 단일 네임스페이스의 앱이 있는 경우에는 해당되는 동일 네임스페이스의 인증서에 대한 TLS 시크릿을 가져오거나 이를 작성할 수 있습니다. 다중 네임스페이스의 앱이 있는 경우에는 ALB가 모든 네임스페이스의 인증서에 액세스하고 이를 사용할 수 있도록 `default` 네임스페이스의 인증서에 대한 TLS 시크릿을 가져오거나 작성하십시오. 와일드카드 TLS 인증에 대한 정보는 [이 참고](#wildcard_tls)를 참조하십시오. **참고**: 사전 공유 키(TLS-PSK)가 포함된 TLS 인증서는 지원되지 않습니다.
 
 **IBM 제공 Ingress 도메인을 사용하는 경우:**
@@ -279,8 +280,8 @@ TLS 인증서가 사용하려는 {{site.data.keyword.cloudcerts_long_notm}}에 �
 {: pre}
 
 준비된 TLS 인증서가 없으면 다음 단계를 수행하십시오.
-1. 인증서 제공자의 인증 기관(CA) 인증서 및 키를 생성하십시오. 고유 도메인이 있는 경우 도메인의 공식적 TLS 인증서를 구매하십시오. **중요**: [CN ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://support.dnsimple.com/articles/what-is-common-name/)이 각 인증서마다 다른지 확인하십시오.
-2. 인증서 및 키를 Base-64로 변환하십시오. 
+1. 인증서 제공자의 인증 기관(CA) 인증서 및 키를 생성하십시오. 고유 도메인이 있는 경우 도메인의 공식적 TLS 인증서를 구매하십시오. [CN ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://support.dnsimple.com/articles/what-is-common-name/)이 각 인증서에 대해 서로 다른지 확인하십시오. 
+2. 인증서 및 키를 Base-64로 변환하십시오.
    1. 인증서 및 키를 Base-64로 인코딩하고 Base-64로 인코딩된 값을 새 파일에 저장하십시오.
       ```
       openssl base64 -in tls.key -out tls.key.base64
@@ -328,7 +329,8 @@ TLS 인증서가 사용하려는 {{site.data.keyword.cloudcerts_long_notm}}에 �
 Ingress 리소스는 ALB에서 트래픽을 앱 서비스에 라우팅하는 데 사용하는 라우팅 규칙을 정의합니다.
 {: shortdesc}
 
-**참고:** 클러스터에 앱이 노출되는 여러 네임스페이스가 있는 경우에는 네임스페이스당 하나의 Ingress 리소스가 필요합니다. 그러나 각 네임스페이스는 다른 호스트를 사용해야 합니다. 와일드카드 도메인을 등록하고 각 리소스에 다른 하위 도메인을 지정해야 합니다. 자세한 정보는 [단일 또는 다중 네임스페이스에 대한 네트워킹 계획](#multiple_namespaces)을 참조하십시오.
+클러스터에 앱이 노출되는 여러 네임스페이스가 있는 경우에는 네임스페이스당 하나의 Ingress 리소스가 필요합니다. 그러나 각 네임스페이스는 다른 호스트를 사용해야 합니다. 와일드카드 도메인을 등록하고 각 리소스에 다른 하위 도메인을 지정해야 합니다. 자세한 정보는 [단일 또는 다중 네임스페이스에 대한 네트워킹 계획](#multiple_namespaces)을 참조하십시오.
+{: note}
 
 1. 선호하는 편집기를 열고 `myingressresource.yaml`과 같은 이름의 Ingress 구성 파일을 작성하십시오.
 
@@ -487,9 +489,9 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
 
 * Ingress [전제조건](#config_prereqs)을 검토하십시오.
 * 클러스터 로드 밸런싱에 포함시키고자 하는 외부 앱에 공인 IP 주소를 사용하여 액세스할 수 있는지 확인하십시오.
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
+* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
-클러스터 외부에 있는 앱을 공용으로 노출하려면 다음 작업을 수행하십시오. 
+클러스터 외부에 있는 앱을 공용으로 노출하려면 다음 작업을 수행하십시오.
 
 1.  작성할 외부 엔드포인트로 수신 요청을 전달할 클러스터에 대한 Kubernetes 서비스를 작성하십시오.
     1.  선호하는 편집기를 열고 예를 들어, `myexternalservice.yaml`이라는 이름의 서비스 구성 파일을 작성하십시오.
@@ -572,7 +574,7 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
         ```
         {: pre}
 
-3. [클러스터 내부에 있는 앱을 공용으로 노출](#public_inside_2)의 단계를 2단계부터 계속 진행하십시오. 
+3. "클러스터 내부에 있는 앱을 공용으로 노출"의 단계를 계속하십시오([2단계: 앱 도메인 선택](#public_inside_2)). 
 
 <br />
 
@@ -644,7 +646,8 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
 표준 클러스터를 작성하면 작업자 노드가 있는 각 구역에 IBM 제공 사설 애플리케이션 로드 밸런서(ALB)가 작성되며 포터블 사설 IP 주소 및 사설 라우트가 지정됩니다. 그러나 각 구역의 기본 사설 ALB가 자동으로 사용되지는 않습니다. 기본 사설 ALB를 사용하여 앱에 대한 사설 네트워크 트래픽을 로드 밸런싱하려면, 먼저 IBM 제공 포터블 사설 IP 주소 또는 자체 포터블 사설 IP 주소 중 하나로 이를 사용할 수 있도록 해야 합니다.
 {:shortdesc}
 
-**참고**: 클러스터를 작성했을 때 `--no-subnet` 플래그를 사용한 경우, 사설 ALB를 사용하려면 먼저 포터블 사설 서브넷 또는 사용자 관리 서브넷을 추가해야 합니다. 자세한 정보는 [클러스터의 추가 서브넷 요청](cs_subnets.html#request)을 참조하십시오.
+클러스터 작성 시에 `--no-subnet` 플래그를 사용한 경우, 사설 ALB를 사용으로 설정하려면 우선 포터블 사설 서브넷이나 사용자 관리 서브넷을 추가해야 합니다. 자세한 정보는 [클러스터의 추가 서브넷 요청](cs_subnets.html#request)을 참조하십시오.
+{: note}
 
 **사전 지정된 IBM 제공 포터블 사설 IP 주소를 사용하여 기본 사설 ALB를 사용하도록 설정하려면 다음을 수행하십시오. **
 
@@ -657,11 +660,11 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
 
     사설 ALB의 **상태(Status)** 필드는 _disabled_입니다.
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
-    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
-    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   false     disabled   private   -               dal12
-    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
-    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    true      enabled    public    169.xx.xxx.xxx  dal12
+    ALB ID                                            Status     Type      ALB IP          Zone    Build
+    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   disabled   private   -               dal10   ingress:350/ingress-auth:192
+    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   disabled   private   -               dal12   ingress:350/ingress-auth:192
+    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
+    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
     ```
     {: screen}
     다중 구역 클러스터에서, ALB ID의 번호 지정된 접미어는 ALB가 추가된 순서를 표시합니다.
@@ -715,9 +718,9 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
 
     사설 ALB의 **상태(Status)** 필드는 _disabled_입니다.
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP          Zone
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -               dal10
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx  dal10
+    ALB ID                                            Status     Type      ALB IP          Zone    Build
+    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   disabled   private   -               dal10   ingress:350/ingress-auth:192
+    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
     ```
     {: screen}
 
@@ -761,8 +764,8 @@ TLS 인증서가 사용하려는 {{site.data.keyword.cloudcerts_long_notm}}에 �
 {: pre}
 
 준비된 TLS 인증서가 없으면 다음 단계를 수행하십시오.
-1. 인증서 제공자의 인증 기관(CA) 인증서 및 키를 생성하십시오. 고유 도메인이 있는 경우 도메인의 공식적 TLS 인증서를 구매하십시오. **중요**: [CN ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://support.dnsimple.com/articles/what-is-common-name/)이 각 인증서마다 다른지 확인하십시오.
-2. 인증서 및 키를 Base-64로 변환하십시오. 
+1. 인증서 제공자의 인증 기관(CA) 인증서 및 키를 생성하십시오. 고유 도메인이 있는 경우 도메인의 공식적 TLS 인증서를 구매하십시오. [CN ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://support.dnsimple.com/articles/what-is-common-name/)이 각 인증서에 대해 서로 다른지 확인하십시오. 
+2. 인증서 및 키를 Base-64로 변환하십시오.
    1. 인증서 및 키를 Base-64로 인코딩하고 Base-64로 인코딩된 값을 새 파일에 저장하십시오.
       ```
       openssl base64 -in tls.key -out tls.key.base64
@@ -810,7 +813,8 @@ TLS 인증서가 사용하려는 {{site.data.keyword.cloudcerts_long_notm}}에 �
 Ingress 리소스는 ALB에서 트래픽을 앱 서비스에 라우팅하는 데 사용하는 라우팅 규칙을 정의합니다.
 {: shortdesc}
 
-**참고:** 클러스터에 앱이 노출되는 여러 네임스페이스가 있는 경우에는 네임스페이스당 하나의 Ingress 리소스가 필요합니다. 그러나 각 네임스페이스는 다른 호스트를 사용해야 합니다. 와일드카드 도메인을 등록하고 각 리소스에 다른 하위 도메인을 지정해야 합니다. 자세한 정보는 [단일 또는 다중 네임스페이스에 대한 네트워킹 계획](#multiple_namespaces)을 참조하십시오.
+클러스터에 앱이 노출되는 여러 네임스페이스가 있는 경우에는 네임스페이스당 하나의 Ingress 리소스가 필요합니다. 그러나 각 네임스페이스는 다른 호스트를 사용해야 합니다. 와일드카드 도메인을 등록하고 각 리소스에 다른 하위 도메인을 지정해야 합니다. 자세한 정보는 [단일 또는 다중 네임스페이스에 대한 네트워킹 계획](#multiple_namespaces)을 참조하십시오.
+{: note}
 
 1. 선호하는 편집기를 열고 `myingressresource.yaml`과 같은 이름의 Ingress 구성 파일을 작성하십시오.
 
@@ -978,7 +982,7 @@ Ingress 애플리케이션 로드 밸런서(ALB)에 기능을 추가하려면 In
 * [redirect-to-https](cs_annotations.html#redirect-to-https): 비보안 HTTP 클라이언트 요청을 HTTPS로 변환합니다.
 * [rewrite-path](cs_annotations.html#rewrite-path): 백엔드 앱이 청취하는 다른 경로로 수신 네트워크 트래픽을 라우팅합니다.
 * [ssl-services](cs_annotations.html#ssl-services): TLS를 사용하여 HTTPS가 필요한 업스트림 앱으로의 트래픽을 암호화합니다.
-* [appid-auth](cs_annotations.html#appid-auth): {{site.data.keyword.appid_full_notm}}를 사용하여 애플리케이션에 인증합니다. 
+* [appid-auth](cs_annotations.html#appid-auth): {{site.data.keyword.appid_full_notm}}를 사용하여 애플리케이션에 인증합니다.
 * [client-max-body-size](cs_annotations.html#client-max-body-size): 클라이언트가 요청의 일부로 전송할 수 있는 최대 본문 크기를 설정합니다.
 
 지원되는 어노테이션의 전체 목록은 [어노테이션으로 Ingress의 사용자 정의](cs_annotations.html)를 참조하십시오.
@@ -1001,7 +1005,8 @@ Ingress 애플리케이션 로드 밸런서(ALB)에 기능을 추가하려면 In
 
 2. <code>data</code> 섹션을 추가하고 공용 포트 `80`, `443`과 그 외에 노출시킬 기타 포트를 세미콜론(;)으로 구분하여 지정하십시오.
 
-    **중요**: 기본적으로 포트 80 및 443이 열립니다. 80 및 443을 열린 상태로 유지하려면 `public-ports` 필드에 지정하는 다른 포트 이외에 이러한 포트도 포함해야 합니다. 지정되지 않은 포트는 닫힙니다. 사설 ALB를 사용으로 설정한 경우 `private-ports` 필드에도 열린 상태로 유지할 포트를 지정해야 합니다.
+    기본적으로 포트 80 및 443이 열립니다. 80 및 443을 열린 상태로 유지하려면 `public-ports` 필드에 지정하는 다른 포트 이외에 이러한 포트도 포함해야 합니다. 지정되지 않은 포트는 닫힙니다. 사설 ALB를 사용으로 설정한 경우 `private-ports` 필드에도 열린 상태로 유지할 포트를 지정해야 합니다.
+    {: important}
 
     ```
     apiVersion: v1
@@ -1048,7 +1053,8 @@ configmap 리소스에 대한 자세한 정보는 [Kubernetes 문서](https://ku
 
 클라이언트 요청의 원래 소스 IP 주소를 유지하기 위해 [소스 IP 유지를 사용 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)할 수 있습니다. 앱 서버가 보안 및 액세스 제어 정책을 적용해야 하는 경우 등에는 클라이언트의 IP를 유지하는 것이 유용합니다.
 
-**참고**: [ALB 사용 안함](cs_cli_reference.html#cs_alb_configure)을 설정하면 ALB를 노출하는 로드 밸런서 서비스에 대한 소스 IP 변경사항이 유실됩니다. ALB를 다시 사용하도록 설정하는 경우에는 소스 IP를 다시 사용하도록 설정해야 합니다.
+[ALB 사용 안함](cs_cli_reference.html#cs_alb_configure)을 설정하면 ALB를 노출하는 로드 밸런서 서비스에 대해 작성된 소스 IP 변경사항이 유실됩니다. ALB를 다시 사용하도록 설정하는 경우에는 소스 IP를 다시 사용하도록 설정해야 합니다.
+{: note}
 
 소스 IP 유지를 사용하려면 Ingress ALB를 노출하는 로드 밸런서 서비스를 편집하십시오.
 
@@ -1136,7 +1142,8 @@ configmap 리소스에 대한 자세한 정보는 [Kubernetes 문서](https://ku
 
 기본적으로 TLS 1.2 프로토콜은 IBM 제공 도메인을 사용하는 모든 Ingress 구성에 사용됩니다. 다음 단계에 따라 대신 TLS 1.1 또는 1.0 프로토콜을 사용하도록 기본값을 대체할 수 있습니다.
 
-**참고**: 모든 호스트에 사용으로 설정된 프로토콜을 지정할 때 TLSv1.1 및 TLSv1.2 매개변수(1.1.13, 1.0.12)는 OpenSSL 1.0.1 이상을 사용하는 경우에만 작동합니다. TLSv1.3 매개변수(1.13.0)는 TLSv1.3 지원으로 빌드된 OpenSSL 1.1.1을 사용하는 경우에만 작동합니다.
+모든 호스트에 대해 사용으로 설정된 프로토콜을 지정하는 경우, TLSv1.1 및 TLSv1.2 매개변수(1.1.13, 1.0.12)는 OpenSSL 1.0.1 이상을 사용할 때만 작동합니다. TLSv1.3 매개변수(1.13.0)는 TLSv1.3 지원으로 빌드된 OpenSSL 1.1.1을 사용하는 경우에만 작동합니다.
+{: note}
 
 configmap을 편집하여 SSL 프로토콜 및 암호를 사용으로 설정하려면 다음을 수행하십시오.
 

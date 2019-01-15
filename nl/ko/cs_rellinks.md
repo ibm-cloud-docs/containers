@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -26,15 +29,15 @@ lastupdated: "2018-10-25"
 
 **일반사항**
 
-- [클러스터용 가격 계산기![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
+- [클러스터용 비용 계산기 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
 
 <br />
 
 
 **REST API**
 
-- [클러스터용 REST API![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger)
-- [클러스터용 REST API JSON ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api-json)
+- [클러스터용 REST API![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api/)
+- [클러스터용 REST API JSON ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api/swagger.json)
 - [클러스터의 로깅용 REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [클러스터의 Ingress 애플리케이션 로드 밸런서 관리용 REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 
@@ -74,7 +77,7 @@ lastupdated: "2018-10-25"
 
 **용어집**
 
-- [{{site.data.keyword.Bluemix_notm}} 용어집](/docs/overview/glossary/index.html#glossary)
+- [{{site.data.keyword.Bluemix_notm}} 용어집](/docs/overview/glossary/glossary.html#glossary)
 - [Kubernetes 용어집 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Docker 용어집 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/glossary/)
 
@@ -85,7 +88,8 @@ lastupdated: "2018-10-25"
 {: #registry}
 
 - [{{site.data.keyword.registryshort_notm}} 문서](/docs/services/Registry/index.html)
-- [REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://registry.ng.bluemix.net/api/doc/)
+- [{{site.data.keyword.registryshort_notm}}REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/apidocs/container-registry)
+- [Vulnerability Advisor REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/apidocs/container-registry/va)
 
 <br />
 
@@ -93,7 +97,7 @@ lastupdated: "2018-10-25"
 ## 팔로우하기
 {: #follow}
 
-- [Twitter ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://twitter.com/hashtag/ibmcontainers)
+- [Twitter ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://twitter.com/hashtag/IKS)
 - [개발자 커뮤니티 기사 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/tag/containers/)
 - [Microservices.TV ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/tv/microservices/)
 

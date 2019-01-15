@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -21,12 +24,12 @@ lastupdated: "2018-10-25"
 # 유스 케이스의 개요
 {: #cs_uc_intro}
 
-다양한 유스 케이스는 {{site.data.keyword.containerlong_notm}}와 {{site.data.keyword.Bluemix_notm}}가 함께 사용되었을 때의 장점을 보여줍니다. 이들 케이스에는 몇 가지 업계 및 워크로드 유형이 강조되어 있습니다. 각 유스 케이스는 특정 업계의 시점에서 제시되지만, 워크로드는 다양한 업계에서 전형적입니다. 다음과 같은 워크로드 주제를 볼 수 있습니다. 
+다양한 유스 케이스는 {{site.data.keyword.containerlong_notm}}와 {{site.data.keyword.Bluemix_notm}}가 함께 사용되었을 때의 장점을 보여줍니다. 이들 케이스에는 몇 가지 업계 및 워크로드 유형이 강조되어 있습니다. 각 유스 케이스는 특정 업계의 시점에서 제시되지만, 워크로드는 다양한 업계에서 전형적입니다. 다음과 같은 워크로드 주제를 볼 수 있습니다.
 * AI 및 기계 학습
 * 데이터 및 스토리지
 * DevOps
-
 {: shortdesc}
+
 <table summary="이 표는 유스 케이스를 보여줍니다. 행은 왼쪽에서 오른쪽으로 읽으며, 아이콘이 1열의 각 업계와 2열의 설명을 나타냅니다. ">
 <caption>유스 케이스</caption>
   <thead>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -54,10 +57,37 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
 
     CLI 출력에서 작업자 노드의 **상태**에 **준비**가 표시되고 **머신 유형**에 **무료** 이외의 머신 유형이 표시되는지 확인하십시오.
 
-2.  로드 밸런서 서비스의 구성 파일이 정확한지 확인하십시오.
+2. 버전 2.0 로드 밸런서의 경우: [로드 밸런서 2.0 전제조건](cs_loadbalancer.html#ipvs_provision)을 완료했는지 확인하십시오. 
 
-    ```
-    apiVersion: v1
+3. 로드 밸런서 서비스의 구성 파일이 정확한지 확인하십시오.
+    * 버전 2.0 로드 밸런서:
+        ```
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: myservice
+          annotations:
+            service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
+        spec:
+          type: LoadBalancer
+          selector:
+            <selector_key>:<selector_value>
+          ports:
+           - protocol: TCP
+             port: 8080
+          externalTrafficPolicy: Local
+        ```
+        {: screen}
+
+        1. **LoadBalancer**를 서비스 유형으로 정의했는지 확인하십시오.
+        2. `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"` 어노테이션을 포함했는지 확인하십시오. 
+        3. LoadBalancer 서비스의 `spec.selector` 섹션에서 `<selector_key>` 및 `<selector_value>`가 배치 yaml의 `spec.template.metadata.labels` 섹션에서 사용한 키/값 쌍과 동일한지 확인하십시오. 레이블이 일치하지 않으면 LoadBalancer 서비스의 **Endpoints** 섹션에 **`<none>`**이 표시되며 인터넷을 통해 앱에 액세스할 수 없습니다.
+        4. 앱에서 청취하는 **port**를 사용했는지 확인하십시오.
+        5. `externalTrafficPolicy`를 `Local`로 설정했는지 확인하십시오. 
+
+    * 버전 1.0 로드 밸런서:
+        ```
+            apiVersion: v1
     kind: Service
     metadata:
       name: myservice
@@ -66,14 +96,14 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
       selector:
         <selector_key>:<selector_value>
       ports:
-       - protocol: TCP
-         port: 8080
-    ```
-    {: pre}
+           - protocol: TCP
+             port: 8080
+        ```
+        {: screen}
 
-    1.  **LoadBalancer**를 서비스 유형으로 정의했는지 확인하십시오.
-    2.  LoadBalancer 서비스의 `spec.selector` 섹션에서 `<selector_key>` 및 `<selector_value>`가 배치 yaml의 `spec.template.metadata.labels` 섹션에서 사용한 키/값 쌍과 동일한지 확인하십시오. 레이블이 일치하지 않으면 LoadBalancer 서비스의 **Endpoints** 섹션에 **`<none>`**이 표시되며 인터넷을 통해 앱에 액세스할 수 없습니다.
-    3.  앱에서 청취하는 **port**를 사용했는지 확인하십시오.
+        1. **LoadBalancer**를 서비스 유형으로 정의했는지 확인하십시오.
+        2. LoadBalancer 서비스의 `spec.selector` 섹션에서 `<selector_key>` 및 `<selector_value>`가 배치 yaml의 `spec.template.metadata.labels` 섹션에서 사용한 키/값 쌍과 동일한지 확인하십시오. 레이블이 일치하지 않으면 LoadBalancer 서비스의 **Endpoints** 섹션에 **`<none>`**이 표시되며 인터넷을 통해 앱에 액세스할 수 없습니다.
+        3. 앱에서 청취하는 **port**를 사용했는지 확인하십시오.
 
 3.  로드 밸런서 서비스를 확인하고 **Events** 섹션을 검토하여 잠재적 오류를 찾으십시오.
 
@@ -88,13 +118,12 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
     <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>이 오류 메시지는 로드 밸런서 서비스에 할당할 포터블 공인 IP 주소가 남아 있지 않음을 나타냅니다. 클러스터의 포터블 공인 IP 주소를 요청하는 방법에 대한 정보는 <a href="cs_subnets.html#subnets">클러스터에 서브넷 추가</a>를 참조하십시오. 포터블 공인 IP 주소를 클러스터에 사용할 수 있게 되면 로드 밸런서 서비스가 자동으로 작성됩니다.</li>
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>**loadBalancerIP** 섹션을 사용하여 로드 밸런서 서비스의 포터블 공인 IP 주소를 정의했지만, 이 포터블 공인 IP 주소는 포터블 공용 서브넷에서 사용할 수 없습니다. 구성 스크립트의 **loadBalancerIP** 섹션에서 기존 IP 주소를 제거하고 사용 가능한 포터블 공인 IP 주소 중 하나를 추가하십시오. 사용 가능한 포터블 공인 IP 주소를 자동으로 할당할 수 있도록 스크립트에서 **loadBalancerIP** 섹션을 제거할 수도 있습니다.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>로드 밸런서 서비스를 배치하는 데 충분한 작업자 노드가 없습니다. 그 이유 중 하나는 작업자 노드가 두 개 이상인 표준 클러스터를 배치했지만 작업자 노드의 프로비저닝에 실패했기 때문일 수 있습니다.</li>
-    <ol><li>사용 가능한 작업자 노드를 나열하십시오.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
-    <li>두 개 이상의 사용 가능한 작업자 노드를 발견하면 작업자 노드 세부사항을 나열하십시오.</br><pre class="codeblock"><code>ibmcloud ks worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
-    <li><code>kubectl get nodes</code> 및 <code>ibmcloud ks [&lt;cluster_name_or_ID&gt;] worker-get</code> 명령에서 리턴된 작업자 노드의 공인 및 사설 VLAN ID가 일치하는지 확인하십시오.</li></ol></li></ul>
+    <ol><li>사용 가능한 작업자 노드를 나열하십시오.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
+    <li>두 개 이상의 사용 가능한 작업자 노드를 발견하면 작업자 노드 세부사항을 나열하십시오.</br><pre class="pre"><code>ibmcloud ks worker-get &lt;cluster_name_or_ID&gt; &lt;worker_ID&gt;</code></pre></li>
+    <li><code>kubectl get nodes</code> 및 <code>ibmcloud ks &lt;cluster_name_or_ID&gt; worker-get</code> 명령으로 리턴된 작업자 노드의 공인 및 사설 VLAN ID가 일치하는지 확인하십시오. </li></ol></li></ul>
 
 4.  사용자 정의 도메인을 사용하여 로드 밸런서 서비스에 연결하는 경우 사용자 정의 도메인이 로드 밸런서 서비스의 공인 IP 주소에 맵핑되었는지 확인하십시오.
     1.  로드 밸런서 서비스의 공인 IP 주소를 찾으십시오.
-
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
@@ -113,10 +142,10 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
 
 {: tsResolve}
 ALB의 고가용성을 보장할 수 있도록 우선 클러스터가 완전히 배치되어 있으며 구역마다 2개 이상의 작업자 노드가 사용 가능한지 확인하십시오.
-    ```
-      ibmcloud ks workers <cluster_name_or_ID>
-    ```
-    {: pre}
+```
+  ibmcloud ks workers <cluster_name_or_ID>
+```
+{: pre}
 
 CLI 출력에서 작업자 노드의 **상태**에 **준비**가 표시되고 **머신 유형**에 **무료** 이외의 머신 유형이 표시되는지 확인하십시오.
 
@@ -146,7 +175,7 @@ ALB 시크릿이 실패할 수 있는 다음과 같은 이유와 해당 문제�
  <tbody>
  <tr>
  <td>인증서 데이터 다운로드와 업데이트에 필요한 액세스 역할이 없습니다.</td>
- <td>{{site.data.keyword.cloudcerts_full_notm}} 인스턴스에 대한 **관리자** 및 **작성자** 역할을 모두 지정하도록 계정 관리자에게 요청하십시오. 자세한 정보는 {{site.data.keyword.cloudcerts_short}}에 대한 <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">서비스 액세스 관리</a>를 참조하십시오.</td>
+ <td>계정 관리자에게 요청하여 다음의 {{site.data.keyword.Bluemix_notm}} IAM 역할을 지정받으십시오. <ul><li>{{site.data.keyword.cloudcerts_full_notm}} 인스턴스에 대한 **관리자** 및 **작성자** 서비스 역할. 자세한 정보는 {{site.data.keyword.cloudcerts_short}}에 대한 <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">서비스 액세스 관리</a>를 참조하십시오.</li><li>클러스터에 대한 <a href="cs_users.html#platform">**관리자** 플랫폼 역할</a>. </li></ul></td>
  </tr>
  <tr>
  <td>작성, 업데이트 또는 제거 시 제공한 인증서 CRN이 클러스터와 동일한 계정에 속하지 않습니다.</td>
@@ -190,12 +219,15 @@ VLAN의 서브넷 수를 보려면 다음 작업을 수행하십시오.
 2.  클러스터를 작성하는 데 사용한 VLAN의 **VLAN 번호**를 클릭하십시오. **서브넷** 섹션을 검토하여 40개 이상의 서브넷이 있는지 확인하십시오.
 
 {: tsResolve}
-새 VLAN이 필요하면 [{{site.data.keyword.Bluemix_notm}} 지원에 문의](/docs/infrastructure/vlans/order-vlan.html#order-vlans)하여 VLAN을 주문하십시오. 그런 다음, 이 새 VLAN을 사용하는 [클러스터를 작성](cs_cli_reference.html#cs_cluster_create)하십시오.
+새 VLAN이 필요하면 [{{site.data.keyword.Bluemix_notm}} 지원 팀에 문의](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans)하여 VLAN을 주문하십시오. 그런 다음, 이 새 VLAN을 사용하는 [클러스터를 작성](cs_cli_reference.html#cs_cluster_create)하십시오.
 
 사용 가능한 다른 VLAN이 있는 경우에는 기존 클러스터에 [VLAN Spanning을 설정](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)할 수 있습니다. 그 후에는 사용 가능한 서브넷이 있는 다른 VLAN을 사용하는 클러스터에 새 작업자 노드를 추가할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오.
 
 VLAN의 모든 서브넷을 사용 중인 경우가 아니면 클러스터에서 서브넷을 재사용할 수 있습니다.
-1.  사용할 서브넷이 사용 가능한지 확인하십시오. **참고**: 사용 중인 인프라 계정이 여러 {{site.data.keyword.Bluemix_notm}} 계정 간에 공유되는 경우가 있습니다. 이 경우에는 `ibmcloud ks subnets` 명령을 실행하여 **바인딩된 클러스터**의 서브넷을 확인해도 사용자가 자체 클러스터에 대한 정보만 볼 수 있습니다. 인프라 계정 소유자에게 확인하여 해당 서브넷이 사용 가능하며 다른 계정 또는 팀에 의해 사용 중이 아닌지 확인하십시오.
+1.  사용할 서브넷이 사용 가능한지 확인하십시오.
+
+    사용 중인 인프라 계정이 여러 {{site.data.keyword.Bluemix_notm}} 계정 간에 공유될 수 있습니다. 이 경우에는 `ibmcloud ks subnets` 명령을 실행하여 **바인딩된 클러스터**의 서브넷을 확인해도 사용자가 자체 클러스터에 대한 정보만 볼 수 있습니다. 인프라 계정 소유자에게 확인하여 해당 서브넷이 사용 가능하며 다른 계정 또는 팀에 의해 사용 중이 아닌지 확인하십시오.
+    {: note}
 
 2.  서비스가 새 서브넷을 작성하지 않도록 `--no-subnet` 옵션을 사용하여 [클러스터를 작성](cs_cli_reference.html#cs_cluster_create)하십시오. 재사용에 이용할 수 있는 서브넷이 있는 구역 및 VLAN을 지정하십시오.
 
@@ -210,12 +242,12 @@ VLAN의 모든 서브넷을 사용 중인 경우가 아니면 클러스터에서
 {: tsSymptoms}
 다중 구역 클러스터가 있으며 `ibmcloud ks albs <cluster>`를 실행하는 경우, ALB가 구역에 배치되지 않습니다. 예를 들어, 3개의 구역에 작업자 노드가 있으면 공용 ALB가 세 번째 구역에 배치되지 않은 다음과 유사한 출력을 볼 수 있습니다.
 ```
-ALB ID                                            Enabled   Status     Type      ALB IP   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false     disabled   private   -   
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false     disabled   private   -   
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true      enabled    public    169.xx.xxx.xxx
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true      enabled    public    169.xx.xxx.xxx
+ALB ID                                            Status     Type      ALB IP           Zone    Build
+private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
+private-cr96039a75fddb4ad1a09ced6699c88888-alb2   disabled   private   -                dal12   ingress:350/ingress-auth:192
+private-cr96039a75fddb4ad1a09ced6699c88888-alb3   disabled   private   -                dal13   ingress:350/ingress-auth:192
+public-cr96039a75fddb4ad1a09ced6699c88888-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
+public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
 ```
 {: screen}
 
@@ -258,23 +290,23 @@ Ingress 서비스는 WebSocket을 사용하는 앱을 노출합니다. 그러나
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-[ 로드 밸런서](cs_loadbalancer.html#node_affinity_tolerations) 또는 [Ingress ALB](cs_ingress.html#preserve_source_ip) 서비스의 구성 파일에서 `externalTrafficPolicy`를 `Local`로 변경하여 이러한 서비스에 대해 소스 IP 주소 보존을 사용으로 설정했습니다. 그러나 앱의 백엔드 서비스에 트래픽이 도달하지 않습니다. 
+서비스의 구성 파일에서 `externalTrafficPolicy`를 `Local`로 변경하여 [버전 1.0 로드 밸런서](cs_loadbalancer.html#node_affinity_tolerations) 또는 [Ingress ALB](cs_ingress.html#preserve_source_ip) 서비스에 대해 소스 IP 주소 보존을 사용으로 설정했습니다. 그러나 앱의 백엔드 서비스에 트래픽이 도달하지 않습니다.
 
 {: tsCauses}
-로드 밸런서 또는 Ingress ALB 서비스에 대해 소스 IP 주소 보존을 사용으로 설정하면 클라이언트 요청의 소스 IP 주소가 보존됩니다. 해당 서비스는 요청 패킷의 IP 주소가 변경되지 않았음을 보장하기 위해 동일한 작업자 노드에 있는 앱 팟(Pod)에만 트래픽을 전달합니다. 일반적으로, 로드 밸런서 또는 Ingress ALB 서비스 팟(Pod)은 앱 팟(Pod)이 배치된 작업자 노드와 동일한 노드에 배치됩니다. 그러나 서비스 팟(Pod)과 앱 팟(Pod)이 동일한 작업자 노드에 스케줄되지 않는 상황 또한 있습니다. 작업자 노드에 [Kubernetes 오염 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)을 사용하면 오염 허용이 설정되지 않은 팟(Pod)은 오염된 작업자 노드에서 실행되지 않게 됩니다. 소스 IP 주소 보존은 사용하는 오염 유형에 따라 작동하지 않을 수 있습니다. 
+로드 밸런서 또는 Ingress ALB 서비스에 대해 소스 IP 주소 보존을 사용으로 설정하면 클라이언트 요청의 소스 IP 주소가 보존됩니다. 해당 서비스는 요청 패킷의 IP 주소가 변경되지 않았음을 보장하기 위해 동일한 작업자 노드에 있는 앱 팟(Pod)에만 트래픽을 전달합니다. 일반적으로, 로드 밸런서 또는 Ingress ALB 서비스 팟(Pod)은 앱 팟(Pod)이 배치된 작업자 노드와 동일한 노드에 배치됩니다. 그러나 서비스 팟(Pod)과 앱 팟(Pod)이 동일한 작업자 노드에 스케줄되지 않는 상황 또한 있습니다. 작업자 노드에 [Kubernetes 오염 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)을 사용하면 오염 허용이 설정되지 않은 팟(Pod)은 오염된 작업자 노드에서 실행되지 않게 됩니다. 소스 IP 주소 보존은 사용하는 오염 유형에 따라 작동하지 않을 수 있습니다.
 
-* **에지 노드 오염**: 사용자가 클러스터의 각 공용 VLAN에 있는 둘 이상의 작업자 노드에 [`dedicated=edge` 레이블을 추가](cs_edge.html#edge_nodes)하여 이러한 작업자 노드에만 Ingress 및 로드 밸런서 팟(Pod)이 배치되도록 하였습니다. 그 후에는 [이러한 에지 노드 또한 오염](cs_edge.html#edge_workloads)시켜 다른 워크로드가 이러한 에지 노드에서 실행되지 않도록 하였습니다. 그러나 앱 배치에 에지 노드 친화성 규칙 및 오염 허용을 추가하지는 않았습니다. 앱 팟(Pod)이 서비스 팟(Pod)과 동일한 오염된 노드에 스케줄될 수 없으므로 앱의 백엔드 서비스에 트래픽이 도달하지 않습니다. 
+* **에지 노드 오염**: 사용자가 클러스터의 각 공용 VLAN에 있는 둘 이상의 작업자 노드에 [`dedicated=edge` 레이블을 추가](cs_edge.html#edge_nodes)하여 이러한 작업자 노드에만 Ingress 및 로드 밸런서 팟(Pod)이 배치되도록 하였습니다. 그 후에는 [이러한 에지 노드 또한 오염](cs_edge.html#edge_workloads)시켜 다른 워크로드가 이러한 에지 노드에서 실행되지 않도록 하였습니다. 그러나 앱 배치에 에지 노드 친화성 규칙 및 오염 허용을 추가하지는 않았습니다. 앱 팟(Pod)이 서비스 팟(Pod)과 동일한 오염된 노드에 스케줄될 수 없으므로 앱의 백엔드 서비스에 트래픽이 도달하지 않습니다.
 
-* **사용자 정의 오염**: 사용자가 여러 노드에 사용자 정의 오염을 사용하여 해당 오염 허용이 있는 팟(Pod)만 이러한 노드에 배치될 수 있도록 하였습니다. 그 후 앱과 로드 밸런서 또는 Ingress 서비스의 배치에 친화성 규칙 및 오염 허용을 추가하여 이들의 팟(Pod)이 이러한 노드에만 배치되도록 하였습니다. 그러나 `ibm-system` 네임스페이스에 자동으로 작성된 `ibm-cloud-provider-ip` `keepalived` 팟(Pod)은 로드 밸런서 팟(Pod)이 앱 팟(Pod)을 따라 동일한 노드에 배치되도록 합니다. 이러한 `keepalived` 팟(Pod)에는 사용된 사용자 정의 오염에 대한 오염 허용이 없습니다. 이들은 앱 팟(Pod)이 실행 중인 동일한 오염된 노드에 스케줄될 수 없으므로 앱의 백엔드 서비스에 트래픽이 도달하지 않습니다. 
+* **사용자 정의 오염**: 사용자가 여러 노드에 사용자 정의 오염을 사용하여 해당 오염 허용이 있는 팟(Pod)만 이러한 노드에 배치될 수 있도록 하였습니다. 그 후 앱과 로드 밸런서 또는 Ingress 서비스의 배치에 친화성 규칙 및 오염 허용을 추가하여 이들의 팟(Pod)이 이러한 노드에만 배치되도록 하였습니다. 그러나 `ibm-system` 네임스페이스에서 자동으로 작성된 `ibm-cloud-provider-ip` `keepalived` 팟(Pod)은 로드 밸런서 팟(Pod) 및 앱 팟(Pod)이 항상 동일한 작업자 노드로 스케줄되도록 보장합니다. 이러한 `keepalived` 팟(Pod)에는 사용된 사용자 정의 오염에 대한 오염 허용이 없습니다. 이들은 앱 팟(Pod)이 실행 중인 동일한 오염된 노드에 스케줄될 수 없으므로 앱의 백엔드 서비스에 트래픽이 도달하지 않습니다.
 
 {: tsResolve}
-다음 선택사항 중 하나를 선택하여 문제를 해결하십시오. 
+다음 선택사항 중 하나를 선택하여 문제를 해결하십시오.
 
-* **에지 노드 오염**: 로드 밸런서 및 앱  팟(Pod)이 오염된 에지 노드에 배치되도록 하려면 [앱 배치에 에지 노드 친화성 규칙 및 오염 허용을 추가](cs_loadbalancer.html#edge_nodes)하십시오. 로드 밸런서 및 Ingress ALB 팟(Pod)에는 기본적으로 이러한 친화성 규칙 및 오염 허용이 있습니다. 
+* **에지 노드 오염**: 로드 밸런서 및 앱 팟(Pod)이 오염된 에지 노드에 배치되도록 하려면 [앱 배치에 에지 노드 친화성 규칙 및 오염 허용을 추가](cs_loadbalancer.html#edge_nodes)하십시오. 로드 밸런서 및 Ingress ALB 팟(Pod)에는 기본적으로 이러한 친화성 규칙 및 오염 허용이 있습니다.
 
-* **사용자 정의 오염**: `keepalived` 팟(Pod)에 오염 허용이 없는 사용자 정의 오염을 제거하십시오. 대신 [작업자 노드를 에지 노드로 레이블 지정한 후 이러한 에지 노드를 오염](cs_edge.html)시킬 수 있습니다. 
+* **사용자 정의 오염**: `keepalived` 팟(Pod)에 오염 허용이 없는 사용자 정의 오염을 제거하십시오. 대신 [작업자 노드를 에지 노드로 레이블 지정한 후 이러한 에지 노드를 오염](cs_edge.html)시킬 수 있습니다.
 
-위 선택사항 중 하나를 완료했으나 `keepalived` 팟(Pod)이 여전히 스케줄되지 않는 경우에는 다음 작업을 수행하여 `keepalived` 팟(Pod)에 대한 더 자세한 정보를 얻을 수 있습니다. 
+위 선택사항 중 하나를 완료했으나 `keepalived` 팟(Pod)이 여전히 스케줄되지 않는 경우에는 다음 작업을 수행하여 `keepalived` 팟(Pod)에 대한 더 자세한 정보를 얻을 수 있습니다.
 
 1. `keepalived` 팟(Pod)을 가져오십시오.
     ```
@@ -291,7 +323,7 @@ Ingress 서비스는 WebSocket을 사용하는 앱을 노출합니다. 그러나
 
 3. 각 `keepalived` 팟(Pod)에 대한 설명을 출력하고 **Events** 섹션을 찾으십시오. 나열된 모든 오류 또는 경고 메시지를 처리하십시오.
     ```
-    ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
+    kubectl describe pod ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
     ```
     {: pre}
 
@@ -302,7 +334,7 @@ Ingress 서비스는 WebSocket을 사용하는 앱을 노출합니다. 그러나
 {: #cs_vpn_fails}
 
 {: tsSymptoms}
-`kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status`를 실행하여 VPN 연결을 확인하는 경우 `ESTABLISHED`의 상태가 표시되지 않거나 VPN 팟(Pod)이 `ERROR` 상태에 있거나 계속해서 중단된 후 다시 시작됩니다.
+`kubectl exec  $STRONGSWAN_POD -- ipsec status`를 실행하여 VPN 연결을 확인하는 경우, `ESTABLISHED`의 상태가 보이지 않거나 VPN 팟(Pod)이 `ERROR` 상태에 있거나 계속해서 중단된 후 다시 시작됩니다. 
 
 {: tsCauses}
 Helm 차트 구성 파일에 올바르지 않은 값, 누락된 값 또는 구문 오류가 있습니다.
@@ -310,48 +342,21 @@ Helm 차트 구성 파일에 올바르지 않은 값, 누락된 값 또는 구�
 {: tsResolve}
 strongSwan Helm 차트를 사용하여 VPN 연결을 설정하려는 경우 처음에 VPN 상태는 `ESTABLISHED`가 아닐 수 있습니다. 여러 유형의 문제를 확인하고 구성 파일을 적절하게 변경해야 할 수 있습니다. strongSwan VPN 연결의 문제점을 해결하려면 다음을 수행하십시오.
 
-1. 구성 파일의 설정에 대한 온프레미스 VPN 엔드포인트 설정을 확인하십시오. 설정이 일치하지 않는 경우 다음을 수행하십시오.
+1. strongSwan 차트 정의에 포함된 5개의 Helm 테스트를 실행하여 [strongSwan VPN 연결을 테스트하고 확인](cs_vpn.html#vpn_test)하십시오. 
 
-    <ol>
-    <li>기존 Helm 차트를 삭제하십시오.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
-    <li><code>config.yaml</code> 파일의 올바르지 않은 값을 수정한 후 업데이트된 파일을 저장하십시오.</li>
-    <li>새 Helm 차트를 설치하십시오.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
-    </ol>
-
-2. VPN 팟(Pod)이 `ERROR` 상태이거나 계속 충돌하고 다시 시작되는 경우, 차트 구성 맵에 있는 `ipsec.conf` 설정의 매개변수 유효성 검증 때문일 수 있습니다.
-
-    <ol>
-    <li>strongSwan 팟(Pod) 로그에서 유효성 검증 오류를 확인하십시오.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
-    <li>로그에 유효성 검증 오류가 포함되어 있는 경우 기존 Helm 차트를 삭제하십시오.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
-    <li>`config.yaml` 파일의 올바르지 않은 값을 수정한 후 업데이트된 파일을 저장하십시오.</li>
-    <li>새 Helm 차트를 설치하십시오.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
-    </ol>
-
-3. strongSwan 차트 정의에 포함된 5회의 Helm 테스트를 실행하십시오.
-
-    <ol>
-    <li>Helm 테스트를 실행하십시오.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
-    <li>테스트에 실패하는 경우 각 테스트에 대한 정보 및 실패 이유를 확인하려면 [Helm VPN 연결 테스트 이해](cs_vpn.html#vpn_tests_table)를 참조하십시오. <b>참고</b>: 일부 테스트에는 VPN 구성에서 선택적 설정인 요구사항이 포함됩니다. 일부 테스트가 실패하는 경우 실패는 선택적 설정의 지정 여부에 따라 허용될 수 있습니다.</li>
-    <li>테스트 팟(Pod)의 로그를 확인하여 실패한 테스트의 출력을 보십시오.<br><pre class="codeblock"><code>kubectl logs -n kube-system <test_program></code></pre></li>
-    <li>기존 Helm 차트를 삭제하십시오.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
-    <li><code>config.yaml</code> 파일의 올바르지 않은 값을 수정한 후 업데이트된 파일을 저장하십시오.</li>
-    <li>새 Helm 차트를 설치하십시오.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
-    <li>변경사항을 확인하려면 다음을 수행하십시오.<ol><li>현재 테스트 팟(Pod)을 가져오십시오.</br><pre class="codeblock"><code>kubectl get pods -a -n kube-system -l app=strongswan-test</code></pre></li><li>현재 테스트 팟(Pod)을 정리하십시오.</br><pre class="codeblock"><code>kubectl delete pods -n kube-system -l app=strongswan-test</code></pre></li><li>테스트를 다시 실행하십시오.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
-    </ol></ol>
-
-4. VPN 팟(Pod) 이미지의 내부에 패키징된 VPN 디버깅 도구를 실행하십시오.
+2. Helm 테스트를 실행한 후에 VPN 연결을 설정할 수 없는 경우에는 VPN 팟(Pod) 이미지의 내부에 패키징된 VPN 디버깅 도구를 실행할 수 있습니다. 
 
     1. `STRONGSWAN_POD` 환경 변수를 설정하십시오.
 
         ```
-        export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+    export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
         ```
         {: pre}
 
     2. 디버깅 도구를 실행하십시오.
 
         ```
-        kubectl exec -n kube-system  $STRONGSWAN_POD -- vpnDebug
+        kubectl exec  $STRONGSWAN_POD -- vpnDebug
         ```
         {: pre}
 
@@ -364,9 +369,9 @@ strongSwan Helm 차트를 사용하여 VPN 연결을 설정하려는 경우 처�
 {: #cs_strongswan_release}
 
 {: tsSymptoms}
-사용자가 strongSwan Helm 차트를 수정하고 `helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan`을 실행하여 새 릴리스의 설치를 시도합니다. 그러나 다음 오류가 표시됩니다.
+사용자는 strongSwan Helm 차트를 수정하고 `helm install -f config.yaml --name=vpn ibm/strongswan`을 실행하여 새 릴리스의 설치를 시도합니다. 그러나 다음 오류가 표시됩니다.
 ```
-Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan" already exists
+Error: release vpn failed: deployments.extensions "vpn-strongswan" already exists
 ```
 {: screen}
 
@@ -377,25 +382,25 @@ Error: release <new_release_name> failed: deployments.extensions "vpn-strongswan
 
 1. 이전 차트 릴리스를 삭제하십시오.
     ```
-    helm delete --purge <old_release_name>
+    helm delete --purge vpn
     ```
     {: pre}
 
 2. 이전 릴리스에 대한 배치를 삭제하십시오. 배치 및 연관된 팟(Pod)을 삭제하려면 최대 1분이 소요됩니다.
     ```
-    kubectl delete deploy -n kube-system vpn-strongswan
+    kubectl delete deploy vpn-strongswan
     ```
     {: pre}
 
 3. 배치가 삭제되었는지 확인하십시오. `vpn-strongswan` 배치가 목록에 나타나지 않습니다.
     ```
-    kubectl get deployments -n kube-system
+         kubectl get deployments
     ```
     {: pre}
 
 4. 새 릴리스 이름으로 업데이트된 strongSwan Helm 차트를 다시 설치하십시오.
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<new_release_name> bluemix/strongswan
+    helm install -f config.yaml --name=vpn ibm/strongswan
     ```
     {: pre}
 
@@ -496,7 +501,7 @@ Helm 차트 값을 업데이트하여 작업자 노드 변경사항을 반영하
 4. 업데이트된 값을 사용하여 새 Helm 차트를 설치하십시오.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
@@ -516,14 +521,14 @@ Helm 차트 값을 업데이트하여 작업자 노드 변경사항을 반영하
 8. `STRONGSWAN_POD` 환경 변수를 설정하십시오.
 
     ```
-    export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=<release_name> -o jsonpath='{ .items[0].metadata.name }')
+    export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=<release_name> -o jsonpath='{ .items[0].metadata.name }')
     ```
     {: pre}
 
 9. VPN의 상태를 확인하십시오.
 
     ```
-        kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+    kubectl exec $STRONGSWAN_POD -- ipsec status
     ```
     {: pre}
 
@@ -567,7 +572,7 @@ Calico 정책을 사용하려면 클러스터 Kubernetes 버전, Calico CLI 버�
     {: pre}
 
     * 클러스터가 Kubernetes 버전 1.10 이상인 경우 다음을 수행하십시오.
-        1. [버전 3.1.1 Calico CLI를 설치 및 구성](cs_network_policy.html#1.10_install)하십시오. 구성에는 Calico v3 구문을 사용하도록 수동으로 `calicoctl.cfg` 파일을 업데이트하는 작업이 포함됩니다.
+        1. [버전 3.3.1 Calico CLI를 설치하고 구성](cs_network_policy.html#1.10_install)하십시오. 구성에는 Calico v3 구문을 사용하도록 수동으로 `calicoctl.cfg` 파일을 업데이트하는 작업이 포함됩니다.
         2. 작성하고 클러스터에 적용할 정책이 [Calico v3 구문![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy)을 사용하는지 확인하십시오. Calico v2 구문으로 된 기존 정책 `.yaml` 또는 `.json` 파일이 있는 경우 [`calicoctl convert` 명령 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert)을 사용하여 Calico v3 구문으로 변환할 수 있습니다.
         3. [정책을 보기](cs_network_policy.html#1.10_examine_policies) 위해 글로벌 정책의 경우 `calicoctl get GlobalNetworkPolicy`를 사용하고 특정 네임스페이스로 범위가 지정된 정책의 경우 `calicoctl get NetworkPolicy --namespace <policy_namespace>`를 사용 중인지 확인하십시오.
 
@@ -602,7 +607,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 
 또는 새 VLAN을 주문하고 이를 사용하여 풀에서 새 작업자 노드를 작성하여 기존 작업자 풀을 유지할 수 있습니다.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
 1.  새 VLAN ID가 필요한 구역을 가져오려면 다음 명령 출력의 **위치**를 기록해 두십시오. **참고**: 클러스터가 다중 구역인 경우에는 각 구역마다 VLAN ID가 필요합니다.
 
@@ -611,7 +616,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
     ```
     {: pre}
 
-2.  [{{site.data.keyword.Bluemix_notm}} 지원에 문의](/docs/infrastructure/vlans/order-vlan.html#order-vlans)하여 클러스터가 있는 각 구역에 대한 사설 및 공용 VLAN을 가져오십시오.
+2.  [{{site.data.keyword.Bluemix_notm}} 지원 팀에 문의](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans)하여 클러스터가 있는 각 구역에 대한 새 사설 및 공용 VLAN을 가져오십시오.
 
 3.  각 구역에 대한 새 사설 및 공용 VLAN ID를 기록해 두십시오.
 
@@ -656,20 +661,15 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 {: shortdesc}
 
 -  터미널에서 `ibmcloud` CLI 및 플러그인에 대한 업데이트가 사용 가능한 시점을 사용자에게 알려줍니다. 사용 가능한 모든 명령과 플래그를 사용할 수 있도록 반드시 CLI를 최신 상태로 유지하십시오.
-
 -   {{site.data.keyword.Bluemix_notm}}가 사용 가능한지 확인하려면 [{{site.data.keyword.Bluemix_notm}} 상태 페이지를 확인 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/bluemix/support/#status)하십시오.
 -   [{{site.data.keyword.containerlong_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에 질문을 게시하십시오.
-
-{{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
+    {{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
     {: tip}
 -   포럼을 검토하여 다른 사용자에게도 동일한 문제가 발생하는지 여부를 확인하십시오. 포럼을 사용하여 질문을 할 때는 {{site.data.keyword.Bluemix_notm}} 개발 팀이 볼 수 있도록 질문에 태그를 지정하십시오.
-
     -   {{site.data.keyword.containerlong_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
     -   서비스 및 시작하기 지시사항에 대한 질문이 있으면 [IBM Developer Answers ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support/howtogetsupport.html#using-avatar)를 참조하십시오.
-
--   티켓을 열어 IBM 지원 센터에 문의하십시오. IBM 지원 티켓 열기 또는 지원 레벨 및 티켓 심각도에 대해 알아보려면 [지원 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
-
-{: tip}
+-   케이스를 열어서 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨과 케이스 심각도에 대해 알아보려면 [지원 팀에 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
 문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오.
+{: tip}
 

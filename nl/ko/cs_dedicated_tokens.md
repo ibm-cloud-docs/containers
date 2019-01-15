@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -63,11 +66,11 @@ lastupdated: "2018-10-25"
     </tr>
     <tr>
     <td><code>--docker-server=&lt;registry_url&gt;</code></td>
-    <td>필수. 네임스페이스가 설정된 이미지 레지스트리에 대한 URL(<code>registry.&lt;dedicated_domain&gt;</code>)입니다. </li></ul></td>
+    <td>필수. 네임스페이스가 설정된 이미지 레지스트리에 대한 URL(<code>registry.&lt;dedicated_domain&gt;</code>)입니다.</li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username=token</code></td>
-    <td>필수. 이 값은 변경하지 마십시오. </td>
+    <td>필수. 이 값은 변경하지 마십시오.</td>
     </tr>
     <tr>
     <td><code>--docker-password=&lt;token_value&gt;</code></td>

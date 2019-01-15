@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -41,8 +44,8 @@ lastupdated: "2018-10-25"
 
 ## 전제조건
 
--  [IBM Cloud CLI, {{site.data.keyword.containerlong_notm}} 플러그인 및 Kubernetes CLI를 설치](cs_cli_install.html#cs_cli_install_steps)하십시오. Istio에는 Kubernetes 버전 1.9 이상이 필요합니다. 클러스터의 Kubernetes 버전과 일치하는 `kubectl` CLI 버전을 설치해야 합니다.
--  [Kubernetes 버전 1.9 이상을 실행 중인 클러스터를 작성](cs_clusters.html#clusters_cli)하거나 [기존 클러스터를 버전 1.9로 업데이트](cs_versions.html#cs_v19)하십시오.
+-  [IBM Cloud CLI, {{site.data.keyword.containerlong_notm}} 플러그인 및 Kubernetes CLI를 설치](cs_cli_install.html#cs_cli_install_steps)하십시오. 클러스터의 Kubernetes 버전과 일치하는 `kubectl` CLI 버전을 설치해야 합니다.
+-  [클러스터를 작성](cs_clusters.html#clusters_cli)하십시오. 
 -  [CLI를 클러스터에 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 ## 학습 1: Istio 다운로드 및 설치
@@ -52,7 +55,7 @@ Istio를 클러스터에 다운로드하고 설치하십시오.
 {:shortdesc}
 
 1. [IBM Istio Helm 차트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-istio)를 사용하여 Istio를 설치하십시오.
-    1. [클러스터에서 Helm을 설정하고 `ibm-charts` 저장소를 Helm 인스턴스에 추가](cs_integrations.html#helm)하십시오. 
+    1. [클러스터에서 Helm을 설정하고 `ibm-charts` 저장소를 Helm 인스턴스에 추가](cs_integrations.html#helm)하십시오.
     2.  **Helm 버전 2.9 이하에만 해당**: Istio의 사용자 정의 리소스 정의를 설치하십시오.
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
@@ -256,7 +259,7 @@ Istio에 대한 작업을 완료했으며 [계속해서 탐색](#istio_tutorial_
 ## 다음 단계
 {: #istio_tutorial_whatsnext}
 
-* {{site.data.keyword.containerlong_notm}} 및 Istio를 둘 다 사용하여 앱을 노출하려 하십니까? 이 [블로그 게시물 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2018/09/transitioning-your-service-mesh-from-ibm-cloud-kubernetes-service-ingress-to-istio-ingress/)에서 {{site.data.keyword.containerlong_notm}} Ingress ALB와 Istio 게이트웨이를 연결하는 방법을 알아보십시오. 
+* {{site.data.keyword.containerlong_notm}} 및 Istio를 둘 다 사용하여 앱을 노출하려 하십니까? 이 [블로그 게시물 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2018/09/transitioning-your-service-mesh-from-ibm-cloud-kubernetes-service-ingress-to-istio-ingress/)에서 {{site.data.keyword.containerlong_notm}} Ingress ALB와 Istio 게이트웨이를 연결하는 방법을 알아보십시오.
 * Istio를 추가로 탐색하려면 [Istio 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/)에서 더 많은 안내서를 찾을 수 있습니다.
     * [Intelligent Routing ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/guides/intelligent-routing.html): 이 예제는 Istio의 트래픽 관리 기능을 사용하여 특정 BookInfo 버전의 검토 및 등급 마이크로서비스로 트래픽을 라우팅하는 방법을 보여줍니다.
     * [In-Depth Telemetry ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/guides/telemetry.html): 이 예에는 Istio Mixer와 Envoy 프록시를 사용하여 BookInfo의 전체 마이크로서비스에서 균일한 메트릭, 로그 및 추적을 얻는 방법이 포함되어 있습니다.

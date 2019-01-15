@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -22,7 +25,7 @@ lastupdated: "2018-10-25"
 모든 Kubernetes 클러스터는 Calico라는 네트워크 플러그인으로 설정됩니다. {{site.data.keyword.containerlong}}에서 모든 작업자 노드의 공용 네트워크 인터페이스 보안을 위해 기본 네트워크 정책이 설정됩니다.
 {: shortdesc}
 
-고유한 보안 요구사항이 있는 경우 또는 VLAN Spanning이 사용으로 설정된 다중 구역 클러스터가 있는 경우에는 Calico 및 Kubernetes를 사용하여 클러스터에 대한 네트워크 정책을 작성할 수 있습니다. Kubernetes 네트워크 정책을 사용하면 클러스터 내의 팟(Pod)에 대해 허용하거나 차단할 네트워크 트래픽을 지정할 수 있습니다. 로드 밸런서 서비스에 대한 인바운드(Ingress) 트래픽 차단과 같은 고급 네트워크 정책을 설정하려면 Calico 네트워크 정책을 사용하십시오. 
+고유한 보안 요구사항이 있는 경우 또는 VLAN Spanning이 사용으로 설정된 다중 구역 클러스터가 있는 경우에는 Calico 및 Kubernetes를 사용하여 클러스터에 대한 네트워크 정책을 작성할 수 있습니다. Kubernetes 네트워크 정책을 사용하면 클러스터 내의 팟(Pod)에 대해 허용하거나 차단할 네트워크 트래픽을 지정할 수 있습니다. 로드 밸런서 서비스에 대한 인바운드(Ingress) 트래픽 차단과 같은 고급 네트워크 정책을 설정하려면 Calico 네트워크 정책을 사용하십시오.
 
 <ul>
   <li>
@@ -33,12 +36,12 @@ Kubernetes 버전 [1.10 이상 클러스터 ![외부 링크 아이콘](../icons/
     <ul>
     <li>Kubernetes 팟(Pod) 소스 또는 대상 IP 주소나 CIDR에 관계없이 특정 네트워크 인터페이스의 네트워크 트래픽을 허용하거나 차단합니다.</li>
     <li>네임스페이스 간에 팟(Pod)에 대한 네트워크 트래픽을 허용하거나 차단합니다.</li>
-    <li>[Kubernetes LoadBalancer 또는 NodePort 서비스에 대한 인바운드(Ingress) 트래픽을 차단](#block_ingress)합니다. </li>
+    <li>[Kubernetes LoadBalancer 또는 NodePort 서비스에 대한 인바운드(Ingress) 트래픽을 차단](#block_ingress)합니다.</li>
     </ul>
   </li>
   </ul>
 
-Calico는 Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 자동으로 Calico 정책으로 변환된 Kubernetes 네트워크 정책을 포함하는 해당 정책을 적용합니다. Iptables 규칙은 대상으로 지정된 리소스에 전달되도록 네트워크 트래픽이 충족해야 하는 특성을 정의하기 위해
+Calico는 Kubernetes 작업자 노드에서 Linux Iptables 규칙을 설정하여 자동으로 Calico 정책으로 변환된 Kubernetes 네트워크 정책을 포함하여 이러한 정책을 적용합니다. Iptables 규칙은 대상으로 지정된 리소스에 전달되도록 네트워크 트래픽이 충족해야 하는 특성을 정의하기 위해
 작업자 노드에 대한 방화벽의 역할을 합니다.
 
 Ingress 및 로드 밸런서 서비스를 사용하려면 Calico 및 Kubernetes 정책을 사용하여 클러스터 내부 또는 외부로의 네트워크 트래픽을 관리하십시오. IBM Cloud 인프라(SoftLayer) [보안 그룹](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups)은 사용하지 마십시오. IBM Cloud 인프라(SoftLayer) 보안 그룹은 하이퍼바이저 레벨에서 트래픽을 필터링하기 위해 단일 가상 서버의 네트워크 인터페이스에 적용됩니다. 그러나 보안 그룹은 로드 밸런서 IP 주소의 관리를 위해 {{site.data.keyword.containerlong_notm}}에서 사용하는 VRRP 프로토콜을 지원하지 않습니다. 로드 밸런서 IP 주소를 관리하기 위한 VRRP 프로토콜이 존재하지 않으면 Ingress 및 로드 밸런서 서비스가 올바르게 작동하지 않습니다.
@@ -57,7 +60,8 @@ Ingress 및 로드 밸런서 서비스를 사용하려면 Calico 및 Kubernetes 
 
 자동으로 클러스터에 적용되는 다음과 같은 기본 Calico 네트워크 정책을 검토하십시오.
 
-**중요:** 정책을 완전히 이해한 경우를 제외하고는 호스트 엔드포인트에 적용된 정책을 제거하지 마십시오. 정책에서 허용되는 트래픽이 필요하지 않은지 확인하십시오.
+정책을 완전히 이해하지 못하는 경우에는 호스트 엔드포인트에 적용된 정책을 제거하지 마십시오. 정책에서 허용되는 트래픽이 필요하지 않은지 확인하십시오.
+{: important}
 
  <table summary="표에서 첫 번째 행은 두 열 모두에 걸쳐 있습니다. 나머지 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 서버 구역은 1열에 있고 일치시킬 IP 주소는 2열에 있습니다. ">
  <caption>각 클러스터의 기본 Calico 정책</caption>
@@ -79,7 +83,7 @@ Ingress 및 로드 밸런서 서비스를 사용하려면 Calico 및 Kubernetes 
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>해당 서비스가 노출되는 팟(Pod)에 대한 수신 노드 포트, 로드 밸런서 및 Ingress 서비스 트래픽을 허용합니다. <strong>참고</strong>: Kubernetes는 대상 네트워크 주소 변환(DNAT)을 사용하여 서비스 요청을 올바른 팟(Pod)에 전달하므로 노출된 포트를 지정할 필요가 없습니다. 호스트 엔드포인트 정책이 iptables에 적용되기 전에 해당 전달이 이루어집니다.</td>
+      <td>해당 서비스가 노출되는 팟(Pod)에 대한 수신 노드 포트, 로드 밸런서 및 Ingress 서비스 트래픽을 허용합니다. <strong>참고</strong>: Kubernetes는 대상 네트워크 주소 변환(DNAT)을 사용하여 서비스 요청을 올바른 팟(Pod)에 전달하므로 노출된 포트를 지정할 필요가 없습니다. 해당 전달은 호스트 엔드포인트 정책이 Iptables에서 적용되기 전에 이루어집니다. </td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
@@ -102,7 +106,7 @@ Kubernetes 버전 1.10 이상 클러스터에서는 Kubernetes 대시보드에 �
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td><b>Kubernetes v1.10에서만</b> <code>kube-system</code> 네임스페이스에 제공됨: 모든 팟(Pod)이 Kubernetes 대시보드에 액세스하지 못하도록 차단합니다. 이 정책은 {{site.data.keyword.Bluemix_notm}} UI 또는 <code>kubectl proxy</code>를 사용하여 대시보드에 액세스하는 기능에는 영향을 미치지 않습니다. 팟(Pod)에 대시보드에 대한 액세스 권한이 필요한 경우 <code>kubernetes-dashboard-policy: allow</code> 레이블이 있는 네임스페이스에 팟(Pod)을 배치하십시오.</td>
+  <td><b>Kubernetes v1.10 이상에서만</b>, <code>kube-system</code> 네임스페이스에 제공됨: Kubernetes 대시보드에 액세스하지 못하도록 모든 팟(Pod)을 차단합니다. 이 정책은 {{site.data.keyword.Bluemix_notm}} 콘솔에서 또는 <code>kubectl proxy</code>를 사용하여 대시보드에 액세스하는 데는 영향을 주지 않습니다. 팟(Pod)에 대시보드에 대한 액세스 권한이 필요한 경우 <code>kubernetes-dashboard-policy: allow</code> 레이블이 있는 네임스페이스에 팟(Pod)을 배치하십시오.</td>
  </tr>
 </tbody>
 </table>
@@ -119,12 +123,12 @@ Calico 정책을 확인, 관리 및 추가하려면 Calico CLI를 설치하여 �
 CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Kubernetes 버전에 따라 다릅니다. Calico CLI를 설치 및 구성하려면 클러스터 버전에 따라 다음 링크 중 하나를 클릭하십시오.
 
 * [Kubernetes 버전 1.10 이상 클러스터](#1.10_install)
-* [Kubernetes 버전 1.9 이상 클러스터](#1.9_install)
+* [Kubernetes 버전 1.9 이하 클러스터(더 이상 사용되지 않음)](#1.9_install)
 
 클러스터를 Kubernetes 버전 1.9 이하에서 버전 1.10 이상으로 업데이트하기 전에 [Calico v3으로 업데이트 준비](cs_versions.html#110_calicov3)를 검토하십시오.
 {: tip}
 
-### Kubernetes 버전 1.10 이상을 실행 중인 클러스터용 버전 3.1.1 Calico CLI 설치 및 구성
+### Kubernetes 버전 1.10 이상을 실행 중인 클러스터용 버전 3.3.1 Calico CLI 설치 및 구성
 {: #1.10_install}
 
 1. [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). `--admin` 옵션을 `ibmcloud ks cluster-config` 명령에 포함하십시오. 이는 인증서 및 권한 파일을 다운로드하는 데 사용됩니다. 이 다운로드에는 인프라 포트폴리오에 액세스하고 작업자 노드에서 Calico 명령을 실행하기 위한 키도 포함됩니다.
@@ -153,7 +157,7 @@ CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Ku
         ```
         {: pre}
 
-4. [Calico CLI를 다운로드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/projectcalico/calicoctl/releases/tag/v3.1.1)하십시오.
+4. [Calico CLI를 다운로드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/projectcalico/calicoctl/releases/tag/v3.3.1)하십시오.
 
     OSX를 사용하는 경우 `-darwin-amd64` 버전을 다운로드하십시오. Windows를 사용하는 경우 {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 Calico CLI를 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다. 반드시 `calicoctl.exe`로 파일을 저장하십시오.
     {: tip}
@@ -192,7 +196,7 @@ CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Ku
       ```
       {: pre}
 
-    - Windows: `--config` 플래그를 사용하여, 1단계에서 얻은 네트워크 구성 파일을 대상으로 지정하십시오. `calicoctl` 명령을 실행할 때마다 이 플래그를 포함시키십시오. 
+    - Windows: `--config` 플래그를 사용하여, 1단계에서 얻은 네트워크 구성 파일을 대상으로 지정하십시오. `calicoctl` 명령을 실행할 때마다 이 플래그를 포함시키십시오.
 
       ```
       calicoctl get nodes --config=filepath/calicoctl.cfg
@@ -210,8 +214,11 @@ CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Ku
       {: screen}
 
 
-### Kubernetes 버전 1.9 이상을 실행 중인 클러스터용 버전 1.6.3 Calico CLI 설치 및 구성
+### Kubernetes 버전 1.9 이상을 실행 중인 클러스터용 버전 1.6.3 Calico CLI 설치 및 구성(더 이상 사용되지 않음)
 {: #1.9_install}
+
+Kubernetes 버전 1.9은 더 이상 사용되지 않으며 2018년 12월 27일 현재 지원되지 않습니다. 이전 버전의 Kubernetes는 지원되지 않습니다. 가급적이면 빨리 [지원되는 버전](cs_versions.html#cs_versions)을 실행하는 클러스터를 [업데이트](cs_cluster_update.html#update) 또는 [작성](cs_clusters.html#clusters)하십시오.
+{: note}
 
 1. [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). `--admin` 옵션을 `ibmcloud ks cluster-config` 명령에 포함하십시오. 이는 인증서 및 권한 파일을 다운로드하는 데 사용됩니다. 이 다운로드에는 인프라 포트폴리오에 액세스하고 작업자 노드에서 Calico 명령을 실행하기 위한 키도 포함됩니다.
 
@@ -283,16 +290,16 @@ CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Ku
     ```
     {: codeblock}
 
-    1. `<ETCD_HOST>` 및 `<ETCD_PORT>`를 검색하십시오. 
+    1. `<ETCD_HOST>` 및 `<ETCD_PORT>`.
         1. `cluster-info` ConfigMap으로부터 Calico 구성 값을 가져오십시오.
             ```
             kubectl get cm -n kube-system cluster-info -o yaml
             ```
             {: pre}
 
-        2. `data` 섹션에서 `etcd_host` 및 `etcd_port` 값을 찾으십시오. 
+        2. `data` 섹션에서 `etcd_host` 및 `etcd_port` 값을 찾으십시오.
 
-    2. Kubernetes 인증서가 다운로드되는 디렉토리인 `<CERTS_DIR>`을 검색하십시오.
+    2. `<CERTS_DIR>`(Kubernetes 인증서가 다운로드된 디렉토리)을 검색하십시오. 
 
         - Linux 및 OS X:
           ```
@@ -318,7 +325,7 @@ CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Ku
           ```
           {: screen}
 
-        디렉토리 경로를 얻으려면 출력의 끝에서 `kube-config-prod-<zone>-<cluster_name>.yml`을 제거하십시오. 
+        디렉토리 경로를 얻으려면 출력의 끝에서 `kube-config-prod-<zone>-<cluster_name>.yml`을 제거하십시오.
 
     3. `ca-*pem_file`을 검색하십시오.
 
@@ -380,10 +387,10 @@ CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Ku
 CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Kubernetes 버전에 따라 다릅니다. Calico CLI를 설치 및 구성하려면 클러스터 버전에 따라 다음 링크 중 하나를 클릭하십시오.
 
 * [Kubernetes 버전 1.10 이상 클러스터](#1.10_examine_policies)
-* [Kubernetes 버전 1.9 이상 클러스터](#1.9_examine_policies)
+* [Kubernetes 버전 1.9 이하 클러스터(더 이상 사용되지 않음)](#1.9_examine_policies)
 
-클러스터를 Kubernetes 버전 1.9 이하에서 버전 1.10 이상으로 업데이트하기 전에 [Calico v3으로 업데이트 준비](cs_versions.html#110_calicov3)를 검토하십시오.
-{: tip}
+Kubernetes 버전 1.9은 더 이상 사용되지 않으며 2018년 12월 27일 현재 지원되지 않습니다. 이전 버전의 Kubernetes는 지원되지 않습니다. 가급적이면 빨리 [지원되는 버전](cs_versions.html#cs_versions)을 실행하는 클러스터를 [업데이트](cs_cluster_update.html#update) 또는 [작성](cs_clusters.html#clusters)하십시오. 클러스터를 Kubernetes 버전 1.9 이하에서 버전 1.10 이상으로 업데이트하기 전에 [Calico v3으로 업데이트 준비](cs_versions.html#110_calicov3)를 검토하십시오.
+{: note}
 
 ### Kubernetes 버전 1.10 이상을 실행 중인 클러스터의 네트워크 정책 보기
 {: #1.10_examine_policies}
@@ -426,8 +433,11 @@ Linux 및 Mac 사용자는 `--config=filepath/calicoctl.cfg` 플래그를 `calic
     ```
     {: pre}
 
-### Kubernetes 버전 1.9 이하를 실행 중인 클러스터의 네트워크 정책 보기
+### Kubernetes 버전 1.9 이하를 실행 중인 클러스터의 네트워크 정책 보기(더 이상 사용되지 않음)
 {: #1.9_examine_policies}
+
+Kubernetes 버전 1.9은 더 이상 사용되지 않으며 2018년 12월 27일 현재 지원되지 않습니다. 이전 버전의 Kubernetes는 지원되지 않습니다. 가급적이면 빨리 [지원되는 버전](cs_versions.html#cs_versions)을 실행하는 클러스터를 [업데이트](cs_cluster_update.html#update) 또는 [작성](cs_clusters.html#clusters)하십시오.
+{: note}
 
 Linux 사용자는 `--config=filepath/calicoctl.cfg` 플래그를 `calicoctl` 명령에 포함할 필요가 없습니다.
 {: tip}
@@ -471,7 +481,16 @@ Linux 사용자는 `--config=filepath/calicoctl.cfg` 플래그를 `calicoctl` �
 
 Kubernetes 네트워크 정책을 작성하려면 [Kubernetes 네트워크 정책 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/services-networking/network-policies/)를 참조하십시오.
 
-Calico 정책을 작성하려면 다음 단계를 사용하십시오.
+Calico 정책을 작성하려면 다음 단계를 사용하십시오. CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Kubernetes 버전에 따라 다릅니다. 클러스터 버전에 따라 다음 링크 중 하나를 클릭하십시오.
+
+* [Kubernetes 버전 1.10 이상 클러스터](#1.10_create_new)
+* [Kubernetes 버전 1.9 이하 클러스터(더 이상 사용되지 않음)](#1.9_create_new)
+
+Kubernetes 버전 1.9은 더 이상 사용되지 않으며 2018년 12월 27일 현재 지원되지 않습니다. 이전 버전의 Kubernetes는 지원되지 않습니다. 가급적이면 빨리 [지원되는 버전](cs_versions.html#cs_versions)을 실행하는 클러스터를 [업데이트](cs_cluster_update.html#update) 또는 [작성](cs_clusters.html#clusters)하십시오. 클러스터를 Kubernetes 버전 1.9 이하에서 버전 1.10 이상으로 업데이트하기 전에 [Calico v3으로 업데이트 준비](cs_versions.html#110_calicov3)를 검토하십시오.
+{: tip}
+
+### Kubernetes 버전 1.10 이상을 실행 중인 클러스터에 Calico 정책 추가
+{: #1.10_create_new}
 
 시작하기 전에:
 1. [Calico CLI를 설치 및 구성](#cli_install)하십시오.
@@ -481,19 +500,7 @@ Calico 정책을 작성하려면 다음 단계를 사용하십시오.
     ```
     {: pre}
 
-CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Kubernetes 버전에 따라 다릅니다. 클러스터 버전에 따라 다음 링크 중 하나를 클릭하십시오.
-
-* [Kubernetes 버전 1.10 이상 클러스터](#1.10_create_new)
-* [Kubernetes 버전 1.9 이상 클러스터](#1.9_create_new)
-
-클러스터를 Kubernetes 버전 1.9 이하에서 버전 1.10 이상으로 업데이트하기 전에 [Calico v3으로 업데이트 준비](cs_versions.html#110_calicov3)를 검토하십시오.
-{: tip}
-
-### Kubernetes 버전 1.10 이상을 실행 중인 클러스터에 Calico 정책 추가
-{: #1.10_create_new}
-
-1. 구성 스크립트(`.yaml`)를 작성하여 Calico [네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) 또는 [글로벌 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy)을 정의하십시오. 이러한 구성 파일에는 이러한 정책이 적용되는 팟(Pod), 네임스페이스 또는 호스트를 설명하는 선택기가 포함됩니다. 사용자 공유 정책을 작성하려면 이러한 [샘플 Calico 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)을 참조하십시오.
-    **참고**: Kubernetes 버전 1.10 이상 클러스터는 Calico v3 정책 구문을 사용합니다.
+1. 구성 스크립트(`.yaml`)를 작성하여 Calico [네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) 또는 [글로벌 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy)을 정의하십시오. 이러한 구성 파일에는 이러한 정책이 적용되는 팟(Pod), 네임스페이스 또는 호스트를 설명하는 선택기가 포함됩니다. 사용자 공유 정책을 작성하려면 이러한 [샘플 Calico 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)을 참조하십시오. 참고로, Kubernetes 버전 1.10 이상 클러스터는 Calico v3 정책 구문을 사용해야 합니다. 
 
 2. 클러스터에 정책을 적용하십시오.
     - Linux 및 OS X:
@@ -510,11 +517,21 @@ CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Ku
       ```
       {: pre}
 
-### Kubernetes 버전 1.9 이하를 실행 중인 클러스터에 Calico 정책 추가
+### Kubernetes 버전 1.9 이하를 실행 중인 클러스터에서 Calico 정책 추가(더 이상 사용되지 않음)
 {: #1.9_create_new}
 
-1. 구성 스크립트(`.yaml`)를 작성하여 [Calico 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)을 정의하십시오. 이러한 구성 파일에는 이러한 정책이 적용되는 팟(Pod), 네임스페이스 또는 호스트를 설명하는 선택기가 포함됩니다. 사용자 공유 정책을 작성하려면 이러한 [샘플 Calico 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy)을 참조하십시오.
-    **참고**: Kubernetes 버전 1.9 이하 클러스터는 Calico v2 정책 구문을 사용해야 합니다.
+Kubernetes 버전 1.9은 더 이상 사용되지 않으며 2018년 12월 27일 현재 지원되지 않습니다. 이전 버전의 Kubernetes는 지원되지 않습니다. 가급적이면 빨리 [지원되는 버전](cs_versions.html#cs_versions)을 실행하는 클러스터를 [업데이트](cs_cluster_update.html#update) 또는 [작성](cs_clusters.html#clusters)하십시오.
+{: note}
+
+시작하기 전에:
+1. [Calico CLI를 설치 및 구성](#cli_install)하십시오.
+2. [클러스터에 Kubernetes CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. `--admin` 옵션을 `ibmcloud ks cluster-config` 명령에 포함하십시오. 이는 인증서 및 권한 파일을 다운로드하는 데 사용됩니다. 이 다운로드에는 인프라 포트폴리오에 액세스하고 작업자 노드에서 Calico 명령을 실행하기 위한 키도 포함됩니다.
+    ```
+    ibmcloud ks cluster-config <cluster_name> --admin
+    ```
+    {: pre}
+
+1. 구성 스크립트(`.yaml`)를 작성하여 [Calico 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)을 정의하십시오. 이러한 구성 파일에는 이러한 정책이 적용되는 팟(Pod), 네임스페이스 또는 호스트를 설명하는 선택기가 포함됩니다. 사용자 공유 정책을 작성하려면 이러한 [샘플 Calico 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy)을 참조하십시오. 참고로, Kubernetes 버전 1.9 이하 클러스터는 Calico v2 정책 구문을 사용해야 합니다. 
 
 
 2. 클러스터에 정책을 적용하십시오.
@@ -541,20 +558,20 @@ CLI 구성 및 정책에 대한 Calico 버전의 호환성은 클러스터의 Ku
 [기본적으로](#default_policy) Kubernetes NodePort 및 LoadBalancer 서비스는 앱을 모든 공용 및 사설 클러스터 인터페이스에서 사용 가능하게 하도록 디자인되었습니다. 그러나 사용자는 Calico 정책을 사용하여 트래픽 소스 또는 대상을 기반으로 서비스에 대한 수신 트래픽을 차단할 수 있습니다.
 {:shortdesc}
 
-Kubernetes NodePort 및 LoadBalancer 서비스에 대해 생성된 DNAT iptables 규칙으로 인해 기본 Kubernetes 및 Calico 정책을 이러한 서비스의 보호에 적용하기 어렵습니다. 그러나 사전 DNAT 정책은 Kubernetes가 일반 DNAT를 사용하여 트래픽을 팟(Pod)에 전달하기 전에 iptables 규칙을 생성하고 적용하므로, 이러한 정책은 특정 트래픽이 앱에 도달하지 못하도록 차단합니다. 
+해당 서비스에 대해 생성된 DNAT Iptables 규칙으로 인해, 기본 Kubernetes 및 Calico 정책을 Kubernetes NodePort 및 LoadBalancer 서비스의 보호에 적용하기는 어렵습니다. 그러나 Kubernetes가 일반 DNAT를 사용하여 트래픽을 팟(Pod)에 전달하기 전에 Iptables 규칙을 생성하고 적용하기 때문에 사전 DNAT 정책은 특정 트래픽이 앱에 도달하지 못하도록 차단합니다. 
 
-Calico 사전 DNAT 네트워크 정책의 몇 가지 일반적인 사용법은 다음과 같습니다. 
+Calico 사전 DNAT 네트워크 정책의 몇 가지 일반적인 사용법은 다음과 같습니다.
 
   - 개인용 로드 밸런서 서비스의 공용 노트 포트에 대한 트래픽 차단: 로드 밸런서 서비스는 로드 밸런서 IP 주소 및 포트를 통해 앱을 사용할 수 있도록 하고, 서비스의 노드 포트를 통해 앱을 사용할 수 있도록 합니다. 클러스터 내의 모든 노드에 대한 모든 IP 주소(공인 및 사설)에서 노드 포트에 액세스할 수 있습니다.
-  - [에지 작업자 노드](cs_edge.html#edge)에서 실행되는 클러스터의 공용 노드 포트에 대한 트래픽 차단: 노드 포트를 차단하면 에지 작업자 노드가 수신 트래픽을 처리하는 유일한 작업자 노드가 됩니다. 
+  - [에지 작업자 노드](cs_edge.html#edge)에서 실행되는 클러스터의 공용 노드 포트에 대한 트래픽 차단: 노드 포트를 차단하면 에지 작업자 노드가 수신 트래픽을 처리하는 유일한 작업자 노드가 됩니다.
   - 특정 소스 IP 주소 또는 CIDR로부터의 트래픽을 차단(블랙리스트 지정)
   - 특정 소스 IP 주소 또는 CIDR로부터의 트래픽만 허용(화이트리스트 지정)하고 다른 모든 트래픽을 차단
 
 소스 IP 주소를 화이트리스트 또는 블랙리스트에 추가하는 방법을 보려면 [Calico 네트워크 정책을 사용하여 트래픽 차단 튜토리얼](cs_tutorials_policies.html#policy_tutorial)을 참고하십시오. 클러스터와의 양방향 트래픽을 제어하는 추가적인 예제 Calico 네트워크 정책을 보려면 [스타 정책 데모 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) 및 [고급 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)을 체크아웃할 수 있습니다.
 {: tip}
 
-1. Ingress(수신 트래픽)의 Kubernetes 서비스 액세스에 대한 Calico 사전 DNAT 네트워크 정책을 정의하십시오. 
-    * Kubernetes 버전 1.10 이상 클러스터는 [Calico v3 정책 구문 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy)을 사용해야 합니다. Kubernetes 버전 1.9 이하 클러스터는 [Calico v2 정책 구문 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)을 사용해야 합니다. 
+1. Ingress(수신 트래픽)의 Kubernetes 서비스 액세스에 대한 Calico 사전 DNAT 네트워크 정책을 정의하십시오.
+    * Kubernetes 버전 1.10 이상 클러스터는 [Calico v3 정책 구문 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy)을 사용해야 합니다. Kubernetes 버전 1.9 이하 클러스터는 [Calico v2 정책 구문 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)을 사용해야 합니다.
 
         모든 노드 포트를 차단하는 리소스 예:
 
@@ -615,7 +632,7 @@ Calico 사전 DNAT 네트워크 정책의 몇 가지 일반적인 사용법은 �
 
 **작업자 노드**
 
-* 개인용 인터페이스 유출은 팟(Pod) IP, 이 클러스터의 작업자, DNS 액세스를 위한 UPD/TCP 포트 53, NFS 파일 서버와의 통신을 위한 포트 2049, 블록 스토리지와의 통신을 위한 포트 443 및 3260에만 허용됩니다. 
+* 개인용 인터페이스 유출은 팟(Pod) IP, 이 클러스터의 작업자, DNS 액세스를 위한 UPD/TCP 포트 53, NFS 파일 서버와의 통신을 위한 포트 2049, 블록 스토리지와의 통신을 위한 포트 443 및 3260에만 허용됩니다.
 * 개인용 인터페이스 유입은 클러스터의 작업자에서만, 그리고 DNS, kubelet, ICMP 및 VRRP로만 허용됩니다.
 
 **팟(Pod)**
@@ -652,11 +669,10 @@ Calico 정책을 사용하여 사설 네트워크에서 클러스터를 분리�
       ```
       {: pre}
 
-3. 개인용 호스트 엔드포인트에 대한 정책을 설정하십시오. 
+3. 개인용 호스트 엔드포인트에 대한 정책을 설정하십시오.
     1. `generic-privatehostendpoint.yaml` 정책을 여십시오.
     2. `<worker_name>`을 작업자 노드의 이름으로 대체하고 `<worker-node-private-ip>`를 작업자 노드의 사설 IP 주소로 대체하십시오. 작업자 노드의 사설 IP를 보려면 다음을 실행하십시오. `ibmcloud ks workers --cluster <my_cluster>`.
-    3. 클러스터의 각 작업자 노드의 새 섹션에서 이 단계를 반복하십시오.
-    **참고**: 클러스터에 작업자 노드를 추가할 때마다 호스트 엔드포인트 파일을 새 항목으로 업데이트해야 합니다.
+    3. 클러스터의 각 작업자 노드의 새 섹션에서 이 단계를 반복하십시오. **참고**: 클러스터에 작업자 노드를 추가할 때마다 호스트 엔드포인트 파일을 새 항목으로 업데이트해야 합니다.
 
 4. 클러스터에 모든 정책을 적용하십시오.
     - Linux 및 OS X:
@@ -787,7 +803,7 @@ spec:
 
 이제 트래픽은 finance 마이크로서비스에서 accounts Srv1 백엔드로 이동할 수 있습니다. accounts Srv1 백엔드는 finance 마이크로서비스에 응답할 수 있지만 역방향 트래픽 연결은 설정할 수 없습니다.
 
-**참고**: `podSelector` 및 `namespaceSelector`를 결합할 수 없으므로, 사용자는 다른 네임스페이스의 특정 앱 팟(Pod)에서의 트래픽을 허용할 수 없습니다. 이 예제에서는 Finance 네임스페이스의 모든 마이크로서비스에서의 모든 트래픽이 허용됩니다.
+이 예제에서는 Finance 네임스페이스의 모든 마이크로서비스에서의 모든 트래픽이 허용됩니다. `podSelector` 및 `namespaceSelector`를 결합할 수 없으므로 사용자는 다른 네임스페이스의 특정 앱 팟(Pod)에서의 트래픽을 허용할 수 없습니다. 
 
 ## 거부된 트래픽 로깅
 {: #log_denied}
@@ -831,7 +847,7 @@ spec:
         kubectl apply -f <policy_name>.yaml
         ```
         {: pre}
-        Calico가 iptables 규칙으로서 적용할 수 있도록 Kubernetes 정책은 Calico NetworkPolicy으로 자동 변환됩니다.
+        Calico가 Iptables 규칙으로서 적용할 수 있도록 Kubernetes 정책은 Calico NetworkPolicy으로 자동 변환됩니다. 
 
     * Calico 정책을 적용하려면 다음을 실행하십시오.
         ```
@@ -864,7 +880,7 @@ spec:
     ```
     {: screen}
 
-4. 이전에 작성한 Calico 정책에 의해 거부된 모든 트래픽을 로깅하려면 이름이 `log-denied-packets`인 Calico NetworkPolicy를 작성하십시오. 예를 들어, 1단계에서 정의한 네트워크 정책에 의해 거부된 모든 패킷을 로깅하려면 다음 정책을 사용하십시오. 로그 정책은 이 정책을 Calico iptables 규칙 체인에 추가하는 예제 `access-nginx` 정책과 동일한 팟(Pod) 선택기를 사용합니다. 높은 순서 번호(예: `3000`)를 사용하여 iptables 규칙 체인의 끝에 이 규칙이 추가되도록 보장할 수 있습니다. `access-nginx` 정책 규칙과 일치하는 "run=access" 팟(Pod)의 요청 패킷은 "run=nginx" 팟(Pod)에 의해 허용됩니다.  그러나 기타 소스의 패킷이 낮은 순서 `access-nginx` 정책 규칙과의 일치를 시도하는 경우 이는 거부됩니다. 그리고 해당 패킷은 높은 순서 `log-denied-packets` 정책 규칙과의 일치를 시도합니다. 이에 도달하는 패킷을 `log-denied-packets`에서 로깅하므로, "run=nginx" 팟(Pod)에 의해 거부된 패킷만 로깅됩니다. 패킷의 시도가 로깅된 후에는 패킷이 삭제됩니다.
+4. 이전에 작성한 Calico 정책에 의해 거부된 모든 트래픽을 로깅하려면 이름이 `log-denied-packets`인 Calico NetworkPolicy를 작성하십시오. 예를 들어, 1단계에서 정의한 네트워크 정책에 의해 거부된 모든 패킷을 로깅하려면 다음 정책을 사용하십시오. 로그 정책은 이 정책을 Calico Iptables 규칙 체인에 추가하는 예제 `access-nginx` 정책과 동일한 팟(Pod) 선택기를 사용합니다. 보다 높은 순서 번호(예: `3000`)를 사용하여 Iptables 규칙 체인의 끝에 이 규칙이 추가되도록 보장할 수 있습니다. `access-nginx` 정책 규칙과 일치하는 "run=access" 팟(Pod)의 요청 패킷은 "run=nginx" 팟(Pod)에 의해 허용됩니다.  그러나 기타 소스의 패킷이 낮은 순서 `access-nginx` 정책 규칙과의 일치를 시도하는 경우 이는 거부됩니다. 그리고 해당 패킷은 높은 순서 `log-denied-packets` 정책 규칙과의 일치를 시도합니다. 이에 도달하는 패킷을 `log-denied-packets`에서 로깅하므로, "run=nginx" 팟(Pod)에 의해 거부된 패킷만 로깅됩니다. 패킷의 시도가 로깅된 후에는 패킷이 삭제됩니다.
     ```
     apiVersion: projectcalico.org/v3
     kind: NetworkPolicy
@@ -890,7 +906,7 @@ spec:
     <tbody>
     <tr>
      <td><code>types</code></td>
-     <td>이 <code>Ingress</code> 정책은 모든 수신 트래픽 요청에 적용됩니다. <strong>참고:</strong> <code>Ingress</code> 값은 모든 수신 트래픽에 대한 일반 조항이며, IBM Ingress ALB에서만의 트래픽을 의미하지 않습니다.</td>
+     <td>이 <code>Ingress</code> 정책은 모든 수신 트래픽 요청에 적용됩니다. <code>Ingress</code> 값은 모든 수신 트래픽에 대한 일반 용어이며, IBM Ingress ALB에서만의 트래픽을 의미하지 않습니다. </td>
     </tr>
      <tr>
       <td><code>ingress</code></td>
@@ -898,11 +914,11 @@ spec:
      </tr>
      <tr>
       <td><code>selector</code></td>
-      <td>&lt;selector&gt;를 1단계에서 Calico 정책에서 사용된 또는 3단계에서 Kubernetes 정책에 대한 Calico 구문에서 찾은 `spec.selector` 필드의 동일한 선택기로 대체하십시오. 예를 들어, 선택기 <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>를 사용하면 이 정책의 규칙이 1단계의 <code>access-nginx</code> 샘플 네트워크 규칙과 동일한 iptables 체인에 추가됩니다. 이 정책은 동일한 팟(Pod) 선택기 레이블을 사용하는 팟(Pod)에 대한 수신 네트워크 트래픽에만 적용됩니다.</td>
+      <td>&lt;selector&gt;를 1단계에서 Calico 정책에서 사용된 또는 3단계에서 Kubernetes 정책에 대한 Calico 구문에서 찾은 `spec.selector` 필드의 동일한 선택기로 대체하십시오. 예를 들어, 선택기 <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>를 사용하면 이 정책의 규칙이 1단계의 <code>access-nginx</code> 샘플 네트워크 규칙과 동일한 Iptables 체인에 추가됩니다. 이 정책은 동일한 팟(Pod) 선택기 레이블을 사용하는 팟(Pod)에 대한 수신 네트워크 트래픽에만 적용됩니다. </td>
      </tr>
      <tr>
       <td><code>order</code></td>
-      <td>Calico 정책에는 수신 요청 패킷에 적용되는 시점을 판별하는 순서가 있습니다. 낮은 순서(예: <code>1000</code>)의 정책이 우선 적용됩니다. 높은 순서의 정책은 낮은 순서 정책 이후에 적용됩니다. 예를 들어, 매우 높은 순서(예: <code>3000</code>)의 정책은 사실상 낮은 순서 정책이 모두 적용된 후에 마지막으로 적용됩니다.</br></br>수신 요청 패킷은 iptables 규칙 체인을 거치며 우선 낮은 순서 정책의 규칙을 일치시키려고 시도합니다. 패킷이 규칙과 일치하면 패킷이 허용됩니다. 그러나 패킷이 어떤 규칙과도 일치하지 않으면 이는 최상위 순서의 iptables 규칙 체인의 마지막 규칙에 도달합니다. 해당 정책이 체인의 마지막 정책이 되도록 하려면, 1단계에서 작성한 정책보다 훨씬 높은 순서(예: <code>3000</code>)를 사용하십시오.</td>
+      <td>Calico 정책에는 수신 요청 패킷에 적용되는 시점을 판별하는 순서가 있습니다. 낮은 순서(예: <code>1000</code>)의 정책이 우선 적용됩니다. 높은 순서의 정책은 낮은 순서 정책 이후에 적용됩니다. 예를 들어, 매우 높은 순서(예: <code>3000</code>)의 정책은 사실상 낮은 순서 정책이 모두 적용된 후에 마지막으로 적용됩니다.</br></br>수신 요청 패킷은 Iptables 규칙 체인을 거치며 우선 낮은 순서 정책의 규칙을 일치시키려고 시도합니다. 패킷이 규칙과 일치하면 패킷이 허용됩니다. 그러나 패킷이 어떤 규칙과도 일치하지 않으면 이는 최상위 순서의 Iptables 규칙 체인의 마지막 규칙에 도달합니다. 해당 정책이 체인의 마지막 정책이 되도록 하려면, 1단계에서 작성한 정책보다 훨씬 높은 순서(예: <code>3000</code>)를 사용하십시오.</td>
      </tr>
     </tbody>
     </table>

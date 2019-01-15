@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -84,7 +87,7 @@ lastupdated: "2018-10-25"
    ```
    {: pre}
 
-2. 클러스터가 `default` 외의 리소스 그룹에 속해 있는 경우에는 해당 리소스 그룹을 대상으로 지정하십시오. **참고**: 해당 리소스 그룹에 대해 [**Viewer** 역할](cs_users.html#platform) 이상의 역할을 갖고 있어야 합니다. 
+2. 클러스터가 `default` 외의 리소스 그룹에 속해 있는 경우에는 해당 리소스 그룹을 대상으로 지정하십시오. 각 클러스터가 속하는 리소스 그룹을 보려면 `ibmcloud ks clusters`를 실행하십시오. **참고**: 해당 리소스 그룹에 대해 [**Viewer** 역할](cs_users.html#platform) 이상의 역할을 갖고 있어야 합니다.
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -114,7 +117,7 @@ lastupdated: "2018-10-25"
    출력 예:
    ```
    ...
-   Master URL:		https://169.xx.xxx.xxx:31142
+   Master URL:		https://c3.<region>.containers.cloud.ibm.com
    ...
    ```
    {: screen}
@@ -130,7 +133,7 @@ lastupdated: "2018-10-25"
 
    명령 예:
    ```
-   curl --insecure https://169.xx.xxx.xxx:31142/version
+   curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
    ```
    {: pre}
 
@@ -191,7 +194,10 @@ lastupdated: "2018-10-25"
     {: pre}
 
 2.  소스 _<each_worker_node_publicIP>_에서 대상 TCP/UDP 포트 범위 20000-32767 및 포트 443으로의 발신 네트워크 트래픽과 다음 IP 주소 및 네트워크 그룹을 허용하십시오. 로컬 머신이 공용 인터넷 엔드포인트에 액세스하지 못하도록 방지하는 회사 방화벽이 있는 경우, 소스 작업자 노드와 로컬 머신 둘 다에 대해 이 단계를 수행하십시오.
-    - **중요**: 부트스트랩 프로세스 중에 로드 밸런싱을 수행하려면 지역 내의 모든 구역에 대해 포트 443에 대한 발신 트래픽을 허용해야 합니다. 예를 들어, 클러스터가 미국 남부에 있으면 각 작업자 노드의 공용 IP에서 모든 구역(dal10, dal12, dal13)에 대한 IP 주소의 포트 443으로 트래픽을 허용해야 합니다.
+
+    부트스트랩 프로세스 중에 로드 밸런싱을 수행하려면 지역 내의 모든 구역에 대해 포트 443에 대한 발신 트래픽을 허용해야 합니다. 예를 들어, 클러스터가 미국 남부에 있는 경우에는 각 작업자 노드의 공용 IP에서 모든 구역의 IP 주소의 포트 443으로 트래픽을 허용해야 합니다.
+    {: important}
+
     <table summary="표에서 첫 번째 행은 두 열 모두에 걸쳐 있습니다. 나머지 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 서버 구역은 1열에 있고 일치시킬 IP 주소는 2열에 있습니다. ">
     <caption>발신 트래픽을 위해 열리는 IP 주소</caption>
         <thead>
@@ -202,33 +208,33 @@ lastupdated: "2018-10-25"
       <tbody>
         <tr>
           <td>AP 북부</td>
-          <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-          <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+          <td>che01<br>hkg02<br>seo01<br>sng01<br>tok02, tok04, tok05</td>
+          <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210, 128.168.71.117, 165.192.69.69</code></td>
          </tr>
         <tr>
            <td>AP 남부</td>
-           <td>mel01<br>syd01<br>syd04</td>
-           <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19, 130.198.66.34</code></td>
+           <td>mel01<br>syd01, syd04</td>
+           <td><code>168.1.97.67</code><br><code>168.1.8.195, 130.198.66.26, 168.1.12.98, 130.198.64.19</code></td>
         </tr>
         <tr>
            <td>중앙 유럽</td>
-           <td>ams03<br>fra02<br>mil01<br>osl01<br>par01</td>
-           <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+           <td>ams03<br>mil01<br>osl01<br>par01<br>fra02, fra04, fra05</td>
+           <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code><br><code>169.50.56.174, 161.156.65.42, 149.81.78.114</code></td>
           </tr>
         <tr>
           <td>영국 남부</td>
-          <td>lon02<br>lon04</td>
-          <td><code>159.122.242.78</code><br><code>158.175.65.170, 158.175.74.170, 158.175.76.2</code></td>
+          <td>lon02, lon04, lon05, lon06</td>
+          <td><code>159.122.242.78, 158.175.111.42, 158.176.94.26, 159.122.224.242, 158.175.65.170, 158.176.95.146</code></td>
         </tr>
         <tr>
           <td>미국 동부</td>
-           <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
-           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+           <td>mon01<br>tor01<br>wdc04, wdc06, wdc07</td>
+           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.63.88.186, 169.60.73.142, 169.61.109.34, 169.63.88.178, 169.60.101.42, 169.61.83.62</code></td>
         </tr>
         <tr>
           <td>미국 남부</td>
-          <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01<br>sjc03<br>sjc04</td>
-          <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code></td>
+          <td>hou02<br>sao01<br>sjc03<br>sjc04<br>dal10,dal12,dal13</td>
+          <td><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><code>169.46.7.238, 169.48.230.146, 169.61.29.194, 169.46.110.218, 169.47.70.10, 169.62.166.98, 169.48.143.218, 169.61.177.2, 169.60.128.2</code></td>
         </tr>
         </tbody>
       </table>
@@ -248,12 +254,12 @@ lastupdated: "2018-10-25"
         <tr>
           <td>{{site.data.keyword.containerlong_notm}} 지역 전체의 글로벌 레지스트리</td>
           <td>registry.bluemix.net</td>
-          <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
+          <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29></code></td>
         </tr>
         <tr>
           <td>AP 북부, AP 남부</td>
           <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></td>
         </tr>
         <tr>
           <td>중앙 유럽</td>
@@ -263,7 +269,7 @@ lastupdated: "2018-10-25"
          <tr>
           <td>영국 남부</td>
           <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
          </tr>
          <tr>
           <td>미국 동부, 미국 남부</td>
@@ -274,10 +280,11 @@ lastupdated: "2018-10-25"
       </table>
 </p>
 
-4. 선택사항: 작업자 노드에서 {{site.data.keyword.monitoringlong_notm}} 및 {{site.data.keyword.loganalysislong_notm}} 서비스로의 발신 네트워크 트래픽을 허용하십시오.
-    - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
-    - <em>&lt;monitoring_public_IP&gt;</em>를 트래픽을 허용할 모니터링 지역에 대한 모든 주소로 대체하십시오.
-      <p><table summary="표에서 첫 번째 행은 두 열 모두에 걸쳐 있습니다. 나머지 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 서버 구역은 1열에 있고 일치시킬 IP 주소는 2열에 있습니다.">
+4.  선택사항: 작업자 노드에서 {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}} 및 LogDNA 서비스로의 발신 네트워크 트래픽을 허용하십시오. 
+    *   **{{site.data.keyword.monitoringlong_notm}}**:
+        <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_public_IP&gt;</pre>
+<em>&lt;monitoring_public_IP&gt;</em>를 트래픽을 허용할 모니터링 지역에 대한 모든 주소로 대체하십시오.
+        <p><table summary="표에서 첫 번째 행은 두 열 모두에 걸쳐 있습니다. 나머지 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 서버 구역은 1열에 있고 일치시킬 IP 주소는 2열에 있습니다.">
   <caption>모니터링 트래픽을 위해 열리는 IP 주소</caption>
         <thead>
         <th>{{site.data.keyword.containerlong_notm}} 지역</th>
@@ -304,9 +311,10 @@ lastupdated: "2018-10-25"
         </tbody>
       </table>
 </p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
-    - <em>&lt;logging_public_IP&gt;</em>를 트래픽을 허용할 로깅 지역에 대한 모든 주소로 대체하십시오.
-      <p><table summary="표에서 첫 번째 행은 두 열 모두에 걸쳐 있습니다. 나머지 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 서버 구역은 1열에 있고 일치시킬 IP 주소는 2열에 있습니다.">
+    *   **{{site.data.keyword.loganalysislong_notm}}**:
+        <pre class="screen">TCP port 443, port 9091 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logging_public_IP&gt;</pre>
+<em>&lt;logging_public_IP&gt;</em>를 트래픽을 허용할 로깅 지역에 대한 모든 주소로 대체하십시오.
+        <p><table summary="표에서 첫 번째 행은 두 열 모두에 걸쳐 있습니다. 나머지 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 서버 구역은 1열에 있고 일치시킬 IP 주소는 2열에 있습니다.">
 <caption>로깅 트래픽을 위해 열리는 IP 주소</caption>
         <thead>
         <th>{{site.data.keyword.containerlong_notm}} 지역</th>
@@ -318,7 +326,7 @@ lastupdated: "2018-10-25"
             <td>미국 동부, 미국 남부</td>
             <td>ingest.logging.ng.bluemix.net</td>
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-           </tr>
+          </tr>
           <tr>
            <td>영국 남부</td>
            <td>ingest.logging.eu-gb.bluemix.net</td>
@@ -337,13 +345,15 @@ lastupdated: "2018-10-25"
          </tbody>
        </table>
 </p>
+    *   **{{site.data.keyword.la_full_notm}}**:
+        <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
+`<logDNA_public_IP>`를 [LogDNA IP 주소](/docs/services/Log-Analysis-with-LogDNA/network.html#ips)로 대체하십시오. 
 
 5. 로드 밸런서 서비스를 사용하는 경우에는 VRRP 프로토콜을 사용하는 모든 트래픽이 공용 및 개인용 인터페이스의 작업자 노드 간에 허용되는지 확인하십시오. {{site.data.keyword.containerlong_notm}}는 VRRP 프로토콜을 사용하여 공용 및 개인용 로드 밸런서의 IP 주소를 관리합니다.
 
-6. {: #pvc}데이터 스토리지에 대한 지속적 볼륨 클레임을 작성하려면, 클러스터가 있는 구역의 [IBM Cloud 인프라(SoftLayer) IP 주소](/docs/infrastructure/hardware-firewall-dedicated/ips.html#ibm-cloud-ip-ranges)에 대해 방화벽을 통한 egress 액세스를 허용하십시오.
-    - 클러스터의 구역을 찾으려면 `ibmcloud ks clusters`를 실행하십시오.
-    - [**프론트 엔드(공용) 네트워크**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network)와 [**백엔드(사설) 네트워크**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) 둘 다에 대해 IP 범위에 대한 액세스를 허용하십시오.
-    - 참고로, **백엔드(사설) 네트워크**에 대한 `dal01` 구역(데이터센터)은 반드시 추가해야 합니다.
+6. {: #pvc}데이터 스토리지에 대한 지속적 볼륨 클레임을 작성하려면 IBM Cloud 인프라(SoftLayer)에 대해 방화벽을 통한 egress 액세스를 허용하십시오. 
+    - 프로비저닝 요청을 시작하기 위해 IBM Cloud 인프라(SoftLayer) API 엔드포인트에 대한 액세스 허용: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
+    - [**프론트 엔드(공용) 네트워크**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) 및 [**백엔드(사설) 네트워크**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) 둘 다에 대해 클러스터가 있는 구역의 IBM Cloud 인프라(SoftLayer) IP 범위에 대한 액세스를 허용하십시오. 클러스터의 구역을 찾으려면 `ibmcloud ks clusters`를 실행하십시오.
 
 <br />
 
@@ -354,8 +364,8 @@ lastupdated: "2018-10-25"
 사설 네트워크에 방화벽이 있는 경우에는 작업자 노드 간의 통신을 허용하고 클러스터가 사설 네트워크에서 인프라 리소스에 액세스할 수 있도록 허용하십시오.
 {:shortdesc}
 
-1. 작업자 노드 간에 모든 트래픽을 허용하십시오. 
-    1. 공용 및 개인용 인터페이스에서 작업자 노드 간에 모든 TCP, UDP, VRRP 및 IPEncap 트래픽을 허용하십시오. {{site.data.keyword.containerlong_notm}}는 개인용 로드 밸런서의 IP 주소를 관리하는 데 VRRP 프로토콜을 사용하고 서브넷 간 팟(Pod) 대 팟(Pod) 트래픽을 허용하는 데 IPEncap 프로토콜을 사용합니다. 
+1. 작업자 노드 간에 모든 트래픽을 허용하십시오.
+    1. 공용 및 개인용 인터페이스에서 작업자 노드 간에 모든 TCP, UDP, VRRP 및 IPEncap 트래픽을 허용하십시오. {{site.data.keyword.containerlong_notm}}는 개인용 로드 밸런서의 IP 주소를 관리하는 데 VRRP 프로토콜을 사용하고 서브넷 간 팟(Pod) 대 팟(Pod) 트래픽을 허용하는 데 IPEncap 프로토콜을 사용합니다.
     2. Calico 정책을 사용 중이거나 다중 구역 클러스터의 각 구역에 방화벽이 있는 경우에는 방화벽이 작업자 노드 간의 통신을 차단할 수 있습니다. 작업자의 포트, 작업자의 사설 IP 주소 또는 Calico 작업자 노드 레이블을 사용하여 서로 간에 클러스터의 모든 작업자 노드를 열어야 합니다.
 
 2. 클러스터에서 작업자 노드를 작성할 수 있도록 IBM Cloud 인프라(SoftLayer) 사설 IP 범위를 허용하십시오.
@@ -365,11 +375,11 @@ lastupdated: "2018-10-25"
 3. 다음 포트를 여십시오.
     - 작업자 노드 업데이트와 재로드가 허용되도록 작업자에서 포트 80 및 443으로 아웃바운드 TCP 및 UDP 연결을 허용하십시오.
     - 볼륨으로서 파일 스토리지의 마운트가 허용되도록 포트 2049로의 아웃바운드 TCP 및 UDP를 허용하십시오.
-    - 블록 스토리지와의 통신에 대해 포트 3260으로의 아웃바운드 TCP 및 UDP를 허용합니다. 
+    - 블록 스토리지와의 통신에 대해 포트 3260으로의 아웃바운드 TCP 및 UDP를 허용합니다.
     - Kubernetes 대시보드와 명령(예: `kubectl logs` 및 `kubectl exec`)에 대해 포트 10250으로의 인바운드 TCP 및 UDP 연결을 허용하십시오.
     - DNS 액세스용 TCP 및 UDP 포트 53에 대한 인바운드와 아웃바운드 연결을 허용하십시오.
 
-4. 공용 네트워크에도 방화벽이 있는 경우, 또는 사설 VLAN 전용 클러스터가 있으며 게이트웨이 어플라이언스를 방화벽으로 사용 중인 경우에는 [클러스터가 인프라 리소스 및 기타 서비스에 액세스할 수 있도록 허용](#firewall_outbound)에 지정된 IP 주소 및 포트도 허용해야 합니다. 
+4. 공용 네트워크에도 방화벽이 있는 경우, 또는 사설 VLAN 전용 클러스터가 있으며 게이트웨이 어플라이언스를 방화벽으로 사용 중인 경우에는 [클러스터가 인프라 리소스 및 기타 서비스에 액세스할 수 있도록 허용](#firewall_outbound)에 지정된 IP 주소 및 포트도 허용해야 합니다.
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,11 +13,14 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
- 
+
 
 
 # 클러스터 스토리지 문제점 해결
@@ -89,7 +92,7 @@ Helm 차트를 사용하여 이미지를 배치하는 경우 init 컨테이너�
 배치에 [init 컨테이너 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)를 포함하는 경우 컨테이너 내부의 볼륨 마운트 경로에 대해 Dockerfile 쓰기 권한에 지정된 루트가 아닌 사용자를 제공할 수 있습니다. 앱 컨테이너가 시작되기 전에 init 컨테이너가 시작됩니다. init 컨테이너는 컨테이너 내부에 볼륨 마운트 경로를 작성하고 올바른(루트가 아닌) 사용자가 소유하도록 마운트 경로를 변경한 후 닫습니다. 그런 다음, 마운트 경로에 쓰기를 수행해야 하는 루트가 아닌 사용자가 포함된 앱 컨테이너가 시작됩니다. 루트가 아닌 사용자가 경로를 이미 소유하고 있기 때문에 마운트 경로 쓰기에 성공합니다. init 컨테이너를 사용하지 않을 경우 Dockerfile을 수정하여 루트가 아닌 사용자 액세스를 NFS 파일 스토리지에 추가할 수 있습니다.
 
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
 1.  앱의 Dockerfile을 열고 볼륨 마운트 경로에 대한 쓰기 권한을 제공하려는 사용자로부터 사용자 ID(UID) 및 그룹 ID(GID)를 가져오십시오. Jenkins Dockerfile의 예에서 정보는 다음과 같습니다.
     - UID: `1000`
@@ -350,7 +353,7 @@ PV가 성공적으로 작성되고 기존 블록 스토리지 인스턴스에 �
 {: #cos_helm_fails}
 
 {: tsSymptoms}
-{{site.data.keyword.cos_full_notm}} `ibmc` Helm 플러그인을 설치하면 다음 오류로 설치에 실패합니다. 
+{{site.data.keyword.cos_full_notm}} `ibmc` Helm 플러그인을 설치하면 다음 오류로 설치에 실패합니다.
 ```
 Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
 ```
@@ -360,13 +363,13 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 `ibmc` Helm 플러그인이 설치되면 `./helm/plugins/helm-ibmc` 디렉토리에서 `ibmc` Helm 플러그인이 시스템에 위치한 디렉토리(일반적으로 `./ibmcloud-object-storage-plugin/helm-ibmc`에 있음)로 symlink가 작성됩니다. 로컬 시스템에서 `ibmc` Helm 플러그인을 제거하거나 `ibmc` Helm 플러그인 디렉토리를 다른 위치로 이동하는 경우, symlink가 제거되지 않습니다.
 
 {: tsResolve}
-1. {{site.data.keyword.cos_full_notm}} Helm 플러그인을 제거하십시오. 
+1. {{site.data.keyword.cos_full_notm}} Helm 플러그인을 제거하십시오.
    ```
    rm -rf ~/.helm/plugins/helm-ibmc
    ```
    {: pre}
-   
-2. [{{site.data.keyword.cos_full_notm}}를 설치](cs_storage_cos.html#install_cos)하십시오. 
+
+2. [{{site.data.keyword.cos_full_notm}}를 설치](cs_storage_cos.html#install_cos)하십시오.
 
 <br />
 
@@ -375,33 +378,35 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 {: #cos_secret_access_fails}
 
 {: tsSymptoms}
-PVC를 작성하거나 PVC를 마운트하는 팟(Pod)을 배치할 때 작성이나 배치에 실패합니다. 
+PVC를 작성하거나 PVC를 마운트하는 팟(Pod)을 배치할 때 작성이나 배치에 실패합니다.
 
-- PVC 작성 실패에 대한 오류 메시지의 예: 
+- PVC 작성 실패에 대한 오류 메시지의 예:
   ```
   pvc-3:1b23159vn367eb0489c16cain12345:cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
   ```
   {: screen}
 
-- 팟(Pod) 작성 실패에 대한 오류 메시지의 예: 
+- 팟(Pod) 작성 실패에 대한 오류 메시지의 예:
   ```
   persistentvolumeclaim "pvc-3" not found (repeated 3 times)
   ```
   {: screen}
-  
+
 {: tsCauses}
-{{site.data.keyword.cos_full_notm}} 서비스 인증 정보, PVC 및 팟(Pod)이 저장된 Kubernetes 시크릿이 모두 동일한 Kubernetes 네임스페이스에 있지 않습니다. 시크릿이 PVC 또는 팟(Pod)과 다른 네임스페이스에 배치되면 시크릿에 액세스할 수 없습니다. 
+{{site.data.keyword.cos_full_notm}} 서비스 인증 정보, PVC 및 팟(Pod)이 저장된 Kubernetes 시크릿이 모두 동일한 Kubernetes 네임스페이스에 있지 않습니다. 시크릿이 PVC 또는 팟(Pod)과 다른 네임스페이스에 배치되면 시크릿에 액세스할 수 없습니다.
 
 {: tsResolve}
-1. 클러스터의 시크릿을 나열하고 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 Kubernetes 시크릿이 작성된 Kubernetes 네임스페이스를 검토하십시오. 시크릿은 `ibm/ibmc-s3fs`를 **유형**으로 표시해야 합니다. 
+
+
+1. 클러스터의 시크릿을 나열하고 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 Kubernetes 시크릿이 작성된 Kubernetes 네임스페이스를 검토하십시오. 시크릿은 `ibm/ibmc-s3fs`를 **유형**으로 표시해야 합니다.
    ```
    kubectl get secrets --all-namespaces
    ```
    {: pre}
-   
-2. PVC 및 팟(Pod)의 YAML 구성 파일을 검사하여 동일한 네임스페이스가 사용되었는지 확인하십시오. 시크릿이 존재하는 네임스페이스와는 다른 네임스페이스에 팟(Pod)을 배치하려면 원하는 네임스페이스에서 [다른 시크릿을 작성](cs_storage_cos.html#create_cos_secret)하십시오. 
-   
-3. PVC를 작성하거나 원하는 네임스페이스에 팟(Pod)을 배치하십시오. 
+
+2. PVC 및 팟(Pod)의 YAML 구성 파일을 검사하여 동일한 네임스페이스가 사용되었는지 확인하십시오. 시크릿이 존재하는 네임스페이스와는 다른 네임스페이스에 팟(Pod)을 배치하려면 원하는 네임스페이스에서 [다른 시크릿을 작성](cs_storage_cos.html#create_cos_secret)하십시오.
+
+3. PVC를 작성하거나 원하는 네임스페이스에 팟(Pod)을 배치하십시오.
 
 <br />
 
@@ -410,7 +415,7 @@ PVC를 작성하거나 PVC를 마운트하는 팟(Pod)을 배치할 때 작성�
 {: #cred_failure}
 
 {: tsSymptoms}
-PVC를 작성할 때 다음 중 하나와 유사한 오류 메시지가 나타납니다. 
+PVC를 작성할 때 다음 중 하나와 유사한 오류 메시지가 나타납니다.
 
 ```
 SignatureDoesNotMatch: The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. For more information, see REST Authentication and SOAP Authentication for details.
@@ -418,7 +423,7 @@ SignatureDoesNotMatch: The request signature we calculated does not match the si
 {: screen}
 
 ```
-AccessDenied: Access Denied status code: 403 
+AccessDenied: Access Denied status code: 403
 ```
 {: screen}
 
@@ -432,22 +437,22 @@ CredentialsEndpointError: failed to load credentials
 
 {: tsResolve}
 1. 서비스 세부사항 페이지의 탐색에서 **서비스 인증 정보**를 클릭하십시오.
-2. 인증 정보를 찾은 후에 **인증 정보 보기**를 클릭하십시오. 
-3. Kubernetes 시크릿의 올바른 **access_key_id** 및 **secret_access_key**를 사용 중인지 확인하십시오. 그렇지 않은 경우에는 Kubernetes 시크릿을 업데이트하십시오. 
-   1. 시크릿 작성에 사용한 YAML을 가져오십시오. 
+2. 인증 정보를 찾은 후에 **인증 정보 보기**를 클릭하십시오.
+3. Kubernetes 시크릿의 올바른 **access_key_id** 및 **secret_access_key**를 사용 중인지 확인하십시오. 그렇지 않은 경우에는 Kubernetes 시크릿을 업데이트하십시오.
+   1. 시크릿 작성에 사용한 YAML을 가져오십시오.
       ```
       kubectl get secret <secret_name> -o yaml
       ```
       {: pre}
-      
-   2. **access_key_id** 및 **secret_access_key**를 업데이트하십시오. 
-   3. 시크릿을 업데이트하십시오. 
+
+   2. **access_key_id** 및 **secret_access_key**를 업데이트하십시오.
+   3. 시크릿을 업데이트하십시오.
       ```
       kubectl apply -f secret.yaml
       ```
       {: pre}
-      
-4. **iam_role_crn** 섹션에서 `Writer` 또는 `Manager` 역할을 보유하는지 확인하십시오. 올바른 역할이 없는 경우에는 [올바른 권한으로 새 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보를 작성](cs_storage_cos.html#create_cos_service)해야 합니다. 그리고 기존 시크릿을 업데이트하거나 새 서비스 인증 정보로 [새 시크릿을 작성](cs_storage_cos.html#create_cos_secret)하십시오. 
+
+4. **iam_role_crn** 섹션에서 `Writer` 또는 `Manager` 역할을 보유하는지 확인하십시오. 올바른 역할이 없는 경우에는 [올바른 권한으로 새 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보를 작성](cs_storage_cos.html#create_cos_service)해야 합니다. 그리고 기존 시크릿을 업데이트하거나 새 서비스 인증 정보로 [새 시크릿을 작성](cs_storage_cos.html#create_cos_secret)하십시오.
 
 <br />
 
@@ -455,7 +460,7 @@ CredentialsEndpointError: failed to load credentials
 ## 오브젝트 스토리지: 기존 버킷에 액세스할 수 없음
 
 {: tsSymptoms}
-PVC를 작성할 때 {{site.data.keyword.cos_full_notm}}의 버킷에 액세스할 수 없습니다. 다음과 유사한 오류 메시지가 표시될 수 있습니다. 
+PVC를 작성할 때 {{site.data.keyword.cos_full_notm}}의 버킷에 액세스할 수 없습니다. 다음과 유사한 오류 메시지가 표시될 수 있습니다.
 
 ```
 Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:1b2345678b69175abc98y873e2:cannot access bucket <bucket_name>: NotFound: Not Found
@@ -463,13 +468,13 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: screen}
 
 {: tsCauses}
-올바르지 않은 스토리지 클래스를 사용하여 기존 버킷에 액세스했거나, 작성되지 않은 버킷에 액세스를 시도했습니다. 
+올바르지 않은 스토리지 클래스를 사용하여 기존 버킷에 액세스했거나 작성하지 않은 버킷에 액세스를 시도했을 수 있습니다. 
 
 {: tsResolve}
-1. [{{site.data.keyword.Bluemix_notm}} 대시보드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/dashboard/apps)에서 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 선택하십시오. 
-2. **버킷**을 선택하십시오. 
-3. 기존 버킷의 **클래스** 및 **위치** 정보를 검토하십시오. 
-4. 적합한 [스토리지 클래스](cs_storage_cos.html#storageclass_reference)를 선택하십시오.  
+1. [{{site.data.keyword.Bluemix_notm}} 대시보드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/dashboard/apps)에서 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 선택하십시오.
+2. **버킷**을 선택하십시오.
+3. 기존 버킷의 **클래스** 및 **위치** 정보를 검토하십시오.
+4. 적합한 [스토리지 클래스](cs_storage_cos.html#storageclass_reference)를 선택하십시오.
 
 <br />
 
@@ -478,25 +483,25 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: #cos_nonroot_access}
 
 {: tsSymptoms}
-GUI 또는 REST API를 사용하여 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에 파일을 업로드했습니다. 앱 배치에서 `runAsUser`로 정의된 비-루트 사용자로 이러한 파일에 액세스를 시도하면 파일에 대한 액세스가 거부됩니다. 
+콘솔 또는 REST API를 사용하여 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스에 파일을 업로드했습니다. 앱 배치에서 `runAsUser`로 정의된 비-루트 사용자로 이러한 파일에 액세스를 시도하면 파일에 대한 액세스가 거부됩니다.
 
 {: tsCauses}
-Linux에서는 파일 또는 디렉토리에 3개의 액세스 그룹(`Owner`, `Group` 및 `Other`)이 있습니다. GUI 또는 REST API를 사용하여 {{site.data.keyword.cos_full_notm}}에 파일을 업로드하면 `Owner`, `Group` 및 `Other`에 대한 권한이 제거됩니다. 각 파일의 권한은 다음과 같이 나타날 수 있습니다. 
+Linux에서는 파일 또는 디렉토리에 3개의 액세스 그룹(`Owner`, `Group` 및 `Other`)이 있습니다. 콘솔 또는 REST API를 사용하여 {{site.data.keyword.cos_full_notm}}에 파일을 업로드하면 `Owner`, `Group` 및 `Other`에 대한 권한이 제거됩니다. 각 파일의 권한은 다음과 같이 나타날 수 있습니다.
 
 ```
 d--------- 1 root root 0 Jan 1 1970 <file_name>
 ```
 {: screen}
 
-{{site.data.keyword.cos_full_notm}} 플러그인을 사용하여 파일을 업로드하면 파일에 대한 권한이 유지되며 변경되지 않습니다.  
+{{site.data.keyword.cos_full_notm}} 플러그인을 사용하여 파일을 업로드하면 파일에 대한 권한이 유지되며 변경되지 않습니다.
 
 {: tsResolve}
-비-루트 사용자로 파일에 액세스하려면 비-루트 사용자에게 해당 파일에 대한 읽기 및 쓰기 권한이 있어야 합니다. 팟(Pod) 배치의 일부로서 파일에 대한 권한을 변경하려면 쓰기 권한이 필요합니다. {{site.data.keyword.cos_full_notm}}는 쓰기 워크로드용으로 디자인되지 않았습니다. 팟(Pod) 배치 중에 권한을 업데이트하면 팟(Pod)이 `Running` 상태가 되지 못할 수 있습니다. 
+비-루트 사용자로 파일에 액세스하려면 비-루트 사용자에게 해당 파일에 대한 읽기 및 쓰기 권한이 있어야 합니다. 팟(Pod) 배치의 일부로서 파일에 대한 권한을 변경하려면 쓰기 권한이 필요합니다. {{site.data.keyword.cos_full_notm}}는 쓰기 워크로드용으로 디자인되지 않았습니다. 팟(Pod) 배치 중에 권한을 업데이트하면 팟(Pod)이 `Running` 상태가 되지 못할 수 있습니다.
 
-이 문제를 해결하려면 PVC를 앱 팟(Pod)에 마운트하기 전에 다른 팟(Pod)을 작성하여 비-루트 사용자에 대한 올바른 권한을 설정하십시오. 
+이 문제를 해결하려면 PVC를 앱 팟(Pod)에 마운트하기 전에 다른 팟(Pod)을 작성하여 비-루트 사용자에 대한 올바른 권한을 설정하십시오.
 
-1. 버킷에서 파일의 권한을 확인하십시오. 
-   1. `test-permission` 팟(Pod)의 구성 파일을 작성하고 파일 이름을 `test-permission.yaml`로 지정하십시오. 
+1. 버킷에서 파일의 권한을 확인하십시오.
+   1. `test-permission` 팟(Pod)의 구성 파일을 작성하고 파일 이름을 `test-permission.yaml`로 지정하십시오.
       ```
       apiVersion: v1
       kind: Pod
@@ -515,38 +520,38 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
             claimName: <pvc_name>
       ```
       {: codeblock}
-        
-   2. `test-permission` 팟(Pod)을 작성하십시오. 
+
+   2. `test-permission` 팟(Pod)을 작성하십시오.
       ```
       kubectl apply -f test-permission.yaml
       ```
       {: pre}
-      
-   3. 팟(Pod)에 로그인하십시오. 
+
+   3. 팟(Pod)에 로그인하십시오.
       ```
       kubectl exec test-permission -it bash
       ```
       {: pre}
-   
-   4. 마운트 경로로 이동하고 파일에 대한 권한을 나열하십시오. 
+
+   4. 마운트 경로로 이동하고 파일에 대한 권한을 나열하십시오.
       ```
       cd test && ls -al
       ```
       {: pre}
-      
-      출력 예: 
+
+      출력 예:
       ```
       d--------- 1 root root 0 Jan 1 1970 <file_name>
       ```
       {: screen}
-      
-2. 팟(Pod)을 삭제하십시오. 
+
+2. 팟(Pod)을 삭제하십시오.
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-      
-3. 파일의 권한 정정에 사용되는 팟(Pod)의 구성 파일을 작성하고 이름을 `fix-permission.yaml`로 지정하십시오. 
+
+3. 파일의 권한 정정에 사용되는 팟(Pod)의 구성 파일을 작성하고 이름을 `fix-permission.yaml`로 지정하십시오.
    ```
    apiVersion: v1
    kind: Pod
@@ -568,61 +573,62 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
          claimName: <pvc_name>
     ```
     {: codeblock}
-    
-3. `fix-permission` 팟(Pod)을 작성하십시오. 
+
+3. `fix-permission` 팟(Pod)을 작성하십시오.
    ```
    kubectl apply -f fix-permission.yaml
    ```
    {: pre}
-   
+
 4. 팟(Pod)이 `Completed` 상태가 될 때까지 대기하십시오.  
    ```
    kubectl get pod fix-permission
    ```
    {: pre}
 
-5. `fix-permission` 팟(Pod)을 삭제하십시오. 
+5. `fix-permission` 팟(Pod)을 삭제하십시오.
    ```
    kubectl delete pod fix-permission
    ```
-   {: pre} 
-   
-5. 권한 확인을 위해 이전에 사용된 `test-permission` 팟(Pod)을 재작성하십시오. 
+   {: pre}
+
+5. 권한 확인을 위해 이전에 사용된 `test-permission` 팟(Pod)을 재작성하십시오.
    ```
    kubectl apply -f test-permission.yaml
    ```
    {: pre}
-   
-5. 파일에 대한 권한이 업데이트되었는지 확인하십시오. 
-   1. 팟(Pod)에 로그인하십시오. 
+
+5. 파일에 대한 권한이 업데이트되었는지 확인하십시오.
+   1. 팟(Pod)에 로그인하십시오.
       ```
       kubectl exec test-permission -it bash
       ```
       {: pre}
-   
-   2. 마운트 경로로 이동하고 파일에 대한 권한을 나열하십시오. 
+
+   2. 마운트 경로로 이동하고 파일에 대한 권한을 나열하십시오.
       ```
       cd test && ls -al
       ```
       {: pre}
 
-      출력 예: 
+      출력 예:
       ```
       -rwxrwx--- 1 <nonroot_userID> root 6193 Aug 21 17:06 <file_name>
       ```
       {: screen}
-      
-6. `test-permission` 팟(Pod)을 삭제하십시오. 
+
+6. `test-permission` 팟(Pod)을 삭제하십시오.
    ```
    kubectl delete pod test-permission
    ```
    {: pre}
-   
-7. 비-루트 사용자로 PVC를 앱에 마운트하십시오. 
 
-   **중요:** 동시에 배치 YAML에서 `fsGroup` 설정 없이 `runAsUser`로서 비-루트 사용자를 정의하지 마십시오. `fsGroup`을 설정하면 팟(Pod) 배치 시에 버킷의 모든 파일에 대한 그룹 권한을 업데이트하도록 {{site.data.keyword.cos_full_notm}} 플러그인이 트리거됩니다. 권한 업데이트는 쓰기 오퍼레이션이며, 이로 인해 팟(Pod)이 `Running` 상태가 되지 못할 수 있습니다. 
+7. 비-루트 사용자로 PVC를 앱에 마운트하십시오.
 
-{{site.data.keyword.cos_full_notm}} 서비스 인스턴스에서 올바른 파일 권한을 설정한 후에는 GUI 또는 REST API를 사용하여 파일을 업로드하지 마십시오. {{site.data.keyword.cos_full_notm}} 플러그인을 사용하여 파일을 서비스 인스턴스에 추가하십시오. 
+   동시에 배치 YAML에서 `fsGroup` 설정 없이 `runAsUser`로서 비-루트 사용자를 정의하십시오. `fsGroup`을 설정하면 팟(Pod) 배치 시에 버킷의 모든 파일에 대한 그룹 권한을 업데이트하도록 {{site.data.keyword.cos_full_notm}} 플러그인이 트리거됩니다. 권한 업데이트는 쓰기 오퍼레이션이며, 이로 인해 팟(Pod)이 `Running` 상태가 되지 못할 수 있습니다.
+   {: important}
+
+{{site.data.keyword.cos_full_notm}} 서비스 인스턴스에서 올바른 파일 권한을 설정한 후에는 콘솔 또는 REST API를 사용하여 파일을 업로드하지 마십시오. {{site.data.keyword.cos_full_notm}} 플러그인을 사용하여 파일을 서비스 인스턴스에 추가하십시오.
 {: tip}
 
 <br />
@@ -637,20 +643,15 @@ d--------- 1 root root 0 Jan 1 1970 <file_name>
 {: shortdesc}
 
 -  터미널에서 `ibmcloud` CLI 및 플러그인에 대한 업데이트가 사용 가능한 시점을 사용자에게 알려줍니다. 사용 가능한 모든 명령과 플래그를 사용할 수 있도록 반드시 CLI를 최신 상태로 유지하십시오.
-
 -   {{site.data.keyword.Bluemix_notm}}가 사용 가능한지 확인하려면 [{{site.data.keyword.Bluemix_notm}} 상태 페이지를 확인 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/bluemix/support/#status)하십시오.
 -   [{{site.data.keyword.containerlong_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에 질문을 게시하십시오.
-
-{{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
+    {{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
     {: tip}
 -   포럼을 검토하여 다른 사용자에게도 동일한 문제가 발생하는지 여부를 확인하십시오. 포럼을 사용하여 질문을 할 때는 {{site.data.keyword.Bluemix_notm}} 개발 팀이 볼 수 있도록 질문에 태그를 지정하십시오.
-
     -   {{site.data.keyword.containerlong_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
     -   서비스 및 시작하기 지시사항에 대한 질문이 있으면 [IBM Developer Answers ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support/howtogetsupport.html#using-avatar)를 참조하십시오.
-
--   티켓을 열어 IBM 지원 센터에 문의하십시오. IBM 지원 티켓 열기 또는 지원 레벨 및 티켓 심각도에 대해 알아보려면 [지원 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
-
-{: tip}
+-   케이스를 열어서 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨과 케이스 심각도에 대해 알아보려면 [지원 팀에 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
 문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오.
+{: tip}
 

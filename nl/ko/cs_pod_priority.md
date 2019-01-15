@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 팟(Pod) 우선순위 설정
@@ -35,7 +38,7 @@ Kubernetes 팟(Pod) 우선순위 및 선취를 사용하여 팟(Pod)의 상대�
 
 팟 배치에 대한 우선순위를 지정하지 않은 경우, 기본값은 `globalDefault`로 설정된 우선순위 클래스로 설정됩니다. `globalDefault` 우선순위 클래스가 없는 경우, 모든 팟(Pod)의 기본 우선순위는 영(`0`)입니다. 기본적으로 {{site.data.keyword.containerlong_notm}}에서 `globalDefault`를 설정하지 않으므로, 팟(Pod) 우선순위는 영(0)입니다.
 
-다음 그림에 있는 시나리오를 고려하십시오. **중요**: 보시다시피, 사용자는 팟(Pod) 우선순위 및 스케줄러가 함께 작동하여 사용 가능한 리소스의 작업자 노드에 우선순위 지정된 팟(Pod)을 배치하는 방법을 이해해야 합니다. 그렇지 않으면, 시나리오 3에서와 같이 기존 팟(Pod)의 제거와 동시에 클러스터의 높은 우선순위 팟(Pod)이 보류 중 상태를 유지할 수 있습니다.
+팟(Pod) 우선순위와 스케줄러가 함께 작동되는 방법을 이해하려면 다음 그림에 있는 시나리오를 고려하십시오. 사용 가능한 리소스의 작업자 노드에 우선순위가 지정된 팟(Pod)을 두어야 합니다. 그렇지 않으면, 시나리오 3에서와 같이 기존 팟(Pod)이 제거됨과 동시에 클러스터의 높은 우선순위 팟(Pod)이 보류 중 상태를 유지할 수 있습니다. 
 
 _그림: 팟(Pod) 우선순위 시나리오_
 ![팟(Pod) 우선순위 시나리오](images/pod-priority.png)
@@ -48,13 +51,19 @@ _그림: 팟(Pod) 우선순위 시나리오_
 **팟(Pod) 우선순위 허가 제어기를 사용하지 않을 수 있습니까?**</br>
 아니오, 팟(Pod) 우선순위를 사용하지 않으려면 팟(Pod) 배치에 우선순위 클래스를 포함하거나 `globalDefault`를 설정하지 마십시오. IBM이 [기본 우선순위 클래스](#default_priority_class)로 배치하는 cluster-critical 팟(Pod)을 제외한 모든 팟(Pod)의 기본값은 영(0)입니다. 팟(Pod) 우선순위가 상대적이므로, 이 기본 설정은 cluster-critical 팟(Pod)이 리소스에 대해 우선순위가 지정되도록 보장하며 사용자가 지정한 기존 스케줄링 정책에 따라 기타 팟(Pod)을 스케줄합니다.
 
+**리소스 할당량이 팟(Pod) 우선순위에 어떻게 영향을 줍니까?**</br>
+Kubernetes 1.12 이상을 실행하는 클러스터의 [할당량 범위 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes)를 포함하여, 팟(Pod) 우선순위를 리소스 할당량과 결합하여 사용할 수 있습니다.  할당량 범위를 사용하면 팟(Pod) 우선순위를 설명하는 리소스 할당량을 설정할 수 있습니다. 보다 높은 우선순위의 팟(Pod)은 보다 낮은 우선순위의 팟(Pod) 이전에 리소스 할당량에 의해 제한된 시스템 리소스를 이용하게 됩니다. 
+
 ## 기본 우선순위 클래스 이해
 {: #default_priority_class}
 
-{{site.data.keyword.containerlong_notm}} 클러스터는 기본적으로 일부 우선순위 클래스로 제공됩니다. **중요**: 클러스터의 적절한 관리에 사용되는 기본 클래스는 수정하지 마십시오. 앱 배치에서 이러한 클래스를 사용하거나 [자체 우선순위 클래스를 작성](#create_priority_class)할 수 있습니다.
+{{site.data.keyword.containerlong_notm}} 클러스터는 기본적으로 일부 우선순위 클래스로 제공됩니다.
 {: shortdesc}
 
-다음 표에서는 기본적으로 클러스터에 있는 우선순위 클래스와 이를 사용하는 이유를 설명합니다. 
+클러스터의 적절한 관리에 사용되는 기본 클래스는 수정하지 마십시오. 앱 배치에서 이러한 클래스를 사용하거나 [자체 우선순위 클래스를 작성](#create_priority_class)할 수 있습니다.
+{: important}
+
+다음 표에서는 기본적으로 클러스터에 있는 우선순위 클래스와 이를 사용하는 이유를 설명합니다.
 
 |이름 | 설정 주체 |우선순위 값 |용도 |
 |---|---|---|
@@ -77,25 +86,27 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 시작하기 전에:
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
-* 클러스터를 Kubernetes 버전 1.11로 [작성](cs_clusters.html#clusters_ui)하거나 [업데이트](cs_cluster_update.html#update)하십시오. 
+* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
+* 클러스터를 Kubernetes 버전 1.11로 [작성](cs_clusters.html#clusters_ui)하거나 [업데이트](cs_cluster_update.html#update)하십시오.
+
+우선 순위 클래스를 사용하려면 다음을 수행하십시오. 
 
 1.  선택사항: 기존 우선순위 클래스를 새 클래스의 템플리트로 사용하십시오.
-    
+
     1.  기존 우선순위 클래스를 나열하십시오.
-        
+
         ```
         kubectl get priorityclasses
         ```
         {: pre}
-        
+
     2.  복사하려는 우선순위 클래스를 선택하고 로컬 YAML 파일을 작성하십시오.
-    
+
         ```
         kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
         ```
         {: pre}
-        
+
 2.  우선 순위 클래스 YAML 파일을 작성하십시오.
 
     ```yaml
@@ -108,7 +119,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     description: "Use this class for XYZ service pods only."
     ```
     {: codeblock}
-    
+
     <table>
     <caption>YAML 파일 컴포넌트 이해</caption>
     <thead>
@@ -132,7 +143,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     <td><code>description</code></td>
     <td>선택사항: 이 우선순위 클래스를 사용하는 이유를 사용자에게 알려줍니다. 따옴표(`""`)로 문자열을 묶으십시오.</td>
     </tr></tbody></table>
-    
+
 3.  클러스터의 우선순위 클래스를 작성하십시오.
 
     ```
@@ -156,22 +167,22 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 시작하기 전에:
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
-* 클러스터를 Kubernetes 버전 1.11로 [작성](cs_clusters.html#clusters_ui)하거나 [업데이트](cs_cluster_update.html#update)하십시오. 
+* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
+* 클러스터를 Kubernetes 버전 1.11로 [작성](cs_clusters.html#clusters_ui)하거나 [업데이트](cs_cluster_update.html#update)하십시오.
 * 우선순위가 기존 팟(Pod)을 선취하고 클러스터의 리소스가 이용되는 방법에 영향을 줄 수 있으므로 [우선순위 스케줄링이 작동하는 방법을 이해](#priority_scheduling)하십시오.
 
 팟(Pod)에 우선순위를 지정하려면 다음을 수행하십시오.
 
 1.  이미 배치된 팟(Pod)과 관련하여 팟(Pod)의 올바른 우선순위 클래스를 선택할 수 있도록, 기타 배치된 팟(Pod)의 중요도를 확인하십시오.
 
-    1.  네임스페이스의 기타 팟(Pod)이 사용하는 우선순위 클래스를 보십시오. 
-        
+    1.  네임스페이스의 기타 팟(Pod)이 사용하는 우선순위 클래스를 보십시오.
+
         ```
         kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
         ```
         {: pre}
-        
-    2.  우선순위 클래스의 세부사항을 가져오고 **값** 숫자를 기록해 두십시오. 높은 숫자의 팟(Pod)은 낮은 숫자의 팟(Pod) 이전에 우선순위가 지정됩니다. 검토할 각 우선순위 클래스마다 이 단계를 반복하십시오.
+
+    2.  우선순위 클래스의 세부사항을 가져오고 **값** 숫자를 기록해 두십시오. 높은 숫자의 팟(Pod)은 낮은 숫자의 팟(Pod) 이전에 우선순위가 지정됩니다. 검토할 각 우선순위 클래스마다 이 단계를 반복하십시오. 
 
         ```
         kubectl describe priorityclass <priorityclass_name>
@@ -184,7 +195,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     kubectl get priorityclasses
     ```
     {: pre}
-    
+
 3.  팟(Pod) 스펙에서, 이전 단계에서 검색한 우선순위 클래스의 이름으로 `priorityClassName` 필드를 추가하십시오.
 
     ```yaml

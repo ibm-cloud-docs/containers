@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -168,8 +171,8 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks credentials-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
@@ -383,7 +386,7 @@ IAM(Identity and Access Management) API 키는 {{site.data.keyword.containerlong
 
 지역에 대해 저장된 API 키를 업데이트해야 한다고 판별된 경우에는 [ibmcloud ks api-key-reset](#cs_api_key_reset) 명령을 사용하여 이를 수행할 수 있습니다. 이 명령은 {{site.data.keyword.containerlong_notm}} 관리자 액세스 정책이 필요하고 계정에서 이 명령을 실행하는 사용자의 API 키를 저장합니다.
 
-**팁:** IBM Cloud 인프라(SoftLayer) 인증 정보가 [ibmcloud ks credentials-set](#cs_credentials_set) 명령을 사용하여 수동으로 설정된 경우에는 이 명령에서 리턴된 API 키가 사용되지 않을 수 있습니다.
+**팁:** IBM Cloud 인프라(SoftLayer) 인증 정보가 [ibmcloud ks credential-set](#cs_credentials_set) 명령을 사용하여 수동으로 설정된 경우에는 이 명령에서 리턴된 API 키가 사용되지 않을 수 있습니다.
 
 <strong>명령 옵션</strong>:
 
@@ -795,7 +798,7 @@ trusted: <em>true</em>
 
 <dt><code>--trusted</code></dt>
 <dd><p>**베어메탈 전용**: [신뢰할 수 있는 컴퓨팅](cs_secure.html#trusted_compute)을 사용하여 베어메탈 작업자 노드의 변조 여부를 확인합니다. 클러스터 작성 중에 신뢰 사용을 설정하지 않고 나중에 이를 수행하려면 `ibmcloud ks feature-enable` [명령](cs_cli_reference.html#cs_cluster_feature_enable)을 사용할 수 있습니다. 신뢰를 사용하도록 설정한 후에는 나중에 사용하지 않도록 설정할 수 없습니다.</p>
-<p>베어메탈 머신 유형의 신뢰 지원 여부를 확인하려면 `ibmcloud ks machine-types <zone>` [명령](#cs_machine_types)의 `Trustable` 필드를 확인하십시오. 클러스터에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks cluster-get` [명령](#cs_cluster_get)의 출력에서 **Trust ready** 필드를 보십시오. 베어메탈 작업자 노드에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks worker-get` [명령](#cs_worker_get)의 출력에서 **Trust** 필드를 보십시오.</p></dd>
+<p>베어메탈 머신 유형의 신뢰 지원 여부를 확인하려면 `ibmcloud ks machine-types <zone>` [명령](#cs_machine_types)의 출력에서 **Trustable** 필드를 확인하십시오. 클러스터에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks cluster-get` [명령](#cs_cluster_get)의 출력에서 **Trust ready** 필드를 보십시오. 베어메탈 작업자 노드에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks worker-get` [명령](#cs_worker_get)의 출력에서 **Trust** 필드를 보십시오.</p></dd>
 
 <dt><code>-s</code></dt>
 <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다. 이 값은 선택사항입니다.</dd>
@@ -850,7 +853,7 @@ trusted: <em>true</em>
 
    <dt><code><em>--trusted</em></code></dt>
    <dd><p>클러스터에 있는 모든 지원되는 베어메탈 작업자 노드에서 [신뢰할 수 있는 컴퓨팅](cs_secure.html#trusted_compute)을 사용으로 설정하기 위한 플래그를 포함시킵니다. 신뢰를 사용하도록 설정한 후에는 나중에 클러스터에 대해 이를 사용하지 않도록 설정할 수 없습니다.</p>
-   <p>베어메탈 머신 유형의 신뢰 지원 여부를 확인하려면 `ibmcloud ks machine-types <zone>` [명령](#cs_machine_types)의 **Trustable** 필드를 확인하십시오. 클러스터에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks cluster-get` [명령](#cs_cluster_get)의 출력에서 **Trust ready** 필드를 보십시오. 베어메탈 작업자 노드에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks worker-get` [명령](#cs_worker_get)의 출력에서 **Trust** 필드를 보십시오.</p></dd>
+   <p>베어메탈 머신 유형의 신뢰 지원 여부를 확인하려면 `ibmcloud ks machine-types <zone>` [명령](#cs_machine_types)의 출력에서 **Trustable** 필드를 확인하십시오. 클러스터에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks cluster-get` [명령](#cs_cluster_get)의 출력에서 **Trust ready** 필드를 보십시오. 베어메탈 작업자 노드에서 신뢰가 사용되는지 확인하려면 `ibmcloud ks worker-get` [명령](#cs_worker_get)의 출력에서 **Trust** 필드를 보십시오.</p></dd>
 
   <dt><code>-s</code></dt>
    <dd>오늘의 메시지 또는 업데이트 미리 알림을 표시하지 않습니다. 이 값은 선택사항입니다.</dd>
@@ -897,21 +900,23 @@ trusted: <em>true</em>
 **출력 예**:
 
   ```
-  Name:        my_cluster
-  ID:          abc1234567
-  State:       normal
-  Trust ready: false
-  Created:     2018-01-01T17:19:28+0000
-  Zone:        dal10
-  Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Master Location: Dallas
-  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
-  Ingress secret:    my_cluster
-  Workers:      3
-  Worker Zones: dal10
-  Version:      1.11.3
-  Owner Email:  name@example.com
+  Name:                 my_cluster
+  ID:                   abc1234567
+  State:                normal
+  Trust ready:          false
+  Created:              2018-01-01T17:19:28+0000
+  Zone:                 dal10
+  Master URL:           https://169.xx.xxx.xxx:xxxxx
+  Master Location:      Dallas
+  Ingress subdomain:    my_cluster.us-south.containers.appdomain.cloud
+  Ingress secret:       my_cluster
+  Workers:              3
+  Worker Zones:         dal10
+  Version:              1.12.3
+  Owner:                name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Resource Group ID:    a8a12accd63b437bbd6d58fb6a462ca7
+  Resource Group Name:  Default
 
   Addons
   Name                   Enabled
@@ -1660,7 +1665,7 @@ ALB의 세부사항을 봅니다.
 ## 인프라 명령
 {: #infrastructure_commands}
 
-### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 {{site.data.keyword.containerlong_notm}} 계정에 대한 IBM Cloud 인프라(SoftLayer) 계정 인증 정보를 설정합니다.
@@ -1717,12 +1722,12 @@ API 키를 생성하려면 다음을 수행하십시오.
 **예제**:
 
   ```
-  ibmcloud ks credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+  ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
 
-### ibmcloud ks credentials-unset
+### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
 {{site.data.keyword.containerlong_notm}} 계정에서 IBM Cloud 인프라(SoftLayer) 계정 인증 정보를 제거합니다.
@@ -1739,7 +1744,7 @@ API 키를 생성하려면 다음을 수행하십시오.
 **예제**:
 
   ```
-  ibmcloud ks credentials-unset
+  ibmcloud ks credential-unset
   ```
   {: pre}
 
@@ -2800,7 +2805,7 @@ kubectl get nodes
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.8_1512
+  Version:            1.10.11_1512
   ```
   {: screen}
 
@@ -3016,4 +3021,3 @@ kubectl get nodes
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
-  

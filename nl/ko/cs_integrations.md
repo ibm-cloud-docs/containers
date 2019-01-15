@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -72,14 +75,14 @@ lastupdated: "2018-10-25"
 <tbody>
 <tr>
 <td>CoScale</td>
-<td><a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 사용하여 작업자 노드, 컨테이너, 복제본 세트 및 서비스를 모니터합니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">CoScale을 사용하여 {{site.data.keyword.containerlong_notm}} 모니터링 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 참조하십시오. </td>
+<td><a href="https://www.newrelic.com/coscale" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 사용하여 작업자 노드, 컨테이너, 복제본 세트 및 서비스를 모니터합니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">CoScale을 사용하여 {{site.data.keyword.containerlong_notm}} 모니터링 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 참조하십시오. </td>
 </tr>
 <tr>
 <td>Datadog</td>
 <td><a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하여 클러스터를 모니터하고 인프라 및 애플리케이션 성능 메트릭을 봅니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Datadog를 사용하여 {{site.data.keyword.containerlong_notm}} 모니터링 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 참조하십시오. </td>
 </tr>
 <tr>
-<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>{{site.data.keyword.cloudaccesstrailfull}}</td>
 <td>Grafana를 통해 로그를 분석하여 클러스터에서 작성된 관리 활동을 모니터합니다. 서비스에 대한 자세한 정보는 [활동 트래커](/docs/services/cloud-activity-tracker/index.html) 문서를 참조하십시오. 추적할 수 있는 이벤트의 유형에 대한 자세한 정보는 [활동 트래커 이벤트](cs_at_events.html)를 참조하십시오.</td>
 </tr>
 <tr>
@@ -87,8 +90,16 @@ lastupdated: "2018-10-25"
 <td>{{site.data.keyword.loganalysisfull_notm}}를 사용하여 로그 콜렉션, 보존 및 검색 기능을 확장합니다. 자세한 정보는 <a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">클러스터 로그의 자동 콜렉션 사용 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 참조하십시오. </td>
 </tr>
 <tr>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>팟(Pod) 컨테이너에서 로그를 관리하기 위해 LogDNA를 작업자 노드에 써드파티 서비스로 배치하여 로그 관리 기능을 클러스터에 추가합니다. 자세한 정보는 [LogDNA로 {{site.data.keyword.loganalysisfull_notm}}에서 Kubernetes 클러스터 로그 관리](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)를 참조하십시오. </td>
+</tr>
+<tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
-<td>{{site.data.keyword.monitoringlong_notm}}으로 규칙 및 경보를 정의하여 메트릭 콜렉션 및 보존 기능을 확장합니다. 자세한 정보는 <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Kubernetes 클러스터에 배치된 앱에 대한 Grafana의 메트릭 분석 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 참조하십시오. </td>
+<td>{{site.data.keyword.monitoringlong_notm}}으로 규칙 및 경보를 정의하여 메트릭 콜렉션 및 보존 기능을 확장합니다. 자세한 정보는 <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Kubernetes 클러스터에 배치된 앱에 대한 Grafana의 메트릭 분석 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 참조하십시오.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>메트릭을 {{site.data.keyword.monitoringlong}}에 전달하기 위해 Sysdig를 작업자 노드에 써드파티의 서비스로 배치하여 앱의 성능과 상태에 대한 작동 가시성을 얻을 수 있습니다. 자세한 정보는 [Kubernetes 클러스터에서 앱에 대한 메트릭 분석](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)을 참조하십시오. **참고**:Kubernetes 버전 1.11 이상을 실행하는 클러스터에서 {{site.data.keyword.mon_full_notm}}을 사용할 경우 Sysdig가 현재 `containerd`를 지원하지 않으므로 일부 컨테이너만 수집됩니다. </td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -124,7 +135,7 @@ lastupdated: "2018-10-25"
 ## 보안 서비스
 {: #security_services}
 
-{{site.data.keyword.Bluemix_notm}} 보안 서비스를 클러스터와 통합하는 방법을 포괄적으로 보려 하십니까? [클라우드 애플리케이션에 엔드-투-엔드 보안 적용 튜토리얼](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application)을 참조하십시오.
+{{site.data.keyword.Bluemix_notm}} 보안 서비스를 클러스터와 통합하는 방법을 포괄적으로 보려 하십니까? [클라우드 애플리케이션에 엔드-투-엔드 보안 적용 튜토리얼](/docs/tutorials/cloud-e2e-security.html)을 참조하십시오.
 {: shortdesc}
 
 <table summary="접근성 요약">
@@ -154,8 +165,7 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
-  <td>{{site.data.keyword.keymanagementserviceshort}}를 사용으로 설정하여 클러스터에 있는 Kubernetes secret을 암호화하십시오. Kubernetes secret을 암호화하면 권한 없는 사용자가 민감한 클러스터 정보에 액세스하지 못하도록 할 수 있습니다.
-<br>설정하려면 <a href="cs_encrypt.html#keyprotect">{{site.data.keyword.keymanagementserviceshort}}를 사용한 Kubernetes secret 암호화</a>를 참조하십시오. <br>자세한 정보는 <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
+  <td>{{site.data.keyword.keymanagementserviceshort}}를 사용으로 설정하여 클러스터에 있는 Kubernetes secret을 암호화하십시오. Kubernetes secret을 암호화하면 권한 없는 사용자가 민감한 클러스터 정보에 액세스하지 못하도록 할 수 있습니다.<br>설정하려면 <a href="cs_encrypt.html#keyprotect">{{site.data.keyword.keymanagementserviceshort}}를 사용한 Kubernetes secret 암호화</a>를 참조하십시오.<br>자세한 정보는 <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -185,7 +195,7 @@ lastupdated: "2018-10-25"
 <tbody>
 <tr>
   <td>Heptio Ark</td>
-  <td><a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하여 클러스터 리소스 및 지속적 볼륨을 백업하고 복원할 수 있습니다. 자세한 정보는 Heptio Ark의 <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">재해 복구 및 클러스터 마이그레이션을 위한 유스 케이스 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
+  <td><a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하여 클러스터 리소스 및 지속적 볼륨을 백업하고 복원할 수 있습니다. 자세한 정보는 Heptio Ark의 <a href="https://github.com/heptio/ark/blob/release-0.9/docs/use-cases.md" target="_blank">재해 복구 및 클러스터 마이그레이션을 위한 유스 케이스 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -193,7 +203,7 @@ lastupdated: "2018-10-25"
 </tr>
   <tr>
     <td>{{site.data.keyword.cloudantfull}}</td>
-    <td>{{site.data.keyword.cloudant_short_notm}}는  데이터를 JSON 형식의 문서로 저장하는 문서 지향 DBaaS(DataBase as a Service)입니다. 이 서비스는 확장성, 고가용성 및 내구성을 제공하기 위해 제작되었습니다. 자세한 정보는 <a href="/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant" target="_blank">{{site.data.keyword.cloudant_short_notm}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
+    <td>{{site.data.keyword.cloudant_short_notm}}는 데이터를 JSON 형식의 문서로 저장하는 문서 지향 DBaaS(DataBase as a Service)입니다. 이 서비스는 확장성, 고가용성 및 내구성을 제공하기 위해 제작되었습니다. 자세한 정보는 <a href="/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant" target="_blank">{{site.data.keyword.cloudant_short_notm}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
   </tr>
   <tr>
     <td>{{site.data.keyword.composeForMongoDB_full}}</td>
@@ -213,12 +223,19 @@ lastupdated: "2018-10-25"
 Watson AI, 데이터, 보안 및 IoT(Internet of Things) 등의 분야에서 추가 기능으로 Kubernetes 클러스터를 개선하려면 {{site.data.keyword.Bluemix_notm}} 서비스를 추가하십시오.
 {:shortdesc}
 
-**중요:** 서비스 키를 지원하는 서비스만 바인드할 수 있습니다. 서비스 키를 지원하는 서비스가 있는 목록을 찾으려면 [외부 앱이 {{site.data.keyword.Bluemix_notm}} 서비스를 사용하도록 설정](/docs/apps/reqnsi.html#accser_external)을 참조하십시오.
+서비스 키를 지원하는 서비스만 바인딩할 수 있습니다. 서비스 키를 지원하는 서비스가 있는 목록을 찾으려면 [외부 앱이 {{site.data.keyword.Bluemix_notm}} 서비스를 사용하도록 설정](/docs/resources/connect_external_app.html#externalapp)을 참조하십시오.
+{: note}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
+시작하기 전에:
+- 다음 역할을 보유하고 있는지 확인하십시오. 
+    - 클러스터에 대한 [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](cs_users.html#platform)
+    - 사용하려는 영역에 대한 [**개발자** Cloud Foundry 역할](/docs/iam/mngcf.html#mngcf)
+- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
 클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스를 추가하려면 다음을 수행하십시오.
-1. [{{site.data.keyword.Bluemix_notm}} 서비스의 인스턴스를 작성](/docs/apps/reqnsi.html#req_instance)하십시오. </br></br>**참고:**<ul><li>몇몇 {{site.data.keyword.Bluemix_notm}} 서비스는 일부 지역에서만 사용 가능합니다. 서비스가 클러스터와 동일한 지역에서 사용 가능한 경우에만 클러스터에 서비스를 바인드할 수 있습니다. 또한 워싱턴 DC 구역에서 서비스 인스턴스를 작성하려면 CLI를 사용해야 합니다.</li><li>서비스 인스턴스는 클러스터와 동일한 리소스 그룹에 작성해야 합니다. 특정 리소스는 하나의 리소스 그룹에서만 작성될 수 있으며 이후에는 이를 변경할 수 없습니다. </li></ul>
+1. [{{site.data.keyword.Bluemix_notm}} 서비스의 인스턴스를 작성](/docs/apps/reqnsi.html#req_instance)하십시오.
+    * 몇몇 {{site.data.keyword.Bluemix_notm}} 서비스는 일부 지역에서만 사용 가능합니다. 서비스가 클러스터와 동일한 지역에서 사용 가능한 경우에만 클러스터에 서비스를 바인드할 수 있습니다. 또한 워싱턴 DC 구역에서 서비스 인스턴스를 작성하려면 CLI를 사용해야 합니다.
+    * 서비스 인스턴스는 클러스터와 동일한 리소스 그룹에 작성해야 합니다. 특정 리소스는 하나의 리소스 그룹에서만 작성될 수 있으며 이후에는 이를 변경할 수 없습니다.
 
 2. 작성한 서비스 유형을 확인하고 서비스 인스턴스 **이름**을 기록해 두십시오.
    - **Cloud Foundry 서비스:**
@@ -234,7 +251,7 @@ Watson AI, 데이터, 보안 및 IoT(Internet of Things) 등의 분야에서 추
      ```
      {: screen}
 
-  - **IAM 사용 서비스:**
+  - **{{site.data.keyword.Bluemix_notm}}IAM 사용 서비스:**
      ```
     ibmcloud resource service-instances
      ```
@@ -249,7 +266,7 @@ Watson AI, 데이터, 보안 및 IoT(Internet of Things) 등의 분야에서 추
 
    **Cloud Foundry 서비스** 및 **서비스**로서 대시보드에서 다른 서비스 유형을 볼 수도 있습니다.
 
-3. IAM 사용 서비스의 경우, 이 서비스를 클러스터에 바인드할 수 있도록 Cloud Foundry 별명을 작성하십시오. 서비스가 이미 Cloud Foundry 서비스인 경우에는 이 단계가 필요하지 않으며 다음 단계를 계속할 수 있습니다.
+3. {{site.data.keyword.Bluemix_notm}} IAM 사용 서비스의 경우, 이 서비스를 클러스터에 바인드할 수 있도록 Cloud Foundry 별명을 작성하십시오. 서비스가 이미 Cloud Foundry 서비스인 경우에는 이 단계가 필요하지 않으며 다음 단계를 계속할 수 있습니다.
    1. Cloud Foundry 조직 및 영역을 대상으로 지정하십시오.
       ```
       ibmcloud target --cf
@@ -269,19 +286,12 @@ Watson AI, 데이터, 보안 및 IoT(Internet of Things) 등의 분야에서 추
       {: pre}
 
 4. 서비스를 추가하는 데 사용할 클러스터 네임스페이스를 식별하십시오. 다음 옵션 중에 선택하십시오.
-   - 기존 네임스페이스를 나열하고 사용할 네임스페이스를 선택하십시오.
      ```
          kubectl get namespaces
      ```
      {: pre}
 
-   - 클러스터에 네임스페이스를 작성하십시오.
-     ```
-        kubectl create namespace <namespace_name>
-     ```
-     {: pre}
-
-5.  서비스를 클러스터에 추가하십시오. IAM 사용 서비스의 경우, 반드시 이전에 작성한 Cloud Foundry 별명을 사용하십시오.
+5.  서비스를 클러스터에 추가하십시오. {{site.data.keyword.Bluemix_notm}} IAM 사용 서비스의 경우, 앞에서 작성한 Cloud Foundry 별명을 사용해야 합니다.
     ```
     ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
@@ -357,7 +367,7 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
 {: tip}
 
 시작하기 전에:
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
+- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 - [{{site.data.keyword.Bluemix_notm}} 서비스를 클러스터에 추가](#adding_cluster)하십시오.
 
 ### 볼륨으로서 시크릿을 팟(Pod)에 마운트
@@ -646,7 +656,7 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
 
 {{site.data.keyword.containerlong_notm}}에서 Helm 차트를 사용하려면, 우선 클러스터에 Helm 인스턴스를 설치하고 이를 초기화해야 합니다. 그런 다음, {{site.data.keyword.Bluemix_notm}} Helm 저장소를 Helm 인스턴스에 추가할 수 있습니다.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
+시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
 1. <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 설치하십시오.
 
@@ -678,10 +688,10 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
     ```
     {: screen}
 
-5. {{site.data.keyword.Bluemix_notm}} Helm 저장소를 Helm 인스턴스에 추가하십시오. 
+5. {{site.data.keyword.Bluemix_notm}} Helm 저장소를 Helm 인스턴스에 추가하십시오.
 
     ```
-    helm repo add ibm  https://registry.bluemix.net/helm/ibm
+    helm repo add ibm https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
@@ -690,7 +700,7 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
     ```
     {: pre}
 
-6. 현재 {{site.data.keyword.Bluemix_notm}} 저장소에서 사용 가능한 Helm 차트를 나열하십시오. 
+6. 현재 {{site.data.keyword.Bluemix_notm}} 저장소에서 사용 가능한 Helm 차트를 나열하십시오.
 
     ```
     helm search ibm
@@ -716,7 +726,7 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
 {: #helm_links}
 
 * strongSwan Helm 차트를 사용하려면 [strongSwan IPSec VPN 서비스 Helm 차트와 VPN 연결 설정](cs_vpn.html#vpn-setup)을 참조하십시오.
-* [Helm 차트 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) GUI에서 {{site.data.keyword.Bluemix_notm}}와 함께 사용할 수 있는 사용 가능한 Helm 차트를 보십시오.
+* {{site.data.keyword.Bluemix_notm}}에서 사용할 수 있는 사용 가능한 Helm 차트는 콘솔의 [Helm 차트 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts)에서 확인하십시오. 
 * <a href="https://docs.helm.sh/helm/" target="_blank">Helm 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>에서 Helm 차트를 설정하고 관리하는 데 사용되는 Helm 명령에 대해 자세히 알아보십시오.
 * [Kubernetes Helm 차트를 사용하여 배치 속도를 향상 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/)시키는 방법에 대해 자세히 알아보십시오.
 
@@ -730,7 +740,7 @@ Weave Scope는 서비스, 팟(Pod), 컨테이너, 프로세스 등을 포함하�
 
 -   공용 인터넷에 클러스터 정보를 노출하지 않도록 유념하십시오. 이러한 단계를 완료하여 안전하게 Weave Scope를 배치하고 웹 브라우저에서 로컬로 이에 액세스하십시오.
 -   클러스터가 아직 없으면 [표준 클러스터를 작성](cs_clusters.html#clusters_ui)하십시오. Weave Scope는 CPU를 많이 사용할 수 있습니다(특히, 앱의 경우). 무료 클러스터가 아닌 더 큰 표준 클러스터에서 Weave Scope를 실행하십시오.
--   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
+-   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
 
 클러스터에서 Weave Scope를 사용하려면 다음을 수행하십시오.

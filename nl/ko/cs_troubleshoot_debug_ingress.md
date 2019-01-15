@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -30,6 +33,9 @@ lastupdated: "2018-10-25"
 
 하나의 호스트를 하나의 Ingress 리소스에서만 정의했는지 확인하십시오. 여러 Ingress 리소스에 하나의 호스트를 정의하면 ALB가 올바르게 트래픽을 전달하지 않으면서 오류가 발생할 수 있습니다.
 {: tip}
+
+시작하기 전에 다음의 [{{site.data.keyword.Bluemix_notm}} IAM 액세스 정책](cs_users.html#platform)이 있는지 확인하십시오.
+  - 클러스터에 대한 **편집자** 또는 **관리자** 플랫폼 역할
 
 ## 1단계: Ingress 배치 및 ALB 팟(Pod) 로그에서 오류 메시지 확인
 {: #errors}
@@ -122,11 +128,11 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
     `dal10` 및 `dal13`에서 작업자 노드의 다중 구역 클러스터에 대한 예제 출력:
 
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone   
-    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -                dal13   
-    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -                dal10   
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13   
-    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222    dal10  
+    ALB ID                                            Status     Type      ALB IP           Zone    Build
+    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
+    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
     ```
     {: screen}
 
@@ -134,7 +140,7 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
 
 2. ALB IP의 상태를 확인하십시오.
 
-    * 단일 구역 클러스터 및 다중 구역 클러스터의 경우: 각 공용 ALB의 IP 주소에 대해 ping을 실행하여 각 ALB가 패킷을 성공적으로 수신할 수 있는지 확인하십시오. 참고: 사설 ALB를 사용 중이면 사설 네트워크에서만 해당 IP 주소에 대해 ping을 실행할 수 있습니다.
+    * 단일 구역 클러스터 및 다중 구역 클러스터의 경우: 각 공용 ALB의 IP 주소에 대해 ping을 실행하여 각 ALB가 패킷을 성공적으로 수신할 수 있는지 확인하십시오. 사설 ALB를 사용 중이면 사설 네트워크에서만 해당 IP 주소에 대해 ping을 실행할 수 있습니다.
         ```
       ping <ALB_IP>
         ```
@@ -143,10 +149,11 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
         * CLI가 제한시간 초과를 리턴하고 작업자 노드를 보호하는 사용자 정의 방화벽이 있는 경우, [방화벽](cs_troubleshoot_clusters.html#cs_firewall)에서 ICMP가 허용되는지 확인하십시오.
         * Ping 실행을 차단하는 방화벽이 없으며 Ping 실행이 여전히 제한시간을 초과하는 경우에는 [ALB 팟(Pod)의 상태를 확인](#check_pods)하십시오.
 
-    * 다중 구역 클러스터에만 해당: MZLB 상태 검사를 사용하여 ALB IP의 상태를 판별할 수 있습니다. MZLB에 대한 자세한 정보는 [다중 구역 로드 밸런서(MZLB)](cs_ingress.html#planning)를 참조하십시오. **참고**: MZLB 상태 검사는 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 형식의 새 Ingress 하위 도메인이 있는 클러스터에만 사용될 수 있습니다. 클러스터가 여전히 `<cluster_name>.<region>.containers.mybluemix.net`의 이전 형식을 사용하는 경우에는 [단일 구역 클러스터를 다중 구역으로 변환](cs_clusters.html#add_zone)하십시오. 클러스터에 새 형식의 하위 도메인이 지정되지만, 이전 하위 도메인 형식이 계속 사용될 수도 있습니다. 또는 새 하위 도메인 형식이 자동으로 지정된 새 클러스터를 주문할 수 있습니다.
+    * 다중 구역 클러스터에만 해당: MZLB 상태 검사를 사용하여 ALB IP의 상태를 판별할 수 있습니다. MZLB에 대한 자세한 정보는 [다중 구역 로드 밸런서(MZLB)](cs_ingress.html#planning)를 참조하십시오. MZLB 상태 검사는 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 형식의 새 Ingress 하위 도메인이 있는 클러스터에만 사용될 수 있습니다. 클러스터가 여전히 `<cluster_name>.<region>.containers.mybluemix.net`의 이전 형식을 사용하는 경우에는 [단일 구역 클러스터를 다중 구역으로 변환](cs_clusters.html#add_zone)하십시오. 클러스터에 새 형식의 하위 도메인이 지정되지만, 이전 하위 도메인 형식이 계속 사용될 수도 있습니다. 또는 새 하위 도메인 형식이 자동으로 지정된 새 클러스터를 주문할 수 있습니다.
+
     다음의 HTTP cURL 명령에서는 ALB IP에 대해 `healthy` 또는 `unhealthy` 상태를 리턴하도록 {{site.data.keyword.containerlong_notm}}에 의해 구성된 `albhealth` 호스트를 사용합니다.
         ```
-    curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+            curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
         ```
         {: pre}
 
@@ -221,7 +228,7 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
     ```
     {: pre}
 
-    1. 하나의 호스트를 하나의 Ingress 리소스에서만 정의했는지 확인하십시오. 여러 Ingress 리소스에 하나의 호스트를 정의하면 ALB가 올바르게 트래픽을 전달하지 않으면서 오류가 발생할 수 있습니다. 
+    1. 하나의 호스트를 하나의 Ingress 리소스에서만 정의했는지 확인하십시오. 여러 Ingress 리소스에 하나의 호스트를 정의하면 ALB가 올바르게 트래픽을 전달하지 않으면서 오류가 발생할 수 있습니다.
 
     2. 하위 도메인 및 TLS 인증서가 올바른지 확인하십시오. IBM 제공 Ingress 하위 도메인 및 TLS 인증서를 찾으려면 다음을 실행하십시오. `ibmcloud ks cluster-get <cluster_name_or_ID>`
 
@@ -248,8 +255,8 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
 
     예를 들어, 접속 불가능한 IP `169.62.196.238`은 ALB `public-cr24a9f2caf6554648836337d240064935-alb1`에 속합니다.
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13
+    ALB ID                                            Status     Type      ALB IP           Zone   Build
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
     ```
     {: screen}
 
@@ -387,20 +394,15 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
 {: shortdesc}
 
 -  터미널에서 `ibmcloud` CLI 및 플러그인에 대한 업데이트가 사용 가능한 시점을 사용자에게 알려줍니다. 사용 가능한 모든 명령과 플래그를 사용할 수 있도록 반드시 CLI를 최신 상태로 유지하십시오.
-
 -   {{site.data.keyword.Bluemix_notm}}가 사용 가능한지 확인하려면 [{{site.data.keyword.Bluemix_notm}} 상태 페이지를 확인 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/bluemix/support/#status)하십시오.
 -   [{{site.data.keyword.containerlong_notm}} Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)에 질문을 게시하십시오.
-
-{{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
+    {{site.data.keyword.Bluemix_notm}} 계정에 대해 IBM ID를 사용 중이 아닌 경우에는 이 Slack에 대한 [초대를 요청](https://bxcs-slack-invite.mybluemix.net/)하십시오.
     {: tip}
 -   포럼을 검토하여 다른 사용자에게도 동일한 문제가 발생하는지 여부를 확인하십시오. 포럼을 사용하여 질문을 할 때는 {{site.data.keyword.Bluemix_notm}} 개발 팀이 볼 수 있도록 질문에 태그를 지정하십시오.
-
     -   {{site.data.keyword.containerlong_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
     -   서비스 및 시작하기 지시사항에 대한 질문이 있으면 [IBM Developer Answers ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support/howtogetsupport.html#using-avatar)를 참조하십시오.
-
--   티켓을 열어 IBM 지원 센터에 문의하십시오. IBM 지원 티켓 열기 또는 지원 레벨 및 티켓 심각도에 대해 알아보려면 [지원 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
-
-{: tip}
+-   케이스를 열어서 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨과 케이스 심각도에 대해 알아보려면 [지원 팀에 문의](/docs/get-support/howtogetsupport.html#getting-customer-support)를 참조하십시오.
 문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오.
+{: tip}
 

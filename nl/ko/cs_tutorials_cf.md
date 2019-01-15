@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -41,7 +44,8 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 - [{{site.data.keyword.registrylong_notm}}에서 개인용 이미지 레지스트리를 작성](../services/Registry/index.html)하십시오.
 - [클러스터를 작성](cs_clusters.html#clusters_ui)하십시오.
 - [CLI에 클러스터를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
-- [**편집자**, **운영자** 또는 **관리자** 플랫폼 역할을 보유 중인지 확인](cs_users.html#add_users_cli)하십시오.
+- {{site.data.keyword.containerlong_notm}}에 대해 다음의 {{site.data.keyword.Bluemix_notm}} IAM 액세스 정책이 있는지 확인하십시오. 
+    - [임의의 플랫폼 역할](cs_users.html#platform)
 - [Docker 및 Kubernetes 용어에 대해 학습](cs_tech.html)하십시오.
 
 
@@ -73,7 +77,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
     앱이 배치되면 "명령 인터페이스를 사용한 앱 다운로드, 수정 및 재배치"에 대한 지시사항이 표시됩니다.
 
-    c. GUI 지시사항의 1단계에서 **스타터 코드 다운로드**를 클릭하십시오.
+    c. 콘솔 지시사항의 1단계에서 **스타터 코드 다운로드**를 클릭하십시오.
 
     d. .zip 파일의 압축을 풀어 컨텐츠를 `cf-py` 디렉토리에 저장하십시오.
 
@@ -259,7 +263,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
     ```
     {: screen}
 
@@ -269,7 +273,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
 5.  [Kubernetes 대시보드를 실행](cs_app.html#cli_dashboard)하십시오.
 
-    [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/)에서 클러스터를 선택하는 경우 **Kubernetes 대시보드** 단추를 사용하여 한 번의 클릭으로 대시보드를 실행할 수 있습니다.
+    [{{site.data.keyword.Bluemix_notm}} 콘솔](https://console.bluemix.net/)에서 클러스터를 선택하는 경우, **Kubernetes 대시보드** 단추를 사용하여 한 번의 클릭으로 대시보드를 실행할 수 있습니다.
     {: tip}
 
 6. **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다.

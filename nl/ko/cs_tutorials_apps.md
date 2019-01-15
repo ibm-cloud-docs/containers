@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -56,6 +59,7 @@ PR 회사의 앱 개발자가 지난 튜토리얼에서 작성된 Kubernetes 클
 ## 전제조건
 
 * [튜토리얼: Kubernetes 클러스터 작성](cs_tutorials.html#cs_cluster_tutorial).
+* [container-registry 플러그인](/docs/services/Registry/index.html#registry_cli_install) 설치
 
 
 ## 학습 1: Kubernetes 클러스터에 단일 인스턴스 앱 배치
@@ -87,9 +91,9 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
 
-3. [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). 
+3. [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
-5.  {{site.data.keyword.registryshort_notm}} CLI에 로그인하십시오.  **참고**: 컨테이너 레지스트리 플러그인이 [설치](/docs/services/Registry/index.html#registry_cli_install)되어 있는지 확인하십시오.
+5.  {{site.data.keyword.registryshort_notm}} CLI에 로그인하십시오.
 
     ```
     ibmcloud cr login
@@ -231,7 +235,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
         ```
         {: screen}
 
@@ -247,7 +251,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
 
 11. [Kubernetes 대시보드를 실행](cs_app.html#cli_dashboard)하십시오.
 
-    [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/)에서 클러스터를 선택하는 경우 **Kubernetes 대시보드** 단추를 사용하여 한 번의 클릭으로 대시보드를 실행할 수 있습니다.
+    [{{site.data.keyword.Bluemix_notm}} 콘솔](https://console.bluemix.net/)에서 클러스터를 선택하는 경우, **Kubernetes 대시보드** 단추를 사용하여 한 번의 클릭으로 대시보드를 실행할 수 있습니다.
     {: tip}
 
 12. **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다.
@@ -374,7 +378,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
   ```
   {: screen}
 
-7.  팟(Pod) 상태를 검사하여 Kubernetes에서 앱의 상태를 모니터하십시오. CLI 또는 Kubernetes 대시보드 GUI에서 상태를 확인할 수 있습니다.
+7.  팟(Pod) 상태를 검사하여 Kubernetes에서 앱의 상태를 모니터하십시오. CLI 또는 Kubernetes 대시보드에서 상태를 확인할 수 있습니다.
 
     *  **CLI에서**: 상태가 변경될 때 팟(Pod)에 무슨 일이 발생하는지 지켜보십시오.
        ```
@@ -382,7 +386,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
        ```
        {: pre}
 
-    *  **GUI에서:**
+    *  **Kubernetes 대시보드에서**:
 
        1.  [Kubernetes 대시보드를 실행](cs_app.html#cli_dashboard)하십시오.
        2.  **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다. 이 탭에서 새로 고치기를 계속 수행하여 상태 검사가 작동 중인지 볼 수 있습니다. **팟(Pod)** 섹션에서는 내부의 컨테이너가 재작성될 때 팟(Pod)이 다시 시작되는 횟수를 볼 수 있습니다. 대시보드에서 다음 오류를 발견하는 경우, 이 메시지는 상태 검사에서 문제점을 발견했음을 표시합니다. 잠시 기다린 후에 새로 고치기를 다시 수행하십시오. 각 팟(Pod)마다 재시작 횟수가 변경됨을 볼 수 있습니다.
@@ -523,7 +527,7 @@ Listing images...
         ```
         {: codeblock}
 
-    2.  Watson 배치의 볼륨 섹션에서, 이전 튜토리얼에서 작성한 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 시크릿의 이름을 업데이트하십시오. 배치에 대한 볼륨으로 Kubernetes 시크릿을 마운트하면 팟(Pod)에서 실행 중인 컨테이너에서 {{site.data.keyword.Bluemix_notm}} 서비스 인증 정보를 사용할 수 있습니다. 이 튜토리얼의 {{site.data.keyword.watson}} 앱 컴포넌트는 볼륨 마운트 경로를 사용하여 서비스 인증 정보를 찾도록 구성되어 있습니다.
+    2.  Watson 배치의 볼륨 섹션에서, 이전 튜토리얼에서 작성한 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 시크릿의 이름을 업데이트하십시오. 배치에 볼륨으로서 Kubernetes 시크릿을 마운트하면 팟(Pod)에서 실행 중인 컨테이너가 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키를 사용할 수 있습니다. 이 튜토리얼의 {{site.data.keyword.watson}} 앱 컴포넌트는 볼륨 마운트 경로를 사용하여 API 키를 찾도록 구성되어 있습니다. 
 
         ```
 volumes:

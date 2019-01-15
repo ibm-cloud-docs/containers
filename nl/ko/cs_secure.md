@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -72,7 +75,7 @@ Kubernetes API 서버와 etcd 데이터 저장소를 보호하려면 인간 사�
     <tr>
       <td>완전 관리되는 전용 Kubernetes 마스터</td>
       <td><p>{{site.data.keyword.containerlong_notm}}의 모든 Kubernetes 클러스터는 IBM에서 IBM 소유 IBM Cloud 인프라(SoftLayer) 계정으로 관리하는 전용 Kubernetes 마스터에 의해 제어됩니다. Kubernetes 마스터는 다른 IBM 고객과 공유하지 않는 다음의 전용 컴포넌트로 설정됩니다.</p>
-        <ul><li><strong>etcd 데이터 저장소:</strong> `서비스`, `배치` 및 `팟(Pod)`과 같은, 클러스터의 모든 Kubernetes 리소스를 저장합니다. Kubernetes `ConfigMap` 및 `secret`은 팟(Pod)에서 실행되는 앱에서 사용할 수 있도록 키 값 쌍으로 저장되는 앱 데이터입니다. etcd의 데이터는 IBM에서 관리하고 매일 백업되는 암호화된 디스크에 저장됩니다. 팟(Pod)에 전송될 때 데이터는 데이터 보호와 무결성을 보장하기 위해 TLS를 통해 암호화됩니다.</li>
+        <ul><li><strong>etcd 데이터 저장소:</strong> `서비스`, `배치` 및 `팟(Pod)`과 같은, 클러스터의 모든 Kubernetes 리소스를 저장합니다. Kubernetes `ConfigMap` 및 `secret`은 팟(Pod)에서 실행되는 앱에서 사용할 수 있도록 키 값 쌍으로 저장되는 앱 데이터입니다. Kubernetes 버전 1.10 이상이 실행되는 클러스터에서, etcd의 데이터는 Kubernetes 마스터의 로컬 디스크에 저장되며 {{site.data.keyword.cos_full_notm}}에 백업됩니다. 데이터는 {{site.data.keyword.cos_full_notm}}로 이전 중에 암호화되고 고정됩니다. 클러스터에 대해 [{{site.data.keyword.keymanagementservicelong_notm}} 암호화를 사용으로 설정](cs_encrypt.html#encryption)하여 Kubernetes 마스터의 로컬 디스크에서 etcd 데이터의 암호화를 사용 설정하도록 선택할 수 있습니다. Kubernetes의 이전 버전을 실행하는 클러스터의 Etcd 데이터는 매일 백업되며 IBM에 의해 관리되는 암호화된 디스크에 저장됩니다. etcd 데이터가 팟(Pod)에 전송될 때 데이터는 데이터 보호와 무결성을 보장하기 위해 TLS를 통해 암호화됩니다. </li>
           <li><strong>kube-apiserver:</strong> 작업자 노드에서 Kubernetes로의 모든 클러스터 관리 요청에 대한 기본 시작점 역할을 합니다. 
 kube-apiserver는 요청을 유효성 검증하고 처리하며 etcd 데이터 저장소에서 읽고 쓰기가 가능합니다.</li>
           <li><strong>kube-scheduler:</strong> 용량 및 성능 요구사항, 하드웨어 및 소프트웨어 정책 제한조건, 반친화성 스펙 및 워크로드 요구사항을 고려하여 팟(Pod)을 배치할 위치를 결정합니다. 
@@ -94,7 +97,7 @@ kube-apiserver는 요청을 유효성 검증하고 처리하며 etcd 데이터 �
     </tr>
     <tr>
       <td>정밀한 액세스 제어</td>
-      <td>계정 관리자인 경우에는 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management)을 사용하여 [{{site.data.keyword.containerlong_notm}}의 기타 사용자에 대한 액세스 권한을 부여](cs_users.html#users)할 수 있습니다. IAM은 {{site.data.keyword.Bluemix_notm}} 플랫폼, {{site.data.keyword.containerlong_notm}} 및 계정의 모든 리소스의 보안 인증을 제공합니다. 적절한 사용자 역할 및 권한 설정은 리소스에 액세스할 수 있는 사용자를 제한하고 적법한 권한이 오용될 때 사용자가 입힐 수 있는 손상을 제한하기 위한 핵심입니다. </br></br>사용자가 수행할 수 있는 조치 세트를 판별하는 다음의 사전 정의된 사용자 역할에서 선택할 수 있습니다. <ul><li>
+      <td>계정 관리자인 경우에는 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management)을 사용하여 [{{site.data.keyword.containerlong_notm}}의 기타 사용자에 대한 액세스 권한을 부여](cs_users.html#users)할 수 있습니다. {{site.data.keyword.Bluemix_notm}} IAM은 {{site.data.keyword.Bluemix_notm}} 플랫폼, {{site.data.keyword.containerlong_notm}} 및 계정의 모든 리소스의 보안 인증을 제공합니다. 적절한 사용자 역할 및 권한 설정은 리소스에 액세스할 수 있는 사용자를 제한하고 적법한 권한이 오용될 때 사용자가 입힐 수 있는 손상을 제한하기 위한 핵심입니다. </br></br>사용자가 수행할 수 있는 조치 세트를 판별하는 다음의 사전 정의된 사용자 역할에서 선택할 수 있습니다. <ul><li>
 <strong>플랫폼 역할:</strong> {{site.data.keyword.containerlong_notm}}에서 사용자가 수행할 수 있는 클러스터 및 작업자 노드 관련 조치를 판별합니다.</li><li><strong>인프라 역할:</strong> 작업자 노드, VLAN 또는 서브넷 등의 인프라 리소스를 주문, 업데이트 또는 제거하기 위한 권한을 판별합니다.</li><li><strong>Kubernetes RBAC 역할:</strong> 클러스터에 대한 액세스 권한이 부여된 경우 사용자가 실행할 수 있는 `kubectl` 명령을 결정합니다. RBAC 역할은 클러스터의 기본 네임스페이스에 대해 자동으로 설정됩니다. 기타 네임스페이스에서 동일한 RBAC 역할을 사용하려면 기본 네임스페이스에서 RBAC 역할을 복사할 수 있습니다.  </li></ul> </br> 사전 정의된 사용자 역할을 사용하는 대신에 [인프라 권한의 사용자 정의](cs_users.html#infra_access) 또는 [자체 RBAC 역할 설정](cs_users.html#rbac)을 선택하여 보다 미세 조정된 액세스 제어를 추가할 수 있습니다. </td>
     </tr>
     <tr>
@@ -114,7 +117,7 @@ kube-apiserver는 요청을 유효성 검증하고 처리하며 etcd 데이터 �
       <li>ServiceAccount</li>
       <li>StorageObjectInUseProtection(Kubernetes 1.10 이상)</li>
       <li>ValidatingAdmissionWebhook(Kubernetes 1.9 이상)</li></ul></br>
-      [클러스터에 자체 허가 제어기를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks)하거나 {{site.data.keyword.containerlong_notm}}에서 제공하는 선택적 허가 제어기에서 선택할 수 있습니다. <ul><li><strong>[컨테이너 이미지 보안 적용기](/docs/services/Registry/registry_security_enforce.html#security_enforce):</strong> 이 허가 제어기를 사용하여 취약한 이미지의 배치를 차단하도록 클러스터에서 Vulnerability Advisor 정책을 적용할 수 있습니다.</li></ul></br><strong>참고</strong>: 수동으로 허가 제어기를 설치했으며 이를 더 이상 사용하지 않으려면 이를 완전히 제거해야 합니다. 허가 제어기가 완전히 제거되지 않은 경우, 이는 사용자가 클러스터에서 수행하고자 하는 모든 조치를 차단할 수 있습니다. </td>
+      [클러스터에 자체 허가 제어기를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks)하거나 {{site.data.keyword.containerlong_notm}}에서 제공하는 선택적 허가 제어기에서 선택할 수 있습니다. <ul><li><strong>[컨테이너 이미지 보안 적용기](/docs/services/Registry/registry_security_enforce.html#security_enforce):</strong> 이 허가 제어기를 사용하여 취약한 이미지의 배치를 차단하도록 클러스터에서 Vulnerability Advisor 정책을 적용할 수 있습니다.</li></ul></br><p class="note">수동으로 허가 제어기를 설치했으며 이를 더 이상 사용하지 않으려면 반드시 이를 완전히 제거해야 합니다. 허가 제어기가 완전히 제거되지 않은 경우, 이는 사용자가 클러스터에서 수행하고자 하는 모든 조치를 차단할 수 있습니다.</p></td>
     </tr>
   </tbody>
 </table>
@@ -126,12 +129,18 @@ kube-apiserver는 요청을 유효성 검증하고 처리하며 etcd 데이터 �
 {: shortdesc}
 
 **작업자 노드의 소유자는 누구이며, 내가 이를 보호해야 합니까?** </br>
-작업자 노드의 소유권은 작성된 클러스터의 유형에 따라 다릅니다. 무료 클러스터의 작업자 노드는 IBM이 소유하고 있는 IBM Cloud 인프라(SoftLayer) 계정에 프로비저닝됩니다. 앱을 작업자 노드에 배치할 수 있지만 설정을 변경하거나 작업자 노드에 추가 소프트웨어를 설치할 수는 없습니다. 제한된 용량과 제한된 {{site.data.keyword.containerlong_notm}} 기능 때문에, 무료 클러스터에서는 프로덕션 워크로드를 실행하지 마십시오. 프로덕션 워크로드에는 표준 클러스터를 사용하는 것을 고려하십시오. </br> </br>
-표준 클러스터의 작업자 노드는 공용 또는 데디케이티드 {{site.data.keyword.Bluemix_notm}} 계정과 연관된 IBM Cloud 인프라(SoftLayer) 계정으로 프로비저닝됩니다. 작업자 노드는 사용자 계정 전용이며 사용자는 작업자 노드 OS 및 {{site.data.keyword.containerlong_notm}} 컴포넌트가 최신 보안 업데이트와 패치를 적용하도록 보장하기 위해 작업자 노드에 대한 시기 적절한 업데이트를 요청할 책임이 있습니다. </br></br><strong>중요</strong>: <code>ibmcloud ks worker-update</code> [명령](cs_cli_reference.html#cs_worker_update)을 주기적(예: 매월)으로 사용하여 운영 체제에 업데이트와 보안 패치를 배치하고 Kubernetes 버전을 업데이트하십시오. 업데이트가 사용 가능한 경우에는 GUI 또는 CLI에서 <code>ibmcloud ks clusters</code> 또는 <code>ibmcloud ks workers <cluster_name></code> 명령을 사용하여 마스터 및 작업자 노드에 대한 정보를 볼 때 알림이 나타납니다.
+작업자 노드의 소유권은 작성된 클러스터의 유형에 따라 다릅니다. 무료 클러스터의 작업자 노드는 IBM이 소유하고 있는 IBM Cloud 인프라(SoftLayer) 계정에 프로비저닝됩니다. 앱을 작업자 노드에 배치할 수 있지만 설정을 변경하거나 작업자 노드에 추가 소프트웨어를 설치할 수는 없습니다. 제한된 용량과 제한된 {{site.data.keyword.containerlong_notm}} 기능 때문에, 무료 클러스터에서는 프로덕션 워크로드를 실행하지 마십시오. 프로덕션 워크로드에 대해 표준 클러스터의 사용을 고려하십시오. 
+
+표준 클러스터의 작업자 노드는 공용 또는 데디케이티드 {{site.data.keyword.Bluemix_notm}} 계정과 연관된 IBM Cloud 인프라(SoftLayer) 계정으로 프로비저닝됩니다. 작업자 노드는 사용자 계정 전용이며 사용자는 작업자 노드 OS 및 {{site.data.keyword.containerlong_notm}} 컴포넌트가 최신 보안 업데이트와 패치를 적용하도록 보장하기 위해 작업자 노드에 대한 시기 적절한 업데이트를 요청할 책임이 있습니다.
+
+`ibmcloud ks worker-update` [명령](cs_cli_reference.html#cs_worker_update)을 주기적(예: 매월)으로 사용하여 운영 체제에 업데이트와 보안 패치를 배치하고 Kubernetes 버전을 업데이트하십시오. 업데이트가 사용 가능한 경우에는 {{site.data.keyword.Bluemix_notm}} 콘솔 또는 CLI에서 마스터 및 작업자 노드에 대한 정보를 볼 때 알림을 받습니다(예: `ibmcloud ks clusters` 또는 `ibmcloud ks workers <cluster_name>` 명령으로).
+{: important}
 
 **내 작업자 노드 설정이 어떻게 보입니까? **</br>
-다음의 이미지는 악성 공격으로부터 작업자 노드를 보호하기 위해 모든 작업자 노드에 대해 설정된 컴포넌트를 보여줍니다. </br></br>
-**참고:** 이미지에는 작업자 노드와의 양방향 엔드-투-엔드 보안 통신을 보장하는 컴포넌트는 포함되어 있지 않습니다. 자세한 정보는 [네트워크 보안](#network)을 참조하십시오.
+다음의 이미지는 악성 공격으로부터 작업자 노드를 보호하기 위해 모든 작업자 노드에 대해 설정된 컴포넌트를 보여줍니다.
+
+이미지에는 작업자 노드와의 양방향 엔드-투-엔드 보안 통신을 보장하는 컴포넌트가 포함되지 않습니다. 자세한 정보는 [네트워크 보안](#network)을 참조하십시오.
+{: note}
 
 <img src="images/cs_worker_setup.png" width="600" alt="작업자 노드 설정(네트워크 보안 제외)" style="width:600px; border-style: none"/>
 
@@ -142,10 +151,10 @@ kube-apiserver는 요청을 유효성 검증하고 처리하며 etcd 데이터 �
   <th>설명</th>
   </thead>
   <tbody>
-    <tr><td>CIS 준수 Linux 이미지</td><td>모든 작업자 노드는 CIS(Center of Internet Security)에서 공개한 벤치마크를 구현하는 Ubuntu 운영 체제로 설정됩니다. Ubuntu 운영 체제는 사용자 또는 시스템 소유자에 의해 변경될 수 없습니다. 현재 Ubuntu 버전을 검토하려면 <code>kubectl get nodes -o wide</code>를 실행하십시오. IBM은 내부 및 외부 보안 자문 팀과 공동 작업하여 잠재적 보안 준수 취약점을 해결합니다. 운영 체제에 대한 보안 업데이트와 패치는 {{site.data.keyword.containerlong_notm}}를 통해 사용할 수 있으며, 작업자 노드의 보안을 유지하기 위해 사용자에 의해 설치되어야 합니다. </br></br><strong>중요:</strong> {{site.data.keyword.containerlong_notm}}는 작업자 노드에 Ubuntu Linux 커널을 사용합니다. {{site.data.keyword.containerlong_notm}}에서 Linux 배포판을 기반으로 컨테이너를 실행할 수 있습니다. Ubuntu Linux 커널에서 실행될 컨테이너 이미지가 지원되는 경우에는 이를 지원하는 컨테이너 이미지 공급업체를 확인하십시오.</td></tr>
+    <tr><td>CIS 준수 Linux 이미지</td><td>모든 작업자 노드는 CIS(Center of Internet Security)에서 공개한 벤치마크를 구현하는 Ubuntu 운영 체제로 설정됩니다. Ubuntu 운영 체제는 사용자 또는 시스템 소유자에 의해 변경될 수 없습니다. 현재 Ubuntu 버전을 검토하려면 <code>kubectl get nodes -o wide</code>를 실행하십시오. IBM은 내부 및 외부 보안 자문 팀과 공동 작업하여 잠재적 보안 준수 취약점을 해결합니다. 운영 체제에 대한 보안 업데이트와 패치는 {{site.data.keyword.containerlong_notm}}를 통해 사용할 수 있으며, 작업자 노드의 보안을 유지하기 위해 사용자에 의해 설치되어야 합니다.<p class="important">{{site.data.keyword.containerlong_notm}}는 작업자 노드에 Ubuntu Linux 커널을 사용합니다. {{site.data.keyword.containerlong_notm}}에서 Linux 배포판을 기반으로 컨테이너를 실행할 수 있습니다. Ubuntu Linux 커널에서 실행될 컨테이너 이미지가 지원되는 경우에는 이를 지원하는 컨테이너 이미지 공급업체를 확인하십시오.</p></td></tr>
     <tr>
-    <td>사이트 신뢰성 엔지니어(SRE)에 의한 지속적 모니터링</td>
-    <td>작업자 노드에 설치된 Linux 이미지는 취약성 및 보안 규제 준수 문제를 발견하기 위해 IBM 사이트 신뢰성 엔지니어(SRE)에 의해 지속적으로 모니터됩니다. SRE는 취약성에 대처하기 위해 작업자 노드를 위한 보안 패치 및 수정팩을 작성합니다. 작업자 노드와 여기에서 실행되는 앱을 위한 안전한 환경을 보장할 수 있도록, 이러한 패치는 사용 가능해지는 즉시 적용하십시오. </td>
+    <td>사이트 신뢰성 엔지니어(SRE)에 의한 지속적 모니터링 </td>
+    <td>작업자 노드에 설치된 Linux 이미지는 취약성 및 보안 규제 준수 문제를 발견하기 위해 IBM 사이트 신뢰성 엔지니어(SRE)에 의해 지속적으로 모니터됩니다. SRE는 취약성에 대처하기 위해 작업자 노드를 위한 보안 패치 및 수정팩을 작성합니다. 작업자 노드와 여기에서 실행되는 앱을 위한 안전한 환경을 보장할 수 있도록, 이러한 패치는 사용 가능해지는 즉시 적용하십시오.</td>
     </tr>
     <tr>
   <td>컴퓨팅 격리</td>
@@ -158,12 +167,12 @@ kube-apiserver는 요청을 유효성 검증하고 처리하며 etcd 데이터 �
 <tr>
   <td id="trusted_compute">신뢰할 수 있는 컴퓨팅에 대한 옵션</td>
     <td>신뢰할 수 있는 컴퓨팅을 지원하는 베어메탈에서 클러스터를 배치하는 경우에는 [신뢰를 사용](cs_cli_reference.html#cs_cluster_feature_enable)할 수 있습니다. 이 TPM(Trusted Platform Module) 칩은 신뢰할 수 있는 컴퓨팅(클러스터에 추가하는 이후 노드 포함)을 지원하는 클러스터의 각 베어메탈 작업자 노드에서 사용으로 설정됩니다. 그러므로 신뢰를 사용하도록 설정한 후에는 나중에 클러스터에 대해 이를 사용하지 않도록 설정할 수 없습니다. 신뢰 서버는 마스터 노드에 배치되고 신뢰 에이전트는 작업자 노드에 팟(Pod)으로 배치됩니다. 작업자 노드가 시작되면 신뢰 에이전트 팟(Pod)은 프로세스의 각 단계를 모니터합니다.<p>하드웨어는 신뢰의 루트에 있으며, 이는 TPM을 사용하여 측정치를 전송합니다. TPM은 프로세스 전체에서 측정 데이터의 전송을 보호하는 데 사용되는 암호화 키를 생성합니다. 신뢰 에이전트는 스타트업 프로세스에서 각 컴포넌트의 측정치를 신뢰 서버로 전달합니다(TPM 하드웨어와 상호작용하는 BIOS 펌웨어에서 부트로더 및 OS 커널로). 그리고 신뢰 에이전트는 이러한 측정치를 신뢰할 수 있는 서버의 예상 값과 비교하여 스타트업의 유효성 여부를 입증합니다. 신뢰할 수 있는 컴퓨팅 프로세스는 애플리케이션과 같은 작업자 노드의 기타 팟(Pod)은 모니터하지 않습니다.</p><p>예를 들어 권한 없는 사용자가 시스템에 대한 액세스 권한을 확보하고 데이터 수집을 위한 추가 로직으로 OS 커널을 수정하는 경우, 신뢰 에이전트는 이 변경사항을 감지하고 노드에 대해 비신뢰를 표시합니다. 신뢰할 수 있는 컴퓨팅을 사용하면 작업자 노드의 변조 여부를 확인할 수 있습니다.</p>
-    <p><strong>참고</strong>: 신뢰할 수 있는 컴퓨팅은 선택된 베어메탈 머신 유형에만 사용할 수 있습니다. 예를 들어, `mgXc` GPU 특성(flavor)은 신뢰할 수 있는 컴퓨팅을 지원하지 않습니다.</p>
+    <p class="note">신뢰할 수 있는 컴퓨팅은 선택된 베어메탈 머신 유형에만 사용할 수 있습니다. 예를 들어, `mgXc` GPU 특성(flavor)은 신뢰할 수 있는 컴퓨팅을 지원하지 않습니다.</p>
     <p><img src="images/trusted_compute.png" alt="베어메탈 클러스터에 대한 신뢰할 수 있는 컴퓨팅" width="480" style="width:480px; border-style: none"/></p></td>
   </tr>
     <tr>
   <td id="encrypted_disk">암호화된 디스크</td>
-    <td>기본적으로 모든 작업자 노드는 2개의 로컬 SSD 암호화된 데이터 파티션으로 프로비저닝됩니다. 첫 번째 파티션에는 작업자 노드의 부팅에 사용되며 암호화되지 않은 커널 이미지가 포함되어 있습니다. 두 번째 파티션은 컨테이너 파일 시스템을 보유하며 LUKS 암호화 키를 사용하여 잠금 해제됩니다. 각 Kubernetes 클러스터의 각 작업자 노드에는 {{site.data.keyword.containerlong_notm}}에 의해 관리되는 자체 고유 LUKS 암호화 키가 있습니다. 클러스터를 작성하거나 기존 클러스터에 작업자 노드를 추가하는 경우, 키를 안전하게 가져온 다음 암호화 디스크가 잠금 해제된 후에 버려집니다.</br></br><strong>참고</strong>: 암호화는 디스크 I/O 성능에 영향을 줄 수 있습니다. 고성능 디스크 I/O가 필요한 워크로드의 경우, 암호화를 끌지 여부를 결정하는 데 도움이 되도록 암호화가 사용된 클러스터와 사용되지 않은 클러스터를 둘 다 테스트하십시오.</td>
+    <td>기본적으로 모든 작업자 노드는 2개의 로컬 SSD 암호화된 데이터 파티션으로 프로비저닝됩니다. 첫 번째 파티션에는 작업자 노드의 부팅에 사용되며 암호화되지 않은 커널 이미지가 포함되어 있습니다. 두 번째 파티션은 컨테이너 파일 시스템을 보유하며 LUKS 암호화 키를 사용하여 잠금 해제됩니다. 각 Kubernetes 클러스터의 각 작업자 노드에는 {{site.data.keyword.containerlong_notm}}에 의해 관리되는 자체 고유 LUKS 암호화 키가 있습니다. 클러스터를 작성하거나 기존 클러스터에 작업자 노드를 추가하는 경우, 키를 안전하게 가져온 다음 암호화 디스크가 잠금 해제된 후에 버려집니다. <p class="note">암호화는 디스크 I/O 성능에 영향을 줄 수 있습니다. 고성능 디스크 I/O가 필요한 워크로드의 경우, 암호화를 끌지 여부를 결정하는 데 도움이 되도록 암호화가 사용된 클러스터와 사용되지 않은 클러스터를 둘 다 테스트하십시오.</p></td>
       </tr>
     <tr>
       <td>Expert AppArmor 정책</td>
@@ -362,8 +371,10 @@ Kubernetes 네임스페이스는 실제로 클러스터를 파티션하는 방�
 - **ibm-cloud-cert:** 이 네임스페이스는 {{site.data.keyword.cloudcerts_long_notm}}와 관련된 리소스에 사용됩니다.
 - **kube-public:** 이 네임스페이스는 클러스터에서 인증되지 않은 경우에도 모든 사용자에 의해 액세스가 가능합니다. 클러스터가 손상될 위험성에 처할 수 있으므로 이 네임스페이스에 리소스를 배치할 때는 주의가 필요합니다.
 
-클러스터 관리는 클러스터에서 추가 네임스페이스를 설정하고 자체 요구사항에 맞게 이를 사용자 정의할 수 있습니다. </br></br>
-**중요:** 클러스터에서 보유 중인 모든 네임스페이스에 대해, 반드시 적절한 [RBAC 정책](cs_users.html#rbac)을 설정하여 이 네임스페이스에 대한 액세스를 제한하고 배치될 항목을 제어하며 적절한 [리소스 할당량 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 및 [한계 범위 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/)를 설정하십시오.  
+클러스터 관리는 클러스터에서 추가 네임스페이스를 설정하고 자체 요구사항에 맞게 이를 사용자 정의할 수 있습니다.
+
+클러스터에서 보유 중인 모든 네임스페이스에 대해, 반드시 적절한 [RBAC 정책](cs_users.html#rbac)을 설정하여 이 네임스페이스에 대한 액세스를 제한하고 배치될 항목을 제어하며 적절한 [리소스 할당량 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 및 [한계 범위 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/)를 설정하십시오.
+{: important}
 
 **싱글 테넌트 또는 멀티 테넌트 클러스터를 설정해야 합니까?** </br>
 싱글 테넌트 클러스터에서는 클러스터에서 워크로드를 실행해야 하는 모든 사용자 그룹에 대해 하나의 클러스터를 작성합니다. 일반적으로, 이 팀은 클러스터를 관리하고 이를 알맞게 구성하며 보호해야 할 책임을 집니다. 멀티 테넌트 클러스터는 멀티 네임스페이스를 사용하여 테넌트 및 해당 워크로드를 격리합니다.
@@ -381,14 +392,14 @@ Kubernetes 네임스페이스는 실제로 클러스터를 파티션하는 방�
 - **컴퓨팅 리소스 제한사항:** 모든 팀이 클러스터에서 서비스 배치와 앱 실행에 필요한 리소스를 보유하도록 보장하려면, 모든 네임스페이스에 대해 [리소스 할당량](https://kubernetes.io/docs/concepts/policy/resource-quotas/)을 설정해야 합니다. 리소스 할당량은 네임스페이스에 대한 배치 제한조건(예: 배치 가능한 Kubernetes 리소스의 수와 해당 리소스가 이용할 수 있는 CPU 및 메모리의 양)을 판별합니다. 할당량을 설정한 후에 사용자는 자체 배치의 리소스 요청 및 한계를 포함해야 합니다.
 - **공유 클러스터 리소스:** 하나의 클러스터에서 다수의 테넌트를 실행하는 경우, 일부 클러스터 리소스(예: Ingress 애플리케이션 로드 밸런서) 또는 사용 가능한 포터블 IP 주소는 테넌트 간에 공유됩니다. 클러스터의 대형 서비스와 경쟁해야 하는 경우, 보다 소형의 서비스는 공유 리소스 사용에 어려움을 겪어야 할 수 있습니다.
 - **업데이트:** 한 번에 하나의 Kubernetes API 버전만 실행할 수 있습니다. 클러스터에서 실행되는 모든 앱은 앱을 소유하는 팀과 무관하게 현재 Kubernetes API 버전을 준수해야 합니다. 클러스터를 업데이트하려면 모든 팀이 새 Kubernetes API 버전으로 전환할 준비가 되었으며 앱이 새 Kubernetes API 버전에서 작동하도록 업데이트되었는지 확인해야 합니다. 또한 이는 개별 팀에게 자신이 실행할 Kubernetes API 버전에 대한 보다 약한 제어권이 있음을 의미합니다.
-- **클러스터 설정의 변경:** 클러스터 설정을 변경하거나 새 작업자 노드로 마이그레이션하려는 경우에는 테넌트 간에 이러한 변경사항을 롤아웃해야 합니다. 이 롤아웃에서는 싱글 테넌트 클러스터에서보다 더 많은 조정과 테스트가 필요합니다.
+- **클러스터 설정의 변경:** 클러스터 설정을 변경하거나 새 작업자 노드로 워크로드를 다시 스케줄하려는 경우에는 테넌트 간에 이러한 변경사항을 롤아웃해야 합니다. 이 롤아웃에서는 싱글 테넌트 클러스터에서보다 더 많은 조정과 테스트가 필요합니다.
 - **통신 프로세스:** 멀티 테넌트를 관리하는 경우, 클러스터에서 문제가 발생하거나 해당 서비스를 위해 더 많은 리소스를 필요로 할 때 이동할 위치를 테넌트가 파악할 수 있도록 통신 프로세스를 설정하는 것을 고려하십시오. 이 통신 프로세스에는 클러스터 설정이나 계획된 업데이트의 모든 변경사항에 대해 테넌트에 알리는 것도 포함됩니다.
 
 **내 컨테이너를 보호하기 위해 그 밖에 내가 무엇을 할 수 있습니까?**
 
 |보안 기능|설명|
 |-------|----------------------------------|
-|인가된 컨테이너의 수 제한|컨테이너는 기타 프로세스와 격리된 컴퓨팅 호스트에서 개별 Linux 프로세스로서 실행됩니다. 컨테이너 내부에서 사용자에게는 루트 액세스 권한이 있지만, 기타 Linux 프로세스, 호스트 파일 시스템 및 호스트 디바이스를 보호할 수 있도록 컨테이너 외부에서는 이 사용자의 권한이 제한됩니다. 일부 앱에서는 올바른 실행을 위한 고급 권한 또는 호스트 파일 시스템에 대한 액세스 권한이 필요합니다. 권한 모드에서 컨테이너를 실행하면 컴퓨팅 호스트에서 실행 중인 프로세스와 동일한 액세스 권한을 컨테이너에 허용할 수 있습니다. </br></br> <strong>중요</strong>: 인가된 컨테이너는 손상 시에 클러스터와 기반 컴퓨팅 호스트에 상당한 피해를 입힐 수 있음을 유념하십시오. 권한 모드에서 실행되는 컨테이너의 수를 제한해 보고, 앱이 고급 권한 없이 실행될 수 있도록 앱에 대한 구성의 변경을 고려하십시오. 클러스터에서 인가된 컨테이너의 실행을 차단하려면 [팟(Pod) 보안 정책](cs_psp.html#customize_psp)의 설정을 고려하십시오. |
+|인가된 컨테이너의 수 제한|컨테이너는 기타 프로세스와 격리된 컴퓨팅 호스트에서 개별 Linux 프로세스로서 실행됩니다. 컨테이너 내부에서 사용자에게는 루트 액세스 권한이 있지만, 기타 Linux 프로세스, 호스트 파일 시스템 및 호스트 디바이스를 보호할 수 있도록 컨테이너 외부에서는 이 사용자의 권한이 제한됩니다. 일부 앱에서는 올바른 실행을 위한 고급 권한 또는 호스트 파일 시스템에 대한 액세스 권한이 필요합니다. 권한 모드에서 컨테이너를 실행하면 컴퓨팅 호스트에서 실행 중인 프로세스와 동일한 액세스 권한을 컨테이너에 허용할 수 있습니다.<p class="important">인가된 컨테이너는 손상된 경우 클러스터와 기본 컴퓨팅 호스트에 상당한 피해를 줄 수 있음을 유념하십시오. 권한 모드에서 실행되는 컨테이너의 수를 제한해 보고, 앱이 고급 권한 없이 실행될 수 있도록 앱에 대한 구성의 변경을 고려하십시오. 클러스터에서 인가된 컨테이너의 실행을 차단하려면 [팟(Pod) 보안 정책](cs_psp.html#customize_psp)의 설정을 고려하십시오.</p>|
 |컨테이너에 대한 CPU 및 메모리 한계 설정|제대로 시작하고 실행을 지속하기 위해 모든 컨테이너에서는 특정 양의 CPU 및 메모리가 필요합니다. 컨테이너가 이용할 수 있는 CPU 및 메모리의 양을 제한하기 위해 컨테이너에 대한 [Kubernetes 리소스 요청 및 리소스 한계 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)를 정의할 수 있습니다. CPU 및 메모리에 대한 한계가 설정되어 있지 않은 상태에서 컨테이너가 작동되는 경우, 컨테이너는 사용 가능한 모든 리소스를 사용합니다. 이러한 높은 리소스 이용량은 제대로 시작하거나 실행하기 위한 충분한 리소스가 없는 작업자 노드의 기타 컨테이너에 영향을 줄 수 있으며, 작업자 노드는 서비스 거부(DoS) 공격을 받을 위험성에 놓이게 됩니다.|
 |팟(Pod)에 OS 보안 설정 적용|팟(Pod) 배치에 [<code>securityContext</code> 섹션 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)을 추가하여 팟(Pod) 또는 팟 내의 특정 컨테이너에 Linux 특정 보안 설정을 적용할 수 있습니다. 보안 설정에는 컨테이너 내의 스크립트(예: 시작점 스크립트)를 실행하는 사용자 ID 및 그룹 ID에 대한 제어나 볼륨 마운트 경로를 소유한 사용자 ID 및 그룹 IP에 대한 제어가 포함됩니다. </br></br><strong>팁:</strong> <code>securityContext</code>를 사용하여 <code>runAsUser</code> 사용자 ID 또는 <code>fsGroup</code> 그룹 ID를 설정하려면 [지속적 스토리지를 작성](cs_storage_block.html#add_block)할 때 블록 스토리지 사용을 고려하십시오. NFS 스토리지는 <code>fsGroup</code>을 지원하지 않으며 <code>runAsUser</code>는 팟(Pod) 레벨이 아닌 컨테이너 레벨에서 설정되어야 합니다. |
 {: caption="기타 보안 보호" caption-side="top"}
@@ -407,4 +418,4 @@ Kubernetes 네임스페이스는 실제로 클러스터를 파티션하는 방�
   <dd>컨테이너 이미지 또는 레지스트리 네임스페이스에 개인 정보를 저장하지 마십시오. 적절한 보호 및 암호화를 위해 대신 <a href="cs_images.html#other">Kubernetes imagePullSecret</a>에 레지스트리 인증 정보를 저장하고 <a href="cs_encrypt.html#secrets">Kubernetes 시크릿</a>에 기타 개인 정보를 저장하십시오. 개인 정보가 이전 이미지 계층에 저장된 경우 이미지를 삭제하는 것만으로 이 개인 정보를 삭제하기에 충분하지 않을 수 있음을 기억하십시오.</dd>
   </dl>
 
-secret에 대한 암호화를 설정하려는 경우에는 [{{site.data.keyword.keymanagementserviceshort}}를 사용한 Kubernetes secret 암호화](cs_encrypt.html#keyprotect)를 참조하십시오. 
+secret에 대한 암호화를 설정하려는 경우에는 [{{site.data.keyword.keymanagementserviceshort}}를 사용한 Kubernetes secret 암호화](cs_encrypt.html#keyprotect)를 참조하십시오.

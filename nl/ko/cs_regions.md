@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,52 +13,58 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 지역 및 구역
 {: #regions-and-zones}
 
-지역(region)은 앱, 서비스 및 기타 {{site.data.keyword.Bluemix}} 리소스가 배치될 수 있는 특정한 지리적 위치입니다. [{{site.data.keyword.Bluemix_notm}} 지역](#bluemix_regions)은 [{{site.data.keyword.containerlong}} 지역](#container_regions)과 다릅니다. 지역은 서비스와 애플리케이션을 호스팅하는 컴퓨팅, 네트워크, 스토리지 리소스 및 관련 냉각 장치와 전원 장치를 호스팅하는 실제 데이터센터인 하나 이상의 구역으로 구성되어 있습니다. 구역은 서로 간에 격리되어 있으며, 이는 공유되는 단일 장애 지점이 없도록 보장합니다. 
+지역(region)은 앱, 서비스 및 기타 {{site.data.keyword.Bluemix}} 리소스가 배치될 수 있는 특정한 지리적 위치입니다. [{{site.data.keyword.Bluemix_notm}} 지역](#bluemix_regions)은 [{{site.data.keyword.containerlong}} 지역](#container_regions)과 다릅니다. 지역은 서비스와 애플리케이션을 호스팅하는 컴퓨팅, 네트워크, 스토리지 리소스 및 관련 냉각 장치와 전원 장치를 호스팅하는 실제 데이터센터인 하나 이상의 구역으로 구성되어 있습니다. 구역은 서로 간에 격리되어 있으며, 이는 공유되는 단일 장애 지점이 없도록 보장합니다.
 {:shortdesc}
-
-{{site.data.keyword.Bluemix_notm}}는 전세계적으로 호스팅됩니다. {{site.data.keyword.Bluemix_notm}} 내의 서비스는 글로벌로 사용 가능하거나 특정 지역 내에서 사용 가능할 수 있습니다. {{site.data.keyword.containerlong_notm}}에서 Kubernetes 클러스터를 작성할 때 리소스는 클러스터를 배치하는 지역에 남아 있습니다. 
-
-**참고**: 지원되는 모든 {{site.data.keyword.containerlong_notm}} 지역에서 표준 클러스터를 작성할 수 있습니다. 무료 클러스터는 선택된 지역에서만 사용 가능합니다.
 
 ![{{site.data.keyword.containerlong_notm}} 지역 및 구역](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 
-지원되는 {{site.data.keyword.containerlong_notm}} 지역은 다음과 같습니다.
-* AP 북부(표준 클러스터만 해당)
-* AP 남부
-* 중앙 유럽
-* 영국 남부
-* 미국 동부(표준 클러스터만 해당)
-* 미국 남부
+{{site.data.keyword.Bluemix_notm}}는 전세계적으로 호스팅됩니다. {{site.data.keyword.Bluemix_notm}} 내의 서비스는 글로벌로 사용 가능하거나 특정 지역 내에서 사용 가능할 수 있습니다. {{site.data.keyword.containerlong_notm}}에서 Kubernetes 클러스터를 작성할 때 리소스는 클러스터를 배치하는 지역에 남아 있습니다.
+
+지원되는 모든 {{site.data.keyword.containerlong_notm}} 지역에서 표준 클러스터를 작성할 수 있습니다. 무료 클러스터는 선택된 지역에서만 사용 가능합니다.
+{: note}
+
+| {{site.data.keyword.containerlong_notm}} 지역 | 해당되는 {{site.data.keyword.Bluemix_notm}} 위치 |
+| --- | --- |
+|AP 북부(표준 클러스터만 해당) | 도쿄 |
+|AP 남부 | 시드니 |
+|중앙 유럽 | 프랑크푸르트 |
+|영국 남부 | 런던 |
+|미국 동부(표준 클러스터만 해당) | 워싱턴 DC |
+|미국 남부 | 달라스 |
+{: caption="표: 지원되는 Kubernetes 서비스 지역 및 해당되는 IBM Cloud 위치. " caption-side="top"}
 
 <br />
 
 
-## {{site.data.keyword.Bluemix_notm}}의 지역
+## {{site.data.keyword.Bluemix_notm}}의 위치
 {: #bluemix_regions}
 
-{{site.data.keyword.Bluemix_notm}} 지역을 사용하여 {{site.data.keyword.Bluemix_notm}} 서비스에 걸쳐 리소스를 구성할 수 있습니다. 예를 들어, 동일한 지역의 {{site.data.keyword.registryshort_notm}}에 저장된 개인용 Docker 이미지를 사용하여 Kubernetes 클러스터를 작성할 수 있습니다.
+지역이라고도 하는 {{site.data.keyword.Bluemix_notm}} 위치를 사용하여 {{site.data.keyword.Bluemix_notm}} 서비스 간에 리소스를 구성할 수 있습니다. 예를 들어, 동일한 위치의 {{site.data.keyword.registryshort_notm}}에 저장된 개인용 Docker 이미지를 사용하여 Kubernetes 클러스터를 작성할 수 있습니다.
 {:shortdesc}
 
-현재 자신이 위치한 {{site.data.keyword.Bluemix_notm}} 지역을 확인하려면 `ibmcloud info`를 실행하고 **지역** 필드를 검토하십시오.
+현재 자신이 있는 {{site.data.keyword.Bluemix_notm}} 위치를 확인하려면 `ibmcloud info`를 실행하고 **지역** 필드를 검토하십시오. 
 
-로그인할 때 API 엔드포인트를 지정하여 {{site.data.keyword.Bluemix_notm}} 지역에 액세스할 수 있습니다. 지역을 지정하지 않으면 가장 근접한 지역에 자동으로 로그인됩니다.
+로그인할 때 지역 API 엔드포인트를 지정하여 {{site.data.keyword.Bluemix_notm}} 위치에 액세스할 수 있습니다. 지역 엔드포인트를 지정하지 않으면 가장 근접한 지역에 자동으로 로그인됩니다. 
 
 예를 들어, 다음 명령을 사용하여 {{site.data.keyword.Bluemix_notm}} 지역 API 엔드포인트에 로그인할 수 있습니다.
 
-  * 미국 남부
+  * 달라스
       ```
       ibmcloud login -a api.ng.bluemix.net
       ```
       {: pre}
 
-  * 미국 동부
+  * 워싱턴 DC
       ```
       ibmcloud login -a api.us-east.bluemix.net
       ```
@@ -70,13 +76,13 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
       ```
       {: pre}
 
-  * 독일
+  * 프랑크푸르트
       ```
       ibmcloud login -a api.eu-de.bluemix.net
       ```
       {: pre}
 
-  * 영국
+  * 런던
       ```
       ibmcloud login -a api.eu-gb.bluemix.net
       ```
@@ -91,7 +97,8 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 {{site.data.keyword.containerlong_notm}} 지역을 사용하여 사용자가 로그인한 {{site.data.keyword.Bluemix_notm}} 지역 이외의 지역에 Kubernetes 클러스터를 작성하거나 액세스할 수 있습니다. {{site.data.keyword.containerlong_notm}} 지역 엔드포인트는 전체적으로 {{site.data.keyword.Bluemix_notm}}가 아닌 {{site.data.keyword.containerlong_notm}}만 특정하게 참조합니다.
 {:shortdesc}
 
-**참고**: 지원되는 모든 {{site.data.keyword.containerlong_notm}} 지역에서 표준 클러스터를 작성할 수 있습니다. 무료 클러스터는 선택된 지역에서만 사용 가능합니다.
+지원되는 모든 {{site.data.keyword.containerlong_notm}} 지역에서 표준 클러스터를 작성할 수 있습니다. 무료 클러스터는 선택된 지역에서만 사용 가능합니다.
+{: note}
 
 지원되는 {{site.data.keyword.containerlong_notm}} 지역:
   * AP 북부(표준 클러스터만 해당)
@@ -145,8 +152,8 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
 구역(zone)은 {{site.data.keyword.Bluemix_notm}} 지역 내에서 사용 가능한 실제 데이터센터입니다. 지역은 구역을 구성하기 위한 개념적인 도구이며, 이에는 다른 나라의 구역(데이터센터)이 포함될 수 있습니다. 다음 표에는 지역별로 사용 가능한 구역이 표시되어 있습니다.
 {:shortdesc}
 
-* **다중 구역 메트로 시티**: 다중 구역 메트로 시티에서 작성된 클러스터의 작업자 노드는 구역 간에 전개될 수 있습니다.
-* **단일 구역 시티**: 단일 구역 시티에서 작성된 클러스터의 작업자 노드는 하나의 구역 내에서만 유지될 수 있습니다. 다중 구역 간에 작업자 노드를 전개할 수는 없습니다.
+* **다중 구역 메트로 시티**: 다중 구역 메트로 시티에서 작성된 클러스터의 작업자 노드는 구역 간에 전개될 수 있습니다. 또한 다중 구역 메트로 시티에서 Kubernetes 버전 1.10 이상 클러스터를 작성하는 경우에는 고가용성 마스터가 구역 간에 전개됩니다. 
+* **단일 구역 시티**: 단일 구역 시티에서 작성된 클러스터의 작업자 노드는 하나의 구역 내에서만 유지될 수 있습니다. 다중 구역 간에 작업자 노드를 전개할 수는 없습니다. 고가용성 마스터에는 별도의 호스트에 3개의 복제본이 포함되지만, 이는 구역 간에 전개되어 있지 않습니다. 
 
 <table summary="표에서는 지역별로 사용 가능한 구역을 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 지역은 1열에 있고 다중 구역 메트로 시티는 2열에 있으며 단일 구역 시티는 3열에 있습니다. ">
 <caption>지역별로 사용 가능한 단일 및 다중 구역.</caption>
@@ -159,7 +166,8 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
     <tr>
       <td>AP 북부</td>
       <td>도쿄: tok02, tok04, tok05</td>
-      <td><p>홍콩 특별행정구 : hkg02</p>
+      <td><p>센네이: che01</p>
+      <p>홍콩 특별행정구 : hkg02</p>
       <p>서울: seo01</p>
       <p>싱가포르: sng01</p></td>
     </tr>
@@ -180,7 +188,8 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
     </tr>
     <tr>
       <td>영국 남부</td>
-      <td>런던: lon04, lon05, lon06<br><br>**참고**: lon05는 lon02를 대체합니다. 새 클러스터는 lon05를 사용해야 합니다. </td>
+      <td>런던: lon04, lon05, lon06 **참고**: lon05는 lon02를 대체합니다. 새 클러스터는 lon05를 사용해야 하며, lon05만 구역 간에 전개된 고가용성 마스터를 지원합니다. </td>
+      <td></td>
     </tr>
     <tr>
       <td>미국 동부</td>

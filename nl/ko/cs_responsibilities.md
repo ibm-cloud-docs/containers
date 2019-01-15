@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,7 +50,7 @@ lastupdated: "2018-10-25"
 - [작업자 풀의 크기를 조정하여 클러스터 용량 추가 또는 제거](cs_clusters.html#add_workers)
 - [VLAN Spanning 사용 및 구역 간 다중 구역 작업자 풀의 밸런스 유지](cs_clusters_planning.html#ha_clusters)
 - [ 클러스터의 네트워크 격리를 위해 IBM Cloud 인프라(SoftLayer)에서 공용 및 사설 VLAN 작성](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [모든 작업자 노드에서 Kubernetes 마스터 URL에 네트워크로 연결할 수 있는지 확인](cs_firewall.html#firewall) <p>**참고**: 작업자 노드에 공용 및 사설 VLAN이 모두 있는 경우 네트워크 연결이 구성됩니다. 작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 네트워크 연결에 대해 대체 솔루션을 구성해야 합니다. 자세한 정보는 [개인 전용 클러스터 네트워킹 계획](cs_network_cluster.html#private_vlan)을 참조하십시오. </p>
+- [모든 작업자 노드에서 Kubernetes 마스터 URL에 네트워크로 연결할 수 있는지 확인](cs_firewall.html#firewall) <p class="note">작업자 노드에 공용 및 사설 VLAN이 둘 다 있으면 네트워크 연결이 구성됩니다. 작업자 노드가 사설 VLAN 전용으로 설정된 경우에는 네트워크 연결에 대해 대체 솔루션을 구성해야 합니다. 자세한 정보는 [개인 전용 클러스터 네트워킹 계획](cs_network_cluster.html#private_vlan)을 참조하십시오. </p>
 - [Kubernetes 버전 업데이트가 사용 가능한 경우 마스터 kube-apiserver 업데이트](cs_cluster_update.html#master)
 - [작업자 노드를 주, 부 및 패치 버전에 대해 최신 상태로 유지](cs_cluster_update.html#worker_node)
 - [`kubectl` 명령(예: `cordon` 또는 `drain`) 및 `ibmcloud ks` 명령(예: `reboot`, `reload` 또는 `delete`)을 실행하여 문제가 발생한 작업자 노드 복구](cs_cli_reference.html#cs_worker_reboot)
