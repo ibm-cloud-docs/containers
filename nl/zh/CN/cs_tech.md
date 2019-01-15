@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -142,11 +145,11 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>OpenVPN 服务器与 OpenVPN 客户机配合使用，以安全地将主节点连接到工作程序节点。此连接支持 kubectl exec、attach、logs 和 proxy。</td>
+    <td>OpenVPN 服务器与 OpenVPN 客户机配合使用，以安全地将主节点连接到工作程序节点。此连接支持对 pod 和服务的 `apiserver proxy` 调用，还支持对 kubelet 的 `kubectl exec`、`attach` 和 `logs` 调用。</td>
     </tr>
     <tr>
     <td>etcd</td>
-    <td>etcd 是一种高可用性键值存储，用于存储集群的所有 Kubernetes 资源（例如，服务、部署和 pod）的状态。etcd 中的数据存储在由 IBM 管理并每天备份的加密磁盘上。</td>
+    <td>etcd 是一种高可用性键值存储，用于存储集群的所有 Kubernetes 资源（例如，服务、部署和 pod）的状态。etcd 中的数据会备份到 IBM 管理的加密存储器实例中。</td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -168,19 +171,34 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     </thead>
     <tbody>
     <tr>
+    <td>ibm-master-proxy</td>
+    <td>kube-system</td>
+    <td>对于运行 Kubernetes V1.10 或更高版本的集群，`ibm-master-proxy` 会将请求从工作程序节点转发到高可用性主节点副本的 IP 地址。在单专区集群中，主节点有三个副本，每个副本位于单独的主机上，使用一个主节点 IP 地址和域名。对于位于支持多专区的专区中的集群，主节点的三个副本在各专区中进行分布。因此，每个主节点都有自己的 IP 地址（已向 DNS 注册），并且整个集群主节点使用一个域名。</td>
+    </tr>
+    <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>OpenVPN 客户机与 OpenVPN 服务器配合使用，以安全地将主节点连接到工作程序节点。此连接支持 kubectl exec、attach、logs 和 proxy。</td>
+    <td>OpenVPN 客户机与 OpenVPN 服务器配合使用，以安全地将主节点连接到工作程序节点。此连接支持对 pod 和服务的 `apiserver proxy` 调用，还支持对 kubelet 的 `kubectl exec`、`attach` 和 `logs` 调用。</td>
     </tr>
     <tr>
-    <td>calico-policy-controller</td>
+    <td>kubelet</td>
     <td>kube-system</td>
-    <td>Calico 策略控制器监视入站和出站网络流量，以确定是否符合设置的网络策略。如果集群中不允许该流量，那么会阻止对该集群的访问。Calico 策略控制器还用于为集群创建和设置网络策略。</td>
+    <td>kubelet 是一个 pod，在每个工作程序节点上运行，负责监视在工作程序节点上运行的 pod 的运行状况，以及监视 Kubernetes API 服务器发送的事件。根据事件，kubelet 会创建或除去 pod，确保活性和就绪性探测，并向 Kubernetes API 服务器报告 pod 的阶段状态。</td>
     </tr>
     <tr>
-    <td>存储器提供者</td>
+    <td>kube-dns</td>
     <td>kube-system</td>
-    <td>每个集群都设置有一个插件，用于供应文件存储器。您可以选择安装其他附加组件，例如块存储器。</td>
+    <td>Kubernetes DNS 安排集群上的 DNS pod 和服务。容器会自动使用 DNS 服务的 IP 来解析对其他 pod 和服务的搜索中的 DNS 名称。</td>
+    </tr>
+    <tr>
+    <td>calico</td>
+    <td>kube-system</td>
+    <td>Calico 管理集群的网络策略，并由如下一些组件组成。
+    <ul>
+    <li>**calico-cni**：Calico 容器网络接口 (CNI) 管理容器的网络连接，并在删除容器时除去分配的资源。</li>
+    <li>**calico-ipam**：Calico IPAM 管理容器的 IP 地址分配。</li>
+    <li>**calico-node**：Calico 节点是一个容器，用于将使用 Calico 对容器联网所需的各种组件捆绑在一起。</li>
+    <li>**calico-policy-controller**：Calico 策略控制器监视入站和出站网络流量，以确定是否符合设置的网络策略。如果集群中不允许该流量，那么会阻止对该集群的访问。Calico 策略控制器还用于为集群创建和设置网络策略。</li></ul></td>
     </tr>
     <tr>
     <td>kube-proxy</td>
@@ -190,12 +208,7 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>Kubernetes 仪表板是一种基于 Web 的 UI，允许用户对集群和集群中运行的应用程序进行管理和故障诊断。</td>
-    </tr>
-    <tr>
-    <td>kube-dns</td>
-    <td>kube-system</td>
-    <td>Kubernetes DNS 安排集群上的 DNS pod 和服务。容器会自动使用 DNS 服务的 IP 来解析对其他 pod 和服务的搜索中的 DNS 名称。</td>
+    <td>Kubernetes 仪表板是一种基于 Web 的 GUI，允许用户对集群和集群中运行的应用程序进行管理和故障诊断。</td>
     </tr>
     <tr>
     <td>heapster</td>
@@ -203,19 +216,19 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     <td>Heapster 是一种集群范围的监视和事件数据聚集器。Heapster pod 会发现集群中的所有节点，并查询每个节点的 kubelet 中的使用情况信息。可以在 Kubernetes 仪表板中找到利用率图形。</td>
     </tr>
     <tr>
-    <td>calico-node</td>
+    <td>Ingress ALB</td>
     <td>kube-system</td>
-    <td>Calico 节点是一个容器，用于将使用 Calico 对容器联网所需的各种组件捆绑在一起。</td>
+    <td>Ingress 是一种 Kubernetes 服务，可用于通过将公共或专用请求转发到集群中的多个应用程序，均衡集群中的网络流量工作负载。要通过公用或专用网络公开应用程序，必须创建 Ingress 资源，以向 Ingress 应用程序负载均衡器 (ALB) 注册应用程序。然后，可以使用单个 URL 或 IP 地址来访问多个应用程序。</td>
+    </tr>
+    <tr>
+    <td>存储器提供者</td>
+    <td>kube-system</td>
+    <td>每个集群都设置有一个插件，用于供应文件存储器。您可以选择安装其他附加组件，例如块存储器。</td>
     </tr>
     <tr>
     <td>日志记录和度量</td>
     <td>ibm-system</td>
     <td>在使用日志和度量值时，可以使用集成的 {{site.data.keyword.loganalysislong_notm}} 和 {{site.data.keyword.monitoringlong_notm}} 服务来扩展收集和保留功能。</td>
-    </tr>
-    <tr>
-    <td>Ingress ALB</td>
-    <td>ibm-system</td>
-    <td>Ingress 是一种 Kubernetes 服务，可用于通过将公共或专用请求转发到集群中的多个应用程序，均衡集群中的网络流量工作负载。要通过公用或专用网络公开应用程序，必须创建 Ingress 资源，以向 Ingress 应用程序负载均衡器 (ALB) 注册应用程序。然后，可以使用单个 URL 或 IP 地址来访问多个应用程序。</td>
     </tr>
     <tr>
     <td>负载均衡器</td>
@@ -226,21 +239,6 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
     <td>应用程序 pod 和服务</td>
     <td>default</td>
     <td>在 <code>default</code> 名称空间或您创建的名称空间中，可以在 pod 和服务中部署应用程序，以与这些 pod 进行通信。</td>
-    </tr>
-    <tr>
-    <td>calico-cni</td>
-    <td>不适用</td>
-    <td>Calico 容器网络接口 (CNI) 管理容器的网络连接，并在删除容器时除去分配的资源。</td>
-    </tr>
-    <tr>
-    <td>calico-ipam</td>
-    <td>不适用</td>
-    <td>Calico IPAM 管理容器的 IP 地址分配。</td>
-    </tr>
-    <tr>
-    <td>kubelet</td>
-    <td>不适用</td>
-    <td>kubelet 是一个 pod，在每个工作程序节点上运行，负责监视在工作程序节点上运行的 pod 的运行状况，以及监视 Kubernetes API 服务器发送的事件。根据事件，kubelet 会创建或除去 pod，确保活性和就绪性探测，并向 Kubernetes API 服务器报告 pod 的阶段状态。</td>
     </tr>
     </tbody></table></dd>
 </dl>

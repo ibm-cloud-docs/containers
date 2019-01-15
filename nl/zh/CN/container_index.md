@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -48,15 +51,15 @@ lastupdated: "2018-10-25"
 **开始之前**
 
 获取适合您的 [{{site.data.keyword.Bluemix_notm}} 帐户](https://console.bluemix.net/registration/)类型：
-* **现买现付或预订**：可以创建免费试用集群。还可以供应 IBM Cloud Infrastructure (SoftLayer) 资源以在标准集群中创建和使用。
-* **轻量**：无法创建免费或标准集群。[升级帐户](/docs/account/account_faq.html#changeacct)至现买现付或预订。
+* **计费（现买现付或预订）**：可以创建免费试用集群。还可以供应 IBM Cloud Infrastructure (SoftLayer) 资源以在标准集群中创建和使用。
+* **轻量**：无法创建免费或标准集群。请[升级帐户](/docs/account/account_faq.html#changeacct)至计费帐户。
 * **试用（用于培训目的）**：可以创建一个免费集群并可以使用 30 天，以便熟悉服务。
 
 要创建免费集群，请执行以下操作：
 
-1.  在 [{{site.data.keyword.Bluemix_notm}} **目录** ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/catalog/?category=containers) 中，选择 **{{site.data.keyword.containerlong_notm}}**，然后单击**创建**。这将打开集群配置页面。缺省情况下，已选择**免费集群**。
+1.  在 [{{site.data.keyword.Bluemix_notm}} **目录** ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/catalog/?category=containers) 中，选择 **{{site.data.keyword.containershort_notm}}**，然后单击**创建**。这将打开集群配置页面。缺省情况下，已选择**免费集群**。
 
-2. 为集群提供唯一名称。
+2.  为集群提供唯一名称。
 
 3.  单击**创建集群**。这将创建包含 1 个工作程序节点的工作程序池。供应工作程序节点可能需要几分钟的时间，但您可以在**工作程序节点**选项卡中查看进度。阶段状态达到 `Ready` 时，即可以开始使用集群！
 

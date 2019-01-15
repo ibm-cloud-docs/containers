@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -36,6 +39,9 @@ lastupdated: "2018-10-25"
 
 ## 查找事件的信息
 {: #kube-find}
+
+您可以通过在 Kibana 仪表板中查看日志来监视集群中的活动。
+{: shortdesc}
 
 要监视管理活动，请执行以下操作：
 
@@ -364,19 +370,19 @@ lastupdated: "2018-10-25"
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.create</code></td>
-    <td>在 Kubernetes V1.9 和更高版本中，创建了修改 Webhook 配置。</td>
+    <td>在 Kubernetes V1.9 和更高版本中，创建了突变 Webhook 配置。</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.delete</code></td>
-    <td>在 Kubernetes V1.9 和更高版本中，删除了修改 Webhook 配置。</td>
+    <td>在 Kubernetes V1.9 和更高版本中，删除了突变 Webhook 配置。</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.patch</code></td>
-    <td>在 Kubernetes V1.9 和更高版本中，修补了修改 Webhook 配置。</td>
+    <td>在 Kubernetes V1.9 和更高版本中，修补了突变 Webhook 配置。</td>
   </tr>
   <tr>
     <td><code>mutatingwebhookconfigurations.update</code></td>
-    <td>在 Kubernetes V1.9 和更高版本中，更新了修改 Webhook 配置。</td>
+    <td>在 Kubernetes V1.9 和更高版本中，更新了突变 Webhook 配置。</td>
   </tr>
   <tr>
     <td><code>namespaces.create</code></td>

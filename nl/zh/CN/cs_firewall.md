@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -83,7 +86,7 @@ lastupdated: "2018-10-25"
     ```
    {: pre}
 
-2. 如果集群位于非 `default` 资源组中，请将该资源组设定为目标。**注**：对于该资源组，您必须至少具有[**查看者**角色](cs_users.html#platform)。
+2. 如果集群位于非 `default` 资源组中，请将该资源组设定为目标。要查看每个集群所属的资源组，请运行 `ibmcloud ks clusters`。**注**：对于该资源组，您必须至少具有[**查看者**角色](cs_users.html#platform)。
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -113,7 +116,7 @@ lastupdated: "2018-10-25"
    输出示例：
    ```
    ...
-   Master URL:		https://169.xx.xxx.xxx:31142
+   Master URL:		https://c3.<region>.containers.cloud.ibm.com
    ...
    ```
    {: screen}
@@ -129,7 +132,7 @@ lastupdated: "2018-10-25"
 
    示例命令：
    ```
-   curl --insecure https://169.xx.xxx.xxx:31142/version
+   curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
    ```
    {: pre}
 
@@ -190,8 +193,12 @@ lastupdated: "2018-10-25"
     {: pre}
 
 2.  允许从源 _<each_worker_node_publicIP>_ 到目标 TCP/UDP 端口范围 20000-32767 和端口 443 以及以下 IP 地址和网络组的出站网络流量。如果您拥有的公司防火墙阻止您的本地机器访问公用因特网端点，请对源工作程序节点和本地机器执行此步骤。
-    - **重要信息**：针对区域内的所有专区，必须允许从端口 443 发出的出局流量，以便在引导过程中均衡负载。例如，如果集群位于美国南部，那么必须允许流量从每个工作程序节点的公共 IP 流至所有专区（dal10、dal12 和 dal13）的 IP 地址的端口 443。<table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
-  <caption>要为出局流量打开的 IP 地址</caption>
+
+    针对区域内的所有专区，必须允许出局流量流至端口 443，以便在引导过程中均衡负载。例如，如果集群位于美国南部，那么必须允许流量从每个工作程序节点的公共 IP 流至所有专区的 IP 地址的端口 443。
+    {: important}
+
+    <table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
+    <caption>要为出局流量打开的 IP 地址</caption>
         <thead>
         <th>区域</th>
         <th>专区</th>
@@ -200,33 +207,33 @@ lastupdated: "2018-10-25"
       <tbody>
         <tr>
           <td>亚太地区北部</td>
-          <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-          <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+          <td>che01<br>hkg02<br>seo01<br>sng01<br>tok02、tok04、tok05</td>
+          <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210、128.168.71.117、165.192.69.69</code></td>
          </tr>
         <tr>
            <td>亚太地区南部</td>
-           <td>mel01<br>syd01<br>syd04</td>
-           <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19, 130.198.66.34</code></td>
+           <td>mel01<br>syd01、syd04</td>
+           <td><code>168.1.97.67</code><br><code>168.1.8.195、130.198.66.26、168.1.12.98、130.198.64.19</code></td>
         </tr>
         <tr>
            <td>欧洲中部</td>
-           <td>ams03<br>fra02<br>mil01<br>osl01<br>par01</td>
-           <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+           <td>ams03<br>mil01<br>osl01<br>par01<br>fra02、fra04、fra05</td>
+           <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code><br><code>169.50.56.174、161.156.65.42、149.81.78.114</code></td>
           </tr>
         <tr>
           <td>英国南部</td>
-          <td>lon02<br>lon04</td>
-          <td><code>159.122.242.78</code><br><code>158.175.65.170, 158.175.74.170, 158.175.76.2</code></td>
+          <td>lon02、lon04、lon05、lon06</td>
+          <td><code>159.122.242.78、158.175.111.42、158.176.94.26、159.122.224.242、158.175.65.170、158.176.95.146</code></td>
         </tr>
         <tr>
           <td>美国东部</td>
-           <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
-           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+           <td>mon01<br>tor01<br>wdc04、wdc06、wdc07</td>
+           <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.63.88.186、169.60.73.142、169.61.109.34、169.63.88.178、169.60.101.42、169.61.83.62</code></td>
         </tr>
         <tr>
           <td>美国南部</td>
-          <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01<br>sjc03<br>sjc04</td>
-          <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code></td>
+          <td>hou02<br>sao01<br>sjc03<br>sjc04<br>dal10、dal12、dal13</td>
+          <td><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><code>169.46.7.238、169.48.230.146、169.61.29.194、169.46.110.218、169.47.70.10、169.62.166.98、169.48.143.218、169.61.177.2、169.60.128.2</code></td>
         </tr>
         </tbody>
       </table>
@@ -246,12 +253,12 @@ lastupdated: "2018-10-25"
         <tr>
           <td>跨 {{site.data.keyword.containerlong_notm}} 区域的全局注册表</td>
           <td>registry.bluemix.net</td>
-          <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
+          <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29></code></td>
         </tr>
         <tr>
           <td>亚太地区北部和亚太地区南部</td>
           <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></td>
         </tr>
         <tr>
           <td>欧洲中部</td>
@@ -261,7 +268,7 @@ lastupdated: "2018-10-25"
          <tr>
           <td>英国南部</td>
           <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
          </tr>
          <tr>
           <td>美国东部和美国南部</td>
@@ -272,9 +279,10 @@ lastupdated: "2018-10-25"
       </table>
 </p>
 
-4. 可选：允许出站网络流量从工作程序节点流至 {{site.data.keyword.monitoringlong_notm}} 和 {{site.data.keyword.loganalysislong_notm}} 服务：
-    - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
-    - 将 <em>&lt;monitoring_public_IP&gt;</em> 替换为要允许流量流至的监视区域的所有地址：
+4.  可选：允许出局网络流量从工作程序节点流至 {{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}} 和 LogDNA 服务：
+    *   **{{site.data.keyword.monitoringlong_notm}}**:
+        <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_public_IP&gt;</pre>
+将 <em>&lt;monitoring_public_IP&gt;</em> 替换为要允许流量流至的监视区域的所有地址：
         <p><table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
   <caption>要为监视流量打开的 IP 地址</caption>
         <thead>
@@ -302,8 +310,9 @@ lastupdated: "2018-10-25"
         </tbody>
       </table>
 </p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
-    - 将 <em>&lt;logging_public_IP&gt;</em> 替换为要允许流量流至的日志记录区域的所有地址：
+    *   **{{site.data.keyword.loganalysislong_notm}}**:
+        <pre class="screen">TCP port 443, port 9091 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logging_public_IP&gt;</pre>
+将 <em>&lt;logging_public_IP&gt;</em> 替换为要允许流量流至的日志记录区域的所有地址：
         <p><table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
 <caption>要对日志记录流量打开的 IP 地址</caption>
         <thead>
@@ -316,7 +325,7 @@ lastupdated: "2018-10-25"
             <td>美国东部和美国南部</td>
             <td>ingest.logging.ng.bluemix.net</td>
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-           </tr>
+          </tr>
           <tr>
            <td>英国南部</td>
            <td>ingest.logging.eu-gb.bluemix.net</td>
@@ -335,13 +344,15 @@ lastupdated: "2018-10-25"
          </tbody>
        </table>
 </p>
+    *   **{{site.data.keyword.la_full_notm}}**:
+        <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
+将 `<logDNA_public_IP>` 替换为 [LogDNA IP 地址](/docs/services/Log-Analysis-with-LogDNA/network.html#ips)。
 
 5. 如果使用负载均衡器服务，请确保在工作程序节点的公共和专用接口上允许所有使用 VRRP 协议的所有流量。{{site.data.keyword.containerlong_notm}} 使用 VRRP 协议来管理公共和专用负载均衡器的 IP 地址。
 
-6. {: #pvc}要为数据存储创建持久性卷申领，请针对集群所在专区的 [IBM Cloud Infrastructure (SoftLayer) IP 地址](/docs/infrastructure/hardware-firewall-dedicated/ips.html#ibm-cloud-ip-ranges)允许通过防火墙进行流出访问。
-    - 要查找集群的专区，请运行 `ibmcloud ks clusters`。
-    - 允许访问[**前端（公共）网络**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network)和[**后端（专用）网络**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)的 IP 范围。
-    - 请注意，必须为**后端（专用）网络**添加 `dal01` 专区（数据中心）。
+6. {: #pvc}要为数据存储创建持久性卷申领，请允许通过防火墙对 IBM Cloud Infrastructure (SoftLayer) 进行流出访问：
+    - 允许访问 IBM Cloud Infrastructure (SoftLayer) API 端点以启动供应请求：`TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`。
+    - 允许访问[**前端（公共）网络**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network)和[**后端（专用）网络**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)中集群所在的专区的 IBM Cloud Infrastructure (SoftLayer) IP 范围。要查找集群的专区，请运行 `ibmcloud ks clusters`。
 
 <br />
 
@@ -383,7 +394,6 @@ lastupdated: "2018-10-25"
   <dd>打开将服务部署到允许流量流到的所有工作程序节点的公共 IP 地址时所配置的端口。要查找该端口，请运行 `kubectl get svc`。端口在 20000-32000 范围内。<dd>
   <dt>LoadBalancer 服务</dt>
   <dd>打开将服务部署到 LoadBalancer 服务的公共 IP 地址时所配置的端口。</dd>
-  <dt>Ingress
-        </dt>
+  <dt>Ingress</dt>
   <dd>针对 Ingress 应用程序负载均衡器的 IP 地址打开端口 80（对于 HTTP）或端口 443（对于 HTTPS）。</dd>
 </dl>

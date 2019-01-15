@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,13 +13,16 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 
 
-# 将 {{site.data.keyword.containerlong_notm}} 用于 {{site.data.keyword.Bluemix_notm}} Private
+# 混合云
 {: #hybrid_iks_icp}
 
 如果您有 {{site.data.keyword.Bluemix}} Private 帐户，那么可以将其用于精选 {{site.data.keyword.Bluemix_notm}} 服务，包括 {{site.data.keyword.containerlong}}。有关更多信息，请参阅[跨 {{site.data.keyword.Bluemix_notm}} Private 和 IBM Public Cloud 的混合体验 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://ibm.biz/hybridJune2018)。
@@ -34,7 +37,7 @@ lastupdated: "2018-10-25"
 {: shortdesc}
 
 1.  在 {{site.data.keyword.Bluemix_notm}} Public 中通过 {{site.data.keyword.containerlong}} 创建标准集群，或使用现有集群。要创建集群，有以下选项可供选择： 
-    - [通过 GUI 创建标准集群](cs_clusters.html#clusters_ui)。 
+    - [通过控制台创建标准集群](cs_clusters.html#clusters_ui)。 
     - [通过 CLI 创建标准集群](cs_clusters.html#clusters_cli)。 
     - [使用 Cloud Automation Manager (CAM) 通过预定义模板创建集群 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html)。使用 CAM 部署集群时，会自动安装 Helm Tiller。
 

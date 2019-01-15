@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -72,14 +75,14 @@ lastupdated: "2018-10-25"
 <tbody>
 <tr>
 <td>CoScale</td>
-<td>使用 <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 可监视工作程序节点、容器、副本集、复制控制器和服务。有关更多信息，请参阅 <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+<td>使用 <a href="https://www.newrelic.com/coscale" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 可监视工作程序节点、容器、副本集、复制控制器和服务。有关更多信息，请参阅 <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
 </tr>
 <tr>
 <td>Datadog</td>
 <td>使用 <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 可监视集群并查看基础架构和应用程序性能度量值。有关更多信息，请参阅 <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
 </tr>
 <tr>
-<td> {{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>{{site.data.keyword.cloudaccesstrailfull}}</td>
 <td>通过 Grafana 来分析日志，以监视集群中进行的管理活动。有关服务的更多信息，请参阅 [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) 文档。有关可以跟踪的事件类型的更多信息，请参阅 [Activity Tracker 事件](cs_at_events.html)。</td>
 </tr>
 <tr>
@@ -87,8 +90,16 @@ lastupdated: "2018-10-25"
 <td>使用 {{site.data.keyword.loganalysisfull_notm}} 扩展日志收集、保留和搜索能力。有关更多信息，请参阅<a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">启用自动收集集群日志 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
 </tr>
 <tr>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>通过将 LogDNA 作为第三方服务部署到工作程序节点来管理 pod 容器中的日志，从而将日志管理功能添加到集群。有关更多信息，请参阅[使用 {{site.data.keyword.loganalysisfull_notm}} 通过 LogDNA 管理 Kubernetes 集群日志](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)。</td>
+</tr>
+<tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
 <td>通过使用 {{site.data.keyword.monitoringlong_notm}} 定义规则和警报来扩展度量值收集和保留功能。有关更多信息，请参阅<a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">在 Grafana 中分析在 Kubernetes 集群中部署的应用程序的度量值 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>通过将 Sysdig 作为第三方服务部署到工作程序节点，以将度量值转发到 {{site.data.keyword.monitoringlong}}，从而从运营角度了解应用程序的性能和运行状况。有关更多信息，请参阅[分析在 Kubernetes 集群中部署的应用程序的度量值](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**注**：如果将 {{site.data.keyword.mon_full_notm}} 用于运行 Kubernetes V1.11 或更高版本的集群，那么不会收集所有容器度量值，因为 Sysdig 当前不支持 `containerd`。</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -124,7 +135,7 @@ lastupdated: "2018-10-25"
 ## 安全服务
 {: #security_services}
 
-想要全面了解如何将 {{site.data.keyword.Bluemix_notm}} 安全服务与集群集成吗？请查看[将端到端安全性应用于云应用程序教程](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application)。
+想要全面了解如何将 {{site.data.keyword.Bluemix_notm}} 安全服务与集群集成吗？请查看[将端到端安全性应用于云应用程序教程](/docs/tutorials/cloud-e2e-security.html)。
 {: shortdesc}
 
 <table summary="可访问性摘要">
@@ -184,7 +195,7 @@ lastupdated: "2018-10-25"
 <tbody>
 <tr>
   <td>Heptio Ark</td>
-  <td>可以使用 <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 来备份和复原集群资源和持久性卷。有关更多信息，请参阅 Heptio Ark <a href="https://github.com/heptio/ark/blob/master/docs/use-cases.md#use-cases" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+  <td>可以使用 <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 来备份和复原集群资源和持久性卷。有关更多信息，请参阅 Heptio Ark <a href="https://github.com/heptio/ark/blob/release-0.9/docs/use-cases.md" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -212,12 +223,19 @@ lastupdated: "2018-10-25"
 添加 {{site.data.keyword.Bluemix_notm}} 服务以使用区域中的额外功能增强 Kubernetes 集群，例如，Watson AI、数据、安全性和物联网 (IoT)。
 {:shortdesc}
 
-**重要信息：**只能绑定支持服务密钥的服务。要查找支持服务密钥的服务的列表，请参阅[使外部应用程序能够使用 {{site.data.keyword.Bluemix_notm}} 服务](/docs/apps/reqnsi.html#accser_external)。
+只能绑定支持服务密钥的服务。要查找支持服务密钥的服务的列表，请参阅[使外部应用程序能够使用 {{site.data.keyword.Bluemix_notm}} 服务](/docs/resources/connect_external_app.html#externalapp)。
+{: note}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+开始之前：
+- 确保您具有以下角色：
+    - 对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **编辑者**或**管理员**服务角色](cs_users.html#platform)。
+    - 对要使用的空间的 [Cloud Foundry **开发者**角色](/docs/iam/mngcf.html#mngcf)。
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 
 要将 {{site.data.keyword.Bluemix_notm}} 服务添加到集群：
-1. [创建 {{site.data.keyword.Bluemix_notm}} 服务的实例](/docs/apps/reqnsi.html#req_instance)。</br></br>**注：**<ul><li>某些 {{site.data.keyword.Bluemix_notm}} 服务仅在精选区域中可用。仅当服务在与您的集群相同的区域中可用时，才可将服务绑定到集群。此外，如果想要在华盛顿专区中创建服务实例，必须使用 CLI。</li><li>必须在集群所在的资源组中创建服务实例。只能在一个资源组中创建资源，并且在此之后无法更改资源组。</li></ul>
+1. [创建 {{site.data.keyword.Bluemix_notm}} 服务的实例](/docs/apps/reqnsi.html#req_instance)。
+    * 某些 {{site.data.keyword.Bluemix_notm}} 服务仅在精选区域中可用。仅当服务在与您的集群相同的区域中可用时，才可将服务绑定到集群。此外，如果想要在华盛顿专区中创建服务实例，必须使用 CLI。
+    * 必须在集群所在的资源组中创建服务实例。只能在一个资源组中创建资源，并且在此之后无法更改资源组。
 
 2. 检查创建的服务类型，并记下服务实例**名称**。
    - **Cloud Foundry 服务：**
@@ -233,7 +251,7 @@ lastupdated: "2018-10-25"
      ```
      {: screen}
 
-  - **支持 IAM 的服务：**
+  - **{{site.data.keyword.Bluemix_notm}}支持 IAM 的服务：**
      ```
     ibmcloud resource service-instances
     ```
@@ -248,7 +266,7 @@ lastupdated: "2018-10-25"
 
    您还可以在仪表板中查看作为 **Cloud Foundry 服务**和**服务**的不同服务类型。
 
-3. 对于支持 IAM 的服务，创建 Cloud Foundry 别名，从而可将此服务绑定到集群。如果服务已经是 Cloud Foundry 服务，那么此步骤不是必需的，并且可继续下一步。
+3. 对于支持 {{site.data.keyword.Bluemix_notm}} IAM 的服务，创建 Cloud Foundry 别名，从而可将此服务绑定到集群。如果服务已经是 Cloud Foundry 服务，那么此步骤不是必需的，并且可继续下一步。
    1. 将 Cloud Foundry 组织和空间作为目标。
       ```
       ibmcloud target --cf
@@ -268,20 +286,12 @@ lastupdated: "2018-10-25"
       {: pre}
 
 4. 确定要用于添加服务的集群名称空间。在以下选项之间进行选择。
-
-   - 列出现有名称空间，并选择要使用的名称空间。
-```
+     ```
         kubectl get namespaces
         ```
      {: pre}
 
-   - 在集群中创建名称空间。
-     ```
-        kubectl create namespace <namespace_name>
-        ```
-     {: pre}
-
-5.  将服务添加到集群。对于支持 IAM 的服务，确保使用先前创建的 Cloud Foundry 别名。
+5.  将服务添加到集群。对于支持 {{site.data.keyword.Bluemix_notm}} IAM 的服务，确保使用先前创建的 Cloud Foundry 别名。
     ```
     ibmcloud ks cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
@@ -290,7 +300,7 @@ lastupdated: "2018-10-25"
     服务成功添加到集群后，将创建集群私钥，用于保存服务实例的凭证。将在 etcd 中自动加密私钥以保护数据。
 
     输出示例：
-        ```
+    ```
         ibmcloud ks cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
@@ -720,7 +730,7 @@ lastupdated: "2018-10-25"
 {: #helm_links}
 
 * 要使用 strongSwan Helm 图表，请参阅[使用 strongSwan IPSec VPN 服务 Helm 图表设置 VPN 连接](cs_vpn.html#vpn-setup)。
-* 查看可在 [Helm 图表目录 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) GUI 中与 {{site.data.keyword.Bluemix_notm}} 配合使用的可用 Helm 图表。
+* 在控制台中查看可在 [Helm 图表目录 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) 中与 {{site.data.keyword.Bluemix_notm}} 配合使用的可用 Helm 图表。
 * 在 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 中了解有关用于设置和管理 Helm 图表的 Helm 命令的更多信息。
 * 了解有关如何[利用 Kubernetes Helm 图表提高部署速度 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/) 的更多信息。
 

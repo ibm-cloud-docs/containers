@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -27,7 +30,8 @@ lastupdated: "2018-10-25"
 ## 抵押贷款公司削减成本并加快实现合规性
 {: #uc_mortgage}
 
-一家住宅抵押贷款公司的风险管理副总裁每天要处理 7000 万条记录，但内部部署系统的速度较慢，而且也不准确。IT 费用迅速攀升，原因是硬件很快过时，而且未得到充分利用。在等待硬件供应期间，公司的合规性脚步会因此而放慢。 
+一家住宅抵押贷款公司的风险管理副总裁每天要处理 7000 万条记录，但内部部署系统的速度较慢，而且也不准确。IT 费用迅速攀升，原因是硬件很快过时，而且未得到充分利用。在等待硬件供应期间，公司的合规性脚步会因此而放慢。
+{: shortdesc}
 
 为什么选择 {{site.data.keyword.Bluemix_notm}}：为了改进风险分析，该公司期望 {{site.data.keyword.containerlong_notm}} 和 IBM Cloud Analytic 服务可帮助降低成本，提高全球范围的可用性，并最终加快实现合规性。通过多个区域中的 {{site.data.keyword.containerlong_notm}}，可以对该公司的分析应用程序容器化并将其部署到全球范围，从而提高可用性并满足当地法规要求。这些部署通过人们熟悉的开放式源代码工具进行加速，这些工具已经是 {{site.data.keyword.containerlong_notm}} 的组成部分。
 
@@ -91,6 +95,7 @@ lastupdated: "2018-10-25"
 {: #uc_payment_tech}
 
 在等待硬件采购期间，开发主管手下有开发者使用的是内部部署传统工具，这些工具会使原型设计速度变慢。
+{: shortdesc}
 
 为什么选择 {{site.data.keyword.Bluemix_notm}}：{{site.data.keyword.containerlong_notm}} 提供了使用开放式源代码标准技术来加速计算的功能。在该公司移至 {{site.data.keyword.containerlong_notm}} 后，开发者有权访问 DevOps 友好工具，例如可移植且轻松共享的容器。
 
@@ -146,7 +151,7 @@ lastupdated: "2018-10-25"
 **步骤 1：提升和转换为安全计算**
 * 用于管理高敏感性数据的应用程序可以在裸机上运行的 {{site.data.keyword.containerlong_notm}} 上重新托管，以实现可信计算。可信计算可以验证底层硬件是否受到篡改。 
 * 将虚拟机映像迁移到在公共 {{site.data.keyword.Bluemix_notm}} 的 {{site.data.keyword.containerlong_notm}} 中运行的容器映像。
-* 通过该核心，漏洞顾问程序可提供针对已知恶意软件的映像、策略、容器、打包扫描和漏洞扫描。 
+* 通过该核心，漏洞顾问程序可提供针对已知恶意软件的映像、策略、容器和打包漏洞扫描。 
 * 专用数据中心/内部部署资本成本大幅减少，取而代之的是基于工作负载需求进行扩展的实用工具计算模型。
 
 **步骤 2：操作现有支付系统后端以及与其连接**

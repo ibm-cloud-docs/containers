@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 
 ---
@@ -14,6 +14,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 用户访问许可权
@@ -24,24 +27,27 @@ lastupdated: "2018-10-25"
 [分配集群许可权](cs_users.html)时，很难判断需要将哪个角色分配给用户。请使用以下各部分中的表来确定在 {{site.data.keyword.containerlong}} 中执行常见任务所需的最低许可权级别。
 {: shortdesc}
 
-## IAM 平台和 Kubernetes RBAC
+## {{site.data.keyword.Bluemix_notm}} IAM 平台和 Kubernetes RBAC
 {: #platform}
 
-{{site.data.keyword.containerlong_notm}} 已配置为使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 角色。IAM 平台角色确定用户可对集群执行的操作。分配有 IAM 平台角色的每个用户还会在缺省名称空间中自动分配有相应的 Kubernetes 基于角色的访问控制 (RBAC) 角色。此外， IAM 平台角色会自动为用户设置基本的基础架构许可权。要设置 IAM 策略，请参阅[分配 IAM 平台许可权](cs_users.html#platform)。要了解有关 RBAC 角色的更多信息，请参阅[分配 RBAC 许可权](cs_users.html#role-binding)。
+{{site.data.keyword.containerlong_notm}} 已配置为使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 角色。{{site.data.keyword.Bluemix_notm}} IAM 平台角色确定用户可对集群执行的操作。分配有平台角色的每个用户还会在缺省名称空间中自动分配有相应的 Kubernetes 基于角色的访问控制 (RBAC) 角色。此外，平台角色会自动为用户设置基本的基础架构许可权。要设置策略，请参阅[分配 {{site.data.keyword.Bluemix_notm}} IAM 平台许可权](cs_users.html#platform)。要了解有关 RBAC 角色的更多信息，请参阅[分配 RBAC 许可权](cs_users.html#role-binding)。
+{: shortdesc}
 
-下表显示了每个 IAM 平台角色授予的集群管理许可权，以及相应 RBAC 角色的 Kubernetes 资源许可权。
+下表显示了每个平台角色授予的集群管理许可权，以及相应 RBAC 角色的 Kubernetes 资源许可权。
 
-<table>
-  <tr>
-    <th>IAM 平台角色</th>
+<table summary="该表显示了 IAM 平台角色的用户许可权和相应 RBAC 策略。每行从左到右阅读，其中第一列是 IAM 平台角色，第二列是集群许可权，第三列是相应的 RBAC 角色。">
+<caption>集群管理许可权（按平台和 RBAC 角色）</caption>
+<thead>
+    <th>平台角色</th>
     <th>集群管理许可权</th>
     <th>相应的 RBAC 角色和资源许可权</th>
-  </tr>
+</thead>
+<tbody>
   <tr>
     <td>**查看者**</td>
     <td>
       集群：<ul>
-        <li>查看资源组和区域的 IAM API 密钥所有者的姓名和电子邮件地址</li>
+        <li>查看资源组和区域的 {{site.data.keyword.Bluemix_notm}} IAM API 密钥所有者的姓名和电子邮件地址</li>
         <li>如果 {{site.data.keyword.Bluemix_notm}} 帐户使用其他凭证来访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合，那么可查看基础架构用户名</li>
         <li>列出所有集群、工作程序节点、工作程序池、集群中的服务和 Webhook，或查看这些对象的详细信息</li>
         <li>查看基础架构帐户的 VLAN 生成状态</li>
@@ -106,7 +112,7 @@ lastupdated: "2018-10-25"
         <li>使用 {{site.data.keyword.keymanagementservicefull}} 加密 Kubernetes 私钥</li>
         <li>为 {{site.data.keyword.Bluemix_notm}} 帐户设置 API 密钥以访问链接的 IBM Cloud Infrastructure (SoftLayer) 产品服务组合</li>
         <li>设置、查看和除去用于访问不同 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的 {{site.data.keyword.Bluemix_notm}} 帐户的基础架构凭证</li>
-        <li>为帐户中的其他现有用户分配和更改 IAM 平台角色</li>
+        <li>为帐户中的其他现有用户分配和更改 {{site.data.keyword.Bluemix_notm}} IAM 平台角色</li>
         <li>为所有区域中的所有 {{site.data.keyword.containerlong_notm}} 实例（集群）设置时：列出帐户中的所有可用 VLAN</ul>
       日志记录：<ul>
         <li>针对 `kube-audit` 类型创建和更新日志转发配置</li>
@@ -116,7 +122,7 @@ lastupdated: "2018-10-25"
         <li>列出集群中的所有 ALB 私钥或查看这些 ALB 私钥的详细信息</li>
         <li>将证书从 {{site.data.keyword.cloudcerts_long_notm}} 实例部署到 ALB</li>
         <li>更新集群中的 ALB 私钥或从集群中除去 ALB 私钥</li></ul>
-      <strong>注</strong>：要创建资源（如机器、VLAN 和子网），管理员用户需要**超级用户**基础架构角色。
+      <p class="note">要创建资源（如机器、VLAN 和子网），管理员用户需要**超级用户**基础架构角色。</p>
     </td>
     <td><code>cluster-admin</code> 集群角色由 <code>ibm-admin</code> 集群角色绑定进行应用，提供以下许可权：
       <ul><li>对每个名称空间中资源的读/写访问权</li>
@@ -125,6 +131,7 @@ lastupdated: "2018-10-25"
       <li>创建使应用程序公共可用的 Ingress 资源</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 
@@ -132,15 +139,18 @@ lastupdated: "2018-10-25"
 ## Cloud Foundry 角色
 {: #cloud-foundry}
 
-Cloud Foundry 角色会授予对帐户内组织和空间的访问权。要在 {{site.data.keyword.Bluemix_notm}} 中查看基于 Cloud Foundry 的服务的列表，请运行 `ibmcloud service list`。要了解更多信息，请参阅 IAM 文档中的所有可用[组织和空间角色](/docs/iam/cfaccess.html)或[管理 Cloud Foundry 访问权](/docs/iam/mngcf.html)的步骤。
+Cloud Foundry 角色会授予对帐户内组织和空间的访问权。要在 {{site.data.keyword.Bluemix_notm}} 中查看基于 Cloud Foundry 的服务的列表，请运行 `ibmcloud service list`。要了解更多信息，请参阅 {{site.data.keyword.Bluemix_notm}} IAM 文档中的所有可用[组织和空间角色](/docs/iam/cfaccess.html)或[管理 Cloud Foundry 访问权](/docs/iam/mngcf.html)的步骤。
+{: shortdesc}
 
 下表显示了集群操作许可权所需的 Cloud Foundry 角色。
 
-<table>
-  <tr>
+<table summary="该表显示了 Cloud Foundry 的用户许可权。每行从左到右阅读，其中第一列是 Cloud Foundry 角色，第二列是集群许可权。">
+  <caption>集群管理许可权（按 Cloud Foundry 角色）</caption>
+  <thead>
     <th>Cloud Foundry 角色</th>
     <th>集群管理许可权</th>
-  </tr>
+  </thead>
+  <tbody>
   <tr>
     <td>空间角色：管理员</td>
     <td>管理用户对 {{site.data.keyword.Bluemix_notm}} 空间的访问权</td>
@@ -153,12 +163,14 @@ Cloud Foundry 角色会授予对帐户内组织和空间的访问权。要在 {{
       <li>通过集群日志转发配置在空间级别查看日志</li></ul>
     </td>
   </tr>
+  </tbody>
 </table>
 
 ## 基础架构角色
 {: #infra}
 
-**注**：具有**超级用户**基础架构访问角色的用户[为区域和资源组设置 API 密钥](cs_users.html#api_key)时，帐户中其他用户的基础架构许可权由 IAM 平台角色进行设置。您无需编辑其他用户的 IBM Cloud Infrastructure (SoftLayer) 许可权。仅当无法将**超级用户**分配给设置 API 密钥的用户时，才可以使用下表来定制用户的 IBM Cloud Infrastructure (SoftLayer) 许可权。有关更多信息，请参阅[定制基础架构许可权](cs_users.html#infra_access)。
+具有**超级用户**基础架构访问角色的用户[为区域和资源组设置 API 密钥](cs_users.html#api_key)时，帐户中其他用户的基础架构许可权由 {{site.data.keyword.Bluemix_notm}} IAM 平台角色进行设置。您无需编辑其他用户的 IBM Cloud Infrastructure (SoftLayer) 许可权。仅当无法将**超级用户**分配给设置 API 密钥的用户时，才可以使用下表来定制用户的 IBM Cloud Infrastructure (SoftLayer) 许可权。有关更多信息，请参阅[定制基础架构许可权](cs_users.html#infra_access)。
+{: shortdesc}
 
 下表显示了完成常见任务组所需的基础架构许可权。
 

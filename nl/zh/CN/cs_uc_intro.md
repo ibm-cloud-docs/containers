@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -25,8 +28,8 @@ lastupdated: "2018-10-25"
 * AI 和机器学习
 * 数据和存储
 * DevOps
-
 {: shortdesc}
+
 <table summary="该表显示了用例。每行从左到右阅读，其中第一列是表示每个行业的图标，第二列是描述。">
 <caption>用例</caption>
   <thead>

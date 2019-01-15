@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -53,7 +56,7 @@ lastupdated: "2018-10-25"
    <tbody>
 <tr>
    <td>Aborted</td>
-   <td>在部署 Kubernetes 主节点之前，用户请求删除集群。在集群删除完成后，将从仪表板中除去集群。如果集群长时间卡在此状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](cs_troubleshoot.html#ts_getting_help)。</td>
+   <td>在部署 Kubernetes 主节点之前，用户请求删除集群。在集群删除完成后，将从仪表板中除去集群。如果集群长时间卡在此状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持用例](cs_troubleshoot.html#ts_getting_help)。</td>
    </tr>
  <tr>
      <td>Critical</td>
@@ -65,7 +68,7 @@ lastupdated: "2018-10-25"
    </tr>
    <tr>
      <td>Deleted</td>
-     <td>集群已删除，但尚未从仪表板中除去。如果集群长时间卡在此状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](cs_troubleshoot.html#ts_getting_help)。</td>
+     <td>集群已删除，但尚未从仪表板中除去。如果集群长时间卡在此状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持用例](cs_troubleshoot.html#ts_getting_help)。</td>
    </tr>
    <tr>
    <td>Deleting</td>
@@ -73,7 +76,7 @@ lastupdated: "2018-10-25"
    </tr>
    <tr>
      <td>Deploy failed</td>
-     <td>无法完成 Kubernetes 主节点的部署。您无法解决此状态。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](cs_troubleshoot.html#ts_getting_help)来联系 IBM Cloud 支持。</td>
+     <td>无法完成 Kubernetes 主节点的部署。您无法解决此状态。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持用例](cs_troubleshoot.html#ts_getting_help)来联系 IBM Cloud 支持人员。</td>
    </tr>
      <tr>
        <td>Deploying</td>
@@ -81,7 +84,7 @@ lastupdated: "2018-10-25"
       </tr>
       <tr>
        <td>Normal</td>
-       <td>集群中的所有工作程序节点都已启动并正在运行。您可以访问集群，并将应用程序部署到集群。此状态视为正常运行，不需要您执行操作。**注**：虽然工作程序节点可能是正常的，但其他基础架构资源（例如，[联网](cs_troubleshoot_network.html)和[存储](cs_troubleshoot_storage.html)）可能仍然需要注意。</td>
+       <td>集群中的所有工作程序节点都已启动并正在运行。您可以访问集群，并将应用程序部署到集群。此状态视为正常运行，不需要您执行操作。<p class="note">虽然工作程序节点可能是正常的，但其他基础架构资源（例如，[联网](cs_troubleshoot_network.html)和[存储](cs_troubleshoot_storage.html)）可能仍然需要注意。</p></td>
     </tr>
       <tr>
        <td>Pending</td>
@@ -89,7 +92,7 @@ lastupdated: "2018-10-25"
      </tr>
    <tr>
      <td>Requested</td>
-     <td>发送了用于创建集群并为 Kubernetes 主节点和工作程序节点订购基础架构的请求。集群部署启动后，集群状态将更改为 <code>Deploying</code>。如果集群长时间卡在 <code>Requested</code> 状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](cs_troubleshoot.html#ts_getting_help)。</td>
+     <td>发送了用于创建集群并为 Kubernetes 主节点和工作程序节点订购基础架构的请求。集群部署启动后，集群状态将更改为 <code>Deploying</code>。如果集群长时间卡在 <code>Requested</code> 状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持用例](cs_troubleshoot.html#ts_getting_help)。</td>
    </tr>
    <tr>
      <td>Updating</td>
@@ -103,7 +106,10 @@ lastupdated: "2018-10-25"
  </table>
 
 
-**注**：[Kubernetes 主节点](cs_tech.html#architecture)是用于保持集群正常启动并运行的主组件。主节点将集群资源及其配置存储在充当集群单个事实点的 etcd 数据库中。Kubernetes API 服务器是从工作程序节点到主节点的所有集群管理请求或者想要与集群资源交互时的主入口点。<br><br>如果主节点发生故障，那么工作负载将继续在工作程序节点上运行，但是无法使用 `kubectl` 命令来处理集群资源或查看集群运行状况，直至主节点中的 Kubernetes API 服务器恢复运行。如果在主节点停运期间 pod 停止运行，那么在工作程序节点可再次访问 Kubernetes API 服务器之前，将无法重新调度 pod。<br><br>在主节点停运期间，您仍可以针对 {{site.data.keyword.containerlong_notm}} API 运行 `ibmcloud ks` 命令以处理基础架构资源，例如，工作程序节点或 VLAN。如果通过向集群添加或从中除去工作程序节点来更改当前集群配置，那么在主节点恢复运行前，更改不会发生。**注**：在主节点停运期间，请勿重新启动或重新引导工作程序节点。此操作会从工作程序节点中除去 pod。因为 Kubernetes API 服务器不可用，因此无法将 pod 重新调度到集群中的其他工作程序节点。
+[Kubernetes 主节点](cs_tech.html#architecture)是用于保持集群正常启动并运行的主组件。主节点将集群资源及其配置存储在充当集群单个事实点的 etcd 数据库中。Kubernetes API 服务器是从工作程序节点到主节点的所有集群管理请求或者想要与集群资源交互时的主入口点。<br><br>如果主节点发生故障，那么工作负载将继续在工作程序节点上运行，但是无法使用 `kubectl` 命令来处理集群资源或查看集群运行状况，直至主节点中的 Kubernetes API 服务器恢复运行。如果在主节点停运期间 pod 停止运行，那么在工作程序节点可再次访问 Kubernetes API 服务器之前，将无法重新调度 pod。<br><br>在主节点停运期间，您仍可以针对 {{site.data.keyword.containerlong_notm}} API 运行 `ibmcloud ks` 命令以处理基础架构资源，例如，工作程序节点或 VLAN。如果通过向集群添加或从中除去工作程序节点来更改当前集群配置，那么在主节点恢复运行前，更改不会发生。
+
+在主节点停运期间，请勿重新启动或重新引导工作程序节点。此操作会从工作程序节点中除去 pod。因为 Kubernetes API 服务器不可用，因此无法将 pod 重新调度到集群中的其他工作程序节点。
+{: important}
 
 
 <br />
@@ -169,7 +175,7 @@ lastupdated: "2018-10-25"
       </tr>
       <tr>
        <td>Unknown</td>
-       <td>由于以下某种原因，Kubernetes 主节点不可访问：<ul><li>您请求了更新 Kubernetes 主节点。在更新期间无法检索到工作程序节点的状态。</li><li>您可能有其他防火墙在保护工作程序节点，或者最近更改了防火墙设置。{{site.data.keyword.containerlong_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。有关更多信息，请参阅[防火墙阻止工作程序节点进行连接](cs_troubleshoot_clusters.html#cs_firewall)。</li><li>Kubernetes 主节点已停止运行。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</li></ul></td>
+       <td>由于以下某种原因，Kubernetes 主节点不可访问：<ul><li>您请求了更新 Kubernetes 主节点。在更新期间无法检索到工作程序节点的状态。如果工作程序节点长时间保持此状态，即使在成功更新 Kubernetes 主节点之后也是如此，请尝试[重新装入](cs_cli_reference.html#cs_worker_reload)工作程序节点。</li><li>您可能有其他防火墙在保护工作程序节点，或者最近更改了防火墙设置。{{site.data.keyword.containerlong_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。有关更多信息，请参阅[防火墙阻止工作程序节点进行连接](cs_troubleshoot_clusters.html#cs_firewall)。</li><li>Kubernetes 主节点已停止运行。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持用例](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持人员。</li></ul></td>
   </tr>
      <tr>
         <td>Warning</td>
@@ -207,7 +213,7 @@ lastupdated: "2018-10-25"
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：当前禁止您的帐户订购“计算实例”。</td>
-        <td>您的 IBM Cloud Infrastructure (SoftLayer) 帐户可能受到限制，无法订购计算资源。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</td>
+        <td>您的 IBM Cloud Infrastructure (SoftLayer) 帐户可能受到限制，无法订购计算资源。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持用例](#ts_getting_help)来联系 {{site.data.keyword.Bluemix_notm}} 支持人员。</td>
       </tr>
       <tr>
       <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法下单。<br><br>
@@ -216,11 +222,11 @@ lastupdated: "2018-10-25"
       <li>对于单专区集群，请在另一个专区中创建集群。对于多专区集群，请将专区添加到集群。</li>
       <li>在 IBM Cloud infrastructure (SoftLayer) 帐户中，为工作程序节点指定不同的公共和专用 VLAN 对。对于位于工作程序池中的工作程序节点，您可以使用 <code>ibmcloud ks zone-network-set</code> [命令](cs_cli_reference.html#cs_zone_network_set)。</li>
       <li>请联系 IBM Cloud infrastructure (SoftLayer) 帐户管理员以验证未超过帐户限制，例如，全球配额。</li>
-      <li>开具 [IBM Cloud infrastructure (SoftLayer) 支持凭单](#ts_getting_help)</li></ul></td>
+      <li>开具 [IBM Cloud Infrastructure (SoftLayer) 支持用例](#ts_getting_help)</li></ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基础架构异常：无法获取标识为 &lt;vlan id&gt; 的网络 VLAN。</td>
-        <td>由于以下某种原因而找不到所选的 VLAN 标识，因此无法供应工作程序节点：<ul><li>您可能指定的是 VLAN 编号，而不是 VLAN 标识。VLAN 编号的长度为 3 位或 4 位，而 VLAN 标识的长度为 7 位。运行 <code>ibmcloud ks vlans &lt;zone&gt;</code> 以检索 VLAN 标识。<li>该 VLAN 标识可能未与所使用的 IBM Cloud Infrastructure (SoftLayer) 帐户相关联。运行 <code>ibmcloud ks vlans &lt;zone&gt;</code> 以列出您帐户的可用 VLAN 标识。要更改 IBM Cloud Infrastructure (SoftLayer) 帐户，请参阅 [`ibmcloud ks credentials-set`](cs_cli_reference.html#cs_credentials_set)。</ul></td>
+        <td>由于以下某种原因而找不到所选的 VLAN 标识，因此无法供应工作程序节点：<ul><li>您可能指定的是 VLAN 编号，而不是 VLAN 标识。VLAN 编号的长度为 3 位或 4 位，而 VLAN 标识的长度为 7 位。运行 <code>ibmcloud ks vlans &lt;zone&gt;</code> 以检索 VLAN 标识。<li>该 VLAN 标识可能未与所使用的 IBM Cloud Infrastructure (SoftLayer) 帐户相关联。运行 <code>ibmcloud ks vlans &lt;zone&gt;</code> 以列出您帐户的可用 VLAN 标识。要更改 IBM Cloud Infrastructure (SoftLayer) 帐户，请参阅 [`ibmcloud ks credential-set`](cs_cli_reference.html#cs_credentials_set)。</ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation：为此订单提供的位置无效。(HTTP 500)</td>
@@ -239,7 +245,7 @@ lastupdated: "2018-10-25"
      </tr>
       <tr>
   <td>无法创建 IMS 门户网站令牌，因为没有 IMS 帐户链接到所选的 BSS 帐户</br></br>找不到提供的用户或该用户不处于活动状态</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus：用户帐户当前处于 cancel_pending 状态。</br></br>正在等待机器向用户显示</td>
-  <td>用于访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的 API 密钥的所有者没有执行此操作的必需许可权，或者可能处于暂挂待删除状态。</br></br><strong>以用户身份</strong>，执行以下步骤：<ol><li>如果您有权访问多个帐户，请确保您已登录到要使用 {{site.data.keyword.containerlong_notm}} 的帐户。</li><li>运行 <code>ibmcloud ks api-key-info</code> 以查看用于访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的当前 API 密钥所有者。</li><li>运行 <code>ibmcloud account list</code> 以查看当前使用的 {{site.data.keyword.Bluemix_notm}} 帐户的所有者。</li><li>请与 {{site.data.keyword.Bluemix_notm}} 帐户的所有者联系，并报告 API 密钥所有者在 IBM Cloud Infrastructure (SoftLayer) 中的许可权不足，或者可能暂挂待删除。</li></ol></br><strong>以帐户所有者身份</strong>，执行以下步骤：<ol><li>复查 [IBM Cloud Infrastructure (SoftLayer) 中的必需许可权](cs_users.html#infra_access)，即执行先前失败的操作所需的许可权。</li><li>使用 [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 命令来修正 API 密钥所有者的许可权或创建新的 API 密钥。</li><li>如果您或其他帐户管理员在您的帐户上手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，请运行 [<code>ibmcloud ks credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) 以从您的帐户中除去这些凭证。</li></ol></td>
+  <td>用于访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的 API 密钥的所有者没有执行此操作的必需许可权，或者可能处于暂挂待删除状态。</br></br><strong>以用户身份</strong>，执行以下步骤：<ol><li>如果您有权访问多个帐户，请确保您已登录到要使用 {{site.data.keyword.containerlong_notm}} 的帐户。</li><li>运行 <code>ibmcloud ks api-key-info</code> 以查看用于访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的当前 API 密钥所有者。</li><li>运行 <code>ibmcloud account list</code> 以查看当前使用的 {{site.data.keyword.Bluemix_notm}} 帐户的所有者。</li><li>请与 {{site.data.keyword.Bluemix_notm}} 帐户的所有者联系，并报告 API 密钥所有者在 IBM Cloud Infrastructure (SoftLayer) 中的许可权不足，或者可能暂挂待删除。</li></ol></br><strong>以帐户所有者身份</strong>，执行以下步骤：<ol><li>复查 [IBM Cloud Infrastructure (SoftLayer) 中的必需许可权](cs_users.html#infra_access)，即执行先前失败的操作所需的许可权。</li><li>使用 [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 命令来修正 API 密钥所有者的许可权或创建新的 API 密钥。</li><li>如果您或其他帐户管理员在您的帐户中手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，请运行 [<code>ibmcloud ks credential-unset</code>](cs_cli_reference.html#cs_credentials_unset) 以从您的帐户中除去这些凭证。</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -255,6 +261,8 @@ lastupdated: "2018-10-25"
 {: #debug_apps}
 
 复查您可用于调试应用程序部署并查找失败根本原因的选项。
+
+
 
 1. 通过运行 `describe` 命令，在服务或部署资源中查找异常情况。
 
@@ -302,20 +310,13 @@ lastupdated: "2018-10-25"
 {: shortdesc}
 
 -  在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
-
 -   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/bluemix/support/#status)。
--   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
-
-如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
+-   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
     {: tip}
 -   请复查论坛，以查看是否有其他用户遇到相同的问题。使用论坛进行提问时，请使用适当的标记来标注您的问题，以方便 {{site.data.keyword.Bluemix_notm}} 开发团队识别。
-
     -   如果您有关于使用 {{site.data.keyword.containerlong_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
     -   有关服务的问题和入门指示信息，请使用 [IBM Developer Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
     有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support/howtogetsupport.html#using-avatar)。
-
--   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
-
+-   通过开具用例，与 IBM 支持人员联系。要了解有关开具 IBM 支持用例或有关支持级别和用例严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
 {: tip}
-报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
 

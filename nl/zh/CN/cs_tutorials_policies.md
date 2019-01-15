@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -21,6 +24,7 @@ lastupdated: "2018-10-25"
 {: #policy_tutorial}
 
 缺省情况下，Kubernetes NodePort、LoadBalancer 和 Ingress 服务能使应用程序在所有公共和专用集群网络接口上都可用。`allow-node-port-dnat` 缺省 Calico 策略允许来自 NodePort、LoadBalancer 和 Ingress 服务的入局流量流至这些服务公开的应用程序 pod。Kubernetes 会使用目标网络地址转换 (DNAT) 将服务请求转发到正确的 pod。
+{: shortdesc}
 
 但是，出于安全原因，您可能需要仅允许来自特定源 IP 地址的流量流至联网服务。可以使用 [Calico DNAT 前策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) 将流量流入或流出的特定 IP 地址列入白名单或黑名单。DNAT 前策略会阻止指定流量到达应用程序，因为会在 Kubernetes 使用常规 DNAT 将流量转发到 pod 之前应用这些策略。创建 Calico DNAT 前策略时，可以选择是将源 IP 地址列入白名单还是黑名单。对于大多数场景，白名单可提供最安全的配置，因为除了来自已知的允许源 IP 地址的流量之外，将阻止其他所有流量。黑名单通常仅在阻止来自一小组 IP 地址的攻击等场景中有用。
 
@@ -40,10 +44,11 @@ lastupdated: "2018-10-25"
 
 ## 先决条件
 
-- [创建 V1.10 集群](cs_clusters.html#clusters_ui)或[将现有集群更新到 V1.10](cs_versions.html#cs_v110)。在本教程中，需要 Kubernetes V1.10 或更高版本的集群才能使用 3.1.1 Calico CLI 和 Calico V3 策略语法。
+- [创建 V1.10 或更高版本的集群](cs_clusters.html#clusters_ui)或者[将现有集群更新到 V1.10](cs_versions.html#cs_v110)。在本教程中，需要 Kubernetes V1.10 或更高版本的集群才能使用 3.3.1 Calico CLI 和 Calico V3 策略语法。
 - [设定 CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
 - [安装和配置 Calico CLI](cs_network_policy.html#1.10_install)。
-- [确保您具有**编辑者**、**操作员**或**管理员**平台角色](cs_users.html#add_users_cli)。
+- 确保您具有用于 {{site.data.keyword.containerlong_notm}} 的以下 {{site.data.keyword.Bluemix_notm}} IAM 访问策略：
+    - [任何平台角色](cs_users.html#platform)
 
 <br />
 
@@ -54,7 +59,10 @@ lastupdated: "2018-10-25"
 第一课说明如何从多个 IP 地址和端口公开应用程序，以及公共流量进入集群的位置。
 {: shortdesc}
 
-首先，部署要在整个教程中使用的样本 Web 服务器应用程序。`echoserver` Web 服务器显示有关从客户机与集群建立的连接的数据，并允许您测试对公关公司集群的访问。然后，通过创建 LoadBalancer 服务公开应用程序。LoadBalancer 服务通过 LoadBalancer 服务 IP 地址和工作程序节点的节点端口使应用程序可用。
+首先，部署要在整个教程中使用的样本 Web 服务器应用程序。`echoserver` Web 服务器显示有关从客户机与集群建立的连接的数据，并允许您测试对公关公司集群的访问。然后，通过创建 LoadBalancer 2.0 服务公开应用程序。LoadBalancer 2.0 服务通过 LoadBalancer 服务 IP 地址和工作程序节点的节点端口使应用程序可用。
+
+要改用使用 [Ingress 应用程序负载均衡器 (ALB)](cs_ingress.html)？请跳过步骤 3 和步骤 4 中的负载均衡器创建，而改为通过运行 `ibmcloud ks albs --cluster <cluster_name>` 来获取 ALB 的公共 IP，然后在本教程中使用这些 IP 来替代 `<loadbalancer_IP>`。
+{: tip}
 
 下图显示了在第 1 课结束时，Web 服务器应用程序如何通过公共节点端口和公共负载均衡器公开到因特网：
 
@@ -73,7 +81,7 @@ lastupdated: "2018-10-25"
     {: pre}
 
     输出示例：
-        ```
+    ```
     NAME                         READY     STATUS    RESTARTS   AGE       IP               NODE
     webserver-855556f688-6dbsn   1/1       Running   0          1m        172.30.xxx.xxx   10.176.48.78
     webserver-855556f688-76rkp   1/1       Running   0          1m        172.30.xxx.xxx   10.176.48.78
@@ -81,7 +89,7 @@ lastupdated: "2018-10-25"
     ```
     {: screen}
 
-3. 要将应用程序公开到公用因特网，请在文本编辑器中创建名为 `webserver-lb.yaml` 的 LoadBalancer 服务配置文件。
+3. 要将应用程序公开到公用因特网，请在文本编辑器中创建名为 `webserver-lb.yaml` 的 LoadBalancer 2.0 服务配置文件。
     ```
     apiVersion: v1
     kind: Service
@@ -89,16 +97,18 @@ lastupdated: "2018-10-25"
       labels:
         run: webserver
       name: webserver-lb
+      annotations:
+        service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
     spec:
-      externalTrafficPolicy: Cluster
+      type: LoadBalancer
+      selector:
+        run: webserver
       ports:
       - name: webserver-port
         port: 80
         protocol: TCP
         targetPort: 8080
-      selector:
-        run: webserver
-      type: LoadBalancer
+      externalTrafficPolicy: Local
     ```
     {: codeblock}
 
@@ -179,9 +189,9 @@ lastupdated: "2018-10-25"
         输出示例：
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11_1513*   
         ```
         {: screen}
 
@@ -226,7 +236,7 @@ lastupdated: "2018-10-25"
 
 要保护公关公司的集群，必须阻止对 LoadBalancer 服务以及公开应用程序的节点端口的公共访问。首先是阻止对节点端口的访问。下图显示了在第 2 课结束时，如何允许流量流至负载均衡器，但不允许流至节点端口：
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="450" alt="在第 2 课结束时，Web 服务器应用程序仅通过公共负载均衡器公开到因特网。" style="width:450px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="在第 2 课结束时，Web 服务器应用程序会仅通过公共负载均衡器公开给因特网。" style="width:425px; border-style: none"/>
 
 1. 在文本编辑器中，创建名为 `deny-nodeports.yaml` 的高位 DNAT 前策略，以拒绝来自任何源 IP 的入局 TCP 和 UDP 流量流至所有节点端口。
     ```
@@ -236,6 +246,7 @@ lastupdated: "2018-10-25"
       name: deny-nodeports
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
             destination:
@@ -249,7 +260,6 @@ lastupdated: "2018-10-25"
           - 30000:32767
         protocol: UDP
         source: {}
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 1100
       types:
@@ -272,8 +282,8 @@ lastupdated: "2018-10-25"
       calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
       ```
       {: pre}
-输出示例：
-    ```
+  输出示例：
+  ```
   Successfully applied 1 'GlobalNetworkPolicy' resource(s)
   ```
   {: screen}
@@ -290,20 +300,14 @@ lastupdated: "2018-10-25"
     ```
     {: screen}
 
-4. 将上一课中创建的负载均衡器的 externalTrafficPolicy 从 `Cluster` 更改为 `Local`。`Local` 可确保在下一步中对负载均衡器的外部 IP 执行 curl 时，保留系统的源 IP。
-    ```
-    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
-    ```
-    {: pre}
-
-5. 使用备忘单中的值，验证是否仍能够以公共方式访问负载均衡器外部 IP 地址。
+4. 使用备忘单中的值，验证是否仍能够以公共方式访问负载均衡器外部 IP 地址。
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
 
     输出示例：
-        ```
+    ```
     Hostname: webserver-855556f688-76rkp
     Pod Information:
         -no pod information available-
@@ -327,7 +331,7 @@ lastupdated: "2018-10-25"
     {: screen}
     在输出的 `Request Information` 部分中，请注意源 IP 地址的内容，例如 `client_address=1.1.1.1`。源 IP 地址是用于运行 curl 的系统的公共 IP。反之，如果通过代理或 VPN 连接到因特网，代理或 VPN 可能会隐藏系统的实际 IP 地址。在任一情况下，负载均衡器都会将系统的源 IP 地址视为客户机 IP 地址。
 
-6. 将系统的源 IP 地址（上一步输出中的 `client_address=1.1.1.1`）复制到备忘单中以在后面的课程中使用。
+5. 将系统的源 IP 地址（上一步输出中的 `client_address=1.1.1.1`）复制到备忘单中以在后面的课程中使用。
 
 太棒了！此时，应用程序仅从公共负载均衡器端口公开到公用因特网。将阻止流至公共节点端口的流量。您已经部分锁定集群以阻止不需要的流量。
 
@@ -340,9 +344,11 @@ lastupdated: "2018-10-25"
 {: shortdesc}
 
 首先，除了节点端口外，还必须阻止流至公开应用程序的负载均衡器的所有入局流量。然后，可以创建一个策略，用于将系统的 IP 地址列入白名单。在第 3 课结束时，将阻止流至公共节点端口和负载均衡器的所有流量，并且只允许来自列入白名单的系统 IP 的流量：
-<img src="images/cs_tutorial_policies_L3.png" width="600" alt="Web 服务器应用程序通过公共负载均衡器仅公开到系统 IP。" style="width:600px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L3.png" width="550" alt="Web 服务器应用程序通过公共负载均衡器仅公开到系统 IP。" style="width:500px; border-style: none"/>
 
 1. 在文本编辑器中，创建名为 `deny-lb-port-80.yaml` 的高位 DNAT 前策略，以拒绝来自任何源 IP 的所有入局 TCP 和 UDP 流量流至负载均衡器 IP 地址和端口。将 `<loadbalancer_IP>` 替换为备忘单中的负载均衡器公共 IP 地址。
+    
+
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -350,6 +356,7 @@ lastupdated: "2018-10-25"
       name: deny-lb-port-80
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
         destination:
@@ -367,9 +374,8 @@ lastupdated: "2018-10-25"
           - 80
         protocol: UDP
         source: {}
-      preDNAT: true
       selector: ibm.role=='worker_public'
-      order: 1100
+      order: 800
       types:
       - Ingress
         ```
@@ -405,6 +411,7 @@ lastupdated: "2018-10-25"
       name: whitelist
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Allow
         destination:
@@ -416,7 +423,6 @@ lastupdated: "2018-10-25"
         source:
           nets:
           - <client_address>/32
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 500
       types:
@@ -462,21 +468,21 @@ lastupdated: "2018-10-25"
 在上一课中，您阻止了所有流量，并且只将若干 IP 列入了白名单。针对您希望将访问仅限于若干个受控源 IP 地址的测试目的，该场景非常适用。但是，公关公司拥有需要可供公众广泛使用的应用程序。因此，除了发现的来自若干 IP 地址的异常流量外，您需要确保允许其他所有流量。黑名单在像这样的场景中非常有用，因为它可以帮助您阻止来自一小组 IP 地址的攻击。
 
 在本课程中，您将通过阻止来自自己系统的源 IP 地址的流量来测试黑名单功能。在第 4 课结束时，将阻止流至公共节点端口的所有流量，但允许流至公共负载均衡器的所有流量。只阻止来自列入黑名单的系统 IP 的流量流至负载均衡器：
-<img src="images/cs_tutorial_policies_L4.png" width="600" alt="Web 服务器应用程序通过公共负载均衡器公开到因特网。只阻止来自系统 IP 的流量。" style="width:600px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web 服务器应用程序通过公共负载均衡器公开到因特网。只阻止来自系统 IP 的流量。" style="width:550px; border-style: none"/>
 
 1. 清除上一课中创建的白名单策略。
     
-    - Linux：
-```
-    calicoctl delete GlobalNetworkPolicy deny-lb-port-80
-    ```
+    - Linux:
+      ```
+      calicoctl delete GlobalNetworkPolicy deny-lb-port-80
+      ```
       {: pre}
       ```
     calicoctl delete GlobalNetworkPolicy whitelist
     ```
       {: pre}
 
-    - Windows 和 OS X：
+    - Windows and OS X:
       ```
       calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
       ```
@@ -488,7 +494,7 @@ lastupdated: "2018-10-25"
 
     现在，再次允许来自任何源 IP 的所有入局 TCP 和 UDP 流量流至负载均衡器 IP 地址和端口。
 
-2. 要拒绝来自系统的源 IP 地址的所有入局 TCP 和 UDP 流量流至负载均衡器 IP 地址和端口，请在文本编辑器中创建名为 `deny-lb-port-80.yaml` 的低位 DNAT 前策略。使用备忘单中的值，将 `<loadbalancer_IP>` 替换为负载均衡器的公共 IP 地址，将 `<client_address>` 替换为系统源 IP 的公共 IP 地址。
+2. 要拒绝来自系统的源 IP 地址的所有入局 TCP 和 UDP 流量流至负载均衡器 IP 地址和端口，请在文本编辑器中创建名为 `blacklist.yaml` 的低位 DNAT 前策略。使用备忘单中的值，将 `<loadbalancer_IP>` 替换为负载均衡器的公共 IP 地址，将 `<client_address>` 替换为系统源 IP 的公共 IP 地址。
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -496,6 +502,7 @@ lastupdated: "2018-10-25"
       name: blacklist
     spec:
       applyOnForward: true
+      doNotTrack: true
       ingress:
       - action: Deny
         destination:
@@ -517,7 +524,6 @@ lastupdated: "2018-10-25"
         source:
           nets:
           - <client_address>/32
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 500
       types:
@@ -558,7 +564,7 @@ lastupdated: "2018-10-25"
     ```
       {: pre}
 
-    - Windows 和 OS X：
+    - Windows and OS X:
       ```
       calicoctl delete GlobalNetworkPolicy blacklist --config=filepath/calicoctl.cfg
       ```

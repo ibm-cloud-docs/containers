@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,30 +13,32 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 调整性能
 {: #kernel}
 
-如果您具有特定的性能优化需求，那么可以在 {{site.data.keyword.containerlong}} 中更改工作程序节点和 pod 网络名称空间上 Linux 内核 `sysctl` 参数的缺省设置。
+如果您具有特定的性能优化需求，那么可以在 {{site.data.keyword.containerlong}} 中更改某些集群组件的缺省设置。
 {: shortdesc}
 
-系统会自动向工作程序节点供应优化的内核性能，但您可以通过将定制 Kubernetes `守护程序集`对象应用于集群来更改缺省设置。守护程序集将更改所有现有工作程序节点的设置，并将设置应用于集群中供应的任何新工作程序节点。这不会影响任何 pod。
-
-要优化应用程序 pod 的内核设置，可以在每个部署的 `pod/ds/rs/deployment` YAML 中插入 initContainer。initContainer 将添加到 pod 网络名称空间中要优化其性能的每个应用程序部署。
-
-例如，以下各部分中的样本通过 `net.core.somaxconn` 设置来更改环境中允许的缺省最大连接数，并通过 `net.ipv4.ip_local_port_range` 设置来更改临时端口范围。
-
-**警告**：如果选择更改缺省内核参数设置，由此带来的风险由您自行承担。对任何已更改的设置运行测试是您的责任，并且对环境中因更改的设置而导致的任何潜在中断也由您负责。
+如果选择更改缺省设置，由此带来的风险由您自行承担。对任何已更改的设置运行测试是您的责任，并且对环境中因更改的设置而导致的任何潜在中断也由您负责。
+{: important}
 
 ## 优化工作程序节点性能
 {: #worker}
 
-应用[守护程序集 ![外部链接图标](../icons/launch-glyph.svg " 外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 以更改工作程序节点主机上的内核参数。
+如果您具有特定的性能优化需求，那么可以更改工作程序节点上 Linux 内核 `sysctl` 参数的缺省设置。
+{: shortdesc}
 
-**注**：您必须具有[管理员访问角色](cs_users.html#access_policies)才能运行样本特权 initContainer。在初始化这些部署的容器之后，将删除这些特权。
+系统会自动向工作程序节点供应优化的内核性能，但您可以通过将定制 [Kubernetes `守护程序集` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 对象应用于集群来更改缺省设置。守护程序集将更改所有现有工作程序节点的设置，并将设置应用于集群中供应的任何新工作程序节点。这不会影响任何 pod。
 
-1. 将以下守护程序集保存在名为 `worker-node-kernel-settings.yaml` 的文件中。在 `spec.template.spec.initContainers` 部分中，添加要调整的 `sysctl` 参数的字段和值。此示例守护程序集将更改 `net.core.somaxconn` 和 `net.ipv4.ip_local_port_range` 参数的值。
+您必须具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](cs_users.html#platform)，才能运行样本特权 initContainer。在初始化这些部署的容器之后，将删除这些特权。
+{: note}
+
+1. 将以下守护程序集保存在名为 `worker-node-kernel-settings.yaml` 的文件中。在 `spec.template.spec.initContainers` 部分中，添加要调整的 `sysctl` 参数的字段和值。此示例守护程序集通过 `net.core.somaxconn` 设置来更改环境中允许的缺省最大连接数，并通过 `net.ipv4.ip_local_port_range` 设置来更改临时端口范围。
     ```
     apiVersion: extensions/v1beta1
     kind: DaemonSet
@@ -115,12 +117,14 @@ lastupdated: "2018-10-25"
 ## 优化 pod 性能
 {: #pod}
 
-如果您有特定工作负载需求，那么可以应用 [initContainer ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 补丁来更改应用程序 pod 的内核参数。
+如果您具有特定的性能工作负载需求，那么可以更改 pod 网络名称空间上 Linux 内核 `sysctl` 参数的缺省设置。
 {: shortdesc}
 
-**注**：您必须具有[管理员访问角色](cs_users.html#access_policies)才能运行样本特权 initContainer。在初始化这些部署的容器之后，将删除这些特权。
+要优化应用程序 pod 的内核设置，可以在每个部署的 `pod/ds/rs/deployment` YAML 中插入 [initContainer ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)。initContainer 将添加到 pod 网络名称空间中要优化其性能的每个应用程序部署。
 
-1. 将以下 initContainer 补丁保存在名为 `pod-patch.yaml` 的文件中，并为要调整的 `sysctl` 参数添加字段和值。此示例 initContainer 将更改 `net.core.somaxconn` 和 `net.ipv4.ip_local_port_range` 参数的值。
+开始之前，您必须具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](cs_users.html#platform)，才能运行样本特权 initContainer。在初始化这些部署的容器之后，将删除这些特权。
+
+1. 将以下 initContainer 补丁保存在名为 `pod-patch.yaml` 的文件中，并为要调整的 `sysctl` 参数添加字段和值。此示例 initContainer 通过 `net.core.somaxconn` 设置来更改环境中允许的缺省最大连接数，并通过 `net.ipv4.ip_local_port_range` 设置来更改临时端口范围。
     ```
     spec:
       template:
@@ -146,3 +150,74 @@ lastupdated: "2018-10-25"
     {: pre}
 
 3. 如果在内核设置中更改了 `net.core.somaxconn` 值，那么大多数应用程序可以自动使用更新后的值。但是，某些应用程序可能会要求您手动更改应用程序代码中的对应值以与内核值相匹配。例如，如果要调整在运行 NGINX 应用程序的 pod 的性能，那么必须更改 NGINX 应用程序代码中 `backlog` 字段的值以进行匹配。有关更多信息，请参阅此 [NGINX 博客帖子 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.nginx.com/blog/tuning-nginx/)。
+
+<br />
+
+
+## 调整集群度量值提供程序资源
+{: #metrics}
+
+集群的度量值提供程序（在 Kubernetes 1.12 和更高版本中为 `metrics-server`，在更低版本中为 `heapster`）配置针对每个工作程序节点不超过 30 个 pod 的集群进行了优化。如果集群的每个工作程序节点具有更多 pod，那么用于 pod 的度量值提供程序 `metrics-server` 或 `heapter` 主容器可能会频繁重新启动，并返回错误消息，例如 `OOMKilled`。
+
+度量值提供程序 pod 还有一个 `nanny` 容器，用于对 `metrics-server` 或 `heapster` 主容器的资源请求和限制进行调整，以响应集群中工作程序节点的数量。您可以通过编辑度量值提供程序的配置映射来更改缺省资源。
+
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+
+1.  打开集群度量值提供程序配置映射 YAML。
+    *  对于 `metrics-server`：
+       ```
+       kubectl get configmap metrics-server-config -n kube-system -o yaml
+       ```
+       {: pre}
+    *  对于 `heapster`：
+       ```
+       kubectl get configmap heapster-config -n kube-system -o yaml
+       ```
+       {: pre}
+    输出示例：
+    ```
+    apiVersion: v1
+    data:
+      NannyConfiguration: |-
+        apiVersion: nannyconfig/v1alpha1
+        kind: NannyConfiguration
+    kind: ConfigMap
+    metadata:
+      annotations:
+        armada-service: cruiser-kube-addons
+        version: --
+      creationTimestamp: 2018-10-09T20:15:32Z
+      labels:
+        addonmanager.kubernetes.io/mode: EnsureExists
+        kubernetes.io/cluster-service: "true"
+      name: heapster-config
+      namespace: kube-system
+      resourceVersion: "526"
+      selfLink: /api/v1/namespaces/kube-system/configmaps/heapster-config
+      uid: 11a1aaaa-bb22-33c3-4444-5e55e555e555
+    ```
+    {: screen}
+
+2.  将 `memoryPerNode` 字段添加到 `data.NannyConfiguration` 部分中的配置映射。`metrics-server` 和 `heapster` 的缺省值设置为 `4Mi`。
+    ```
+    apiVersion: v1
+    data:
+      NannyConfiguration: |-
+        apiVersion: nannyconfig/v1alpha1
+        kind: NannyConfiguration
+        memoryPerNode: 5Mi
+    kind: ConfigMap
+    ...
+    ```
+    {: codeblock}
+
+3.  应用更改。
+    ```
+    kubectl apply -f heapster-config.yaml
+    ```
+    {: pre}
+
+4.  监视度量值提供程序 pod 以了解容器是否由于 `OOMKilled` 错误消息而持续重新启动。如果是，请重复上述步骤来增大 `memoryPerNode` 大小，直至 pod 稳定。
+
+要调整更多设置吗？请查看 [Kubernetes Add-on resizer configuration 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration) 以了解更多构想。
+{: tip}

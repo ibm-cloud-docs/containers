@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -26,15 +29,15 @@ lastupdated: "2018-10-25"
 
 **常规**
 
-- [用于集群的定价计算器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
+- [用于集群的成本估算工具 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)
 
 <br />
 
 
 **REST API**
 
-- [用于集群的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.bluemix.net/swagger)
-- [用于集群的 REST API JSON ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.bluemix.net/swagger-api-json)
+- [用于集群的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.bluemix.net/swagger-api/)
+- [用于集群的 REST API JSON ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.bluemix.net/swagger-api/swagger.json)
 - [用于在集群中进行日志记录的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [用于管理集群中 Ingress 应用程序负载均衡器的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 
@@ -74,7 +77,7 @@ lastupdated: "2018-10-25"
 
 **词汇表**
 
-- [{{site.data.keyword.Bluemix_notm}} 词汇表](/docs/overview/glossary/index.html#glossary)
+- [{{site.data.keyword.Bluemix_notm}} 词汇表](/docs/overview/glossary/glossary.html#glossary)
 - [Kubernetes 词汇表 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Docker 词汇表 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/glossary/)
 
@@ -85,7 +88,8 @@ lastupdated: "2018-10-25"
 {: #registry}
 
 - [{{site.data.keyword.registryshort_notm}} 文档](/docs/services/Registry/index.html)
-- [REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://registry.ng.bluemix.net/api/doc/)
+- [{{site.data.keyword.registryshort_notm}}REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/apidocs/container-registry)
+- [漏洞顾问程序 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/apidocs/container-registry/va)
 
 <br />
 
@@ -93,7 +97,7 @@ lastupdated: "2018-10-25"
 ## 关注我们
 {: #follow}
 
-- [Twitter ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://twitter.com/hashtag/ibmcontainers)
+- [Twitter ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://twitter.com/hashtag/IKS)
 - [开发者社区文章 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/tag/containers/)
 - [Microservices.TV ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/tv/microservices/)
 

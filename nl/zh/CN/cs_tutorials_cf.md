@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -41,7 +44,8 @@ lastupdated: "2018-10-25"
 - [在 {{site.data.keyword.registrylong_notm}} 中创建专用映像注册表](../services/Registry/index.html)。
 - [创建集群](cs_clusters.html#clusters_ui)。
 - [设定 CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
-- [确保您具有**编辑者**、**操作员**或**管理员**平台角色](cs_users.html#add_users_cli)。
+- 确保您具有用于 {{site.data.keyword.containerlong_notm}} 的以下 {{site.data.keyword.Bluemix_notm}} IAM 访问策略：
+    - [任何平台角色](cs_users.html#platform)
 - [了解有关 Docker 和 Kubernetes 术语的信息](cs_tech.html)。
 
 
@@ -73,7 +77,7 @@ lastupdated: "2018-10-25"
 
     部署应用程序后，将显示“使用命令行界面下载、修改和重新部署应用程序”的指示信息。
 
-    c. 在 GUI 指示信息的步骤 1 中，单击**下载入门模板代码**。
+    c. 在控制台指示信息的步骤 1 中，单击**下载入门模板代码**。
 
     d. 解压缩 .zip 文件，并将其内容保存到 `cf-py` 目录。
 
@@ -259,7 +263,7 @@ lastupdated: "2018-10-25"
 
     ```
 ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.8
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.10.11
     ```
     {: screen}
 
@@ -269,7 +273,7 @@ ID                                                 Public IP        Private IP  
 
 5.  [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
 
-    如果在 [{{site.data.keyword.Bluemix_notm}}GUI](https://console.bluemix.net/) 中选择了集群，那么可以使用 **Kubernetes 仪表板**按钮来通过一次单击启动仪表板。
+    如果在 [{{site.data.keyword.Bluemix_notm}} 控制台](https://console.bluemix.net/)中选择了集群，那么可以使用 **Kubernetes 仪表板**按钮来通过一次单击启动仪表板。
     {: tip}
 
 6. 在**工作负载**选项卡中，可以查看已创建的资源。

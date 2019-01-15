@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -44,7 +47,8 @@ lastupdated: "2018-10-25"
 
 4. 该请求会转发到部署了应用程序的 pod 的专用 IP 地址。如果集群中部署了多个应用程序实例，那么 NodePort 服务会在应用程序 pod 之间路由请求。
 
-**注**：工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。在测试应用程序的公共访问权时，或者仅在短时间内需要公共访问权时，可以使用 NodePort 服务。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](cs_loadbalancer.html)或 [Ingress](cs_ingress.html) 来公开应用程序。
+工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。在测试应用程序的公共访问权时，或者仅在短时间内需要公共访问权时，可以使用 NodePort 服务。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](cs_loadbalancer.html)或 [Ingress](cs_ingress.html) 来公开应用程序。
+{: note}
 
 <br />
 
@@ -57,7 +61,10 @@ lastupdated: "2018-10-25"
 
 如果还没有应用程序准备就绪，可以使用名为 [Guestbook ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml) 的 Kubernetes 示例应用程序。
 
-1.  在应用程序的配置文件中，定义 [service ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/) 部分。**注**：对于 Guestbook 示例，配置文件中已经存在前端服务部分。要使 Guestbook 应用程序在外部可用，请向前端服务部分添加 NodePort 类型以及范围为 30000-32767 的 NodePort。
+1.  在应用程序的配置文件中，定义 [service ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/) 部分。
+
+    对于 Guestbook 示例，配置文件中已存在前端服务部分。要使 Guestbook 应用程序在外部可用，请向前端服务部分添加 NodePort 类型以及范围为 30000-32767 的 NodePort。
+    {: tip}
 
     示例：
 
@@ -115,7 +122,7 @@ apiVersion: v1
 
 **接下来要做什么？**
 
-应用程序部署后，可以使用任何工作程序节点的公共 IP 地址和 NodePort 来构成公共 URL，以用于在浏览器中访问该应用程序。如果工作程序节点仅连接到专用 VLAN，那么会创建专用 NodePort 服务，并且可以通过 q 工作程序节点的专用 IP 地址对其进行访问。
+应用程序部署后，可以使用任何工作程序节点的公共 IP 地址和 NodePort 来构成公共 URL，以用于在浏览器中访问该应用程序。如果工作程序节点仅连接到专用 VLAN，那么会创建专用 NodePort 服务，并且可以通过工作程序节点的专用 IP 地址对其进行访问。
 
 1.  获取集群中工作程序节点的公共 IP 地址。如果要访问专用网络上的工作程序节点，请改为获取专用 IP 地址。
 
@@ -157,7 +164,9 @@ apiVersion: v1
     ```
     {: screen}
 
-    在此示例中，NodePort为 `30872`。</br>
-    **注：**如果 **Endpoints** 部分显示 `<none>`，请在 NodePort 服务的 `spec.selector` 部分中检查使用的 `<selectorkey>` 和 `<selectorvalue>`。确保它与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的_键/值_对相同。
+    在此示例中，NodePort为 `30872`。
+
+    如果 **Endpoints** 部分显示 `<none>`，请在 NodePort 服务的 `spec.selector` 部分中检查使用的 `<selectorkey>` 和 `<selectorvalue>`。确保它与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的_键/值_对相同。
+    {: note}
 
 3.  使用其中一个工作程序节点 IP 地址和 NodePort 来构成 URL。示例：`http://192.0.2.23:30872`

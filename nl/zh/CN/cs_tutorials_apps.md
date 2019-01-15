@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -57,6 +60,7 @@ lastupdated: "2018-10-25"
 ## 先决条件
 
 * [教程：创建 Kubernetes 集群](cs_tutorials.html#cs_cluster_tutorial)。
+* 安装 [container-registry 插件](/docs/services/Registry/index.html#registry_cli_install)。
 
 
 ## 第 1 课：将单实例应用程序部署到 Kubernetes 集群
@@ -92,7 +96,7 @@ lastupdated: "2018-10-25"
 
 3. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 
-5.  登录到 {{site.data.keyword.registryshort_notm}} CLI。**注**：请确保已[安装](/docs/services/Registry/index.html#registry_cli_install) container-registry 插件。
+5.  登录到 {{site.data.keyword.registryshort_notm}} CLI。
 
     ```
     ibmcloud cr login
@@ -234,7 +238,7 @@ Name:                   hello-world-service
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
         ```
         {: screen}
 
@@ -251,7 +255,7 @@ Name:                   hello-world-service
 
 11. [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
 
-    如果在 [{{site.data.keyword.Bluemix_notm}}GUI](https://console.bluemix.net/) 中选择了集群，那么可以使用 **Kubernetes 仪表板**按钮来通过一次单击启动仪表板。
+    如果在 [{{site.data.keyword.Bluemix_notm}} 控制台](https://console.bluemix.net/)中选择了集群，那么可以使用 **Kubernetes 仪表板**按钮来通过一次单击启动仪表板。
     {: tip}
 
 12. 在**工作负载**选项卡中，可以查看已创建的资源。
@@ -380,7 +384,7 @@ livenessProbe:
   ```
   {: screen}
 
-7.  检查 pod 的阶段状态，以监视 Kubernetes 中应用程序的运行状况。您可以通过 CLI 或 Kubernetes 仪表板 GUI 来检查阶段状态。
+7.  检查 pod 的阶段状态，以监视 Kubernetes 中应用程序的运行状况。您可以通过 CLI 或 Kubernetes 仪表板来检查阶段状态。
 
     *  **通过 CLI**：监视 pod 的阶段状态更改时发生的情况。
        ```
@@ -388,7 +392,7 @@ livenessProbe:
        ```
        {: pre}
 
-    *  **通过 GUI**：
+    *  **通过 Kubernetes 仪表板**：
 
        1.  [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。
        2.  在**工作负载**选项卡中，可以查看已创建的资源。在此选项卡中，可以持续刷新并查看运行状况检查是否在运行。在 **Pod** 部分中，可以查看在重新创建 pod 中的容器时，pod 重新启动的次数。如果在仪表板中偶然遇到以下错误，此消息指示运行状况检查遇到问题。请等待几分钟，然后重新刷新。您会看到每个 pod 的重新启动次数发生变化。
@@ -532,9 +536,7 @@ image: "registry.<region>.bluemix.net/namespace/watson-talk"
         ```
         {: codeblock}
 
-    2.  在 watson 部署的 volumes 部分中，更新在先前教程中创建的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 私钥的名称。通过将 Kubernetes 私钥作为卷安装到您的部署，可使 {{site.data.keyword.Bluemix_notm}} 服务凭证可用于在 pod 中运行的容器。
-本教程中的 {{site.data.keyword.watson}} 应用程序组件配置为使用卷安装路径来查找服务凭证。
-
+    2.  在 watson 部署的 volumes 部分中，更新在先前教程中创建的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 私钥的名称。通过将 Kubernetes 私钥作为卷安装到您的部署，可使 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 密钥可用于在 pod 中运行的容器。本教程中的 {{site.data.keyword.watson}} 应用程序组件配置为使用卷安装路径来查找 API 密钥。
 
         ```
 volumes:

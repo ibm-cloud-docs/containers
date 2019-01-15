@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -40,19 +43,20 @@ lastupdated: "2018-10-25"
 ## 计划在集群中运行应用程序
 {: #plan_apps}
 
-确保应用程序已准备好部署到 {{site.data.keyword.containerlong_notm}}。
+在将应用程序部署到 {{site.data.keyword.containerlong_notm}} 集群之前，请决定要如何设置应用程序，以便可以正确访问应用程序并将其与 {{site.data.keyword.Bluemix_notm}} 中的其他服务集成。
 {:shortdesc}
 
 ### 我可以为自己的应用程序创建什么类型的 Kubernetes 对象？
 {: #object}
 
 准备应用程序 YAML 文件时，您有许多选项可用于提高应用程序的可用性、性能和安全性。例如，您可以不使用单个 pod，而改为使用 Kubernetes 控制器对象来管理工作负载（例如，副本集、作业或守护程序集）。有关 pod 和控制器的更多信息，请查看 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)。用于管理 pod 副本集的部署是应用程序的常见用例。
+{: shortdesc}
 
 例如，要部署应用程序 pod，`kind: Deployment` 对象是一个不错的选择，因为使用该对象，可以指定副本集，从而提高 pod 的可用性。
 
 下表描述了您可能会创建不同类型 Kubernetes 工作负载对象的原因。
 
-|Object|描述| 
+|Object|描述|
 | --- | --- |
 |[`pod` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/pod/)|pod 是工作负载的最小可部署单元，可以容纳单个或多个容器。pod 与容器类似，也设计为可一次性使用，通常用于应用程序功能的单元测试。为了避免应用程序发生停机时间，请考虑使用 Kubernetes 控制器（例如，部署）来部署 pod。部署可帮助您管理多个 pod、副本、pod 扩展、应用等。|
 |[`副本集` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)|副本集可确保 pod 的多个副本同时运行，并且如果某个 pod 关闭，会重新安排一个 pod。您可以创建副本集来测试 pod 安排的工作方式，但要管理应用程序更新、应用和扩展，请改为创建部署。|
@@ -80,6 +84,7 @@ lastupdated: "2018-10-25"
 {: #variables}
 
 要将变量信息添加到部署，而不是将数据硬编码到 YAML 文件中，可以使用 Kubernetes [`配置映射` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) 或[`私钥` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/secret/) 对象。
+{: shortdesc}
 
 要使用配置映射或私钥，您需要将其安装到 pod。就在运行 pod 之前，配置映射或私钥会与 pod 组合在一起。您可以跨许多应用程序复用部署规范和映像，但要交换出定制的配置映射和私钥。尤其是私钥可能会在本地节点上占用大量存储空间，因此请相应地进行规划。
 
@@ -104,6 +109,7 @@ lastupdated: "2018-10-25"
 
 ### 该如何确保应用程序具有正确的资源？
 [指定应用程序 YAML 文件](#app_yaml)时，可以将 Kubernetes 功能添加到应用程序配置，以帮助应用程序获得正确的资源。尤其是，对于 YAML 文件中定义的每个容器，[设置资源限制和请求 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)。
+{: shortdesc}
 
 此外，集群管理员可能会设置可影响应用程序部署的资源控制，例如以下各项。
 *  [资源配额 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
@@ -111,6 +117,7 @@ lastupdated: "2018-10-25"
 
 ### 如何访问我的应用程序？
 您可以[使用 `clusterIP` 服务](cs_network_cluster.html#planning)在集群中以专用方式访问您的应用程序。
+{: shortdesc}
 
 如果要以公共方式公开应用程序，您有不同的选项可用，具体取决于集群类型。
 *  **免费集群**：可以使用 [NodePort 服务](cs_nodeport.html#nodeport)来公开应用程序。
@@ -120,16 +127,19 @@ lastupdated: "2018-10-25"
 
 ### 部署应用程序后，如何监视其运行状况？
 您可以为集群设置 {{site.data.keyword.Bluemix_notm}} [日志记录和监视](cs_health.html#health)。此外，还可以选择与第三方[日志记录或监视服务](cs_integrations.html#health_services)集成。
+{: shortdesc}
 
 ### 如何使应用程序保持最新？
 如果要动态添加和除去应用程序以响应工作负载的使用情况，请参阅[扩展应用程序](cs_app.html#app_scaling)。
+{: shortdesc}
 
 如果要管理应用程序的更新，请参阅[管理滚动部署](cs_app.html#app_rolling)。
 
 ### 如何控制谁有权访问我的应用程序部署？
 帐户和集群管理员可以控制在许多不同级别的访问权：集群、Kubernetes 名称空间、pod 和容器。
+{: shortdesc}
 
-通过 IAM，可以在集群实例级别为各个用户、组或服务帐户分配许可权。您可以通过将用户限制为只能访问集群内的特定名称空间，从而进一步缩小集群访问范围。有关更多信息，请参阅[分配集群访问权](cs_users.html#users)。
+通过 {{site.data.keyword.Bluemix_notm}} IAM，可以在集群实例级别为各个用户、组或服务帐户分配许可权。您可以通过将用户限制为只能访问集群内的特定名称空间，从而进一步缩小集群访问范围。有关更多信息，请参阅[分配集群访问权](cs_users.html#users)。
 
 要在 pod 级别控制访问权，可以[使用 Kubernetes RBAC 配置 pod 安全策略](cs_psp.html#psp)。
 
@@ -157,6 +167,9 @@ lastupdated: "2018-10-25"
 
 ### 提高应用程序的可用性
 {: #increase_availability}
+
+请考虑以下选项以提高应用程序的可用性。
+{: shortdesc}
 
 <dl>
   <dt>使用部署和副本集来部署应用程序及其依赖项</dt>
@@ -208,7 +221,7 @@ lastupdated: "2018-10-25"
 
 <dl>
 <dt>基本部署元数据</dt>
-  <dd><p>将相应的 API 版本用于部署的 [Kubernetes 对象类型](#object)。API 版本将确定可供您使用的 Kubernetes 对象的受支持功能。在元数据中提供的名称是对象的名称，而不是对象的标签。与对象交互时可使用该名称，例如 `kubectl get deployment <name>`。</p>
+  <dd><p>将相应的 API 版本用于部署的 [Kubernetes 对象类型](#object)。API 版本将确定可供您使用的 Kubernetes 对象的受支持功能。在元数据中提供的名称是对象的名称，而不是对象的标签。与对象交互时可使用该名称，例如 `kubectl get deployment <name>`.</p>
   <p><pre class="codeblock"><code>apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -277,7 +290,7 @@ app: wasliberty
   <dd><p>作为集群管理员，您可以通过为集群中的每个 Kubernetes 名称空间创建一个 [ResourceQuota 对象 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)，确保共享该集群的团队使用的计算资源（内存和 CPU）不会超过其公平份额。如果集群管理员设置了计算资源配额，那么部署模板中的每个容器都必须指定内存和 CPU 的资源请求和限制，否则创建 pod 会失败。</p>
   <p><ol><li>检查是否为名称空间设置了资源配额。<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>查看配额限制。<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
-  <p>即使未设置任何资源配额，您也可以在部署中包含资源请求和限制，以改进对工作程序节点资源的管理。**注**：如果容器超过其限制，容器可能会重新启动或失败。如果容器超过请求，那么当工作程序节点即将耗尽超过的该资源时，可能会逐出该容器的 pod。有关故障诊断信息，请参阅 [pod 重新启动一再失败或 pod 被意外除去](cs_troubleshoot_clusters.html#pods_fail)。</p>
+  <p>即使未设置任何资源配额，您也可以在部署中包含资源请求和限制，以改进对工作程序节点资源的管理。</p><p class="note">如果容器超过其限制，容器可能会重新启动或发生故障。如果容器超过请求，那么当工作程序节点即将耗尽超过的该资源时，可能会逐出该容器的 pod。有关故障诊断信息，请参阅 [pod 重新启动一再失败或 pod 被意外除去](cs_troubleshoot_clusters.html#pods_fail)。</p>
   <p>**请求**：调度程序保留供容器使用的最小资源量。如果资源量等于限制，那么将保证请求。如果资源量小于限制，那么仍会保证请求，但调度程序可以使用请求和限制之间的差异来利用其他容器的资源。</p>
   <p>**限制**：容器可以使用的最大资源量。如果跨容器使用的资源总量超过工作程序节点上的可用资源量，那么会逐出容器以释放空间。为了避免逐出，请将资源请求设置为等于容器限制。如果未指定任何限制，那么缺省值为工作程序节点的容量。</p>
   <p>有关更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)。</p>
@@ -456,6 +469,7 @@ spec:
 {: #yaml-example}
 
 下面是[先前逐个部分讨论](#app_yaml)的部署 YAML 的副本。您还可以[从 GitHub 下载 YAML](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml)。
+{: shortdesc}
 
 ```yaml
 apiVersion: apps/v1beta1
@@ -593,19 +607,23 @@ spec:
 {: #cli_dashboard}
 
 在本地系统上打开 Kubernetes 仪表板，以查看有关集群及其工作程序节点的信息。
-[在 GUI 中](#db_gui)，可以使用方便的一次单击按钮来访问该仪表板。[通过 CLI](#db_cli)，可以访问该仪表板或使用自动化过程中的步骤，例如针对 CI/CD 管道的步骤。
+[在 {{site.data.keyword.Bluemix_notm}} 控制台中](#db_gui)，可以使用方便的一次单击按钮来访问该仪表板。[通过 CLI](#db_cli)，可以访问该仪表板或使用自动化过程中的步骤，例如针对 CI/CD 管道的步骤。
 {:shortdesc}
 
+您的集群中是否有太多资源和用户，导致 Kubernetes 仪表板的速度有些慢？对于运行 Kubernetes 1.12 或更高版本的集群，集群管理员可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来扩展 `kubernetes-dashboard` 部署。
+{: tip}
+
 开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 
 您可以使用缺省端口或设置自己的端口来启动集群的 Kubernetes 仪表板。
 
-**通过 GUI 启动 Kubernetes 仪表板**
+**通过 {{site.data.keyword.Bluemix_notm}} 控制台启动 Kubernetes 仪表板**
 {: #db_gui}
 
-1.  登录到 [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/)。
-2.  从菜单栏的概要文件中，选择要使用的帐户。
-3.  在菜单中，单击**容器**。
+1.  登录到 [{{site.data.keyword.Bluemix_notm}} 控制台](https://console.bluemix.net/)。
+2.  在菜单栏中，单击用户头像 ![“头像”图标](../icons/i-avatar-icon.svg "“头像”图标")，然后选择要使用的帐户。
+3.  在菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中，单击 **Kubernetes**。
 4.  在**集群**页面上，单击要访问的集群。
 5.  在集群详细信息页面中，单击 **Kubernetes 仪表板**按钮。
 
@@ -658,11 +676,15 @@ spec:
 <br />
 
 
-## 使用 GUI 部署应用程序
+## 使用 Kubernetes 仪表板部署应用程序
 {: #app_ui}
 
 使用 Kubernetes 仪表板将应用程序部署到集群时，部署资源会在集群中自动创建、更新和管理 pod。
+有关使用仪表板的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)。
 {:shortdesc}
+
+您的集群中是否有太多资源和用户，导致 Kubernetes 仪表板的速度有些慢？对于运行 Kubernetes 1.12 或更高版本的集群，集群管理员可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来扩展 `kubernetes-dashboard` 部署。
+{: tip}
 
 开始之前：
 
@@ -831,7 +853,8 @@ apiVersion: extensions/v1beta1
 要在 GPU 机器上执行工作负载，请执行以下操作：
 1.  创建 YAML 文件。在此示例中，`Job` YAML 管理类似批处理的工作负载的方式是，生成一个运行时间很短的 pod，该 pod 一直运行到将其安排为完成的命令成功终止。
 
-    **重要信息**：对于 GPU 工作负载，必须始终在 YAML 规范中提供 `resources: limits: nvidia.com/gpu` 字段。
+    对于 GPU 工作负载，必须始终在 YAML 规范中提供 `resources: limits: nvidia.com/gpu` 字段。
+    {: note}
 
     ```yaml
     apiVersion: batch/v1
@@ -918,7 +941,7 @@ kubectl get pod -a -l 'name in (nvidia-sim)'
     {: pre}
 
     输出示例：
-        ```
+    ```
     NAME                  READY     STATUS      RESTARTS   AGE
     nvidia-smi-ppkd4      0/1       Completed   0          36s
     ```
@@ -934,7 +957,7 @@ kubectl describe pod nvidia-smi-ppkd4
     {: pre}
 
     输出示例：
-        ```
+    ```
     Name:           nvidia-smi-ppkd4
     Namespace:      default
     ...
@@ -959,7 +982,7 @@ kubectl logs nvidia-sim-ppkd4
     {: pre}
 
     输出示例：
-        ```
+    ```
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 390.12                 Driver Version: 390.12                    |
     |-------------------------------+----------------------+----------------------+
@@ -1033,7 +1056,7 @@ kubectl logs nvidia-sim-ppkd4
     对于更复杂的部署，您可能需要创建[配置文件](#app_cli)。
     {: tip}
 
-2.  创建自动扩展程序并定义策略。有关使用 `kubectl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
+2.  创建自动扩展程序并定义策略。有关使用 `kubectl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>

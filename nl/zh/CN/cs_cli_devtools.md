@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -168,8 +171,8 @@ lastupdated: "2018-10-25"
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks credentials-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credentials-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
     <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
     <td>[ibmcloud ks vlans](#cs_vlans)</td>
   </tr>
@@ -383,7 +386,7 @@ Region:                us-south
 
 如果发现需要更新为区域存储的 API 密钥，那么可以通过运行 [ibmcloud ks api-key-reset](#cs_api_key_reset) 命令来执行此操作。此命令需要 {{site.data.keyword.containerlong_notm}} 管理员访问策略，并在帐户中存储执行此命令的用户的 API 密钥。
 
-**提示：**如果使用 [ibmcloud ks credentials-set](#cs_credentials_set) 命令手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，那么可能不会使用在此命令中返回的 API 密钥。
+**提示：**如果使用 [ibmcloud ks credential-set](#cs_credentials_set) 命令手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，那么可能不会使用在此命令中返回的 API 密钥。
 
 <strong>命令选项</strong>：
 
@@ -689,7 +692,8 @@ trusted: <em>true</em>
     <tbody>
     <tr>
     <td><code><em>name</em></code></td>
-    <td>将 <code><em>&lt;cluster_name&gt;</em></code> 替换为集群的名称。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。</td>
+    <td>将 <code><em>&lt;cluster_name&gt;</em></code> 替换为集群的名称。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。
+</td>
     </tr>
     <tr>
     <td><code><em>zone</em></code></td>
@@ -748,7 +752,8 @@ trusted: <em>true</em>
 <dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署专区而变化。有关更多信息，请参阅 `ibmcloud ks machine-types` [命令](cs_cli_reference.html#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>集群的名称。此值是必需的。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。</dd>
+<dd>集群的名称。此值是必需的。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。
+</dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
 <dd>集群主节点的 Kubernetes 版本。此值是可选的。未指定版本时，会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>ibmcloud ks kube-versions</code>。
@@ -896,21 +901,23 @@ trusted: <em>true</em>
 **示例输出**：
 
   ```
-  Name:        my_cluster
-  ID:          abc1234567
-  State:       normal
-  Trust ready: false
-  Created:     2018-01-01T17:19:28+0000
-  Zone:        dal10
-  Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Master Location: Dallas
-  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
-  Ingress secret:    my_cluster
-  Workers:      3
-  Worker Zones: dal10
-  Version:      1.11.3
-  Owner Email:  name@example.com
+  Name:                 my_cluster
+  ID:                   abc1234567
+  State:                normal
+  Trust ready:          false
+  Created:              2018-01-01T17:19:28+0000
+  Zone:                 dal10
+  Master URL:           https://169.xx.xxx.xxx:xxxxx
+  Master Location:      Dallas
+  Ingress subdomain:    my_cluster.us-south.containers.appdomain.cloud
+  Ingress secret:       my_cluster
+  Workers:              3
+  Worker Zones:         dal10
+  Version:              1.12.3
+  Owner:                name@example.com
   Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Resource Group ID:    a8a12accd63b437bbd6d58fb6a462ca7
+  Resource Group Name:  Default
 
   Addons
   Name                   Enabled
@@ -1145,8 +1152,7 @@ trusted: <em>true</em>
 <dl>
 <dt><code>CONTAINER_ID</code></dt>
 <dd><p>容器的标识。此值是必需的。</p>
-<p>要查找容器的标识，请执行以下操作：<ol><li>[设定 Kubernetes CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。</li><li>通过运行 `kubectl get pods` 列出 pod。</li><li>在 `kubectl describe pod <pod_name>` 命令检索到的工作程序节点的标识。
-      例如，`Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li><li>在将容器标识用于 `ibmcloud ks va` 命令之前，请从标识中除去 `docker://` 前缀。例如，`1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li></ol></p></dd>
+<p>要查找容器的标识，请执行以下操作：<ol><li>[设定 Kubernetes CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。</li><li>通过运行 `kubectl get pods` 列出 pod。</li><li>在 `kubectl describe pod <pod_name>` 命令的输出中找到 **Container ID** 字段。例如，`Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li><li>在将容器标识用于 `ibmcloud ks va` 命令之前，请从标识中除去 `docker://` 前缀。例如，`1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`。</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
 <dd><p>扩展命令输出，以显示有漏洞的包的更多修订信息。此值是可选的。</p>
@@ -1654,7 +1660,7 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
 ## 基础架构命令
 {: #infrastructure_commands}
 
-### ibmcloud ks credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 为 {{site.data.keyword.containerlong_notm}} 帐户设置 IBM Cloud Infrastructure (SoftLayer) 帐户凭证。
@@ -1710,12 +1716,12 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
 **示例**：
 
   ```
-  ibmcloud ks credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+  ibmcloud ks credential-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
 
-### ibmcloud ks credentials-unset
+### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
 从 {{site.data.keyword.containerlong_notm}} 帐户中除去 IBM Cloud Infrastructure (SoftLayer) 帐户凭证。
@@ -1732,7 +1738,7 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
 **示例**：
 
   ```
-  ibmcloud ks credentials-unset
+  ibmcloud ks credential-unset
   ```
   {: pre}
 
@@ -2473,8 +2479,8 @@ kubectl get nodes
     ```
     {: pre}
 此过程可能需要几分钟时间。
- 5. 重新引导工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令检索到的工作程序节点的标识。
-      ```
+ 5. 重新引导工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令返回的工作程序标识。
+    ```
     ibmcloud ks worker-reboot <cluster_name_or_ID> <worker_name_or_ID>
     ```
     {: pre}
@@ -2546,8 +2552,8 @@ kubectl get nodes
     ```
     {: pre}
 此过程可能需要几分钟时间。
- 5. 重新装入工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令检索到的工作程序节点的标识。
-      ```
+ 5. 重新装入工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令返回的工作程序标识。
+    ```
     ibmcloud ks worker-reload <cluster_name_or_ID> <worker_name_or_ID>
     ```
     {: pre}
@@ -2612,8 +2618,7 @@ kubectl get nodes
     ```
    {: pre}
 此过程可能需要几分钟时间。
-     5. 除去工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令检索到的工作程序节点的标识。
-      
+     5. 除去工作程序节点。使用从 `ibmcloud ks workers <cluster_name_or_ID>` 命令返回的工作程序标识。
    ```
    ibmcloud ks worker-rm <cluster_name_or_ID> <worker_name_or_ID>
    ```
@@ -2796,7 +2801,7 @@ kubectl get nodes
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.10.8_1512
+  Version:            1.10.11_1512
   ```
   {: screen}
 
@@ -3012,4 +3017,3 @@ kubectl get nodes
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
-  

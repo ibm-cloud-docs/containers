@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -37,10 +40,10 @@ lastupdated: "2018-10-25"
 
 开始之前：
 
-- [创建标准集群](cs_clusters.html#clusters_cli)。
-- 确保集群至少具有一个公用 VLAN。边缘工作程序节点不可用于仅具有专用 VLAN 的集群。
-- [创建新的工作程序池](cs_clusters.html#add_pool)，此池跨集群中的所有专区，并且每个专区至少有 2 个工作程序。
-- [设定 Kubernetes CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
+1. 确保您具有任何 {{site.data.keyword.Bluemix_notm}} IAM [平台角色](cs_users.html#platform)。
+2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+3. 确保集群至少具有一个公用 VLAN。边缘工作程序节点不可用于仅具有专用 VLAN 的集群。
+4. [创建新的工作程序池](cs_clusters.html#add_pool)，此池跨集群中的所有专区，并且每个专区至少有 2 个工作程序。
 
 要将工作程序节点标记为边缘节点，请执行以下操作：
 
@@ -107,6 +110,7 @@ lastupdated: "2018-10-25"
 使用 `dedicated=edge` 容忍度意味着所有 LoadBalancer 和 Ingress 服务仅部署到已标记的工作程序节点。但是，要阻止其他工作负载在边缘工作程序节点上运行并使用工作程序节点资源，必须使用 [Kubernetes 污点 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
 
 
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 
 1. 列出具有 `dedicated=edge` 标签的所有工作程序节点。
 
@@ -123,4 +127,4 @@ lastupdated: "2018-10-25"
   {: pre}
 现在，仅具有 `dedicated=edge` 容忍度的 pod 会部署到边缘工作程序节点。
 
-3. 如果选择[为 LoadBalancer 服务启用源 IP 保留 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)，请确保通过[向应用程序 pod 添加边缘节点亲缘关系](cs_loadbalancer.html#edge_nodes)，将应用程序 pod 安排到边缘工作程序节点。应用程序 pod 必须安排到边缘节点才能接收入局请求。
+3. 如果选择[为 LoadBalancer 1.0 服务启用源 IP 保留 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)，请确保通过[向应用程序 pod 添加边缘节点亲缘关系](cs_loadbalancer.html#edge_nodes)，将应用程序 pod 安排到边缘工作程序节点。应用程序 pod 必须安排到边缘节点才能接收入局请求。

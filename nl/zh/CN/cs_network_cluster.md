@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 规划集群内联网和专用联网
@@ -79,7 +82,7 @@ VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IB
 **为什么可能会使用此设置？**
 
 * 您在单专区集群中具有必须可供公用因特网访问的应用程序。
-* 您在多专区集群中具有必须可供公用因特网访问的应用程序。由于必须启用 [VLAN 生成](cs_subnets.html#subnet-routing)才能创建多专区集群，因此该集群可以与连接到同一 IBM Cloud 帐户中任何专用 VLAN 的其他系统进行通信。**注**：要隔离专用网络上的多专区集群，请使用 [Calico 网络策略](cs_network_policy.html#isolate_workers)。
+* 您在多专区集群中具有必须可供公用因特网访问的应用程序。由于必须启用 [VLAN 生成](cs_subnets.html#subnet-routing)才能创建多专区集群，因此该集群可以与连接到同一 IBM Cloud 帐户中任何专用 VLAN 的其他系统进行通信。要隔离专用网络上的多专区集群，可以使用 [Calico 网络策略](cs_network_policy.html#isolate_workers)。
 
 **哪些选项可用于管理对集群的公共和专用访问权？**
 </br>以下各部分描述了 {{site.data.keyword.containerlong_notm}} 中的功能，您可以使用这些功能为连接到公用和专用 VLAN 的集群设置联网。
@@ -184,7 +187,7 @@ VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IB
 * 所有工作程序节点和主节点之间的自动连接。必须通过[配置网关设备](#private_vlan_gateway)来提供此连接。
 
 **为什么可能会使用此设置？**
-</br>您具有特定安全性需求，或者需要创建定制网络策略和路由规则，以提供专用网络安全性。**注**：使用网关设备会产生单独的开销。有关详细信息，请参阅[文档](/docs/infrastructure/fortigate-10g/explore-firewalls.html)。
+</br>您具有特定安全性需求，或者需要创建定制网络策略和路由规则，以提供专用网络安全性。请注意，使用网关设备会产生单独的开销。有关详细信息，请参阅[文档](/docs/infrastructure/fortigate-10g/explore-firewalls.html)。
 
 **哪些选项可用于管理对集群的公共和专用访问权？**
 </br>以下各部分描述了 {{site.data.keyword.containerlong_notm}} 中的功能，您可以使用这些功能为仅连接到专用 VLAN 的集群设置联网。
@@ -194,10 +197,8 @@ VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IB
 
 如果工作程序节点设置为仅使用专用 VLAN，那么必须为工作程序节点与主节点之间的网络连接配置备用解决方案。可以使用定制网络策略来设置防火墙，以便为标准集群提供专用网络安全性，检测网络侵入并进行补救。例如，可以选择设置[虚拟路由器设备](/docs/infrastructure/virtual-router-appliance/about.html)或 [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html)，以充当防火墙并阻止不需要的流量。设置防火墙时，还必须为每个区域[打开必需的端口和 IP 地址](cs_firewall.html#firewall_outbound)，以便主节点和工作程序节点可以通信。
 
-**注**：如果您有现有路由器设备，然后添加集群，那么不会在该路由器设备上配置为集群订购的新可移植子网。要使用联网服务，必须通过 [启用 VLAN 生成](cs_subnets.html#vra-routing)启用同一 VLAN 上子网之间的路由。
-
-要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](cs_cli_reference.html#cs_vlan_spanning_get)。
-{: tip}
+如果您有现有路由器设备，然后添加集群，那么不会在该路由器设备上配置为集群订购的新可移植子网。要使用联网服务，必须通过[启用 VLAN 生成](cs_subnets.html#vra-routing)来启用同一 VLAN 上子网之间的路由。
+{: important}
 
 ### 使用专用联网服务公开应用程序
 {: #private_vlan_services}

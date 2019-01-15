@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -24,11 +27,77 @@ lastupdated: "2018-10-25"
 与 {{site.data.keyword.containerlong}} 中的内容保持同步。了解要探索的新功能、试用技巧或其他开发者目前在产品中发现有用的一些热门主题。
 {:shortdesc}
 
+## 2018 年 12 月的热门主题
+{: #dec18}
+
+<table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
+<caption>2018 年 12 月容器和 Kubernetes 集群的热门主题</caption>
+<thead>
+<th>日期</th>
+<th>标题</th>
+<th>描述</th>
+</thead>
+<tbody>
+<tr>
+<td>12 月 6 日</td>
+<td>{{site.data.keyword.mon_full_notm}}</td>
+<td>通过将 Sysdig 作为第三方服务部署到工作程序节点，以将度量值转发到 {{site.data.keyword.monitoringlong}}，从而从运营角度了解应用程序的性能和运行状况。有关更多信息，请参阅[分析在 Kubernetes 集群中部署的应用程序的度量值](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**注**：如果将 {{site.data.keyword.mon_full_notm}} 用于运行 Kubernetes V1.11 或更高版本的集群，那么不会收集所有容器度量值，因为 Sysdig 当前不支持 `containerd`。</td>
+</tr>
+</tbody></table>
+
+## 2018 年 11 月的热门主题
+{: #nov18}
+
+<table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
+<caption>2018 年 11 月容器和 Kubernetes 集群的热门主题</caption>
+<thead>
+<th>日期</th>
+<th>标题</th>
+<th>描述</th>
+</thead>
+<tbody>
+<tr>
+<td>11 月 29 日</td>
+<td>[在金奈提供了专区](cs_regions.html)</td>
+<td>欢迎使用印度金奈专区，这是用于亚太北部区域中集群的新专区。如果您有防火墙，请确保[打开防火墙端口](cs_firewall.html#firewall)以用于此专区以及您集群所在区域内的其他专区。</td>
+</tr>
+<tr>
+<td>11 月 27 日</td>
+<td>{{site.data.keyword.la_full_notm}}</td>
+<td>通过将 LogDNA 作为第三方服务部署到工作程序节点来管理 pod 容器中的日志，从而将日志管理功能添加到集群。有关更多信息，请参阅[使用 {{site.data.keyword.loganalysisfull_notm}} 通过 LogDNA 管理 Kubernetes 集群日志](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)。</td>
+</tr>
+<tr>
+<td>11 月 7 日</td>
+<td>LoadBalancer 2.0 (beta)</td>
+<td>现在可以选择 [LoadBalancer 1.0 或 2.0](cs_loadbalancer.html#planning_ipvs)，以向公众安全地公开集群应用程序。</td>
+</tr>
+<tr>
+<td>11 月 7 日</td>
+<td>Kubernetes V1.12 可用</td>
+<td>现在，可以更新或创建运行 [Kubernetes V1.12](cs_versions.html#cs_v112) 的集群！缺省情况下，1.12 集群随附高可用性 Kubernetes 主节点。</td>
+</tr>
+<tr>
+<td>11 月 7 日</td>
+<td>运行 Kubernetes V1.10 的集群中的高可用性主节点</td>
+<td>运行 Kubernetes V1.10 的集群中提供了高可用性主节点。在前面 1.11 集群的条目中描述的所有优点也同样适用于 1.10 集群，此外必须执行的[准备步骤](cs_versions.html#110_ha-masters)也一样。</td>
+</tr>
+<tr>
+<td>11 月 1 日</td>
+<td>运行 Kubernetes V1.11 的集群中的高可用性主节点</td>
+<td>在单个专区中，主节点具有高可用性，在分别用于 Kubernetes API 服务器、etcd、调度程序和控制器管理器的不同物理主机上包含多个副本，以防止发生中断，例如在集群更新期间。如果集群位于支持多专区的专区中，那么高可用性主节点还将在各专区中进行分布，以帮助保护集群不受专区故障的影响。<br>有关必须执行的操作，请参阅[更新为高可用性集群主节点](cs_versions.html#ha-masters)。这些准备操作适用于以下情况：<ul>
+<li>如果具有防火墙或定制 Calico 网络策略。</li>
+<li>如果在工作程序节点上使用的主机端口是 `2040` 或 `2041`。</li>
+<li>如果使用了集群主节点 IP 地址对主节点进行集群内访问。</li>
+<li>如果具有调用 Calico API 或 CLI (`calicoctl`) 的自动化操作，例如创建 Calico 策略。</li>
+<li>如果使用 Kubernetes 或 Calico 网络策略来控制对主节点的 pod 流出访问。</li></ul></td>
+</tr>
+</tbody></table>
+
 ## 2018 年 10 月的热门主题
 {: #oct18}
 
 <table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
-<caption>2018 年 8 月容器和 Kubernetes 集群的热门主题</caption>
+<caption>2018 年 10 月容器和 Kubernetes 集群的热门主题</caption>
 <thead>
 <th>日期</th>
 <th>标题</th>
@@ -53,7 +122,7 @@ lastupdated: "2018-10-25"
 <tr>
 <td>10 月 4 日</td>
 <td>现在，[{{site.data.keyword.registrylong}} 已与 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam) 集成</td>
-<td>您可以使用 IAM 来控制对注册表资源的访问，例如拉取、推送和构建映像。创建集群时，还会创建注册表令牌，以便集群可以使用注册表。因此，您需要注册表的**管理员**平台管理角色才能创建集群。要对注册表帐户启用 IAM，请参阅[对现有用户启用策略强制实施](/docs/services/Registry/registry_users.html#existing_users)。</td>
+<td>您可以使用 {{site.data.keyword.Bluemix_notm}} IAM 来控制对注册表资源的访问，例如拉取、推送和构建映像。创建集群时，还会创建注册表令牌，以便集群可以使用注册表。因此，您需要帐户级别注册表的**管理员**平台管理角色才能创建集群。要对注册表帐户启用 {{site.data.keyword.Bluemix_notm}} IAM，请参阅[对现有用户启用策略强制实施](/docs/services/Registry/registry_users.html#existing_users)。</td>
 </tr>
 <tr>
 <td>10 月 1 日</td>
@@ -66,7 +135,7 @@ lastupdated: "2018-10-25"
 {: #sept18}
 
 <table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
-<caption>2018 年 8 月容器和 Kubernetes 集群的热门主题</caption>
+<caption>2018 年 9 月容器和 Kubernetes 集群的热门主题</caption>
 <thead>
 <th>日期</th>
 <th>标题</th>
@@ -190,8 +259,8 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
 <td>5 月 1 日</td>
-<td>[通过 GUI 部署 Kubernetes 仪表板](cs_app.html#cli_dashboard)</td>
-<td>您曾想过仅单击一次就访问 Kubernetes 仪表板吗？请使用 {{site.data.keyword.Bluemix_notm}} GUI 中的 **Kubernetes 仪表板**按钮。</td>
+<td>[通过控制台部署 Kubernetes 仪表板](cs_app.html#cli_dashboard)</td>
+<td>您曾想过仅单击一次就访问 Kubernetes 仪表板吗？请使用 {{site.data.keyword.Bluemix_notm}} 控制台中的 **Kubernetes 仪表板**按钮。</td>
 </tr>
 </tbody></table>
 
@@ -282,7 +351,7 @@ lastupdated: "2018-10-25"
 </tr>
 <tr>
 <td>2 月 23 日</td>
-<td>在 Web UI 中查看[日志记录](cs_health.html#view_logs)和[度量值](cs_health.html#view_metrics)</td>
+<td>在 Web 控制台中查看[日志记录](cs_health.html#view_logs)和[度量值](cs_health.html#view_metrics)</td>
 <td>通过改进的 Web UI，轻松查看集群及其组件的日志和度量数据。有关访问权的信息，请参阅“集群详细信息”页面。</td>
 </tr>
 <tr>

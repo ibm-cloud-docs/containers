@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -47,7 +50,7 @@ lastupdated: "2018-10-25"
 - [通过调整工作程序池大小来添加或除去集群容量](cs_clusters.html#add_workers)
 - [启用 VLAN 生成并使多专区工作程序池跨专区保持均衡](cs_clusters_planning.html#ha_clusters)
 - [在 IBM Cloud Infrastructure (SoftLayer) 中创建公用和专用 VLAN 以针对集群进行网络隔离](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [确保所有工作程序节点都具有到 Kibernetes 主节点 URL 的网络连接](cs_firewall.html#firewall)<p>**注**：如果工作程序节点同时具有公用和专用 VLAN，那么已配置网络连接。如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。</p>
+- [确保所有工作程序节点都具有到 Kibernetes 主节点 URL 的网络连接](cs_firewall.html#firewall)<p class="note">如果工作程序节点同时具有公用和专用 VLAN，那么已配置网络连接。如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。</p>
 - [Kubernetes 版本更新可用时更新主 kube-apiserver](cs_cluster_update.html#master)
 - [使主版本、次版本和补丁版本上的工作程序节点保持最新](cs_cluster_update.html#worker_node)
 - [通过运行 `kubectl` 命令（如 `cordon` 或 `drain`）以及运行 `ibmcloud ks` 命令（如 `reboot`、`reload` 或 `delete`](cs_cli_reference.html#cs_worker_reboot)）来恢复有故障的工作程序节点。

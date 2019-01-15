@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 区域和专区
@@ -21,46 +24,50 @@ lastupdated: "2018-10-25"
 区域是可以部署应用程序、服务和其他 {{site.data.keyword.Bluemix}} 资源的特定地理位置。[{{site.data.keyword.Bluemix_notm}} 区域](#bluemix_regions)与 [{{site.data.keyword.containerlong}} 区域](#container_regions)不同。区域由一个或多个专区组成，专区是物理数据中心，用于托管计算、网络和存储资源以及相关冷却系统和电源，服务和应用程序通过这些资源托管。专区彼此隔离，可确保没有共享的单点故障。
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} 在全球托管。{{site.data.keyword.Bluemix_notm}} 内的服务可以在全球可用或在特定区域内可用。
-在 {{site.data.keyword.containerlong_notm}} 中创建 Kubernetes 集群时，其资源仍保留在将集群部署到的区域中。
- 
-
-**注**：您可以在每个受支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
-
 ![{{site.data.keyword.containerlong_notm}} 区域和专区](images/regions-mz.png)
 
 _{{site.data.keyword.containerlong_notm}} 区域和专区_
 
-支持的 {{site.data.keyword.containerlong_notm}} 区域如下所示：
-* 亚太地区北部（仅限标准集群）
-* 亚太地区南部
-* 欧洲中部
-* 英国南部
-* 美国东部（仅限标准集群）
-* 美国南部
+{{site.data.keyword.Bluemix_notm}} 在全球托管。{{site.data.keyword.Bluemix_notm}} 内的服务可以在全球可用或在特定区域内可用。
+在 {{site.data.keyword.containerlong_notm}} 中创建 Kubernetes 集群时，其资源仍保留在将集群部署到的区域中。
+
+
+您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
+{: note}
+
+|{{site.data.keyword.containerlong_notm}} 区域|相应的 {{site.data.keyword.Bluemix_notm}} 位置|
+| --- | --- |
+|亚太地区北部（仅限标准集群）|东京|
+|亚太地区南部|悉尼|
+|欧洲中部|法兰克福|
+|英国南部|伦敦|
+|美国东部（仅限标准集群）|华盛顿|
+|美国南部
+      |达拉斯|
+{: caption="表：支持的 Kubernetes 服务区域和相应的 IBM Cloud 位置。" caption-side="top"}
 
 <br />
 
 
-## {{site.data.keyword.Bluemix_notm}} 中的区域
+## {{site.data.keyword.Bluemix_notm}} 中的位置
 {: #bluemix_regions}
 
-您可以使用 {{site.data.keyword.Bluemix_notm}} 区域在 {{site.data.keyword.Bluemix_notm}} 服务之间组织资源。例如，您可以通过使用存储在同一区域的 {{site.data.keyword.registryshort_notm}} 中的专用 Docker 映像来创建 Kubernetes 集群。
+您可以使用 {{site.data.keyword.Bluemix_notm}} 位置（也称为区域）在 {{site.data.keyword.Bluemix_notm}} 服务之间组织资源。例如，您可以通过使用存储在同一位置的 {{site.data.keyword.registryshort_notm}} 中的专用 Docker 映像来创建 Kubernetes 集群。
 {:shortdesc}
 
-要检查您当前所在的 {{site.data.keyword.Bluemix_notm}} 区域，请运行 `ibmcloud info` 并查看 **Region** 字段。
+要检查您当前所在的 {{site.data.keyword.Bluemix_notm}} 位置，请运行 `ibmcloud info` 并查看 **Region** 字段。
 
-可以通过在登录时指定 API 端点来访问 {{site.data.keyword.Bluemix_notm}} 区域。如果未指定区域，那么您会自动登录到离您最近的区域。
+可以通过在登录时指定区域 API 端点来访问 {{site.data.keyword.Bluemix_notm}} 位置。如果未指定区域端点，那么您会自动登录到离您最近的区域。
 
 例如，可以使用以下命令来登录到 {{site.data.keyword.Bluemix_notm}} 区域 API 端点：
 
-  * 美国南部
+  * 达拉斯
       ```
       ibmcloud login -a api.ng.bluemix.net
       ```
       {: pre}
 
-  * 美国东部
+  * 华盛顿
       ```
       ibmcloud login -a api.us-east.bluemix.net
       ```
@@ -72,13 +79,13 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
       ```
       {: pre}
 
-  * 德国
+  * 法兰克福
       ```
       ibmcloud login -a api.eu-de.bluemix.net
       ```
       {: pre}
 
-  * 英国
+  * 伦敦
       ```
       ibmcloud login -a api.eu-gb.bluemix.net
       ```
@@ -94,7 +101,8 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
 {{site.data.keyword.containerlong_notm}} 区域端点具体参考 {{site.data.keyword.containerlong_notm}}，而不是作为一个整体参考 {{site.data.keyword.Bluemix_notm}}。
 {:shortdesc}
 
-**注**：您可以在每个受支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
+您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在选择区域中可用。
+{: note}
 
 支持的 {{site.data.keyword.containerlong_notm}} 区域：
   * 亚太地区北部（仅限标准集群）
@@ -148,8 +156,8 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
 专区是 {{site.data.keyword.Bluemix_notm}} 区域内可用的物理数据中心。区域是用于组织专区的概念工具，可以包含不同国家或地区中的专区（数据中心）。下表按区域显示可用的专区。
 {:shortdesc}
 
-* **多专区大城市**：在多专区大城市中创建的集群中的工作程序节点可以跨专区分布。
-* **单专区城市**：在单专区城市中创建的集群中的工作程序节点只能保留在一个专区中。不能跨多个专区分布工作程序节点。
+* **多专区大城市**：在多专区大城市中创建的集群中的工作程序节点可以跨专区分布。此外，如果在多专区大城市中创建 Kubernetes V1.10 或更高版本的集群，那么高可用性主节点会在各专区中分布。
+* **单专区城市**：在单专区城市中创建的集群中的工作程序节点只能保留在一个专区中。不能跨多个专区分布工作程序节点。高可用性主节点包含三个副本，分别位于不同的主机上，但主节点不会在各专区中分布。
 
 <table summary="该表显示了按区域列出的可用专区。每行从左到右阅读，其中第一列是区域，第二列是多专区大城市，第三列是单专区城市。">
 <caption>按区域列出的可用单专区和多专区。</caption>
@@ -162,7 +170,8 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
     <tr>
       <td>亚太地区北部</td>
       <td>东京：tok02、tok04、tok05</td>
-      <td><p>中国香港特别行政区：hkg02</p>
+      <td><p>金奈：che01</p>
+      <p>中国香港特别行政区：hkg02</p>
       <p>首尔：seo01</p>
       <p>新加坡：sng01</p></td>
     </tr>
@@ -183,7 +192,8 @@ _{{site.data.keyword.containerlong_notm}} 区域和专区_
     </tr>
     <tr>
       <td>英国南部</td>
-      <td>伦敦：lon04、lon05、lon06<br><br>**注**：lon05 替换了 lon02。新集群必须使用 lon05。</td>
+      <td>伦敦：lon04、lon05、lon06 **注**：lon05 替换了 lon02。新集群必须使用 lon05，并且只有 lon05 支持高可用性主节点在各专区中分布。</td>
+      <td></td>
     </tr>
     <tr>
       <td>美国东部</td>

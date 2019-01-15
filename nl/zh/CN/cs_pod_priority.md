@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 # 设置 pod 优先级
@@ -35,7 +38,7 @@ lastupdated: "2018-10-25"
 
 如果未对 pod 部署指定优先级，那么缺省优先级会设置为已设为 `globalDefault` 的优先级类。如果没有 `globalDefault` 优先级类，那么所有 pod 的缺省优先级都为零 (`0`)。缺省情况下，{{site.data.keyword.containerlong_notm}} 并未设置 `globalDefault`，因此 pod 的缺省优先级为零。
 
-请考虑下图中的方案。**重要信息**：如您所见，您需要了解 pod 优先级和调度程序如何协同工作，以将已划分优先级的 pod 置于具有可用资源的工作程序节点上。否则，在除去现有 pod 的同时，集群中的高优先级 pod 可能保持暂挂状态，例如在场景 3 中那样。
+要了解 pod 优先级和调度程序如何一起工作，请考虑下图中的场景。您必须将已划分优先级的 pod 置于具有可用资源的工作程序节点上。否则，在除去现有 pod 的同时，集群中的高优先级 pod 可能保持暂挂状态，例如在场景 3 中那样。
 
 _图：pod 优先级场景_
 ![pod 优先级场景](images/pod-priority.png)
@@ -48,13 +51,19 @@ _图：pod 优先级场景_
 **可以禁用 pod 优先级许可控制器吗？**</br>
 不能。如果不想使用 pod 优先级，请勿设置 `globalDefault` 或在 pod 部署中包含优先级类。每个 pod 的优先级缺省为零，但 IBM 使用[缺省优先级类](#default_priority_class)部署的集群关键 pod 除外。因为 pod 优先级是相对优先级，所以此基本设置可确保对集群关键 pod 划分优先级以使用资源，并遵循已落实的现有安排策略来调度其他任何 pod。
 
+**资源配额对 pod 优先级有怎样的影响？**</br>
+对于运行 Kubernetes 1.12 或更高版本的集群，可以将 pod 优先级与资源配额组合使用，包括[配额作用域 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes)。借助配额作用域，可以设置资源配额来考虑 pod 优先级。优先级高的 pod 相比优先级低的 pod，可优先使用受到资源配额限制的系统资源。
+
 ## 了解缺省优先级类
 {: #default_priority_class}
 
-缺省情况下，{{site.data.keyword.containerlong_notm}} 集群会随附一些优先级类。**重要信息**：请勿修改用于正确管理集群的缺省类。您可以在应用程序部署中使用这些类，或[创建自己的优先级类](#create_priority_class)。
+缺省情况下，{{site.data.keyword.containerlong_notm}} 集群会随附一些优先级类。
 {: shortdesc}
 
-下表描述了缺省情况下集群中的优先级类以及使用这些类的原因。 
+请勿修改用于正确管理集群的缺省类。您可以在应用程序部署中使用这些类，或[创建自己的优先级类](#create_priority_class)。
+{: important}
+
+下表描述了缺省情况下集群中的优先级类以及使用这些类的原因。
 
 |名称|设置方|优先级值|用途|
 |---|---|---|
@@ -78,24 +87,26 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 
 开始之前：
 * [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
-* [创建](cs_clusters.html#clusters_ui) Kubernetes V1.11 或更高版本集群，或将集群[更新](cs_cluster_update.html#update)到 Kubernetes V1.11 或更高版本。
+* [创建](cs_clusters.html#clusters_ui) Kubernetes V1.11 或更高版本的集群，或将集群[更新](cs_cluster_update.html#update)到 Kubernetes V1.11 或更高版本。
+
+要使用优先级类，请执行以下操作：
 
 1.  可选：使用现有优先级类作为新类的模板。
-    
+
     1.  列出现有优先级类。
-        
+
         ```
         kubectl get priorityclasses
         ```
         {: pre}
-        
+
     2.  选择要复制的优先级类并创建本地 YAML 文件。
-    
+
         ```
         kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
         ```
         {: pre}
-        
+
 2.  编写自己的优先级类 YAML 文件。
 
     ```yaml
@@ -108,7 +119,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     description: "Use this class for XYZ service pods only."
     ```
     {: codeblock}
-    
+
     <table>
     <caption>了解 YAML 文件的组成部分</caption>
     <thead>
@@ -132,7 +143,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     <td><code>description</code></td>
     <td>可选：指示用户使用此优先级类的原因。将字符串用引号 (`""`) 括起。</td>
     </tr></tbody></table>
-    
+
 3.  在集群中创建优先级类。
 
     ```
@@ -157,20 +168,20 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 
 开始之前：
 * [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
-* [创建](cs_clusters.html#clusters_ui) Kubernetes V1.11 或更高版本集群，或将集群[更新](cs_cluster_update.html#update)到 Kubernetes V1.11 或更高版本。
+* [创建](cs_clusters.html#clusters_ui) Kubernetes V1.11 或更高版本的集群，或将集群[更新](cs_cluster_update.html#update)到 Kubernetes V1.11 或更高版本。
 * [了解优先级安排的运作方式](#priority_scheduling)，因为优先级可以抢占现有 pod，并影响如何使用集群的资源。
 
 要为 pod 分配优先级，请执行以下操作：
 
 1.  检查其他已部署 pod 的重要性，以便可以相对于已部署的 pod，为您的 pod 选择适当的优先级类。
 
-    1.  查看名称空间中其他 pod 使用的优先级类。 
-        
+    1.  查看名称空间中其他 pod 使用的优先级类。
+
         ```
         kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
         ```
         {: pre}
-        
+
     2.  获取优先级类的详细信息，并记下**值**数字。划分优先级时，数字较大的 pod 会位于数字较低的 pod 之前。对于要复查的每个优先级类重复此步骤。
 
         ```
@@ -184,7 +195,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     kubectl get priorityclasses
     ```
     {: pre}
-    
+
 3.  在 pod spec 中，为 `priorityClassName` 字段添加在上一步中检索到的优先级类的名称。
 
     ```yaml

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,7 +13,11 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
+{:gif: data-image-type='gif'}
 
 
 # 设置集群和工作程序节点
@@ -34,11 +38,11 @@ lastupdated: "2018-10-25"
 ### 帐户级别
 {: #prepare_account_level}
 
-1.  [创建帐户或将帐户升级到 {{site.data.keyword.Bluemix_notm}} 现买现付或预订帐户](https://console.bluemix.net/registration/)。
+1.  [创建计费帐户或将帐户升级到计费帐户（{{site.data.keyword.Bluemix_notm}} 现买现付或预订帐户）](https://console.bluemix.net/registration/)。
 2.  [在要创建集群的区域中设置 {{site.data.keyword.containerlong_notm}} API 密钥](cs_users.html#api_key)。为 API 密钥分配可创建集群的相应许可权：
     *  IBM Cloud Infrastructure (SoftLayer) 的**超级用户**角色。
-    *  {{site.data.keyword.containerlong_notm}} 的**管理员**平台管理角色。
-    *  {{site.data.keyword.registrylong_notm}} 的**管理员**平台管理角色。
+    *  帐户级别的 {{site.data.keyword.containerlong_notm}} 的**管理员**平台管理角色。
+    *  帐户级别的 {{site.data.keyword.registrylong_notm}} 的**管理员**平台管理角色。
 
     您是帐户所有者吗？如果是，那么您已具有必需的许可权！创建集群时，该区域和资源组的 API 密钥将使用您的凭证进行设置。
     {: tip}
@@ -46,10 +50,10 @@ lastupdated: "2018-10-25"
 3.  如果帐户使用了多个资源组，请确定[管理资源组](cs_users.html#resource_groups)的帐户策略。 
     *  在您登录到 {{site.data.keyword.Bluemix_notm}} 后，将在您设定为目标的资源组中创建集群。如果未将某个资源组设定为目标，那么会自动将缺省资源组设定为目标。
     *  如果要在非缺省资源组中创建集群，那么您至少需要该资源组的**查看者**角色。如果您不具有该资源组的任何角色，但仍然是该资源组中服务的**管理员**，那么将在缺省资源组中创建集群。
-    *  无法更改集群的资源组。集群只能与同一资源组中的其他 {{site.data.keyword.Bluemix_notm}} 服务集成。
+    *  无法更改集群的资源组。集群只能与同一资源组中的其他 {{site.data.keyword.Bluemix_notm}} 服务集成，或与不支持资源组的服务（例如，{{site.data.keyword.registrylong_notm}}）集成。
     *  如果计划将 [{{site.data.keyword.monitoringlong_notm}} 用于度量值](cs_health.html#view_metrics)，请计划为集群提供在您帐户中的所有资源组和区域之间唯一的名称，以避免发生度量值命名冲突。
     * 如果您具有 {{site.data.keyword.Bluemix_dedicated}} 帐户，那么只能在缺省资源组中创建集群。
-4.  启用 VLAN 生成。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
+4.  启用 VLAN 生成。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud Infrastructure (SoftLayer) 帐户代表。
 
 ### 集群级别
 {: #prepare_cluster_level}
@@ -63,66 +67,74 @@ lastupdated: "2018-10-25"
     *  确定是创建[单专区](cs_clusters_planning.html#single_zone)还是[多专区](cs_clusters_planning.html#multizone)集群。请注意，多专区集群仅在精选位置可用。
     *  如果要创建不能以公共方式访问的集群，请查看其他[专用集群步骤](cs_clusters_planning.html#private_clusters)。
     *  选择要用于集群的工作程序节点的[硬件和隔离](cs_clusters_planning.html#shared_dedicated_node)类型，包括决定是使用虚拟机还是裸机机器。
-4.  对于标准集群，可以[使用定价计算器来估算成本 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)。**注**：有关估算工具中可能不包含的费用的详细信息，请参阅[定价和计费](cs_why.html#pricing)。
+4.  对于标准集群，可以[使用成本估算工具来估算成本 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)。有关估算工具中可能不包含的费用的更多信息，请参阅[定价和计费](cs_why.html#pricing)。
 <br>
 <br>
 
 **接下来要做什么？**
-* [使用 GUI 创建集群](#clusters_ui)
-* [使用 CLI 创建集群](#clusters_cli)
+* [使用 {{site.data.keyword.Bluemix_notm}} 控制台创建集群](#clusters_ui)
+* [使用 {{site.data.keyword.Bluemix_notm}} CLI 创建集群](#clusters_cli)
 
-## 使用 GUI 创建集群
+## 使用 {{site.data.keyword.Bluemix_notm}} 控制台创建集群
 {: #clusters_ui}
 
 Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备，以便使应用程序保持高可用性。要部署应用程序，必须先创建集群，并在该集群中设置工作程序节点的定义。
 {:shortdesc}
 
-开始之前，请查看[准备创建集群](#cluster_prepare)需要执行的步骤。
+### 创建免费集群
+{: #clusters_ui_free}
 
-**创建免费集群**
+可以使用 1 个免费集群来熟悉 {{site.data.keyword.containerlong_notm}} 的工作方式。通过免费集群，您可以了解术语，完成教程，弄清状况，然后再跃升到生产级别的标准集群。别担心，就算您拥有的是计费帐户，也仍会获得免费集群。
 
-可以使用 1 个免费集群来熟悉 {{site.data.keyword.containerlong_notm}} 的工作方式。通过免费集群，您可以了解术语，完成教程，弄清状况，然后再跃升到生产级别的标准集群。别担心，就算您拥有的是现买现付或预订帐户，也仍会获得免费集群。**注**：免费集群的生命周期为 30 天。在此时间之后，免费集群将到期，并且会删除该集群及其数据。{{site.data.keyword.Bluemix_notm}} 不会备份删除的数据，因此无法复原这些数据。请确保备份任何重要数据。
+免费集群的生命周期为 30 天。在此时间之后，免费集群将到期，并且会删除该集群及其数据。{{site.data.keyword.Bluemix_notm}} 不会备份删除的数据，因此无法复原这些数据。请确保备份任何重要数据。
+{: note}
 
-1. 在目录中，选择 **{{site.data.keyword.containerlong_notm}}**。
+1. [准备创建集群](#cluster_prepare)，以确保您具有正确的 {{site.data.keyword.Bluemix_notm}} 帐户设置和用户许可权，并决定要使用的集群设置和资源组。
 
-2. 选择要在其中部署集群的区域。**注**：无法在美国东部或亚太北部区域以及对应的专区中创建免费集群。
+2. 在[目录 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/catalog/?category=containers) 中，选择 **{{site.data.keyword.containershort_notm}}** 以创建集群。
 
-3. 选择**免费**集群套餐。
+3. 选择要在其中部署集群的位置。**注**：无法在华盛顿（美国东部）或东京（亚太北部）位置中创建免费集群。
 
-4. 为集群提供名称。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。
+4. 选择**免费**集群套餐。
+
+5. 为集群提供名称。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。
 
 
-5. 单击**创建集群**。缺省情况下，将创建包含一个工作程序节点的工作程序池。您可以在**工作程序节点**选项卡中查看工作程序节点部署的进度。完成部署后，您可以在**概述**选项卡中看到集群已就绪。
+6. 单击**创建集群**。缺省情况下，将创建包含一个工作程序节点的工作程序池。您可以在**工作程序节点**选项卡中查看工作程序节点部署的进度。完成部署后，您可以在**概述**选项卡中看到集群已就绪。
 
     更改创建期间分配的唯一标识或域名，会导致 Kubernetes 主节点无法管理集群。
     {: tip}
 
 </br>
 
-**创建标准集群**
+### 创建标准集群
+{: #clusters_ui_standard}
 
-1. 在目录中，选择 **{{site.data.keyword.containershort_notm}}**。
+1. [准备创建集群](#cluster_prepare)，以确保您具有正确的 {{site.data.keyword.Bluemix_notm}} 帐户设置和用户许可权，并决定要使用的集群设置和资源组。
 
-2. 选择要在其中创建集群的资源组。
+2. 在[目录 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/catalog/?category=containers) 中，选择 **{{site.data.keyword.containershort_notm}}** 以创建集群。
+
+3. 选择要在其中创建集群的资源组。
   **注**：
     * 只能在一个资源组中创建集群，在创建集群后，即无法更改其资源组。
     * 免费集群会自动在缺省资源组中创建。
     * 要在非缺省资源组中创建集群，您必须至少具有该资源组的[**查看者**角色](cs_users.html#platform)。
 
-2. 选择要在其中部署集群的区域。要获得最佳性能，请选择物理上离您最近的区域。请记住，如果选择的是您所在国家或地区以外的专区，那么在存储数据之前可能需要法律授权。
+4. 选择要在其中部署集群的 [{{site.data.keyword.Bluemix_notm}} 位置](cs_regions.html#regions-and-zones)。要获得最佳性能，请选择实际离您最近的位置。请记住，如果选择的是您所在国家或地区以外的专区，那么在存储数据之前可能需要法律授权。
 
-3. 选择**标准**集群套餐。通过标准集群，您有权访问多种功能，如高可用性环境的多个工作程序节点。
+5. 选择**标准**集群套餐。通过标准集群，您有权访问多种功能，如高可用性环境的多个工作程序节点。
 
-4. 输入专区详细信息。
+6. 输入专区详细信息。
 
     1. 选择**单专区**或**多专区**可用性。在多专区集群中，主节点部署在支持多专区的专区中，并且集群的资源会在多个专区中进行分布。根据区域的不同，您的选择可能会受到限制。
 
     2. 选择要在其中托管集群的特定专区。必须选择至少一个专区，但您可以选择任意多数量的专区。如果选择多个专区，那么工作程序节点会跨您选择的专区分布，从而为您提供更高的可用性。如果仅选择 1 个专区，那么在创建该专区后，可以[向集群添加专区](#add_zone)。
 
-    3. 从 IBM Cloud Infrastructure (SoftLayer) 帐户中选择公用 VLAN（可选）和专用 VLAN（必需）。工作程序节点使用专用 VLAN 相互通信。要与 Kubernetes 主节点通信，必须为工作程序节点配置公共连接。如果在此专区中没有公用或专用 VLAN，请使其留空。系统将自动创建公用和专用 VLAN。如果您有现有 VLAN，并且未指定公用 VLAN，请考虑配置防火墙，例如[虚拟路由器设备](/docs/infrastructure/virtual-router-appliance/about.html#about)。可以对多个集群使用相同的 VLAN。
-**注**：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。
+    3. 从 IBM Cloud Infrastructure (SoftLayer) 帐户中选择公用 VLAN（可选）和专用 VLAN（必需）。工作程序节点使用专用 VLAN 相互通信。要与 Kubernetes 主节点通信，必须为工作程序节点配置公共连接。如果在此专区中没有公用或专用 VLAN，请使其留空。系统将自动创建公用和专用 VLAN。如果您有现有 VLAN，并且未指定公用 VLAN，请考虑配置防火墙，例如[虚拟路由器设备](/docs/infrastructure/virtual-router-appliance/about.html#about-the-vra)。可以对多个集群使用相同的 VLAN。
+如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。
+        {: note}
 
-5. 配置缺省工作程序池。工作程序池是共享相同配置的成组的工作程序节点。日后，始终可以向集群添加更多工作程序池。
+7. 配置缺省工作程序池。工作程序池是共享相同配置的成组的工作程序节点。日后，始终可以向集群添加更多工作程序池。
 
     1. 选择硬件隔离的类型。“虚拟”按小时计费，“裸机”按月计费。
 
@@ -130,7 +142,7 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
 
         - **虚拟 - 共享**：基础架构资源（例如，系统管理程序和物理硬件）在您与其他 IBM 客户之间共享，但每个工作程序节点只能由您访问。虽然此选项更便宜，并且足以满足大多数情况，但您可能希望使用公司策略来验证性能和基础架构需求。
 
-        - **裸机**：裸机服务器按月计费，通过与 IBM Cloud Infrastructure (SoftLayer) 进行手动交互来供应，可能需要一个工作日以上的时间才能完成。裸机最适用于需要更多资源和主机控制的高性能应用程序。对于运行 Kubernetes V1.9 或更高版本的集群，还可以选择启用[可信计算](cs_secure.html#trusted_compute)来验证工作程序节点是否被篡改。可信计算可用于精选的裸机机器类型。例如，`mgXc` GPU 类型模板不支持可信计算。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。
+        - **裸机**：裸机服务器按月计费，通过与 IBM Cloud Infrastructure (SoftLayer) 进行手动交互来供应，可能需要一个工作日以上的时间才能完成。裸机最适用于需要更多资源和主机控制的高性能应用程序。还可以选择启用[可信计算](cs_secure.html#trusted_compute)来验证工作程序节点是否被篡改。可信计算可用于精选的裸机机器类型。例如，`mgXc` GPU 类型模板不支持可信计算。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。
 
         确保要供应裸机机器。因为裸机机器是按月计费的，所以如果在错误下单后立即将其取消，也仍然会按整月向您收费。
         {:tip}
@@ -139,11 +151,11 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
 
     3. 指定集群中需要的工作程序节点数。输入的工作程序数将在所选数量的专区之间进行复制。这意味着如果您有 2 个专区并选择了 3 个工作程序节点，那么会供应 6 个节点，并且每个专区中存在 3 个节点。
 
-6. 为集群提供唯一名称。**注**：更改创建期间分配的唯一标识或域名，会导致 Kubernetes 主节点无法管理集群。
+8. 为集群提供唯一名称。**注**：更改创建期间分配的唯一标识或域名，会导致 Kubernetes 主节点无法管理集群。
 
-7. 为集群主节点选择 Kubernetes API 服务器版本。
+9. 为集群主节点选择 Kubernetes API 服务器版本。
 
-8. 单击**创建集群**。这将创建具有指定工作程序数的工作程序池。您可以在**工作程序节点**选项卡中查看工作程序节点部署的进度。完成部署后，您可以在**概述**选项卡中看到集群已就绪。
+10. 单击**创建集群**。这将创建具有指定工作程序数的工作程序池。您可以在**工作程序节点**选项卡中查看工作程序节点部署的进度。完成部署后，您可以在**概述**选项卡中看到集群已就绪。
 
 **接下来要做什么？**
 
@@ -159,19 +171,19 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
 <br />
 
 
-## 使用 CLI 创建集群
+## 使用 {{site.data.keyword.Bluemix_notm}} CLI 创建集群
 {: #clusters_cli}
 
 Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备，以便使应用程序保持高可用性。要部署应用程序，必须先创建集群，并在该集群中设置工作程序节点的定义。
 {:shortdesc}
 
-开始之前：
-* 查看[准备创建集群](#cluster_prepare)需要执行的步骤。
-* 安装 {{site.data.keyword.Bluemix_notm}} CLI 和 [{{site.data.keyword.containerlong_notm}} 插件](cs_cli_install.html#cs_cli_install)。
+开始之前，请安装 {{site.data.keyword.Bluemix_notm}} CLI 和 [{{site.data.keyword.containerlong_notm}} 插件](cs_cli_install.html#cs_cli_install)。
 
 要创建集群，请执行以下操作：
 
-1.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。
+1. [准备创建集群](#cluster_prepare)，以确保您具有正确的 {{site.data.keyword.Bluemix_notm}} 帐户设置和用户许可权，并决定要使用的集群设置和资源组。
+
+2.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。
 
     1.  登录并根据提示输入 {{site.data.keyword.Bluemix_notm}} 凭证。
 
@@ -180,7 +192,8 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
         ```
         {: pre}
 
-        **注**：如果您有联合标识，请使用 `ibmcloud login --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+        如果您有联合标识，请使用 `ibmcloud login --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+        {: tip}
 
     2. 如果有多个 {{site.data.keyword.Bluemix_notm}} 帐户，请选择要在其中创建 Kubernetes 集群的帐户。
 
@@ -197,11 +210,9 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
     4.  如果要在先前选择的 {{site.data.keyword.Bluemix_notm}} 区域以外的区域中创建或访问 Kubernetes 集群，请运行 `ibmcloud ks region-set`。
 
 
-3.  创建集群。**注**：可在任何区域和可用专区中创建标准集群。无法在美国东部或亚太北部区域以及对应的专区中创建免费集群，并且无法选择专区。
+4.  创建集群。可在任何区域和可用专区中创建标准集群。无法在美国东部或亚太北部区域以及对应的专区中创建免费集群，并且无法选择专区。
 
-    1.  **标准集群**：查看可用的专区。显示的专区取决于您登录到的 {{site.data.keyword.containerlong_notm}} 区域。
-
-        **注**：要使集群跨多个专区，必须在[支持多专区的专区](cs_regions.html#zones)中创建集群。
+    1.  **标准集群**：查看可用的专区。显示的专区取决于您登录到的 {{site.data.keyword.containerlong_notm}} 区域。要使集群跨多个专区，必须在[支持多专区的专区](cs_regions.html#zones)中创建集群。
 
         ```
         ibmcloud ks zones
@@ -213,15 +224,15 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
         -  查看**服务器类型**字段，以选择虚拟或物理（裸机）机器。
         -  **虚拟**：虚拟机按小时计费，在共享或专用硬件上供应。
         -  **物理**：裸机服务器按月计费，通过与 IBM Cloud Infrastructure (SoftLayer) 进行手动交互来供应，可能需要一个工作日以上的时间才能完成。裸机最适用于需要更多资源和主机控制的高性能应用程序。
-        - **具有可信计算的物理机器**：对于运行 Kubernetes V1.9 或更高版本的裸机集群，还可以选择启用[可信计算](cs_secure.html#trusted_compute)来验证裸机工作程序节点是否被篡改。可信计算可用于精选的裸机机器类型。例如，`mgXc` GPU 类型模板不支持可信计算。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。
+        - **具有可信计算的物理机器**：您还可以选择启用[可信计算](cs_secure.html#trusted_compute)来验证裸机工作程序节点是否被篡改。可信计算可用于精选的裸机机器类型。例如，`mgXc` GPU 类型模板不支持可信计算。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。
         -  **机器类型**：要确定需要部署的机器类型，请查看[可用工作程序节点硬件](cs_clusters_planning.html#shared_dedicated_node)的核心、内存和存储器组合。创建集群后，可以通过[添加工作程序池](#add_pool)来添加不同的物理或虚拟机类型。
 
            确保要供应裸机机器。因为裸机机器是按月计费的，所以如果在错误下单后立即将其取消，也仍然会按整月向您收费。
         {:tip}
 
         ```
-   ibmcloud ks machine-types <zone>
-   ```
+        ibmcloud ks machine-types <zone>
+        ```
         {: pre}
 
     3.  **标准集群**：检查以确定 IBM Cloud Infrastructure (SoftLayer) 中是否已存在此帐户的公用和专用 VLAN。
@@ -270,7 +281,7 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
         </tr>
         <tr>
         <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-        <td>**标准集群**：将 <em>&lt;zone&gt;</em> 替换为要在其中创建集群的 {{site.data.keyword.Bluemix_notm}} 专区的标识。可用专区取决于您登录到的 {{site.data.keyword.containerlong_notm}} 区域。<br></br>**注**：集群工作程序节点会部署到此专区中。要使集群跨多个专区，必须在[支持多专区的专区](cs_regions.html#zones)中创建集群。创建集群后，可以[向集群添加专区](#add_zone)。</td>
+        <td>**标准集群**：将 <em>&lt;zone&gt;</em> 替换为要在其中创建集群的 {{site.data.keyword.Bluemix_notm}} 专区的标识。可用专区取决于您登录到的 {{site.data.keyword.containerlong_notm}} 区域。<p class="note">集群工作程序节点会部署到此专区中。要使集群跨多个专区，必须在[支持多专区的专区](cs_regions.html#zones)中创建集群。创建集群后，可以[向集群添加专区](#add_zone)。</p></td>
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
@@ -284,13 +295,13 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
         <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
         <td><ul>
           <li>**免费集群**：无需定义公用 VLAN。免费集群会自动连接到 IBM 拥有的公用 VLAN。</li>
-          <li>**标准集群**：如果已经在 IBM Cloud Infrastructure (SoftLayer) 帐户中为该专区设置了公用 VLAN，请输入该公用 VLAN 的标识。如果要将工作程序节点仅连接到专用 VLAN，请不要指定此选项。**注**：如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。<br/><br/>
-          <strong>注</strong>：专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。</li>
+          <li>**标准集群**：如果已经在 IBM Cloud Infrastructure (SoftLayer) 帐户中为该专区设置了公用 VLAN，请输入该公用 VLAN 的标识。如果要将工作程序节点仅连接到专用 VLAN，请不要指定此选项。<p>专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。</p>
+          <p class="note">如果工作程序节点设置为仅使用专用 VLAN，那么必须为网络连接配置备用解决方案。有关更多信息，请参阅[规划仅专用集群联网](cs_network_cluster.html#private_vlan)。</p></li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>**免费集群**：无需定义专用 VLAN。免费集群会自动连接到 IBM 拥有的专用 VLAN。</li><li>**标准集群**：如果已经在 IBM Cloud Infrastructure (SoftLayer) 帐户中为该专区设置了专用 VLAN，请输入该专用 VLAN 的标识。如果帐户中没有专用 VLAN，请不要指定此选项。{{site.data.keyword.containerlong_notm}} 会自动为您创建专用 VLAN。<br/><br/><strong>注</strong>：专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。</li></ul></td>
+        <td><ul><li>**免费集群**：无需定义专用 VLAN。免费集群会自动连接到 IBM 拥有的专用 VLAN。</li><li>**标准集群**：如果已经在 IBM Cloud Infrastructure (SoftLayer) 帐户中为该专区设置了专用 VLAN，请输入该专用 VLAN 的标识。如果帐户中没有专用 VLAN，请不要指定此选项。{{site.data.keyword.containerlong_notm}} 会自动为您创建专用 VLAN。<p>专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。创建集群并指定公用和专用 VLAN 时，在这些前缀之后的数字和字母组合必须匹配。</p></li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -316,24 +327,22 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
         </tr>
         </tbody></table>
 
-4.  验证是否请求了创建集群。
+5.  验证是否请求了创建集群。对于虚拟机，可能需要几分钟时间，才能订购好工作程序节点机器并且在帐户中设置并供应集群。裸机物理机器通过与 IBM Cloud Infrastructure (SoftLayer) 进行手动交互来供应，可能需要一个工作日以上的时间才能完成。
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-    **注**：对于虚拟机，可能需要若干分钟才能订购好工作程序节点机器，并且在帐户中设置并供应集群。裸机物理机器通过与 IBM Cloud Infrastructure (SoftLayer) 进行手动交互来供应，可能需要一个工作日以上的时间才能完成。
-
     当完成集群供应时，集群的状态会更改为**已部署**。
 
     ```
-    Name         ID                                   State      Created          Workers   Zone   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.8
+    Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.10.11      Default
     ```
     {: screen}
 
-5.  检查工作程序节点的状态。
+6.  检查工作程序节点的状态。
 
     ```
     ibmcloud ks workers <cluster_name_or_ID>
@@ -342,15 +351,16 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
 
     当工作程序节点已准备就绪时，状态会更改为 **normal**，而阶段状态为 **Ready**。节点阶段状态为 **Ready** 时，可以访问集群。
 
-    **注**：为每个工作程序节点分配了唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。
+    系统会为每个工作程序节点分配唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。
+    {: important}
 
     ```
-    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.8
+    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.10.11      Default
     ```
     {: screen}
 
-6.  将所创建的集群设置为此会话的上下文。每次使用集群时都完成这些配置步骤。
+7.  将所创建的集群设置为此会话的上下文。每次使用集群时都完成这些配置步骤。
     1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
 
         ```
@@ -387,7 +397,7 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
         ```
         {: screen}
 
-7.  使用缺省端口 `8001` 启动 Kubernetes 仪表板。
+8.  使用缺省端口 `8001` 启动 Kubernetes 仪表板。
     1.  使用缺省端口号设置代理。
 
         ```
@@ -432,7 +442,7 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
 如果您有多专区集群，请使其工作程序节点资源保持均衡。确保所有工作程序池跨相同专区进行分布，并通过调整池大小（而不采用添加单个节点的方式）来添加或除去工作程序。
 {: tip}
 
-以下各部分说明了如何实现：
+开始之前，请确保您具有 [{{site.data.keyword.Bluemix_notm}} IAM **操作员**或**管理员**平台角色](cs_users.html#platform)。然后，选择下列其中一个部分：
   * [通过调整集群中现有工作程序池的大小来添加工作程序节点](#resize_pool)
   * [通过向集群添加工作程序池来添加工作程序节点](#add_pool)
   * [向集群添加专区并在跨多个专区的工作程序池中复制工作程序节点](#add_zone)
@@ -488,7 +498,7 @@ Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备
 可以通过创建新的工作程序池，向集群添加工作程序节点。
 {:shortdesc}
 
-1. 在希望在工作程序池中部署工作程序节点的集群中，选择**工作程序专区**。如果计划在跨多个专区的现有工作程序池中分布工作程序节点，请选择专区或[添加新专区](#add_zone)至[支持多专区](cs_regions.html#zones)的集群。可以通过运行 `ibmcloud ks zones` 来列出可用专区。
+1. 检索集群的**工作程序专区**，并选择要在其中部署工作程序池中工作程序节点的专区。如果您具有单专区集群，那么必须使用在 **Worker Zones** 字段中看到的专区。对于多专区集群，可以选择集群的任何现有**工作程序专区**，也可以为集群所在的区域添加其中一个[多专区大城市](cs_regions.html#zones)。可以通过运行 `ibmcloud ks zones` 来列出可用专区。
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
@@ -554,11 +564,11 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
 
 将专区添加到工作程序池时，将在新专区中供应工作程序池中定义的工作程序节点数，并考虑用于未来的工作负载安排。{{site.data.keyword.containerlong_notm}} 会自动将区域的 `failure-domain.beta.kubernetes.io/region` 标签和专区的 `failure-domain.beta.kubernetes.io/zone` 标签添加到每个工作程序节点。Kubernetes 调度程序使用这些标签在同一区域内的各个专区之间分布 pod。
 
-**注**：如果集群中有多个工作程序池，请将该专区添加到所有这些工作程序池，以便工作程序节点在集群中均匀分布。
+如果集群中有多个工作程序池，请将该专区添加到所有这些工作程序池，以便工作程序节点在集群中均匀分布。
 
 开始之前：
 *  要将专区添加到工作程序池，工作程序池必须位于[支持多专区的专区](cs_regions.html#zones)中。如果工作程序池不位于支持多专区的专区中，请考虑[创建新的工作程序池](#add_pool)。
-*  如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
+*  如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud Infrastructure (SoftLayer) 帐户代表。
 
 要将具有工作程序节点的专区添加到工作程序池，请执行以下操作：
 
@@ -580,7 +590,10 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
    ```
    {: pre}
 
-4. 将专区添加到工作程序池。如果您有多个工作程序池，请将专区添加到所有工作程序池，以便在所有专区中均衡集群。将 `<pool1_id_or_name,pool2_id_or_name,...>` 替换为所有工作程序池的名称（采用逗号分隔列表形式）。</br>**注：**必须存在专用和公用 VLAN，才能将专区添加到多个工作程序池。如果在该专区中没有专用和公用 VLAN，请首先将该专区添加到一个工作程序池，以便创建专用和公用 VLAN。然后，可以通过指定创建的专用和公用 VLAN，将该专区添加到其他工作程序池。
+4. 将专区添加到工作程序池。如果您有多个工作程序池，请将专区添加到所有工作程序池，以便在所有专区中均衡集群。将 `<pool1_id_or_name,pool2_id_or_name,...>` 替换为所有工作程序池的名称（采用逗号分隔列表形式）。
+
+    必须存在专用和公用 VLAN，才能将专区添加到多个工作程序池。如果在该专区中没有专用和公用 VLAN，请首先将该专区添加到一个工作程序池，以便创建专用和公用 VLAN。然后，可以通过指定创建的专用和公用 VLAN，将该专区添加到其他工作程序池。
+    {: note}
 
    如果要对不同工作程序池使用不同的 VLAN，请对每个 VLAN 及其相应的工作程序池重复此命令。任何新的工作程序节点都会添加到指定的 VLAN，但不会更改任何现有工作程序节点的 VLAN。
       {: tip}
@@ -596,7 +609,7 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
     {: pre}
 
     输出示例：
-        ```
+    ```
     Name:                   mycluster
     ID:                     df253b6025d64944ab99ed63bb4567b6
     State:                  normal
@@ -613,6 +626,7 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
     Owner:                  owner@email.com
     Monitoring Dashboard:   ...
     Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
+    Resource Group Name:    Default
     ```
     {: screen}  
 
@@ -620,9 +634,10 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
 {: #standalone}
 
 如果您的集群是在引入工作程序池之前创建的，那么可以使用不推荐的命令来添加独立工作程序节点。
-{: shortdesc}
+{: deprecated}
 
-**注：**如果您的集群是在引入工作程序池后创建的，那么无法添加独立工作程序节点。您可以改为通过[创建工作程序池](#add_pool)、[调整现有工作程序池大小](#resize_pool)或[向工作程序池添加专区](#add_zone)，将工作程序节点添加到集群。
+如果您的集群是在引入工作程序池后创建的，那么无法添加独立工作程序节点。您可以改为通过[创建工作程序池](#add_pool)、[调整现有工作程序池大小](#resize_pool)或[向工作程序池添加专区](#add_zone)，将工作程序节点添加到集群。
+{: note}
 
 1. 列出可用专区，然后选取要添加工作程序节点的专区。
    ```
@@ -675,7 +690,7 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
    <tbody>
 <tr>
    <td>Aborted</td>
-   <td>在部署 Kubernetes 主节点之前，用户请求删除集群。在集群删除完成后，将从仪表板中除去集群。如果集群长时间卡在此状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](cs_troubleshoot.html#ts_getting_help)。</td>
+   <td>在部署 Kubernetes 主节点之前，用户请求删除集群。在集群删除完成后，将从仪表板中除去集群。如果集群长时间卡在此状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持用例](cs_troubleshoot.html#ts_getting_help)。</td>
    </tr>
  <tr>
      <td>Critical</td>
@@ -687,7 +702,7 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
    </tr>
    <tr>
      <td>Deleted</td>
-     <td>集群已删除，但尚未从仪表板中除去。如果集群长时间卡在此状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](cs_troubleshoot.html#ts_getting_help)。</td>
+     <td>集群已删除，但尚未从仪表板中除去。如果集群长时间卡在此状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持用例](cs_troubleshoot.html#ts_getting_help)。</td>
    </tr>
    <tr>
    <td>Deleting</td>
@@ -695,7 +710,7 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
    </tr>
    <tr>
      <td>Deploy failed</td>
-     <td>无法完成 Kubernetes 主节点的部署。您无法解决此状态。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](cs_troubleshoot.html#ts_getting_help)来联系 IBM Cloud 支持。</td>
+     <td>无法完成 Kubernetes 主节点的部署。您无法解决此状态。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持用例](cs_troubleshoot.html#ts_getting_help)来联系 IBM Cloud 支持人员。</td>
    </tr>
      <tr>
        <td>Deploying</td>
@@ -703,7 +718,7 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
       </tr>
       <tr>
        <td>Normal</td>
-       <td>集群中的所有工作程序节点都已启动并正在运行。您可以访问集群，并将应用程序部署到集群。此状态视为正常运行，不需要您执行操作。**注**：虽然工作程序节点可能是正常的，但其他基础架构资源（例如，[联网](cs_troubleshoot_network.html)和[存储](cs_troubleshoot_storage.html)）可能仍然需要注意。</td>
+       <td>集群中的所有工作程序节点都已启动并正在运行。您可以访问集群，并将应用程序部署到集群。此状态视为正常运行，不需要您执行操作。<p class="note">虽然工作程序节点可能是正常的，但其他基础架构资源（例如，[联网](cs_troubleshoot_network.html)和[存储](cs_troubleshoot_storage.html)）可能仍然需要注意。</p></td>
     </tr>
       <tr>
        <td>Pending</td>
@@ -711,7 +726,7 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
      </tr>
    <tr>
      <td>Requested</td>
-     <td>发送了用于创建集群并为 Kubernetes 主节点和工作程序节点订购基础架构的请求。集群部署启动后，集群状态将更改为 <code>Deploying</code>。如果集群长时间卡在 <code>Requested</code> 状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](cs_troubleshoot.html#ts_getting_help)。</td>
+     <td>发送了用于创建集群并为 Kubernetes 主节点和工作程序节点订购基础架构的请求。集群部署启动后，集群状态将更改为 <code>Deploying</code>。如果集群长时间卡在 <code>Requested</code> 状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持用例](cs_troubleshoot.html#ts_getting_help)。</td>
    </tr>
    <tr>
      <td>Updating</td>
@@ -731,20 +746,21 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
 ## 除去集群
 {: #remove}
 
-对于使用现买现付帐户创建的免费和标准集群，不再需要这些集群时，必须手动将其除去，以便这些集群不再耗用资源。
+对于使用计费帐户创建的免费和标准集群，不再需要这些集群时，必须手动将其除去，以便这些集群不再耗用资源。
 {:shortdesc}
 
-**警告：**
-  - 不会为持久性存储器中的集群或数据创建备份。删除集群或持久性存储器是永久的，无法撤销。
-  - 除去集群时，还会除去创建集群时自动供应的任何子网，以及使用 `ibmcloud ks cluster-subnet-create` 命令创建的任何子网。但是，如果是使用 `ibmcloud ks cluster-subnet-add 命令`以手动方式将现有子网添加到集群的，那么不会从 IBM Cloud Infrastructure (SoftLayer) 帐户中除去这些子网，并且您可以在其他集群中复用这些子网。
+<p class="important">
+不会为持久性存储器中的集群或数据创建备份。删除集群或持久性存储器是永久的，无法撤销。</br>
+</br>除去集群时，还会除去创建集群时自动供应的任何子网，以及使用 `ibmcloud ks cluster-subnet-create` 命令创建的任何子网。但是，如果是使用 `ibmcloud ks cluster-subnet-add 命令`以手动方式将现有子网添加到集群的，那么不会从 IBM Cloud Infrastructure (SoftLayer) 帐户中除去这些子网，并且您可以在其他集群中复用这些子网。</p>
 
 开始之前：
 * 记下集群标识。您可能需要集群标识来调查和除去未随集群一起自动删除的相关 IBM Cloud Infrastructure (SoftLayer) 资源。
 * 如果要删除持久性存储器中的数据，请[了解删除选项](cs_storage_remove.html#cleanup)。
+* 确保您具有 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](cs_users.html#platform)。
 
 要除去集群，请执行以下操作：
 
--   通过 {{site.data.keyword.Bluemix_notm}} GUI
+-   在 {{site.data.keyword.Bluemix_notm}} 控制台中
     1.  选择集群，然后单击**更多操作...** 菜单中的**删除**。
 
 -   通过 {{site.data.keyword.Bluemix_notm}} CLI
@@ -759,16 +775,17 @@ ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools
     2.  删除集群。
 
         ```
-  ibmcloud ks cluster-rm <cluster_name_or_ID>
-  ```
+        ibmcloud ks cluster-rm <cluster_name_or_ID>
+        ```
         {: pre}
 
     3.  遵循提示并选择是否删除集群资源，包括容器、pod、绑定的服务、持久性存储器和私钥。
       - **持久性存储器**：持久性存储器为数据提供了高可用性。如果使用[现有文件共享](cs_storage_file.html#existing_file)创建了持久性卷申领，那么在删除集群时无法删除该文件共享。必须日后从 IBM Cloud Infrastructure (SoftLayer) 产品服务组合中手动删除此文件共享。
 
-          **注**：受每月计费周期的影响，无法在一个月的最后一天删除持久性卷申领。如果在一个月的最后一天删除持续性卷申领，那么删除操作会保持暂挂，直到下个月开始再执行。
+          受每月计费周期的影响，无法在一个月的最后一天删除持久性卷申领。如果在一个月的最后一天删除持续性卷申领，那么删除操作会保持暂挂，直到下个月开始再执行。
+          {: note}
 
 后续步骤：
 - 运行 `ibmcloud ks cluster` 命令时，已除去的集群不再列在可用集群列表中之后，您可以复用该集群的名称。
 - 如果保留子网，那么可以[在新集群中复用子网](cs_subnets.html#custom)，也可以日后从 IBM Cloud Infrastructure (SoftLayer) 产品服务组合中手动删除这些子网。
-- 如果保留了持久性存储器，那么日后可以通过 {{site.data.keyword.Bluemix_notm}} GUI 中的 IBM Cloud Infrastructure (SoftLayer) 仪表板来[删除存储器](cs_storage_remove.html#cleanup)。
+- 如果保留了持久性存储器，那么日后可以通过 {{site.data.keyword.Bluemix_notm}} 控制台中的 IBM Cloud Infrastructure (SoftLayer) 仪表板来[删除存储器](cs_storage_remove.html#cleanup)。

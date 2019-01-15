@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -63,8 +66,8 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 {: tsCauses}
 您没有正确的许可权来创建集群。您需要以下许可权才能创建集群：
 *  IBM Cloud Infrastructure (SoftLayer) 的**超级用户**角色。
-*  {{site.data.keyword.containerlong_notm}} 的**管理员**平台管理角色。
-*  {{site.data.keyword.registrylong_notm}} 的**管理员**平台管理角色。
+*  帐户级别的 {{site.data.keyword.containerlong_notm}} 的**管理员**平台管理角色。
+*  帐户级别的 {{site.data.keyword.registrylong_notm}} 的**管理员**平台管理角色。不要将 {{site.data.keyword.registryshort_notm}} 的策略限制为资源组级别。如果您是在 2018 年 10 月 4 日之前开始使用的 {{site.data.keyword.registrylong_notm}}，请确保[启用 {{site.data.keyword.Bluemix_notm}} IAM 策略实施](/docs/services/Registry/registry_users.html#existing_users)。
 
 对于与基础架构相关的错误，在自动帐户链接启用后创建的 {{site.data.keyword.Bluemix_notm}} 现买现付帐户已设置有对 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的访问权。您可以为集群购买基础架构资源，而无需额外配置。
 如果您有有效的现买现付帐户，但收到此错误消息，说明可能未使用正确的 IBM Cloud Infrastructure (SoftLayer) 帐户凭证来访问基础架构资源。
@@ -78,9 +81,9 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 {: tsResolve}
 帐户所有者必须正确设置基础架构帐户凭证。凭证取决于使用的基础架构帐户的类型。
 
-1.  验证您是否有权访问基础架构帐户。登录到 [{{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/)，然后在可展开的菜单中，单击**基础架构**。如果看到基础架构仪表板，说明您有权访问基础架构帐户。
+1.  验证您是否有权访问基础架构帐户。登录到 [{{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/)，然后在菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中，单击**基础架构**。如果看到基础架构仪表板，说明您有权访问基础架构帐户。
 2.  检查集群使用的是否是与现买现付帐户随附的基础架构帐户不同的基础架构帐户。
-    1.  在可展开的菜单中，单击**容器 > 集群**。
+    1.  在菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中，单击**容器 > 集群**。
     2.  从表中选择您的集群。
     3.  在**概述**选项卡中，检查**基础架构用户**字段。
         * 如果看不到**基础架构用户**字段，那么会有一个链接的现买现付帐户，此帐户将相同的凭证用于基础架构和平台帐户。
@@ -103,7 +106,7 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 您可能具有企业网络策略，这些策略灰阻止通过代理或防火墙从本地系统访问公共端点。
 
 {: tsResolve}
-[允许 TCP 访问以使 CLI 命令能够运作](cs_firewall.html#firewall)。此任务需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
+[允许 TCP 访问以使 CLI 命令能够运作](cs_firewall.html#firewall_bx)。此任务需要对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](cs_users.html#platform)。
 
 
 ## 防火墙阻止集群连接到资源
@@ -147,7 +150,7 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 您可能已在 IBM Cloud Infrastructure (SoftLayer) 帐户中设置了其他防火墙或定制了现有防火墙设置。{{site.data.keyword.containerlong_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。另一个原因可能是工作程序节点陷入重新装入循环。
 
 {: tsResolve}
-[允许集群访问基础架构资源和其他服务](cs_firewall.html#firewall_outbound)。此任务需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
+[允许集群访问基础架构资源和其他服务](cs_firewall.html#firewall_outbound)。此任务需要对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](cs_users.html#platform)。
 
 <br />
 
@@ -162,7 +165,7 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 
 
 {: tsCauses}
-在 {{site.data.keyword.Bluemix_notm}} 中，每个资源都必须位于资源组中。例如，集群 `mycluster` 可能存在于 `default` 资源组中。帐户所有者通过为您分配 IAM 平台角色，从而授予您对资源的访问权时，该访问权可以是针对特定资源或针对资源组。授予您对特定资源的访问权时，您无权访问资源组。在这种情况下，您无需将资源组设定为目标就可以使用您有权访问的集群。如果设定为目标的资源组不是集群所在的资源组，那么针对该集群的操作会失败。反之，授予您对资源的访问权以作为对资源组访问权的一部分时，必须将资源组设定为目标，才能使用该组中的集群。如果未将 CLI 会话的目标设定为集群所在的资源组，那么针对该集群的操作会失败。
+在 {{site.data.keyword.Bluemix_notm}} 中，每个资源都必须位于资源组中。例如，集群 `mycluster` 可能存在于 `default` 资源组中。帐户所有者通过为您分配 {{site.data.keyword.Bluemix_notm}} IAM 平台角色，从而授予您对资源的访问权时，该访问权可以是针对特定资源或针对资源组。授予您对特定资源的访问权时，您无权访问资源组。在这种情况下，您无需将资源组设定为目标就可以使用您有权访问的集群。如果设定为目标的资源组不是集群所在的资源组，那么针对该集群的操作会失败。反之，授予您对资源的访问权以作为对资源组访问权的一部分时，必须将资源组设定为目标，才能使用该组中的集群。如果未将 CLI 会话的目标设定为集群所在的资源组，那么针对该集群的操作会失败。
 
 如果找不到集群或无法使用集群，那么可能会遇到下列其中一个问题：
 * 您有权访问集群和集群所在的资源组，但 CLI 会话的目标未设定为集群所在的资源组。
@@ -219,7 +222,7 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
                      Resource
         ```
         {: screen}
-    2. 查找具有值为 `containers-kubernetes` 的 **Service Name** 以及值为集群标识的 **Service Instance** 的策略。您可以通过运行 `ibmcloud ks cluster-get<cluster_name>` 来查找集群标识。例如，以下策略指示用户有权访问特定集群：
+    2. 查找具有值为 `containers-kubernetes` 的 **Service Name** 以及值为集群标识的 **Service Instance** 的策略。您可以通过运行 `ibmcloud ks cluster-get<cluster_name>`. 例如，以下策略指示用户有权访问特定集群：
         ```
         Policy ID:   140555ce-93ac-4fb2-b15d-6ad726795d90
         Roles:       Administrator
@@ -253,7 +256,7 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
         ibmcloud target -g none
         ```
         {: pre}
-        **注**：此命令失败，因为不存在名为 `none` 的资源组。但是，命令失败时，会自动取消将当前资源组设定为目标。
+        此命令会失败，因为不存在名为 `none` 的资源组。但是，命令失败时，会自动取消将当前资源组设定为目标。
 
       2. 将集群设定为目标。
          ```
@@ -262,13 +265,13 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
         {: pre}
 
     * 如果您无权访问集群：
-        1. 请求您的帐户所有者为您分配对该集群的 [IAM 平台角色](cs_users.html#platform)。
+        1. 请求您的帐户所有者为您分配对该集群的 [{{site.data.keyword.Bluemix_notm}}IAM 平台角色](cs_users.html#platform)。
         2. 不要将资源组设定为目标。如果已经将某个资源组设定为目标，请取消将其设定为目标：
           ```
           ibmcloud target -g none
           ```
           {: pre}
-          **注**：此命令失败，因为不存在名为 `none` 的资源组。但是，命令失败时，会自动取消将当前资源组设定为目标。
+        此命令会失败，因为不存在名为 `none` 的资源组。但是，命令失败时，会自动取消将当前资源组设定为目标。
         3. 将集群设定为目标。
           ```
     ibmcloud ks cluster-config <cluster_name_or_ID>
@@ -335,7 +338,7 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 请考虑以下场景来了解集群可能变为孤立集群的情况。
 1.  您具有 {{site.data.keyword.Bluemix_notm}} 现买现付帐户。
 2.  您创建了名为 `Cluster1` 的集群。工作程序节点和其他基础架构资源供应到现买现付帐户随附的基础架构帐户中。
-3.  稍后，您发现自己的团队在使用旧的或共享的 IBM Cloud Infrastructure (SoftLayer) 帐户。您使用 `ibmcloud ks credentials-set` 命令更改了 IBM Cloud Infrastructure (SoftLayer) 凭证，以使用团队帐户。
+3.  稍后，您发现自己的团队在使用旧的或共享的 IBM Cloud Infrastructure (SoftLayer) 帐户。为此，您使用 `ibmcloud ks credential-set` 命令更改了 IBM Cloud Infrastructure (SoftLayer) 凭证，以使用团队帐户。
 4.  您创建了另一个名为 `Cluster2` 的集群。工作程序节点和其他基础架构资源供应到团队基础架构帐户中。
 5.  您注意到 `Cluster1` 需要工作程序节点更新或工作程序节点重新装入，或者您只是想通过删除工作程序节点来将其清除。但是，由于 `Cluster1` 已供应到其他基础架构帐户中，因此无法修改其基础架构资源。`Cluster1` 成为孤立集群。
 6.  您遵循了以下部分中的解决步骤，但未将基础架构凭证设置回团队帐户。您可以删除 `Cluster1`，但现在 `Cluster2` 会成为孤立集群。
@@ -345,22 +348,23 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 
 {: tsResolve}
 1.  检查您的集群所在区域当前在使用哪个基础架构帐户来供应集群。
-    1.  登录到 [{{site.data.keyword.containerlong_notm}} 集群 GUI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/containers-kubernetes/clusters)。
+    1.  登录到 [{{site.data.keyword.containerlong_notm}} 集群控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/containers-kubernetes/clusters)。
     2.  从表中选择您的集群。
     3.  在**概述**选项卡中，检查**基础架构用户**字段。此字段可帮助确定您的 {{site.data.keyword.containerlong_notm}} 帐户使用的基础架构帐户是否不同于缺省值。
         * 如果看不到**基础架构用户**字段，那么会有一个链接的现买现付帐户，此帐户将相同的凭证用于基础架构和平台帐户。无法修改的集群可能是在其他基础架帐户中供应的。
         * 如果看到**基础架构用户**字段，说明您使用的基础架构帐户与现买现付帐户随附的基础架构帐户不同。这些不同的凭证应用于区域中的所有集群。无法修改的集群可能是在现买现付或其他基础架帐户中供应的。
 2.  检查哪个基础架构帐户已用于供应集群。
     1.  在**工作程序节点**选项卡中，选择工作程序节点，并记下其**标识**。
-    2.  打开可展开的菜单，然后单击**基础架构**。
-    3.  在基础架构菜单中，单击**设备 > 设备列表**。
+    2.  打开菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标")，然后单击**基础架构**。
+    3.  在基础架构导航窗格中，单击**设备 > 设备列表**。
     4.  搜索您先前记下的工作程序节点标识。
     5.  如果找不到工作程序节点标识，说明工作程序节点未供应到此基础架构帐户中。请切换到其他基础架构帐户，然后重试。
-3.  使用 `ibmcloud ks credentials-set` [命令](cs_cli_reference.html#cs_credentials_set)将基础架构凭证更改为集群工作程序节点供应到其中的帐户，即您在上一步中找到的帐户。**注**：如果您不再有权访问基础架构凭证，因而无法获得这些凭证，那么必须开具 {{site.data.keyword.Bluemix_notm}} 支持凭单来除去孤立集群。
+3.  使用 `ibmcloud ks credential-set` [命令](cs_cli_reference.html#cs_credentials_set)将基础架构凭证更改为集群工作程序节点供应到其中的帐户，即您在上一步中找到的帐户。如果您不再有权访问基础架构凭证，因而无法获得这些凭证，那么必须开具 {{site.data.keyword.Bluemix_notm}} 支持用例来除去孤立集群。
+    {: note}
 4.  [删除集群](cs_clusters.html#remove)。
 5.  如果需要，请将基础架构凭证重置为先前的帐户。请注意，如果创建集群使用的基础架构帐户不同于切换到的帐户，那么可能会使这些集群变为孤立集群。
-    * 要将凭证设置为其他基础架构帐户，请使用 `ibmcloud ks credentials-set` [命令](cs_cli_reference.html#cs_credentials_set)。
-    * 要使用 {{site.data.keyword.Bluemix_notm}} 现买现付帐户随附的缺省凭证，请使用 `ibmcloud ks credentials-unset` [命令](cs_cli_reference.html#cs_credentials_unset)。
+    * 要将凭证设置为其他基础架构帐户，请使用 `ibmcloud ks credential-set` [命令](cs_cli_reference.html#cs_credentials_set)。
+    * 要使用 {{site.data.keyword.Bluemix_notm}} 现买现付帐户随附的缺省凭证，请使用 `ibmcloud ks credential-unset` [命令](cs_cli_reference.html#cs_credentials_unset)。
 
 <br />
 
@@ -380,7 +384,7 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 主节点与工作程序节点之间的 OpenVPN 连接工作不正常。
 
 {: tsResolve}
-1. 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
+1. 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud Infrastructure (SoftLayer) 帐户代表。
 2. 重新启动 OpenVPN 客户机 pod。
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -447,7 +451,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: screen}
 
 {: tsCauses}
-要将服务绑定到集群，您必须具有在其中供应服务实例的空间的 Cloud Foundry 开发者用户角色。此外，您必须具有对 {{site.data.keyword.containerlong}} 的 IAM 编辑者访问权。要访问服务实例，您必须登录到在其中供应该服务实例的空间。
+要将服务绑定到集群，您必须具有在其中供应服务实例的空间的 Cloud Foundry 开发者用户角色。此外，您必须具有对 {{site.data.keyword.containerlong}} 的 {{site.data.keyword.Bluemix_notm}} IAM 编辑者平台访问权。要访问服务实例，您必须登录到在其中供应该服务实例的空间。
 
 {: tsResolve}
 
@@ -483,7 +487,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 
 4. 稍等几分钟，然后让用户重试绑定服务。
 
-5. 如果这无法解决此问题，说明 IAM 许可权不同步，您无法自行解决此问题。请通过开具支持凭单来[联系 IBM 支持](/docs/get-support/howtogetsupport.html#getting-customer-support)。确保提供集群标识、用户标识和服务实例标识。
+5. 如果这无法解决此问题，说明 {{site.data.keyword.Bluemix_notm}} IAM 许可权不同步，您无法自行解决此问题。请通过开具支持用例来[联系 IBM 支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。确保提供集群标识、用户标识和服务实例标识。
    1. 检索集群标识。
       ```
       ibmcloud ks clusters
@@ -512,7 +516,7 @@ This service doesn't support creation of keys
 {: screen}
 
 {: tsCauses}
-{{site.data.keyword.Bluemix_notm}} 中的某些服务（例如，{{site.data.keyword.keymanagementservicelong}}）不支持创建服务凭证，也称为服务密钥。如果不支持服务密钥，那么服务不可绑定到集群。要查找支持创建服务密钥的服务的列表，请参阅[使外部应用程序能够使用 {{site.data.keyword.Bluemix_notm}} 服务](/docs/apps/reqnsi.html#accser_external)。
+{{site.data.keyword.Bluemix_notm}} 中的某些服务（例如，{{site.data.keyword.keymanagementservicelong}}）不支持创建服务凭证，也称为服务密钥。如果不支持服务密钥，那么服务不可绑定到集群。要查找支持创建服务密钥的服务的列表，请参阅[使外部应用程序能够使用 {{site.data.keyword.Bluemix_notm}} 服务](/docs/resources/connect_external_app.html#externalapp)。
 
 {: tsResolve}
 要集成不支持服务密钥的服务，请检查服务是否提供可用于直接从应用程序访问服务的 API。例如，如果想要使用 {{site.data.keyword.keymanagementservicelong}}，请参阅 [API 引用 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/apidocs/kms?language=curl)。
@@ -561,8 +565,8 @@ This service doesn't support creation of keys
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.8
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.8
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.10.11
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.10.11
   ```
   {: screen}
 
@@ -670,7 +674,7 @@ This service doesn't support creation of keys
 *  pod 可能已超出资源请求或限制。
 
 {: tsResolve}
-此任务需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
+此任务需要对集群的 {{site.data.keyword.Bluemix_notm}} IAM [**管理员**平台角色](cs_users.html#platform)。
 
 如果刚创建了 Kubernetes 集群，请运行以下命令并等待工作程序节点初始化。
 
@@ -883,20 +887,13 @@ Helm 实例中 {{site.data.keyword.Bluemix_notm}} 存储库的 URL 可能不正�
 {: shortdesc}
 
 -  在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
-
 -   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/bluemix/support/#status)。
--   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
-
-如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
+-   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
     {: tip}
 -   请复查论坛，以查看是否有其他用户遇到相同的问题。使用论坛进行提问时，请使用适当的标记来标注您的问题，以方便 {{site.data.keyword.Bluemix_notm}} 开发团队识别。
-
     -   如果您有关于使用 {{site.data.keyword.containerlong_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
     -   有关服务的问题和入门指示信息，请使用 [IBM Developer Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
     有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support/howtogetsupport.html#using-avatar)。
-
--   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
-
+-   通过开具用例，与 IBM 支持人员联系。要了解有关开具 IBM 支持用例或有关支持级别和用例严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
 {: tip}
-报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
 

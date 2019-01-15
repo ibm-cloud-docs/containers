@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
@@ -31,7 +34,10 @@ lastupdated: "2018-10-25"
 确保一个主机仅在一个 Ingress 资源中进行定义。如果一个主机在多个 Ingress 资源中进行定义，那么 ALB 可能无法正确转发流量，并且您可能会遇到错误。
 {: tip}
 
-## 步骤 1：检查 Ingress 部署或 ALB pod 日志中的错误消息
+开始之前，请确保您具有以下 [{{site.data.keyword.Bluemix_notm}} IAM 访问策略](cs_users.html#platform)：
+  - 对集群的**编辑者**或**管理员**平台角色
+
+## 步骤 1：检查 Ingress 部署和 ALB pod 日志中的错误消息
 {: #errors}
 
 首先检查 Ingress 资源部署事件和 ALB pod 日志中的错误消息。这些错误消息可帮助您找到故障的根本原因，并在后续各部分中进一步调试 Ingress 设置。
@@ -121,11 +127,11 @@ kubectl get pods -n kube-system | grep alb
     `dal10` 和 `dal13` 中具有工作程序节点的多专区集群的示例输出：
 
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone   
-    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -                dal13   
-    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -                dal10   
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13   
-    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222    dal10  
+    ALB ID                                            Status     Type      ALB IP           Zone    Build
+    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
+    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
+    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
     ```
     {: screen}
 
@@ -133,7 +139,7 @@ kubectl get pods -n kube-system | grep alb
 
 2. 检查 ALB IP 的运行状况。
 
-    * 对于单专区集群和多专区集群：对每个公共 ALB 的 IP 地址执行 ping 操作，以确保每个 ALB 都能够成功接收包。注：如果使用的是专用 ALB，那么只能从专用网络对其 IP 地址执行 ping 操作。
+    * 对于单专区集群和多专区集群：对每个公共 ALB 的 IP 地址执行 ping 操作，以确保每个 ALB 都能够成功接收包。如果使用的是专用 ALB，那么只能从专用网络对其 IP 地址执行 ping 操作。
         ```
 ping <ALB_IP>
       ```
@@ -142,10 +148,12 @@ ping <ALB_IP>
         * 如果 CLI 返回超时并且您具有保护工作程序节点的定制防火墙，请确保在[防火墙](cs_troubleshoot_clusters.html#cs_firewall)中允许 ICMP。
         * 如果没有防火墙阻止 ping 操作，并且 ping 操作一直运行到超时，请[检查 ALB pod 的状态](#check_pods)。
 
-    * 仅多专区集群：可以使用 MZLB 运行状况检查来确定 ALB IP 的阶段状态。有关 MZLB 的更多信息，请参阅[多专区负载均衡器 (MZLB)](cs_ingress.html#planning)。**注**：MZLB 运行状况检查仅可用于具有以下格式的新 Ingress 子域的集群：`<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。如果集群仍使用旧格式的 `<cluster_name>.<region>.containers.mybluemix.net`，请[将单专区集群转换为多专区集群](cs_clusters.html#add_zone)。将为集群分配采用新格式的子域，但也可以继续使用较旧的子域格式。或者，可以对自动分配了新的子域格式的新集群进行排序。
+    * 仅多专区集群：可以使用 MZLB 运行状况检查来确定 ALB IP 的阶段状态。有关 MZLB 的更多信息，请参阅[多专区负载均衡器 (MZLB)](cs_ingress.html#planning)。MZLB 运行状况检查仅可用于具有以下格式的新 Ingress 子域的集群：`<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。如果集群仍使用旧格式的 `<cluster_name>.<region>.containers.mybluemix.net`，请[将单专区集群转换为多专区集群](cs_clusters.html#add_zone)。将为集群分配采用新格式的子域，但也可以继续使用较旧的子域格式。或者，可以对自动分配了新的子域格式的新集群进行排序。
+    
+
     以下 HTTP cURL 命令使用 `albhealth` 主机，该主机由 {{site.data.keyword.containerlong_notm}} 配置为返回 ALB IP 的 `healthy` 或 `unhealthy` 阶段状态。
             ```
-    curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
+            curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-12345.us-south.containers.appdomain.cloud"
     ```
         {: pre}
 
@@ -163,7 +171,7 @@ ping <ALB_IP>
     {: pre}
 
     输出示例：
-        ```
+    ```
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     ```
@@ -177,7 +185,7 @@ ping <ALB_IP>
     {: pre}
 
     输出示例：
-        ```
+    ```
     NAME                HOSTS                                                    ADDRESS                        PORTS     AGE
     myingressresource   mycluster-12345.us-south.containers.appdomain.cloud      169.46.52.222,169.62.196.238   80        1h
     ```
@@ -248,8 +256,8 @@ ping <ALB_IP>
 
     例如，不可访问的 IP `169.62.196.238` 属于 ALB `public-cr24a9f2caf6554648836337d240064935-alb1`：
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP           Zone
-    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238   dal13
+    ALB ID                                            Status     Type      ALB IP           Zone   Build
+    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
     ```
     {: screen}
 
@@ -260,7 +268,7 @@ ping <ALB_IP>
     {: pre}
 
     输出示例：
-        ```
+    ```
     public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq   2/2       Running   0          24m
     public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-trqxc   2/2       Running   0          24m
     ```
@@ -371,7 +379,7 @@ ping <ALB_IP>
     {: pre}
 
     输出示例：
-        ```
+    ```
     mycluster-12345.us-south.containers.appdomain.cloud has address 169.46.52.222
     mycluster-12345.us-south.containers.appdomain.cloud has address 169.62.196.238
     ```
@@ -387,20 +395,13 @@ ping <ALB_IP>
 {: shortdesc}
 
 -  在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
-
 -   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/bluemix/support/#status)。
--   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
-
-如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
+-   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
     {: tip}
 -   请复查论坛，以查看是否有其他用户遇到相同的问题。使用论坛进行提问时，请使用适当的标记来标注您的问题，以方便 {{site.data.keyword.Bluemix_notm}} 开发团队识别。
-
     -   如果您有关于使用 {{site.data.keyword.containerlong_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
     -   有关服务的问题和入门指示信息，请使用 [IBM Developer Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
     有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support/howtogetsupport.html#using-avatar)。
-
--   通过开具凭单，与 IBM 支持联系。要了解有关开具 IBM 支持凭单或有关支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
-
+-   通过开具用例，与 IBM 支持人员联系。要了解有关开具 IBM 支持用例或有关支持级别和用例严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
 {: tip}
-报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
 

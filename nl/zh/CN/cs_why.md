@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -20,7 +23,7 @@ lastupdated: "2018-10-25"
 # 为什么使用 {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
-{{site.data.keyword.containerlong}} 通过组合 Docker 容器、Kubernetes 技术、直观的用户体验以及内置安全性和隔离，提供功能强大的工具来自动对计算主机集群中的容器化应用程序进行部署、操作、扩展和监视。有关证书信息，请参阅 [Compliance on the {{site.data.keyword.Bluemix_notm}} [外部链接图标](../icons/launch-glyph.svg "外部链接图标")(https://www.ibm.com/cloud/compliance)]。
+{{site.data.keyword.containerlong}} 通过组合 Docker 容器、Kubernetes 技术、直观的用户体验以及内置安全性和隔离，提供功能强大的工具来自动对计算主机集群中的容器化应用程序进行部署、操作、扩展和监视。有关证书信息，请参阅 [Compliance on the {{site.data.keyword.Bluemix_notm}} ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/compliance)。
 {:shortdesc}
 
 
@@ -34,6 +37,7 @@ lastupdated: "2018-10-25"
 |-------|-----------|
 |隔离了计算、网络和存储基础架构的单租户 Kubernetes 集群|<ul><li>创建您自己的定制基础架构，以满足组织的需求。</li><li>使用 IBM Cloud Infrastructure (SoftLayer) 提供的资源来供应专用而安全的 Kubernetes 主节点、工作程序节点、虚拟网络和存储器。</li><li>由 {{site.data.keyword.IBM_notm}} 持续监视和更新的完全受管 Kubernetes 主节点，使您的集群可用。</li><li>用于将工作程序节点作为具有可信计算的裸机服务器供应的选项。</li><li>存储持久数据，在 Kubernetes pod 之间共享数据，以及在需要时使用集成和安全卷服务复原数据。</li><li>受益于对所有本机 Kubernetes API 的完全支持。</li></ul>|
 |多专区集群可提高高可用性| <ul><li>通过工作程序池轻松管理同一机器类型（CPU、内存、虚拟或物理）的工作程序节点。</li><li>通过在精选多专区中均匀分布节点并对应用程序使用反亲缘关系 pod 部署，以防止专区故障。</li><li>通过使用多专区集群而不是在单独的集群中复制资源，从而降低成本。</li><li>通过在集群的每个专区中自动设置的多专区负载均衡器 (MZLB)，受益于跨应用程序的自动负载均衡。</li></ul>|
+|高可用性主节点| <ul>在运行 Kubernetes V1.10 或更高版本的集群中可用。<li>缩短集群停机时间，例如在对创建集群时自动供应的高可用性主节点进行主节点更新期间。</li><li>在[多专区集群](cs_clusters_planning.html#multizone)中的各个专区中分布主节点，以防止集群发生专区故障。</li></ul> |
 |使用漏洞顾问程序确保映像安全合规性|<ul><li>在安全的 Docker 专用映像注册表中设置您自己的存储库，映像会存储在该存储库中，并供组织中的所有用户共享。</li><li>受益于自动扫描专用 {{site.data.keyword.Bluemix_notm}} 注册表中的映像。</li><li>查看特定于映像中所用操作系统的建议，以修复潜在漏洞。</li></ul>|
 |持续监视集群运行状况|<ul><li>使用集群仪表板可快速查看和管理集群、工作程序节点和容器部署的运行状况。</li><li>使用 {{site.data.keyword.monitoringlong}}，找到详细的使用量度量值，并快速扩展集群以满足工作负载需求。</li><li>使用 {{site.data.keyword.loganalysislong}} 复查日志记录信息，以查看详细的集群活动。</li></ul>|
 |安全地向公众公开应用程序|<ul><li>在公共 IP 地址、{{site.data.keyword.IBM_notm}} 提供的路径或您自己的定制域之间进行选择，以通过因特网访问集群中的服务。</li></ul>|
@@ -110,6 +114,8 @@ lastupdated: "2018-10-25"
 |[工作程序节点上用于非持久性存储的磁盘空间](cs_storage_planning.html#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[能够在每个 {{site.data.keyword.containerlong_notm}} 区域中创建集群](cs_regions.html)| | <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[用于提高应用程序高可用性的多专区集群](cs_clusters_planning.html#multizone)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|实现更高可用性的复制主节点（Kubernetes 1.10 或更高版本）| | <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|[用于增加容量的可扩展工作程序节点数](cs_app.html#app_scaling)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[基于 NFS 文件的持久存储器（带有卷）](cs_storage_file.html#file_storage)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[LoadBalancer 服务对稳定 IP 地址的公共或专用网络应用程序访问权](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[Ingress 服务对稳定 IP 地址和可定制 URL 的公用网络应用程序访问权](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
@@ -121,6 +127,8 @@ lastupdated: "2018-10-25"
 {: caption="免费和标准集群的特征" caption-side="top"}
 
 <br />
+
+
 
 
 ## 定价和计费
@@ -135,7 +143,7 @@ lastupdated: "2018-10-25"
 **该如何检查我的计费和使用情况？**<br>
 要检查使用情况和估算的总计，请参阅[查看使用情况](/docs/billing-usage/viewing_usage.html#viewingusage)。
 
-如果您链接了 {{site.data.keyword.Bluemix_notm}} 和 IBM Cloud Infrastructure (SoftLayer) 帐户，那么将收到合并帐单。有关更多信息，请参阅[链接帐户的合并计费](/docs/billing-usage/linking_accounts.html#unifybillaccounts)。
+如果您链接了 {{site.data.keyword.Bluemix_notm}} 和 IBM Cloud Infrastructure (SoftLayer) 帐户，那么将收到合并帐单。有关更多信息，请参阅[链接帐户的合并计费](/docs/customer-portal/linking_accounts.html#unifybillaccounts)。
 
 **能按团队或部门对云资源分组以进行计费吗？**<br>
 您可以[使用资源组](/docs/resources/bestpractice_rgs.html#bp_resourcegroups)将 {{site.data.keyword.Bluemix_notm}} 资源（包括集群）组织成组，从而对计费进行组织。
@@ -180,7 +188,7 @@ lastupdated: "2018-10-25"
   <p>有关机器规范的详细信息，请参阅[工作程序节点的可用硬件](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)。</p></dd>
 
 <dt id="bandwidth">公共带宽</dt>
-  <dd><p>带宽是指入站和出站网络流量的公共数据传输，包括进出全球数据中心的 {{site.data.keyword.Bluemix_notm}} 资源的数据传输。公共带宽按每 GB 计费。您可以通过登录到 [{{site.data.keyword.Bluemix_notm}} 控制台](https://console.bluemix.net/)，从菜单中选择**基础架构**，然后选择**网络 > 带宽 > 摘要**页面来查看当前带宽摘要。
+  <dd><p>带宽是指入站和出站网络流量的公共数据传输，包括进出全球数据中心的 {{site.data.keyword.Bluemix_notm}} 资源的数据传输。公共带宽按每 GB 计费。您可以通过登录到 [{{site.data.keyword.Bluemix_notm}} 控制台](https://console.bluemix.net/)，从菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中选择**基础架构**，然后选择**网络 > 带宽 > 摘要**页面来查看当前带宽摘要。
   <p>查看影响公共带宽费用的以下因素：</p>
   <ul><li><strong>位置</strong>：与工作程序节点一样，费用随资源所部署到的专区而有所不同。</li>
   <li><strong>随附带宽或现买现付</strong>：工作程序节点机器可能分配有一定的每月出站联网带宽，例如 250 GB（对于 VM）或 500 GB（对于裸机）。或者，分配可能是根据 GB 使用量现买现付。</li>

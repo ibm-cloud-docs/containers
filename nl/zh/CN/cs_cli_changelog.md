@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -26,7 +29,7 @@ lastupdated: "2018-10-25"
 
 请参阅下表以获取每个 CLI 插件版本的更改摘要。
 
-<table summary="{{site.data.keyword.containerlong_notm}} CLI 插件的更改日志">
+<table summary="{{site.data.keyword.containerlong_notm}} CLI 插件的版本更改概述">
 <caption>{{site.data.keyword.containerlong_notm}} CLI 插件的更改日志</caption>
 <thead>
 <tr>
@@ -36,6 +39,35 @@ lastupdated: "2018-10-25"
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.1.654</td>
+<td>2018 年 12 月 5 日</td>
+<td>更新了文档和翻译。</td>
+</tr>
+<tr>
+<td>0.1.638</td>
+<td>2018 年 11 月 15 日</td>
+<td>
+<ul><li>添加了 [<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh) 命令。</li>
+<li>向 <code>ibmcloud ks cluster-get</code> 和 <code>ibmcloud ks clusters</code> 的输出添加了资源组名称。</li></ul>
+</td>
+</tr>
+<tr>
+<td>0.1.635</td>
+<td>2018 年 11 月 6 日</td>
+<td>添加了 [<code>ibmcloud ks alb-autoupdate-disable</code>](cs_cli_reference.html#cs_alb_autoupdate_disable)、[<code>ibmcloud ks alb-autoupdate-enable</code>](cs_cli_reference.html#cs_alb_autoupdate_enable)、[<code>ibmcloud ks alb-autoupdate-get</code>](cs_cli_reference.html#cs_alb_autoupdate_get)、[<code>ibmcloud ks alb-rollback</code>](cs_cli_reference.html#cs_alb_rollback) 和 [<code>ibmcloud ks alb-update</code>](cs_cli_reference.html#cs_alb_update) 命令，用于管理 Ingress ALB 集群附加组件的自动更新。
+</td>
+</tr>
+<tr>
+<td>0.1.621</td>
+<td>2018 年 10 月 30 日</td>
+<td><ul>
+<li>添加了 [<code>ibmcloud ks credential-get</code> 命令](cs_cli_reference.html#cs_credential_get)。</li>
+<li>添加了对 <code>storage</code> 日志源用于所有集群日志记录命令的支持。有关更多信息，请参阅<a href="cs_health.html#logging">了解集群和应用程序日志转发</a>。</li>
+<li>向 [<code>ibmcloud ks cluster-config</code> 命令](cs_cli_reference.html#cs_cluster_config)添加了 `--network` 标志，用于下载 Calico 配置文件以运行所有 Calico 命令。</li>
+<li>小幅错误修订和重构</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.1.593</td>
 <td>2018 年 10 月 10 日</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -53,6 +56,10 @@ lastupdated: "2018-10-25"
 **必须使用多专区集群吗？**</br>
 不是。您可以根据需要创建任意数量的单专区集群。实际上，为了简化管理，或者在集群必须位于特定[单专区城市](cs_regions.html#zones)中时，您可能更愿意使用单专区集群。
 
+**在单个专区中可以有高可用性主节点吗？**</br>
+可以，运行 Kubernetes V1.10 或更高版本的集群可以有高可用性主节点。在单个专区中，主节点具有高可用性，在分别用于 Kubernetes API 服务器、etcd、调度程序和控制器管理器的不同物理主机上包含多个副本，以防止发生中断，例如在主节点更新期间。要避免受到专区故障的影响，可以执行以下操作：
+* [在支持多专区的专区中创建集群](cs_clusters_planning.html#multizone)，其中主节点在各专区中分布。
+* [创建多个集群](#multiple_clusters)并使用全局负载均衡器连接这些集群。
 
 ## 多专区集群
 {: #multizone}
@@ -65,7 +72,7 @@ lastupdated: "2018-10-25"
 工作程序池是具有相同类型模板（例如，机器类型、CPU 和内存）的工作程序节点的集合。在创建集群时，会自动为您创建缺省工作程序池。要使工作程序节点分布在跨专区的池中、将工作程序节点添加到池或者更新工作程序节点，那么可以使用新的 `ibmcloud ks worker-pool` 命令。
 
 **仍可以使用独立工作程序节点吗？**</br>
-支持独立工作程序节点的先前集群设置，但不推荐使用。确保[向集群添加工作程序池](cs_clusters.html#add_pool)，然后[迁移到使用工作程序池](cs_cluster_update.html#standalone_to_workerpool)来组织工作程序节点，以取代独立工作程序节点。
+支持独立工作程序节点的先前集群设置，但不推荐使用。确保[向集群添加工作程序池](cs_clusters.html#add_pool)，然后[使用工作程序池](cs_cluster_update.html#standalone_to_workerpool)来组织工作程序节点，以取代独立工作程序节点。
 
 **可以将单专区集群转换为多专区集群吗？**</br>
 如果集群位于某个[受支持的多专区大城市](cs_regions.html#zones)中，那么是。请参阅[从独立工作程序节点更新到工作程序池](cs_cluster_update.html#standalone_to_workerpool)。
@@ -74,8 +81,7 @@ lastupdated: "2018-10-25"
 ### 我想了解有关多专区集群设置的更多信息
 {: #mz_setup}
 
-<img src="images/cs_cluster_multizone.png" alt="多专区集群的高可用性" width="500" style="width:500px; border-style: none"/>
-
+<img src="images/cs_cluster_multizone-ha.png" alt="多专区集群的高可用性" width="500" style="width:500px; border-style: none"/>
 
 您可以向集群添加更多专区，以在一个区域内跨多个专区的工作程序池中复制工作程序节点。多专区集群旨在跨工作程序节点和专区均匀安排 pod，以确保可用性和故障恢复。如果工作程序节点未跨专区均匀分布，或者其中一个专区中的容量不足，那么 Kubernetes 调度程序可能无法安排所有请求的 pod。结果，pod 可能会进入**暂挂**状态，直到有足够的容量可用为止。如果要更改缺省行为，以使 Kubernetes 调度程序在多个专区中以最佳分布方式分布 pod，请使用 `preferredDuringSchedulingIgnoredDuringExecution` [pod 亲缘关系策略](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)。
 
@@ -88,16 +94,19 @@ lastupdated: "2018-10-25"
 - **在 3 个专区中分布资源：**使用此选项时，每个专区会部署 3 个核心，总容量为 9 个核心。要处理工作负载，在同一时间必须有两个专区在正常运行。如果一个专区不可用，那么其他两个专区可以处理工作负载。如果两个专区不可用，那么剩余 3 个核心将处理工作负载。每个区域部署 3 个核心意味着机器更小，从而降低了成本。</br>
 
 **如何设置我的 Kubernetes 主节点？**</br>
-多专区集群设置有单个 Kubernetes 主节点，该主节点在工作程序所在的大城市区域中进行供应。例如，如果工作程序位于 `dal10`、`dal12` 或 `dal13` 这三个专区中的一个或多个专区中，那么主节点会位于 Dallas 多专区大城市中。
+多专区集群可设置单个 Kubernetes 主节点或高可用性（Kubernetes 1.10 或更高版本）Kubernetes 主节点，该主节点在工作程序所在的大城市区域中进行供应。此外，如果创建多专区集群，那么高可用性主节点会在各专区中分布。例如，如果集群位于 `dal10`、`dal12` 或 `dal13` 专区中，那么主节点会在达拉斯多专区大城市中的各专区中分布。
 
 **Kubernetes 主节点变得不可用时会发生什么情况？**</br>
-[Kubernetes 主节点](cs_tech.html#architecture)是用于保持集群正常启动并运行的主组件。主节点将集群资源及其配置存储在充当集群单个事实点的 etcd 数据库中。Kubernetes API 服务器是从工作程序节点到主节点的所有集群管理请求或者想要与集群资源交互时的主入口点。<br><br>如果主节点发生故障，那么工作负载将继续在工作程序节点上运行，但是无法使用 `kubectl` 命令来处理集群资源或查看集群运行状况，直至主节点中的 Kubernetes API 服务器恢复运行。如果在主节点停运期间 pod 停止运行，那么在工作程序节点可再次访问 Kubernetes API 服务器之前，将无法重新调度 pod。<br><br>在主节点停运期间，您仍可以针对 {{site.data.keyword.containerlong_notm}} API 运行 `ibmcloud ks` 命令以处理基础架构资源，例如，工作程序节点或 VLAN。如果通过向集群添加或从中除去工作程序节点来更改当前集群配置，那么在主节点恢复运行前，更改不会发生。**注**：在主节点停运期间，请勿重新启动或重新引导工作程序节点。此操作会从工作程序节点中除去 pod。因为 Kubernetes API 服务器不可用，因此无法将 pod 重新调度到集群中的其他工作程序节点。
+[Kubernetes 主节点](cs_tech.html#architecture)是用于保持集群正常启动并运行的主组件。主节点将集群资源及其配置存储在充当集群单个事实点的 etcd 数据库中。Kubernetes API 服务器是从工作程序节点到主节点的所有集群管理请求或者想要与集群资源交互时的主入口点。<br><br>如果主节点发生故障，那么工作负载将继续在工作程序节点上运行，但是无法使用 `kubectl` 命令来处理集群资源或查看集群运行状况，直至主节点中的 Kubernetes API 服务器恢复运行。如果在主节点停运期间 pod 停止运行，那么在工作程序节点可再次访问 Kubernetes API 服务器之前，将无法重新调度 pod。<br><br>在主节点停运期间，您仍可以针对 {{site.data.keyword.containerlong_notm}} API 运行 `ibmcloud ks` 命令以处理基础架构资源，例如，工作程序节点或 VLAN。如果通过向集群添加或从中除去工作程序节点来更改当前集群配置，那么在主节点恢复运行前，更改不会发生。
+
+在主节点停运期间，请勿重新启动或重新引导工作程序节点。此操作会从工作程序节点中除去 pod。因为 Kubernetes API 服务器不可用，因此无法将 pod 重新调度到集群中的其他工作程序节点。
+{: important}
 
 
 要保护集群不受 Kubernetes 主节点故障的影响或在多专区集群不可用的区域中保护集群，可以[设置多个集群并通过全局负载均衡器连接](#multiple_clusters)。
 
 **是否必须执行任何操作从而使主节点可跨专区与工作程序进行通信？**</br>
-可以。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
+可以。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud Infrastructure (SoftLayer) 帐户代表。
 
 **如何允许用户通过公共因特网访问应用程序？**</br>
 可以使用 Ingress 应用程序负载均衡器 (ALB) 或 LoadBalancer 服务来公开应用程序。
@@ -112,8 +121,8 @@ lastupdated: "2018-10-25"
 NFS 文件和块存储器不可跨专区共享。持久性卷只能在实际存储设备所在的专区中使用。如果想要继续使用集群中的现有 NFS 文件或块存储器，那么必须将区域和专区标签应用于现有持久性卷。这些标签可帮助 kube-scheduler 确定在何处安排使用持久性卷的应用程序。运行以下命令并将 `<mycluster>` 替换为您的集群名称。
 
 ```
-    bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
-    ```
+bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
+```
 {: pre}
 
 **我已创建多专区集群。为什么仍然只有一个专区？如何向集群添加专区？**</br>
@@ -135,7 +144,7 @@ NFS 文件和块存储器不可跨专区共享。持久性卷只能在实际存�
   <tbody>
     <tr>
     <td>向集群添加工作程序节点。</td>
-    <td><strong>不推荐</strong>：<code>ibmcloud ks worker-add</code> 用于添加独立工作程序节点。</td>
+    <td><p class="deprecated"><code>ibmcloud ks worker-add</code>，用于添加独立工作程序节点。</p></td>
     <td><ul><li>要添加与现有池不同的机器类型，请创建新的工作程序池：<code>ibmcloud ks worker-pool-create</code> [命令](cs_cli_reference.html#cs_worker_pool_create)。</li>
     <li>要向现有池添加工作程序节点，请调整池中每个专区的节点数：<code>ibmcloud ks worker-pool-resize</code> [命令](cs_cli_reference.html#cs_worker_pool_resize)。</li></ul></td>
     </tr>
@@ -147,7 +156,7 @@ NFS 文件和块存储器不可跨专区共享。持久性卷只能在实际存�
     </tr>
     <tr>
     <td>将新的 VLAN 用于工作程序节点。</td>
-    <td><strong>不推荐</strong>：添加使用新的专用或公用 VLAN 的新工作程序节点：<code>ibmcloud ks worker-add</code>。</td>
+    <td><p class="deprecated">添加使用新的专用或公用 VLAN 的新工作程序节点：<code>ibmcloud ks worker-add</code>。</p></td>
     <td>将工作程序池设置为使用不同于先前所用的公用或专用 VLAN：<code>ibmcloud ks zone-network-set</code> [命令](cs_cli_reference.html#cs_zone_network_set)。</td>
     </tr>
   </tbody>
@@ -172,8 +181,8 @@ NFS 文件和块存储器不可跨专区共享。持久性卷只能在实际存�
 **要设置用于多个集群的全局负载均衡器，请执行以下操作：**
 
 1. 在多个专区或区域中[创建集群](cs_clusters.html#clusters)。
-2. 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
-3. 在每个集群中，使用[应用程序负载均衡器 (ALB)](cs_ingress.html#ingress_expose_public) 或 [LoadBalancer 服务](cs_loadbalancer.html#config)来公开应用程序。
+2. 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud Infrastructure (SoftLayer) 帐户代表。
+3. 在每个集群中，使用[应用程序负载均衡器 (ALB)](cs_ingress.html#ingress_expose_public) 或 [LoadBalancer 服务](cs_loadbalancer.html)来公开应用程序。
 4. 对于每个集群，列出 ALB 或 LoadBalancer 服务的公共 IP 地址。
    - 要列出集群中所有支持公共的 ALB 的 IP 地址，请运行以下命令：
      ```
@@ -213,7 +222,10 @@ NFS 文件和块存储器不可跨专区共享。持久性卷只能在实际存�
 如果要锁定集群以允许专用 VLAN 上的专用流量，但阻止公用 VLAN 上的公共流量，那么可以[使用 Calico 网络策略保护集群不被公共访问](cs_network_cluster.html#both_vlans_private_services)。这些 Calico 网络策略不会阻止工作程序节点与主节点进行通信。通过[将联网工作负载隔离到边缘工作程序节点](cs_edge.html)，您还可以限制集群中漏洞的浮现，而无需锁定公共流量。
 
 如果想要创建仅具有专用 VLAN 访问权的集群，那么可创建单专区或多专区专用集群。但是，在工作程序节点仅连接到专用 VLAN 时，工作程序节点无法自动连接到主节点。必须配置网关设备以在工作程序节点和主节点之间提供网络连接。
-**注**：您无法将连接到公共和专用 VLAN 的集群转换为仅专用。从集群除去所有公用 VLAN 将导致多个集群组件停止工作。必须使用以下步骤来创建新集群。
+
+
+您无法将连接到公用和专用 VLAN 的集群转换为仅专用集群。从集群除去所有公用 VLAN 将导致多个集群组件停止工作。必须使用以下步骤来创建新集群。
+{: note}
 
 如果想要创建仅具有专用 VLAN 访问权的集群：
 
@@ -244,7 +256,7 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 ![标准集群中工作程序节点的硬件选项](images/cs_clusters_hardware.png)
 
 如果想要多个工作程序节点类型模板，那么必须为每个类型模板创建一个工作程序池。创建免费集群时，工作程序节点会自动作为 IBM Cloud Infrastructure (SoftLayer) 帐户中的虚拟共享节点进行供应。
-规划时，请考虑将[工作程序节点限制最小阈值](#resource_limit_node)设置为总内存容量的 10%。
+在标准集群中，可以选择最适合工作负载的机器类型。规划时，请考虑有关总 CPU 和内存容量的[工作程序节点资源保留量](#resource_limit_node)。
 
 可以使用[控制台 UI](cs_clusters.html#clusters_ui) 或 [CLI](cs_clusters.html#clusters_cli) 来部署集群。
 
@@ -349,12 +361,13 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 通过裸机，您可以直接访问机器上的物理资源，例如内存或 CPU。此设置无需虚拟机系统管理程序将物理资源分配给在主机上运行的虚拟机。相反，裸机机器的所有资源都仅供工作程序专用，因此您无需担心“吵闹的邻居”共享资源或降低性能。物理机器类型的本地存储器大于虚拟机，并且某些类型具有用于提高数据可用性的 RAID。工作程序节点上的本地存储器仅用于短期处理，更新或重新装入工作程序节点时将擦除主磁盘和辅助磁盘。对于持久性存储器解决方案，请参阅[规划高可用性持久性存储器](cs_storage_planning.html#storage_planning)。
 
 **除了更优秀的性能规格外，是否有些事情是裸机能做而 VM 无法做到的？**</br>
-可以。利用裸机，可以选择启用“可信计算”来验证工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。可以创建不含信任的新集群。有关节点启动过程中的信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containerlong_notm}}](cs_secure.html#trusted_compute)。在运行 Kubernetes V1.9 或更高版本并具有特定裸机机器类型的集群上，可信计算可用。运行 `ibmcloud ks machine-types <zone>` [命令](cs_cli_reference.html#cs_machine_types)后，可以通过查看 **Trustable** 字段来了解哪些机器支持信任。例如，`mgXc` GPU 类型模板不支持可信计算。
+可以。利用裸机，可以选择启用“可信计算”来验证工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。可以创建不含信任的新集群。有关节点启动过程中的信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containerlong_notm}}](cs_secure.html#trusted_compute)。可信计算可用于特定的裸机机器类型。运行 `ibmcloud ks machine-types <zone>` [命令](cs_cli_reference.html#cs_machine_types)后，可以通过查看 **Trustable** 字段来了解哪些机器支持信任。例如，`mgXc` GPU 类型模板不支持可信计算。
 
 **裸机听起来很不错！现在，有什么阻止我订购？**</br>
 裸机服务器比虚拟服务器更昂贵，最适用于需要更多资源和主机控制的高性能应用程序。
 
-**重要信息**：裸机服务器按月计费。如果您在月底之前取消裸机服务器，那么仍将收取该整月的费用。订购和取消裸机服务器是通过 IBM Cloud Infrastructure (SoftLayer) 帐户进行的手动过程。完成此过程可能需要超过一个工作日的时间。
+裸机服务器按月计费。如果您在月底之前取消裸机服务器，那么仍将收取该整月的费用。订购和取消裸机服务器是通过 IBM Cloud Infrastructure (SoftLayer) 帐户进行的手动过程。完成此过程可能需要超过一个工作日的时间。
+{: important}
 
 **我可订购哪些裸机类型模板？**</br>
 机器类型因专区而变化。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`. 您还可以复查可用 [VM](#vm) 或 [SDS](#sds) 机器类型。
@@ -432,9 +445,9 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 
 **何时使用 SDS 类型模板？**</br>
 在下列情况下，通常使用 SDS 机器：
-*  如果对集群使用 SDS 附加组件，那么必须使用 SDS 机器。
+*  如果对集群使用 SDS 附加组件，请使用 SDS 机器。
 *  如果应用程序是需要本地存储器的 [StatefulSet ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)，那么可使用 SDS 机器并供应 [Kubernetes 本地持久性卷 (beta) ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/)。
-*  您可能具有需要 SDS 或本地存储器的定制应用程序或集群附加组件。例如，如果计划使用 logDNA，那么必须使用 SDS 机器类型。
+*  您可能具有需要其他原始本地存储器的定制应用程序。
 
 有关更多存储解决方案的信息，请参阅[规划高可用性持久性存储器](cs_storage_planning.html#storage_planning)。
 
@@ -490,17 +503,106 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 </tbody>
 </table>
 
-## 工作程序节点内存限制
+## 工作程序节点资源保留量
 {: #resource_limit_node}
 
-{{site.data.keyword.containerlong_notm}} 会对每个工作程序节点设置内存限制。在工作程序节点上运行的 pod 超过此内存限制时，将除去 pod。在 Kubernetes 中，此限制称为[硬逐出阈值 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds)。
+{{site.data.keyword.containerlong_notm}} 会设置计算资源保留量，用于限制每个工作程序节点上的可用计算资源。保留的内存和 CPU 资源不能由工作程序节点上的 pod 使用，因此每个工作程序节点上的可分配资源会变少。最初部署 pod 时，如果工作程序节点没有足够的可分配资源，部署会失败。此外，如果 pod 超过工作程序节点资源限制，那么会逐出这些 pod。在 Kubernetes 中，此限制称为[硬逐出阈值 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds)。
 {:shortdesc}
 
-如果需要频繁除去 pod，请向集群添加更多工作程序节点，或者对 pod 设置[资源限制 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)。
+如果可用的 CPU 或内存少于工作程序节点保留量，Kubernetes 会开始逐出 pod，以复原足够的计算资源。如果有其他工作程序节点可用，那么 pod 会重新安排到该工作程序节点上。如果频繁逐出 pod，请向集群添加更多工作程序节点，或者对 pod 设置[资源限制 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)。
 
-**每台机器的最小阈值等于其总内存容量的 10%**。如果工作程序节点上的可用内存小于允许的最小阈值，那么 Kubernetes 将立即除去 pod。如果有工作程序节点可用，那么 pod 会重新安排到其他工作程序节点上。例如，如果您有一个 `b2c.4x16` 虚拟机，其总内存容量为 16 GB。如果可用内存小于 1600 MB (10%)，那么无法将新 pod 安排到此工作程序节点上，而是改为安排到其他工作程序节点上。如果没有其他工作程序节点可用，那么新 pod 将保持不安排。
+在工作程序节点上保留的资源取决于工作程序节点随附的 CPU 和内存量。{{site.data.keyword.containerlong_notm}} 定义了内存和 CPU 层，如下表中所示。如果工作程序节点随附多个层中的计算资源，那么将为每个层保留一定百分比的 CPU 和内存资源。
 
-要查看工作程序节点上使用的内存量，请运行 [`kubectl top node ` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/#top)。
+要查看工作程序节点上当前使用的计算资源量，请运行 [`kubectl top node` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/#top)。
+{: tip}
+
+<table summary="工作程序节点内存保留量（按层）。">
+<caption>工作程序节点内存保留量（按层）。</caption>
+<thead>
+<tr>
+  <th>内存层</th>
+  <th>保留的 % 或保留量</th>
+  <th>`b2c.4x16` 工作程序节点 (16 GB) 示例</th>
+  <th>`mg1c.28x256` 工作程序节点 (256 GB) 示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>前 16 GB (0-16 GB)</td>
+  <td>10% 的内存</td>
+  <td>1.6 GB</td>
+  <td>1.6 GB</td>
+</tr>
+<tr>
+  <td>接下来 112 GB (17-128 GB)</td>
+  <td>6% 的内存</td>
+  <td>不适用</td>
+  <td>6.72 GB</td>
+</tr>
+<tr>
+  <td>剩余 GB（129 GB 及更多）</td>
+  <td>2% 的内存</td>
+  <td>不适用</td>
+  <td>2.54 GB</td>
+</tr>
+<tr>
+  <td>用于 [`kubelet` 逐出 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/) 的其他保留量</td>
+  <td>100 MB</td>
+  <td>100 MB（固定量）</td>
+  <td>100 MB（固定量）</td>
+</tr>
+<tr>
+  <td>**总保留量**</td>
+  <td>**（变化）**</td>
+  <td>**1.7 GB，共 16 GB**</td>
+  <td>**10.96 GB，共 256 GB**</td>
+</tr>
+</tbody>
+</table>
+
+<table summary="工作程序节点 CPU 保留量（按层）。">
+<caption>工作程序节点 CPU 保留量（按层）。</caption>
+<thead>
+<tr>
+  <th>CPU 层</th>
+  <th>保留的 %</th>
+  <th>`b2c.4x16` 工作程序节点（4 个核心）示例</th>
+  <th>`mg1c.28x256` 工作程序节点（28 个核心）示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>第 1 个核心（核心 1）</td>
+  <td>6% 的核心</td>
+  <td>0.06 的核心</td>
+  <td>0.06 的核心</td>
+</tr>
+<tr>
+  <td>后 2 个核心（核心 2-3）</td>
+  <td>1% 的核心</td>
+  <td>0.02 的核心</td>
+  <td>0.02 的核心</td>
+</tr>
+<tr>
+  <td>后 2 个核心（核心 4-5）</td>
+  <td>0.5% 的核心</td>
+  <td>0.005 的核心</td>
+  <td>0.01 的核心</td>
+</tr>
+<tr>
+  <td>剩余核心（核心 6 及更多核心）</td>
+  <td>0.25% 的核心</td>
+  <td>不适用</td>
+  <td>0.0575 的核心</td>
+</tr>
+<tr>
+  <td>**总保留量**</td>
+  <td>**（变化）**</td>
+  <td>**0.085 的核心，共 4 个核心**</td>
+  <td>**0.1475 的核心，共 28 个核心**</td>
+</tr>
+</tbody>
+</table>
 
 ## 自动恢复工作程序节点
 {: #autorecovery}

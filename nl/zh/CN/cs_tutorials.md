@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -50,20 +53,22 @@ lastupdated: "2018-10-25"
 ## 先决条件
 
 -  查看[准备创建集群](cs_clusters.html#cluster_prepare)时需要执行的步骤。
--  要在其中工作的集群空间中的 [Cloud Foundry **开发者**角色](/docs/iam/mngcf.html#mngcf)。
+-  确保您具有以下访问策略：
+    - {{site.data.keyword.containerlong_notm}} 的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](cs_users.html#platform)
+    -  要在其中工作的集群空间中的 [Cloud Foundry **开发者**角色](/docs/iam/mngcf.html#mngcf)。
 
 
 ## 第 1 课：创建集群并设置 CLI
 {: #cs_cluster_tutorial_lesson1}
 
-在 GUI 中创建 Kubernetes 集群并安装必需的 CLI。
+在 {{site.data.keyword.Bluemix_notm}} 控制台中创建 Kubernetes 集群并安装必需的 CLI。
 {: shortdesc}
 
 **创建集群**
 
 集群可能需要几分钟时间进行供应，因此请在安装 CLI 之前创建集群。
 
-1.  [在 GUI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) 中，创建免费或标准集群，其中包含具有 1 个工作程序节点的 1 个工作程序池。
+1.  [在 {{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) 中，创建免费或标准集群，其中包含具有 1 个工作程序节点的 1 个工作程序池。
 
     您还可以[在 CLI 中创建集群](cs_clusters.html#clusters_cli)。
     {: tip}
@@ -88,13 +93,13 @@ lastupdated: "2018-10-25"
     {: pre}
 
 5.  要将应用程序部署到集群中，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。要使用 Kubernetes CLI 运行命令，请使用前缀 `kubectl`。
-    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.10.8。
+    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.10.11。
 
-        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl)
+        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
 
-        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl)
+        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/linux/amd64/kubectl)
 
-        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/windows/amd64/kubectl.exe)
+        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/windows/amd64/kubectl.exe)
 
           **提示：**如果使用的是 Windows，请将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。此安装将在您以后运行命令时减少一些文件路径更改操作。
 
@@ -157,9 +162,10 @@ lastupdated: "2018-10-25"
     ```
     {: pre}
 
-    **注：**如果您有联合标识，请使用 `--sso` 标志登录。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。
+    如果您有联合标识，请使用 `--sso` 标志登录。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。
+    {: tip}
 
-2.  如果集群位于非 `default` 资源组中，请将该资源组设定为目标。
+2.  如果集群位于非 `default` 资源组中，请将该资源组设定为目标。要查看每个集群所属的资源组，请运行 `ibmcloud ks clusters`。
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -187,7 +193,7 @@ lastupdated: "2018-10-25"
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.10.11
     ```
     {: screen}
 
@@ -243,8 +249,8 @@ lastupdated: "2018-10-25"
     输出示例：
 
     ```
-    Client Version: v1.10.8
-    Server Version: v1.10.8
+    Client Version: v1.10.11
+    Server Version: v1.10.11
     ```
     {: screen}
 
@@ -256,7 +262,8 @@ lastupdated: "2018-10-25"
 
 1.  将 {{site.data.keyword.toneanalyzershort}} 服务添加到您的 {{site.data.keyword.Bluemix_notm}} 帐户。将 <service_name> 替换为服务实例的名称。
 
-    **注**：将 {{site.data.keyword.toneanalyzershort}} 服务添加到您的帐户时，将显示一条消息表明该服务不是免费的。如果限制 API 调用，那么本教程不会导致 {{site.data.keyword.watson}} 服务收取费用。[查看 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服务的定价信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/catalog/services/tone-analyzer)。
+    将 {{site.data.keyword.toneanalyzershort}} 服务添加到您的帐户时，将显示一条消息表明该服务不是免费的。如果限制 API 调用，那么本教程不会导致 {{site.data.keyword.watson}} 服务收取费用。[查看 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服务的定价信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/catalog/services/tone-analyzer)。
+    {: note}
 
     ```
     ibmcloud service create tone_analyzer standard <service_name>
@@ -281,7 +288,7 @@ lastupdated: "2018-10-25"
     ```
     {: screen}
 
-3.  验证是否已在集群名称空间中创建 Kubernetes 私钥。每个 {{site.data.keyword.Bluemix_notm}} 服务都由一个 JSON 文件进行定义，此文件包含容器用于获取访问权的保密信息，例如用户名、密码和 URL。为了安全地存储这些信息，将使用 Kubernetes 私钥。在此示例中，私钥所包含的凭证用于访问在您帐户中供应的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 的实例。
+3.  验证是否已在集群名称空间中创建 Kubernetes 私钥。每个 {{site.data.keyword.Bluemix_notm}} 服务都由一个 JSON 文件进行定义，此文件包含容器用于获取访问权的保密信息，例如 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API 密钥和 URL。为了安全地存储这些信息，将使用 Kubernetes 私钥。在此示例中，私钥所包含的 API 密钥用于访问在您帐户中供应的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 实例。
 
     ```
     kubectl get secrets --namespace=default

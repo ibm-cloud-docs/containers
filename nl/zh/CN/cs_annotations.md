@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -23,7 +26,8 @@ lastupdated: "2018-10-25"
 要向 Ingress 应用程序负载均衡器 (ALB) 添加功能，您可以将注释指定为 Ingress 资源中的元数据。
 {: shortdesc}
 
-**重要信息**：在使用注释之前，请确保通过执行[使用 Ingress 公开应用程序](cs_ingress.html)中的步骤来正确设置 Ingress 服务配置。使用基本配置设置 Ingress ALB 后，可以通过向 Ingress 资源文件添加注释来扩展其功能。
+在使用注释之前，请确保通过执行[使用 Ingress 公开应用程序](cs_ingress.html)中的步骤来正确设置 Ingress 服务配置。使用基本配置设置 Ingress ALB 后，可以通过向 Ingress 资源文件添加注释来扩展其功能。
+{: note}
 
 <table>
 <caption>一般注释</caption>
@@ -144,7 +148,7 @@ lastupdated: "2018-10-25"
   <tr>
   <td><a href="#appid-auth">{{site.data.keyword.appid_short}} 认证</a></td>
   <td><code>appid-auth</code></td>
-  <td>使用 {{site.data.keyword.appid_full_notm}} 向应用程序进行认证。</td>
+  <td>使用 {{site.data.keyword.appid_full}} 向应用程序进行认证。</td>
   </tr>
   <tr>
   <td><a href="#custom-port">定制 HTTP 和 HTTPS 端口</a></td>
@@ -309,7 +313,7 @@ lastupdated: "2018-10-25"
 <dl>
 <dt>描述</dt>
 <dd>添加外部服务的路径定义。仅当应用程序在外部服务（而不是后端服务）上运行时，才可使用此注释。使用此注释来创建外部服务路径时，仅支持 `client-max-body-size`、`proxy-read-timeout`、`proxy-connect-timeout` 和 `proxy-buffering` 注释一起使用。不支持其他任何注释与 `proxy-external-service` 一起使用。
-<br><br><strong>注</strong>：不能为单个服务和路径指定多个主机。
+<p class="note">不能为单个服务和路径指定多个主机。</p>
 </dd>
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
@@ -370,7 +374,7 @@ tls:
 
 <dl>
 <dt>描述</dt>
-<dd>缺省情况下，ALB 会将应用程序侦听的路径作为前缀进行处理。ALB 接收到对应用程序的请求时，ALB 会检查 Ingress 资源以查找与请求 URI 的开头相匹配的路径（作为前缀）。如果找到匹配项，那么会将请求转发到部署了应用程序的 pod 的 IP 地址。<br><br>`location-modifier` 注释通过修改位置块配置来更改 ALB 搜索匹配项的方式。位置块用于确定如何处理请求中的应用程序路径。<br><br><strong>注</strong>：要处理正则表达式 (regex) 路径，此注释是必需的。</dd>
+<dd>缺省情况下，ALB 会将应用程序侦听的路径作为前缀进行处理。ALB 接收到对应用程序的请求时，ALB 会检查 Ingress 资源以查找与请求 URI 的开头相匹配的路径（作为前缀）。如果找到匹配项，那么会将请求转发到部署了应用程序的 pod 的 IP 地址。<br><br>`location-modifier` 注释通过修改位置块配置来更改 ALB 搜索匹配项的方式。位置块用于确定如何处理请求中的应用程序路径。<p class="note">要处理正则表达式 (regex) 路径，此注释是必需的。</p></dd>
 
 <dt>支持的修饰符</dt>
 <dd>
@@ -471,11 +475,14 @@ metadata:
   name: myingress
 annotations:
   ingress.bluemix.net/location-snippets: |
-    serviceName=&lt;myservice&gt;
+    serviceName=&lt;myservice1&gt;
     # Example location snippet
     proxy_request_buffering off;
     rewrite_log on;
     proxy_set_header "x-additional-test-header" "location-snippet-header";
+    &lt;EOS&gt;
+    serviceName=&lt;myservice2&gt;
+    proxy_set_header Authorization "";
     &lt;EOS&gt;
 spec:
 tls:
@@ -503,7 +510,7 @@ paths:
 </tr>
 <tr>
 <td>位置片段</td>
-<td>提供要用于指定服务的配置片段。此样本片段将位置块配置为关闭代理请求缓冲，开启日志重写，并在将请求转发到 <code>myservice</code> 服务时设置额外的头。</td>
+<td>提供要用于指定服务的配置片段。用于 <code>myservice1</code> 服务的样本片段将位置块配置为关闭代理请求缓冲，开启日志重写，并在将请求转发到该服务时设置额外的头。用于 <code>myservice2</code> 服务的样本片段设置空的 <code>Authorization</code> 头。每个位置片段都必须以值 <code>&lt;EOS&gt;</code> 结尾。</td>
 </tr>
 </tbody></table>
 </dd>
@@ -544,9 +551,9 @@ tls:
   http:
 paths:
     - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
 
 <table>
 <caption>了解注释的组成部分</caption>
@@ -690,7 +697,7 @@ paths:
 
 
 
-<p>**注**：ALB 以通过方式运行，并将流量转发到后端应用程序。在此情况下，不支持 SSL 终止。TLS 连接不会终止，也不会通过非接触方式传递。</p>
+<p class="note">ALB 以通过方式运行，并将流量转发到后端应用程序。在此情况下，不支持 SSL 终止。TLS 连接不会终止，也不会通过非接触方式传递。</p>
 </dd>
 
 
@@ -703,7 +710,7 @@ kind: Ingress
 metadata:
   name: myingress
 annotations:
-  ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; [servicePort=&lt;service_port&gt;]"
+  ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
 spec:
 tls:
   - hosts:
@@ -734,7 +741,7 @@ tls:
   </tr>
   <tr>
   <td><code>servicePort</code></td>
-  <td>此参数是可选的。如果提供了此参数，那么在将流量发送到后端应用程序之前，会将端口替换为此值。否则，该端口与 Ingress 端口保持相同。</td>
+  <td>此参数是可选的。如果提供了此参数，那么在将流量发送到后端应用程序之前，会将端口替换为此值。否则，该端口与 Ingress 端口保持相同。如果不想设置此参数，那么可以将其从配置中除去。</td>
   </tr>
   </tbody></table>
 
@@ -751,7 +758,8 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
 <li>将 TCP 端口添加到配置映射。将 <code>&lt;port&gt;</code> 替换为要打开的 TCP 端口。
-<b>注</b>：缺省情况下，端口 80 和 443 已打开。如果要使 80 和 443 保持打开，那么必须在 `public-ports` 字段中包含这两个端口以及您指定的其他任何 TCP 端口。如果启用了专用 ALB，那么还必须在 `private-ports` 字段中指定要保持打开的任何端口。有关更多信息，请参阅<a href="cs_ingress.html#opening_ingress_ports">在 Ingress ALB 中打开端口</a>。
+<p class="note">缺省情况下，端口 80 和 443 已打开。如果要使 80 和 443 保持打开，那么必须在 `public-ports` 字段中包含这两个端口以及您指定的其他任何 TCP 端口。如果启用了专用 ALB，那么还必须在 `private-ports` 字段中指定要保持打开的任何端口。有关更多信息，请参阅<a href="cs_ingress.html#opening_ingress_ports">在 Ingress ALB 中打开端口</a>。
+</p>
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -783,6 +791,9 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 
 ## 连接注释
 {: #connection}
+
+通过使用连接注释，可以更改 ALB 连接到后端应用程序和上游服务器的方式，并设置应用程序或服务器被视为不可用之前的超时或最大保持活动连接数。
+{: shortdesc}
 
 ### 定制连接超时和读取超时（proxy-connect-timeout 和 proxy-read-timeout）
 {: #proxy-connect-timeout}
@@ -825,9 +836,9 @@ tls:
    http:
 paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
 
 <table>
 <caption>了解注释的组成部分</caption>
@@ -837,7 +848,7 @@ paths:
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>等待连接到后端应用程序的秒数或分钟数，例如 <code>65s</code> 或 <code>1m</code>。<strong>注</strong>：连接超时不能超过 75 秒。</td>
+ <td>等待连接到后端应用程序的秒数或分钟数，例如 <code>65s</code> 或 <code>1m</code>。连接超时不能超过 75 秒。</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
@@ -944,9 +955,9 @@ tls:
    http:
 paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
 
 <table>
 <caption>了解注释的组成部分</caption>
@@ -979,7 +990,7 @@ paths:
 <dl>
 <dt>描述</dt>
 <dd>
-Ingress ALB 充当客户机应用程序和您的应用程序之间的代理。某些应用程序设置需要多个上游服务器来处理来自 ALB 的入局客户机请求。有时，ALB 使用的代理服务器无法与应用程序使用的上游服务器建立连接。于是 ALB 可以尝试与下一个上游服务器建立连接，以改为将请求传递到这一个上游服务器。可以使用 `proxy-next-upstream-config` 注释来设置在哪些情况下 ALB 可以尝试将请求传递到下一个上游服务器，以及尝试的时间长度和次数。<br><br><strong>注</strong>：使用 `proxy-next-upstream-config` 时，始终会配置超时，所以不要将 `timeout=true` 添加到此注释。
+Ingress ALB 充当客户机应用程序和您的应用程序之间的代理。某些应用程序设置需要多个上游服务器来处理来自 ALB 的入局客户机请求。有时，ALB 使用的代理服务器无法与应用程序使用的上游服务器建立连接。于是 ALB 可以尝试与下一个上游服务器建立连接，以改为将请求传递到这一个上游服务器。可以使用 `proxy-next-upstream-config` 注释来设置在哪些情况下 ALB 可以尝试将请求传递到下一个上游服务器，以及尝试的时间长度和次数。<p class="note">使用 `proxy-next-upstream-config` 时，始终会配置超时，所以不要将 `timeout=true` 添加到此注释。</p>
 </dd>
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
@@ -1309,6 +1320,9 @@ tls:
 ## HTTPS 和 TLS/SSL 认证注释
 {: #https-auth}
 
+通过使用 HTTPS 和 TLS/SSL 认证注释，可以配置 ALB 用于 HTTPS 流量，更改缺省 HTTPS 端口，对发送到后端应用程序的流量启用 SSL 加密，或设置相互认证。
+{: shortdesc}
+
 ### {{site.data.keyword.appid_short_notm}} 认证 (appid-auth)
 {: #appid-auth}
 
@@ -1320,11 +1334,11 @@ tls:
 <dd>
   使用 {{site.data.keyword.appid_short_notm}} 对 Web 或 API HTTP/HTTPS 请求进行认证。
 
-<p>如果将请求类型设置为 <code>web</code>，那么将验证包含 {{site.data.keyword.appid_short_notm}} 访问令牌的 Web 请求。如果令牌验证失败，将拒绝 Web 请求。如果请求不包含访问令牌，那么会将请求重定向到 {{site.data.keyword.appid_short_notm}} 登录页面。<strong>注</strong>：要使 {{site.data.keyword.appid_short_notm}} Web 认证能够正常运作，必须在用户的浏览器中启用 cookie。</p>
+<p>如果将请求类型设置为 <code>web</code>，那么将验证包含 {{site.data.keyword.appid_short_notm}} 访问令牌的 Web 请求。如果令牌验证失败，将拒绝 Web 请求。如果请求不包含访问令牌，那么会将请求重定向到 {{site.data.keyword.appid_short_notm}} 登录页面。要使 {{site.data.keyword.appid_short_notm}} Web 认证能够正常运作，必须在用户的浏览器中启用 cookie。</p>
 
 <p>如果将请求类型设置为 <code>api</code>，那么将验证包含 {{site.data.keyword.appid_short_notm}} 访问令牌的 API 请求。如果请求不包含访问令牌，将向用户返回 <code>401: Unauthorized</code> 错误消息。</p>
 
-<p>**注**：出于安全原因，{{site.data.keyword.appid_short_notm}} 认证仅支持启用了 TLS/SSL 的后端。</p>
+<p class="note">出于安全原因，{{site.data.keyword.appid_short_notm}} 认证仅支持启用了 TLS/SSL 的后端。</p>
 </dd>
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
@@ -1382,7 +1396,7 @@ tls:
     * 要使用现有实例，请确保服务实例名称不包含空格。要除去空格，请选择服务实例名称旁边的“更多选项”菜单，然后选择**重命名服务**。
     * 要供应[新 {{site.data.keyword.appid_short_notm}} 实例](https://console.bluemix.net/catalog/services/app-id)，请执行以下操作：
         1. 将自动填充的**服务名称**替换为您自己的服务实例唯一名称。
-            **重要信息**：服务实例名称不能包含空格。
+            服务实例名称不能包含空格。
         2. 选择部署了您的集群的区域。
         3. 单击**创建**。
 2. 添加应用程序的重定向 URL。重定向 URL 是应用程序的回调端点。要防止钓鱼攻击，应用程序标识将根据重定向 URL 的白名单来验证请求 URL。
@@ -1429,7 +1443,7 @@ tls:
 <dt>描述</dt>
 <dd>缺省情况下，Ingress ALB 配置为在端口 80 上侦听入局 HTTP 网络流量，在端口 443 上侦听入局 HTTPS 网络流量。您可以更改缺省端口以向 ALB 域添加安全性，或仅启用 HTTPS 端口。
 
-<p><strong>注</strong>：要在端口上启用相互认证，请[配置 ALB 以打开有效端口](cs_ingress.html#opening_ingress_ports)，然后在 [`mutual-auth` 注释](#mutual-auth)中指定该端口。不要使用 `custom-port` 注释来指定用于相互认证的端口。</p></dd>
+<p class="note">要在端口上启用相互认证，请[配置 ALB 以打开有效端口](cs_ingress.html#opening_ingress_ports)，然后在 [`mutual-auth` 注释](#mutual-auth)中指定该端口。不要使用 `custom-port` 注释来指定用于相互认证的端口。</p></dd>
 
 
 <dt>样本 Ingress 资源 YAML</dt>
@@ -1452,9 +1466,9 @@ tls:
    http:
 paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
 
 <table>
 <caption>了解注释的组成部分</caption>
@@ -1468,7 +1482,7 @@ paths:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>输入要用于入局 HTTP 或 HTTPS 网络流量的端口号。<p><strong>注：</strong>当为 HTTP 或 HTTPS 指定定制端口时，缺省端口对于 HTTP 和 HTTPS 都不再有效。例如，要将 HTTPS 的缺省端口更改为 8443，而对 HTTP 使用缺省端口，那么必须为两者设置定制端口：<code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>。</p></td>
+ <td>输入要用于入局 HTTP 或 HTTPS 网络流量的端口号。<p class="note">指定定制端口用于 HTTP 或 HTTPS 时，缺省端口对于 HTTP 和 HTTPS 都不再有效。例如，要将 HTTPS 的缺省端口更改为 8443，而对 HTTP 使用缺省端口，那么必须为两者设置定制端口：<code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>。</p></td>
  </tr>
  </tbody></table>
 
@@ -1485,7 +1499,8 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
 <li>将非缺省 HTTP 和 HTTPS 端口添加到配置映射。将 &lt;port&gt; 替换为要打开的 HTTP 或 HTTPS 端口。
-<b>注</b>：缺省情况下，端口 80 和 443 已打开。如果要使 80 和 443 保持打开，那么必须在 `public-ports` 字段中包含这两个端口以及您指定的其他任何 TCP 端口。如果启用了专用 ALB，那么还必须在 `private-ports` 字段中指定要保持打开的任何端口。有关更多信息，请参阅<a href="cs_ingress.html#opening_ingress_ports">在 Ingress ALB 中打开端口</a>。
+<p class="note">缺省情况下，端口 80 和 443 已打开。如果要使 80 和 443 保持打开，那么必须在 `public-ports` 字段中包含这两个端口以及您指定的其他任何 TCP 端口。如果启用了专用 ALB，那么还必须在 `private-ports` 字段中指定要保持打开的任何端口。有关更多信息，请参阅<a href="cs_ingress.html#opening_ingress_ports">在 Ingress ALB 中打开端口</a>。
+</p>
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1644,7 +1659,7 @@ tls:
 <dt>先决条件</dt>
 <dd>
 <ul>
-<li>您必须具有包含所需 <code>ca.crt</code> 的有效相互认证私钥。要创建相互认证私钥，请参阅此部分末尾的步骤。</li>
+<li>您必须具有包含所需 <code>client.crt</code> 的有效相互认证私钥。要创建相互认证私钥，请参阅此部分末尾的步骤。</li>
 <li>要在 443 之外的端口上启用相互认证，请[配置 ALB 以打开有效端口](cs_ingress.html#opening_ingress_ports)，然后在此注释中指定该端口。不要使用 `custom-port` 注释来指定用于相互认证的端口。</li>
 </ul>
 </dd>
@@ -1699,21 +1714,21 @@ tls:
 **要创建相互认证私钥，请执行以下操作：**
 
 1. 通过下列其中一种方式生成密钥和证书：
-    * 通过证书提供者生成认证中心 (CA) 证书和密钥。如果您有自己的域，请为您的域购买正式的 TLS 证书。**重要信息**：请确保每个证书的 [CN ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://support.dnsimple.com/articles/what-is-common-name/) 都是不同的。
+    * 通过证书提供者生成认证中心 (CA) 证书和密钥。如果您有自己的域，请为您的域购买正式的 TLS 证书。请确保每个证书的 [CN ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://support.dnsimple.com/articles/what-is-common-name/) 都是不同的。
     * 出于测试目的，可以使用 OpenSSL 创建自签名证书。有关更多信息，请参阅此[自签名 SSL 证书教程 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.akadia.com/services/ssh_test_certificate.html)。
-        1. 创建 `ca.key`。
+        1. 创建 `client.key`。
             ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. 使用密钥创建 `ca.crt`。
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
+            openssl genrsa -out client.key 1024
             ```
             {: pre}
-        3. 使用 `ca.crt` 创建自签名证书。
+        2. 使用密钥创建 `client.crt`。
             ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            openssl req -new -x509 -key client.key -out client.crt
+            ```
+            {: pre}
+        3. 使用 `client.crt` 创建自签名证书。
+            ```
+            openssl x509 -req -in example.org.csr -CA client.crt -CAkey client.key -CAcreateserial -out example.org.crt
             ```
             {: pre}
 2. [将证书转换为 Base64 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.base64encode.org/)。
@@ -1725,7 +1740,7 @@ tls:
        name: ssl-my-test
      type: Opaque
      data:
-       ca.crt: <ca_certificate>
+       client.crt: <ca_certificate>
      ```
      {: codeblock}
 4. 将证书创建为 Kubernetes 私钥。
@@ -1747,8 +1762,8 @@ tls:
 <dl>
 <dt>描述</dt>
 <dd>
-Ingress 资源配置具有 TLS 部分时，Ingress ALB 可以处理向应用程序发出的通过 HTTPS 保护的 URL 请求。但是，ALB 会处理 TLS 终止并在将流量转发到应用程序之前对请求解密。如果您具有需要 HTTPS 协议且需要流量保持加密的应用程序，请使用 `ssl-services` 注释来禁用 ALB 的缺省 TLS 终止。ALB 会终止 TLS 连接并重新加密 SSL，然后再将流量发送到后端应用程序。</br></br>
-此外，如果后端应用程序可以处理 TLS，并且您希望添加额外的安全性，那么可以通过提供私钥中包含的证书来添加单向或相互认证。</br></br>
+Ingress 资源配置具有 TLS 部分时，Ingress ALB 可以处理向应用程序发出的通过 HTTPS 保护的 URL 请求。缺省情况下，ALB 会终止 TLS 终止，并在使用 HTTP 协议将流量转发到应用程序之前对请求解密。如果您具有需要 HTTPS 协议且需要对流量加密的应用程序，请使用 `ssl-services` 注释。通过使用 `ssl-services` 注释，ALB 将终止外部 TLS 连接，然后在 ALB 和应用程序 pod 之间创建新的 SSL 连接。在将流量发送到上游 pod 之前，会对流量重新加密。</br></br>
+如果后端应用程序可以处理 TLS，并且您希望添加额外的安全性，那么可以通过提供私钥中包含的证书来添加单向或相互认证。</br></br>
 对于 Ingress ALB 与后端应用程序之间的 SSL 终止，请使用 `ssl-services` 注释。对于客户机与 Ingress ALB 之间的 SSL 终止，请使用 [`mutual-auth` 注释](#mutual-auth)。</dd>
 
 <dt>样本 Ingress 资源 YAML</dt>
@@ -1794,7 +1809,7 @@ tls:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>如果后端应用程序可以处理 TLS，并且您希望添加额外的安全性，请将 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 替换为该服务的单向或相互认证私钥。<ul><li>如果提供了单向认证私钥，那么该值必须包含来自上游服务器的 <code>trusted.crt</code>。要创建单向认证私钥，请参阅此部分末尾的步骤。</li><li>如果提供了相互认证私钥，那么值必须包含应用程序期望从客户机收到的必需的 <code>ca.crt</code> 和 <code>ca.key</code>。要创建相互认证私钥，请参阅此部分末尾的步骤。</li></ul><strong>警告</strong>：如果未提供私钥，系统会允许不安全连接。如果要测试连接并且证书尚未就绪，或者如果证书已到期并且您希望允许不安全的连接，那么可选择省略私钥。</td>
+  <td>如果后端应用程序可以处理 TLS，并且您希望添加额外的安全性，请将 <code>&lt;<em>service-ssl-secret</em>&gt;</code> 替换为该服务的单向或相互认证私钥。<ul><li>如果提供了单向认证私钥，那么该值必须包含来自上游服务器的 <code>trusted.crt</code>。要创建单向认证私钥，请参阅此部分末尾的步骤。</li><li>如果提供了相互认证私钥，那么值必须包含应用程序期望从客户机收到的必需的 <code>client.crt</code> 和 <code>client.key</code>。要创建相互认证私钥，请参阅此部分末尾的步骤。</li></ul><p class="important">如果未提供私钥，系统会允许不安全连接。如果要测试连接并且证书尚未就绪，或者如果证书已到期并且您希望允许不安全的连接，那么可选择省略私钥。</p></td>
   </tr>
   </tbody></table>
 
@@ -1816,7 +1831,10 @@ tls:
        trusted.crt: <ca_certificate>
      ```
      {: codeblock}
-     **注**：如果您还希望对上游流量强制执行相互认证，那么除了 data 部分中的 `trusted.crt` 外，还可以提供 `client.crt` 和 `client.key`。
+
+     如果您还希望对上游流量强制执行相互认证，那么除了在 data 部分中提供 `trusted.crt` 外，还可以提供 `client.crt` 和 `client.key`。
+     {: tip}
+
 4. 将证书创建为 Kubernetes 私钥。
      ```
      kubectl create -f ssl-my-test
@@ -1827,21 +1845,21 @@ tls:
 **要创建相互认证私钥，请执行以下操作：**
 
 1. 通过下列其中一种方式生成密钥和证书：
-    * 通过证书提供者生成认证中心 (CA) 证书和密钥。如果您有自己的域，请为您的域购买正式的 TLS 证书。**重要信息**：请确保每个证书的 [CN ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://support.dnsimple.com/articles/what-is-common-name/) 都是不同的。
+    * 通过证书提供者生成认证中心 (CA) 证书和密钥。如果您有自己的域，请为您的域购买正式的 TLS 证书。请确保每个证书的 [CN ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://support.dnsimple.com/articles/what-is-common-name/) 都是不同的。
     * 出于测试目的，可以使用 OpenSSL 创建自签名证书。有关更多信息，请参阅此[自签名 SSL 证书教程 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.akadia.com/services/ssh_test_certificate.html)。
-        1. 创建 `ca.key`。
+        1. 创建 `client.key`。
             ```
-            openssl genrsa -out ca.key 1024
-            ```
-            {: pre}
-        2. 使用密钥创建 `ca.crt`。
-            ```
-            openssl req -new -x509 -key ca.key -out ca.crt
+            openssl genrsa -out client.key 1024
             ```
             {: pre}
-        3. 使用 `ca.crt` 创建自签名证书。
+        2. 使用密钥创建 `client.crt`。
             ```
-            openssl x509 -req -in example.org.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+            openssl req -new -x509 -key client.key -out client.crt
+            ```
+            {: pre}
+        3. 使用 `client.crt` 创建自签名证书。
+            ```
+            openssl x509 -req -in example.org.csr -CA client.crt -CAkey client.key -CAcreateserial -out example.org.crt
             ```
             {: pre}
 2. [将证书转换为 Base64 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.base64encode.org/)。
@@ -1853,7 +1871,7 @@ tls:
        name: ssl-my-test
      type: Opaque
      data:
-       ca.crt: <ca_certificate>
+       client.crt: <ca_certificate>
      ```
      {: codeblock}
 4. 将证书创建为 Kubernetes 私钥。
@@ -1868,6 +1886,9 @@ tls:
 ## Istio 注释
 {: #istio-annotations}
 
+使用 Istio 注释将入局流量路由到 Istio 管理的服务。
+{: shortdesc}
+
 ### Istio 服务 (istio-services)
 {: #istio-services}
 
@@ -1877,8 +1898,7 @@ tls:
 <dl>
 <dt>描述</dt>
 <dd>
-<strong>注</strong>：此注释仅适用于 Istio 0.7 和更早版本。
-<br>  如果您有 Istio 管理的服务，那么可以使用集群 ALB 将 HTTP/HTTPS 请求路由到 Istio Ingress 控制器。然后，Istio Ingress 控制器会将请求路由到应用程序服务。为了路由流量，必须对集群 ALB 和 Istio Ingress 控制器的 Ingress 资源进行更改。
+<p class="note">此注释仅适用于 Istio 0.7 和更早版本。</p>  如果您有 Istio 管理的服务，那么可以使用集群 ALB 将 HTTP/HTTPS 请求路由到 Istio Ingress 控制器。然后，Istio Ingress 控制器会将请求路由到应用程序服务。为了路由流量，必须对集群 ALB 和 Istio Ingress 控制器的 Ingress 资源进行更改。
     <br><br>在集群 ALB 的 Ingress 资源中，必须：
       <ul>
     <li>指定 `istio-services` 注释</li>
@@ -2059,6 +2079,8 @@ tls:
 ## 代理缓冲区注释
 {: #proxy-buffer}
 
+Ingress ALB 充当后端应用程序和客户机 Web 浏览器之间的代理。通过使用代理缓冲区注释，可以配置在发送或接收数据包时如何在 ALB 上对数据进行缓冲。  
+{: shortdesc}
 
 ### 客户机响应数据缓冲 (proxy-buffering)
 {: #proxy-buffering}
@@ -2094,9 +2116,9 @@ tls:
    http:
 paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
 
 <table>
 <caption>了解注释的组成部分</caption>
@@ -2130,6 +2152,8 @@ paths:
 <dt>描述</dt>
 <dd>
 设置缓冲区的数目和大小，这些缓冲区用于读取来自通过代理传递的服务器的单个连接的响应。除非指定了服务，否则配置将应用于 Ingress 主机中的所有服务。例如，如果指定如 <code>serviceName=SERVICE number=2 size=1k</code> 这样的配置，那么会对该服务应用 1k。如果指定如 <code>number=2 size=1k</code> 这样的配置，那么会对 Ingress 主机中的所有服务应用 1k。
+</br>
+<p class="tip">如果收到错误消息 `upstream sent too big header while reading response header from upstream`，说明后端中的上游服务器发送的头大小大于缺省限制。请增大 <code>proxy-buffers</code> 和 [<code>proxy-buffer-size</code>](#proxy-buffer-size) 的大小。</p>
 </dd>
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
@@ -2150,9 +2174,9 @@ tls:
    http:
 paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
 
 <table>
 <caption>了解注释的组成部分</caption>
@@ -2302,12 +2326,18 @@ paths:
 ## 请求和响应注释
 {: #request-response}
 
+使用请求和响应注释可在客户机和服务器请求中添加或除去头信息，以及更改客户机可以发送的主体的大小。
+{: shortdesc}
+
 ### 将服务器端口添加到主机头 (add-host-port)
 {: #add-host-port}
 
+向客户机请求添加服务器端口，然后将该请求转发到后端应用程序。
+{: shortdesc}
+
 <dl>
 <dt>描述</dt>
-<dd>将 `:server_port` 添加到客户机请求的主机头，然后将请求转发到后端应用程序。
+<dd>将 `:server_port` 添加到客户机请求的主机头，然后将该请求转发到后端应用程序。
 
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
@@ -2329,9 +2359,9 @@ tls:
    http:
 paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
 
 <table>
 <caption>了解注释的组成部分</caption>
@@ -2362,24 +2392,15 @@ paths:
 
 <dl>
 <dt>描述</dt>
-<dd>Ingress ALB 充当客户机应用程序和后端应用程序之间的代理。发送到 ALB 的客户机请求经过处理（通过代理传递）后放入新的请求中，然后将该新请求发送到后端应用程序。与此类似，发送到 ALB 的后端应用程序响应经过处理（通过代理传递）后放入新的响应中，然后将该新响应发送到客户机。通过代理传递请求或响应会除去初始从客户机或后端应用程序发送的 HTTP 头信息，例如用户名。
+<dd>Ingress ALB 充当客户机应用程序和后端应用程序之间的代理。发送到 ALB 的客户机请求经过处理（通过代理传递）后放入新的请求中，然后将该新请求发送到后端应用程序。与此类似，发送到 ALB 的后端应用程序响应经过处理（通过代理传递）后放入新的响应中，然后将该新响应发送到客户机。通过代理传递请求或响应会除去初始从客户机或后端应用程序发送的 HTTP 头信息，例如用户名。<br><br>
+如果后端应用程序需要 HTTP 头信息，那么可以使用 <code>proxy-add-headers</code> 注释向客户机请求添加头信息，然后由 ALB 将该请求转发到后端应用程序。如果客户机 Web 应用程序需要 HTTP 头信息，那么可以使用 <code>response-add-headers</code> 注释将头信息添加到响应，然后由 ALB 将响应转发到客户机 Web 应用程序。<br>
 
-<br><br>
-如果后端应用程序需要 HTTP 头信息，那么可以使用 <code>proxy-add-headers</code> 注释向客户机请求添加头信息，然后由 ALB 将该请求转发到后端应用程序。
-
-<br>
-<ul><li>例如，在将请求转发到应用程序之前，可能需要将以下 X-Forward 头信息添加到请求中：
-
-<pre class="screen">
+<ul><li>例如，在将请求转发到应用程序之前，可能需要将以下 X-Forward 头信息添加到请求中：<pre class="screen">
 <code>proxy_set_header Host $host;
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
-
-</li>
-
-<li>要将 X-Forward 头信息添加到发送到应用程序的请求中，请按以下方式使用 `proxy-add-headers` 注释：
-
+要将 X-Forward 头信息添加到发送到应用程序的请求中，请按以下方式使用 `proxy-add-headers` 注释：
 <pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
       serviceName=&lt;myservice1&gt; {
@@ -2388,10 +2409,10 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
   X-Forwarded-Proto $scheme;
   X-Forwarded-For $proxy_add_x_forwarded_for;
   }</code></pre>
-
-</li></ul><br>
-
-如果客户机 Web 应用程序需要 HTTP 头信息，那么可以使用 <code>response-add-headers</code> 注释将头信息添加到响应，然后由 ALB 将响应转发到客户机 Web 应用程序。</dd>
+</li></ul>
+</br>
+<p class="tip"><code>response-add-headers</code> 注释不支持用于所有服务的全局头。要在服务器级别添加用于所有服务响应的头，可以使用 [<code>server-snippets</code> 注释](#server-snippets)。</p>
+</dd>
 
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
@@ -2537,7 +2558,7 @@ tls:
 </br></br>
 您可能希望增大最大主体大小，因为您预期客户机请求的主体大小大于 1 兆字节。例如，您希望客户机能够上传大型文件。增大最大请求主体大小可能会影响 ALB 的性能，因为与客户机的连接必须保持打开状态，直到接收完请求为止。
 </br></br>
-<strong>注</strong>：某些客户机 Web 浏览器无法正确显示 413 HTTP 响应消息。</dd>
+<p class="note">某些客户机 Web 浏览器无法正确显示 413 HTTP 响应消息。</p></dd>
 <dt>样本 Ingress 资源 YAML</dt>
 <dd>
 
@@ -2558,9 +2579,9 @@ tls:
    http:
 paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
 
 <table>
 <caption>了解注释的组成部分</caption>
@@ -2570,7 +2591,7 @@ paths:
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>客户机响应主体的最大大小。例如，要将最大大小设置为 200 兆字节，请定义 <code>200m</code>。<strong>注</strong>：可以将大小设置为 0 以禁止检查客户机请求主体大小。</td>
+ <td>客户机响应主体的最大大小。例如，要将最大大小设置为 200 兆字节，请定义 <code>200m</code>。可以将大小设置为 0 以禁止检查客户机请求主体大小。</td>
  </tr>
  </tbody></table>
 
@@ -2609,9 +2630,9 @@ tls:
    http:
 paths:
      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
+       backend:
+         serviceName: myservice
+         servicePort: 8080</code></pre>
 
 <table>
 <caption>了解注释的组成部分</caption>
@@ -2626,7 +2647,7 @@ paths:
  <tr>
  <td><code>&lt;size&gt;</code></td>
  <td>读取大型客户机请求头的缓冲区的最大大小。例如，要将其设置为 16 千字节，请定义 <code>16k</code>。
-   <strong>注：</strong>对于千字节，大小必须以 <code>k</code> 结尾，对于兆字节，必须以 <code>m</code> 结尾。</td>
+   对于千字节，大小必须以 <code>k</code> 结尾，对于兆字节，必须以 <code>m</code> 结尾。</td>
  </tr>
 </tbody></table>
 </dd>
@@ -2638,6 +2659,8 @@ paths:
 ## 服务限制注释
 {: #service-limit}
 
+通过使用服务限制注释，可以更改可来自单个 IP 地址的缺省请求处理速率和连接数。
+{: shortdesc}
 
 ### 全局速率限制 (global-rate-limit)
 {: #global-rate-limit}

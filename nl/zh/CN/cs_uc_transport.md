@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -29,8 +32,9 @@ lastupdated: "2018-10-25"
 {: #uc_shipping}
 
 IT 主管拥有与合作伙伴进行交互的全球运输路线和调度系统。合作伙伴需要访问这些 IoT 设备数据的系统中的最新信息。然而，这些系统无法以充分的 HA 在全球范围进行扩展。
+{: shortdesc}
  
- 为什么选择 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 可扩展可用性达 99.999% 的容器化应用程序，以满足不断增长的需求。开发者可以轻松进行试验，从而将更改快速推送到开发和测试系统时，应用程序部署每天可执行 40 次。通过 IoT Platform，可轻松访问 IoT 数据。 
+为什么选择 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 可扩展可用性达 99.999% 的容器化应用程序，以满足不断增长的需求。开发者可以轻松进行试验，从而将更改快速推送到开发和测试系统时，应用程序部署每天可执行 40 次。通过 IoT Platform，可轻松访问 IoT 数据。 
  
 关键技术：    
 * [针对合作伙伴生态系统的多个区域](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)
@@ -117,6 +121,7 @@ IoT 设备流式传输的数据由 {{site.data.keyword.messagehub_full}} 分发�
 {: #uc_airline}
 
 人力资源主管 (CHRO) 需要采用创新的聊天机器人的新 HR 福利站点，但当前的开发工具和平台意味着应用程序上线的提前时间很长。这种情况包括须长时间等待硬件采购。
+{: shortdesc}
 
 为什么选择 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 提供了易于启动的计算。开发者还可以轻松进行试验，利用开放式工具链，快速将更改推送到开发和测试系统。他们的传统软件开发工具添加到 IBM Watson Assistant 后性能得到提升。新的福利站点在 3 周内就创建完成。
 

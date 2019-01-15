@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-06"
 
 ---
 
@@ -13,9 +13,10 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
-
-
 
 
 
@@ -32,7 +33,7 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](cs_versio
 {:shortdesc}
 
 **如何知道何时更新主节点？**</br>
-更新可用时，您会在 GUI 和 CLI 中收到相关通知，此外还可以查看[支持的版本](cs_versions.html)页面。
+更新可用时，您会在 {{site.data.keyword.Bluemix_notm}} 控制台和 CLI 中收到相关通知，此外还可以查看[支持的版本](cs_versions.html)页面。
 
 **主节点可以落后于最新版本多少个版本？**</br>
 IBM 通常在给定时间支持 3 个版本的 Kubernetes。更新 Kubernetes API 服务器时，可以更新的版本不能超过其当前版本的 2 个版本。
@@ -42,10 +43,17 @@ IBM 通常在给定时间支持 3 个版本的 Kubernetes。更新 Kubernetes AP
 如果集群运行的是不支持的 Kubernetes 版本，那么可能必须强制执行此更新。因此，请使集群保持最新，以避免操作影响。
 
 **工作程序节点能否运行高于主节点的版本？**</br>
-不能。请首先[更新主节点](#update_master)至最新的 Kubernetes 版本。然后，在集群中[更新工作程序节点](#worker_node)。与主节点不同的是，您必须为工作程序更新每个补丁版本。
+不能。请首先[更新主节点](#update_master)至最新的 Kubernetes 版本。然后，在集群中[更新工作程序节点](#worker_node)。
+
+**如何应用补丁更新？**</br>
+缺省情况下，主节点补丁更新会自动应用，但需要若干天时间，因此主节点补丁版本可能会在应用于主节点之前显示为可用。自动更新还会跳过运行状况欠佳或当前有操作正在执行的集群。有时，IBM 可能会对特定主节点修订包禁用自动更新，例如仅当主节点从一个次版本更新到另一个次版本时才需要的补丁。在上述任何情况下，您都可以[查看版本更改日志](cs_versions_changelog.html)以了解任何潜在影响，并选择自行安全地使用 `ibmcloud ks cluster-update` [命令](cs_cli_reference.html#cs_cluster_update)，而无需等待应用自动更新。
+
+与主节点不同的是，您必须为工作程序更新每个补丁版本。
 
 **主节点更新期间会发生什么情况？**</br>
-更新 Kubernetes API 服务器时，该 API 服务器将关闭约 5 到 10 分钟。在更新期间，您无法访问或更改集群。但是，不会修改集群用户已部署的工作程序节点、应用程序和资源，并继续运行。
+在运行 Kubernetes V1.11 或更高版本的集群中，主节点具有高可用性，有三个副本主节点 pod。主节点 pod 采用滚动更新，在此期间，一次只有一个 pod 不可用。在更新期间会有两个实例启动且正在运行，以便您可以访问和更改集群。工作程序节点、应用程序和资源会继续运行。
+
+对于运行先前版本的 Kubernetes 的集群，更新 Kubernetes API 服务器时，该 API 服务器将停止运行约 5 到 10 分钟。在更新期间，您无法访问或更改集群。但是，不会修改集群用户已部署的工作程序节点、应用程序和资源，并继续运行。
 
 **可以回滚更新吗？**</br>
 不能，在执行更新过程后，无法将集群回滚到先前版本。请确保使用测试集群并遵循指示信息来解决潜在问题，然后再更新生产主节点。
@@ -58,11 +66,13 @@ IBM 通常在给定时间支持 3 个版本的 Kubernetes。更新 Kubernetes AP
 图 1. Kubernetes 主节点更新流程图
 
 {: #update_master}
+开始之前，请确保您具有 [{{site.data.keyword.Bluemix_notm}} IAM **操作员**或**管理员**平台角色](cs_users.html#platform)。
+
 要更新 Kubernetes 主节点的_主_版本或_次_版本，请执行以下操作：
 
 1.  查看 [Kubernetes 更改](cs_versions.html)，并对任何更新标记为_在更新主节点之前更新_。
 
-2.  使用 GUI 或运行 CLI `ibmcloud ks cluster-update` [命令](cs_cli_reference.html#cs_cluster_update)来更新 Kubernetes API 服务器和关联的 Kubernetes 主节点组件。
+2.  使用 {{site.data.keyword.Bluemix_notm}} 控制台或运行 CLI `ibmcloud ks cluster-update` [命令](cs_cli_reference.html#cs_cluster_update)来更新 Kubernetes API 服务器和关联的 Kubernetes 主节点组件。
 
 3.  稍等几分钟，然后确认更新是否已完成。在 {{site.data.keyword.Bluemix_notm}}“仪表板”上查看 Kubernetes API 服务器版本，或运行 `ibmcloud ks clusters`。
 
@@ -79,15 +89,6 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
 您收到了工作程序节点更新通知。这意味着什么呢？由于 Kubernetes API 服务器和其他 Kubernetes 主节点组件的安全性更新和补丁已到位，因此您必须确保工作程序节点保持同步。
 {: shortdesc}
 
-开始之前：
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
-- [更新 Kubernetes 主节点](#master)。工作程序节点 Kubernetes 版本不能高于在 Kubernetes 主节点中运行的 Kubernetes API 服务器版本。
-- 落实在 [Kubernetes 更改](cs_versions.html)中标记为_在主节点后更新_的任何更改。
-- 如果要应用补丁更新，请查看 [Kubernetes 版本更改日志](cs_versions_changelog.html#changelog)。</br>
-
-**注意**：更新工作程序节点可能会导致应用程序和服务产生停机时间。如果数据未[存储在 pod 外部](cs_storage_planning.html#persistent_storage_overview)，那么将删除数据。
-
-
 **更新期间应用程序会发生什么情况？**</br>
 如果在更新的工作程序节点上作为部署的一部分运行应用程序，那么会将应用程序重新安排到集群中的其他工作程序节点上。这些工作程序节点可能位于其他工作程序池中，或者如果您具有独立工作程序节点，那么可能会将应用程序安排到独立工作程序节点上。要避免应用程序产生停机时间，必须确保集群中有足够的容量来执行工作负载。
 
@@ -99,7 +100,17 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
 **如果选择不定义配置映射会怎样？**</br>
 未定义配置映射时，将使用缺省值。缺省情况下，在更新过程中，每个集群的所有工作程序节点中最多可以有 20% 的节点不可用。
 
-要创建配置映射并更新工作程序节点，请执行以下操作：
+**开始之前**：
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+- [更新 Kubernetes 主节点](#master)。工作程序节点 Kubernetes 版本不能高于在 Kubernetes 主节点中运行的 Kubernetes API 服务器版本。
+- 落实在 [Kubernetes 更改](cs_versions.html)中标记为_在主节点后更新_的任何更改。
+- 如果要应用补丁更新，请查看 [Kubernetes 版本更改日志](cs_versions_changelog.html#changelog)。
+- 确保您具有 [{{site.data.keyword.Bluemix_notm}} IAM **操作员**或**管理员**平台角色](cs_users.html#platform)。</br>
+
+更新工作程序节点可能会导致应用程序和服务产生停机时间。系统会对工作程序节点机器重新应用映像，并且如果数据未[存储在 pod 外部](cs_storage_planning.html#persistent_storage_overview)，那么将删除数据。
+{: important}
+
+**创建配置映射并更新工作程序节点**：
 
 1.  列出可用的工作程序节点，并记录其专用 IP 地址。
 
@@ -139,7 +150,8 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
 
 3. 创建配置映射，并定义工作程序节点的不可用性规则。以下示例显示了 4 个检查：`zonecheck.json`、`regioncheck.json` 和 `defaultcheck.json` 和一个检查模板。可以使用这些示例检查来为特定专区中的工作程序节点定义规则 (`zonechk.json`)、为区域中的工作程序节点定义规则 (`regioncheck.json`)，或为与在配置映射中定义的任何检查不匹配的所有工作程序节点定义规则 (`defaultcheck.json`)。使用检查模板可创建自己的检查。对于每个检查，要识别工作程序节点，必须选择在上一步中检索到的其中一个工作程序节点标签。  
 
-   **注：**对于每个检查，只能为 <code>NodeSelectorKey</code> 和 <code>NodeSelectorValue</code> 设置一个值。如果要为多个区域、专区或其他工作程序节点标签设置规则，请创建新的检查。在配置映射中最多可定义 10 个检查。如果添加更多检查，将忽略这些检查。
+   对于每个检查，只能为 <code>NodeSelectorKey</code> 和 <code>NodeSelectorValue</code> 设置一个值。如果要为多个区域、专区或其他工作程序节点标签设置规则，请创建新的检查。在配置映射中最多可定义 10 个检查。如果添加更多检查，将忽略这些检查。
+   {: note}
 
    示例：
    ```
@@ -173,7 +185,7 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
         "NodeSelectorValue": "<node_selector_value>"
       }
    ```
-   {:pre}
+   {: codeblock}
 
    <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是参数，第二列是匹配的描述。">
     <caption>ConfigMap 组成部分</caption>
@@ -259,9 +271,7 @@ kubectl get nodes
 开始之前：
 - [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 - 如果是将数据存储在工作程序节点上，而没有[存储在工作程序节点外部](cs_storage_planning.html#persistent_storage_overview)，那么将删除数据。
-
-
-**注意**：更新工作程序节点可能会导致应用程序和服务产生停机时间。如果数据未[存储在 pod 外部](cs_storage_planning.html#persistent_storage_overview)，那么将删除数据。
+- 确保您具有 [{{site.data.keyword.Bluemix_notm}} IAM **操作员**或**管理员**平台角色](cs_users.html#platform)。
 
 1. 列出可用的工作程序节点，并记录其专用 IP 地址。
    - **对于工作程序池中的工作程序节点**：
@@ -368,15 +378,20 @@ kubectl get nodes
 ## 更新集群附加组件
 {: #addons}
 
-{{site.data.keyword.containerlong_notm}} 集群随附在供应集群时自动安装的**附加组件**，例如用于日志记录的 Fluentd。这些附加组件必须独立于主节点和工作程序节点进行更新。
+{{site.data.keyword.containerlong_notm}} 集群随附在供应集群时自动安装的附加组件，例如用于日志记录的 Fluentd。缺省情况下，IBM 会自动更新这些附加组件。但是，您可以禁用某些附加组件的自动更新，而单独从主节点和工作程序节点手动更新这些附加组件。
 {: shortdesc}
 
-**必须单独更新集群中的哪些缺省附加组件？**
+**可以单独更新集群中的哪些缺省附加组件？**</br>
+您可以选择禁用以下附加组件的自动更新：
 * [用于日志记录的 Fluentd](#logging)
+* [Ingress 应用程序负载均衡器](#alb)
 
-**是否存在不需要更新且无法更改的附加组件？**</br>
-是的，集群部署有以下无法更改的受管附加组件以及关联资源。如果尝试更改下列其中一个部署附加组件，其原始设置会定期复原。
+**集群中有无法单独更新的附加组件吗？**</br>
 
+有。集群部署的以下受管附加组件和关联的资源不能更改，但为了获得特定性能优点而扩展 pod 或编辑配置映射时除外。如果尝试更改下列其中一个部署附加组件，其原始设置会定期复原。
+
+* `coredns`
+* `coredns-autoscaler`
 * `heapster`
 * `ibm-file-plugin`
 * `ibm-storage-watcher`
@@ -384,6 +399,7 @@ kubectl get nodes
 * `kube-dns-amd64`
 * `kube-dns-autoscaler`
 * `kubernetes-dashboard`
+* `metrics-server`
 * `vpn`
 
 您可以使用 `addonmanager.kubernetes.io/mode: Reconcile` 标签来查看这些资源。例如：
@@ -396,33 +412,117 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 **可以安装其他非缺省附加组件吗？**</br>
 可以。{{site.data.keyword.containerlong_notm}} 提供了其他附加组件，您可以选择这些附加组件以向集群添加功能。例如，您可能希望[使用 Helm 图表](cs_integrations.html#helm)来安装[块存储器插件](cs_storage_block.html#install_block)、[Istio](cs_tutorials_istio.html#istio_tutorial) 或 [strongSwan VPN](cs_vpn.html#vpn-setup)。您必须通过遵循指示信息来更新 Helm 图表，从而分别更新每个附加组件。
 
-### 用于日志记录的 Fluentd
+### 管理用于日志记录的 Fluentd 附加组件的自动更新
 {: #logging}
 
 为了对日志记录或过滤器配置进行更改，Fluentd 附加组件必须为最新版本。缺省情况下，会启用附加组件的自动更新。
 {: shortdesc}
 
-可以通过运行 `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [命令](cs_cli_reference.html#cs_log_autoupdate_get)来检查是否启用了自动更新。
+您可以通过以下方式来管理 Fluentd 附加组件的自动更新。**注**：要运行以下命令，您必须具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](cs_users.html#platform)。
 
-要禁用自动更新，请运行 `ibmcloud ks logging-autoupdate-disable` [命令](cs_cli_reference.html#cs_log_autoupdate_disable)。
-
-如果禁用了自动更新，但您需要对配置进行更改，那么有两个选项。
-
-*  启用 Fluentd pod 的自动更新。
-
-    ```
+* 通过运行 `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [命令](cs_cli_reference.html#cs_log_autoupdate_get)来检查是否启用了自动更新。
+* 通过运行 `ibmcloud ks logging-autoupdate-disable` [命令](cs_cli_reference.html#cs_log_autoupdate_disable)来禁用自动更新。
+* 如果禁用了自动更新，但您需要对配置进行更改，那么有两个选项：
+    * 启用 Fluentd pod 的自动更新。
+        ```
     ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
     ```
-    {: pre}
+        {: pre}
+    * 使用包含 `--force-update` 选项的日志记录命令时，强制执行一次性更新。**注**：pod 会更新到最新版本的 Fluentd 附加组件，但 Fluentd 此后不会自动更新。示例命令：
 
-*  使用包含 `--force-update` 选项的日志记录命令时，强制执行一次性更新。**注**：pod 会更新到最新版本的 Fluentd 附加组件，但 Fluentd 此后不会自动更新。
-
-    示例命令：
-
-    ```
+        ```
     ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_ID> --type <log_type> --force-update
     ```
+        {: pre}
+
+### 管理 Ingress ALB 附加组件的自动更新
+{: #alb}
+
+控制何时更新 Ingress 应用程序负载均衡器 (ALB) 附加组件。
+{: shortdesc}
+
+更新 ALB 附加组件时，所有 ALB pod 中的 `nginx-ingress` 和 `ingress-auth` 容器都会更新为最新的构建版本。缺省情况下，会启用附加组件的自动更新。
+更新是基于滚动方式执行的，以便 Ingress ALB 不会遇到任何停机时间。
+
+如果您禁用了自动更新，那么您将负责更新附加组件。更新可用时，您在 CLI 中运行 `ibmcloud ks albs` 或 `alb-autoupdate-get` 命令时，会收到相应通知。
+
+更新集群的 Kubernetes 主版本或次版本时，IBM 会自动对 Ingress 部署进行必要的更改，但不会更改 Ingress ALB 附加组件的构建版本。您应负责检查最新的 Kubernetes 版本和 Ingress ALB 附加组件映像的兼容性。
+{: note}
+
+开始之前：
+
+1. 验证 ALB 是否正在运行。
+    ```
+    ibmcloud ks albs
+    ```
     {: pre}
+
+2. 检查 Ingress ALB 附加组件自动更新的状态。
+    ```
+    ibmcloud ks alb-autoupdate-get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    启用了自动更新时的示例输出：
+    ```
+    Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
+    OK
+    Automatic updates of the ALB pods are enabled in cluster mycluster
+    ALBs are at the latest version in cluster mycluster
+    ```
+    {: screen}
+
+    禁用了自动更新时的示例输出：
+    ```
+    Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
+    OK
+    Automatic updates of the ALB pods are disabled in cluster mycluster
+    ALBs are not at the latest version in cluster mycluster. To view the current version, run 'ibmcloud ks albs'.
+    ```
+    {: screen}
+
+3. 验证 ALB pod 的当前 **Build** 版本。
+    ```
+    ibmcloud ks albs --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    输出示例：
+    ```
+    ALB ID                                            Status    Type      ALB IP         Zone    Build
+    private-crb110acca09414e88a44227b87576ceea-alb1   enabled   private   10.130.5.78    mex01   ingress:350/ingress-auth:192*
+    public-crb110acca09414e88a44227b87576ceea-alb1    enabled   public    169.57.1.110   mex01   ingress:350/ingress-auth:192*
+
+    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://console.bluemix.net/docs/containers/cs_cluster_update.html#alb
+    ```
+    {: screen}
+
+您可以通过以下方式来管理 Ingress ALB 附加组件的自动更新。**注**：要运行以下命令，您必须具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **编辑者**或**管理员**平台角色](cs_users.html#platform)。
+* 禁用自动更新。
+    ```
+    ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+* 手动更新 Ingress ALB 附加组件。
+    1. 如果更新可用并且您希望更新该附加组件，请先查看[最新版本 Ingress ALB 附加组件的更改日志](cs_versions_addons.html#alb_changelog)，以验证是否有任何潜在中断性更改。
+    2. 强制一次性更新 ALB pod。集群中的所有 ALB pod 都会更新为最新构建版本。您无法更新单个 ALB，也无法选择要将附加组件更新到哪个构建。自动更新会保持禁用状态。
+        ```
+        ibmcloud ks alb-update --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+* 如果最近更新了 ALB pod，但 ALB 的定制配置受到最新构建的影响，那么您可以将更新回滚到 ALB pod 先前运行的构建。**注**：回滚更新后，会禁用 ALB pod 的自动更新。
+    ```
+    ibmcloud ks alb-rollback --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+* 重新启用自动更新。这样，每当下一个构建可用时，ALB pod 都会自动更新为最新构建。
+        ```
+        ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+<br />
+
 
 ## 从独立工作程序节点更新到工作程序池
 {: #standalone_to_workerpool}
@@ -432,13 +532,16 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 
 可以使用工作程序池在专区之间均匀分布工作程序节点，并构建均衡的集群。均衡的集群具有更高可用性，对故障的弹性也更高。如果从专区中除去工作程序节点，那么可以重新均衡工作程序池，并自动为该专区供应新的工作程序节点。工作程序池还用于将 Kubernetes 版本更新安装到所有工作程序节点。  
 
-**重要信息：**如果在多专区集群可用之前创建了集群，那么工作程序节点仍然独立，而不会自动分组到工作程序池中。您必须更新这些集群才能使用工作程序池。如果未更新，那么不能将单专区集群更改为多专区集群。
+如果在多专区集群可用之前创建了集群，那么工作程序节点会保持独立，而不会自动分组到工作程序池中。您必须更新这些集群才能使用工作程序池。如果未更新，那么不能将单专区集群更改为多专区集群。
+{: important}
 
 查看下图以了解从独立工作程序节点移至工作程序池时，集群设置如何更改。
 
 <img src="images/cs_cluster_migrate.png" alt="“将集群从独立工作程序节点更新到工作程序池" width="600" style="width:600px; border-style: none"/>
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+开始之前：
+- 确保您具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **操作员**或**管理员**平台角色](cs_users.html#platform)。
+- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
 
 1. 列出集群中的现有独立工作程序节点，并记录 **ID**、**Machine Type** 和 **Private IP**。
    ```
@@ -473,7 +576,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
       ```
       {: pre}
 
-   2. **将该专区添加到多个工作程序池**：将多个工作程序池添加到 `ibmcloud ks zone-add` 命令。要将一个专区添加到多个工作程序池，必须在该专区中具有现有专用和公用 VLAN。如果在该专区中没有公用和专用 VLAN，请考虑首先将该专区添加到一个工作程序池，以便创建公用和专用 VLAN。然后，可以将该专区添加到其他工作程序池。</br></br>务必将所有工作程序池中的工作程序节点供应到所有专区中，以确保集群可跨专区均衡。如果要对不同工作程序池使用不同的 VLAN，请对要用于工作程序池的 VLAN 重复此命令。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
+   2. **将该专区添加到多个工作程序池**：将多个工作程序池添加到 `ibmcloud ks zone-add` 命令。要将一个专区添加到多个工作程序池，必须在该专区中具有现有专用和公用 VLAN。如果在该专区中没有公用和专用 VLAN，请考虑首先将该专区添加到一个工作程序池，以便创建公用和专用 VLAN。然后，可以将该专区添加到其他工作程序池。</br></br>务必将所有工作程序池中的工作程序节点供应到所有专区中，以确保集群可跨专区均衡。如果要对不同工作程序池使用不同的 VLAN，请对要用于工作程序池的 VLAN 重复此命令。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，从而使工作程序节点可以在专用网络上相互通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](cs_users.html#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果使用 {{site.data.keyword.BluDirectLink}}，那么必须改为使用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。要启用 VRF，请联系 IBM Cloud infrastructure (SoftLayer) 帐户代表。
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
@@ -524,3 +627,110 @@ kubectl get nodes
 **接下来要做什么？**
 </br>
 现在，您已将集群更新为使用工作程序池，因此可以通过向集群添加更多专区来提高可用性。通过向集群添加更多专区，可将集群从单专区集群更改为[多专区集群](cs_clusters_planning.html#ha_clusters)。将单专区集群更改为多专区集群时，Ingress 域会从 `<cluster_name>.<region>.containers.mybluemix.net` 更改为 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。现有 Ingress 域仍然有效，可用于向应用程序发送请求。
+
+<br />
+
+
+## 将集群 DNS 提供程序设置为 CoreDNS
+{: #dns}
+
+集群中的每个服务都分配有一个域名系统 (DNS) 名称，集群 DNS 提供程序将注册该名称以解析 DNS 请求。缺省集群 DNS 提供程序为 Kubernetes DNS (KubeDNS)。但是，对于运行 Kubernetes V1.12 或更高版本的集群，可以选择改用 [CoreDNS ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://coredns.io/)。您可作为早期采用者来使用 CoreDNS，或者将其用于测试在 Kubernetes 项目移动以将 KubeDNS 替换为 CoreDNS 时的潜在影响。有关服务和 pod 的 DNS 的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)。
+{: shortdesc}
+
+开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
+
+1.  确定当前集群 DNS 提供程序。在以下示例中，KubeDNS 是当前集群 DNS 提供程序。
+    ```
+    kubectl cluster-info
+    ```
+    {: pre}
+
+输出示例：
+        ```
+    ...
+    KubeDNS is running at https://c2.us-south.containers.cloud.ibm.com:20190/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+    ...
+    ```
+    {: screen}
+2.  将 CoreDNS 设置为集群 DNS 提供程序。
+
+    1.  **可选**：如果在 `kube-system` 名称空间中定制了 `kube-dns` 配置映射，请将所有定制内容传输到 `kube-system` 名称空间中的 `coredns` 配置映射。请注意，`kube-dns` 和 `coredns` 配置映射的语法不同。有关示例，请参阅 CoreDNS 文档中的 [Installing CoreDNS via Kubeadm ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/)。
+
+    2.  向下扩展 KubeDNS 自动扩展程序部署。
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
+        ```
+        {: pre}
+
+    3.  检查并等待要删除的 pod 显示。
+        ```
+        kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
+        ```
+        {: pre}
+
+    4.  向下扩展 KubeDNS 部署。
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
+        ```
+        {: pre}
+
+    5.  向上扩展 CoreDNS 自动扩展程序部署。
+        ```
+        kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
+        ```
+        {: pre}
+
+    6.  对集群 DNS 服务进行标记和注释以用于 CoreDNS。
+        ```
+        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port=9153
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape=true
+        ```
+        {: pre}
+3.  **可选**：撤销先前的步骤可切换回将 KubeDNS 用作集群 DNS 提供程序。
+
+    1.  **可选**：如果在 `kube-system` 名称空间中定制了 `coredns` 配置映射，请将所有定制内容传输到 `kube-system` 名称空间中的 `kube-dns` 配置映射。请注意，`kube-dns` 和 `coredns` 配置映射的语法不同。有关示例，请参阅 CoreDNS 文档中的 [Installing CoreDNS via Kubeadm ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/)。
+
+    2.  向下扩展 CoreDNS 自动扩展程序部署。
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
+        ```
+        {: pre}
+
+    3.  检查并等待要删除的 pod 显示。
+        ```
+        kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
+        ```
+        {: pre}
+
+    4.  向下扩展 CoreDNS 部署。
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 coredns
+        ```
+        {: pre}
+
+    5.  向上扩展 KubeDNS 自动扩展程序部署。
+        ```
+        kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
+        ```
+        {: pre}
+
+    6.  对集群 DNS 服务进行标记和注释以用于 KubeDNS。
+        ```
+        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port-
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape-
+        ```
+        {: pre}

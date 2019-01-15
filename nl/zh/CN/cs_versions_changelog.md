@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-10-25"
+lastupdated: "2018-12-05"
 
 ---
 
@@ -13,6 +13,9 @@ lastupdated: "2018-10-25"
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
 {:download: .download}
 
 
@@ -23,27 +26,511 @@ lastupdated: "2018-10-25"
 查看可用于 {{site.data.keyword.containerlong}} Kubernetes 集群的主要更新、次要更新和补丁更新的版本更改信息。更改包括对 Kubernetes 和 {{site.data.keyword.Bluemix_notm}} Provider 组件的更新。
 {:shortdesc}
 
-有关主版本、次版本和补丁版本以及次版本之间的迁移操作的更多信息，请参阅 [Kubernetes 版本](cs_versions.html)。
+有关主版本、次版本和补丁版本以及次版本之间的准备操作的更多信息，请参阅 [Kubernetes 版本](cs_versions.html)。
 {: tip}
 
 有关自上一个版本以来的更改的信息，请参阅以下更改日志。
+-  V1.12 [更改日志](#112_changelog)。
 -  V1.11 [更改日志](#111_changelog)。
 -  V1.10 [更改日志](#110_changelog)。
--  V1.9 [更改日志](#19_changelog)。
 -  对不推荐使用或不受支持的版本的更改日志[归档](#changelog_archive)。
 
-**注**：一些更改日志针对_工作程序节点修订包_，仅适用于工作程序节点。您必须[应用这些补丁](cs_cli_reference.html#cs_worker_update)才能确保工作程序节点的安全合规性。另一些更改日志针对_主节点修订包_，仅适用于集群主节点。主节点修订包可能不会自动应用。您可以选择[手动进行应用](cs_cli_reference.html#cs_cluster_update)。有关补丁类型的更多信息，请参阅[更新类型](cs_versions.html#update_types)。
+一些更改日志针对_工作程序节点修订包_，仅适用于工作程序节点。您必须[应用这些补丁](cs_cli_reference.html#cs_worker_update)才能确保工作程序节点的安全合规性。另一些更改日志针对_主节点修订包_，仅适用于集群主节点。主节点修订包可能不会自动应用。您可以选择[手动进行应用](cs_cli_reference.html#cs_cluster_update)。有关补丁类型的更多信息，请参阅[更新类型](cs_versions.html#update_types)。
+{: note}
 
 </br>
+
+## V1.12 更改日志
+{: #112_changelog}
+
+查看 V1.12 更改日志。
+{: shortdesc}
+
+### 2018 年 12 月 5 日发布的 1.12.3_1531 的更改日志
+{: #1123_1531}
+
+下表显示了补丁 1.12.3_1531 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.2_1530 以来进行的更改">
+<caption>自 V1.12.2_1530 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.12.2-68</td>
+<td>V1.12.3-91</td>
+<td>更新为支持 Kubernetes 1.12.3 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.12.2</td>
+<td>V1.12.3</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.3)。更新解决了 [CVE-2018-1002105 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/issues/71411)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 12 月 4 日发布的工作程序节点 FP1.12.2_1530 的更改日志
+{: #1122_1530}
+
+下表显示了工作程序节点 FP1.12.2_1530 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.2_1529 以来进行的更改">
+<caption>自 V1.12.2_1529 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作程序节点资源利用率</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>添加了针对 kubelet 和 containerd 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](cs_clusters_planning.html#resource_limit_node)。</td>
+</tr>
+</tbody>
+</table>
+
+
+
+### 2018 年 11 月 27 日发布的 1.12.2_1529 的更改日志
+{: #1122_1529}
+
+下表显示了补丁 1.12.2_1529 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.2_1528 以来进行的更改">
+<caption>自 V1.12.2_1528 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>V3.2.1</td>
+<td>V3.3.1</td>
+<td>请参阅 [Calico 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/releases/#v331)。更新解决了 [Tigera Technical Advisory TTA-2018-001 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.projectcalico.org/security-bulletins/)。</td>
+</tr>
+<tr>
+<td>集群 DNS 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>修复了可能导致 Kubernetes DNS 和 CoreDNS pod 在集群创建或更新操作之后同时运行的错误。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>V1.2.0</td>
+<td>V1.1.5</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.5)。更新了 containerd，以修复会[阻止 pod 终止 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/issues/2744) 的死锁。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机和服务器</td>
+<td>2.4.4-r1-6</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>更新了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) 的映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 11 月 19 日发布的工作程序节点 FP1.12.2_1528 的更改日志
+{: #1122_1528}
+
+下表显示了工作程序节点 FP1.12.2_1528 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.2_1527 以来进行的更改">
+<caption>自 V1.12.2_1527 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内核</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>通过 [CVE-2018-7755 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+
+### 2018 年 11 月 7 日发布的 1.12.2_1527 的更改日志
+{: #1122_1527}
+
+下表显示了补丁 1.12.2_1527 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.3_1533 以来进行的更改">
+<caption>自 V1.11.3_1533 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>现在，`kube-system` 名称空间中的 Calico `calco-*` pod 设置对所有容器的 CPU 和内存资源请求。</td>
+</tr>
+<tr>
+<td>集群 DNS 提供程序</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>Kubernetes DNS (KubeDNS) 仍然是缺省集群 DNS 提供程序。但是，现在可以选择[将集群 DNS 提供程序更改为 CoreDNS](cs_cluster_update.html#dns)。</td>
+</tr>
+<tr>
+<td>集群度量值提供程序</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>Kubernetes Metrics Server 将替换作为集群度量值提供程序的 Kubernetes Heapster（自 Kubernetes V1.8 开始不推荐使用）。有关操作项，请参阅 [`metrics-server` 准备操作](cs_versions.html#metrics-server)。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.4</td>
+<td>1.2.0</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.2.0)。</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>不适用</td>
+<td>1.2.2</td>
+<td>请参阅 [CoreDNS 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coredns/coredns/releases/tag/v1.2.2)。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.11.3</td>
+<td>V1.12.2</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.2)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>添加了三个新的 IBM pod 安全策略及其关联的集群角色。有关更多信息，请参阅[了解 IBM 集群管理的缺省资源](cs_psp.html#ibm_psp)。</td>
+</tr>
+<tr>
+<td>Kubernetes 仪表板</td>
+<td>V1.8.3</td>
+<td>V1.10.0</td>
+<td>请参阅 [Kubernetes 仪表板发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0)。<br><br>
+如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为使用**令牌**进行登录。此外，现在可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来向上扩展 Kubernetes 仪表板 pod 的数量。</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.10</td>
+<td>1.14.13</td>
+<td>请参阅 [Kubernetes DNS 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/dns/releases/tag/1.14.13)。</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>不适用</td>
+<td>V0.3.1</td>
+<td>请参阅 [Kubernetes Metrics Server 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.1)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.11.3-118</td>
+<td>V1.12.2-68</td>
+<td>更新为支持 Kubernetes 1.12 发行版。其他更改包括以下内容：
+<ul><li>现在，负载均衡器 pod（在 `ibm-system` 名称空间中为 `ibm-cloud-provider-ip-*`）可设置 CPU 和内存资源请求。</li>
+<li>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`。</li>
+<li>新的[负载均衡器 2.0](cs_loadbalancer.html#planning_ipvs) 作为 Beta 提供。</li></ul></td>
+</tr>
+<tr>
+<td>OpenVPN 客户机配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>现在，`kube-system` 名称空间中的 OpenVPN 客户机 `vpn-* pod` 可设置 CPU 和内存资源请求。</td>
+</tr>
+</tbody>
+</table>
 
 ## V1.11 更改日志
 {: #111_changelog}
 
-查看以下更改。
+查看 V1.11 更改日志。
 
+### 2018 年 12 月 5 日发布的 1.11.5_1537 的更改日志
+{: #1115_1537}
+
+下表显示了补丁 1.11.5_1537 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.4_1536 以来进行的更改">
+<caption>自 V1.11.4_1536 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.11.4-142</td>
+<td>V1.11.5-152</td>
+<td>更新为支持 Kubernetes 1.11.5 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.11.4</td>
+<td>V1.11.5</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.5)。更新解决了 [CVE-2018-1002105 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/issues/71411)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 12 月 4 日发布的工作程序节点 FP1.11.4_1536 的更改日志
+{: #1114_1536}
+
+下表显示了工作程序节点 FP1.11.4_1536 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.4_1535 以来进行的更改">
+<caption>自 V1.11.4_1535 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作程序节点资源利用率</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>添加了针对 kubelet 和 containerd 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](cs_clusters_planning.html#resource_limit_node)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 11 月 27 日发布的 1.11.4_1535 的更改日志
+{: #1114_1535}
+
+下表显示了补丁 1.11.4_1535 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.3_1534 以来进行的更改">
+<caption>自 V1.11.3_1534 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>V3.2.1</td>
+<td>V3.3.1</td>
+<td>请参阅 [Calico 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/releases/#v331)。更新解决了 [Tigera Technical Advisory TTA-2018-001 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.projectcalico.org/security-bulletins/)。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>V1.1.4</td>
+<td>V1.1.5</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.5)。更新了 containerd，以修复会[阻止 pod 终止 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/issues/2744) 的死锁。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.11.3-127</td>
+<td>V1.11.4-142</td>
+<td>更新为支持 Kubernetes 1.11.4 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.11.3</td>
+<td>V1.11.4</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.4)。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机和服务器</td>
+<td>2.4.4-r1-6</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>更新了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) 的映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 11 月 19 日发布的工作程序节点 FP1.11.3_1534 的更改日志
+{: #1113_1534}
+
+下表显示了工作程序节点 FP1.11.3_1534 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.3_1533 以来进行的更改">
+<caption>自 V1.11.3_1533 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内核</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>通过 [CVE-2018-7755 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+
+### 2018 年 11 月 7 日发布的 1.11.3_1533 的更改日志
+{: #1113_1533}
+
+下表显示了补丁 1.11.3_1533 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.3_1531 以来进行的更改">
+<caption>自 V1.11.3_1531 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 更新</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>对于使用许可 Webhook（例如，`initializerconfigurations`、`mutatingwebhookconfigurations` 或 `validatingwebhookconfigurations`）的集群，修复了对其高可用性 (HA) 主节点的更新。您可以将这些 Webhook 与 Helm 图表配合使用，例如用于 [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.11.3-100</td>
+<td>V1.11.3-127</td>
+<td>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`.</td>
+</tr>
+<tr>
+<td>启用 TPM 的内核</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](cs_cli_reference.html#cs_cluster_feature_enable)，那么需要[重新装入](cs_cli_reference.html#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](cs_cli_reference.html#cs_machine_types)后查看 **Trustable** 字段。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 11 月 1 日发布的主节点 FP1.11.3_1531 的更改日志
+{: #1113_1531_ha-master}
+
+下表显示了主节点 FP1.11.3_1531 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.3_1527 以来进行的更改">
+<caption>自 V1.11.3_1527 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了集群主节点配置以提高高可用性 (HA)。集群现在有三个 Kubernetes 主节点副本，设置为使用高可用性 (HA) 配置，其中每个主节点副本部署到单独的物理主机上。此外，如果集群位于支持多专区的专区中，那么这些主节点还将在各专区中进行分布。<br>有关必须执行的操作，请参阅[更新为高可用性集群主节点](cs_versions.html#ha-masters)。这些准备操作适用于以下情况：<ul>
+<li>如果具有防火墙或定制 Calico 网络策略。</li>
+<li>如果在工作程序节点上使用的主机端口是 `2040` 或 `2041`。</li>
+<li>如果使用了集群主节点 IP 地址对主节点进行集群内访问。</li>
+<li>如果具有调用 Calico API 或 CLI (`calicoctl`) 的自动化操作，例如创建 Calico 策略。</li>
+<li>如果使用 Kubernetes 或 Calico 网络策略来控制对主节点的 pod 流出访问。</li></ul></td>
+</tr>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>不适用</td>
+<td>1.8.12-alpine</td>
+<td>在所有工作程序节点上添加了用于客户机端负载均衡的 `ibm-master-proxy-*` pod，以便每个工作程序节点客户机都可以将请求路由到可用的 HA 主节点副本。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>V3.2.18</td>
+<td>V3.3.1</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.3.1)。</td>
+</tr>
+<tr>
+<td>加密 etcd 中的数据</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>先前，etcd 数据存储在静态加密的主节点 NFS 文件存储器实例上。现在，etcd 数据存储在主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。但是，不会对主节点本地磁盘上的 etcd 数据进行加密。如果要对主节点的本地 etcd 数据进行加密，请[在集群中启用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 10 月 26 日发布的工作程序节点 FP1.11.3_1531 的更改日志
+{: #1113_1531}
+
+下表显示了工作程序节点 FP1.11.3_1531 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.3_1525 以来进行的更改">
+<caption>自 V1.11.3_1525 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作系统中断处理</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>用更高性能的中断处理程序替换了中断请求 (IRQ) 系统守护程序。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2018 年 10 月 15 日发布的主节点 FP1.11.3_1527 的更改日志
 {: #1113_1527}
+
+下表显示了主节点 FP1.11.3_1527 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.11.3_1524 以来进行的更改">
 <caption>自 V1.11.3_1524 以来的更改</caption>
@@ -74,6 +561,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 10 月 10 日发布的工作程序节点 FP1.11.3_1525 的更改日志
 {: #1113_1525}
 
+下表显示了工作程序节点 FP1.11.3_1525 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.11.3_1524 以来进行的更改">
 <caption>自 V1.11.3_1524 以来的更改</caption>
 <thead>
@@ -103,6 +593,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 10 月 2 日发布的 1.11.3_1524 的更改日志
 {: #1113_1524}
+
+下表显示了补丁 1.11.3_1524 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.11.3_1521 以来进行的更改">
 <caption>自 V1.11.3_1521 以来的更改</caption>
@@ -139,6 +632,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 9 月 20 日发布的 1.11.3_1521 的更改日志
 {: #1113_1521}
+
+下表显示了补丁 1.11.3_1521 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.11.2_1516 以来进行的更改">
 <caption>自 V1.11.2_1516 以来的更改</caption>
@@ -212,6 +708,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 9 月 4 日发布的 1.11.2_1516 的更改日志
 {: #1112_1516}
 
+下表显示了补丁 1.11.2_1516 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.11.2_1514 以来进行的更改">
 <caption>自 V1.11.2_1514 以来的更改</caption>
 <thead>
@@ -253,6 +752,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 8 月 23 日发布的工作程序节点 FP1.11.2_1514 的更改日志
 {: #1112_1514}
 
+下表显示了工作程序节点 FP1.11.2_1514 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.11.2_1513 以来进行的更改">
 <caption>自 V1.11.2_1513 以来的更改</caption>
 <thead>
@@ -282,6 +784,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 8 月 14 日发布的 1.11.2_1513 的更改日志
 {: #1112_1513}
 
+下表显示了补丁 1.11.2_1513 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.10.5_1518 以来进行的更改">
 <caption>自 V1.10.5_1518 以来的更改</caption>
 <thead>
@@ -297,13 +802,13 @@ lastupdated: "2018-10-25"
 <td>containerd</td>
 <td>不适用</td>
 <td>1.1.2</td>
-<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时。请参阅 [`containerd` 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.2)。有关必须执行的操作，请参阅[作为容器运行时迁移到 `containerd`](cs_versions.html#containerd)。</td>
+<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时。请参阅 [`containerd` 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.2)。有关必须执行的操作，请参阅[更新为 `containerd` 作为容器运行时](cs_versions.html#containerd)。</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时以增强性能。有关必须执行的操作，请参阅[作为容器运行时迁移到 `containerd`](cs_versions.html#containerd)。</td>
+<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时以增强性能。有关必须执行的操作，请参阅[更新为 `containerd` 作为容器运行时](cs_versions.html#containerd)。</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -333,7 +838,7 @@ lastupdated: "2018-10-25"
 <td>Kubernetes 配置</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>更新了集群的 Kubernetes API 服务器的 OpenID Connect 配置以支持 {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) 访问组。向集群的 Kubernetes API 服务器的 `--enable-admission-plugins` 选项添加了 `Priority`，并将集群配置为支持 pod 优先级。有关更多信息，请参阅：<ul><li>[IAM 访问组](cs_users.html#rbac)</li>
+<td>更新了集群的 Kubernetes API 服务器的 OpenID Connect 配置以支持 {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) 访问组。向集群的 Kubernetes API 服务器的 `--enable-admission-plugins` 选项添加了 `Priority`，并将集群配置为支持 pod 优先级。有关更多信息，请参阅：<ul><li>[{{site.data.keyword.Bluemix_notm}}IAM 访问组](cs_users.html#rbac)</li>
 <li>[配置 pod 优先级](cs_pod_priority.html#pod_priority)</li></ul></td>
 </tr>
 <tr>
@@ -357,10 +862,202 @@ lastupdated: "2018-10-25"
 ## V1.10 更改日志
 {: #110_changelog}
 
-查看以下更改。
+查看 V1.10 更改日志。
+
+### 2018 年 12 月 4 日发布的 1.10.11_1536 的更改日志
+{: #11011_1536}
+
+下表显示了补丁 1.10.11_1536 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.8_1532 以来进行的更改">
+<caption>自 V1.10.8_1532 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>V3.2.1</td>
+<td>V3.3.1</td>
+<td>请参阅 [Calico 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.3/releases/#v331)。更新解决了 [Tigera Technical Advisory TTA-2018-001 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.projectcalico.org/security-bulletins/)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.10.8-197</td>
+<td>V1.10.11-219</td>
+<td>更新为支持 Kubernetes 1.10.11 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.10.8</td>
+<td>V1.10.11</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.11)。更新解决了 [CVE-2018-1002105 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/issues/71411)。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机和服务器</td>
+<td>2.4.4-r1-6</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>更新了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) 的映像。</td>
+</tr>
+<tr>
+<td>工作程序节点资源利用率</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>添加了针对 kubelet 和 Docker 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](cs_clusters_planning.html#resource_limit_node)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 11 月 27 日发布的工作程序节点 FP1.10.8_1532 的更改日志
+{: #1108_1532}
+
+下表显示了工作程序节点 FP1.10.8_1532 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.8_1531 以来进行的更改">
+<caption>自 V1.10.8_1531 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>17.06.2</td>
+<td>18.06.1</td>
+<td>请参阅 [Docker 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/engine/release-notes/#18061-ce)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 11 月 19 日发布的工作程序节点 FP1.10.8_1531 的更改日志
+{: #1108_1531}
+
+下表显示了工作程序节点 FP1.10.8_1531 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.8_1530 以来进行的更改">
+<caption>自 V1.10.8_1530 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内核</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>通过 [CVE-2018-7755 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 11 月 7 日发布的 1.10.8_1530 的更改日志
+{: #1108_1530_ha-master}
+
+下表显示了补丁 1.10.8_1530 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.8_1528 以来进行的更改">
+<caption>自 V1.10.8_1528 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了集群主节点配置以提高高可用性 (HA)。集群现在有三个 Kubernetes 主节点副本，设置为使用高可用性 (HA) 配置，其中每个主节点副本部署到单独的物理主机上。此外，如果集群位于支持多专区的专区中，那么这些主节点还将在各专区中进行分布。<br>有关必须执行的操作，请参阅[更新为高可用性集群主节点](cs_versions.html#ha-masters)。这些准备操作适用于以下情况：<ul>
+<li>如果具有防火墙或定制 Calico 网络策略。</li>
+<li>如果在工作程序节点上使用的主机端口是 `2040` 或 `2041`。</li>
+<li>如果使用了集群主节点 IP 地址对主节点进行集群内访问。</li>
+<li>如果具有调用 Calico API 或 CLI (`calicoctl`) 的自动化操作，例如创建 Calico 策略。</li>
+<li>如果使用 Kubernetes 或 Calico 网络策略来控制对主节点的 pod 流出访问。</li></ul></td>
+</tr>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>不适用</td>
+<td>1.8.12-alpine</td>
+<td>在所有工作程序节点上添加了用于客户机端负载均衡的 `ibm-master-proxy-*` pod，以便每个工作程序节点客户机都可以将请求路由到可用的 HA 主节点副本。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>V3.2.18</td>
+<td>V3.3.1</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.3.1)。</td>
+</tr>
+<tr>
+<td>加密 etcd 中的数据</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>先前，etcd 数据存储在静态加密的主节点 NFS 文件存储器实例上。现在，etcd 数据存储在主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。但是，不会对主节点本地磁盘上的 etcd 数据进行加密。如果要对主节点的本地 etcd 数据进行加密，请[在集群中启用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.10.8-172</td>
+<td>V1.10.8-197</td>
+<td>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`.</td>
+</tr>
+<tr>
+<td>启用 TPM 的内核</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](cs_cli_reference.html#cs_cluster_feature_enable)，那么需要[重新装入](cs_cli_reference.html#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](cs_cli_reference.html#cs_machine_types)后查看 **Trustable** 字段。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 10 月 26 日发布的工作程序节点 FP1.10.8_1528 的更改日志
+{: #1108_1528}
+
+下表显示了工作程序节点 FP1.10.8_1528 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.8_1527 以来进行的更改">
+<caption>自 V1.10.8_1527 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作系统中断处理</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>用更高性能的中断处理程序替换了中断请求 (IRQ) 系统守护程序。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2018 年 10 月 15 日发布的主节点 FP1.10.8_1527 的更改日志
 {: #1108_1527}
+
+下表显示了主节点 FP1.10.8_1527 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.10.8_1524 以来进行的更改">
 <caption>自 V1.10.8_1524 以来的更改</caption>
@@ -391,6 +1088,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 10 月 10 日发布的工作程序节点 FP1.10.8_1525 的更改日志
 {: #1108_1525}
 
+下表显示了工作程序节点 FP1.10.8_1525 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.10.8_1524 以来进行的更改">
 <caption>自 V1.10.8_1524 以来的更改</caption>
 <thead>
@@ -420,6 +1120,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 10 月 2 日发布的 1.10.8_1524 的更改日志
 {: #1108_1524}
+
+下表显示了补丁 1.10.8_1524 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.10.7_1520 以来进行的更改">
 <caption>自 V1.10.7_1520 以来的更改</caption>
@@ -469,6 +1172,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 9 月 20 日发布的工作程序节点 FP1.10.7_1521 的更改日志
 {: #1107_1521}
 
+下表显示了工作程序节点 FP1.10.7_1521 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.10.7_1520 以来进行的更改">
 <caption>自 V1.10.7_1520 以来的更改</caption>
 <thead>
@@ -510,13 +1216,16 @@ lastupdated: "2018-10-25"
 <td>不适用</td>
 <td>禁用了缺省 Docker 网桥，以便 `172.17.0.0/16` IP 范围现在可用于专用路由。如果通过直接在主机上执行 `docker` 命令或使用安装了 Docker 套接字的 pod 来依赖于在工作程序节点中构建 Docker 容器，请从以下选项中进行选择。<ul><li>要确保构建容器时的外部网络连接，请运行 `docker build . --network host`。</li>
 <li>要显式创建在构建容器时要使用的网络，请运行 `docker network create`，然后使用此网络。</li></ul>
-**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[迁移到 `containerd`（而不是 `docker`）作为容器运行时](cs_versions.html#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
+**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[更新为 `containerd`（而不是 `docker`）作为容器运行时](cs_versions.html#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
 </tr>
 </tbody>
 </table>
 
 ### 2018 年 9 月 4 日发布的 1.10.7_1520 的更改日志
 {: #1107_1520}
+
+下表显示了补丁 1.10.7_1520 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.10.5_1519 以来进行的更改">
 <caption>自 V1.10.5_1519 以来的更改</caption>
@@ -565,6 +1274,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 8 月 23 日发布的工作程序节点 FP1.10.5_1519 的更改日志
 {: #1105_1519}
 
+下表显示了工作程序节点 FP1.10.5_1519 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.10.5_1518 以来进行的更改">
 <caption>自 V1.10.5_1518 以来的更改</caption>
 <thead>
@@ -595,6 +1307,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 8 月 13 日发布的工作程序节点 FP1.10.5_1518 的更改日志
 {: #1105_1518}
 
+下表显示了工作程序节点 FP1.10.5_1518 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.10.5_1517 以来进行的更改">
 <caption>自 V1.10.5_1517 以来的更改</caption>
 <thead>
@@ -617,6 +1332,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 7 月 27 日发布的 1.10.5_1517 的更改日志
 {: #1105_1517}
+
+下表显示了补丁 1.10.5_1517 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.10.3_1514 以来进行的更改">
 <caption>自 V1.10.3_1514 以来的更改</caption>
@@ -671,6 +1389,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 7 月 3 日发布的工作程序节点 FP1.10.3_1514 的更改日志
 {: #1103_1514}
 
+下表显示了工作程序节点 FP1.10.3_1514 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.10.3_1513 以来进行的更改">
 <caption>自 V1.10.3_1513 以来的更改</caption>
 <thead>
@@ -695,6 +1416,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 6 月 21 日发布的工作程序节点 FP1.10.3_1513 的更改日志
 {: #1103_1513}
 
+下表显示了工作程序节点 FP1.10.3_1513 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.10.3_1512 以来进行的更改">
 <caption>自 V1.10.3_1512 以来的更改</caption>
 <thead>
@@ -717,6 +1441,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 6 月 12 日发布的 1.10.3_1512 的更改日志
 {: #1103_1512}
+
+下表显示了补丁 1.10.3_1512 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.10.1_1510 以来进行的更改">
 <caption>自 V1.10.1_1510 以来的更改</caption>
@@ -773,6 +1500,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 5 月 18 日发布的工作程序节点 FP1.10.1_1510 的更改日志
 {: #1101_1510}
 
+下表显示了工作程序节点 FP1.10.1_1510 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.10.1_1509 以来进行的更改">
 <caption>自 V1.10.1_1509 以来的更改</caption>
 <thead>
@@ -796,6 +1526,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 5 月 16 日发布的工作程序节点 FP1.10.1_1509 的更改日志
 {: #1101_1509}
 
+下表显示了工作程序节点 FP1.10.1_1509 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.10.1_1508 以来进行的更改">
 <caption>自 V1.10.1_1508 以来的更改</caption>
 <thead>
@@ -818,6 +1551,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 5 月 1 日发布的 1.10.1_1508 的更改日志
 {: #1101_1508}
+
+下表显示了补丁 1.10.1_1508 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.9.7_1510 以来进行的更改">
 <caption>自 V1.9.7_1510 以来的更改</caption>
@@ -878,13 +1614,178 @@ lastupdated: "2018-10-25"
 <br />
 
 
-## V1.9 更改日志
+## 归档
+{: #changelog_archive}
+
+不支持的 Kubernetes 版本：
+*  [V1.9](#19_changelog)
+*  [V1.8](#18_changelog)
+*  [V1.7](#17_changelog)
+
+### V1.9 更改日志（不推荐使用，自 2018 年 12 月 27 日起不再支持）
 {: #19_changelog}
 
-查看以下更改。
+查看 V1.9 更改日志。
+
+### 2018 年 12 月 4 日发布的工作程序节点 FP1.9.11_1538 的更改日志
+{: #1911_1538}
+
+下表显示了工作程序节点 FP1.9.11_1538 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.9.11_1537 以来进行的更改">
+<caption>自 V1.9.11_1537 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作程序节点资源利用率</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>添加了针对 kubelet 和 Docker 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](cs_clusters_planning.html#resource_limit_node)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 11 月 27 日发布的工作程序节点 FP1.9.11_1537 的更改日志
+{: #1911_1537}
+
+下表显示了工作程序节点 FP1.9.11_1537 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.9.11_1536 以来进行的更改">
+<caption>自 V1.9.11_1536 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>17.06.2</td>
+<td>18.06.1</td>
+<td>请参阅 [Docker 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/engine/release-notes/#18061-ce)。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 11 月 19 日发布的 1.9.11_1536 的更改日志
+{: #1911_1536}
+
+下表显示了补丁 1.9.11_1536 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.9.10_1532 以来进行的更改">
+<caption>自 V1.9.10_1532 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>V2.6.5</td>
+<td>V2.6.12</td>
+<td>请参阅 [Calico 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v2.6/releases/#v2612)。更新解决了 [Tigera Technical Advisory TTA-2018-001 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.projectcalico.org/security-bulletins/)。</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>4.4.0-137</td>
+<td>4.4.0-139</td>
+<td>通过 [CVE-2018-7755 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-139.165/changelog) 的内核更新，更新了工作程序节点映像。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.9.10</td>
+<td>V1.9.11</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.11)。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}}</td>
+<td>V1.9.10-219</td>
+<td>V1.9.11-249</td>
+<td>更新为支持 Kubernetes 1.9.11 发行版。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机和服务器</td>
+<td>2.4.4-r2</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>更新了 [CVE-2018-0732 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732) 和 [CVE-2018-0737 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737) 的映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 11 月 7 日发布的工作程序节点 FP1.9.10_1532 的更改日志
+{: #1910_1532}
+
+下表显示了工作程序节点 FP1.9.11_1532 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.9.10_1531 以来进行的更改">
+<caption>自 V1.9.10_1531 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>启用 TPM 的内核</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](cs_cli_reference.html#cs_cluster_feature_enable)，那么需要[重新装入](cs_cli_reference.html#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](cs_cli_reference.html#cs_machine_types)后查看 **Trustable** 字段。</td>
+</tr>
+</tbody>
+</table>
+
+### 2018 年 10 月 26 日发布的工作程序节点 FP1.9.10_1531 的更改日志
+{: #1910_1531}
+
+下表显示了工作程序节点 FP1.9.10_1531 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.9.10_1530 以来进行的更改">
+<caption>自 V1.9.10_1530 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作系统中断处理</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>用更高性能的中断处理程序替换了中断请求 (IRQ) 系统守护程序。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2018 年 10 月 15 日发布的主节点 FP1.9.10_1530 的更改日志
 {: #1910_1530}
+
+下表显示了工作程序节点 FP1.9.10_1530 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.9.10_1527 以来进行的更改">
 <caption>自 V1.9.10_1527 以来的更改</caption>
@@ -908,6 +1809,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 10 月 10 日发布的工作程序节点 FP1.9.10_1528 的更改日志
 {: #1910_1528}
+
+下表显示了工作程序节点 FP1.9.10_1528 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.9.10_1527 以来进行的更改">
 <caption>自 V1.9.10_1527 以来的更改</caption>
@@ -939,6 +1843,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 10 月 2 日发布的 1.9.10_1527 的更改日志
 {: #1910_1527}
 
+下表显示了补丁 1.9.10_1527 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.9.10_1523 以来进行的更改">
 <caption>自 V1.9.10_1523 以来的更改</caption>
 <thead>
@@ -968,6 +1875,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 9 月 20 日发布的工作程序节点 FP1.9.10_1524 的更改日志
 {: #1910_1524}
+
+下表显示了工作程序节点 FP1.9.10_1524 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.9.10_1523 以来进行的更改">
 <caption>自 V1.9.10_1523 以来的更改</caption>
@@ -1010,13 +1920,16 @@ lastupdated: "2018-10-25"
 <td>不适用</td>
 <td>禁用了缺省 Docker 网桥，以便 `172.17.0.0/16` IP 范围现在可用于专用路由。如果通过直接在主机上执行 `docker` 命令或使用安装了 Docker 套接字的 pod 来依赖于在工作程序节点中构建 Docker 容器，请从以下选项中进行选择。<ul><li>要确保构建容器时的外部网络连接，请运行 `docker build . --network host`。</li>
 <li>要显式创建在构建容器时要使用的网络，请运行 `docker network create`，然后使用此网络。</li></ul>
-**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[迁移到 `containerd`（而不是 `docker`）作为容器运行时](cs_versions.html#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
+**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[更新为 `containerd`（而不是 `docker`）作为容器运行时](cs_versions.html#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
 </tr>
 </tbody>
 </table>
 
 ### 2018 年 9 月 4 日发布的 1.9.10_1523 的更改日志
 {: #1910_1523}
+
+下表显示了补丁 1.9.10_1523 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.9.9_1522 以来进行的更改">
 <caption>自 V1.9.9_1522 以来的更改</caption>
@@ -1059,6 +1972,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 8 月 23 日发布的工作程序节点 FP1.9.9_1522 的更改日志
 {: #199_1522}
 
+下表显示了工作程序节点 FP1.9.9_1522 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.9.9_1521 以来进行的更改">
 <caption>自 V1.9.9_1521 以来的更改</caption>
 <thead>
@@ -1089,6 +2005,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 8 月 13 日发布的工作程序节点 FP1.9.9_1521 的更改日志
 {: #199_1521}
 
+下表显示了工作程序节点 FP1.9.9_1521 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.9.9_1520 以来进行的更改">
 <caption>自 V1.9.9_1520 以来的更改</caption>
 <thead>
@@ -1111,6 +2030,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 7 月 27 日发布的 1.9.9_1520 的更改日志
 {: #199_1520}
+
+下表显示了补丁 1.9.9_1520 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.9.8_1517 以来进行的更改">
 <caption>自 V1.9.8_1517 以来的更改</caption>
@@ -1159,6 +2081,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 7 月 3 日发布的工作程序节点 FP1.9.8_1517 的更改日志
 {: #198_1517}
 
+下表显示了工作程序节点 FP1.9.8_1517 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.9.8_1516 以来进行的更改">
 <caption>自 V1.9.8_1516 以来的更改</caption>
 <thead>
@@ -1183,6 +2108,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 6 月 21 日发布的工作程序节点 FP1.9.8_1516 的更改日志
 {: #198_1516}
 
+下表显示了工作程序节点 FP1.9.8_1516 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.9.8_1515 以来进行的更改">
 <caption>自 V1.9.8_1515 以来的更改</caption>
 <thead>
@@ -1205,6 +2133,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 6 月 19 日发布的 1.9.8_1515 的更改日志
 {: #198_1515}
+
+下表显示了补丁 1.9.8_1515 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.9.7_1513 以来进行的更改">
 <caption>自 V1.9.7_1513 以来的更改</caption>
@@ -1248,6 +2179,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 6 月 11 日发布的工作程序节点 FP1.9.7_1513 的更改日志
 {: #197_1513}
 
+下表显示了工作程序节点 FP1.9.7_1513 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.9.7_1512 以来进行的更改">
 <caption>自 V1.9.7_1512 以来的更改</caption>
 <thead>
@@ -1270,6 +2204,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 5 月 18 日发布的工作程序节点 FP1.9.7_1512 的更改日志
 {: #197_1512}
+
+下表显示了工作程序节点 FP1.9.7_1512 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.9.7_1511 以来进行的更改">
 <caption>自 V1.9.7_1511 以来的更改</caption>
@@ -1294,6 +2231,9 @@ lastupdated: "2018-10-25"
 ### 2018 年 5 月 16 日发布的工作程序节点 FP1.9.7_1511 的更改日志
 {: #197_1511}
 
+下表显示了工作程序节点 FP1.9.7_1511 中包含的更改。
+{: shortdesc}
+
 <table summary="自 V1.9.7_1510 以来进行的更改">
 <caption>自 V1.9.7_1510 以来的更改</caption>
 <thead>
@@ -1316,6 +2256,9 @@ lastupdated: "2018-10-25"
 
 ### 2018 年 4 月 30 日发布的 1.9.7_1510 的更改日志
 {: #197_1510}
+
+下表显示了补丁 1.9.7_1510 中包含的更改。
+{: shortdesc}
 
 <table summary="自 V1.9.3_1506 以来进行的更改">
 <caption>自 V1.9.3_1506 以来的更改</caption>
@@ -1357,13 +2300,6 @@ lastupdated: "2018-10-25"
 
 <br />
 
-
-## 归档
-{: #changelog_archive}
-
-不支持的 Kubernetes 版本：
-*  [V1.8](#18_changelog)
-*  [V1.7](#17_changelog)
 
 ### V1.8 更改日志（不受支持）
 {: #18_changelog}
@@ -1688,7 +2624,7 @@ lastupdated: "2018-10-25"
 <td>Kubernetes</td>
 <td>V1.8.8</td>
 <td>V1.8.11</td>
-<td><p>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11)。此发行版解决了 [CVE-2017-1002101 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) 和 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) 漏洞。</p><p><strong>注</strong>：现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，应用程序可以将数据写入这些卷，但系统可能会自动还原数据。如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</p></td>
+<td><p>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11)。此发行版解决了 [CVE-2017-1002101 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) 和 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) 漏洞。</p><p>现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，应用程序可以将数据写入这些卷，但系统可能会自动还原数据。如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</p></td>
 </tr>
 <tr>
 <td>暂停容器映像</td>
@@ -1806,7 +2742,7 @@ lastupdated: "2018-10-25"
 <td>Kubernetes</td>
 <td>V1.7.4</td>
 <td>V1.7.16</td>
-<td><p>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16)。此发行版解决了 [CVE-2017-1002101 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) 和 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) 漏洞。</p><p><strong>注</strong>：现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，应用程序可以将数据写入这些卷，但系统可能会自动还原数据。如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</p></td>
+<td><p>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16)。此发行版解决了 [CVE-2017-1002101 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) 和 [CVE-2017-1002102 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) 漏洞。</p><p>现在，`secret`、`configMap`、`downwardAPI` 和投影卷均安装为只读。先前，应用程序可以将数据写入这些卷，但系统可能会自动还原数据。如果应用程序依赖于先前的不安全行为，请相应地对其进行修改。</p></td>
 </tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>V1.7.4-133</td>
