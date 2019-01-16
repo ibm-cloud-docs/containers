@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-09"
+lastupdated: "2019-01-16"
 
 ---
 
@@ -77,10 +77,10 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud ks workers <cluster>` or `ibmcloud ks worker-get <cluster> <worker>` commands.
--  **Major and minor updates**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node).
+-  **Major and minor updates (1.x)**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node). Worker nodes cannot run a Kubernetes version that is greater than the masters.
    - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.9 and you want to update to 1.12, you must update to 1.10 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results or failure.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](cs_cli_install.html#kubectl) up-to-date.
--  **Patch updates**: Changes across patches are documented in the [Version changelog](cs_versions_changelog.html). As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
+-  **Patch updates (x.x.4_1510)**: Changes across patches are documented in the [Version changelog](cs_versions_changelog.html). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
    - **Worker node patches**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `ibmcloud ks worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. Note that during an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
    - **Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster-update` [command](cs_cli_reference.html#cs_cluster_update) yourself without waiting for the update automation to apply.
 
@@ -99,6 +99,96 @@ For a complete list of changes, review the following information:
 * [IBM version changelog](cs_versions_changelog.html).
 
 </br>
+
+## Release history
+{: #release-history}
+
+The following table records {{site.data.keyword.containerlong_notm}} version release history. You can use this information for planning purposes, such as to estimate general time frames when a certain release might become available or unsupported. For example, historically {{site.data.keyword.containerlong_notm}} release dates often follow the community release date by about a month and a half. 
+{: shortdesc}
+
+{{site.data.keyword.containerlong_notm}} was first generally available with Kubernetes version 1.5. Projected release or unsupported dates are subject to change. To go to the version update preparation steps, click the version number.
+
+Dates that are marked with a dagger (`†`) are tentative and subject to change. Supported versions are marked with a checkmark ![Supported checkmark icon](images/healthy.png). Unsupported versions are marked with an X ![Unsupported X icon](images/close.png).
+{: note}
+
+<table summary="Release history for {{site.data.keyword.containerlong_notm}}.">
+<caption>Release history for {{site.data.keyword.containerlong_notm}}.</caption>
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<thead>
+<tr>
+<th>Version</th>
+<th>Kubernetes community<br>release date</th>
+<th>{{site.data.keyword.containerlong_notm}}<br>release date</th>
+<th>Days between the release dates</th>
+<th>{{site.data.keyword.containerlong_notm}}<br>unsupported date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>![Supported checkmark icon](images/healthy.png) [1.12](#cs_v112)</td>
+  <td>27 Sep 2018</td>
+  <td>07 Nov 2018</td>
+  <td>41 days</td>
+  <td>Sep 2019 `†`</td>
+</tr>
+<tr>
+  <td>![Supported checkmark icon](images/healthy.png) [1.11](#cs_v111)</td>
+  <td>26 Jun 2018</td>
+  <td>14 Aug 2018</td>
+  <td>49 days</td>
+  <td>Jun 2019 `†`</td>
+</tr>
+<tr>
+  <td>![Supported checkmark icon](images/healthy.png) [1.10](#cs_v110)</td>
+  <td>26 Mar 2018</td>
+  <td>01 May 2018</td>
+  <td>36 days</td>
+  <td>29 Mar 2019 `†`</td>
+</tr>
+<tr>
+  <td>![Unsupported X icon](images/close.png) [1.9](#cs_v19)</td>
+  <td>13 Dec 2017</td>
+  <td>08 Feb 2018</td>
+  <td>57 days</td>
+  <td>27 Dec 2018</td>
+</tr>
+<tr>
+  <td>![Unsupported X icon](images/close.png) [1.8](#cs_v18)</td>
+  <td>27 Sep 2017</td>
+  <td>08 Nov 2017</td>
+  <td>41 days</td>
+  <td>22 Sep 2018</td>
+</tr>
+<tr>
+  <td>![Unsupported X icon](images/close.png) [1.7](#cs_v17)</td>
+  <td>28 Jun 2017</td>
+  <td>19 Sep 2017</td>
+  <td>83 days</td>
+  <td>21 Jun 2018</td>
+</tr>
+<tr>
+  <td>![Unsupported X icon](images/close.png) 1.6</td>
+  <td>22 Mar 2017</td>
+  <td>N/A</td>
+  <td>N/A</td>
+  <td>N/A</td>
+</tr>
+<tr>
+  <td>![Unsupported X icon](images/close.png) [1.5](#cs_v1-5)</td>
+  <td>12 Dec 2016</td>
+  <td>23 May 2017</td>
+  <td>162 days</td>
+  <td>04 Apr 2018</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
 
 ## Version 1.12
 {: #cs_v112}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-16"
 
 ---
 
@@ -45,7 +45,7 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 
 -  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps). Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
--  [Create a cluster ](cs_clusters.html#clusters_cli). 
+-  [Create a cluster](cs_clusters.html#clusters_cli). 
 -  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure).
 
 ## Lesson 1: Download and install Istio
@@ -102,21 +102,27 @@ Deploy the BookInfo sample app's microservices to your Kubernetes cluster.
 These four microservices include a product web page, book details, reviews (with several versions of the review microservice), and ratings. When you deploy BookInfo, Envoy sidecar proxies are injected as containers into your app microservices' pods before the microservice pods are deployed. Istio uses an extended version of the Envoy proxy to mediate all inbound and outbound traffic for all microservices in the service mesh. For more about Envoy, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/overview/#envoy).
 
 1. Download the Istio package containing the necessary BookInfo files.
-    1. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) and extract the installation files, or get the latest version by using cURL:
+    1. Set the Istio version as an environment variable.
+        ```
+        export ISTIO_VERSION=1.0.5
+        ```
+        {: pre}
+
+    2. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) and extract the installation files, or get the latest version by using cURL:
        ```
        curl -L https://git.io/getLatestIstio | sh -
        ```
        {: pre}
 
-    2. Change the directory to the Istio file location.
+    3. Change the directory to the Istio file location.
        ```
-       cd <filepath>/istio-1.0
+       cd <filepath>/istio-1.0.5
        ```
        {: pre}
 
-    3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
+    4. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
         ```
-        export PATH=$PWD/istio-1.0/bin:$PATH
+        export PATH=$PWD/istio-1.0.5/bin:$PATH
         ```
         {: pre}
 
@@ -127,11 +133,10 @@ These four microservices include a product web page, book details, reviews (with
     {: pre}
 
 3. Deploy the BookInfo app. When the app microservices deploy, the Envoy sidecar is also deployed in each microservice pod.
-
-   ```
-   kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
-   ```
-   {: pre}
+    ```
+    kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+    ```
+    {: pre}
 
 4. Ensure that the microservices and their corresponding pods are deployed:
     ```

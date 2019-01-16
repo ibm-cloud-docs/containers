@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-09"
+lastupdated: "2019-01-16"
 
 ---
 
@@ -81,6 +81,8 @@ The list is divided into two parts:
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
 
+
+
 ### Creating a free cluster
 {: #clusters_ui_free}
 
@@ -90,13 +92,9 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 {: note}
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
-
 2. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.
-
 3. Select a location in which to deploy your cluster. **Note**: You cannot create free clusters in the Washington DC (US East) or Tokyo (AP North) locations.
-
 4. Select the **Free** cluster plan.
-
 5. Give your cluster a name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 
 6. Click **Create cluster**. By default, a worker pool with one worker node is created. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab.
@@ -110,25 +108,17 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 {: #clusters_ui_standard}
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
-
 2. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.
-
 3. Select a resource group in which to create your cluster.
   **Note**:
     * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
     * Free clusters are automatically created in the default resource group.
     * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
-
 4. Select an [{{site.data.keyword.Bluemix_notm}} location](cs_regions.html#regions-and-zones) in which to deploy your cluster. For the best performance, select the location that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
-
 5. Select the **Standard** cluster plan. With a standard cluster you have access to features like multiple worker nodes for a highly available environment.
-
 6. Enter your zone details.
-
     1. Select **Single zone** or **Multizone** availability. In a multizone cluster the master node is deployed in a multizone-capable zone and your cluster's resources are spread across multiple zones. Your choices might be limited by region.
-
     2. Select the specific zones in which you want to host your cluster. You must select at least 1 zone but you can select as many as you would like. If you select more than 1 zone, the worker nodes are spread across the zones that you choose which gives you higher availability. If you select only 1 zone, you can [add zones to your cluster](#add_zone) after it is created.
-
     3. Select a public VLAN (optional) and a private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Worker nodes communicate with each other by using the private VLAN. To communicate with the Kubernetes master, you must configure public connectivity for your worker node.  If you do not have a public or private VLAN in this zone, leave it blank. A public and a private VLAN is automatically created for you. If you have existing VLANs and you do not specify a public VLAN, consider configuring a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about-the-vra). You can use the same VLAN for multiple clusters.
         If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
         {: note}
@@ -151,9 +141,7 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
     3. Specify the number of worker nodes that you need in the cluster. The number of workers that you enter is replicated across the number of zones that you selected. This means that if you have 2 zones and select 3 worker nodes, 6 nodes are provisioned, and 3 nodes live in each zone.
 
 8. Give your cluster a unique name. **Note**: Changing the unique ID or domain name that is assigned during creation blocks the Kubernetes master from managing your cluster.
-
 9. Choose the Kubernetes API server version for the cluster master node.
-
 10. Click **Create cluster**. A worker pool is created with the number of workers that you specified. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab.
 
 **What's next?**
@@ -176,6 +164,8 @@ When the cluster is up and running, you can check out the following tasks:
 
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
+
+
 
 Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](cs_cli_install.html#cs_cli_install).
 
@@ -208,7 +198,6 @@ To create a cluster:
       {: pre}
 
     4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
-
 
 4.  Create a cluster. Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
 
@@ -320,7 +309,7 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--disable-disk-encrypt</code></td>
-        <td>**Free and standard clusters**: Worker nodes feature disk encryption by default; [learn more](cs_secure.html#encrypted_disk). If you want to disable encryption, include this option.</td>
+        <td>**Free and standard clusters**: Worker nodes feature [disk encryption](cs_secure.html#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
         </tr>
         <tr>
         <td><code>--trusted</code></td>
