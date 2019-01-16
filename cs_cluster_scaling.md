@@ -145,8 +145,13 @@ Make the most out of the cluster autoscaler by organizing your worker node and a
 *   If you're using pod priority, you can [edit the priority cutoff ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-cluster-autoscaler-work-with-pod-priority-and-preemption) to change what types of priority trigger scaling up. By default, the priority cutoff is zero (`0`).
 
 <br>
-**My autoscaled worker pools are unbalanced, but I can't use the rebalance command. What can I do?**<br>
-[Update your cluster autoscaler configmap](#ca_cm) to remove the unbalanced worker pool, run the `ibmcloud ks worker-pool-rebalance` [command](cs_cli_reference.html#cs_rebalance), and finally add the worker pool back to the cluster autoscaler configmap.
+**Why are my autoscaled worker pools unbalanced?**<br>
+During a scaleup, the cluster autoscaler balances nodes across zones, with a permitted difference of plus or minus one (+/- 1) worker node. Your pending workloads might not request enough capacity to make each zone balanced. In this case, if you want to manually balance the worker pools, [update your cluster autoscaler configmap](#ca_cm) to remove the unbalanced worker pool. Then run the `ibmcloud ks worker-pool-rebalance` [command](cs_cli_reference.html#cs_rebalance), and add the worker pool back to the cluster autoscaler configmap.
+
+**Why can't I resize or rebalance my worker pool?**<br>
+When the cluster autoscaler is enabled for a worker pool, you cannot [resize](cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](cs_cli_reference.html#cs_rebalance) your worker pools. You must [edit the configmap](#ca_cm) to change the worker pool minimum or maximum sizes, or disable cluster autoscaling for that worker pool.
+
+Further, if you do not disable the worker pools before you uninstall the `ibm-ks-cluster-autoscaler` Helm chart, the worker pools cannot be resized manually. Reinstall the `ibm-ks-cluster-autoscaler` Helm chart, [edit the configmap](#ca_cm) to disable the worker pool, and try again.
 
 <br />
 
@@ -296,6 +301,9 @@ The cluster autoscaler is available as a **preview beta** for select users only.
 Update the cluster autoscaler configmap to enable automatically scaling worker nodes in your worker pools based on the minimum and maximum values that you set.
 {: shortdesc}
 
+After you edit the configmap to enable a worker pool, the cluster autoscaler begins to scale your cluster in response to your workload requests. As such, you cannot [resize](cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](cs_cli_reference.html#cs_rebalance) your worker pools. Scanning and scaling up and down happens at regular intervals over time, and depending on the number of worker nodes might take a longer period of time to complete, such as 30 minutes. Later, if you want to [remove the cluster autoscaler](#ca_rm), you must first disable each worker pool in the configmap.
+{: note}
+
 **Before you begin**:
 *  [Install the `ibm-ks-cluster-autoscaler` plug-in](#ca_helm).
 *  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
@@ -352,19 +360,25 @@ Update the cluster autoscaler configmap to enable automatically scaling worker n
     </tr>
     <tr>
     <td>`"enabled":false`</td>
-    <td>Set the value to `true` for the cluster autoscaler to manage scaling for the worker pool.</td>
+    <td>Set the value to `true` for the cluster autoscaler to manage scaling for the worker pool. Set the value to `false` to stop the cluster autoscaler from scaling the worker pool.<br><br>
+    Later, if you want to [remove the cluster autoscaler](#ca_rm), you must first disable each worker pool in the configmap.</td>
     </tr>
     </tbody>
     </table>
-3.  Apply your changes to the cluster. After the changes are deployed, the cluster autoscaler begins to scale your cluster in response to your workload requests. As such, you cannot [resize](cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](cs_cli_reference.html#cs_rebalance) your worker pools. Scanning and scaling up and down happens at regular intervals over time, and depending on the number of worker nodes might take a longer period of time to complete, such as 30 minutes.
+3.  Apply your changes to the cluster. 
     ```
     kubectl apply -f iks-ca-configmap.yaml
     ```
     {: pre}
-4.  Review the **Events** section of the cluster autoscaler pod for a **ConfigUpdated** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
+4.  Get your cluster autoscaler pod.
+    ```
+    kubectl get pods -n kube-system
+    ```
+    {: pre}
+5.  Review the **Events** section of the cluster autoscaler pod for a **ConfigUpdated** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
 
     ```
-    kubectl describe pod -n kube-system ibm-ks-cluster-autoscaler-857c4d9d54-gwvc6
+    kubectl describe pod -n kube-system <cluster_autoscaler_pod>
     ```
     {: pre}
     
@@ -580,12 +594,29 @@ If you do not want to automatically scale your worker pools, you can uninstall t
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-1.  List your existing Helm charts and note the name of the cluster autoscaler.
+1.  In the [cluster autoscaler configmap](#ca_cm), remove the worker pool by setting the `"enabled"` value to `false`.
+    ```
+    kubectl edit cm iks-ca-configmap -n kube-system
+    ```
+    {: pre}
+    Example output:
+    ```
+    apiVersion: v1
+    data:
+      workerPoolsConfig.json: |
+        [
+         {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
+         {"name":"mypool","minSize":1,"maxSize":5,"enabled":false}
+        ]
+    kind: ConfigMap
+    ...
+    ```
+2.  List your existing Helm charts and note the name of the cluster autoscaler.
     ```
     helm ls
     ```
     {: pre}
-2.  Remove the existing Helm chart from your cluster.
+3.  Remove the existing Helm chart from your cluster.
     ```
     helm delete --purge <ibm-ks-cluster-autoscaler_name>
     ```
