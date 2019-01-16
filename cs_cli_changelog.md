@@ -40,6 +40,13 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </thead>
 <tbody>
 <tr>
+<td>0.2.19</td>
+<td>16 Jan 2019</td>
+<td><ul><li>Adds the `IKS_BETA_VERSION` environment variable to enable the redesigned beta version of the {{site.data.keyword.containerlong_notm}} plug-in CLI. To try out the redesigned version, see [Using the beta command structure](cs_cli_reference.html#cs_beta).</li>
+<li>Increases the default timeout value for `ibmcloud ks subnets` to `60s`.</li>
+<li>Minor bug and translation fixes.</li></ul></td>
+</tr>
+<tr>
 <td>0.1.668</td>
 <td>18 Dec 2018</td>
 <td><ul><li>Switches the default API endpoint from <code>https://containers.bluemix.net</code> to <code>https://containers.cloud.ibm.com</code>.</li>

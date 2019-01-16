@@ -33,6 +33,23 @@ In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-in
 Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_notm}} CLI reference](/docs/container-registry-cli-plugin/container-registry-cli.html). Looking for `kubectl` commands? See the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).
 {:tip}
 
+
+
+## Using the beta command structure
+{: #cs_beta}
+
+A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from the hyphenated structure to a spaced structure.
+* When you run `ibmcloud ks help`, commands are shown in the legacy hyphenated structure and are listed alphabetically.
+* You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).
+
+To use the redesigned {{site.data.keyword.containerlong_notm}} plug-in, set the `IKS_BETA_VERSION` environment variable to the beta version `0.2`.
+```
+export IKS_BETA_VERSION=0.2
+```
+{: pre}
+
+
+
 ## ibmcloud ks commands
 {: #cs_commands}
 
