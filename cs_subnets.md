@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-16"
+lastupdated: "2019-01-18"
 
 ---
 
@@ -69,6 +69,8 @@ In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. I
 {: note}
 
 <br />
+
+
 
 
 ## Using custom or existing subnets to create a cluster
