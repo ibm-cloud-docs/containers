@@ -113,7 +113,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 <table summary="Release history for {{site.data.keyword.containerlong_notm}}.">
 <caption>Release history for {{site.data.keyword.containerlong_notm}}.</caption>
-<col width="20%">
+<col width="20%" align="center">
 <col width="20%">
 <col width="30%">
 <col width="30%">
