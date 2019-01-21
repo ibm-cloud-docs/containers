@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-16"
+lastupdated: "2019-01-21"
 
 ---
 
@@ -1060,6 +1060,10 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
  kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
  ```
  {: pre}
+
+ 5. Optional:
+    * Access an app via a non-standard TCP port that you opened by using the [`tcp-ports`](cs_annotations.html#tcp-ports) annotation.
+    * Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic to a port that you opened by using the [`custom-port`](cs_annotations.html#custom-port) annotation.
 
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/).
 

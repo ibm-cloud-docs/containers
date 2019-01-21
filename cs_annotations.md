@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-18"
+lastupdated: "2019-01-21"
 
 ---
 
@@ -693,7 +693,7 @@ spec:
 <br />
 
 
-### TCP ports for appplication load balancers (tcp-ports)
+### TCP ports (tcp-ports)
 {: #tcp-ports}
 
 Access an app via a non-standard TCP port.
