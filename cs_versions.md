@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-16"
+lastupdated: "2019-01-21"
 
 ---
 
@@ -103,85 +103,75 @@ For a complete list of changes, review the following information:
 ## Release history
 {: #release-history}
 
-The following table records {{site.data.keyword.containerlong_notm}} version release history. You can use this information for planning purposes, such as to estimate general time frames when a certain release might become available or unsupported. For example, historically {{site.data.keyword.containerlong_notm}} release dates often follow the community release date by about a month and a half. 
+The following table records {{site.data.keyword.containerlong_notm}} version release history. You can use this information for planning purposes, such as to estimate general time frames when a certain release might become unsupported. After the Kubernetes community releases a version update, the IBM team begins a process of hardening and testing the release for {{site.data.keyword.containerlong_notm}} environments. Availability and unsupported release dates depend on the results of these tests, community updates, security patches, and technology changes between versions. Plan to keep your cluster master and worker node version up to date according to the n-2 version support policy.
 {: shortdesc}
 
 {{site.data.keyword.containerlong_notm}} was first generally available with Kubernetes version 1.5. Projected release or unsupported dates are subject to change. To go to the version update preparation steps, click the version number.
 
-Dates that are marked with a dagger (`†`) are tentative and subject to change. Supported versions are marked with a checkmark ![Supported checkmark icon](images/healthy.png). Unsupported versions are marked with an X ![Unsupported X icon](images/close.png).
+Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: note}
 
 <table summary="Release history for {{site.data.keyword.containerlong_notm}}.">
 <caption>Release history for {{site.data.keyword.containerlong_notm}}.</caption>
 <col width="20%">
 <col width="20%">
-<col width="20%">
-<col width="20%">
-<col width="20%">
+<col width="30%">
+<col width="30%">
 <thead>
 <tr>
+<th>Supported?</th>
 <th>Version</th>
-<th>Kubernetes community<br>release date</th>
 <th>{{site.data.keyword.containerlong_notm}}<br>release date</th>
-<th>Days between the release dates</th>
 <th>{{site.data.keyword.containerlong_notm}}<br>unsupported date</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>![Supported checkmark icon](images/healthy.png) [1.12](#cs_v112)</td>
-  <td>27 Sep 2018</td>
+  <td>![Supported checkmark icon](images/healthy.png)</td>
+  <td>[1.12](#cs_v112)</td>
   <td>07 Nov 2018</td>
-  <td>41 days</td>
   <td>Sep 2019 `†`</td>
 </tr>
 <tr>
-  <td>![Supported checkmark icon](images/healthy.png) [1.11](#cs_v111)</td>
-  <td>26 Jun 2018</td>
+  <td>![Supported checkmark icon](images/healthy.png)</td>
+  <td>[1.11](#cs_v111)</td>
   <td>14 Aug 2018</td>
-  <td>49 days</td>
   <td>Jun 2019 `†`</td>
 </tr>
 <tr>
-  <td>![Supported checkmark icon](images/healthy.png) [1.10](#cs_v110)</td>
-  <td>26 Mar 2018</td>
+  <td>![Supported checkmark icon](images/healthy.png)</td>
+  <td>[1.10](#cs_v110)</td>
   <td>01 May 2018</td>
-  <td>36 days</td>
   <td>29 Mar 2019 `†`</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close.png) [1.9](#cs_v19)</td>
-  <td>13 Dec 2017</td>
+  <td>![Unsupported X icon](images/close.png)</td>
+  <td>[1.9](#cs_v19)</td>
   <td>08 Feb 2018</td>
-  <td>57 days</td>
   <td>27 Dec 2018</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close.png) [1.8](#cs_v18)</td>
-  <td>27 Sep 2017</td>
+  <td>![Unsupported X icon](images/close.png)</td>
+  <td>[1.8](#cs_v18)</td>
   <td>08 Nov 2017</td>
-  <td>41 days</td>
   <td>22 Sep 2018</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close.png) [1.7](#cs_v17)</td>
-  <td>28 Jun 2017</td>
+  <td>![Unsupported X icon](images/close.png)</td>
+  <td>[1.7](#cs_v17)</td>
   <td>19 Sep 2017</td>
-  <td>83 days</td>
   <td>21 Jun 2018</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close.png) 1.6</td>
-  <td>22 Mar 2017</td>
-  <td>N/A</td>
+  <td>![Unsupported X icon](images/close.png)</td>
+  <td>1.6</td>
   <td>N/A</td>
   <td>N/A</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close.png) [1.5](#cs_v1-5)</td>
-  <td>12 Dec 2016</td>
+  <td>![Unsupported X icon](images/close.png)</td>
+  <td>[1.5](#cs_v1-5)</td>
   <td>23 May 2017</td>
-  <td>162 days</td>
   <td>04 Apr 2018</td>
 </tr>
 </tbody>
