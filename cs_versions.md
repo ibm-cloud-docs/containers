@@ -30,9 +30,9 @@ lastupdated: "2019-01-21"
 {:shortdesc}
 
 **Supported Kubernetes versions**:
-- Latest: 1.12.3
-- Default: 1.10.11
-- Other: 1.11.5
+- Latest: 1.12.4
+- Default: 1.10.12
+- Other: 1.11.6
 
 </br>
 
@@ -55,7 +55,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.10.11+IKS
+Server Version: v1.10.12+IKS
 ```
 {: screen}
 
@@ -267,7 +267,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>Kubernetes dashboard</td>
-<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, use a **Token** to log in.</td>
+<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](cs_app.html#cli_dashboard).</td>
 </tr>
 <tr>
 <td id="metrics-server">Kubernetes Metrics Server</td>
@@ -369,6 +369,10 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 <tr>
 <td>Refresh Kubernetes configuration</td>
 <td>The OpenID Connect configuration for the cluster's Kubernetes API server is updated to support {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) access groups. As a result, you must refresh your cluster's Kubernetes configuration after the master Kubernetes v1.11 update by running `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. With this command, the configuration is applied to role bindings in the `default` namespace. If you use namespaces other than `default`, [reapply the role bindings](cs_users.html#rbac_copy) to each namespace.<br><br>If you do not refresh the configuration, cluster actions fail with the following error message: `You must be logged in to the server (Unauthorized).`</td>
+</tr>
+<tr>
+<td>Kubernetes dashboard</td>
+<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](cs_app.html#cli_dashboard).</td>
 </tr>
 <tr>
 <td>`kubectl` CLI</td>
@@ -698,6 +702,10 @@ The following table shows the actions that you must take after you update the Ku
 <tr>
 <td>Node <code>ExternalIP</code> address</td>
 <td>The <code>ExternalIP</code> field of a node is now set to the public IP address value of the node. Review and update any resources that depend on this value.</td>
+</tr>
+<tr>
+<td>Kubernetes dashboard</td>
+<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](cs_app.html#cli_dashboard).</td>
 </tr>
 <tr>
 <td><code>kubectl port-forward</code></td>
