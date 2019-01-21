@@ -17,9 +17,6 @@ lastupdated: "2019-01-21"
 {:important: .important}
 {:deprecated: .deprecated}
 {:note: .note}
-{:important: .important}
-{:deprecated: .deprecated}
-{:download: .download}
 
 
 
@@ -109,7 +106,7 @@ The following table records {{site.data.keyword.containerlong_notm}} version rel
 {{site.data.keyword.containerlong_notm}} was first generally available with Kubernetes version 1.5. Projected release or unsupported dates are subject to change. To go to the version update preparation steps, click the version number.
 
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
-{: note}
+{: important}
 
 <table summary="Release history for {{site.data.keyword.containerlong_notm}}.">
 <caption>Release history for {{site.data.keyword.containerlong_notm}}.</caption>
