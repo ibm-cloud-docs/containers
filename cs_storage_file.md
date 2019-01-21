@@ -1315,50 +1315,119 @@ To create your customized storage class, see [Customizing a storage class](cs_st
 ### Specifying the zone for multizone clusters
 {: #multizone_yaml}
 
-The following `.yaml` file customizes a storage class that is based on the `ibm-file-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. The zone is specified as `dal12`. You can review the previous information on `ibmc` storage classes to help you choose acceptable values for these.</br>
+If you want to create your file storage in a specific zone, you can specify the zone and region in a customized storage class. 
+{: shortdesc}
 
-Create the storage class in the same region and zone as your cluster and worker nodes. To get the region of your cluster, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and look for the region prefix in the **Master URL**, such as `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`. To get the zone of your worker node, run `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
-{: tip}
+Use the customized storage class if you want to [statically provision file storage](#existing_file) in a specific zone. In all other cases, [specify the zone directly in your PVC](#add_file).
+{: note}
 
-```
-apiVersion: storage.k8s.io/v1beta1
-kind: StorageClass
-metadata:
-  name: ibmc-file-silver-mycustom-storageclass
-  labels:
-    kubernetes.io/cluster-service: "true"
-provisioner: ibm.io/ibmc-file
-parameters:
-  zone: "dal12"
-  region: "us-south"
-  type: "Endurance"
-  iopsPerGB: "4"
-  sizeRange: "[20-12000]Gi"
-  reclaimPolicy: "Delete"
-  classVersion: "2"
-```
-{: codeblock}
+When you create the customized storage class, specify the same region and zone that your cluster and worker nodes are in. To get the region of your cluster, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and look for the region prefix in the **Master URL**, such as `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`. To get the zone of your worker node, run `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
+
+- **Example for Endurance file storage:**
+
+  ```
+  apiVersion: storage.k8s.io/v1beta1
+  kind: StorageClass
+  metadata:
+    name: ibmc-file-silver-mycustom-storageclass
+    labels:
+      kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+    zone: "dal12"
+    region: "us-south"
+    type: "Endurance"
+    iopsPerGB: "4"
+    sizeRange: "[20-12000]Gi"
+    reclaimPolicy: "Delete"
+    classVersion: "2"
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+  ```
+  {: codeblock}
+  
+- **Example for Performance file storage:**
+
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+   name: ibmc-file-performance-storageclass
+   labels:
+     kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+   zone: "dal12"
+   region: "us-south"
+   billingType: "hourly"
+   classVersion: "2"
+   sizeIOPSRange: |-
+     "[20-39]Gi:[100-1000]"
+     "[40-79]Gi:[100-2000]"
+     "[80-99]Gi:[100-4000]"
+     "[100-499]Gi:[100-6000]"
+     "[500-999]Gi:[100-10000]"
+     "[1000-1999]Gi:[100-20000]"
+     "[2000-2999]Gi:[200-40000]"
+     "[3000-3999]Gi:[200-48000]"
+     "[4000-7999]Gi:[300-48000]"
+     "[8000-9999]Gi:[500-48000]"
+     "[10000-12000]Gi:[1000-48000]"
+   type: "Performance"
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
+  ```
+  {: codeblock}
 
 ### Changing the default NFS version
 {: #nfs_version_class}
 
-The following customized storage class is based on the [`ibmc-file-bronze` storage class](#bronze) and lets you define the NFS version that you want to provision. For example, to provision NFS version 3.0, replace `<nfs_version>` with **3.0**.
-```
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ibmc-file-mount
-  #annotations:
-  #  storageclass.beta.kubernetes.io/is-default-class: "true"
-  labels:
-    kubernetes.io/cluster-service: "true"
-provisioner: ibm.io/ibmc-file
-parameters:
-  type: "Endurance"
-  iopsPerGB: "2"
-  sizeRange: "[1-12000]Gi"
-  reclaimPolicy: "Delete"
-  classVersion: "2"
-  mountOptions: nfsvers=<nfs_version>
-```
-{: codeblock}
+The following customized storage class lets you define the NFS version that you want to provision. For example, to provision NFS version 3.0, replace `<nfs_version>` with **3.0**.
+{: shortdesc}
+
+- **Example for Endurance file storage:**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ibmc-file-mount
+    labels:
+      kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+    type: "Endurance"
+    iopsPerGB: "2"
+    sizeRange: "[1-12000]Gi"
+    reclaimPolicy: "Delete"
+    classVersion: "2"
+    mountOptions: nfsvers=<nfs_version>
+  ```
+  {: codeblock}
+  
+- **Example for Performance file storage:**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ibmc-file-mount
+    labels:
+      kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+   type: "Performance"
+   classVersion: "2"
+   sizeIOPSRange: |-
+     "[20-39]Gi:[100-1000]"
+     "[40-79]Gi:[100-2000]"
+     "[80-99]Gi:[100-4000]"
+     "[100-499]Gi:[100-6000]"
+     "[500-999]Gi:[100-10000]"
+     "[1000-1999]Gi:[100-20000]"
+     "[2000-2999]Gi:[200-40000]"
+     "[3000-3999]Gi:[200-48000]"
+     "[4000-7999]Gi:[300-48000]"
+     "[8000-9999]Gi:[500-48000]"
+     "[10000-12000]Gi:[1000-48000]"
+   mountOptions: nfsvers=<nfs_version>
+  ```
+  {: codeblock}
