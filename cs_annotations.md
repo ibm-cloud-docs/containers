@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-16"
+lastupdated: "2019-01-21"
 
 ---
 
@@ -693,7 +693,7 @@ spec:
 <br />
 
 
-### TCP ports for appplication load balancers (tcp-ports)
+### TCP ports (tcp-ports)
 {: #tcp-ports}
 
 Access an app via a non-standard TCP port.
@@ -1705,24 +1705,9 @@ spec:
 
 **To create a mutual authentication secret:**
 
-1. Generate a key and certificate in one of the following ways:
-    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Create a `client.key`.
-            ```
-            openssl genrsa -out client.key 1024
-            ```
-            {: pre}
-        2. Use the key to create a `client.crt`.
-            ```
-            openssl req -new -x509 -key client.key -out client.crt
-            ```
-            {: pre}
-        3. Use the `client.crt` to create a self-signed certificate.
-            ```
-            openssl x509 -req -in example.org.csr -CA client.crt -CAkey client.key -CAcreateserial -out example.org.crt
-            ```
-            {: pre}
+1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon"](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
+    {: tip}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert.
      ```
@@ -1834,24 +1819,9 @@ spec:
 </br>
 **To create a mutual authentication secret:**
 
-1. Generate a key and certificate in one of the following ways:
-    * Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    * For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html).
-        1. Create a `client.key`.
-            ```
-            openssl genrsa -out client.key 1024
-            ```
-            {: pre}
-        2. Use the key to create a `client.crt`.
-            ```
-            openssl req -new -x509 -key client.key -out client.crt
-            ```
-            {: pre}
-        3. Use the `client.crt` to create a self-signed certificate.
-            ```
-            openssl x509 -req -in example.org.csr -CA client.crt -CAkey client.key -CAcreateserial -out example.org.crt
-            ```
-            {: pre}
+1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon"](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
+    {: tip}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert.
      ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-16"
+lastupdated: "2019-01-21"
 
 ---
 
@@ -71,6 +71,8 @@ In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. I
 <br />
 
 
+
+
 ## Using custom or existing subnets to create a cluster
 {: #custom}
 
@@ -130,7 +132,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.10.11      Default
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.10.12      Default
     ```
     {: screen}
 
@@ -145,7 +147,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.11
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.10.12
     ```
     {: screen}
 

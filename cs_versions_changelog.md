@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-16"
+lastupdated: "2019-01-21"
 
 ---
 
@@ -45,6 +45,56 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.12 changelog. 
 {: shortdesc}
+
+### Changelog for 1.12.4_1534, released 21 January 2019
+{: #1124_1533}
+
+The following table shows the changes that are included in the patch 1.12.3_1534.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.3_1533">
+<caption>Changes since version 1.12.3_1533</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.3-91</td>
+<td>v1.12.4-118</td>
+<td>Updated to support the Kubernetes 1.12.4 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.3</td>
+<td>v1.12.4</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.4).</td>
+</tr>
+<tr>
+<td>Kubernetes add-on resizer</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>See the [Kubernetes add-on resizer release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+</tr>
+<tr>
+<td>Kubernetes dashboard</td>
+<td>v1.8.3</td>
+<td>v1.10.1</td>
+<td>See the [Kubernetes dashboard release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). Update resolves [CVE-2018-18264 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).</td>
+</tr>
+<tr>
+<td>GPU installer</td>
+<td>390.12</td>
+<td>410.79</td>
+<td>Updated the installed GPU drivers to 410.79.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.3_1533, released 7 January 2019
 {: #1123_1533}
@@ -294,7 +344,7 @@ The following table shows the changes that are included in patch 1.12.2_1527.
 <td>v1.8.3</td>
 <td>v1.10.0</td>
 <td>See the [Kubernetes Dashboard release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0).<br><br>
-If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, use a **Token** to log in. Additionally, you can now scale up the number of Kubernetes Dashboard pods by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.</td>
+If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](cs_app.html#cli_dashboard). Additionally, you can now scale up the number of Kubernetes Dashboard pods by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
@@ -330,6 +380,56 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for 1.11.6_1540, released 21 January 2019
+{: #1116_1540}
+
+The following table shows the changes that are included in the patch 1.11.6_1540.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.5_1539">
+<caption>Changes since version 1.11.5_1539</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.5-152</td>
+<td>v1.11.6-180</td>
+<td>Updated to support the Kubernetes 1.11.6 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.5</td>
+<td>v1.11.6</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.6).</td>
+</tr>
+<tr>
+<td>Kubernetes add-on resizer</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>See the [Kubernetes add-on resizer release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+</tr>
+<tr>
+<td>Kubernetes dashboard</td>
+<td>v1.8.3</td>
+<td>v1.10.1</td>
+<td>See the [Kubernetes dashboard release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). Update resolves [CVE-2018-18264 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](cs_app.html#cli_dashboard).</td>
+</tr>
+<tr>
+<td>GPU installer</td>
+<td>390.12</td>
+<td>410.79</td>
+<td>Updated the installed GPU drivers to 410.79.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019
 {: #1115_1538}
@@ -970,8 +1070,58 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 
 Review the version 1.10 changelog.
 
+### Changelog for 1.10.12_1540, released 21 January 2019
+{: #11012_1540}
+
+The following table shows the changes that are included in the patch 1.10.12_1540.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.11_1538">
+<caption>Changes since version 1.10.11_1538</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.11-219</td>
+<td>v1.10.12-252</td>
+<td>Updated to support the Kubernetes 1.10.12 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.11</td>
+<td>v1.10.12</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.12).</td>
+</tr>
+<tr>
+<td>Kubernetes add-on resizer</td>
+<td>1.8.1</td>
+<td>1.8.4</td>
+<td>See the [Kubernetes add-on resizer release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.4).</td>
+</tr>
+<tr>
+<td>Kubernetes dashboard</td>
+<td>v1.8.3</td>
+<td>v1.10.1</td>
+<td>See the [Kubernetes dashboard release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). Update resolves [CVE-2018-18264 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](cs_app.html#cli_dashboard).</td>
+</tr>
+<tr>
+<td>GPU installer</td>
+<td>390.12</td>
+<td>410.79</td>
+<td>Updated the installed GPU drivers to 410.79.</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for worker node fix pack 1.10.11_1538, released 7 January 2019
-{: #1115_1538}
+{: #11011_1538}
 
 The following table shows the changes that are included in the worker node fix pack 1.10.11_1538.
 {: shortdesc}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-16"
+lastupdated: "2019-01-21"
 
 ---
 
@@ -234,7 +234,7 @@ To deploy the app:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.11
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.10.12
         ```
         {: screen}
 
@@ -650,7 +650,7 @@ Change the name of the image:
 
     When you roll out a change, another pod is created and tested by Kubernetes. When the test is successful, the old pod is removed.
 
-
+[Test your knowledge and take a quiz! ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
 Congratulations! You deployed the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app. The PR firm can start to use this deployment to start analyzing their press releases.
 
@@ -685,4 +685,4 @@ Now that you conquered the basics, you can move to more advanced activities. Con
 
 - Complete a [more complicated lab ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) in the repository
 - [Automatically scale your apps](cs_app.html#app_scaling) with {{site.data.keyword.containerlong_notm}}
-- Explore the container orchestration code patterns on [IBM Developer ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/technologies/container-orchestration/)
+- Explore the container orchestration code patterns on [IBM Developer ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/technologies/containers/)

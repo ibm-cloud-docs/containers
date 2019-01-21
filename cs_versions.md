@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-16"
+lastupdated: "2019-01-21"
 
 ---
 
@@ -17,9 +17,6 @@ lastupdated: "2019-01-16"
 {:important: .important}
 {:deprecated: .deprecated}
 {:note: .note}
-{:important: .important}
-{:deprecated: .deprecated}
-{:download: .download}
 
 
 
@@ -33,9 +30,9 @@ lastupdated: "2019-01-16"
 {:shortdesc}
 
 **Supported Kubernetes versions**:
-- Latest: 1.12.3
-- Default: 1.10.11
-- Other: 1.11.5
+- Latest: 1.12.4
+- Default: 1.10.12
+- Other: 1.11.6
 
 </br>
 
@@ -58,7 +55,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.10.11+IKS
+Server Version: v1.10.12+IKS
 ```
 {: screen}
 
@@ -77,7 +74,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud ks workers <cluster>` or `ibmcloud ks worker-get <cluster> <worker>` commands.
--  **Major and minor updates (1.x)**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node). Worker nodes cannot run a Kubernetes version that is greater than the masters.
+-  **Major and minor updates (1.x)**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node). Worker nodes cannot run a Kubernetes major or minor version that is greater than the masters.
    - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.9 and you want to update to 1.12, you must update to 1.10 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results or failure.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](cs_cli_install.html#kubectl) up-to-date.
 -  **Patch updates (x.x.4_1510)**: Changes across patches are documented in the [Version changelog](cs_versions_changelog.html). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
@@ -103,85 +100,75 @@ For a complete list of changes, review the following information:
 ## Release history
 {: #release-history}
 
-The following table records {{site.data.keyword.containerlong_notm}} version release history. You can use this information for planning purposes, such as to estimate general time frames when a certain release might become available or unsupported. For example, historically {{site.data.keyword.containerlong_notm}} release dates often follow the community release date by about a month and a half. 
+The following table records {{site.data.keyword.containerlong_notm}} version release history. You can use this information for planning purposes, such as to estimate general time frames when a certain release might become unsupported. After the Kubernetes community releases a version update, the IBM team begins a process of hardening and testing the release for {{site.data.keyword.containerlong_notm}} environments. Availability and unsupported release dates depend on the results of these tests, community updates, security patches, and technology changes between versions. Plan to keep your cluster master and worker node version up to date according to the n-2 version support policy.
 {: shortdesc}
 
 {{site.data.keyword.containerlong_notm}} was first generally available with Kubernetes version 1.5. Projected release or unsupported dates are subject to change. To go to the version update preparation steps, click the version number.
 
-Dates that are marked with a dagger (`†`) are tentative and subject to change. Supported versions are marked with a checkmark ![Supported checkmark icon](images/healthy.png). Unsupported versions are marked with an X ![Unsupported X icon](images/close.png).
-{: note}
+Dates that are marked with a dagger (`†`) are tentative and subject to change.
+{: important}
 
 <table summary="Release history for {{site.data.keyword.containerlong_notm}}.">
 <caption>Release history for {{site.data.keyword.containerlong_notm}}.</caption>
+<col width="20%" align="center">
 <col width="20%">
-<col width="20%">
-<col width="20%">
-<col width="20%">
-<col width="20%">
+<col width="30%">
+<col width="30%">
 <thead>
 <tr>
+<th>Supported?</th>
 <th>Version</th>
-<th>Kubernetes community<br>release date</th>
 <th>{{site.data.keyword.containerlong_notm}}<br>release date</th>
-<th>Days between the release dates</th>
 <th>{{site.data.keyword.containerlong_notm}}<br>unsupported date</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>![Supported checkmark icon](images/healthy.png) [1.12](#cs_v112)</td>
-  <td>27 Sep 2018</td>
+  <td>![Supported checkmark icon](images/healthy.png)</td>
+  <td>[1.12](#cs_v112)</td>
   <td>07 Nov 2018</td>
-  <td>41 days</td>
   <td>Sep 2019 `†`</td>
 </tr>
 <tr>
-  <td>![Supported checkmark icon](images/healthy.png) [1.11](#cs_v111)</td>
-  <td>26 Jun 2018</td>
+  <td>![Supported checkmark icon](images/healthy.png)</td>
+  <td>[1.11](#cs_v111)</td>
   <td>14 Aug 2018</td>
-  <td>49 days</td>
   <td>Jun 2019 `†`</td>
 </tr>
 <tr>
-  <td>![Supported checkmark icon](images/healthy.png) [1.10](#cs_v110)</td>
-  <td>26 Mar 2018</td>
+  <td>![Supported checkmark icon](images/healthy.png)</td>
+  <td>[1.10](#cs_v110)</td>
   <td>01 May 2018</td>
-  <td>36 days</td>
   <td>29 Mar 2019 `†`</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close.png) [1.9](#cs_v19)</td>
-  <td>13 Dec 2017</td>
+  <td>![Unsupported X icon](images/close.png)</td>
+  <td>[1.9](#cs_v19)</td>
   <td>08 Feb 2018</td>
-  <td>57 days</td>
   <td>27 Dec 2018</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close.png) [1.8](#cs_v18)</td>
-  <td>27 Sep 2017</td>
+  <td>![Unsupported X icon](images/close.png)</td>
+  <td>[1.8](#cs_v18)</td>
   <td>08 Nov 2017</td>
-  <td>41 days</td>
   <td>22 Sep 2018</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close.png) [1.7](#cs_v17)</td>
-  <td>28 Jun 2017</td>
+  <td>![Unsupported X icon](images/close.png)</td>
+  <td>[1.7](#cs_v17)</td>
   <td>19 Sep 2017</td>
-  <td>83 days</td>
   <td>21 Jun 2018</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close.png) 1.6</td>
-  <td>22 Mar 2017</td>
-  <td>N/A</td>
+  <td>![Unsupported X icon](images/close.png)</td>
+  <td>1.6</td>
   <td>N/A</td>
   <td>N/A</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close.png) [1.5](#cs_v1-5)</td>
-  <td>12 Dec 2016</td>
+  <td>![Unsupported X icon](images/close.png)</td>
+  <td>[1.5](#cs_v1-5)</td>
   <td>23 May 2017</td>
-  <td>162 days</td>
   <td>04 Apr 2018</td>
 </tr>
 </tbody>
@@ -280,7 +267,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>Kubernetes dashboard</td>
-<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, use a **Token** to log in.</td>
+<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](cs_app.html#cli_dashboard).</td>
 </tr>
 <tr>
 <td id="metrics-server">Kubernetes Metrics Server</td>
@@ -382,6 +369,10 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 <tr>
 <td>Refresh Kubernetes configuration</td>
 <td>The OpenID Connect configuration for the cluster's Kubernetes API server is updated to support {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) access groups. As a result, you must refresh your cluster's Kubernetes configuration after the master Kubernetes v1.11 update by running `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. With this command, the configuration is applied to role bindings in the `default` namespace. If you use namespaces other than `default`, [reapply the role bindings](cs_users.html#rbac_copy) to each namespace.<br><br>If you do not refresh the configuration, cluster actions fail with the following error message: `You must be logged in to the server (Unauthorized).`</td>
+</tr>
+<tr>
+<td>Kubernetes dashboard</td>
+<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](cs_app.html#cli_dashboard).</td>
 </tr>
 <tr>
 <td>`kubectl` CLI</td>
@@ -711,6 +702,10 @@ The following table shows the actions that you must take after you update the Ku
 <tr>
 <td>Node <code>ExternalIP</code> address</td>
 <td>The <code>ExternalIP</code> field of a node is now set to the public IP address value of the node. Review and update any resources that depend on this value.</td>
+</tr>
+<tr>
+<td>Kubernetes dashboard</td>
+<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](cs_app.html#cli_dashboard).</td>
 </tr>
 <tr>
 <td><code>kubectl port-forward</code></td>
