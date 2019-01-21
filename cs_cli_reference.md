@@ -108,6 +108,7 @@ ibmcloud plugin list
 
 <br>
 
+
 <table summary="Cluster commands: Management table">
 <caption>Cluster commands: Management commands</caption>
 <col width="25%">
@@ -138,178 +139,8 @@ ibmcloud plugin list
 </tbody>
 </table>
 
-<br>
 
-<table summary="Cluster commands: Services and integrations table">
-<caption>Cluster commands: Services and integrations commands</caption>
-<col width="25%">
-<col width="25%">
-<col width="25%">
- <thead>
-    <th colspan=4>Cluster commands: Services and integrations</th>
- </thead>
- <tbody>
-  <tr>
-    <td>[ibmcloud ks cluster-service-bind](#cs_cluster_service_bind)</td>
-    <td>[ibmcloud ks cluster-service-unbind](#cs_cluster_service_unbind)</td>
-    <td>[ibmcloud ks cluster-services](#cs_cluster_services)</td>
-    <td>[ibmcloud ks va](#cs_va)</td>
-  </tr>
-    <td>[ibmcloud ks webhook-create](#cs_webhook_create)</td>
-  <tr>
-  </tr>
-</tbody>
-</table>
 
-</br>
-
-<table summary="Cluster commands: Subnets table">
-<caption>Cluster commands: Subnets commands</caption>
-<col width="25%">
-<col width="25%">
-<col width="25%">
- <thead>
-    <th colspan=4>Cluster commands: Subnets</th>
- </thead>
- <tbody>
-  <tr>
-    <td>[ibmcloud ks cluster-subnet-add](#cs_cluster_subnet_add)</td>
-    <td>[ibmcloud ks cluster-subnet-create](#cs_cluster_subnet_create)</td>
-    <td>[ibmcloud ks cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
-    <td>[ibmcloud ks cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
-  </tr>
-  <tr>
-    <td>[ibmcloud ks subnets](#cs_subnets)</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</tbody>
-</table>
-
-</br>
-
-<table summary="Infrastructure commands table">
-<caption>Cluster commands: Infrastructure commands</caption>
-<col width="25%">
-<col width="25%">
-<col width="25%">
- <thead>
-    <th colspan=4>Infrastructure commands</th>
- </thead>
- <tbody>
-  <tr>
-    <td>[ibmcloud ks credential-get](#cs_credential_get)</td>
-    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
-    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
-    <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
-  </tr>
-  <tr>
-    <td>[ibmcloud ks vlans](#cs_vlans)</td>
-    <td>[ibmcloud ks vlan-spanning-get](#cs_vlan_spanning_get)</td>
-    <td> </td>
-    <td> </td>
-  </tr>
-</tbody>
-</table>
-
-</br>
-
-<table summary="Ingress application load balancer (ALB) commands table">
-<caption>Ingress application load balancer (ALB) commands</caption>
-<col width = 25%>
-<col width = 25%>
-<col width = 25%>
-  <thead>
-    <tr>
-      <th colspan=4>Ingress application load balancer (ALB) commands</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>[ibmcloud ks alb-autoupdate-disable](#cs_alb_autoupdate_disable)</td>
-      <td>[ibmcloud ks alb-autoupdate-enable](#cs_alb_autoupdate_enable)</td>
-      <td>[ibmcloud ks alb-autoupdate-get](#cs_alb_autoupdate_get)</td>
-      <td>[ibmcloud ks alb-cert-deploy](#cs_alb_cert_deploy)</td>
-    </tr>
-    <tr>
-      <td>[ibmcloud ks alb-cert-get](#cs_alb_cert_get)</td>
-      <td>[ibmcloud ks alb-cert-rm](#cs_alb_cert_rm)</td>
-      <td>[ibmcloud ks alb-certs](#cs_alb_certs)</td>
-      <td>[ibmcloud ks alb-configure](#cs_alb_configure)</td>
-    </tr>
-    <tr>
-      <td>[ibmcloud ks alb-get](#cs_alb_get)</td>
-      <td>[ibmcloud ks alb-rollback](#cs_alb_rollback)</td>
-      <td>[ibmcloud ks alb-types](#cs_alb_types)</td>
-      <td>[ibmcloud ks alb-update](#cs_alb_update)</td>
-    </tr>
-    <tr>
-      <td>[ibmcloud ks albs](#cs_albs)</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-</br>
-
-<table summary="Logging commands table">
-<caption>Logging commands</caption>
-<col width = 25%>
-<col width = 25%>
-<col width = 25%>
-  <thead>
-    <tr>
-      <th colspan=4>Logging commands</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>[ibmcloud ks logging-autoupdate-enable](#cs_log_autoupdate_enable)</td>
-      <td>[ibmcloud ks logging-autoupdate-disable](#cs_log_autoupdate_disable)</td>
-      <td>[ibmcloud ks logging-autoupdate-get](#cs_log_autoupdate_get)</td>
-      <td>[ibmcloud ks logging-config-create](#cs_logging_create)</td>
-    </tr>
-    <tr>
-      <td>[ibmcloud ks logging-config-get](#cs_logging_get)</td>
-      <td>[ibmcloud ks logging-config-refresh](#cs_logging_refresh)</td>
-      <td>[ibmcloud ks logging-config-rm](#cs_logging_rm)</td>
-      <td>[ibmcloud ks logging-config-update](#cs_logging_update)</td>
-    </tr>
-    <tr>
-      <td>[ibmcloud ks logging-filter-create](#cs_log_filter_create)</td>
-      <td>[ibmcloud ks logging-filter-update](#cs_log_filter_update)</td>
-      <td>[ibmcloud ks logging-filter-get](#cs_log_filter_view)</td>
-      <td>[ibmcloud ks logging-filter-rm](#cs_log_filter_delete)</td>
-    </tr>
-    <tr>
-      <td>[ibmcloud ks logging-collect](#cs_log_collect)</td>
-      <td>[ibmcloud ks logging-collect-status](#cs_log_collect_status)</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-</br>
-
-<table summary="Region commands table">
-<caption>Region commands</caption>
-<col width="25%">
-<col width="25%">
-<col width="25%">
- <thead>
-    <th colspan=4>Region commands</th>
- </thead>
- <tbody>
-  <tr>
-    <td>[ibmcloud ks region](#cs_region)</td>
-    <td>[ibmcloud ks region-set](#cs_region-set)</td>
-    <td>[ibmcloud ks regions](#cs_regions)</td>
-    <td>[ibmcloud ks zones](#cs_datacenters)</td>
-  </tr>
 </tbody>
 </table>
 
@@ -918,26 +749,33 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-### ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted] [-s]
+
+
+### ibmcloud ks cluster-feature-enable
 {: #cs_cluster_feature_enable}
 
-Enable a feature on an existing cluster.
+Enable a feature on an existing cluster. This command must be combined with one of the following subcommands for the feature that you want to enable.
 {: shortdesc}
+
+
+
+#### ibmcloud ks cluster-feature-enable trusted --cluster CLUSTER [-s] [-f]
+{: #cs_cluster_feature_enable_trusted}
+
+Enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.
+{: shortdesc}
+
+To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker get` [command](#cs_worker_get).
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
-   <dl>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Use this option to force the <code>--trusted</code> option without user prompts. This value is optional.</dd>
-
-   <dt><code><em>--trusted</em></code></dt>
-   <dd><p>Include the flag to enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
-   <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker-get` [command](#cs_worker_get).</p></dd>
 
   <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -946,9 +784,11 @@ Enable a feature on an existing cluster.
 **Example command**:
 
   ```
-  ibmcloud ks cluster-feature-enable --cluster my_cluster --trusted=true
+  ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
   ```
   {: pre}
+
+
 
 ### ibmcloud ks cluster-get --cluster CLUSTER [--json] [--showResources] [-s]
 {: #cs_cluster_get}
@@ -3143,6 +2983,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
    ```
    kubectl get nodes
    ```
+   {: pre}
    The **name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud ks workers <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
 2. Mark the worker node as unschedulable in a process that is known as cordoning. When you cordon a worker node, you make it unavailable for future pod scheduling. Use the **name** of the worker node that you retrieved in the previous step.
    ```
@@ -3172,6 +3013,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
    ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
+   {: pre}
 </br>
 <strong>Command options</strong>:
 
