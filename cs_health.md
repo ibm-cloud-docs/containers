@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -239,12 +239,12 @@ Before you begin, [create](cs_clusters.html#clusters) or identify a standard clu
     2. If you specified a space when you created the cluster, both you and the {{site.data.keyword.containerlong_notm}} API key owner need the [**Developer** Cloud Foundry role](/docs/iam/mngcf.html) in that space.
       * If you don't know who the {{site.data.keyword.containerlong_notm}} API key owner is, run the following command.
           ```
-          ibmcloud ks api-key-info <cluster_name>
+          ibmcloud ks api-key-info --cluster <cluster_name>
           ```
           {: pre}
       * If you change permissions, you can immediately apply the changes by running the following command.
           ```
-          ibmcloud ks logging-config-refresh <cluster_name>
+          ibmcloud ks logging-config-refresh --cluster <cluster_name>
           ```
           {: pre}
 
@@ -351,13 +351,13 @@ You can verify that your configuration is set up correctly in one of two ways:
 
 * To list all of the logging configurations in a cluster:
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 * To list the logging configurations for one type of log source:
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID> --logsource <source>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID> --logsource <source>
     ```
     {: pre}
 
@@ -371,7 +371,7 @@ You can update a logging configuration that you already created.
 
 1. Update a log forwarding configuration.
     ```
-    ibmcloud ks logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+    ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
     ```
     {: pre}
 
@@ -389,9 +389,9 @@ You can stop forwarding logs one or all of the logging configurations for a clus
 2. Delete the logging configuration.
   <ul>
   <li>To delete one logging configuration:</br>
-    <pre><code>ibmcloud ks logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
+    <pre><code>ibmcloud ks logging-config-rm --cluster &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
   <li>To delete all of the logging configurations:</br>
-    <pre><code>ibmcloud ks logging-config-rm <my_cluster> --all</pre></code></li>
+    <pre><code>ibmcloud ks logging-config-rm --cluster <my_cluster> --all</pre></code></li>
   </ul>
 
 </br>
@@ -491,20 +491,20 @@ You can choose which logs that you forward by filtering out specific logs for a 
 2. View the log filter that you created.
 
   ```
-  ibmcloud ks logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+  ibmcloud ks logging-filter-get --cluster <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
   ```
   {: pre}
 
 3. Update the log filter that you created.
   ```
-  ibmcloud ks logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+  ibmcloud ks logging-filter-update --cluster <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
 
 4. Delete a log filter that you created.
 
   ```
-  ibmcloud ks logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
+  ibmcloud ks logging-filter-rm --cluster <cluster_name_or_ID> --id <filter_ID> [--all]
   ```
   {: pre}
 
@@ -589,13 +589,13 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
 2. View your cluster logging configuration to verify that it was implemented the way that you intended.
 
     ```
-    ibmcloud ks logging-config-get <cluster_name_or_ID>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
     Example command and output:
     ```
-    ibmcloud ks logging-config-get myCluster
+    ibmcloud ks logging-config-get --cluster myCluster
     Retrieving cluster myCluster logging configurations...
     OK
     Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
@@ -674,7 +674,7 @@ To forward Kubernetes API audit logs:
 3. Apply the configuration update by restarting the Kubernetes master.
 
     ```
-    ibmcloud ks apiserver-refresh <cluster_name_or_ID>
+    ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -690,7 +690,7 @@ To forward Kubernetes API audit logs:
     3. Apply the configuration update by restarting the Kubernetes master.
 
         ```
-        ibmcloud ks apiserver-refresh <cluster_name_or_ID>
+        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
