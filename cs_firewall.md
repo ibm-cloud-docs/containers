@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -109,7 +109,7 @@ To allow access for a specific cluster:
 4. Retrieve the **Master URL** for your cluster.
 
    ```
-   ibmcloud ks cluster-get <cluster_name_or_ID>
+   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -188,7 +188,7 @@ Let your cluster access infrastructure resources and services from behind a fire
 1.  Note the public IP address for all of your worker nodes in the cluster.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
