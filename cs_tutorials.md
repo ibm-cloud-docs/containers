@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -185,7 +185,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
 3.  Before you continue to the next step, verify that the deployment of your worker node is complete.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -208,7 +208,7 @@ Every time you log in to the {{site.data.keyword.containerlong}} CLI to work wit
 1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
     ```
-    ibmcloud ks cluster-config <cluster_name_or_ID>
+    ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
