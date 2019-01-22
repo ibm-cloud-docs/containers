@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -482,7 +482,7 @@ If you have a Dedicated account, you must [open a support case](/docs/get-suppor
 1.  {: #external_storage}From the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.net/), click **Storage**.
 2.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
 3.  Select **Subnets**.
-4.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ibmcloud ks workers <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
+4.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ibmcloud ks workers --cluster <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
 5.  Click **Submit**.
 6.  Click the name of the file storage.
 7.  Note the `Mount Point`, the `size`, and the `Location` field. The `Mount Point` field is displayed as `<nfs_server>:<file_storage_path>`.
