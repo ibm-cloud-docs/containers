@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -153,7 +153,7 @@ Review the options to debug your worker nodes and find the root causes for failu
 1.  If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes.
 
   ```
-  ibmcloud ks workers <cluster_name_or_id>
+  ibmcloud ks workers --cluster <cluster_name_or_id>
   ```
   {: pre}
 
@@ -217,12 +217,12 @@ Review the options to debug your worker nodes and find the root causes for failu
 5.  List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.
 
    ```
-   ibmcloud ks worker-get <worker_id>
+   ibmcloud ks worker-get --worker <worker_id>
    ```
    {: pre}
 
   ```
-  ibmcloud ks worker-get [<cluster_name_or_id>] <worker_node_id>
+  ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id>
   ```
   {: pre}
 
@@ -257,7 +257,7 @@ Review common error messages and learn how to resolve them.
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: &lt;vlan id&gt;.</td>
-        <td>Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:<ul><li>You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. Run <code>ibmcloud ks vlans &lt;zone&gt;</code> to retrieve the VLAN ID.<li>The VLAN ID might not be associated with the IBM Cloud infrastructure (SoftLayer) account that you use. Run <code>ibmcloud ks vlans &lt;zone&gt;</code> to list available VLAN IDs for your account. To change the IBM Cloud infrastructure (SoftLayer) account, see [`ibmcloud ks credential-set`](cs_cli_reference.html#cs_credentials_set). </ul></td>
+        <td>Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:<ul><li>You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. Run <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> to retrieve the VLAN ID.<li>The VLAN ID might not be associated with the IBM Cloud infrastructure (SoftLayer) account that you use. Run <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> to list available VLAN IDs for your account. To change the IBM Cloud infrastructure (SoftLayer) account, see [`ibmcloud ks credential-set`](cs_cli_reference.html#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
@@ -273,11 +273,22 @@ Review common error messages and learn how to resolve them.
       </tr>
       <tr>
        <td>Worker unable to talk to {{site.data.keyword.containerlong_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
-       <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](cs_firewall.html#firewall_outbound).</li><li>Check whether your cluster does not have a public IP by running `ibmcloud ks workers &lt;mycluster&gt;`. If no public IP is listed, then your cluster has only private VLANs.<ul><li>If you want the cluster to have only private VLANs, set up your [VLAN connection](cs_clusters_planning.html#private_clusters) and your [firewall](cs_firewall.html#firewall_outbound).</li><li>If you want the cluster to have a public IP, [add new worker nodes](cs_cli_reference.html#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
+       <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](cs_firewall.html#firewall_outbound).</li>
+       <li>Check whether your cluster does not have a public IP by running `ibmcloud ks workers --cluster &lt;mycluster&gt;`. If no public IP is listed, then your cluster has only private VLANs.
+       <ul><li>If you want the cluster to have only private VLANs, set up your [VLAN connection](cs_clusters_planning.html#private_clusters) and your [firewall](cs_firewall.html#firewall_outbound).</li>
+       <li>If you want the cluster to have a public IP, [add new worker nodes](cs_cli_reference.html#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
      </tr>
       <tr>
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
-  <td>The owner of the API key that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps: <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li><li>Run <code>ibmcloud ks api-key-info</code> to view the current API key owner that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio. </li><li>Run <code>ibmcloud account list</code> to view the owner of the {{site.data.keyword.Bluemix_notm}} account that you currently use. </li><li>Contact the owner of the {{site.data.keyword.Bluemix_notm}} account and report that the API key owner has insufficient permissions in IBM Cloud infrastructure (SoftLayer) or might be pending to be deleted. </li></ol></br><strong>As the account owner</strong>, follow these steps: <ol><li>Review the [required permissions in IBM Cloud infrastructure (SoftLayer)](cs_users.html#infra_access) to perform the action that previously failed. </li><li>Fix the permissions of the API key owner or create a new API key by using the [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. </li><li>If you or another account admin manually set IBM Cloud infrastructure (SoftLayer) credentials in your account, run [<code>ibmcloud ks credential-unset</code>](cs_cli_reference.html#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
+  <td>The owner of the API key that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps: 
+  <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li>
+  <li>Run <code>ibmcloud ks api-key-info</code> to view the current API key owner that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio. </li>
+  <li>Run <code>ibmcloud account list</code> to view the owner of the {{site.data.keyword.Bluemix_notm}} account that you currently use. </li>
+  <li>Contact the owner of the {{site.data.keyword.Bluemix_notm}} account and report that the API key owner has insufficient permissions in IBM Cloud infrastructure (SoftLayer) or might be pending to be deleted. </li></ol>
+  </br><strong>As the account owner</strong>, follow these steps: 
+  <ol><li>Review the [required permissions in IBM Cloud infrastructure (SoftLayer)](cs_users.html#infra_access) to perform the action that previously failed. </li>
+  <li>Fix the permissions of the API key owner or create a new API key by using the [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. </li>
+  <li>If you or another account admin manually set IBM Cloud infrastructure (SoftLayer) credentials in your account, run [<code>ibmcloud ks credential-unset</code>](cs_cli_reference.html#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
   </tr>
     </tbody>
   </table>
