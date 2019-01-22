@@ -347,8 +347,8 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
     To manage more than one worker pool, copy the JSON line to a comma-separated line, such as follows. <pre class="codeblock">[
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
-    ]<br><br>
-    **Note**: The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check if your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](cs_clusters.html#add_pool) and use this worker pool with the cluster autoscaler.</pre></td>
+    ]</pre><br><br>
+    **Note**: The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check if your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](cs_clusters.html#add_pool) and use this worker pool with the cluster autoscaler.</td>
     </tr>
     <tr>
     <td>`"minSize": 1`</td>
