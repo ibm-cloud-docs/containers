@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -236,7 +236,7 @@ You can use the IBM-provided domain, such as `mycluster-12345.us-south.container
 
 Get the IBM-provided domain. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
 ```
-ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
 ```
 {: pre}
 
@@ -252,7 +252,7 @@ Ingress Secret:         <tls_secret>
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
-    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
+    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get --cluster <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
     -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as a record. To find the portable public IP address of the ALB, run `ibmcloud ks alb-get <public_alb_ID>`.
 
 ### Step 3: Select TLS termination
@@ -270,7 +270,7 @@ The ALB load balances HTTP network traffic to the apps in your cluster. To also 
 
 Get the IBM-provided TLS secret for your cluster. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
 ```
-ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
 ```
 {: pre}
 
