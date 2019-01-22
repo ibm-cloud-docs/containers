@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -194,7 +194,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
 3. Get the IBM-provided Ingress subdomain.
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
     ```
     {: pre}
 
@@ -258,7 +258,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
     1. Ensure that you define a host in only one Ingress resource. If one host is defined in multiple Ingress resources, the ALB might not forward traffic properly and you might experience errors.
 
-    2. Check that the subdomain and TLS certificate are correct. To find the IBM provided Ingress subdomain and TLS certificate, run `ibmcloud ks cluster-get <cluster_name_or_ID>`.
+    2. Check that the subdomain and TLS certificate are correct. To find the IBM provided Ingress subdomain and TLS certificate, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
 
     3.  Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](cs_annotations.html#rewrite-path) annotation.
 
