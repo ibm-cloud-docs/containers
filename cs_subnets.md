@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -41,7 +41,7 @@ When you create a cluster, the cluster's worker nodes are connected automaticall
 <dt>VLANs for standard clusters</dt>
 <dd>In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. For every subsequent cluster that you create in that zone, you must specify the VLAN pair that you want to use in that zone. You can reuse the same public and private VLANs that were created for you because multiple clusters can share VLANs.</br></br>You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can use the ID of an existing private VLAN or [create a private VLAN](/docs/cli/reference/ibmcloud/cli_vlan.html#ibmcloud-sl-vlan-create) and use the ID during cluster creation.</dd></dl>
 
-To see the VLANs that are provisioned in each zone for your account, run `ibmcloud ks vlans <zone>.` To see the VLANs that one cluster is provisioned on, run `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
+To see the VLANs that are provisioned in each zone for your account, run `ibmcloud ks vlans --zone <zone>.` To see the VLANs that one cluster is provisioned on, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
 
 IBM Cloud infrastructure (SoftLayer) manages the VLANs that are automatically provisioned when you create your first cluster in a zone. If you let a VLAN become unused, such as by removing all worker nodes from a VLAN, IBM Cloud infrastructure (SoftLayer) reclaims the VLAN. After, if you need a new VLAN, [contact {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans).
 
@@ -63,7 +63,7 @@ The following subnets are automatically provisioned on the default public and pr
 * The primary private subnet determines the private IP addresses that are assigned to worker nodes during cluster creation. Multiple clusters on the same VLAN can share one primary private subnet.
 * The portable private subnet is bound to one cluster only and provides the cluster with 8 private IP addresses. 3 IPs are reserved for IBM Cloud infrastructure (SoftLayer) functions. 1 IP is used by the default private Ingress ALB and 4 IPs can be used to create private load balancer networking services. Portable private IPs are permanent, fixed IP addresses that can be used to access load balancer services over the internet. If you need more than 4 IPs for private load balancers, see [Adding portable IP addresses](#adding_ips).
 
-To see all of the subnets provisioned in your account, run `ibmcloud ks subnets`. To see the portable public and portable private subnets that are bound to one cluster, you can run `ibmcloud ks cluster-get <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
+To see all of the subnets provisioned in your account, run `ibmcloud ks subnets`. To see the portable public and portable private subnets that are bound to one cluster, you can run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
 
 In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If you reach this limit, first check to see whether you can [reuse subnets in the VLAN to create new clusters](#custom). If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans). Then, [create a cluster](cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
 {: note}
@@ -89,7 +89,7 @@ Before you begin:
 - To reuse subnets from a cluster that you no longer need, delete the unneeded cluster. Create the new cluster immediately because the subnets are deleted within 24 hours if you do not reuse them.
 
    ```
-   ibmcloud ks cluster-rm <cluster_name_or_ID>
+   ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -118,7 +118,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
-    If you can't remember which zone the VLAN is in for the `--zone` flag, you can check whether the VLAN is in a certain zone by running `ibmcloud ks vlans <zone>`.
+    If you can't remember which zone the VLAN is in for the `--zone` flag, you can check whether the VLAN is in a certain zone by running `ibmcloud ks vlans --zone <zone>`.
     {: tip}
 
 3.  Verify that the cluster was created. It can take up to 15 minutes for the worker node machines to be ordered and for the cluster to be set up and provisioned in your account.
@@ -139,7 +139,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 4.  Check the status of the worker nodes.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -304,7 +304,7 @@ To order a subnet:
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td>Replace <code>&lt;VLAN_ID&gt;</code> with the ID of the public or private VLAN on which you want to allocate the portable public or private IP addresses. You must select the public or private VLAN that an existing worker node is connected to. To review the public or private VLAN for a worker node, run the <code>ibmcloud ks worker-get &lt;worker_id&gt;</code> command. <The subnet is provisioned in the same zone that the VLAN is in.</td>
+    <td>Replace <code>&lt;VLAN_ID&gt;</code> with the ID of the public or private VLAN on which you want to allocate the portable public or private IP addresses. You must select the public or private VLAN that an existing worker node is connected to. To review the public or private VLAN for a worker node, run the <code>ibmcloud ks worker-get --worker &lt;worker_id&gt;</code> command. <The subnet is provisioned in the same zone that the VLAN is in.</td>
     </tr>
     </tbody></table>
 
