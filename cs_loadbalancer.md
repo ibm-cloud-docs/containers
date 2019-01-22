@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -956,7 +956,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
     1. List portable public VLANs for your cluster.
         ```
-        ibmcloud ks cluster-get <cluster_name_or_ID> --showResources
+        ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources
         ```
         {: pre}
 
