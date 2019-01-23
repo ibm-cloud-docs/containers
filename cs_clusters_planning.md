@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-23"
 
 ---
 
@@ -291,6 +291,7 @@ To start using `u2c` and `b2c` machine types, [update the machine types by addin
 **What virtual machine flavors are available?**</br>
 Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. For example, the `m2c` VMs are only available in the Dallas location (`dal10, dal12, dal13`). You can also review available [bare metal](#bm) or [SDS](#sds) machine types.
 
+{: #vm-table}
 <table>
 <caption>Available virtual machine types in {{site.data.keyword.containerlong_notm}}.</caption>
 <thead>
@@ -418,6 +419,7 @@ Choose a machine type with the right storage configuration to support your workl
 * **RAID**: The storage device has data distributed for redundancy and performance that varies depending on the RAID level. As such, the disk capacity that is available for use varies.
 
 
+{: #bm-table}
 <table>
 <caption>Available bare metal machine types in {{site.data.keyword.containerlong_notm}}.</caption>
 <thead>
@@ -498,6 +500,7 @@ Choose a machine type with the right storage configuration to support your workl
 * **RAID**: The storage device has data distributed for redundancy and performance that varies depending on the RAID level. As such, the disk capacity that is available for use varies.
 
 
+{: #sds-table}
 <table>
 <caption>Available SDS machine types in {{site.data.keyword.containerlong_notm}}.</caption>
 <thead>
