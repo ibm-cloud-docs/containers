@@ -467,8 +467,8 @@ To add block storage:
        <td>Enter the name of the PVC.</td>
        </tr>
        <tr>
-       <td><code>metadata.annotations</code></td>
-       <td>The name of the storage class that you want to use to provision block storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
+       <td><code>metadata.annotations.</code></br><code>volume.beta.kubernetes.io/storage-class</code></td>
+       <td>The name of the storage class that you want to use to provision block storage. You can choose to use one of the [IBM-provided storage classes](#storageclass_reference) or [create your own storage class](#custom_storageclass). </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
        </tr>
        <tr>
          <td><code>metadata.labels.billingType</code></td>
@@ -476,11 +476,11 @@ To add block storage:
        </tr>
        <tr>
        <td><code>metadata.labels.region</code></td>
-       <td>Specify the region where you want to provision your block storage. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. <p class="note">This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</p></td>
+       <td>Specify the region where you want to provision your block storage. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. <p class="note">This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. To specify the zone for your storage, you can create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</p></td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
-	<td>Specify the zone where you want to provision your block storage. If you specify the zone, you must also specify a region. If you do not specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. <p class="note">This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. If you want to specify the zone for your storage, create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</p></td>
+	<td>Specify the zone where you want to provision your block storage. If you specify the zone, you must also specify a region. If you do not specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. <p class="note">This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. To specify the zone for your storage, you can create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</p></td>
 	</tr>
         <tr>
         <td><code>spec.resources.requests.storage</code></td>
@@ -851,7 +851,7 @@ You cannot deploy two stateful sets at the same time. If you try to create a sta
 In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set.
 
 **Can I delay binding of a PV to my stateful pod until the pod is ready?**<br>
-Yes, you can [create a custom storage class](cs_storage_basics.html#storageclasses) for your PVC that includes the [`volumeBindingMode: WaitForFirstConsumer` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) field.
+Yes, you can [create a custom storage class](cs_storage_basics.html#topology_yaml) for your PVC that includes the [`volumeBindingMode: WaitForFirstConsumer` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) field.
 
 **What options do I have to add block storage to a stateful set?** </br>
 If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#static_statefulset) with your stateful set.  
@@ -908,7 +908,11 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
       A stateful set is fully deployed when the number of replicas that you find in the **Replicas** section of your CLI output equals the number of **Running** pods in the **Pods Status** section. If a stateful set is not fully deployed yet, wait until the deployment is finished before you proceed.
 
-3. Create a configuration file for your stateful set and the service that you use to expose the stateful set. The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte block storage device is provisioned based on the specifications defined in the `ibmc-block-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because block storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto a worker node that is located in `dal10`.
+3. Create a configuration file for your stateful set and the service that you use to expose the stateful set. 
+
+   **Example stateful set that specifies a zone:**
+   
+   The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte block storage device is provisioned based on the specifications that are defined in the `ibmc-block-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because block storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto worker nodes that are located in `dal10`.
 
    ```
    apiVersion: v1
@@ -970,6 +974,103 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
             iops: "300" #required only for performance storage
    ```
    {: codeblock}
+   
+   **Example stateful set with anti-affinity rule and delayed block storage creation:**
+   
+   The following example shows how to deploy nginx as a stateful set with 3 replicas. The stateful set does not specify the region and zone where the block storage is created. Instead, the stateful set uses an anti-affinity rule to ensure that the pods are spread across worker nodes and zones. By defining `topologykey: failure-domain.beta.kubernetes.io/zone`, the Kubernetes scheduler cannot schedule a pod on a worker node if the worker node is in the same zone as a pod that has the `app: nignx` label. For each stateful set pod, two PVCs are created as defined in the `volumeClaimTemplates` section, but the creation of the block storage instances is delayed until a stateful set pod that uses the storage is scheduled. This setup is referred to as [topology-aware volume scheduling](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
+   
+   ```
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: ibmc-block-bronze-delayed
+   parameters:
+     billingType: hourly
+     classVersion: "2"
+     fsType: ext4
+     iopsPerGB: "2"
+     sizeRange: '[20-12000]Gi'
+     type: Endurance
+   provisioner: ibm.io/ibmc-block
+   reclaimPolicy: Delete
+   volumeBindingMode: WaitForFirstConsumer
+   ---
+   apiVersion: v1
+   kind: Service
+   metadata:
+     name: nginx
+     labels:
+       app: nginx
+   spec:
+     ports:
+     - port: 80
+       name: web
+     clusterIP: None
+     selector:
+       app: nginx
+   ---
+   apiVersion: apps/v1beta1
+   kind: StatefulSet
+   metadata:
+     name: web
+   spec:
+     serviceName: "nginx"
+     replicas: 3
+     podManagementPolicy: "Parallel"
+     selector:
+       matchLabels:
+         app: nginx
+     template:
+       metadata:
+         labels:
+           app: nginx
+       spec:
+         affinity:
+           podAntiAffinity:
+             preferredDuringSchedulingIgnoredDuringExecution:
+             - weight: 100
+               podAffinityTerm:
+                 labelSelector:
+                   matchExpressions:
+                   - key: app
+                     operator: In
+                     values:
+                     - nginx
+                 topologyKey: failure-domain.beta.kubernetes.io/zone
+         containers:
+         - name: nginx
+           image: k8s.gcr.io/nginx-slim:0.8
+           ports:
+           - containerPort: 80
+             name: web
+           volumeMounts:
+           - name: www
+             mountPath: /usr/share/nginx/html
+           - name: wwwww
+             mountPath: /tmp1
+     volumeClaimTemplates:
+     - metadata:
+         annotations:
+           volume.beta.kubernetes.io/storage-class: ibmc-block-bronze-delayed
+         name: myvol1
+       spec:
+         accessModes:
+         - ReadWriteOnce # access mode
+         resources:
+           requests:
+             storage: 20Gi 
+     - metadata:
+         annotations:
+           volume.beta.kubernetes.io/storage-class: ibmc-block-bronze-delayed
+         name: myvol2
+       spec:
+         accessModes:
+         - ReadWriteOnce # access mode
+         resources:
+           requests:
+             storage: 20Gi 
+   ```
+   {: codeblock}
 
    <table>
     <caption>Understanding the stateful set YAML file components</caption>
@@ -1000,6 +1101,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     <tr>
     <td style="text-align:left"><code>spec.template.metadata.labels</code></td>
     <td style="text-align:left">Enter the same labels that you added to the <code>spec.selector.matchLabels</code> section. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
+    <td style="text-align:left"></td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
@@ -1472,7 +1577,69 @@ You can create a customized storage class and use the storage class in your PVC.
 
 To create your customized storage class, see [Customizing a storage class](cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_block).
 
-### Specifying the zone for multizone clusters
+### Creating topology-aware storage
+{: #topology_yaml}
+
+To use block storage in a multizone cluster, your pod must be scheduled in the same zone as your block storage instance so that you can read and write to the volume. Before topology-aware volume scheduling was introduced by Kubernetes, the dynamic provisioning of your storage automatically created the block storage instance when a PVC was created. Then, when you created your pod, the Kubernetes scheduler tried to deploy the pod to the same data center as your block storage instance. 
+{: shortdesc}
+
+Creating the block storage instance without knowing the constraints of the pod can lead to unwanted results. For example, your pod might not be able to be scheduled to the same worker node as your storage because the worker node has insufficient resources or the worker node is tainted and does not allow the pod to be scheduled. With topology-aware volume scheduling, the block storage instance is delayed until the first pod that uses the storage is created. 
+
+Topology-aware volume scheduling is supported on clusters that run Kubernetes version 1.12 or later only. To use this feature, make sure that you installed the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.2.0 or later. 
+{: note}
+
+The following examples show how to create storage classes that delay the creation of the block storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the block storage instance is created when you create the PVC. 
+
+- **Example for Endurance block storage:**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ibmc-block-bronze-delayed
+  parameters:
+    billingType: hourly
+    classVersion: "2"
+    fsType: ext4
+    iopsPerGB: "2"
+    sizeRange: '[20-12000]Gi'
+    type: Endurance
+  provisioner: ibm.io/ibmc-block
+  reclaimPolicy: Delete
+  volumeBindingMode: WaitForFirstConsumer
+  ```
+  {: codeblock}
+  
+- **Example for Performance block storage:**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+   name: ibmc-file-performance-storageclass
+   labels:
+     kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+   billingType: "hourly"
+   classVersion: "2"
+   sizeIOPSRange: |-
+     "[20-39]Gi:[100-1000]"
+     "[40-79]Gi:[100-2000]"
+     "[80-99]Gi:[100-4000]"
+     "[100-499]Gi:[100-6000]"
+     "[500-999]Gi:[100-10000]"
+     "[1000-1999]Gi:[100-20000]"
+     "[2000-2999]Gi:[200-40000]"
+     "[3000-3999]Gi:[200-48000]"
+     "[4000-7999]Gi:[300-48000]"
+     "[8000-9999]Gi:[500-48000]"
+     "[10000-12000]Gi:[1000-48000]"
+   type: "Performance"
+  reclaimPolicy: Delete
+  volumeBindingMode: WaitForFirstConsumer
+  ```
+  {: codeblock}
+
+### Specifying the zone and region 
 {: #multizone_yaml}
 
 If you want to create your block storage in a specific zone, you can specify the zone and region in a customized storage class. 
@@ -1481,8 +1648,9 @@ If you want to create your block storage in a specific zone, you can specify the
 Use the customized storage class if you use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.0.0 or if you want to [statically provision block storage](#existing_block) in a specific zone. In all other cases, [specify the zone directly in your PVC](#add_block).
 {: note}
 
-When you create the customized storage class, specify the same region and zone that your cluster and worker nodes are in. To get the region of your cluster, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and look for the region prefix in the **Master URL**, such as `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`. To get the zone of your worker node, run `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
-{: tip}
+The following `.yaml` file customizes a storage class that is based on the `ibm-block-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. The zone is specified as `dal12`. To use a different storage class as your base, see the [storage class reference](#storageclass_reference).
+
+Create the storage class in the same region and zone as your cluster and worker nodes. To get the region of your cluster, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and look for the region prefix in the **Master URL**, such as `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`. To get the zone of your worker node, run `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
 
 - **Example for Endurance block storage:**
   ```
@@ -1535,7 +1703,7 @@ When you create the customized storage class, specify the same region and zone t
 ### Mounting block storage with an `XFS` file system
 {: #xfs}
 
-The following example creates a storage class that provisions block storage with an `XFS` file system.
+The following examples creates a storage class that provisions block storage with an `XFS` file system.
 
 - **Example for Endurance block storage:**
   ```
