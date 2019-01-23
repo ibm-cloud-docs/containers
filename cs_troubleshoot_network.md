@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -54,7 +54,7 @@ To troubleshoot your load balancer service:
 1.  Check that you set up a standard cluster that is fully deployed and has at least two worker nodes to ensure high availability for your load balancer service.
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID>
+  ibmcloud ks workers --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -122,8 +122,8 @@ To troubleshoot your load balancer service:
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>You defined a portable public IP address for your load balancer service by using the **loadBalancerIP** section, but this portable public IP address is not available in your portable public subnet. In the **loadBalancerIP** section your configuration script, remove the existing IP address and add one of the available portable public IP addresses. You can also remove the **loadBalancerIP** section from your script so that an available portable public IP address can be allocated automatically.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>You do not have enough worker nodes to deploy a load balancer service. One reason might be that you deployed a standard cluster with more than one worker node, but the provisioning of the worker nodes failed.</li>
     <ol><li>List available worker nodes.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
-    <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="pre"><code>ibmcloud ks worker-get &lt;cluster_name_or_ID&gt; &lt;worker_ID&gt;</code></pre></li>
-    <li>Make sure that the public and private VLAN IDs for the worker nodes that were returned by the <code>kubectl get nodes</code> and the <code>ibmcloud ks &lt;cluster_name_or_ID&gt; worker-get</code> commands match.</li></ol></li></ul>
+    <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
+    <li>Make sure that the public and private VLAN IDs for the worker nodes that were returned by the <code>kubectl get nodes</code> and the <code>ibmcloud ks worker-get</code> commands match.</li></ol></li></ul>
 
 4.  If you are using a custom domain to connect to your load balancer service, make sure that your custom domain is mapped to the public IP address of your load balancer service.
     1.  Find the public IP address of your load balancer service.
@@ -146,7 +146,7 @@ You publicly exposed your app by creating an Ingress resource for your app in yo
 {: tsResolve}
 First, check that your cluster is fully deployed and has at least 2 worker nodes available per zone to ensure high availability for your ALB.
 ```
-ibmcloud ks workers <cluster_name_or_ID>
+ibmcloud ks workers --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
@@ -205,7 +205,7 @@ Review the following reasons why the ALB secret might fail and the corresponding
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-When you run `ibmcloud ks cluster-get <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** is available.
+When you run `ibmcloud ks cluster-get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** is available.
 
 You might see an error message similar to the following.
 
@@ -632,7 +632,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 8.  Verify that your worker nodes are created.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID> --worker-pool <worker_pool>
+    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool>
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -46,6 +46,9 @@ These components include:
 - [Container images and registry](#images_registry)
 - [Container isolation and security](#container)
 - [Personal information](#pi)
+
+<br />
+
 
 ## Kubernetes API server and etcd
 {: #apiserver}
@@ -119,6 +122,11 @@ The following image shows the default cluster security settings that address aut
   </tbody>
 </table>
 
+
+
+<br />
+
+
 ## Worker node
 {: #workernodes}
 
@@ -130,7 +138,7 @@ The ownership of a worker node depends on the type of cluster that you create. W
 
 Worker nodes in standard clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is associated with your public or dedicated {{site.data.keyword.Bluemix_notm}} account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches.
 
-Use the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the `ibmcloud ks clusters` or `ibmcloud ks workers <cluster_name>` commands.
+Use the `ibmcloud ks worker-update` [command](cs_cli_reference.html#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the `ibmcloud ks clusters` or `ibmcloud ks workers --cluster <cluster_name>` commands.
 {: important}
 
 **How does my worker node setup look like?**</br>
@@ -182,6 +190,9 @@ The image does not include components that ensure secure end-to-end communicatio
   </tbody>
   </table>
 
+<br />
+
+
 ## Network
 {: #network}
 The classic approach to protect a company's network is to set up a firewall and block any unwanted network traffic to your apps. While this is still true, research shows that many malicious attacks come from insiders or authorized users who misuse their assigned permissions.
@@ -199,9 +210,13 @@ Network segmentation describes the approach to divide a network into multiple su
 
 {{site.data.keyword.containerlong_notm}} provides IBM Cloud infrastructure (SoftLayer) VLANs that ensure quality network performance and network isolation for worker nodes. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire. VLANs are dedicated to your {{site.data.keyword.Bluemix_notm}} account and not shared across IBM customers. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
+
 VLAN spanning is an {{site.data.keyword.Bluemix_notm}} account setting and can be either turned on or off. When turned on, all clusters in your account can see and talk to each other. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](cs_cli_reference.html#cs_vlan_spanning_get). While this might be useful for some scenarios, VLAN spanning removes network segmentation for your clusters.
 
 Review the following table to see your options for how to achieve network segmentation when VLAN spanning is turned on.
+
+
+Review the following table to see your options for how to achieve network segmentation when you enable VRF or VLAN spanning for your account.
 
 |Security feature|Description|
 |-------|----------------------------------|
@@ -242,6 +257,9 @@ The Ingress service offers TLS termination at two points in the traffic flow:
 
 To secure the service-to-service communication, you can use [Istio's mutual TLS authentication ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/security/mutual-tls/). Istio is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms like Kubernetes.
 
+<br />
+
+
 ## Persistent storage
 {: #storage}
 
@@ -253,6 +271,9 @@ For more information about how data is encrypted for the specific storage type, 
 - [Block storage](/docs/infrastructure/BlockStorage/block-file-storage-encryption-rest.html#block-storage-encryption-at-rest) </br>
 
 You can also use an {{site.data.keyword.Bluemix_notm}} database service, such as [{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant), to persist data in a managed database outside the cluster. Data that is stored with a cloud database service can be accessed across clusters, zones, and regions. For security-related information about IBM Cloudant NoSQL DB, see the [service documentation](/docs/services/Cloudant/offerings/security.html#security).
+
+<br />
+
 
 ## Monitoring and logging
 {: #monitoring_logging}
@@ -299,6 +320,8 @@ By default, {{site.data.keyword.containerlong_notm}} provides many features for 
 5.  **Network analytics with Security Advisor (preview)**: With {{site.data.keyword.Bluemix_notm}} Security Advisor, you can centralize security insights from {{site.data.keyword.Bluemix_notm}} services such as Vulnerability Advisor and {{site.data.keyword.cloudcerts_short}}. When you enable Security Advisor in your cluster, you can view reports about suspicious incoming and outgoing network traffic. For more information, see [Network Analytics](/docs/services/security-advisor/network-analytics.html#network-analytics). To install, see [Setting up monitoring of suspicious clients and server IP addresses for a Kubernetes cluster](/docs/services/security-advisor/setup_cluster.html).
 
 6.  **{{site.data.keyword.cloudcerts_long_notm}} (beta)**: If you have a cluster in US South and want to [expose your app by using a custom domain with TLS](cs_ingress.html#ingress_expose_public), you can store your TLS certificate in {{site.data.keyword.cloudcerts_short}}. Expired or about-to-expire certificates can also reported in your Security Advisor dashboard. For more information, see [Getting started with {{site.data.keyword.cloudcerts_short}}](/docs/services/certificate-manager/index.html#gettingstarted).
+
+<br />
 
 
 ## Image and registry
@@ -355,6 +378,8 @@ Even if you deployed a container from an image that passes the vulnerability che
   </tbody>
   </table>
 
+<br />
+
 
 ## Container isolation and security
 {: #container}
@@ -399,6 +424,9 @@ Multi-tenant clusters come with the advantage that you can use the same service 
 |Set CPU and memory limits for containers|Every container requires a specific amount of CPU and memory to properly start and to continue to run. You can define [Kubernetes resource requests and resource limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) for your containers to limit the amount of CPU and memory that the container can consume. If no limits for CPU and memory are set, and the container is busy, the container uses all the resources that are available. This high consumption of resources might affect other containers on the worker node that do not have enough resources to properly start or run, and puts your worker node at risk for denial-of-service attacks.|
 |Apply OS security settings to pods|You can add the [<code>securityContext</code> section ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) to your pod deployment to apply Linux-specific security settings to the pod or a specific container inside the pod. Security settings include the control over the user ID and group ID that runs scripts inside the container, such as the entrypoint script, or the user ID and group IP that own the volume mount path. </br></br><strong>Tip:</strong> If you want to use <code>securityContext</code> to set the <code>runAsUser</code> user ID or <code>fsGroup</code> group ID, consider using block storage when you [create persistent storage](cs_storage_block.html#add_block). NFS storage does not support <code>fsGroup</code>, and <code>runAsUser</code> must be set at the container level, not the pod level. |
 {: caption="Other security protections" caption-side="top"}
+
+<br />
+
 
 ## Storing personal information
 {: #pi}

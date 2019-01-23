@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -255,7 +255,7 @@ Deploy your app as a container in a Kubernetes cluster.
     a.  Get the public IP address for the worker node in the cluster.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 

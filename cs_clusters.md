@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -227,7 +227,7 @@ To create a cluster:
     3.  **Standard clusters**: Check to see if a public and private VLAN already exists in the IBM Cloud infrastructure (SoftLayer) for this account.
 
         ```
-        ibmcloud ks vlans <zone>
+        ibmcloud ks vlans --zone <zone>
         ```
         {: pre}
 
@@ -335,7 +335,7 @@ To create a cluster:
 6.  Check the status of the worker nodes.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -354,7 +354,7 @@ To create a cluster:
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -469,7 +469,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 
 3. Verify that the worker pool is resized.
     ```
-    ibmcloud ks workers <cluster_name_or_ID> --worker-pool <pool_name>
+    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
     ```
     {: pre}
 
@@ -504,7 +504,7 @@ You can add worker nodes to your cluster by creating a new worker pool.
 
 2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
    ```
-   ibmcloud ks vlans <zone>
+   ibmcloud ks vlans --zone <zone>
    ```
    {: pre}
 
@@ -535,7 +535,7 @@ You can add worker nodes to your cluster by creating a new worker pool.
 
 7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the status changes from **provision_pending** to **normal**.
    ```
-   ibmcloud ks workers <cluster_name_or_ID> --worker-pool <pool_name>
+   ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
    ```
    {: pre}
 
@@ -571,7 +571,7 @@ To add a zone with worker nodes to your worker pool:
 
 2. List available VLANs in that zone. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
    ```
-   ibmcloud ks vlans <zone>
+   ibmcloud ks vlans --zone <zone>
    ```
    {: pre}
 
@@ -595,7 +595,7 @@ To add a zone with worker nodes to your worker pool:
 
 5. Verify that the zone is added to your cluster. Look for the added zone in the **Worker zones** field of the output. Note that the total number of workers in the **Workers** field has increased as new worker nodes are provisioned in the added zone.
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -638,13 +638,13 @@ If you have a cluster that was created after worker pools were introduced, you c
 
 2. List available VLANs in that zone and note their ID.
    ```
-   ibmcloud ks vlans <zone>
+   ibmcloud ks vlans --zone <zone>
    ```
    {: pre}
 
 3. List available machine types in that zone.
    ```
-   ibmcloud ks machine-types <zone>
+   ibmcloud ks machine-types --zone <zone>
    ```
    {: pre}
 
@@ -656,7 +656,7 @@ If you have a cluster that was created after worker pools were introduced, you c
 
 5. Verify that the worker nodes are created.
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -766,7 +766,7 @@ To remove a cluster:
     2.  Delete the cluster.
 
         ```
-        ibmcloud ks cluster-rm <cluster_name_or_ID>
+        ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
         ```
         {: pre}
 

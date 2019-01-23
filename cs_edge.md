@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -49,7 +49,7 @@ To label worker nodes as edge nodes:
 1. List the worker nodes in your edge node worker pool. Use the **Private IP** address to identify the nodes.
 
   ```
-  ibmcloud ks workers <cluster_name_or_ID> --worker-pool <edge_pool_name>
+  ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <edge_pool_name>
   ```
   {: pre}
 

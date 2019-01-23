@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -182,7 +182,7 @@ The following image shows how the webserver app will be exposed to the internet 
 
     2. Get the **Public IP** address of a worker node.
         ```
-        ibmcloud ks workers <cluster_name>
+        ibmcloud ks workers --cluster <cluster_name>
         ```
         {: pre}
 

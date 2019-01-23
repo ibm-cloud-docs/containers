@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -115,7 +115,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 1.  List available worker nodes and note their private IP address.
 
     ```
-    ibmcloud ks workers <cluster_name_or_ID>
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -235,7 +235,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 6.  Update the worker nodes.
 
     ```
-    ibmcloud ks worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
+    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -308,26 +308,26 @@ To update machine types:
 
      2. List the worker nodes in the worker pool.
         ```
-        ibmcloud ks workers <cluster_name_or_ID> --worker-pool <pool_name>
+        ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
         ```
         {: pre}
 
      3. Get the details for a worker node and note the zone, the private and the public VLAN ID.
         ```
-        ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> <worker_ID>
         ```
         {: pre}
 
    - **Deprecated: For stand-alone worker nodes**:
      1. List available worker nodes.
         ```
-        ibmcloud ks workers <cluster_name_or_ID>
+        ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
      2. Get the details for a worker node and note the zone, the private and the public VLAN ID.
         ```
-        ibmcloud ks worker-get <cluster_name_or_ID> <worker_ID>
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_ID>
         ```
         {: pre}
 
@@ -365,7 +365,7 @@ To update machine types:
 
 4. Wait for the worker nodes to be deployed.
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -387,13 +387,13 @@ To update machine types:
 
    - **Deprecated: For stand-alone worker nodes**:
       ```
-      ibmcloud ks worker-rm <cluster_name> <worker_node>
+      ibmcloud ks worker-rm --cluster <cluster_name> --worker <worker_node>
       ```
       {: pre}
 
 6. Verify that the worker nodes are removed from your cluster.
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -571,7 +571,7 @@ To update stand-alone worker nodes to worker pools:
 
 1. List existing stand-alone worker nodes in your cluster and note the **ID**, the **Machine Type**, and **Private IP**.
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -581,7 +581,7 @@ To update stand-alone worker nodes to worker pools:
    ```
    {: pre}
 
-3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud ks cluster-get <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](cs_regions.html#zones).
+3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](cs_regions.html#zones).
    ```
    ibmcloud ks zones
    ```
@@ -589,7 +589,7 @@ To update stand-alone worker nodes to worker pools:
 
 4. List available VLANs for the zone that you chose in the previous step. If you do not have a VLAN in that zone yet, the VLAN is automatically created for you when you add the zone to the worker pool.
    ```
-   ibmcloud ks vlans <zone>
+   ibmcloud ks vlans --zone <zone>
    ```
    {: pre}
 
@@ -612,7 +612,7 @@ To update stand-alone worker nodes to worker pools:
 
 6. Wait for the worker nodes to be deployed in each zone.
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
    When the worker node state changes to **Normal** the deployment is finished.
@@ -643,7 +643,7 @@ To update stand-alone worker nodes to worker pools:
 
    5. Remove your stand-alone worker node. Use the ID of the worker node that you retrieved with the `ibmcloud ks workers <cluster_name_or_ID>` command.
       ```
-      ibmcloud ks worker-rm <cluster_name_or_ID> <worker_ID>
+      ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_ID>
       ```
       {: pre}
    6. Repeat these steps until all your stand-alone worker nodes are removed.

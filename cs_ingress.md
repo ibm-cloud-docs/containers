@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-23"
 
 ---
 
@@ -236,7 +236,7 @@ You can use the IBM-provided domain, such as `mycluster-12345.us-south.container
 
 Get the IBM-provided domain. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
 ```
-ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
 ```
 {: pre}
 
@@ -252,7 +252,7 @@ Ingress Secret:         <tls_secret>
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
-    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
+    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get --cluster <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
     -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as a record. To find the portable public IP address of the ALB, run `ibmcloud ks alb-get <public_alb_ID>`.
 
 ### Step 3: Select TLS termination
@@ -263,14 +263,14 @@ After you choose the app domain, you choose whether to use TLS termination.
 
 The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster.
 
-* If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by IBM. The certificates expire every 90 days and are automatically renewed 7 days before they expire. For information about wildcard TLS certification, see [this note](#wildcard_tls).
+* If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by IBM. The certificates expire every 90 days and are automatically renewed 37 days before they expire. For information about wildcard TLS certification, see [this note](#wildcard_tls).
 * If you use a custom domain, you can use your own TLS certificate to manage TLS termination. If you have apps in one namespace only, you can import or create a TLS secret for the certificate in that same namespace. If you have apps in multiple namespaces, import or create a TLS secret for the certificate in the `default` namespace so that the ALB can access and use the certificate in every namespace. In the Ingress resources that you define for each namespace, specify the name of the secret that is in the default namespace. For information about wildcard TLS certification, see [this note](#wildcard_tls). **Note**: TLS certificates that contain pre-shared keys (TLS-PSK) are not supported.
 
 **If you use the IBM-provided Ingress domain:**
 
 Get the IBM-provided TLS secret for your cluster. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
 ```
-ibmcloud ks cluster-get <cluster_name_or_ID> | grep Ingress
+ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
 ```
 {: pre}
 
@@ -1164,7 +1164,7 @@ To enable source IP preservation, edit the load balancer service that exposes an
 Enable SSL protocols and ciphers at the global HTTP level by editing the `ibm-cloud-provider-ingress-cm` configmap.
 {:shortdesc}
 
-To comply with the PCI Security Standards Council mandate, the Ingress service disables TLS 1.0 and 1.1 by default with the upcoming version upgrade of the Ingress ALB pods on 14 January 2019. The update rolls out automatically to all {{site.data.keyword.containerlong_notm}} clusters that have not opted out from automatic ALB updates. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, you must manually enable the required TLS versions. You can override the default setting to use TLS 1.1 or 1.0 protocols by following the steps in this section. For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.Bluemix_notm}} Blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).
+To comply with the PCI Security Standards Council mandate, the Ingress service disables TLS 1.0 and 1.1 by default with the upcoming version upgrade of the Ingress ALB pods on 23 January 2019. The update rolls out automatically to all {{site.data.keyword.containerlong_notm}} clusters that have not opted out from automatic ALB updates. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, you must manually enable the required TLS versions. You can override the default setting to use TLS 1.1 or 1.0 protocols by following the steps in this section. For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.Bluemix_notm}} blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).
 {: important}
 
 When you specify the enabled protocols for all hosts, the TLSv1.1 and TLSv1.2 parameters (1.1.13, 1.0.12) work only when OpenSSL 1.0.1 or higher is used. The TLSv1.3 parameter (1.13.0) works only when OpenSSL 1.1.1 built with TLSv1.3 support is used.

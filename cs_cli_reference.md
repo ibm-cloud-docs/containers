@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-23"
 
 ---
 
@@ -887,7 +887,7 @@ trusted: <em>true</em>
 
 **Examples**:
 
-  
+
 
   **Create a free cluster**: Specify the cluster name only; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 
@@ -3143,6 +3143,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
    ```
    kubectl get nodes
    ```
+   {: pre}
    The **name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud ks workers <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
 2. Mark the worker node as unschedulable in a process that is known as cordoning. When you cordon a worker node, you make it unavailable for future pod scheduling. Use the **name** of the worker node that you retrieved in the previous step.
    ```
@@ -3172,6 +3173,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
    ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
+   {: pre}
 </br>
 <strong>Command options</strong>:
 

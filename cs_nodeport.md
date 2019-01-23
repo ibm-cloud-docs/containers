@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -125,7 +125,7 @@ When the app is deployed, you can use the public IP address of any worker node a
 1.  Get the public IP address for a worker node in the cluster. If you want to access the worker node on a private network, get the private IP address instead.
 
     ```
-    ibmcloud ks workers <cluster_name>
+    ibmcloud ks workers --cluster <cluster_name>
     ```
     {: pre}
 

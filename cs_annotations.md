@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -1984,7 +1984,7 @@ spec:
 
 5. Get the IBM **Ingress subdomain** and **Ingress secret** for your cluster. The subdomain and secret are pre-registered for your cluster and are used as a unique public URL for your app.
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 

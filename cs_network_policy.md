@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -122,13 +122,13 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
 1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
 
   ```
-  ibmcloud ks cluster-config <cluster_name> --admin
+  ibmcloud ks cluster-config --cluster <cluster_name> --admin
   ```
   {: pre}
 
 2. Download the Calico configuration file to run all Calico commands.
     ```
-    ibmcloud ks cluster-config <cluster_name_or_ID> --network
+    ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --network
     ```
     {: pre}
 
@@ -214,7 +214,7 @@ Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
 2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
     ```
-    ibmcloud ks cluster-config <cluster_name> --admin
+    ibmcloud ks cluster-config --cluster <cluster_name> --admin
     ```
     {: pre}
 
@@ -275,7 +275,7 @@ Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
 2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
     ```
-    ibmcloud ks cluster-config <cluster_name> --admin
+    ibmcloud ks cluster-config --cluster <cluster_name> --admin
     ```
     {: pre}
 
@@ -448,7 +448,7 @@ Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
 2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
     ```
-    ibmcloud ks cluster-config <cluster_name> --admin
+    ibmcloud ks cluster-config --cluster <cluster_name> --admin
     ```
     {: pre}
 
@@ -614,7 +614,7 @@ Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
 2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
     ```
-    ibmcloud ks cluster-config <cluster_name> --admin
+    ibmcloud ks cluster-config --cluster <cluster_name> --admin
     ```
     {: pre}
 

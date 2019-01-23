@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -388,7 +388,7 @@ Use this option if you want to add different block storage configurations, add b
 
 1. List the worker nodes in your cluster and note the private IP address and the zone of the non-SDS worker nodes where you want to add a block storage device.
    ```
-   ibmcloud ks workers <cluster_name_or_ID>
+   ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 

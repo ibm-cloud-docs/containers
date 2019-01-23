@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -236,7 +236,7 @@ To check your user access permissions:
                      Resource
         ```
         {: screen}
-    2. Look for a policy that has a **Service Name** value of `containers-kubernetes` and a **Service Instance** value of the cluster's ID. You can find a cluster ID by running `ibmcloud ks cluster-get <cluster_name>`. For example, this policy indicates that a user has access to a specific cluster:
+    2. Look for a policy that has a **Service Name** value of `containers-kubernetes` and a **Service Instance** value of the cluster's ID. You can find a cluster ID by running `ibmcloud ks cluster-get --cluster <cluster_name>`. For example, this policy indicates that a user has access to a specific cluster:
         ```
         Policy ID:   140555ce-93ac-4fb2-b15d-6ad726795d90
         Roles:       Administrator
@@ -260,7 +260,7 @@ To check your user access permissions:
 
       2. Target the cluster.
           ```
-          ibmcloud ks cluster-config <cluster_name_or_ID>
+          ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
           ```
           {: pre}
 
@@ -274,7 +274,7 @@ To check your user access permissions:
 
       2. Target the cluster.
         ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -288,7 +288,7 @@ To check your user access permissions:
           This command fails because no resource group that is named `none` exists. However, the current resource group is automatically untargeted when the command fails.
         3. Target the cluster.
           ```
-          ibmcloud ks cluster-config <cluster_name_or_ID>
+          ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
           ```
           {: pre}
 
@@ -574,7 +574,7 @@ Manually update the reference of the private IP address to point to the correct 
 1.  Confirm that you have two worker nodes with the same **Private IP** address. Note the **Private IP** and **ID** of the deleted worker.
 
   ```
-  ibmcloud ks workers <CLUSTER_NAME>
+  ibmcloud ks workers --cluster <cluster_name_or_id>
   ```
   {: pre}
 
@@ -610,7 +610,7 @@ Manually update the reference of the private IP address to point to the correct 
 5.  Reboot the worker node that was not deleted.
 
   ```
-  ibmcloud ks worker-reboot CLUSTER_ID NODE_ID
+  ibmcloud ks worker-reboot --cluster <cluster_name_or_id> --worker <worker_id>
   ```
   {: pre}
 
@@ -669,8 +669,8 @@ If you just created the cluster, the worker nodes might still be configuring. If
 {: tsResolve}
 
 You can try one of the following solutions:
-  - Check the status of your cluster by running `ibmcloud ks clusters`. Then, check to be sure that your worker nodes are deployed by running `ibmcloud ks workers <cluster_name>`.
-  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `ibmcloud ks vlans <zone>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
+  - Check the status of your cluster by running `ibmcloud ks clusters`. Then, check to be sure that your worker nodes are deployed by running `ibmcloud ks workers --cluster <cluster_name>`.
+  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `ibmcloud ks vlans --zone <zone>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
 
 <br />
 

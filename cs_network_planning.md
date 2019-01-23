@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-21"
+lastupdated: "2019-01-22"
 
 ---
 
@@ -24,6 +24,9 @@ lastupdated: "2019-01-21"
 
 With {{site.data.keyword.containerlong}}, you can manage external networking by making apps publicly or privately accessible.
 {: shortdesc}
+
+This page helps you plan external networking for your apps. For information about setting up your cluster for networking, including information about VLANs, subnets, firewalls, and VPNs, see [Planning a cluster network setup](cs_network_cluster.html).
+{: tip}
 
 ## Choosing a NodePort, LoadBalancer, or Ingress service
 {: #external}
@@ -80,8 +83,6 @@ The following diagram shows how Kubernetes forwards public network traffic in {{
 
 The public network interface for the worker nodes in both free and standard clusters is protected by Calico network policies. These policies block most inbound traffic by default. However, inbound traffic that is necessary for Kubernetes to function is allowed, as are connections to NodePort, LoadBalancer, and Ingress services. For more information about these policies, including how to modify them, see [Network policies](cs_network_policy.html#network_policies).
 
-For more information about setting up your cluster for networking, including information about subnets, firewalls, and VPNs, see [Planning default cluster networking](cs_network_cluster.html#both_vlans).
-
 <br />
 
 
@@ -104,12 +105,10 @@ When your worker nodes are connected to both a public and a private VLAN, you ca
 
 As an example, say that you created a private load balancer service. You also created a Calico preDNAT policy to block public traffic from reaching the public NodePorts opened by the load balancer. This private load balancer can be accessed by:
 * Any pod in that same cluster
-* Any pod in any cluster in the same IBM Cloud account
-* If you have [VLAN spanning enabled](cs_subnets.html#subnet-routing), any system that is connected to any of the private VLANs in the same IBM Cloud account
-* If you're not in the IBM Cloud account but still behind the company firewall, any system through a VPN connection to the subnet that the load balancer IP is on
-* If you're in a different IBM Cloud account, any system through a VPN connection to the subnet that the load balancer IP is on
-
-For more information about setting up your cluster for networking, including information about subnets, firewalls, and VPNs, see [Planning default cluster networking](cs_network_cluster.html#both_vlans).
+* Any pod in any cluster in the same {{site.data.keyword.Bluemix_notm}} account
+* If you have [VLAN spanning enabled](cs_subnets.html#subnet-routing), any system that is connected to any of the private VLANs in the same {{site.data.keyword.Bluemix_notm}} account
+* If you're not in the {{site.data.keyword.Bluemix_notm}} account but still behind the company firewall, any system through a VPN connection to the subnet that the load balancer IP is on
+* If you're in a different {{site.data.keyword.Bluemix_notm}} account, any system through a VPN connection to the subnet that the load balancer IP is on.
 
 <br />
 
@@ -132,5 +131,3 @@ When your worker nodes are connected to a private VLAN only, you can make your a
 * When you create a cluster, a private Ingress application load balancer (ALB) is created automatically but is not enabled by default. You must [enable the private ALB](cs_ingress.html#private_ingress).
 * Then, [create a private Ingress service](cs_ingress.html#ingress_expose_private).
 * In your private firewall, open port 80 for HTTP or port 443 for HTTPS to the IP address for the private ALB.
-
-For more information about setting up your cluster for networking, including information about subnets and gateway appliances, see [Planning networking for a private VLAN only setup](cs_network_cluster.html#private_vlan).
