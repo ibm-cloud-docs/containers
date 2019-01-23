@@ -923,32 +923,26 @@ trusted: <em>true</em>
   {: pre}
 
 
-
-### ibmcloud ks cluster-feature-enable
+### ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted] [-s]
 {: #cs_cluster_feature_enable}
 
-Enable a feature on an existing cluster. This command must be combined with one of the following subcommands for the feature that you want to enable.
+Enable a feature on an existing cluster.
 {: shortdesc}
-
-
-
-#### ibmcloud ks cluster-feature-enable trusted --cluster CLUSTER [-s] [-f]
-{: #cs_cluster_feature_enable_trusted}
-
-Enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.
-{: shortdesc}
-
-To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker get` [command](#cs_worker_get).
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
+   <dl>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Use this option to force the <code>--trusted</code> option without user prompts. This value is optional.</dd>
+
+   <dt><code><em>--trusted</em></code></dt>
+   <dd><p>Include the flag to enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
+   <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker-get` [command](#cs_worker_get).</p></dd>
 
   <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -957,9 +951,11 @@ To check whether the bare metal machine type supports trust, check the **Trustab
 **Example command**:
 
   ```
-  ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
+  ibmcloud ks cluster-feature-enable --cluster my_cluster --trusted=true
   ```
   {: pre}
+
+
 
 
 
