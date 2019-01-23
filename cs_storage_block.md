@@ -910,219 +910,219 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 3. Create a configuration file for your stateful set and the service that you use to expose the stateful set. 
 
-   **Example stateful set that specifies a zone:**
+   - **Example stateful set that specifies a zone:**
    
-   The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte block storage device is provisioned based on the specifications that are defined in the `ibmc-block-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because block storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto worker nodes that are located in `dal10`.
+     The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte block storage device is provisioned based on the specifications that are defined in the `ibmc-block-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because block storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto worker nodes that are located in `dal10`.
 
-   ```
-   apiVersion: v1
-   kind: Service
-   metadata:
-    name: nginx
-    labels:
-      app: nginx
-   spec:
-    ports:
-    - port: 80
-      name: web
-    clusterIP: None
-    selector:
-      app: nginx
-   ---
-   apiVersion: apps/v1beta1
-   kind: StatefulSet
-   metadata:
-    name: nginx
-   spec:
-    serviceName: "nginx"
-    replicas: 3
-    podManagementPolicy: Parallel
-    selector:
-      matchLabels:
+     ```
+     apiVersion: v1
+     kind: Service
+     metadata:
+      name: nginx
+      labels:
         app: nginx
-        billingType: "hourly"
-        region: "us-south"
-        zone: "dal10"
-    template:
-      metadata:
-        labels:
+     spec:
+      ports:
+      - port: 80
+        name: web
+      clusterIP: None
+      selector:
+        app: nginx
+     ---
+     apiVersion: apps/v1beta1
+     kind: StatefulSet
+     metadata:
+      name: nginx
+     spec:
+      serviceName: "nginx"
+      replicas: 3
+      podManagementPolicy: Parallel
+      selector:
+        matchLabels:
           app: nginx
           billingType: "hourly"
           region: "us-south"
           zone: "dal10"
-      spec:
-        containers:
-        - name: nginx
-          image: k8s.gcr.io/nginx-slim:0.8
-          ports:
-          - containerPort: 80
-            name: web
-          volumeMounts:
-          - name: myvol
-            mountPath: /usr/share/nginx/html
-    volumeClaimTemplates:
-    - metadata:
-        annotations:
-          volume.beta.kubernetes.io/storage-class: ibmc-block-retain-bronze
-        name: myvol
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 20Gi
-            iops: "300" #required only for performance storage
-   ```
-   {: codeblock}
+      template:
+        metadata:
+          labels:
+            app: nginx
+            billingType: "hourly"
+            region: "us-south"
+            zone: "dal10"
+        spec:
+          containers:
+          - name: nginx
+            image: k8s.gcr.io/nginx-slim:0.8
+            ports:
+            - containerPort: 80
+              name: web
+            volumeMounts:
+            - name: myvol
+              mountPath: /usr/share/nginx/html
+      volumeClaimTemplates:
+      - metadata:
+          annotations:
+            volume.beta.kubernetes.io/storage-class: ibmc-block-retain-bronze
+          name: myvol
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 20Gi
+              iops: "300" #required only for performance storage
+     ```
+     {: codeblock}
    
-   **Example stateful set with anti-affinity rule and delayed block storage creation:**
+   - **Example stateful set with anti-affinity rule and delayed block storage creation:**
    
-   The following example shows how to deploy nginx as a stateful set with 3 replicas. The stateful set does not specify the region and zone where the block storage is created. Instead, the stateful set uses an anti-affinity rule to ensure that the pods are spread across worker nodes and zones. By defining `topologykey: failure-domain.beta.kubernetes.io/zone`, the Kubernetes scheduler cannot schedule a pod on a worker node if the worker node is in the same zone as a pod that has the `app: nignx` label. For each stateful set pod, two PVCs are created as defined in the `volumeClaimTemplates` section, but the creation of the block storage instances is delayed until a stateful set pod that uses the storage is scheduled. This setup is referred to as [topology-aware volume scheduling](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
+     The following example shows how to deploy nginx as a stateful set with 3 replicas. The stateful set does not specify the region and zone where the block storage is created. Instead, the stateful set uses an anti-affinity rule to ensure that the pods are spread across worker nodes and zones. By defining `topologykey: failure-domain.beta.kubernetes.io/zone`, the Kubernetes scheduler cannot schedule a pod on a worker node if the worker node is in the same zone as a pod that has the `app: nignx` label. For each stateful set pod, two PVCs are created as defined in the `volumeClaimTemplates` section, but the creation of the block storage instances is delayed until a stateful set pod that uses the storage is scheduled. This setup is referred to as [topology-aware volume scheduling](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
    
-   ```
-   apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
-     name: ibmc-block-bronze-delayed
-   parameters:
-     billingType: hourly
-     classVersion: "2"
-     fsType: ext4
-     iopsPerGB: "2"
-     sizeRange: '[20-12000]Gi'
-     type: Endurance
-   provisioner: ibm.io/ibmc-block
-   reclaimPolicy: Delete
-   volumeBindingMode: WaitForFirstConsumer
-   ---
-   apiVersion: v1
-   kind: Service
-   metadata:
-     name: nginx
-     labels:
-       app: nginx
-   spec:
-     ports:
-     - port: 80
-       name: web
-     clusterIP: None
-     selector:
-       app: nginx
-   ---
-   apiVersion: apps/v1beta1
-   kind: StatefulSet
-   metadata:
-     name: web
-   spec:
-     serviceName: "nginx"
-     replicas: 3
-     podManagementPolicy: "Parallel"
-     selector:
-       matchLabels:
+     ```
+     apiVersion: storage.k8s.io/v1
+     kind: StorageClass
+     metadata:
+       name: ibmc-block-bronze-delayed
+     parameters:
+       billingType: hourly
+       classVersion: "2"
+       fsType: ext4
+       iopsPerGB: "2"
+       sizeRange: '[20-12000]Gi'
+       type: Endurance
+     provisioner: ibm.io/ibmc-block
+     reclaimPolicy: Delete
+     volumeBindingMode: WaitForFirstConsumer
+     ---
+     apiVersion: v1
+     kind: Service
+     metadata:
+       name: nginx
+       labels:
          app: nginx
-     template:
-       metadata:
-         labels:
+     spec:
+       ports:
+       - port: 80
+         name: web
+       clusterIP: None
+       selector:
+         app: nginx
+     ---
+     apiVersion: apps/v1beta1
+     kind: StatefulSet
+     metadata:
+       name: web
+     spec:
+       serviceName: "nginx"
+       replicas: 3
+       podManagementPolicy: "Parallel"
+       selector:
+         matchLabels:
            app: nginx
-       spec:
-         affinity:
-           podAntiAffinity:
-             preferredDuringSchedulingIgnoredDuringExecution:
-             - weight: 100
-               podAffinityTerm:
-                 labelSelector:
-                   matchExpressions:
-                   - key: app
-                     operator: In
-                     values:
-                     - nginx
-                 topologyKey: failure-domain.beta.kubernetes.io/zone
-         containers:
-         - name: nginx
-           image: k8s.gcr.io/nginx-slim:0.8
-           ports:
-           - containerPort: 80
-             name: web
-           volumeMounts:
-           - name: www
-             mountPath: /usr/share/nginx/html
-           - name: wwwww
-             mountPath: /tmp1
-     volumeClaimTemplates:
-     - metadata:
-         annotations:
-           volume.beta.kubernetes.io/storage-class: ibmc-block-bronze-delayed
-         name: myvol1
-       spec:
-         accessModes:
-         - ReadWriteOnce # access mode
-         resources:
-           requests:
-             storage: 20Gi 
-     - metadata:
-         annotations:
-           volume.beta.kubernetes.io/storage-class: ibmc-block-bronze-delayed
-         name: myvol2
-       spec:
-         accessModes:
-         - ReadWriteOnce # access mode
-         resources:
-           requests:
-             storage: 20Gi 
-   ```
-   {: codeblock}
+       template:
+         metadata:
+           labels:
+             app: nginx
+         spec:
+           affinity:
+             podAntiAffinity:
+               preferredDuringSchedulingIgnoredDuringExecution:
+               - weight: 100
+                 podAffinityTerm:
+                   labelSelector:
+                     matchExpressions:
+                     - key: app
+                       operator: In
+                       values:
+                       - nginx
+                   topologyKey: failure-domain.beta.kubernetes.io/zone
+           containers:
+           - name: nginx
+             image: k8s.gcr.io/nginx-slim:0.8
+             ports:
+             - containerPort: 80
+               name: web
+             volumeMounts:
+             - name: www
+               mountPath: /usr/share/nginx/html
+             - name: wwwww
+               mountPath: /tmp1
+       volumeClaimTemplates:
+       - metadata:
+           annotations:
+             volume.beta.kubernetes.io/storage-class: ibmc-block-bronze-delayed
+           name: myvol1
+         spec:
+           accessModes:
+           - ReadWriteOnce # access mode
+           resources:
+             requests:
+               storage: 20Gi 
+       - metadata:
+           annotations:
+             volume.beta.kubernetes.io/storage-class: ibmc-block-bronze-delayed
+           name: myvol2
+         spec:
+           accessModes:
+           - ReadWriteOnce # access mode
+           resources:
+             requests:
+               storage: 20Gi 
+     ```
+     {: codeblock}
 
-   <table>
-    <caption>Understanding the stateful set YAML file components</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the stateful set YAML file components</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td style="text-align:left"><code>metadata.name</code></td>
-    <td style="text-align:left">Enter a name for your stateful set. The name that you enter is used to create the name for your PVC in the format: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>. </td>
-    </tr>
-    <tr>
-    <td style="text-align:left"><code>spec.serviceName</code></td>
-    <td style="text-align:left">Enter the name of the service that you want to use to expose your stateful set. </td>
-    </tr>
-    <tr>
-    <td style="text-align:left"><code>spec.replicas</code></td>
-    <td style="text-align:left">Enter the number of replicas for your stateful set. </td>
-    </tr>
-    <tr>
-    <td style="text-align:left"><code>spec.podManagementPolicy</code></td>
-    <td style="text-align:left">Enter the pod management policy that you want to use for your stateful set. Choose between the following options: <ul><li><strong>OrderedReady: </strong>With this option, stateful set replicas are deployed one after another. For example, if you specified 3 replicas, then Kubernetes creates the PVC for your first replica, waits until the PVC is bound, deploys the stateful set replica, and mounts the PVC to the replica. After the deployment is finished, the second replica is deployed. For more information about this option, see [OrderedReady Pod Management ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel: </strong>With this option, the deployment of all stateful set replicas is started at the same time. If your app supports parallel deployment of replicas, then use this option to save deployment time for your PVCs and stateful set replicas. </li></ul></td>
-    </tr>
-    <tr>
-    <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
-    <td style="text-align:left">Enter all labels that you want to include in your stateful set and your PVC. Labels that you include in the <code>volumeClaimTemplates</code> of your stateful set are not recognized by Kubernetes. Sample labels that you might want to include are: <ul><li><code><strong>region</strong></code> and <code><strong>zone</strong></code>: If you want all your stateful set replicas and PVCs to be created in one specific zone, add both labels. You can also specify the zone and region in the storage class that you use. If you do not specify a zone and region and you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones.</li><li><code><strong>billingType</strong></code>: Enter the billing type that you want to use for your PVCs. Choose between <code>hourly</code> or <code>monthly</code>. If you do not specify this label, all PVCs are created with an hourly billing type. </li></ul></td>
-    </tr>
-    <tr>
-    <td style="text-align:left"><code>spec.template.metadata.labels</code></td>
-    <td style="text-align:left">Enter the same labels that you added to the <code>spec.selector.matchLabels</code> section. </td>
-    </tr>
-    <tr>
-    <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
-    <td style="text-align:left"></td>
-    </tr>
-    <tr>
-    <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-    <td style="text-align:left">Enter the storage class that you want to use. To list existing storage classes, run <code>kubectl get storageclasses | grep block</code>. If you do not specify a storage class, the PVC is created with the default storage class that is set in your cluster. Make sure that the default storage class uses the <code>ibm.io/ibmc-block</code> provisioner so that your stateful set is provisioned with block storage.</td>
-    </tr>
-    <tr>
-    <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
-    <td style="text-align:left">Enter a name for your volume. Use the same name that you defined in the <code>spec.containers.volumeMount.name</code> section. The name that you enter here is used to create the name for your PVC in the format: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>. </td>
-    </tr>
-    <tr>
-    <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.storage</code></td>
-    <td style="text-align:left">Enter the size of the block storage in gigabytes (Gi).</td>
-    </tr>
-    <tr>
-    <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.iops</code></td>
-    <td style="text-align:left">If you want to provision [performance storage](#predefined_storageclass), enter the number of IOPS. If you use an endurance storage class and specify a number of IOPS, the number of IOPS is ignored. Instead, the IOPS that is specified in your storage class is used.  </td>
-    </tr>
-    </tbody></table>
+     <table>
+     <caption>Understanding the stateful set YAML file components</caption>
+     <thead>
+     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the stateful set YAML file components</th>
+     </thead>
+     <tbody>
+     <tr>
+     <td style="text-align:left"><code>metadata.name</code></td>
+     <td style="text-align:left">Enter a name for your stateful set. The name that you enter is used to create the name for your PVC in the format: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>. </td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.serviceName</code></td>
+     <td style="text-align:left">Enter the name of the service that you want to use to expose your stateful set. </td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.replicas</code></td>
+     <td style="text-align:left">Enter the number of replicas for your stateful set. </td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.podManagementPolicy</code></td>
+     <td style="text-align:left">Enter the pod management policy that you want to use for your stateful set. Choose between the following options: <ul><li><strong>OrderedReady: </strong>With this option, stateful set replicas are deployed one after another. For example, if you specified 3 replicas, then Kubernetes creates the PVC for your first replica, waits until the PVC is bound, deploys the stateful set replica, and mounts the PVC to the replica. After the deployment is finished, the second replica is deployed. For more information about this option, see [OrderedReady Pod Management ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel: </strong>With this option, the deployment of all stateful set replicas is started at the same time. If your app supports parallel deployment of replicas, then use this option to save deployment time for your PVCs and stateful set replicas. </li></ul></td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
+     <td style="text-align:left">Enter all labels that you want to include in your stateful set and your PVC. Labels that you include in the <code>volumeClaimTemplates</code> of your stateful set are not recognized by Kubernetes. Sample labels that you might want to include are: <ul><li><code><strong>region</strong></code> and <code><strong>zone</strong></code>: If you want all your stateful set replicas and PVCs to be created in one specific zone, add both labels. You can also specify the zone and region in the storage class that you use. If you do not specify a zone and region and you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones.</li><li><code><strong>billingType</strong></code>: Enter the billing type that you want to use for your PVCs. Choose between <code>hourly</code> or <code>monthly</code>. If you do not specify this label, all PVCs are created with an hourly billing type. </li></ul></td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.template.metadata.labels</code></td>
+     <td style="text-align:left">Enter the same labels that you added to the <code>spec.selector.matchLabels</code> section. </td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
+     <td style="text-align:left">Specify your anti-affinity rule to ensure that your stateful set pods are distributed across worker nodes and zones. The example shows an anti-affinity rule where the stateful set pod prefers not to be scheduled on a worker node where a pod runs that has the `app: nginx` label. The `topologykey: failure-domain.beta.kubernetes.io/zone` restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node if the worker node is in the same zone as a pod that has the app: nignx label. By using this anti-affinity rule, you can achieve anti-affinity across worker nodes and zones. </td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
+     <td style="text-align:left">Enter the storage class that you want to use. To list existing storage classes, run <code>kubectl get storageclasses | grep block</code>. If you do not specify a storage class, the PVC is created with the default storage class that is set in your cluster. Make sure that the default storage class uses the <code>ibm.io/ibmc-block</code> provisioner so that your stateful set is provisioned with block storage.</td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
+     <td style="text-align:left">Enter a name for your volume. Use the same name that you defined in the <code>spec.containers.volumeMount.name</code> section. The name that you enter here is used to create the name for your PVC in the format: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>. </td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.storage</code></td>
+     <td style="text-align:left">Enter the size of the block storage in gigabytes (Gi).</td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.iops</code></td>
+     <td style="text-align:left">If you want to provision [performance storage](#predefined_storageclass), enter the number of IOPS. If you use an endurance storage class and specify a number of IOPS, the number of IOPS is ignored. Instead, the IOPS that is specified in your storage class is used.  </td>
+     </tr>
+     </tbody></table>
 
 4. Create your stateful set.
    ```
@@ -1720,6 +1720,7 @@ The following examples creates a storage class that provisions block storage wit
     sizeRange: "[20-12000]Gi"
     fsType: "xfs"
   reclaimPolicy: "Delete"
+  ```
 
 - **Example for Performance block storage:**
   ```
