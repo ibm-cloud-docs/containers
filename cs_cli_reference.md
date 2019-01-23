@@ -593,7 +593,7 @@ After you disable the webhook, you must run the `ibmcloud ks apiserver-refresh` 
 ### ibmcloud ks apiserver-refresh --cluster CLUSTER [-s]
 {: #cs_apiserver_refresh}
 
-Apply configuration changes for the Kubernetes master in the etcd data store that are requested with the `ibmcloud ks apiserver-config-set`,or `apiserver-config-unset` commands. If a configuration change requires a restart, the affected Kubernetes master component is restarted. If the configuration changes can be applied without a restart, no Kubernetes master component is restarted. Your worker nodes, apps, and resources are not modified and continue to run.
+Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks apiserver-config-set`,or `apiserver-config-unset` commands. If a configuration change requires a restart, the affected Kubernetes master component is restarted. If the configuration changes can be applied without a restart, no Kubernetes master component is restarted. Your worker nodes, apps, and resources are not modified and continue to run.
 {: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
