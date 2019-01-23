@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-23"
 
 ---
 
@@ -432,7 +432,7 @@ The following table shows the changes that are included in the patch 1.11.6_1540
 </table>
 
 ### Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019
-{: #1115_1538}
+{: #1115_1539}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.5_1539.
 {: shortdesc}
