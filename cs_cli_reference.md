@@ -152,12 +152,12 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[{[bxcs]} cluster-service-bind](#cs_cluster_service_bind)</td>
-    <td>[{[bxcs]} cluster-service-unbind](#cs_cluster_service_unbind)</td>
-    <td>[{[bxcs]} cluster-services](#cs_cluster_services)</td>
-    <td>[{[bxcs]} va](#cs_va)</td>
+    <td>[ibmcloud ks cluster-service-bind](#cs_cluster_service_bind)</td>
+    <td>[ibmcloud ks cluster-service-unbind](#cs_cluster_service_unbind)</td>
+    <td>[ibmcloud ks cluster-services](#cs_cluster_services)</td>
+    <td>[ibmcloud ks va](#cs_va)</td>
   </tr>
-    <td>[{[bxcs]} webhook-create](#cs_webhook_create)</td>
+    <td>[ibmcloud ks webhook-create](#cs_webhook_create)</td>
   <tr>
   </tr>
 </tbody>
@@ -175,13 +175,13 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[{[bxcs]} cluster-subnet-add](#cs_cluster_subnet_add)</td>
-    <td>[{[bxcs]} cluster-subnet-create](#cs_cluster_subnet_create)</td>
-    <td>[{[bxcs]} cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
-    <td>[{[bxcs]} cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
+    <td>[ibmcloud ks cluster-subnet-add](#cs_cluster_subnet_add)</td>
+    <td>[ibmcloud ks cluster-subnet-create](#cs_cluster_subnet_create)</td>
+    <td>[ibmcloud ks cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
+    <td>[ibmcloud ks cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
   </tr>
   <tr>
-    <td>[{[bxcs]} subnets](#cs_subnets)</td>
+    <td>[ibmcloud ks subnets](#cs_subnets)</td>
     <td></td>
     <td></td>
     <td></td>
@@ -201,14 +201,14 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[{[bxcs]} credential-get](#cs_credential_get)</td>
-    <td>[{[bxcs]} credential-set](#cs_credentials_set)</td>
-    <td>[{[bxcs]} credential-unset](#cs_credentials_unset)</td>
-    <td>[{[bxcs]} machine-types](#cs_machine_types)</td>
+    <td>[ibmcloud ks credential-get](#cs_credential_get)</td>
+    <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+    <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud ks machine-types](#cs_machine_types)</td>
   </tr>
   <tr>
-    <td>[{[bxcs]} vlans](#cs_vlans)</td>
-    <td>[{[bxcs]} vlan-spanning-get](#cs_vlan_spanning_get)</td>
+    <td>[ibmcloud ks vlans](#cs_vlans)</td>
+    <td>[ibmcloud ks vlan-spanning-get](#cs_vlan_spanning_get)</td>
     <td> </td>
     <td> </td>
   </tr>
@@ -229,25 +229,25 @@ ibmcloud plugin list
   </thead>
   <tbody>
     <tr>
-      <td>[{[bxcs]} alb-autoupdate-disable](#cs_alb_autoupdate_disable)</td>
-      <td>[{[bxcs]} alb-autoupdate-enable](#cs_alb_autoupdate_enable)</td>
-      <td>[{[bxcs]} alb-autoupdate-get](#cs_alb_autoupdate_get)</td>
-      <td>[{[bxcs]} alb-cert-deploy](#cs_alb_cert_deploy)</td>
+      <td>[ibmcloud ks alb-autoupdate-disable](#cs_alb_autoupdate_disable)</td>
+      <td>[ibmcloud ks alb-autoupdate-enable](#cs_alb_autoupdate_enable)</td>
+      <td>[ibmcloud ks alb-autoupdate-get](#cs_alb_autoupdate_get)</td>
+      <td>[ibmcloud ks alb-cert-deploy](#cs_alb_cert_deploy)</td>
     </tr>
     <tr>
-      <td>[{[bxcs]} alb-cert-get](#cs_alb_cert_get)</td>
-      <td>[{[bxcs]} alb-cert-rm](#cs_alb_cert_rm)</td>
-      <td>[{[bxcs]} alb-certs](#cs_alb_certs)</td>
-      <td>[{[bxcs]} alb-configure](#cs_alb_configure)</td>
+      <td>[ibmcloud ks alb-cert-get](#cs_alb_cert_get)</td>
+      <td>[ibmcloud ks alb-cert-rm](#cs_alb_cert_rm)</td>
+      <td>[ibmcloud ks alb-certs](#cs_alb_certs)</td>
+      <td>[ibmcloud ks alb-configure](#cs_alb_configure)</td>
     </tr>
     <tr>
-      <td>[{[bxcs]} alb-get](#cs_alb_get)</td>
-      <td>[{[bxcs]} alb-rollback](#cs_alb_rollback)</td>
-      <td>[{[bxcs]} alb-types](#cs_alb_types)</td>
-      <td>[{[bxcs]} alb-update](#cs_alb_update)</td>
+      <td>[ibmcloud ks alb-get](#cs_alb_get)</td>
+      <td>[ibmcloud ks alb-rollback](#cs_alb_rollback)</td>
+      <td>[ibmcloud ks alb-types](#cs_alb_types)</td>
+      <td>[ibmcloud ks alb-update](#cs_alb_update)</td>
     </tr>
     <tr>
-      <td>[{[bxcs]} albs](#cs_albs)</td>
+      <td>[ibmcloud ks albs](#cs_albs)</td>
       <td> </td>
       <td> </td>
       <td> </td>
@@ -269,26 +269,26 @@ ibmcloud plugin list
   </thead>
   <tbody>
     <tr>
-      <td>[{[bxcs]} logging-autoupdate-enable](#cs_log_autoupdate_enable)</td>
-      <td>[{[bxcs]} logging-autoupdate-disable](#cs_log_autoupdate_disable)</td>
-      <td>[{[bxcs]} logging-autoupdate-get](#cs_log_autoupdate_get)</td>
-      <td>[{[bxcs]} logging-config-create](#cs_logging_create)</td>
+      <td>[ibmcloud ks logging-autoupdate-enable](#cs_log_autoupdate_enable)</td>
+      <td>[ibmcloud ks logging-autoupdate-disable](#cs_log_autoupdate_disable)</td>
+      <td>[ibmcloud ks logging-autoupdate-get](#cs_log_autoupdate_get)</td>
+      <td>[ibmcloud ks logging-config-create](#cs_logging_create)</td>
     </tr>
     <tr>
-      <td>[{[bxcs]} logging-config-get](#cs_logging_get)</td>
-      <td>[{[bxcs]} logging-config-refresh](#cs_logging_refresh)</td>
-      <td>[{[bxcs]} logging-config-rm](#cs_logging_rm)</td>
-      <td>[{[bxcs]} logging-config-update](#cs_logging_update)</td>
+      <td>[ibmcloud ks logging-config-get](#cs_logging_get)</td>
+      <td>[ibmcloud ks logging-config-refresh](#cs_logging_refresh)</td>
+      <td>[ibmcloud ks logging-config-rm](#cs_logging_rm)</td>
+      <td>[ibmcloud ks logging-config-update](#cs_logging_update)</td>
     </tr>
     <tr>
-      <td>[{[bxcs]} logging-filter-create](#cs_log_filter_create)</td>
-      <td>[{[bxcs]} logging-filter-update](#cs_log_filter_update)</td>
-      <td>[{[bxcs]} logging-filter-get](#cs_log_filter_view)</td>
-      <td>[{[bxcs]} logging-filter-rm](#cs_log_filter_delete)</td>
+      <td>[ibmcloud ks logging-filter-create](#cs_log_filter_create)</td>
+      <td>[ibmcloud ks logging-filter-update](#cs_log_filter_update)</td>
+      <td>[ibmcloud ks logging-filter-get](#cs_log_filter_view)</td>
+      <td>[ibmcloud ks logging-filter-rm](#cs_log_filter_delete)</td>
     </tr>
     <tr>
-      <td>[{[bxcs]} logging-collect](#cs_log_collect)</td>
-      <td>[{[bxcs]} logging-collect-status](#cs_log_collect_status)</td>
+      <td>[ibmcloud ks logging-collect](#cs_log_collect)</td>
+      <td>[ibmcloud ks logging-collect-status](#cs_log_collect_status)</td>
       <td> </td>
       <td> </td>
     </tr>
@@ -307,10 +307,10 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[{[bxcs]} region](#cs_region)</td>
-    <td>[{[bxcs]} region-set](#cs_region-set)</td>
-    <td>[{[bxcs]} regions](#cs_regions)</td>
-    <td>[{[bxcs]} zones](#cs_datacenters)</td>
+    <td>[ibmcloud ks region](#cs_region)</td>
+    <td>[ibmcloud ks region-set](#cs_region-set)</td>
+    <td>[ibmcloud ks regions](#cs_regions)</td>
+    <td>[ibmcloud ks zones](#cs_datacenters)</td>
   </tr>
 </tbody>
 </table>
@@ -920,7 +920,6 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-
 ### ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted] [-s]
 {: #cs_cluster_feature_enable}
 
@@ -952,7 +951,6 @@ Enable a feature on an existing cluster.
   ibmcloud ks cluster-feature-enable --cluster my_cluster --trusted=true
   ```
   {: pre}
-
 
 ### ibmcloud ks cluster-get --cluster CLUSTER [--json] [--showResources] [-s]
 {: #cs_cluster_get}
