@@ -108,7 +108,6 @@ ibmcloud plugin list
 
 <br>
 
-
 <table summary="Cluster commands: Management table">
 <caption>Cluster commands: Management commands</caption>
 <col width="25%">
@@ -138,7 +137,6 @@ ibmcloud plugin list
   </tr>
 </tbody>
 </table>
-
 
 <br>
 
