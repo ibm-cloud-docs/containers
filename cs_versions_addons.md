@@ -52,7 +52,6 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td>403 / 295</td>
 <td>23 Jan 2019</td>
-<td>Disables TLS 1.0 and 1.1 by default. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, manually enable the required TLS versions by following [these steps](cs_ingress.html#ssl_protocols_ciphers). For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.Bluemix_notm}} Blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).</td>
 <td><ul>
 <li>Updates the NGINX version of ALBs to 1.15.2.</li>
 <li>IBM-provided TLS certificates are now automatically renewed 37 days before they expire instead of 7 days.</li>
@@ -61,6 +60,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <li>Updates the {{site.data.keyword.appid_full_notm}} location directive so that the `app-id` annotation can be used in conjunction with the `proxy-buffers`, `proxy-buffer-size`, and `proxy-busy-buffer-size` annotations.</li>
 <li>Fixes a bug so that informational logs are not labeled as errors.</li>
 </ul></td>
+<td>Disables TLS 1.0 and 1.1 by default. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, manually enable the required TLS versions by following [these steps](cs_ingress.html#ssl_protocols_ciphers). For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.Bluemix_notm}} Blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).</td>
 </tr>
 <tr>
 <td>393 / 291</td>
