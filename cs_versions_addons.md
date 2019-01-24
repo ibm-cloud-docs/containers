@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-23"
+lastupdated: "2019-01-24"
 
 ---
 
@@ -36,6 +36,10 @@ Refer to the following table for a summary of changes for each build of the Ingr
 
 <table summary="Overview of build changes for the Ingress application load balancer add-on">
 <caption>Changelog for the Ingress application load balancer add-on</caption>
+<col width="15%">
+<col width="15%">
+<col width="35%">
+<col width="35%">
 <thead>
 <tr>
 <th>`nginx-ingress` / `ingress-auth` build</th>
