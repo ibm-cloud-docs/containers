@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-23"
+lastupdated: "2019-01-24"
 
 ---
 
@@ -515,28 +515,28 @@ Choose a machine type with the right storage configuration to support your workl
 <td><strong>Bare metal with SDS, ms2c.4x32.1.9tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 960GB SSD</td>
-<td>1.9TB Raw SSD</td>
+<td>1.9TB Raw SSD (device path: `sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>Bare metal with SDS, ms2c.16x64.1.9tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>16 / 64GB</td>
 <td>2TB SATA / 960GB SSD</td>
-<td>1.9TB Raw SSD</td>
+<td>1.9TB Raw SSD (device path: `sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>Bare metal with SDS, ms2c.28x256.3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>28 / 256GB</td>
 <td>2TB SATA / 1.9TB SSD</td>
-<td>3.8TB Raw SSD</td>
+<td>3.8TB Raw SSD (device path: `sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
 <td><strong>Bare metal with SDS, ms2c.28x512.4x3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>28 / 512GB</td>
 <td>2TB SATA / 1.9TB SSD</td>
-<td>4 disks, 3.8TB Raw SSD</td>
+<td>4 disks, 3.8TB Raw SSD (device paths: `sdc`, `sdd`, `sde`, `sdf`)</td>
 <td>10000Mbps</td>
 </tr>
 </tbody>
