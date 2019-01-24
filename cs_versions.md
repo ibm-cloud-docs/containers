@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-24"
 
 ---
 
@@ -38,10 +38,10 @@ lastupdated: "2019-01-22"
 
 **Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. You cannot create new clusters that use the deprecated version.
 
-**Unsupported versions**: If you are running clusters on a Kubernetes version that is not supported, review potential impacts for updates below and then immediately [update the cluster](cs_cluster_update.html#update) to continue receiving important security updates and support.
-*  **Attention**: If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure.
-*  Unsupported clusters cannot add or reload existing worker nodes.
-*  After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
+**Unsupported versions**: If you are running clusters on a Kubernetes version that is not supported, review potential impacts for updates below and then immediately [update the cluster](cs_cluster_update.html#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes.
+
+If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure. For example, if your cluster runs Kubernetes version 1.9 or earlier, when you update the master to 1.12 or later, most pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff` or `ContainerCreating` until you updat the worker nodes to the same version.<br><br>After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
+{: important}
 
 </br>
 
