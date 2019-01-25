@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -29,10 +29,10 @@ lastupdated: "2019-01-22"
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting your clusters and worker nodes.
 {: shortdesc}
 
-If you have a more general issue, try out [cluster debugging](cs_troubleshoot.html).
+If you have a more general issue, try out [cluster debugging](/docs/containers/cs_troubleshoot.html).
 {: tip}
 
-While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](cs_troubleshoot.html#debug_utility) to run tests and gather pertinent information from your cluster.
+While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers/cs_troubleshoot.html#debug_utility) to run tests and gather pertinent information from your cluster.
 {: tip}
 
 ## Unable to create a cluster due to permission errors
@@ -98,8 +98,8 @@ The account owner must set up the infrastructure account credentials properly. T
         * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts.
         * If you see an **Infrastructure User** field, your cluster uses a different infrastructure account than the one that came with your Pay-As-You-Go account. These different credentials apply to all clusters within the region.
 3.  Decide what type of account you want to have to determine how to troubleshoot your infrastructure permission issue. For most users, the default linked Pay-As-You-Go account is sufficient.
-    *  Linked Pay-As-You-Go {{site.data.keyword.Bluemix_notm}} account: [Verify that the API key is set up with the correct permissions](cs_users.html#default_account). If your cluster is using a different infrastructure account, you must unset those credentials as part of the process.
-    *  Different {{site.data.keyword.Bluemix_notm}} platform and infrastructure accounts: Verify that you can access the infrastructure portfolio and that [the infrastructure account credentials are set up with the correct permissions](cs_users.html#credentials).
+    *  Linked Pay-As-You-Go {{site.data.keyword.Bluemix_notm}} account: [Verify that the API key is set up with the correct permissions](/docs/containers/cs_users.html#default_account). If your cluster is using a different infrastructure account, you must unset those credentials as part of the process.
+    *  Different {{site.data.keyword.Bluemix_notm}} platform and infrastructure accounts: Verify that you can access the infrastructure portfolio and that [the infrastructure account credentials are set up with the correct permissions](/docs/containers/cs_users.html#credentials).
 4.  If you cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](#orphaned).
 
 <br />
@@ -115,7 +115,7 @@ When you run `ibmcloud`, `kubectl`, or `calicoctl` commands from the CLI, they f
 You might have corporate network policies that prevent access from your local system to public endpoints via proxies or firewalls.
 
 {: tsResolve}
-[Allow TCP access for the CLI commands to work](cs_firewall.html#firewall_bx). This task requires the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for the cluster.
+[Allow TCP access for the CLI commands to work](/docs/containers/cs_firewall.html#firewall_bx). This task requires the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) for the cluster.
 
 
 ## Cannot access resources in my cluster
@@ -164,7 +164,7 @@ To access resources in the cluster, your worker nodes must be able to communicat
    {: pre}
 
 2. If you have a multizone cluster and your account is not enabled for VRF, verify that you [enabled VLAN spanning](/docs/containers/cs_subnets.html#subnet-routing) for your account.
-3. If you have a Vyatta or custom firewall settings, make sure that you [opened up the required ports](cs_firewall.html#firewall_outbound) to allow the cluster to access infrastructure resources and services.
+3. If you have a Vyatta or custom firewall settings, make sure that you [opened up the required ports](/docs/containers/cs_firewall.html#firewall_outbound) to allow the cluster to access infrastructure resources and services.
 
 <br />
 
@@ -279,7 +279,7 @@ To check your user access permissions:
         {: pre}
 
     * If you do not have access to the cluster:
-        1. Ask your account owner to assign an [{{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) to you for that cluster.
+        1. Ask your account owner to assign an [{{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) to you for that cluster.
         2. Do not target a resource group. If you already targeted a resource group, untarget it:
           ```
           ibmcloud target -g none
@@ -325,9 +325,9 @@ Instance ID inconsistent with worker records
 The machine ID can become inconsistent with the {{site.data.keyword.containerlong_notm}} worker record when the machine experiences hardware issues. When IBM Cloud infrastructure (SoftLayer) resolves this issue, a component can change within the system that the service does not identify.
 
 {: tsResolve}
-For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload the bare metal worker node](cs_cli_reference.html#cs_worker_reload). **Note**: Reloading also updates the machine's [patch version](cs_versions_changelog.html).
+For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload the bare metal worker node](/docs/containers/cs_cli_reference.html#cs_worker_reload). **Note**: Reloading also updates the machine's [patch version](/docs/containers/cs_versions_changelog.html).
 
-You can also [delete the bare metal worker node](cs_cli_reference.html#cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
+You can also [delete the bare metal worker node](/docs/containers/cs_cli_reference.html#cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
 
 <br />
 
@@ -373,13 +373,13 @@ Consider the following scenario to understand how clusters might become orphaned
     3.  From the infrastructure navigation pane, click **Devices > Device List**.
     4.  Search for the worker node ID that you previously noted.
     5.  If you do not find the worker node ID, the worker node is not provisioned into this infrastructure account. Switch to a different infrastructure account and try again.
-3.  Use the `ibmcloud ks credential-set` [command](cs_cli_reference.html#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
+3.  Use the `ibmcloud ks credential-set` [command](/docs/containers/cs_cli_reference.html#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
     If you no longer have access to and cannot get the infrastructure credentials, you must open an {{site.data.keyword.Bluemix_notm}} support case to remove the orphaned cluster.
     {: note}
-4.  [Delete the cluster](cs_clusters.html#remove).
+4.  [Delete the cluster](/docs/containers/cs_clusters.html#remove).
 5.  If you want, reset the infrastructure credentials to the previous account. Note that if you created clusters with a different infrastructure account than the account that you switch to, you might orphan those clusters.
-    * To set credentials to a different infrastructure account, use the `ibmcloud ks credential-set` [command](cs_cli_reference.html#cs_credentials_set).
-    * To use the default credentials that come with your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, use the `ibmcloud ks credential-unset` [command](cs_cli_reference.html#cs_credentials_unset).
+    * To set credentials to a different infrastructure account, use the `ibmcloud ks credential-set` [command](/docs/containers/cs_cli_reference.html#cs_credentials_set).
+    * To use the default credentials that come with your {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, use the `ibmcloud ks credential-unset` [command](/docs/containers/cs_cli_reference.html#cs_credentials_unset).
 
 <br />
 
@@ -405,7 +405,7 @@ The OpenVPN connection between the master node and worker nodes is not functioni
   kubectl delete pod -n kube-system -l app=vpn
   ```
   {: pre}
-3. If you still see the same error message, then the worker node that the VPN pod is on might be unhealthy. To restart the VPN pod and reschedule it to a different worker node, [cordon, drain, and reboot the worker node](cs_cli_reference.html#cs_worker_reboot) that the VPN pod is on.
+3. If you still see the same error message, then the worker node that the VPN pod is on might be unhealthy. To restart the VPN pod and reschedule it to a different worker node, [cordon, drain, and reboot the worker node](/docs/containers/cs_cli_reference.html#cs_worker_reboot) that the VPN pod is on.
 
 <br />
 
@@ -428,7 +428,7 @@ Multiple service instances might have the same name in different regions.
 {: tsResolve}
 Use the service GUID instead of the service instance name in the `ibmcloud ks cluster-service-bind` command.
 
-1. [Log in to the region that includes the service instance to bind.](cs_regions.html#bluemix_regions)
+1. [Log in to the region that includes the service instance to bind.](/docs/containers/cs_regions.html#bluemix_regions)
 
 2. Get the GUID for the service instance.
   ```
@@ -585,7 +585,7 @@ Manually update the reference of the private IP address to point to the correct 
   ```
   {: screen}
 
-2.  Install the [Calico CLI](cs_network_policy.html#adding_network_policies).
+2.  Install the [Calico CLI](/docs/containers/cs_network_policy.html#adding_network_policies).
 3.  List the available worker nodes in Calico. Replace <path_to_file> with the local path to the Calico configuration file.
 
   ```
@@ -634,12 +634,12 @@ unable to validate against any pod security policy
 {: screen}
 
 {: tsCauses}
-[The `PodSecurityPolicy` admission controller](cs_psp.html) checks the authorization of the user or service account, such as a deployment or Helm tiller, that tried to create the pod. If no pod security policy supports the user or service account, then the `PodSecurityPolicy` admission controller prevents the pods from being created.
+[The `PodSecurityPolicy` admission controller](/docs/containers/cs_psp.html) checks the authorization of the user or service account, such as a deployment or Helm tiller, that tried to create the pod. If no pod security policy supports the user or service account, then the `PodSecurityPolicy` admission controller prevents the pods from being created.
 
-If you deleted one of the pod security policy resources for [{{site.data.keyword.IBM_notm}} cluster management](cs_psp.html#ibm_psp), you might experience similar issues.
+If you deleted one of the pod security policy resources for [{{site.data.keyword.IBM_notm}} cluster management](/docs/containers/cs_psp.html#ibm_psp), you might experience similar issues.
 
 {: tsResolve}
-Make sure that the user or service account is authorized by a pod security policy. You might need to [modify an existing policy](cs_psp.html#customize_psp).
+Make sure that the user or service account is authorized by a pod security policy. You might need to [modify an existing policy](/docs/containers/cs_psp.html#customize_psp).
 
 If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, refresh the Kubernetes master to restore it.
 
@@ -689,7 +689,7 @@ If this cluster is an existing one:
 *  The pod might have exceeded a resource request or limit.
 
 {: tsResolve}
-This task requires the {{site.data.keyword.Bluemix_notm}} IAM [**Administrator** platform role](cs_users.html#platform) for the cluster.
+This task requires the {{site.data.keyword.Bluemix_notm}} IAM [**Administrator** platform role](/docs/containers/cs_users.html#platform) for the cluster.
 
 If you just created the Kubernetes cluster, run the following command and wait for the worker nodes to initialize.
 
@@ -741,7 +741,7 @@ If this cluster is an existing one, check your cluster capacity.
         ```
         {: pre}
 
-    2.  If the request exceeds the available capacity, [add a new worker pool](cs_clusters.html#add_pool) with worker nodes that can fulfill the request.
+    2.  If the request exceeds the available capacity, [add a new worker pool](/docs/containers/cs_clusters.html#add_pool) with worker nodes that can fulfill the request.
 
 6.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
 
@@ -758,7 +758,7 @@ The pods deploy successfully to clusters, but the containers do not start.
 Containers might not start when the registry quota is reached.
 
 {: tsResolve}
-[Free up storage in {{site.data.keyword.registryshort_notm}}.](../services/Registry/registry_quota.html#registry_quota_freeup)
+[Free up storage in {{site.data.keyword.registryshort_notm}}.](/docs/services/Registry/registry_quota.html#registry_quota_freeup)
 
 <br />
 

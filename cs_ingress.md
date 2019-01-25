@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-23"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -37,11 +37,11 @@ Ingress is a Kubernetes service that balances network traffic workloads in your 
 Ingress consists of three components:
 <dl>
 <dt>Ingress resource</dt>
-<dd>To expose an app by using Ingress, you must create a Kubernetes service for your app and register this service with Ingress by defining an Ingress resource. The Ingress resource is a Kubernetes resource that defines the rules for how to route incoming requests for apps. The Ingress resource also specifies the path to your app services, which are appended to the public route to form a unique app URL such as `mycluster.us-south.containers.appdomain.cloud/myapp1`.<p class="note">As of 24 May 2018, the Ingress subdomain format changed for new clusters. The region or zone name included in the new subdomain format is generated based on the zone where the cluster was created. If you have pipeline dependencies on consistent app domain names, you can use your own custom domain instead of the IBM-provided Ingress subdomain.<ul><li>All clusters created after 24 May 2018 are assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>.</li><li>Single-zone clusters created before 24 May 2018 continue to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li><li>If you change a single-zone cluster created before 24 May 2018 to multizone by [adding a zone to the cluster](cs_clusters.html#add_zone) for the first time, the cluster continues to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>, and is also assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>. Either subdomain can be used.</li></ul></p>**Multizone clusters**: The Ingress resource is global, and only one Ingress resource is required per namespace for a multizone cluster.</dd>
+<dd>To expose an app by using Ingress, you must create a Kubernetes service for your app and register this service with Ingress by defining an Ingress resource. The Ingress resource is a Kubernetes resource that defines the rules for how to route incoming requests for apps. The Ingress resource also specifies the path to your app services, which are appended to the public route to form a unique app URL such as `mycluster.us-south.containers.appdomain.cloud/myapp1`.<p class="note">As of 24 May 2018, the Ingress subdomain format changed for new clusters. The region or zone name included in the new subdomain format is generated based on the zone where the cluster was created. If you have pipeline dependencies on consistent app domain names, you can use your own custom domain instead of the IBM-provided Ingress subdomain.<ul><li>All clusters created after 24 May 2018 are assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>.</li><li>Single-zone clusters created before 24 May 2018 continue to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li><li>If you change a single-zone cluster created before 24 May 2018 to multizone by [adding a zone to the cluster](/docs/containers/cs_clusters.html#add_zone) for the first time, the cluster continues to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>, and is also assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code>. Either subdomain can be used.</li></ul></p>**Multizone clusters**: The Ingress resource is global, and only one Ingress resource is required per namespace for a multizone cluster.</dd>
 <dt>Application load balancer (ALB)</dt>
 <dd>The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, TCP, or UDP service requests. The ALB then forwards requests to the appropriate app pod according to the rules defined in the Ingress resource. When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically creates a highly available ALB for your cluster and assigns a unique public route to it. The public route is linked to a portable public IP address that is provisioned into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. A default private ALB is also automatically created, but is not automatically enabled.<br></br>**Multizone clusters**: When you add a zone to your cluster, a portable public subnet is added, and a new public ALB is automatically created and enabled on the subnet in that zone. All default public ALBs in your cluster share one public route, but have a different IP addresses. A default private ALB is also automatically created in each zone, but is not automatically enabled.</dd>
 <dt>Multizone load balancer (MZLB)</dt>
-<dd><p>**Multizone clusters**: Whenever you create a multizone cluster or [add a zone to a single zone cluster](cs_clusters.html#add_zone), a Cloudflare multizone load balancer (MZLB) is automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same hostname and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the hostname `yourcluster.us-east.containers.appdomain.cloud` has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For example, if your ALBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your Ingress subdomain returns all 3 IPs, 1 of which the client accesses at random. If the ALB with IP address `3.3.3.3` becomes unavailable for any reason, such as due to zone failure, then the health check for that zone fails, the MZLB removes the failed IP from the host name, and the DNS lookup returns only the healthy `1.1.1.1` and `2.2.2.2` ALB IPs. The subdomain has a 30 second time to live (TTL), so after 30 seconds, new client apps can access only one of the available, healthy ALB IPs.</p><p>In rare cases, some DNS resolvers or client apps might continue to use the unhealthy ALB IP after the 30-second TTL. These client apps might experience a longer load time until the client app abandons the `3.3.3.3` IP and tries to connect to `1.1.1.1` or `2.2.2.2`. Depending on the client browser or client app settings, the delay can range from a few seconds to a full TCP timeout.</p>
+<dd><p>**Multizone clusters**: Whenever you create a multizone cluster or [add a zone to a single zone cluster](/docs/containers/cs_clusters.html#add_zone), a Cloudflare multizone load balancer (MZLB) is automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same hostname and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the hostname `yourcluster.us-east.containers.appdomain.cloud` has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For example, if your ALBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your Ingress subdomain returns all 3 IPs, 1 of which the client accesses at random. If the ALB with IP address `3.3.3.3` becomes unavailable for any reason, such as due to zone failure, then the health check for that zone fails, the MZLB removes the failed IP from the host name, and the DNS lookup returns only the healthy `1.1.1.1` and `2.2.2.2` ALB IPs. The subdomain has a 30 second time to live (TTL), so after 30 seconds, new client apps can access only one of the available, healthy ALB IPs.</p><p>In rare cases, some DNS resolvers or client apps might continue to use the unhealthy ALB IP after the 30-second TTL. These client apps might experience a longer load time until the client app abandons the `3.3.3.3` IP and tries to connect to `1.1.1.1` or `2.2.2.2`. Depending on the client browser or client app settings, the delay can range from a few seconds to a full TCP timeout.</p>
 <p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you use only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME in your DNS entry to forward requests from your custom domain to the IBM-provided Ingress subdomain for your cluster.</p>
 <p class="note">If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also whitelist <a href="https://www.cloudflare.com/ips/">Cloudflare's IPv4 IPs <img src="../icons/launch-glyph.svg" alt="External link icon"></a> that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the <a href="cs_tutorials_policies.html#lesson3">Calico network policy tutorial</a>.</p></dd>
 </dl>
@@ -107,7 +107,7 @@ Before you get started with Ingress, review the following prerequisites.
 - Setting up Ingress requires the **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role.
 
 **Prerequisites for using Ingress in multizone clusters**:
- - If you restrict network traffic to [edge worker nodes](cs_edge.html), at least 2 edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](cs_clusters.html#add_pool) that spans all the zones in your cluster and has at least 2 worker nodes per zone.
+ - If you restrict network traffic to [edge worker nodes](/docs/containers/cs_edge.html), at least 2 edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](/docs/containers/cs_clusters.html#add_pool) that spans all the zones in your cluster and has at least 2 worker nodes per zone.
  - If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
  - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
 
@@ -425,7 +425,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     </br></br>
     Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app. Examples: <ul><li>For <code>http://domain/</code>, enter <code>/</code> as the path.</li><li>For <code>http://domain/app1_path</code>, enter <code>/app1_path</code> as the path.</li></ul>
     </br>
-    <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](cs_annotations.html#rewrite-path).</td>
+    <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](/docs/containers/cs_annotations.html#rewrite-path).</td>
     </tr>
     <tr>
     <td><code>serviceName</code></td>
@@ -485,7 +485,7 @@ http://<subdomain2>.<domain>/<app1_path>
 {: pre}
 
 
-Having trouble connecting to your app through Ingress? Try [debugging Ingress](cs_troubleshoot_debug_ingress.html).
+Having trouble connecting to your app through Ingress? Try [debugging Ingress](/docs/containers/cs_troubleshoot_debug_ingress.html).
 {: tip}
 
 <br />
@@ -601,7 +601,7 @@ To use a private ALB, you must first enable the private ALB. Because private VLA
 
 Before you begin:
 * Review the Ingress [prerequisites](#config_prereqs).
-* Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
+* Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](/docs/containers/cs_network_planning.html#private_both_vlans) or to [a private VLAN only](/docs/containers/cs_network_planning.html#private_vlan).
     * If your worker nodes are connected to a private VLAN only, you must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 
 ### Step 1: Deploy apps and create app services
@@ -660,7 +660,7 @@ Start by deploying your apps and creating Kubernetes services to expose them.
 When you create a standard cluster, an IBM-provided private application load balancer (ALB) is created in each zone that you have worker nodes and assigned a portable private IP address and a private route. However, the default private ALB in each zone is not automatically enabled. To use the default private ALB to load balance private network traffic to your apps, you must first enable it with either the IBM-provided portable private IP address or your own portable private IP address.
 {:shortdesc}
 
-If you used the `--no-subnet` flag when you created the cluster, then you must add a portable private subnet or a user-managed subnet before you can enable the private ALB. For more information, see [Requesting more subnets for your cluster](cs_subnets.html#request).
+If you used the `--no-subnet` flag when you created the cluster, then you must add a portable private subnet or a user-managed subnet before you can enable the private ALB. For more information, see [Requesting more subnets for your cluster](/docs/containers/cs_subnets.html#request).
 {: note}
 
 **To enable a default private ALB by using the pre-assigned, IBM-provided portable private IP address:**
@@ -899,7 +899,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     <tbody>
     <tr>
     <td><code>ingress.bluemix.net/ALB-ID</code></td>
-    <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. If you have a multizone cluster and have enabled multiple private ALBs, include the ID of each ALB. Run <code>ibmcloud ks albs --cluster <my_cluster></code> to find the ALB IDs. For more information about this Ingress annotation, see [Private application load balancer routing](cs_annotations.html#alb-id).</td>
+    <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. If you have a multizone cluster and have enabled multiple private ALBs, include the ID of each ALB. Run <code>ibmcloud ks albs --cluster <my_cluster></code> to find the ALB IDs. For more information about this Ingress annotation, see [Private application load balancer routing](/docs/containers/cs_annotations.html#alb-id).</td>
     </tr>
     <tr>
     <td><code>tls.hosts</code></td>
@@ -922,7 +922,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     </br></br>
     Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app. Examples: <ul><li>For <code>http://domain/</code>, enter <code>/</code> as the path.</li><li>For <code>http://domain/app1_path</code>, enter <code>/app1_path</code> as the path.</li></ul>
     </br>
-    <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](cs_annotations.html#rewrite-path).</td>
+    <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](/docs/containers/cs_annotations.html#rewrite-path).</td>
     </tr>
     <tr>
     <td><code>serviceName</code></td>
@@ -956,7 +956,7 @@ Your Ingress resource is created in the same namespace as your app services. You
 {: #private_6}
 
 1. Before you can access your app, make sure that you can access a DNS service.
-  * Public and private VLAN: To use the default external DNS provider, you must [configure edge nodes with public access](cs_edge.html#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
+  * Public and private VLAN: To use the default external DNS provider, you must [configure edge nodes with public access](/docs/containers/cs_edge.html#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
   * Private VLAN only: You must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 
 2. From within your private network firewall, enter the URL of the app service in a web browser.
@@ -999,13 +999,13 @@ To add capabilities to your Ingress application load balancer (ALB), you can add
 {: shortdesc}
 
 Get started with some of the most commonly used annotations.
-* [redirect-to-https](cs_annotations.html#redirect-to-https): Convert insecure HTTP client requests to HTTPS.
-* [rewrite-path](cs_annotations.html#rewrite-path): Route incoming network traffic to a different path that your backend app listens on.
-* [ssl-services](cs_annotations.html#ssl-services): Use TLS to encrypt traffic to your upstream apps that require HTTPS.
-* [appid-auth](cs_annotations.html#appid-auth): Use {{site.data.keyword.appid_full_notm}} to authenticate with your application.
-* [client-max-body-size](cs_annotations.html#client-max-body-size): Set the maximum size of the body that the client can send as part of a request.
+* [redirect-to-https](/docs/containers/cs_annotations.html#redirect-to-https): Convert insecure HTTP client requests to HTTPS.
+* [rewrite-path](/docs/containers/cs_annotations.html#rewrite-path): Route incoming network traffic to a different path that your backend app listens on.
+* [ssl-services](/docs/containers/cs_annotations.html#ssl-services): Use TLS to encrypt traffic to your upstream apps that require HTTPS.
+* [appid-auth](/docs/containers/cs_annotations.html#appid-auth): Use {{site.data.keyword.appid_full_notm}} to authenticate with your application.
+* [client-max-body-size](/docs/containers/cs_annotations.html#client-max-body-size): Set the maximum size of the body that the client can send as part of a request.
 
-For the full list of supported annotations, see [Customizing Ingress with annotations](cs_annotations.html).
+For the full list of supported annotations, see [Customizing Ingress with annotations](/docs/containers/cs_annotations.html).
 
 <br />
 
@@ -1062,8 +1062,8 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
  {: pre}
 
  5. Optional:
-    * Access an app via a non-standard TCP port that you opened by using the [`tcp-ports`](cs_annotations.html#tcp-ports) annotation.
-    * Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic to a port that you opened by using the [`custom-port`](cs_annotations.html#custom-port) annotation.
+    * Access an app via a non-standard TCP port that you opened by using the [`tcp-ports`](/docs/containers/cs_annotations.html#tcp-ports) annotation.
+    * Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic to a port that you opened by using the [`custom-port`](/docs/containers/cs_annotations.html#custom-port) annotation.
 
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/).
 
@@ -1077,7 +1077,7 @@ By default, the source IP address of the client request is not preserved. When a
 
 To preserve the original source IP address of the client request, you can [enable source IP preservation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer). Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
 
-If you [disable an ALB](cs_cli_reference.html#cs_alb_configure), any source IP changes you make to the load balancer service exposing the ALB are lost. When you re-enable the ALB, you must enable source IP again.
+If you [disable an ALB](/docs/containers/cs_cli_reference.html#cs_alb_configure), any source IP changes you make to the load balancer service exposing the ALB are lost. When you re-enable the ALB, you must enable source IP again.
 {: note}
 
 To enable source IP preservation, edit the load balancer service that exposes an Ingress ALB:
@@ -1332,7 +1332,7 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
 ### Tuning kernel performance
 {: #kernel}
 
-To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](cs_performance.html). Worker nodes are automatically provisioned with optimized kernel tuning, so only change these settings if you have specific performance optimization requirements.
+To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers/cs_performance.html). Worker nodes are automatically provisioned with optimized kernel tuning, so only change these settings if you have specific performance optimization requirements.
 
 <br />
 

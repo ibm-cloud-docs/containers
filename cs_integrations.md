@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -45,7 +45,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. <p>For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](cs_integrations.html#helm).</p></td>
+<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. <p>For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_integrations.html#helm).</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
@@ -53,7 +53,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Istio</td>
-<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms like Kubernetes. Check out the blog post about <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">how IBM co-founded and launched Istio<img src="../icons/launch-glyph.svg" alt="External link icon"></a> to find out more about the open-source project. To install Istio on your Kubernetes cluster in {{site.data.keyword.containerlong_notm}} and get started with a sample app, see [Tutorial: Managing microservices with Istio](cs_tutorials_istio.html#istio_tutorial).</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms like Kubernetes. Check out the blog post about <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">how IBM co-founded and launched Istio<img src="../icons/launch-glyph.svg" alt="External link icon"></a> to find out more about the open-source project. To install Istio on your Kubernetes cluster in {{site.data.keyword.containerlong_notm}} and get started with a sample app, see [Tutorial: Managing microservices with Istio](/docs/containers/cs_tutorials_istio.html#istio_tutorial).</td>
 </tr>
 </tbody>
 </table>
@@ -83,7 +83,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudaccesstrailfull}}</td>
-<td>Monitor the administrative activity made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) documentation. For more information about the types of events that you can track, see [Activity Tracker events](cs_at_events.html).</td>
+<td>Monitor the administrative activity made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers/cs_at_events.html).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
@@ -122,7 +122,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Weave Scope</td>
-<td>Weave Scope provides a visual diagram of your resources within a Kubernetes cluster, including services, pods, containers, processes, nodes, and more. Weave Scope provides interactive metrics for CPU and memory and also provides tools to tail and exec into a container.<p>For more information, see [Visualizing Kubernetes cluster resources with Weave Scope and {{site.data.keyword.containerlong_notm}}](cs_integrations.html#weavescope).</p></li></ol>
+<td>Weave Scope provides a visual diagram of your resources within a Kubernetes cluster, including services, pods, containers, processes, nodes, and more. Weave Scope provides interactive metrics for CPU and memory and also provides tools to tail and exec into a container.<p>For more information, see [Visualizing Kubernetes cluster resources with Weave Scope and {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_integrations.html#weavescope).</p></li></ol>
 </td>
 </tr>
 </tbody>
@@ -149,7 +149,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 <tbody>
   <tr id="appid">
     <td>{{site.data.keyword.appid_full}}</td>
-    <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid/index.html#gettingstarted) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](cs_annotations.html#appid-auth).</td>
+    <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid/index.html#gettingstarted) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers/cs_annotations.html#appid-auth).</td>
   </tr>
 <tr>
 <td>Aqua Security</td>
@@ -232,7 +232,7 @@ You can bind only services that support service keys. To find a list with servic
 
 Before you begin:
 - Ensure you have the following roles:
-    - [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM service role](cs_users.html#platform) for the cluster.
+    - [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the cluster.
     - [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) for the space that you want to use
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
@@ -276,7 +276,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      ```
      {: pre}
 
-4.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](cs_cli_reference.html#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
+4.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](/docs/containers/cs_cli_reference.html#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
     ```
     ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
     ```
@@ -348,7 +348,7 @@ The credentials of a service instance are base64 encoded and stored inside your 
 - [Mount the secret as a volume to your pod](#mount_secret)
 - [Reference the secret in environment variables](#reference_secret)
 <br>
-Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect) in your cluster to encrypt new and existing secrets, such as the secret that stores the credentials of your {{site.data.keyword.Bluemix_notm}} service instances.
+Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](/docs/containers/cs_encrypt.html#keyprotect) in your cluster to encrypt new and existing secrets, such as the secret that stores the credentials of your {{site.data.keyword.Bluemix_notm}} service instances.
 {: tip}
 
 Before your begin:
@@ -645,7 +645,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
 
-2. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following `.yaml` file from the [{{site.data.keyword.Bluemix_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml). **Note**: To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](cs_users.html#access_policies).
+2. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following `.yaml` file from the [{{site.data.keyword.Bluemix_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml). **Note**: To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](/docs/containers/cs_users.html#access_policies).
     ```
     kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml
     ```
@@ -717,7 +717,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 ### Related Helm links
 {: #helm_links}
 
-* To use the strongSwan Helm chart, see [Setting up VPN connectivity with the strongSwan IPSec VPN service Helm chart](cs_vpn.html#vpn-setup).
+* To use the strongSwan Helm chart, see [Setting up VPN connectivity with the strongSwan IPSec VPN service Helm chart](/docs/containers/cs_vpn.html#vpn-setup).
 * View the available Helm charts that you can use with {{site.data.keyword.Bluemix_notm}} in the [Helm Charts Catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts) in the console.
 * Learn more about the Helm commands that are used to set up and manage Helm charts in the <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
 * Learn more about how you can [increase deployment velocity with Kubernetes Helm Charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
@@ -731,7 +731,7 @@ Weave Scope provides a visual diagram of your resources within a Kubernetes clus
 Before you begin:
 
 -   Remember not to expose your cluster information on the public internet. Complete these steps to deploy Weave Scope securely and access it from a web browser locally.
--   If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui). Weave Scope can be CPU intensive, especially the app. Run Weave Scope with larger standard clusters, not free clusters.
+-   If you do not have one already, [create a standard cluster](/docs/containers/cs_clusters.html#clusters_ui). Weave Scope can be CPU intensive, especially the app. Run Weave Scope with larger standard clusters, not free clusters.
 -   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 

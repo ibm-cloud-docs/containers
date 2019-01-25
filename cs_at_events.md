@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -145,7 +145,7 @@ Check out the following list of the cluster management events that are sent to {
 Check out the following table for a list of the Kubernetes API server audit events that are sent to {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
-Before you begin: Be sure that your cluster is configured to forward [Kubernetes API audit events](cs_health.html#api_forward).
+Before you begin: Be sure that your cluster is configured to forward [Kubernetes API audit events](/docs/containers/cs_health.html#api_forward).
 
 <table>
   <tr>

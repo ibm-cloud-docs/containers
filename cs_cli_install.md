@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -44,7 +44,7 @@ This task includes the information for installing these CLIs and plug-ins:
 <br>
 To install the CLIs:
 
-1.  As a prerequisite for the {{site.data.keyword.containerlong_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](../cli/index.html#overview). The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
+1.  As a prerequisite for the {{site.data.keyword.containerlong_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli/index.html#overview). The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
 
     Plan to use the CLI a lot? Try [Enabling shell autocompletion for {{site.data.keyword.Bluemix_notm}} CLI (Linux/MacOS only)](/docs/cli/reference/ibmcloud/enable_cli_autocompletion.html#enabling-shell-autocompletion-for-ibm-cloud-cli-linux-macos-only-).
     {: tip}
@@ -133,12 +133,12 @@ To install the CLIs:
 
     The plug-in is displayed in the results as container-registry.
 
-Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](cs_clusters.html#clusters_cli).
+Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_clusters.html#clusters_cli).
 
 For reference information about these CLIs, see the documentation for those tools.
 
--   [`ibmcloud` commands](../cli/reference/ibmcloud/bx_cli.html#ibmcloud_cli)
--   [`ibmcloud ks` commands](cs_cli_reference.html#cs_cli_reference)
+-   [`ibmcloud` commands](/docs/cli/reference/ibmcloud/bx_cli.html#ibmcloud_cli)
+-   [`ibmcloud ks` commands](/docs/containers/cs_cli_reference.html#cs_cli_reference)
 -   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [`ibmcloud cr` commands](/docs/container-registry-cli-plugin/container-registry-cli.html)
 
@@ -185,11 +185,11 @@ All `kubectl` commands that are available in Kubernetes 1.10.12 are supported fo
 
 Before you can run `kubectl` commands:
 * [Install the required CLIs](#cs_cli_install).
-* [Create a cluster](cs_clusters.html#clusters_cli).
+* [Create a cluster](/docs/containers/cs_clusters.html#clusters_cli).
 
 To use `kubectl` commands:
 
-1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
+1.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](/docs/containers/cs_regions.html#bluemix_regions).
 
     ```
     ibmcloud login
@@ -201,7 +201,7 @@ To use `kubectl` commands:
 
 2.  Select an {{site.data.keyword.Bluemix_notm}} account. If you are assigned to multiple {{site.data.keyword.Bluemix_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.Bluemix_notm}} space. Therefore, you are not required to select a space.
 
-3.  To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks clusters`. **Note**: You must have [**Viewer** access](cs_users.html#platform) to the resource group.
+3.  To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks clusters`. **Note**: You must have [**Viewer** access](/docs/containers/cs_users.html#platform) to the resource group.
     ```
     ibmcloud target -g <resource_group_name>
     ```
@@ -296,9 +296,9 @@ This task includes the information for updating these CLIs.
 <br>
 To update the CLIs:
 
-1.  Update the {{site.data.keyword.Bluemix_notm}} CLI. Download the [latest version ![External link icon](../icons/launch-glyph.svg "External link icon")](../cli/index.html#overview) and run the installer.
+1.  Update the {{site.data.keyword.Bluemix_notm}} CLI. Download the [latest version ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli/index.html#overview) and run the installer.
 
-2. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
+2. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](/docs/containers/cs_regions.html#bluemix_regions).
 
     ```
     ibmcloud login
@@ -443,7 +443,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    To specify an {{site.data.keyword.Bluemix_notm}} region, [review the region abbreviations as they are used in the API endpoints](cs_regions.html#bluemix_regions).
+    To specify an {{site.data.keyword.Bluemix_notm}} region, [review the region abbreviations as they are used in the API endpoints](/docs/containers/cs_regions.html#bluemix_regions).
 
     <table summary-"Input parameters to retrieve tokens">
     <caption>Input parameters to get tokens</caption>
@@ -567,7 +567,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    To specify an {{site.data.keyword.Bluemix_notm}} region, [review the region abbreviations as they are used in the API endpoints](cs_regions.html#bluemix_regions).
+    To specify an {{site.data.keyword.Bluemix_notm}} region, [review the region abbreviations as they are used in the API endpoints](/docs/containers/cs_regions.html#bluemix_regions).
 
     <table summary-"Input parameters to retrieve tokens">
     <caption>Input parameters to get tokens</caption>

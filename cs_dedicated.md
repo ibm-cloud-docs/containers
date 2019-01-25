@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -25,12 +25,12 @@ lastupdated: "2019-01-22"
 If you have an {{site.data.keyword.Bluemix_dedicated}} account, you can deploy Kubernetes clusters in a dedicated cloud environment (`https://<my-dedicated-cloud-instance>.bluemix.net`) and connect with the preselected {{site.data.keyword.Bluemix_notm}} services that are also running there.
 {:shortdesc}
 
-If you do not have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can [get started with {{site.data.keyword.containerlong_notm}}](container_index.html) in a public {{site.data.keyword.Bluemix_notm}} account.
+If you do not have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can [get started with {{site.data.keyword.containerlong_notm}}](/docs/containers/container_index.html) in a public {{site.data.keyword.Bluemix_notm}} account.
 
 ## About the Dedicated cloud environment
 {: #dedicated_environment}
 
-With an {{site.data.keyword.Bluemix_dedicated_notm}} account, available physical resources are dedicated to your cluster only and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. You might choose to set up an {{site.data.keyword.Bluemix_dedicated_notm}} environment when you want isolation for your cluster and you require isolation for the other {{site.data.keyword.Bluemix_notm}} services that you use. If you do not have a Dedicated account, you can [create clusters with dedicated hardware in {{site.data.keyword.Bluemix_notm}} public](cs_clusters.html#clusters_ui).
+With an {{site.data.keyword.Bluemix_dedicated_notm}} account, available physical resources are dedicated to your cluster only and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. You might choose to set up an {{site.data.keyword.Bluemix_dedicated_notm}} environment when you want isolation for your cluster and you require isolation for the other {{site.data.keyword.Bluemix_notm}} services that you use. If you do not have a Dedicated account, you can [create clusters with dedicated hardware in {{site.data.keyword.Bluemix_notm}} public](/docs/containers/cs_clusters.html#clusters_ui).
 
 With {{site.data.keyword.Bluemix_dedicated_notm}}, you can create clusters from the catalog in the Dedicated console or by using the {{site.data.keyword.containerlong_notm}} CLI. To use the Dedicated console, you log in to both your Dedicated and public accounts simultaneously by using your IBMid. You can use the dual login to access your public clusters by using your Dedicated console. To use the CLI, you log in by using your Dedicated endpoint (`api.<my-dedicated-cloud-instance>.bluemix.net.`). You then target the {{site.data.keyword.containerlong_notm}} API endpoint of the public region that is associated with the Dedicated environment.
 
@@ -66,7 +66,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Load balancer and Ingress networking</td>
  <td>During the provisioning of standard clusters, the following actions occur automatically.<ul><li>One portable public and one portable private subnet are bound to your cluster and assigned to your IBM Cloud infrastructure (SoftLayer) account. More subnets can be requested through your IBM Cloud infrastructure (SoftLayer) account.</li></li><li>One portable public IP address is used for a highly available Ingress application load balancer (ALB) and a unique public route is assigned in the format <code>&lt;cluster_name&gt;. containers.appdomain.cloud</code>. You can use this route to expose multiple apps to the public. One portable private IP address is used for a private ALB.</li><li>Four portable public and four portable private IP addresses are assigned to the cluster that can be used for load balancer services.</ul></td>
- <td>When you create your Dedicated account, you make a connectivity decision on how you want to expose and access your cluster services. To use your own enterprise IP ranges (user-manged IPs), you must provide them when you [set up an {{site.data.keyword.Bluemix_dedicated_notm}} environment](/docs/dedicated/index.html#setupdedicated). <ul><li>By default, no portable public subnets are bound to clusters that you create in your Dedicated account. Instead, you have the flexibility to choose the connectivity model which best suits your enterprise.</li><li>After you create the cluster, you choose the type of subnets you want bind to and use with your cluster for either load balancer or Ingress connectivity.<ul><li>For public or private portable subnets, you can [add subnets to clusters](cs_subnets.html#subnets)</li><li>For user-managed IP addresses that you provided to IBM at Dedicated onboarding, you can [add user-managed subnets to clusters](#dedicated_byoip_subnets).</li></ul></li><li>After you bind a subnet to your cluster, the Ingress ALB is created. A public Ingress route is created only if you use a portable public subnet.</li></ul></td>
+ <td>When you create your Dedicated account, you make a connectivity decision on how you want to expose and access your cluster services. To use your own enterprise IP ranges (user-manged IPs), you must provide them when you [set up an {{site.data.keyword.Bluemix_dedicated_notm}} environment](/docs/dedicated/index.html#setupdedicated). <ul><li>By default, no portable public subnets are bound to clusters that you create in your Dedicated account. Instead, you have the flexibility to choose the connectivity model which best suits your enterprise.</li><li>After you create the cluster, you choose the type of subnets you want bind to and use with your cluster for either load balancer or Ingress connectivity.<ul><li>For public or private portable subnets, you can [add subnets to clusters](/docs/containers/cs_subnets.html#subnets)</li><li>For user-managed IP addresses that you provided to IBM at Dedicated onboarding, you can [add user-managed subnets to clusters](#dedicated_byoip_subnets).</li></ul></li><li>After you bind a subnet to your cluster, the Ingress ALB is created. A public Ingress route is created only if you use a portable public subnet.</li></ul></td>
  </tr>
  <tr>
  <td>NodePort networking</td>
@@ -75,8 +75,8 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  </tr>
  <tr>
  <td>Persistent storage</td>
- <td>Use [dynamic provisioning](cs_storage_basics.html#dynamic_provisioning) or [static provisioning](cs_storage_basics.html#static_provisioning) of volumes.</td>
- <td>Use [dynamic provisioning](cs_storage_basics.html#dynamic_provisioning) of volumes. [Open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
+ <td>Use [dynamic provisioning](/docs/containers/cs_storage_basics.html#dynamic_provisioning) or [static provisioning](/docs/containers/cs_storage_basics.html#static_provisioning) of volumes.</td>
+ <td>Use [dynamic provisioning](/docs/containers/cs_storage_basics.html#dynamic_provisioning) of volumes. [Open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
  </tr>
  <tr>
  <td>Image registry URL in {{site.data.keyword.registryshort_notm}}</td>
@@ -85,13 +85,13 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  </tr>
  <tr>
  <td>Accessing the registry</td>
- <td>See the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](cs_images.html).</td>
- <td><ul><li>For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](cs_images.html).</li><li>For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.</li></ul></td>
+ <td>See the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_images.html).</td>
+ <td><ul><li>For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_images.html).</li><li>For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](/docs/containers/cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.</li></ul></td>
  </tr>
  <tr>
  <td>Multizone clusters</td>
- <td>Create [multizone clusters](cs_clusters_planning.html#multizone) by adding more zones to your worker pools.</td>
- <td>Create [single zone clusters](cs_clusters_planning.html#single_zone). The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](cs_clusters.html#resize_pool) or by [adding a new worker pool](cs_clusters.html#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
+ <td>Create [multizone clusters](/docs/containers/cs_clusters_planning.html#multizone) by adding more zones to your worker pools.</td>
+ <td>Create [single zone clusters](/docs/containers/cs_clusters_planning.html#single_zone). The available zone was pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment was set up. By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers/cs_clusters.html#resize_pool) or by [adding a new worker pool](/docs/containers/cs_clusters.html#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.</td>
  </tr>
 </tbody></table>
 {: caption="Feature differences between {{site.data.keyword.Bluemix_notm}} public and {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
@@ -123,7 +123,7 @@ Each {{site.data.keyword.Bluemix_dedicated_notm}} environment has a public, clie
 
 Before you begin:
   * [Set up an {{site.data.keyword.Bluemix_dedicated_notm}} environment](/docs/dedicated/index.html#setupdedicated).
-  * If your local system or your corporate network controls public internet endpoints by using proxies or firewalls, you must [open required ports and IP addresses in your firewall](cs_firewall.html#firewall).
+  * If your local system or your corporate network controls public internet endpoints by using proxies or firewalls, you must [open required ports and IP addresses in your firewall](/docs/containers/cs_firewall.html#firewall).
   * [Download the Cloud Foundry CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/cloudfoundry/cli/releases).
 
 To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
@@ -277,7 +277,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
         Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
         {:tip}
 
-    5. Select a **Machine type**. The machine type defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](cs_cli_reference.html#cs_machine_types). After you create your cluster, you can add different machine types by adding a worker node to the cluster.
+    5. Select a **Machine type**. The machine type defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers/cs_cli_reference.html#cs_machine_types). After you create your cluster, you can add different machine types by adding a worker node to the cluster.
 
     6. Choose the **Number of worker nodes** that you need. Select `3` to ensure high availability of your cluster.
 
@@ -285,7 +285,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
         If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
         {: note}
 
-    8. By default, **Encrypt local disk** is selected. If you choose to clear the check box, then the host's container runtime data is not encrypted. [Learn more about the encryption](cs_secure.html#encrypted_disk).
+    8. By default, **Encrypt local disk** is selected. If you choose to clear the check box, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers/cs_secure.html#encrypted_disk).
 
 6. Click **Create cluster**. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deployment is done, you can see that your cluster is ready in the **Overview** tab.
     Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
@@ -294,7 +294,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 ### Creating clusters with the CLI
 {: #dedicated_creating_cli}
 
-1.  Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](cs_cli_install.html#cs_cli_install).
+1.  Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers/cs_cli_install.html#cs_cli_install).
 2.  Log in to the endpoint for your {{site.data.keyword.Bluemix_dedicated_notm}} instance. Enter your {{site.data.keyword.Bluemix_notm}} credentials and select your account when prompted.
 
     ```
@@ -332,7 +332,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>Enter a machine type. You can deploy your worker nodes as virtual machines on dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](cs_cli_reference.html#cs_machine_types).</td>
+    <td>Enter a machine type. You can deploy your worker nodes as virtual machines on dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers/cs_cli_reference.html#cs_machine_types).</td>
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -358,11 +358,11 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     </tr>
     <tr>
     <td><code>--disable-disk-encrypt</code></td>
-    <td>Worker nodes feature [disk encryption](cs_secure.html#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
+    <td>Worker nodes feature [disk encryption](/docs/containers/cs_secure.html#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
     </tr>
     <tr>
     <td><code>--trusted</code></td>
-    <td>Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td>
+    <td>Enable [Trusted Compute](/docs/containers/cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td>
     </tr>
     </tbody></table>
 
@@ -464,19 +464,19 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 ### Adding worker nodes
 {: #add_workers}
 
-With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](cs_clusters_planning.html#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](cs_clusters.html#resize_pool) or by [adding a new worker pool](cs_clusters.html#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
+With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers/cs_clusters_planning.html#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers/cs_clusters.html#resize_pool) or by [adding a new worker pool](/docs/containers/cs_clusters.html#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
 
 ### Using private and public image registries
 {: #dedicated_images}
 
 Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.
 
-For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](cs_images.html). For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.
+For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_images.html). For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](/docs/containers/cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.
 
 ### Adding subnets to clusters
 {: #dedicated_cluster_subnet}
 
-Change the pool of available portable public IP addresses by adding subnets to your cluster. For more information, see [Adding subnets to clusters](cs_subnets.html#subnets). Review the following differences for adding subnets to Dedicated clusters.
+Change the pool of available portable public IP addresses by adding subnets to your cluster. For more information, see [Adding subnets to clusters](/docs/containers/cs_subnets.html#subnets). Review the following differences for adding subnets to Dedicated clusters.
 
 #### Adding more user-managed subnets and IP addresses to your Kubernetes clusters
 {: #dedicated_byoip_subnets}
@@ -519,20 +519,20 @@ Before you begin: Configure the routing of network traffic into and out of your 
 4. **Important**: If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 5. To configure on-premises and internal account connectivity, choose between these options:
-  - If you used a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises and internal account connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, load balancer, or Ingress services](cs_network_planning.html#planning).
-  - If you did not use a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, load balancer, or Ingress services](cs_network_planning.html#planning). However, you must use an IBM Cloud infrastructure (SoftLayer) portable private subnet to configure internal account connectivity between your cluster and other Cloud Foundry-based services. You can create a portable private subnet with the [`ibmcloud ks cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) command. For this scenario, your cluster has both a user-managed subnet for on-premises connectivity and an IBM Cloud infrastructure (SoftLayer) portable private subnet for internal account connectivity.
+  - If you used a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises and internal account connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, load balancer, or Ingress services](/docs/containers/cs_network_planning.html#planning).
+  - If you did not use a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, load balancer, or Ingress services](/docs/containers/cs_network_planning.html#planning). However, you must use an IBM Cloud infrastructure (SoftLayer) portable private subnet to configure internal account connectivity between your cluster and other Cloud Foundry-based services. You can create a portable private subnet with the [`ibmcloud ks cluster-subnet-add`](/docs/containers/cs_cli_reference.html#cs_cluster_subnet_add) command. For this scenario, your cluster has both a user-managed subnet for on-premises connectivity and an IBM Cloud infrastructure (SoftLayer) portable private subnet for internal account connectivity.
 
 ### Other cluster configurations
 {: #dedicated_other}
 
 Review the following options for other cluster configurations:
-  * [Managing cluster access](cs_users.html#access_policies)
-  * [Updating the Kubernetes master](cs_cluster_update.html#master)
-  * [Updating worker nodes](cs_cluster_update.html#worker_node)
-  * [Configuring cluster logging](cs_health.html#logging). Log enablement is not supported from the Dedicated endpoint. You must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space to enable log forwarding.
-  * [Configuring cluster monitoring](cs_health.html#view_metrics). An `ibm-monitoring` cluster exists within each {{site.data.keyword.Bluemix_dedicated_notm}} account. This cluster continuously monitors the health of the {{site.data.keyword.containerlong_notm}} in the Dedicated environment, checking the stability and connectivity of the environment. Do not remove this cluster from the environment.
-  * [Visualizing Kubernetes cluster resources](cs_integrations.html#weavescope)
-  * [Removing clusters](cs_clusters.html#remove)
+  * [Managing cluster access](/docs/containers/cs_users.html#access_policies)
+  * [Updating the Kubernetes master](/docs/containers/cs_cluster_update.html#master)
+  * [Updating worker nodes](/docs/containers/cs_cluster_update.html#worker_node)
+  * [Configuring cluster logging](/docs/containers/cs_health.html#logging). Log enablement is not supported from the Dedicated endpoint. You must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space to enable log forwarding.
+  * [Configuring cluster monitoring](/docs/containers/cs_health.html#view_metrics). An `ibm-monitoring` cluster exists within each {{site.data.keyword.Bluemix_dedicated_notm}} account. This cluster continuously monitors the health of the {{site.data.keyword.containerlong_notm}} in the Dedicated environment, checking the stability and connectivity of the environment. Do not remove this cluster from the environment.
+  * [Visualizing Kubernetes cluster resources](/docs/containers/cs_integrations.html#weavescope)
+  * [Removing clusters](/docs/containers/cs_clusters.html#remove)
 
 <br />
 
@@ -543,7 +543,7 @@ Review the following options for other cluster configurations:
 You can use Kubernetes techniques to deploy apps in {{site.data.keyword.Bluemix_dedicated_notm}} clusters and to ensure that your apps are always up and running.
 {:shortdesc}
 
-To deploy apps in clusters, you can follow the instructions for [deploying apps in {{site.data.keyword.Bluemix_notm}} public clusters](cs_app.html#app). Review the following differences for {{site.data.keyword.Bluemix_dedicated_notm}} clusters.
+To deploy apps in clusters, you can follow the instructions for [deploying apps in {{site.data.keyword.Bluemix_notm}} public clusters](/docs/containers/cs_app.html#app). Review the following differences for {{site.data.keyword.Bluemix_dedicated_notm}} clusters.
 
 Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.
 
@@ -555,16 +555,16 @@ For {{site.data.keyword.Bluemix_dedicated_notm}} environments, public primary IP
 #### Configuring access to an app by using the load balancer service type
 {: #dedicated_apps_public_load_balancer}
 
-If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps with load balancers](cs_loadbalancer.html).
+If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps with load balancers](/docs/containers/cs_loadbalancer.html).
 
 #### Configuring public access to an app by using Ingress
 {: #dedicated_apps_public_ingress}
 
-If you want to use public IP addresses for the Ingress ALB, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps to the public](cs_ingress.html#ingress_expose_public).
+If you want to use public IP addresses for the Ingress ALB, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps to the public](/docs/containers/cs_ingress.html#ingress_expose_public).
 
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see Persistent data storage options for high availability](cs_storage_planning.html#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).
+To review options for creating persistent storage, see Persistent data storage options for high availability](/docs/containers/cs_storage_planning.html#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-If you choose to provision [file storage](cs_storage_file.html#predefined_storageclass), choose non-retain storage classes. Choosing non-retain storage classes helps prevent orphaned persistent storage instances in IBM Cloud infrastructure (SoftLayer) that you can remove only by opening a support case.
+If you choose to provision [file storage](/docs/containers/cs_storage_file.html#predefined_storageclass), choose non-retain storage classes. Choosing non-retain storage classes helps prevent orphaned persistent storage instances in IBM Cloud infrastructure (SoftLayer) that you can remove only by opening a support case.

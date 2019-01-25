@@ -176,9 +176,9 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 
-2. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cos_full_notm}} plug-in.
+2. Follow the [instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cos_full_notm}} plug-in.
 
-    If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm).
+    If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](/docs/containers/cs_integrations.html#helm).
     {: important}
 
 3. Add the {{site.data.keyword.Bluemix_notm}} Helm repo to your cluster.
@@ -475,7 +475,7 @@ Removing the plug-in does not remove existing PVCs, PVs, or data. When you remov
 
 Before you begin:
 
-- [Target your CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+- [Target your CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 - Make sure that you do not have any PVCs or PVs in your cluster that use {{site.data.keyword.cos_full_notm}}. To list all pods that mount a specific PVC, run `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`.
 
 To remove the plug-in:
@@ -608,7 +608,7 @@ To remove the plug-in:
    </tr>
    <tr>
    <td><code>ibm.io/curl-debug</code></td>
-   <td>Enable the logging of requests that are sent to the {{site.data.keyword.cos_full_notm}} service instance. If enabled, logs are sent to `syslog` and you can [forward the logs to an external logging server](cs_health.html#logging). By default, all storage classes are set to <strong>false</strong> to disable this logging feature. </td>
+   <td>Enable the logging of requests that are sent to the {{site.data.keyword.cos_full_notm}} service instance. If enabled, logs are sent to `syslog` and you can [forward the logs to an external logging server](/docs/containers/cs_health.html#logging). By default, all storage classes are set to <strong>false</strong> to disable this logging feature. </td>
    </tr>
    <tr>
    <td><code>ibm.io/debug-level</code></td>
@@ -628,7 +628,7 @@ To remove the plug-in:
    </tr>
    <tr>
    <td><code>ibm.io/object-store-endpoint</code></td>
-   <td>The API endpoint to use to access the bucket in your {{site.data.keyword.cos_full_notm}} service instance. The endpoint is automatically set based on the region of your cluster. **Note**: If you want to access an existing bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](cs_storage_basics.html#customized_storageclass) and use the API endpoint for your bucket.</td>
+   <td>The API endpoint to use to access the bucket in your {{site.data.keyword.cos_full_notm}} service instance. The endpoint is automatically set based on the region of your cluster. **Note**: If you want to access an existing bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](/docs/containers/cs_storage_basics.html#customized_storageclass) and use the API endpoint for your bucket.</td>
    </tr>
    <tr>
    <td><code>ibm.io/object-store-storage-class</code></td>
@@ -653,7 +653,7 @@ To remove the plug-in:
    </tbody>
    </table>
 
-   For more information about each storage class, see the [storage class reference](#storageclass_reference). If you want to change any of the pre-set values, create your own [customized storage class](cs_storage_basics.html#customized_storageclass).
+   For more information about each storage class, see the [storage class reference](#storageclass_reference). If you want to change any of the pre-set values, create your own [customized storage class](/docs/containers/cs_storage_basics.html#customized_storageclass).
    {: tip}
 
 5. Decide on a name for your bucket. The name of a bucket must be unique in {{site.data.keyword.cos_full_notm}}. You can also choose to automatically create a name for your bucket by the {{site.data.keyword.cos_full_notm}} plug-in. To organize data in a bucket, you can create subdirectories.
@@ -672,8 +672,8 @@ Create a persistent volume claim (PVC) to provision {{site.data.keyword.cos_full
 {: shortdesc}
 
 Depending on the settings that you choose in your PVC, you can provision {{site.data.keyword.cos_full_notm}} in the following ways:
-- [Dynamic provisioning](cs_storage_basics.html#dynamic_provisioning): When you create the PVC, the matching persistent volume (PV) and the bucket in your {{site.data.keyword.cos_full_notm}} service instance are automatically created.
-- [Static provisioning](cs_storage_basics.html#static_provisioning): You can reference an existing bucket in your {{site.data.keyword.cos_full_notm}} service instance in your PVC. When you create the PVC, only the matching PV is automatically created and linked to your existing bucket in {{site.data.keyword.cos_full_notm}}.
+- [Dynamic provisioning](/docs/containers/cs_storage_basics.html#dynamic_provisioning): When you create the PVC, the matching persistent volume (PV) and the bucket in your {{site.data.keyword.cos_full_notm}} service instance are automatically created.
+- [Static provisioning](/docs/containers/cs_storage_basics.html#static_provisioning): You can reference an existing bucket in your {{site.data.keyword.cos_full_notm}} service instance in your PVC. When you create the PVC, only the matching PV is automatically created and linked to your existing bucket in {{site.data.keyword.cos_full_notm}}.
 
 Before you begin:
 - [Create and prepare your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service).
@@ -721,7 +721,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    </tr>
    <tr>
    <td><code>volume.beta.kubernetes.io/storage-class</code></td>
-   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the storage class that you want to use for your new bucket. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the storage class that you used to create your existing bucket. </br></br>If you manually created the bucket in your {{site.data.keyword.cos_full_notm}} service instance or you cannot remember the storage class that you used, find your service instance in the {{site.data.keyword.Bluemix}} dashboard and review the <strong>Class</strong> and <strong>Location</strong> of your existing bucket. Then, use the appropriate [storage class](#storageclass_reference). <p class="note">The {{site.data.keyword.cos_full_notm}} API endpoint that is set in your storage class is based on the region that your cluster is in. If you want to access a bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](cs_storage_basics.html#customized_storageclass) and use the appropriate API endpoint for your bucket.</p></li></ul>  </td>
+   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the storage class that you want to use for your new bucket. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the storage class that you used to create your existing bucket. </br></br>If you manually created the bucket in your {{site.data.keyword.cos_full_notm}} service instance or you cannot remember the storage class that you used, find your service instance in the {{site.data.keyword.Bluemix}} dashboard and review the <strong>Class</strong> and <strong>Location</strong> of your existing bucket. Then, use the appropriate [storage class](#storageclass_reference). <p class="note">The {{site.data.keyword.cos_full_notm}} API endpoint that is set in your storage class is based on the region that your cluster is in. If you want to access a bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](/docs/containers/cs_storage_basics.html#customized_storageclass) and use the appropriate API endpoint for your bucket.</p></li></ul>  </td>
    </tr>
    <tr>
    <td><code>ibm.io/auto-create-bucket</code></td>
@@ -768,7 +768,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    ```
    {: screen}
 
-4. Optional: If you plan to access your data with a non-root user, or added files to an existing {{site.data.keyword.cos_full_notm}} bucket by using the console or the API directly, make sure that the [files have the correct permission](cs_troubleshoot_storage.html#cos_nonroot_access) assigned so that your app can successfully read and update the files as needed.
+4. Optional: If you plan to access your data with a non-root user, or added files to an existing {{site.data.keyword.cos_full_notm}} bucket by using the console or the API directly, make sure that the [files have the correct permission](/docs/containers/cs_troubleshoot_storage.html#cos_nonroot_access) assigned so that your app can successfully read and update the files as needed.
 
 4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 

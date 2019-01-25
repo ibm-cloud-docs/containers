@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -86,7 +86,7 @@ To allow access for a specific cluster:
    ```
    {: pre}
 
-2. If the cluster is in a resource group other than `default`, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks clusters`. **Note**: You must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
+2. If the cluster is in a resource group other than `default`, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks clusters`. **Note**: You must have at least the [**Viewer** role](/docs/containers/cs_users.html#platform) for the resource group.
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -370,7 +370,7 @@ If you have a firewall on the private network, allow communication between worke
 
 2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges so that you can create worker nodes in your cluster.
     1. Allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. See [Backend (private) Network](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network).
-    2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges for all of the [zones](cs_regions.html#zones) that you are using. Note that you must add IPs for the `dal01` and `wdc04` zones. See [Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated/ips.html#service-network-on-backend-private-network-).
+    2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges for all of the [zones](/docs/containers/cs_regions.html#zones) that you are using. Note that you must add IPs for the `dal01` and `wdc04` zones. See [Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated/ips.html#service-network-on-backend-private-network-).
 
 3. Open the following ports:
     - Allow outbound TCP and UDP connections from the workers to ports 80 and 443 to allow worker node updates and reloads.

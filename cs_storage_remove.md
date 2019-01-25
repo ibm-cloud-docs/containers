@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -34,7 +34,7 @@ Understanding your delete options:
 It depends. When you delete a cluster, the PVC and PV are deleted. However, you choose whether to remove the associated storage instance in IBM Cloud infrastructure (SoftLayer). If you chose not to remove it, then the storage instance still exists. Also, if you deleted your cluster in an unhealthy state, the storage might still exist even if you chose to remove it. Follow the instructions, particularly the step to [delete your storage instance](#sl_delete_storage) in IBM Cloud infrastructure (SoftLayer).
 
 **Can I delete the PVC to remove all my storage?**</br>
-Sometimes. If you [create the persistent storage dynamically](cs_storage_basics.html#dynamic_provisioning) and select a storage class without `retain` in its name, then when you delete the PVC, the PV and the IBM Cloud infrastructure (SoftLayer) storage instance are also deleted.
+Sometimes. If you [create the persistent storage dynamically](/docs/containers/cs_storage_basics.html#dynamic_provisioning) and select a storage class without `retain` in its name, then when you delete the PVC, the PV and the IBM Cloud infrastructure (SoftLayer) storage instance are also deleted.
 
 In all other cases, follow the instructions to check the status of your PVC, PV, and the physical storage device and delete them separately if necessary.
 
@@ -42,7 +42,7 @@ In all other cases, follow the instructions to check the status of your PVC, PV,
 It depends on what you delete and the billing type. If you delete the PVC and PV, but not the instance in your IBM Cloud infrastructure (SoftLayer) account, that instance still exists and you are charged for it. You must delete everything to avoid charges. Further, when you specify the `billingType` in the PVC, you can choose `hourly` or `monthly`. If you chose `monthly`, your instance is billed monthly. When you delete the instance, you are charged for the remainder of the month.
 
 
-<p class="important">When you clean up persistent storage, you delete all the data that is stored in it. If you need a copy of the data, make a backup for [file storage](cs_storage_file.html#backup_restore) or [block storage](cs_storage_block.html#backup_restore).</br>
+<p class="important">When you clean up persistent storage, you delete all the data that is stored in it. If you need a copy of the data, make a backup for [file storage](/docs/containers/cs_storage_file.html#backup_restore) or [block storage](/docs/containers/cs_storage_block.html#backup_restore).</br>
 </br>If you use an {{site.data.keyword.Bluemix_dedicated}} account, you must request volume deletion by [opening a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).</p>
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).

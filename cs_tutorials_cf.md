@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -41,12 +41,12 @@ This tutorial is intended for Cloud Foundry app developers.
 
 ## Prerequisites
 
-- [Create a private image registry in {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
-- [Create a cluster](cs_clusters.html#clusters_ui).
-- [Target your CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+- [Create a private image registry in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry/index.html).
+- [Create a cluster](/docs/containers/cs_clusters.html#clusters_ui).
+- [Target your CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 - Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
-    - [Any platform role](cs_users.html#platform)
-- [Learn about Docker and Kubernetes terminology](cs_tech.html).
+    - [Any platform role](/docs/containers/cs_users.html#platform)
+- [Learn about Docker and Kubernetes terminology](/docs/containers/cs_tech.html).
 
 
 <br />
@@ -271,7 +271,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
     <img src="images/python_flask.png" alt="A screen capture of the deployed boilerplate Python Flask app." />
 
-5.  [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
+5.  [Launch the Kubernetes dashboard](/docs/containers/cs_app.html#cli_dashboard).
 
     If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}

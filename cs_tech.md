@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -247,5 +247,5 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     </tbody></table></dd>
 </dl>
 
-Want to see how {{site.data.keyword.containerlong_notm}} can be used with other products and services? Check out some of the [integrations](cs_integrations.html#integrations).
+Want to see how {{site.data.keyword.containerlong_notm}} can be used with other products and services? Check out some of the [integrations](/docs/containers/cs_integrations.html#integrations).
 {: tip}

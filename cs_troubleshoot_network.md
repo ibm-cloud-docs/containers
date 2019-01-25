@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -29,10 +29,10 @@ lastupdated: "2019-01-22"
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting cluster networking.
 {: shortdesc}
 
-Having trouble connecting to your app through Ingress? Try [debugging Ingress](cs_troubleshoot_debug_ingress.html).
+Having trouble connecting to your app through Ingress? Try [debugging Ingress](/docs/containers/cs_troubleshoot_debug_ingress.html).
 {: tip}
 
-While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](cs_troubleshoot.html#debug_utility) to run tests and gather pertinent networking, Ingress, and strongSwan information from your cluster.
+While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers/cs_troubleshoot.html#debug_utility) to run tests and gather pertinent networking, Ingress, and strongSwan information from your cluster.
 {: tip}
 
 ## Cannot connect to an app via a load balancer service
@@ -60,7 +60,7 @@ To troubleshoot your load balancer service:
 
     In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a machine type other than **free**.
 
-2. For version 2.0 load balancers: Ensure that you complete the [load balancer 2.0 prerequisites](cs_loadbalancer.html#ipvs_provision).
+2. For version 2.0 load balancers: Ensure that you complete the [load balancer 2.0 prerequisites](/docs/containers/cs_loadbalancer.html#ipvs_provision).
 
 3. Check the accuracy of the configuration file for your load balancer service.
     * Version 2.0 load balancers:
@@ -152,8 +152,8 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 
 In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a machine type other than **free**.
 
-* If your standard cluster is fully deployed and has at least 2 worker nodes per zone, but no **Ingress Subdomain** is available, see [Cannot get a subdomain for Ingress ALB](cs_troubleshoot_network.html#cs_subnet_limit).
-* For other issues, troubleshoot your Ingress setup by following the steps in [Debugging Ingress](cs_troubleshoot_debug_ingress.html).
+* If your standard cluster is fully deployed and has at least 2 worker nodes per zone, but no **Ingress Subdomain** is available, see [Cannot get a subdomain for Ingress ALB](/docs/containers/cs_troubleshoot_network.html#cs_subnet_limit).
+* For other issues, troubleshoot your Ingress setup by following the steps in [Debugging Ingress](/docs/containers/cs_troubleshoot_debug_ingress.html).
 
 <br />
 
@@ -222,9 +222,9 @@ To view how many subnets a VLAN has:
 2.  Click the **VLAN Number** of the VLAN that you used to create your cluster. Review the **Subnets** section to see whether 40 or more subnets exist.
 
 {: tsResolve}
-If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans). Then, [create a cluster](cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
+If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans). Then, [create a cluster](/docs/containers/cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
 
-If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](cs_cli_reference.html#cs_vlan_spanning_get).
+If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get).
 
 If you are not using all the subnets in the VLAN, you can reuse subnets in the cluster.
 1.  Check that the subnets that you want to use are available.
@@ -232,9 +232,9 @@ If you are not using all the subnets in the VLAN, you can reuse subnets in the c
     The infrastructure account that you are using might be shared across multiple {{site.data.keyword.Bluemix_notm}} accounts. If so, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
     {: note}
 
-2.  [Create a cluster](cs_cli_reference.html#cs_cluster_create) with the `--no-subnet` option so that the service does not try to create new subnets. Specify the zone and VLAN that has the subnets that are available for reuse.
+2.  [Create a cluster](/docs/containers/cs_cli_reference.html#cs_cluster_create) with the `--no-subnet` option so that the service does not try to create new subnets. Specify the zone and VLAN that has the subnets that are available for reuse.
 
-3.  Use the `ibmcloud ks cluster-subnet-add` [command](cs_cli_reference.html#cs_cluster_subnet_add) to add existing subnets to your cluster. For more information, see [Adding or reusing custom and existing subnets in Kubernetes clusters](cs_subnets.html#custom).
+3.  Use the `ibmcloud ks cluster-subnet-add` [command](/docs/containers/cs_cli_reference.html#cs_cluster_subnet_add) to add existing subnets to your cluster. For more information, see [Adding or reusing custom and existing subnets in Kubernetes clusters](/docs/containers/cs_subnets.html#custom).
 
 <br />
 
@@ -282,7 +282,7 @@ To prevent the connection from closing after 60 seconds of inactivity:
 
 2. To keep the connection alive, you can increase the value of the timeout or set up a heartbeat in your app.
 <dl><dt>Change the timeout</dt>
-<dd>Increase the value of the `proxy-read-timeout` in your ALB configuration. For example, to change the timeout from `60s` to a larger value like `300s`, add this [annotation](cs_annotations.html#connection) to your Ingress resource file: `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. The timeout is changed for all public ALBs in your cluster.</dd>
+<dd>Increase the value of the `proxy-read-timeout` in your ALB configuration. For example, to change the timeout from `60s` to a larger value like `300s`, add this [annotation](/docs/containers/cs_annotations.html#connection) to your Ingress resource file: `ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`. The timeout is changed for all public ALBs in your cluster.</dd>
 <dt>Set up a heartbeat</dt>
 <dd>If you don't want to change the ALB's default read timeout value, set up a heartbeat in your WebSocket app. When you set up a heartbeat protocol by using a framework like [WAMP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://wamp-proto.org/), the app's upstream server periodically sends a "ping" message on a timed interval and the client responds with a "pong" message. Set the heartbeat interval to 58 seconds or less so that the "ping/pong" traffic keeps the connection open before the 60-second timeout is enforced.</dd></dl>
 
@@ -293,21 +293,21 @@ To prevent the connection from closing after 60 seconds of inactivity:
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-You enabled source IP preservation for a [version 1.0 load balancer](cs_loadbalancer.html#node_affinity_tolerations) or [Ingress ALB](cs_ingress.html#preserve_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the backend service for your app.
+You enabled source IP preservation for a [version 1.0 load balancer](/docs/containers/cs_loadbalancer.html#node_affinity_tolerations) or [Ingress ALB](/docs/containers/cs_ingress.html#preserve_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the backend service for your app.
 
 {: tsCauses}
 When you enable source IP preservation for load balancer or Ingress ALB services, the source IP address of the client request is preserved. The service forwards traffic to app pods on the same worker node only to ensure that the request packet's IP address isn't changed. Typically, load balancer or Ingress ALB service pods are deployed to the same worker nodes that the app pods are deployed to. However, some situations exist where the service pods and app pods might not be scheduled onto the same worker node. If you use [Kubernetes taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) on worker nodes, any pods that don't have a taint toleration are prevented from running on the tainted worker nodes. Source IP preservation might not be working based on the type of taint you used:
 
-* **Edge node taints**: You [added the `dedicated=edge` label](cs_edge.html#edge_nodes) to two or more worker nodes on each public VLAN in your cluster to ensure that Ingress and load balancer pods deploy to those worker nodes only. Then, you also [tainted those edge nodes](cs_edge.html#edge_workloads) to prevent any other workloads from running on edge nodes. However, you didn't add an edge node affinity rule and toleration to your app deployment. Your app pods can't be scheduled on the same tainted nodes as the service pods, and no traffic reaches the backend service for your app.
+* **Edge node taints**: You [added the `dedicated=edge` label](/docs/containers/cs_edge.html#edge_nodes) to two or more worker nodes on each public VLAN in your cluster to ensure that Ingress and load balancer pods deploy to those worker nodes only. Then, you also [tainted those edge nodes](/docs/containers/cs_edge.html#edge_workloads) to prevent any other workloads from running on edge nodes. However, you didn't add an edge node affinity rule and toleration to your app deployment. Your app pods can't be scheduled on the same tainted nodes as the service pods, and no traffic reaches the backend service for your app.
 
 * **Custom taints**: You used custom taints on several nodes so that only app pods with that taint toleration can deploy to those nodes. You added affinity rules and tolerations to the deployments of your app and load balancer or Ingress service so that their pods deploy to only those nodes. However, `ibm-cloud-provider-ip` `keepalived` pods that are automatically created in the `ibm-system` namespace ensure that the load balancer pods and the app pods are always scheduled onto the same worker node. These `keepalived` pods don't have the tolerations for the custom taints that you used. They can't be scheduled on the same tainted nodes that your app pods are running on, and no traffic reaches the backend service for your app.
 
 {: tsResolve}
 Resolve the issue by choosing one of the following options:
 
-* **Edge node taints**: To ensure that your load balancer and app pods deploy to tainted edge nodes, [add edge node affinity rules and tolerations to your app deployment](cs_loadbalancer.html#edge_nodes). Load balancer and Ingress ALB pods have these affinity rules and tolerations by default.
+* **Edge node taints**: To ensure that your load balancer and app pods deploy to tainted edge nodes, [add edge node affinity rules and tolerations to your app deployment](/docs/containers/cs_loadbalancer.html#edge_nodes). Load balancer and Ingress ALB pods have these affinity rules and tolerations by default.
 
-* **Custom taints**: Remove custom taints that the `keepalived` pods don't have tolerations for. Instead, you can [label worker nodes as edge nodes, and then taint those edge nodes](cs_edge.html).
+* **Custom taints**: Remove custom taints that the `keepalived` pods don't have tolerations for. Instead, you can [label worker nodes as edge nodes, and then taint those edge nodes](/docs/containers/cs_edge.html).
 
 If you complete one of the above options but the `keepalived` pods are still not scheduled, you can get more information about the `keepalived` pods:
 
@@ -345,7 +345,7 @@ Your Helm chart configuration file has incorrect values, missing values, or synt
 {: tsResolve}
 When you try to establish VPN connectivity with the strongSwan Helm chart, it is likely that the VPN status will not be `ESTABLISHED` the first time. You might need to check for several types of issues and change your configuration file accordingly. To troubleshoot your strongSwan VPN connectivity:
 
-1. [Test and verify the strongSwan VPN connectivity](cs_vpn.html#vpn_test) by running the five Helm tests that are included in the strongSwan chart definition.
+1. [Test and verify the strongSwan VPN connectivity](/docs/containers/cs_vpn.html#vpn_test) by running the five Helm tests that are included in the strongSwan chart definition.
 
 2. If you are unable to establish VPN connectivity after running the Helm tests, you can run the VPN debugging tool that is packaged inside of the VPN pod image.
 
@@ -562,13 +562,13 @@ When you try to view Calico network policies in your cluster by running `calicoc
 To use Calico policies, four factors must all align: your cluster Kubernetes version, Calico CLI version, Calico config file syntax, and view policy commands. One or more of these factors is not at the correct version.
 
 {: tsResolve}
-When your cluster is at [Kubernetes version 1.10 or later](cs_versions.html), you must use Calico CLI v3.1, `calicoctl.cfg` v3 config file syntax, and the `calicoctl get GlobalNetworkPolicy` and `calicoctl get NetworkPolicy` commands.
+When your cluster is at [Kubernetes version 1.10 or later](/docs/containers/cs_versions.html), you must use Calico CLI v3.1, `calicoctl.cfg` v3 config file syntax, and the `calicoctl get GlobalNetworkPolicy` and `calicoctl get NetworkPolicy` commands.
 
 To ensure that all Calico factors align:
 
-1. [Install and configure the version 3.3.1 Calico CLI](cs_network_policy.html#cli_install). Configuration includes manually updating the `calicoctl.cfg` file to use Calico v3 syntax.
+1. [Install and configure the version 3.3.1 Calico CLI](/docs/containers/cs_network_policy.html#cli_install). Configuration includes manually updating the `calicoctl.cfg` file to use Calico v3 syntax.
 2. Ensure that any policies you create and want to apply to your cluster use [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). If you have an existing policy `.yaml` or `.json` file in Calico v2 syntax, you can convert it to Calico v3 syntax by using the [`calicoctl convert` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
-3. To [view policies](cs_network_policy.html#view_policies), ensure that you are using `calicoctl get GlobalNetworkPolicy` for global policies and `calicoctl get NetworkPolicy --namespace <policy_namespace>` for policies that are scoped to specific namespaces.
+3. To [view policies](/docs/containers/cs_network_policy.html#view_policies), ensure that you are using `calicoctl get GlobalNetworkPolicy` for global policies and `calicoctl get NetworkPolicy --namespace <policy_namespace>` for policies that are scoped to specific namespaces.
 
 <br />
 
@@ -589,7 +589,7 @@ When an account is suspended, the worker nodes within the account are deleted. I
 
 {: tsResolve}
 
-You can [delete your existing worker pool](cs_cli_reference.html#cs_worker_pool_rm), then [create a new worker pool](cs_cli_reference.html#cs_worker_pool_create).
+You can [delete your existing worker pool](/docs/containers/cs_cli_reference.html#cs_worker_pool_rm), then [create a new worker pool](/docs/containers/cs_cli_reference.html#cs_worker_pool_create).
 
 Alternatively, you can keep your existing worker pool by ordering new VLANs and using these to create new worker nodes in the pool.
 
@@ -613,7 +613,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-5.  Use the `zone-network-set` [command](cs_cli_reference.html#cs_zone_network_set) to change the worker pool network metadata.
+5.  Use the `zone-network-set` [command](/docs/containers/cs_cli_reference.html#cs_zone_network_set) to change the worker pool network metadata.
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>

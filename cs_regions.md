@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -125,7 +125,7 @@ You might want to log in to another {{site.data.keyword.containerlong_notm}} reg
   * You created {{site.data.keyword.Bluemix_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containerlong_notm}} in another region.
   * You want to access a cluster in a region that is different from the default {{site.data.keyword.Bluemix_notm}} region that you are logged in to.
 
-To quickly switch regions, run [`ibmcloud ks region-set`](cs_cli_reference.html#cs_region-set).
+To quickly switch regions, run [`ibmcloud ks region-set`](/docs/containers/cs_cli_reference.html#cs_region-set).
 
 ### Using {{site.data.keyword.containerlong_notm}} API commands
 {: #containers_api}
@@ -230,9 +230,9 @@ In a multizone cluster, the master node is deployed in a multizone-capable zone 
 1.  Worker nodes are spread across multiple zones in one region to provide more availability for your cluster. The master remains in the same multizone-capable zone that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes through a regional endpoint.
 
 2.  Other cluster resources, such as storage, networking, compute, or apps running in pods, vary in how they deploy to the zones in your multizone cluster. For more information, review these topics:
-    * Setting up [file storage](cs_storage_file.html#add_file) and [block storage](cs_storage_block.html#add_block) in multizone clusters
-    * [Enabling public or private access to an app by using a LoadBalancer service in a multizone cluster](cs_loadbalancer.html#multi_zone_config)
-    * [Managing network traffic by using Ingress](cs_ingress.html#planning)
-    * [Increasing the availability of your app](cs_app.html#increase_availability)
+    * Setting up [file storage](/docs/containers/cs_storage_file.html#add_file) and [block storage](/docs/containers/cs_storage_block.html#add_block) in multizone clusters
+    * [Enabling public or private access to an app by using a LoadBalancer service in a multizone cluster](/docs/containers/cs_loadbalancer.html#multi_zone_config)
+    * [Managing network traffic by using Ingress](/docs/containers/cs_ingress.html#planning)
+    * [Increasing the availability of your app](/docs/containers/cs_app.html#increase_availability)
 
-3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](cs_cli_reference.html#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
+3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers/cs_cli_reference.html#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.

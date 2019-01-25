@@ -21,7 +21,7 @@ lastupdated: "2019-01-25"
 # Storing data on IBM Block Storage for IBM Cloud
 {: #block_storage}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage/index.html#billing). 
+{{site.data.keyword.Bluemix_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers/cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage/index.html#billing). 
 {: shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} Block Storage is available for standard clusters only.
@@ -56,9 +56,9 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 
-2. Follow the [instructions](cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) in your cluster.
+2. Follow the [instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) in your cluster.
 
-   If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](cs_integrations.html#helm).
+   If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](/docs/containers/cs_integrations.html#helm).
    {: important}
    
 3. Add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
@@ -262,7 +262,7 @@ To remove the plug-in:
 
 Every storage class specifies the type of block storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
-Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
+Make sure to choose your storage configuration carefully to have enough capacity to store your data. After you provision a specific type of storage by using a storage class, you cannot change the size, type, IOPS, or retention policy for the storage device. If you need more storage or storage with a different configuration, you must [create a new storage instance and copy the data](/docs/containers/cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
 {: important}
 
 1. List available storage classes in {{site.data.keyword.containerlong}}.
@@ -392,14 +392,14 @@ Make sure to choose your storage configuration carefully to have enough capacity
 ## Adding block storage to apps
 {: #add_block}
 
-Create a persistent volume claim (PVC) to [dynamically provision](cs_storage_basics.html#dynamic_provisioning) block storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the actual storage device in your IBM Cloud infrastructure (SoftLayer) account.
+Create a persistent volume claim (PVC) to [dynamically provision](/docs/containers/cs_storage_basics.html#dynamic_provisioning) block storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the actual storage device in your IBM Cloud infrastructure (SoftLayer) account.
 {:shortdesc}
 
 Block storage comes with a `ReadWriteOnce` access mode. You can mount it to only one pod on one worker node in the cluster at a time.
 {: note}
 
 Before you begin:
-- If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
+- If you have a firewall, [allow egress access](/docs/containers/cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
 - Install the [{{site.data.keyword.Bluemix_notm}} block storage plug-in](#install_block).
 - [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass).
 
@@ -642,7 +642,7 @@ To add block storage:
 ## Using existing block storage in your cluster
 {: #existing_block}
 
-If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](cs_storage_basics.html#static_provisioning) the storage.
+If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](/docs/containers/cs_storage_basics.html#static_provisioning) the storage.
 {: shortdesc}
 
 Before you can start to mount your existing storage to an app, you must retrieve all necessary information for your PV.  
@@ -741,7 +741,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
-    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](cs_storage_basics.html#multizone) to your PV.
+    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](/docs/containers/cs_storage_basics.html#multizone) to your PV.
     </tr>
     <tr>
     <td><code>spec.flexVolume.fsType</code></td>
@@ -849,10 +849,10 @@ You cannot deploy two stateful sets at the same time. If you try to create a sta
 {: important}
 
 **How can I create my stateful set in a specific zone?** </br>
-In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set.
+In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](/docs/containers/cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set.
 
 **Can I delay binding of a PV to my stateful pod until the pod is ready?**<br>
-Yes, you can [create a custom storage class](cs_storage_basics.html#topology_yaml) for your PVC that includes the [`volumeBindingMode: WaitForFirstConsumer` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) field.
+Yes, you can [create a custom storage class](/docs/containers/cs_storage_basics.html#topology_yaml) for your PVC that includes the [`volumeBindingMode: WaitForFirstConsumer` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) field.
 
 **What options do I have to add block storage to a stateful set?** </br>
 If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#static_statefulset) with your stateful set.  
@@ -1577,7 +1577,7 @@ You can create a customized storage class and use the storage class in your PVC.
 
 {{site.data.keyword.containerlong_notm}} provides [pre-defined storage classes](#storageclass_reference) to provision block storage with a particular tier and configuration. In some cases, you might want to provision storage with a different configuration that is not covered in the pre-defined storage classes. You can use the examples in this topic to find sample customized storage classes.
 
-To create your customized storage class, see [Customizing a storage class](cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_block).
+To create your customized storage class, see [Customizing a storage class](/docs/containers/cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_block).
 
 ### Creating topology-aware storage
 {: #topology_yaml}

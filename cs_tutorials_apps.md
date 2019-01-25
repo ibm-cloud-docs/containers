@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -58,7 +58,7 @@ Software developers and network administrators that are deploying an app into a 
 
 ## Prerequisites
 
-* [Tutorial: Creating Kubernetes clusters](cs_tutorials.html#cs_cluster_tutorial).
+* [Tutorial: Creating Kubernetes clusters](/docs/containers/cs_tutorials.html#cs_cluster_tutorial).
 * Install the [container-registry plug-in](/docs/services/Registry/index.html#registry_cli_install).
 
 
@@ -248,7 +248,7 @@ To deploy the app:
     To see that the app is publicly available, try entering it into a browser on your cell phone.
     {: tip}
 
-11. [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
+11. [Launch the Kubernetes dashboard](/docs/containers/cs_app.html#cli_dashboard).
 
     If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
@@ -387,7 +387,7 @@ As defined in the configuration script, Kubernetes can use an availability check
 
     *  **From the Kubernetes dashboard**:
 
-       1.  [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
+       1.  [Launch the Kubernetes dashboard](/docs/containers/cs_app.html#cli_dashboard).
        2.  In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when the containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.
 
        ```
@@ -526,7 +526,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
         ```
         {: codeblock}
 
-    2.  In the volumes section of the watson deployment, update the name of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret that you created in the previous [Creating Kubernetes cluster tutorial](cs_tutorials.html#cs_cluster_tutorial_lesson4). By mounting the Kubernetes secret as a volume to your deployment, you make the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key available to the container that is running in your pod. The {{site.data.keyword.watson}} app components in this tutorial are configured to look up the API key by using the volume mount path.
+    2.  In the volumes section of the watson deployment, update the name of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret that you created in the previous [Creating Kubernetes cluster tutorial](/docs/containers/cs_tutorials.html#cs_cluster_tutorial_lesson4). By mounting the Kubernetes secret as a volume to your deployment, you make the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key available to the container that is running in your pod. The {{site.data.keyword.watson}} app components in this tutorial are configured to look up the API key by using the volume mount path.
 
         ```
         volumes:
@@ -602,7 +602,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
 
     In a browser, you can see the JSON response for the text you entered.
 
-10. [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
+10. [Launch the Kubernetes dashboard](/docs/containers/cs_app.html#cli_dashboard).
 
 11. In the **Workloads** tab, you can see the resources that you created.
 
@@ -684,5 +684,5 @@ Ready to delete what you created? You can use the configuration script to delete
 Now that you conquered the basics, you can move to more advanced activities. Consider trying out one of the following:
 
 - Complete a [more complicated lab ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) in the repository
-- [Automatically scale your apps](cs_app.html#app_scaling) with {{site.data.keyword.containerlong_notm}}
+- [Automatically scale your apps](/docs/containers/cs_app.html#app_scaling) with {{site.data.keyword.containerlong_notm}}
 - Explore the container orchestration code patterns on [IBM Developer ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/technologies/containers/)

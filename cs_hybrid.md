@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -28,7 +28,7 @@ lastupdated: "2019-01-22"
 If you have an {{site.data.keyword.Bluemix}} Private account, you can use it with select {{site.data.keyword.Bluemix_notm}} services, including {{site.data.keyword.containerlong}}. For more information, see the blog on [Hybrid experience across {{site.data.keyword.Bluemix_notm}} Private and IBM Public Cloud![External link icon](../icons/launch-glyph.svg "External link icon")](http://ibm.biz/hybridJune2018).
 {: shortdesc}
 
-You understand the [{{site.data.keyword.Bluemix_notm}} offerings](cs_why.html#differentiation). Now, you can [connect your public and private cloud](#hybrid_vpn) and [reuse your private packages for public containers](#hybrid_ppa_importer).
+You understand the [{{site.data.keyword.Bluemix_notm}} offerings](/docs/containers/cs_why.html#differentiation). Now, you can [connect your public and private cloud](#hybrid_vpn) and [reuse your private packages for public containers](#hybrid_ppa_importer).
 
 ## Connecting your public and private cloud with the strongSwan VPN
 {: #hybrid_vpn}
@@ -37,19 +37,19 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 {: shortdesc}
 
 1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_notm}} Public or use an existing one. To create a cluster, choose between the following options: 
-    - [Create a standard cluster from the console](cs_clusters.html#clusters_ui). 
-    - [Create a standard cluster from the CLI](cs_clusters.html#clusters_cli). 
+    - [Create a standard cluster from the console](/docs/containers/cs_clusters.html#clusters_ui). 
+    - [Create a standard cluster from the CLI](/docs/containers/cs_clusters.html#clusters_cli). 
     - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
 
-2.  In your {{site.data.keyword.containerlong_notm}} cluster, [follow the instructions to set up the strongSwan IPSec VPN service](cs_vpn.html#vpn_configure). 
+2.  In your {{site.data.keyword.containerlong_notm}} cluster, [follow the instructions to set up the strongSwan IPSec VPN service](/docs/containers/cs_vpn.html#vpn_configure). 
 
-    *  For [Step 2](cs_vpn.html#strongswan_2), note that:
+    *  For [Step 2](/docs/containers/cs_vpn.html#strongswan_2), note that:
 
        * The `local.id` that you set in your {{site.data.keyword.containerlong_notm}} cluster must match what you later set as the `remote.id` in your {{site.data.keyword.Bluemix}} Private cluster. 
        * The `remote.id` that you set in your {{site.data.keyword.containerlong_notm}} cluster must match what you later set as the `local.id` in your {{site.data.keyword.Bluemix}} Private cluster.
        * The `preshared.secret` that you set in your {{site.data.keyword.containerlong_notm}} cluster must match what you later set as the `preshared.secret` in your {{site.data.keyword.Bluemix}} Private cluster.
 
-    *  For [Step 3](cs_vpn.html#strongswan_3), configure strongSwan for an **inbound** VPN connection.
+    *  For [Step 3](/docs/containers/cs_vpn.html#strongswan_3), configure strongSwan for an **inbound** VPN connection.
 
        ```
        ipsec.auto: add
@@ -86,7 +86,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
         
         Now, you can initiate a connection from the {{site.data.keyword.Bluemix_notm}} Private cluster to the {{site.data.keyword.containerlong_notm}} cluster.
 
-7.  [Test the VPN connection](cs_vpn.html#vpn_test) between your clusters.
+7.  [Test the VPN connection](/docs/containers/cs_vpn.html#vpn_test) between your clusters.
 
 8.  Repeat these steps for each cluster that you want to connect. 
 

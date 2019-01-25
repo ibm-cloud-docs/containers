@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -38,8 +38,8 @@ An IT Exec has worldwide ship routing and scheduling systems that partners inter
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} scales containerized apps with five 9s of availability to meet growing demands. App deployments occur 40 times daily when Developers experiment easily, pushing changes to Development and Test systems quickly. The IoT Platform makes access to IoT data easy. 
  
 Key technologies:    
-* [Multi-regions for partner ecosystem ](cs_regions.html#regions-and-zones)
-* [Horizontal scaling](cs_app.html#highly_available_apps) 
+* [Multi-regions for partner ecosystem ](/docs/containers/cs_regions.html#regions-and-zones)
+* [Horizontal scaling](/docs/containers/cs_app.html#highly_available_apps) 
 * [Open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Cloud services for innovation](https://www.ibm.com/cloud/products/#analytics)
 * [{{site.data.keyword.messagehub_full}} to feed event data to apps](/docs/services/MessageHub/messagehub010.html#about)
@@ -127,7 +127,7 @@ An HR Exec (CHRO) needs a new HR benefits site with an innovative chatbot, but c
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides easy spin-up of compute. Then, Developers can experiment easily, pushing changes to Development and Test systems quickly with open toolchains. Their traditional software development tools get a boost when they add on IBM Watson Assistant. The new benefits site was created in less than 3 weeks.
 
 Key technologies:    
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)
 * [Chatbot service powered by Watson](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs/index.html#nodejs_runtime)

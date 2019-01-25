@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -28,7 +28,7 @@ Customize logging and set up monitoring to help you troubleshoot issues and impr
 {: #ingress_logs}
 
 Logs are automatically collected for your Ingress ALBs. To view the ALB logs, choose between two options.
-* [Create a logging configuration for the Ingress service](cs_health.html#configuring) in your cluster.
+* [Create a logging configuration for the Ingress service](/docs/containers/cs_health.html#configuring) in your cluster.
 * Check the logs from the CLI.
     1. Get the ID of a pod for an ALB.
         ```
@@ -61,7 +61,7 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"client": "$remote_addr"</code></td>
-<td>The IP address of the request package that the client sent to your app. This IP can change based on the following situations:<ul><li>When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the request package is changed to the public IP address of the worker node where the app pod is running.</li><li>If [source IP preservation is enabled](cs_ingress.html#preserve_source_ip), the original IP address of the client request to your app is recorded instead.</li></ul></td>
+<td>The IP address of the request package that the client sent to your app. This IP can change based on the following situations:<ul><li>When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the request package is changed to the public IP address of the worker node where the app pod is running.</li><li>If [source IP preservation is enabled](/docs/containers/cs_ingress.html#preserve_source_ip), the original IP address of the client request to your app is recorded instead.</li></ul></td>
 </tr>
 <tr>
 <td><code>"host": "$http_host"</code></td>
@@ -220,7 +220,7 @@ By default, Ingress logs are formatted in JSON and display common log fields. Ho
    {: pre}
 
 4. To view the Ingress ALB logs, choose between two options.
-    * [Create a logging configuration for the Ingress service](cs_health.html#logging) in your cluster.
+    * [Create a logging configuration for the Ingress service](/docs/containers/cs_health.html#logging) in your cluster.
     * Check the logs from the CLI.
         1. Get the ID of a pod for an ALB.
             ```
@@ -247,7 +247,7 @@ Shared memory zones are defined so that worker processes can share information s
 
 In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-size` field sets the size of the shared memory zone for metrics data collection. By default, `vts-status-zone-size` is set to `10m`. If you have a large environment that requires more memory for metrics collection, you can override the default to instead use a larger value by following these steps.
 
-Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](cs_users.html#platform) for the `kube-system` namespace.
+Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `kube-system` namespace.
 
 1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
