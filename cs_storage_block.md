@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-23"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -22,6 +22,7 @@ lastupdated: "2019-01-23"
 {: #block_storage}
 
 {{site.data.keyword.Bluemix_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage/index.html#billing). 
+{: shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} Block Storage is available for standard clusters only.
 {: note}
@@ -642,9 +643,9 @@ To add block storage:
 {: #existing_block}
 
 If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](cs_storage_basics.html#static_provisioning) the storage.
+{: shortdesc}
 
 Before you can start to mount your existing storage to an app, you must retrieve all necessary information for your PV.  
-{: shortdesc}
 
 ### Step 1: Retrieving the information of your existing block storage
 
@@ -1357,6 +1358,7 @@ For questions about billing and to find the steps for how to use the {{site.data
 {: #backup_restore}
 
 Block storage is provisioned into the same location as the worker nodes in your cluster. The storage is hosted on clustered servers by IBM to provide availability in case a server goes down. However, block storage is not backed up automatically and might be inaccessible if the entire location fails. To protect your data from being lost or damaged, you can set up periodic backups that you can use to restore your data when needed.
+{: shortdesc}
 
 Review the following backup and restore options for your block storage:
 
@@ -1704,6 +1706,7 @@ Create the storage class in the same region and zone as your cluster and worker 
 {: #xfs}
 
 The following examples creates a storage class that provisions block storage with an `XFS` file system.
+{: shortdesc}
 
 - **Example for Endurance block storage:**
   ```
