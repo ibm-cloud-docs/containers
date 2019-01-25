@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -468,6 +468,7 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
 {: #remove_cos_plugin}
 
 If you do not want to provision and use {{site.data.keyword.cos_full_notm}} in your cluster, you can uninstall the helm charts.
+{: shortdesc}
 
 Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new {{site.data.keyword.cos_full_notm}} for your cluster or use existing PVCs and PVs after you remove the plug-in, unless you configure your app to use the {{site.data.keyword.cos_full_notm}} API directly.
 {: important}
@@ -539,6 +540,7 @@ To remove the plug-in:
 {: #configure_cos}
 
 {{site.data.keyword.containerlong_notm}} provides pre-defined storage classes that you can use to create buckets with a specific configuration.
+{: shortdesc}
 
 1. List available storage classes in {{site.data.keyword.containerlong_notm}}.
    ```
@@ -900,6 +902,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
 {: #cos_statefulset}
 
 If you have a stateful app such as a database, you can create stateful sets that use {{site.data.keyword.cos_full_notm}} to store your app's data. Alternatively, you can use an {{site.data.keyword.Bluemix_notm}} database-as-a-service, such as {{site.data.keyword.cloudant_short_notm}} and store your data in the cloud.
+{: shortdesc}
 
 Before you begin:
 - [Create and prepare your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service).
