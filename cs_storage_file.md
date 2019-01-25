@@ -429,6 +429,7 @@ To add file storage:
 {: #existing_file}
 
 If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](cs_storage_basics.html#static_provisioning) the storage.
+{: shortdesc}
 
 Before you begin:
 - Make sure that you have at least one worker node that exists in the same zone as your existing file storage instance.
@@ -437,6 +438,7 @@ Before you begin:
 ### Step 1: Preparing your existing storage.
 
 Before you can start to mount your existing storage to an app, you must retrieve all necessary information for your PV and prepare the storage to be accessible in your cluster.  
+{: shortdesc}
 
 **For storage that was provisioned with a `retain` storage class:** </br>
 If you provisioned storage with a `retain` storage class and you remove the PVC, the PV and the physical storage device are not automatically removed. To reuse the storage in your cluster, you must remove the remaining PV first.
