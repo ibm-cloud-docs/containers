@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -398,6 +398,7 @@ Great! Now that you set up your Portworx cluster, you can now [add storage from 
 {: #update_portworx}
 
 You can upgrade Portworx to the latest version.
+{: shortdesc}
 
 1. Follow steps 2-5 in [Installing Portworx on your cluster](#install_portworx).
 
@@ -423,6 +424,7 @@ You can upgrade Portworx to the latest version.
 {: #remove_portworx}
 
 If you do not want to use Portworx in your cluster, you can uninstall the Helm chart.
+{: shortdesc}
 
 1. Find the installation name of your Portworx Helm chart.
    ```
@@ -495,6 +497,7 @@ The following image illustrates the decryption workflow in Portworx with {{site.
 {: #setup_encryption}
 
 Follow these steps to set up encryption for your Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}. 
+{: shortdesc}
 
 1. Make sure that you are [assigned the `Adminstrator` platform access role and the `Writer` service access role](/docs/services/key-protect/manage-access.html#manage-access) in {{site.data.keyword.Bluemix_notm}} Identity and Access Management for {{site.data.keyword.keymanagementservicelong_notm}}. 
 
@@ -1132,6 +1135,7 @@ When you added storage from your Portworx cluster to your app, you have three ma
 {: #remove_storage_node_cluster}
 
 You can exclude worker nodes from your Portworx cluster or remove the entire Portworx cluster if you do not want to use Portworx anymore.
+{: shortdesc}
 
 Removing your Portworx cluster removes all the data from your Portworx cluster. Make sure to [create a snapshot for your data and save this snapshot to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/snaps.html).
 {: important}
