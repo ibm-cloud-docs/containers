@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -188,7 +188,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <li>[Object storage plans![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
 
 <dt id="services">{{site.data.keyword.Bluemix_notm}} services</dt>
-  <dd>Each service that you integrate with your cluster has its own pricing model. Consult each product documentation and the [cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/) for more information.</dd>
+  <dd>Each service that you integrate with your cluster has its own pricing model. Consult each product documentation and use the {{site.data.keyword.Bluemix_notm}} console to [estimate costs](/docs/billing-usage/estimating_costs.html#cost).</dd>
 
 </dl>
 
@@ -206,7 +206,7 @@ If you linked your {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructu
 {: #cost_estimate}
 {: faq}
 
-Yes, see [Estimating your costs](/docs/billing-usage/estimating_costs.html#cost) and the [cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/) tool for more information. 
+Yes, see [Estimating your costs](/docs/billing-usage/estimating_costs.html#cost). Keep in mind that some charges are not reflected in the estimate, such as tiered pricing for increased hourly usage. For more information, see [What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](#charges).
 
 ## Can I view my current usage? 
 {: #usage}

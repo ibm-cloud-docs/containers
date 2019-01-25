@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -31,7 +31,7 @@ lastupdated: "2019-01-22"
 
 **General**
 
-- [Cost estimator for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/configure/iaas/containers-kubernetes)
+- [Estimating your costs](/docs/billing-usage/estimating_costs.html#cost).
 
 <br />
 
