@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-25"
 
 ---
 
@@ -34,6 +34,7 @@ During cluster creation, the cluster worker nodes and default subnets are automa
 {: #vlans}
 
 When you create a cluster, the cluster's worker nodes are connected automatically to a VLAN. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire and provides a channel for connectivity among the workers and pods.
+{: shortdesc}
 
 <dl>
 <dt>VLANs for free clusters</dt>
@@ -52,6 +53,7 @@ If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or 
 {: #subnets_ips}
 
 In addition to worker nodes and pods, subnets are also automatically provisioned onto VLANs. Subnets provide network connectivity to your cluster components by assigning IP addresses to them.
+{: shortdesc}
 
 The following subnets are automatically provisioned on the default public and private VLANs:
 
@@ -167,11 +169,13 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 {: #managing_ips}
 
 By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](cs_loadbalancer.html). To create a load balancer service, you must have at least 1 portable IP address of the correct type available. You can view portable IP addresses that are available or free up a used portable IP address.
+{: shortdesc}
 
 ### Viewing available portable public IP addresses
 {: #review_ip}
 
-To list all of the portable IP addresses in your cluster, both used and available, you can run:
+To list all of the portable IP addresses in your cluster, both used and available, you can run the following command. 
+{: shortdesc}
 
 ```
 kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
@@ -258,6 +262,7 @@ Before you begin:[Log in to your account. Target the appropriate region and, if 
 {: #adding_ips}
 
 By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](cs_loadbalancer.html). To create more than 4 public or 4 private load balancers, you can get more portable IP addresses by adding network subnets to the cluster.
+{: shortdesc}
 
 When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure to use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.
 {: important}
@@ -427,6 +432,7 @@ To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning
 {: #vra-routing}
 
 When you create a cluster, a portable public and a portable private subnet are ordered on the VLANs that the cluster is connected to. These subnets provide IP addresses for Ingress and load balancer networking services.
+{: shortdesc}
 
 However, if you have an existing router appliance, such as a [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html#about-the-vra), the newly added portable subnets from those VLANs that the cluster is connected to are not configured on the router. To use Ingress or load balancer networking services, you must ensure that network devices can route between different subnets on the same VLAN by [enabling VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
 
