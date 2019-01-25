@@ -121,6 +121,7 @@ Define update strategies for your app, including the number of pods that you wan
 In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, your containerized apps are hosted on compute hosts that are called worker nodes. To be more specific, the apps run in pods and the pods are hosted on worker nodes. Worker nodes are managed by the Kubernetes master. The Kubernetes master and the worker nodes communicate with each other through secure TLS certificates and an openVPN connection to orchestrate your cluster configurations.
 {: shortdesc}
 
+
 The following image shows the components of your cluster and how they interact.
 <p>
 <figure>

@@ -131,3 +131,5 @@ When your worker nodes are connected to a private VLAN only, you can make your a
 * When you create a cluster, a private Ingress application load balancer (ALB) is created automatically but is not enabled by default. You must [enable the private ALB](/docs/containers/cs_ingress.html#private_ingress).
 * Then, [create a private Ingress service](/docs/containers/cs_ingress.html#ingress_expose_private).
 * In your private firewall, open port 80 for HTTP or port 443 for HTTPS to the IP address for the private ALB.
+
+
