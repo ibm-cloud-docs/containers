@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-25"
+lastupdated: "2019-01-26"
 
 ---
 
@@ -30,7 +30,7 @@ A Docker image is the basis for every container that you create with {{site.data
 An image is created from a Dockerfile, which is a file that contains instructions to build the image. A Dockerfile might reference build artifacts in its instructions that are stored separately, such as an app, the app's configuration, and its dependencies.
 
 ## Planning image registries
-{: #planning}
+{: #planning_images}
 
 Images are typically stored in a registry that can either be accessible by the public (public registry) or set up with limited access for a small group of users (private registry).
 {:shortdesc}
