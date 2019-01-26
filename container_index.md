@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-25"
+lastupdated: "2019-01-26"
 
 ---
 
@@ -40,7 +40,7 @@ Click an option to get started:
 
 
 ## Getting started with clusters
-{: #clusters}
+{: #clusters_gs}
 
 So you want to deploy an app in a container? Hold on! Start by creating a Kubernetes cluster first. Kubernetes is an orchestration tool for containers. With Kubernetes, developers can deploy highly available apps in a flash by using the power and flexibility of clusters.
 {:shortdesc}
