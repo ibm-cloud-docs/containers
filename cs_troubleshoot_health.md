@@ -168,7 +168,7 @@ Review the following reasons why you are hitting your log quota and the correspo
   </tr>
   <tr>
     <td>You are exceeding the log storage quota for your current paid plan.</td>
-    <td>First, [calculate the search quota and daily usage](docs/services/CloudLogAnalysis/how-to/quota.html) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](docs/services/CloudLogAnalysis/how-to/change_plan.html#change_plan).</td>
+    <td>First, [calculate the search quota and daily usage](/docs/services/CloudLogAnalysis/how-to/quota.html) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](/docs/services/CloudLogAnalysis/how-to/change_plan.html#change_plan).</td>
   </tr>
   </tbody>
 </table>
