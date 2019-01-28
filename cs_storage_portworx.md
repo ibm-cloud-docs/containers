@@ -160,6 +160,8 @@ To install Portworx:
    - **etcd.credentials**: Enter the user name and password of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `<user_name>:<password>`.
    - **usedrivesAndPartitions**: Enter `true` to let Portworx find unmounted hard drives and partitions.
    - **usefileSystemDrive**: Enter `true` to let Portworx find unmounted hard drives, even if they are formatted.
+   - **drives**: Enter `none` to let Portworx find unmounted and unformatted hard drives. 
+   - **imageVersion**: Enter the latest version of the Portworx Helm chart. To find the latest version, refer to the Portworx [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/release-notes/).
 
    For a full list of supported parameters, see the [Portworx Helm chart documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/blob/master/charts/portworx/README.md#configuration).
 
@@ -169,7 +171,7 @@ To install Portworx:
 
    deploymentType: oci                     # accepts "oci" or "docker"
    imageType: none                         #
-   imageVersion: 1.5.0                   # Version of the PX Image.
+   imageVersion: 2.0.2                   # Version of the PX Image.
 
    openshiftInstall: false                 # Defaults to false for installing Portworx on Openshift .
    isTargetOSCoreOS: false                 # Is your target OS CoreOS? Defaults to false.
