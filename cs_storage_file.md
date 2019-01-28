@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -24,7 +24,8 @@ lastupdated: "2019-01-22"
 # Storing data on IBM File Storage for IBM Cloud
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} FILE Storage is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} File Storage is the right storage option for you, see [Choosing a storage solution](cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/FileStorage/index.html#billing). 
+{{site.data.keyword.Bluemix_notm}} File Storage is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} File Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers/cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/FileStorage/index.html#billing). 
+{: shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} File Storage is available for standard clusters only.
 {: note}
@@ -37,7 +38,7 @@ lastupdated: "2019-01-22"
 
 Every storage class specifies the type of file storage that you provision, including available size, IOPS, file system, and the retention policy.  
 
-After you provision a specific type of storage by using a storage class, you cannot change the type, or retention policy for the storage device. However, you can [change the size and the IOPS](#change_storage_configuration) if you want to increase your storage capacity and performance. To change the type and retention policy for your storage, you must [create a new storage instance and copy the data](cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
+After you provision a specific type of storage by using a storage class, you cannot change the type, or retention policy for the storage device. However, you can [change the size and the IOPS](#change_storage_configuration) if you want to increase your storage capacity and performance. To change the type and retention policy for your storage, you must [create a new storage instance and copy the data](/docs/containers/cs_storage_basics.html#update_storageclass) from the old storage instance to your new one.
 {: important}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
@@ -173,11 +174,11 @@ To decide on a storage configuration:
 ## Adding file storage to apps
 {: #add_file}
 
-Create a persistent volume claim (PVC) to [dynamically provision](cs_storage_basics.html#dynamic_provisioning) file storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the physical storage device in your IBM Cloud infrastructure (SoftLayer) account.
+Create a persistent volume claim (PVC) to [dynamically provision](/docs/containers/cs_storage_basics.html#dynamic_provisioning) file storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the physical storage device in your IBM Cloud infrastructure (SoftLayer) account.
 {:shortdesc}
 
 Before you begin:
-- If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
+- If you have a firewall, [allow egress access](/docs/containers/cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
 - [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass).
 
 Looking to deploy file storage in a stateful set? See [Using file storage in a stateful set](#file_statefulset) for more information.
@@ -317,7 +318,7 @@ To add file storage:
 
 4.  {: #app_volume_mount}To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
-    If you have an app that requires a non-root user to write to the persistent storage, or an app that requires that the mount path is owned by the root user, see [Adding non-root user access to NFS file storage](cs_troubleshoot_storage.html#nonroot) or [Enabling root permission for NFS file storage](cs_troubleshoot_storage.html#nonroot).
+    If you have an app that requires a non-root user to write to the persistent storage, or an app that requires that the mount path is owned by the root user, see [Adding non-root user access to NFS file storage](/docs/containers/cs_troubleshoot_storage.html#nonroot) or [Enabling root permission for NFS file storage](/docs/containers/cs_troubleshoot_storage.html#nonroot).
     {: tip}
 
     ```
@@ -427,7 +428,8 @@ To add file storage:
 ## Using existing file storage in your cluster
 {: #existing_file}
 
-If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](cs_storage_basics.html#static_provisioning) the storage.
+If you have an existing physical storage device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](/docs/containers/cs_storage_basics.html#static_provisioning) the storage.
+{: shortdesc}
 
 Before you begin:
 - Make sure that you have at least one worker node that exists in the same zone as your existing file storage instance.
@@ -436,6 +438,7 @@ Before you begin:
 ### Step 1: Preparing your existing storage.
 
 Before you can start to mount your existing storage to an app, you must retrieve all necessary information for your PV and prepare the storage to be accessible in your cluster.  
+{: shortdesc}
 
 **For storage that was provisioned with a `retain` storage class:** </br>
 If you provisioned storage with a `retain` storage class and you remove the PVC, the PV and the physical storage device are not automatically removed. To reuse the storage in your cluster, you must remove the remaining PV first.
@@ -522,7 +525,7 @@ If you have a Dedicated account, you must [open a support case](/docs/get-suppor
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
-    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](cs_storage_basics.html#multizone) to your PV.
+    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](/docs/containers/cs_storage_basics.html#multizone) to your PV.
     </tr>
     <tr>
     <td><code>spec.capacity.storage</code></td>
@@ -556,7 +559,7 @@ If you have a Dedicated account, you must [open a support case](/docs/get-suppor
     ```
     {: pre}
 
-5.  Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be empty. If any of these fields do not match the PV, then a new PV, and a new physical storage instance is [dynamically provisioned](cs_storage_basics.html#dynamic_provisioning).
+5.  Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be empty. If any of these fields do not match the PV, then a new PV, and a new physical storage instance is [dynamically provisioned](/docs/containers/cs_storage_basics.html#dynamic_provisioning).
 
     ```
     kind: PersistentVolumeClaim
@@ -628,7 +631,7 @@ You cannot deploy two stateful sets at the same time. If you try to create a sta
 {: important}
 
 **How can I create my stateful set in a specific zone?** </br>
-In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set.
+In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](/docs/containers/cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set.
 
 **What options do I have to add file storage to a stateful set?** </br>
 If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#static_statefulset) with your stateful set.  
@@ -1310,7 +1313,7 @@ You can create a customized storage class and use the storage class in your PVC.
 
 {{site.data.keyword.containerlong_notm}} provides [pre-defined storage classes](#storageclass_reference) to provision file storage with a particular tier and configuration. In some cases, you might want to provision storage with a different configuration that is not covered in the pre-defined storage classes. You can use the examples in this topic to find sample customized storage classes.
 
-To create your customized storage class, see [Customizing a storage class](cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_file).
+To create your customized storage class, see [Customizing a storage class](/docs/containers/cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_file).
 
 ### Specifying the zone for multizone clusters
 {: #multizone_yaml}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -29,7 +29,7 @@ lastupdated: "2019-01-22"
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting cluster storage.
 {: shortdesc}
 
-If you have a more general issue, try out [cluster debugging](cs_troubleshoot.html).
+If you have a more general issue, try out [cluster debugging](/docs/containers/cs_troubleshoot.html).
 {: tip}
 
 ## In a multizone cluster, a persistent volume fails to mount to a pod
@@ -46,7 +46,7 @@ For multizone clusters, PVs must have the following labels so that pods do not t
 New clusters with worker pools that can span multiple zones label the PVs by default. If you created your clusters before worker pools were introduced, you must add the labels manually.
 
 {: tsResolve}
-[Update the PVs in your cluster with the region and zone labels](cs_storage_basics.html#multizone).
+[Update the PVs in your cluster with the region and zone labels](/docs/containers/cs_storage_basics.html#multizone).
 
 <br />
 
@@ -68,7 +68,7 @@ The file system on the worker node is read-only.
 2.  For a short-term fix to the existing worker node, reload the worker node.
     <pre class="pre"><code>ibmcloud ks worker-reload --cluster &lt;cluster_name&gt; --worker &lt;worker_ID&gt;</code></pre>
 
-For a long-term fix, [update the machine type of your worker pool](cs_cluster_update.html#machine_type).
+For a long-term fix, [update the machine type of your worker pool](/docs/containers/cs_cluster_update.html#machine_type).
 
 <br />
 
@@ -78,7 +78,7 @@ For a long-term fix, [update the machine type of your worker pool](cs_cluster_up
 {: #nonroot}
 
 {: tsSymptoms}
-After you [add NFS storage](cs_storage_file.html#app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as "write-permission" or "do not have required permission". The pod fails and is stuck in a reload cycle.
+After you [add NFS storage](/docs/containers/cs_storage_file.html#app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as "write-permission" or "do not have required permission". The pod fails and is stuck in a reload cycle.
 
 {: tsCauses}
 By default, non-root users do not have write permission on the volume mount path for NFS-backed storage. Some common app images, such as Jenkins and Nexus3, specify a non-root user that owns the mount path in the Dockerfile. When you create a container from this Dockerfile, the creation of the container fails due to insufficient permissions of the non-root user on the mount path. To grant write permission, you can modify the Dockerfile to temporarily add the non-root user to the root user group before it changes the mount path permissions, or use an init container.
@@ -302,7 +302,7 @@ failed to mount the volume as "ext4", it already contains xfs. Mount error: moun
 {: screen}
 
 {: tsCauses}
-You have an existing block storage device that is set up with an `XFS` file system. To mount this device to your pod, you [created a PV](cs_storage_block.html#existing_block) that specified `ext4` as your file system or no file system in the `spec/flexVolume/fsType` section. If no file system is defined, the PV defaults to `ext4`.
+You have an existing block storage device that is set up with an `XFS` file system. To mount this device to your pod, you [created a PV](/docs/containers/cs_storage_block.html#existing_block) that specified `ext4` as your file system or no file system in the `spec/flexVolume/fsType` section. If no file system is defined, the PV defaults to `ext4`.
 The PV was created successfully and was linked to your existing block storage instance. However, when you try to mount the PV to your cluster by using a matching PVC, the volume fails to mount. You cannot mount your `XFS` block storage instance with an `ext4` file system to the pod.
 
 {: tsResolve}
@@ -369,7 +369,7 @@ When the `ibmc` Helm plug-in is installed, a symlink is created from the `./helm
    ```
    {: pre}
 
-2. [Install the {{site.data.keyword.cos_full_notm}}](cs_storage_cos.html#install_cos).
+2. [Install the {{site.data.keyword.cos_full_notm}}](/docs/containers/cs_storage_cos.html#install_cos).
 
 <br />
 
@@ -404,7 +404,7 @@ The Kubernetes secret where you store your {{site.data.keyword.cos_full_notm}} s
    ```
    {: pre}
 
-2. Check your YAML configuration file for your PVC and pod to verify that you used the same namespace. If you want to deploy a pod in a different namespace than the one where your secret exists, [create another secret](cs_storage_cos.html#create_cos_secret) in the desired namespace.
+2. Check your YAML configuration file for your PVC and pod to verify that you used the same namespace. If you want to deploy a pod in a different namespace than the one where your secret exists, [create another secret](/docs/containers/cs_storage_cos.html#create_cos_secret) in the desired namespace.
 
 3. Create the PVC or deploy the pod in the desired namespace.
 
@@ -452,7 +452,7 @@ The {{site.data.keyword.cos_full_notm}} service credentials that you use to acce
       ```
       {: pre}
 
-4. In the **iam_role_crn** section, verify that you have the `Writer` or `Manager` role. If you do not have the correct role, you must [create new {{site.data.keyword.cos_full_notm}} service credentials with the correct permission](cs_storage_cos.html#create_cos_service). Then, update your existing secret or [create a new secret](cs_storage_cos.html#create_cos_secret) with your new service credentials.
+4. In the **iam_role_crn** section, verify that you have the `Writer` or `Manager` role. If you do not have the correct role, you must [create new {{site.data.keyword.cos_full_notm}} service credentials with the correct permission](/docs/containers/cs_storage_cos.html#create_cos_service). Then, update your existing secret or [create a new secret](/docs/containers/cs_storage_cos.html#create_cos_secret) with your new service credentials.
 
 <br />
 
@@ -474,7 +474,7 @@ You might have used the wrong storage class to access your existing bucket, or y
 1. From the [{{site.data.keyword.Bluemix_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/dashboard/apps), select your {{site.data.keyword.cos_full_notm}} service instance.
 2. Select **Buckets**.
 3. Review the **Class** and **Location** information for your existing bucket.
-4. Choose the appropriate [storage class](cs_storage_cos.html#storageclass_reference).
+4. Choose the appropriate [storage class](/docs/containers/cs_storage_cos.html#storageclass_reference).
 
 <br />
 

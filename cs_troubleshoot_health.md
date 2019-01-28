@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -29,7 +29,7 @@ lastupdated: "2019-01-22"
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting issues with logging and monitoring.
 {: shortdesc}
 
-If you have a more general issue, try out [cluster debugging](cs_troubleshoot.html).
+If you have a more general issue, try out [cluster debugging](/docs/containers/cs_troubleshoot.html).
 {: tip}
 
 ## Logs do not appear
@@ -160,15 +160,15 @@ Review the following reasons why you are hitting your log quota and the correspo
  <tbody>
   <tr>
     <td>One or more pods is producing a very high amount of logs.</td>
-    <td>You can free up log storage space by preventing the logs from specific pods from being forwarded. Create a [logging filter](cs_health.html#filter-logs) for these pods.</td>
+    <td>You can free up log storage space by preventing the logs from specific pods from being forwarded. Create a [logging filter](/docs/containers/cs_health.html#filter-logs) for these pods.</td>
   </tr>
   <tr>
     <td>You are exceeding the 500MB daily allotment for log storage for the Lite plan.</td>
-    <td>First, [calculate the search quota and daily usage](../services/CloudLogAnalysis/how-to/quota.html) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](../services/CloudLogAnalysis/how-to/change_plan.html#change_plan).</td>
+    <td>First, [calculate the search quota and daily usage](/docs/services/CloudLogAnalysis/how-to/quota.html) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](/docs/services/CloudLogAnalysis/how-to/change_plan.html#change_plan).</td>
   </tr>
   <tr>
     <td>You are exceeding the log storage quota for your current paid plan.</td>
-    <td>First, [calculate the search quota and daily usage](../services/CloudLogAnalysis/how-to/quota.html) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](../services/CloudLogAnalysis/how-to/change_plan.html#change_plan).</td>
+    <td>First, [calculate the search quota and daily usage](/docs/services/CloudLogAnalysis/how-to/quota.html) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](/docs/services/CloudLogAnalysis/how-to/change_plan.html#change_plan).</td>
   </tr>
   </tbody>
 </table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -29,7 +29,7 @@ As a cluster adminstrator, you want to control which pods are more critical to y
 
 By setting pod priority, you can help prevent lower priority workloads from impacting critical workloads in your cluster, especially in cases where the cluster starts to reach its resource capacity.
 
-Make sure that you have [set up proper user access](cs_users.html#users) to your cluster, and if applicable, [pod security policies](cs_psp.html#psp). Access and pod security policies can help prevent untrusted users from deploying high priority pods that prevent other pods from scheduling.
+Make sure that you have [set up proper user access](/docs/containers/cs_users.html#users) to your cluster, and if applicable, [pod security policies](/docs/containers/cs_psp.html#psp). Access and pod security policies can help prevent untrusted users from deploying high priority pods that prevent other pods from scheduling.
 {: tip}
 
 {: #priority_scheduling}
@@ -88,7 +88,7 @@ To set pod priority, you need to use a priority class.
 
 Before you begin:
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
-* [Create](cs_clusters.html#clusters_ui) or [update](cs_cluster_update.html#update) your cluster to Kubernetes version 1.11 or later.
+* [Create](/docs/containers/cs_clusters.html#clusters_ui) or [update](/docs/containers/cs_cluster_update.html#update) your cluster to Kubernetes version 1.11 or later.
 
 To use a priority class:
 
@@ -169,7 +169,7 @@ Assign a priority class to your pod spec to set the pod's priority within your {
 
 Before you begin:
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
-* [Create](cs_clusters.html#clusters_ui) or [update](cs_cluster_update.html#update) your cluster to Kubernetes version 1.11 or later.
+* [Create](/docs/containers/cs_clusters.html#clusters_ui) or [update](/docs/containers/cs_cluster_update.html#update) your cluster to Kubernetes version 1.11 or later.
 * [Understand how priority scheduling works](#priority_scheduling), as priority can preempt existing pods and affect how your cluster's resources are consumed.
 
 To assign priority to your pods:

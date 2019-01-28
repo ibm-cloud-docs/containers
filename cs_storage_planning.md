@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -269,7 +269,7 @@ If you have a multizone cluster, choose between the following persistent storage
 
 Persistent data storage options are available for standard clusters only.
 
-Looking to connect your cluster to an on-prem database instead? See [Setting up VPN connectivity to your cluster](cs_vpn.html#vpn).
+Looking to connect your cluster to an on-prem database instead? See [Setting up VPN connectivity to your cluster](/docs/containers/cs_vpn.html#vpn).
 {: tip}
 
 The following image shows the options that you have in {{site.data.keyword.containerlong_notm}} to permanently store your data in a multizone cluster and make your data highly available. You can use these options in a single zone cluster, but you might not get the high availability benefits that your app requires. 

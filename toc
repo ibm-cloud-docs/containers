@@ -61,9 +61,9 @@ IBM Cloud Kubernetes Service
         cs_network_cluster.md
         cs_firewall.md
         cs_network_policy.md
-        cs_subnets.md
         cs_edge.md
         cs_vpn.md
+        cs_subnets.md
 
     cs_images.md
     cs_app.md

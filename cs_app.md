@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -27,7 +27,7 @@ lastupdated: "2019-01-22"
 You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running at all times. For example, you can perform rolling updates and rollbacks without downtime for your users.
 {: shortdesc}
 
-Learn the general steps for deploying apps by clicking an area of the following image. Want to learn the basics first? Try out the [deploying apps tutorial](cs_tutorials_apps.html#cs_apps_tutorial).
+Learn the general steps for deploying apps by clicking an area of the following image. Want to learn the basics first? Try out the [deploying apps tutorial](/docs/containers/cs_tutorials_apps.html#cs_apps_tutorial).
 
 <img usemap="#d62e18" border="0" class="image" id="basic_deployment_process" src="images/basic_deployment_process.png" width="780" style="width:780px;" alt="Basic deployment process"/>
 <map name="d62e18" id="d62e18">
@@ -61,7 +61,7 @@ The following table describes why you might create different types of Kubernetes
 | [`Pod` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) | A pod is the smallest deployable unit for your workloads, and can hold a single or multiple containers. Similar to containers, pods are designed to be disposable and are often used for unit testing of app features. To avoid downtime for your app, consider deploying pods with a Kubernetes controller, such as a deployment. A deployment helps you to manage multiple pods, replicas, pod scaling, rollouts, and more. |
 | [`ReplicaSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | A replica set makes sure that multiple replicas of your pod are running, and reschedules a pod if the pod goes down. You might create a replica set to test how pod scheduling works, but to manage app updates, rollouts, and scaling, create a deployment instead. |
 | [`Deployment` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | A deployment is a controller that manages a pod or [replica set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) of pod templates. You can create pods or replica sets without a deployment to test app features. For a production-level setup, use deployments to manage app updates, rollouts, and scaling. |
-| [`StatefulSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Similar to deployments, a stateful set is a controller that manages a replica set of pods. Unlike deployments, a stateful set ensures that your pod has a unique network identity that maintains its state across rescheduling. When you want to run workloads in the cloud, try to design your app to be stateless so that your service instances are independent from each other and can fail without a service interruption. However, some apps, such as databases, must be stateless. For those cases, consider to create a stateful set and use [file](cs_storage_file.html#file_statefulset), [block](cs_storage_block.html#block_statefulset), or [object](cs_storage_cos.html#cos_statefulset) storage as the persistent storage for your stateful set. |
+| [`StatefulSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Similar to deployments, a stateful set is a controller that manages a replica set of pods. Unlike deployments, a stateful set ensures that your pod has a unique network identity that maintains its state across rescheduling. When you want to run workloads in the cloud, try to design your app to be stateless so that your service instances are independent from each other and can fail without a service interruption. However, some apps, such as databases, must be stateless. For those cases, consider to create a stateful set and use [file](/docs/containers/cs_storage_file.html#file_statefulset), [block](/docs/containers/cs_storage_block.html#block_statefulset), or [object](/docs/containers/cs_storage_cos.html#cos_statefulset) storage as the persistent storage for your stateful set. |
 | [`DaemonSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | Use a daemonset when you must run the same pod on every worker node in your cluster. Pods that are managed by a daemonset are automatically scheduled when a worker node is added to a cluster. Typical use cases include log collectors, such as `logstash` or `prometheus`, that collect logs from every worker node to provide insight into the health of a cluster or an app. |
 | [`Job` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | A job ensures that one or more pods run successfully to completion. You might use a job for queues or batch jobs to support parallel processing of separate but related work items, such as a certain number of frames to render, emails to send, and files to convert. To schedule a job to run at certain times, use a [Cron Job ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/).|
 {: caption="Types of Kubernetes workload objects that you can create." caption-side="top"}
@@ -100,14 +100,14 @@ Both resources define key-value pairs, but you use them for different situations
 <dt>Secret</dt>
 <dd>Provide sensitive information to your workloads, such as follows. Note that other users of the cluster might have access to the secret, so be sure that you know the secret information can be shared with those users.
 <ul><li><strong>Personally identifiable information (PII)</strong>: Store sensitive information such as email addresses or other types of information that are required for company compliance or government regulation in secrets.</li>
-<li><strong>Credentials</strong>: Put credentials such as passwords, keys, and tokens in a secret to reduce the risk of accidental exposure. For example, when you [bind a service](cs_integrations.html#adding_cluster) to your cluster, the credentials are stored in a secret.</li></ul></dd>
+<li><strong>Credentials</strong>: Put credentials such as passwords, keys, and tokens in a secret to reduce the risk of accidental exposure. For example, when you [bind a service](/docs/containers/cs_integrations.html#adding_cluster) to your cluster, the credentials are stored in a secret.</li></ul></dd>
 </dl>
 
-Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect) in your cluster to encrypt new and existing secrets.
+Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](/docs/containers/cs_encrypt.html#keyprotect) in your cluster to encrypt new and existing secrets.
 {: tip}
 
 ### How can I add IBM services to my app, such as Watson?
-See [Adding services to apps](cs_integrations.html#adding_app).
+See [Adding services to apps](/docs/containers/cs_integrations.html#adding_app).
 
 ### How can I make sure that my app has the right resources?
 When you [specify your app YAML file](#app_yaml), you can add Kubernetes functionalities to your app configuration that help your app get the right resources. In particular, [set resource limits and requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) for each container that is defined in your YAML file.
@@ -115,35 +115,35 @@ When you [specify your app YAML file](#app_yaml), you can add Kubernetes functio
 
 Additionally, your cluster admin might set up resource controls that can affect your app deployment, such as the following.
 *  [Resource quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
-*  [Pod priority](cs_pod_priority.html#pod_priority)
+*  [Pod priority](/docs/containers/cs_pod_priority.html#pod_priority)
 
 ### How can I access my app?
-You can access your app privately within the cluster by [using a `clusterIP` service](cs_network_cluster.html#in-cluster).
+You can access your app privately within the cluster by [using a `clusterIP` service](/docs/containers/cs_network_cluster.html#in-cluster).
 {: shortdesc}
 
 If you want to expose your app publicly, you have different options that depend on your cluster type.
-*  **Free cluster**: You can expose your app by using a [NodePort service](cs_nodeport.html#nodeport).
-*  **Standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](cs_network_planning.html#planning).
-*  **Cluster that is made private by using Calico**: You can expose your app by using a [NodePort, load balancer, or Ingress service](cs_network_planning.html#private_both_vlans). You also must use a Calico preDNAT network policy to block the public node ports.
-*  **Private VLAN-only standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](cs_network_planning.html#private_vlan). You also must open the port for the service's private IP address in your firewall.
+*  **Free cluster**: You can expose your app by using a [NodePort service](/docs/containers/cs_nodeport.html#nodeport).
+*  **Standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#planning).
+*  **Cluster that is made private by using Calico**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#private_both_vlans). You also must use a Calico preDNAT network policy to block the public node ports.
+*  **Private VLAN-only standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#private_vlan). You also must open the port for the service's private IP address in your firewall.
 
 ### After I deploy my app, how can I monitor its health?
-You can set up {{site.data.keyword.Bluemix_notm}} [logging and monitoring](cs_health.html#health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](cs_integrations.html#health_services).
+You can set up {{site.data.keyword.Bluemix_notm}} [logging and monitoring](/docs/containers/cs_health.html#health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](/docs/containers/cs_integrations.html#health_services).
 {: shortdesc}
 
 ### How can I keep my app up-to-date?
-If you want to dynamically add and remove apps in response to workload usage, see [Scaling apps](cs_app.html#app_scaling).
+If you want to dynamically add and remove apps in response to workload usage, see [Scaling apps](/docs/containers/cs_app.html#app_scaling).
 {: shortdesc}
 
-If you want to manage updates to your app, see [Managing rolling deployments](cs_app.html#app_rolling).
+If you want to manage updates to your app, see [Managing rolling deployments](/docs/containers/cs_app.html#app_rolling).
 
 ### How can I control who has access to my app deployments?
 The account and cluster admins can control access on many different levels: the cluster, Kubernetes namespace, pod, and container.
 {: shortdesc}
 
-With {{site.data.keyword.Bluemix_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](cs_users.html#users).
+With {{site.data.keyword.Bluemix_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](/docs/containers/cs_users.html#users).
 
-To control access at the pod level, you can [configure pod security policies with Kubernetes RBAC](cs_psp.html#psp).
+To control access at the pod level, you can [configure pod security policies with Kubernetes RBAC](/docs/containers/cs_psp.html#psp).
 
 Within the app deployment YAML, you can set the security context for a pod or container. For more information, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 
@@ -164,7 +164,7 @@ Review the following potential app setups that are ordered with increasing degre
 2.  A deployment with n+2 pods that are managed by a replica set and spread across multiple nodes (anti-affinity) in a single zone cluster.
 3.  A deployment with n+2 pods that are managed by a replica set and spread across multiple nodes (anti-affinity) in a multizone cluster across zones.
 
-You can also [connect multiple clusters in different regions with a global load balancer](cs_clusters_planning.html#multiple_clusters) to increase the high availability.
+You can also [connect multiple clusters in different regions with a global load balancer](/docs/containers/cs_clusters_planning.html#multiple_clusters) to increase the high availability.
 
 ### Increasing the availability of your app
 {: #increase_availability}
@@ -188,13 +188,13 @@ Consider the following options to increase availability of your app.
       </dd>
     </dd>
 <dt>Distribute pods across multiple zones or regions</dt>
-  <dd><p>To protect your app from a zone failure, you can create multiple clusters in separate zones or add zones to a worker pool in a multizone cluster. Multizone clusters are available only in [certain metro areas](cs_regions.html#zones), such as Dallas. If you create multiple clusters in separate zones, you must [set up a global load balancer](cs_clusters_planning.html#multiple_clusters).</p>
-  <p>When you use a replica set and specify pod anti-affinity, Kubernetes spreads your app pods across the nodes. If your nodes are in multiple zones, the pods are spread across the zones, increasing the availability of your app. If you want to limit your apps to run only in one zone, you can configure pod affinity, or create and label a worker pool in one zone. For more information, see [High availability for multizone clusters](cs_clusters_planning.html#ha_clusters).</p>
+  <dd><p>To protect your app from a zone failure, you can create multiple clusters in separate zones or add zones to a worker pool in a multizone cluster. Multizone clusters are available only in [certain metro areas](/docs/containers/cs_regions.html#zones), such as Dallas. If you create multiple clusters in separate zones, you must [set up a global load balancer](/docs/containers/cs_clusters_planning.html#multiple_clusters).</p>
+  <p>When you use a replica set and specify pod anti-affinity, Kubernetes spreads your app pods across the nodes. If your nodes are in multiple zones, the pods are spread across the zones, increasing the availability of your app. If you want to limit your apps to run only in one zone, you can configure pod affinity, or create and label a worker pool in one zone. For more information, see [High availability for multizone clusters](/docs/containers/cs_clusters_planning.html#ha_clusters).</p>
   <p><strong>In a multizone cluster deployment, are my app pods distributed evenly across the nodes?</strong></p>
   <p>The pods are evenly distributed across zones, but not always across nodes. For example, if you have a cluster with 1 node in each of 3 zones and deploy a replica set of 6 pods, then each node gets 2 pods. However, if you have a cluster with 2 nodes in each of 3 zones and deploy a replica set of 6 pods, each zone has 2 pods scheduled, and might schedule 1 pod per node or might not. For more control over scheduling, you can [set pod affinity ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
   <p><strong>If a zone goes down, how are pods rescheduled onto the remaining nodes in the other zones?</strong></br>It depends on your scheduling policy that you used in the deployment. If you included [node-specific pod affinity ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), your pods are not rescheduled. If you did not, pods are created on available worker nodes in other zones, but they might not be balanced. For example, the 2 pods might be spread across the 2 available nodes, or they might both be scheduled onto 1 node with available capacity. Similarly, when the unavailable zone returns, pods are not automatically deleted and rebalanced across nodes. If you want the pods to be rebalanced across zones after the zone is back up, consider using the [Kubernetes descheduler ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/descheduler).</p>
   <p><strong>Tip</strong>: In multizone clusters, try to keep your worker node capacity at 50% per zone so that you have enough capacity left to protect your cluster against a zonal failure.</p>
-  <p><strong>What if I want to spread my app across regions?</strong></br>To protect your app from a region failure, create a second cluster in another region, [set up a global load balancer](cs_clusters_planning.html#multiple_clusters) to connect your clusters, and use a deployment YAML to deploy a duplicate replica set with [pod anti-affinity ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) for your app.</p>
+  <p><strong>What if I want to spread my app across regions?</strong></br>To protect your app from a region failure, create a second cluster in another region, [set up a global load balancer](/docs/containers/cs_clusters_planning.html#multiple_clusters) to connect your clusters, and use a deployment YAML to deploy a duplicate replica set with [pod anti-affinity ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) for your app.</p>
   <p><strong>What if my apps need persistent storage?</strong></p>
   <p>Use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).</p></dd>
 </dl>
@@ -238,7 +238,7 @@ metadata:
   <dd><p>With labels, you can mark different types of resources in your cluster with the same `key: value` pair. Then, you can specify the selector to match the label so that you can build upon these other resources. If you plan to expose your app publicly, you must use a label that matches the selector that you specify in the service. In the example, the deployment spec uses the template that matches the label `app: wasliberty.`</p>
   <p>You can retrieve objects that are labeled in your cluster, such as to see `staging` or `production` components. For example, list all resources with an `env: production` label across all namespaces in the cluster. Note that you need access to all namespaces to run this command.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>For more information about labels, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</li>
-  <li>For a more detailed example, see [Deploying apps to specific worker nodes by using labels](cs_app.html#node_affinity).</li></ul>
+  <li>For a more detailed example, see [Deploying apps to specific worker nodes by using labels](/docs/containers/cs_app.html#node_affinity).</li></ul>
   <p><pre class="codeblock"><code>selector:
   matchLabels:
     app: wasliberty
@@ -252,7 +252,7 @@ template:
   <p>For more information, see the Kubernetes documentation on <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Opens in a new tab or window)">Assigning Pods to Nodes</a>.</p>
   <ul><li><strong>Required anti-affinity</strong>: You can only deploy the amount of replicas that you have worker nodes for. For example, if you have 3 worker nodes in your cluster but you define 5 replicas in your YAML file, then only 3 replicas deploy. Each replica lives on a different worker node. The leftover 2 replicas remain pending. If you add another worker node to your cluster, then one of the leftover replicas deploys to the new worker node automatically. If a worker node fails, the pod does not reschedule because the affinity policy is required. For an example YAML with required, see <a href="https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Opens in a new tab or window)">Liberty app with required pod anti-affinity.</a></li>
   <li><strong>Preferred anti-affinity</strong>: You can deploy your pods to nodes with available capacity, which provides more flexibility for your workload. When possible, the pods are scheduled on different worker nodes. For example, if you have 3 worker nodes with enough capacity in your cluster, it can schedule the 5 replica pods across the nodes. However, if you add two more worker nodes to your cluster, the affinity rule does not force the 2 extra pods running on the existing nodes to reschedule onto the free node.</li>
-  <li><strong>Worker node affinity</strong>: You can configure your deployment to run on only certain worker nodes, such as bare metal. For more information, see [Deploying apps to specific worker nodes by using labels](cs_app.html#node_affinity).</li></ul>
+  <li><strong>Worker node affinity</strong>: You can configure your deployment to run on only certain worker nodes, such as bare metal. For more information, see [Deploying apps to specific worker nodes by using labels](/docs/containers/cs_app.html#node_affinity).</li></ul>
   <p>Example for preferred anti-affinity:</p>
   <p><pre class="codeblock"><code>spec:
   affinity:
@@ -290,7 +290,7 @@ template:
   <dd><p>As a cluster admin, you can make sure that teams that share a cluster don't take up more than their fair share of compute resources (memory and CPU) by creating a [ResourceQuota object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) for each Kubernetes namespace in the cluster. If the cluster admin sets a compute resource quota, then each container within the deployment template must specify resource requests and limits for memory and CPU, otherwise the pod creation fails.</p>
   <p><ol><li>Check if a resource quota is set for a namespace.<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>See what the quota limits are.<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
-  <p>Even if no resource quota is set, you can include resource requests and limits in your deployment to improve the management of worker node resources.</p><p class="note">If a container exceeds its limit, the container might be restarted or fail. If a container exceeds a request, its pod might be evicted if the worker node runs out of that resource that is exceeded. For troubleshooting information, see [Pods repeatedly fail to restart or are unexpectedly removed](cs_troubleshoot_clusters.html#pods_fail).</p>
+  <p>Even if no resource quota is set, you can include resource requests and limits in your deployment to improve the management of worker node resources.</p><p class="note">If a container exceeds its limit, the container might be restarted or fail. If a container exceeds a request, its pod might be evicted if the worker node runs out of that resource that is exceeded. For troubleshooting information, see [Pods repeatedly fail to restart or are unexpectedly removed](/docs/containers/cs_troubleshoot_clusters.html#pods_fail).</p>
   <p>**Request**: The minimum amount of the resource that the scheduler reserves for the container to use. If the amount is equal to the limit, the request is guaranteed. If the amount is less than the limit, the request is still guaranteed, but the the scheduler can use the difference between the request and the limit to fulfill the resources of other containers.</p>
   <p>**Limit**: The maximum amount of the resource that the container can consume. If the total amount of resources that is used across the containers exceeds the amount available on the worker node, containers can be evicted to free up space. To prevent eviction, set the resource request equal to the limit of the container. If no limit is specified, the default is the worker node's capacity.</p>
   <p>For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
@@ -324,7 +324,7 @@ readinessProbe:
   <dd><p>You can create a service that exposes your app. In the `spec` section, make sure to match the `port` and label values with the ones that you used in the deployment. The service exposes objects that match the label, such as `app: wasliberty` in the following example.</p>
   <ul><li>By default, a service uses [ClusterIP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/), which makes the service accessible only within the cluster but not outside the cluster.</li>
   <li>You can create a NodePort, load balancer, or Ingress service to expose the app publicly. These services have two IPs, one external and one internal. When traffic is received on the external IP, it is forwarded to the internal cluster IP. Then, from the internal cluster IP, the traffic is routed to the container IP of the app.</li>
-  <li>The example uses `NodePort` to expose the service outside the cluster. For information about how to set up external access, see [Choosing a NodePort, load balancer, or Ingress service](cs_network_planning.html#external).</li></ul>
+  <li>The example uses `NodePort` to expose the service outside the cluster. For information about how to set up external access, see [Choosing a NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#external).</li></ul>
   <p><pre class="codeblock"><code>apiVersion: v1
 kind: Service
 metadata:
@@ -379,7 +379,7 @@ data:
 
   <dt id="secret">Secrets for container environment variables</dt>
   <dd><p>Secrets provide sensitive configuration information such as passwords for your deployment workloads. The following example shows shows how you can reference values from your secret as environment variables in the container spec section of your deployment YAML. You can also mount the secret as a volume. By referencing values from your secret, you can decouple this configuration information from your deployment to keep your containerized app portable.<ul><li>[Help me decide whether to use a ConfigMap or Secret for variables](#variables).</li>
-  <li>For more information, see [Understanding when to use secrets](cs_encrypt.html#secrets).</li></ul></p>
+  <li>For more information, see [Understanding when to use secrets](/docs/containers/cs_encrypt.html#secrets).</li></ul></p>
   <p><pre class="codeblock"><code>apiVersion: apps/v1beta1
   kind: Deployment
   metadata:
@@ -418,7 +418,7 @@ data:
     password: cGFzc3dvcmQ=</pre></code></p></dd>
 
 <dt id="pv">Persistent volumes for container storage</dt>
-<dd><p>Persistent volumes (PVs) interface with physical storage to provide persistent data storage for your container workloads. The following example shows how you can add persistent storage to your app. To provision persistent storage, you create a persistent volume claim (PVC) to describe the type and size of file storage that you want to have. After creating the PVC, the persistent volume and the physical storage is automatically created by using [dynamic provisioning](cs_storage_basics.html#dynamic_provisioning). By referencing the PVC in your deployment YAML, the storage is automatically mounted to your app pod. When the container in your pod writes data to the `/test` mount path directory, data is stored on the NFS file storage instance.</p><ul><li>For more information, see [Understanding Kubernetes storage basics](cs_storage_basics.html#kube_concepts).</li><li>For options on other types of storage that you can provision, see [Planning highly available persistent storage](cs_storage_planning.html#storage_planning).</li></ul>
+<dd><p>Persistent volumes (PVs) interface with physical storage to provide persistent data storage for your container workloads. The following example shows how you can add persistent storage to your app. To provision persistent storage, you create a persistent volume claim (PVC) to describe the type and size of file storage that you want to have. After creating the PVC, the persistent volume and the physical storage is automatically created by using [dynamic provisioning](/docs/containers/cs_storage_basics.html#dynamic_provisioning). By referencing the PVC in your deployment YAML, the storage is automatically mounted to your app pod. When the container in your pod writes data to the `/test` mount path directory, data is stored on the NFS file storage instance.</p><ul><li>For more information, see [Understanding Kubernetes storage basics](/docs/containers/cs_storage_basics.html#kube_concepts).</li><li>For options on other types of storage that you can provision, see [Planning highly available persistent storage](/docs/containers/cs_storage_planning.html#storage_planning).</li></ul>
 <p><pre class="codeblock"><code>apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -459,8 +459,8 @@ spec:
 
 <dt id="nextsteps">Ready to deploy an app?</dt>
 <dd><ul><li>[Use a copy of the complete YAML as a template to get started](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).</li>
-<li>[Deploy an app from the Kubernetes dashboard](cs_app.html#app_ui).</li>
-<li>[Deploy an app from the CLI](cs_app.html#app_cli).</li></ul></dd>
+<li>[Deploy an app from the Kubernetes dashboard](/docs/containers/cs_app.html#app_ui).</li>
+<li>[Deploy an app from the CLI](/docs/containers/cs_app.html#app_cli).</li></ul></dd>
 
 </dl>
 
@@ -685,7 +685,7 @@ Do you have so many resources and users in your cluster that the Kubernetes dash
 
 Before you begin:
 
--   [Install the required CLIs](cs_cli_install.html#cs_cli_install).
+-   [Install the required CLIs](/docs/containers/cs_cli_install.html#cs_cli_install).
 -   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 To deploy your app:
@@ -700,7 +700,7 @@ To deploy your app:
 
 3.  Verify that you successfully deployed your app in one of the following ways.
   * In the Kubernetes dashboard, click **Deployments**. A list of successful deployments is displayed.
-  * If your app is [publicly available](cs_network_planning.html#public_access), navigate to the cluster overview page in your {{site.data.keyword.containerlong}} dashboard. Copy the subdomain, which is located in the cluster summary section and paste it into a browser to view your app.
+  * If your app is [publicly available](/docs/containers/cs_network_planning.html#public_access), navigate to the cluster overview page in your {{site.data.keyword.containerlong}} dashboard. Copy the subdomain, which is located in the cluster summary section and paste it into a browser to view your app.
 
 <br />
 
@@ -713,7 +713,7 @@ After a cluster is created, you can deploy an app into that cluster by using the
 
 Before you begin:
 
--   Install the required [CLIs](cs_cli_install.html#cs_cli_install).
+-   Install the required [CLIs](/docs/containers/cs_cli_install.html#cs_cli_install).
 -   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 To deploy your app:
@@ -837,13 +837,13 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 ## Deploying an app on a GPU machine
 {: #gpu_app}
 
-If you have a [bare metal graphics processing unit (GPU) machine type](cs_clusters_planning.html#shared_dedicated_node), you can schedule mathematically intensive workloads onto the worker node. For example, you might run a 3D app that uses the Compute Unified Device Architecture (CUDA) platform to share the processing load across the GPU and CPU to increase performance.
+If you have a [bare metal graphics processing unit (GPU) machine type](/docs/containers/cs_clusters_planning.html#shared_dedicated_node), you can schedule mathematically intensive workloads onto the worker node. For example, you might run a 3D app that uses the Compute Unified Device Architecture (CUDA) platform to share the processing load across the GPU and CPU to increase performance.
 {:shortdesc}
 
 In the following steps, you learn how to deploy workloads that require the GPU. You can also [deploy apps](#app_ui) that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tensorflow.org/) machine learning framework with [this Kubernetes demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow).
 
 Before you begin:
-* [Create a bare metal GPU machine type](cs_clusters.html#clusters_cli). Note that this process can take more than 1 business day to complete.
+* [Create a bare metal GPU machine type](/docs/containers/cs_clusters.html#clusters_cli). Note that this process can take more than 1 business day to complete.
 * Your cluster master and GPU worker node must run Kubernetes version 1.10 or later.
 
 To execute a workload on a GPU machine:
@@ -1009,7 +1009,7 @@ To execute a workload on a GPU machine:
 With Kubernetes, you can enable [horizontal pod autoscaling ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) to automatically increase or decrease the number of instances of your apps based on CPU.
 {:shortdesc}
 
-Looking for information about scaling Cloud Foundry applications? Check out [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html). Want to scale your worker nodes instead of your pods? Check out the [cluster autoscaler preview (beta)](cs_cluster_scaling.html#ca).
+Looking for information about scaling Cloud Foundry applications? Check out [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html). Want to scale your worker nodes instead of your pods? Check out the [cluster autoscaler preview (beta)](/docs/containers/cs_cluster_scaling.html#ca).
 {: tip}
 
 Before you begin:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2019-01-22"
 
 # Setting up clusters and worker nodes
 {: #clusters}
-Create clusters and add worker nodes to increase cluster capacity in {{site.data.keyword.containerlong}}. Still getting started? Try out the [creating a Kubernetes cluster tutorial](cs_tutorials.html#cs_cluster_tutorial).
+Create clusters and add worker nodes to increase cluster capacity in {{site.data.keyword.containerlong}}. Still getting started? Try out the [creating a Kubernetes cluster tutorial](/docs/containers/cs_tutorials.html#cs_cluster_tutorial).
 {: shortdesc}
 
 ## Preparing to create clusters
@@ -39,7 +39,7 @@ The list is divided into two parts:
 {: #prepare_account_level}
 
 1.  [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
-2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
+2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](/docs/containers/cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
     *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
     *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
     *  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level.
@@ -47,13 +47,14 @@ The list is divided into two parts:
     Are you the account owner? You already have the necessary permissions! When you create a cluster, the API key for that region and resource group is set with your credentials.
     {: tip}
 
-3.  If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](cs_users.html#resource_groups). 
+3.  If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](/docs/containers/cs_users.html#resource_groups). 
     *  The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the default resource group is automatically targeted.
     *  If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the default resource group.
     *  You cannot change a cluster's resource group. The cluster can only integrate with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group or services that do not support resource groups, such as {{site.data.keyword.registrylong_notm}}.
-    *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](cs_health.html#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
+    *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](/docs/containers/cs_health.html#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
     * If you have an {{site.data.keyword.Bluemix_dedicated}} account, you must create clusters in the default resource group only.
-4.  Enable VLAN spanning. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
+
+4.  Enable VLAN spanning. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers/cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/vrf-on-ibm-cloud.html#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 ### Cluster-level
 {: #prepare_cluster_level}
@@ -62,12 +63,12 @@ The list is divided into two parts:
     1.  From the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) menu bar, click **Manage > Access (IAM)**.
     2.  Click the **Users** page, and then from the table, select yourself.
     3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}. **Note**: If you have the **Administrator** role for {{site.data.keyword.containershort_notm}} in only one resource group or region instead of the entire account, you must have at least the **Viewer** role at the account level to see the account's VLANs.
-2.  Decide between a [free or standard cluster](cs_why.html#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
-3.  [Plan your cluster set up](cs_clusters_planning.html#plan_clusters).
-    *  Decide whether to create a [single zone](cs_clusters_planning.html#single_zone) or [multizone](cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are available in select locations only.
-    *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](cs_clusters_planning.html#private_clusters).
-    *  Choose what type of [hardware and isolation](cs_clusters_planning.html#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
-4.  For standard clusters, you can [estimate the cost with the cost estimator ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/pricing/configure/iaas/containers-kubernetes). For more information on charges that might not be included in the estimator, see [Pricing and billing](faqs.html#charges).
+2.  Decide between a [free or standard cluster](/docs/containers/cs_why.html#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
+3.  [Plan your cluster set up](/docs/containers/cs_clusters_planning.html#plan_clusters).
+    *  Decide whether to create a [single zone](/docs/containers/cs_clusters_planning.html#single_zone) or [multizone](/docs/containers/cs_clusters_planning.html#multizone) cluster. Note that multizone clusters are available in select locations only.
+    *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](/docs/containers/cs_clusters_planning.html#private_clusters).
+    *  Choose what type of [hardware and isolation](/docs/containers/cs_clusters_planning.html#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
+4.  For standard clusters, you can [estimate the cost](/docs/billing-usage/estimating_costs.html#cost) in the {{site.data.keyword.Bluemix_notm}} console. For more information on charges that might not be included in the estimator, see [Pricing and billing](/docs/containers/faqs.html#charges).
 <br>
 <br>
 
@@ -113,8 +114,8 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
   **Note**:
     * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
     * Free clusters are automatically created in the default resource group.
-    * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
-4. Select an [{{site.data.keyword.Bluemix_notm}} location](cs_regions.html#regions-and-zones) in which to deploy your cluster. For the best performance, select the location that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
+    * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers/cs_users.html#platform) for the resource group.
+4. Select an [{{site.data.keyword.Bluemix_notm}} location](/docs/containers/cs_regions.html#regions-and-zones) in which to deploy your cluster. For the best performance, select the location that is physically closest to you. Keep in mind that if you select a zone that is outside of your country, you might require legal authorization prior to the data being stored.
 5. Select the **Standard** cluster plan. With a standard cluster you have access to features like multiple worker nodes for a highly available environment.
 6. Enter your zone details.
     1. Select **Single zone** or **Multizone** availability. In a multizone cluster the master node is deployed in a multizone-capable zone and your cluster's resources are spread across multiple zones. Your choices might be limited by region.
@@ -131,7 +132,7 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 
         - **Virtual - Shared**: Infrastructure resources, such as the hypervisor and physical hardware, are shared across you and other IBM customers, but each worker node is accessible only by you. Although this option is less expensive and sufficient in most cases, you might want to verify your performance and infrastructure requirements with your company policies.
 
-        - **Bare Metal**: Billed monthly, bare metal servers are provisioned manually by IBM Cloud infrastructure (SoftLayer) after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control. You can also choose to enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
+        - **Bare Metal**: Billed monthly, bare metal servers are provisioned manually by IBM Cloud infrastructure (SoftLayer) after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control. You can also choose to enable [Trusted Compute](/docs/containers/cs_secure.html#trusted_compute) to verify your worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
 
         Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
         {:tip}
@@ -149,12 +150,12 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 When the cluster is up and running, you can check out the following tasks:
 
 -   If you created the cluster in a multizone capable zone, spread worker nodes by [adding a zone to your cluster](#add_zone).
--   [Install the CLIs to start working with your cluster.](cs_cli_install.html#cs_cli_install)
--   [Deploy an app in your cluster.](cs_app.html#app_cli)
+-   [Install the CLIs to start working with your cluster.](/docs/containers/cs_cli_install.html#cs_cli_install)
+-   [Deploy an app in your cluster.](/docs/containers/cs_app.html#app_cli)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
--   If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
--   [Set up the cluster autoscaler (preview beta)](cs_cluster_scaling.html#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
--   Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
+-   If you have a firewall, you might need to [open the required ports](/docs/containers/cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
+-   [Set up the cluster autoscaler (preview beta)](/docs/containers/cs_cluster_scaling.html#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
+-   Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](/docs/containers/cs_psp.html).
 
 <br />
 
@@ -167,7 +168,7 @@ The purpose of the Kubernetes cluster is to define a set of resources, nodes, ne
 
 
 
-Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](cs_cli_install.html#cs_cli_install).
+Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers/cs_cli_install.html#cs_cli_install).
 
 To create a cluster:
 
@@ -190,7 +191,7 @@ To create a cluster:
     3.  To create clusters in a resource group other than default, target that resource group.
       **Note**:
         * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
-        * You must have at least the [**Viewer** role](cs_users.html#platform) for the resource group.
+        * You must have at least the [**Viewer** role](/docs/containers/cs_users.html#platform) for the resource group.
         * Free clusters are automatically created in the the default resource group.
       ```
       ibmcloud target -g <resource_group_name>
@@ -201,7 +202,7 @@ To create a cluster:
 
 4.  Create a cluster. Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
 
-    1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](cs_regions.html#zones).
+    1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers/cs_regions.html#zones).
 
         ```
         ibmcloud ks zones
@@ -213,8 +214,8 @@ To create a cluster:
         -  View the **Server Type** field to choose virtual or physical (bare metal) machines.
         -  **Virtual**: Billed hourly, virtual machines are provisioned on shared or dedicated hardware.
         -  **Physical**: Billed monthly, bare metal servers are provisioned manually by IBM Cloud infrastructure (SoftLayer) after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control.
-        - **Physical machines with Trusted Compute**: You can also choose to enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
-        -  **Machine types**: To decide what machine type to deploy, review the core, memory, and storage combinations of the [available worker node hardware](cs_clusters_planning.html#shared_dedicated_node). After you create your cluster, you can add different physical or virtual machine types by [adding a worker pool](#add_pool).
+        - **Physical machines with Trusted Compute**: You can also choose to enable [Trusted Compute](/docs/containers/cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
+        -  **Machine types**: To decide what machine type to deploy, review the core, memory, and storage combinations of the [available worker node hardware](/docs/containers/cs_clusters_planning.html#shared_dedicated_node). After you create your cluster, you can add different physical or virtual machine types by [adding a worker pool](#add_pool).
 
            Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by  mistake, you are still charged the full month.
            {:tip}
@@ -270,11 +271,11 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-        <td>**Standard clusters**: Replace <em>&lt;zone&gt;</em> with the {{site.data.keyword.Bluemix_notm}} zone ID where you want to create your cluster. Available zones depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in to.<p class="note">The cluster worker nodes are deployed into this zone. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](cs_regions.html#zones). After the cluster is created, you can [add a zone to the cluster](#add_zone).</p></td>
+        <td>**Standard clusters**: Replace <em>&lt;zone&gt;</em> with the {{site.data.keyword.Bluemix_notm}} zone ID where you want to create your cluster. Available zones depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in to.<p class="note">The cluster worker nodes are deployed into this zone. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers/cs_regions.html#zones). After the cluster is created, you can [add a zone to the cluster](#add_zone).</p></td>
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-        <td>**Standard clusters**: Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](cs_cli_reference.html#cs_machine_types). For free clusters, you do not have to define the machine type.</td>
+        <td>**Standard clusters**: Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers/cs_cli_reference.html#cs_machine_types). For free clusters, you do not have to define the machine type.</td>
         </tr>
         <tr>
         <td><code>--hardware <em>&lt;shared_or_dedicated&gt;</em></code></td>
@@ -309,11 +310,11 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--disable-disk-encrypt</code></td>
-        <td>**Free and standard clusters**: Worker nodes feature [disk encryption](cs_secure.html#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
+        <td>**Free and standard clusters**: Worker nodes feature [disk encryption](/docs/containers/cs_secure.html#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
         </tr>
         <tr>
         <td><code>--trusted</code></td>
-        <td>**Standard bare metal clusters**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td>
+        <td>**Standard bare metal clusters**: Enable [Trusted Compute](/docs/containers/cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td>
         </tr>
         </tbody></table>
 
@@ -409,12 +410,12 @@ To create a cluster:
 **What's next?**
 
 -   If you created the cluster in a multizone capable zone, spread worker nodes by [adding a zone to your cluster](#add_zone).
--   [Deploy an app in your cluster.](cs_app.html#app_cli)
+-   [Deploy an app in your cluster.](/docs/containers/cs_app.html#app_cli)
 -   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
-- If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
--   [Set up the cluster autoscaler (preview beta)](cs_cluster_scaling.html#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
--  Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
+- If you have a firewall, you might need to [open the required ports](/docs/containers/cs_firewall.html#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
+-   [Set up the cluster autoscaler (preview beta)](/docs/containers/cs_cluster_scaling.html#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
+-  Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](/docs/containers/cs_psp.html).
 
 <br />
 
@@ -431,13 +432,13 @@ When you create a cluster, the worker nodes are provisioned in a worker pool. Af
 If you have a multizone cluster, keep its worker node resources balanced. Make sure that all the worker pools are spread across the same zones, and add or remove workers by resizing the pools instead of adding individual nodes.
 {: tip}
 
-Before you begin, make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform). Then, choose one of the following sections:
+Before you begin, make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform). Then, choose one of the following sections:
   * [Add worker nodes by resizing an existing worker pool in your cluster](#resize_pool)
   * [Add worker nodes by adding a worker pool to your cluster](#add_pool)
   * [Add a zone to your cluster and replicate the worker nodes in your worker pools across multiple zones](#add_zone)
   * [Deprecated: Add a stand-alone worker node to a cluster](#standalone)
 
-After you set up your worker pool, you can [set up the cluster autoscaler (preview beta)](cs_cluster_scaling.html#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
+After you set up your worker pool, you can [set up the cluster autoscaler (preview beta)](/docs/containers/cs_cluster_scaling.html#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 {:tip}
 
 ### Adding worker nodes by resizing an existing worker pool
@@ -489,7 +490,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 You can add worker nodes to your cluster by creating a new worker pool.
 {:shortdesc}
 
-1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro cities](cs_regions.html#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones`.
+1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro cities](/docs/containers/cs_regions.html#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones`.
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
@@ -508,7 +509,7 @@ You can add worker nodes to your cluster by creating a new worker pool.
    ```
    {: pre}
 
-3.  For each zone, review the [available machine types for worker nodes](cs_clusters_planning.html#shared_dedicated_node).
+3.  For each zone, review the [available machine types for worker nodes](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).
 
     ```
     ibmcloud ks machine-types <zone>
@@ -558,8 +559,8 @@ When you add a zone to a worker pool, the worker nodes that are defined in your 
 If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster.
 
 Before you begin:
-*  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](cs_regions.html#zones). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
-*  If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
+*  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](/docs/containers/cs_regions.html#zones). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
+*  If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/vrf-on-ibm-cloud.html#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 To add a zone with worker nodes to your worker pool:
 
@@ -669,9 +670,9 @@ If you have a cluster that was created after worker pools were introduced, you c
 Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might have occurred.
 {:shortdesc}
 
-To view information about a specific cluster, such as its zones, master URL, Ingress subdomain, version, owner, and monitoring dashboard, use the `ibmcloud ks cluster-get <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
+To view information about a specific cluster, such as its zones, master URL, Ingress subdomain, version, owner, and monitoring dashboard, use the `ibmcloud ks cluster-get <cluster_name_or_ID>` [command](/docs/containers/cs_cli_reference.html#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
 
-You can view the current cluster state by running the `ibmcloud ks clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](cs_troubleshoot.html#debug_clusters).
+You can view the current cluster state by running the `ibmcloud ks clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](/docs/containers/cs_troubleshoot.html#debug_clusters).
 
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
 <caption>Cluster states</caption>
@@ -747,8 +748,8 @@ No backups are created of your cluster or your data in your persistent storage. 
 
 Before you begin:
 * Note your cluster ID. You might need the cluster ID to investigate and remove related IBM Cloud infrastructure (SoftLayer) resources that are not automatically deleted with your cluster.
-* If you want to delete the data in your persistent storage, [understand the delete options](cs_storage_remove.html#cleanup).
-* Make sure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform).
+* If you want to delete the data in your persistent storage, [understand the delete options](/docs/containers/cs_storage_remove.html#cleanup).
+* Make sure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform).
 
 To remove a cluster:
 
@@ -771,12 +772,12 @@ To remove a cluster:
         {: pre}
 
     3.  Follow the prompts and choose whether to delete cluster resources, which includes containers, pods, bound services, persistent storage, and secrets.
-      - **Persistent storage**: Persistent storage provides high availability for your data. If you created a persistent volume claim by using an [existing file share](cs_storage_file.html#existing_file), then you cannot delete the file share when you delete the cluster. You must manually delete the file share later from your IBM Cloud infrastructure (SoftLayer) portfolio.
+      - **Persistent storage**: Persistent storage provides high availability for your data. If you created a persistent volume claim by using an [existing file share](/docs/containers/cs_storage_file.html#existing_file), then you cannot delete the file share when you delete the cluster. You must manually delete the file share later from your IBM Cloud infrastructure (SoftLayer) portfolio.
 
           Due to the monthly billing cycle, a persistent volume claim cannot be deleted on the last day of a month. If you delete the persistent volume claim on the last day of the month, the deletion remains pending until the beginning of the next month.
           {: note}
 
 Next steps:
 - After it is no longer listed in the available clusters list when you run the `ibmcloud ks clusters` command, you can reuse the name of a removed cluster.
-- If you kept the subnets, you can [reuse them in a new cluster](cs_subnets.html#custom) or manually delete them later from your IBM Cloud infrastructure (SoftLayer) portfolio.
-- If you kept the persistent storage, you can [delete your storage](cs_storage_remove.html#cleanup) later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.Bluemix_notm}} console.
+- If you kept the subnets, you can [reuse them in a new cluster](/docs/containers/cs_subnets.html#custom) or manually delete them later from your IBM Cloud infrastructure (SoftLayer) portfolio.
+- If you kept the persistent storage, you can [delete your storage](/docs/containers/cs_storage_remove.html#cleanup) later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.Bluemix_notm}} console.

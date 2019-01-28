@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -36,9 +36,9 @@ An IT Exec for a healthcare provider has business reporting and patient systems 
 Why {{site.data.keyword.cloud_notm}}: To improve patient service, the provider looked to {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.contdelivery_full}} to reduce IT spend and accelerate development, all on a secure platform. The provider’s high-use SaaS systems, which held both patient record systems and business report apps, needed updates frequently. Yet the on-premises environment hindered agile development. The provider also wanted to counteract increasing labor costs and a decreasing budget.
 
 Key technologies:    
-* [Clusters that fit varied CPU, RAM, storage needs](cs_clusters_planning.html#shared_dedicated_node)
-* [Horizontal scaling](cs_app.html#highly_available_apps)
-* [Container security and isolation](cs_secure.html#security)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)
+* [Horizontal scaling](/docs/containers/cs_app.html#highly_available_apps)
+* [Container security and isolation](/docs/containers/cs_secure.html#security)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs/index.html#nodejs_runtime)
 
@@ -116,7 +116,7 @@ A Development Exec for a disease research nonprofit has academic and industry re
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} delivers secure compute that can host sensitive and performant data processing on an open platform. That global platform is hosted in near-by regions. So it's tied to local regulations that inspire patients’ and researchers’ confidence that their data is both protected locally and makes a difference in better health outcomes.
 
 Key technologies:    
-* [Intelligent scheduling places workloads where needed](cs_regions.html#regions-and-zones)    
+* [Intelligent scheduling places workloads where needed](/docs/containers/cs_regions.html#regions-and-zones)    
 * [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant/getting-started.html)
 * [Vulnerability scanning  and isolation for workloads](/docs/services/Registry/registry_ui.html#registry_ui)    
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)

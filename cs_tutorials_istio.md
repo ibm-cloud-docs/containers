@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -44,9 +44,9 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
--  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](cs_cli_install.html#cs_cli_install_steps). Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
--  [Create a cluster](cs_clusters.html#clusters_cli). 
--  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure).
+-  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](/docs/containers/cs_cli_install.html#cs_cli_install_steps). Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
+-  [Create a cluster](/docs/containers/cs_clusters.html#clusters_cli). 
+-  [Target the CLI to your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 ## Lesson 1: Download and install Istio
 {: #istio_tutorial1}
@@ -55,7 +55,7 @@ Download and install Istio in your cluster.
 {:shortdesc}
 
 1. Install Istio by using the [IBM Istio Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-istio).
-    1. [Set up Helm in your cluster and add the `ibm-charts` repository to your Helm instance](cs_integrations.html#helm).
+    1. [Set up Helm in your cluster and add the `ibm-charts` repository to your Helm instance](/docs/containers/cs_integrations.html#helm).
     2.  **For Helm versions 2.9 or earlier only**: Install Istio’s custom resource definitions.
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml

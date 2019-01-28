@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -39,10 +39,10 @@ Add the `dedicated=edge` label to two or more worker nodes on each public VLAN i
 
 Before you begin:
 
-1. Ensure you have any {{site.data.keyword.Bluemix_notm}} IAM [platform role](cs_users.html#platform).
+1. Ensure you have any {{site.data.keyword.Bluemix_notm}} IAM [platform role](/docs/containers/cs_users.html#platform).
 2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 3. Ensure that your cluster has a least one public VLAN. Edge worker nodes are not available for clusters with private VLANs only.
-4. [Create a new worker pool](cs_clusters.html#add_pool) that spans all the zone in your cluster and has at least 2 workers per zone.
+4. [Create a new worker pool](/docs/containers/cs_clusters.html#add_pool) that spans all the zone in your cluster and has at least 2 workers per zone.
 
 To label worker nodes as edge nodes:
 
@@ -95,7 +95,7 @@ To label worker nodes as edge nodes:
   ```
   {: screen}
 
-You labeled worker nodes with `dedicated=edge` and redeployed all of the existing load balancers and Ingress to the edge worker nodes. Next, prevent other [workloads from running on edge worker nodes](#edge_workloads) and [block inbound traffic to NodePorts on worker nodes](cs_network_policy.html#block_ingress).
+You labeled worker nodes with `dedicated=edge` and redeployed all of the existing load balancers and Ingress to the edge worker nodes. Next, prevent other [workloads from running on edge worker nodes](#edge_workloads) and [block inbound traffic to NodePorts on worker nodes](/docs/containers/cs_network_policy.html#block_ingress).
 
 <br />
 
@@ -125,4 +125,4 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
   {: pre}
   Now, only pods with the `dedicated=edge` toleration are deployed to your edge worker nodes.
 
-3. If you choose to [enable source IP preservation for a load balancer 1.0 service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](cs_loadbalancer.html#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
+3. If you choose to [enable source IP preservation for a load balancer 1.0 service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](/docs/containers/cs_loadbalancer.html#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -39,35 +39,35 @@ A variety of use cases show the strengths of {{site.data.keyword.containerlong_n
     <tr>
     <td align="center"><img src="icons/finance.svg" alt="Icon of front and back of credit card"/><br>Financial services</td>
     <td><ul>
-    <li>[Trim IT costs and accelerate regulatory compliance](cs_uc_finance.html#uc_mortgage)</li>
-    <li>[Streamline developer productivity to deploy AI tools to partners 4 times faster](cs_uc_finance.html#uc_payment_tech)</li>
+    <li>[Trim IT costs and accelerate regulatory compliance](/docs/containers/cs_uc_finance.html#uc_mortgage)</li>
+    <li>[Streamline developer productivity to deploy AI tools to partners 4 times faster](/docs/containers/cs_uc_finance.html#uc_payment_tech)</li>
     </ul></td>
      </tr>
      <tr>
      <td align="center"><img src="icons/gov.svg" alt="Icon of government building with person inside"/><br>Government</td>
      <td><ul>
-    <li>[Secure the exchange of data, connecting public and private organizations](cs_uc_gov.html#uc_port)</li>
-     <li>[Improve collaboration velocity with community Developers, combining public-private data](cs_uc_gov.html#uc_data_mashup)</li></ul></td>
+    <li>[Secure the exchange of data, connecting public and private organizations](/docs/containers/cs_uc_gov.html#uc_port)</li>
+     <li>[Improve collaboration velocity with community Developers, combining public-private data](/docs/containers/cs_uc_gov.html#uc_data_mashup)</li></ul></td>
       </tr>
     <tr>
       <td align="center"><img src="icons/health.svg" alt="Icon of medical bag"/><br>Healthcare</td>
       <td><ul>
-     <li>[Migrate workloads from inefficient VMs to easily operated containers for patient systems](cs_uc_health.html#uc_migrate)</li>
-      <li>[Securely host sensitive data while growing research with partners](cs_uc_health.html#uc_research)</li>
+     <li>[Migrate workloads from inefficient VMs to easily operated containers for patient systems](/docs/containers/cs_uc_health.html#uc_migrate)</li>
+      <li>[Securely host sensitive data while growing research with partners](/docs/containers/cs_uc_health.html#uc_research)</li>
       </ul></td>
       </tr>
       <tr>
          <td align="center"><img src="icons/retail.svg" alt="Icon of shopping cart with currency symbol"/><br>Retail</td>
          <td><ul>
-        <li>[Share data via APIs with global partners to drive omni-channel sales](cs_uc_retail.html#uc_data-share)</li>
-         <li>[Optimize inventory expenses with digital insights to sales behavior](cs_uc_retail.html#uc_grocer)</li>
+        <li>[Share data via APIs with global partners to drive omni-channel sales](/docs/containers/cs_uc_retail.html#uc_data-share)</li>
+         <li>[Optimize inventory expenses with digital insights to sales behavior](/docs/containers/cs_uc_retail.html#uc_grocer)</li>
               </ul></td>
           </tr>
       <tr>
        <td align="center"><img src="icons/transport.svg" alt="Icon of railroad car with containers"/><br>Transportation</td>
            <td><ul>
-          <li>[Build and deploy HR site with AI in less than 3 weeks](cs_uc_transport.html#uc_airline)</li>
-           <li>[Increase availability of worldwide systems for partners](cs_uc_transport.html#uc_shipping)</li></ul></td>
+          <li>[Build and deploy HR site with AI in less than 3 weeks](/docs/containers/cs_uc_transport.html#uc_airline)</li>
+           <li>[Increase availability of worldwide systems for partners](/docs/containers/cs_uc_transport.html#uc_shipping)</li></ul></td>
       </tr>
   </tbody>
   </table>

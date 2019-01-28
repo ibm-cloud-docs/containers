@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-22"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -52,9 +52,9 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
--  Check out the steps you need to take to [prepare to create a cluster](cs_clusters.html#cluster_prepare).
+-  Check out the steps you need to take to [prepare to create a cluster](/docs/containers/cs_clusters.html#cluster_prepare).
 -  Ensure you have the following access policies:
-    - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](cs_users.html#platform) for {{site.data.keyword.containerlong_notm}}
+    - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) for {{site.data.keyword.containerlong_notm}}
     -  The [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) in the cluster space that you want to work in
 
 
@@ -70,7 +70,7 @@ Because it can take a few minutes to provision, create your cluster before you i
 
 1.  [In the {{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/catalog/cluster/create), create a free or standard cluster with 1 worker pool that has 1 worker node in it.
 
-    You can also create a [cluster in the CLI](cs_clusters.html#clusters_cli).
+    You can also create a [cluster in the CLI](/docs/containers/cs_clusters.html#clusters_cli).
     {: tip}
 
 As your cluster provisions, install the following CLIs that are used to manage clusters:
@@ -312,4 +312,4 @@ Great work! Your cluster is configured and your local environment is ready for y
 {: #next}
 
 * Test your knowledge and [take a quiz ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)!
-* Try the [Tutorial: Deploying apps into Kubernetes clusters](cs_tutorials_apps.html#cs_apps_tutorial) to deploy the PR firm's app into the cluster that you created.
+* Try the [Tutorial: Deploying apps into Kubernetes clusters](/docs/containers/cs_tutorials_apps.html#cs_apps_tutorial) to deploy the PR firm's app into the cluster that you created.
