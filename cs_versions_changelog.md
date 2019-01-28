@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-25"
+lastupdated: "2019-01-28"
 
 ---
 
@@ -46,8 +46,35 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.12 changelog. 
 {: shortdesc}
 
+### Changelog for worker node fix pack 1.12.4_1535, released 28 January 2019
+{: #1124_1535}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.4_1535.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.4_1534">
+<caption>Changes since version 1.12.4_1534</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages including `apt` for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) / [USN-3863-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/3863-1/2).</td>
+</tr>
+</tbody>
+</table>
+
+
 ### Changelog for 1.12.4_1534, released 21 January 2019
-{: #1124_1533}
+{: #1124_1534}
 
 The following table shows the changes that are included in the patch 1.12.3_1534.
 {: shortdesc}
@@ -380,6 +407,32 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019
+{: #1116_1541}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.6_1541.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.6_1540">
+<caption>Changes since version 1.11.6_1540</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages including `apt` for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) / [USN-3863-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/3863-1/2).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.11.6_1540, released 21 January 2019
 {: #1116_1540}
@@ -1069,6 +1122,32 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 {: #110_changelog}
 
 Review the version 1.10 changelog.
+
+### Changelog for worker node fix pack 1.10.12_1541, released 28 January 2019
+{: #11012_1541}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.12_1541.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.12_1540">
+<caption>Changes since version 1.10.12_1540</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages including `apt` for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) / [USN-3863-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/3863-1/2).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.10.12_1540, released 21 January 2019
 {: #11012_1540}
