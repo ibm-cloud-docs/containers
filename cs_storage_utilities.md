@@ -206,7 +206,7 @@ To add different block storage configurations, add block storage to a subset of 
 
 2.  Clone the {{site.data.keyword.Bluemix_notm}} Storage Utilities repo.
     ```
-    git clone git@github.com:IBM/ibmcloud-storage-utilities.git
+    git clone https://github.com/IBM/ibmcloud-storage-utilities.git
     ```
     {: pre}
 
