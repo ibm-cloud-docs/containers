@@ -27,7 +27,7 @@ lastupdated: "2019-01-29"
 {{site.data.keyword.Bluemix_notm}} File Storage is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} File Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers/cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/FileStorage/index.html#billing). 
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage is available for standard clusters only.
+{{site.data.keyword.Bluemix_notm}} File Storage is available for standard clusters only. NFS file storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
 {: note}
 
 ## Deciding on the file storage configuration

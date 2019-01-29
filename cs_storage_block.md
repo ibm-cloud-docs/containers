@@ -24,7 +24,7 @@ lastupdated: "2019-01-29"
 {{site.data.keyword.Bluemix_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers/cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage/index.html#billing). 
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage is available for standard clusters only.
+{{site.data.keyword.Bluemix_notm}} Block Storage is available for standard clusters only. Block storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
 {: note}
 
 ## Installing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in in your cluster
