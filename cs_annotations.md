@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-29"
 
 ---
 
@@ -1398,8 +1398,10 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
     1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Identity providers > Manage**.
     2. Make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
     3. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<app_path>/appid_callback` or `https://<hostname>/<app_path>/appid_callback`.
-        * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`.
-        * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/appid_callback`.
+      * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`.
+      * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/appid_callback`.
+      {{site.data.keyword.appid_full_notm}} offers a logout function: If `/logout` exists in your {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page. To use this function, you must append `/appid_logout` to your domain in the format `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_logout` and include this URL in the redirect URLs list.
+      {: note}
 
 3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
     ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-29"
 
 ---
 
@@ -24,6 +24,102 @@ lastupdated: "2019-01-28"
 
 Expose multiple apps in your Kubernetes cluster by creating Ingress resources that are managed by the IBM-provided application load balancer in {{site.data.keyword.containerlong}}.
 {:shortdesc}
+
+<img src="images/cs_ingress_imagemap.png" usemap="#image-map">
+
+<map name="image-map">
+    <area target="" alt="Ingress components" title="Ingress components" href="#components" coords="63,72,187,96" shape="rect">
+    <area target="" alt="ALB IPs" title="ALB IPs" href="#ips" coords="60,104,187,128" shape="rect">
+    <area target="" alt="Architecture" title="Architecture" href="#architecture-single" coords="60,139,189,164" shape="rect">
+    <area target="" alt="Prerequisites" title="Prerequisites" href="#config_prereqs" coords="59,175,191,198" shape="rect">
+    <area target="" alt="Planning networking for single or multiple namespaces" title="Planning networking for single or multiple namespaces" href="#multiple_namespaces" coords="62,208,189,232" shape="rect">
+    <area target="" alt="Exposing apps that are inside your cluster to the public" title="Exposing apps that are inside your cluster to the public" href="#ingress_expose_public" coords="280,71,409,108" shape="rect">
+    <area target="" alt="Exposing apps that are outside your cluster to the public" title="Exposing apps that are outside your cluster to the public" href="#external_endpoint" coords="283,116,408,148" shape="rect">
+    <area target="" alt="Exposing apps to a private network" title="Exposing apps to a private network" href="#ingress_expose_private" coords="283,157,411,190" shape="rect">
+    <area target="" alt="Bringing your own Ingress controller" title="Bringing your own Ingress controller" href="#user_managed" coords="281,200,408,234" shape="rect">
+    <area target="" alt="Customizing an Ingress resource with annotations" title="Customizing an Ingress resource with annotations" href="#annotations" coords="500,73,634,99" shape="rect">
+    <area target="" alt="Opening ports in the Ingress ALB" title="Opening ports in the Ingress ALB" href="#opening_ingress_ports" coords="500,107,633,132" shape="rect">
+    <area target="" alt="Configuring SSL protocols and SSL ciphers at the HTTP level" title="Configuring SSL protocols and SSL ciphers at the HTTP level" href="#ssl_protocols_ciphers" coords="500,141,635,181" shape="rect">
+    <area target="" alt="Preserving the source IP address" title="Preserving the source IP address" href="#preserve_source_ip" coords="502,187,633,220" shape="rect">
+    <area target="" alt="Tuning ALB performance" title="Tuning ALB performance" href="#perf_tuning" coords="501,231,633,253" shape="rect">
+</map>
+
+## Sample YAMLs
+{: #sample_ingress}
+
+**Ingress resource to publicly expose an app**</br>
+
+Have you already completed the following?
+- Deploy app
+- Create app service
+- Select domain name and TLS secret
+
+You can use the following deployment YAML to create an Ingress resource:
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingressresource
+spec:
+  tls:
+  - hosts:
+    - <domain>
+    secretName: <tls_secret_name>
+  rules:
+  - host: <domain>
+    http:
+      paths:
+      - path: /<app1_path>
+        backend:
+          serviceName: <app1_service>
+          servicePort: 80
+      - path: /<app2_path>
+        backend:
+          serviceName: <app2_service>
+          servicePort: 80
+```
+{: codeblock}
+
+**Ingress resource to privately expose an app**</br>
+
+Have you already completed the following?
+- Enable private ALB
+- Deploy app
+- Create app service
+- Select domain name and TLS secret
+
+You can use the following deployment YAML to create an Ingress resource:
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingressresource
+  annotations:
+    ingress.bluemix.net/ALB-ID: "<private_ALB_ID_1>;<private_ALB_ID_2>"
+spec:
+  tls:
+  - hosts:
+    - <domain>
+    secretName: <tls_secret_name>
+  rules:
+  - host: <domain>
+    http:
+      paths:
+      - path: /<app1_path>
+        backend:
+          serviceName: <app1_service>
+          servicePort: 80
+      - path: /<app2_path>
+        backend:
+          serviceName: <app2_service>
+          servicePort: 80
+```
+{: codeblock}
+
+<br />
+
 
 ## Ingress components and architecture
 {: #planning}
@@ -291,6 +387,9 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 ```
 {: pre}
 
+Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+{: note}
+
 If you do not have a TLS certificate ready, follow these steps:
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
 2. Convert the cert and key into base-64.
@@ -300,18 +399,9 @@ If you do not have a TLS certificate ready, follow these steps:
       ```
       {: pre}
 
-      ```
-      openssl base64 -in tls.crt -out tls.crt.base64
-      ```
-      {: pre}
    2. View the base-64 encoded value for your cert and key.
       ```
       cat tls.key.base64
-      ```
-      {: pre}
-
-      ```
-      cat tls.crt.base64
       ```
       {: pre}
 
@@ -333,6 +423,8 @@ If you do not have a TLS certificate ready, follow these steps:
      kubectl create -f ssl-my-test
      ```
      {: pre}
+     Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+     {: note}
 
 
 ### Step 4: Create the Ingress resource
@@ -783,6 +875,9 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 ```
 {: pre}
 
+Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+{: note}
+
 If you do not have a TLS certificate ready, follow these steps:
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
 2. Convert the cert and key into base-64.
@@ -792,18 +887,9 @@ If you do not have a TLS certificate ready, follow these steps:
       ```
       {: pre}
 
-      ```
-      openssl base64 -in tls.crt -out tls.crt.base64
-      ```
-      {: pre}
    2. View the base-64 encoded value for your cert and key.
       ```
       cat tls.key.base64
-      ```
-      {: pre}
-
-      ```
-      cat tls.crt.base64
       ```
       {: pre}
 
@@ -825,6 +911,8 @@ If you do not have a TLS certificate ready, follow these steps:
      kubectl create -f ssl-my-test
      ```
      {: pre}
+     Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+     {: note}
 
 
 ### Step 5: Create the Ingress resource

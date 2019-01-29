@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-29"
 
 ---
 
@@ -162,7 +162,7 @@ In your CLI output, make sure that the **Status** of your worker nodes displays 
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
-After you deploy an Ingress application load balancer (ALB) secret to your cluster, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.
+After you deploy an Ingress application load balancer (ALB) secret to your cluster by using the `ibmcloud ks alb-cert-deploy` command, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.
 
 When you list information about the ALB secret, the status says `*_failed`. For example, `create_failed`, `update_failed`, `delete_failed`.
 
@@ -195,6 +195,10 @@ Review the following reasons why the ALB secret might fail and the corresponding
  <tr>
  <td>The {{site.data.keyword.cloudcerts_long_notm}} service is experiencing downtime.</td>
  <td>Check that your {{site.data.keyword.cloudcerts_short}} service is up and running.</td>
+ </tr>
+ <tr>
+ <td>Your imported secret has the same name as the IBM-provided Ingress secret.</td>
+ <td>Rename your secret. You can check the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.</td>
  </tr>
  </tbody></table>
 
