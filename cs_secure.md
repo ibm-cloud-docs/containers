@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-29"
 
 ---
 
@@ -205,6 +205,7 @@ All containers are protected by [predefined Calico network policy settings](/doc
 
 If you want to allow incoming network traffic from the internet, you must expose your apps with a [NodePort service, a LoadBalancer service, or an Ingress application load balancer](/docs/containers/cs_network_planning.html#planning).  
 
+{: #network_segmentation}
 **What is network segmentation and how can I set it up for a cluster?** </br>
 Network segmentation describes the approach to divide a network into multiple sub-networks. You can group apps and related data to be accessed by a specific group in your organization. Apps that run in one sub-network cannot see or access apps in another sub-network. Network segmentation also limits the access that is provided to an insider or third party software and can limit the range of malicious activities.   
 
@@ -215,8 +216,6 @@ VLAN spanning is an {{site.data.keyword.Bluemix_notm}} account setting and can b
 
 Review the following table to see your options for how to achieve network segmentation when VLAN spanning is turned on.
 
-
-Review the following table to see your options for how to achieve network segmentation when you enable VRF or VLAN spanning for your account.
 
 |Security feature|Description|
 |-------|----------------------------------|
