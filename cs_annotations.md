@@ -1400,6 +1400,7 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
     3. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<app_path>/appid_callback` or `https://<hostname>/<app_path>/appid_callback`.
       * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`.
       * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/appid_callback`.
+
       {{site.data.keyword.appid_full_notm}} offers a logout function: If `/logout` exists in your {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page. To use this function, you must append `/appid_logout` to your domain in the format `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_logout` and include this URL in the redirect URLs list.
       {: note}
 

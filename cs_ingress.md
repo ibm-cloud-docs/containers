@@ -28,20 +28,20 @@ Expose multiple apps in your Kubernetes cluster by creating Ingress resources th
 <img src="images/cs_ingress_imagemap.png" usemap="#image-map">
 
 <map name="image-map">
-    <area target="" alt="Ingress components" title="Ingress components" href="#components" coords="63,72,187,96" shape="rect">
-    <area target="" alt="ALB IPs" title="ALB IPs" href="#ips" coords="60,104,187,128" shape="rect">
-    <area target="" alt="Architecture" title="Architecture" href="#architecture-single" coords="60,139,189,164" shape="rect">
-    <area target="" alt="Prerequisites" title="Prerequisites" href="#config_prereqs" coords="59,175,191,198" shape="rect">
-    <area target="" alt="Planning networking for single or multiple namespaces" title="Planning networking for single or multiple namespaces" href="#multiple_namespaces" coords="62,208,189,232" shape="rect">
-    <area target="" alt="Exposing apps that are inside your cluster to the public" title="Exposing apps that are inside your cluster to the public" href="#ingress_expose_public" coords="280,71,409,108" shape="rect">
-    <area target="" alt="Exposing apps that are outside your cluster to the public" title="Exposing apps that are outside your cluster to the public" href="#external_endpoint" coords="283,116,408,148" shape="rect">
-    <area target="" alt="Exposing apps to a private network" title="Exposing apps to a private network" href="#ingress_expose_private" coords="283,157,411,190" shape="rect">
-    <area target="" alt="Bringing your own Ingress controller" title="Bringing your own Ingress controller" href="#user_managed" coords="281,200,408,234" shape="rect">
-    <area target="" alt="Customizing an Ingress resource with annotations" title="Customizing an Ingress resource with annotations" href="#annotations" coords="500,73,634,99" shape="rect">
-    <area target="" alt="Opening ports in the Ingress ALB" title="Opening ports in the Ingress ALB" href="#opening_ingress_ports" coords="500,107,633,132" shape="rect">
-    <area target="" alt="Configuring SSL protocols and SSL ciphers at the HTTP level" title="Configuring SSL protocols and SSL ciphers at the HTTP level" href="#ssl_protocols_ciphers" coords="500,141,635,181" shape="rect">
-    <area target="" alt="Preserving the source IP address" title="Preserving the source IP address" href="#preserve_source_ip" coords="502,187,633,220" shape="rect">
-    <area target="" alt="Tuning ALB performance" title="Tuning ALB performance" href="#perf_tuning" coords="501,231,633,253" shape="rect">
+    <area target="" alt="Ingress components" title="Ingress components" href="#components" coords="28,42,172,69" shape="rect">
+    <area target="" alt="ALB IPs" title="ALB IPs" href="#ips" coords="27,79,171,104" shape="rect">
+    <area target="" alt="Architecture" title="Architecture" href="#architecture-single" coords="31,114,171,140" shape="rect">
+    <area target="" alt="Prerequisites" title="Prerequisites" href="#config_prereqs" coords="28,151,171,176" shape="rect">
+    <area target="" alt="Planning networking for single or multiple namespaces" title="Planning networking for single or multiple namespaces" href="#multiple_namespaces" coords="31,191,172,229" shape="rect">
+    <area target="" alt="Exposing apps that are inside your cluster to the public" title="Exposing apps that are inside your cluster to the public" href="#ingress_expose_public" coords="275,43,418,78" shape="rect">
+    <area target="" alt="Exposing apps that are outside your cluster to the public" title="Exposing apps that are outside your cluster to the public" href="#external_endpoint" coords="275,94,419,128" shape="rect">
+    <area target="" alt="Exposing apps to a private network" title="Exposing apps to a private network" href="#ingress_expose_private" coords="277,141,418,177" shape="rect">
+    <area target="" alt="Bringing your own Ingress controller" title="Bringing your own Ingress controller" href="#user_managed" coords="278,192,416,228" shape="rect">
+    <area target="" alt="Customizing an Ingress resource with annotations" title="Customizing an Ingress resource with annotations" href="#annotations" coords="523,44,670,73" shape="rect">
+    <area target="" alt="Opening ports in the Ingress ALB" title="Opening ports in the Ingress ALB" href="#opening_ingress_ports" coords="521,83,669,105" shape="rect">
+    <area target="" alt="Configuring SSL protocols and SSL ciphers at the HTTP level" title="Configuring SSL protocols and SSL ciphers at the HTTP level" href="#ssl_protocols_ciphers" coords="523,116,669,158" shape="rect">
+    <area target="" alt="Preserving the source IP address" title="Preserving the source IP address" href="#preserve_source_ip" coords="522,167,671,202" shape="rect">
+    <area target="" alt="Tuning ALB performance" title="Tuning ALB performance" href="#perf_tuning" coords="524,213,669,237" shape="rect">
 </map>
 
 ## Sample YAMLs
