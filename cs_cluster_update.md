@@ -110,7 +110,8 @@ When the config map is not defined, the default is used. By default, a maximum o
 Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
 {: important}
 
-{: #worker-up-configmap}**To create a config map and update worker nodes**:
+{: #worker-up-configmap}
+**To create a config map and update worker nodes**:
 
 1.  List available worker nodes and note their private IP address.
 
