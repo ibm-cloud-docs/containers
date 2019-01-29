@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-29"
 
 ---
 
@@ -78,7 +78,22 @@ For a long-term fix, [update the machine type of your worker pool](/docs/contain
 {: #nonroot}
 
 {: tsSymptoms}
-After you [add NFS storage](/docs/containers/cs_storage_file.html#app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as "write-permission" or "do not have required permission". The pod fails and is stuck in a reload cycle.
+After you [add NFS storage](/docs/containers/cs_storage_file.html#app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as the following. The pod fails and is stuck in a reload cycle.
+
+```
+write-permission
+```
+{: screen}
+
+```
+do not have required permission
+```
+{: screen}
+
+```
+cannot create directory '/bitnami/mariadb/data': Permission denied
+```
+{: screen}
 
 {: tsCauses}
 By default, non-root users do not have write permission on the volume mount path for NFS-backed storage. Some common app images, such as Jenkins and Nexus3, specify a non-root user that owns the mount path in the Dockerfile. When you create a container from this Dockerfile, the creation of the container fails due to insufficient permissions of the non-root user on the mount path. To grant write permission, you can modify the Dockerfile to temporarily add the non-root user to the root user group before it changes the mount path permissions, or use an init container.
@@ -278,7 +293,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 {: #cs_storage_nonroot}
 
 {: tsSymptoms}
-After you [add non-root user access to persistent storage](#nonroot) or deploying a Helm chart with a non-root user ID specified, the user cannot write to the mounted storage.
+After you [add non-root user access to persistent storage](#nonroot) or deploy a Helm chart with a non-root user ID specified, the user cannot write to the mounted storage.
 
 {: tsCauses}
 The deployment or Helm chart configuration specifies the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for the pod's `fsGroup` (group ID) and `runAsUser` (user ID). Currently, {{site.data.keyword.containerlong_notm}} does not support the `fsGroup` specification, and supports only `runAsUser` set as `0` (root permissions).
