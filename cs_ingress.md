@@ -81,6 +81,8 @@ spec:
 ```
 {: codeblock}
 
+</br>
+
 **Ingress resource to privately expose an app**</br>
 
 Have you already completed the following?
