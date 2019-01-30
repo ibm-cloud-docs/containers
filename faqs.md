@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -110,13 +110,11 @@ For more information about supported regions, see [Regions and zones](/docs/cont
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following standards: 
-- HIPAA
-- SOC1
-- SOC2 Type 1
-- ISAE 3402
-- ISO 27001
-- ISO 27017
-- ISO 27018
+- Health Insurance Portability and Accountability Act (HIPAA)
+- Service Organization Control standards (SOC 1, SOC 2 Type 1)
+- International Standard on Assurance Engagements 3402 (ISAE 3402), Assurance Reports on Controls at a Service Organization
+- International Organization for Standardization (ISO 27001, ISO 27017, ISO 27018)
+- Payment Card Industry Data Security Standard (PCI DSS)
 
 ## Can I use IBM Cloud and other services with my cluster?
 {: #integrations}
