@@ -770,6 +770,9 @@ Metrics help you monitor the health and performance of your clusters. You can us
 
 Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containerlong_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containerlong_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster components.
 
+To avoid conflicts when using metrics services, be sure that clusters across resource groups and regions have unique names.
+{: tip}
+
 <dl>
   <dt>Cluster details page in {{site.data.keyword.Bluemix_notm}}</dt>
     <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.Bluemix_notm}} service binding. To view the cluster details page, go to your **{{site.data.keyword.Bluemix_notm}} Dashboard** and select a cluster.</dd>
@@ -808,9 +811,6 @@ Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.co
   <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Note**: {{site.data.keyword.mon_full_notm}} does not support the `containerd` container runtime. When you use {{site.data.keyword.mon_full_notm}} with version 1.11 or later clusters, not all container metrics are collected.</dd>
 </dl>
 
-To avoid conflicts when using the built in metric service, be sure that clusters across resource groups and regions have unique names.
-{: tip}
-
 ### Other health monitoring tools
 {: #health_tools}
 
@@ -841,7 +841,7 @@ To configure Autorecovery:
 1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
 
 2.  Verify that tiller is installed with a service account.
-    
+
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```
