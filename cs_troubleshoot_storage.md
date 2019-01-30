@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -46,7 +46,7 @@ For multizone clusters, PVs must have the following labels so that pods do not t
 New clusters with worker pools that can span multiple zones label the PVs by default. If you created your clusters before worker pools were introduced, you must add the labels manually.
 
 {: tsResolve}
-[Update the PVs in your cluster with the region and zone labels](/docs/containers/cs_storage_basics.html#multizone).
+[Update the PVs in your cluster with the region and zone labels](/docs/containers/cs_storage_basics.html#storage_multizone).
 
 <br />
 
@@ -652,7 +652,7 @@ After you set the correct file permissions in your {{site.data.keyword.cos_full_
 
 
 ## Getting help and support
-{: #ts_getting_help}
+{: #storage_getting_help}
 
 Still having issues with your cluster?
 {: shortdesc}

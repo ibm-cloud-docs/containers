@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -1084,7 +1084,7 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>IBM file storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated `incubator` version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to [add the region the zone labels](/docs/containers/cs_storage_basics.html#multizone).</td>
+<td>Updated `incubator` version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to [add the region the zone labels](/docs/containers/cs_storage_basics.html#storage_multizone).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -123,7 +123,7 @@ You can access your app privately within the cluster by [using a `clusterIP` ser
 
 If you want to expose your app publicly, you have different options that depend on your cluster type.
 *  **Free cluster**: You can expose your app by using a [NodePort service](/docs/containers/cs_nodeport.html#nodeport).
-*  **Standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#planning).
+*  **Standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#external).
 *  **Cluster that is made private by using Calico**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#private_both_vlans). You also must use a Calico preDNAT network policy to block the public node ports.
 *  **Private VLAN-only standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#private_vlan). You also must open the port for the service's private IP address in your firewall.
 

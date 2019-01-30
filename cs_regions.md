@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -208,7 +208,7 @@ Zones are physical data centers that are available within an {{site.data.keyword
 {: note}
 
 ### Single-zone clusters
-{: #single_zone}
+{: #regions_single_zone}
 
 In a single-zone cluster, your cluster's resources remain in the zone in which the cluster is deployed. The following image highlights the relationship of single-zone cluster components within an example region of US East:
 
@@ -223,7 +223,7 @@ _Understanding where your single-zone cluster resources are._
 3.  When you initiate cluster management actions, such as using `ibmcloud ks` commands, basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
 
 ### Multizone clusters
-{: #multizone}
+{: #regions_multizone}
 
 In a multizone cluster, the master node is deployed in a multizone-capable zone and your cluster's resources are spread across multiple zones.
 

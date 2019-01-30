@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -28,18 +28,24 @@ You can take an app that you deployed previously by using Cloud Foundry and depl
 
 
 ## Objectives
+{: #cf_objectives}
 
 - Learn the general process of deploying apps in containers to a Kubernetes cluster.
 - Create a Dockerfile from your app code to build a container image.
 - Deploy a container from that image into a Kubernetes cluster.
 
 ## Time required
+{: #cf_time}
+
 30 minutes
 
 ## Audience
+{: #cf_audience}
+
 This tutorial is intended for Cloud Foundry app developers.
 
 ## Prerequisites
+{: #cf_prereqs}
 
 - [Create a private image registry in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry/index.html).
 - [Create a cluster](/docs/containers/cs_clusters.html#clusters_ui).
@@ -54,6 +60,7 @@ This tutorial is intended for Cloud Foundry app developers.
 
 
 ## Lesson 1: Download app code
+{: #cf_1}
 
 Get your code ready to go. Don't have any code yet? You can download starter code to use in this tutorial.
 {: shortdesc}
@@ -89,6 +96,7 @@ Your app code is ready to be containerized!
 
 
 ## Lesson 2: Creating a Docker image with your app code
+{: #cf_2}
 
 Create a Dockerfile that includes your app code and the necessary configurations for your container. Then, build a Docker image from that Dockerfile and push it to your private image registry.
 {: shortdesc}
@@ -175,6 +183,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
 
 
 ## Lesson 3: Deploying a container from your image
+{: #cf_3}
 
 Deploy your app as a container in a Kubernetes cluster.
 {: shortdesc}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2019-01-29"
 
 
 # Planning to expose your apps with external networking
-{: #planning}
+{: #cs_network_planning}
 
 With {{site.data.keyword.containerlong}}, you can manage external networking by making apps publicly or privately accessible.
 {: shortdesc}

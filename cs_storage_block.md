@@ -753,7 +753,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
-    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](/docs/containers/cs_storage_basics.html#multizone) to your PV.
+    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](/docs/containers/cs_storage_basics.html#storage_multizone) to your PV.
     </tr>
     <tr>
     <td><code>spec.flexVolume.fsType</code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -525,7 +525,7 @@ If you have a Dedicated account, you must [open a support case](/docs/get-suppor
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
-    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](/docs/containers/cs_storage_basics.html#multizone) to your PV.
+    <td>Enter the region and the zone that you retrieved earlier. You must have at least one worker node in the same region and zone as your persistent storage to mount the storage in your cluster. If a PV for your storage already exists, [add the zone and region label](/docs/containers/cs_storage_basics.html#storage_multizone) to your PV.
     </tr>
     <tr>
     <td><code>spec.capacity.storage</code></td>

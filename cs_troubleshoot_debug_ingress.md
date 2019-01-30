@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -416,7 +416,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
 
 ## Getting help and support
-{: #ts_getting_help}
+{: #ingress_getting_help}
 
 Still having issues with your cluster?
 {: shortdesc}

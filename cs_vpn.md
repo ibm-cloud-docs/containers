@@ -71,7 +71,7 @@ Before using the strongSwan Helm chart, review the following considerations and 
 
 
 ## Configuring the strongSwan VPN in a multizone cluster
-{: #multizone}
+{: #vpn_multizone}
 
 Deploy a strongSwan VPN service in a multizone cluster. By making app instances available on worker nodes in multiple zones, your apps can continue to be available over the VPN connection in the event of a zonal outage.
 {: shortdesc}
@@ -115,9 +115,9 @@ Install Helm and get the strongSwan Helm chart to view possible configurations.
 {: shortdesc}
 
 1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
-    
+
 2.  Verify that tiller is installed with a service account.
-    
+
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -203,7 +203,7 @@ To protect your network and limit the range of damage that a user can do when ac
 **What network traffic is allowed for my cluster by default?**</br>
 All containers are protected by [predefined Calico network policy settings](/docs/containers/cs_network_policy.html#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked, except a few ports that are opened so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master. Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers/cs_tech.html).
 
-If you want to allow incoming network traffic from the internet, you must expose your apps with a [NodePort service, a LoadBalancer service, or an Ingress application load balancer](/docs/containers/cs_network_planning.html#planning).  
+If you want to allow incoming network traffic from the internet, you must expose your apps with a [NodePort service, a LoadBalancer service, or an Ingress application load balancer](/docs/containers/cs_network_planning.html#external).  
 
 {: #network_segmentation}
 **What is network segmentation and how can I set it up for a cluster?** </br>
@@ -228,7 +228,7 @@ The more apps or worker nodes that you expose publicly, the more steps you must 
 
 |Security feature|Description|
 |-------|----------------------------------|
-|Limit the number of exposed apps|By default, your apps and services that run within the cluster are not reachable over the public internet. You can choose if you want to expose your apps to the public, or if you want your apps and services be reachable on the private network only. When you keep your apps and services private, you can leverage the built-in security features to assure secured communication between worker nodes and pods. To expose services and apps to the public internet, you can leverage the [Ingress and load balancer support](/docs/containers/cs_network_planning.html#planning) to securely make your services publicly available. Ensure that only necessary services are exposed, and re-visit the list of exposed apps on a regular basis to ensure that they are still valid. |
+|Limit the number of exposed apps|By default, your apps and services that run within the cluster are not reachable over the public internet. You can choose if you want to expose your apps to the public, or if you want your apps and services be reachable on the private network only. When you keep your apps and services private, you can leverage the built-in security features to assure secured communication between worker nodes and pods. To expose services and apps to the public internet, you can leverage the [Ingress and load balancer support](/docs/containers/cs_network_planning.html#external) to securely make your services publicly available. Ensure that only necessary services are exposed, and re-visit the list of exposed apps on a regular basis to ensure that they are still valid. |
 |Keep worker nodes private|When you create a cluster, every cluster is automatically connected to a private VLAN. The private VLAN determines the private IP address that is assigned to a worker node. You can choose to keep your worker nodes private by connecting them to a private VLAN only. Private VLANs in free clusters are managed by IBM, and private VLANs in standard clusters are managed by you in your IBM Cloud infrastructure (SoftLayer) account. </br></br><strong>Attention:</strong> Keep in mind that in order to communicate with the Kubernetes master and for {{site.data.keyword.containerlong_notm}} to properly function, you must configure public connectivity to [specific URLs and IP addresses](/docs/containers/cs_firewall.html#firewall_outbound). To set up this public connectivity, you can configure a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html), in front of your worker nodes and enable network traffic to these URLs and IP addresses.|
 |Limit public internet connectivity with edge nodes|By default, every worker node is configured to accept app pods and associated load balancer or ingress pods. You can label worker nodes as [edge nodes](/docs/containers/cs_edge.html#edge) to force load balancer and ingress pods to be deployed to these worker nodes only. In addition, you can [taint your worker nodes](/docs/containers/cs_edge.html#edge_workloads) so that app pods cannot schedule onto the edge nodes. With edge nodes, you can isolate the networking workload on fewer worker nodes in your cluster and keep other worker nodes in the cluster private.|
 {: caption="Private services and worker node options" caption-side="top"}

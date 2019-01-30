@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -30,6 +30,7 @@ In this tutorial series, you can see how a fictional public relations firm uses 
 
 
 ## Objectives
+{: #tutorials_objectives}
 
 In this first tutorial, you act as the PR firm's networking administrator. You configure a custom Kubernetes cluster that is used to deploy and test a Hello World version of the app in {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
@@ -41,16 +42,19 @@ In this first tutorial, you act as the PR firm's networking administrator. You c
 
 
 ## Time required
+{: #tutorials_time}
 
 40 minutes
 
 
 ## Audience
+{: #tutorials_audience}
 
 This tutorial is intended for software developers and network administrators who are creating a Kubernetes cluster for the first time.
 {: shortdesc}
 
 ## Prerequisites
+{: #tutorials_prereqs}
 
 -  Check out the steps you need to take to [prepare to create a cluster](/docs/containers/cs_clusters.html#cluster_prepare).
 -  Ensure you have the following access policies:
@@ -309,7 +313,7 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
 Great work! Your cluster is configured and your local environment is ready for you to start deploying apps into the cluster.
 
 ## What's next?
-{: #next}
+{: #tutorials_next}
 
 * Test your knowledge and [take a quiz ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)!
 * Try the [Tutorial: Deploying apps into Kubernetes clusters](/docs/containers/cs_tutorials_apps.html#cs_apps_tutorial) to deploy the PR firm's app into the cluster that you created.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -529,7 +529,7 @@ Set an option for a cluster's Kubernetes API server configuration. This command 
 
 Set the webhook backend for the API server configuration. The webhook backend forwards API server audit logs to a remote server. A webhook configuration is created based on the information you provide in this command's flags. If you do not provide any information in the flags, a default webhook configuration is used.
 
-After you set the webhook, you must run the `ibmcloud ks apiserver-refresh` command to apply the changes to the Kubernetes master. 
+After you set the webhook, you must run the `ibmcloud ks apiserver-refresh` command to apply the changes to the Kubernetes master.
 {: note}
 
 <strong>Minimum required permissions</strong>: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -571,7 +571,7 @@ Disable an option for a cluster's Kubernetes API server configuration. This comm
 
 Disable the webhook backend configuration for the cluster's API server. Disabling the webhook backend stops forwarding API server audit logs to a remote server.
 
-After you disable the webhook, you must run the `ibmcloud ks apiserver-refresh` command to apply the changes to the Kubernetes master. 
+After you disable the webhook, you must run the `ibmcloud ks apiserver-refresh` command to apply the changes to the Kubernetes master.
 {: note}
 
 <strong>Minimum required permissions</strong>: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}

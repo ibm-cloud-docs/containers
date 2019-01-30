@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -576,7 +576,7 @@ You can find the complete example in [this IBM Cloud deployment pattern blog ![E
 
 
 ## v1.0: Components and architecture
-{: #planning}
+{: #v1_planning}
 
 The TCP/UDP load balancer 1.0 uses Iptables, a Linux kernel feature, to load balance requests across an app's pods.
 {: shortdesc}

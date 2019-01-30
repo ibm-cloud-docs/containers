@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -896,7 +896,7 @@ To troubleshoot your Helm chart:
 
 
 ## Getting help and support
-{: #ts_getting_help}
+{: #clusters_getting_help}
 
 Still having issues with your cluster?
 {: shortdesc}
