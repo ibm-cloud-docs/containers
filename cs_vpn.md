@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -114,16 +114,31 @@ Before you begin:
 Install Helm and get the strongSwan Helm chart to view possible configurations.
 {: shortdesc}
 
-1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](/docs/containers/cs_integrations.html#helm).
+1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
+    
+2.  Verify that tiller is installed with a service account.
+    
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
 
-2. Save the default configuration settings for the strongSwan Helm chart in a local YAML file.
+    Example output:
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+3. Save the default configuration settings for the strongSwan Helm chart in a local YAML file.
 
     ```
     helm inspect values ibm/strongswan > config.yaml
     ```
     {: pre}
 
-3. Open the `config.yaml` file.
+4. Open the `config.yaml` file.
 
 ### Step 2: Configure basic IPSec settings
 {: #strongswan_2}

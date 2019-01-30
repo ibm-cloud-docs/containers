@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -198,8 +198,22 @@ The cluster autoscaler is available as a **preview beta** for select users only.
 <br>
 **To install the `ibm-ks-cluster-autoscaler` plug-in in your cluster**:
 
-1.  Follow the [instructions](/docs/containers/cs_integrations.html#helm) to install the **Helm version 2.11 or later** client on your local machine and install the Helm server (tiller) in your cluster.
-2.  Add and update the Helm repo where the cluster autoscaler Helm chart is.
+1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the **Helm version 2.11 or later** client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+2.  Verify that tiller is installed with a service account.
+    
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
+
+    Example output:
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+3.  Add and update the Helm repo where the cluster autoscaler Helm chart is.
     ```
     helm repo add ibm https://registry.bluemix.net/helm/ibm/
     ```
@@ -208,7 +222,7 @@ The cluster autoscaler is available as a **preview beta** for select users only.
     helm repo update
     ```
     {: pre}
-3.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster.
+4.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster.
     
     You can also [customize the cluster autoscaler settings](#ca_chart_values) such as the amount of time it waits before scaling worker nodes up or down.
     {: tip}
@@ -265,7 +279,7 @@ The cluster autoscaler is available as a **preview beta** for select users only.
     ```
     {: screen}
 
-4.  Verify that the installation is successful.
+5.  Verify that the installation is successful.
 
     1.  Check that the cluster autoscaler pod is in a **Running** state.
         ```
@@ -288,9 +302,9 @@ The cluster autoscaler is available as a **preview beta** for select users only.
         ```
         {: screen}
 
-5.  Repeat these steps for every cluster where you want to provision the cluster autoscaler.
+6.  Repeat these steps for every cluster where you want to provision the cluster autoscaler.
 
-6.  To start scaling your worker pools, see [Updating the cluster autoscaler configuration](#ca_cm).
+7.  To start scaling your worker pools, see [Updating the cluster autoscaler configuration](#ca_cm).
 
 <br />
 

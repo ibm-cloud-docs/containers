@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -838,9 +838,24 @@ Before you begin:
 
 To configure Autorecovery:
 
-1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](/docs/containers/cs_integrations.html#helm).
+1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
 
-2. Create a configuration map file that defines your checks in JSON format. For example, the following YAML file defines three checks: an HTTP check and two Kubernetes API server checks. Refer to the tables following the example YAML file for information about the three kinds of checks and information about the individual components of the checks.
+2.  Verify that tiller is installed with a service account.
+    
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
+
+    Example output:
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+3. Create a configuration map file that defines your checks in JSON format. For example, the following YAML file defines three checks: an HTTP check and two Kubernetes API server checks. Refer to the tables following the example YAML file for information about the three kinds of checks and information about the individual components of the checks.
 </br>
    **Tip:** Define each check as a unique key in the `data` section of the configuration map.
 
@@ -984,35 +999,35 @@ To configure Autorecovery:
    </tbody>
    </table>
 
-3. Create the configuration map in your cluster.
+4. Create the configuration map in your cluster.
 
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
-3. Verify that you created the configuration map with the name `ibm-worker-recovery-checks` in the `kube-system` namespace with the proper checks.
+5. Verify that you created the configuration map with the name `ibm-worker-recovery-checks` in the `kube-system` namespace with the proper checks.
 
     ```
     kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
     ```
     {: pre}
 
-4. Deploy Autorecovery into your cluster by installing the `ibm-worker-recovery` Helm chart.
+6. Deploy Autorecovery into your cluster by installing the `ibm-worker-recovery` Helm chart.
 
     ```
     helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
     ```
     {: pre}
 
-5. After a few minutes, you can check the `Events` section in the output of the following command to see activity on the Autorecovery deployment.
+7. After a few minutes, you can check the `Events` section in the output of the following command to see activity on the Autorecovery deployment.
 
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
 
-6. If you are not seeing activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
+8. If you are not seeing activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
 
     ```
     helm test ibm-worker-recovery

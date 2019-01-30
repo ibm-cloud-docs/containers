@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -56,24 +56,36 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 
-2. Follow the [instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) in your cluster.
+2.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+    
+3.  Verify that tiller is installed with a service account.
+    
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
 
-   If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](/docs/containers/cs_integrations.html#helm).
-   {: important}
+    Example output:
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
    
-3. Add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
+4. Add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
    ```
    helm repo add ibm https://registry.bluemix.net/helm/ibm
    ```
    {: pre}
 
-4. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
+5. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
    {: pre}
 
-5. Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
+6. Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
    ```
    helm install ibm/ibmcloud-block-storage-plugin
    ```
@@ -123,7 +135,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ```
    {: screen}
 
-6. Verify that the installation was successful.
+7. Verify that the installation was successful.
    ```
    kubectl get pod -n kube-system | grep block
    ```
@@ -138,7 +150,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
    The installation is successful when you see one `ibmcloud-block-storage-plugin` pod and one or more `ibmcloud-block-storage-driver` pods. The number of `ibmcloud-block-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a **Running** state.
 
-7. Verify that the storage classes for block storage were added to your cluster.
+8. Verify that the storage classes for block storage were added to your cluster.
    ```
    kubectl get storageclasses | grep block
    ```
@@ -157,7 +169,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ```
    {: screen}
 
-8. Repeat these steps for every cluster where you want to provision block storage.
+9. Repeat these steps for every cluster where you want to provision block storage.
 
 You can now continue to [create a PVC](#add_block) to provision block storage for your app.
 

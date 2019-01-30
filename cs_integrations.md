@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -658,20 +658,34 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-4. Verify that the `tiller-deploy` pod has a **Status** of `Running` in your cluster.
+4.  Verify that the installation is successful.
+    1.  Verify that the Tiller service account is created.
+        ```
+        kubectl get serviceaccount -n kube-system | grep tiller
+        ```
+        {: pre}
+        
+        Example output:
+        
+        ```
+        NAME                                 SECRETS   AGE
+        tiller                               1         2m
+        ```
+        {: screen}
+        
+    2.  Verify that the `tiller-deploy` pod has a **Status** of `Running` in your cluster.
+        ```
+        kubectl get pods -n kube-system -l app=helm
+        ```
+        {: pre}
 
-    ```
-    kubectl get pods -n kube-system -l app=helm
-    ```
-    {: pre}
+        Example output:
 
-    Example output:
-
-    ```
-    NAME                            READY     STATUS    RESTARTS   AGE
-    tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
-    ```
-    {: screen}
+        ```
+        NAME                            READY     STATUS    RESTARTS   AGE
+        tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
+        ```
+        {: screen}
 
 5. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
 

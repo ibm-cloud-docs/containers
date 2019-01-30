@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -138,23 +138,38 @@ Before you begin:
 
 To install Portworx:
 
-1. Follow the [instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) version 2.9 or higher with a Kubernetes service account in your cluster.
+1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+    
+2.  Verify that tiller is installed with a service account.
+    
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
 
-2. [Retrieve the endpoint, user name and password](#etcd_credentials) of the {{site.data.keyword.composeForEtcd}} service instance that you created earlier.
+    Example output:
 
-3. Download the Portworx Helm chart.
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+3. [Retrieve the endpoint, user name and password](#etcd_credentials) of the {{site.data.keyword.composeForEtcd}} service instance that you created earlier.
+
+4. Download the Portworx Helm chart.
    ```
    git clone https://github.com/portworx/helm.git
    ```
    {: pre}
 
-4. Open the `values.yaml` file with your preferred editor. This example uses the `nano` editor.
+5. Open the `values.yaml` file with your preferred editor. This example uses the `nano` editor.
    ```
    nano helm/charts/portworx/values.yaml
    ```
    {: pre}
 
-5. Update the following values and save your changes.
+6. Update the following values and save your changes.
    - **etcdEndPoint**: Add the endpoint of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
    - **clusterName**: Enter the name of the cluster where you want to install Portworx.
    - **etcd.credentials**: Enter the user name and password of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `<user_name>:<password>`.
@@ -219,7 +234,7 @@ To install Portworx:
    ```
    {: codeblock}
 
-6. Install the Portworx Helm chart.
+7. Install the Portworx Helm chart.
    ```
    helm install ./helm/charts/portworx/ --debug --name portworx
    ```
@@ -313,7 +328,7 @@ To install Portworx:
    ```
    {: screen}
 
-7. Verify that Portworx is installed successfully.
+8. Verify that Portworx is installed successfully.
    1. List the Portworx pods in your `kube-system` namespace.
       ```
       kubectl get pods -n kube-system | grep 'portworx\|stork'
@@ -336,7 +351,7 @@ To install Portworx:
 
       The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of `portworx`, `stork`, and `stork-scheduler` pods equals the number of worker nodes that are included in your Portworx cluster. All pods must be in a **Running** state.
 
-8. Verify that your Portworx cluster is set up correctly.      
+9. Verify that your Portworx cluster is set up correctly.      
    1. Log in to one of your `portworx` pods and list the status of your Portworx cluster.
       ```
       kubectl exec <portworx_pod> -it -n kube-system -- /opt/pwx/bin/pxctl status
