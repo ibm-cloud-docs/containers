@@ -22,6 +22,7 @@ lastupdated: "2019-01-31"
 # Planning your cluster and worker node setup
 {: #plan_clusters}
 Design your standard cluster for maximum availability and capacity for your app with {{site.data.keyword.containerlong}}.
+{: shortdesc}
 
 ## Highly available clusters
 {: #ha_clusters}
@@ -131,6 +132,7 @@ If you [create your multizone cluster with the CLI](/docs/containers/cs_clusters
 {: #mz_new_ways}
 
 With the introduction of worker pools, you can use a new set of APIs and commands to manage your cluster. You can see these new commands in the [CLI documentation page](/docs/containers/cs_cli_reference.html#cs_cli_reference), or in your terminal by running `ibmcloud ks help`.
+{: shortdesc}
 
 The following table compares the old and new methods for a few common cluster management actions.
 <table summary="The table shows the description of the new way to perform multizone commands. Rows are to be read from the left to right, with the description in column one, the old way in column two, and the new multizone way in column three.">
