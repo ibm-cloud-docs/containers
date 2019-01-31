@@ -27,6 +27,9 @@ Customize logging and set up monitoring to help you troubleshoot issues and impr
 ## Viewing Ingress logs
 {: #ingress_logs}
 
+If you want to troubleshoot your Ingress or monitor Ingress activity, you can review the Ingress logs. 
+{: shortdesc}
+
 Logs are automatically collected for your Ingress ALBs. To view the ALB logs, choose between two options.
 * [Create a logging configuration for the Ingress service](/docs/containers/cs_health.html#configuring) in your cluster.
 * Check the logs from the CLI. **Note**: You must have at least the [**Reader** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `kube-system` namespace.
@@ -316,6 +319,7 @@ To install the metrics exporter and Prometheus agent for an ALB in your cluster:
 {: #alb_metrics}
 
 The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. ALB metrics collect data on the connections and responses the ALB is handling.
+{: shortdesc}
 
 ALB metrics are in the format `kube_system_<ALB-ID>_<METRIC-NAME> <VALUE>`. For example, if an ALB receives 23 responses with 2xx-level status codes, the metric is formatted as `kube_system_public_crf02710f54fcc40889c301bfd6d5b77fe_alb1_totalHandledRequest {.. metric="2xx"} 23` where `metric` is the prometheus label.
 
@@ -383,6 +387,7 @@ The following table lists the supported ALB metric names with the metric labels 
 {: #server_metrics}
 
 The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Server metrics collect data on the host defined in an Ingress resource; for example, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
+{: shortdesc}
 
 Server metrics are in the format `kube_system_server_<ALB-ID>_<SUB-TYPE>_<SERVER-NAME>_<METRIC-NAME> <VALUE>`.
 
@@ -507,6 +512,7 @@ The following table lists the supported server metric names.
 {: #upstream_metrics}
 
 The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Upstream metrics collect data on the backend service defined in an Ingress resource.
+{: shortdesc}
 
 Upstream metrics are formatted in two ways.
 * [Type 1](#type_one) includes the upstream service name.
@@ -516,6 +522,7 @@ Upstream metrics are formatted in two ways.
 {: #type_one}
 
 Upstream type 1 metrics are in the format `kube_system_upstream_<ALB-ID>_<SUB-TYPE>_<UPSTREAM-NAME>_<METRIC-NAME> <VALUE>`.
+{: shortdesc}
 
 `<UPSTREAM-NAME>_<METRIC-NAME>` are formatted as labels. For example, `albId="default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc",metric="in"`
 
@@ -597,6 +604,7 @@ The following table lists the supported upstream type 1 metric names.
 {: #type_two}
 
 Upstream type 2 metrics are in the format `kube_system_upstream_<ALB-ID>_<METRIC-NAME>_<UPSTREAM-NAME>_<POD-IP> <VALUE>`.
+{: shortdesc}
 
 `<UPSTREAM-NAME>_<POD-IP>` are formatted as labels. For example, `albId="default-cafe-ingress-dev_dev_demostg1_us-south_containers_appdomain_cloud-tea-svc",backend="172_30_75_6_80"`
 
