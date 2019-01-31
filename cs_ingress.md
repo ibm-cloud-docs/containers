@@ -47,6 +47,9 @@ Expose multiple apps in your Kubernetes cluster by creating Ingress resources th
 ## Sample YAMLs
 {: #sample_ingress}
 
+Use these sample YAML files to quickly get started with specifying your Ingress resource. 
+{: shortdesc}
+
 **Ingress resource to publicly expose an app**</br>
 
 Have you already completed the following?
@@ -150,6 +153,7 @@ Ingress consists of three components:
 When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically provisions a portable public subnet and a portable private subnet. By default, the cluster automatically uses:
 * 1 portable public IP address from the portable public subnet for the default public Ingress ALB.
 * 1 portable private IP address from the portable private subnet for the default private Ingress ALB.
+{: shortdesc}
 
 If you have a multizone cluster, a default public ALB and a default private ALB are automatically created in each zone. The IP addresses of your default public ALBs are all behind the same IBM-provided hostname for your cluster.
 
@@ -224,6 +228,7 @@ One Ingress resource is required per namespace where you have apps that you want
 {: #one-ns}
 
 If the apps in your cluster are all in the same namespace, one Ingress resource is required to define routing rules for the apps that are exposed there. For example, if you have `app1` and `app2` exposed by services in a development namespace, you can create an Ingress resource in the namespace. The resource specifies `domain.net` as the host and registers the paths that each app listens on with `domain.net`.
+{: shortdesc}
 
 <img src="images/cs_ingress_single_ns.png" width="270" alt="One resource is required per namespace." style="width:270px; border-style: none"/>
 
@@ -231,6 +236,7 @@ If the apps in your cluster are all in the same namespace, one Ingress resource 
 {: #multi-ns}
 
 If the apps in your cluster are in different namespaces, you must create one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
+{: shortdesc}
 
 For example, consider the following scenario:
 * You have two versions of the same app, `app1` and `app3`, for testing purposes.
@@ -254,6 +260,7 @@ The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containe
 {: #multi-domains}
 
 Within an individual namespace, you can use one domain to access all the apps in the namespace. If you want to use different domains for the apps within an individual namespace, use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.appdomain.cloud` is registered, multiple subdomains all resolve to the same host. Then, you can use one resource to specify multiple subdomain hosts within that resource. Alternatively, you can create multiple Ingress resources in the namespace and specify a different subdomain in each Ingress resource.
+{: shortdesc}
 
 <img src="images/cs_ingress_single_ns_multi_subs.png" width="625" alt="One resource is required per namespace." style="width:625px; border-style: none"/>
 
@@ -555,6 +562,7 @@ Your Ingress resource is created in the same namespace as your app services. You
 {: #public_inside_5}
 
 In a web browser, enter the URL of the app service to access.
+{: shortdesc}
 
 ```
 https://<domain>/<app1_path>
@@ -591,7 +599,7 @@ Having trouble connecting to your app through Ingress? Try [debugging Ingress](/
 {: #external_endpoint}
 
 Expose apps that are outside your cluster to the public by including them in public Ingress ALB load balancing. Incoming public requests on the IBM-provided or your custom domain are forwarded automatically to the external app.
-{:shortdesc}
+{: shortdesc}
 
 Before you begin:
 
@@ -1167,6 +1175,7 @@ For more information about configmap resources, see the [Kubernetes documentatio
 {: #preserve_source_ip}
 
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
+{: shortdesc}
 
 To preserve the original source IP address of the client request, you can [enable source IP preservation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer). Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
 
@@ -1308,6 +1317,7 @@ To optimize performance of your Ingress ALBs, you can change the default setting
 {: #access-log}
 
 By default, the Ingress ALB logs each request as it arrives. If you have an environment that is heavily used, logging each request as it arrives can greatly increase disk I/O utilization. To avoid continuous disk I/O, you can enable log buffering and flush timeout for the ALB by editing the `ibm-cloud-provider-ingress-cm` Ingress configmap. When buffering is enabled, instead of performing a separate write operation for each log entry, the ALB buffers a series of entries and writes them to the file together in a single operation.
+{: shortdesc}
 
 1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
@@ -1426,6 +1436,7 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
 {: #kernel}
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers/cs_performance.html). Worker nodes are automatically provisioned with optimized kernel tuning, so only change these settings if you have specific performance optimization requirements.
+{: shortdesc}
 
 <br />
 
