@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -39,7 +39,9 @@ Add the `dedicated=edge` label to two or more worker nodes on each public VLAN i
 
 Before you begin:
 
-1. Ensure you have any {{site.data.keyword.Bluemix_notm}} IAM [platform role](/docs/containers/cs_users.html#platform).
+1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers/cs_users.html#platform):
+  * Any platform role for the cluster
+  * **Writer** or **Manager** service role for all namespaces
 2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 3. Ensure that your cluster has a least one public VLAN. Edge worker nodes are not available for clusters with private VLANs only.
 4. [Create a new worker pool](/docs/containers/cs_clusters.html#add_pool) that spans all the zone in your cluster and has at least 2 workers per zone.
@@ -108,7 +110,9 @@ A benefit of edge worker nodes is that they can be specified to run networking s
 
 Using the `dedicated=edge` toleration means that all load balancer and Ingress services are deployed to the labeled worker nodes only. However, to prevent other workloads from running on edge worker nodes and consuming worker node resources, you must use [Kubernetes taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin:
+- Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role for all namespaces](/docs/containers/cs_users.html#platform).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1. List all of the worker nodes with the `dedicated=edge` label.
 
@@ -126,3 +130,9 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
   Now, only pods with the `dedicated=edge` toleration are deployed to your edge worker nodes.
 
 3. If you choose to [enable source IP preservation for a load balancer 1.0 service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](/docs/containers/cs_loadbalancer.html#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
+
+4. To remove a taint, run the following command.
+    ```
+    kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
+    ```
+    {: pre}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -45,7 +45,8 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 
 -  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](/docs/containers/cs_cli_install.html#cs_cli_install_steps). Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
--  [Create a cluster](/docs/containers/cs_clusters.html#clusters_cli). 
+-  [Create a cluster](/docs/containers/cs_clusters.html#clusters_cli).
+-  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for {{site.data.keyword.containerlong_notm}}.
 -  [Target the CLI to your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 ## Lesson 1: Download and install Istio

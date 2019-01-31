@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2019-01-28"
 
 
 # Planning in-cluster and private networking
-{: #planning}
+{: #cs_network_cluster}
 
 Plan a networking setup for your {{site.data.keyword.containerlong}} cluster.
 {: shortdesc}

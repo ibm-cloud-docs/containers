@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -203,8 +203,9 @@ To protect your network and limit the range of damage that a user can do when ac
 **What network traffic is allowed for my cluster by default?**</br>
 All containers are protected by [predefined Calico network policy settings](/docs/containers/cs_network_policy.html#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked, except a few ports that are opened so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master. Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers/cs_tech.html).
 
-If you want to allow incoming network traffic from the internet, you must expose your apps with a [NodePort service, a LoadBalancer service, or an Ingress application load balancer](/docs/containers/cs_network_planning.html#planning).  
+If you want to allow incoming network traffic from the internet, you must expose your apps with a [NodePort service, a LoadBalancer service, or an Ingress application load balancer](/docs/containers/cs_network_planning.html#external).  
 
+{: #network_segmentation}
 **What is network segmentation and how can I set it up for a cluster?** </br>
 Network segmentation describes the approach to divide a network into multiple sub-networks. You can group apps and related data to be accessed by a specific group in your organization. Apps that run in one sub-network cannot see or access apps in another sub-network. Network segmentation also limits the access that is provided to an insider or third party software and can limit the range of malicious activities.   
 
@@ -215,8 +216,6 @@ VLAN spanning is an {{site.data.keyword.Bluemix_notm}} account setting and can b
 
 Review the following table to see your options for how to achieve network segmentation when VLAN spanning is turned on.
 
-
-Review the following table to see your options for how to achieve network segmentation when you enable VRF or VLAN spanning for your account.
 
 |Security feature|Description|
 |-------|----------------------------------|
@@ -229,7 +228,7 @@ The more apps or worker nodes that you expose publicly, the more steps you must 
 
 |Security feature|Description|
 |-------|----------------------------------|
-|Limit the number of exposed apps|By default, your apps and services that run within the cluster are not reachable over the public internet. You can choose if you want to expose your apps to the public, or if you want your apps and services be reachable on the private network only. When you keep your apps and services private, you can leverage the built-in security features to assure secured communication between worker nodes and pods. To expose services and apps to the public internet, you can leverage the [Ingress and load balancer support](/docs/containers/cs_network_planning.html#planning) to securely make your services publicly available. Ensure that only necessary services are exposed, and re-visit the list of exposed apps on a regular basis to ensure that they are still valid. |
+|Limit the number of exposed apps|By default, your apps and services that run within the cluster are not reachable over the public internet. You can choose if you want to expose your apps to the public, or if you want your apps and services be reachable on the private network only. When you keep your apps and services private, you can leverage the built-in security features to assure secured communication between worker nodes and pods. To expose services and apps to the public internet, you can leverage the [Ingress and load balancer support](/docs/containers/cs_network_planning.html#external) to securely make your services publicly available. Ensure that only necessary services are exposed, and re-visit the list of exposed apps on a regular basis to ensure that they are still valid. |
 |Keep worker nodes private|When you create a cluster, every cluster is automatically connected to a private VLAN. The private VLAN determines the private IP address that is assigned to a worker node. You can choose to keep your worker nodes private by connecting them to a private VLAN only. Private VLANs in free clusters are managed by IBM, and private VLANs in standard clusters are managed by you in your IBM Cloud infrastructure (SoftLayer) account. </br></br><strong>Attention:</strong> Keep in mind that in order to communicate with the Kubernetes master and for {{site.data.keyword.containerlong_notm}} to properly function, you must configure public connectivity to [specific URLs and IP addresses](/docs/containers/cs_firewall.html#firewall_outbound). To set up this public connectivity, you can configure a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html), in front of your worker nodes and enable network traffic to these URLs and IP addresses.|
 |Limit public internet connectivity with edge nodes|By default, every worker node is configured to accept app pods and associated load balancer or ingress pods. You can label worker nodes as [edge nodes](/docs/containers/cs_edge.html#edge) to force load balancer and ingress pods to be deployed to these worker nodes only. In addition, you can [taint your worker nodes](/docs/containers/cs_edge.html#edge_workloads) so that app pods cannot schedule onto the edge nodes. With edge nodes, you can isolate the networking workload on fewer worker nodes in your cluster and keep other worker nodes in the cluster private.|
 {: caption="Private services and worker node options" caption-side="top"}
@@ -446,3 +445,10 @@ You are responsible for ensuring the security of your personal information in Ku
 To set up encryption for your secrets, see [Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}](/docs/containers/cs_encrypt.html#keyprotect).
 
 On SGX-enabled bare metal worker nodes, you can encrypt you can encrypt your data in use by using the [{{site.data.keyword.datashield_short}} (Beta) service](/docs/services/data-shield/index.html#gettingstarted). Similar to the way encryption works for data at rest and data in motion, Fortanix Runtime Encryption that is integrated with {{site.data.keyword.datashield_short}} protects keys, data, and apps from external and internal threats. The threats might include malicious insiders, cloud providers, OS-level hacks, or network intruders.
+
+## Kubernetes security bulletins
+{: #security_bulletins}
+
+If vulnerabilities are found in Kubernetes, Kubernetes releases CVEs in security bulletins to inform users and to describe the actions that users must take to remediate the vulnerability. Kubernetes security bulletins that affect {{site.data.keyword.containerlong_notm}} users or the {{site.data.keyword.Bluemix_notm}} platform are published in the [{{site.data.keyword.Bluemix_notm}} security bulletin](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security). 
+
+Some CVEs require the latest patch update for a Kubernetes version that you can install as part of the regular [cluster update process](/docs/containers/cs_cluster_update.html#update) in {{site.data.keyword.containerlong_notm}}. Make sure to apply security patches in time to protect your cluster from malicious attacks. For information about what is included in a security patch, refer to the [version changelog](/docs/containers/cs_versions_changelog.html#changelog). 

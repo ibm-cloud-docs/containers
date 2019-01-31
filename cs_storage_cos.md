@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -176,30 +176,42 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 
-2. Follow the [instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) in your cluster, and add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cos_full_notm}} plug-in.
+2.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+    
+3.  Verify that tiller is installed with a service account.
+    
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
 
-    If you use Helm version 2.9 or higher, make sure that you installed tiller with a [service account](/docs/containers/cs_integrations.html#helm).
-    {: important}
+    Example output:
 
-3. Add the {{site.data.keyword.Bluemix_notm}} Helm repo to your cluster.
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+4. Add the {{site.data.keyword.Bluemix_notm}} Helm repo to your cluster.
    ```
    helm repo add ibm https://registry.bluemix.net/helm/ibm
    ```
    {: pre}
 
-4. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
+5. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
    {: pre}
 
-5. Download the Helm charts and unpack the charts in your current directory.
+6. Download the Helm charts and unpack the charts in your current directory.
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
    {: pre}
 
-6. If you use macOS or a Linux distribution, install the {{site.data.keyword.cos_full_notm}} Helm plug-in `ibmc`. The plug-in is used to automatically retrieve your cluster location and to set the API endpoint for your {{site.data.keyword.cos_full_notm}} buckets in your storage classes. If you use Windows as your operating system, continue with the next step.
+7. If you use macOS or a Linux distribution, install the {{site.data.keyword.cos_full_notm}} Helm plug-in `ibmc`. The plug-in is used to automatically retrieve your cluster location and to set the API endpoint for your {{site.data.keyword.cos_full_notm}} buckets in your storage classes. If you use Windows as your operating system, continue with the next step.
    1. Install the Helm plug-in.
       ```
       helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
@@ -237,7 +249,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       {: screen}
 
-7. Optional: Limit the {{site.data.keyword.cos_full_notm}} plug-in to access only the Kubernetes secrets that hold your {{site.data.keyword.cos_full_notm}} service credentials. By default, the plug-in is authorized to access all Kubernetes secrets in your cluster.
+8. Optional: Limit the {{site.data.keyword.cos_full_notm}} plug-in to access only the Kubernetes secrets that hold your {{site.data.keyword.cos_full_notm}} service credentials. By default, the plug-in is authorized to access all Kubernetes secrets in your cluster.
    1. [Create your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service).
    2. [Store your {{site.data.keyword.cos_full_notm}} service credentials in a Kubernetes secret](#create_cos_secret).
    3. Navigate to the `templates` directory and list available files.  
@@ -262,7 +274,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       {: codeblock}
    7. Save your changes.
 
-8. Install the {{site.data.keyword.cos_full_notm}} plug-in. When you install the plug-in, pre-defined storage classes are added to your cluster.
+9. Install the {{site.data.keyword.cos_full_notm}} plug-in. When you install the plug-in, pre-defined storage classes are added to your cluster.
 
    - **For macOS and Linux:**
      - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.
@@ -366,7 +378,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ```
    {: screen}
 
-8. Verify that the plug-in is installed correctly.
+10. Verify that the plug-in is installed correctly.
    ```
    kubectl get pod -n kube-system -o wide | grep object
    ```
@@ -381,7 +393,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
    The installation is successful when you see one `ibmcloud-object-storage-plugin` pod and one or more `ibmcloud-object-storage-driver` pods. The number of `ibmcloud-object-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a `Running` state for the plug-in to function properly. If the pods fail, run `kubectl describe pod -n kube-system <pod_name>` to find the root cause for the failure.
 
-9. Verify that the storage classes are created successfully.
+11. Verify that the storage classes are created successfully.
    ```
    kubectl get storageclass | grep s3
    ```
@@ -404,7 +416,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ```
    {: screen}
 
-10. Repeat the steps for all clusters where you want to access {{site.data.keyword.cos_full_notm}} buckets.
+12. Repeat the steps for all clusters where you want to access {{site.data.keyword.cos_full_notm}} buckets.
 
 ### Updating the IBM Cloud Object Storage plug-in
 {: #update_cos_plugin}

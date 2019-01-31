@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -192,7 +192,7 @@ When you dynamically provision persistent storage by using a storage class, you 
 
 
 ## Preparing existing storage for multizone usage with Kubernetes labels
-{: #multizone}
+{: #storage_multizone}
 
 If you updated your cluster from a single-zone to a multizone cluster and had existing persistent volumes (PVs), add the Kubernetes zone and region labels to your PVs. The labels assure that pods that mount this storage are deployed to the zone where the persistent storage exists.
 {:shortdesc}

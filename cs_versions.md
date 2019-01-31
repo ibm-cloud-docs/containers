@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -188,7 +188,7 @@ Review changes that you might need to make when you are updating from the previo
 ### Update before master
 {: #112_before}
 
-The following table shows the actions that you must take before you update the Kubernetes master. 
+The following table shows the actions that you must take before you update the Kubernetes master.
 {: shortdesc}
 
 <table summary="Kubernetes updates for version 1.12">
@@ -214,7 +214,7 @@ The following table shows the actions that you must take before you update the K
 ### Update after master
 {: #112_after}
 
-The following table shows the actions that you must take after you update the Kubernetes master. 
+The following table shows the actions that you must take after you update the Kubernetes master.
 {: shortdesc}
 
 <table summary="Kubernetes updates for version 1.12">
@@ -306,7 +306,7 @@ Before you can successfully update a cluster from Kubernetes version 1.9 or earl
 ### Update before master
 {: #111_before}
 
-The following table shows the actions that you must take before you update the Kubernetes master. 
+The following table shows the actions that you must take before you update the Kubernetes master.
 {: shortdesc}
 
 <table summary="Kubernetes updates for version 1.11">
@@ -349,7 +349,7 @@ The following table shows the actions that you must take before you update the K
 ### Update after master
 {: #111_after}
 
-The following table shows the actions that you must take after you update the Kubernetes master. 
+The following table shows the actions that you must take after you update the Kubernetes master.
 {: shortdesc}
 
 <table summary="Kubernetes updates for version 1.11">
@@ -368,7 +368,7 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 </tr>
 <tr>
 <td>Refresh Kubernetes configuration</td>
-<td>The OpenID Connect configuration for the cluster's Kubernetes API server is updated to support {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) access groups. As a result, you must refresh your cluster's Kubernetes configuration after the master Kubernetes v1.11 update by running `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. With this command, the configuration is applied to role bindings in the `default` namespace. If you use namespaces other than `default`, [reapply the role bindings](/docs/containers/cs_users.html#rbac_copy) to each namespace.<br><br>If you do not refresh the configuration, cluster actions fail with the following error message: `You must be logged in to the server (Unauthorized).`</td>
+<td>The OpenID Connect configuration for the cluster's Kubernetes API server is updated to support {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) access groups. As a result, you must refresh your cluster's Kubernetes configuration after the master Kubernetes v1.11 update by running `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. With this command, the configuration is applied to role bindings in the `default` namespace.<br><br>If you do not refresh the configuration, cluster actions fail with the following error message: `You must be logged in to the server (Unauthorized).`</td>
 </tr>
 <tr>
 <td>Kubernetes dashboard</td>
@@ -636,7 +636,7 @@ Before you can successfully update to Kubernetes 1.10, you must follow the steps
 ### Update before master
 {: #110_before}
 
-The following table shows the actions that you must take before you update the Kubernetes master. 
+The following table shows the actions that you must take before you update the Kubernetes master.
 {: shortdesc}
 
 <table summary="Kubernetes updates for version 1.10">
@@ -683,7 +683,7 @@ The following table shows the actions that you must take before you update the K
 ### Update after master
 {: #110_after}
 
-The following table shows the actions that you must take after you update the Kubernetes master. 
+The following table shows the actions that you must take after you update the Kubernetes master.
 {: shortdesc}
 
 <table summary="Kubernetes updates for version 1.10">
@@ -923,7 +923,7 @@ Prepare for the Calico v3 update before you update the master. During the master
 ## Archive
 {: #k8s_version_archive}
 
-Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}. 
+Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 ### Version 1.9 (Unsupported)

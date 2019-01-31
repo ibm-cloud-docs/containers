@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -40,7 +40,7 @@ Choose one of the following options to get started:
     <area target="" alt="v2.0: Setting up a load balancer 2.0 in a multizone cluster" title="v2.0: Setting up a load balancer 2.0 in a multizone cluster" href="#ipvs_multi_zone_config" coords="276,122,417,147" shape="rect">
     <area target="" alt="v2.0: Setting up a load balancer 2.0 in a single-zone cluster" title="v2.0: Setting up a load balancer 2.0 in a single-zone cluster" href="#ipvs_single_zone_config" coords="277,156,419,184" shape="rect">
     <area target="" alt="v2.0: Scheduling algorithms" title="v2.0: Scheduling algorithms" href="#scheduling" coords="276,196,419,220" shape="rect">
-    <area target="" alt="v1.0: Components and architecture" title="v1.0: Components and architecture" href="#planning" coords="519,47,668,74" shape="rect">
+    <area target="" alt="v1.0: Components and architecture" title="v1.0: Components and architecture" href="#v1_planning" coords="519,47,668,74" shape="rect">
     <area target="" alt="v1.0: Setting up a load balancer 1.0 in a multizone cluster" title="v1.0: Setting up a load balancer 1.0 in a multizone cluster" href="#multi_zone_config" coords="520,85,667,110" shape="rect">
     <area target="" alt="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" title="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" href="#config" coords="520,122,667,146" shape="rect">
     <area target="" alt="v1.0: Enabling source IP preservation" title="v1.0: Enabling source IP preservation" href="#node_affinity_tolerations" coords="519,157,667,194" shape="rect">
@@ -100,6 +100,9 @@ spec:
 ```
 {: codeblock}
 
+<br />
+
+
 ## Overview
 {: #overview}
 
@@ -112,6 +115,9 @@ When you create a standard cluster, {{site.data.keyword.containerlong}} automati
 Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node that the load balancer IP address is on is removed, a Keepalived daemon that constantly monitors the IP automatically moves the IP to another worker node. You can assign any port to your load balancer. The load balancer service serves as the external entry point for incoming requests for the app. To access the load balancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`.
 
 When you expose an app with a load balancer service, your app is automatically made available over the service's NodePorts too. [NodePorts](/docs/containers/cs_nodeport.html) are accessible on every public and private IP address of every worker node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers/cs_network_policy.html#block_ingress).
+
+<br />
+
 
 ## Comparison of version 1.0 and 2.0 load balancers
 {: #comparison}
@@ -127,6 +133,9 @@ Version 1.0 and 2.0 load balancers are both Layer 4 load balancers that live onl
 When a client sends a request to your app, the load balancer routes request packets to the worker node IP address where an app pod exists. Version 1.0 load balancers use network address translation (NAT) to rewrite the request packet's source IP address to the IP of worker node where a load balancer pod exists. When the worker node returns the app response packet, it uses that worker node IP where the load balancer exists. The load balancer must then send the response packet to the client. To prevent the IP address from being rewritten, you can [enable source IP preservation](#node_affinity_tolerations). However, source IP preservation requires load balancer pods and app pods to run on the same worker so that the request doesn't have to be forwarded to another worker. You must add node affinity and tolerations to app pods.
 
 As opposed to version 1.0 load balancers, version 2.0 load balancers don't use NAT when forwarding requests to app pods on other workers. When a load balancer 2.0 routes a client request, it uses IP over IP (IPIP) to encapsulate the original request packet into another, new packet. This encapsulating IPIP packet has a source IP of the worker node where the load balancer pod is, which allows the original request packet to preserve the client IP as its source IP address. The worker node then uses direct server return (DSR) to send the app response packet to the client IP. The response packet skips the load balancer and is sent directly to the client, decreasing the amount of traffic that the load balancer must handle.
+
+<br />
+
 
 ## v2.0: Components and architecture (Beta)
 {: #planning_ipvs}
@@ -229,6 +238,7 @@ Next, you can follow the steps in [Setting up a load balancer 2.0 in a multizone
 * **Important**: Complete the [load balancer 2.0 prerequisites](#ipvs_provision).
 * To create public load balancers in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private load balancers in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
 * If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers/cs_edge.html#edge) are enabled in each zone so that load balancers deploy uniformly.
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 
 
 To set up a load balancer 2.0 in a multizone cluster:
@@ -388,6 +398,7 @@ To set up a load balancer 2.0 in a multizone cluster:
 
 * **Important**: Complete the [load balancer 2.0 prerequisites](#ipvs_provision).
 * You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 
 To create a load balancer 2.0 service in a single-zone cluster:
 
@@ -567,7 +578,7 @@ You can find the complete example in [this IBM Cloud deployment pattern blog ![E
 
 
 ## v1.0: Components and architecture
-{: #planning}
+{: #v1_planning}
 
 The TCP/UDP load balancer 1.0 uses Iptables, a Linux kernel feature, to load balance requests across an app's pods.
 {: shortdesc}
@@ -606,6 +617,7 @@ By default, each load balancer 1.0 is set up in one zone only. To achieve high a
 * To create public load balancers in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private load balancers in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
 * If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers/cs_edge.html#edge) are enabled in each zone so that load balancers deploy uniformly.
 * Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers/cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 
 
 To set up a load balancer 1.0 service in a multizone cluster:
@@ -748,7 +760,9 @@ To set up a load balancer 1.0 service in a multizone cluster:
 ## v1.0: Setting up a load balancer 1.0 in a single-zone cluster
 {: #config}
 
-**Before you begin**:You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
+**Before you begin**:
+* You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 
 To create a load balancer 1.0 service in a single-zone cluster:
 

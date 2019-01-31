@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -189,7 +189,7 @@ A long log message might be truncated due to its length before it is collected b
 To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [EnhancedPatternLayout ![External link icon](../icons/launch-glyph.svg "External link icon")](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html) to limit the `stack_trace` to 15KB.
 
 ## Getting help and support
-{: #ts_getting_help}
+{: #health_getting_help}
 
 Still having issues with your cluster?
 {: shortdesc}

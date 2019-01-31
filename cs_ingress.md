@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -24,6 +24,104 @@ lastupdated: "2019-01-28"
 
 Expose multiple apps in your Kubernetes cluster by creating Ingress resources that are managed by the IBM-provided application load balancer in {{site.data.keyword.containerlong}}.
 {:shortdesc}
+
+<img src="images/cs_ingress_imagemap.png" usemap="#image-map">
+
+<map name="image-map">
+    <area target="" alt="Ingress components" title="Ingress components" href="#components" coords="28,42,172,69" shape="rect">
+    <area target="" alt="ALB IPs" title="ALB IPs" href="#ips" coords="27,79,171,104" shape="rect">
+    <area target="" alt="Architecture" title="Architecture" href="#architecture-single" coords="31,114,171,140" shape="rect">
+    <area target="" alt="Prerequisites" title="Prerequisites" href="#config_prereqs" coords="28,151,171,176" shape="rect">
+    <area target="" alt="Planning networking for single or multiple namespaces" title="Planning networking for single or multiple namespaces" href="#multiple_namespaces" coords="31,191,172,229" shape="rect">
+    <area target="" alt="Exposing apps that are inside your cluster to the public" title="Exposing apps that are inside your cluster to the public" href="#ingress_expose_public" coords="275,43,418,78" shape="rect">
+    <area target="" alt="Exposing apps that are outside your cluster to the public" title="Exposing apps that are outside your cluster to the public" href="#external_endpoint" coords="275,94,419,128" shape="rect">
+    <area target="" alt="Exposing apps to a private network" title="Exposing apps to a private network" href="#ingress_expose_private" coords="277,141,418,177" shape="rect">
+    <area target="" alt="Bringing your own Ingress controller" title="Bringing your own Ingress controller" href="#user_managed" coords="278,192,416,228" shape="rect">
+    <area target="" alt="Customizing an Ingress resource with annotations" title="Customizing an Ingress resource with annotations" href="#annotations" coords="523,44,670,73" shape="rect">
+    <area target="" alt="Opening ports in the Ingress ALB" title="Opening ports in the Ingress ALB" href="#opening_ingress_ports" coords="521,83,669,105" shape="rect">
+    <area target="" alt="Configuring SSL protocols and SSL ciphers at the HTTP level" title="Configuring SSL protocols and SSL ciphers at the HTTP level" href="#ssl_protocols_ciphers" coords="523,116,669,158" shape="rect">
+    <area target="" alt="Preserving the source IP address" title="Preserving the source IP address" href="#preserve_source_ip" coords="522,167,671,202" shape="rect">
+    <area target="" alt="Tuning ALB performance" title="Tuning ALB performance" href="#perf_tuning" coords="524,213,669,237" shape="rect">
+</map>
+
+## Sample YAMLs
+{: #sample_ingress}
+
+**Ingress resource to publicly expose an app**</br>
+
+Have you already completed the following?
+- Deploy app
+- Create app service
+- Select domain name and TLS secret
+
+You can use the following deployment YAML to create an Ingress resource:
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingressresource
+spec:
+  tls:
+  - hosts:
+    - <domain>
+    secretName: <tls_secret_name>
+  rules:
+  - host: <domain>
+    http:
+      paths:
+      - path: /<app1_path>
+        backend:
+          serviceName: <app1_service>
+          servicePort: 80
+      - path: /<app2_path>
+        backend:
+          serviceName: <app2_service>
+          servicePort: 80
+```
+{: codeblock}
+
+</br>
+
+**Ingress resource to privately expose an app**</br>
+
+Have you already completed the following?
+- Enable private ALB
+- Deploy app
+- Create app service
+- Select domain name and TLS secret
+
+You can use the following deployment YAML to create an Ingress resource:
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingressresource
+  annotations:
+    ingress.bluemix.net/ALB-ID: "<private_ALB_ID_1>;<private_ALB_ID_2>"
+spec:
+  tls:
+  - hosts:
+    - <domain>
+    secretName: <tls_secret_name>
+  rules:
+  - host: <domain>
+    http:
+      paths:
+      - path: /<app1_path>
+        backend:
+          serviceName: <app1_service>
+          servicePort: 80
+      - path: /<app2_path>
+        backend:
+          serviceName: <app2_service>
+          servicePort: 80
+```
+{: codeblock}
+
+<br />
+
 
 ## Ingress components and architecture
 {: #planning}
@@ -91,7 +189,7 @@ The following diagram shows how Ingress directs communication from the internet 
 
 4. The load balancer service routes the request to the ALB.
 
-5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
+5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
 
 <br />
 
@@ -104,7 +202,9 @@ Before you get started with Ingress, review the following prerequisites.
 
 **Prerequisites for all Ingress configurations:**
 - Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied.
-- Setting up Ingress requires the **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role.
+- Setting up Ingress requires the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers/cs_users.html#platform):
+    - **Administrator** platform role for the cluster
+    - **Manager** service role in all namespaces
 
 **Prerequisites for using Ingress in multizone clusters**:
  - If you restrict network traffic to [edge worker nodes](/docs/containers/cs_edge.html), at least 2 edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](/docs/containers/cs_clusters.html#add_pool) that spans all the zones in your cluster and has at least 2 worker nodes per zone.
@@ -291,6 +391,9 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 ```
 {: pre}
 
+Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+{: note}
+
 If you do not have a TLS certificate ready, follow these steps:
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
 2. Convert the cert and key into base-64.
@@ -300,18 +403,9 @@ If you do not have a TLS certificate ready, follow these steps:
       ```
       {: pre}
 
-      ```
-      openssl base64 -in tls.crt -out tls.crt.base64
-      ```
-      {: pre}
    2. View the base-64 encoded value for your cert and key.
       ```
       cat tls.key.base64
-      ```
-      {: pre}
-
-      ```
-      cat tls.crt.base64
       ```
       {: pre}
 
@@ -333,6 +427,8 @@ If you do not have a TLS certificate ready, follow these steps:
      kubectl create -f ssl-my-test
      ```
      {: pre}
+     Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+     {: note}
 
 
 ### Step 4: Create the Ingress resource
@@ -783,6 +879,9 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 ```
 {: pre}
 
+Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+{: note}
+
 If you do not have a TLS certificate ready, follow these steps:
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
 2. Convert the cert and key into base-64.
@@ -792,18 +891,9 @@ If you do not have a TLS certificate ready, follow these steps:
       ```
       {: pre}
 
-      ```
-      openssl base64 -in tls.crt -out tls.crt.base64
-      ```
-      {: pre}
    2. View the base-64 encoded value for your cert and key.
       ```
       cat tls.key.base64
-      ```
-      {: pre}
-
-      ```
-      cat tls.crt.base64
       ```
       {: pre}
 
@@ -825,6 +915,8 @@ If you do not have a TLS certificate ready, follow these steps:
      kubectl create -f ssl-my-test
      ```
      {: pre}
+     Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+     {: note}
 
 
 ### Step 5: Create the Ingress resource
@@ -1005,7 +1097,8 @@ Get started with some of the most commonly used annotations.
 * [appid-auth](/docs/containers/cs_annotations.html#appid-auth): Use {{site.data.keyword.appid_full_notm}} to authenticate with your application.
 * [client-max-body-size](/docs/containers/cs_annotations.html#client-max-body-size): Set the maximum size of the body that the client can send as part of a request.
 
-For the full list of supported annotations, see [Customizing Ingress with annotations](/docs/containers/cs_annotations.html).
+Only annotations in the format `ingress.bluemix.net/<annotation>` are supported. For the full list of supported annotations, see [Customizing Ingress with annotations](/docs/containers/cs_annotations.html). Annotations in the format `ingress.kubernetes.io/<annotation>`, `kubernetes.io/<annotation>` and `nginx.ingress.kubernetes.io/<annotation>` are not supported.
+{: important}
 
 <br />
 

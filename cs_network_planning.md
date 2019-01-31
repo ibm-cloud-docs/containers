@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2019-01-28"
 
 
 # Planning to expose your apps with external networking
-{: #planning}
+{: #cs_network_planning}
 
 With {{site.data.keyword.containerlong}}, you can manage external networking by making apps publicly or privately accessible.
 {: shortdesc}
@@ -57,7 +57,7 @@ To make your apps externally accessible from the public internet or a private ne
 
 To choose the best networking service for your app, you can follow this decision tree and click one of the options to get started.
 
-<img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="This image walks you through choosing the best networking option for your application. If this image is not displaying, the information can still be found in the documentation." style="width:500px;" />
+<img usemap="#networking_map" border="0" class="image" src="images/cs_network_planning_dt-01.png" width="500px" alt="This image walks you through choosing the best networking option for your application. If this image is not displaying, the information can still be found in the documentation." style="width:500px;" />
 <map name="networking_map" id="networking_map">
 <area href="/docs/containers/cs_nodeport.html" alt="Nodeport service" shape="circle" coords="52, 283, 45"/>
 <area href="/docs/containers/cs_loadbalancer.html" alt="LoadBalancer service" shape="circle" coords="247, 419, 44"/>
@@ -77,7 +77,7 @@ To make an app publicly available to the internet, you can create a NodePort, Lo
 
 The following diagram shows how Kubernetes forwards public network traffic in {{site.data.keyword.containerlong_notm}}.
 
-![{{site.data.keyword.containerlong_notm}} Kubernetes architecture](images/networking.png)
+![{{site.data.keyword.containerlong_notm}} Kubernetes architecture](images/cs_network_planning_ov-01.png)
 
 *Kubernetes data plane in {{site.data.keyword.containerlong_notm}}*
 

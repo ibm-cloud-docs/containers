@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -49,6 +49,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>404 / 300</td>
+<td>31 Jan 2019</td>
+<td>Updates the Go version to 1.11.4.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>403 / 295</td>
 <td>23 Jan 2019</td>

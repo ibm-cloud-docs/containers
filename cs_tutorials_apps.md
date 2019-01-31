@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -40,6 +40,7 @@ To make your app even more highly available, in standard clusters, you can creat
 Only one of the lessons includes the integration of an {{site.data.keyword.Bluemix_notm}} service into an app, but you can use them with as simple or complex of an app as you can imagine.
 
 ## Objectives
+{: #apps_objectives}
 
 * Understand basic Kubernetes terminology
 * Push an image to your registry namespace in {{site.data.keyword.registryshort_notm}}
@@ -49,14 +50,17 @@ Only one of the lessons includes the integration of an {{site.data.keyword.Bluem
 * Deploy an app that uses functionality from an {{site.data.keyword.Bluemix_notm}} service
 
 ## Time required
+{: #apps_time}
 
 40 minutes
 
 ## Audiences
+{: #apps_audience}
 
 Software developers and network administrators that are deploying an app into a Kubernetes cluster for the first time.
 
 ## Prerequisites
+{: #apps_prereqs}
 
 * [Tutorial: Creating Kubernetes clusters](/docs/containers/cs_tutorials.html#cs_cluster_tutorial).
 * Install the [container-registry plug-in](/docs/services/Registry/index.html#registry_cli_install).
@@ -679,7 +683,7 @@ Ready to delete what you created? You can use the configuration script to delete
   {: pre}
 
 ## What's next?
-{: #next}
+{: #apps_next}
 
 Now that you conquered the basics, you can move to more advanced activities. Consider trying out one of the following:
 

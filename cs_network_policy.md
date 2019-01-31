@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -119,18 +119,12 @@ In Kubernetes version 1.10 and later clusters, a default Kubernetes policy that 
 To view, manage, and add Calico policies, install and configure the Calico CLI.
 {:shortdesc}
 
-1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
+1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
-  ibmcloud ks cluster-config --cluster <cluster_name> --admin
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
   ```
   {: pre}
-
-2. Download the Calico configuration file to run all Calico commands.
-    ```
-    ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --network
-    ```
-    {: pre}
 
 3. For OSX and Linux users, complete the following steps.
     1. Create the `/etc/calico` directory.
@@ -212,11 +206,12 @@ View the details for default and any added network policies that are applied to 
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Target the Kubernetes CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
-    ```
-    ibmcloud ks cluster-config --cluster <cluster_name> --admin
-    ```
-    {: pre}
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
 **To view network policies in clusters**:
 
@@ -271,17 +266,17 @@ To create Kubernetes network policies, see the [Kubernetes network policy docume
 
 To create Calico policies, use the following steps.
 
-Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Target the Kubernetes CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
-    ```
-    ibmcloud ks cluster-config --cluster <cluster_name> --admin
-    ```
-    {: pre}
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
-1. Define your Calico [network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) or [global network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own. Note that Kubernetes version 1.10 or later clusters must use Calico v3 policy syntax.
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
-2. Apply the policies to the cluster.
+3. Define your Calico [network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) or [global network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own. Note that Kubernetes version 1.10 or later clusters must use Calico v3 policy syntax.
+
+4. Apply the policies to the cluster.
     - Linux and OS X:
 
       ```
@@ -316,6 +311,17 @@ Some common uses for Calico pre-DNAT network policies:
 
 To see how to whitelist or blacklist source IP addresses, try the [Using Calico network policies to block traffic tutorial](/docs/containers/cs_tutorials_policies.html#policy_tutorial). For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
 {: tip}
+
+Before you begin:
+1. [Install and configure the Calico CLI.](#cli_install)
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+To create a pre-DNAT policy:
 
 1. Define a Calico pre-DNAT network policy for ingress (inbound traffic) access to Kubernetes services.
     * Kubernetes version 1.10 or later clusters must use [Calico v3 policy syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy).
@@ -447,11 +453,12 @@ The policies target the worker node private interface (eth0) and the pod network
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Target the Kubernetes CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
-    ```
-    ibmcloud ks cluster-config --cluster <cluster_name> --admin
-    ```
-    {: pre}
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
 
 To isolate your cluster on the private network using Calico policies:
 
@@ -469,8 +476,13 @@ To isolate your cluster on the private network using Calico policies:
 
 3. Set up a policy for the private host endpoint.
     1. Open the `generic-privatehostendpoint.yaml` policy.
-    2. Replace `<worker_name>` with the name of a worker node and `<worker-node-private-ip>` with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`.
-    3. Repeat this step in a new section for each worker node in your cluster. **Note**: Each time you add a worker node to a cluster, you must update the host endpoints file with the new entries.
+    2. Replace `<worker_name>` with the name of a worker node. **Important**: Some worker nodes must follow a different naming structure for Calico policies. You must use the name of a worker node in the format that is returned by the following command.
+      ```
+      ibmcloud ks calicoctl get nodes --config==filepath/calicoctl.cfg
+      ```
+      {: pre}
+    3. Replace `<worker-node-private-ip>` with the private IP address for the worker node. To see your worker nodes' private IPs, run `ibmcloud ks workers --cluster <my_cluster>`.
+    4. Repeat this set of steps in a new section for each worker node in your cluster. **Note**: Each time you add a worker node to a cluster, you must update the host endpoints file with the new entries.
 
 4. Apply all of the policies to your cluster.
     - Linux and OS X:

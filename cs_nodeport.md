@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -28,7 +28,7 @@ Make your containerized app available to internet access by using the public IP 
 {:shortdesc}
 
 ## Managing network traffic by using NodePorts
-{: #planning}
+{: #nodeport_planning}
 
 Expose a public port on your worker node and use the public IP address of the worker node to access your service in the cluster publicly from the internet.
 {:shortdesc}

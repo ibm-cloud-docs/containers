@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -37,6 +37,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>30 January</td>
+<td>{{site.data.keyword.Bluemix_notm}} IAM service access roles and Kubernetes namespaces</td>
+<td>{{site.data.keyword.containerlong_notm}} now supports {{site.data.keyword.Bluemix_notm}} IAM [service access roles](/docs/containers/cs_access_reference.html#service). These service access roles align with [Kubernetes RBAC](/docs/containers/cs_users.html#role-binding) to authorize users to perform `kubectl` actions within the cluster to manage Kubernetes resources such as pods or deployments. Further, you can [limit user access to a specific Kubernetes namespace](/docs/containers/cs_users.html#platform) within the cluster by using {{site.data.keyword.Bluemix_notm}} IAM service access roles. [Platform access roles](/docs/containers/cs_access_reference.html#platform) are now used to authorize users to perform `ibmcloud ks` actions to manage your cluster infrastructure, such as worker nodes.<br><br>{{site.data.keyword.Bluemix_notm}} IAM service access roles are automatically added to existing {{site.data.keyword.containerlong_notm}} accounts and clusters based on the permissions that your users previously had with IAM platform access roles. Going forward, you can use IAM to create access groups, add users to access groups, and assign the groups platform or service access roles.</td>
+</tr>
 <tr>
 <td>8 January</td>
 <td>[Cluster autoscaler preview beta](/docs/containers/cs_cluster_scaling.html#ca)</td>

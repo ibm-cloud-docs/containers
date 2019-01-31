@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -64,7 +64,7 @@ Learn about some basic Docker concepts:
 
 <p>Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.</p>
 
-<p>Ready to gain deeper knowledge of Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Learn how Docker and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></p>
+<p>Ready to gain deeper knowledge of Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">Learn how Docker and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></p>
 
 </dl>
 
@@ -107,7 +107,7 @@ Define update strategies for your app, including the number of pods that you wan
 
 <p>Ready to gain deeper knowledge of Kubernetes?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Expand your terminology knowledge with the Creating clusters tutorial</a>.</li>
-<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></li></ul>
+<li><a href="https://developer.ibm.com/courses/all/container-kubernetes-essentials-with-ibm-cloud/" target="_blank">Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></li></ul>
 
 
 </dl>

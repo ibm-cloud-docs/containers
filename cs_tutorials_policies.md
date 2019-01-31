@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -31,24 +31,31 @@ However, for security reasons, you might need to allow traffic to the networking
 In this scenario, you play the role of a networking administrator for a PR firm, and you notice some unusual traffic hitting your apps. The lessons in this tutorial walk you through creating a sample web server app, exposing the app by using a load balancer service, and protecting the app from unwanted unusual traffic with both whitelist and blacklist Calico policies.
 
 ## Objectives
+{: #policies_objectives}
 
 - Learn to block all incoming traffic to all node ports by creating a high-order Pre-DNAT policy.
 - Learn to allow whitelisted source IP addresses to access the load balancer public IP and port by creating a low-order Pre-DNAT policy. Lower order policies override higher-order policies.
 - Learn to block blacklisted source IP addresses from accessing the load balancer public IP and port by creating a low-order Pre-DNAT policy.
 
 ## Time required
+{: #policies_time}
+
 1 hour
 
 ## Audience
+{: #policies_audience}
+
 This tutorial is intended for software developers and network administrators who want to manage network traffic to an app.
 
 ## Prerequisites
+{: #policies_prereqs}
 
 - [Create a version 1.10 or later cluster](/docs/containers/cs_clusters.html#clusters_ui) or [update an existing cluster to version 1.10](/docs/containers/cs_versions.html#cs_v110). A Kubernetes version 1.10 or later cluster is required to use the 3.3.1 Calico CLI and Calico v3 policy syntax in this tutorial.
 - [Target your CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 - [Install and configure the Calico CLI](/docs/containers/cs_network_policy.html#cli_install).
 - Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
     - [Any platform role](/docs/containers/cs_users.html#platform)
+    - The [**Writer** or **Manager** service role](/docs/containers/cs_users.html#platform)
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -71,7 +71,7 @@ Before using the strongSwan Helm chart, review the following considerations and 
 
 
 ## Configuring the strongSwan VPN in a multizone cluster
-{: #multizone}
+{: #vpn_multizone}
 
 Deploy a strongSwan VPN service in a multizone cluster. By making app instances available on worker nodes in multiple zones, your apps can continue to be available over the VPN connection in the event of a zonal outage.
 {: shortdesc}
@@ -106,6 +106,7 @@ Before you install the strongSwan Helm chart, you must decide on your strongSwan
 
 Before you begin:
 * [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 ### Step 1: Get the strongSwan Helm chart
@@ -114,16 +115,31 @@ Before you begin:
 Install Helm and get the strongSwan Helm chart to view possible configurations.
 {: shortdesc}
 
-1. [Install Helm for your cluster and add the {{site.data.keyword.Bluemix_notm}} repository to your Helm instance](/docs/containers/cs_integrations.html#helm).
+1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
 
-2. Save the default configuration settings for the strongSwan Helm chart in a local YAML file.
+2.  Verify that tiller is installed with a service account.
+
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
+
+    Example output:
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+3. Save the default configuration settings for the strongSwan Helm chart in a local YAML file.
 
     ```
     helm inspect values ibm/strongswan > config.yaml
     ```
     {: pre}
 
-3. Open the `config.yaml` file.
+4. Open the `config.yaml` file.
 
 ### Step 2: Configure basic IPSec settings
 {: #strongswan_2}

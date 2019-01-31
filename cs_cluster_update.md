@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-29"
 
 ---
 
@@ -92,7 +92,7 @@ You received a notification to update your worker nodes. What does that mean? As
 **What happens to my apps during an update?**</br>
 If you run apps as part of a deployment on worker nodes that you update, the apps are rescheduled onto other worker nodes in the cluster. These worker nodes might be in a different worker pool, or if you have stand-alone worker nodes, apps might be scheduled onto stand-alone worker nodes. To avoid downtime for your app, you must ensure that you have enough capacity in the cluster to carry the workload.
 
-**How can I control how many worker nodes go down at a given time during the update?**
+**How can I control how many worker nodes go down at a given time during the update?**</br>
 If you need all your worker nodes to be up and running, consider [resizing your worker pool](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize) or [adding stand-alone worker nodes](/docs/containers/cs_cli_reference.html#cs_worker_add) to add more worker nodes. You can remove the additional worker nodes after the update is completed.
 
 In addition, you can create a Kubernetes config map that specifies the maximum number of worker nodes that can be unavailable at a time during the update. Worker nodes are identified by the worker node labels. You can use IBM-provided labels or custom labels that you added to the worker node.
@@ -110,6 +110,7 @@ When the config map is not defined, the default is used. By default, a maximum o
 Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
 {: important}
 
+{: #worker-up-configmap}
 **To create a config map and update worker nodes**:
 
 1.  List available worker nodes and note their private IP address.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-28"
+lastupdated: "2019-01-30"
 
 ---
 
@@ -34,15 +34,30 @@ The {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in creates pod
 Looking for instructions for how to update or remove the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in? See [Updating the plug-in](#update_block_attacher) and [Removing the plug-in](#remove_block_attacher).
 {: tip}
 
-1. Follow the [instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) version 2.10 or later with a Kubernetes service account in your cluster.
+1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+    
+2.  Verify that tiller is installed with a service account.
+    
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
 
-2. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
+    Example output:
+
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+3. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
    {: pre}
 
-3. Install the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
+4. Install the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
    ```
    helm install ibm/ibm-block-storage-attacher --name block-attacher
    ```
@@ -84,7 +99,7 @@ Looking for instructions for how to update or remove the {{site.data.keyword.Blu
    ```
    {: screen}
 
-4. Verify that the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher daemon set is installed successfully.
+5. Verify that the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher daemon set is installed successfully.
    ```
    kubectl get pod -n kube-system -o wide | grep attacher
    ```
@@ -98,7 +113,7 @@ Looking for instructions for how to update or remove the {{site.data.keyword.Blu
 
    The installation is successful when you see one or more **ibmcloud-block-storage-attacher** pods. The number of pods equals the number of worker nodes in your cluster. All pods must be in a **Running** state.
 
-5. Verify that the storage class for the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher is created successfully.
+6. Verify that the storage class for the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher is created successfully.
    ```
    kubectl get storageclasses | grep attacher
    ```
