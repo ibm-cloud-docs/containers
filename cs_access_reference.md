@@ -96,11 +96,6 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td>-</td>
 </tr>
 <tr>
-<td>Stop targeting a region for {{site.data.keyword.containerlong_notm}}.</td>
-<td>[ibmcloud ks region-unset](/docs/containers/cs_cli_reference.html#cs_region_unset)</td>
-<td>-</td>
-</tr>
-<tr>
 <td>Lists the available regions.</td>
 <td>[ibmcloud ks regions](/docs/containers/cs_cli_reference.html#cs_regions)</td>
 <td>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</td>
@@ -431,21 +426,6 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 <td>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</td>
 </tr>
 <tr>
-<td>Disable automatic updates of the Kubernetes master to the latest patch version. **Note**: This command is feature-flagged for select use cases only.</td>
-<td>[ibmcloud ks cluster-autoupdate-disable](/docs/containers/cs_cli_reference.html#cs_cluster_autoupdate_disable)</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Enable automatic updates of the Kubernetes master to the latest patch version. **Note**: This command is feature-flagged for select use cases only.</td>
-<td>[ibmcloud ks cluster-autoupdate-enable](/docs/containers/cs_cli_reference.html#cs_cluster_autoupdate_enable)</td>
-<td>-</td>
-</tr>
-<tr>
-<td>View whether your cluster is set to automatically update the Kubernetes master to the latest patch version. **Note**: This command is feature-flagged for select use cases only.</td>
-<td>[ibmcloud ks cluster-autoupdate-get](/docs/containers/cs_cli_reference.html#cs_cluster_autoupdate_get)</td>
-<td>-</td>
-</tr>
-<tr>
 <td>Restart the cluster master nodes to apply new Kubernetes API configuration changes.</td>
 <td>[ibmcloud ks cluster-refresh](/docs/containers/cs_cli_reference.html#cs_cluster_refresh)</td>
 <td>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</td>
@@ -563,18 +543,8 @@ The **Administrator** platform role includes all permissions that are granted by
 <td>[POST /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateCluster)</td>
 </tr>
 <tr>
-<td>Disable a specified feature for a cluster, such as the public service endpoint for the cluster master.</td>
-<td>[ibmcloud ks cluster-feature-disable](/docs/containers/cs_cli_reference.html#cs_cluster_feature_disable)</td>
-<td>-</td>
-</tr>
-<tr>
 <td>Enable a specified feature for a cluster, such as the private service endpoint for the cluster master.</td>
 <td>[ibmcloud ks cluster-feature-enable](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable)</td>
-<td>-</td>
-</tr>
-<tr>
-<td>List enabled features in a cluster.</td>
-<td>[ibmcloud ks cluster-features](/docs/containers/cs_cli_reference.html#cs_cluster_feature_ls)</td>
 <td>-</td>
 </tr>
 <tr>
