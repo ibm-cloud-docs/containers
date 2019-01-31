@@ -38,6 +38,8 @@ The list is divided into two parts:
 ### Account-level
 {: #prepare_account_level}
 
+Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for {{site.data.keyword.containerlong_notm}}. {: shortdesc}
+
 1.  [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
 2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](/docs/containers/cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
     *  **Super User** role for IBM Cloud infrastructure (SoftLayer).
@@ -58,6 +60,9 @@ The list is divided into two parts:
 
 ### Cluster-level
 {: #prepare_cluster_level}
+
+Follow the steps to prepare the setup of your cluster. 
+{: shortdesc}
 
 1.  Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}.
     1.  From the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) menu bar, click **Manage > Access (IAM)**.
@@ -88,6 +93,7 @@ The purpose of the Kubernetes cluster is to define a set of resources, nodes, ne
 {: #clusters_ui_free}
 
 You can use your 1 free cluster to become familiar with how {{site.data.keyword.containerlong_notm}} works. With free clusters, you can learn the terminology, complete a tutorial, and get your bearings before you take the leap to production-level standard clusters. Don't worry, you still get a free cluster, even if you have a billable account.
+{: shortdesc}
 
 Free clusters have a life span of 30 days. After that time, the cluster expires and the cluster and its data are deleted. The deleted data is not backed up by {{site.data.keyword.Bluemix_notm}} and cannot be restored. Be sure to back up any important data.
 {: note}
