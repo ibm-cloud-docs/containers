@@ -22,6 +22,7 @@ lastupdated: "2019-01-31"
 # Planning your cluster and worker node setup
 {: #plan_clusters}
 Design your standard cluster for maximum availability and capacity for your app with {{site.data.keyword.containerlong}}.
+{: shortdesc}
 
 ## Highly available clusters
 {: #ha_clusters}
