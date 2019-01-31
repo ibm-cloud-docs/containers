@@ -72,6 +72,7 @@ For more information about the types of {{site.data.keyword.containerlong_notm}}
 {: #logging}
 
 By default, logs are collected by the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) add-on in your cluster. When you create a logging configuration for a source in your cluster such as a container, the logs that Fluentd collects from that source's paths are forwarded to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server. The traffic from the source to the logging service on the ingestion port is encrypted.
+{: shortdesc}
 
 **What are the sources that I can configure log forwarding for?**
 
@@ -210,6 +211,7 @@ You can configure logging for {{site.data.keyword.containerlong_notm}} standard 
 {: #enable-forwarding-ui}
 
 You can configure log forwarding in the {{site.data.keyword.containerlong_notm}} dashboard. It can take a few minutes for the process to complete, so if you don't see logs immediately, try waiting a few minutes and then check back.
+{: shortdesc}
 
 To create a configuration at the account level, for a specific container namespace, or for app logging use the CLI.
 {: tip}
@@ -229,6 +231,7 @@ Before you begin, [create](/docs/containers/cs_clusters.html#clusters) or identi
 {: #enable-forwarding}
 
 You can create a configuration for cluster logging. You can differentiate between the different logging options by using flags.
+{: shortdesc}
 
 Before you begin, [create](/docs/containers/cs_clusters.html#clusters) or identify a standard cluster to use.
 
@@ -349,17 +352,18 @@ The following steps are general instructions. Prior to using the container in a 
 ### Verifying log forwarding
 {: verify-logging}
 
-You can verify that your configuration is set up correctly in one of two ways:
+You can verify that your configuration is set up correctly by using the `{[bxcs]}` CLI. 
+{: shortdesc}
 
 * To list all of the logging configurations in a cluster:
     ```
-    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
+    {[bxcs]} logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 * To list the logging configurations for one type of log source:
     ```
-    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID> --logsource <source>
+    {[bxcs]} logging-config-get --cluster <cluster_name_or_ID> --logsource <source>
     ```
     {: pre}
 
@@ -370,6 +374,7 @@ You can verify that your configuration is set up correctly in one of two ways:
 {: #updating-forwarding}
 
 You can update a logging configuration that you already created.
+{: shortdesc}
 
 1. Update a log forwarding configuration.
     ```
@@ -434,6 +439,7 @@ You can leverage the built-in container runtime logging capabilities to review a
 {: #filter-logs}
 
 You can choose which logs that you forward by filtering out specific logs for a period of time. You can differentiate between the different filtering options by using flags.
+{: shortdesc}
 
 <table>
 <caption>Understanding the options for log filtering</caption>
@@ -532,7 +538,8 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 ### Sending audit logs to {{site.data.keyword.loganalysisshort_notm}}
 {: #audit_enable_loganalysis}
 
-You can forward your Kubernetes API server audit logs to {{site.data.keyword.loganalysisshort_notm}}
+You can forward your Kubernetes API server audit logs to {{site.data.keyword.loganalysisshort_notm}}. 
+{: shortdesc}
 
 **Before you begin**
 
