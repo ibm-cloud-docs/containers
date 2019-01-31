@@ -31,6 +31,7 @@ If you do not have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you 
 {: #dedicated_environment}
 
 With an {{site.data.keyword.Bluemix_dedicated_notm}} account, available physical resources are dedicated to your cluster only and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. You might choose to set up an {{site.data.keyword.Bluemix_dedicated_notm}} environment when you want isolation for your cluster and you require isolation for the other {{site.data.keyword.Bluemix_notm}} services that you use. If you do not have a Dedicated account, you can [create clusters with dedicated hardware in {{site.data.keyword.Bluemix_notm}} public](/docs/containers/cs_clusters.html#clusters_ui).
+{: shortdesc}
 
 With {{site.data.keyword.Bluemix_dedicated_notm}}, you can create clusters from the catalog in the Dedicated console or by using the {{site.data.keyword.containerlong_notm}} CLI. To use the Dedicated console, you log in to both your Dedicated and public accounts simultaneously by using your IBMid. You can use the dual login to access your public clusters by using your Dedicated console. To use the CLI, you log in by using your Dedicated endpoint (`api.<my-dedicated-cloud-instance>.bluemix.net.`). You then target the {{site.data.keyword.containerlong_notm}} API endpoint of the public region that is associated with the Dedicated environment.
 
@@ -465,6 +466,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 {: #add_workers}
 
 With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single zone clusters](/docs/containers/cs_clusters_planning.html#single_zone). By default, a single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers/cs_clusters.html#resize_pool) or by [adding a new worker pool](/docs/containers/cs_clusters.html#add_pool). When you add a worker pool, you must add the available zone to the worker pool so that workers can deploy into the zone. However, you cannot add other zones to your worker pools.
+{: shortdesc}
 
 ### Using private and public image registries
 {: #dedicated_images}
@@ -477,11 +479,13 @@ For new namespaces, see the options in [Using private and public image registrie
 {: #dedicated_cluster_subnet}
 
 Change the pool of available portable public IP addresses by adding subnets to your cluster. For more information, see [Adding subnets to clusters](/docs/containers/cs_subnets.html#subnets). Review the following differences for adding subnets to Dedicated clusters.
+{: shortdesc}
 
 #### Adding more user-managed subnets and IP addresses to your Kubernetes clusters
 {: #dedicated_byoip_subnets}
 
 Provide more of your own subnets from an on-premises network that you want to use to access {{site.data.keyword.containerlong_notm}}. You can add private IP addresses from those subnets to Ingress and load balancer services in your Kubernetes cluster. User-managed subnets are configured in one of two ways depending on the format of the subnet that you want to use.
+{: shortdesc}
 
 Requirements:
 - User-managed subnets can be added to private VLANs only.
@@ -551,20 +555,24 @@ Learn more about [securing your personal information](cs_secure.html#pi) when yo
 {: #dedicated_apps_public}
 
 For {{site.data.keyword.Bluemix_dedicated_notm}} environments, public primary IP addresses are blocked by a firewall. To make an app publicly available, use a [load balancer service](#dedicated_apps_public_load_balancer) or [Ingress](#dedicated_apps_public_ingress) instead of a NodePort service. If you require access to a load balancer service or Ingress that portable public IP addresses, supply an enterprise firewall whitelist to IBM at service onboarding time.
+{: shortdesc}
 
 #### Configuring access to an app by using the load balancer service type
 {: #dedicated_apps_public_load_balancer}
 
 If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps with load balancers](/docs/containers/cs_loadbalancer.html).
+{: shortdesc}
 
 #### Configuring public access to an app by using Ingress
 {: #dedicated_apps_public_ingress}
 
 If you want to use public IP addresses for the Ingress ALB, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps to the public](/docs/containers/cs_ingress.html#ingress_expose_public).
+{: shortdesc}
 
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
 To review options for creating persistent storage, see Persistent data storage options for high availability](/docs/containers/cs_storage_planning.html#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support/howtogetsupport.html#getting-customer-support).
+{: shortdesc}
 
 If you choose to provision [file storage](/docs/containers/cs_storage_file.html#predefined_storageclass), choose non-retain storage classes. Choosing non-retain storage classes helps prevent orphaned persistent storage instances in IBM Cloud infrastructure (SoftLayer) that you can remove only by opening a support case.
