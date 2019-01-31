@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -29,7 +29,7 @@ Customize logging and set up monitoring to help you troubleshoot issues and impr
 
 Logs are automatically collected for your Ingress ALBs. To view the ALB logs, choose between two options.
 * [Create a logging configuration for the Ingress service](/docs/containers/cs_health.html#configuring) in your cluster.
-* Check the logs from the CLI.
+* Check the logs from the CLI. **Note**: You must have at least the [**Reader** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `kube-system` namespace.
     1. Get the ID of a pod for an ALB.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -128,7 +128,7 @@ You can customize the content and format of logs that are collected for the Ingr
 
 By default, Ingress logs are formatted in JSON and display common log fields. However, you can also create a custom log format by choosing which log components are forwarded and how the components are arranged in the log output
 
-
+Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `kube-system` namespace.
 
 1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 

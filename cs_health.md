@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -317,7 +317,9 @@ If you have apps that run in your containers that can't be configured to write l
 The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
 {: tip}
 
-1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform).
+1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers/cs_users.html#platform):
+    * **Editor** or **Administrator** platform role for the cluster
+    * **Writer** or **Manager** service role for the `kube-system` namespace
 
 2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
@@ -833,7 +835,9 @@ Autorecovery requires at least one healthy node to function properly. Configure 
 {: note}
 
 Before you begin:
-- Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform).
+- Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers/cs_users.html#platform):
+    - **Administrator** platform role for the cluster
+    - **Writer** or **Manager** service role for the `kube-system` namespace
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 To configure Autorecovery:

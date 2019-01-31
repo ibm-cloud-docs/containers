@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -36,6 +36,7 @@ Ensure that you define a host in only one Ingress resource. If one host is defin
 
 Before you begin, ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM access policies](/docs/containers/cs_users.html#platform):
   - **Editor** or **Administrator** platform role for the cluster
+  - **Writer** or **Manager** service role
 
 ## Step 1: Run Ingress tests in the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 

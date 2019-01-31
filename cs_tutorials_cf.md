@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -52,6 +52,7 @@ This tutorial is intended for Cloud Foundry app developers.
 - [Target your CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 - Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
     - [Any platform role](/docs/containers/cs_users.html#platform)
+    - The [**Writer** or **Manager** service role](/docs/containers/cs_users.html#platform)
 - [Learn about Docker and Kubernetes terminology](/docs/containers/cs_tech.html).
 
 

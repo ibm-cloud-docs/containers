@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -709,7 +709,9 @@ ibmcloud ks messages
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
 {: shortdesc}
 
-**Minimum required permissions**: None
+**Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.Bluemix_notm}} IAM service role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform role or only a service role, additional constraints apply.
+* **Platform**: If you have only a platform role, you can perform this command, but you need a [service role](/docs/containers/cs_users.html#platform) or a [custom RBAC policy](/docs/containers/cs_users.html#role-binding) to perform Kubernetes actions in the clsuter.
+* **Service**: If you have only a service role, you can perform this command. However, your cluster admin must give you the cluster name and ID, because you cannot run the `ibmcloud ks clusters` command or launch the {{site.data.keyword.containerlong_notm}} console to view clusters. After, you can [launch the Kubernetes dashboard from the CLI](/docs/containers/cs_app.html#db_cli) and work with Kubernetes.
 
 **Command options**:
 
@@ -1005,7 +1007,7 @@ View information about a cluster in your organization.
   State:                  normal
   Created:                2018-09-28T15:43:15+0000
   Location:               dal10
-  Master URL:             https://169.xx.xxx.xxx:30426
+  Master URL:             https://c3.<region>.containers.cloud.ibm.com:30426
   Master Location:        Dallas
   Master Status:          Ready (21 hours ago)
   Ingress Subdomain:      ...
@@ -1990,35 +1992,24 @@ Before you use this command, make sure that the user whose credentials are used 
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>IBM Cloud infrastructure (SoftLayer) account API username. This value is required. Note that the infrastructure API username is not the same as the IBMid. To view the infrastructure API username:
-   <ol><li>Log in to the [{{site.data.keyword.Bluemix_notm}} portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/).</li>
-   <li>From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), select **Infrastructure**.</li>
-   <li>From the menu bar, select **Account** > **Users** > **User List**.</li>
-   <li>For the user that you want to view, click the **IBMid or Username**.</li>
-   <li>In the **API Access Information** section, view the **API Username**.</li>
+   <ol>
+   <li>Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com).
+   <li>From the menu bar, select **Manage > Access (IAM)**.
+   <li>Select the **Users** tab and then click on your user name.
+   <li>In the **API keys** pane, find the entry **Classic infrastructure API key** and click the **Action menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Details**.
+   <li>Copy the API user name.
    </ol></dd>
 
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
-   <dd>IBM Cloud infrastructure (SoftLayer) account API key. This value is required.
-
- <p>
-  To generate an API key:
-
-  <ol>
-  <li>Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.net/).</li>
-  <li>Select <strong>Account</strong>, and then <strong>Users</strong>.</li>
-  <li>Click <strong>Generate</strong> to generate an IBM Cloud infrastructure (SoftLayer) API key for your account.</li>
-  <li>Copy the API key to use in this command.</li>
+   <dd>IBM Cloud infrastructure (SoftLayer) account API key. This value is required. To view or generate an infrastructure API key:
+  <li>Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com).
+  <li>From the menu bar, select **Manage > Access (IAM)**.
+  <li>Select the **Users** tab and then click on your user name.
+  <li>In the **API keys** pane, find the entry **Classic infrastructure API key** and click the **Action menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Details**. If you do not see a classic infrastructure API key, generate one by clicking **Create an {{site.data.keyword.Bluemix_notm}} API key**.
+  <li>Copy the API user name.
   </ol>
-
-  To view your existing API key:
-  <ol>
-  <li>Log in to the [IBM Cloud infrastructure (SoftLayer)portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.net/).</li>
-  <li>Select <strong>Account</strong>, and then <strong>Users</strong>.</li>
-  <li>Click <strong>View</strong> to see your existing API key.</li>
-  <li>Copy the API key to use in this command.</li>
-  </ol>
-  </p></dd>
+  </dd>
 
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>

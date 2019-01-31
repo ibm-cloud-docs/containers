@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -174,7 +174,7 @@ By default, 4 portable public and 4 portable private IP addresses can be used to
 ### Viewing available portable public IP addresses
 {: #review_ip}
 
-To list all of the portable IP addresses in your cluster, both used and available, you can run the following command. 
+To list all of the portable IP addresses in your cluster, both used and available, you can run the following command.
 {: shortdesc}
 
 ```
@@ -184,7 +184,9 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 
 To list only portable public IP addresses that are available to create load balancers, you can use the following steps:
 
-Before you begin:[Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin:
+-  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1.  Create a Kubernetes service configuration file that is named `myservice.yaml` and define a service of type `LoadBalancer` with a dummy load balancer IP address. The following example uses the IP address 1.1.1.1 as the load balancer IP address.
 
@@ -239,7 +241,9 @@ Before you begin:[Log in to your account. Target the appropriate region and, if 
 You can free up a used portable IP address by deleting the load balancer service that is using the portable IP address.
 {:shortdesc}
 
-Before you begin:[Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin:
+-  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 1.  List available services in your cluster.
 

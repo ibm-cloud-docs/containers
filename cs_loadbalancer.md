@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -238,6 +238,7 @@ Next, you can follow the steps in [Setting up a load balancer 2.0 in a multizone
 * **Important**: Complete the [load balancer 2.0 prerequisites](#ipvs_provision).
 * To create public load balancers in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private load balancers in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
 * If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers/cs_edge.html#edge) are enabled in each zone so that load balancers deploy uniformly.
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 
 
 To set up a load balancer 2.0 in a multizone cluster:
@@ -397,6 +398,7 @@ To set up a load balancer 2.0 in a multizone cluster:
 
 * **Important**: Complete the [load balancer 2.0 prerequisites](#ipvs_provision).
 * You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 
 To create a load balancer 2.0 service in a single-zone cluster:
 
@@ -615,6 +617,7 @@ By default, each load balancer 1.0 is set up in one zone only. To achieve high a
 * To create public load balancers in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private load balancers in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
 * If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers/cs_edge.html#edge) are enabled in each zone so that load balancers deploy uniformly.
 * Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers/cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 
 
 To set up a load balancer 1.0 service in a multizone cluster:
@@ -757,7 +760,9 @@ To set up a load balancer 1.0 service in a multizone cluster:
 ## v1.0: Setting up a load balancer 1.0 in a single-zone cluster
 {: #config}
 
-**Before you begin**:You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
+**Before you begin**:
+* You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 
 To create a load balancer 1.0 service in a single-zone cluster:
 

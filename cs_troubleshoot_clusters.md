@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -689,7 +689,7 @@ If this cluster is an existing one:
 *  The pod might have exceeded a resource request or limit.
 
 {: tsResolve}
-This task requires the {{site.data.keyword.Bluemix_notm}} IAM [**Administrator** platform role](/docs/containers/cs_users.html#platform) for the cluster.
+This task requires the {{site.data.keyword.Bluemix_notm}} IAM [**Administrator** platform role](/docs/containers/cs_users.html#platform) for the cluster and the [**Manager** service role](/docs/containers/cs_users.html#platform) for all namespaces.
 
 If you just created the Kubernetes cluster, run the following command and wait for the worker nodes to initialize.
 

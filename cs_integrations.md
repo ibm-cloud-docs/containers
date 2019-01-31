@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -233,6 +233,7 @@ You can bind only services that support service keys. To find a list with servic
 Before you begin:
 - Ensure you have the following roles:
     - [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the cluster.
+    - [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the namespace where you want to bind the service
     - [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) for the space that you want to use
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
@@ -352,6 +353,7 @@ Want to make your secrets even more secured? Ask your cluster admin to [enable {
 {: tip}
 
 Before your begin:
+-  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `kube-system` namespace.
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - [Add an {{site.data.keyword.Bluemix_notm}} service to your cluster](#adding_cluster).
 
@@ -664,15 +666,15 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
         kubectl get serviceaccount -n kube-system | grep tiller
         ```
         {: pre}
-        
+
         Example output:
-        
+
         ```
         NAME                                 SECRETS   AGE
         tiller                               1         2m
         ```
         {: screen}
-        
+
     2.  Verify that the `tiller-deploy` pod has a **Status** of `Running` in your cluster.
         ```
         kubectl get pods -n kube-system -l app=helm
@@ -746,6 +748,7 @@ Before you begin:
 
 -   Remember not to expose your cluster information on the public internet. Complete these steps to deploy Weave Scope securely and access it from a web browser locally.
 -   If you do not have one already, [create a standard cluster](/docs/containers/cs_clusters.html#clusters_ui). Weave Scope can be CPU intensive, especially the app. Run Weave Scope with larger standard clusters, not free clusters.
+-  Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for all namespaces.
 -   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -55,6 +55,7 @@ This tutorial is intended for software developers and network administrators who
 - [Install and configure the Calico CLI](/docs/containers/cs_network_policy.html#cli_install).
 - Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
     - [Any platform role](/docs/containers/cs_users.html#platform)
+    - The [**Writer** or **Manager** service role](/docs/containers/cs_users.html#platform)
 
 <br />
 

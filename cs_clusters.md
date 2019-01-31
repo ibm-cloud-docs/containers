@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -166,7 +166,22 @@ When the cluster is up and running, you can check out the following tasks:
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
 
-
+Have you created a cluster before and are just looking for quick example commands? Try these examples.
+*  **Free cluster**:
+   ```
+   ibmcloud ks cluster-create --name my_cluster
+   ```
+   {: pre}
+*  **Standard cluster, shared virtual machine**:
+   ```
+   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b2c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ```
+   {: pre}
+*  **Standard cluster, bare metal**:
+   ```
+   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ```
+   {: pre}
 
 Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers/cs_cli_install.html#cs_cli_install).
 
@@ -607,7 +622,7 @@ To add a zone with worker nodes to your worker pool:
     State:                  normal
     Created:                2018-09-28T15:43:15+0000
     Location:               dal10
-    Master URL:             https://169.xx.xxx.xxx:30426
+    Master URL:             https://c3.<region>.containers.cloud.ibm.com:30426
     Master Location:        Dallas
     Master Status:          Ready (21 hours ago)
     Ingress Subdomain:      ...
