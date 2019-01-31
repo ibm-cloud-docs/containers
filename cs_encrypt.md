@@ -52,11 +52,13 @@ Review the following tasks that require secrets.
 {: #secrets_service}
 
 When you bind a service to a cluster, you don't have to create a secret to store your service credentials. A secret is automatically created for you. For more information, see [Adding Cloud Foundry services to clusters](/docs/containers/cs_integrations.html#adding_cluster).
+{: shortdesc}
 
 ### Encrypting traffic to your apps with TLS secrets
 {: #secrets_tls}
 
 The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. For more information, see the [Ingress configuration documentation](/docs/containers/cs_ingress.html#public_inside_3).
+{: shortdesc}
 
 Additionally, if you have apps that require the HTTPS protocol and need traffic to stay encrypted, you can use one-way or mutual authentication secrets with the `ssl-services` annotation. For more information, see the [Ingress annotations documentation](/docs/containers/cs_annotations.html#ssl-services).
 
