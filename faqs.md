@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -76,6 +76,14 @@ For more information about how to achieve high availability for your cluster, se
 You can use built-in security features in {{site.data.keyword.containerlong_notm}} to protect the components in your cluster, your data, and app deployments to ensure security compliance and data integrity. Use these features to secure your Kubernetes API server, etcd data store, worker node, network, storage, images, and deployments against malicious attacks. You can also leverage built-in logging and monitoring tools to detect malicious attacks and suspicious usage patterns. 
 
 For more information about the components of your cluster and how you can secure each component, see [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_secure.html#security). 
+
+## Where can I find a list of security bulletins that affect my cluster? 
+(: #security_bulletins)
+{: faq}
+
+If vulnerabilities are found in Kubernetes, Kubernetes releases security bulletins to inform users and to describe the actions that users must take to remediate the vulnerability. Kubernetes security bulletins that affect {{site.data.keyword.containerlong_notm}} users or the {{site.data.keyword.Bluemix_notm}} platform are published in the [{{site.data.keyword.Bluemix_notm}} security bulletin](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security). 
+
+Some CVEs require the latest patch update for a Kubernetes version that you can install as part of the regular [cluster update process](/docs/containers/cs_cluster_update.html#update) in {{site.data.keyword.containerlong_notm}}. Make sure to apply security patches in time to protect your cluster from malicious attacks. For information about what is included in a security patch, refer to the [version changelog](/docs/containers/cs_versions_changelog.html#changelog). 
 
 ## Does the service offer support for bare metal and GPU? 
 {: #bare_metal_gpu}
