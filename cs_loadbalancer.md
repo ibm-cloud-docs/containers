@@ -49,6 +49,9 @@ Choose one of the following options to get started:
 ## Sample YAMLs
 {: #sample}
 
+Review the following sample YAML files to quickly get started with specifying your load balancer service. 
+{: shortdesc}
+
 **Load balancer 2.0**</br>
 
 Already have the [prerequisites for a load balancer 2.0](#ipvs_provision) completed? You can use the following deployment YAML to create a load balancer 2.0:
@@ -123,6 +126,7 @@ When you expose an app with a load balancer service, your app is automatically m
 {: #comparison}
 
 When you create a load balancer, you can choose a version 1.0 or 2.0 load balancer. Note that version 2.0 load balancers are in beta.
+{: shortdesc}
 
 **How are version 1.0 and 2.0 load balancers similar?**
 
@@ -151,6 +155,7 @@ For more details, you can also check out this [blog post ![External link icon](.
 {: #ipvs_single}
 
 The following diagram shows how a load balancer 2.0 directs communication from the internet to an app in a single zone cluster.
+{: shortdesc}
 
 <img src="images/cs_loadbalancer_ipvs_planning.png" width="600" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a version 2.0 load balancer" style="width:600px; border-style: none"/>
 
@@ -168,6 +173,7 @@ The following diagram shows how a load balancer 2.0 directs communication from t
 {: #ipvs_multi}
 
 The traffic flow through a multizone cluster follows the same path as [traffic through a single zone cluster](#ipvs_single). In a multizone cluster, the load balancer routes requests to the app instances in its own zone and to app instances in other zones. The following diagram shows how version 2.0 load balancers in each zone direct traffic from the internet to an app in a multizone cluster.
+{: shortdesc}
 
 <img src="images/cs_loadbalancer_ipvs_multizone.png" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a load balancer 2.0" style="width:500px; border-style: none"/>
 
@@ -180,6 +186,7 @@ By default, each version 2.0 load balancer is set up in one zone only. You can a
 {: #ipvs_provision}
 
 You cannot update an existing version 1.0 load balancer to 2.0. You must create a new version 2.0 load balancer. Note that you can run version 1.0 and 2.0 load balancers simultaneously in a cluster.
+{: shortdesc}
 
 Before you create a version 2.0 load balancer, you must complete the following prerequisite steps.
 
@@ -528,6 +535,7 @@ To create a load balancer 2.0 service in a single-zone cluster:
 {: #scheduling}
 
 Scheduling algorithms determine how a version 2.0 load balancer assigns network connections to your app pods. As client requests arrive to your cluster, the load balancer routes the request packets to worker nodes based on the scheduling algorithm. To use a scheduling algorithm, specify its Keepalived shortname in the scheduler annotation of your load balancer service configuration file: `service.kubernetes.io/ibm-load-balancer-cloud-provider-scheduler: "rr"`. Check the following lists to see which scheduling algorithms are supported in {{site.data.keyword.containerlong_notm}}. If you do not specify a scheduling algorithm, the Round Robin algorithm is used by default. For more information, see the [Keepalived documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](http://www.Keepalived.org/doc/scheduling_algorithms.html).
+{: shortdesc}
 
 ### Supported scheduling algorithms
 {: #scheduling_supported}
@@ -587,6 +595,7 @@ The TCP/UDP load balancer 1.0 uses Iptables, a Linux kernel feature, to load bal
 {: #v1_single}
 
 The following diagram shows how a load balancer 1.0 directs communication from the internet to an app in a single-zone cluster.
+{: shortdesc}
 
 <img src="images/cs_loadbalancer_planning.png" width="410" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a load balancer 1.0" style="width:410px; border-style: none"/>
 
@@ -602,6 +611,7 @@ The following diagram shows how a load balancer 1.0 directs communication from t
 {: #v1_multi}
 
 The following diagram shows how a load balancer 1.0 directs communication from the internet to an app in a multizone cluster.
+{: shortdesc}
 
 <img src="images/cs_loadbalancer_planning_multizone.png" width="500" alt="Use a load balancer 1.0 to load balance apps in multizone clusters" style="width:500px; border-style: none"/>
 
@@ -904,6 +914,7 @@ This feature is for version 1.0 load balancers only. The source IP address of cl
 {: note}
 
 When a client request to your app is sent to your cluster, a load balancer service pod receives the request. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the load balancer service pod is running.
+{: shortdesc}
 
 To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for load balancer services. The TCP connection continues all the way to the app pods so that the app can see the actual source IP address of the initiator. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
 
