@@ -260,7 +260,7 @@ To create a cluster:
 
         You must connect your worker nodes to a private VLAN, and optionally, you can connect your worker nodes to a public VLAN. **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).
 
-    4.  **Free and standard clusters**: Run the `cluster-create` command. You can choose between a free cluster, which includes one worker node set up with 2vCPU and 4GB memory and is automatically deleted after 30 days. When you create a standard cluster, by default, the worker node disks are encrypted, its hardware is shared by multiple IBM customers, and it is billed by hours of usage. </br>Example for a standard cluster. Specify the cluster's options:
+    4.  **Free and standard clusters**: Run the `cluster-create` command. You can choose between a free cluster, which includes one worker node set up with 2vCPU and 4GB memory and is automatically deleted after 30 days. When you create a standard cluster, by default, the worker node disks are AES 256-bit encrypted, its hardware is shared by multiple IBM customers, and it is billed by hours of usage. </br>Example for a standard cluster. Specify the cluster's options:
 
         ```
         ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--disable-disk-encrypt] [--trusted]
@@ -325,7 +325,7 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--disable-disk-encrypt</code></td>
-        <td>**Free and standard clusters**: Worker nodes feature [disk encryption](/docs/containers/cs_secure.html#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
+        <td>**Free and standard clusters**: Worker nodes feature AES 256-bit [disk encryption](/docs/containers/cs_secure.html#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
         </tr>
         <tr>
         <td><code>--trusted</code></td>

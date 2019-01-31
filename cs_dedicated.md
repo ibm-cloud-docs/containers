@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-01-31"
 
 ---
 
@@ -358,7 +358,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     </tr>
     <tr>
     <td><code>--disable-disk-encrypt</code></td>
-    <td>Worker nodes feature [disk encryption](/docs/containers/cs_secure.html#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
+    <td>Worker nodes feature AES 256-bit [disk encryption](/docs/containers/cs_secure.html#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
     </tr>
     <tr>
     <td><code>--trusted</code></td>

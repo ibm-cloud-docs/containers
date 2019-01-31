@@ -823,7 +823,7 @@ trusted: <em>true</em>
 </td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>Worker nodes feature disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
+      <td>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
       <tr>
       <td><code>trusted: <em>true</em></code></td>
       <td>**Bare metal only**: Enable [Trusted Compute](/docs/containers/cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td></tr>
@@ -887,7 +887,7 @@ trusted: <em>true</em>
 <p class="important">Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Worker nodes feature disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option.</dd>
+<dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option.</dd>
 
 <dt><code>--trusted</code></dt>
 <dd><p>**Bare metal only**: Enable [Trusted Compute](/docs/containers/cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
@@ -2050,7 +2050,7 @@ After you remove the credentials, the [{{site.data.keyword.Bluemix_notm}} IAM AP
 ### ibmcloud ks machine-types --zone ZONE [--json] [-s]
 {: #cs_machine_types}
 
-View a list of available machine types for your worker nodes. Machine types vary by zone. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers/cs_secure.html#encrypted_disk).
+View a list of available machine types for your worker nodes. Machine types vary by zone. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with AES 256-bit LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers/cs_secure.html#encrypted_disk).
 {:shortdesc}
 
 You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).
@@ -2895,7 +2895,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>Worker nodes feature disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
+<td>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
@@ -2914,7 +2914,7 @@ diskEncryption: <em>false</em></code></pre>
 <dd>The public VLAN that was specified when the cluster was created. This value is optional. If you want your worker nodes to exist on a private VLAN only, do not provide a public VLAN ID. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.<p class="note">If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#private_vlan).</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Worker nodes feature disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option.</dd>
+<dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
