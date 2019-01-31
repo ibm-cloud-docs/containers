@@ -49,7 +49,7 @@ Choose one of the following options to get started:
 ## Sample YAMLs
 {: #sample}
 
-Review the following sample YAML files to quickly specify your Ingress resource. 
+Review the following sample YAML files to quickly get started with specifying your load balancer service. 
 {: shortdesc}
 
 **Load balancer 2.0**</br>
