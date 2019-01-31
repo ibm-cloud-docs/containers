@@ -78,7 +78,7 @@ You can use built-in security features in {{site.data.keyword.containerlong_notm
 For more information about the components of your cluster and how you can secure each component, see [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_secure.html#security). 
 
 ## Where can I find a list of security bulletins that affect my cluster? 
-(: #security_bulletins)
+{: #security_bulletins}
 {: faq}
 
 If vulnerabilities are found in Kubernetes, Kubernetes releases security bulletins to inform users and to describe the actions that users must take to remediate the vulnerability. Kubernetes security bulletins that affect {{site.data.keyword.containerlong_notm}} users or the {{site.data.keyword.Bluemix_notm}} platform are published in the [{{site.data.keyword.Bluemix_notm}} security bulletin](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security). 
