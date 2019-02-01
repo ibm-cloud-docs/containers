@@ -40,6 +40,11 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </thead>
 <tbody>
 <tr>
+<td>0.2.30</td>
+<td>31 Jan 2019</td>
+<td>Increases the default timeout value for `ibmcloud ks cluster-config` to `500s`.</td>
+</tr>
+<tr>
 <td>0.2.19</td>
 <td>16 Jan 2019</td>
 <td><ul><li>Adds the `IKS_BETA_VERSION` environment variable to enable the redesigned beta version of the {{site.data.keyword.containerlong_notm}} plug-in CLI. To try out the redesigned version, see [Using the beta command structure](/docs/containers/cs_cli_reference.html#cs_beta).</li>
