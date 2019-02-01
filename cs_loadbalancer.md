@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-01"
 
 ---
 
@@ -107,7 +107,7 @@ spec:
 
 
 ## Overview
-{: #overview}
+{: #lb_overview}
 
 When you create a standard cluster, {{site.data.keyword.containerlong}} automatically provisions a portable public subnet and a portable private subnet.
 {: shortdesc}
@@ -768,7 +768,7 @@ To set up a load balancer 1.0 service in a multizone cluster:
 7. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers/cs_nodeport.html) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers/cs_network_policy.html#block_ingress).
 
 ## v1.0: Setting up a load balancer 1.0 in a single-zone cluster
-{: #config}
+{: #lb_config}
 
 **Before you begin**:
 * You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers/cs_subnets.html).

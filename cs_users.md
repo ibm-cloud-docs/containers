@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-01"
 
 
 ---
@@ -416,7 +416,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
     4. From the **Services** list, type **{{site.data.keyword.containershort_notm}}**.
     5. From the **Region** list, select one or all regions.
     6. Select a role for the policy.
-       * **Platform access role**: Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. To find a list of supported actions per role, see [platform roles reference page](/cs_access_reference.html#platform).
+       * **Platform access role**: Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. To find a list of supported actions per role, see [platform roles reference page](/cs_access_reference.html#iam_platform).
        * **Service access role**: Grants access to Kubernetes as access from within a cluster so that users can manage Kubernetes resources such as pods, deployments, services, and namespaces. To find a list of supported actions per role, see [service roles reference page](/docs/containers/cs_access_reference.html#service).
     7. Click **Assign**.
     8. **Optional**: If you assigned only a service roles to users, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster-config` [command](/docs/containers/cs_cli_reference.html#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers/cs_app.html#db_cli) or otherwise interact with the Kubernetes API. If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, repeat these steps to give the users the platform **Viewer** role.
@@ -427,7 +427,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
     4. From the **Cluster** list, select one or all cluster instances.
     5. In the **Namespace** field, enter the name of the Kubernetes namespace that you want to scope the _service access_ policy to. Note that you cannot scope a _platform access_ policy to a namespace. The policy grants access to namespaces in all clusters that you previously selected, such as all clusters within a region. If you want to grant access to all namespaces, you can leave the namespace field blank.
     6. Select a role for the policy.
-       *  **Platform access role**: Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. To find a list of supported actions per role, see [platform roles reference page](/cs_access_reference.html#platform).
+       *  **Platform access role**: Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. To find a list of supported actions per role, see [platform roles reference page](/cs_access_reference.html#iam_platform).
           * If you assign a user the **Administrator** platform role for only one cluster, you must also assign the user the **Viewer** platform role for all clusters in that region in the resource group.
           * If you scoped the policy to a namespace, you cannot also assign platform role at the same time. If you also want the user to have a platform role, repeat these steps but leave the namespace field blank and assign only a platform role (do not assign a service access role again).
        * **Service access role**: Grants access to Kubernetes as accessed from within a cluster so that users can manage Kubernetes resources such as pods, deployments, services, and namespaces. To find a list of supported actions per role, see [service roles reference page](/docs/containers/cs_access_reference.html#service).
@@ -495,7 +495,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
         <td>Role</td>
         <td>`--role`</td>
         <td>Choose the role you want to assign.
-        <ul><li>[Platform role](/docs/containers/cs_access_reference.html#platform): Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. Possible values are: `Administrator`, `Operator`, `Editor`, or `Viewer`.</li>
+        <ul><li>[Platform role](/docs/containers/cs_access_reference.html#iam_platform): Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. Possible values are: `Administrator`, `Operator`, `Editor`, or `Viewer`.</li>
         <li>[Service role](/docs/containers/cs_access_reference.html#service): Grants access to Kubernetes as access from within a cluster so that users can manage Kubernetes resources such as pods, deployments, services, and namespaces. Possible values are: `Manager`, `Writer`, or `Reader`.</li></td>
         </tr>
       </tbody>

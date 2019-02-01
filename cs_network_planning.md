@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-01"
 
 ---
 
@@ -115,7 +115,7 @@ As an example, say that you created a private load balancer service. You also cr
 
 
 ## Planning private external networking for a private VLAN only setup
-{: #private_vlan}
+{: #plan_private_vlan}
 
 When your worker nodes are connected to a private VLAN only, you can make your app accessible from a private network only by creating private NodePort, LoadBalancer, or Ingress services. Because your worker nodes are not connected to a public VLAN, no public traffic is routed to these services.
 {: shortdesc}

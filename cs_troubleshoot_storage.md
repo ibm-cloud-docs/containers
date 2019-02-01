@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-01"
 
 ---
 
@@ -489,7 +489,7 @@ You might have used the wrong storage class to access your existing bucket, or y
 1. From the [{{site.data.keyword.Bluemix_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/dashboard/apps), select your {{site.data.keyword.cos_full_notm}} service instance.
 2. Select **Buckets**.
 3. Review the **Class** and **Location** information for your existing bucket.
-4. Choose the appropriate [storage class](/docs/containers/cs_storage_cos.html#storageclass_reference).
+4. Choose the appropriate [storage class](/docs/containers/cs_storage_cos.html#cos_storageclass_reference).
 
 <br />
 

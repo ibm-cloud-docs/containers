@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-02-01"
 
 ---
 
@@ -1047,7 +1047,7 @@ To access the storage from your app, you must mount the PVC to your app.
 </dl>
 
 ## Cleaning up your Portworx volumes and cluster
-{: #cleanup}
+{: #portworx_cleanup}
 
 Remove a [Portworx volume](#remove_pvc), a [storage node](#remove_storage_node_cluster), or the [entire Portworx cluster](#remove_storage_node_cluster) if you do not need it anymore.
 {: shortdesc}
@@ -1161,6 +1161,6 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 - **Remove the entire Portworx cluster:** You can remove a Portworx cluster by using the [`kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl cluster-delete` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/control/cluster.html#pxctl-cluster-delete) or by [uninstalling the Portworx Helm chart](#remove_portworx).
 
 ## Getting help and support
-{: #help}
+{: #portworx_help}
 
 If you run into an issue with using Portworx or you want to chat about Portworx configurations for your specific use case, post a question in the `portworx-on-iks` channel in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/). Log in to Slack by using your IBM ID. If you do not use an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation to this Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/).

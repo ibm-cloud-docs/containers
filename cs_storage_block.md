@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-02-01"
 
 ---
 
@@ -267,7 +267,7 @@ To remove the plug-in:
 
 
 ## Deciding on the block storage configuration
-{: #predefined_storageclass}
+{: #block_predefined_storageclass}
 
 {{site.data.keyword.containerlong}} provides pre-defined storage classes for block storage that you can use to provision block storage with a specific configuration.
 {: shortdesc}
@@ -304,7 +304,7 @@ Make sure to choose your storage configuration carefully to have enough capacity
    ```
    {: pre}
 
-   For more information about each storage class, see the [storage class reference](#storageclass_reference). If you do not find what you are looking for, consider creating your own customized storage class. To get started, check out the [customized storage class samples](#custom_storageclass).
+   For more information about each storage class, see the [storage class reference](#block_storageclass_reference). If you do not find what you are looking for, consider creating your own customized storage class. To get started, check out the [customized storage class samples](#block_custom_storageclass).
    {: tip}
 
 3. Choose the type of block storage that you want to provision.
@@ -413,7 +413,7 @@ Block storage comes with a `ReadWriteOnce` access mode. You can mount it to only
 Before you begin:
 - If you have a firewall, [allow egress access](/docs/containers/cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
 - Install the [{{site.data.keyword.Bluemix_notm}} block storage plug-in](#install_block).
-- [Decide on a pre-defined storage class](#predefined_storageclass) or create a [customized storage class](#custom_storageclass).
+- [Decide on a pre-defined storage class](#block_predefined_storageclass) or create a [customized storage class](#block_custom_storageclass).
 
 Looking to deploy block storage in a stateful set? See [Using block storage in a stateful set](#block_statefulset) for more information.
 {: tip}
@@ -481,7 +481,7 @@ To add block storage:
        </tr>
        <tr>
        <td><code>metadata.annotations.</code></br><code>volume.beta.kubernetes.io/storage-class</code></td>
-       <td>The name of the storage class that you want to use to provision block storage. You can choose to use one of the [IBM-provided storage classes](#storageclass_reference) or [create your own storage class](#custom_storageclass). </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
+       <td>The name of the storage class that you want to use to provision block storage. You can choose to use one of the [IBM-provided storage classes](#block_storageclass_reference) or [create your own storage class](#block_custom_storageclass). </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
        </tr>
        <tr>
          <td><code>metadata.labels.billingType</code></td>
@@ -489,11 +489,11 @@ To add block storage:
        </tr>
        <tr>
        <td><code>metadata.labels.region</code></td>
-       <td>Specify the region where you want to provision your block storage. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. <p class="note">This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. To specify the zone for your storage, you can create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</p></td>
+       <td>Specify the region where you want to provision your block storage. If you specify the region, you must also specify a zone. If you do not specify a region, or the specified region is not found, the storage is created in the same region as your cluster. <p class="note">This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. To specify the zone for your storage, you can create a [customized storage class](#block_multizone_yaml) first. Then, create a PVC with your customized storage class.</p></td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
-	<td>Specify the zone where you want to provision your block storage. If you specify the zone, you must also specify a region. If you do not specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. <p class="note">This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. To specify the zone for your storage, you can create a [customized storage class](#multizone_yaml) first. Then, create a PVC with your customized storage class.</p></td>
+	<td>Specify the zone where you want to provision your block storage. If you specify the zone, you must also specify a region. If you do not specify a zone or the specified zone is not found in a multizone cluster, the zone is selected on a round-robin basis. <p class="note">This option is supported only with the IBM Cloud Block Storage plug-in version 1.0.1 or higher. For older plug-in versions, if you have a multizone cluster, the zone in which your storage is provisioned is selected on a round-robin basis to balance volume requests evenly across all zones. To specify the zone for your storage, you can create a [customized storage class](#block_multizone_yaml) first. Then, create a PVC with your customized storage class.</p></td>
 	</tr>
         <tr>
         <td><code>spec.resources.requests.storage</code></td>
@@ -867,10 +867,10 @@ In a multizone cluster, you can specify the zone and region where you want to cr
 Yes, you can [create a custom storage class](#topology_yaml) for your PVC that includes the [`volumeBindingMode: WaitForFirstConsumer` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) field.
 
 **What options do I have to add block storage to a stateful set?** </br>
-If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#static_statefulset) with your stateful set.  
+If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#block_dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#block_static_statefulset) with your stateful set.  
 
 ### Dynamically provision the PVC when you create a stateful set
-{: #dynamic_statefulset}
+{: #block_dynamic_statefulset}
 
 Use this option if you want to automatically create the PVC when you create the stateful set.
 {: shortdesc}
@@ -1133,7 +1133,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
      </tr>
      <tr>
      <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.iops</code></td>
-     <td style="text-align:left">If you want to provision [performance storage](#predefined_storageclass), enter the number of IOPS. If you use an endurance storage class and specify a number of IOPS, the number of IOPS is ignored. Instead, the IOPS that is specified in your storage class is used.  </td>
+     <td style="text-align:left">If you want to provision [performance storage](#block_predefined_storageclass), enter the number of IOPS. If you use an endurance storage class and specify a number of IOPS, the number of IOPS is ignored. Instead, the IOPS that is specified in your storage class is used.  </td>
      </tr>
      </tbody></table>
 
@@ -1153,12 +1153,12 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    {: tip}
 
 ### Pre-provisioning the PVC before creating the stateful set
-{: #static_statefulset}
+{: #block_static_statefulset}
 
 You can pre-provision your PVCs before creating your stateful set or use existing PVCs with your stateful set.
 {: shortdesc}
 
-When you [dynamically provision your PVCs when creating the stateful set](#dynamic_statefulset), the name of the PVC is assigned based on the values that you used in the stateful set YAML file. In order for the stateful set to use existing PVCs, the name of your PVCs must match the name that would automatically be created when using dynamic provisioning.
+When you [dynamically provision your PVCs when creating the stateful set](#block_dynamic_statefulset), the name of the PVC is assigned based on the values that you used in the stateful set YAML file. In order for the stateful set to use existing PVCs, the name of your PVCs must match the name that would automatically be created when using dynamic provisioning.
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
@@ -1169,7 +1169,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
    For example, if you must create 3 stateful set replicas, create 3 PVCs with the following names: `nginxvol-nginx_statefulset-0`, `nginxvol-nginx_statefulset-1`, and `nginxvol-nginx_statefulset-2`.  
 
-2. Follow the steps in [Dynamically provision the PVC when you create a stateful set](#dynamic_statefulset) to create your stateful set. Make sure to use the values from your PVC names in the stateful set specification:
+2. Follow the steps in [Dynamically provision the PVC when you create a stateful set](#block_dynamic_statefulset) to create your stateful set. Make sure to use the values from your PVC names in the stateful set specification:
    - **`spec.volumeClaimTemplates.metadata.name`**: Enter the `<volume_name>` that you used in the previous step.
    - **`metadata.name`**: Enter the `<statefulset_name>` that you used in the previous step.
    - **`spec.replicas`**: Enter the number of replicas that you want to create for your stateful set. The number of replicas must equal the number of PVCs that you created earlier.
@@ -1209,7 +1209,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 
 ## Changing the size and IOPS of your existing storage device
-{: #change_storage_configuration}
+{: #block_change_storage_configuration}
 
 If you want to increase storage capacity or performance, you can modify your existing volume. 
 {: shortdesc}
@@ -1285,15 +1285,15 @@ For questions about billing and to find the steps for how to use the {{site.data
    </tr>
    <tr>
    <td><code>&lt;new-size&gt;</code></td>
-   <td>Enter the new size in gigabytes (Gi) for your volume. For valid sizes, see [Deciding on the block storage configuration](#predefined_storageclass). The size that you enter must be greater than or equal to the current size of your volume. If you do not specify a new size, the current size of the volume is used. </td>
+   <td>Enter the new size in gigabytes (Gi) for your volume. For valid sizes, see [Deciding on the block storage configuration](#block_predefined_storageclass). The size that you enter must be greater than or equal to the current size of your volume. If you do not specify a new size, the current size of the volume is used. </td>
    </tr>
    <tr>
    <td><code>&lt;new-iops&gt;</code></td>
-   <td>For performance storage only. Enter the new number of IOPS that you want. For valid IOPS, see [Deciding on the block storage configuration](#predefined_storageclass). If you do not specify the IOPS, the current IOPS is used. <p class="note">If the original IOPS/GB ratio for the volume is less than 0.3, the new IOPS/GB ratio must be less than 0.3. If the original IOPS/GB ratio for the volume is greater than or equal to 0.3, the new IOPS/GB ratio for the volume must be greater than or equal to 0.3.</p> </td>
+   <td>For performance storage only. Enter the new number of IOPS that you want. For valid IOPS, see [Deciding on the block storage configuration](#block_predefined_storageclass). If you do not specify the IOPS, the current IOPS is used. <p class="note">If the original IOPS/GB ratio for the volume is less than 0.3, the new IOPS/GB ratio must be less than 0.3. If the original IOPS/GB ratio for the volume is greater than or equal to 0.3, the new IOPS/GB ratio for the volume must be greater than or equal to 0.3.</p> </td>
    </tr>
    <tr>
    <td><code>&lt;new-tier&gt;</code></td>
-   <td>For endurance stoage only. Enter the new number of IOPS per GB that you want. For valid IOPS, see [Deciding on the block storage configuration](#predefined_storageclass). If you do not specify the IOPS, the current IOPS is used. <p class="note">If the original IOPS/GB ratio for the volume is less than 0.25, the new IOPS/GB ratio must be less than 0.25. If the original IOPS/GB ratio for the volume is greater than or equal to 0.25, the new IOPS/GB ratio for the volume must be greater than or equal to 0.25.</p> </td>
+   <td>For endurance stoage only. Enter the new number of IOPS per GB that you want. For valid IOPS, see [Deciding on the block storage configuration](#block_predefined_storageclass). If you do not specify the IOPS, the current IOPS is used. <p class="note">If the original IOPS/GB ratio for the volume is less than 0.25, the new IOPS/GB ratio must be less than 0.25. If the original IOPS/GB ratio for the volume is greater than or equal to 0.25, the new IOPS/GB ratio for the volume must be greater than or equal to 0.25.</p> </td>
    </tr>
    </tbody>
    </table>
@@ -1367,7 +1367,7 @@ For questions about billing and to find the steps for how to use the {{site.data
 
 
 ## Backing up and restoring data
-{: #backup_restore}
+{: #block_backup_restore}
 
 Block storage is provisioned into the same location as the worker nodes in your cluster. The storage is hosted on clustered servers by IBM to provide availability in case a server goes down. However, block storage is not backed up automatically and might be inaccessible if the entire location fails. To protect your data from being lost or damaged, you can set up periodic backups that you can use to restore your data when needed.
 {: shortdesc}
@@ -1399,10 +1399,10 @@ To make your data even more highly available and protect your app from a zone fa
 
 
 ## Storage class reference
-{: #storageclass_reference}
+{: #block_storageclass_reference}
 
 ### Bronze
-{: #bronze}
+{: #block_bronze}
 
 <table>
 <caption>Block storage class: bronze</caption>
@@ -1448,7 +1448,7 @@ To make your data even more highly available and protect your app from a zone fa
 
 
 ### Silver
-{: #silver}
+{: #block_silver}
 
 <table>
 <caption>Block storage class: silver</caption>
@@ -1493,7 +1493,7 @@ To make your data even more highly available and protect your app from a zone fa
 </table>
 
 ### Gold
-{: #gold}
+{: #block_gold}
 
 <table>
 <caption>Block storage class: gold</caption>
@@ -1538,7 +1538,7 @@ To make your data even more highly available and protect your app from a zone fa
 </table>
 
 ### Custom
-{: #custom}
+{: #block_custom}
 
 <table>
 <caption>Block storage class: custom</caption>
@@ -1582,12 +1582,12 @@ To make your data even more highly available and protect your app from a zone fa
 
 
 ## Sample customized storage classes
-{: #custom_storageclass}
+{: #block_custom_storageclass}
 
 You can create a customized storage class and use the storage class in your PVC.
 {: shortdesc}
 
-{{site.data.keyword.containerlong_notm}} provides [pre-defined storage classes](#storageclass_reference) to provision block storage with a particular tier and configuration. In some cases, you might want to provision storage with a different configuration that is not covered in the pre-defined storage classes. You can use the examples in this topic to find sample customized storage classes.
+{{site.data.keyword.containerlong_notm}} provides [pre-defined storage classes](#block_storageclass_reference) to provision block storage with a particular tier and configuration. In some cases, you might want to provision storage with a different configuration that is not covered in the pre-defined storage classes. You can use the examples in this topic to find sample customized storage classes.
 
 To create your customized storage class, see [Customizing a storage class](/docs/containers/cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_block).
 
@@ -1654,7 +1654,7 @@ The following examples show how to create storage classes that delay the creatio
   {: codeblock}
 
 ### Specifying the zone and region 
-{: #multizone_yaml}
+{: #block_multizone_yaml}
 
 If you want to create your block storage in a specific zone, you can specify the zone and region in a customized storage class. 
 {: shortdesc}
@@ -1662,7 +1662,7 @@ If you want to create your block storage in a specific zone, you can specify the
 Use the customized storage class if you use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.0.0 or if you want to [statically provision block storage](#existing_block) in a specific zone. In all other cases, [specify the zone directly in your PVC](#add_block).
 {: note}
 
-The following `.yaml` file customizes a storage class that is based on the `ibm-block-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. The zone is specified as `dal12`. To use a different storage class as your base, see the [storage class reference](#storageclass_reference).
+The following `.yaml` file customizes a storage class that is based on the `ibm-block-silver` non-retaining storage class: the `type` is `"Endurance"`, the `iopsPerGB` is `4`, the `sizeRange` is `"[20-12000]Gi"`, and the `reclaimPolicy` is set to `"Delete"`. The zone is specified as `dal12`. To use a different storage class as your base, see the [storage class reference](#block_storageclass_reference).
 
 Create the storage class in the same region and zone as your cluster and worker nodes. To get the region of your cluster, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and look for the region prefix in the **Master URL**, such as `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`. To get the zone of your worker node, run `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
 

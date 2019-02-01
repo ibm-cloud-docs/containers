@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-01"
 
 ---
 
@@ -76,7 +76,7 @@ In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. I
 
 
 ## Using custom or existing subnets to create a cluster
-{: #custom}
+{: #subnets_custom}
 
 When you create a standard cluster, subnets are automatically created for you. However, instead of using the automatically provisioned subnets, you can use existing portable subnets from your IBM Cloud infrastructure (SoftLayer) account or reuse subnets from a deleted cluster.
 {:shortdesc}

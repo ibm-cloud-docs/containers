@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-01"
 
 ---
 
@@ -62,7 +62,7 @@ Click one of the following setups to plan networking for your cluster:
 <map name="home_map" id="home_map">
 <area href="#both_vlans" alt="Planning default cluster networking" title="Planning default cluster networking" shape="rect" coords="-7, -8, 149, 211" />
 <area href="#both_vlans_private" alt="Planning customized default cluster networking" title="Planning customized default cluster networking" shape="rect" coords="196, -1, 362, 210" />
-<area href="#private_vlan" alt="Planning private-only cluster networking" title="Planning private-only cluster networking" shape="rect" coords="409, -10, 572, 218" />
+<area href="#plan_setup_private_vlan" alt="Planning private-only cluster networking" title="Planning private-only cluster networking" shape="rect" coords="409, -10, 572, 218" />
 </map>
 
 <br />
@@ -177,7 +177,7 @@ To securely connect your worker nodes and apps to an on-premises network, you ca
 
 
 ## Planning private-only cluster networking
-{: #private_vlan}
+{: #plan_setup_private_vlan}
 
 You can choose to [create a private-VLAN only cluster](/docs/containers/cs_clusters.html#clusters_cli) by including the `--private-only` flag in the CLI. When your worker nodes are connected to a private VLAN only, the worker nodes can't automatically connect to the master. You must use a gateway appliance to connect the worker nodes to the master. You can also use the gateway appliance as a firewall to secure your cluster from unwanted access.
 {:shortdesc}

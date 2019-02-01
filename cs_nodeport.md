@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-02-01"
 
 ---
 
@@ -54,7 +54,7 @@ The public IP address of the worker node is not permanent. When a worker node is
 
 
 ## Enabling access to an app by using a NodePort service
-{: #config}
+{: #nodeport_config}
 
 You can expose your app as a Kubernetes NodePort service for free or standard clusters.
 {:shortdesc}

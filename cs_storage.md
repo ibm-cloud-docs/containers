@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-02-01"
 
 ---
 
@@ -28,12 +28,12 @@ To improve the findability of storage information, the storage topics that you a
 *  Adding NFS file storage or block storage to apps
     * [File storage](/docs/containers/cs_storage_file.html#add_file)
     * [Block storage](/docs/containers/cs_storage_block.html#add_block)
-*  [Customizing a storage class for XFS block storage](/docs/containers/cs_storage_block.html#custom_storageclass)
+*  [Customizing a storage class for XFS block storage](/docs/containers/cs_storage_block.html#file_custom_storageclass)
 *  [Changing the default NFS file storage version](/docs/containers/cs_storage_file.html#nfs_version)
 *  [Setting up NFS and block persistent storage in multizone clusters](/docs/containers/cs_storage_basics.html#storage_multizone)
 *  Installing the IBM Cloud infrastructure (SoftLayer) CLI: Now, you can use `ibmcloud sl` commands instead of installing the `slcli`.
 *  [Installing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in on your cluster](/docs/containers/cs_storage_block.html#install_block)
 *  Setting up backup and restore solutions for NFS file shares and block storage
-    * [File storage](/docs/containers/cs_storage_file.html#backup_restore)
-    * [Block storage](/docs/containers/cs_storage_block.html#backup_restore)
+    * [File storage](/docs/containers/cs_storage_file.html#file_backup_restore)
+    * [Block storage](/docs/containers/cs_storage_block.html#block_backup_restore)
 *  [Cleaning up persistent NFS file and block storage](/docs/containers/cs_storage_remove.html#cleanup)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-01"
 
 
 ---
@@ -29,7 +29,7 @@ As of 30 January 2019, {{site.data.keyword.containerlong_notm}} has a new way of
 {: note}
 
 ## {{site.data.keyword.Bluemix_notm}} IAM platform roles
-{: #platform}
+{: #iam_platform}
 
 {{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.Bluemix_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.Bluemix_notm}} resources such as clusters, worker nodes, and Ingress application load balancers. {{site.data.keyword.Bluemix_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.Bluemix_notm}} IAM platform permissions](/docs/containers/cs_users.html#platform).
 {: shortdesc}

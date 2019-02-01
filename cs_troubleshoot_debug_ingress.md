@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-01"
 
 ---
 
@@ -221,7 +221,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     {: screen}
 
 ## Step 4: Check your domain mappings and Ingress resource configuration
-{: #config}
+{: #ts_ingress_config}
 
 1. If you use a custom domain, verify that you used your DNS provider to map the custom domain to the IBM-provided subdomain or the ALB's public IP address. Note that using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
     * IBM-provided subdomain: Check that your custom domain is mapped to the cluster's IBM-provided subdomain in the Canonical Name record (CNAME).
