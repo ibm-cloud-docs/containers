@@ -336,6 +336,7 @@ To create a pre-DNAT policy:
           name: deny-nodeports
         spec:
           applyOnForward: true
+          preDNAT: true
           ingress:
           - action: Deny
             destination:
@@ -349,7 +350,6 @@ To create a pre-DNAT policy:
               - 30000:32767
             protocol: UDP
             source: {}
-          preDNAT: true
           selector: ibm.role=='worker_public'
           order: 1100
           types:
@@ -393,6 +393,8 @@ To create a pre-DNAT policy:
         metadata:
           name: whitelist
         spec:
+          applyOnForward: true
+          preDNAT: true
           ingress:
           - action: Allow
             destination:
@@ -404,7 +406,6 @@ To create a pre-DNAT policy:
             source:
               nets:
               - <client_address>/32
-          preDNAT: true
           selector: ibm.role=='worker_public'
           order: 500
           types:
