@@ -1045,6 +1045,8 @@ View information about a cluster in your organization.
   ```
   {: screen}
 
+
+
 ### ibmcloud ks cluster-refresh --cluster CLUSTER [-f] [-s]
 {: #cs_cluster_refresh}
 
