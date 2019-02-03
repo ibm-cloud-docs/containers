@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-01"
+lastupdated: "2019-02-03"
 
 
 ---
@@ -253,7 +253,7 @@ If the user is leaving your organization, the {{site.data.keyword.Bluemix_notm}}
 
 **How can I lock down my cluster if my API key becomes compromised?**
 
-If an API key that is set for a region and resource group in your cluster is compromised, [delete it](../iam/userid_keys.html#deleting-an-api-key) so that no further calls can be made using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers/cs_secure.html#apiserver) security topic.
+If an API key that is set for a region and resource group in your cluster is compromised, [delete it](/docs/iam/userid_keys.html#deleting-an-api-key) so that no further calls can be made using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers/cs_secure.html#apiserver) security topic.
 
 **How do I set up the API key for my cluster?**</br>
 
