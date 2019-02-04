@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-01"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -113,6 +113,8 @@ Using the `dedicated=edge` toleration means that all load balancer and Ingress s
 Before you begin:
 - Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role for all namespaces](/docs/containers/cs_users.html#platform).
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+To prevent other workloads from running on edge worker nodes:
 
 1. List all of the worker nodes with the `dedicated=edge` label.
 
