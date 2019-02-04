@@ -38,7 +38,8 @@ The list is divided into two parts:
 ### Account-level
 {: #prepare_account_level}
 
-Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for {{site.data.keyword.containerlong_notm}}. {: shortdesc}
+Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for {{site.data.keyword.containerlong_notm}}. 
+{: shortdesc}
 
 1.  [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
 2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](/docs/containers/cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
@@ -87,8 +88,6 @@ Follow the steps to prepare the setup of your cluster.
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
 
-
-
 ### Creating a free cluster
 {: #clusters_ui_free}
 
@@ -113,6 +112,9 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 
 ### Creating a standard cluster
 {: #clusters_ui_standard}
+
+Use standard clusters if you want to explore the full capabilities of Kubernetes and {{site.data.keyword.containerlong_notm}} to deploy and manage your containerized apps.
+{: shortdesc}
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 2. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.

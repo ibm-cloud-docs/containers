@@ -210,7 +210,10 @@ Zones are physical data centers that are available within an {{site.data.keyword
 ### Single-zone clusters
 {: #regions_single_zone}
 
-In a single-zone cluster, your cluster's resources remain in the zone in which the cluster is deployed. The following image highlights the relationship of single-zone cluster components within an example region of US East:
+In a single-zone cluster, your cluster's resources remain in the zone in which the cluster is deployed.
+{: shortdesc}
+
+The following image highlights the relationship of single-zone cluster components within an example region of US East:
 
 <img src="/images/region-cluster-resources.png" width="650" alt="Understanding where your cluster resources reside" style="width:650px; border-style: none"/>
 
@@ -226,6 +229,7 @@ _Understanding where your single-zone cluster resources are._
 {: #regions_multizone}
 
 In a multizone cluster, the master node is deployed in a multizone-capable zone and your cluster's resources are spread across multiple zones.
+{: shortdesc}
 
 1.  Worker nodes are spread across multiple zones in one region to provide more availability for your cluster. The master remains in the same multizone-capable zone that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes through a regional endpoint.
 
