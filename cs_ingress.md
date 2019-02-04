@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -47,7 +47,7 @@ Expose multiple apps in your Kubernetes cluster by creating Ingress resources th
 ## Sample YAMLs
 {: #sample_ingress}
 
-Use these sample YAML files to quickly get started with specifying your Ingress resource. 
+Use these sample YAML files to quickly get started with specifying your Ingress resource.
 {: shortdesc}
 
 **Ingress resource to publicly expose an app**</br>
@@ -562,6 +562,7 @@ Your Ingress resource is created in the same namespace as your app services. You
 {: #public_inside_5}
 
 In a web browser, enter the URL of the app service to access.
+{: shortdesc}
 
 ```
 https://<domain>/<app1_path>
@@ -598,7 +599,7 @@ Having trouble connecting to your app through Ingress? Try [debugging Ingress](/
 {: #external_endpoint}
 
 Expose apps that are outside your cluster to the public by including them in public Ingress ALB load balancing. Incoming public requests on the IBM-provided or your custom domain are forwarded automatically to the external app.
-{:shortdesc}
+{: shortdesc}
 
 Before you begin:
 
@@ -704,7 +705,7 @@ To use a private ALB, you must first enable the private ALB. Because private VLA
 
 Before you begin:
 * Review the Ingress [prerequisites](#config_prereqs).
-* Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](/docs/containers/cs_network_planning.html#private_both_vlans) or to [a private VLAN only](/docs/containers/cs_network_planning.html#private_vlan).
+* Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](/docs/containers/cs_network_planning.html#private_both_vlans) or to [a private VLAN only](/docs/containers/cs_network_planning.html#plan_private_vlan).
     * If your worker nodes are connected to a private VLAN only, you must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 
 ### Step 1: Deploy apps and create app services
@@ -1155,15 +1156,14 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
 3. Save the configuration file.
 
 4. Verify that the configmap changes were applied.
+  ```
+  kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+  ```
+  {: pre}
 
- ```
- kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
- ```
- {: pre}
-
- 5. Optional:
-    * Access an app via a non-standard TCP port that you opened by using the [`tcp-ports`](/docs/containers/cs_annotations.html#tcp-ports) annotation.
-    * Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic to a port that you opened by using the [`custom-port`](/docs/containers/cs_annotations.html#custom-port) annotation.
+5. Optional:
+  * Access an app via a non-standard TCP port that you opened by using the [`tcp-ports`](/docs/containers/cs_annotations.html#tcp-ports) annotation.
+  * Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic to a port that you opened by using the [`custom-port`](/docs/containers/cs_annotations.html#custom-port) annotation.
 
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/).
 

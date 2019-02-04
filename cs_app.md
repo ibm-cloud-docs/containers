@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -125,7 +125,7 @@ If you want to expose your app publicly, you have different options that depend 
 *  **Free cluster**: You can expose your app by using a [NodePort service](/docs/containers/cs_nodeport.html#nodeport).
 *  **Standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#external).
 *  **Cluster that is made private by using Calico**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#private_both_vlans). You also must use a Calico preDNAT network policy to block the public node ports.
-*  **Private VLAN-only standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#private_vlan). You also must open the port for the service's private IP address in your firewall.
+*  **Private VLAN-only standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#plan_private_vlan). You also must open the port for the service's private IP address in your firewall.
 
 ### After I deploy my app, how can I monitor its health?
 You can set up {{site.data.keyword.Bluemix_notm}} [logging and monitoring](/docs/containers/cs_health.html#health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](/docs/containers/cs_integrations.html#health_services).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -306,6 +306,57 @@ Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser
 
 
 
+## Block storage: Block storage changes to read-only
+{: #readonly_block}
+
+{: tsSymptoms}
+You might see the following symptoms:
+- When you run `kubectl get pods -o wide`, you see that multiple pods on the same worker node are stuck in the `ContainerCreating` or `CrashLoopBackOff` state. All these pods use the same block storage instance. 
+- When you run a `kubectl describe pod` command, you see the following error in the **Events** section: `MountVolume.SetUp failed for volume ... read-only`.
+
+{: tsCauses}
+If a network error occurs while a pod writes to a volume, IBM Cloud infrastructure (SoftLayer) protects the data on the volume from getting corrupted by changing the volume to a read-only mode. Pods that use this volume cannot continue to write to the volume and fail. 
+
+{: tsResolve}
+1. Check the version of the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in that is installed in your cluster.
+   ```
+   helm ls
+   ```
+   {: pre}
+    
+2. Verify that you use the [latest version of the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). If not, [update your plug-in](/docs/containers/cs_storage_block.html#updating-the-ibm-cloud-block-storage-plug-in). 
+3. If you used a Kubernetes deployment for your pod, restart the pod that is failing by removing the pod and letting Kubernetes re-create it. If you did not use a deployment, retrieve the YAML file that was used to create your pod by running `kubectl get pod <pod_name> -o yaml >pod.yaml`. Then, delete and manually re-create the pod. 
+    ```
+    kubectl delete pod <pod_name>
+    ```
+    {: pre}
+      
+4. Check if re-creating your pod resolved the issue. If not, reload the worker node. 
+   1. Find the worker node where your pod runs and note the private IP address that is assigned to your worker node.
+      ```
+      kubectl describe pod <pod_name> | grep Node
+      ```
+      {: pre}
+      
+      Example output: 
+      ```
+      Node:               10.75.XX.XXX/10.75.XX.XXX
+      Node-Selectors:  <none>
+      ```
+      {: screen}
+      
+   2. Retrieve the **ID** of your worker node by using the private IP address from the previous step. 
+      ```
+      ibmcloud ks workers --cluster <cluster_name_or_ID>
+      ```
+      {: pre}
+      
+   3. Gracefully [reload the worker node](/docs/containers/cs_cli_reference.html#cs_worker_reload). 
+
+
+<br />
+
+
 ## Block storage: Mounting existing block storage to a pod fails due to the wrong file system
 {: #block_filesystem}
 
@@ -489,7 +540,7 @@ You might have used the wrong storage class to access your existing bucket, or y
 1. From the [{{site.data.keyword.Bluemix_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/dashboard/apps), select your {{site.data.keyword.cos_full_notm}} service instance.
 2. Select **Buckets**.
 3. Review the **Class** and **Location** information for your existing bucket.
-4. Choose the appropriate [storage class](/docs/containers/cs_storage_cos.html#storageclass_reference).
+4. Choose the appropriate [storage class](/docs/containers/cs_storage_cos.html#cos_storageclass_reference).
 
 <br />
 

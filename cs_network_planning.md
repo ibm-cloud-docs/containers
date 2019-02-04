@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -90,6 +90,7 @@ The public network interface for the worker nodes in both free and standard clus
 {: #private_both_vlans}
 
 When your worker nodes are connected to both a public and a private VLAN, you can make your app accessible from a private network only by creating private NodePort, LoadBalancer, or Ingress services. Then, you can create Calico policies to block public traffic to the services.
+{: shortdesc}
 
 **NodePort**
 * [Create a NodePort service](/docs/containers/cs_nodeport.html). In addition to the public IP address, a NodePort service is available over the private IP address of a worker node.
@@ -114,9 +115,10 @@ As an example, say that you created a private load balancer service. You also cr
 
 
 ## Planning private external networking for a private VLAN only setup
-{: #private_vlan}
+{: #plan_private_vlan}
 
 When your worker nodes are connected to a private VLAN only, you can make your app accessible from a private network only by creating private NodePort, LoadBalancer, or Ingress services. Because your worker nodes are not connected to a public VLAN, no public traffic is routed to these services.
+{: shortdesc}
 
 **NodePort**:
 * [Create a private NodePort service](/docs/containers/cs_nodeport.html). The service is available over the private IP address of a worker node.

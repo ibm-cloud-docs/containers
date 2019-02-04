@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-29"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -39,6 +39,11 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.2.30</td>
+<td>31 Jan 2019</td>
+<td>Increases the default timeout value for `ibmcloud ks cluster-config` to `500s`.</td>
+</tr>
 <tr>
 <td>0.2.19</td>
 <td>16 Jan 2019</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -132,6 +132,7 @@ If you [create your multizone cluster with the CLI](/docs/containers/cs_clusters
 {: #mz_new_ways}
 
 With the introduction of worker pools, you can use a new set of APIs and commands to manage your cluster. You can see these new commands in the [CLI documentation page](/docs/containers/cs_cli_reference.html#cs_cli_reference), or in your terminal by running `ibmcloud ks help`.
+{: shortdesc}
 
 The following table compares the old and new methods for a few common cluster management actions.
 <table summary="The table shows the description of the new way to perform multizone commands. Rows are to be read from the left to right, with the description in column one, the old way in column two, and the new multizone way in column three.">
@@ -225,12 +226,12 @@ You cannot convert a cluster that is connected to a public and private VLAN to b
 
 If you want to create a cluster that only has access on a private VLAN:
 
-1.  Review [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#private_vlan).
+1.  Review [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#plan_setup_private_vlan).
 2.  Configure your gateway appliance for network connectivity. Note that you must [open the required ports and IP addresses](/docs/containers/cs_firewall.html#firewall_outbound) in your firewall and [enable VLAN spanning](/docs/containers/cs_subnets.html#vra-routing) for the subnets.
 3.  Create a cluster.
     *  [From the console](/docs/containers/cs_clusters.html#clusters_ui), select a private VLAN but not select a public VLAN.
     *  [From the CLI](/docs/containers/cs_clusters.html#clusters_cli), include the `--private-only` flag.
-4.  If you want to expose an app to a private network by using a private NodePort, load balancer, or Ingress service, review [Planning private external networking for a private VLAN only setup](/docs/containers/cs_network_planning.html#private_vlan). The service is accessible on only the private IP address and you must configure the ports in your firewall to use the private IP address.
+4.  If you want to expose an app to a private network by using a private NodePort, load balancer, or Ingress service, review [Planning private external networking for a private VLAN only setup](/docs/containers/cs_network_planning.html#plan_private_vlan). The service is accessible on only the private IP address and you must configure the ports in your firewall to use the private IP address.
 
 
 
@@ -645,7 +646,7 @@ To review how much compute resources are currently used on your worker node, run
 </table>
 
 ## Autorecovery for your worker nodes
-{: #autorecovery}
+{: #planning_autorecovery}
 
 Critical components, such as `containerd`, `kubelet`, `kube-proxy`, and `calico`, must be functional to have a healthy Kubernetes worker node. Over time these components can break and may leave your worker node in a nonfunctional state. Nonfunctional worker nodes decrease total capacity of the cluster and can result in downtime for your app.
 {:shortdesc}

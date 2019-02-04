@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -38,7 +38,7 @@ With {{site.data.keyword.containerlong_notm}}, you can create your own Kubernete
 For more information on how your cluster resources are set up, see the [Service architecture](/docs/containers/cs_tech.html#architecture). To find a list of capabilities and benefits, see [Why {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_why.html#cs_ov).
 
 ## Why should I use IBM Cloud Kubernetes Service?
-{: #benefits}
+{: #faq_benefits}
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} is a managed Kubernetes offering that delivers powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services related to IBM Watson®, AI, IoT, DevOps, security, and data analytics. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. The service also has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment.
@@ -56,7 +56,7 @@ Periodically, Kubernetes releases [major, minor, or patch updates](/docs/contain
 Worker nodes in standard clusters are provisioned in to your {{site.data.keyword.Bluemix_notm}} infrastructure account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches. Security updates and patches are made available by IBM Site Reliability Engineers (SREs) who continuously monitor the Linux image that is installed on your worker nodes to detect vulnerabilities and security compliance issues. For more information, see [Updating worker nodes](/docs/containers/cs_cluster_update.html#worker_node). 
 
 ## Are the Kubernetes master and worker nodes highly available?
-{: #ha}
+{: #faq_ha}
 {: faq}
 
 The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is designed to ensure reliability, low processing latency, and a maximum uptime of the service. By default, every cluster in {{site.data.keyword.containerlong_notm}} that runs the Kubernetes version 1.10 or higher is set up with multiple Kubernetes master instances to ensure availability and accessibility of your cluster resources, even if one or more instances of your Kubernetes master are unavailable. 
@@ -78,10 +78,10 @@ You can use built-in security features in {{site.data.keyword.containerlong_notm
 For more information about the components of your cluster and how you can secure each component, see [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_secure.html#security). 
 
 ## Where can I find a list of security bulletins that affect my cluster? 
-{: #security_bulletins}
+{: #faq_security_bulletins}
 {: faq}
 
-If vulnerabilities are found in Kubernetes, Kubernetes releases security bulletins to inform users and to describe the actions that users must take to remediate the vulnerability. Kubernetes security bulletins that affect {{site.data.keyword.containerlong_notm}} users or the {{site.data.keyword.Bluemix_notm}} platform are published in the [{{site.data.keyword.Bluemix_notm}} security bulletin](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security). 
+If vulnerabilities are found in Kubernetes, Kubernetes releases CVEs in security bulletins to inform users and to describe the actions that users must take to remediate the vulnerability. Kubernetes security bulletins that affect {{site.data.keyword.containerlong_notm}} users or the {{site.data.keyword.Bluemix_notm}} platform are published in the [{{site.data.keyword.Bluemix_notm}} security bulletin](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security). 
 
 Some CVEs require the latest patch update for a Kubernetes version that you can install as part of the regular [cluster update process](/docs/containers/cs_cluster_update.html#update) in {{site.data.keyword.containerlong_notm}}. Make sure to apply security patches in time to protect your cluster from malicious attacks. For information about what is included in a security patch, refer to the [version changelog](/docs/containers/cs_versions_changelog.html#changelog). 
 
@@ -125,7 +125,7 @@ For more information about supported regions, see [Regions and zones](/docs/cont
 - Payment Card Industry Data Security Standard (PCI DSS)
 
 ## Can I use IBM Cloud and other services with my cluster?
-{: #integrations}
+{: #faq_integrations}
 {: faq}
 
 You can add {{site.data.keyword.Bluemix_notm}} platform and infrastructure services as well as services from third-party vendors to your {{site.data.keyword.containerlong_notm}} cluster to enable automation, improve security, or enhance your monitoring and logging capabilities in the cluster.
@@ -184,7 +184,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <p>For more information, see [Bandwidth packages ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth).</p></dd>
 
 <dt id="subnets">Subnet IP addresses</dt>
-  <dd><p>When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly.</p><p>If you already have available subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers/cs_cli_reference.html#cs_cluster_create), and then [reuse your subnets](/docs/containers/cs_subnets.html#custom).</p>
+  <dd><p>When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly.</p><p>If you already have available subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers/cs_cli_reference.html#cs_cluster_create), and then [reuse your subnets](/docs/containers/cs_subnets.html#subnets_custom).</p>
   </dd>
 
 <dt id="storage">Storage</dt>

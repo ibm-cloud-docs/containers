@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -238,7 +238,7 @@ If you are not using all the subnets in the VLAN, you can reuse subnets in the c
 
 2.  [Create a cluster](/docs/containers/cs_cli_reference.html#cs_cluster_create) with the `--no-subnet` option so that the service does not try to create new subnets. Specify the zone and VLAN that has the subnets that are available for reuse.
 
-3.  Use the `ibmcloud ks cluster-subnet-add` [command](/docs/containers/cs_cli_reference.html#cs_cluster_subnet_add) to add existing subnets to your cluster. For more information, see [Adding or reusing custom and existing subnets in Kubernetes clusters](/docs/containers/cs_subnets.html#custom).
+3.  Use the `ibmcloud ks cluster-subnet-add` [command](/docs/containers/cs_cli_reference.html#cs_cluster_subnet_add) to add existing subnets to your cluster. For more information, see [Adding or reusing custom and existing subnets in Kubernetes clusters](/docs/containers/cs_subnets.html#subnets_custom).
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -68,7 +68,7 @@ The following subnets are automatically provisioned on the default public and pr
 
 To see all of the subnets provisioned in your account, run `ibmcloud ks subnets`. To see the portable public and portable private subnets that are bound to one cluster, you can run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
 
-In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If you reach this limit, first check to see whether you can [reuse subnets in the VLAN to create new clusters](#custom). If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans). Then, [create a cluster](/docs/containers/cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
+In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If you reach this limit, first check to see whether you can [reuse subnets in the VLAN to create new clusters](#subnets_custom). If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans). Then, [create a cluster](/docs/containers/cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
 {: note}
 
 <br />
@@ -76,7 +76,7 @@ In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. I
 
 
 ## Using custom or existing subnets to create a cluster
-{: #custom}
+{: #subnets_custom}
 
 When you create a standard cluster, subnets are automatically created for you. However, instead of using the automatically provisioned subnets, you can use existing portable subnets from your IBM Cloud infrastructure (SoftLayer) account or reuse subnets from a deleted cluster.
 {:shortdesc}
@@ -188,6 +188,8 @@ Before you begin:
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
+To list available portable public IP addresses:
+
 1.  Create a Kubernetes service configuration file that is named `myservice.yaml` and define a service of type `LoadBalancer` with a dummy load balancer IP address. The following example uses the IP address 1.1.1.1 as the load balancer IP address.
 
     ```
@@ -244,6 +246,8 @@ You can free up a used portable IP address by deleting the load balancer service
 Before you begin:
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+To delete a load balancer:
 
 1.  List available services in your cluster.
 

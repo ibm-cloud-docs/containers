@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -108,8 +108,8 @@ Review the following common use cases for static provisioning of persistent stor
 4. **Share persistent storage across namespaces in the same cluster:** You provisioned persistent storage in a namespace of your cluster. You want to use the same storage instance for an app pod that is deployed to a different namespace in your cluster.
 
 For more information about how to statically provision storage, see:
-- [File storage](/docs/containers/cs_storage_file.html#predefined_storageclass)
-- [Block storage](/docs/containers/cs_storage_block.html#predefined_storageclass)
+- [File storage](/docs/containers/cs_storage_file.html#file_predefined_storageclass)
+- [Block storage](/docs/containers/cs_storage_block.html#block_predefined_storageclass)
 
 ## Storage classes
 {: #storageclasses}
@@ -120,8 +120,8 @@ To dynamically provision persistent storage, you must define the type and config
 A [Kubernetes storage class ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/) is used to abstract the underlying storage platform that is supported in {{site.data.keyword.Bluemix_notm}} so that you do not have to know all the details about supported sizes, IOPS, or retention policies to successfully provision persistent storage in a cluster. {{site.data.keyword.containerlong_notm}} provides pre-defined storage classes for every type of storage that is supported. Each storage class is designed to abstract the supported storage tier while giving you the choice to decide on the size, IOPS, and retention policy that you want.
 
 For the pre-defined storage class specifications, see:
-- [File storage](/docs/containers/cs_storage_file.html#storageclass_reference)
-- [Block storage](/docs/containers/cs_storage_block.html#storageclass_reference)
+- [File storage](/docs/containers/cs_storage_file.html#file_storageclass_reference)
+- [Block storage](/docs/containers/cs_storage_block.html#block_storageclass_reference)
 
 Not finding what you are looking for? You can also create your own customized storage class to provision the type of storage that you want.
 {: tip}
@@ -134,11 +134,11 @@ If you cannot use one of the provided storage classes, you can create your own c
 
 1. Create a customized storage class. You can start by using one of the pre-defined storage classes, or check out our sample customized storage classes.
    - Pre-defined storage classes:
-     - [File storage](/docs/containers/cs_storage_file.html#storageclass_reference)
-     - [Block storage](/docs/containers/cs_storage_block.html#storageclass_reference)
+     - [File storage](/docs/containers/cs_storage_file.html#file_storageclass_reference)
+     - [Block storage](/docs/containers/cs_storage_block.html#block_storageclass_reference)
    - Sample customized storage classes:
-     - [File storage](/docs/containers/cs_storage_file.html#custom_storageclass)
-     - [Block storage](/docs/containers/cs_storage_block.html#custom_storageclass)
+     - [File storage](/docs/containers/cs_storage_file.html#file_custom_storageclass)
+     - [Block storage](/docs/containers/cs_storage_block.html#block_custom_storageclass)
 
 2. Create the customized storage class.
    ```
@@ -177,11 +177,11 @@ When you dynamically provision persistent storage by using a storage class, you 
 <tbody>
 <tr>
 <td>File storage</td>
-<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](/docs/containers/cs_storage_file.html#change_storage_configuration). </td>
+<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](/docs/containers/cs_storage_file.html#file_change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Block storage</td>
-<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](/docs/containers/cs_storage_block.html#change_storage_configuration). </td>
+<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](/docs/containers/cs_storage_block.html#block_change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Object storage</td>

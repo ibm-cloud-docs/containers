@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -33,7 +33,7 @@ Choose one of the following options to get started:
 
 <img src="images/cs_loadbalancer_imagemap.png" width="725px" usemap="#image-map" style="width:725px;" alt="Load balancer image">
 <map name="image-map">
-    <area target="" alt="Overview" title="Overview" href="#overview" coords="35,44,175,72" shape="rect">
+    <area target="" alt="Overview" title="Overview" href="#lb_overview" coords="35,44,175,72" shape="rect">
     <area target="" alt="Comparison of version 1.0 and 2.0 load balancers" title="Comparison of version 1.0 and 2.0 load balancers" href="#comparison" coords="34,83,173,108" shape="rect">
     <area target="" alt="v2.0: Components and architecture (Beta)" title="v2.0: Components and architecture (Beta)" href="#planning_ipvs" coords="273,45,420,72" shape="rect">
     <area target="" alt="v2.0: Prerequisites" title="v2.0: Prerequisites" href="#ipvs_provision" coords="277,85,417,108" shape="rect">
@@ -42,14 +42,14 @@ Choose one of the following options to get started:
     <area target="" alt="v2.0: Scheduling algorithms" title="v2.0: Scheduling algorithms" href="#scheduling" coords="276,196,419,220" shape="rect">
     <area target="" alt="v1.0: Components and architecture" title="v1.0: Components and architecture" href="#v1_planning" coords="519,47,668,74" shape="rect">
     <area target="" alt="v1.0: Setting up a load balancer 1.0 in a multizone cluster" title="v1.0: Setting up a load balancer 1.0 in a multizone cluster" href="#multi_zone_config" coords="520,85,667,110" shape="rect">
-    <area target="" alt="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" title="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" href="#config" coords="520,122,667,146" shape="rect">
+    <area target="" alt="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" title="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" href="#lb_config" coords="520,122,667,146" shape="rect">
     <area target="" alt="v1.0: Enabling source IP preservation" title="v1.0: Enabling source IP preservation" href="#node_affinity_tolerations" coords="519,157,667,194" shape="rect">
 </map>
 
 ## Sample YAMLs
 {: #sample}
 
-Review the following sample YAML files to quickly get started with specifying your load balancer service. 
+Review the following sample YAML files to quickly get started with specifying your load balancer service.
 {: shortdesc}
 
 **Load balancer 2.0**</br>
@@ -107,7 +107,7 @@ spec:
 
 
 ## Overview
-{: #overview}
+{: #lb_overview}
 
 When you create a standard cluster, {{site.data.keyword.containerlong}} automatically provisions a portable public subnet and a portable private subnet.
 {: shortdesc}
@@ -205,7 +205,7 @@ Before you create a version 2.0 load balancer, you must complete the following p
 
 3. After your VLANs have been configured with capacity aggregation, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account. When VLAN spanning is enabled, the version 2.0 load balancer can route packets to various subnets in the account.
 
-4. If you use [Calico pre-DNAT network policies](/docs/containers/cs_network_policy.html#block_ingress) to manage traffic to the IP address of a version 2.0 load balancer, you must add the `applyOnForward: true` and `doNotTrack: true` fields to the `spec` section in the policies. `applyOnForward: true` ensures that the Calico policy is applied to the traffic as it is encapsulated and forwarded. `doNotTrack: true` ensures that the worker nodes can use DSR to return a response packet directly to the client without needing the connection to be tracked. For example, if you use a Calico policy to whitelist traffic from only specific IP addresses to your load balancer IP address, the policy looks similar to the following:
+4. If you use [Calico pre-DNAT network policies](/docs/containers/cs_network_policy.html#block_ingress) to manage traffic to the IP address of a version 2.0 load balancer, you must add the `applyOnForward: true` and `doNotTrack: true` fields to and remove the `preDNAT: true` from the `spec` section in the policies. `applyOnForward: true` ensures that the Calico policy is applied to the traffic as it is encapsulated and forwarded. `doNotTrack: true` ensures that the worker nodes can use DSR to return a response packet directly to the client without needing the connection to be tracked. For example, if you use a Calico policy to whitelist traffic from only specific IP addresses to your load balancer IP address, the policy looks similar to the following:
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -225,7 +225,6 @@ Before you create a version 2.0 load balancer, you must complete the following p
         source:
           nets:
           - <client_address>/32
-      preDNAT: true
       selector: ibm.role=='worker_public'
       order: 500
       types:
@@ -769,7 +768,7 @@ To set up a load balancer 1.0 service in a multizone cluster:
 7. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers/cs_nodeport.html) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers/cs_network_policy.html#block_ingress).
 
 ## v1.0: Setting up a load balancer 1.0 in a single-zone cluster
-{: #config}
+{: #lb_config}
 
 **Before you begin**:
 * You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers/cs_subnets.html).

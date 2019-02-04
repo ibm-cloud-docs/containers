@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-31"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -28,7 +28,7 @@ Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you
 Continuous monitoring and logging is the key to detecting attacks on your cluster and troubleshooting issues as they arise. By continuously monitoring your cluster, you're able to better understand your cluster capacity and the availability of resources that are available to your app. With this insight, you can prepare to protect your apps against downtime. **Note**: To configure logging and monitoring, you must use a standard cluster in {{site.data.keyword.containerlong_notm}}.
 
 ## Choosing a logging solution
-{: #overview}
+{: #logging_overview}
 
 By default, logs are generated and written locally for all of the following {{site.data.keyword.containerlong_notm}} cluster components: worker nodes, containers, applications, persistent storage, Ingress application load balancer, Kubernetes API, and the `kube-system` namespace. Several logging solutions are available to collect, forward, and view these logs.
 {: shortdesc}
@@ -538,7 +538,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 ### Sending audit logs to {{site.data.keyword.loganalysisshort_notm}}
 {: #audit_enable_loganalysis}
 
-You can forward your Kubernetes API server audit logs to {{site.data.keyword.loganalysisshort_notm}}. 
+You can forward your Kubernetes API server audit logs to {{site.data.keyword.loganalysisshort_notm}}.
 {: shortdesc}
 
 **Before you begin**

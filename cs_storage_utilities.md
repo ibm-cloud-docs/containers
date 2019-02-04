@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-01-30"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -264,19 +264,19 @@ To add different block storage configurations, add block storage to a subset of 
    </tr>
    <tr>
    <td><code>type</code></td>
-   <td>Enter the type of storage that you want to provision. Choose between <code>performance</code> or <code>endurance</code>. For more information, see [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#predefined_storageclass).  </td>
+   <td>Enter the type of storage that you want to provision. Choose between <code>performance</code> or <code>endurance</code>. For more information, see [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#block_predefined_storageclass).  </td>
    </tr>
    <tr>
    <td><code>performance.iops</code></td>
-   <td>If you want to provision `performance` storage, enter the number of IOPS. For more information, see [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#predefined_storageclass). If you want to provision `endurance` storage, remove this section or comment it out by adding `#` to the beginning of each line.
+   <td>If you want to provision `performance` storage, enter the number of IOPS. For more information, see [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#block_predefined_storageclass). If you want to provision `endurance` storage, remove this section or comment it out by adding `#` to the beginning of each line.
    </tr>
    <tr>
    <td><code>endurance.tier</code></td>
-   <td>If you want to provision `endurance` storage, enter the number of IOPS per gigabyte. For example, if you want to provision block storage as it is defined in the `ibmc-block-bronze` storage class, enter 2. For more information, see [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#predefined_storageclass). If you want to provision `performance` storage, remove this section or comment it out by adding `#` to the beginning of each line. </td>
+   <td>If you want to provision `endurance` storage, enter the number of IOPS per gigabyte. For example, if you want to provision block storage as it is defined in the `ibmc-block-bronze` storage class, enter 2. For more information, see [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#block_predefined_storageclass). If you want to provision `performance` storage, remove this section or comment it out by adding `#` to the beginning of each line. </td>
    </tr>
    <tr>
    <td><code>size</code></td>
-   <td>Enter the size of your storage in gigabytes. See [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#predefined_storageclass) to find supported sizes for your storage tier. </td>
+   <td>Enter the size of your storage in gigabytes. See [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#block_predefined_storageclass) to find supported sizes for your storage tier. </td>
    </tr>
    </tbody>
    </table>  
@@ -407,7 +407,7 @@ Use this option if you want to add different block storage configurations, add b
    ```
    {: pre}
 
-2. Review step 3 and 4 in [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#predefined_storageclass) to choose the type, size, and number of IOPS for the block storage device that you want to add to your non-SDS worker node.    
+2. Review step 3 and 4 in [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#block_predefined_storageclass) to choose the type, size, and number of IOPS for the block storage device that you want to add to your non-SDS worker node.    
 
 3. Create the block storage device in the same zone that your non-SDS worker node is in.
 
