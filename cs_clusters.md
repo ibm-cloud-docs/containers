@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-01"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -127,7 +127,7 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
     1. Select **Single zone** or **Multizone** availability. In a multizone cluster the master node is deployed in a multizone-capable zone and your cluster's resources are spread across multiple zones. Your choices might be limited by region.
     2. Select the specific zones in which you want to host your cluster. You must select at least 1 zone but you can select as many as you would like. If you select more than 1 zone, the worker nodes are spread across the zones that you choose which gives you higher availability. If you select only 1 zone, you can [add zones to your cluster](#add_zone) after it is created.
     3. Select a public VLAN (optional) and a private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Worker nodes communicate with each other by using the private VLAN. To communicate with the Kubernetes master, you must configure public connectivity for your worker node.  If you do not have a public or private VLAN in this zone, leave it blank. A public and a private VLAN is automatically created for you. If you have existing VLANs and you do not specify a public VLAN, consider configuring a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html#about-the-vra). You can use the same VLAN for multiple clusters.
-        If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#setup_private_vlan).
+        If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#setup_private_vlan).
         {: note}
 
 7. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
@@ -264,7 +264,7 @@ To create a cluster:
 
         If a public and private VLAN already exist, note the matching routers. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match. In the example output, any of the private VLANs can be used with any of public VLANs because the routers all include `02a.dal10`.
 
-        You must connect your worker nodes to a private VLAN, and optionally, you can connect your worker nodes to a public VLAN. **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#setup_private_vlan).
+        You must connect your worker nodes to a private VLAN, and optionally, you can connect your worker nodes to a public VLAN. **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#setup_private_vlan).
 
     4.  **Free and standard clusters**: Run the `cluster-create` command. You can choose between a free cluster, which includes one worker node set up with 2vCPU and 4GB memory and is automatically deleted after 30 days. When you create a standard cluster, by default, the worker node disks are AES 256-bit encrypted, its hardware is shared by multiple IBM customers, and it is billed by hours of usage. </br>Example for a standard cluster. Specify the cluster's options:
 
@@ -308,7 +308,7 @@ To create a cluster:
           <li>**Free clusters**: You do not have to define a public VLAN. Your free cluster is automatically connected to a public VLAN that is owned by IBM.</li>
           <li>**Standard clusters**: If you already have a public VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option.
           <p>Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p>
-          <p class="note">If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](cs_network_cluster.html#setup_private_vlan).</p></li>
+          <p class="note">If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#setup_private_vlan).</p></li>
         </ul></td>
         </tr>
         <tr>
@@ -800,5 +800,5 @@ To remove a cluster:
 
 Next steps:
 - After it is no longer listed in the available clusters list when you run the `ibmcloud ks clusters` command, you can reuse the name of a removed cluster.
-- If you kept the subnets, you can [reuse them in a new cluster](/docs/containers/cs_subnets.html#custom) or manually delete them later from your IBM Cloud infrastructure (SoftLayer) portfolio.
+- If you kept the subnets, you can [reuse them in a new cluster](/docs/containers/cs_subnets.html#subnets_custom) or manually delete them later from your IBM Cloud infrastructure (SoftLayer) portfolio.
 - If you kept the persistent storage, you can [delete your storage](/docs/containers/cs_storage_remove.html#cleanup) later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.Bluemix_notm}} console.

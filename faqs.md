@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-01"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -184,7 +184,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <p>For more information, see [Bandwidth packages ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth).</p></dd>
 
 <dt id="subnets">Subnet IP addresses</dt>
-  <dd><p>When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly.</p><p>If you already have available subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers/cs_cli_reference.html#cs_cluster_create), and then [reuse your subnets](/docs/containers/cs_subnets.html#custom).</p>
+  <dd><p>When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly.</p><p>If you already have available subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers/cs_cli_reference.html#cs_cluster_create), and then [reuse your subnets](/docs/containers/cs_subnets.html#subnets_custom).</p>
   </dd>
 
 <dt id="storage">Storage</dt>

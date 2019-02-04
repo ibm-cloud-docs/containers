@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-01"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -33,7 +33,7 @@ Choose one of the following options to get started:
 
 <img src="images/cs_loadbalancer_imagemap.png" width="725px" usemap="#image-map" style="width:725px;" alt="Load balancer image">
 <map name="image-map">
-    <area target="" alt="Overview" title="Overview" href="#overview" coords="35,44,175,72" shape="rect">
+    <area target="" alt="Overview" title="Overview" href="#lb_overview" coords="35,44,175,72" shape="rect">
     <area target="" alt="Comparison of version 1.0 and 2.0 load balancers" title="Comparison of version 1.0 and 2.0 load balancers" href="#comparison" coords="34,83,173,108" shape="rect">
     <area target="" alt="v2.0: Components and architecture (Beta)" title="v2.0: Components and architecture (Beta)" href="#planning_ipvs" coords="273,45,420,72" shape="rect">
     <area target="" alt="v2.0: Prerequisites" title="v2.0: Prerequisites" href="#ipvs_provision" coords="277,85,417,108" shape="rect">
@@ -42,7 +42,7 @@ Choose one of the following options to get started:
     <area target="" alt="v2.0: Scheduling algorithms" title="v2.0: Scheduling algorithms" href="#scheduling" coords="276,196,419,220" shape="rect">
     <area target="" alt="v1.0: Components and architecture" title="v1.0: Components and architecture" href="#v1_planning" coords="519,47,668,74" shape="rect">
     <area target="" alt="v1.0: Setting up a load balancer 1.0 in a multizone cluster" title="v1.0: Setting up a load balancer 1.0 in a multizone cluster" href="#multi_zone_config" coords="520,85,667,110" shape="rect">
-    <area target="" alt="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" title="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" href="#config" coords="520,122,667,146" shape="rect">
+    <area target="" alt="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" title="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" href="#lb_config" coords="520,122,667,146" shape="rect">
     <area target="" alt="v1.0: Enabling source IP preservation" title="v1.0: Enabling source IP preservation" href="#node_affinity_tolerations" coords="519,157,667,194" shape="rect">
 </map>
 
