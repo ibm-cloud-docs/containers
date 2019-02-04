@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-03"
+lastupdated: "2019-02-04"
 
 
 ---
@@ -26,7 +26,7 @@ lastupdated: "2019-02-03"
 As a cluster administrator, you can define access policies for your {{site.data.keyword.containerlong}} cluster to create different levels of access for different users. For example, you can authorize certain users to work with cluster infrastructure resources and others to deploy only containers.
 {: shortdesc}
 
-As of 30 January 2019, {{site.data.keyword.containerlong_notm}} has a new way of authorizing users with {{site.data.keyword.Bluemix_notm}} IAM: [service access roles](/docs/containers/cs_access_reference.html#service). These service roles are used to grant access to resources within the cluster, such as Kubernetes namespaces.
+As of 30 January 2019, {{site.data.keyword.containerlong_notm}} has a new way of authorizing users with {{site.data.keyword.Bluemix_notm}} IAM: [service access roles](/docs/containers/cs_access_reference.html#service). These service roles are used to grant access to resources within the cluster, such as Kubernetes namespaces. For more information, check out the blog, [Introducing service roles and namespaces in IAM for more granular control of cluster access ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
 {: note}
 
 ## Understanding access policies and roles
