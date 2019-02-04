@@ -198,17 +198,25 @@ These four microservices include a product web page, book details, reviews (with
            {: pre}
 
     * Free clusters:
-        1. Get the public IP address of any worker node in your cluster.
+
+        1. Set the ingress host. This host is the public IP address of any worker node in your cluster.
             ```
-            ibmcloud ks workers <cluster_name_or_ID>
+            export INGRESS_HOST=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}')
             ```
             {: pre}
 
-        2. Create a GATEWAY_URL environment variable that uses the public IP address of the worker node.
+        2. Set the ingress port.
             ```
-            export GATEWAY_URL=<worker_node_public_IP>:$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
+            export INGRESS_PORT=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
             ```
             {: pre}
+
+        3. Create a GATEWAY_URL environment variable that uses the public IP address of the worker node and a NodePort.
+
+           ```
+           export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+           ```
+           {: pre}
 
 5. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
      ```

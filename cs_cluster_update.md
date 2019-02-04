@@ -266,7 +266,7 @@ Next steps:
 After you set up the config map for the first time, you can subsequently update worker nodes by using the {{site.data.keyword.Bluemix_notm}} console.
 {: shortdesc}
 
-Before you begin: 
+Before you begin:
 *   [Set up a config map](#worker_node) to control how your worker nodes are updated.
 *   [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
 *   Make any changes that are marked with _Update after master_ in the [Kubernetes changes](/docs/containers/cs_versions.html).
