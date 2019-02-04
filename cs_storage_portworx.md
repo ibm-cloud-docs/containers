@@ -565,7 +565,7 @@ The following image illustrates the decryption workflow in Portworx with {{site.
 Follow these steps to set up encryption for your Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}. 
 {: shortdesc}
 
-1. Make sure that you are [assigned the `Adminstrator` platform access role and the `Writer` service access role](/docs/services/key-protect/manage-access.html#manage-access) in {{site.data.keyword.Bluemix_notm}} Identity and Access Management for {{site.data.keyword.keymanagementservicelong_notm}}. 
+1. Make sure that you are [assigned the `Editor` platform access role and the `Writer` service access role](/docs/services/key-protect/manage-access.html#manage-access) in {{site.data.keyword.Bluemix_notm}} Identity and Access Management for {{site.data.keyword.keymanagementservicelong_notm}}. 
 
 2. Create an {{site.data.keyword.keymanagementservicelong_notm}} service instance.
    1. Open the [{{site.data.keyword.keymanagementservicelong_notm}} catalog page](https://cloud.ibm.com/catalog/services/key-protect).
