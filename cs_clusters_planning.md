@@ -226,7 +226,7 @@ You cannot convert a cluster that is connected to a public and private VLAN to b
 
 If you want to create a cluster that only has access on a private VLAN:
 
-1.  Review [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#setup_private_vlan).
+1.  Review [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#plan_setup_private_vlan).
 2.  Configure your gateway appliance for network connectivity. Note that you must [open the required ports and IP addresses](/docs/containers/cs_firewall.html#firewall_outbound) in your firewall and [enable VLAN spanning](/docs/containers/cs_subnets.html#vra-routing) for the subnets.
 3.  Create a cluster.
     *  [From the console](/docs/containers/cs_clusters.html#clusters_ui), select a private VLAN but not select a public VLAN.
