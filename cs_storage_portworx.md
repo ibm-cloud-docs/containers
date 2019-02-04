@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-01"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -81,21 +81,25 @@ When you [install Portworx with a Helm chart](#install_portworx), you get the Po
 
 For more information about available license types and how to upgrade your Trial license, see [Portworx Licensing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/knowledge-base/px-licensing/).
 
-## Setting up a Compose for etcd database for Portworx metadata
+## Setting up a database for Portworx metadata
 {: #portworx_database}
 
-Set up an {{site.data.keyword.composeForEtcd_full}} database service instance to create a key-value store for the Portworx cluster metadata.
+Set up an {{site.data.keyword.Bluemix_notm}} database service, such as [{{site.data.keyword.composeForEtcd}}](#compose) or [Databases for etcd](#databaseetcd) to create a key-value store for the Portworx cluster metadata.
 {: shortdesc}
 
 The Portworx key-value store serves as the single source of truth for your Portworx cluster. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable.
 
+### Setting up a Compose for etcd service instance
+{: #compose}
+
 {{site.data.keyword.composeForEtcd}} comes with the option to set up your database as part of a cloud storage cluster that offers high availability and resiliency in case of a zone failure. For more information, see the {{site.data.keyword.composeForEtcd}} [Getting Started tutorial](/docs/services/ComposeForEtcd/getting_started.html#getting-started-tutorial).
+{: shortdesc}
 
 The following steps show how to provision and set up the {{site.data.keyword.composeForEtcd}} database service for Portworx.
 
 1. Make sure that you have the [`Developer` Cloud Foundry role for the space](/docs/iam/mngcf.html#mngcf) where you want to create your {{site.data.keyword.composeForEtcd}} database service. 
 
-2. Deploy a {{site.data.keyword.composeForEtcd}} service instance.
+2. Provision a {{site.data.keyword.composeForEtcd}} service instance.
    1. Open the [{{site.data.keyword.composeForEtcd}} catalog page](https://cloud.ibm.com/catalog/services/compose-for-etcd)
    2. Enter a name for your service instance, such as `px-etcd`.
    3. Select the region where you want to deploy your service instance. For optimal performance, choose the region that your cluster is in.
@@ -119,6 +123,51 @@ The following steps show how to provision and set up the {{site.data.keyword.com
       ```
       {: screen}
    5. Use these service credentials when you [install Portworx in your cluster](#install_portworx).
+   
+### Setting up a Databases for etcd service instance
+{: #databaseetcd}
+
+Databases for etcd is a managed etcd service that securely stores and replicates your data across three storage instances to provide high availability and resiliency for your data. For more information, see the [Databases for etcd getting started tutorial](/docs/services/databases-for-etcd/getting-started.html#getting-started-tutorial). 
+
+The following steps show how to provision and set up a Databases for etcd service instance for Portworx.
+
+1. Make sure that you have the [`Administrator` platform access role in {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/iam/mngiam.html#iammanidaccser)  for the Databases for etcd service.  
+
+2. Provision your Databases for etcd service instance.
+   1. Open the [Databases for etcd catalog page](https://cloud.ibm.com/catalog/services/databases-for-etcd)
+   2. Enter a name for your service instance, such as `px-etcd`.
+   3. Select the region where you want to deploy your service instance. For optimal performance, choose the region that your cluster is in.
+   4. Select the same resource group that your cluster is in.
+   5. Use the default settings for the initial memory and disk allocation. 
+   6. Choose if you want to use the default {{site.data.keyword.keymanagementserviceshort}} service instance or your own.
+   5. Review the pricing plan.
+   6. Click **Create** to start setting up your service instance. The setup might take a few minutes to complete.
+3. Create service credentials for your Databases for etcd service instance.
+   1. In the navigation on the service details page, click **Service Credentials**.
+   2. Click **New credentials**. 
+   3. Enter a name for your service credentials and click **Add**. 
+4. {: #databases_credentials}Retrieve your service credentials. 
+   1. From the **Actions** column in the service credentials table, click **View credentials**. 
+   2. Find the `grp.authentication` section of your service credentials and note the **username** and **password**. 
+      Example output for username and password: 
+      ```
+      "grpc": {
+      "authentication": {
+        "method": "direct",
+        "password": "123a4567ab89cde09876vaa543a2bc2a10a123456bcd123456f0a7895aab1de",
+        "username": "ibm_cloud_1abd2e3f_g12h_3bc4_1234_5a6bc7890ab"
+      }
+      ```
+      {: screen}
+   3. Find the `composed` section of your service credentials and note the etcd **`--endpoints`**.  
+      Example output for `--endpoints`:
+      ```
+      --endpoints=https://1ab234c5-12a1-1234-a123-123abc45cde1.123456ab78cd9ab1234a456740ab123c.databases.appdomain.cloud:32059
+      ```
+      {: screen}
+      
+   4. Use these service credentials when you [install Portworx in your cluster](#install_portworx).
+
 
 ## Installing Portworx in your cluster
 {: #install_portworx}
@@ -155,7 +204,7 @@ To install Portworx:
     ```
     {: screen}
 
-3. [Retrieve the endpoint, user name and password](#etcd_credentials) of the {{site.data.keyword.composeForEtcd}} service instance that you created earlier.
+3. Retrieve the etcd endpoint, user name and password of the Portworx database that you set up ealier. Depending on the type of database service that you used, see [{{site.data.keyword.composeForEtcd}}](#etcd_credentials) or [Databases for etcd](#databases_credentials). 
 
 4. Download the Portworx Helm chart.
    ```
