@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-01"
+lastupdated: "2019-02-04"
 
 ---
 
@@ -47,7 +47,7 @@ Expose multiple apps in your Kubernetes cluster by creating Ingress resources th
 ## Sample YAMLs
 {: #sample_ingress}
 
-Use these sample YAML files to quickly get started with specifying your Ingress resource. 
+Use these sample YAML files to quickly get started with specifying your Ingress resource.
 {: shortdesc}
 
 **Ingress resource to publicly expose an app**</br>
@@ -1156,15 +1156,14 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
 3. Save the configuration file.
 
 4. Verify that the configmap changes were applied.
+  ```
+  kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+  ```
+  {: pre}
 
- ```
- kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
- ```
- {: pre}
-
- 5. Optional:
-    * Access an app via a non-standard TCP port that you opened by using the [`tcp-ports`](/docs/containers/cs_annotations.html#tcp-ports) annotation.
-    * Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic to a port that you opened by using the [`custom-port`](/docs/containers/cs_annotations.html#custom-port) annotation.
+5. Optional:
+  * Access an app via a non-standard TCP port that you opened by using the [`tcp-ports`](/docs/containers/cs_annotations.html#tcp-ports) annotation.
+  * Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic to a port that you opened by using the [`custom-port`](/docs/containers/cs_annotations.html#custom-port) annotation.
 
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/).
 
