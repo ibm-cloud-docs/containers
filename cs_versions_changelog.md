@@ -83,7 +83,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>CoreDNS</td>
 <td>1.2.2</td>
 <td>1.2.6</td>
-<td>See the [CoreDNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coredns/coredns/releases/tag/v1.2.6). Additionally, the CoreDNS configuration is updated to [support multiple Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-update/issues/add-link-to-doc).</td>
+<td>See the [CoreDNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coredns/coredns/releases/tag/v1.2.6). Additionally, the CoreDNS configuration is updated to [support multiple Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/).</td>
 </tr>
 <tr>
 <td>etcd</td>
