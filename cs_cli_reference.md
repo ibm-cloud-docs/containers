@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -53,9 +53,6 @@ export IKS_BETA_VERSION=0.2
 
 ## ibmcloud ks commands
 {: #cs_commands}
-
-Review the list of {{site.data.keyword.containerlong_notm}} CLI commands that you can use to interact with your Kubernetes cluster. 
-{: shortdesc}
 
 **Tip:** To see the version of the {{site.data.keyword.containerlong_notm}} plug-in, run the following command.
 
@@ -142,7 +139,6 @@ ibmcloud plugin list
   </tr>
 </tbody>
 </table>
-
 
 
 
