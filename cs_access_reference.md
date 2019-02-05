@@ -538,6 +538,21 @@ The **Administrator** platform role includes all permissions that are granted by
 <td>[POST /v1/keys](https://containers.cloud.ibm.com/swagger-api/#!/accounts/ResetUserAPIKey)</td>
 </tr>
 <tr>
+<td>Disable a managed add-on, such Istio or Knative, in a cluster.</td>
+<td>[ibmcloud ks cluster-addon-disable](/docs/containers/cs_cli_reference.html#cs_cluster_addon_disable)</td>
+<td>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</td>
+</tr>
+<tr>
+<td>Enable a managed add-on, such Istio or Knative, in a cluster.</td>
+<td>[ibmcloud ks cluster-addon-enable](/docs/containers/cs_cli_reference.html#cs_cluster_addon_enable)</td>
+<td>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</td>
+</tr>
+<tr>
+<td>List managed add-on, such Istio or Knative, that are enabled in a cluster.</td>
+<td>[ibmcloud ks cluster-addons](/docs/containers/cs_cli_reference.html#cs_cluster_addons)</td>
+<td>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterAddons)</td>
+</tr>
+<tr>
 <td>Create a free or standard cluster. **Note**: The Administrator platform role for {{site.data.keyword.registrylong_notm}} and the Super User infrastructure role are also required.</td>
 <td>[ibmcloud ks cluster-create](/docs/containers/cs_cli_reference.html#cs_cluster_create)</td>
 <td>[POST /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateCluster)</td>

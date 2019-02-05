@@ -435,7 +435,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **Can I install other add-ons than the default?**</br>
-Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](/docs/containers/cs_integrations.html#helm) to install the [block storage plug-in](/docs/containers/cs_storage_block.html#install_block), [Istio](/docs/containers/cs_tutorials_istio.html#istio_tutorial), or [strongSwan VPN](/docs/containers/cs_vpn.html#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
+Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](/docs/containers/cs_integrations.html#helm) to install the [block storage plug-in](/docs/containers/cs_storage_block.html#install_block), [Istio](/docs/containers/cs_istio.html), or [strongSwan VPN](/docs/containers/cs_vpn.html#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
 
 ### Managing automatic updates for the Fluentd for logging add-on
 {: #logging}

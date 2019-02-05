@@ -120,22 +120,22 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
+    <td>[ibmcloud ks cluster-addon-disable](#cs_cluster_addon_disable)</td>
+    <td>[ibmcloud ks cluster-addon-enable](#cs_cluster_addon_enable)</td>
+    <td>[ibmcloud ks cluster-addons](#cs_cluster_addons)</td>
     <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
+  </tr>
+  <tr>
     <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
     <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
     <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
+    <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
     <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
     <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
-  </tr>
-  <tr>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
   </tr>
 </tbody>
 </table>
@@ -709,6 +709,229 @@ ibmcloud ks messages
 
 ## Cluster commands: Management
 {: #cluster_mgmt_commands}
+
+### ibmcloud ks cluster-addon-disable
+{: #cs_cluster_addon_disable}
+
+Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
+{: shortdesc}
+
+#### ibmcloud ks cluster-addon-disable istio --cluster CLUSTER
+{: #cs_cluster_addon_disable_istio}
+
+Disable the managed Istio add-on. Removes all Istio core components from the cluster, including Prometheus.
+{: shortdesc}
+
+This add-on is a dependency for the `istio-extras`, `istio-sampe-bookinfo`, and `knative` managed add-ons. You must disable those add-ons before you can disable the `istio` add-on.
+{: note}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-disable istio --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable istio-extras --cluster CLUSTER [-y]
+{: #cs_cluster_addon_disable_istio_extras}
+
+Disable the managed Istio extras add-on. Removes Grafana, Jeager, and Kiali from the cluster.
+{: shortdesc}
+
+This add-on is a dependency for the `istio-sample-bookinfo` managed add-on. You must disable that add-on before you can disable the `istio-extras` add-on.
+{: note}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-disable istio-extras --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster CLUSTER [-y]
+{: #cs_cluster_addon_disable_istio_sample_bookinfo}
+
+Disable the managed Istio BookInfo add-on. Removes all deployments, pods, and other BookInfo app resources from the cluster.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable knative --cluster CLUSTER [-y]
+{: #cs_cluster_addon_disable_knative}
+
+Disable the managed Knative add-on to remove the Knative serverless framework from the cluster.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks cluster-addon-enable
+{: #cs_cluster_addon_enable}
+
+Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
+{: shortdesc}
+
+#### ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
+{: #cs_cluster_addon_enable_istio}
+
+Enable the managed Istio add-on. Installs the core components of Istio version 1.0.5, including Prometheus.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-enable istio --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
+{: #cs_cluster_addon_enable_istio_extras}
+
+Enable the managed Istio extras add-on. Installs Grafana, Jeager, and Kiali to provide extra monitoring, tracing, and visualization for Istio.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>Optional: Enable the `istio` add-on dependency.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
+{: #cs_cluster_addon_enable_istio_sample_bookinfo}
+
+Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/) into the `default` namespace.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>Optional: Enable the `istio` and `istio-extras` add-on dependencies.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
+{: #cs_cluster_addon_enable_knative}
+
+Enable the managed Knative add-on to install the Knative serverless framework.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>Optional: Enable the `istio` add-on dependency.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-enable knative --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks cluster-addons --cluster CLUSTER
+{: #cs_cluster_addons}
+
+List managed add-ons that are enabled in a cluster.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addons --cluster my_cluster
+  ```
+  {: pre}
 
 
 
