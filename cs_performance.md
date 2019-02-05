@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -158,7 +158,6 @@ Before you begin, ensure you have the [**Manager** {{site.data.keyword.Bluemix_n
 {: #metrics}
 
 Your cluster's metrics provider (`metrics-server` in Kubernetes 1.12 and later, or `heapster` in earlier versions) configurations are optimized for clusters with 30 or less pods per worker node. If your cluster has more pods per worker node, the metrics provider `metrics-server` or `heapster` main container for the pod might restart frequently with an error message such as `OOMKilled`.
-{: shortdesc}
 
 The metrics provider pod also has a `nanny` container that scales the `metrics-server` or `heapster` main container's resource requests and limits in response to the number of worker nodes in the cluster. You can change the default resources by editing the metrics provider's configmap.
 

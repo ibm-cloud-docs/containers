@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -40,11 +40,15 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 </br>
 
+
+
 ## Version 1.12 changelog
 {: #112_changelog}
 
 Review the version 1.12 changelog. 
 {: shortdesc}
+
+
 
 ### Changelog for worker node fix pack 1.12.4_1535, released 28 January 2019
 {: #1124_1535}
@@ -407,6 +411,8 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+
 
 ### Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019
 {: #1116_1541}
@@ -1122,6 +1128,8 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 {: #110_changelog}
 
 Review the version 1.10 changelog.
+
+
 
 ### Changelog for worker node fix pack 1.10.12_1541, released 28 January 2019
 {: #11012_1541}

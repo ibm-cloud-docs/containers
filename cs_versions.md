@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -30,9 +30,11 @@ lastupdated: "2019-02-04"
 {:shortdesc}
 
 **Supported Kubernetes versions**:
+
 - Latest: 1.12.4
 - Default: 1.10.12
 - Other: 1.11.6
+
 
 </br>
 
@@ -177,12 +179,14 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 <br />
 
 
+
+
 ## Version 1.12
 {: #cs_v112}
 
 <p><img src="images/certified_kubernetes_1x12.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.12 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.12 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
-Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.12.
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.12.
 {: shortdesc}
 
 ### Update before master
@@ -292,12 +296,15 @@ The following table shows the actions that you must take after you update the Ku
 </tbody>
 </table>
 
+<br />
+
+
 ## Version 1.11
 {: #cs_v111}
 
 <p><img src="images/certified_kubernetes_1x11.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.11 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.11 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
-Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.11.
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.11.
 {: shortdesc}
 
 Before you can successfully update a cluster from Kubernetes version 1.9 or earlier to version 1.11, you must follow the steps listed in [Preparing to update to Calico v3](#111_calicov3).
@@ -625,7 +632,7 @@ Before you begin, your cluster master and all worker nodes must be running Kuber
 
 <p><img src="images/certified_kubernetes_1x10.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.10 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.10 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
-Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.10.
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.10.
 {: shortdesc}
 
 Before you can successfully update to Kubernetes 1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).
