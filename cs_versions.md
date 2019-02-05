@@ -30,11 +30,9 @@ lastupdated: "2019-02-05"
 {:shortdesc}
 
 **Supported Kubernetes versions**:
-
-- Latest: 1.12.4
+- Latest: 1.13.2
 - Default: 1.10.12
-- Other: 1.11.6
-
+- Other: 1.12.5, 1.11.7
 
 </br>
 
@@ -86,6 +84,7 @@ As updates become available, you are notified when you view information about th
 </br>
 
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version.
+-  Version 1.13 [preparation actions](#cs_v113).
 -  Version 1.12 [preparation actions](#cs_v112).
 -  Version 1.11 [preparation actions](#cs_v111).
 -  Version 1.10 [preparation actions](#cs_v110).
@@ -125,6 +124,12 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 </tr>
 </thead>
 <tbody>
+<tr>
+  <td>![Supported checkmark icon](images/healthy.png)</td>
+  <td>[1.13](#cs_v113)</td>
+  <td>05 Feb 2019</td>
+  <td>TBD `†`</td>
+</tr>
 <tr>
   <td>![Supported checkmark icon](images/healthy.png)</td>
   <td>[1.12](#cs_v112)</td>
@@ -179,6 +184,87 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 <br />
 
 
+## Version 1.13
+{: #cs_v113}
+
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.13.
+{: shortdesc}
+
+### Update before master
+{: #113_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master.
+{: shortdesc}
+
+<table summary="Kubernetes updates for version 1.13">
+<caption>Changes to make before you update the master to Kubernetes 1.13</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N/A</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### Update after master
+{: #113_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master.
+{: shortdesc}
+
+<table summary="Kubernetes updates for version 1.13">
+<caption>Changes to make after you update the master to Kubernetes 1.13</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd `cri` stream server</td>
+<td>In containerd version 1.2, the `cri` plug-in stream server now serves on a random port, `http://localhost:0`. This change supports the `kubelet` streaming proxy and provides a more secure streaming interface for container `exec` and `logs` operations. Previously, the `cri` stream server listened on the worker node's private network interface by using port 10010. If your apps use the container `cri` plug-in and rely on the previous behavior, update them.</td>
+</tr>
+<tr>
+<td>CoreDNS available as the new default cluster DNS provider</td>
+<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers/cs_dns.html#cluster_dns).
+<br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services are using IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
+</tr>
+<tr>
+<td>`kubectl` output for `Deployment` and `StatefulSet`</td>
+<td>The `kubectl` output for `Deployment` and `StatefulSet` now includes a `Ready` column and is more human-readable. If your scripts rely on the previous behavior, update them.</td>
+</tr>
+<tr>
+<td>`kubectl` output for `PriorityClass`</td>
+<td>The `kubectl` output for `PriorityClass` now includes a `Value` column. If your scripts rely on the previous behavior, update them.</td>
+</tr>
+<tr>
+<td>`kubectl get componentstatuses`</td>
+<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/landing) or by using the `ibmcloud ks cluster-get` [command](/docs/containers/cs_cli_reference.html#cs_cluster_get).</td>
+</tr>
+<tr>
+<tr>
+<td>Unsupported: `kubectl run-container`</td>
+<td>The `kubectl run-container` command is removed. Instead, use the `kubectl run` command.</td>
+</tr>
+<tr>
+<td>`kubectl rollout undo`</td>
+<td>When you run `kubectl rollout undo` for a revision that does not exist, an error is returned. If your scripts rely on the previous behavior, update them.</td>
+</tr>
+<tr>
+<td>Deprecated: `scheduler.alpha.kubernetes.io/critical-pod` annotation</td>
+<td>The `scheduler.alpha.kubernetes.io/critical-pod` annotation is now deprecated. Change any pods that rely on this annotation to use [pod priority](/docs/containers/cs_pod_priority.html#pod_priority) instead.</td>
+</tr>
+</tbody>
+</table>
+
+<br />
 
 
 ## Version 1.12
