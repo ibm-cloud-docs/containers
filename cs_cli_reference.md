@@ -726,12 +726,11 @@ Disable the managed Istio add-on. Removes all Istio core components from the clu
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
-   <dl>
+<dl>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
-
    <dt><code>-f</code></dt>
-   <dd>Optional: This add-on is a dependency for the `istio-extras`, `istio-sample-bookinfo`, and `knative` managed add-ons. Include this flag to also disable those add-ons.</dd>
+   <dd>Optional: This add-on is a dependency for the <code>istio-extras</code>, <code>istio-sample-bookinfo</code>, and <code>knative</code> managed add-ons. Include this flag to also disable those add-ons.</dd>
 </dl>
 
 **Example command**:
@@ -756,7 +755,7 @@ Disable the managed Istio extras add-on. Removes Grafana, Jeager, and Kiali from
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>-f</code></dt>
-   <dd>Optional: This add-on is a dependency for the `istio-sample-bookinfo` managed add-on. Include this flag to also disable that add-on.</dd>
+   <dd>Optional: This add-on is a dependency for the <code>istio-sample-bookinfo</code> managed add-on. Include this flag to also disable that add-on.</dd>
 </dl>
 
 **Example command**:
@@ -852,7 +851,7 @@ Enable the managed Istio extras add-on. Installs Grafana, Jeager, and Kiali to p
    <dd>The name or ID of the cluster. This value is required.</dd>
 
   <dt><code>-y</code></dt>
-   <dd>Optional: Enable the `istio` add-on dependency.</dd>
+   <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
 </dl>
 
 **Example command**:
@@ -865,7 +864,7 @@ Enable the managed Istio extras add-on. Installs Grafana, Jeager, and Kiali to p
 #### ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
 {: #cs_cluster_addon_enable_istio_sample_bookinfo}
 
-Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/) into the `default` namespace.
+Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/) into the <code>default</code> namespace.
 {: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -877,7 +876,7 @@ Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample applicati
    <dd>The name or ID of the cluster. This value is required.</dd>
 
   <dt><code>-y</code></dt>
-   <dd>Optional: Enable the `istio` and `istio-extras` add-on dependencies.</dd>
+   <dd>Optional: Enable the <code>istio</code> and <code>istio-extras</code> add-on dependencies.</dd>
 </dl>
 
 **Example command**:
@@ -902,7 +901,7 @@ Enable the managed Knative add-on to install the Knative serverless framework.
    <dd>The name or ID of the cluster. This value is required.</dd>
 
   <dt><code>-y</code></dt>
-   <dd>Optional: Enable the `istio` add-on dependency.</dd>
+   <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
 </dl>
 
 **Example command**:
@@ -993,7 +992,7 @@ Create a cluster in your organization. For free clusters, you specify the cluste
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
-<dd>The path to the YAML file to create your standard cluster. Instead of defining the characteristics of your cluster by using the options provided in this command, you can use a YAML file.  This value is optional for standard clusters and is not available for free clusters.
+<dd>The path to the YAML file to create your standard cluster. Instead of defining the characteristics of your cluster by using the options provided in this command, you can use a YAML file. This value is optional for standard clusters and is not available for free clusters.
 
 <p class="note">If you provide the same option in the command as parameter in the YAML file, the value in the command takes precedence over the value in the YAML. For example, you define a location in your YAML file and use the <code>--zone</code> option in the command, the value that you entered in the command option overrides the value in the YAML file.</p>
 
