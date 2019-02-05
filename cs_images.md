@@ -88,7 +88,7 @@ Want to make your registry credentials even more secured? Ask your cluster admin
 {: tip}
 
 Before you begin:
-1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} on {{site.data.keyword.Bluemix_notm}} Public or {{site.data.keyword.Bluemix_dedicated_notm}} and push images to this namespace](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
+1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} on {{site.data.keyword.Bluemix_notm}} Public or {{site.data.keyword.Bluemix_dedicated_notm}} and push images to this namespace](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_setup).
 2. [Create a cluster](/docs/containers/cs_clusters.html#clusters_cli).
 3. [Target your CLI to your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
@@ -149,7 +149,7 @@ ImagePullSecrets are valid only for the Kubernetes namespaces that they were cre
 
 Before you begin:
 
-1.  [Set up a namespace in {{site.data.keyword.registryshort_notm}} on {{site.data.keyword.Bluemix_notm}} Public or {{site.data.keyword.Bluemix_dedicated_notm}} and push images to this namespace](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
+1.  [Set up a namespace in {{site.data.keyword.registryshort_notm}} on {{site.data.keyword.Bluemix_notm}} Public or {{site.data.keyword.Bluemix_dedicated_notm}} and push images to this namespace](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_setup).
 2.  [Create a cluster](/docs/containers/cs_clusters.html#clusters_cli).
 3.  [Target your CLI to your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
