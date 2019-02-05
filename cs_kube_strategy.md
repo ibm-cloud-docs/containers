@@ -15,7 +15,7 @@ You can take some general steps to containerize your app as follows.
 
 For more, see the following tutorials:
 *  [Migrating an app from Cloud Foundry to a cluster](/docs/containers/cs_tutorials_cf.html#cf_tutorial)
-*  [Moving a VM based app to Kubernetes](/docs/tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
+*  [Moving a VM based app to Kubernetes](/docs/tutorials/vm-to-containers-and-kubernetes.html#moving-a-vm-based-app-to-kubernetes)
 
 
 
