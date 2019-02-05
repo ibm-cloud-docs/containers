@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -247,7 +247,7 @@ To add file storage:
        </tr>
        <tr>
        <td><code>metadata.annotations.</code></br><code>volume.beta.kubernetes.io/</code></br><code>storage-class</code></td>
-       <td>The name of the storage class that you want to use to provision file storage. </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code>. </br></br><strong>Tip:</strong> If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</td>
+       <td>The name of the storage class that you want to use to provision file storage. You can choose to use one of the [IBM-provided storage classes](#file_storageclass_reference) or [create your own storage class](#file_custom_storageclass). </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code>. </br></br><strong>Tip:</strong> If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</td>
        </tr>
        <tr>
          <td><code>metadata.labels.billingType</code></td>
@@ -633,6 +633,9 @@ You cannot deploy two stateful sets at the same time. If you try to create a sta
 **How can I create my stateful set in a specific zone?** </br>
 In a multizone cluster, you can specify the zone and region where you want to create your stateful set in the `spec.selector.matchLabels` and `spec.template.metadata.labels` section of your stateful set YAML. Alternatively, you can add those labels to a [customized storage class](/docs/containers/cs_storage_basics.html#customized_storageclass) and use this storage class in the `volumeClaimTemplates` section of your stateful set.
 
+**Can I delay binding of a PV to my stateful pod until the pod is ready?**<br>
+Yes, you can [create a custom storage class](#file-topology) for your PVC that includes the [`volumeBindingMode: WaitForFirstConsumer` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) field.
+
 **What options do I have to add file storage to a stateful set?** </br>
 If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#file_dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#file_static_statefulset) with your stateful set.  
 
@@ -688,70 +691,170 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
       A stateful set is fully deployed when the number of replicas that you find in the **Replicas** section of your CLI output equals the number of **Running** pods in the **Pods Status** section. If a stateful set is not fully deployed yet, wait until the deployment is finished before you proceed.
 
-3. Create a configuration file for your stateful set and the service that you use to expose the stateful set. The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte file storage device is provisioned based on the specifications defined in the `ibmc-file-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because file storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto a worker node that is located in `dal10`.
+2. Create a configuration file for your stateful set and the service that you use to expose the stateful set. 
+  
+  - **Example stateful set that specifies a zone:**
+   
+    The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte file storage device is provisioned based on the specifications in the `ibmc-file-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because file storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto worker nodes that are located in `dal10`.
 
-   ```
-   apiVersion: v1
-   kind: Service
-   metadata:
-    name: nginx
-    labels:
-      app: nginx
-   spec:
-    ports:
-    - port: 80
-      name: web
-    clusterIP: None
-    selector:
-      app: nginx
-   ---
-   apiVersion: apps/v1beta1
-   kind: StatefulSet
-   metadata:
-    name: nginx
-   spec:
-    serviceName: "nginx"
-    replicas: 3
-    podManagementPolicy: Parallel
-    selector:
-      matchLabels:
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+     name: nginx
+     labels:
+       app: nginx
+    spec:
+     ports:
+     - port: 80
+       name: web
+     clusterIP: None
+     selector:
+       app: nginx
+    ---
+    apiVersion: apps/v1beta1
+    kind: StatefulSet
+    metadata:
+     name: nginx
+    spec:
+     serviceName: "nginx"
+     replicas: 3
+     podManagementPolicy: Parallel
+     selector:
+       matchLabels:
+         app: nginx
+         billingType: "hourly"
+         region: "us-south"
+         zone: "dal10"
+     template:
+       metadata:
+         labels:
+           app: nginx
+           billingType: "hourly"
+           region: "us-south"
+           zone: "dal10"
+       spec:
+         containers:
+         - name: nginx
+           image: k8s.gcr.io/nginx-slim:0.8
+           ports:
+           - containerPort: 80
+             name: web
+           volumeMounts:
+           - name: myvol
+             mountPath: /usr/share/nginx/html
+     volumeClaimTemplates:
+     - metadata:
+         annotations:
+           volume.beta.kubernetes.io/storage-class: ibmc-file-retain-bronze
+         name: myvol
+       spec:
+         accessModes:
+         - ReadWriteOnce
+         resources:
+           requests:
+             storage: 20Gi
+             iops: "300" #required only for performance storage
+    ```
+    {: codeblock}
+     
+  - **Example stateful set with anti-affinity rule and delayed file storage creation:**
+   
+    The following example shows how to deploy nginx as a stateful set with 3 replicas. The stateful set does not specify the region and zone where the file storage is created. Instead, the stateful set uses an anti-affinity rule to ensure that the pods are spread across worker nodes and zones. Worker node anti-affinity is achieved by defining the `app: nignx` label. This label instructs the Kubernetes scheduler to not schedule a pod on a worker node if a pod with the same label already runs on this worker node. The `topologykey: failure-domain.beta.kubernetes.io/zone` label restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node that is located in the same zone as a worker node that already runs a pod with the `app: nignx` label. For each stateful set pod, two PVCs are created as defined in the `volumeClaimTemplates` section, but the creation of the file storage instances is delayed until a stateful set pod that uses the storage is scheduled. This setup is referred to as [topology-aware volume scheduling](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
+   
+    ```
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+      name: ibmc-file-bronze-delayed
+    parameters:
+      billingType: hourly
+      classVersion: "2"
+      iopsPerGB: "2"
+      sizeRange: '[20-12000]Gi'
+      type: Endurance
+    provisioner: ibm.io/ibmc-file
+    reclaimPolicy: Delete
+    volumeBindingMode: WaitForFirstConsumer
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: nginx
+      labels:
         app: nginx
-        billingType: "hourly"
-        region: "us-south"
-        zone: "dal10"
-    template:
-      metadata:
-        labels:
+    spec:
+      ports:
+      - port: 80
+        name: web
+      clusterIP: None
+      selector:
+        app: nginx
+    ---
+    apiVersion: apps/v1beta1
+    kind: StatefulSet
+    metadata:
+      name: web
+    spec:
+      serviceName: "nginx"
+      replicas: 3
+      podManagementPolicy: "Parallel"
+      selector:
+        matchLabels:
           app: nginx
-          billingType: "hourly"
-          region: "us-south"
-          zone: "dal10"
-      spec:
-        containers:
-        - name: nginx
-          image: k8s.gcr.io/nginx-slim:0.8
-          ports:
-          - containerPort: 80
-            name: web
-          volumeMounts:
-          - name: myvol
-            mountPath: /usr/share/nginx/html
-    volumeClaimTemplates:
-    - metadata:
-        annotations:
-          volume.beta.kubernetes.io/storage-class: ibmc-file-retain-bronze
-        name: myvol
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 20Gi
-            iops: "300" #required only for performance storage
-   ```
-   {: codeblock}
+      template:
+        metadata:
+          labels:
+            app: nginx
+        spec:
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - nginx
+                  topologyKey: failure-domain.beta.kubernetes.io/zone
+          containers:
+          - name: nginx
+            image: k8s.gcr.io/nginx-slim:0.8
+            ports:
+            - containerPort: 80
+              name: web
+            volumeMounts:
+            - name: www
+              mountPath: /usr/share/nginx/html
+            - name: wwwww
+              mountPath: /tmp1
+      volumeClaimTemplates:
+      - metadata:
+          annotations:
+            volume.beta.kubernetes.io/storage-class: ibmc-file-bronze-delayed
+          name: myvol1
+        spec:
+          accessModes:
+          - ReadWriteMany # access mode
+          resources:
+            requests:
+              storage: 20Gi 
+      - metadata:
+          annotations:
+            volume.beta.kubernetes.io/storage-class: ibmc-file-bronze-delayed
+          name: myvol2
+        spec:
+          accessModes:
+          - ReadWriteMany # access mode
+          resources:
+            requests:
+              storage: 20Gi 
+    ```
+    {: codeblock}
 
-   <table>
+    <table>
     <caption>Understanding the stateful set YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the stateful set YAML file components</th>
@@ -780,6 +883,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     <tr>
     <td style="text-align:left"><code>spec.template.metadata.labels</code></td>
     <td style="text-align:left">Enter the same labels that you added to the <code>spec.selector.matchLabels</code> section. </td>
+    </tr>
+    <tr>
+    <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
+    <td style="text-align:left">Specify your anti-affinity rule to ensure that your stateful set pods are distributed across worker nodes and zones. The example shows an anti-affinity rule where the stateful set pod prefers not to be scheduled on a worker node where a pod runs that has the `app: nginx` label. The `topologykey: failure-domain.beta.kubernetes.io/zone` restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node if the worker node is in the same zone as a pod that has the app: nignx label. By using this anti-affinity rule, you can achieve anti-affinity across worker nodes and zones. </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
@@ -1315,6 +1422,67 @@ You can create a customized storage class and use the storage class in your PVC.
 
 To create your customized storage class, see [Customizing a storage class](/docs/containers/cs_storage_basics.html#customized_storageclass). Then, [use your customized storage class in your PVC](#add_file).
 
+### Creating topology-aware storage
+{: #file-topology}
+
+To use file storage in a multizone cluster, your pod must be scheduled in the same zone as your file storage instance so that you can read and write to the volume. Before topology-aware volume scheduling was introduced by Kubernetes, the dynamic provisioning of your storage automatically created the file storage instance when a PVC was created. Then, when you created your pod, the Kubernetes scheduler tried to deploy the pod to a worker node in the same data center as your file storage instance. 
+{: shortdesc}
+
+Creating the file storage instance without knowing the constraints of the pod can lead to unwanted results. For example, your pod might not be able to be scheduled to the same worker node as your storage because the worker node has insufficient resources or the worker node is tainted and does not allow the pod to be scheduled. With topology-aware volume scheduling, the file storage instance is delayed until the first pod that uses the storage is created. 
+
+Topology-aware volume scheduling is supported on clusters that run Kubernetes version 1.12 or later only. 
+{: note}
+
+The following examples show how to create storage classes that delay the creation of the file storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the file storage instance is created when you create the PVC. 
+
+- **Example for Endurance file storage:**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ibmc-file-bronze-delayed
+  parameters:
+    billingType: hourly
+    classVersion: "2"
+    iopsPerGB: "2"
+    sizeRange: '[20-12000]Gi'
+    type: Endurance
+  provisioner: ibm.io/ibmc-file
+  reclaimPolicy: Delete
+  volumeBindingMode: WaitForFirstConsumer
+  ```
+  {: codeblock}
+  
+- **Example for Performance file storage:**
+  ```
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+   name: ibmc-file-performance-storageclass
+   labels:
+     kubernetes.io/cluster-service: "true"
+  provisioner: ibm.io/ibmc-file
+  parameters:
+   billingType: "hourly"
+   classVersion: "2"
+   sizeIOPSRange: |-
+     "[20-39]Gi:[100-1000]"
+     "[40-79]Gi:[100-2000]"
+     "[80-99]Gi:[100-4000]"
+     "[100-499]Gi:[100-6000]"
+     "[500-999]Gi:[100-10000]"
+     "[1000-1999]Gi:[100-20000]"
+     "[2000-2999]Gi:[200-40000]"
+     "[3000-3999]Gi:[200-48000]"
+     "[4000-7999]Gi:[300-48000]"
+     "[8000-9999]Gi:[500-48000]"
+     "[10000-12000]Gi:[1000-48000]"
+   type: "Performance"
+  reclaimPolicy: Delete
+  volumeBindingMode: WaitForFirstConsumer
+  ```
+  {: codeblock}
+
 ### Specifying the zone for multizone clusters
 {: #file_multizone_yaml}
 
@@ -1327,7 +1495,6 @@ Use the customized storage class if you want to [statically provision file stora
 When you create the customized storage class, specify the same region and zone that your cluster and worker nodes are in. To get the region of your cluster, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and look for the region prefix in the **Master URL**, such as `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`. To get the zone of your worker node, run `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
 
 - **Example for Endurance file storage:**
-
   ```
   apiVersion: storage.k8s.io/v1beta1
   kind: StorageClass
@@ -1350,7 +1517,6 @@ When you create the customized storage class, specify the same region and zone t
   {: codeblock}
   
 - **Example for Performance file storage:**
-
   ```
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
