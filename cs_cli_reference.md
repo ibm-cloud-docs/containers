@@ -716,14 +716,11 @@ ibmcloud ks messages
 Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
 {: shortdesc}
 
-#### ibmcloud ks cluster-addon-disable istio --cluster CLUSTER
+#### ibmcloud ks cluster-addon-disable istio --cluster CLUSTER [-f]
 {: #cs_cluster_addon_disable_istio}
 
 Disable the managed Istio add-on. Removes all Istio core components from the cluster, including Prometheus.
 {: shortdesc}
-
-This add-on is a dependency for the `istio-extras`, `istio-sampe-bookinfo`, and `knative` managed add-ons. You must disable those add-ons before you can disable the `istio` add-on.
-{: note}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -731,6 +728,9 @@ This add-on is a dependency for the `istio-extras`, `istio-sampe-bookinfo`, and 
    <dl>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>Optional: This add-on is a dependency for the `istio-extras`, `istio-sample-bookinfo`, and `knative` managed add-ons. Include this flag to also disable those add-ons.</dd>
 </dl>
 
 **Example command**:
@@ -740,14 +740,11 @@ This add-on is a dependency for the `istio-extras`, `istio-sampe-bookinfo`, and 
   ```
   {: pre}
 
-#### ibmcloud ks cluster-addon-disable istio-extras --cluster CLUSTER [-y]
+#### ibmcloud ks cluster-addon-disable istio-extras --cluster CLUSTER [-f]
 {: #cs_cluster_addon_disable_istio_extras}
 
 Disable the managed Istio extras add-on. Removes Grafana, Jeager, and Kiali from the cluster.
 {: shortdesc}
-
-This add-on is a dependency for the `istio-sample-bookinfo` managed add-on. You must disable that add-on before you can disable the `istio-extras` add-on.
-{: note}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -756,6 +753,9 @@ This add-on is a dependency for the `istio-sample-bookinfo` managed add-on. You 
    <dl>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>Optional: This add-on is a dependency for the `istio-sample-bookinfo` managed add-on. Include this flag to also disable that add-on.</dd>
 </dl>
 
 **Example command**:
@@ -765,7 +765,7 @@ This add-on is a dependency for the `istio-sample-bookinfo` managed add-on. You 
   ```
   {: pre}
 
-#### ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster CLUSTER [-y]
+#### ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster CLUSTER
 {: #cs_cluster_addon_disable_istio_sample_bookinfo}
 
 Disable the managed Istio BookInfo add-on. Removes all deployments, pods, and other BookInfo app resources from the cluster.
@@ -775,9 +775,9 @@ Disable the managed Istio BookInfo add-on. Removes all deployments, pods, and ot
 
 <strong>Command options</strong>:
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
 
 **Example command**:
@@ -787,7 +787,7 @@ Disable the managed Istio BookInfo add-on. Removes all deployments, pods, and ot
   ```
   {: pre}
 
-#### ibmcloud ks cluster-addon-disable knative --cluster CLUSTER [-y]
+#### ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 {: #cs_cluster_addon_disable_knative}
 
 Disable the managed Knative add-on to remove the Knative serverless framework from the cluster.
@@ -797,9 +797,9 @@ Disable the managed Knative add-on to remove the Knative serverless framework fr
 
 <strong>Command options</strong>:
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
 
 **Example command**:
@@ -3719,7 +3719,7 @@ Resize your worker pool to increase or decrease the number of worker nodes that 
   ```
   {: pre}
 
-### ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-s]
+### ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-f] [-s]
 {: #cs_worker_pool_rm}
 
 Remove a worker pool from your cluster. All worker nodes in the pool are deleted. Your pods are rescheduled when you delete. To avoid downtime, be sure that you have enough workers to run your workload.
@@ -3734,6 +3734,8 @@ Remove a worker pool from your cluster. All worker nodes in the pool are deleted
     <dd>The name of the worker node pool that you want to remove. This value is required.</dd>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to remove the worker pool from. This value is required.</dd>
+  <dt><code>-f</code></dt>
+    <dd>Force the command to run without user prompts. This value is optional.</dd>
   <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>

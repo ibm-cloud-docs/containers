@@ -509,7 +509,7 @@ Note that the `istio` add-on is a dependency for the `istio-extras`, `istio-samp
 
 3. Disable the `istio` add-on.
   ```
-  ibmcloud ks cluster-addon-disable istio --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster-addon-disable istio --cluster <cluster_name_or_ID> -f
   ```
   {: pre}
 
