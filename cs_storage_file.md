@@ -886,7 +886,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
-    <td style="text-align:left">Specify your anti-affinity rule to ensure that your stateful set pods are distributed across worker nodes and zones. The example shows an anti-affinity rule where the stateful set pod prefers not to be scheduled on a worker node where a pod runs that has the `app: nginx` label. The `topologykey: failure-domain.beta.kubernetes.io/zone` restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node if the worker node is in the same zone as a pod that has the app: nignx label. By using this anti-affinity rule, you can achieve anti-affinity across worker nodes and zones. </td>
+    <td style="text-align:left">Specify your anti-affinity rule to ensure that your stateful set pods are distributed across worker nodes and zones. The example shows an anti-affinity rule where the stateful set pod prefers not to be scheduled on a worker node where a pod runs that has the `app: nginx` label. The `topologykey: failure-domain.beta.kubernetes.io/zone` restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node if the worker node is in the same zone as a pod that has the `app: nignx` label. By using this anti-affinity rule, you can achieve anti-affinity across worker nodes and zones. </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
