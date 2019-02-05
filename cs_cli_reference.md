@@ -142,6 +142,7 @@ ibmcloud plugin list
 
 
 
+
 <br>
 
 <table summary="Cluster commands: Services and integrations table">
@@ -871,7 +872,7 @@ Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample applicati
 
 <strong>Command options</strong>:
 
-   <dl>
+<dl>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
 
@@ -896,7 +897,7 @@ Enable the managed Knative add-on to install the Knative serverless framework.
 
 <strong>Command options</strong>:
 
-   <dl>
+<dl>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
 
@@ -942,7 +943,7 @@ After logging in, download Kubernetes configuration data and certificates to con
 {: shortdesc}
 
 **Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.Bluemix_notm}} IAM service role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform role or only a service role, additional constraints apply.
-* **Platform**: If you have only a platform role, you can perform this command, but you need a [service role](/docs/containers/cs_users.html#platform) or a [custom RBAC policy](/docs/containers/cs_users.html#role-binding) to perform Kubernetes actions in the clsuter.
+* **Platform**: If you have only a platform role, you can perform this command, but you need a [service role](/docs/containers/cs_users.html#platform) or a [custom RBAC policy](/docs/containers/cs_users.html#role-binding) to perform Kubernetes actions in the cluster.
 * **Service**: If you have only a service role, you can perform this command. However, your cluster admin must give you the cluster name and ID, because you cannot run the `ibmcloud ks clusters` command or launch the {{site.data.keyword.containerlong_notm}} console to view clusters. After, you can [launch the Kubernetes dashboard from the CLI](/docs/containers/cs_app.html#db_cli) and work with Kubernetes.
 
 **Command options**:
