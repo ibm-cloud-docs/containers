@@ -665,7 +665,7 @@ The following table shows the Kubernetes resource permissions granted by each se
   </thead>
   <tr>
     <td>**Reader**</td>
-    <td>When scoped to one namespace: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding</br>When scoped to all namespaces: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> cluster role binding</td>
+    <td>When scoped to one namespace: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding in each namespace of the cluster</td>
     <td><ul>
       <li>Read access to resources in a namespace</li>
       <li>No read access to roles and role bindings or to Kubernetes secrets</li>
@@ -674,7 +674,7 @@ The following table shows the Kubernetes resource permissions granted by each se
   </tr>
   <tr>
     <td>**Writer**</td>
-    <td>When scoped to one namespace: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding</br>When scoped to all namespaces: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> cluster role binding</td>
+    <td>When scoped to one namespace: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding in each namespace of the cluster</td>
     <td><ul><li>Read/write access to resources in a namespace</li>
     <li>No read/write access to roles and role bindings</li>
     <li>Access the Kubernetes dashboard to view resources in a namespace</li></ul>
@@ -682,7 +682,7 @@ The following table shows the Kubernetes resource permissions granted by each se
   </tr>
   <tr>
     <td>**Manager**</td>
-    <td>When scoped to one namespace: <strong><code>admin</code></strong> cluster role applied by the <strong><code>ibm-operate</code></strong> role binding</br>When scoped to all namespaces: <strong><code>cluster-admin</code></strong> cluster role applied by the <strong><code>ibm-admin</code></strong> cluster role binding</td>
+    <td>When scoped to one namespace: <strong><code>admin</code></strong> cluster role applied by the <strong><code>ibm-operate</code></strong> cluster role binding in only this namespace</br><br>When scoped to all namespaces: <strong><code>cluster-admin</code></strong> cluster role applied by the <strong><code>ibm-admin</code></strong> cluster role binding</td>
     <td>When scoped to one namespace:
       <ul><li>Read/write access to all resources in a namespace but not to the namespace itself</li>
       <li>Create RBAC roles and role bindings in a namespace</li>
