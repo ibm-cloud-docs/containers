@@ -110,8 +110,8 @@ The following table is an overview of available {{site.data.keyword.Bluemix_notm
 {: caption="Table. Supported {{site.data.keyword.Bluemix_notm}} Private products to be used in {{site.data.keyword.Bluemix_notm}} Public." caption-side="top"}
 
 Before you begin: 
-- [Install the {{site.data.keyword.registryshort}} CLI plug-in (`ibmcloud cr`)](/docs/services/Registry/registry_setup_cli_namespace.html#registry_cli_install). 
-- [Set up a namespace in {{site.data.keyword.registryshort}}](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add) or retrieve your existing namespace by running `ibmcloud cr namespaces`. 
+- [Install the {{site.data.keyword.registryshort}} CLI plug-in (`ibmcloud cr`)](/docs/services/Registry/registry_setup_cli_namespace.html#cli_namespace_registry_cli_install). 
+- [Set up a namespace in {{site.data.keyword.registryshort}}](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_setup) or retrieve your existing namespace by running `ibmcloud cr namespaces`. 
 - [Target your `kubectl` CLI to your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). 
 - [Install the Helm CLI and set up tiller in your cluster](/docs/containers/cs_integrations.html#helm). 
 
