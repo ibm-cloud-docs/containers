@@ -18,7 +18,6 @@ lastupdated: "2019-02-05"
 {:deprecated: .deprecated}
 {:download: .download}
 
-
 ## Configure the cluster DNS provider
 {: #cluster_dns}
 
