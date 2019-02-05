@@ -42,7 +42,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tr>
 <td>0.2.37</td>
 <td>05 Feb 2019</td>
-<td>Adds the [<code>cluster-addons</code>](/docs/containers/cs_cli_reference.html#cs_cluster_addons), <code>cluster-addon-enable</code>](/docs/containers/cs_cli_reference.html#cs_cluster_addon_enable), and <code>cluster-addon-disable</code>](/docs/containers/cs_cli_reference.html#cs_cluster_addon_disable) for working with managed cluster add-ons such as the [Istio](/docs/containers/cs_istio.html) and [Knative](/docs/containers/cs_tutorials_knative.html) managed add-ons for {{site.data.keyword.containerlong_notm}}.</td>
+<td>Adds the [<code>ibmcloud ks cluster-addons</code>](/docs/containers/cs_cli_reference.html#cs_cluster_addons), <code>ibmcloud ks cluster-addon-enable</code>](/docs/containers/cs_cli_reference.html#cs_cluster_addon_enable), and <code>ibmcloud ks cluster-addon-disable</code>](/docs/containers/cs_cli_reference.html#cs_cluster_addon_disable) for working with managed cluster add-ons such as the [Istio](/docs/containers/cs_istio.html) and [Knative](/docs/containers/cs_tutorials_knative.html) managed add-ons for {{site.data.keyword.containerlong_notm}}.</td>
 </tr>
 <tr>
 <td>0.2.30</td>
