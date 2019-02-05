@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -80,6 +80,8 @@ When you [install Portworx with a Helm chart](#install_portworx), you get the Po
 {: shortdesc}
 
 For more information about available license types and how to upgrade your Trial license, see [Portworx Licensing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/knowledge-base/px-licensing/).
+
+IBM employees must order a Portworx license by following [this process](https://github.ibm.com/alchemy-containers/armada-storage/blob/master/portworx/px-license.md). 
 
 ## Setting up a database for Portworx metadata
 {: #portworx_database}
