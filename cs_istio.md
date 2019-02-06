@@ -39,7 +39,7 @@ Istio on {{site.data.keyword.containerlong}} provides a one-step installation of
 [Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/info/istio) is an open service mesh platform to connect, secure, control, and observe microservices on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
-When you shift monolith applications to a distributed microservice architecture, the connections between your microservices begin to form a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by allowing you to manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
+When you shift monolithic applications to a distributed microservice architecture, the connections between your microservices begin to form a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by allowing you to manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
 
 For example, using Istio in your microservice mesh can help you:
 - Achieve better visibility into the apps running in your cluster
