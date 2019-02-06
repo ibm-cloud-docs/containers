@@ -44,7 +44,7 @@ By default, your cluster DNS provider includes a deployment to autoscale the DNS
     kubectl get deployment -n kube-system | grep dns-autoscaler
     ```
     {: pre}
-
+    
     Example output:
     ```
     NAME                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
@@ -62,7 +62,7 @@ By default, your cluster DNS provider includes a deployment to autoscale the DNS
     kubectl edit configmap -n kube-system <dns-autoscaler>
     ```
     {: pre}
-
+    
     Example output:
     ```
     apiVersion: v1
@@ -85,7 +85,7 @@ You can customize the cluster DNS provider by editing the DNS configmap. For exa
     kubectl get deployment -n kube-system | grep dns
     ```
     {: pre}
-
+    
     Example output:
     ```
     NAME                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
@@ -99,13 +99,13 @@ You can customize the cluster DNS provider by editing the DNS configmap. For exa
     ```
     {: pre}    
 3.  Edit the default settings for the CoreDNS or KubeDNS configmap.
-
+    
     *   **For CoreDNS**: Use multiple Corefiles in the `data` section of the configmap to customize stubdomains and upstream nameservers. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns).
         ```
         kubectl edit configmap -n kube-system coredns
         ```
         {: pre}
-
+    
         Example output:
         ```
         apiVersion: v1
