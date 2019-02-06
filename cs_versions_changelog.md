@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -71,7 +71,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>Cluster DNS provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>CoreDNS is now the default cluster DNS provider for new clusters. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers/cs_dns.html#dns_set).</td>
+<td>CoreDNS is now the default cluster DNS provider for new clusters. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers/cs_cluster_update.html#dns_set).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -542,7 +542,7 @@ The following table shows the changes that are included in patch 1.12.2_1527.
 <td>Cluster DNS provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Kubernetes DNS (KubeDNS) remains the default cluster DNS provider. However, you now have the option to [change the cluster DNS provide to CoreDNS](/docs/containers/cs_dns.html#dns_set).</td>
+<td>Kubernetes DNS (KubeDNS) remains the default cluster DNS provider. However, you now have the option to [use CoreDNS instead](/docs/containers/cs_cluster_update.html#dns_set).</td>
 </tr>
 <tr>
 <td>Cluster metrics provider</td>

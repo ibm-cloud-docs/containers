@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -233,7 +233,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>CoreDNS available as the new default cluster DNS provider</td>
-<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers/cs_dns.html#dns_set).
+<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers/cs_cluster_update.html#dns_set).
 <br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services are using IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
 </tr>
 <tr>
@@ -324,7 +324,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>CoreDNS available as cluster DNS provider</td>
-<td>The Kubernetes project is in the process of transitioning to support CoreDNS instead of the current Kubernetes DNS (KubeDNS). In version 1.12, the default cluster DNS remains KubeDNS, but you can [choose to use CoreDNS](/docs/containers/cs_dns.html#dns_set).</td>
+<td>The Kubernetes project is in the process of transitioning to support CoreDNS instead of the current Kubernetes DNS (KubeDNS). In version 1.12, the default cluster DNS remains KubeDNS, but you can [use CoreDNS instead](/docs/containers/cs_cluster_update.html#dns_set).</td>
 </tr>
 <tr>
 <td>`kubectl apply --force`</td>
