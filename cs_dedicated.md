@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -471,7 +471,7 @@ With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single
 ### Using private and public image registries
 {: #dedicated_images}
 
-Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.
+Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with container images.
 
 For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_images.html). For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](/docs/containers/cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.
 
@@ -549,7 +549,7 @@ You can use Kubernetes techniques to deploy apps in {{site.data.keyword.Bluemix_
 
 To deploy apps in clusters, you can follow the instructions for [deploying apps in {{site.data.keyword.Bluemix_notm}} public clusters](/docs/containers/cs_app.html#app). Review the following differences for {{site.data.keyword.Bluemix_dedicated_notm}} clusters.
 
-Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.
+Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with Kubernetes resources.
 
 ### Allowing public access to apps
 {: #dedicated_apps_public}

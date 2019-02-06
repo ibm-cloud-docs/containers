@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -38,7 +38,8 @@ The list is divided into two parts:
 ### Account-level
 {: #prepare_account_level}
 
-Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for {{site.data.keyword.containerlong_notm}}. {: shortdesc}
+Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for {{site.data.keyword.containerlong_notm}}.
+{: shortdesc}
 
 1.  [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
 2.  [Set up an {{site.data.keyword.containerlong_notm}} API key](/docs/containers/cs_users.html#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
@@ -61,7 +62,7 @@ Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for 
 ### Cluster-level
 {: #prepare_cluster_level}
 
-Follow the steps to prepare the setup of your cluster. 
+Follow the steps to prepare the setup of your cluster.
 {: shortdesc}
 
 1.  Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}.

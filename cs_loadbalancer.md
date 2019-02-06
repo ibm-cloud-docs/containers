@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -141,7 +141,7 @@ As opposed to version 1.0 load balancers, version 2.0 load balancers don't use N
 <br />
 
 
-## v2.0: Components and architecture (Beta)
+## v2.0: Components and architecture (beta)
 {: #planning_ipvs}
 
 Load balancer 2.0 capabilities are in beta. To use a version 2.0 load balancer, you must [update your cluster's master and worker nodes](/docs/containers/cs_cluster_update.html) to Kubernetes version 1.12 or later.

@@ -19,7 +19,6 @@ lastupdated: "2019-02-06"
 {:note: .note}
 
 
-
 # Version information and update actions
 {: #cs_versions}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -366,8 +366,7 @@ You can verify that your configuration is set up correctly in one of two ways:
     ```
     {: pre}
 
-</br>
-</br>
+</br></br>
 
 ### Updating log forwarding
 {: #updating-forwarding}

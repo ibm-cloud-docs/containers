@@ -19,7 +19,6 @@ lastupdated: "2019-02-06"
 {:download: .download}
 
 
-
 # Updating clusters, worker nodes, and add-ons
 {: #update}
 

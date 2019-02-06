@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -17,7 +17,6 @@ lastupdated: "2019-02-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 
@@ -49,7 +48,7 @@ You can use multiple registries with {{site.data.keyword.containerlong_notm}} to
 
 After you set up an image registry, cluster users can use the images for their app deployments to the cluster.
 
-Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.
+Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with container images.
 
 <br />
 
