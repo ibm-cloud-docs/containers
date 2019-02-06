@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -278,7 +278,7 @@ You can also use an {{site.data.keyword.Bluemix_notm}} database service, such as
 ## Monitoring and logging
 {: #monitoring_logging}
 
-The key to detect malicious attacks in your cluster is the proper monitoring and logging of all the events that happen in the cluster. Monitoring and logging can also help you understand the cluster capacity and availability of resources for your app so that you can plan accordingly to protect your apps from a downtime.
+The key to detect malicious attacks in your cluster is the proper monitoring and logging of metrics and all the events that happen in the cluster. Monitoring and logging can also help you understand the cluster capacity and availability of resources for your app so that you can plan accordingly to protect your apps from a downtime.
 {: shortdesc}
 
 **Does IBM monitor my cluster?**</br>
@@ -299,7 +299,9 @@ You can choose what events you want to log for your cluster and where you want t
 **How can I monitor the health and performance of my cluster?**</br>
 You can verify the capacity and performance of your cluster by monitoring your cluster components and compute resources, such as CPU and memory usage. {{site.data.keyword.containerlong_notm}} automatically sends metrics for standard clusters to {{site.data.keyword.monitoringlong}} so that you can [see and analyze them in Grafana](/docs/containers/cs_health.html#view_metrics).
 
-You can also use built-in tools, such as the {{site.data.keyword.containerlong_notm}} details page, the Kubernetes dashboard, or [set up third party integrations](/docs/containers/cs_integrations.html#health_services), such as Prometheus, Weave Scope, and others.
+You can also use built-in tools, such as the {{site.data.keyword.containerlong_notm}} details page, the Kubernetes dashboard, or [set up third party integrations](/docs/containers/cs_integrations.html#health_services), such as Prometheus, Sysdig, LogDNA, Weave Scope, and others. 
+
+To set up a host-based intrusion detection system (HIDS) and security event log monitoring (SELM), install third party tools that are designed to monitor your cluster and containerized apps to detect intrusion or misuse, such as [Twistlock ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.twistlock.com/) or the [Sysdig Falco project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://sysdig.com/opensource/falco/). Sysdig Falco is a separate tool and is not included if you choose to install the IBM-provided [Sysdig add-on](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster) in your cluster.  
 
 **How can I audit events that happen in my cluster?**</br>
 You can [set up {{site.data.keyword.cloudaccesstraillong}} in your {{site.data.keyword.containerlong_notm}} cluster](/docs/containers/cs_at_events.html#at_events). For more information, view the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/services/cloud-activity-tracker/activity_tracker_ov.html#activity_tracker_ov).
@@ -336,12 +338,15 @@ Public registries, such as Docker Hub, can be used to get started with Docker im
 **Why is it important to check images against vulnerabilities?** </br>
 Research shows that most malicious attacks leverage known software vulnerabilities and weak system configurations. When you deploy a container from an image, the container spins up with the OS and extra binaries that you described in the image. Just like you protect your virtual or physical machine, you must eliminate known vulnerabilities in the OS and binaries that you use inside the container to protect your app from being accessed by unauthorized users. </br>
 
-To protect your apps, consider establishing a process within your team to address the following areas:
+To protect your apps, consider to address the following areas:
 
-1. **Scan images before they deploy into production:** </br>
-Make sure to scan every image before you deploy a container from it. If vulnerabilities are found, consider eliminating the vulnerabilities or block deployment for those images. Establish a process where the content of the image must be approved and where you can only deploy images that pass the vulnerability checks.
+1. **Automate the build process and limit permissions**: </br>
+Automate the process to build your container image from your source code to eliminate source code variations and defects. By integrating the build process into your CI/CD pipeline, you can ensure that your image is scanned and built only if the image passes the security checks that you specified. To avoid that developers apply hot fixes to sensitive images, limit the number of people in your organization who have access to the build process. 
 
-2. **Regularly scan running containers:** </br>
+2. **Scan images before they deploy into production:** </br>
+Make sure to scan every image before you deploy a container from it. For example, if you use {{site.data.keyword.registryshort_notm}}, all images are automatically scanned for vulnerabilities when you push the image to your namespace. If vulnerabilities are found, consider eliminating the vulnerabilities or block deployment for those images. Find a person or team in your organization who is responsible for monitoring and removing vulnerabilities. Depending on your organizational structure, this person might be part of a security, operations, or deloyment team. Use admission controllers, such as the [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce) to block deployments from images that have not passed vulnerability checks and enable [content trust](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent) so that images must be approved by a trusted signer before they can be pushed to the container registry. 
+
+3. **Regularly scan running containers:** </br>
 Even if you deployed a container from an image that passes the vulnerability check, the operating system or binaries that run in the container might get vulnerable over time. To protect your app, you must ensure that running containers are regularly scanned so that you can detect and remediate vulnerabilities. Depending on the app, to add extra security, you can establish a process that takes down vulnerable containers after they are detected.
 
 **How can {{site.data.keyword.registryshort_notm}} help me to protect my images and deployment process?**  
@@ -357,7 +362,7 @@ Even if you deployed a container from an image that passes the vulnerability che
   <tbody>
     <tr>
       <td>Secured Docker private image repository in {{site.data.keyword.registryshort_notm}}</td>
-      <td>Set up your own Docker [image repository](/docs/services/Registry/index.html#index) in a multi-tenant, highly available, and scalable private image registry that is hosted and managed by IBM. By using the registry, you can build, securely store, and share Docker images across cluster users. </br></br>Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.</td>
+      <td>Set up your own Docker [image repository](/docs/services/Registry/index.html#index) in a multi-tenant, highly available, and scalable private image registry that is hosted and managed by IBM. By using the registry, you can build, securely store, and share Docker images across cluster users. </br></br>Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with container images.</td>
     </tr>
     <tr>
       <td>Push images with trusted content only</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -633,7 +633,7 @@ To expose apps that are outside your cluster to the public:
         <tbody>
         <tr>
         <td><code>metadata.name</code></td>
-        <td>Replace <em>&lt;myexternalservice&gt;</em> with a name for your service.<p>Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.</p></td>
+        <td>Replace <em>&lt;myexternalservice&gt;</em> with a name for your service.<p>Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with Kubernetes resources.</p></td>
         </tr>
         <tr>
         <td><code>port</code></td>

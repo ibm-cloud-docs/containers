@@ -19,7 +19,6 @@ lastupdated: "2019-02-06"
 {:note: .note}
 
 
-
 # Version information and update actions
 {: #cs_versions}
 
@@ -128,7 +127,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>![Supported checkmark icon](images/healthy.png)</td>
   <td>[1.13](#cs_v113)</td>
   <td>05 Feb 2019</td>
-  <td>TBD `†`</td>
+  <td>Dec 2019 `†`</td>
 </tr>
 <tr>
   <td>![Supported checkmark icon](images/healthy.png)</td>
@@ -228,12 +227,8 @@ The following table shows the actions that you must take after you update the Ku
 </thead>
 <tbody>
 <tr>
-<td>containerd `cri` stream server</td>
-<td>In containerd version 1.2, the `cri` plug-in stream server now serves on a random port, `http://localhost:0`. This change supports the `kubelet` streaming proxy and provides a more secure streaming interface for container `exec` and `logs` operations. Previously, the `cri` stream server listened on the worker node's private network interface by using port 10010. If your apps use the container `cri` plug-in and rely on the previous behavior, update them.</td>
-</tr>
-<tr>
 <td>CoreDNS available as the new default cluster DNS provider</td>
-<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers/cs_cluster_update.html#dns_set).
+<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers/cs_dns.html#dns_set).
 <br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services are using IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
 </tr>
 <tr>
@@ -260,6 +255,28 @@ The following table shows the actions that you must take after you update the Ku
 <tr>
 <td>Deprecated: `scheduler.alpha.kubernetes.io/critical-pod` annotation</td>
 <td>The `scheduler.alpha.kubernetes.io/critical-pod` annotation is now deprecated. Change any pods that rely on this annotation to use [pod priority](/docs/containers/cs_pod_priority.html#pod_priority) instead.</td>
+</tr>
+</tbody>
+</table>
+
+### Update after worker nodes
+{: #113_after_workers}
+
+The following table shows the actions that you must take after you update your worker nodes.
+{: shortdesc}
+
+<table summary="Kubernetes updates for version 1.13">
+<caption>Changes to make after you update your worker nodes to Kubernetes 1.13</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd `cri` stream server</td>
+<td>In containerd version 1.2, the `cri` plug-in stream server now serves on a random port, `http://localhost:0`. This change supports the `kubelet` streaming proxy and provides a more secure streaming interface for container `exec` and `logs` operations. Previously, the `cri` stream server listened on the worker node's private network interface by using port 10010. If your apps use the container `cri` plug-in and rely on the previous behavior, update them.</td>
 </tr>
 </tbody>
 </table>
@@ -324,11 +341,15 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>CoreDNS available as cluster DNS provider</td>
-<td>The Kubernetes project is in the process of transitioning to support CoreDNS instead of the current Kubernetes DNS (KubeDNS). In version 1.12, the default cluster DNS remains KubeDNS, but you can [use CoreDNS instead](/docs/containers/cs_cluster_update.html#dns_set).</td>
+<td>The Kubernetes project is in the process of transitioning to support CoreDNS instead of the current Kubernetes DNS (KubeDNS). In version 1.12, the default cluster DNS remains KubeDNS, but you can [choose to use CoreDNS](/docs/containers/cs_dns.html#dns_set).</td>
 </tr>
 <tr>
 <td>`kubectl apply --force`</td>
 <td>Now, when you force an apply action (`kubectl apply --force`) on resources that cannot be updated, such as immutable fields in YAML files, the resources are recreated instead. If your scripts rely on the previous behavior, update them.</td>
+</tr>
+<tr>
+<td>`kubectl get componentstatuses`</td>
+<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/landing) or by using the `ibmcloud ks cluster-get` [command](/docs/containers/cs_cli_reference.html#cs_cluster_get).</td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>

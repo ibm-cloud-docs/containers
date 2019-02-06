@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -110,7 +110,7 @@ To deploy the app:
         ```
         {: pre}
 
-6.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous tutorial. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.
+6.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous tutorial. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with container images.
 
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. To get the region prefix for the region that you are currently in, run `ibmcloud api`. For example, the Dallas location, US South region prefix is `ng`.
 
@@ -149,7 +149,7 @@ To deploy the app:
     ```
     {: screen}
 
-    Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.
+    Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with Kubernetes resources.
 
 8.  Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort that you expose is the port on which the worker node listens for traffic.
 

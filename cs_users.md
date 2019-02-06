@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 
 ---
@@ -642,7 +642,7 @@ To learn more about the actions permitted by each RBAC role, check out the [{{si
 
 **Can I create custom roles or cluster roles?**
 
-The `view`, `edit`, `admin` and `cluster-admin` cluster roles are predefined roles that are automatically created when you assign a user the corresponding {{site.data.keyword.Bluemix_notm}} IAM service role. To grant other Kubernetes permissions, you can [create custom RBAC permissions](#rbac). Custom RBAC roles are in addition to and do not change or override any RBAC roles that you might have assigned with service access roles.
+The `view`, `edit`, `admin` and `cluster-admin` cluster roles are predefined roles that are automatically created when you assign a user the corresponding {{site.data.keyword.Bluemix_notm}} IAM service role. To grant other Kubernetes permissions, you can [create custom RBAC permissions](#rbac). Custom RBAC roles are in addition to and do not change or override any RBAC roles that you might have assigned with service access roles. Note that to create custom RBAC permissions, you must have the IAM **Manager** service access role that gives you the `cluster-admin` Kubernetes RBAC role. The other users, however, do not need an IAM service access role if you manage your own custom Kubernetes RBAC roles.
 
 Making your own custom RBAC policies? Be sure not to edit the existing IBM role bindings that are in the cluster, or name new role bindings with the same name. Any changes to IBM-provided RBAC role bindings are overwritten periodically. Instead, create your own role bindings.
 {: tip}
@@ -668,18 +668,18 @@ To prevent breaking changes, do not change the predefined `view`, `edit`, `admin
 
 **Do I create a role or a cluster role? Do I apply it with a role binding or a cluster role binding?**
 
-* To allow a user, access group, or service account to access a resource within a specific namespace, choose one of the following combinations:
+* **Namespace access**: To allow a user, access group, or service account to access a resource within a specific namespace, choose one of the following combinations:
   * Create a role, and apply it with a role binding. This option is useful for controlling access to a unique resource that exists only in one namespace, like an app deployment.
   * Create a cluster role, and apply it with a role binding. This option is useful for controlling access to general resources in one namespace, like pods.
-* To allow a user or an access group to access cluster-wide resources or resources in all namespaces, create a cluster role, and apply it with a cluster role binding. This option is useful for controlling access to resources that are not scoped to namespaces, like worker nodes, or resources in all namespaces in your cluster, like pods in each namespace.
+* **Cluster-wide access**: To allow a user or an access group to access cluster-wide resources or resources in all namespaces, create a cluster role, and apply it with a cluster role binding. This option is useful for controlling access to resources that are not scoped to namespaces, like worker nodes, or resources in all namespaces in your cluster, like pods in each namespace.
 
-Before you begin:
+**Before you begin**:
 
 - Target the [Kubernetes CLI](/docs/containers/cs_cli_install.html#cs_cli_configure) to your cluster.
 - Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for all namespaces.
 - To assign access to individual users or users in an access group, ensure that the user or group has been assigned at least one [{{site.data.keyword.Bluemix_notm}} IAM platform role](#platform) at the {{site.data.keyword.containerlong_notm}} service level.
 
-To create custom RBAC permissions:
+**To create custom RBAC permissions**:
 
 1. Create the role or cluster role with the access that you want to assign.
 

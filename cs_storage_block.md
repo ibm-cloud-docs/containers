@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -18,10 +18,12 @@ lastupdated: "2019-02-05"
 {:deprecated: .deprecated}
 {:download: .download}
 
+
+
 # Storing data on IBM Block Storage for IBM Cloud
 {: #block_storage}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers/cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage/index.html#billing). 
+{{site.data.keyword.Bluemix_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers/cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage/index.html#billing).
 {: shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} Block Storage is available for standard clusters only. Block storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
@@ -57,9 +59,9 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 
 2.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
-    
+
 3.  Verify that tiller is installed with a service account.
-    
+
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```
@@ -72,7 +74,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     tiller                               1         2m
     ```
     {: screen}
-   
+
 4. Add the {{site.data.keyword.Bluemix_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
    ```
    helm repo add ibm https://registry.bluemix.net/helm/ibm
@@ -921,10 +923,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
       A stateful set is fully deployed when the number of replicas that you find in the **Replicas** section of your CLI output equals the number of **Running** pods in the **Pods Status** section. If a stateful set is not fully deployed yet, wait until the deployment is finished before you proceed.
 
-2. Create a configuration file for your stateful set and the service that you use to expose the stateful set. 
+2. Create a configuration file for your stateful set and the service that you use to expose the stateful set.
 
    - **Example stateful set that specifies a zone:**
-   
+
      The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte block storage device is provisioned based on the specifications that are defined in the `ibmc-block-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because block storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto worker nodes that are located in `dal10`.
 
      ```
@@ -987,11 +989,11 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
               iops: "300" #required only for performance storage
      ```
      {: codeblock}
-   
+
    - **Example stateful set with anti-affinity rule and delayed block storage creation:**
-   
+
      The following example shows how to deploy nginx as a stateful set with 3 replicas. The stateful set does not specify the region and zone where the block storage is created. Instead, the stateful set uses an anti-affinity rule to ensure that the pods are spread across worker nodes and zones. By defining `topologykey: failure-domain.beta.kubernetes.io/zone`, the Kubernetes scheduler cannot schedule a pod on a worker node if the worker node is in the same zone as a pod that has the `app: nignx` label. For each stateful set pod, two PVCs are created as defined in the `volumeClaimTemplates` section, but the creation of the block storage instances is delayed until a stateful set pod that uses the storage is scheduled. This setup is referred to as [topology-aware volume scheduling](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
-   
+
      ```
      apiVersion: storage.k8s.io/v1
      kind: StorageClass
@@ -1071,7 +1073,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
            - ReadWriteOnce # access mode
            resources:
              requests:
-               storage: 20Gi 
+               storage: 20Gi
        - metadata:
            annotations:
              volume.beta.kubernetes.io/storage-class: ibmc-block-bronze-delayed
@@ -1081,7 +1083,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
            - ReadWriteOnce # access mode
            resources:
              requests:
-               storage: 20Gi 
+               storage: 20Gi
      ```
      {: codeblock}
 
@@ -1211,32 +1213,32 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 ## Changing the size and IOPS of your existing storage device
 {: #block_change_storage_configuration}
 
-If you want to increase storage capacity or performance, you can modify your existing volume. 
+If you want to increase storage capacity or performance, you can modify your existing volume.
 {: shortdesc}
 
-For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding Block Storage capacity](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). If you use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, you must follow steps 4-7 in this topic to complete the modification. 
+For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding Block Storage capacity](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). If you use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, you must follow steps 4-7 in this topic to complete the modification.
 {: tip}
 
-1. List the PVCs in your cluster and note the name of the associated PV from the **VOLUME** column. 
+1. List the PVCs in your cluster and note the name of the associated PV from the **VOLUME** column.
    ```
    kubectl get pvc
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
    myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
    ```
    {: screen}
-   
-2. Retrieve the **VolumeID** and the **StorageType** of the physical file storage that is associated with your PVC by listing the details of the PV that your PVC is bound to. Replace `<pv_name>` with the name of the PV that you retrieved in the previous step. The storage type is shown in the **Labels** section, and the volume ID is shown in the **Source** > **Options** section of your CLI output. 
+
+2. Retrieve the **VolumeID** and the **StorageType** of the physical file storage that is associated with your PVC by listing the details of the PV that your PVC is bound to. Replace `<pv_name>` with the name of the PV that you retrieved in the previous step. The storage type is shown in the **Labels** section, and the volume ID is shown in the **Source** > **Options** section of your CLI output.
    ```
    kubectl describe pv <pv_name>
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    Name:            pvc-c1839152-c333-11e8-b6a8-46ad53f2579a
    Labels:          CapacityGb=24
@@ -1259,20 +1261,20 @@ For questions about billing and to find the steps for how to use the {{site.data
    ```
    {: screen}
 
-3. Modify the size or IOPS of your volume in your IBM Cloud infrastructure (SoftLayer) account. 
+3. Modify the size or IOPS of your volume in your IBM Cloud infrastructure (SoftLayer) account.
 
-   Example for performance storage: 
+   Example for performance storage:
    ```
    ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-iops <iops>
    ```
    {: pre}
-   
-   Example for endurance storage: 
+
+   Example for endurance storage:
    ```
    ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-tier <iops>
    ```
    {: pre}
-   
+
    <table>
    <caption>Understanding the command's components</caption>
    <thead>
@@ -1297,8 +1299,8 @@ For questions about billing and to find the steps for how to use the {{site.data
    </tr>
    </tbody>
    </table>
-   
-   Example output: 
+
+   Example output:
    ```
    Order 31020713 was placed successfully!.
    > Storage as a Service
@@ -1312,50 +1314,50 @@ For questions about billing and to find the steps for how to use the {{site.data
    You may run 'ibmcloud sl block volume-list --order 12345667' to find this block volume after it is ready.
    ```
    {: screen}
-   
+
 4. Patch the PV configuration to add the `autofix-resizefs` annotation. This annotation automatically resizes the file system when the volume is mounted to a pod.  
    ```
    kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
    ```
    {: pre}
-   
-5. List all the pods that use the PVC. 
+
+5. List all the pods that use the PVC.
    ```
    kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
    ```
    {: pre}
-   
-   Pods are returned in the format: `<pod_name>: <pvc_name>`. 
-   
-6. If you have a pod that uses the PVC, restart the pod by removing the pod and letting Kubernetes re-create it. If you created a pod without using a Kubernetes deployment or replica set, then you must re-create your pod after you remove it. 
-   To retrieve the YAML file that was used to create your pod, run `kubectl get pod <pod_name> -o yaml >pod.yaml`. 
+
+   Pods are returned in the format: `<pod_name>: <pvc_name>`.
+
+6. If you have a pod that uses the PVC, restart the pod by removing the pod and letting Kubernetes re-create it. If you created a pod without using a Kubernetes deployment or replica set, then you must re-create your pod after you remove it.
+   To retrieve the YAML file that was used to create your pod, run `kubectl get pod <pod_name> -o yaml >pod.yaml`.
    {: tip}
    ```
    kubectl delete pod <pod_name>
    ```
    {: pre}
-   
+
 7. If you changed the size of your volume, log in to your pod to verify the new size. Note that the storage instance takes a while to resize, and you cannot verify the size until the process is complete.
-   1. Get the volume mount path that you used in your pod to access your volume. 
+   1. Get the volume mount path that you used in your pod to access your volume.
       ```
       kubectl describe pod <pod_name>
       ```
       {: pre}
-      
-      The volume mount path is shown in the **Containers** > **block** > **Mounts** section of your CLI output. 
-   2. Log in to your pod. 
+
+      The volume mount path is shown in the **Containers** > **block** > **Mounts** section of your CLI output.
+   2. Log in to your pod.
       ```
       kubectl exec -it <pod_name> bash
       ```
       {: pre}
-      
-   3. Show the disk usage statistics and find the mount path for your volume that you retrieved earlier. Verify that the **Size** column shows the new size of your volume. 
+
+   3. Show the disk usage statistics and find the mount path for your volume that you retrieved earlier. Verify that the **Size** column shows the new size of your volume.
       ```
       df -h
       ```
       {: pre}
-      
-      Example output: 
+
+      Example output:
       ```
       Filesystem                                     Size  Used Avail Use% Mounted on
       overlay                                         99G  3.2G   91G   4% /
@@ -1594,15 +1596,15 @@ To create your customized storage class, see [Customizing a storage class](/docs
 ### Creating topology-aware storage
 {: #topology_yaml}
 
-To use block storage in a multizone cluster, your pod must be scheduled in the same zone as your block storage instance so that you can read and write to the volume. Before topology-aware volume scheduling was introduced by Kubernetes, the dynamic provisioning of your storage automatically created the block storage instance when a PVC was created. Then, when you created your pod, the Kubernetes scheduler tried to deploy the pod to the same data center as your block storage instance. 
+To use block storage in a multizone cluster, your pod must be scheduled in the same zone as your block storage instance so that you can read and write to the volume. Before topology-aware volume scheduling was introduced by Kubernetes, the dynamic provisioning of your storage automatically created the block storage instance when a PVC was created. Then, when you created your pod, the Kubernetes scheduler tried to deploy the pod to the same data center as your block storage instance.
 {: shortdesc}
 
-Creating the block storage instance without knowing the constraints of the pod can lead to unwanted results. For example, your pod might not be able to be scheduled to the same worker node as your storage because the worker node has insufficient resources or the worker node is tainted and does not allow the pod to be scheduled. With topology-aware volume scheduling, the block storage instance is delayed until the first pod that uses the storage is created. 
+Creating the block storage instance without knowing the constraints of the pod can lead to unwanted results. For example, your pod might not be able to be scheduled to the same worker node as your storage because the worker node has insufficient resources or the worker node is tainted and does not allow the pod to be scheduled. With topology-aware volume scheduling, the block storage instance is delayed until the first pod that uses the storage is created.
 
-Topology-aware volume scheduling is supported on clusters that run Kubernetes version 1.12 or later only. To use this feature, make sure that you installed the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.2.0 or later. 
+Topology-aware volume scheduling is supported on clusters that run Kubernetes version 1.12 or later only. To use this feature, make sure that you installed the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.2.0 or later.
 {: note}
 
-The following examples show how to create storage classes that delay the creation of the block storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the block storage instance is created when you create the PVC. 
+The following examples show how to create storage classes that delay the creation of the block storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the block storage instance is created when you create the PVC.
 
 - **Example for Endurance block storage:**
   ```
@@ -1622,7 +1624,7 @@ The following examples show how to create storage classes that delay the creatio
   volumeBindingMode: WaitForFirstConsumer
   ```
   {: codeblock}
-  
+
 - **Example for Performance block storage:**
   ```
   apiVersion: storage.k8s.io/v1
@@ -1653,10 +1655,10 @@ The following examples show how to create storage classes that delay the creatio
   ```
   {: codeblock}
 
-### Specifying the zone and region 
+### Specifying the zone and region
 {: #block_multizone_yaml}
 
-If you want to create your block storage in a specific zone, you can specify the zone and region in a customized storage class. 
+If you want to create your block storage in a specific zone, you can specify the zone and region in a customized storage class.
 {: shortdesc}
 
 Use the customized storage class if you use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.0.0 or if you want to [statically provision block storage](#existing_block) in a specific zone. In all other cases, [specify the zone directly in your PVC](#add_block).
@@ -1684,7 +1686,7 @@ Create the storage class in the same region and zone as your cluster and worker 
   reclaimPolicy: "Delete"
   ```
   {: codeblock}
-  
+
 - **Example for Performance block storage:**
   ```
   apiVersion: storage.k8s.io/v1beta1

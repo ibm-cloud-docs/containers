@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -17,7 +17,6 @@ lastupdated: "2019-02-05"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 
@@ -277,9 +276,9 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      ```
      {: pre}
 
-4.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](/docs/containers/cs_cli_reference.html#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
+4.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](/docs/containers/cs_cli_reference.html#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. For IAM-enabled services, you can also use the default **Writer** service access role, or specify the service access role with the `--role` flag. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials. If you use the `--key` flag, do not include the `--role` flag. 
     ```
-    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
+    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
     ```
     {: pre}
 

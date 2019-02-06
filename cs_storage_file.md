@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-05"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -20,11 +20,10 @@ lastupdated: "2019-02-05"
 
 
 
-
 # Storing data on IBM File Storage for IBM Cloud
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} File Storage is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} File Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers/cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/FileStorage/index.html#billing). 
+{{site.data.keyword.Bluemix_notm}} File Storage is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} File Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers/cs_storage_planning.html#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/FileStorage/index.html#billing).
 {: shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} File Storage is available for standard clusters only. NFS file storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
@@ -691,10 +690,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
       A stateful set is fully deployed when the number of replicas that you find in the **Replicas** section of your CLI output equals the number of **Running** pods in the **Pods Status** section. If a stateful set is not fully deployed yet, wait until the deployment is finished before you proceed.
 
-2. Create a configuration file for your stateful set and the service that you use to expose the stateful set. 
-  
+2. Create a configuration file for your stateful set and the service that you use to expose the stateful set.
+
   - **Example stateful set that specifies a zone:**
-   
+
     The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte file storage device is provisioned based on the specifications in the `ibmc-file-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because file storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto worker nodes that are located in `dal10`.
 
     ```
@@ -757,11 +756,11 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
              iops: "300" #required only for performance storage
     ```
     {: codeblock}
-     
+
   - **Example stateful set with anti-affinity rule and delayed file storage creation:**
-   
+
     The following example shows how to deploy nginx as a stateful set with 3 replicas. The stateful set does not specify the region and zone where the file storage is created. Instead, the stateful set uses an anti-affinity rule to ensure that the pods are spread across worker nodes and zones. Worker node anti-affinity is achieved by defining the `app: nignx` label. This label instructs the Kubernetes scheduler to not schedule a pod on a worker node if a pod with the same label already runs on this worker node. The `topologykey: failure-domain.beta.kubernetes.io/zone` label restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node that is located in the same zone as a worker node that already runs a pod with the `app: nignx` label. For each stateful set pod, two PVCs are created as defined in the `volumeClaimTemplates` section, but the creation of the file storage instances is delayed until a stateful set pod that uses the storage is scheduled. This setup is referred to as [topology-aware volume scheduling](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
-   
+
     ```
     apiVersion: storage.k8s.io/v1
     kind: StorageClass
@@ -840,7 +839,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
           - ReadWriteMany # access mode
           resources:
             requests:
-              storage: 20Gi 
+              storage: 20Gi
       - metadata:
           annotations:
             volume.beta.kubernetes.io/storage-class: ibmc-file-bronze-delayed
@@ -850,7 +849,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
           - ReadWriteMany # access mode
           resources:
             requests:
-              storage: 20Gi 
+              storage: 20Gi
     ```
     {: codeblock}
 
@@ -980,32 +979,32 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 ## Changing the size and IOPS of your existing storage device
 {: #file_change_storage_configuration}
 
-If you want to increase storage capacity or performance, you can modify your existing volume. 
+If you want to increase storage capacity or performance, you can modify your existing volume.
 {: shortdesc}
 
-For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding File Share capacity](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity). 
+For questions about billing and to find the steps for how to use the {{site.data.keyword.Bluemix_notm}} console to modify your storage, see [Expanding File Share capacity](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity).
 {: tip}
 
-1. List the PVCs in your cluster and note the name of the associated PV from the **VOLUME** column. 
+1. List the PVCs in your cluster and note the name of the associated PV from the **VOLUME** column.
    ```
    kubectl get pvc
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
    myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-file-bronze    147d
    ```
    {: screen}
-   
-2. Retrieve the **StorageType**, **volumeId**, and the **server** of the physical file storage that is associated with your PVC by listing the details of the PV that your PVC is bound to. Replace `<pv_name>` with the name of the PV that you retrieved in the previous step. The storage type, volume ID, and the server name are shown in the **Labels** section of your CLI output. 
+
+2. Retrieve the **StorageType**, **volumeId**, and the **server** of the physical file storage that is associated with your PVC by listing the details of the PV that your PVC is bound to. Replace `<pv_name>` with the name of the PV that you retrieved in the previous step. The storage type, volume ID, and the server name are shown in the **Labels** section of your CLI output.
    ```
    kubectl describe pv <pv_name>
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    Name:            pvc-4b62c704-5f77-11e8-8a75-b229c11ba64a
    Labels:          CapacityGb=20
@@ -1023,20 +1022,20 @@ For questions about billing and to find the steps for how to use the {{site.data
    ```
    {: screen}
 
-3. Modify the size or IOPS of your volume in your IBM Cloud infrastructure (SoftLayer) account. 
+3. Modify the size or IOPS of your volume in your IBM Cloud infrastructure (SoftLayer) account.
 
-   Example for performance storage: 
+   Example for performance storage:
    ```
    ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-iops <iops>
    ```
    {: pre}
-   
-   Example for endurance storage: 
+
+   Example for endurance storage:
    ```
    ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-tier <iops>
    ```
    {: pre}
-   
+
    <table>
    <caption>Understanding the command's components</caption>
    <thead>
@@ -1061,8 +1060,8 @@ For questions about billing and to find the steps for how to use the {{site.data
    </tr>
    </tbody>
    </table>
-   
-   Example output: 
+
+   Example output:
    ```
    Order 31020713 was placed successfully!.
    > Storage as a Service
@@ -1076,28 +1075,28 @@ For questions about billing and to find the steps for how to use the {{site.data
    You may run 'ibmcloud sl file volume-list --order 12345667' to find this file volume after it is ready.
    ```
    {: screen}
-   
-4. If you changed the size of your volume and you use the volume in a pod, log in to your pod to verify the new size. 
+
+4. If you changed the size of your volume and you use the volume in a pod, log in to your pod to verify the new size.
    1. List all the pods that use PVC.
       ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
       ```
       {: pre}
-      
-      Pods are returned in the format: `<pod_name>: <pvc_name>`. 
-   2. Log in to your pod. 
+
+      Pods are returned in the format: `<pod_name>: <pvc_name>`.
+   2. Log in to your pod.
       ```
       kubectl exec -it <pod_name> bash
       ```
       {: pre}
-      
-   3. Show the disk usage statistics and find the server path for your volume that you retrieved earlier. 
+
+   3. Show the disk usage statistics and find the server path for your volume that you retrieved earlier.
       ```
       df -h
       ```
       {: pre}
-      
-      Example output: 
+
+      Example output:
       ```
       Filesystem                                                      Size  Used Avail Use% Mounted on
       overlay                                                          99G  4.8G   89G   6% /
@@ -1106,7 +1105,7 @@ For questions about billing and to find the steps for how to use the {{site.data
       fsf-dal1001g-fz.adn.networklayer.com:/IBM01SEV1234567_6/data01   40G     0   40G   0% /myvol
       ```
       {: screen}
-   
+
 
 ## Changing the default NFS version
 {: #nfs_version}
@@ -1425,15 +1424,15 @@ To create your customized storage class, see [Customizing a storage class](/docs
 ### Creating topology-aware storage
 {: #file-topology}
 
-To use file storage in a multizone cluster, your pod must be scheduled in the same zone as your file storage instance so that you can read and write to the volume. Before topology-aware volume scheduling was introduced by Kubernetes, the dynamic provisioning of your storage automatically created the file storage instance when a PVC was created. Then, when you created your pod, the Kubernetes scheduler tried to deploy the pod to a worker node in the same data center as your file storage instance. 
+To use file storage in a multizone cluster, your pod must be scheduled in the same zone as your file storage instance so that you can read and write to the volume. Before topology-aware volume scheduling was introduced by Kubernetes, the dynamic provisioning of your storage automatically created the file storage instance when a PVC was created. Then, when you created your pod, the Kubernetes scheduler tried to deploy the pod to a worker node in the same data center as your file storage instance.
 {: shortdesc}
 
-Creating the file storage instance without knowing the constraints of the pod can lead to unwanted results. For example, your pod might not be able to be scheduled to the same worker node as your storage because the worker node has insufficient resources or the worker node is tainted and does not allow the pod to be scheduled. With topology-aware volume scheduling, the file storage instance is delayed until the first pod that uses the storage is created. 
+Creating the file storage instance without knowing the constraints of the pod can lead to unwanted results. For example, your pod might not be able to be scheduled to the same worker node as your storage because the worker node has insufficient resources or the worker node is tainted and does not allow the pod to be scheduled. With topology-aware volume scheduling, the file storage instance is delayed until the first pod that uses the storage is created.
 
-Topology-aware volume scheduling is supported on clusters that run Kubernetes version 1.12 or later only. 
+Topology-aware volume scheduling is supported on clusters that run Kubernetes version 1.12 or later only.
 {: note}
 
-The following examples show how to create storage classes that delay the creation of the file storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the file storage instance is created when you create the PVC. 
+The following examples show how to create storage classes that delay the creation of the file storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the file storage instance is created when you create the PVC.
 
 - **Example for Endurance file storage:**
   ```
@@ -1452,7 +1451,7 @@ The following examples show how to create storage classes that delay the creatio
   volumeBindingMode: WaitForFirstConsumer
   ```
   {: codeblock}
-  
+
 - **Example for Performance file storage:**
   ```
   apiVersion: storage.k8s.io/v1
@@ -1486,7 +1485,7 @@ The following examples show how to create storage classes that delay the creatio
 ### Specifying the zone for multizone clusters
 {: #file_multizone_yaml}
 
-If you want to create your file storage in a specific zone, you can specify the zone and region in a customized storage class. 
+If you want to create your file storage in a specific zone, you can specify the zone and region in a customized storage class.
 {: shortdesc}
 
 Use the customized storage class if you want to [statically provision file storage](#existing_file) in a specific zone. In all other cases, [specify the zone directly in your PVC](#add_file).
@@ -1515,7 +1514,7 @@ When you create the customized storage class, specify the same region and zone t
   volumeBindingMode: Immediate
   ```
   {: codeblock}
-  
+
 - **Example for Performance file storage:**
   ```
   apiVersion: storage.k8s.io/v1
@@ -1572,7 +1571,7 @@ The following customized storage class lets you define the NFS version that you 
     mountOptions: nfsvers=<nfs_version>
   ```
   {: codeblock}
-  
+
 - **Example for Performance file storage:**
   ```
   apiVersion: storage.k8s.io/v1
