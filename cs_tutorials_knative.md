@@ -158,7 +158,7 @@ Knative builds on top of Istio to ensure that your serverless and containerized 
 
    4. Verify that all pods of the Knative `Sources` component are in a `Running` state.
       ```
-      kubectl get pods --namespace knative-monitoring
+      kubectl get pods --namespace knative-sources
       ```
       {: pre}
 
