@@ -21,7 +21,7 @@ lastupdated: "2019-02-05"
 
 
 # Tutorial: Using Knative to run serverless apps in Kubernetes clusters
-{: #knative_tutorial}
+{: #knative_tutorial} 
 
 With this tutorial, you can learn how to install Knative in a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
