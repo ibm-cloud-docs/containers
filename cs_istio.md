@@ -4,9 +4,6 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-02-06"
 
-keywords: kubernetes, iks
-
-scope: containers
 ---
 
 {:new_window: target="_blank"}
@@ -26,8 +23,10 @@ scope: containers
 # Using the managed Istio add-on (beta)
 {: #istio}
 
-Istio on {{site.data.keyword.containerlong}} provides a one-step installation of Istio into your cluster. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.Bluemix_notm}} automatically keeps all your Istio components up to date.
+Istio on {{site.data.keyword.containerlong}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools.
 {: shortdesc}
+
+With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.Bluemix_notm}} automatically keeps all your Istio components up to date.
 
 ## Understanding Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_ov}
