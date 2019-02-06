@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -921,7 +921,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
       A stateful set is fully deployed when the number of replicas that you find in the **Replicas** section of your CLI output equals the number of **Running** pods in the **Pods Status** section. If a stateful set is not fully deployed yet, wait until the deployment is finished before you proceed.
 
-3. Create a configuration file for your stateful set and the service that you use to expose the stateful set. 
+2. Create a configuration file for your stateful set and the service that you use to expose the stateful set. 
 
    - **Example stateful set that specifies a zone:**
    
@@ -1628,10 +1628,10 @@ The following examples show how to create storage classes that delay the creatio
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
-   name: ibmc-file-performance-storageclass
+   name: ibmc-block-performance-storageclass
    labels:
      kubernetes.io/cluster-service: "true"
-  provisioner: ibm.io/ibmc-file
+  provisioner: ibm.io/ibmc-block
   parameters:
    billingType: "hourly"
    classVersion: "2"

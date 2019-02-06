@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -53,9 +53,6 @@ export IKS_BETA_VERSION=0.2
 
 ## ibmcloud ks commands
 {: #cs_commands}
-
-Review the list of {{site.data.keyword.containerlong_notm}} CLI commands that you can use to interact with your Kubernetes cluster. 
-{: shortdesc}
 
 **Tip:** To see the version of the {{site.data.keyword.containerlong_notm}} plug-in, run the following command.
 
@@ -123,22 +120,22 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
+    <td>[ibmcloud ks cluster-addon-disable](#cs_cluster_addon_disable)</td>
+    <td>[ibmcloud ks cluster-addon-enable](#cs_cluster_addon_enable)</td>
+    <td>[ibmcloud ks cluster-addons](#cs_cluster_addons)</td>
     <td>[ibmcloud ks cluster-config](#cs_cluster_config)</td>
+  </tr>
+  <tr>
     <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
     <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
     <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
+    <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
   </tr>
   <tr>
-    <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
     <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
     <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
-  </tr>
-  <tr>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
   </tr>
 </tbody>
 </table>
@@ -714,6 +711,228 @@ ibmcloud ks messages
 ## Cluster commands: Management
 {: #cluster_mgmt_commands}
 
+### ibmcloud ks cluster-addon-disable
+{: #cs_cluster_addon_disable}
+
+Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
+{: shortdesc}
+
+#### ibmcloud ks cluster-addon-disable istio --cluster CLUSTER [-f]
+{: #cs_cluster_addon_disable_istio}
+
+Disable the managed Istio add-on. Removes all Istio core components from the cluster, including Prometheus.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+   <dt><code>-f</code></dt>
+   <dd>Optional: This add-on is a dependency for the <code>istio-extras</code>, <code>istio-sample-bookinfo</code>, and <code>knative</code> managed add-ons. Include this flag to also disable those add-ons.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-disable istio --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable istio-extras --cluster CLUSTER [-f]
+{: #cs_cluster_addon_disable_istio_extras}
+
+Disable the managed Istio extras add-on. Removes Grafana, Jeager, and Kiali from the cluster.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>Optional: This add-on is a dependency for the <code>istio-sample-bookinfo</code> managed add-on. Include this flag to also disable that add-on.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-disable istio-extras --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster CLUSTER
+{: #cs_cluster_addon_disable_istio_sample_bookinfo}
+
+Disable the managed Istio BookInfo add-on. Removes all deployments, pods, and other BookInfo app resources from the cluster.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
+{: #cs_cluster_addon_disable_knative}
+
+Disable the managed Knative add-on to remove the Knative serverless framework from the cluster.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks cluster-addon-enable
+{: #cs_cluster_addon_enable}
+
+Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
+{: shortdesc}
+
+#### ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
+{: #cs_cluster_addon_enable_istio}
+
+Enable the managed Istio add-on. Installs the core components of Istio version 1.0.5, including Prometheus.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-enable istio --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
+{: #cs_cluster_addon_enable_istio_extras}
+
+Enable the managed Istio extras add-on. Installs Grafana, Jeager, and Kiali to provide extra monitoring, tracing, and visualization for Istio.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
+{: #cs_cluster_addon_enable_istio_sample_bookinfo}
+
+Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/) into the <code>default</code> namespace.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>Optional: Enable the <code>istio</code> and <code>istio-extras</code> add-on dependencies.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
+  ```
+  {: pre}
+
+#### ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
+{: #cs_cluster_addon_enable_knative}
+
+Enable the managed Knative add-on to install the Knative serverless framework.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>-y</code></dt>
+   <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addon-enable knative --cluster my_cluster
+  ```
+  {: pre}
+
+### ibmcloud ks cluster-addons --cluster CLUSTER
+{: #cs_cluster_addons}
+
+List managed add-ons that are enabled in a cluster.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  ibmcloud ks cluster-addons --cluster my_cluster
+  ```
+  {: pre}
+
 
 
 ### ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-s] [--yaml]
@@ -723,7 +942,7 @@ After logging in, download Kubernetes configuration data and certificates to con
 {: shortdesc}
 
 **Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.Bluemix_notm}} IAM service role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform role or only a service role, additional constraints apply.
-* **Platform**: If you have only a platform role, you can perform this command, but you need a [service role](/docs/containers/cs_users.html#platform) or a [custom RBAC policy](/docs/containers/cs_users.html#role-binding) to perform Kubernetes actions in the clsuter.
+* **Platform**: If you have only a platform role, you can perform this command, but you need a [service role](/docs/containers/cs_users.html#platform) or a [custom RBAC policy](/docs/containers/cs_users.html#role-binding) to perform Kubernetes actions in the cluster.
 * **Service**: If you have only a service role, you can perform this command. However, your cluster admin must give you the cluster name and ID, because you cannot run the `ibmcloud ks clusters` command or launch the {{site.data.keyword.containerlong_notm}} console to view clusters. After, you can [launch the Kubernetes dashboard from the CLI](/docs/containers/cs_app.html#db_cli) and work with Kubernetes.
 
 **Command options**:
@@ -773,7 +992,7 @@ Create a cluster in your organization. For free clusters, you specify the cluste
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
-<dd>The path to the YAML file to create your standard cluster. Instead of defining the characteristics of your cluster by using the options provided in this command, you can use a YAML file.  This value is optional for standard clusters and is not available for free clusters.
+<dd>The path to the YAML file to create your standard cluster. Instead of defining the characteristics of your cluster by using the options provided in this command, you can use a YAML file. This value is optional for standard clusters and is not available for free clusters.
 
 <p class="note">If you provide the same option in the command as parameter in the YAML file, the value in the command takes precedence over the value in the YAML. For example, you define a location in your YAML file and use the <code>--zone</code> option in the command, the value that you entered in the command option overrides the value in the YAML file.</p>
 
@@ -3500,7 +3719,7 @@ Resize your worker pool to increase or decrease the number of worker nodes that 
   ```
   {: pre}
 
-### ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-s]
+### ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-f] [-s]
 {: #cs_worker_pool_rm}
 
 Remove a worker pool from your cluster. All worker nodes in the pool are deleted. Your pods are rescheduled when you delete. To avoid downtime, be sure that you have enough workers to run your workload.
@@ -3515,6 +3734,8 @@ Remove a worker pool from your cluster. All worker nodes in the pool are deleted
     <dd>The name of the worker node pool that you want to remove. This value is required.</dd>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to remove the worker pool from. This value is required.</dd>
+  <dt><code>-f</code></dt>
+    <dd>Force the command to run without user prompts. This value is optional.</dd>
   <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>

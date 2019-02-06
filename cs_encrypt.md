@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -71,7 +71,6 @@ When you create a cluster, secrets for your {{site.data.keyword.registrylong}} c
 * From an image in your {{site.data.keyword.registryshort_notm}} registry that is stored in a different {{site.data.keyword.Bluemix_notm}} region or {{site.data.keyword.Bluemix_notm}} account.
 * From an image that is stored in an {{site.data.keyword.Bluemix_notm}} Dedicated account.
 * From an image that is stored in an external, private registry.
-{: shortdesc}
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-06"
 
 ---
 
@@ -30,6 +30,7 @@ For more information about major, minor, and patch versions and preparation acti
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
+-  Version 1.13 [changelog](#113_changelog).
 -  Version 1.12 [changelog](#112_changelog).
 -  Version 1.11 [changelog](#111_changelog).
 -  Version 1.10 [changelog](#110_changelog).
@@ -40,11 +41,218 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 </br>
 
+## Version 1.13 changelog
+{: #113_changelog}
+
+### Changelog for 1.13.2_1507, released 5 February 2019
+{: #1124_1534}
+
+The following table shows the changes that are included in the patch 1.13.2_1507.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.4_1535">
+<caption>Changes since version 1.12.4_1535</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.3.1</td>
+<td>v3.4.0</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.4/releases/#v340).</td>
+</tr>
+<tr>
+<td>Cluster DNS provider</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>CoreDNS is now the default cluster DNS provider for new clusters. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers/cs_cluster_update.html#dns_set).</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.2.2</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.2).</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.2</td>
+<td>1.2.6</td>
+<td>See the [CoreDNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coredns/coredns/releases/tag/v1.2.6). Additionally, the CoreDNS configuration is updated to [support multiple Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/).</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Updated images for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.4-118</td>
+<td>v1.13.2-62</td>
+<td>Updated to support the Kubernetes 1.13.2 release. Additionally, `calicoctl` version is updated to 3.4.0. Fixed unnecessary configuration updates to version 2.0 load balancers on worker node status changes.</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in</td>
+<td>338</td>
+<td>342</td>
+<td>The file storage plug-in is updated as follows:
+<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers/cs_storage_file.html#file-topology).</li>
+<li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
+<li>Adds a failure message annotation to failed PVCs.</li>
+<li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
+<li>Checks user permissions before starting the provisioning.</li>
+<li>Adds a `CriticalAddonsOnly` toleration to the `ibm-file-plugin` and `ibm-storage-watcher` deployments in the `kube-system` namespace.</li></ul></td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>111</td>
+<td>122</td>
+<td>Added retry logic to avoid temporary failures when Kubernetes secrets are managed by {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.4</td>
+<td>v1.13.2</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.2).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The Kubernetes API server audit policy configuration is updated to include logging metadata for `cluster-admin` requests and logging the request body of workload `create`, `update`, and `patch` requests.</td>
+</tr>
+<tr>
+<td>Kubernetes DNS autoscaler</td>
+<td>1.2.0</td>
+<td>1.3.0</td>
+<td>See the [Kubernetes DNS autoscaler release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.3.0).</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Added `CriticalAddonsOnly` toleration to the `vpn` deployment in the `kube-system` namespace. Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Security patch for [CVE-2018-16864 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
 ## Version 1.12 changelog
 {: #112_changelog}
 
 Review the version 1.12 changelog. 
 {: shortdesc}
+
+### Changelog for 1.12.5_1537, released 5 February 2019
+{: #1125_1537}
+
+The following table shows the changes that are included in the patch 1.12.5_1537.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.4_1535">
+<caption>Changes since version 1.12.4_1535</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Updated images for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.4-118</td>
+<td>v1.12.5-137</td>
+<td>Updated to support the Kubernetes 1.12.5 release. Additionally, `calicoctl` version is updated to 3.3.1. Fixed unnecessary configuration updates to version 2.0 load balancers on worker node status changes.</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in</td>
+<td>338</td>
+<td>342</td>
+<td>The file storage plug-in is updated as follows:
+<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers/cs_storage_file.html#file-topology).</li>
+<li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
+<li>Adds a failure message annotation to failed PVCs.</li>
+<li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
+<li>Checks user permissions before starting the provisioning.</li></ul></td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>111</td>
+<td>122</td>
+<td>Added retry logic to avoid temporary failures when Kubernetes secrets are managed by {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.4</td>
+<td>v1.12.5</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.5).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The Kubernetes API server audit policy configuration is updated to include logging metadata for `cluster-admin` requests and logging the request body of workload `create`, `update`, and `patch` requests.</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Security patch for [CVE-2018-16864 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.4_1535, released 28 January 2019
 {: #1124_1535}
@@ -334,7 +542,7 @@ The following table shows the changes that are included in patch 1.12.2_1527.
 <td>Cluster DNS provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Kubernetes DNS (KubeDNS) remains the default cluster DNS provider. However, you now have the option to [change the cluster DNS provide to CoreDNS](/docs/containers/cs_cluster_update.html#dns).</td>
+<td>Kubernetes DNS (KubeDNS) remains the default cluster DNS provider. However, you now have the option to [use CoreDNS instead](/docs/containers/cs_cluster_update.html#dns_set).</td>
 </tr>
 <tr>
 <td>Cluster metrics provider</td>
@@ -407,6 +615,91 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for 1.11.7_1543, released 5 February 2019
+{: #1117_1543}
+
+The following table shows the changes that are included in the patch 1.11.7_1543.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.6_1541">
+<caption>Changes since version 1.11.6_1541</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Updated images for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.6-180</td>
+<td>v1.11.7-198</td>
+<td>Updated to support the Kubernetes 1.11.7 release. Additionally, `calicoctl` version is updated to 3.3.1. Fixed unnecessary configuration updates to version 2.0 load balancers on worker node status changes.</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in</td>
+<td>338</td>
+<td>342</td>
+<td>The file storage plug-in is updated as follows:
+<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers/cs_storage_file.html#file-topology).</li>
+<li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
+<li>Adds a failure message annotation to failed PVCs.</li>
+<li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
+<li>Checks user permissions before starting the provisioning.</li></ul></td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>111</td>
+<td>122</td>
+<td>Added retry logic to avoid temporary failures when Kubernetes secrets are managed by {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.6</td>
+<td>v1.11.7</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.7).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The Kubernetes API server audit policy configuration is updated to include logging metadata for `cluster-admin` requests and logging the request body of workload `create`, `update`, and `patch` requests.</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Security patch for [CVE-2018-16864 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019
 {: #1116_1541}
@@ -1122,6 +1415,79 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 {: #110_changelog}
 
 Review the version 1.10 changelog.
+
+### Changelog for 1.10.12_1543, released 5 February 2019
+{: #1117_1543}
+
+The following table shows the changes that are included in the patch 1.10.12_1543.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.12_1541">
+<caption>Changes since version 1.10.12_1541</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd</td>
+<td>v3.3.1</td>
+<td>v3.3.11</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>13fdc0d</td>
+<td>eb3a259</td>
+<td>Updated images for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>IBM file storage plug-in</td>
+<td>338</td>
+<td>342</td>
+<td>The file storage plug-in is updated as follows:
+<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers/cs_storage_file.html#file-topology).</li>
+<li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
+<li>Adds a failure message annotation to failed PVCs.</li>
+<li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
+<li>Checks user permissions before starting the provisioning.</li></ul></td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>111</td>
+<td>122</td>
+<td>Added retry logic to avoid temporary failures when Kubernetes secrets are managed by {{site.data.keyword.keymanagementservicefull_notm}}.</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The Kubernetes API server audit policy configuration is updated to include logging metadata for `cluster-admin` requests and logging the request body of workload `create`, `update`, and `patch` requests.</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407). Additionally, the pod configuration is now obtained from a secret instead of from a configmap.</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-8</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>Updated image for [CVE-2018-0734 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734) and [CVE-2018-5407 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407).</td>
+</tr>
+<tr>
+<td>systemd</td>
+<td>230</td>
+<td>229</td>
+<td>Security patch for [CVE-2018-16864 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16864).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.12_1541, released 28 January 2019
 {: #11012_1541}

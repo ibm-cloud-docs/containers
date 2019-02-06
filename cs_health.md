@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -352,18 +352,17 @@ The following steps are general instructions. Prior to using the container in a 
 ### Verifying log forwarding
 {: verify-logging}
 
-You can verify that your configuration is set up correctly by using the `{[bxcs]}` CLI. 
-{: shortdesc}
+You can verify that your configuration is set up correctly in one of two ways:
 
 * To list all of the logging configurations in a cluster:
     ```
-    {[bxcs]} logging-config-get --cluster <cluster_name_or_ID>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 * To list the logging configurations for one type of log source:
     ```
-    {[bxcs]} logging-config-get --cluster <cluster_name_or_ID> --logsource <source>
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID> --logsource <source>
     ```
     {: pre}
 
