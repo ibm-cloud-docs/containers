@@ -720,7 +720,7 @@ The following table shows the Kubernetes resource permissions granted by each se
 ## Kubernetes resource permissions per RBAC role
 {: #rbac}
 
-Every user who is assigned an {{site.data.keyword.Bluemix_notm}} IAM service access role is also automatically assigned a corresponding, predefined Kubernetes role-based access control (RBAC) role.
+Every user who is assigned an {{site.data.keyword.Bluemix_notm}} IAM service access role is also automatically assigned a corresponding, predefined Kubernetes role-based access control (RBAC) role. If you plan to manage your own custom Kubernetes RBAC roles, see [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers/cs_users.html#rbac).
 {: shortdesc}
 
 Wondering if you have the correct permissions to run a certain `kubectl` command on a resource in a namespace? Try the [`kubectl auth can-i` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-can-i-em-).
