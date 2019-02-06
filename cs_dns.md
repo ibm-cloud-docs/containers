@@ -145,8 +145,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
               cache 30
               proxy . 1.2.3.4
           }
-          ```
-          {: screen}
+        ```
+        {: screen}
           **Kubernetes version 1.12 example output**:
           ```
           apiVersion: v1
@@ -176,8 +176,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
                 reload
                 loadbalance
             }
-            ```
-            {: screen}
+          ```
+          {: screen}
     *   **For KubeDNS**: Configure stubdomains and upstream nameservers in the `data` section of the configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns).
         ```
         kubectl edit configmap -n kube-system kube-dns
