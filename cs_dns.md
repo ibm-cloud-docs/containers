@@ -76,7 +76,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: screen}
 
-## Customing the cluster DNS provider
+## Customizing the cluster DNS provider
 {: #dns_customize}
 
 You can customize your {{site.data.keyword.containerlong_notm}} cluster DNS provider by editing the DNS configmap. For example, you might want to configure stubdomains and upstream nameservers to resolve services that point to external hosts. Additionally, if you use CoreDNS, you can configure multiple [Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/) within the CoreDNS configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
@@ -147,7 +147,6 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
           }
           ```
           {: screen}
-          
           **Kubernetes version 1.12 example output**:
           ```
           apiVersion: v1
@@ -177,8 +176,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
                 reload
                 loadbalance
             }
-          ```
-          {: screen}
+            ```
+            {: screen}
     *   **For KubeDNS**: Configure stubdomains and upstream nameservers in the `data` section of the configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns).
         ```
         kubectl edit configmap -n kube-system kube-dns
@@ -230,31 +229,26 @@ Set up CoreDNS instead of KubeDNS as the cluster DNS provider.
 {: shortdesc}
 
 1.  If you customized the `kube-dns` configmap in the `kube-system` namespace, transfer any [DNS customizations ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) to the `coredns` configmap in the `kube-system` namespace. Note that the syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [Installing CoreDNS via Kubeadm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in the CoreDNS docs.
-
 2.  Scale down the KubeDNS autoscaler deployment.
     ```
     kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
     ```
     {: pre}
-
 3.  Check and wait for the pods to be deleted.
     ```
     kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
     ```
     {: pre}
-
 4.  Scale down the KubeDNS deployment.
     ```
     kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
     ```
     {: pre}
-
 5.  Scale up the CoreDNS autoscaler deployment.
     ```
     kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
     ```
     {: pre}
-
 6.  Label and annotate the cluster DNS service for CoreDNS.
     ```
     kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
@@ -282,31 +276,26 @@ Set up KubeDNS instead of CoreDNS as the cluster DNS provider.
 {: shortdesc}
 
 1.  If you customized the `coredns` configmap in the `kube-system` namespace, transfer any [DNS customizations ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) to the `kube-dns` configmap in the `kube-system` namespace. Note that the syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [Installing CoreDNS via Kubeadm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in the CoreDNS docs.
-
 2.  Scale down the CoreDNS autoscaler deployment.
     ```
     kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
     ```
     {: pre}
-
 3.  Check and wait for the pods to be deleted.
     ```
     kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
     ```
     {: pre}
-
 4.  Scale down the CoreDNS deployment.
     ```
     kubectl scale deployment -n kube-system --replicas=0 coredns
     ```
     {: pre}
-
 5.  Scale up the KubeDNS autoscaler deployment.
     ```
     kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
     ```
     {: pre}
-
 6.  Label and annotate the cluster DNS service for KubeDNS.
     ```
     kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
