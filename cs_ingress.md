@@ -92,7 +92,7 @@ Have you already completed the following?
 - Enable private ALB
 - Deploy app
 - Create app service
-- Select domain name and TLS secret
+- Register custom domain name and TLS secret
 
 You can use the following deployment YAML to create an Ingress resource:
 

@@ -232,7 +232,7 @@ Install Istio managed add-ons in an existing cluster.
     {: screen}
 
 ### Installing managed Istio add-ons in the UI
-{: #istio_install_cli}
+{: #istio_install_ui}
 
 1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters), click the name of a version 1.10 or later cluster.
 
@@ -335,7 +335,7 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
 
 
 
-Next, you can [log, monitor, trace, and visualize](#istio_health) the microservice mesh for the BookInfo app.
+Next, you can  [log, monitor, trace, and visualize](#istio_health) the service mesh for the BookInfo app.
 
 <br />
 
