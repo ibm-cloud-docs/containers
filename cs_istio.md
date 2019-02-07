@@ -37,7 +37,7 @@ With one click, you can get all Istio core components, additional tracing, monit
 [Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/info/istio) is an open service mesh platform to connect, secure, control, and observe microservices on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
-When you shift monolith applications to a distributed microservice architecture, a set of new challenges arise such as how to control the traffic of your microservices, how to do dark launches and canary rollouts of your services, handle failures, secure the service communication, observe the services, and enforce consistent access policies across the fleet of services. To address these difficulties, you can leverage a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by allowing you to manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
+When you shift monolith applications to a distributed microservice architecture, a set of new challenges arise such as how to control the traffic of your microservices, do dark launches and canary rollouts of your services, handle failures, secure the service communication, observe the services, and enforce consistent access policies across the fleet of services. To address these difficulties, you can leverage a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by allowing you to manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
 
 For example, using Istio in your microservice mesh can help you:
 - Achieve better visibility into the apps running in your cluster
@@ -59,7 +59,7 @@ When you install the Istio add-on, the Istio control and data planes use the VLA
 **How does the update process work?**</br>
 The Istio version in the managed add-on is tested by {{site.data.keyword.Bluemix_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. Additionally, the Istio add-on simplifies the maintenance of your Istio control plane so you can focus on managing your microservices. {{site.data.keyword.Bluemix_notm}} keeps all your Istio components up-to-date by automatically rolling out updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}.  
 
-If you want to use the latest version of Istio or want to customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.Bluemix_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/).
+If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.Bluemix_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/).
 {: tip}
 
 <br />
@@ -89,7 +89,7 @@ Istio on {{site.data.keyword.containerlong_notm}} is offered as three managed ad
 <dd>Optional: Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/). This deployment includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.</dd>
 </dl>
 
-<br><br>
+<br>
 You can always see which Istio add-ons are enabled in your cluster by running the following command:
 ```
 ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
@@ -105,7 +105,7 @@ The `istio` managed add-on can be installed into a free cluster. To also install
 ## Installing Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_install}
 
-Install managed Istio add-ons in an existing cluster.
+Install Istio managed add-ons in an existing cluster.
 {: shortdesc}
 
 **Before you begin**</br>
@@ -460,7 +460,7 @@ To enable automatic sidecar injection for a namespace:
     ```
     {: pre}
 
-The app pods are integrated into your Istio service mesh because they have the Istio sidecar container running alongside your app container.
+The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container running alongside your app container.
 
 ### Manually injecting sidecars
 {: #istio_sidecar_manual}
@@ -474,7 +474,7 @@ To manually inject sidecars into a deployment:
   curl -L https://git.io/getIstio | sh -
   ```
 
-2. Change the directory to the Istio package directory.
+2. Navigate to the Istio package directory.
   ```
   cd istio-1.0.5
   ```
@@ -484,6 +484,7 @@ To manually inject sidecars into a deployment:
   ```
   istioctl kube-inject -f <myapp>.yaml | kubectl apply -f -
   ```
+  {: pre}
 
 4. Deploy your app.
   ```
@@ -491,7 +492,7 @@ To manually inject sidecars into a deployment:
   ```
   {: pre}
 
-The app pods are integrated into your Istio service mesh because they have the Istio sidecar container running alongside your app container.
+The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container running alongside your app container.
 
 <br />
 
