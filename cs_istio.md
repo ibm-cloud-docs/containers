@@ -335,7 +335,7 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
 
 
 
-Next, you can  [log, monitor, trace, and visualize](#istio_health) the service mesh for the BookInfo app.
+Next, you can [log, monitor, trace, and visualize](#istio_health) the service mesh for the BookInfo app.
 
 <br />
 
