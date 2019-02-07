@@ -622,7 +622,7 @@ spec:
 </tr>
 <tr>
 <td><code>rewrite</code></td>
-<td>Replace <code>&lt;<em>target_path</em>&gt;</code> with the path that your app listens on. Incoming network traffic on the ALB domain is forwarded to the Kubernetes service by using this path. Most apps do not listen on a specific path, but use the root path and a specific port. In the example above, the rewrite path was defined as <code>/coffee</code>.</td>
+<td>Replace <code>&lt;<em>target_path</em>&gt;</code> with the path that your app listens on. Incoming network traffic on the ALB domain is forwarded to the Kubernetes service by using this path. Most apps do not listen on a specific path, but use the root path and a specific port. In the example for <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code>, the rewrite path is <code>/coffee</code>. <strong>Note</strong>: If you apply this file and the URL shows a <code>404</code> response, your backend app might be listening on a path that ends in `/`. Try adding a trailing `/` to this rewrite field, then reapply the file and try the URL again.</td>
 </tr>
 </tbody></table>
 

@@ -37,7 +37,7 @@ With one click, you can get all Istio core components, additional tracing, monit
 [Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/info/istio) is an open service mesh platform to connect, secure, control, and observe microservices on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
-When you shift monolith applications to a distributed microservice architecture, the connections between your microservices begin to form a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by allowing you to manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
+When you shift monolith applications to a distributed microservice architecture, a set of new challenges arise such as how to control the traffic of your microservices, how to do dark launches and canary rollouts of your services, handle failures, secure the service communication, observe the services, and enforce consistent access policies across the fleet of services. To address these difficulties, you can leverage a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by allowing you to manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
 
 For example, using Istio in your microservice mesh can help you:
 - Achieve better visibility into the apps running in your cluster
@@ -45,7 +45,7 @@ For example, using Istio in your microservice mesh can help you:
 - Enable automatic encryption of data that is transferred between microservices
 - Enforce rate limiting and attribute-based whitelist and blacklist policies
 
-An Istio service mesh is composed of a data plane and a control plane. The data plane consists of Envoy proxy sidecars in each app pod, which mediate communication between microservices, and Mixer pods, which manage policies and telemetry. The control plane consists of the Pilot, Mixer, Citadel, and the API server components, which configure the Envoy proxy sidecars and Mixer pods. For more information about each of these components, see the [`istio` add-on description](#istio_components).
+An Istio service mesh is composed of a data plane and a control plane. The data plane consists of Envoy proxy sidecars in each app pod, which mediate communication between microservices. The control plane consists of Pilot, Mixer telemetry and policy, and Citadel, which apply Istio configurations in your cluster. For more information about each of these components, see the [`istio` add-on description](#istio_components).
 
 ### What is Istio on {{site.data.keyword.containerlong_notm}} (beta)?
 {: #istio_ov_addon}
@@ -116,13 +116,25 @@ Install managed Istio add-ons in an existing cluster.
 ### Installing managed Istio add-ons in the CLI
 {: #istio_install_cli}
 
-1. Enable the `istio-sample-bookinfo` add-on and include the `-y` flag. The `-y` flag also installs the other Istio add-ons, `istio` and `istio-extras`, because they are dependencies for BookInfo.
+1. Enable the `istio` add-on.
   ```
-  ibmcloud ks cluster-addon-enable istio-sample-bookinfo -y --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster-addon-enable istio --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
-2. Verify that all managed Istio add-ons are enabled in this cluster.
+2. Optional: Enable the `istio-extras` add-on.
+  ```
+  ibmcloud ks cluster-addon-enable istio-extras --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+3. Optional: Enable the `istio-sample-bookinfo` add-on.
+  ```
+  ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+4. Verify that the managed Istio add-ons that you installed are enabled in this cluster.
   ```
   ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   ```
@@ -137,7 +149,7 @@ Install managed Istio add-ons in an existing cluster.
   ```
   {: screen}
 
-3. You can also check out the individual components of each add-on in your cluster.
+5. You can also check out the individual components of each add-on in your cluster.
   - Components of `istio` and `istio-extras`: Ensure that the Istio services and their corresponding pods are deployed.
     ```
     kubectl get svc -n istio-system
@@ -319,7 +331,9 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
     ```
     {: pre}
 
-4. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars. The changes between each version are the results of the `v1`, `v2`, and `v3` of the `reviews` microservice being randomly called each time. The versions are selected randomly because the destination rules that are applied to the BookInfo app give equal weight to the `v1`, `v2`, and `v3` of the `reviews` microservice. To see the destination rules that are applied to BookInfo, run `kubectl get destinationrules -o yaml`.
+4. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars. The changes that you see are the result of the different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice that are called randomly each time. The versions are selected randomly because the destination rules that are applied to the BookInfo app give equal weight to the `v1`, `v2`, and `v3` of the `reviews` microservice. To see the destination rules that are applied to BookInfo, run `kubectl get destinationrules -o yaml`.
+
+
 
 Next, you can [log, monitor, trace, and visualize](#istio_health) the microservice mesh for the BookInfo app.
 
@@ -329,10 +343,10 @@ Next, you can [log, monitor, trace, and visualize](#istio_health) the microservi
 ## Logging, monitoring, tracing, and visualizing Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_health}
 
-To log, monitor, trace, and visualize your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}, you can launch the Grafana, Jaeger, and Kaili dashboards that are installed in the `istio-extras` add-on or deploy LogDNA and Sysdig as a third-party services to your worker nodes.
+To log, monitor, trace, and visualize your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}, you can launch the Grafana, Jaeger, and Kiali dashboards that are installed in the `istio-extras` add-on or deploy LogDNA and Sysdig as a third-party services to your worker nodes.
 {: shortdesc}
 
-### Launching the Grafana, Jaeger, and Kaili dashboards
+### Launching the Grafana, Jaeger, and Kiali dashboards
 {: #istio_health_extras}
 
 The Istio extras add-on (`istio-extras`) installs [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/). Launch the dashboards for each of these services to provide extra monitoring, tracing, and visualization for Istio.
@@ -455,7 +469,7 @@ If you do not want to enable automatic sidecar injection on a namespace, you can
 
 To manually inject sidecars into a deployment:
 
-1. Download the the `istioctl` client.
+1. Download the `istioctl` client.
   ```
   curl -L https://git.io/getIstio | sh -
   ```
