@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-06"
+lastupdated: "2019-02-07"
 
 ---
 
@@ -1870,6 +1870,9 @@ Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_not
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
+To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting) set by {{site.data.keyword.cloudcerts_short}}, wait at least 45 seconds in between successive `alb-cert-deploy` and `alb-cert-deploy --update` commands.
+{: note}
+
 <strong>Command options</strong>
 
    <dl>
@@ -1957,6 +1960,9 @@ Remove an ALB secret in a cluster.
 {: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting) set by {{site.data.keyword.cloudcerts_short}}, wait at least 45 seconds in between successive `alb-cert-rm` commands.
+{: note}
 
 <strong>Command options</strong>
 
