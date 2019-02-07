@@ -442,7 +442,7 @@ To add block storage:
          resources:
            requests:
              storage: 24Gi
-	   storageClassName: ibmc-block-silver
+	     storageClassName: ibmc-block-silver
        ```
        {: codeblock}
 
@@ -465,7 +465,7 @@ To add block storage:
            requests:
              storage: 45Gi
              iops: "300"
-	   storageClassName: ibmc-block-retain-custom
+	     storageClassName: ibmc-block-retain-custom
        ```
        {: codeblock}
 
