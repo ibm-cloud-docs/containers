@@ -158,23 +158,23 @@ Install managed Istio add-ons in an existing cluster.
 
     ```
     NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
-    grafana                  ClusterIP      172.21.98.154    <none>          3000/TCP                                                       58m
-    istio-citadel            ClusterIP      172.21.221.65    <none>          8060/TCP,9093/TCP                                              58m
-    istio-egressgateway      ClusterIP      172.21.46.253    <none>          80/TCP,443/TCP                                                 58m
-    istio-galley             ClusterIP      172.21.125.77    <none>          443/TCP,9093/TCP                                               58m
+    grafana                  ClusterIP      172.21.98.154    <none>          3000/TCP                                                       2m
+    istio-citadel            ClusterIP      172.21.221.65    <none>          8060/TCP,9093/TCP                                              2m
+    istio-egressgateway      ClusterIP      172.21.46.253    <none>          80/TCP,443/TCP                                                 2m
+    istio-galley             ClusterIP      172.21.125.77    <none>          443/TCP,9093/TCP                                               2m
     istio-ingressgateway     LoadBalancer   172.21.230.230   169.46.56.125   80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
-                                                                             8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP   58m
-    istio-pilot              ClusterIP      172.21.171.29    <none>          15010/TCP,15011/TCP,8080/TCP,9093/TCP                          58m
-    istio-policy             ClusterIP      172.21.140.180   <none>          9091/TCP,15004/TCP,9093/TCP                                    58m
-    istio-sidecar-injector   ClusterIP      172.21.248.36    <none>          443/TCP                                                        58m
-    istio-telemetry          ClusterIP      172.21.204.173   <none>          9091/TCP,15004/TCP,9093/TCP,42422/TCP                          58m
-    jaeger-agent             ClusterIP      None             <none>          5775/UDP,6831/UDP,6832/UDP                                     58m
-    jaeger-collector         ClusterIP      172.21.65.195    <none>          14267/TCP,14268/TCP                                            58m
-    jaeger-query             ClusterIP      172.21.171.199   <none>          16686/TCP                                                      58m
-    kiali                    ClusterIP      172.21.13.35     <none>          20001/TCP                                                      58m
-    prometheus               ClusterIP      172.21.105.229   <none>          9090/TCP                                                       58m
-    tracing                  ClusterIP      172.21.125.177   <none>          80/TCP                                                         58m
-    zipkin                   ClusterIP      172.21.1.77      <none>          9411/TCP                                                       58m
+                                                                              8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP   2m
+    istio-pilot              ClusterIP      172.21.171.29    <none>          15010/TCP,15011/TCP,8080/TCP,9093/TCP                          2m
+    istio-policy             ClusterIP      172.21.140.180   <none>          9091/TCP,15004/TCP,9093/TCP                                    2m
+    istio-sidecar-injector   ClusterIP      172.21.248.36    <none>          443/TCP                                                        2m
+    istio-telemetry          ClusterIP      172.21.204.173   <none>          9091/TCP,15004/TCP,9093/TCP,42422/TCP                          2m
+    jaeger-agent             ClusterIP      None             <none>          5775/UDP,6831/UDP,6832/UDP                                     2m
+    jaeger-collector         ClusterIP      172.21.65.195    <none>          14267/TCP,14268/TCP                                            2m
+    jaeger-query             ClusterIP      172.21.171.199   <none>          16686/TCP                                                      2m
+    kiali                    ClusterIP      172.21.13.35     <none>          20001/TCP                                                      2m
+    prometheus               ClusterIP      172.21.105.229   <none>          9090/TCP                                                       2m
+    tracing                  ClusterIP      172.21.125.177   <none>          80/TCP                                                         2m
+    zipkin                   ClusterIP      172.21.1.77      <none>          9411/TCP                                                       2m
     ```
     {: screen}
 
@@ -185,18 +185,18 @@ Install managed Istio add-ons in an existing cluster.
 
     ```
     NAME                                      READY   STATUS    RESTARTS   AGE
-    grafana-76dcdfc987-94ldq                  1/1     Running   0          52m
-    istio-citadel-869c7f9498-wtldz            1/1     Running   0          52m
-    istio-egressgateway-69bb5d4585-qxxbp      1/1     Running   0          52m
-    istio-galley-75d7b5bdb9-c9d9n             1/1     Running   0          52m
-    istio-ingressgateway-5c8764db74-gh8xg     1/1     Running   0          52m
-    istio-pilot-55fd7d886f-vv6fb              2/2     Running   0          52m
-    istio-policy-6bb6f6ddb9-s4c8t             2/2     Running   0          52m
-    istio-sidecar-injector-7d9845dbb7-r8nq5   1/1     Running   0          52m
-    istio-telemetry-7695b4c4d4-tlvn8          2/2     Running   0          52m
-    istio-tracing-55bbf55878-z4rd2            1/1     Running   0          52m
-    kiali-77566cc66c-kh6lm                    1/1     Running   0          52m
-    prometheus-5d5cb44877-lwrqx               1/1     Running   0          52m
+    grafana-76dcdfc987-94ldq                  1/1     Running   0          2m
+    istio-citadel-869c7f9498-wtldz            1/1     Running   0          2m
+    istio-egressgateway-69bb5d4585-qxxbp      1/1     Running   0          2m
+    istio-galley-75d7b5bdb9-c9d9n             1/1     Running   0          2m
+    istio-ingressgateway-5c8764db74-gh8xg     1/1     Running   0          2m
+    istio-pilot-55fd7d886f-vv6fb              2/2     Running   0          2m
+    istio-policy-6bb6f6ddb9-s4c8t             2/2     Running   0          2m
+    istio-sidecar-injector-7d9845dbb7-r8nq5   1/1     Running   0          2m
+    istio-telemetry-7695b4c4d4-tlvn8          2/2     Running   0          2m
+    istio-tracing-55bbf55878-z4rd2            1/1     Running   0          2m
+    kiali-77566cc66c-kh6lm                    1/1     Running   0          2m
+    prometheus-5d5cb44877-lwrqx               1/1     Running   0          2m
     ```
     {: screen}
 
@@ -208,10 +208,10 @@ Install managed Istio add-ons in an existing cluster.
 
     ```
     NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
-    details                   ClusterIP      172.21.19.104    <none>         9080/TCP         1m
-    productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         1m
-    ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         1m
-    reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         1m
+    details                   ClusterIP      172.21.19.104    <none>         9080/TCP         2m
+    productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         2m
+    ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         2m
+    reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         2m
     ```
     {: screen}
 
@@ -427,7 +427,7 @@ For more information on referencing metrics and dashboards, monitoring Istio int
 Ready to manage your own apps by using Istio? Before you deploy your app, you must first decide how you want to inject the Envoy proxy sidecars into app pods.
 {: shortdesc}
 
-Each pod in the mesh must be running an Envoy proxy sidecar so that the microservices can be included in the service mesh. You can make sure sidecars are injected into each app pod automatically or manually. For more information about sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/).
+Each app pod must be running an Envoy proxy sidecar so that the microservices can be included in the service mesh. You can make sure sidecars are injected into each app pod automatically or manually. For more information about sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/).
 
 ### Enabling automatic sidecar injection
 {: #istio_sidecar_automatic}
@@ -494,6 +494,8 @@ To manually inject sidecars into a deployment:
 The app pods are integrated into your Istio service mesh because they have the Istio sidecar container running alongside your app container.
 
 <br />
+
+
 
 
 ## Uninstalling Istio on {{site.data.keyword.containerlong_notm}}
