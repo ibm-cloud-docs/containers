@@ -84,9 +84,9 @@ You can customize your {{site.data.keyword.containerlong_notm}} cluster DNS prov
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-1.  Verify that the cluster DNS provider deployment is available. You might have the autoscaler for the KubeDNS, the CoreDNS, or both DNS providers installed in your cluster. If you have both DNS autoscalers installed, find the one that is in use by looking at the **AVAILABLE** column in your CLI output. The deployment that is in use is listed with 1 available deployment, and does not have `autoscaler` in the name.
+1.  Verify that the cluster DNS provider deployment is available. You might have the DNS cluster provider for KubeDNS, CoreDNS, or both DNS providers installed in your cluster. If you have both DNS providers installed, find the one that is in use by looking at the **AVAILABLE** column in your CLI output. The deployment that is in use is listed with 1 available deployment.
     ```
-    kubectl get deployment -n kube-system | grep dns
+    kubectl get deployment -n kube-system -l k8s-app=kube-dns
     ```
     {: pre}
     
