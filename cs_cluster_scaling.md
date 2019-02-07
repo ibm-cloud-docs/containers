@@ -606,7 +606,7 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 You can upgrade the existing cluster autoscaler Helm chart to the latest version.
 {: shortdesc}
 
-Updating to Helm chart 1.0.3 from a previous version? First, [remove](#ca_rm) your current Helm chart. Then, [install](#ca_helm) the Helm chart version 1.0.3.
+Updating to Helm chart 1.0.3 from a previous version? First, save your cluster autoscaler [configmap](#ca_cm) and [settings](#ca_chart_values). Then, [remove](#ca_rm) your current Helm chart. Finally, [install](#ca_helm) the Helm chart version 1.0.3 and reapply the [configmap](#ca_cm) and [settings](#ca_chart_values).
 {: note}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
