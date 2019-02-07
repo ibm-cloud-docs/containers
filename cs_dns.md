@@ -99,55 +99,15 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     kube-dns-autoscaler    1         1         1            1           89d
     ```
     {: screen}
-2.  Get the name of the configmap for the cluster DNS provider.
-    ```
-    kubectl get configmap -n kube-system
-    ```
-    {: pre}    
-3.  Edit the default settings for the CoreDNS or KubeDNS configmap.
+2.  Edit the default settings for the CoreDNS or KubeDNS configmap.
     
-    *   **For CoreDNS**: Use multiple Corefiles in the `data` section of the configmap to customize stubdomains and upstream nameservers. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns).
+    *   **For CoreDNS**: Use a Corefile in the `data` section of the configmap to customize stubdomains and upstream nameservers. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns).
         ```
         kubectl edit configmap -n kube-system coredns
         ```
         {: pre}
     
-        **Kubernetes version 1.13 or later example output**:
-        ```
-        apiVersion: v1
-        kind: ConfigMap
-        metadata:
-          name: coredns
-          namespace: kube-system
-        data:
-          Corefile: |
-            # In Kubernetes 1.13 and later, add your CoreDNS customizations as import files.
-            # Search CoreDNS at https://cloud.ibm.com/docs/containers/ for details.
-            import MyCorefile
-            .:53 {
-                errors
-                health
-                kubernetes cluster.local in-addr.arpa ip6.arpa {
-                   pods insecure
-                   upstream 172.16.0.1
-                   fallthrough in-addr.arpa ip6.arpa
-                }
-                prometheus :9153
-                proxy . /etc/resolv.conf
-                cache 30
-                loop
-                reload
-                loadbalance
-            }
-            MyCorefile: |
-            abc.com:53 {
-                errors
-                cache 30
-                proxy . 1.2.3.4
-            }
-        ```
-        {: screen}
-          **Kubernetes version 1.12 example output**:
+        **CoreDNS example output**: 
           ```
           apiVersion: v1
           kind: ConfigMap
@@ -178,13 +138,17 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
               }
           ```
           {: screen}
+          
+          Do you have many customizations that you want to organize? In Kubernetes version 1.13 and later, you can add multiple Corefiles to the CoreDNS configmap. For more information, see [the Corefile import documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/import/).
+          {: tip}
+          
     *   **For KubeDNS**: Configure stubdomains and upstream nameservers in the `data` section of the configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns).
         ```
         kubectl edit configmap -n kube-system kube-dns
         ```
         {: pre}
 
-        Example output:
+        **KubeDNS example output**:
         ```
         apiVersion: v1
         kind: ConfigMap
