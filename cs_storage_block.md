@@ -442,7 +442,7 @@ To add block storage:
          resources:
            requests:
              storage: 24Gi
-	 storageClassName: ibmc-block-silver
+	   storageClassName: ibmc-block-silver
        ```
        {: codeblock}
 
@@ -465,7 +465,7 @@ To add block storage:
            requests:
              storage: 45Gi
              iops: "300"
-	 storageClassName: ibmc-block-retain-custom
+	   storageClassName: ibmc-block-retain-custom
        ```
        {: codeblock}
 
@@ -982,7 +982,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
             requests:
               storage: 20Gi
               iops: "300" #required only for performance storage
-	  storageClassName: ibmc-block-retain-bronze
+	    storageClassName: ibmc-block-retain-bronze
      ```
      {: codeblock}
 
@@ -1068,7 +1068,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
            resources:
              requests:
                storage: 20Gi
-	   storageClassName: ibmc-block-bronze-delayed
+	     storageClassName: ibmc-block-bronze-delayed
        - metadata:
            name: myvol2
          spec:
@@ -1077,7 +1077,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
            resources:
              requests:
                storage: 20Gi
-	   storageClassName: ibmc-block-bronze-delayed
+	     storageClassName: ibmc-block-bronze-delayed
      ```
      {: codeblock}
 
