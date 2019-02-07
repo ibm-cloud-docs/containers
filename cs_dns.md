@@ -120,47 +120,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
           name: coredns
           namespace: kube-system
         data:
-        Corefile: |
-          # In Kubernetes 1.13 and later, add your CoreDNS customizations as import files.
-          # Search CoreDNS at https://cloud.ibm.com/docs/containers/ for details.
-          import MyCorefile
-          .:53 {
-              errors
-              health
-              kubernetes cluster.local in-addr.arpa ip6.arpa {
-                 pods insecure
-                 upstream 172.16.0.1
-                 fallthrough in-addr.arpa ip6.arpa
-              }
-              prometheus :9153
-              proxy . /etc/resolv.conf
-              cache 30
-              loop
-              reload
-              loadbalance
-          }
-          MyCorefile: |
-          abc.com:53 {
-              errors
-              cache 30
-              proxy . 1.2.3.4
-          }
-        ```
-        {: screen}
-          **Kubernetes version 1.12 example output**:
-          ```
-          apiVersion: v1
-          kind: ConfigMap
-          metadata:
-            name: coredns
-            namespace: kube-system
-          data:
           Corefile: |
-            abc.com:53 {
-                errors
-                cache 30
-                proxy . 1.2.3.4
-            }
+            # In Kubernetes 1.13 and later, add your CoreDNS customizations as import files.
+            # Search CoreDNS at https://cloud.ibm.com/docs/containers/ for details.
+            import MyCorefile
             .:53 {
                 errors
                 health
@@ -176,6 +139,43 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
                 reload
                 loadbalance
             }
+            MyCorefile: |
+            abc.com:53 {
+                errors
+                cache 30
+                proxy . 1.2.3.4
+            }
+        ```
+        {: screen}
+          **Kubernetes version 1.12 example output**:
+          ```
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: coredns
+            namespace: kube-system
+          data:
+            Corefile: |
+              abc.com:53 {
+                  errors
+                  cache 30
+                  proxy . 1.2.3.4
+              }
+              .:53 {
+                  errors
+                  health
+                  kubernetes cluster.local in-addr.arpa ip6.arpa {
+                     pods insecure
+                     upstream 172.16.0.1
+                     fallthrough in-addr.arpa ip6.arpa
+                  }
+                  prometheus :9153
+                  proxy . /etc/resolv.conf
+                  cache 30
+                  loop
+                  reload
+                  loadbalance
+              }
           ```
           {: screen}
     *   **For KubeDNS**: Configure stubdomains and upstream nameservers in the `data` section of the configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns).
