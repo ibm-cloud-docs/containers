@@ -19,7 +19,7 @@ lastupdated: "2019-02-07"
 {:download: .download}
 
 
-# Tutorial: Using Knative to run serverless apps in Kubernetes clusters
+# Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters
 {: #knative_tutorial}
 
 With this tutorial, you can learn how to install Knative in a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
@@ -37,13 +37,16 @@ Knative comes with 3 key components, or _primitives_, that help you to build, de
 - **Serving:** The `Serving` primitive helps to deploy serverless apps as Knative services and to automatically scale them, even down to zero instances. By using the traffic management and intelligent routing capabilities of Istio, you can control what traffic is routed to a specific version of your service which makes it easy for a developer to test and roll out a new app version or do A-B testing.
 - **Eventing:** With the `Eventing` primitive, you can create triggers or event streams that other services can subscribe to. For example, you might want to kick off a new build of your app every time code is pushed to your GitHub master repo. Or you want to run a serverless app only if the temperature drops below freezing point. The `Eventing` primitive can be integrated into your CI/CD pipeline to automate the build and deployment of apps in case a specific event occurs.
 
+**What is the Managed Knative on {{site.data.keyword.containerlong_notm}} (experimental) add-on?** </br>
+Managed Knative on {{site.data.keyword.containerlong_notm}} is a managed add-on that integrates Knative and Istio directly with your Kubernetes cluster. The Knative and Istio version in the add-on are tested by IBM and supported for the use in {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.containerlong_notm}} keeps the Knative and Istio components up-to-date by automatically rolling out updates for your app-on. 
+
 Sounds good? Follow this tutorial to get started with Knative in {{site.data.keyword.containerlong_notm}}.
 
 ## Objectives
 {: #knative_objectives}
 
 - Learn the basics about Knative and the Knative primitives.  
-- Install Knative and Istio in your cluster.
+- Install the managed Knative and managed Istio add-on in your cluster.
 - Deploy your first serverless app with Knative and expose the app on the internet by using the Knative `Serving` primitive.
 - Explore the Knative scaling and revision capabilities.
 
@@ -65,13 +68,13 @@ This tutorial is designed for developers who are interested in learning how to u
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for {{site.data.keyword.containerlong_notm}}.
 -  [Target the CLI to your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
-## Lesson 1: Setting up Knative
+## Lesson 1: Setting up the managed Knative add-on
 {: #knative_setup}
 
-Knative builds on top of Istio to ensure that your serverless and containerized workloads can be exposed within the cluster and on the internet. With Istio, you can also monitor and control network traffic between your services and ensure that your data is encrypted during transit.
+Knative builds on top of Istio to ensure that your serverless and containerized workloads can be exposed within the cluster and on the internet. With Istio, you can also monitor and control network traffic between your services and ensure that your data is encrypted during transit. When you install the managed Knative add-on, the managed Istio add-on is automatically installed as well. 
 {: shortdesc}
 
-1. Enable Knative in your cluster. When you enable Knative in your cluster, Istio and all Knative components are installed in your cluster.
+1. Enable the managed Knative add-on in your cluster. When you enable Knative in your cluster, Istio and all Knative components are installed in your cluster.
    ```
    ibmcloud ks cluster-addon-enable knative --cluster <cluster_name_or_ID>
    ```
