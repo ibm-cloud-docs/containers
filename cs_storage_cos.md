@@ -424,18 +424,24 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the latest version.
 {: shortdesc}
 
-1. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
+1. If you use macOS or a Linux distribution, update the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in to the latest version. 
+   ```
+   helm ibmc --update
+   ```
+   {: pre}
+
+2. Update the {{site.data.keyword.Bluemix_notm}} Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
    {: pre}
 
-2. Download to latest Helm chart to your local machine and unzip the package to review the `release.md` file to find the latest release information.
+3. Download the latest {{site.data.keyword.cos_full_notm}} Helm chart to your local machine and unzip the package to review the `release.md` file to find the latest release information.
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
 
-3. Find the installation name of your helm chart.
+4. Find the installation name of your Helm chart.
    ```
    helm ls | grep ibmcloud-object-storage-plugin
    ```
@@ -447,13 +453,13 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
    ```
    {: screen}
 
-4. Upgrade the {{site.data.keyword.cos_full_notm}} plug-in to the latest version.
+5. Upgrade the {{site.data.keyword.cos_full_notm}} Helm chart to the latest version.
    ```   
    helm ibmc upgrade <helm_chart_name> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
    ```
    {: pre}
 
-5. Verify that the `ibmcloud-object-storage-plugin` is successfully upgraded.  
+6. Verify that the `ibmcloud-object-storage-plugin` is successfully upgraded.  
    ```
    kubectl rollout status deployment/ibmcloud-object-storage-plugin -n kube-system
    ```
@@ -461,7 +467,7 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
 
    The upgrade of the plug-in is successful when you see `deployment "ibmcloud-object-storage-plugin" successfully rolled out` in your CLI output.
 
-6. Verify that the `ibmcloud-object-storage-driver` is successfully upgraded.
+7. Verify that the `ibmcloud-object-storage-driver` is successfully upgraded.
    ```
    kubectl rollout status ds/ibmcloud-object-storage-driver -n kube-system
    ```
@@ -469,7 +475,7 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
 
    The upgrade is successful when you see `daemon set "ibmcloud-object-storage-driver" successfully rolled out` in your CLI output.
 
-7. Verify that the {{site.data.keyword.cos_full_notm}} pods are in a `Running` state.
+8. Verify that the {{site.data.keyword.cos_full_notm}} pods are in a `Running` state.
    ```
    kubectl get pods -n kube-system -o wide | grep object-storage
    ```
