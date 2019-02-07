@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-06"
+lastupdated: "2019-02-07"
 
 ---
 
@@ -889,14 +889,13 @@ When you create the PVC by specifying the storage class that you created earlier
    apiVersion: v1
    metadata:
       name: mypvc
-      annotations:
-        volume.beta.kubernetes.io/storage-class: portworx-shared-sc
    spec:
       accessModes:
         - <access_mode>
       resources:
         requests:
           storage: <size>
+      storageClassName: portworx-shared-sc
     ```
     {: codeblock}
 
@@ -911,16 +910,16 @@ When you create the PVC by specifying the storage class that you created earlier
     <td>Enter a name for your PVC, such as <code>mypvc</code>. </td>
     </tr>
     <tr>
-    <td><code>volume.beta.kubernetes.io/storage-class</code></td>
-    <td>Enter the name of the storage class that you chose or created earlier and that you want to use to provision your PV. The example YAML file uses the <code>portworx-shared-sc</code> storage class. </td>
-    </tr>
-    <tr>
     <td><code>spec.accessModes</code></td>
     <td>Enter the [Kubernetes access mode ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) that you want to use. </td>
     </tr>
     <tr>
     <td><code>resources.requests.storage</code></td>
     <td>Enter the amount of storage in gigabytes that you want to assign from your Portworx cluster. For example, to assign 2 gigabytes from your Portworx cluster, enter `2Gi`. The amount of storage that you can specify is limited by the amount of storage that is available in your Portworx cluster. If you specified a replication factor in your [storage class](#create_storageclass) that is higher than 1, then the amount of storage that you specify in your PVC is reserved on multiple worker nodes.   </td>
+    </tr>
+    <tr>
+    <td><code>spec.storageClassName</code></td>
+    <td>Enter the name of the storage class that you chose or created earlier and that you want to use to provision your PV. The example YAML file uses the <code>portworx-shared-sc</code> storage class. </td>
     </tr>
     </tbody>
     </table>

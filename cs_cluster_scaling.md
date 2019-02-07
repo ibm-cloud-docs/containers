@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-06"
+lastupdated: "2019-02-07"
 
 ---
 
@@ -26,7 +26,7 @@ lastupdated: "2019-02-06"
 With the {{site.data.keyword.containerlong_notm}} `ibm-iks-cluster-autoscaler` plug-in, you can scale the worker pools in your cluster automatically to increase or decrease the number of worker nodes in the worker pool based on the sizing needs of your scheduled workloads. The `ibm-iks-cluster-autoscaler` plug-in is based on the [Kubernetes Cluster-Autoscaler project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler).
 {: shortdesc}
 
-The cluster autoscaler is available as a **preview beta** for select users only. To request access, [register for the public Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/) and post in the [#cluster-autoscaler ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CF6APMLBB) channel. If you are an IBMer, you can post in the [internal Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C90D3KZUL) channel. In your request, include the **unique IBMid** of the API key owner of the region where you cluster is located. To list the API key owner, run `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`. To get the API key owner's unique IBMid, run `ibmcloud account users --output json`, find the user's entry, and note the `"ibmUniqueId"` field.
+The cluster autoscaler is available as a **preview beta** for select users only. To request access, [register for the public Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/) and post in the [#cluster-autoscaler ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CF6APMLBB) channel. If you are an IBMer, you can post in the [internal Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C90D3KZUL) channel. In your request, include the **unique IBMid** of the API key owner of the region where your cluster is located. To list the API key owner, run `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`. To get the API key owner's unique IBMid, run `ibmcloud account users --output json`, find the user's entry, and note the `"ibmUniqueId"` field.
 {: note}
 
 Keep reading for more information about how cluster autoscaler works, or skip to the instructions for using it.
@@ -162,7 +162,7 @@ Further, if you do not disable the worker pools before you uninstall the `ibm-ik
 Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in with a Helm chart to autoscale worker pools in your cluster.
 {: shortdesc}
 
-The cluster autoscaler is available as a **preview beta** for select users only. To request access, [register for the public Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/) and post in the [#cluster-autoscaler ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CF6APMLBB) channel. If you are an IBMer, you can post in the [internal Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C90D3KZUL) channel. In your request, include the **unique IBMid** of the API key owner of the region where you cluster is located. To list the API key owner, run `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`. To get the API key owner's unique IBMid, run `ibmcloud account users --output json`, find the user's entry, and note the `"ibmUniqueId"` field.
+The cluster autoscaler is available as a **preview beta** for select users only. To request access, [register for the public Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/) and post in the [#cluster-autoscaler ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CF6APMLBB) channel. If you are an IBMer, you can post in the [internal Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C90D3KZUL) channel. In your request, include the **unique IBMid** of the API key owner of the region where your cluster is located. To list the API key owner, run `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`. To get the API key owner's unique IBMid, run `ibmcloud account users --output json`, find the user's entry, and note the `"ibmUniqueId"` field.
 {: note}
 
 **Before you begin**:
@@ -444,6 +444,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
         memory: 100Mi
     scaleDownDelayAfterAdd: 10m
     scaleDownDelayAfterDelete: 10m
+    scale-down-utilization-threshold: 0.5
     scaleDownUnneededTime: 10m
     scanInterval: 1m
     skipNodes:
@@ -527,6 +528,11 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     <td>10m</td>
     </tr>
     <tr>
+    <td>`scale-down-utilization-threshold`</td>
+    <td>Set the worker node utilization threshold. If the worker node utilization goes below the threshold, the worker node is considered to be scaled down. Worker node utilization is calculated as the sum of the CPU and memory resources that are requested by all pods that run on the worker node divided by the worker node resource capacity.</td>
+    <td>0.5</td>
+    </tr>
+    <tr>
     <td>`scanInterval`</td>
     <td>Set how often in minutes that the cluster autoscaler scans for workload usage that triggers scaling up or down.</td>
     <td>1m</td>
@@ -543,7 +549,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     </tr>
     </tbody>
     </table>
-2.  To change any of the cluster autoscaler configuration values, upgrade the Helm chart with the new values.
+2.  To change any of the cluster autoscaler configuration values, update the Helm chart with the new values.
     ```
     helm upgrade --set scanInterval=2m ibm-iks-cluster-autoscaler ibm/ibm-iks-cluster-autoscaler -i
     ```
@@ -603,10 +609,10 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 ## Updating the cluster autoscaler Helm chart
 {: #ca_helm_up}
 
-You can upgrade the existing cluster autoscaler Helm chart to the latest version.
+You can update the existing cluster autoscaler Helm chart to the latest version. To check your current Helm chart version, run `helm ls | grep cluster-autoscaler`.
 {: shortdesc}
 
-Updating to Helm chart 1.0.3 from a previous version? First, [remove](#ca_rm) your current Helm chart. Then, [install](#ca_helm) the Helm chart version 1.0.3.
+Updating to the latest Helm chart from version 1.0.2 or earlier? [Follow these instructions](#ca_helm_up_102).
 {: note}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
@@ -625,7 +631,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 3.  Find the name of the cluster autoscaler Helm chart that you installed in your cluster.
     ```
-    helm ls | grep ibm-iks-cluster-autoscaler
+    helm ls | grep cluster-autoscaler
     ```
     {: pre}
 
@@ -635,13 +641,13 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: screen}
 
-4.  Upgrade the cluster autoscaler Helm chart to the latest version.
+4.  Update the cluster autoscaler Helm chart to the latest version.
     ```
     helm upgrade --force --recreate-pods <helm_chart_name>  ibm/ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
-5.  Optional: Verify that the [cluster autoscaler configmap](#ca_cm) `workerPoolsConfig.json` section is set to `"enabled": true` for the worker pools that you want to scale.
+5.  Verify that the [cluster autoscaler configmap](#ca_cm) `workerPoolsConfig.json` section is set to `"enabled": true` for the worker pools that you want to scale.
     ```
     kubectl describe cm iks-ca-configmap -n kube-system
     ```
@@ -663,6 +669,73 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ]
 
     Events:  <none>
+    ```
+    {: screen}
+
+### Updating to the latest Helm chart from version 1.0.2 or earlier
+{: #ca_helm_up_102}
+
+The latest Helm chart version of the cluster autoscaler requires a full removal of previously installed cluster autoscaler Helm chart versions. If you installed the Helm chart version 1.0.2 or earlier, uninstall that version first before you install the latest Helm chart of the cluster autoscaler.
+{: shortdesc}
+
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+1.  Get your cluster autoscaler configmap. 
+    ```
+    kubectl get cm iks-ca-configmap -n kube-system -o yaml > iks-ca-configmap.yaml
+    ```
+    {: pre}
+2.  Remove all worker pools from the configmap by setting the `"enabled"` value to `false`.
+    ```
+    kubectl edit cm iks-ca-configmap -n kube-system
+    ```
+    {: pre}
+3.  If you applied custom settings to the Helm chart, note your custom settings.
+    ```
+    helm get values ibm-ks-cluster-autoscaler -a
+    ```
+    {: pre}
+4.  Uninstall your current Helm chart. 
+    ```
+    helm delete --purge ibm-ks-cluster-autoscaler
+    ```
+    {: pre}
+5.  Update the Helm chart repo to get the latest cluster autoscaler Helm chart version.
+    ```
+    helm repo update
+    ```
+    {: pre}
+6.  Install the latest cluster autoscaler Helm chart. Apply any custom settings that you previously used with the `--set` flag, such as `scanInterval=2m`.
+    ```
+    helm install  ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler [--set <custom_settings>]
+    ```
+    {: pre}
+7.  Apply the cluster autoscaler configmap that you previously retrieved to enabled autoscaling for your worker pools.
+    ```
+    kubectl apply -f iks-ca-configmap.yaml
+    ```
+    {: pre}
+8.  Get your cluster autoscaler pod.
+    ```
+    kubectl get pods -n kube-system
+    ```
+    {: pre}
+9.  Review the **Events** section of the cluster autoscaler pod and look for a **ConfigUpdated** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
+    ```
+    kubectl describe pod -n kube-system <cluster_autoscaler_pod>
+    ```
+    {: pre}
+    
+    Example output:
+    ```
+		Name:               ibm-iks-cluster-autoscaler-857c4d9d54-gwvc6
+		Namespace:          kube-system
+		...
+		Events:
+		Type     Reason         Age   From                                        Message
+		----     ------         ----  ----                                        -------
+		
+		Normal  ConfigUpdated  3m    ibm-iks-cluster-autoscaler-857c4d9d54-gwvc6  {"1:3:default":"SUCCESS:"}
     ```
     {: screen}
 

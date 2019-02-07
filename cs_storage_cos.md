@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-06"
+lastupdated: "2019-02-07"
 
 ---
 
@@ -166,7 +166,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.10.12_1523* 
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.11.7_1523* 
       ```
       {: screen}
       
@@ -424,18 +424,24 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the latest version.
 {: shortdesc}
 
-1. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
+1. If you use macOS or a Linux distribution, update the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in to the latest version. 
+   ```
+   helm ibmc --update
+   ```
+   {: pre}
+
+2. Update the {{site.data.keyword.Bluemix_notm}} Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
    {: pre}
 
-2. Download to latest Helm chart to your local machine and unzip the package to review the `release.md` file to find the latest release information.
+3. Download the latest {{site.data.keyword.cos_full_notm}} Helm chart to your local machine and unzip the package to review the `release.md` file to find the latest release information.
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```
 
-3. Find the installation name of your helm chart.
+4. Find the installation name of your Helm chart.
    ```
    helm ls | grep ibmcloud-object-storage-plugin
    ```
@@ -447,13 +453,13 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
    ```
    {: screen}
 
-4. Upgrade the {{site.data.keyword.cos_full_notm}} plug-in to the latest version.
+5. Upgrade the {{site.data.keyword.cos_full_notm}} Helm chart to the latest version.
    ```   
    helm ibmc upgrade <helm_chart_name> ibm/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
    ```
    {: pre}
 
-5. Verify that the `ibmcloud-object-storage-plugin` is successfully upgraded.  
+6. Verify that the `ibmcloud-object-storage-plugin` is successfully upgraded.  
    ```
    kubectl rollout status deployment/ibmcloud-object-storage-plugin -n kube-system
    ```
@@ -461,7 +467,7 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
 
    The upgrade of the plug-in is successful when you see `deployment "ibmcloud-object-storage-plugin" successfully rolled out` in your CLI output.
 
-6. Verify that the `ibmcloud-object-storage-driver` is successfully upgraded.
+7. Verify that the `ibmcloud-object-storage-driver` is successfully upgraded.
    ```
    kubectl rollout status ds/ibmcloud-object-storage-driver -n kube-system
    ```
@@ -469,7 +475,7 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
 
    The upgrade is successful when you see `daemon set "ibmcloud-object-storage-driver" successfully rolled out` in your CLI output.
 
-7. Verify that the {{site.data.keyword.cos_full_notm}} pods are in a `Running` state.
+8. Verify that the {{site.data.keyword.cos_full_notm}} pods are in a `Running` state.
    ```
    kubectl get pods -n kube-system -o wide | grep object-storage
    ```
@@ -702,7 +708,6 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
      name: <pvc_name>
      namespace: <namespace>
      annotations:
-       volume.beta.kubernetes.io/storage-class: "<storage_class>"
        ibm.io/auto-create-bucket: "<true_or_false>"
        ibm.io/auto-delete-bucket: "<true_or_false>"
        ibm.io/bucket: "<bucket_name>"
@@ -714,6 +719,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
      resources:
        requests:
          storage: 8Gi # Enter a fictitious value
+     storageClassName: <storage_class>
    ```
    {: codeblock}
 
@@ -730,10 +736,6 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    <tr>
    <td><code>metadata.namespace</code></td>
    <td>Enter the namespace where you want to create the PVC. The PVC must be created in the same namespace where you created the Kubernetes secret for your {{site.data.keyword.cos_full_notm}} service credentials and where you want to run your pod. </td>
-   </tr>
-   <tr>
-   <td><code>volume.beta.kubernetes.io/storage-class</code></td>
-   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the storage class that you want to use for your new bucket. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the storage class that you used to create your existing bucket. </br></br>If you manually created the bucket in your {{site.data.keyword.cos_full_notm}} service instance or you cannot remember the storage class that you used, find your service instance in the {{site.data.keyword.Bluemix}} dashboard and review the <strong>Class</strong> and <strong>Location</strong> of your existing bucket. Then, use the appropriate [storage class](#cos_storageclass_reference). <p class="note">The {{site.data.keyword.cos_full_notm}} API endpoint that is set in your storage class is based on the region that your cluster is in. If you want to access a bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](/docs/containers/cs_storage_basics.html#customized_storageclass) and use the appropriate API endpoint for your bucket.</p></li></ul>  </td>
    </tr>
    <tr>
    <td><code>ibm.io/auto-create-bucket</code></td>
@@ -757,6 +759,10 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    <tr>
    <td><code>resources.requests.storage</code></td>
    <td>A fictitious size for your {{site.data.keyword.cos_full_notm}} bucket in gigabytes. The size is required by Kubernetes, but not respected in {{site.data.keyword.cos_full_notm}}. You can enter any size that you want. The actual space that you use in {{site.data.keyword.cos_full_notm}} might be different and is billed based on the [pricing table ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api). </td>
+   </tr>
+   <tr>
+   <td><code>spec.storageClassName</code></td>
+   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the storage class that you want to use for your new bucket. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the storage class that you used to create your existing bucket. </br></br>If you manually created the bucket in your {{site.data.keyword.cos_full_notm}} service instance or you cannot remember the storage class that you used, find your service instance in the {{site.data.keyword.Bluemix}} dashboard and review the <strong>Class</strong> and <strong>Location</strong> of your existing bucket. Then, use the appropriate [storage class](#cos_storageclass_reference). <p class="note">The {{site.data.keyword.cos_full_notm}} API endpoint that is set in your storage class is based on the region that your cluster is in. If you want to access a bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](/docs/containers/cs_storage_basics.html#customized_storageclass) and use the appropriate API endpoint for your bucket.</p></li></ul>  </td>
    </tr>
    </tbody>
    </table>
