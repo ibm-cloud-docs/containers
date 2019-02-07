@@ -432,8 +432,6 @@ To add block storage:
        kind: PersistentVolumeClaim
        metadata:
          name: mypvc
-         annotations:
-           volume.beta.kubernetes.io/storage-class: "ibmc-block-silver"
          labels:
            billingType: "hourly"
 	       region: us-south
@@ -444,6 +442,7 @@ To add block storage:
          resources:
            requests:
              storage: 24Gi
+	 storageClassName: ibmc-block-silver
        ```
        {: codeblock}
 
@@ -455,8 +454,6 @@ To add block storage:
        kind: PersistentVolumeClaim
        metadata:
          name: mypvc
-         annotations:
-           volume.beta.kubernetes.io/storage-class: "ibmc-block-retain-custom"
          labels:
            billingType: "hourly"
 	       region: us-south
@@ -468,6 +465,7 @@ To add block storage:
            requests:
              storage: 45Gi
              iops: "300"
+	 storageClassName: ibmc-block-retain-custom
        ```
        {: codeblock}
 
@@ -480,10 +478,6 @@ To add block storage:
        <tr>
        <td><code>metadata.name</code></td>
        <td>Enter the name of the PVC.</td>
-       </tr>
-       <tr>
-       <td><code>metadata.annotations.</code></br><code>volume.beta.kubernetes.io/storage-class</code></td>
-       <td>The name of the storage class that you want to use to provision block storage. You can choose to use one of the [IBM-provided storage classes](#block_storageclass_reference) or [create your own storage class](#block_custom_storageclass). </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
        </tr>
        <tr>
          <td><code>metadata.labels.billingType</code></td>
@@ -505,6 +499,10 @@ To add block storage:
         <td><code>spec.resources.requests.iops</code></td>
         <td>This option is available for the custom storage classes only (`ibmc-block-custom / ibmc-block-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
         </tr>
+	<tr>
+	<td><code>spec.storageClassName</code></td>
+	<td>The name of the storage class that you want to use to provision block storage. You can choose to use one of the [IBM-provided storage classes](#block_storageclass_reference) or [create your own storage class](#block_custom_storageclass). </br> If you do not specify a storage class, the PV is created with the default storage class <code>ibmc-file-bronze</code><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
+	</tr>
         </tbody></table>
 
     If you want to use a customized storage class, create your PVC with the corresponding storage class name, a valid IOPS and size.   
@@ -801,14 +799,13 @@ Before you can start to mount your existing storage to an app, you must retrieve
      apiVersion: v1
      metadata:
       name: mypvc
-      annotations:
-        volume.beta.kubernetes.io/storage-class: ""
      spec:
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
           storage: "<storage_size>"
+      storageClassName: 
      ```
      {: codeblock}
 
@@ -977,8 +974,6 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
               mountPath: /usr/share/nginx/html
       volumeClaimTemplates:
       - metadata:
-          annotations:
-            volume.beta.kubernetes.io/storage-class: ibmc-block-retain-bronze
           name: myvol
         spec:
           accessModes:
@@ -987,6 +982,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
             requests:
               storage: 20Gi
               iops: "300" #required only for performance storage
+	  storageClassName: ibmc-block-retain-bronze
      ```
      {: codeblock}
 
@@ -1065,8 +1061,6 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
                mountPath: /tmp1
        volumeClaimTemplates:
        - metadata:
-           annotations:
-             volume.beta.kubernetes.io/storage-class: ibmc-block-bronze-delayed
            name: myvol1
          spec:
            accessModes:
@@ -1074,9 +1068,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
            resources:
              requests:
                storage: 20Gi
+	   storageClassName: ibmc-block-bronze-delayed
        - metadata:
-           annotations:
-             volume.beta.kubernetes.io/storage-class: ibmc-block-bronze-delayed
            name: myvol2
          spec:
            accessModes:
@@ -1084,6 +1077,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
            resources:
              requests:
                storage: 20Gi
+	   storageClassName: ibmc-block-bronze-delayed
      ```
      {: codeblock}
 
@@ -1122,10 +1116,6 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
      <td style="text-align:left">Specify your anti-affinity rule to ensure that your stateful set pods are distributed across worker nodes and zones. The example shows an anti-affinity rule where the stateful set pod prefers not to be scheduled on a worker node where a pod runs that has the `app: nginx` label. The `topologykey: failure-domain.beta.kubernetes.io/zone` restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node if the worker node is in the same zone as a pod that has the app: nignx label. By using this anti-affinity rule, you can achieve anti-affinity across worker nodes and zones. </td>
      </tr>
      <tr>
-     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-     <td style="text-align:left">Enter the storage class that you want to use. To list existing storage classes, run <code>kubectl get storageclasses | grep block</code>. If you do not specify a storage class, the PVC is created with the default storage class that is set in your cluster. Make sure that the default storage class uses the <code>ibm.io/ibmc-block</code> provisioner so that your stateful set is provisioned with block storage.</td>
-     </tr>
-     <tr>
      <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
      <td style="text-align:left">Enter a name for your volume. Use the same name that you defined in the <code>spec.containers.volumeMount.name</code> section. The name that you enter here is used to create the name for your PVC in the format: <code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>. </td>
      </tr>
@@ -1136,6 +1126,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
      <tr>
      <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.iops</code></td>
      <td style="text-align:left">If you want to provision [performance storage](#block_predefined_storageclass), enter the number of IOPS. If you use an endurance storage class and specify a number of IOPS, the number of IOPS is ignored. Instead, the IOPS that is specified in your storage class is used.  </td>
+     </tr>
+     <tr>
+     <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>spec.storageClassName</code></td>
+     <td style="text-align:left">Enter the storage class that you want to use. To list existing storage classes, run <code>kubectl get storageclasses | grep block</code>. If you do not specify a storage class, the PVC is created with the default storage class that is set in your cluster. Make sure that the default storage class uses the <code>ibm.io/ibmc-block</code> provisioner so that your stateful set is provisioned with block storage.</td>
      </tr>
      </tbody></table>
 
