@@ -543,7 +543,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     </tr>
     </tbody>
     </table>
-2.  To change any of the cluster autoscaler configuration values, upgrade the Helm chart with the new values.
+2.  To change any of the cluster autoscaler configuration values, update the Helm chart with the new values.
     ```
     helm upgrade --set scanInterval=2m ibm-iks-cluster-autoscaler ibm/ibm-iks-cluster-autoscaler -i
     ```
@@ -603,10 +603,10 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 ## Updating the cluster autoscaler Helm chart
 {: #ca_helm_up}
 
-You can upgrade the existing cluster autoscaler Helm chart to the latest version.
+You can update the existing cluster autoscaler Helm chart to the latest version. To check your current Helm chart version, run `helm ls | grep cluster-autoscaler`.
 {: shortdesc}
 
-Updating to Helm chart 1.0.3 from a previous version? First, save your cluster autoscaler [configmap](#ca_cm) and [settings](#ca_chart_values). Then, [remove](#ca_rm) your current Helm chart. Finally, [install](#ca_helm) the Helm chart version 1.0.3 and reapply the [configmap](#ca_cm) and [settings](#ca_chart_values).
+Updating to the latest Helm chart from version 1.0.2 or earlier? [Follow these instructions](#ca_helm_up_102).
 {: note}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
@@ -635,7 +635,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: screen}
 
-4.  Upgrade the cluster autoscaler Helm chart to the latest version.
+4.  Update the cluster autoscaler Helm chart to the latest version.
     ```
     helm upgrade --force --recreate-pods <helm_chart_name>  ibm/ibm-iks-cluster-autoscaler
     ```
@@ -663,6 +663,73 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ]
 
     Events:  <none>
+    ```
+    {: screen}
+
+### Updating to the latest Helm chart from version 1.0.2 or earlier
+{: #ca_helm_up_102}
+
+The latest Helm chart version of the cluster autoscaler requires a full removal of previously installed cluster autoscaler Helm chart versions. If you installed the Helm chart version 1.0.2 or earlier, uninstall that version first before you install the latest Helm chart of the cluster autoscaler.
+{: shortdesc}
+
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+
+1.  Get your cluster autoscaler configmap. 
+    ```
+    kubectl get cm iks-ca-configmap -n kube-system -o yaml > iks-ca-configmap.yaml
+    ```
+    {: pre}
+2.  Remove all worker pools from the configmap by setting the `"enabled"` value to `false`.
+    ```
+    kubectl edit cm iks-ca-configmap -n kube-system
+    ```
+    {: pre}
+3.  If you applied custom settings to the Helm chart, note your custom settings.
+    ```
+    helm get values ibm-ks-cluster-autoscaler -a
+		```
+    {: pre}
+4.  Uninstall your current Helm chart. 
+    ```
+    helm delete --purge ibm-ks-cluster-autoscaler
+		```
+    {: pre}
+5.  Update the Helm chart repo to get the latest cluster autoscaler Helm chart version.
+    ```
+    helm repo update
+    ```
+    {: pre}
+6.  Install the latest cluster autoscaler Helm chart. Apply any custom settings that you previously used with the `--set` flag, such as `scanInterval=2m`.
+    ```
+    helm install  ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler [--set <custom_settings>]
+		```
+    {: pre}
+7.  Apply the cluster autoscaler configmap that you previously retrieved to enabled autoscaling for your worker pools.
+    ```
+    kubectl apply -f iks-ca-configmap.yaml
+		```
+    {: pre}
+8.  Get your cluster autoscaler pod.
+    ```
+    kubectl get pods -n kube-system
+    ```
+    {: pre}
+9.  Review the **Events** section of the cluster autoscaler pod and look for a **ConfigUpdated** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
+    ```
+    kubectl describe pod -n kube-system <cluster_autoscaler_pod>
+    ```
+    {: pre}
+    
+    Example output:
+    ```
+		Name:               ibm-iks-cluster-autoscaler-857c4d9d54-gwvc6
+		Namespace:          kube-system
+		...
+		Events:
+		Type     Reason         Age   From                                        Message
+		----     ------         ----  ----                                        -------
+		
+		Normal  ConfigUpdated  3m    ibm-iks-cluster-autoscaler-857c4d9d54-gwvc6  {"1:3:default":"SUCCESS:"}
     ```
     {: screen}
 
