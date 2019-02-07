@@ -444,6 +444,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
         memory: 100Mi
     scaleDownDelayAfterAdd: 10m
     scaleDownDelayAfterDelete: 10m
+    scale-down-utilization-threshold: 0.5
     scaleDownUnneededTime: 10m
     scanInterval: 1m
     skipNodes:
@@ -525,6 +526,11 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     <td>`scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete`</td>
     <td>Set the amount of time in minutes that the cluster autoscaler waits to start scaling actions again after scaling up (`add`) or scaling down (`delete`).</td>
     <td>10m</td>
+    </tr>
+    <tr>
+    <td>`scale-down-utilization-threshold`</td>
+    <td>Set the worker node utilization threshold. If the worker node utilization goes below the threshold, the worker node is considered to be scaled down. Worker node utilization is calculated as the sum of the CPU and memory resources that are requested by all pods that run on the worker node divided by the worker node resource capacity.</td>
+    <td>0.5</td>
     </tr>
     <tr>
     <td>`scanInterval`</td>
@@ -625,7 +631,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 3.  Find the name of the cluster autoscaler Helm chart that you installed in your cluster.
     ```
-    helm ls | grep ibm-iks-cluster-autoscaler
+    helm ls | grep cluster-autoscaler
     ```
     {: pre}
 
@@ -641,7 +647,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-5.  Optional: Verify that the [cluster autoscaler configmap](#ca_cm) `workerPoolsConfig.json` section is set to `"enabled": true` for the worker pools that you want to scale.
+5.  Verify that the [cluster autoscaler configmap](#ca_cm) `workerPoolsConfig.json` section is set to `"enabled": true` for the worker pools that you want to scale.
     ```
     kubectl describe cm iks-ca-configmap -n kube-system
     ```
