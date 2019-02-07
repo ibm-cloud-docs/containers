@@ -936,7 +936,7 @@ List managed add-ons that are enabled in a cluster.
 
 
 
-### ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-s] [--yaml]
+### ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [--skip-rbac] [-s] [--yaml]
 {: #cs_cluster_config}
 
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
@@ -960,6 +960,9 @@ After logging in, download Kubernetes configuration data and certificates to con
 
    <dt><code>--export</code></dt>
    <dd>Download Kubernetes configuration data and certificates without any messages other than the export command. Because no messages are displayed, you can use this flag when you create automated scripts. This value is optional.</dd>
+
+   <dt><code>--skip-rbac</code></dt>
+   <dd>Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.Bluemix_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers/cs_users.html#rbac). If you use [{{site.data.keyword.Bluemix_notm}} IAM service access roles](/docs/containers/cs_access_reference.html#service) to manage all your RBAC users, do not include this option.</dd>
 
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
