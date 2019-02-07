@@ -693,12 +693,12 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 3.  If you applied custom settings to the Helm chart, note your custom settings.
     ```
     helm get values ibm-ks-cluster-autoscaler -a
-		```
+    ```
     {: pre}
 4.  Uninstall your current Helm chart. 
     ```
     helm delete --purge ibm-ks-cluster-autoscaler
-		```
+    ```
     {: pre}
 5.  Update the Helm chart repo to get the latest cluster autoscaler Helm chart version.
     ```
@@ -708,12 +708,12 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 6.  Install the latest cluster autoscaler Helm chart. Apply any custom settings that you previously used with the `--set` flag, such as `scanInterval=2m`.
     ```
     helm install  ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler [--set <custom_settings>]
-		```
+    ```
     {: pre}
 7.  Apply the cluster autoscaler configmap that you previously retrieved to enabled autoscaling for your worker pools.
     ```
     kubectl apply -f iks-ca-configmap.yaml
-		```
+    ```
     {: pre}
 8.  Get your cluster autoscaler pod.
     ```
