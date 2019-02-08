@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-08"
 
 ---
 
@@ -84,46 +84,11 @@ For more information about available license types and how to upgrade your Trial
 ## Setting up a database for Portworx metadata
 {: #portworx_database}
 
-Set up an {{site.data.keyword.Bluemix_notm}} database service, such as [{{site.data.keyword.composeForEtcd}}](#compose) or [Databases for etcd](#databaseetcd) to create a key-value store for the Portworx cluster metadata.
+Set up an {{site.data.keyword.Bluemix_notm}} database service, such as [Databases for etcd](#databaseetcd) or [{{site.data.keyword.composeForEtcd}}](#compose) to create a key-value store for the Portworx cluster metadata.
 {: shortdesc}
 
 The Portworx key-value store serves as the single source of truth for your Portworx cluster. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable.
 
-### Setting up a Compose for etcd service instance
-{: #compose}
-
-{{site.data.keyword.composeForEtcd}} comes with the option to set up your database as part of a cloud storage cluster that offers high availability and resiliency in case of a zone failure. For more information, see the {{site.data.keyword.composeForEtcd}} [Getting Started tutorial](/docs/services/ComposeForEtcd/getting_started.html#getting-started-tutorial).
-{: shortdesc}
-
-The following steps show how to provision and set up the {{site.data.keyword.composeForEtcd}} database service for Portworx.
-
-1. Make sure that you have the [`Developer` Cloud Foundry role for the space](/docs/iam/mngcf.html#mngcf) where you want to create your {{site.data.keyword.composeForEtcd}} database service. 
-
-2. Provision a {{site.data.keyword.composeForEtcd}} service instance.
-   1. Open the [{{site.data.keyword.composeForEtcd}} catalog page](https://cloud.ibm.com/catalog/services/compose-for-etcd)
-   2. Enter a name for your service instance, such as `px-etcd`.
-   3. Select the region where you want to deploy your service instance. For optimal performance, choose the region that your cluster is in.
-   4. Select a Cloud Foundy org and space.
-   5. Review the pricing plans and select the one that you want.
-   6. Click **Create** to start setting up your service instance. When the setup is finished, the service details page opens.
-3. {: #etcd_credentials}Retrieve the {{site.data.keyword.composeForEtcd}} service credentials.
-   1. In the navigation on the service details page, click **Manage**.
-   2. Go to the **Overview** tab.
-   3. In the **Connection Strings** section, select **Command Line**.
-   4. Note the value of the `--endpoints` and `--user` parameters.
-      Example output for `--endpoints`:
-      ```
-      --endpoints=https://portal-ssl123-34.bmix-dal-yp-12a23b5c-123a-12ab-a1b2-1a2bc3d34567.1234567890.composedb.com:12345,https://portal-ssl123-35.bmix-dal-yp-12a23b5c-123a-12ab-a1b2-1a2bc3d34567.1234567890.composedb.com:12345
-      ```
-      {: screen}
-
-      Example output for `--user`:
-      ```
-      --user=root:ABCDEFGHIJKLMNOP
-      ```
-      {: screen}
-   5. Use these service credentials when you [install Portworx in your cluster](#install_portworx).
-   
 ### Setting up a Databases for etcd service instance
 {: #databaseetcd}
 
@@ -168,6 +133,42 @@ The following steps show how to provision and set up a Databases for etcd servic
       
    4. Use these service credentials when you [install Portworx in your cluster](#install_portworx).
 
+
+### Setting up a Compose for etcd service instance
+{: #compose}
+
+{{site.data.keyword.composeForEtcd}} comes with the option to set up your database as part of a cloud storage cluster that offers high availability and resiliency in case of a zone failure. For more information, see the {{site.data.keyword.composeForEtcd}} [Getting Started tutorial](/docs/services/ComposeForEtcd/getting_started.html#getting-started-tutorial).
+{: shortdesc}
+
+The following steps show how to provision and set up the {{site.data.keyword.composeForEtcd}} database service for Portworx.
+
+1. Make sure that you have the [`Developer` Cloud Foundry role for the space](/docs/iam/mngcf.html#mngcf) where you want to create your {{site.data.keyword.composeForEtcd}} database service. 
+
+2. Provision a {{site.data.keyword.composeForEtcd}} service instance.
+   1. Open the [{{site.data.keyword.composeForEtcd}} catalog page](https://cloud.ibm.com/catalog/services/compose-for-etcd)
+   2. Enter a name for your service instance, such as `px-etcd`.
+   3. Select the region where you want to deploy your service instance. For optimal performance, choose the region that your cluster is in.
+   4. Select a Cloud Foundy org and space.
+   5. Review the pricing plans and select the one that you want.
+   6. Click **Create** to start setting up your service instance. When the setup is finished, the service details page opens.
+3. {: #etcd_credentials}Retrieve the {{site.data.keyword.composeForEtcd}} service credentials.
+   1. In the navigation on the service details page, click **Manage**.
+   2. Go to the **Overview** tab.
+   3. In the **Connection Strings** section, select **Command Line**.
+   4. Note the value of the `--endpoints` and `--user` parameters.
+      Example output for `--endpoints`:
+      ```
+      --endpoints=https://portal-ssl123-34.bmix-dal-yp-12a23b5c-123a-12ab-a1b2-1a2bc3d34567.1234567890.composedb.com:12345,https://portal-ssl123-35.bmix-dal-yp-12a23b5c-123a-12ab-a1b2-1a2bc3d34567.1234567890.composedb.com:12345
+      ```
+      {: screen}
+
+      Example output for `--user`:
+      ```
+      --user=root:ABCDEFGHIJKLMNOP
+      ```
+      {: screen}
+   5. Use these service credentials when you [install Portworx in your cluster](#install_portworx).
+   
 
 ## Installing Portworx in your cluster
 {: #install_portworx}
