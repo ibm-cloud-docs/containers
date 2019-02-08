@@ -54,7 +54,7 @@ You can create standard clusters in every supported {{site.data.keyword.containe
 You can organize your resources across {{site.data.keyword.Bluemix_notm}} services by using {{site.data.keyword.Bluemix_notm}} locations, also called regions. For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location.
 {:shortdesc}
 
-You can specify a {{site.data.keyword.Bluemix_notm}} region when you log in to the global API endpoint. To list available regions, run `ibmcloud regions`. To check which {{site.data.keyword.Bluemix_notm}} location you are currently in, run `ibmcloud target` and review the **Region** field. If you do not specify a region, you are prompted to select a region.
+You can specify an {{site.data.keyword.Bluemix_notm}} region when you log in to the global API endpoint. To list available regions, run `ibmcloud regions`. To check which {{site.data.keyword.Bluemix_notm}} location you are currently in, run `ibmcloud target` and review the **Region** field. If you do not specify a region, you are prompted to select a region.
 
 For example, to log in to the global API endpoint in the Dallas (`us-south`) region:
 ```
