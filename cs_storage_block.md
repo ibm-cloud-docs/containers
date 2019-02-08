@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-08"
 
 ---
 
@@ -982,7 +982,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
             requests:
               storage: 20Gi
               iops: "300" #required only for performance storage
-	    storageClassName: ibmc-block-retain-bronze
+	      storageClassName: ibmc-block-retain-bronze
      ```
      {: codeblock}
 
@@ -1068,7 +1068,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
            resources:
              requests:
                storage: 20Gi
-	     storageClassName: ibmc-block-bronze-delayed
+	       storageClassName: ibmc-block-bronze-delayed
        - metadata:
            name: myvol2
          spec:
@@ -1077,7 +1077,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
            resources:
              requests:
                storage: 20Gi
-	     storageClassName: ibmc-block-bronze-delayed
+	       storageClassName: ibmc-block-bronze-delayed
      ```
      {: codeblock}
 
