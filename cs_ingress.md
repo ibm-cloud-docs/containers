@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-08"
 
 ---
 
@@ -1106,7 +1106,7 @@ Get started with some of the most commonly used annotations.
 * [client-max-body-size](/docs/containers/cs_annotations.html#client-max-body-size): Set the maximum size of the body that the client can send as part of a request.
 
 Only annotations in the format `ingress.bluemix.net/<annotation>` are supported. For the full list of supported annotations, see [Customizing Ingress with annotations](/docs/containers/cs_annotations.html). Annotations in the format `ingress.kubernetes.io/<annotation>`, `kubernetes.io/<annotation>` and `nginx.ingress.kubernetes.io/<annotation>` are not supported.
-{: important}
+{: note}
 
 <br />
 
