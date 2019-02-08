@@ -41,13 +41,6 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </thead>
 <tbody>
 <tr>
-<td>0.2.44</td>
-<td>07 Feb 2019</td>
-<td><ul>
-<li>Adds `--skip-rbac` option to the `ibmcloud ks cluster-config` command to skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.Bluemix_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers/cs_users.html#rbac). If you use [{{site.data.keyword.Bluemix_notm}} IAM service access roles](/docs/containers/cs_access_reference.html#service) to manage all your RBAC users, do not include this option.</li>
-<li>Updates the Go version to 1.11.5.</li></td>
-</tr>
-<tr>
 <td>0.2.40</td>
 <td>06 Feb 2019</td>
 <td><ul>
@@ -69,7 +62,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tr>
 <td>0.1.668</td>
 <td>18 Dec 2018</td>
-<td><ul><li>Switches the default API endpoint from <code>https://containers.bluemix.net</code> to <code>https://containers.cloud.ibm.com</code>.</li>
+<td><ul><li>Changes the default API endpoint from <code>https://containers.bluemix.net</code> to <code>https://containers.cloud.ibm.com</code>.</li>
 <li>Fixes bug so that translations are displaying properly for command help and error messages.</li>
 <li>Displays command help faster.</li></ul></td>
 </tr>
@@ -89,8 +82,13 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tr>
 <td>0.1.635</td>
 <td>06 Nov 2018</td>
-<td>Adds the [<code>ibmcloud ks alb-autoupdate-disable</code>](/docs/containers/cs_cli_reference.html#cs_alb_autoupdate_disable),  [<code>ibmcloud ks alb-autoupdate-enable</code>](/docs/containers/cs_cli_reference.html#cs_alb_autoupdate_enable), [<code>ibmcloud ks alb-autoupdate-get</code>](/docs/containers/cs_cli_reference.html#cs_alb_autoupdate_get), [<code>ibmcloud ks alb-rollback</code>](/docs/containers/cs_cli_reference.html#cs_alb_rollback), and [<code>ibmcloud ks alb-update</code>](/docs/containers/cs_cli_reference.html#cs_alb_update) commands for managing automatic updates of the Ingress ALB cluster add-on.
-</td>
+<td>Adds commands for managing automatic updates of the Ingress ALB cluster add-on:<ul>
+<li>[<code>ibmcloud ks alb-autoupdate-disable</code>](/docs/containers/cs_cli_reference.html#cs_alb_autoupdate_disable)</li>
+<li>[<code>ibmcloud ks alb-autoupdate-enable</code>](/docs/containers/cs_cli_reference.html#cs_alb_autoupdate_enable)</li>
+<li>[<code>ibmcloud ks alb-autoupdate-get</code>](/docs/containers/cs_cli_reference.html#cs_alb_autoupdate_get)</li>
+<li>[<code>ibmcloud ks alb-rollback</code>](/docs/containers/cs_cli_reference.html#cs_alb_rollback)</li>
+<li>[<code>ibmcloud ks alb-update</code>](/docs/containers/cs_cli_reference.html#cs_alb_update)</li>
+</ul></td>
 </tr>
 <tr>
 <td>0.1.621</td>

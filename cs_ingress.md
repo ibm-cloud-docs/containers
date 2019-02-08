@@ -567,26 +567,26 @@ In a web browser, enter the URL of the app service to access.
 ```
 https://<domain>/<app1_path>
 ```
-{: pre}
+{: codeblock}
 
 If you exposed multiple apps, access those apps by changing the path that is appended to the URL.
 
 ```
 https://<domain>/<app2_path>
 ```
-{: pre}
+{: codeblock}
 
 If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
 
 ```
 http://<subdomain1>.<domain>/<app1_path>
 ```
-{: pre}
+{: codeblock}
 
 ```
 http://<subdomain2>.<domain>/<app1_path>
 ```
-{: pre}
+{: codeblock}
 
 
 Having trouble connecting to your app through Ingress? Try [debugging Ingress](/docs/containers/cs_troubleshoot_debug_ingress.html).
@@ -1064,26 +1064,26 @@ Your Ingress resource is created in the same namespace as your app services. You
 ```
 https://<domain>/<app1_path>
 ```
-{: pre}
+{: codeblock}
 
 If you exposed multiple apps, access those apps by changing the path that is appended to the URL.
 
 ```
 https://<domain>/<app2_path>
 ```
-{: pre}
+{: codeblock}
 
 If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
 
 ```
 http://<subdomain1>.<domain>/<app1_path>
 ```
-{: pre}
+{: codeblock}
 
 ```
 http://<subdomain2>.<domain>/<app1_path>
 ```
-{: pre}
+{: codeblock}
 
 
 For a comprehensive tutorial on how to secure microservice-to-microservice communication across your clusters by using the private ALB with TLS, check out [this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2).
