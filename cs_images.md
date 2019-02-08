@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-08"
 
 ---
 
@@ -452,12 +452,12 @@ Every namespace has a Kubernetes service account that is named `default`. You ca
 2. Add the image pull secret to your default service account.
    - **To add the image pull secret when no image pull secret is defined:**
        ```
-       kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "bluemix-<namespace_name>-secret-regional"}]}'
+       kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "<image_pull_secret_name>"}]}'
        ```
        {: pre}
    - **To add the image pull secret when an image pull secret is already defined:**
        ```
-       kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"bluemix-<namespace_name>-secret-regional"}}]'
+       kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"<image_pull_secret_name>"}}]'
        ```
        {: pre}
 3. Verify that your image pull secret was added to your default service account.
@@ -472,7 +472,7 @@ Every namespace has a Kubernetes service account that is named `default`. You ca
    Namespace:           <namespace_name>
    Labels:              <none>
    Annotations:         <none>
-   Image pull secrets:  bluemix-namespace_name-secret-regional
+   Image pull secrets:  <image_pull_secret_name>
    Mountable secrets:   default-token-sh2dx
    Tokens:              default-token-sh2dx
    Events:              <none>

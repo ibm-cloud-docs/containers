@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-08"
 
 ---
 
@@ -54,41 +54,62 @@ You can create standard clusters in every supported {{site.data.keyword.containe
 You can organize your resources across {{site.data.keyword.Bluemix_notm}} services by using {{site.data.keyword.Bluemix_notm}} locations, also called regions. For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location.
 {:shortdesc}
 
-To check which {{site.data.keyword.Bluemix_notm}} location you are currently in, run `ibmcloud target` and review the **Region** field.
+You can specify an {{site.data.keyword.Bluemix_notm}} region when you log in to the global API endpoint. To list available regions, run `ibmcloud regions`. To check which {{site.data.keyword.Bluemix_notm}} location you are currently in, run `ibmcloud target` and review the **Region** field. If you do not specify a region, you are prompted to select a region.
 
-{{site.data.keyword.Bluemix_notm}} locations can be accessed by specifying the region API endpoint when you log in. If you do not specify a region endpoint, you are automatically logged in to the region that is closest to you.
+For example, to log in to the global API endpoint in the Dallas (`us-south`) region:
+```
+ibmcloud login -a https://cloud.ibm.com -r us-south
+```
+{: pre}
 
-For example, you can use the following commands to log in to {{site.data.keyword.Bluemix_notm}} region API endpoints:
+To log in to the global API endpoint and select a region:
+```
+ibmcloud login -a https://cloud.ibm.com
+```
+{: pre}
 
-  * Dallas
-      ```
-      ibmcloud login -a api.ng.bluemix.net
-      ```
-      {: pre}
+Example output:
+```
+API endpoint: cloud.ibm.com
 
-  * Washington DC
-      ```
-      ibmcloud login -a api.us-east.bluemix.net
-      ```
-      {: pre}
+Get One Time Code from https://identity-2.eu-central.iam.cloud.ibm.com/identity/passcode to proceed.
+Open the URL in the default browser? [Y/n]> y
+One Time Code > 
+Authenticating...
+OK
 
-  * Sydney and Tokyo
-      ```
-      ibmcloud login -a api.au-syd.bluemix.net
-      ```
-      {: pre}
+Select an account:
+1. MyAccount (00a11aa1a11aa11a1111a1111aaa11aa) <-> 1234567
+2. TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
+Enter a number> 2
+Targeted account TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
 
-  * Frankfurt
-      ```
-      ibmcloud login -a api.eu-de.bluemix.net
-      ```
-      {: pre}
 
-  * London
-      ```
-      ibmcloud login -a api.eu-gb.bluemix.net
-      ```
-      {: pre}
+Targeted resource group default
+
+Select a region (or press enter to skip):
+1. au-syd
+2. jp-tok
+3. eu-de
+4. eu-gb
+5. us-south
+6. us-east
+Enter a number> 5
+Targeted region us-south
+
+                      
+API endpoint:      https://cloud.ibm.com   
+Region:            us-south   
+User:              first.last@email.com   
+Account:           TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321  
+Resource group:    default   
+CF API endpoint:      
+Org:                  
+Space:                
+
+...
+```
+{: screen}
 
 <br />
 
