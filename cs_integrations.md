@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-08"
 
 ---
 
@@ -237,7 +237,7 @@ Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
-1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/apps/reqnsi.html#req_instance).
+1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/resources/connect_external_app.html#req_instance).
     * Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.
     * You must create the service instance in the same resource group as your cluster. A resource can be created in only one resource group that you can't change afterward.
 
@@ -276,7 +276,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      ```
      {: pre}
 
-4.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](/docs/containers/cs_cli_reference.html#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. For IAM-enabled services, you can also use the default **Writer** service access role, or specify the service access role with the `--role` flag. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials. If you use the `--key` flag, do not include the `--role` flag. 
+4.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](/docs/containers/cs_cli_reference.html#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. For IAM-enabled services, you can also use the default **Writer** service access role, or specify the service access role with the `--role` flag. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials. If you use the `--key` flag, do not include the `--role` flag.
     ```
     ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
     ```
