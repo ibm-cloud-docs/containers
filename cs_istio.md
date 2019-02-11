@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-08"
+lastupdated: "2019-02-11"
 
 ---
 
@@ -460,6 +460,44 @@ To enable automatic sidecar injection for a namespace:
     ```
     {: pre}
 
+5. If you have not created a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/spec-requirements/).
+
+  1. Define a service for the app.
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: myappservice
+    spec:
+      selector:
+        <selector_key>: <selector_value>
+      ports:
+       - protocol: TCP
+         port: 8080
+    ```
+    {: codeblock}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the ALB service YAML file components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>selector</code></td>
+    <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs.</td>
+     </tr>
+     <tr>
+     <td><code>port</code></td>
+     <td>The port that the service listens on.</td>
+     </tr>
+     </tbody></table>
+
+  2. Create the service in your cluster. Ensure that the service deploys into the same namespace as the app.
+    ```
+    kubectl apply -f myappservice.yaml -n <namespace>
+    ```
+    {: pre}
+
 The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container running alongside your app container.
 
 ### Manually injecting sidecars
@@ -491,6 +529,44 @@ To manually inject sidecars into a deployment:
   kubectl apply <myapp>.yaml
   ```
   {: pre}
+
+5. If you have not created a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/spec-requirements/).
+
+  1. Define a service for the app.
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: myappservice
+    spec:
+      selector:
+        <selector_key>: <selector_value>
+      ports:
+       - protocol: TCP
+         port: 8080
+    ```
+    {: codeblock}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the ALB service YAML file components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>selector</code></td>
+    <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs.</td>
+     </tr>
+     <tr>
+     <td><code>port</code></td>
+     <td>The port that the service listens on.</td>
+     </tr>
+     </tbody></table>
+
+  2. Create the service in your cluster. Ensure that the service deploys into the same namespace as the app.
+    ```
+    kubectl apply -f myappservice.yaml -n <namespace>
+    ```
+    {: pre}
 
 The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container running alongside your app container.
 

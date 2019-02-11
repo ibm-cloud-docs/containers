@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-11"
 
 ---
 
@@ -176,26 +176,6 @@ Before you use annotations, make sure you have properly set up your Ingress serv
   <td>Allow SSL services support to encrypt traffic to your upstream apps that require HTTPS.</td>
   </tr>
   </tbody></table>
-
-<br>
-
-<table>
-<caption>Istio annotations</caption>
-<col width="20%">
-<col width="20%">
-<col width="60%">
-<thead>
-<th>Istio annotations</th>
-<th>Name</th>
-<th>Description</th>
-</thead>
-<tbody>
-<tr>
-<td><a href="#istio-services">Istio services</a></td>
-<td><code>istio-services</code></td>
-<td>Route traffic to Istio-managed services.</td>
-</tr>
-</tbody></table>
 
 <br>
 
@@ -790,6 +770,192 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 <code>kubectl apply -f myingress.yaml</code></pre>
 </li>
 <li>Curl the Ingress subdomain to access your app. Example: <code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
+
+### Istio services (istio-services)
+{: #istio-services}
+
+Route traffic to Istio-managed services.
+{:shortdesc}
+
+
+
+<dl>
+<dt>Description</dt>
+<dd>
+If you have Istio-managed services, you can use a cluster ALB to route HTTP/HTTPS requests to the Istio Ingress controller. The Istio Ingress controller then routes the requests to the app services. In order to route traffic, you must make changes to the Ingress resources for both the cluster ALB and the Istio Ingress controller.
+<br><br>In the Ingress resource for the cluster ALB, you must:
+  <ul>
+    <li>specify the `istio-services` annotation</li>
+    <li>define the service path as the actual path the app listens on</li>
+    <li>define the service port as the port of the Istio Ingress controller</li>
+  </ul>
+<br>In the Ingress resource for the Istio Ingress controller, you must:
+  <ul>
+    <li>define the service path as the actual path the app listens on</li>
+    <li>define the service port as the HTTP/HTTPS port of the app service that is exposed by the Istio Ingress controller</li>
+</ul>
+</dd>
+
+<dt>Sample Ingress resource YAML for the cluster ALB</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/istio-services: "enable=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: &lt;/myapp1&gt;
+        backend:
+          serviceName: &lt;myservice1&gt;
+          servicePort: &lt;istio_ingress_port&gt;
+      - path: &lt;/myapp2&gt;
+        backend:
+          serviceName: &lt;myservice2&gt;
+          servicePort: &lt;istio_ingress_port&gt;</code></pre>
+
+<table>
+<caption>Understanding the YAML file components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>enable</code></td>
+  <td>To enable traffic routing to Istio-managed services, set to <code>True</code>.</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code><em>&lt;myservice1&gt;</em></code> with the name of the Kubernetes service that you created for your Istio-managed app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all Istio-managed services are enabled for traffic routing.</td>
+</tr>
+<tr>
+<td><code>istioServiceNamespace</code></td>
+<td>Replace <code><em>&lt;istio-namespace&gt;</em></code> with the Kubernetes namespace where Istio is installed. This field is optional. If you do not specify a namespace, then the <code>istio-system</code> namespace is used.</td>
+</tr>
+<tr>
+<td><code>istioServiceName</code></td>
+<td>Replace <code><em>&lt;istio-ingress-service&gt;</em></code> with the name of the Istio Ingress service. This field is optional. If you do not specify the Istio Ingress service name, then service name <code>istio-ingress</code> is used.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+  <td>For each Istio-managed service that you want to route traffic to, replace <code><em>&lt;/myapp1&gt;</em></code> with the back-end path that the Istio-managed service listens on. The path must correspond to the path that you defined in the Istio Ingress resource.</td>
+</tr>
+<tr>
+<td><code>servicePort</code></td>
+<td>For each Istio-managed service that you want to route traffic to, replace <code><em>&lt;istio_ingress_port&gt;</em></code> with port of the Istio Ingress controller.</td>
+</tr>
+</tbody></table>
+</dd>
+
+<dt>Usage</dt></dl>
+
+1. Deploy your app. The example resources provided in these steps use the Istio sample app called [BookInfo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v0.7/docs/guides/bookinfo.html), which can be found in the `istio-0.7.1/samples/bookinfo/kube` repository.
+   ```
+   kubectl apply -f bookinfo.yaml -n istio-system
+   ```
+   {: pre}
+
+2. Set up Istio routing rules for the app. For example, in the Istio sample app called BookInfo, [routing rules for each microservice ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v0.7/docs/tasks/traffic-management/request-routing.html) are defined in the `route-rule-all-v1.yaml` file.
+
+3. Expose the app to the Istio Ingress controller by creating an Istio Ingress resource. The resource allows Istio features, such as monitoring and route rules, to be applied to traffic entering the cluster.
+    For example, the following resource for the BookInfo app is pre-defined in the `bookinfo.yaml` file:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: istio-ingress-resource
+      annotations:
+        kubernetes.io/ingress.class: "istio"
+    spec:
+      rules:
+      - http:
+          paths:
+          - path: /productpage
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /login
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /logout
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /api/v1/products.*
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+    ```
+    {: codeblock}
+
+4. Create the Istio Ingress resource.
+    ```
+    kubectl create -f istio-ingress-resource.yaml -n istio-system
+    ```
+    {: pre}
+    You app is connected to the Istio Ingress controller.
+
+5. Get the IBM **Ingress subdomain** and **Ingress secret** for your cluster. The subdomain and secret are pre-registered for your cluster and are used as a unique public URL for your app.
+    ```
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+6. Connect the Istio Ingress controller to the IBM Ingress ALB for your cluster by creating an IBM Ingress resource.
+    Example for the BookInfo app:
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: ibm-ingress-resource
+      annotations:
+        ingress.bluemix.net/istio-services: "enabled=true serviceName=productpage istioServiceName=istio-ingress-resource"
+    spec:
+      tls:
+      - hosts:
+        - mycluster-459249.us-south.containers.mybluemix.net
+        secretName: mycluster-459249
+      rules:
+      - host: mycluster-459249.us-south.containers.mybluemix.net
+        http:
+          paths:
+          - path: /productpage
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /login
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /logout
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+          - path: /api/v1/products.*
+            backend:
+              serviceName: productpage
+              servicePort: 9080
+    ```
+    {: codeblock}
+
+7. Create the IBM ALB Ingress resource.
+    ```
+    kubectl apply -f ibm-ingress-resource.yaml -n istio-system
+    ```
+    {: pre}
+
+8. In a browser, go to `https://<hostname>/frontend` to view the app web page.
 
 <br />
 
@@ -1842,199 +2008,6 @@ spec:
      kubectl create -f ssl-my-test
      ```
      {: pre}
-
-<br />
-
-
-## Istio annotations
-{: #istio-annotations}
-
-Use Istio annotations to route incoming traffic to Istio-managed services.
-{: shortdesc}
-
-### Istio services (istio-services)
-{: #istio-services}
-
-Route traffic to Istio-managed services.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>
-<p class="note">This annotation works only with Istio 0.7 and earlier.</p>If you have Istio-managed services, you can use a cluster ALB to route HTTP/HTTPS requests to the Istio Ingress controller. The Istio Ingress controller then routes the requests to the app services. In order to route traffic, you must make changes to the Ingress resources for both the cluster ALB and the Istio Ingress controller.
-<br><br>In the Ingress resource for the cluster ALB, you must:
-  <ul>
-    <li>specify the `istio-services` annotation</li>
-    <li>define the service path as the actual path the app listens on</li>
-    <li>define the service port as the port of the Istio Ingress controller</li>
-  </ul>
-<br>In the Ingress resource for the Istio Ingress controller, you must:
-  <ul>
-    <li>define the service path as the actual path the app listens on</li>
-    <li>define the service port as the HTTP/HTTPS port of the app service that is exposed by the Istio Ingress controller</li>
-</ul>
-</dd>
-
-<dt>Sample Ingress resource YAML for the cluster ALB</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/istio-services: "enable=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: &lt;/myapp1&gt;
-        backend:
-          serviceName: &lt;myservice1&gt;
-          servicePort: &lt;istio_ingress_port&gt;
-      - path: &lt;/myapp2&gt;
-        backend:
-          serviceName: &lt;myservice2&gt;
-          servicePort: &lt;istio_ingress_port&gt;</code></pre>
-
-<table>
-<caption>Understanding the YAML file components</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-</thead>
-<tbody>
-<tr>
-<td><code>enable</code></td>
-  <td>To enable traffic routing to Istio-managed services, set to <code>True</code>.</td>
-</tr>
-<tr>
-<td><code>serviceName</code></td>
-<td>Replace <code><em>&lt;myservice1&gt;</em></code> with the name of the Kubernetes service that you created for your Istio-managed app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all Istio-managed services are enabled for traffic routing.</td>
-</tr>
-<tr>
-<td><code>istioServiceNamespace</code></td>
-<td>Replace <code><em>&lt;istio-namespace&gt;</em></code> with the Kubernetes namespace where Istio is installed. This field is optional. If you do not specify a namespace, then the <code>istio-system</code> namespace is used.</td>
-</tr>
-<tr>
-<td><code>istioServiceName</code></td>
-<td>Replace <code><em>&lt;istio-ingress-service&gt;</em></code> with the name of the Istio Ingress service. This field is optional. If you do not specify the Istio Ingress service name, then service name <code>istio-ingress</code> is used.</td>
-</tr>
-<tr>
-<td><code>path</code></td>
-  <td>For each Istio-managed service that you want to route traffic to, replace <code><em>&lt;/myapp1&gt;</em></code> with the back-end path that the Istio-managed service listens on. The path must correspond to the path that you defined in the Istio Ingress resource.</td>
-</tr>
-<tr>
-<td><code>servicePort</code></td>
-<td>For each Istio-managed service that you want to route traffic to, replace <code><em>&lt;istio_ingress_port&gt;</em></code> with port of the Istio Ingress controller.</td>
-</tr>
-</tbody></table>
-</dd>
-
-<dt>Usage</dt></dl>
-
-1. Deploy your app. The example resources provided in these steps use the Istio sample app called [BookInfo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v0.7/docs/guides/bookinfo.html), which can be found in the `istio-0.7.1/samples/bookinfo/kube` repository.
-   ```
-   kubectl apply -f bookinfo.yaml -n istio-system
-   ```
-   {: pre}
-
-2. Set up Istio routing rules for the app. For example, in the Istio sample app called BookInfo, [routing rules for each microservice ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v0.7/docs/tasks/traffic-management/request-routing.html) are defined in the `route-rule-all-v1.yaml` file.
-
-3. Expose the app to the Istio Ingress controller by creating an Istio Ingress resource. The resource allows Istio features, such as monitoring and route rules, to be applied to traffic entering the cluster.
-    For example, the following resource for the BookInfo app is pre-defined in the `bookinfo.yaml` file:
-    ```
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: istio-ingress-resource
-      annotations:
-        kubernetes.io/ingress.class: "istio"
-    spec:
-      rules:
-      - http:
-          paths:
-          - path: /productpage
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /login
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /logout
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /api/v1/products.*
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-    ```
-    {: codeblock}
-
-4. Create the Istio Ingress resource.
-    ```
-    kubectl create -f istio-ingress-resource.yaml -n istio-system
-    ```
-    {: pre}
-    You app is connected to the Istio Ingress controller.
-
-5. Get the IBM **Ingress subdomain** and **Ingress secret** for your cluster. The subdomain and secret are pre-registered for your cluster and are used as a unique public URL for your app.
-    ```
-    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-6. Connect the Istio Ingress controller to the IBM Ingress ALB for your cluster by creating an IBM Ingress resource.
-    Example for the BookInfo app:
-    ```
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: ibm-ingress-resource
-      annotations:
-        ingress.bluemix.net/istio-services: "enabled=true serviceName=productpage istioServiceName=istio-ingress-resource"
-    spec:
-      tls:
-      - hosts:
-        - mycluster-459249.us-south.containers.mybluemix.net
-        secretName: mycluster-459249
-      rules:
-      - host: mycluster-459249.us-south.containers.mybluemix.net
-        http:
-          paths:
-          - path: /productpage
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /login
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /logout
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-          - path: /api/v1/products.*
-            backend:
-              serviceName: productpage
-              servicePort: 9080
-    ```
-    {: codeblock}
-
-7. Create the IBM ALB Ingress resource.
-    ```
-    kubectl apply -f ibm-ingress-resource.yaml -n istio-system
-    ```
-    {: pre}
-
-8. In a browser, go to `https://<hostname>/frontend` to view the app web page.
 
 <br />
 
