@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-11"
 
 ---
 
@@ -40,6 +40,8 @@ This task includes the information for installing these CLIs and plug-ins:
 -   {{site.data.keyword.containerlong_notm}} plug-in
 -   Kubernetes CLI version that matches the `major.minor` version of your cluster
 -   Optional: {{site.data.keyword.registryshort_notm}} plug-in
+
+
 
 <br>
 To install the CLIs:
@@ -396,6 +398,8 @@ To uninstall the CLIs:
 <br />
 
 
+
+
 ## Automating cluster deployments with the API
 {: #cs_api}
 
@@ -671,7 +675,7 @@ Before you begin, make sure that you have an {{site.data.keyword.Bluemix_notm}} 
 - **API key:** Retrieve your [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) API key as follows.
    1. From the menu bar, click **Manage** > **Access (IAM)**.
    2. Click the **Users** page and then select yourself.
-   3. In the **API keys** pane, click **Create an IBM Cloud API key**. 
+   3. In the **API keys** pane, click **Create an IBM Cloud API key**.
    4. Enter a **Name** and **Description** for your API key and click **Create**.
    4. Click **Show** to see the API key that was generated for you.
    5. Copy the API key so that you can use it to retrieve your new {{site.data.keyword.Bluemix_notm}} IAM access token.

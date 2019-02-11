@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-08"
+lastupdated: "2019-02-11"
 
 ---
 
@@ -819,7 +819,7 @@ Enable a managed add-on in an existing cluster. This command must be combined wi
 #### ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
 {: #cs_cluster_addon_enable_istio}
 
-Enable the managed Istio add-on. Installs the core components of Istio version 1.0.5, including Prometheus.
+Enable the managed [Istio add-on](/docs/containers/cs_istio.html). Installs the core components of Istio version 1.0.5, including Prometheus.
 {: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -890,7 +890,7 @@ Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample applicati
 #### ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
 {: #cs_cluster_addon_enable_knative}
 
-Enable the managed Knative add-on to install the Knative serverless framework.
+Enable the managed [Knative add-on](/docs/containers/cs_tutorials_knative.html) to install the Knative serverless framework.
 {: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
