@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-08"
+lastupdated: "2019-02-11"
 
 ---
 
@@ -668,7 +668,7 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
         IBM_SERVICE_API_KEY: <base64_apikey>
         IBM_INSTANCE_ID: <base64_guid>
         IBM_CUSTOMER_ROOT_KEY: <base64_rootkey>
-	      IBM_BASE_URL: <kp_api_endpoint>
+	    IBM_BASE_URL: <kp_api_endpoint>
       ```
       {: codeblock}
 
