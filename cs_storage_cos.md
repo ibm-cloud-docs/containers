@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-11"
+lastupdated: "2019-02-12"
 
 ---
 
@@ -279,13 +279,13 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    - **For macOS and Linux:**
      - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.
        ```
-       helm ibmc install ibm/ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install ibm/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml 
        ```
        {: pre}
 
      - If you completed the previous step, install with a limitation to specific Kubernetes secrets.
        ```
-       helm ibmc install ./ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc install ./ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml 
        ```
        {: pre}
 
