@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-12"
 
 ---
 
@@ -190,7 +190,7 @@ Before you begin:
 
 To list available portable public IP addresses:
 
-1.  Create a Kubernetes service configuration file that is named `myservice.yaml` and define a service of type `LoadBalancer` with a dummy load balancer IP address. The following example uses the IP address 1.1.1.1 as the load balancer IP address.
+1.  Create a Kubernetes service configuration file that is named `myservice.yaml` and define a service of type `LoadBalancer` with a dummy load balancer IP address. The following example uses the IP address 1.1.1.1 as the load balancer IP address. Replace `<zone>` with the zone where you want to check for available IPs.
 
     ```
     apiVersion: v1
@@ -200,6 +200,8 @@ To list available portable public IP addresses:
         run: myservice
       name: myservice
       namespace: default
+      annotations:
+        service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"
     spec:
       ports:
       - port: 80
