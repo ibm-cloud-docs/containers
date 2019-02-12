@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-11"
+lastupdated: "2019-02-12"
 
 ---
 
@@ -479,7 +479,7 @@ To enable automatic sidecar injection for a namespace:
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the ALB service YAML file components</th>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the service YAML file components</th>
     </thead>
     <tbody>
     <tr>
@@ -549,7 +549,7 @@ To manually inject sidecars into a deployment:
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the ALB service YAML file components</th>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the service YAML file components</th>
     </thead>
     <tbody>
     <tr>
