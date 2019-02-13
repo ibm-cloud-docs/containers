@@ -705,7 +705,16 @@ Use the IBM-provided Ingress subdomain for your Istio-managed apps by connecting
 
 Before you begin:
 1. [Install the `istio` managed add-on](#istio_install) in a cluster.
-2. [Download the `istioctl` client ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/download-release/).
+2. Install the `istioctl` client.
+  1. Download `istioctl`.
+    ```
+    curl -L https://git.io/getIstio | sh -
+    ```
+  2. Navigate to the Istio package directory.
+    ```
+    cd istio-1.0.5
+    ```
+    {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
 
 To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} ALB:
