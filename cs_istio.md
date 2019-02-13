@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-12"
+lastupdated: "2019-02-13"
 
 ---
 
@@ -333,9 +333,11 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
 
 4. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars. The changes that you see are the result of the different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice that are called randomly each time. The versions are selected randomly because the destination rules that are applied to the BookInfo app give equal weight to the `v1`, `v2`, and `v3` of the `reviews` microservice. To see the destination rules that are applied to BookInfo, run `kubectl get destinationrules -o yaml`.
 
-
-
 Next, you can [log, monitor, trace, and visualize](#istio_health) the service mesh for the BookInfo app.
+
+
+
+
 
 <br />
 
