@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-11"
+lastupdated: "2019-02-13"
 
 ---
 
@@ -1871,10 +1871,12 @@ ibmcloud ks alb-autoupdate-get --cluster mycluster
 Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to the ALB in a cluster. You can only update certificates that are imported from the same {{site.data.keyword.cloudcerts_long_notm}} instance.
 {: shortdesc}
 
-<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+When you import a certificate with this command, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. When the ALB is processing requests, it follows this reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
 
 To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting) set by {{site.data.keyword.cloudcerts_short}}, wait at least 45 seconds in between successive `alb-cert-deploy` and `alb-cert-deploy --update` commands.
 {: note}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>
 
@@ -1915,7 +1917,7 @@ Example for updating an existing ALB secret:
 ### ibmcloud ks alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [--json] [-s]
 {: #cs_alb_cert_get}
 
-View information about an ALB secret in a cluster.
+If you imported a certificate from {{site.data.keyword.cloudcerts_short}} to the ALB in a cluster, view information about the TLS certificate, such as the secrets that are associated with it.
 {: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -1959,13 +1961,13 @@ View information about an ALB secret in a cluster.
 ### ibmcloud ks alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [-s]
 {: #cs_alb_cert_rm}
 
-Remove an ALB secret in a cluster.
+If you imported a certificate from {{site.data.keyword.cloudcerts_short}} to the ALB in a cluster, remove the secret from the cluster.
 {: shortdesc}
-
-<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting) set by {{site.data.keyword.cloudcerts_short}}, wait at least 45 seconds in between successive `alb-cert-rm` commands.
 {: note}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>
 
@@ -2004,7 +2006,7 @@ To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manag
 ### ibmcloud ks alb-certs --cluster CLUSTER [--json] [-s]
 {: #cs_alb_certs}
 
-View a list of ALB secrets in a cluster.
+List the certificates that you imported from your {{site.data.keyword.cloudcerts_long_notm}} instance to ALBs in a cluster.
 {: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
