@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-12"
+lastupdated: "2019-02-13"
 
 ---
 
@@ -1819,7 +1819,7 @@ Use the `mutual-auth` annotation for SSL termination between the client and the 
 <dt>Pre-requisites</dt>
 <dd>
 <ul>
-<li>You must have a valid mutual authentication secret that contains the required <code>client.crt</code>. To create a mutual authentication secret, see the steps at the end of this section.</li>
+<li>You must have a valid mutual authentication secret that contains the required <code>ca.crt</code>. To create a mutual authentication secret, see the steps at the end of this section.</li>
 <li>To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](/docs/containers/cs_ingress.html#opening_ingress_ports) and then specify that port in this annotation. Do not use the `custom-port` annotation to specify a port for mutual authentication.</li>
 </ul>
 </dd>
@@ -1886,7 +1886,7 @@ spec:
        name: ssl-my-test
      type: Opaque
      data:
-       client.crt: <ca_certificate>
+       ca.crt: <ca_certificate>
      ```
      {: codeblock}
 4. Create the certificate as a Kubernetes secret.
@@ -2000,7 +2000,7 @@ spec:
        name: ssl-my-test
      type: Opaque
      data:
-       client.crt: <ca_certificate>
+       ca.crt: <ca_certificate>
      ```
      {: codeblock}
 4. Create the certificate as a Kubernetes secret.
