@@ -2928,6 +2928,7 @@ Make a request for a snapshot of your logs at a specific point in time and then 
   ```
   {: screen}
 
+
 ### ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
 {: #cs_log_collect_status}
 
