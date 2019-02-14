@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-14"
 
 ---
 
@@ -126,7 +126,7 @@ spec:
 <br />
 
 
-## Ingress components and architecture
+## What is Ingress?
 {: #planning}
 
 Ingress is a Kubernetes service that balances network traffic workloads in your cluster by forwarding public or private requests to your apps. You can use Ingress to expose multiple app services to the public or to a private network by using a unique public or private route.
@@ -163,6 +163,8 @@ For more information about what happens to ALB IPs in the event of a zone failur
 
 ### How does a request get to my app with Ingress in a single zone cluster?
 {: #architecture-single}
+
+
 
 The following diagram shows how Ingress directs communication from the internet to an app in a single-zone cluster:
 
@@ -1573,3 +1575,8 @@ Your apps are now exposed by your custom Ingress controller. To restore the IBM-
 ibmcloud ks alb-configure --albID <alb ID> --enable
 ```
 {: pre}
+
+## Using Istio with the Ingress ALB
+{: #istio_ingress}
+
+When you enable the [Istio managed add-on](/docs/containers/cs_istio.html#istio_install) in {{site.data.keyword.containerlong_notm}}, you can use Istio to manage your app microservices in a service mesh. Istio uses a gateway load balancer to expose app microservices. However, you can still use the IBM-provided Ingress subdomain for your cluster to expose your Istio-managed apps by connecting the Istio gateway load balancer and the IBM Ingress ALB. To get started, see [Exposing Istio-managed apps by using the IBM-provided Ingress subdomain](/docs/containers/cs_istio.html#istio_expose).

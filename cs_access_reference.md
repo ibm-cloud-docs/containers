@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-14"
 
 
 ---
@@ -22,7 +22,7 @@ lastupdated: "2019-02-13"
 
 
 # User access permissions
-{: #understanding}
+{: #access_reference}
 
 When you [assign cluster permissions](/docs/containers/cs_users.html), it can be hard to judge which role you need to assign to a user. Use the tables in the following sections to determine the minimum level of permissions that are required to perform common tasks in {{site.data.keyword.containerlong}}.
 {: shortdesc}
