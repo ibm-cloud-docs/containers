@@ -3330,6 +3330,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
   {: pre}
 
 
+
 ### ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER] [--skip-master-healthcheck] [-s]
 {: #cs_worker_reload}
 
