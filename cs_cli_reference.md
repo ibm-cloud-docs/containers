@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-14"
 
 ---
 
@@ -17,7 +17,6 @@ lastupdated: "2019-02-13"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 
@@ -36,6 +35,8 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_n
 
 
 
+
+
 ## Using the beta command structure
 {: #cs_beta}
 
@@ -51,7 +52,6 @@ export IKS_BETA_VERSION=0.2
 {: pre}
 
 
-
 ## ibmcloud ks commands
 {: #cs_commands}
 
@@ -61,8 +61,6 @@ export IKS_BETA_VERSION=0.2
 ibmcloud plugin list
 ```
 {: pre}
-
-
 
 <table summary="API commands table">
 <caption>API commands</caption>
@@ -110,7 +108,6 @@ ibmcloud plugin list
 
 <br>
 
-
 <table summary="Cluster commands: Management table">
 <caption>Cluster commands: Management commands</caption>
 <col width="25%">
@@ -140,9 +137,6 @@ ibmcloud plugin list
   </tr>
 </tbody>
 </table>
-
-
-
 
 <br>
 
@@ -603,7 +597,7 @@ After you disable the webhook, you must run the `ibmcloud ks apiserver-refresh` 
 ### ibmcloud ks apiserver-refresh --cluster CLUSTER [-s]
 {: #cs_apiserver_refresh}
 
-Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks apiserver-config-set`, or `apiserver-config-unset` commands. If a configuration change requires a restart, the affected Kubernetes master component is restarted. If the configuration changes can be applied without a restart, no Kubernetes master component is restarted. Your worker nodes, apps, and resources are not modified and continue to run.
+Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks apiserver-config-set` or `apiserver-config-unset` commands. If a configuration change requires a restart, the affected Kubernetes master component is restarted. If the configuration changes can be applied without a restart, no Kubernetes master component is restarted. Your worker nodes, apps, and resources are not modified and continue to run.
 {: shortdesc}
 
 <strong>Minimum required permissions</strong>: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -682,13 +676,10 @@ Initialize the {{site.data.keyword.containerlong_notm}} plug-in or specify the r
    </dl>
 
 **Example**:
-
-
 ```
 ibmcloud ks init --host https://uk-south.containers.cloud.ibm.com
 ```
 {: pre}
-
 
 ### ibmcloud ks messages
 {: #cs_messages}
@@ -934,8 +925,6 @@ List managed add-ons that are enabled in a cluster.
   ```
   {: pre}
 
-
-
 ### ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [--skip-rbac] [-s] [--yaml]
 {: #cs_cluster_config}
 
@@ -1116,8 +1105,6 @@ trusted: <em>true</em>
 <dt><code>--private-only</code></dt>
   <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  <p class="note">If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Private clusters](/docs/containers/cs_clusters_planning.html#private_clusters).</p></dd>
 
-
-
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with 1 worker node is created. This value is optional for standard clusters and is not available for free clusters.
 
@@ -1135,8 +1122,6 @@ trusted: <em>true</em>
 </dl>
 
 **Examples**:
-
-  
 
   **Create a free cluster**: Specify the cluster name only; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 
@@ -1166,7 +1151,6 @@ trusted: <em>true</em>
   ibmcloud ks cluster-create --machine-type machine-type --workers number --name cluster_name
   ```
   {: pre}
-
 
 ### ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted] [-s]
 {: #cs_cluster_feature_enable}
@@ -1199,10 +1183,6 @@ Enable a feature on an existing cluster.
   ibmcloud ks cluster-feature-enable --cluster my_cluster --trusted=true
   ```
   {: pre}
-
-
-
-
 
 ### ibmcloud ks cluster-get --cluster CLUSTER [--json] [--showResources] [-s]
 {: #cs_cluster_get}
@@ -1270,8 +1250,6 @@ View information about a cluster in your organization.
 
   ```
   {: screen}
-
-
 
 ### ibmcloud ks cluster-refresh --cluster CLUSTER [-f] [-s]
 {: #cs_cluster_refresh}
@@ -3058,8 +3036,6 @@ OK
 ```
 {: screen}
 
-
-
 ### ibmcloud ks regions
 {: #cs_regions}
 
@@ -3918,3 +3894,5 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
+
+
