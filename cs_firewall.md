@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-14"
 
 ---
 
@@ -282,7 +282,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       
 4. Allow outgoing network traffic from your worker node to {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). 
     - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.bluemix.net`
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO `https://iam.cloud.ibm.com`
+    - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.cloud.ibm.com`
 
 5.  Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, and LogDNA services:
     *   **{{site.data.keyword.monitoringlong_notm}}**:
