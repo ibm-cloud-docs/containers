@@ -809,7 +809,7 @@ To use Weave Scope with a cluster:
     ```
     {: screen}
 
-5.  Open your web browser to `http://localhost:4040`. Without the default components deployed, you see the following diagram. You can choose to view topology diagrams or tables of the Kubernetes resources in the cluster.
+5.  Open your browser to `http://localhost:4040`. Without the default components deployed, you see the following diagram. You can choose to view topology diagrams or tables of the Kubernetes resources in the cluster.
 
      <img src="images/weave_scope.png" alt="Example topology from Weave Scope" style="width:357px;" />
 
