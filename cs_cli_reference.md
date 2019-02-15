@@ -3754,6 +3754,7 @@ Remove a worker pool from your cluster. All worker nodes in the pool are deleted
   ```
   {: pre}
 
+
 ### ibmcloud ks worker-pools --cluster CLUSTER [--json] [-s]
 {: #cs_worker_pools}
 
