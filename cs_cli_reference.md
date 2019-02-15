@@ -520,6 +520,7 @@ View the URL for the remote logging service that you are sending API server audi
   ```
   {: pre}
 
+
 ### ibmcloud ks apiserver-config-set
 {: #cs_apiserver_config_set}
 
@@ -1252,6 +1253,7 @@ View information about a cluster in your organization.
 
   ```
   {: screen}
+
 
 ### ibmcloud ks cluster-refresh --cluster CLUSTER [-f] [-s]
 {: #cs_cluster_refresh}
@@ -2070,6 +2072,7 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
   ```
   {: pre}
 
+
 ### ibmcloud ks alb-get --albID ALB_ID [--json] [-s]
 {: #cs_alb_get}
 
@@ -2189,6 +2192,7 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 <br />
 
 
+
 ## Infrastructure commands
 {: #infrastructure_commands}
 
@@ -2273,6 +2277,7 @@ Before you use this command, make sure that the user whose credentials are used 
   ```
   {: pre}
 
+
 ### ibmcloud ks credential-unset
 {: #cs_credentials_unset}
 
@@ -2327,6 +2332,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
   ibmcloud ks machine-types --zone dal10
   ```
   {: pre}
+
 
 
 ### ibmcloud ks vlans --zone ZONE [--all] [--json] [-s]
@@ -2513,6 +2519,7 @@ Example for log type `syslog` that forwards logs from an `ingress` source on a p
   ```
   {: pre}
 
+
 ### ibmcloud ks logging-config-get --cluster CLUSTER [--logsource LOG_SOURCE] [--json] [-s]
 {: #cs_logging_get}
 
@@ -2575,6 +2582,7 @@ Refresh the logging configuration for the cluster. This refreshes the logging to
   ibmcloud ks logging-config-refresh --cluster my_cluster
   ```
   {: pre}
+
 
 
 ### ibmcloud ks logging-config-rm --cluster CLUSTER [--id LOG_CONFIG_ID] [--all] [--force-update] [-s]
@@ -3481,6 +3489,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
   {: pre}
 
 
+
 ### ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [--force-update] [-s]
 {: #cs_worker_update}
 
@@ -3521,6 +3530,7 @@ You might need to change your YAML files for deployments before updating. Review
   ibmcloud ks worker-update --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
+
 
 ### ibmcloud ks workers --cluster CLUSTER [--worker-pool POOL] [--show-pools] [--show-deleted] [--json] [-s]
 {: #cs_workers}
@@ -3611,6 +3621,7 @@ You can create a worker pool in your cluster. When you add a worker pool, it is 
   ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b2c.4x16 --size-per-zone 6
   ```
   {: pre}
+
 
 ### ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--json]
 {: #cs_worker_pool_get}
