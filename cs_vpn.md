@@ -19,7 +19,6 @@ lastupdated: "2019-02-15"
 {:download: .download}
 
 
-
 # Setting up VPN connectivity
 {: #vpn}
 

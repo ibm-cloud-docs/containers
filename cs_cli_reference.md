@@ -19,7 +19,6 @@ lastupdated: "2019-02-15"
 {:download: .download}
 
 
-
 # Command reference
 {: #cs_cli_reference}
 
