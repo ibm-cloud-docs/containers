@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-15"
 
 ---
 
@@ -43,8 +43,46 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 ## Version 1.13 changelog
 {: #113_changelog}
 
+### Changelog for worker node fix pack 1.13.2_1508, released 15 February 2019
+{: #1132_1508}
+
+The following table shows the changes that are included in the worker node fix pack 1.13.2_1508.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.2_1507">
+<caption>Changes since version 1.13.2_1507</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Changed the pod configuration `spec.priorityClassName` value to `system-node-critical` and set the `spec.priority` value to `2000001000`.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.2</td>
+<td>1.2.4</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.4). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Kubernetes `kubelet` configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Enabled the `ExperimentalCriticalPodAnnotation` feature gate to prevent critical static pod eviction. Decreased the `streaming-connection-idle-timeout` option from `4h` to `30m` to close an idle streaming connection faster. Set the `event-qps` option to `0` to prevent rate limiting event creation.</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for 1.13.2_1507, released 5 February 2019
-{: #1124_1534}
+{: #1132_1507}
 
 The following table shows the changes that are included in the patch 1.13.2_1507.
 {: shortdesc}
@@ -167,6 +205,44 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.5_1538, released 15 February 2019
+{: #1125_1538}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.5_1538.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.5_1537">
+<caption>Changes since version 1.12.5_1537</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Changed the pod configuration `spec.priorityClassName` value to `system-node-critical` and set the `spec.priority` value to `2000001000`.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.1.6</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.6). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Kubernetes `kubelet` configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Enabled the `ExperimentalCriticalPodAnnotation` feature gate to prevent critical static pod eviction.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.12.5_1537, released 5 February 2019
 {: #1125_1537}
@@ -614,6 +690,44 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019
+{: #1117_1544}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.7_1544.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.7_1543">
+<caption>Changes since version 1.11.7_1543</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Changed the pod configuration `spec.priorityClassName` value to `system-node-critical` and set the `spec.priority` value to `2000001000`.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.5</td>
+<td>1.1.6</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.6). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Kubernetes `kubelet` configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Enabled the `ExperimentalCriticalPodAnnotation` feature gate to prevent critical static pod eviction.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.11.7_1543, released 5 February 2019
 {: #1117_1543}
@@ -1414,6 +1528,38 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 {: #110_changelog}
 
 Review the version 1.10 changelog.
+
+### Changelog for worker node fix pack 1.10.12_1544, released 15 February 2019
+{: #11012_1544}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.12_1544.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.12_1543">
+<caption>Changes since version 1.10.12_1543</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker</td>
+<td>18.06.1-ce</td>
+<td>18.06.2-ce</td>
+<td>See the [Docker CE release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/docker/docker-ce/releases/tag/v18.06.2-ce). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>Kubernetes `kubelet` configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Enabled the `ExperimentalCriticalPodAnnotation` feature gate to prevent critical static pod eviction.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.10.12_1543, released 5 February 2019
 {: #1117_1543}
