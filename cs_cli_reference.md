@@ -766,7 +766,7 @@ ibmcloud ks cluster-addon-disable istio --cluster CLUSTER [-f]
    <dd>Optional: This add-on is a dependency for the <code>istio-extras</code>, <code>istio-sample-bookinfo</code>, and <code>knative</code> managed add-ons. Include this flag to also disable those add-ons.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-addon-disable istio --cluster my_cluster
@@ -796,7 +796,7 @@ ibmcloud ks cluster-addon-disable istio-extras --cluster CLUSTER [-f]
    <dd>Optional: This add-on is a dependency for the <code>istio-sample-bookinfo</code> managed add-on. Include this flag to also disable that add-on.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-addon-disable istio-extras --cluster my_cluster
@@ -823,7 +823,7 @@ ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster CLUSTER
   <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster my_cluster
@@ -850,7 +850,7 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
   <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-addon-disable knative --cluster my_cluster
@@ -882,7 +882,7 @@ ibmcloud ks cluster-addon-enable istio --cluster CLUSTER
    <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-addon-enable istio --cluster my_cluster
@@ -912,7 +912,7 @@ ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [-y]
    <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
@@ -942,7 +942,7 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
    <dd>Optional: Enable the <code>istio</code> and <code>istio-extras</code> add-on dependencies.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
@@ -972,7 +972,7 @@ ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [-y]
    <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-addon-enable knative --cluster my_cluster
@@ -999,7 +999,7 @@ ibmcloud ks cluster-addons --cluster CLUSTER
    <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-addons --cluster my_cluster
@@ -1274,7 +1274,7 @@ ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted] [-s]
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-feature-enable --cluster my_cluster --trusted=true
@@ -1311,7 +1311,7 @@ ibmcloud ks cluster-get --cluster CLUSTER [--json] [--showResources] [-s]
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
   </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks cluster-get --cluster my_cluster --showResources
@@ -2583,7 +2583,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
   </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks machine-types --zone dal10
@@ -3586,7 +3586,7 @@ ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [-
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks worker-get --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1
@@ -3992,7 +3992,7 @@ ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b2c.4x16 --size-per-zone 6
@@ -4028,7 +4028,7 @@ ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks worker-pool-get --worker-pool pool1 --cluster my_cluster
@@ -4111,7 +4111,7 @@ ibmcloud ks worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --siz
 
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks worker-pool-resize --cluster my_cluster --worker-pool my_pool --size-per-zone 3
@@ -4144,7 +4144,7 @@ ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-f] [-s]
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks worker-pool-rm --cluster my_cluster --worker-pool pool1
@@ -4175,7 +4175,7 @@ ibmcloud ks worker-pools --cluster CLUSTER [--json] [-s]
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-**Example command**:
+**Example**:
 
   ```
   ibmcloud ks worker-pools --cluster my_cluster
