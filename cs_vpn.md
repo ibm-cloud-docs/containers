@@ -68,32 +68,84 @@ Before using the strongSwan Helm chart, review the following considerations and 
 <br />
 
 
-
-
 ## Configuring the strongSwan VPN in a multizone cluster
 {: #vpn_multizone}
 
-Deploy a strongSwan VPN service in a multizone cluster. By making app instances available on worker nodes in multiple zones, your apps can continue to be available over the VPN connection in the event of a zonal outage.
+Multizone clusters provide high availability for apps in the event of an outage by making app instances available on worker nodes in multiple zones. However, configuring the strongSwan VPN service in a multizone cluster is more complex than configuring strongSwan in a single-zone cluster.
 {: shortdesc}
 
-When you deploy a strongSwan VPN service in a multizone cluster, a single outbound VPN connection can float between different worker nodes across all availability zones in your cluster. For example, if the worker node that the VPN is currently on is removed or experiences downtime, `kubelet` reschedules the VPN pod onto a new worker node. If an availability zone where the VPN pod currently exists experiences an outage, `kubelet` reschedules the VPN pod onto a new worker node in a different zone.
+Before you configure strongSwan in a multizone cluster, first try to deploy a strongSwan Helm chart into a single-zone cluster. When you first establish a VPN connection between a single-zone cluster and an on-premises network, you can more easily determine remote network firewall settings that are important for a multizone strongSwan configuration:
+* Some remote VPN endpoints have settings such as `leftid` or `rightid` in the `ipsec.conf` file. If you have these settings, check whether you must set the `leftid` to the IP address of the VPN IPSec tunnel.
+*	If the connection is inbound to the cluster from the remote network, check whether the remote VPN endpoint can re-establish the VPN connection to a different IP address in case of load balancer failure in one zone.
 
-To get started with strongSwan in a multizone cluster, you must be able to use an [outbound VPN connection](#strongswan_3), and the remote VPN endpoint must allow the `local.id` value to be specified. In either of the following scenarios, you cannot currently deploy strongSwan into your multizone cluster:
-* You can use an outbound VPN connection, but the remote VPN endpoint requires that `local.id` must be the public IP address of the local endpoint for the VPN IPSec tunnel.
-* You require inbound VPN connections only and cannot use outbound VPN connections.
+To get started with strongSwan in a multizone cluster, choose one of the following options.
+* If you can use an outbound VPN connection, you can choose to configure only one strongSwan VPN deployment. See [Configuring one outbound VPN connection from a multizone cluster](#multizone_one_outbound).
+* If you require an inbound VPN connection, the configuration settings you can use vary depending on whether the remote VPN endpoint can be configured to re-establish the VPN connection to a different public load balancer IP when an outage is detected.
+  * If the remote VPN endpoint can automatically re-establish the VPN connection to a different IP, you can choose to configure only one strongSwan VPN deployment. See [Configuring one inbound VPN connection to a multizone cluster](#multizone_one_inbound).
+  * If the remote VPN endpoint cannot automatically re-establish the VPN connection to a different IP, you must deploy a separate inbound strongSwan VPN service in each zone. See [Configuring a VPN connection in each zone of a multizone cluster](#multizone_multiple).
 
-To configure the strongSwan VPN service in a multizone cluster:
+Try to set up your environment so that you need only one strongSwan VPN deployment for an outbound or inbound VPN connection to your multizone cluster. If you must set up separate strongSwan VPNs in each zone, make sure that you plan how to manage this added complexity and increased resource usage.
+{: note}
+
+### Configuring a single outbound VPN connection from a multizone cluster
+{: #multizone_one_outbound}
+
+The simplest solution for configuring the strongSwan VPN service in a multizone cluster is to use a single outbound VPN connection that floats between different worker nodes across all availability zones in your cluster.
+{: shortdesc}
+
+When the VPN connection is outbound from the multizone cluster, only one strongSwan deployment is required. If a worker node is removed or experiences downtime, `kubelet` reschedules the VPN pod onto a new worker node. If an availability zone experiences an outage, `kubelet` reschedules the VPN pod onto a new worker node in a different zone.
 
 1. [Configure one strongSwan VPN Helm chart](/docs/containers/cs_vpn.html#vpn_configure). When you follow the steps in that section, ensure that you specify the following settings:
-    - `ipsec.auto`: Change to `start`.
+    - `ipsec.auto`: Change to `start`. Connections are outbound from the cluster.
     - `loadBalancerIP`: Do not specify an IP address. Leave this setting blank.
-    - `connectUsingLoadBalancerIP`: Set to `false`. The strongSwan service uses the worker node's public IP address to establish the outbound connection.
-    - `local.id`: Specify a fixed value that is supported by your remote VPN endpoint.
+    - `zoneLoadBalancer`: Specify a public load balancer IP address for each zone where you have worker nodes. [You can check to see your available public IP addresses](/docs/containers/cs_subnets.html#review_ip) or [free up a used IP address](/docs/containers/cs_subnets.html#free). Because the strongSwan VPN pod can be scheduled to a worker node in any zone, this list of IPs ensures that a load balancer IP can be used in any zone where the VPN pod is scheduled.
+    - `connectUsingLoadBalancerIP`: Set to `true`. When the strongSwan VPN pod is scheduled onto a worker node, the strongSwan service selects the load balancer IP address that is in the same zone and uses this IP to establish the outbound connection.
+    - `local.id`: Specify a fixed value that is supported by your remote VPN endpoint. If the remote VPN endpoint requires you to set the `local.id` option (`leftid` value in `ipsec.conf`) to the public IP address of the VPN IPSec tunnel, set `local.id` to `%loadBalancerIP`. This value automatically configures the `leftid` value in `ipsec.conf` to the load balancer IP address that is used for the connection.
 
-2. In your remote network firewall, allow incoming IPSec VPN connections from the public IP address of each worker node in your cluster. Because the IP address can float between worker nodes, you must allow the public IP addresses of all workers. List the public IPs of workers by running `ibmcloud ks workers --cluster <cluster_node_or_ID>`.
+2. In your remote network firewall, allow incoming IPSec VPN connections from the public IP addresses you listed in the `zoneLoadBalancer` setting.
 
+3. Configure the remote VPN endpoint to allow an incoming VPN connection from each of the possible load balancer IPs that you listed in the `zoneLoadBalancer` setting.
 
+### Configuring a single inbound VPN connection to a multizone cluster
+{: #multizone_one_inbound}
 
+When you require incoming VPN connections and the remote VPN endpoint can automatically re-establish the VPN connection to a different IP when a failure is detected, you can use a single inbound VPN connection that floats between different worker nodes across all availability zones in your cluster.
+{: shortdesc}
+
+The remote VPN endpoint can establish the VPN connection to any of the strongSwan load balancers in any of the zones. The incoming request is sent to the VPN pod regardless of which zone the VPN pod is in. Responses from the VPN pod are sent back through the original load balancer to the remote VPN endpoint. This option ensures high availability because `kubelet` reschedules the VPN pod onto a new worker node if a worker node is removed or experiences downtime. Additionally, if an availability zone experiences an outage, the remote VPN endpoint can re-establish the VPN connection to the load balancer IP address in a different zone so that the VPN pod can still be reached.
+
+1. [Configure one strongSwan VPN Helm chart](/docs/containers/cs_vpn.html#vpn_configure). When you follow the steps in that section, ensure that you specify the following settings:
+    - `ipsec.auto`: Change to `add`. Connections are inbound to the cluster.
+    - `loadBalancerIP`: Do not specify an IP address. Leave this setting blank.
+    - `zoneLoadBalancer`: Specify a public load balancer IP address for each zone where you have worker nodes. [You can check to see your available public IP addresses](/docs/containers/cs_subnets.html#review_ip) or [free up a used IP address](/docs/containers/cs_subnets.html#free).
+    - `local.id`: If the remote VPN endpoint requires you to set the `local.id` option (`leftid` value in `ipsec.conf`) to the public IP address of the VPN IPSec tunnel, set `local.id` to `%loadBalancerIP`. This value automatically configures the `leftid` value in `ipsec.conf` to the load balancer IP address that is used for the connection.
+
+2. In your remote network firewall, allow outgoing IPSec VPN connections to the public IP addresses you listed in the `zoneLoadBalancer` setting.
+
+### Configuring an inbound VPN connection in each zone of a multizone cluster
+{: #multizone_multiple}
+
+When you require incoming VPN connections and the remote VPN endpoint cannot re-establish the VPN connection to a different IP, you must deploy a separate strongSwan VPN service in each zone.
+{: shortdesc}
+
+The remote VPN endpoint must be updated to establish a separate VPN connection to a load balancer in each of the zones. Additionally, you must configure zone-specific settings on the remote VPN endpoint so that each of these VPN connections is unique. Ensure that these multiple incoming VPN connections remain active at all times.
+
+After you deploy each Helm chart, each strongSwan VPN deployment starts up as a Kubernetes load balancer service in the correct zone. Incoming requests to that public IP are forwarded to the VPN pod that is also allocated in the same zone. If the zone experiences an outage, the VPN connections that are established in the other zones are unaffected.
+
+1. [Configure a strongSwan VPN Helm chart](/docs/containers/cs_vpn.html#vpn_configure) for each zone. When you follow the steps in that section, ensure that you specify the following settings:
+    - `loadBalancerIP`: Specify an available public load balancer IP address that is in the zone where you deploy this strongSwan service. [You can check to see your available public IP addresses](/docs/containers/cs_subnets.html#review_ip) or [free up a used IP address](/docs/containers/cs_subnets.html#free).
+    - `zoneSelector`: Specify the zone where you want the VPN pod to be scheduled.
+    - Additional settings, such as `zoneSpecificRoutes`, `remoteSubnetNAT`, `localSubnetNAT`, or `enableSingleSourceIP`, might be required depending on which resources must be accessible over the VPN. See the next step for more details.
+
+2. Configure zone-specific settings on both sides of the VPN tunnel to ensure that each VPN connection is unique. Depending on which resources must be accessible over the VPN, you have two options for making the connections distinguishable:
+    * If pods in the cluster must access services on the remote on-premises network:
+      - `zoneSpecificRoutes`: Set to `true`. This setting restricts the VPN connection to a single zone in the cluster. Pods in a specific zone use only the VPN connection that is set up for that specific zone. This solution reduces the number of strongSwan pods that are required to support multiple VPNs in a multizone cluster, improves VPN performance because the VPN traffic only flows to worker nodes located in the current zone, and ensures that VPN connectivity for each zone is unaffected by VPN connectivity, crashed pods, or zone outages in other zones. Note that you do not need to configure `remoteSubnetNAT`. Multiple VPNs that use the `zoneSpecificRoutes` setting can have the same `remote.subnet` because the routing is setup on a per-zone basis.
+      - `enableSingleSourceIP`: Set to `true` and set the `local.subnet` to a single /32 IP address. This combination of settings hides all of the cluster private IP addresses behind a single /32 IP address. This unique /32 IP address allows the remote on-premises network to send replies back over the correct VPN connection to the correct pod in the cluster that initiated the request. Note that the single /32 IP address that is configured for the `local.subnet` option must be unique in each strongSwan VPN configuration.
+    * If applications in the remote on-premises network must access services in the cluster:    
+      - `localSubnetNAT`: Ensure that an application in the on-premises remote network can select a specific VPN connection to send and receive traffic to the cluster. In each strongSwan Helm configuration, use `localSubnetNAT` to uniquely identify the cluster resources that can be accessed by the remote on-premises application. Because multiple VPNs are established from the remote on-premises network to the cluster, you must add logic to the application on the on-premise network so that it can select which VPN to use when it accesses services in the cluster. Note that the services in the cluster are accessible through multiple different subnets depending on what you configured for `localSubetNAT` in each strongSwan VPN configuration.
+      - `remoteSubnetNAT`: Ensure that a pod in your cluster uses the same VPN connection to return traffic to the remote network. In each strongSwan deployment file, map the remote on-premises subnet to a unique subnet using the `remoteSubetNAT` setting. Traffic that is received by a pod in the cluster from a VPN-specific `remoteSubetNAT` is sent back to that same VPN-specific `remoteSubnetNAT` and then over that same VPN connection.
+
+3. Configure the remote VPN endpoint software to establish a separate VPN connection to the load balancer IP in each zone.
 
 <br />
 
