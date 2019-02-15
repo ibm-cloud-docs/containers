@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-15"
 
 ---
 
@@ -701,7 +701,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-6. Update the repos to retrieve the latest version of all Helm charts.
+6. Update the repos to retrieve the latest versions of all Helm charts.
 
     ```
     helm repo update
