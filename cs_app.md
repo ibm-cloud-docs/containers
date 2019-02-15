@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-14"
 
 ---
 
@@ -24,12 +24,12 @@ lastupdated: "2019-02-07"
 # Deploying apps in clusters
 {: #app}
 
-You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running at all times. For example, you can perform rolling updates and rollbacks without downtime for your users.
+You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running at all times. For example, you can perform rolling updates and rollbacks without downtime for your users. Because Kubernetes is an extensible container orchestration platform that does not mandate a specific language or app, you can run a variety of workloads such as stateless, stateful, and data-processing apps that are written in the language of your choice.
 {: shortdesc}
 
 Learn the general steps for deploying apps by clicking an area of the following image. Want to learn the basics first? Try out the [deploying apps tutorial](/docs/containers/cs_tutorials_apps.html#cs_apps_tutorial).
 
-<img usemap="#d62e18" border="0" class="image" id="basic_deployment_process" src="images/basic_deployment_process.png" width="780" style="width:780px;" alt="Basic deployment process"/>
+<img usemap="#d62e18" border="0" class="image" id="basic_app_deployment_process" src="images/basic_app_deployment_process.png" width="780" style="width:780px;" alt="Basic deployment process"/>
 <map name="d62e18" id="d62e18">
 <area href="cs_cli_install.html" target="_blank" alt="Install the CLIs." title="Install the CLIs." shape="rect" coords="30, 69, 179, 209" />
 <area href="https://kubernetes.io/docs/concepts/configuration/overview/" target="_blank" alt="Create a configuration file for your app. Review the best practices from Kubernetes." title="Create a configuration file for your app. Review the best practices from Kubernetes." shape="rect" coords="254, 64, 486, 231" />
@@ -612,7 +612,8 @@ Do you have so many resources and users in your cluster that the Kubernetes dash
 {: tip}
 
 Before you begin:
-* Make sure that you have a [service role](/docs/containers/cs_users.html#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. If you have only a service role but no platform role, you must [launch the Kubernetes dashboard from the CLI](#db_cli).
+* Make sure that you are assigned a [service role](/docs/containers/cs_users.html#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. 
+* To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform role](/docs/containers/cs_users.html#platform). If you are assigned only a service role but no platform role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
@@ -688,6 +689,8 @@ Before you begin:
 
 -   [Install the required CLIs](/docs/containers/cs_cli_install.html#cs_cli_install).
 -   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+-   Make sure that you are assigned a [service role](/docs/containers/cs_users.html#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. 
+-   To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform role](/docs/containers/cs_users.html#platform). If you are assigned only a service role but no platform role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 
 To deploy your app:
 
@@ -716,6 +719,7 @@ Before you begin:
 
 -   Install the required [CLIs](/docs/containers/cs_cli_install.html#cs_cli_install).
 -   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+-   Make sure that you are assigned a [service role](/docs/containers/cs_users.html#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To deploy your app:
 
@@ -747,7 +751,11 @@ To deploy your app:
 When you deploy an app, the app pods indiscriminately deploy to various worker nodes in your cluster. In some cases, you might want to restrict the worker nodes that the app pods to deploy to. For example, you might want app pods to only deploy to worker nodes in a certain worker pool because those worker nodes are on bare metal machines. To designate the worker nodes that app pods must deploy to, add an affinity rule to your app deployment.
 {:shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: 
+*   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+*   Make sure that you are assigned a [service role](/docs/containers/cs_users.html#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
+
+To deploy apps to specific worker nodes:
 
 1. Get the name of the worker pool that you want to deploy app pods to.
     ```
@@ -846,6 +854,7 @@ In the following steps, you learn how to deploy workloads that require the GPU. 
 Before you begin:
 * [Create a bare metal GPU machine type](/docs/containers/cs_clusters.html#clusters_cli). Note that this process can take more than 1 business day to complete.
 * Your cluster master and GPU worker node must run Kubernetes version 1.10 or later.
+* Make sure that you are assigned a [service role](/docs/containers/cs_users.html#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To execute a workload on a GPU machine:
 1.  Create a YAML file. In this example, a `Job` YAML manages batch-like workloads by making a short-lived pod that runs until the command that it is scheduled to complete successfully terminates.
@@ -1016,6 +1025,7 @@ Looking for information about scaling Cloud Foundry applications? Check out [IBM
 Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 - Heapster monitoring must be deployed in the cluster that you want to autoscale.
+- Make sure that you are assigned a [service role](/docs/containers/cs_users.html#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 Steps:
 
@@ -1092,8 +1102,12 @@ You can manage the rollout of your app changes in an automated and controlled fa
 Want to prevent downtime during your rolling update? Be sure to specify a [readiness probe in your deployment](#probe) so that the rollout proceeds to the next app pod after the most recently updated pod is ready.
 {: tip}
 
-Before you begin, create a [deployment](#app_cli).
+Before you begin:
+*   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+*   Create a [deployment](#app_cli).
+*   Make sure that you have a [service role](/docs/containers/cs_users.html#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
+To manage rolling updates to your apps:
 1.  [Roll out ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) a change. For example, you might want to change the image that you used in your initial deployment.
 
     1.  Get the deployment name.

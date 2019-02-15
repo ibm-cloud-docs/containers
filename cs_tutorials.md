@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-13"
 
 ---
 
@@ -83,6 +83,8 @@ As your cluster provisions, install the following CLIs that are used to manage c
 -   {{site.data.keyword.containerlong_notm}} plug-in
 -   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} plug-in
+
+
 
 </br>
 **To install the CLIs and their prerequisites**

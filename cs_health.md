@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-13"
 
 ---
 
@@ -792,7 +792,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
         <thead>
         <th>{{site.data.keyword.containerlong_notm}} region</th>
         <th>Monitoring address</th>
-        <th>Monitoring IP addresses</th>
+        <th>Monitoring subnets</th>
         </thead>
       <tbody>
         <tr>

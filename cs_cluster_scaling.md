@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-07"
+lastupdated: "2019-02-13"
 
 ---
 
@@ -444,7 +444,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
         memory: 100Mi
     scaleDownDelayAfterAdd: 10m
     scaleDownDelayAfterDelete: 10m
-    scale-down-utilization-threshold: 0.5
+    scaleDownUtilizationThreshold: 0.5
     scaleDownUnneededTime: 10m
     scanInterval: 1m
     skipNodes:
@@ -528,7 +528,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     <td>10m</td>
     </tr>
     <tr>
-    <td>`scale-down-utilization-threshold`</td>
+    <td>`scaleDownUtilizationThreshold`</td>
     <td>Set the worker node utilization threshold. If the worker node utilization goes below the threshold, the worker node is considered to be scaled down. Worker node utilization is calculated as the sum of the CPU and memory resources that are requested by all pods that run on the worker node divided by the worker node resource capacity.</td>
     <td>0.5</td>
     </tr>

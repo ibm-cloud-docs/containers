@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-08"
+lastupdated: "2019-02-14"
 
 ---
 
@@ -126,7 +126,7 @@ spec:
 <br />
 
 
-## Ingress components and architecture
+## What is Ingress?
 {: #planning}
 
 Ingress is a Kubernetes service that balances network traffic workloads in your cluster by forwarding public or private requests to your apps. You can use Ingress to expose multiple app services to the public or to a private network by using a unique public or private route.
@@ -163,6 +163,8 @@ For more information about what happens to ALB IPs in the event of a zone failur
 
 ### How does a request get to my app with Ingress in a single zone cluster?
 {: #architecture-single}
+
+
 
 The following diagram shows how Ingress directs communication from the internet to an app in a single-zone cluster:
 
@@ -400,6 +402,10 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 
 Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
 {: note}
+
+When you import a certificate with this command, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. When the ALB is processing requests, it follows this reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
+
+</br>
 
 If you do not have a TLS certificate ready, follow these steps:
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
@@ -889,6 +895,10 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 
 Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
 {: note}
+
+When you import a certificate with this command, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. When the ALB is processing requests, it follows this reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
+
+</br>
 
 If you do not have a TLS certificate ready, follow these steps:
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
@@ -1565,3 +1575,8 @@ Your apps are now exposed by your custom Ingress controller. To restore the IBM-
 ibmcloud ks alb-configure --albID <alb ID> --enable
 ```
 {: pre}
+
+## Using Istio with the Ingress ALB
+{: #istio_ingress}
+
+When you enable the [Istio managed add-on](/docs/containers/cs_istio.html#istio_install) in {{site.data.keyword.containerlong_notm}}, you can use Istio to manage your app microservices in a service mesh. Istio uses a gateway load balancer to expose app microservices. However, you can still use the IBM-provided Ingress subdomain for your cluster to expose your Istio-managed apps by connecting the Istio gateway load balancer and the IBM Ingress ALB. To get started, see [Exposing Istio-managed apps by using the IBM-provided Ingress subdomain](/docs/containers/cs_istio.html#istio_expose).
