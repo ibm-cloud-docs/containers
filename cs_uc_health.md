@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-15"
 
 ---
 
@@ -72,7 +72,7 @@ On-demand compute, storage, and IO services run in the public cloud with secure 
 * Apps that manage highly sensitive patient data can be rehosted on {{site.data.keyword.containerlong_notm}} that runs on Bare Metal for Trusted Compute.
 * Trusted Compute can verify the underlying hardware against tampering.
 * From that core, Vulnerability Advisor provides image, policy, container, and packaging scanning vulnerability scanning, for known malware.
-* Consistently enfore policy-driven authentication to your services and APIs with a simple Ingress annotation. With declarative security you can ensure user authentication and token validation by using {{site.data.keyword.appid.short_notm}}.
+* Consistently enforce policy-driven authentication to your services and APIs with a simple Ingress annotation. With declarative security you can ensure user authentication and token validation by using {{site.data.keyword.appid.short_notm}}.
 
 **Step 2: Lift and shift**
 * Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public cloud.
