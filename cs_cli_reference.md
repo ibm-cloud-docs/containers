@@ -2790,6 +2790,7 @@ ibmcloud ks logging-filter-get mycluster --id 885732 --show-matching-configs
 ```
 {: pre}
 
+
 ### ibmcloud ks logging-filter-rm --cluster CLUSTER [--id FILTER_ID] [--all] [--force-update] [-s]
 {: #cs_log_filter_delete}
 
