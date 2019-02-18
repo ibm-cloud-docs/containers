@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-15"
+lastupdated: "2019-02-18"
 
 ---
 
@@ -114,6 +114,10 @@ You can use various external services and catalog services with a standard Kuber
 <tr>
 <td>Sematext</td>
 <td>View metrics and logs for your containerized applications by using <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring and logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+</tr>
+<tr>
+<td>Splunk</td>
+<td>Import and search your Kubernetes logging, object, and metrics data in Splunk by using Splunk Connect for Kubernetes. Splunk Connect for Kubernetes is a collection of Helm charts that deploy a Splunk-supported deployment of Fluentd to your Kubernetes cluster, a Splunk-built Fluentd HTTP Event Collector (HEC) plug-in to send logs and metadata, and a metrics deployment that captures your cluster metrics. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2019/02/solving-business-problems-with-splunk-on-ibm-cloud-kubernetes-service/" target="_blank">Solving Business Problems with Splunk on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
 <td>Sysdig</td>
