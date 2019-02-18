@@ -381,7 +381,7 @@ The ALB load balances HTTP network traffic to the apps in your cluster. To also 
 
 **If you use the IBM-provided Ingress domain:**
 
-Get the IBM-provided TLS secret for your cluster. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
+Get the IBM-provided TLS secret for your cluster.
 ```
 ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
 ```

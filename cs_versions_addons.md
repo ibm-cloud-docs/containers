@@ -54,6 +54,15 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
+<td>406 / 301</td>
+<td>19 Jan 2019</td>
+<td><ul>
+<li>Updates the Go version to 1.11.5.</li>
+<li>Fixes vulnerabilities for image scans.</li>
+</ul></td>
+<td>-</td>
+</tr>
+<tr>
 <td>404 / 300</td>
 <td>31 Jan 2019</td>
 <td>Updates the Go version to 1.11.4.</td>
