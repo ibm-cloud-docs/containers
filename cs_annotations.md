@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-02-18"
 
 ---
 
@@ -1876,7 +1876,7 @@ spec:
 **To create a mutual authentication secret:**
 
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon"](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
+    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
     {: tip}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert.
@@ -1990,7 +1990,7 @@ spec:
 **To create a mutual authentication secret:**
 
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon"](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
+    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
     {: tip}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert.
