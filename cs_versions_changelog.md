@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-15"
+lastupdated: "2019-02-18"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2019-02-15"
 # Version changelog
 {: #changelog}
 
-View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components.
+View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components. 
 {:shortdesc}
 
 For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](/docs/containers/cs_versions.html).
