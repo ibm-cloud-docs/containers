@@ -781,7 +781,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 Route traffic to Istio-managed services.
 {:shortdesc}
 
-This annotation works only with Istio 0.7 and earlier. To expose Istio-managed apps using the IBM-provided subdomain, see the [documentation for using the Istio managed add-on](docs/containers/cs_istio.html#istio_expose).
+This annotation works only with Istio 0.7 and earlier. To expose Istio-managed apps using the IBM-provided subdomain, see the [documentation for using the Istio managed add-on](/docs/containers/cs_istio.html#istio_expose).
 {: important}
 
 <dl>

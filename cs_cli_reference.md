@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-02-18"
 
-keywords: kubernetes, iks, ibmcloud, ic, ks 
+keywords: kubernetes, iks, ibmcloud, ic, ks
 
 scope: containers
 
@@ -2926,6 +2926,7 @@ ibmcloud ks logging-config-rm --cluster CLUSTER [--id LOG_CONFIG_ID] [--all] [--
 
 
 ### ibmcloud ks logging-config-update
+{: #cs_logging_update}
 
 Update the details of a log forwarding configuration.
 {: shortdesc}
@@ -3000,6 +3001,7 @@ ibmcloud ks logging-config-update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 
 
 ### ibmcloud ks logging-filter-create
+{: #cs_log_filter_create}
 
 Create a logging filter. You can use this command to filter out logs that are forwarded by your logging configuration.
 {: shortdesc}
