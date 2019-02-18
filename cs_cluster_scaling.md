@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-18"
 
 ---
 
@@ -135,7 +135,7 @@ Make the most out of the cluster autoscaler by organizing your worker node and a
 *   You can run only one `ibm-iks-cluster-autoscaler` per cluster.
 *   The cluster autoscaler scales your cluster in response to your workload [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). As such, you do not need to [resize](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](/docs/containers/cs_cli_reference.html#cs_rebalance) your worker pools.
 *   Don't use the `ibmcloud ks worker-rm` [command](/docs/containers/cs_cli_reference.html#cs_worker_rm) to remove individual worker nodes from your worker pool, which can unbalance the worker pool.
-*   If you taint worker nodes, the taints must apply to all worker nodes of the same type, labels, or pods. Don't [taint select worker nodes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) in a worker pool directly.
+*   Because taints cannot be applied at the worker pool level, do not [taint worker nodes](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/), which might have unexpected results. For example, when you deploy a workload that is not tolerated by the tainted worker nodes, the worker nodes are not considered for scale-up and more worker nodes might be ordered even if the cluster otherwise has sufficient capacity. However, the tainted worker nodes are still identified as underutilized if they have less than the threshold (by default 50%) of their resources utilized and thus are considered for scale-down.
 
 <br>
 **What are some general guidelines for app workloads?**<br>
