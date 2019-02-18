@@ -4,6 +4,10 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-02-18"
 
+keywords: kubernetes, iks 
+
+scope: containers
+
 ---
 
 {:new_window: target="_blank"}

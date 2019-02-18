@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-18"
+
+keywords: kubernetes, iks, logmet, logs, metrics 
+
+scope: containers
 
 ---
 
