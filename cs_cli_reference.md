@@ -48,7 +48,7 @@ export IKS_BETA_VERSION=<beta_version>
 ```
 {: pre}
 
-The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available:
+The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available. Note that the default behavior is `0.2`.
 
 <table>
 <caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
@@ -59,7 +59,7 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
   </thead>
   <tbody>
     <tr>
-      <td><code>0.2</code></td>
+      <td><code>0.2</code> (default)</td>
       <td>Legacy: Commands are shown in the hyphenated structure and are listed alphabetically.</td>
       <td>Legacy and beta: You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
   </tr>
