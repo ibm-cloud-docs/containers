@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-18"
+lastupdated: "2019-02-19"
 
 keywords: kubernetes, iks 
 
@@ -41,7 +41,7 @@ scope: containers
 
 **Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. You cannot create new clusters that use the deprecated version.
 
-**Unsupported versions**: If you are running clusters on a Kubernetes version that is not supported, review potential impacts for updates below and then immediately [update the cluster](/docs/containers/cs_cluster_update.html#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes.
+**Unsupported versions**: If your clusters run a Kubernetes version that is not supported, review the following potential update impacts and then immediately [update the cluster](/docs/containers/cs_cluster_update.html#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. You can find out if your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks clusters` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters).
 
 If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure. For example, if your cluster runs Kubernetes version 1.9 or earlier, when you update the master directly to 1.12 or later, most pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff` or `ContainerCreating` until you update the worker nodes to the same version. To avoid this issue, update the cluster to a supported version less than three ahead of the current version, such as 1.9 to 1.11 and then update to 1.12.<br><br>After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
 {: important}
@@ -86,6 +86,7 @@ As updates become available, you are notified when you view information about th
 
 </br>
 
+{: #prep-up}
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version.
 -  Version 1.13 [preparation actions](#cs_v113).
 -  Version 1.12 [preparation actions](#cs_v112).
