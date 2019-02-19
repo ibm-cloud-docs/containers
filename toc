@@ -35,9 +35,9 @@ IBM Cloud Kubernetes Service
         cs_tutorials_knative.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
-        [Tutorial: Move a VM-based application to Kubernetes](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
-        [Tutorial: Create a multi-region cluster using Cloud Internet Services](/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
-        [Tutorial: Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+        [Tutorial: Move a VM-based application to Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
+        [Tutorial: Create a multi-region cluster using Cloud Internet Services](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
+        [Tutorial: Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
