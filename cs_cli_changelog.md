@@ -106,7 +106,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>30 Oct 2018</td>
 <td><ul>
 <li>Adds the [<code>ibmcloud ks credential-get</code> command](/docs/containers/cs_cli_reference.html#cs_credential_get).</li>
-<li>Adds support for the <code>storage</code> log source to all cluster logging commands. For more information, see <a href="cs_health.html#logging">Understanding cluster and app log forwarding</a>.</li>
+<li>Adds support for the <code>storage</code> log source to all cluster logging commands. For more information, see <a href="/docs/containers/cs_health.html#logging">Understanding cluster and app log forwarding</a>.</li>
 <li>Adds the `--network` flag to the [<code>ibmcloud ks cluster-config</code> command](/docs/containers/cs_cli_reference.html#cs_cluster_config), which downloads the Calico configuration file to run all Calico commands.</li>
 <li>Minor bug fixes and refactoring</li></ul>
 </td>
