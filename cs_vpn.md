@@ -33,7 +33,7 @@ To connect your worker nodes and apps to an on-premises data center, you can con
 
 - **strongSwan IPSec VPN Service**: You can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/about.html) that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](#vpn-setup) directly in a pod in your cluster.
 
-- **Virtual Router Appliance (VRA) or Fortigate Security Appliance (FSA)**: You might choose to set up a [VRA](/docs/infrastructure/virtual-router-appliance/about.html) or [FSA](/docs/infrastructure/fortigate-10g/about.html) to configure an IPSec VPN endpoint. This option is useful when you have a larger cluster, want to access multiple clusters over a single VPN, or need a route-based VPN. To configure a VRA, see [Setting up VPN connectivity with VRA](#vyatta).
+- **Virtual Router Appliance (VRA) or Fortigate Security Appliance (FSA)**: You might choose to set up a [VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or [FSA](/docs/infrastructure/fortigate-10g?topic=fortigate-10g-about-fortigate-security-appliance-10gbps) to configure an IPSec VPN endpoint. This option is useful when you have a larger cluster, want to access multiple clusters over a single VPN, or need a route-based VPN. To configure a VRA, see [Setting up VPN connectivity with VRA](#vyatta).
 
 ## Using the strongSwan IPSec VPN service Helm chart
 {: #vpn-setup}
@@ -67,7 +67,7 @@ Before using the strongSwan Helm chart, review the following considerations and 
 * The strongSwan Helm chart does not allow multiple clusters and other IaaS resources to share a single VPN connection.
 * The strongSwan Helm chart runs as a Kubernetes pod inside of the cluster. The VPN performance is affected by the memory and network usage of Kubernetes and other pods that are running in the cluster. If you have a performance-critical environment, consider using a VPN solution that runs outside of the cluster on dedicated hardware.
 * The strongSwan Helm chart runs a single VPN pod as the IPSec tunnel endpoint. If the pod fails, the cluster restarts the pod. However, you might experience a short down time while the new pod starts and the VPN connection is re-established. If you require faster error recovery or a more elaborate high availability solution, consider using a VPN solution that runs outside of the cluster on dedicated hardware.
-* The strongSwan Helm chart does not provide metrics or monitoring of the network traffic flowing over the VPN connection. For a list of supported monitoring tools, see [Logging and monitoring services](/docs/containers/cs_integrations.html#health_services).
+* The strongSwan Helm chart does not provide metrics or monitoring of the network traffic flowing over the VPN connection. For a list of supported monitoring tools, see [Logging and monitoring services](/docs/containers?topic=containers-integrations#health_services).
 
 <br />
 
@@ -99,10 +99,10 @@ The simplest solution for configuring the strongSwan VPN service in a multizone 
 
 When the VPN connection is outbound from the multizone cluster, only one strongSwan deployment is required. If a worker node is removed or experiences downtime, `kubelet` reschedules the VPN pod onto a new worker node. If an availability zone experiences an outage, `kubelet` reschedules the VPN pod onto a new worker node in a different zone.
 
-1. [Configure one strongSwan VPN Helm chart](/docs/containers/cs_vpn.html#vpn_configure). When you follow the steps in that section, ensure that you specify the following settings:
+1. [Configure one strongSwan VPN Helm chart](/docs/containers?topic=containers-vpn#vpn_configure). When you follow the steps in that section, ensure that you specify the following settings:
     - `ipsec.auto`: Change to `start`. Connections are outbound from the cluster.
     - `loadBalancerIP`: Do not specify an IP address. Leave this setting blank.
-    - `zoneLoadBalancer`: Specify a public load balancer IP address for each zone where you have worker nodes. [You can check to see your available public IP addresses](/docs/containers/cs_subnets.html#review_ip) or [free up a used IP address](/docs/containers/cs_subnets.html#free). Because the strongSwan VPN pod can be scheduled to a worker node in any zone, this list of IPs ensures that a load balancer IP can be used in any zone where the VPN pod is scheduled.
+    - `zoneLoadBalancer`: Specify a public load balancer IP address for each zone where you have worker nodes. [You can check to see your available public IP addresses](/docs/containers?topic=containers-subnets#review_ip) or [free up a used IP address](/docs/containers?topic=containers-subnets#free). Because the strongSwan VPN pod can be scheduled to a worker node in any zone, this list of IPs ensures that a load balancer IP can be used in any zone where the VPN pod is scheduled.
     - `connectUsingLoadBalancerIP`: Set to `true`. When the strongSwan VPN pod is scheduled onto a worker node, the strongSwan service selects the load balancer IP address that is in the same zone and uses this IP to establish the outbound connection.
     - `local.id`: Specify a fixed value that is supported by your remote VPN endpoint. If the remote VPN endpoint requires you to set the `local.id` option (`leftid` value in `ipsec.conf`) to the public IP address of the VPN IPSec tunnel, set `local.id` to `%loadBalancerIP`. This value automatically configures the `leftid` value in `ipsec.conf` to the load balancer IP address that is used for the connection.
 
@@ -118,10 +118,10 @@ When you require incoming VPN connections and the remote VPN endpoint can automa
 
 The remote VPN endpoint can establish the VPN connection to any of the strongSwan load balancers in any of the zones. The incoming request is sent to the VPN pod regardless of which zone the VPN pod is in. Responses from the VPN pod are sent back through the original load balancer to the remote VPN endpoint. This option ensures high availability because `kubelet` reschedules the VPN pod onto a new worker node if a worker node is removed or experiences downtime. Additionally, if an availability zone experiences an outage, the remote VPN endpoint can re-establish the VPN connection to the load balancer IP address in a different zone so that the VPN pod can still be reached.
 
-1. [Configure one strongSwan VPN Helm chart](/docs/containers/cs_vpn.html#vpn_configure). When you follow the steps in that section, ensure that you specify the following settings:
+1. [Configure one strongSwan VPN Helm chart](/docs/containers?topic=containers-vpn#vpn_configure). When you follow the steps in that section, ensure that you specify the following settings:
     - `ipsec.auto`: Change to `add`. Connections are inbound to the cluster.
     - `loadBalancerIP`: Do not specify an IP address. Leave this setting blank.
-    - `zoneLoadBalancer`: Specify a public load balancer IP address for each zone where you have worker nodes. [You can check to see your available public IP addresses](/docs/containers/cs_subnets.html#review_ip) or [free up a used IP address](/docs/containers/cs_subnets.html#free).
+    - `zoneLoadBalancer`: Specify a public load balancer IP address for each zone where you have worker nodes. [You can check to see your available public IP addresses](/docs/containers?topic=containers-subnets#review_ip) or [free up a used IP address](/docs/containers?topic=containers-subnets#free).
     - `local.id`: If the remote VPN endpoint requires you to set the `local.id` option (`leftid` value in `ipsec.conf`) to the public IP address of the VPN IPSec tunnel, set `local.id` to `%loadBalancerIP`. This value automatically configures the `leftid` value in `ipsec.conf` to the load balancer IP address that is used for the connection.
 
 2. In your remote network firewall, allow outgoing IPSec VPN connections to the public IP addresses you listed in the `zoneLoadBalancer` setting.
@@ -136,8 +136,8 @@ The remote VPN endpoint must be updated to establish a separate VPN connection t
 
 After you deploy each Helm chart, each strongSwan VPN deployment starts up as a Kubernetes load balancer service in the correct zone. Incoming requests to that public IP are forwarded to the VPN pod that is also allocated in the same zone. If the zone experiences an outage, the VPN connections that are established in the other zones are unaffected.
 
-1. [Configure a strongSwan VPN Helm chart](/docs/containers/cs_vpn.html#vpn_configure) for each zone. When you follow the steps in that section, ensure that you specify the following settings:
-    - `loadBalancerIP`: Specify an available public load balancer IP address that is in the zone where you deploy this strongSwan service. [You can check to see your available public IP addresses](/docs/containers/cs_subnets.html#review_ip) or [free up a used IP address](/docs/containers/cs_subnets.html#free).
+1. [Configure a strongSwan VPN Helm chart](/docs/containers?topic=containers-vpn#vpn_configure) for each zone. When you follow the steps in that section, ensure that you specify the following settings:
+    - `loadBalancerIP`: Specify an available public load balancer IP address that is in the zone where you deploy this strongSwan service. [You can check to see your available public IP addresses](/docs/containers?topic=containers-subnets#review_ip) or [free up a used IP address](/docs/containers?topic=containers-subnets#free).
     - `zoneSelector`: Specify the zone where you want the VPN pod to be scheduled.
     - Additional settings, such as `zoneSpecificRoutes`, `remoteSubnetNAT`, `localSubnetNAT`, or `enableSingleSourceIP`, might be required depending on which resources must be accessible over the VPN. See the next step for more details.
 
@@ -161,9 +161,9 @@ Before you install the strongSwan Helm chart, you must decide on your strongSwan
 {: shortdesc}
 
 Before you begin:
-* [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
-* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+* [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn?topic=VPN-set-up-ipsec-vpn#setting-up-an-ipsec-connection).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 ### Step 1: Get the strongSwan Helm chart
 {: #strongswan_1}
@@ -171,7 +171,7 @@ Before you begin:
 Install Helm and get the strongSwan Helm chart to view possible configurations.
 {: shortdesc}
 
-1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
+1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
 
 2.  Verify that tiller is installed with a service account.
 
@@ -235,7 +235,7 @@ When you configure a strongSwan VPN connection, you choose whether the VPN conne
 
 To establish an inbound VPN connection, modify the following settings:
 1. Verify that `ipsec.auto` is set to `add`.
-2. Optional: Set `loadBalancerIP` to a portable public IP address for the strongSwan VPN service. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall. The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](/docs/containers/cs_subnets.html#review_ip) or [free up a used IP address](/docs/containers/cs_subnets.html#free).
+2. Optional: Set `loadBalancerIP` to a portable public IP address for the strongSwan VPN service. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall. The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](/docs/containers?topic=containers-subnets#review_ip) or [free up a used IP address](/docs/containers?topic=containers-subnets#free).
     * If you leave this setting blank, one of the available portable public IP addresses is used.
     * You must also configure the public IP address that you select for or the public IP address that is assigned to the cluster VPN endpoint on the on-premises VPN endpoint.
 
@@ -250,7 +250,7 @@ To establish an outbound VPN connection, modify the following settings:
         * If the remote VPN endpoint cannot handle VPN connections from multiple public IP addresses, limit the nodes that the strongSwan VPN pod deploys to. Set `nodeSelector` to the IP addresses of specific worker nodes or a worker node label. For example, the value `kubernetes.io/hostname: 10.232.xx.xx` allows the VPN pod to deploy to that worker node only. The value `strongswan: vpn` restricts the VPN pod to running on any worker nodes with that label. You can use any worker node label. To allow different worker nodes to be used with different helm chart deployments, use `strongswan: <release_name>`. For high availability, select at least two worker nodes.
     * **Public IP address of the strongSwan service**: To establish connection by using the IP address of the strongSwan VPN service, set `connectUsingLoadBalancerIP` to `true`. The strongSwan service IP address is either a portable public IP address you can specify in the `loadBalancerIP` setting, or an available portable public IP address that is automatically assigned to the service.
         <br>
-        * If you choose to select an IP address using the `loadBalancerIP` setting, the cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](/docs/containers/cs_subnets.html#review_ip) or [free up a used IP address](/docs/containers/cs_subnets.html#free).
+        * If you choose to select an IP address using the `loadBalancerIP` setting, the cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](/docs/containers?topic=containers-subnets#review_ip) or [free up a used IP address](/docs/containers?topic=containers-subnets#free).
         * All of the cluster worker nodes must be on the same public VLAN. Otherwise, you must use the `nodeSelector` setting to ensure that the VPN pod deploys to a worker node on the same public VLAN as the `loadBalancerIP`.
         * If `connectUsingLoadBalancerIP` is set to `true` and `ipsec.keyexchange` is set to `ikev1`, you must set `enableServiceSourceIP` to `true`.
 
@@ -529,7 +529,7 @@ Before you use this solution, review the following considerations and limitation
 Before you begin:
 * Create or use a cluster that runs Kubernetes version 1.10 or later.
 * [Deploy the strongSwan Helm chart](#vpn_configure) and [ensure that VPN connectivity is working correctly](#vpn_test).
-* [Install and configure the Calico CLI](/docs/containers/cs_network_policy.html#cli_install).
+* [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 
 To limit VPN traffic to a certain namespace:
 
@@ -650,7 +650,7 @@ To upgrade your strongSwan Helm chart to the latest version:
   ```
   {: pre}
 
-The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](/docs/containers/cs_versions.html#cs_v110), first update strongSwan to the 2.2.0 or later Helm chart, which are backward compatible with Calico 2.6 and Kubernetes 1.9. Next, delete your strongSwan Helm chart. Then, after the update, you can reinstall the chart.
+The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before you [update your cluster to 1.10](/docs/containers?topic=containers-cs_versions#cs_v110), first update strongSwan to the 2.2.0 or later Helm chart, which are backward compatible with Calico 2.6 and Kubernetes 1.9. Next, delete your strongSwan Helm chart. Then, after the update, you can reinstall the chart.
 {:tip}
 
 ## Disabling the strongSwan IPSec VPN service
@@ -670,7 +670,7 @@ You can disable the VPN connection by deleting the Helm chart.
 ## Using a Virtual Router Appliance
 {: #vyatta}
 
-The [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) provides the latest Vyatta 5600 operating system for x86 bare metal servers. You can use a VRA as VPN gateway to securely connect to an on-premises network.
+The [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) provides the latest Vyatta 5600 operating system for x86 bare metal servers. You can use a VRA as VPN gateway to securely connect to an on-premises network.
 {:shortdesc}
 
 All public and private network traffic that enters or exits the cluster VLANs is routed through a VRA. You can use the VRA as a VPN endpoint to create an encrypted IPSec tunnel between servers in IBM Cloud infrastructure (SoftLayer) and on-premises resources. For example, the following diagram shows how an app on a private-only worker node in {{site.data.keyword.containerlong_notm}} can communicate with an on-premises server via a VRA VPN connection:
@@ -689,11 +689,11 @@ All public and private network traffic that enters or exits the cluster VLANs is
 
 To set up a Virtual Router Appliance:
 
-1. [Order a VRA](/docs/infrastructure/virtual-router-appliance/getting-started.html).
+1. [Order a VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started-with-ibm-virtual-router-appliance).
 
-2. [Configure the private VLAN on the VRA](/docs/infrastructure/virtual-router-appliance/manage-vlans.html).
+2. [Configure the private VLAN on the VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-managing-your-vlans).
 
-3. To enable a VPN connection by using the VRA, [configure VRRP on the VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).
+3. To enable a VPN connection by using the VRA, [configure VRRP on the VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-working-with-high-availability-and-vrrp#high-availability-vpn-with-vrrp).
 
-If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster are not configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](/docs/containers/cs_subnets.html#subnet-routing). To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get).
+If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster are not configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](/docs/containers?topic=containers-subnets#subnet-routing). To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
 {: important}

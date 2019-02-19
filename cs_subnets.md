@@ -45,11 +45,11 @@ When you create a cluster, the cluster's worker nodes are connected automaticall
 <dt>VLANs for free clusters</dt>
 <dd>In free clusters, the cluster's worker nodes are connected to an IBM-owned public VLAN and private VLAN by default. Because IBM controls the VLANs, subnets, and IP addresses, you cannot create multizone clusters or add subnets to your cluster, and can use only NodePort services to expose your app.</dd>
 <dt>VLANs for standard clusters</dt>
-<dd>In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. For every subsequent cluster that you create in that zone, you must specify the VLAN pair that you want to use in that zone. You can reuse the same public and private VLANs that were created for you because multiple clusters can share VLANs.</br></br>You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can use the ID of an existing private VLAN or [create a private VLAN](/docs/cli/reference/ibmcloud/cli_vlan.html#ibmcloud-sl-vlan-create) and use the ID during cluster creation.</dd></dl>
+<dd>In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. For every subsequent cluster that you create in that zone, you must specify the VLAN pair that you want to use in that zone. You can reuse the same public and private VLANs that were created for you because multiple clusters can share VLANs.</br></br>You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can use the ID of an existing private VLAN or [create a private VLAN](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#ibmcloud-sl-vlan-create) and use the ID during cluster creation.</dd></dl>
 
 To see the VLANs that are provisioned in each zone for your account, run `ibmcloud ks vlans --zone <zone>.` To see the VLANs that one cluster is provisioned on, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
 
-IBM Cloud infrastructure (SoftLayer) manages the VLANs that are automatically provisioned when you create your first cluster in a zone. If you let a VLAN become unused, such as by removing all worker nodes from a VLAN, IBM Cloud infrastructure (SoftLayer) reclaims the VLAN. After, if you need a new VLAN, [contact {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans).
+IBM Cloud infrastructure (SoftLayer) manages the VLANs that are automatically provisioned when you create your first cluster in a zone. If you let a VLAN become unused, such as by removing all worker nodes from a VLAN, IBM Cloud infrastructure (SoftLayer) reclaims the VLAN. After, if you need a new VLAN, [contact {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
 If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/vrf-on-ibm-cloud.html#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 {: important}
@@ -72,7 +72,7 @@ The following subnets are automatically provisioned on the default public and pr
 
 To see all of the subnets provisioned in your account, run `ibmcloud ks subnets`. To see the portable public and portable private subnets that are bound to one cluster, you can run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
 
-In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If you reach this limit, first check to see whether you can [reuse subnets in the VLAN to create new clusters](#subnets_custom). If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans). Then, [create a cluster](/docs/containers/cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
+In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If you reach this limit, first check to see whether you can [reuse subnets in the VLAN to create new clusters](#subnets_custom). If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Then, [create a cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) that uses this new VLAN.
 {: note}
 
 <br />
@@ -91,7 +91,7 @@ Portable public IP addresses are charged monthly. If you remove portable public 
 {: note}
 
 Before you begin:
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 - To reuse subnets from a cluster that you no longer need, delete the unneeded cluster. Create the new cluster immediately because the subnets are deleted within 24 hours if you do not reuse them.
 
    ```
@@ -118,7 +118,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ```
     {: screen}
 
-2. [Create a cluster](/docs/containers/cs_clusters.html#clusters_cli) by using the VLAN ID that you identified. Include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
+2. [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli) by using the VLAN ID that you identified. Include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
 
     ```
     ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
@@ -172,7 +172,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 ## Managing existing portable IP addresses
 {: #managing_ips}
 
-By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](/docs/containers/cs_loadbalancer.html). To create a load balancer service, you must have at least 1 portable IP address of the correct type available. You can view portable IP addresses that are available or free up a used portable IP address.
+By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](/docs/containers?topic=containers-loadbalancer). To create a load balancer service, you must have at least 1 portable IP address of the correct type available. You can view portable IP addresses that are available or free up a used portable IP address.
 {: shortdesc}
 
 ### Viewing available portable public IP addresses
@@ -189,8 +189,8 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 To list only portable public IP addresses that are available to create load balancers, you can use the following steps:
 
 Before you begin:
--  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+-  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 To list available portable public IP addresses:
 
@@ -250,8 +250,8 @@ You can free up a used portable IP address by deleting the load balancer service
 {:shortdesc}
 
 Before you begin:
--  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+-  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 To delete a load balancer:
 
@@ -275,7 +275,7 @@ To delete a load balancer:
 ## Adding portable IP addresses
 {: #adding_ips}
 
-By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](/docs/containers/cs_loadbalancer.html). To create more than 4 public or 4 private load balancers, you can get more portable IP addresses by adding network subnets to the cluster.
+By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](/docs/containers?topic=containers-loadbalancer). To create more than 4 public or 4 private load balancers, you can get more portable IP addresses by adding network subnets to the cluster.
 {: shortdesc}
 
 When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure to use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.
@@ -291,8 +291,8 @@ You can get more portable IPs for load balancer services by creating a new subne
 {:shortdesc}
 
 Before you begin:
--  Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) for the cluster.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+-  Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 To order a subnet:
 
@@ -362,9 +362,9 @@ Requirements:
 
 Before you begin:
 - Configure the routing of network traffic into and out of the external subnet.
-- Confirm that you have VPN connectivity between the on-premises data center network gateway and either the private network Virtual Router Appliance or the strongSwan VPN service that runs in your cluster. For more information, see [Setting up VPN connectivity](/docs/containers/cs_vpn.html).
--  Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) for the cluster.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+- Confirm that you have VPN connectivity between the on-premises data center network gateway and either the private network Virtual Router Appliance or the strongSwan VPN service that runs in your cluster. For more information, see [Setting up VPN connectivity](/docs/containers?topic=containers-vpn).
+-  Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 
 To add a subnet from an on-premises network:
@@ -417,7 +417,7 @@ To add a subnet from an on-premises network:
 
 4. [Enable routing between subnets on the same VLAN](#subnet-routing).
 
-5. Add a [private load balancer service](/docs/containers/cs_loadbalancer.html) or enable a [private Ingress ALB](/docs/containers/cs_ingress.html#private_ingress) to access your app over the private network. To use a private IP address from the subnet that you added, you must specify an IP address from the subnet CIDR. Otherwise, an IP address is chosen at random from the IBM Cloud infrastructure (SoftLayer) subnets or user-provided subnets on the private VLAN.
+5. Add a [private load balancer service](/docs/containers?topic=containers-loadbalancer) or enable a [private Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress) to access your app over the private network. To use a private IP address from the subnet that you added, you must specify an IP address from the subnet CIDR. Otherwise, an IP address is chosen at random from the IBM Cloud infrastructure (SoftLayer) subnets or user-provided subnets on the private VLAN.
 
 <br />
 
@@ -437,9 +437,9 @@ When you create a cluster, a subnet that ends in `/26` is provisioned on the def
 
 This 62 worker node limit might be exceeded by a large cluster or by several smaller clusters in a single region that are on the same VLAN. When the 62 worker node limit is reached, a second private primary subnet in the same VLAN is ordered.
 
-To ensure that workers in these primary subnets on the same VLAN can communicate, you must turn on VLAN spanning. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+To ensure that workers in these primary subnets on the same VLAN can communicate, you must turn on VLAN spanning. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
 
-To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get).
+To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
 {: tip}
 
 ### Managing subnet routing for gateway appliances
@@ -448,7 +448,7 @@ To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning
 When you create a cluster, a portable public and a portable private subnet are ordered on the VLANs that the cluster is connected to. These subnets provide IP addresses for Ingress and load balancer networking services.
 {: shortdesc}
 
-However, if you have an existing router appliance, such as a [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html#about-the-vra), the newly added portable subnets from those VLANs that the cluster is connected to are not configured on the router. To use Ingress or load balancer networking services, you must ensure that network devices can route between different subnets on the same VLAN by [enabling VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+However, if you have an existing router appliance, such as a [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra#about-the-vra), the newly added portable subnets from those VLANs that the cluster is connected to are not configured on the router. To use Ingress or load balancer networking services, you must ensure that network devices can route between different subnets on the same VLAN by [enabling VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
 
-To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get).
+To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
 {: tip}

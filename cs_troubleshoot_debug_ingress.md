@@ -38,7 +38,7 @@ You publicly exposed your app by creating an Ingress resource for your app in yo
 Ensure that you define a host in only one Ingress resource. If one host is defined in multiple Ingress resources, the ALB might not forward traffic properly and you might experience errors.
 {: tip}
 
-Before you begin, ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM access policies](/docs/containers/cs_users.html#platform):
+Before you begin, ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM access policies](/docs/containers?topic=containers-users#platform):
   - **Editor** or **Administrator** platform role for the cluster
   - **Writer** or **Manager** service role
 
@@ -46,7 +46,7 @@ Before you begin, ensure you have the following [{{site.data.keyword.Bluemix_not
 
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Ingress tests and gather pertinent Ingress information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
 
-1. [Set up Helm in your cluster, create a service account for Tiller, and add the `ibm` repository to your Helm instance](/docs/containers/cs_integrations.html#helm).
+1. [Set up Helm in your cluster, create a service account for Tiller, and add the `ibm` repository to your Helm instance](/docs/containers?topic=containers-integrations#helm).
 
 2. Install the Helm chart to your cluster.
     ```
@@ -82,7 +82,7 @@ Start by checking for error messages in the Ingress resource deployment events a
     ```
     {: pre}
 
-    In the **Events** section of the output, you might see warning messages about invalid values in your Ingress resource or in certain annotations that you used. Check the [Ingress resource configuration documentation](/docs/containers/cs_ingress.html#public_inside_4) or the [annotations documentation](/docs/containers/cs_annotations.html).
+    In the **Events** section of the output, you might see warning messages about invalid values in your Ingress resource or in certain annotations that you used. Check the [Ingress resource configuration documentation](/docs/containers?topic=containers-ingress#public_inside_4) or the [annotations documentation](/docs/containers?topic=containers-ingress_annotation).
 
     ```
     Name:             myingress
@@ -169,7 +169,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     ```
     {: screen}
 
-    * If a public ALB has no IP address, see [Ingress ALB does not deploy in a zone](/docs/containers/cs_troubleshoot_network.html#cs_multizone_subnet_limit).
+    * If a public ALB has no IP address, see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit).
 
 2. Check the health of your ALB IPs.
 
@@ -179,10 +179,10 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
         ```
         {: pre}
 
-        * If the CLI returns a timeout and you have a custom firewall that is protecting your worker nodes, make sure that you allow ICMP in your [firewall](/docs/containers/cs_troubleshoot_clusters.html#cs_firewall).
+        * If the CLI returns a timeout and you have a custom firewall that is protecting your worker nodes, make sure that you allow ICMP in your [firewall](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).
         * If there is no firewall that is blocking the pings and the pings still run to timeout, [check the status of your ALB pods](#check_pods).
 
-    * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs. For more information about the MZLB, see [Multizone load balancer (MZLB)](/docs/containers/cs_ingress.html#planning). The MZLB health check is available only for clusters that have the new Ingress subdomain in the format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. If your cluster still uses the older format of `<cluster_name>.<region>.containers.mybluemix.net`, [convert your single zone cluster to multizone](/docs/containers/cs_clusters.html#add_zone). Your cluster is assigned a subdomain with the new format, but can also continue to use the older subdomain format. Alternatively, you can order a new cluster that is automatically assigned the new subdomain format.
+    * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs. For more information about the MZLB, see [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress#planning). The MZLB health check is available only for clusters that have the new Ingress subdomain in the format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. If your cluster still uses the older format of `<cluster_name>.<region>.containers.mybluemix.net`, [convert your single zone cluster to multizone](/docs/containers?topic=containers-clusters#add_zone). Your cluster is assigned a subdomain with the new format, but can also continue to use the older subdomain format. Alternatively, you can order a new cluster that is automatically assigned the new subdomain format.
 
     The following HTTP cURL command uses the `albhealth` host, which is configured by {{site.data.keyword.containerlong_notm}} to return the `healthy` or `unhealthy` status for an ALB IP.
         ```
@@ -265,7 +265,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
     2. Check that the subdomain and TLS certificate are correct. To find the IBM provided Ingress subdomain and TLS certificate, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
 
-    3.  Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](/docs/containers/cs_annotations.html#rewrite-path) annotation.
+    3.  Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](/docs/containers?topic=containers-ingress_annotation#rewrite-path) annotation.
 
     4. Edit your resource configuration YAML as needed. When you close the editor, your changes are saved and automatically applied.
         ```
@@ -383,7 +383,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     {: pre}
 
     * If everything is configured correctly, you get back the expected response from your app.
-    * If you get an error in response, there might be an error in your app or in a configuration that applies only to this specific ALB. Check your app code, your [Ingress resource configuration files](/docs/containers/cs_ingress.html#public_inside_4), or any other configurations you have applied to only this ALB.
+    * If you get an error in response, there might be an error in your app or in a configuration that applies only to this specific ALB. Check your app code, your [Ingress resource configuration files](/docs/containers?topic=containers-ingress#public_inside_4), or any other configurations you have applied to only this ALB.
 
 7. After you finish debugging, restore the health check on the ALB pods. Repeat these steps for each ALB pod.
   1. Log in to the ALB pod and remove the `#` from the `server_name`.
@@ -436,6 +436,6 @@ Still having issues with your cluster?
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support/howtogetsupport.html#using-avatar) for more details about using the forums.
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](cs_troubleshoot.html#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers/cs_troubleshoot.html#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

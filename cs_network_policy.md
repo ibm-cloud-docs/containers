@@ -47,7 +47,7 @@ If you have unique security requirements or you have a multizone cluster with VL
 
 Calico enforces these policies, including any Kubernetes network policies that are automatically converted to Calico policies, by setting up Linux Iptables rules on the Kubernetes worker nodes. Iptables rules serve as a firewall for the worker node to define the characteristics that the network traffic must meet to be forwarded to the targeted resource.
 
-To use Ingress and load balancer services, use Calico and Kubernetes policies to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups/sg_overview.html#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containerlong_notm}} uses to manage the load balancer IP address. If the VRRP protocol isn't present to manage the load balancer IP, Ingress and load balancer services do not work properly.
+To use Ingress and load balancer services, use Calico and Kubernetes policies to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containerlong_notm}} uses to manage the load balancer IP address. If the VRRP protocol isn't present to manage the load balancer IP, Ingress and load balancer services do not work properly.
 {: tip}
 
 <br />
@@ -123,7 +123,7 @@ In Kubernetes version 1.10 and later clusters, a default Kubernetes policy that 
 To view, manage, and add Calico policies, install and configure the Calico CLI.
 {:shortdesc}
 
-1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -171,7 +171,7 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
         ```
         {: pre}
 
-6. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints, [allow TCP access for Calico commands](/docs/containers/cs_firewall.html#firewall).
+6. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints, [allow TCP access for Calico commands](/docs/containers?topic=containers-firewall#firewall).
 
 7. Verify that the Calico configuration is working correctly.
 
@@ -210,7 +210,7 @@ View the details for default and any added network policies that are applied to 
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -271,7 +271,7 @@ To create Kubernetes network policies, see the [Kubernetes network policy docume
 To create Calico policies, use the following steps.
 
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -309,16 +309,16 @@ Default Kubernetes and Calico policies are difficult to apply to protecting Kube
 Some common uses for Calico pre-DNAT network policies:
 
   - Block traffic to public node ports of a private load balancer service: A load balancer service makes your app available over the load balancer IP address and port and makes your app available over the service's node ports. Node ports are accessible on every IP address (public and private) for every node within the cluster.
-  - Block traffic to public node ports on clusters that are running [edge worker nodes](/docs/containers/cs_edge.html#edge): Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
+  - Block traffic to public node ports on clusters that are running [edge worker nodes](/docs/containers?topic=containers-edge#edge): Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
   - Block traffic from certain source IP addresses or CIDRs (blacklisting)
   - Allow traffic from only certain source IP addresses or CIDRs (whitelisting), and block all other traffic
 
-To see how to whitelist or blacklist source IP addresses, try the [Using Calico network policies to block traffic tutorial](/docs/containers/cs_tutorials_policies.html#policy_tutorial). For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
+To see how to whitelist or blacklist source IP addresses, try the [Using Calico network policies to block traffic tutorial](/docs/containers?topic=containers-policy_tutorial#policy_tutorial). For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
 {: tip}
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -329,7 +329,7 @@ To create a pre-DNAT policy:
 
 1. Define a Calico pre-DNAT network policy for ingress (inbound traffic) access to Kubernetes services.
     * Kubernetes version 1.10 or later clusters must use [Calico v3 policy syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy).
-    * If you manage traffic to a [version 2.0 load balancer service](/docs/containers/cs_loadbalancer.html#planning_ipvs), you must include the `applyOnForward: true` and `doNotTrack: true` fields to the `spec` section of the policy.
+    * If you manage traffic to a [version 2.0 load balancer service](/docs/containers?topic=containers-loadbalancer#planning_ipvs), you must include the `applyOnForward: true` and `doNotTrack: true` fields to the `spec` section of the policy.
 
         Example resource that blocks all node ports:
 
@@ -434,12 +434,12 @@ policy changes to be applied throughout the cluster.
     ```
     {: pre}
 
-3. Optional: In multizone clusters, a multizone load balancer (MZLB) health checks the Ingress application load balancers (ALBs) in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. If you use pre-DNAT policies to block all incoming traffic to Ingress services, you must also whitelist [Cloudflare's IPv4 IPs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/) that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the [Calico network policy tutorial](/docs/containers/cs_tutorials_policies.html#lesson3).
+3. Optional: In multizone clusters, a multizone load balancer (MZLB) health checks the Ingress application load balancers (ALBs) in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. If you use pre-DNAT policies to block all incoming traffic to Ingress services, you must also whitelist [Cloudflare's IPv4 IPs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/) that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the [Calico network policy tutorial](/docs/containers?topic=containers-policy_tutorial#lesson3).
 
 ## Isolating clusters on the private network
 {: #isolate_workers}
 
-If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must [enable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) so that your worker nodes can communicate with each other on the private network. However, when VLAN spanning is enabled, any system that is connected to any of the private VLANs in the same IBM Cloud account can communicate with workers.
+If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must [enable VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) so that your worker nodes can communicate with each other on the private network. However, when VLAN spanning is enabled, any system that is connected to any of the private VLANs in the same IBM Cloud account can communicate with workers.
 {: shortdecsc}
 
 You can isolate your cluster from other systems on the private network by applying [Calico private network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). This set of Calico policies and host endpoints isolate the private network traffic of a cluster from other resources in the account's private network.
@@ -458,7 +458,7 @@ The policies target the worker node private interface (eth0) and the pod network
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -630,7 +630,7 @@ When you set up network policies to limit traffic to app pods, traffic requests 
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Target the Kubernetes CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
+2. [Target the Kubernetes CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Include the `--admin` option with the `ibmcloud ks cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys to access your infrastructure portfolio and run Calico commands on your worker nodes.
     ```
     ibmcloud ks cluster-config --cluster <cluster_name> --admin
     ```
@@ -744,4 +744,4 @@ To create a Calico policy to log denied traffic:
     ```
     {: pre}
 
-6. [Forward the logs](/docs/containers/cs_health.html#configuring) from `/var/log/syslog` to {{site.data.keyword.loganalysislong}} or an external syslog server.
+6. [Forward the logs](/docs/containers?topic=containers-health#configuring) from `/var/log/syslog` to {{site.data.keyword.loganalysislong}} or an external syslog server.

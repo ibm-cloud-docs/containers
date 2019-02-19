@@ -54,12 +54,12 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 {: #policies_prereqs}
 
-- [Create a version 1.10 or later cluster](/docs/containers/cs_clusters.html#clusters_ui) or [update an existing cluster to version 1.10](/docs/containers/cs_versions.html#cs_v110). A Kubernetes version 1.10 or later cluster is required to use the 3.3.1 Calico CLI and Calico v3 policy syntax in this tutorial.
-- [Target your CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
-- [Install and configure the Calico CLI](/docs/containers/cs_network_policy.html#cli_install).
+- [Create a version 1.10 or later cluster](/docs/containers?topic=containers-clusters#clusters_ui) or [update an existing cluster to version 1.10](/docs/containers?topic=containers-cs_versions#cs_v110). A Kubernetes version 1.10 or later cluster is required to use the 3.3.1 Calico CLI and Calico v3 policy syntax in this tutorial.
+- [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 - Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
-    - [Any platform role](/docs/containers/cs_users.html#platform)
-    - [The **Writer** or **Manager** service role](/docs/containers/cs_users.html#platform)
+    - [Any platform role](/docs/containers?topic=containers-users#platform)
+    - [The **Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform)
 
 <br />
 
@@ -72,7 +72,7 @@ The first lesson shows you how your app is exposed from multiple IP addresses an
 
 Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection being made to the cluster from the client, and lets you test access to the PR firm's cluster. Then, expose the app by creating a load balancer 1.0 service. A load balancer 1.0 service makes your app available over both the load balancer service IP address and the worker nodes' node ports.
 
-Want to use an Ingress application load balancer (ALB)? Instead of creating a load balancer in steps 3 and 4, [create a service for the web server app](/docs/containers/cs_ingress.html#public_inside_1) and [create an Ingress resource for the web server app](/docs/containers/cs_ingress.html#public_inside_4). Then get the public IPs of your ALBs by running `ibmcloud ks albs --cluster <cluster_name>` and use these IPs throughout the tutorial in place of the `<loadbalancer_IP>.`
+Want to use an Ingress application load balancer (ALB)? Instead of creating a load balancer in steps 3 and 4, [create a service for the web server app](/docs/containers?topic=containers-ingress#public_inside_1) and [create an Ingress resource for the web server app](/docs/containers?topic=containers-ingress#public_inside_4). Then get the public IPs of your ALBs by running `ibmcloud ks albs --cluster <cluster_name>` and use these IPs throughout the tutorial in place of the `<loadbalancer_IP>.`
 {: tip}
 
 The following image shows how the web server app is exposed to the internet by the public node port and public load balancer at the end of Lesson 1:
@@ -582,5 +582,5 @@ Great work! You've successfully controlled traffic into your app by using Calico
 ## What's next?
 {: #whats_next}
 
-* Read more about [controlling traffic with network policies](/docs/containers/cs_network_policy.html).
+* Read more about [controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
 * For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).

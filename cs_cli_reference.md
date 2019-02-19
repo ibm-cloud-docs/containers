@@ -29,11 +29,11 @@ scope: containers
 Refer to these commands to create and manage Kubernetes clusters in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-To install the CLI plug-in, see [Installing the CLI](/docs/containers/cs_cli_install.html#cs_cli_install_steps).
+To install the CLI plug-in, see [Installing the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
 
 In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all the available commands and flags.
 
-Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_notm}} CLI reference](/docs/services/Registry/registry_cli_reference.html#registry_cli_reference). Looking for `kubectl` commands? See the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).
+Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_notm}} CLI reference](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference). Looking for `kubectl` commands? See the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).
 {:tip}
 
 ## Using the beta command structure
@@ -468,7 +468,7 @@ ibmcloud ks api-key-info --cluster CLUSTER [--json] [-s]
 
 The {{site.data.keyword.Bluemix_notm}} API key is automatically set for a resource group and region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the `default` resource group in the `us-south` region. By doing that, the {{site.data.keyword.Bluemix_notm}} IAM API key for this user is stored in the account for this resource group and region. The API key is used to order resources in IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs. A different API key can be set for each region within a resource group.
 
-When a different user performs an action in this resource group and region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine if sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](/docs/containers/cs_users.html#infra_access).
+When a different user performs an action in this resource group and region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine if sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](/docs/containers?topic=containers-users#infra_access).
 
 If you find that you need to update the API key that is stored for a resource group and region, you can do so by running the [ibmcloud ks api-key-reset](#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
 
@@ -511,7 +511,7 @@ ibmcloud ks api-key-reset [-s]
 
 This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The {{site.data.keyword.Bluemix_notm}} IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how {{site.data.keyword.Bluemix_notm}} IAM API keys work, see the [`ibmcloud ks api-key-info` command](#cs_api_key_info).
 
-Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers/cs_users.html#users).
+Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users).
 {: important}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -723,7 +723,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use.  This value is optional. [View the available API endpoint values.](/docs/containers/cs_regions.html#container_regions)</dd>
+   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use.  This value is optional. [View the available API endpoint values.](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>Allow an insecure HTTP connection.</dd>
@@ -892,7 +892,7 @@ Enable a managed add-on in an existing cluster. This command must be combined wi
 #### ibmcloud ks cluster-addon-enable istio
 {: #cs_cluster_addon_enable_istio}
 
-Enable the managed [Istio add-on](/docs/containers/cs_istio.html). Installs the core components of Istio version 1.0.5, including Prometheus.
+Enable the managed [Istio add-on](/docs/containers?topic=containers-istio). Installs the core components of Istio version 1.0.5, including Prometheus.
 {: shortdesc}
 
 ```
@@ -978,7 +978,7 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
 #### ibmcloud ks cluster-addon-enable knative
 {: #cs_cluster_addon_enable_knative}
 
-Enable the managed [Knative add-on](/docs/containers/cs_tutorials_knative.html) to install the Knative serverless framework.
+Enable the managed [Knative add-on](/docs/containers?topic=containers-knative_tutorial) to install the Knative serverless framework.
 {: shortdesc}
 
 ```
@@ -1044,8 +1044,8 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
 {: pre}
 
 **Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.Bluemix_notm}} IAM service role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform role or only a service role, additional constraints apply.
-* **Platform**: If you have only a platform role, you can perform this command, but you need a [service role](/docs/containers/cs_users.html#platform) or a [custom RBAC policy](/docs/containers/cs_users.html#role-binding) to perform Kubernetes actions in the cluster.
-* **Service**: If you have only a service role, you can perform this command. However, your cluster admin must give you the cluster name and ID, because you cannot run the `ibmcloud ks clusters` command or launch the {{site.data.keyword.containerlong_notm}} console to view clusters. After, you can [launch the Kubernetes dashboard from the CLI](/docs/containers/cs_app.html#db_cli) and work with Kubernetes.
+* **Platform**: If you have only a platform role, you can perform this command, but you need a [service role](/docs/containers?topic=containers-users#platform) or a [custom RBAC policy](/docs/containers?topic=containers-users#role-binding) to perform Kubernetes actions in the cluster.
+* **Service**: If you have only a service role, you can perform this command. However, your cluster admin must give you the cluster name and ID, because you cannot run the `ibmcloud ks clusters` command or launch the {{site.data.keyword.containerlong_notm}} console to view clusters. After, you can [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) and work with Kubernetes.
 
 **Command options**:
 
@@ -1063,7 +1063,7 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
    <dd>Download Kubernetes configuration data and certificates without any messages other than the export command. Because no messages are displayed, you can use this flag when you create automated scripts. This value is optional.</dd>
 
    <dt><code>--skip-rbac</code></dt>
-   <dd>Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.Bluemix_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers/cs_users.html#rbac). If you use [{{site.data.keyword.Bluemix_notm}} IAM service access roles](/docs/containers/cs_access_reference.html#service) to manage all your RBAC users, do not include this option.</dd>
+   <dd>Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.Bluemix_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.Bluemix_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, do not include this option.</dd>
 
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1142,7 +1142,7 @@ trusted: <em>true</em>
       </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
-     <td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers/cs_cli_reference.html#cs_machine_types).</td>
+     <td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types).</td>
      </tr>
      <tr>
      <td><code><em>private-vlan</em></code></td>
@@ -1166,10 +1166,10 @@ trusted: <em>true</em>
 </td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
+      <td>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
       <tr>
       <td><code>trusted: <em>true</em></code></td>
-      <td>**Bare metal only**: Enable [Trusted Compute](/docs/containers/cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td></tr>
+      <td>**Bare metal only**: Enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td></tr>
      </tbody></table>
     </p></dd>
 
@@ -1179,13 +1179,13 @@ trusted: <em>true</em>
 <dt><code>--zone <em>ZONE</em></code></dt>
 <dd>The zone where you want to create the cluster. The zones that are available to you depend on the {{site.data.keyword.Bluemix_notm}} region you are logged in to. Select the region that is physically closest to you for best performance. This value is required for standard clusters and is optional for free clusters.
 
-<p>Review [available zones](/docs/containers/cs_regions.html#zones).</p>
+<p>Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</p>
 
 <p class="note">When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.</p>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-types` [command](/docs/containers/cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
+<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-types` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>The name for the cluster.  This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
@@ -1220,7 +1220,7 @@ trusted: <em>true</em>
 <p>To find out if you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>.</p></dd>
 
 <dt><code>--private-only</code></dt>
-  <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  <p class="note">If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Private clusters](/docs/containers/cs_clusters_planning.html#private_clusters).</p></dd>
+  <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  <p class="note">If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with 1 worker node is created. This value is optional for standard clusters and is not available for free clusters.
@@ -1228,10 +1228,10 @@ trusted: <em>true</em>
 <p class="important">Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option.</dd>
+<dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option.</dd>
 
 <dt><code>--trusted</code></dt>
-<dd><p>**Bare metal only**: Enable [Trusted Compute](/docs/containers/cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
+<dd><p>**Bare metal only**: Enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
 <p>To check whether the bare metal machine type supports trust, check the `Trustable` field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker-get` [command](#cs_worker_get).</p></dd>
 
 <dt><code>-s</code></dt>
@@ -1293,7 +1293,7 @@ ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted] [-s]
    <dd>Use this option to force the <code>--trusted</code> option without user prompts. This value is optional.</dd>
 
    <dt><code><em>--trusted</em></code></dt>
-   <dd><p>Include the flag to enable [Trusted Compute](/docs/containers/cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
+   <dd><p>Include the flag to enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
    <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker-get` [command](#cs_worker_get).</p></dd>
 
   <dt><code>-s</code></dt>
@@ -1463,7 +1463,7 @@ ibmcloud ks cluster-update --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH] 
 ```
 {: pre}
 
-You might need to change your YAML files for future deployments. Review this [release note](/docs/containers/cs_versions.html) for details.
+You might need to change your YAML files for future deployments. Review this [release note](/docs/containers?topic=containers-cs_versions) for details.
 
 <strong>Minimum required permissions</strong>: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1528,7 +1528,7 @@ ibmcloud ks clusters [--json] [-s]
 ### ibmcloud ks kube-versions
 {: #cs_kube_versions}
 
-View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers/cs_cli_reference.html#cs_worker_update) to the default version for the latest, stable capabilities.
+View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) to the default version for the latest, stable capabilities.
 {: shortdesc}
 
 ```
@@ -1692,7 +1692,7 @@ ibmcloud ks cluster-services --cluster CLUSTER [--namespace KUBERNETES_NAMESPACE
 ### ibmcloud ks va
 {: #cs_va}
 
-After you [install the container scanner](/docs/services/va/va_index.html#va_install_container_scanner), view a detailed vulnerability assessment report for a container in your cluster.
+After you [install the container scanner](/docs/services/va?topic=va-va_index#va_install_container_scanner), view a detailed vulnerability assessment report for a container in your cluster.
 {: shortdesc}
 
 ```
@@ -1707,7 +1707,7 @@ ibmcloud ks va --container CONTAINER_ID [--extended] [--vulnerabilities] [--conf
 <dl>
 <dt><code>--container CONTAINER_ID</code></dt>
 <dd><p>The ID of the container. This value is required.</p>
-<p>To find the ID of your container:<ol><li>[Target the Kubernetes CLI to your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).</li><li>List your pods by running `kubectl get pods`.</li><li>Find the **Container ID** field in the output of the `kubectl describe pod <pod_name>` command. For example, `Container ID: containerd://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remove the `containerd://` prefix from the ID before you use the container ID for the `ibmcloud ks va` command. For example, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+<p>To find the ID of your container:<ol><li>[Target the Kubernetes CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).</li><li>List your pods by running `kubectl get pods`.</li><li>Find the **Container ID** field in the output of the `kubectl describe pod <pod_name>` command. For example, `Container ID: containerd://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remove the `containerd://` prefix from the ID before you use the container ID for the `ibmcloud ks va` command. For example, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
 <dd><p>Extend the command output to show more fix information for vulnerable packages. This value is optional.</p>
@@ -1733,7 +1733,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks key-protect-enable
 {: #cs_key_protect}
 
-Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect/index.html#getting-started-with-key-protect) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster.
+Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-with-key-protect) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster.
 {: shortdesc}
 
 ```
@@ -1753,13 +1753,13 @@ If you delete the root key in your {{site.data.keyword.keymanagementserviceshort
 <dd>The name or ID of the cluster.</dd>
 
 <dt><code>--key-protect-url ENDPOINT</code></dt>
-<dd>The {{site.data.keyword.keymanagementserviceshort}} endpoint for your cluster instance. To get the endpoint, see [service endpoints by region](/docs/services/key-protect/regions.html#service-endpoints).</dd>
+<dd>The {{site.data.keyword.keymanagementserviceshort}} endpoint for your cluster instance. To get the endpoint, see [service endpoints by region](/docs/services/key-protect?topic=key-protect-regions#service-endpoints).</dd>
 
 <dt><code>--key-protect-instance INSTANCE_GUID</code></dt>
 <dd>Your {{site.data.keyword.keymanagementserviceshort}} instance GUID. To get the instance GUID, run <code>ibmcloud resource service-instance SERVICE_INSTANCE_NAME --id</code> and copy the second value (not the full CRN).</dd>
 
 <dt><code>--crk ROOT_KEY_ID</code></dt>
-<dd>Your {{site.data.keyword.keymanagementserviceshort}} root key ID. To get the CRK, see [Viewing keys](/docs/services/key-protect/view-keys.html#view-keys).</dd>
+<dd>Your {{site.data.keyword.keymanagementserviceshort}} root key ID. To get the CRK, see [Viewing keys](/docs/services/key-protect?topic=key-protect-view-keys#view-keys).</dd>
 </dl>
 
 **Example**:
@@ -1829,7 +1829,7 @@ ibmcloud ks cluster-subnet-add --cluster CLUSTER --subnet-id SUBNET [-s]
 
 <p class="important">Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.</br>
 </br>When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.</br>
-</br>To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](/docs/containers/cs_subnets.html#subnet-routing).</p>
+</br>To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](/docs/containers?topic=containers-subnets#subnet-routing).</p>
 
 <strong>Minimum required permissions</strong>: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2516,7 +2516,7 @@ If IBM Cloud infrastructure (SoftLayer) credentials are manually set for a regio
 
 You cannot set multiple credentials for the same {{site.data.keyword.containerlong_notm}} resource group and region.
 
-Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers/cs_users.html#users).
+Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users).
 {: important}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -2584,7 +2584,7 @@ After you remove the credentials, the [{{site.data.keyword.Bluemix_notm}} IAM AP
 ### ibmcloud ks machine-types
 {: #cs_machine_types}
 
-View a list of available machine types for your worker nodes. Machine types vary by zone. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with AES 256-bit LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers/cs_secure.html#encrypted_disk).
+View a list of available machine types for your worker nodes. Machine types vary by zone. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with AES 256-bit LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers?topic=containers-security#encrypted_disk).
 {:shortdesc}
 
 ```
@@ -2592,7 +2592,7 @@ ibmcloud ks machine-types --zone ZONE [--json] [-s]
 ```
 {: pre}
 
-You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](/docs/containers/cs_clusters_planning.html#shared_dedicated_node).
+You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).
 
 <strong>Minimum required permissions</strong>: None
 
@@ -2600,7 +2600,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 
    <dl>
    <dt><code>--zone <em>ZONE</em></code></dt>
-   <dd>Enter the zone where you want to list available machine types. This value is required. Review [available zones](/docs/containers/cs_regions.html#zones).</dd>
+   <dd>Enter the zone where you want to list available machine types. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
 
    <dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -2637,7 +2637,7 @@ ibmcloud ks vlans --zone ZONE [--all] [--json] [-s]
 
    <dl>
    <dt><code>--zone <em>ZONE</em></code></dt>
-   <dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](/docs/containers/cs_regions.html#zones).</dd>
+   <dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
 
    <dt><code>--all</code></dt>
    <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANS that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
@@ -2776,7 +2776,7 @@ ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --typ
     <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
 
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-    <dd>When the logging type is <code>syslog</code>, the host name or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+    <dd>When the logging type is <code>syslog</code>, the host name or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
 
   <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
     <dd>The port of the log collector server. This value is optional. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and the standard port <code>9091</code> is used for <code>ibm</code>.</dd>
@@ -2977,7 +2977,7 @@ ibmcloud ks logging-config-update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
     <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
 
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-   <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+   <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
 
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
    <dd>The port of the log collector server. This value is optional when the logging type is <code>syslog</code>. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and <code>9091</code> is used for <code>ibm</code>.</dd>
@@ -3382,7 +3382,7 @@ For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US Sout
 <dt><code>--region <em>REGION</em></code></dt>
 <dd>Enter the region that you want to target. This value is optional. If you do not provide the region, you can select it from the list in the output.
 
-For a list of available regions, review [regions and zones](/docs/containers/cs_regions.html) or use the `ibmcloud ks regions` [command](#cs_regions).</dd></dl>
+For a list of available regions, review [regions and zones](/docs/containers?topic=containers-regions-and-zones) or use the `ibmcloud ks regions` [command](#cs_regions).</dd></dl>
 
 **Example**:
 
@@ -3525,7 +3525,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the `ibmcloud ks machine-types` [command](/docs/containers/cs_cli_reference.html#cs_machine_types).</td>
+<td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the `ibmcloud ks machine-types` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types).</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
@@ -3545,14 +3545,14 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
+<td>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>The level of hardware isolation for your worker node. Use dedicated if you want to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional. For bare metal machine types, specify `dedicated`.</dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-types` [command](/docs/containers/cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
+<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-types` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--workers <em>NUMBER</em></code></dt>
 <dd>An integer that represents the number of worker nodes to create in the cluster. The default value is 1. This value is optional.</dd>
@@ -3564,7 +3564,7 @@ diskEncryption: <em>false</em></code></pre>
 <dd>The public VLAN that was specified when the cluster was created. This value is optional. If you want your worker nodes to exist on a private VLAN only, do not provide a public VLAN ID. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.<p class="note">If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#plan_setup_private_vlan).</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers/cs_secure.html#encrypted_disk). To disable encryption, include this option.</dd>
+<dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -3727,7 +3727,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
 ### ibmcloud ks worker-reload
 {: #cs_worker_reload}
 
-Reload the configurations for a worker node. A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside of the worker node](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
+Reload the configurations for a worker node. A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside of the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: shortdesc}
 
 ```
@@ -3735,7 +3735,7 @@ ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER] [--sk
 ```
 {: pre}
 
-Reloading a worker node applies patch version updates to your worker node, but not major or minor updates. To see the changes from one patch version to the next, review the [Version changelog](/docs/containers/cs_versions_changelog.html#changelog) documentation.
+Reloading a worker node applies patch version updates to your worker node, but not major or minor updates. To see the changes from one patch version to the next, review the [Version changelog](/docs/containers?topic=containers-changelog#changelog) documentation.
 {: tip}
 
 <strong>Minimum required permissions</strong>: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -3883,7 +3883,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
 ### ibmcloud ks worker-update
 {: #cs_worker_update}
 
-Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the Kubernetes master. You can update the master Kubernetes version with the `ibmcloud ks cluster-update` [command](/docs/containers/cs_cli_reference.html#cs_cluster_update).
+Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the Kubernetes master. You can update the master Kubernetes version with the `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update).
 {: shortdesc}
 
 ```
@@ -3893,10 +3893,10 @@ ibmcloud ks worker-update [-f] --cluster CLUSTER --workers WORKER[,WORKER] [--fo
 
 <strong>Minimum required permissions</strong>: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-Running `ibmcloud ks worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes, the worker node is reimaged, and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](/docs/containers/cs_cluster_update.html#worker_node).
+Running `ibmcloud ks worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes, the worker node is reimaged, and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](/docs/containers?topic=containers-update#worker_node).
 {: important}
 
-You might need to change your YAML files for deployments before updating. Review this [release note](/docs/containers/cs_versions.html) for details.
+You might need to change your YAML files for deployments before updating. Review this [release note](/docs/containers?topic=containers-cs_versions) for details.
 
 <strong>Command options</strong>:
 
@@ -3999,7 +3999,7 @@ ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type
     <dd>The name or ID of the cluster. This value is required.</dd>
 
   <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-    <dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-types` [command](/docs/containers/cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
+    <dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-types` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
   <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
     <dd>The number of workers to create in each zone. This value is required, and must be 1 or greater.</dd>
@@ -4227,7 +4227,7 @@ ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers/cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+    <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>
@@ -4247,7 +4247,7 @@ ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,
     <p>If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/vrf-on-ibm-cloud.html#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.</p></dd>
 
   <dt><code>--private-only</code></dt>
-    <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Private clusters](/docs/containers/cs_clusters_planning.html#private_clusters).</p></dd>
+    <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
 
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -4286,13 +4286,13 @@ VLAN ID   Subnet CIDR         Public   User-managed
   <pre class="screen"><code>ID        Name   Number   Type      Router         Supports Virtual Workers
 229xxxx          1234     private   bcr01a.dal12   true
 229xxxx          5678     public    fcr01a.dal12   true</code></pre><p>Note that <strong>Router</strong> pod IDs match: `01a` and `01a`. If one pod ID were `01a` and the other were `02a`, you cannot set these public and private VLAN IDs for your worker pool.</p></li>
-  <li>If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/order-vlan.html#ordering-premium-vlans">order new VLANs</a>.</li></ol>
+  <li>If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans">order new VLANs</a>.</li></ol>
 
   <strong>Command options</strong>:
 
   <dl>
     <dt><code>--zone <em>ZONE</em></code></dt>
-      <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers/cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+      <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>
@@ -4340,7 +4340,7 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers/cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+    <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>

@@ -33,7 +33,7 @@ scope: containers
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting issues with logging and monitoring.
 {: shortdesc}
 
-If you have a more general issue, try out [cluster debugging](/docs/containers/cs_troubleshoot.html).
+If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
 {: tip}
 
 ## Logs do not appear
@@ -66,7 +66,7 @@ Review the following reasons why your cluster logs are not appearing and the cor
   </tr>
   <tr>
     <td>The log storage quota has been met.</td>
-    <td>To increase your log storage limits, see the <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html">{{site.data.keyword.loganalysislong_notm}} documentation</a>.</td>
+    <td>To increase your log storage limits, see the <a href="/docs/services/CloudLogAnalysis/troubleshooting?topic=cloudloganalysis-error_msgs">{{site.data.keyword.loganalysislong_notm}} documentation</a>.</td>
   </tr>
   <tr>
     <td>If you specified a space at cluster creation, the account owner does not have Manager, Developer, or Auditor permissions to that space.</td>
@@ -84,7 +84,7 @@ Review the following reasons why your cluster logs are not appearing and the cor
 
 To test changes you made during troubleshooting, you can deploy *Noisy*, a sample pod that produces several log events, to a worker node in your cluster.
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 1. Create the `deploy-noisy.yaml` configuration file.
     ```
@@ -164,15 +164,15 @@ Review the following reasons why you are hitting your log quota and the correspo
  <tbody>
   <tr>
     <td>One or more pods is producing a very high amount of logs.</td>
-    <td>You can free up log storage space by preventing the logs from specific pods from being forwarded. Create a [logging filter](/docs/containers/cs_health.html#filter-logs) for these pods.</td>
+    <td>You can free up log storage space by preventing the logs from specific pods from being forwarded. Create a [logging filter](/docs/containers?topic=containers-health#filter-logs) for these pods.</td>
   </tr>
   <tr>
     <td>You are exceeding the 500MB daily allotment for log storage for the Lite plan.</td>
-    <td>First, [calculate the search quota and daily usage](/docs/services/CloudLogAnalysis/how-to/quota.html) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](/docs/services/CloudLogAnalysis/how-to/change_plan.html#change_plan).</td>
+    <td>First, [calculate the search quota and daily usage](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan).</td>
   </tr>
   <tr>
     <td>You are exceeding the log storage quota for your current paid plan.</td>
-    <td>First, [calculate the search quota and daily usage](/docs/services/CloudLogAnalysis/how-to/quota.html) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](/docs/services/CloudLogAnalysis/how-to/change_plan.html#change_plan).</td>
+    <td>First, [calculate the search quota and daily usage](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan).</td>
   </tr>
   </tbody>
 </table>
@@ -208,6 +208,6 @@ Still having issues with your cluster?
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support/howtogetsupport.html#using-avatar) for more details about using the forums.
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](cs_troubleshoot.html#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers/cs_troubleshoot.html#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

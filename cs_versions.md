@@ -41,7 +41,7 @@ scope: containers
 
 **Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. You cannot create new clusters that use the deprecated version.
 
-**Unsupported versions**: If your clusters run a Kubernetes version that is not supported, review the following potential update impacts and then immediately [update the cluster](/docs/containers/cs_cluster_update.html#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. You can find out if your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks clusters` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters).
+**Unsupported versions**: If your clusters run a Kubernetes version that is not supported, review the following potential update impacts and then immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. You can find out if your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks clusters` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters).
 
 If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure. For example, if your cluster runs Kubernetes version 1.9 or earlier, when you update the master directly to 1.12 or later, most pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff` or `ContainerCreating` until you update the worker nodes to the same version. To avoid this issue, update the cluster to a supported version less than three ahead of the current version, such as 1.9 to 1.11 and then update to 1.12.<br><br>After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
 {: important}
@@ -77,12 +77,12 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `ibmcloud ks workers --cluster <cluster>` or `ibmcloud ks worker-get --cluster <cluster> --worker <worker>` commands.
--  **Major and minor updates (1.x)**: First, [update your master node](/docs/containers/cs_cluster_update.html#master) and then [update the worker nodes](/docs/containers/cs_cluster_update.html#worker_node). Worker nodes cannot run a Kubernetes major or minor version that is greater than the masters.
+-  **Major and minor updates (1.x)**: First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node). Worker nodes cannot run a Kubernetes major or minor version that is greater than the masters.
    - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.9 and you want to update to 1.12, you must update to 1.10 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results or failure.
-   - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers/cs_cli_install.html#kubectl) up-to-date.
--  **Patch updates (x.x.4_1510)**: Changes across patches are documented in the [Version changelog](/docs/containers/cs_versions_changelog.html). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
-   - **Worker node patches**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker-update` [command](/docs/containers/cs_cli_reference.html#cs_worker_update) or the `ibmcloud ks worker-reload` [command](/docs/containers/cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. Note that during an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
-   - **Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster-update` [command](/docs/containers/cs_cli_reference.html#cs_cluster_update) yourself without waiting for the update automation to apply.
+   - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers?topic=containers-cs_cli_install#kubectl) up-to-date.
+-  **Patch updates (x.x.4_1510)**: Changes across patches are documented in the [Version changelog](/docs/containers?topic=containers-changelog). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the following commands: `ibmcloud ks clusters`, `cluster-get`, `workers`, or `worker-get`.
+   - **Worker node patches**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) or the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) to apply these security and operating system patches. Note that during an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+   - **Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update) yourself without waiting for the update automation to apply.
 
 </br>
 
@@ -98,7 +98,7 @@ This information summarizes updates that are likely to have impact on deployed a
 
 For a complete list of changes, review the following information:
 * [Kubernetes changelog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md).
-* [IBM version changelog](/docs/containers/cs_versions_changelog.html).
+* [IBM version changelog](/docs/containers?topic=containers-changelog).
 
 </br>
 
@@ -235,7 +235,7 @@ The following table shows the actions that you must take after you update the Ku
 <tbody>
 <tr>
 <td>CoreDNS available as the new default cluster DNS provider</td>
-<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers/cs_dns.html#dns_set).
+<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers?topic=containers-cluster_dns#dns_set).
 <br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services are using IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
 </tr>
 <tr>
@@ -248,7 +248,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/landing) or by using the `ibmcloud ks cluster-get` [command](/docs/containers/cs_cli_reference.html#cs_cluster_get).</td>
+<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/landing) or by using the `ibmcloud ks cluster-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get).</td>
 </tr>
 <tr>
 <tr>
@@ -261,7 +261,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>Deprecated: `scheduler.alpha.kubernetes.io/critical-pod` annotation</td>
-<td>The `scheduler.alpha.kubernetes.io/critical-pod` annotation is now deprecated. Change any pods that rely on this annotation to use [pod priority](/docs/containers/cs_pod_priority.html#pod_priority) instead.</td>
+<td>The `scheduler.alpha.kubernetes.io/critical-pod` annotation is now deprecated. Change any pods that rely on this annotation to use [pod priority](/docs/containers?topic=containers-pod_priority#pod_priority) instead.</td>
 </tr>
 </tbody>
 </table>
@@ -320,7 +320,7 @@ The following table shows the actions that you must take before you update the K
 </tr>
 <tr>
 <td>Role bindings for `kube-system` `default` service account</td>
-<td>The `kube-system` `default` service account no longer has **cluster-admin** access to the Kubernetes API. If you deploy features or add-ons such as [Helm](/docs/containers/cs_integrations.html#helm) that require access to processes in your cluster, set up a [service account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/). If you need time to create and set up individual service accounts with the appropriate permissions, you can temporarily grant the **cluster-admin** role with the following cluster role binding: `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
+<td>The `kube-system` `default` service account no longer has **cluster-admin** access to the Kubernetes API. If you deploy features or add-ons such as [Helm](/docs/containers?topic=containers-integrations#helm) that require access to processes in your cluster, set up a [service account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/). If you need time to create and set up individual service accounts with the appropriate permissions, you can temporarily grant the **cluster-admin** role with the following cluster role binding: `kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
 </tr>
 </tbody>
 </table>
@@ -348,7 +348,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>CoreDNS available as cluster DNS provider</td>
-<td>The Kubernetes project is in the process of transitioning to support CoreDNS instead of the current Kubernetes DNS (KubeDNS). In version 1.12, the default cluster DNS remains KubeDNS, but you can [choose to use CoreDNS](/docs/containers/cs_dns.html#dns_set).</td>
+<td>The Kubernetes project is in the process of transitioning to support CoreDNS instead of the current Kubernetes DNS (KubeDNS). In version 1.12, the default cluster DNS remains KubeDNS, but you can [choose to use CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set).</td>
 </tr>
 <tr>
 <td>`kubectl apply --force`</td>
@@ -356,7 +356,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>`kubectl get componentstatuses`</td>
-<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/landing) or by using the `ibmcloud ks cluster-get` [command](/docs/containers/cs_cli_reference.html#cs_cluster_get).</td>
+<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/landing) or by using the `ibmcloud ks cluster-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get).</td>
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>
@@ -385,13 +385,13 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>Kubernetes dashboard</td>
-<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers/cs_app.html#cli_dashboard).</td>
+<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers?topic=containers-app#cli_dashboard).</td>
 </tr>
 <tr>
 <td id="metrics-server">Kubernetes Metrics Server</td>
-<td>Kubernetes Metrics Server replaces Kubernetes Heapster (deprecated since Kubernetes version 1.8) as the cluster metrics provider. If you run more than 30 pods per worker node in your cluster, [adjust the `metrics-server` configuration for performance](/docs/containers/cs_performance.html#metrics).
+<td>Kubernetes Metrics Server replaces Kubernetes Heapster (deprecated since Kubernetes version 1.8) as the cluster metrics provider. If you run more than 30 pods per worker node in your cluster, [adjust the `metrics-server` configuration for performance](/docs/containers?topic=containers-kernel#metrics).
 <p>The Kubernetes dashboard does not work with the `metrics-server`. If you want to display metrics in a dashboard, choose from the following options.</p>
-<ul><li>[Set up Grafana to analyze metrics](/docs/services/cloud-monitoring/tutorials/container_service_metrics.html#container_service_metrics) by using the Cluster Monitoring Dashboard.</li>
+<ul><li>[Set up Grafana to analyze metrics](/docs/services/cloud-monitoring/tutorials?topic=cloud-monitoring-container_service_metrics#container_service_metrics) by using the Cluster Monitoring Dashboard.</li>
 <li>Deploy [Heapster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/heapster) to your cluster.
 <ol><li>Copy the `heapster-rbac` [YAML ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/heapster-rbac.yaml), `heapster-service` [YAML ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-service.yaml), and `heapster-controller` [YAML ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-controller.yaml) files.</li>
 <li>Edit the `heapster-controller` YAML by replacing the following strings.
@@ -454,7 +454,7 @@ The following table shows the actions that you must take before you update the K
 </tr>
 <tr>
 <td>Encrypting data in etcd</td>
-<td>Previously, etcd data was stored on a master’s NFS file storage instance that was encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](/docs/containers/cs_encrypt.html#keyprotect).</td>
+<td>Previously, etcd data was stored on a master’s NFS file storage instance that was encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect).</td>
 </tr>
 <tr>
 <td>Kubernetes container volume mount propagation</td>
@@ -493,7 +493,7 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 </tr>
 <tr>
 <td>Kubernetes dashboard</td>
-<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers/cs_app.html#cli_dashboard).</td>
+<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers?topic=containers-app#cli_dashboard).</td>
 </tr>
 <tr>
 <td>`kubectl` CLI</td>
@@ -531,7 +531,7 @@ You can check if your cluster has an HA master configuration by checking the clu
 <br>
 **Updating your firewall or custom Calico host network policies for HA masters**:</br>
 {: #ha-firewall}
-If you use a firewall or custom Calico host network policies to control egress from your worker nodes, allow outgoing traffic to the ports and IP addresses for all the zones within the region that your cluster is in. See [Allowing the cluster to access infrastructure resources and other services](/docs/containers/cs_firewall.html#firewall_outbound).
+If you use a firewall or custom Calico host network policies to control egress from your worker nodes, allow outgoing traffic to the ports and IP addresses for all the zones within the region that your cluster is in. See [Allowing the cluster to access infrastructure resources and other services](/docs/containers?topic=containers-firewall#firewall_outbound).
 
 <br>
 **Reserving host ports `2040` and `2041` on your worker nodes**:</br>
@@ -561,12 +561,12 @@ If you previously used the cluster master IP address, this method continues to w
 {: #ha-outofcluster}
 The data that is stored in the `calico-config` configmap in the `kube-system` namespace is changed to support HA master configuration. In particular, the `etcd_endpoints` value now supports in-cluster access only. Using this value to configure Calico CLI for access from outside the cluster no longer works.
 
-Instead, use the data that is stored in the `cluster-info` configmap in the `kube-system` namespace. In particular, use the `etcd_host` and `etcd_port` values to configure the endpoint for the [Calico CLI](/docs/containers/cs_network_policy.html#cli_install) to access the master with HA configuration from outside the cluster.
+Instead, use the data that is stored in the `cluster-info` configmap in the `kube-system` namespace. In particular, use the `etcd_host` and `etcd_port` values to configure the endpoint for the [Calico CLI](/docs/containers?topic=containers-network_policies#cli_install) to access the master with HA configuration from outside the cluster.
 
 <br>
 **Updating Kubernetes or Calico network policies**:</br>
 {: #ha-networkpolicies}
-You need to take additional actions if you use [Kubernetes or Calico network policies](/docs/containers/cs_network_policy.html#network_policies) to control pod egress access to the cluster master and you are currently using:
+You need to take additional actions if you use [Kubernetes or Calico network policies](/docs/containers?topic=containers-network_policies#network_policies) to control pod egress access to the cluster master and you are currently using:
 *  The Kubernetes service cluster IP, which you can get by running `kubectl get service kubernetes -o yaml | grep clusterIP`.
 *  The Kubernetes service domain name, which by default is `https://kubernetes.default.svc.cluster.local`.
 *  The cluster master IP, which you can get by running `kubectl cluster-info | grep Kubernetes`.
@@ -574,7 +574,7 @@ You need to take additional actions if you use [Kubernetes or Calico network pol
 The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and `calicoctl` to search policies for impacts.
 {: note}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 1.  Get your cluster master IP address.
     ```
@@ -657,7 +657,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-6.  After you complete all the [preparation actions](#ha-masters) (including these steps), [update your cluster master](/docs/containers/cs_cluster_update.html#master) to the HA master fix pack.
+6.  After you complete all the [preparation actions](#ha-masters) (including these steps), [update your cluster master](/docs/containers?topic=containers-update#master) to the HA master fix pack.
 
 7.  After the update is complete, remove the cluster master IP address from the network policy. For example, from the previous network policy, remove the following lines, and then reapply the policy.
 
@@ -730,13 +730,13 @@ Before you begin, your cluster master and all worker nodes must be running Kuber
         ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
-    2.  If the worker node state is not **Normal**, follow the [Debugging worker nodes](/docs/containers/cs_troubleshoot.html#debug_worker_nodes) steps. For example, a **Critical** or **Unknown** state is often resolved by [reloading the worker node](/docs/containers/cs_cli_reference.html#cs_worker_reload).
+    2.  If the worker node state is not **Normal**, follow the [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes) steps. For example, a **Critical** or **Unknown** state is often resolved by [reloading the worker node](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload).
 
 3.  If you auto-generate Calico policies or other Calico resources, update your automation tooling to generate these resources with [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/).
 
-4.  If you use [strongSwan](/docs/containers/cs_vpn.html#vpn-setup) for VPN connectivity, the strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.11. [Update strongSwan](/docs/containers/cs_vpn.html#vpn_upgrade) to the 2.1.0 Helm chart, which is backward compatible with Calico 2.6, and Kubernetes 1.7, 1.8, and 1.9.
+4.  If you use [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) for VPN connectivity, the strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.11. [Update strongSwan](/docs/containers?topic=containers-vpn#vpn_upgrade) to the 2.1.0 Helm chart, which is backward compatible with Calico 2.6, and Kubernetes 1.7, 1.8, and 1.9.
 
-5.  [Update your cluster master to Kubernetes v1.11](/docs/containers/cs_cluster_update.html#master).
+5.  [Update your cluster master to Kubernetes v1.11](/docs/containers?topic=containers-update#master).
 
 <br />
 
@@ -796,7 +796,7 @@ The following table shows the actions that you must take before you update the K
 </tr>
 <tr>
 <td>strongSwan VPN</td>
-<td>If you use [strongSwan](/docs/containers/cs_vpn.html#vpn-setup) for VPN connectivity, you must remove the chart before you update the cluster by running `helm delete --purge <release_name>`. After the cluster update is complete, reinstall the strongSwan Helm chart.</td>
+<td>If you use [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) for VPN connectivity, you must remove the chart before you update the cluster by running `helm delete --purge <release_name>`. After the cluster update is complete, reinstall the strongSwan Helm chart.</td>
 </tr>
 </tbody>
 </table>
@@ -826,7 +826,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>Kubernetes dashboard</td>
-<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers/cs_app.html#cli_dashboard).</td>
+<td>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers?topic=containers-app#cli_dashboard).</td>
 </tr>
 <tr>
 <td><code>kubectl port-forward</code></td>
@@ -834,7 +834,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>`kubectl --show-all, -a` flag</td>
-<td>The `--show-all, -a` flag, which applied only to human-readable pod commands (not API calls), is deprecated and is unsupported in future versions. The flag is used to display pods in a terminal state. To track information about terminated apps and containers, [set up log forwarding in your cluster](/docs/containers/cs_health.html#health).</td>
+<td>The `--show-all, -a` flag, which applied only to human-readable pod commands (not API calls), is deprecated and is unsupported in future versions. The flag is used to display pods in a terminal state. To track information about terminated apps and containers, [set up log forwarding in your cluster](/docs/containers?topic=containers-health#health).</td>
 </tr>
 <tr>
 <td>Read-only API data volumes</td>
@@ -846,7 +846,7 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 </tr>
 <tr>
 <td>strongSwan VPN</td>
-<td>If you use [strongSwan](/docs/containers/cs_vpn.html#vpn-setup) for VPN connectivity and deleted your chart before updating your cluster, you can now re-install your strongSwan Helm chart.</td>
+<td>If you use [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) for VPN connectivity and deleted your chart before updating your cluster, you can now re-install your strongSwan Helm chart.</td>
 </tr>
 </tbody>
 </table>
@@ -868,7 +868,7 @@ You can check if your cluster has an HA master configuration by checking the clu
 <br>
 **Updating your firewall or custom Calico host network policies for HA masters**:</br>
 {: #110_ha-firewall}
-If you use a firewall or custom Calico host network policies to control egress from your worker nodes, allow outgoing traffic to the ports and IP addresses for all the zones within the region that your cluster is in. See [Allowing the cluster to access infrastructure resources and other services](/docs/containers/cs_firewall.html#firewall_outbound).
+If you use a firewall or custom Calico host network policies to control egress from your worker nodes, allow outgoing traffic to the ports and IP addresses for all the zones within the region that your cluster is in. See [Allowing the cluster to access infrastructure resources and other services](/docs/containers?topic=containers-firewall#firewall_outbound).
 
 <br>
 **Reserving host ports `2040` and `2041` on your worker nodes**:</br>
@@ -898,12 +898,12 @@ If you previously used the cluster master IP address, this method continues to w
 {: #110_ha-outofcluster}
 The data that is stored in the `calico-config` configmap in the `kube-system` namespace is changed to support HA master configuration. In particular, the `etcd_endpoints` value now supports in-cluster access only. Using this value to configure Calico CLI for access from outside the cluster no longer works.
 
-Instead, use the data that is stored in the `cluster-info` configmap in the `kube-system` namespace. In particular, use the `etcd_host` and `etcd_port` values to configure the endpoint for the [Calico CLI](/docs/containers/cs_network_policy.html#cli_install) to access the master with HA configuration from outside the cluster.
+Instead, use the data that is stored in the `cluster-info` configmap in the `kube-system` namespace. In particular, use the `etcd_host` and `etcd_port` values to configure the endpoint for the [Calico CLI](/docs/containers?topic=containers-network_policies#cli_install) to access the master with HA configuration from outside the cluster.
 
 <br>
 **Updating Kubernetes or Calico network policies**:</br>
 {: #110_ha-networkpolicies}
-You need to take additional actions if you use [Kubernetes or Calico network policies](/docs/containers/cs_network_policy.html#network_policies) to control pod egress access to the cluster master and you are currently using:
+You need to take additional actions if you use [Kubernetes or Calico network policies](/docs/containers?topic=containers-network_policies#network_policies) to control pod egress access to the cluster master and you are currently using:
 *  The Kubernetes service cluster IP, which you can get by running `kubectl get service kubernetes -o yaml | grep clusterIP`.
 *  The Kubernetes service domain name, which by default is `https://kubernetes.default.svc.cluster.local`.
 *  The cluster master IP, which you can get by running `kubectl cluster-info | grep Kubernetes`.
@@ -911,7 +911,7 @@ You need to take additional actions if you use [Kubernetes or Calico network pol
 The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and use `calicoctl` to search policies for impacts.
 {: note}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 1.  Get your cluster master IP address.
     ```
@@ -994,7 +994,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-6.  After you complete all the [preparation actions](#ha-masters) (including these steps), [update your cluster master](/docs/containers/cs_cluster_update.html#master) to the HA master fix pack.
+6.  After you complete all the [preparation actions](#ha-masters) (including these steps), [update your cluster master](/docs/containers?topic=containers-update#master) to the HA master fix pack.
 
 7.  After the update is complete, remove the cluster master IP address from the network policy. For example, from the previous network policy, remove the following lines, and then reapply the policy.
 
@@ -1030,13 +1030,13 @@ Prepare for the Calico v3 update before you update the master. During the master
         ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
-    2.  If the worker node state is not **Normal**, follow the [Debugging worker nodes](/docs/containers/cs_troubleshoot.html#debug_worker_nodes) steps. For example, a **Critical** or **Unknown** state is often resolved by [reloading the worker node](/docs/containers/cs_cli_reference.html#cs_worker_reload).
+    2.  If the worker node state is not **Normal**, follow the [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes) steps. For example, a **Critical** or **Unknown** state is often resolved by [reloading the worker node](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload).
 
 3.  If you auto-generate Calico policies or other Calico resources, update your automation tooling to generate these resources with [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/).
 
-4.  If you use [strongSwan](/docs/containers/cs_vpn.html#vpn-setup) for VPN connectivity, the strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. [Update strongSwan](/docs/containers/cs_vpn.html#vpn_upgrade) to the 2.1.0 Helm chart, which is backward compatible with Calico 2.6, and Kubernetes 1.7, 1.8, and 1.9.
+4.  If you use [strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) for VPN connectivity, the strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. [Update strongSwan](/docs/containers?topic=containers-vpn#vpn_upgrade) to the 2.1.0 Helm chart, which is backward compatible with Calico 2.6, and Kubernetes 1.7, 1.8, and 1.9.
 
-5.  [Update your cluster master to Kubernetes v1.10](/docs/containers/cs_cluster_update.html#master).
+5.  [Update your cluster master to Kubernetes v1.10](/docs/containers?topic=containers-update#master).
 
 <br />
 
@@ -1050,26 +1050,26 @@ Find an overview of Kubernetes versions that are unsupported in {{site.data.keyw
 ### Version 1.9 (Unsupported)
 {: #cs_v19}
 
-As of 27 December 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.9](/docs/containers/cs_versions_changelog.html#changelog_archive) are unsupported. Version 1.9 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.10](#cs_v110)).
+As of 27 December 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.9](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.9 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Review potential impact](/docs/containers/cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers/cs_cluster_update.html#update) immediately to at least 1.10.
+[Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
 
 ### Version 1.8 (Unsupported)
 {: #cs_v18}
 
-As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.8](/docs/containers/cs_versions_changelog.html#changelog_archive) are unsupported. Version 1.8 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.10](#cs_v110)).
+As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.8](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.8 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Review potential impact](/docs/containers/cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers/cs_cluster_update.html#update) immediately to at least 1.10.
+[Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
 
 ### Version 1.7 (Unsupported)
 {: #cs_v17}
 
-As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.7](/docs/containers/cs_versions_changelog.html#changelog_archive) are unsupported. Version 1.7 clusters cannot receive security updates or support unless they are updated to the next most recently supported version ([Kubernetes 1.10](#cs_v110)).
+As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.7](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.7 clusters cannot receive security updates or support unless they are updated to the next most recently supported version ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Review potential impact](/docs/containers/cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers/cs_cluster_update.html#update) immediately to at least 1.10.
+[Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
 
 ### Version 1.5 (Unsupported)
 {: #cs_v1-5}
@@ -1077,4 +1077,4 @@ As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [
 As of 4 April 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) are unsupported. Version 1.5 clusters cannot receive security updates or support.
 {: shortdesc}
 
-To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers/cs_clusters.html#clusters) and [deploy your apps](/docs/containers/cs_app.html#app) to the new cluster.
+To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.

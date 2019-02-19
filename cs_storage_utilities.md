@@ -31,14 +31,14 @@ scope: containers
 Use the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in to attach raw, unformatted, and unmounted block storage to a worker node in your cluster.  
 {: shortdesc}
 
-For example, you want to store your data with a software-defined storage solution (SDS), such as [Portworx](/docs/containers/cs_storage_portworx.html), but you do not want to use bare metal worker nodes that are optimized for SDS usage and that come with extra local disks. To add local disks to your non-SDS worker node, you must manually create your block storage devices in your {{site.data.keyword.Bluemix_notm}} infrastructure account and use the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher to attach the storage to your non-SDS worker node.
+For example, you want to store your data with a software-defined storage solution (SDS), such as [Portworx](/docs/containers?topic=containers-portworx), but you do not want to use bare metal worker nodes that are optimized for SDS usage and that come with extra local disks. To add local disks to your non-SDS worker node, you must manually create your block storage devices in your {{site.data.keyword.Bluemix_notm}} infrastructure account and use the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher to attach the storage to your non-SDS worker node.
   
 The {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in creates pods on every worker node in your cluster as part of a daemon set and sets up a Kubernetes storage class that you later use to attach the block storage device to your non-SDS worker node.
 
 Looking for instructions for how to update or remove the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in? See [Updating the plug-in](#update_block_attacher) and [Removing the plug-in](#remove_block_attacher).
 {: tip}
 
-1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
     
 2.  Verify that tiller is installed with a service account.
     
@@ -268,19 +268,19 @@ To add different block storage configurations, add block storage to a subset of 
    </tr>
    <tr>
    <td><code>type</code></td>
-   <td>Enter the type of storage that you want to provision. Choose between <code>performance</code> or <code>endurance</code>. For more information, see [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#block_predefined_storageclass).  </td>
+   <td>Enter the type of storage that you want to provision. Choose between <code>performance</code> or <code>endurance</code>. For more information, see [Deciding on your block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass).  </td>
    </tr>
    <tr>
    <td><code>performance.iops</code></td>
-   <td>If you want to provision `performance` storage, enter the number of IOPS. For more information, see [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#block_predefined_storageclass). If you want to provision `endurance` storage, remove this section or comment it out by adding `#` to the beginning of each line.
+   <td>If you want to provision `performance` storage, enter the number of IOPS. For more information, see [Deciding on your block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). If you want to provision `endurance` storage, remove this section or comment it out by adding `#` to the beginning of each line.
    </tr>
    <tr>
    <td><code>endurance.tier</code></td>
-   <td>If you want to provision `endurance` storage, enter the number of IOPS per gigabyte. For example, if you want to provision block storage as it is defined in the `ibmc-block-bronze` storage class, enter 2. For more information, see [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#block_predefined_storageclass). If you want to provision `performance` storage, remove this section or comment it out by adding `#` to the beginning of each line. </td>
+   <td>If you want to provision `endurance` storage, enter the number of IOPS per gigabyte. For example, if you want to provision block storage as it is defined in the `ibmc-block-bronze` storage class, enter 2. For more information, see [Deciding on your block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass). If you want to provision `performance` storage, remove this section or comment it out by adding `#` to the beginning of each line. </td>
    </tr>
    <tr>
    <td><code>size</code></td>
-   <td>Enter the size of your storage in gigabytes. See [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#block_predefined_storageclass) to find supported sizes for your storage tier. </td>
+   <td>Enter the size of your storage in gigabytes. See [Deciding on your block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) to find supported sizes for your storage tier. </td>
    </tr>
    </tbody>
    </table>  
@@ -411,7 +411,7 @@ Use this option if you want to add different block storage configurations, add b
    ```
    {: pre}
 
-2. Review step 3 and 4 in [Deciding on your block storage configuration](/docs/containers/cs_storage_block.html#block_predefined_storageclass) to choose the type, size, and number of IOPS for the block storage device that you want to add to your non-SDS worker node.    
+2. Review step 3 and 4 in [Deciding on your block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) to choose the type, size, and number of IOPS for the block storage device that you want to add to your non-SDS worker node.    
 
 3. Create the block storage device in the same zone that your non-SDS worker node is in.
 
@@ -501,7 +501,7 @@ To attach the block storage device to a non-SDS worker node you must create a pe
 
 **Before you begin**:
 - Make sure that you [automatically](#automatic_block) or [manually](#manual_block) created raw, unformatted and unmounted block storage to your non-SDS worker nodes. 
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 **To attach raw block storage to non-SDS worker nodes**:
 1. Prepare the PV creation.  
@@ -642,6 +642,6 @@ To attach the block storage device to a non-SDS worker node you must create a pe
 
    The block storage device is successfully attached when the **ibm.io/dm** is set to a device ID, such as `/dev/dm/1`, and you can see **ibm.io/attachstatus=attached** in the **Annotations** section of your CLI output.
    
-If you want to detach a volume, delete the PV. Detached volumes are still authorized to be accessed by a specific worker node and are attached again when you create a new PV with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher storage class to attach a different volume to the same worker node. To avoid attaching the old detached volume again, unauthorize the worker node to access the detached volume by using the `ibmcloud sl block access-revoke` command. Detaching the volume does not remove the volume from your IBM Cloud infrastructure (SoftLayer) account. To cancel the billing for your volume, you must manually [remove the storage from your IBM Cloud infrastructure (SoftLayer) account](/docs/containers/cs_storage_remove.html).
+If you want to detach a volume, delete the PV. Detached volumes are still authorized to be accessed by a specific worker node and are attached again when you create a new PV with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher storage class to attach a different volume to the same worker node. To avoid attaching the old detached volume again, unauthorize the worker node to access the detached volume by using the `ibmcloud sl block access-revoke` command. Detaching the volume does not remove the volume from your IBM Cloud infrastructure (SoftLayer) account. To cancel the billing for your volume, you must manually [remove the storage from your IBM Cloud infrastructure (SoftLayer) account](/docs/containers?topic=containers-cleanup).
 {: note}
   

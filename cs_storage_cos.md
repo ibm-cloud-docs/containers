@@ -54,7 +54,7 @@ Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, 
 To access your {{site.data.keyword.cos_full_notm}} service instance to read and write data, you must securely store the service credentials in a Kubernetes secret. The {{site.data.keyword.cos_full_notm}} plug-in uses these credentials for every read or write operation to your bucket.
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 1. Retrieve the **apikey**, or the **access_key_id** and the **secret_access_key** of your [{{site.data.keyword.cos_full_notm}} service credentials](#service_credentials).
 
@@ -157,30 +157,30 @@ Install the {{site.data.keyword.cos_full_notm}} plug-in with a Helm chart to set
 Looking for instructions for how to update or remove the {{site.data.keyword.cos_full_notm}} plug-in? See [Updating the plug-in](#update_cos_plugin) and [Removing the plug-in](#remove_cos_plugin).
 {: tip}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
-1. Make sure that your worker node applies the latest patch for your minor version. 
-   1. List the current patch version of your worker nodes. 
+1. Make sure that your worker node applies the latest patch for your minor version.
+   1. List the current patch version of your worker nodes.
       ```
       ibmcloud ks workers --cluster <cluster_name_or_ID>
       ```
       {: pre}
-      
-      Example output: 
+
+      Example output:
       ```
       OK
-      ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.11.7_1523* 
+      ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.11.7_1523*
       ```
       {: screen}
-      
-      If your worker node does not apply the latest patch version, you see an asterisk (`*`) in the **Version** column of your CLI output. 
-      
-   2. Review the [version changelog](cs_versions_changelog.html#changelog) to find the changes that are included in the latest patch version. 
-   
-   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](cs_storage_planning.html#persistent_storage_overview).
 
-2.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+      If your worker node does not apply the latest patch version, you see an asterisk (`*`) in the **Version** column of your CLI output.
+
+   2. Review the [version changelog](/docs/containers/cs_versions_changelog.html#changelog) to find the changes that are included in the latest patch version.
+
+   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers/cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
+
+2.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
     
 3.  Verify that tiller is installed with a service account.
     
@@ -497,7 +497,7 @@ Removing the plug-in does not remove existing PVCs, PVs, or data. When you remov
 
 Before you begin:
 
-- [Target your CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+- [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Make sure that you do not have any PVCs or PVs in your cluster that use {{site.data.keyword.cos_full_notm}}. To list all pods that mount a specific PVC, run `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`.
 
 To remove the plug-in:
@@ -594,8 +594,8 @@ To remove the plug-in:
    - **Flex**: This option is used for workloads and data that do not follow a specific usage pattern, or that are too huge to determine or predict a usage pattern. **Tip:** Check out this [blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/03/interconnect-2017-changing-rules-storage/) to learn how the Flex storage class works compared to traditional storage tiers.   
 
 3. Decide on the level of resiliency for the data that is stored in your bucket.
-   - **Cross-region**: With this option, your data is stored across three regions within a geolocation for highest availability. If you have workloads that are distributed across regions, requests are routed to the nearest regional endpoint. The API endpoint for the geolocation is automatically set by the `ibmc` Helm plug-in that you installed earlier based on the location that your cluster is in. For example, if your cluster is in `US South`, then your storage classes are configured to use the `US GEO` API endpoint for your buckets. See [Regions and endpoints](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) for more information.  
-   - **Regional**: With this option, your data is replicated across multiple zones within one region. If you have workloads that are located in the same region, you see lower latency and better performance than in a cross-regional setup. The regional endpoint is automatically set by the `ibm` Helm plug-in that you installed earlier based on the location that your cluster is in. For example, if your cluster is in `US South`, then your storage classes were configured to use `US South` as the regional endpoint for your buckets. See [Regions and endpoints](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) for more information.
+   - **Cross-region**: With this option, your data is stored across three regions within a geolocation for highest availability. If you have workloads that are distributed across regions, requests are routed to the nearest regional endpoint. The API endpoint for the geolocation is automatically set by the `ibmc` Helm plug-in that you installed earlier based on the location that your cluster is in. For example, if your cluster is in `US South`, then your storage classes are configured to use the `US GEO` API endpoint for your buckets. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information.  
+   - **Regional**: With this option, your data is replicated across multiple zones within one region. If you have workloads that are located in the same region, you see lower latency and better performance than in a cross-regional setup. The regional endpoint is automatically set by the `ibm` Helm plug-in that you installed earlier based on the location that your cluster is in. For example, if your cluster is in `US South`, then your storage classes were configured to use `US South` as the regional endpoint for your buckets. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information.
 
 4. Review the detailed {{site.data.keyword.cos_full_notm}} bucket configuration for a storage class.
    ```
@@ -630,7 +630,7 @@ To remove the plug-in:
    </tr>
    <tr>
    <td><code>ibm.io/curl-debug</code></td>
-   <td>Enable the logging of requests that are sent to the {{site.data.keyword.cos_full_notm}} service instance. If enabled, logs are sent to `syslog` and you can [forward the logs to an external logging server](/docs/containers/cs_health.html#logging). By default, all storage classes are set to <strong>false</strong> to disable this logging feature. </td>
+   <td>Enable the logging of requests that are sent to the {{site.data.keyword.cos_full_notm}} service instance. If enabled, logs are sent to `syslog` and you can [forward the logs to an external logging server](/docs/containers?topic=containers-health#logging). By default, all storage classes are set to <strong>false</strong> to disable this logging feature. </td>
    </tr>
    <tr>
    <td><code>ibm.io/debug-level</code></td>
@@ -650,7 +650,7 @@ To remove the plug-in:
    </tr>
    <tr>
    <td><code>ibm.io/object-store-endpoint</code></td>
-   <td>The API endpoint to use to access the bucket in your {{site.data.keyword.cos_full_notm}} service instance. The endpoint is automatically set based on the region of your cluster. **Note**: If you want to access an existing bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](/docs/containers/cs_storage_basics.html#customized_storageclass) and use the API endpoint for your bucket.</td>
+   <td>The API endpoint to use to access the bucket in your {{site.data.keyword.cos_full_notm}} service instance. The endpoint is automatically set based on the region of your cluster. **Note**: If you want to access an existing bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](/docs/containers?topic=containers-kube_concepts#customized_storageclass) and use the API endpoint for your bucket.</td>
    </tr>
    <tr>
    <td><code>ibm.io/object-store-storage-class</code></td>
@@ -675,7 +675,7 @@ To remove the plug-in:
    </tbody>
    </table>
 
-   For more information about each storage class, see the [storage class reference](#cos_storageclass_reference). If you want to change any of the pre-set values, create your own [customized storage class](/docs/containers/cs_storage_basics.html#customized_storageclass).
+   For more information about each storage class, see the [storage class reference](#cos_storageclass_reference). If you want to change any of the pre-set values, create your own [customized storage class](/docs/containers?topic=containers-kube_concepts#customized_storageclass).
    {: tip}
 
 5. Decide on a name for your bucket. The name of a bucket must be unique in {{site.data.keyword.cos_full_notm}}. You can also choose to automatically create a name for your bucket by the {{site.data.keyword.cos_full_notm}} plug-in. To organize data in a bucket, you can create subdirectories.
@@ -694,8 +694,8 @@ Create a persistent volume claim (PVC) to provision {{site.data.keyword.cos_full
 {: shortdesc}
 
 Depending on the settings that you choose in your PVC, you can provision {{site.data.keyword.cos_full_notm}} in the following ways:
-- [Dynamic provisioning](/docs/containers/cs_storage_basics.html#dynamic_provisioning): When you create the PVC, the matching persistent volume (PV) and the bucket in your {{site.data.keyword.cos_full_notm}} service instance are automatically created.
-- [Static provisioning](/docs/containers/cs_storage_basics.html#static_provisioning): You can reference an existing bucket in your {{site.data.keyword.cos_full_notm}} service instance in your PVC. When you create the PVC, only the matching PV is automatically created and linked to your existing bucket in {{site.data.keyword.cos_full_notm}}.
+- [Dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning): When you create the PVC, the matching persistent volume (PV) and the bucket in your {{site.data.keyword.cos_full_notm}} service instance are automatically created.
+- [Static provisioning](/docs/containers?topic=containers-kube_concepts#static_provisioning): You can reference an existing bucket in your {{site.data.keyword.cos_full_notm}} service instance in your PVC. When you create the PVC, only the matching PV is automatically created and linked to your existing bucket in {{site.data.keyword.cos_full_notm}}.
 
 Before you begin:
 - [Create and prepare your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service).
@@ -766,7 +766,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    </tr>
    <tr>
    <td><code>spec.storageClassName</code></td>
-   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the storage class that you want to use for your new bucket. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the storage class that you used to create your existing bucket. </br></br>If you manually created the bucket in your {{site.data.keyword.cos_full_notm}} service instance or you cannot remember the storage class that you used, find your service instance in the {{site.data.keyword.Bluemix}} dashboard and review the <strong>Class</strong> and <strong>Location</strong> of your existing bucket. Then, use the appropriate [storage class](#cos_storageclass_reference). <p class="note">The {{site.data.keyword.cos_full_notm}} API endpoint that is set in your storage class is based on the region that your cluster is in. If you want to access a bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](/docs/containers/cs_storage_basics.html#customized_storageclass) and use the appropriate API endpoint for your bucket.</p></li></ul>  </td>
+   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the storage class that you want to use for your new bucket. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the storage class that you used to create your existing bucket. </br></br>If you manually created the bucket in your {{site.data.keyword.cos_full_notm}} service instance or you cannot remember the storage class that you used, find your service instance in the {{site.data.keyword.Bluemix}} dashboard and review the <strong>Class</strong> and <strong>Location</strong> of your existing bucket. Then, use the appropriate [storage class](#cos_storageclass_reference). <p class="note">The {{site.data.keyword.cos_full_notm}} API endpoint that is set in your storage class is based on the region that your cluster is in. If you want to access a bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](/docs/containers?topic=containers-kube_concepts#customized_storageclass) and use the appropriate API endpoint for your bucket.</p></li></ul>  </td>
    </tr>
    </tbody>
    </table>
@@ -790,7 +790,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    ```
    {: screen}
 
-4. Optional: If you plan to access your data with a non-root user, or added files to an existing {{site.data.keyword.cos_full_notm}} bucket by using the console or the API directly, make sure that the [files have the correct permission](/docs/containers/cs_troubleshoot_storage.html#cos_nonroot_access) assigned so that your app can successfully read and update the files as needed.
+4. Optional: If you plan to access your data with a non-root user, or added files to an existing {{site.data.keyword.cos_full_notm}} bucket by using the console or the API directly, make sure that the [files have the correct permission](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access) assigned so that your app can successfully read and update the files as needed.
 
 4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
@@ -1153,7 +1153,7 @@ To deploy a stateful set that uses object storage:
 </tr>
 <tr>
 <td>Default resiliency endpoint</td>
-<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) for more information. </td>
+<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information. </td>
 </tr>
 <tr>
 <td>Chunk size</td>
@@ -1190,7 +1190,7 @@ To deploy a stateful set that uses object storage:
 </tr>
 <tr>
 <td>Default resiliency endpoint</td>
-<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) for more information. </td>
+<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information. </td>
 </tr>
 <tr>
 <td>Chunk size</td>
@@ -1227,7 +1227,7 @@ To deploy a stateful set that uses object storage:
 </tr>
 <tr>
 <td>Default resiliency endpoint</td>
-<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) for more information. </td>
+<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information. </td>
 </tr>
 <tr>
 <td>Chunk size</td>
@@ -1264,7 +1264,7 @@ To deploy a stateful set that uses object storage:
 </tr>
 <tr>
 <td>Default resiliency endpoint</td>
-<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints) for more information. </td>
+<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information. </td>
 </tr>
 <tr>
 <td>Chunk size</td>

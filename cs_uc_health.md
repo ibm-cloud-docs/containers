@@ -40,12 +40,12 @@ An IT Exec for a healthcare provider has business reporting and patient systems 
 Why {{site.data.keyword.cloud_notm}}: To improve patient service, the provider looked to {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.contdelivery_full}} to reduce IT spend and accelerate development, all on a secure platform. The provider’s high-use SaaS systems, which held both patient record systems and business report apps, needed updates frequently. Yet the on-premises environment hindered agile development. The provider also wanted to counteract increasing labor costs and a decreasing budget.
 
 Key technologies:    
-* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)
-* [Horizontal scaling](/docs/containers/cs_app.html#highly_available_apps)
-* [Container security and isolation](/docs/containers/cs_secure.html#security)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Horizontal scaling](/docs/containers?topic=containers-app#highly_available_apps)
+* [Container security and isolation](/docs/containers?topic=containers-security#security)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](/docs/runtimes/nodejs/index.html#nodejs_runtime)
-* [Sign-on capability without changing app code by using {{site.data.keyword.appid.short_notm}}](/docs/services/appid/index.html)
+* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [Sign-on capability without changing app code by using {{site.data.keyword.appid.short_notm}}](/docs/services/appid?topic=appid-gettingstarted)
 
 They started by containerizing their SaaS systems and putting them in the cloud. From that first step, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the SaaS systems, they easily designed Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for decreased staff costs is that IBM manages Kubernetes, so the provider can focus on delivering better customer service.
 
@@ -123,11 +123,11 @@ A Development Exec for a disease research nonprofit has academic and industry re
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} delivers secure compute that can host sensitive and performant data processing on an open platform. That global platform is hosted in near-by regions. So it's tied to local regulations that inspire patients’ and researchers’ confidence that their data is both protected locally and makes a difference in better health outcomes.
 
 Key technologies:    
-* [Intelligent scheduling places workloads where needed](/docs/containers/cs_regions.html#regions-and-zones)    
-* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant/getting-started.html)
+* [Intelligent scheduling places workloads where needed](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)    
+* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
 * [Vulnerability scanning  and isolation for workloads](/docs/services/Registry/registry_ui.html#registry_ui)    
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}} to sanitize data and notify researchers about data structure changes](/docs/openwhisk/openwhisk_cloudant.html#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}} to sanitize data and notify researchers about data structure changes](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
 
 **Context: Securely hosting and sharing disease data for Research Nonprofit**
 

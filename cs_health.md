@@ -44,7 +44,7 @@ You can choose your logging solution based on which cluster components you need 
 <dt>Fluentd with {{site.data.keyword.loganalysisfull_notm}} or syslog</dt>
 <dd>To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) cluster add-on collects logs from the paths for a specified source. Fluentd then forwards these logs to {{site.data.keyword.loganalysisfull_notm}} or an external syslog server.
 
-<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis/log_analysis_ov.html) expands your log collection, retention, and search abilities. When you create a logging configuration that forwards logs for a source to {{site.data.keyword.loganalysisfull_notm}}, you can view your logs in a Kibana dashboard.</li>
+<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) expands your log collection, retention, and search abilities. When you create a logging configuration that forwards logs for a source to {{site.data.keyword.loganalysisfull_notm}}, you can view your logs in a Kibana dashboard.</li>
 
 <li><strong>External syslog server</strong>: Set up an external server that accepts a syslog protocol. Then, you can create a logging configuration for a source in your cluster to forward logs to that external server.</li></ul>
 
@@ -52,7 +52,7 @@ To get started, see [Understanding cluster and app log forwarding](#logging).
 </dd>
 
 <dt>{{site.data.keyword.la_full_notm}}</dt>
-<dd>Manage pod container logs by deploying LogDNA as a third-party service to your cluster. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/overview.html) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</dd>
+<dd>Manage pod container logs by deploying LogDNA as a third-party service to your cluster. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</dd>
 
 <dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
 <dd>To monitor user-initiated administrative activity made in your cluster, you can collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}. Clusters generate two types of {{site.data.keyword.cloudaccesstrailshort}} events.
@@ -61,14 +61,14 @@ To get started, see [Understanding cluster and app log forwarding](#logging).
 
 <li>Kubernetes API server audit events are automatically generated, but you must [create a logging configuration](#api_forward) so that Fluentd can forward these logs to {{site.data.keyword.loganalysisshort}}. {{site.data.keyword.cloudaccesstrailshort}} then pulls these logs from {{site.data.keyword.loganalysisshort}}.</li></ul>
 
-For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](/docs/containers/cs_at_events.html). For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) documentation.
+For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events). For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla) documentation.
 </dd>
 
 <dt>{{site.data.keyword.cos_full_notm}}</dt>
 <dd>To collect, forward, and view logs for your cluster's Kubernetes master, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies. To get started, see [Collecting master logs](#collect_master).</dd>
 
 <dt>Third-party services</dt>
-<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers/cs_integrations.html#health_services). In clusters that run Kubernetes version 1.11 or later, you can collect container logs from the `/var/log/pods/` path. In clusters that run Kubernetes version 1.10 or earlier, you can collect container logs from the `/var/lib/docker/containers/` path.</dd>
+<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-integrations#health_services). In clusters that run Kubernetes version 1.11 or later, you can collect container logs from the `/var/log/pods/` path. In clusters that run Kubernetes version 1.10 or earlier, you can collect container logs from the `/var/lib/docker/containers/` path.</dd>
 
 </dl>
 
@@ -110,7 +110,7 @@ In the following image you can see the location of the sources that you can conf
 
 6. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource.
 
-7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](/docs/containers/cs_ingress_health.html#ingress_logs).</br>**Paths**:
+7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](/docs/containers?topic=containers-ingress_health#ingress_logs).</br>**Paths**:
     * `/var/log/alb/ids/*.log`
     * `/var/log/alb/ids/*.err`
     * `/var/log/alb/customerlogs/*.log`
@@ -147,7 +147,7 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--hostname</em></code></td>
-      <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
+      <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
       <p>For syslog, specify the host name or IP address of the log collector service.</p></td>
     </tr>
     <tr>
@@ -192,7 +192,7 @@ The following table shows the different options that you have when configuring l
 
 **Am I responsible for keeping Fluentd updated?**
 
-In order to make changes to your logging or filter configurations, the Fluentd logging add-on must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster add-ons: Fluentd for logging](/docs/containers/cs_cluster_update.html#logging).
+In order to make changes to your logging or filter configurations, the Fluentd logging add-on must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster add-ons: Fluentd for logging](/docs/containers?topic=containers-update#logging).
 
 **Can I forward some logs, but not others, from one source in my cluster?**
 
@@ -220,7 +220,7 @@ You can configure log forwarding in the {{site.data.keyword.containerlong_notm}}
 To create a configuration at the account level, for a specific container namespace, or for app logging use the CLI.
 {: tip}
 
-Before you begin, [create](/docs/containers/cs_clusters.html#clusters) or identify a standard cluster to use.
+Before you begin, [create](/docs/containers?topic=containers-clusters#clusters) or identify a standard cluster to use.
 
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/containers-kubernetes/clusters) and navigate to **Kubernetes > Clusters**.
 2. Select your standard cluster and from the **Overview** tab **Logs** field, click **Enable**.
@@ -237,13 +237,13 @@ Before you begin, [create](/docs/containers/cs_clusters.html#clusters) or identi
 You can create a configuration for cluster logging. You can differentiate between the different logging options by using flags.
 {: shortdesc}
 
-Before you begin, [create](/docs/containers/cs_clusters.html#clusters) or identify a standard cluster to use.
+Before you begin, [create](/docs/containers?topic=containers-clusters#clusters) or identify a standard cluster to use.
 
 **Forwarding logs to IBM**
 
 1. Verify permissions.
-    1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform).
-    2. If you specified a space when you created the cluster, both you and the {{site.data.keyword.containerlong_notm}} API key owner need the [**Developer** Cloud Foundry role](/docs/iam/mngcf.html) in that space.
+    1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+    2. If you specified a space when you created the cluster, both you and the {{site.data.keyword.containerlong_notm}} API key owner need the [**Developer** Cloud Foundry role](/docs/iam?topic=iam-mngcf) in that space.
       * If you don't know who the {{site.data.keyword.containerlong_notm}} API key owner is, run the following command.
           ```
           ibmcloud ks api-key-info --cluster <cluster_name>
@@ -255,7 +255,7 @@ Before you begin, [create](/docs/containers/cs_clusters.html#clusters) or identi
           ```
           {: pre}
 
-2.  For the standard cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+2.  For the standard cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
     If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
     {: tip}
@@ -297,9 +297,9 @@ If you have apps that run in your containers that can't be configured to write l
 
 **Forwarding logs to your own server over the `udp` or `tcp` protocols**
 
-1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform).
+1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
-2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 3. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
@@ -324,11 +324,11 @@ If you have apps that run in your containers that can't be configured to write l
 The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
 {: tip}
 
-1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers/cs_users.html#platform):
+1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
     * **Editor** or **Administrator** platform role for the cluster
     * **Writer** or **Manager** service role for the `kube-system` namespace
 
-2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 3. Set up a server that accepts a syslog protocol in one of two ways:
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
@@ -393,7 +393,7 @@ You can update a logging configuration that you already created.
 You can stop forwarding logs one or all of the logging configurations for a cluster.
 {: shortdesc}
 
-1. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+1. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 2. Delete the logging configuration.
   <ul>
@@ -418,7 +418,7 @@ To view logs for clusters and containers, you can use the standard Kubernetes an
 You can view the logs that you forwarded to {{site.data.keyword.loganalysislong_notm}} through the Kibana dashboard.
 {: shortdesc}
 
-If you used the default values to create your configuration file, then your logs can be found in the account, or org and space, in which the cluster was created. If you specified an org and space in your configuration file, then you can find your logs in that space. For more information about logging, see [Logging for {{site.data.keyword.containerlong_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+If you used the default values to create your configuration file, then your logs can be found in the account, or org and space, in which the cluster was created. If you specified an org and space in your configuration file, then you can find your logs in that space. For more information about logging, see [Logging for {{site.data.keyword.containerlong_notm}}](/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kubernetes#containers_kubernetes).
 
 To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you configured log forwarding for the cluster.
 - US-South and US-East: https://logging.ng.bluemix.net
@@ -426,13 +426,13 @@ To access the Kibana dashboard, go to one of the following URLs and select the {
 - EU-Central: https://logging.eu-fra.bluemix.net
 - AP-South and AP-North: https://logging.au-syd.bluemix.net
 
-For more information about viewing logs, see [Navigating to Kibana from a web browser](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
+For more information about viewing logs, see [Navigating to Kibana from a web browser](/docs/services/CloudLogAnalysis/kibana?topic=cloudloganalysis-launch#launch_Kibana_from_browser).
 
 </br>
 
 **Container logs**
 
-You can leverage the built-in container runtime logging capabilities to review activities on the standard STDOUT and STDERR output streams. For more information, see [Viewing container logs for a container that runs in a Kubernetes cluster](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+You can leverage the built-in container runtime logging capabilities to review activities on the standard STDOUT and STDERR output streams. For more information, see [Viewing container logs for a container that runs in a Kubernetes cluster](/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kubernetes#containers_kubernetes).
 
 <br />
 
@@ -534,7 +534,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 * Currently, a default audit policy is used for all clusters with this logging configuration.
 * Currently, filters are not supported.
 * There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.loganalysisshort_notm}} and an external server by creating a logging configuration and a webhook.
-* You must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) for the cluster.
+* You must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 
 ### Sending audit logs to {{site.data.keyword.loganalysisshort_notm}}
@@ -547,7 +547,7 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
 
 1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containerlong_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
 
-2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 **Forwarding logs**
 
@@ -584,7 +584,7 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
         </tr>
         <tr>
           <td><code><em>&lt;ingestion_URL&gt;</em></code></td>
-          <td>The endpoint where you want to forward logs. If you do not specify an [ingestion URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls), the endpoint for the region in which you created your cluster is used.</td>
+          <td>The endpoint where you want to forward logs. If you do not specify an [ingestion URL](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls), the endpoint for the region in which you created your cluster is used.</td>
         </tr>
         <tr>
           <td><code><em>&lt;cluster_space&gt;</em></code></td>
@@ -628,7 +628,7 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
 
 1. Set up a remote logging server where you can forward the logs. For example, you can [use Logstash with Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend) to collect audit events.
 
-2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 To forward Kubernetes API audit logs:
 
@@ -690,7 +690,7 @@ To forward Kubernetes API audit logs:
     {: pre}
 
 4. Optional: If you want to stop forwarding audit logs, you can disable your configuration.
-    1. For the cluster that you want to stop collecting API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+    1. For the cluster that you want to stop collecting API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
     2. Disable the webhook back-end configuration for the cluster's API server.
 
         ```
@@ -718,14 +718,14 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
 **Before you begin**
 
-* [Provision an instance](/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.Bluemix_notm}} catalog.
-* Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) for the cluster.
+* [Provision an instance](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-for-developers#provision-an-instance-of-ibm-cloud-object-storage) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.Bluemix_notm}} catalog.
+* Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 **Creating a snapshot**
 
-1. Create an Object Storage bucket through the {{site.data.keyword.Bluemix_notm}} console by following [this getting started tutorial](/docs/services/cloud-object-storage/getting-started.html#create-buckets).
+1. Create an Object Storage bucket through the {{site.data.keyword.Bluemix_notm}} console by following [this getting started tutorial](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started-console-#create-buckets).
 
-2. Generate [HMAC service credentials](/docs/services/cloud-object-storage/iam/service-credentials.html) in the bucket that you created.
+2. Generate [HMAC service credentials](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials) in the bucket that you created.
   1. In the **Service Credentials** tab of the {{site.data.keyword.cos_short}} dashboard, click **New Credential**.
   2. Give the HMAC credentials the `Writer` service role.
   3. In the **Add Inline Configuration Parameters** field, specify `{"HMAC":true}`.
@@ -788,9 +788,9 @@ To avoid conflicts when using metrics services, be sure that clusters across res
   <dt>Cluster details page in {{site.data.keyword.Bluemix_notm}}</dt>
     <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.Bluemix_notm}} service binding. To view the cluster details page, go to your **{{site.data.keyword.Bluemix_notm}} Dashboard** and select a cluster.</dd>
   <dt>Kubernetes dashboard</dt>
-    <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_app.html#cli_dashboard).</dd>
+    <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-app#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
+    <dd><p>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
     <p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.</p> <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for monitoring traffic</caption>
         <thead>
@@ -819,7 +819,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
       </table>
  </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Note**: {{site.data.keyword.mon_full_notm}} does not support the `containerd` container runtime. When you use {{site.data.keyword.mon_full_notm}} with version 1.11 or later clusters, not all container metrics are collected.</dd>
+  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). **Note**: {{site.data.keyword.mon_full_notm}} does not support the `containerd` container runtime. When you use {{site.data.keyword.mon_full_notm}} with version 1.11 or later clusters, not all container metrics are collected.</dd>
 </dl>
 
 ### Other health monitoring tools
@@ -828,7 +828,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 You can configure other tools for more monitoring capabilities.
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For setup information, see [Integrating services with {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_integrations.html#integrations).</dd>
+    <dd>Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For setup information, see [Integrating services with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#integrations).</dd>
 </dl>
 
 <br />
@@ -844,14 +844,14 @@ Autorecovery requires at least one healthy node to function properly. Configure 
 {: note}
 
 Before you begin:
-- Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers/cs_users.html#platform):
+- Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
     - **Administrator** platform role for the cluster
     - **Writer** or **Manager** service role for the `kube-system` namespace
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 To configure Autorecovery:
 
-1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
+1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
 
 2.  Verify that tiller is installed with a service account.
 

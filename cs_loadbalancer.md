@@ -30,7 +30,7 @@ scope: containers
 Expose a port and use a portable IP address for a Layer 4 load balancer to access a containerized app.
 {:shortdesc}
 
-Load balancer services are available for standard clusters only and do not support TLS termination. If your app requires TLS termination, you can expose your app by using [Ingress](/docs/containers/cs_ingress.html), or configure your app to manage the TLS termination.
+Load balancer services are available for standard clusters only and do not support TLS termination. If your app requires TLS termination, you can expose your app by using [Ingress](/docs/containers?topic=containers-ingress), or configure your app to manage the TLS termination.
 {: note}
 
 Choose one of the following options to get started:
@@ -116,12 +116,12 @@ spec:
 When you create a standard cluster, {{site.data.keyword.containerlong}} automatically provisions a portable public subnet and a portable private subnet.
 {: shortdesc}
 
-* The portable public subnet provides 5 usable IP addresses. 1 portable public IP address is used by the default [public Ingress ALB](/docs/containers/cs_ingress.html). The remaining 4 portable public IP addresses can be used to expose single apps to the internet by creating public load balancer services.
-* The portable private subnet provides 5 usable IP addresses. 1 portable private IP address is used by the default [private Ingress ALB](/docs/containers/cs_ingress.html#private_ingress). The remaining 4 portable private IP addresses can be used to expose single apps to a private network by creating private load balancer services.
+* The portable public subnet provides 5 usable IP addresses. 1 portable public IP address is used by the default [public Ingress ALB](/docs/containers?topic=containers-ingress). The remaining 4 portable public IP addresses can be used to expose single apps to the internet by creating public load balancer services.
+* The portable private subnet provides 5 usable IP addresses. 1 portable private IP address is used by the default [private Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress). The remaining 4 portable private IP addresses can be used to expose single apps to a private network by creating private load balancer services.
 
 Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node that the load balancer IP address is on is removed, a Keepalived daemon that constantly monitors the IP automatically moves the IP to another worker node. You can assign any port to your load balancer. The load balancer service serves as the external entry point for incoming requests for the app. To access the load balancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`.
 
-When you expose an app with a load balancer service, your app is automatically made available over the service's NodePorts too. [NodePorts](/docs/containers/cs_nodeport.html) are accessible on every public and private IP address of every worker node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers/cs_network_policy.html#block_ingress).
+When you expose an app with a load balancer service, your app is automatically made available over the service's NodePorts too. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address of every worker node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
 <br />
 
@@ -148,7 +148,7 @@ As opposed to version 1.0 load balancers, version 2.0 load balancers don't use N
 ## v2.0: Components and architecture (beta)
 {: #planning_ipvs}
 
-Load balancer 2.0 capabilities are in beta. To use a version 2.0 load balancer, you must [update your cluster's master and worker nodes](/docs/containers/cs_cluster_update.html) to Kubernetes version 1.12 or later.
+Load balancer 2.0 capabilities are in beta. To use a version 2.0 load balancer, you must [update your cluster's master and worker nodes](/docs/containers?topic=containers-update) to Kubernetes version 1.12 or later.
 {: note}
 
 The load balancer 2.0 is a Layer 4 load balancer that uses the Linux kernel's IP Virtual Server (IPVS). The load balancer 2.0 supports TCP and UDP, runs in front of multiple worker nodes, and uses IP over IP (IPIP) tunneling to distribute traffic that arrives to a single load balancer IP address across those worker nodes.
@@ -194,7 +194,7 @@ You cannot update an existing version 1.0 load balancer to 2.0. You must create 
 
 Before you create a version 2.0 load balancer, you must complete the following prerequisite steps.
 
-1. [Update your cluster's master and worker nodes](/docs/containers/cs_cluster_update.html) to Kubernetes version 1.12 or later.
+1. [Update your cluster's master and worker nodes](/docs/containers?topic=containers-update) to Kubernetes version 1.12 or later.
 
 2. To allow your load balancer 2.0 to forward requests to app pods in multiple zones, open a support case to request a configuration setting for your VLANs. **Important**: You must request this configuration for all public VLANs. If you request a new VLAN associated, you must open another ticket for that VLAN.
     1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/).
@@ -206,9 +206,9 @@ Before you create a version 2.0 load balancer, you must complete the following p
     4. Add the following information to the description: "Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145".
     5. Click **Submit**.
 
-3. If VLAN spanning is disabled, enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account. When VLAN spanning is enabled, the version 2.0 load balancer can route packets to various subnets in the account. You can see whether VLAN spanning is enabled by running `ibmcloud ks vlan-spanning-get`.
+3. If VLAN spanning is disabled, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account. When VLAN spanning is enabled, the version 2.0 load balancer can route packets to various subnets in the account. You can see whether VLAN spanning is enabled by running `ibmcloud ks vlan-spanning-get`.
 
-4. If you use [Calico pre-DNAT network policies](/docs/containers/cs_network_policy.html#block_ingress) to manage traffic to the IP address of a version 2.0 load balancer, you must add the `applyOnForward: true` and `doNotTrack: true` fields to and remove the `preDNAT: true` from the `spec` section in the policies. `applyOnForward: true` ensures that the Calico policy is applied to the traffic as it is encapsulated and forwarded. `doNotTrack: true` ensures that the worker nodes can use DSR to return a response packet directly to the client without needing the connection to be tracked. For example, if you use a Calico policy to whitelist traffic from only specific IP addresses to your load balancer IP address, the policy looks similar to the following:
+4. If you use [Calico pre-DNAT network policies](/docs/containers?topic=containers-network_policies#block_ingress) to manage traffic to the IP address of a version 2.0 load balancer, you must add the `applyOnForward: true` and `doNotTrack: true` fields to and remove the `preDNAT: true` from the `spec` section in the policies. `applyOnForward: true` ensures that the Calico policy is applied to the traffic as it is encapsulated and forwarded. `doNotTrack: true` ensures that the worker nodes can use DSR to return a response packet directly to the client without needing the connection to be tracked. For example, if you use a Calico policy to whitelist traffic from only specific IP addresses to your load balancer IP address, the policy looks similar to the following:
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -246,13 +246,13 @@ Next, you can follow the steps in [Setting up a load balancer 2.0 in a multizone
 **Before you begin**:
 
 * **Important**: Complete the [load balancer 2.0 prerequisites](#ipvs_provision).
-* To create public load balancers in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private load balancers in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
-* If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers/cs_edge.html#edge) are enabled in each zone so that load balancers deploy uniformly.
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
+* To create public load balancers in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private load balancers in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
+* If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that load balancers deploy uniformly.
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 
 
 To set up a load balancer 2.0 in a multizone cluster:
-1.  [Deploy your app to the cluster](/docs/containers/cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all of the pods where your app is running so that they can be included in the load balancing.
+1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all of the pods where your app is running so that they can be included in the load balancing.
 
 2.  Create a load balancer service for the app that you want to expose to the public internet or a private network.
   1. Create a service configuration file that is named, for example, `myloadbalancer.yaml`.
@@ -399,7 +399,7 @@ To set up a load balancer 2.0 in a multizone cluster:
 
 5. To achieve high availability, repeat the above steps to add a load balancer 2.0 in each zone where you have app instances.
 
-6. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers/cs_nodeport.html) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers/cs_network_policy.html#block_ingress).
+6. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
 ## v2.0: Setting up a load balancer 2.0 in a single-zone cluster
 {: #ipvs_single_zone_config}
@@ -407,12 +407,12 @@ To set up a load balancer 2.0 in a multizone cluster:
 **Before you begin**:
 
 * **Important**: Complete the [load balancer 2.0 prerequisites](#ipvs_provision).
-* You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
+* You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 
 To create a load balancer 2.0 service in a single-zone cluster:
 
-1.  [Deploy your app to the cluster](/docs/containers/cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all pods where your app is running so that they can be included in the load balancing.
+1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all pods where your app is running so that they can be included in the load balancing.
 2.  Create a load balancer service for the app that you want to expose to the public internet or a private network.
     1.  Create a service configuration file that is named, for example, `myloadbalancer.yaml`.
 
@@ -529,7 +529,7 @@ To create a load balancer 2.0 service in a single-zone cluster:
         ```
         {: codeblock}
 
-5. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers/cs_nodeport.html) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers/cs_network_policy.html#block_ingress).
+5. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
 <br />
 
@@ -627,14 +627,14 @@ By default, each load balancer 1.0 is set up in one zone only. To achieve high a
 {: #multi_zone_config}
 
 **Before you begin**:
-* To create public load balancers in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private load balancers in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
-* If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers/cs_edge.html#edge) are enabled in each zone so that load balancers deploy uniformly.
-* Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers/cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get).
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
+* To create public load balancers in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private load balancers in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
+* If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that load balancers deploy uniformly.
+* Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 
 
 To set up a load balancer 1.0 service in a multizone cluster:
-1.  [Deploy your app to the cluster](/docs/containers/cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all of the pods where your app is running so that they can be included in the load balancing.
+1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all of the pods where your app is running so that they can be included in the load balancing.
 
 2.  Create a load balancer service for the app that you want to expose to the public internet or a private network.
   1. Create a service configuration file that is named, for example, `myloadbalancer.yaml`.
@@ -768,18 +768,18 @@ To set up a load balancer 1.0 service in a multizone cluster:
 
 6. Repeat the above steps to add a version 1.0 load balancer in each zone.
 
-7. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers/cs_nodeport.html) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers/cs_network_policy.html#block_ingress).
+7. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
 ## v1.0: Setting up a load balancer 1.0 in a single-zone cluster
 {: #lb_config}
 
 **Before you begin**:
-* You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers/cs_subnets.html).
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `default` namespace.
+* You must have an available portable public or private IP address to assign to the load balancer service. For more information, see [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 
 To create a load balancer 1.0 service in a single-zone cluster:
 
-1.  [Deploy your app to the cluster](/docs/containers/cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all pods where your app is running so that they can be included in the load balancing.
+1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all pods where your app is running so that they can be included in the load balancing.
 2.  Create a load balancer service for the app that you want to expose to the public internet or a private network.
     1.  Create a service configuration file that is named, for example, `myloadbalancer.yaml`.
 
@@ -905,7 +905,7 @@ To create a load balancer 1.0 service in a single-zone cluster:
 
 5. If you choose to [enable source IP preservation for a version 1.0 load balancer service](#node_affinity_tolerations), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
-6. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers/cs_nodeport.html) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers/cs_network_policy.html#block_ingress).
+6. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
 <br />
 
@@ -931,7 +931,7 @@ To force your app to deploy to specific worker nodes where load balancer service
 ### Adding edge node affinity rules and tolerations
 {: #edge_nodes}
 
-When you [label worker nodes as edge nodes](/docs/containers/cs_edge.html#edge_nodes) and also [taint the edge nodes](/docs/containers/cs_edge.html#edge_workloads), load balancer service pods deploy only to those edge nodes, and app pods cannot deploy to edge nodes. When source IP is enabled for the load balancer service, the load balancer pods on the edge nodes cannot forward incoming requests to your app pods on other worker nodes.
+When you [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes) and also [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads), load balancer service pods deploy only to those edge nodes, and app pods cannot deploy to edge nodes. When source IP is enabled for the load balancer service, the load balancer pods on the edge nodes cannot forward incoming requests to your app pods on other worker nodes.
 {:shortdesc}
 
 To force your app pods to deploy to edge nodes, add an edge node [affinity rule ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) and [toleration ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#concepts) to the app deployment.
@@ -972,7 +972,7 @@ When your cluster is connected to multiple public or private VLANs, your app pod
 
 When source IP is enabled, schedule app pods on worker nodes that are the same VLAN as the load balancer's IP address by adding an affinity rule to the app deployment.
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 1. Get the IP address of the load balancer service. Look for the IP address in the **LoadBalancer Ingress** field.
     ```

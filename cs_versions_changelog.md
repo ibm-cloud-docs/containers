@@ -29,7 +29,7 @@ scope: containers
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components. 
 {:shortdesc}
 
-For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](/docs/containers/cs_versions.html).
+For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
@@ -39,7 +39,7 @@ For information about changes since the previous version, see the following chan
 -  Version 1.10 [changelog](#110_changelog).
 -  [Archive](#changelog_archive) of changelogs for deprecated or unsupported versions.
 
-Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers/cs_cli_reference.html#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers/cs_cli_reference.html#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers/cs_versions.html#update_types).
+Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
 </br>
@@ -112,7 +112,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>Cluster DNS provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>CoreDNS is now the default cluster DNS provider for new clusters. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers/cs_dns.html#dns_set).</td>
+<td>CoreDNS is now the default cluster DNS provider for new clusters. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers?topic=containers-cluster_dns#dns_set).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -149,7 +149,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
-<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers/cs_storage_file.html#file-topology).</li>
+<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers?topic=containers-file_storage#file-topology).</li>
 <li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
 <li>Adds a failure message annotation to failed PVCs.</li>
 <li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
@@ -288,7 +288,7 @@ The following table shows the changes that are included in the patch 1.12.5_1537
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
-<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers/cs_storage_file.html#file-topology).</li>
+<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers?topic=containers-file_storage#file-topology).</li>
 <li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
 <li>Adds a failure message annotation to failed PVCs.</li>
 <li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
@@ -516,7 +516,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers/cs_clusters_planning.html#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -621,13 +621,13 @@ The following table shows the changes that are included in patch 1.12.2_1527.
 <td>Cluster DNS provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Kubernetes DNS (KubeDNS) remains the default cluster DNS provider. However, you now have the option to [change the cluster DNS provide to CoreDNS](/docs/containers/cs_dns.html#dns_set).</td>
+<td>Kubernetes DNS (KubeDNS) remains the default cluster DNS provider. However, you now have the option to [change the cluster DNS provide to CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set).</td>
 </tr>
 <tr>
 <td>Cluster metrics provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Kubernetes Metrics Server replaces Kubernetes Heapster (deprecated since Kubernetes version 1.8) as the cluster metrics provider. For action items, see [the `metrics-server` preparation action](/docs/containers/cs_versions.html#metrics-server).</td>
+<td>Kubernetes Metrics Server replaces Kubernetes Heapster (deprecated since Kubernetes version 1.8) as the cluster metrics provider. For action items, see [the `metrics-server` preparation action](/docs/containers?topic=containers-cs_versions#metrics-server).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -651,14 +651,14 @@ The following table shows the changes that are included in patch 1.12.2_1527.
 <td>Kubernetes configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added three new IBM pod security policies and their associated cluster roles. For more information, see [Understanding default resources for IBM cluster management](/docs/containers/cs_psp.html#ibm_psp).</td>
+<td>Added three new IBM pod security policies and their associated cluster roles. For more information, see [Understanding default resources for IBM cluster management](/docs/containers?topic=containers-psp#ibm_psp).</td>
 </tr>
 <tr>
 <td>Kubernetes Dashboard</td>
 <td>v1.8.3</td>
 <td>v1.10.0</td>
 <td>See the [Kubernetes Dashboard release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0).<br><br>
-If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers/cs_app.html#cli_dashboard). Additionally, you can now scale up the number of Kubernetes Dashboard pods by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.</td>
+If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers?topic=containers-app#cli_dashboard). Additionally, you can now scale up the number of Kubernetes Dashboard pods by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
@@ -679,7 +679,7 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 <td>Updated to support the Kubernetes 1.12 release. Additional changes include the following:
 <ul><li>Load balancer pods (`ibm-cloud-provider-ip-*` in `ibm-system` namespace) now set CPU and memory resource requests.</li>
 <li>The `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` annotation is added to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run `ibmcloud ks vlans --zone <zone>`.</li>
-<li>A new [load balancer 2.0](/docs/containers/cs_loadbalancer.html#planning_ipvs) is available as a beta.</li></ul></td>
+<li>A new [load balancer 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) is available as a beta.</li></ul></td>
 </tr>
 <tr>
 <td>OpenVPN client configuration</td>
@@ -773,7 +773,7 @@ The following table shows the changes that are included in the patch 1.11.7_1543
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
-<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers/cs_storage_file.html#file-topology).</li>
+<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers?topic=containers-file_storage#file-topology).</li>
 <li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
 <li>Adds a failure message annotation to failed PVCs.</li>
 <li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
@@ -883,7 +883,7 @@ The following table shows the changes that are included in the patch 1.11.6_1540
 <td>Kubernetes dashboard</td>
 <td>v1.8.3</td>
 <td>v1.10.1</td>
-<td>See the [Kubernetes dashboard release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). Update resolves [CVE-2018-18264 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers/cs_app.html#cli_dashboard).</td>
+<td>See the [Kubernetes dashboard release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). Update resolves [CVE-2018-18264 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers?topic=containers-app#cli_dashboard).</td>
 </tr>
 <tr>
 <td>GPU installer</td>
@@ -999,7 +999,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers/cs_clusters_planning.html#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1102,7 +1102,7 @@ The following table shows the changes that are included in patch 1.11.3_1533.
 <td>Cluster master HA update</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fixed the update to highly available (HA) masters for clusters that use admission webhooks such as `initializerconfigurations`, `mutatingwebhookconfigurations`, or `validatingwebhookconfigurations`. You might use these webhooks with Helm charts such as for [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce).</td>
+<td>Fixed the update to highly available (HA) masters for clusters that use admission webhooks such as `initializerconfigurations`, `mutatingwebhookconfigurations`, or `validatingwebhookconfigurations`. You might use these webhooks with Helm charts such as for [Container Image Security Enforcement](/docs/services/Registry?topic=registry-security_enforce#security_enforce).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -1114,7 +1114,7 @@ The following table shows the changes that are included in patch 1.11.3_1533.
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers/cs_cli_reference.html#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers/cs_cli_reference.html#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -1140,7 +1140,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Cluster master</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br>For actions that you must take, see [Updating to highly available cluster masters](/docs/containers/cs_versions.html#ha-masters). These preparation actions apply:<ul>
+<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br>For actions that you must take, see [Updating to highly available cluster masters](/docs/containers?topic=containers-cs_versions#ha-masters). These preparation actions apply:<ul>
 <li>If you have a firewall or custom Calico network policies.</li>
 <li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
 <li>If you used the cluster master IP address for in-cluster access to the master.</li>
@@ -1163,7 +1163,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Encrypting data in etcd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](/docs/containers/cs_encrypt.html#keyprotect).</td>
+<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect).</td>
 </tr>
 </tbody>
 </table>
@@ -1332,7 +1332,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>Key Management Service Provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added the ability to use the Kubernetes key management service (KMS) provider in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers/cs_encrypt.html#keyprotect), all your Kubernetes secrets are encrypted.</td>
+<td>Added the ability to use the Kubernetes key management service (KMS) provider in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1350,13 +1350,13 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers/cs_cli_reference.html#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers/cs_cli_reference.html#cs_worker_update).</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update).</td>
 </tr>
 <tr>
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers/cs_cli_reference.html#cs_worker_update) or [reload](/docs/containers/cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) or [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>Worker node runtime components (`kubelet`, `kube-proxy`, `containerd`)</td>
@@ -1412,7 +1412,7 @@ The following table shows the changes that are included in patch 1.11.2_1516.
 <td>IBM file storage plug-in configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers/cs_storage_file.html#nfs_version_class).</td>
+<td>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 </tbody>
 </table>
@@ -1470,13 +1470,13 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>containerd</td>
 <td>N/A</td>
 <td>1.1.2</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2). For actions that you must take, see [Updating to `containerd` as the container runtime](/docs/containers/cs_versions.html#containerd).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2). For actions that you must take, see [Updating to `containerd` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd).</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. For actions that you must take, see [Updating to `containerd` as the container runtime](/docs/containers/cs_versions.html#containerd).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. For actions that you must take, see [Updating to `containerd` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd).</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -1494,7 +1494,7 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>IBM file storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated `incubator` version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to [add the region the zone labels](/docs/containers/cs_storage_basics.html#storage_multizone).</td>
+<td>Updated `incubator` version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to [add the region the zone labels](/docs/containers?topic=containers-kube_concepts#storage_multizone).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1507,8 +1507,8 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>N/A</td>
 <td>N/A</td>
 <td>Updated the OpenID Connect configuration for the cluster's Kubernetes API server to support {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) access groups. Added `Priority` to the `--enable-admission-plugins` option for the cluster's Kubernetes API server and configured the cluster to support pod priority. For more information, see:
-<ul><li>[{{site.data.keyword.Bluemix_notm}} IAM access groups](/docs/containers/cs_users.html#rbac)</li>
-<li>[Configuring pod priority](/docs/containers/cs_pod_priority.html#pod_priority)</li></ul></td>
+<ul><li>[{{site.data.keyword.Bluemix_notm}} IAM access groups](/docs/containers?topic=containers-users#rbac)</li>
+<li>[Configuring pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)</li></ul></td>
 </tr>
 <tr>
 <td>Kubernetes Heapster</td>
@@ -1599,7 +1599,7 @@ The following table shows the changes that are included in the patch 1.10.12_154
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
-<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers/cs_storage_file.html#file-topology).</li>
+<ul><li>Supports dynamic provisioning with [volume topology-aware scheduling](/docs/containers?topic=containers-file_storage#file-topology).</li>
 <li>Ignores persistent volume claim (PVC) delete errors if the storage is already deleted.</li>
 <li>Adds a failure message annotation to failed PVCs.</li>
 <li>Optimizes the storage provisioner controller's leader election and resync period settings, and increases the provisioning timeout from 30 minutes to 1 hour.</li>
@@ -1703,7 +1703,7 @@ The following table shows the changes that are included in the patch 1.10.12_154
 <td>Kubernetes dashboard</td>
 <td>v1.8.3</td>
 <td>v1.10.1</td>
-<td>See the [Kubernetes dashboard release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). Update resolves [CVE-2018-18264 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers/cs_app.html#cli_dashboard).</td>
+<td>See the [Kubernetes dashboard release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1). Update resolves [CVE-2018-18264 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-18264).<br><br>If you access the dashboard via `kubectl proxy`, the **SKIP** button on the login page is removed. Instead, [use a **Token** to log in](/docs/containers?topic=containers-app#cli_dashboard).</td>
 </tr>
 <tr>
 <td>GPU installer</td>
@@ -1812,7 +1812,7 @@ The following table shows the changes that are included in patch 1.10.11_1536.
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers/cs_clusters_planning.html#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1890,7 +1890,7 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>Cluster master</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br>For actions that you must take, see [Updating to highly available cluster masters](/docs/containers/cs_versions.html#ha-masters). These preparation actions apply:<ul>
+<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br>For actions that you must take, see [Updating to highly available cluster masters](/docs/containers?topic=containers-cs_versions#ha-masters). These preparation actions apply:<ul>
 <li>If you have a firewall or custom Calico network policies.</li>
 <li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
 <li>If you used the cluster master IP address for in-cluster access to the master.</li>
@@ -1913,7 +1913,7 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>Encrypting data in etcd</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](/docs/containers/cs_encrypt.html#keyprotect).</td>
+<td>Previously, etcd data was stored on a master’s NFS file storage instance that is encrypted at rest. Now, etcd data is stored on the master’s local disk and backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. However, the etcd data on the master’s local disk is not encrypted. If you want your master’s local etcd data to be encrypted, [enable {{site.data.keyword.keymanagementservicelong_notm}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -1925,7 +1925,7 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers/cs_cli_reference.html#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers/cs_cli_reference.html#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -2042,7 +2042,7 @@ The following table shows the changes that are included in patch 1.10.8_1524.
 <td>Key Management Service Provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added the ability to use the Kubernetes key management service (KMS) provider in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers/cs_encrypt.html#keyprotect), all your Kubernetes secrets are encrypted.</td>
+<td>Added the ability to use the Kubernetes key management service (KMS) provider in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -2093,7 +2093,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers/cs_cli_reference.html#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers/cs_cli_reference.html#cs_worker_update).</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update).</td>
 </tr>
 <tr>
 <td>Worker node runtime components (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -2105,7 +2105,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers/cs_cli_reference.html#cs_worker_update) or [reload](/docs/containers/cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) or [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -2119,7 +2119,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>N/A</td>
 <td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
 <li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
-**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](/docs/containers/cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
+**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
@@ -2157,7 +2157,7 @@ The following table shows the changes that are included in patch 1.10.7_1520.
 <td>IBM file storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br> Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers/cs_storage_file.html#nfs_version_class).</td>
+<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br> Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -2369,7 +2369,7 @@ The following table shows the changes that are included in patch 1.10.3_1512.
 <td>Kubernetes Configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added `PodSecurityPolicy` to the `--enable-admission-plugins` option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers/cs_psp.html).</td>
+<td>Added `PodSecurityPolicy` to the `--enable-admission-plugins` option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers?topic=containers-psp).</td>
 </tr>
 <tr>
 <td>Kubelet Configuration</td>
@@ -2509,7 +2509,7 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 <td>GPU support</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Support for [graphics processing unit (GPU) container workloads](/docs/containers/cs_app.html#gpu_app) is now available for scheduling and execution. For a list of available GPU machine types, see [Hardware for worker nodes](/docs/containers/cs_clusters_planning.html#shared_dedicated_node). For more information, see the Kubernetes documentation to [Schedule GPUs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>Support for [graphics processing unit (GPU) container workloads](/docs/containers?topic=containers-app#gpu_app) is now available for scheduling and execution. For a list of available GPU machine types, see [Hardware for worker nodes](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). For more information, see the Kubernetes documentation to [Schedule GPUs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>
@@ -2577,7 +2577,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Worker node resource utilization</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers/cs_clusters_planning.html#resource_limit_node).</td>
+<td>Added dedicated cgroups for the kubelet and docker to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -2679,7 +2679,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers/cs_cli_reference.html#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers/cs_cli_reference.html#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -2823,7 +2823,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers/cs_cli_reference.html#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers/cs_cli_reference.html#cs_worker_update).</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update).</td>
 </tr>
 <tr>
 <td>Worker node runtime components (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -2835,7 +2835,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers/cs_cli_reference.html#cs_worker_update) or [reload](/docs/containers/cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) or [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -2849,7 +2849,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>N/A</td>
 <td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
 <li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
-**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](/docs/containers/cs_versions.html#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
+**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
@@ -2881,7 +2881,7 @@ The following table shows the changes that are included in patch 1.9.10_1523.
 <td>IBM file storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers/cs_storage_file.html#nfs_version_class).</td>
+<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -3087,7 +3087,7 @@ The following table shows the changes that are included in patch 1.9.8_1515.
 <td>Kubernetes Configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added `PodSecurityPolicy` to the `--admission-control` option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers/cs_psp.html).</td>
+<td>Added `PodSecurityPolicy` to the `--admission-control` option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers?topic=containers-psp).</td>
 </tr>
 <tr>
 <td>IBM Cloud Provider</td>
@@ -3216,13 +3216,13 @@ The following table shows the changes that are included in patch 1.9.7_1510.
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.9.3-71</td>
 <td>v1.9.7-102</td>
-<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers/cs_loadbalancer.html#node_affinity_tolerations) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
+<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Fix [edge node](/docs/containers/cs_edge.html#edge) toleration setup for older clusters.</td>
+<td>Fix [edge node](/docs/containers?topic=containers-edge#edge) toleration setup for older clusters.</td>
 </tr>
 </tbody>
 </table>
@@ -3253,7 +3253,7 @@ Review the following changes.
 <td>Log rotate</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers/cs_cli_reference.html#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers/cs_cli_reference.html#cs_worker_update).</td>
+<td>Switched to use `systemd` timers instead of `cronjobs` to prevent `logrotate` from failing on worker nodes that are not reloaded or updated within 90 days. **Note**: In all earlier versions for this minor release, the primary disk fills up after the cron job fails because the logs are not rotated. The cron job fails after the worker node is active for 90 days without being updated or reloaded. If the logs fill up the entire primary disk, the worker node enters a failed state. The worker node can be fixed by using the `ibmcloud ks worker-reload` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) or the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update).</td>
 </tr>
 <tr>
 <td>Worker node runtime components (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -3265,7 +3265,7 @@ Review the following changes.
 <td>Root password expiration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers/cs_cli_reference.html#cs_worker_update) or [reload](/docs/containers/cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
+<td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) or [reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -3446,7 +3446,7 @@ Review the following changes.
 <td>Kubernetes Configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added `PodSecurityPolicy` to the `--admission-control` option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers/cs_psp.html).</td>
+<td>Added `PodSecurityPolicy` to the `--admission-control` option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers?topic=containers-psp).</td>
 </tr>
 <tr>
 <td>IBM Cloud Provider</td>
@@ -3565,13 +3565,13 @@ Review the following changes.
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.8.8-86</td>
 <td>v1.8.11-126</td>
-<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers/cs_loadbalancer.html#node_affinity_tolerations) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
+<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Fix [edge node](/docs/containers/cs_edge.html#edge) toleration setup for older clusters.</td>
+<td>Fix [edge node](/docs/containers?topic=containers-edge#edge) toleration setup for older clusters.</td>
 </tr>
 </tbody>
 </table>
@@ -3676,13 +3676,13 @@ Review the following changes.
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.7.4-133</td>
 <td>v1.7.16-17</td>
-<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers/cs_loadbalancer.html#node_affinity_tolerations) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
+<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td></td>
-<td>Fix [edge node](/docs/containers/cs_edge.html#edge) toleration setup for older clusters.</td>
+<td>Fix [edge node](/docs/containers?topic=containers-edge#edge) toleration setup for older clusters.</td>
 </tr>
 </tbody>
 </table>

@@ -109,8 +109,8 @@ Install Istio managed add-ons in an existing cluster.
 {: shortdesc}
 
 **Before you begin**</br>
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for {{site.data.keyword.containerlong_notm}}.
-* [Target the CLI to an existing 1.10 or later cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
+* [Target the CLI to an existing 1.10 or later cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 * If you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
 
 ### Installing managed Istio add-ons in the CLI
@@ -414,9 +414,9 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 Seamlessly manage logs for your app container and the Envoy proxy sidecar container in each pod by deploying LogDNA to your worker nodes to forward logs to {{site.data.keyword.loganalysislong}}.
 {: shortdesc}
 
-To use [{{site.data.keyword.la_full}}](/docs/services/Log-Analysis-with-LogDNA/overview.html), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
+To use [{{site.data.keyword.la_full}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
 
-To get started, set up LogDNA for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).
+To get started, set up LogDNA for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
 
 
 
@@ -431,9 +431,9 @@ With Istio on {{site.data.keyword.containerlong_notm}}, the managed `istio` add-
 
 Since all of the Prometheus work is done, all that is left for you is to deploy Sysdig in your cluster.
 
-1. Set up Sysdig by following the steps in [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster).
+1. Set up Sysdig by following the steps in [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).
 
-2. [Launch the Sysdig UI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#step3).
+2. [Launch the Sysdig UI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#step3).
 
 3. Click **Add new dashboard**.
 
@@ -863,7 +863,7 @@ To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} AL
 If you're finished working with Istio, you can clean up the Istio resources in your cluster by uninstalling Istio add-ons.
 {:shortdesc}
 
-Note that the `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinfo`, and [`knative`](/docs/containers/cs_tutorials_knative.html) add-ons. The `istio-extras` add-on is a dependency for the `istio-sample-bookinfo` add-on.
+Note that the `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinfo`, and [`knative`](/docs/containers?topic=containers-knative_tutorial) add-ons. The `istio-extras` add-on is a dependency for the `istio-sample-bookinfo` add-on.
 
 ### Uninstalling managed Istio add-ons in the CLI
 {: #istio_uninstall_cli}
