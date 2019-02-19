@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-02-19"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -164,6 +164,7 @@ Before you begin:
 * [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn?topic=VPN-set-up-ipsec-vpn#setting-up-an-ipsec-connection).
 * Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+  * **Note**: All strongSwan configurations are permitted in standard clusters. If you use a free cluster, you can choose only an outbound VPN connection in [Step 3](#strongswan_3). Inbound VPN connections require a load balancer in the cluster, and load balancers are not available for free clusters.
 
 ### Step 1: Get the strongSwan Helm chart
 {: #strongswan_1}
@@ -232,6 +233,8 @@ When you configure a strongSwan VPN connection, you choose whether the VPN conne
 <dt>Outbound</dt>
 <dd>The cluster initiates the VPN connection, and the on-premises VPN endpoint from the remote network listens for the connection.</dd>
 </dl>
+
+If you use a free cluster, you can choose only an outbound VPN connection. Inbound VPN connections require a load balancer in the cluster, and load balancers are not available for free clusters.
 
 To establish an inbound VPN connection, modify the following settings:
 1. Verify that `ipsec.auto` is set to `add`.

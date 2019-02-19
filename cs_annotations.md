@@ -308,7 +308,7 @@ Before you use annotations, make sure you have properly set up your Ingress serv
 ## General annotations
 {: #general}
 
-### Location snippets (location-snippets)
+### Location snippets (`location-snippets`)
 {: #location-snippets}
 
 Add a custom location block configuration for a service.
@@ -377,7 +377,7 @@ spec:
 <br />
 
 
-### Private ALB routing (ALB-ID)
+### Private ALB routing (`ALB-ID`)
 {: #alb-id}
 
 Route incoming requests to your apps with a private ALB.
@@ -432,7 +432,7 @@ If you have a multizone cluster with more than one private ALB enabled, you can 
 <br />
 
 
-### Server snippets (server-snippets)
+### Server snippets (`server-snippets`)
 {: #server-snippets}
 
 Add a custom server block configuration.
@@ -494,7 +494,7 @@ spec:
 <br />
 
 
-### Istio services (istio-services)
+### Istio services (`istio-services`)
 {: #istio-services}
 
 Route traffic to Istio-managed services.
@@ -690,7 +690,7 @@ spec:
 With connection annotations, you can change how the ALB connects to the back-end app and upstream-servers, and set timeouts or a maximum number of keepalive connections before the app or server is considered to be unavailable.
 {: shortdesc}
 
-### Custom connect-timeouts and read-timeouts (proxy-connect-timeout, proxy-read-timeout)
+### Custom connect-timeouts and read-timeouts (`proxy-connect-timeout`, `proxy-read-timeout`)
 {: #proxy-connect-timeout}
 
 Set the time that the ALB waits to connect to and read from the back-end app before the back-end app is considered unavailable.
@@ -755,7 +755,7 @@ spec:
 
 
 
-### Keepalive requests (keepalive-requests)
+### Keepalive requests (`keepalive-requests`)
 {: #keepalive-requests}
 
 <dl>
@@ -812,7 +812,7 @@ spec:
 
 
 
-### Keepalive timeout (keepalive-timeout)
+### Keepalive timeout (`keepalive-timeout`)
 {: #keepalive-timeout}
 
 <dl>
@@ -868,7 +868,7 @@ spec:
 <br />
 
 
-### Proxy next upstream (proxy-next-upstream-config)
+### Proxy next upstream (`proxy-next-upstream-config`)
 {: #proxy-next-upstream-config}
 
 Set when the ALB can pass a request to the next upstream server.
@@ -955,7 +955,7 @@ spec:
 <br />
 
 
-### Session-affinity with cookies (sticky-cookie-services)
+### Session-affinity with cookies (`sticky-cookie-services`)
 {: #sticky-cookie-services}
 
 Use the sticky cookie annotation to add session affinity to your ALB and always route incoming network traffic to the same upstream server.
@@ -1032,7 +1032,7 @@ spec:
 <br />
 
 
-### Upstream fail timeout (upstream-fail-timeout)
+### Upstream fail timeout (`upstream-fail-timeout`)
 {: #upstream-fail-timeout}
 
 Set the amount of time during which the ALB can attempt to connect to the server.
@@ -1089,7 +1089,7 @@ spec:
 <br />
 
 
-### Upstream keepalive (upstream-keepalive)
+### Upstream keepalive (`upstream-keepalive`)
 {: #upstream-keepalive}
 
 Set the maximum number of idle keepalive connections for an upstream server.
@@ -1147,7 +1147,7 @@ spec:
 <br />
 
 
-### Upstream max fails (upstream-max-fails)
+### Upstream max fails (`upstream-max-fails`)
 {: #upstream-max-fails}
 
 Set the maximum number of unsuccessful attempts to communicate with the server.
@@ -1209,7 +1209,7 @@ spec:
 With HTTPS and TLS/SSL authentication annotations, you can configure your ALB for HTTPS traffic, change default HTTPS ports, enable SSL encryption for traffic that is sent to your back-end apps, or set up mutual authentication.
 {: shortdesc}
 
-### {{site.data.keyword.appid_short_notm}} Authentication (appid-auth)
+### {{site.data.keyword.appid_short_notm}} Authentication (`appid-auth`)
 {: #appid-auth}
 
 Use {{site.data.keyword.appid_full_notm}} to authenticate with your app.
@@ -1321,7 +1321,7 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
 
 
 
-### Custom HTTP and HTTPS ports (custom-port)
+### Custom HTTP and HTTPS ports (`custom-port`)
 {: #custom-port}
 
 Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic.
@@ -1415,7 +1415,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 
 
 
-### HTTP redirects to HTTPS (redirect-to-https)
+### HTTP redirects to HTTPS (`redirect-to-https`)
 {: #redirect-to-https}
 
 Convert insecure HTTP client requests to HTTPS.
@@ -1459,7 +1459,7 @@ spec:
 <br />
 
 
-### HTTP Strict Transport Security (HSTS)
+### HTTP Strict Transport Security (`hsts`)
 {: #hsts}
 
 <dl>
@@ -1525,7 +1525,7 @@ spec:
 <br />
 
 
-### Mutual authentication (mutual-auth)
+### Mutual authentication (`mutual-auth`)
 {: #mutual-auth}
 
 Configure mutual authentication for the ALB.
@@ -1623,7 +1623,7 @@ spec:
 
 
 
-### SSL services support (ssl-services)
+### SSL services support (`ssl-services`)
 {: #ssl-services}
 
 Allow HTTPS requests and encrypt traffic to your upstream apps.
@@ -1736,7 +1736,7 @@ spec:
 <br />
 
 
-### TCP ports (tcp-ports)
+### TCP ports (`tcp-ports`)
 {: #tcp-ports}
 
 Access an app via a non-standard TCP port.
@@ -1843,7 +1843,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 The Ingress ALB routes traffic to the paths that back-end apps listen on. With path routing annotations, you can configure how the ALB routes traffic to your apps.
 {: shortdesc}
 
-### Custom error actions (custom-errors, custom-error-actions)
+### Custom error actions (`custom-errors`, `custom-error-actions`)
 {: #custom-errors}
 
 Indicate custom actions that the ALB can take for specific HTTP errors.
@@ -1925,7 +1925,7 @@ spec:
 <br />
 
 
-### External services (proxy-external-service)
+### External services (`proxy-external-service`)
 {: #proxy-external-service}
 
 Add path definitions to external services, such as services hosted in {{site.data.keyword.Bluemix_notm}}.
@@ -1986,7 +1986,7 @@ spec:
 <br />
 
 
-### Location modifier (location-modifier)
+### Location modifier (`location-modifier`)
 {: #location-modifier}
 
 Modify the way the ALB matches the request URI against the app path.
@@ -2074,7 +2074,7 @@ spec:
 <br />
 
 
-### Rewrite paths (rewrite-path)
+### Rewrite paths (`rewrite-path`)
 {: #rewrite-path}
 
 Route incoming network traffic on an ALB domain path to a different path that your back-end app listens on.
@@ -2134,7 +2134,7 @@ spec:
 The Ingress ALB acts as a proxy between your back-end app and the client web browser. With proxy buffer annotations, you can configure how data is buffered on your ALB when sending or receiving data packets.  
 {: shortdesc}
 
-### Large client header buffers (large-client-header-buffers)
+### Large client header buffers (`large-client-header-buffers`)
 {: #large-client-header-buffers}
 
 Set the maximum number and size of buffers that read large client request headers.
@@ -2189,7 +2189,7 @@ spec:
 <br />
 
 
-### Client response data buffering (proxy-buffering)
+### Client response data buffering (`proxy-buffering`)
 {: #proxy-buffering}
 
 Use the buffer annotation to disable the storage of response data on the ALB while the data is sent to the client.
@@ -2249,7 +2249,7 @@ spec:
 
 
 
-### Proxy buffers (proxy-buffers)
+### Proxy buffers (`proxy-buffers`)
 {: #proxy-buffers}
 
 Configure the number and size of proxy buffers for the ALB.
@@ -2309,7 +2309,7 @@ spec:
 <br />
 
 
-### Proxy buffer size (proxy-buffer-size)
+### Proxy buffer size (`proxy-buffer-size`)
 {: #proxy-buffer-size}
 
 Configure the size of the proxy buffer that reads the first part of the response.
@@ -2371,7 +2371,7 @@ spec:
 
 
 
-### Proxy busy buffers size (proxy-busy-buffers-size)
+### Proxy busy buffers size (`proxy-busy-buffers-size`)
 {: #proxy-busy-buffers-size}
 
 Configure the size of proxy buffers that can be busy.
@@ -2438,7 +2438,7 @@ spec:
 Use request and response annotations to add or remove header information from the client and server requests, and to change the size of the body that the client can send.
 {: shortdesc}
 
-### Add server port to host header (add-host-port)
+### Add server port to host header (`add-host-port`)
 {: #add-host-port}
 
 Add a server port to the client request before the request is forwarded to your back-end app.
@@ -2493,7 +2493,7 @@ spec:
 <br />
 
 
-### Additional client request or response header (proxy-add-headers, response-add-headers)
+### Additional client request or response header (`proxy-add-headers`, `response-add-headers`)
 {: #proxy-add-headers}
 
 Add extra header information to a client request before sending the request to the back-end app or to a client response before sending the response to the client.
@@ -2595,7 +2595,7 @@ spec:
 
 
 
-### Client response header removal (response-remove-headers)
+### Client response header removal (`response-remove-headers`)
 {: #response-remove-headers}
 
 Remove header information that is included in the client response from the back-end end app before the response is sent to the client.
@@ -2658,7 +2658,7 @@ spec:
 <br />
 
 
-### Client request body size (client-max-body-size)
+### Client request body size (`client-max-body-size`)
 {: #client-max-body-size}
 
 Set the maximum size of the body that the client can send as part of a request.
@@ -2719,7 +2719,7 @@ spec:
 With service limit annotations, you can change the default request processing rate and the number of connections that can come from a single IP address.
 {: shortdesc}
 
-### Global rate limits (global-rate-limit)
+### Global rate limits (`global-rate-limit`)
 {: #global-rate-limit}
 
 Limit the request processing rate and number of connections per a defined key for all services.
@@ -2783,7 +2783,7 @@ spec:
 
 
 
-### Service rate limits (service-rate-limit)
+### Service rate limits (`service-rate-limit`)
 {: #service-rate-limit}
 
 Limit the request processing rate and the number of connections for specific services.
