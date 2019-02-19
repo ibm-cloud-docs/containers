@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-18"
+lastupdated: "2019-02-19"
 
 keywords: kubernetes, iks, ingress
 
@@ -1851,10 +1851,10 @@ Indicate custom actions that the ALB can take for specific HTTP errors.
 
 <dl>
 <dt>Description</dt>
-<dd>To handle specific HTTP errors that occur while the ALB proxies traffic to your app, you can set up custom error actions for the ALB to take.<ul>
-<li>The `custom-errors` annotation indicates the service name, the HTTP error to handle, and the name of the error action that the ALB takes when it encounters the specified HTTP error for the service.</li>
-<li>The `custom-error-actions` annotation indicates custom error actions in NGINX code snippets.</li></ul>
-For example, in the `custom-errors` annotation, you can set up the ALB to handle `401` HTTP errors for `app1` by returning a custom error action called `/errorAction401`. Then, in the `custom-error-actions` annotation, you can define `/errorAction401` as a custom error page, such as `http://example.com/unauthorized.html`, that the ALB returns to the client.</br>You can also use the `custom-errors` annotation to redirect the client to an error service when a specific HTTP error occurs. You must define the path to this error service in the `paths` section of the Ingress resource file.</dd>
+<dd>To handle specific HTTP errors that might occur, you can set up custom error actions for the ALB to take.<ul>
+<li>The `custom-errors` annotation defines the service name, the HTTP error to handle, and the name of the error action that the ALB takes when it encounters the specified HTTP error for the service.</li>
+<li>The `custom-error-actions` annotation defines custom error actions in NGINX code snippets.</li></ul>
+</br>For example, in the `custom-errors` annotation, you can set up the ALB to handle `401` HTTP errors for `app1` by returning a custom error action called `/errorAction401`. Then, in the `custom-error-actions` annotation, you can define a code snippet called `/errorAction401` so that the ALB returns a custom error page to the client.</br>You can also use the `custom-errors` annotation to redirect the client to an error service that you manage. You must define the path to this error service in the `paths` section of the Ingress resource file.</dd>
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
