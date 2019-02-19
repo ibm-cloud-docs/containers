@@ -98,7 +98,7 @@ You must also specify whether users have access to one cluster in a resource gro
 In {{site.data.keyword.Bluemix_notm}} IAM, you can assign user access roles to resource instances, Kubernetes namespaces, or resource groups.
 {: shortdesc}
 
-When you create your {{site.data.keyword.Bluemix_notm}} account, the default resource group is created automatically. If you do not specify a resource group when you create the resource, resource instances (clusters) belong to the default resource group. In {{site.data.keyword.Bluemix_notm}} IAM, a Kubernetes namespace is a resource type of a resource instance (cluster). If you want to add a resource group in your account, see [Best practices for setting up your account](/docs/account?topic=account-account_setup) and [Setting up your resource groups](/docs/resources?topic=resources-bp_resourcegroups#setting-up-your-resource-groups).
+When you create your {{site.data.keyword.Bluemix_notm}} account, the default resource group is created automatically. If you do not specify a resource group when you create the resource, resource instances (clusters) belong to the default resource group. In {{site.data.keyword.Bluemix_notm}} IAM, a Kubernetes namespace is a resource type of a resource instance (cluster). If you want to add a resource group in your account, see [Best practices for setting up your account](/docs/account?topic=account-account_setup) and [Setting up your resource groups](/docs/resources?topic=resources-bp_resourcegroups#setuprgs).
 
 <dl>
 <dt>Resource instance</dt>
@@ -256,7 +256,7 @@ If the user is leaving your organization, the {{site.data.keyword.Bluemix_notm}}
 
 **How can I lock down my cluster if my API key becomes compromised?**
 
-If an API key that is set for a region and resource group in your cluster is compromised, [delete it](/docs/iam?topic=iam-userapikey#deleting-an-api-key) so that no further calls can be made using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver) security topic.
+If an API key that is set for a region and resource group in your cluster is compromised, [delete it](/docs/iam?topic=iam-userapikey#delete_user_key) so that no further calls can be made using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver) security topic.
 
 **How do I set up the API key for my cluster?**</br>
 

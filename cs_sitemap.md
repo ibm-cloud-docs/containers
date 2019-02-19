@@ -68,7 +68,7 @@ lastupdated: "2019-02-19"
 
 [Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#your-responsibilities-by-using-ibm-cloud-kubernetes-service)
 * [Cluster management responsibilities](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#responsibilities)
-* [Abuse of {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#terms)
+* [Abuse of {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#terms)
 
 [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
 * [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
@@ -99,17 +99,17 @@ lastupdated: "2019-02-19"
 * [Lesson 4: Adding a service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
-[Tutorial: Deploying apps into Kubernetes clusters](/docs/containers?topic=containers-tutorials_apps#cs_apps_tutorial)
-* [Objectives](/docs/containers?topic=containers-tutorials_apps#apps_objectives)
-* [Time required](/docs/containers?topic=containers-tutorials_apps#apps_time)
-* [Audiences](/docs/containers?topic=containers-tutorials_apps#apps_audience)
-* [Prerequisites](/docs/containers?topic=containers-tutorials_apps#apps_prereqs)
-* [Lesson 1: Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-tutorials_apps#cs_apps_tutorial_lesson1)
-* [Lesson 2: Deploying and updating apps with higher availability](/docs/containers?topic=containers-tutorials_apps#cs_apps_tutorial_lesson2)
-* [Lesson 3: Deploying and updating the Watson Tone Analyzer app](/docs/containers?topic=containers-tutorials_apps#cs_apps_tutorial_lesson3)
-  * [Lesson 3a: Deploying the Watson Tone Analyzer app](/docs/containers?topic=containers-tutorials_apps#lesson3a)
-  * [Lesson 3b. Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-tutorials_apps#lesson3b)
-* [What's next?](/docs/containers?topic=containers-tutorials_apps#apps_next)
+[Tutorial: Deploying apps into Kubernetes clusters](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)
+* [Objectives](/docs/containers?topic=containers-cs_apps_tutorial#apps_objectives)
+* [Time required](/docs/containers?topic=containers-cs_apps_tutorial#apps_time)
+* [Audiences](/docs/containers?topic=containers-cs_apps_tutorial#apps_audience)
+* [Prerequisites](/docs/containers?topic=containers-cs_apps_tutorial#apps_prereqs)
+* [Lesson 1: Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial_lesson1)
+* [Lesson 2: Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial_lesson2)
+* [Lesson 3: Deploying and updating the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial_lesson3)
+  * [Lesson 3a: Deploying the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_apps_tutorial#lesson3a)
+  * [Lesson 3b. Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_apps_tutorial#lesson3b)
+* [What's next?](/docs/containers?topic=containers-cs_apps_tutorial#apps_next)
 
 [Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
 * [Objectives](/docs/containers?topic=containers-knative_tutorial#knative_objectives)
@@ -239,8 +239,8 @@ lastupdated: "2019-02-19"
     * [Remove Cloud Foundry permissions](/docs/containers?topic=containers-users#remove_cloud_foundry)
     * [Remove IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#remove_infra)
 
-[Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryptionion#encryption)
-* [Understanding when to use secrets](/docs/containers?topic=containers-setup_encryption#secrets)
+[Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption#encryption)
+* [Understanding when to use secrets](/docs/containers?topic=containers-encryption#secrets)
   * [Adding a service to a cluster](/docs/containers?topic=containers-encryption#secrets_service)
   * [Encrypting traffic to your apps with TLS secrets](/docs/containers?topic=containers-encryption#secrets_tls)
   * [Accessing your registry with credentials stored in a Kubernetes imagePullSecret](/docs/containers?topic=containers-encryption#imagepullsecret)
@@ -889,7 +889,7 @@ lastupdated: "2019-02-19"
 
 ## User access permissions
 
-[User access permissions](/docs/containers?topic=containers-access_reference#understanding)
+[User access permissions](/docs/containers?topic=containers-access_reference)
 * [{{site.data.keyword.Bluemix_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
   * [Actions requiring no permissions](/docs/containers?topic=containers-access_reference#none-actions)
   * [Viewer actions](/docs/containers?topic=containers-access_reference#view-actions)
