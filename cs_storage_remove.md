@@ -49,7 +49,7 @@ It depends on what you delete and the billing type. If you delete the PVC and PV
 <p class="important">When you clean up persistent storage, you delete all the data that is stored in it. If you need a copy of the data, make a backup for [file storage](/docs/containers?topic=containers-file_storage#file_backup_restore) or [block storage](/docs/containers?topic=containers-block_storage#block_backup_restore).</br>
 </br>If you use an {{site.data.keyword.Bluemix_dedicated}} account, you must request volume deletion by [opening a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).</p>
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 To clean up persistent data:
 

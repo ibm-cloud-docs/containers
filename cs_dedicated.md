@@ -91,7 +91,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Accessing the registry</td>
  <td>See the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-images).</td>
- <td><ul><li>For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-images).</li><li>For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](/docs/containers/cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.</li></ul></td>
+ <td><ul><li>For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-images).</li><li>For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](/docs/containers?topic=containers-cs_dedicated_tokens#cs_dedicated_tokens) for authentication.</li></ul></td>
  </tr>
  <tr>
  <td>Multizone clusters</td>
@@ -287,7 +287,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     6. Choose the **Number of worker nodes** that you need. Select `3` to ensure high availability of your cluster.
 
     7. Select a **Public VLAN** (optional) and **Private VLAN** (required). The available public and private VLANs are pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment is set up. Both VLANs communicate between worker nodes but the public VLAN also communicates with the IBM-managed Kubernetes master. You can use the same VLAN for multiple clusters.
-        If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#plan_setup_private_vlan).
+        If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers?topic=containers-cs_network_cluster#plan_setup_private_vlan).
         {: note}
 
     8. By default, **Encrypt local disk** is selected. If you choose to clear the check box, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers?topic=containers-security#encrypted_disk).
@@ -341,7 +341,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>Enter the ID of the public VLAN that your Dedicated environment is configured to use. If you want to connect your worker nodes to a private VLAN only, do not specify this option.<p class="note">If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#plan_setup_private_vlan).</p></td>
+    <td>Enter the ID of the public VLAN that your Dedicated environment is configured to use. If you want to connect your worker nodes to a private VLAN only, do not specify this option.<p class="note">If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers?topic=containers-cs_network_cluster#plan_setup_private_vlan).</p></td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -475,9 +475,9 @@ With a {{site.data.keyword.Bluemix_dedicated_notm}}, you can create only [single
 ### Using private and public image registries
 {: #dedicated_images}
 
-Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with container images.
+Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
-For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-images). For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](/docs/containers/cs_dedicated_tokens.html#cs_dedicated_tokens) for authentication.
+For new namespaces, see the options in [Using private and public image registries with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-images). For namespaces that were set up for single and scalable groups, [use a token and create a Kubernetes secret](/docs/containers?topic=containers-cs_dedicated_tokens#cs_dedicated_tokens) for authentication.
 
 ### Adding subnets to clusters
 {: #dedicated_cluster_subnet}
@@ -524,7 +524,7 @@ Before you begin: Configure the routing of network traffic into and out of your 
     ```
     {: screen}
 
-4. **Important**: If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/vrf-on-ibm-cloud.html#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
+4. **Important**: If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 5. To configure on-premises and internal account connectivity, choose between these options:
   - If you used a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises and internal account connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, load balancer, or Ingress services](/docs/containers?topic=containers-cs_network_planning#external).
@@ -553,7 +553,7 @@ You can use Kubernetes techniques to deploy apps in {{site.data.keyword.Bluemix_
 
 To deploy apps in clusters, you can follow the instructions for [deploying apps in {{site.data.keyword.Bluemix_notm}} public clusters](/docs/containers?topic=containers-app#app). Review the following differences for {{site.data.keyword.Bluemix_dedicated_notm}} clusters.
 
-Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with Kubernetes resources.
+Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
 
 ### Allowing public access to apps
 {: #dedicated_apps_public}
@@ -576,7 +576,7 @@ If you want to use public IP addresses for the Ingress ALB, ensure that an enter
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see Persistent data storage options for high availability](/docs/containers/cs_storage_planning.html#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+To review options for creating persistent storage, see Persistent data storage options for high availability](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). To request a backup for your volumes, a restoration from your volumes, a deletion of volumes, or a periodic snapshot of file storage, you must [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
 {: shortdesc}
 
 If you choose to provision [file storage](/docs/containers?topic=containers-file_storage#file_predefined_storageclass), choose non-retain storage classes. Choosing non-retain storage classes helps prevent orphaned persistent storage instances in IBM Cloud infrastructure (SoftLayer) that you can remove only by opening a support case.

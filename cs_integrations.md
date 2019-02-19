@@ -176,7 +176,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
-  <td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see <a href="cs_encrypt.html#keyprotect">Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}</a>.<br>For more information, see the <a href="/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see <a href="/docs/containers?topic=containers-encryption#keyprotect">Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}</a>.<br>For more information, see the <a href="/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -242,7 +242,7 @@ Before you begin:
     - [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the cluster.
     - [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the namespace where you want to bind the service
     - [**Developer** Cloud Foundry role](/docs/iam?topic=iam-mngcf#mngcf) for the space that you want to use
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 
@@ -362,7 +362,7 @@ Want to make your secrets even more secured? Ask your cluster admin to [enable {
 
 Before your begin:
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Add an {{site.data.keyword.Bluemix_notm}} service to your cluster](#adding_cluster).
 
 ### Mounting the secret as a volume to your pod
@@ -651,7 +651,7 @@ You can add the service credentials and other key value pairs from your Kubernet
 
 Before you use Helm charts with {{site.data.keyword.containerlong_notm}}, you must install and initialize a Helm instance in your cluster. You can then add the {{site.data.keyword.Bluemix_notm}} Helm repository to your Helm instance.
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
 
@@ -757,7 +757,7 @@ Before you begin:
 -   Remember not to expose your cluster information on the public internet. Complete these steps to deploy Weave Scope securely and access it from a web browser locally.
 -   If you do not have one already, [create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui). Weave Scope can be CPU intensive, especially the app. Run Weave Scope with larger standard clusters, not free clusters.
 -  Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for all namespaces.
--   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+-   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 
 To use Weave Scope with a cluster:

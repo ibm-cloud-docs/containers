@@ -299,7 +299,7 @@ Be sure that you want to reset the key and understand the impact to your app. Th
 
 **Before you begin**:
 - If the account owner is not setting the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 To set the API key to access the IBM Cloud infrastructure (SoftLayer) portfolio:
 
@@ -339,7 +339,7 @@ The IBM Cloud infrastructure (SoftLayer) credentials set by the `ibmcloud ks cre
 
 **Before you begin**:
 - If you are not using the account owner's credentials, [ensure that the user whose credentials you want to set for the API key has the correct permissions](#owner_permissions).
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 To set infrastructure account credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio:
 
@@ -453,7 +453,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
 
 - Verify that you're assigned the `cluster-admin` {{site.data.keyword.Bluemix_notm}} IAM platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 - Verify that the user is added to the account. If the user is not, invite the user to your account by running `ibmcloud account user-invite <user@email.com>`.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 **To assign {{site.data.keyword.Bluemix_notm}} IAM policies from the CLI:**
 

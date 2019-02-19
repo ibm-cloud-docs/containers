@@ -54,7 +54,7 @@ Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, 
 To access your {{site.data.keyword.cos_full_notm}} service instance to read and write data, you must securely store the service credentials in a Kubernetes secret. The {{site.data.keyword.cos_full_notm}} plug-in uses these credentials for every read or write operation to your bucket.
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1. Retrieve the **apikey**, or the **access_key_id** and the **secret_access_key** of your [{{site.data.keyword.cos_full_notm}} service credentials](#service_credentials).
 
@@ -157,7 +157,7 @@ Install the {{site.data.keyword.cos_full_notm}} plug-in with a Helm chart to set
 Looking for instructions for how to update or remove the {{site.data.keyword.cos_full_notm}} plug-in? See [Updating the plug-in](#update_cos_plugin) and [Removing the plug-in](#remove_cos_plugin).
 {: tip}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1. Make sure that your worker node applies the latest patch for your minor version.
    1. List the current patch version of your worker nodes.
@@ -176,9 +176,9 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
       If your worker node does not apply the latest patch version, you see an asterisk (`*`) in the **Version** column of your CLI output.
 
-   2. Review the [version changelog](/docs/containers/cs_versions_changelog.html#changelog) to find the changes that are included in the latest patch version.
+   2. Review the [version changelog](/docs/containers?topic=containers-changelog#changelog) to find the changes that are included in the latest patch version.
 
-   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers/cs_cli_reference.html#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
+   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 2.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
     

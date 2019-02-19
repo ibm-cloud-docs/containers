@@ -66,7 +66,7 @@ Learn about some basic Docker concepts:
   </ul>
   </dd>
 
-<p>Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with container images.</p>
+<p>Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.</p>
 
 <p>Ready to gain deeper knowledge of Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">Learn how Docker and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></p>
 
@@ -107,10 +107,10 @@ Define update strategies for your app, including the number of pods that you wan
 <dt>App</dt>
 <dd>An app might refer to a complete app or a component of an app. You might deploy components of an app in separate pods or separate worker nodes.</dd>
 
-<p>Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with Kubernetes resources.</p>
+<p>Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.</p>
 
 <p>Ready to gain deeper knowledge of Kubernetes?</p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Expand your terminology knowledge with the Creating clusters tutorial</a>.</li>
+<ul><li><a href="/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial" target="_blank">Expand your terminology knowledge with the Creating clusters tutorial</a>.</li>
 <li><a href="https://developer.ibm.com/courses/all/container-kubernetes-essentials-with-ibm-cloud/" target="_blank">Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></li></ul>
 
 

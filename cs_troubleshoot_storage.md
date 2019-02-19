@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-02-19"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -111,7 +111,7 @@ If you use a Helm chart to deploy the image, edit the Helm deployment to use an 
 When you include an [init container![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) in your deployment, you can give a non-root user that is specified in your Dockerfile write permissions for the volume mount path inside the container. The init container starts before your app container starts. The init container creates the volume mount path inside the container, changes the mount path to be owned by the correct (non-root) user, and closes. Then, your app container starts with the non-root user that must write to the mount path. Because the path is already owned by the non-root user, writing to the mount path is successful. If you do not want to use an init container, you can modify the Dockerfile to add non-root user access to NFS file storage.
 
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  Open the Dockerfile for your app and get the user ID (UID) and group ID (GID) from the user that you want to give writer permission on the volume mount path. In the example from a Jenkins Dockerfile, the information is:
     - UID: `1000`
@@ -315,11 +315,11 @@ Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser
 
 {: tsSymptoms}
 You might see the following symptoms:
-- When you run `kubectl get pods -o wide`, you see that multiple pods on the same worker node are stuck in the `ContainerCreating` or `CrashLoopBackOff` state. All these pods use the same block storage instance. 
+- When you run `kubectl get pods -o wide`, you see that multiple pods on the same worker node are stuck in the `ContainerCreating` or `CrashLoopBackOff` state. All these pods use the same block storage instance.
 - When you run a `kubectl describe pod` command, you see the following error in the **Events** section: `MountVolume.SetUp failed for volume ... read-only`.
 
 {: tsCauses}
-If a network error occurs while a pod writes to a volume, IBM Cloud infrastructure (SoftLayer) protects the data on the volume from getting corrupted by changing the volume to a read-only mode. Pods that use this volume cannot continue to write to the volume and fail. 
+If a network error occurs while a pod writes to a volume, IBM Cloud infrastructure (SoftLayer) protects the data on the volume from getting corrupted by changing the volume to a read-only mode. Pods that use this volume cannot continue to write to the volume and fail.
 
 {: tsResolve}
 1. Check the version of the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in that is installed in your cluster.
@@ -327,35 +327,35 @@ If a network error occurs while a pod writes to a volume, IBM Cloud infrastructu
    helm ls
    ```
    {: pre}
-    
-2. Verify that you use the [latest version of the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). If not, [update your plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in). 
-3. If you used a Kubernetes deployment for your pod, restart the pod that is failing by removing the pod and letting Kubernetes re-create it. If you did not use a deployment, retrieve the YAML file that was used to create your pod by running `kubectl get pod <pod_name> -o yaml >pod.yaml`. Then, delete and manually re-create the pod. 
+
+2. Verify that you use the [latest version of the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). If not, [update your plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
+3. If you used a Kubernetes deployment for your pod, restart the pod that is failing by removing the pod and letting Kubernetes re-create it. If you did not use a deployment, retrieve the YAML file that was used to create your pod by running `kubectl get pod <pod_name> -o yaml >pod.yaml`. Then, delete and manually re-create the pod.
     ```
     kubectl delete pod <pod_name>
     ```
     {: pre}
-      
-4. Check if re-creating your pod resolved the issue. If not, reload the worker node. 
+
+4. Check if re-creating your pod resolved the issue. If not, reload the worker node.
    1. Find the worker node where your pod runs and note the private IP address that is assigned to your worker node.
       ```
       kubectl describe pod <pod_name> | grep Node
       ```
       {: pre}
-      
-      Example output: 
+
+      Example output:
       ```
       Node:               10.75.XX.XXX/10.75.XX.XXX
       Node-Selectors:  <none>
       ```
       {: screen}
-      
-   2. Retrieve the **ID** of your worker node by using the private IP address from the previous step. 
+
+   2. Retrieve the **ID** of your worker node by using the private IP address from the previous step.
       ```
       ibmcloud ks workers --cluster <cluster_name_or_ID>
       ```
       {: pre}
-      
-   3. Gracefully [reload the worker node](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload). 
+
+   3. Gracefully [reload the worker node](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload).
 
 
 <br />
@@ -720,8 +720,8 @@ Still having issues with your cluster?
 -   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containerlong_notm}}, post your question on [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
-    See [Getting help](/docs/get-support/howtogetsupport.html#using-avatar) for more details about using the forums.
--   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers/cs_troubleshoot.html#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
+    See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
+-   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

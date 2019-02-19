@@ -9,6 +9,6 @@ lastupdated: "2019-02-19"
 
 # Source files for customer-facing documentation
 
-Customer-facing documentation: https://cloud.ibm.com/docs/containers/container_index.html
+Customer-facing documentation: https://cloud.ibm.com/docs/containers?topic=containers-container_index
 
 

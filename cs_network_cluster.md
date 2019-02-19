@@ -104,15 +104,15 @@ If you want to expose your apps to the public or to a private network, you can c
 ### Optional: Isolate networking workloads to edge worker nodes
 {: #both_vlans_edge}
 
-Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](/docs/containers/cs_edge.html#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](/docs/containers/cs_edge.html#edge_workloads).
+Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads).
 
 
 ### Optional: Connect to an on-premises network or IBM Cloud Private by using strongSwan VPN
 {: #both_vlans_vpn}
 
 To securely connect your worker nodes and apps to an on-premises network, you can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/about.html). The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite.
-* To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers/cs_vpn.html#vpn-setup) directly in a pod in your cluster.
-* To set up a secure connection between your cluster and an IBM Cloud Private instance, see [Connecting your public and private cloud with the strongSwan VPN](/docs/containers/cs_hybrid.html#hybrid_vpn).
+* To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.
+* To set up a secure connection between your cluster and an IBM Cloud Private instance, see [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn).
 
 
 <br />
@@ -164,7 +164,7 @@ If you have a multizone cluster, multiple VLANs for a single zone cluster, or mu
 ### Optional: Isolate networking workloads to edge worker nodes
 {: #both_vlans_private_edge}
 
-Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](/docs/containers/cs_edge.html#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](/docs/containers/cs_edge.html#edge_workloads).
+Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads).
 
 
 Then, use a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to public NodePorts on clusters that are running edge worker nodes. Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
@@ -173,8 +173,8 @@ Then, use a [Calico preDNAT network policy](/docs/containers?topic=containers-ne
 {: #both_vlans_private_vpn}
 
 To securely connect your worker nodes and apps to an on-premises network, you can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/about.html). The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite.
-* To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers/cs_vpn.html#vpn-setup) directly in a pod in your cluster.
-* To set up a secure connection between your cluster and an IBM Cloud Private instance, see [Connecting your public and private cloud with the strongSwan VPN](/docs/containers/cs_hybrid.html#hybrid_vpn).
+* To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.
+* To set up a secure connection between your cluster and an IBM Cloud Private instance, see [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn).
 
 
 <br />

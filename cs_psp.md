@@ -75,7 +75,7 @@ policies allow the users to create and update privileged and unprivileged (restr
 You can modify these RBAC roles to remove or add administrators, users, services, or nodes to the policy.
 
 Before you begin:
-*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 *  Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac) or the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 * Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for all namespaces.
 

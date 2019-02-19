@@ -39,7 +39,7 @@ Each service in your {{site.data.keyword.containerlong}} cluster is assigned a D
 By default, your {{site.data.keyword.containerlong_notm}} cluster DNS provider includes a deployment to autoscale the DNS pods in response to the number of worker nodes and cores within the cluster. You can finetune the DNS autoscaler parameters by editing the DNS autoscaling configmap. For example, if your apps have heavy usage of the cluster DNS provider, you might need to increase the minimum number of DNS pods to support the app. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/).
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  Verify that the cluster DNS provider deployment is available. You might have the autoscaler for the KubeDNS, the CoreDNS, or both DNS providers installed in your cluster. If you have both DNS autoscalers installed, find the one that is in use by looking at the **AVAILABLE** column in your CLI output. The deployment that is in use is listed with 1 available deployment.
     ```
@@ -82,7 +82,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 You can customize your {{site.data.keyword.containerlong_notm}} cluster DNS provider by editing the DNS configmap. For example, you might want to configure stubdomains and upstream nameservers to resolve services that point to external hosts. Additionally, if you use CoreDNS, you can configure multiple [Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/) within the CoreDNS configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  Verify that the cluster DNS provider deployment is available. You might have the DNS cluster provider for KubeDNS, CoreDNS, or both DNS providers installed in your cluster. If you have both DNS providers installed, find the one that is in use by looking at the **AVAILABLE** column in your CLI output. The deployment that is in use is listed with 1 available deployment.
     ```
@@ -168,7 +168,7 @@ If you have a {{site.data.keyword.containerlong_notm}} cluster that runs Kuberne
 {: shortdesc}
 
 **Before you begin**:
-1.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+1.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 2.  Determine the current cluster DNS provider. In the following example, KubeDNS is the current cluster DNS provider.
     ```
     kubectl cluster-info

@@ -123,7 +123,7 @@ In Kubernetes version 1.10 and later clusters, a default Kubernetes policy that 
 To view, manage, and add Calico policies, install and configure the Calico CLI.
 {:shortdesc}
 
-1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -210,7 +210,7 @@ View the details for default and any added network policies that are applied to 
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -271,7 +271,7 @@ To create Kubernetes network policies, see the [Kubernetes network policy docume
 To create Calico policies, use the following steps.
 
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -318,7 +318,7 @@ To see how to whitelist or blacklist source IP addresses, try the [Using Calico 
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -458,7 +458,7 @@ The policies target the worker node private interface (eth0) and the pod network
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
-2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+2. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network

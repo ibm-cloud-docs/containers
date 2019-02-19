@@ -52,7 +52,7 @@ You can use multiple registries with {{site.data.keyword.containerlong_notm}} to
 
 After you set up an image registry, cluster users can use the images for their app deployments to the cluster.
 
-Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with container images.
+Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
 <br />
 

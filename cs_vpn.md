@@ -163,7 +163,7 @@ Before you install the strongSwan Helm chart, you must decide on your strongSwan
 Before you begin:
 * [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn?topic=VPN-set-up-ipsec-vpn#setting-up-an-ipsec-connection).
 * Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
-* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 ### Step 1: Get the strongSwan Helm chart
 {: #strongswan_1}

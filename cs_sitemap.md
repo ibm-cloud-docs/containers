@@ -24,7 +24,7 @@ lastupdated: "2019-02-19"
 
 ## Getting started with {{site.data.keyword.containerlong_notm}}
 
-[Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers/containers?topic=containers-container_index#container_index)
+[Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-container_index#container_index)
 
 
 

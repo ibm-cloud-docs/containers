@@ -255,7 +255,7 @@ Before you begin, [create](/docs/containers?topic=containers-clusters#clusters) 
           ```
           {: pre}
 
-2.  For the standard cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+2.  For the standard cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
     If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
     {: tip}
@@ -299,7 +299,7 @@ If you have apps that run in your containers that can't be configured to write l
 
 1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
-2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 3. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
@@ -328,7 +328,7 @@ The following steps are general instructions. Prior to using the container in a 
     * **Editor** or **Administrator** platform role for the cluster
     * **Writer** or **Manager** service role for the `kube-system` namespace
 
-2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 3. Set up a server that accepts a syslog protocol in one of two ways:
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
@@ -393,7 +393,7 @@ You can update a logging configuration that you already created.
 You can stop forwarding logs one or all of the logging configurations for a cluster.
 {: shortdesc}
 
-1. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+1. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 2. Delete the logging configuration.
   <ul>
@@ -547,7 +547,7 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
 
 1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containerlong_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
 
-2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 **Forwarding logs**
 
@@ -628,7 +628,7 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
 
 1. Set up a remote logging server where you can forward the logs. For example, you can [use Logstash with Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend) to collect audit events.
 
-2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
 To forward Kubernetes API audit logs:
 
@@ -690,7 +690,7 @@ To forward Kubernetes API audit logs:
     {: pre}
 
 4. Optional: If you want to stop forwarding audit logs, you can disable your configuration.
-    1. For the cluster that you want to stop collecting API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+    1. For the cluster that you want to stop collecting API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
     2. Disable the webhook back-end configuration for the cluster's API server.
 
         ```
@@ -847,7 +847,7 @@ Before you begin:
 - Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
     - **Administrator** platform role for the cluster
     - **Writer** or **Manager** service role for the `kube-system` namespace
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 To configure Autorecovery:
 

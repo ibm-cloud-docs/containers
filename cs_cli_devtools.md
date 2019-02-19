@@ -382,7 +382,7 @@ View the name and email address for the owner of the IAM API key in an {{site.da
 
 The Identity and Access Management (IAM) API key is automatically set for a region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the `us-south` region. By doing that, the IAM API key for this user is stored in the account for this region. The API key is used to order resources in IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs.
 
-When a different user performs an action in this region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine if sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](cs_users.html#infra_access).
+When a different user performs an action in this region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine if sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](/docs/containers?topic=containers-users#infra_access).
 
 If you find that you need to update the API key that is stored for a region, you can do so by running the [ibmcloud ks api-key-reset](#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
 
@@ -417,7 +417,7 @@ Replace the current IAM API key in an {{site.data.keyword.containerlong_notm}} r
 
 This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how IAM API keys work, see the [`ibmcloud ks api-key-info` command](#cs_api_key_info).
 
-**Important** Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
+**Important** Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users).
 
 <strong>Command options</strong>:
 
@@ -576,7 +576,7 @@ Initialize the {{site.data.keyword.containerlong_notm}} plug-in or specify the r
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use.  This value is optional. [View the available API endpoint values.](cs_regions.html#container_regions)</dd>
+   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use.  This value is optional. [View the available API endpoint values.](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>Allow an insecure HTTP connection.</dd>
@@ -741,7 +741,7 @@ trusted: <em>true</em>
 <dt><code>--zone <em>ZONE</em></code></dt>
 <dd>The zone where you want to create the cluster. The zones that are available to you depend on the {{site.data.keyword.Bluemix_notm}} region you are logged in to. Select the region that is physically closest to you for best performance.  This value is required for standard clusters and is optional for free clusters.
 
-<p>Review [available zones](cs_regions.html#zones).</p>
+<p>Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</p>
 
 <p><strong>Note:</strong> When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.</p>
 </dd>
@@ -1148,7 +1148,7 @@ After you [install the container scanner](/docs/services/va?topic=va-va_index#va
 <dl>
 <dt><code>CONTAINER_ID</code></dt>
 <dd><p>The ID of the container. This value is required.</p>
-<p>To find the ID of your container:<ol><li>[Target the Kubernetes CLI to your cluster](cs_cli_install.html#cs_cli_configure).</li><li>List your pods by running `kubectl get pods`.</li><li>Find the **Container ID** field in the output of the `kubectl describe pod <pod_name>` command. For example, `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remove the `docker://` prefix from the ID before you use the container ID for the `ibmcloud ks va` command. For example, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+<p>To find the ID of your container:<ol><li>[Target the Kubernetes CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).</li><li>List your pods by running `kubectl get pods`.</li><li>Find the **Container ID** field in the output of the `kubectl describe pod <pod_name>` command. For example, `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remove the `docker://` prefix from the ID before you use the container ID for the `ibmcloud ks va` command. For example, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
 <dd><p>Extend the command output to show more fix information for vulnerable packages. This value is optional.</p>
@@ -1667,7 +1667,7 @@ If IBM Cloud infrastructure (SoftLayer) credentials are manually set, these cred
 
 You cannot set multiple credentials for one {{site.data.keyword.containerlong_notm}} account. Every {{site.data.keyword.containerlong_notm}} account is linked to one IBM Cloud infrastructure (SoftLayer) portfolio only.
 
-**Important:** Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
+**Important:** Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users).
 
 <strong>Command options</strong>:
 
@@ -1751,7 +1751,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 
    <dl>
    <dt><code><em>ZONE</em></code></dt>
-   <dd>Enter the zone where you want to list available machine types. This value is required. Review [available zones](cs_regions.html#zones).</dd>
+   <dd>Enter the zone where you want to list available machine types. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
 
    <dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -1776,7 +1776,7 @@ List the public and private VLANs that are available for a zone in your IBM Clou
 
    <dl>
    <dt><code><em>ZONE</em></code></dt>
-   <dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](cs_regions.html#zones).</dd>
+   <dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
 
    <dt><code>--all</code></dt>
    <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANS that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
@@ -2228,7 +2228,7 @@ For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US Sout
 <dt><code><em>REGION</em></code></dt>
 <dd>Enter the region that you want to target. This value is optional. If you do not provide the region, you can select it from the list in the output.
 
-For a list of available regions, review [regions and zones](cs_regions.html) or use the `ibmcloud ks regions` [command](#cs_regions).</dd></dl>
+For a list of available regions, review [regions and zones](/docs/containers?topic=containers-regions-and-zones) or use the `ibmcloud ks regions` [command](#cs_regions).</dd></dl>
 
 **Example**:
 
@@ -2906,7 +2906,7 @@ View the worker pools that you have in a cluster.
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+    <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>
@@ -2951,7 +2951,7 @@ View the worker pools that you have in a cluster.
 
   <dl>
     <dt><code>--zone <em>ZONE</em></code></dt>
-      <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+      <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>
@@ -2991,7 +2991,7 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+    <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>
