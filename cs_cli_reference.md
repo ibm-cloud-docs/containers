@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-18"
+lastupdated: "2019-02-19"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -36,23 +36,46 @@ In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-in
 Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_notm}} CLI reference](/docs/services/Registry/registry_cli_reference.html#registry_cli_reference). Looking for `kubectl` commands? See the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).
 {:tip}
 
-
-
-
-
 ## Using the beta command structure
 {: #cs_beta}
 
 A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from the hyphenated structure to a spaced structure.
-* When you run `ibmcloud ks help`, commands are shown in the legacy hyphenated structure and are listed alphabetically.
-* You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).
 {: shortdesc}
 
-To use the redesigned {{site.data.keyword.containerlong_notm}} plug-in, set the `IKS_BETA_VERSION` environment variable to the beta version `0.2`.
+To use the redesigned {{site.data.keyword.containerlong_notm}} plug-in, set the `IKS_BETA_VERSION` environment variable to the beta version that you want to use:
 ```
-export IKS_BETA_VERSION=0.2
+export IKS_BETA_VERSION=<beta_version>
 ```
 {: pre}
+
+The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available:
+
+<table>
+<caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
+  <thead>
+    <th>Beta version</th>
+    <th>`ibmcloud ks help` output structure</th>
+    <th>Command structure</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>0.2</code></td>
+      <td>Legacy: Commands are shown in the hyphenated structure and are listed alphabetically.</td>
+      <td>Legacy and beta: You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
+  </tr>
+    <tr>
+      <td><code>0.3</code></td>
+      <td>Beta: Commands are shown in the spaced structure and are listed in categories.</td>
+      <td>Legacy and beta: You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
+    </tr>
+    <tr>
+      <td><code>1.0</code></td>
+      <td>Beta: Commands are shown in the spaced structure and are listed in categories.</td>
+      <td>Beta: You can run commands only in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
+    </tr>
+  </tbody>
+</table>
+
 
 
 ## ibmcloud ks commands
