@@ -695,7 +695,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
   - **Example stateful set that specifies a zone:**
 
-    The following example shows how to deploy nginx as a stateful set with 3 replicas. For each replica, a 20 gigabyte file storage device is provisioned based on the specifications in the `ibmc-file-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because file storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto worker nodes that are located in `dal10`.
+    The following example shows how to deploy NGINX as a stateful set with 3 replicas. For each replica, a 20 gigabyte file storage device is provisioned based on the specifications in the `ibmc-file-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because file storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto worker nodes that are located in `dal10`.
 
     ```
     apiVersion: v1
@@ -759,7 +759,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
   - **Example stateful set with anti-affinity rule and delayed file storage creation:**
 
-    The following example shows how to deploy nginx as a stateful set with 3 replicas. The stateful set does not specify the region and zone where the file storage is created. Instead, the stateful set uses an anti-affinity rule to ensure that the pods are spread across worker nodes and zones. Worker node anti-affinity is achieved by defining the `app: nignx` label. This label instructs the Kubernetes scheduler to not schedule a pod on a worker node if a pod with the same label already runs on this worker node. The `topologykey: failure-domain.beta.kubernetes.io/zone` label restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node that is located in the same zone as a worker node that already runs a pod with the `app: nignx` label. For each stateful set pod, two PVCs are created as defined in the `volumeClaimTemplates` section, but the creation of the file storage instances is delayed until a stateful set pod that uses the storage is scheduled. This setup is referred to as [topology-aware volume scheduling](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
+    The following example shows how to deploy NGINX as a stateful set with 3 replicas. The stateful set does not specify the region and zone where the file storage is created. Instead, the stateful set uses an anti-affinity rule to ensure that the pods are spread across worker nodes and zones. Worker node anti-affinity is achieved by defining the `app: nginx` label. This label instructs the Kubernetes scheduler to not schedule a pod on a worker node if a pod with the same label already runs on this worker node. The `topologykey: failure-domain.beta.kubernetes.io/zone` label restricts this anti-affinity rule even more and prevents the pod to be scheduled on a worker node that is located in the same zone as a worker node that already runs a pod with the `app: nginx` label. For each stateful set pod, two PVCs are created as defined in the `volumeClaimTemplates` section, but the creation of the file storage instances is delayed until a stateful set pod that uses the storage is scheduled. This setup is referred to as [topology-aware volume scheduling](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
 
     ```
     apiVersion: storage.k8s.io/v1
@@ -871,7 +871,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.podManagementPolicy</code></td>
-    <td style="text-align:left">Enter the pod management policy that you want to use for your stateful set. Choose between the following options: <ul><li><strong>OrderedReady: </strong>With this option, stateful set replicas are deployed one after another. For example, if you specified 3 replicas, then Kubernetes creates the PVC for your first replica, waits until the PVC is bound, deploys the stateful set replica, and mounts the PVC to the replica. After the deployment is finished, the second replica is deployed. For more information about this option, see [OrderedReady Pod Management ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel: </strong>With this option, the deployment of all stateful set replicas is started at the same time. If your app supports parallel deployment of replicas, then use this option to save deployment time for your PVCs and stateful set replicas. </li></ul></td>
+    <td style="text-align:left">Enter the pod management policy that you want to use for your stateful set. Choose between the following options: <ul><li><strong><code>OrderedReady</code></strong>: With this option, stateful set replicas are deployed one after another. For example, if you specified 3 replicas, then Kubernetes creates the PVC for your first replica, waits until the PVC is bound, deploys the stateful set replica, and mounts the PVC to the replica. After the deployment is finished, the second replica is deployed. For more information about this option, see [`OrderedReady` Pod Management ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel: </strong>With this option, the deployment of all stateful set replicas is started at the same time. If your app supports parallel deployment of replicas, then use this option to save deployment time for your PVCs and stateful set replicas. </li></ul></td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
@@ -950,7 +950,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       {: pre}
 
-   2. Verify that your existing PVC is mounted to your stateful set replica. Review the **ClaimName** in the **Volumes** section of your CLI output.
+   2. Verify that your existing PVC is mounted to your stateful set replica. Review the **`ClaimName`** in the **`Volumes`** section of your CLI output.
       ```
       kubectl describe pod <pod_name>
       ```
@@ -996,7 +996,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    ```
    {: screen}
 
-2. Retrieve the **StorageType**, **volumeId**, and the **server** of the physical file storage that is associated with your PVC by listing the details of the PV that your PVC is bound to. Replace `<pv_name>` with the name of the PV that you retrieved in the previous step. The storage type, volume ID, and the server name are shown in the **Labels** section of your CLI output.
+2. Retrieve the **`StorageType`**, **`volumeId`**, and the **`server`** of the physical file storage that is associated with your PVC by listing the details of the PV that your PVC is bound to. Replace `<pv_name>` with the name of the PV that you retrieved in the previous step. The storage type, volume ID, and the server name are shown in the **`Labels`** section of your CLI output.
    ```
    kubectl describe pv <pv_name>
    ```
@@ -1054,7 +1054,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    </tr>
    <tr>
    <td><code>&lt;new-tier&gt;</code></td>
-   <td>For endurance stoage only. Enter the new number of IOPS per GB that you want. For valid IOPS, see [Deciding on the file storage configuration](#file_predefined_storageclass). If you do not specify the IOPS, the current IOPS is used. <p class="note">If the original IOPS/GB ratio for the volume is less than 0.25, the new IOPS/GB ratio must be less than 0.25. If the original IOPS/GB ratio for the volume is greater than or equal to 0.25, the new IOPS/GB ratio for the volume must be greater than or equal to 0.25.</p> </td>
+   <td>For endurance storage only. Enter the new number of IOPS per GB that you want. For valid IOPS, see [Deciding on the file storage configuration](#file_predefined_storageclass). If you do not specify the IOPS, the current IOPS is used. <p class="note">If the original IOPS/GB ratio for the volume is less than 0.25, the new IOPS/GB ratio must be less than 0.25. If the original IOPS/GB ratio for the volume is greater than or equal to 0.25, the new IOPS/GB ratio for the volume must be greater than or equal to 0.25.</p> </td>
    </tr>
    </tbody>
    </table>
@@ -1147,7 +1147,7 @@ To apply the latest security updates and for a better performance, use the defau
    {: pre}
 
 3. Delete the pod that uses the file storage and re-create the pod.
-   1. Save the pod yaml to your local machine.
+   1. Save the pod YAML to your local machine.
       ```
       kubect get pod <pod_name> -o yaml > <filepath/pod.yaml>
       ```

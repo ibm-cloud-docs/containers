@@ -66,8 +66,8 @@ The following table describes why you might create different types of Kubernetes
 | [`ReplicaSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | A replica set makes sure that multiple replicas of your pod are running, and reschedules a pod if the pod goes down. You might create a replica set to test how pod scheduling works, but to manage app updates, rollouts, and scaling, create a deployment instead. |
 | [`Deployment` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | A deployment is a controller that manages a pod or [replica set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) of pod templates. You can create pods or replica sets without a deployment to test app features. For a production-level setup, use deployments to manage app updates, rollouts, and scaling. |
 | [`StatefulSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | Similar to deployments, a stateful set is a controller that manages a replica set of pods. Unlike deployments, a stateful set ensures that your pod has a unique network identity that maintains its state across rescheduling. When you want to run workloads in the cloud, try to design your app to be stateless so that your service instances are independent from each other and can fail without a service interruption. However, some apps, such as databases, must be stateless. For those cases, consider to create a stateful set and use [file](/docs/containers/cs_storage_file.html#file_statefulset), [block](/docs/containers/cs_storage_block.html#block_statefulset), or [object](/docs/containers/cs_storage_cos.html#cos_statefulset) storage as the persistent storage for your stateful set. You can also install [Portworx](/docs/containers/cs_storage_portworx.html) on top of your bare metal worker nodes and use Portworx as a highly available software-defined storage solution to manage persistent storage for your stateful set. |
-| [`DaemonSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | Use a daemonset when you must run the same pod on every worker node in your cluster. Pods that are managed by a daemonset are automatically scheduled when a worker node is added to a cluster. Typical use cases include log collectors, such as `logstash` or `prometheus`, that collect logs from every worker node to provide insight into the health of a cluster or an app. |
-| [`Job` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | A job ensures that one or more pods run successfully to completion. You might use a job for queues or batch jobs to support parallel processing of separate but related work items, such as a certain number of frames to render, emails to send, and files to convert. To schedule a job to run at certain times, use a [Cron Job ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/).|
+| [`DaemonSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | Use a daemon set when you must run the same pod on every worker node in your cluster. Pods that are managed by a daemon set are automatically scheduled when a worker node is added to a cluster. Typical use cases include log collectors, such as `logstash` or `prometheus`, that collect logs from every worker node to provide insight into the health of a cluster or an app. |
+| [`Job` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | A job ensures that one or more pods run successfully to completion. You might use a job for queues or batch jobs to support parallel processing of separate but related work items, such as a certain number of frames to render, emails to send, and files to convert. To schedule a job to run at certain times, use a [`CronJob` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/).|
 {: caption="Types of Kubernetes workload objects that you can create." caption-side="top"}
 
 ### How can I add capabilities to my Kubernetes app configuration?
@@ -97,7 +97,7 @@ Both resources define key-value pairs, but you use them for different situations
 <dl>
 <dt>Configmap</dt>
 <dd>Provide non-sensitive configuration information for workloads that are specified in a deployment. You can use configmaps in three main ways.
-<ul><li><strong>Filesystem</strong>: You can mount an entire file or a set of variables to a pod. A file is created for each entry based on the key name contents of the file that are set to the value.</li>
+<ul><li><strong>File system</strong>: You can mount an entire file or a set of variables to a pod. A file is created for each entry based on the key name contents of the file that are set to the value.</li>
 <li><strong>Environment variable</strong>: Dynamically set the environment variable for a container spec.</li>
 <li><strong>Command-line argument</strong>: Set the command-line argument that is used in a container spec.</li></ul></dd>
 
@@ -142,7 +142,7 @@ If you want to dynamically add and remove apps in response to workload usage, se
 If you want to manage updates to your app, see [Managing rolling deployments](/docs/containers/cs_app.html#app_rolling).
 
 ### How can I control who has access to my app deployments?
-The account and cluster admins can control access on many different levels: the cluster, Kubernetes namespace, pod, and container.
+The account and cluster administrators can control access on many different levels: the cluster, Kubernetes namespace, pod, and container.
 {: shortdesc}
 
 With {{site.data.keyword.Bluemix_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](/docs/containers/cs_users.html#users).
@@ -186,7 +186,7 @@ Consider the following options to increase availability of your app.
   <dt>Include enough replicas for your app's workload, plus two</dt>
     <dd>To make your app even more highly available and more resilient to failure, consider including extra replicas than the minimum to handle the expected workload. Extra replicas can handle the workload in case a pod crashes and the replica set has not yet recovered the crashed pod. For protection against two simultaneous failures, include two extra replicas. This setup is an N+2 pattern, where N is the number of replicas to handle the incoming workload and +2 is an extra two replicas. As long as your cluster has enough space, you can have as many pods as you want.</dd>
   <dt>Spread pods across multiple nodes (anti-affinity)</dt>
-    <dd><p>When you create your deployment, each pod can be deployed to the same worker node. This is known as affinity, or co-location. To protect your app against worker node failure, you can configure your deployment to spread your pods across multiple worker nodes by using the <em>podAntiAffinity</em> option with your standard clusters. You can define two types of pod anti-affinity: preferred or required.
+    <dd><p>When you create your deployment, each pod can be deployed to the same worker node. This is known as affinity, or co-location. To protect your app against worker node failure, you can configure your deployment to spread your pods across multiple worker nodes by using the <code>podAntiAffinity</code> option with your standard clusters. You can define two types of pod anti-affinity: preferred or required.
       <p>For more information, see the Kubernetes documentation on <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Opens in a new tab or window)">Assigning Pods to Nodes</a>.</p>
       <p>For an example of affinity in an app deployment, see [Making your app deployment YAML file](#app_yaml).</p>
       </dd>
@@ -291,7 +291,7 @@ template:
 - containerPort: 9080</pre></code></p></dd>
 
 <dt id="resourcereq">Resource requests and limits</dt>
-  <dd><p>As a cluster admin, you can make sure that teams that share a cluster don't take up more than their fair share of compute resources (memory and CPU) by creating a [ResourceQuota object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) for each Kubernetes namespace in the cluster. If the cluster admin sets a compute resource quota, then each container within the deployment template must specify resource requests and limits for memory and CPU, otherwise the pod creation fails.</p>
+  <dd><p>As a cluster admin, you can make sure that teams that share a cluster don't take up more than their fair share of compute resources (memory and CPU) by creating a [<code>ResourceQuota</code> object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) for each Kubernetes namespace in the cluster. If the cluster admin sets a compute resource quota, then each container within the deployment template must specify resource requests and limits for memory and CPU, otherwise the pod creation fails.</p>
   <p><ol><li>Check if a resource quota is set for a namespace.<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>See what the quota limits are.<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
   <p>Even if no resource quota is set, you can include resource requests and limits in your deployment to improve the management of worker node resources.</p><p class="note">If a container exceeds its limit, the container might be restarted or fail. If a container exceeds a request, its pod might be evicted if the worker node runs out of that resource that is exceeded. For troubleshooting information, see [Pods repeatedly fail to restart or are unexpectedly removed](/docs/containers/cs_troubleshoot_clusters.html#pods_fail).</p>
@@ -326,7 +326,7 @@ readinessProbe:
 
 <dt id="service">Exposing the app service</dt>
   <dd><p>You can create a service that exposes your app. In the `spec` section, make sure to match the `port` and label values with the ones that you used in the deployment. The service exposes objects that match the label, such as `app: wasliberty` in the following example.</p>
-  <ul><li>By default, a service uses [ClusterIP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/), which makes the service accessible only within the cluster but not outside the cluster.</li>
+  <ul><li>By default, a service uses [`ClusterIP` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/), which makes the service accessible only within the cluster but not outside the cluster.</li>
   <li>You can create a NodePort, load balancer, or Ingress service to expose the app publicly. These services have two IPs, one external and one internal. When traffic is received on the external IP, it is forwarded to the internal cluster IP. Then, from the internal cluster IP, the traffic is routed to the container IP of the app.</li>
   <li>The example uses `NodePort` to expose the service outside the cluster. For information about how to set up external access, see [Choosing a NodePort, load balancer, or Ingress service](/docs/containers/cs_network_planning.html#external).</li></ul>
   <p><pre class="codeblock"><code>apiVersion: v1
@@ -772,7 +772,7 @@ To deploy apps to specific worker nodes:
 
 2. [Add an affinity rule ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) for the worker pool name to the app deployment.
 
-    Example yaml:
+    Example YAML:
 
     ```
     apiVersion: extensions/v1beta1
@@ -795,7 +795,7 @@ To deploy apps to specific worker nodes:
     ```
     {: codeblock}
 
-    In the **affinity** section of the example yaml, `workerPool` is the `key` and `<worker_pool_name>` is the `value`.
+    In the **affinity** section of the example YAML, `workerPool` is the `key` and `<worker_pool_name>` is the `value`.
 
 3. Apply the updated deployment configuration file.
     ```
@@ -1041,7 +1041,7 @@ Steps:
     {: pre}
 
     <table>
-    <caption>Command components for kubectl run</caption>
+    <caption>Command components for `kubectl run`</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command&apos;s components</th>
     </thead>
@@ -1074,7 +1074,7 @@ Steps:
     {: pre}
 
     <table>
-    <caption>Command components for kubectl autoscale</caption>
+    <caption>Command components for `kubectl autoscale`</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command&apos;s components</th>
     </thead>

@@ -405,7 +405,7 @@ The following table shows the actions that you must take after you update the Ku
 </tr>
 <tr>
 <td>`rbac.authorization.k8s.io/v1` Kubernetes API</td>
-<td>The `rbac.authorization.k8s.io/v1` Kubernetes API (supported since Kubernetes 1.8) is replacing the `rbac.authorization.k8s.io/v1alpha1` and `rbac.authorization.k8s.io/v1beta1` API. You can no longer create RBAC objects such as roles or rolebindings with the unsupported `v1alpha` API. Existing RBAC objects are converted to the `v1` API.</td>
+<td>The `rbac.authorization.k8s.io/v1` Kubernetes API (supported since Kubernetes 1.8) is replacing the `rbac.authorization.k8s.io/v1alpha1` and `rbac.authorization.k8s.io/v1beta1` API. You can no longer create RBAC objects such as roles or role bindings with the unsupported `v1alpha` API. Existing RBAC objects are converted to the `v1` API.</td>
 </tr>
 </tbody>
 </table>

@@ -88,7 +88,7 @@ To troubleshoot your load balancer service:
 
         1. Check that you defined **LoadBalancer** as the type for your service.
         2. Check that you included the `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"` annotation.
-        3. In the `spec.selector` section of the LoadBalancer service, ensure that the `<selector_key>` and `<selector_value>` is the same as the key/value pair that you used in the `spec.template.metadata.labels` section of your deployment yaml. If labels do not match, the **Endpoints** section in your LoadBalancer service displays **<none>** and your app is not accessible from the internet.
+        3. In the `spec.selector` section of the LoadBalancer service, ensure that the `<selector_key>` and `<selector_value>` is the same as the key/value pair that you used in the `spec.template.metadata.labels` section of your deployment YAML. If labels do not match, the **Endpoints** section in your LoadBalancer service displays **<none>** and your app is not accessible from the internet.
         4. Check that you used the **port** that your app listens on.
         5. Check that you set `externalTrafficPolicy` to `Local`.
 
@@ -109,7 +109,7 @@ To troubleshoot your load balancer service:
         {: screen}
 
         1. Check that you defined **LoadBalancer** as the type for your service.
-        2. In the `spec.selector` section of the LoadBalancer service, ensure that the `<selector_key>` and `<selector_value>` is the same as the key/value pair that you used in the `spec.template.metadata.labels` section of your deployment yaml. If labels do not match, the **Endpoints** section in your LoadBalancer service displays **<none>** and your app is not accessible from the internet.
+        2. In the `spec.selector` section of the LoadBalancer service, ensure that the `<selector_key>` and `<selector_value>` is the same as the key/value pair that you used in the `spec.template.metadata.labels` section of your deployment YAML. If labels do not match, the **Endpoints** section in your LoadBalancer service displays **<none>** and your app is not accessible from the internet.
         3. Check that you used the **port** that your app listens on.
 
 3.  Check your load balancer service and review the **Events** section to find potential errors.
@@ -123,7 +123,7 @@ To troubleshoot your load balancer service:
 
     <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>To use the load balancer service, you must have a standard cluster with at least two worker nodes.</li>
     <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>This error message indicates that no portable public IP addresses are left to be allocated to your load balancer service. Refer to <a href="cs_subnets.html#subnets">Adding subnets to clusters</a> to find information about how to request portable public IP addresses for your cluster. After portable public IP addresses are available to the cluster, the load balancer service is automatically created.</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>You defined a portable public IP address for your load balancer service by using the **loadBalancerIP** section, but this portable public IP address is not available in your portable public subnet. In the **loadBalancerIP** section your configuration script, remove the existing IP address and add one of the available portable public IP addresses. You can also remove the **loadBalancerIP** section from your script so that an available portable public IP address can be allocated automatically.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>You defined a portable public IP address for your load balancer service by using the **`loadBalancerIP`** section, but this portable public IP address is not available in your portable public subnet. In the **`loadBalancerIP`** section your configuration script, remove the existing IP address and add one of the available portable public IP addresses. You can also remove the **`loadBalancerIP`** section from your script so that an available portable public IP address can be allocated automatically.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>You do not have enough worker nodes to deploy a load balancer service. One reason might be that you deployed a standard cluster with more than one worker node, but the provisioning of the worker nodes failed.</li>
     <ol><li>List available worker nodes.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
     <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
@@ -301,14 +301,14 @@ To prevent the connection from closing after 60 seconds of inactivity:
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-You enabled source IP preservation for a [version 1.0 load balancer](/docs/containers/cs_loadbalancer.html#node_affinity_tolerations) or [Ingress ALB](/docs/containers/cs_ingress.html#preserve_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the backend service for your app.
+You enabled source IP preservation for a [version 1.0 load balancer](/docs/containers/cs_loadbalancer.html#node_affinity_tolerations) or [Ingress ALB](/docs/containers/cs_ingress.html#preserve_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the back-end service for your app.
 
 {: tsCauses}
 When you enable source IP preservation for load balancer or Ingress ALB services, the source IP address of the client request is preserved. The service forwards traffic to app pods on the same worker node only to ensure that the request packet's IP address isn't changed. Typically, load balancer or Ingress ALB service pods are deployed to the same worker nodes that the app pods are deployed to. However, some situations exist where the service pods and app pods might not be scheduled onto the same worker node. If you use [Kubernetes taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) on worker nodes, any pods that don't have a taint toleration are prevented from running on the tainted worker nodes. Source IP preservation might not be working based on the type of taint you used:
 
-* **Edge node taints**: You [added the `dedicated=edge` label](/docs/containers/cs_edge.html#edge_nodes) to two or more worker nodes on each public VLAN in your cluster to ensure that Ingress and load balancer pods deploy to those worker nodes only. Then, you also [tainted those edge nodes](/docs/containers/cs_edge.html#edge_workloads) to prevent any other workloads from running on edge nodes. However, you didn't add an edge node affinity rule and toleration to your app deployment. Your app pods can't be scheduled on the same tainted nodes as the service pods, and no traffic reaches the backend service for your app.
+* **Edge node taints**: You [added the `dedicated=edge` label](/docs/containers/cs_edge.html#edge_nodes) to two or more worker nodes on each public VLAN in your cluster to ensure that Ingress and load balancer pods deploy to those worker nodes only. Then, you also [tainted those edge nodes](/docs/containers/cs_edge.html#edge_workloads) to prevent any other workloads from running on edge nodes. However, you didn't add an edge node affinity rule and toleration to your app deployment. Your app pods can't be scheduled on the same tainted nodes as the service pods, and no traffic reaches the back-end service for your app.
 
-* **Custom taints**: You used custom taints on several nodes so that only app pods with that taint toleration can deploy to those nodes. You added affinity rules and tolerations to the deployments of your app and load balancer or Ingress service so that their pods deploy to only those nodes. However, `ibm-cloud-provider-ip` `keepalived` pods that are automatically created in the `ibm-system` namespace ensure that the load balancer pods and the app pods are always scheduled onto the same worker node. These `keepalived` pods don't have the tolerations for the custom taints that you used. They can't be scheduled on the same tainted nodes that your app pods are running on, and no traffic reaches the backend service for your app.
+* **Custom taints**: You used custom taints on several nodes so that only app pods with that taint toleration can deploy to those nodes. You added affinity rules and tolerations to the deployments of your app and load balancer or Ingress service so that their pods deploy to only those nodes. However, `ibm-cloud-provider-ip` `keepalived` pods that are automatically created in the `ibm-system` namespace ensure that the load balancer pods and the app pods are always scheduled onto the same worker node. These `keepalived` pods don't have the tolerations for the custom taints that you used. They can't be scheduled on the same tainted nodes that your app pods are running on, and no traffic reaches the back-end service for your app.
 
 {: tsResolve}
 Resolve the issue by choosing one of the following options:
@@ -523,7 +523,7 @@ Update the Helm chart values to reflect the worker node changes:
     ```
     {: pre}
 
-6. In some cases, you might need to change your on-prem settings and your firewall settings to match the changes you made to the VPN config file.
+6. In some cases, you might need to change your on-prem settings and your firewall settings to match the changes you made to the VPN configuration file.
 
 7. Start the VPN.
     * If the VPN connection is initiated by the cluster (`ipsec.auto` is set to `start`), start the VPN on the on-prem gateway, and then start the VPN on the cluster.
@@ -567,10 +567,10 @@ When you try to view Calico network policies in your cluster by running `calicoc
 - `Failed to get resources: Resource type 'GlobalNetworkPolicy' is not supported`
 
 {: tsCauses}
-To use Calico policies, four factors must all align: your cluster Kubernetes version, Calico CLI version, Calico config file syntax, and view policy commands. One or more of these factors is not at the correct version.
+To use Calico policies, four factors must all align: your cluster Kubernetes version, Calico CLI version, Calico configuration file syntax, and view policy commands. One or more of these factors is not at the correct version.
 
 {: tsResolve}
-When your cluster is at [Kubernetes version 1.10 or later](/docs/containers/cs_versions.html), you must use Calico CLI v3.1, `calicoctl.cfg` v3 config file syntax, and the `calicoctl get GlobalNetworkPolicy` and `calicoctl get NetworkPolicy` commands.
+When your cluster is at [Kubernetes version 1.10 or later](/docs/containers/cs_versions.html), you must use Calico CLI v3.1, `calicoctl.cfg` v3 configuration file syntax, and the `calicoctl get GlobalNetworkPolicy` and `calicoctl get NetworkPolicy` commands.
 
 To ensure that all Calico factors align:
 

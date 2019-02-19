@@ -76,7 +76,7 @@ Review the following reasons why your cluster logs are not appearing and the cor
       <li>To refresh the logging token after permissions are changed, run <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
-      <td>You have an application logging config with a symlink in your app path.</td>
+      <td>You have an application logging configuration with a symlink in your app path.</td>
       <td><p>In order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink.</p> <p>Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></td>
     </tr>
   </tbody>
@@ -127,7 +127,7 @@ When you access the Kubernetes dashboard, utilization graphs do not display.
 Sometimes after a cluster update or worker node reboot the `kube-dashboard` pod does not update.
 
 {: tsResolve}
-Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access heapster for utilization information.
+Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access `heapster` for utilization information.
 
   ```
   kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
@@ -190,7 +190,7 @@ You set up a logging configuration in your cluster to forward logs to {{site.dat
 A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to {{site.data.keyword.loganalysisshort_notm}}.
 
 {: tsResolve}
-To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [EnhancedPatternLayout ![External link icon](../icons/launch-glyph.svg "External link icon")](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html) to limit the `stack_trace` to 15KB.
+To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [`EnhancedPatternLayout` ![External link icon](../icons/launch-glyph.svg "External link icon")](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html) to limit the `stack_trace` to 15KB.
 
 ## Getting help and support
 {: #health_getting_help}

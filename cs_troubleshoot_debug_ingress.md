@@ -313,7 +313,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
         ```
         {: pre}
 
-        Example output that confirms the ALB pod is configured with the correct health check hostname, `albhealth.<domain>`:
+        Example output that confirms the ALB pod is configured with the correct health check host name, `albhealth.<domain>`:
         ```
         server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud;
         ```

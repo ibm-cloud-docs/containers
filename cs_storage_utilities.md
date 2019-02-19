@@ -427,7 +427,7 @@ Use this option if you want to add different block storage configurations, add b
    ```
    {: pre}
 
-4. Verify that the block storage device is created and note the **id** of the volume. **Note:** If you do not see your block storage device right away, wait a few minutes. Then, run this command again.
+4. Verify that the block storage device is created and note the **`id`** of the volume. **Note:** If you do not see your block storage device right away, wait a few minutes. Then, run this command again.
    ```
    ibmcloud sl block volume-list
    ```
@@ -440,7 +440,7 @@ Use this option if you want to add different block storage configurations, add b
    ```
    {: screen}
 
-5. Review the details for your volume and note the **Target IP** and **LUN Id**.
+5. Review the details for your volume and note the **`Target IP`** and **`LUN Id`**.
    ```
    ibmcloud sl block volume-detail <volume_ID>
    ```
@@ -475,7 +475,7 @@ Use this option if you want to add different block storage configurations, add b
    ```
    {: screen}
 
-7. Verify that your non-SDS worker node is successfully authorized and note the **host_iqn**, **username**, and **password**.
+7. Verify that your non-SDS worker node is successfully authorized and note the **`host_iqn`**, **`username`**, and **`password`**.
    ```
    ibmcloud sl block access-list <volume_ID>
    ```
@@ -488,7 +488,7 @@ Use this option if you want to add different block storage configurations, add b
    ```
    {: screen}
 
-   The authorization is successful when the **host_iqn**, **username**, and **password** are assigned.
+   The authorization is successful when the **`host_iqn`**, **`username`**, and **`password`** are assigned.
 
 8. [Attach the block storage devices to your worker nodes](#attach_block).
 

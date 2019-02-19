@@ -92,7 +92,7 @@ To install the CLIs:
         - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.11.7/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.11.7/bin/linux/amd64/kubectl)
         - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.11.7/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.11.7/bin/windows/amd64/kubectl.exe)
 
-    2.  **For OSX and Linux**: Complete the following steps.
+    2.  **For OS X and Linux**: Complete the following steps.
         1.  Move the executable file to the `/usr/local/bin` directory.
 
             ```
@@ -121,7 +121,7 @@ To install the CLIs:
             ```
             {: pre}
 
-    3.  **For Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some filepath changes when you run commands later.
+    3.  **For Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some file path changes when you run commands later.
 
 5.  To manage a private image repository, install the {{site.data.keyword.registryshort_notm}} plug-in. Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster. The prefix for running registry commands is `ibmcloud cr`.
 
@@ -436,10 +436,10 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 </table>
 
 1.  Create your {{site.data.keyword.Bluemix_notm}} IAM access token. The body information that is included in your request varies based on the {{site.data.keyword.Bluemix_notm}} authentication method that you use. Replace the following values:
-  - _&lt;username&gt;_: Your {{site.data.keyword.Bluemix_notm}} user name.
-  - _&lt;password&gt;_: Your {{site.data.keyword.Bluemix_notm}} password.
-  - _&lt;api_key&gt;_: Your {{site.data.keyword.Bluemix_notm}} API key.
-  - _&lt;passcode&gt;_: Your {{site.data.keyword.Bluemix_notm}} one-time passcode. Run `ibmcloud login --sso` and follow the instructions in your CLI output to retrieve your one-time passcode by using your web browser.
+  - _`<username>`_: Your {{site.data.keyword.Bluemix_notm}} user name.
+  - _`<password>`_: Your {{site.data.keyword.Bluemix_notm}} password.
+  - _`<api_key>`: Your {{site.data.keyword.Bluemix_notm}} API key.
+  - _`<passcode>`_: Your {{site.data.keyword.Bluemix_notm}} one-time passcode. Run `ibmcloud login --sso` and follow the instructions in your CLI output to retrieve your one-time passcode by using your web browser.
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
@@ -463,7 +463,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     <tbody>
     <tr>
     <td>Header</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the username <strong>bx</strong> and the password <strong>bx</strong>.</p></li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</p></li></ul>
     </td>
     </tr>
     <tr>
@@ -513,7 +513,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: screen}
 
-    You can find the {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token** field of your API ouput. Note the {{site.data.keyword.Bluemix_notm}} IAM token to retrieve additional header information in the next steps.
+    You can find the {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token** field of your API output. Note the {{site.data.keyword.Bluemix_notm}} IAM token to retrieve additional header information in the next steps.
 
 2.  Retrieve the ID of the {{site.data.keyword.Bluemix_notm}} account where the cluster was created. Replace _&lt;iam_token&gt;_ with the {{site.data.keyword.Bluemix_notm}} IAM token that you retrieved in the previous step.
 
@@ -587,7 +587,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     <tbody>
     <tr>
     <td>Header</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the username <strong>bx</strong> and the password <strong>bx</strong>.</p></li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</p></li></ul>
     </td>
     </tr>
     <tr>
@@ -702,7 +702,7 @@ Use the following steps if you want to create an {{site.data.keyword.Bluemix_not
     <tr>
     <td>Header</td>
     <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
-      <li>Authorization: Basic Yng6Yng=</br></br><strong>Note:</strong> <code>Yng6Yng=</code> equals the URL-encoded authorization for the username <strong>bx</strong> and the password <strong>bx</strong>.</li></ul></td>
+      <li>Authorization: Basic Yng6Yng=</br></br><strong>Note:</strong> <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</li></ul></td>
     </tr>
     <tr>
     <td>Body when using the refresh token</td>

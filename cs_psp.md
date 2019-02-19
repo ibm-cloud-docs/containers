@@ -43,7 +43,7 @@ Trying to control which users have access to the {{site.data.keyword.containerlo
 **Are any policies set by default? What can I add?**</br>
 By default, {{site.data.keyword.containerlong_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you cannot delete or modify. You also cannot disable the admission controller.
 
-Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all admins, users, services, and nodes to create privileged and unprivileged pods. Additional RBAC resources are included for portability with {{site.data.keyword.Bluemix_notm}} Private packages that are used for [hybrid deployments](/docs/containers/cs_hybrid.html#hybrid_iks_icp).
+Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all administrators, users, services, and nodes to create privileged and unprivileged pods. Additional RBAC resources are included for portability with {{site.data.keyword.Bluemix_notm}} Private packages that are used for [hybrid deployments](/docs/containers/cs_hybrid.html#hybrid_iks_icp).
 
 If you want to prevent certain users from creating or updating pods, you can [modify these RBAC resources or create your own](#customize_psp).
 
@@ -72,7 +72,7 @@ policies allow the users to create and update privileged and unprivileged (restr
 | `restricted-psp-user` | cluster-wide | `ClusterRoleBinding` | Enables cluster administrators, authenticated users, service accounts, and nodes to use `ibm-restricted-psp` pod security policy. |
 {: caption="Default RBAC resources that you can modify" caption-side="top"}
 
-You can modify these RBAC roles to remove or add admins, users, services, or nodes to the policy.
+You can modify these RBAC roles to remove or add administrators, users, services, or nodes to the policy.
 
 Before you begin:
 *  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
@@ -205,7 +205,7 @@ The default `PodSecurityPolicy` resources refer to the pod security policies tha
 |---|---|---|---|
 | `ibm-anyuid-hostaccess-psp` | cluster-wide | `PodSecurityPolicy` | Policy for full host access pod creation. |
 | `ibm-anyuid-hostaccess-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-hostaccess-psp` pod security policy. |
-| `ibm-anyuid-hostpath-psp` | cluster-wide | `PodSecurityPolicy` | Policy for hostpath access pod creation. |
+| `ibm-anyuid-hostpath-psp` | cluster-wide | `PodSecurityPolicy` | Policy for host path access pod creation. |
 | `ibm-anyuid-hostpath-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-hostpath-psp` pod security policy. |
 | `ibm-anyuid-psp` | cluster-wide | `PodSecurityPolicy` | Policy for any UID/GID executable pod creation. |
 | `ibm-anyuid-psp-user` | cluster-wide | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-psp` pod security policy. |

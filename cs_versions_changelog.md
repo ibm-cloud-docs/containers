@@ -1365,7 +1365,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>Removed dependencies of runtime components on the primary disk. This enhancement prevents worker nodes from failing when the primary disk is filled up.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -2108,7 +2108,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers/cs_cli_reference.html#cs_worker_update) or [reload](/docs/containers/cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -2838,7 +2838,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers/cs_cli_reference.html#cs_worker_update) or [reload](/docs/containers/cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -3087,7 +3087,7 @@ The following table shows the changes that are included in patch 1.9.8_1515.
 <td>Kubernetes Configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added PodSecurityPolicy to the --admission-control option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers/cs_psp.html).</td>
+<td>Added `PodSecurityPolicy` to the `--admission-control` option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers/cs_psp.html).</td>
 </tr>
 <tr>
 <td>IBM Cloud Provider</td>
@@ -3268,7 +3268,7 @@ Review the following changes.
 <td>Root passwords for the worker nodes expire after 90 days for compliance reasons. If your automation tooling needs to log in to the worker node as root or relies on cron jobs that run as root, you can disable the password expiration by logging into the worker node and running `chage -M -1 root`. **Note**: If you have security compliance requirements that prevent running as root or removing password expiration, do not disable the expiration. Instead, you can [update](/docs/containers/cs_cli_reference.html#cs_worker_update) or [reload](/docs/containers/cs_cli_reference.html#cs_worker_reload) your worker nodes at least every 90 days.</td>
 </tr>
 <tr>
-<td>Systemd</td>
+<td>systemd</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Periodically clean transient mount units to prevent them from becoming unbounded. This action addresses [Kubernetes issue 57345 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/57345).</td>
@@ -3446,7 +3446,7 @@ Review the following changes.
 <td>Kubernetes Configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added PodSecurityPolicy to the --admission-control option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers/cs_psp.html).</td>
+<td>Added `PodSecurityPolicy` to the `--admission-control` option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](/docs/containers/cs_psp.html).</td>
 </tr>
 <tr>
 <td>IBM Cloud Provider</td>

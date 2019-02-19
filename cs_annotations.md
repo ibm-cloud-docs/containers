@@ -105,7 +105,7 @@ Before you use annotations, make sure you have properly set up your Ingress serv
   <td>Always route incoming network traffic to the same upstream server by using a sticky cookie.</td>
   </tr>
   <tr>
-  <td><a href="#upstream-fail-timeout">Upstream failtimeout</a></td>
+  <td><a href="#upstream-fail-timeout">Upstream fail timeout</a></td>
   <td><code>upstream-fail-timeout</code></td>
   <td>Set the amount of time during which the ALB can attempt to connect to the server before the server is considered unavailable.</td>
   </tr>
@@ -115,7 +115,7 @@ Before you use annotations, make sure you have properly set up your Ingress serv
   <td>Set the maximum number of idle keepalive connections for an upstream server.</td>
   </tr>
   <tr>
-  <td><a href="#upstream-max-fails">Upstream maxfails</a></td>
+  <td><a href="#upstream-max-fails">Upstream max fails</a></td>
   <td><code>upstream-max-fails</code></td>
   <td>Set the maximum number of unsuccessful attempts to communicate with the server before the server is considered unavailable.</td>
   </tr>
@@ -1032,7 +1032,7 @@ spec:
 <br />
 
 
-### Upstream failtimeout (upstream-fail-timeout)
+### Upstream fail timeout (upstream-fail-timeout)
 {: #upstream-fail-timeout}
 
 Set the amount of time during which the ALB can attempt to connect to the server.
@@ -1147,7 +1147,7 @@ spec:
 <br />
 
 
-### Upstream maxfails (upstream-max-fails)
+### Upstream max fails (upstream-max-fails)
 {: #upstream-max-fails}
 
 Set the maximum number of unsuccessful attempts to communicate with the server.
@@ -1224,7 +1224,7 @@ Authenticate web or API HTTP/HTTPS requests with {{site.data.keyword.appid_short
 
 <p>If you set the request type to <code>api</code>, an API request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If the request does not contain an access token, a <code>401: Unauthorized</code> error message is returned to the user.</p>
 
-<p class="note">For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports backends with TLS/SSL enabled.</p>
+<p class="note">For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports back ends with TLS/SSL enabled.</p>
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -1459,7 +1459,7 @@ spec:
 <br />
 
 
-### HTTP Strict Transport Security (hsts)
+### HTTP Strict Transport Security (HSTS)
 {: #hsts}
 
 <dl>
@@ -2259,7 +2259,7 @@ Configure the number and size of proxy buffers for the ALB.
 <dt>Description</dt>
 <dd>
 Set the number and size of the buffers that read a response for a single connection from the proxied server. The configuration is applied to all of the services in the Ingress host unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE number=2 size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>number=2 size=1k</code> is specified, 1k is applied to all of the services in the Ingress host.</br>
-<p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your backend sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffers</code> and [<code>proxy-buffer-size</code>](#proxy-buffer-size).</p>
+<p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your back end sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffers</code> and [<code>proxy-buffer-size</code>](#proxy-buffer-size).</p>
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -2319,7 +2319,7 @@ Configure the size of the proxy buffer that reads the first part of the response
 <dt>Description</dt>
 <dd>
 Set the size of the buffer that reads the first part of the response that is received from the proxied server. This part of the response usually contains a small response header. The configuration is applied to all of the services in the Ingress host unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>size=1k</code> is specified, 1k is applied to all of the services in the Ingress host.
-<p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your backend sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffer-size</code> and [<code>proxy-buffers</code>](#proxy-buffers).</p>
+<p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your back end sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffer-size</code> and [<code>proxy-buffers</code>](#proxy-buffers).</p>
 </dd>
 
 
@@ -2728,7 +2728,7 @@ Limit the request processing rate and number of connections per a defined key fo
 <dl>
 <dt>Description</dt>
 <dd>
-For all services, limit the request processing rate and the number of connections per a defined key that are coming from a single IP address for all paths of the selected backends.
+For all services, limit the request processing rate and the number of connections per a defined key that are coming from a single IP address for all paths of the selected back ends.
 </dd>
 
 
@@ -2791,7 +2791,7 @@ Limit the request processing rate and the number of connections for specific ser
 
 <dl>
 <dt>Description</dt>
-<dd>For specific services, limit the request processing rate and the number of connections per a defined key that are coming from a single IP address for all paths of the selected backends.
+<dd>For specific services, limit the request processing rate and the number of connections per a defined key that are coming from a single IP address for all paths of the selected back ends.
 </dd>
 
 

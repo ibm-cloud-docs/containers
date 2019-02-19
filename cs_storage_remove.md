@@ -53,7 +53,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 To clean up persistent data:
 
-1.  List the PVCs in your cluster and note the **NAME** of the PVC, the **STORAGECLASS**, and the name of the PV that is bound to the PVC and shown as **VOLUME**.
+1.  List the PVCs in your cluster and note the **`NAME`** of the PVC, the **`STORAGECLASS`**, and the name of the PV that is bound to the PVC and shown as **`VOLUME`**.
     ```
     kubectl get pvc
     ```
@@ -68,7 +68,7 @@ To clean up persistent data:
     ```
     {: screen}
 
-2. Review the **ReclaimPolicy** and **billingType** for the storage class.
+2. Review the **`ReclaimPolicy`** and **`billingType`** for the storage class.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
@@ -112,7 +112,7 @@ To clean up persistent data:
    ```
    {: pre}
 
-5. Review the status of your PV. Use the name of the PV that you retrieved ealier as **VOLUME**.
+5. Review the status of your PV. Use the name of the PV that you retrieved earlier as **`VOLUME`**.
    ```
    kubectl get pv <pv_name>
    ```
@@ -132,7 +132,7 @@ To clean up persistent data:
    ```
    {: pre}
 
-8. {: #sl_delete_storage}List the physical storage instance that your PV pointed to and note the **id** of the physical storage instance.
+8. {: #sl_delete_storage}List the physical storage instance that your PV pointed to and note the **`id`** of the physical storage instance.
 
    **File storage:**
    ```

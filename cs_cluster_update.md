@@ -255,7 +255,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
    ```
    {: pre}
 
-9. Verify that you do not have duplicate worker nodes. In some cases, older clusters might list duplicate worker nodes with a **NotReady** status after an update. To remove duplicates, see [troubleshooting](/docs/containers/cs_troubleshoot_clusters.html#cs_duplicate_nodes).
+9. Verify that you do not have duplicate worker nodes. In some cases, older clusters might list duplicate worker nodes with a **`NotReady`** status after an update. To remove duplicates, see [troubleshooting](/docs/containers/cs_troubleshoot_clusters.html#cs_duplicate_nodes).
 
 Next steps:
 -   Repeat the update process with other worker pools.
@@ -637,7 +637,7 @@ To update stand-alone worker nodes to worker pools:
       kubectl get nodes
       ```
       {: pre}
-      Your worker node is disabled for pod scheduling if the status displays **SchedulingDisabled**.
+      Your worker node is disabled for pod scheduling if the status displays **`SchedulingDisabled`**.
    4. Force pods to be removed from your stand-alone worker node and rescheduled onto remaining uncordoned stand-alone worker nodes and worker nodes from your worker pool.
       ```
       kubectl drain <worker_name> --ignore-daemonsets

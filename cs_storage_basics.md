@@ -88,7 +88,7 @@ If you have an existing persistent storage device in your IBM Cloud infrastructu
 
 **How does it work?**</br>
 
-Static provisioning is a feature that is native to Kubernetes and that allows cluster admins to make existing storage devices available to a cluster. As a cluster admin, you must know the details of the storage device, its supported configurations, and mount options.  
+Static provisioning is a feature that is native to Kubernetes and that allows cluster administrators to make existing storage devices available to a cluster. As a cluster administrator, you must know the details of the storage device, its supported configurations, and mount options.  
 
 To make existing storage available to a cluster user, you must manually create the storage device, a PV, and a PVC.  
 

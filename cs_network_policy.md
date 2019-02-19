@@ -56,7 +56,7 @@ To use Ingress and load balancer services, use Calico and Kubernetes policies to
 ## Default Calico and Kubernetes network policies
 {: #default_policy}
 
-When a cluster with a public VLAN is created, a HostEndpoint resource with the `ibm.role: worker_public` label is created automatically for each worker node and its public network interface. To protect the public network interface of a worker node, default Calico policies are applied to any host endpoint with the `ibm.role: worker_public` label.
+When a cluster with a public VLAN is created, a `HostEndpoint` resource with the `ibm.role: worker_public` label is created automatically for each worker node and its public network interface. To protect the public network interface of a worker node, default Calico policies are applied to any host endpoint with the `ibm.role: worker_public` label.
 {:shortdesc}
 
 These default Calico policies allow all outbound network traffic and allow inbound traffic to specific cluster components, such as Kubernetes NodePort, LoadBalancer, and Ingress services. Any other inbound network traffic from the internet to your worker nodes that isn't specified in the default policies is blocked. The default policies don't affect pod to pod traffic.
@@ -130,7 +130,7 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
   ```
   {: pre}
 
-3. For OSX and Linux users, complete the following steps.
+3. For OS X and Linux users, complete the following steps.
     1. Create the `/etc/calico` directory.
         ```
         sudo mkdir /etc/calico
@@ -145,10 +145,10 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
 
 4. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v3.3.1).
 
-    If you are using OSX, download the `-darwin-amd64` version. If you are using Windows, install the Calico CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some filepath changes when you run commands later. Make sure to save the file as `calicoctl.exe`.
+    If you are using OS X, download the `-darwin-amd64` version. If you are using Windows, install the Calico CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some file path changes when you run commands later. Make sure to save the file as `calicoctl.exe`.
     {: tip}
 
-5. For OSX and Linux users, complete the following steps.
+5. For OS X and Linux users, complete the following steps.
     1. Move the executable file to the _/usr/local/bin_ directory.
         - Linux:
 
@@ -182,7 +182,7 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
       ```
       {: pre}
 
-    - Windows: Use the `--config` flag to point to the network config file that you got in step 1. Include this flag each time you run a `calicoctl` command.
+    - Windows: Use the `--config` flag to point to the network configuration file that you got in step 1. Include this flag each time you run a `calicoctl` command.
 
       ```
       calicoctl get nodes --config=filepath/calicoctl.cfg
@@ -528,13 +528,13 @@ For more information about how Kubernetes network policies control pod-to-pod tr
 
 The following scenario demonstrates how to manage traffic between app microservices within one namespace.
 
-An Accounts team deploys multiple app services in one namespace, but they need isolation to permit only necessary communication between the microservices over the public network. For the app Srv1, the team has frontend, backend, and database services. They label each service with the `app: Srv1` label and the `tier: frontend`, `tier: backend`, or `tier: db` label.
+An Accounts team deploys multiple app services in one namespace, but they need isolation to permit only necessary communication between the microservices over the public network. For the app Srv1, the team has front end, back end, and database services. They label each service with the `app: Srv1` label and the `tier: frontend`, `tier: backend`, or `tier: db` label.
 
 <img src="images/cs_network_policy_single_ns.png" width="200" alt="Use a network policy to manage cross-namespace traffic." style="width:200px; border-style: none"/>
 
-The Accounts team wants to allow traffic from the frontend to the backend, and from the backend to the database. They use labels in their network policies to designate which traffic flows are permitted between microservices.
+The Accounts team wants to allow traffic from the front end to the back end, and from the back end to the database. They use labels in their network policies to designate which traffic flows are permitted between microservices.
 
-First, they create a Kubernetes network policy that allows traffic from the frontend to the backend:
+First, they create a Kubernetes network policy that allows traffic from the front end to the back end:
 
 ```
 kind: NetworkPolicy
@@ -555,9 +555,9 @@ spec:
 ```
 {: codeblock}
 
-The `spec.podSelector.matchLabels` section lists the labels for the Srv1 backend service so that the policy applies only _to_ those pods. The `spec.ingress.from.podSelector.matchLabels` section lists the labels for the Srv1 frontend service so that ingress is permitted only _from_ those pods.
+The `spec.podSelector.matchLabels` section lists the labels for the Srv1 back-end service so that the policy applies only _to_ those pods. The `spec.ingress.from.podSelector.matchLabels` section lists the labels for the Srv1 front-end service so that ingress is permitted only _from_ those pods.
 
-Then, they create a similar Kubernetes network policy that allows traffic from the backend to the database:
+Then, they create a similar Kubernetes network policy that allows traffic from the back end to the database:
 
 ```
 kind: NetworkPolicy
@@ -578,20 +578,20 @@ spec:
   ```
   {: codeblock}
 
-The `spec.podSelector.matchLabels` section lists the labels for the Srv1 database service so that the policy applies only _to_ those pods. The `spec.ingress.from.podSelector.matchLabels` section lists the labels for the Srv1 backend service so that ingress is permitted only _from_ those pods.
+The `spec.podSelector.matchLabels` section lists the labels for the Srv1 database service so that the policy applies only _to_ those pods. The `spec.ingress.from.podSelector.matchLabels` section lists the labels for the Srv1 back-end service so that ingress is permitted only _from_ those pods.
 
-Traffic can now flow from the frontend to the backend, and from the backend to the database. The database can respond to the backend, and the backend can respond to the frontend, but no reverse traffic connections can be established.
+Traffic can now flow from the front end to the back end, and from the back end to the database. The database can respond to the back end, and the back end can respond to the front end, but no reverse traffic connections can be established.
 
 ### Isolate app services between namespaces
 {: #services_across_ns}
 
 The following scenario demonstrates how to manage traffic between app microservices across multiple namespaces.
 
-Services owned by different subteams need to communicate, but the services are deployed in different namespaces within the same cluster. The Accounts team deploys frontend, backend, and database services for the app Srv1 in the accounts namespace. The Finance team deploys frontend, backend, and database services for the app Srv2 in the finance namespace. Both teams label each service with the `app: Srv1` or `app: Srv2` label and the `tier: frontend`, `tier: backend`, or `tier: db` label. They also label the namespaces with the `usage: accounts` or `usage: finance` label.
+Services owned by different subteams need to communicate, but the services are deployed in different namespaces within the same cluster. The Accounts team deploys front end, backe nd, and database services for the app Srv1 in the accounts namespace. The Finance team deploys front end, back end, and database services for the app Srv2 in the finance namespace. Both teams label each service with the `app: Srv1` or `app: Srv2` label and the `tier: frontend`, `tier: backend`, or `tier: db` label. They also label the namespaces with the `usage: accounts` or `usage: finance` label.
 
 <img src="images/cs_network_policy_multi_ns.png" width="475" alt="Use a network policy to manage cross-namepsace traffic." style="width:475px; border-style: none"/>
 
-The Finance team's Srv2 needs to call information from the Accounts team's Srv1 backend. So the Accounts team creates a Kubernetes network policy that uses labels to allow all traffic from the finance namespace to the Srv1 backend in the accounts namespace. The team also specifies the port 3111 to isolate access through that port only.
+The Finance team's Srv2 needs to call information from the Accounts team's Srv1 back end. So the Accounts team creates a Kubernetes network policy that uses labels to allow all traffic from the finance namespace to the Srv1 back end in the accounts namespace. The team also specifies the port 3111 to isolate access through that port only.
 
 ```
 kind: NetworkPolicy
@@ -614,9 +614,9 @@ spec:
 ```
 {: codeblock}
 
-The `spec.podSelector.matchLabels` section lists the labels for the Srv1 backend service so that the policy applies only _to_ those pods. The `spec.ingress.from.NamespaceSelector.matchLabels` section lists the label for the finance namespace so that ingress is permitted only _from_ services in that namespace.
+The `spec.podSelector.matchLabels` section lists the labels for the Srv1 back-end service so that the policy applies only _to_ those pods. The `spec.ingress.from.NamespaceSelector.matchLabels` section lists the label for the finance namespace so that ingress is permitted only _from_ services in that namespace.
 
-Traffic can now flow from finance microservices to the accounts Srv1 backend. The accounts Srv1 backend can respond to finance microservices, but can't establish a reverse traffic connection.
+Traffic can now flow from finance microservices to the accounts Srv1 back end. The accounts Srv1 back end can respond to finance microservices, but can't establish a reverse traffic connection.
 
 In this example, all traffic from all microservices in the finance namespace is permitted. You can't allow traffic from specific app pods in another namespace because `podSelector` and `namespaceSelector` can't be combined.
 
@@ -662,7 +662,7 @@ To create a Calico policy to log denied traffic:
         kubectl apply -f <policy_name>.yaml
         ```
         {: pre}
-        The Kubernetes policy is automatically converted to a Calico NetworkPolicy so that Calico can apply it as Iptables rules.
+        The Kubernetes policy is automatically converted to a Calico `NetworkPolicy` so that Calico can apply it as Iptables rules.
 
     * To apply a Calico policy:
         ```
@@ -695,7 +695,7 @@ To create a Calico policy to log denied traffic:
     ```
     {: screen}
 
-4. To log all the traffic that is denied by the Calico policy that you created earlier, create a Calico NetworkPolicy named `log-denied-packets`. For example, use the following policy to log all packets that were denied by the network policy that you defined in step 1. The log policy uses the same pod selector as the example `access-nginx` policy, which adds this policy to the Calico Iptables rule chain. By using a higher order number, such as `3000`, you can ensure that this rule is added to the end of the Iptables rule chain. Any request packet from the "run=access" pod that matches the `access-nginx` policy rule is accepted by the "run=nginx" pods.  However, when packets from any other source try to match the low-order `access-nginx` policy rule, they are denied. Those packets then try to match the high-order `log-denied-packets` policy rule. `log-denied-packets` logs any packets that arrive to it, so only packets that were denied by the "run=nginx" pods are logged. After the packets' attempts are logged, the packets are dropped.
+4. To log all the traffic that is denied by the Calico policy that you created earlier, create a Calico `NetworkPolicy` named `log-denied-packets`. For example, use the following policy to log all packets that were denied by the network policy that you defined in step 1. The log policy uses the same pod selector as the example `access-nginx` policy, which adds this policy to the Calico Iptables rule chain. By using a higher order number, such as `3000`, you can ensure that this rule is added to the end of the Iptables rule chain. Any request packet from the "run=access" pod that matches the `access-nginx` policy rule is accepted by the "run=nginx" pods.  However, when packets from any other source try to match the low-order `access-nginx` policy rule, they are denied. Those packets then try to match the high-order `log-denied-packets` policy rule. `log-denied-packets` logs any packets that arrive to it, so only packets that were denied by the "run=nginx" pods are logged. After the packets' attempts are logged, the packets are dropped.
     ```
     apiVersion: projectcalico.org/v3
     kind: NetworkPolicy

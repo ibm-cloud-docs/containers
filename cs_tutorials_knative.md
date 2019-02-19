@@ -58,7 +58,7 @@ Sounds good? Follow this tutorial to get started with Knative in {{site.data.key
 ## Audience
 {: #knative_audience}
 
-This tutorial is designed for developers who are interested in learning how to use Knative to deploy a serverless app in a Kubernetes cluster, and for cluster admins who want to learn how to set up Knative in a cluster.
+This tutorial is designed for developers who are interested in learning how to use Knative to deploy a serverless app in a Kubernetes cluster, and for cluster administrators who want to learn how to set up Knative in a cluster.
 
 ## Prerequisites
 {: #knative_prerequisites}

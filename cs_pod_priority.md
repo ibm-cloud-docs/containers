@@ -29,7 +29,7 @@ With Kubernetes pod priority and preemption, you can configure priority classes 
 {: shortdesc}
 
 **Why do I set pod priority?**</br>
-As a cluster adminstrator, you want to control which pods are more critical to your cluster workload. Priority classes can help you control the Kubernetes scheduler decisions to favor higher priority pods over lower priority pods. The scheduler can even preempt (remove) lower priority pods that are running so that pending higher priority pods can be scheduled.
+As a cluster administrator, you want to control which pods are more critical to your cluster workload. Priority classes can help you control the Kubernetes scheduler decisions to favor higher priority pods over lower priority pods. The scheduler can even preempt (remove) lower priority pods that are running so that pending higher priority pods can be scheduled.
 
 By setting pod priority, you can help prevent lower priority workloads from impacting critical workloads in your cluster, especially in cases where the cluster starts to reach its resource capacity.
 

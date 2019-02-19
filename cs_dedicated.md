@@ -110,7 +110,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
 Each worker node is set up with separate compute resources, networking, and volume service.
 {:shortdesc}
 
-Built-in security features provide isolation, resource management capabilities, and worker node security compliance. The worker node communicates with the master by using secure TLS certificates and openVPN connection.
+Built-in security features provide isolation, resource management capabilities, and worker node security compliance. The worker node communicates with the master by using secure TLS certificates and OpenVPN connection.
 
 
 *Kubernetes architecture and networking in the {{site.data.keyword.Bluemix_dedicated_notm}}*

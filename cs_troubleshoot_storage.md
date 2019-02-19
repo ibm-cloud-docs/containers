@@ -303,7 +303,7 @@ After you [add non-root user access to persistent storage](#nonroot) or deploy a
 The deployment or Helm chart configuration specifies the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for the pod's `fsGroup` (group ID) and `runAsUser` (user ID). Currently, {{site.data.keyword.containerlong_notm}} does not support the `fsGroup` specification, and supports only `runAsUser` set as `0` (root permissions).
 
 {: tsResolve}
-Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser` from the image, deployment, or Helm chart configuration file and redeploy. If you need to change the ownership of the mount path from `nobody`, [add non-root user access](#nonroot). After you add the [non-root initContainer](#nonroot), set `runAsUser` at the container level, not the pod level.
+Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser` from the image, deployment, or Helm chart configuration file and redeploy. If you need to change the ownership of the mount path from `nobody`, [add non-root user access](#nonroot). After you add the [non-root `initContainer`](#nonroot), set `runAsUser` at the container level, not the pod level.
 
 <br />
 
@@ -384,13 +384,13 @@ Update the file system in the existing PV from `ext4` to `XFS`.
    ```
    {: pre}
 
-2. Save the PV yaml on your local machine.
+2. Save the PV YAML on your local machine.
    ```
    kubectl get pv <pv_name> -o yaml > <filepath/xfs_pv.yaml>
    ```
    {: pre}
 
-3. Open the yaml file and change the `fsType` from `ext4` to `xfs`.
+3. Open the YAML file and change the `fsType` from `ext4` to `xfs`.
 4. Replace the PV in your cluster.
    ```
    kubectl replace --force -f <filepath/xfs_pv.yaml>

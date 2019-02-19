@@ -80,7 +80,7 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"request_method": "$request_method"</code></td>
-<td>The method of the request call to the backend app, such as <code>GET</code> or <code>POST</code>.</td>
+<td>The method of the request call to the back-end app, such as <code>GET</code> or <code>POST</code>.</td>
 </tr>
 <tr>
 <td><code>"request_uri": "$uri"</code></td>
@@ -107,7 +107,7 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"upstream_status": $upstream_status</code></td>
-<td>The status code of the response obtained from the upstream server for the backend app, such as standard HTTP response codes. Status codes of several responses are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable. If the ALB can't select a server, the 502 (Bad Gateway) status code is logged.</td>
+<td>The status code of the response obtained from the upstream server for the back-end app, such as standard HTTP response codes. Status codes of several responses are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable. If the ALB can't select a server, the 502 (Bad Gateway) status code is logged.</td>
 </tr>
 <tr>
 <td><code>"request_time": $request_time</code></td>
@@ -115,15 +115,15 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"upstream_response_time": $upstream_response_time</code></td>
-<td>The time that it takes the ALB to receive the response from the upstream server for the backend app, measured in seconds with a milliseconds resolution. Times of several responses are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
+<td>The time that it takes the ALB to receive the response from the upstream server for the back-end app, measured in seconds with a milliseconds resolution. Times of several responses are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
 </tr>
 <tr>
 <td><code>"upstream_connect_time": $upstream_connect_time</code></td>
-<td>The time that it takes the ALB to establish a connection with the upstream server for the backend app, measured in seconds with a milliseconds resolution. If TLS/SSL is enabled in your Ingress resource configuration, this time includes time spent on the handshake. Times of several connections are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
+<td>The time that it takes the ALB to establish a connection with the upstream server for the back-end app, measured in seconds with a milliseconds resolution. If TLS/SSL is enabled in your Ingress resource configuration, this time includes time spent on the handshake. Times of several connections are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
 </tr>
 <tr>
 <td><code>"upstream_header_time": $upstream_header_time</code></td>
-<td>The time that it takes the ALB to receive the response header from the upstream server for the backend app, measured in seconds with a milliseconds resolution. Times of several connections are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
+<td>The time that it takes the ALB to receive the response header from the upstream server for the back-end app, measured in seconds with a milliseconds resolution. Times of several connections are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
 </tr>
 </tbody></table>
 
@@ -286,7 +286,7 @@ To install the metrics exporter and Prometheus agent for an ALB in your cluster:
     ```
     {: pre}
 
-5. Install the `ibmcloud-alb-metrics-exporter/subcharts/prometheus` sub-chart to your cluster. This sub-chart deploys a Prometheus agent to collect and display ALB metrics on the Prometheus dashboard. Replace <ingress_subdomain> with the Ingress subdomain for your cluster. The URL for the Prometheus dashboard is a combination of the `prom-dash` subdomain and your Ingress usbdomain, for example `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. To find the Ingress subdomain for your cluster, run <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>.
+5. Install the `ibmcloud-alb-metrics-exporter/subcharts/prometheus` sub-chart to your cluster. This sub-chart deploys a Prometheus agent to collect and display ALB metrics on the Prometheus dashboard. Replace <ingress_subdomain> with the Ingress subdomain for your cluster. The URL for the Prometheus dashboard is a combination of the `prom-dash` subdomain and your Ingress subdomain, for example `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. To find the Ingress subdomain for your cluster, run <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>.
 
     ```
     helm install ibm/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
@@ -515,7 +515,7 @@ The following table lists the supported server metric names.
 ### Upstream metrics
 {: #upstream_metrics}
 
-The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Upstream metrics collect data on the backend service defined in an Ingress resource.
+The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Upstream metrics collect data on the back-end service defined in an Ingress resource.
 {: shortdesc}
 
 Upstream metrics are formatted in two ways.

@@ -260,7 +260,7 @@ Review common error messages and learn how to resolve them.
       <li>Open an [IBM Cloud infrastructure (SoftLayer) support case](#ts_getting_help)</li></ul></td>
       </tr>
       <tr>
-        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: &lt;vlan id&gt;.</td>
+        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: <code>&lt;vlan id&gt;</code>.</td>
         <td>Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:<ul><li>You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. Run <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> to retrieve the VLAN ID.<li>The VLAN ID might not be associated with the IBM Cloud infrastructure (SoftLayer) account that you use. Run <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> to list available VLAN IDs for your account. To change the IBM Cloud infrastructure (SoftLayer) account, see [`ibmcloud ks credential-set`](/docs/containers/cs_cli_reference.html#cs_credentials_set). </ul></td>
       </tr>
       <tr>
@@ -316,7 +316,7 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
  Example:
  <pre class="pre"><code>kubectl describe service &lt;service_name&gt; </code></pre>
 
-2. [Check whether the containers are stuck in the ContainerCreating state](/docs/containers/cs_troubleshoot_storage.html#stuck_creating_state).
+2. [Check whether the containers are stuck in the `ContainerCreating` state](/docs/containers/cs_troubleshoot_storage.html#stuck_creating_state).
 
 3. Check whether the cluster is in the `Critical` state. If the cluster is in a `Critical` state, check the firewall rules and verify that the master can communicate with the worker nodes.
 

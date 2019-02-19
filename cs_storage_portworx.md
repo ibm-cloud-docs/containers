@@ -117,8 +117,8 @@ The following steps show how to provision and set up a Databases for etcd servic
    3. Enter a name for your service credentials and click **Add**.
 4. {: #databases_credentials}Retrieve your service credentials.
    1. From the **Actions** column in the service credentials table, click **View credentials**.
-   2. Find the `grp.authentication` section of your service credentials and note the **username** and **password**.
-      Example output for username and password:
+   2. Find the `grp.authentication` section of your service credentials and note the **user name** and **password**.
+      Example output for user name and password:
       ```
       "grpc": {
       "authentication": {
@@ -152,7 +152,7 @@ The following steps show how to provision and set up the {{site.data.keyword.com
    1. Open the [{{site.data.keyword.composeForEtcd}} catalog page](https://cloud.ibm.com/catalog/services/compose-for-etcd)
    2. Enter a name for your service instance, such as `px-etcd`.
    3. Select the region where you want to deploy your service instance. For optimal performance, choose the region that your cluster is in.
-   4. Select a Cloud Foundy org and space.
+   4. Select a Cloud Foundry org and space.
    5. Review the pricing plans and select the one that you want.
    6. Click **Create** to start setting up your service instance. When the setup is finished, the service details page opens.
 3. {: #etcd_credentials}Retrieve the {{site.data.keyword.composeForEtcd}} service credentials.
@@ -224,13 +224,13 @@ To install Portworx:
    {: pre}
 
 6. Update the following values and save your changes.
-   - **etcdEndPoint**: Add the endpoint of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
-   - **clusterName**: Enter the name of the cluster where you want to install Portworx.
-   - **etcd.credentials**: Enter the user name and password of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `<user_name>:<password>`.
-   - **usedrivesAndPartitions**: Enter `true` to let Portworx find unmounted hard drives and partitions.
-   - **usefileSystemDrive**: Enter `true` to let Portworx find unmounted hard drives, even if they are formatted.
-   - **drives**: Enter `none` to let Portworx find unmounted and unformatted hard drives.
-   - **imageVersion**: Enter the latest version of the Portworx Helm chart. To find the latest version, refer to the Portworx [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/release-notes/).
+   - **`etcdEndPoint`**: Add the endpoint of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
+   - **`clusterName`**: Enter the name of the cluster where you want to install Portworx.
+   - **`etcd.credentials`**: Enter the user name and password of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `<user_name>:<password>`.
+   - **`usedrivesAndPartitions`**: Enter `true` to let Portworx find unmounted hard drives and partitions.
+   - **`usefileSystemDrive`**: Enter `true` to let Portworx find unmounted hard drives, even if they are formatted.
+   - **`drives`**: Enter `none` to let Portworx find unmounted and unformatted hard drives.
+   - **`imageVersion`**: Enter the latest version of the Portworx Helm chart. To find the latest version, refer to the Portworx [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/release-notes/).
 
    For a full list of supported parameters, see the [Portworx Helm chart documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/blob/master/charts/portworx/README.md#configuration).
 
@@ -440,7 +440,7 @@ To install Portworx:
       ```
       {: screen}
 
-   2. Verify that all worker nodes that you wanted to include into your Portworx cluster are included by reviewing the **StorageNode** column in the **Cluster Summary** section of your CLI output. If a worker node is included as a storage node in the Portworx cluster, this worker node displays **Yes** in the **StorageNode** column. If a worker node is not included in the Portworx cluster, then Portworx could not find the raw und unformatted block storage device that is attached to your worker node.
+   2. Verify that all worker nodes that you wanted to include into your Portworx cluster are included by reviewing the **`StorageNode`** column in the **Cluster Summary** section of your CLI output. If a worker node is included as a storage node in the Portworx cluster, this worker node displays **Yes** in the **`StorageNode`** column. If a worker node is not included in the Portworx cluster, then Portworx could not find the raw and unformatted block storage device that is attached to your worker node.
 
       Because Portworx is running as a daemon set in your cluster, new worker nodes that you add to your cluster are automatically inspected for raw block storage and added to the Portworx data layer.
       {: note}
@@ -717,7 +717,7 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
       ```
       {: pre}
 
-10. If you set up encryption before your installed Portworx, you can now [install Portworx in your cluster](#add_portworx_storage). To add encryption to your cluster after you installed Portworx, update the Portworx daemon set to add `"-secret_type"` and `"ibm-kp"` as additional arguments to the portworx container definition.
+10. If you set up encryption before your installed Portworx, you can now [install Portworx in your cluster](#add_portworx_storage). To add encryption to your cluster after you installed Portworx, update the Portworx daemon set to add `"-secret_type"` and `"ibm-kp"` as additional arguments to the Portworx container definition.
    1. Update the Portworx daemon set.
       ```
       kubectl edit daemonset portworx -n kube-system
@@ -949,7 +949,7 @@ To access the storage from your app, you must mount the PVC to your app.
 
 1. Create a configuration file for a deployment that mounts the PVC.
 
-   For tips for how to deploy a stateful set with Portworx, see [StatefulSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/statefulsets.html). The Portworx documentation also includes examples for how to deploy [Cassandra ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/cassandra-k8s.html), [Kafka ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/kafka-k8s.html), [ElasticSearch with Kibana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/elasticstack-kibana-k8s.html), and [Wordpress with MySQL ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/wp-k8s.html).
+   For tips for how to deploy a stateful set with Portworx, see [StatefulSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/statefulsets.html). The Portworx documentation also includes examples for how to deploy [Cassandra ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/cassandra-k8s.html), [Kafka ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/kafka-k8s.html), [ElasticSearch with Kibana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/elasticstack-kibana-k8s.html), and [WordPress with MySQL ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/wp-k8s.html).
    {: tip}
 
    ```
@@ -1092,7 +1092,7 @@ To access the storage from your app, you must mount the PVC to your app.
 <dt>Using existing Portworx volumes</dt>
 <dd>If you have an existing Portworx volume that you created manually or that was not automatically deleted when you deleted the PVC, you can statically provision the corresponding PV and PVC and use this volume with your app. For more information, see [Using existing volumes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/preprovisioned-volumes.html#using-the-portworx-volume). </dd>
 <dt>Running stateful sets on Portworx</dt>
-<dd>If you have a stateful app that you want to deploy as a stateful set into your cluster, you can set up your stateful set to use storage from your Portworx cluster. For more information, see [Create a mysql StatefulSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/statefulsets.html#create-a-mysql-statefulset). </dd>
+<dd>If you have a stateful app that you want to deploy as a stateful set into your cluster, you can set up your stateful set to use storage from your Portworx cluster. For more information, see [Create a MySQL StatefulSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/statefulsets.html#create-a-mysql-statefulset). </dd>
 <dt>Running your pods hyperconverged</dt>
 <dd>You can configure your Portworx cluster to schedule pods on the same worker node where the pod's volume resides. This setup is also referred to as `hyperconverged` and can improve the data storage performance. For more information, see [Run pods on same host as a volume  ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/scheduler-convergence.html).</dd>
 <dt>Creating snapshots of your Portworx volumes</dt>
@@ -1124,7 +1124,7 @@ When you added storage from your Portworx cluster to your app, you have three ma
     ```
     {: screen}
 
-2. Review the **ReclaimPolicy** for the storage class.
+2. Review the **`ReclaimPolicy`** for the storage class.
    ```
    kubectl describe storageclass <storageclass_name>
    ```
@@ -1169,7 +1169,7 @@ When you added storage from your Portworx cluster to your app, you have three ma
    ```
    {: pre}
 
-5. Review the status of your PV. Use the name of the PV that you retrieved ealier as **VOLUME**.
+5. Review the status of your PV. Use the name of the PV that you retrieved earlier as **VOLUME**.
    ```
    kubectl get pv <pv_name>
    ```

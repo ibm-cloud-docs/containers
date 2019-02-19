@@ -37,12 +37,12 @@ If you choose to change the default settings, you are doing so at your own risk.
 If you have specific performance optimization requirements, you can change the default settings for the Linux kernel `sysctl` parameters on worker nodes.
 {: shortdesc}
 
-Worker nodes are automatically provisioned with optimized kernel performance, but you can change the default settings by applying a custom [Kubernetes `DaemonSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) object to your cluster. The daemonset alters the settings for all existing worker nodes and applies the settings to any new worker nodes that are provisioned in the cluster. No pods are affected.
+Worker nodes are automatically provisioned with optimized kernel performance, but you can change the default settings by applying a custom [Kubernetes `DaemonSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) object to your cluster. The daemon set alters the settings for all existing worker nodes and applies the settings to any new worker nodes that are provisioned in the cluster. No pods are affected.
 
-You must have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for all namespaces to run the sample privileged initContainer. After the containers for the deployments are initialized, the privileges are dropped.
+You must have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for all namespaces to run the sample privileged `initContainer`. After the containers for the deployments are initialized, the privileges are dropped.
 {: note}
 
-1. Save the following daemonset in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example daemonset changes the default maximum number of connections allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
+1. Save the following daemon set in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example daemon set changes the default maximum number of connections allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
     ```
     apiVersion: extensions/v1beta1
     kind: DaemonSet
@@ -97,7 +97,7 @@ You must have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service ro
     ```
     {: codeblock}
 
-2. Apply the daemonset to your worker nodes. The changes are applied immediately.
+2. Apply the daemon set to your worker nodes. The changes are applied immediately.
     ```
     kubectl apply -f worker-node-kernel-settings.yaml
     ```
@@ -107,7 +107,7 @@ You must have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service ro
 
 To revert your worker nodes' `sysctl` parameters to the default values set by {{site.data.keyword.containerlong_notm}}:
 
-1. Delete the daemonset. The initContainers that applied the custom settings are removed.
+1. Delete the daemon set. The `initContainers` that applied the custom settings are removed.
     ```
     kubectl delete ds kernel-optimization
     ```
@@ -124,11 +124,11 @@ To revert your worker nodes' `sysctl` parameters to the default values set by {{
 If you have specific performance workload demands, you can change the default settings for the Linux kernel `sysctl` parameters on pod network namespaces.
 {: shortdesc}
 
-To optimize kernel settings for app pods, you can insert an [initContainer ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) patch into the `pod/ds/rs/deployment` YAML for each deployment. The initContainer is added to each app deployment that is in the pod network namespace for which you want to optimize performance.
+To optimize kernel settings for app pods, you can insert an [`initContainer` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) patch into the `pod/ds/rs/deployment` YAML for each deployment. The `initContainer` is added to each app deployment that is in the pod network namespace for which you want to optimize performance.
 
-Before you begin, ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for all namespaces to run the sample privileged initContainer. After the containers for the deployments are initialized, the privileges are dropped.
+Before you begin, ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for all namespaces to run the sample privileged `initContainer`. After the containers for the deployments are initialized, the privileges are dropped.
 
-1. Save the following initContainer patch in a file named `pod-patch.yaml` and add the fields and values for the `sysctl` parameters that you want to tune. This example initContainer changes the default maximum number of connections allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
+1. Save the following `initContainer` patch in a file named `pod-patch.yaml` and add the fields and values for the `sysctl` parameters that you want to tune. This example `initContainer` changes the default maximum number of connections allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
     ```
     spec:
       template:

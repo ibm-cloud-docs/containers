@@ -171,14 +171,14 @@ Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`
 
 1. Retrieve the IP address from the master URL that you used to allow the [`kubectl` commands](#firewall_kubectl).
 
-2. Get the port for ETCD.
+2. Get the port for etcd.
 
   ```
   kubectl get cm -n kube-system cluster-info -o yaml | grep etcd_host
   ```
   {: pre}
 
-3. Allow access for the Calico policies via the master URL IP address and the ETCD port.
+3. Allow access for the Calico policies via the master URL IP address and the etcd port.
 
 <br />
 

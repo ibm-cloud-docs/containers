@@ -341,7 +341,7 @@ The IBM Cloud infrastructure (SoftLayer) credentials set by the `ibmcloud ks cre
 - If you are not using the account owner's credentials, [ensure that the user whose credentials you want to set for the API key has the correct permissions](#owner_permissions).
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 
-To set infrastructure account credentials to access the IBM Cloud infrastructure (SoftLayer) portofolio:
+To set infrastructure account credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio:
 
 1. Get the infrastructure account that you want to use to access the IBM Cloud infrastructure (SoftLayer) portfolio. You have different options that depend on your [current account type](#understand_infra).
 
@@ -664,7 +664,7 @@ The `view`, `edit`, `admin` and `cluster-admin` cluster roles are automatically 
 
 You can assign custom RBAC roles and cluster roles to individual users, groups of users (in clusters that run Kubernetes v1.11 or later), or service accounts. When a binding is created for a group, it affects any user that is added or removed from that group. When you add users to a group, they get the access rights of the group in addition to any individual access rights that you grant them. If they are removed, their access is revoked. Note that you can't add service accounts to access groups.
 
-If you want to assign access to a process that runs in pods, such as a continuous delivery toolchain, you can use [Kubernetes ServiceAccounts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/). To follow a tutorial that demonstrates how to set up service accounts for Travis and Jenkins and to assign custom RBAC roles to the ServiceAccounts, see the blog post [Kubernetes ServiceAccounts for use in automated systems ![External link icon](../icons/launch-glyph.svg "External link icon")](https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automated-systems-515297974982).
+If you want to assign access to a process that runs in pods, such as a continuous delivery toolchain, you can use [Kubernetes `ServiceAccounts` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/). To follow a tutorial that demonstrates how to set up service accounts for Travis and Jenkins and to assign custom RBAC roles to the service accounts, see the blog post [Kubernetes `ServiceAccounts` for use in automated systems ![External link icon](../icons/launch-glyph.svg "External link icon")](https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automated-systems-515297974982).
 
 To prevent breaking changes, do not change the predefined `view`, `edit`, `admin` and `cluster-admin` cluster roles. Custom RBAC roles are in addition to and do not change or override any RBAC roles that you might have assigned with {{site.data.keyword.Bluemix_notm}} IAM service access roles.
 {: important}
@@ -1002,7 +1002,7 @@ Before the user leaves, the {{site.data.keyword.Bluemix_notm}} account owner mus
 
 3. Remove the user from the {{site.data.keyword.Bluemix_notm}} account.
     1. From the menu bar, select **Manage > Access (IAM)**. Then click the **Users** page.
-    2. Click the user's username.
+    2. Click the user's user name.
     3. In the table entry for the user, click the **Action menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Remove user**. When you remove a user, the user's assigned {{site.data.keyword.Bluemix_notm}} IAM platform roles, Cloud Foundry roles, and IBM Cloud infrastructure (SoftLayer) roles are automatically removed.
 
 4. When {{site.data.keyword.Bluemix_notm}} IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. However, if you created custom RBAC roles or cluster roles, [remove the user from those RBAC role bindings or cluster role bindings](#remove_custom_rbac).

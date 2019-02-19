@@ -146,7 +146,7 @@ Ingress consists of three components:
 <dt>Application load balancer (ALB)</dt>
 <dd>The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, TCP, or UDP service requests. The ALB then forwards requests to the appropriate app pod according to the rules defined in the Ingress resource. When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically creates a highly available ALB for your cluster and assigns a unique public route to it. The public route is linked to a portable public IP address that is provisioned into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. A default private ALB is also automatically created, but is not automatically enabled.<br></br>**Multizone clusters**: When you add a zone to your cluster, a portable public subnet is added, and a new public ALB is automatically created and enabled on the subnet in that zone. All default public ALBs in your cluster share one public route, but have a different IP addresses. A default private ALB is also automatically created in each zone, but is not automatically enabled.</dd>
 <dt>Multizone load balancer (MZLB)</dt>
-<dd><p>**Multizone clusters**: Whenever you create a multizone cluster or [add a zone to a single zone cluster](/docs/containers/cs_clusters.html#add_zone), a Cloudflare multizone load balancer (MZLB) is automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same hostname and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the hostname `yourcluster.us-east.containers.appdomain.cloud` has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For example, if your ALBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your Ingress subdomain returns all 3 IPs, 1 of which the client accesses at random. If the ALB with IP address `3.3.3.3` becomes unavailable for any reason, such as due to zone failure, then the health check for that zone fails, the MZLB removes the failed IP from the host name, and the DNS lookup returns only the healthy `1.1.1.1` and `2.2.2.2` ALB IPs. The subdomain has a 30 second time to live (TTL), so after 30 seconds, new client apps can access only one of the available, healthy ALB IPs.</p><p>In rare cases, some DNS resolvers or client apps might continue to use the unhealthy ALB IP after the 30-second TTL. These client apps might experience a longer load time until the client app abandons the `3.3.3.3` IP and tries to connect to `1.1.1.1` or `2.2.2.2`. Depending on the client browser or client app settings, the delay can range from a few seconds to a full TCP timeout.</p>
+<dd><p>**Multizone clusters**: Whenever you create a multizone cluster or [add a zone to a single zone cluster](/docs/containers/cs_clusters.html#add_zone), a Cloudflare multizone load balancer (MZLB) is automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same host name and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the host name `yourcluster.us-east.containers.appdomain.cloud` has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For example, if your ALBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your Ingress subdomain returns all 3 IPs, 1 of which the client accesses at random. If the ALB with IP address `3.3.3.3` becomes unavailable for any reason, such as due to zone failure, then the health check for that zone fails, the MZLB removes the failed IP from the host name, and the DNS lookup returns only the healthy `1.1.1.1` and `2.2.2.2` ALB IPs. The subdomain has a 30 second time to live (TTL), so after 30 seconds, new client apps can access only one of the available, healthy ALB IPs.</p><p>In rare cases, some DNS resolvers or client apps might continue to use the unhealthy ALB IP after the 30-second TTL. These client apps might experience a longer load time until the client app abandons the `3.3.3.3` IP and tries to connect to `1.1.1.1` or `2.2.2.2`. Depending on the client browser or client app settings, the delay can range from a few seconds to a full TCP timeout.</p>
 <p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you use only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME in your DNS entry to forward requests from your custom domain to the IBM-provided Ingress subdomain for your cluster.</p>
 <p class="note">If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also whitelist <a href="https://www.cloudflare.com/ips/">Cloudflare's IPv4 IPs <img src="../icons/launch-glyph.svg" alt="External link icon"></a> that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the <a href="cs_tutorials_policies.html#lesson3">Calico network policy tutorial</a>.</p></dd>
 </dl>
@@ -159,9 +159,9 @@ When you create a standard cluster, {{site.data.keyword.containerlong_notm}} aut
 * 1 portable private IP address from the portable private subnet for the default private Ingress ALB.
 {: shortdesc}
 
-If you have a multizone cluster, a default public ALB and a default private ALB are automatically created in each zone. The IP addresses of your default public ALBs are all behind the same IBM-provided hostname for your cluster.
+If you have a multizone cluster, a default public ALB and a default private ALB are automatically created in each zone. The IP addresses of your default public ALBs are all behind the same IBM-provided host name for your cluster.
 
-Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node is removed, a Keepalived daemon that constantly monitors the IP automatically reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. For the life of the cluster, the ALB IP address in each zone does not change. If you remove a zone from a cluster, then the ALB IP address for that zone is removed.
+Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node is removed, a `Keepalived` daemon that constantly monitors the IP automatically reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. For the life of the cluster, the ALB IP address in each zone does not change. If you remove a zone from a cluster, then the ALB IP address for that zone is removed.
 
 For more information about what happens to ALB IPs in the event of a zone failure, see the definition for the [multizone load balancer component](#components).
 
@@ -176,7 +176,7 @@ The following diagram shows how Ingress directs communication from the internet 
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
-2. A DNS system service resolves the hostname in the URL to the portable public IP address of the load balancer that exposes the ALB in your cluster.
+2. A DNS system service resolves the host name in the URL to the portable public IP address of the load balancer that exposes the ALB in your cluster.
 
 3. Based on the resolved IP address, the client sends the request to the load balancer service that exposes the ALB.
 
@@ -193,7 +193,7 @@ The following diagram shows how Ingress directs communication from the internet 
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
-2. A DNS system service, which acts as the global load balancer, resolves the hostname in the URL to an available IP address that was reported as healthy by the MZLB. The MZLB continuously checks the portable public IP addresses of the load balancer services that expose public ALBs in each zone in your cluster. The IP addresses are resolved in a round-robin cycle, ensuring that requests are equally load balanced among the healthy ALBs in various zones.
+2. A DNS system service, which acts as the global load balancer, resolves the host name in the URL to an available IP address that was reported as healthy by the MZLB. The MZLB continuously checks the portable public IP addresses of the load balancer services that expose public ALBs in each zone in your cluster. The IP addresses are resolved in a round-robin cycle, ensuring that requests are equally load balanced among the healthy ALBs in various zones.
 
 3. The client sends the request to the IP address of the load balancer service that exposes an ALB.
 
@@ -645,7 +645,7 @@ To expose apps that are outside your cluster to the public:
         <tbody>
         <tr>
         <td><code>metadata.name</code></td>
-        <td>Replace <em>&lt;myexternalservice&gt;</em> with a name for your service.<p>Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with Kubernetes resources.</p></td>
+        <td>Replace <em><code>&lt;myexternalservice&gt;</code></em> with a name for your service.<p>Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with Kubernetes resources.</p></td>
         </tr>
         <tr>
         <td><code>port</code></td>
@@ -684,7 +684,7 @@ To expose apps that are outside your cluster to the public:
         <tbody>
         <tr>
         <td><code>name</code></td>
-        <td>Replace <em>&lt;myexternalendpoint&gt;</em> with the name of the Kubernetes service that you created earlier.</td>
+        <td>Replace <em><code>&lt;myexternalendpoint&gt;</code></em> with the name of the Kubernetes service that you created earlier.</td>
         </tr>
         <tr>
         <td><code>ip</code></td>
@@ -1116,7 +1116,7 @@ To add capabilities to your Ingress application load balancer (ALB), you can add
 
 Get started with some of the most commonly used annotations.
 * [redirect-to-https](/docs/containers/cs_annotations.html#redirect-to-https): Convert insecure HTTP client requests to HTTPS.
-* [rewrite-path](/docs/containers/cs_annotations.html#rewrite-path): Route incoming network traffic to a different path that your backend app listens on.
+* [rewrite-path](/docs/containers/cs_annotations.html#rewrite-path): Route incoming network traffic to a different path that your back-end app listens on.
 * [ssl-services](/docs/containers/cs_annotations.html#ssl-services): Use TLS to encrypt traffic to your upstream apps that require HTTPS.
 * [appid-auth](/docs/containers/cs_annotations.html#appid-auth): Use {{site.data.keyword.appid_full_notm}} to authenticate with your application.
 * [client-max-body-size](/docs/containers/cs_annotations.html#client-max-body-size): Set the maximum size of the body that the client can send as part of a request.
@@ -1213,7 +1213,7 @@ To enable source IP preservation, edit the load balancer service that exposes an
             ```
             {: pre}
 
-        3. Under **spec**, change the value of **externalTrafficPolicy** from `Cluster` to `Local`.
+        3. Under **`spec`**, change the value of **`externalTrafficPolicy`** from `Cluster` to `Local`.
 
         4. Save and close the configuration file. The output is similar to the following:
 
@@ -1258,7 +1258,7 @@ To enable source IP preservation, edit the load balancer service that exposes an
         ```
         {: pre}
 
-3. Now, when you look up the headers for the requests sent to your backend app, you can see the client IP address in the `x-forwarded-for` header.
+3. Now, when you look up the headers for the requests sent to your back-end app, you can see the client IP address in the `x-forwarded-for` header.
 
 4. If you no longer want to preserve the source IP, you can revert the changes you made to the service.
     * To revert source IP preservation for your public ALBs:
@@ -1476,7 +1476,7 @@ Configuring your own custom Ingress controller can be useful when you have speci
     ```
     {: pre}
 
-3. Get the configuration file for your Ingress controller ready. For example, you can use the YAML configuration file for the [nginx community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml).
+3. Get the configuration file for your Ingress controller ready. For example, you can use the YAML configuration file for the [NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml).
 
 4. Deploy your own Ingress controller. **Important**: To continue to use the load balancer service exposing the controller and the IBM-provided Ingress subdomain, your controller must be deployed in the `kube-system` namespace.
     ```

@@ -262,7 +262,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       {: pre}
 
-   4. Open the `provisioner-sa.yaml` file and look for the `ibmcloud-object-storage-secret-reader` ClusterRole definition.
+   4. Open the `provisioner-sa.yaml` file and look for the `ibmcloud-object-storage-secret-reader` `ClusterRole` definition.
    6. Add the name of the secret that you created earlier to the list of secrets that the plug-in is authorized to access in the `resourceNames` section.
       ```
       kind: ClusterRole
@@ -670,7 +670,7 @@ To remove the plug-in:
    </tr>
    <tr>
    <td><code>ibm.io/tls-cipher-suite</code></td>
-   <td>The TLS cipher suite that must be used when a connection to {{site.data.keyword.cos_full_notm}} is established via the HTTPS endpoint. The value for the cipher suite must follow the [OpenSSL format ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html). All storage classes use the <strong>AESGCM</strong> cipher suite by default.  </td>
+   <td>The TLS cipher suite that must be used when a connection to {{site.data.keyword.cos_full_notm}} is established via the HTTPS endpoint. The value for the cipher suite must follow the [OpenSSL format ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html). All storage classes use the <strong><code>AESGCM</code></strong> cipher suite by default.  </td>
    </tr>
    </tbody>
    </table>
@@ -933,7 +933,7 @@ Before you begin:
 
 To deploy a stateful set that uses object storage:
 
-1. Create a configuration file for your stateful set and the service that you use to expose the stateful set. The following examples show how to deploy nginx as a stateful set with 3 replicas with each replica using a separate bucket, or with all replicas sharing the same bucket.
+1. Create a configuration file for your stateful set and the service that you use to expose the stateful set. The following examples show how to deploy NGINX as a stateful set with 3 replicas with each replica using a separate bucket, or with all replicas sharing the same bucket.
 
    **Example to create a stateful set with 3 replicas, with each replica using a separate bucket**:
    ```

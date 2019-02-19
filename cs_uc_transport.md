@@ -145,7 +145,7 @@ Key technologies:
 
 **The solution**
 
-The airline wants to design an open culture that puts people first. The HR Exec is well aware that a focus on incenting and retaining talent impacts the airline’s profitability. Thus, the annual rollout of benefits is a key aspect of fostering an employee-centered culture. 
+The airline wants to design an open culture that puts people first. The HR Executive is well aware that a focus on incentivizing and retaining talent impacts the airline’s profitability. Thus, the annual rollout of benefits is a key aspect of fostering an employee-centered culture. 
 
 They need a solution that helps the Developers and their users:
 * FRONT-END TO EXISTING BENEFITS: insurance, educational offerings, wellness, and more

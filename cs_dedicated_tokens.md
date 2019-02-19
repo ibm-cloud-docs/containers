@@ -66,7 +66,7 @@ Create a non-expiring token for an image registry that you used for single and s
     </tr>
     <tr>
     <td><code>&lt;secret_name&gt;</code></td>
-    <td>Required. The name that you want to use for your imagePullSecret.</td>
+    <td>Required. The name that you want to use for your image pull secret.</td>
     </tr>
     <tr>
     <td><code>--docker-server=&lt;registry_url&gt;</code></td>
@@ -86,10 +86,10 @@ Create a non-expiring token for an image registry that you used for single and s
     </tr>
     </tbody></table>
 
-4.  Create a pod that references the imagePullSecret.
+4.  Create a pod that references the image pull secret.
 
-    1.  Open your preferred text editor and create a pod configuration script that is named mypod.yaml.
-    2.  Define the pod and the imagePullSecret that you want to use to access the registry. To use a private image from a namespace:
+    1.  Open your preferred text editor and create a pod configuration script that is named `mypod.yaml`.
+    2.  Define the pod and the image pull secret that you want to use to access the registry. To use a private image from a namespace:
 
         ```
         apiVersion: v1
@@ -132,7 +132,7 @@ Create a non-expiring token for an image registry that you used for single and s
         </tr>
         <tr>
         <td><code>&lt;secret_name&gt;</code></td>
-        <td>The name of the imagePullSecret that you created earlier.</td>
+        <td>The name of the image pull secret that you created earlier.</td>
         </tr>
         </tbody></table>
 

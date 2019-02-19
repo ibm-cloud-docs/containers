@@ -52,9 +52,9 @@ scope: containers
 
 **Tutorials, demos, and courses**
 
-- [Modernize and extend an existing Java web app (JPetStore) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
+- [Modernize and extend an existing Java web app (`JPetStore`) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/jpetstore-kubernetes)
 - [{{site.data.keyword.containerlong_notm}} Cognitive Class learning path ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cognitiveclass.ai/learn/containers-k8s-and-istio-on-ibm-cloud/)
-- [How to build a web app on IKS ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
+- [How to build a web app on {{site.data.keyword.containerlong_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/scalable-webapp-kubernetes.html#scalable-web-application-on-kubernetes)
 - [Secure multi-region clusters with Cloud Internet Service (CIS) ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/multi-region-k8s-cis.html#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
 - [Apply end-to-end security to a cloud application with {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.keymanagementservicelong_notm}}, {{site.data.keyword.appid_full_notm}}, and {{site.data.keyword.cos_full_notm}}](/docs/tutorials/cloud-e2e-security.html#apply-end-to-end-security-to-a-cloud-application)
 - [Analyze logs and monitor the health of apps ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials/kubernetes-log-analysis-kibana.html#analyze-logs-and-monitor-the-health-of-kubernetes-applications)

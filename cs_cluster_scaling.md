@@ -68,7 +68,7 @@ In general, the cluster autoscaler calculates the number of worker nodes that yo
 **How is this behavior different from worker pools that are not manage by the cluster autoscaler?**<br>
 When you [create a worker pool](/docs/containers/cs_clusters.html#add_pool), you specify how many worker nodes per zone it has. The worker pool maintains that number of worker nodes until you [resize](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](/docs/containers/cs_cli_reference.html#cs_rebalance) it. The worker pool does not add or remove worker nodes for you. If you have more pods than can be scheduled, the pods remain in pending state until you resize the worker pool.
 
-When you enable the cluster austoscaler for a worker pool, worker nodes are scaled up or down in response to your pod spec settings and resource requests. You don't need to resize or rebalance the worker pool manually.
+When you enable the cluster autoscaler for a worker pool, worker nodes are scaled up or down in response to your pod spec settings and resource requests. You don't need to resize or rebalance the worker pool manually.
 
 **Can I see an example of how the cluster autoscaler scales up and down?**<br>
 Consider the following image for an example of scaling the cluster up and down.
@@ -78,12 +78,12 @@ _Figure: Autoscaling a cluster up and down._
 
 1.  The cluster has four worker nodes in two worker pools that are spread across two zones. Each pool has one worker node per zone, but **Worker Pool A** has a machine type of `u2c.2x4` and **Worker Pool B** has a machine type of `b2c.4x16`. Your total compute resources are roughly 10 cores (2 cores x 2 worker nodes for **Worker Pool A**, and 4 cores x 2 worker nodes for **Worker Pool B**). Your cluster currently runs a workload that requests 6 of these 10 cores. Note that additional computing resources are taken up on each worker node by the [reserved resources](/docs/containers/cs_clusters_planning.html#resource_limit_node) required to run the cluster, worker nodes, and any add-ons such as the cluster autoscaler.
 2.  The cluster autoscaler is configured to manage both worker pools with the following minimum and maximum size-per-zone:
-    *  **Worker Pool A**: minSize=1, maxSize=5.
-    *  **Worker Pool B**: minSize=1, maxSize=2.
+    *  **Worker Pool A**: `minSize=1`, `maxSize=5`.
+    *  **Worker Pool B**: `minSize=1`, `maxSize=2`.
 3.  You schedule deployments that require 14 additional pod replicas of an app that requests 1 core of CPU per replica. One pod replica can be deployed on the current resources, but the other 13 are pending.
 4.  The cluster autoscaler scales up your worker nodes within these constraints to support the additional 13 pod replicas resource requests.
     *  **Worker Pool A**: 7 worker nodes are added in a round-robin method as evenly as possible across the zones. The worker nodes increase the cluster compute capacity by roughly 14 cores (2 cores x 7 worker nodes).
-    *  **Worker Pool B**: 2 worker nodes are added evenly across the zones, reaching the maxSize of 2 worker nodes per zone. The worker nodes increase cluster capacity by roughly 8 cores (4 cores x 2 worker node).
+    *  **Worker Pool B**: 2 worker nodes are added evenly across the zones, reaching the `maxSize` of 2 worker nodes per zone. The worker nodes increase cluster capacity by roughly 8 cores (4 cores x 2 worker node).
 5.  The 20 pods with 1-core requests are distributed as follows across the worker nodes. Note that because worker nodes have resource reserves as well as pods that run to cover default cluster features, the pods for your workload cannot use all the available compute resources of a worker node. For example, although the `b2c.4x16` worker nodes have 4 cores, only 3 pods that request a minimum of 1 core each can be scheduled onto the worker nodes.
     <table summary="Distribution of workload in scaled cluster.">
     <caption>Distribution of workload in scaled cluster.</caption>
@@ -393,7 +393,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
     kubectl get pods -n kube-system
     ```
     {: pre}
-5.  Review the **Events** section of the cluster autoscaler pod for a **ConfigUpdated** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
+5.  Review the **`Events`** section of the cluster autoscaler pod for a **`ConfigUpdated`** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
 
     ```
     kubectl describe pod -n kube-system <cluster_autoscaler_pod>
@@ -724,7 +724,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     kubectl get pods -n kube-system
     ```
     {: pre}
-9.  Review the **Events** section of the cluster autoscaler pod and look for a **ConfigUpdated** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
+9.  Review the **`Events`** section of the cluster autoscaler pod and look for a **`ConfigUpdated`** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
     ```
     kubectl describe pod -n kube-system <cluster_autoscaler_pod>
     ```

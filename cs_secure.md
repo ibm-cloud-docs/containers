@@ -82,7 +82,7 @@ The following image shows the default cluster security settings that address aut
     <tr>
       <td>Fully managed and dedicated Kubernetes master</td>
       <td><p>Every Kubernetes cluster in {{site.data.keyword.containerlong_notm}} is controlled by a dedicated Kubernetes master that is managed by IBM in an IBM-owned IBM Cloud infrastructure (SoftLayer) account. The Kubernetes master is set up with the following dedicated components that are not shared with other IBM customers.</p>
-        <ul><li><strong>etcd data store:</strong> Stores all Kubernetes resources of a cluster, such as `Services`, `Deployments`, and `Pods`. Kubernetes `ConfigMaps` and `Secrets` are app data that is stored as key value pairs so that they can be used by an app that runs in a pod. In clusters that run Kubernetes version 1.10 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](/docs/containers/cs_encrypt.html#encryption) for your cluster. Etcd data for clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.</li>
+        <ul><li><strong>etcd data store:</strong> Stores all Kubernetes resources of a cluster, such as `Services`, `Deployments`, and `Pods`. Kubernetes `ConfigMaps` and `Secrets` are app data that is stored as key value pairs so that they can be used by an app that runs in a pod. In clusters that run Kubernetes version 1.10 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](/docs/containers/cs_encrypt.html#encryption) for your cluster. The etcd data for clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.</li>
           <li><strong>kube-apiserver:</strong> Serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The kube-apiserver validates and processes requests and can read from and write to the etcd data store.</li>
           <li><strong>kube-scheduler:</strong> Decides where to deploy pods, considering the capacity and performance needs, hardware and software policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</li>
           <li><strong>kube-controller-manager:</strong> Responsible for monitoring replica sets, and creating corresponding pods to achieve the desired state.</li>
@@ -107,20 +107,20 @@ The following image shows the default cluster security settings that address aut
     <tr>
       <td>Admission controllers</td>
       <td>Admission controllers are implemented for specific features in Kubernetes and {{site.data.keyword.containerlong_notm}}. With admission controllers, you can set up policies in your cluster that determine if a particular action in the cluster is allowed or not. In the policy, you can specify conditions when a user cannot perform an action, even if this action is part of the general permissions that you assigned the user by using RBAC. Therefore, admission controllers can provide an extra layer of security for your cluster before an API request is processed by the Kubernetes API server. </br></br> When you create a cluster, {{site.data.keyword.containerlong_notm}} automatically installs the following [Kubernetes admission controllers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/admission-controllers/) in the Kubernetes master, which cannot be changed by the user: <ul>
-      <li>DefaultTolerationSeconds</li>
-      <li>DefaultStorageClass</li>
-      <li>GenericAdmissionWebhook (Kubernetes 1.8)</li>
-      <li>Initializers</li>
-      <li>LimitRanger</li>
-      <li>MutatingAdmissionWebhook (Kubernetes 1.9 and later)</li>
-      <li>NamespaceLifecycle</li>
-      <li>PersistentVolumeLabel</li>
-      <li>[PodSecurityPolicy](/docs/containers/cs_psp.html#ibm_psp) (Kubernetes 1.8.13, 1.9.8, or 1.10.3 and later)</li>
-      <li>[Priority](/docs/containers/cs_pod_priority.html#pod_priority) (Kubernetes 1.11.2 or later</li>
-      <li>ResourceQuota</li>
-      <li>ServiceAccount</li>
-      <li>StorageObjectInUseProtection (Kubernetes 1.10 and later)</li>
-      <li>ValidatingAdmissionWebhook (Kubernetes 1.9 and later)</li></ul></br>
+      <li>`DefaultTolerationSeconds`</li>
+      <li>`DefaultStorageClass`</li>
+      <li>`GenericAdmissionWebhook` (Kubernetes 1.8)</li>
+      <li>`Initializers`</li>
+      <li>`LimitRanger`</li>
+      <li>`MutatingAdmissionWebhook` (Kubernetes 1.9 and later)</li>
+      <li>`NamespaceLifecycle`</li>
+      <li>`PersistentVolumeLabel`</li>
+      <li>[`PodSecurityPolicy`](/docs/containers/cs_psp.html#ibm_psp) (Kubernetes 1.8.13, 1.9.8, or 1.10.3 and later)</li>
+      <li>[`Priority`](/docs/containers/cs_pod_priority.html#pod_priority) (Kubernetes 1.11.2 or later</li>
+      <li>`ResourceQuota`</li>
+      <li>`ServiceAccount`</li>
+      <li>`StorageObjectInUseProtection` (Kubernetes 1.10 and later)</li>
+      <li>`ValidatingAdmissionWebhook` (Kubernetes 1.9 and later)</li></ul></br>
       You can [install your own admission controllers in the cluster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) or choose from the optional admission controllers that {{site.data.keyword.containerlong_notm}} provides: <ul><li><strong>[Container image security enforcer](/docs/services/Registry/registry_security_enforce.html#security_enforce):</strong> Use this admission controller to enforce Vulnerability Advisor policies in your cluster to block deployments from vulnerable images.</li></ul></br><p class="note">If you manually installed admission controllers and you do not want to use them anymore, make sure to remove them entirely. If admission controllers are not entirely removed, they might block all actions that you want to perform on the cluster.</p></td>
     </tr>
   </tbody>
@@ -243,7 +243,7 @@ To connect your worker nodes and apps to an on-prem data center, you can configu
 ### LoadBalancer and Ingress services
 {: #network_lb_ingress}
 
-You can use LoadBalancer and Ingress networking services to connect your apps to the public internet or to external private networks. Review the following optional settings for load balancers and Ingress ALBs that you can use to meet backend app security requirements or encrypt traffic as it moves through your cluster.
+You can use LoadBalancer and Ingress networking services to connect your apps to the public internet or to external private networks. Review the following optional settings for load balancers and Ingress ALBs that you can use to meet back-end app security requirements or encrypt traffic as it moves through your cluster.
 {: shortdesc}
 
 **Can I use security groups to manage my cluster's network traffic?** </br>
@@ -252,7 +252,7 @@ To use Ingress and LoadBalancer services, use [Calico and Kubernetes policies](/
 **How can I secure the source IP within the cluster?** </br>
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
 
-Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. To preserve the original source IP address of the client request, you can enable source IP preservation for [loadbalancers](/docs/containers/cs_loadbalancer.html#node_affinity_tolerations) or [Ingress ALBs](/docs/containers/cs_ingress.html#preserve_source_ip).
+Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. To preserve the original source IP address of the client request, you can enable source IP preservation for [load balancers](/docs/containers/cs_loadbalancer.html#node_affinity_tolerations) or [Ingress ALBs](/docs/containers/cs_ingress.html#preserve_source_ip).
 
 **How can I encrypt traffic with TLS?** </br>
 The Ingress service offers TLS termination at two points in the traffic flow:
@@ -348,7 +348,7 @@ To protect your apps, consider to address the following areas:
 Automate the process to build your container image from your source code to eliminate source code variations and defects. By integrating the build process into your CI/CD pipeline, you can ensure that your image is scanned and built only if the image passes the security checks that you specified. To avoid that developers apply hot fixes to sensitive images, limit the number of people in your organization who have access to the build process.
 
 2. **Scan images before they deploy into production:** </br>
-Make sure to scan every image before you deploy a container from it. For example, if you use {{site.data.keyword.registryshort_notm}}, all images are automatically scanned for vulnerabilities when you push the image to your namespace. If vulnerabilities are found, consider eliminating the vulnerabilities or block deployment for those images. Find a person or team in your organization who is responsible for monitoring and removing vulnerabilities. Depending on your organizational structure, this person might be part of a security, operations, or deloyment team. Use admission controllers, such as the [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce) to block deployments from images that have not passed vulnerability checks and enable [content trust](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent) so that images must be approved by a trusted signer before they can be pushed to the container registry.
+Make sure to scan every image before you deploy a container from it. For example, if you use {{site.data.keyword.registryshort_notm}}, all images are automatically scanned for vulnerabilities when you push the image to your namespace. If vulnerabilities are found, consider eliminating the vulnerabilities or block deployment for those images. Find a person or team in your organization who is responsible for monitoring and removing vulnerabilities. Depending on your organizational structure, this person might be part of a security, operations, or deployment team. Use admission controllers, such as the [Container Image Security Enforcement](/docs/services/Registry/registry_security_enforce.html#security_enforce) to block deployments from images that have not passed vulnerability checks and enable [content trust](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent) so that images must be approved by a trusted signer before they can be pushed to the container registry.
 
 3. **Regularly scan running containers:** </br>
 Even if you deployed a container from an image that passes the vulnerability check, the operating system or binaries that run in the container might get vulnerable over time. To protect your app, you must ensure that running containers are regularly scanned so that you can detect and remediate vulnerabilities. Depending on the app, to add extra security, you can establish a process that takes down vulnerable containers after they are detected.
@@ -398,11 +398,11 @@ Kubernetes namespaces are a way to virtually partition a cluster and provide iso
 
 Every cluster is set up with the following namespaces:
 - **default:** The namespace where everything is deployed to that does not define a specific namespace. When you assign the Viewer, Editor, or Operator platform role to a user, the user can access the default namespace, but not the `kube-system`, `ibm-system`, or `ibm-cloud-cert` namespaces.
-- **kube-system and ibm-system:** This namespace holds deployments and services that are required for Kubernetes and {{site.data.keyword.containerlong_notm}} to manage the cluster. Cluster admins can use this namespace to make a Kubernetes resource available across namespaces.
+- **kube-system and ibm-system:** This namespace holds deployments and services that are required for Kubernetes and {{site.data.keyword.containerlong_notm}} to manage the cluster. Cluster administrators can use this namespace to make a Kubernetes resource available across namespaces.
 - **ibm-cloud-cert:** This namespace is used for resources that are related to {{site.data.keyword.cloudcerts_long_notm}}.
 - **kube-public:** This namespace can be accessed by all users, even if they are not authenticated with the cluster. Be cautious to deploy resources into this namespace as you might be putting your cluster at risk to get compromised.
 
-Cluster admins can set up additional namespaces in the cluster and customize them to their needs.
+Cluster administrators can set up additional namespaces in the cluster and customize them to their needs.
 
 For every namespace that you have in the cluster, make sure to set up proper [RBAC policies](/docs/containers/cs_users.html#rbac) to limit access to this namespace, control what gets deployed, and to set proper [resource quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) and [limit ranges ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/).
 {: important}
@@ -445,10 +445,10 @@ You are responsible for ensuring the security of your personal information in Ku
 
 <dl>
   <dt>Use a Kubernetes secret to store personal information</dt>
-  <dd>Only store personal information in Kubernetes resources that are designed to hold personal information. For example, do not use your name in the name of a Kubernetes namespace, deployment, service, or config map. For proper protection and encryption, store personal information in <a href="cs_encrypt.html#secrets">Kubernetes secrets</a> instead.</dd>
+  <dd>Only store personal information in Kubernetes resources that are designed to hold personal information. For example, do not use your name in the name of a Kubernetes namespace, deployment, service, or config map. For proper protection and encryption, store personal information in <a href="/docs/containers/cs_encrypt.html#secrets">Kubernetes secrets</a> instead.</dd>
 
   <dt>Use a Kubernetes `imagePullSecret` to store image registry credentials</dt>
-  <dd>Do not store personal information in container images or registry namespaces. For proper protection and encryption, store registry credentials in <a href="cs_images.html#other">Kubernetes imagePullSecrets</a> and other personal information in <a href="cs_encrypt.html#secrets">Kubernetes secrets</a> instead. Remember that if personal information is stored in a previous layer of an image, deleting an image might not be sufficient to delete this personal information.</dd>
+  <dd>Do not store personal information in container images or registry namespaces. For proper protection and encryption, store registry credentials in <a href="/docs/containers/cs_images.html#other">Kubernetes `imagePullSecrets`</a> and other personal information in <a href="/docs/containers/cs_encrypt.html#secrets">Kubernetes secrets</a> instead. Remember that if personal information is stored in a previous layer of an image, deleting an image might not be sufficient to delete this personal information.</dd>
   </dl>
 
 To set up encryption for your secrets, see [Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}](/docs/containers/cs_encrypt.html#keyprotect).

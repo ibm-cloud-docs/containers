@@ -542,7 +542,7 @@ Get information about an option for a cluster's Kubernetes API server configurat
 #### ibmcloud ks apiserver-config-get audit-webhook
 {: #cs_apiserver_config_get_audit_webhook}
 
-View the URL for the remote logging service that you are sending API server audit logs to. The URL was specified when you created the webhook backend for the API server configuration.
+View the URL for the remote logging service that you are sending API server audit logs to. The URL was specified when you created the webhook back end for the API server configuration.
 {: shortdesc}
 
 ```
@@ -576,7 +576,7 @@ Set an option for a cluster's Kubernetes API server configuration. This command 
 #### ibmcloud ks apiserver-config-set audit-webhook
 {: #cs_apiserver_set}
 
-Set the webhook backend for the API server configuration. The webhook backend forwards API server audit logs to a remote server. A webhook configuration is created based on the information you provide in this command's flags. If you do not provide any information in the flags, a default webhook configuration is used.
+Set the webhook back end for the API server configuration. The webhook back end forwards API server audit logs to a remote server. A webhook configuration is created based on the information you provide in this command's flags. If you do not provide any information in the flags, a default webhook configuration is used.
 {: shortdesc}
 
 ```
@@ -599,13 +599,13 @@ After you set the webhook, you must run the `ibmcloud ks apiserver-refresh` comm
    <dd>The URL or IP address for the remote logging service you want to send audit logs to. If you provide an insecure server URL, any certificates are ignored. This value is optional.</dd>
 
    <dt><code>--caCert <em>CA_CERT_PATH</em></code></dt>
-   <dd>The filepath for the CA certificate that is used to verify the remote logging service. This value is optional.</dd>
+   <dd>The file path for the CA certificate that is used to verify the remote logging service. This value is optional.</dd>
 
    <dt><code>--clientCert <em>CLIENT_CERT_PATH</em></code></dt>
-   <dd>The filepath for the client certificate that is used to authenticate against the remote logging service. This value is optional.</dd>
+   <dd>The file path for the client certificate that is used to authenticate against the remote logging service. This value is optional.</dd>
 
    <dt><code>--clientKey <em> CLIENT_KEY_PATH</em></code></dt>
-   <dd>The filepath for the corresponding client key that is used to connect to the remote logging service. This value is optional.</dd>
+   <dd>The file path for the corresponding client key that is used to connect to the remote logging service. This value is optional.</dd>
    </dl>
 
 **Example**:
@@ -625,7 +625,7 @@ Disable an option for a cluster's Kubernetes API server configuration. This comm
 #### ibmcloud ks apiserver-config-unset audit-webhook
 {: #cs_apiserver_unset}
 
-Disable the webhook backend configuration for the cluster's API server. Disabling the webhook backend stops forwarding API server audit logs to a remote server.
+Disable the webhook back end configuration for the cluster's API server. Disabling the webhook back end stops forwarding API server audit logs to a remote server.
 {: shortdesc}
 
 ```
@@ -732,7 +732,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
    <dd>Your IBM Cloud password.</dd>
 
    <dt><code>-u</code></dt>
-   <dd>Your IBM Cloud username.</dd>
+   <dd>Your IBM Cloud user name.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2259,7 +2259,7 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
 {: shortdesc}
 
 ```
-ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USERIP] [--disable] [--disable-deployment] [-s]
+ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disable] [--disable-deployment] [-s]
 ```
 {: pre}
 
@@ -2525,7 +2525,7 @@ Before you use this command, make sure that the user whose credentials are used 
 
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
-   <dd>IBM Cloud infrastructure (SoftLayer) account API username. This value is required. Note that the infrastructure API username is not the same as the IBMid. To view the infrastructure API username:
+   <dd>IBM Cloud infrastructure (SoftLayer) account API username. This value is required. Note that the infrastructure API user name is not the same as the IBMid. To view the infrastructure API user name:
    <ol>
    <li>Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com).
    <li>From the menu bar, select **Manage > Access (IAM)**.
@@ -2776,7 +2776,7 @@ ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --typ
     <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
 
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-    <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+    <dd>When the logging type is <code>syslog</code>, the host name or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
 
   <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
     <dd>The port of the log collector server. This value is optional. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and the standard port <code>9091</code> is used for <code>ibm</code>.</dd>
@@ -3478,7 +3478,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
 ### Deprecated: ibmcloud ks worker-add
 {: #cs_worker_add}
 
-Add standalone worker nodes to your standard cluster that are not in a worker pool.
+Add stand-alone worker nodes to your standard cluster that are not in a worker pool.
 {: deprecated}
 
 ```
@@ -3672,7 +3672,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
    kubectl get nodes
    ```
    {: pre}
-   Your worker node is disabled for pod scheduling if the status displays **SchedulingDisabled**.
+   Your worker node is disabled for pod scheduling if the status displays **`SchedulingDisabled`**.
  4. Force pods to be removed from your worker node and rescheduled onto remaining worker nodes in the cluster.
     ```
     kubectl drain <worker_name>
@@ -3758,7 +3758,7 @@ Before you reload your worker node, make sure that pods are rescheduled on other
    kubectl get nodes
    ```
    {: pre}
-   Your worker node is disabled for pod scheduling if the status displays **SchedulingDisabled**.
+   Your worker node is disabled for pod scheduling if the status displays **`SchedulingDisabled`**.
  4. Force pods to be removed from your worker node and rescheduled onto remaining worker nodes in the cluster.
     ```
     kubectl drain <worker_name>
@@ -3836,7 +3836,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
    kubectl get nodes
    ```
    {: pre}
-   Your worker node is disabled for pod scheduling if the status displays **SchedulingDisabled**.
+   Your worker node is disabled for pod scheduling if the status displays **`SchedulingDisabled`**.
 4. Force pods to be removed from your worker node and rescheduled onto remaining worker nodes in the cluster.
    ```
    kubectl drain <worker_name>

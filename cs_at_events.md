@@ -174,7 +174,7 @@ Before you begin: Be sure that your cluster is configured to forward [Kubernetes
   </tr>
   <tr>
     <td><code>certificatesigningrequests.update</code></td>
-    <td>A request to sign a certificateis updated.</td>
+    <td>A request to sign a certificate is updated.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.create</code></td>

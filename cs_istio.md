@@ -345,13 +345,13 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 </br></br>To see the configuration file for the BookInfo gateway, run the following command.
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
 
-<dt>VirtualService</dt>
-<dd>The `bookinfo` [VirtualService ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService) defines the rules that control how requests are routed within the service mesh by defining microservices as `destinations`. In the `bookinfo` virtual service, the `/productpage` URI of a request is routed to the `productpage` host on port `9080`. In this way, all requests to the BookInfo app are routed first to the `productpage` microservice, which then calls the other microservices of BookInfo.
+<dt>`VirtualService`</dt>
+<dd>The `bookinfo` [`VirtualService` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService) defines the rules that control how requests are routed within the service mesh by defining microservices as `destinations`. In the `bookinfo` virtual service, the `/productpage` URI of a request is routed to the `productpage` host on port `9080`. In this way, all requests to the BookInfo app are routed first to the `productpage` microservice, which then calls the other microservices of BookInfo.
 </br></br>To see the virtual service rule that is applied to BookInfo, run the following command.
 <pre class="pre"><code>kubectl get virtualservice bookinfo -o yaml</code></pre></dd>
 
-<dt>DestinationRule</dt>
-<dd>After the gateway routes the request according to virtual service rule, the `details`, `productpage`, `ratings`, and `reviews` [DestinationRules ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule) define policies that are applied to the request when it reaches a microservice. For example, when you refresh the BookInfo product page, the changes that you see are the result of the `productpage` microservice randomly calling different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice. The versions are selected randomly because the `reviews` destination rule gives equal weight to the `subsets`, or the named versions, of the microservice. These subsets are used by the virtual service rules when traffic is routed to specific versions of the service.
+<dt>`DestinationRule`</dt>
+<dd>After the gateway routes the request according to virtual service rule, the `details`, `productpage`, `ratings`, and `reviews` [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule) define policies that are applied to the request when it reaches a microservice. For example, when you refresh the BookInfo product page, the changes that you see are the result of the `productpage` microservice randomly calling different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice. The versions are selected randomly because the `reviews` destination rule gives equal weight to the `subsets`, or the named versions, of the microservice. These subsets are used by the virtual service rules when traffic is routed to specific versions of the service.
 </br></br>To see the destination rules that are applied to BookInfo, run the following command.
 <pre class="pre"><code>kubectl describe destinationrules</code></pre></dd>
 </dl>
@@ -395,7 +395,7 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 
 2. To open the Jaeger UI, go to the following URL: http://localhost:16686.
 
-3. If you installed the [BookInfo add-on](#istio_bookinfo), you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the Bookinfo sample ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample) in the Istio open source documentation.
+3. If you installed the [BookInfo add-on](#istio_bookinfo), you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample) in the Istio open source documentation.
 
 **Kiali**</br>
 1. Start Kubernetes port forwarding for the Kiali dashboard.
@@ -406,7 +406,7 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 
 2. To open the Kiali UI, go to the following URL: http://localhost:20001.
 
-3. Enter `admin` for both the username and passphrase. For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
+3. Enter `admin` for both the user name and passphrase. For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
 
 ### Setting up logging with {{site.data.keyword.la_full_notm}}
 {: #istio_health_logdna}
@@ -953,6 +953,6 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
     * [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/intelligent-routing.html): This example shows how to route traffic to a specific version of BookInfo's reviews and ratings microservices by using Istio's traffic management capabilities.
     * [In-Depth Telemetry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/telemetry.html): This example includes how to get uniform metrics, logs, and traces across BookInfo's microservices by using Istio Mixer and the Envoy proxy.
-* Learn how expose your Istio-managed apps by using the {{site.data.keyword.containerlong_notm}} Ingress hostname and an Istio Gateway in this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/09/transitioning-your-service-mesh-from-ibm-cloud-kubernetes-service-ingress-to-istio-ingress/).
+* Learn how expose your Istio-managed apps by using the {{site.data.keyword.containerlong_notm}} Ingress host name and an Istio Gateway in this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/09/transitioning-your-service-mesh-from-ibm-cloud-kubernetes-service-ingress-to-istio-ingress/).
 * Take the [Cognitive Class: Getting started with Microservices with Istio and IBM Cloud Kubernetes Service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/). **Note**: You can skip the Istio installation section of this course.
-* Check out this blog post on using [Vistio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) to visualize your Istio service mesh.
+* Check out this blog post on using [Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) to visualize your Istio service mesh.

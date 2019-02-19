@@ -46,7 +46,7 @@ You can use multiple registries with {{site.data.keyword.containerlong_notm}} to
 |Registry|Description|Benefit|
 |--------|-----------|-------|
 |[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry/index.html)|With this option, you can set up your own secured Docker image repository in {{site.data.keyword.registryshort_notm}} where you can safely store and share images between cluster users.|<ul><li>Manage access to images in your account.</li><li>Use {{site.data.keyword.IBM_notm}} provided images and sample apps, such as {{site.data.keyword.IBM_notm}} Liberty, as a parent image and add your own app code to it.</li><li>Automatic scanning of images for potential vulnerabilities by Vulnerability Advisor, including OS specific recommendations to fix them.</li></ul>|
-|Any other private registry|Connect any existing private registry to your cluster by creating an [imagePullSecret ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/containers/images/). The secret is used to securely save your registry URL and credentials in a Kubernetes secret.|<ul><li>Use existing private registries independent of their source (Docker Hub, organization owned registries, or other private Cloud registries).</li></ul>|
+|Any other private registry|Connect any existing private registry to your cluster by creating an [image pull secret ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/containers/images/). The secret is used to securely save your registry URL and credentials in a Kubernetes secret.|<ul><li>Use existing private registries independent of their source (Docker Hub, organization owned registries, or other private Cloud registries).</li></ul>|
 |[Public Docker Hub![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/){: #dockerhub}|Use this option to directly use existing public images from Docker Hub in your [Kubernetes deployment![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) when no Dockerfile changes are needed. <p>**Note:** Keep in mind that this option might not meet your organization's security requirements, like access management, vulnerability scanning, or app privacy.</p>|<ul><li>No additional setup is needed for your cluster.</li><li>Includes a variety of open-source applications.</li></ul>|
 {: caption="Public and private image registry options" caption-side="top"}
 
@@ -84,7 +84,7 @@ When you create a cluster, non-expiring registry tokens and secrets are automati
 
 Each token must be stored in a Kubernetes `imagePullSecret` so that it is accessible to a Kubernetes cluster when you deploy a containerized app. When your cluster is created, {{site.data.keyword.containerlong_notm}} automatically stores the tokens for the global (IBM-provided public images) and regional registries in Kubernetes image pull secrets. The image pull secrets are added to the `default` Kubernetes namespace, the `kube-system` namespace, and the list of secrets in the `default` service account for those namespaces.
 
-By using this initial setup, you can deploy containers from any image that is available in a namespace in your {{site.data.keyword.Bluemix_notm}} account into the **default** namespace of your cluster. To deploy a container into other namespaces of your cluster, or to use an image that is stored in another {{site.data.keyword.Bluemix_notm}} region or in another {{site.data.keyword.Bluemix_notm}} account, you must [create your own imagePullSecret for your cluster](#other).
+By using this initial setup, you can deploy containers from any image that is available in a namespace in your {{site.data.keyword.Bluemix_notm}} account into the **default** namespace of your cluster. To deploy a container into other namespaces of your cluster, or to use an image that is stored in another {{site.data.keyword.Bluemix_notm}} region or in another {{site.data.keyword.Bluemix_notm}} account, you must [create your own image pull secret for your cluster](#other).
 {: note}
 
 Want to make your registry credentials even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](/docs/containers/cs_encrypt.html#keyprotect) in your cluster to encrypt Kubernetes secrets in your cluster, such as the `imagePullSecret` that stores your registry credentials.
@@ -147,7 +147,7 @@ To deploy a container into the **default** namespace of your cluster, create a c
 Create your own `imagePullSecret` to deploy containers to other Kubernetes namespaces, use images that are stored in other {{site.data.keyword.Bluemix_notm}} regions or accounts, use images that are stored in {{site.data.keyword.Bluemix_dedicated_notm}}, or use images that are stored in external private registries.
 {:shortdesc}
 
-ImagePullSecrets are valid only for the Kubernetes namespaces that they were created for. Repeat these steps for every namespace where you want to deploy containers. Images from [DockerHub](#dockerhub) do not require ImagePullSecrets.
+Image pull secrets are valid only for the Kubernetes namespaces that they were created for. Repeat these steps for every namespace where you want to deploy containers. Images from [DockerHub](#dockerhub) do not require ImagePullSecrets.
 {: tip}
 
 Before you begin:
@@ -157,18 +157,18 @@ Before you begin:
 3.  [Target your CLI to your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
 
 <br/>
-To create your own imagePullSecret you can choose among the following options:
-- [Copy the imagePullSecret from the default namespace to other namespaces in your cluster](#copy_imagePullSecret).
-- [Create an imagePullSecret to access images in other {{site.data.keyword.Bluemix_notm}} regions and accounts](#other_regions_accounts).
-- [Create an imagePullSecret to access images in external private registries](#private_images).
+To create your own image pull secret you can choose among the following options:
+- [Copy the image pull secret from the default namespace to other namespaces in your cluster](#copy_imagePullSecret).
+- [Create an image pull secret to access images in other {{site.data.keyword.Bluemix_notm}} regions and accounts](#other_regions_accounts).
+- [Create an image pull secrets to access images in external private registries](#private_images).
 
 <br/>
-If you already created an imagePullSecret in your namespace that you want to use in your deployment, see [Deploying containers by using the created imagePullSecret](#use_imagePullSecret).
+If you already created an image pull secret in your namespace that you want to use in your deployment, see [Deploying containers by using the created imagePullSecret](#use_imagePullSecret).
 
-### Copying the imagePullSecret from the default namespace to other namespaces in your cluster
+### Copying the image pull secret from the default namespace to other namespaces in your cluster
 {: #copy_imagePullSecret}
 
-You can copy the imagePullSecret that is automatically created for the `default` Kubernetes namespace to other namespaces in your cluster.
+You can copy the image pull secret that is automatically created for the `default` Kubernetes namespace to other namespaces in your cluster.
 {: shortdesc}
 
 1. List available namespaces in your cluster.
@@ -214,10 +214,10 @@ You can copy the imagePullSecret that is automatically created for the `default`
 5. [Deploy a container by using the imagePullSecret](#use_imagePullSecret) in your namespace.
 
 
-### Creating an imagePullSecret to access images in other {{site.data.keyword.Bluemix_notm}} regions and accounts
+### Creating an image pull secret to access images in other {{site.data.keyword.Bluemix_notm}} regions and accounts
 {: #other_regions_accounts}
 
-To access images in other {{site.data.keyword.Bluemix_notm}} regions or accounts, you must create a registry token and save your credentials in an imagePullSecret.
+To access images in other {{site.data.keyword.Bluemix_notm}} regions or accounts, you must create a registry token and save your credentials in an image pull secret.
 {: shortdesc}
 
 1.  If you do not have a token, [create a token for the registry that you want to access.](/docs/services/Registry/registry_tokens.html#registry_tokens_create)
@@ -289,7 +289,7 @@ To access images in other {{site.data.keyword.Bluemix_notm}} regions or accounts
 ### Accessing images that are stored in other private registries
 {: #private_images}
 
-If you already have a private registry, you must store the registry credentials in a Kubernetes imagePullSecret and reference this secret from your configuration file.
+If you already have a private registry, you must store the registry credentials in a Kubernetes image pull secret and reference this secret from your configuration file.
 {:shortdesc}
 
 Before you begin:
@@ -430,7 +430,7 @@ When you refer to the image pull secret in a pod deployment, the image pull secr
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>The name of the imagePullSecret that you created earlier.</td>
+    <td>The name of the image pull secret that you created earlier.</td>
     </tr>
     </tbody></table>
 
