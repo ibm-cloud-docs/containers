@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-18"
+lastupdated: "2019-02-19"
 
 keywords: kubernetes, iks, node scaling 
 
@@ -49,8 +49,8 @@ Want to autoscale your pods instead? Check out [Scaling apps](/docs/containers/c
 The cluster autoscaler periodically scans the cluster to adjust the number of worker nodes within the worker pools that it manages in response to your workload resource requests and any custom settings that you configure, such as scanning intervals. Every minute, the cluster autoscaler checks for the following situations.
 {: shortdesc}
 
-*   **Pending pods to scale-up**: A pod is considered pending when insufficient compute resources exist to schedule the pod on a worker node. When the cluster autoscaler detects pending pods, the autoscaler scales up your worker nodes evenly across zones to meet the workload resource requests.
-*   **Underutilized worker nodes to scale-down**: Worker nodes that run with less than 50% of the total compute resources requested for 10 minutes or more and that can reschedule their workloads onto other worker nodes are considered underutilized. If the cluster autoscaler detects underutilized worker nodes, it scales down your worker nodes one at a time so that you have only the compute resources that you need.
+*   **Pending pods to scale up**: A pod is considered pending when insufficient compute resources exist to schedule the pod on a worker node. When the cluster autoscaler detects pending pods, the autoscaler scales up your worker nodes evenly across zones to meet the workload resource requests.
+*   **Underutilized worker nodes to scale down**: Worker nodes that run with less than 50% of the total compute resources requested for 10 minutes or more and that can reschedule their workloads onto other worker nodes are considered underutilized. If the cluster autoscaler detects underutilized worker nodes, it scales down your worker nodes one at a time so that you have only the compute resources that you need.
 
 Scanning and scaling up and down happens at regular intervals over time, and depending on the number of worker nodes might take a longer period of time to complete, such as 30 minutes.
 
@@ -139,7 +139,7 @@ Make the most out of the cluster autoscaler by organizing your worker node and a
 *   You can run only one `ibm-iks-cluster-autoscaler` per cluster.
 *   The cluster autoscaler scales your cluster in response to your workload [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). As such, you do not need to [resize](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](/docs/containers/cs_cli_reference.html#cs_rebalance) your worker pools.
 *   Don't use the `ibmcloud ks worker-rm` [command](/docs/containers/cs_cli_reference.html#cs_worker_rm) to remove individual worker nodes from your worker pool, which can unbalance the worker pool.
-*   Because taints cannot be applied at the worker pool level, do not [taint worker nodes](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) to avoid unexpected results. For example, when you deploy a workload that is not tolerated by the tainted worker nodes, the worker nodes are not considered for scale-up and more worker nodes might be ordered even if the cluster has sufficient capacity. However, the tainted worker nodes are still identified as underutilized if they have less than the threshold (by default 50%) of their resources utilized and thus are considered for scale-down. 
+*   Because taints cannot be applied at the worker pool level, do not [taint worker nodes](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) to avoid unexpected results. For example, when you deploy a workload that is not tolerated by the tainted worker nodes, the worker nodes are not considered for scaleup and more worker nodes might be ordered even if the cluster has sufficient capacity. However, the tainted worker nodes are still identified as underutilized if they have less than the threshold (by default 50%) of their resources utilized and thus are considered for scaledown. 
 
 <br>
 **What are some general guidelines for app workloads?**<br>
@@ -172,13 +172,13 @@ The cluster autoscaler is available as a **preview beta** for select users only.
 **Before you begin**:
 
 1.  [Install the required CLI and plug-ins](/docs/cli/index.html#overview):
-   *  {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)
-   *  {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`)
-   *  {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
-   *  Kubernetes (`kubectl`)
-   *  Helm (`helm`)
-2. [Create a standard cluster](/docs/containers/cs_clusters.html#clusters_ui) that runs **Kubernetes version 1.12**.
-3.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+    *  {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)
+    *  {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`)
+    *  {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
+    *  Kubernetes (`kubectl`)
+    *  Helm (`helm`)
+2.  [Create a standard cluster](/docs/containers/cs_clusters.html#clusters_ui) that runs **Kubernetes version 1.12 or later**.
+3.   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
 4.  Confirm that your {{site.data.keyword.Bluemix_notm}} Identity and Access Management credentials are stored in the cluster. The cluster autoscaler uses this secret to authenticate.
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
@@ -226,13 +226,13 @@ The cluster autoscaler is available as a **preview beta** for select users only.
     helm repo update
     ```
     {: pre}
-4.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster.
+4.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster. Set the `image.tag` to the Kubernetes version of your cluster. Supported Kubernetes versions are 1.12 or later.
     
     You can also [customize the cluster autoscaler settings](#ca_chart_values) such as the amount of time it waits before scaling worker nodes up or down.
     {: tip}
     
     ```
-    helm install ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler
+    helm install ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler --set image.tag=<kubernetes_version>
     ```
     {: pre}
 
@@ -485,7 +485,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     </tr>
     <tr>
     <td>`image.tag`</td>
-    <td>Set the version of the image that you want to pull.</td>
+    <td>Set the image tag to the Kubernetes version of your cluster. Must be 1.12 or later.</td>
     <td>1.12</td>
     </tr>
     <tr>
