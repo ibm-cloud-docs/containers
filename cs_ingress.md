@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-18"
+lastupdated: "2019-02-19"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -241,8 +241,10 @@ If the apps in your cluster are all in the same namespace, one Ingress resource 
 ### Apps are in multiple namespaces
 {: #multi-ns}
 
-If the apps in your cluster are in different namespaces, you must create one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
+If the apps in your cluster are in different namespaces, you must create one resource per namespace to define rules for the apps that are exposed there.
 {: shortdesc}
+
+However, you can define a hostname in only one resource. You cannot define the same hostname in multiple resources. To register multiple Ingress resources with the same hostname, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains can all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
 
 For example, consider the following scenario:
 * You have two versions of the same app, `app1` and `app3`, for testing purposes.
