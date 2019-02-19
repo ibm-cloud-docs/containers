@@ -15,4 +15,3 @@ mycustomdomain,
 myingress,
 myservice,
 mydomain,
-#EOF
