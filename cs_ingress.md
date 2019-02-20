@@ -349,7 +349,7 @@ You can use the IBM-provided domain, such as `mycluster-12345.us-south.container
 
 **To use the IBM-provided Ingress domain:**
 
-Get the IBM-provided domain. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
+Get the IBM-provided domain. Replace `<cluster_name_or_ID>` with the name of the cluster where the app is deployed.
 ```
 ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
 ```
