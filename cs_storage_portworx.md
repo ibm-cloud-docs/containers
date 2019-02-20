@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -799,7 +799,7 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
 
    6. Exit the pod.
 
-Check out how to [encrypt the secrets in your Kubernetes cluster](/docs/containers?topic=containers-encryption#keyprotect), including the secret where you stored your {{site.data.keyword.keymanagementserviceshort_notm}} CRK for your Portworx storage cluster.
+Check out how to [encrypt the secrets in your Kubernetes cluster](/docs/containers?topic=containers-encryption#keyprotect), including the secret where you stored your {{site.data.keyword.keymanagementserviceshort}} CRK for your Portworx storage cluster.
 {: tip}
 
 ## Adding storage from your Portworx cluster to apps

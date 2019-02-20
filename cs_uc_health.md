@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -45,7 +45,7 @@ Key technologies:
 * [Container security and isolation](/docs/containers?topic=containers-security#security)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
-* [Sign-on capability without changing app code by using {{site.data.keyword.appid.short_notm}}](/docs/services/appid?topic=appid-gettingstarted)
+* [Sign-on capability without changing app code by using {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-gettingstarted)
 
 They started by containerizing their SaaS systems and putting them in the cloud. From that first step, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the SaaS systems, they easily designed Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for decreased staff costs is that IBM manages Kubernetes, so the provider can focus on delivering better customer service.
 
@@ -76,7 +76,7 @@ On-demand compute, storage, and IO services run in the public cloud with secure 
 * Apps that manage highly sensitive patient data can be rehosted on {{site.data.keyword.containerlong_notm}} that runs on Bare Metal for Trusted Compute.
 * Trusted Compute can verify the underlying hardware against tampering.
 * From that core, Vulnerability Advisor provides image, policy, container, and packaging scanning vulnerability scanning, for known malware.
-* Consistently enforce policy-driven authentication to your services and APIs with a simple Ingress annotation. With declarative security you can ensure user authentication and token validation by using {{site.data.keyword.appid.short_notm}}.
+* Consistently enforce policy-driven authentication to your services and APIs with a simple Ingress annotation. With declarative security you can ensure user authentication and token validation by using {{site.data.keyword.appid_short_notm}}.
 
 **Step 2: Lift and shift**
 * Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public cloud.
@@ -95,7 +95,7 @@ On-demand compute, storage, and IO services run in the public cloud with secure 
 * {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
-* {{site.data.keyword.appid.short_notm}}
+* {{site.data.keyword.appid_short_notm}}
 
 For the most sensitive workloads, the clusters can be hosted in {{site.data.keyword.containerlong_notm}} for Bare Metal.  It provides a trusted compute platform that automatically scans hardware and runtime code for vulnerabilities. By using industry-standard containers technology, apps can initially be rehosted on {{site.data.keyword.containerlong_notm}} quickly without major architectural changes. This change provides the immediate benefit of scalability.
 
