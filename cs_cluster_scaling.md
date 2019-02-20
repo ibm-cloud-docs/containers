@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks, node scaling 
+
+scope: containers
 
 ---
 
@@ -36,7 +40,7 @@ Keep reading for more information about how cluster autoscaler works, or skip to
 * [Limiting apps to run on only certain autoscaled worker pools](#ca_limit_pool)
 * [Removing the cluster autoscaler](#ca_rm)
 
-Want to autoscale your pods instead? Check out [Scaling apps](/docs/containers/cs_app.html#app_scaling).
+Want to autoscale your pods instead? Check out [Scaling apps](/docs/containers?topic=containers-app#app_scaling).
 {: tip}
 
 ## Understanding how the cluster autoscaler works
@@ -45,12 +49,12 @@ Want to autoscale your pods instead? Check out [Scaling apps](/docs/containers/c
 The cluster autoscaler periodically scans the cluster to adjust the number of worker nodes within the worker pools that it manages in response to your workload resource requests and any custom settings that you configure, such as scanning intervals. Every minute, the cluster autoscaler checks for the following situations.
 {: shortdesc}
 
-*   **Pending pods to scale-up**: A pod is considered pending when insufficient compute resources exist to schedule the pod on a worker node. When the cluster autoscaler detects pending pods, the autoscaler scales up your worker nodes evenly across zones to meet the workload resource requests.
-*   **Underutilized worker nodes to scale-down**: Worker nodes that run with less than 50% of the total compute resources requested for 10 minutes or more and that can reschedule their workloads onto other worker nodes are considered underutilized. If the cluster autoscaler detects underutilized worker nodes, it scales down your worker nodes one at a time so that you have only the compute resources that you need.
+*   **Pending pods to scale up**: A pod is considered pending when insufficient compute resources exist to schedule the pod on a worker node. When the cluster autoscaler detects pending pods, the autoscaler scales up your worker nodes evenly across zones to meet the workload resource requests.
+*   **Underutilized worker nodes to scale down**: Worker nodes that run with less than 50% of the total compute resources requested for 10 minutes or more and that can reschedule their workloads onto other worker nodes are considered underutilized. If the cluster autoscaler detects underutilized worker nodes, it scales down your worker nodes one at a time so that you have only the compute resources that you need.
 
 Scanning and scaling up and down happens at regular intervals over time, and depending on the number of worker nodes might take a longer period of time to complete, such as 30 minutes.
 
-The cluster autoscaler adjusts the number of worker nodes by considering the [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) that you define for your deployments, not actual worker node usage. If your pods and deployments don't request appropriate amounts of resources, you must adjust their configuration files. The cluster autoscaler can't adjust them for you. Also keep in mind that worker nodes use some of their compute resources for basic cluster functionality, default and custom [add-ons](/docs/containers/cs_cluster_update.html#addons), and [resource reserves](/docs/containers/cs_clusters_planning.html#resource_limit_node).
+The cluster autoscaler adjusts the number of worker nodes by considering the [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) that you define for your deployments, not actual worker node usage. If your pods and deployments don't request appropriate amounts of resources, you must adjust their configuration files. The cluster autoscaler can't adjust them for you. Also keep in mind that worker nodes use some of their compute resources for basic cluster functionality, default and custom [add-ons](/docs/containers?topic=containers-update#addons), and [resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).
 {: note}
 
 <br>
@@ -58,13 +62,13 @@ The cluster autoscaler adjusts the number of worker nodes by considering the [re
 In general, the cluster autoscaler calculates the number of worker nodes that your cluster needs to run its workload. Scaling the cluster up or down depends on many factors including the following.
 *   The minimum and maximum worker node size per zone that you set.
 *   Your pending pod resource requests and certain metadata that you associate with the workload, such as anti-affinity, labels to place pods only on certain machine types, or [pod disruption budgets![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
-*   The worker pools that the cluster autoscaler manages, potentially across zones in a [multizone cluster](/docs/containers/cs_clusters_planning.html#multizone).
+*   The worker pools that the cluster autoscaler manages, potentially across zones in a [multizone cluster](/docs/containers?topic=containers-plan_clusters#multizone).
 *   For more information, see the [Kubernetes Cluster Autoscaler FAQs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md).
 
 **How is this behavior different from worker pools that are not manage by the cluster autoscaler?**<br>
-When you [create a worker pool](/docs/containers/cs_clusters.html#add_pool), you specify how many worker nodes per zone it has. The worker pool maintains that number of worker nodes until you [resize](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](/docs/containers/cs_cli_reference.html#cs_rebalance) it. The worker pool does not add or remove worker nodes for you. If you have more pods than can be scheduled, the pods remain in pending state until you resize the worker pool.
+When you [create a worker pool](/docs/containers?topic=containers-clusters#add_pool), you specify how many worker nodes per zone it has. The worker pool maintains that number of worker nodes until you [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) it. The worker pool does not add or remove worker nodes for you. If you have more pods than can be scheduled, the pods remain in pending state until you resize the worker pool.
 
-When you enable the cluster austoscaler for a worker pool, worker nodes are scaled up or down in response to your pod spec settings and resource requests. You don't need to resize or rebalance the worker pool manually.
+When you enable the cluster autoscaler for a worker pool, worker nodes are scaled up or down in response to your pod spec settings and resource requests. You don't need to resize or rebalance the worker pool manually.
 
 **Can I see an example of how the cluster autoscaler scales up and down?**<br>
 Consider the following image for an example of scaling the cluster up and down.
@@ -72,14 +76,14 @@ Consider the following image for an example of scaling the cluster up and down.
 _Figure: Autoscaling a cluster up and down._
 ![Autoscaling a cluster up and down GIF](images/cluster-autoscaler-x3.gif){: gif}
 
-1.  The cluster has four worker nodes in two worker pools that are spread across two zones. Each pool has one worker node per zone, but **Worker Pool A** has a machine type of `u2c.2x4` and **Worker Pool B** has a machine type of `b2c.4x16`. Your total compute resources are roughly 10 cores (2 cores x 2 worker nodes for **Worker Pool A**, and 4 cores x 2 worker nodes for **Worker Pool B**). Your cluster currently runs a workload that requests 6 of these 10 cores. Note that additional computing resources are taken up on each worker node by the [reserved resources](/docs/containers/cs_clusters_planning.html#resource_limit_node) required to run the cluster, worker nodes, and any add-ons such as the cluster autoscaler.
+1.  The cluster has four worker nodes in two worker pools that are spread across two zones. Each pool has one worker node per zone, but **Worker Pool A** has a machine type of `u2c.2x4` and **Worker Pool B** has a machine type of `b2c.4x16`. Your total compute resources are roughly 10 cores (2 cores x 2 worker nodes for **Worker Pool A**, and 4 cores x 2 worker nodes for **Worker Pool B**). Your cluster currently runs a workload that requests 6 of these 10 cores. Note that additional computing resources are taken up on each worker node by the [reserved resources](/docs/containers?topic=containers-plan_clusters#resource_limit_node) required to run the cluster, worker nodes, and any add-ons such as the cluster autoscaler.
 2.  The cluster autoscaler is configured to manage both worker pools with the following minimum and maximum size-per-zone:
-    *  **Worker Pool A**: minSize=1, maxSize=5.
-    *  **Worker Pool B**: minSize=1, maxSize=2.
+    *  **Worker Pool A**: `minSize=1`, `maxSize=5`.
+    *  **Worker Pool B**: `minSize=1`, `maxSize=2`.
 3.  You schedule deployments that require 14 additional pod replicas of an app that requests 1 core of CPU per replica. One pod replica can be deployed on the current resources, but the other 13 are pending.
 4.  The cluster autoscaler scales up your worker nodes within these constraints to support the additional 13 pod replicas resource requests.
     *  **Worker Pool A**: 7 worker nodes are added in a round-robin method as evenly as possible across the zones. The worker nodes increase the cluster compute capacity by roughly 14 cores (2 cores x 7 worker nodes).
-    *  **Worker Pool B**: 2 worker nodes are added evenly across the zones, reaching the maxSize of 2 worker nodes per zone. The worker nodes increase cluster capacity by roughly 8 cores (4 cores x 2 worker node).
+    *  **Worker Pool B**: 2 worker nodes are added evenly across the zones, reaching the `maxSize` of 2 worker nodes per zone. The worker nodes increase cluster capacity by roughly 8 cores (4 cores x 2 worker node).
 5.  The 20 pods with 1-core requests are distributed as follows across the worker nodes. Note that because worker nodes have resource reserves as well as pods that run to cover default cluster features, the pods for your workload cannot use all the available compute resources of a worker node. For example, although the `b2c.4x16` worker nodes have 4 cores, only 3 pods that request a minimum of 1 core each can be scheduled onto the worker nodes.
     <table summary="Distribution of workload in scaled cluster.">
     <caption>Distribution of workload in scaled cluster.</caption>
@@ -133,9 +137,9 @@ Make the most out of the cluster autoscaler by organizing your worker node and a
 <br>
 **What are some general guidelines for worker pools and nodes?**<br>
 *   You can run only one `ibm-iks-cluster-autoscaler` per cluster.
-*   The cluster autoscaler scales your cluster in response to your workload [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). As such, you do not need to [resize](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](/docs/containers/cs_cli_reference.html#cs_rebalance) your worker pools.
-*   Don't use the `ibmcloud ks worker-rm` [command](/docs/containers/cs_cli_reference.html#cs_worker_rm) to remove individual worker nodes from your worker pool, which can unbalance the worker pool.
-*   If you taint worker nodes, the taints must apply to all worker nodes of the same type, labels, or pods. Don't [taint select worker nodes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) in a worker pool directly.
+*   The cluster autoscaler scales your cluster in response to your workload [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). As such, you do not need to [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) your worker pools.
+*   Don't use the `ibmcloud ks worker-rm` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm) to remove individual worker nodes from your worker pool, which can unbalance the worker pool.
+*   Because taints cannot be applied at the worker pool level, do not [taint worker nodes](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) to avoid unexpected results. For example, when you deploy a workload that is not tolerated by the tainted worker nodes, the worker nodes are not considered for scaleup and more worker nodes might be ordered even if the cluster has sufficient capacity. However, the tainted worker nodes are still identified as underutilized if they have less than the threshold (by default 50%) of their resources utilized and thus are considered for scaledown. 
 
 <br>
 **What are some general guidelines for app workloads?**<br>
@@ -146,10 +150,10 @@ Make the most out of the cluster autoscaler by organizing your worker node and a
 
 <br>
 **Why are my autoscaled worker pools unbalanced?**<br>
-During a scaleup, the cluster autoscaler balances nodes across zones, with a permitted difference of plus or minus one (+/- 1) worker node. Your pending workloads might not request enough capacity to make each zone balanced. In this case, if you want to manually balance the worker pools, [update your cluster autoscaler configmap](#ca_cm) to remove the unbalanced worker pool. Then run the `ibmcloud ks worker-pool-rebalance` [command](/docs/containers/cs_cli_reference.html#cs_rebalance), and add the worker pool back to the cluster autoscaler configmap.
+During a scaleup, the cluster autoscaler balances nodes across zones, with a permitted difference of plus or minus one (+/- 1) worker node. Your pending workloads might not request enough capacity to make each zone balanced. In this case, if you want to manually balance the worker pools, [update your cluster autoscaler configmap](#ca_cm) to remove the unbalanced worker pool. Then run the `ibmcloud ks worker-pool-rebalance` [command](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance), and add the worker pool back to the cluster autoscaler configmap.
 
 **Why can't I resize or rebalance my worker pool?**<br>
-When the cluster autoscaler is enabled for a worker pool, you cannot [resize](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](/docs/containers/cs_cli_reference.html#cs_rebalance) your worker pools. You must [edit the configmap](#ca_cm) to change the worker pool minimum or maximum sizes, or disable cluster autoscaling for that worker pool.
+When the cluster autoscaler is enabled for a worker pool, you cannot [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) your worker pools. You must [edit the configmap](#ca_cm) to change the worker pool minimum or maximum sizes, or disable cluster autoscaling for that worker pool.
 
 Further, if you do not disable the worker pools before you uninstall the `ibm-iks-cluster-autoscaler` Helm chart, the worker pools cannot be resized manually. Reinstall the `ibm-iks-cluster-autoscaler` Helm chart, [edit the configmap](#ca_cm) to disable the worker pool, and try again.
 
@@ -167,14 +171,14 @@ The cluster autoscaler is available as a **preview beta** for select users only.
 
 **Before you begin**:
 
-1.  [Install the required CLI and plug-ins](/docs/cli/index.html#overview):
-   *  {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)
-   *  {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`)
-   *  {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
-   *  Kubernetes (`kubectl`)
-   *  Helm (`helm`)
-2. [Create a standard cluster](/docs/containers/cs_clusters.html#clusters_ui) that runs **Kubernetes version 1.12**.
-3.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+1.  [Install the required CLI and plug-ins](/docs/cli?topic=cloud-cli-ibmcloud-cli#overview):
+    *  {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)
+    *  {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`)
+    *  {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
+    *  Kubernetes (`kubectl`)
+    *  Helm (`helm`)
+2.  [Create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui) that runs **Kubernetes version 1.12 or later**.
+3.   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 4.  Confirm that your {{site.data.keyword.Bluemix_notm}} Identity and Access Management credentials are stored in the cluster. The cluster autoscaler uses this secret to authenticate.
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
@@ -192,13 +196,13 @@ The cluster autoscaler is available as a **preview beta** for select users only.
         Labels:             ibm-cloud.kubernetes.io/worker-pool-id=a1aa111111b22b22cc3c3cc444444d44-4d555e5
         ```
         {: screen}
-    2.  If your worker pool does not have the required label, [add a new worker pool](/docs/containers/cs_clusters.html#add_pool) and use this worker pool with the cluster autoscaler.
+    2.  If your worker pool does not have the required label, [add a new worker pool](/docs/containers?topic=containers-clusters#add_pool) and use this worker pool with the cluster autoscaler.
 
 
 <br>
 **To install the `ibm-iks-cluster-autoscaler` plug-in in your cluster**:
 
-1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the **Helm version 2.11 or later** client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the **Helm version 2.11 or later** client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
 2.  Verify that tiller is installed with a service account.
     
     ```
@@ -222,13 +226,13 @@ The cluster autoscaler is available as a **preview beta** for select users only.
     helm repo update
     ```
     {: pre}
-4.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster.
+4.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster. Set the `image.tag` to the Kubernetes version of your cluster. Supported Kubernetes versions are 1.12 or later.
     
     You can also [customize the cluster autoscaler settings](#ca_chart_values) such as the amount of time it waits before scaling worker nodes up or down.
     {: tip}
     
     ```
-    helm install ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler
+    helm install ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler --set image.tag=<kubernetes_version>
     ```
     {: pre}
 
@@ -315,12 +319,12 @@ The cluster autoscaler is available as a **preview beta** for select users only.
 Update the cluster autoscaler configmap to enable automatically scaling worker nodes in your worker pools based on the minimum and maximum values that you set.
 {: shortdesc}
 
-After you edit the configmap to enable a worker pool, the cluster autoscaler begins to scale your cluster in response to your workload requests. As such, you cannot [resize](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](/docs/containers/cs_cli_reference.html#cs_rebalance) your worker pools. Scanning and scaling up and down happens at regular intervals over time, and depending on the number of worker nodes might take a longer period of time to complete, such as 30 minutes. Later, if you want to [remove the cluster autoscaler](#ca_rm), you must first disable each worker pool in the configmap.
+After you edit the configmap to enable a worker pool, the cluster autoscaler begins to scale your cluster in response to your workload requests. As such, you cannot [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) your worker pools. Scanning and scaling up and down happens at regular intervals over time, and depending on the number of worker nodes might take a longer period of time to complete, such as 30 minutes. Later, if you want to [remove the cluster autoscaler](#ca_rm), you must first disable each worker pool in the configmap.
 {: note}
 
 **Before you begin**:
 *  [Install the `ibm-iks-cluster-autoscaler` plug-in](#ca_helm).
-*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 **To update the cluster autoscaler configmap and values**:
 
@@ -347,7 +351,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
       uid: b45d047b-f406-11e8-b7f0-82ddffc6e65e
     ```
     {: screen}
-2.  Edit the configmap with the parameters to define how the cluster autoscaler scales your cluster worker pool. Note that unless you [disabled](/docs/containers/cs_cli_reference.html#cs_alb_configure) application load balancers (ALBs) in your standard cluster, you must change the `minSize` to `2` per zone so that the ALB pods can be spread for high availability.
+2.  Edit the configmap with the parameters to define how the cluster autoscaler scales your cluster worker pool. Note that unless you [disabled](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) application load balancers (ALBs) in your standard cluster, you must change the `minSize` to `2` per zone so that the ALB pods can be spread for high availability.
 
     <table>
     <caption>Cluster autoscaler configmap parameters</caption>
@@ -362,11 +366,11 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
     ]</pre><br><br>
-    **Note**: The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check if your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](/docs/containers/cs_clusters.html#add_pool) and use this worker pool with the cluster autoscaler.</td>
+    **Note**: The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check if your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](/docs/containers?topic=containers-clusters#add_pool) and use this worker pool with the cluster autoscaler.</td>
     </tr>
     <tr>
     <td>`"minSize": 1`</td>
-    <td>Specify the minimum number of worker nodes per zone to be in the worker pool at all times. The value must be 2 or greater so that your ALB pods can be spread for high availability. If you [disabled](/docs/containers/cs_cli_reference.html#cs_alb_configure) the ALB in your standard cluster, you can set the value to `1`.</td>
+    <td>Specify the minimum number of worker nodes per zone to be in the worker pool at all times. The value must be 2 or greater so that your ALB pods can be spread for high availability. If you [disabled](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) the ALB in your standard cluster, you can set the value to `1`.</td>
     </tr>
     <tr>
     <td>`"maxSize": 2`</td>
@@ -389,7 +393,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
     kubectl get pods -n kube-system
     ```
     {: pre}
-5.  Review the **Events** section of the cluster autoscaler pod for a **ConfigUpdated** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
+5.  Review the **`Events`** section of the cluster autoscaler pod for a **`ConfigUpdated`** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
 
     ```
     kubectl describe pod -n kube-system <cluster_autoscaler_pod>
@@ -417,7 +421,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
 
 **Before you begin**:
 *  [Install the `ibm-iks-cluster-autoscaler` plug-in](#ca_helm).
-*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 **To update the cluster autoscaler values**:
 
@@ -463,7 +467,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     <tbody>
     <tr>
     <td>`api_route`</td>
-    <td>Set the [{{site.data.keyword.containerlong_notm}} API endpoint](/docs/containers/cs_cli_reference.html#cs_api) for the region that your cluster is in.</td>
+    <td>Set the [{{site.data.keyword.containerlong_notm}} API endpoint](/docs/containers?topic=containers-cs_cli_reference#cs_api) for the region that your cluster is in.</td>
     <td>No default; uses the targeted region that your cluster is in.</td>
     </tr>
     <tr>
@@ -481,7 +485,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     </tr>
     <tr>
     <td>`image.tag`</td>
-    <td>Set the version of the image that you want to pull.</td>
+    <td>Set the image tag to the Kubernetes version of your cluster. Must be 1.12 or later.</td>
     <td>1.12</td>
     </tr>
     <tr>
@@ -574,7 +578,7 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 
 **Before you begin**:
 *  [Install the `ibm-iks-cluster-autoscaler` plug-in](#ca_helm).
-*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+*  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 **To limit pods to run on certain autoscaled worker pools**:
 
@@ -615,7 +619,7 @@ You can update the existing cluster autoscaler Helm chart to the latest version.
 Updating to the latest Helm chart from version 1.0.2 or earlier? [Follow these instructions](#ca_helm_up_102).
 {: note}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
     ```
@@ -678,7 +682,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 The latest Helm chart version of the cluster autoscaler requires a full removal of previously installed cluster autoscaler Helm chart versions. If you installed the Helm chart version 1.0.2 or earlier, uninstall that version first before you install the latest Helm chart of the cluster autoscaler.
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  Get your cluster autoscaler configmap. 
     ```
@@ -720,7 +724,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     kubectl get pods -n kube-system
     ```
     {: pre}
-9.  Review the **Events** section of the cluster autoscaler pod and look for a **ConfigUpdated** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
+9.  Review the **`Events`** section of the cluster autoscaler pod and look for a **`ConfigUpdated`** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
     ```
     kubectl describe pod -n kube-system <cluster_autoscaler_pod>
     ```
@@ -745,10 +749,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 ## Removing the cluster autoscaler
 {: #ca_rm}
 
-If you do not want to automatically scale your worker pools, you can uninstall the cluster autoscaler Helm chart. After the removal, you must [resize](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize) or [rebalance](/docs/containers/cs_cli_reference.html#cs_rebalance) your worker pools manually.
+If you do not want to automatically scale your worker pools, you can uninstall the cluster autoscaler Helm chart. After the removal, you must [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) your worker pools manually.
 {: shortdesc}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1.  In the [cluster autoscaler configmap](#ca_cm), remove the worker pool by setting the `"enabled"` value to `false`.
     ```

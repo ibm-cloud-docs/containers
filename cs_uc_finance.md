@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks 
+
+scope: containers
 
 ---
 
@@ -38,12 +42,12 @@ A Risk Management VP for a residential mortgage company processes 70 million rec
 Why {{site.data.keyword.Bluemix_notm}}: To improve risk analysis, the company looked to {{site.data.keyword.containerlong_notm}} and IBM Cloud Analytic services to reduce costs, increase worldwide availability, and ultimately accelerate regulatory compliance. With {{site.data.keyword.containerlong_notm}} in multiple regions, their analysis apps can be containerized and deployed across the globe, improving availability and addressing local regulations. Those deployments are accelerated with familiar open source tools, already part of {{site.data.keyword.containerlong_notm}}.
 
 {{site.data.keyword.containerlong_notm}} and key technologies: 
-* [Horizontal scaling](/docs/containers/cs_app.html#highly_available_apps) 
-* [Multiple regions for high availability](/docs/containers/cs_regions.html#regions-and-zones)
-* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)
-* [Container security and isolation](/docs/containers/cs_secure.html#security)
-* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant/getting-started.html)
-* [SDK for Node.js](/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [Horizontal scaling](/docs/containers?topic=containers-app#highly_available_apps) 
+* [Multiple regions for high availability](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Container security and isolation](/docs/containers?topic=containers-security#security)
+* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **The solution**
 
@@ -108,10 +112,10 @@ Why {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}}
 Then, Developers can experiment easily, pushing changes to Development and Test systems quickly with open toolchains. Their traditional software development tools get a new face when they add on AI cloud services to apps with a click. 
 
 Key technologies:    
-* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Fraud prevention with {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](/docs/runtimes/nodejs/index.html#nodejs_runtime)
+* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **Context: Streamlining developer productivity and deploying AI tools to partners 4 times faster**
 

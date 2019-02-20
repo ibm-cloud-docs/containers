@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks, docker
+
+scope: containers
 
 ---
 
@@ -62,7 +66,7 @@ Learn about some basic Docker concepts:
   </ul>
   </dd>
 
-<p>Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with container images.</p>
+<p>Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.</p>
 
 <p>Ready to gain deeper knowledge of Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-a-developer-introduction/" target="_blank">Learn how Docker and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></p>
 
@@ -103,10 +107,10 @@ Define update strategies for your app, including the number of pods that you wan
 <dt>App</dt>
 <dd>An app might refer to a complete app or a component of an app. You might deploy components of an app in separate pods or separate worker nodes.</dd>
 
-<p>Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with Kubernetes resources.</p>
+<p>Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.</p>
 
 <p>Ready to gain deeper knowledge of Kubernetes?</p>
-<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Expand your terminology knowledge with the Creating clusters tutorial</a>.</li>
+<ul><li><a href="/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial" target="_blank">Expand your terminology knowledge with the Creating clusters tutorial</a>.</li>
 <li><a href="https://developer.ibm.com/courses/all/container-kubernetes-essentials-with-ibm-cloud/" target="_blank">Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></li></ul>
 
 
@@ -176,47 +180,47 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     </thead>
     <tbody>
     <tr>
-    <td>ibm-master-proxy</td>
+    <td>`ibm-master-proxy`</td>
     <td>kube-system</td>
     <td>For clusters that run Kubernetes version 1.10 or later, the `ibm-master-proxy` forwards requests from the worker node to the IP addresses of the highly available master replicas. In single zone clusters, the master has three replicas on separate hosts with one master IP address and domain name. For clusters that are in a multizone-capable zone, the master has three replicas that are spread across zones. As such, each master has its own IP address that is registered with DNS, with one domain name for the entire cluster master.</td>
     </tr>
     <tr>
-    <td>openvpn-client</td>
+    <td>`openvpn-client`</td>
     <td>kube-system</td>
     <td>The OpenVPN client works with the OpenVPN server to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
     </tr>
     <tr>
-    <td>kubelet</td>
+    <td>`kubelet`</td>
     <td>kube-system</td>
     <td>The kubelet is a pod that runs on every worker node and is responsible for monitoring the health of pods that run on the worker node and for watching the events that the Kubernetes API server sends. Based on the events, the kubelet creates or removes pods, ensures liveness and readiness probes, and reports back the status of the pods to the Kubernetes API server.</td>
     </tr>
     <tr>
-    <td>kube-dns</td>
+    <td>`kube-dns`</td>
     <td>kube-system</td>
     <td>Kubernetes DNS schedules a DNS pod and service on the cluster. Containers automatically use the DNS service's IP to resolve DNS names in their searches for other pods and services.</td>
     </tr>
     <tr>
-    <td>calico</td>
+    <td>`calico`</td>
     <td>kube-system</td>
     <td>Calico manages network policies for your cluster, and comprises a few components as follows.
     <ul>
-    <li>**calico-cni**: The Calico container network interface (CNI) manages the network connectivity of containers and removes allocated resources when a container is deleted.</li>
-    <li>**calico-ipam**: The Calico IPAM manages IP address assignment for containers.</li>
-    <li>**calico-node**: The Calico node is a container that bundles together the various components required for networking containers with Calico.</li>
-    <li>**calico-policy-controller**: The Calico policy controller watches inbound and outbound network traffic for compliance with set network policies. If the traffic is not allowed in the cluster, access to the cluster is blocked. The Calico policy controller is also used to create and set network policies for a cluster.</li></ul></td>
+    <li>**`calico-cni`**: The Calico container network interface (CNI) manages the network connectivity of containers and removes allocated resources when a container is deleted.</li>
+    <li>**`calico-ipam`**: The Calico IPAM manages IP address assignment for containers.</li>
+    <li>**`calico-node`**: The Calico node is a container that bundles together the various components required for networking containers with Calico.</li>
+    <li>**`calico-policy-controller`**: The Calico policy controller watches inbound and outbound network traffic for compliance with set network policies. If the traffic is not allowed in the cluster, access to the cluster is blocked. The Calico policy controller is also used to create and set network policies for a cluster.</li></ul></td>
     </tr>
     <tr>
-    <td>kube-proxy</td>
+    <td>`kube-proxy`</td>
     <td>kube-system</td>
     <td>The Kubernetes network proxy is a daemon that runs on every worker node and that forwards or load balances TCP and UDP network traffic for services that run in the cluster.</td>
     </tr>
     <tr>
-    <td>kube-dashboard</td>
+    <td>`kube-dashboard`</td>
     <td>kube-system</td>
     <td>The Kubernetes dashboard is a web-based GUI that allows users to manage and troubleshoot the cluster and applications running in the cluster.</td>
     </tr>
     <tr>
-    <td>heapster</td>
+    <td>`heapster`</td>
     <td>kube-system</td>
     <td>Heapster is a cluster-wide aggregator of monitoring and event data. The Heapster pod discovers all nodes in the cluster and queries usage information from each node's kubelet. You can find utilization graphs in the Kubernetes dashboard.</td>
     </tr>
@@ -248,5 +252,5 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     </tbody></table></dd>
 </dl>
 
-Want to see how {{site.data.keyword.containerlong_notm}} can be used with other products and services? Check out some of the [integrations](/docs/containers/cs_integrations.html#integrations).
+Want to see how {{site.data.keyword.containerlong_notm}} can be used with other products and services? Check out some of the [integrations](/docs/containers?topic=containers-integrations#integrations).
 {: tip}

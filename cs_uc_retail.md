@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks 
+
+scope: containers
 
 ---
 
@@ -34,11 +38,11 @@ take advantage of analytics for market insights, multiregion deployments across 
 A Line-of-Business (LOB) Exec needs to increase sales channels, but the retail system is closed off in an on-premises data center. The competition has global partners to cross-sell and upsell permutations of their goods: across brick-and-mortar and online sites. 
 {: shortdesc}
 
-Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides a public-cloud ecosystem, where containers enable new partners and other external players to co-develop apps and data, through APIs. Now that the retail system is on the public cloud, APIs also streamline data sharing and jumpstart new app development. App deployments increase when Developers experiment easily, pushing changes to Development and Test systems quickly with toolchains. 
+Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides a public-cloud ecosystem, where containers enable new partners and other external players to co-develop apps and data, through APIs. Now that the retail system is on the public cloud, APIs also streamline data sharing and jump-start new app development. App deployments increase when Developers experiment easily, pushing changes to Development and Test systems quickly with toolchains. 
 
 {{site.data.keyword.containerlong_notm}} and key technologies:
-* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)
-* [{{site.data.keyword.cos_full}} to persist and sync data across apps](/docs/tutorials/pub-sub-object-storage.html#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [{{site.data.keyword.cos_full}} to persist and sync data across apps](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
 **Context: Retailer shares data, by using APIs with global partners to drive omnichannel sales**
@@ -119,8 +123,8 @@ A Chief Marketing Officer (CMO) needs to increase customer traffic by 20% in sto
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides easy spin-up of more compute, where Developers quickly add Cloud Analytics services for sales behavior insights and digital market adaptability. 
 
 Key technologies:    
-* [Horizontal scaling to accelerate development](/docs/containers/cs_app.html#highly_available_apps) 
-* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)
+* [Horizontal scaling to accelerate development](/docs/containers?topic=containers-app#highly_available_apps) 
+* [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Insights to market trends with Watson Discovery](https://www.ibm.com/watson/services/discovery/)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Inventory management with {{site.data.keyword.messagehub_full}}](/docs/services/MessageHub/messagehub010.html#about)

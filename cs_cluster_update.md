@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks 
+
+scope: containers
 
 ---
 
@@ -28,11 +32,11 @@ You can install updates to keep your Kubernetes clusters up-to-date in {{site.da
 ## Updating the Kubernetes master
 {: #master}
 
-Periodically, Kubernetes releases [major, minor, or patch updates](/docs/containers/cs_versions.html#version_types). Updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM updates the patch version, but you must update the master major and minor versions.
+Periodically, Kubernetes releases [major, minor, or patch updates](/docs/containers?topic=containers-cs_versions#version_types). Updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM updates the patch version, but you must update the master major and minor versions.
 {:shortdesc}
 
 **How do I know when to update the master?**</br>
-You are notified in the {{site.data.keyword.Bluemix_notm}} console and CLI when updates are available, and can also check our [supported versions](/docs/containers/cs_versions.html) page.
+You are notified in the {{site.data.keyword.Bluemix_notm}} console and CLI when updates are available, and can also check our [supported versions](/docs/containers?topic=containers-cs_versions) page.
 
 **How many versions behind the latest can the master be?**</br>
 IBM generally supports 3 versions of Kubernetes at a given time. You can update the Kubernetes API server no more than 2 versions ahead of its current version.
@@ -45,7 +49,7 @@ If your cluster is running an unsupported Kubernetes version, you might have to 
 No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
 
 **How are patch updates applied?**</br>
-By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can [check the versions changelog](/docs/containers/cs_versions_changelog.html) for any potential impact and choose to safely use the `ibmcloud ks cluster-update` [command](/docs/containers/cs_cli_reference.html#cs_cluster_update) yourself without waiting for the update automation to apply.
+By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can [check the versions changelog](/docs/containers?topic=containers-changelog) for any potential impact and choose to safely use the `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update) yourself without waiting for the update automation to apply.
 
 Unlike the master, you must update your workers for each patch version.
 
@@ -65,17 +69,17 @@ The following diagram shows the process that you can take to update your master.
 Figure 1. Updating Kubernetes master process diagram
 
 {: #update_master}
-Before you begin, make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform).
+Before you begin, make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
 To update the Kubernetes master _major_ or _minor_ version:
 
-1.  Review the [Kubernetes changes](/docs/containers/cs_versions.html) and make any updates marked _Update before master_.
+1.  Review the [Kubernetes changes](/docs/containers?topic=containers-cs_versions) and make any updates marked _Update before master_.
 
-2.  Update your Kubernetes API server and associated Kubernetes master components by using the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/login) or running the CLI `ibmcloud ks cluster-update` [command](/docs/containers/cs_cli_reference.html#cs_cluster_update).
+2.  Update your Kubernetes API server and associated Kubernetes master components by using the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/login) or running the CLI `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update).
 
 3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} clusters dashboard or run `ibmcloud ks clusters`.
 
-4.  Install the version of the [`kubectl cli`](/docs/containers/cs_cli_install.html#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master.
+4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master.
 
 When the Kubernetes API server update is complete, you can update your worker nodes.
 
@@ -92,7 +96,7 @@ You received a notification to update your worker nodes. What does that mean? As
 If you run apps as part of a deployment on worker nodes that you update, the apps are rescheduled onto other worker nodes in the cluster. These worker nodes might be in a different worker pool, or if you have stand-alone worker nodes, apps might be scheduled onto stand-alone worker nodes. To avoid downtime for your app, you must ensure that you have enough capacity in the cluster to carry the workload.
 
 **How can I control how many worker nodes go down at a given time during the update?**</br>
-If you need all your worker nodes to be up and running, consider [resizing your worker pool](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize) or [adding stand-alone worker nodes](/docs/containers/cs_cli_reference.html#cs_worker_add) to add more worker nodes. You can remove the additional worker nodes after the update is completed.
+If you need all your worker nodes to be up and running, consider [resizing your worker pool](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [adding stand-alone worker nodes](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add) to add more worker nodes. You can remove the additional worker nodes after the update is completed.
 
 In addition, you can create a Kubernetes config map that specifies the maximum number of worker nodes that can be unavailable at a time during the update. Worker nodes are identified by the worker node labels. You can use IBM-provided labels or custom labels that you added to the worker node.
 
@@ -100,13 +104,13 @@ In addition, you can create a Kubernetes config map that specifies the maximum n
 When the config map is not defined, the default is used. By default, a maximum of 20% of all of your worker nodes in each cluster can be unavailable during the update process.
 
 **Before you begin**:
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
-- Make any changes that are marked with _Update after master_ in the [Kubernetes changes](/docs/containers/cs_versions.html).
-- If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers/cs_versions_changelog.html#changelog).
-- Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform). </br>
+- Make any changes that are marked with _Update after master_ in the [Kubernetes changes](/docs/containers?topic=containers-cs_versions).
+- If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers?topic=containers-changelog#changelog).
+- Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). </br>
 
-Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
+Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 {: #worker-up-configmap}
@@ -251,12 +255,12 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
    ```
    {: pre}
 
-9. Verify that you do not have duplicate worker nodes. In some cases, older clusters might list duplicate worker nodes with a **NotReady** status after an update. To remove duplicates, see [troubleshooting](/docs/containers/cs_troubleshoot_clusters.html#cs_duplicate_nodes).
+9. Verify that you do not have duplicate worker nodes. In some cases, older clusters might list duplicate worker nodes with a **`NotReady`** status after an update. To remove duplicates, see [troubleshooting](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_nodes).
 
 Next steps:
 -   Repeat the update process with other worker pools.
 -   Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
--   If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](/docs/containers/cs_troubleshoot_health.html#cs_dashboard_graphs).
+-   If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs).
 
 
 ### Updating worker nodes in the console
@@ -268,11 +272,11 @@ After you set up the config map for the first time, you can subsequently update 
 Before you begin:
 *   [Set up a config map](#worker_node) to control how your worker nodes are updated.
 *   [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
-*   Make any changes that are marked with _Update after master_ in the [Kubernetes changes](/docs/containers/cs_versions.html).
-*   If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers/cs_versions_changelog.html#changelog).
-*   Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform). </br>
+*   Make any changes that are marked with _Update after master_ in the [Kubernetes changes](/docs/containers?topic=containers-cs_versions).
+*   If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers?topic=containers-changelog#changelog).
+*   Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). </br>
 
-Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
+Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 To update worker nodes from the console:
@@ -292,9 +296,9 @@ You can update the machine types of your worker nodes by adding new worker nodes
 {: shortdesc}
 
 Before you begin:
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
-- If you store data on your worker node, the data is deleted if not [stored outside the worker node](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
-- Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- If you store data on your worker node, the data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+- Make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
 To update machine types:
 
@@ -351,7 +355,7 @@ To update machine types:
         ```
         {: pre}
 
-     3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](/docs/containers/cs_regions.html#zones).
+     3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
         ```
         ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
         ```
@@ -434,7 +438,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 {: pre}
 
 **Can I install other add-ons than the default?**</br>
-Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](/docs/containers/cs_integrations.html#helm) to install the [block storage plug-in](/docs/containers/cs_storage_block.html#install_block), [Istio](/docs/containers/cs_istio.html), or [strongSwan VPN](/docs/containers/cs_vpn.html#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
+Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](/docs/containers?topic=containers-integrations#helm) to install the [block storage plug-in](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio), or [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
 
 ### Managing automatic updates for the Fluentd for logging add-on
 {: #logging}
@@ -442,10 +446,10 @@ Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you ca
 In order to make changes to your logging or filter configurations, the Fluentd add-on must be at the latest version. By default, automatic updates to the add-on are enabled.
 {: shortdesc}
 
-You can manage automatic updates of the Fluentd add-on in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) for the cluster.
+You can manage automatic updates of the Fluentd add-on in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
-* Check whether automatic updates are enabled by running the `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [command](/docs/containers/cs_cli_reference.html#cs_log_autoupdate_get).
-* Disable automatic updates by running the `ibmcloud ks logging-autoupdate-disable` [command](/docs/containers/cs_cli_reference.html#cs_log_autoupdate_disable).
+* Check whether automatic updates are enabled by running the `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get).
+* Disable automatic updates by running the `ibmcloud ks logging-autoupdate-disable` [command](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable).
 * If automatic updates are disabled but you need to make a change to your configuration, you have two options:
     * Turn on automatic updates for your Fluentd pods.
         ```
@@ -517,18 +521,18 @@ Before you begin:
     private-crb110acca09414e88a44227b87576ceea-alb1   enabled   private   10.130.5.78    mex01   ingress:350/ingress-auth:192*
     public-crb110acca09414e88a44227b87576ceea-alb1    enabled   public    169.57.1.110   mex01   ingress:350/ingress-auth:192*
 
-    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://cloud.ibm.com/docs/containers/cs_cluster_update.html#alb
+    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://cloud.ibm.com/docs/containers?topic=containers-update#alb
     ```
     {: screen}
 
-You can manage automatic updates of the Ingress ALB add-on in the following ways. **Note**: To run the following commands, you must have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) for the cluster.
+You can manage automatic updates of the Ingress ALB add-on in the following ways. **Note**: To run the following commands, you must have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 * Disable automatic updates.
     ```
     ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
     ```
     {: pre}
 * Manually update your Ingress ALB add-on.
-    1. If an update is available and you want to update the add-on, first check the [changelog for the latest version of the Ingress ALB add-on](/docs/containers/cs_versions_addons.html#alb_changelog) to verify any potentially disruptive changes.
+    1. If an update is available and you want to update the add-on, first check the [changelog for the latest version of the Ingress ALB add-on](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) to verify any potentially disruptive changes.
     2. Force a one-time update of your ALB pods. All ALB pods in the cluster are updated to the latest build version. You cannot update an individual ALB or choose which build to update the add-on to. Automatic updates remain disabled.
         ```
         ibmcloud ks alb-update --cluster <cluster_name_or_ID>
@@ -564,8 +568,8 @@ Review the following image to see how your cluster setup changes when you move f
 <img src="images/cs_cluster_migrate.png" alt="Update your cluster from stand-alone worker nodes to worker pools" width="600" style="width:600px; border-style: none"/>
 
 Before you begin:
-- Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) for the cluster.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+- Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 To update stand-alone worker nodes to worker pools:
 
@@ -581,7 +585,7 @@ To update stand-alone worker nodes to worker pools:
    ```
    {: pre}
 
-3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](/docs/containers/cs_regions.html#zones).
+3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
    ```
    ibmcloud ks zones
    ```
@@ -602,13 +606,13 @@ To update stand-alone worker nodes to worker pools:
       ```
       {: pre}
 
-   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone-add` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/vrf-on-ibm-cloud.html#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
+   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone-add` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone-add` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](/docs/containers/cs_clusters_planning.html#multizone).
+   3. **To add multiple zones to your worker pools**: Repeat the `ibmcloud ks zone-add` command with a different zone and specify the worker pools that you want to provision in that zone. By adding more zones to your cluster, you change your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-plan_clusters#multizone).
 
 6. Wait for the worker nodes to be deployed in each zone.
    ```
@@ -633,7 +637,7 @@ To update stand-alone worker nodes to worker pools:
       kubectl get nodes
       ```
       {: pre}
-      Your worker node is disabled for pod scheduling if the status displays **SchedulingDisabled**.
+      Your worker node is disabled for pod scheduling if the status displays **`SchedulingDisabled`**.
    4. Force pods to be removed from your stand-alone worker node and rescheduled onto remaining uncordoned stand-alone worker nodes and worker nodes from your worker pool.
       ```
       kubectl drain <worker_name> --ignore-daemonsets
@@ -650,7 +654,7 @@ To update stand-alone worker nodes to worker pools:
 
 
 **What's next?** </br>
-Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](/docs/containers/cs_clusters_planning.html#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.
+Now that you updated your cluster to use worker pools, you can, improve availability by adding more zones to your cluster. Adding more zones to your cluster changes your cluster from a single zone cluster to a [multizone cluster](/docs/containers?topic=containers-plan_clusters#ha_clusters). When you change your single zone cluster to a multizone cluster, your Ingress domain changes from `<cluster_name>.<region>.containers.mybluemix.net` to `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. The existing Ingress domain is still valid and can be used to send requests to your apps.
 
 <br />
 

@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks 
+
+scope: containers
 
 ---
 
@@ -56,11 +60,11 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 {: #tutorials_prereqs}
 
--  Check out the steps you need to take to [prepare to create a cluster](/docs/containers/cs_clusters.html#cluster_prepare).
+-  Check out the steps you need to take to [prepare to create a cluster](/docs/containers?topic=containers-clusters#cluster_prepare).
 -  Ensure you have the following access policies:
-    - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers/cs_users.html#platform) for {{site.data.keyword.containerlong_notm}}
-    - The [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for {{site.data.keyword.containerlong_notm}}
-    -  The [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) in the cluster space that you want to work in
+    - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
+    - The [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
+    -  The [**Developer** Cloud Foundry role](/docs/iam?topic=iam-mngcf#mngcf) in the cluster space that you want to work in
 
 
 ## Lesson 1: Creating a cluster and setting up the CLI
@@ -75,7 +79,7 @@ Because it can take a few minutes to provision, create your cluster before you i
 
 1.  [In the {{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/catalog/cluster/create), create a free or standard cluster with 1 worker pool that has 1 worker node in it.
 
-    You can also create a [cluster in the CLI](/docs/containers/cs_clusters.html#clusters_cli).
+    You can also create a [cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli).
     {: tip}
 
 As your cluster provisions, install the following CLIs that are used to manage clusters:
@@ -108,7 +112,7 @@ As your cluster provisions, install the following CLIs that are used to manage c
 
         Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.11.7/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.11.7/bin/windows/amd64/kubectl.exe)
 
-          **Tip:** If you are using Windows, install the Kubernetes CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some filepath changes when you run commands later.
+          **Tip:** If you are using Windows, install the Kubernetes CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some file path changes when you run commands later.
 
     2.  If you're using OS X or Linux, complete the following steps.
         1.  Move the executable file to the `/usr/local/bin` directory.
@@ -180,7 +184,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
 
 2.  Set up your own private image repository in {{site.data.keyword.registryshort_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.Bluemix_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
 
-    Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with container images.
+    Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
     In this example, the PR firm wants to create only one image repository in {{site.data.keyword.registryshort_notm}}, so they choose _pr_firm_ as their namespace to group all images in their account. Replace _&lt;namespace&gt;_ with a namespace of your choice that is unrelated to the tutorial.
 
@@ -319,4 +323,4 @@ Great work! Your cluster is configured and your local environment is ready for y
 {: #tutorials_next}
 
 * Test your knowledge and [take a quiz ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)!
-* Try the [Tutorial: Deploying apps into Kubernetes clusters](/docs/containers/cs_tutorials_apps.html#cs_apps_tutorial) to deploy the PR firm's app into the cluster that you created.
+* Try the [Tutorial: Deploying apps into Kubernetes clusters](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial) to deploy the PR firm's app into the cluster that you created.

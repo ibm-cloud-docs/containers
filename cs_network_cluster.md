@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks
+
+scope: containers
 
 ---
 
@@ -48,7 +52,7 @@ To access a pod behind a cluster service, apps can either use the in-cluster IP 
 {{site.data.keyword.containerlong_notm}} provides IBM Cloud infrastructure (SoftLayer) VLANs that ensure quality network performance and network isolation for worker nodes. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire. VLANs are dedicated to your {{site.data.keyword.Bluemix_notm}} account and not shared across IBM customers.
 {: shortdesc}
 
-By default, all clusters are connected to a private VLAN. The private VLAN determines the private IP address that is assigned to each worker node. Your workers have a private network interface and are accessible over the private network. When you create a cluster that is also connected to a public VLAN, your cluster has a public network interface too. The public VLAN allows the worker nodes to automatically and securely connect to the master. For more information about the default VLANs for your cluster, see [Default VLANs, subnets, and IPs for clusters](/docs/containers/cs_subnets.html#default_vlans_subnets).
+By default, all clusters are connected to a private VLAN. The private VLAN determines the private IP address that is assigned to each worker node. Your workers have a private network interface and are accessible over the private network. When you create a cluster that is also connected to a public VLAN, your cluster has a public network interface too. The public VLAN allows the worker nodes to automatically and securely connect to the master. For more information about the default VLANs for your cluster, see [Default VLANs, subnets, and IPs for clusters](/docs/containers?topic=containers-subnets#default_vlans_subnets).
 
 Cluster networking setups can be defined by the cluster's network interfaces:
 
@@ -84,7 +88,7 @@ By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with a
 **Why might I use this setup?**
 
 * You have an app that must be accessible to the public internet in a single-zone cluster.
-* You have an app that must be accessible to the public internet in a multizone cluster. Because you must enable [VLAN spanning](/docs/containers/cs_subnets.html#subnet-routing) to create a multizone cluster, the cluster can communicate with other systems that are connected to any private VLAN in the same IBM Cloud account. To isolate your multizone cluster on the private network, you can use [Calico network policies](/docs/containers/cs_network_policy.html#isolate_workers).
+* You have an app that must be accessible to the public internet in a multizone cluster. Because you must enable [VLAN spanning](/docs/containers?topic=containers-subnets#subnet-routing) to create a multizone cluster, the cluster can communicate with other systems that are connected to any private VLAN in the same IBM Cloud account. To isolate your multizone cluster on the private network, you can use [Calico network policies](/docs/containers?topic=containers-network_policies#isolate_workers).
 
 **What are my options for managing public and private access to my cluster?**
 </br>The following sections describe the capabilities across {{site.data.keyword.containerlong_notm}} that you can use to set up networking for clusters that are connected to a public and a private VLAN.
@@ -92,23 +96,23 @@ By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with a
 ### Expose your apps with networking services
 {: #both_vlans_services}
 
-The public network interface for worker nodes is protected by [predefined Calico network policy settings](/docs/containers/cs_network_policy.html#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports. These ports are opened so that IBM can monitor network traffic and automatically install security updates for the Kubernetes master.
+The public network interface for worker nodes is protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports. These ports are opened so that IBM can monitor network traffic and automatically install security updates for the Kubernetes master.
 {: shortdesc}
 
-If you want to expose your apps to the public or to a private network, you can create public or private NodePort, LoadBalancer, or Ingress services. For more information about each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](/docs/containers/cs_network_planning.html#external).
+If you want to expose your apps to the public or to a private network, you can create public or private NodePort, LoadBalancer, or Ingress services. For more information about each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](/docs/containers?topic=containers-cs_network_planning#external).
 
 ### Optional: Isolate networking workloads to edge worker nodes
 {: #both_vlans_edge}
 
-Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](cs_edge.html#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](cs_edge.html#edge_workloads).
+Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads).
 
 
 ### Optional: Connect to an on-premises network or IBM Cloud Private by using strongSwan VPN
 {: #both_vlans_vpn}
 
 To securely connect your worker nodes and apps to an on-premises network, you can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/about.html). The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite.
-* To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](cs_vpn.html#vpn-setup) directly in a pod in your cluster.
-* To set up a secure connection between your cluster and an IBM Cloud Private instance, see [Connecting your public and private cloud with the strongSwan VPN](cs_hybrid.html#hybrid_vpn).
+* To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.
+* To set up a secure connection between your cluster and an IBM Cloud Private instance, see [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn).
 
 
 <br />
@@ -130,47 +134,47 @@ By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with a
 **Why might I use this setup?**
 
 * You have an app in a single-zone cluster. You want to expose the app only to pods within the cluster or in other clusters that are connected to the same private VLAN.
-* You have an app in a multizone cluster. You want to expose the app only to pods within the cluster or in other clusters that are connected to the same private VLANs as your cluster. However, because [VLAN spanning](/docs/containers/cs_subnets.html#subnet-routing) must be enabled for multizone clusters, other systems that are connected to any private VLAN in the same IBM Cloud account can access the cluster. You want to isolate your multizone cluster from other systems.
+* You have an app in a multizone cluster. You want to expose the app only to pods within the cluster or in other clusters that are connected to the same private VLANs as your cluster. However, because [VLAN spanning](/docs/containers?topic=containers-subnets#subnet-routing) must be enabled for multizone clusters, other systems that are connected to any private VLAN in the same IBM Cloud account can access the cluster. You want to isolate your multizone cluster from other systems.
 
 **What are my options for managing public and private access to my cluster?**</br>The following sections describe the capabilities across {{site.data.keyword.containerlong_notm}} that you can use to set up private-only networking and lock down public networking for clusters that are connected to a public and a private VLAN.
 
 ### Expose your apps with private networking services and secure your cluster from public access with Calico network policies
 {: #both_vlans_private_services}
 
-The public network interface for worker nodes is protected by [predefined Calico network policy settings](/docs/containers/cs_network_policy.html#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports. These ports are opened so that IBM can monitor network traffic and automatically install security updates for the Kubernetes master.
+The public network interface for worker nodes is protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports. These ports are opened so that IBM can monitor network traffic and automatically install security updates for the Kubernetes master.
 {: shortdesc}
 
-If you want to expose your apps over a private network only, you can create private NodePort, a LoadBalancer, or Ingress services. For more information about planning private external networking, see [Planning private external networking for a public and private VLAN setup](/docs/containers/cs_network_planning.html#private_both_vlans).
+If you want to expose your apps over a private network only, you can create private NodePort, a LoadBalancer, or Ingress services. For more information about planning private external networking, see [Planning private external networking for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_planning#private_both_vlans).
 
-However, the default Calico network policies also allow inbound public network traffic from the internet to these services. You can create Calico policies to instead block all public traffic to the services. For example, a NodePort service opens a port on a worker node over both the private and public IP address of the worker node. A load balancer service with a portable private IP address opens a public NodePort on every worker node. You must create a [Calico preDNAT network policy](/docs/containers/cs_network_policy.html#block_ingress) to block public NodePorts.
+However, the default Calico network policies also allow inbound public network traffic from the internet to these services. You can create Calico policies to instead block all public traffic to the services. For example, a NodePort service opens a port on a worker node over both the private and public IP address of the worker node. A load balancer service with a portable private IP address opens a public NodePort on every worker node. You must create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block public NodePorts.
 
 As an example, say you created a private load balancer service. You also created a Calico preDNAT policy to block public traffic from reaching the public NodePorts opened by the load balancer. This private load balancer can be accessed by:
 * [Any pod in that same cluster](#in-cluster)
 * Any pod in any cluster that is connected to the same private VLAN
-* If you have [VLAN spanning enabled](/docs/containers/cs_subnets.html#subnet-routing), any system that is connected to any of the private VLANs in the same IBM Cloud account
+* If you have [VLAN spanning enabled](/docs/containers?topic=containers-subnets#subnet-routing), any system that is connected to any of the private VLANs in the same IBM Cloud account
 * If you're not in the IBM Cloud account but still behind the company firewall, any system through a VPN connection to the subnet that the load balancer IP is on
 * If you're in a different IBM Cloud account, any system through a VPN connection to the subnet that the load balancer IP is on
 
 ### Isolate your cluster on the private network
 {: #isolate}
 
-If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must [enable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) so that your worker nodes can communicate with each other on the private network. However, when VLAN spanning is enabled, any system that is connected to any of the private VLANs in the same IBM Cloud account can access your workers. You can isolate your multizone cluster from other systems on the private network by using [Calico network policies](/docs/containers/cs_network_policy.html#isolate_workers). These policies also allow ingress and egress for the private IP ranges and ports that you opened in your private firewall.
+If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must [enable VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) so that your worker nodes can communicate with each other on the private network. However, when VLAN spanning is enabled, any system that is connected to any of the private VLANs in the same IBM Cloud account can access your workers. You can isolate your multizone cluster from other systems on the private network by using [Calico network policies](/docs/containers?topic=containers-network_policies#isolate_workers). These policies also allow ingress and egress for the private IP ranges and ports that you opened in your private firewall.
 {: shortdesc}
 
 ### Optional: Isolate networking workloads to edge worker nodes
 {: #both_vlans_private_edge}
 
-Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](cs_edge.html#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](cs_edge.html#edge_workloads).
+Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads).
 
 
-Then, use a [Calico preDNAT network policy](/docs/containers/cs_network_policy.html#block_ingress) to block traffic to public NodePorts on clusters that are running edge worker nodes. Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
+Then, use a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to public NodePorts on clusters that are running edge worker nodes. Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
 
 ### Optional: Connect to an on-premises network or IBM Cloud Private by using strongSwan VPN
 {: #both_vlans_private_vpn}
 
 To securely connect your worker nodes and apps to an on-premises network, you can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/about.html). The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite.
-* To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](cs_vpn.html#vpn-setup) directly in a pod in your cluster.
-* To set up a secure connection between your cluster and an IBM Cloud Private instance, see [Connecting your public and private cloud with the strongSwan VPN](cs_hybrid.html#hybrid_vpn).
+* To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.
+* To set up a secure connection between your cluster and an IBM Cloud Private instance, see [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn).
 
 
 <br />
@@ -179,7 +183,7 @@ To securely connect your worker nodes and apps to an on-premises network, you ca
 ## Planning private-only cluster networking
 {: #plan_setup_private_vlan}
 
-You can choose to [create a private-VLAN only cluster](/docs/containers/cs_clusters.html#clusters_cli) by including the `--private-only` flag in the CLI. When your worker nodes are connected to a private VLAN only, the worker nodes can't automatically connect to the master. You must use a gateway appliance to connect the worker nodes to the master. You can also use the gateway appliance as a firewall to secure your cluster from unwanted access.
+You can choose to [create a private-VLAN only cluster](/docs/containers?topic=containers-clusters#clusters_cli) by including the `--private-only` flag in the CLI. When your worker nodes are connected to a private VLAN only, the worker nodes can't automatically connect to the master. You must use a gateway appliance to connect the worker nodes to the master. You can also use the gateway appliance as a firewall to secure your cluster from unwanted access.
 {:shortdesc}
 
 
@@ -192,7 +196,7 @@ You can choose to [create a private-VLAN only cluster](/docs/containers/cs_clust
 * An automatic connection between all worker nodes and the master. You must provide this connection by [configuring a gateway appliance](#private_vlan_gateway).
 
 **Why might I use this setup?**
-</br>You have specific security requirements or need to create custom network policies and routing rules to provide dedicated network security. Note that using a gateway appliance incurs separate costs. For details, see the [documentation](/docs/infrastructure/fortigate-10g/explore-firewalls.html).
+</br>You have specific security requirements or need to create custom network policies and routing rules to provide dedicated network security. Note that using a gateway appliance incurs separate costs. For details, see the [documentation](/docs/infrastructure/fortigate-10g?topic=fortigate-10g-exploring-firewalls).
 
 **What are my options for managing public and private access to my cluster?**
 </br>The following sections describe the capabilities across {{site.data.keyword.containerlong_notm}} that you can use to set up networking for clusters that are connected to a private VLAN only.
@@ -200,24 +204,24 @@ You can choose to [create a private-VLAN only cluster](/docs/containers/cs_clust
 ### Configure a gateway appliance
 {: #private_vlan_gateway}
 
-If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity between your worker nodes and the master. You can set up a firewall with custom network policies to provide dedicated network security for your standard cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) or a [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) to act as your firewall and block unwanted traffic. When you set up a firewall, you must also [open up the required ports and IP addresses](/docs/containers/cs_firewall.html#firewall_outbound) for each region so that the master and the worker nodes can communicate.
+If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity between your worker nodes and the master. You can set up a firewall with custom network policies to provide dedicated network security for your standard cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or a [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g?topic=fortigate-10g-about-fortigate-security-appliance-10gbps) to act as your firewall and block unwanted traffic. When you set up a firewall, you must also [open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound) for each region so that the master and the worker nodes can communicate.
 {: shortdesc}
 
-If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster aren't configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](/docs/containers/cs_subnets.html#vra-routing).
+If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster aren't configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](/docs/containers?topic=containers-subnets#vra-routing).
 {: important}
 
 ### Expose your apps with private networking services
 {: #private_vlan_services}
 
-To make your app accessible from a private network only, you can use private NodePort, LoadBalancer, or Ingress services. Because your worker nodes aren't connected to a public VLAN, no public traffic is routed to these services. You must also [open up the required ports and IP addresses](/docs/containers/cs_firewall.html#firewall_inbound) to permit inbound traffic to these services.
+To make your app accessible from a private network only, you can use private NodePort, LoadBalancer, or Ingress services. Because your worker nodes aren't connected to a public VLAN, no public traffic is routed to these services. You must also [open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_inbound) to permit inbound traffic to these services.
 {: shortdesc}
 
-For more information about each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](/docs/containers/cs_network_planning.html#external).
+For more information about each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](/docs/containers?topic=containers-cs_network_planning#external).
 
 ### Optional: Connect to an on-premises database by using the gateway appliance
 {: #private_vlan_vpn}
 
-To securely connect your worker nodes and apps to an on-premises network, you must set up a VPN gateway. You can use the VRA or FSA that you previously set up to also configure an IPSec VPN endpoint. To configure a VRA, see [Setting up VPN connectivity with a VRA](/docs/containers/cs_vpn.html#vyatta).
+To securely connect your worker nodes and apps to an on-premises network, you must set up a VPN gateway. You can use the VRA or FSA that you previously set up to also configure an IPSec VPN endpoint. To configure a VRA, see [Setting up VPN connectivity with a VRA](/docs/containers?topic=containers-vpn#vyatta).
 {: shortdesc}
 
 

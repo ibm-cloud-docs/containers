@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-15"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks, helm
+
+scope: containers
 
 ---
 
@@ -44,7 +48,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. <p>For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_integrations.html#helm).</p></td>
+<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. <p>For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#helm).</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
@@ -52,7 +56,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Istio on {{site.data.keyword.containerlong_notm}}</td>
-<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms. Istio on {{site.data.keyword.containerlong}} provides a one-step installation of Istio into your cluster through a managed add-on. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. To get started, see [Using the managed Istio add-on (beta)](/docs/containers/cs_istio.html).</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms. Istio on {{site.data.keyword.containerlong}} provides a one-step installation of Istio into your cluster through a managed add-on. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. To get started, see [Using the managed Istio add-on (beta)](/docs/containers?topic=containers-istio).</td>
 </tr>
 </tbody>
 </table>
@@ -82,23 +86,23 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudaccesstrailfull}}</td>
-<td>Monitor the administrative activity made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker/index.html) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers/cs_at_events.html).</td>
+<td>Monitor the administrative activity made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
-<td>Expand your log collection, retention, and search abilities with {{site.data.keyword.loganalysisfull_notm}}. For more information, see <a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">Enabling automatic collection of cluster logs <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>Expand your log collection, retention, and search abilities with {{site.data.keyword.loganalysisfull_notm}}. For more information, see <a href="/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kube_other_logs" target="_blank">Enabling automatic collection of cluster logs <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.la_full_notm}}</td>
-<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
+<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
-<td>Expand your metrics collection and retention capabilities by defining rules and alerts with {{site.data.keyword.monitoringlong_notm}}. For more information, see <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Analyze metrics in Grafana for an app that is deployed in a Kubernetes cluster <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+<td>Expand your metrics collection and retention capabilities by defining rules and alerts with {{site.data.keyword.monitoringlong_notm}}. For more information, see <a href="/docs/services/cloud-monitoring/tutorials?topic=cloud-monitoring-container_service_metrics" target="_blank">Analyze metrics in Grafana for an app that is deployed in a Kubernetes cluster <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Note**: If you use {{site.data.keyword.mon_full_notm}} with clusters that run Kubernetes version 1.11 or later, not all container metrics are collected because Sysdig does not currently support `containerd`.</td>
+<td>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). **Note**: If you use {{site.data.keyword.mon_full_notm}} with clusters that run Kubernetes version 1.11 or later, not all container metrics are collected because Sysdig does not currently support `containerd`.</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -116,12 +120,16 @@ You can use various external services and catalog services with a standard Kuber
 <td>View metrics and logs for your containerized applications by using <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring and logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 <tr>
+<td>Splunk</td>
+<td>Import and search your Kubernetes logging, object, and metrics data in Splunk by using Splunk Connect for Kubernetes. Splunk Connect for Kubernetes is a collection of Helm charts that deploy a Splunk-supported deployment of Fluentd to your Kubernetes cluster, a Splunk-built Fluentd HTTP Event Collector (HEC) plug-in to send logs and metadata, and a metrics deployment that captures your cluster metrics. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2019/02/solving-business-problems-with-splunk-on-ibm-cloud-kubernetes-service/" target="_blank">Solving Business Problems with Splunk on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+</tr>
+<tr>
 <td>Sysdig</td>
 <td>Capture app, container, statsd, and host metrics with a single instrumentation point by using <a href="https://sysdig.com/" target="_blank">Sysdig <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/08/monitoring-ibm-bluemix-container-service-sysdig-container-intelligence/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with Sysdig Container Intelligence <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 <tr>
 <td>Weave Scope</td>
-<td>Weave Scope provides a visual diagram of your resources within a Kubernetes cluster, including services, pods, containers, processes, nodes, and more. Weave Scope provides interactive metrics for CPU and memory and also provides tools to tail and exec into a container.<p>For more information, see [Visualizing Kubernetes cluster resources with Weave Scope and {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_integrations.html#weavescope).</p></li></ol>
+<td>Weave Scope provides a visual diagram of your resources within a Kubernetes cluster, including services, pods, containers, processes, nodes, and more. Weave Scope provides interactive metrics for CPU and memory and also provides tools to tail and exec into a container.<p>For more information, see [Visualizing Kubernetes cluster resources with Weave Scope and {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#weavescope).</p></li></ol>
 </td>
 </tr>
 </tbody>
@@ -134,7 +142,7 @@ You can use various external services and catalog services with a standard Kuber
 ## Security services
 {: #security_services}
 
-Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/tutorials/cloud-e2e-security.html).
+Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security).
 {: shortdesc}
 
 <table summary="Summary for accessibility">
@@ -148,27 +156,27 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 <tbody>
   <tr id="appid">
     <td>{{site.data.keyword.appid_full}}</td>
-    <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid/index.html#gettingstarted) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers/cs_annotations.html#appid-auth).</td>
+    <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-gettingstarted#gettingstarted) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td>As a supplement to <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to improve the security of container deployments by reducing what your app is allowed to do. For more information, see <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+  <td>As a supplement to <a href="/docs/services/va?topic=va-va_index" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to improve the security of container deployments by reducing what your app is allowed to do. For more information, see <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td>You can use <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to store and manage SSL certificates for your apps. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>You can use <a href="/docs/services/certificate-manager?topic=certificate-manager-gettingstarted" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to store and manage SSL certificates for your apps. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}} (Beta)</td>
-  <td>You can use <a href="/docs/services/data-shield/index.html#gettingstarted" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
+  <td>You can use <a href="/docs/services/data-shield?topic=data-shield-gettingstarted#gettingstarted" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the <a href="/docs/services/Registry?topic=registry-index" target="_blank">{{site.data.keyword.registrylong}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
-  <td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see <a href="cs_encrypt.html#keyprotect">Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}</a>.<br>For more information, see the <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see <a href="/docs/containers?topic=containers-encryption#keyprotect">Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}</a>.<br>For more information, see the <a href="/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -176,7 +184,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 </tr>
 <tr>
 <td>Twistlock</td>
-<td>As a supplement to <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to manage firewalls, threat protection, and incident response. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>As a supplement to <a href="/docs/services/va?topic=va-va_index" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to manage firewalls, threat protection, and incident response. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 </tbody>
 </table>
@@ -202,15 +210,15 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) to configure the service to make one-time or scheduled backups for data in your clusters. For general information about the service, see the <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For general information about the service, see the <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
   <tr>
     <td>{{site.data.keyword.cloudantfull}}</td>
-    <td>{{site.data.keyword.cloudant_short_notm}} is a document-oriented DataBase as a Service (DBaaS) that stores data as documents in JSON format. The service is built for scalability, high availability, and durability. For more information, see the <a href="/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant" target="_blank">{{site.data.keyword.cloudant_short_notm}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+    <td>{{site.data.keyword.cloudant_short_notm}} is a document-oriented DataBase as a Service (DBaaS) that stores data as documents in JSON format. The service is built for scalability, high availability, and durability. For more information, see the <a href="/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant" target="_blank">{{site.data.keyword.cloudant_short_notm}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
   </tr>
   <tr>
     <td>{{site.data.keyword.composeForMongoDB_full}}</td>
-    <td>{{site.data.keyword.composeForMongoDB}} delivers high availability and redundancy, automated and on-demand no-stop backups, monitoring tools, integration into alert systems, performance analysis views, and more. For more information, see the <a href="/docs/services/ComposeForMongoDB/index.html#about-compose-for-mongodb" target="_blank">{{site.data.keyword.composeForMongoDB}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+    <td>{{site.data.keyword.composeForMongoDB}} delivers high availability and redundancy, automated and on-demand no-stop backups, monitoring tools, integration into alert systems, performance analysis views, and more. For more information, see the <a href="/docs/services/ComposeForMongoDB?topic=compose-for-mongodb-about#about-compose-for-mongodb" target="_blank">{{site.data.keyword.composeForMongoDB}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
   </tr>
 </tbody>
 </table>
@@ -226,19 +234,19 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 Add {{site.data.keyword.Bluemix_notm}} services to enhance your Kubernetes cluster with extra capabilities in areas such as Watson AI, data, security, and Internet of Things (IoT).
 {:shortdesc}
 
-You can bind only services that support service keys. To find a list with services that support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/resources/connect_external_app.html#externalapp).
+You can bind only services that support service keys. To find a list with services that support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/resources?topic=resources-externalapp#externalapp).
 {: note}
 
 Before you begin:
 - Ensure you have the following roles:
-    - [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the cluster.
-    - [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the namespace where you want to bind the service
-    - [**Developer** Cloud Foundry role](/docs/iam/mngcf.html#mngcf) for the space that you want to use
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+    - [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the cluster.
+    - [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the namespace where you want to bind the service
+    - [**Developer** Cloud Foundry role](/docs/iam?topic=iam-mngcf#mngcf) for the space that you want to use
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 
-1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/resources/connect_external_app.html#externalapp).
+1. [Create an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/resources?topic=resources-externalapp#externalapp).
     * Some {{site.data.keyword.Bluemix_notm}} services are available only in select regions. You can bind a service to your cluster only if the service is available in the same region as your cluster. In addition, if you want to create a service instance in the Washington DC zone, you must use the CLI.
     * You must create the service instance in the same resource group as your cluster. A resource can be created in only one resource group that you can't change afterward.
 
@@ -277,7 +285,7 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
      ```
      {: pre}
 
-4.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](/docs/containers/cs_cli_reference.html#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. For IAM-enabled services, you can also use the default **Writer** service access role, or specify the service access role with the `--role` flag. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials. If you use the `--key` flag, do not include the `--role` flag.
+4.  Add the service to your cluster by using the `ibmcloud ks cluster-service-bind` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind). For {{site.data.keyword.Bluemix_notm}} IAM-enabled services, make sure to use the Cloud Foundry alias that you created earlier. For IAM-enabled services, you can also use the default **Writer** service access role, or specify the service access role with the `--role` flag. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials. If you use the `--key` flag, do not include the `--role` flag.
     ```
     ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
     ```
@@ -349,12 +357,12 @@ The credentials of a service instance are base64 encoded and stored inside your 
 - [Mount the secret as a volume to your pod](#mount_secret)
 - [Reference the secret in environment variables](#reference_secret)
 <br>
-Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](/docs/containers/cs_encrypt.html#keyprotect) in your cluster to encrypt new and existing secrets, such as the secret that stores the credentials of your {{site.data.keyword.Bluemix_notm}} service instances.
+Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt new and existing secrets, such as the secret that stores the credentials of your {{site.data.keyword.Bluemix_notm}} service instances.
 {: tip}
 
 Before your begin:
--  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `kube-system` namespace.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+-  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Add an {{site.data.keyword.Bluemix_notm}} service to your cluster](#adding_cluster).
 
 ### Mounting the secret as a volume to your pod
@@ -643,11 +651,11 @@ You can add the service credentials and other key value pairs from your Kubernet
 
 Before you use Helm charts with {{site.data.keyword.containerlong_notm}}, you must install and initialize a Helm instance in your cluster. You can then add the {{site.data.keyword.Bluemix_notm}} Helm repository to your Helm instance.
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
 
-2. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following `.yaml` file from the [{{site.data.keyword.Bluemix_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml). **Note**: To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](/docs/containers/cs_users.html#access_policies).
+2. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following `.yaml` file from the [{{site.data.keyword.Bluemix_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml). **Note**: To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
     ```
     kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml
     ```
@@ -733,7 +741,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 ### Related Helm links
 {: #helm_links}
 
-* To use the strongSwan Helm chart, see [Setting up VPN connectivity with the strongSwan IPSec VPN service Helm chart](/docs/containers/cs_vpn.html#vpn-setup).
+* To use the strongSwan Helm chart, see [Setting up VPN connectivity with the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup).
 * View the available Helm charts that you can use with {{site.data.keyword.Bluemix_notm}} in the [Helm Charts Catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts) in the console.
 * Learn more about the Helm commands that are used to set up and manage Helm charts in the <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
 * Learn more about how you can [increase deployment velocity with Kubernetes Helm Charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
@@ -747,9 +755,9 @@ Weave Scope provides a visual diagram of your resources within a Kubernetes clus
 Before you begin:
 
 -   Remember not to expose your cluster information on the public internet. Complete these steps to deploy Weave Scope securely and access it from a web browser locally.
--   If you do not have one already, [create a standard cluster](/docs/containers/cs_clusters.html#clusters_ui). Weave Scope can be CPU intensive, especially the app. Run Weave Scope with larger standard clusters, not free clusters.
--  Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for all namespaces.
--   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+-   If you do not have one already, [create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui). Weave Scope can be CPU intensive, especially the app. Run Weave Scope with larger standard clusters, not free clusters.
+-  Ensure you have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for all namespaces.
+-   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 
 To use Weave Scope with a cluster:

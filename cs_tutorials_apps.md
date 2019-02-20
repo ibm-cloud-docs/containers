@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks 
+
+scope: containers
 
 ---
 
@@ -62,8 +66,8 @@ Software developers and network administrators that are deploying an app into a 
 ## Prerequisites
 {: #apps_prereqs}
 
-* [Tutorial: Creating Kubernetes clusters](/docs/containers/cs_tutorials.html#cs_cluster_tutorial).
-* Install the [container-registry plug-in](/docs/services/Registry/index.html#registry_cli_install).
+* [Tutorial: Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
+* Install the [container-registry plug-in](/docs/services/Registry?topic=registry-index#registry_cli_install).
 
 
 ## Lesson 1: Deploying single instance apps to Kubernetes clusters
@@ -95,7 +99,7 @@ To deploy the app:
     ```
     {: pre}
 
-3. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](cs_cli_install.html#cs_cli_configure).
+3. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 5.  Log in to the {{site.data.keyword.registryshort_notm}} CLI.
 
@@ -110,7 +114,7 @@ To deploy the app:
         ```
         {: pre}
 
-6.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous tutorial. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with container images.
+6.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous tutorial. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. To get the region prefix for the region that you are currently in, run `ibmcloud api`. For example, the Dallas location, US South region prefix is `ng`.
 
@@ -149,7 +153,7 @@ To deploy the app:
     ```
     {: screen}
 
-    Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with Kubernetes resources.
+    Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
 
 8.  Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort that you expose is the port on which the worker node listens for traffic.
 
@@ -252,7 +256,7 @@ To deploy the app:
     To see that the app is publicly available, try entering it into a browser on your cell phone.
     {: tip}
 
-11. [Launch the Kubernetes dashboard](/docs/containers/cs_app.html#cli_dashboard).
+11. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
 
     If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
@@ -391,7 +395,7 @@ As defined in the configuration script, Kubernetes can use an availability check
 
     *  **From the Kubernetes dashboard**:
 
-       1.  [Launch the Kubernetes dashboard](/docs/containers/cs_app.html#cli_dashboard).
+       1.  [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
        2.  In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when the containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.
 
        ```
@@ -530,7 +534,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
         ```
         {: codeblock}
 
-    2.  In the volumes section of the watson deployment, update the name of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret that you created in the previous [Creating Kubernetes cluster tutorial](/docs/containers/cs_tutorials.html#cs_cluster_tutorial_lesson4). By mounting the Kubernetes secret as a volume to your deployment, you make the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key available to the container that is running in your pod. The {{site.data.keyword.watson}} app components in this tutorial are configured to look up the API key by using the volume mount path.
+    2.  In the volumes section of the watson deployment, update the name of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret that you created in the previous [Creating Kubernetes cluster tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). By mounting the Kubernetes secret as a volume to your deployment, you make the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key available to the container that is running in your pod. The {{site.data.keyword.watson}} app components in this tutorial are configured to look up the API key by using the volume mount path.
 
         ```
         volumes:
@@ -606,7 +610,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
 
     In a browser, you can see the JSON response for the text you entered.
 
-10. [Launch the Kubernetes dashboard](/docs/containers/cs_app.html#cli_dashboard).
+10. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
 
 11. In the **Workloads** tab, you can see the resources that you created.
 
@@ -688,5 +692,5 @@ Ready to delete what you created? You can use the configuration script to delete
 Now that you conquered the basics, you can move to more advanced activities. Consider trying out one of the following:
 
 - Complete a [more complicated lab ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) in the repository
-- [Automatically scale your apps](/docs/containers/cs_app.html#app_scaling) with {{site.data.keyword.containerlong_notm}}
+- [Automatically scale your apps](/docs/containers?topic=containers-app#app_scaling) with {{site.data.keyword.containerlong_notm}}
 - Explore the container orchestration code patterns on [IBM Developer ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/technologies/containers/)

@@ -2,7 +2,11 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks, audit
+
+scope: containers
 
 ---
 
@@ -33,9 +37,9 @@ The {{site.data.keyword.containershort_notm}} generates two types of {{site.data
 
 * **Kubernetes API server audit events**:
     * These events are automatically generated, but you must configure your cluster to forward these events to the {{site.data.keyword.cloudaccesstrailshort}} service.
-    * You can configure your cluster to send events to the {{site.data.keyword.cloudaccesstrailshort}} **account domain** or to a **space domain**. For more information, see [Sending audit logs](/docs/containers/cs_health.html#api_forward).
+    * You can configure your cluster to send events to the {{site.data.keyword.cloudaccesstrailshort}} **account domain** or to a **space domain**. For more information, see [Sending audit logs](/docs/containers?topic=containers-health#api_forward).
 
-For more information about how the service works, see the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/services/cloud-activity-tracker/index.html). For more information about the Kubernetes actions that are tracked, review the [Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/).
+For more information about how the service works, see the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla). For more information about the Kubernetes actions that are tracked, review the [Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/).
 
 ## Finding information for events
 {: #kube-find}
@@ -54,7 +58,7 @@ To monitor administrative activity:
 5. Set the time frame that you want to view logs for. The default is 24 hours.
 6. To narrow your search, you can click the edit icon for `ActivityTracker_Account_Search_in_24h` and add fields in the **Available Fields** column.
 
-To let other users view account and space events, see [Granting permissions to see account events](/docs/services/cloud-activity-tracker/how-to/grant_permissions.html#grant_permissions).
+To let other users view account and space events, see [Granting permissions to see account events](/docs/services/cloud-activity-tracker/how-to?topic=cloud-activity-tracker-grant_permissions#grant_permissions).
 {: tip}
 
 ## Tracking cluster management events
@@ -145,7 +149,7 @@ Check out the following list of the cluster management events that are sent to {
 Check out the following table for a list of the Kubernetes API server audit events that are sent to {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
-Before you begin: Be sure that your cluster is configured to forward [Kubernetes API audit events](/docs/containers/cs_health.html#api_forward).
+Before you begin: Be sure that your cluster is configured to forward [Kubernetes API audit events](/docs/containers?topic=containers-health#api_forward).
 
 <table>
   <tr>
@@ -170,7 +174,7 @@ Before you begin: Be sure that your cluster is configured to forward [Kubernetes
   </tr>
   <tr>
     <td><code>certificatesigningrequests.update</code></td>
-    <td>A request to sign a certificateis updated.</td>
+    <td>A request to sign a certificate is updated.</td>
   </tr>
   <tr>
     <td><code>clusterbindings.create</code></td>

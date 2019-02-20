@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks 
+
+scope: containers
 
 ---
 
@@ -44,7 +48,7 @@ Before you can decide what type of storage is the right solution for you, you mu
 3. If your app does not have a limitation on the type of storage that you must use, determine the type of data that you want to store.
    - **Structured data:** Data that you can store in a relational database where you have a table with columns and rows. Data in tables can be connected by using keys and is usually easy to access due to the pre-defined data model. Examples are phone numbers, account numbers, Social Security numbers, or ZIP codes.
    - **Semi-structured data:** Data that does not fit into a relational database, but that comes with some organizational properties that you can use to read and analyze this data more easily. Examples are markup language files such as CSV, XML, or JSON.  
-   - **Unstructured data:** Data that does not follow an organizational pattern and that is so complex that you cannot store it in a relational database with pre-defined data models. To access this data, you need advanced tools and software. Examples are e-mail messages, videos, photos, audio files, presentations, social media data, or webpages.
+   - **Unstructured data:** Data that does not follow an organizational pattern and that is so complex that you cannot store it in a relational database with pre-defined data models. To access this data, you need advanced tools and software. Examples are e-mail messages, videos, photos, audio files, presentations, social media data, or web pages.
 
    If you have structured and unstructured data, try to store each data type separately in a storage solution that is designed for this data type. Using an appropriate storage solution for your data type eases up access to your data and gives you the benefits of performance, scalability, durability, and consistency.
    {: tip}
@@ -110,7 +114,7 @@ The following image shows available non-persistent data storage options in {{sit
 <tr>
 <td style="text-align:left">Capacity</td>
 <td style="text-align:left">Limited to the worker node's available secondary disk. To limit the amount of secondary storage that is consumed by your pod, use resource requests and limits for [ephemeral storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
-<td style="text-align:left">Limited to the worker node's available space on the primary (hostPath) or secondary disk (emptyDir). To limit the amount of secondary storage that is consumed by your pod, use resource requests and limits for [ephemeral storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
+<td style="text-align:left">Limited to the worker node's available space on the primary (`hostPath`) or secondary disk (`emptyDir`). To limit the amount of secondary storage that is consumed by your pod, use resource requests and limits for [ephemeral storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#local-ephemeral-storage).</td>
 </tr>
 <tr>
 <td style="text-align:left">Data access pattern</td>
@@ -148,7 +152,7 @@ The following image shows available non-persistent data storage options in {{sit
 <td style="text-align:left">Difficult to extend as limited to the worker node's primary and secondary disk capacity</td>
 </tr>
 <tr>
-<td style="text-align:left">Durabillity</td>
+<td style="text-align:left">Durability</td>
 <td style="text-align:left">Data is lost when the container crashes or is removed. </td>
 <td style="text-align:left">Data in <code>hostPath</code> or <code>emptyDir</code> volumes is lost when: <ul><li>The worker node is deleted.</li><li>The worker node is reloaded or updated.</li><li>The cluster is deleted.</li><li>The {{site.data.keyword.Bluemix_notm}} account reaches a suspended state. </li></ul></p><p>In addition, data in an <code>emptyDir</code> volume is removed when: <ul><li>The assigned pod is permanently deleted from the worker node.</li><li>The assigned pod is scheduled on another worker node.</li></ul>
 </tr>
@@ -269,7 +273,7 @@ If you have a multizone cluster, choose between the following persistent storage
 
 Persistent data storage options are available for standard clusters only.
 
-Looking to connect your cluster to an on-prem database instead? See [Setting up VPN connectivity to your cluster](/docs/containers/cs_vpn.html#vpn).
+Looking to connect your cluster to an on-prem database instead? See [Setting up VPN connectivity to your cluster](/docs/containers?topic=containers-vpn#vpn).
 {: tip}
 
 The following image shows the options that you have in {{site.data.keyword.containerlong_notm}} to permanently store your data in a multizone cluster and make your data highly available. You can use these options in a single zone cluster, but you might not get the high availability benefits that your app requires. 

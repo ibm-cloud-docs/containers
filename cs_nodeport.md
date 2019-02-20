@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks 
+
+scope: containers
 
 ---
 
@@ -33,7 +37,7 @@ Make your containerized app available to internet access by using the public IP 
 Expose a public port on your worker node and use the public IP address of the worker node to access your service in the cluster publicly from the internet.
 {:shortdesc}
 
-When you expose your app by creating a Kubernetes service of type NodePort, a NodePort in the range of 30000 - 32767 and an internal cluster IP address is assigned to the service. The NodePort service serves as the external entry point for incoming requests for your app. The assigned NodePort is publicly exposed in the kubeproxy settings of each worker node in the cluster. Every worker node starts listening on the assigned NodePort for incoming requests for the service. To access the service from the internet, you can use the public IP address of any worker node that was assigned during cluster creation and the NodePort in the format `<IP_address>:<nodeport>`. In addition to the public IP address, a NodePort service is available over the private IP address of a worker node.
+When you expose your app by creating a Kubernetes service of type NodePort, a NodePort in the range of 30000 - 32767 and an internal cluster IP address is assigned to the service. The NodePort service serves as the external entry point for incoming requests for your app. The assigned NodePort is publicly exposed in the `kubeproxy` settings of each worker node in the cluster. Every worker node starts listening on the assigned NodePort for incoming requests for the service. To access the service from the internet, you can use the public IP address of any worker node that was assigned during cluster creation and the NodePort in the format `<IP_address>:<nodeport>`. In addition to the public IP address, a NodePort service is available over the private IP address of a worker node.
 
 The following diagram shows how communication is directed from the internet to an app when a NodePort service is configured:
 
@@ -47,7 +51,7 @@ The following diagram shows how communication is directed from the internet to a
 
 4. The request is forwarded to the private IP address of the pod where the app is deployed. If multiple app instances are deployed in the cluster, the NodePort service routes the requests between the app pods.
 
-The public IP address of the worker node is not permanent. When a worker node is removed or re-created, a new public IP address is assigned to the worker node. You can use the NodePort service for testing the public access for your app or when public access is needed for a short amount of time only. When you require a stable public IP address and more availability for your service, expose your app by using a [LoadBalancer service](/docs/containers/cs_loadbalancer.html) or [Ingress](/docs/containers/cs_ingress.html).
+The public IP address of the worker node is not permanent. When a worker node is removed or re-created, a new public IP address is assigned to the worker node. You can use the NodePort service for testing the public access for your app or when public access is needed for a short amount of time only. When you require a stable public IP address and more availability for your service, expose your app by using a [LoadBalancer service](/docs/containers?topic=containers-loadbalancer) or [Ingress](/docs/containers?topic=containers-ingress).
 {: note}
 
 <br />
@@ -94,7 +98,7 @@ If you do not already have an app ready, you can use a Kubernetes example app ca
     <tbody>
     <tr>
     <td><code>metadata.name</code></td>
-    <td>Replace <code><em>&lt;my-nodeport-service&gt;</em></code> with a name for your NodePort service.<p>Learn more about [securing your personal information](/docs/containers/cs_secure.html#pi) when you work with Kubernetes resources.</p></td>
+    <td>Replace <code><em>&lt;my-nodeport-service&gt;</em></code> with a name for your NodePort service.<p>Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.</p></td>
     </tr>
     <tr>
     <td><code>metadata.labels</code></td>
@@ -102,7 +106,7 @@ If you do not already have an app ready, you can use a Kubernetes example app ca
     </tr>
     <tr>
       <td><code>spec.selector</code></td>
-      <td>Replace <code><em>&lt;my-selector-key&gt;</em></code> and <code><em>&lt;my-selector-value&gt;</em></code> with the key/value pair that you used in the <code>spec.template.metadata.labels</code> section of your deployment yaml. To associate the service with the deployment, the selector must match the deployment labels.
+      <td>Replace <code><em>&lt;my-selector-key&gt;</em></code> and <code><em>&lt;my-selector-value&gt;</em></code> with the key/value pair that you used in the <code>spec.template.metadata.labels</code> section of your deployment YAML. To associate the service with the deployment, the selector must match the deployment labels.
       </tr>
     <tr>
     <td><code>ports.port</code></td>
@@ -164,7 +168,7 @@ When the app is deployed, you can use the public IP address of any worker node a
 
     In this example, the NodePort is `30872`.
 
-    If the **Endpoints** section displays `<none>`, check the `<selectorkey>` and `<selectorvalue>` that you use in the `spec.selector` section of the NodePort service. Ensure that it is the same as the _key/value_ pair that you used in the `spec.template.metadata.labels` section of your deployment yaml.
+    If the **Endpoints** section displays `<none>`, check the `<selectorkey>` and `<selectorvalue>` that you use in the `spec.selector` section of the NodePort service. Ensure that it is the same as the _key/value_ pair that you used in the `spec.template.metadata.labels` section of your deployment YAML.
     {: note}
 
 3.  Form the URL with one of the worker node IP addresses and the NodePort. Example: `http://192.0.2.23:30872`

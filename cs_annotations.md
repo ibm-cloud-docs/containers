@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks, ingress
+
+scope: containers
 
 ---
 
@@ -26,7 +30,7 @@ lastupdated: "2019-02-14"
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
 {: shortdesc}
 
-Before you use annotations, make sure you have properly set up your Ingress service configuration by following the steps in [Exposing apps with Ingress](/docs/containers/cs_ingress.html). Once you have set up the Ingress ALB with a basic configuration, you can then expand its capabilities by adding annotations to the Ingress resource file.
+Before you use annotations, make sure you have properly set up your Ingress service configuration by following the steps in [Exposing apps with Ingress](/docs/containers?topic=containers-ingress). Once you have set up the Ingress ALB with a basic configuration, you can then expand its capabilities by adding annotations to the Ingress resource file.
 {: note}
 
 <table>
@@ -34,48 +38,33 @@ Before you use annotations, make sure you have properly set up your Ingress serv
 <col width="20%">
 <col width="20%">
 <col width="60%">
- <thead>
- <th>General annotations</th>
- <th>Name</th>
- <th>Description</th>
- </thead>
- <tbody>
- <tr>
- <td><a href="#proxy-external-service">External services</a></td>
- <td><code>proxy-external-service</code></td>
- <td>Add path definitions to external services, such as a service hosted in {{site.data.keyword.Bluemix_notm}}.</td>
- </tr>
- <tr>
- <td><a href="#location-modifier">Location modifier</a></td>
- <td><code>location-modifier</code></td>
- <td>Modify the way the ALB matches the request URI against the app path.</td>
- </tr>
- <tr>
- <td><a href="#location-snippets">Location snippets</a></td>
- <td><code>location-snippets</code></td>
- <td>Add a custom location block configuration for a service.</td>
- </tr>
- <tr>
- <td><a href="#alb-id">Private ALB routing</a></td>
- <td><code>ALB-ID</code></td>
- <td>Route incoming requests to your apps with a private ALB.</td>
- </tr>
- <tr>
- <td><a href="#rewrite-path">Rewrite paths</a></td>
- <td><code>rewrite-path</code></td>
- <td>Route incoming network traffic to a different path that your back-end app listens on.</td>
- </tr>
- <tr>
- <td><a href="#server-snippets">Server snippets</a></td>
- <td><code>server-snippets</code></td>
- <td>Add a custom server block configuration.</td>
- </tr>
- <tr>
- <td><a href="#tcp-ports">TCP ports</a></td>
- <td><code>tcp-ports</code></td>
- <td>Access an app via a non-standard TCP port.</td>
- </tr>
- </tbody></table>
+<thead>
+<th>General annotations</th>
+<th>Name</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td><a href="#custom-errors">Custom error actions</a></td>
+<td><code>custom-errors, custom-error-actions</code></td>
+<td>Indicate custom actions that the ALB can take for specific HTTP errors.</td>
+</tr>
+<tr>
+<td><a href="#location-snippets">Location snippets</a></td>
+<td><code>location-snippets</code></td>
+<td>Add a custom location block configuration for a service.</td>
+</tr>
+<tr>
+<td><a href="#alb-id">Private ALB routing</a></td>
+<td><code>ALB-ID</code></td>
+<td>Route incoming requests to your apps with a private ALB.</td>
+</tr>
+<tr>
+<td><a href="#server-snippets">Server snippets</a></td>
+<td><code>server-snippets</code></td>
+<td>Add a custom server block configuration.</td>
+</tr>
+</tbody></table>
 
 <br>
 
@@ -116,7 +105,7 @@ Before you use annotations, make sure you have properly set up your Ingress serv
   <td>Always route incoming network traffic to the same upstream server by using a sticky cookie.</td>
   </tr>
   <tr>
-  <td><a href="#upstream-fail-timeout">Upstream failtimeout</a></td>
+  <td><a href="#upstream-fail-timeout">Upstream fail timeout</a></td>
   <td><code>upstream-fail-timeout</code></td>
   <td>Set the amount of time during which the ALB can attempt to connect to the server before the server is considered unavailable.</td>
   </tr>
@@ -126,7 +115,7 @@ Before you use annotations, make sure you have properly set up your Ingress serv
   <td>Set the maximum number of idle keepalive connections for an upstream server.</td>
   </tr>
   <tr>
-  <td><a href="#upstream-max-fails">Upstream maxfails</a></td>
+  <td><a href="#upstream-max-fails">Upstream max fails</a></td>
   <td><code>upstream-max-fails</code></td>
   <td>Set the maximum number of unsuccessful attempts to communicate with the server before the server is considered unavailable.</td>
   </tr>
@@ -175,7 +164,42 @@ Before you use annotations, make sure you have properly set up your Ingress serv
   <td><code>ssl-services</code></td>
   <td>Allow SSL services support to encrypt traffic to your upstream apps that require HTTPS.</td>
   </tr>
+  <tr>
+  <td><a href="#tcp-ports">TCP ports</a></td>
+  <td><code>tcp-ports</code></td>
+  <td>Access an app via a non-standard TCP port.</td>
+  </tr>
   </tbody></table>
+
+<br>
+
+<table>
+<caption>Path routing annotations</caption>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+<thead>
+<th>Path routing annotations</th>
+<th>Name</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td><a href="#proxy-external-service">External services</a></td>
+<td><code>proxy-external-service</code></td>
+<td>Add path definitions to external services, such as a service hosted in {{site.data.keyword.Bluemix_notm}}.</td>
+</tr>
+<tr>
+<td><a href="#location-modifier">Location modifier</a></td>
+<td><code>location-modifier</code></td>
+<td>Modify the way the ALB matches the request URI against the app path.</td>
+</tr>
+<tr>
+<td><a href="#rewrite-path">Rewrite paths</a></td>
+<td><code>rewrite-path</code></td>
+<td>Route incoming network traffic to a different path that your back-end app listens on.</td>
+</tr>
+</tbody></table>
 
 <br>
 
@@ -284,156 +308,7 @@ Before you use annotations, make sure you have properly set up your Ingress serv
 ## General annotations
 {: #general}
 
-### External services (proxy-external-service)
-{: #proxy-external-service}
-
-Add path definitions to external services, such as services hosted in {{site.data.keyword.Bluemix_notm}}.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>Add path definitions to external services. Use this annotation only when your app operates on an external service instead of a back-end service. When you use this annotation to create an external service route, only `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout`, and `proxy-buffering` annotations are supported in conjunction. Any other annotations are not supported in conjunction with `proxy-external-service`.<p class="note">You cannot specify multiple hosts for a single service and path.</p>
-</dd>
-<dt>Sample Ingress resource YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: cafe-ingress
-  annotations:
-    ingress.bluemix.net/proxy-external-service: "path=&lt;mypath&gt; external-svc=https:&lt;external_service&gt; host=&lt;mydomain&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mysecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 80
-</code></pre>
-
-<table>
-<caption>Understanding the annotation components</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
- </thead>
- <tbody>
- <tr>
- <td><code>path</code></td>
- <td>Replace <code>&lt;<em>mypath</em>&gt;</code> with the path that the external service listens on.</td>
- </tr>
- <tr>
- <td><code>external-svc</code></td>
- <td>Replace <code>&lt;<em>external_service</em>&gt;</code> with the external service to be called. For example, <code>https://&lt;myservice&gt;.&lt;region&gt;.mybluemix.net</code>.</td>
- </tr>
- <tr>
- <td><code>host</code></td>
- <td>Replace <code>&lt;<em>mydomain</em>&gt;</code> with the host domain for the external service.</td>
- </tr>
- </tbody></table>
-
- </dd></dl>
-
-<br />
-
-
-### Location modifier (location-modifier)
-{: #location-modifier}
-
-Modify the way the ALB matches the request URI against the app path.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>By default, ALBs process the paths that apps listen on as prefixes. When an ALB receives a request to an app, the ALB checks the Ingress resource for a path (as a prefix) that matches the beginning of the request URI. If a match is found, the request is forwarded to the IP address of the pod where the app is deployed.<br><br>The `location-modifier` annotation changes the way the ALB searches for matches by modifying the location block configuration. The location block determines how requests are handled for the app path.<p class="note">To handle regular expression (regex) paths, this annotation is required.</p></dd>
-
-<dt>Supported modifiers</dt>
-<dd>
-
-<table>
-<caption>Supported modifiers</caption>
- <col width="10%">
- <col width="90%">
- <thead>
- <th>Modifier</th>
- <th>Description</th>
- </thead>
- <tbody>
- <tr>
- <td><code>=</code></td>
- <td>The equal sign modifier causes the ALB to select exact matches only. When an exact match is found, the search stops and the matching path is selected.<br>For example, if you app listens on <code>/tea</code>, the ALB selects only exact <code>/tea</code> paths when matching a request to your app.</td>
- </tr>
- <tr>
- <td><code>~</code></td>
- <td>The tilde modifier causes the ALB to process paths as case-sensitive regex paths during matching.<br>For example, if you app listens on <code>/coffee</code>, the ALB can select <code>/ab/coffee</code> or <code>/123/coffee</code> paths when matching a request to your app even though the paths are not explicitly set for your app.</td>
- </tr>
- <tr>
- <td><code>~\*</code></td>
- <td>The tilde followed by an asterisk modifier causes the ALB to process paths as case-insensitive regex paths during matching.<br>For example, if you app listens on <code>/coffee</code>, the ALB can select <code>/ab/Coffee</code> or <code>/123/COFFEE</code> paths when matching a request to your app even though the paths are not explicitly set for your app.</td>
- </tr>
- <tr>
- <td><code>^~</code></td>
- <td>The carat followed by a tilde modifier causes the ALB to select the best non-regex match instead of a regex path.</td>
- </tr>
- </tbody>
-</table>
-
-</dd>
-
-<dt>Sample Ingress resource YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mysecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;myservice&gt;
-          servicePort: 80</code></pre>
-
- <table>
- <caption>Understanding the annotation components</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>modifier</code></td>
-  <td>Replace <code>&lt;<em>location_modifier</em>&gt;</code> with the location modifier you want to use for the path. Supported modifiers are <code>'='</code>, <code>'~'</code>, <code>'~\*'</code>, and <code>'^~'</code>. You must surround the modifiers in single quotes.</td>
-  </tr>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service you created for your app.</td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
-
-<br />
-
-
-### Location snippets (location-snippets)
+### Location snippets (`location-snippets`)
 {: #location-snippets}
 
 Add a custom location block configuration for a service.
@@ -502,7 +377,7 @@ spec:
 <br />
 
 
-### Private ALB routing (ALB-ID)
+### Private ALB routing (`ALB-ID`)
 {: #alb-id}
 
 Route incoming requests to your apps with a private ALB.
@@ -557,61 +432,7 @@ If you have a multizone cluster with more than one private ALB enabled, you can 
 <br />
 
 
-### Rewrite paths (rewrite-path)
-{: #rewrite-path}
-
-Route incoming network traffic on an ALB domain path to a different path that your back-end app listens on.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>Your Ingress ALB domain routes incoming network traffic on <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> to your app. Your app listens on <code>/coffee</code>, instead of <code>/beans</code>. To forward incoming network traffic to your app, add the rewrite annotation to your Ingress resource configuration file. The rewrite annotation ensures that incoming network traffic on <code>/beans</code> is forwarded to your app by using the <code>/coffee</code> path. When including multiple services, use only a semi-colon (;) to separate them.</dd>
-<dt>Sample Ingress resource YAML</dt>
-<dd>
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/rewrite-path: "serviceName=&lt;myservice1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;myservice2&gt; rewrite=&lt;target_path2&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mysecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /beans
-        backend:
-          serviceName: myservice1
-          servicePort: 80
-</code></pre>
-
-<table>
-<caption>Understanding the annotation components</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-</thead>
-<tbody>
-<tr>
-<td><code>serviceName</code></td>
-<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
-</tr>
-<tr>
-<td><code>rewrite</code></td>
-<td>Replace <code>&lt;<em>target_path</em>&gt;</code> with the path that your app listens on. Incoming network traffic on the ALB domain is forwarded to the Kubernetes service by using this path. Most apps do not listen on a specific path, but use the root path and a specific port. In the example for <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code>, the rewrite path is <code>/coffee</code>. <strong>Note</strong>: If you apply this file and the URL shows a <code>404</code> response, your backend app might be listening on a path that ends in `/`. Try adding a trailing `/` to this rewrite field, then reapply the file and try the URL again.</td>
-</tr>
-</tbody></table>
-
-</dd></dl>
-
-<br />
-
-
-### Server snippets (server-snippets)
+### Server snippets (`server-snippets`)
 {: #server-snippets}
 
 Add a custom server block configuration.
@@ -621,7 +442,7 @@ Add a custom server block configuration.
 <dt>Description</dt>
 <dd>A server block is an NGINX directive that defines the configuration for the ALB virtual server. By providing a custom configuration snippet in the <code>server-snippets</code> annotation, you can modify how the ALB handles requests at the server level.
 
-<p class="tip">To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: <code>kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-&lt;ingress_resource_name&gt;.conf</code</p>
+<p class="tip">To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: <code>kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-&lt;ingress_resource_name&gt;.conf</code></p>
 </dd>
 
 <dt>Sample Ingress resource YAML</dt>
@@ -673,111 +494,13 @@ spec:
 <br />
 
 
-### TCP ports (tcp-ports)
-{: #tcp-ports}
-
-Access an app via a non-standard TCP port.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>
-Use this annotation for an app that is running a TCP streams workload.
-
-<p class="note">The ALB operates in pass-through mode and forwards traffic to back-end apps. SSL termination is not supported in this case. The TLS connection is not terminated and passes through untouched.</p>
-</dd>
-
-
-<dt>Sample Ingress resource YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mysecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;myservice&gt;
-          servicePort: 80</code></pre>
-
- <table>
- <caption>Understanding the annotation components</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service to access over non-standard TCP port.</td>
-  </tr>
-  <tr>
-  <td><code>ingressPort</code></td>
-  <td>Replace <code>&lt;<em>ingress_port</em>&gt;</code> with the TCP port on which you want to access your app.</td>
-  </tr>
-  <tr>
-  <td><code>servicePort</code></td>
-  <td>This parameter is optional. When provided, the port is substituted to this value before traffic is sent to the back-end app. Otherwise, the port remains the same as the Ingress port. If you don't want to set this parameter, you can remove it from your configuration. </td>
-  </tr>
-  </tbody></table>
-
- </dd>
- <dt>Usage</dt>
- <dd><ol><li>Review open ports for your ALB.
-<pre class="pre">
-<code>kubectl get service -n kube-system</code></pre>
-Your CLI output looks similar to the following:
-<pre class="screen">
-<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
-<li>Open the ALB config map.
-<pre class="pre">
-<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Add the TCP ports to the config map. Replace <code>&lt;port&gt;</code> with the TCP ports that you want to open.<p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a>.</p>
-<pre class="codeblock">
-<code>apiVersion: v1
-kind: ConfigMap
-data:
- public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
-metadata:
- creationTimestamp: 2017-08-22T19:06:51Z
- name: ibm-cloud-provider-ingress-cm
- namespace: kube-system
- resourceVersion: "1320"
- selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
- uid: &lt;uid&gt;</code></pre></li>
- <li>Verify that your ALB is re-configured with the TCP ports.
-<pre class="pre">
-<code>kubectl get service -n kube-system</code></pre>
-Your CLI output looks similar to the following:
-<pre class="screen">
-<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
-<li>Configure your Ingress to access your app via a non-standard TCP port. Use the sample YAML file in this reference. </li>
-<li>Either create your ALB resource or update your existing ALB configuration.
-<pre class="pre">
-<code>kubectl apply -f myingress.yaml</code></pre>
-</li>
-<li>Curl the Ingress subdomain to access your app. Example: <code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
-
-### Istio services (istio-services)
+### Istio services (`istio-services`)
 {: #istio-services}
 
 Route traffic to Istio-managed services.
 {:shortdesc}
 
-This annotation works only with Istio 0.7 and earlier. To expose Istio-managed apps using the IBM-provided subdomain, see the [documentation for using the Istio managed add-on](docs/containers/cs_istio.html#istio_expose).
+This annotation works only with Istio 0.7 and earlier. To expose Istio-managed apps using the IBM-provided subdomain, see the [documentation for using the Istio managed add-on](/docs/containers?topic=containers-istio#istio_expose).
 {: important}
 
 <dl>
@@ -967,7 +690,7 @@ spec:
 With connection annotations, you can change how the ALB connects to the back-end app and upstream-servers, and set timeouts or a maximum number of keepalive connections before the app or server is considered to be unavailable.
 {: shortdesc}
 
-### Custom connect-timeouts and read-timeouts (proxy-connect-timeout, proxy-read-timeout)
+### Custom connect-timeouts and read-timeouts (`proxy-connect-timeout`, `proxy-read-timeout`)
 {: #proxy-connect-timeout}
 
 Set the time that the ALB waits to connect to and read from the back-end app before the back-end app is considered unavailable.
@@ -1032,7 +755,7 @@ spec:
 
 
 
-### Keepalive requests (keepalive-requests)
+### Keepalive requests (`keepalive-requests`)
 {: #keepalive-requests}
 
 <dl>
@@ -1089,7 +812,7 @@ spec:
 
 
 
-### Keepalive timeout (keepalive-timeout)
+### Keepalive timeout (`keepalive-timeout`)
 {: #keepalive-timeout}
 
 <dl>
@@ -1145,7 +868,7 @@ spec:
 <br />
 
 
-### Proxy next upstream (proxy-next-upstream-config)
+### Proxy next upstream (`proxy-next-upstream-config`)
 {: #proxy-next-upstream-config}
 
 Set when the ALB can pass a request to the next upstream server.
@@ -1232,7 +955,7 @@ spec:
 <br />
 
 
-### Session-affinity with cookies (sticky-cookie-services)
+### Session-affinity with cookies (`sticky-cookie-services`)
 {: #sticky-cookie-services}
 
 Use the sticky cookie annotation to add session affinity to your ALB and always route incoming network traffic to the same upstream server.
@@ -1309,7 +1032,7 @@ spec:
 <br />
 
 
-### Upstream failtimeout (upstream-fail-timeout)
+### Upstream fail timeout (`upstream-fail-timeout`)
 {: #upstream-fail-timeout}
 
 Set the amount of time during which the ALB can attempt to connect to the server.
@@ -1366,7 +1089,7 @@ spec:
 <br />
 
 
-### Upstream keepalive (upstream-keepalive)
+### Upstream keepalive (`upstream-keepalive`)
 {: #upstream-keepalive}
 
 Set the maximum number of idle keepalive connections for an upstream server.
@@ -1424,7 +1147,7 @@ spec:
 <br />
 
 
-### Upstream maxfails (upstream-max-fails)
+### Upstream max fails (`upstream-max-fails`)
 {: #upstream-max-fails}
 
 Set the maximum number of unsuccessful attempts to communicate with the server.
@@ -1486,7 +1209,7 @@ spec:
 With HTTPS and TLS/SSL authentication annotations, you can configure your ALB for HTTPS traffic, change default HTTPS ports, enable SSL encryption for traffic that is sent to your back-end apps, or set up mutual authentication.
 {: shortdesc}
 
-### {{site.data.keyword.appid_short_notm}} Authentication (appid-auth)
+### {{site.data.keyword.appid_short_notm}} Authentication (`appid-auth`)
 {: #appid-auth}
 
 Use {{site.data.keyword.appid_full_notm}} to authenticate with your app.
@@ -1501,7 +1224,7 @@ Authenticate web or API HTTP/HTTPS requests with {{site.data.keyword.appid_short
 
 <p>If you set the request type to <code>api</code>, an API request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If the request does not contain an access token, a <code>401: Unauthorized</code> error message is returned to the user.</p>
 
-<p class="note">For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports backends with TLS/SSL enabled.</p>
+<p class="note">For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports back ends with TLS/SSL enabled.</p>
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -1598,7 +1321,7 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
 
 
 
-### Custom HTTP and HTTPS ports (custom-port)
+### Custom HTTP and HTTPS ports (`custom-port`)
 {: #custom-port}
 
 Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic.
@@ -1606,7 +1329,7 @@ Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic
 
 <dl>
 <dt>Description</dt>
-<dd>By default, the Ingress ALB is configured to listen for incoming HTTP network traffic on port 80 and for incoming HTTPS network traffic on port 443. You can change the default ports to add security to your ALB domain, or to enable only an HTTPS port.<p class="note">To enable mutual authentication on a port, [configure the ALB to open the valid port](/docs/containers/cs_ingress.html#opening_ingress_ports) and then specify that port in the [`mutual-auth` annotation](#mutual-auth). Do not use the `custom-port` annotation to specify a port for mutual authentication.</p></dd>
+<dd>By default, the Ingress ALB is configured to listen for incoming HTTP network traffic on port 80 and for incoming HTTPS network traffic on port 443. You can change the default ports to add security to your ALB domain, or to enable only an HTTPS port.<p class="note">To enable mutual authentication on a port, [configure the ALB to open the valid port](/docs/containers?topic=containers-ingress#opening_ingress_ports) and then specify that port in the [`mutual-auth` annotation](#mutual-auth). Do not use the `custom-port` annotation to specify a port for mutual authentication.</p></dd>
 
 
 <dt>Sample Ingress resource YAML</dt>
@@ -1661,7 +1384,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>Open the ALB config map.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Add the non-default HTTP and HTTPS ports to the config map. Replace &lt;port&gt; with the HTTP or HTTPS port that you want to open.<p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a>.</p>
+<li>Add the non-default HTTP and HTTPS ports to the config map. Replace &lt;port&gt; with the HTTP or HTTPS port that you want to open.<p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="/docs/containers?topic=containers-ingress#opening_ingress_ports">Opening ports in the Ingress ALB</a>.</p>
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1692,7 +1415,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 
 
 
-### HTTP redirects to HTTPS (redirect-to-https)
+### HTTP redirects to HTTPS (`redirect-to-https`)
 {: #redirect-to-https}
 
 Convert insecure HTTP client requests to HTTPS.
@@ -1736,7 +1459,7 @@ spec:
 <br />
 
 
-### HTTP Strict Transport Security (hsts)
+### HTTP Strict Transport Security (`hsts`)
 {: #hsts}
 
 <dl>
@@ -1802,7 +1525,7 @@ spec:
 <br />
 
 
-### Mutual authentication (mutual-auth)
+### Mutual authentication (`mutual-auth`)
 {: #mutual-auth}
 
 Configure mutual authentication for the ALB.
@@ -1821,7 +1544,7 @@ Use the `mutual-auth` annotation for SSL termination between the client and the 
 <dd>
 <ul>
 <li>You must have a valid mutual authentication secret that contains the required <code>ca.crt</code>. To create a mutual authentication secret, see the steps at the end of this section.</li>
-<li>To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](/docs/containers/cs_ingress.html#opening_ingress_ports) and then specify that port in this annotation. Do not use the `custom-port` annotation to specify a port for mutual authentication.</li>
+<li>To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](/docs/containers?topic=containers-ingress#opening_ingress_ports) and then specify that port in this annotation. Do not use the `custom-port` annotation to specify a port for mutual authentication.</li>
 </ul>
 </dd>
 
@@ -1876,7 +1599,7 @@ spec:
 **To create a mutual authentication secret:**
 
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon"](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
+    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
     {: tip}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert.
@@ -1900,7 +1623,7 @@ spec:
 
 
 
-### SSL services support (ssl-services)
+### SSL services support (`ssl-services`)
 {: #ssl-services}
 
 Allow HTTPS requests and encrypt traffic to your upstream apps.
@@ -1990,7 +1713,7 @@ spec:
 **To create a mutual authentication secret:**
 
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon"](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
+    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
     {: tip}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert.
@@ -2013,13 +1736,405 @@ spec:
 <br />
 
 
+### TCP ports (`tcp-ports`)
+{: #tcp-ports}
+
+Access an app via a non-standard TCP port.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>
+Use this annotation for an app that is running a TCP streams workload.
+
+<p class="note">The ALB operates in pass-through mode and forwards traffic to back-end apps. SSL termination is not supported in this case. The TLS connection is not terminated and passes through untouched.</p>
+</dd>
+
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;myservice&gt;
+          servicePort: 80</code></pre>
+
+ <table>
+ <caption>Understanding the annotation components</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service to access over non-standard TCP port.</td>
+  </tr>
+  <tr>
+  <td><code>ingressPort</code></td>
+  <td>Replace <code>&lt;<em>ingress_port</em>&gt;</code> with the TCP port on which you want to access your app.</td>
+  </tr>
+  <tr>
+  <td><code>servicePort</code></td>
+  <td>This parameter is optional. When provided, the port is substituted to this value before traffic is sent to the back-end app. Otherwise, the port remains the same as the Ingress port. If you don't want to set this parameter, you can remove it from your configuration. </td>
+  </tr>
+  </tbody></table>
+
+ </dd>
+ <dt>Usage</dt>
+ <dd><ol><li>Review open ports for your ALB.
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+Your CLI output looks similar to the following:
+<pre class="screen">
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d</code></pre></li>
+<li>Open the ALB config map.
+<pre class="pre">
+<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
+<li>Add the TCP ports to the config map. Replace <code>&lt;port&gt;</code> with the TCP ports that you want to open.<p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="/docs/containers?topic=containers-ingress#opening_ingress_ports">Opening ports in the Ingress ALB</a>.</p>
+<pre class="codeblock">
+<code>apiVersion: v1
+kind: ConfigMap
+data:
+ public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
+metadata:
+ creationTimestamp: 2017-08-22T19:06:51Z
+ name: ibm-cloud-provider-ingress-cm
+ namespace: kube-system
+ resourceVersion: "1320"
+ selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
+ uid: &lt;uid&gt;</code></pre></li>
+ <li>Verify that your ALB is re-configured with the TCP ports.
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+Your CLI output looks similar to the following:
+<pre class="screen">
+<code>NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d</code></pre></li>
+<li>Configure your Ingress to access your app via a non-standard TCP port. Use the sample YAML file in this reference. </li>
+<li>Either create your ALB resource or update your existing ALB configuration.
+<pre class="pre">
+<code>kubectl apply -f myingress.yaml</code></pre>
+</li>
+<li>Curl the Ingress subdomain to access your app. Example: <code>curl &lt;domain&gt;:&lt;ingressPort&gt;</code></li></ol></dd></dl>
+
+<br />
+
+
+## Path routing annotations
+{: #proxy-buffer}
+
+The Ingress ALB routes traffic to the paths that back-end apps listen on. With path routing annotations, you can configure how the ALB routes traffic to your apps.
+{: shortdesc}
+
+### Custom error actions (`custom-errors`, `custom-error-actions`)
+{: #custom-errors}
+
+Indicate custom actions that the ALB can take for specific HTTP errors.
+{: shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>To handle specific HTTP errors that might occur, you can set up custom error actions for the ALB to take.<ul>
+<li>The `custom-errors` annotation defines the service name, the HTTP error to handle, and the name of the error action that the ALB takes when it encounters the specified HTTP error for the service.</li>
+<li>The `custom-error-actions` annotation defines custom error actions in NGINX code snippets.</li></ul>
+</br>For example, in the `custom-errors` annotation, you can set up the ALB to handle `401` HTTP errors for `app1` by returning a custom error action called `/errorAction401`. Then, in the `custom-error-actions` annotation, you can define a code snippet called `/errorAction401` so that the ALB returns a custom error page to the client.</br>You can also use the `custom-errors` annotation to redirect the client to an error service that you manage. You must define the path to this error service in the `paths` section of the Ingress resource file.</dd>
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+<pre class="codeblock">
+<code>
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/custom-errors: "serviceName=&lt;app1&gt; httpError=&lt;401&gt; errorActionName=&lt;/errorAction401&gt;;serviceName=&lt;app2&gt; httpError=&lt;403&gt; errorActionName=&lt;/errorPath&gt;"
+    ingress.bluemix.net/custom-error-actions: |
+         errorActionName=&lt;/errorAction401&gt;
+         #Example custom error snippet
+         proxy_pass http://example.com/forbidden.html;
+         &lt;EOS&gt;
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /path1
+        backend:
+          serviceName: app1
+          servicePort: 80
+      - path: /path2
+        backend:
+          serviceName: app2
+          servicePort: 80
+      - path: &lt;/errorPath&gt;
+        backend:
+          serviceName: &lt;error-svc&gt;
+          servicePort: 80
+</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Replace <code>&lt;<em>app1</em>&gt;</code> with the name of the Kubernetes service that the custom error applies to. The custom error applies only to the specific paths that use this same upstream service. If you do not set a service name, then the custom errors are applied to all service paths.</td>
+ </tr>
+ <tr>
+ <td><code>httpError</code></td>
+ <td>Replace <code>&lt;<em>401</em>&gt;</code> with the HTTP error code that you want to handle with a custom error action.</td>
+ </tr>
+ <tr>
+ <td><code>errorActionName</code></td>
+ <td>Replace <code>&lt;<em>/errorAction401</em>&gt;</code> with the name of a custom error action to take or the path to an error service.<ul>
+ <li>If you specify the name of a custom error action, you must define that error action in a code snippet in the <code>custom-error-actions</code> annotation. In the sample YAML, <code>app1</code> uses <code>/errorAction401</code>, which is defined in the snippet in the <code>custom-error-actions</code> annotation.</li>
+ <li>If you specify the path to an error service, you must specify that error path and the name of the error service in the <code>paths</code> section. In the sample YAML, <code>app2</code> uses <code>/errorPath</code>, which is defined at the end of the <code>paths</code> section.</li></ul></td>
+ </tr>
+ <tr>
+ <td><code>ingress.bluemix.net/custom-error-actions</code></td>
+ <td>Define a custom error action that the ALB takes for the service and HTTP error that you specified. Use an NGINX code snippet and end each snippet with <code>&lt;EOS&gt;</code>. In the sample YAML, the ALB passes a custom error page, <code>http://example.com/forbidden.html</code>, to the client when a <code>401</code> error occurs for <code>app1</code>.</td>
+ </tr>
+ </tbody></table>
+
+ </dd></dl>
+
+<br />
+
+
+### External services (`proxy-external-service`)
+{: #proxy-external-service}
+
+Add path definitions to external services, such as services hosted in {{site.data.keyword.Bluemix_notm}}.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>Add path definitions to external services. Use this annotation only when your app operates on an external service instead of a back-end service. When you use this annotation to create an external service route, only `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout`, and `proxy-buffering` annotations are supported in conjunction. Any other annotations are not supported in conjunction with `proxy-external-service`.<p class="note">You cannot specify multiple hosts for a single service and path.</p>
+</dd>
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/proxy-external-service: "path=&lt;mypath&gt; external-svc=https:&lt;external_service&gt; host=&lt;mydomain&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 80
+</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>path</code></td>
+ <td>Replace <code>&lt;<em>mypath</em>&gt;</code> with the path that the external service listens on.</td>
+ </tr>
+ <tr>
+ <td><code>external-svc</code></td>
+ <td>Replace <code>&lt;<em>external_service</em>&gt;</code> with the external service to be called. For example, <code>https://&lt;myservice&gt;.&lt;region&gt;.mybluemix.net</code>.</td>
+ </tr>
+ <tr>
+ <td><code>host</code></td>
+ <td>Replace <code>&lt;<em>mydomain</em>&gt;</code> with the host domain for the external service.</td>
+ </tr>
+ </tbody></table>
+
+ </dd></dl>
+
+<br />
+
+
+### Location modifier (`location-modifier`)
+{: #location-modifier}
+
+Modify the way the ALB matches the request URI against the app path.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>By default, ALBs process the paths that apps listen on as prefixes. When an ALB receives a request to an app, the ALB checks the Ingress resource for a path (as a prefix) that matches the beginning of the request URI. If a match is found, the request is forwarded to the IP address of the pod where the app is deployed.<br><br>The `location-modifier` annotation changes the way the ALB searches for matches by modifying the location block configuration. The location block determines how requests are handled for the app path.<p class="note">To handle regular expression (regex) paths, this annotation is required.</p></dd>
+
+<dt>Supported modifiers</dt>
+<dd>
+
+<table>
+<caption>Supported modifiers</caption>
+ <col width="10%">
+ <col width="90%">
+ <thead>
+ <th>Modifier</th>
+ <th>Description</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>=</code></td>
+ <td>The equal sign modifier causes the ALB to select exact matches only. When an exact match is found, the search stops and the matching path is selected.<br>For example, if you app listens on <code>/tea</code>, the ALB selects only exact <code>/tea</code> paths when matching a request to your app.</td>
+ </tr>
+ <tr>
+ <td><code>~</code></td>
+ <td>The tilde modifier causes the ALB to process paths as case-sensitive regex paths during matching.<br>For example, if you app listens on <code>/coffee</code>, the ALB can select <code>/ab/coffee</code> or <code>/123/coffee</code> paths when matching a request to your app even though the paths are not explicitly set for your app.</td>
+ </tr>
+ <tr>
+ <td><code>~\*</code></td>
+ <td>The tilde followed by an asterisk modifier causes the ALB to process paths as case-insensitive regex paths during matching.<br>For example, if you app listens on <code>/coffee</code>, the ALB can select <code>/ab/Coffee</code> or <code>/123/COFFEE</code> paths when matching a request to your app even though the paths are not explicitly set for your app.</td>
+ </tr>
+ <tr>
+ <td><code>^~</code></td>
+ <td>The carat followed by a tilde modifier causes the ALB to select the best non-regex match instead of a regex path.</td>
+ </tr>
+ </tbody>
+</table>
+
+</dd>
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;myservice&gt;
+          servicePort: 80</code></pre>
+
+ <table>
+ <caption>Understanding the annotation components</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>modifier</code></td>
+  <td>Replace <code>&lt;<em>location_modifier</em>&gt;</code> with the location modifier you want to use for the path. Supported modifiers are <code>'='</code>, <code>'~'</code>, <code>'~\*'</code>, and <code>'^~'</code>. You must surround the modifiers in single quotes.</td>
+  </tr>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service you created for your app.</td>
+  </tr>
+  </tbody></table>
+  </dd>
+  </dl>
+
+<br />
+
+
+### Rewrite paths (`rewrite-path`)
+{: #rewrite-path}
+
+Route incoming network traffic on an ALB domain path to a different path that your back-end app listens on.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>Your Ingress ALB domain routes incoming network traffic on <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> to your app. Your app listens on <code>/coffee</code>, instead of <code>/beans</code>. To forward incoming network traffic to your app, add the rewrite annotation to your Ingress resource configuration file. The rewrite annotation ensures that incoming network traffic on <code>/beans</code> is forwarded to your app by using the <code>/coffee</code> path. When including multiple services, use only a semi-colon (;) to separate them.</dd>
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/rewrite-path: "serviceName=&lt;myservice1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;myservice2&gt; rewrite=&lt;target_path2&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /beans
+        backend:
+          serviceName: myservice1
+          servicePort: 80
+</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
+</tr>
+<tr>
+<td><code>rewrite</code></td>
+<td>Replace <code>&lt;<em>target_path</em>&gt;</code> with the path that your app listens on. Incoming network traffic on the ALB domain is forwarded to the Kubernetes service by using this path. Most apps do not listen on a specific path, but use the root path and a specific port. In the example for <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code>, the rewrite path is <code>/coffee</code>. <strong>Note</strong>: If you apply this file and the URL shows a <code>404</code> response, your backend app might be listening on a path that ends in `/`. Try adding a trailing `/` to this rewrite field, then reapply the file and try the URL again.</td>
+</tr>
+</tbody></table>
+
+</dd></dl>
+
+<br />
+
+
 ## Proxy buffer annotations
 {: #proxy-buffer}
 
 The Ingress ALB acts as a proxy between your back-end app and the client web browser. With proxy buffer annotations, you can configure how data is buffered on your ALB when sending or receiving data packets.  
 {: shortdesc}
 
-### Large client header buffers (large-client-header-buffers)
+### Large client header buffers (`large-client-header-buffers`)
 {: #large-client-header-buffers}
 
 Set the maximum number and size of buffers that read large client request headers.
@@ -2074,7 +2189,7 @@ spec:
 <br />
 
 
-### Client response data buffering (proxy-buffering)
+### Client response data buffering (`proxy-buffering`)
 {: #proxy-buffering}
 
 Use the buffer annotation to disable the storage of response data on the ALB while the data is sent to the client.
@@ -2134,7 +2249,7 @@ spec:
 
 
 
-### Proxy buffers (proxy-buffers)
+### Proxy buffers (`proxy-buffers`)
 {: #proxy-buffers}
 
 Configure the number and size of proxy buffers for the ALB.
@@ -2144,7 +2259,7 @@ Configure the number and size of proxy buffers for the ALB.
 <dt>Description</dt>
 <dd>
 Set the number and size of the buffers that read a response for a single connection from the proxied server. The configuration is applied to all of the services in the Ingress host unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE number=2 size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>number=2 size=1k</code> is specified, 1k is applied to all of the services in the Ingress host.</br>
-<p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your backend sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffers</code> and [<code>proxy-buffer-size</code>](#proxy-buffer-size).</p>
+<p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your back end sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffers</code> and [<code>proxy-buffer-size</code>](#proxy-buffer-size).</p>
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -2194,7 +2309,7 @@ spec:
 <br />
 
 
-### Proxy buffer size (proxy-buffer-size)
+### Proxy buffer size (`proxy-buffer-size`)
 {: #proxy-buffer-size}
 
 Configure the size of the proxy buffer that reads the first part of the response.
@@ -2204,7 +2319,7 @@ Configure the size of the proxy buffer that reads the first part of the response
 <dt>Description</dt>
 <dd>
 Set the size of the buffer that reads the first part of the response that is received from the proxied server. This part of the response usually contains a small response header. The configuration is applied to all of the services in the Ingress host unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>size=1k</code> is specified, 1k is applied to all of the services in the Ingress host.
-<p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your backend sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffer-size</code> and [<code>proxy-buffers</code>](#proxy-buffers).</p>
+<p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your back end sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffer-size</code> and [<code>proxy-buffers</code>](#proxy-buffers).</p>
 </dd>
 
 
@@ -2256,7 +2371,7 @@ spec:
 
 
 
-### Proxy busy buffers size (proxy-busy-buffers-size)
+### Proxy busy buffers size (`proxy-busy-buffers-size`)
 {: #proxy-busy-buffers-size}
 
 Configure the size of proxy buffers that can be busy.
@@ -2323,7 +2438,7 @@ spec:
 Use request and response annotations to add or remove header information from the client and server requests, and to change the size of the body that the client can send.
 {: shortdesc}
 
-### Add server port to host header (add-host-port)
+### Add server port to host header (`add-host-port`)
 {: #add-host-port}
 
 Add a server port to the client request before the request is forwarded to your back-end app.
@@ -2378,7 +2493,7 @@ spec:
 <br />
 
 
-### Additional client request or response header (proxy-add-headers, response-add-headers)
+### Additional client request or response header (`proxy-add-headers`, `response-add-headers`)
 {: #proxy-add-headers}
 
 Add extra header information to a client request before sending the request to the back-end app or to a client response before sending the response to the client.
@@ -2480,7 +2595,7 @@ spec:
 
 
 
-### Client response header removal (response-remove-headers)
+### Client response header removal (`response-remove-headers`)
 {: #response-remove-headers}
 
 Remove header information that is included in the client response from the back-end end app before the response is sent to the client.
@@ -2543,7 +2658,7 @@ spec:
 <br />
 
 
-### Client request body size (client-max-body-size)
+### Client request body size (`client-max-body-size`)
 {: #client-max-body-size}
 
 Set the maximum size of the body that the client can send as part of a request.
@@ -2604,7 +2719,7 @@ spec:
 With service limit annotations, you can change the default request processing rate and the number of connections that can come from a single IP address.
 {: shortdesc}
 
-### Global rate limits (global-rate-limit)
+### Global rate limits (`global-rate-limit`)
 {: #global-rate-limit}
 
 Limit the request processing rate and number of connections per a defined key for all services.
@@ -2613,7 +2728,7 @@ Limit the request processing rate and number of connections per a defined key fo
 <dl>
 <dt>Description</dt>
 <dd>
-For all services, limit the request processing rate and the number of connections per a defined key that are coming from a single IP address for all paths of the selected backends.
+For all services, limit the request processing rate and the number of connections per a defined key that are coming from a single IP address for all paths of the selected back ends.
 </dd>
 
 
@@ -2668,7 +2783,7 @@ spec:
 
 
 
-### Service rate limits (service-rate-limit)
+### Service rate limits (`service-rate-limit`)
 {: #service-rate-limit}
 
 Limit the request processing rate and the number of connections for specific services.
@@ -2676,7 +2791,7 @@ Limit the request processing rate and the number of connections for specific ser
 
 <dl>
 <dt>Description</dt>
-<dd>For specific services, limit the request processing rate and the number of connections per a defined key that are coming from a single IP address for all paths of the selected backends.
+<dd>For specific services, limit the request processing rate and the number of connections per a defined key that are coming from a single IP address for all paths of the selected back ends.
 </dd>
 
 

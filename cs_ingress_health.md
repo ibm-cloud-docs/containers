@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks 
+
+scope: containers
 
 ---
 
@@ -31,8 +35,8 @@ If you want to troubleshoot your Ingress or monitor Ingress activity, you can re
 {: shortdesc}
 
 Logs are automatically collected for your Ingress ALBs. To view the ALB logs, choose between two options.
-* [Create a logging configuration for the Ingress service](/docs/containers/cs_health.html#configuring) in your cluster.
-* Check the logs from the CLI. **Note**: You must have at least the [**Reader** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `kube-system` namespace.
+* [Create a logging configuration for the Ingress service](/docs/containers?topic=containers-health#configuring) in your cluster.
+* Check the logs from the CLI. **Note**: You must have at least the [**Reader** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
     1. Get the ID of a pod for an ALB.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -64,7 +68,7 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"client": "$remote_addr"</code></td>
-<td>The IP address of the request package that the client sent to your app. This IP can change based on the following situations:<ul><li>When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the request package is changed to the public IP address of the worker node where the app pod is running.</li><li>If [source IP preservation is enabled](/docs/containers/cs_ingress.html#preserve_source_ip), the original IP address of the client request to your app is recorded instead.</li></ul></td>
+<td>The IP address of the request package that the client sent to your app. This IP can change based on the following situations:<ul><li>When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the request package is changed to the public IP address of the worker node where the app pod is running.</li><li>If [source IP preservation is enabled](/docs/containers?topic=containers-ingress#preserve_source_ip), the original IP address of the client request to your app is recorded instead.</li></ul></td>
 </tr>
 <tr>
 <td><code>"host": "$http_host"</code></td>
@@ -76,7 +80,7 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"request_method": "$request_method"</code></td>
-<td>The method of the request call to the backend app, such as <code>GET</code> or <code>POST</code>.</td>
+<td>The method of the request call to the back-end app, such as <code>GET</code> or <code>POST</code>.</td>
 </tr>
 <tr>
 <td><code>"request_uri": "$uri"</code></td>
@@ -103,7 +107,7 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"upstream_status": $upstream_status</code></td>
-<td>The status code of the response obtained from the upstream server for the backend app, such as standard HTTP response codes. Status codes of several responses are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable. If the ALB can't select a server, the 502 (Bad Gateway) status code is logged.</td>
+<td>The status code of the response obtained from the upstream server for the back-end app, such as standard HTTP response codes. Status codes of several responses are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable. If the ALB can't select a server, the 502 (Bad Gateway) status code is logged.</td>
 </tr>
 <tr>
 <td><code>"request_time": $request_time</code></td>
@@ -111,15 +115,15 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"upstream_response_time": $upstream_response_time</code></td>
-<td>The time that it takes the ALB to receive the response from the upstream server for the backend app, measured in seconds with a milliseconds resolution. Times of several responses are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
+<td>The time that it takes the ALB to receive the response from the upstream server for the back-end app, measured in seconds with a milliseconds resolution. Times of several responses are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
 </tr>
 <tr>
 <td><code>"upstream_connect_time": $upstream_connect_time</code></td>
-<td>The time that it takes the ALB to establish a connection with the upstream server for the backend app, measured in seconds with a milliseconds resolution. If TLS/SSL is enabled in your Ingress resource configuration, this time includes time spent on the handshake. Times of several connections are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
+<td>The time that it takes the ALB to establish a connection with the upstream server for the back-end app, measured in seconds with a milliseconds resolution. If TLS/SSL is enabled in your Ingress resource configuration, this time includes time spent on the handshake. Times of several connections are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
 </tr>
 <tr>
 <td><code>"upstream_header_time": $upstream_header_time</code></td>
-<td>The time that it takes the ALB to receive the response header from the upstream server for the backend app, measured in seconds with a milliseconds resolution. Times of several connections are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
+<td>The time that it takes the ALB to receive the response header from the upstream server for the back-end app, measured in seconds with a milliseconds resolution. Times of several connections are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
 </tr>
 </tbody></table>
 
@@ -131,7 +135,7 @@ You can customize the content and format of logs that are collected for the Ingr
 
 By default, Ingress logs are formatted in JSON and display common log fields. However, you can also create a custom log format by choosing which log components are forwarded and how the components are arranged in the log output
 
-Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `kube-system` namespace.
+Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 
 1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
@@ -223,7 +227,7 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
    {: pre}
 
 4. To view the Ingress ALB logs, choose between two options.
-    * [Create a logging configuration for the Ingress service](/docs/containers/cs_health.html#logging) in your cluster.
+    * [Create a logging configuration for the Ingress service](/docs/containers?topic=containers-health#logging) in your cluster.
     * Check the logs from the CLI.
         1. Get the ID of a pod for an ALB.
             ```
@@ -253,7 +257,7 @@ The ALB metrics exporter pods must deploy to the same worker nodes that your ALB
 
 To install the metrics exporter and Prometheus agent for an ALB in your cluster:
 
-1.  [Follow the instructions](/docs/containers/cs_integrations.html#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
+1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
 
 2.  Verify that tiller is installed with a service account.
     ```
@@ -282,7 +286,7 @@ To install the metrics exporter and Prometheus agent for an ALB in your cluster:
     ```
     {: pre}
 
-5. Install the `ibmcloud-alb-metrics-exporter/subcharts/prometheus` sub-chart to your cluster. This sub-chart deploys a Prometheus agent to collect and display ALB metrics on the Prometheus dashboard. Replace <ingress_subdomain> with the Ingress subdomain for your cluster. The URL for the Prometheus dashboard is a combination of the `prom-dash` subdomain and your Ingress usbdomain, for example `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. To find the Ingress subdomain for your cluster, run <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>.
+5. Install the `ibmcloud-alb-metrics-exporter/subcharts/prometheus` sub-chart to your cluster. This sub-chart deploys a Prometheus agent to collect and display ALB metrics on the Prometheus dashboard. Replace <ingress_subdomain> with the Ingress subdomain for your cluster. The URL for the Prometheus dashboard is a combination of the `prom-dash` subdomain and your Ingress subdomain, for example `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. To find the Ingress subdomain for your cluster, run <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>.
 
     ```
     helm install ibm/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
@@ -511,7 +515,7 @@ The following table lists the supported server metric names.
 ### Upstream metrics
 {: #upstream_metrics}
 
-The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Upstream metrics collect data on the backend service defined in an Ingress resource.
+The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Upstream metrics collect data on the back-end service defined in an Ingress resource.
 {: shortdesc}
 
 Upstream metrics are formatted in two ways.
@@ -669,7 +673,7 @@ Shared memory zones are defined so that worker processes can share information s
 
 In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-size` field sets the size of the shared memory zone for metrics data collection. By default, `vts-status-zone-size` is set to `10m`. If you have a large environment that requires more memory for metrics collection, you can override the default to instead use a larger value by following these steps.
 
-Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for the `kube-system` namespace.
+Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 
 1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 

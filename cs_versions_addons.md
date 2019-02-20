@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks, nginx, ingress controller
+
+scope: containers
 
 ---
 
@@ -30,7 +34,7 @@ Your {{site.data.keyword.containerlong}} cluster comes with add-ons that are upd
 View build version changes for the Ingress application load balancer (ALB) add-on in your {{site.data.keyword.containerlong_notm}} clusters.
 {:shortdesc}
 
-When the Ingress ALB add-on is updated, the `nginx-ingress` and `ingress-auth` containers in all ALB pods are updated to the latest build version. By default, automatic updates to the add-on are enabled, but you can disable automatic updates and manually update the add-on. For more information, see [Updating the Ingress application load balancer](/docs/containers/cs_cluster_update.html#alb).
+When the Ingress ALB add-on is updated, the `nginx-ingress` and `ingress-auth` containers in all ALB pods are updated to the latest build version. By default, automatic updates to the add-on are enabled, but you can disable automatic updates and manually update the add-on. For more information, see [Updating the Ingress application load balancer](/docs/containers?topic=containers-update#alb).
 
 Refer to the following table for a summary of changes for each build of the Ingress ALB add-on.
 
@@ -50,6 +54,15 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
+<td>406 / 301</td>
+<td>19 Jan 2019</td>
+<td><ul>
+<li>Updates the Go version to 1.11.5.</li>
+<li>Fixes vulnerabilities for image scans.</li>
+</ul></td>
+<td>-</td>
+</tr>
+<tr>
 <td>404 / 300</td>
 <td>31 Jan 2019</td>
 <td>Updates the Go version to 1.11.4.</td>
@@ -66,7 +79,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <li>Updates the {{site.data.keyword.appid_full_notm}} location directive so that the `app-id` annotation can be used in conjunction with the `proxy-buffers`, `proxy-buffer-size`, and `proxy-busy-buffer-size` annotations.</li>
 <li>Fixes a bug so that informational logs are not labeled as errors.</li>
 </ul></td>
-<td>Disables TLS 1.0 and 1.1 by default. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, manually enable the required TLS versions by following [these steps](/docs/containers/cs_ingress.html#ssl_protocols_ciphers). For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.Bluemix_notm}} Blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).</td>
+<td>Disables TLS 1.0 and 1.1 by default. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, manually enable the required TLS versions by following [these steps](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers). For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.Bluemix_notm}} Blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).</td>
 </tr>
 <tr>
 <td>393 / 291</td>

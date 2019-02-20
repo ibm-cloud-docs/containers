@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks 
+
+scope: containers
 
 ---
 
@@ -32,7 +36,7 @@ The following image shows the storage components in a Kubernetes cluster.
 
 <img src="images/cs_storage_pvc_pv.png" alt="Storage components in a cluster" width="275" style="width: 275px; border-style: none"/>
 
-- **Cluster**</br> By default, every cluster is set up with a plug-in to [provision file storage](/docs/containers/cs_storage_file.html#add_file). You can choose to install other add-ons, such as the one for [block storage](/docs/containers/cs_storage_block.html). To use storage in a cluster, you must create a persistent volume claim, a persistent volume and a physical storage instance. When you delete the cluster, you have the option to delete related storage instances.
+- **Cluster**</br> By default, every cluster is set up with a plug-in to [provision file storage](/docs/containers?topic=containers-file_storage#add_file). You can choose to install other add-ons, such as the one for [block storage](/docs/containers?topic=containers-block_storage). To use storage in a cluster, you must create a persistent volume claim, a persistent volume and a physical storage instance. When you delete the cluster, you have the option to delete related storage instances.
 - **App**</br> To read from and write to your storage instance, you must mount the persistent volume claim (PVC) to your app. Different storage types have different read-write rules. For example, you can mount multiple pods to the same PVC for file storage. Block storage comes with a RWO (ReadWriteOnce) access mode so that you can mount the storage to one pod only.
 - **Persistent volume claim (PVC)** </br> A PVC is the request to provision persistent storage with a specific type and configuration. To specify the persistent storage flavor that you want, you use [Kubernetes storage classes](#storageclasses). The cluster admin can define storage classes, or you can choose from one of the predefined storage classes in {{site.data.keyword.containerlong_notm}}. When you create a PVC, the request is sent to the {{site.data.keyword.Bluemix}} storage provider. Depending on the configuration that is defined in the storage class, the physical storage device is ordered and provisioned into your IBM Cloud infrastructure (SoftLayer) account. If the requested configuration does not exist, the storage is not created.
 - **Persistent volume (PV)** </br> A PV is a virtual storage instance that is added as a volume to the cluster. The PV points to a physical storage device in your IBM Cloud infrastructure (SoftLayer) account and abstracts the API that is used to communicate with the storage device. To mount a PV to an app, you must have a matching PVC. Mounted PVs appear as a folder inside the container's file system.
@@ -73,8 +77,8 @@ Review the following common use cases for dynamic provisioning:
 3. **Create and delete storage often:** You have an app or set up a continuous delivery pipeline that creates and removes persistent storage regularly. Persistent storage that is dynamically provisioned with a non-retaining storage class can be removed by deleting the PVC.
 
 For more information about how to dynamically provision persistent storage, see:
-- [File storage](/docs/containers/cs_storage_file.html#add_file)
-- [Block storage](/docs/containers/cs_storage_block.html#add_block)
+- [File storage](/docs/containers?topic=containers-file_storage#add_file)
+- [Block storage](/docs/containers?topic=containers-block_storage#add_block)
 
 ## Static provisioning
 {: #static_provisioning}
@@ -84,7 +88,7 @@ If you have an existing persistent storage device in your IBM Cloud infrastructu
 
 **How does it work?**</br>
 
-Static provisioning is a feature that is native to Kubernetes and that allows cluster admins to make existing storage devices available to a cluster. As a cluster admin, you must know the details of the storage device, its supported configurations, and mount options.  
+Static provisioning is a feature that is native to Kubernetes and that allows cluster administrators to make existing storage devices available to a cluster. As a cluster administrator, you must know the details of the storage device, its supported configurations, and mount options.  
 
 To make existing storage available to a cluster user, you must manually create the storage device, a PV, and a PVC.  
 
@@ -108,8 +112,8 @@ Review the following common use cases for static provisioning of persistent stor
 4. **Share persistent storage across namespaces in the same cluster:** You provisioned persistent storage in a namespace of your cluster. You want to use the same storage instance for an app pod that is deployed to a different namespace in your cluster.
 
 For more information about how to statically provision storage, see:
-- [File storage](/docs/containers/cs_storage_file.html#file_predefined_storageclass)
-- [Block storage](/docs/containers/cs_storage_block.html#block_predefined_storageclass)
+- [File storage](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
+- [Block storage](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 
 ## Storage classes
 {: #storageclasses}
@@ -120,8 +124,8 @@ To dynamically provision persistent storage, you must define the type and config
 A [Kubernetes storage class ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/storage-classes/) is used to abstract the underlying storage platform that is supported in {{site.data.keyword.Bluemix_notm}} so that you do not have to know all the details about supported sizes, IOPS, or retention policies to successfully provision persistent storage in a cluster. {{site.data.keyword.containerlong_notm}} provides pre-defined storage classes for every type of storage that is supported. Each storage class is designed to abstract the supported storage tier while giving you the choice to decide on the size, IOPS, and retention policy that you want.
 
 For the pre-defined storage class specifications, see:
-- [File storage](/docs/containers/cs_storage_file.html#file_storageclass_reference)
-- [Block storage](/docs/containers/cs_storage_block.html#block_storageclass_reference)
+- [File storage](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+- [Block storage](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
 
 Not finding what you are looking for? You can also create your own customized storage class to provision the type of storage that you want.
 {: tip}
@@ -134,11 +138,11 @@ If you cannot use one of the provided storage classes, you can create your own c
 
 1. Create a customized storage class. You can start by using one of the pre-defined storage classes, or check out our sample customized storage classes.
    - Pre-defined storage classes:
-     - [File storage](/docs/containers/cs_storage_file.html#file_storageclass_reference)
-     - [Block storage](/docs/containers/cs_storage_block.html#block_storageclass_reference)
+     - [File storage](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+     - [Block storage](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
    - Sample customized storage classes:
-     - [File storage](/docs/containers/cs_storage_file.html#file_custom_storageclass)
-     - [Block storage](/docs/containers/cs_storage_block.html#block_custom_storageclass)
+     - [File storage](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
+     - [Block storage](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
 
 2. Create the customized storage class.
    ```
@@ -153,8 +157,8 @@ If you cannot use one of the provided storage classes, you can create your own c
     {: pre}
 
 4. Create a persistent volume claim (PVC) to dynamically provision storage with your customized storage class.
-   - [File storage](/docs/containers/cs_storage_file.html#add_file)
-   - [Block storage](/docs/containers/cs_storage_block.html#add_block)
+   - [File storage](/docs/containers?topic=containers-file_storage#add_file)
+   - [Block storage](/docs/containers?topic=containers-block_storage#add_block)
 
 5. Verify that your PVC is created and bound to a persistent volume (PV). This process might take a few minutes to complete.
    ```
@@ -177,11 +181,11 @@ When you dynamically provision persistent storage by using a storage class, you 
 <tbody>
 <tr>
 <td>File storage</td>
-<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](/docs/containers/cs_storage_file.html#file_change_storage_configuration). </td>
+<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](/docs/containers?topic=containers-file_storage#file_change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Block storage</td>
-<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](/docs/containers/cs_storage_block.html#block_change_storage_configuration). </td>
+<td>You can increase your storage size and assigned IOPS by [modifying your existing volume](/docs/containers?topic=containers-block_storage#block_change_storage_configuration). </td>
 </tr>
 <tr>
 <td>Object storage</td>
@@ -203,8 +207,8 @@ These steps are required only if you had existing PVs that were created before m
 Use a script to find all the PVs in your cluster and apply the Kubernetes `failure-domain.beta.kubernetes.io/region` and `failure-domain.beta.kubernetes.io/zone` labels. If the PV already has the labels, the script does not overwrite the existing values.
 
 Before you begin:
-- [Target the Kubernetes CLI to the cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
-- If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/vrf-on-ibm-cloud.html#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
+- [Target the Kubernetes CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 To update existing PVs:
 
@@ -276,5 +280,5 @@ To update existing PVs:
 **What's next?**
 
 Now that you labeled your existing PVs, you can mount the PV to your multizone cluster. See the following links for more information.
-- Use [existing NFS file storage](/docs/containers/cs_storage_file.html#existing_file)
-- Use [existing block storage](/docs/containers/cs_storage_block.html#existing_block)
+- Use [existing NFS file storage](/docs/containers?topic=containers-file_storage#existing_file)
+- Use [existing block storage](/docs/containers?topic=containers-block_storage#existing_block)

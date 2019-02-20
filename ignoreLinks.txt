@@ -13,6 +13,3 @@ ingress_subdomain,
 mycluster,
 mycustomdomain,
 myingress,
-myservice,
-mydomain,
-#EOF

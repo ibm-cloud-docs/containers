@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
 
 ---
 
@@ -382,7 +382,7 @@ View the name and email address for the owner of the IAM API key in an {{site.da
 
 The Identity and Access Management (IAM) API key is automatically set for a region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the `us-south` region. By doing that, the IAM API key for this user is stored in the account for this region. The API key is used to order resources in IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs.
 
-When a different user performs an action in this region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine if sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](cs_users.html#infra_access).
+When a different user performs an action in this region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine if sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](/docs/containers?topic=containers-users#infra_access).
 
 If you find that you need to update the API key that is stored for a region, you can do so by running the [ibmcloud ks api-key-reset](#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
 
@@ -417,7 +417,7 @@ Replace the current IAM API key in an {{site.data.keyword.containerlong_notm}} r
 
 This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how IAM API keys work, see the [`ibmcloud ks api-key-info` command](#cs_api_key_info).
 
-**Important** Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
+**Important** Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users).
 
 <strong>Command options</strong>:
 
@@ -576,7 +576,7 @@ Initialize the {{site.data.keyword.containerlong_notm}} plug-in or specify the r
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use.  This value is optional. [View the available API endpoint values.](cs_regions.html#container_regions)</dd>
+   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use.  This value is optional. [View the available API endpoint values.](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>Allow an insecure HTTP connection.</dd>
@@ -741,7 +741,7 @@ trusted: <em>true</em>
 <dt><code>--zone <em>ZONE</em></code></dt>
 <dd>The zone where you want to create the cluster. The zones that are available to you depend on the {{site.data.keyword.Bluemix_notm}} region you are logged in to. Select the region that is physically closest to you for best performance.  This value is required for standard clusters and is optional for free clusters.
 
-<p>Review [available zones](cs_regions.html#zones).</p>
+<p>Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</p>
 
 <p><strong>Note:</strong> When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.</p>
 </dd>
@@ -1141,14 +1141,14 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
 ### ibmcloud ks va CONTAINER_ID [--extended] [--vulnerabilities] [--configuration-issues] [--json]
 {: #cs_va}
 
-After you [install the container scanner](/docs/services/va/va_index.html#va_install_container_scanner), view a detailed vulnerability assessment report for a container in your cluster.
+After you [install the container scanner](/docs/services/va?topic=va-va_index#va_install_container_scanner), view a detailed vulnerability assessment report for a container in your cluster.
 
 **Command options**:
 
 <dl>
 <dt><code>CONTAINER_ID</code></dt>
 <dd><p>The ID of the container. This value is required.</p>
-<p>To find the ID of your container:<ol><li>[Target the Kubernetes CLI to your cluster](cs_cli_install.html#cs_cli_configure).</li><li>List your pods by running `kubectl get pods`.</li><li>Find the **Container ID** field in the output of the `kubectl describe pod <pod_name>` command. For example, `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remove the `docker://` prefix from the ID before you use the container ID for the `ibmcloud ks va` command. For example, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+<p>To find the ID of your container:<ol><li>[Target the Kubernetes CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).</li><li>List your pods by running `kubectl get pods`.</li><li>Find the **Container ID** field in the output of the `kubectl describe pod <pod_name>` command. For example, `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remove the `docker://` prefix from the ID before you use the container ID for the `ibmcloud ks va` command. For example, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
 
 <dt><code>--extended</code></dt>
 <dd><p>Extend the command output to show more fix information for vulnerable packages. This value is optional.</p>
@@ -1218,7 +1218,7 @@ You can add existing portable public or private subnets from your IBM Cloud infr
 **Note:**
 * Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
 * When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.
-* To route between subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+* To route between subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
 
 <strong>Command options</strong>:
 
@@ -1249,7 +1249,7 @@ Create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make it a
 
 **Note:**
 * When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.
-* To route between subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+* To route between subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
 
 <strong>Command options</strong>:
 
@@ -1285,7 +1285,7 @@ This private subnet is not one provided by IBM Cloud infrastructure (SoftLayer).
 
 **Note**:
 * When you add a private user subnet to a cluster, IP addresses of this subnet are used for private Load Balancers in the cluster. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.
-* To route between subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning).
+* To route between subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
 
 <strong>Command options</strong>:
 
@@ -1667,7 +1667,7 @@ If IBM Cloud infrastructure (SoftLayer) credentials are manually set, these cred
 
 You cannot set multiple credentials for one {{site.data.keyword.containerlong_notm}} account. Every {{site.data.keyword.containerlong_notm}} account is linked to one IBM Cloud infrastructure (SoftLayer) portfolio only.
 
-**Important:** Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
+**Important:** Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users).
 
 <strong>Command options</strong>:
 
@@ -1751,7 +1751,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 
    <dl>
    <dt><code><em>ZONE</em></code></dt>
-   <dd>Enter the zone where you want to list available machine types. This value is required. Review [available zones](cs_regions.html#zones).</dd>
+   <dd>Enter the zone where you want to list available machine types. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
 
    <dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -1776,7 +1776,7 @@ List the public and private VLANs that are available for a zone in your IBM Clou
 
    <dl>
    <dt><code><em>ZONE</em></code></dt>
-   <dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](cs_regions.html#zones).</dd>
+   <dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
 
    <dt><code>--all</code></dt>
    <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANS that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
@@ -1823,7 +1823,7 @@ Create a logging configuration. You can use this command to forward logs for con
     <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
 
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-    <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+    <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
 
   <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
     <dd>The port of the log collector server. This value is optional. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and the standard port <code>9091</code> is used for <code>ibm</code>.</dd>
@@ -1981,7 +1981,7 @@ Update the details of a log forwarding configuration.
     <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
 
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-   <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+   <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
 
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
    <dd>The port of the log collector server. This value is optional when the logging type is <code>syslog</code>. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and <code>9091</code> is used for <code>ibm</code>.</dd>
@@ -2228,7 +2228,7 @@ For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US Sout
 <dt><code><em>REGION</em></code></dt>
 <dd>Enter the region that you want to target. This value is optional. If you do not provide the region, you can select it from the list in the output.
 
-For a list of available regions, review [regions and zones](cs_regions.html) or use the `ibmcloud ks regions` [command](#cs_regions).</dd></dl>
+For a list of available regions, review [regions and zones](/docs/containers?topic=containers-regions-and-zones) or use the `ibmcloud ks regions` [command](#cs_regions).</dd></dl>
 
 **Example**:
 
@@ -2906,7 +2906,7 @@ View the worker pools that you have in a cluster.
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+    <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>
@@ -2917,12 +2917,12 @@ View the worker pools that you have in a cluster.
   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
     <dd><p>The ID of the private VLAN. This value is conditional.</p>
     <p>If you have a private VLAN in the zone, this value must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>.</p>
-    <p>If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a new zone to your worker pool. Then, <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >enable VLAN spanning</a> for your account so that worker nodes in different zones can communicate with each other.</p>
+    <p>If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a new zone to your worker pool. Then, <a href="/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning" >enable VLAN spanning</a> for your account so that worker nodes in different zones can communicate with each other.</p>
 <p>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd><p>The ID of the public VLAN. This value is required if you want to expose workloads on the nodes to the public after you create the cluster. It must match the public VLAN ID of one or more of the worker nodes in the cluster for the zone. To see the VLANs that you have available, run <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>.</p>
-    <p>If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a new zone to your worker pool. Then, <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >enable VLAN spanning</a> for your account so that worker nodes in different zones can communicate with each other.</p>
+    <p>If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a new zone to your worker pool. Then, <a href="/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning" >enable VLAN spanning</a> for your account so that worker nodes in different zones can communicate with each other.</p>
     <p>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</p></dd>
 
   <dt><code>--private-only</code></dt>
@@ -2951,7 +2951,7 @@ View the worker pools that you have in a cluster.
 
   <dl>
     <dt><code>--zone <em>ZONE</em></code></dt>
-      <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+      <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>
@@ -2960,10 +2960,10 @@ View the worker pools that you have in a cluster.
     <dd>A comma-separated list of worker pools that the zone is added to. At least 1 worker pool is required.</dd>
 
   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
-    <dd>The ID of the private VLAN. This value is required. It must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
+    <dd>The ID of the private VLAN. This value is required. It must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-    <dd>The ID of the public VLAN. This value is required if you want to change the public VLAN for the zone. If you do not want to change the private VLAN with the public VLAN, use the same private VLAN ID. The public VLAN ID must match the public VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
+    <dd>The ID of the public VLAN. This value is required if you want to change the public VLAN for the zone. If you do not want to change the private VLAN with the public VLAN, use the same private VLAN ID. The public VLAN ID must match the public VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
 
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -2991,7 +2991,7 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
 
 <dl>
   <dt><code>--zone <em>ZONE</em></code></dt>
-    <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+    <dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
 
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>

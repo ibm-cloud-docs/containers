@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-14"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks 
+
+scope: containers
 
 ---
 
@@ -86,7 +90,7 @@ To allow access for a specific cluster:
    ```
    {: pre}
 
-2. If the cluster is in a resource group other than `default`, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks clusters`. **Note**: You must have at least the [**Viewer** role](/docs/containers/cs_users.html#platform) for the resource group.
+2. If the cluster is in a resource group other than `default`, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks clusters`. **Note**: You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -167,14 +171,14 @@ Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`
 
 1. Retrieve the IP address from the master URL that you used to allow the [`kubectl` commands](#firewall_kubectl).
 
-2. Get the port for ETCD.
+2. Get the port for etcd.
 
   ```
   kubectl get cm -n kube-system cluster-info -o yaml | grep etcd_host
   ```
   {: pre}
 
-3. Allow access for the Calico policies via the master URL IP address and the ETCD port.
+3. Allow access for the Calico policies via the master URL IP address and the etcd port.
 
 <br />
 
@@ -239,9 +243,9 @@ Let your cluster access infrastructure resources and services from behind a fire
         </tbody>
       </table>
 
-3.  Allow outgoing network traffic from the worker nodes to [{{site.data.keyword.registrylong_notm}} regions](/docs/services/Registry/registry_overview.html#registry_regions):
+3.  Allow outgoing network traffic from the worker nodes to [{{site.data.keyword.registrylong_notm}} regions](/docs/services/Registry?topic=registry-registry_overview#registry_regions):
     - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
-    - Replace <em>&lt;registry_subnet&gt;</em> with the registry subnet to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images. Port 4443 is required for notary functions, such as [Verifying image signatures](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent).
+    - Replace <em>&lt;registry_subnet&gt;</em> with the registry subnet to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images. Port 4443 is required for notary functions, such as [Verifying image signatures](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent).
       <p>
 <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for Registry traffic</caption>
@@ -351,13 +355,13 @@ Let your cluster access infrastructure resources and services from behind a fire
 </p>
     *   **{{site.data.keyword.la_full_notm}}**:
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
-        Replace `<logDNA_public_IP>` with the [LogDNA IP addresses](/docs/services/Log-Analysis-with-LogDNA/network.html#ips).
+        Replace `<logDNA_public_IP>` with the [LogDNA IP addresses](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#ips).
 
 6. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
 7. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
     - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
-    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Frontend (public) network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) and [**Backend (private) Network**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
+    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Frontend (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Backend (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
 
 <br />
 
@@ -373,8 +377,8 @@ If you have a firewall on the private network, allow communication between worke
     2. If you use Calico policies, or if you have firewalls in each zone of a multizone cluster, a firewall might block communication between worker nodes. You must open all worker nodes in the cluster to each other by using the workers' ports, workers' private IP addresses, or the Calico worker node label.
 
 2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges so that you can create worker nodes in your cluster.
-    1. Allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. See [Backend (private) Network](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network).
-    2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges for all of the [zones](/docs/containers/cs_regions.html#zones) that you are using. Note that you must add IPs for the `dal01` and `wdc04` zones. See [Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated/ips.html#service-network-on-backend-private-network-).
+    1. Allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. See [Backend (private) Network](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network).
+    2. Allow the IBM Cloud infrastructure (SoftLayer) private IP ranges for all of the [zones](/docs/containers?topic=containers-regions-and-zones#zones) that you are using. Note that you must add IPs for the `dal01` and `wdc04` zones. See [Service Network (on backend/private network)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
 
 3. Open the following ports:
     - Allow outbound TCP and UDP connections from the workers to ports 80 and 443 to allow worker node updates and reloads.

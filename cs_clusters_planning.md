@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
+
+keywords: kubernetes, iks, multi az, multi-az, szr, mzr
+
+scope: containers
 
 ---
 
@@ -46,20 +50,20 @@ To improve availability for your app and to allow failover for the case that one
 
 <img src="images/cs_cluster_singlezone.png" alt="High availability for clusters in a single zone" width="230" style="width:230px; border-style: none"/>
 
-By default, your single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers/cs_clusters.html#resize_pool) or by [adding a new worker pool](/docs/containers/cs_clusters.html#add_pool).
+By default, your single zone cluster is set up with a worker pool that is named `default`. The worker pool groups worker nodes with the same configuration, such as the machine type, that you defined during cluster creation. You can add more worker nodes to your cluster by [resizing an existing worker pool](/docs/containers?topic=containers-clusters#resize_pool) or by [adding a new worker pool](/docs/containers?topic=containers-clusters#add_pool).
 
 When you add more worker nodes, app instances can be distributed across multiple worker nodes. If one worker node goes down, app instances on available worker nodes continue to run. Kubernetes automatically reschedules pods from unavailable worker nodes to ensure performance and capacity for your app. To ensure that your pods are evenly distributed across worker nodes, implement [pod affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
 
 **Can I convert my single zone cluster to a multizone cluster?**</br>
-If the cluster is in one of the [supported multizone metro cities](cs_regions.html#zones), yes. See [Updating from stand-alone worker nodes to worker pools](cs_cluster_update.html#standalone_to_workerpool).
+If the cluster is in one of the [supported multizone metro cities](/docs/containers?topic=containers-regions-and-zones#zones), yes. See [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 
 **Do I have to use multizone clusters?**</br>
-No. You can create as many single zone clusters as you like. Indeed, you might prefer single zone clusters for simplified management or if your cluster must reside in a specific [single zone city](/docs/containers/cs_regions.html#zones).
+No. You can create as many single zone clusters as you like. Indeed, you might prefer single zone clusters for simplified management or if your cluster must reside in a specific [single zone city](/docs/containers?topic=containers-regions-and-zones#zones).
 
 **Can I have a highly available master in a single zone?**</br>
 Yes, with clusters that run Kubernetes version 1.10 or later. In a single zone, your master is highly available and includes replicas on separate physical hosts for your Kubernetes API server, etcd, scheduler, and controller manager to protect against an outage such as during a master update. To protect against a zonal failure, you can:
-* [Create a cluster in a multizone-capable zone](/docs/containers/cs_clusters_planning.html#multizone), where the master is spread across zones.
+* [Create a cluster in a multizone-capable zone](/docs/containers?topic=containers-plan_clusters#multizone), where the master is spread across zones.
 * [Create multiple clusters](#multiple_clusters) and connect them with a global load balancer.
 
 ## Multizone cluster
@@ -72,10 +76,10 @@ With {{site.data.keyword.containerlong}}, you can create multizone clusters. You
 A worker pool is a collection of worker nodes with the same flavor, such as machine type, CPU, and memory. When you create a cluster, a default worker pool is automatically created for you. To spread the worker nodes in your pool across zones, add worker nodes to the pool, or update worker nodes, you can use new `ibmcloud ks worker-pool` commands.
 
 **Can I still use stand-alone worker nodes?**</br>
-The previous cluster setup of stand-alone worker nodes is supported, but deprecated. Be sure to [add a worker pool to your cluster](/docs/containers/cs_clusters.html#add_pool), and then [use worker pools](/docs/containers/cs_cluster_update.html#standalone_to_workerpool) to organize your worker nodes instead of stand-alone worker nodes.
+The previous cluster setup of stand-alone worker nodes is supported, but deprecated. Be sure to [add a worker pool to your cluster](/docs/containers?topic=containers-clusters#add_pool), and then [use worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool) to organize your worker nodes instead of stand-alone worker nodes.
 
 **Can I convert my single zone cluster to a multizone cluster?**</br>
-If the cluster is in one of the [supported multizone metro cities](cs_regions.html#zones), yes. See [Updating from stand-alone worker nodes to worker pools](cs_cluster_update.html#standalone_to_workerpool).
+If the cluster is in one of the [supported multizone metro cities](/docs/containers?topic=containers-regions-and-zones#zones), yes. See [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 
 ### Tell me more about the multizone cluster setup
@@ -94,10 +98,10 @@ Let's say you need a worker node with 6 cores to handle the workload for your ap
 - **Distribute resources across 3 zones:** With this option, you deploy 3 cores per zone, which leaves you with a total capacity of 9 cores. To handle your workload, two zones must be up at a time. If one zone is unavailable, the other two zones can handle your workload. If two zones are unavailable, the 3 remaining cores are up to handle your workload. Deploying 3 cores per zone means smaller machines and hence reduced cost for you.</br>
 
 **How is my Kubernetes master set up?** </br>
-A multizone cluster is set up with a single or highly available (in Kubernetes 1.10 or later) Kubernetes master that is provisioned in the same metro area as the workers. Further, if you create a multizone cluster in [select metro cities](/docs/containers/cs_regions.html#zones), highly available masters are spread across zones. For example, if the cluster is in `dal10`, `dal12`, or `dal13` zones, the master is spread across each zone in the Dallas multizone metro city.
+A multizone cluster is set up with a single or highly available (in Kubernetes 1.10 or later) Kubernetes master that is provisioned in the same metro area as the workers. Further, if you create a multizone cluster in [select metro cities](/docs/containers?topic=containers-regions-and-zones#zones), highly available masters are spread across zones. For example, if the cluster is in `dal10`, `dal12`, or `dal13` zones, the master is spread across each zone in the Dallas multizone metro city.
 
 **What happens if the Kubernetes master becomes unavailable?** </br>
-The [Kubernetes master](cs_tech.html#architecture) is the main component that keeps your cluster up and running. The master stores cluster resources and their configurations in the etcd database that serves as the single point of truth for your cluster. The Kubernetes API server is the main entry point for all cluster management requests from the worker nodes to the master, or when you want to interact with your cluster resources.<br><br>If a master failure occurs, your workloads continue to run on the worker nodes, but you cannot use `kubectl` commands to work with your cluster resources or view the cluster health until the Kubernetes API server in the master is back up. If a pod goes down during the master outage, the pod cannot be rescheduled until the worker node can reach the Kubernetes API server again.<br><br>During a master outage, you can still run `ibmcloud ks` commands against the {{site.data.keyword.containerlong_notm}} API to work with your infrastructure resources, such as worker nodes or VLANs. If you change the current cluster configuration by adding or removing worker nodes to the cluster, your changes do not happen until the master is back up.
+The [Kubernetes master](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture) is the main component that keeps your cluster up and running. The master stores cluster resources and their configurations in the etcd database that serves as the single point of truth for your cluster. The Kubernetes API server is the main entry point for all cluster management requests from the worker nodes to the master, or when you want to interact with your cluster resources.<br><br>If a master failure occurs, your workloads continue to run on the worker nodes, but you cannot use `kubectl` commands to work with your cluster resources or view the cluster health until the Kubernetes API server in the master is back up. If a pod goes down during the master outage, the pod cannot be rescheduled until the worker node can reach the Kubernetes API server again.<br><br>During a master outage, you can still run `ibmcloud ks` commands against the {{site.data.keyword.containerlong_notm}} API to work with your infrastructure resources, such as worker nodes or VLANs. If you change the current cluster configuration by adding or removing worker nodes to the cluster, your changes do not happen until the master is back up.
 
 Do not restart or reboot a worker node during a master outage. This action removes the pods from your worker node. Because the Kubernetes API server is unavailable, the pods cannot be rescheduled onto other worker nodes in the cluster.
 {: important}
@@ -106,17 +110,17 @@ Do not restart or reboot a worker node during a master outage. This action remov
 To protect your cluster against a Kubernetes master failure or in regions where multizone clusters are not available, you can [set up multiple clusters and connect them with a global load balancer](#multiple_clusters).
 
 **Do I have to do anything so that the master can communicate with the workers across zones?**</br>
-Yes. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/vrf-on-ibm-cloud.html#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
+Yes. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 **How do I let my users access my app from the public Internet?**</br>
 You can expose your apps by using an Ingress application load balancer (ALB) or load balancer service.
 
-- **Ingress application load balancer (ALB)** By default, public ALBs are automatically created and enabled in each zone in your cluster. A Cloudflare multizone load balancer (MZLB) for your cluster is also automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same hostname and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the hostname `yourcluster.us-east.containers.appdomain.cloud` has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For more information, see [Ingress components and architecture](/docs/containers/cs_ingress.html#planning).
+- **Ingress application load balancer (ALB)** By default, public ALBs are automatically created and enabled in each zone in your cluster. A Cloudflare multizone load balancer (MZLB) for your cluster is also automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same host name and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the host name `yourcluster.us-east.containers.appdomain.cloud` has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For more information, see [Ingress components and architecture](/docs/containers?topic=containers-ingress#planning).
 
-- **Load balancer services:** Load balancer services are set up in one zone only. Incoming requests to your app are routed from that one zone to all app instances in other zones. If this zone becomes unavailable, then your app might not be reachable from the internet. You can set up additional load balancer services in other zones to account for a single zone failure. For more information, see highly available [load balancer services](/docs/containers/cs_loadbalancer.html#multi_zone_config).
+- **Load balancer services:** Load balancer services are set up in one zone only. Incoming requests to your app are routed from that one zone to all app instances in other zones. If this zone becomes unavailable, then your app might not be reachable from the internet. You can set up additional load balancer services in other zones to account for a single zone failure. For more information, see highly available [load balancer services](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
 
 **Can I set up persistent storage for my multizone cluster?**</br>
-For highly available persistent storage, use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage). You can also try a software-defined storage (SDS) solution such as [Portworx](/docs/containers/cs_storage_portworx.html#portworx) that uses [SDS machines](#sds). For more information, see [Comparison of persistent storage options for multizone clusters](/docs/containers/cs_storage_planning.html#persistent_storage_overview).
+For highly available persistent storage, use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage). You can also try a software-defined storage (SDS) solution such as [Portworx](/docs/containers?topic=containers-portworx#portworx) that uses [SDS machines](#sds). For more information, see [Comparison of persistent storage options for multizone clusters](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 NFS file and block storage is not sharable across zones. Persistent volumes can be used only in the zone where the actual storage device is located. If you have existing NFS file or block storage in your cluster that you want to continue to use, you must apply region and zone labels to existing persistent volumes. These labels help the kube-scheduler to determine where to schedule an app that uses the persistent volume. Run the following command and replace `<mycluster>` with your cluster name.
 
@@ -126,12 +130,12 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 {: pre}
 
 **I created my multizone cluster. Why is there still only one zone? How do I add zones to my cluster?**</br>
-If you [create your multizone cluster with the CLI](/docs/containers/cs_clusters.html#clusters_cli), the cluster is created, but you must add zones to the worker pool to complete the process. To span across multiple zones, your cluster must be in a [multizone metro city](/docs/containers/cs_regions.html#zones). To add a zone to your cluster and spread worker nodes across zones, see [Adding a zone to your cluster](/docs/containers/cs_clusters.html#add_zone).
+If you [create your multizone cluster with the CLI](/docs/containers?topic=containers-clusters#clusters_cli), the cluster is created, but you must add zones to the worker pool to complete the process. To span across multiple zones, your cluster must be in a [multizone metro city](/docs/containers?topic=containers-regions-and-zones#zones). To add a zone to your cluster and spread worker nodes across zones, see [Adding a zone to your cluster](/docs/containers?topic=containers-clusters#add_zone).
 
 ### What are some changes from how I currently manage my clusters?
 {: #mz_new_ways}
 
-With the introduction of worker pools, you can use a new set of APIs and commands to manage your cluster. You can see these new commands in the [CLI documentation page](/docs/containers/cs_cli_reference.html#cs_cli_reference), or in your terminal by running `ibmcloud ks help`.
+With the introduction of worker pools, you can use a new set of APIs and commands to manage your cluster. You can see these new commands in the [CLI documentation page](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), or in your terminal by running `ibmcloud ks help`.
 {: shortdesc}
 
 The following table compares the old and new methods for a few common cluster management actions.
@@ -146,19 +150,19 @@ The following table compares the old and new methods for a few common cluster ma
     <tr>
     <td>Add worker nodes to the cluster.</td>
     <td><p class="deprecated"><code>ibmcloud ks worker-add</code> to add stand-alone worker nodes.</p></td>
-    <td><ul><li>To add different machine types than your existing pool, create a new worker pool: <code>ibmcloud ks worker-pool-create</code> [command](/docs/containers/cs_cli_reference.html#cs_worker_pool_create).</li>
-    <li>To add worker nodes to an existing pool, resize the number of nodes per zone in the pool: <code>ibmcloud ks worker-pool-resize</code> [command](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize).</li></ul></td>
+    <td><ul><li>To add different machine types than your existing pool, create a new worker pool: <code>ibmcloud ks worker-pool-create</code> [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).</li>
+    <li>To add worker nodes to an existing pool, resize the number of nodes per zone in the pool: <code>ibmcloud ks worker-pool-resize</code> [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize).</li></ul></td>
     </tr>
     <tr>
     <td>Remove worker nodes from the cluster.</td>
     <td><code>ibmcloud ks worker-rm</code>, which you can still use to delete a troublesome worker node from your cluster.</td>
-    <td><ul><li>If your worker pool is unbalanced, for example after removing a worker node), rebalance it: <code>ibmcloud ks worker-pool-rebalance</code> [command](/docs/containers/cs_cli_reference.html#cs_rebalance).</li>
-    <li>To reduce the number of worker nodes in a pool, resize the number per zone (minimum value of 1): <code>ibmcloud ks worker-pool-resize</code> [command](/docs/containers/cs_cli_reference.html#cs_worker_pool_resize).</li></ul></td>
+    <td><ul><li>If your worker pool is unbalanced, for example after removing a worker node), rebalance it: <code>ibmcloud ks worker-pool-rebalance</code> [command](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance).</li>
+    <li>To reduce the number of worker nodes in a pool, resize the number per zone (minimum value of 1): <code>ibmcloud ks worker-pool-resize</code> [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize).</li></ul></td>
     </tr>
     <tr>
     <td>Use a new VLAN for worker nodes.</td>
     <td><p class="deprecated">Add a new worker node that uses the new private or public VLAN: <code>ibmcloud ks worker-add</code>.</p></td>
-    <td>Set the worker pool to use a different public or private VLAN than what it previously used: <code>ibmcloud ks zone-network-set</code> [command](/docs/containers/cs_cli_reference.html#cs_zone_network_set).</td>
+    <td>Set the worker pool to use a different public or private VLAN than what it previously used: <code>ibmcloud ks zone-network-set</code> [command](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set).</td>
     </tr>
   </tbody>
   </table>
@@ -181,9 +185,9 @@ You can set up multiple clusters in different regions of one geolocation (such a
 
 **To set up a global load balancer for multiple clusters:**
 
-1. [Create clusters](/docs/containers/cs_clusters.html#clusters) in multiple zones or regions.
-2. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link/vrf-on-ibm-cloud.html#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
-3. In each cluster, expose your app by using an [application load balancer (ALB)](/docs/containers/cs_ingress.html#ingress_expose_public) or [load balancer service](/docs/containers/cs_loadbalancer.html).
+1. [Create clusters](/docs/containers?topic=containers-clusters#clusters) in multiple zones or regions.
+2. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
+3. In each cluster, expose your app by using an [application load balancer (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) or [load balancer service](/docs/containers?topic=containers-loadbalancer).
 4. For each cluster, list the public IP addresses for your ALBs or load balancer services.
    - To list the IP address of all public enabled ALBs in your cluster:
      ```
@@ -202,10 +206,10 @@ You can set up multiple clusters in different regions of one geolocation (such a
 4.  Set up a global load balancer by using {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) or set up your own global load balancer.
 
     **To use a CIS global load balancer**:
-    1.  Set up the service by following steps 1 - 5 in [Getting Started with {{site.data.keyword.Bluemix_notm}} Internet Services (CIS)](/docs/infrastructure/cis/getting-started.html#getting-started-with-ibm-cloud-internet-services-cis-). These steps walk you through provisioning the service instance, adding your app domain, and configuring your name servers, and creating DNS records. Create a DNS record for each ALB or load balancer IP address that you collected. These DNS records map your app domain to all of your cluster ALBs or load balancers, and ensure that requests to your app domain are forwarded to your clusters in a round-robin cycle.
-    2. [Add health checks](/docs/infrastructure/cis/glb-setup.html#add-a-health-check) for the ALBs or load balancers. You can use the same health check for the ALBs or load balancers in all of your clusters, or create specific health checks to use for specific clusters.
-    3. [Add an origin pool](/docs/infrastructure/cis/glb-setup.html#add-a-pool) for each cluster by adding the cluster's ALB or load balancer IPs. For example, if you have 3 clusters that each have 2 ALBs, create 3 origin pools that each have 2 ALB IP addresses. Add a health check to each origin pool that you create.
-    4. [Add a global load balancer](/docs/infrastructure/cis/glb-setup.html#set-up-and-configure-your-load-balancers).
+    1.  Set up the service by following steps 1 - 5 in [Getting Started with {{site.data.keyword.Bluemix_notm}} Internet Services (CIS)](/docs/infrastructure/cis?topic=cis-getting-started-with-ibm-cloud-internet-services-cis-#getting-started-with-ibm-cloud-internet-services-cis-). These steps walk you through provisioning the service instance, adding your app domain, and configuring your name servers, and creating DNS records. Create a DNS record for each ALB or load balancer IP address that you collected. These DNS records map your app domain to all of your cluster ALBs or load balancers, and ensure that requests to your app domain are forwarded to your clusters in a round-robin cycle.
+    2. [Add health checks](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check) for the ALBs or load balancers. You can use the same health check for the ALBs or load balancers in all of your clusters, or create specific health checks to use for specific clusters.
+    3. [Add an origin pool](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool) for each cluster by adding the cluster's ALB or load balancer IPs. For example, if you have 3 clusters that each have 2 ALBs, create 3 origin pools that each have 2 ALB IP addresses. Add a health check to each origin pool that you create.
+    4. [Add a global load balancer](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers).
 
     **To use your own global load balancer**:
     1. Configure your domain to route incoming traffic to your ALB or load balancer services by adding the IP addresses of all public enabled ALBs and load balancer services to your domain.
@@ -217,7 +221,7 @@ You can set up multiple clusters in different regions of one geolocation (such a
 By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access to a private VLAN and a public VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface. The public VLAN allows the worker nodes to automatically and securely connect to the master.
 {: shortdesc}
 
-For most cases, your cluster setup can include worker nodes on both public and private VLANs. If you want to lock down your cluster to allow private traffic over the private VLAN but block public traffic over the public VLAN, you can [secure your cluster from public access with Calico network policies](/docs/containers/cs_network_cluster.html#both_vlans_private_services). These Calico network policies do not prevent your worker nodes from communicating with the master. You can also limit the surface of vulnerability in your cluster without locking down public traffic by [isolating networking workloads to edge worker nodes](/docs/containers/cs_edge.html).
+For most cases, your cluster setup can include worker nodes on both public and private VLANs. If you want to lock down your cluster to allow private traffic over the private VLAN but block public traffic over the public VLAN, you can [secure your cluster from public access with Calico network policies](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_services). These Calico network policies do not prevent your worker nodes from communicating with the master. You can also limit the surface of vulnerability in your cluster without locking down public traffic by [isolating networking workloads to edge worker nodes](/docs/containers?topic=containers-edge).
 
 If you want to create a cluster that only has access on a private VLAN, you can create a single zone or multizone private cluster. However, when your worker nodes are connected to a private VLAN only, the worker nodes can't automatically connect to the master. You must configure a gateway appliance to provide network connectivity between the worker nodes and the master.
 
@@ -226,27 +230,27 @@ You cannot convert a cluster that is connected to a public and private VLAN to b
 
 If you want to create a cluster that only has access on a private VLAN:
 
-1.  Review [Planning private-only cluster networking](/docs/containers/cs_network_cluster.html#plan_setup_private_vlan).
-2.  Configure your gateway appliance for network connectivity. Note that you must [open the required ports and IP addresses](/docs/containers/cs_firewall.html#firewall_outbound) in your firewall and [enable VLAN spanning](/docs/containers/cs_subnets.html#vra-routing) for the subnets.
+1.  Review [Planning private-only cluster networking](/docs/containers?topic=containers-cs_network_cluster#plan_setup_private_vlan).
+2.  Configure your gateway appliance for network connectivity. Note that you must [open the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound) in your firewall and [enable VLAN spanning](/docs/containers?topic=containers-subnets#vra-routing) for the subnets.
 3.  Create a cluster.
-    *  [From the console](/docs/containers/cs_clusters.html#clusters_ui), select a private VLAN but not select a public VLAN.
-    *  [From the CLI](/docs/containers/cs_clusters.html#clusters_cli), include the `--private-only` flag.
-4.  If you want to expose an app to a private network by using a private NodePort, load balancer, or Ingress service, review [Planning private external networking for a private VLAN only setup](/docs/containers/cs_network_planning.html#plan_private_vlan). The service is accessible on only the private IP address and you must configure the ports in your firewall to use the private IP address.
+    *  [From the console](/docs/containers?topic=containers-clusters#clusters_ui), select a private VLAN but not select a public VLAN.
+    *  [From the CLI](/docs/containers?topic=containers-clusters#clusters_cli), include the `--private-only` flag.
+4.  If you want to expose an app to a private network by using a private NodePort, load balancer, or Ingress service, review [Planning private external networking for a private VLAN only setup](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). The service is accessible on only the private IP address and you must configure the ports in your firewall to use the private IP address.
 
 
 
 ## Worker pools and worker nodes
 {: #planning_worker_nodes}
 
-A Kubernetes cluster consists of worker nodes that are grouped in worker node pools and is centrally monitored and managed by the Kubernetes master. Cluster admins decide how to set up the cluster of worker nodes to ensure that cluster users have all the resources to deploy and run apps in the cluster.
+A Kubernetes cluster consists of worker nodes that are grouped in worker node pools and is centrally monitored and managed by the Kubernetes master. Cluster administrators decide how to set up the cluster of worker nodes to ensure that cluster users have all the resources to deploy and run apps in the cluster.
 {:shortdesc}
 
-When you create a standard cluster, worker nodes of the same memory, CPU, and disk space specifications (flavor) are ordered in IBM Cloud infrastructure (SoftLayer) on your behalf and added to the default worker node pool in your cluster. Every worker node is assigned a unique worker node ID and domain name that must not be changed after the cluster is created. You can choose between virtual or physical (bare metal) servers. Depending on the level of hardware isolation that you choose, virtual worker nodes can be set up as shared or dedicated nodes. To add different flavors to your cluster, [create another worker pool](/docs/containers/cs_cli_reference.html#cs_worker_pool_create).
+When you create a standard cluster, worker nodes of the same memory, CPU, and disk space specifications (flavor) are ordered in IBM Cloud infrastructure (SoftLayer) on your behalf and added to the default worker node pool in your cluster. Every worker node is assigned a unique worker node ID and domain name that must not be changed after the cluster is created. You can choose between virtual or physical (bare metal) servers. Depending on the level of hardware isolation that you choose, virtual worker nodes can be set up as shared or dedicated nodes. To add different flavors to your cluster, [create another worker pool](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
 
 Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/cluster-large/) for more information.
 
 
-Want to be sure that you always have enough worker nodes to cover your workload? Try out [the cluster autoscaler (beta)](/docs/containers/cs_cluster_scaling.html#ca).
+Want to be sure that you always have enough worker nodes to cover your workload? Try out [the cluster autoscaler (beta)](/docs/containers?topic=containers-ca#ca).
 {: tip}
 
 
@@ -260,7 +264,7 @@ When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you ch
 
 If you want more than one flavor of worker node, you must create a worker pool for each flavor. You cannot resize existing worker nodes to have different resources such as CPU or memory. When you create a free cluster, your worker node is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account. In standard clusters, you can choose the type of machine that works best for your workload. As you plan, consider the [worker node resource reserves](#resource_limit_node) on the total CPU and memory capacity.
 
-You can deploy clusters by using the [console UI](/docs/containers/cs_clusters.html#clusters_ui) or the [CLI](/docs/containers/cs_clusters.html#clusters_cli).
+You can deploy clusters by using the [console UI](/docs/containers?topic=containers-clusters#clusters_ui) or the [CLI](/docs/containers?topic=containers-clusters#clusters_cli).
 
 Select one of the following options to decide what type of worker pool you want.
 * [Virtual machines](#vm)
@@ -285,10 +289,10 @@ Some flavors are available for only one type of tenancy setup. For example, the 
 {: note}
 
 **What are the general features of VMs?**</br>
-Virtual machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. Every VM comes with 1000Mbps networking speed, 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for data such as the container runtime and the `kubelet`. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers/cs_storage_planning.html#storage_planning).
+Virtual machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. Every VM comes with 1000Mbps networking speed, 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for data such as the container runtime and the `kubelet`. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **What if I have deprecated `u1c` or `b1c` machine types?**</br>
-To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](/docs/containers/cs_cluster_update.html#machine_type).
+To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](/docs/containers?topic=containers-update#machine_type).
 
 **What virtual machine flavors are available?**</br>
 Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. For example, the `m2c` VMs are only available in the Dallas location (`dal10, dal12, dal13`). You can also review available [bare metal](#bm) or [SDS](#sds) machine types.
@@ -395,10 +399,10 @@ You can provision your worker node as a single-tenant physical server, also refe
 {: shortdesc}
 
 **How is bare metal different than VMs?**</br>
-Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to increase data availability. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers/cs_storage_planning.html#storage_planning).
+Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to increase data availability. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **Besides better specs for performance, can I do something with bare metal that I can't with VMs?**</br>
-Yes. With bare metal, you have the option to enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers/cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containerlong_notm}} with Trusted Compute](/docs/containers/cs_secure.html#trusted_compute). Trusted Compute is available for certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](/docs/containers/cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.
+Yes. With bare metal, you have the option to enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containerlong_notm}} with Trusted Compute](/docs/containers?topic=containers-security#trusted_compute). Trusted Compute is available for certain bare metal machine types. When you run the `ibmcloud ks machine-types <zone>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.
 
 In addition to Trusted Compute, you can also take advantage of {{site.data.keyword.datashield_full}} (Beta). {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified. If you or your company require data sensitivity due to internal policies, government regulations, or industry compliance requirements, this solution might help you to move to the cloud. Example use cases include financial and healthcare institutions, or countries with government policies that require on-premises cloud solutions.
 
@@ -462,7 +466,7 @@ Choose a machine type with the right storage configuration to support your workl
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Balanced bare metal, mb2c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer. This flavor can also be enabled with Intel® Software Guard Extensions (SGX) so that you can use <a href="/docs/services/data-shield/index.html#gettingstarted" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory.</td>
+<td><strong>Balanced bare metal, mb2c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer. This flavor can also be enabled with Intel® Software Guard Extensions (SGX) so that you can use <a href="/docs/services/data-shield?topic=data-shield-gettingstarted#gettingstarted" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory.</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 2TB SATA</td>
 <td>10000Mbps</td>
@@ -485,11 +489,11 @@ Software-defined storage (SDS) flavors are physical machines that are provisione
 
 **When do I use SDS flavors?**</br>
 You typically use SDS machines in the following cases:
-*  If you use an SDS add-on such as [Portworx](/docs/containers/cs_storage_portworx.html#portworx) to the cluster, use an SDS machine.
+*  If you use an SDS add-on such as [Portworx](/docs/containers?topic=containers-portworx#portworx) to the cluster, use an SDS machine.
 *  If your app is a [StatefulSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) that requires local storage, you can use SDS machines and provision [Kubernetes local persistent volumes (beta) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
 *  You might have custom apps that require additional raw local storage.
 
-For more storage solutions, see [Planning highly available persistent storage](/docs/containers/cs_storage_planning.html#storage_planning).
+For more storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **What SDS flavors can I order?**</br>
 Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [bare metal](#bm) or [VM](#vm) machine types.
@@ -651,7 +655,7 @@ To review how much compute resources are currently used on your worker node, run
 Critical components, such as `containerd`, `kubelet`, `kube-proxy`, and `calico`, must be functional to have a healthy Kubernetes worker node. Over time these components can break and may leave your worker node in a nonfunctional state. Nonfunctional worker nodes decrease total capacity of the cluster and can result in downtime for your app.
 {:shortdesc}
 
-You can [configure health checks for your worker node and enable Autorecovery](/docs/containers/cs_health.html#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
+You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
 
 <br />
 

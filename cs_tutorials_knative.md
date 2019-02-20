@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-13"
+lastupdated: "2019-02-19"
 
 ---
 
@@ -58,15 +58,15 @@ Sounds good? Follow this tutorial to get started with Knative in {{site.data.key
 ## Audience
 {: #knative_audience}
 
-This tutorial is designed for developers who are interested in learning how to use Knative to deploy a serverless app in a Kubernetes cluster, and for cluster admins who want to learn how to set up Knative in a cluster.
+This tutorial is designed for developers who are interested in learning how to use Knative to deploy a serverless app in a Kubernetes cluster, and for cluster administrators who want to learn how to set up Knative in a cluster.
 
 ## Prerequisites
 {: #knative_prerequisites}
 
--  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](/docs/containers/cs_cli_install.html#cs_cli_install_steps). Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
--  [Create a cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b2c.4x16`) or more](/docs/containers/cs_clusters.html#clusters_cli). Every worker node must run Kubernetes version 1.11 or higher.
--  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers/cs_users.html#platform) for {{site.data.keyword.containerlong_notm}}.
--  [Target the CLI to your cluster](/docs/containers/cs_cli_install.html#cs_cli_configure).
+-  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
+-  [Create a cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b2c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_cli). Every worker node must run Kubernetes version 1.11 or higher.
+-  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
+-  [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 ## Lesson 1: Setting up the managed Knative add-on
 {: #knative_setup}
