@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
 keywords: kubernetes, iks, node scaling 
 
@@ -226,13 +226,13 @@ The cluster autoscaler is available as a **preview beta** for select users only.
     helm repo update
     ```
     {: pre}
-4.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster. Set the `image.tag` to the Kubernetes version of your cluster. Supported Kubernetes versions are 1.12 or later.
+4.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster.
     
     You can also [customize the cluster autoscaler settings](#ca_chart_values) such as the amount of time it waits before scaling worker nodes up or down.
     {: tip}
     
     ```
-    helm install ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler --set image.tag=<kubernetes_version>
+    helm install ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler
     ```
     {: pre}
 
