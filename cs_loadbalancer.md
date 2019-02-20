@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -35,7 +35,7 @@ Load balancer services are available for standard clusters only and do not suppo
 
 Choose one of the following options to get started:
 
-<img src="images/cs_loadbalancer_imagemap.png" width="725px" usemap="#image-map" style="width:725px;" alt="Load balancer image">
+<img src="images/cs_loadbalancer_imagemap.png" width="725px" usemap="#image-map" style="width:725px;" alt="This imagemap provides quick links to configuration topics on this page.">
 <map name="image-map">
     <area target="" alt="Overview" title="Overview" href="#lb_overview" coords="35,44,175,72" shape="rect">
     <area target="" alt="Comparison of version 1.0 and 2.0 load balancers" title="Comparison of version 1.0 and 2.0 load balancers" href="#comparison" coords="34,83,173,108" shape="rect">

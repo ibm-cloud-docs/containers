@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -29,7 +29,7 @@ scope: containers
 Expose multiple apps in your Kubernetes cluster by creating Ingress resources that are managed by the IBM-provided application load balancer in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-<img src="images/cs_ingress_imagemap.png" usemap="#image-map">
+<img src="images/cs_ingress_imagemap.png" usemap="#image-map" alt="This imagemap provides quick links to configuration topics on this page.">
 
 <map name="image-map">
     <area target="" alt="Ingress components" title="Ingress components" href="#components" coords="28,42,172,69" shape="rect">

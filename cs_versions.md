@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -113,7 +113,7 @@ The following table records {{site.data.keyword.containerlong_notm}} version rel
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-<table summary="Release history for {{site.data.keyword.containerlong_notm}}.">
+<table summary="This table shows the release history for {{site.data.keyword.containerlong_notm}}.">
 <caption>Release history for {{site.data.keyword.containerlong_notm}}.</caption>
 <col width="20%" align="center">
 <col width="20%">
