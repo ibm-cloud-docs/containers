@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
 keywords: kubernetes, iks
 
@@ -47,7 +47,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tr>
 <td>0.2.53</td>
 <td>19 Feb 2019</td>
-<td>Fixes a bug where the region was ignored for `ibmcloud ks api-key-reset`, `ibmcloud ks credential-get/set`, and `ibmcloud ks vlan-spanning-get`.<ul>
+<td><ul><li>Fixes a bug where the region was ignored for `ibmcloud ks api-key-reset`, `ibmcloud ks credential-get/set`, and `ibmcloud ks vlan-spanning-get`.</li>
 <li>Improves performance for `ibmcloud ks worker-update`.</li>
 <li>Adds the version of the add-on in `ibmcloud ks cluster-addon-enable` prompts.</li>
 </ul></td>

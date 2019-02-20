@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -40,9 +40,9 @@ Refer to the following table for a summary of changes for each build of the Ingr
 
 <table summary="Overview of build changes for the Ingress application load balancer add-on">
 <caption>Changelog for the Ingress application load balancer add-on</caption>
-<col width="15%">
-<col width="15%">
-<col width="35%">
+<col width="12%">
+<col width="12%">
+<col width="41%">
 <col width="35%">
 <thead>
 <tr>
@@ -55,7 +55,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tbody>
 <tr>
 <td>406 / 301</td>
-<td>19 Jan 2019</td>
+<td>19 Feb 2019</td>
 <td><ul>
 <li>Updates the Go version to 1.11.5.</li>
 <li>Fixes vulnerabilities for image scans.</li>
