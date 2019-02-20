@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -64,7 +64,6 @@ This tutorial is intended for software developers and network administrators who
 -  Ensure you have the following access policies:
     - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
     - The [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
-    -  The [**Developer** Cloud Foundry role](/docs/iam?topic=iam-mngcf#mngcf) in the cluster space that you want to work in
 
 
 ## Lesson 1: Creating a cluster and setting up the CLI
