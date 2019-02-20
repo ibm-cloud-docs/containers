@@ -34,8 +34,8 @@ scope: containers
 
 **Supported Kubernetes versions**:
 - Latest: 1.13.2
-- Default: 1.10.12
-- Other: 1.12.5, 1.11.7
+- Default: 1.11.7
+- Other: 1.12.5, 1.10.12
 
 </br>
 
