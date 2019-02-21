@@ -1001,7 +1001,7 @@ lastupdated: "2019-02-21"
 
 ## Popular topics for {{site.data.keyword.containerlong_notm}}
 [Popular topics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_popular_topics)
-* [Popular topics in January 2019](/docs/containers?topic=containers-cs_popular_topics#feb19)
+* [Popular topics in February 2019](/docs/containers?topic=containers-cs_popular_topics#feb19)
 * [Popular topics in January 2019](/docs/containers?topic=containers-cs_popular_topics#jan19)
 * [Popular topics in December 2018](/docs/containers?topic=containers-cs_popular_topics#dec18)
 * [Popular topics in November 2018](/docs/containers?topic=containers-cs_popular_topics#nov18)
