@@ -43,8 +43,8 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <tbody>
 <tr>
 <td>21 February</td>
-<td>[Zone available in Mexico](/docs/containers/cs_regions.html)</td>
-<td>Welcome Mexico (`mex01`) as a new zone for clusters in the US South region. If you have a firewall, be sure to [open the firewall ports](/docs/containers/cs_firewall.html#firewall) for this zone and the other zones within the region that your cluster is in.</td>
+<td>[Zone available in Mexico](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)</td>
+<td>Welcome Mexico (`mex01`) as a new zone for clusters in the US South region. If you have a firewall, be sure to [open the firewall ports](/docs/containers?topic=containers-firewall#firewall_outbound) for this zone and the other zones within the region that your cluster is in.</td>
 </tr>
 </tbody></table>
 
