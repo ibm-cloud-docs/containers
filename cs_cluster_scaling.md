@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-20"
+lastupdated: "2019-02-21"
 
 keywords: kubernetes, iks, node scaling
 
@@ -50,7 +50,7 @@ The cluster autoscaler periodically scans the cluster to adjust the number of wo
 {: shortdesc}
 
 *   **Pending pods to scale up**: A pod is considered pending when insufficient compute resources exist to schedule the pod on a worker node. When the cluster autoscaler detects pending pods, the autoscaler scales up your worker nodes evenly across zones to meet the workload resource requests.
-*   **Underutilized worker nodes to scale down**: Worker nodes that run with less than 50% of the total compute resources requested for 10 minutes or more and that can reschedule their workloads onto other worker nodes are considered underutilized. If the cluster autoscaler detects underutilized worker nodes, it scales down your worker nodes one at a time so that you have only the compute resources that you need.
+*   **Underutilized worker nodes to scale down**: By default, worker nodes that run with less than 50% of the total compute resources requested for 10 minutes or more and that can reschedule their workloads onto other worker nodes are considered underutilized. If the cluster autoscaler detects underutilized worker nodes, it scales down your worker nodes one at a time so that you have only the compute resources that you need. If you want, you can [customize](/docs/containers?topic=containers-ca#ca_chart_values) the default scale-down utilization threshold of 50% for 10 minutes.
 
 Scanning and scaling up and down happens at regular intervals over time, and depending on the number of worker nodes might take a longer period of time to complete, such as 30 minutes.
 
@@ -482,11 +482,6 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     <td>`image.repository`</td>
     <td>Specify the cluster autoscaler Docker image to use.</td>
     <td>registry.bluemix.net/ibm/ibmcloud-cluster-autoscaler</td>
-    </tr>
-    <tr>
-    <td>`image.tag`</td>
-    <td>Set the image tag to the Kubernetes version of your cluster. Must be 1.12 or later.</td>
-    <td>1.12</td>
     </tr>
     <tr>
     <td>`image.pullPolicy`</td>
