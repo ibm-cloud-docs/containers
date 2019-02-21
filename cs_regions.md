@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-21"
 
 keywords: kubernetes, iks 
 
@@ -226,7 +226,7 @@ Zones are physical data centers that are available within an {{site.data.keyword
     <tr>
       <td>US South</td>
       <td>Dallas: dal10, dal12, dal13</td>
-      <td><p>San Jose: sjc03, sjc04</p><p>São Paulo: sao01</p></td>
+      <td><p>Mexico: mex01</p><p>San Jose: sjc03, sjc04</p><p>São Paulo: sao01</p></td>
     </tr>
   </tbody>
 </table>
