@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
 keywords: kubernetes, iks 
 
@@ -46,7 +46,9 @@ For example, if your current Kubernetes API server version is 1.8 and you want t
 If your cluster is running an unsupported Kubernetes version, you might have to force the update. Therefore, keep your cluster up to date to avoid operational impact.
 
 **Can my worker nodes run a later version than the master?**</br>
-No. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
+Your worker nodes cannot run a later `major.minor` Kubernetes version than the master. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
+
+Worker nodes can run later patch versions than the master, such as patch versions that are specific to worker nodes for security updates.
 
 **How are patch updates applied?**</br>
 By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can [check the versions changelog](/docs/containers?topic=containers-changelog) for any potential impact and choose to safely use the `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update) yourself without waiting for the update automation to apply.

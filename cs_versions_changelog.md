@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -26,7 +26,7 @@ scope: containers
 # Version changelog
 {: #changelog}
 
-View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components. 
+View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.Bluemix_notm}} Provider components.
 {:shortdesc}
 
 For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](/docs/containers?topic=containers-cs_versions).
@@ -1566,7 +1566,7 @@ The following table shows the changes that are included in the worker node fix p
 </table>
 
 ### Changelog for 1.10.12_1543, released 5 February 2019
-{: #1117_1543}
+{: #11012_1543}
 
 The following table shows the changes that are included in the patch 1.10.12_1543.
 {: shortdesc}

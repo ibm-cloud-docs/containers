@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -561,7 +561,7 @@ The resources that are reserved on your worker node depend on the amount of CPU 
 To review how much compute resources are currently used on your worker node, run [`kubectl top node` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
 {: tip}
 
-<table summary="Worker node memory reserves by tier.">
+<table summary="This table shows worker node memory reserves by tier.">
 <caption>Worker node memory reserves by tier.</caption>
 <thead>
 <tr>
@@ -605,7 +605,7 @@ To review how much compute resources are currently used on your worker node, run
 </tbody>
 </table>
 
-<table summary="Worker node CPU reserves by tier.">
+<table summary="This table shows worker node CPU reserves by tier.">
 <caption>Worker node CPU reserves by tier.</caption>
 <thead>
 <tr>

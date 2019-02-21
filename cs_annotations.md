@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
 keywords: kubernetes, iks, ingress
 
@@ -1838,7 +1838,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 
 
 ## Path routing annotations
-{: #proxy-buffer}
+{: #path-routing}
 
 The Ingress ALB routes traffic to the paths that back-end apps listen on. With path routing annotations, you can configure how the ALB routes traffic to your apps.
 {: shortdesc}

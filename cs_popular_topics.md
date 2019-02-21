@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-21"
 
 keywords: kubernetes, iks 
 
@@ -29,6 +29,24 @@ scope: containers
 
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
+
+## Popular topics in February 2019
+{: #feb19}
+
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in February 2019</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>21 February</td>
+<td>[Zone available in Mexico](/docs/containers/cs_regions.html)</td>
+<td>Welcome Mexico (`mex01`) as a new zone for clusters in the US South region. If you have a firewall, be sure to [open the firewall ports](/docs/containers/cs_firewall.html#firewall) for this zone and the other zones within the region that your cluster is in.</td>
+</tr>
+</tbody></table>
 
 ## Popular topics in January 2019
 {: #jan19}

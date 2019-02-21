@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -436,10 +436,10 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 </table>
 
 1.  Create your {{site.data.keyword.Bluemix_notm}} IAM access token. The body information that is included in your request varies based on the {{site.data.keyword.Bluemix_notm}} authentication method that you use. Replace the following values:
-  - _`<username>`_: Your {{site.data.keyword.Bluemix_notm}} user name.
-  - _`<password>`_: Your {{site.data.keyword.Bluemix_notm}} password.
-  - _`<api_key>`: Your {{site.data.keyword.Bluemix_notm}} API key.
-  - _`<passcode>`_: Your {{site.data.keyword.Bluemix_notm}} one-time passcode. Run `ibmcloud login --sso` and follow the instructions in your CLI output to retrieve your one-time passcode by using your web browser.
+  - `<username>`: Your {{site.data.keyword.Bluemix_notm}} user name.
+  - `<password>`: Your {{site.data.keyword.Bluemix_notm}} password.
+  - `<api_key>`: Your {{site.data.keyword.Bluemix_notm}} API key.
+  - `<passcode>`: Your {{site.data.keyword.Bluemix_notm}} one-time passcode. Run `ibmcloud login --sso` and follow the instructions in your CLI output to retrieve your one-time passcode by using your web browser.
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
@@ -515,7 +515,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 
     You can find the {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token** field of your API output. Note the {{site.data.keyword.Bluemix_notm}} IAM token to retrieve additional header information in the next steps.
 
-2.  Retrieve the ID of the {{site.data.keyword.Bluemix_notm}} account where the cluster was created. Replace _&lt;iam_token&gt;_ with the {{site.data.keyword.Bluemix_notm}} IAM token that you retrieved in the previous step.
+2.  Retrieve the ID of the {{site.data.keyword.Bluemix_notm}} account where the cluster was created. Replace `<iam_token>` with the {{site.data.keyword.Bluemix_notm}} IAM token that you retrieved in the previous step.
 
     ```
     GET https://accountmanagement.<region>.bluemix.net/v1/accounts
@@ -560,7 +560,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 
     You can find the ID of your {{site.data.keyword.Bluemix_notm}} account in the **resources/metadata/guid** field of your API output.
 
-3.  Generate a new {{site.data.keyword.Bluemix_notm}} IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID where the cluster was created. Replace _&lt;account_ID&gt;_ with the ID of the {{site.data.keyword.Bluemix_notm}} account that you retrieved in the previous step.
+3.  Generate a new {{site.data.keyword.Bluemix_notm}} IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID where the cluster was created. Replace `<account_ID>` with the ID of the {{site.data.keyword.Bluemix_notm}} account that you retrieved in the previous step.
 
     If you are using an {{site.data.keyword.Bluemix_notm}} API key, you must use the {{site.data.keyword.Bluemix_notm}} account ID the API key was created for. To access clusters in other accounts, log into this account and create an {{site.data.keyword.Bluemix_notm}} API key that is based on this account.
     {: note}

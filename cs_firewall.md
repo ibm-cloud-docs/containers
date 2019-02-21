@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-21"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -196,7 +196,7 @@ Let your cluster access infrastructure resources and services from behind a fire
     ```
     {: pre}
 
-2.  Allow outgoing network traffic from the source _<each_worker_node_publicIP>_ to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
+2.  Allow outgoing network traffic from the source `<each_worker_node_publicIP>` to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
 
     You must allow outgoing traffic to port 443 for all of the zones within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from the public IPs of each of your worker nodes to port 443 of the IP address for all the zones.
     {: important}
@@ -237,8 +237,8 @@ Let your cluster access infrastructure resources and services from behind a fire
         </tr>
         <tr>
           <td>US South</td>
-          <td>hou02<br>sao01<br>sjc03<br>sjc04<br><br>dal10,dal12,dal13</td>
-          <td><code>184.173.44.62</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><br><code>169.46.7.238, 169.48.230.146, 169.61.29.194, 169.46.110.218, 169.47.70.10, 169.62.166.98, 169.48.143.218, 169.61.177.2, 169.60.128.2</code></td>
+          <td>hou02<br>mex01<br>sao01<br>sjc03<br>sjc04<br><br>dal10,dal12,dal13</td>
+          <td><code>184.173.44.62</code><br><code>169.57.100.18</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><br><code>169.46.7.238, 169.48.230.146, 169.61.29.194, 169.46.110.218, 169.47.70.10, 169.62.166.98, 169.48.143.218, 169.61.177.2, 169.60.128.2</code></td>
         </tr>
         </tbody>
       </table>
@@ -283,8 +283,8 @@ Let your cluster access infrastructure resources and services from behind a fire
         </tbody>
       </table>
 </p>
-      
-4. Allow outgoing network traffic from your worker node to {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). 
+
+4. Allow outgoing network traffic from your worker node to {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).
     - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.bluemix.net`
     - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.cloud.ibm.com`
 

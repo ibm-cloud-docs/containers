@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-21"
 
 ---
 
@@ -598,10 +598,10 @@ lastupdated: "2019-02-19"
   * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
   * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
 
-[Storing data on {{site.data.keyword.blockstorage_full_notm}}](/docs/containers?topic=containers-block_storage#block_storage)
-* [Installing the {{site.data.keyword.blockstorage_full_notm}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
-  * [Updating the {{site.data.keyword.blockstorage_full_notm}} plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)
-  * [Removing the {{site.data.keyword.blockstorage_full_notm}} plug-in](/docs/containers?topic=containers-block_storage#removing-the-ibm-cloud-block-storage-plug-in)
+[Storing data on {{site.data.keyword.blockstoragefull}}](/docs/containers?topic=containers-block_storage#block_storage)
+* [Installing the {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
+  * [Updating the {{site.data.keyword.blockstorageshort}} plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)
+  * [Removing the {{site.data.keyword.blockstorageshort}} plug-in](/docs/containers?topic=containers-block_storage#removing-the-ibm-cloud-block-storage-plug-in)
 * [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 * [Adding block storage to apps](/docs/containers?topic=containers-block_storage#add_block)
 * [Using existing block storage in your cluster](/docs/containers?topic=containers-block_storage#existing_block)
@@ -1001,6 +1001,7 @@ lastupdated: "2019-02-19"
 
 ## Popular topics for {{site.data.keyword.containerlong_notm}}
 [Popular topics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_popular_topics)
+* [Popular topics in February 2019](/docs/containers?topic=containers-cs_popular_topics#feb19)
 * [Popular topics in January 2019](/docs/containers?topic=containers-cs_popular_topics#jan19)
 * [Popular topics in December 2018](/docs/containers?topic=containers-cs_popular_topics#dec18)
 * [Popular topics in November 2018](/docs/containers?topic=containers-cs_popular_topics#nov18)

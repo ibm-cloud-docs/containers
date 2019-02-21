@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-20"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -64,7 +64,6 @@ This tutorial is intended for software developers and network administrators who
 -  Ensure you have the following access policies:
     - The [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
     - The [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
-    -  The [**Developer** Cloud Foundry role](/docs/iam?topic=iam-mngcf#mngcf) in the cluster space that you want to work in
 
 
 ## Lesson 1: Creating a cluster and setting up the CLI
@@ -182,18 +181,18 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
    ```
    {: pre}
 
-2.  Set up your own private image repository in {{site.data.keyword.registryshort_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.Bluemix_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
+3.  Set up your own private image repository in {{site.data.keyword.registryshort_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.Bluemix_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
 
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
-    In this example, the PR firm wants to create only one image repository in {{site.data.keyword.registryshort_notm}}, so they choose _pr_firm_ as their namespace to group all images in their account. Replace _&lt;namespace&gt;_ with a namespace of your choice that is unrelated to the tutorial.
+    In this example, the PR firm wants to create only one image repository in {{site.data.keyword.registryshort_notm}}, so they choose `pr_firm` as their namespace to group all images in their account. Replace &lt;namespace&gt; with a namespace of your choice that is unrelated to the tutorial.
 
     ```
     ibmcloud cr namespace-add <namespace>
     ```
     {: pre}
 
-3.  Before you continue to the next step, verify that the deployment of your worker node is complete.
+4.  Before you continue to the next step, verify that the deployment of your worker node is complete.
 
     ```
     ibmcloud ks workers --cluster <cluster_name_or_ID>
