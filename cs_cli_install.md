@@ -50,7 +50,7 @@ This task includes the information for installing these CLIs and plug-ins:
 <br>
 To install the CLIs:
 
-1.  As a prerequisite for the {{site.data.keyword.containerlong_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-ibmcloud-cli#overview). The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
+1.  As a prerequisite for the {{site.data.keyword.containerlong_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-ibmcloud-cli). The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
 
     Plan to use the CLI a lot? Try [Enabling shell autocompletion for {{site.data.keyword.Bluemix_notm}} CLI (Linux/MacOS only)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux).
     {: tip}
