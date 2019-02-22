@@ -168,7 +168,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
 
 **Before you begin**:
 
-1.  [Install the required CLI and plug-ins](/docs/cli?topic=cloud-cli-ibmcloud-cli#overview):
+1.  [Install the required CLI and plug-ins](/docs/cli?topic=cloud-cli-ibmcloud-cli):
     *  {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)
     *  {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`)
     *  {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
