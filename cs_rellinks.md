@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-22"
 
 keywords: kubernetes, iks 
 
@@ -44,8 +44,8 @@ scope: containers
 
 - [REST API for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api/)
 - [REST API JSON for clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
-- [REST API for logging in clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.cloud.ibm.com/swagger-logging/)
-- [REST API for managing Ingress application load balancers in clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.cloud.ibm.com/swagger-alb-api/)
+- [REST API for logging in clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-logging/)
+- [REST API for managing Ingress application load balancers in clusters ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-alb-api/)
 
 <br />
 
