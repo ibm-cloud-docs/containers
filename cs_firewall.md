@@ -198,7 +198,7 @@ Let your cluster access infrastructure resources and services from behind a fire
     ```
     {: pre}
 
-2.  Allow outgoing network traffic from the source `<each_worker_node_publicIP>` to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
+2.  Allow outgoing network traffic from the source <em>&lt;each_worker_node_publicIP&gt;</em> to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
 
     You must allow outgoing traffic to port 443 for all of the zones within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from the public IPs of each of your worker nodes to port 443 of the IP address for all the zones.
     {: important}
