@@ -45,6 +45,14 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </thead>
 <tbody>
 <tr>
+<td>0.2.55</td>
+<td>25 Feb 2019</td>
+<td><ul>
+<li>Adds the `debug-tool` add-on to the <code>ibmcloud ks cluster-addon-enable</code> command to install the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility).</li>
+<li>Adds the `cluster-pull-secret-apply` command, which creates an IAM service ID for the cluster, policies, API key, and image pull secrets so that containers that run in the default Kubernetes namespace can pull images from IBM Cloud Container Registry. For new clusters, image pull secrets that use IAM credentials are created by default. Use this command to update existing clusters or if your cluster has an image pull secret error during creation. For more information, see [the doc](https://test.cloud.ibm.com/docs/containers?topic=containers-images#cluster_registry_auth).</li>
+</ul></td>
+</tr>
+<tr>
 <td>0.2.53</td>
 <td>19 Feb 2019</td>
 <td><ul><li>Fixes a bug where the region was ignored for `ibmcloud ks api-key-reset`, `ibmcloud ks credential-get/set`, and `ibmcloud ks vlan-spanning-get`.</li>
@@ -64,7 +72,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.2.40</td>
 <td>06 Feb 2019</td>
 <td><ul>
-<li>Adds the [<code>ibmcloud ks cluster-addons</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addons), [<code>ibmcloud ks cluster-addon-enable</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable), and [<code>ibmcloud ks cluster-addon-disable</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_disable) for working with managed cluster add-ons such as the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-knative_tutorial) managed add-ons for {{site.data.keyword.containerlong_notm}}.</li>
+<li>Adds the [<code>ibmcloud ks cluster-addons</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addons), [<code>ibmcloud ks cluster-addon-enable</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable), and [<code>ibmcloud ks cluster-addon-disable</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_disable) commands for working with managed cluster add-ons such as the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-knative_tutorial) managed add-ons for {{site.data.keyword.containerlong_notm}}.</li>
 <li>Improves help text for {{site.data.keyword.Bluemix_dedicated_notm}} users of the <code>ibmcloud ks vlans</code> command.</li></td>
 </tr>
 <tr>

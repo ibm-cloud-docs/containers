@@ -153,13 +153,19 @@ ibmcloud plugin list
     <td>[ibmcloud ks cluster-create](#cs_cluster_create)</td>
     <td>[ibmcloud ks cluster-feature-enable](#cs_cluster_feature_enable)</td>
     <td>[ibmcloud ks cluster-get](#cs_cluster_get)</td>
-    <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
+    <td>[ibmcloud ks cluster-pull-secret-apply](#cs_cluster_pull_secret_apply)</td>
   </tr>
   <tr>
+    <td>[ibmcloud ks cluster-refresh](#cs_cluster_refresh)</td>
     <td>[ibmcloud ks cluster-rm](#cs_cluster_rm)</td>
     <td>[ibmcloud ks cluster-update](#cs_cluster_update)</td>
     <td>[ibmcloud ks clusters](#cs_clusters)</td>
+  </tr>
+  <tr>
     <td>[ibmcloud ks kube-versions](#cs_kube_versions)</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
   </tr>
 </tbody>
 </table>
@@ -770,6 +776,31 @@ ibmcloud ks messages
 Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
 {: shortdesc}
 
+#### ibmcloud ks cluster-addon-disable debug-tool
+{: #cs_cluster_addon_disable_debug}
+
+Disable the add-on for the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable debug-tool --cluster CLUSTER
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  ibmcloud ks cluster-addon-disable debug-tool --cluster my_cluster
+  ```
+  {: pre}
 
 #### ibmcloud ks cluster-addon-disable istio
 {: #cs_cluster_addon_disable_istio}
@@ -888,6 +919,32 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 
 Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
 {: shortdesc}
+
+#### ibmcloud ks cluster-addon-enable debug-tool
+{: #cs_cluster_addon_enable_debug}
+
+Enable the add-on for the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable debug-tool --cluster CLUSTER
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+<dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  ibmcloud ks cluster-addon-enable debug-tool --cluster my_cluster
+  ```
+  {: pre}
 
 #### ibmcloud ks cluster-addon-enable istio
 {: #cs_cluster_addon_enable_istio}
@@ -1379,6 +1436,42 @@ ibmcloud ks cluster-get --cluster CLUSTER [--json] [--showResources] [-s]
   ```
   {: screen}
 
+### ibmcloud ks cluster-pull-secret-apply
+{: #cs_cluster_pull_secret_apply}
+
+Make an {{site.data.keyword.Bluemix_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID. The API key is then stored in a Kubernetes `imagePullSecret` so that you can pull images from your {{site.data.keyword.registryshort_notm}} namespaces for containers that are in the `default` Kubernetes namespace. This process happens automatically when you create a cluster. If you got an error during the cluster creation process or have an existing cluster, you can use this command to apply the process again.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-pull-secret-apply --cluster CLUSTER
+```
+{: pre}
+
+This API key method replaces the previous method of authorizing a cluster to access {{site.data.keyword.registrylong_notm}} by automatically creating a [token](/docs/services/Registry?topic=registry-registry_access#registry_tokens) and storing the token in an image pull secret. Now, by using IAM API keys to access {{site.data.keyword.registrylong_notm}}, you can customize IAM policies for the service ID to restrict access to your namespaces or specific images. For example, you can change the service ID policies in the cluster's image pull secret to pull images from only a certain registry region or namespace. Before you can customize IAM policies, you must [enable {{site.data.keyword.Bluemix_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users).
+
+For more information, see [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-images#cluster_registry_auth).
+
+If you added IAM policies to an existing service ID, such as to restrict access to a regional registry, the service ID, IAM policies, and API key for the image pull secret are reset by this command.
+{: important}
+
+<strong>Minimum required permissions</strong>:
+*  **Operator or Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+*  **Administrator** platform role in {{site.data.keyword.registrylong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+   </dl>
+
+**Example**:
+
+```
+ibmcloud ks cluster-pull-secret-apply --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-refresh
 {: #cs_cluster_refresh}
