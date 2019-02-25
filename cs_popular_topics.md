@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-21"
+lastupdated: "2019-02-25"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -42,9 +42,23 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
+<td>25 February</td>
+<td>More granular control over pulling images from {{site.data.keyword.registrylong_notm}}</td>
+<td>When you deploy your workloads in {{site.data.keyword.containerlong_notm}} clusters, your containers can now pull images from the [new `icr.io` domain names for {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-registry_overview#registry_regions). In addition, you can use fine-grained access policies in {{site.data.keyword.Bluemix_notm}} IAM to control access to your images. For more information, see [Understanding how your cluster is authorized to pull images](/docs/containers?topic=containers-images#cluster_registry_auth).</td>
+</tr>
+<tr>
 <td>21 February</td>
-<td>[Zone available in Mexico](/docs/containers/cs_regions.html)</td>
-<td>Welcome Mexico (`mex01`) as a new zone for clusters in the US South region. If you have a firewall, be sure to [open the firewall ports](/docs/containers/cs_firewall.html#firewall) for this zone and the other zones within the region that your cluster is in.</td>
+<td>[Zone available in Mexico](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)</td>
+<td>Welcome Mexico (`mex01`) as a new zone for clusters in the US South region. If you have a firewall, be sure to [open the firewall ports](/docs/containers?topic=containers-firewall#firewall_outbound) for this zone and the other zones within the region that your cluster is in.</td>
+</tr>
+<tr><td>06 Feb 2019</td>
+<td>[Istio on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-istio)</td>
+<td>Istio on {{site.data.keyword.containerlong_notm}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.Bluemix_notm}} automatically keeps all your Istio components up to date.</td>
+</tr>
+<tr>
+<td>06 Feb 2019</td>
+<td>[Knative on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-knative_tutorial)</td>
+<td>Knative is an open source platform that extends the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. Managed Knative on {{site.data.keyword.containerlong_notm}} is a managed add-on that integrates Knative and Istio directly with your Kubernetes cluster. The Knative and Istio version in the add-on are tested by IBM and supported for the use in {{site.data.keyword.containerlong_notm}}.</td>
 </tr>
 </tbody></table>
 
@@ -71,8 +85,8 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </tr>
 <tr>
 <td>8 January</td>
-<td>[{{site.data.keyword.containerlong_notm}} debug utility](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)</td>
-<td>Do you sometimes find it hard to get all the YAML files and other information that you need to help troubleshoot an issue? Try out the {{site.data.keyword.containerlong_notm}} debug utility for a graphical user interface that helps you gather cluster, deployment, and network information.</td>
+<td>[{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)</td>
+<td>Do you sometimes find it hard to get all the YAML files and other information that you need to help troubleshoot an issue? Try out the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool for a graphical user interface that helps you gather cluster, deployment, and network information.</td>
 </tr>
 </tbody></table>
 

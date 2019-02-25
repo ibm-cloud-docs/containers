@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-20"
+lastupdated: "2019-02-25"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -96,7 +96,7 @@ The Portworx key-value store serves as the single source of truth for your Portw
 ### Setting up a Databases for etcd service instance
 {: #databaseetcd}
 
-Databases for etcd is a managed etcd service that securely stores and replicates your data across three storage instances to provide high availability and resiliency for your data. For more information, see the [Databases for etcd getting started tutorial](/docs/services/databases-for-etcd?topic=databases-for-etcd-getting-started#getting-started-tutorial).
+Databases for etcd is a managed etcd service that securely stores and replicates your data across three storage instances to provide high availability and resiliency for your data. For more information, see the [Databases for etcd getting started tutorial](/docs/services/databases-for-etcd?topic=databases-for-etcd-getting-started#getting-started).
 
 The following steps show how to provision and set up a Databases for etcd service instance for Portworx.
 
@@ -177,7 +177,7 @@ The following steps show how to provision and set up the {{site.data.keyword.com
 ## Installing Portworx in your cluster
 {: #install_portworx}
 
-Install Portworx with a Helm chart. The Helm chart deploys a trial version of the Portworx enterprise edition `px-enterprise` that you can use for 30 days. In addition, [Stork ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/stork.html) is also installed on your Kubernetes cluster. Stork is the Portworx storage scheduler and allows you to co-locate pods with their data and create and restore snapshots of Portworx volumes.
+Install Portworx with a Helm chart. The Helm chart deploys a trial version of the Portworx enterprise edition `px-enterprise` that you can use for 30 days. In addition, [Stork ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) is also installed on your Kubernetes cluster. Stork is the Portworx storage scheduler and allows you to co-locate pods with their data and create and restore snapshots of Portworx volumes.
 {: shortdesc}
 
 Looking for instructions about how to update or remove Portworx? See [Updating Portworx](#update_portworx) and [Removing Portworx](#remove_portworx).
@@ -257,7 +257,7 @@ To install Portworx:
    managementInterface: none             # Name of the interface <ethX>
    envVars: none                         # NOTE: This is a ";" seperated list of environment variables. For eg: MYENV1=myvalue1;MYENV2=myvalue2
 
-   stork: true                           # Use Stork https://docs.portworx.com/scheduler/kubernetes/stork.html for hyperconvergence.
+   stork: true                           # Use Stork https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/ for hyperconvergence.
    storkVersion: 1.1.3
 
    customRegistryURL:
@@ -372,11 +372,11 @@ To install Portworx:
        https://docs.portworx.com/scheduler/kubernetes/dynamic-provisioning.html
 
    Want to use Storage Orchestration for hyperconvergence, Please look at STork here. (NOTE: This isnt currently deployed as part of the Helm chart)
-       https://docs.portworx.com/scheduler/kubernetes/stork.html
+       https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/
 
    Refer application solutions such as Cassandra, Kafka etcetera.
-       https://docs.portworx.com/scheduler/kubernetes/cassandra-k8s.html
-       https://docs.portworx.com/scheduler/kubernetes/kafka-k8s.html
+       https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/
+       https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper/.html
 
    For options that you could provide while installing Portworx on your cluster head over to the README.md
    ```
@@ -614,7 +614,7 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
    ```
    {: screen}
 
-5. [Retrieve an {{site.data.keyword.keymanagementservicelong_notm}} API key](/docs/services/key-protect/access-api.html#access-api). The API key is used by Portworx to interact with the {{site.data.keyword.keymanagementservicelong_notm}} API on your behalf.
+5. [Retrieve an {{site.data.keyword.keymanagementservicelong_notm}} API key](/docs/services/key-protect?topic=key-protect-set-up-api#set-up-api#access-api). The API key is used by Portworx to interact with the {{site.data.keyword.keymanagementservicelong_notm}} API on your behalf.
 
 6. [Retrieve the {{site.data.keyword.keymanagementservicelong_notm}} API endpoint](/docs/services/key-protect?topic=key-protect-regions#regions) for the region where you created your service instance.
 
@@ -825,7 +825,7 @@ To request storage from your Portworx cluster and use it in your app, you must s
 
 2. If you don't want to use an existing storage class, create a configuration file for your new storage class.
 
-   For a full list of supported options that you can specify in your storage class, see [Using Dynamic Provisioning ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/dynamic-provisioning.html#using-dynamic-provisioning)
+   For a full list of supported options that you can specify in your storage class, see [Using Dynamic Provisioning ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning)
 
    ```
    kind: StorageClass
@@ -949,7 +949,7 @@ To access the storage from your app, you must mount the PVC to your app.
 
 1. Create a configuration file for a deployment that mounts the PVC.
 
-   For tips for how to deploy a stateful set with Portworx, see [StatefulSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/statefulsets.html). The Portworx documentation also includes examples for how to deploy [Cassandra ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/cassandra-k8s.html), [Kafka ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/kafka-k8s.html), [ElasticSearch with Kibana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/elasticstack-kibana-k8s.html), and [WordPress with MySQL ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/wp-k8s.html).
+   For tips for how to deploy a stateful set with Portworx, see [StatefulSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/). The Portworx documentation also includes examples for how to deploy [Cassandra ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/), [Kafka ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper/.html), [ElasticSearch with Kibana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana/), and [WordPress with MySQL ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/wordpress/).
    {: tip}
 
    ```
@@ -1004,7 +1004,7 @@ To access the storage from your app, you must mount the PVC to your app.
       </tr>
     <tr>
     <td><code>spec.schedulerName</code></td>
-    <td>Use [Stork ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/stork.html) as the scheduler for your Portworx cluster. Stork allows you to co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes. </td>
+    <td>Use [Stork ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) as the scheduler for your Portworx cluster. Stork allows you to co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes. </td>
     </tr>
     <tr>
     <td><code>spec.containers.image</code></td>
@@ -1016,7 +1016,7 @@ To access the storage from your app, you must mount the PVC to your app.
     </tr>
     <tr>
     <td><code>spec.containers.securityContext.fsGroup</code></td>
-    <td>Optional: To access your storage with a non-root user, specify the [security context ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for your pod and define the set of users that you want to grant access in the `fsGroup` section on your deployment YAML. For more information, see [Accessing Portworx volumes with a non-root user ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/non-root.html). </td>
+    <td>Optional: To access your storage with a non-root user, specify the [security context ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for your pod and define the set of users that you want to grant access in the `fsGroup` section on your deployment YAML. For more information, see [Accessing Portworx volumes with a non-root user ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users/). </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
@@ -1090,13 +1090,13 @@ To access the storage from your app, you must mount the PVC to your app.
 
 <dl>
 <dt>Using existing Portworx volumes</dt>
-<dd>If you have an existing Portworx volume that you created manually or that was not automatically deleted when you deleted the PVC, you can statically provision the corresponding PV and PVC and use this volume with your app. For more information, see [Using existing volumes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/preprovisioned-volumes.html#using-the-portworx-volume). </dd>
+<dd>If you have an existing Portworx volume that you created manually or that was not automatically deleted when you deleted the PVC, you can statically provision the corresponding PV and PVC and use this volume with your app. For more information, see [Using existing volumes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes/#using-the-portworx-volume). </dd>
 <dt>Running stateful sets on Portworx</dt>
-<dd>If you have a stateful app that you want to deploy as a stateful set into your cluster, you can set up your stateful set to use storage from your Portworx cluster. For more information, see [Create a MySQL StatefulSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/statefulsets.html#create-a-mysql-statefulset). </dd>
+<dd>If you have a stateful app that you want to deploy as a stateful set into your cluster, you can set up your stateful set to use storage from your Portworx cluster. For more information, see [Create a MySQL StatefulSet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/#create-a-mysql-statefulset). </dd>
 <dt>Running your pods hyperconverged</dt>
-<dd>You can configure your Portworx cluster to schedule pods on the same worker node where the pod's volume resides. This setup is also referred to as `hyperconverged` and can improve the data storage performance. For more information, see [Run pods on same host as a volume  ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/scheduler-convergence.html).</dd>
+<dd>You can configure your Portworx cluster to schedule pods on the same worker node where the pod's volume resides. This setup is also referred to as `hyperconverged` and can improve the data storage performance. For more information, see [Run pods on same host as a volume  ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/).</dd>
 <dt>Creating snapshots of your Portworx volumes</dt>
-<dd>You can save the current state of a volume and its data by creating a Portworx snapshot. Snapshots can be stored on your local Portworx cluster or in the Cloud. For more information, see [Create and use local snapshots ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/snaps.html). </dd>
+<dd>You can save the current state of a volume and its data by creating a Portworx snapshot. Snapshots can be stored on your local Portworx cluster or in the Cloud. For more information, see [Create and use local snapshots ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/). </dd>
 </dl>
 
 ## Cleaning up your Portworx volumes and cluster
@@ -1207,11 +1207,11 @@ When you added storage from your Portworx cluster to your app, you have three ma
 You can exclude worker nodes from your Portworx cluster or remove the entire Portworx cluster if you do not want to use Portworx anymore.
 {: shortdesc}
 
-Removing your Portworx cluster removes all the data from your Portworx cluster. Make sure to [create a snapshot for your data and save this snapshot to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/snaps.html).
+Removing your Portworx cluster removes all the data from your Portworx cluster. Make sure to [create a snapshot for your data and save this snapshot to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/).
 {: important}
 
-- **Remove a worker node from the Portworx cluster:** If you want to remove a worker node that runs Portworx and stores data in your Portworx cluster,  you must migrate existing pods to remaining worker nodes and then uninstall Portworx from the node. For more information, see [Decommission a Portworx node in Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/scheduler/kubernetes/k8s-node-decommission.html)
-- **Remove the entire Portworx cluster:** You can remove a Portworx cluster by using the [`kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl cluster-delete` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/control/cluster.html#pxctl-cluster-delete) or by [uninstalling the Portworx Helm chart](#remove_portworx).
+- **Remove a worker node from the Portworx cluster:** If you want to remove a worker node that runs Portworx and stores data in your Portworx cluster,  you must migrate existing pods to remaining worker nodes and then uninstall Portworx from the node. For more information, see [Decommission a Portworx node in Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/)
+- **Remove the entire Portworx cluster:** You can remove a Portworx cluster by using the [`kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl cluster-delete` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/cli/#pxctl-cluster-delete) or by [uninstalling the Portworx Helm chart](#remove_portworx).
 
 ## Getting help and support
 {: #portworx_help}

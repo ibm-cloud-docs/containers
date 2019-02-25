@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-25"
 
 keywords: kubernetes, iks 
 
@@ -594,8 +594,8 @@ To remove the plug-in:
    - **Flex**: This option is used for workloads and data that do not follow a specific usage pattern, or that are too huge to determine or predict a usage pattern. **Tip:** Check out this [blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/03/interconnect-2017-changing-rules-storage/) to learn how the Flex storage class works compared to traditional storage tiers.   
 
 3. Decide on the level of resiliency for the data that is stored in your bucket.
-   - **Cross-region**: With this option, your data is stored across three regions within a geolocation for highest availability. If you have workloads that are distributed across regions, requests are routed to the nearest regional endpoint. The API endpoint for the geolocation is automatically set by the `ibmc` Helm plug-in that you installed earlier based on the location that your cluster is in. For example, if your cluster is in `US South`, then your storage classes are configured to use the `US GEO` API endpoint for your buckets. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information.  
-   - **Regional**: With this option, your data is replicated across multiple zones within one region. If you have workloads that are located in the same region, you see lower latency and better performance than in a cross-regional setup. The regional endpoint is automatically set by the `ibm` Helm plug-in that you installed earlier based on the location that your cluster is in. For example, if your cluster is in `US South`, then your storage classes were configured to use `US South` as the regional endpoint for your buckets. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information.
+   - **Cross-region**: With this option, your data is stored across three regions within a geolocation for highest availability. If you have workloads that are distributed across regions, requests are routed to the nearest regional endpoint. The API endpoint for the geolocation is automatically set by the `ibmc` Helm plug-in that you installed earlier based on the location that your cluster is in. For example, if your cluster is in `US South`, then your storage classes are configured to use the `US GEO` API endpoint for your buckets. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) for more information.  
+   - **Regional**: With this option, your data is replicated across multiple zones within one region. If you have workloads that are located in the same region, you see lower latency and better performance than in a cross-regional setup. The regional endpoint is automatically set by the `ibm` Helm plug-in that you installed earlier based on the location that your cluster is in. For example, if your cluster is in `US South`, then your storage classes were configured to use `US South` as the regional endpoint for your buckets. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) for more information.
 
 4. Review the detailed {{site.data.keyword.cos_full_notm}} bucket configuration for a storage class.
    ```
@@ -1153,7 +1153,7 @@ To deploy a stateful set that uses object storage:
 </tr>
 <tr>
 <td>Default resiliency endpoint</td>
-<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information. </td>
+<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) for more information. </td>
 </tr>
 <tr>
 <td>Chunk size</td>
@@ -1190,7 +1190,7 @@ To deploy a stateful set that uses object storage:
 </tr>
 <tr>
 <td>Default resiliency endpoint</td>
-<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information. </td>
+<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) for more information. </td>
 </tr>
 <tr>
 <td>Chunk size</td>
@@ -1227,7 +1227,7 @@ To deploy a stateful set that uses object storage:
 </tr>
 <tr>
 <td>Default resiliency endpoint</td>
-<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information. </td>
+<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) for more information. </td>
 </tr>
 <tr>
 <td>Chunk size</td>
@@ -1264,7 +1264,7 @@ To deploy a stateful set that uses object storage:
 </tr>
 <tr>
 <td>Default resiliency endpoint</td>
-<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#select-regions-and-endpoints) for more information. </td>
+<td>The resiliency endpoint is automatically set based on the location that your cluster is in. See [Regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints) for more information. </td>
 </tr>
 <tr>
 <td>Chunk size</td>

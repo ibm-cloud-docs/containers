@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-25"
 
 keywords: kubernetes, iks 
 
@@ -349,9 +349,9 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 
     1.  Get the user's infrastructure API credentials. Note that the credentials differ from the IBMid.
 
-        1.  From the [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/) console **Infrastructure** > **Account** > **Users** > **User List** table, click the **IBMid or Username**.
+        1.  From the [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) console, select **Manage** > **Access (IAM)** > **Users** table and click the user name.
 
-        2.  In the **API Access Information** section, view the **API Username** and **Authentication Key**.    
+        2.  In the **API Keys** section, find or create a classic infrastructure API key.   
 
     2.  Set the infrastructure API credentials to use.
         ```
@@ -419,7 +419,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
     4. From the **Services** list, type **{{site.data.keyword.containershort_notm}}**.
     5. From the **Region** list, select one or all regions.
     6. Select a role for the policy.
-       * **Platform access role**: Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. To find a list of supported actions per role, see [platform roles reference page](/cs_access_reference.html#iam_platform).
+       * **Platform access role**: Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. To find a list of supported actions per role, see [platform roles reference page](/docs/containers?topic=containers-access_reference#iam_platform).
        * **Service access role**: Grants access to Kubernetes as access from within a cluster so that users can manage Kubernetes resources such as pods, deployments, services, and namespaces. To find a list of supported actions per role, see [service roles reference page](/docs/containers?topic=containers-access_reference#service).
     7. Click **Assign**.
     8. **Optional**: If you assigned only a service roles to users, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster-config` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) or otherwise interact with the Kubernetes API. If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, repeat these steps to give the users the platform **Viewer** role.
@@ -430,7 +430,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
     4. From the **Cluster** list, select one or all cluster instances.
     5. In the **Namespace** field, enter the name of the Kubernetes namespace that you want to scope the _service access_ policy to. Note that you cannot scope a _platform access_ policy to a namespace. The policy grants access to namespaces in all clusters that you previously selected, such as all clusters within a region. If you want to grant access to all namespaces, you can leave the namespace field blank.
     6. Select a role for the policy.
-       *  **Platform access role**: Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. To find a list of supported actions per role, see [platform roles reference page](/cs_access_reference.html#iam_platform).
+       *  **Platform access role**: Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. To find a list of supported actions per role, see [platform roles reference page](/docs/containers?topic=containers-access_reference#iam_platform).
           * If you assign a user the **Administrator** platform role for only one cluster, you must also assign the user the **Viewer** platform role for all clusters in that region in the resource group.
           * If you scoped the policy to a namespace, you cannot also assign platform role at the same time. If you also want the user to have a platform role, repeat these steps but leave the namespace field blank and assign only a platform role (do not assign a service access role again).
        * **Service access role**: Grants access to Kubernetes as accessed from within a cluster so that users can manage Kubernetes resources such as pods, deployments, services, and namespaces. To find a list of supported actions per role, see [service roles reference page](/docs/containers?topic=containers-access_reference#service).
@@ -1008,7 +1008,7 @@ Before the user leaves, the {{site.data.keyword.Bluemix_notm}} account owner mus
 4. When {{site.data.keyword.Bluemix_notm}} IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. However, if you created custom RBAC roles or cluster roles, [remove the user from those RBAC role bindings or cluster role bindings](#remove_custom_rbac).
 
 5. If you have a Pay-As-You-Go account that is automatically linked to your {{site.data.keyword.Bluemix_notm}} account, the user's IBM Cloud infrastructure (SoftLayer) roles are automatically removed. However, if you have a [different type of account](#understand_infra), you might need to manually remove the user from IBM Cloud infrastructure (SoftLayer).
-    1. From the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) click **Infrastructure**.
+    1. From the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/) click **Infrastructure**.
     2. Navigate to **Account > Users > User List**.
     2. Look for a table entry for the user.
         * If you don't see an entry for the user, the user has already been removed. No further action is required.
@@ -1068,7 +1068,7 @@ If you do not need custom RBAC permissions anymore, you can remove them.
 To remove all of a user's Cloud Foundry permissions, you can remove the user's organization roles. If you only want to remove a user's ability, for example, to bind services in a cluster, only remove the user's space roles.
 {: shortdesc}
 
-1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/). From the menu bar, select **Manage > Access (IAM)**.
+1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/). From the menu bar, select **Manage > Access (IAM)**.
 2. Click the **Users** page, and then click the name of the user that you want to remove permissions from.
 3. Click the **Cloud Foundry access** tab.
     * To remove the user's space role:

@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-25"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -40,21 +40,34 @@ You can take these general steps to ensure that your clusters are up-to-date:
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 {: #debug_utility}
 
-While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
+While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, you can enable the add-on in your cluster.
+{: shortdesc}
 
-1. [Set up Helm in your cluster, create a service account for Tiller, and add the `ibm` repository to your Helm instance](/docs/containers?topic=containers-integrations#helm).
+1. Enable the `debug-tool` add-on in your cluster.
+  ```
+  ibmcloud ks cluster-addon-enable debug-tool --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
 
-2. Install the Helm chart to your cluster.
-    ```
-    helm install ibm/ibmcloud-iks-debug --name debug-tool
-    ```
-    {: pre}
+2. Verify that the add-on is enabled.
+  ```
+  ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  OK
+  Name                    Version
+  debug-tool              1.0.5
+  ```
+  {: screen}
 
 3. Start a proxy server to display the debug tool interface.
-    ```
-    kubectl proxy --port 8080
-    ```
-    {: pre}
+  ```
+  kubectl proxy --port 8080
+  ```
+  {: pre}
 
 4. In a web browser, open the debug tool interface URL: http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
 

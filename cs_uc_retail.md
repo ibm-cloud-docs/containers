@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-25"
 
 keywords: kubernetes, iks 
 
@@ -42,7 +42,7 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} p
 
 {{site.data.keyword.containerlong_notm}} and key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
-* [{{site.data.keyword.cos_full}} to persist and sync data across apps](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#asynchronous-data-processing-using-object-storage-and-pub-sub-messaging)
+* [{{site.data.keyword.cos_full}} to persist and sync data across apps](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
 **Context: Retailer shares data, by using APIs with global partners to drive omnichannel sales**
@@ -127,7 +127,7 @@ Key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Insights to market trends with Watson Discovery](https://www.ibm.com/watson/services/discovery/)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Inventory management with {{site.data.keyword.messagehub_full}}](/docs/services/MessageHub/messagehub010.html#about)
+* [Inventory management with {{site.data.keyword.messagehub_full}}](/docs/services/EventStreams?topic=eventstreams-about#about)
 
 **Context: Traditional grocer increases customer traffic and sales with digital insights**
 

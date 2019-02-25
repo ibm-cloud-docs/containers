@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-19"
+lastupdated: "2019-02-25"
 
 keywords: kubernetes, iks 
 
@@ -238,7 +238,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         ```
         {: pre}
 
-5.  If you want to unlink your accounts, you can disconnect your IBMid from your Dedicated user ID. For more information, see [Disconnect your dedicated ID from the public IBMid](/docs/iam?topic=iam-connect_dedicated_id#disconnect-your-dedicated-id-from-the-public-ibmid).
+5.  If you want to unlink your accounts, you can disconnect your IBMid from your Dedicated user ID. For more information, see [Disconnect your dedicated ID from the public IBMid](/docs/iam?topic=iam-connect_dedicated_id#disconnect_id).
 
     ```
     ibmcloud iam dedicated-id-disconnect

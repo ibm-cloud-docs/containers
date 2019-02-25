@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-21"
+lastupdated: "2019-02-25"
 
 keywords: kubernetes, iks
 
@@ -189,6 +189,8 @@ Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`
 Let your cluster access infrastructure resources and services from behind a firewall, such as for {{site.data.keyword.containerlong_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
 {:shortdesc}
 
+
+
 1.  Note the public IP address for all of your worker nodes in the cluster.
 
     ```
@@ -196,7 +198,7 @@ Let your cluster access infrastructure resources and services from behind a fire
     ```
     {: pre}
 
-2.  Allow outgoing network traffic from the source `<each_worker_node_publicIP>` to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
+2.  Allow outgoing network traffic from the source `&lt;each_worker_node_publicIP&gt;` to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
 
     You must allow outgoing traffic to port 443 for all of the zones within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from the public IPs of each of your worker nodes to port 443 of the IP address for all the zones.
     {: important}
@@ -242,47 +244,90 @@ Let your cluster access infrastructure resources and services from behind a fire
         </tr>
         </tbody>
       </table>
+          </thead>
+        <tbody>
+          <tr>
+            <td>AP North</td>
+            <td>che01<br>hkg02<br>seo01<br>sng01<br><br>tok02, tok04, tok05</td>
+            <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><br><code>161.202.126.210, 128.168.71.117, 165.192.69.69</code></td>
+           </tr>
+          <tr>
+             <td>AP South</td>
+             <td>mel01<br><br>syd01, syd04, syd05</td>
+             <td><code>168.1.97.67</code><br><br><code>168.1.8.195, 130.198.66.26, 168.1.12.98, 130.198.64.19</code></td>
+          </tr>
+          <tr>
+             <td>EU Central</td>
+             <td>ams03<br>mil01<br>osl01<br>par01<br><br>fra02, fra04, fra05</td>
+             <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+            </tr>
+          <tr>
+            <td>UK South</td>
+            <td>lon02, lon04, lon05, lon06</td>
+            <td><code>159.122.242.78, 158.175.111.42, 158.176.94.26, 159.122.224.242, 158.175.65.170, 158.176.95.146</code></td>
+          </tr>
+          <tr>
+            <td>US East</td>
+             <td>mon01<br>tor01<br><br>wdc04, wdc06, wdc07</td>
+             <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><br><code>169.63.88.186, 169.60.73.142, 169.61.109.34, 169.63.88.178, 169.60.101.42, 169.61.83.62</code></td>
+          </tr>
+          <tr>
+            <td>US South</td>
+            <td>hou02<br>mex01<br>sao01<br>sjc03<br>sjc04<br><br>dal10,dal12,dal13</td>
+            <td><code>184.173.44.62</code><br><code>169.57.100.18</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><br><code>169.46.7.238, 169.48.230.146, 169.61.29.194, 169.46.110.218, 169.47.70.10, 169.62.166.98, 169.48.143.218, 169.61.177.2, 169.60.128.2</code></td>
+          </tr>
+          </tbody>
+        </table></staging>
 
 3.  Allow outgoing network traffic from the worker nodes to [{{site.data.keyword.registrylong_notm}} regions](/docs/services/Registry?topic=registry-registry_overview#registry_regions):
     - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
     - Replace <em>&lt;registry_subnet&gt;</em> with the registry subnet to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images. Port 4443 is required for notary functions, such as [Verifying image signatures](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent).
-      <p>
-<table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
-  <caption>IP addresses to open for Registry traffic</caption>
-      <thead>
-        <th>{{site.data.keyword.containerlong_notm}} region</th>
-        <th>Registry address</th>
-        <th>Registry subnets</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Global registry across {{site.data.keyword.containerlong_notm}} regions</td>
-          <td>registry.bluemix.net</td>
-          <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
-        </tr>
-        <tr>
-          <td>AP North, AP South</td>
-          <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
-        </tr>
-        <tr>
-          <td>EU Central</td>
-          <td>registry.eu-de.bluemix.net</td>
-          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
-         </tr>
-         <tr>
-          <td>UK South</td>
-          <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
-         </tr>
-         <tr>
-          <td>US East, US South</td>
-          <td>registry.ng.bluemix.net</td>
-          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
-         </tr>
-        </tbody>
-      </table>
-</p>
+      <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
+        <caption>IP addresses to open for Registry traffic</caption>
+            <thead>
+              <th>{{site.data.keyword.containerlong_notm}} region</th>
+              <th>Registry address</th>
+              <th>Registry subnets</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Global registry across <br>{{site.data.keyword.containerlong_notm}} regions</td>
+                <td><code>icr.io</code><br><br>
+                Deprecated: <code>registry.bluemix.net</code></td>
+                <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
+              </tr>
+              <tr>
+                <td>AP North</td>
+                <td><code>jp.icr.io</code><br><br>
+                Deprecated: <code>registry.au-syd.bluemix.net</code></td>
+                <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
+              </tr>
+              <tr>
+                <td>AP South</td>
+                <td><code>au.icr.io</code><br><br>
+                Deprecated: <code>registry.au-syd.bluemix.net</code></td>
+                <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
+              </tr>
+              <tr>
+                <td>EU Central</td>
+                <td><code>de.icr.io</code><br><br>
+                Deprecated: <code>registry.eu-de.bluemix.net</code></td>
+                <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
+               </tr>
+               <tr>
+                <td>UK South</td>
+                <td><code>uk.icr.io</code><br><br>
+                Deprecated: <code>registry.eu-gb.bluemix.net</code></td>
+                <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
+               </tr>
+               <tr>
+                <td>US East, US South</td>
+                <td><code>us.icr.io</code><br><br>
+                Deprecated: <code>registry.ng.bluemix.net</code></td>
+                <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
+               </tr>
+              </tbody>
+            </table>
 
 4. Allow outgoing network traffic from your worker node to {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).
     - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.bluemix.net`
