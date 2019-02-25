@@ -151,6 +151,9 @@ To control access at the pod level, you can [configure pod security policies wit
 
 Within the app deployment YAML, you can set the security context for a pod or container. For more information, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 
+Want to control access at the application level? To create a sign-on flow that you can update at anytime without changing your app code try using [{{site.data.keyword.appid_long_notm}}](/docs/services/appid?topic=appid-gettingstarted#gettingstarted).
+{: tip}
+
 <br />
 
 

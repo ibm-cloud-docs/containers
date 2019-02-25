@@ -25,12 +25,11 @@ scope: containers
 
 
 
-# Financial services use cases for {{site.data.keyword.Bluemix_notm}}
+# Financial services use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_finance}
 
 These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} can 
-take advantage of high availability, high-performance
-compute, easy spin-up of clusters for faster development, and AI from {{site.data.keyword.ibmwatson}}. 
+take advantage of high availability, high-performance compute, easy spin-up of clusters for faster development, and AI from {{site.data.keyword.ibmwatson}}. 
 {: shortdesc}
 
 ## Mortgage company trims costs and accelerates regulatory compliance
@@ -116,6 +115,7 @@ Key technologies:
 * [Fraud prevention with {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [Sign-on capability without changing app code by using {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-gettingstarted)
 
 **Context: Streamlining developer productivity and deploying AI tools to partners 4 times faster**
 
@@ -147,6 +147,7 @@ Technical solution:
 * {{site.data.keyword.contdelivery_full}}
 * IBM Cloud Logging and Monitoring
 * {{site.data.keyword.ibmwatson_notm}} for Financial Services
+* {{site.data.keyword.appid_full_notm}}
 
 They started by containerizing the payment tool VMs and putting them in the cloud. In a flash, their hardware headaches went away. They were able to easily design Kubernetes clusters to fit their CPU, RAM, storage, and security needs. And when their payment tools need to change, they can add or shrink compute without expensive and slow hardware purchases. 
 
@@ -163,6 +164,7 @@ Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, th
 * Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public {{site.data.keyword.Bluemix_notm}}.
 * From that core, Vulnerability Advisor provides image, policy, container, and packaging vulnerability scanning, for known malware. 
 * Private data center / on-premises capital costs are greatly reduced and replaced with a utility computing model that scales based on workload demand.
+* Consistently enforce policy-driven authentication to your services and APIs with a simple Ingress annotation. With declarative security you can ensure user authentication and token validation by using {{site.data.keyword.appid_short_notm}}.
 
 **Step 2: Operations and connections to existing payment systems back-end**
 * Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to on-premises tool systems.
