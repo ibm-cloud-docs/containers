@@ -46,7 +46,7 @@ Key technologies:
 * [Horizontal scaling](/docs/containers?topic=containers-app#highly_available_apps) 
 * [Open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Cloud services for innovation](https://www.ibm.com/cloud/products/#analytics)
-* [{{site.data.keyword.messagehub_full}} to feed event data to apps](/docs/services/MessageHub/messagehub010.html#about)
+* [{{site.data.keyword.messagehub_full}} to feed event data to apps](/docs/services/EventStreams?topic=eventstreams-about#about)
 
 **Context: Shipping company increases availability of worldwide systems for partner ecosystem**
 

@@ -140,11 +140,11 @@ lastupdated: "2019-02-25"
 * [Lesson 2: Creating a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
 * [Lesson 3: Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
-[Tutorial: Move a VM-based application to Kubernetes](/docs/tutorials/vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
+[Tutorial: Move a VM-based application to Kubernetes](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 
-[Tutorial: Create a multi-region cluster using Cloud Internet Services](/docs/tutorials/multi-region-k8s-cis#resilient-and-secure-multi-region-kubernetes-clusters-with-cloud-internet-services)
+[Tutorial: Create a multi-region cluster using Cloud Internet Services](/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
 
-[Tutorial: Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/docs/tutorials/continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+[Tutorial: Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 
 ## Setting up the CLI and API
 
@@ -957,9 +957,9 @@ lastupdated: "2019-02-25"
 
 [Troubleshooting cluster storage](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_troubleshoot_storage)
 * [In a multizone cluster, a persistent volume fails to mount to a pod](/docs/containers?topic=containers-cs_troubleshoot_storage#mz_pv_mount)
-* [File storage: File systems for worker nodes change to read-only](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_nodes)
+* [File storage: File systems for worker nodes change to read-only](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_nodes)]
+* [File storage: App fails when a non-root user owns the NFS file storage mount path](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)]
 * [File storage: Adding non-root user access to persistent storage fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot)
-* [File storage: App fails with a group ID error for NFS file storage permissions](/docs/containers?topic=containers-cs_troubleshoot_storage#root)
 * [Block storage: Block storage changes to read-only](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_block)
 * [Block storage: Mounting existing block storage to a pod fails due to the wrong file system](/docs/containers?topic=containers-cs_troubleshoot_storage#block_filesystem)
 * [Object storage: Installing the {{site.data.keyword.cos_full_notm}} ibmcloud Helm plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails)

@@ -92,7 +92,7 @@ As your cluster provisions, install the following CLIs that are used to manage c
 </br>
 **To install the CLIs and their prerequisites**
 
-1.  As a prerequisite for the {{site.data.keyword.containerlong_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://clis.ng.bluemix.net/ui/home.html). To run {{site.data.keyword.Bluemix_notm}} CLI commands, use the prefix `ibmcloud`.
+1.  As a prerequisite for the {{site.data.keyword.containerlong_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli). To run {{site.data.keyword.Bluemix_notm}} CLI commands, use the prefix `ibmcloud`.
 2.  Follow the prompts to select an account and an {{site.data.keyword.Bluemix_notm}} organization. Clusters are specific to an account, but are independent from an {{site.data.keyword.Bluemix_notm}} organization or space.
 
 4.  Install the {{site.data.keyword.containerlong_notm}} plug-in to create Kubernetes clusters and manage worker nodes. To run {{site.data.keyword.containerlong_notm}} plug-in commands, use the prefix `ibmcloud ks`.
