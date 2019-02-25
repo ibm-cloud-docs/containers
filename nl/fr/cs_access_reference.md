@@ -122,7 +122,7 @@ Le tableau suivant présente les droits de gestion de cluster octroyés par chaq
         <li>Afficher tout ou les détails des valeurs confidentielles (secrets) d'ALB dans un cluster</li>
         <li>Déployer un certificat depuis votre instance {{site.data.keyword.cloudcerts_long_notm}} vers un équilibreur de charge d'application (ALB)</li>
         <li>Mettre jour ou retirer des valeurs confidentielles d'ALB dans un cluster</li></ul>
-      <p class="note">Pour créer des ressources, telles que des machines, des VLAN et des sous-réseaux, les administrateurs requièrent le rôle d'infrastructure **Superutilisateur**.    </p>
+      <p class="note">Pour créer des ressources, telles que des machines, des VLAN et des sous-réseaux, les administrateurs requièrent le rôle d'infrastructure **Superutilisateur**.</p>
     </td>
     <td>Le rôle de cluster <code>cluster-admin</code> est appliqué par la liaison de rôle de cluster <code>ibm-admin</code>, il fournit les droits suivants :
       <ul><li>Accès en lecture/écriture aux ressources dans tous les espaces de nom</li>

@@ -21,8 +21,7 @@ lastupdated: "2018-12-05"
 
 # Journal des modifications des modules complémentaires de cluster
 
-Votre cluster {{site.data.keyword.containerlong}} est fourni avec des modules complémentaires qui sont automatiquement mis à jour par IBM. Vous pouvez également désactiver les mises à jour automatiques pour certains modules complémentaires pour effectuer leur mise à jour manuellement indépendamment du maître et des noeuds worker.
-Consultez les tableaux des sections suivantes pour obtenir un récapitulatif des modifications de chaque version.
+Votre cluster {{site.data.keyword.containerlong}} est fourni avec des modules complémentaires qui sont automatiquement mis à jour par IBM. Vous pouvez également désactiver les mises à jour automatiques pour certains modules complémentaires pour effectuer leur mise à jour manuellement indépendamment du maître et des noeuds worker. Consultez les tableaux des sections suivantes pour obtenir un récapitulatif des modifications de chaque version.
 {: shortdesc}
 
 ## Journal des modifications du module complémentaire d'équilibreur de charge d'application (ALB) Ingress

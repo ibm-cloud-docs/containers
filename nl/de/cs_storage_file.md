@@ -38,7 +38,7 @@ Nachdem Sie mithilfe einer Speicherklasse einen bestimmten Typ von Speicher bere
 
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
-Gehen Sie wie folgt vor, um sich für eine Speicherkonfiguration zu entscheiden: 
+Gehen Sie wie folgt vor, um sich für eine Speicherkonfiguration zu entscheiden:
 
 1. Listen Sie die in {{site.data.keyword.containerlong}} verfügbaren Speicherklassen auf.
     ```
@@ -159,7 +159,8 @@ Gehen Sie wie folgt vor, um sich für eine Speicherkonfiguration zu entscheiden:
    - Wenn Sie möchten, dass der persistente Datenträger, die Daten und Ihre physische Dateispeichereinheit beim Löschen des Persistent Volume Claim (PVC) gelöscht werden, müssen Sie eine Speicherklasse ohne `retain` auswählen. **Hinweis**: Wenn Sie über ein Dedicated-Konto verfügen, wählen Sie eine Speicherklasse ohne `retain` aus, um zu verhindern, dass es verwaiste Datenträger in der IBM Cloud-Infrastruktur (SoftLayer) gibt.
 
 6. Wählen Sie aus, ob Sie die Abrechnung auf Stundenbasis oder monatlich erhalten möchten. Weitere Informationen finden Sie unter [Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing). Standardmäßig werden alle Dateispeichereinheiten mit dem Abrechnungstyp 'Stündlich' (hourly) bereitgestellt.
-   Wenn Sie als Abrechnungstyp 'Monatlich' wählen, zahlen Sie beim Entfernen des persistenten Speichers immer noch eine monatliche Gebühr für ihn, selbst dann, wenn Sie den Speicher nur für eine kurze Zeit genutzt haben. {: note}
+   Wenn Sie als Abrechnungstyp 'Monatlich' wählen, zahlen Sie beim Entfernen des persistenten Speichers immer noch eine monatliche Gebühr für ihn, selbst dann, wenn Sie den Speicher nur für eine kurze Zeit genutzt haben.
+   {: note}
 
 <br />
 
@@ -253,7 +254,8 @@ Gehen Sie wie folgt vor, um Dateispeicher hinzuzufügen:
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
-       <td>Optional: Geben Sie die Zone an, in der der Dateispeicher bereitgestellt werden soll. Um Ihren Speicher in einer App zu verwenden, erstellen Sie den Speicher in derselben Zone, in der sich Ihr Workerknoten befindet. Um die Zone Ihres Workerknotens anzuzeigen, führen Sie <code>ibmcloud ks workers --cluster &lt;clustername_oder_-id&gt;</code> aus und überprüfen Sie die Spalte <strong>Zone</strong> Ihrer CLI-Ausgabe. Bei Angabe der Zone müssen Sie auch eine Region angeben. Wenn Sie keine Zone angeben oder die angegebene Zone in einem Mehrzonencluster nicht gefunden wird, wird die Zone im Umlaufverfahren ausgewählt. </br></br><strong>Tipp: </strong>Statt die Region und die Zone im PVC anzugeben, können Sie diese Werte auch in einer [angepassten Speicherklasse](#multizone_yaml) angeben. Verwenden Sie dann Ihre Speicherklasse im Abschnitt <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> Ihres PVC. Wenn die Region und die Zone in der Speicherklasse und im PVC angegeben sind, haben die Werte im PVC Vorrang. </td>
+       <td>Optional: Geben Sie die Zone an, in der der Dateispeicher bereitgestellt werden soll. Um Ihren Speicher in einer App zu verwenden, erstellen Sie den Speicher in derselben Zone, in der sich Ihr Workerknoten befindet. Um die Zone Ihres Workerknotens anzuzeigen, führen Sie <code>ibmcloud ks workers --cluster &lt;clustername_oder_-id&gt;</code> aus und überprüfen Sie die Spalte <strong>Zone</strong> Ihrer CLI-Ausgabe. Bei Angabe der Zone müssen Sie auch eine Region angeben. Wenn Sie keine Zone angeben oder die angegebene Zone in einem Mehrzonencluster nicht gefunden wird, wird die Zone im Umlaufverfahren ausgewählt. </br></br><strong>Tipp: </strong>Statt die Region und die Zone im PVC anzugeben, können Sie diese Werte auch in einer [angepassten Speicherklasse](#multizone_yaml) angeben. Verwenden Sie dann Ihre Speicherklasse im Abschnitt <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> Ihres PVC. Wenn die Region und die Zone in der Speicherklasse und im PVC angegeben sind, haben die Werte im PVC Vorrang.
+</td>
        </tr>
        <tr>
        <td><code>spec.accessMode</code></td>
@@ -422,7 +424,7 @@ Gehen Sie wie folgt vor, um Dateispeicher hinzuzufügen:
 Wenn Sie bereits über eine physische Speichereinheit verfügen, die Sie in Ihrem Cluster verwenden möchten, können Sie den persistenten Datenträger und den PVC manuell erstellen, um den Speicher [statisch bereitzustellen](cs_storage_basics.html#static_provisioning).
 
 Vorbemerkungen:
-- Stellen Sie sicher, dass Sie über mindestens einen Workerknoten verfügen, der sich in derselben Zone befindet wie Ihre vorhandene Dateispeicherinstanz. 
+- Stellen Sie sicher, dass Sie über mindestens einen Workerknoten verfügen, der sich in derselben Zone befindet wie Ihre vorhandene Dateispeicherinstanz.
 - [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
 ### Schritt 1: Vorhandenen Speicher vorbereiten
@@ -468,7 +470,8 @@ Wenn Sie den in einem Cluster bereitgestellten Speicher auch in einem anderen Cl
 **Für persistenten Speicher, der außerhalb des Clusters bereitgestellt wurde:** </br>
 Wenn Sie bereits vorhandenen Speicher verwenden möchten, den Sie zuvor bereitgestellt, aber noch nie zuvor in Ihrem Cluster verwendet haben, müssen Sie den Speicher in demselben Teilnetz wie Ihre Workerknoten verfügbar machen.
 
-Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie [einen Supportfall öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support). {: note}
+Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie [einen Supportfall öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support).
+{: note}
 
 1.  {: #external_storage}Klicken Sie im [Portal der IBM Cloud-Infrastruktur (SoftLayer) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://control.bluemix.net/) auf **Speicher**.
 2.  Klicken Sie auf **Dateispeicher** und wählen Sie im Menü **Aktionen** die Option zum Autorisieren des Hosts**** aus.
@@ -676,7 +679,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 
       Eine statusabhängige Gruppe wird vollständig bereitgestellt, wenn die Anzahl der Replikate, die im Abschnitt **Replicas** (Replikate) der CLI-Ausgabe enthalten sind, mit der Anzahl der **aktiven** Pods im Abschnitt **Pods Status** (Podstatus) übereinstimmt. Wenn eine statusabhängige Gruppe noch nicht vollständig bereitgestellt wird, müssen Sie warten, bis die Bereitstellung abgeschlossen ist, bevor Sie fortfahren können.
 
-3. Erstellen Sie eine Konfigurationsdatei für die statusabhängige Gruppe und den Service, den Sie verwenden, um die statusabhängige Gruppe zugänglich zu machen. Im folgenden Beispiel wird veranschaulicht, wie Ngingx als statusabhängige Gruppe mit drei Replikaten bereitgestellt wird. Für jedes Replikat wird eine 20-Gigabyte-Dateispeichereinheit basierend auf den Spezifikationen bereitgestellt, die in der Speicherklasse `ibmc-file-retain-bronze` definiert sind. Alle Speichereinheiten werden in der Zone `dal10` bereitgestellt. Da auf Dateispeicher nicht von anderen Zonen aus zugegriffen werden kann, werden alle Replikate der statusabhängigen Gruppe auch auf einem Workerknoten bereitgestellt, der sich in `dal10` befindet. 
+3. Erstellen Sie eine Konfigurationsdatei für die statusabhängige Gruppe und den Service, den Sie verwenden, um die statusabhängige Gruppe zugänglich zu machen. Im folgenden Beispiel wird veranschaulicht, wie Ngingx als statusabhängige Gruppe mit drei Replikaten bereitgestellt wird. Für jedes Replikat wird eine 20-Gigabyte-Dateispeichereinheit basierend auf den Spezifikationen bereitgestellt, die in der Speicherklasse `ibmc-file-retain-bronze` definiert sind. Alle Speichereinheiten werden in der Zone `dal10` bereitgestellt. Da auf Dateispeicher nicht von anderen Zonen aus zugegriffen werden kann, werden alle Replikate der statusabhängigen Gruppe auch auf einem Workerknoten bereitgestellt, der sich in `dal10` befindet.
 
    ```
    apiVersion: v1
@@ -824,7 +827,8 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
    - **`metadata.name`**: Geben Sie den `<statefulset_name>` ein, den Sie im vorherigen Schritt verwendet haben.
    - **`spec.replicas`**: Geben Sie die Anzahl der Replikate ein, die Sie für die statusabhängige Gruppe erstellen möchten. Die Anzahl der Replikate muss mit der Anzahl der PVCs identisch sein, die Sie zuvor erstellt haben.
 
-   Wenn Sie die PVCs in verschiedenen Zonen erstellt haben, schließen Sie keine Bezeichnung für eine Region oder Zone in die statusabhängige Gruppe ein. {: note}
+   Wenn Sie die PVCs in verschiedenen Zonen erstellt haben, schließen Sie keine Bezeichnung für eine Region oder Zone in die statusabhängige Gruppe ein.
+   {: note}
 
 3. Überprüfen Sie, ob die PVCs in den Pods der Replikate der statusabhängige Gruppe verwendet werden.
    1. Listen Sie die Pods in Ihrem Cluster auf. Suchen Sie die Pods, die zur statusabhängigen Gruppe gehören.
@@ -860,12 +864,13 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 ## Größe und E/A-Operationen pro Sekunde Ihrer vorhandenen Speichereinheit ändern
 {: #change_storage_configuration}
 
-Wenn Sie die Speicherkapazität oder die Leistung erhöhen möchten, können Sie den vorhandenen Datenträger ändern.
+Wenn Sie die Speicherkapazität oder die Leistung erhöhen möchten, können Sie den vorhandenen Datenträger ändern. 
 {: shortdesc}
 
-Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.keyword.Bluemix_notm}}-Konsole zum Ändern Ihres Speichers finden Sie unter [Dateifreigabekapazität erweitern](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity). {: tip}
+Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.keyword.Bluemix_notm}}-Konsole zum Ändern Ihres Speichers finden Sie unter [Dateifreigabekapazität erweitern](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity). 
+{: tip}
 
-1. Listen Sie die PVCs in Ihrem Cluster auf und notieren Sie sich den Namen des zugehörigen persistenten Datenträgers in der Spalte **VOLUME**.  
+1. Listen Sie die PVCs in Ihrem Cluster auf und notieren Sie sich den Namen des zugehörigen persistenten Datenträgers in der Spalte **VOLUME**. 
    ```
    kubectl get pvc
    ```
@@ -878,7 +883,7 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    ```
    {: screen}
    
-2. Rufen Sie den Speichertyp (**StorageType**), die Datenträger-ID (**volumeID**) und den Server (**server**) des physischen Dateispeichers ab, die Ihrem PVC zugeordnet sind, indem Sie die Details des persistenten Datenträgers auflisten, an den Ihr PVC gebunden ist. Replace `<pv-name>` durch den Namen des persistenten Datenträgers, den Sie im vorherigen Schritt abgerufen haben. Den Speichertyp, die Datenträger-ID und den Servernamen finden Sie im Abschnitt **Labels** Ihrer CLI-Ausgabe.  
+2. Rufen Sie den Speichertyp (**StorageType**), die Datenträger-ID (**volumeID**) und den Server (**server**) des physischen Dateispeichers ab, die Ihrem PVC zugeordnet sind, indem Sie die Details des persistenten Datenträgers auflisten, an den Ihr PVC gebunden ist. Replace `<pv_name>` durch den Namen des persistenten Datenträgers, den Sie im vorherigen Schritt abgerufen haben. Den Speichertyp, die Datenträger-ID und den Servernamen finden Sie im Abschnitt **Labels** Ihrer CLI-Ausgabe. 
    ```
    kubectl describe pv <pv-name>
    ```
@@ -902,9 +907,9 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    ```
    {: screen}
 
-3. Ändern Sie die Größe oder die E/A-Operationen pro Sekunde Ihres Datenträgers in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer).  
+3. Ändern Sie die Größe oder die E/A-Operationen pro Sekunde Ihres Datenträgers in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer). 
 
-   Beispiel für einen Leistungsspeicher:  
+   Beispiel für einen Leistungsspeicher: 
    ```
    ibmcloud sl file volume-modify <datenträger-id> --new-size <größe> --new-iops <iops>
    ```
@@ -924,7 +929,7 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    <tbody>
    <tr>
    <td><code>&lt;datenträger-id&gt;</code></td>
-   <td>Geben Sie die ID des Datenträgers ein, den Sie zuvor abgerufen haben. </td>
+   <td>Geben Sie die ID des Datenträgers ein, den Sie zuvor abgerufen haben.</td>
    </tr>
    <tr>
    <td><code>&lt;new-size&gt;</code></td>
@@ -932,11 +937,11 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    </tr>
    <tr>
    <td><code>&lt;new-iops&gt;</code></td>
-   <td>Nur für Leistungsspeicher. Geben Sie die gewünschte neue Anzahl von E/A-Operationen pro Sekunde ein. Informationen zu gültigen E/A-Operationen pro Sekunde finden Sie unter [Dateispeicherkonfiguration festlegen](#predefined_storageclass). Wenn Sie die E/A-Operationen pro Sekunde nicht angeben, wird die aktuelle Anzahl E/A-Operationen pro Sekunde verwendet. <p class="note">Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger kleiner als 0,3 ist, muss der neue IOPS/GB-Faktor kleiner als 0,3 sein. Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger größer-gleich 0,3 ist, muss der neue IOPS/GB-Faktor größer-gleich 0,3 sein. </p> </td>
+   <td>Nur für Leistungsspeicher. Geben Sie die gewünschte neue Anzahl von E/A-Operationen pro Sekunde ein. Informationen zu gültigen E/A-Operationen pro Sekunde finden Sie unter [Dateispeicherkonfiguration festlegen](#predefined_storageclass). Wenn Sie die E/A-Operationen pro Sekunde nicht angeben, wird die aktuelle Anzahl E/A-Operationen pro Sekunde verwendet. <p class="note">Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger kleiner als 0,3 ist, muss der neue IOPS/GB-Faktor kleiner als 0,3 sein. Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger größer-gleich 0,3 ist, muss der neue IOPS/GB-Faktor größer-gleich 0,3 sein.</p> </td>
    </tr>
    <tr>
    <td><code>&lt;new-tier&gt;</code></td>
-   <td>Nur für Endurance-Speicher. Geben Sie die gewünschte neue Anzahl von E/A-Operationen pro Sekunde pro GB ein. Informationen zu gültigen E/A-Operationen pro Sekunde finden Sie unter [Dateispeicherkonfiguration festlegen](#predefined_storageclass). Wenn Sie die E/A-Operationen pro Sekunde nicht angeben, wird die aktuelle Anzahl E/A-Operationen pro Sekunde verwendet. <p class="note">Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger kleiner als 0,25 ist, muss der neue IOPS/GB-Faktor kleiner als 0,25 sein. Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger größer-gleich 0,25 ist, muss der neue IOPS/GB-Faktor größer-gleich 0,25 sein. </p> </td>
+   <td>Nur für Endurance-Speicher. Geben Sie die gewünschte neue Anzahl von E/A-Operationen pro Sekunde pro GB ein. Informationen zu gültigen E/A-Operationen pro Sekunde finden Sie unter [Dateispeicherkonfiguration festlegen](#predefined_storageclass). Wenn Sie die E/A-Operationen pro Sekunde nicht angeben, wird die aktuelle Anzahl E/A-Operationen pro Sekunde verwendet. <p class="note">Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger kleiner als 0,25 ist, muss der neue IOPS/GB-Faktor kleiner als 0,25 sein. Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger größer-gleich 0,25 ist, muss der neue IOPS/GB-Faktor größer-gleich 0,25 sein.</p> </td>
    </tr>
    </tbody>
    </table>
@@ -956,21 +961,21 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    ```
    {: screen}
    
-4. Wenn Sie die Größe Ihres Datenträgers geändert haben und den Datenträger in einem Pod verwenden, melden Sie sich bei Ihrem Pod an, um die neue Größe zu überprüfen.  
+4. Wenn Sie die Größe Ihres Datenträgers geändert haben und den Datenträger in einem Pod verwenden, melden Sie sich bei Ihrem Pod an, um die neue Größe zu überprüfen. 
    1. Listen Sie alle Pods auf, die einen PVC verwenden.
-```
+      ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc-name>"
       ```
       {: pre}
       
-Pods werden im folgenden Format zurückgegeben: `<podname>: <pvc-name>`. 
+      Pods werden im folgenden Format zurückgegeben: `<pod_name>: <pvc_name>`. 
    2. Melden Sie sich beim Pod an. 
       ```
       kubectl exec -it <podname> bash
       ```
       {: pre}
       
-   3. Zeigen Sie die Statistikdaten zur Plattenbelegung an und suchen Sie den Serverpfad für Ihren Datenträger, den Sie zuvor abgerufen haben.
+   3. Zeigen Sie die Statistikdaten zur Plattenbelegung an und suchen Sie den Serverpfad für Ihren Datenträger, den Sie zuvor abgerufen haben. 
       ```
       df -h
       ```
@@ -995,7 +1000,8 @@ Die Version des Dateispeichers bestimmt das Protokoll, das für die Kommunikatio
 
 Um die NFS-Standardversion zu ändern, können Sie entweder eine neue Speicherklasse erstellen, um den Dateispeicher dynamisch in Ihrem Cluster bereitzustellen, oder ändern Sie ein vorhandenes PV, der an den Pod angehängt ist.
 
-Um die aktuellen Sicherheitsupdates anzuwenden und eine bessere Leistung zu erzielen, verwenden Sie die NFS-Standardversion und wechseln nicht zu einer älteren NFS-Version. {: important}
+Um die aktuellen Sicherheitsupdates anzuwenden und eine bessere Leistung zu erzielen, verwenden Sie die NFS-Standardversion und wechseln nicht zu einer älteren NFS-Version.
+{: important}
 
 **Gehen Sie wie folgt vor, um eine angepasste Speicherklasse mit der gewünschten NFS-Version zu erstellen:**
 1. Erstellen Sie eine [angepasste Speicherklasse (custom)](#nfs_version_class), die die NFS-Version aufweist, die Sie bereitstellen möchten.
@@ -1021,7 +1027,7 @@ Um die aktuellen Sicherheitsupdates anzuwenden und eine bessere Leistung zu erzi
    ```
    {: pre}
 
-2. Fügen Sie dem persistenten Datenträger eine Annotation hinzu. Ersetzen Sie `<versionsnummer>` durch die zu verwendende NFS-Version. Um beispielsweise eine Änderung in NFS Version 3.0 vorzunehmen, geben Sie **3** ein.  
+2. Fügen Sie dem persistenten Datenträger eine Annotation hinzu. Ersetzen Sie `<version_number>` durch die zu verwendende NFS-Version. Um beispielsweise eine Änderung in NFS Version 3.0 vorzunehmen, geben Sie **3** ein.  
    ```
    kubectl patch pv <pv-name> -p '{"metadata": {"annotations":{"volume.beta.kubernetes.io/mount-options":"vers=<versionsnummer>"}}}'
    ```
@@ -1085,7 +1091,7 @@ Der Dateispeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 
 <dl>
   <dt>Regelmäßige Snapshots konfigurieren</dt>
-  <dd><p>Sie können [für Ihren Dateispeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/FileStorage/snapshots.html) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Dateispeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, falls ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt. <p class="note">: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie [einen Supportfall öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support). </p></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>[Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)</li><li>Melden Sie sich an der Befehlszeilenschnittstelle `ibmcloud sl` an. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>Sie können [für Ihren Dateispeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/FileStorage/snapshots.html) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Dateispeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, falls ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt. <p class="note">: Wenn Sie über ein Dedicated-Konto verfügen, müssen Sie [einen Supportfall öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support).</p></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>[Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)</li><li>Melden Sie sich an der Befehlszeilenschnittstelle `ibmcloud sl` an. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>Listen Sie alle vorhandenen PVs in Ihrem Cluster auf. <pre class="pre"><code>    kubectl get pv
     </code></pre></li><li>Rufen Sie die Details für das PV ab, für das Snapshotspeicherplatz angefordert werden soll, und notieren Sie sich die Datenträger-ID, die Größe und die E/A-Operationen pro Sekunde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv-name&gt;</code></pre> Die Datenträger-ID, die Größe und den Wert für die Anzahl E/A-Operationen pro Sekunde finden Sie im Abschnitt <strong>Labels</strong> der CLI-Ausgabe. </li><li>Erstellen Sie die Snapshotgröße für den vorhandenen Datenträger mit den Parametern, die Sie im vorherigen Schritt abgerufen haben. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;datenträger-id&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Warten Sie, bis die Snapshotgröße erstellt wurde. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;datenträger-id&gt;</code></pre>Die Snapshotgröße wird erfolgreich bereitgestellt, wenn der Wert für <strong>Snapshot Size (GB)</strong> (Snapshotgröße (GB)) in der CLI-Ausgabe von '0' in die von Ihnen angeforderte Größe geändert wird. </li><li>Erstellen Sie einen Snapshot für den Datenträger und notieren Sie die ID des von Sie erstellten Snapshots. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;datenträger-id&gt;</code></pre></li><li>Überprüfen Sie, dass der Snapshot erfolgreich erstellt wurde. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;datenträger-id&gt;</code></pre></li></ol></br><strong>Gehen Sie wie folgt vor, um Daten aus einem Snapshot auf einem vorhandenen Datenträger wiederherzustellen: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot-id&gt;</code></pre></p></dd>
   <dt>Snapshots in eine andere Zone replizieren</dt>

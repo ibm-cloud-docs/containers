@@ -41,7 +41,7 @@ lastupdated: "2018-12-06"
 <tr>
 <td>12 月 6 日</td>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)を参照してください。**注**: Kubernetes バージョン 1.11 以降を実行するクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、Sysdig は現在 `containerd` をサポートしていないため、すべてのコンテナー・メトリックが収集されるわけではありません。</td>
+<td>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。 詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)を参照してください。 **注**: Kubernetes バージョン 1.11 以降を実行するクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、Sysdig は現在 `containerd` をサポートしていないため、すべてのコンテナー・メトリックが収集されるわけではありません。</td>
 </tr>
 </tbody></table>
 
@@ -59,12 +59,12 @@ lastupdated: "2018-12-06"
 <tr>
 <td>11 月 29 日</td>
 <td>[チェンナイのゾーンの提供開始](cs_regions.html)</td>
-<td>北アジア太平洋地域のクラスターの新しいゾーンとして、インドのチェンナイが追加されました。ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のゾーンに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
+<td>北アジア太平洋地域のクラスターの新しいゾーンとして、インドのチェンナイが追加されました。 ファイアウォールを使用している場合は、このゾーンと、ご使用のクラスターがある地域内の他のゾーンに対し、必ず[ファイアウォール・ポートを開いてください](cs_firewall.html#firewall)。</td>
 </tr>
 <tr>
 <td>11 月 27 日</td>
 <td>{{site.data.keyword.la_full_notm}}</td>
-<td>LogDNA をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、ポッド・コンテナーのログを管理することで、ログ管理機能をクラスターに追加できます。詳しくは、[{{site.data.keyword.loganalysisfull_notm}} with LogDNA による Kubernetes クラスター・ログの管理](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube) を参照してください。</td>
+<td>LogDNA をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、ポッド・コンテナーのログを管理することで、ログ管理機能をクラスターに追加できます。 詳しくは、[{{site.data.keyword.loganalysisfull_notm}} with LogDNA による Kubernetes クラスター・ログの管理](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube) を参照してください。</td>
 </tr>
 <tr>
 <td>11 月 7 日</td>
@@ -74,17 +74,17 @@ lastupdated: "2018-12-06"
 <tr>
 <td>11 月 7 日</td>
 <td>Kubernetes バージョン 1.12 の提供開始</td>
-<td>[Kubernetes バージョン  1.12](cs_versions.html#cs_v112) を実行するクラスターに更新またはこれを作成できるようになりました。1.12 クラスターの Kubernetes マスターは、デフォルトで高可用性です。</td>
+<td>[Kubernetes バージョン  1.12](cs_versions.html#cs_v112) を実行するクラスターに更新またはこれを作成できるようになりました。 1.12 クラスターの Kubernetes マスターは、デフォルトで高可用性です。</td>
 </tr>
 <tr>
 <td>11 月 7 日</td>
 <td>Kubernetes バージョン 1.10 を実行するクラスターの高可用性マスター</td>
-<td>Kubernetes バージョン 1.10 を実行するクラスターで高可用性マスターを使用できます。1.11 クラスターに関する過去の情報で説明されているすべてのメリットが 1.10 クラスターに適用されます。また、実行する必要がある[準備手順](cs_versions.html#110_ha-masters)も適用されます。</td>
+<td>Kubernetes バージョン 1.10 を実行するクラスターで高可用性マスターを使用できます。 1.11 クラスターに関する過去の情報で説明されているすべてのメリットが 1.10 クラスターに適用されます。また、実行する必要がある[準備手順](cs_versions.html#110_ha-masters)も適用されます。</td>
 </tr>
 <tr>
 <td>11 月 1 日</td>
 <td>Kubernetes バージョン 1.11 を実行するクラスターの高可用性マスター</td>
-<td>単一ゾーンのマスターは高可用性です。クラスター更新時などの停止を防ぐために、Kubernetes API サーバー、etcd、スケジューラー、およびコントローラー・マネージャー用に別々の物理ホスト上にレプリカが配置されます。クラスターが複数ゾーン対応ゾーンにある場合は、高可用性マスターも複数ゾーンに分散されるので、ゾーン障害から保護されます。<br>実行する必要があるアクションについては、[高可用性クラスター・マスターへの更新](cs_versions.html#ha-masters)を参照してください。これらの準備アクションは、以下の場合に適用されます。<ul>
+<td>単一ゾーンのマスターは高可用性です。クラスター更新時などの停止を防ぐために、Kubernetes API サーバー、etcd、スケジューラー、およびコントローラー・マネージャー用に別々の物理ホスト上にレプリカが配置されます。 クラスターが複数ゾーン対応ゾーンにある場合は、高可用性マスターも複数ゾーンに分散されるので、ゾーン障害から保護されます。<br>実行する必要があるアクションについては、[高可用性クラスター・マスターへの更新](cs_versions.html#ha-masters)を参照してください。 これらの準備アクションは、以下の場合に適用されます。<ul>
 <li>ファイアウォールまたはカスタム Calico ネットワーク・ポリシーがある場合。</li>
 <li>ワーカー・ノードでホスト・ポート `2040` または `2041` を使用している場合。</li>
 <li>マスターへのクラスター内アクセス用にクラスターのマスター IP アドレスを使用していた場合。</li>
@@ -122,7 +122,7 @@ lastupdated: "2018-12-06"
 <tr>
 <td>10 月 4 日</td>
 <td>[{{site.data.keyword.registrylong}} が {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam) と統合される</td>
-<td>{{site.data.keyword.Bluemix_notm}} IAM を使用して、レジストリー・リソースへのアクセス (イメージのプル、プッシュ、作成など) を制御できます。 クラスターを作成するときに、レジストリー・トークンも作成することによって、クラスターがレジストリーと連携できるようにします。 したがって、クラスターを作成するには、アカウント・レベルのレジストリーの**管理者**のプラットフォーム管理役割が必要です。ご使用のレジストリー・アカウントで {{site.data.keyword.Bluemix_notm}} IAM を有効にするには、[Enabling policy enforcement for existing users](/docs/services/Registry/registry_users.html#existing_users) を参照してください。</td>
+<td>{{site.data.keyword.Bluemix_notm}} IAM を使用して、レジストリー・リソースへのアクセス (イメージのプル、プッシュ、作成など) を制御できます。 クラスターを作成するときに、レジストリー・トークンも作成することによって、クラスターがレジストリーと連携できるようにします。 したがって、クラスターを作成するには、アカウント・レベルのレジストリーの**管理者**のプラットフォーム管理役割が必要です。 ご使用のレジストリー・アカウントで {{site.data.keyword.Bluemix_notm}} IAM を有効にするには、[Enabling policy enforcement for existing users](/docs/services/Registry/registry_users.html#existing_users) を参照してください。</td>
 </tr>
 <tr>
 <td>10 月 1 日</td>

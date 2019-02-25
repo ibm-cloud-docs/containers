@@ -68,7 +68,7 @@ Prüfen Sie folgende Überlegungen und Einschränkungen, bevor Sie das StrongSwa
 ## StrongSwan-Helm-Diagramm konfigurieren
 {: #vpn_configure}
 
-Bevor Sie das StrongSwan-Helm-Diagramm installieren, müssen Sie eine Entscheidung bezüglich Ihrer StrongSwan-Konfiguration treffen.
+Bevor Sie das StrongSwan-Helm-Diagramm installieren, müssen Sie eine Entscheidung bezüglich Ihrer StrongSwan-Konfiguration treffen. 
 {: shortdesc}
 
 Vorbemerkungen:
@@ -78,7 +78,8 @@ Vorbemerkungen:
 ### Schritt 1: StrongSwan-Helm-Diagramm abrufen
 {: #strongswan_1}
 
-Installieren Sie Helm und holen Sie sich das StrongSwan-Helm-Diagramm, um mögliche Konfigurationen anzuzeigen. {: shortdesc}
+Installieren Sie Helm und holen Sie sich das StrongSwan-Helm-Diagramm, um mögliche Konfigurationen anzuzeigen. 
+{: shortdesc}
 
 1. [Installieren Sie Helm für Ihr Cluster und fügen Sie das {{site.data.keyword.Bluemix_notm}}-Repository zu Ihrer Helm-Instanz hinzu](cs_integrations.html#helm).
 
@@ -100,7 +101,7 @@ Installieren Sie Helm und holen Sie sich das StrongSwan-Helm-Diagramm, um mögli
 Weitere Informationen zu den einzelnen Einstellungen finden Sie in der Dokumentation, die in der Datei `config.yaml` für das Helm-Diagramm bereitgestellt wird.
 {: tip}
 
-1. Wenn Ihr lokaler VPN-Tunnelendpunkt `ikev2` als Protokoll für die Initialisierung der Verbindung nicht unterstützt, ändern Sie den Wert von `ipsec.keyexchange` in `ikev1`. 
+1. Wenn Ihr lokaler VPN-Tunnelendpunkt `ikev2` als Protokoll für die Initialisierung der Verbindung nicht unterstützt, ändern Sie den Wert von `ipsec.keyexchange` in `ikev1`.
 2. Legen Sie als `ipsec.esp` die Liste von ESP-Verschlüsselungs-/Authentifizierungsalgorithmen fest, die Ihr lokaler VPN-Tunnelendpunkt für die Verbindung verwendet.
     * Wenn `ipsec.keyexchange` auf `ikev1` festgelegt ist, muss diese Einstellung angegeben werden.
     * Wenn `ipsec.keyexchange` auf `ikev2` festgelegt ist, ist diese Einstellung optional.
@@ -187,19 +188,20 @@ Ermitteln Sie, welche fernen Netzressourcen für das Cluster über die VPN-Verbi
 ### Schritt 6 (optional): Überwachung mit der Slack-Webhook-Integration aktivieren
 {: #strongswan_6}
 
-Um den Status des StrongSwan-VPN zu überwachen, können Sie einen Webhook zum automatischen Posten von VPN-Konnektivitätsnachrichten an einen Slack-Kanal einrichten. {: shortdesc}
+Um den Status des StrongSwan-VPN zu überwachen, können Sie einen Webhook zum automatischen Posten von VPN-Konnektivitätsnachrichten an einen Slack-Kanal einrichten.
+{: shortdesc}
 
-1. Melden Sie sich bei Ihrem Slack-Arbeitsbereich an. 
+1. Melden Sie sich bei Ihrem Slack-Arbeitsbereich an.
 
-2. Rufen Sie die [App-Seite für eingehende Webhooks ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks) auf. 
+2. Rufen Sie die [App-Seite für eingehende Webhooks ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks) auf.
 
-3. Klicken Sie auf **Installationsanforderung**. Falls diese App nicht in Ihrer Slack-Konfiguration aufgeführt ist, wenden Sie sich an den Eigner Ihres Slack-Arbeitsbereichs. 
+3. Klicken Sie auf **Installationsanforderung**. Falls diese App nicht in Ihrer Slack-Konfiguration aufgeführt ist, wenden Sie sich an den Eigner Ihres Slack-Arbeitsbereichs.
 
-4. Nachdem Ihre Installationsanforderung genehmigt wurde, klicken Sie auf **Konfiguration hinzufügen**. 
+4. Nachdem Ihre Installationsanforderung genehmigt wurde, klicken Sie auf **Konfiguration hinzufügen**.
 
-5. Wählen Sie einen Slack-Kanal aus oder erstellen Sie einen neuen Kanal, an den die VPN-Nachrichten gesendet werden sollen. 
+5. Wählen Sie einen Slack-Kanal aus oder erstellen Sie einen neuen Kanal, an den die VPN-Nachrichten gesendet werden sollen.
 
-6. Kopieren Sie die Webhook-URL, die generiert wird. Das URL-Format sieht wie folgt aus: 
+6. Kopieren Sie die Webhook-URL, die generiert wird. Das URL-Format sieht wie folgt aus:
   ```
   https://hooks.slack.com/services/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
   ```
@@ -211,18 +213,19 @@ Um den Status des StrongSwan-VPN zu überwachen, können Sie einen Webhook zum a
     ```
     {: pre}
 
-8. Wechseln Sie zu dem Slack-Kanal, den Sie ausgewählt haben, um zu verifizieren, dass die Testnachricht erfolgreich ist. 
+8. Wechseln Sie zu dem Slack-Kanal, den Sie ausgewählt haben, um zu verifizieren, dass die Testnachricht erfolgreich ist.
 
-9. Konfigurieren Sie in der Datei `config.yaml` für das Helm-Diagramm den Webhook zum Überwachen Ihrer VPN-Verbindung. 
-    1. Ändern Sie `monitoring.enable` in `true`. 
-    2. Fügen Sie private IP-Adressen oder HTTP-Endpunkte in dem fernen Teilnetz hinzu, für die Sie sicherstellen möchten, dass sie über die VPN-Verbindung zu `monitoring.privateIPs` oder `monitoring.httpEndpoints` erreichbar sind. Sie können beispielsweise die IP aus der Einstellung `remote.privateIPtoPing` zu `monitoring.privateIPs` hinzufügen. 
-    3. Fügen Sie die Webhook-URL zu `monitoring.slackWebhook` hinzu. 
-    4. Ändern Sie andere optionale Überwachungseinstellungen (`monitoring`) nach Bedarf. 
+9. Konfigurieren Sie in der Datei `config.yaml` für das Helm-Diagramm den Webhook zum Überwachen Ihrer VPN-Verbindung.
+    1. Ändern Sie `monitoring.enable` in `true`.
+    2. Fügen Sie private IP-Adressen oder HTTP-Endpunkte in dem fernen Teilnetz hinzu, für die Sie sicherstellen möchten, dass sie über die VPN-Verbindung zu `monitoring.privateIPs` oder `monitoring.httpEndpoints` erreichbar sind. Sie können beispielsweise die IP aus der Einstellung `remote.privateIPtoPing` zu `monitoring.privateIPs` hinzufügen.
+    3. Fügen Sie die Webhook-URL zu `monitoring.slackWebhook` hinzu.
+    4. Ändern Sie andere optionale Überwachungseinstellungen (`monitoring`) nach Bedarf.
 
 ### Schritt 7: Helm-Diagramm bereitstellen
 {: #strongswan_7}
 
-Stellen Sie das StrongSwan-Helm-Diagramm in Ihrem Cluster mit den Konfigurationen, die Sie zuvor ausgewählt haben, bereit. {: shortdesc}
+Stellen Sie das StrongSwan-Helm-Diagramm in Ihrem Cluster mit den Konfigurationen, die Sie zuvor ausgewählt haben, bereit. 
+{: shortdesc}
 
 1. Beachten Sie die Dokumentation, die für jede Einstellung im Helm-Diagramm bereitgestellt ist, wenn Sie weitere erweiterte Einstellungen konfigurieren müssen.
 
@@ -288,13 +291,13 @@ Nachdem Sie Ihr Helm-Diagramm bereitgestellt haben, testen Sie die VPN-Konnektiv
         1. Führen Sie folgenden Befehl aus: `helm delete --purge <release_name>`
         2. Korrigieren Sie die falschen Werte in der Konfigurationsdatei.
         3. Führen Sie `helm install -f config.yaml --name=<release_name> ibm/strongswan` aus.
-      Sie können im nächsten Schritt noch weitere Prüfungen vornehmen. 
+      Sie können im nächsten Schritt noch weitere Prüfungen vornehmen.
 
-    * Falls der VPN-Pod den Status `ERROR` aufweist oder immer wieder ausfällt und neu startet, kann dies an der Parametervalidierung der `ipsec.conf`-Einstellungen in der Konfigurationszuordnung des Diagramms liegen. 
-        1. Prüfen Sie, ob dies der Fall ist, indem Sie mithilfe des Befehls `kubectl logs $STRONGSWAN_POD` in den Protokollen des StrongSwan-Pods nach Validierungsfehlern suchen. 
+    * Falls der VPN-Pod den Status `ERROR` aufweist oder immer wieder ausfällt und neu startet, kann dies an der Parametervalidierung der `ipsec.conf`-Einstellungen in der Konfigurationszuordnung des Diagramms liegen.
+        1. Prüfen Sie, ob dies der Fall ist, indem Sie mithilfe des Befehls `kubectl logs $STRONGSWAN_POD` in den Protokollen des StrongSwan-Pods nach Validierungsfehlern suchen.
         2. Wenn Gültigkeitsfehler vorhanden sind, führen Sie den folgenden Befehl aus: `helm delete --purge <release_name>`
         3. Korrigieren Sie die falschen Werte in der Konfigurationsdatei.
-        4. Führen Sie `helm install -f config.yaml --name=<release_name> ibm/strongswan` aus.
+        4. Führen Sie `helm install -f config.yaml --name=<release_name> ibm/strongswan`
 
 4. Sie können die VPN-Konnektivität weiter testen, indem Sie die fünf Helm-Tests ausführen, die in der StrongSwan-Diagrammdefinition enthalten sind.
 
@@ -333,7 +336,7 @@ Nachdem Sie Ihr Helm-Diagramm bereitgestellt haben, testen Sie die VPN-Konnektiv
     </tr>
     <tr>
     <td><code>vpn-strongswan-ping-remote-gw</code></td>
-    <td>Überprüfen Sie die öffentliche IP-Adresse <code>remote.gateway</code>, die Sie in der Datei <code>config.yaml</code> konfiguriert haben mit einem Pingsignal, Wenn die VPN-Verbindung den Status <code>ESTABLISHED</code> aufweist, können Sie das Ergebnis dieses Tests ignorieren. Wenn die VPN-Verbindung nicht den Status <code>ESTABLISHED</code> aufweist, kann dieser Test aus den folgenden Gründen fehlschlagen: <ul><li>Sie haben keine IP-Adresse für das lokalen VPN-Gateway im Unternehmen angegeben. Falls für <code>ipsec.auto</code> die Einstellung <code>start</code> festgelegt ist, ist die IP-Adresse <code>remote.gateway</code> erforderlich.</li><li>ICMP-Pakete (Ping) werden von der Firewall geblockt. </li></ul></td>
+    <td>Überprüfen Sie die öffentliche IP-Adresse <code>remote.gateway</code>, die Sie in der Datei <code>config.yaml</code> konfiguriert haben mit einem Pingsignal, Wenn die VPN-Verbindung den Status <code>ESTABLISHED</code> aufweist, können Sie das Ergebnis dieses Tests ignorieren. Wenn die VPN-Verbindung nicht den Status <code>ESTABLISHED</code> aufweist, kann dieser Test aus den folgenden Gründen fehlschlagen:<ul><li>Sie haben keine IP-Adresse für das lokalen VPN-Gateway im Unternehmen angegeben. Falls für <code>ipsec.auto</code> die Einstellung <code>start</code> festgelegt ist, ist die IP-Adresse <code>remote.gateway</code> erforderlich.</li><li>ICMP-Pakete (Ping) werden von der Firewall geblockt.</li></ul></td>
     </tr>
     <tr>
     <td><code>vpn-strongswan-ping-remote-ip-1</code></td>
@@ -402,25 +405,27 @@ Nachdem Sie Ihr Helm-Diagramm bereitgestellt haben, testen Sie die VPN-Konnektiv
 ## StrongSwan-VPN-Datenverkehr nach Namensbereich oder Workerknoten beschränken
 {: #limit}
 
-Wenn Sie über ein Single-Tenant-Cluster verfügen oder wenn Sie über ein Multi-Tenant-Cluster verfügen, in dem Clusterressourcen von den Tenants gemeinsam verwendet werden, können Sie den [VPN-Datenverkehr für die einzelnen StrongSwan-Bereitstellungen auf Pods in bestimmten Namensbereichen beschränken](#limit_namespace). Wenn Sie über ein Multi-Tenant-Cluster verfügen, in dem Clusterressourcen ganz bestimmten Tenants zugeordnet sind, können Sie den [VPN-Datenverkehr für die einzelnen StrongSwan-Bereitstellungen auf die den einzelnen Tenants zugeordneten Workerknoten beschränken](#limit_worker). {: shortdesc}
+Wenn Sie über ein Single-Tenant-Cluster verfügen oder wenn Sie über ein Multi-Tenant-Cluster verfügen, in dem Clusterressourcen von den Tenants gemeinsam verwendet werden, können Sie den [VPN-Datenverkehr für die einzelnen StrongSwan-Bereitstellungen auf Pods in bestimmten Namensbereichen beschränken](#limit_namespace). Wenn Sie über ein Multi-Tenant-Cluster verfügen, in dem Clusterressourcen ganz bestimmten Tenants zugeordnet sind, können Sie den [VPN-Datenverkehr für die einzelnen StrongSwan-Bereitstellungen auf die den einzelnen Tenants zugeordneten Workerknoten beschränken](#limit_worker).
+{: shortdesc}
 
 ### StrongSwan-VPN-Datenverkehr nach Namensbereich
 {: #limit_namespace}
 
-Wenn Sie über ein Single-Tenant-Cluster verfügen oder über ein Multi-Tenant-Cluster verfügen, können Sie den VPN-Datenverkehr auf Pods in bestimmten Namensbereichen beschränken. {: shortdesc}
+Wenn Sie über ein Single-Tenant-Cluster verfügen oder über ein Multi-Tenant-Cluster verfügen, können Sie den VPN-Datenverkehr auf Pods in bestimmten Namensbereichen beschränken.
+{: shortdesc}
 
-Nehmen wir beispielsweise an, dass Pods nur in einem bestimmten Namensbereich, `my-secure-namespace`, Daten über das VPN senden und empfangen sollen. Sie möchten nicht, dass Pods in anderen Namensbereichen, z. B. `kube-system`, `ibm-system` oder `default` auf Ihr lokales Netz zugreifen. Um den VPN-Datenverkehr auf `my-secure-namespace` zu beschränken, können Sie globale Calico-Netzrichtlinien erstellen. 
+Nehmen wir beispielsweise an, dass Pods nur in einem bestimmten Namensbereich, `my-secure-namespace`, Daten über das VPN senden und empfangen sollen. Sie möchten nicht, dass Pods in anderen Namensbereichen, z. B. `kube-system`, `ibm-system` oder `default` auf Ihr lokales Netz zugreifen. Um den VPN-Datenverkehr auf `my-secure-namespace` zu beschränken, können Sie globale Calico-Netzrichtlinien erstellen.
 
-Prüfen Sie die folgenden Überlegungen und Einschränkungen, bevor Sie diese Lösung einsetzen. 
-* Sie müssen das StrongSwan-Helm-Diagramm nicht im angegebenen Namensbereich bereitstellen. Der StrongSwan-VPN-Pod und die Routen-Dämongruppe können in `kube-system` oder einem beliebigen anderen Namensbereich bereitgestellt werden. Wenn das StrongSwan-VPN nicht im angegebenen Namensbereich bereitgestellt wird, schlägt der Helm-Test für `vpn-strongswan-ping-remote-ip-1` fehl. Dieser Fehler wird erwartet und ist zulässig. Der Test setzt ein Pingsignal an die private IP-Adresse `remote.privateIPtoPing` des lokalen VPN-Gateways von dem VPN-Pod im Cluster ab, der sich nicht in dem Namensbereich mit direktem Zugriff auf das ferne Teilnetz befindet. Der VPN-Pod kann jedoch weiterhin Datenverkehr an Pods in den Namensbereichen weiterleiten, die über Routen zu dem fernen Teilnetz verfügen, und der Datenverkehr kann weiter ordnungsgemäß fließen. Der VPN-Status lautet immer noch `ESTABLISHED` und die Pods im angegebenen Namensbereich können über das VPN eine Verbindung herstellen. 
-* Die globalen Netzrichtlinien von Calico in den folgenden Schritten verhindern nicht, dass Kubernetes-Pods, die Hostnetzbetrieb verwenden, Daten über das VPN senden und empfangen. Wenn ein Pod mit Hostnetzbetrieb konfiguriert wird, kann die in dem Pod ausgeführte App an den Netzschnittstellen des Workerknotens, auf dem sie sich befindet, empfangsbereit sein. Diese Hostnetzbetrieb-Pods können in allen Namensbereichen vorhanden sein. Um zu bestimmen, welche Pods Hostnetzbetrieb haben, führen Sie `kubectl get pods --all-namespaces -o wide` aus und suchen Sie nach Pods, die nicht die Pod-IP-Adresse `172.30.0.0/16` aufweisen. Wenn Sie ausschließen möchten, dass Hostnetzbetrieb-Pods Daten über das VPN senden und empfangen, können Sie die folgenden Optionen in Ihrer Bereitstellungsdatei `values.yaml` festlegen: `local.subnet: 172.30.0.0/16` und `enablePodSNAT: false`. Diese Konfigurationseinstellungen machen alle Kubernetes-Pods über die VPN-Verbindung zum fernen Netz zugänglich. Es sind jedoch nur die Pods über das VPN erreichbar, die sich im angegebenen sicheren Namensbereich befinden. 
+Prüfen Sie die folgenden Überlegungen und Einschränkungen, bevor Sie diese Lösung einsetzen.
+* Sie müssen das StrongSwan-Helm-Diagramm nicht im angegebenen Namensbereich bereitstellen. Der StrongSwan-VPN-Pod und die Routen-Dämongruppe können in `kube-system` oder einem beliebigen anderen Namensbereich bereitgestellt werden. Wenn das StrongSwan-VPN nicht im angegebenen Namensbereich bereitgestellt wird, schlägt der Helm-Test für `vpn-strongswan-ping-remote-ip-1` fehl. Dieser Fehler wird erwartet und ist zulässig. Der Test setzt ein Pingsignal an die private IP-Adresse `remote.privateIPtoPing` des lokalen VPN-Gateways von dem VPN-Pod im Cluster ab, der sich nicht in dem Namensbereich mit direktem Zugriff auf das ferne Teilnetz befindet. Der VPN-Pod kann jedoch weiterhin Datenverkehr an Pods in den Namensbereichen weiterleiten, die über Routen zu dem fernen Teilnetz verfügen, und der Datenverkehr kann weiter ordnungsgemäß fließen. Der VPN-Status lautet immer noch `ESTABLISHED` und die Pods im angegebenen Namensbereich können über das VPN eine Verbindung herstellen.
+* Die globalen Netzrichtlinien von Calico in den folgenden Schritten verhindern nicht, dass Kubernetes-Pods, die Hostnetzbetrieb verwenden, Daten über das VPN senden und empfangen. Wenn ein Pod mit Hostnetzbetrieb konfiguriert wird, kann die in dem Pod ausgeführte App an den Netzschnittstellen des Workerknotens, auf dem sie sich befindet, empfangsbereit sein. Diese Hostnetzbetrieb-Pods können in allen Namensbereichen vorhanden sein. Um zu bestimmen, welche Pods Hostnetzbetrieb haben, führen Sie `kubectl get pods --all-namespaces -o wide` aus und suchen Sie nach Pods, die nicht die Pod-IP-Adresse `172.30.0.0/16` aufweisen. Wenn Sie ausschließen möchten, dass Hostnetzbetrieb-Pods Daten über das VPN senden und empfangen, können Sie die folgenden Optionen in Ihrer Bereitstellungsdatei `values.yaml` festlegen: `local.subnet: 172.30.0.0/16` und `enablePodSNAT: false`. Diese Konfigurationseinstellungen machen alle Kubernetes-Pods über die VPN-Verbindung zum fernen Netz zugänglich. Es sind jedoch nur die Pods über das VPN erreichbar, die sich im angegebenen sicheren Namensbereich befinden.
 
 Vorbemerkungen:
-* Erstellen oder verwenden Sie einen Cluster mit Kubernetes Version 1.10 oder höher. 
-* [Stellen Sie das StrongSwan-Helm-Diagramm bereit](#vpn_configure) und [stellen Sie sicher, dass die VPN-Konnektivität ordnungsgemäß funktioniert](#vpn_test). 
+* Erstellen oder verwenden Sie einen Cluster mit Kubernetes Version 1.10 oder höher.
+* [Stellen Sie das StrongSwan-Helm-Diagramm bereit](#vpn_configure) und [stellen Sie sicher, dass die VPN-Konnektivität ordnungsgemäß funktioniert](#vpn_test).
 * [Installieren und konfigurieren Sie die Calico-CLI](cs_network_policy.html#cli_install).
 
-Gehen Sie wie folgt vor, um den VPN-Datenverkehr auf einen bestimmten Namensbereich zu beschränken: 
+Gehen Sie wie folgt vor, um den VPN-Datenverkehr auf einen bestimmten Namensbereich zu beschränken:
 
 1. Erstellen Sie eine globale Calico-Netzrichtlinie namens `allow-non-vpn-outbound.yaml`. Diese Richtlinie ermöglicht es allen Namensbereichen, weiterhin ausgehenden Datenverkehr an alle Ziele zu senden, mit Ausnahme des fernen Teilnetzes, auf das das StrongSwan-VPN zugreift. Ersetzen Sie `<remote.subnet>` durch die `remote.subnet`-Instanz, die Sie in der Helm-Konfigurationsdatei `values.yaml` angegeben haben. Informationen zum Angeben mehrerer ferner Teilnetze finden Sie in der [Calico-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
     ```yaml
@@ -448,7 +453,7 @@ Gehen Sie wie folgt vor, um den VPN-Datenverkehr auf einen bestimmten Namensbere
     ```
     {: pre}
 
-3. Erstellen Sie eine weitere globale Calico-Netzrichtlinie namens `allow-vpn-from-namespace.yaml`. Diese Richtlinie ermöglicht es nur einem bestimmten Namensbereich, ausgehenden Datenverkehr an das ferne Teilnetz zu senden, auf das das StrongSwan-VPN zugreift. Ersetzen Sie `<namensbereich>` durch den Namensbereich, der auf das VPN zugreifen kann, und `<remote.subnet>` durch die `remote.subnet`-Instanz, die Sie in der Helm-Konfigurationsdatei `values.yaml` angegeben haben. Informationen zum Angeben mehrerer Namensbereiche oder ferner Teilnetze finden Sie in der [Calico-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
+3. Erstellen Sie eine weitere globale Calico-Netzrichtlinie namens `allow-vpn-from-namespace.yaml`. Diese Richtlinie ermöglicht es nur einem bestimmten Namensbereich, ausgehenden Datenverkehr an das ferne Teilnetz zu senden, auf das das StrongSwan-VPN zugreift. Ersetzen Sie `<namespace>` durch den Namensbereich, der auf das VPN zugreifen kann, und `<remote.subnet>` durch die `remote.subnet`-Instanz, die Sie in der Helm-Konfigurationsdatei `values.yaml` angegeben haben. Informationen zum Angeben mehrerer Namensbereiche oder ferner Teilnetze finden Sie in der [Calico-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -486,20 +491,20 @@ Gehen Sie wie folgt vor, um den VPN-Datenverkehr auf einen bestimmten Namensbere
 Wenn Sie über mehrere StrongSwan-VPN-Bereitstellungen in einem Multi-Tenant-Cluster verfügen, können Sie den VPN-Datenverkehr für jede Bereitstellung auf bestimmte Workerknoten beschränken, die den einzelnen Tenants zugeordnet sind.
 {: shortdesc}
 
-Wenn Sie ein StrongSwan-Helm-Diagramm bereitstellen, wird eine StrongSwan-VPN-Bereitstellung erstellt. Die StrongSwan-VPN-Pods werden auf allen Workerknoten ohne Taints bereitgestellt. Außerdem wird eine Kubernetes-Dämongruppe erstellt. Diese Dämongruppe konfiguriert automatisch Routen auf allen Workerknoten ohne Taint in dem Cluster zu den jeweiligen fernen Teilnetzen. Der StrongSwan-VPN-Pod verwendet die Routen auf Workerknoten, um Anforderungen an das ferne Teilnetz in dem lokalen Netz weiterzuleiten. 
+Wenn Sie ein StrongSwan-Helm-Diagramm bereitstellen, wird eine StrongSwan-VPN-Bereitstellung erstellt. Die StrongSwan-VPN-Pods werden auf allen Workerknoten ohne Taints bereitgestellt. Außerdem wird eine Kubernetes-Dämongruppe erstellt. Diese Dämongruppe konfiguriert automatisch Routen auf allen Workerknoten ohne Taint in dem Cluster zu den jeweiligen fernen Teilnetzen. Der StrongSwan-VPN-Pod verwendet die Routen auf Workerknoten, um Anforderungen an das ferne Teilnetz in dem lokalen Netz weiterzuleiten.
 
-Routen werden nicht für Knoten mit Taint konfiguriert, es sei denn, Sie geben den Taint in der Einstellung für Tolerierungen (`tolerations`) in der Datei `value.yaml` ein. Indem Sie Workerknoten mit Taints versehen, können Sie verhindern, dass auf diesen Workern VPN-Routen konfiguriert werden. Anschließend können Sie den Taint in der Einstellung für Tolerierungen (`tolerations`) nur für die VPN-Bereitstellung angeben, die Sie auf den Workern mit Taint zulassen möchten. Auf diese Weise verwenden die StrongSwan-VPN-Pods für die Bereitstellung des Helm-Diagramms eines Tenants nur die Routen auf den Workerknoten dieses Tenants, um Datenverkehr über die VPN-Verbindung an das ferne Teilnetz weiterzuleiten. 
+Routen werden nicht für Knoten mit Taint konfiguriert, es sei denn, Sie geben den Taint in der Einstellung für Tolerierungen (`tolerations`) in der Datei `value.yaml` ein. Indem Sie Workerknoten mit Taints versehen, können Sie verhindern, dass auf diesen Workern VPN-Routen konfiguriert werden. Anschließend können Sie den Taint in der Einstellung für Tolerierungen (`tolerations`) nur für die VPN-Bereitstellung angeben, die Sie auf den Workern mit Taint zulassen möchten. Auf diese Weise verwenden die StrongSwan-VPN-Pods für die Bereitstellung des Helm-Diagramms eines Tenants nur die Routen auf den Workerknoten dieses Tenants, um Datenverkehr über die VPN-Verbindung an das ferne Teilnetz weiterzuleiten.
 
-Prüfen Sie die folgenden Überlegungen und Einschränkungen, bevor Sie diese Lösung einsetzen. 
-* Standardmäßig platziert Kubernetes App-Pods auf allen verfügbaren Workerknoten ohne Taints. Um sicherzustellen, dass diese Lösung ordnungsgemäß funktioniert, muss jeder Tenant zunächst sicherstellen, dass ihre App-Pods nur auf Workern bereitgestellt werden, die mit einem Taint für den richtigen Tenant versehen sind. Außerdem muss jeder Workerknoten mit Taint auch über eine Tolerierung verfügen, damit die App-Pods auf dem Knoten platziert werden können. Weitere Informationen zu Taints und Tolerierungen finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/). 
-* Clusterressourcen werden möglicherweise nicht optimal genutzt, weil keiner der Tenants App-Pods auf den gemeinsam genutzten Knoten ohne Taints platzieren kann. 
+Prüfen Sie die folgenden Überlegungen und Einschränkungen, bevor Sie diese Lösung einsetzen.
+* Standardmäßig platziert Kubernetes App-Pods auf allen verfügbaren Workerknoten ohne Taints. Um sicherzustellen, dass diese Lösung ordnungsgemäß funktioniert, muss jeder Tenant zunächst sicherstellen, dass ihre App-Pods nur auf Workern bereitgestellt werden, die mit einem Taint für den richtigen Tenant versehen sind. Außerdem muss jeder Workerknoten mit Taint auch über eine Tolerierung verfügen, damit die App-Pods auf dem Knoten platziert werden können. Weitere Informationen zu Taints und Tolerierungen finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+* Clusterressourcen werden möglicherweise nicht optimal genutzt, weil keiner der Tenants App-Pods auf den gemeinsam genutzten Knoten ohne Taints platzieren kann.
 
-In den folgenden Schritten zum Einschränken des StrongSwan-VPN-Datenverkehrs nach Workerknoten wird dieses Beispielszenario verwendet: Angenommen, Sie verfügen über einen Multi-Tenant-Cluster von {{site.data.keyword.containerlong_notm}} mit sechs Workerknoten. Der Cluster unterstützt Tenant A und Tenant B. Sie können die Workerknoten auf folgende Weise mit Taints versehen: 
-* Zwei Workerknoten haben Taints, sodass nur Tenant A-Pods auf den Workern geplant sind. 
-* Zwei Workerknoten haben Taints, sodass nur Tenant B-Pods auf den Workern geplant sind. 
-* Zwei Workerknoten haben keine Taints, weil mindestens zwei Workerknoten erforderlich sind, damit die StrongSwan-VPN-Pods und die IP der Lastausgleichsfunktion ausgeführt werden können. 
+In den folgenden Schritten zum Einschränken des StrongSwan-VPN-Datenverkehrs nach Workerknoten wird dieses Beispielszenario verwendet: Angenommen, Sie verfügen über einen Multi-Tenant-Cluster von {{site.data.keyword.containerlong_notm}} mit sechs Workerknoten. Der Cluster unterstützt Tenant A und Tenant B. Sie können die Workerknoten auf folgende Weise mit Taints versehen:
+* Zwei Workerknoten haben Taints, sodass nur Tenant A-Pods auf den Workern geplant sind.
+* Zwei Workerknoten haben Taints, sodass nur Tenant B-Pods auf den Workern geplant sind.
+* Zwei Workerknoten haben keine Taints, weil mindestens zwei Workerknoten erforderlich sind, damit die StrongSwan-VPN-Pods und die IP der Lastausgleichsfunktion ausgeführt werden können.
 
-Gehen Sie wie folgt vor, um den VPN-Datenverkehr auf Knoten mit Taints für jeden Tenant zu beschränken: 
+Gehen Sie wie folgt vor, um den VPN-Datenverkehr auf Knoten mit Taints für jeden Tenant zu beschränken:
 
 1. Um den VPN-Datenverkehr nur auf Worker zu beschränken, die in diesem Beispiel Tenant A zugeordnet sind, geben Sie die folgende Tolerierung (`toleration`) in der Datei `values.yaml` für das StrongSwan-Helm-Diagramm des Tenants A an:
     ```
@@ -510,7 +515,7 @@ Gehen Sie wie folgt vor, um den VPN-Datenverkehr auf Knoten mit Taints für jede
        effect: "NoSchedule"
     ```
     {: codeblock}
-    Diese Tolerierung lässt zu, dass die Routen-Dämongruppe auf den beiden Workerknoten ausgeführt wird, die mit dem Taint `'dedicated="tenantA"' versehen sind, ebenso wie auf den Workerknoten ohne Taints. Die StrongSwan-VPN-Pods für diese Bereitstellung werden auf den beiden Workerknoten ohne Taints ausgeführt. 
+    Diese Tolerierung lässt zu, dass die Routen-Dämongruppe auf den beiden Workerknoten ausgeführt wird, die mit dem Taint `'dedicated="tenantA"' versehen sind, ebenso wie auf den Workerknoten ohne Taints. Die StrongSwan-VPN-Pods für diese Bereitstellung werden auf den beiden Workerknoten ohne Taints ausgeführt.
 
 2. Um den VPN-Datenverkehr nur auf Worker zu beschränken, die in diesem Beispiel Tenant B zugeordnet sind, geben Sie die folgende Tolerierung (`toleration`) in der Datei `values.yaml` für das StrongSwan-Helm-Diagramm des Tenants B an:
     ```
@@ -521,7 +526,7 @@ Gehen Sie wie folgt vor, um den VPN-Datenverkehr auf Knoten mit Taints für jede
        effect: "NoSchedule"
     ```
     {: codeblock}
-    Diese Tolerierung lässt zu, dass die Routen-Dämongruppe auf den beiden Workerknoten ausgeführt wird, die mit dem Taint `'dedicated="tenantB"' versehen sind, ebenso wie auf den Workerknoten ohne Taints. Die StrongSwan-VPN-Pods für diese Bereitstellung werden auch auf den beiden Workerknoten ohne Taints ausgeführt. 
+    Diese Tolerierung lässt zu, dass die Routen-Dämongruppe auf den beiden Workerknoten ausgeführt wird, die mit dem Taint `'dedicated="tenantB"' versehen sind, ebenso wie auf den Workerknoten ohne Taints. Die StrongSwan-VPN-Pods für diese Bereitstellung werden auch auf den beiden Workerknoten ohne Taints ausgeführt.
 
 <br />
 

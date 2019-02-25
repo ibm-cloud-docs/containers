@@ -55,9 +55,9 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
   ```
   {: pre}
 
-    Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für **Machine Type** (Maschinentyp) etwas anderes als **free** (frei) anzeigt wird. 
+    Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für **Machine Type** (Maschinentyp) etwas anderes als **free** (frei) anzeigt wird.
 
-2. Für Lastausgleichsfunktionen der Version 2.0: Stellen Sie sicher, dass Sie die [Voraussetzungen für die Lastausgleichsfunktion der Version 2.0](cs_loadbalancer.html#ipvs_provision) erfüllen. 
+2. Für Lastausgleichsfunktionen der Version 2.0: Stellen Sie sicher, dass Sie die [Voraussetzungen für die Lastausgleichsfunktion der Version 2.0](cs_loadbalancer.html#ipvs_provision) erfüllen.
 
 3. Prüfen Sie die Richtigkeit der Konfigurationsdatei für Ihren Lastausgleichsservice.
     * Lastausgleichsfunktionen der Version 2.0:
@@ -80,10 +80,10 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
         {: screen}
 
         1. Überprüfen Sie, dass Sie **LoadBalancer** als Typ für Ihren Service definiert haben.
-        2. Überprüfen Sie, dass Sie die Annotation `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"` eingeschlossen haben. 
-        3. Stellen Sie im Abschnitt `spec.selector` des LoadBalancer-Service sicher, dass `<selektorschlüssel>` und `<selektorwert>` dasselbe Schlüssel/Wert-Paar ist, das Sie im Abschnitt `spec.template.metadata.labels` Ihrer Bereitstellungs-YAML verwendet haben. Wenn die Bezeichnungen nicht übereinstimmen, zeigt der Abschnitt zu den Endpunkten (**Endpoints**) in Ihrem LoadBalancer-Service **<none>** an und Ihre App ist über das Internet nicht zugänglich.
+        2. Überprüfen Sie, dass Sie die Annotation `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"` eingeschlossen haben.
+        3. Stellen Sie im Abschnitt `spec.selector` des LoadBalancer-Service sicher, dass `<selector_key>` und `<selector_value>` dasselbe Schlüssel/Wert-Paar ist, das Sie im Abschnitt `spec.template.metadata.labels` Ihrer Bereitstellungs-YAML verwendet haben. Wenn die Bezeichnungen nicht übereinstimmen, zeigt der Abschnitt zu den Endpunkten (**Endpoints**) in Ihrem LoadBalancer-Service **<none>** an und Ihre App ist über das Internet nicht zugänglich.
         4. Überprüfen Sie, ob Sie den **Port** verwendet haben, den Ihre App überwacht.
-        5. Überprüfen Sie, dass `externalTrafficPolicy` auf `Local` gesetzt ist. 
+        5. Überprüfen Sie, dass `externalTrafficPolicy` auf `Local` gesetzt ist.
 
     * Lastausgleichsfunktionen der Version 1.0:
         ```
@@ -102,7 +102,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
         {: screen}
 
         1. Überprüfen Sie, dass Sie **LoadBalancer** als Typ für Ihren Service definiert haben.
-        2. Stellen Sie im Abschnitt `spec.selector` des LoadBalancer-Service sicher, dass `<selektorschlüssel>` und `<selektorwert>` dasselbe Schlüssel/Wert-Paar ist, das Sie im Abschnitt `spec.template.metadata.labels` Ihrer Bereitstellungs-YAML verwendet haben. Wenn die Bezeichnungen nicht übereinstimmen, zeigt der Abschnitt zu den Endpunkten (**Endpoints**) in Ihrem LoadBalancer-Service **<none>** an und Ihre App ist über das Internet nicht zugänglich.
+        2. Stellen Sie im Abschnitt `spec.selector` des LoadBalancer-Service sicher, dass `<selector_key>` und `<selector_value>` dasselbe Schlüssel/Wert-Paar ist, das Sie im Abschnitt `spec.template.metadata.labels` Ihrer Bereitstellungs-YAML verwendet haben. Wenn die Bezeichnungen nicht übereinstimmen, zeigt der Abschnitt zu den Endpunkten (**Endpoints**) in Ihrem LoadBalancer-Service **<none>** an und Ihre App ist über das Internet nicht zugänglich.
         3. Prüfen Sie, ob Sie den **Port** verwendet haben, den Ihre App überwacht.
 
 3.  Prüfen Sie Ihren Lastausgleichsservice und suchen Sie im Abschnitt zu den Ereignissen (**Events**) nach potenziellen Fehlern.
@@ -120,7 +120,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Sie verfügen nicht über ausreichend Workerknoten, um einen Lastausgleichsservice bereitzustellen. Ein Grund kann sein, dass Sie einen Standardcluster mit mehr als einem Workerknoten bereitgestellt haben, aber die Bereitstellung der Workerknoten ist fehlgeschlagen.</li>
     <ol><li>Listen Sie verfügbare Workerknoten auf.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
     <li>Werden mindestens zwei verfügbare Workerknoten gefunden, listen Sie die Details der Workerknoten auf.</br><pre class="pre"><code>ibmcloud ks worker-get &lt;clustername_oder_-id&gt; &lt;worker-id&gt;</code></pre></li>
-    <li>Stellen Sie sicher, dass die öffentlichen und privaten VLAN-IDs für die Workerknoten, die von den Befehlen <code>kubectl get nodes</code> und <code>ibmcloud ks &lt;clustername_oder_-id&gt; worker-get</code> zurückgegeben wurden, übereinstimmen. </li></ol></li></ul>
+    <li>Stellen Sie sicher, dass die öffentlichen und privaten VLAN-IDs für die Workerknoten, die von den Befehlen <code>kubectl get nodes</code> und <code>ibmcloud ks &lt;clustername_oder_-id&gt; worker-get</code> zurückgegeben wurden, übereinstimmen.</li></ol></li></ul>
 
 4.  Wenn Sie eine angepasste Domäne verwenden, um Ihren Lastausgleichsservice zu verbinden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse Ihres Lastausgleichsservice zugeordnet ist.
     1.  Suchen Sie nach der öffentlichen IP-Adresse Ihres Lastausgleichsservice.
@@ -175,7 +175,7 @@ Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunkt
  <tbody>
  <tr>
  <td>Sie verfügen nicht über die erforderlichen Zugriffsrollen für das Herunterladen und Aktualisieren von Zertifikatsdaten.</td>
- <td>Bitten Sie Ihren Kontoadministrator, Ihnen die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Rollen zuzuweisen: <ul><li>Die Servicerollen **Manager** und **Schreibberechtigter** für Ihre {{site.data.keyword.cloudcerts_full_notm}}-Instanz. Weitere Informationen finden Sie unter <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Servicezugriff verwalten</a> für {{site.data.keyword.cloudcerts_short}}.</li><li>Die <a href="cs_users.html#platform">Plattformrolle **Administrator**</a> für den Cluster. </li></ul></td>
+ <td>Bitten Sie Ihren Kontoadministrator, Ihnen die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Rollen zuzuweisen:<ul><li>Die Servicerollen **Manager** und **Schreibberechtigter** für Ihre {{site.data.keyword.cloudcerts_full_notm}}-Instanz. Weitere Informationen finden Sie unter <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Servicezugriff verwalten</a> für {{site.data.keyword.cloudcerts_short}}.</li><li>Die <a href="cs_users.html#platform">Plattformrolle **Administrator**</a> für den Cluster.</li></ul></td>
  </tr>
  <tr>
  <td>Die CRN des Zertifikats, die zum Zeitpunkt der Erstellung, Aktualisierung oder Entfernung angegeben wurde, gehört nicht zu demselben Konto wie der Cluster.</td>
@@ -334,7 +334,7 @@ Falls Sie eine der oben aufgeführten Optionen durchgeführt haben, die `keepali
 {: #cs_vpn_fails}
 
 {: tsSymptoms}
-Wenn Sie die VPN-Konnektivität überprüfen, indem Sie den Befehl `kubectl exec  $STRONGSWAN_POD -- ipsec status` ausführen, sehen Sie den Status `ESTABLISHED` nicht oder der VPN-Pod befindet sich im Fehlerstatus `ERROR` oder er schlägt immer wieder fehl und startet neu. 
+Wenn Sie die VPN-Konnektivität überprüfen, indem Sie den Befehl `kubectl exec  $STRONGSWAN_POD -- ipsec status` ausführen, sehen Sie den Status `ESTABLISHED` nicht oder der VPN-Pod befindet sich im Fehlerstatus `ERROR` oder er schlägt immer wieder fehl und startet neu.
 
 {: tsCauses}
 Ihre Helm-Diagrammkonfigurationsdatei weist falsche oder fehlende Werte auf oder es liegen Syntaxfehler vor.
@@ -342,9 +342,9 @@ Ihre Helm-Diagrammkonfigurationsdatei weist falsche oder fehlende Werte auf oder
 {: tsResolve}
 Wenn Sie versuchen, VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erstellen, ist es wahrscheinlich, dass der Status beim ersten Mal nicht `ESTABLISHED` lautet. Möglicherweise müssen Sie mehrere Problemtypen überprüfen und Ihre Konfigurationsdatei entsprechend ändern. Gehen Sie wie folgt vor, um Fehler in Ihrer StrongSwan-VPN-Konnektivität zu beheben:
 
-1. [Testen und verifizieren Sie die strongSwan-VPN-Konnektivität](cs_vpn.html#vpn_test), indem Sie die fünf Helm-Tests ausführen, die in der StrongSwan-Diagrammdefinition enthalten sind. 
+1. [Testen und verifizieren Sie die strongSwan-VPN-Konnektivität](cs_vpn.html#vpn_test), indem Sie die fünf Helm-Tests ausführen, die in der StrongSwan-Diagrammdefinition enthalten sind.
 
-2. Wenn Sie die VPN-Konnektivität nach der Ausführung der Helm-Tests nicht herstellen können, können Sie das VPN-Debugging-Tool ausführen, das mit dem VPN-Pod-Image bereitgestellt wird. 
+2. Wenn Sie die VPN-Konnektivität nach der Ausführung der Helm-Tests nicht herstellen können, können Sie das VPN-Debugging-Tool ausführen, das mit dem VPN-Pod-Image bereitgestellt wird.
 
     1. Legen Sie die Umgebungsvariable `STRONGSWAN_POD` fest.
 
@@ -672,6 +672,7 @@ von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren
 finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
--   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support). Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
+-   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 {: tip}
 

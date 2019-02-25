@@ -1197,7 +1197,7 @@ Inclua um serviço do {{site.data.keyword.Bluemix_notm}} em um cluster. Para vis
 Remova um serviço do {{site.data.keyword.Bluemix_notm}} de um cluster.
 {: shortdesc}
 
-Quando você remove um serviço do {{site.data.keyword.Bluemix_notm}}, as credenciais de serviço são removidas do cluster.  Se um pod ainda está usando o serviço,
+Quando você remove um serviço do {{site.data.keyword.Bluemix_notm}}, as credenciais de serviço são removidas do cluster. Se um pod ainda está usando o serviço,
 ele falha porque as credenciais de serviço não podem ser localizadas.
 {: note}
 
@@ -2435,7 +2435,7 @@ Crie um filtro de criação de log. É possível usar esse comando para filtrar 
     <dd>Filtra logs que estão no nível especificado e inferior. Os valores aceitáveis na ordem canônica são <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> e <code>trace</code>. Esse valor é opcional. Como um exemplo, se você filtrou logs no nível <code>info</code>, <code>debug</code> e <code>trace</code> também serão filtrados. **Nota**: é possível usar essa sinalização apenas quando as mensagens de log estiverem em formato JSON e contiverem um campo de nível. Saída de exemplo: <code>{"log": "hello", "level": "info"}</code></dd>
 
   <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Filtra quaisquer logs que contêm uma mensagem especificada em qualquer lugar no log. Esse valor é opcional. Exemplo: As mensagens "Hello", "!" e "Hello, World!" se aplicariam ao log "Hello, World!".</dd>
+    <dd>Filtra quaisquer logs que contêm uma mensagem especificada em qualquer lugar no log. Esse valor é opcional. Exemplo: As mensagens "Hello", "!"e "Hello, World!"se aplicariam ao log "Hello, World!".</dd>
 
   <dt><code>--regex-message <em>MESSAGE</em></code></dt>
     <dd>Filtra quaisquer logs que contêm uma mensagem especificada que é gravada como uma expressão regular em qualquer lugar no log. Esse valor é opcional. Exemplo: o padrão "hello [0-9]" se aplicaria a "hello 1", "hello 2" e "hello 9".</dd>
@@ -2569,7 +2569,7 @@ Atualize um filtro de criação de log. É possível usar esse comando para atua
     <dd>Filtra logs que estão no nível especificado e inferior. Os valores aceitáveis na ordem canônica são <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> e <code>trace</code>. Esse valor é opcional. Como um exemplo, se você filtrou logs no nível <code>info</code>, <code>debug</code> e <code>trace</code> também serão filtrados. **Nota**: é possível usar essa sinalização apenas quando as mensagens de log estiverem em formato JSON e contiverem um campo de nível. Saída de exemplo: <code>{"log": "hello", "level": "info"}</code></dd>
 
   <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Filtra quaisquer logs que contêm uma mensagem especificada em qualquer lugar no log. Esse valor é opcional. Exemplo: As mensagens "Hello", "!" e "Hello, World!" se aplicariam ao log "Hello, World!".</dd>
+    <dd>Filtra quaisquer logs que contêm uma mensagem especificada em qualquer lugar no log. Esse valor é opcional. Exemplo: As mensagens "Hello", "!"e "Hello, World!"se aplicariam ao log "Hello, World!".</dd>
 
   <dt><code>--regex-message <em>MESSAGE</em></code></dt>
     <dd>Filtra quaisquer logs que contêm uma mensagem especificada que é gravada como uma expressão regular em qualquer lugar no log. Esse valor é opcional. Exemplo: o padrão "hello [0-9]" se aplicaria a "hello 1", "hello 2" e "hello 9"</dd>

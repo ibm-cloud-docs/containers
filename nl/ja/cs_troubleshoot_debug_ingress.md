@@ -35,7 +35,7 @@ lastupdated: "2018-12-05"
 {: tip}
 
 始めに、以下の [{{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシー](cs_users.html#platform)があることを確認してください。
-  - クラスターに対する**エディター**または**管理者**のプラットフォーム役割 
+  - クラスターに対する**エディター**または**管理者**のプラットフォーム役割
 
 ## ステップ 1: Ingress デプロイメントと ALB ポッドのログでエラー・メッセージを確認する
 {: #errors}
@@ -149,7 +149,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
         * CLI がタイムアウトを返し、ワーカー・ノードを保護するカスタム・ファイアウォールがある場合は、[ファイアウォール](cs_troubleshoot_clusters.html#cs_firewall)で ICMP を許可していることを確認します。
         * ping をブロックしているファイアウォールがなく、引き続き ping がタイムアウトになる場合は、[ALB ポッドの状況を確認](#check_pods)します。
 
-    * 複数ゾーン・クラスターのみの場合: MZLB ヘルス・チェックを使用して、ALB IP の状況を確認できます。 MZLB について詳しくは、[複数ゾーン・ロード・バランサー (MZLB)](cs_ingress.html#planning) を参照してください。 MZLB ヘルス・チェックは、`<cluster_name>.<region_or_zone>.containers.appdomain.cloud` の形式の新しい Ingress サブドメインを持つクラスターのみに使用できます。クラスターでまだ `<cluster_name>.<region>.containers.mybluemix.net` の古い形式を使用している場合は、[単一ゾーン・クラスターを複数ゾーンに変換](cs_clusters.html#add_zone)します。 クラスターに新しい形式のサブドメインが割り当てられますが、古いサブドメイン形式も引き続き使用できます。 別の方法として、新しいサブドメイン形式が自動的に割り当てられた新しいクラスターを注文することもできます。
+    * 複数ゾーン・クラスターのみの場合: MZLB ヘルス・チェックを使用して、ALB IP の状況を確認できます。 MZLB について詳しくは、[複数ゾーン・ロード・バランサー (MZLB)](cs_ingress.html#planning) を参照してください。 MZLB ヘルス・チェックは、`<cluster_name>.<region_or_zone>.containers.appdomain.cloud` の形式の新しい Ingress サブドメインを持つクラスターのみに使用できます。 クラスターでまだ `<cluster_name>.<region>.containers.mybluemix.net` の古い形式を使用している場合は、[単一ゾーン・クラスターを複数ゾーンに変換](cs_clusters.html#add_zone)します。 クラスターに新しい形式のサブドメインが割り当てられますが、古いサブドメイン形式も引き続き使用できます。 別の方法として、新しいサブドメイン形式が自動的に割り当てられた新しいクラスターを注文することもできます。
 
     以下の HTTP cURL コマンドは、`albhealth` ホストを使用します。このホストは、{{site.data.keyword.containerlong_notm}} によって構成され、ALB IP の `healthy` または `unhealthy` の状況を返します。
         ```

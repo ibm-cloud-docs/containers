@@ -33,7 +33,7 @@ Wenn Sie [Clusterberechtigungen zuordnen](cs_users.html), kann es schwierig sein
 {{site.data.keyword.containerlong_notm}} ist für die Verwendung von {{site.data.keyword.Bluemix_notm}} Identity and Access Management-Rollen (IAM-Rollen) konfiguriert. Von den Rollen der {{site.data.keyword.Bluemix_notm}} IAM-Plattform werden die Aktionen festgelegt, die Benutzer in einem Cluster ausführen können. Jedem Benutzer, dem eine Plattformrolle zugeordnet ist, wird automatisch auch eine entsprechende Rolle für Kubernetes-RBAC (RBAC - rollenbasierte Zugriffssteuerung) im Standardnamensbereich zugeordnet. Zusätzlich werden mithilfe der Plattformrollen automatisch Basisinfrastrukturberechtigungen für Benutzer festgelegt. Informationen zum Festlegen von Richtlinien finden Sie unter [{{site.data.keyword.Bluemix_notm}} IAM-Plattformberechtigungen zuordnen](cs_users.html#platform). Weitere Informationen zu RBAC-Rollen finden Sie unter [RBAC-Berechtigungen zuordnen](cs_users.html#role-binding).
 {: shortdesc}
 
-In der folgenden Tabelle werden die Berechtigungen für die Clusterverwaltung aufgeführt, die den entsprechenden RBAC-Rollen von jeder einzelnen Plattformrolle und den Kubernetes-Ressourcenberechtigungen gewährt werden. 
+In der folgenden Tabelle werden die Berechtigungen für die Clusterverwaltung aufgeführt, die den entsprechenden RBAC-Rollen von jeder einzelnen Plattformrolle und den Kubernetes-Ressourcenberechtigungen gewährt werden.
 
 <table summary="In der Tabelle werden Benutzerberechtigungen für IAM-Plattformrollen und entsprechende RBAC-Richtlinien angezeigt. Die Zeilen sind von links nach rechts zu lesen, mit der IAM-Plattformrolle in der ersten Spalte, der Clusterberechtigung in der zweiten Spalte und der entsprechenden RBAC-Rolle in der dritten Spalte.">
 <caption>Berechtigungen der Clusterverwaltung nach Plattform und RBAC-Rolle</caption>
@@ -122,7 +122,7 @@ In der folgenden Tabelle werden die Berechtigungen für die Clusterverwaltung au
         <li>Auflisten aller oder Anzeigen der Details für geheime ALB-Schlüssel (ALB - Lastausgleichsfunktionen für Anwendungen) in einem Cluster</li>
         <li>Bereitstellen eines Zertifikats der {{site.data.keyword.cloudcerts_long_notm}}-Instanz für eine Lastausgleichsfunktion für Anwendungen</li>
         <li>Aktualisieren oder Entfernen von geheimen ALB-Schlüsseln von einem Cluster</li></ul>
-      <p class="note">Zum Erstellen von Ressourcen wie Maschinen, VLANs und Teilnetzen benötigen Administratorbenutzer die Infrastrukturrolle **Superuser**. </p>
+      <p class="note">Zum Erstellen von Ressourcen wie Maschinen, VLANs und Teilnetzen benötigen Administratorbenutzer die Infrastrukturrolle **Superuser**.</p>
     </td>
     <td>Die Clusterrolle <code>cluster-admin</code> wird von der Clusterrollenbindung <code>ibm-admin</code> angewendet und stellt die folgenden Berechtigungen bereit:
       <ul><li>Schreib-/Lesezugriff auf Ressourcen in allen Namensbereichen</li>
@@ -139,7 +139,8 @@ In der folgenden Tabelle werden die Berechtigungen für die Clusterverwaltung au
 ## Cloud Foundry-Rollen
 {: #cloud-foundry}
 
-Cloud Foundry-Rollen gewähren Zugriff für Organisationen und Bereiche innerhalb des Kontos. Wenn Sie die Liste der Cloud Foundry-basierten Services in {{site.data.keyword.Bluemix_notm}} anzeigen möchten, führen Sie `ibmcloud service list` aus. Weitere Informationen finden Sie unter den verfügbaren [Organisations- und Benutzerrollen](/docs/iam/cfaccess.html) oder in den Schritten unter [Cloud Foundry-Zugriff verwalten](/docs/iam/mngcf.html) in der Dokumentation zu {{site.data.keyword.Bluemix_notm}} Identity and Access Management. {: shortdesc}
+Cloud Foundry-Rollen gewähren Zugriff für Organisationen und Bereiche innerhalb des Kontos. Wenn Sie die Liste der Cloud Foundry-basierten Services in {{site.data.keyword.Bluemix_notm}} anzeigen möchten, führen Sie `ibmcloud service list` aus. Weitere Informationen finden Sie unter den verfügbaren [Organisations- und Benutzerrollen](/docs/iam/cfaccess.html) oder in den Schritten unter [Cloud Foundry-Zugriff verwalten](/docs/iam/mngcf.html) in der Dokumentation zu {{site.data.keyword.Bluemix_notm}} Identity and Access Management.
+{: shortdesc}
 
 In der folgenden Tabelle werden die Cloud Foundry-Rollen aufgeführt, die für Clusteraktionsberechtigungen erforderlich sind.
 

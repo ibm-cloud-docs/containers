@@ -43,7 +43,8 @@ Aprenda as etapas gerais para implementar apps clicando em uma área da imagem a
 ## Planejamento para executar apps em clusters
 {: #plan_apps}
 
-Antes de implementar um app em um cluster do {{site.data.keyword.containerlong_notm}}, decida como deseja configurar seu app para que ele possa ser acessado corretamente e integrado a outros serviços no {{site.data.keyword.Bluemix_notm}}. {:shortdesc}
+Antes de implementar um app em um cluster do {{site.data.keyword.containerlong_notm}}, decida como deseja configurar seu app para que ele possa ser acessado corretamente e integrado a outros serviços no {{site.data.keyword.Bluemix_notm}}.
+{:shortdesc}
 
 ### Que tipo de objetos do Kubernetes posso fazer para meu app?
 {: #object}
@@ -140,7 +141,7 @@ Se desejar gerenciar atualizações para seu app, veja [Gerenciando implementaç
 Os administradores de conta e cluster podem controlar o acesso em vários níveis diferentes: cluster, namespace do Kubernetes, pod e contêiner.
 {: shortdesc}
 
-Com o {{site.data.keyword.Bluemix_notm}} IAM, é possível designar permissões a usuários individuais, grupos ou contas de serviço no nível de instância de cluster. É possível definir o escopo de acesso do cluster ainda mais, restringindo os usuários a namespaces específicos dentro do cluster. Para obter mais informações, veja [Designando acesso ao cluster](cs_users.html#users).
+Com o {{site.data.keyword.Bluemix_notm}} IAM, é possível designar permissões a usuários individuais, grupos ou contas de serviço no nível de instância de cluster.  É possível definir o escopo de acesso do cluster ainda mais, restringindo os usuários a namespaces específicos dentro do cluster. Para obter mais informações, veja [Designando acesso ao cluster](cs_users.html#users).
 
 Para controlar o acesso no nível de pod, é possível [configurar políticas de segurança de pod com o RBAC do Kubernetes](cs_psp.html#psp).
 
@@ -169,7 +170,7 @@ Também é possível [conectar múltiplos clusters em regiões diferentes com um
 ### Aumentando a disponibilidade de seu app
 {: #increase_availability}
 
-Considere as opções a seguir para aumentar a disponibilidade de seu app.
+Considere as opções a seguir para aumentar a disponibilidade de seu app. 
 {: shortdesc}
 
 <dl>

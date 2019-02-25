@@ -175,7 +175,7 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
  <tbody>
  <tr>
  <td>証明書データのダウンロードやアップデートに必要なアクセス役割を持っていない。</td>
- <td>アカウント管理者に問い合わせて、以下の {{site.data.keyword.Bluemix_notm}} IAM 役割を割り当てるように依頼してください。 <ul><li>{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**管理者**と**ライター**のサービス役割。詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">サービス・アクセスの管理</a>を参照してください。</li><li>クラスターに対する<a href="cs_users.html#platform">**管理者**のプラットフォーム役割</a>。</li></ul></td>
+ <td>アカウント管理者に問い合わせて、以下の {{site.data.keyword.Bluemix_notm}} IAM 役割を割り当てるように依頼してください。<ul><li>{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**管理者**と**ライター**のサービス役割。 詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">サービス・アクセスの管理</a>を参照してください。</li><li>クラスターに対する<a href="cs_users.html#platform">**管理者**のプラットフォーム役割</a>。</li></ul></td>
  </tr>
  <tr>
  <td>作成時、更新時、または削除時に提供された証明書 CRN が、クラスターと同じアカウントに属していない。</td>
@@ -290,14 +290,14 @@ Ingress サービスによって、WebSocket を使用するアプリが公開�
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-サービス構成ファイルの `externalTrafficPolicy` を `Local` に変更して、[バージョン 1.0 ロード・バランサー](cs_loadbalancer.html#node_affinity_tolerations)・サービスまたは [Ingress ALB](cs_ingress.html#preserve_source_ip) サービスのソース IP 保持を有効にしました。しかし、トラフィックがアプリのバックエンド・サービスに到達しません。
+サービス構成ファイルの `externalTrafficPolicy` を `Local` に変更して、[バージョン 1.0 ロード・バランサー](cs_loadbalancer.html#node_affinity_tolerations)・サービスまたは [Ingress ALB](cs_ingress.html#preserve_source_ip) サービスのソース IP 保持を有効にしました。 しかし、トラフィックがアプリのバックエンド・サービスに到達しません。
 
 {: tsCauses}
 ロード・バランサー・サービスまたは Ingress ALB サービスのソース IP 保持を有効にすると、クライアント要求のソース IP アドレスは保持されます。 これらのサービスは、要求パケットの IP アドレスが変更されないようにするために、同じワーカー・ノード上の各アプリ・ポッドにのみトラフィックを転送します。 通常、ロード・バランサーまたは Ingress ALB のサービス・ポッドは、各アプリ・ポッドがデプロイされたワーカー・ノードと同じワーカー・ノードにデプロイされます。 しかし、次のように、サービス・ポッドとアプリ・ポッドが同じワーカー・ノードにスケジュールされない状況もあります。 ワーカー・ノードで [Kubernetes テイント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) を使用している場合、テイントの耐障害性がないポッドはすべて、テイント適用ワーカー・ノードでの実行が阻止されます。 ソース IP 保持が、次に示すように、使用しているテイントのタイプに基づいて動作していない可能性があります。
 
 * **エッジ・ノードのテイント**: クラスター内の各パブリック VLAN 上の複数のワーカー・ノードに [`dedicated=edge` ラベルを追加](cs_edge.html#edge_nodes)して、Ingress ポッドとロード・バランサー・ポッドがそれらのワーカー・ノードにのみデプロイされるようにしました。 その後、[それらのエッジ・ノードにテイントも適用](cs_edge.html#edge_workloads)して、他のすべてのワークロードがエッジ・ノードで実行されないようにしました。 しかし、アプリ・デプロイメントにエッジ・ノードのアフィニティー・ルールと耐障害性を追加しませんでした。 アプリ・ポッドは、サービス・ポッドと同じテイント適用ノードにスケジュールすることはできず、トラフィックはアプリのバックエンド・サービスに到達しません。
 
-* **カスタム・テイント**: カスタム・テイントをいくつかのノード上で使用して、そのテイントの耐障害性があるアプリ・ポッドだけをそれらのノードにデプロイできるようにしました。 アプリのデプロイメントと、ロード・バランサー・サービスまたは Ingress サービスにアフィニティー・ルールと耐障害性を追加したので、それらのポッドはそれらのノードにのみデプロイされます。 しかし、`ibm-system` 名前空間に自動的に作成される `ibm-cloud-provider-ip` `keepalived` ポッドがあるので、ロード・バランサー・ポッドとアプリ・ポッドは必ず同じワーカー・ノードにスケジュールされます。これらの `keepalived` ポッドには、使用したカスタムのテイントに対する耐障害性がありません。 これらのポッドをアプリ・ポッドが実行されているノードと同じテイント適用ノードにスケジュールすることはできず、トラフィックはアプリのバックエンド・サービスに到達しません。
+* **カスタム・テイント**: カスタム・テイントをいくつかのノード上で使用して、そのテイントの耐障害性があるアプリ・ポッドだけをそれらのノードにデプロイできるようにしました。 アプリのデプロイメントと、ロード・バランサー・サービスまたは Ingress サービスにアフィニティー・ルールと耐障害性を追加したので、それらのポッドはそれらのノードにのみデプロイされます。 しかし、`ibm-system` 名前空間に自動的に作成される `ibm-cloud-provider-ip` `keepalived` ポッドがあるので、ロード・バランサー・ポッドとアプリ・ポッドは必ず同じワーカー・ノードにスケジュールされます。 これらの `keepalived` ポッドには、使用したカスタムのテイントに対する耐障害性がありません。 これらのポッドをアプリ・ポッドが実行されているノードと同じテイント適用ノードにスケジュールすることはできず、トラフィックはアプリのバックエンド・サービスに到達しません。
 
 {: tsResolve}
 以下のいずれかのオプションを選択して、この問題を解決します。
@@ -369,7 +369,7 @@ strongSwan Helm チャートとの VPN 接続を確立しようとすると、�
 {: #cs_strongswan_release}
 
 {: tsSymptoms}
-strongSwan Helm チャートを変更し、`helm install -f config.yaml --name=vpn ibm/strongswan` を実行して、新しいリリースをインストールしようとします。しかし、次のエラーが表示されます。
+strongSwan Helm チャートを変更し、`helm install -f config.yaml --name=vpn ibm/strongswan` を実行して、新しいリリースをインストールしようとします。 しかし、次のエラーが表示されます。
 ```
 Error: release vpn failed: deployments.extensions "vpn-strongswan" already exists
 ```

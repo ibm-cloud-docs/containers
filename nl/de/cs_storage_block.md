@@ -53,13 +53,14 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
       
    2. Überprüfen Sie das [Versionsänderungsprotokoll](cs_versions_changelog.html#changelog) und suchen Sie nach Änderungen, die in der neuesten Patchversion enthalten sind. 
    
-   3. Wenden Sie die neueste Patchversion durch erneutes Laden des Workerknotens an. Gehen Sie gemäß den Anweisungen für den Befehl [ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) vor, um sorgfältig alle aktiven Pods auf dem Workerknoten erneut zu planen, bevor der Workerknoten erneut geladen wird. Beachten Sie, dass Ihre Workerknotenmaschine während eines Neuladens mit dem neuen Image aktualisiert wird und dass dabei Daten gelöscht werden, die nicht [außerhalb des Workerknotens gespeichert sind](cs_storage_planning.html#persistent_storage_overview). 
+   3. Wenden Sie die neueste Patchversion durch erneutes Laden des Workerknotens an. Gehen Sie gemäß den Anweisungen für den Befehl [ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) vor, um sorgfältig alle aktiven Pods auf dem Workerknoten erneut zu planen, bevor der Workerknoten erneut geladen wird. Beachten Sie, dass Ihre Workerknotenmaschine während eines Neuladens mit dem neuen Image aktualisiert wird und dass dabei Daten gelöscht werden, die nicht [außerhalb des Workerknotens gespeichert sind](cs_storage_planning.html#persistent_storage_overview).
 
-2. Führen Sie die [Anweisungen](cs_integrations.html#helm) aus, um den Helm-Client auf Ihrer lokalen Maschine zu installieren und installieren Sie den Helm-Server (tiller) in Ihrem Cluster. 
+2. Führen Sie die [Anweisungen](cs_integrations.html#helm) aus, um den Helm-Client auf Ihrer lokalen Maschine zu installieren und installieren Sie den Helm-Server (tiller) in Ihrem Cluster.
 
-   Wenn Sie Helm Version 2.9 oder höher verwenden, stellen Sie sicher, dass Sie Tiller mit einem [Servicekonto](cs_integrations.html#helm) installiert haben. {: important}
+   Wenn Sie Helm Version 2.9 oder höher verwenden, stellen Sie sicher, dass Sie Tiller mit einem [Servicekonto](cs_integrations.html#helm) installiert haben.
+   {: important}
    
-3. Fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Diagramm-Repository zu dem Cluster hinzu, in dem Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in verwenden möchten. 
+3. Fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Diagramm-Repository zu dem Cluster hinzu, in dem Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in verwenden möchten.
    ```
    helm repo add ibm  https://registry.bluemix.net/helm/ibm
    ```
@@ -904,7 +905,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 
       Eine statusabhängige Gruppe wird vollständig bereitgestellt, wenn die Anzahl der Replikate, die im Abschnitt **Replicas** (Replikate) der CLI-Ausgabe enthalten sind, mit der Anzahl der **aktiven** Pods im Abschnitt **Pods Status** (Podstatus) übereinstimmt. Wenn eine statusabhängige Gruppe noch nicht vollständig bereitgestellt wird, müssen Sie warten, bis die Bereitstellung abgeschlossen ist, bevor Sie fortfahren können.
 
-3. Erstellen Sie eine Konfigurationsdatei für die statusabhängige Gruppe und den Service, den Sie verwenden, um die statusabhängige Gruppe zugänglich zu machen. Im folgenden Beispiel wird veranschaulicht, wie Ngingx als statusabhängige Gruppe mit drei Replikaten bereitgestellt wird. Für jedes Replikat wird eine 20-Gigabyte-Blockspeichereinheit basierend auf den Spezifikationen bereitgestellt, die in der Speicherklasse `ibmc-block-retain-bronze` definiert sind. Alle Speichereinheiten werden in der Zone `dal10` bereitgestellt. Da auf Blockspeicher nicht von anderen Zonen aus zugegriffen werden kann, werden alle Replikate der statusabhängigen Gruppe auch auf einem Workerknoten bereitgestellt, der sich in `dal10` befindet. 
+3. Erstellen Sie eine Konfigurationsdatei für die statusabhängige Gruppe und den Service, den Sie verwenden, um die statusabhängige Gruppe zugänglich zu machen. Im folgenden Beispiel wird veranschaulicht, wie Ngingx als statusabhängige Gruppe mit drei Replikaten bereitgestellt wird. Für jedes Replikat wird eine 20-Gigabyte-Blockspeichereinheit basierend auf den Spezifikationen bereitgestellt, die in der Speicherklasse `ibmc-block-retain-bronze` definiert sind. Alle Speichereinheiten werden in der Zone `dal10` bereitgestellt. Da auf Blockspeicher nicht von anderen Zonen aus zugegriffen werden kann, werden alle Replikate der statusabhängigen Gruppe auch auf einem Workerknoten bereitgestellt, der sich in `dal10` befindet.
 
    ```
    apiVersion: v1
@@ -1052,7 +1053,8 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
    - **`metadata.name`**: Geben Sie den `<statefulset_name>` ein, den Sie im vorherigen Schritt verwendet haben.
    - **`spec.replicas`**: Geben Sie die Anzahl der Replikate ein, die Sie für die statusabhängige Gruppe erstellen möchten. Die Anzahl der Replikate muss mit der Anzahl der PVCs identisch sein, die Sie zuvor erstellt haben.
 
-   Wenn Sie die PVCs in verschiedenen Zonen erstellt haben, schließen Sie keine Bezeichnung für eine Region oder Zone in die statusabhängige Gruppe ein. {: note}
+   Wenn Sie die PVCs in verschiedenen Zonen erstellt haben, schließen Sie keine Bezeichnung für eine Region oder Zone in die statusabhängige Gruppe ein.
+   {: note}
 
 3. Überprüfen Sie, ob die PVCs in den Pods der Replikate der statusabhängige Gruppe verwendet werden.
    1. Listen Sie die Pods in Ihrem Cluster auf. Suchen Sie die Pods, die zur statusabhängigen Gruppe gehören.
@@ -1088,13 +1090,13 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 ## Größe und E/A-Operationen pro Sekunde Ihrer vorhandenen Speichereinheit ändern
 {: #change_storage_configuration}
 
-Wenn Sie die Speicherkapazität oder die Leistung erhöhen möchten, können Sie den vorhandenen Datenträger ändern.
+Wenn Sie die Speicherkapazität oder die Leistung erhöhen möchten, können Sie den vorhandenen Datenträger ändern. 
 {: shortdesc}
 
-Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.keyword.Bluemix_notm}}-Konsole zum Ändern Ihres Speichers finden Sie unter [Blockspeicherkapazität erweitern](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). Wenn Sie die {{site.data.keyword.Bluemix_notm}}-Konsole verwenden, um Ihren Speicher zu ändern, müssen Sie die Schritte 4-7 in diesem Abschnitt ausführen, um die Änderung abzuschließen.
+Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.keyword.Bluemix_notm}}-Konsole zum Ändern Ihres Speichers finden Sie unter [Blockspeicherkapazität erweitern](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). Wenn Sie die {{site.data.keyword.Bluemix_notm}}-Konsole verwenden, um Ihren Speicher zu ändern, müssen Sie die Schritte 4-7 in diesem Abschnitt ausführen, um die Änderung abzuschließen. 
 {: tip}
 
-1. Listen Sie die PVCs in Ihrem Cluster auf und notieren Sie sich den Namen des zugehörigen persistenten Datenträgers in der Spalte **VOLUME**.  
+1. Listen Sie die PVCs in Ihrem Cluster auf und notieren Sie sich den Namen des zugehörigen persistenten Datenträgers in der Spalte **VOLUME**. 
    ```
    kubectl get pvc
    ```
@@ -1107,7 +1109,7 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    ```
    {: screen}
    
-2. Rufen Sie die Datenträger-ID (**VolumeID**) und den Speichertyp (**StorageType**) des physischen Dateispeichers ab, die Ihrem PVC zugeordnet sind, indem Sie die Details des persistenten Datenträgers auflisten, an den Ihr PVC gebunden ist. Ersetzen Sie `<pv-name>` durch den Namen des persistenten Datenträgers, den Sie im vorherigen Schritt abgerufen haben. Der Speichertyp wird im Abschnitt mit **Labels** (Bezeichnungen) angezeigt und die Datenträger-ID wird im Abschnitt **Source** (Quelle) > **Options** (Optionen) Ihrer CLI-Ausgabe angezeigt.  
+2. Rufen Sie die Datenträger-ID (**VolumeID**) und den Speichertyp (**StorageType**) des physischen Dateispeichers ab, die Ihrem PVC zugeordnet sind, indem Sie die Details des persistenten Datenträgers auflisten, an den Ihr PVC gebunden ist. Ersetzen Sie `<pv_name>` durch den Namen des persistenten Datenträgers, den Sie im vorherigen Schritt abgerufen haben. Der Speichertyp wird im Abschnitt mit **Labels** (Bezeichnungen) angezeigt und die Datenträger-ID wird im Abschnitt **Source** (Quelle) > **Options** (Optionen) Ihrer CLI-Ausgabe angezeigt. 
    ```
    kubectl describe pv <pv-name>
    ```
@@ -1136,9 +1138,9 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    ```
    {: screen}
 
-3. Ändern Sie die Größe oder die E/A-Operationen pro Sekunde Ihres Datenträgers in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer).  
+3. Ändern Sie die Größe oder die E/A-Operationen pro Sekunde Ihres Datenträgers in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer). 
 
-   Beispiel für einen Leistungsspeicher:  
+   Beispiel für einen Leistungsspeicher: 
    ```
    ibmcloud sl block volume-modify <datenträger-id> --new-size <größe> --new-iops <iops>
    ```
@@ -1158,7 +1160,7 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    <tbody>
    <tr>
    <td><code>&lt;datenträger-id&gt;</code></td>
-   <td>Geben Sie die ID des Datenträgers ein, den Sie zuvor abgerufen haben. </td>
+   <td>Geben Sie die ID des Datenträgers ein, den Sie zuvor abgerufen haben.</td>
    </tr>
    <tr>
    <td><code>&lt;new-size&gt;</code></td>
@@ -1166,11 +1168,11 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    </tr>
    <tr>
    <td><code>&lt;new-iops&gt;</code></td>
-   <td>Nur für Leistungsspeicher. Geben Sie die gewünschte neue Anzahl von E/A-Operationen pro Sekunde ein. Informationen zu gültigen E/A-Operationen pro Sekunde finden Sie unter [Blockspeicherkonfiguration festlegen](#predefined_storageclass). Wenn Sie die E/A-Operationen pro Sekunde nicht angeben, wird die aktuelle Anzahl E/A-Operationen pro Sekunde verwendet. <p class="note">Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger kleiner als 0,3 ist, muss der neue IOPS/GB-Faktor kleiner als 0,3 sein. Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger größer-gleich 0,3 ist, muss der neue IOPS/GB-Faktor größer-gleich 0,3 sein. </p> </td>
+   <td>Nur für Leistungsspeicher. Geben Sie die gewünschte neue Anzahl von E/A-Operationen pro Sekunde ein. Informationen zu gültigen E/A-Operationen pro Sekunde finden Sie unter [Blockspeicherkonfiguration festlegen](#predefined_storageclass). Wenn Sie die E/A-Operationen pro Sekunde nicht angeben, wird die aktuelle Anzahl E/A-Operationen pro Sekunde verwendet. <p class="note">Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger kleiner als 0,3 ist, muss der neue IOPS/GB-Faktor kleiner als 0,3 sein. Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger größer-gleich 0,3 ist, muss der neue IOPS/GB-Faktor größer-gleich 0,3 sein.</p> </td>
    </tr>
    <tr>
    <td><code>&lt;new-tier&gt;</code></td>
-   <td>Nur für Endurance-Speicher. Geben Sie die gewünschte neue Anzahl von E/A-Operationen pro Sekunde pro GB ein. Informationen zu gültigen E/A-Operationen pro Sekunde finden Sie unter [Blockspeicherkonfiguration festlegen](#predefined_storageclass). Wenn Sie die E/A-Operationen pro Sekunde nicht angeben, wird die aktuelle Anzahl E/A-Operationen pro Sekunde verwendet. <p class="note">Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger kleiner als 0,25 ist, muss der neue IOPS/GB-Faktor kleiner als 0,25 sein. Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger größer-gleich 0,25 ist, muss der neue IOPS/GB-Faktor größer-gleich 0,25 sein. </p> </td>
+   <td>Nur für Endurance-Speicher. Geben Sie die gewünschte neue Anzahl von E/A-Operationen pro Sekunde pro GB ein. Informationen zu gültigen E/A-Operationen pro Sekunde finden Sie unter [Blockspeicherkonfiguration festlegen](#predefined_storageclass). Wenn Sie die E/A-Operationen pro Sekunde nicht angeben, wird die aktuelle Anzahl E/A-Operationen pro Sekunde verwendet. <p class="note">Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger kleiner als 0,25 ist, muss der neue IOPS/GB-Faktor kleiner als 0,25 sein. Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger größer-gleich 0,25 ist, muss der neue IOPS/GB-Faktor größer-gleich 0,25 sein.</p> </td>
    </tr>
    </tbody>
    </table>
@@ -1190,43 +1192,43 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    ```
    {: screen}
    
-4. Korrigieren Sie die Konfiguration des persistenten Datenträgers, um die Annotation `autofix-resizefs` hinzuzufügen. Diese Annotation ändert die Größe des Dateisystems automatisch, wenn der Datenträger an einen Pod angehängt wird.   
+4. Korrigieren Sie die Konfiguration des persistenten Datenträgers, um die Annotation `autofix-resizefs` hinzuzufügen. Diese Annotation ändert die Größe des Dateisystems automatisch, wenn der Datenträger an einen Pod angehängt wird.  
    ```
    kubectl patch pv <name_des_persistenten_datenträgers> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
    ```
    {: pre}
    
-5. Listen Sie alle Pods auf, die den PVC verwenden.  
+5. Listen Sie alle Pods auf, die den PVC verwenden. 
    ```
    kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc-name>"
    ```
    {: pre}
    
-   Pods werden im folgenden Format zurückgegeben: `<podname>: <pvc-name>`. 
+   Pods werden im folgenden Format zurückgegeben: `<pod_name>: <pvc_name>`. 
    
-6. Wenn Sie über einen Pod verfügen, der den PVC verwendet, starten Sie den Pod erneut, indem Sie den Pod entfernen und ihn von Kubernetes erneut erstellen lassen. Wenn Sie einen Pod erstellt haben, ohne eine Kubernetes-Bereitstellung oder eine Replikatgruppe zu verwenden, müssen Sie Ihren Pod erneut erstellen, nachdem Sie ihn entfernt haben.
-   Zum Abrufen der YAML-Datei, die zum Erstellen Ihres Pods verwendet wurde, führen Sie `kubectl get pod <podname> -o yaml >pod.yaml` aus.
+6. Wenn Sie über einen Pod verfügen, der den PVC verwendet, starten Sie den Pod erneut, indem Sie den Pod entfernen und ihn von Kubernetes erneut erstellen lassen. Wenn Sie einen Pod erstellt haben, ohne eine Kubernetes-Bereitstellung oder eine Replikatgruppe zu verwenden, müssen Sie Ihren Pod erneut erstellen, nachdem Sie ihn entfernt haben. 
+   Zum Abrufen der YAML-Datei, die zum Erstellen Ihres Pods verwendet wurde, führen Sie `kubectl get pod <pod_name> -o yaml >pod.yaml` aus. 
    {: tip}
    ```
    kubectl delete pod <podname>
    ```
    {: pre}
    
-7. Wenn Sie die Größe Ihres Datenträgers geändert haben, melden Sie sich bei Ihrem Pod an, um die neue Größe zu überprüfen.  
-   1. Rufen Sie den Datenträgermountpfad ab, den Sie in Ihrem Pod verwendet haben, um auf Ihren Datenträger zuzugreifen.
+7. Wenn Sie die Größe Ihres Datenträgers geändert haben, melden Sie sich bei Ihrem Pod an, um die neue Größe zu überprüfen. 
+   1. Rufen Sie den Datenträgermountpfad ab, den Sie in Ihrem Pod verwendet haben, um auf Ihren Datenträger zuzugreifen. 
       ```
       kubectl describe pod <podname>
       ```
       {: pre}
       
-      Der Datenträgermountpfad wird im Abschnitt **Containers** > **block** > **Mounts** Ihrer CLI-Ausgabe angezeigt.
+      Der Datenträgermountpfad wird im Abschnitt **Containers** > **block** > **Mounts** Ihrer CLI-Ausgabe angezeigt. 
    2. Melden Sie sich beim Pod an. 
       ```
       kubectl exec -it <podname> bash
       ```
       {: pre}
       
-   3. Zeigen Sie die Statistikdaten zur Plattenbelegung an und suchen Sie den Mountpfad für Ihren Datenträger, den Sie zuvor abgerufen haben. Verifizieren Sie, dass die Spalte **Größe** die neue Größe Ihres Datenträgers anzeigt.
+   3. Zeigen Sie die Statistikdaten zur Plattenbelegung an und suchen Sie den Mountpfad für Ihren Datenträger, den Sie zuvor abgerufen haben. Verifizieren Sie, dass die Spalte **Größe** die neue Größe Ihres Datenträgers anzeigt. 
       ```
       df -h
       ```

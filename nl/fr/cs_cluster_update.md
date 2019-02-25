@@ -105,7 +105,7 @@ Lorsque la mappe de configuration n'est pas définie, la valeur par défaut est 
 - [Mettez à jour le maître Kubernetes](#master). La version Kubernetes du noeud worker ne peut pas être supérieure à celle du serveur d'API Kubernetes qui s'exécute sur votre maître Kubernetes.
 - Apportez toutes les modifications indiquées dans _Mise à jour après le maître_ sur la page des [modifications de Kubernetes](cs_versions.html).
 - Pour appliquer une mise à jour de module de correction, consultez le [journal des modifications de version de Kubernetes](cs_versions_changelog.html#changelog).
-- Assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](cs_users.html#platform).</br>
+- Assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](cs_users.html#platform). </br>
 
 Les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. La machine de votre noeud worker est réimagée et les données sont supprimées si elles ne sont pas [stockées hors du pod](cs_storage_planning.html#persistent_storage_overview).
 {: important}

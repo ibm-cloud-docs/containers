@@ -21,15 +21,16 @@ lastupdated: "2018-12-05"
 
 # クラスター・アドオンの変更ログ
 
-{{site.data.keyword.containerlong}} クラスターには、IBM によって自動的に更新されるアドオンが付属しています。一部のアドオンの自動更新を無効にして、マスター・ノードやワーカー・ノードとは別に手動で更新することもできます。各バージョンの変更の要約について、以下のセクションの表にまとめます。
+{{site.data.keyword.containerlong}} クラスターには、IBM によって自動的に更新されるアドオンが付属しています。 一部のアドオンの自動更新を無効にして、マスター・ノードやワーカー・ノードとは別に手動で更新することもできます。 各バージョンの変更の要約について、以下のセクションの表にまとめます。
 {: shortdesc}
 
 ## Ingress ALB アドオンの変更ログ
 {: #alb_changelog}
 
-{{site.data.keyword.containerlong_notm}} クラスター内の Ingress アプリケーション・ロード・バランサー (ALB) アドオンのビルド・バージョンの変更内容を示します。{:shortdesc}
+{{site.data.keyword.containerlong_notm}} クラスター内の Ingress アプリケーション・ロード・バランサー (ALB) アドオンのビルド・バージョンの変更内容を示します。
+{:shortdesc}
 
-Ingress ALB アドオンが更新されると、すべての ALB ポッド内の `nginx-ingress` と `ingress-auth` のコンテナーが最新のビルド・バージョンに更新されます。デフォルトでは、このアドオンに対する自動更新は有効になっていますが、自動更新を無効にして手動で更新することもできます。詳しくは、[Ingress アプリケーション・ロード・バランサーの更新](cs_cluster_update.html#alb)を参照してください。
+Ingress ALB アドオンが更新されると、すべての ALB ポッド内の `nginx-ingress` と `ingress-auth` のコンテナーが最新のビルド・バージョンに更新されます。 デフォルトでは、このアドオンに対する自動更新は有効になっていますが、自動更新を無効にして手動で更新することもできます。 詳しくは、[Ingress アプリケーション・ロード・バランサーの更新](cs_cluster_update.html#alb)を参照してください。
 
 Ingress ALB アドオンのビルドごとの変更の要約については、以下の表を参照してください。
 
@@ -54,7 +55,7 @@ Ingress ALB アドオンのビルドごとの変更の要約については、�
 <td>384 / 246</td>
 <td>2018 年 11 月 14 日</td>
 <td>{{site.data.keyword.appid_full}} のロギング機能とログアウト機能が改善されました。</td>
-<td> `*.containers.mybluemix.net` の自己署名証明書が、自動生成されてクラスターで自動使用される LetsEncrypt 署名付き証明書に置き換えられました。 `*.containers.mybluemix.net` 自己署名証明書は削除されます。</td>
+<td>`*.containers.mybluemix.net` の自己署名証明書が、自動生成されてクラスターで自動使用される LetsEncrypt 署名付き証明書に置き換えられました。 `*.containers.mybluemix.net` 自己署名証明書は削除されます。</td>
 </tr>
 <tr>
 <td>350 / 192</td>

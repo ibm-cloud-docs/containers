@@ -864,10 +864,10 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 ## Modifica della dimensione e dell'IOPS del tuo dispositivo di archiviazione esistente
 {: #change_storage_configuration}
 
-Se vuoi modificare la capacità o le prestazioni di archiviazione, puoi modificare il tuo volume esistente.
+Se vuoi modificare la capacità o le prestazioni di archiviazione, puoi modificare il tuo volume esistente. 
 {: shortdesc}
 
-Per domande sulla fatturazione e per trovare i passi su come utilizzare la console {{site.data.keyword.Bluemix_notm}} per modificare la tua archiviazione, vedi [Espansione della capacità di condivisione file](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity).
+Per domande sulla fatturazione e per trovare i passi su come utilizzare la console {{site.data.keyword.Bluemix_notm}} per modificare la tua archiviazione, vedi [Espansione della capacità di condivisione file](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity). 
 {: tip}
 
 1. Elenca le PVC nel tuo cluster e prendi nota del nome del PV associato dalla colonna **VOLUME**. 
@@ -975,7 +975,7 @@ Per domande sulla fatturazione e per trovare i passi su come utilizzare la conso
       ```
       {: pre}
       
-   3. Mostra le statistiche di utilizzo del disco e trova il percorso server per il tuo volume che hai richiamato in precedenza.
+   3. Mostra le statistiche di utilizzo del disco e trova il percorso server per il tuo volume che hai richiamato in precedenza. 
       ```
       df -h
       ```

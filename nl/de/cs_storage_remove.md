@@ -43,7 +43,7 @@ Dies hängt vom Abrechnungstyp sowie davon ab, welche Elemente Sie löschen. Wen
 
 
 <p class="important">Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](cs_storage_file.html#backup_restore) oder den [Blockspeicher](cs_storage_block.html#backup_restore) eine Sicherung ausführen.</br>
-</br>Wenn Sie ein {{site.data.keyword.Bluemix_dedicated}}-Konto verwenden, müssen Sie die Datenträgerlöschung anfordern, indem Sie [einen Supportfall öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support). </p>
+</br>Wenn Sie ein {{site.data.keyword.Bluemix_dedicated}}-Konto verwenden, müssen Sie die Datenträgerlöschung anfordern, indem Sie [einen Supportfall öffnen](/docs/get-support/howtogetsupport.html#getting-customer-support).</p>
 
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
@@ -72,7 +72,8 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
 
    Wenn die Zurückforderungsrichtlinie `Delete` (Löschen) enthält, werden Ihr persistenter Datenträger und der physische Speicher entfernt, wenn Sie den Persistent Volume Claim entfernen. Wenn die Zurückforderungsrichtlinie `Retain` (Beibehalten) enthält oder Sie Ihren Speicher ohne Speicherklasse bereitgestellt haben, werden Ihr persistenter Datenträger und der physische Speicher nicht entfernt, wenn Sie den Persistent Volume Claim entfernen. Sie müssen den PVC, den persistenten Datenträger und den physischen Speicher separat voneinander entfernen.
 
-   Wenn Ihr Speicher monatlich berechnet wird, wird Ihnen der gesamte Monat auch dann in Rechnung gestellt, wenn Sie den Speicher vor Ende des Abrechnungszyklus entfernen. {: important}
+   Wenn Ihr Speicher monatlich berechnet wird, wird Ihnen der gesamte Monat auch dann in Rechnung gestellt, wenn Sie den Speicher vor Ende des Abrechnungszyklus entfernen.
+   {: important}
 
 3. Entfernen Sie alle Pods, die den Persistent Volume Claim anhängen.
    1. Listen Sie die Pods auf, die den PVC anhängen.
@@ -173,7 +174,7 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    ```
    {: pre}
 
-9. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. Beachten Sie, dass der Löschvorgang mehrere Tage dauern kann. 
+9. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. Beachten Sie, dass der Löschvorgang mehrere Tage dauern kann.
 
    **File Storage:**
    ```

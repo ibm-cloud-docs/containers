@@ -26,7 +26,7 @@ lastupdated: "2018-12-05"
 Visualize informações de mudanças de versão para atualizações principais, secundárias e de correção que estão disponíveis para os clusters do Kubernetes do {{site.data.keyword.containerlong}}. As mudanças incluem atualizações para o Kubernetes e componentes do Provedor do {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
-Para obter mais informações sobre versões principais, secundárias e de correção e ações de preparação entre versões secundárias, consulte [Versões do Kubernetes](cs_versions.html).
+Para obter mais informações sobre versões principais, secundárias e de correção e ações de preparação entre versões secundárias, consulte [Versões do Kubernetes](cs_versions.html). 
 {: tip}
 
 Para obter informações sobre mudanças desde a versão anterior, veja os logs de mudanças a seguir.
@@ -43,7 +43,7 @@ Alguns logs de mudanças são para _fix packs do nó do trabalhador_ e se aplica
 ## Log de mudanças da Versão 1.12
 {: #112_changelog}
 
-Revise o log de mudanças da versão 1.12.
+Revise o log de mudanças da versão 1.12. 
 {: shortdesc}
 
 ### Log de mudanças para 1.12.3_1531, liberado em 5 de dezembro de 2018
@@ -153,7 +153,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.2
 ### Log de mudanças para o fix pack do nó do trabalhador 1.12.2_1528, liberado em 19 de novembro de 2018
 {: #1122_1528}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.12.2_1528.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.12.2_1528. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.12.2_1527">
@@ -180,7 +180,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.12.2_1527, liberado em 7 de novembro de 2018
 {: #1122_1527}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.2_1527.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.12.2_1527. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1533">
@@ -389,7 +389,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.4
 ### Log de mudanças para o fix pack do nó do trabalhador 1.11.3_1534, liberado em 19 de novembro de 2018
 {: #1113_1534}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1534.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1534. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1533">
@@ -416,7 +416,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.11.3_1533, liberado em 7 de novembro de 2018
 {: #1113_1533}
 
-A tabela a seguir mostra as mudanças incluídas na correção 1.11.3_1533.
+A tabela a seguir mostra as mudanças incluídas na correção 1.11.3_1533. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1531">
@@ -454,7 +454,7 @@ A tabela a seguir mostra as mudanças incluídas na correção 1.11.3_1533.
 ### Log de mudanças para fix pack do mestre 1.11.3_1531, liberado em 1 de novembro de 2018
 {: #1113_1531_ha-master}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.11.3_1531.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.11.3_1531. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1527">
@@ -503,7 +503,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestr
 ### Log de mudanças para o fix pack do nó do trabalhador 1.11.3_1531, liberado em 26 de outubro de 2018
 {: #1113_1531}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1531.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1531. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1525">
@@ -529,7 +529,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack de mestre 1.11.3_1527, liberado em 15 de outubro de 2018
 {: #1113_1527}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.11.3_1527.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.11.3_1527. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1524">
@@ -561,7 +561,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestr
 ### Log de mudanças para o fix pack 1.11.3_1525 do nó do trabalhador, liberado em 10 de outubro de 2018
 {: #1113_1525}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1525.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.3_1525. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1524">
@@ -594,7 +594,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.11.3_1524, liberado em 2 de outubro de 2018
 {: #1113_1524}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.3_1524.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.3_1524. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.3_1521">
@@ -633,7 +633,7 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 ### Log de mudanças para 1.11.3_1521, liberado em 20 de setembro de 2018
 {: #1113_1521}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.3_1521.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.3_1521. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.2_1516">
@@ -708,7 +708,7 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 ### Log de mudanças para 1.11.2_1516, liberado em 4 de setembro de 2018
 {: #1112_1516}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2_1516.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2_1516. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.2_1514">
@@ -752,7 +752,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2
 ### Log de mudanças para o fix pack 1.11.2_1514 do nó do trabalhador, liberado em 23 de agosto de 2018
 {: #1112_1514}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.2_1514.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.11.2_1514. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.11.2_1513">
@@ -784,7 +784,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.11.2_1513, liberado em 14 de agosto de 2018
 {: #1112_1513}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2_1513.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.11.2_1513. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.5_1518">
@@ -944,7 +944,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack do nó do trabalhador 1.10.8_1531, liberado em 19 de novembro de 2018
 {: #1108_1531}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1531.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1531. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.8_1530">
@@ -970,7 +970,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.8_1530, liberado em 7 de novembro de 2018
 {: #1108_1530_ha-master}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.8_1530.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.8_1530. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.8_1528">
@@ -1031,7 +1031,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.8
 ### Log de mudanças para o fix pack do nó do trabalhador 1.10.8_1528, liberado em 26 de outubro de 2018
 {: #1108_1528}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1528.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1528. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.8_1527">
@@ -1057,7 +1057,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack de mestre 1.10.8_1527, liberado em 15 de outubro de 2018
 {: #1108_1527}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.10.8_1527.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestre 1.10.8_1527. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.8_1524">
@@ -1089,7 +1089,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do mestr
 ### Log de mudanças para o fix pack 1.10.8_1525 do nó do trabalhador, liberado em 10 de outubro de 2018
 {: #1108_1525}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1525.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.8_1525. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.8_1524">
@@ -1122,7 +1122,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.8_1524, liberado em 2 de outubro de 2018
 {: #1108_1524}
 
-A tabela a seguir mostra as mudanças incluídas na correção 1.10.8_1524.
+A tabela a seguir mostra as mudanças incluídas na correção 1.10.8_1524. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.7_1520">
@@ -1173,7 +1173,7 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 ### Log de mudanças para o fix pack 1.10.7_1521 do nó do trabalhador, liberado em 20 de setembro de 2018
 {: #1107_1521}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.7_1521.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.7_1521. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.7_1520">
@@ -1225,7 +1225,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.7_1520, liberado em 4 de setembro de 2018
 {: #1107_1520}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.7_1520.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.7_1520. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.5_1519">
@@ -1275,7 +1275,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.7
 ### Log de mudanças para o fix pack 1.10.5_1519 do nó do trabalhador, liberado em 23 de agosto de 2018
 {: #1105_1519}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.5_1519.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.5_1519. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.5_1518">
@@ -1308,7 +1308,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.10.5_1518 do nó do trabalhador, liberado em 13 de agosto de 2018
 {: #1105_1518}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.5_1518.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.5_1518. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.5_1517">
@@ -1334,7 +1334,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.5_1517, liberado em 27 de julho de 2018
 {: #1105_1517}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.5_1517.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.5_1517. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.3_1514">
@@ -1390,7 +1390,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.5
 ### Log de mudanças para o fix pack do nó do trabalhador 1.10.3_1514, liberado em 3 de julho de 2018
 {: #1103_1514}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.3_1514.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.3_1514. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.3_1513">
@@ -1417,7 +1417,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack do nó do trabalhador 1.10.3_1513, liberado em 21 de junho de 2018
 {: #1103_1513}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.3_1513.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.3_1513. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.3_1512">
@@ -1443,7 +1443,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.3_1512, liberado em 12 de junho de 2018
 {: #1103_1512}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.3_1512.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.3_1512. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.1_1510">
@@ -1501,7 +1501,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.3
 ### Log de mudanças para o fix pack 1.10.1_1510 do nó do trabalhador, liberado em 18 de maio de 2018
 {: #1101_1510}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.1_1510.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.1_1510. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.1_1509">
@@ -1527,7 +1527,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.10.1_1509 do nó do trabalhador, liberado em 16 de maio de 2018
 {: #1101_1509}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.1_1509.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.10.1_1509. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.10.1_1508">
@@ -1553,7 +1553,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.10.1_1508, liberado em 1º de maio de 2018
 {: #1101_1508}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.1_1508.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.10.1_1508. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.7_1510">
@@ -1683,7 +1683,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.11_1536, liberado em 19 de novembro de 2018
 {: #1911_1536}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.11_1536.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.11_1536. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1532">
@@ -1733,7 +1733,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.11
 ### Log de mudanças para a correção do nó do trabalhador 1.9.10_1532, liberado em 7 de novembro de 2018
 {: #1910_1532}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.11_1532.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.11_1532. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1531">
@@ -1759,7 +1759,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack do nó do trabalhador 1.9.10_1531, liberado em 26 de outubro de 2018
 {: #1910_1531}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1531.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1531. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1530">
@@ -1785,7 +1785,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack de mestre 1.9.10_1530 liberado em 15 de outubro de 2018
 {: #1910_1530}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1530.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1530. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1527">
@@ -1811,7 +1811,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.9.10_1528 do nó do trabalhador, liberado em 10 de outubro de 2018
 {: #1910_1528}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1528.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1528. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1527">
@@ -1844,7 +1844,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.10_1527, liberado em 2 de outubro de 2018
 {: #1910_1527}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10_1527.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10_1527. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1523">
@@ -1877,7 +1877,7 @@ Além disso, agora quando você atualiza o cluster mestre, a classe de armazenam
 ### Log de mudanças para o fix pack 1.9.10_1524 do nó do trabalhador, liberado em 20 de setembro de 2018
 {: #1910_1524}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1524.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.10_1524. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.10_1523">
@@ -1929,7 +1929,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.10_1523, liberado em 4 de setembro de 2018
 {: #1910_1523}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10_1523.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10_1523. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.9_1522">
@@ -1973,7 +1973,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.10
 ### Log de mudanças para o fix pack 1.9.9_1522 do nó do trabalhador, liberado em 23 de agosto de 2018
 {: #199_1522}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.9_1522.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.9_1522. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.9_1521">
@@ -2006,7 +2006,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.9.9_1521 do nó do trabalhador, liberado em 13 de agosto de 2018
 {: #199_1521}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.9_1521.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.9_1521. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.9_1520">
@@ -2032,7 +2032,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.9_1520, liberado em 27 de julho de 2018
 {: #199_1520}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.9_1520.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.9_1520. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.8_1517">
@@ -2082,7 +2082,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.9_
 ### Log de mudanças para o fix pack do nó do trabalhador 1.9.8_1517, liberado em 3 de julho de 2018
 {: #198_1517}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.8_1517.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.8_1517. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.8_1516">
@@ -2109,7 +2109,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack do nó do trabalhador 1.9.8_1516, liberado em 21 de junho de 2018
 {: #198_1516}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.8_1516.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.8_1516. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.8_1515">
@@ -2135,7 +2135,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.8_1515, liberado em 19 de junho de 2018
 {: #198_1515}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.8_1515.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.8_1515. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.7_1513">
@@ -2180,7 +2180,7 @@ A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.8_
 ### Log de mudanças para o fix pack do trabalhador do trabalhador 1.9.7_1513, liberado em 11 de junho de 2018
 {: #197_1513}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1513.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1513. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.7_1512">
@@ -2206,7 +2206,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.9.7_1512 do nó do trabalhador, liberado em 18 de maio de 2018
 {: #197_1512}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1512.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1512. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.7_1511">
@@ -2232,7 +2232,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para o fix pack 1.9.7_1511 nó do trabalhador, liberado em 16 de maio de 2018
 {: #197_1511}
 
-A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1511.
+A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó do trabalhador 1.9.7_1511. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.7_1510">
@@ -2258,7 +2258,7 @@ A tabela a seguir mostra as mudanças que estão incluídas no fix pack do nó d
 ### Log de mudanças para 1.9.7_1510, liberado em 30 de abril de 2018
 {: #197_1510}
 
-A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.7_1510.
+A tabela a seguir mostra as mudanças que estão incluídas na correção 1.9.7_1510. 
 {: shortdesc}
 
 <table summary="Mudanças que foram feitas desde a versão 1.9.3_1506">

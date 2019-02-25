@@ -204,14 +204,14 @@ Kubernetes 1.10.11 内で使用できるすべての `kubectl` コマンドは�
 
 2.  {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 複数の {{site.data.keyword.Bluemix_notm}} の組織が割り当てられている場合は、対象クラスターが作成されている組織を選択してください。 クラスターは組織に固有のものですが、{{site.data.keyword.Bluemix_notm}} スペースからは独立しています。 そのため、スペースを選択する必要はありません。
 
-3.  デフォルト以外のリソース・グループにクラスターを作成して操作するには、そのリソース・グループをターゲットとして設定します。 各クラスターが属するリソース・グループを表示するには、`ibmcloud ks clusters` を実行します。**注**: そのリソース・グループに対する [**Viewer** アクセス権限](cs_users.html#platform)が必要です。
+3.  デフォルト以外のリソース・グループにクラスターを作成して操作するには、そのリソース・グループをターゲットとして設定します。 各クラスターが属するリソース・グループを表示するには、`ibmcloud ks clusters` を実行します。 **注**: そのリソース・グループに対する [**Viewer** アクセス権限](cs_users.html#platform)が必要です。
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {: pre}
 
 4.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域とは別の地域の Kubernetes クラスターを作成または使用するには、その地域をターゲットにします。
-```
+    ```
     ibmcloud ks region-set
     ```
     {: pre}
@@ -406,7 +406,7 @@ CLI をアンインストールするには、以下のようにします。
 
 {{site.data.keyword.containerlong_notm}} API にはヘッダー情報が必要です。これは、API 要求に指定する必要があります。また、使用する API に応じて異なる場合があります。 使用する API に必要なヘッダー情報を調べるには、[{{site.data.keyword.containerlong_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-api) を参照してください。
 
-{{site.data.keyword.containerlong_notm}} で認証を受けるために、{{site.data.keyword.Bluemix_notm}} 資格情報を使用して生成した {{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) トークン (クラスターの作成に使用した {{site.data.keyword.Bluemix_notm}} アカウント ID が入っているもの) を渡す必要があります。{{site.data.keyword.Bluemix_notm}} での認証方法に応じて、{{site.data.keyword.Bluemix_notm}} IAM トークンの作成を自動化するための次のオプションから選択できます。
+{{site.data.keyword.containerlong_notm}} で認証を受けるために、{{site.data.keyword.Bluemix_notm}} 資格情報を使用して生成した {{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) トークン (クラスターの作成に使用した {{site.data.keyword.Bluemix_notm}} アカウント ID が入っているもの) を渡す必要があります。 {{site.data.keyword.Bluemix_notm}} での認証方法に応じて、{{site.data.keyword.Bluemix_notm}} IAM トークンの作成を自動化するための次のオプションから選択できます。
 
 [API Swagger JSON ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api-json) を使用して、自動化作業の一部として API と対話可能なクライアントを生成することもできます。
 {: tip}
@@ -429,7 +429,7 @@ CLI をアンインストールするには、以下のようにします。
 </tbody>
 </table>
 
-1.  {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンを作成します。要求に含まれる本文情報は、使用する {{site.data.keyword.Bluemix_notm}} 認証方式によって異なります。 以下の値を置き換えます。
+1.  {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンを作成します。 要求に含まれる本文情報は、使用する {{site.data.keyword.Bluemix_notm}} 認証方式によって異なります。 以下の値を置き換えます。
   - _&lt;username&gt;_: {{site.data.keyword.Bluemix_notm}} ユーザー名。
   - _&lt;password&gt;_: {{site.data.keyword.Bluemix_notm}} パスワード。
   - _&lt;api_key&gt;_: {{site.data.keyword.Bluemix_notm}} API キー。
@@ -665,7 +665,7 @@ CLI をアンインストールするには、以下のようにします。
 ## API を使用した {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得
 {: #cs_api_refresh}
 
-API を介して発行されるすべての {{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) アクセス・トークンは、1 時間後に有効期限が切れます。{{site.data.keyword.Bluemix_notm}} API へのアクセスを確保するには、アクセス・トークンを定期的にリフレッシュする必要があります。 同じ手順を使用して、新しいリフレッシュ・トークンを取得できます。
+API を介して発行されるすべての {{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) アクセス・トークンは、1 時間後に有効期限が切れます。 {{site.data.keyword.Bluemix_notm}} API へのアクセスを確保するには、アクセス・トークンを定期的にリフレッシュする必要があります。 同じ手順を使用して、新しいリフレッシュ・トークンを取得できます。
 {:shortdesc}
 
 まず始めに、新しいアクセス・トークンを要求するために使用できる {{site.data.keyword.Bluemix_notm}} IAM リフレッシュ・トークンまたは {{site.data.keyword.Bluemix_notm}} API キーを用意してください。
@@ -743,9 +743,9 @@ API を介して発行されるすべての {{site.data.keyword.Bluemix_notm}} I
 ## CLI を使用した {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得
 {: #cs_cli_refresh}
 
-新しい CLI セッションを開始する場合、または現在の CLI セッションで 24 時間が経過した場合は、`ibmcloud ks cluster-config<cluster_name>` を実行してクラスターのコンテキストを設定する必要があります。このコマンドでクラスターのコンテキストを設定すると、Kubernetes クラスターの `kubeconfig` ファイルがダウンロードされます。さらに、認証を提供するために、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) ID トークンおよびリフレッシュ・トークンが発行されます。
+新しい CLI セッションを開始する場合、または現在の CLI セッションで 24 時間が経過した場合は、`ibmcloud ks cluster-config<cluster_name>` を実行してクラスターのコンテキストを設定する必要があります。 このコマンドでクラスターのコンテキストを設定すると、Kubernetes クラスターの `kubeconfig` ファイルがダウンロードされます。 さらに、認証を提供するために、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) ID トークンおよびリフレッシュ・トークンが発行されます。
 {: shortdesc}
 
-**ID トークン**: CLI を介して発行されるすべての IAM ID トークンは、1 時間後に有効期限が切れます。ID トークンの有効期限が切れると、リフレッシュ・トークンがトークン・プロバイダーに送信され、ID トークンがリフレッシュされます。認証がリフレッシュされ、クラスターに対して引き続きコマンドを実行できるようになります。
+**ID トークン**: CLI を介して発行されるすべての IAM ID トークンは、1 時間後に有効期限が切れます。 ID トークンの有効期限が切れると、リフレッシュ・トークンがトークン・プロバイダーに送信され、ID トークンがリフレッシュされます。 認証がリフレッシュされ、クラスターに対して引き続きコマンドを実行できるようになります。
 
-**リフレッシュ・トークン**: リフレッシュ・トークンは 30 日ごとに有効期限が切れます。リフレッシュ・トークンの有効期限が切れると、ID トークンをリフレッシュできなくなるので、CLI でコマンドの実行を続けられなくなります。`ibmcloud ks cluster-config <cluster_name>` を実行すると、新しいリフレッシュ・トークンを取得できます。このコマンドは ID トークンもリフレッシュします。
+**リフレッシュ・トークン**: リフレッシュ・トークンは 30 日ごとに有効期限が切れます。 リフレッシュ・トークンの有効期限が切れると、ID トークンをリフレッシュできなくなるので、CLI でコマンドの実行を続けられなくなります。 `ibmcloud ks cluster-config <cluster_name>` を実行すると、新しいリフレッシュ・トークンを取得できます。 このコマンドは ID トークンもリフレッシュします。

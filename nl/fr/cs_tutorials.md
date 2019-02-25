@@ -93,7 +93,7 @@ Pendant la mise à disposition de votre cluster, installez les interfaces CLI su
     {: pre}
 
 5.  Pour déployer des applications dans vos clusters, [installez l'interface CLI de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Pour exécuter des commandes à l'aide de l'interface CLI de Kubernetes, utilisez le préfixe `kubectl`.
-    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version actuelle par défaut de Kubernetes d'{{site.data.keyword.containerlong_notm}} est la version 1.10.11. 
+    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version actuelle par défaut de Kubernetes d'{{site.data.keyword.containerlong_notm}} est la version 1.10.11.
 
         OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
 
@@ -165,7 +165,7 @@ Configurez un référentiel d'images privé dans {{site.data.keyword.registrysho
     Si vous disposez d'un ID fédéré, utilisez l'indicateur `--sso` pour vous connecter. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie de l'interface de ligne de commande pour extraire votre code d'accès à usage unique.
     {: tip}
 
-2.  Si le cluster se trouve dans un autre groupe de ressources que `default`, ciblez ce groupe de ressources. Pour voir à quel groupe de ressources appartient chaque cluster, exécutez la commande `ibmcloud ks clusters`. 
+2.  Si le cluster se trouve dans un autre groupe de ressources que `default`, ciblez ce groupe de ressources. Pour voir à quel groupe de ressources appartient chaque cluster, exécutez la commande `ibmcloud ks clusters`.
    ```
    ibmcloud target -g <resource_group_name>
    ```

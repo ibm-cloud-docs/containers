@@ -468,7 +468,7 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: screen}
 
 {: tsCauses}
-Sie haben möglicherweise die falsche Speicherklasse verwendet, um auf das vorhandene Bucket zuzugreifen, oder Sie haben versucht, auf ein Bucket zuzugreifen, das Sie nicht erstellt haben. 
+Sie haben möglicherweise die falsche Speicherklasse verwendet, um auf das vorhandene Bucket zuzugreifen, oder Sie haben versucht, auf ein Bucket zuzugreifen, das Sie nicht erstellt haben.
 
 {: tsResolve}
 1. Wählen Sie im [{{site.data.keyword.Bluemix_notm}}-Dashboard ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/dashboard/apps) Ihre {{site.data.keyword.cos_full_notm}}-Serviceinstanz aus.
@@ -654,6 +654,7 @@ von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren
 finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
--   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support). Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
+-   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 {: tip}
 

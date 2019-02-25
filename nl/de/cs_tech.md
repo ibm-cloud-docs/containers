@@ -147,11 +147,11 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>Der OpenVPN-Server arbeitet mit dem OpenVPN-Client zusammen, um den Master sicher mit dem Workerknoten zu verbinden. Diese Verbindung unterstützt `apiserver proxy`-Aufrufe für Ihre Pods und Services sowie `kubectl exec`-, `attach`- und `logs`-Aufrufe für 'kubelet'. </td>
+    <td>Der OpenVPN-Server arbeitet mit dem OpenVPN-Client zusammen, um den Master sicher mit dem Workerknoten zu verbinden. Diese Verbindung unterstützt `apiserver proxy`-Aufrufe für Ihre Pods und Services sowie `kubectl exec`-, `attach`- und `logs`-Aufrufe für 'kubelet'.</td>
     </tr>
     <tr>
     <td>etcd</td>
-    <td>'etcd' ist ein hoch verfügbarer Schlüsselwertspeicher, in dem der Status aller Kubernetes-Ressourcen eines Clusters gespeichert ist, wie z. B. von Services, Implementierungen und Pods. Daten in 'etcd' werden in einer verschlüsselten Speicherinstanz gesichert, die von IBM verwaltet wird. </td>
+    <td>'etcd' ist ein hoch verfügbarer Schlüsselwertspeicher, in dem der Status aller Kubernetes-Ressourcen eines Clusters gespeichert ist, wie z. B. von Services, Implementierungen und Pods. Daten in 'etcd' werden in einer verschlüsselten Speicherinstanz gesichert, die von IBM verwaltet wird.</td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -175,12 +175,12 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     <tr>
     <td>ibm-master-proxy</td>
     <td>kube-system</td>
-    <td>Für Cluster, auf denen Kubernetes Version 1.10 oder höher ausgeführt wird, leitet `ibm-master-proxy` Anforderungen vom Workerknoten an die IP-Adressen der hoch verfügbaren Master-Replikate weiter. In Einzelzonenclustern verfügt der Master über drei Replikate auf separaten Hosts mit einer Master-IP-Adresse und einem Domänennamen. Für Cluster in einer mehrzonenfähigen Zone verfügt der Master über drei Replikate, die über Zonen verteilt sind. Jeder Master hat hier seine eigene IP-Adresse, die bei DNS registriert ist, und einen Domänennamen für den gesamten Cluster-Master. </td>
+    <td>Für Cluster, auf denen Kubernetes Version 1.10 oder höher ausgeführt wird, leitet `ibm-master-proxy` Anforderungen vom Workerknoten an die IP-Adressen der hoch verfügbaren Master-Replikate weiter. In Einzelzonenclustern verfügt der Master über drei Replikate auf separaten Hosts mit einer Master-IP-Adresse und einem Domänennamen. Für Cluster in einer mehrzonenfähigen Zone verfügt der Master über drei Replikate, die über Zonen verteilt sind. Jeder Master hat hier seine eigene IP-Adresse, die bei DNS registriert ist, und einen Domänennamen für den gesamten Cluster-Master.</td>
     </tr>
     <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>Der OpenVPN-Client arbeitet mit dem OpenVPN-Server zusammen, um den Master sicher mit dem Workerknoten zu verbinden. Diese Verbindung unterstützt `apiserver proxy`-Aufrufe für Ihre Pods und Services sowie `kubectl exec`-, `attach`- und `logs`-Aufrufe für 'kubelet'. </td>
+    <td>Der OpenVPN-Client arbeitet mit dem OpenVPN-Server zusammen, um den Master sicher mit dem Workerknoten zu verbinden. Diese Verbindung unterstützt `apiserver proxy`-Aufrufe für Ihre Pods und Services sowie `kubectl exec`-, `attach`- und `logs`-Aufrufe für 'kubelet'.</td>
     </tr>
     <tr>
     <td>kubelet</td>
@@ -196,10 +196,10 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     <td>calico</td>
     <td>kube-system</td>
     <td>Calico verwaltet die Netzrichtlinien für Ihren Cluster und besteht aus den folgenden Komponenten.
-<ul>
-    <li>**calico-cni**: Die Container-Netzschnittstelle (CNI – Container Network Interface) von Calico verwaltet die Netzkonnektivität von Containern und entfernt zugeordnete Ressourcen, wenn ein Container gelöscht wird. </li>
-    <li>**calico-ipam**: Die IP-Adressverwaltung von Calico (IPAM – IP Address Management) verwaltet die Zuordnung von IP-Adressen zu Containern. </li>
-    <li>**calico-node**: Der Calico-Knoten ist ein Container, der die verschiedenen Komponenten bündelt, die für die Vernetzung von Containern mit Calico erforderlich sind. </li>
+    <ul>
+    <li>**calico-cni**: Die Container-Netzschnittstelle (CNI – Container Network Interface) von Calico verwaltet die Netzkonnektivität von Containern und entfernt zugeordnete Ressourcen, wenn ein Container gelöscht wird.</li>
+    <li>**calico-ipam**: Die IP-Adressverwaltung von Calico (IPAM – IP Address Management) verwaltet die Zuordnung von IP-Adressen zu Containern.</li>
+    <li>**calico-node**: Der Calico-Knoten ist ein Container, der die verschiedenen Komponenten bündelt, die für die Vernetzung von Containern mit Calico erforderlich sind.</li>
     <li>**calico-policy-controller**: Der Richtliniencontroller von Calico überwacht den eingehenden und ausgehenden Netzverkehr auf Konformität mit festgelegten Netzrichtlinien. Wenn der Datenverkehr im Cluster nicht zulässig ist, wird der Zugriff auf den Cluster blockiert. Der Richtliniencontroller von Calico wird auch verwendet, um Netzrichtlinien für einen Cluster zu erstellen und festzulegen.</li></ul></td>
     </tr>
     <tr>
@@ -210,7 +210,7 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>Das Kubernetes-Dashboard ist eine webbasierte Benutzerschnittstelle, die es Benutzern ermöglicht, den Cluster und die Anwendungen, die im Cluster ausgeführt werden, zu verwalten und auftretende Fehler zu beheben. </td>
+    <td>Das Kubernetes-Dashboard ist eine webbasierte Benutzerschnittstelle, die es Benutzern ermöglicht, den Cluster und die Anwendungen, die im Cluster ausgeführt werden, zu verwalten und auftretende Fehler zu beheben.</td>
     </tr>
     <tr>
     <td>heapster</td>

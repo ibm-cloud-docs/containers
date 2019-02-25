@@ -165,7 +165,7 @@ Si vous ne pouvez pas utiliser l'une des classes de stockage fournies, vous pouv
 ### Modification ou mise à jour pour passer à une autre classe de stockage
 {: #update_storageclass}
 
-Avec le provisionnement dynamique de stockage persistant à l'aide d'une classe de stockage, vous mettez à disposition le stockage persistant avec une configuration spécifique. Vous ne pouvez pas modifier le nom de la classe de stockage ou le type de stockage que vous avez mis à disposition. Cependant, vous avez la possibilité d'effectuer une mise à l'échelle de votre stockage comme indiqué dans le tableau suivant.
+Avec le provisionnement dynamique de stockage persistant à l'aide d'une classe de stockage, vous mettez à disposition le stockage persistant avec une configuration spécifique. Vous ne pouvez pas modifier le nom de la classe de stockage ou le type de stockage que vous avez mis à disposition. Cependant, vous avez la possibilité d'effectuer une mise à l'échelle de votre stockage comme indiqué dans le tableau suivant. 
 {: shortdesc}
 
 <table> 

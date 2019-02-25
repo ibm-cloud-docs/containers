@@ -105,7 +105,7 @@ Kubernetes バージョン 1.10 以降のクラスターでは、Kubernetes ダ�
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td><b>Kubernetes v1.10 以降でのみ</b>、<code>kube-system</code> 名前空間で提供されます。すべてのポッドに対し、Kubernetes ダッシュボードへのアクセスをブロックします。このポリシーは、ダッシュボードへの {{site.data.keyword.Bluemix_notm}} コンソールからのアクセス、または <code>kubectl proxy</code> を使用したアクセスには影響しません。 ダッシュボードへのアクセスを必要とするポッドの場合は、<code>kubernetes-dashboard-policy: allow</code> ラベルを持つ名前空間にそのポッドをデプロイします。</td>
+  <td><b>Kubernetes v1.10 以降でのみ</b>、<code>kube-system</code> 名前空間で提供されます。すべてのポッドに対し、Kubernetes ダッシュボードへのアクセスをブロックします。 このポリシーは、ダッシュボードへの {{site.data.keyword.Bluemix_notm}} コンソールからのアクセス、または <code>kubectl proxy</code> を使用したアクセスには影響しません。 ダッシュボードへのアクセスを必要とするポッドの場合は、<code>kubernetes-dashboard-policy: allow</code> ラベルを持つ名前空間にそのポッドをデプロイします。</td>
  </tr>
 </tbody>
 </table>
@@ -216,7 +216,7 @@ Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラ�
 ### Kubernetes バージョン 1.9 以前を実行しているクラスター用のバージョン 1.6.3 の Calico CLI のインストールおよび構成 (非推奨)
 {: #1.9_install}
 
-Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。それより前のバージョンの Kubernetes はサポートされていません。可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
+Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。 それより前のバージョンの Kubernetes はサポートされていません。 可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
 {: note}
 
 1. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](cs_cli_install.html#cs_cli_configure)。 `ibmcloud ks cluster-config` コマンドで `--admin` オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。 このダウンロードには、インフラストラクチャー・ポートフォリオにアクセスし、ワーカー・ノードで Calico コマンドを実行するためのキーも含まれています。
@@ -388,8 +388,7 @@ CLI 構成およびポリシーに関する Calico バージョンの互換性�
 * [Kubernetes バージョン 1.10 以降のクラスター](#1.10_examine_policies)
 * [Kubernetes バージョン 1.9 以前のクラスター (非推奨)](#1.9_examine_policies)
 
-Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。それより前のバージョンの Kubernetes はサポートされていません。可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
-Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラスターを更新する前に、[Calico v3 への更新の準備](cs_versions.html#110_calicov3)を確認してください。
+Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。 それより前のバージョンの Kubernetes はサポートされていません。 可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。 Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラスターを更新する前に、[Calico v3 への更新の準備](cs_versions.html#110_calicov3)を確認してください。
 {: note}
 
 ### Kubernetes バージョン 1.10 以降を実行しているクラスター内のネットワーク・ポリシーの表示
@@ -436,7 +435,7 @@ Linux および Mac ユーザーは、`calicoctl` コマンドに `--config=file
 ### Kubernetes バージョン 1.9 以前を実行しているクラスター内のネットワーク・ポリシーの表示 (非推奨)
 {: #1.9_examine_policies}
 
-Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。それより前のバージョンの Kubernetes はサポートされていません。可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
+Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。 それより前のバージョンの Kubernetes はサポートされていません。 可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
 {: note}
 
 Linux ユーザーは、`calicoctl` コマンドに `--config=filepath/calicoctl.cfg` フラグを含める必要はありません。
@@ -486,8 +485,7 @@ Calico ポリシーを作成するには、以下の手順を実行します。 
 * [Kubernetes バージョン 1.10 以降のクラスター](#1.10_create_new)
 * [Kubernetes バージョン 1.9 以前のクラスター (非推奨)](#1.9_create_new)
 
-Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。それより前のバージョンの Kubernetes はサポートされていません。可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
-Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラスターを更新する前に、[Calico v3 への更新の準備](cs_versions.html#110_calicov3)を確認してください。
+Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。 それより前のバージョンの Kubernetes はサポートされていません。 可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。 Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラスターを更新する前に、[Calico v3 への更新の準備](cs_versions.html#110_calicov3)を確認してください。
 {: tip}
 
 ### Kubernetes バージョン 1.10 以降を実行しているクラスターでの Calico ポリシーの追加
@@ -521,7 +519,7 @@ Kubernetes バージョン 1.9 以前からバージョン 1.10 以降にクラ�
 ### Kubernetes バージョン 1.9 以前を実行しているクラスターでの Calico ポリシーの追加 (非推奨)
 {: #1.9_create_new}
 
-Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。それより前のバージョンの Kubernetes はサポートされていません。可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
+Kubernetes バージョン 1.9 は非推奨であり、2018 年 12 月 27 日にサポートされなくなります。 それより前のバージョンの Kubernetes はサポートされていません。 可能な限り早く、[サポートされるバージョン](cs_versions.html#cs_versions)を実行するクラスターに[更新する](cs_cluster_update.html#update)か、そのようなクラスターを[作成](cs_clusters.html#clusters)してください。
 {: note}
 
 開始前に、以下のことを行います。
@@ -673,7 +671,7 @@ Calico ポリシーを使用して、プライベート・ネットワーク上�
 
 3. プライベート・ホスト・エンドポイントのポリシーをセットアップします。
     1. `generic-privatehostendpoint.yaml` ポリシーを開きます。
-    2. `<worker_name>` をワーカー・ノードの名前に置き換え、`<worker-node-private-ip>` をワーカー・ノードのプライベート IP アドレスに置き換えます。ワーカー・ノードのプライベート IP を確認するには、`ibmcloud ks workers --cluster <my_cluster>` を実行します。
+    2. `<worker_name>` をワーカー・ノードの名前に置き換え、`<worker-node-private-ip>` をワーカー・ノードのプライベート IP アドレスに置き換えます。 ワーカー・ノードのプライベート IP を確認するには、`ibmcloud ks workers --cluster <my_cluster>` を実行します。
     3. クラスター内の各ワーカー・ノードの新しいセクションでこのステップを繰り返します。 **注**: ワーカー・ノードをクラスターに追加するたびに、新しいエントリーを使用してホスト・エンドポイント・ファイルを更新する必要があります。
 
 4. すべてのポリシーをクラスターに適用します。

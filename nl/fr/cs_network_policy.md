@@ -388,8 +388,7 @@ La compatibilité entre les versions de Calico pour la configuration de l'interf
 * [Clusters Kubernetes version 1.10 ou ultérieure](#1.10_examine_policies)
 * [Clusters Kubernetes version 1.9 ou antérieure (déprécié)](#1.9_examine_policies)
 
-La version 1.9 de Kubernetes est dépréciée et n'est plus prise en charge à partir du 27 décembre 2018. Les versions antérieures de Kubernetes ne sont pas prises en charge. Dès que possible, [mettez à jour](cs_cluster_update.html#update) ou [créez](cs_clusters.html#clusters) des clusters qui exécutent une [version prise en charge](cs_versions.html#cs_versions).
-Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieure à la version 1.10 ou ultérieure, consultez la rubrique [Préparation à la mise à jour vers Calico v3](cs_versions.html#110_calicov3).
+La version 1.9 de Kubernetes est dépréciée et n'est plus prise en charge à partir du 27 décembre 2018. Les versions antérieures de Kubernetes ne sont pas prises en charge. Dès que possible, [mettez à jour](cs_cluster_update.html#update) ou [créez](cs_clusters.html#clusters) des clusters qui exécutent une [version prise en charge](cs_versions.html#cs_versions). Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieure à la version 1.10 ou ultérieure, consultez la rubrique [Préparation à la mise à jour vers Calico v3](cs_versions.html#110_calicov3).
 {: note}
 
 ### Afficher les règles réseau dans les clusters exécutant Kubernetes version 1.10 ou ultérieure
@@ -486,8 +485,7 @@ Pour créer des règles Calico, procédez comme suit : La compatibilité entre l
 * [Clusters Kubernetes version 1.10 ou ultérieure](#1.10_create_new)
 * [Clusters Kubernetes version 1.9 ou antérieure (déprécié)](#1.9_create_new)
 
-La version 1.9 de Kubernetes est dépréciée et n'est plus prise en charge à partir du 27 décembre 2018. Les versions antérieures de Kubernetes ne sont pas prises en charge. Dès que possible, [mettez à jour](cs_cluster_update.html#update) ou [créez](cs_clusters.html#clusters) des clusters qui exécutent une [version prise en charge](cs_versions.html#cs_versions).
-Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieure à la version 1.10 ou ultérieure, consultez la rubrique [Préparation à la mise à jour vers Calico v3](cs_versions.html#110_calicov3).
+La version 1.9 de Kubernetes est dépréciée et n'est plus prise en charge à partir du 27 décembre 2018. Les versions antérieures de Kubernetes ne sont pas prises en charge. Dès que possible, [mettez à jour](cs_cluster_update.html#update) ou [créez](cs_clusters.html#clusters) des clusters qui exécutent une [version prise en charge](cs_versions.html#cs_versions). Avant de mettre à jour votre cluster de la version Kubernetes 1.9 ou antérieure à la version 1.10 ou ultérieure, consultez la rubrique [Préparation à la mise à jour vers Calico v3](cs_versions.html#110_calicov3).
 {: tip}
 
 ### Ajout de règles Calico dans les clusters exécutant Kubernetes version 1.10 ou ultérieure
@@ -559,7 +557,7 @@ Avant de commencer :
 [Par défaut](#default_policy), les services Kubernetes NodePort et LoadBalancer sont conçus pour rendre accessible votre application sur toutes les interfaces de cluster publiques et privées. Vous pouvez toutefois utiliser des règles Calico pour bloquer le trafic entrant vers vos services en fonction de l'origine ou de la destination du trafic.
 {:shortdesc}
 
-Les règles par défaut de Kubernetes et Calico sont difficiles à appliquer pour protéger les services Kubernetes NodePort et LoadBalancer en raison des règles Iptables DNAT générées pour ces services. Cependant, les règles pre-DNAT empêchent le trafic spécifié d'atteindre vos applications car elles génèrent et appliquent des règles Iptables avant que Kubernetes utilise la fonction DNAT standard pour acheminer le trafic vers les pods. 
+Les règles par défaut de Kubernetes et Calico sont difficiles à appliquer pour protéger les services Kubernetes NodePort et LoadBalancer en raison des règles Iptables DNAT générées pour ces services. Cependant, les règles pre-DNAT empêchent le trafic spécifié d'atteindre vos applications car elles génèrent et appliquent des règles Iptables avant que Kubernetes utilise la fonction DNAT standard pour acheminer le trafic vers les pods.
 
 Quelques utilisations classiques des règles réseau pre-DNAT Calico :
 
@@ -805,7 +803,7 @@ La section `spec.podSelector.matchLabels` répertorie les libellés pour le serv
 
 Le trafic peut désormais circuler des microservices Finance vers le service de back end Srv1. Le service de back end Srv1 de Accounts peut répondre aux microservices Finance, mais une connexion de trafic inverse n'est pas possible.
 
-Dans cet exemple, l'ensemble du trafic en provenance de tous les microservices dans l'espace de nom Finance est autorisé. Vous ne pouvez pas autoriser le trafic en provenance de pods d'application spécifiques d'un autre espace de nom car les éléments `podSelector` et `namespaceSelector` ne peuvent pas être combinés. 
+Dans cet exemple, l'ensemble du trafic en provenance de tous les microservices dans l'espace de nom Finance est autorisé. Vous ne pouvez pas autoriser le trafic en provenance de pods d'application spécifiques d'un autre espace de nom car les éléments `podSelector` et `namespaceSelector` ne peuvent pas être combinés.
 
 ## Consignation du trafic refusé
 {: #log_denied}

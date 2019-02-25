@@ -490,8 +490,7 @@ Conditions requises :
 
 Avant de commencer : Configurez le routage entrant et sortant du trafic réseau de votre entreprise afin d'utiliser le réseau {{site.data.keyword.Bluemix_dedicated_notm}} qui exploitera le sous-réseau géré par l'utilisateur.
 
-1. Pour utiliser votre propre sous-réseau, [ouvrez un cas de support](/docs/get-support/howtogetsupport.html#getting-customer-support) et fournissez la liste des routages de sous-réseaux CIDR que vous désirez utiliser.
-    **Remarque **: la manière dont les ALB et les équilibreurs de charge sont gérés pour la connectivité sur site et la connectivité de compte interne diffère selon le format du CIDR de sous-réseau. Voir la dernière étape pour les différences de configuration.
+1. Pour utiliser votre propre sous-réseau, [ouvrez un cas de support](/docs/get-support/howtogetsupport.html#getting-customer-support) et fournissez la liste des routages de sous-réseaux CIDR que vous désirez utiliser. **Remarque **: la manière dont les ALB et les équilibreurs de charge sont gérés pour la connectivité sur site et la connectivité de compte interne diffère selon le format du CIDR de sous-réseau. Voir la dernière étape pour les différences de configuration.
 
 2. Après qu'{{site.data.keyword.IBM_notm}} provisionne les sous-réseaux gérés par l'utilisateur, rendez le sous-réseau disponible pour votre cluster Kubernetes.
 

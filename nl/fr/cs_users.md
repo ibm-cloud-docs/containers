@@ -219,7 +219,7 @@ Pour accéder au portefeuille de l'infrastructure IBM Cloud (SoftLayer), vous ut
 
 {{site.data.keyword.containerlong_notm}} accède au portefeuille de l'infrastructure IBM Cloud (SoftLayer) à l'aide d'une clé d'API. Cette clé d'API contient les données d'identification d'un utilisateur ayant accès au compte d'infrastructure IBM Cloud (SoftLayer). Les clés d'API sont définies par région au sein d'un groupe de ressources. Elles sont partagées par les utilisateurs situés dans cette région.
  
-Pour activer l'accès de tous les utilisateurs au portefeuille de l'infrastructure IBM Cloud (SoftLayer), l'utilisateur dont les données d'identification sont stockées dans la clé d'API doit disposer [du rôle d'infrastructure **Superutilisateur** et du rôle de plateforme **Administrateur** pour {{site.data.keyword.containerlong_notm}} et pour {{site.data.keyword.registryshort_notm}}](#owner_permissions) dans votre compte {{site.data.keyword.Bluemix_notm}}. Laissez ensuite cet utilisateur effectuer la première opération d'administration dans une région et un groupe de ressources. Les données d'identification d'infrastructure de l'utilisateur sont stockées dans une clé d'API correspondant à cette région et à ce groupe de ressources. 
+Pour activer l'accès de tous les utilisateurs au portefeuille de l'infrastructure IBM Cloud (SoftLayer), l'utilisateur dont les données d'identification sont stockées dans la clé d'API doit disposer [du rôle d'infrastructure **Superutilisateur** et du rôle de plateforme **Administrateur** pour {{site.data.keyword.containerlong_notm}} et pour {{site.data.keyword.registryshort_notm}}](#owner_permissions) dans votre compte {{site.data.keyword.Bluemix_notm}}. Laissez ensuite cet utilisateur effectuer la première opération d'administration dans une région et un groupe de ressources. Les données d'identification d'infrastructure de l'utilisateur sont stockées dans une clé d'API correspondant à cette région et à ce groupe de ressources.
 
 D'autres utilisateurs dans le compte partagent la clé d'API pour accéder à l'infrastructure. Lorsque les utilisateurs se connectent au compte {{site.data.keyword.Bluemix_notm}}, un jeton {{site.data.keyword.Bluemix_notm}} IAM basé sur la clé d'API est généré pour la session de l'interface de ligne de commande (CLI) et permet aux commandes liées à l'infrastructure de s'exécuter dans un cluster.
 
@@ -418,7 +418,7 @@ Avant de commencer, vérifiez que le rôle de plateforme **Administrateur** vous
     5. Dans la section **Sélection de rôles**, choisissez un rôle d'accès de plateforme {{site.data.keyword.Bluemix_notm}} IAM. Pour obtenir la liste des actions prises en charge pour chaque rôle, voir [Droits d'accès des utilisateurs](/cs_access_reference.html#platform). Remarque : si vous affectez à un utilisateur le rôle de plateforme **Administrateur** pour un cluster unique, vous devez également lui affecter le rôle de plateforme **Afficheur** pour tous les clusters de cette région dans le groupe de ressources.
     6. Cliquez sur **Affecter**.
 
-4. Si vous souhaitez que les utilisateurs puissent travailler avec des clusters dans un groupe de ressources autre que le groupe par défaut, ces utilisateurs nécessitent d'autres accès aux groupes de ressources dans lesquels se trouvent les clusters. Vous pouvez affecter au minimum à ces utilisateurs le rôle de plateforme **Afficheur** pour les groupes de ressources. 
+4. Si vous souhaitez que les utilisateurs puissent travailler avec des clusters dans un groupe de ressources autre que le groupe par défaut, ces utilisateurs nécessitent d'autres accès aux groupes de ressources dans lesquels se trouvent les clusters. Vous pouvez affecter au minimum à ces utilisateurs le rôle de plateforme **Afficheur** pour les groupes de ressources.
   1. Cliquez sur **Affecter l'accès au sein d'un groupe de ressources**.
   2. Sélectionnez le nom du groupe de ressources.
   3. Dans la liste **Affecter l'accès à un groupe de ressources**, sélectionnez le rôle **Afficheur**. Ce rôle autorise les utilisateurs à accéder au groupe de ressources même, mais pas aux ressources figurant dans le groupe.
@@ -825,7 +825,7 @@ Vous venez de créer et de lier un rôle de cluster ou un rôle RBAC Kubernetes 
 ## Affectation de droits RBAC
 {: #role-binding}
 
-Utilisez des rôles RBAC pour définir les actions pouvant être effectuées par un utilisateur pour travailler avec les ressources Kubernetes dans votre cluster.
+Utilisez des rôles RBAC pour définir les actions pouvant être effectuées par un utilisateur pour travailler avec les ressources Kubernetes dans votre cluster. 
 {: shortdesc}
 
 **Que sont les rôles RBAC et les rôles de cluster ?**</br>
@@ -1299,7 +1299,7 @@ Avant de commencer, [vérifiez que les données d'identification d'infrastructur
 #### Retirer des droits RBAC personnalisés
 {: #remove_custom_rbac}
 
-Si vous n'avez plus besoin des droits RBAC personnalisés, vous pouvez les retirer.
+Si vous n'avez plus besoin des droits RBAC personnalisés, vous pouvez les retirer. 
 {: shortdesc}
 
 1. Ouvrez le fichier `.yaml` correspondant à la liaison de rôle ou à la liaison de rôle de cluster que vous avez créée.

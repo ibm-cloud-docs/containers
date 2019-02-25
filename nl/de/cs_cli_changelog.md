@@ -48,8 +48,8 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 <td>0.1.638</td>
 <td>15. November 2018</td>
 <td>
-<ul><li>Hinzufügen des Befehls [<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh). </li>
-<li>Hinzufügen des Namens der Ressourcengruppe zur Ausgabe von <code>ibmcloud ks cluster-get</code> und <code>ibmcloud ks clusters</code>. </li></ul>
+<ul><li>Hinzufügen des Befehls [<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh).</li>
+<li>Hinzufügen des Namens der Ressourcengruppe zur Ausgabe von <code>ibmcloud ks cluster-get</code> und <code>ibmcloud ks clusters</code>.</li></ul>
 </td>
 </tr>
 <tr>
@@ -62,9 +62,9 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 <td>0.1.621</td>
 <td>30. Oktober 2018</td>
 <td><ul>
-<li>Hinzufügen des [Befehls <code>ibmcloud ks credential-get</code>](cs_cli_reference.html#cs_credential_get). </li>
-<li>Hinzufügen von Unterstützung für die Protokollquelle <code>storage</code> zu allen Clusterprotokollierungsbefehlen. Weitere Informationen finden Sie unter <a href="cs_health.html#logging">Informationen zur Protokollweiterleitung für Cluster und Apps</a>. </li>
-<li>Hinzufügen des Flags `--network` zum [Befehl <code>ibmcloud ks cluster-config</code>](cs_cli_reference.html#cs_cluster_config), der die Calico-Konfigurationsdatei für die Ausführung aller Calico-Befehle herunterlädt. </li>
+<li>Hinzufügen des [Befehls <code>ibmcloud ks credential-get</code>](cs_cli_reference.html#cs_credential_get).</li>
+<li>Hinzufügen von Unterstützung für die Protokollquelle <code>storage</code> zu allen Clusterprotokollierungsbefehlen. Weitere Informationen finden Sie unter <a href="cs_health.html#logging">Informationen zur Protokollweiterleitung für Cluster und Apps</a>.</li>
+<li>Hinzufügen des Flags `--network` zum [Befehl <code>ibmcloud ks cluster-config</code>](cs_cli_reference.html#cs_cluster_config), der die Calico-Konfigurationsdatei für die Ausführung aller Calico-Befehle herunterlädt.</li>
 <li>Kleinere Fehlerkorrekturen und Refactoring</li></ul>
 </td>
 </tr>

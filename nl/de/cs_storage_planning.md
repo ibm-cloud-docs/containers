@@ -66,7 +66,7 @@ Bevor Sie entscheiden können, welcher Speichertyp die richtige Lösung für Sie
    - **Zugriff über mehrere Pods hinweg:** Wenn Sie persistente Kubernetes-Datenträger für den Zugriff auf Ihren Speicher verwenden, können Sie die Anzahl der Pods bestimmen, die den Datenträger gleichzeitig anhängen können. Bestimmte Speicherlösungen - wie z. B. Blockspeicher - können jeweils nur von einem Pod gleichzeitig aufgerufen werden. Bei anderen Speicherlösungen können Sie denselben Datenträger über mehrere Pods hinweg gemeinsam nutzen.
    - **Zugriff über mehrere Zonen und Regionen hinweg:** Möglicherweise müssen Sie Ihre Daten über mehrere Zonen oder Regionen hinweg zugänglich machen. Bestimmte Speicherlösungen - z. B. Datei- und Blockspeicher - sind spezifisch für Rechenzentren und können in einer Mehrzonenclusterkonfiguration nicht über mehrere Zonen hinweg gemeinsam genutzt werden.
    
-   Wenn Sie Ihre Daten zonen- oder regionsübergreifend zugänglich machen möchten, sollten Sie Ihre Rechtsabteilung zu Rate ziehen, um sicherzustellen, dass Ihre Daten in mehreren Zonen oder einem anderen Land gespeichert werden können.
+   Wenn Sie Ihre Daten zonen- oder regionsübergreifend zugänglich machen möchten, sollten Sie Ihre Rechtsabteilung zu Rate ziehen, um sicherzustellen, dass Ihre Daten in mehreren Zonen oder einem anderen Land gespeichert werden können. 
    {: note}
 
 6. Prüfen Sie andere Speichermerkmale, die Ihre Wahl beeinflussen.
@@ -173,7 +173,7 @@ Die folgende Abbildung zeigt die verfügbaren Optionen für nicht persistente Da
 Sie können persistente Speicheroptionen für beliebige Daten verwenden, und zwar auch dann, wenn der Container, der Workerknoten oder der Cluster entfernt wurde.
 {: shortdesc}
 
-Persistente Datenspeicheroptionen sind nur für Standardcluster verfügbar. 
+Persistente Datenspeicheroptionen sind nur für Standardcluster verfügbar.
 
 Sie möchten Ihren Cluster stattdessen mit einer lokalen Datenbank verbinden? Weitere Informationen hierzu finden Sie im Abschnitt [VPN-Konnektivität zu Ihrem Cluster einrichten](cs_vpn.html#vpn).
 {: tip}

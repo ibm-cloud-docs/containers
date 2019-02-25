@@ -51,7 +51,7 @@ Und was ist ein Cluster? Ein Cluster ist eine Gruppe von Ressourcen, Knoten, Net
 
 Rufen Sie den für Sie geeigneten [{{site.data.keyword.Bluemix_notm}}-Kontotyp](https://console.bluemix.net/registration/) ab:
 * **Belastbar (nutzungsabhängig oder Abonnement)**: Sie können einen kostenlosen Testcluster erstellen. Sie können auch Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) für die Erstellung und Verwendung in Standardclustern bereitstellen.
-* **Lite**: Es ist nicht möglich, einen kostenlosen oder einen Standardcluster zu erstellen. [Aktualisieren Sie Ihr Konto](/docs/account/account_faq.html#changeacct) in ein belastbares Konto. 
+* **Lite**: Es ist nicht möglich, einen kostenlosen oder einen Standardcluster zu erstellen. [Aktualisieren Sie Ihr Konto](/docs/account/account_faq.html#changeacct) in ein belastbares Konto.
 * **Testversion (zu Schulungszwecken)**: Sie können einen kostenlosen Cluster erstellen, den Sie 30 Tage lang verwenden können, um sich mit dem Service vertraut zu machen.
 
 Gehen Sie wie folgt vor, um einen kostenlosen Cluster zu erstellen:

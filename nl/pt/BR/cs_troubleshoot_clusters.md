@@ -40,17 +40,23 @@ Ao criar um novo cluster do Kubernetes, você recebe uma mensagem de erro semelh
 
 ```
 Não foi possível se conectar à sua conta de infraestrutura do IBM Cloud (SoftLayer).
-Criar um cluster padrão requer que você tenha uma conta pré-paga vinculada a um termo da conta de infraestrutura do IBM Cloud (SoftLayer) ou que tenha usado a CLI do {{site.data.keyword.containerlong_notm}} para configurar as suas chaves API de Infraestrutura do {{site.data.keyword.Bluemix_notm}}.
+Criar um cluster padrão requer que você tenha uma conta
+pré-paga vinculada a um termo da conta de infraestrutura do IBM Cloud (SoftLayer)
+ou que tenha usado a CLI do {{site.data.keyword.containerlong_notm}} para
+configurar as suas chaves API de Infraestrutura do {{site.data.keyword.Bluemix_notm}}.
 ```
 {: screen}
 
 ```
-Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: 'Item' deve ser pedido com permissão.
+Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}:
+'Item' deve ser pedido com permissão.
 ```
 {: screen}
 
 ```
-Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: o usuário não tem as permissões de infraestrutura necessárias do {{site.data.keyword.Bluemix_notm}} para incluir servidores
+Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}:
+o usuário não tem as permissões de infraestrutura necessárias do {{site.data.keyword.Bluemix_notm}}
+para incluir servidores
 ```
 {: screen}
 
@@ -675,7 +681,7 @@ Se esse cluster for um existente:
 *  O pod pode ter excedido uma solicitação de recurso ou um limite.
 
 {: tsResolve}
-Esta tarefa requer a função [**Administrador** da plataforma](cs_users.html#platform) IAM {{site.data.keyword.Bluemix_notm}} para o cluster.
+Esta tarefa requer a [função **Administrador** da plataforma](cs_users.html#platform) {{site.data.keyword.Bluemix_notm}} IAM para o cluster.
 
 Se você acabou de criar o cluster do Kubernetes, execute o comando a seguir e aguarde a inicialização dos nós do trabalhador.
 

@@ -55,14 +55,15 @@ CLI プラグインの各バージョンにおける変更の要約について�
 <tr>
 <td>0.1.635</td>
 <td>2018 年 11 月 6 日</td>
-<td>Ingress ALB クラスター・アドオンの自動更新を管理するための [<code>ibmcloud ks alb-autoupdate-disable</code>](cs_cli_reference.html#cs_alb_autoupdate_disable)、[<code>ibmcloud ks alb-autoupdate-enable</code>](cs_cli_reference.html#cs_alb_autoupdate_enable)、[<code>ibmcloud ks alb-autoupdate-get</code>](cs_cli_reference.html#cs_alb_autoupdate_get)、[<code>ibmcloud ks alb-rollback</code>](cs_cli_reference.html#cs_alb_rollback)、および [<code>ibmcloud ks alb-update</code>](cs_cli_reference.html#cs_alb_update) コマンドを追加。</td>
+<td>Ingress ALB クラスター・アドオンの自動更新を管理するための [<code>ibmcloud ks alb-autoupdate-disable</code>](cs_cli_reference.html#cs_alb_autoupdate_disable)、[<code>ibmcloud ks alb-autoupdate-enable</code>](cs_cli_reference.html#cs_alb_autoupdate_enable)、[<code>ibmcloud ks alb-autoupdate-get</code>](cs_cli_reference.html#cs_alb_autoupdate_get)、[<code>ibmcloud ks alb-rollback</code>](cs_cli_reference.html#cs_alb_rollback)、および [<code>ibmcloud ks alb-update</code>](cs_cli_reference.html#cs_alb_update) コマンドを追加。
+</td>
 </tr>
 <tr>
 <td>0.1.621</td>
 <td>2018 年 10 月 30 日</td>
 <td><ul>
 <li>[<code>ibmcloud ks credential-get</code> コマンドを追加します](cs_cli_reference.html#cs_credential_get)。</li>
-<li>すべてのクラスター・ロギング・コマンドに <code>storage</code> ログ・ソースのサポートを追加。詳しくは、<a href="cs_health.html#logging">クラスターおよびアプリのログ転送について</a>を参照してください。</li>
+<li>すべてのクラスター・ロギング・コマンドに <code>storage</code> ログ・ソースのサポートを追加。 詳しくは、<a href="cs_health.html#logging">クラスターおよびアプリのログ転送について</a>を参照してください。</li>
 <li>[<code>ibmcloud ks cluster-config</code> コマンド](cs_cli_reference.html#cs_cluster_config)に `--network` フラグを追加。このフラグは、すべての Calico コマンドを実行するための Calico 構成ファイルをダウンロードします。</li>
 <li>軽微な不具合の修正およびリファクタリング</li></ul>
 </td>

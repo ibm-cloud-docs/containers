@@ -46,12 +46,12 @@ Falls Ihr Cluster in einer nicht unterstützten Kubernetes-Version ausgeführt w
 Nein. [Aktualisieren Sie Ihren Master](#update_master) zunächst auf die aktuellste Version von Kubernetes. Anschließend [aktualisieren Sie die Workerknoten](#worker_node) in Ihrem Cluster.
 
 **Wie werden Patchaktualisierungen angewendet?**</br>
-Patchaktualisierungen für den Master werden automatisch über mehrere Tage hinweg angewendet, sodass eine Master-Patch-Version möglicherweise als verfügbar angezeigt wird, bevor sie auf Ihren Master angewendet wird. Die Aktualisierungsautomatisierung überspringt auch Cluster, die sich in einem nicht einwandfreien Zustand befinden oder in denen derzeit Operationen ausgeführt werden. Es kann vorkommen, dass IBM gelegentlich die automatischen Aktualisierungen für ein bestimmtes Master-Fixpack inaktiviert, zum Beispiel ein Patch, das nur benötigt wird, wenn ein Master von einer Nebenversion auf eine andere Version aktualisiert wird. In allen diesen Fällen können Sie [das Änderungsprotokoll der Versionen](cs_versions_changelog.html) auf alle potenziellen Auswirkungen prüfen und sicher selbst den [Befehl](cs_cli_reference.html#cs_cluster_update) `ibmcloud ks cluster-update` verwenden, ohne auf die Anwendung der automatischen Aktualisierung zu warten. 
+Patchaktualisierungen für den Master werden automatisch über mehrere Tage hinweg angewendet, sodass eine Master-Patch-Version möglicherweise als verfügbar angezeigt wird, bevor sie auf Ihren Master angewendet wird. Die Aktualisierungsautomatisierung überspringt auch Cluster, die sich in einem nicht einwandfreien Zustand befinden oder in denen derzeit Operationen ausgeführt werden. Es kann vorkommen, dass IBM gelegentlich die automatischen Aktualisierungen für ein bestimmtes Master-Fixpack inaktiviert, zum Beispiel ein Patch, das nur benötigt wird, wenn ein Master von einer Nebenversion auf eine andere Version aktualisiert wird. In allen diesen Fällen können Sie [das Änderungsprotokoll der Versionen](cs_versions_changelog.html) auf alle potenziellen Auswirkungen prüfen und sicher selbst den [Befehl](cs_cli_reference.html#cs_cluster_update) `ibmcloud ks cluster-update` verwenden, ohne auf die Anwendung der automatischen Aktualisierung zu warten.
 
 Im Gegensatz zum Master müssen Sie die Worker für jede Patchversion aktualisieren.
 
 **Was passiert bei der Masteraktualisierung?**</br>
-In Clustern, in denen Kubernetes Version 1.11 oder aktueller ausgeführt wird, ist Ihr Master mit drei Replikat-Master-Pods hoch verfügbar. Die Master-Pods haben eine rollierende Aktualisierung, während der immer nur ein Pod nicht verfügbar ist. Zwei Instanzen sind aktiv, sodass Sie während der Aktualisierung  auf den Cluster zugreifen und ihn ändern können. Ihre Workerknoten, Apps und Ressourcen werden weiterhin ausgeführt. 
+In Clustern, in denen Kubernetes Version 1.11 oder aktueller ausgeführt wird, ist Ihr Master mit drei Replikat-Master-Pods hoch verfügbar. Die Master-Pods haben eine rollierende Aktualisierung, während der immer nur ein Pod nicht verfügbar ist. Zwei Instanzen sind aktiv, sodass Sie während der Aktualisierung  auf den Cluster zugreifen und ihn ändern können. Ihre Workerknoten, Apps und Ressourcen werden weiterhin ausgeführt.
 
 Für Cluster mit früheren Versionen von Kubernetes ist der API-Server für ca. 5 - 10 Minuten inaktiv, wenn Sie den Kubernetes-API-Server aktualisieren. Während der Aktualisierung können Sie weder auf den Cluster zugreifen noch Änderungen am Cluster vornehmen. Allerdings werden Workerknoten, Apps und Ressourcen, die von Clusterbenutzern bereitgestellt wurden, nicht geändert und weiterhin ausgeführt.
 
@@ -66,13 +66,13 @@ Das folgende Diagramm zeigt den Prozess, den Sie zum Aktualisieren des Masters d
 Abbildung 1. Prozessdiagramm für die Aktualisierung des Kubernetes-Masters
 
 {: #update_master}
-Bevor Sie beginnen, stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Operator** oder **Administrator** innehaben. 
+Bevor Sie beginnen, stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Operator** oder **Administrator** innehaben.
 
 Gehen Sie wie folgt vor, um die Haupt- oder Nebenversion des Kubernetes-Masters zu aktualisieren:
 
 1.  Überprüfen Sie die [Kubernetes-Änderungen](cs_versions.html)(cs_users.html#platform)] und führen Sie alle Aktualisierungen durch, die mit der Markierung Vor Master aktualisieren gekennzeichnet sind.
 
-2.  Aktualisieren Sie Ihre API-Server von Kubernetes und die zugehörigen Masterkomponenten von Kubernetes, indem Sie die {{site.data.keyword.Bluemix_notm}}-Konsole verwenden oder den [CLI-Befehl `ibmcloud ks cluster-update`](cs_cli_reference.html#cs_cluster_update) ausführen. 
+2.  Aktualisieren Sie Ihre API-Server von Kubernetes und die zugehörigen Masterkomponenten von Kubernetes, indem Sie die {{site.data.keyword.Bluemix_notm}}-Konsole verwenden oder den [CLI-Befehl `ibmcloud ks cluster-update`](cs_cli_reference.html#cs_cluster_update) ausführen.
 
 3.  Warten Sie ein paar Minuten und stellen Sie dann sicher, dass die Aktualisierung abgeschlossen ist. Überprüfen Sie die Version des Kubernetes-API-Servers im {{site.data.keyword.Bluemix_notm}}-Dashboard oder führen Sie den Befehl `ibmcloud ks clusters` aus.
 
@@ -107,7 +107,8 @@ Wenn die Konfigurationszuordnung nicht definiert wurde, wird die Standardeinstel
 - Wenn Sie eine Patchaktualisierung anwenden möchten, lesen Sie sich die Informationen im [Kubernetes-Änderungsprotokoll](cs_versions_changelog.html#changelog) durch.
 - Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Operator** oder **Administrator** innehaben. </br>
 
-Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Von Ihrer Workerknotenmaschine wird ein neues Image erstellt wird und dabei werden Daten gelöscht, die nicht [außerhalb des Pods gespeichert sind](cs_storage_planning.html#persistent_storage_overview)(cs_users.html#platform)]. {: important}
+Die Aktualisierung von Workerknoten kann zu Ausfallzeiten bei Ihren Apps und Services führen. Von Ihrer Workerknotenmaschine wird ein neues Image erstellt wird und dabei werden Daten gelöscht, die nicht [außerhalb des Pods gespeichert sind](cs_storage_planning.html#persistent_storage_overview)(cs_users.html#platform)].
+{: important}
 
 **Gehen Sie wie folgt vor, um eine Konfigurationszuordnung zu erstellen und die Workerknoten zu aktualisieren**:
 
@@ -270,7 +271,7 @@ Sie können die Maschinentypen der Workerknoten aktualisieren, indem Sie neue Wo
 Vorbemerkungen:
 - [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 - Wenn Sie Daten auf dem Workerknoten speichern, werden die Daten gelöscht, wenn sie nicht [außerhalb des Workerknotens gespeichert sind](cs_storage_planning.html#persistent_storage_overview).
-- Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Operator** oder **Administrator** innehaben. 
+- Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Operator** oder **Administrator** innehaben.
 
 1. Listen Sie verfügbare Workerknoten auf und notieren Sie deren private IP-Adressen.
    - Für Workerknoten in einem Worker-Pool:
@@ -376,10 +377,11 @@ Vorbemerkungen:
 ## Cluster-Add-ons aktualisieren
 {: #addons}
 
-Ihr {{site.data.keyword.containerlong_notm}}-Cluster wird mit Add-ons geliefert, z. B. Fluentd für die Protokollierung, die automatisch installiert werden, wenn Sie den Cluster bereitstellen. Diese Add-ons werden standardmäßig automatisch von IBM aktualisiert. Sie können jedoch automatische Aktualisierungen für manche Add-ons inaktivieren und sie separat über die Master- und Worker-Knoten aktualisieren. {: shortdesc}
+Ihr {{site.data.keyword.containerlong_notm}}-Cluster wird mit Add-ons geliefert, z. B. Fluentd für die Protokollierung, die automatisch installiert werden, wenn Sie den Cluster bereitstellen. Diese Add-ons werden standardmäßig automatisch von IBM aktualisiert. Sie können jedoch automatische Aktualisierungen für manche Add-ons inaktivieren und sie separat über die Master- und Worker-Knoten aktualisieren.
+{: shortdesc}
 
 **Welche Standard-Add-ons kann ich separat vom Cluster aktualisieren?**</br>
-Optional können Sie automatische Aktualisierungen für die folgenden Add-ons inaktivieren: 
+Optional können Sie automatische Aktualisierungen für die folgenden Add-ons inaktivieren:
 * [Fluentd für Protokollierung](#logging)
 * [Lastausgleichsfunktion für Ingress-Anwendungen](#alb)
 
@@ -415,11 +417,11 @@ Ja. {{site.data.keyword.containerlong_notm}} stellt weitere Add-ons zur Verfügu
 Um Änderungen an Ihren Protokollierungs- oder Filterkonfigurationen vornehmen zu können, muss das Fluentd-Add-on die aktuelle Version aufweisen. Standardmäßig sind automatische Aktualisierungen für das Add-on aktiviert.
 {: shortdesc}
 
-Sie können die automatischen Aktualisierungen des Fluentd-Add-ons auf folgende Arten verwalten. **Hinweis**: Um die folgenden Befehle auszuführen, müssen Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** für den Cluster innehaben. 
+Sie können die automatischen Aktualisierungen des Fluentd-Add-ons auf folgende Arten verwalten. **Hinweis**: Um die folgenden Befehle auszuführen, müssen Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** für den Cluster innehaben.
 
-* Prüfen Sie, ob automatische Aktualisierungen durch Ausführen des [Befehls](cs_cli_reference.html#cs_log_autoupdate_get)(cs_users.html#platform)] ibmcloud ks logging-autoupdate-get --cluster <clustername_oder_-id> aktiviert werden. 
-* Inaktivieren Sie automatische Aktualisierungen, indem Sie den [Befehl](cs_cli_reference.html#cs_log_autoupdate_disable) `ibmcloud ks logging-autoupdate-disable` ausführen. 
-* Wenn automatische Aktualisierungen inaktiviert sind, Sie jedoch eine Änderung an der Konfiguration vornehmen müssen, stehen Ihnen zwei Optionen zur Auswahl: 
+* Prüfen Sie, ob automatische Aktualisierungen durch Ausführen des [Befehls](cs_cli_reference.html#cs_log_autoupdate_get)(cs_users.html#platform)] ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID> aktiviert werden.
+* Inaktivieren Sie automatische Aktualisierungen, indem Sie den [Befehl](cs_cli_reference.html#cs_log_autoupdate_disable) `ibmcloud ks logging-autoupdate-disable` ausführen.
+* Wenn automatische Aktualisierungen inaktiviert sind, Sie jedoch eine Änderung an der Konfiguration vornehmen müssen, stehen Ihnen zwei Optionen zur Auswahl:
     * Aktivieren Sie automatische Aktualisierungen für Ihre Fluentd-Pods.
         ```
         ibmcloud ks logging-autoupdate-enable --cluster <clustername_oder_-id>
@@ -439,9 +441,9 @@ Sie können die automatischen Aktualisierungen des Fluentd-Add-ons auf folgende 
 Steuern Sie, wann das Add-on für die Lastausgleichsfunktion für Ingress-Anwendungen aktualisiert wird.
 {: shortdesc}
 
-Wenn das Add-on für die Lastausgleichsfunktion für Anwendungen aktualisiert wird, werden die Container `nginx-ingress` und `ingress-auth` in allen ALB-Pods auf die aktuelle Buildversion aktualisiert. Standardmäßig sind automatische Aktualisierungen für das Add-on aktiviert. Aktualisierungen werden auf rollierender Basis durchgeführt, sodass es für die Lastausgleichsfunktionen für Ihre Ingress-Anwendungen keine Ausfallzeiten gibt. 
+Wenn das Add-on für die Lastausgleichsfunktion für Anwendungen aktualisiert wird, werden die Container `nginx-ingress` und `ingress-auth` in allen ALB-Pods auf die aktuelle Buildversion aktualisiert. Standardmäßig sind automatische Aktualisierungen für das Add-on aktiviert. Aktualisierungen werden auf rollierender Basis durchgeführt, sodass es für die Lastausgleichsfunktionen für Ihre Ingress-Anwendungen keine Ausfallzeiten gibt.
 
-Wenn Sie automatische Aktualisierungen inaktivieren, sind Sie für das Aktualisieren des Add-ons verantwortlich. Sobald Aktualisierungen verfügbar sind, werden Sie über die CLI benachrichtigt, wenn Sie die Befehle `ibmcloud ks albs` oder `alb-autoupdate-get` ausführen. 
+Wenn Sie automatische Aktualisierungen inaktivieren, sind Sie für das Aktualisieren des Add-ons verantwortlich. Sobald Aktualisierungen verfügbar sind, werden Sie über die CLI benachrichtigt, wenn Sie die Befehle `ibmcloud ks albs` oder `alb-autoupdate-get` ausführen.
 
 Wenn Sie die Kubernetes-Hauptversion oder -Nebenversion Ihres Clusters aktualisieren, nimmt IBM automatisch die erforderlichen Änderungen an der Ingress-Bereitstellung vor, ändert aber nicht die Buildversion Ihres Add-ons für die Lastausgleichsfunktion für Ihre Ingress-Anwendungen. Sie sind dafür verantwortlich, die Kompatibilität der aktuellen Kubernetes-Versionen und Ihrer Images des Add-ons für die Lastausgleichsfunktion für Ingress-Anwendungen zu prüfen.
 {: note}
@@ -461,7 +463,7 @@ Vorbemerkungen:
     {: pre}
 
     Beispielausgabe, wenn automatische Aktualisierungen aktiviert sind:
-```
+    ```
     Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
     OK
     Automatic updates of the ALB pods are enabled in cluster mycluster
@@ -470,7 +472,7 @@ Vorbemerkungen:
     {: screen}
 
     Beispielausgabe, wenn automatische Aktualisierungen inaktiviert sind:
-```
+    ```
     Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
     OK
     Automatic updates of the ALB pods are disabled in cluster mycluster
@@ -494,21 +496,21 @@ Vorbemerkungen:
     ```
     {: screen}
 
-Sie können die automatischen Aktualisierungen des Ingress-ALB-Add-ons auf folgende Arten verwalten. **Hinweis**: Um die folgenden Befehle auszuführen, müssen Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Editor** oder **Administrator** für den Cluster innehaben. 
+Sie können die automatischen Aktualisierungen des Ingress-ALB-Add-ons auf folgende Arten verwalten. **Hinweis**: Um die folgenden Befehle auszuführen, müssen Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Editor** oder **Administrator** für den Cluster innehaben.
 * Inaktivieren Sie automatische Aktualisierungen.
     
     ibmcloud ks alb-autoupdate-disable --cluster <clustername_oder_-id>
     
     {: pre}
 * Aktualisieren Sie Ihr Ingress-ALB-Add-on manuell.
-    1. Wenn eine Aktualisierung verfügbar ist und Sie das Add-on aktualisieren möchten, überprüfen Sie zunächst das [Änderungsprotokoll für die aktuelle Version des Ingress-ALB-Add-ons](cs_versions_addons.html#alb_changelog)(cs_users.html#platform)], um alle potenziell störenden Änderungen zu überprüfen. 
+    1. Wenn eine Aktualisierung verfügbar ist und Sie das Add-on aktualisieren möchten, überprüfen Sie zunächst das [Änderungsprotokoll für die aktuelle Version des Ingress-ALB-Add-ons](cs_versions_addons.html#alb_changelog)(cs_users.html#platform)], um alle potenziell störenden Änderungen zu überprüfen.
     2. Erzwingen Sie eine einmalige Aktualisierung Ihrer ALB-Pods. Alle ALB-Pods in dem Cluster werden auf die aktuelle Buildversion aktualisiert. Sie können nicht eine einzelne ALB aktualisieren oder auswählen, auf welchen Build das Add-on aktualisiert werden soll. Die automatischen Aktualisierungen bleiben inaktiviert.
         ```
         ibmcloud ks alb-update --cluster <clustername_oder_-id>
         ```
         {: pre}
 * Wenn Ihre ALB-Pods vor Kurzem aktualisiert wurde, aber eine angepasste Konfiguration für Ihre ALBs von dem letzten Build betroffen ist, können Sie die Aktualisierung rückgängig machen und wieder den Build herstellen, den Ihre ALB-Pods zuvor ausgeführt hatten. **Hinweis**: Nachdem Sie eine Aktualisierung rückgängig gemacht haben, werden die automatischen Aktualisierungen für ALB-Pods inaktiviert.
-```
+    ```
     ibmcloud ks alb-rollback --cluster <clustername_oder_-id>
     ```
     {: pre}
@@ -537,7 +539,7 @@ Die folgende Abbildung veranschaulicht, wie sich Ihre Clusterkonfiguration ände
 <img src="images/cs_cluster_migrate.png" alt="Cluster von eigenständigen Workerknoten auf Worker-Pools aktualisieren" width="600" style="width:600px; border-style: none"/>
 
 Vorbemerkungen:
-- Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Operator** oder **Administrator** für den Cluster innehaben. 
+- Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Operator** oder **Administrator** für den Cluster innehaben.
 - [Melden Sie sich bei Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)(cs_users.html#platform)]
 
 1. Listen Sie vorhandene eigenständige Workerknoten in Ihrem Cluster auf und notieren Sie die **ID**, den **Maschinentyp** und die **private IP**.
@@ -565,7 +567,7 @@ Vorbemerkungen:
    {: pre}
 
 5. Fügen Sie die Zone zu Ihrem Worker-Pool hinzu. Beim Hinzufügen einer Zone zu einem Worker-Pool werden die Workerknoten, die im Worker-Pool definiert sind, in der Zone bereitgestellt und für die zukünftige Planung von Workloads berücksichtigt. {{site.data.keyword.containerlong}} fügt automatisch die Bezeichnung `failure-domain.beta.kubernetes.io/region` für die Region und die Bezeichnung `failure-domain.beta.kubernetes.io/zone` für die Zone für jeden Workerknoten hinzu. Der Kubernetes-Scheduler verwendet diese Bezeichnungen, um Pods auf Zonen innerhalb derselben Region zu verteilen.
-   1. **So fügen Sie eine Zone zu einem Workerpool hinzu**: Ersetzen Sie `.<poolname>` durch den Namen Ihres Worker-Pools und füllen Sie die Werte für die Cluster-ID, die Zone und die VLANs mit den zuvor abgerufenen Informationen aus. Wenn Sie nicht über ein privates und ein öffentliches VLAN in dieser Zone verfügen, geben Sie diese Option nicht an. Ein privates und ein öffentliches VLAN werden automatisch für Sie erstellt.
+   1. **So fügen Sie eine Zone zu einem Workerpool hinzu**: Ersetzen Sie `.<pool_name>` durch den Namen Ihres Worker-Pools und füllen Sie die Werte für die Cluster-ID, die Zone und die VLANs mit den zuvor abgerufenen Informationen aus. Wenn Sie nicht über ein privates und ein öffentliches VLAN in dieser Zone verfügen, geben Sie diese Option nicht an. Ein privates und ein öffentliches VLAN werden automatisch für Sie erstellt.
 
       Wenn Sie verschiedene VLANs für unterschiedliche Worker-Pools verwenden möchten, wiederholen Sie diesen Befehl für jedes VLAN und die entsprechenden Worker-Pools. Alle neuen Workerknoten werden den von Ihnen angegebenen VLANs hinzugefügt, die VLANs für alle vorhandenen Workerknoten werden jedoch nicht geändert.
       ```
@@ -612,8 +614,7 @@ Vorbemerkungen:
       {: pre}
       Dieser Prozess kann einige Minuten dauern.
 
-   5. Entfernen Sie den eigenständigen Workerknoten. Verwenden Sie die ID des Workerknotens, den Sie im vorherigen Schritt mit dem Befehl `ibmcloud ks workers
-      <clustername_oder_-id>` abgerufen haben.
+   5. Entfernen Sie den eigenständigen Workerknoten. Verwenden Sie die ID des Workerknotens, den Sie im vorherigen Schritt mit dem Befehl `ibmcloud ks workers <cluster_name_or_ID>` abgerufen haben.
       ```
       ibmcloud ks worker-rm <clustername_oder_-id> <worker-id>
       ```
@@ -636,7 +637,7 @@ Jedem Service in Ihrem Cluster wird ein DNS-Name (Domain Name System) zugeordnet
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
 1.  Bestimmen Sie den aktuellen Cluster-DNS-Provider. Im folgenden Beispiel ist KubeDNS der aktuelle Cluster-DNS-Provider.
-```
+    ```
     kubectl cluster-info
     ```
     {: pre}
@@ -648,9 +649,9 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
     ...
     ```
     {: screen}
-2.  Legen Sie CoreDNS als Cluster-DNS-Provider fest. 
+2.  Legen Sie CoreDNS als Cluster-DNS-Provider fest.
 
-    1.  **Optional**: Wenn Sie die Konfigurationszuordnung `kube-dns` im Namensbereich `kube-system` angepasst haben, übertragen Sie alle Anpassungen an die Konfigurationszuordnung `coredns` im Namensbereich `kube-system`. Beachten Sie, dass sich die Syntax von den Konfigurationszuordnungen `kube-dns` und `coredns` unterscheidet. Ein Beispiel finden Sie unter [Installing CoreDNS via Kubeadm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in den CoreDNS-Dokumenten. 
+    1.  **Optional**: Wenn Sie die Konfigurationszuordnung `kube-dns` im Namensbereich `kube-system` angepasst haben, übertragen Sie alle Anpassungen an die Konfigurationszuordnung `coredns` im Namensbereich `kube-system`. Beachten Sie, dass sich die Syntax von den Konfigurationszuordnungen `kube-dns` und `coredns` unterscheidet. Ein Beispiel finden Sie unter [Installing CoreDNS via Kubeadm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in den CoreDNS-Dokumenten.
 
     2.  Skalieren Sie die KubeDNS-Bereitstellung für automatische Skalierung nach unten.
         ```
@@ -659,7 +660,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
         {: pre}
 
     3.  Prüfen und warten Sie, bis die Pods gelöscht werden.
-```
+        ```
         kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
         ```
         {: pre}
@@ -689,9 +690,9 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
         kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape=true
         ```
         {: pre}
-3.  **Optional**: Machen Sie die letzten Schritte rückgängig, um zu KubeDNS als Cluster-DNS-Provider zurückzuwechseln. 
+3.  **Optional**: Machen Sie die letzten Schritte rückgängig, um zu KubeDNS als Cluster-DNS-Provider zurückzuwechseln.
 
-    1.  **Optional**: Wenn Sie die Konfigurationszuordnung `coredns` im Namensbereich `kube-system` angepasst haben, übertragen Sie alle Anpassungen an die Konfigurationszuordnung `kube-dns` im Namensbereich `kube-system`. Beachten Sie, dass sich die Syntax von den Konfigurationszuordnungen `kube-dns` und `coredns` unterscheidet. Ein Beispiel finden Sie unter [Installing CoreDNS via Kubeadm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in den CoreDNS-Dokumenten. 
+    1.  **Optional**: Wenn Sie die Konfigurationszuordnung `coredns` im Namensbereich `kube-system` angepasst haben, übertragen Sie alle Anpassungen an die Konfigurationszuordnung `kube-dns` im Namensbereich `kube-system`. Beachten Sie, dass sich die Syntax von den Konfigurationszuordnungen `kube-dns` und `coredns` unterscheidet. Ein Beispiel finden Sie unter [Installing CoreDNS via Kubeadm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in den CoreDNS-Dokumenten.
 
     2.  Skalieren Sie die CoreDNS-Bereitstellung für automatische Skalierung nach unten.
         ```
@@ -700,7 +701,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
         {: pre}
 
     3.  Prüfen und warten Sie, bis die Pods gelöscht werden.
-```
+        ```
         kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
         ```
         {: pre}

@@ -155,7 +155,7 @@ Sicherheit zuerst: Bei Verwendung von Bare-Metal für {{site.data.keyword.contai
 **Schritt 1: Lift-and-shift zum Sichern der Rechenleistung**
 * Apps, die hochsensible Daten verwalten, können in {{site.data.keyword.containerlong_notm}} mithilfe von Bare Metal für Trusted Compute ausgeführt werden. Mit Trusted Compute kann die zugrunde liegende Hardware auf Manipulationen überprüft werden. 
 * Migrieren Sie die Images der virtuellen Maschine auf Container-Images, die in {{site.data.keyword.containerlong_notm}} in der öffentlichen {{site.data.keyword.Bluemix_notm}}-Instanz ausgeführt werden.
-* Auf dieser Grundlage werden von Vulnerability Advisor Schwachstellensuchen für Images, Richtlinien, Container und Paketierung auf bekannte Malware durchgeführt.  
+* Auf dieser Grundlage werden von Vulnerability Advisor Schwachstellensuchen für Images, Richtlinien, Container und Paketierung auf bekannte Malware durchgeführt. 
 * Die Kosten für private Rechenzentren bzw. Investitionen vor Ort werden erheblich reduziert und durch ein Modell für Utility-Computing ersetzt, das abhängig vom Workloadbedarf skaliert wird.
 
 **Schritt 2: Operationen und Verbindungen zum Back-End vorhandener Zahlungssysteme**

@@ -69,7 +69,7 @@ The cluster could not be configured with the registry. Make sure that you have t
 クラスターを作成する適切な許可がありません。 クラスターを作成するには、次の許可が必要です。
 *  IBM Cloud インフラストラクチャー (SoftLayer) に対する**スーパーユーザー**の役割。
 *  {{site.data.keyword.containerlong_notm}} に対するアカウント・レベルの**管理者**のプラットフォーム管理役割。
-*  {{site.data.keyword.registrylong_notm}} に対するアカウント・レベルの**管理者**のプラットフォーム管理役割。{{site.data.keyword.registryshort_notm}} のポリシーを、リソース・グループ・レベルに制限しないでください。2018 年 10 月 4 日より前に {{site.data.keyword.registrylong_notm}} を使い始めた場合は、[{{site.data.keyword.Bluemix_notm}} IAM ポリシー制約を有効に](/docs/services/Registry/registry_users.html#existing_users)していることを確認してください。
+*  {{site.data.keyword.registrylong_notm}} に対するアカウント・レベルの**管理者**のプラットフォーム管理役割。 {{site.data.keyword.registryshort_notm}} のポリシーを、リソース・グループ・レベルに制限しないでください。 2018 年 10 月 4 日より前に {{site.data.keyword.registrylong_notm}} を使い始めた場合は、[{{site.data.keyword.Bluemix_notm}} IAM ポリシー制約を有効に](/docs/services/Registry/registry_users.html#existing_users)していることを確認してください。
 
 インフラストラクチャー関連のエラーについては、自動アカウント・リンクを有効にした後に作成した {{site.data.keyword.Bluemix_notm}} の従量課金アカウントが、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスできるように既にセットアップされています。 追加の構成を行わなくても、クラスターのためのインフラストラクチャー・リソースを購入できます。 有効な従量制課金アカウントを持っていて、このエラー・メッセージを受け取った場合は、インフラストラクチャー・リソースにアクセスするための正しい IBM Cloud インフラストラクチャー (SoftLayer) アカウントの資格情報を使用していない可能性があります。
 
@@ -82,7 +82,7 @@ The cluster could not be configured with the registry. Make sure that you have t
 {: tsResolve}
 アカウント所有者は、インフラストラクチャー・アカウントの資格情報を正しくセットアップする必要があります。 資格情報は、使用しているインフラストラクチャー・アカウントのタイプによって異なります。
 
-1.  インフラストラクチャー・アカウントに対するアクセス権限があることを確認します。 [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) にログインし、メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン")の**「インフラストラクチャー」**をクリックします。インフラストラクチャー・ダッシュボードが表示された場合は、インフラストラクチャー・アカウントへのアクセス権限があります。
+1.  インフラストラクチャー・アカウントに対するアクセス権限があることを確認します。 [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) にログインし、メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン")の**「インフラストラクチャー」**をクリックします。 インフラストラクチャー・ダッシュボードが表示された場合は、インフラストラクチャー・アカウントへのアクセス権限があります。
 2.  クラスターが従量課金 (PAYG) アカウントに付属したものとは異なるインフラストラクチャー・アカウントを使用しているかどうかを確認します。
     1.  メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン") の**「コンテナー」> 「クラスター」**をクリックします。
     2.  テーブルから、該当のクラスターを選択します。
@@ -107,7 +107,7 @@ CLI からコマンド `ibmcloud`、`kubectl`、または `calicoctl` を実行�
 ローカル・システムからプロキシーまたはファイアウォール経由での公共のエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されている可能性があります。
 
 {: tsResolve}
-[CLI コマンドでの TCP アクセスを許可します](cs_firewall.html#firewall_bx)。 このタスクには、クラスターに対する[**管理者**{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform)が必要です。
+[CLI コマンドでの TCP アクセスを許可します](cs_firewall.html#firewall_bx)。 このタスクには、クラスターに対する [**管理者** {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](cs_users.html#platform) が必要です。
 
 
 ## ファイアウォールがあるためにクラスターからリソースに接続できない
@@ -453,7 +453,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: screen}
 
 {: tsCauses}
-サービスをクラスターにバインドするには、サービス・インスタンスがプロビジョンされているスペースに対する Cloud Foundry 開発者ユーザー役割が必要です。 また、{{site.data.keyword.containerlong}} に対するエディターの {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム・アクセス権限も必要です。サービス・インスタンスにアクセスするには、サービス・インスタンスがプロビジョンされているスペースにログインする必要があります。
+サービスをクラスターにバインドするには、サービス・インスタンスがプロビジョンされているスペースに対する Cloud Foundry 開発者ユーザー役割が必要です。 また、{{site.data.keyword.containerlong}} に対するエディターの {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム・アクセス権限も必要です。 サービス・インスタンスにアクセスするには、サービス・インスタンスがプロビジョンされているスペースにログインする必要があります。
 
 {: tsResolve}
 

@@ -24,7 +24,7 @@ lastupdated: "2018-12-05"
 {: #kubernetes}
 {: faq}
 
-Kubernetes は、コンテナー化されたワークロードやサービスを複数のホストにわたって管理するためのオープン・ソース・プラットフォームです。手作業による介入をまったく、あるいはほとんど必要とせずに、コンテナー化アプリのデプロイ、自動化、モニター、スケーリングを行える管理ツールを備えています。マイクロサービスを構成するすべてのコンテナーは、管理と検出を簡単にするための論理的なユニットであるポッドにグループ分けされます。これらのポッドを実行するコンピュート・ホストは、ポータブルで拡張性に優れ、障害発生時の自己修復機能を備えた Kubernetes クラスターで管理されます。
+Kubernetes は、コンテナー化されたワークロードやサービスを複数のホストにわたって管理するためのオープン・ソース・プラットフォームです。手作業による介入をまったく、あるいはほとんど必要とせずに、コンテナー化アプリのデプロイ、自動化、モニター、スケーリングを行える管理ツールを備えています。 マイクロサービスを構成するすべてのコンテナーは、管理と検出を簡単にするための論理的なユニットであるポッドにグループ分けされます。 これらのポッドを実行するコンピュート・ホストは、ポータブルで拡張性に優れ、障害発生時の自己修復機能を備えた Kubernetes クラスターで管理されます。 
 {: shortdesc}
 
 Kubernetes について詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational) を参照してください。 
@@ -33,15 +33,15 @@ Kubernetes について詳しくは、[Kubernetes の資料 ![外部リンク・
 {: #kubernetes_service}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} を利用すると、{{site.data.keyword.Bluemix_notm}} で独自の Kubernetes クラスターを作成してコンテナー化アプリをデプロイおよび管理できます。コンテナー化アプリは、ワーカー・ノードと呼ばれる IBM Cloud インフラストラクチャー (SoftLayer) のコンピュート・ホスト上でホストされます。コンピュート・ホストは、共有リソースまたは専用リソースを備えた[仮想マシン](cs_clusters_planning.html#vm)としてプロビジョンすることも、GPU およびソフトウェア定義ストレージ (SDS) を使用するために最適化できる[ベア・メタル・マシン](cs_clusters_planning.html#bm)としてプロビジョンすることもできます。ワーカー・ノードは、IBM が構成、モニター、および管理する、高可用性の Kubernetes マスターによって制御されます。クラスター・インフラストラクチャーのリソースの操作には {{site.data.keyword.containerlong_notm}} の API または CLI を、デプロイメントとサービスの管理には Kubernetes の API または CLI を使用できます。 
+{{site.data.keyword.containerlong_notm}} を利用すると、{{site.data.keyword.Bluemix_notm}} で独自の Kubernetes クラスターを作成してコンテナー化アプリをデプロイおよび管理できます。 コンテナー化アプリは、ワーカー・ノードと呼ばれる IBM Cloud インフラストラクチャー (SoftLayer) のコンピュート・ホスト上でホストされます。 コンピュート・ホストは、共有リソースまたは専用リソースを備えた[仮想マシン](cs_clusters_planning.html#vm)としてプロビジョンすることも、GPU およびソフトウェア定義ストレージ (SDS) を使用するために最適化できる[ベア・メタル・マシン](cs_clusters_planning.html#bm)としてプロビジョンすることもできます。 ワーカー・ノードは、IBM が構成、モニター、および管理する、高可用性の Kubernetes マスターによって制御されます。 クラスター・インフラストラクチャーのリソースの操作には {{site.data.keyword.containerlong_notm}} の API または CLI を、デプロイメントとサービスの管理には Kubernetes の API または CLI を使用できます。 
 
-クラスター・リソースのセットアップ方法について詳しくは、[サービス・アーキテクチャー](cs_tech.html#architecture)を参照してください。機能と利点を示したリストを確認するには、[{{site.data.keyword.containerlong_notm}} を使用する理由](cs_why.html#cs_ov)を参照してください。
+クラスター・リソースのセットアップ方法について詳しくは、[サービス・アーキテクチャー](cs_tech.html#architecture)を参照してください。 機能と利点を示したリストを確認するには、[{{site.data.keyword.containerlong_notm}} を使用する理由](cs_why.html#cs_ov)を参照してください。
 
 ## IBM Cloud Kubernetes Service を使用するとよいのはなぜですか?
 {: #benefits}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} は、IBM Watson®、AI、IoT、DevOps、セキュリティー、データ分析に関連するクラウド・サービスにバインド可能なアプリを迅速にデリバリーできるように、強力なツール、直感的なユーザー・エクスペリエンス、組み込みのセキュリティーを提供するマネージド Kubernetes オファリングです。{{site.data.keyword.containerlong_notm}} は、認定された Kubernetes プロバイダーとして、インテリジェントなスケジューリング、自己修復、水平スケーリング、サービス・ディスカバリーとロード・バランシング、自動によるロールアウトとロールバック、シークレットと構成の管理を可能にします。また、このサービスは、シンプルなクラスター管理、コンテナー・セキュリティーおよび分離ポリシーに関連する拡張機能、独自のクラスターを設計する機能、一貫性のあるデプロイメントを行うための統合運用ツールを備えています。
+{{site.data.keyword.containerlong_notm}} は、IBM Watson®、AI、IoT、DevOps、セキュリティー、データ分析に関連するクラウド・サービスにバインド可能なアプリを迅速にデリバリーできるように、強力なツール、直感的なユーザー・エクスペリエンス、組み込みのセキュリティーを提供するマネージド Kubernetes オファリングです。 {{site.data.keyword.containerlong_notm}} は、認定された Kubernetes プロバイダーとして、インテリジェントなスケジューリング、自己修復、水平スケーリング、サービス・ディスカバリーとロード・バランシング、自動によるロールアウトとロールバック、シークレットと構成の管理を可能にします。 また、このサービスは、シンプルなクラスター管理、コンテナー・セキュリティーおよび分離ポリシーに関連する拡張機能、独自のクラスターを設計する機能、一貫性のあるデプロイメントを行うための統合運用ツールを備えています。
 
 機能と利点の概要については、[{{site.data.keyword.containerlong_notm}} を使用する理由](cs_why.html#cs_ov)を参照してください。 
 
@@ -49,11 +49,11 @@ Kubernetes について詳しくは、[Kubernetes の資料 ![外部リンク・
 {: #managed_master_worker}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} に含まれる Kubernetes クラスターはすべて、IBM が所有する {{site.data.keyword.Bluemix_notm}} インフラストラクチャー・アカウントで、IBM が管理する専用 Kubernetes マスターによって制御されます。Kubernetes マスター (すべてのマスター・コンポーネント、コンピュート・リソース、ネットワーキング・リソース、ストレージ・リソースを含む) は、IBM サイト信頼性エンジニア (SRE) によって継続的にモニターされます。 SRE は、最新のセキュリティー規格を適用し、悪意のあるアクティビティーを検出して対処し、{{site.data.keyword.containerlong_notm}} の信頼性と可用性を確保するための作業を行います。 クラスターのプロビジョン時に自動的にインストールされるアドオン (ロギング用の Fluentd など) は、IBM によって自動的に更新されます。ただし、一部のアドオンの自動更新を無効にして、マスターおよびワーカー・ノードとは別に手動で更新することもできます。詳しくは、[クラスター・アドオンの更新](cs_cluster_update.html#addons)を参照してください。 
+{{site.data.keyword.containerlong_notm}} に含まれる Kubernetes クラスターはすべて、IBM が所有する {{site.data.keyword.Bluemix_notm}} インフラストラクチャー・アカウントで、IBM が管理する専用 Kubernetes マスターによって制御されます。 Kubernetes マスター (すべてのマスター・コンポーネント、コンピュート・リソース、ネットワーキング・リソース、ストレージ・リソースを含む) は、IBM サイト信頼性エンジニア (SRE) によって継続的にモニターされます。 SRE は、最新のセキュリティー規格を適用し、悪意のあるアクティビティーを検出して対処し、{{site.data.keyword.containerlong_notm}} の信頼性と可用性を確保するための作業を行います。 クラスターのプロビジョン時に自動的にインストールされるアドオン (ロギング用の Fluentd など) は、IBM によって自動的に更新されます。 ただし、一部のアドオンの自動更新を無効にして、マスターおよびワーカー・ノードとは別に手動で更新することもできます。 詳しくは、[クラスター・アドオンの更新](cs_cluster_update.html#addons)を参照してください。 
 
-Kubernetes は、定期的に[メジャー、マイナー、またはパッチの更新](cs_versions.html#version_types)をリリースしています。 これらの更新は、Kubernetes API サーバーのバージョンや Kubernetes マスター内の他のコンポーネントに影響を与える可能性があります。パッチ・バージョンの更新は IBM によって自動的に実行されますが、マスターのメジャー・バージョンとマイナー・バージョンの更新はお客様が行う必要があります。詳しくは、[Kubernetes マスターの更新](cs_cluster_update.html#master)を参照してください。 
+Kubernetes は、定期的に[メジャー、マイナー、またはパッチの更新](cs_versions.html#version_types)をリリースしています。 これらの更新は、Kubernetes API サーバーのバージョンや Kubernetes マスター内の他のコンポーネントに影響を与える可能性があります。 パッチ・バージョンの更新は IBM によって自動的に実行されますが、マスターのメジャー・バージョンとマイナー・バージョンの更新はお客様が行う必要があります。 詳しくは、[Kubernetes マスターの更新](cs_cluster_update.html#master)を参照してください。 
 
-標準クラスターのワーカー・ノードは、{{site.data.keyword.Bluemix_notm}} インフラストラクチャー・アカウントにプロビジョンされます。ワーカー・ノードはユーザー・アカウントに専用のものです。このためユーザーは、ワーカー・ノードの OS および {{site.data.keyword.containerlong_notm}} コンポーネントに最新のセキュリティー更新とパッチが適用されるように、ワーカー・ノードに対するタイムリーな更新を要求する責任があります。セキュリティー更新およびパッチは、IBM サイト信頼性エンジニア (SRE) から提供されます。SRE は、脆弱性およびセキュリティー・コンプライアンス上の問題を検出するために、お客様のワーカー・ノードにインストールされている Linux イメージを継続的にモニターしています。詳しくは、[ワーカー・ノードの更新](cs_cluster_update.html#worker_node)を参照してください。 
+標準クラスターのワーカー・ノードは、{{site.data.keyword.Bluemix_notm}} インフラストラクチャー・アカウントにプロビジョンされます。 ワーカー・ノードはユーザー・アカウントに専用のものです。このためユーザーは、ワーカー・ノードの OS および {{site.data.keyword.containerlong_notm}} コンポーネントに最新のセキュリティー更新とパッチが適用されるように、ワーカー・ノードに対するタイムリーな更新を要求する責任があります。 セキュリティー更新およびパッチは、IBM サイト信頼性エンジニア (SRE) から提供されます。SRE は、脆弱性およびセキュリティー・コンプライアンス上の問題を検出するために、お客様のワーカー・ノードにインストールされている Linux イメージを継続的にモニターしています。 詳しくは、[ワーカー・ノードの更新](cs_cluster_update.html#worker_node)を参照してください。 
 
 ## Kubernetes マスターおよびワーカー・ノードは高可用性ですか?
 {: #ha}
@@ -61,9 +61,9 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 
 {{site.data.keyword.containerlong_notm}} のアーキテクチャーとインフラストラクチャーは、信頼性を確保し、処理待ち時間を短く、サービスの実行可能時間を最大にするように設計されています。 デフォルトでは、Kubernetes バージョン 1.10 以上を実行する {{site.data.keyword.containerlong_notm}} のすべてのクラスターに、複数の Kubernetes マスター・インスタンスがセットアップされます。これにより、1 つ以上の Kubernetes マスター・インスタンスが使用不可になっても、クラスター・リソースの可用性と利用可能性を確保できます。 
 
-クラスターの可用性をさらに高め、アプリのダウン時間を回避するために、地域の複数のゾーンに複数のワーカー・ノードを置いてワークロードを分散させることができます。[複数ゾーン・クラスター](cs_clusters_planning.html#multizone)と呼ばれるこのセットアップでは、1 つのワーカー・ノードまたは 1 つのゾーン全体が使用不可になっても、引き続きアプリにアクセスできます。 
+クラスターの可用性をさらに高め、アプリのダウン時間を回避するために、地域の複数のゾーンに複数のワーカー・ノードを置いてワークロードを分散させることができます。 [複数ゾーン・クラスター](cs_clusters_planning.html#multizone)と呼ばれるこのセットアップでは、1 つのワーカー・ノードまたは 1 つのゾーン全体が使用不可になっても、引き続きアプリにアクセスできます。 
 
-地域全体の障害から保護するには、[複数のクラスターを作成し、それらを複数の {{site.data.keyword.containerlong_notm}} 地域に分散](cs_clusters_planning.html#multiple_clusters)させます。それらのクラスターに対するロード・バランサーをセットアップすることで、クラスターの地域間ロード・バランシングと地域間ネットワーキングを実現できます。 
+地域全体の障害から保護するには、[複数のクラスターを作成し、それらを複数の {{site.data.keyword.containerlong_notm}} 地域に分散](cs_clusters_planning.html#multiple_clusters)させます。 それらのクラスターに対するロード・バランサーをセットアップすることで、クラスターの地域間ロード・バランシングと地域間ネットワーキングを実現できます。 
 
 障害発生時にもデータを使用できるようにするには、必ず[永続ストレージ](cs_storage_planning.html#storage_planning)にデータを保管してください。 
 
@@ -73,7 +73,7 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 {: #secure_cluster}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} の組み込みセキュリティー機能を使用して、クラスター内のコンポーネント、データ、アプリ・デプロイメントを保護し、セキュリティー・コンプライアンスとデータ保全性を確保できます。これらの機能を使用して、Kubernetes API サーバー、etcd データ・ストア、ワーカー・ノード、ネットワーク、ストレージ、イメージ、デプロイメントを悪意のある攻撃から保護できます。また、ロギングおよびモニタリングのための組み込みのツールを利用して、悪意のある攻撃や不審な使用パターンを検出することもできます。 
+{{site.data.keyword.containerlong_notm}} の組み込みセキュリティー機能を使用して、クラスター内のコンポーネント、データ、アプリ・デプロイメントを保護し、セキュリティー・コンプライアンスとデータ保全性を確保できます。 これらの機能を使用して、Kubernetes API サーバー、etcd データ・ストア、ワーカー・ノード、ネットワーク、ストレージ、イメージ、デプロイメントを悪意のある攻撃から保護できます。 また、ロギングおよびモニタリングのための組み込みのツールを利用して、悪意のある攻撃や不審な使用パターンを検出することもできます。 
 
 クラスターのコンポーネント、および各コンポーネントを保護する方法について詳しくは、[{{site.data.keyword.containerlong_notm}} のセキュリティー](cs_secure.html#security)を参照してください。 
 
@@ -81,7 +81,7 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 {: #bare_metal_gpu}
 {: faq}
 
-はい。ワーカー・ノードを単一テナントの物理ベア・メタル・サーバーとしてプロビジョンできます。ベア・メタル・サーバーは、データ、AI、GPU などのワークロードで高性能を発揮します。また、すべてのハードウェア・リソースがお客様のワークロード専用になるので、「ノイジー・ネイバー」に関する問題がありません。
+はい。ワーカー・ノードを単一テナントの物理ベア・メタル・サーバーとしてプロビジョンできます。 ベア・メタル・サーバーは、データ、AI、GPU などのワークロードで高性能を発揮します。 また、すべてのハードウェア・リソースがお客様のワークロード専用になるので、「ノイジー・ネイバー」に関する問題がありません。
 
 使用可能なベア・メタル・フレーバー、およびベア・メタルと仮想マシンの違いについて詳しくは、[物理マシン (ベア・メタル)](cs_clusters_planning.html#bm) を参照してください。
 
@@ -101,7 +101,7 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 {: #supported_regions}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} は世界中で利用できます。標準クラスターは、サポートされるすべての {{site.data.keyword.containerlong_notm}} 地域で作成できます。 フリー・クラスターは、選択地域でのみ使用可能です。
+{{site.data.keyword.containerlong_notm}} は世界中で利用できます。 標準クラスターは、サポートされるすべての {{site.data.keyword.containerlong_notm}} 地域で作成できます。 フリー・クラスターは、選択地域でのみ使用可能です。
 
 サポートされる地域について詳しくは、[地域とゾーン](cs_regions.html#regions-and-zones)を参照してください。
 
@@ -130,11 +130,11 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 {: #hybrid}
 {: faq}
 
-{{site.data.keyword.Bluemix_notm}} Public のサービスをオンプレミス・データ・センターに接続して、独自のハイブリッド・クラウド・セットアップを作成できます。オンプレミス・データ・センターで実行されるアプリと {{site.data.keyword.Bluemix_notm}} Public および Private を利用する方法の例は、以下のとおりです。 
+{{site.data.keyword.Bluemix_notm}} Public のサービスをオンプレミス・データ・センターに接続して、独自のハイブリッド・クラウド・セットアップを作成できます。 オンプレミス・データ・センターで実行されるアプリと {{site.data.keyword.Bluemix_notm}} Public および Private を利用する方法の例は、以下のとおりです。 
 - {{site.data.keyword.Bluemix_notm}} Public または Dedicated で {{site.data.keyword.containerlong_notm}} を使用してクラスターを作成するが、そのクラスターをオンプレミス・データベースに接続する必要がある。
-- 独自のデータ・センターの {{site.data.keyword.Bluemix_notm}} Private で Kubernetes クラスターを作成し、そのクラスターにアプリをデプロイする。ただし、そのアプリは {{site.data.keyword.Bluemix_notm}} Public の {{site.data.keyword.ibmwatson_notm}} サービス (Tone Analyzer など) を使用する可能性がある。
+- 独自のデータ・センターの {{site.data.keyword.Bluemix_notm}} Private で Kubernetes クラスターを作成し、そのクラスターにアプリをデプロイする。 ただし、そのアプリは {{site.data.keyword.Bluemix_notm}} Public の {{site.data.keyword.ibmwatson_notm}} サービス (Tone Analyzer など) を使用する可能性がある。
 
-{{site.data.keyword.Bluemix_notm}} Public または Dedicated で実行されるサービスと、オンプレミスで実行されるサービスの間で通信できるようにするには、[VPN 接続をセットアップする](cs_vpn.html#vpn)必要があります。{{site.data.keyword.Bluemix_notm}} Public または Dedicated 環境と {{site.data.keyword.Bluemix_notm}} Private 環境を接続するには、[{{site.data.keyword.Bluemix_notm}} Private での {{site.data.keyword.containerlong_notm}} の使用](cs_hybrid.html#hybrid_iks_icp)を参照してください。
+{{site.data.keyword.Bluemix_notm}} Public または Dedicated で実行されるサービスと、オンプレミスで実行されるサービスの間で通信できるようにするには、[VPN 接続をセットアップする](cs_vpn.html#vpn)必要があります。 {{site.data.keyword.Bluemix_notm}} Public または Dedicated 環境と {{site.data.keyword.Bluemix_notm}} Private 環境を接続するには、[{{site.data.keyword.Bluemix_notm}} Private での {{site.data.keyword.containerlong_notm}} の使用](cs_hybrid.html#hybrid_iks_icp)を参照してください。
 
 サポートされる {{site.data.keyword.containerlong_notm}} オファリングの概要については、[オファーとそれらの組み合わせの比較](cs_why.html#differentiation)を参照してください。
 
@@ -142,7 +142,7 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 {: #private}
 {: faq}
 
-アプリを {{site.data.keyword.Bluemix_notm}} Public または Dedicated に移行したくはないが、{{site.data.keyword.containerlong_notm}} の機能は利用したいという場合は、{{site.data.keyword.Bluemix_notm}} Private をインストールすることができます。{{site.data.keyword.Bluemix_notm}} Private は、お客様のマシンにローカルにインストールできるアプリケーション・プラットフォームです。これを利用すると、ファイアウォールの内側にある自分で管理できる環境で、オンプレミスのコンテナー化アプリを開発して管理することができます。 
+アプリを {{site.data.keyword.Bluemix_notm}} Public または Dedicated に移行したくはないが、{{site.data.keyword.containerlong_notm}} の機能は利用したいという場合は、{{site.data.keyword.Bluemix_notm}} Private をインストールすることができます。 {{site.data.keyword.Bluemix_notm}} Private は、お客様のマシンにローカルにインストールできるアプリケーション・プラットフォームです。これを利用すると、ファイアウォールの内側にある自分で管理できる環境で、オンプレミスのコンテナー化アプリを開発して管理することができます。 
 
 詳しくは、[{{site.data.keyword.Bluemix_notm}} Private の製品資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html)を参照してください。 
 
@@ -182,7 +182,7 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
   </dd>
 
 <dt id="storage">ストレージ</dt>
-  <dd>ストレージをプロビジョンする場合、ユース・ケースに適切なストレージ・タイプとストレージ・クラスを選択できます。 課金は、ストレージ・タイプ、場所、およびストレージ・インスタンスの仕様に応じて異なります。 ファイル・ストレージやブロック・ストレージなどの一部のストレージ・ソリューションでは、時間単位と月単位のプランから選択することができます。適切なストレージ・ソリューションを選択するには、[可用性の高い永続ストレージの計画](cs_storage_planning.html#storage_planning)を参照してください。 詳しくは、以下を参照してください。
+  <dd>ストレージをプロビジョンする場合、ユース・ケースに適切なストレージ・タイプとストレージ・クラスを選択できます。 課金は、ストレージ・タイプ、場所、およびストレージ・インスタンスの仕様に応じて異なります。 ファイル・ストレージやブロック・ストレージなどの一部のストレージ・ソリューションでは、時間単位と月単位のプランから選択することができます。 適切なストレージ・ソリューションを選択するには、[可用性の高い永続ストレージの計画](cs_storage_planning.html#storage_planning)を参照してください。 詳しくは、以下を参照してください。
   <ul><li>[NFS ファイル・ストレージの価格設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing)</li>
   <li>[ブロック・ストレージの価格設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/block-storage/pricing)</li>
   <li>[オブジェクト・ストレージ・プラン ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
@@ -212,5 +212,5 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 {: #usage}
 {: faq}
 
-{{site.data.keyword.Bluemix_notm}} プラットフォームおよびインフラストラクチャーのリソースの現在の使用量と、月額合計の見積もりを確認できます。詳しくは、[使用量の表示](/docs/billing-usage/viewing_usage.html#viewingusage)を参照してください。請求を編成するために、ご使用のリソースを[リソース・グループ](/docs/resources/bestpractice_rgs.html#bp_resourcegroups)にグループ化することができます。 
+{{site.data.keyword.Bluemix_notm}} プラットフォームおよびインフラストラクチャーのリソースの現在の使用量と、月額合計の見積もりを確認できます。 詳しくは、[使用量の表示](/docs/billing-usage/viewing_usage.html#viewingusage)を参照してください。 請求を編成するために、ご使用のリソースを[リソース・グループ](/docs/resources/bestpractice_rgs.html#bp_resourcegroups)にグループ化することができます。 
 

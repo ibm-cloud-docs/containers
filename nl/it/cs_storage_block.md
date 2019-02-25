@@ -58,7 +58,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 2. Segui le [istruzioni](cs_integrations.html#helm) per installare il client Helm sulla tua macchina locale e per installare il server Helm (tiller) nel tuo cluster.
 
    Se utilizzi Helm versione 2.9 o superiore, assicurati di avere installato tiller con un [account di servizio](cs_integrations.html#helm).
-    {: important}
+   {: important}
    
 3. Aggiungi il repository di grafici Helm {{site.data.keyword.Bluemix_notm}} al cluster in cui vuoi utilizzare il plug-in {{site.data.keyword.Bluemix_notm}} Block Storage.
    ```
@@ -1090,10 +1090,10 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
 ## Modifica della dimensione e dell'IOPS del tuo dispositivo di archiviazione esistente
 {: #change_storage_configuration}
 
-Se vuoi modificare la capacità o le prestazioni di archiviazione, puoi modificare il tuo volume esistente.
+Se vuoi modificare la capacità o le prestazioni di archiviazione, puoi modificare il tuo volume esistente. 
 {: shortdesc}
 
-Per domande sulla fatturazione e per trovare i passi su come utilizzare la console {{site.data.keyword.Bluemix_notm}} per modificare la tua archiviazione, vedi [Espansione della capacità di Block Storage](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). Se utilizzi la console {{site.data.keyword.Bluemix_notm}} per modificare l'archiviazione, devi seguire i passi 4-7 in questo argomento per completare la modifica.
+Per domande sulla fatturazione e per trovare i passi su come utilizzare la console {{site.data.keyword.Bluemix_notm}} per modificare la tua archiviazione, vedi [Espansione della capacità di Block Storage](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). Se utilizzi la console {{site.data.keyword.Bluemix_notm}} per modificare l'archiviazione, devi seguire i passi 4-7 in questo argomento per completare la modifica. 
 {: tip}
 
 1. Elenca le PVC nel tuo cluster e prendi nota del nome del PV associato dalla colonna **VOLUME**. 
@@ -1206,7 +1206,7 @@ Per domande sulla fatturazione e per trovare i passi su come utilizzare la conso
    
    I pod vengono restituiti nel formato: `<pod_name>: <pvc_name>`. 
    
-6. Se hai un pod che utilizza la PVC, riavvialo rimuovendo il pod e lasciando che Kubernetes lo ricrei. Se hai creato un pod senza utilizzare una distribuzione o una serie di repliche Kubernetes, devi ricreare il pod dopo averlo rimosso.
+6. Se hai un pod che utilizza la PVC, riavvialo rimuovendo il pod e lasciando che Kubernetes lo ricrei. Se hai creato un pod senza utilizzare una distribuzione o una serie di repliche Kubernetes, devi ricreare il pod dopo averlo rimosso. 
    Per richiamare il file YAML che è stato utilizzato per creare il tuo pod, esegui `kubectl get pod <pod_name> -o yaml >pod.yaml`. 
    {: tip}
    ```
@@ -1215,20 +1215,20 @@ Per domande sulla fatturazione e per trovare i passi su come utilizzare la conso
    {: pre}
    
 7. Se hai modificato la dimensione del tuo volume, accedi al pod per verificare la nuova dimensione. 
-   1. Ottieni il percorso di montaggio del volume che hai usato nel tuo pod per accedere al tuo volume.
+   1. Ottieni il percorso di montaggio del volume che hai usato nel tuo pod per accedere al tuo volume. 
       ```
       kubectl describe pod <pod_name>
       ```
       {: pre}
       
-      Il percorso di montaggio del volume è mostrato nella sezione **Containers** > **block** > **Mounts** dell'output della CLI.
+      Il percorso di montaggio del volume è mostrato nella sezione **Containers** > **block** > **Mounts** dell'output della CLI. 
    2. Accedi al tuo pod. 
       ```
       kubectl exec -it <pod_name> bash
       ```
       {: pre}
       
-   3. Mostra le statistiche di utilizzo del disco e trova il percorso di montaggio per il volume che hai richiamato in precedenza. Verifica che la colonna **Size** mostri la nuova dimensione del tuo volume.
+   3. Mostra le statistiche di utilizzo del disco e trova il percorso di montaggio per il volume che hai richiamato in precedenza. Verifica che la colonna **Size** mostri la nuova dimensione del tuo volume. 
       ```
       df -h
       ```

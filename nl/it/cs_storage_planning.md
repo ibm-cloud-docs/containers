@@ -66,7 +66,7 @@ Prima di poter decidere quale tipo di archiviazione è la soluzione giusta per t
    - **Accesso tra i pod:** quando utilizzi i volumi persistenti Kubernetes per accedere alla tua archiviazione, puoi determinare il numero di pod che possono montare il volume contemporaneamente. Ad alcune soluzioni di archiviazione, come ad esempio l'archiviazione blocchi, può accedere un solo pod per volta. Altre soluzioni di archiviazione ti consentono di condividere lo stesso volume tra più pod.
    - **Accesso tra zone e regioni:** potresti aver bisogno che i tuoi dati siano accessibili tra zone o regioni. Alcune soluzioni di archiviazione, come l'archiviazione file e blocchi, sono specifiche per i data center e non possono essere condivise tra zone in una configurazione del cluster multizona.
    
-   Se desideri rendere i tuoi dati accessibili tra zone o regioni, assicurati di consultare il tuo dipartimento legale per verificare che i tuoi dati possano essere archiviati in più zone o in un altro paese.
+   Se desideri rendere i tuoi dati accessibili tra zone o regioni, assicurati di consultare il tuo dipartimento legale per verificare che i tuoi dati possano essere archiviati in più zone o in un altro paese. 
    {: note}
 
 6. Comprendi le altre caratteristiche di archiviazione che si ripercuotono sulla tua scelta.

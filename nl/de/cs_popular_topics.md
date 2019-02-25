@@ -41,7 +41,7 @@ Bleiben Sie auf dem neuesten Stand bei den Entwicklungen für {{site.data.keywor
 <tr>
 <td>6. Dezember</td>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>Gewinnen Sie betriebliche Einblicke in die Leistung und den Allgemeinzustand Ihrer Apps, indem Sie Sysdig als Drittanbieterservice auf Ihren Workerknoten bereitstellen, um Metriken an {{site.data.keyword.monitoringlong}} weiterzuleiten. Weitere Informationen finden Sie unter [Metriken für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Hinweis**: Wenn Sie {{site.data.keyword.mon_full_notm}} mit Clustern verwenden, auf denen Kubernetes Version 1.11 oder höher ausgeführt wird, werden nicht alle Containermetriken erfasst, da Sysdig derzeit `containerd` nicht unterstützt. </td>
+<td>Gewinnen Sie betriebliche Einblicke in die Leistung und den Allgemeinzustand Ihrer Apps, indem Sie Sysdig als Drittanbieterservice auf Ihren Workerknoten bereitstellen, um Metriken an {{site.data.keyword.monitoringlong}} weiterzuleiten. Weitere Informationen finden Sie unter [Metriken für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Hinweis**: Wenn Sie {{site.data.keyword.mon_full_notm}} mit Clustern verwenden, auf denen Kubernetes Version 1.11 oder höher ausgeführt wird, werden nicht alle Containermetriken erfasst, da Sysdig derzeit `containerd` nicht unterstützt.</td>
 </tr>
 </tbody></table>
 
@@ -64,32 +64,32 @@ Bleiben Sie auf dem neuesten Stand bei den Entwicklungen für {{site.data.keywor
 <tr>
 <td>27. November</td>
 <td>{{site.data.keyword.la_full_notm}}</td>
-<td>Fügen Sie Ihrem Cluster Protokollmanagementfunktionen hinzu, indem Sie LogDNA als Drittanbieterservice auf Ihren Workerknoten implementieren, um Protokolle aus Ihren Pod-Containern zu verwalten. Weitere Informationen finden Sie unter [Kubernetes-Clusterprotokolle mit {{site.data.keyword.loganalysisfull_notm}} und LogDNA verwalten](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube). </td>
+<td>Fügen Sie Ihrem Cluster Protokollmanagementfunktionen hinzu, indem Sie LogDNA als Drittanbieterservice auf Ihren Workerknoten implementieren, um Protokolle aus Ihren Pod-Containern zu verwalten. Weitere Informationen finden Sie unter [Kubernetes-Clusterprotokolle mit {{site.data.keyword.loganalysisfull_notm}} und LogDNA verwalten](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
 </tr>
 <tr>
 <td>7. November</td>
 <td>Lastausgleichsfunktion der Version 2.0 (Beta)</td>
-<td>Sie können jetzt zwischen einer [Lastausgleichsfunktion der Version 1.0 oder 2.0](cs_loadbalancer.html#planning_ipvs) wählen, um Ihre Cluster-Apps sicher öffentlich zugänglich zu machen. </td>
+<td>Sie können jetzt zwischen einer [Lastausgleichsfunktion der Version 1.0 oder 2.0](cs_loadbalancer.html#planning_ipvs) wählen, um Ihre Cluster-Apps sicher öffentlich zugänglich zu machen.</td>
 </tr>
 <tr>
 <td>7. November</td>
 <td>Kubernetes Version 1.12 verfügbar</td>
-<td>Sie können jetzt Cluster aktualisieren oder erstellen, die [Kubernetes Version 1.12](cs_versions.html#cs_v112) ausführen! Cluster der Version 1.12 werden standardmäßig mit hoch verfügbaren Kubernetes-Mastern bereitgestellt. </td>
+<td>Sie können jetzt Cluster aktualisieren oder erstellen, die [Kubernetes Version 1.12](cs_versions.html#cs_v112) ausführen! Cluster der Version 1.12 werden standardmäßig mit hoch verfügbaren Kubernetes-Mastern bereitgestellt.</td>
 </tr>
 <tr>
 <td>7. November</td>
 <td>Hoch verfügbare Master in Clustern, die Kubernetes Version 1.10 ausführen</td>
-<td>Hoch verfügbare Master sind für Cluster verfügbar, die Kubernetes Version 1.10 ausführen! Alle im vorherigen Eintrag für Cluster der Version 1.11 beschriebenen Vorteile gelten auch für Cluster der Version 1.10. Dies gilt auch für die [Vorbereitungsschritte](cs_versions.html#110_ha-masters), die Sie ausführen müssen. </td>
+<td>Hoch verfügbare Master sind für Cluster verfügbar, die Kubernetes Version 1.10 ausführen! Alle im vorherigen Eintrag für Cluster der Version 1.11 beschriebenen Vorteile gelten auch für Cluster der Version 1.10. Dies gilt auch für die [Vorbereitungsschritte](cs_versions.html#110_ha-masters), die Sie ausführen müssen.</td>
 </tr>
 <tr>
 <td>1. November</td>
 <td>Hoch verfügbare Master in Clustern, die Kubernetes Version 1.11 ausführen</td>
-<td>In einer Einzelzone ist Ihr Master hochverfügbar und umfasst Replikate auf separaten physischen Hosts für Ihren Kubernetes-API-Server, für 'etcd', für Ihren Scheduler und Ihren Controller-Manager, um beispielsweise vor Ausfällen während der Aktualisierung eines Clusters zu schützen. Wenn sich Ihr Cluster in einer mehrzonenfähigen Zone befindet, wird Ihr hoch verfügbarer Master über Zonen verteilt, um besser vor einem Zonenausfall zu schützen. <br>Informationen zu den Aktionen, die Sie ausführen müssen, finden Sie unter [Aktualisierung auf hoch verfügbare Cluster-Master](cs_versions.html#ha-masters). Diese Vorbereitungsaktionen finden Anwendung: <ul>
-<li>Wenn Sie über eine Firewall oder über angepasste Calico-Netzrichtlinien verfügen. </li>
-<li>Wenn Sie die Host-Ports `2040` oder `2041` auf Ihren Workerknoten verwenden. </li>
-<li>Wenn Sie die IP-Adresse des Cluster-Masters für den clusterinternen Zugriff auf den Master verwendet haben. </li>
-<li>Wenn eine Automatisierung vorhanden ist, die die Calico-API oder -CLI (`calicoctl`) aufruft, z. B. um Calico-Richtlinien zu erstellen. </li>
-<li>Wenn Sie Kubernetes- oder Calico-Netzrichtlinien zum Steuern des Pod-Egress-Zugriffs auf den Master verwenden. </li></ul></td>
+<td>In einer Einzelzone ist Ihr Master hochverfügbar und umfasst Replikate auf separaten physischen Hosts für Ihren Kubernetes-API-Server, für 'etcd', für Ihren Scheduler und Ihren Controller-Manager, um beispielsweise vor Ausfällen während der Aktualisierung eines Clusters zu schützen. Wenn sich Ihr Cluster in einer mehrzonenfähigen Zone befindet, wird Ihr hoch verfügbarer Master über Zonen verteilt, um besser vor einem Zonenausfall zu schützen.<br>Informationen zu den Aktionen, die Sie ausführen müssen, finden Sie unter [Aktualisierung auf hoch verfügbare Cluster-Master](cs_versions.html#ha-masters). Diese Vorbereitungsaktionen finden Anwendung:<ul>
+<li>Wenn Sie über eine Firewall oder über angepasste Calico-Netzrichtlinien verfügen.</li>
+<li>Wenn Sie die Host-Ports `2040` oder `2041` auf Ihren Workerknoten verwenden.</li>
+<li>Wenn Sie die IP-Adresse des Cluster-Masters für den clusterinternen Zugriff auf den Master verwendet haben.</li>
+<li>Wenn eine Automatisierung vorhanden ist, die die Calico-API oder -CLI (`calicoctl`) aufruft, z. B. um Calico-Richtlinien zu erstellen.</li>
+<li>Wenn Sie Kubernetes- oder Calico-Netzrichtlinien zum Steuern des Pod-Egress-Zugriffs auf den Master verwenden.</li></ul></td>
 </tr>
 </tbody></table>
 
@@ -122,7 +122,7 @@ Bleiben Sie auf dem neuesten Stand bei den Entwicklungen für {{site.data.keywor
 <tr>
 <td>04. Oktober</td>
 <td>[{{site.data.keyword.registrylong}} ist jetzt in {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/services/Registry/iam.html#iam) integriert.</td>
-<td>Sie können {{site.data.keyword.Bluemix_notm}} IAM zum Steuern des Zugriffs auf Registrierungsressourcen verwenden, zum Beispiel zum Extrahieren, Hinzufügen oder Erstellen von Images. Wenn Sie einen Cluster erstellen, erstellen Sie auch ein Registry-Token, damit der Cluster mit der Registry arbeiten kann. Somit benötigen Sie die Plattformmanagementrolle **Administrator** der Registry auf Kontoebene zum Erstellen eines Clusters. Informationen zum Aktivieren von {{site.data.keyword.Bluemix_notm}} IAM für ein Registry-Konto finden Sie unter [Richtliniendurchsetzung für vorhandene Benutzer aktivieren](/docs/services/Registry/registry_users.html#existing_users). </td>
+<td>Sie können {{site.data.keyword.Bluemix_notm}} IAM zum Steuern des Zugriffs auf Registrierungsressourcen verwenden, zum Beispiel zum Extrahieren, Hinzufügen oder Erstellen von Images. Wenn Sie einen Cluster erstellen, erstellen Sie auch ein Registry-Token, damit der Cluster mit der Registry arbeiten kann. Somit benötigen Sie die Plattformmanagementrolle **Administrator** der Registry auf Kontoebene zum Erstellen eines Clusters. Informationen zum Aktivieren von {{site.data.keyword.Bluemix_notm}} IAM für ein Registry-Konto finden Sie unter [Richtliniendurchsetzung für vorhandene Benutzer aktivieren](/docs/services/Registry/registry_users.html#existing_users).</td>
 </tr>
 <tr>
 <td>01. Oktober</td>
@@ -261,7 +261,7 @@ Pod-Sicherheitsrichtlinien konfigurieren, um zu festzulegen, wer Pods in {{site.
 <tr>
 <td>1. Mai</td>
 <td>[Kubernetes-Dashboard über die Konsole bereitstellen](cs_app.html#cli_dashboard)</td>
-<td>Wollten Sie schon immer einmal mit nur einem Klick auf das Kubernetes-Dashboard zugreifen? Sehen Sie sich dazu die Schaltfläche **Kubernetes-Dashboard** in der {{site.data.keyword.Bluemix_notm}}-Konsole genauer an. </td>
+<td>Wollten Sie schon immer einmal mit nur einem Klick auf das Kubernetes-Dashboard zugreifen? Sehen Sie sich dazu die Schaltfläche **Kubernetes-Dashboard** in der {{site.data.keyword.Bluemix_notm}}-Konsole genauer an.</td>
 </tr>
 </tbody></table>
 

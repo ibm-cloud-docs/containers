@@ -278,7 +278,7 @@ Per controllare le tue autorizzazioni di accesso utente:
           ibmcloud target -g none
           ```
           {: pre}
-        Questo comando non riesce perché non esiste alcun gruppo di risorse denominato `none`. Tuttavia, il gruppo di risorse corrente viene automaticamente disattivato quando il comando non riesce.
+          Questo comando non riesce perché non esiste alcun gruppo di risorse denominato `none`. Tuttavia, il gruppo di risorse corrente viene automaticamente disattivato quando il comando non riesce.
         3. Specifica il cluster.
           ```
           ibmcloud ks cluster-config <cluster_name_or_ID>

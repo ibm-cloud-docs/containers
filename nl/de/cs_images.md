@@ -191,7 +191,7 @@ Sie können das imagePullSecret, das automatisch für den Kubernetes-Standardnam
    ```
    {: pre}
 
-3. Kopieren Sie das imagePullSecrets aus dem Namensbereich `default` in den Namensbereich Ihrer Wahl. Die neuen 'imagePullSecrets' heißen `bluemix-<name_des_namensbereichs>-secret-regional` und `bluemix-<namespace_name>-secret-international`. 
+3. Kopieren Sie das imagePullSecrets aus dem Namensbereich `default` in den Namensbereich Ihrer Wahl. Die neuen 'imagePullSecrets' heißen `bluemix-<name_des_namensbereichs>-secret-regional` und `bluemix-<namespace_name>-secret-international`.
    ```
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<name_des_namensbereichs>/g' | kubectl -n <name_des_namensbereichs> create -f -
    ```
@@ -311,7 +311,7 @@ Gehen Sie wie folgt vor, um ein imagePullSecret zu erstellen:
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes-namensbereich&gt;</em></code></td>
-    <td>Erforderlich. Der Kubernetes-Namensbereich Ihres Clusters, in dem Sie den geheimen Schlüssel verwenden und Container bereitstellen möchten. Führen Sie <code>kubectl get namespaces</code> aus, um alle Namensbereiche in Ihrem Cluster aufzulisten. </td>
+    <td>Erforderlich. Der Kubernetes-Namensbereich Ihres Clusters, in dem Sie den geheimen Schlüssel verwenden und Container bereitstellen möchten. Führen Sie <code>kubectl get namespaces</code> aus, um alle Namensbereiche in Ihrem Cluster aufzulisten.</td>
     </tr>
     <tr>
     <td><code><em>&lt;name_des_geheimen_schlüssels&gt;</em></code></td>

@@ -19,7 +19,7 @@ lastupdated: "2018-12-05"
 {:download: .download}
 
 
-# Sucesos de {{site.data.keyword.cloudaccesstrailshort}}
+# {{site.data.keyword.cloudaccesstrailshort}} events
 {: #at_events}
 
 Puede ver, gestionar y auditar las actividades que ha realizado el usuario en el clúster de {{site.data.keyword.containerlong_notm}} mediante el servicio {{site.data.keyword.cloudaccesstrailshort}}.

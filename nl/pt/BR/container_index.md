@@ -70,7 +70,7 @@ Bom Trabalho! Você criou seu primeiro cluster do Kubernetes. Aqui estão alguns
 *   **Outras opções**: clusters grátis são implementados na região que você seleciona, mas não é possível escolher qual zona. Para controlar a zona, a rede e o armazenamento persistente, crie um cluster padrão. [Saiba mais sobre os benefícios de clusters grátis e padrão](cs_why.html#cluster_types).
 
 
-**O que vem a seguir?**</br>
+**O que Vem a Seguir?**</br>
 Experimente algumas coisas com seu cluster grátis antes de expirar.
 
 * Percorra o [primeiro tutorial do {{site.data.keyword.containerlong_notm}}](cs_tutorials.html#cs_cluster_tutorial) para criar um cluster do Kubernetes, instalando a CLI, criando um registro privado, configurando seu ambiente de cluster e incluindo um serviço em seu cluster.

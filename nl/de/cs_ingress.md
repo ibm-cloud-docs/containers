@@ -92,7 +92,7 @@ Bevor Sie mit der Verwendung mit Ingress beginnen, überprüfen Sie die folgende
 
 **Voraussetzungen für alle Ingress-Konfigurationen:**
 - Ingress ist nur für Standardcluster verfügbar und erfordert mindestens zwei Workerknoten pro Zone, um eine hohe Verfügbarkeit und regelmäßige Aktualisierungen zu gewährleisten.
-- Für die Einrichtung von Ingress ist die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Administrator** erforderlich. 
+- Für die Einrichtung von Ingress ist die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Administrator** erforderlich.
 
 **Voraussetzungen für die Verwendung von Ingress in Mehrzonenclustern**:
  - Wenn Sie den Datenaustausch im Netz auf [Edge-Workerknoten](cs_edge.html) beschränken möchten, müssen in jeder Zone mindestens zwei Edge-Workerknoten für die Hochverfügbarkeit von Ingress-Pods aktiviert werden. [Erstellen Sie einen Worker-Pool für Edge-Workerknoten](cs_clusters.html#add_pool), der sich über alle Zonen im Cluster erstreckt und mindestens zwei Workerknoten pro Zone aufweist.
@@ -281,7 +281,7 @@ ibmcloud ks alb-cert-deploy --secret-name <name_des_geheimen_schlüssels> --clus
 {: pre}
 
 Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
-1. Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist. 
+1. Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
 2. Konvertieren Sie das Zertifikat und den Schlüssel in Base-64.
    1. Verschlüsseln Sie das Zertifikat und den Schlüssel in Base-64 und speichern Sie den mit Base-64 verschlüsselten Wert in einer neuen Datei.
       ```
@@ -575,7 +575,7 @@ Gehen Sie wie folgt vor, um Apps außerhalb Ihres Clusters öffentlich zugängli
         ```
         {: pre}
 
-3. Fahren Sie mit den Schritten unter "Apps in Ihrem Cluster öffentlich zugänglich machen" fort, [Schritt 2: App-Domäne auswählen](#public_inside_2). 
+3. Fahren Sie mit den Schritten unter "Apps in Ihrem Cluster öffentlich zugänglich machen" fort, [Schritt 2: App-Domäne auswählen](#public_inside_2).
 
 <br />
 
@@ -765,7 +765,7 @@ ibmcloud ks alb-cert-deploy --secret-name <name_des_geheimen_schlüssels> --clus
 {: pre}
 
 Wenn kein TLS-Zertifikat bereitsteht, führen Sie die folgenden Schritte aus:
-1. Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist. 
+1. Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
 2. Konvertieren Sie das Zertifikat und den Schlüssel in Base-64.
    1. Verschlüsseln Sie das Zertifikat und den Schlüssel in Base-64 und speichern Sie den mit Base-64 verschlüsselten Wert in einer neuen Datei.
       ```

@@ -413,7 +413,7 @@ Region:                us-south
 
 {{site.data.keyword.containerlong_notm}} リソース・グループおよび地域の {{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) API キーの所有者の名前と E メール・アドレスを表示します。
 
-{{site.data.keyword.containerlong_notm}} 管理アクセス・ポリシーを必要とする最初のアクションが実行されると、リソース・グループおよび地域に対して {{site.data.keyword.Bluemix_notm}} API キーが自動的に設定されます。例えば、管理ユーザーの 1 人が `us-south` 地域内の `default` リソース・グループに最初のクラスターを作成したとします。 これにより、そのリソース・グループおよび地域に対してこのユーザーの {{site.data.keyword.Bluemix_notm}} IAM API キーがアカウントに保管されます。 新しいワーカー・ノードや VLAN などのリソースを IBM Cloud インフラストラクチャー (SoftLayer) で注文する際には、この API キーが使用されます。 リソース・グループ内で地域ごとに異なる API キーを設定できます。
+{{site.data.keyword.containerlong_notm}} 管理アクセス・ポリシーを必要とする最初のアクションが実行されると、リソース・グループおよび地域に対して {{site.data.keyword.Bluemix_notm}} API キーが自動的に設定されます。 例えば、管理ユーザーの 1 人が `us-south` 地域内の `default` リソース・グループに最初のクラスターを作成したとします。 これにより、そのリソース・グループおよび地域に対してこのユーザーの {{site.data.keyword.Bluemix_notm}} IAM API キーがアカウントに保管されます。 新しいワーカー・ノードや VLAN などのリソースを IBM Cloud インフラストラクチャー (SoftLayer) で注文する際には、この API キーが使用されます。 リソース・グループ内で地域ごとに異なる API キーを設定できます。
 
 IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオとのやりとりが必要なアクション (例えば、新規クラスターの作成やワーカー・ノードの再ロードなど) を別のユーザーがこのリソース・グループおよび地域で実行すると、保管されている API キーを基に、そのアクションを実行できるだけの権限があるかどうかが判断されます。 インフラストラクチャー関連のアクションをクラスター内で正常に実行するためには、{{site.data.keyword.containerlong_notm}} 管理ユーザーにインフラストラクチャー・アクセス・ポリシーの**スーパーユーザー**を割り当ててください。 詳しくは、[ユーザー・アクセスの管理](cs_users.html#infra_access)を参照してください。
 
@@ -1003,7 +1003,7 @@ trusted: <em>true</em>
 ### ibmcloud ks cluster-refresh --cluster CLUSTER [-f][-s]
 {: #cs_cluster_refresh}
 
-クラスター・マスター・ノードを再始動して、新しい Kubernetes API 構成変更を適用します。ご使用のワーカー・ノード、アプリ、リソースは変更されず、引き続き実行されます。
+クラスター・マスター・ノードを再始動して、新しい Kubernetes API 構成変更を適用します。 ご使用のワーカー・ノード、アプリ、リソースは変更されず、引き続き実行されます。
 {: shortdesc}
 
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**オペレーター**のプラットフォーム役割
@@ -1266,7 +1266,7 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
 
 [コンテナー・スキャナーのインストール](/docs/services/va/va_index.html#va_install_container_scanner)後に、クラスター内のコンテナーに関する詳細な脆弱性評価レポートを表示します。
 
-<strong>最小限必要な許可</strong>: {{site.data.keyword.registrylong_notm}} に対する**リーダー**のサービス・アクセス役割。**注**: {{site.data.keyword.registryshort_notm}} のポリシーをリソース・グループ・レベルで割り当てないでください。
+<strong>最小限必要な許可</strong>: {{site.data.keyword.registrylong_notm}} に対する**リーダー**のサービス・アクセス役割。 **注**: {{site.data.keyword.registryshort_notm}} のポリシーをリソース・グループ・レベルで割り当てないでください。
 
 **コマンド・オプション**:
 
@@ -1535,9 +1535,9 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントで使用
 ### ibmcloud ks alb-autoupdate-disable --cluster CLUSTER
 {: #cs_alb_autoupdate_disable}
 
-デフォルトでは、Ingress アプリケーション・ロード・バランサー (ALB) アドオンに対する自動更新が有効になっています。新しいビルド・バージョンが使用可能になると、ALB ポッドが自動的に更新されます。代わりに手動でアドオンを更新したい場合に、このコマンドを使用して自動更新を無効にすることができます。その後に、[`ibmcloud ks alb-update` コマンド](#cs_alb_update)を実行して ALB ポッドを更新できます。
+デフォルトでは、Ingress アプリケーション・ロード・バランサー (ALB) アドオンに対する自動更新が有効になっています。 新しいビルド・バージョンが使用可能になると、ALB ポッドが自動的に更新されます。 代わりに手動でアドオンを更新したい場合に、このコマンドを使用して自動更新を無効にすることができます。 その後に、[`ibmcloud ks alb-update` コマンド](#cs_alb_update)を実行して ALB ポッドを更新できます。
 
-お客様がクラスターの Kubernetes のメジャー・バージョンまたはマイナー・バージョンを更新した場合、IBM は Ingress デプロイメントに対して必要な変更を自動的に行いますが、Ingress ALB アドオンのビルド・バージョンは変更しません。お客様が、最新の Kubernetes バージョンと Ingress ALB アドオン・イメージの適合性を確認する必要があります。
+お客様がクラスターの Kubernetes のメジャー・バージョンまたはマイナー・バージョンを更新した場合、IBM は Ingress デプロイメントに対して必要な変更を自動的に行いますが、Ingress ALB アドオンのビルド・バージョンは変更しません。 お客様が、最新の Kubernetes バージョンと Ingress ALB アドオン・イメージの適合性を確認する必要があります。
 
 **最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
 
@@ -1551,7 +1551,7 @@ ibmcloud ks alb-autoupdate-disable --cluster mycluster
 ### ibmcloud ks alb-autoupdate-enable --cluster CLUSTER
 {: #cs_alb_autoupdate_enable}
 
-Ingress ALB アドオンの自動更新を無効にした場合に、再び自動更新を有効にすることができます。次のビルド・バージョンが使用可能になるたびに、ALB は自動的に最新ビルドに更新されます。
+Ingress ALB アドオンの自動更新を無効にした場合に、再び自動更新を有効にすることができます。 次のビルド・バージョンが使用可能になるたびに、ALB は自動的に最新ビルドに更新されます。
 
 **最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
 
@@ -1818,7 +1818,7 @@ ALB の詳細を表示します。
 ### ibmcloud ks alb-rollback --cluster CLUSTER
 {: #cs_alb_rollback}
 
-ALB ポッドが最近更新されたが、ALB のカスタム構成が最新ビルドの影響を受けているという場合は、ALB ポッドが以前実行していたビルドに更新をロールバックできます。更新をロールバックした後、ALB ポッドの自動更新は無効になります。自動更新を再び有効にするには、[`alb-autoupdate-enable` コマンド](#cs_alb_autoupdate_enable)を使用します。
+ALB ポッドが最近更新されたが、ALB のカスタム構成が最新ビルドの影響を受けているという場合は、ALB ポッドが以前実行していたビルドに更新をロールバックできます。 更新をロールバックした後、ALB ポッドの自動更新は無効になります。 自動更新を再び有効にするには、[`alb-autoupdate-enable` コマンド](#cs_alb_autoupdate_enable)を使用します。
 
 **最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
 
@@ -1856,9 +1856,9 @@ ibmcloud ks alb-rollback --cluster mycluster
 ### ibmcloud ks alb-update --cluster CLUSTER
 {: #cs_alb_update}
 
-Ingress ALB アドオンの自動更新が無効になっている場合にアドオンを更新するには、一回限りの ALB ポッド更新を強制実行します。アドオンを手動で更新することにした場合は、クラスター内のすべての ALB ポッドが最新ビルドに更新されます。個々の ALB を更新したり、どのビルドにアドオンを更新するかを選択したりすることはできません。自動更新は無効のままです。
+Ingress ALB アドオンの自動更新が無効になっている場合にアドオンを更新するには、一回限りの ALB ポッド更新を強制実行します。 アドオンを手動で更新することにした場合は、クラスター内のすべての ALB ポッドが最新ビルドに更新されます。 個々の ALB を更新したり、どのビルドにアドオンを更新するかを選択したりすることはできません。 自動更新は無効のままです。
 
-お客様がクラスターの Kubernetes のメジャー・バージョンまたはマイナー・バージョンを更新した場合、IBM は Ingress デプロイメントに対して必要な変更を自動的に行いますが、Ingress ALB アドオンのビルド・バージョンは変更しません。お客様が、最新の Kubernetes バージョンと Ingress ALB アドオン・イメージの適合性を確認する必要があります。
+お客様がクラスターの Kubernetes のメジャー・バージョンまたはマイナー・バージョンを更新した場合、IBM は Ingress デプロイメントに対して必要な変更を自動的に行いますが、Ingress ALB アドオンのビルド・バージョンは変更しません。 お客様が、最新の Kubernetes バージョンと Ingress ALB アドオン・イメージの適合性を確認する必要があります。
 
 **最小限必要な許可**: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**エディター**のプラットフォーム役割
 
@@ -1951,7 +1951,7 @@ Infrastructure credentials for user name user@email.com set for resource group d
 
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
-   <dd>IBM Cloud インフラストラクチャー (SoftLayer) アカウントの API ユーザー名。 この値は必須です。 インフラストラクチャー API ユーザー名は IBMid と同じではないことに注意してください。インフラストラクチャーの API ユーザー名を表示するには、以下のようにします。
+   <dd>IBM Cloud インフラストラクチャー (SoftLayer) アカウントの API ユーザー名。 この値は必須です。 インフラストラクチャー API ユーザー名は IBMid と同じではないことに注意してください。 インフラストラクチャーの API ユーザー名を表示するには、以下のようにします。
    <ol><li>[{{site.data.keyword.Bluemix_notm}} ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) にログインします。</li>
    <li>メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン") から、**「インフラストラクチャー」**を選択します。</li>
    <li>メニュー・バーから、**「アカウント」** > **「ユーザー」** > **「ユーザー・リスト」**を選択します。</li>
@@ -2114,25 +2114,25 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントの VLAN 
 ### ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
 {: #cs_log_autoupdate_disable}
 
-特定のクラスター内の Fluentd ポッドの自動更新を無効にします。 お客様がクラスターの Kubernetes のメジャー・バージョンまたはマイナー・バージョンを更新した場合、IBM は Fluentd 構成マップに対して必要な変更を自動的に行いますが、ロギング用 Fluentd アドオンのビルド・バージョンは変更しません。お客様が、最新の Kubernetes バージョンとアドオン・イメージの適合性を確認する必要があります。
+特定のクラスター内の Fluentd ポッドの自動更新を無効にします。 お客様がクラスターの Kubernetes のメジャー・バージョンまたはマイナー・バージョンを更新した場合、IBM は Fluentd 構成マップに対して必要な変更を自動的に行いますが、ロギング用 Fluentd アドオンのビルド・バージョンは変更しません。 お客様が、最新の Kubernetes バージョンとアドオン・イメージの適合性を確認する必要があります。
 
 <strong>コマンド・オプション</strong>:
 
 <dl>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>Fluentd アドオンの自動更新を無効にするクラスターの名前または ID。この値は必須です。</dd>
+    <dd>Fluentd アドオンの自動更新を無効にするクラスターの名前または ID。 この値は必須です。</dd>
 </dl>
 
 ### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
 {: #cs_log_autoupdate_enable}
 
-特定のクラスター内の Fluentd ポッドの自動更新を有効にします。新しいビルド・バージョンが使用可能になると、Fluentd ポッドが自動的に更新されます。
+特定のクラスター内の Fluentd ポッドの自動更新を有効にします。 新しいビルド・バージョンが使用可能になると、Fluentd ポッドが自動的に更新されます。
 
 <strong>コマンド・オプション</strong>:
 
 <dl>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>Fluentd アドオンの自動更新を有効にするクラスターの名前または ID。この値は必須です。</dd>
+    <dd>Fluentd アドオンの自動更新を有効にするクラスターの名前または ID。 この値は必須です。</dd>
 </dl>
 
 ### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
@@ -2144,7 +2144,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントの VLAN 
 
 <dl>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>Fluentd アドオンの自動更新が有効になっているかどうかを検査するクラスターの名前または ID。この値は必須です。</dd>
+    <dd>Fluentd アドオンの自動更新が有効になっているかどうかを検査するクラスターの名前または ID。 この値は必須です。</dd>
 </dl>
 
 ### ibmcloud ks logging-config-create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG][--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS][--syslog-protocol PROTOCOL]  [--json][--skip-validation] [--force-update][-s]
@@ -2260,7 +2260,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントの VLAN 
   {: pre}
 
 
-### ibmcloud ks logging-config-refresh --cluster CLUSTER  [--force-update][-s]
+### ibmcloud ks logging-config-refresh --cluster CLUSTER  [--force-update]  [-s]
 {: #cs_logging_refresh}
 
 クラスターのロギング構成をリフレッシュします。 クラスター内のスペース・レベルに転送を行うすべてのロギング構成のロギング・トークンをリフレッシュします。
@@ -3035,7 +3035,7 @@ diskEncryption: <em>false</em></code></pre>
 ### ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER][--skip-master-healthcheck] [-s]
 {: #cs_worker_reload}
 
-ワーカー・ノードの構成を再ロードします。再ロードは、ワーカー・ノードでパフォーマンスの低下などの問題が発生した場合や、ワーカー・ノードが正常でない状態に陥った場合に役立ちます。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](cs_storage_planning.html#persistent_storage_overview)していないデータは削除されることに注意してください。
+ワーカー・ノードの構成を再ロードします。 再ロードは、ワーカー・ノードでパフォーマンスの低下などの問題が発生した場合や、ワーカー・ノードが正常でない状態に陥った場合に役立ちます。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](cs_storage_planning.html#persistent_storage_overview)していないデータは削除されることに注意してください。
 {: shortdesc}
 
 ワーカー・ノードを再ロードすると、パッチ・バージョンの更新がワーカー・ノードに適用されますが、メジャー更新やマイナー更新は適用されません。 あるパッチ・バージョンから次のバージョンまでの変更点を確認するには、[バージョンの変更ログ](cs_versions_changelog.html#changelog)の資料を参照してください。
@@ -3181,7 +3181,7 @@ diskEncryption: <em>false</em></code></pre>
 
 <strong>最小限必要な許可</strong>: {{site.data.keyword.containerlong_notm}} 内のクラスターに対する**オペレーター**のプラットフォーム役割
 
-`ibmcloud ks worker-update` を実行すると、アプリとサービスにダウン時間が発生する可能性があります。 更新中は、すべてのポッドが他のワーカー・ノードにスケジュール変更され、ワーカー・ノードが再イメージ化されるので、ポッドの外部に保管していないデータは削除されます。ダウン時間を回避するには、[選択したワーカー・ノードの更新中に、ワークロードを処理するために十分なワーカー・ノード数を確保するようにしてください。](cs_cluster_update.html#worker_node)
+`ibmcloud ks worker-update` を実行すると、アプリとサービスにダウン時間が発生する可能性があります。 更新中は、すべてのポッドが他のワーカー・ノードにスケジュール変更され、ワーカー・ノードが再イメージ化されるので、ポッドの外部に保管していないデータは削除されます。 ダウン時間を回避するには、[選択したワーカー・ノードの更新中に、ワークロードを処理するために十分なワーカー・ノード数を確保するようにしてください。](cs_cluster_update.html#worker_node)
 {: important}
 
 更新の前に、デプロイメント用に YAML ファイルを変更する必要がある場合があります。 詳しくは、この[リリース・ノート](cs_versions.html)を確認してください。

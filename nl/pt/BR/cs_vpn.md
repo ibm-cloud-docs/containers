@@ -68,7 +68,7 @@ Antes de usar o gráfico Helm do strongSwan, revise as considerações e limita�
 ## Configurando o gráfico Helm do strongSwan
 {: #vpn_configure}
 
-Antes de instalar o gráfico Helm do strongSwan, deve-se decidir sobre a configuração do strongSwan.
+Antes de instalar o gráfico Helm do strongSwan, deve-se decidir sobre a configuração do strongSwan. 
 {: shortdesc}
 
 Antes de iniciar:
@@ -78,7 +78,7 @@ Antes de iniciar:
 ### Etapa 1: obter o gráfico Helm do strongSwan
 {: #strongswan_1}
 
-Instale o Helm e obterá o gráfico Helm do strongSwan para visualizar as configurações possíveis.
+Instale o Helm e obterá o gráfico Helm do strongSwan para visualizar as configurações possíveis. 
 {: shortdesc}
 
 1. [Instale o Helm para seu cluster e inclua o repositório do {{site.data.keyword.Bluemix_notm}} em sua instância do Helm](cs_integrations.html#helm).
@@ -224,7 +224,7 @@ Para monitorar o status da VPN do strongSwan, é possível configurar um webhook
 ### Etapa 7: implementar o gráfico Helm
 {: #strongswan_7}
 
-Implemente o gráfico Helm do strongSwan em seu cluster com as configurações que você escolheu anteriormente.
+Implemente o gráfico Helm do strongSwan em seu cluster com as configurações que você escolheu anteriormente. 
 {: shortdesc}
 
 1. Se você precisar definir configurações mais avançadas, siga a documentação fornecida para cada configuração no gráfico Helm.
@@ -428,7 +428,7 @@ Antes de iniciar:
 Para limitar o tráfego de VPN para um determinado namespace:
 
 1. Crie uma política de rede global do Calico denominada `allow-non-vpn-outbound.yaml`. Essa política permite que todos os namespaces continuem a enviar o tráfego de saída para todos os destinos, exceto para a sub-rede remota que o strongSwan VPN acessa. Substitua `<remote.subnet>` com o `remote.subnet` especificado no arquivo de configuração Helm `values.yaml`. Para especificar múltiplas redes remotas, consulte a [documentação do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
-```yaml
+    ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
     metadata:

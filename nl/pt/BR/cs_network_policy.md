@@ -498,7 +498,7 @@ A versão 1.9 do Kubernetes foi descontinuada e não será suportada a partir de
 {: #1.10_create_new}
 
 Antes de iniciar:
-1. [Instale e configure a CLI do Calico.](#cli_install)
+1. [Instale e configure o CLI do Calico.](#cli_install)
 2. [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure). Inclua a opção `--admin` com o comando `ibmcloud ks cluster-config`, que é usado para fazer download dos certificados e dos arquivos de permissão. Esse download também inclui as chaves para acessar seu portfólio de infraestrutura e executar os comandos do Calico em seus nós do trabalhador.
     ```
     ibmcloud ks cluster-config <cluster_name> --admin

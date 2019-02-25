@@ -68,7 +68,7 @@ Prima di utilizzare il grafico Helm strongSwan, esamina le considerazioni e le l
 ## Configurazione del grafico Helm strongSwan
 {: #vpn_configure}
 
-Prima di installare il grafico Helm strongSwan, devi decidere la configurazione di strongSwan.
+Prima di installare il grafico Helm strongSwan, devi decidere la configurazione di strongSwan. 
 {: shortdesc}
 
 Prima di iniziare:
@@ -78,7 +78,7 @@ Prima di iniziare:
 ### Passo 1: Ottieni il grafico Helm strongSwan
 {: #strongswan_1}
 
-Installa Helm e ottieni il grafico Helm strongSwan per visualizzare le possibili configurazioni.
+Installa Helm e ottieni il grafico Helm strongSwan per visualizzare le possibili configurazioni. 
 {: shortdesc}
 
 1. [Installa Helm per il tuo cluster e aggiungi il repository {{site.data.keyword.Bluemix_notm}} alla tua istanza Helm](cs_integrations.html#helm).
@@ -224,7 +224,7 @@ Per monitorare lo stato della VPN strongSwan, puoi configurare un webhook per pu
 ### Passo 7: Distribuisci il grafico Helm
 {: #strongswan_7}
 
-Distribuisci il grafico Helm strongSwan nel tuo cluster con le configurazioni che hai scelto in precedenza.
+Distribuisci il grafico Helm strongSwan nel tuo cluster con le configurazioni che hai scelto in precedenza. 
 {: shortdesc}
 
 1. Se devi configurare delle impostazioni più avanzate, attieniti alla documentazione fornita per ciascuna impostazione nel grafico Helm.

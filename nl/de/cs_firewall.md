@@ -279,7 +279,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       </table>
 </p>
 
-4.  Optional: Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, und LogDNA-Services: 
+4.  Optional: Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, und LogDNA-Services:
     *   **{{site.data.keyword.monitoringlong_notm}}**:
         <pre class="screen">TCP port 443, port 9095 FROM &lt;öffentliche_ip_jedes_workerknotens&gt; TO &lt;öffentliche_ip_der_überwachung&gt;</pre>
         Ersetzen Sie <em>&lt;öffentliche_ip_der_überwachung&gt;</em> durch alle Adressen für die Überwachungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
@@ -346,12 +346,12 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
 </p>
     *   **{{site.data.keyword.la_full_notm}}**:
         <pre class="screen">TCP port 443, port 80 FROM &lt;öffentliche_ip_jedes_workerknotens&gt; TO &lt;öffentliche_logDNA-ip&gt;</pre>
-        Ersetzen Sie `<öffentliche_logDNA_ip>` durch die [LogDNA-IP-Adressen](/docs/services/Log-Analysis-with-LogDNA/network.html#ips). 
+        Ersetzen Sie `<logDNA_public_IP>` durch die [LogDNA-IP-Adressen](/docs/services/Log-Analysis-with-LogDNA/network.html#ips).
 
 5. Wenn Sie Services der Lastausgleichsfunktion verwenden, müssen Sie sicherstellen, dass der gesamte Datenverkehr, der das VRRP-Protokoll verwendet, zwischen Workerknoten auf öffentlichen und privaten Schnittstellen zulässig ist. {{site.data.keyword.containerlong_notm}} verwendet das VRRP-Protokoll, um IP-Adressen für öffentliche und private Lastausgleichsfunktionen zu verwalten.
 
-6. {: #pvc}Um Persistent Volume Claims für Datenspeicher zu erstellen, lassen Sie Egress-Zugriff über Ihre Firewall auf die IBM Cloud-Infrastruktur (SoftLayer) zu: 
-    - Lassen Sie Zugriff auf den API-Endpunkt der IBM Cloud-Infrastruktur (SoftLayer) zu, um das Bereitstellen von Anforderungen zu initialisieren: `TCP port 443 FROM <öffentliche_ip_jedes_workerknotens> TO 66.228.119.120`.
+6. {: #pvc}Um Persistent Volume Claims für Datenspeicher zu erstellen, lassen Sie Egress-Zugriff über Ihre Firewall auf die IBM Cloud-Infrastruktur (SoftLayer) zu:
+    - Lassen Sie Zugriff auf den API-Endpunkt der IBM Cloud-Infrastruktur (SoftLayer) zu, um das Bereitstellen von Anforderungen zu initialisieren: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
     - Lassen Sie Zugriff auf den IP-Bereich der IBM Cloud-Infrastruktur (SoftLayer) für die Zone zu, in der sich Ihr Cluster befindet - sowohl für das [**(öffentliche) Front-End-Netz**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) als auch für das [**(private) Back-End-Netz**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network). Um die Zone des Clusters zu ermitteln, führen Sie `ibmcloud ks clusters` aus.
 
 <br />

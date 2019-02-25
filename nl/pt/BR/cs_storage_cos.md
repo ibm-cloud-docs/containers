@@ -965,7 +965,10 @@ Para implementar um conjunto stateful que usa armazenamento de objetos:
            volume.beta.kubernetes.io/storage-provisioner: ibm.io/ibmc-s3fs
        spec:
          accessModes: [ "ReadWriteOnce" ]
-         storageClassName: "ibmc-s3fs-standard-perf-cross-region" resources: requests: storage: 1Gi
+         storageClassName: "ibmc-s3fs-standard-perf-cross-region"
+         resources:
+           requests:
+             storage: 1Gi
    ```
    {: codeblock}
 
@@ -1024,7 +1027,10 @@ Para implementar um conjunto stateful que usa armazenamento de objetos:
            volume.beta.kubernetes.io/storage-provisioner: ibm.io/ibmc-s3fs
        spec:
          accessModes: [ "ReadOnlyMany" ]
-         storageClassName: "ibmc-s3fs-standard-perf-cross-region" resources: requests: storage: 1Gi
+         storageClassName: "ibmc-s3fs-standard-perf-cross-region"
+         resources:
+           requests:
+             storage: 1Gi
    ```
    {: codeblock}
 

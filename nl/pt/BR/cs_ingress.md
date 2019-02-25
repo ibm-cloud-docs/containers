@@ -351,7 +351,7 @@ Se o seu cluster tiver múltiplos namespaces em que os apps são expostos, um re
       name: myingressresource
     spec:
       tls:
-      - hosts:
+      - System z:
         - <domain> secretName: <tls_secret_name> rules:
       - host: <domain> http: paths:
           - path: /<app1_path> backend: serviceName: <app1_service> servicePort: 80
@@ -812,7 +812,7 @@ Se o seu cluster tiver múltiplos namespaces em que os apps são expostos, um re
         ingress.bluemix.net/ALB-ID: "<private_ALB_ID>"
     spec:
       tls:
-      - hosts:
+      - System z:
         - <domain> secretName: <tls_secret_name> rules:
       - host: <domain> http: paths:
           - path: /<app1_path> backend: serviceName: <app1_service> servicePort: 80

@@ -271,7 +271,7 @@ Puoi aggiornare i tipi di macchina dei tuoi nodi di lavoro aggiungendo nuovi nod
 Prima di iniziare:
 - [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](cs_cli_install.html#cs_cli_configure).
 - Se archivi i dati nel tuo nodo di lavoro, i dati vengono eliminati se non [archiviati all'esterno del nodo di lavoro](cs_storage_planning.html#persistent_storage_overview).
-- Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](cs_users.html#platform). 
+- Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](cs_users.html#platform).
 
 1. Elenca i nodi di lavoro e prendi nota del loro indirizzo IP privato.
    - **Per i nodi di lavoro in un pool di nodi di lavoro**:
@@ -443,7 +443,7 @@ Controlla quando viene aggiornato il componente aggiuntivo ALB (application load
 
 Quando il componente aggiuntivo ALB viene aggiornato, i contenitori `nginx-ingress` e `ingress-auth` in tutti i pod ALB vengono aggiornati all'ultima versione di build. Per impostazione predefinita, gli aggiornamenti automatici per il componente aggiuntivo sono abilitati. Gli aggiornamenti vengono eseguiti su base continuativa in modo che i tuoi ALB Ingress non subiscano tempi di inattività.
 
-Se disabiliti gli aggiornamenti automatici, sei responsabile dell'aggiornamento del componente aggiuntivo. Man via che gli aggiornamenti diventano disponibili, ricevi una notifica nella CLI quando esegui i comandi `ibmcloud ks albs` o `alb-autoupdate-get`.
+Se disabiliti gli aggiornamenti automatici, sei responsabile dell'aggiornamento del componente aggiuntivo. Man mano che gli aggiornamenti diventano disponibili, ricevi una notifica nella CLI quando esegui i comandi `ibmcloud ks albs` o `alb-autoupdate-get`.
 
 Quando aggiorni la versione Kubernetes principale o secondaria del tuo cluster, IBM apporta automaticamente le modifiche necessarie alla distribuzione di Ingress, ma non modifica la versione di build del tuo componente aggiuntivo ALB Ingress. Sei responsabile della verifica della compatibilità delle ultime versioni di Kubernetes e delle immagini del componente aggiuntivo ALB Ingress.
 {: note}

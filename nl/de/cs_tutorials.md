@@ -53,9 +53,9 @@ Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipie
 ## Voraussetzungen
 
 -  Überprüfen Sie die Schritte, die Sie zur [Vorbereitung der Erstellung eines Clusters](cs_clusters.html#cluster_prepare) ausführen müssen.
--  Stellen Sie sicher, dass Sie über die folgenden Zugriffsrichtlinien verfügen: 
-    - Die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** für {{site.data.keyword.containerlong_notm}} 
-    -  Die Cloud Foundry-[-Rolle Entwickler](/docs/iam/mngcf.html#mngcf)(cs_users.html#platform)] in dem Clusterbereich, in dem Sie arbeiten möchten 
+-  Stellen Sie sicher, dass Sie über die folgenden Zugriffsrichtlinien verfügen:
+    - Die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** für {{site.data.keyword.containerlong_notm}}
+    -  Die Cloud Foundry-[-Rolle Entwickler](/docs/iam/mngcf.html#mngcf)(cs_users.html#platform)] in dem Clusterbereich, in dem Sie arbeiten möchten
 
 
 ## Lerneinheit 1: Cluster erstellen und CLI einrichten
@@ -68,7 +68,7 @@ Erstellen Sie Ihren Cluster in der {{site.data.keyword.Bluemix_notm}}-Konsole un
 
 Da die Bereitstellung des Clusters einige Minuten dauern kann, erstellen Sie den Cluster, bevor Sie die CLIs installieren.
 
-1.  [Erstellen Sie in der {{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) einen kostenlosen oder einen Standardcluster mit einem (1) Worker-Pool, in dem sich ein (1) Workerknoten befindet. 
+1.  [Erstellen Sie in der {{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) einen kostenlosen oder einen Standardcluster mit einem (1) Worker-Pool, in dem sich ein (1) Workerknoten befindet.
 
     Sie können auch einen [Cluster in der CLI](cs_clusters.html#clusters_cli) erstellen.
     {: tip}
@@ -93,7 +93,7 @@ Installieren Sie bei der Bereitstellung des Clusters die folgenden CLIs, die fü
     {: pre}
 
 5.  Um die Apps in Ihren Clustern bereitzustellen, müssen Sie die [Kubernetes-CLI installieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Um Befehle über die Kubernetes-CLI auszuführen, müssen Sie das Präfix `kubectl` verwenden.
-    1.  Zur Erreichung der vollständigen funktionalen Kompatibilität müssen Sie die Kubernetes-CLI-Version herunterladen, die mit der Version des Kubernetes-Clusters übereinstimmt, die verwendet werden soll. Die aktuelle Kubernetes-Standardversion für {{site.data.keyword.containerlong_notm}} ist Version 1.10.11. 
+    1.  Zur Erreichung der vollständigen funktionalen Kompatibilität müssen Sie die Kubernetes-CLI-Version herunterladen, die mit der Version des Kubernetes-Clusters übereinstimmt, die verwendet werden soll. Die aktuelle Kubernetes-Standardversion für {{site.data.keyword.containerlong_notm}} ist Version 1.10.11.
 
         OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
 
@@ -165,7 +165,7 @@ Richten Sie in {{site.data.keyword.registryshort_notm}} ein privates Image-Repos
     Wenn Sie über eine eingebundene ID verfügen, dann geben Sie das Flag `--sso` an, um sich anzumelden. Geben Sie Ihren Benutzernamen ein und verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen Kenncode abzurufen.
     {: tip}
 
-2.  Wenn sich der Cluster in einer anderen Ressourcengruppe als `default` befindet, geben Sie diese Ressourcengruppe als Ziel an. Um die Ressourcengruppen anzuzeigen, zu denen die einzelnen Cluster gehören, führen Sie `ibmcloud ks clusters` aus. 
+2.  Wenn sich der Cluster in einer anderen Ressourcengruppe als `default` befindet, geben Sie diese Ressourcengruppe als Ziel an. Um die Ressourcengruppen anzuzeigen, zu denen die einzelnen Cluster gehören, führen Sie `ibmcloud ks clusters` aus.
    ```
    ibmcloud target -g <ressourcengruppenname>
    ```
@@ -290,7 +290,7 @@ Mit den {{site.data.keyword.Bluemix_notm}}-Services können Sie bereits entwicke
     ```
     {: screen}
 
-3.  Stellen Sie sicher, dass der geheime Kubernetes-Schlüssel im Namensbereich Ihres Clusters erstellt wurde. Jeder {{site.data.keyword.Bluemix_notm}}-Service ist durch eine JSON-Datei definiert, die vertrauliche Informationen enthält, wie zum Beispiel den {{site.data.keyword.Bluemix_notm}} IAM-API-Schlüssel (Identity and Access Management) und die URL, über die der Container Zugriff erhält. Kubernetes verwendet geheime Schlüssel, um diese Informationen sicher zu speichern. Im vorliegenden Beispiel enthält der geheime Schlüssel den API-Schlüssel für den Zugriff auf die {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Instanz, die in Ihrem Konto bereitgestellt wird. 
+3.  Stellen Sie sicher, dass der geheime Kubernetes-Schlüssel im Namensbereich Ihres Clusters erstellt wurde. Jeder {{site.data.keyword.Bluemix_notm}}-Service ist durch eine JSON-Datei definiert, die vertrauliche Informationen enthält, wie zum Beispiel den {{site.data.keyword.Bluemix_notm}} IAM-API-Schlüssel (Identity and Access Management) und die URL, über die der Container Zugriff erhält. Kubernetes verwendet geheime Schlüssel, um diese Informationen sicher zu speichern. Im vorliegenden Beispiel enthält der geheime Schlüssel den API-Schlüssel für den Zugriff auf die {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Instanz, die in Ihrem Konto bereitgestellt wird.
 
     ```
     kubectl get secrets --namespace=default

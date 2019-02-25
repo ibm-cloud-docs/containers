@@ -55,7 +55,6 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
    
    3. Appliquez la dernière version de correctif en rechargeant votre noeud worker. Suivez les instructions indiquées dans la [commande ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) pour replanifier correctement tous les pods en cours d'exécution sur votre noeud worker avant de le recharger. Notez que durant le rechargement, la machine de votre noeud worker est mise à jour avec l'image la plus récente et les données sont supprimées si elles ne sont pas [stockées hors du noeud worker](cs_storage_planning.html#persistent_storage_overview).
 
-
 2. Suivez les [instructions](cs_integrations.html#helm) pour installer le client Helm sur votre machine locale et installer le serveur Helm (Tiller) sur votre cluster.
 
    Si vous utilisez Helm version 2.9 ou supérieure, assurez-vous d'avoir installé Tiller avec un [compte de service](cs_integrations.html#helm).
@@ -1091,10 +1090,10 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 ## Modification de la taille et du nombre d'opérations d'entrée-sortie par seconde (IOPS) de votre unité de stockage
 {: #change_storage_configuration}
 
-Si vous envisagez d'augmenter la capacité de stockage ou les performances, vous pouvez modifier votre volume existant.
+Si vous envisagez d'augmenter la capacité de stockage ou les performances, vous pouvez modifier votre volume existant. 
 {: shortdesc}
 
-Pour toute question concernant la facturation ou la procédure à suivre pour modifier votre stockage en utilisant la console {{site.data.keyword.Bluemix_notm}}, voir [Extension de la capacité de stockage par blocs](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). Si vous utilisez la console {{site.data.keyword.Bluemix_notm}} pour modifier votre stockage, vous devez suivre les étapes 4 à 7 de cette rubrique pour effectuer la modification.
+Pour toute question concernant la facturation ou la procédure à suivre pour modifier votre stockage en utilisant la console {{site.data.keyword.Bluemix_notm}}, voir [Extension de la capacité de stockage par blocs](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). Si vous utilisez la console {{site.data.keyword.Bluemix_notm}} pour modifier votre stockage, vous devez suivre les étapes 4 à 7 de cette rubrique pour effectuer la modification. 
 {: tip}
 
 1. Répertoriez les réservations de volume persistant (PVC) et notez le nom du volume persistant (PV) associé indiqué dans la colonne **VOLUME**. 
@@ -1207,7 +1206,7 @@ Pour toute question concernant la facturation ou la procédure à suivre pour mo
    
    Les pods sont renvoyés au format : `<pod_name>: <pvc_name>`. 
    
-6. Si vous disposez d'un pod utilisant la PVC, redémarrez le pod en retirant le pod et en laissant Kubernetes le recréer. Si vous avez créé un pod sans utiliser un déploiement ou un jeu de répliques Kubernetes, il vous faudra recréer votre pod après l'avoir retiré.
+6. Si vous disposez d'un pod utilisant la PVC, redémarrez le pod en retirant le pod et en laissant Kubernetes le recréer. Si vous avez créé un pod sans utiliser un déploiement ou un jeu de répliques Kubernetes, il vous faudra recréer votre pod après l'avoir retiré. 
    Pour extraire le fichier YAML utilisé pour créer votre pod, exécutez la commande `kubectl get pod <pod_name> -o yaml >pod.yaml`. 
    {: tip}
    ```
@@ -1216,20 +1215,20 @@ Pour toute question concernant la facturation ou la procédure à suivre pour mo
    {: pre}
    
 7. Si vous avez modifié la taille de votre volume, connectez-vous à votre pod pour vérifier la nouvelle taille. 
-   1. Obtenez le chemin de montage du volume que vous avez utilisé dans votre pod pour accéder à votre volume.
+   1. Obtenez le chemin de montage du volume que vous avez utilisé dans votre pod pour accéder à votre volume. 
       ```
       kubectl describe pod <pod_name>
       ```
       {: pre}
       
-      Le chemin de montage du volume est affiché dans la section **Containers** > **block** > **Mounts** de la sortie de l'interface de ligne de commande.
+      Le chemin de montage du volume est affiché dans la section **Containers** > **block** > **Mounts** de la sortie de l'interface de ligne de commande. 
    2. Connectez-vous à votre pod. 
       ```
       kubectl exec -it <pod_name> bash
       ```
       {: pre}
       
-   3. Affichez les statistiques d'utilisation du disque et recherchez le chemin de montage du volume que vous avez récupéré précédemment. Vérifiez que la colonne **Size** affiche la nouvelle taille de votre volume.
+   3. Affichez les statistiques d'utilisation du disque et recherchez le chemin de montage du volume que vous avez récupéré précédemment. Vérifiez que la colonne **Size** affiche la nouvelle taille de votre volume. 
       ```
       df -h
       ```

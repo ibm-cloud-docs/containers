@@ -789,7 +789,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 ## Annotazioni di connessione
 {: #connection}
 
-Con le annotazioni di connessione, puoi modificare il modo in cui l'ALB si connette all'applicazione di back-end e ai server upstream e impostare i timeout o un numero massimo di connessioni keepalive prima che l'applicazione o il server siano considerati non disponibili.
+Con le annotazioni di connessione, puoi modificare il modo in cui l'ALB si connette all'applicazione di back-end e ai server upstream e impostare i timeout o un numero massimo di connessioni keepalive prima che l'applicazione o il server siano considerati non disponibili. 
 {: shortdesc}
 
 ### Timeout di lettura e connessione personalizzati (proxy-connect-timeout, proxy-read-timeout)
@@ -1314,7 +1314,7 @@ spec:
 ## Annotazioni autenticazione HTTPS e TLS/SSL
 {: #https-auth}
 
-Con le annotazioni di autenticazione HTTPS e TLS/SSL, puoi configurare il tuo ALB per il traffico HTTPS, modificare le porte HTTPS predefinite, abilitare la crittografia SSL per il traffico inviato alle tue applicazioni di back-end o configurare l'autenticazione reciproca.
+Con le annotazioni di autenticazione HTTPS e TLS/SSL, puoi configurare il tuo ALB per il traffico HTTPS, modificare le porte HTTPS predefinite, abilitare la crittografia SSL per il traffico inviato alle tue applicazioni di back-end o configurare l'autenticazione reciproca. 
 {: shortdesc}
 
 ### Autenticazione {{site.data.keyword.appid_short_notm}} (appid-auth)
@@ -1876,7 +1876,7 @@ spec:
 ## Annotazioni Istio
 {: #istio-annotations}
 
-Utilizza le annotazioni Istio per instradare il traffico in entrata ai servizi gestiti da Istio.
+Utilizza le annotazioni Istio per instradare il traffico in entrata ai servizi gestiti da Istio. 
 {: shortdesc}
 
 ### Servizi Istio (istio-services)
@@ -1888,7 +1888,7 @@ Instrada il traffico ai servizi gestiti da Istio.
 <dl>
 <dt>Descrizione</dt>
 <dd>
-<p class="note">Questa annotazione funziona solo con Istio 0.7 e precedenti. </p>Se hai servizi gestiti da Istio, puoi utilizzare un ALB cluster per instradare le richieste HTTP/HTTPS al controller Ingress Istio. Il controller Ingress Istio instrada quindi le richieste ai servizi dell'applicazione. Al fine di instradare il traffico, devi apportare modifiche alle risorse Ingress sia per l'ALB cluster che per il controller Ingress Istio.
+<p class="note">Questa annotazione funziona solo con Istio 0.7 e precedenti.</p>Se hai servizi gestiti da Istio, puoi utilizzare un ALB cluster per instradare le richieste HTTP/HTTPS al controller Ingress Istio. Il controller Ingress Istio instrada quindi le richieste ai servizi dell'applicazione. Al fine di instradare il traffico, devi apportare modifiche alle risorse Ingress sia per l'ALB cluster che per il controller Ingress Istio.
 <br><br>Nella risorsa Ingress per l'ALB cluster, devi:
   <ul>
     <li>specificare l'annotazione `istio-services`</li>
@@ -2316,13 +2316,13 @@ spec:
 ## Annotazioni richiesta e risposta
 {: #request-response}
 
-Utilizza le annotazioni di richiesta e risposta per aggiungere o rimuovere le informazioni di intestazione dalle richieste del client e del server e per modificare la dimensione del corpo che il client può inviare.
+Utilizza le annotazioni di richiesta e risposta per aggiungere o rimuovere le informazioni di intestazione dalle richieste del client e del server e per modificare la dimensione del corpo che il client può inviare. 
 {: shortdesc}
 
 ### Aggiungi porta server all'intestazione host (add-host-port)
 {: #add-host-port}
 
-Aggiungi una porta del server alla richiesta del client prima che la richiesta venga inoltrata alla tua applicazione di back-end.
+Aggiungi una porta del server alla richiesta del client prima che la richiesta venga inoltrata alla tua applicazione di back-end. 
 {: shortdesc}
 
 <dl>
@@ -2650,7 +2650,7 @@ spec:
 ## Annotazioni limite del servizio
 {: #service-limit}
 
-Con le annotazioni di limite del servizio, puoi modificare la velocità di elaborazione delle richieste predefinita e il numero di connessioni che possono provenire da un singolo indirizzo IP.
+Con le annotazioni di limite del servizio, puoi modificare la velocità di elaborazione delle richieste predefinita e il numero di connessioni che possono provenire da un singolo indirizzo IP. 
 {: shortdesc}
 
 ### Limiti di velocità globali

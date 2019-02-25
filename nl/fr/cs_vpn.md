@@ -68,7 +68,7 @@ Avant d'utiliser une charte Helm strongSwan, consultez les remarques et limitati
 ## Configuration de la charte Helm strongSwan
 {: #vpn_configure}
 
-Avant d'installer la charte Helm strongSwan, vous devez déterminer la configuration à adopter pour strongSwan.
+Avant d'installer la charte Helm strongSwan, vous devez déterminer la configuration à adopter pour strongSwan. 
 {: shortdesc}
 
 Avant de commencer :
@@ -78,7 +78,7 @@ Avant de commencer :
 ### Etape 1 : Obtenez la charte Helm strongSwan
 {: #strongswan_1}
 
-Installez Helm et récupérez la charge Helm strongSwan pour afficher les configurations possibles.
+Installez Helm et récupérez la charge Helm strongSwan pour afficher les configurations possibles. 
 {: shortdesc}
 
 1. [Installez Helm pour votre cluster et ajoutez le référentiel {{site.data.keyword.Bluemix_notm}} dans votre instance Helm](cs_integrations.html#helm).
@@ -224,7 +224,7 @@ Pour surveiller le statut du VPN strongSwan, vous pouvez configurer un webhook p
 ### Etape 7 : Déployez la charte Helm
 {: #strongswan_7}
 
-Déployez la charte Helm strongSwan dans votre cluster avec les configurations que vous avez choisies précédemment.
+Déployez la charte Helm strongSwan dans votre cluster avec les configurations que vous avez choisies précédemment. 
 {: shortdesc}
 
 1. Si vous devez configurer d'autres paramètres avancés, suivez la documentation fournie pour chaque paramètre dans la charte Helm.

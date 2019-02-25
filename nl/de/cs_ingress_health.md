@@ -138,7 +138,7 @@ Gemeinsam genutzte Speicherzonen sind so definiert, dass Workerprozesse Informat
 
 In der Ingress-Konfigurationszuordnung `ibm-cloud-provider-ingress-cm` legt das Feld `vts-status-zone-size` die Größe der gemeinsam genutzten Speicherzone für die Messdatenerfassung fest. Standardmäßig ist der Wert für `vts-status-zone-size` auf `10m` gesetzt. Wenn Sie über eine große Umgebung verfügen, die mehr Speicher für die Erfassung von Messwerten benötigt, können Sie den Standardwert überschreiben, um stattdessen einen größeren Wert zu verwenden, indem Sie die folgenden Schritte ausführen.
 
-Stellen Sie zunächst sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Servicerolle [**Schreibberechtigter** oder **Manager** für den Namensbereich `kube-system` innehaben. 
+Stellen Sie zunächst sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Servicerolle [**Schreibberechtigter** oder **Manager** für den Namensbereich `kube-system` innehaben.
 
 1. Erstellen Sie eine lokale Version der Konfigurationsdatei für die Konfigurationszuordnungsressource ibm-cloud-provider-ingress-cm.
 

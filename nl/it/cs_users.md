@@ -827,7 +827,7 @@ Ora che hai creato e associato un ruolo RBAC o un ruolo cluster Kubernetes perso
 ## Assegnazione delle autorizzazioni RBAC
 {: #role-binding}
 
-Utilizza i ruoli RBAC per definire le azioni che un utente può eseguire per lavorare con le risorse Kubernetes nel tuo cluster.
+Utilizza i ruoli RBAC per definire le azioni che un utente può eseguire per lavorare con le risorse Kubernetes nel tuo cluster. 
 {: shortdesc}
 
 **Cosa sono i ruoli RBAC e i ruoli cluster?**</br>
@@ -1301,7 +1301,7 @@ Prima di iniziare, [assicurati che le credenziali di infrastruttura dell'utente 
 #### Rimuovi le autorizzazioni RBAC personalizzate
 {: #remove_custom_rbac}
 
-Se non hai più bisogno delle autorizzazioni RBAC personalizzate, puoi rimuoverle.
+Se non hai più bisogno delle autorizzazioni RBAC personalizzate, puoi rimuoverle. 
 {: shortdesc}
 
 1. Apri il file `.yaml` per il bind del ruolo o il bind del ruolo cluster che hai creato.

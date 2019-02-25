@@ -86,7 +86,7 @@ lastupdated: "2018-12-05"
    ```
    {: pre}
 
-2. `default` 以外のリソース・グループ内にクラスターがある場合は、そのリソース・グループをターゲットとして設定します。 各クラスターが属するリソース・グループを表示するには、`ibmcloud ks clusters` を実行します。**注**: リソース・グループに対する[**ビューアー**以上の役割](cs_users.html#platform)が必要です。
+2. `default` 以外のリソース・グループ内にクラスターがある場合は、そのリソース・グループをターゲットとして設定します。 各クラスターが属するリソース・グループを表示するには、`ibmcloud ks clusters` を実行します。 **注**: リソース・グループに対する[**ビューアー**以上の役割](cs_users.html#platform)が必要です。
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -352,7 +352,7 @@ lastupdated: "2018-12-05"
 
 6. {: #pvc}データ・ストレージの永続ボリューム請求を作成するには、ファイアウォールを介した IBM Cloud インフラストラクチャー (SoftLayer) への発信アクセスを許可します。
     - プロビジョニング要求を開始できるように、IBM Cloud インフラストラクチャー (SoftLayer) API エンドポイントへのアクセスを許可します (`TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`)。
-    - [**フロントエンド (パブリック) ネットワーク**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network)と[**バックエンド (プライベート) ネットワーク**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)の両方について、クラスターがあるゾーンの IBM Cloud インフラストラクチャー (SoftLayer) IP 範囲へのアクセスを許可します。クラスターのゾーンを確認するには、`ibmcloud ks clusters` を実行します。
+    - [**フロントエンド (パブリック) ネットワーク**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network)と[**バックエンド (プライベート) ネットワーク**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)の両方について、クラスターがあるゾーンの IBM Cloud インフラストラクチャー (SoftLayer) IP 範囲へのアクセスを許可します。 クラスターのゾーンを確認するには、`ibmcloud ks clusters` を実行します。
 
 <br />
 

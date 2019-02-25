@@ -59,7 +59,7 @@ Softwareentwickler und Netzadministratoren, die erstmalig eine App in einem Kube
 ## Voraussetzungen
 
 * [Lernprogramm: Kubernetes-Cluster erstellen](cs_tutorials.html#cs_cluster_tutorial).
-* Installieren Sie das [Plug-in 'container-registry'](/docs/services/Registry/index.html#registry_cli_install). 
+* Installieren Sie das [Plug-in 'container-registry'](/docs/services/Registry/index.html#registry_cli_install).
 
 
 ## Lerneinheit 1: Einzelinstanz-Apps auf Kubernetes-Clustern bereitstellen
@@ -223,8 +223,8 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
     2.  Rufen Sie die öffentliche IP-Adresse für den Workerknoten im Cluster ab.
 
         ```
-            ibmcloud ks workers <clustername_oder_-id>
-            ```
+        ibmcloud ks workers <clustername_oder_-id>
+        ```
         {: pre}
 
         Beispielausgabe:
@@ -378,7 +378,7 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
   ```
   {: screen}
 
-7.  Überprüfen Sie Ihren Podstatus, um den Zustand Ihrer App in Kubernetes zu überwachen. Sie können den Status über die CLI oder im Kubernetes-Dashboard überprüfen. 
+7.  Überprüfen Sie Ihren Podstatus, um den Zustand Ihrer App in Kubernetes zu überwachen. Sie können den Status über die CLI oder im Kubernetes-Dashboard überprüfen.
 
     *  **Über die CLI**: Beobachten Sie, was mit Ihren Pods geschieht, während sich ihr Status ändert.
        ```
@@ -531,7 +531,7 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         {: codeblock}
 
     2.  Aktualisieren Sie im Datenträgerabschnitt der Watson-Bereitstellung den Namen des geheimen Schlüssels
-für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den Sie im vorherigen Lernprogramm erstellt haben. Wenn Sie den geheimen Kubernetes-Schlüssel als Datenträger an Ihre Bereitstellung anhängen, stellen Sie den {{site.data.keyword.Bluemix_notm}} IAM-API-Schüssel (Identity and Access Management) dem Container zur Verfügung, der in Ihrem Pod ausgeführt wird. Die {{site.data.keyword.watson}}-App-Komponenten in diesem Lernprogramm sind so konfiguriert, dass sie den API-Schlüssel unter Verwendung des Datenträgermountpfads suchen. 
+für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den Sie im vorherigen Lernprogramm erstellt haben. Wenn Sie den geheimen Kubernetes-Schlüssel als Datenträger an Ihre Bereitstellung anhängen, stellen Sie den {{site.data.keyword.Bluemix_notm}} IAM-API-Schüssel (Identity and Access Management) dem Container zur Verfügung, der in Ihrem Pod ausgeführt wird. Die {{site.data.keyword.watson}}-App-Komponenten in diesem Lernprogramm sind so konfiguriert, dass sie den API-Schlüssel unter Verwendung des Datenträgermountpfads suchen.
 
         ```
         volumes:

@@ -44,7 +44,7 @@ Dieses Lernprogramm richtet sich an Entwickler von Cloud Foundry-Apps.
 - [Erstellen Sie eine private Image-Registry in {{site.data.keyword.registrylong_notm}}](../services/Registry/index.html).
 - [Erstellen Sie einen Cluster](cs_clusters.html#clusters_ui).
 - [Geben Sie als Ziel Ihrer CLI den Cluster an](cs_cli_install.html#cs_cli_configure).
-- Stellen Sie sicher, dass Sie über die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien für {{site.data.keyword.containerlong_notm}} verfügen: 
+- Stellen Sie sicher, dass Sie über die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien für {{site.data.keyword.containerlong_notm}} verfügen:
     - [Beliebige Plattformrolle](cs_users.html#platform)
 - [Lernen Sie die Docker- und Kubernetes-Terminologie kennen](cs_tech.html).
 
@@ -77,7 +77,7 @@ Bereiten Sie Ihren Code vor. Sie haben noch keinen Code? Sie können den in dies
 
     Während die App bereitgestellt wird, werden Anweisungen für das Herunterladen, Ändern und erneute Bereitstellen Ihrer App mithilfe der Befehlszeilenschnittstelle angezeigt.
 
-    c. Klicken Sie in Schritt 1 in den Konsolenanweisungen auf **STARTER-CODE HERUNTERLADEN**. 
+    c. Klicken Sie in Schritt 1 in den Konsolenanweisungen auf **STARTER-CODE HERUNTERLADEN**.
 
     d. Extrahieren Sie die ZIP-Datei und speichern Sie ihren Inhalt in Ihrem Verzeichnis `cf-py`.
 

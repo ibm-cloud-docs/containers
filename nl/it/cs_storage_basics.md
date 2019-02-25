@@ -165,7 +165,7 @@ Se non puoi utilizzare una delle classi di archiviazione fornite, puoi creare un
 ### Modifica o aggiornamento a una classe di archiviazione differente
 {: #update_storageclass}
 
-Quando esegui dinamicamente il provisioning dell'archiviazione persistente utilizzando una classe di archiviazione, esegui il provisioning dell'archiviazione persistente con una configurazione specifica. Non puoi modificare il nome della classe di archiviazione o il tipo di archiviazione di cui hai eseguito il provisioning. Tuttavia, hai la possibilità di ridimensionare la tua archiviazione come mostrato nella seguente tabella.
+Quando esegui dinamicamente il provisioning dell'archiviazione persistente utilizzando una classe di archiviazione, esegui il provisioning dell'archiviazione persistente con una configurazione specifica. Non puoi modificare il nome della classe di archiviazione o il tipo di archiviazione di cui hai eseguito il provisioning. Tuttavia, hai la possibilità di ridimensionare la tua archiviazione come mostrato nella seguente tabella. 
 {: shortdesc}
 
 <table> 

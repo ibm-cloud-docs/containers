@@ -165,7 +165,7 @@ Kubernetes ストレージ・クラスを使用して、{{site.data.keyword.Blue
 ### 別のストレージ・クラスへの変更または更新
 {: #update_storageclass}
 
-ストレージ・クラスを使用して永続ストレージを動的にプロビジョンする場合は、特定の構成で永続ストレージをプロビジョンすることになります。 ストレージ・クラスの名前やプロビジョンしたストレージのタイプは変更できません。 ただし、次の表に示すように、ストレージをスケーリングすることはできます。
+ストレージ・クラスを使用して永続ストレージを動的にプロビジョンする場合は、特定の構成で永続ストレージをプロビジョンすることになります。 ストレージ・クラスの名前やプロビジョンしたストレージのタイプは変更できません。 ただし、次の表に示すように、ストレージをスケーリングすることはできます。 
 {: shortdesc}
 
 <table> 
@@ -177,11 +177,11 @@ Kubernetes ストレージ・クラスを使用して、{{site.data.keyword.Blue
 <tbody>
 <tr>
 <td>ファイル・ストレージ</td>
-<td>[既存のボリュームを変更](cs_storage_file.html#change_storage_configuration)することで、ストレージ・サイズおよび IOPS の割り当てを増やすことができます。</td>
+<td>[既存のボリュームを変更](cs_storage_file.html#change_storage_configuration)することで、ストレージ・サイズおよび IOPS の割り当てを増やすことができます。 </td>
 </tr>
 <tr>
 <td>ブロック・ストレージ</td>
-<td>[既存のボリュームを変更](cs_storage_block.html#change_storage_configuration)することで、ストレージ・サイズおよび IOPS の割り当てを増やすことができます。</td>
+<td>[既存のボリュームを変更](cs_storage_block.html#change_storage_configuration)することで、ストレージ・サイズおよび IOPS の割り当てを増やすことができます。 </td>
 </tr>
 <tr>
 <td>オブジェクト・ストレージ</td>

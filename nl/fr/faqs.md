@@ -24,7 +24,7 @@ lastupdated: "2018-12-05"
 {: #kubernetes}
 {: faq}
 
-Kubernetes est une plateforme open source utilisée pour gérer des charges de travail et des services conteneurisés sur plusieurs hôtes et offrir des outils de gestion pour déployer, automatiser, surveiller et mettre à l'échelle de applications conteneurisées avec une intervention manuelle minimale voire nulle. Tous les conteneurs constituant votre microservice sont regroupés dans des pods. Les pods sont des unités logiques facilitant les opérations de gestion et de reconnaissance. Ces pods s'exécutent sur des hôtes de calcul gérés dans un cluster Kubernetes portable, extensible et à réparation spontanée en cas de défaillance.
+Kubernetes est une plateforme open source utilisée pour gérer des charges de travail et des services conteneurisés sur plusieurs hôtes et offrir des outils de gestion pour déployer, automatiser, surveiller et mettre à l'échelle de applications conteneurisées avec une intervention manuelle minimale voire nulle. Tous les conteneurs constituant votre microservice sont regroupés dans des pods. Les pods sont des unités logiques facilitant les opérations de gestion et de reconnaissance. Ces pods s'exécutent sur des hôtes de calcul gérés dans un cluster Kubernetes portable, extensible et à réparation spontanée en cas de défaillance. 
 {: shortdesc}
 
 Pour plus d'informations sur Kubernetes, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational). 

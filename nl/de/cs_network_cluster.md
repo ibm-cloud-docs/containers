@@ -81,7 +81,7 @@ Klicken Sie auf eine der folgenden Konfigurationen, um den Vernetzung Ihres Clus
 **Warum sollte ich diese Konfiguration verwenden?**
 
 * Sie verfügen über eine App, die für das öffentliche Internet in einem Einzelzonencluster zugänglich sein muss.
-* Sie verfügen über eine App, die für das öffentliche Internet in einem Mehrzonencluster zugänglich sein muss. Da Sie [VLAN-Spanning](cs_subnets.html#subnet-routing) aktivieren müssen, um einen Mehrzonencluster zu erstellen, kann der Cluster mit anderen Systemen kommunizieren, die mit einem beliebigen privaten VLAN in demselben IBM Cloud-Konto verbunden sind. Sie können [Calico-Netzrichtlinien](cs_network_policy.html#isolate_workers) verwenden, um Ihren Mehrzonencluster im privaten Netz zu isolieren. 
+* Sie verfügen über eine App, die für das öffentliche Internet in einem Mehrzonencluster zugänglich sein muss. Da Sie [VLAN-Spanning](cs_subnets.html#subnet-routing) aktivieren müssen, um einen Mehrzonencluster zu erstellen, kann der Cluster mit anderen Systemen kommunizieren, die mit einem beliebigen privaten VLAN in demselben IBM Cloud-Konto verbunden sind. Sie können [Calico-Netzrichtlinien](cs_network_policy.html#isolate_workers) verwenden, um Ihren Mehrzonencluster im privaten Netz zu isolieren.
 
 **Welche Optionen habe ich für die Verwaltung des öffentlichen und privaten Zugriffs auf meinen Cluster?**
 </br>In den folgenden Abschnitten werden die Funktionen von {{site.data.keyword.containerlong_notm}} beschrieben, mit denen Sie den Netzbetrieb für Cluster einrichten können, die mit einem öffentlichen und einem privaten VLAN verbunden sind.
@@ -91,7 +91,7 @@ Klicken Sie auf eine der folgenden Konfigurationen, um den Vernetzung Ihres Clus
 
 Die öffentliche Netzschnittstelle für Workerknoten wird durch [vordefinierte Calico-Netzrichtlinieneinstellungen](cs_network_policy.html#default_policy) geschützt, die bei der Clustererstellung auf jedem Workerknoten konfiguriert werden. Standardmäßig ist für alle Workerknoten der gesamte ausgehende Netzverkehr zulässig. Eingehender Netzverkehr wird abgesehen von bestimmten Ports blockiert. Diese Ports werden geöffnet, damit IBM den Netzverkehr überwachen und Sicherheitsupdates für den Kubernetes-Master automatisch installieren kann.
 
-Wenn Sie Ihre Apps öffentlich oder in einem privaten Netz zugänglich machen möchten, können Sie öffentliche oder private NodePort-, LoadBalancer- oder Ingress-Services erstellen. Weitere Informationen zu den einzelnen Services finden Sie unter [NodePort-Service, Lastausgleichsservice oder Ingress-Service auswählen](cs_network_planning.html#external). 
+Wenn Sie Ihre Apps öffentlich oder in einem privaten Netz zugänglich machen möchten, können Sie öffentliche oder private NodePort-, LoadBalancer- oder Ingress-Services erstellen. Weitere Informationen zu den einzelnen Services finden Sie unter [NodePort-Service, Lastausgleichsservice oder Ingress-Service auswählen](cs_network_planning.html#external).
 
 ### Optional: Netzarbeitslasten für Edge-Workerknoten isolieren
 {: #both_vlans_edge}
@@ -196,7 +196,8 @@ Sie können [einen Cluster ausschließlich mit privatem VLAN erstellen](cs_clust
 
 Wenn Workerknoten nur mit einem privaten VLAN eingerichtet werden, müssen Sie eine alternative Lösung für die Netzkonnektivität zwischen Ihren Workerknoten und dem Master konfigurieren. Sie können eine Firewall mit angepassten Netzrichtlinien einrichten, um für Ihren Standardcluster dedizierte Netzsicherheit bereitzustellen und unbefugten Zugriff zu erkennen und zu unterbinden. Sie können beispielsweise [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) oder [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) als Ihre Firewall und zum Blockieren unerwünschten Datenverkehrs einrichten. Wenn Sie eine Firewall einrichten, müssen Sie auch [die erforderlichen Ports und IP-Adressen für die einzelnen Regionen öffnen](cs_firewall.html#firewall_outbound), damit der Master und die Workerknoten kommunizieren können.
 
-Wenn Sie über eine vorhandene Router Appliance verfügen und dann einen Cluster hinzufügen, werden die neuen portierbaren Teilnetze, die für den Cluster bestellt sind, nicht in der Router Appliance konfiguriert. Um Netzservices verwenden zu können, müssen Sie die Weiterleitung zwischen Teilnetzen im selben VLAN aktivieren, indem Sie [VLAN-Spanning aktivieren](cs_subnets.html#vra-routing). {: important}
+Wenn Sie über eine vorhandene Router Appliance verfügen und dann einen Cluster hinzufügen, werden die neuen portierbaren Teilnetze, die für den Cluster bestellt sind, nicht in der Router Appliance konfiguriert. Um Netzservices verwenden zu können, müssen Sie die Weiterleitung zwischen Teilnetzen im selben VLAN aktivieren, indem Sie [VLAN-Spanning aktivieren](cs_subnets.html#vra-routing).
+{: important}
 
 ### Apps mit privaten Netzservices zugänglich machen
 {: #private_vlan_services}

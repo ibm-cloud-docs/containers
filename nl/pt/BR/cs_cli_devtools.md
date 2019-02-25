@@ -2168,7 +2168,7 @@ Atualize um filtro de criação de log. É possível usar esse comando para atua
     <dd>Filtra logs que estão no nível especificado e inferior. Os valores aceitáveis na ordem canônica são <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code> e <code>trace</code>. Esse valor é opcional. Como um exemplo, se você filtrou logs no nível <code>info</code>, <code>debug</code> e <code>trace</code> também serão filtrados. **Nota**: é possível usar essa sinalização apenas quando as mensagens de log estiverem em formato JSON e contiverem um campo de nível. Saída de exemplo: <code>{"log": "hello", "level": "info"}</code></dd>
 
   <dt><code>--message <em>MESSAGE</em></code></dt>
-    <dd>Filtra quaisquer logs que contêm uma mensagem especificada em qualquer lugar no log. A mensagem é correspondida literalmente e não como uma expressão. Exemplo: As mensagens “Hello”, “!” e “Hello, World!” se aplicariam ao log “Hello, World!”. Esse valor é opcional.</dd>
+    <dd>Filtra quaisquer logs que contêm uma mensagem especificada em qualquer lugar no log. A mensagem é correspondida literalmente e não como uma expressão. Exemplo: As mensagens “Hello”, “!”e “Hello, World!”se aplicariam ao log “Hello, World!”. Esse valor é opcional.</dd>
 
   <dt><code>--json</code></dt>
     <dd>Imprime a saída de comando no formato JSON. Esse valor é opcional.</dd>

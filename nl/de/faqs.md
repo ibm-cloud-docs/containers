@@ -24,79 +24,78 @@ lastupdated: "2018-12-05"
 {: #kubernetes}
 {: faq}
 
-Kubernetes ist eine Open-Source-Plattform für die Verwaltung containerisierter Workloads und Services über mehrere Hosts hinweg und bietet Verwaltungstools für die Bereitstellung, Automatisierung, Überwachung und Skalierung containerisierter Apps mit geringer bis gar keiner manuellen Intervention. Alle Container, aus denen sich Ihr Mikroservice zusammensetzt, werden in Pods gruppiert, einer logischen Einheit zur Sicherstellung einer einfachen Verwaltung und Erkennung. Diese Pods werden auf Rechenhosts ausgeführt, die in einem portierbaren, erweiterbaren und im Störfall selbst-heilenden Kubernetes-Cluster verwaltet werden.
+Kubernetes ist eine Open-Source-Plattform für die Verwaltung containerisierter Workloads und Services über mehrere Hosts hinweg und bietet Verwaltungstools für die Bereitstellung, Automatisierung, Überwachung und Skalierung containerisierter Apps mit geringer bis gar keiner manuellen Intervention. Alle Container, aus denen sich Ihr Mikroservice zusammensetzt, werden in Pods gruppiert, einer logischen Einheit zur Sicherstellung einer einfachen Verwaltung und Erkennung. Diese Pods werden auf Rechenhosts ausgeführt, die in einem portierbaren, erweiterbaren und im Störfall selbst-heilenden Kubernetes-Cluster verwaltet werden. 
 {: shortdesc}
 
-Weitere Informationen zu Kubernetes finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational).  
+Weitere Informationen zu Kubernetes finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational). 
 
-## Wie funktioniert IBM Cloud Kubernetes Service? 
+## Wie funktioniert IBM Cloud Kubernetes Service?
 {: #kubernetes_service}
 {: faq}
 
-Mit {{site.data.keyword.containerlong_notm}} können Sie Ihren eigenen Kubernetes-Cluster zum Bereitstellen und Verwalten von containerisierten Apps in {{site.data.keyword.Bluemix_notm}} erstellen. Ihre containerisierten Apps werden auf Rechenhosts der IBM Cloud-Infrastruktur (SoftLayer) namens Workerknoten gehostet. Sie können Ihre Rechenhosts als [virtuelle Maschinen](cs_clusters_planning.html#vm) mit gemeinsam genutzten oder dedizierten Ressourcen oder als [Bare-Metal-Maschinen](cs_clusters_planning.html#bm) bereitstellen, die für die GPU- (Graphics Processing Unit) und SDS-Verwendung (Software-defined Storage) optimiert werden können. Ihre Workerknoten werden von einem hoch verfügbaren Kubernetes-Master gesteuert, der von IBM konfiguriert, überwacht und verwaltet wird. Sie können die {{site.data.keyword.containerlong_notm}}-API oder -CLI verwenden, um mit Ihren Clusterinfrastrukturressourcen zu arbeiten, und die Kubernetes-API oder -CLI, um Ihre Bereitstellungen und Services zu verwalten.  
+Mit {{site.data.keyword.containerlong_notm}} können Sie Ihren eigenen Kubernetes-Cluster zum Bereitstellen und Verwalten von containerisierten Apps in {{site.data.keyword.Bluemix_notm}} erstellen. Ihre containerisierten Apps werden auf Rechenhosts der IBM Cloud-Infrastruktur (SoftLayer) namens Workerknoten gehostet. Sie können Ihre Rechenhosts als [virtuelle Maschinen](cs_clusters_planning.html#vm) mit gemeinsam genutzten oder dedizierten Ressourcen oder als [Bare-Metal-Maschinen](cs_clusters_planning.html#bm) bereitstellen, die für die GPU- (Graphics Processing Unit) und SDS-Verwendung (Software-defined Storage) optimiert werden können. Ihre Workerknoten werden von einem hoch verfügbaren Kubernetes-Master gesteuert, der von IBM konfiguriert, überwacht und verwaltet wird. Sie können die {{site.data.keyword.containerlong_notm}}-API oder -CLI verwenden, um mit Ihren Clusterinfrastrukturressourcen zu arbeiten, und die Kubernetes-API oder -CLI, um Ihre Bereitstellungen und Services zu verwalten. 
 
-Weitere Informationen zur Konfiguration Ihrer Clusterressourcen finden Sie unter [Servicearchitektur](cs_tech.html#architecture). Informationen zum Auflisten von Funktionen und Vorteilen finden Sie unter [Warum {{site.data.keyword.containerlong_notm}}?](cs_why.html#cs_ov). 
+Weitere Informationen zur Konfiguration Ihrer Clusterressourcen finden Sie unter [Servicearchitektur](cs_tech.html#architecture). Informationen zum Auflisten von Funktionen und Vorteilen finden Sie unter [Warum {{site.data.keyword.containerlong_notm}}?](cs_why.html#cs_ov).
 
-## Warum sollte ich IBM Cloud Kubernetes Service verwenden? 
+## Warum sollte ich IBM Cloud Kubernetes Service verwenden?
 {: #benefits}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} ist ein verwaltetes Kubernetes-Angebot, das leistungsfähige Tools, eine intuitive Benutzererfahrung und integrierte Sicherheit für schnelle Bereitstellung von Apps bereitstellt, die Sie an Cloud-Services für IBM Watson®, KI, Internet der Dinge, DevOps, Sicherheit und Datenanalyse binden können. Als zertifizierter Kubernetes-Provider stellt {{site.data.keyword.containerlong_notm}} intelligente Planung, automatische Fehlerbehebung, horizontale Skalierung, Serviceerkennung und Lastausgleich, automatisierte Rollouts und Rollbacks sowie Verwaltung von geheimen Schlüsseln und Konfigurationsverwaltung bereit. Der Service bietet außerdem erweiterte Funktionen für vereinfachtes Cluster-Management, Containersicherheit und Isolationsrichtlinien, die Möglichkeit, einen eigenen Cluster zu entwerfen, und integrierte operationale Tools für Konsistenz in der Bereitstellung. 
+{{site.data.keyword.containerlong_notm}} ist ein verwaltetes Kubernetes-Angebot, das leistungsfähige Tools, eine intuitive Benutzererfahrung und integrierte Sicherheit für schnelle Bereitstellung von Apps bereitstellt, die Sie an Cloud-Services für IBM Watson®, KI, Internet der Dinge, DevOps, Sicherheit und Datenanalyse binden können. Als zertifizierter Kubernetes-Provider stellt {{site.data.keyword.containerlong_notm}} intelligente Planung, automatische Fehlerbehebung, horizontale Skalierung, Serviceerkennung und Lastausgleich, automatisierte Rollouts und Rollbacks sowie Verwaltung von geheimen Schlüsseln und Konfigurationsverwaltung bereit. Der Service bietet außerdem erweiterte Funktionen für vereinfachtes Cluster-Management, Containersicherheit und Isolationsrichtlinien, die Möglichkeit, einen eigenen Cluster zu entwerfen, und integrierte operationale Tools für Konsistenz in der Bereitstellung.
 
-Einen detaillierten Überblick über die Funktionen und Vorteile finden Sie unter [Warum {{site.data.keyword.containerlong_notm}}?](cs_why.html#cs_ov).  
+Einen detaillierten Überblick über die Funktionen und Vorteile finden Sie unter [Warum {{site.data.keyword.containerlong_notm}}?](cs_why.html#cs_ov). 
 
-## Beinhaltet der Service einen verwalteten Kubernetes-Masterknoten sowie Workerknoten? 
+## Beinhaltet der Service einen verwalteten Kubernetes-Masterknoten sowie Workerknoten?
 {: #managed_master_worker}
 {: faq}
 
-Jeder Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} wird von einem dedizierten Kubernetes-Master gesteuert, der von IBM in einem IBM eigenen {{site.data.keyword.Bluemix_notm}}-Infrastrukturkonto verwaltet wird. Der Kubernetes-Master, einschließlich aller Masterkomponenten, Rechen-, Netzbetriebs- und Speicherressourcen, wird fortlaufend von IBM Site Reliability Engineers (SREs) überwacht. Von SREs werden die neuesten Sicherheitsstandards angewendet, böswillige Aktivitäten ermittelt und korrigiert und somit die Zuverlässigkeit und Verfügbarkeit von {{site.data.keyword.containerlong_notm}} sichergestellt. Add-ons wie Fluentd für die Protokollierung, die automatisch installiert werden, wenn Sie den Cluster bereitstellen, werden automatisch von IBM aktualisiert. Sie können jedoch automatische Aktualisierungen für manche Add-ons inaktivieren und sie separat über die Master- und Workerknoten aktualisieren. Weitere Informationen finden Sie unter [Cluster-Add-ons aktualisieren](cs_cluster_update.html#addons).  
+Jeder Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} wird von einem dedizierten Kubernetes-Master gesteuert, der von IBM in einem IBM eigenen {{site.data.keyword.Bluemix_notm}}-Infrastrukturkonto verwaltet wird. Der Kubernetes-Master, einschließlich aller Masterkomponenten, Rechen-, Netzbetriebs- und Speicherressourcen, wird fortlaufend von IBM Site Reliability Engineers (SREs) überwacht. Von SREs werden die neuesten Sicherheitsstandards angewendet, böswillige Aktivitäten ermittelt und korrigiert und somit die Zuverlässigkeit und Verfügbarkeit von {{site.data.keyword.containerlong_notm}} sichergestellt. Add-ons wie Fluentd für die Protokollierung, die automatisch installiert werden, wenn Sie den Cluster bereitstellen, werden automatisch von IBM aktualisiert. Sie können jedoch automatische Aktualisierungen für manche Add-ons inaktivieren und sie separat über die Master- und Workerknoten aktualisieren. Weitere Informationen finden Sie unter [Cluster-Add-ons aktualisieren](cs_cluster_update.html#addons). 
 
-Kubernetes gibt regelmäßig [Hauptversionen, Nebenversionen oder Patches als Aktualisierungen heraus.](cs_versions.html#version_types). Diese Aktualisierungen können die API-Serverversion von Kubernetes oder andere Komponenten in Ihrem Kubernetes-Master betreffen. IBM aktualisiert die Patchversionen automatisch, aber Sie müssen die Haupt- und Nebenversionen des Masters aktualisieren.
-Weitere Informationen finden Sie unter [Kubernetes-Master aktualisieren](cs_cluster_update.html#master).  
+Kubernetes gibt regelmäßig [Hauptversionen, Nebenversionen oder Patches als Aktualisierungen heraus.](cs_versions.html#version_types). Diese Aktualisierungen können die API-Serverversion von Kubernetes oder andere Komponenten in Ihrem Kubernetes-Master betreffen. IBM aktualisiert die Patchversionen automatisch, aber Sie müssen die Haupt- und Nebenversionen des Masters aktualisieren. Weitere Informationen finden Sie unter [Kubernetes-Master aktualisieren](cs_cluster_update.html#master). 
 
-Workerknoten in Standardclustern werden in Ihrem {{site.data.keyword.Bluemix_notm}}-Infrastrukturkonto bereitgestellt. Die Workerknoten sind Ihrem Konto zugeordnet und es liegt in Ihrer Verantwortung, zeitnahe Aktualisierungen für die Workerknoten anzufordern, um sicherzustellen, dass das Betriebssystem der Workerknoten und die {{site.data.keyword.containerlong_notm}}-Komponenten die neuesten Sicherheitsupdates und Patches anwenden. Sicherheitspatches und -aktualisierungen von Sicherheitsinformationen werden von IBM Site Reliability Engineers (SREs) zur Verfügung gestellt, die das Linux-Image kontinuierlich überwachen, das auf Ihren Workerknoten installiert ist, um Sicherheitslücken und Probleme bei der Einhaltung von Sicherheitsbestimmungen zu ermitteln. Weitere Informationen finden Sie unter [Workerknoten aktualisieren](cs_cluster_update.html#worker_node).  
+Workerknoten in Standardclustern werden in Ihrem {{site.data.keyword.Bluemix_notm}}-Infrastrukturkonto bereitgestellt. Die Workerknoten sind Ihrem Konto zugeordnet und es liegt in Ihrer Verantwortung, zeitnahe Aktualisierungen für die Workerknoten anzufordern, um sicherzustellen, dass das Betriebssystem der Workerknoten und die {{site.data.keyword.containerlong_notm}}-Komponenten die neuesten Sicherheitsupdates und Patches anwenden. Sicherheitspatches und -aktualisierungen von Sicherheitsinformationen werden von IBM Site Reliability Engineers (SREs) zur Verfügung gestellt, die das Linux-Image kontinuierlich überwachen, das auf Ihren Workerknoten installiert ist, um Sicherheitslücken und Probleme bei der Einhaltung von Sicherheitsbestimmungen zu ermitteln. Weitere Informationen finden Sie unter [Workerknoten aktualisieren](cs_cluster_update.html#worker_node). 
 
 ## Sind die Kubernetes-Masterknoten und -Workerknoten hoch verfügbar?
 {: #ha}
 {: faq}
 
-Die {{site.data.keyword.containerlong_notm}}-Architektur und -Infrastruktur wurde konzipiert, um eine hohe Zuverlässigkeit, eine geringe Latenzzeit bei der Verarbeitung und eine maximale Betriebszeit des Service zu gewährleisten. Standardmäßig wird jeder Cluster in {{site.data.keyword.containerlong_notm}}, der Kubernetes Version 1.10 oder höher ausführt, mit mehreren Kubernetes-Masterinstanzen konfiguriert, um die Verfügbarkeit und den Zugriff auf die Clusterressourcen zu gewährleisten, selbst wenn eine oder mehrere Instanzen Ihres Kubernetes-Masters nicht verfügbar sind.  
+Die {{site.data.keyword.containerlong_notm}}-Architektur und -Infrastruktur wurde konzipiert, um eine hohe Zuverlässigkeit, eine geringe Latenzzeit bei der Verarbeitung und eine maximale Betriebszeit des Service zu gewährleisten. Standardmäßig wird jeder Cluster in {{site.data.keyword.containerlong_notm}}, der Kubernetes Version 1.10 oder höher ausführt, mit mehreren Kubernetes-Masterinstanzen konfiguriert, um die Verfügbarkeit und den Zugriff auf die Clusterressourcen zu gewährleisten, selbst wenn eine oder mehrere Instanzen Ihres Kubernetes-Masters nicht verfügbar sind. 
 
-Sie können die Hochverfügbarkeit Ihres Clusters weiter steigern und Ihre App vor Ausfallzeiten schützen, indem Sie Ihre Workloads über mehrere Workerknoten in mehreren Zonen einer Region verteilen. Diese Konfiguration wird als [Mehrzonencluster](cs_clusters_planning.html#multizone) bezeichnet und stellt sicher, dass auf Ihre App zugegriffen werden kann, selbst wenn ein Workerknoten oder eine gesamte Zone nicht verfügbar ist.  
+Sie können die Hochverfügbarkeit Ihres Clusters weiter steigern und Ihre App vor Ausfallzeiten schützen, indem Sie Ihre Workloads über mehrere Workerknoten in mehreren Zonen einer Region verteilen. Diese Konfiguration wird als [Mehrzonencluster](cs_clusters_planning.html#multizone) bezeichnet und stellt sicher, dass auf Ihre App zugegriffen werden kann, selbst wenn ein Workerknoten oder eine gesamte Zone nicht verfügbar ist. 
 
-Erstellen Sie zum Schutz vor dem Ausfall einer ganzen Region [mehrere Cluster und verteilen Sie diese über {{site.data.keyword.containerlong_notm}}-Regionen](cs_clusters_planning.html#multiple_clusters). Indem Sie eine Lastausgleichsfunktion für Ihre Cluster konfigurieren, können Sie einen regionsübergreifenden Lastausgleich und Netzbetrieb für Ihre Cluster erzielen.  
+Erstellen Sie zum Schutz vor dem Ausfall einer ganzen Region [mehrere Cluster und verteilen Sie diese über {{site.data.keyword.containerlong_notm}}-Regionen](cs_clusters_planning.html#multiple_clusters). Indem Sie eine Lastausgleichsfunktion für Ihre Cluster konfigurieren, können Sie einen regionsübergreifenden Lastausgleich und Netzbetrieb für Ihre Cluster erzielen. 
 
-Wenn Sie Daten haben, die auch bei einem Ausfall verfügbar sein müssen, müssen Sie sicherstellen, dass Ihre Daten in einem [persistenten Speicher](cs_storage_planning.html#storage_planning) gesichert sind.  
+Wenn Sie Daten haben, die auch bei einem Ausfall verfügbar sein müssen, müssen Sie sicherstellen, dass Ihre Daten in einem [persistenten Speicher](cs_storage_planning.html#storage_planning) gesichert sind. 
 
-Weitere Informationen dazu, wie Sie Hochverfügbarkeit für Ihren Cluster erzielen, finden Sie unter [Hochverfügbarkeit für {{site.data.keyword.containerlong_notm}}](cs_ha.html#ha).  
+Weitere Informationen dazu, wie Sie Hochverfügbarkeit für Ihren Cluster erzielen, finden Sie unter [Hochverfügbarkeit für {{site.data.keyword.containerlong_notm}}](cs_ha.html#ha). 
 
-## Welche Möglichkeiten habe ich, meinen Cluster zu sichern? 
+## Welche Möglichkeiten habe ich, meinen Cluster zu sichern?
 {: #secure_cluster}
 {: faq}
 
-Sie können integrierte Sicherheitsfeatures in {{site.data.keyword.containerlong_notm}} verwenden, um die Komponenten in Ihrem Cluster, Ihre Daten und App-Bereitstellungen zu schützen und so die Einhaltung von Sicherheitsbestimmungen und die Datenintegrität zu gewährleisten. Verwenden Sie diese Features, um Ihren Kubernetes-API-Server, den etcd-Datenspeicher, Workerknoten, das Netz, den Speicher, die Images und die Bereitstellungen vor böswilligen Angriffen zu schützen. Sie können auch integrierte Protokollierungs- und Überwachungstools nutzen, um böswillige Angriffe und verdächtige Verwendungsmuster zu erkennen.  
+Sie können integrierte Sicherheitsfeatures in {{site.data.keyword.containerlong_notm}} verwenden, um die Komponenten in Ihrem Cluster, Ihre Daten und App-Bereitstellungen zu schützen und so die Einhaltung von Sicherheitsbestimmungen und die Datenintegrität zu gewährleisten. Verwenden Sie diese Features, um Ihren Kubernetes-API-Server, den etcd-Datenspeicher, Workerknoten, das Netz, den Speicher, die Images und die Bereitstellungen vor böswilligen Angriffen zu schützen. Sie können auch integrierte Protokollierungs- und Überwachungstools nutzen, um böswillige Angriffe und verdächtige Verwendungsmuster zu erkennen. 
 
-Weitere Informationen zu den Komponenten Ihres Clusters und dazu, wie Sie die einzelnen Komponenten schützen können, finden Sie unter [Sicherheit für {{site.data.keyword.containerlong_notm}}](cs_secure.html#security).  
+Weitere Informationen zu den Komponenten Ihres Clusters und dazu, wie Sie die einzelnen Komponenten schützen können, finden Sie unter [Sicherheit für {{site.data.keyword.containerlong_notm}}](cs_secure.html#security). 
 
 ## Bietet der Service Unterstützung für Bare-Metal und GPU? 
 {: #bare_metal_gpu}
 {: faq}
 
-Ja, Sie können Ihre Workerknoten als physischen Single-Tenant-Server bereitstellen, der auch als Bare-Metal-Server bezeichnet wird. Bare-Metal-Server bieten den Vorteil hoher Leistung für Workloads wie Daten, KI (künstliche Intelligenz) und GPU (Graphics Processing Unit). Außerdem sind alle Hardwareressourcen für Ihre Workloads dediziert, sodass Sie sich keine Sorgen um Leistungsbeeinträchtigungen machen brauchen, weil Sie Ressourcen mit anderen teilen. 
+Ja, Sie können Ihre Workerknoten als physischen Single-Tenant-Server bereitstellen, der auch als Bare-Metal-Server bezeichnet wird. Bare-Metal-Server bieten den Vorteil hoher Leistung für Workloads wie Daten, KI (künstliche Intelligenz) und GPU (Graphics Processing Unit). Außerdem sind alle Hardwareressourcen für Ihre Workloads dediziert, sodass Sie sich keine Sorgen um Leistungsbeeinträchtigungen machen brauchen, weil Sie Ressourcen mit anderen teilen.
 
-Weitere Informationen zu verfügbaren Bare-Metal-Optionen und zu den Unterschieden zwischen Bare-Metal- und virtuellen Maschinen finden Sie unter [Physische Maschinen (Bare-Metal)](cs_clusters_planning.html#bm). 
+Weitere Informationen zu verfügbaren Bare-Metal-Optionen und zu den Unterschieden zwischen Bare-Metal- und virtuellen Maschinen finden Sie unter [Physische Maschinen (Bare-Metal)](cs_clusters_planning.html#bm).
 
 ## Welche Kubernetes-Versionen unterstützt der Service? 
 {: #supported_kube_versions}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} unterstützt momentan mehrere Versionen von Kubernetes. Wenn die aktuellste Version (n) freigegeben wird, werden bis zu 2 Versionen davor (n-2) unterstützt. Versionen, die mehr als zwei Versionen älter sind, als die aktuellsten Version (n-3) werden zuerst nicht mehr verwendet und dann nicht weiter unterstützt. Die folgenden Versionen werden derzeit unterstützt:  
+{{site.data.keyword.containerlong_notm}} unterstützt momentan mehrere Versionen von Kubernetes. Wenn die aktuellste Version (n) freigegeben wird, werden bis zu 2 Versionen davor (n-2) unterstützt. Versionen, die mehr als zwei Versionen älter sind, als die aktuellsten Version (n-3) werden zuerst nicht mehr verwendet und dann nicht weiter unterstützt. Die folgenden Versionen werden derzeit unterstützt: 
 
 - Aktuelle: 1.12.3
 - Standard: 1.10.11
 - Sonstige: 1.11.5
 
-Weitere Informationen zu unterstützten Versionen und Aktualisierungsaktionen, die Sie ausführen müssen, um von einer Version zu einer anderen zu wechseln, finden Sie unter [Versionsinformationen und Aktualisierungsaktionen](cs_versions.html#cs_versions). 
+Weitere Informationen zu unterstützten Versionen und Aktualisierungsaktionen, die Sie ausführen müssen, um von einer Version zu einer anderen zu wechseln, finden Sie unter [Versionsinformationen und Aktualisierungsaktionen](cs_versions.html#cs_versions).
 
 ## Wo ist der Service verfügbar?
 {: #supported_regions}
@@ -104,13 +103,13 @@ Weitere Informationen zu unterstützten Versionen und Aktualisierungsaktionen, d
 
 {{site.data.keyword.containerlong_notm}} ist weltweit verfügbar. Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
 
-Weitere Informationen zu unterstützten Regionen finden Sie unter [Regionen und Zonen](cs_regions.html#regions-and-zones). 
+Weitere Informationen zu unterstützten Regionen finden Sie unter [Regionen und Zonen](cs_regions.html#regions-and-zones).
 
 ## Welche Standards hält der Service ein? 
 {: #standards}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} implementiert Kontrollmechanismen, die den folgenden Standards entsprechen:  
+{{site.data.keyword.containerlong_notm}} implementiert Kontrollmechanismen, die den folgenden Standards entsprechen: 
 - HIPAA
 - SOC1
 - SOC2 Type 1
@@ -123,27 +122,27 @@ Weitere Informationen zu unterstützten Regionen finden Sie unter [Regionen und 
 {: #integrations}
 {: faq}
 
-Sie können {{site.data.keyword.Bluemix_notm}}-Plattform- und Infrastrukturservices sowie Services von Drittanbietern zu Ihrem {{site.data.keyword.containerlong_notm}}-Cluster hinzufügen, um die Automatisierung zu aktivieren, die Sicherheit zu verbessern oder Ihre Überwachungs- und Protokollierungsfunktionen im Cluster zu erweitern. 
+Sie können {{site.data.keyword.Bluemix_notm}}-Plattform- und Infrastrukturservices sowie Services von Drittanbietern zu Ihrem {{site.data.keyword.containerlong_notm}}-Cluster hinzufügen, um die Automatisierung zu aktivieren, die Sicherheit zu verbessern oder Ihre Überwachungs- und Protokollierungsfunktionen im Cluster zu erweitern.
 
-Eine Liste der unterstützten Services finden Sie unter [Services integrieren](cs_integrations.html#integrations). 
+Eine Liste der unterstützten Services finden Sie unter [Services integrieren](cs_integrations.html#integrations).
 
 ## Kann ich meinen Cluster in IBM Cloud Public mit Apps verbinden, die in meinem lokalen Rechenzentrum ausgeführt werden?
 {: #hybrid}
 {: faq}
 
-Sie können Services in {{site.data.keyword.Bluemix_notm}} Public mit Ihrem lokalen Rechenzentrum verbinden, um Ihre eigene Hybrid-Cloud-Konfiguration zu erstellen. Beispiele für die Verwendung von {{site.data.keyword.Bluemix_notm}} Public und Private mit Apps, die in Ihrem lokalen Rechenzentrum ausgeführt werden:  
-- Sie erstellen einen Cluster mit {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Public oder Dedicated, möchten Ihren Cluster aber mit einer lokalen Datenbank verbinden. 
-- Sie erstellen einen Kubernetes-Cluster in {{site.data.keyword.Bluemix_notm}} Private in Ihrem eigenen Rechenzentrum und stellen Apps in Ihrem Cluster bereit. Ihre App verwendet jedoch unter Umständen einen {{site.data.keyword.ibmwatson_notm}}-Service wie Tone Analyzer in {{site.data.keyword.Bluemix_notm}} Public. 
+Sie können Services in {{site.data.keyword.Bluemix_notm}} Public mit Ihrem lokalen Rechenzentrum verbinden, um Ihre eigene Hybrid-Cloud-Konfiguration zu erstellen. Beispiele für die Verwendung von {{site.data.keyword.Bluemix_notm}} Public und Private mit Apps, die in Ihrem lokalen Rechenzentrum ausgeführt werden: 
+- Sie erstellen einen Cluster mit {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Public oder Dedicated, möchten Ihren Cluster aber mit einer lokalen Datenbank verbinden.
+- Sie erstellen einen Kubernetes-Cluster in {{site.data.keyword.Bluemix_notm}} Private in Ihrem eigenen Rechenzentrum und stellen Apps in Ihrem Cluster bereit. Ihre App verwendet jedoch unter Umständen einen {{site.data.keyword.ibmwatson_notm}}-Service wie Tone Analyzer in {{site.data.keyword.Bluemix_notm}} Public.
 
-Um die Kommunikation zwischen Services zu aktivieren, die in {{site.data.keyword.Bluemix_notm}} Public oder Dedicated ausgeführt werden, und Services, die lokal ausgeführt werden, müssen Sie eine [VPN-Verbindung einrichten](cs_vpn.html#vpn). Informationen zum Verbinden Ihrer {{site.data.keyword.Bluemix_notm}} Public- oder Dedicated-Umgebung mit einer {{site.data.keyword.Bluemix_notm}} Private-Umgebung finden Sie unter [{{site.data.keyword.containerlong_notm}} mit {{site.data.keyword.Bluemix_notm}} Private verwenden](cs_hybrid.html#hybrid_iks_icp). 
+Um die Kommunikation zwischen Services zu aktivieren, die in {{site.data.keyword.Bluemix_notm}} Public oder Dedicated ausgeführt werden, und Services, die lokal ausgeführt werden, müssen Sie eine [VPN-Verbindung einrichten](cs_vpn.html#vpn). Informationen zum Verbinden Ihrer {{site.data.keyword.Bluemix_notm}} Public- oder Dedicated-Umgebung mit einer {{site.data.keyword.Bluemix_notm}} Private-Umgebung finden Sie unter [{{site.data.keyword.containerlong_notm}} mit {{site.data.keyword.Bluemix_notm}} Private verwenden](cs_hybrid.html#hybrid_iks_icp).
 
-Einen Überblick über die unterstützen {{site.data.keyword.containerlong_notm}}-Angebote finden Sie unter [Vergleich von Angeboten und ihren Kombinationen](cs_why.html#differentiation). 
+Einen Überblick über die unterstützen {{site.data.keyword.containerlong_notm}}-Angebote finden Sie unter [Vergleich von Angeboten und ihren Kombinationen](cs_why.html#differentiation).
 
 ## Kann ich einen IBM Cloud Kubernetes-Service in meinem eigenen Rechenzentrum bereitstellen?
 {: #private}
 {: faq}
 
-Wenn Sie Ihre Apps nicht in {{site.data.keyword.Bluemix_notm}} Public oder Dedicated verschieben möchten, aber trotzdem die Features von {{site.data.keyword.containerlong_notm}} nutzen möchten, können Sie {{site.data.keyword.Bluemix_notm}} Private installieren. {{site.data.keyword.Bluemix_notm}} Private ist eine Anwendungsplattform, die lokal auf Ihren Maschinen installiert werden kann und mit der Sie lokale containerisierte Apps in Ihrer eigenen kontrollierten Umgebung hinter einer Firewall entwickeln und verwalten können.  
+Wenn Sie Ihre Apps nicht in {{site.data.keyword.Bluemix_notm}} Public oder Dedicated verschieben möchten, aber trotzdem die Features von {{site.data.keyword.containerlong_notm}} nutzen möchten, können Sie {{site.data.keyword.Bluemix_notm}} Private installieren. {{site.data.keyword.Bluemix_notm}} Private ist eine Anwendungsplattform, die lokal auf Ihren Maschinen installiert werden kann und mit der Sie lokale containerisierte Apps in Ihrer eigenen kontrollierten Umgebung hinter einer Firewall entwickeln und verwalten können. 
 
 Weitere Informationen finden Sie unter [{{site.data.keyword.Bluemix_notm}} Private – Produktdokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html). 
 
@@ -151,7 +150,7 @@ Weitere Informationen finden Sie unter [{{site.data.keyword.Bluemix_notm}} Priva
 {: #charges}
 {: faq}
 
-Mit {{site.data.keyword.containerlong_notm}}-Clustern können Sie die Rechen-, Netzbetriebs- und Speicherressourcen der IBM Cloud-Infrastruktur (SoftLayer) mit Plattformservices (Watson AI oder Database as a Service 'Compose') verwenden. Mit jeder Ressource sind eigene Gebühren verbunden, die [fest, gemessen, gestaffelt oder reserviert](/docs/billing-usage/how_charged.html#charges) sein können.  
+Mit {{site.data.keyword.containerlong_notm}}-Clustern können Sie die Rechen-, Netzbetriebs- und Speicherressourcen der IBM Cloud-Infrastruktur (SoftLayer) mit Plattformservices (Watson AI oder Database as a Service 'Compose') verwenden. Mit jeder Ressource sind eigene Gebühren verbunden, die [fest, gemessen, gestaffelt oder reserviert](/docs/billing-usage/how_charged.html#charges) sein können. 
 * [Workerknoten](#nodes)
 * [Abgehender Netzbetrieb](#bandwidth)
 * [IP-Teilnetzadressen](#subnets)
@@ -201,17 +200,17 @@ Bei monatlichen Ressourcen wird die Nutzung des aktuellen Monats im Folgemonat a
 {: faq}
 
 Wenn Sie ein belastbares {{site.data.keyword.Bluemix_notm}}-Konto verwenden, werden Plattform- und Infrastrukturressourcen in einer Rechnung zusammengefasst.
-Wenn Sie Ihre {{site.data.keyword.Bluemix_notm}}- und IBM Cloud-Infrastrukturkonten (SoftLayer) miteinander verknüpft haben, erhalten Sie eine [konsolidierte Rechnung](/docs/customer-portal/linking_accounts.html#unifybillaccounts) für Ihre {{site.data.keyword.Bluemix_notm}}-Plattform- und Infrastrukturressourcen.  
+Wenn Sie Ihre {{site.data.keyword.Bluemix_notm}}- und IBM Cloud-Infrastrukturkonten (SoftLayer) miteinander verknüpft haben, erhalten Sie eine [konsolidierte Rechnung](/docs/customer-portal/linking_accounts.html#unifybillaccounts) für Ihre {{site.data.keyword.Bluemix_notm}}-Plattform- und Infrastrukturressourcen. 
 
 ## Kann ich meine Kosten schätzen?
 {: #cost_estimate}
 {: faq}
 
-Ja, Informationen hierzu finden Sie unter [Kosten schätzen](/docs/billing-usage/estimating_costs.html#cost) und [Kostenschätzungstool ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/pricing/).  
+Ja, Informationen hierzu finden Sie unter [Kosten schätzen](/docs/billing-usage/estimating_costs.html#cost) und [Kostenschätzungstool ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/pricing/). 
 
 ## Kann ich meine aktuelle Nutzung anzeigen? 
 {: #usage}
 {: faq}
 
-Sie können Ihre aktuelle Nutzung und die monatliche Schätzung der Gesamtkosten für Ihre {{site.data.keyword.Bluemix_notm}}-Plattform- und Infrastrukturressourcen prüfen. Weitere Informationen finden Sie unter [Nutzung anzeigen](/docs/billing-usage/viewing_usage.html#viewingusage). Organisieren Sie Ihre Abrechnung, indem Sie Ihre Ressourcen in [Ressourcengruppen](/docs/resources/bestpractice_rgs.html#bp_resourcegroups) gruppieren.  
+Sie können Ihre aktuelle Nutzung und die monatliche Schätzung der Gesamtkosten für Ihre {{site.data.keyword.Bluemix_notm}}-Plattform- und Infrastrukturressourcen prüfen. Weitere Informationen finden Sie unter [Nutzung anzeigen](/docs/billing-usage/viewing_usage.html#viewingusage). Organisieren Sie Ihre Abrechnung, indem Sie Ihre Ressourcen in [Ressourcengruppen](/docs/resources/bestpractice_rgs.html#bp_resourcegroups) gruppieren. 
 

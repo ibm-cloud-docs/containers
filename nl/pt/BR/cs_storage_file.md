@@ -841,7 +841,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 Se você desejar aumentar a capacidade de armazenamento ou o desempenho, será possível modificar seu volume existente. 
 {: shortdesc}
 
-Para perguntas sobre faturamento e para localizar as etapas de como usar o console do {{site.data.keyword.Bluemix_notm}} para modificar seu armazenamento, veja [Expandir capacidade de compartilhamento de arquivo](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity).
+Para perguntas sobre faturamento e para localizar as etapas de como usar o console do {{site.data.keyword.Bluemix_notm}} para modificar seu armazenamento, veja [Expandir capacidade de compartilhamento de arquivo](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity). 
 {: tip}
 
 1. Liste os PVCs em seu cluster e anote o nome do PV associado na coluna **VOLUME**. 
@@ -949,7 +949,7 @@ Para perguntas sobre faturamento e para localizar as etapas de como usar o conso
       ```
       {: pre}
       
-   3. Mostre as estatísticas de uso do disco e localize o caminho do servidor para seu volume que você recuperou anteriormente.
+   3. Mostre as estatísticas de uso do disco e localize o caminho do servidor para seu volume que você recuperou anteriormente. 
       ```
       df -h
       ```

@@ -24,7 +24,8 @@ lastupdated: "2018-12-05"
 Wenn Sie bestimmte Voraussetzungen für die Leistungsoptimierung haben, können Sie die Standardeinstellungen für manche Clusterkomponenten in {{site.data.keyword.containerlong}} ändern.
 {: shortdesc}
 
-Wenn Sie die Standardeinstellungen ändern, tun Sie dies auf eigenes Risiko. Sie sind für die Ausführung der erforderlichen Tests für alle geänderten Einstellungen und für eventuelle Unterbrechungen, die durch die geänderten Einstellungen in Ihrer Umgebung verursacht werden, verantwortlich.{: important}
+Wenn Sie die Standardeinstellungen ändern, tun Sie dies auf eigenes Risiko. Sie sind für die Ausführung der erforderlichen Tests für alle geänderten Einstellungen und für eventuelle Unterbrechungen, die durch die geänderten Einstellungen in Ihrer Umgebung verursacht werden, verantwortlich.
+{: important}
 
 ## Leistung des Workerknotens optimieren
 {: #worker}
@@ -156,13 +157,13 @@ Sie müssen zunächst sicherstellen, dass Sie die {{site.data.keyword.Bluemix_no
 ## Ressourcen des Providers von Clustermetriken anpassen
 {: #metrics}
 
-Die Konfigurationen Ihres Provider von Clustermetriken (`metrics-server` in Kubernetes 1.12 und höher oder `heapster` in früheren Versionen) sind für Cluster mit 30 oder weniger Pods pro Workerknoten optimiert. Wenn Ihr Cluster mehr Pods pro Workerknoten aufweist, kann es sein, dass der Hauptcontainer `metrics-server` oder `heapster` des Providers von Metriken für den Pod regelmäßig mit einer Fehlernachricht wie `OOMKilled` neu gestartet wird. 
+Die Konfigurationen Ihres Provider von Clustermetriken (`metrics-server` in Kubernetes 1.12 und höher oder `heapster` in früheren Versionen) sind für Cluster mit 30 oder weniger Pods pro Workerknoten optimiert. Wenn Ihr Cluster mehr Pods pro Workerknoten aufweist, kann es sein, dass der Hauptcontainer `metrics-server` oder `heapster` des Providers von Metriken für den Pod regelmäßig mit einer Fehlernachricht wie `OOMKilled` neu gestartet wird.
 
-Der Pod des Providers von Metriken verfügt auch über einen Container `nanny`, der die Ressourcenanforderungen und -limits des Hauptcontainers `metrics-server` oder `heapster` in Antwort auf die Anzahl von Workerknoten im Cluster skaliert. Sie können die Standardressourcen ändern, indem Sie die Konfigurationszuordnung des Providers von Metriken bearbeiten. 
+Der Pod des Providers von Metriken verfügt auch über einen Container `nanny`, der die Ressourcenanforderungen und -limits des Hauptcontainers `metrics-server` oder `heapster` in Antwort auf die Anzahl von Workerknoten im Cluster skaliert. Sie können die Standardressourcen ändern, indem Sie die Konfigurationszuordnung des Providers von Metriken bearbeiten.
 
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
-1.  Öffnen Sie die Konfigurationszuordnungs-YAML des Providers von Clustermetriken. 
+1.  Öffnen Sie die Konfigurationszuordnungs-YAML des Providers von Clustermetriken.
     *  Für `metrics-server`:
        ```
        kubectl get configmap metrics-server-config -n kube-system -o yaml
@@ -216,7 +217,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
     ```
     {: pre}
 
-4.  Überwachen Sie die Pods des Providers von Metriken, um zu sehen, ob Container weiterhin aufgrund einer Fehlernachricht `OOMKilled` erneut gestartet werden. Ist dies der Fall, wiederholen Sie diese Schritte und setzen Sie den Wert für `memoryPerNode` nach oben, bis der Pod stabil läuft. 
+4.  Überwachen Sie die Pods des Providers von Metriken, um zu sehen, ob Container weiterhin aufgrund einer Fehlernachricht `OOMKilled` erneut gestartet werden. Ist dies der Fall, wiederholen Sie diese Schritte und setzen Sie den Wert für `memoryPerNode` nach oben, bis der Pod stabil läuft.
 
 Möchten Sie weitere Einstellungen anpassen? Ideen und Informationen finden Sie in der [Dokumentation zur Konfiguration von Kubernetes Add-on Resizer ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration).
 {: tip}

@@ -57,7 +57,7 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
 
 3. `アプリケーション`: アプリケーション・レベルで発生するイベントに関する情報。 これは、ログインの成功、ストレージに関する警告、アプリ・レベルで実行できるその他の操作などのイベントが発生したという通知である可能性があります。</br>**パス**: ログの転送先にするパスを設定できます。 ただし、ログを送信するには、ロギング構成で絶対パスを使用する必要があります。そうしないとログは読み取られません。 パスがワーカー・ノードにマウントされている場合は、シンボリック・リンクが作成されている可能性があります。 例: 指定されたパスが `/usr/local/spark/work/app-0546/0/stderr` であるのに、実際にはログが `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr` に送信されている場合、ログは読み取れません。
 
-4. `ストレージ`: クラスター内にセットアップされた永続ストレージに関する情報。ストレージ・ログは、DevOps パイプラインおよび製品リリースの一部として問題判別ダッシュボードおよびアラートをセットアップするのに役立ちます。`注**: パス **/var/log/kubelet.log` および `/var/log/syslog` にもストレージ・ログが含まれていますが、これらのパスにあるログは `kubernetes` および `worker` ログ・ソースによって収集されます。</br>**パス**:
+4. `ストレージ`: クラスター内にセットアップされた永続ストレージに関する情報。 ストレージ・ログは、DevOps パイプラインおよび製品リリースの一部として問題判別ダッシュボードおよびアラートをセットアップするのに役立ちます。 `注**: パス **/var/log/kubelet.log` および `/var/log/syslog` にもストレージ・ログが含まれていますが、これらのパスにあるログは `kubernetes` および `worker` ログ・ソースによって収集されます。</br>**パス**:
     * `/var/log/ibmc-s3fs.log`
     * `/var/log/ibmc-block.log`
 
@@ -764,7 +764,7 @@ Kubernetes API サーバー・ログは自動的にストリーミングされ�
       </table>
  </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)を参照してください。**注**: {{site.data.keyword.mon_full_notm}} は `containerd` コンテナー・ランタイムをサポートしていません。バージョン 1.11 以降のクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、一部のコンテナー・メトリックは収集されません。</dd>
+  <dd>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。 詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)を参照してください。 **注**: {{site.data.keyword.mon_full_notm}} は `containerd` コンテナー・ランタイムをサポートしていません。 バージョン 1.11 以降のクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、一部のコンテナー・メトリックは収集されません。</dd>
 </dl>
 
 メトリック・サービスでのビルドの使用時に競合しないようにするには、リソース・グループと地域間でクラスターの名前が固有であることを確認してください。

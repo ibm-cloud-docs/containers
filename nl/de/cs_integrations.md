@@ -91,7 +91,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>{{site.data.keyword.la_full_notm}}</td>
-<td>Fügen Sie Ihrem Cluster Protokollmanagementfunktionen hinzu, indem Sie LogDNA als Drittanbieterservice auf Ihren Workerknoten implementieren, um Protokolle aus Ihren Pod-Containern zu verwalten. Weitere Informationen finden Sie unter [Kubernetes-Clusterprotokolle mit {{site.data.keyword.loganalysisfull_notm}} und LogDNA verwalten](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube). </td>
+<td>Fügen Sie Ihrem Cluster Protokollmanagementfunktionen hinzu, indem Sie LogDNA als Drittanbieterservice auf Ihren Workerknoten implementieren, um Protokolle aus Ihren Pod-Containern zu verwalten. Weitere Informationen finden Sie unter [Kubernetes-Clusterprotokolle mit {{site.data.keyword.loganalysisfull_notm}} und LogDNA verwalten](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
@@ -99,7 +99,7 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 </tr>
 <tr>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>Gewinnen Sie betriebliche Einblicke in die Leistung und den Allgemeinzustand Ihrer Apps, indem Sie Sysdig als Drittanbieterservice auf Ihren Workerknoten bereitstellen, um Metriken an {{site.data.keyword.monitoringlong}} weiterzuleiten. Weitere Informationen finden Sie unter [Metriken für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Hinweis**: Wenn Sie {{site.data.keyword.mon_full_notm}} mit Clustern verwenden, auf denen Kubernetes Version 1.11 oder höher ausgeführt wird, werden nicht alle Containermetriken erfasst, da Sysdig derzeit `containerd` nicht unterstützt. </td>
+<td>Gewinnen Sie betriebliche Einblicke in die Leistung und den Allgemeinzustand Ihrer Apps, indem Sie Sysdig als Drittanbieterservice auf Ihren Workerknoten bereitstellen, um Metriken an {{site.data.keyword.monitoringlong}} weiterzuleiten. Weitere Informationen finden Sie unter [Metriken für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Hinweis**: Wenn Sie {{site.data.keyword.mon_full_notm}} mit Clustern verwenden, auf denen Kubernetes Version 1.11 oder höher ausgeführt wird, werden nicht alle Containermetriken erfasst, da Sysdig derzeit `containerd` nicht unterstützt.</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -227,9 +227,9 @@ Sie können nur Services binden, die Serviceschlüssel unterstützen. Eine Liste
 {: note}
 
 Vorbemerkungen:
-- Stellen Sie sicher, dass Sie die folgenden Rollen innehaben: 
-    - [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Editor** oder **Administrator**](cs_users.html#platform) für den Cluster. 
-    - [Cloud Foundry-Rolle **Entwickler**](/docs/iam/mngcf.html#mngcf) für den Bereich, den Sie verwenden möchten. 
+- Stellen Sie sicher, dass Sie die folgenden Rollen innehaben:
+    - [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Editor** oder **Administrator**](cs_users.html#platform) für den Cluster.
+    - [Cloud Foundry-Rolle **Entwickler**](/docs/iam/mngcf.html#mngcf) für den Bereich, den Sie verwenden möchten.
 - [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 
 Gehen Sie wie folgt vor, um einen {{site.data.keyword.Bluemix_notm}}-Service zu Ihrem Cluster hinzuzufügen:
@@ -726,7 +726,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 {: #helm_links}
 
 * Informationen zur Verwendung von StrongSwan finden Sie unter [Einrichtung von VPN-Konnektivität mit dem Helm-Diagramm des StrongSwan-IPSec-VPN-Service](cs_vpn.html#vpn-setup).
-* Zeigen Sie verfügbare Helm-Diagramme an, die Sie mit {{site.data.keyword.Bluemix_notm}} im [Helm-Diagrammkatalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) in der Konsole verwenden können. 
+* Zeigen Sie verfügbare Helm-Diagramme an, die Sie mit {{site.data.keyword.Bluemix_notm}} im [Helm-Diagrammkatalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) in der Konsole verwenden können.
 * Weitere Informationen zu den Helm-Befehlen zum Konfigurieren und Verwalten von Helm-Diagrammen finden Sie in der <a href="https://docs.helm.sh/helm/" target="_blank">Helm-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.
 * Über den folgenden Link finden Sie weitere Informationen zur Vorgehensweise bei der [Erhöhung der Bereitstellungsgeschwindigkeit mit Kubernetes-Helm-Diagrammen![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 

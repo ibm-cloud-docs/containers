@@ -174,12 +174,12 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
       
    2. Überprüfen Sie das [Versionsänderungsprotokoll](cs_versions_changelog.html#changelog) und suchen Sie nach Änderungen, die in der neuesten Patchversion enthalten sind. 
    
-   3. Wenden Sie die neueste Patchversion durch erneutes Laden des Workerknotens an. Gehen Sie gemäß den Anweisungen für den Befehl [ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) vor, um sorgfältig alle aktiven Pods auf dem Workerknoten erneut zu planen, bevor der Workerknoten erneut geladen wird. Beachten Sie, dass Ihre Workerknotenmaschine während eines Neuladens mit dem neuen Image aktualisiert wird und dass dabei Daten gelöscht werden, die nicht [außerhalb des Workerknotens gespeichert sind](cs_storage_planning.html#persistent_storage_overview). 
+   3. Wenden Sie die neueste Patchversion durch erneutes Laden des Workerknotens an. Gehen Sie gemäß den Anweisungen für den Befehl [ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reload) vor, um sorgfältig alle aktiven Pods auf dem Workerknoten erneut zu planen, bevor der Workerknoten erneut geladen wird. Beachten Sie, dass Ihre Workerknotenmaschine während eines Neuladens mit dem neuen Image aktualisiert wird und dass dabei Daten gelöscht werden, die nicht [außerhalb des Workerknotens gespeichert sind](cs_storage_planning.html#persistent_storage_overview).
 
 2. Führen Sie die [Anweisungen](cs_integrations.html#helm) aus, um den Helm-Client auf Ihrer lokalen Maschine zu installieren, installieren Sie den Helm-Server (tiller) in Ihrem Cluster und fügen Sie das {{site.data.keyword.Bluemix_notm}}-Repository für das Helm-Diagramm dem Cluster hinzu, in dem Sie das {{site.data.keyword.cos_full_notm}}-Plug-in verwenden wollen.
 
     Wenn Sie Helm Version 2.9 oder höher verwenden, stellen Sie sicher, dass Sie Tiller mit einem [Servicekonto](cs_integrations.html#helm) installiert haben.
-{: important}
+    {: important}
 
 3. Fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Repository zu Ihrem Cluster hinzu.
    ```
@@ -627,7 +627,7 @@ Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
    </tr>
    <tr>
    <td><code>ibm.io/object-store-endpoint</code></td>
-   <td>Der API-Endpunkt, der für den Zugriff auf das Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz verwendet werden soll. Der Endpunkt wird automatisch auf der Basis der Region des Clusters festgelegt. **Hinweis**: Wenn Sie auf ein vorhandenes Bucket zugreifen möchten, das sich in einer anderen als der Region befindet, in der Ihr Cluster enthalten ist, müssen Sie eine [angepasste Speicherklasse](cs_storage_basics.html#customized_storageclass) erstellen und den API-Endpunkt für Ihr Bucket verwenden. </td>
+   <td>Der API-Endpunkt, der für den Zugriff auf das Bucket in Ihrer {{site.data.keyword.cos_full_notm}}-Serviceinstanz verwendet werden soll. Der Endpunkt wird automatisch auf der Basis der Region des Clusters festgelegt. **Hinweis**: Wenn Sie auf ein vorhandenes Bucket zugreifen möchten, das sich in einer anderen als der Region befindet, in der Ihr Cluster enthalten ist, müssen Sie eine [angepasste Speicherklasse](cs_storage_basics.html#customized_storageclass) erstellen und den API-Endpunkt für Ihr Bucket verwenden.</td>
    </tr>
    <tr>
    <td><code>ibm.io/object-store-storage-class</code></td>
@@ -767,7 +767,7 @@ Gehen Sie wie folgt vor, um {{site.data.keyword.cos_full_notm}} zu Ihrem Cluster
    ```
    {: screen}
 
-4. Optional: Wenn Sie als Benutzer ohne Rootberechtigung auf Ihre Daten zugreifen möchten oder Dateien zu einem vorhandenen {{site.data.keyword.cos_full_notm}}-Bucket direkt über die Konsole oder die API hinzugefügt haben, stellen Sie sicher, dass den [Dateien die richtige Berechtigung zugewiesen wird](cs_troubleshoot_storage.html#cos_nonroot_access), sodass Ihre App die Dateien nach Bedarf erfolgreich lesen und aktualisieren kann. 
+4. Optional: Wenn Sie als Benutzer ohne Rootberechtigung auf Ihre Daten zugreifen möchten oder Dateien zu einem vorhandenen {{site.data.keyword.cos_full_notm}}-Bucket direkt über die Konsole oder die API hinzugefügt haben, stellen Sie sicher, dass den [Dateien die richtige Berechtigung zugewiesen wird](cs_troubleshoot_storage.html#cos_nonroot_access), sodass Ihre App die Dateien nach Bedarf erfolgreich lesen und aktualisieren kann.
 
 4.  {: #app_volume_mount}Erstellen Sie zum Anhängen des persistenten Datenträgers an Ihre Bereitstellung eine `.yaml`-Konfigurationsdatei und geben Sie den Persistent Volume Claim (PVC) an, der den PV (Persistent Volume) bindet.
 

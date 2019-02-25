@@ -91,7 +91,7 @@ lastupdated: "2018-12-06"
 </tr>
 <tr>
 <td>{{site.data.keyword.la_full_notm}}</td>
-<td>LogDNA をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、ポッド・コンテナーのログを管理することで、ログ管理機能をクラスターに追加できます。詳しくは、[{{site.data.keyword.loganalysisfull_notm}} with LogDNA による Kubernetes クラスター・ログの管理](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube) を参照してください。</td>
+<td>LogDNA をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、ポッド・コンテナーのログを管理することで、ログ管理機能をクラスターに追加できます。 詳しくは、[{{site.data.keyword.loganalysisfull_notm}} with LogDNA による Kubernetes クラスター・ログの管理](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube) を参照してください。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
@@ -99,7 +99,7 @@ lastupdated: "2018-12-06"
 </tr>
 <tr>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)を参照してください。**注**: Kubernetes バージョン 1.11 以降を実行するクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、Sysdig は現在 `containerd` をサポートしていないため、すべてのコンテナー・メトリックが収集されるわけではありません。</td>
+<td>Sysdig をサード・パーティー・サービスとしてワーカー・ノードにデプロイし、メトリックを {{site.data.keyword.monitoringlong}} に転送することで、アプリのパフォーマンスと正常性を可視化して運用することができます。 詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)を参照してください。 **注**: Kubernetes バージョン 1.11 以降を実行するクラスターで {{site.data.keyword.mon_full_notm}} を使用する場合、Sysdig は現在 `containerd` をサポートしていないため、すべてのコンテナー・メトリックが収集されるわけではありません。</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -223,7 +223,7 @@ lastupdated: "2018-12-06"
 {{site.data.keyword.Bluemix_notm}} サービスを追加して、Watson AI、データ、セキュリティー、モノのインターネット (IoT) などの領域の追加機能によって Kubernetes クラスターを拡張します。
 {:shortdesc}
 
-サービス・キーをサポートするサービスのみをバインドできます。サービス・キーをサポートするサービスのリストを確認するには、[{{site.data.keyword.Bluemix_notm}} サービスを使用するための外部アプリの使用可能化](/docs/resources/connect_external_app.html#externalapp)を参照してください。
+サービス・キーをサポートするサービスのみをバインドできます。 サービス・キーをサポートするサービスのリストを確認するには、[{{site.data.keyword.Bluemix_notm}} サービスを使用するための外部アプリの使用可能化](/docs/resources/connect_external_app.html#externalapp)を参照してください。
 {: note}
 
 開始前に、以下のことを行います。

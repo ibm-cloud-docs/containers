@@ -526,7 +526,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: codeblock}
 
-    2.  watson デプロイメントの volumes セクションで、前のチュートリアルで作成した {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットの名前を更新します。 Kubernetes シークレットをボリュームとしてデプロイメントにマウントすると、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) の API キーを、ポッドで実行されるコンテナーから使用できるようになります。このチュートリアルの {{site.data.keyword.watson}} アプリ・コンポーネントは、ボリューム・マウント・パスを使用して API キーを検索するように構成されています。
+    2.  watson デプロイメントの volumes セクションで、前のチュートリアルで作成した {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットの名前を更新します。 Kubernetes シークレットをボリュームとしてデプロイメントにマウントすると、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) の API キーを、ポッドで実行されるコンテナーから使用できるようになります。 このチュートリアルの {{site.data.keyword.watson}} アプリ・コンポーネントは、ボリューム・マウント・パスを使用して API キーを検索するように構成されています。
 
         ```
         volumes:

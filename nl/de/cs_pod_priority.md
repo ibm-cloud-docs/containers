@@ -38,7 +38,7 @@ Im Allgemeinen werden anstehende Pods, die eine höhere Priorität haben, vor Po
 
 Wenn Sie für Ihre Podbereitstellung keine Priorität angeben, wird die Standardeinstellung auf die Prioritätsklasse gesetzt, die als `globalDefault` festgelegt ist. Wenn Sie keine Prioritätsklasse `globalDefault` haben, ist die Standardpriorität für alle Pods null (`0`). Standardmäßig legt {{site.data.keyword.containerlong_notm}} keinen Wert für `globalDefault` fest, sodass die Podstandardpriorität null ist.
 
-Wenn Sie wissen möchten, wie die Podpriorität und der Scheduler zusammenarbeiten, sehen Sie sich die Szenarios in der folgenden Abbildung an. Sie müssen priorisierte Pods auf Workerknoten mit verfügbaren Ressourcen platzieren. Andernfalls kann es geschehen, dass Pods mit hoher Priorität in Ihrem Cluster weiter zur Verarbeitung anstehen, während gleichzeitig vorhandene Pods entfernt werden (siehe Szenario 3). 
+Wenn Sie wissen möchten, wie die Podpriorität und der Scheduler zusammenarbeiten, sehen Sie sich die Szenarios in der folgenden Abbildung an. Sie müssen priorisierte Pods auf Workerknoten mit verfügbaren Ressourcen platzieren. Andernfalls kann es geschehen, dass Pods mit hoher Priorität in Ihrem Cluster weiter zur Verarbeitung anstehen, während gleichzeitig vorhandene Pods entfernt werden (siehe Szenario 3).
 
 _Abbildung: Szenarios für die Podpriorität_
 ![Szenarios für die Podpriorität](images/pod-priority.png)
@@ -52,7 +52,7 @@ _Abbildung: Szenarios für die Podpriorität_
 Nein. Wenn Sie die Podpriorität nicht verwenden möchten, legen Sie keinen Wert für `globalDefault` fest oder fügen Sie eine Prioritätsklasse in Ihre Podbereitstellungen ein. Jeder Pod nimmt standardmäßig den Wert null an, mit Ausnahme der clusterkritischen Pods, die von IBM mit den [Standardprioritätsklassen](#default_priority_class) bereitgestellt werden. Da die Podpriorität relativ ist, stellt diese Basiskonfiguration sicher, dass die clusterkritischen Pods für Ressourcen priorisiert werden, und plant alle anderen Pods nach den bestehenden Planungsrichtlinien, die Sie eingerichtet haben.
 
 **Wie wirken sich Ressourcenquoten auf die Podpriorität aus?**</br>
-Sie können Podpriorität in Kombination mit Ressourcenquoten verwenden, einschließlich [Quotenbereiche ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) für Cluster, auf denen Kubernetes 1.12 oder höher ausgeführt wird. Mithilfe von Quotenbereichen können Sie Ihre Ressourcenquoten für die Podpriorität einrichten. Die Pods mit höherer Priorität können Systemressourcen nutzen, die durch die Ressourcenquote eingeschränkt werden, bevor Pods mit niedrigerer Priorität darauf Zugriff erhalten. 
+Sie können Podpriorität in Kombination mit Ressourcenquoten verwenden, einschließlich [Quotenbereiche ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) für Cluster, auf denen Kubernetes 1.12 oder höher ausgeführt wird. Mithilfe von Quotenbereichen können Sie Ihre Ressourcenquoten für die Podpriorität einrichten. Die Pods mit höherer Priorität können Systemressourcen nutzen, die durch die Ressourcenquote eingeschränkt werden, bevor Pods mit niedrigerer Priorität darauf Zugriff erhalten.
 
 ## Erklärung der Standardprioritätsklassen
 {: #default_priority_class}
@@ -89,7 +89,7 @@ Vorbereitende Schritte:
 * [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 * [Erstellen](cs_clusters.html#clusters_ui) oder [aktualisieren](cs_cluster_update.html#update) Sie den Cluster so, dass Kubernetes Version 1.11 oder eine höhere Version verwendet wird.
 
-Gehen Sie wie folgt vor, um eine Prioritätsklasse zu verwenden: 
+Gehen Sie wie folgt vor, um eine Prioritätsklasse zu verwenden:
 
 1.  Optional: Verwenden Sie eine vorhandene Prioritätsklasse als Vorlage für die neue Klasse.
 
@@ -182,7 +182,7 @@ Gehen Sie wie folgt vor, um Ihren Pods eine Priorität zuzuweisen:
         ```
         {: pre}
 
-    2.  Rufen Sie die Details der Prioritätsklasse ab und notieren Sie die Zahl für **value**. Pods mit höheren Zahlen werden vor Pods mit niedrigeren Zahlen priorisiert. Wiederholen Sie diesen Schritt für jede Prioritätsklasse, die Sie prüfen wollen. 
+    2.  Rufen Sie die Details der Prioritätsklasse ab und notieren Sie die Zahl für **value**. Pods mit höheren Zahlen werden vor Pods mit niedrigeren Zahlen priorisiert. Wiederholen Sie diesen Schritt für jede Prioritätsklasse, die Sie prüfen wollen.
 
         ```
         kubectl describe priorityclass <name_der_prioritätsklasse>

@@ -419,7 +419,7 @@ Para fazer mudanças em suas configurações de criação de log ou de filtro, o
 
 É possível gerenciar atualizações automáticas do complemento Fluentd das maneiras a seguir. **Nota**: para executar os comandos a seguir, deve-se ter a [função de plataforma **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](cs_users.html#platform) para o cluster.
 
-* Verifique se as atualizações automáticas estão ativadas executando o [comando](cs_cli_reference.html#cs_log_autoupdate_get) `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>`.
+* Para verificar se as atualizações automáticas estão disponíveis, execute o [comando](cs_cli_reference.html#cs_log_autoupdate_get) `ibmcloud ks logging-autoupdate-get --cluster<cluster_name_or_ID>`.
 * Desative as atualizações automáticas executando o [comando](cs_cli_reference.html#cs_log_autoupdate_disable) `ibmcloud ks logging-autoupdate-disable`.
 * Se as atualizações automáticas estiverem desativadas, mas você precisar fazer uma mudança em sua configuração, você terá duas opções:
     * Ativar as atualizações automáticas para os seus pods do Fluentd.

@@ -66,7 +66,7 @@ Avant de décider du type de stockage qui vous convient le mieux, vous devez con
    - **Accès entre les pods :** lorsque vous utilisez des volumes persistants Kubernetes pour accéder à votre stockage, vous pouvez déterminer le nombre de pods pouvant monter le volume en même temps. Certaines solutions de stockage, telles que le stockage par blocs, sont accessibles à un pod à la fois uniquement. D'autres solutions de stockage vous permettent de partager le même volume entre plusieurs pods.
    - **Accès entre les zones et les régions :** vos données devront parfois être accessibles entre plusieurs zones ou régions. Certaines solutions de stockage, par exemple le stockage de fichiers ou le stockage par blocs, sont spécifiques à un centre de données et ne peuvent pas être partagées entre plusieurs zones dans une configuration de cluster à zones multiples.
    
-   Si vous souhaitez rendre vos données accessibles dans les différentes zones ou régions, veillez à consulter votre service juridique pour vérifier que vos données peuvent être stockées dans plusieurs zones ou dans un autre pays.
+   Si vous souhaitez rendre vos données accessibles dans les différentes zones ou régions, veillez à consulter votre service juridique pour vérifier que vos données peuvent être stockées dans plusieurs zones ou dans un autre pays. 
    {: note}
 
 6. Familiarisez-vous avec d'autres caractéristiques de stockage pouvant influencer votre choix.

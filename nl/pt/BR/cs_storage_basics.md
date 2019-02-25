@@ -165,7 +165,7 @@ Se não for possível usar uma das classes de armazenamento fornecidas, será po
 ### Mudando ou atualizando para uma classe de armazenamento diferente
 {: #update_storageclass}
 
-Quando você provisiona dinamicamente o armazenamento persistente usando uma classe de armazenamento, você provisiona o armazenamento persistente com uma configuração específica. Não é possível mudar o nome da classe de armazenamento ou o tipo de armazenamento provisionado. No entanto, você tem a opção de escalar seu armazenamento conforme mostrado na tabela a seguir.
+Quando você provisiona dinamicamente o armazenamento persistente usando uma classe de armazenamento, você provisiona o armazenamento persistente com uma configuração específica. Não é possível mudar o nome da classe de armazenamento ou o tipo de armazenamento provisionado. No entanto, você tem a opção de escalar seu armazenamento conforme mostrado na tabela a seguir. 
 {: shortdesc}
 
 <table> 

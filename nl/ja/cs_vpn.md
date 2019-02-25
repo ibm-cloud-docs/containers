@@ -68,7 +68,7 @@ strongSwan Helm チャートを使用する前に、以下の考慮事項や制�
 ## strongSwan Helm チャートの構成
 {: #vpn_configure}
 
-strongSwan Helm チャートをインストールする前に、strongSwan 構成を決定する必要があります。
+strongSwan Helm チャートをインストールする前に、strongSwan 構成を決定する必要があります。 
 {: shortdesc}
 
 開始前に、以下のことを行います。
@@ -78,7 +78,7 @@ strongSwan Helm チャートをインストールする前に、strongSwan 構�
 ### ステップ 1: strongSwan Helm チャートの取得
 {: #strongswan_1}
 
-Helm をインストールし、strongSwan Helm チャートを取得して、設定可能な構成を確認します。
+Helm をインストールし、strongSwan Helm チャートを取得して、設定可能な構成を確認します。 
 {: shortdesc}
 
 1. [クラスター用の Helm をインストールし、Helm インスタンスに {{site.data.keyword.Bluemix_notm}} リポジトリーを追加します](cs_integrations.html#helm)。
@@ -183,7 +183,7 @@ VPN 接続を介してクラスターがアクセスできるリモート・ネ�
 {: shortdesc}
 
 1. 1 つ以上のオンプレミス・プライベート・サブネットの CIDR を `remote.subnet` 設定に追加します。 **注**: `ipsec.keyexchange` が `ikev1` に設定されている場合、指定できるサブネットは 1 つだけです。
-2. バージョン 2.2.0 以降の strongSwan Helm チャートのオプション: `remoteSubnetNAT` 設定を使用して、リモート・ネットワーク・サブネットを再マップします。 サブネットのネットワーク・アドレス変換 (NAT) は、クラスター・ネットワークとオンプレミス・リモート・ネットワークの間のサブネット競合の回避策になります。 NAT を使用して、リモート・ネットワークの IP サブネットを、異なるプライベート・サブネットに再マップすることができます。 再マップは、VPN トンネル経由でパケットが送信される前に行われます。クラスター内のポッドは、元のサブネットではなく、再マップされた IP サブネットを認識します。ポッドが VPN トンネル経由でデータを戻す前に、再マップされた IP サブネットは、リモート・ネットワークで使用されている実際のサブネットに戻されます。再マップされたサブネットと再マップされていないサブネットの両方を同時に VPN を介して公開できます。
+2. バージョン 2.2.0 以降の strongSwan Helm チャートのオプション: `remoteSubnetNAT` 設定を使用して、リモート・ネットワーク・サブネットを再マップします。 サブネットのネットワーク・アドレス変換 (NAT) は、クラスター・ネットワークとオンプレミス・リモート・ネットワークの間のサブネット競合の回避策になります。 NAT を使用して、リモート・ネットワークの IP サブネットを、異なるプライベート・サブネットに再マップすることができます。 再マップは、VPN トンネル経由でパケットが送信される前に行われます。 クラスター内のポッドは、元のサブネットではなく、再マップされた IP サブネットを認識します。 ポッドが VPN トンネル経由でデータを戻す前に、再マップされた IP サブネットは、リモート・ネットワークで使用されている実際のサブネットに戻されます。 再マップされたサブネットと再マップされていないサブネットの両方を同時に VPN を介して公開できます。
 
 ### ステップ 6 (オプション): Slack Webhook 統合によるモニターの有効化
 {: #strongswan_6}
@@ -195,13 +195,13 @@ strongSwan VPN の状況をモニターするには、VPN 接続メッセージ�
 
 2. [「Incoming WebHooks」アプリ・ページ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks) にアクセスします。
 
-3. **「インストールの要求 (Request to Install)」**をクリックします。このアプリが Slack セットアップに表示されない場合は、Slack ワークスペースの所有者に連絡してください。
+3. **「インストールの要求 (Request to Install)」**をクリックします。 このアプリが Slack セットアップに表示されない場合は、Slack ワークスペースの所有者に連絡してください。
 
 4. インストールの要求が承認されたら、**「構成の追加 (Add Configuration)」**をクリックします。
 
 5. VPN メッセージの送信先にする Slack チャネルを選択するか、新規チャネルを作成します。
 
-6. 生成された Webhook URL をコピーします。URL の形式は、以下のようになります。
+6. 生成された Webhook URL をコピーします。 URL の形式は、以下のようになります。
   ```
   https://hooks.slack.com/services/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
   ```
@@ -217,14 +217,14 @@ strongSwan VPN の状況をモニターするには、VPN 接続メッセージ�
 
 9. Helm チャートの `config.yaml` ファイルで、VPN 接続をモニターするための Webhook を構成します。
     1. `monitoring.enable` を `true` に変更します。
-    2. VPN 接続を介して到達できることを確認するリモート・サブネットのプライベート IP アドレスまたは HTTP エンドポイントを、`monitoring.privateIPs` または `monitoring.httpEndpoints` に追加します。例えば、`remote.privateIPtoPing` 設定の IP を `monitoring.privateIPs` に追加したりします。
+    2. VPN 接続を介して到達できることを確認するリモート・サブネットのプライベート IP アドレスまたは HTTP エンドポイントを、`monitoring.privateIPs` または `monitoring.httpEndpoints` に追加します。 例えば、`remote.privateIPtoPing` 設定の IP を `monitoring.privateIPs` に追加したりします。
     3. Webhook URL を `monitoring.slackWebhook` に追加します。
     4. 必要に応じて、他のオプションの `monitoring` 設定を変更します。
 
 ### ステップ 7: Helm チャートのデプロイ
 {: #strongswan_7}
 
-先ほど選択した構成を使用して、strongSwan Helm チャートをクラスターにデプロイします。
+先ほど選択した構成を使用して、strongSwan Helm チャートをクラスターにデプロイします。 
 {: shortdesc}
 
 1. 詳細設定を構成する必要がある場合は、Helm チャートの設定ごとに提供されている資料に従ってください。
@@ -336,7 +336,7 @@ Helm チャートをデプロイしたら、VPN 接続をテストします。
     </tr>
     <tr>
     <td><code>vpn-strongswan-ping-remote-gw</code></td>
-    <td><code>config.yaml</code> ファイルに構成した <code>remote.gateway</code> パブリック IP アドレスを ping します。 VPN 接続の状況が <code>ESTABLISHED</code> の場合は、このテストの結果を無視できます。VPN 接続の状況が <code>ESTABLISHED</code> でない場合は、以下の理由でこのテストに失格した可能性があります。<ul><li>オンプレミス VPN ゲートウェイの IP アドレスを指定していない。 <code>ipsec.auto</code> を <code>start</code> に設定する場合は、<code>remote.gateway</code> IP アドレスが必要です。</li><li>ファイアウォールによって ICMP (ping) パケットがブロックされている。</li></ul></td>
+    <td><code>config.yaml</code> ファイルに構成した <code>remote.gateway</code> パブリック IP アドレスを ping します。 VPN 接続の状況が <code>ESTABLISHED</code> の場合は、このテストの結果を無視できます。 VPN 接続の状況が <code>ESTABLISHED</code> でない場合は、以下の理由でこのテストに失格した可能性があります。<ul><li>オンプレミス VPN ゲートウェイの IP アドレスを指定していない。 <code>ipsec.auto</code> を <code>start</code> に設定する場合は、<code>remote.gateway</code> IP アドレスが必要です。</li><li>ファイアウォールによって ICMP (ping) パケットがブロックされている。</li></ul></td>
     </tr>
     <tr>
     <td><code>vpn-strongswan-ping-remote-ip-1</code></td>
@@ -405,7 +405,7 @@ Helm チャートをデプロイしたら、VPN 接続をテストします。
 ## 名前空間またはワーカー・ノードによる strongSwan VPN トラフィックの制限
 {: #limit}
 
-単一テナント・クラスターを使用している場合、または複数のテナント間でクラスター・リソースを共有するマルチテナント・クラスターを使用している場合は、[各 strongSwan デプロイメントの VPN トラフィックを特定の名前空間内のポッドに制限する](#limit_namespace)ことができます。テナントに専用のクラスター・リソースが存在するマルチテナント・クラスターの場合は、[各 strongSwan デプロイメントの VPN トラフィックを各テナント専用のワーカー・ノードに制限する](#limit_worker)ことができます。
+単一テナント・クラスターを使用している場合、または複数のテナント間でクラスター・リソースを共有するマルチテナント・クラスターを使用している場合は、[各 strongSwan デプロイメントの VPN トラフィックを特定の名前空間内のポッドに制限する](#limit_namespace)ことができます。 テナントに専用のクラスター・リソースが存在するマルチテナント・クラスターの場合は、[各 strongSwan デプロイメントの VPN トラフィックを各テナント専用のワーカー・ノードに制限する](#limit_worker)ことができます。
 {: shortdesc}
 
 ### 名前空間による strongSwan VPN トラフィックの制限
@@ -414,11 +414,11 @@ Helm チャートをデプロイしたら、VPN 接続をテストします。
 単一テナント・クラスターまたはマルチテナント・クラスターを使用している場合、VPN トラフィックを特定の名前空間内のポッドのみに制限できます。
 {: shortdesc}
 
-例えば、特定の名前空間 `my-secure-namespace` のポッドにのみ、VPN 経由でデータを送受信させるとします。他の名前空間 (`kube-system`、`ibm-system`、`default` など) にあるポッドには、オンプレミス・ネットワークにアクセスさせません。VPN トラフィックを `my-secure-namespace` のみに制限するには、Calico グローバル・ネットワーク・ポリシーを作成します。
+例えば、特定の名前空間 `my-secure-namespace` のポッドにのみ、VPN 経由でデータを送受信させるとします。 他の名前空間 (`kube-system`、`ibm-system`、`default` など) にあるポッドには、オンプレミス・ネットワークにアクセスさせません。 VPN トラフィックを `my-secure-namespace` のみに制限するには、Calico グローバル・ネットワーク・ポリシーを作成します。
 
 このソリューションを利用する前に、以下の考慮事項と制限事項を確認してください。
-* 指定した名前空間に strongSwan Helm チャートをデプロイする必要はありません。strongSwan VPN ポッドと routes デーモン・セットは `kube-system` または他の任意の名前空間にデプロイできます。指定した名前空間に strongSwan VPN をデプロイしていない場合、`vpn-strongswan-ping-remote-ip-1` Helm テストには失格します。この失格は予期されるものであり、許容できます。このテストでは、リモート・サブネットに直接アクセスできる名前空間にないクラスター内の VPN ポッドから、オンプレミス VPN ゲートウェイの `remote.privateIPtoPing` プライベート IP アドレスを ping します。しかし、VPN ポッドは、リモート・サブネットへの経路を持つ名前空間のポッドにトラフィックを転送できるので、トラフィックは正常に流されます。VPN の状態が `ESTABLISHED` のままであれば、指定した名前空間のポッドは VPN 経由で接続できます。
-* 次の手順の Calico グローバル・ネットワーク・ポリシーでは、ホスト・ネットワーキングを使用する Kubernetes ポッドに対して、VPN 経由のデータの送受信を禁止しません。ポッドにホスト・ネットワーキングが構成されている場合、そのポッドで実行されるアプリは、そのポッドが存在するワーカー・ノードのネットワーク・インターフェースで listen できます。このようなホスト・ネットワーキング・ポッドは、どの名前空間にも存在する可能性があります。ホスト・ネットワーキングを使用するポッドを特定するには、`kubectl get pods --all-namespaces -o wide` を実行し、`172.30.0.0/16` ポッド IP アドレスを持たないポッドを探します。ホスト・ネットワーキング・ポッドに VPN 経由のデータの送受信を行わせないためには、`values.yaml` デプロイメント・ファイルにオプション `local.subnet: 172.30.0.0/16` および `enablePodSNAT: false` を設定します。これらの構成設定により、VPN 接続を使用するすべての Kubernetes ポッドがリモート・ネットワークに公開されます。ただし、指定した安全な名前空間に配置されたポッドにのみ、VPN 経由で到達できます。
+* 指定した名前空間に strongSwan Helm チャートをデプロイする必要はありません。 strongSwan VPN ポッドと routes デーモン・セットは `kube-system` または他の任意の名前空間にデプロイできます。 指定した名前空間に strongSwan VPN をデプロイしていない場合、`vpn-strongswan-ping-remote-ip-1` Helm テストには失格します。 この失格は予期されるものであり、許容できます。 このテストでは、リモート・サブネットに直接アクセスできる名前空間にないクラスター内の VPN ポッドから、オンプレミス VPN ゲートウェイの `remote.privateIPtoPing` プライベート IP アドレスを ping します。 しかし、VPN ポッドは、リモート・サブネットへの経路を持つ名前空間のポッドにトラフィックを転送できるので、トラフィックは正常に流されます。 VPN の状態が `ESTABLISHED` のままであれば、指定した名前空間のポッドは VPN 経由で接続できます。
+* 次の手順の Calico グローバル・ネットワーク・ポリシーでは、ホスト・ネットワーキングを使用する Kubernetes ポッドに対して、VPN 経由のデータの送受信を禁止しません。 ポッドにホスト・ネットワーキングが構成されている場合、そのポッドで実行されるアプリは、そのポッドが存在するワーカー・ノードのネットワーク・インターフェースで listen できます。 このようなホスト・ネットワーキング・ポッドは、どの名前空間にも存在する可能性があります。 ホスト・ネットワーキングを使用するポッドを特定するには、`kubectl get pods --all-namespaces -o wide` を実行し、`172.30.0.0/16` ポッド IP アドレスを持たないポッドを探します。 ホスト・ネットワーキング・ポッドに VPN 経由のデータの送受信を行わせないためには、`values.yaml` デプロイメント・ファイルにオプション `local.subnet: 172.30.0.0/16` および `enablePodSNAT: false` を設定します。 これらの構成設定により、VPN 接続を使用するすべての Kubernetes ポッドがリモート・ネットワークに公開されます。 ただし、指定した安全な名前空間に配置されたポッドにのみ、VPN 経由で到達できます。
 
 開始前に、以下のことを行います。
 * Kubernetes バージョン 1.10 以降を実行するクラスターを、作成または使用します。
@@ -427,7 +427,7 @@ Helm チャートをデプロイしたら、VPN 接続をテストします。
 
 VPN トラフィックを特定の名前空間に制限するには、以下のようにします。
 
-1. `allow-non-vpn-outbound.yaml` という名前の Calico グローバル・ネットワーク・ポリシーを作成します。このポリシーは、strongSwan VPN でアクセスするリモート・サブネットを除くすべての宛先に引き続きアウトバウンド・トラフィックを送信することを、すべての名前空間に許可します。`<remote.subnet>` を、Helm `values.yaml` 構成ファイルで指定した `remote.subnet` に置き換えてください。複数のリモート・サブネットを指定するには、[Calico の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy) を参照してください。
+1. `allow-non-vpn-outbound.yaml` という名前の Calico グローバル・ネットワーク・ポリシーを作成します。 このポリシーは、strongSwan VPN でアクセスするリモート・サブネットを除くすべての宛先に引き続きアウトバウンド・トラフィックを送信することを、すべての名前空間に許可します。 `<remote.subnet>` を、Helm `values.yaml` 構成ファイルで指定した `remote.subnet` に置き換えてください。 複数のリモート・サブネットを指定するには、[Calico の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy) を参照してください。
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -453,7 +453,7 @@ VPN トラフィックを特定の名前空間に制限するには、以下の�
     ```
     {: pre}
 
-3. `allow-vpn-from-namespace.yaml` という名前の別の Calico グローバル・ネットワーク・ポリシーを作成します。このポリシーは、strongSwan VPN でアクセスするリモート・サブネットにアウトバウンド・トラフィックを送信することを、指定した名前空間だけに許可します。`<namespace>` を、VPN にアクセスできる名前空間に置き換えてください。また、`<remote.subnet>` を、Helm `values.yaml` 構成ファイルで指定した `remote.subnet` に置き換えてください。複数の名前空間またはリモート・サブネットを指定するには、[Calico の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy) を参照してください。
+3. `allow-vpn-from-namespace.yaml` という名前の別の Calico グローバル・ネットワーク・ポリシーを作成します。 このポリシーは、strongSwan VPN でアクセスするリモート・サブネットにアウトバウンド・トラフィックを送信することを、指定した名前空間だけに許可します。 `<namespace>` を、VPN にアクセスできる名前空間に置き換えてください。また、`<remote.subnet>` を、Helm `values.yaml` 構成ファイルで指定した `remote.subnet` に置き換えてください。 複数の名前空間またはリモート・サブネットを指定するには、[Calico の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy) を参照してください。
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -491,15 +491,15 @@ VPN トラフィックを特定の名前空間に制限するには、以下の�
 マルチテナント・クラスターに複数の strongSwan VPN デプロイメントがある場合、各デプロイメントの VPN トラフィックを、各テナント専用の特定のワーカー・ノードに制限できます。
 {: shortdesc}
 
-strongSwan Helm チャートをデプロイすると、strongSwan VPN デプロイメントが作成されます。strongSwan VPN ポッドは、テイントが適用されていないワーカー・ノードにデプロイされます。さらに、Kubernetes デーモン・セットが作成されます。このデーモン・セットは、テイントが適用されていないクラスター内のすべてワーカー・ノードに、各リモート・サブネットへの経路を自動的に構成します。strongSwan VPN ポッドは、ワーカー・ノード上のそれらの経路を使用して、オンプレミス・ネットワーク内のリモート・サブネットに要求を転送します。
+strongSwan Helm チャートをデプロイすると、strongSwan VPN デプロイメントが作成されます。 strongSwan VPN ポッドは、テイントが適用されていないワーカー・ノードにデプロイされます。 さらに、Kubernetes デーモン・セットが作成されます。 このデーモン・セットは、テイントが適用されていないクラスター内のすべてワーカー・ノードに、各リモート・サブネットへの経路を自動的に構成します。 strongSwan VPN ポッドは、ワーカー・ノード上のそれらの経路を使用して、オンプレミス・ネットワーク内のリモート・サブネットに要求を転送します。
 
-テイントが適用されたノードには経路は構成されません。ただし、そのテイントが `value.yaml` ファイルの `tolerations` 設定に指定されている場合は別です。ワーカー・ノードにテイントを適用することで、それらのワーカーに VPN 経路が構成されることを防止できます。そして、テイントを適用したワーカーに許可する VPN デプロイメントについてのみ、`tolerations` 設定にそのテイントを指定できます。これにより、特定のテナントの Helm チャート・デプロイメントの strongSwan VPN ポッドは、そのテナントのワーカー・ノード上の経路のみを使用して、VPN 接続でリモート・サブネットにトラフィックを転送するようになります。
+テイントが適用されたノードには経路は構成されません。ただし、そのテイントが `value.yaml` ファイルの `tolerations` 設定に指定されている場合は別です。 ワーカー・ノードにテイントを適用することで、それらのワーカーに VPN 経路が構成されることを防止できます。 そして、テイントを適用したワーカーに許可する VPN デプロイメントについてのみ、`tolerations` 設定にそのテイントを指定できます。 これにより、特定のテナントの Helm チャート・デプロイメントの strongSwan VPN ポッドは、そのテナントのワーカー・ノード上の経路のみを使用して、VPN 接続でリモート・サブネットにトラフィックを転送するようになります。
 
 このソリューションを利用する前に、以下の考慮事項と制限事項を確認してください。
-* デフォルトでは、Kubernetes は、テイントが適用されていない、使用可能なワーカー・ノードにアプリ・ポッドを配置します。このソリューションを正しく機能させるには、まず、各テナントのアプリ・ポッドが、そのテナント用のテイントが適用された正しいワーカーにのみデプロイされるようにする必要があります。さらに、テイントが適用されたワーカー・ノードに、そのノードへのアプリ・ポッドの配置を許容する容認も設定されていなければなりません。テイントと容認について詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) を参照してください。
+* デフォルトでは、Kubernetes は、テイントが適用されていない、使用可能なワーカー・ノードにアプリ・ポッドを配置します。 このソリューションを正しく機能させるには、まず、各テナントのアプリ・ポッドが、そのテナント用のテイントが適用された正しいワーカーにのみデプロイされるようにする必要があります。 さらに、テイントが適用されたワーカー・ノードに、そのノードへのアプリ・ポッドの配置を許容する容認も設定されていなければなりません。 テイントと容認について詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) を参照してください。
 * テイントが適用されていない共有ノードにはどのテナントもアプリ・ポッドを配置できないので、クラスター・リソースの利用状況が最適でない可能性があります。
 
-ワーカー・ノードによって strongSwan VPN トラフィックを制限するための次の手順では、例として、6 つのワーカー・ノードが存在するマルチテナント {{site.data.keyword.containerlong_notm}} クラスターを使用する状況を想定します。このクラスターはテナント A とテナント B をサポートしています。以下のように、ワーカー・ノードにテイントを適用します。
+ワーカー・ノードによって strongSwan VPN トラフィックを制限するための次の手順では、例として、6 つのワーカー・ノードが存在するマルチテナント {{site.data.keyword.containerlong_notm}} クラスターを使用する状況を想定します。 このクラスターはテナント A とテナント B をサポートしています。以下のように、ワーカー・ノードにテイントを適用します。
 * 2 つのワーカー・ノードに、テナント A のポッドのみがスケジュールされるようにするテイントを適用します。
 * 2 つのワーカー・ノードに、テナント B のポッドのみがスケジュールされるようにするテイントを適用します。
 * 2 つのワーカー・ノードにはテイントを適用しません。strongSwan VPN ポッドとロード・バランサー IP を実行するために、少なくとも 2 つのワーカー・ノードが必要であるからです。
@@ -515,7 +515,7 @@ strongSwan Helm チャートをデプロイすると、strongSwan VPN デプロ�
        effect: "NoSchedule"
     ```
     {: codeblock}
-    この toleration により、route デーモン・セットは、`dedicated="tenantA"` テイントが適用された 2 つのワーカー・ノードと、テイントが適用されていない 2 つのワーカー・ノードで実行できるようになります。このデプロイメントの strongSwan VPN ポッドは、テイントが適用されていない 2 つのワーカー・ノードで実行されます。
+    この toleration により、route デーモン・セットは、`dedicated="tenantA"` テイントが適用された 2 つのワーカー・ノードと、テイントが適用されていない 2 つのワーカー・ノードで実行できるようになります。 このデプロイメントの strongSwan VPN ポッドは、テイントが適用されていない 2 つのワーカー・ノードで実行されます。
 
 2. この例のテナント B 専用のワーカーにのみ VPN トラフィックを制限するために、テナント B の strongSwan Helm チャートの `values.yaml` ファイルに以下の `toleration` を指定します。
     ```
@@ -526,7 +526,7 @@ strongSwan Helm チャートをデプロイすると、strongSwan VPN デプロ�
        effect: "NoSchedule"
     ```
     {: codeblock}
-    この toleration により、route デーモン・セットは、`dedicated="tenantB"` テイントが適用された 2 つのワーカー・ノードと、テイントが適用されていない 2 つのワーカー・ノードで実行できるようになります。このデプロイメントの strongSwan VPN ポッドも、テイントが適用されていない 2 つのワーカー・ノードで実行されます。
+    この toleration により、route デーモン・セットは、`dedicated="tenantB"` テイントが適用された 2 つのワーカー・ノードと、テイントが適用されていない 2 つのワーカー・ノードで実行できるようになります。 このデプロイメントの strongSwan VPN ポッドも、テイントが適用されていない 2 つのワーカー・ノードで実行されます。
 
 <br />
 
@@ -544,7 +544,7 @@ strongSwan Helm チャートを最新バージョンにアップグレードす�
   ```
   {: pre}
 
-strongSwan 2.0.0 Helm チャートは Calico v3 または Kubernetes 1.10 では機能しません。 [クラスターを 1.10 に更新する](cs_versions.html#cs_v110)前に、まず、Calico 2.6 および Kubernetes 1.9 との後方互換性がある 2.2.0 以降の Helm チャートに strongSwan を更新してください。次に、strongSwan Helm チャートを削除します。それから、更新後にチャートを再インストールすることができます。
+strongSwan 2.0.0 Helm チャートは Calico v3 または Kubernetes 1.10 では機能しません。 [クラスターを 1.10 に更新する](cs_versions.html#cs_v110)前に、まず、Calico 2.6 および Kubernetes 1.9 との後方互換性がある 2.2.0 以降の Helm チャートに strongSwan を更新してください。 次に、strongSwan Helm チャートを削除します。 それから、更新後にチャートを再インストールすることができます。
 {:tip}
 
 ## strongSwan IPSec VPN サービスの無効化

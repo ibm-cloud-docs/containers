@@ -26,7 +26,7 @@ lastupdated: "2018-12-05"
 Affichez des informations sur les modifications de version correspondant à des mises à jour de version principale, de version secondaire ou de correctif disponibles pour vos clusters Kubernetes {{site.data.keyword.containerlong}}. Les modifications comprennent des mises à jour pour les composants de Kubernetes et d'{{site.data.keyword.Bluemix_notm}} Provider.
 {:shortdesc}
 
-Pour plus d'informations sur les versions principales et secondaires, les versions de correctifs et les actions de préparation entre les versions secondaires, voir [Versions Kubernetes](cs_versions.html).
+Pour plus d'informations sur les versions principales et secondaires, les versions de correctifs et les actions de préparation entre les versions secondaires, voir [Versions Kubernetes](cs_versions.html). 
 {: tip}
 
 Pour plus d'informations sur les modifications apportées depuis la version précédente, voir les journaux de modifications suivants.
@@ -43,7 +43,7 @@ Certains journaux de modifications concernent les _groupes de correctifs de noeu
 ## Journal des modifications - Version 1.12
 {: #112_changelog}
 
-Passez en revue le journal des modifications de la version 1.12.
+Passez en revue le journal des modifications de la version 1.12. 
 {: shortdesc}
 
 ### Journal des modifications pour la version 1.12.3_1531, publié le 5 décembre 2018
@@ -153,7 +153,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.12.2
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.12.2_1528, publié le 19 novembre 2018
 {: #1122_1528}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.2_1528.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.12.2_1528. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.12.2_1527">
@@ -180,7 +180,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.12.2_1527, publié le 7 novembre 2018
 {: #1122_1527}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.12.2_1527.
+Le tableau suivant présente les modifications incluses dans le correctif 1.12.2_1527. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1533">
@@ -228,7 +228,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.12.2
 <td>Kubernetes</td>
 <td>v1.11.3</td>
 <td>v1.12.2</td>
-<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.2). </td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.2).</td>
 </tr>
 <tr>
 <td>Configuration de Kubernetes</td>
@@ -299,7 +299,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.5
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.11.4-142</td>
 <td>v1.11.5-152</td>
-<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.11.5. </td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.11.5.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -369,13 +369,13 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.4
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.11.3-127</td>
 <td>v1.11.4-142</td>
-<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.11.4. </td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.11.4.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
 <td>v1.11.3</td>
 <td>v1.11.4</td>
-<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.4). </td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.4).</td>
 </tr>
 <tr>
 <td>Serveur et client OpenVPN</td>
@@ -389,7 +389,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.4
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.11.3_1534, publié le 19 novembre 2018
 {: #1113_1534}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1534.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1534. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1533">
@@ -416,7 +416,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.11.3_1533, publié le 7 novembre 2018
 {: #1113_1533}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1533.
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1533. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1531">
@@ -454,7 +454,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.3
 ### Journal des modifications du maître - Groupe de correctifs 1.11.3_1531, publié le 1er novembre 2018
 {: #1113_1531_ha-master}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.11.3_1531.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.11.3_1531. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1527">
@@ -503,7 +503,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.11.3_1531, publié le 26 octobre 2018
 {: #1113_1531}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1531.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1531. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1525">
@@ -529,7 +529,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications du maître - Groupe de correctifs 1.11.3_1527, publié le 15 octobre 2018
 {: #1113_1527}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.11.3_1527.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.11.3_1527. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1524">
@@ -561,7 +561,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.11.3_1525, publié le 10 octobre 2018
 {: #1113_1525}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1525.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.3_1525. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1524">
@@ -594,7 +594,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.11.3_1524, publié le 2 octobre 2018
 {: #1113_1524}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1524.
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1524. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.3_1521">
@@ -633,7 +633,7 @@ Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe d
 ### Journal des modifications pour la version 1.11.3_1521, publié le 20 septembre 2018
 {: #1113_1521}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1521.
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.3_1521. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.2_1516">
@@ -708,7 +708,7 @@ Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe d
 ### Journal des modifications pour la version 1.11.2_1516, publié le 4 septembre 2018
 {: #1112_1516}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.11.2_1516.
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.2_1516. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.2_1514">
@@ -752,7 +752,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.11.2
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.11.2_1514, publié le 23 août 2018
 {: #1112_1514}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.2_1514.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.11.2_1514. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.11.2_1513">
@@ -784,7 +784,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.11.2_1513, publié le 14 août 2018
 {: #1112_1513}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.11.2_1513.
+Le tableau suivant présente les modifications incluses dans le correctif 1.11.2_1513. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.5_1518">
@@ -892,7 +892,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.1
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.10.8-197</td>
 <td>v1.10.11-219</td>
-<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.10.11. </td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.10.11.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -936,7 +936,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Docker</td>
 <td>17.06.2</td>
 <td>18.06.1</td>
-<td>Voir les [notes sur l'édition de Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/engine/release-notes/#18061-ce). </td>
+<td>Voir les [notes sur l'édition de Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/engine/release-notes/#18061-ce).</td>
 </tr>
 </tbody>
 </table>
@@ -944,7 +944,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.8_1531, publié le 19 novembre 2018
 {: #1108_1531}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1531.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1531. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.8_1530">
@@ -970,7 +970,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.10.8_1530, publié le 7 novembre 2018
 {: #1108_1530_ha-master}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.8_1530.
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.8_1530. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.8_1528">
@@ -1031,7 +1031,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.8
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.8_1528, publié le 26 octobre 2018
 {: #1108_1528}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1528.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1528. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.8_1527">
@@ -1057,7 +1057,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications du maître - Groupe de correctifs 1.10.8_1527, publié le 15 octobre 2018
 {: #1108_1527}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.10.8_1527.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs du maître 1.10.8_1527. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.8_1524">
@@ -1089,7 +1089,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.8_1525, publié le 10 octobre 2018
 {: #1108_1525}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1525.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.8_1525. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.8_1524">
@@ -1122,7 +1122,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.10.8_1524, publié le 2 octobre 2018
 {: #1108_1524}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.8_1524.
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.8_1524. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.7_1520">
@@ -1173,7 +1173,7 @@ Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe d
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.7_1521, publié le 20 septembre 2018
 {: #1107_1521}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.7_1521.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.7_1521. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.7_1520">
@@ -1225,7 +1225,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.10.7_1520, publié le 4 septembre 2018
 {: #1107_1520}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.7_1520.
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.7_1520. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.5_1519">
@@ -1275,7 +1275,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.7
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.5_1519, publié le 23 août 2018
 {: #1105_1519}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.5_1519.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.5_1519. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.5_1518">
@@ -1308,7 +1308,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.5_1518, publié le 13 août 2018
 {: #1105_1518}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.5_1518.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.5_1518. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.5_1517">
@@ -1334,7 +1334,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.10.5_1517, publié le 27 juillet 2018
 {: #1105_1517}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.5_1517.
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.5_1517. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.3_1514">
@@ -1390,7 +1390,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.5
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.3_1514, publié le 3 juillet 2018
 {: #1103_1514}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.3_1514.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.3_1514. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.3_1513">
@@ -1417,7 +1417,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.3_1513, publié le 21 juin 2018
 {: #1103_1513}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.3_1513.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.3_1513. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.3_1512">
@@ -1443,7 +1443,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.10.3_1512, publié le 12 juin 2018
 {: #1103_1512}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.3_1512.
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.3_1512. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.1_1510">
@@ -1501,7 +1501,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.10.3
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.1_1510, publié le 18 mai 2018
 {: #1101_1510}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.1_1510.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.1_1510. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.1_1509">
@@ -1527,7 +1527,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.10.1_1509, publié le 16 mai 2018
 {: #1101_1509}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.1_1509.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.10.1_1509. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.10.1_1508">
@@ -1553,7 +1553,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 10. 1_1508, publié le 1er mai 2018
 {: #1101_1508}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.10.1_1508.
+Le tableau suivant présente les modifications incluses dans le correctif 1.10.1_1508. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.7_1510">
@@ -1675,7 +1675,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 <td>Docker</td>
 <td>17.06.2</td>
 <td>18.06.1</td>
-<td>Voir les [notes sur l'édition de Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/engine/release-notes/#18061-ce). </td>
+<td>Voir les [notes sur l'édition de Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/engine/release-notes/#18061-ce).</td>
 </tr>
 </tbody>
 </table>
@@ -1683,7 +1683,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.11_1536, publié le 19 novembre 2018
 {: #1911_1536}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.11_1536.
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.11_1536. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1532">
@@ -1713,13 +1713,13 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.11
 <td>Kubernetes</td>
 <td>v1.9.10</td>
 <td>v1.9.11</td>
-<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.11). </td>
+<td>Voir les [notes sur l'édition de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.11).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}}</td>
 <td>v1.9.10-219</td>
 <td>v1.9.11-249</td>
-<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.9.11. </td>
+<td>Mise à jour pour prendre en charge l'édition Kubernetes 1.9.11.</td>
 </tr>
 <tr>
 <td>Serveur et client OpenVPN</td>
@@ -1733,7 +1733,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.11
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.10_1532, publié le 7 novembre 2018
 {: #1910_1532}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.11_1532.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.11_1532. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1531">
@@ -1759,7 +1759,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.10_1531, publié le 26 octobre 2018
 {: #1910_1531}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1531.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1531. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1530">
@@ -1785,7 +1785,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications du maître - Groupe de correctifs 1.9.10_1530, publié le 15 octobre 2018
 {: #1910_1530}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1530.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1530. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1527">
@@ -1811,7 +1811,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.10_1528, publié le 10 octobre 2018
 {: #1910_1528}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1528.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1528. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1527">
@@ -1844,7 +1844,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.10_1527, publié le 2 octobre 2018
 {: #1910_1527}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.10_1527.
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.10_1527. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1523">
@@ -1877,7 +1877,7 @@ Désormais, lorsque vous mettez à jour le noeud maître du cluster, la classe d
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.10_1524, publié le 20 septembre 2018
 {: #1910_1524}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1524.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.10_1524. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.10_1523">
@@ -1929,7 +1929,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.10_1523, publié le 4 septembre 2018
 {: #1910_1523}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.10_1523.
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.10_1523. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.9_1522">
@@ -1973,7 +1973,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.10
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.9_1522, publié le 23 août 2018
 {: #199_1522}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.9_1522.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.9_1522. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.9_1521">
@@ -2006,7 +2006,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.9_1521, publié le 13 août 2018
 {: #199_1521}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.9_1521.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.9_1521. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.9_1520">
@@ -2032,7 +2032,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.9_1520, publié le 27 juillet 2018
 {: #199_1520}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.9_1520.
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.9_1520. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.8_1517">
@@ -2082,7 +2082,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.9_
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.8_1517, publié le 3 juillet 2018
 {: #198_1517}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.8_1517.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.8_1517. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.8_1516">
@@ -2109,7 +2109,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.8_1516, publié le 21 juin 2018
 {: #198_1516}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.8_1516.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.8_1516. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.8_1515">
@@ -2135,7 +2135,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.8_1515, publié le 19 juin 2018
 {: #198_1515}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.8_1515.
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.8_1515. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.7_1513">
@@ -2180,7 +2180,7 @@ Le tableau suivant présente les modifications incluses dans le correctif 1.9.8_
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.7_1513, publié le 11 juin 2018
 {: #197_1513}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1513.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1513. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.7_1512">
@@ -2206,7 +2206,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.7_1512, publié le 18 mai 2018
 {: #197_1512}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1512.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1512. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.7_1511">
@@ -2232,7 +2232,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications de noeud worker - Groupe de correctifs 1.9.7_1511, publié le 16 mai 2018
 {: #197_1511}
 
-Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1511.
+Le tableau suivant présente les modifications incluses dans le groupe de correctifs de noeud worker 1.9.7_1511. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.7_1510">
@@ -2258,7 +2258,7 @@ Le tableau suivant présente les modifications incluses dans le groupe de correc
 ### Journal des modifications pour la version 1.9.7_1510, publié le 30 avril 2018
 {: #197_1510}
 
-Le tableau suivant présente les modifications incluses dans le correctif 1.9.7_1510.
+Le tableau suivant présente les modifications incluses dans le correctif 1.9.7_1510. 
 {: shortdesc}
 
 <table summary="Modifications effectuées depuis la version 1.9.3_1506">
@@ -2625,8 +2625,7 @@ Passez en revue les modifications suivantes.
 <td>Kubernetes</td>
 <td>v1.8.8</td>
 <td>v1.8.11	</td>
-<td><p>Voir les [notes sur l'édition de Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11). Cette édition traite les vulnérabilités [CVE-2017-1002101 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) et [CVE-2017-1002102 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p>Désormais les éléments `secret`, `configMap`, `downwardAPI` et les volumes projetés sont montés en mode lecture seule.
-Auparavant, les applications pouvaient écrire des données dans ces volumes, mais le système pouvait les rétablir automatiquement. Si vos applications s'appuient sur ce comportement peu fiable en matière de sécurité, modifiez-les en conséquence.</p></td>
+<td><p>Voir les [notes sur l'édition de Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.8.11). Cette édition traite les vulnérabilités [CVE-2017-1002101 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) et [CVE-2017-1002102 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p>Désormais les éléments `secret`, `configMap`, `downwardAPI` et les volumes projetés sont montés en mode lecture seule. Auparavant, les applications pouvaient écrire des données dans ces volumes, mais le système pouvait les rétablir automatiquement. Si vos applications s'appuient sur ce comportement peu fiable en matière de sécurité, modifiez-les en conséquence.</p></td>
 </tr>
 <tr>
 <td>Image de conteneur Pause</td>
@@ -2744,8 +2743,7 @@ Passez en revue les modifications suivantes.
 <td>Kubernetes</td>
 <td>v1.7.4</td>
 <td>v1.7.16	</td>
-<td><p>Voir les [Notes sur l'édition de Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16). Cette édition traite les vulnérabilités [CVE-2017-1002101 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) et [CVE-2017-1002102 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p>Désormais les éléments `secret`, `configMap`, `downwardAPI` et les volumes projetés sont montés en mode lecture seule.
-Auparavant, les applications pouvaient écrire des données dans ces volumes, mais le système pouvait les rétablir automatiquement. Si vos applications s'appuient sur ce comportement peu fiable en matière de sécurité, modifiez-les en conséquence.</p></td>
+<td><p>Voir les [Notes sur l'édition de Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16). Cette édition traite les vulnérabilités [CVE-2017-1002101 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) et [CVE-2017-1002102 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102).</p><p>Désormais les éléments `secret`, `configMap`, `downwardAPI` et les volumes projetés sont montés en mode lecture seule. Auparavant, les applications pouvaient écrire des données dans ces volumes, mais le système pouvait les rétablir automatiquement. Si vos applications s'appuient sur ce comportement peu fiable en matière de sécurité, modifiez-les en conséquence.</p></td>
 </tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.7.4-133</td>

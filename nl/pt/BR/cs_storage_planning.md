@@ -66,7 +66,7 @@ Antes de decidir qual tipo de armazenamento é a solução correta para você, d
    - **Acessar entre pods:** quando você usa volumes persistentes do Kubernetes para acessar seu armazenamento, é possível determinar o número de pods que podem montar o volume ao mesmo tempo. Algumas soluções de armazenamento, como armazenamento de bloco, podem ser acessadas somente por um pod por vez. Outras soluções de armazenamento permitem que você compartilhe o mesmo volume entre múltiplos pods.
    - **Acessar entre zonas e regiões:** você pode requerer que os seus dados estejam acessíveis entre zonas ou regiões. Algumas soluções de armazenamento, como armazenamento de arquivo e de bloco, são específicas do data center e não podem ser compartilhadas entre as zonas em uma configuração de cluster de múltiplas zonas.
    
-   Se você desejar tornar seus dados acessíveis entre zonas ou regiões, certifique-se de consultar seu departamento jurídico para verificar se os dados podem ser armazenados em múltiplas zonas ou em um país diferente.
+   Se você desejar tornar seus dados acessíveis entre zonas ou regiões, certifique-se de consultar seu departamento jurídico para verificar se os dados podem ser armazenados em múltiplas zonas ou em um país diferente. 
    {: note}
 
 6. Entenda outras características de armazenamento que impactam sua opção.

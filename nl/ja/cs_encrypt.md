@@ -25,20 +25,20 @@ lastupdated: "2018-12-05"
 データ保全性を確保し、無許可ユーザーにデータをさらさないために、クラスターの機密情報を保護してください。
 {: shortdesc}
 
-クラスター内には、さまざまなレベルの機密データが作成されます。それぞれに適切な保護が必要になります。 
-- **クラスター・レベル:** クラスター構成データが、Kubernetes マスターの etcd コンポーネントに保管されます。Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。クラスターの [{{site.data.keyword.keymanagementservicelong_notm}} 暗号化を有効にする](cs_encrypt.html#encryption)と、Kubernetes マスターのローカル・ディスク上の etcd データの暗号化を有効にできます。以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。
-- **アプリ・レベル:** アプリをデプロイする際に、資格情報や鍵などの機密情報を YAML 構成ファイルや構成マップ、スクリプトに保管しないでください。代わりに、[Kubernetes シークレット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/secret/) を使用します。 [Kubernetes シークレット内でデータを暗号化して](#keyprotect)、許可されていないユーザーがクラスターの機密情報にアクセスできないようにすることもできます。
+クラスター内には、さまざまなレベルの機密データが作成されます。それぞれに適切な保護が必要になります。
+- **クラスター・レベル:** クラスター構成データが、Kubernetes マスターの etcd コンポーネントに保管されます。 Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 クラスターの [{{site.data.keyword.keymanagementservicelong_notm}} 暗号化を有効にする](cs_encrypt.html#encryption)と、Kubernetes マスターのローカル・ディスク上の etcd データの暗号化を有効にできます。 以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。
+- **アプリ・レベル:** アプリをデプロイする際に、資格情報や鍵などの機密情報を YAML 構成ファイルや構成マップ、スクリプトに保管しないでください。 代わりに、[Kubernetes シークレット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/secret/) を使用します。 [Kubernetes シークレット内でデータを暗号化して](#keyprotect)、許可されていないユーザーがクラスターの機密情報にアクセスできないようにすることもできます。
 
 クラスターの保護について詳しくは、[{{site.data.keyword.containerlong_notm}} のセキュリティー](cs_secure.html#security)を参照してください。
 
 ![クラスター暗号化の概要](images/cs_encrypt_ov.png)
 _図: クラスター内のデータ暗号化の概要_
 
-1.  **etcd**: etcd は、オブジェクト構成 `.yaml` ファイルやシークレットなどの Kubernetes リソースのデータを保管するマスターのコンポーネントです。Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。クラスターの [{{site.data.keyword.keymanagementservicelong_notm}} 暗号化を有効にする](#keyprotect)と、Kubernetes マスターのローカル・ディスク上の etcd データの暗号化を有効にできます。以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。etcd データがポッドに送信されるときには、データの保護と保全性を確保するために、データが TLS で暗号化されます。
-2.  **ワーカー・ノードの 2 次ディスク**: ワーカー・ノードの 2 次ディスクは、コンテナー・ファイル・システムとローカルにプルしたイメージが保管される場所です。このディスクは LUKS 暗号鍵で暗号化されます。この暗号鍵はワーカー・ノードに固有であり、IBM 管理の etcd にシークレットとして保管されます。ワーカー・ノードを再ロードまたは更新すると、LUKS 鍵はローテーションされます。
-3.  **ストレージ**: [ファイル、ブロック、またはオブジェクトの永続ストレージをセットアップ](cs_storage_planning.html#persistent_storage_overview)してデータを保管することができます。IBM Cloud インフラストラクチャー (SoftLayer) ストレージ・インスタンスは、暗号化されたディスクにデータを保存するので、保存中のデータは暗号化されています。さらに、オブジェクト・ストレージを選択した場合は、転送中のデータも暗号化されます。
-4.  **{{site.data.keyword.Bluemix_notm}} サービス**: クラスターと {{site.data.keyword.registryshort_notm}} や {{site.data.keyword.watson}} などの [{{site.data.keyword.Bluemix_notm}} サービスを統合](cs_integrations.html#adding_cluster)できます。サービス資格情報は、etcd に保存されるシークレットに保管されます。このシークレットにアプリがアクセスするには、シークレットをボリュームとしてマウントするか、[デプロイメント](cs_app.html#secret)でシークレットを環境変数として指定します。
-5.  **{{site.data.keyword.keymanagementserviceshort}}**: クラスターで [{{site.data.keyword.keymanagementserviceshort}} を有効にする](#keyprotect)と、ラップされたデータ暗号鍵 (DEK) が etcd に保管されます。DEK は、サービス資格情報や LUKS 鍵など、クラスター内のシークレットを暗号化します。ルート・キーは {{site.data.keyword.keymanagementserviceshort}} インスタンス内にあるので、暗号化されたシークレットへのアクセスを制御できます。{{site.data.keyword.keymanagementserviceshort}} の暗号化の仕組みについて詳しくは、[エンベロープ暗号化](/docs/services/key-protect/concepts/envelope-encryption.html#envelope-encryption)を参照してください。
+1.  **etcd**: etcd は、オブジェクト構成 `.yaml` ファイルやシークレットなどの Kubernetes リソースのデータを保管するマスターのコンポーネントです。 Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 クラスターの [{{site.data.keyword.keymanagementservicelong_notm}} 暗号化を有効にする](#keyprotect)と、Kubernetes マスターのローカル・ディスク上の etcd データの暗号化を有効にできます。 以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。 etcd データがポッドに送信されるときには、データの保護と保全性を確保するために、データが TLS で暗号化されます。
+2.  **ワーカー・ノードの 2 次ディスク**: ワーカー・ノードの 2 次ディスクは、コンテナー・ファイル・システムとローカルにプルしたイメージが保管される場所です。 このディスクは LUKS 暗号鍵で暗号化されます。この暗号鍵はワーカー・ノードに固有であり、IBM 管理の etcd にシークレットとして保管されます。 ワーカー・ノードを再ロードまたは更新すると、LUKS 鍵はローテーションされます。
+3.  **ストレージ**: [ファイル、ブロック、またはオブジェクトの永続ストレージをセットアップ](cs_storage_planning.html#persistent_storage_overview)してデータを保管することができます。 IBM Cloud インフラストラクチャー (SoftLayer) ストレージ・インスタンスは、暗号化されたディスクにデータを保存するので、保存中のデータは暗号化されています。 さらに、オブジェクト・ストレージを選択した場合は、転送中のデータも暗号化されます。
+4.  **{{site.data.keyword.Bluemix_notm}} サービス**: クラスターと {{site.data.keyword.registryshort_notm}} や {{site.data.keyword.watson}} などの [{{site.data.keyword.Bluemix_notm}} サービスを統合](cs_integrations.html#adding_cluster)できます。 サービス資格情報は、etcd に保存されるシークレットに保管されます。このシークレットにアプリがアクセスするには、シークレットをボリュームとしてマウントするか、[デプロイメント](cs_app.html#secret)でシークレットを環境変数として指定します。
+5.  **{{site.data.keyword.keymanagementserviceshort}}**: クラスターで [{{site.data.keyword.keymanagementserviceshort}} を有効にする](#keyprotect)と、ラップされたデータ暗号鍵 (DEK) が etcd に保管されます。 DEK は、サービス資格情報や LUKS 鍵など、クラスター内のシークレットを暗号化します。 ルート・キーは {{site.data.keyword.keymanagementserviceshort}} インスタンス内にあるので、暗号化されたシークレットへのアクセスを制御できます。 {{site.data.keyword.keymanagementserviceshort}} の暗号化の仕組みについて詳しくは、[エンベロープ暗号化](/docs/services/key-protect/concepts/envelope-encryption.html#envelope-encryption)を参照してください。
 
 ## シークレットを使用するケースについて
 {: #secrets}
@@ -75,12 +75,12 @@ ALB は、HTTP ネットワーク・トラフィックをクラスター内の�
 ## {{site.data.keyword.keymanagementserviceshort}} を使用した Kubernetes マスターのローカル・ディスクとシークレットの暗号化
 {: #keyprotect}
 
-クラスター内で Kubernetes [鍵管理サービス (KMS) プロバイダー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) として [{{site.data.keyword.keymanagementservicefull}} ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/services/key-protect/index.html#getting-started-with-key-protect) を使用することによって、Kubernetes マスター内の etcd コンポーネントと Kubernetes シークレットを保護できます。KMS プロバイダーは、Kubernetes のバージョン 1.10 と 1.11 のアルファ・フィーチャーです。
+クラスター内で Kubernetes [鍵管理サービス (KMS) プロバイダー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) として [{{site.data.keyword.keymanagementservicefull}} ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/services/key-protect/index.html#getting-started-with-key-protect) を使用することによって、Kubernetes マスター内の etcd コンポーネントと Kubernetes シークレットを保護できます。 KMS プロバイダーは、Kubernetes のバージョン 1.10 と 1.11 のアルファ・フィーチャーです。
 {: shortdesc}
 
-デフォルトでは、クラスター構成と Kubernetes シークレットは、IBM 管理の Kubernetes マスターの etcd コンポーネントに保管されます。ワーカー・ノードには 2 次ディスクもあり、これは etcd にシークレットとして保管される IBM 管理の LUKS 鍵で暗号化されます。Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。ただし、Kubernetes マスターのローカル・ディスク上の etcd コンポーネント内のデータが自動的に暗号化されるのは、クラスターの {{site.data.keyword.keymanagementserviceshort}} 暗号化を有効にした後です。以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。
+デフォルトでは、クラスター構成と Kubernetes シークレットは、IBM 管理の Kubernetes マスターの etcd コンポーネントに保管されます。 ワーカー・ノードには 2 次ディスクもあり、これは etcd にシークレットとして保管される IBM 管理の LUKS 鍵で暗号化されます。 Kubernetes バージョン 1.10 以降を実行するクラスターでは、etcd のデータは Kubernetes マスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 ただし、Kubernetes マスターのローカル・ディスク上の etcd コンポーネント内のデータが自動的に暗号化されるのは、クラスターの {{site.data.keyword.keymanagementserviceshort}} 暗号化を有効にした後です。 以前のバージョンの Kubernetes を実行するクラスターでは、etcd データは IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。
 
-クラスターで {{site.data.keyword.keymanagementserviceshort}} を有効にすると、お客様固有のルート・キーを使用して、LUKS シークレットなどの etcd 内のデータが暗号化されます。このルート・キーを使用してシークレットを暗号化すると、機密データの制御を強化できます。 お客様固有の暗号化を使用して、etcd データと Kubernetes シークレットにセキュリティー層を追加し、クラスターの機密情報にアクセスできる人をさらに細かく制御することができます。etcd またはシークレットに対するアクセス権限を不可逆的に削除する必要が生じた場合は、ルート・キーを削除します。
+クラスターで {{site.data.keyword.keymanagementserviceshort}} を有効にすると、お客様固有のルート・キーを使用して、LUKS シークレットなどの etcd 内のデータが暗号化されます。 このルート・キーを使用してシークレットを暗号化すると、機密データの制御を強化できます。 お客様固有の暗号化を使用して、etcd データと Kubernetes シークレットにセキュリティー層を追加し、クラスターの機密情報にアクセスできる人をさらに細かく制御することができます。 etcd またはシークレットに対するアクセス権限を不可逆的に削除する必要が生じた場合は、ルート・キーを削除します。
 
 {{site.data.keyword.keymanagementserviceshort}} インスタンス内のルート・キーを削除すると、クラスターに含まれる etcd 内のデータやシークレットのデータにアクセスすることも削除することもできなくなります。
 {: important}
@@ -125,4 +125,4 @@ ALB は、HTTP ネットワーク・トラフィックをクラスター内の�
     ```
     {: pre}
 
-クラスターで {{site.data.keyword.keymanagementserviceshort}} を有効にすると、クラスターに含まれる `etcd` 内のデータ、既存のシークレット、新規作成されるシークレットは、{{site.data.keyword.keymanagementserviceshort}} ルート・キーを使用して自動的に暗号化されます。新しいルート・キー ID を使用してこれらの手順を繰り返すと、いつでも鍵を循環させることができます。
+クラスターで {{site.data.keyword.keymanagementserviceshort}} を有効にすると、クラスターに含まれる `etcd` 内のデータ、既存のシークレット、新規作成されるシークレットは、{{site.data.keyword.keymanagementserviceshort}} ルート・キーを使用して自動的に暗号化されます。 新しいルート・キー ID を使用してこれらの手順を繰り返すと、いつでも鍵を循環させることができます。

@@ -165,7 +165,8 @@ Wenn Sie keine der bereitgestellten Speicherklassen verwenden können, können S
 ### Ändern oder Aktualisieren in eine andere Speicherklasse
 {: #update_storageclass}
 
-Wenn Sie persistenten Speicher mithilfe einer Speicherklasse dynamisch bereitstellen, stellen Sie persistenten Speicher mit einer bestimmten Konfiguration bereit. Sie können den Namen der Speicherklasse oder den Typ des Speichers, den Sie bereitgestellt haben, nicht ändern. Sie haben jedoch die Möglichkeit, Ihren Speicher zu skalieren, wie in der folgenden Tabelle gezeigt. {: shortdesc}
+Wenn Sie persistenten Speicher mithilfe einer Speicherklasse dynamisch bereitstellen, stellen Sie persistenten Speicher mit einer bestimmten Konfiguration bereit. Sie können den Namen der Speicherklasse oder den Typ des Speichers, den Sie bereitgestellt haben, nicht ändern. Sie haben jedoch die Möglichkeit, Ihren Speicher zu skalieren, wie in der folgenden Tabelle gezeigt. 
+{: shortdesc}
 
 <table> 
 <caption>Übersicht über die Skalierungsoptionen für {{site.data.keyword.containerlong_notm}}-Speicherlösungen</caption>

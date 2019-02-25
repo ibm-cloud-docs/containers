@@ -58,7 +58,7 @@ Die Lösung besteht aus den folgenden wichtigen Bestandteilen:
 * Cross-Selling und Up-Selling: Eine App, von der Gelegenheiten für Cross-Selling und Up-Selling mit APIs bereitgestellt werden, die in unterschiedlichen E-Commerce-Apps und mobilen Apps verwendet werden kann
 * Entwicklungsumgebung: Kubernetes-Cluster für Entwicklungs-, Test- und Produktionssysteme verbessern die Zusammenarbeit und gemeinsame Datennutzung zwischen dem Einzelhandelsunternehmen und seinen Partnern
 
-Damit das Einzelhandelsunternehmen mit globalen Partnern zusammenarbeiten kann, müssen an den APIs für den Lagerbestand Änderungen vorgenommen werden, damit die Sprache und die Marktvorgaben für jede einzelne Region angepasst werden können. {{site.data.keyword.containerlong_notm}} bietet eine Abdeckung in mehreren Regionen, darunter Nordamerika, Europa, Asien und Australien; hierbei spiegeln die APIs die Bedürfnisse der einzelnen Länder wieder und stellen eine kurze Latenzzeit für API-Aufrufe sicher. 
+Damit das Einzelhandelsunternehmen mit globalen Partnern zusammenarbeiten kann, müssen an den APIs für den Lagerbestand Änderungen vorgenommen werden, damit die Sprache und die Marktvorgaben für jede einzelne Region angepasst werden können. {{site.data.keyword.containerlong_notm}} bietet eine Abdeckung in mehreren Regionen, darunter Nordamerika, Europa, Asien und Australien; hierbei spiegeln die APIs die Bedürfnisse der einzelnen Länder wieder und stellen eine kurze Latenzzeit für API-Aufrufe sicher.
 
 Eine weitere Voraussetzung ist, dass die gemeinsame Nutzung der Bestandsdaten mit den Kunden der Partner und des Unternehmens möglich ist. Mit den APIs für die Bestandsdaten können die Entwickler Informationen in Apps bereitstellen, zum Beispiel als mobile Bestandsdaten-Apps oder E-Commerce-Lösungen für das World Wide Web. Die Entwickler sind auch mit dem Aufbau und der Pflege der primären E-Commerce-Site beschäftigt. Somit müssen sie sich auf die Codierung und nicht auf die Verwaltung der Infrastruktur konzentrieren. 
 
@@ -104,7 +104,7 @@ Technische Lösung:
 * {{site.data.keyword.containerlong_notm}} bietet eine einfache Durchführung von Rollouts und Rollbacks für die Apps; angepasste Apps werden unter Verwendung des intelligenten Routings und Lastausgleichs von Istio zum Testen von Kampagnen bereitgestellt. 
 
 **Ergebnisse**
-* Mit Microservices wird die Bereitstellungszeit für Patches, Fehlerkorrekturen und neue Funktionen erheblich reduziert. Die erstmalige weltweite Entwicklung verläuft schnell und Aktualisierungen werden bis zu 40 Mal pro Woche bereitgestellt. 
+* Mit Microservices wird die Bereitstellungszeit für Patches, Fehlerkorrekturen und neue Funktionen erheblich reduziert. Die erstmalige weltweite Entwicklung verläuft schnell und Aktualisierungen werden bis zu 40 Mal pro Woche bereitgestellt.
 * Der Einzelhändler und seine Partner verfügen mithilfe von APIs über direkten Zugriff auf die Bestandsverfügbarkeit und Bereitstellungszeitpläne. 
 * Mit {{site.data.keyword.containerlong_notm}} und den IBM CI/CD-Tools können Kampagnen mit A-B-Versionen der Apps getestet werden. 
 * {{site.data.keyword.containerlong_notm}} bietet eine skalierbare Rechenleistung, sodass die Workloads für Lagerbestand und Cross-Selling in Zeiträumen mit hohem Umsatz zunehmen können, zum Beispiel in den Herbstferien. 

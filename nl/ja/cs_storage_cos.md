@@ -614,7 +614,7 @@ lastupdated: "2018-12-05"
    </tr>
    <tr>
    <td><code>ibm.io/iam-endpoint</code></td>
-   <td>{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) の API エンドポイント。</td>
+   <td>{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) の API エンドポイント。 </td>
    </tr>
    <tr>
    <td><code>ibm.io/kernel-cache</code></td>

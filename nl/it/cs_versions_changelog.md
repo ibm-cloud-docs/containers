@@ -26,7 +26,7 @@ lastupdated: "2018-12-05"
 Visualizza le informazioni sulle modifiche alla versione per gli aggiornamenti principali, secondari e patch disponibili per i tuoi cluster Kubernetes {{site.data.keyword.containerlong}}. Le modifiche includono gli aggiornamenti ai componenti Kubernetes e {{site.data.keyword.Bluemix_notm}} Provider.
 {:shortdesc}
 
-Per ulteriori informazioni sulle versioni principali, secondarie e patch e sulle azioni di preparazione tra le versioni secondarie, vedi [Versioni Kubernetes](cs_versions.html).
+Per ulteriori informazioni sulle versioni principali, secondarie e patch e sulle azioni di preparazione tra le versioni secondarie, vedi [Versioni Kubernetes](cs_versions.html). 
 {: tip}
 
 Per informazioni sulle modifiche dalla versione precedente, vedi i seguenti changelog.
@@ -43,7 +43,7 @@ Alcuni changelog sono per i _fix pack del nodo di lavoro_ e si applicano solo ai
 ## Changelog versione 1.12
 {: #112_changelog}
 
-Esamina il changelog della versione 1.12.
+Esamina il changelog della versione 1.12. 
 {: shortdesc}
 
 ### Changelog per 1.12.3_1531, rilasciato il 5 dicembre 2018
@@ -153,7 +153,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.12.2_1529.
 ### Changelog per il fix pack del nodo di lavoro 1.12.2_1528, rilasciato il 19 novembre 2018
 {: #1122_1528}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.12.2_1528.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.12.2_1528. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.12.2_1527">
@@ -180,7 +180,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.12.2_1527, rilasciato il 7 novembre 2018
 {: #1122_1527}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.12.2_1527.
+La seguente tabella mostra le modifiche incluse nella patch 1.12.2_1527. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.3_1533">
@@ -389,7 +389,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.11.4_1535.
 ### Changelog per il fix pack del nodo di lavoro 1.11.3_1534, rilasciato il 19 novembre 2018
 {: #1113_1534}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.11.3_1534.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.11.3_1534. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.3_1533">
@@ -416,7 +416,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.11.3_1533, rilasciato il 7 novembre 2018
 {: #1113_1533}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.11.3_1533.
+La seguente tabella mostra le modifiche incluse nella patch 1.11.3_1533. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.3_1531">
@@ -454,7 +454,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.11.3_1533.
 ### Changelog per il fix pack del master 1.11.3_1531, rilasciato l'1 novembre 2018
 {: #1113_1531_ha-master}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del master 1.11.3_1531.
+La seguente tabella mostra le modifiche incluse nel fix pack del master 1.11.3_1531. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.3_1527">
@@ -503,7 +503,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del master 1.11.3_1
 ### Changelog per il fix pack del nodo di lavoro 1.11.3_1531, rilasciato il 26 ottobre 2018
 {: #1113_1531}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.11.3_1531.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.11.3_1531. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.3_1525">
@@ -529,7 +529,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del master 1.11.3_1527, rilasciato il 15 ottobre 2018
 {: #1113_1527}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del master 1.11.3_1527.
+La seguente tabella mostra le modifiche incluse nel fix pack del master 1.11.3_1527. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.3_1524">
@@ -561,7 +561,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del master 1.11.3_1
 ### Changelog per il fix pack del nodo di lavoro 1.11.3_1525, rilasciato il 10 ottobre 2018
 {: #1113_1525}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.11.3_1525.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.11.3_1525. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.3_1524">
@@ -594,7 +594,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.11.3_1524, rilasciato il 2 ottobre 2018
 {: #1113_1524}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.11.3_1524.
+La seguente tabella mostra le modifiche incluse nella patch 1.11.3_1524. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.3_1521">
@@ -633,7 +633,7 @@ Inoltre, adesso quando aggiorni il master del cluster, la classe di archiviazion
 ### Changelog per 1.11.3_1521, rilasciato il 20 ottobre 2018
 {: #1113_1521}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.11.3_1521.
+La seguente tabella mostra le modifiche incluse nella patch 1.11.3_1521. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.2_1516">
@@ -708,7 +708,7 @@ Inoltre, adesso quando aggiorni il master del cluster, la classe di archiviazion
 ### Changelog per 1.11.2_1516, rilasciato il 4 settembre 2018
 {: #1112_1516}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.11.2_1516.
+La seguente tabella mostra le modifiche incluse nella patch 1.11.2_1516. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.2_1514">
@@ -752,7 +752,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.11.2_1516.
 ### Changelog per il fix pack del nodo di lavoro 1.11.2_1514, rilasciato il 23 agosto 2018
 {: #1112_1514}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.11.2_1514.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.11.2_1514. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.11.2_1513">
@@ -784,7 +784,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.11.2_1513, rilasciato il 14 agosto 2018
 {: #1112_1513}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.11.2_1513.
+La seguente tabella mostra le modifiche incluse nella patch 1.11.2_1513. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.5_1518">
@@ -944,7 +944,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del nodo di lavoro 1.10.8_1531, rilasciato il 19 novembre 2018
 {: #1108_1531}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.8_1531.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.8_1531. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.8_1530">
@@ -970,7 +970,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.10.8_1530, rilasciato il 7 novembre 2018
 {: #1108_1530_ha-master}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.10.8_1530.
+La seguente tabella mostra le modifiche incluse nella patch 1.10.8_1530. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.8_1528">
@@ -1031,7 +1031,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.8_1530.
 ### Changelog per il fix pack del nodo di lavoro 1.10.8_1528, rilasciato il 26 ottobre 2018
 {: #1108_1528}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.8_1528.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.8_1528. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.8_1527">
@@ -1057,7 +1057,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del master 1.10.8_1527, rilasciato il 15 ottobre 2018
 {: #1108_1527}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del master 1.10.8_1527.
+La seguente tabella mostra le modifiche incluse nel fix pack del master 1.10.8_1527. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.8_1524">
@@ -1089,7 +1089,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del master 1.10.8_1
 ### Changelog per il fix pack del nodo di lavoro 1.10.8_1525, rilasciato il 10 ottobre 2018
 {: #1108_1525}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.8_1525.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.8_1525. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.8_1524">
@@ -1122,7 +1122,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.10.8_1524, rilasciato il 2 ottobre 2018
 {: #1108_1524}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.10.8_1524.
+La seguente tabella mostra le modifiche incluse nella patch 1.10.8_1524. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.7_1520">
@@ -1173,7 +1173,7 @@ Inoltre, adesso quando aggiorni il master del cluster, la classe di archiviazion
 ### Changelog per il fix pack del nodo di lavoro 1.10.7_1521, rilasciato il 20 settembre 2018
 {: #1107_1521}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.7_1521.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.7_1521. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.7_1520">
@@ -1225,7 +1225,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.10.7_1520, rilasciato il 4 settembre 2018
 {: #1107_1520}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.10.7_1520.
+La seguente tabella mostra le modifiche incluse nella patch 1.10.7_1520. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.5_1519">
@@ -1275,7 +1275,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.7_1520.
 ### Changelog per il fix pack del nodo di lavoro 1.10.5_1519, rilasciato il 23 agosto 2018
 {: #1105_1519}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.5_1519.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.5_1519. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.5_1518">
@@ -1308,7 +1308,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del nodo di lavoro 1.10.5_1518, rilasciato il 13 agosto 2018
 {: #1105_1518}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.5_1518.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.5_1518. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.5_1517">
@@ -1334,7 +1334,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.10.5_1517, rilasciato il 27 luglio 2018
 {: #1105_1517}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.10.5_1517.
+La seguente tabella mostra le modifiche incluse nella patch 1.10.5_1517. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.3_1514">
@@ -1390,7 +1390,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.5_1517.
 ### Changelog per il fix pack del nodo di lavoro 1.10.3_1514, rilasciato il 3 luglio 2018
 {: #1103_1514}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.3_1514.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.3_1514. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.3_1513">
@@ -1417,7 +1417,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del nodo di lavoro 1.10.3_1513, rilasciato il 21 giugno 2018
 {: #1103_1513}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.3_1513.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.3_1513. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.3_1512">
@@ -1443,7 +1443,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.10.3_1512, rilasciato il 12 giugno 2018
 {: #1103_1512}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.10.3_1512.
+La seguente tabella mostra le modifiche incluse nella patch 1.10.3_1512. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.1_1510">
@@ -1501,7 +1501,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.3_1512.
 ### Changelog per il fix pack del nodo di lavoro 1.10.1_1510, rilasciato il 18 maggio 2018
 {: #1101_1510}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.1_1510.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.1_1510. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.1_1509">
@@ -1527,7 +1527,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del nodo di lavoro 1.10.1_1509, rilasciato il 16 maggio 2018
 {: #1101_1509}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.1_1509.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.1_1509. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.10.1_1508">
@@ -1553,7 +1553,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.10.1_1508, rilasciato il 01 maggio 2018
 {: #1101_1508}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.10.1_1508.
+La seguente tabella mostra le modifiche incluse nella patch 1.10.1_1508. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.7_1510">
@@ -1683,7 +1683,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.9.11_1536, rilasciato il 19 novembre 2018
 {: #1911_1536}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.9.11_1536.
+La seguente tabella mostra le modifiche incluse nella patch 1.9.11_1536. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.10_1532">
@@ -1733,7 +1733,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.9.11_1536.
 ### Changelog per il fix pack del nodo di lavoro 1.9.10_1532, rilasciato il 7 novembre 2018
 {: #1910_1532}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.11_1532.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.11_1532. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.10_1531">
@@ -1759,7 +1759,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del nodo di lavoro 1.9.10_1531, rilasciato il 26 ottobre 2018
 {: #1910_1531}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1531.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1531. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.10_1530">
@@ -1785,7 +1785,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del master 1.9.10_1530, rilasciato il 15 ottobre 2018
 {: #1910_1530}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1530.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1530. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.10_1527">
@@ -1811,7 +1811,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del nodo di lavoro 1.9.10_1528, rilasciato il 10 ottobre 2018
 {: #1910_1528}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1528.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1528. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.10_1527">
@@ -1844,7 +1844,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.9.10_1527, rilasciato il 2 ottobre 2018
 {: #1910_1527}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.9.10_1527.
+La seguente tabella mostra le modifiche incluse nella patch 1.9.10_1527. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.10_1523">
@@ -1877,7 +1877,7 @@ Inoltre, adesso quando aggiorni il master del cluster, la classe di archiviazion
 ### Changelog per il fix pack del nodo di lavoro 1.9.10_1524, rilasciato il 20 settembre 2018
 {: #1910_1524}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1524.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1524. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.10_1523">
@@ -1929,7 +1929,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.9.10_1523, rilasciato il 4 settembre 2018
 {: #1910_1523}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.9.10_1523.
+La seguente tabella mostra le modifiche incluse nella patch 1.9.10_1523. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.9_1522">
@@ -1973,7 +1973,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.9.10_1523.
 ### Changelog per il fix pack del nodo di lavoro 1.9.9_1522, rilasciato il 23 agosto 2018
 {: #199_1522}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.9_1522.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.9_1522. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.9_1521">
@@ -2006,7 +2006,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del nodo di lavoro 1.9.9_1521, rilasciato il 13 agosto 2018
 {: #199_1521}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.9_1521.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.9_1521. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.9_1520">
@@ -2032,7 +2032,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.9.9_1520, rilasciato il 27 luglio 2018
 {: #199_1520}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.9.9_1520.
+La seguente tabella mostra le modifiche incluse nella patch 1.9.9_1520. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.8_1517">
@@ -2082,7 +2082,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.9.9_1520.
 ### Changelog per il fix pack del nodo di lavoro 1.9.8_1517, rilasciato il 3 luglio 2018
 {: #198_1517}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.8_1517.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.8_1517. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.8_1516">
@@ -2109,7 +2109,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del nodo di lavoro 1.9.8_1516, rilasciato il 21 giugno 2018
 {: #198_1516}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.8_1516.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.8_1516. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.8_1515">
@@ -2135,7 +2135,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.9.8_1515, rilasciato il 19 giugno 2018
 {: #198_1515}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.9.8_1515.
+La seguente tabella mostra le modifiche incluse nella patch 1.9.8_1515. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.7_1513">
@@ -2180,7 +2180,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.9.8_1515.
 ### Changelog per il fix pack del nodo di lavoro 1.9.7_1513, rilasciato l'11 giugno 2018
 {: #197_1513}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.7_1513.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.7_1513. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.7_1512">
@@ -2206,7 +2206,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del nodo di lavoro 1.9.7_1512, rilasciato il 18 maggio 2018
 {: #197_1512}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.7_1512.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.7_1512. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.7_1511">
@@ -2232,7 +2232,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per il fix pack del nodo di lavoro 1.9.7_1511, rilasciato il 16 maggio 2018
 {: #197_1511}
 
-La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.7_1511.
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.7_1511. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.7_1510">
@@ -2258,7 +2258,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 ### Changelog per 1.9.7_1510, rilasciato il 30 aprile 2018
 {: #197_1510}
 
-La seguente tabella mostra le modifiche incluse nella patch 1.9.7_1510.
+La seguente tabella mostra le modifiche incluse nella patch 1.9.7_1510. 
 {: shortdesc}
 
 <table summary="Modifiche apportate a partire dalla versione 1.9.3_1506">

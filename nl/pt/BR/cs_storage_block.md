@@ -1067,7 +1067,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 Se você desejar aumentar a capacidade de armazenamento ou o desempenho, será possível modificar seu volume existente. 
 {: shortdesc}
 
-Para perguntas sobre faturamento e para localizar as etapas de como usar o console do {{site.data.keyword.Bluemix_notm}} para modificar seu armazenamento, consulte [Expandindo a capacidade do Block Storage](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). Se você usar o console do {{site.data.keyword.Bluemix_notm}} para modificar seu armazenamento, deve-se seguir as etapas 4 a 7 neste tópico para concluir a modificação.
+Para perguntas sobre faturamento e para localizar as etapas de como usar o console do {{site.data.keyword.Bluemix_notm}} para modificar seu armazenamento, consulte [Expandindo a capacidade do Block Storage](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity). Se você usar o console do {{site.data.keyword.Bluemix_notm}} para modificar seu armazenamento, deve-se seguir as etapas 4 a 7 neste tópico para concluir a modificação. 
 {: tip}
 
 1. Liste os PVCs em seu cluster e anote o nome do PV associado na coluna **VOLUME**. 
@@ -1180,8 +1180,8 @@ Para perguntas sobre faturamento e para localizar as etapas de como usar o conso
    
    Os pods são retornados no formato: `<pod_name>: <pvc_name>`. 
    
-6. se você tiver um pod que usa o PVC, reinicie o pod removendo o pod e permitindo que o Kubernetes recrie-o. Se você criou um pod sem usar uma implementação do Kubernetes ou um conjunto de réplicas, deve-se recriar seu pod depois de removê-lo.
-   Para recuperar o arquivo YAML que foi usado para criar seu pod, execute `kubectl get pod <pod_name> -o yaml >pod.yaml`.
+6. se você tiver um pod que usa o PVC, reinicie o pod removendo o pod e permitindo que o Kubernetes recrie-o. Se você criou um pod sem usar uma implementação do Kubernetes ou um conjunto de réplicas, deve-se recriar seu pod depois de removê-lo. 
+   Para recuperar o arquivo YAML que foi usado para criar seu pod, execute `kubectl get pod <pod_name> -o yaml >pod.yaml`. 
    {: tip}
    ```
    kubectl delete pod <pod_name>
@@ -1189,20 +1189,20 @@ Para perguntas sobre faturamento e para localizar as etapas de como usar o conso
    {: pre}
    
 7. Se você mudou o tamanho de seu volume, efetue login em seu pod para verificar o novo tamanho. 
-   1. Obtenha o caminho de montagem do volume que você usou em seu pod para acessar seu volume.
+   1. Obtenha o caminho de montagem do volume que você usou em seu pod para acessar seu volume. 
       ```
       kubectl describe pod <pod_name>
       ```
       {: pre}
       
-      O caminho de montagem do volume é mostrado na seção **Contêineres** > **bloco** > **Montagens** de sua saída da CLI.
+      O caminho de montagem do volume é mostrado na seção **Contêineres** > **bloco** > **Montagens** de sua saída da CLI. 
    2. Efetue login em seu pod. 
       ```
       kubectl exec -it <pod_name> bash
       ```
       {: pre}
       
-   3. Mostre as estatísticas de uso do disco e localize o caminho de montagem para seu volume que você recuperou anteriormente. Verifique se a coluna **Tamanho** mostra o novo tamanho de seu volume.
+   3. Mostre as estatísticas de uso do disco e localize o caminho de montagem para seu volume que você recuperou anteriormente. Verifique se a coluna **Tamanho** mostra o novo tamanho de seu volume. 
       ```
       df -h
       ```

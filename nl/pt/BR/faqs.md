@@ -24,7 +24,7 @@ lastupdated: "2018-12-05"
 {: #kubernetes}
 {: faq}
 
-O Kubernetes é uma plataforma de software livre para gerenciar cargas de trabalho e serviços conteinerizados em múltiplos hosts, que oferece ferramentas de gerenciamento para implementar, automatizar, monitorar e escalar apps conteinerizados com intervenção manual mínima ou até nenhuma. Todos os contêineres que compõem seu microsserviço são agrupados em pods, uma unidade lógica para assegurar fácil gerenciamento e descoberta. Esses pods são executados em hosts de cálculo que são gerenciados em um cluster do Kubernetes que é móvel, extensível e com capacidade de recuperação automática em caso de falhas.
+O Kubernetes é uma plataforma de software livre para gerenciar cargas de trabalho e serviços conteinerizados em múltiplos hosts, que oferece ferramentas de gerenciamento para implementar, automatizar, monitorar e escalar apps conteinerizados com intervenção manual mínima ou até nenhuma. Todos os contêineres que compõem seu microsserviço são agrupados em pods, uma unidade lógica para assegurar fácil gerenciamento e descoberta. Esses pods são executados em hosts de cálculo que são gerenciados em um cluster do Kubernetes que é móvel, extensível e com capacidade de recuperação automática em caso de falhas. 
 {: shortdesc}
 
 Para obter mais informações sobre o Kubernetes, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational). 

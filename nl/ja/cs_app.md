@@ -43,7 +43,8 @@ lastupdated: "2018-12-05"
 ## クラスターでアプリを実行する計画
 {: #plan_apps}
 
-アプリを {{site.data.keyword.containerlong_notm}} クラスターにデプロイする前に、アプリの適切な利用を可能にして、アプリと {{site.data.keyword.Bluemix_notm}} の他のサービスの統合も可能にするセットアップを決定しておく必要があります。{:shortdesc}
+アプリを {{site.data.keyword.containerlong_notm}} クラスターにデプロイする前に、アプリの適切な利用を可能にして、アプリと {{site.data.keyword.Bluemix_notm}} の他のサービスの統合も可能にするセットアップを決定しておく必要があります。
+{:shortdesc}
 
 ### どのようなタイプの Kubernetes オブジェクトをアプリ用に作成できますか?
 {: #object}
@@ -168,7 +169,7 @@ YAML ファイルにデータをハードコーディングするのではなく
 ### アプリの可用性の向上
 {: #increase_availability}
 
-アプリの可用性を向上させるには、以下の選択肢を検討してください。
+アプリの可用性を向上させるには、以下の選択肢を検討してください。 
 {: shortdesc}
 
 <dl>
@@ -676,7 +677,8 @@ Kubernetes ダッシュボードでの作業が完了したら、`CTRL+C` を使
 ## Kubernetes ダッシュボードでアプリをデプロイする方法
 {: #app_ui}
 
-Kubernetes ダッシュボードを使用してアプリをクラスターにデプロイすると、デプロイメント・リソースが、クラスター内にポッドを自動的に作成し、更新および管理します。 ダッシュボードの使用方法について詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/) を参照してください。{:shortdesc}
+Kubernetes ダッシュボードを使用してアプリをクラスターにデプロイすると、デプロイメント・リソースが、クラスター内にポッドを自動的に作成し、更新および管理します。 ダッシュボードの使用方法について詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/) を参照してください。
+{:shortdesc}
 
 クラスター内のリソースやユーザーが多すぎて Kubernetes ダッシュボードが少し遅くなっていますか? Kubernetes バージョン 1.12 以降を実行するクラスターの場合、クラスター管理者は `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` を実行して `kubernetes-dashboard` デプロイメントをスケーリングできます。
 {: tip}

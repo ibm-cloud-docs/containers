@@ -63,7 +63,7 @@ Bevor Sie Annotationen verwenden, stellen Sie sicher, dass Sie Ihre Ingress-Serv
  <tr>
  <td><a href="#rewrite-path">Pfade neu schreiben</a></td>
  <td><code>rewrite-path</code></td>
- <td>Eingehenden Netzverkehr an einen anderen Pfad weiterleiten, den Ihre Back-End-App überwacht. </td>
+ <td>Eingehenden Netzverkehr an einen anderen Pfad weiterleiten, den Ihre Back-End-App überwacht.</td>
  </tr>
  <tr>
  <td><a href="#server-snippets">Server-Snippets</a></td>
@@ -312,8 +312,7 @@ Hinzufügen von Pfaddefinitionen zu externen Services, wie beispielsweise in {{s
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Fügen Sie Pfaddefinitionen zu externen Services hinzu. Verwenden Sie diese Annotation nur dann, wenn Ihre App für einen externen Service, nicht für einen Back-End-Service, betrieben wird. Wenn Sie diese Annotation verwenden, um eine externe Serviceroute zu erstellen, dann werden zusammen mit ihr nur die Annotationen `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` und `proxy-buffering` unterstützt. Darüber hinaus werden keine weiteren Annotationen zusammen mit `proxy-external-service` unterstützt.<p class="note">Es ist nicht möglich, mehrere Hosts für einen einzelnen Service und Pfad anzugeben.
-</p>
+<dd>Fügen Sie Pfaddefinitionen zu externen Services hinzu. Verwenden Sie diese Annotation nur dann, wenn Ihre App für einen externen Service, nicht für einen Back-End-Service, betrieben wird. Wenn Sie diese Annotation verwenden, um eine externe Serviceroute zu erstellen, dann werden zusammen mit ihr nur die Annotationen `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` und `proxy-buffering` unterstützt. Darüber hinaus werden keine weiteren Annotationen zusammen mit `proxy-external-service` unterstützt.<p class="note">Es ist nicht möglich, mehrere Hosts für einen einzelnen Service und Pfad anzugeben.</p>
 </dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
@@ -374,7 +373,7 @@ Die Art und Weise ändern, in der die ALB die Anforderungs-URI mit dem App-Pfad 
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Standardmäßig verarbeiten ALBs die Pfade, auf denen Apps empfangsbereit sind, als Präfixe. Wenn eine ALB eine Anforderung an eine App empfängt, prüft die ALB die Ingress-Ressource auf einen Pfad (als Präfix), der mit dem Anfang der Anforderungs-URI übereinstimmt. Wenn eine Übereinstimmung gefunden wurde, wird die Anforderung an die IP-Adresse des Pods weitergeleitet, in dem die App bereitgestellt ist.<br><br>Die Annotation `location-modifier` ändert die Art und Weise, in der die ALB nach Übereinstimmungen sucht, indem die Positionsblockkonfiguration geändert wird. Der Positionsblock bestimmt, wie Anforderungen für den App-Pfad gehandhabt werden.<p class="note">Um reguläre Ausdruckspfade (regex) zu bearbeiten, ist diese Annotation erforderlich. </p></dd>
+<dd>Standardmäßig verarbeiten ALBs die Pfade, auf denen Apps empfangsbereit sind, als Präfixe. Wenn eine ALB eine Anforderung an eine App empfängt, prüft die ALB die Ingress-Ressource auf einen Pfad (als Präfix), der mit dem Anfang der Anforderungs-URI übereinstimmt. Wenn eine Übereinstimmung gefunden wurde, wird die Anforderung an die IP-Adresse des Pods weitergeleitet, in dem die App bereitgestellt ist.<br><br>Die Annotation `location-modifier` ändert die Art und Weise, in der die ALB nach Übereinstimmungen sucht, indem die Positionsblockkonfiguration geändert wird. Der Positionsblock bestimmt, wie Anforderungen für den App-Pfad gehandhabt werden.<p class="note">Um reguläre Ausdruckspfade (regex) zu bearbeiten, ist diese Annotation erforderlich.</p></dd>
 
 <dt>Unterstützte Modifikatoren</dt>
 <dd>
@@ -510,7 +509,7 @@ tls:
 </tr>
 <tr>
 <td>Positionssnippet</td>
-<td>Geben Sie das Konfigurationssnippet an, das Sie für den angegebenen Service verwenden möchten. Dieses Beispielsnippet für den Service <code>mein_service1</code> konfiguriert den Positionsblock, um die Pufferung von Proxy-Anforderungen zu blockieren, Protokollumschreibvorgänge zu aktivieren und zusätzliche Header festzulegen, wenn er eine Anforderung an den Service weiterleitet. Das Beispielsnippet für den Service <code>mein_service2</code> legt einen leeren Header <code>Authorization</code> fest. Jedes Positions-Snippet muss auf den Wert <code>&lt;EOS&gt;</code> enden. </td>
+<td>Geben Sie das Konfigurationssnippet an, das Sie für den angegebenen Service verwenden möchten. Dieses Beispielsnippet für den Service <code>mein_service1</code> konfiguriert den Positionsblock, um die Pufferung von Proxy-Anforderungen zu blockieren, Protokollumschreibvorgänge zu aktivieren und zusätzliche Header festzulegen, wenn er eine Anforderung an den Service weiterleitet. Das Beispielsnippet für den Service <code>mein_service2</code> legt einen leeren Header <code>Authorization</code> fest. Jedes Positions-Snippet muss auf den Wert <code>&lt;EOS&gt;</code> enden.</td>
 </tr>
 </tbody></table>
 </dd>
@@ -788,7 +787,8 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 ## Annotationen für Verbindungen
 {: #connection}
 
-Mithilfe von Verbindungsannotationen können Sie ändern, wie die ALB eine Verbindung zu der Back-End-App und den Upstream-Servern herstellt, und Zeitlimits oder eine maximale Anzahl von Keepalive-Verbindungen festlegen, bevor die App oder der Server als nicht verfügbar angenommen wird. {: shortdesc}
+Mithilfe von Verbindungsannotationen können Sie ändern, wie die ALB eine Verbindung zu der Back-End-App und den Upstream-Servern herstellt, und Zeitlimits oder eine maximale Anzahl von Keepalive-Verbindungen festlegen, bevor die App oder der Server als nicht verfügbar angenommen wird. 
+{: shortdesc}
 
 ### Angepasste Verbindungs- und Lesezeitlimits (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
@@ -841,7 +841,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;verbindungszeitlimit&gt;</code></td>
- <td>Die Anzahl der Sekunden oder Minuten, die gewartet werden soll, bis eine Verbindung zur Back-End-App hergestellt wird, z. B. <code>65s</code> oder <code>1m</code>. Ein Verbindungszeitlimit kann nicht größer als 75 Sekunden sein. </td>
+ <td>Die Anzahl der Sekunden oder Minuten, die gewartet werden soll, bis eine Verbindung zur Back-End-App hergestellt wird, z. B. <code>65s</code> oder <code>1m</code>. Ein Verbindungszeitlimit kann nicht größer als 75 Sekunden sein.</td>
  </tr>
  <tr>
  <td><code>&lt;lesezeitlimit&gt;</code></td>
@@ -983,8 +983,7 @@ Festlegen, wann die ALB eine Anforderung an den nächsten Upstream-Server überg
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen der Client-App und Ihrer App. Für einige App-Konfigurationen müssen Sie unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen von der ALB verarbeiten. Manchmal kann der Proxy-Server, den die ALB verwendet, keine Verbindung mit einem Upstream-Server herstellen, den die App verwendet. Die ALB kann dann versuchen, eine Verbindung mit dem nächsten Upstream-Server herzustellen, um die Anforderung stattdessen an ihn zu übergeben. Sie können die Annotation `proxy-next-upstream-config` verwenden, um festzulegen, in welchen Fällen, wie lange und wie oft die ALB versuchen kann, eine Anforderung an den nächsten Upstream-Server zu übergeben.<p class="note">Wenn Sie `proxy-next-upstream-config` verwenden, ist immer ein Zeitlimit konfiguriert. Fügen Sie deshalb `timeout=true` nicht zu dieser Annotation hinzu.
-</p>
+Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen der Client-App und Ihrer App. Für einige App-Konfigurationen müssen Sie unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen von der ALB verarbeiten. Manchmal kann der Proxy-Server, den die ALB verwendet, keine Verbindung mit einem Upstream-Server herstellen, den die App verwendet. Die ALB kann dann versuchen, eine Verbindung mit dem nächsten Upstream-Server herzustellen, um die Anforderung stattdessen an ihn zu übergeben. Sie können die Annotation `proxy-next-upstream-config` verwenden, um festzulegen, in welchen Fällen, wie lange und wie oft die ALB versuchen kann, eine Anforderung an den nächsten Upstream-Server zu übergeben.<p class="note">Wenn Sie `proxy-next-upstream-config` verwenden, ist immer ein Zeitlimit konfiguriert. Fügen Sie deshalb `timeout=true` nicht zu dieser Annotation hinzu.</p>
 </dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
@@ -1312,7 +1311,7 @@ spec:
 ## Annotationen für HTTPS- und TLS/SSL-Authentifizierung
 {: #https-auth}
 
-Mithilfe von HTTPS- und TLS/SSL-Authentifizierungsannotationen können Sie Ihre ALB für HTTPS-Datenverkehr konfigurieren, HTTPS-Standardports ändern, SSL-Verschlüsselung für Datenverkehr aktivieren, der an Ihre Back-End-Apps gesendet wird, oder eine gegenseitige Authentifizierung konfigurieren.
+Mithilfe von HTTPS- und TLS/SSL-Authentifizierungsannotationen können Sie Ihre ALB für HTTPS-Datenverkehr konfigurieren, HTTPS-Standardports ändern, SSL-Verschlüsselung für Datenverkehr aktivieren, der an Ihre Back-End-Apps gesendet wird, oder eine gegenseitige Authentifizierung konfigurieren. 
 {: shortdesc}
 
 ### {{site.data.keyword.appid_short_notm}} Authentifizierung (appid-auth)
@@ -1326,11 +1325,11 @@ Mithilfe von HTTPS- und TLS/SSL-Authentifizierungsannotationen können Sie Ihre 
 <dd>
 Authentifizieren Sie Web- oder API-HTTP/HTTPS-Anforderungen mit {{site.data.keyword.appid_short_notm}}.
 
-<p>Wenn Sie den Anforderungstyp auf <code>web</code> setzen, wird eine Webanforderung, die ein {{site.data.keyword.appid_short_notm}}-Zugriffstoken enthält, geprüft. Wenn die Tokenprüfung fehlschlägt, wird die Webanforderung zurückgewiesen. Wenn die Anforderung kein Zugriffstoken enthält, wird die Anforderung an die {{site.data.keyword.appid_short_notm}}-Anmeldeseite umgeleitet. Damit die {{site.data.keyword.appid_short_notm}}-Webauthentifizierung funktioniert, müssen Cookies im Browser des Benutzers aktiviert sein. </p>
+<p>Wenn Sie den Anforderungstyp auf <code>web</code> setzen, wird eine Webanforderung, die ein {{site.data.keyword.appid_short_notm}}-Zugriffstoken enthält, geprüft. Wenn die Tokenprüfung fehlschlägt, wird die Webanforderung zurückgewiesen. Wenn die Anforderung kein Zugriffstoken enthält, wird die Anforderung an die {{site.data.keyword.appid_short_notm}}-Anmeldeseite umgeleitet. Damit die {{site.data.keyword.appid_short_notm}}-Webauthentifizierung funktioniert, müssen Cookies im Browser des Benutzers aktiviert sein.</p>
 
 <p>Wenn Sie den Anforderungstyp auf <code>api</code> setzen, wird eine API-Anforderung, die ein {{site.data.keyword.appid_short_notm}}-Zugriffstoken enthält, geprüft. Wenn die Anforderung kein Zugriffstoken enthält, wird die Fehlernachricht <code>401: Unauthorized</code> an den Benutzer zurückgegeben.</p>
 
-<p class="note">Aus Sicherheitsgründen unterstützt die {{site.data.keyword.appid_short_notm}}-Authentifizierung nur Back-Ends mit aktiviertem TLS/SSL. </p>
+<p class="note">Aus Sicherheitsgründen unterstützt die {{site.data.keyword.appid_short_notm}}-Authentifizierung nur Back-Ends mit aktiviertem TLS/SSL.</p>
 </dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
@@ -1382,12 +1381,12 @@ spec:
 </dd>
 <dt>Syntax</dt></dl>
 
-Da die App {{site.data.keyword.appid_short_notm}} für die Authentifizierung verwendet, müssen Sie eine {{site.data.keyword.appid_short_notm}}-Instanz bereitstellen, die Instanz mit gültigen Umleitungs-URIs konfigurieren und einen geheimen Bindungsschlüssel generieren, indem Sie die Instanz an den Cluster binden. 
+Da die App {{site.data.keyword.appid_short_notm}} für die Authentifizierung verwendet, müssen Sie eine {{site.data.keyword.appid_short_notm}}-Instanz bereitstellen, die Instanz mit gültigen Umleitungs-URIs konfigurieren und einen geheimen Bindungsschlüssel generieren, indem Sie die Instanz an den Cluster binden.
 
 1. Wählen Sie eine vorhandene Instanz aus oder erstellen Sie eine neue {{site.data.keyword.appid_short_notm}}-Instanz.
     * Um eine vorhandene Instanz zu verwenden, stellen Sie sicher, dass der Name der Serviceinstanz keine Leerzeichen enthält. Um Leerzeichen zu entfernen, wählen Sie das Menü für mehr Optionen neben dem Namen der Serviceinstanz und anschließend **Service umbenennen** aus.
     * Gehen Sie wie folgt vor, um eine [neue {{site.data.keyword.appid_short_notm}}-Instanz](https://console.bluemix.net/catalog/services/app-id) bereitzustellen:
-        1. Ersetzen Sie den im Feld **Servicename** automatisch eingetragenen Wert durch Ihren eigenen eindeutigen Namen für die Serviceinstanz. Der Name der Serviceinstanz darf keine Leerzeichen enthalten. 
+        1. Ersetzen Sie den im Feld **Servicename** automatisch eingetragenen Wert durch Ihren eigenen eindeutigen Namen für die Serviceinstanz. Der Name der Serviceinstanz darf keine Leerzeichen enthalten.
         2. Wählen Sie die Region aus, in der Ihr Cluster implementiert ist.
         3. Klicken Sie auf **Erstellen**.
 2. Fügen Sie Umleitungs-URLs für Ihre App hinzu. Eine Umleitungs-URL ist der Callback-Endpunkt Ihrer App. Um Phishing-Attacken zu verhindern, validiert die App-ID die Anforderungs-URL gegen die Whitelist von Umleitungs-URLs.
@@ -1432,7 +1431,7 @@ Da die App {{site.data.keyword.appid_short_notm}} für die Authentifizierung ver
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Standardmäßig ist die Ingress-Lastausgleichsfunktion für Anwendungen (ALB) so konfiguriert, dass sie für eingehenden HTTP-Netzverkehr am Port mit der Nummer 80 und für eingehenden HTTPS-Netzverkehr am Port mit der Nummer 443 empfangsbereit ist. Sie können die Standardports ändern, um die Sicherheit der Domäne Ihrer Lastausgleichsfunktion für Anwendungen (ALB) zu verbessern oder um ausschließlich einen HTTPS-Port zu aktivieren.<p class="note">Um die gegenseitige Authentifizierung an einem Port zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](cs_ingress.html#opening_ingress_ports) und geben Sie den Port dann in der Annotation [`mutual-auth` an](#mutual-auth). Verwenden Sie die Annotation `custom-port` nicht, um einen Port für die gegenseitige Authentifizierung anzugeben. </p></dd>
+<dd>Standardmäßig ist die Ingress-Lastausgleichsfunktion für Anwendungen (ALB) so konfiguriert, dass sie für eingehenden HTTP-Netzverkehr am Port mit der Nummer 80 und für eingehenden HTTPS-Netzverkehr am Port mit der Nummer 443 empfangsbereit ist. Sie können die Standardports ändern, um die Sicherheit der Domäne Ihrer Lastausgleichsfunktion für Anwendungen (ALB) zu verbessern oder um ausschließlich einen HTTPS-Port zu aktivieren.<p class="note">Um die gegenseitige Authentifizierung an einem Port zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](cs_ingress.html#opening_ingress_ports) und geben Sie den Port dann in der Annotation [`mutual-auth` an](#mutual-auth). Verwenden Sie die Annotation `custom-port` nicht, um einen Port für die gegenseitige Authentifizierung anzugeben.</p></dd>
 
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
@@ -1646,7 +1645,7 @@ Verwenden Sie die Annotation `mutual-auth` für die SSL-Terminierung zwischen de
 <dd>
 <ul>
 <li>Sie müssen über einen gültigen geheimen Schlüssel für die gegenseitige Authentifizierung verfügen, der die erforderliche Datei <code>client.crt</code> enthält. Informationen zum Erstellen eines geheimen Schlüssels für gegenseitige Authentifizierung finden Sie in den Schritten am Ende dieses Abschnitts.</li>
-<li>Um die gegenseitige Authentifizierung an einem anderen Port als 443 zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](cs_ingress.html#opening_ingress_ports) und geben Sie den Port dann in dieser Annotation an. Verwenden Sie die Annotation `custom-port` nicht, um einen Port für die gegenseitige Authentifizierung anzugeben. </li>
+<li>Um die gegenseitige Authentifizierung an einem anderen Port als 443 zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](cs_ingress.html#opening_ingress_ports) und geben Sie den Port dann in dieser Annotation an. Verwenden Sie die Annotation `custom-port` nicht, um einen Port für die gegenseitige Authentifizierung anzugeben.</li>
 </ul>
 </dd>
 
@@ -1701,7 +1700,7 @@ spec:
 **Gehen Sie wie folgt vor, um einen geheimen Schlüssel für die gegenseitige Authentifizierung zu erstellen:**
 
 1. Generieren Sie einen Schlüssel und ein Zertifikat auf eine der folgenden Arten:
-    * Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist. 
+    * Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
     * Zu Testzwecken können Sie ein selbst signiertes Zertifikat mit OpenSSL erstellen. Weitere Informationen erhalten Sie in diesem [Lernprogramm zu selbst signierten SSL-Zertifikaten ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.akadia.com/services/ssh_test_certificate.html).
         1. Erstellen Sie einen Schlüssel (`client.key`).
             ```
@@ -1749,10 +1748,9 @@ Lassen Sie HTTPS-Anforderungen zu und verschlüsseln Sie Datenverkehr zu Ihren U
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Wenn Ihre Ingress-Ressourcenkonfiguration über einen TLS-Abschnitt verfügt, kann die Ingress-ALB mit HTTPS gesicherte URL-Anforderungen an Ihre App verarbeiten. Standardmäßig beendet die ALB die TLS-Terminierung und entschlüsselt die Anforderung, bevor der Datenverkehr an Ihre Apps mithilfe des HTTP-Protokolls weitergeleitet wird. Wenn Sie über Apps verfügen, die das HTTPS-Protokoll benötigen und für die der Datenverkehr verschlüsselt sein muss, verwenden Sie die Annotation `ssl-services`. Mit der Annotation `ssl-services` beendet die ALB die externe TLS-Verbindung und erstellt dann eine neue SSL-Verbindung zwischen der ALB und dem App-Pod. Der Datenverkehr wird erneut verschlüsselt, bevor er an die Upstream-Pods gesendet wird. </br></br>
-Wenn Ihre Back-End-App TLS verarbeiten kann und Sie weitere Sicherheitsfunktionalität hinzufügen möchten, können Sie eine unidirektionale oder gegenseitige Authentifizierung hinzufügen, indem Sie ein Zertifikat bereitstellen, das in einem geheimen Schlüssel enthalten ist. </br></br>
-Verwenden Sie die Annotation `ssl-services` für die SSL-Terminierung zwischen der Ingress-Lastausgleichsfunktion für Anwendungen und der Back-End-App.
-Verwenden Sie die [Annotation `mutual-auth`](#mutual-auth) für die SSL-Terminierung zwischen dem Client und der Ingress-Lastausgleichsfunktion für Anwendungen. </dd>
+Wenn Ihre Ingress-Ressourcenkonfiguration über einen TLS-Abschnitt verfügt, kann die Ingress-ALB mit HTTPS gesicherte URL-Anforderungen an Ihre App verarbeiten. Standardmäßig beendet die ALB die TLS-Terminierung und entschlüsselt die Anforderung, bevor der Datenverkehr an Ihre Apps mithilfe des HTTP-Protokolls weitergeleitet wird. Wenn Sie über Apps verfügen, die das HTTPS-Protokoll benötigen und für die der Datenverkehr verschlüsselt sein muss, verwenden Sie die Annotation `ssl-services`. Mit der Annotation `ssl-services` beendet die ALB die externe TLS-Verbindung und erstellt dann eine neue SSL-Verbindung zwischen der ALB und dem App-Pod. Der Datenverkehr wird erneut verschlüsselt, bevor er an die Upstream-Pods gesendet wird.</br></br>
+Wenn Ihre Back-End-App TLS verarbeiten kann und Sie weitere Sicherheitsfunktionalität hinzufügen möchten, können Sie eine unidirektionale oder gegenseitige Authentifizierung hinzufügen, indem Sie ein Zertifikat bereitstellen, das in einem geheimen Schlüssel enthalten ist.</br></br>
+Verwenden Sie die Annotation `ssl-services` für die SSL-Terminierung zwischen der Ingress-Lastausgleichsfunktion für Anwendungen und der Back-End-App. Verwenden Sie die [Annotation `mutual-auth`](#mutual-auth) für die SSL-Terminierung zwischen dem Client und der Ingress-Lastausgleichsfunktion für Anwendungen. </dd>
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
@@ -1797,7 +1795,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Wenn Ihre Back-End-App TLS verarbeiten kann und Sie weitere Sicherheitsfunktionalität hinzufügen möchten, ersetzen Sie <code>&lt;<em>service-ssl-secret</em>&gt;</code> durch den geheimen Schlüssel mit unidirektionaler oder gegenseitiger Authentifizierung für den Service. <ul><li>Wenn Sie einen geheimen Schlüssel mit unidirektionaler Authentifizierung bereitstellen, muss er <code>trusted.crt</code> vom Upstream-Server enthalten. Informationen zum Erstellen eines unidirektionalen geheimen Schlüssels finden Sie in den Schritten am Ende dieses Abschnitts.</li><li>Wenn Sie einen geheimen Schlüssel mit gegenseitiger Authentifizierung bereitstellen, muss der Wert die erforderlichen Angaben für <code>client.crt</code> und <code>client.key</code> enthalten, die Ihre App vom Client erwartet. Informationen zum Erstellen eines geheimen Schlüssels für gegenseitige Authentifizierung finden Sie in den Schritten am Ende dieses Abschnitts.</li></ul><p class="important">Wenn Sie keinen geheimen Schlüssel angeben, sind unsichere Verbindungen zulässig. Sie können auf den geheimen Schlüssel verzichten, wenn Sie die Verbindung testen möchten und keine Zertifikate vorliegen oder wenn Ihre Zertifikate abgelaufen sind und Sie unsichere Verbindungen zulassen möchten.</p></td>
+  <td>Wenn Ihre Back-End-App TLS verarbeiten kann und Sie weitere Sicherheitsfunktionalität hinzufügen möchten, ersetzen Sie <code>&lt;<em>service-ssl-secret</em>&gt;</code> durch den geheimen Schlüssel mit unidirektionaler oder gegenseitiger Authentifizierung für den Service.<ul><li>Wenn Sie einen geheimen Schlüssel mit unidirektionaler Authentifizierung bereitstellen, muss er <code>trusted.crt</code> vom Upstream-Server enthalten. Informationen zum Erstellen eines unidirektionalen geheimen Schlüssels finden Sie in den Schritten am Ende dieses Abschnitts.</li><li>Wenn Sie einen geheimen Schlüssel mit gegenseitiger Authentifizierung bereitstellen, muss der Wert die erforderlichen Angaben für <code>client.crt</code> und <code>client.key</code> enthalten, die Ihre App vom Client erwartet. Informationen zum Erstellen eines geheimen Schlüssels für gegenseitige Authentifizierung finden Sie in den Schritten am Ende dieses Abschnitts.</li></ul><p class="important">Wenn Sie keinen geheimen Schlüssel angeben, sind unsichere Verbindungen zulässig. Sie können auf den geheimen Schlüssel verzichten, wenn Sie die Verbindung testen möchten und keine Zertifikate vorliegen oder wenn Ihre Zertifikate abgelaufen sind und Sie unsichere Verbindungen zulassen möchten.</p></td>
   </tr>
   </tbody></table>
 
@@ -1820,7 +1818,8 @@ spec:
      ```
      {: codeblock}
 
-     Wenn Sie die gegenseitige Authentifizierung auch für den Upstream-Datenverkehr erzwingen möchten, können Sie neben dem Wert für `trusted.crt` im Datenabschnitt auch Werte für `client.crt` und `client.key` bereitstellen. {: tip}
+     Wenn Sie die gegenseitige Authentifizierung auch für den Upstream-Datenverkehr erzwingen möchten, können Sie neben dem Wert für `trusted.crt` im Datenabschnitt auch Werte für `client.crt` und `client.key` bereitstellen.
+     {: tip}
 
 4. Erstellen Sie das Zertifikat als einen geheimen Kubernetes-Schlüssel.
      ```
@@ -1832,7 +1831,7 @@ spec:
 **Gehen Sie wie folgt vor, um einen geheimen Schlüssel für die gegenseitige Authentifizierung zu erstellen:**
 
 1. Generieren Sie einen Schlüssel und ein Zertifikat auf eine der folgenden Arten:
-    * Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist. 
+    * Generieren Sie ein Zertifikat und einen Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
     * Zu Testzwecken können Sie ein selbst signiertes Zertifikat mit OpenSSL erstellen. Weitere Informationen erhalten Sie in diesem [Lernprogramm zu selbst signierten SSL-Zertifikaten ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.akadia.com/services/ssh_test_certificate.html).
         1. Erstellen Sie einen Schlüssel (`client.key`).
             ```
@@ -1873,7 +1872,7 @@ spec:
 ## Istio-Annotationen
 {: #istio-annotations}
 
-Istio-Annotationen verwenden, um eingehenden Datenverkehr an Istio-verwaltete Services weiterzuleiten.
+Istio-Annotationen verwenden, um eingehenden Datenverkehr an Istio-verwaltete Services weiterzuleiten. 
 {: shortdesc}
 
 ### Istio-Services (istio-services)
@@ -1885,8 +1884,7 @@ Datenverkehr an Istio-verwaltete Services weiterleiten.
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-<p class="note">Diese Annotation kann nur mit Istio 0.7 und früheren Versionen verwendet werden.
-</p>Wenn Sie über Istio-verwaltete Services verfügen, können Sie eine Cluster-ALB verwenden, um HTTP-/HTTPS-Anforderungen an den Istio-Ingress-Controller weiterzuleiten. Der Istio-Ingress-Controller leitet die Anforderungen dann weiter an die App-Services. Damit der Datenverkehr weitergeleitet werden kann, müssen Sie Änderungen an den Ingress-Ressourcen für die Cluster-ALB und den Istio-Ingress-Controller vornehmen.
+<p class="note">Diese Annotation kann nur mit Istio 0.7 und früheren Versionen verwendet werden.</p>Wenn Sie über Istio-verwaltete Services verfügen, können Sie eine Cluster-ALB verwenden, um HTTP-/HTTPS-Anforderungen an den Istio-Ingress-Controller weiterzuleiten. Der Istio-Ingress-Controller leitet die Anforderungen dann weiter an die App-Services. Damit der Datenverkehr weitergeleitet werden kann, müssen Sie Änderungen an den Ingress-Ressourcen für die Cluster-ALB und den Istio-Ingress-Controller vornehmen.
 <br><br>In der Ingress-Ressource für die Cluster-ALB müssen Sie Folgendes tun:
   <ul>
     <li>die Annotation `istio-services` angeben</li>
@@ -2067,7 +2065,7 @@ spec:
 ## Annotationen für Proxypuffer
 {: #proxy-buffer}
 
-Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen Ihrer Back-End-App und dem Client-Web-Browser. Mit Annotationen für Proxypuffer können Sie konfigurieren, wie Daten in Ihrer ALB beim Senden oder Empfangen von Datenpaketen gepuffert werden.   
+Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen Ihrer Back-End-App und dem Client-Web-Browser. Mit Annotationen für Proxypuffer können Sie konfigurieren, wie Daten in Ihrer ALB beim Senden oder Empfangen von Datenpaketen gepuffert werden.  
 {: shortdesc}
 
 ### Pufferung von Clientantwortdaten (proxy-buffering)
@@ -2140,7 +2138,7 @@ Konfiguration der Anzahl und Größe der Proxypuffer für die Lastausgleichsfunk
 <dt>Beschreibung</dt>
 <dd>
 Legen Sie die Anzahl und Größe der Puffer fest, mit denen eine Antwort für eine einzelne Verbindung von einem Proxy-Server gelesen wird. Die Konfiguration wird auf alle Services auf dem Ingress-Host angewendet, es sei denn, es wird ein Service angegeben. Wenn beispielsweise eine Konfiguration wie <code>serviceName=SERVICE number=2 size=1k</code> angegeben wird, wird '1k' auf den Service angewendet. Wenn eine Konfiguration wie <code>number=2 size=1k</code> angegeben wird, wird '1k' auf alle Services auf dem Ingress-Host angewendet.</br>
-<p class="tip">Wenn Sie die Fehlernachricht `upstream sent too big header while reading response header from upstream` erhalten, hat der Upstream-Server in Ihrem Back-End eine Headergröße größer als die Standardbegrenzung gesendet. Erhöhen Sie die Größe für <code>proxy-buffers</code> und [<code>proxy-buffer-size</code>](#proxy-buffer-size). </p>
+<p class="tip">Wenn Sie die Fehlernachricht `upstream sent too big header while reading response header from upstream` erhalten, hat der Upstream-Server in Ihrem Back-End eine Headergröße größer als die Standardbegrenzung gesendet. Erhöhen Sie die Größe für <code>proxy-buffers</code> und [<code>proxy-buffer-size</code>](#proxy-buffer-size).</p>
 </dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
@@ -2315,18 +2313,18 @@ spec:
 ## Annotationen für Anforderungen und Antworten
 {: #request-response}
 
-Anforderungs- und Antwortannotationen verwenden, um Headerinformationen zu Client- und Serveranforderungen hinzuzufügen oder daraus zu entfernen und um die Größe des Hauptteils zu ändern, den der Client senden kann.
+Anforderungs- und Antwortannotationen verwenden, um Headerinformationen zu Client- und Serveranforderungen hinzuzufügen oder daraus zu entfernen und um die Größe des Hauptteils zu ändern, den der Client senden kann. 
 {: shortdesc}
 
 ### Server-Port zum Host-Header hinzufügen (add-host-port)
 {: #add-host-port}
 
-Server-Port zur Clientanforderung hinzufügen, bevor die Anforderung an Ihre Back-End-App weitergeleitet wird.
+Server-Port zur Clientanforderung hinzufügen, bevor die Anforderung an Ihre Back-End-App weitergeleitet wird. 
 {: shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>`:server_port` zum Host-Header einer Clientanforderung hinzufügen, bevor Sie die Anforderung an Ihre Back-End-App weiterleiten. 
+<dd>`:server_port` zum Host-Header einer Clientanforderung hinzufügen, bevor Sie die Anforderung an Ihre Back-End-App weiterleiten.
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
@@ -2391,7 +2389,8 @@ Wenn Ihre Back-End-App HTTP-Headerinformationen erfordert, können Sie die Annot
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
-Verwenden Sie die Annotation `proxy-add-headers` wie folgt, um die X-Forward-Headerinformationen der Anforderung hinzuzufügen, die an Ihre App gesendet wurde: <pre class="screen">
+Verwenden Sie die Annotation `proxy-add-headers` wie folgt, um die X-Forward-Headerinformationen der Anforderung hinzuzufügen, die an Ihre App gesendet wurde:
+<pre class="screen">
 <code>ingress.bluemix.net/proxy-add-headers: |
   serviceName=&lt;mein_service1&gt; {
   Host $host;
@@ -2401,7 +2400,7 @@ Verwenden Sie die Annotation `proxy-add-headers` wie folgt, um die X-Forward-Hea
   }</code></pre>
 </li></ul>
 </br>
-<p class="tip">Die Annotation <code>response-add-headers</code> unterstützt keine globalen Header für alle Services. Um einen Header für alle Serviceantworten auf Serverebene hinzuzufügen, können Sie die [Annotation <code>server-snippets</code>](#server-snippets) verwenden. </p>
+<p class="tip">Die Annotation <code>response-add-headers</code> unterstützt keine globalen Header für alle Services. Um einen Header für alle Serviceantworten auf Serverebene hinzuzufügen, können Sie die [Annotation <code>server-snippets</code>](#server-snippets) verwenden.</p>
 </dd>
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
@@ -2548,7 +2547,7 @@ Die maximale Größe des Hauptteils anpassen, den der Client als Teil der Anford
 </br></br>
 Wenn Sie Clientanforderungen mit einer Hauptteilgröße über 1 Megabyte erwarten, können Sie die maximale Größe des Hauptteils erhöhen. Beispiel: Sie möchten, dass Ihr Client große Dateien hochladen kann. Das Erhöhen der maximalen Größe des Anforderungshauptteils kann sich negativ auf die Leistung Ihrer Lastausgleichsfunktion für Anwendungen (ALB) auswirken, weil die Verbindung mit dem Client geöffnet bleiben muss, bis die Anforderung empfangen wird.
 </br></br>
-<p class="note">Einige Client-Web-Browser können die HTTP-Antwortnachricht 413 nicht ordnungsgemäß anzeigen. </p></dd>
+<p class="note">Einige Client-Web-Browser können die HTTP-Antwortnachricht 413 nicht ordnungsgemäß anzeigen.</p></dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
 
@@ -2581,7 +2580,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;größe&gt;</code></td>
- <td>Die maximal zulässige Größe des Hauptteils der Clientantwort. Um die maximale Größe beispielsweise auf 200 Megabyte festzulegen, definieren Sie <code>200m</code>. Sie können die Größe auf '0' festlegen, um die Prüfung der Größe des Clientanforderungshauptteils zu inaktivieren. </td>
+ <td>Die maximal zulässige Größe des Hauptteils der Clientantwort. Um die maximale Größe beispielsweise auf 200 Megabyte festzulegen, definieren Sie <code>200m</code>. Sie können die Größe auf '0' festlegen, um die Prüfung der Größe des Clientanforderungshauptteils zu inaktivieren.</td>
  </tr>
  </tbody></table>
 
@@ -2636,7 +2635,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;größe&gt;</code></td>
- <td>Die maximale Größe der Puffer, die große Clientanforderungsheader lesen. Um beispielsweise 16 Kilobyte zu verwenden, definieren Sie <code>16k</code>. Die Größe muss mit einem <code>k</code> für Kilobyte oder <code>m</code> für Megabyte enden. </td>
+ <td>Die maximale Größe der Puffer, die große Clientanforderungsheader lesen. Um beispielsweise 16 Kilobyte zu verwenden, definieren Sie <code>16k</code>. Die Größe muss mit einem <code>k</code> für Kilobyte oder <code>m</code> für Megabyte enden.</td>
  </tr>
 </tbody></table>
 </dd>
@@ -2648,7 +2647,7 @@ spec:
 ## Annotationen für Servicegrenzwerte
 {: #service-limit}
 
-Mit Annotationen für Servicegrenzwerte können Sie die Standardverarbeitungsrate von Anforderungen und die Anzahl von Verbindungen ändern, die von einer einzelnen IP-Adresse stammen.
+Mit Annotationen für Servicegrenzwerte können Sie die Standardverarbeitungsrate von Anforderungen und die Anzahl von Verbindungen ändern, die von einer einzelnen IP-Adresse stammen. 
 {: shortdesc}
 
 ### Grenzwerte für globale Rate (global-rate-limit)

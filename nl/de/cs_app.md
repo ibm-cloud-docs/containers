@@ -43,7 +43,8 @@ Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, inde
 ## Ausführen von Apps in Clustern planen
 {: #plan_apps}
 
-Bevor Sie eine App in einem {{site.data.keyword.containerlong_notm}}-Cluster bereitstellen, müssen Sie entscheiden, wie Sie Ihre App konfigurieren möchten, damit sie ordnungsgemäß aufgerufen und in andere Services in {{site.data.keyword.Bluemix_notm}} integriert werden kann. {:shortdesc}
+Bevor Sie eine App in einem {{site.data.keyword.containerlong_notm}}-Cluster bereitstellen, müssen Sie entscheiden, wie Sie Ihre App konfigurieren möchten, damit sie ordnungsgemäß aufgerufen und in andere Services in {{site.data.keyword.Bluemix_notm}} integriert werden kann.
+{:shortdesc}
 
 ### Welche Art von Kubernetes-Objekten kann ich für meine App erstellen?
 {: #object}
@@ -140,7 +141,7 @@ Informationen zum Verwalten von Aktualisierungen für eine App finden Sie unter 
 Konto- und Clusteradministratoren können den Zugriff auf vielen unterschiedlichen Ebenen steuern: Cluster, Kubernetes-Namensbereich, Pod und Container.
 {: shortdesc}
 
-Mit {{site.data.keyword.Bluemix_notm}} IAM können Sie Berechtigungen zu einzelnen Benutzern, Gruppen oder Servicekonten auf der Clusterinstanzebene zuordnen. Sie können einen Bereich für den Clusterzugriff noch weiter definieren, indem Sie Benutzer auf bestimmte Namensbereiche im Cluster beschränken. Weitere Informationen finden Sie in [Clusterzugriff zuweisen](cs_users.html#users).
+Mit {{site.data.keyword.Bluemix_notm}} IAM können Sie Berechtigungen zu einzelnen Benutzern, Gruppen oder Servicekonten auf der Clusterinstanzebene zuordnen.  Sie können einen Bereich für den Clusterzugriff noch weiter definieren, indem Sie Benutzer auf bestimmte Namensbereiche im Cluster beschränken. Weitere Informationen finden Sie in [Clusterzugriff zuweisen](cs_users.html#users).
 
 Wenn Sie den Zugriff auf Podebene steuern möchten, können Sie [Podsicherheitsrichtlinien mit Kubernetes-RBAC konfigurieren](cs_psp.html#psp).
 
@@ -168,7 +169,7 @@ Sie können auch [mehrere Cluster in verschiedenen Regionen mit einer globalen L
 ### Verfügbarkeit Ihrer App erhöhen
 {: #increase_availability}
 
-Ziehen Sie die folgenden Optionen zum Verbessern der Verfügbarkeit Ihrer App in Betracht.
+Ziehen Sie die folgenden Optionen zum Verbessern der Verfügbarkeit Ihrer App in Betracht. 
 {: shortdesc}
 
 <dl>
@@ -607,7 +608,8 @@ spec:
 Öffnen Sie auf Ihrem lokalen System ein Kubernetes-Dashboard, um Informationen zu einem Cluster und seinen Workerknoten anzuzeigen. [In der {{site.data.keyword.Bluemix_notm}}-Konsole](#db_gui) können Sie über eine praktische Schaltfläche mit einem Mausklick auf das Dashboard zugreifen. [Bei der CLI](#db_cli) können Sie auf das Dashboard zugreifen oder die Schritte in einem Automatisierungsprozess wie für eine CI/CD-Pipeline verwenden.
 {:shortdesc}
 
-Sind in Ihrem Cluster so viele Ressourcen und Benutzer enthalten, dass das Kubernetes-Dashboard etwas langsam reagiert? Für Cluster, auf denen Kubernetes Version 1.12 oder höher ausgeführt wird, kann Ihr Clusteradministrator die Bereitstellung von `kubernetes-dashboard` skalieren, indem er `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` ausführt. {: tip}
+Sind in Ihrem Cluster so viele Ressourcen und Benutzer enthalten, dass das Kubernetes-Dashboard etwas langsam reagiert? Für Cluster, auf denen Kubernetes Version 1.12 oder höher ausgeführt wird, kann Ihr Clusteradministrator die Bereitstellung von `kubernetes-dashboard` skalieren, indem er `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` ausführt.
+{: tip}
 
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 * [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
@@ -617,9 +619,9 @@ Sie können den Standardport verwenden oder einen eigenen Port festlegen, um das
 **Kubernetes-Dashboard über die {{site.data.keyword.Bluemix_notm}}-Konsole starten**
 {: #db_gui}
 
-1.  Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://console.bluemix.net/) an. 
-2.  Klicken Sie in der Menüleiste auf Ihren Benutzeravatar ![Avatarsymbol](../icons/i-avatar-icon.svg "Avatarsymbol") und wählen Sie das Konto aus, das Sie verwenden möchten. 
-3.  Klicken Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") auf **Kubernetes**. 
+1.  Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://console.bluemix.net/) an.
+2.  Klicken Sie in der Menüleiste auf Ihren Benutzeravatar ![Avatarsymbol](../icons/i-avatar-icon.svg "Avatarsymbol") und wählen Sie das Konto aus, das Sie verwenden möchten.
+3.  Klicken Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") auf **Kubernetes**.
 4.  Klicken Sie auf der Seite **Cluster** auf den Cluster, auf den Sie zugreifen möchten.
 5.  Klicken Sie auf der Seite mit den Clusterdetails auf die Schaltfläche **Kubernetes-Dashboard**.
 
@@ -678,7 +680,8 @@ Wenn Sie die Arbeit im Kubernetes-Dashboard beendet haben, beenden Sie den Befeh
 Wenn Sie eine App über das Kubernetes-Dashboard in Ihrem Cluster bereitstellen, wird eine Bereitstellungsressource automatisch die Pods in Ihrem Cluster erstellen, aktualisieren und verwalten. Weitere Informationen zur Verwendung des Dashboards finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/).
 {:shortdesc}
 
-Sind in Ihrem Cluster so viele Ressourcen und Benutzer enthalten, dass das Kubernetes-Dashboard etwas langsam reagiert? Für Cluster, auf denen Kubernetes Version 1.12 oder höher ausgeführt wird, kann Ihr Clusteradministrator die Bereitstellung von `kubernetes-dashboard` skalieren, indem er `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` ausführt. {: tip}
+Sind in Ihrem Cluster so viele Ressourcen und Benutzer enthalten, dass das Kubernetes-Dashboard etwas langsam reagiert? Für Cluster, auf denen Kubernetes Version 1.12 oder höher ausgeführt wird, kann Ihr Clusteradministrator die Bereitstellung von `kubernetes-dashboard` skalieren, indem er `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` ausführt.
+{: tip}
 
 Vorbemerkungen:
 
@@ -847,7 +850,7 @@ Gehen Sie wie folgt vor, um eine Workload auf einer GPU-Maschine auszuführen:
 1.  Erstellen Sie eine YAML-Datei. In diesem Beispiel verwaltet eine YAML-Datei des Typs `Job` Stapelworkloads, die einen Pod mit kurzer Lebensdauer hervorbringen, der so lange ausgeführt wird, bis der Befehl, der ihn erfolgreich abschließen soll, beendet wird.
 
     Bei GPU-Workloads müssen Sie immer einen Wert für das Feld `resources: limits: nvidia.com/gpu` in der YAML-Spezifikation bereitstellen.
-{: note}
+    {: note}
 
     ```yaml
     apiVersion: batch/v1

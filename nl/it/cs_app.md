@@ -169,7 +169,7 @@ Puoi anche [collegare più cluster in regioni diverse con un programma di bilanc
 ### Aumento della disponibilità della tua applicazione
 {: #increase_availability}
 
-Considera le seguenti opzioni per aumentare la disponibilità della tua applicazione.
+Considera le seguenti opzioni per aumentare la disponibilità della tua applicazione. 
 {: shortdesc}
 
 <dl>

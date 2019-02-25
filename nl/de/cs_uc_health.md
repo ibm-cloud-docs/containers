@@ -97,7 +97,7 @@ Die Apps können mit definierten Regeln und dem automatisierten Kubernetes-Orche
 
 {{site.data.keyword.cloudant}} ist eine moderne NoSQL-Datenbank, die für eine Reihe datengesteuerter Anwendungsfälle genutzt werden kann: von Schlüsselwerten bis zu komplexen dokumentorientierten Datenspeichern und Abfragen. Zum Minimieren der Abfragen des Back-Office-RDBMS wird {{site.data.keyword.cloudant}} verwendet, um die Sitzungsdaten des Benutzers in den Apps zwischenzuspeichern. Diese Auswahlmöglichkeiten verbessern die durchgehende Benutzerfreundlichkeit und Leistung in allen Apps für {{site.data.keyword.containerlong_notm}}.
 
-Das Verschieben der Rechenworkloads in {{site.data.keyword.cloud_notm}} reicht nicht aus. Der Anbieter muss auch eine Umwandlung der Prozesse und Methoden durchführen. Bei Übernahme der Verfahren von IBM Garage Method kann der Anbieter einen agilen und iterativen Bereitstellungsprozess implementieren, von dem moderne DevOps-Verfahren wie Continuous Integration and Delivery (CI/CD) unterstützt werden. 
+Das Verschieben der Rechenworkloads in {{site.data.keyword.cloud_notm}} reicht nicht aus. Der Anbieter muss auch eine Umwandlung der Prozesse und Methoden durchführen. Bei Übernahme der Verfahren von IBM Garage Method kann der Anbieter einen agilen und iterativen Bereitstellungsprozess implementieren, von dem moderne DevOps-Verfahren wie Continuous Integration and Delivery (CI/CD) unterstützt werden.
 
 Ein großer Teil des CI/CD-Prozesses wird in der Cloud unter Verwendung des IBM Service 'Continuous Delivery' automatisiert. Der Anbieter kann die Workflow-Toolchains zum Vorbereiten der Container-Images definieren, eine Überprüfung auf Schwachstellen durchführen und eine Bereitstellung im Kubernetes-Cluster ausführen.
 

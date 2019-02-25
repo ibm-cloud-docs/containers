@@ -179,7 +179,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 2. Suivez les [instructions](cs_integrations.html#helm) pour installer le client Helm sur votre machine locale, installer le serveur Helm (Tiller) sur votre cluster et ajouter le référentiel de charte Helm {{site.data.keyword.Bluemix_notm}} dans le cluster où vous souhaitez utiliser le plug-in {{site.data.keyword.cos_full_notm}}.
 
     Si vous utilisez Helm version 2.9 ou supérieure, assurez-vous d'avoir installé Tiller avec un [compte de service](cs_integrations.html#helm).
-   {: important}
+    {: important}
 
 3. Ajoutez le référentiel Helm {{site.data.keyword.Bluemix_notm}} dans votre cluster :
    ```

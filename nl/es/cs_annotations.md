@@ -2228,7 +2228,7 @@ spec:
         backend:
           serviceName: myservice
           servicePort: 8080
- </code></pre>
+</code></pre>
 
 <table>
 <caption>Componentes de anotación</caption>

@@ -52,9 +52,9 @@ Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containe
 Sie können Ihre Ressourcen übergreifend für die {{site.data.keyword.Bluemix_notm}}-Services organisieren, indem Sie die {{site.data.keyword.Bluemix_notm}}-Standorte, auch Regionen genannt, verwenden. Sie können beispielsweise einen Kubernetes-Cluster mithilfe eines privaten Docker-Images erstellen, das in Ihrem {{site.data.keyword.registryshort_notm}} an demselben Standort gespeichert ist.
 {:shortdesc}
 
-Um zu überprüfen, an welchem {{site.data.keyword.Bluemix_notm}}-Standort Sie sich momentan befinden, müssen Sie den Befehl `ibmcloud info` ausführen und dann den Wert im Feld **Region** überprüfen. 
+Um zu überprüfen, an welchem {{site.data.keyword.Bluemix_notm}}-Standort Sie sich momentan befinden, müssen Sie den Befehl `ibmcloud info` ausführen und dann den Wert im Feld **Region** überprüfen.
 
-Auf {{site.data.keyword.Bluemix_notm}}-Standorte kann zugegriffen werden, indem bei der Anmeldung der API-Endpunkt der Region angegeben wird. Wenn Sie keinen Regionsendpunkt angeben, werden Sie automatisch bei der nächstgelegenen Region angemeldet. 
+Auf {{site.data.keyword.Bluemix_notm}}-Standorte kann zugegriffen werden, indem bei der Anmeldung der API-Endpunkt der Region angegeben wird. Wenn Sie keinen Regionsendpunkt angeben, werden Sie automatisch bei der nächstgelegenen Region angemeldet.
 
 Beispielsweise können Sie die folgenden Befehle für die Anmeldung bei den API-Endpunkten der {{site.data.keyword.Bluemix_notm}}-Region verwenden:
 
@@ -152,8 +152,8 @@ Die Dokumentation zu den API-Befehlen finden Sie unter [https://containers.bluem
 Zonen sind physische Rechenzentren, die in einer {{site.data.keyword.Bluemix_notm}}-Region verfügbar sind. Regionen sind ein konzeptionelles Hilfsmittel, um Zonen zu organisieren. Sie können Zonen (Rechenzentren) in verschiedenen Ländern umfassen. Die folgende Tabelle zeigt die pro Region verfügbaren Zonen.
 {:shortdesc}
 
-* **Metropole mit mehreren Zonen**: Workerknoten in Clustern, die in einer Metropole mit mehreren Zonen erstellt werden, können auf mehrere Zonen verteilt werden. Darüber hinaus erstrecken sich die hochverfügbaren Master über mehrere Zonen, wenn Sie ein Cluster mit der Kubernetes-Version 1.0 oder höher in einer Metropole mit mehreren Zonen erstellen. 
-* **Stadt mit einer einzelnen Zone**: Workerknoten in Clustern, die in einer Einzelzonenstadt erstellt werden, bleiben in einer Zone. Workerknoten können nicht über mehrere Zonen verteilt werden. Der hoch verfügbare Master enthält drei Replikate auf separaten Hosts, erstreckt sich jedoch nicht über mehrere Zonen. 
+* **Metropole mit mehreren Zonen**: Workerknoten in Clustern, die in einer Metropole mit mehreren Zonen erstellt werden, können auf mehrere Zonen verteilt werden. Darüber hinaus erstrecken sich die hochverfügbaren Master über mehrere Zonen, wenn Sie ein Cluster mit der Kubernetes-Version 1.0 oder höher in einer Metropole mit mehreren Zonen erstellen.
+* **Stadt mit einer einzelnen Zone**: Workerknoten in Clustern, die in einer Einzelzonenstadt erstellt werden, bleiben in einer Zone. Workerknoten können nicht über mehrere Zonen verteilt werden. Der hoch verfügbare Master enthält drei Replikate auf separaten Hosts, erstreckt sich jedoch nicht über mehrere Zonen.
 
 <table summary="Die Tabelle zeigt die nach Regionen verfügbaren Zonen. Die Tabellenzeilen enthalten von links nach rechts die Region in der ersten Spalte, die Metropolen mit mehreren Zonen in der zweiten Spalte und die Einzelzonenstädte in der dritten Spalte.">
 <caption>Verfügbare Städte mit einer und mehreren Zonen nach Region.</caption>
@@ -188,7 +188,7 @@ Zonen sind physische Rechenzentren, die in einer {{site.data.keyword.Bluemix_not
     </tr>
     <tr>
       <td>Vereinigtes Königreich (Süden)</td>
-      <td>London: lon04, lon05, lon06 **Hinweis:** lon02 wird durch lon05 ersetzt. Neue Cluster müssen lon05 verwenden, und nur lon05 unterstützt hoch verfügbare Master, die sich über mehrere Zonen erstrecken. </td>
+      <td>London: lon04, lon05, lon06 **Hinweis:** lon02 wird durch lon05 ersetzt. Neue Cluster müssen lon05 verwenden, und nur lon05 unterstützt hoch verfügbare Master, die sich über mehrere Zonen erstrecken.</td>
       <td></td>
     </tr>
     <tr>

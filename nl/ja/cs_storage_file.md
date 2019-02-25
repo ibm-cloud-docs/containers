@@ -242,7 +242,7 @@ lastupdated: "2018-12-05"
        </tr>
        <tr>
        <td><code>metadata.annotations.</code></br><code>volume.beta.kubernetes.io/</code></br><code>storage-class</code></td>
-       <td>ファイル・ストレージをプロビジョンするために使用するストレージ・クラスの名前。 </br> ストレージ・クラスを指定しなかった場合は、デフォルトのストレージ・クラス <code>ibmc-file-bronze</code> を使用して PV が作成されます。</br></br><strong>ヒント:</strong> デフォルトのストレージ・クラスを変更する場合は、<code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> を実行して、<code>&lt;storageclass&gt;</code> をストレージ・クラスの名前に置き換えます。</td>
+       <td>ファイル・ストレージをプロビジョンするために使用するストレージ・クラスの名前。 </br> ストレージ・クラスを指定しなかった場合は、デフォルトのストレージ・クラス <code>ibmc-file-bronze</code> を使用して PV が作成されます。 </br></br><strong>ヒント:</strong> デフォルトのストレージ・クラスを変更する場合は、<code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> を実行して、<code>&lt;storageclass&gt;</code> をストレージ・クラスの名前に置き換えます。</td>
        </tr>
        <tr>
          <td><code>metadata.labels.billingType</code></td>
@@ -250,11 +250,12 @@ lastupdated: "2018-12-05"
        </tr>
        <tr>
        <td><code>metadata.labels.region</code></td>
-       <td>オプション: ファイル・ストレージをプロビジョンする地域を指定します。 ストレージに接続するには、クラスターが存在する地域と同じ地域にストレージを作成します。地域を指定する場合は、ゾーンも指定する必要があります。 地域を指定しなかった場合、または指定した地域が見つからなかった場合、ストレージはクラスターと同じ地域に作成されます。 </br></br><strong>ヒント: </strong>PVC に地域とゾーンを指定するのではなく、[カスタマイズ型ストレージ・クラス](#multizone_yaml)にそれらの値を指定することもできます。そして、PVC の <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> セクションでそのストレージ・クラスを使用します。 地域とゾーンがストレージ・クラスにも PVC にも指定されている場合は、PVC の値が優先されます。</td>
+       <td>オプション: ファイル・ストレージをプロビジョンする地域を指定します。 ストレージに接続するには、クラスターが存在する地域と同じ地域にストレージを作成します。 地域を指定する場合は、ゾーンも指定する必要があります。 地域を指定しなかった場合、または指定した地域が見つからなかった場合、ストレージはクラスターと同じ地域に作成されます。 </br></br><strong>ヒント: </strong>PVC に地域とゾーンを指定するのではなく、[カスタマイズ型ストレージ・クラス](#multizone_yaml)にそれらの値を指定することもできます。 そして、PVC の <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> セクションでそのストレージ・クラスを使用します。 地域とゾーンがストレージ・クラスにも PVC にも指定されている場合は、PVC の値が優先されます。 </td>
        </tr>
        <tr>
        <td><code>metadata.labels.zone</code></td>
-       <td>オプション: ファイル・ストレージをプロビジョンするゾーンを指定します。 アプリでストレージを使用するには、ワーカー・ノードが存在するゾーンと同じゾーンにストレージを作成します。 ワーカー・ノードのゾーンを表示するには、<code>ibmcloud ks workers --cluster &lt;cluster_name_or_ID&gt;</code> を実行し、CLI 出力の <strong>Zone</strong> 列を確認します。 ゾーンを指定する場合は、地域も指定する必要があります。 ゾーンを指定しなかった場合、または指定したゾーンが複数ゾーン・クラスターで見つからなかった場合、ゾーンはラウンドロビン・ベースで選択されます。 </br></br><strong>ヒント: </strong>PVC に地域とゾーンを指定するのではなく、[カスタマイズ型ストレージ・クラス](#multizone_yaml)にそれらの値を指定することもできます。そして、PVC の <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> セクションでそのストレージ・クラスを使用します。地域とゾーンがストレージ・クラスにも PVC にも指定されている場合は、PVC の値が優先されます。</td>
+       <td>オプション: ファイル・ストレージをプロビジョンするゾーンを指定します。 アプリでストレージを使用するには、ワーカー・ノードが存在するゾーンと同じゾーンにストレージを作成します。 ワーカー・ノードのゾーンを表示するには、<code>ibmcloud ks workers --cluster &lt;cluster_name_or_ID&gt;</code> を実行し、CLI 出力の <strong>Zone</strong> 列を確認します。 ゾーンを指定する場合は、地域も指定する必要があります。 ゾーンを指定しなかった場合、または指定したゾーンが複数ゾーン・クラスターで見つからなかった場合、ゾーンはラウンドロビン・ベースで選択されます。 </br></br><strong>ヒント: </strong>PVC に地域とゾーンを指定するのではなく、[カスタマイズ型ストレージ・クラス](#multizone_yaml)にそれらの値を指定することもできます。 そして、PVC の <code>metadata.annotations.volume.beta.kubernetes.io/storage-class</code> セクションでそのストレージ・クラスを使用します。 地域とゾーンがストレージ・クラスにも PVC にも指定されている場合は、PVC の値が優先されます。
+</td>
        </tr>
        <tr>
        <td><code>spec.accessMode</code></td>
@@ -863,10 +864,10 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ## 既存のストレージ・デバイスのサイズと IOPS の変更
 {: #change_storage_configuration}
 
-ストレージ容量またはパフォーマンスを向上させるために既存のボリュームを変更することができます。
+ストレージ容量またはパフォーマンスを向上させるために既存のボリュームを変更することができます。 
 {: shortdesc}
 
-課金方法について不明な点がある場合や、{{site.data.keyword.Bluemix_notm}} コンソールを使用してストレージを変更する手順を調べたい場合は、[ファイル共有容量の拡張](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity)を参照してください。
+課金方法について不明な点がある場合や、{{site.data.keyword.Bluemix_notm}} コンソールを使用してストレージを変更する手順を調べたい場合は、[ファイル共有容量の拡張](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity)を参照してください。 
 {: tip}
 
 1. クラスターの PVC をリストし、**VOLUME** 列に表示される関連 PV の名前をメモします。 
@@ -882,7 +883,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
    ```
    {: screen}
    
-2. PVC がバインドされている PV の詳細をリストして、PVC に関連付けられている物理ファイル・ストレージの **StorageType**、**volumeId**、および **server** を取得します。`<pv_name>` を前のステップで取得した PV の名前に置き換えてください。ストレージ・タイプ、ボリューム ID、およびサーバー名は、CLI 出力の **Labels** セクションに表示されます。 
+2. PVC がバインドされている PV の詳細をリストして、PVC に関連付けられている物理ファイル・ストレージの **StorageType**、**volumeId**、および **server** を取得します。 `<pv_name>` を前のステップで取得した PV の名前に置き換えてください。 ストレージ・タイプ、ボリューム ID、およびサーバー名は、CLI 出力の **Labels** セクションに表示されます。 
    ```
    kubectl describe pv <pv_name>
    ```
@@ -932,15 +933,15 @@ PV が正常に作成され、PVC にバインドされました。 これで、
    </tr>
    <tr>
    <td><code>&lt;new-size&gt;</code></td>
-   <td>ボリュームの新しいサイズをギガバイト (Gi) 単位で入力します。 有効なサイズについては、[ファイル・ストレージ構成の決定](#predefined_storageclass)を参照してください。 入力するサイズは、ボリュームの現行サイズ以上でなければなりません。 新しいサイズを指定しない場合、ボリュームの現行サイズが使用されます。</td>
+   <td>ボリュームの新しいサイズをギガバイト (Gi) 単位で入力します。 有効なサイズについては、[ファイル・ストレージ構成の決定](#predefined_storageclass)を参照してください。 入力するサイズは、ボリュームの現行サイズ以上でなければなりません。 新しいサイズを指定しない場合、ボリュームの現行サイズが使用されます。 </td>
    </tr>
    <tr>
    <td><code>&lt;new-iops&gt;</code></td>
-   <td>パフォーマンス・ストレージのみ。 必要な新しい IOPS 数を入力します。 有効な IOPS については、[ファイル・ストレージ構成の決定](#predefined_storageclass)を参照してください。 IOPS を指定しない場合は、現在の IOPS が使用されます。<p class="note">ボリュームの元の IOPS/GB 率が 0.3 未満の場合、新しい IOPS/GB 率も 0.3 未満にする必要があります。 ボリュームの元の IOPS/GB 率が 0.3 以上の場合、ボリュームの新しい IOPS/GB 率も 0.3 以上にする必要があります。</p> </td>
+   <td>パフォーマンス・ストレージのみ。 必要な新しい IOPS 数を入力します。 有効な IOPS については、[ファイル・ストレージ構成の決定](#predefined_storageclass)を参照してください。 IOPS を指定しない場合は、現在の IOPS が使用されます。 <p class="note">ボリュームの元の IOPS/GB 率が 0.3 未満の場合、新しい IOPS/GB 率も 0.3 未満にする必要があります。 ボリュームの元の IOPS/GB 率が 0.3 以上の場合、ボリュームの新しい IOPS/GB 率も 0.3 以上にする必要があります。</p> </td>
    </tr>
    <tr>
    <td><code>&lt;new-tier&gt;</code></td>
-   <td>エンデュランス・ストレージのみ。 必要な新しい IOPS 数/GB を入力します。 有効な IOPS については、[ファイル・ストレージ構成の決定](#predefined_storageclass)を参照してください。 IOPS を指定しない場合は、現在の IOPS が使用されます。<p class="note">ボリュームの元の IOPS/GB 率が 0.25 未満の場合、新しい IOPS/GB 率も 0.25 未満にする必要があります。 ボリュームの元の IOPS/GB 率が 0.25 以上の場合、ボリュームの新しい IOPS/GB 率も 0.25 以上にする必要があります。</p> </td>
+   <td>エンデュランス・ストレージのみ。 必要な新しい IOPS 数/GB を入力します。 有効な IOPS については、[ファイル・ストレージ構成の決定](#predefined_storageclass)を参照してください。 IOPS を指定しない場合は、現在の IOPS が使用されます。 <p class="note">ボリュームの元の IOPS/GB 率が 0.25 未満の場合、新しい IOPS/GB 率も 0.25 未満にする必要があります。 ボリュームの元の IOPS/GB 率が 0.25 以上の場合、ボリュームの新しい IOPS/GB 率も 0.25 以上にする必要があります。</p> </td>
    </tr>
    </tbody>
    </table>
@@ -967,14 +968,14 @@ PV が正常に作成され、PVC にバインドされました。 これで、
       ```
       {: pre}
       
-      ポッドは、`<pod_name>: <pvc_name>` の形式で返されます。
+      ポッドは、`<pod_name>: <pvc_name>` の形式で返されます。 
    2. ポッドにログインします。 
       ```
       kubectl exec -it <pod_name> bash
       ```
       {: pre}
       
-   3. ディスク使用量の統計を表示し、前に取得したボリュームのサーバー・パスを見つけます。
+   3. ディスク使用量の統計を表示し、前に取得したボリュームのサーバー・パスを見つけます。 
       ```
       df -h
       ```

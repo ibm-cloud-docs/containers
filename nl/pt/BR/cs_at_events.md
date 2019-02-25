@@ -40,7 +40,7 @@ Para obter mais informações sobre como o serviço funciona, veja a [documenta�
 ## Localizando informações para eventos
 {: #kube-find}
 
-É possível monitorar as atividades em seu cluster examinando os logs no painel do Kibana.
+É possível monitorar as atividades em seu cluster examinando os logs no painel do Kibana. 
 {: shortdesc}
 
 Para monitorar a atividade administrativa:

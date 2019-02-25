@@ -40,7 +40,7 @@ Pour plus d'informations sur le fonctionnement de ce service, voir la [documenta
 ## Recherche d'informations pour les événements
 {: #kube-find}
 
-Vous pouvez surveiller les activités de votre cluster en examinant les journaux dans le tableau de bord Kibana.
+Vous pouvez surveiller les activités de votre cluster en examinant les journaux dans le tableau de bord Kibana. 
 {: shortdesc}
 
 Pour surveiller les activités d'administration :
@@ -80,9 +80,9 @@ Consultez la liste suivante d'événements de gestion de cluster envoyés à {{s
 <td><code>containers-kubernetes.apikey.reset</code></td>
 <td>Une clé d'API est réinitialisée pour une région et un groupe de ressources.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.create</code></td>
-<td>Un cluster est créé. </td></tr><tr>
+<td>Un cluster est créé.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.delete</code></td>
-<td>Un cluster est supprimé. </td></tr><tr>
+<td>Un cluster est supprimé.</td></tr><tr>
 <td><code>containers-kubernetes.cluster-feature.enable</code></td>
 <td>Une fonction, telle que le calcul sécurisé pour les noeuds worker bare metal, est activée sur un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.get</code></td>
@@ -118,7 +118,7 @@ Consultez la liste suivante d'événements de gestion de cluster envoyés à {{s
 <td><code>containers-kubernetes.subnet.add</code></td>
 <td>Un sous-réseau existant de l'infrastructure IBM Cloud (SoftLayer) est ajouté dans un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.create</code></td>
-<td>Un sous-réseau est créé. </td></tr><tr>
+<td>Un sous-réseau est créé.</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.add</code></td>
 <td>Un sous-réseau géré par l'utilisateur est ajouté dans un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.delete</code></td>
@@ -674,11 +674,11 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
   </tr>
   <tr>
     <td><code>services.create</code></td>
-    <td>Un service est créé. </td>
+    <td>Un service est créé.</td>
   </tr>
   <tr>
     <td><code>services.deleted</code></td>
-    <td>Un service est supprimé. </td>
+    <td>Un service est supprimé.</td>
   </tr>
   <tr>
     <td><code>services.patch</code></td>

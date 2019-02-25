@@ -824,7 +824,7 @@ Agora que você criou e ligou uma função RBAC ou uma função de cluster custo
 ## Designando permissões de RBAC
 {: #role-binding}
 
-Use funções RBAC para definir as ações que um usuário pode executar para trabalhar com os recursos do Kubernetes em seu cluster.
+Use funções RBAC para definir as ações que um usuário pode executar para trabalhar com os recursos do Kubernetes em seu cluster. 
 {: shortdesc}
 
 **O que são funções RBAC e funções de cluster?**</br>
@@ -1296,7 +1296,7 @@ Antes de iniciar, [assegure-se de que as credenciais de infraestrutura do usuár
 #### Remover permissões RBAC customizadas
 {: #remove_custom_rbac}
 
-Se você não precisar mais de permissões RBAC customizadas, será possível removê-las.
+Se você não precisar mais de permissões RBAC customizadas, será possível removê-las. 
 {: shortdesc}
 
 1. Abra o arquivo `.yaml` para a ligação de função ou ligação de função de cluster que você criou.

@@ -39,7 +39,7 @@ Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containerl
 **Gibt es Richtlinien, die standardmäßig festgelegt werden? Was kann ich hinzufügen?**</br>
 Standardmäßig konfiguriert {{site.data.keyword.containerlong_notm}} den Zugangscontroller `PodSecurityPolicy` mit [Ressourcen für die {{site.data.keyword.IBM_notm}} Clusterverwaltung](#ibm_psp), den Sie nicht löschen oder ändern können. Sie können den Zugangscontroller auch nicht inaktivieren.
 
-Pod-Aktionen sind standardmäßig nicht gesperrt. Stattdessen autorisieren zwei rollenbasierte Zugriffssteuerungsressourcen (RBAC, Role-Based Access Control) im Cluster alle Administratoren, Benutzer, Services und Knoten, um privilegierte und nicht privilegierte Pods zu erstellen. Zusätzliche RBAC-Ressourcen sind für die Portierbarkeit mit privaten {{site.data.keyword.Bluemix_notm}}-Paketen eingeschlossen, die für [Hybridbereitstellungen](cs_hybrid.html#hybrid_iks_icp) verwendet werden. 
+Pod-Aktionen sind standardmäßig nicht gesperrt. Stattdessen autorisieren zwei rollenbasierte Zugriffssteuerungsressourcen (RBAC, Role-Based Access Control) im Cluster alle Administratoren, Benutzer, Services und Knoten, um privilegierte und nicht privilegierte Pods zu erstellen. Zusätzliche RBAC-Ressourcen sind für die Portierbarkeit mit privaten {{site.data.keyword.Bluemix_notm}}-Paketen eingeschlossen, die für [Hybridbereitstellungen](cs_hybrid.html#hybrid_iks_icp) verwendet werden.
 
 Wenn Sie bestimmte Benutzer daran hindern möchten, Pods zu erstellen oder zu aktualisieren, können Sie [diese RBAC-Ressourcen ändern oder eigene Ressourcen erstellen](#customize_psp).
 
@@ -192,7 +192,7 @@ Ihr Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} enthält die 
 Pod-Sicherheitsrichtlinien und zugehörigen RBAC-Ressourcen, damit {{site.data.keyword.IBM_notm}} Ihren Cluster ordnungsgemäß verwalten kann.
 {: shortdesc}
 
-Die `PodSecurityPolicy`-Standardressourcen beziehen sich auf die von {{site.data.keyword.IBM_notm}} festgelegten Pod-Sicherheitsrichtlinien. 
+Die `PodSecurityPolicy`-Standardressourcen beziehen sich auf die von {{site.data.keyword.IBM_notm}} festgelegten Pod-Sicherheitsrichtlinien.
 
 **Achtung**: Sie dürfen diese Ressourcen nicht löschen oder ändern.
 

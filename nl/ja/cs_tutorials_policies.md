@@ -44,7 +44,7 @@ lastupdated: "2018-12-05"
 
 ## 前提条件
 
-- [バージョン 1.10 以降のクラスターを作成する](cs_clusters.html#clusters_ui)か、または[既存のクラスターをバージョン 1.10 に更新します](cs_versions.html#cs_v110)。このチュートリアルでは、Kubernetes バージョン 1.10 以降のクラスターで、3.3.1 Calico CLI および Calico v3 ポリシー構文を使用する必要があります。
+- [バージョン 1.10 以降のクラスターを作成する](cs_clusters.html#clusters_ui)か、または[既存のクラスターをバージョン 1.10 に更新します](cs_versions.html#cs_v110)。 このチュートリアルでは、Kubernetes バージョン 1.10 以降のクラスターで、3.3.1 Calico CLI および Calico v3 ポリシー構文を使用する必要があります。
 - [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
 - [Calico CLI をインストールして構成します](cs_network_policy.html#1.10_install)。
 - {{site.data.keyword.containerlong_notm}}に対する以下の {{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシーがあることを確認します。

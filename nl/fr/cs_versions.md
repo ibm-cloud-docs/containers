@@ -111,7 +111,7 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 ### Mise à jour avant le maître
 {: #112_before}
 
-Le tableau suivant présente les actions que vous devez effectuer avant de mettre à jour le maître Kubernetes.
+Le tableau suivant présente les actions que vous devez effectuer avant de mettre à jour le maître Kubernetes. 
 {: shortdesc}
 
 <table summary="Mise à jour de Kubernetes pour la version 1.12">
@@ -137,7 +137,7 @@ Le tableau suivant présente les actions que vous devez effectuer avant de mettr
 ### Mise à jour après le maître
 {: #112_after}
 
-Le tableau suivant présente les actions que vous devez effectuer après avoir mis à jour le maître Kubernetes.
+Le tableau suivant présente les actions que vous devez effectuer après avoir mis à jour le maître Kubernetes. 
 {: shortdesc}
 
 <table summary="Mise à jour de Kubernetes pour la version 1.12">
@@ -229,7 +229,7 @@ Pour pouvoir effectuer la mise à jour d'un cluster de Kubernetes version 1.9 ou
 ### Mise à jour avant le maître
 {: #111_before}
 
-Le tableau suivant présente les actions que vous devez effectuer avant de mettre à jour le maître Kubernetes.
+Le tableau suivant présente les actions que vous devez effectuer avant de mettre à jour le maître Kubernetes. 
 {: shortdesc}
 
 <table summary="Mises à jour Kubernetes pour la version 1.11">
@@ -272,7 +272,7 @@ Le tableau suivant présente les actions que vous devez effectuer avant de mettr
 ### Mise à jour après le maître
 {: #111_after}
 
-Le tableau suivant présente les actions que vous devez effectuer après avoir mis à jour le maître Kubernetes.
+Le tableau suivant présente les actions que vous devez effectuer après avoir mis à jour le maître Kubernetes. 
 {: shortdesc}
 
 <table summary="Mises à jour Kubernetes pour la version 1.11">
@@ -483,7 +483,7 @@ Exemples de fois où vous pouvez vous appuyer sur l'environnement d'exécution d
 *  Si vous accédez au moteur Docker ou directement à l'API en utilisant des conteneurs privilégiés, mettez à jour vos pods pour prendre en charge `containerd` comme environnement d'exécution. Par exemple, vous pouvez appeler le socket Docker directement pour lancer les conteneurs ou effectuer d'autres opérations Docker. Le socket Docker est passé de `/var/run/docker.sock` à `/run/containerd/containerd.sock`. Le protocole utilisé dans le socket `containerd` est légèrement différent de celui de Docker. Essayez de mettre à jour votre application pour utiliser le socket `containerd`. Pour continuer à utiliser le socket Docker, envisagez d'utiliser [Docker-inside-Docker (DinD) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://hub.docker.com/_/docker/).
 *  Certains modules complémentaires de tiers, par exemple les outils de consignation et de surveillance, que vous installez dans votre cluster peuvent reposer sur le moteur Docker. Vérifiez auprès de votre fournisseur que les outils sont bien compatibles avec containerd. Les cas d'utilisations possibles sont :
    - Votre outil de consignation peut utiliser le répertoire `stderr/stdout` du conteneur `/var/log/pods/<pod_uuid>/<container_name>/*.log` pour accéder aux journaux. Dans Docker, ce répertoire est un lien symbolique vers `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log` alors que dans `containerd` vous accédez directement au répertoire sans recourir à un lien symbolique.
-   - Votre outil de surveillance accède directement au socket Docker. Le socket Docker est passé de `/var/run/docker.sock` à `/run/containerd/containerd.sock`. 
+   - Votre outil de surveillance accède directement au socket Docker. Le socket Docker est passé de `/var/run/docker.sock` à `/run/containerd/containerd.sock`.
 
 <br>
 
@@ -557,7 +557,7 @@ Pour pouvoir effectuer la mise à jour vers Kubernetes 1.10, vous devez suivre l
 ### Mise à jour avant le maître
 {: #110_before}
 
-Le tableau suivant présente les actions que vous devez effectuer avant de mettre à jour le maître Kubernetes.
+Le tableau suivant présente les actions que vous devez effectuer avant de mettre à jour le maître Kubernetes. 
 {: shortdesc}
 
 <table summary="Mises à jour Kubernetes pour la version 1.10">
@@ -604,7 +604,7 @@ Le tableau suivant présente les actions que vous devez effectuer avant de mettr
 ### Mise à jour après le maître
 {: #110_after}
 
-Le tableau suivant présente les actions que vous devez effectuer après avoir mis à jour le maître Kubernetes.
+Le tableau suivant présente les actions que vous devez effectuer après avoir mis à jour le maître Kubernetes. 
 {: shortdesc}
 
 <table summary="Mises à jour Kubernetes pour la version 1.10">
@@ -842,7 +842,7 @@ Préparez la mise à jour vers Calico v3 avant de mettre à jour le maître. Dur
 ## Archive
 {: #k8s_version_archive}
 
-Recherchez une présentation des versions de Kubernetes qui ne sont pas prises en charge dans {{site.data.keyword.containerlong_notm}}.
+Recherchez une présentation des versions de Kubernetes qui ne sont pas prises en charge dans {{site.data.keyword.containerlong_notm}}. 
 {: shortdesc}
 
 ### Version 1.9 (dépréciée, non prise en charge depuis le 27 décembre 2018)
@@ -858,7 +858,7 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 ### Mise à jour avant le maître
 {: #19_before}
 
-Le tableau suivant présente les actions que vous devez effectuer avant de mettre à jour le maître Kubernetes.
+Le tableau suivant présente les actions que vous devez effectuer avant de mettre à jour le maître Kubernetes. 
 {: shortdesc}
 
 <table summary="Mises à jour Kubernetes pour la version 1.9">
@@ -880,7 +880,7 @@ Le tableau suivant présente les actions que vous devez effectuer avant de mettr
 ### Mise à jour après le maître
 {: #19_after}
 
-Le tableau suivant présente les actions que vous devez effectuer après avoir mis à jour le maître Kubernetes.
+Le tableau suivant présente les actions que vous devez effectuer après avoir mis à jour le maître Kubernetes. 
 {: shortdesc}
 
 <table summary="Mises à jour Kubernetes pour la version 1.9">

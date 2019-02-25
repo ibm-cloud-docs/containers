@@ -57,7 +57,7 @@ In der folgenden Abbildung sehen Sie die Position der Quellen, für die Sie die 
 
 3. `application`: Informationen zu Ereignissen, die auf Anwendungsebene auftreten. Dabei kann es sich um eine Benachrichtigung handeln, dass eine Ereignis stattgefunden hat, beispielsweise eine erfolgreiche Anmeldung, eine Warnung zum Speicher oder andere Operationen, die auf Anwendungsebene durchgeführt werden können.</br>**Pfade:** Sie können die Pfade festlegen, an die Ihre Protokolle weitergeleitet werden. Damit Protokolle jedoch gesendet werden, müssen Sie einen absoluten Pfad in Ihrer Protokollierungskonfiguration verwenden. Andernfalls können die Protokolle nicht gelesen werden. Falls Ihr Pfad an Ihren Workerknoten angehängt ist, wurde dadurch möglicherweise die symbolische Verbindung erstellt. Beispiel: Wenn der angegebene Pfad `/usr/local/spark/work/app-0546/0/stderr` lautet, die Protokolle jedoch tatsächlich in `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr` gespeichert werden, können die Protokolle nicht gelesen werden.
 
-4. `storage`: Informationen zum persistenten Speicher, der in Ihrem Cluster konfiguriert ist. Mit Hilfe von Speicherprotokollen können Sie Problembestimmungsdashboards und Alerts als Teil Ihrer DevOps-Pipeline und der Produktionsreleases konfigurieren. **Hinweis**: Die Pfade `/var/log/kubelet.log` und `/var/log/syslog` enthalten ebenfalls Speicherprotokolle, aber diese Protokolle werden von den Protokollquellen `kubernetes` und `worker` gesammelt. </br>**Pfade:**
+4. `storage`: Informationen zum persistenten Speicher, der in Ihrem Cluster konfiguriert ist. Mit Hilfe von Speicherprotokollen können Sie Problembestimmungsdashboards und Alerts als Teil Ihrer DevOps-Pipeline und der Produktionsreleases konfigurieren. **Hinweis**: Die Pfade `/var/log/kubelet.log` und `/var/log/syslog` enthalten ebenfalls Speicherprotokolle, aber diese Protokolle werden von den Protokollquellen `kubernetes` und `worker` gesammelt.</br>**Pfade:**
     * `/var/log/ibmc-s3fs.log`
     * `/var/log/ibmc-block.log`
 
@@ -196,8 +196,8 @@ Sie können eine Konfiguration für die Clusterprotokollierung erstellen. Sie k�
 **Weiterleitung von Protokollen an IBM**
 
 1. Überprüfen Sie die Berechtigungen.
-    1. Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Editor** oder **Administrator** innehaben. 
-    2. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, müssen sowohl Sie als auch der {{site.data.keyword.containerlong_notm}}-API-Schlüsseleigner die [Cloud Foundry-Rolle Entwickler](/docs/iam/mngcf.html)(cs_users.html#platform)] in diesem Bereich innehaben. 
+    1. Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Editor** oder **Administrator** innehaben.
+    2. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, müssen sowohl Sie als auch der {{site.data.keyword.containerlong_notm}}-API-Schlüsseleigner die [Cloud Foundry-Rolle Entwickler](/docs/iam/mngcf.html)(cs_users.html#platform)] in diesem Bereich innehaben.
       * Wenn Sie wissen, wer der {{site.data.keyword.containerlong_notm}}-API-Schlüsseleigner ist, führen Sie den folgenden Befehl aus:
           ```
           ibmcloud ks api-key-info <clustername>
@@ -251,7 +251,7 @@ Wenn Apps in Ihren Containern ausgeführt werden, die nicht für das Schreiben v
 
 **Protokolle an Ihren eigenen Server über die Protokolle `udp` oder `tcp` weiterleiten**
 
-1. Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Editor** oder **Administrator** innehaben. 
+1. Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Editor** oder **Administrator** innehaben.
 
 2. Für den Cluster, in dem sich die Protokollquelle befindet: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)(cs_users.html#platform)] Hinweis: Wenn Sie ein dediziertes Konto verwenden, müssen Sie sich beim öffentlichen {{site.data.keyword.cloud_notm}}-Endpunkt anmelden und als Ziel Ihre öffentliche Organisation und den Bereich angeben, um die Protokollweiterleitung zu ermöglichen.
 
@@ -278,7 +278,7 @@ Wenn Apps in Ihren Containern ausgeführt werden, die nicht für das Schreiben v
 Die folgenden Schritte sind allgemeine Anweisungen. Stellen Sie vor der Verwendung des Containers in einer Produktionsumgebung sicher, dass alle von Ihnen benötigten Sicherheitsanforderungen erfüllt sind.
 {: tip}
 
-1. Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Editor** oder **Administrator** innehaben. 
+1. Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Editor** oder **Administrator** innehaben.
 
 2. Für den Cluster, in dem sich die Protokollquelle befindet: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)(cs_users.html#platform)] Hinweis: Wenn Sie ein dediziertes Konto verwenden, müssen Sie sich beim öffentlichen {{site.data.keyword.cloud_notm}}-Endpunkt anmelden und als Ziel Ihre öffentliche Organisation und den Bereich angeben, um die Protokollweiterleitung zu ermöglichen.
 
@@ -487,7 +487,7 @@ Weitere Informationen zu Kubernetes-Auditprotokollen finden Sie im Thema zu <a h
 * Aktuell wird eine Standardauditrichtlinie für alle Cluster mit dieser Protokollierungskonfiguration verwendet.
 * Momentan werden Filter nicht unterstützt.
 * Es kann nur eine Konfiguration des Typs `kube-audit` pro Cluster vorhanden sein; Sie können jedoch Protokolle an {{site.data.keyword.loganalysisshort_notm}} und an einen externen Server weiterleiten, indem Sie eine Protokollierungskonfiguration und einen Webhook erstellen.
-* Sie müssen die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** für den Cluster innehaben. 
+* Sie müssen die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** für den Cluster innehaben.
 
 
 ### Auditprotokolle an {{site.data.keyword.loganalysisshort_notm}} senden
@@ -671,7 +671,7 @@ Da die Kubernetes-API-Serverprotokolle automatisch gestreamt werden, werden sie 
 **Vorbereitende Schritte**
 
 * [Stellen Sie eine Instanz](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage) von {{site.data.keyword.cos_short}} im {{site.data.keyword.Bluemix_notm}}-Katalog bereit.
-* Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** für den Cluster innehaben. 
+* Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** für den Cluster innehaben.
 
 Snapshot erstellen
 
@@ -679,7 +679,7 @@ Snapshot erstellen
 
 2. Generieren Sie im soeben erstellten Bucket [HMAC-Serviceberechtigungsnachweise](/docs/services/cloud-object-storage/iam/service-credentials.html).
   1. Klicken Sie in der Registerkarte **Serviceberechtigungsnachweise** des {{site.data.keyword.cos_short}}-Dashboards auf **Neuer Berechtigungsnachweis**.
-  2. Ordnen Sie den HMAC-Berechtigungsnachweisen die Servicerolle `Schreibberechtigter` zu. 
+  2. Ordnen Sie den HMAC-Berechtigungsnachweisen die Servicerolle `Schreibberechtigter` zu.
   3. Geben Sie im Feld **Inline-Konfigurationsparameter hinzufügen** die Zeichenfolge `{"HMAC":true}` an.
 
 3. Erstellen Sie in der Befehlszeilenschnittstelle eine Anforderung für einen Snapshot der Masterprotokolle.
@@ -700,7 +700,7 @@ Snapshot erstellen
   ```
   {: screen}
 
-4. Überprüfen Sie den Status der Anforderung. Die Ausführung des Snapshots kann einige Zeit dauern, Sie können jedoch überprüfen, ob die Anforderung erfolgreich ausgeführt wird. Sie können nach dem Namen der Datei suchen, in der die Masterprotokolle in der Antwort enthalten sind, und die Datei mithilfe der {{site.data.keyword.Bluemix_notm}}-Konsole herunterladen. 
+4. Überprüfen Sie den Status der Anforderung. Die Ausführung des Snapshots kann einige Zeit dauern, Sie können jedoch überprüfen, ob die Anforderung erfolgreich ausgeführt wird. Sie können nach dem Namen der Datei suchen, in der die Masterprotokolle in der Antwort enthalten sind, und die Datei mithilfe der {{site.data.keyword.Bluemix_notm}}-Konsole herunterladen.
 
   ```
   ibmcloud ks logging-collect-status --cluster <clustername_oder_-id>
@@ -764,7 +764,7 @@ Mit Metriken können Sie den Zustand und die Leistung Ihrer Cluster überwachen.
       </table>
  </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Gewinnen Sie betriebliche Einblicke in die Leistung und den Allgemeinzustand Ihrer Apps, indem Sie Sysdig als Drittanbieterservice auf Ihren Workerknoten bereitstellen, um Metriken an {{site.data.keyword.monitoringlong}} weiterzuleiten. Weitere Informationen finden Sie unter [Metriken für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Hinweis**: {{site.data.keyword.mon_full_notm}} unterstützt die Containerlaufzeit `containerd` nicht. Wenn Sie {{site.data.keyword.mon_full_notm}} mit Clustern der Version 1.11 oder höher verwenden, werden nicht alle Containermetriken erfasst. </dd>
+  <dd>Gewinnen Sie betriebliche Einblicke in die Leistung und den Allgemeinzustand Ihrer Apps, indem Sie Sysdig als Drittanbieterservice auf Ihren Workerknoten bereitstellen, um Metriken an {{site.data.keyword.monitoringlong}} weiterzuleiten. Weitere Informationen finden Sie unter [Metriken für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster). **Hinweis**: {{site.data.keyword.mon_full_notm}} unterstützt die Containerlaufzeit `containerd` nicht. Wenn Sie {{site.data.keyword.mon_full_notm}} mit Clustern der Version 1.11 oder höher verwenden, werden nicht alle Containermetriken erfasst.</dd>
 </dl>
 
 Stellen Sie sicher, dass die Cluster in den Ressourcengruppen und Regionen eindeutige Namen aufweisen, um Konflikte bei der Verwendung des integrierten Metrikservice zu vermeiden.
@@ -794,7 +794,7 @@ Für die automatische Wiederherstellung ist es erforderlich, dass mindestens ein
 {: note}
 
 Vorbemerkungen:
-- Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** innehaben. 
+- Stellen Sie sicher, dass Sie die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** innehaben.
 - [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)(cs_users.html#platform)]
 
 1. [Installieren Sie Helm für Ihr Cluster und fügen Sie das {{site.data.keyword.Bluemix_notm}}-Repository zu Ihrer Helm-Instanz hinzu](cs_integrations.html#helm).

@@ -409,7 +409,7 @@ Manténgase al día con lo que está pasando con {{site.data.keyword.containerlo
 ## Chat con desarrolladores de Slack
 {: #slack}
 
-Vea de qué están hablando otros desarrolladores y realice sus propias preguntas en [{{site.data.keyword.containerlong_notm}} Slack. ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com)
+Vea de qué están hablando otros desarrolladores y realice sus propias preguntas en [Slack de {{site.data.keyword.containerlong_notm}}. ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com)
 {:shortdesc}
 
 Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.

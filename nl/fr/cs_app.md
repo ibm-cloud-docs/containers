@@ -169,7 +169,7 @@ Vous pouvez également [connecter plusieurs clusters dans différentes régions 
 ### Augmentation de la disponibilité de votre application
 {: #increase_availability}
 
-Tenez compte des options suivantes pour une disponibilité accrue de votre application.
+Tenez compte des options suivantes pour une disponibilité accrue de votre application. 
 {: shortdesc}
 
 <dl>

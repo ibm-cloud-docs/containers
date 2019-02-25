@@ -76,7 +76,7 @@ Per il tuo cluster Kubernetes sono disponibili tre tipi di aggiornamento: princi
 |Patch|x.x.4_1510|IBM e tu|Patch Kubernetes e altri aggiornamenti del componente {{site.data.keyword.Bluemix_notm}} Provider come patch di sicurezza e del sistema operativo. IBM aggiorna i master automaticamente, ma tu applichi le patch ai nodi di lavoro. Vedi ulteriori informazioni sulle patch nella seguente sezione.|
 {: caption="Impatti degli aggiornamenti di Kubernetes" caption-side="top"}
 
-Quando gli aggiornamenti diventano disponibili, ricevi una notifica quando visualizzi le informazioni relative ai nodi di lavoro, ad esempio con i comandi `ibmcloud ks workers <cluster>` o `ibmcloud ks worker-get <cluster> <worker>`.
+Man mano che gli aggiornamenti diventano disponibili, ricevi una notifica quando visualizzi le informazioni relative ai nodi di lavoro, ad esempio con i comandi `ibmcloud ks workers <cluster>` o `ibmcloud ks worker-get <cluster> <worker>`.
 -  **Aggiornamenti principali e secondari**: per prima cosa, [aggiorna il tuo nodo master](cs_cluster_update.html#master) e poi [aggiorna i nodi di lavoro](cs_cluster_update.html#worker_node).
    - Per impostazione predefinita, non puoi aggiornare un master Kubernetes a più di tre versioni secondarie in avanti. Ad esempio, se la versione corrente del tuo master è 1.9 e vuoi aggiornare alla 1.12, devi prima aggiornare alla 1.10. Puoi forzare l'aggiornamento per continuare, ma l'aggiornamento di più di due versioni secondarie potrebbe causare risultati imprevisti o una condizione di errore.
    - Se utilizzi una versione della CLI `kubectl` che corrisponde almeno alla versione `major.minor` dei tuoi cluster, potresti riscontrare risultati imprevisti. Assicurati di mantenere aggiornate le [versioni della CLI](cs_cli_install.html#kubectl) e dei cluster Kubernetes.
@@ -111,7 +111,7 @@ Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento d
 ### Aggiorna prima il master
 {: #112_before}
 
-La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il master Kubernetes.
+La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il master Kubernetes. 
 {: shortdesc}
 
 <table summary="Aggiornamenti Kubernetes per la versione 1.12">
@@ -137,7 +137,7 @@ La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il ma
 ### Aggiorna dopo il master
 {: #112_after}
 
-La seguente tabella mostra le azioni che devi eseguire dopo aver aggiornato il master Kubernetes.
+La seguente tabella mostra le azioni che devi eseguire dopo aver aggiornato il master Kubernetes. 
 {: shortdesc}
 
 <table summary="Aggiornamenti Kubernetes per la versione 1.12">
@@ -229,7 +229,7 @@ Prima di poter aggiornare correttamente un cluster da Kubernetes versione 1.9 o 
 ### Aggiorna prima il master
 {: #111_before}
 
-La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il master Kubernetes.
+La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il master Kubernetes. 
 {: shortdesc}
 
 <table summary="Aggiornamenti Kubernetes per la versione 1.11">
@@ -272,7 +272,7 @@ La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il ma
 ### Aggiorna dopo il master
 {: #111_after}
 
-La seguente tabella mostra le azioni che devi eseguire dopo aver aggiornato il master Kubernetes.
+La seguente tabella mostra le azioni che devi eseguire dopo aver aggiornato il master Kubernetes. 
 {: shortdesc}
 
 <table summary="Aggiornamenti Kubernetes per la versione 1.11">
@@ -483,7 +483,7 @@ Esempi di volte in cui ti potresti basare su Docker come runtime del contenitore
 *  Se accedi all'API o al Docker Engine direttamente utilizzando contenitori privilegiati, aggiorna i tuoi pod per supportare `containerd` come runtime. Ad esempio, potresti richiamare direttamente il socket Docker per avviare i contenitori o per eseguire altre operazioni di Docker. Il socket Docker è cambiato da `/var/run/docker.sock` a `/run/containerd/containerd.sock`. Il protocollo utilizzato nel socket `containerd` è leggermente diverso da quello usato in Docker. Prova ad aggiornare la tua applicazione al socket `containerd`. Se vuoi continuare a utilizzare il socket Docker, prova a utilizzare [Docker-inside-Docker (DinD) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://hub.docker.com/_/docker/).
 *  Alcuni componenti aggiuntivi di terze parti, come gli strumenti di registrazione e monitoraggio, che installi nel tuo cluster potrebbero basarsi su Docker Engine. Contatta il tuo provider per verificare che gli strumenti siano compatibili con containerd. Possibili casi di utilizzo includono:
    - Il tuo strumento di registrazione potrebbe utilizzare la directory `/var/log/pods/<pod_uuid>/<container_name>/*.log` del contenitore `stderr/stdout` per accedere ai log. In Docker, questa directory è un collegamento simbolico a `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log` mentre in `containerd` accedi direttamente alla directory senza un collegamento simbolico.
-   - Il tuo strumento di monitoraggio accede direttamente al socket Docker. Il socket Docker è cambiato da `/var/run/docker.sock` a `/run/containerd/containerd.sock`. 
+   - Il tuo strumento di monitoraggio accede direttamente al socket Docker. Il socket Docker è cambiato da `/var/run/docker.sock` a `/run/containerd/containerd.sock`.
 
 <br>
 
@@ -557,7 +557,7 @@ Prima di poter eseguire correttamente l'aggiornamento a Kubernetes 1.10, devi se
 ### Aggiorna prima il master
 {: #110_before}
 
-La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il master Kubernetes.
+La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il master Kubernetes. 
 {: shortdesc}
 
 <table summary="Aggiornamenti Kubernetes per la versione 1.10">
@@ -604,7 +604,7 @@ La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il ma
 ### Aggiorna dopo il master
 {: #110_after}
 
-La seguente tabella mostra le azioni che devi eseguire dopo aver aggiornato il master Kubernetes.
+La seguente tabella mostra le azioni che devi eseguire dopo aver aggiornato il master Kubernetes. 
 {: shortdesc}
 
 <table summary="Aggiornamenti Kubernetes per la versione 1.10">
@@ -842,7 +842,7 @@ Prepara l'aggiornamento a Calico v3 prima di aggiornare il master. Durante l'upg
 ## Archivio
 {: #k8s_version_archive}
 
-Trova una panoramica delle versioni Kubernetes che non sono supportate in {{site.data.keyword.containerlong_notm}}.
+Trova una panoramica delle versioni Kubernetes che non sono supportate in {{site.data.keyword.containerlong_notm}}. 
 {: shortdesc}
 
 ### Versione 1.9 (obsoleta, non supportata dal 27 dicembre 2018)
@@ -858,7 +858,7 @@ Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento d
 ### Aggiorna prima il master
 {: #19_before}
 
-La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il master Kubernetes.
+La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il master Kubernetes. 
 {: shortdesc}
 
 <table summary="Aggiornamenti di Kubernetes per le versioni 1.9">
@@ -880,7 +880,7 @@ La seguente tabella mostra le azioni che devi eseguire prima di aggiornare il ma
 ### Aggiorna dopo il master
 {: #19_after}
 
-La seguente tabella mostra le azioni che devi eseguire dopo aver aggiornato il master Kubernetes.
+La seguente tabella mostra le azioni che devi eseguire dopo aver aggiornato il master Kubernetes. 
 {: shortdesc}
 
 <table summary="Aggiornamenti di Kubernetes per le versioni 1.9">

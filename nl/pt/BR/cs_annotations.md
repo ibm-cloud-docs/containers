@@ -418,7 +418,7 @@ annotations:
   ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain secretName: mysecret rules:
   - host: mydomain
     http:
@@ -481,7 +481,7 @@ annotations:
     &lt;EOS&gt;
 spec:
 tls:
-- hosts:
+- System z:
   - mydomain
     secretName: mytlssecret
   rules:
@@ -778,7 +778,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1 LoadBalancer 10.xxx.xx.xxx 169.xx
 ## Anotações da conexão
 {: #connection}
 
-Com as anotações de conexão, é possível mudar como o ALB se conecta ao app de back-end e servidores de envio de dados e configurar tempos limites ou um número máximo de conexões keep-alive antes que o app ou o servidor seja considerado indisponível.
+Com as anotações de conexão, é possível mudar como o ALB se conecta ao app de back-end e servidores de envio de dados e configurar tempos limites ou um número máximo de conexões keep-alive antes que o app ou o servidor seja considerado indisponível. 
 {: shortdesc}
 
 ### Tempos limites de conexão e tempos limites de leitura customizados (proxy-connect-timeout, proxy-read-timeout)
@@ -931,7 +931,7 @@ metadados:
    ingress.bluemix.net/keepalive-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;time&gt;s"
 spec:
  tls:
- - hosts:
+ - System z:
    - mydomain
     secretName: mytlssecret
   rules:
@@ -1146,7 +1146,7 @@ metadados:
     ingresso s.bluemix.net/upstream-fail-timeout: "serviceName= &lt;myservice&gt;  fail-timeout= &lt;fail_timeout&gt;"
 spec:
   tls:
-  - hosts:
+  - System z:
     - mydomain
     secretName: mytlssecret
   rules:
@@ -1295,7 +1295,7 @@ spec:
 ## Anotações de autenticação HTTPS e TLS/SSL
 {: #https-auth}
 
-Com as anotações de autenticação HTTPS e TLS/SSL, é possível configurar seu ALB para tráfego HTTPS, mudar as portas HTTPS padrão, ativar a criptografia SSL para o tráfego que é enviado para seus apps de back-end ou configurar a autenticação mútua.
+Com as anotações de autenticação HTTPS e TLS/SSL, é possível configurar seu ALB para tráfego HTTPS, mudar as portas HTTPS padrão, ativar a criptografia SSL para o tráfego que é enviado para seus apps de back-end ou configurar a autenticação mútua. 
 {: shortdesc}
 
 ### Autenticação do {{site.data.keyword.appid_short_notm}} (appid-auth)
@@ -1837,7 +1837,7 @@ spec:
 ## Anotações do Istio
 {: #istio-annotations}
 
-Use as anotações Istio para rotear o tráfego recebido para os serviços gerenciados pelo Istio.
+Use as anotações Istio para rotear o tráfego recebido para os serviços gerenciados pelo Istio. 
 {: shortdesc}
 
 ### Serviços do Istio (istio-services)
@@ -2253,13 +2253,13 @@ spec:
 ## Anotações de solicitação e de resposta
 {: #request-response}
 
-Use as anotações de solicitação e de resposta para incluir ou remover informações do cabeçalho das solicitações do cliente e do servidor e para mudar o tamanho do corpo que o cliente pode enviar.
+Use as anotações de solicitação e de resposta para incluir ou remover informações do cabeçalho das solicitações do cliente e do servidor e para mudar o tamanho do corpo que o cliente pode enviar. 
 {: shortdesc}
 
 ### Incluir a porta do servidor no cabeçalho do host (add-host-port)
 {: #add-host-port}
 
-Inclua uma porta do servidor na solicitação do cliente antes que a solicitação seja encaminhada para seu app de back-end.
+Inclua uma porta do servidor na solicitação do cliente antes que a solicitação seja encaminhada para seu app de back-end. 
 {: shortdesc}
 
 <dl>
@@ -2575,7 +2575,7 @@ spec:
 ## Anotações de limite de serviço
 {: #service-limit}
 
-Com as anotações de limite de serviço, é possível mudar a taxa de processamento de solicitação padrão e o número de conexões que podem vir de um único endereço IP.
+Com as anotações de limite de serviço, é possível mudar a taxa de processamento de solicitação padrão e o número de conexões que podem vir de um único endereço IP. 
 {: shortdesc}
 
 ### Limites de taxa global (global-rate-limit)

@@ -312,8 +312,7 @@ Ajoutez des définitions de chemin d'accès à des services externes, tels des s
 
 <dl>
 <dt>Description</dt>
-<dd>Ajouter des définitions de chemin d'accès à des services externes. N'utilisez cette annotation que si votre application opère sur un service externe au lieu d'un service de back end. Lorsque vous utilisez cette annotation pour créer une route de service externe, seules les annotations `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` et `proxy-buffering` sont prises en charge conjointement. Aucune autre annotation n'est prise en charge en conjonction avec `proxy-external-service`.<p class="note">Vous ne pouvez pas spécifier plusieurs hôtes correspondant à un service et un chemin d'accès uniques.
-</p>
+<dd>Ajouter des définitions de chemin d'accès à des services externes. N'utilisez cette annotation que si votre application opère sur un service externe au lieu d'un service de back end. Lorsque vous utilisez cette annotation pour créer une route de service externe, seules les annotations `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` et `proxy-buffering` sont prises en charge conjointement. Aucune autre annotation n'est prise en charge en conjonction avec `proxy-external-service`.<p class="note">Vous ne pouvez pas spécifier plusieurs hôtes correspondant à un service et un chemin d'accès uniques.</p>
 </dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
@@ -788,7 +787,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 ## Annotations de connexion
 {: #connection}
 
-Avec les annotations de connexion, vous pouvez modifier le mode de connexion de l'ALB à l'application de back end et aux serveurs en amont et définir des délais d'attente ou un nombre maximum de connexions actives avant de considérer l'application ou le serveur comme étant indisponible.
+Avec les annotations de connexion, vous pouvez modifier le mode de connexion de l'ALB à l'application de back end et aux serveurs en amont et définir des délais d'attente ou un nombre maximum de connexions actives avant de considérer l'application ou le serveur comme étant indisponible. 
 {: shortdesc}
 
 ### Personnalisation des paramètres connect-timeout et read-timeout (proxy-connect-timeout, proxy-read-timeout)
@@ -984,8 +983,7 @@ Définissez à quel moment l'équilibreur de charge ALB transmet une demande au 
 <dl>
 <dt>Description</dt>
 <dd>
-L'équilibreur de charge d'application (ALB) Ingress fait office de proxy entre l'application client et votre application. Certaines configurations d'application nécessitent plusieurs serveurs en amont qui traitent les demandes client entrantes à partir de l'équilibreur de charge ALB. Parfois, le serveur proxy utilisé par l'équilibreur de charge ALB ne parvient pas à établir une connexion à un serveur en amont utilisé par l'application. L'équilibreur de charge ALB peut alors essayer d'établir une connexion avec le prochain serveur en amont pour lui transmettre la demande à la place. Vous pouvez utiliser l'annotation `proxy-next-upstream-config` pour définir dans quels cas, pour combien de temps et combien de fois l'équilibreur de charge ALB peut tenter de transmettre une demande au prochain serveur en amont.<p class="note">Un délai d'attente est toujours configuré lorsque vous utilisez l'annotation `proxy-next-upstream-config`, par conséquent, n'ajoutez pas le paramètre `timeout=true` dans cette annotation.
-</p>
+L'équilibreur de charge d'application (ALB) Ingress fait office de proxy entre l'application client et votre application. Certaines configurations d'application nécessitent plusieurs serveurs en amont qui traitent les demandes client entrantes à partir de l'équilibreur de charge ALB. Parfois, le serveur proxy utilisé par l'équilibreur de charge ALB ne parvient pas à établir une connexion à un serveur en amont utilisé par l'application. L'équilibreur de charge ALB peut alors essayer d'établir une connexion avec le prochain serveur en amont pour lui transmettre la demande à la place. Vous pouvez utiliser l'annotation `proxy-next-upstream-config` pour définir dans quels cas, pour combien de temps et combien de fois l'équilibreur de charge ALB peut tenter de transmettre une demande au prochain serveur en amont.<p class="note">Un délai d'attente est toujours configuré lorsque vous utilisez l'annotation `proxy-next-upstream-config`, par conséquent, n'ajoutez pas le paramètre `timeout=true` dans cette annotation.</p>
 </dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
@@ -1313,7 +1311,7 @@ spec:
 ## Annotations d'authentification HTTPS et TLS/SSL
 {: #https-auth}
 
-Avec les annotations d'authentification HTTPS et TLS/SSL, vous pouvez configurer votre ALB pour le trafic HTTPS, modifier les ports par défaut HTTPS, activer le chiffrement SSL pour le trafic envoyé à vos applications de back end ou configurer l'authentification mutuelle.
+Avec les annotations d'authentification HTTPS et TLS/SSL, vous pouvez configurer votre ALB pour le trafic HTTPS, modifier les ports par défaut HTTPS, activer le chiffrement SSL pour le trafic envoyé à vos applications de back end ou configurer l'authentification mutuelle. 
 {: shortdesc}
 
 ### Authentification {{site.data.keyword.appid_short_notm}} (appid-auth)
@@ -1751,8 +1749,7 @@ Autorisez les demandes HTTPS et chiffrez le trafic vers vos applications en amon
 <dd>
 Lorsque la configuration de votre ressource Ingress comporte une section TLS, l'équilibreur de charge ALB Ingress peut traiter les demandes URL sécurisées par HTTPS vers votre application. Par défaut, l'ALB interrompt la terminaison TLS et déchiffre la demande avant d'utiliser le protocole HTTP pour transférer le trafic vers vos applications. Si vous disposez d'applications qui nécessitent le protocole HTTPS et que vous avez besoin que le trafic soit chiffré, utilisez l'annotation `ssl-services`. Avec l'annotation `ssl-services`, l'ALB met fin à la connexion TLS, puis crée une nouvelle connexion SSL entre l'ALB et le pod d'application. Le trafic est à nouveau chiffré avant d'être envoyé aux pods en amont.</br></br>
 Si votre application de back end peut traiter TLS et que vous souhaitez renforcer la sécurité, vous pouvez ajouter l'authentification unidirectionnelle ou mutuelle en fournissant un certificat inclus dans une valeur confidentielle (secret).</br></br>
-Utilisez l'annotation `ssl-services` pour la terminaison SSL entre l'ALB Ingress et l'application de back end.
-Utilisez l'[annotation `mutual-auth`](#mutual-auth) pour la terminaison SSL entre le client et l'ALB Ingress. </dd>
+Utilisez l'annotation `ssl-services` pour la terminaison SSL entre l'ALB Ingress et l'application de back end. Utilisez l'[annotation `mutual-auth`](#mutual-auth) pour la terminaison SSL entre le client et l'ALB Ingress. </dd>
 
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
@@ -1874,7 +1871,7 @@ spec:
 ## Annotations Istio
 {: #istio-annotations}
 
-Utilisez des annotations Istio pour acheminer le trafic entrant aux services gérés par Istio.
+Utilisez des annotations Istio pour acheminer le trafic entrant aux services gérés par Istio. 
 {: shortdesc}
 
 ### Services Istio (istio-services)
@@ -2226,7 +2223,7 @@ spec:
         backend:
           serviceName: myservice
           servicePort: 8080
- </code></pre>
+</code></pre>
 
 <table>
 <caption>Description des composants de l'annotation</caption>
@@ -2314,13 +2311,13 @@ spec:
 ## Annotations de demande et de réponse
 {: #request-response}
 
-Utilisez les annotations de demande et de réponse pour ajouter et retirer des informations d'en-tête dans les demandes du client et du serveur et pour modifier la taille du corps que le client peut envoyer.
+Utilisez les annotations de demande et de réponse pour ajouter et retirer des informations d'en-tête dans les demandes du client et du serveur et pour modifier la taille du corps que le client peut envoyer. 
 {: shortdesc}
 
 ### Ajout d'un port de serveur à l'en-tête d'hôte (add-host-port)
 {: #add-host-port}
 
-Ajoutez un port de serveur à la demande du client avant la transmission de la demande à votre application de back end.
+Ajoutez un port de serveur à la demande du client avant la transmission de la demande à votre application de back end. 
 {: shortdesc}
 
 <dl>
@@ -2648,7 +2645,7 @@ spec:
 ## Annotations de limites de service
 {: #service-limit}
 
-Avec les annotations de limites de service, vous pouvez modifier le taux de traitement des demandes par défaut et le nombre de connexions en provenance d'une adresse IP unique.
+Avec les annotations de limites de service, vous pouvez modifier le taux de traitement des demandes par défaut et le nombre de connexions en provenance d'une adresse IP unique. 
 {: shortdesc}
 
 ### Limites de débit globales (global-rate-limit)

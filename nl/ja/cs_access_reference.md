@@ -30,7 +30,7 @@ lastupdated: "2018-12-05"
 ## {{site.data.keyword.Bluemix_notm}} IAM プラットフォームと Kubernetes RBAC
 {: #platform}
 
-{{site.data.keyword.containerlong_notm}} は、{{site.data.keyword.Bluemix_notm}} の IAM (ID およびアクセス管理) 役割を使用するように構成されています。 {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割によって、クラスターでユーザーが実行できるアクションが決まります。 プラットフォーム役割が割り当てられたユーザーには必ず、デフォルトの名前空間での対応する Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。 さらに、プラットフォーム役割により、ユーザーの基本的なインフラストラクチャー許可が自動的に設定されます。 ポリシーを設定するには、[{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム許可の割り当て](cs_users.html#platform)を参照してください。RBAC 役割について詳しくは、[RBAC 許可の割り当て](cs_users.html#role-binding)を参照してください。
+{{site.data.keyword.containerlong_notm}} は、{{site.data.keyword.Bluemix_notm}} の IAM (ID およびアクセス管理) 役割を使用するように構成されています。 {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割によって、クラスターでユーザーが実行できるアクションが決まります。 プラットフォーム役割が割り当てられたユーザーには必ず、デフォルトの名前空間での対応する Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。 さらに、プラットフォーム役割により、ユーザーの基本的なインフラストラクチャー許可が自動的に設定されます。 ポリシーを設定するには、[{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム許可の割り当て](cs_users.html#platform)を参照してください。 RBAC 役割について詳しくは、[RBAC 許可の割り当て](cs_users.html#role-binding)を参照してください。
 {: shortdesc}
 
 次の表は、各プラットフォーム役割によって付与されるクラスター管理許可と、対応する RBAC 役割での Kubernetes リソース許可を示しています。

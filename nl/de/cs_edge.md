@@ -39,7 +39,7 @@ Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten auf 
 
 Vorbemerkungen:
 
-1. Stellen Sie sicher, dass Sie über eine beliebige {{site.data.keyword.Bluemix_notm}} IAM-[Plattformrolle](cs_users.html#platform) verfügen. 
+1. Stellen Sie sicher, dass Sie über eine beliebige {{site.data.keyword.Bluemix_notm}} IAM-[Plattformrolle](cs_users.html#platform) verfügen.
 2. [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und - sofern anwendbar - die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](cs_cli_install.html#cs_cli_configure)
 3. Stellen Sie sicher, dass der Cluster mindestens über ein öffentliches VLAN verfügt. Edge-Workerknoten stehen nicht für Cluster mit ausschließlich privaten VLANs zur Verfügung.
 4. [Erstellen Sie einen neuen Worker-Pool](cs_clusters.html#add_pool), der sich über alle Zonen im Cluster erstreckt und mindestens zwei Worker pro Zone aufweist.

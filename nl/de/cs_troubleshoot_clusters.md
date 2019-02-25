@@ -68,8 +68,8 @@ Der Cluster konnte nicht mit der Registry konfiguriert werden. Stellen Sie siche
 {: tsCauses}
 Sie verfügen nicht über die korrekten Berechtigungen zum Erstellen eines Clusters. Zum Erstellen eines Clusters benötigen Sie die folgenden Berechtigungen:
 *  Die Rolle **Superuser** für die IBM Cloud-Infrastruktur (SoftLayer).
-*  Die Plattformmanagementrolle **Administrator** für {{site.data.keyword.containerlong_notm}} auf Kontoebene. 
-*  Die Plattformmanagementrolle **Administrator** für {{site.data.keyword.registrylong_notm}} auf Kontoebene. Schränken Sie Richtlinien für {{site.data.keyword.registryshort_notm}} nicht auf Ressourcengruppenebene ein. Wenn Sie vor dem 4. Oktober 2018 damit begonnen haben, {{site.data.keyword.registrylong_notm}} zu verwenden, stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Richtliniendurchsetzung aktivieren](/docs/services/Registry/registry_users.html#existing_users). 
+*  Die Plattformmanagementrolle **Administrator** für {{site.data.keyword.containerlong_notm}} auf Kontoebene.
+*  Die Plattformmanagementrolle **Administrator** für {{site.data.keyword.registrylong_notm}} auf Kontoebene. Schränken Sie Richtlinien für {{site.data.keyword.registryshort_notm}} nicht auf Ressourcengruppenebene ein. Wenn Sie vor dem 4. Oktober 2018 damit begonnen haben, {{site.data.keyword.registrylong_notm}} zu verwenden, stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Richtliniendurchsetzung aktivieren](/docs/services/Registry/registry_users.html#existing_users).
 
 Aufgrund von infrastrukturbezogenen Fehlern wurde nutzungsabhängigen {{site.data.keyword.Bluemix_notm}}-Konten, die nach der Aktivierung der automatischen Kontoverknüpfung erstellt wurden, bereits Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) gewährt. Somit können Sie Infrastrukturressourcen für Ihren Cluster ohne weitere Konfiguration kaufen. Wenn Sie über ein gültiges nutzungsabhängiges Konto verfügen und diese Fehlernachricht erhalten, verwenden Sie möglicherweise nicht die richtigen Berechtigungsnachweise für das Konto der IBM Cloud-Infrastruktur (SoftLayer), um auf Infrastrukturressourcen zuzugreifen.
 
@@ -84,7 +84,7 @@ Der Kontoeigner muss die Berechtigungsnachweise für das Infrastrukturkonto ordn
 
 1.  Überprüfen Sie, dass Sie Zugriff auf ein Infrastrukturkonto haben. Melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/) an und klicken Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") auf **Infrastruktur**. Wenn das Dashboard 'Infrastruktur' angezeigt wird, haben Sie Zugriff auf ein Infrastrukturkonto.
 2.  Überprüfen Sie, ob Ihr Cluster ein anderes Infrastrukturkonto verwendet als das zusammen mit Ihrem nutzungsabhängigen Konto gelieferte Konto.
-    1.  Klicken Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") auf **Container > Cluster**. 
+    1.  Klicken Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") auf **Container > Cluster**.
     2.  Wählen Sie Ihren Cluster in der Tabelle aus.
     3.  Suchen Sie auf der Registerkarte **Übersicht** nach dem Feld **Infrastrukturbenutzer**.
         * Wenn das Feld **Infrastrukturbenutzer** nicht angezeigt wird, verfügen Sie über ein verlinktes nutzungsabhängiges Konto, das für Ihre Infrastruktur- und Plattformkonten dieselben Berechtigungsnachweise verwendet.
@@ -107,7 +107,7 @@ Wenn Sie die Befehle `ibmcloud`, `kubectl` oder `calicoctl` über die Befehlszei
 Möglicherweise verhindern Unternehmensnetzrichtlinien den Zugriff von Ihrem lokalen System auf öffentliche Endpunkte über Proxys oder Firewalls.
 
 {: tsResolve}
-[Lassen Sie TCP-Zugriff zu, damit die CLI-Befehle ausgeführt werden können](cs_firewall.html#firewall_bx). Diese Task setzt voraus, dass die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** für den Cluster zugewiesen ist. 
+[Lassen Sie TCP-Zugriff zu, damit die CLI-Befehle ausgeführt werden können](cs_firewall.html#firewall_bx). Diese Task setzt voraus, dass die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle [**Administrator** für den Cluster zugewiesen ist.
 
 
 ## Firewall verhindert die Verbindung des Clusters mit Ressourcen
@@ -151,7 +151,7 @@ Wenn die Ausführung von 'kubectl proxy' erfolgreich verläuft, das Dashboard je
 Möglicherweise wurde eine weitere Firewall eingerichtet oder Sie haben die vorhandenen Firewalleinstellungen für Ihr Konto von IBM Cloud Infrastructure (SoftLayer) angepasst. {{site.data.keyword.containerlong_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Ein weiterer möglicher Grund kann sein, dass Ihre Workerknoten in einer Neuladen-Schleife hängen.
 
 {: tsResolve}
-[Gewähren Sie dem Cluster den Zugriff auf Infrastrukturressourcen und andere Services](cs_firewall.html#firewall_outbound)(cs_users.html#platform)]. Diese Task setzt voraus, dass die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle <cs_users.html#platform>Administrator für den Cluster zugewiesen ist. 
+[Gewähren Sie dem Cluster den Zugriff auf Infrastrukturressourcen und andere Services](cs_firewall.html#firewall_outbound)(cs_users.html#platform)]. Diese Task setzt voraus, dass die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle <cs_users.html#platform>Administrator für den Cluster zugewiesen ist.
 
 <br />
 
@@ -272,7 +272,7 @@ Gehen Sie wie folgt vor, um Ihre Zugriffsberechtigungen zu überprüfen:
           ibmcloud target -g none
           ```
           {: pre}
-        Dieser Befehl schlägt fehl, weil keine Ressourcengruppe mit dem Namen `none` vorhanden ist. Die Angabe der aktuellen Ressourcengruppe als Ziel wird jedoch rückgängig gemacht, wenn der Befehl fehlschlägt.
+          Dieser Befehl schlägt fehl, weil keine Ressourcengruppe mit dem Namen `none` vorhanden ist. Die Angabe der aktuellen Ressourcengruppe als Ziel wird jedoch rückgängig gemacht, wenn der Befehl fehlschlägt.
         3. Geben Sie den Cluster als Ziel an.
           ```
           ibmcloud ks cluster-config <clustername_oder_-id>
@@ -339,7 +339,7 @@ Der Cluster kann in einem IBM Cloud-Infrastrukturkonto (SoftLayer) bereitgestell
 Im folgenden Szenario wird veranschaulicht, wie es dazu kommen kann, dass ein Cluster verwaist.
 1.  Sie verfügen über ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto.
 2.  Sie erstellen einen Cluster mit dem Namen `Cluster1`. Die Workerknoten und weitere Infrastrukturressource werden im Infrastrukturkonto angegeben, das mit dem nutzungsabhängigen Konto verknüpft ist.
-3.  Später stellen Sie fest, dass von Ihrem Team ein traditionelles oder gemeinsam genutztes IBM Cloud-Infrastrukturkonto (SoftLayer) verwendet wird. Sie verwenden den Befehl `ibmcloud ks credential-set`, um die Berechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) zum Verwenden des Teamkontos zu ändern. 
+3.  Später stellen Sie fest, dass von Ihrem Team ein traditionelles oder gemeinsam genutztes IBM Cloud-Infrastrukturkonto (SoftLayer) verwendet wird. Sie verwenden den Befehl `ibmcloud ks credential-set`, um die Berechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer) zum Verwenden des Teamkontos zu ändern.
 4.  Sie erstellen einen weiteren Cluster mit dem Namen `Cluster2`. Die Workerknoten und weitere Infrastrukturressource werden im Infrastrukturkonto des Teams angegeben.
 5.  Sie bemerken, dass für `Cluster1` eine Aktualisierung bzw. ein erneutes Laden der Workerknoten erforderlich ist oder Sie möchten einfach eine Bereinigung zum Löschen durchführen. Da `Cluster1` jedoch in einem unterschiedlichen Infrastrukturkonto angegeben wurde, können Sie seine Infrastrukturressource nicht ändern. `Cluster1` ist verwaist.
 6.  Gehen Sie gemäß den folgenden Schritten zur Lösung dieses Problems vor, machen Sie jedoch nicht die Berechtigungsnachweise für die Infrastruktur für das Teamkonto rückgängig. Sie können zwar `Cluster1` löschen, dann ist jedoch `Cluster2` verwaist.
@@ -349,23 +349,24 @@ Im folgenden Szenario wird veranschaulicht, wie es dazu kommen kann, dass ein Cl
 
 {: tsResolve}
 1.  Überprüfen Sie, welches Infrastrukturkonto von der Region, in der sich der Cluster befindet, derzeit zum Bereitstellen der Cluster verwendet wird.
-    1.  Melden Sie sich bei der [{{site.data.keyword.containerlong_notm}}-Clusterkonsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/containers-kubernetes/clusters) an. 
+    1.  Melden Sie sich bei der [{{site.data.keyword.containerlong_notm}}-Clusterkonsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/containers-kubernetes/clusters) an.
     2.  Wählen Sie Ihren Cluster in der Tabelle aus.
     3.  Suchen Sie auf der Registerkarte **Übersicht** nach dem Feld **Infrastrukturbenutzer**. Mithilfe dieses Felds können Sie feststellen, ob vom {{site.data.keyword.containerlong_notm}}-Konto ein anderes Infrastrukturkonto als das Standardkonto verwendet wird.
         * Wenn das Feld **Infrastrukturbenutzer** nicht angezeigt wird, verfügen Sie über ein verlinktes nutzungsabhängiges Konto, das für Ihre Infrastruktur- und Plattformkonten dieselben Berechtigungsnachweise verwendet. Der Cluster, der nicht geändert werden kann, kann in einem anderen Infrastrukturkonto bereitgestellt werden.
         * Wenn ein Feld für den **Infrastrukturbenutzer** angezeigt wird, verwenden Sie ein anderes Infrastrukturkonto als das, das mit dem nutzungsabhängigen Konto verknüpft ist. Diese verschiedenen Berechtigungsnachweise gelten für alle Cluster in der Region. Der Cluster, der nicht geändert werden kann, kann in einem nutzungsabhängigen Konto oder einem anderen Infrastrukturkonto bereitgestellt werden.
 2.  Überprüfen Sie, welches Infrastrukturkonto zum Bereitstellen des Clusters verwendet wurde.
     1.  Wählen Sie in der Registerkarte **Workerknoten** einen Workerknoten aus und notieren Sie seine **ID**.
-    2.  Öffnen Sie das Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") und klicken Sie auf **Infrastruktur**. 
-    3.  Klicken Sie im Infrastrukturnavigationsbereich auf **Geräte > Geräteliste**. 
+    2.  Öffnen Sie das Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") und klicken Sie auf **Infrastruktur**.
+    3.  Klicken Sie im Infrastrukturnavigationsbereich auf **Geräte > Geräteliste**.
     4.  Suchen Sie die Workerknoten-ID, die Sie vorher notiert haben.
     5.  Wenn Sie die Workerknoten-ID nicht finden, wird der Workerknoten in diesem Infrastrukturkonto nicht bereitgestellt. Wechseln Sie zu einem anderen Infrastrukturkonto und versuchen Sie es erneut.
 3.  Verwenden Sie den [Befehl](cs_cli_reference.html#cs_credentials_set) `ibmcloud ks credential-set`, um die Berechtigungsnachweise für die Infrastruktur in die Berechtigungsnachweise des Kontos zu ändern, in dem die Workerknoten des Clusters bereitgestellt werden, die Sie im vorherigen Schritt ermittelt haben.
-    Falls Sie nicht mehr über Zugriff auf die Berechtigungsnachweise für die Infrastruktur verfügen und diese auch nicht abrufen können, müssen Sie einen {{site.data.keyword.Bluemix_notm}}-Supportfall öffnen, um den verwaisten Cluster zu entfernen. {: note}
+    Falls Sie nicht mehr über Zugriff auf die Berechtigungsnachweise für die Infrastruktur verfügen und diese auch nicht abrufen können, müssen Sie einen {{site.data.keyword.Bluemix_notm}}-Supportfall öffnen, um den verwaisten Cluster zu entfernen.
+    {: note}
 4.  [Löschen Sie den Cluster](cs_clusters.html#remove).
 5.  Setzen Sie die Berechtigungsnachweise für die Infrastruktur bei Bedarf auf die des vorherigen Kontos zurück. Beachten Sie hierbei Folgendes: Wenn Sie Cluster mit einem anderen Infrastrukturkonto als dem Konto, zu dem Sie gewechselt sind, erstellt haben, können diese Cluster verwaisen.
-    * Wenn Sie die Berechtigungsnachweise eines anderen Infrastrukturkontos festlegen möchten, verwenden Sie den [Befehl](cs_cli_reference.html#cs_credentials_set) `ibmcloud ks credential-set`. 
-    * Wenn Sie die Standardberechtigungsnachweise verwenden möchten, die mit dem nutzungsabhängigen {{site.data.keyword.Bluemix_notm}}-Konto bereitgestellt werden, verwenden Sie den [Befehl](cs_cli_reference.html#cs_credentials_unset) `ibmcloud ks credential-unset`. 
+    * Wenn Sie die Berechtigungsnachweise eines anderen Infrastrukturkontos festlegen möchten, verwenden Sie den [Befehl](cs_cli_reference.html#cs_credentials_set) `ibmcloud ks credential-set`.
+    * Wenn Sie die Standardberechtigungsnachweise verwenden möchten, die mit dem nutzungsabhängigen {{site.data.keyword.Bluemix_notm}}-Konto bereitgestellt werden, verwenden Sie den [Befehl](cs_cli_reference.html#cs_credentials_unset) `ibmcloud ks credential-unset`.
 
 <br />
 
@@ -675,7 +676,7 @@ Falls dieser Cluster bereits vorhanden ist:
 *  Der Pod kann eine Ressourcenanforderung oder einen Grenzwert überschritten haben.
 
 {: tsResolve}
-Diese Task setzt voraus, dass die {{site.data.keyword.Bluemix_notm}} IAM-[Plattformrolle **Administrator**](cs_users.html#platform) für den Cluster zugewiesen ist. 
+Diese Task setzt voraus, dass die {{site.data.keyword.Bluemix_notm}} IAM-[Plattformrolle **Administrator**](cs_users.html#platform) für den Cluster zugewiesen ist.
 
 Führen Sie den folgenden Befehl aus, wenn Sie den Kubernetes-Cluster gerade erst erstellt haben. Warten Sie, bis die Workerknoten initialisiert werden.
 
@@ -896,6 +897,7 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
     -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
--   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support). Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
+-   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 {: tip}
 

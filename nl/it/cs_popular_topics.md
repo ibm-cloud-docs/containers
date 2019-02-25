@@ -84,7 +84,7 @@ Resta al passo con cosa succede in {{site.data.keyword.containerlong}}. Ulterior
 <tr>
 <td>1 novembre</td>
 <td>Master altamente disponibili nei cluster che eseguono Kubernetes versione 1.11</td>
-<td>In una singola zona, il tuo master è altamente disponibile e include repliche su host fisici separati per il server API, etcd, il programma di pianificazione e il gestore controller Kubernetes per proteggerti in caso di interruzione, come durante un aggiornamento del cluster. Se il tuo cluster si trova in una zona che supporta il multizona, il tuo master altamente disponibile viene esteso anche tra le zone per fornire protezione in caso di un malfunzionamento della zona. <br>Per le azioni che devi eseguire, vedi [Aggiornamento a master cluster altamente disponibili](cs_versions.html#ha-masters). Queste azioni di preparazione si applicano:<ul>
+<td>In una singola zona, il tuo master è altamente disponibile e include repliche su host fisici separati per il server API, etcd, il programma di pianificazione e il gestore controller Kubernetes per proteggerti in caso di interruzione, come durante un aggiornamento del cluster. Se il tuo cluster si trova in una zona che supporta il multizona, il tuo master altamente disponibile viene esteso anche tra le zone per fornire protezione in caso di un malfunzionamento della zona.<br>Per le azioni che devi eseguire, vedi [Aggiornamento a master cluster altamente disponibili](cs_versions.html#ha-masters). Queste azioni di preparazione si applicano:<ul>
 <li>Se hai un firewall o politiche di rete Calico personalizzate.</li>
 <li>Se utilizzi le porte host `2040` o `2041` sui tuoi nodi di lavoro.</li>
 <li>Se hai utilizzato l'indirizzo IP del master cluster per l'accesso in cluster al master.</li>

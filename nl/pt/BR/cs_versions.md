@@ -774,7 +774,7 @@ Prepare-se para a atualização do Calico v3 antes de atualizar o mestre. Durant
 ## Archive
 {: #k8s_version_archive}
 
-Localize uma visão geral das versões do Kubernetes que não são suportadas no {{site.data.keyword.containerlong_notm}}.
+Localize uma visão geral das versões do Kubernetes que não são suportadas no {{site.data.keyword.containerlong_notm}}. 
 {: shortdesc}
 
 ### Versão 1.9 (descontinuada, não suportada em 27 de dezembro de 2018)

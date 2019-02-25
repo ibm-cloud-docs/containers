@@ -34,7 +34,7 @@ Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie eine Ingress-Resso
 Stellen Sie sicher, dass Sie einen Host in nur einer Ingress-Ressource definieren. Wenn ein Host in mehreren Ingress-Ressourcen definiert ist, leitet die Lastausgleichsfunktion für Anwendungen den Datenverkehr möglicherweise nicht ordnungsgemäß weiter und es können Fehler auftreten.
 {: tip}
 
-Stellen Sie zunächst sicher, dass Sie über die folgenden [{{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien](cs_users.html#platform) verfügen: 
+Stellen Sie zunächst sicher, dass Sie über die folgenden [{{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien](cs_users.html#platform) verfügen:
   - Plattformrolle **Editor** oder **Administrator** für den Cluster
 
 ## Schritt 1: Ingress-Bereitstellung und Pod-Protokolle der Lastausgleichsfunktion für Anwendungen auf Fehlernachrichten überprüfen
@@ -149,7 +149,7 @@ Beginnen Sie, indem Sie in den Ereignissen der Ingress-Ressourcenbereitstellung 
         * Wenn die CLI ein Zeitlimit zurückgibt und Sie über eine angepasste Firewall verfügen, die Ihre Workerknoten schützt, stellen Sie sicher, dass Ihre [Firewall](cs_troubleshoot_clusters.html#cs_firewall) ICMP zulässt.
         * Wenn keine Firewall vorhanden ist, die die Pingsignale blockiert, und die Pingsignale weiterhin das Zeitlimit überschreiten, müssen Sie den [Status der ALB-Pods überprüfen](#check_pods).
 
-    * Nur bei Mehrzonenclustern: Sie können die MZLB-Zustandsprüfung verwenden, um den Status Ihrer ALB-IPs zu ermitteln. Weitere Informationen zur MZLB finden Sie unter [Lastausgleichsfunktion für mehrere Zonen (MZLB)](cs_ingress.html#planning). Die MZLB-Zustandsprüfung ist nur für Cluster verfügbar, die über die neue Ingress-Unterdomäne im Format `<clustername>.<region_oder_zone>.containers.appdomain.cloud` verfügen. Wenn Ihr Cluster noch das ältere Format von `<cluster_name>.<region>.containers.mybluemix.net` verwendet, müssen Sie Ihren [Einzelzonencluster in einen Mehrzonencluster konvertieren](cs_clusters.html#add_zone). Ihrem Cluster wird eine Unterdomäne mit dem neuen Format zugewiesen, er kann aber auch weiterhin das ältere Unterdomänenformat verwenden. Alternativ können Sie einen neuen Cluster bestellen, dem automatisch das neue Unterdomänenformat zugeordnet wird.
+    * Nur bei Mehrzonenclustern: Sie können die MZLB-Zustandsprüfung verwenden, um den Status Ihrer ALB-IPs zu ermitteln. Weitere Informationen zur MZLB finden Sie unter [Lastausgleichsfunktion für mehrere Zonen (MZLB)](cs_ingress.html#planning). Die MZLB-Zustandsprüfung ist nur für Cluster verfügbar, die über die neue Ingress-Unterdomäne im Format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` verfügen. Wenn Ihr Cluster noch das ältere Format von `<cluster_name>.<region>.containers.mybluemix.net` verwendet, müssen Sie Ihren [Einzelzonencluster in einen Mehrzonencluster konvertieren](cs_clusters.html#add_zone). Ihrem Cluster wird eine Unterdomäne mit dem neuen Format zugewiesen, er kann aber auch weiterhin das ältere Unterdomänenformat verwenden. Alternativ können Sie einen neuen Cluster bestellen, dem automatisch das neue Unterdomänenformat zugeordnet wird.
 
     Der folgende HTTP-cURL-Befehl verwendet den Host `albhealth`, der von {{site.data.keyword.containerlong_notm}} so konfiguriert wird, dass er entweder den Status `healthy` oder den Status `unhealthy` für eine ALB-IP zurückgibt.
         ```
@@ -402,6 +402,7 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
     -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
--   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support). Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
+-   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.
 {: tip}
 

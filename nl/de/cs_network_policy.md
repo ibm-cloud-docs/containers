@@ -82,7 +82,7 @@ Entfernen Sie keine Richtlinien, die auf einen Host-Endpunkt angewendet sind, es
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>Lässt eingehenden Datenverkehr für Knotenportservice, Lastausgleichsservice und Ingress-Service zu den Pods zu, die diese Services zugänglich machen. <strong>Hinweis</strong>: Sie müssen die zugänglich gemachten Ports nicht angeben, weil Kubernetes DNAT (Destination Network Address Translation, Zielnetzadressumsetzung) verwendet, um die Serviceanforderungen an die korrekten Pods weiterzuleiten. Diese Weiterleitung findet statt, bevor der Host-Endpunkt in 'Iptables' angewendet wird. </td>
+      <td>Lässt eingehenden Datenverkehr für Knotenportservice, Lastausgleichsservice und Ingress-Service zu den Pods zu, die diese Services zugänglich machen. <strong>Hinweis</strong>: Sie müssen die zugänglich gemachten Ports nicht angeben, weil Kubernetes DNAT (Destination Network Address Translation, Zielnetzadressumsetzung) verwendet, um die Serviceanforderungen an die korrekten Pods weiterzuleiten. Diese Weiterleitung findet statt, bevor der Host-Endpunkt in 'Iptables' angewendet wird.</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
@@ -291,7 +291,7 @@ X:
     ```
     {: codeblock}
 
-    1. Rufen Sie `<ETCD_HOST>` und `<ETCD_PORT>` ab. 
+    1. Rufen Sie `<ETCD_HOST>` und `<ETCD_PORT>`.
         1. Rufen Sie die Calico-Konfigurationswerte aus der ConfigMap `cluster-info` ab.
             ```
             kubectl get cm -n kube-system cluster-info -o yaml
@@ -390,8 +390,7 @@ Die Kompatibilität von Calico-Versionen für die CLI-Konfiguration und Richtlin
 * [Kubernetes Version 1.10 oder höhere Cluster](#1.10_examine_policies)
 * [Kubernetes Version 1.10 oder frühere Cluster (veraltet)](#1.9_examine_policies)
 
-Kubernetes Version 1.9 ist veraltet und wird ab dem 27. Dezember 2018 nicht mehr unterstützt. Frühere Versionen von Kubernetes werden nicht unterstützt. [Aktualisieren](cs_cluster_update.html#update) Sie Ihre Cluster oder [erstellen](cs_clusters.html#clusters) Sie Cluster, auf denen eine [unterstützte Version](cs_versions.html#cs_versions) ausgeführt wird.
-Bevor Sie Ihren Cluster von Kubernetes Version 1.9 oder einer früheren Version auf Version 1.10 oder höher aktualisieren, ziehen Sie den Abschnitt [Vorbereitungen für die Aktualisierung auf Calico Version 3](cs_versions.html#110_calicov3) zurate.
+Kubernetes Version 1.9 ist veraltet und wird ab dem 27. Dezember 2018 nicht mehr unterstützt. Frühere Versionen von Kubernetes werden nicht unterstützt. [Aktualisieren](cs_cluster_update.html#update) Sie Ihre Cluster oder [erstellen](cs_clusters.html#clusters) Sie Cluster, auf denen eine [unterstützte Version](cs_versions.html#cs_versions) ausgeführt wird. Bevor Sie Ihren Cluster von Kubernetes Version 1.9 oder einer früheren Version auf Version 1.10 oder höher aktualisieren, ziehen Sie den Abschnitt [Vorbereitungen für die Aktualisierung auf Calico Version 3](cs_versions.html#110_calicov3) zurate.
 {: note}
 
 ### Netzrichtlinien in Clustern anzeigen, die Kubernetes Version 1.10 oder höher ausführen
@@ -488,8 +487,7 @@ Um Calico-Richtlinien zu erstellen, führen Sie die folgenden Schritte aus. Die 
 * [Kubernetes Version 1.10 oder höhere Cluster](#1.10_create_new)
 * [Kubernetes Version 1.10 oder frühere Cluster (veraltet)](#1.9_create_new)
 
-Kubernetes Version 1.9 ist veraltet und wird ab dem 27. Dezember 2018 nicht mehr unterstützt. Frühere Versionen von Kubernetes werden nicht unterstützt. [Aktualisieren](cs_cluster_update.html#update) Sie Ihre Cluster oder [erstellen](cs_clusters.html#clusters) Sie Cluster, auf denen eine [unterstützte Version](cs_versions.html#cs_versions) ausgeführt wird.
-Bevor Sie Ihren Cluster von Kubernetes Version 1.9 oder einer früheren Version auf Version 1.10 oder höher aktualisieren, ziehen Sie den Abschnitt [Vorbereitungen für die Aktualisierung auf Calico Version 3](cs_versions.html#110_calicov3) zurate.
+Kubernetes Version 1.9 ist veraltet und wird ab dem 27. Dezember 2018 nicht mehr unterstützt. Frühere Versionen von Kubernetes werden nicht unterstützt. [Aktualisieren](cs_cluster_update.html#update) Sie Ihre Cluster oder [erstellen](cs_clusters.html#clusters) Sie Cluster, auf denen eine [unterstützte Version](cs_versions.html#cs_versions) ausgeführt wird. Bevor Sie Ihren Cluster von Kubernetes Version 1.9 oder einer früheren Version auf Version 1.10 oder höher aktualisieren, ziehen Sie den Abschnitt [Vorbereitungen für die Aktualisierung auf Calico Version 3](cs_versions.html#110_calicov3) zurate.
 {: tip}
 
 ### Calico-Richtlinien in Clustern hinzufügen, die Kubernetes Version 1.10 oder höher ausführen
@@ -503,7 +501,7 @@ Vorbereitende Schritte:
     ```
     {: pre}
 
-1. Definieren Sie die Calico-[Netzrichtlinie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) oder [globale Netzrichtlinie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy), indem Sie ein Konfigurationsscript (`.yaml`) erstellen. Diese Konfigurationsdateien enthalten die Selektoren, die beschreiben, auf welche Pods, Namensbereiche oder Hosts diese Richtlinien angewendet werden. Ziehen Sie diese [Calico-Beispielrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) als Hilfestellung heran, wenn Sie Ihre eigenen erstellen. Beachten Sie, dass Cluster der Kubernetes Version 1.10 oder höher die Syntax für Calico Version 3-Richtlinien verwenden müssen. 
+1. Definieren Sie die Calico-[Netzrichtlinie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) oder [globale Netzrichtlinie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy), indem Sie ein Konfigurationsscript (`.yaml`) erstellen. Diese Konfigurationsdateien enthalten die Selektoren, die beschreiben, auf welche Pods, Namensbereiche oder Hosts diese Richtlinien angewendet werden. Ziehen Sie diese [Calico-Beispielrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) als Hilfestellung heran, wenn Sie Ihre eigenen erstellen. Beachten Sie, dass Cluster der Kubernetes Version 1.10 oder höher die Syntax für Calico Version 3-Richtlinien verwenden müssen.
 
 2. Wenden Sie die Richtlinien auf den Cluster an.
     - Linux und OS X:
@@ -534,7 +532,7 @@ Vorbereitende Schritte:
     ```
     {: pre}
 
-1. Definieren Sie Ihre [Calico-Netzrichtlinie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy), indem Sie ein Konfigurationsscript erstellen (`.yaml`). Diese Konfigurationsdateien enthalten die Selektoren, die beschreiben, auf welche Pods, Namensbereiche oder Hosts diese Richtlinien angewendet werden. Ziehen Sie diese [Calico-Beispielrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) als Hilfestellung heran, wenn Sie Ihre eigenen erstellen. Beachten Sie, dass Cluster der Kubernetes Version 1.9 oder früher die Syntax für Calico Version 2-Richtlinien verwenden müssen. 
+1. Definieren Sie Ihre [Calico-Netzrichtlinie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy), indem Sie ein Konfigurationsscript erstellen (`.yaml`). Diese Konfigurationsdateien enthalten die Selektoren, die beschreiben, auf welche Pods, Namensbereiche oder Hosts diese Richtlinien angewendet werden. Ziehen Sie diese [Calico-Beispielrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) als Hilfestellung heran, wenn Sie Ihre eigenen erstellen. Beachten Sie, dass Cluster der Kubernetes Version 1.9 oder früher die Syntax für Calico Version 2-Richtlinien verwenden müssen.
 
 
 2. Wenden Sie die Richtlinien auf den Cluster an.
@@ -561,7 +559,7 @@ Vorbereitende Schritte:
 [Standardmäßig](#default_policy) sind die NodePort- und LoadBalancer-Services von Kubernetes so konzipiert, dass Ihre App in allen öffentlichen und privaten Clusterschnittstellen verfügbar ist. Sie können jedoch die Richtlinien von Calico verwenden, um den eingehenden Datenverkehr auf Basis der Datenverkehrsquelle oder des Ziels zu blockieren.
 {:shortdesc}
 
-Die standardmäßigen Kubernetes- und Calico-Richtlinien sind aufgrund der DNAT-Iptables-Regeln, die für die Kubernetes-NodePort- und Kubernetes-LoadBalancer-Services generiert werden, zum Schutz dieser Services schwierig anzuwenden. Mit Pre-DNAT-Richtlinien wird jedoch verhindert, dass angegebener Datenverkehr Ihre Apps erreicht, da durch sie 'Iptables'-Regeln generiert und angewendet werden, bevor Kubernetes reguläre DNAT verwendet, um Datenverkehr an Pods weiterzuleiten. 
+Die standardmäßigen Kubernetes- und Calico-Richtlinien sind aufgrund der DNAT-Iptables-Regeln, die für die Kubernetes-NodePort- und Kubernetes-LoadBalancer-Services generiert werden, zum Schutz dieser Services schwierig anzuwenden. Mit Pre-DNAT-Richtlinien wird jedoch verhindert, dass angegebener Datenverkehr Ihre Apps erreicht, da durch sie 'Iptables'-Regeln generiert und angewendet werden, bevor Kubernetes reguläre DNAT verwendet, um Datenverkehr an Pods weiterzuleiten.
 
 Nachfolgend finden Sie einige gängige Anwendungsbereiche für die Calico-Netzrichtlinien des Typs Pre-DNAT:
 
@@ -674,7 +672,7 @@ Gehen Sie wie folgt vor, um Ihren Cluster mithilfe von Calico-Richtlinien im pri
 
 3. Richten Sie eine Richtlinie für den privaten Hostendpunkt ein.
     1. Öffnen Sie die Richtlinie `generic-privatehostendpoint.yaml`.
-    2. Ersetzen Sie `<workername>` durch den Namen eines Workerknotens und `<private_ip-adresse_des_workerknotens>` durch die private IP-Adresse für den Workerknoten. Wenn Sie die privaten IPs Ihrer Workerknoten anzeigen wollen, führen Sie `ibmcloud ks workers --cluster <mein_cluster>` aus.
+    2. Ersetzen Sie `<worker_name>` durch den Namen eines Workerknotens und `<worker-node-private-ip>` durch die private IP-Adresse für den Workerknoten. Wenn Sie die privaten IPs Ihrer Workerknoten anzeigen wollen, führen Sie `ibmcloud ks workers --cluster <mein_cluster>` aus.
     3. Wiederholen Sie diesen Schritt in einem neuen Abschnitt für jeden Workerknoten in Ihrem Cluster. **Hinweis**: Jedes Mal, wenn Sie einen Workerknoten zu einem Cluster hinzufügen, müssen Sie die Hostendpunktdatei mit den neuen Einträgen aktualisieren.
 
 4. Wenden Sie alle Richtlinien auf Ihren Cluster an.
@@ -806,7 +804,7 @@ Im Abschnitt `spec.podSelector.matchLabels` sind die Bezeichnungen für den Back
 
 Der Datenverkehr kann nun von den Mikroservices von 'Finance' zum Back-End für 'Srv1' von 'Accounts' fließen. Das Back-End für Srv1 von 'Accounts' kann auf die Mikroservices von 'Finance' antworten, jedoch keine umgekehrte Datenverkehrsverbindung herstellen.
 
-In diesem Beispiel ist der gesamte Datenverkehr von allen Mikroservices im Namensbereich 'Finance' zulässig. Der Datenverkehr von bestimmten App-Pods in einem anderen Namensbereich ist nicht möglich, da `podSelector` und `namespaceSelector` nicht kombiniert werden können. 
+In diesem Beispiel ist der gesamte Datenverkehr von allen Mikroservices im Namensbereich 'Finance' zulässig. Der Datenverkehr von bestimmten App-Pods in einem anderen Namensbereich ist nicht möglich, da `podSelector` und `namespaceSelector` nicht kombiniert werden können.
 
 ## Verweigerte Datenverkehr protokollieren
 {: #log_denied}
@@ -850,7 +848,7 @@ Gehen Sie wie folgt vor, um eine Calico-Richtlinie zur Protokollierung des verwe
         kubectl apply -f <richtlinienname>.yaml
         ```
         {: pre}
-        Die Kubernetes-Richtlinie wird automatisch in eine Calico-Netzrichtlinie konvertiert, sodass Calico sie als 'Iptables'-Regeln anwenden kann. 
+        Die Kubernetes-Richtlinie wird automatisch in eine Calico-Netzrichtlinie konvertiert, sodass Calico sie als 'Iptables'-Regeln anwenden kann.
 
     * Gehen Sie wie folgt vor, um eine Calico-Richtlinie anzuwenden:
         ```
@@ -883,7 +881,7 @@ Gehen Sie wie folgt vor, um eine Calico-Richtlinie zur Protokollierung des verwe
     ```
     {: screen}
 
-4. Um den gesamten Datenverkehr zu protokollieren, der von der zuvor erstellten Calico-Richtlinie verweigert wurde, erstellen Sie eine Calico-Netzrichtlinie mit dem Namen `log-denied-packets`. Verwenden Sie zum Beispiel die folgende Richtlinie, um alle Pakete zu protokollieren, die von der in Schritt 1 definierten Netzrichtlinie zurückgewiesen wurden. Die Protokollrichtlinie verwendet denselben Pod-Selektor wie die Beispielrichtlinie `access-nginx`, mit der diese Richtlinie zur Calico-Regelkette 'Iptables' hinzugefügt wird. Wenn Sie eine höhere Folgenummer verwenden (z. B. `3000`), können Sie sicherstellen, dass diese Regel am Ende der Regelkette 'Iptables' hinzugefügt wird. Jedes Anforderungspaket aus dem Pod "run=access", das mit der Richtlinienregel `access-nginx` übereinstimmt, wird von den "run=nginx"-Pods akzeptiert. Wenn jedoch Pakete aus einer anderen Quelle versuchen, mit der niederwertigen Richtlinienregel `access-nginx` übereinzustimmen, werden sie verweigert. Diese Pakete versuchen dann, mit der höherwertigen Richtlinienregel `log-denied-packets` übereinzustimmen. `log-denied-packets` protokolliert alle ankommenden Pakete, d. h. es werden nur Pakete aufgezeichnet, die von den "run=nginx"-Pods verweigert wurden. Nachdem die Versuche der Pakete protokolliert wurden, werden die Pakete gelöscht.
+4. Um den gesamten Datenverkehr zu protokollieren, der von der zuvor erstellten Calico-Richtlinie verweigert wurde, erstellen Sie eine Calico-Netzrichtlinie mit dem Namen `log-denied-packets`. Verwenden Sie zum Beispiel die folgende Richtlinie, um alle Pakete zu protokollieren, die von der in Schritt 1 definierten Netzrichtlinie zurückgewiesen wurden. Die Protokollrichtlinie verwendet denselben Pod-Selektor wie die Beispielrichtlinie `access-nginx`, mit der diese Richtlinie zur Calico-Regelkette 'Iptables' hinzugefügt wird. Wenn Sie eine höhere Folgenummer verwenden (z. B. `3000`), können Sie sicherstellen, dass diese Regel am Ende der Regelkette 'Iptables' hinzugefügt wird. Jedes Anforderungspaket aus dem Pod "run=access", das mit der Richtlinienregel `access-nginx` übereinstimmt, wird von den "run=nginx"-Pods akzeptiert.  Wenn jedoch Pakete aus einer anderen Quelle versuchen, mit der niederwertigen Richtlinienregel `access-nginx` übereinzustimmen, werden sie verweigert. Diese Pakete versuchen dann, mit der höherwertigen Richtlinienregel `log-denied-packets` übereinzustimmen. `log-denied-packets` protokolliert alle ankommenden Pakete, d. h. es werden nur Pakete aufgezeichnet, die von den "run=nginx"-Pods verweigert wurden. Nachdem die Versuche der Pakete protokolliert wurden, werden die Pakete gelöscht.
     ```
     apiVersion: projectcalico.org/v3
     kind: NetworkPolicy
@@ -909,7 +907,7 @@ Gehen Sie wie folgt vor, um eine Calico-Richtlinie zur Protokollierung des verwe
     <tbody>
     <tr>
      <td><code>types</code></td>
-     <td>Diese <code>Ingress</code>-Richtlinie bezieht sich auf alle eingehenden Datenverkehrsanforderungen. Der Wert <code>Ingress</code> ist ein allgemeiner Begriff für den gesamten eingehenden Datenverkehr und bezieht sich nicht nur auf den Datenverkehr von der IBM Ingress ALB. </td>
+     <td>Diese <code>Ingress</code>-Richtlinie bezieht sich auf alle eingehenden Datenverkehrsanforderungen. Der Wert <code>Ingress</code> ist ein allgemeiner Begriff für den gesamten eingehenden Datenverkehr und bezieht sich nicht nur auf den Datenverkehr von der IBM Ingress ALB.</td>
     </tr>
      <tr>
       <td><code>ingress</code></td>
@@ -917,7 +915,7 @@ Gehen Sie wie folgt vor, um eine Calico-Richtlinie zur Protokollierung des verwe
      </tr>
      <tr>
       <td><code>selector</code></td>
-      <td>Ersetzen Sie &lt;selector&gt; durch denselben Selektor im Feld `spec.selector`, den Sie in Ihrer Calico-Richtlinie aus Schritt 1 verwendet haben oder den Sie in der Calico-Syntax für Ihre Kubernetes-Richtlinie in Schritt 3 gefunden haben. Wenn Sie beispielsweise den Selektor <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code> verwenden, wird die Regel dieser Richtlinie zu derselben 'Iptables'-Kette hinzugefügt wie die Beispielregel <code>access-nginx</code> für die Netzrichtlinie in Schritt 1. Diese Richtlinie gilt nur für den eingehenden Netzdatenverkehr an Pods, die dieselbe Pod-Selektorbezeichnung verwenden. </td>
+      <td>Ersetzen Sie &lt;selector&gt; durch denselben Selektor im Feld `spec.selector`, den Sie in Ihrer Calico-Richtlinie aus Schritt 1 verwendet haben oder den Sie in der Calico-Syntax für Ihre Kubernetes-Richtlinie in Schritt 3 gefunden haben. Wenn Sie beispielsweise den Selektor <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code> verwenden, wird die Regel dieser Richtlinie zu derselben 'Iptables'-Kette hinzugefügt wie die Beispielregel <code>access-nginx</code> für die Netzrichtlinie in Schritt 1. Diese Richtlinie gilt nur für den eingehenden Netzdatenverkehr an Pods, die dieselbe Pod-Selektorbezeichnung verwenden.</td>
      </tr>
      <tr>
       <td><code>order</code></td>

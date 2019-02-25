@@ -1,4 +1,4 @@
----
+﻿---
 
 copyright:
   years: 2014, 2018
@@ -1537,7 +1537,6 @@ Par défaut, les mises à jour automatiques du module complémentaire de l'équi
 
 Lorsque vous mettez à jour une version Kubernetes principale ou secondaire de votre cluster, IBM effectue les modifications nécessaires dans le déploiement Ingress, mais ne change pas la version de votre module complémentaire ALB Ingress. Vous êtes chargé de vérifier la compatibilité des dernières versions de Kubernetes et des images de votre module complémentaire ALB Ingress.
 
-
 **Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
 **Exemple** :
@@ -1817,8 +1816,7 @@ Affichage des détails d'un équilibreur de charge ALB.
 ### ibmcloud ks alb-rollback --cluster CLUSTER
 {: #cs_alb_rollback}
 
-Si vos pods ALB ont été récemment mis à jour, mais qu'une configuration personnalisée de vos ALB est affectée par la dernière version, vous pouvez rétromigrer la mise à jour à la version que vos pods ALB utilisaient avant. Après avoir annulé une mise à jour, les mises à jour automatiques des pods ALB sont désactivées.
-    Pour réactiver les mises à jour automatiques, utilisez la [commande `alb-autoupdate-enable`](#cs_alb_autoupdate_enable).
+Si vos pods ALB ont été récemment mis à jour, mais qu'une configuration personnalisée de vos ALB est affectée par la dernière version, vous pouvez rétromigrer la mise à jour à la version que vos pods ALB utilisaient avant. Après avoir annulé une mise à jour, les mises à jour automatiques des pods ALB sont désactivées. Pour réactiver les mises à jour automatiques, utilisez la [commande `alb-autoupdate-enable`](#cs_alb_autoupdate_enable).
 
 **Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
@@ -1856,10 +1854,9 @@ Affichage des types d'équilibreur de charge ALB pris en charge dans la région.
 ### ibmcloud ks alb-update --cluster CLUSTER
 {: #cs_alb_update}
 
-Si les mises à jour automatiques du module complémentaire ALB Ingress sont désactivées et que vous souhaitez le mettre à jour, vous pouvez forcer une mise à jour à usage unique pour vos pods ALB. Lorsque vous optez pour une mise à jour manuelle du module complémentaire, les pods ALB du cluster sont mis à jour à la dernière version. Vous ne pouvez pas mettre à jour un équilibreur de charge ALB individuel ou choisir la version à laquelle mettre à jour le module complémentaire. Les mises à jour automatiques restent désactivées.  
+Si les mises à jour automatiques du module complémentaire ALB Ingress sont désactivées et que vous souhaitez le mettre à jour, vous pouvez forcer une mise à jour à usage unique pour vos pods ALB. Lorsque vous optez pour une mise à jour manuelle du module complémentaire, les pods ALB du cluster sont mis à jour à la dernière version. Vous ne pouvez pas mettre à jour un équilibreur de charge ALB individuel ou choisir la version à laquelle mettre à jour le module complémentaire. Les mises à jour automatiques restent désactivées.
 
 Lorsque vous mettez à jour une version Kubernetes principale ou secondaire de votre cluster, IBM effectue les modifications nécessaires dans le déploiement Ingress, mais ne change pas la version de votre module complémentaire ALB Ingress. Vous êtes chargé de vérifier la compatibilité des dernières versions de Kubernetes et des images de votre module complémentaire ALB Ingress.
-
 
 **Droits minimum requis** : rôle de plateforme **Editeur** pour le cluster dans {{site.data.keyword.containerlong_notm}}
 
@@ -2117,7 +2114,6 @@ Affichez le statut de la fonction Spanning VLAN d'un compte d'infrastructure IBM
 
 Désactivez les mises à jour automatiques de vos pods Fluentd dans un cluster spécifique. Lorsque vous mettez à jour une version Kubernetes principale ou secondaire de votre cluster, IBM effectue les modifications nécessaires dans l'élément configmap de Fluentd, mais ne change pas la version de votre module complémentaire Fluentd pour la consignation. Vous êtes chargé de vérifier la compatibilité des dernières versions de Kubernetes et des images de votre module complémentaire.
 
-
 <strong>Options de commande</strong> :
 
 <dl>
@@ -2128,7 +2124,7 @@ Désactivez les mises à jour automatiques de vos pods Fluentd dans un cluster s
 ### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
 {: #cs_log_autoupdate_enable}
 
-Active les mises à jour automatiques de vos pods Fluentd dans un cluster spécifique. Les pods Fluentd sont automatiquement mis à jour lorsqu'une nouvelle version est disponible. 
+Active les mises à jour automatiques de vos pods Fluentd dans un cluster spécifique. Les pods Fluentd sont automatiquement mis à jour lorsqu'une nouvelle version est disponible.
 
 <strong>Options de commande</strong> :
 
@@ -2262,7 +2258,7 @@ Affichez toutes les configurations d'acheminement de journaux d'un cluster ou fi
   {: pre}
 
 
-### ibmcloud ks logging-config-refresh --cluster CLUSTER  [--force-update][-s]
+### ibmcloud ks logging-config-refresh --cluster CLUSTER  [--force-update]  [-s]
 {: #cs_logging_refresh}
 
 Actualise la configuration de consignation pour le cluster. Ceci actualise le jeton de consignation de toute configuration de consignation qui achemine des données au niveau de l'espace dans votre cluster.
@@ -3474,13 +3470,12 @@ Affichez les pools de noeuds worker dont vous disposez dans un cluster.
 
   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
     <dd><p>ID du VLAN privé. Cette valeur est conditionnelle.</p>
-    <p>Si vous disposez d'un VLAN privé dans cette zone, cette valeur doit correspondre à l'ID du VLAN privé d'un ou plusieurs noeuds worker dans le cluster. Pour voir les VLAN à votre disposition, exécutez la commande <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. Les nouveaux noeuds worker sont ajoutés au VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés.
-   </p>
+    <p>Si vous disposez d'un VLAN privé dans cette zone, cette valeur doit correspondre à l'ID du VLAN privé d'un ou plusieurs noeuds worker dans le cluster. Pour voir les VLAN à votre disposition, exécutez la commande <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. Les nouveaux noeuds worker sont ajoutés au VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés.</p>
     <p>Si vous ne disposez pas de VLAN public ou privé dans cette zone, n'indiquez pas cette option. Un VLAN privé et un VLAN public sont automatiquement créés pour vous la première fois que vous ajoutez une nouvelle zone dans votre pool de noeuds worker.</p>
     <p>Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Avec {{site.data.keyword.BluDirectLink}}, vous devez utiliser à la place une [fonction VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Pour activer la fonction VRF, contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer).</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-    <dd><p>ID du VLAN public. Cette valeur est obligatoire si vous souhaitez exposer au public des charges de travail sur les noeuds après avoir créé le cluster. Elle doit correspondre à l'ID du VLAN public d'un ou plusieurs noeuds worker dans le cluster pour la zone. Pour voir les VLAN à votre disposition, exécutez la commande <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. Les nouveaux noeuds worker sont ajoutés au VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés. </p>
+    <dd><p>ID du VLAN public. Cette valeur est obligatoire si vous souhaitez exposer au public des charges de travail sur les noeuds après avoir créé le cluster. Elle doit correspondre à l'ID du VLAN public d'un ou plusieurs noeuds worker dans le cluster pour la zone. Pour voir les VLAN à votre disposition, exécutez la commande <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>. Les nouveaux noeuds worker sont ajoutés au VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés.</p>
     <p>Si vous ne disposez pas de VLAN public ou privé dans cette zone, n'indiquez pas cette option. Un VLAN privé et un VLAN public sont automatiquement créés pour vous la première fois que vous ajoutez une nouvelle zone dans votre pool de noeuds worker.</p>
     <p>Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer la fonction [Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer des [droits Infrastructure](cs_users.html#infra_access) **Réseau > Gérer spanning VLAN pour réseau** ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Avec {{site.data.keyword.BluDirectLink}}, vous devez utiliser à la place une [fonction VRF (Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf). Pour activer la fonction VRF, contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer).</p></dd>
 
@@ -3533,10 +3528,10 @@ VLAN ID   Subnet CIDR         Public   User-managed
     <dd>Liste séparée par une virgule de pools de noeuds worker auxquels est ajoutée la zone. Il doit y avoir au moins 1 pool de noeuds worker.</dd>
 
   <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
-    <dd>ID du VLAN privé. Cette valeur est obligatoire, même si vous souhaitez utiliser le même VLAN privé ou un autre VLAN privé que celui que vous avez utilisé pour vos autres noeuds worker. Les nouveaux noeuds worker sont ajoutés au VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés. <p class="note">Les VLAN public et privé doivent être compatibles, ce que vous pouvez vérifier à partir du préfixe d'ID du **routeur**.</p></dd>
+    <dd>ID du VLAN privé. Cette valeur est obligatoire, même si vous souhaitez utiliser le même VLAN privé ou un autre VLAN privé que celui que vous avez utilisé pour vos autres noeuds worker. Les nouveaux noeuds worker sont ajoutés au VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés.<p class="note">Les VLAN public et privé doivent être compatibles, ce que vous pouvez vérifier à partir du préfixe d'ID du **routeur**.</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-    <dd>ID du VLAN public. Cette valeur est obligatoire uniquement si vous envisagez de changer de VLAN public pour la zone. Pour changer de VLAN public, vous devez toujours fournir un VLAN privé compatible. Les nouveaux noeuds worker sont ajoutés au VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés. <p class="note">Les VLAN public et privé doivent être compatibles, ce que vous pouvez vérifier à partir du préfixe d'ID du **routeur**.</p></dd>
+    <dd>ID du VLAN public. Cette valeur est obligatoire uniquement si vous envisagez de changer de VLAN public pour la zone. Pour changer de VLAN public, vous devez toujours fournir un VLAN privé compatible. Les nouveaux noeuds worker sont ajoutés au VLAN que vous spécifiez, mais les VLAN pour les noeuds worker existants restent inchangés.<p class="note">Les VLAN public et privé doivent être compatibles, ce que vous pouvez vérifier à partir du préfixe d'ID du **routeur**.</p></dd>
 
   <dt><code>-f</code></dt>
     <dd>Force la commande à s'exécuter sans invites utilisateur. Cette valeur est facultative.</dd>

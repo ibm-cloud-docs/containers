@@ -45,7 +45,7 @@ Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipie
 ## Voraussetzungen
 
 -  [Installieren Sie die IBM Cloud-CLI, das {{site.data.keyword.containerlong_notm}}-Plug-in und die Kubernetes-CLI](cs_cli_install.html#cs_cli_install_steps). Stellen Sie sicher, dass Sie die CLI-Version von `kubectl` installieren, die der Kubernetes-Version Ihres Clusters entspricht.
--  [Erstellen Sie einen Cluster](cs_clusters.html#clusters_cli).  
+-  [Erstellen Sie einen Cluster](cs_clusters.html#clusters_cli). 
 -  [Richten Sie die CLI auf Ihren Cluster aus](cs_cli_install.html#cs_cli_configure).
 
 ## Lerneinheit 1: Istio herunterladen und installieren
