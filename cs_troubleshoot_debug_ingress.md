@@ -44,28 +44,18 @@ Before you begin, ensure you have the following [{{site.data.keyword.Bluemix_not
 
 ## Step 1: Run Ingress tests in the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 
-While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Ingress tests and gather pertinent Ingress information from your cluster. To use the debug tool, you can enable the add-on in your cluster.
+While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Ingress tests and gather pertinent Ingress information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
 {: shortdesc}
 
-1. Enable the `debug-tool` add-on in your cluster.
+
+1. [Set up Helm in your cluster, create a service account for Tiller, and add the `ibm` repository to your Helm instance](/docs/containers?topic=containers-integrations#helm).
+
+2. Install the Helm chart to your cluster.
   ```
-  ibmcloud ks cluster-addon-enable debug-tool --cluster <cluster_name_or_ID>
+  helm install ibm/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 
-2. Verify that the add-on is enabled.
-  ```
-  ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
-
-  Example output:
-  ```
-  OK
-  Name                    Version
-  debug-tool              1.0.5
-  ```
-  {: screen}
 
 3. Start a proxy server to display the debug tool interface.
   ```

@@ -776,32 +776,6 @@ ibmcloud ks messages
 Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
 {: shortdesc}
 
-#### ibmcloud ks cluster-addon-disable debug-tool
-{: #cs_cluster_addon_disable_debug}
-
-Disable the add-on for the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool.
-{: shortdesc}
-
-```
-ibmcloud ks cluster-addon-disable debug-tool --cluster CLUSTER
-```
-{: pre}
-
-<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-<strong>Command options</strong>:
-<dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
-</dl>
-
-**Example**:
-
-  ```
-  ibmcloud ks cluster-addon-disable debug-tool --cluster my_cluster
-  ```
-  {: pre}
-
 #### ibmcloud ks cluster-addon-disable istio
 {: #cs_cluster_addon_disable_istio}
 
@@ -919,32 +893,6 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 
 Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
 {: shortdesc}
-
-#### ibmcloud ks cluster-addon-enable debug-tool
-{: #cs_cluster_addon_enable_debug}
-
-Enable the add-on for the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) in a cluster.
-{: shortdesc}
-
-```
-ibmcloud ks cluster-addon-enable debug-tool --cluster CLUSTER
-```
-{: pre}
-
-<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-<strong>Command options</strong>:
-<dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
-</dl>
-
-**Example**:
-
-  ```
-  ibmcloud ks cluster-addon-enable debug-tool --cluster my_cluster
-  ```
-  {: pre}
 
 #### ibmcloud ks cluster-addon-enable istio
 {: #cs_cluster_addon_enable_istio}
