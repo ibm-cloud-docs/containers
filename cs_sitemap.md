@@ -154,7 +154,6 @@ lastupdated: "2019-02-25"
 * [Configuring the CLI to run kubectl](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
-* [Using the Kubernetes Terminal in your web browser (experimental)](/docs/containers?topic=containers-cs_cli_install#cli_web)
 * [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_cli_install#cs_api)
   * [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
   * [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
