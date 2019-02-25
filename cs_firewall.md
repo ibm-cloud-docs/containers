@@ -224,8 +224,8 @@ Let your cluster access infrastructure resources and services from behind a fire
           </tr>
           <tr>
              <td>EU Central</td>
-             <td>ams03<br>mil01<br>osl01<br>par01<br><br><br>fra02, fra04, fra05</td>
-             <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code><br><br><br><code>169.50.56.174, 161.156.65.42, 149.81.78.114</code></td>
+             <td>ams03<br>mil01<br>osl01<br>par01<br><br>fra02, fra04, fra05</td>
+             <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code><br><br><code>169.50.56.174, 161.156.65.42, 149.81.78.114</code></td>
             </tr>
           <tr>
             <td>UK South</td>
