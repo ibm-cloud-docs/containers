@@ -62,6 +62,9 @@ The Istio version in the managed add-on is tested by {{site.data.keyword.Bluemix
 If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.Bluemix_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/).
 {: tip}
 
+**Are there any limitations?** </br>
+If you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster, you cannot enable the managed Istio add-on in your cluster.
+
 <br />
 
 
