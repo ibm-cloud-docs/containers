@@ -86,6 +86,7 @@ Technical solution:
 * {{site.data.keyword.cos_full}}
 * {{site.data.keyword.contdelivery_full}}
 * IBM Cloud Logging and Monitoring
+* {{site.data.keyword.appid.short_notm}}
 
 **Step 1: Containerize apps by using microservices**
 * Architect apps into a set of cooperative microservices that run within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
@@ -98,11 +99,15 @@ Technical solution:
 * Load-balancing, firewalls, and DNS are handled by IBM Cloud Internet Services. 
 * Using the toolchains and Helm deployment tools, the apps are also deployed to clusters across the globe, so workloads and data meet regional requirements, especially personalization. 
 
-**Step 3: Share data**
+**Step 3: Understand users**
+* {{site.data.keyword.appid.short_notm}} provides sign-on capabilities without needing to change app code.
+* After users have signed in, you can use {{site.data.keyword.appid.short_notm}} to create profiles and personalize a user's experience of your application.
+
+**Step 4: Share data**
 * {{site.data.keyword.cos_full}} plus {{site.data.keyword.messagehub_full}} provides real-time and historical data storage, so that cross-sales offers represent available inventory from partners. 
 * APIs allow the retailer’s partners to share data into their e-commerce and B2B apps.
 
-**Step 4: Deliver continuously**
+**Step 5: Deliver continuously**
 * Debugging the co-developed APIs becomes simpler when they add on IBM Cloud Logging and Monitoring tools, cloud-based ones that are accessible to the various Developers. 
 * {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain by using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
 * After Developers build and test the apps in their Development and Test clusters, they use the IBM continuous integration and delivery (CI and CD) toolchains to deploy apps into clusters across the globe. 

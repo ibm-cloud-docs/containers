@@ -776,32 +776,6 @@ ibmcloud ks messages
 Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
 {: shortdesc}
 
-#### ibmcloud ks cluster-addon-disable debug-tool
-{: #cs_cluster_addon_disable_debug}
-
-Disable the add-on for the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool.
-{: shortdesc}
-
-```
-ibmcloud ks cluster-addon-disable debug-tool --cluster CLUSTER
-```
-{: pre}
-
-<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-<strong>Command options</strong>:
-<dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
-</dl>
-
-**Example**:
-
-  ```
-  ibmcloud ks cluster-addon-disable debug-tool --cluster my_cluster
-  ```
-  {: pre}
-
 #### ibmcloud ks cluster-addon-disable istio
 {: #cs_cluster_addon_disable_istio}
 
@@ -919,32 +893,6 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 
 Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
 {: shortdesc}
-
-#### ibmcloud ks cluster-addon-enable debug-tool
-{: #cs_cluster_addon_enable_debug}
-
-Enable the add-on for the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) in a cluster.
-{: shortdesc}
-
-```
-ibmcloud ks cluster-addon-enable debug-tool --cluster CLUSTER
-```
-{: pre}
-
-<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-<strong>Command options</strong>:
-<dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
-</dl>
-
-**Example**:
-
-  ```
-  ibmcloud ks cluster-addon-enable debug-tool --cluster my_cluster
-  ```
-  {: pre}
 
 #### ibmcloud ks cluster-addon-enable istio
 {: #cs_cluster_addon_enable_istio}
@@ -1663,7 +1611,7 @@ Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view availabl
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_NAME [--key SERVICE_INSTANCE_KEY] [--role IAM_ROLE] [-s]
+ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE_GUID [--key SERVICE_INSTANCE_KEY] [--role IAM_ROLE] [-s]
 ```
 {: pre}
 
@@ -1681,8 +1629,8 @@ ibmcloud ks cluster-service-bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
    <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
    <dd>The name of the Kubernetes namespace. This value is required.</dd>
 
-   <dt><code>--service <em>SERVICE_INSTANCE_NAME</em></code></dt>
-   <dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the name of your service instance, run <code>ibmcloud service list</code>. If more than one instance has the same name in the account, use the service instance ID instead of the name. To find the ID, run <code>ibmcloud service show <service instance name> --guid</code>. One of these values is required.</dd>
+   <dt><code>--service <em>SERVICE_INSTANCE_GUID</em></code></dt>
+   <dd>The ID of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the ID, run <code>ibmcloud service show <service_instance_name> --guid</code>. This value is required. </dd>
 
    <dt><code>--role <em>IAM_ROLE</em></code></dt>
    <dd>The {{site.data.keyword.Bluemix_notm}} IAM role that you want the service key to have. The default value is the IAM service role `Writer`. Do not include this value if you are using an existing service key or for services that are not IAM-enabled, such as Cloud Foundry services.<br><br>
@@ -1727,7 +1675,7 @@ When you remove an {{site.data.keyword.Bluemix_notm}} service, the service crede
    <dd>The name of the Kubernetes namespace. This value is required.</dd>
 
    <dt><code>--service <em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>The ID of the {{site.data.keyword.Bluemix_notm}} service instance that you want to remove. To find the ID of the service instance, run `ibmcloud ks cluster-services <cluster_name_or_ID>`.This value is required.</dd>
+   <dd>The ID of the {{site.data.keyword.Bluemix_notm}} service instance that you want to remove. To find the ID of the service instance, run `ibmcloud ks cluster-services <cluster_name_or_ID>`. This value is required.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>

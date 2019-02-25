@@ -40,6 +40,9 @@ Knative comes with 3 key components, or _primitives_, that help you to build, de
 **What is the Managed Knative on {{site.data.keyword.containerlong_notm}} (experimental) add-on?** </br>
 Managed Knative on {{site.data.keyword.containerlong_notm}} is a managed add-on that integrates Knative and Istio directly with your Kubernetes cluster. The Knative and Istio version in the add-on are tested by IBM and supported for the use in {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.containerlong_notm}} keeps the Knative and Istio components up-to-date by automatically rolling out updates for your add-on. 
 
+**Are there any limitations?** </br>
+If you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster, you cannot enable the managed Knative add-on in your cluster. 
+
 Sounds good? Follow this tutorial to get started with Knative in {{site.data.keyword.containerlong_notm}}.
 
 ## Objectives

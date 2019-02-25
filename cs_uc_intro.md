@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-02-25"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -32,6 +32,7 @@ A variety of use cases show the strengths of {{site.data.keyword.containerlong_n
 * AI and machine learning
 * Data and storage
 * DevOps
+* Identity management
 {: shortdesc}
 
 <table summary="The table shows the use cases. Rows are to be read from the left to right, with icons representing each industry in column one the description in column two.">
