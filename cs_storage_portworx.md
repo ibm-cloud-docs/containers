@@ -376,7 +376,7 @@ To install Portworx:
 
    Refer application solutions such as Cassandra, Kafka etcetera.
        https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/
-       https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper/.html
+       https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper/
 
    For options that you could provide while installing Portworx on your cluster head over to the README.md
    ```
@@ -614,7 +614,7 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
    ```
    {: screen}
 
-5. [Retrieve an {{site.data.keyword.keymanagementservicelong_notm}} API key](/docs/services/key-protect?topic=key-protect-set-up-api#set-up-api#access-api). The API key is used by Portworx to interact with the {{site.data.keyword.keymanagementservicelong_notm}} API on your behalf.
+5. [Retrieve an {{site.data.keyword.keymanagementservicelong_notm}} API key](/docs/services/key-protect?topic=key-protect-set-up-api#set-up-api). The API key is used by Portworx to interact with the {{site.data.keyword.keymanagementservicelong_notm}} API on your behalf.
 
 6. [Retrieve the {{site.data.keyword.keymanagementservicelong_notm}} API endpoint](/docs/services/key-protect?topic=key-protect-regions#regions) for the region where you created your service instance.
 
@@ -949,7 +949,7 @@ To access the storage from your app, you must mount the PVC to your app.
 
 1. Create a configuration file for a deployment that mounts the PVC.
 
-   For tips for how to deploy a stateful set with Portworx, see [StatefulSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/). The Portworx documentation also includes examples for how to deploy [Cassandra ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/), [Kafka ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper/.html), [ElasticSearch with Kibana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana/), and [WordPress with MySQL ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/wordpress/).
+   For tips for how to deploy a stateful set with Portworx, see [StatefulSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/). The Portworx documentation also includes examples for how to deploy [Cassandra ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/), [Kafka ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper/), [ElasticSearch with Kibana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana/), and [WordPress with MySQL ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/wordpress/).
    {: tip}
 
    ```

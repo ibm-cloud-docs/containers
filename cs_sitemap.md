@@ -402,7 +402,7 @@ lastupdated: "2019-02-25"
 * [Deploying containers from an {{site.data.keyword.registryshort_notm}} image to the default Kubernetes namespace](/docs/containers?topic=containers-images#namespace)
 * [Using an image pull secret to access other Kubernetes namespaces, other {{site.data.keyword.Bluemix_notm}} accounts, or external private registries](/docs/containers?topic=containers-images#other)
   * [Copying the image pull secret from the default namespace to other namespaces in your cluster](/docs/containers?topic=containers-images#copy_imagePullSecret)
-  * [Creating an image pull secret to access images in other {{site.data.keyword.Bluemix_notm}} accounts or to use IAM policies to restrict registry access](/docs/containers?topic=containers-images#other_regions_accounts)
+  * [Creating an image pull secret to access images in other {{site.data.keyword.Bluemix_notm}} accounts or to use IAM policies to restrict registry access](/docs/containers?topic=containers-images#other_registry_accounts)
   * [Accessing images that are stored in other private registries](/docs/containers?topic=containers-images#private_images)
 * [Deploying containers by using the created image pull secret](/docs/containers?topic=containers-images#use_imagePullSecret)
   * [Referring to the image pull secret in your pod deployment](/docs/containers?topic=containers-images#pod_imagePullSecret)
