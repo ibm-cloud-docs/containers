@@ -48,7 +48,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.2.60</td>
 <td>26 Feb 2019</td>
 <td><ul>
-<li>Adds the `cluster-pull-secret-apply` command, which creates an IAM service ID for the cluster, policies, API key, and image pull secrets so that containers that run in the default Kubernetes namespace can pull images from IBM Cloud Container Registry. For new clusters, image pull secrets that use IAM credentials are created by default. Use this command to update existing clusters or if your cluster has an image pull secret error during creation. For more information, see [the doc](https://test.cloud.ibm.com/docs/containers?topic=containers-images#cluster_registry_auth).</li>
+<li>Adds the `cluster-pull-secret-apply` command, which creates an IAM service ID for the cluster, policies, API key, and image pull secrets so that containers that run in the `default` Kubernetes namespace can pull images from IBM Cloud Container Registry. For new clusters, image pull secrets that use IAM credentials are created by default. Use this command to update existing clusters or if your cluster has an image pull secret error during creation. For more information, see [the doc](https://test.cloud.ibm.com/docs/containers?topic=containers-images#cluster_registry_auth).</li>
 <li>Fixes a bug where `ibmcloud ks init` failures caused help output to be printed.</li>
 </ul></td>
 </tr>
