@@ -57,10 +57,12 @@ scope: containers
 - [How to build a web app on {{site.data.keyword.containerlong_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-scalable-webapp-kubernetes#scalable-webapp-kubernetes)
 - [Secure multi-region clusters with Cloud Internet Service (CIS) ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
 - [Apply end-to-end security to a cloud application with {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.keymanagementservicelong_notm}}, {{site.data.keyword.appid_full_notm}}, and {{site.data.keyword.cos_full_notm}}](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security#cloud-e2e-security)
-- [Analyze logs and monitor the health of apps ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-kubernetes-log-analysis-kibana#kubernetes-log-analysis-kibana)
+- [Analyze cluster logs with LogDNA ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube)
+- [Monitor the health of your cluster with Sysdig ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)
 - [Set up Continuous Integration/ Continuous Delivery for {{site.data.keyword.containerlong}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 - [Migrate a VM app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 - [Migrate a CF app to the cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
+- [Run serverless apps in a cluster with Knative ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
 - [Orchestrate long running workloads for apps with an Apache Kafka based messaging service ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 - [Automate deployments in a cluster with Terraform ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [Organizing users and teams ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)
@@ -73,6 +75,7 @@ scope: containers
 **Integrated open source technologies**
 
 - [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/)
+- [Knative documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs)
 - [Docker documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a> for Kubernetes package management
 - [Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/) platform to connect, manage, and secure microservices
