@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-02-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -74,7 +74,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <td><ul>
 <li>Updates the NGINX version of ALBs to 1.15.2.</li>
 <li>IBM-provided TLS certificates are now automatically renewed 37 days before they expire instead of 7 days.</li>
-<li>Adds {{site.data.keyword.appid_full}} logout functionality: If the `/logout` prefix exists in an {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page.</li>
+<li>Adds {{site.data.keyword.appid_full_notm}} logout functionality: If the `/logout` prefix exists in an {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page.</li>
 <li>Adds a header to {{site.data.keyword.appid_full_notm}} requests for internal tracking purposes.</li>
 <li>Updates the {{site.data.keyword.appid_full_notm}} location directive so that the `app-id` annotation can be used in conjunction with the `proxy-buffers`, `proxy-buffer-size`, and `proxy-busy-buffer-size` annotations.</li>
 <li>Fixes a bug so that informational logs are not labeled as errors.</li>
