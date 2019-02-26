@@ -170,7 +170,7 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     </tr>
     </tbody></table></dd>
   <dt>Worker node</dt>
-    <dd>Each worker node is a physical machine (bare metal) or a virtual machine that runs on physical hardware in the cloud environment. When you provision a worker node, you determine the resources that are available to the containers that are hosted on that worker node. Out of the box, your worker nodes are set up with an {{site.data.keyword.IBM_notm}} managed Docker Engine, separate compute resources, networking, and a volume service. The built-in security features provide isolation, resource management capabilities, and worker node security compliance.</br></br><p class="note">Modifying default components is unsupported and might cause unexpected results.</p>The following table describes the components of a worker node.
+    <dd>Each worker node is a physical machine (bare metal) or a virtual machine that runs on physical hardware in the cloud environment. When you provision a worker node, you determine the resources that are available to the containers that are hosted on that worker node. Out of the box, your worker nodes are set up with an {{site.data.keyword.IBM_notm}} managed Docker Engine, separate compute resources, networking, and a volume service. The built-in security features provide isolation, resource management capabilities, and worker node security compliance.</br></br><p class="note">Modifying default components is not supported and might cause unexpected results.</p>The following table describes the components of a worker node.
     <table>
     <caption>Components of worker nodes</caption>
     <thead>
