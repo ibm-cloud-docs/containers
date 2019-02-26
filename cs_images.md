@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-02-26"
 
 keywords: kubernetes, iks
 
@@ -111,6 +111,10 @@ To update your cluster image pull secret:
     ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>
     ```
     {: pre}
+    
+    When you run this command, the IAM credentials and image pull secrets are initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} domain until the image pull secret is created.
+    {: note}
+    
 3.  Verify that the image pull secrets are created in your cluster. Note that you have a separate image pull secret for each {{site.data.keyword.registrylong_notm}} region.
     ```
     kubectl get secrets
