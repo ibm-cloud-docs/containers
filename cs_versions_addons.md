@@ -76,7 +76,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <li>IBM-provided TLS certificates are now automatically renewed 37 days before they expire instead of 7 days.</li>
 <li>Adds {{site.data.keyword.appid_full_notm}} logout functionality: If the `/logout` prefix exists in an {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page.</li>
 <li>Adds a header to {{site.data.keyword.appid_full_notm}} requests for internal tracking purposes.</li>
-<li>Updates the {{site.data.keyword.appid_full_notm}} location directive so that the `app-id` annotation can be used in conjunction with the `proxy-buffers`, `proxy-buffer-size`, and `proxy-busy-buffer-size` annotations.</li>
+<li>Updates the {{site.data.keyword.appid_short_notm}} location directive so that the `app-id` annotation can be used in conjunction with the `proxy-buffers`, `proxy-buffer-size`, and `proxy-busy-buffer-size` annotations.</li>
 <li>Fixes a bug so that informational logs are not labeled as errors.</li>
 </ul></td>
 <td>Disables TLS 1.0 and 1.1 by default. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, manually enable the required TLS versions by following [these steps](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers). For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.Bluemix_notm}} Blog post](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).</td>
