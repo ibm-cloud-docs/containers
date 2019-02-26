@@ -106,7 +106,7 @@ To update your cluster image pull secret:
     ibmcloud ks clusters
     ```
     {: pre}
-2.  Create a service ID for the cluster, assign the service ID an IAM **Reader** service role for {{site.data.keyword.registrylong_notm}}, create an API key to impersonate the service ID credentials, and store the API key in a Kubernetes image pull secret in the cluster.
+2.  Run the following command to create a service ID for the cluster, assign the service ID an IAM **Reader** service role for {{site.data.keyword.registrylong_notm}}, create an API key to impersonate the service ID credentials, and store the API key in a Kubernetes image pull secret in the cluster.
     ```
     ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>
     ```
