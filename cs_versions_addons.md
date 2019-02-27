@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-26"
+lastupdated: "2019-02-27"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -53,6 +53,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>408 / 304</td>
+<td>27 Feb 2019</td>
+<td>Fixes bugs in the authorization integration related to logout functionality, token expiration, and the OAuth authorization callback. These fixes are implemented only if you enabled {{site.data.keyword.appid_long}} authorization by using the [`appid-auth` annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth) or {{site.data.keyword.Bluemix_notm}} IAM [`iam-cli-auth` or `iam-ui-auth` annotations](/docs/containers?topic=containers-ingress_annotation#user-authentication). To implement these fixes, additional headers are added, which increases the total header size. Depending on the size of your own headers and the total size of responses, you might need to adjust any [proxy buffers annotations](/docs/containers?topic=containers-ingress_annotation#proxy-buffer) that you use.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>406 / 301</td>
 <td>19 Feb 2019</td>
