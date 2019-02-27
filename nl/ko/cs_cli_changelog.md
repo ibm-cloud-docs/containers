@@ -42,14 +42,14 @@ CLI 플러그인을 설치하려면 [CLI 설치](cs_cli_install.html#cs_cli_inst
 <tr>
 <td>0.1.654</td>
 <td>2018년 12월 5일</td>
-<td>문서 및 번역본이 업데이트되었습니다. </td>
+<td>문서 및 번역본이 업데이트되었습니다.</td>
 </tr>
 <tr>
 <td>0.1.638</td>
 <td>2018년 11월 15일</td>
 <td>
-<ul><li>[<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh) 명령이 추가되었습니다. </li>
-<li><code>ibmcloud ks cluster-get</code> 및 <code>ibmcloud ks clusters</code>의 출력에 리소스 그룹 이름이 추가되었습니다. </li></ul>
+<ul><li>[<code>ibmcloud ks cluster-refresh</code>](cs_cli_reference.html#cs_cluster_refresh) 명령이 추가되었습니다.</li>
+<li><code>ibmcloud ks cluster-get</code> 및 <code>ibmcloud ks clusters</code>의 출력에 리소스 그룹 이름이 추가되었습니다.</li></ul>
 </td>
 </tr>
 <tr>
@@ -62,9 +62,9 @@ CLI 플러그인을 설치하려면 [CLI 설치](cs_cli_install.html#cs_cli_inst
 <td>0.1.621</td>
 <td>2018년 10월 30일</td>
 <td><ul>
-<li>[<code>ibmcloud ks credential-get</code> 명령](cs_cli_reference.html#cs_credential_get)이 추가되었습니다. </li>
-<li>모든 클러스터 로깅 명령에 <code>storage</code> 로그 소스에 대한 지원이 추가되었습니다. 자세한 정보는 <a href="cs_health.html#logging">클러스터 및 앱 로그 전달 이해</a>를 참조하십시오. </li>
-<li>Calico 구성 파일을 다운로드하여 모든 Calico 명령을 실행하는 [<code>ibmcloud ks cluster-config</code> 명령](cs_cli_reference.html#cs_cluster_config)에 `--network` 플래그가 추가되었습니다. </li>
+<li>[<code>ibmcloud ks credential-get</code> 명령](cs_cli_reference.html#cs_credential_get)이 추가되었습니다.</li>
+<li>모든 클러스터 로깅 명령에 <code>storage</code> 로그 소스에 대한 지원이 추가되었습니다. 자세한 정보는 <a href="cs_health.html#logging">클러스터 및 앱 로그 전달 이해</a>를 참조하십시오.</li>
+<li>Calico 구성 파일을 다운로드하여 모든 Calico 명령을 실행하는 [<code>ibmcloud ks cluster-config</code> 명령](cs_cli_reference.html#cs_cluster_config)에 `--network` 플래그가 추가되었습니다.</li>
 <li>사소한 버그 수정 및 리팩토링</li></ul>
 </td>
 </tr>

@@ -37,7 +37,7 @@ lastupdated: "2018-12-05"
 |-------|-----------|
 |컴퓨팅, 네트워크 및 스토리지 인프라가 격리된 싱글 테넌트 Kubernetes 클러스터|<ul><li>조직의 요구사항을 충족하는 고유의 사용자 정의된 인프라를 작성합니다.</li><li>IBM Cloud 인프라(SoftLayer)에서 제공하는 리소스를 사용하여 데디케이티드 및 보안 Kubernetes 마스터, 작업자 노드, 가상 네트워크 및 스토리지를 프로비저닝합니다.</li><li>클러스터를 사용 가능한 상태로 유지하도록 {{site.data.keyword.IBM_notm}}에서 지속적으로 모니터하고 업데이트하는 완전히 관리되는 Kubernetes 마스터.</li><li>신뢰할 수 있는 컴퓨팅을 사용하여 베어메탈 서버로 작업자 노드를 프로비저닝하는 옵션.</li><li>지속적 데이터를 저장하고, Kubernetes 팟(Pod) 간에 데이터를 공유하며, 통합 및 보안 볼륨 서비스에서 필요 시에 데이터를 복원합니다.</li><li>모든 기본 Kubernetes API에 대한 전체 지원의 이점.</li></ul>|
 |고가용성을 높이기 위한 다중 구역 클러스터 | <ul><li>작업자 풀에서 동일한 머신 유형(CPU, 메모리, 가상 또는 실제)의 작업자 노드를 손쉽게 관리합니다.</li><li>선택된 다중 구역 간에 노드를 균등하게 전개하고 앱에 대해 반친화성 및 팟(Pod) 배치를 사용하여 구역 장애가 발생하지 않도록 경계합니다.</li><li>개별 클러스터에서 리소스를 복제하는 대신 다중 구역 클러스터를 사용하여 비용을 절감합니다.</li><li>클러스터의 각 구역에서 사용자를 위해 자동으로 설정되는 다중 구역 로드 밸런서(MZLB)를 사용한 앱 간의 자동 로드 밸런싱으로부터 이익을 얻습니다.</li></ul>|
-| 고가용성 마스터 | <ul>Kubernetes 버전 1.10 이상을 실행하는 클러스터에서 사용 가능합니다. <li>클러스터 가동 중단 시간을 줄입니다(예: 클러스터 작성 시에 자동으로 프로비저닝된 고가용성 마스터의 마스터 업데이트 중에). </li><li>구역 장애로부터 클러스터를 보호하기 위해 [다중 구역 클러스터](cs_clusters_planning.html#multizone)의 구역 간에 마스터를 전개합니다. </li></ul> |
+| 고가용성 마스터 | <ul>Kubernetes 버전 1.10 이상을 실행하는 클러스터에서 사용 가능합니다.<li>클러스터 가동 중단 시간을 줄입니다(예: 클러스터 작성 시에 자동으로 프로비저닝된 고가용성 마스터의 마스터 업데이트 중에).</li><li>구역 장애로부터 클러스터를 보호하기 위해 [다중 구역 클러스터](cs_clusters_planning.html#multizone)의 구역 간에 마스터를 전개합니다.</li></ul> |
 |Vulnerability Advisor에서 이미지 보안 준수|<ul><li>이미지가 저장되고 조직의 모든 사용자에 의해 공유되는 보안 Docker 개인용 이미지 레지스트리의 자체 저장소를 설정합니다.</li><li>개인용 {{site.data.keyword.Bluemix_notm}} 레지스트리에서 이미지를 자동 스캔하는 이점.</li><li>잠재적 취약점을 해결하기 위해 이미지에서 사용된 운영 체제에 특정한 권장사항을 검토합니다.</li></ul>|
 |클러스터 상태의 지속적 모니터링|<ul><li>클러스터 대시보드를 사용하여 클러스터, 작업자 노드 및 컨테이너 배치의 상태를 빠르게 보고 관리합니다.</li><li>{{site.data.keyword.monitoringlong}}를 사용하여 세부 이용 메트릭을 찾아서 작업 로드를 충족하도록 클러스터를 신속하게 확장합니다.</li><li>{{site.data.keyword.loganalysislong}}를 사용하여 로깅 정보를 검토하고 자세한 클러스터 활동을 확인하십시오.</li></ul>|
 |공용으로 앱을 안전하게 노출|<ul><li>인터넷에서 클러스터의 서비스에 액세스하기 위해 공인 IP 주소, {{site.data.keyword.IBM_notm}} 제공 라우트 또는 자체 사용자 정의 도메인 간에 선택합니다.</li></ul>|
@@ -186,7 +186,8 @@ IBM Cloud 인프라(SoftLayer) 리소스는 {{site.data.keyword.containerlong_no
   <p>머신 스펙에 대한 세부사항은 [작업자 노드에 대해 사용 가능한 하드웨어](/docs/containers/cs_clusters_planning.html#shared_dedicated_node)를 참조하십시오.</p></dd>
 
 <dt id="bandwidth">공용 대역폭</dt>
-  <dd><p>대역폭은 {{site.data.keyword.Bluemix_notm}} 리소스와 전 세계에 있는 데이터 센터에서의, 인바운드 및 아웃바운드 네트워크 트래픽의 공용 데이터 전송을 가리킵니다. 공용 대역폭은 GB당 비용 청구됩니다. [{{site.data.keyword.Bluemix_notm}} 콘솔](https://console.bluemix.net/)에 로그인하여 메뉴 ![메뉴 아이콘](../icons/icon_hamburger.svg "메뉴 아이콘")에서 **인프라**를 선택한 후에 **네트워크 > 대역폭 > 요약** 페이지를 선택하여 현재 대역폭 요약을 검토할 수 있습니다. <p>공용 대역폭 비용에 영향을 주는 다음 요소를 검토하십시오.</p>
+  <dd><p>대역폭은 {{site.data.keyword.Bluemix_notm}} 리소스와 전 세계에 있는 데이터 센터에서의, 인바운드 및 아웃바운드 네트워크 트래픽의 공용 데이터 전송을 가리킵니다. 공용 대역폭은 GB당 비용 청구됩니다. [{{site.data.keyword.Bluemix_notm}} 콘솔](https://console.bluemix.net/)에 로그인하여 메뉴 ![메뉴 아이콘](../icons/icon_hamburger.svg "메뉴 아이콘")에서 **인프라**를 선택한 후에 **네트워크 > 대역폭 > 요약** 페이지를 선택하여 현재 대역폭 요약을 검토할 수 있습니다.
+  <p>공용 대역폭 비용에 영향을 주는 다음 요소를 검토하십시오.</p>
   <ul><li><strong>위치</strong>: 작업자 노드와 마찬가지로, 비용은 리소스가 배치되는 구역에 따라 달라집니다.</li>
   <li><strong>대역폭 포함 또는 종량과금제</strong>: 작업자 노드 머신은 VM에 대해 250GB, 베어메탈에 대해 500GB와 같이 특정한 월별 아웃바운드 네트워킹 할당량과 함께 제공될 수 있습니다. 또는 이 할당이 GB 사용량에 따라 종량과금제가 될 수도 있습니다.</li>
   <li><strong>계층식 패키지</strong>: 포함된 대역폭을 초과하면 위치별로 다른 계층식 사용량 체계에 따라 비용이 청구됩니다. 계층 할당량을 초과하면 표준 데이터 전송 요금 또한 청구될 수 있습니다.</li></ul>
@@ -197,7 +198,7 @@ IBM Cloud 인프라(SoftLayer) 리소스는 {{site.data.keyword.containerlong_no
   </dd>
 
 <dt id="storage">스토리지</dt>
-  <dd>스토리지를 프로비저닝할 때는 자신의 유스 케이스에 적합한 스토리지 유형 및 스토리지 클래스를 선택할 수 있습니다. 비용은 스토리지 유형, 위치, 스토리지 인스턴스의 스펙에 따라 달라집니다. 적절한 스토리지 솔루션을 선택하려면 [고가용성 지속적 스토리지 계획](cs_storage_planning.html#storage_planning)을 참조하십시오. 자세한 정보는 다음 항목을 참조하십시오.
+  <dd>스토리지를 프로비저닝할 때는 자신의 유스 케이스에 적합한 스토리지 유형 및 스토리지 클래스를 선택할 수 있습니다. 비용은 스토리지 유형, 위치, 스토리지 인스턴스의 스펙에 따라 달라집니다. 적절한 스토리지 솔루션을 선택하려면 [고가용성 지속적 스토리지 계획](cs_storage_planning.html#storage_planning)을 참조하십시오. 자세한 정보는 다음을 참조하십시오.
   <ul><li>[NFS 파일 스토리지 가격 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud/file-storage/pricing)</li>
   <li>[블록 스토리지 가격 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud/block-storage/pricing)</li>
   <li>[Object Storage 플랜 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>

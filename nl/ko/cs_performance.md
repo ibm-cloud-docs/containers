@@ -157,13 +157,13 @@ lastupdated: "2018-12-05"
 ## 클러스터 메트릭 제공자 리소스 조정
 {: #metrics}
 
-클러스터 메트릭 제공자(Kubernetes 1.12 이상의 경우 `metrics-server`, 이전 버전의 경우 `heapster`) 구성은 작업자 노드당 팟(Pod)이 30개 이하인 클러스터에 맞게 최적화되었습니다. 클러스터에서 작업자 노드당 팟(Pod) 수가 이를 초과할 경우, 팟(Pod)에 대한 메트릭 제공자 `metrics-server` 또는 `heapster` 기본 컨테이너가 `OOMKilled`와 같은 오류 메시지를 리턴하면서 자주 다시 시작될 수 있습니다. 
+클러스터 메트릭 제공자(Kubernetes 1.12 이상의 경우 `metrics-server`, 이전 버전의 경우 `heapster`) 구성은 작업자 노드당 팟(Pod)이 30개 이하인 클러스터에 맞게 최적화되었습니다. 클러스터에서 작업자 노드당 팟(Pod) 수가 이를 초과할 경우, 팟(Pod)에 대한 메트릭 제공자 `metrics-server` 또는 `heapster` 기본 컨테이너가 `OOMKilled`와 같은 오류 메시지를 리턴하면서 자주 다시 시작될 수 있습니다.
 
-메트릭 제공자 팟(Pod)에는 또한 `nanny` 컨테이너도 있는데, 이 컨테이너는 클러스터의 작업자 노드 수에 대한 응답으로 `metrics-server` 또는 `heapster` 기본 컨테이너의 리소스 요청 및 한계를 스케일링합니다. 메트릭 제공자의 configmap을 편집하여 기본 리소스를 변경할 수 있습니다. 
+메트릭 제공자 팟(Pod)에는 또한 `nanny` 컨테이너도 있는데, 이 컨테이너는 클러스터의 작업자 노드 수에 대한 응답으로 `metrics-server` 또는 `heapster` 기본 컨테이너의 리소스 요청 및 한계를 스케일링합니다. 메트릭 제공자의 configmap을 편집하여 기본 리소스를 변경할 수 있습니다.
 
 시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
-1.  클러스터 메트릭 제공자 configmap YAML을 여십시오. 
+1.  클러스터 메트릭 제공자 configmap YAML을 여십시오.
     *  `metrics-server`의 경우:
        ```
        kubectl get configmap metrics-server-config -n kube-system -o yaml
@@ -217,7 +217,7 @@ lastupdated: "2018-12-05"
     ```
     {: pre}
 
-4.  `OOMKilled` 오류 메시지로 인해 컨테이너가 계속 다시 시작되는지 메트릭 제공자 팟(Pod)을 모니터링하십시오. 그럴 경우 이러한 단계를 반복하여 팟(Pod)이 안정될 때까지 `memoryPerNode` 크기를 늘리십시오. 
+4.  `OOMKilled` 오류 메시지로 인해 컨테이너가 계속 다시 시작되는지 메트릭 제공자 팟(Pod)을 모니터링하십시오. 그럴 경우 이러한 단계를 반복하여 팟(Pod)이 안정될 때까지 `memoryPerNode` 크기를 늘리십시오.
 
 더 많은 설정을 튜닝하고 싶으십니까? 자세한 내용은 [Kubernetes 추가 기능 resizer 구성 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration)를 확인하십시오.
 {: tip}

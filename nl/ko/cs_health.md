@@ -57,7 +57,7 @@ lastupdated: "2018-12-06"
 
 3. `application`: 애플리케이션 레벨에서 발생하는 이벤트에 대한 정보입니다. 이는 이벤트가 발생했다는 알림일 수 있습니다(예: 로그인 성공, 스토리지에 대한 경고 또는 앱 레벨에서 수행될 수 있는 기타 오퍼레이션).</br>**경로**: 로그가 전달되는 경로를 설정할 수 있습니다. 그러나 로그를 전송하려면 로깅 구성에서 절대 경로를 사용해야 하며, 그렇지 않으면 로그를 읽을 수 없습니다. 경로가 작업자 노드에 마운트되어 있는 경우에는 symlink가 작성되었을 수 있습니다. 예: 지정된 경로가 `/usr/local/spark/work/app-0546/0/stderr`이지만 로그가 실제로는 `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`로 전달되는 경우에는 로그를 읽을 수 없습니다.
 
-4. `storage`: 클러스터에서 설정된 지속적 스토리지에 대한 정보. 스토리지 로그를 사용하면 DevOps 파이프라인 및 프로덕션 릴리스의 일부로서 문제점 판별 대시보드 및 경보를 설정하는 데 도움이 될 수 있습니다. **참고**: 경로 `/var/log/kubelet.log` 및 `/var/log/syslog`에는 스토리지 로그도 포함되어 있지만, 이러한 경로의 로그는 `kubernetes` 및 `worker` 로그 소스에 의해 수집됩니다. </br>**경로**:
+4. `storage`: 클러스터에서 설정된 지속적 스토리지에 대한 정보. 스토리지 로그를 사용하면 DevOps 파이프라인 및 프로덕션 릴리스의 일부로서 문제점 판별 대시보드 및 경보를 설정하는 데 도움이 될 수 있습니다. **참고**: 경로 `/var/log/kubelet.log` 및 `/var/log/syslog`에는 스토리지 로그도 포함되어 있지만, 이러한 경로의 로그는 `kubernetes` 및 `worker` 로그 소스에 의해 수집됩니다.</br>**경로**:
     * `/var/log/ibmc-s3fs.log`
     * `/var/log/ibmc-block.log`
 
@@ -196,8 +196,8 @@ lastupdated: "2018-12-06"
 **IBM에 로그 전달**
 
 1. 권한을 확인하십시오.
-    1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오. 
-    2. 클러스터를 작성할 때 영역을 지정한 경우, 사용자와 {{site.data.keyword.containerlong_notm}} API 키 소유자 모두는 해당 영역의 [**개발자** Cloud Foundry 역할](/docs/iam/mngcf.html)이 필요합니다. 
+    1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
+    2. 클러스터를 작성할 때 영역을 지정한 경우, 사용자와 {{site.data.keyword.containerlong_notm}} API 키 소유자 모두는 해당 영역의 [**개발자** Cloud Foundry 역할](/docs/iam/mngcf.html)이 필요합니다.
       * {{site.data.keyword.containerlong_notm}} API 키 소유자가 누구인지 모르는 경우에는 다음 명령을 실행하십시오.
           ```
       ibmcloud ks api-key-info <cluster_name>
@@ -251,7 +251,7 @@ lastupdated: "2018-12-06"
 
 **`udp` 또는 `tcp` 프로토콜을 통해 사용자의 자체 서버로 로그 전달**
 
-1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오. 
+1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
 
 2. 로그 소스가 있는 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). **참고**: 데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 공용 조직 및 영역을 대상으로 지정해야 합니다.
 
@@ -278,7 +278,7 @@ lastupdated: "2018-12-06"
 다음 단계는 일반 지시사항입니다. 프로덕션 환경에서 컨테이너를 사용하기 전에 필요한 보안 요구사항이 충족되었는지 확인하십시오.
 {: tip}
 
-1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오. 
+1. [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
 
 2. 로그 소스가 있는 클러스터에서 [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure). **참고**: 데디케이티드 계정을 사용 중인 경우 로그 전달을 사용으로 설정하려면 퍼블릭 {{site.data.keyword.cloud_notm}} 엔드포인트에 로그인하고 공용 조직 및 영역을 대상으로 지정해야 합니다.
 
@@ -487,7 +487,7 @@ Kubernetes 감사 로그에 대한 자세한 정보는 Kubernetes 문서에서 <
 * 현재 이 로깅 구성의 모든 클러스터에 대해 기본 감사 정책이 사용됩니다.
 * 현재는 필터가 지원되지 않습니다.
 * 클러스터당 하나의 `kube-audit` 구성만 있을 수 있지만 로깅 구성과 웹훅을 작성하여 로그를 {{site.data.keyword.loganalysisshort_notm}} 및 외부 서버로 전달할 수 있습니다.
-* 클러스터에 대한 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있어야 합니다. 
+* 클러스터에 대한 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있어야 합니다.
 
 
 ### 감사 로그를 {{site.data.keyword.loganalysisshort_notm}}에 전송
@@ -671,15 +671,15 @@ Kubernetes API 서버 로그는 자동으로 스트리밍되므로, 입력되는
 **시작하기 전에**
 
 * {{site.data.keyword.Bluemix_notm}} 카탈로그에서 {{site.data.keyword.cos_short}}의 [인스턴스를 프로비저닝](https://console.bluemix.net/docs/services/cloud-object-storage/basics/developers.html#provision-an-instance-of-ibm-cloud-object-storage)하십시오.
-* 클러스터에 대한 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오. 
+* 클러스터에 대한 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
 
 **스냅샷 작성**
 
-1. [이 시작하기 튜토리얼](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets)에 따라 {{site.data.keyword.Bluemix_notm}} 콘솔을 통해 오브젝트 스토리지 버킷을 작성하십시오. 
+1. [이 시작하기 튜토리얼](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html#create-buckets)에 따라 {{site.data.keyword.Bluemix_notm}} 콘솔을 통해 오브젝트 스토리지 버킷을 작성하십시오.
 
 2. 작성한 버킷에 [HMAC 서비스 인증 정보](/docs/services/cloud-object-storage/iam/service-credentials.html)를 생성하십시오.
   1. {{site.data.keyword.cos_short}} 대시보드의 **서비스 인증 정보** 탭에서 **새 인증 정보**를 클릭하십시오.
-  2. HMAC 인증 정보에 `Writer` 서비스 역할을 부여하십시오. 
+  2. HMAC 인증 정보에 `Writer` 서비스 역할을 부여하십시오.
   3. **인라인 구성 매개변수 추가** 필드에 `{"HMAC":true}`를 지정하십시오.
 
 3. CLI를 통해 마스터 로그의 스냅샷을 요청하십시오.
@@ -700,7 +700,7 @@ Kubernetes API 서버 로그는 자동으로 스트리밍되므로, 입력되는
   ```
   {: screen}
 
-4. 요청의 상태를 확인하십시오. 요청이 완료되는 데는 어느 정도 시간이 소요될 수 있지만, 사용자는 자신의 요청이 완료되었는지 확인할 수 있습니다. 사용자는 응답에서 마스터 로그를 포함하는 파일의 이름을 찾고 {{site.data.keyword.Bluemix_notm}} 콘솔을 사용하여 파일을 다운로드할 수 있습니다. 
+4. 요청의 상태를 확인하십시오. 요청이 완료되는 데는 어느 정도 시간이 소요될 수 있지만, 사용자는 자신의 요청이 완료되었는지 확인할 수 있습니다. 사용자는 응답에서 마스터 로그를 포함하는 파일의 이름을 찾고 {{site.data.keyword.Bluemix_notm}} 콘솔을 사용하여 파일을 다운로드할 수 있습니다.
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
@@ -765,7 +765,7 @@ Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 �
       </table>
  </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>메트릭을 {{site.data.keyword.monitoringlong}}에 전달할 수 있도록 서드파티 서비스로서 Sysdig를 작업자 노드에 배치하여 앱의 성능과 상태에 대한 운영상의 가시성을 확보하십시오. 자세한 정보는 [Kubernetes 클러스터에 배치된 앱의 메트릭 분석](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)을 참조하십시오. **참고**: {{site.data.keyword.mon_full_notm}}에서는 `containerd` 컨테이너 런타임을 지원하지 않습니다. 버전 1.11 이상 클러스터의 {{site.data.keyword.mon_full_notm}} 사용 시에 일부 컨테이너 메트릭은 수집되지 않습니다. </dd>
+  <dd>메트릭을 {{site.data.keyword.monitoringlong}}에 전달할 수 있도록 서드파티 서비스로서 Sysdig를 작업자 노드에 배치하여 앱의 성능과 상태에 대한 운영상의 가시성을 확보하십시오. 자세한 정보는 [Kubernetes 클러스터에 배치된 앱의 메트릭 분석](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)을 참조하십시오. **참고**: {{site.data.keyword.mon_full_notm}}에서는 `containerd` 컨테이너 런타임을 지원하지 않습니다. 버전 1.11 이상 클러스터의 {{site.data.keyword.mon_full_notm}} 사용 시에 일부 컨테이너 메트릭은 수집되지 않습니다.</dd>
 </dl>
 
 기본 제공 메트릭 서비스를 사용할 때 충돌을 피하려면 리소스 그룹 및 지역 전체에서 클러스터가 고유한 이름을 갖도록 하십시오.
@@ -795,7 +795,7 @@ Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 �
 {: note}
 
 시작하기 전에:
-- [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오. 
+- [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
 - [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
 1. [클러스터를 위해 Helm을 설치하고 {{site.data.keyword.Bluemix_notm}} 저장소를 Helm 인스턴스에 추가](cs_integrations.html#helm)하십시오.

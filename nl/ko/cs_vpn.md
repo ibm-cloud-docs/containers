@@ -68,7 +68,7 @@ strongSwan Helm 차트를 사용하기 전에 다음 고려사항 및 제한사�
 ## strongSwan Helm 차트 구성
 {: #vpn_configure}
 
-strongSwan Helm 차트를 설치하기 전에 strongSwan 구성을 결정해야 합니다.
+strongSwan Helm 차트를 설치하기 전에 strongSwan 구성을 결정해야 합니다. 
 {: shortdesc}
 
 시작하기 전에:
@@ -78,7 +78,7 @@ strongSwan Helm 차트를 설치하기 전에 strongSwan 구성을 결정해야 
 ### 1단계: strongSwan Helm 차트 가져오기
 {: #strongswan_1}
 
-Helm을 설치하고 strongSwan Helm 차트를 가져와서 가능한 구성을 확인하십시오.
+Helm을 설치하고 strongSwan Helm 차트를 가져와서 가능한 구성을 확인하십시오. 
 {: shortdesc}
 
 1. [클러스터를 위해 Helm을 설치하고 {{site.data.keyword.Bluemix_notm}} 저장소를 Helm 인스턴스에 추가](cs_integrations.html#helm)하십시오.
@@ -101,7 +101,7 @@ VPN 연결의 설정을 제어하려면 다음의 기본 IPSec 설정을 수정�
 각 설정에 대한 자세한 정보를 보려면 Helm 차트에 대한 `config.yaml` 파일 내에서 제공된 문서를 읽으십시오.
 {: tip}
 
-1. 온프레미스 VPN 터널 엔드포인트가 연결 초기화를 위한 프로토콜로 `ikev2`를 지원하지 않는 경우 `ipsec.keyexchange`의 값을 `ikev1`로 변경하십시오. 
+1. 온프레미스 VPN 터널 엔드포인트가 연결 초기화를 위한 프로토콜로 `ikev2`를 지원하지 않는 경우 `ipsec.keyexchange`의 값을 `ikev1`로 변경하십시오.
 2. `ipsec.esp`를 온프레미스 VPN 터널 엔드포인트가 연결에 사용하는 ESP 암호화 및 인증 알고리즘의 목록으로 설정하십시오.
     * `ipsec.keyexchange`가 `ikev1`로 설정된 경우에는 이 설정을 지정해야 합니다.
     * `ipsec.keyexchange`가 `ikev2`로 설정된 경우 이 설정은 선택사항입니다.
@@ -191,41 +191,40 @@ VPN 연결을 통해 클러스터가 액세스할 수 있어야 하는 원격 �
 strongSwan VPN의 상태를 모니터링하려면 VPN 연결 메시지를 Slack 채널에 자동으로 게시하도록 웹훅을 설정하십시오.
 {: shortdesc}
 
-1. Slack 작업공간에 로그인하십시오. 
+1. Slack 작업공간에 로그인하십시오.
 
-2. [수신 WebHooks 앱 페이지 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks)로 이동하십시오. 
+2. [수신 WebHooks 앱 페이지 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks)로 이동하십시오.
 
-3. **설치 요청**을 클릭하십시오. 이 앱이 Slack 설정에 나열되지 않을 경우 Slack 작업공간 소유자에게 문의하십시오. 
+3. **설치 요청**을 클릭하십시오. 이 앱이 Slack 설정에 나열되지 않을 경우 Slack 작업공간 소유자에게 문의하십시오.
 
-4. 설치 요청이 승인되면 **구성 추가**를 클릭하십시오. 
+4. 설치 요청이 승인되면 **구성 추가**를 클릭하십시오.
 
-5. Slack 채널을 선택하거나 VPN 메시지를 보낼 새 채널을 작성하십시오. 
+5. Slack 채널을 선택하거나 VPN 메시지를 보낼 새 채널을 작성하십시오.
 
-6. 생성되는 웹훅 URL을 복사하십시오. URL 형식은 다음과 유사하게 표시됩니다. 
+6. 생성되는 웹훅 URL을 복사하십시오. URL 형식은 다음과 유사하게 표시됩니다.
   ```
   https://hooks.slack.com/services/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
   ```
   {: screen}
 
 7. Slack 웹훅이 설치되었는지 확인하려면 다음 명령을 실행하여 테스트 메시지를 웹훅 URL로 보내십시오.
-
-```
+    ```
     curl -X POST -H 'Content-type: application/json' -d '{"text":"VPN test message"}' <webhook_URL>
     ```
     {: pre}
 
-8. 선택한 Slack 채널로 이동하여 테스트 메시지가 성공적인지 확인하십시오. 
+8. 선택한 Slack 채널로 이동하여 테스트 메시지가 성공적인지 확인하십시오.
 
-9. Helm 차트의 `config.yaml` 파일에서 VPN 연결을 모니터링하도록 웹훅을 구성하십시오. 
-    1. `monitoring.enable`을 `true`로 변경하십시오. 
-    2. VPN 연결을 통해 `monitoring.privateIPs` 또는 `monitoring.httpEndpoints`에 연결 가능한지 확인하려는 원격 서브넷에서 사설 IP 주소 또는 HTTP 엔드포인트를 추가하십시오. 예를 들어 `remote.privateIPtoPing` 설정의 IP를 `monitoring.privateIPs`에 추가할 수 있습니다. 
-    3. 웹훅 URL을 `monitoring.slackWebhook`에 추가하십시오. 
-    4. 필요에 따라 다른 선택적 `monitoring` 설정을 변경하십시오. 
+9. Helm 차트의 `config.yaml` 파일에서 VPN 연결을 모니터링하도록 웹훅을 구성하십시오.
+    1. `monitoring.enable`을 `true`로 변경하십시오.
+    2. VPN 연결을 통해 `monitoring.privateIPs` 또는 `monitoring.httpEndpoints`에 연결 가능한지 확인하려는 원격 서브넷에서 사설 IP 주소 또는 HTTP 엔드포인트를 추가하십시오. 예를 들어 `remote.privateIPtoPing` 설정의 IP를 `monitoring.privateIPs`에 추가할 수 있습니다.
+    3. 웹훅 URL을 `monitoring.slackWebhook`에 추가하십시오.
+    4. 필요에 따라 다른 선택적 `monitoring` 설정을 변경하십시오.
 
 ### 7단계: Helm 차트 배치
 {: #strongswan_7}
 
-앞에서 선택한 구성을 사용하여 strongSwan Helm 차트를 클러스터에 배치하십시오.
+앞에서 선택한 구성을 사용하여 strongSwan Helm 차트를 클러스터에 배치하십시오. 
 {: shortdesc}
 
 1. 보다 고급 설정을 구성해야 하는 경우에는 Helm 차트의 각 설정에 대해 제공된 문서를 따르십시오.
@@ -292,10 +291,10 @@ Helm 차트를 배치한 후 VPN 연결을 테스트하십시오.
         1. `helm delete --purge <release_name>을 실행하십시오.`
         2. 구성 파일에서 올바르지 않은 값을 수정하십시오.
         3. `helm install -f config.yaml --name=<release_name> ibm/strongswan`을 실행하십시오.
-      다음 단계에서 추가 검사를 실행할 수도 있습니다. 
+      다음 단계에서 추가 검사를 실행할 수도 있습니다.
 
     * VPN 팟(Pod)이 `ERROR` 상태이거나 계속 충돌하고 다시 시작되는 경우, 차트의 configmap에 있는 `ipsec.conf` 설정의 매개변수 유효성 검증 때문일 수 있습니다.
-        1. `kubectl logs $STRONGSWAN_POD`을 실행하여 strongSwan 팟(Pod) 로그에서 유효성 검증 오류가 있는지 확인하십시오. 
+        1. `kubectl logs $STRONGSWAN_POD`을 실행하여 strongSwan 팟(Pod) 로그에서 유효성 검증 오류가 있는지 확인하십시오.
         2. 유효성 검증 오류가 있는 경우 `helm delete --purge <release_name>을 실행하십시오.`
         3. 구성 파일에서 올바르지 않은 값을 수정하십시오.
         4. `helm install -f config.yaml --name=<release_name> ibm/strongswan`을 실행하십시오.
@@ -337,7 +336,7 @@ Helm 차트를 배치한 후 VPN 연결을 테스트하십시오.
     </tr>
     <tr>
     <td><code>vpn-strongswan-ping-remote-gw</code></td>
-    <td><code>config.yaml</code> 파일에 구성한 <code>remote.gateway</code> 공인 IP 주소에 대해 ping을 실행합니다. VPN 연결이 <code>ESTABLISHED</code> 상태일 경우 이 테스트의 결과를 무시해도 됩니다. VPN 연결이 <code>ESTABLISHED</code> 상태가 아닐 경우 다음과 같은 이유로 이 테스트가 실패할 수 있습니다. <ul><li>온프레미스 VPN 게이트웨이 IP 주소를 지정하지 않았습니다. <code>ipsec.auto</code>가 <code>start</code>로 설정된 경우 <code>remote.gateway</code> IP 주소가 필수입니다.</li><li>ICMP(ping) 패킷이 방화벽에 의해 차단됩니다. </li></ul></td>
+    <td><code>config.yaml</code> 파일에 구성한 <code>remote.gateway</code> 공인 IP 주소에 대해 ping을 실행합니다. VPN 연결이 <code>ESTABLISHED</code> 상태일 경우 이 테스트의 결과를 무시해도 됩니다. VPN 연결이 <code>ESTABLISHED</code> 상태가 아닐 경우 다음과 같은 이유로 이 테스트가 실패할 수 있습니다.<ul><li>온프레미스 VPN 게이트웨이 IP 주소를 지정하지 않았습니다. <code>ipsec.auto</code>가 <code>start</code>로 설정된 경우 <code>remote.gateway</code> IP 주소가 필수입니다.</li><li>ICMP(ping) 패킷이 방화벽에 의해 차단됩니다.</li></ul></td>
     </tr>
     <tr>
     <td><code>vpn-strongswan-ping-remote-ip-1</code></td>
@@ -415,20 +414,20 @@ Helm 차트를 배치한 후 VPN 연결을 테스트하십시오.
 싱글 테넌트 클러스터 또는 멀티 테넌트 클러스터가 있는 경우 VPN 트래픽을 특정 네임스페이스에만 있는 팟(Pod)으로 제한할 수 있습니다.
 {: shortdesc}
 
-예를 들어, 특정 네임스페이스 `my-secure-namespace`에만 있는 팟(Pod)이 VPN을 통해 데이터를 전송 및 수신하려 한다고 가정하십시오. `kube-system`, `ibm-system` 또는 `default`와 같은 다른 네임스페이스에 있는 팟(Pod)은 온프레미스 네트워크에 액세스하지 못하도록 하려고 합니다. VPN 트래픽을 `my-secure-namespace`로만 제한하려면 Calico 글로벌 네트워크 정책을 작성하십시오. 
+예를 들어, 특정 네임스페이스 `my-secure-namespace`에만 있는 팟(Pod)이 VPN을 통해 데이터를 전송 및 수신하려 한다고 가정하십시오. `kube-system`, `ibm-system` 또는 `default`와 같은 다른 네임스페이스에 있는 팟(Pod)은 온프레미스 네트워크에 액세스하지 못하도록 하려고 합니다. VPN 트래픽을 `my-secure-namespace`로만 제한하려면 Calico 글로벌 네트워크 정책을 작성하십시오.
 
-이 솔루션을 사용하기 전에 다음 고려사항 및 제한사항을 검토하십시오. 
-* strongSwan Helm 차트를 지정된 네임스페이스에 배치할 필요가 없습니다. strongSwan VPN 팟(Pod)과 라우트 daemonset은 `kube-system` 또는 다른 네임스페이스에 배치할 수 있습니다. strongSwan VPN이 지정된 네임스페이스에 배치되지 않을 경우 `vpn-strongswan-ping-remote-ip-1` Helm 테스트가 실패합니다. 이 실패는 예상된 결과이므로 허용 가능합니다. 테스트 시 클러스터의 VPN 팟(Pod)에서 온프레미스 VPN 게이트웨이의 `remote.privateIPtoPing` 사설 IP 주소에 대해 ping이 실행됩니다. 이때 이 팟(Pod)은 원격 서브넷에 직접 액세스할 수 있는 네임스페이스에 있지 않습니다. 그러나 해당 VPN 팟(Pod)은 여전히 원격 서브넷으로 라우팅되지 않는 네임스페이스의 팟(Pod)으로 트래픽을 전달할 수 있고, 트래픽 플로우도 올바를 수 있습니다. VPN 상태는 계속 `ESTABLISHED`이고 지정된 네임스페이스에 있는 팟(Pod)은 VPN을 통해 연결될 수 있습니다. 
-* 다음 단계에 설명된 Calico 글로벌 네트워크 정책으로는 호스트 네트워킹을 사용하는 Kubernetes 팟(Pod)이 VPN을 통해 데이터를 전송 및 수신하는 것을 방지할 수 없습니다. 팟(Pod)이 호스트 네트워킹을 사용하도록 구성된 경우 팟(Pod)에서 실행되는 앱은 팟(Pod)이 있는 작업자 노드의 네트워크 인터페이스에서 청취할 수 있습니다. 이러한 호스트 네트워킹 팟(Pod)은 어떤 네임스페이스에나 있을 수 있습니다. 호스트 네트워킹을 사용하는 팟(Pod)을 판별하려면 `kubectl get pods --all-namespaces -o wide`를 실행하고 `172.30.0.0/16` 팟(Pod) IP 주소가 없는 팟(Pod)을 찾으십시오. 호스트 네트워킹 팟(Pod)이 VPN을 통해 데이터를 전송 및 수신하지 못하도록 하려면 `values.yaml` 배치 파일에서 `local.subnet: 172.30.0.0/16` 및 `enablePodSNAT: false` 옵션을 설정하십시오. 이러한 구성 설정을 사용하면 모든 Kubernetes 팟(Pod)이 VPN 연결을 통해 다른 원격 네트워크에 노출됩니다. 그러나 지정된 보안 네임스페이스에 있는 팟(Pod)만 VPN을 통해 연결될 수 있습니다. 
+이 솔루션을 사용하기 전에 다음 고려사항 및 제한사항을 검토하십시오.
+* strongSwan Helm 차트를 지정된 네임스페이스에 배치할 필요가 없습니다. strongSwan VPN 팟(Pod)과 라우트 daemonset은 `kube-system` 또는 다른 네임스페이스에 배치할 수 있습니다. strongSwan VPN이 지정된 네임스페이스에 배치되지 않을 경우 `vpn-strongswan-ping-remote-ip-1` Helm 테스트가 실패합니다. 이 실패는 예상된 결과이므로 허용 가능합니다. 테스트 시 클러스터의 VPN 팟(Pod)에서 온프레미스 VPN 게이트웨이의 `remote.privateIPtoPing` 사설 IP 주소에 대해 ping이 실행됩니다. 이때 이 팟(Pod)은 원격 서브넷에 직접 액세스할 수 있는 네임스페이스에 있지 않습니다. 그러나 해당 VPN 팟(Pod)은 여전히 원격 서브넷으로 라우팅되지 않는 네임스페이스의 팟(Pod)으로 트래픽을 전달할 수 있고, 트래픽 플로우도 올바를 수 있습니다. VPN 상태는 계속 `ESTABLISHED`이고 지정된 네임스페이스에 있는 팟(Pod)은 VPN을 통해 연결될 수 있습니다.
+* 다음 단계에 설명된 Calico 글로벌 네트워크 정책으로는 호스트 네트워킹을 사용하는 Kubernetes 팟(Pod)이 VPN을 통해 데이터를 전송 및 수신하는 것을 방지할 수 없습니다. 팟(Pod)이 호스트 네트워킹을 사용하도록 구성된 경우 팟(Pod)에서 실행되는 앱은 팟(Pod)이 있는 작업자 노드의 네트워크 인터페이스에서 청취할 수 있습니다. 이러한 호스트 네트워킹 팟(Pod)은 어떤 네임스페이스에나 있을 수 있습니다. 호스트 네트워킹을 사용하는 팟(Pod)을 판별하려면 `kubectl get pods --all-namespaces -o wide`를 실행하고 `172.30.0.0/16` 팟(Pod) IP 주소가 없는 팟(Pod)을 찾으십시오. 호스트 네트워킹 팟(Pod)이 VPN을 통해 데이터를 전송 및 수신하지 못하도록 하려면 `values.yaml` 배치 파일에서 `local.subnet: 172.30.0.0/16` 및 `enablePodSNAT: false` 옵션을 설정하십시오. 이러한 구성 설정을 사용하면 모든 Kubernetes 팟(Pod)이 VPN 연결을 통해 다른 원격 네트워크에 노출됩니다. 그러나 지정된 보안 네임스페이스에 있는 팟(Pod)만 VPN을 통해 연결될 수 있습니다.
 
 시작하기 전에:
-* Kubernetes 버전 1.10 이상을 실행하는 클러스터를 작성 또는 사용하십시오. 
-* [strongSwan Helm 차트를 배치](#vpn_configure)하고 [VPN 연결이 올바르게 작동하는지 확인](#vpn_test)하십시오. 
+* Kubernetes 버전 1.10 이상을 실행하는 클러스터를 작성 또는 사용하십시오.
+* [strongSwan Helm 차트를 배치](#vpn_configure)하고 [VPN 연결이 올바르게 작동하는지 확인](#vpn_test)하십시오.
 * [Calico CLI를 설치하고 구성](cs_network_policy.html#cli_install)하십시오.
 
-VPN 트래픽을 특정 네임스페이스로 제한하려면 다음을 수행하십시오. 
+VPN 트래픽을 특정 네임스페이스로 제한하려면 다음을 수행하십시오.
 
-1. `allow-non-vpn-outbound.yaml`이라는 Calico 글로벌 네트워크 정책을 작성하십시오. 이 정책을 사용하면 모든 네임스페이스가 모든 대상(strongSwan VPN이 액세스하는 원격 서브넷 제외)으로 아웃바운드 트래픽을 전송할 수 있습니다. `<remote.subnet>`을 `values.yaml` 구성 파일에 지정한 `remote.subnet`으로 대체하십시오. 원격 서브넷을 여러 개 지정하려면 [Calico 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy)를 참조하십시오.
+1. `allow-non-vpn-outbound.yaml`이라는 Calico 글로벌 네트워크 정책을 작성하십시오. 이 정책을 사용하면 모든 네임스페이스가 모든 대상(strongSwan VPN이 액세스하는 원격 서브넷 제외)으로 아웃바운드 트래픽을 전송할 수 있습니다. `<remote.subnet>`을 Helm `values.yaml` 구성 파일에 지정한 `remote.subnet`으로 대체하십시오. 원격 서브넷을 여러 개 지정하려면 [Calico 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy)를 참조하십시오.
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -492,20 +491,20 @@ calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
 멀티 테넌트 클러스터에 strongSwan VPN 배치가 여러 개 있을 경우 배치 각각에 대한 VPN 트래픽을 각 테넌트에 전용인 특정 작업자 노드로 제한할 수 있습니다.
 {: shortdesc}
 
-strongSwan Helm 차트를 배치하면 strongSwan VPN 배치가 작성됩니다. strongSwan VPN 팟(Pod)은 오염되지 않은 작업자 노드에 배치됩니다. 또한 Kubernetes daemonset가 작성됩니다. 이 daemonset는 클러스터의 오염되지 않은 모든 작업자 노드에서 원격 서브넷 각각에 대해 라우트를 자동으로 구성합니다. strongSwan VPN 팟(Pod)은 작업자 노드의 라우트를 사용하여 온프레미스 네트워크의 원격 서브넷으로 요청을 전달합니다. 
+strongSwan Helm 차트를 배치하면 strongSwan VPN 배치가 작성됩니다. strongSwan VPN 팟(Pod)은 오염되지 않은 작업자 노드에 배치됩니다. 또한 Kubernetes daemonset가 작성됩니다. 이 daemonset는 클러스터의 오염되지 않은 모든 작업자 노드에서 원격 서브넷 각각에 대해 라우트를 자동으로 구성합니다. strongSwan VPN 팟(Pod)은 작업자 노드의 라우트를 사용하여 온프레미스 네트워크의 원격 서브넷으로 요청을 전달합니다.
 
-`value.yaml` 파일의 `tolerations` 설정에 오염을 지정하지 않는 한 오염된 노드에 대해서는 라우트가 구성되지 않습니다. 작업자 노드를 오염시키면 해당 작업자에 대해 VPN 라우트가 구성되는 것을 방지할 수 있습니다. 그런 다음 오염된 작업자에서 허용하지 않을 VPN 배치에 대해서만 `tolerations` 설정에서 오염을 지정할 수 있습니다. 이와 같이, 한 테넌트의 Helm 차트 배치에 대한 strongSwan VPN 팟(Pod)만 해당 테넌트의 작업자 노드의 라우트를 사용하여 VPN 연결을 통해 원격 서브넷에 트래픽을 전달합니다. 
+`value.yaml` 파일의 `tolerations` 설정에 오염을 지정하지 않는 한 오염된 노드에 대해서는 라우트가 구성되지 않습니다. 작업자 노드를 오염시키면 해당 작업자에 대해 VPN 라우트가 구성되는 것을 방지할 수 있습니다. 그런 다음 오염된 작업자에서 허용하지 않을 VPN 배치에 대해서만 `tolerations` 설정에서 오염을 지정할 수 있습니다. 이와 같이, 한 테넌트의 Helm 차트 배치에 대한 strongSwan VPN 팟(Pod)만 해당 테넌트의 작업자 노드의 라우트를 사용하여 VPN 연결을 통해 원격 서브넷에 트래픽을 전달합니다.
 
-이 솔루션을 사용하기 전에 다음 고려사항 및 제한사항을 검토하십시오. 
-* 기본적으로 Kubernetes는 오염되지 않은 사용 가능한 작업자 노드에 앱 팟(Pod)을 배치합니다. 이 솔루션이 올바르게 작동되도록 하려면 각 테넌트는 먼저 올바른 테넌트를 위해 오염된 작업자에만 앱 팟(Pod)을 배치했는지 확인해야 합니다. 또한 오염된 작업자 노드 각각에는 앱 팟(Pod)을 노드에 배치할 수 있도록 하는 결함 허용이 있어야 합니다. 오염 및 결함 허용에 대한 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)를 참조하십시오. 
-* 테넌트는 오염되지 않은 공유 노드에 앱 팟(Pod)을 배치할 수 있으므로 클러스터 리소스가 최적으로 사용되지 않을 수 있습니다. 
+이 솔루션을 사용하기 전에 다음 고려사항 및 제한사항을 검토하십시오.
+* 기본적으로 Kubernetes는 오염되지 않은 사용 가능한 작업자 노드에 앱 팟(Pod)을 배치합니다. 이 솔루션이 올바르게 작동되도록 하려면 각 테넌트는 먼저 올바른 테넌트를 위해 오염된 작업자에만 앱 팟(Pod)을 배치했는지 확인해야 합니다. 또한 오염된 작업자 노드 각각에는 앱 팟(Pod)을 노드에 배치할 수 있도록 하는 결함 허용이 있어야 합니다. 오염 및 결함 허용에 대한 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)를 참조하십시오.
+* 테넌트는 오염되지 않은 공유 노드에 앱 팟(Pod)을 배치할 수 있으므로 클러스터 리소스가 최적으로 사용되지 않을 수 있습니다.
 
-strongSwan VPN 트래픽을 작업자 노드로 제한하는 다음 단계는 이 예제 시나리오를 사용합니다. 작업자 노드가 6개 있는 멀티 테넌트 {{site.data.keyword.containerlong_notm}} 클러스터가 있다고 가정하십시오. 클러스터는 테넌트 A와 테넌트 B를 지원합니다. 작업자 노드를 다음과 같은 방법으로 오염시키십시오. 
-* 테넌트 A 팟(Pod)만 작업자에서 스케줄링되도록 두 개의 작업자 노드를 오염시킵니다. 
-* 테넌트 B 팟(Pod)만 작업자에서 스케줄링되도록 두 개의 작업자 노드를 오염시킵니다. 
-* strongSwan VPN 팟(Pod)과 로드 밸런서 IP가 실행되려면 최소 두 개의 작업자 노드가 필요하므로 두 개의 작업자 노드는 오염되지 않습니다. 
+strongSwan VPN 트래픽을 작업자 노드로 제한하는 다음 단계는 이 예제 시나리오를 사용합니다. 작업자 노드가 6개 있는 멀티 테넌트 {{site.data.keyword.containerlong_notm}} 클러스터가 있다고 가정하십시오. 클러스터는 테넌트 A와 테넌트 B를 지원합니다. 작업자 노드를 다음과 같은 방법으로 오염시키십시오.
+* 테넌트 A 팟(Pod)만 작업자에서 스케줄링되도록 두 개의 작업자 노드를 오염시킵니다.
+* 테넌트 B 팟(Pod)만 작업자에서 스케줄링되도록 두 개의 작업자 노드를 오염시킵니다.
+* strongSwan VPN 팟(Pod)과 로드 밸런서 IP가 실행되려면 최소 두 개의 작업자 노드가 필요하므로 두 개의 작업자 노드는 오염되지 않습니다.
 
-VPN 트래픽을 각 테넌트의 오염된 노드로 제한하려면 다음을 수행하십시오. 
+VPN 트래픽을 각 테넌트의 오염된 노드로 제한하려면 다음을 수행하십시오.
 
 1. 이 예에서 테넌트 A에 전용인 작업자로만 VPN 트래픽을 제한하려면 테넌트 A strongSwan Helm 차트에 대해 `values.yaml` 파일에 다음 `toleration`을 지정하십시오.
     ```
@@ -516,7 +515,7 @@ VPN 트래픽을 각 테넌트의 오염된 노드로 제한하려면 다음을 
        effect: "NoSchedule"
     ```
     {: codeblock}
-    이 결함 허용을 사용하면 `dedicated="tenantA"` 오염이 있는 두 개의 작업자 노드와 오염되지 않은 두 개의 작업자 노드에서 라우트 daemonset가 실행될 수 있습니다. 이 배치에 대한 strongSwan VPN 팟(Pod)은 오염되지 않은 두 개의 작업자 노드에서 실행됩니다. 
+    이 결함 허용을 사용하면 `dedicated="tenantA"` 오염이 있는 두 개의 작업자 노드와 오염되지 않은 두 개의 작업자 노드에서 라우트 daemonset가 실행될 수 있습니다. 이 배치에 대한 strongSwan VPN 팟(Pod)은 오염되지 않은 두 개의 작업자 노드에서 실행됩니다.
 
 2. 이 예에서 테넌트 B에 전용인 작업자로만 VPN 트래픽을 제한하려면 테넌트 B strongSwan Helm 차트에 대해 `values.yaml` 파일에 다음 `toleration`을 지정하십시오.
     ```
@@ -527,7 +526,7 @@ VPN 트래픽을 각 테넌트의 오염된 노드로 제한하려면 다음을 
        effect: "NoSchedule"
     ```
     {: codeblock}
-    이 결함 허용을 사용하면 `dedicated="tenantB"` 오염이 있는 두 개의 작업자 노드와 오염되지 않은 두 개의 작업자 노드에서 라우트 daemonset가 실행될 수 있습니다. 이 배치에 대한 strongSwan VPN 팟(Pod)은 오염되지 않은 두 개의 작업자 노드에서도 실행됩니다. 
+    이 결함 허용을 사용하면 `dedicated="tenantB"` 오염이 있는 두 개의 작업자 노드와 오염되지 않은 두 개의 작업자 노드에서 라우트 daemonset가 실행될 수 있습니다. 이 배치에 대한 strongSwan VPN 팟(Pod)은 오염되지 않은 두 개의 작업자 노드에서도 실행됩니다.
 
 <br />
 

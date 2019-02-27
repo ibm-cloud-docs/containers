@@ -49,7 +49,7 @@ lastupdated: "2018-12-05"
       叢集：<ul>
         <li>檢視資源群組及地區之 {{site.data.keyword.Bluemix_notm}} IAM API 金鑰擁有者的名稱及電子郵件位址。</li>
         <li>如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶使用不同的認證來存取 IBM Cloud 基礎架構 (SoftLayer) 組合，請檢視基礎架構使用者名稱</li>
-        <li>全部列出或檢視叢集、工作者節點、工作者節點儲存區、叢集中服務，以及 Webhook 的詳細資料</li>
+        <li>全部列出或檢視叢集、工作者節點、工作者節點儲存區、叢集裡服務，以及 Webhook 的詳細資料</li>
         <li>檢視基礎架構帳戶的 VLAN Spanning 狀態</li>
         <li>列出基礎架構帳戶中的可用子網路</li>
         <li>針對某個叢集設定時：列出區域中叢集連接至其中的 VLAN</li>
@@ -59,7 +59,7 @@ lastupdated: "2018-12-05"
         <li>列出或檢視日誌轉遞和過濾配置的詳細資料</li>
         <li>檢視 Fluentd 附加程式的自動更新狀態</li></ul>
       Ingress：<ul>
-        <li>全部列出或檢視叢集中 ALB 的詳細資料</li>
+        <li>全部列出或檢視叢集裡 ALB 的詳細資料</li>
         <li>檢視地區中支援的 ALB 類型</li></ul>
     </td>
     <td><code>view</code> 叢集角色是由 <code>ibm-view</code> 角色連結所套用，在 <code>default</code> 名稱空間中提供下列許可權：<ul>
@@ -97,7 +97,7 @@ lastupdated: "2018-12-05"
         <li>更新工作者節點儲存區中給定區域的網路配置</li>
         <li>調整工作者節點儲存區的大小並且重新平衡工作者節點儲存區</li>
         <li>建立及新增子網路至叢集</li>
-        <li>新增及移除叢集中使用者管理的子網路</li></ul>
+        <li>新增及移除叢集裡使用者管理的子網路</li></ul>
     </td>
     <td><code>admin</code> 叢集角色是由 <code>ibm-operate</code> 叢集角色連結所套用，提供下列許可權：<ul>
       <li>讀寫存取名稱空間內的資源，但不會讀寫存取名稱空間本身</li>
@@ -119,9 +119,9 @@ lastupdated: "2018-12-05"
         <li>收集 {{site.data.keyword.cos_full_notm}} 儲存區中 API 伺服器日誌的 Snapshot</li>
         <li>啟用及停用 Fluentd 叢集附加程式的自動更新</li></ul>
       Ingress：<ul>
-        <li>全部列出或檢視叢集中 ALB 密碼的詳細資料</li>
+        <li>全部列出或檢視叢集裡 ALB 密碼的詳細資料</li>
         <li>將 {{site.data.keyword.cloudcerts_long_notm}} 實例中的憑證部署至 ALB</li>
-        <li>更新或移除叢集中的 ALB 密碼</li></ul>
+        <li>更新或移除叢集裡的 ALB 密碼</li></ul>
       <p class="note">若要建立機器、VLAN 及子網路這類資源，「管理者」使用者需要**超級使用者**基礎架構角色。</p>
     </td>
     <td><code>cluster-admin</code> 叢集角色是由 <code>ibm-admin</code> 叢集角色連結所套用，提供下列許可權：
@@ -139,7 +139,7 @@ lastupdated: "2018-12-05"
 ## Cloud Foundry 角色
 {: #cloud-foundry}
 
-Cloud Foundry 角色授與帳戶內組織及空間的存取權。若要查看 {{site.data.keyword.Bluemix_notm}} 中的 Cloud Foundry 型服務清單，請執行 `ibmcloud service list`。若要進一步瞭解，請參閱 {{site.data.keyword.Bluemix_notm}} IAM 文件中的所有可用[組織和空間角色](/docs/iam/cfaccess.html)或[管理 Cloud Foundry 存取](/docs/iam/mngcf.html)的步驟。
+Cloud Foundry 角色會授與對帳戶內組織及空間的存取權。若要查看 {{site.data.keyword.Bluemix_notm}} 中的 Cloud Foundry 型服務清單，請執行 `ibmcloud service list`。若要進一步瞭解，請參閱 {{site.data.keyword.Bluemix_notm}} IAM 文件中的所有可用[組織和空間角色](/docs/iam/cfaccess.html)或[管理 Cloud Foundry 存取](/docs/iam/mngcf.html)的步驟。
 {: shortdesc}
 
 下表顯示叢集動作許可權所需的 Cloud Foundry 角色。

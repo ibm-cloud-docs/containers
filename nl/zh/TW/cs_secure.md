@@ -75,7 +75,7 @@ Kubernetes API 伺服器及 etcd 是在 Kubernetes 主節點中執行的最容�
     <tr>
       <td>完整受管理及專用的 Kubernetes 主節點</td>
       <td><p>{{site.data.keyword.containerlong_notm}} 中的每個 Kubernetes 叢集都是由 IBM 透過 IBM 擁有的 IBM Cloud 基礎架構 (SoftLayer) 帳戶所管理的專用 Kubernetes 主節點予以控制。Kubernetes 主節點已設定下列未與其他 IBM 客戶共用的專用元件。</p>
-        <ul><li><strong>etcd data store：</strong>儲存叢集的所有 Kubernetes 資源（例如`服務`、`部署`及 `Pod`）。Kubernetes `ConfigMaps` 及 `Secrets` 是儲存為鍵值組的應用程式資料，因此，Pod 中執行的應用程式可以使用它們。在執行 Kubernetes 1.10 版或更新版本的叢集中，etcd 中的資料會儲存在 Kubernetes 主節點的本端磁碟上，且會備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。您可以選擇在 Kubernetes 主節點的本端磁碟上針對 etcd 資料啟用加密，方法是針對叢集[啟用 {{site.data.keyword.keymanagementservicelong_notm}} 加密](cs_encrypt.html#encryption)。執行舊版 Kubernetes 之叢集的 Etcd 資料會儲存在由 IBM 管理的已加密磁碟上，並且每日進行備份。當 etcd 資料傳送至 Pod 時，會透過 TLS 將資料加密，以確保資料保護及完整性。</li>
+        <ul><li><strong>etcd data store：</strong>儲存叢集的所有 Kubernetes 資源（例如`服務`、`部署`及 `Pod`）。Kubernetes `ConfigMaps` 及 `Secrets` 是儲存為鍵值組的應用程式資料，因此，Pod 中執行的應用程式可以使用它們。在執行 Kubernetes 1.10 版或更新版本的叢集裡，etcd 中的資料會儲存在 Kubernetes 主節點的本端磁碟上，且會備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。您可以選擇在 Kubernetes 主節點的本端磁碟上針對 etcd 資料啟用加密，方法是針對叢集[啟用 {{site.data.keyword.keymanagementservicelong_notm}} 加密](cs_encrypt.html#encryption)。執行舊版 Kubernetes 之叢集的 Etcd 資料會儲存在由 IBM 管理的已加密磁碟上，並且每日進行備份。當 etcd 資料傳送至 Pod 時，會透過 TLS 將資料加密，以確保資料保護及完整性。</li>
           <li><strong>kube-apiserver：</strong>作為從工作者節點到 Kubernetes 主節點的所有叢集管理要求的主要進入點。kube-apiserver 會驗證及處理要求，並且可以讀取及寫入 etcd 資料儲存庫。</li>
           <li><strong>kube-scheduler：</strong>考量容量及效能需求、軟硬體原則限制、反親緣性規格及工作負載需求，以決定要在何處部署 Pod。如果找不到符合需求的工作者節點，則不會在叢集裡部署 Pod。</li>
           <li><strong>kube-controller-manager：</strong>負責監視抄本集，以及建立對應的 Pod 來達到想要的狀況。</li>
@@ -95,7 +95,7 @@ Kubernetes API 伺服器及 etcd 是在 Kubernetes 主節點中執行的最容�
     </tr>
     <tr>
       <td>精細存取控制</td>
-      <td>當您作為帳戶管理者時，可以使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)，來[授與其他使用者對 {{site.data.keyword.containerlong_notm}} 的存取權](cs_users.html#users)。{{site.data.keyword.Bluemix_notm}} IAM 提供與 {{site.data.keyword.Bluemix_notm}} 平台、{{site.data.keyword.containerlong_notm}} 及帳戶中所有資源的安全鑑別。設定適當的使用者角色和許可權，是限制誰可以存取您的資源以及限制使用者可在誤用合法許可權時執行之損壞的關鍵。</br></br>您可以從下列預先定義的使用者角色中進行選取，這些角色決定使用者可以執行的動作集：<ul><li><strong>平台角色：</strong>決定使用者可在 {{site.data.keyword.containerlong_notm}} 中執行的叢集和工作者節點相關動作。</li><li><strong>基礎架構角色：</strong>決定用來訂購、更新或移除基礎架構資源（例如工作者節點、VLAN 或子網站）的許可權。</li><li><strong>Kubernetes RBAC 角色：</strong>決定使用者可在獲授權存取叢集時執行的 `kubectl` 指令。會自動設定叢集之 default 名稱空間的 RBAC 角色。若要在其他名稱空間中使用相同的 RBAC 角色，您可以複製 default 名稱空間中的 RBAC 角色。</li></ul> </br> 您可以選擇[自訂基礎架構許可權](cs_users.html#infra_access)或[設定自己的 RBAC 角色](cs_users.html#rbac)來新增更精細的存取控制，而非使用預先定義的使用者角色。</td>
+      <td>當您作為帳戶管理者時，可以使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)，來[授與其他使用者對 {{site.data.keyword.containerlong_notm}} 的存取權](cs_users.html#users)。{{site.data.keyword.Bluemix_notm}} IAM 提供與 {{site.data.keyword.Bluemix_notm}} 平台、{{site.data.keyword.containerlong_notm}} 及帳戶中所有資源的安全鑑別。設定適當的使用者角色及許可權，是限制誰可以存取您的資源以及限制使用者可在誤用合法許可權時執行之損壞的關鍵。</br></br>您可以從下列預先定義的使用者角色中進行選取，這些角色決定使用者可以執行的動作集：<ul><li><strong>平台角色：</strong>決定使用者可在 {{site.data.keyword.containerlong_notm}} 中執行的叢集和工作者節點相關動作。</li><li><strong>基礎架構角色：</strong>決定用來訂購、更新或移除基礎架構資源（例如工作者節點、VLAN 或子網站）的許可權。</li><li><strong>Kubernetes RBAC 角色：</strong>決定使用者可在獲授權存取叢集時執行的 `kubectl` 指令。會自動設定叢集之 default 名稱空間的 RBAC 角色。若要在其他名稱空間中使用相同的 RBAC 角色，您可以複製 default 名稱空間中的 RBAC 角色。</li></ul> </br> 您可以選擇[自訂基礎架構許可權](cs_users.html#infra_access)或[設定自己的 RBAC 角色](cs_users.html#rbac)來新增更精細的存取控制，而非使用預先定義的使用者角色。</td>
     </tr>
     <tr>
       <td>許可控制器</td>
@@ -199,9 +199,10 @@ Kubernetes API 伺服器及 etcd 是在 Kubernetes 主節點中執行的最容�
 網路區隔說明將網路分成多個子網路的方式。您可以將可供組織中特定群組存取的應用程式及相關資料分組在一起。在某個子網路中執行的應用程式無法查看或存取另一個子網路中的應用程式。網路區隔也會限制提供給內部人員或協力廠商軟體的存取權，並且可以限制惡意活動的範圍。   
 
 {{site.data.keyword.containerlong_notm}} 提供 IBM Cloud 基礎架構 (SoftLayer) VLAN，確保工作者節點上的優質網路效能及網路隔離。VLAN 會配置一組工作者節點及 Pod，就像它們已連接至相同的實體佈線。
-VLAN 為您的 {{site.data.keyword.Bluemix_notm}} 帳戶所專用，不會在 IBM 客戶之間共用。如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。
+VLAN 為您的 {{site.data.keyword.Bluemix_notm}} 帳戶所專用，不會在 IBM 客戶之間共用。如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
 
-VLAN Spanning 是一種 {{site.data.keyword.Bluemix_notm}} 帳戶設定，可以將它開啟或關閉。開啟時，您帳戶中的所有叢集都可以看到彼此並互相交談。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](cs_cli_reference.html#cs_vlan_spanning_get)。雖然在某些情境下這可能十分用，但 VLAN Spanning 會移除叢集的網路區隔。
+VLAN Spanning 是一種 {{site.data.keyword.Bluemix_notm}} 帳戶設定，可以將它開啟或關閉。開啟時，您帳戶中的所有叢集都可以看到彼此並互相交談。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](cs_cli_reference.html#cs_vlan_spanning_get)。
+雖然在某些情境下這可能十分用，但 VLAN Spanning 會移除叢集的網路區隔。
 
 請檢閱下表，以查看在開啟 VLAN Spanning 時如何達成網路區隔的選項。
 
@@ -247,7 +248,7 @@ Ingress 服務會在資料傳輸流的兩個點提供 TLS 終止：
 ## 持續性儲存空間
 {: #storage}
 
-如果您佈建持續性儲存空間以將資料儲存在叢集中，則在將資料儲存至檔案共用或區塊儲存空間時，會自動加密資料，而不需要額外成本。加密包括 Snapshot 及已抄寫的儲存空間。
+如果您佈建持續性儲存空間以將資料儲存在叢集裡，則在將資料儲存至檔案共用或區塊儲存空間時，會自動加密資料，而不需要額外成本。加密包括 Snapshot 及已抄寫的儲存空間。
 {: shortdesc}
 
 如需如何加密特定儲存空間類型之資料的相關資訊，請參閱下列鏈結。
@@ -374,11 +375,11 @@ Kubernetes 名稱空間這種方式使用虛擬方式分割叢集，並隔離部
 
 叢集管理者可以在叢集裡設定其他名稱空間，並且根據他們的需求進行自訂。
 
-針對您在叢集中的每個名稱空間，請務必設定適當的 [RBAC 原則](cs_users.html#rbac)以限制存取此名稱空間、控制已部署的項目，以及設定適當的[資源配額 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 及[限制範圍 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/)。
+針對您在叢集裡的每個名稱空間，請務必設定適當的 [RBAC 原則](cs_users.html#rbac)以限制存取此名稱空間、控制已部署的項目，以及設定適當的[資源配額 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 及[限制範圍 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/)。
 {: important}
 
 **應該設定單一承租戶還是多方承租戶叢集？** </br>
-在單一承租戶叢集中，您會針對必須在叢集中執行工作負載的每組人員建立一個叢集。通常，此團隊負責管理叢集，以及適當地配置與保護其安全。多方承租戶叢集會使用多個名稱空間來隔離承租戶及其工作負載。
+在單一承租戶叢集裡，您會針對必須在叢集裡執行工作負載的每組人員建立一個叢集。通常，此團隊負責管理叢集，以及適當地配置與保護其安全。多方承租戶叢集會使用多個名稱空間來隔離承租戶及其工作負載。
 
 <img src="images/cs_single_multitenant.png" width="600" alt="單一承租戶與多方承租戶叢集" style="width:600px; border-style: none"/>
 

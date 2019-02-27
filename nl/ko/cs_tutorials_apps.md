@@ -527,7 +527,7 @@ Listing images...
         ```
         {: codeblock}
 
-    2.  Watson 배치의 볼륨 섹션에서, 이전 튜토리얼에서 작성한 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 시크릿의 이름을 업데이트하십시오. 배치에 볼륨으로서 Kubernetes 시크릿을 마운트하면 팟(Pod)에서 실행 중인 컨테이너가 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키를 사용할 수 있습니다. 이 튜토리얼의 {{site.data.keyword.watson}} 앱 컴포넌트는 볼륨 마운트 경로를 사용하여 API 키를 찾도록 구성되어 있습니다. 
+    2.  Watson 배치의 볼륨 섹션에서, 이전 튜토리얼에서 작성한 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 시크릿의 이름을 업데이트하십시오. 배치에 볼륨으로서 Kubernetes 시크릿을 마운트하면 팟(Pod)에서 실행 중인 컨테이너가 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키를 사용할 수 있습니다. 이 튜토리얼의 {{site.data.keyword.watson}} 앱 컴포넌트는 볼륨 마운트 경로를 사용하여 API 키를 찾도록 구성되어 있습니다.
 
         ```
 volumes:

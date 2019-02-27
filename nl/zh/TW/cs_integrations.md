@@ -99,7 +99,7 @@ lastupdated: "2018-12-06"
 </tr>
 <tr>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>取得應用程式效能及性能的作業可見性，方法為將 Sysdig 作為協力廠商服務部署至工作者節點，以將度量轉遞至 {{site.data.keyword.monitoringlong}}。如需相關資訊，請參閱[分析在 Kubernetes 叢集中部署之應用程式的度量](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**附註**：如果您使用 {{site.data.keyword.mon_full_notm}} 與執行 Kubernets 1.11 版或更新版本的叢集搭配，則不會收集所有容器度量，因為 Syslig 目前不支援 `containerd`。</td>
+<td>取得應用程式效能及性能的作業可見性，方法為將 Sysdig 作為協力廠商服務部署至工作者節點，以將度量轉遞至 {{site.data.keyword.monitoringlong}}。如需相關資訊，請參閱[分析在 Kubernetes 叢集裡部署之應用程式的度量](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**附註**：如果您使用 {{site.data.keyword.mon_full_notm}} 與執行 Kubernets 1.11 版或更新版本的叢集搭配，則不會收集所有容器度量，因為 Syslig 目前不支援 `containerd`。</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -166,7 +166,7 @@ lastupdated: "2018-12-06"
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
-  <td>啟用 {{site.data.keyword.keymanagementserviceshort}} 來加密位於叢集中的 Kubernetes 密碼。加密 Kubernetes 密碼，可防止未獲授權的使用者存取機密叢集資訊。<br>若要設定，請參閱<a href="cs_encrypt.html#keyprotect">使用 {{site.data.keyword.keymanagementserviceshort}} 加密 Kubernetes 密碼</a>。<br>如需相關資訊，請參閱 <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+  <td>啟用 {{site.data.keyword.keymanagementserviceshort}} 來加密位於叢集裡的 Kubernetes 密碼。加密 Kubernetes 密碼，可防止未獲授權的使用者存取機密叢集資訊。<br>若要設定，請參閱<a href="cs_encrypt.html#keyprotect">使用 {{site.data.keyword.keymanagementserviceshort}} 加密 Kubernetes 密碼</a>。<br>如需相關資訊，請參閱 <a href="/docs/services/key-protect/index.html#getting-started-with-key-protect" target="_blank">{{site.data.keyword.keymanagementserviceshort}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -218,7 +218,7 @@ lastupdated: "2018-12-06"
 
 
 
-## 將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集中
+## 將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集裡
 {: #adding_cluster}
 
 新增 {{site.data.keyword.Bluemix_notm}} 服務以加強您的 Kubernetes 叢集，其在 Watson AI、資料、安全及物聯網 (IoT) 等方面有額外功能。
@@ -233,7 +233,7 @@ lastupdated: "2018-12-06"
     - 您要使用之空間的[**開發人員** Cloud Foundry 角色](/docs/iam/mngcf.html#mngcf)
 - [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 
-若要將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集中，請執行下列動作：
+若要將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集裡，請執行下列動作：
 1. [建立 {{site.data.keyword.Bluemix_notm}} 服務的實例](/docs/apps/reqnsi.html#req_instance)。
     * 部分 {{site.data.keyword.Bluemix_notm}} 服務僅特定地區才有提供。唯有與您的叢集相同的地區中有提供某服務時，您才可以將該服務連結至您的叢集。此外，如果您要在華盛頓特區中建立服務實例，則必須使用 CLI。
     * 您必須在與叢集相同的資源群組中建立服務實例。只能在一個資源群組中建立一個資源，之後就無法進行變更。
@@ -364,7 +364,7 @@ lastupdated: "2018-12-06"
 - [以磁區將密碼裝載至您的 Pod](#mount_secret)
 - [在環境變數中參照該密碼](#reference_secret)
 <br>
-想要讓您的密碼更加安全嗎？請要求叢集管理者在您的叢集中[啟用 {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect)，以加密新的及現有的密碼，例如儲存 {{site.data.keyword.Bluemix_notm}} 服務實例之認證的密碼。
+想要讓您的密碼更加安全嗎？請要求叢集管理者在您的叢集裡[啟用 {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect)，以加密新的及現有的密碼，例如儲存 {{site.data.keyword.Bluemix_notm}} 服務實例之認證的密碼。
 {: tip}
 
 開始之前：
@@ -377,7 +377,7 @@ lastupdated: "2018-12-06"
 以磁區將密碼裝載至 Pod 時，名稱為 `binding` 的檔案會儲存在磁區裝載目錄中。JSON 格式的 `binding` 檔案包含存取 {{site.data.keyword.Bluemix_notm}} 服務所需的所有資訊和認證。
 {: shortdesc}
 
-1.  列出叢集中的可用密碼，並記下您密碼的**名稱**。尋找類型為 **Opaque** 的密碼。如果有多個密碼，請與叢集管理者聯絡，以識別正確的服務密碼。
+1.  列出叢集裡的可用密碼，並記下您密碼的**名稱**。尋找類型為 **Opaque** 的密碼。如果有多個密碼，請與叢集管理者聯絡，以識別正確的服務密碼。
 
     ```
     kubectl get secrets
@@ -511,7 +511,7 @@ lastupdated: "2018-12-06"
 您可以將 Kubernetes 密碼中的服務認證及其他鍵值組當成環境變數新增至部署中。   
 {: shortdesc}
 
-1. 列出叢集中的可用密碼，並記下您密碼的**名稱**。尋找類型為 **Opaque** 的密碼。如果有多個密碼，請與叢集管理者聯絡，以識別正確的服務密碼。
+1. 列出叢集裡的可用密碼，並記下您密碼的**名稱**。尋找類型為 **Opaque** 的密碼。如果有多個密碼，請與叢集管理者聯絡，以識別正確的服務密碼。
 
     ```
     kubectl get secrets
@@ -655,7 +655,7 @@ lastupdated: "2018-12-06"
 [Helm ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://helm.sh) 是 Kubernetes 套件管理程式。您可以建立 Helm 圖表或使用預先存在的 Helm 圖表，來定義、安裝及升級在 {{site.data.keyword.containerlong_notm}} 叢集裡執行的複式 Kubernetes 應用程式。
 {:shortdesc}
 
-在搭配 {{site.data.keyword.containerlong_notm}} 使用 Helm 圖表之前，您必須先在叢集中安裝及起始設定 Helm 實例。然後，您可以將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至 Helm 實例。
+在搭配 {{site.data.keyword.containerlong_notm}} 使用 Helm 圖表之前，您必須先在叢集裡安裝及起始設定 Helm 實例。然後，您可以將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至 Helm 實例。
 
 開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 

@@ -60,8 +60,8 @@ lastupdated: "2018-12-05"
  </tr>
  <tr>
  <td>叢集硬體及所有權</td>
- <td>在標準叢集中，硬體可以與其他 {{site.data.keyword.IBM_notm}} 客戶共用，或者只供您專用。在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中，是由您擁有及管理公用及專用 VLAN。</td>
- <td>在 {{site.data.keyword.Bluemix_dedicated_notm}} 的叢集中，硬體一律是專用的。用於建立叢集的公用及專用 VLAN 是在設定 {{site.data.keyword.Bluemix_dedicated_notm}} 環境時預先定義的，而且為 IBM 所擁有，並為您管理。建立叢集期間可用的區域也是針對 {{site.data.keyword.Bluemix_notm}} 環境預先定義的。</td>
+ <td>在標準叢集裡，硬體可以與其他 {{site.data.keyword.IBM_notm}} 客戶共用，或者只供您專用。在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中，是由您擁有及管理公用及專用 VLAN。</td>
+ <td>在 {{site.data.keyword.Bluemix_dedicated_notm}} 的叢集裡，硬體一律是專用的。用於建立叢集的公用及專用 VLAN 是在設定 {{site.data.keyword.Bluemix_dedicated_notm}} 環境時預先定義的，而且為 IBM 所擁有，並為您管理。建立叢集期間可用的區域也是針對 {{site.data.keyword.Bluemix_notm}} 環境預先定義的。</td>
  </tr>
  <tr>
  <td>負載平衡器及 Ingress 網路</td>
@@ -334,7 +334,7 @@ lastupdated: "2018-12-05"
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>輸入您配置「專用」環境使用之公用 VLAN 的 ID。如果您只要將工作者節點連接至專用 VLAN，請不要指定此選項。<p class="note">如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅專用叢集網路](cs_network_cluster.html#private_vlan)。</p></td>
+    <td>輸入您配置「專用」環境使用之公用 VLAN 的 ID。如果您只要將工作者節點連接至專用 VLAN，請不要指定此選項。<p class="note">如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅限專用叢集網路](cs_network_cluster.html#private_vlan)。</p></td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -513,7 +513,7 @@ http://localhost:8001/ui
     ```
     {: screen}
 
-4. **重要事項**：如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
+4. **重要事項**：如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
 
 5. 若要配置內部部署及內部帳戶連線功能，請從下列選項中進行選擇：
   - 如果您已使用子網路的 10.x.x.x 專用 IP 位址範圍，請使用該範圍中的有效 IP，以使用 Ingress 及負載平衡器來配置內部部署及內部帳戶連線功能。如需相關資訊，請參閱[規劃搭配 NodePort、負載平衡器或 Ingress 服務的網路](cs_network_planning.html#planning)。

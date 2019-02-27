@@ -41,13 +41,13 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
 
 **如何收集日誌？**
 
-日誌是由叢集中的 [Fluentd ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.fluentd.org/) 附加程式所收集。在叢集中建立來源的記載配置時，Fluentd 附加程式會從該來源的路徑收集日誌。然後，會將日誌轉遞至 {{site.data.keyword.loganalysisshort_notm}} 或外部 syslog 伺服器。
+日誌是由叢集裡的 [Fluentd ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.fluentd.org/) 附加程式所收集。在叢集裡建立來源的記載配置時，Fluentd 附加程式會從該來源的路徑收集日誌。然後，會將日誌轉遞至 {{site.data.keyword.loganalysisshort_notm}} 或外部 syslog 伺服器。
 
 **我可以配置記載的來源為何？**
 
 在下圖中，您可以看到可配置記載的來源位置。
 
-<img src="images/log_sources.png" width="550" alt="叢集中的日誌來源" style="width:550px; border-style: none"/>
+<img src="images/log_sources.png" width="550" alt="叢集裡的日誌來源" style="width:550px; border-style: none"/>
 
 1. `worker`：您針對工作者節點所具有之基礎架構配置特有的資訊。工作者節點日誌會擷取至 syslog，並且包含作業系統事件。在 `auth.log` 中，您可以找到對 OS 提出的鑑別要求的資訊。</br>**路徑**：
     * `/var/log/syslog`
@@ -57,7 +57,7 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
 
 3. `application`：在應用程式層次發生的事件的相關資訊。這可能是發生事件的通知（例如成功登入）、儲存的警告，或可在應用程式層次執行的其他作業。</br>**路徑**：您可以設定將日誌轉遞至其中的路徑。不過，若要傳送日誌，您必須在記載配置中使用絕對路徑，否則無法讀取日誌。如果您的路徑已裝載至工作者節點，則可能已建立一個符號鏈結。範例：如果指定的路徑是 `/usr/local/spark/work/app-0546/0/stderr`，但實際上日誌是移至 `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr`，則無法讀取日誌。
 
-4. `storage`：在叢集中設定之持續性儲存空間的相關資訊。儲存空間日誌可協助您設定問題判斷儀表板及警示，作為 DevOps 管線及正式作業版本的一部分。**附註**：`/var/log/kelbet.log` 和 `/var/log/syslog` 路徑也包含儲存空間日誌，但這些路徑中的日誌是由 `kubernetes` 和 `worker` 日誌來源收集的。</br>**路徑**：
+4. `storage`：在叢集裡設定之持續性儲存空間的相關資訊。儲存空間日誌可協助您設定問題判斷儀表板及警示，作為 DevOps 管線及正式作業版本的一部分。**附註**：`/var/log/kelbet.log` 和 `/var/log/syslog` 路徑也包含儲存空間日誌，但這些路徑中的日誌是由 `kubernetes` 和 `worker` 日誌來源收集的。</br>**路徑**：
     * `/var/log/ibmc-s3fs.log`
     * `/var/log/ibmc-block.log`
 
@@ -160,7 +160,7 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
 
 **我可以使用自己的記載解決方案嗎？**
 
-如果您有特殊需求，則可以在叢集中設定自己的記載解決方案。在執行 Kubbernets 1.11 版或更新版本的叢集中，您可以收集來自 `/var/log/poods/` 路徑的容器日誌。在執行 Kubbernets 1.10 版或更早版本的叢集中，您可以收集來自 `/var/lib/docker/containers/` 路徑的容器日誌。
+如果您有特殊需求，則可以在叢集裡設定自己的記載解決方案。在執行 Kubbernets 1.11 版或更新版本的叢集裡，您可以收集來自 `/var/log/poods/` 路徑的容器日誌。在執行 Kubbernets 1.10 版或更早版本的叢集裡，您可以收集來自 `/var/lib/docker/containers/` 路徑的容器日誌。
 
 <br />
 
@@ -257,7 +257,7 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
 3. 若要將日誌轉遞至 syslog，請以下列兩種方式之一來設定接受 syslog 通訊協定的伺服器：
   * 設定並管理自己的伺服器，或讓提供者為您管理。如果提供者為您管理伺服器，請從記載提供者取得記載端點。
 
-  * 從容器執行 syslog。例如，您可以使用此[部署 .yaml 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)，來提取在叢集中執行容器的 Docker 公用映像檔。映像檔會發佈公用叢集 IP 位址上的埠 `514`，並使用這個公用叢集 IP 位址來配置 syslog 主機。
+  * 從容器執行 syslog。例如，您可以使用此[部署 .yaml 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)，來提取在叢集裡執行容器的 Docker 公用映像檔。映像檔會發佈公用叢集 IP 位址上的埠 `514`，並使用這個公用叢集 IP 位址來配置 syslog 主機。
 
   您可以移除 syslog 字首，以將日誌看成有效的 JSON。若要這樣做，請將下列程式碼新增至 rsyslog 伺服器執行所在之 <code>etc/rsyslog.conf</code> 檔案的頂端：<code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
   {: tip}
@@ -284,7 +284,7 @@ IBM 會持續監視每個 Kubernetes 主節點。{{site.data.keyword.containerlo
 3. 以下列兩種方式之一來設定接受 syslog 通訊協定的伺服器：
   * 設定並管理自己的伺服器，或讓提供者為您管理。如果提供者為您管理伺服器，請從記載提供者取得記載端點。
 
-  * 從容器執行 syslog。例如，您可以使用此[部署 .yaml 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)，來提取在叢集中執行容器的 Docker 公用映像檔。映像檔會發佈公用叢集 IP 位址上的埠 `514`，並使用這個公用叢集 IP 位址來配置 syslog 主機。您需要注入相關的「憑證管理中心」及伺服器端憑證，並更新 `syslog.conf` 來啟用伺服器上的 `tls`。
+  * 從容器執行 syslog。例如，您可以使用此[部署 .yaml 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)，來提取在叢集裡執行容器的 Docker 公用映像檔。映像檔會發佈公用叢集 IP 位址上的埠 `514`，並使用這個公用叢集 IP 位址來配置 syslog 主機。您需要注入相關的「憑證管理中心」及伺服器端憑證，並更新 `syslog.conf` 來啟用伺服器上的 `tls`。
 
 4. 將「憑證管理中心憑證」儲存至名為 `ca-cert` 的檔案。它必須是該確切名稱。
 
@@ -764,7 +764,7 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
       </table>
  </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>取得應用程式效能及性能的作業可見性，方法為將 Sysdig 作為協力廠商服務部署至工作者節點，以將度量轉遞至 {{site.data.keyword.monitoringlong}}。如需相關資訊，請參閱[分析在 Kubernetes 叢集中部署之應用程式的度量](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**附註**：{{site.data.keyword.mon_full_notm}} 不支援 `containerd` 容器運行環境。使用 {{site.data.keyword.mon_full_notm}} 與 1.11 版或更新版本的叢集搭配時，不會收集所有容器度量。</dd>
+  <dd>取得應用程式效能及性能的作業可見性，方法為將 Sysdig 作為協力廠商服務部署至工作者節點，以將度量轉遞至 {{site.data.keyword.monitoringlong}}。如需相關資訊，請參閱[分析在 Kubernetes 叢集裡部署之應用程式的度量](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**附註**：{{site.data.keyword.mon_full_notm}} 不支援 `containerd` 容器運行環境。使用 {{site.data.keyword.mon_full_notm}} 與 1.11 版或更新版本的叢集搭配時，不會收集所有容器度量。</dd>
 </dl>
 
 若要避免在使用內建的度量服務時發生衝突，請確定資源群組和地區之中的叢集都具有唯一名稱。
@@ -791,7 +791,7 @@ Kubernet 會自動審核透過您的 apiserver 所傳遞的全部事件。您可
 「自動回復」系統會使用各種檢查來查詢工作者節點性能狀態。如果「自動回復」根據配置的檢查，偵測到性能不佳的工作者節點，則「自動回復」會觸發更正動作，如在工作者節點上重新載入 OS。一次只有一個工作者節點進行一個更正動作。工作者節點必須先順利完成更正動作，然後任何其他工作者節點才能進行更正動作。如需相關資訊，請參閱此[自動回復部落格文章 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。
 </br> </br>
 
-「自動回復」至少需要一個性能良好的節點，才能正常運作。只在具有兩個以上工作者節點的叢集中，配置具有主動檢查的「自動回復」。
+「自動回復」至少需要一個性能良好的節點，才能正常運作。只在具有兩個以上工作者節點的叢集裡，配置具有主動檢查的「自動回復」。
 {: note}
 
 開始之前：

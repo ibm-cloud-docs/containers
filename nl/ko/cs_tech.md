@@ -149,11 +149,11 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     </tr>
     <tr>
     <td>openvpn-server</td>
-    <td>OpenVPN 서버는 OpenVPN 클라이언트와 함께 작업하여 마스터를 작업자 노드에 안전하게 연결합니다. 이 연결은 팟(Pod) 및 서비스에 대한 `apiserver proxy` 호출과 kubelet에 대한 `kubectl exec`, `attach` 및 `logs` 호출을 지원합니다. </td>
+    <td>OpenVPN 서버는 OpenVPN 클라이언트와 함께 작업하여 마스터를 작업자 노드에 안전하게 연결합니다. 이 연결은 팟(Pod) 및 서비스에 대한 `apiserver proxy` 호출과 kubelet에 대한 `kubectl exec`, `attach` 및 `logs` 호출을 지원합니다.</td>
     </tr>
     <tr>
     <td>etcd</td>
-    <td>etcd는 서비스, 배치 및 팟(Pod) 등 클러스터의 모든 Kubernetes 리소스의 상태를 저장하는 고가용성의 키 값 저장소입니다. etcd의 데이터는 IBM이 관리하는 암호화된 스토리지 인스턴스에 백업됩니다. </td>
+    <td>etcd는 서비스, 배치 및 팟(Pod) 등 클러스터의 모든 Kubernetes 리소스의 상태를 저장하는 고가용성의 키 값 저장소입니다. etcd의 데이터는 IBM이 관리하는 암호화된 스토리지 인스턴스에 백업됩니다.</td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -178,12 +178,12 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     <tr>
     <td>ibm-master-proxy</td>
     <td>kube-system</td>
-    <td>Kubernetes 버전 1.10 이상을 실행하는 클러스터의 경우, `ibm-master-proxy`는 작업자 노드의 요청을 고가용성 마스터 복제본의 IP 주소로 전달합니다. 단일 구역 클러스터에서 마스터에는 하나의 마스터 IP 주소와 도메인 이름을 지닌 별도 호스트의 3개 복제본이 있습니다. 다중 구역 가능 구역에 있는 클러스터의 경우, 마스터에는 구역 간에 전개된 3개의 복제본이 있습니다. 따라서 각각의 마스터에는 전체 클러스터 마스터에 대해 하나의 도메인 이름을 지닌 DNS에 등록된 자체 IP 주소가 있습니다. </td>
+    <td>Kubernetes 버전 1.10 이상을 실행하는 클러스터의 경우, `ibm-master-proxy`는 작업자 노드의 요청을 고가용성 마스터 복제본의 IP 주소로 전달합니다. 단일 구역 클러스터에서 마스터에는 하나의 마스터 IP 주소와 도메인 이름을 지닌 별도 호스트의 3개 복제본이 있습니다. 다중 구역 가능 구역에 있는 클러스터의 경우, 마스터에는 구역 간에 전개된 3개의 복제본이 있습니다. 따라서 각각의 마스터에는 전체 클러스터 마스터에 대해 하나의 도메인 이름을 지닌 DNS에 등록된 자체 IP 주소가 있습니다.</td>
     </tr>
     <tr>
     <td>openvpn-client</td>
     <td>kube-system</td>
-    <td>OpenVPN 클라이언트는 OpenVPN 서버와 함께 작업하여 마스터를 작업자 노드에 안전하게 연결합니다. 이 연결은 팟(Pod) 및 서비스에 대한 `apiserver proxy` 호출과 kubelet에 대한 `kubectl exec`, `attach` 및 `logs` 호출을 지원합니다. </td>
+    <td>OpenVPN 클라이언트는 OpenVPN 서버와 함께 작업하여 마스터를 작업자 노드에 안전하게 연결합니다. 이 연결은 팟(Pod) 및 서비스에 대한 `apiserver proxy` 호출과 kubelet에 대한 `kubectl exec`, `attach` 및 `logs` 호출을 지원합니다.</td>
     </tr>
     <tr>
     <td>kubelet</td>
@@ -201,8 +201,8 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     <td>Calico는 클러스터에 대한 네트워크 정책을 관리하고 다음과 같은 일부 컴포넌트를 구성합니다.
     <ul>
     <li>**calico-cni**: Calico 컨테이너 네트워크 인터페이스(CNI)는 컨테이너의 네트워크 연결을 관리하며 컨테이너가 삭제될 때 할당된 리소스를 제거합니다.</li>
-    <li>**calico-ipam**: Calico IPAM은 컨테이너에 대한 IP 주소 할당을 관리합니다. </li>
-    <li>**calico-node**: Calico 노드는 컨테이너를 Calico와 네트워크로 연결하는 데 필요한 다양한 컴포넌트를 함께 번들링하는 컨테이너입니다. </li>
+    <li>**calico-ipam**: Calico IPAM은 컨테이너에 대한 IP 주소 할당을 관리합니다.</li>
+    <li>**calico-node**: Calico 노드는 컨테이너를 Calico와 네트워크로 연결하는 데 필요한 다양한 컴포넌트를 함께 번들링하는 컨테이너입니다.</li>
     <li>**calico-policy-controller**: Calico 정책 제어기는 설정된 네트워크 정책을 준수하기 위해 인바운드 및 아웃바운드 네트워크 트래픽을 감시합니다. 트래픽이 클러스터에서 허용되지 않으면 클러스터에 대한 액세스가 차단됩니다. Calico 정책 제어기는 클러스터에 대한 네트워크 정책을 작성하고 설정하는 데도 사용됩니다.</li></ul></td>
     </tr>
     <tr>
@@ -213,7 +213,7 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>Kubernetes 대시보드는 사용자가 클러스터에서 실행 중인 애플리케이션과 클러스터를 관리하고 해당 문제점을 해결할 수 있도록 허용하는 웹 기반 GUI입니다. </td>
+    <td>Kubernetes 대시보드는 사용자가 클러스터에서 실행 중인 애플리케이션과 클러스터를 관리하고 해당 문제점을 해결할 수 있도록 허용하는 웹 기반 GUI입니다.</td>
     </tr>
     <tr>
     <td>heapster</td>

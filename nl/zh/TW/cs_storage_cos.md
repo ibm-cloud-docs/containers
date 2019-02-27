@@ -25,7 +25,7 @@ lastupdated: "2018-12-05"
 ## 建立物件儲存空間服務實例
 {: #create_cos_service}
 
-您必須先在帳戶中佈建 {{site.data.keyword.cos_full_notm}} 服務實例，才能在叢集中開始使用 {{site.data.keyword.cos_full_notm}}。
+您必須先在帳戶中佈建 {{site.data.keyword.cos_full_notm}} 服務實例，才能在叢集裡開始使用 {{site.data.keyword.cos_full_notm}}。
 {: shortdesc}
 
 1. 部署 {{site.data.keyword.cos_full_notm}} 服務實例。
@@ -60,7 +60,7 @@ lastupdated: "2018-12-05"
    ```
    {: pre}
 
-3. 將 {{site.data.keyword.cos_full_notm}} **GUID** 以及稍早擷取的 **apikey** 或 **access_key_id** 及 **secret_access_key** 編碼為 base64，並記下所有 base64 編碼值。對每個參數重複此指令，以擷取 base64 編碼值。
+3. 將 {{site.data.keyword.cos_full_notm}} **GUID** 以及稍早擷取的 **apikey** 或 **access_key_id** 及 **secret_access_key** 編碼為 base64，並記下所有 base64 編碼值。對每個參數重複這個指令，以擷取 base64 編碼值。
    ```
    echo -n "<key_value>" | base64
    ```
@@ -130,7 +130,7 @@ lastupdated: "2018-12-05"
    </tbody>
    </table>
 
-5. 在叢集中建立密碼。
+5. 在叢集裡建立密碼。
    ```
    kubectl apply -f filepath/secret.yaml
    ```
@@ -177,7 +177,7 @@ lastupdated: "2018-12-05"
    3. 重新載入您的工作者節點，以套用最新的修補程式版本。在重新載入您的工作者節點之前，請遵循 [ibmcloud ks worker-reload 指令](cs_cli_reference.html#cs_worker_reload)中的指示，以在您的工作者節點上正常地重新排程所有執行中 Pod。請注意，在重新載入期間，會使用最新的映像檔更新您的工作者節點機器，而且如果資料不是[儲存在工作者節點之外](cs_storage_planning.html#persistent_storage_overview)即會被刪除。
 
 
-2. 遵循[指示](cs_integrations.html#helm)，將 Helm 用戶端安裝在您的本端機器上、將 Helm 伺服器 (tiller) 安裝在您的叢集中，並且將 {{site.data.keyword.Bluemix_notm}} Helm 圖表儲存庫新增至您要在其中使用 {{site.data.keyword.cos_full_notm}} 外掛程式的叢集中。
+2. 遵循[指示](cs_integrations.html#helm)，將 Helm 用戶端安裝在您的本端機器上、將 Helm 伺服器 (tiller) 安裝在您的叢集裡，並且將 {{site.data.keyword.Bluemix_notm}} Helm 圖表儲存庫新增至您要在其中使用 {{site.data.keyword.cos_full_notm}} 外掛程式的叢集裡。
 
     如果您使用 Helm 2.9 版或更高版本，請確定已使用[服務帳戶](cs_integrations.html#helm)來安裝 tiller。
     {: important}
@@ -238,7 +238,7 @@ lastupdated: "2018-12-05"
       ```
       {: screen}
 
-7. 選用項目：限制 {{site.data.keyword.cos_full_notm}} 外掛程式只能存取保留您 {{site.data.keyword.cos_full_notm}} 服務認證的 Kubernetes 密碼。依預設，外掛程式有權存取叢集中的所有 Kubernetes 密碼。
+7. 選用項目：限制 {{site.data.keyword.cos_full_notm}} 外掛程式只能存取保留您 {{site.data.keyword.cos_full_notm}} 服務認證的 Kubernetes 密碼。依預設，外掛程式有權存取叢集裡的所有 Kubernetes 密碼。
    1. [建立 {{site.data.keyword.cos_full_notm}} 服務實例](#create_cos_service)。
    2. [將 {{site.data.keyword.cos_full_notm}} 服務認證儲存至 Kubernetes 密碼](#create_cos_secret)。
    3. 導覽至 `templates` 目錄，並列出可用的檔案。  
@@ -380,7 +380,7 @@ lastupdated: "2018-12-05"
    ```
    {: screen}
 
-   當您看到一個 `ibmcloud-object-storage-plugin` Pod 及一個以上的 `ibmcloud-object-storage-driver` Pod 時，安裝即成功。`ibmcloud-object-storage-driver` Pod 的數目等於叢集中的工作者節點數目。所有 Pod 都必須處於 `Running` 狀態，外掛程式才能正常運作。如果 Pod 失敗，請執行 `kubectl describe pod -n kube-system <pod_name>`，以尋找失敗的主要原因。
+   當您看到一個 `ibmcloud-object-storage-plugin` Pod 及一個以上的 `ibmcloud-object-storage-driver` Pod 時，安裝即成功。`ibmcloud-object-storage-driver` Pod 的數目等於叢集裡的工作者節點數目。所有 Pod 都必須處於 `Running` 狀態，外掛程式才能正常運作。如果 Pod 失敗，請執行 `kubectl describe pod -n kube-system <pod_name>`，以尋找失敗的主要原因。
 
 9. 驗證已順利建立儲存空間類別。
    ```
@@ -468,15 +468,15 @@ lastupdated: "2018-12-05"
 ### 移除 IBM Cloud Object Storage 外掛程式
 {: #remove_cos_plugin}
 
-如果您不要在叢集中佈建及使用 {{site.data.keyword.cos_full_notm}}，則可以解除安裝 Helm 圖表。
+如果您不要在叢集裡佈建及使用 {{site.data.keyword.cos_full_notm}}，則可以解除安裝 Helm 圖表。
 
-移除外掛程式不會移除現有的 PVC、PV 或資料。移除外掛程式時，會從叢集裡移除所有相關的 Pod 及常駐程式集。除非您配置應用程式直接使用 {{site.data.keyword.cos_full_notm}} API，否則在移除外掛程式之後，無法針對叢集佈建新的 {{site.data.keyword.cos_full_notm}}，也無法使用現有的 PVC 及 PV。
+移除外掛程式不會移除現有的 PVC、PV 或資料。移除外掛程式時，會從叢集移除所有相關的 Pod 及常駐程式集。除非您配置應用程式直接使用 {{site.data.keyword.cos_full_notm}} API，否則在移除外掛程式之後，無法針對叢集佈建新的 {{site.data.keyword.cos_full_notm}}，也無法使用現有的 PVC 及 PV。
 {: important}
 
 開始之前：
 
 - [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
-- 確定叢集中沒有任何 PVC 或 PV 使用 {{site.data.keyword.cos_full_notm}}。若要列出所有可裝載特定 PVC 的 Pod，請執行 `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`。
+- 確定叢集裡沒有任何 PVC 或 PV 使用 {{site.data.keyword.cos_full_notm}}。若要列出所有可裝載特定 PVC 的 Pod，請執行 `kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"`。
 
 若要移除外掛程式，請執行下列動作：
 
@@ -731,7 +731,7 @@ lastupdated: "2018-12-05"
    <td>請選擇下列選項：<ul><li><strong>true</strong>：當您刪除 PVC 時，會自動移除您的資料、儲存區和 PV。您的 {{site.data.keyword.cos_full_notm}} 服務實例仍然存在，並未刪除。如果您選擇將此選項設為 <strong>true</strong>，則必須設定 <code>ibm.io/auto-create-bucket: true</code> 及 <code>ibm.io/bucket: ""</code>，以使用格式為 <code>tmp-s3fs-xxxx</code> 的名稱自動建立儲存區。</li><li><strong>false</strong>：當您刪除 PVC 時，會自動刪除 PV，但會保留您在 {{site.data.keyword.cos_full_notm}} 服務實例中的資料及儲存區。若要存取資料，您必須以現有儲存區的名稱建立新的 PVC。</li></ul>
    <tr>
    <td><code>ibm.io/bucket</code></td>
-   <td>請選擇下列選項：<ul><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>true</strong>：請輸入您要在 {{site.data.keyword.cos_full_notm}} 中建立的儲存區名稱。此外，如果 <code>ibm.io/auto-delete-bucket</code> 設為 <strong>true</strong>，則您必須將此欄位空白，以使用 <code>tmp-s3fs-xxxx</code> 格式的名稱自動指派儲存區。名稱在 {{site.data.keyword.cos_full_notm}} 中必須是唯一的。</li><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>false</strong>：請輸入您要在叢集中存取的現有儲存區名稱。</li></ul> </td>
+   <td>請選擇下列選項：<ul><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>true</strong>：請輸入您要在 {{site.data.keyword.cos_full_notm}} 中建立的儲存區名稱。此外，如果 <code>ibm.io/auto-delete-bucket</code> 設為 <strong>true</strong>，則您必須將此欄位空白，以使用 <code>tmp-s3fs-xxxx</code> 格式的名稱自動指派儲存區。名稱在 {{site.data.keyword.cos_full_notm}} 中必須是唯一的。</li><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>false</strong>：請輸入您要在叢集裡存取的現有儲存區名稱。</li></ul> </td>
    </tr>
    <tr>
    <td><code>ibm.io/object-path</code></td>
@@ -1080,7 +1080,7 @@ lastupdated: "2018-12-05"
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/bucket</code></td>
-    <td>請選擇下列選項：<ul><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 true：</strong>請輸入您要在 {{site.data.keyword.cos_full_notm}} 中建立的儲存區名稱。此外，如果 <code>ibm.io/auto-delete-bucket</code> 設為 <strong>true</strong>，則您必須將此欄位空白，以使用 tmp-s3fs-xxxx 格式的名稱自動指派儲存區。名稱在 {{site.data.keyword.cos_full_notm}} 中必須是唯一的。</li><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 false：</strong>請輸入您要在叢集中存取的現有儲存區名稱。</li></ul></td>
+    <td>請選擇下列選項：<ul><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 true：</strong>請輸入您要在 {{site.data.keyword.cos_full_notm}} 中建立的儲存區名稱。此外，如果 <code>ibm.io/auto-delete-bucket</code> 設為 <strong>true</strong>，則您必須將此欄位空白，以使用 tmp-s3fs-xxxx 格式的名稱自動指派儲存區。名稱在 {{site.data.keyword.cos_full_notm}} 中必須是唯一的。</li><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 false：</strong>請輸入您要在叢集裡存取的現有儲存區名稱。</li></ul></td>
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/secret-name</code></td>
@@ -1088,7 +1088,7 @@ lastupdated: "2018-12-05"
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-    <td style="text-align:left">輸入您要使用的儲存空間類別。請選擇下列選項：<ul><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 true：</strong>請輸入您要用於新儲存區的儲存空間類別。</li><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 false：</strong>請輸入您用來建立現有儲存區的儲存空間類別。</li></ul></br>  若要列出現有儲存空間類別，請執行 <code>kubectl get storageclasses | grep s3</code>。如果您未指定儲存空間類別，則會建立 PVC，其具有叢集中所設定的預設儲存空間類別。請確定預設儲存空間類別使用 <code>ibm.io/ibmc-s3fs</code> 佈建者，以使用物件儲存空間佈建有狀態集。</td>
+    <td style="text-align:left">輸入您要使用的儲存空間類別。請選擇下列選項：<ul><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 true：</strong>請輸入您要用於新儲存區的儲存空間類別。</li><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 false：</strong>請輸入您用來建立現有儲存區的儲存空間類別。</li></ul></br>  若要列出現有儲存空間類別，請執行 <code>kubectl get storageclasses | grep s3</code>。如果您未指定儲存空間類別，則會建立 PVC，其具有叢集裡所設定的預設儲存空間類別。請確定預設儲存空間類別使用 <code>ibm.io/ibmc-s3fs</code> 佈建者，以使用物件儲存空間佈建有狀態集。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>spec.storageClassName</code></td>

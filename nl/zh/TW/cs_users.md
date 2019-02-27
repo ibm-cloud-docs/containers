@@ -62,7 +62,7 @@ RBAC 角色所允許的範例動作是建立 Pod 這類物件或是讀取 Pod �
 <dd>基礎架構角色可存取您的 IBM Cloud 基礎架構 (SoftLayer) 資源。設定具有**超級使用者**基礎架構角色的使用者，並將此使用者的基礎架構認證儲存在 API 金鑰。然後，在您要建立叢集的每個地區中設定 API 金鑰。設定 API 金鑰之後，您授與 {{site.data.keyword.containerlong_notm}} 存取權的其他使用者就不需要基礎架構角色，因為該地區內的所有使用者都會共用此 API 金鑰。相反地，{{site.data.keyword.Bluemix_notm}} IAM 平台角色決定容許使用者執行的基礎架構動作。如果您未使用完整<strong>超級使用者</strong>基礎架構來設定 API 金鑰，或您需要將特定裝置存取權授與使用者，則可以[自訂基礎架構許可權](#infra_access)。</br></br>
 基礎架構角色所允許的範例動作將會檢視叢集工作者節點機器的詳細資料，或編輯網路及儲存空間資源。</dd>
 <dt>Cloud Foundry</dt>
-<dd>無法使用 {{site.data.keyword.Bluemix_notm}} IAM 來管理所有服務。如果您是使用其中一個服務，則可以繼續使用 Cloud Foundry 使用者角色來控制對這些服務的存取。Cloud Foundry 角色授與帳戶內組織及空間的存取權。若要查看 {{site.data.keyword.Bluemix_notm}} 中的 Cloud Foundry 型服務清單，請執行 <code>ibmcloud service list</code>。</br></br>
+<dd>無法使用 {{site.data.keyword.Bluemix_notm}} IAM 來管理所有服務。如果您是使用其中一個服務，則可以繼續使用 Cloud Foundry 使用者角色來控制對這些服務的存取。Cloud Foundry 角色會授與對帳戶內組織及空間的存取權。若要查看 {{site.data.keyword.Bluemix_notm}} 中的 Cloud Foundry 型服務清單，請執行 <code>ibmcloud service list</code>。</br></br>
 Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務實例，或是將 Cloud Foundry 服務實例連結至叢集。若要進一步瞭解，請參閱 {{site.data.keyword.Bluemix_notm}} IAM 文件中的可用[組織和空間角色](/docs/iam/cfaccess.html)或[管理 Cloud Foundry 存取](/docs/iam/mngcf.html)的步驟。</dd>
 </dl>
 
@@ -116,7 +116,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 ## 設定對叢集的存取權
 {: #access-checklist}
 
-在您[瞭解如何管理您帳戶中的角色、使用者及資源](#access_policies)之後，請使用下列核對清單來配置叢集中的使用者存取權。
+在您[瞭解如何管理您帳戶中的角色、使用者及資源](#access_policies)之後，請使用下列核對清單來配置叢集裡的使用者存取權。
 {: shortdesc}
 
 1. 針對您要建立叢集的所有地區及資源群組，[設定 API 金鑰](#api_key)。
@@ -222,14 +222,14 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
  
 若要讓所有使用者存取 IBM Cloud 基礎架構 (SoftLayer) 組合，API 金鑰中儲存其認證的使用者必須在您的 {{site.data.keyword.Bluemix_notm}} 帳戶中具有[**超級使用者**基礎架構角色，以及 {{site.data.keyword.containerlong_notm}} 及 {{site.data.keyword.registryshort_notm}} 的 **管理者**平台角色](#owner_permissions)。然後，讓該使用者執行地區及資源群組中的第一個管理者動作。使用者的基礎架構認證儲存在該地區及資源群組的 API 金鑰中。
 
-帳戶內的其他使用者會共用用於存取基礎架構的 API 金鑰。使用者登入 {{site.data.keyword.Bluemix_notm}} 帳戶時，會針對 CLI 階段作業產生根據 API 金鑰的 {{site.data.keyword.Bluemix_notm}} IAM 記號，並啟用要在叢集中執行的基礎架構相關指令。
+帳戶內的其他使用者會共用用於存取基礎架構的 API 金鑰。使用者登入 {{site.data.keyword.Bluemix_notm}} 帳戶時，會針對 CLI 階段作業產生根據 API 金鑰的 {{site.data.keyword.Bluemix_notm}} IAM 記號，並啟用要在叢集裡執行的基礎架構相關指令。
 
 若要查看 CLI 階段作業的 {{site.data.keyword.Bluemix_notm}} IAM 記號，您可以執行 `ibmcloud iam oauth-tokens`。{{site.data.keyword.Bluemix_notm}} IAM 記號也可以用來[直接呼叫 {{site.data.keyword.containerlong_notm}} API](cs_cli_install.html#cs_api)。
 {: tip}
 
 **如果使用者有權透過 {{site.data.keyword.Bluemix_notm}} IAM 記號存取該組合，則如何限制使用者可以執行哪些指令？**
 
-在對您帳戶中的使用者設定組合的存取權之後，您接著可以指派適當的[平台角色](#platform)，以控制使用者可以執行的基礎架構動作。藉由將 {{site.data.keyword.Bluemix_notm}} IAM 角色指派給使用者，可以限制他們只能針對叢集執行哪些指令。例如，因為 API 金鑰擁有者具有**超級使用者**基礎架構角色，所以所有基礎架構相關指令都可以在叢集中執行。但是，根據指派給使用者的 {{site.data.keyword.Bluemix_notm}} IAM 角色，使用者只能執行其中部分的基礎架構相關指令。
+在對您帳戶中的使用者設定組合的存取權之後，您接著可以指派適當的[平台角色](#platform)，以控制使用者可以執行的基礎架構動作。藉由將 {{site.data.keyword.Bluemix_notm}} IAM 角色指派給使用者，可以限制他們只能針對叢集執行哪些指令。例如，因為 API 金鑰擁有者具有**超級使用者**基礎架構角色，所以所有基礎架構相關指令都可以在叢集裡執行。但是，根據指派給使用者的 {{site.data.keyword.Bluemix_notm}} IAM 角色，使用者只能執行其中部分的基礎架構相關指令。
 
 例如，如果您要在新地區中建立叢集，請確定第一個叢集是由具有**超級使用者**基礎架構角色的使用者所建立（例如帳戶擁有者）。之後，您可以邀請 {{site.data.keyword.Bluemix_notm}} IAM 存取群組中的個別使用者加入該地區，方法是在該地區中設定其平台管理原則。具有**檢視者**平台角色的使用者未獲授權新增工作者節點。因此，`worker-add` 動作會失敗，即使 API 金鑰具有正確的基礎架構權限也是一樣。如果您將使用者的平台角色變更為**操作員**，則會授權使用者新增工作者節點。`worker-add` 動作成功，因為使用者已獲授權，而且 API 金鑰設定正確。您不需要編輯使用者的 IBM Cloud 基礎架構 (SoftLayer) 許可權。
 
@@ -246,7 +246,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 
 **如果我的 API 金鑰受損，如何才能鎖定我的叢集？**
 
-如果針對您叢集中地區及資源群組設定的 API 金鑰受損，請[刪除它](../iam/userid_keys.html#deleting-an-api-key)，這樣就無法使用 API 金鑰作為鑑別來進一步呼叫。如需安全存取 Kubernetes API 伺服器的相關資訊，請參閱 [Kubernetes API 伺服器及 etcd](cs_secure.html#apiserver) 安全主題。
+如果針對您叢集裡地區及資源群組設定的 API 金鑰受損，請[刪除它](../iam/userid_keys.html#deleting-an-api-key)，這樣就無法使用 API 金鑰作為鑑別來進一步呼叫。如需安全存取 Kubernetes API 伺服器的相關資訊，請參閱 [Kubernetes API 伺服器及 etcd](cs_secure.html#apiserver) 安全主題。
 
 **如何設定叢集的 API 金鑰？**</br>
 
@@ -257,7 +257,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 ### 確保 API 金鑰或基礎架構認證擁有者具有正確許可權
 {: #owner_permissions}
 
-為了確保可以在叢集中順利完成所有基礎架構相關動作，您要針對 API 金鑰設定其認證的使用者必須具有適當的許可權。
+為了確保可以在叢集裡順利完成所有基礎架構相關動作，您要針對 API 金鑰設定其認證的使用者必須具有適當的許可權。
 {: shortdesc}
 
 1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/)。
@@ -269,7 +269,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
     4. 如果使用者沒有您要設定 API 金鑰之資源群組的至少**檢視者**平台角色，請[將該資源群組角色指派給使用者](#platform)。
     5. 若要建立叢集，使用者還需要帳戶層次中 {{site.data.keyword.registrylong_notm}} 的**管理者**平台角色。請不要將 {{site.data.keyword.registryshort_notm}} 的原則限制為資源群組層次。
 
-3. 為了確保可以順利執行叢集中的所有基礎架構相關動作，請驗證使用者具有正確的基礎架構存取原則。
+3. 為了確保可以順利執行叢集裡的所有基礎架構相關動作，請驗證使用者具有正確的基礎架構存取原則。
     1. 從功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示") 中，選取**基礎架構**。
     2. 從功能表列中，選取**帳戶** > **使用者** > **使用者清單**。
     3. 在 **API 金鑰**直欄中，驗證使用者具有 API 金鑰，或按一下**產生**。
@@ -355,9 +355,9 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
         ```
         ibmcloud ks credential-get
         ```
-輸出範例：
+        輸出範例：
         ```
-        針對資源群組 default 所設定之使用者名稱 user@email.com 的基礎架構認證。
+        Infrastructure credentials for user name user@email.com set for resource group default.
         ```
         {: screen}
 
@@ -560,7 +560,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
     ```
     {: pre}
 
-    1. 如果您已指派對所有資源群組中所有叢集的存取權，則請針對帳戶中的每個資源群組重複此指令。
+    1. 如果您已指派對所有資源群組中所有叢集的存取權，則請針對帳戶中的每個資源群組重複這個指令。
 
 5. 若要讓變更生效，請重新整理叢集配置。
     ```
@@ -677,7 +677,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
           </tbody>
         </table>
 
-    2. 在叢集中建立角色或叢集角色。
+    2. 在叢集裡建立角色或叢集角色。
 
         ```
         kubectl apply -f my_role.yaml
@@ -783,7 +783,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
           </tbody>
         </table>
 
-    2. 在叢集中建立角色連結或叢集角色連結資源。
+    2. 在叢集裡建立角色連結或叢集角色連結資源。
 
         ```
         kubectl apply -f my_role_binding.yaml
@@ -825,22 +825,22 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
     ## 指派 RBAC 許可權
 {: #role-binding}
 
-請使用 RBAC 角色，來定義使用者可以採取的動作，以在您的叢集中使用 Kubernetes 資源。
+請使用 RBAC 角色，來定義使用者可以採取的動作，以在您的叢集裡使用 Kubernetes 資源。
 {: shortdesc}
 
 **何謂 RBAC 角色及叢集角色？**</br>
 
-RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kubernetes 資源互動的許可權。角色限定為特定名稱空間內的資源（例如部署）。叢集角色限定為全叢集資源（例如工作者節點）或可在每個名稱空間中找到的名稱空間範圍資源（例如 Pod）。
+RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kubernetes 資源互動的許可權。角色限定為特定名稱空間內的資源（例如部署）。叢集角色限定為全叢集資源（例如工作者節點）或可在每個名稱空間中找到的名稱空間範圍資源（例如 Pod）。
 
 **何謂 RBAC 角色連結及叢集角色連結？**</br>
 
 角色連結會將 RBAC 角色或叢集角色套用至特定的名稱空間。當您使用角色連結來套用角色時，可以將特定名稱空間中特定資源的存取權授與使用者。當您使用角色連結來套用叢集角色時，可以將可在每個名稱空間中找到的名稱空間範圍資源（例如 Pod）的存取權授與使用者，但只限特定名稱空間內。
 
-叢集角色連結會將 RBAC 叢集角色套用至叢集中的所有名稱空間。當您使用叢集角色連結來套用叢集角色時，可以將全叢集資源（例如工作者節點）或每個名稱空間中名稱空間範圍資源（例如 Pod）的存取權授與使用者。
+叢集角色連結會將 RBAC 叢集角色套用至叢集裡的所有名稱空間。當您使用叢集角色連結來套用叢集角色時，可以將全叢集資源（例如工作者節點）或每個名稱空間中名稱空間範圍資源（例如 Pod）的存取權授與使用者。
 
-**這些角色在我的叢集中看起來像什麼？**</br>
+**這些角色在我的叢集裡看起來像什麼？**</br>
 
-獲指派 [{{site.data.keyword.Bluemix_notm}}IAM 平台管理角色](#platform)的每位使用者，會自動獲指派對應的 RBAC 叢集角色。這些 RBAC 叢集角色已預先定義，並允許使用者與叢集中的 Kubernetes 資源互動。此外，會建立角色連結以將叢集角色套用至特定的名稱空間，或建立叢集角色連結以將叢集角色套用至所有名稱空間。
+獲指派 [{{site.data.keyword.Bluemix_notm}}IAM 平台管理角色](#platform)的每位使用者，會自動獲指派對應的 RBAC 叢集角色。這些 RBAC 叢集角色已預先定義，並允許使用者與叢集裡的 Kubernetes 資源互動。此外，會建立角色連結以將叢集角色套用至特定的名稱空間，或建立叢集角色連結以將叢集角色套用至所有名稱空間。
 
 下表說明 {{site.data.keyword.Bluemix_notm}} 平台角色與對應叢集角色之間的關係，以及針對平台角色自動建立的角色連結或叢集角色連結。
 
@@ -880,7 +880,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
 若要進一步瞭解每個 RBAC 角色所允許的動作，請參閱[使用者存取權](cs_access_reference.html#platform)參照主題。
 {: tip}
 
-**如何在我的叢集中管理特定名稱空間的 RBAC 許可權？**
+**如何在我的叢集裡管理特定名稱空間的 RBAC 許可權？**
 
 如果您使用 [Kubernetes 名稱空間來分割叢集並提供工作負載的隔離](cs_secure.html#container)，則必須將特定名稱空間的存取權指派給使用者。當您將**操作員**或**管理者**平台角色指派給使用者時，會將對應的 `admin` 及 `cluster-admin` 預先定義叢集角色自動套用至整個叢集。不過，當您將**檢視者**或**編輯者**平台角色指派給使用者時，只會將對應的 `view` 及 `edit` 預先定義叢集角色自動套用至 default 名稱空間。若要強制執行其他名稱空間中的相同使用者存取層次，您可以將這些叢集角色 `ibm-view` 及 `ibm-edit` 的[角色連結複製](#rbac_copy)到其他名稱空間。
 
@@ -890,9 +890,9 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
 
 **何時需要使用叢集角色連結以及未關聯至所設定之 {{site.data.keyword.Bluemix_notm}} IAM 許可權的角色連結？**
 
-建議您授權誰可以建立及更新您叢集中的 Pod。使用 [Pod 安全原則](https://console.bluemix.net/docs/containers/cs_psp.html#psp)，您可以使用叢集隨附的現有叢集角色連結，或建立您自己的叢集角色連結。
+建議您授權誰可以建立及更新您叢集裡的 Pod。使用 [Pod 安全原則](https://console.bluemix.net/docs/containers/cs_psp.html#psp)，您可以使用叢集隨附的現有叢集角色連結，或建立您自己的叢集角色連結。
 
-也建議您將附加程式整合到叢集。例如，當您[在叢集中設定 Helm](cs_integrations.html#helm) 時，必須在 `kube-system` 名稱空間中建立 Tiller 的服務帳戶，以及建立 `tiller-deploy` Pod 的 Kubernetes RBAC 叢集角色連結。
+也建議您將附加程式整合到叢集。例如，當您[在叢集裡設定 Helm](cs_integrations.html#helm) 時，必須在 `kube-system` 名稱空間中建立 Tiller 的服務帳戶，以及建立 `tiller-deploy` Pod 的 Kubernetes RBAC 叢集角色連結。
 
 ### 將 RBAC 角色連結複製到另一個名稱空間
 {: #rbac_copy}
@@ -900,7 +900,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
 部分角色及叢集角色只會套用至一個名稱空間。例如，只會將 `view` 及 `edit` 預先定義叢集角色自動套用至 `default` 名稱空間。若要強制執行其他名稱空間中的相同使用者存取層次，您可以將這些角色或叢集角色的角色連結複製到其他名稱空間。
 {: shortdesc}
 
-例如，假設您將**編輯者**平台管理角色指派給使用者 "john@email.com"。則會在您的叢集中自動建立預先定義的 RBAC 叢集角色 `edit`，而且 `ibm-edit` 角色連結會將許可權套用至 `default` 名稱空間。您要 "john@email.com" 也具有您開發名稱空間中的「編輯者」存取權，因此，您可以將 `ibm-edit` 角色連結從 `default` 複製到 `development`。**附註**：每次將使用者新增至 `view` 或 `edit` 角色時，您都必須複製角色連結。
+例如，假設您將**編輯者**平台管理角色指派給使用者 "john@email.com"。則會在您的叢集裡自動建立預先定義的 RBAC 叢集角色 `edit`，而且 `ibm-edit` 角色連結會將許可權套用至 `default` 名稱空間。您要 "john@email.com" 也具有您開發名稱空間中的「編輯者」存取權，因此，您可以將 `ibm-edit` 角色連結從 `default` 複製到 `development`。**附註**：每次將使用者新增至 `view` 或 `edit` 角色時，您都必須複製角色連結。
 
 1. 將角色連結從 `default` 複製到另一個名稱空間。
     ```
@@ -929,7 +929,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
 當您指派對應的 {{site.data.keyword.Bluemix_notm}} IAM 平台管理角色時，會自動建立 `view`、`edit`、`admin` 及 `cluster-admin` 叢集角色。您是否需要比這些預先定義許可權所容許的更精細叢集存取原則？沒有問題！您可以建立自訂 RBAC 角色及叢集角色。
 {: shortdesc}
 
-您可以將自訂 RBAC 角色及叢集角色指派給個別使用者、使用者群組（在執行 Kubernetes 1.11 版或更新版本的叢集中）或服務帳戶。為群組建立連結後，它會影響已新增至該群組或已從該群組移除的任何使用者。當您將使用者新增至群組時，除了您授與他們的任何個別存取權之外，他們還會取得群組的存取權。如果移除他們，則會撤銷其存取權。
+您可以將自訂 RBAC 角色及叢集角色指派給個別使用者、使用者群組（在執行 Kubernetes 1.11 版或更新版本的叢集裡）或服務帳戶。為群組建立連結後，它會影響已新增至該群組或已從該群組移除的任何使用者。當您將使用者新增至群組時，除了您授與他們的任何個別存取權之外，他們還會取得群組的存取權。如果移除他們，則會撤銷其存取權。
 **附註**：您不能將服務帳戶新增至存取群組。
 
 如果您要指派對 Pod 中所執行之處理程序（例如持續交付工具鏈）的存取權，則可以使用 [Kubernetes ServiceAccounts ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)。若要遵循指導教學，以示範如何設定 Travis 及 Jenkins 的服務帳戶，以及如何將自訂 RBAC 角色指派給 ServiceAccounts，請參閱[用於自動化系統中的 Kubernetes ServiceAccounts ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automated-systems-515297974982) 部落格文章。
@@ -1007,7 +1007,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
           </tbody>
         </table>
 
-    2. 在叢集中建立角色或叢集角色。
+    2. 在叢集裡建立角色或叢集角色。
 
         ```
         kubectl apply -f my_role.yaml
@@ -1113,7 +1113,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
           </tbody>
         </table>
 
-    2. 在叢集中建立角色連結或叢集角色連結資源。
+    2. 在叢集裡建立角色連結或叢集角色連結資源。
 
         ```
         kubectl apply -f my_role_binding.yaml
@@ -1221,10 +1221,10 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
 
 4. 針對您在其中具有叢集之資源群組及地區的每一種組合，重複這些步驟。
 
-### 從您的帳戶中移除使用者
+### 從您的帳戶移除使用者
 {: #remove_user}
 
-如果您帳戶中的使用者離開您的組織，您必須仔細地移除該使用者的許可權，以確保不會孤立叢集或其他資源。之後，您可以從 {{site.data.keyword.Bluemix_notm}} 帳戶中移除使用者。
+如果您帳戶中的使用者離開您的組織，您必須仔細地移除該使用者的許可權，以確保不會孤立叢集或其他資源。之後，您可以從 {{site.data.keyword.Bluemix_notm}} 帳戶移除使用者。
 {: shortdesc}
 
 開始之前：
@@ -1247,7 +1247,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
         5.  如果您找不到工作者節點 ID，則未將工作者節點佈建至此基礎架構帳戶。請切換至不同的基礎架構帳戶，然後再試一次。
     2. 判斷在使用者離開之後，使用者用來佈建叢集的基礎架構帳戶將發生什麼情況。
         * 如果使用者未擁有基礎架構帳戶，則其他使用者可以存取此基礎架構帳戶，且會在使用者離開之後持續保存。您可以繼續在帳戶中使用這些叢集。請確定至少有一個其他使用者具有叢集的[**管理者**平台角色](#platform)。
-        * 如果使用者擁有基礎架構帳戶，則當使用者離開時，系統會刪除基礎架構帳戶。您無法繼續使用這些叢集。若要防止叢集成為孤立的叢集，使用者必須在離開之前刪除叢集。如果使用者已離開，但未刪除叢集，則您必須使用 `ibmcloud k credential - set` 指令，將基礎架構認證變更為叢集工作者節點佈建所在的帳戶，然後刪除叢集。如需相關資訊，請參閱[無法修改或刪除孤立叢集中的基礎架構](cs_troubleshoot_clusters.html#orphaned)。
+        * 如果使用者擁有基礎架構帳戶，則當使用者離開時，系統會刪除基礎架構帳戶。您無法繼續使用這些叢集。若要防止叢集成為孤立的叢集，使用者必須在離開之前刪除叢集。如果使用者已離開，但未刪除叢集，則您必須使用 `ibmcloud k credential - set` 指令，將基礎架構認證變更為叢集工作者節點佈建所在的帳戶，然後刪除叢集。如需相關資訊，請參閱[無法修改或刪除孤立叢集裡的基礎架構](cs_troubleshoot_clusters.html#orphaned)。
 
 3. 移除 {{site.data.keyword.Bluemix_notm}} 帳戶中的使用者。
     1. 導覽至**管理 > 帳戶 > 使用者**。
@@ -1256,7 +1256,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
 
 4. 移除 {{site.data.keyword.Bluemix_notm}} IAM 平台許可權時，也會從關聯的預先定義 RBAC 角色中自動移除使用者的許可權。不過，如果您已建立自訂 RBAC 角色或叢集角色，請[移除那些 RBAC 角色連結或叢集角色連結的使用者](#remove_custom_rbac)。
 
-5. 如果您具有自動鏈結至 {{site.data.keyword.Bluemix_notm}} 帳戶的「隨收隨付制」帳戶，則會自動移除使用者的 IBM Cloud 基礎架構 (SoftLayer) 角色。不過，如果您具有[不同類型的帳戶](#understand_infra)，則可能需要手動從 IBM Cloud 基礎架構 (SoftLayer) 中移除使用者。
+5. 如果您具有自動鏈結至 {{site.data.keyword.Bluemix_notm}} 帳戶的「隨收隨付制」帳戶，則會自動移除使用者的 IBM Cloud 基礎架構 (SoftLayer) 角色。不過，如果您具有[不同類型的帳戶](#understand_infra)，則可能需要手動從 IBM Cloud 基礎架構 (SoftLayer) 移除使用者。
     1. 在 [{{site.data.keyword.Bluemix_notm}} 主控台](https://console.bluemix.net/)功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示") 中，按一下**基礎架構**。
     2. 導覽至**帳戶 > 使用者 > 使用者清單**。
     2. 尋找使用者的表格項目。
@@ -1280,13 +1280,13 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
 * [使用者的 Cloud Foundry 許可權](#remove_cloud_foundry)
 * [使用者的基礎架構許可權](#remove_infra)
 
-#### 從存取群組中移除使用者
+#### 從存取群組移除使用者
 {: #remove_access_group}
 
 1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://console.bluemix.net/)，並導覽至**管理 > 帳戶 > 使用者**。
 2. 按一下您要從中移除許可權的使用者名稱。
 3. 按一下**存取群組**標籤。
-4. 在存取群組的表格項目中，按一下動作功能表，然後選取**移除使用者**。移除使用者時，會從使用者中移除任何已指派給存取群組的角色。
+4. 在存取群組的表格項目中，按一下動作功能表，然後選取**移除使用者**。移除使用者時，會從使用者移除任何已指派給存取群組的角色。
 
 #### 移除 {{site.data.keyword.Bluemix_notm}} IAM 平台許可權及關聯的預先定義 RBAC 許可權
 {: #remove_iam_rbac}
@@ -1295,7 +1295,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
 2. 按一下您要從中移除許可權的使用者名稱。
 3. 在您要移除之許可權的表格項目中，按一下動作功能表。
 4. 選取**移除。**
-5. 移除 {{site.data.keyword.Bluemix_notm}} IAM 平台許可權時，也會從關聯的預先定義 RBAC 角色中自動移除使用者的許可權。若要使用這些變更來更新 RBAC 角色，請執行 `ibmcloud k cluster-config`。不過，如果您已建立[自訂 RBAC 角色或叢集角色](#rbac)，則必須從 `.yaml` 檔案中移除那些 RBAC 角色連結或叢集角色連結的使用者。請參閱以下移除自訂 RBAC 許可權的步驟。
+5. 移除 {{site.data.keyword.Bluemix_notm}} IAM 平台許可權時，也會從關聯的預先定義 RBAC 角色中自動移除使用者的許可權。若要使用這些變更來更新 RBAC 角色，請執行 `ibmcloud k cluster-config`。不過，如果您已建立[自訂 RBAC 角色或叢集角色](#rbac)，則必須從 `.yaml` 檔案移除那些 RBAC 角色連結或叢集角色連結的使用者。請參閱以下移除自訂 RBAC 許可權的步驟。
 
 #### 移除自訂 RBAC 許可權
 {: #remove_custom_rbac}
@@ -1306,7 +1306,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
 1. 針對您所建立的角色連結或叢集角色連結，開啟 `.yaml` 檔案。
 2. 在 `subjects` 區段中，移除使用者的區段。
 3. 儲存檔案。
-4. 在您的叢集中套用角色連結或叢集角色連結資源中的變更。
+4. 在您的叢集裡套用角色連結或叢集角色連結資源中的變更。
     ```
     kubectl apply -f my_role_binding.yaml
     ```
@@ -1315,7 +1315,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集中的 Kuber
 #### 移除 Cloud Foundry 許可權
 {: #remove_cloud_foundry}
 
-若要移除所有使用者的 Cloud Foundry 許可權，您可以移除使用者的組織角色。如果您只要移除使用者的能力（例如，連結叢集中的服務），則只會移除使用者的空間角色。
+若要移除所有使用者的 Cloud Foundry 許可權，您可以移除使用者的組織角色。如果您只要移除使用者的能力（例如，連結叢集裡的服務），則只會移除使用者的空間角色。
 {: shortdesc}
 
 1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://console.bluemix.net/)，並導覽至**管理 > 帳戶 > 使用者**。

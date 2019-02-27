@@ -41,7 +41,7 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 |영국 남부 | 런던 |
 |미국 동부(표준 클러스터만 해당) | 워싱턴 DC |
 |미국 남부 | 달라스 |
-{: caption="표: 지원되는 Kubernetes 서비스 지역 및 해당되는 IBM Cloud 위치. " caption-side="top"}
+{: caption="표: 지원되는 Kubernetes 서비스 지역 및 해당되는 IBM Cloud 위치." caption-side="top"}
 
 <br />
 
@@ -52,9 +52,9 @@ _{{site.data.keyword.containerlong_notm}} 지역 및 구역_
 지역이라고도 하는 {{site.data.keyword.Bluemix_notm}} 위치를 사용하여 {{site.data.keyword.Bluemix_notm}} 서비스 간에 리소스를 구성할 수 있습니다. 예를 들어, 동일한 위치의 {{site.data.keyword.registryshort_notm}}에 저장된 개인용 Docker 이미지를 사용하여 Kubernetes 클러스터를 작성할 수 있습니다.
 {:shortdesc}
 
-현재 자신이 있는 {{site.data.keyword.Bluemix_notm}} 위치를 확인하려면 `ibmcloud info`를 실행하고 **지역** 필드를 검토하십시오. 
+현재 자신이 있는 {{site.data.keyword.Bluemix_notm}} 위치를 확인하려면 `ibmcloud info`를 실행하고 **지역** 필드를 검토하십시오.
 
-로그인할 때 지역 API 엔드포인트를 지정하여 {{site.data.keyword.Bluemix_notm}} 위치에 액세스할 수 있습니다. 지역 엔드포인트를 지정하지 않으면 가장 근접한 지역에 자동으로 로그인됩니다. 
+로그인할 때 지역 API 엔드포인트를 지정하여 {{site.data.keyword.Bluemix_notm}} 위치에 액세스할 수 있습니다. 지역 엔드포인트를 지정하지 않으면 가장 근접한 지역에 자동으로 로그인됩니다.
 
 예를 들어, 다음 명령을 사용하여 {{site.data.keyword.Bluemix_notm}} 지역 API 엔드포인트에 로그인할 수 있습니다.
 
@@ -152,8 +152,8 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
 구역(zone)은 {{site.data.keyword.Bluemix_notm}} 지역 내에서 사용 가능한 실제 데이터센터입니다. 지역은 구역을 구성하기 위한 개념적인 도구이며, 이에는 다른 나라의 구역(데이터센터)이 포함될 수 있습니다. 다음 표에는 지역별로 사용 가능한 구역이 표시되어 있습니다.
 {:shortdesc}
 
-* **다중 구역 메트로 시티**: 다중 구역 메트로 시티에서 작성된 클러스터의 작업자 노드는 구역 간에 전개될 수 있습니다. 또한 다중 구역 메트로 시티에서 Kubernetes 버전 1.10 이상 클러스터를 작성하는 경우에는 고가용성 마스터가 구역 간에 전개됩니다. 
-* **단일 구역 시티**: 단일 구역 시티에서 작성된 클러스터의 작업자 노드는 하나의 구역 내에서만 유지될 수 있습니다. 다중 구역 간에 작업자 노드를 전개할 수는 없습니다. 고가용성 마스터에는 별도의 호스트에 3개의 복제본이 포함되지만, 이는 구역 간에 전개되어 있지 않습니다. 
+* **다중 구역 메트로 시티**: 다중 구역 메트로 시티에서 작성된 클러스터의 작업자 노드는 구역 간에 전개될 수 있습니다. 또한 다중 구역 메트로 시티에서 Kubernetes 버전 1.10 이상 클러스터를 작성하는 경우에는 고가용성 마스터가 구역 간에 전개됩니다.
+* **단일 구역 시티**: 단일 구역 시티에서 작성된 클러스터의 작업자 노드는 하나의 구역 내에서만 유지될 수 있습니다. 다중 구역 간에 작업자 노드를 전개할 수는 없습니다. 고가용성 마스터에는 별도의 호스트에 3개의 복제본이 포함되지만, 이는 구역 간에 전개되어 있지 않습니다.
 
 <table summary="표에서는 지역별로 사용 가능한 구역을 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 지역은 1열에 있고 다중 구역 메트로 시티는 2열에 있으며 단일 구역 시티는 3열에 있습니다. ">
 <caption>지역별로 사용 가능한 단일 및 다중 구역.</caption>
@@ -188,7 +188,7 @@ API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](htt
     </tr>
     <tr>
       <td>영국 남부</td>
-      <td>런던: lon04, lon05, lon06 **참고**: lon05는 lon02를 대체합니다. 새 클러스터는 lon05를 사용해야 하며, lon05만 구역 간에 전개된 고가용성 마스터를 지원합니다. </td>
+      <td>런던: lon04, lon05, lon06 **참고**: lon05는 lon02를 대체합니다. 새 클러스터는 lon05를 사용해야 하며, lon05만 구역 간에 전개된 고가용성 마스터를 지원합니다.</td>
       <td></td>
     </tr>
     <tr>

@@ -44,10 +44,10 @@ lastupdated: "2018-12-05"
 
 ## 전제조건
 
-- [버전 1.10 이상 클러스터를 작성](cs_clusters.html#clusters_ui)하거나 [기존 클러스터를 버전 1.10으로 업데이트](cs_versions.html#cs_v110)하십시오. 이 튜토리얼에서 3.3.1 Calico CLI 및 Calico v3 정책 구문을 사용하기 위해 Kubernetes 버전 1.10 이상 클러스터가 필요합니다. 
+- [버전 1.10 이상 클러스터를 작성](cs_clusters.html#clusters_ui)하거나 [기존 클러스터를 버전 1.10으로 업데이트](cs_versions.html#cs_v110)하십시오. 이 튜토리얼에서 3.3.1 Calico CLI 및 Calico v3 정책 구문을 사용하기 위해 Kubernetes 버전 1.10 이상 클러스터가 필요합니다.
 - [CLI에 클러스터를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 - [Calico CLI를 설치하고 구성](cs_network_policy.html#1.10_install)하십시오.
-- {{site.data.keyword.containerlong_notm}}에 대해 다음의 {{site.data.keyword.Bluemix_notm}} IAM 액세스 정책이 있는지 확인하십시오. 
+- {{site.data.keyword.containerlong_notm}}에 대해 다음의 {{site.data.keyword.Bluemix_notm}} IAM 액세스 정책이 있는지 확인하십시오.
     - [임의의 플랫폼 역할](cs_users.html#platform)
 
 <br />
@@ -59,7 +59,7 @@ lastupdated: "2018-12-05"
 첫 번째 학습에서는 다중 IP 주소와 포트에서 앱이 노출되는 방법과 트래픽이 클러스터로 유입되는 위치를 보여줍니다.
 {: shortdesc}
 
-튜토리얼 전체에서 사용할 샘플 웹 서버 앱을 배치하여 시작하십시오. `echoserver` 웹 서버는 클라이언트에서 클러스터로 설정된 연결에 대한 데이터를 보여주며, 이를 통해 PR 회사의 클러스터에 대한 액세스를 테스트할 수 있습니다. 그리고 로드 밸런서 2.0 서비스를 작성하여 앱을 노출하십시오. 로드 밸런서 2.0 서비스는 로드 밸런서 서비스 IP 주소 및 작업자 노드의 노드 포트 모두에서 앱이 사용 가능하도록 합니다. 
+튜토리얼 전체에서 사용할 샘플 웹 서버 앱을 배치하여 시작하십시오. `echoserver` 웹 서버는 클라이언트에서 클러스터로 설정된 연결에 대한 데이터를 보여주며, 이를 통해 PR 회사의 클러스터에 대한 액세스를 테스트할 수 있습니다. 그리고 로드 밸런서 2.0 서비스를 작성하여 앱을 노출하십시오. 로드 밸런서 2.0 서비스는 로드 밸런서 서비스 IP 주소 및 작업자 노드의 노드 포트 모두에서 앱이 사용 가능하도록 합니다.
 
 [Ingress 애플리케이션 로드 밸런서(ALB)](cs_ingress.html)를 대신 사용하시겠습니까? 3 - 4단계의 로드 밸런서 작성을 건너뛰십시오. 그 대신에 `ibmcloud ks albs --cluster <cluster_name>`을 실행하여 ALB의 공인 IP를 가져오고 튜토리얼 전체에서 다음 대신 이러한 IP를 사용하십시오. `<loadbalancer_IP>.`
 {: tip}

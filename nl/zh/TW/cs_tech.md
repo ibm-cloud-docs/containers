@@ -29,7 +29,7 @@ lastupdated: "2018-12-05"
 {: #docker_containers}
 
 建置在現有 Linux 容器技術 (LXC) 上的開放程式碼專案 Docker，定義了如何將軟體包裝成標準化單位（稱為容器）的範本，容器中包含了執行應用程式所需要的所有元素。
-{{site.data.keyword.containerlong_notm}} 使用 `containerd` 作為容器運行環境，將容器從 Docker 容器映像檔部署到叢集中。
+{{site.data.keyword.containerlong_notm}} 使用 `containerd` 作為容器運行環境，將容器從 Docker 容器映像檔部署到叢集裡。
 {:shortdesc}
 
 瞭解一些基本 Docker 概念：
@@ -176,7 +176,7 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <tr>
     <td>ibm-master-proxy</td>
     <td>kube-system</td>
-    <td>對於執行 Kubernetes 1.10 版或更新版本的叢集，`ibm-master-proxy` 會將工作者節點中的要求轉遞至高可用性主節點抄本的 IP 位址。在單一區域叢集中，主節點在個別主機上具有三個抄本，搭配一個主節點 IP 位址及網域名稱。對於具有多區域功能之區域中的叢集，主節點具有三個分散在各區域之中的抄本。因此，每一個主節點都有向 DNS 登錄的專屬 IP 位址，搭配一個用於整個叢集主節點的網域名稱。</td>
+    <td>對於執行 Kubernetes 1.10 版或更新版本的叢集，`ibm-master-proxy` 會將工作者節點中的要求轉遞至高可用性主節點抄本的 IP 位址。在單一區域叢集裡，主節點在個別主機上具有三個抄本，搭配一個主節點 IP 位址及網域名稱。對於具有多區域功能之區域中的叢集，主節點具有三個分散在各區域之中的抄本。因此，每一個主節點都有向 DNS 登錄的專屬 IP 位址，搭配一個用於整個叢集主節點的網域名稱。</td>
     </tr>
     <tr>
     <td>openvpn-client</td>
@@ -211,7 +211,7 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <tr>
     <td>kube-dashboard</td>
     <td>kube-system</td>
-    <td>Kubernetes 儀表板是 Web 型 GUI，容許使用者管理及疑難排解叢集和叢集中執行的應用程式。</td>
+    <td>Kubernetes 儀表板是 Web 型 GUI，容許使用者管理及疑難排解叢集和叢集裡執行的應用程式。</td>
     </tr>
     <tr>
     <td>heapster</td>

@@ -95,7 +95,7 @@ Open-Government Data Program Executive 需要與社群及私人部門共用公�
 **步驟 3：使用 IBM Garage 及雲端服務創新**
 * 採用 IBM Garage Method 的敏捷及反覆運算式開發作法，以啟用頻繁發行特性、修補程式及修正程式，且不需要關閉。 
 * 不論開發人員位在公用還是私人部門，{{site.data.keyword.contdelivery_full}} 都可以協助他們使用可自訂且可共用的範本，快速佈建整合式工具鏈。 
-* 「開發人員」在其「開發」及「測試」叢集中建置及測試應用程式之後，會使用 {{site.data.keyword.contdelivery_full}} 工具鏈，將應用程式部署至正式作業叢集。
+* 「開發人員」在其「開發」及「測試」叢集裡建置及測試應用程式之後，會使用 {{site.data.keyword.contdelivery_full}} 工具鏈，將應用程式部署至正式作業叢集。
 * 使用 {{site.data.keyword.Bluemix_notm}} 型錄中提供的 Watson AI、機器學習及深度學習工具，「開發人員」可專注在網域問題。ML 邏輯透過服務連結進入應用程式，而不是自訂唯一的 ML 程式碼。
 
 **結果**
@@ -149,7 +149,7 @@ Open-Government Data Program Executive 需要與社群及私人部門共用公�
 
 **解決方案模型**
 
-隨需應變運算、儲存空間及 Node 入門範本套件是視需要在可安全存取全球出貨資料的公用雲端中執行。叢集中的運算可防竄改，並與裸機隔離。  
+隨需應變運算、儲存空間及 Node 入門範本套件是視需要在可安全存取全球出貨資料的公用雲端中執行。叢集裡的運算可防竄改，並與裸機隔離。  
 
 技術解決方案：
 * 使用授信運算的 {{site.data.keyword.containerlong_notm}}
@@ -165,7 +165,7 @@ Open-Government Data Program Executive 需要與社群及私人部門共用公�
 * 使用 IBM {{site.data.keyword.SecureGateway}} 來維護現有內部部署資料庫的安全連線。
 
 **步驟 2：確定廣域可用性**
-* 「開發人員」在其「開發」及「測試」叢集中部署應用程式之後，會使用 {{site.data.keyword.contdelivery_full}} 工具鏈及 Helm，將國家/地區特定的應用程式部署至全球叢集。 
+* 「開發人員」在其「開發」及「測試」叢集裡部署應用程式之後，會使用 {{site.data.keyword.contdelivery_full}} 工具鏈及 Helm，將國家/地區特定的應用程式部署至全球叢集。 
 * 然後，工作負載及資料可符合地區法規。 
 * {{site.data.keyword.containerlong_notm}} 中的內建 HA 工具會平衡每個地理區域內的工作負載（包括自我修復及負載平衡）。
 

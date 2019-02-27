@@ -33,7 +33,7 @@ lastupdated: "2018-12-05"
 如果您具有特定的效能最佳化需求，則可以變更工作者節點上 Linux Kernel `sysctl` 參數的預設值。
 {: shortdesc}
 
-系統會以最佳化核心效能來自動佈建工作者節點，但您可以藉由將自訂 [Kubernetes `DaemonSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 物件套用至叢集來變更預設值。DaemonSet 會變更所有現有工作者節點的設定，並將這些設定套用至叢集中所佈建的任何新工作者節點。不影響任何 Pod。
+系統會以最佳化核心效能來自動佈建工作者節點，但您可以藉由將自訂 [Kubernetes `DaemonSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 物件套用至叢集來變更預設值。DaemonSet 會變更所有現有工作者節點的設定，並將這些設定套用至叢集裡所佈建的任何新工作者節點。不影響任何 Pod。
 
 您必須具有叢集的[**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台角色](cs_users.html#platform)，才能執行範例特許 initContainer。在起始設定用於部署的容器之後，就會捨棄這些專用權。
 {: note}
@@ -109,7 +109,7 @@ lastupdated: "2018-12-05"
     ```
     {: pre}
 
-2. [將叢集中的所有工作者節點重新開機](cs_cli_reference.html#cs_worker_reboot)。工作者節點已回到線上，並已套用預設值。
+2. [將叢集裡的所有工作者節點重新開機](cs_cli_reference.html#cs_worker_reboot)。工作者節點已回到線上，並已套用預設值。
 
 <br />
 
@@ -159,7 +159,7 @@ lastupdated: "2018-12-05"
 
 叢集的度量提供者（Kubernetes 1.12 以及更新版本中的 `metrics-server`，或舊版中的 `heapster`）配置會針對每個工作者節點具有 30 個或更少 Pod 的叢集進行最佳化。如果您的叢集的每個工作者節點具有更多的 Pod，則 Pod 的度量提供者 `metrics-server` 或 `heapster` 主要容器可能會頻繁地重新啟動，並出現 `OOMKilled` 這類錯誤訊息。
 
-度量提供者 Pod 也有一個 `nanny` 容器，可以調整 `metrics-server` 或 `heapster` 主要容器的資源要求及限制，以回應叢集中的工作者節點數目。您可以藉由編輯度量提供者的 ConfigMap 來變更預設資源。
+度量提供者 Pod 也有一個 `nanny` 容器，可以調整 `metrics-server` 或 `heapster` 主要容器的資源要求及限制，以回應叢集裡的工作者節點數目。您可以藉由編輯度量提供者的 ConfigMap 來變更預設資源。
 
 開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 

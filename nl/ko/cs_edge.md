@@ -39,7 +39,7 @@ lastupdated: "2018-12-05"
 
 시작하기 전에:
 
-1. {{site.data.keyword.Bluemix_notm}} IAM [플랫폼 역할](cs_users.html#platform)을 보유하고 있는지 확인하십시오. 
+1. {{site.data.keyword.Bluemix_notm}} IAM [플랫폼 역할](cs_users.html#platform)을 보유하고 있는지 확인하십시오.
 2. [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 3. 클러스터에 하나 이상의 공용 VLAN을 가지고 있는지 확인하십시오. 에지 작업자 노드는 사설 VLAN만 있는 클러스터에서는 사용할 수 없습니다.
 4. 구역당 최소한 2개의 작업자가 있으며 클러스터의 모든 구역에 전개된 [새 작업자 풀](cs_clusters.html#add_pool)을 작성하십시오.

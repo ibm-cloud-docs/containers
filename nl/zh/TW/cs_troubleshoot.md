@@ -106,9 +106,9 @@ lastupdated: "2018-12-06"
  </table>
 
 
-[Kubernetes 主節點](cs_tech.html#architecture)是保持叢集運作的主要元件。主節點將叢集資源及其配置儲存在 etcd 資料庫中，作為叢集的單點真實資料 (SPOT)。Kubernetes API 伺服器是從工作者節點到主節點之所有叢集管理要求的主要進入點，或您要與叢集資源互動時。<br><br>如果發生主節點失敗，則工作負載會繼續在工作者節點上執行，但無法使用 `kubectl` 指令來使用叢集資源，或檢視叢集性能，直到備份主節點中的 Kubernetes API 伺服器為止。如果 Pod 在主節點中斷期間關閉，則除非工作者節點再次到達 Kubernetes API 伺服器，否則無法重新排定 Pod。<br><br>在主節點中斷期間，您仍然可以針對 {{site.data.keyword.containerlong_notm}} API 執行 `ibmcloud ks` 指令，以使用您的基礎架構資源（例如工作者節點或 VLAN）。如果您透過在叢集中新增或移除工作者節點來變更現行叢集配置，則除非備份主節點，否則您的變更不會發生。
+[Kubernetes 主節點](cs_tech.html#architecture)是保持叢集運作的主要元件。主節點將叢集資源及其配置儲存在 etcd 資料庫中，作為叢集的單點真實資料 (SPOT)。Kubernetes API 伺服器是從工作者節點到主節點之所有叢集管理要求的主要進入點，或您要與叢集資源互動時。<br><br>如果發生主節點失敗，則工作負載會繼續在工作者節點上執行，但無法使用 `kubectl` 指令來使用叢集資源，或檢視叢集性能，直到備份主節點中的 Kubernetes API 伺服器為止。如果 Pod 在主節點中斷期間關閉，則除非工作者節點再次到達 Kubernetes API 伺服器，否則無法重新排定 Pod。<br><br>在主節點中斷期間，您仍然可以針對 {{site.data.keyword.containerlong_notm}} API 執行 `ibmcloud ks` 指令，以使用您的基礎架構資源（例如工作者節點或 VLAN）。如果您透過在叢集裡新增或移除工作者節點來變更現行叢集配置，則除非備份主節點，否則您的變更不會發生。
 
-在主節點中斷期間，請不要將工作者節點重新啟動或重新開機。此動作會從您的工作者節點中移除 Pod。因為 Kubernetes API 伺服器無法使用，所以無法將 Pod 重新排程至叢集中的其他工作者節點。
+在主節點中斷期間，請不要將工作者節點重新啟動或重新開機。此動作會從您的工作者節點移除 Pod。因為 Kubernetes API 伺服器無法使用，所以無法將 Pod 重新排程至叢集裡的其他工作者節點。
 {: important}
 
 
@@ -217,7 +217,7 @@ lastupdated: "2018-12-06"
       </tr>
       <tr>
       <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：無法下訂單。<br><br>
-      {{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：無法下單。路由器 'router_name' 的資源不足，無法滿足下列來賓的要求：'worker_id'。</td>
+      {{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：無法下訂單。路由器 'router_name' 的資源不足，無法滿足下列來賓的要求：'worker_id'。</td>
       <td>您所選取區域的基礎架構容量可能不足，無法佈建您的工作者節點。或者，您可能已超出 IBM Cloud 基礎架構 (SoftLayer) 帳戶的限制。若要解決，請嘗試下列其中一個選項：
       <ul><li>區域中的基礎架構資源可用性可能經常變動。請等待數分鐘，然後再試一次。</li>
       <li>若為單一區域叢集，請在不同的區域中建立叢集。若為多區域叢集，請將區域新增至叢集。</li>
@@ -245,7 +245,7 @@ lastupdated: "2018-12-06"
        <td><ul><li>如果您有防火牆，請[配置防火牆設定，以容許將送出的資料流量傳送至適當的埠和 IP 位址](cs_firewall.html#firewall_outbound)。</li><li>執行 `ibmcloud ks workers &lt;mycluster&gt;`，來檢查您的叢集沒有公用 IP。如果未列出任何公用 IP，則您的叢集只有專用 VLAN。<ul><li>如果您要叢集只有專用 VLAN，則請設定 [VLAN 連線](cs_clusters_planning.html#private_clusters)及[防火牆](cs_firewall.html#firewall_outbound)。</li><li>如果您希望叢集具有公用 IP，請同時使用公用及專用 VLAN 來[新增工作者節點](cs_cli_reference.html#cs_worker_add)。</li></ul></li></ul></td>
      </tr>
       <tr>
-  <td>無法建立 IMS 入口網站記號，因為沒有 IMS 帳戶鏈結至選取的 BSS 帳戶</br></br>找不到提供的使用者，或使用者非作用中</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus：使用者帳戶目前為 cancel_pending。</br></br>等待使用者看見機器</td>
+  <td>無法建立 IMS 入口網站記號，因為沒有任何 IMS 帳戶鏈結到所選取的 BSS 帳戶</br></br>找不到提供的使用者，或是提供的使用者不在作用中</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus：使用者帳戶目前為 cancel_pending。</br></br>等待使用者看見機器</td>
   <td>用來存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰擁有者沒有執行此動作的必要許可權，或可能處於擱置刪除狀態。</br></br><strong>身為使用者</strong>，請遵循下列步驟：<ol><li>如果您可以存取多個帳戶，請確定您已登入想要使用 {{site.data.keyword.containerlong_notm}} 的帳戶。</li><li>執行 <code>ibmcloud ks api-key-info</code>，以檢視用來存取 IBM Cloud 基礎架構 (SoftLayer) 組合的現行 API 金鑰擁有者。</li><li>執行 <code>ibmcloud account list</code>，以檢視您目前使用的 {{site.data.keyword.Bluemix_notm}} 帳戶的擁有者。</li><li>請聯絡 {{site.data.keyword.Bluemix_notm}} 帳戶的擁有者，並報告 API 金鑰擁有者對 IBM Cloud 基礎架構 (SoftLayer) 的許可權不足，或可能處於擱置刪除狀態。</li></ol></br><strong>身為帳戶擁有者</strong>，請遵循下列步驟：<ol><li>請檢閱 [IBM Cloud 基礎架構 (SoftLayer) 中的必要許可權](cs_users.html#infra_access)，以執行先前失敗的動作。</li><li>修正 API 金鑰擁有者的許可權，或使用 [<code>ibmcloud ks api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) 指令來建立新的 API 金鑰。</li><li>如果您或另一位帳戶管理者在您的帳戶中手動設定 IBM Cloud 基礎架構 (SoftLayer) 認證，請執行 [<code>ibmcloud ks credential-unset</code>](cs_cli_reference.html#cs_credentials_unset) 來移除您帳戶中的認證。</li></ol></td>
   </tr>
     </tbody>

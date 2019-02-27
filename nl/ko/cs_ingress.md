@@ -91,7 +91,7 @@ Ingress를 시작하기 전에 다음 전제조건을 검토하십시오.
 
 **모든 Ingress 구성에 대한 전제조건:**
 - Ingress는 표준 클러스터에만 사용 가능하고 고가용성을 보장할 수 있도록 구역당 최소한 2개의 작업자 노드를 요구하며 해당 주기적 업데이트가 적용됩니다.
-- Ingress를 설정하려면 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할이 필요합니다. 
+- Ingress를 설정하려면 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할이 필요합니다.
 
 **다중 구역 클러스터에서 Ingress 사용을 위한 전제조건**:
  - [에지 작업자 노드](cs_edge.html)로 네트워크 트래픽을 제한하는 경우에는 Ingress 팟(Pod)의 고가용성을 위해 각 구역에서 최소한 2개의 에지 작업자 노드를 사용하도록 설정해야 합니다. 구역당 최소한 2개의 작업자 노드가 있으며 클러스터의 모든 구역에 전개된 [에지 노드 작업자 풀을 작성](cs_clusters.html#add_pool)하십시오.
@@ -280,7 +280,7 @@ TLS 인증서가 사용하려는 {{site.data.keyword.cloudcerts_long_notm}}에 �
 {: pre}
 
 준비된 TLS 인증서가 없으면 다음 단계를 수행하십시오.
-1. 인증서 제공자의 인증 기관(CA) 인증서 및 키를 생성하십시오. 고유 도메인이 있는 경우 도메인의 공식적 TLS 인증서를 구매하십시오. [CN ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://support.dnsimple.com/articles/what-is-common-name/)이 각 인증서에 대해 서로 다른지 확인하십시오. 
+1. 인증서 제공자의 인증 기관(CA) 인증서 및 키를 생성하십시오. 고유 도메인이 있는 경우 도메인의 공식적 TLS 인증서를 구매하십시오. [CN ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://support.dnsimple.com/articles/what-is-common-name/)이 각 인증서에 대해 서로 다른지 확인하십시오.
 2. 인증서 및 키를 Base-64로 변환하십시오.
    1. 인증서 및 키를 Base-64로 인코딩하고 Base-64로 인코딩된 값을 새 파일에 저장하십시오.
       ```
@@ -574,7 +574,7 @@ Ingress를 통해 앱에 연결하는 데 문제가 있습니까? [Ingress 디�
         ```
         {: pre}
 
-3. "클러스터 내부에 있는 앱을 공용으로 노출"의 단계를 계속하십시오([2단계: 앱 도메인 선택](#public_inside_2)). 
+3. "클러스터 내부에 있는 앱을 공용으로 노출"의 단계를 계속하십시오([2단계: 앱 도메인 선택](#public_inside_2)).
 
 <br />
 
@@ -764,7 +764,7 @@ TLS 인증서가 사용하려는 {{site.data.keyword.cloudcerts_long_notm}}에 �
 {: pre}
 
 준비된 TLS 인증서가 없으면 다음 단계를 수행하십시오.
-1. 인증서 제공자의 인증 기관(CA) 인증서 및 키를 생성하십시오. 고유 도메인이 있는 경우 도메인의 공식적 TLS 인증서를 구매하십시오. [CN ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://support.dnsimple.com/articles/what-is-common-name/)이 각 인증서에 대해 서로 다른지 확인하십시오. 
+1. 인증서 제공자의 인증 기관(CA) 인증서 및 키를 생성하십시오. 고유 도메인이 있는 경우 도메인의 공식적 TLS 인증서를 구매하십시오. [CN ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://support.dnsimple.com/articles/what-is-common-name/)이 각 인증서에 대해 서로 다른지 확인하십시오.
 2. 인증서 및 키를 Base-64로 변환하십시오.
    1. 인증서 및 키를 Base-64로 인코딩하고 Base-64로 인코딩된 값을 새 파일에 저장하십시오.
       ```

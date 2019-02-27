@@ -57,10 +57,10 @@ lastupdated: "2018-12-05"
 
 相對於 1.0 版負載平衡器，2.0 版負載平衡器在轉遞要求至其他工作者節點上的應用程式 Pod 時，不會使用 NAT。當負載平衡器 2.0 遞送用戶端要求時，它會使用 IP over IP (IPIP)，將原始要求封包封裝至另一個新封包。此封裝 IPIP 封包具有負載平衡器 Pod 所在之工作者節點的來源 IP，如此可讓原始要求封包保留用戶端 IP 作為其來源 IP 位址。然後，工作者節點會使用直接伺服器傳回 (DSR)，將應用程式回應封包傳送至用戶端 IP。回應封包會跳過負載平衡器，並直接傳送至用戶端，因而可減少負載平衡器必須處理的資料流量。
 
-### 如何使用單一區域叢集中的 2.0 版負載平衡器，讓要求傳入我的應用程式？
+### 如何使用單一區域叢集裡的 2.0 版負載平衡器，讓要求傳入我的應用程式？
 {: #ipvs_single}
 
-下圖顯示負載平衡器 2.0 如何將通訊從網際網路導向至單一區域叢集中的應用程式。
+下圖顯示負載平衡器 2.0 如何將通訊從網際網路導向至單一區域叢集裡的應用程式。
 
 <img src="images/cs_loadbalancer_ipvs_planning.png" width="550" alt="使用 2.0 版負載平衡器公開 {{site.data.keyword.containerlong_notm}} 中的應用程式" style="width:550px; border-style: none"/>
 
@@ -68,16 +68,16 @@ lastupdated: "2018-12-05"
 
 2. 負載平衡器會在 IPIP 封包（標示為 "IPIP"）內封裝用戶端要求封包（標示為映像檔中的 "CR"）。用戶端要求封包會將用戶端 IP 保留為其來源 IP 位址。IPIP 封裝封包會使用工作者節點 10.73.14.25 IP 作為其來源 IP 位址。
 
-3. 負載平衡器會將 IPIP 封包遞送至應用程式 Pod 所在的工作者節點，即 10.73.14.26。如果叢集中已部署多個應用程式實例，則負載平衡器會在應用程式 Pod 部署所在的工作者節點之間遞送要求。
+3. 負載平衡器會將 IPIP 封包遞送至應用程式 Pod 所在的工作者節點，即 10.73.14.26。如果叢集裡已部署多個應用程式實例，則負載平衡器會在應用程式 Pod 部署所在的工作者節點之間遞送要求。
 
 4. 工作者節點 10.73.14.26 會解壓縮 IPIP 封裝封包，然後解壓縮用戶端要求封包。用戶端要求封包會轉遞至該工作者節點上的應用程式 Pod。
 
 5. 然後，工作者節點 10.73.14.26 會使用來自原始要求封包的來源 IP 位址（用戶端 IP），將應用程式 Pod 的回應封包直接傳回給用戶端。
 
-### 如何使用多區域叢集中的 2.0 版負載平衡器，讓要求傳入我的應用程式？
+### 如何使用多區域叢集裡的 2.0 版負載平衡器，讓要求傳入我的應用程式？
 {: #ipvs_multi}
 
-透過多區域叢集的資料傳輸流與[透過單一區域叢集的資料傳輸流](#ipvs_single)遵循相同的路徑。在多區域叢集中，負載平衡器會將要求遞送至其專屬區域中的應用程式實例，以及遞送至其他區域中的應用程式實例。下圖顯示每一個區域中的 2.0 版負載平衡器如何將網際網路中的資料流量導向至多區域叢集中的應用程式。
+透過多區域叢集的資料傳輸流與[透過單一區域叢集的資料傳輸流](#ipvs_single)遵循相同的路徑。在多區域叢集裡，負載平衡器會將要求遞送至其專屬區域中的應用程式實例，以及遞送至其他區域中的應用程式實例。下圖顯示每一個區域中的 2.0 版負載平衡器如何將網際網路中的資料流量導向至多區域叢集裡的應用程式。
 
 <img src="images/cs_loadbalancer_ipvs_multizone.png" alt="使用負載平衡器 2.0 公開 {{site.data.keyword.containerlong_notm}} 中的應用程式" style="width:500px; border-style: none"/>
 
@@ -142,7 +142,7 @@ lastupdated: "2018-12-05"
 ## 負載平衡器 2.0 必要條件
 {: #ipvs_provision}
 
-您無法將現有的 1.0 版負載平衡器更新至 2.0。您必須建立新的 2.0 版負載平衡器。請注意，您可以在叢集中同步執行 1.0 版和 2.0 版負載平衡器。
+您無法將現有的 1.0 版負載平衡器更新至 2.0。您必須建立新的 2.0 版負載平衡器。請注意，您可以在叢集裡同步執行 1.0 版和 2.0 版負載平衡器。
 
 在建立 2.0 版負載平衡器之前，您必須完成下列必要步驟。
 
@@ -185,12 +185,12 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-接下來，您可以遵循[在多區域叢集中設定負載平衡器 2.0](#ipvs_multi_zone_config) 或[在單一區域叢集中設定負載平衡器 2.0](#ipvs_single_zone_config) 中的步驟。
+接下來，您可以遵循[在多區域叢集裡設定負載平衡器 2.0](#ipvs_multi_zone_config) 或[在單一區域叢集裡設定負載平衡器 2.0](#ipvs_single_zone_config) 中的步驟。
 
 <br />
 
 
-## 在多區域叢集中設定負載平衡器 2.0
+## 在多區域叢集裡設定負載平衡器 2.0
 {: #ipvs_multi_zone_config}
 
 負載平衡器服務僅適用於標準叢集，而且不支援 TLS 終止。如果您的應用程式需要 TLS 終止，您可以使用 [Ingress](cs_ingress.html) 來公開應用程式，或配置應用程式來管理 TLS 終止。
@@ -203,7 +203,7 @@ lastupdated: "2018-12-05"
   * 如果您將網路資料流量限制為邊緣工作者節點，請確定在每一個區域中至少啟用 2 個[邊緣工作者節點](cs_edge.html#edge)。如果在部分區域中啟用邊緣工作者節點，但在其他區域中未啟用，則不會統一部署負載平衡器。負載平衡器將會部署至部分區域中的邊緣節點，但不會部署至其他區域中的一般工作者節點。
 
 
-若要在多區域叢集中設定負載平衡器 2.0，請執行下列動作：
+若要在多區域叢集裡設定負載平衡器 2.0，請執行下列動作：
 1.  [將應用程式部署至叢集](cs_app.html#app_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
 
 2.  為您要公開的應用程式建立負載平衡器服務。若要讓您的應用程式可在公用網際網路或專用網路上使用，請建立應用程式的 Kubernetes 服務。請配置服務，以將所有構成應用程式的 Pod 包含在負載平衡中。
@@ -241,7 +241,7 @@ lastupdated: "2018-12-05"
       <tbody>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:</code>
-          <td>用來指定負載平衡器類型的註釋。接受值為 <code>private</code> 及 <code>public</code>。如果您要在公用 VLAN 的叢集中建立公用負載平衡器，則不需要此註釋。</td>
+          <td>用來指定負載平衡器類型的註釋。接受值為 <code>private</code> 及 <code>public</code>。如果您要在公用 VLAN 的叢集裡建立公用負載平衡器，則不需要此註釋。</td>
       </tr>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>
@@ -353,7 +353,7 @@ lastupdated: "2018-12-05"
 
 6. 選用項目：負載平衡器服務也可讓您的應用程式透過服務的 NodePort 提供使用。叢集內每個節點的每個公用及專用 IP 位址上都可以存取 [NodePort](cs_nodeport.html)。若要在使用負載平衡器服務時封鎖流向 NodePort 的資料流量，請參閱[控制負載平衡器或 NodePort 服務的入埠資料流量](cs_network_policy.html#block_ingress)。
 
-## 在單一區域叢集中設定負載平衡器 2.0
+## 在單一區域叢集裡設定負載平衡器 2.0
 {: #ipvs_single_zone_config}
 
 開始之前：
@@ -362,7 +362,7 @@ lastupdated: "2018-12-05"
 * 您必須要有可指派給負載平衡器服務的可攜式公用或專用 IP 位址。
 * **重要事項**：請完成[負載平衡器 2.0 必要條件](#ipvs_provision)。
 
-若要在單一區域叢集中建立負載平衡器 2.0 服務，請執行下列動作：
+若要在單一區域叢集裡建立負載平衡器 2.0 服務，請執行下列動作：
 
 1.  [將應用程式部署至叢集](cs_app.html#app_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
 2.  為您要公開的應用程式建立負載平衡器服務。若要讓您的應用程式可在公用網際網路或專用網路上使用，請建立應用程式的 Kubernetes 服務。請配置服務，以將所有構成應用程式的 Pod 包含在負載平衡中。
@@ -399,7 +399,7 @@ lastupdated: "2018-12-05"
         <tbody>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
-          <td>用來指定負載平衡器類型的註釋。接受值為 `private` 及 `public`。如果您要在公用 VLAN 的叢集中建立公用負載平衡器，則不需要此註釋。</td>
+          <td>用來指定負載平衡器類型的註釋。接受值為 `private` 及 `public`。如果您要在公用 VLAN 的叢集裡建立公用負載平衡器，則不需要此註釋。</td>
         </tr>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan:`
@@ -494,7 +494,7 @@ lastupdated: "2018-12-05"
 
 TCP/UDP 負載平衡器 1.0 會使用 Iptables（Linux Kernel 特性），跨應用程式的 Pod 對要求進行負載平衡。
 
-**如何使用單一區域叢集中的 1.0 版負載平衡器，讓要求傳入我的應用程式？**
+**如何使用單一區域叢集裡的 1.0 版負載平衡器，讓要求傳入我的應用程式？**
 
 下圖顯示負載平衡器 1.0 如何將通訊從網際網路導向至應用程式。
 
@@ -508,18 +508,18 @@ TCP/UDP 負載平衡器 1.0 會使用 Iptables（Linux Kernel 特性），跨應
 
 4. 要求會轉遞至應用程式 Pod 的專用 IP 位址。要求套件的來源 IP 位址會變更為應用程式 Pod 執行所在之工作者節點的公用 IP 位址。如果叢集裡已部署多個應用程式實例，則負載平衡器會在應用程式 Pod 之間遞送要求。
 
-**如何使用多區域叢集中的 1.0 版負載平衡器，讓要求傳入我的應用程式？**
+**如何使用多區域叢集裡的 1.0 版負載平衡器，讓要求傳入我的應用程式？**
 
-如果您有多區域叢集，則應用程式實例會部署至不同區域的工作者節點上的 Pod。下圖顯示負載平衡器 1.0 如何將通訊從網際網路導向至多區域叢集中的應用程式。
+如果您有多區域叢集，則應用程式實例會部署至不同區域的工作者節點上的 Pod。下圖顯示負載平衡器 1.0 如何將通訊從網際網路導向至多區域叢集裡的應用程式。
 
-<img src="images/cs_loadbalancer_planning_multizone.png" width="475" alt="使用負載平衡器 1.0 對多區域叢集中的應用程式進行負載平衡" style="width:475px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning_multizone.png" width="475" alt="使用負載平衡器 1.0 對多區域叢集裡的應用程式進行負載平衡" style="width:475px; border-style: none"/>
 
 依預設，每一個負載平衡器 1.0 只會設定在某個區域中。若要達到高可用性，必須在您具有應用程式實例的每個區域中部署負載平衡器 1.0。各種區域中的負載平衡器會以循環式週期處理要求。此外，每一個負載平衡器都會將要求遞送至其專屬區域中的應用程式實例，以及遞送至其他區域中的應用程式實例。
 
 <br />
 
 
-## 在多區域叢集中設定負載平衡器 1.0
+## 在多區域叢集裡設定負載平衡器 1.0
 {: #multi_zone_config}
 
 負載平衡器服務僅適用於標準叢集，而且不支援 TLS 終止。如果您的應用程式需要 TLS 終止，您可以使用 [Ingress](cs_ingress.html) 來公開應用程式，或配置應用程式來管理 TLS 終止。
@@ -528,10 +528,10 @@ TCP/UDP 負載平衡器 1.0 會使用 Iptables（Linux Kernel 特性），跨應
 **開始之前**：
   * 您必須在每一個區域中部署負載平衡器，且每一個負載平衡器獲指派其本身在該區域的 IP 位址。若要建立公用負載平衡器，則必須至少有一個公用 VLAN 在每一個區域中具有可用的可攜式子網路。若要新增專用負載平衡器服務，則必須至少有一個專用 VLAN 在每一個區域中具有可用的可攜式子網路。若要新增子網路，請參閱[配置叢集的子網路](cs_subnets.html)。
   * 如果您將網路資料流量限制為邊緣工作者節點，請確定在每一個區域中至少啟用 2 個[邊緣工作者節點](cs_edge.html#edge)。如果在部分區域中啟用邊緣工作者節點，但在其他區域中未啟用，則不會統一部署負載平衡器。負載平衡器將會部署至部分區域中的邊緣節點，但不會部署至其他區域中的一般工作者節點。
-  * 針對您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud s vlan-spanning` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。
+  * 針對您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。
 
 
-若要在多區域叢集中設定負載平衡器 1.0 服務，請執行下列動作：
+若要在多區域叢集裡設定負載平衡器 1.0 服務，請執行下列動作：
 1.  [將應用程式部署至叢集](cs_app.html#app_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
 
 2.  為您要公開的應用程式建立負載平衡器服務。若要讓您的應用程式可在公用網際網路或專用網路上使用，請建立應用程式的 Kubernetes 服務。請配置服務，以將所有構成應用程式的 Pod 包含在負載平衡中。
@@ -566,7 +566,7 @@ TCP/UDP 負載平衡器 1.0 會使用 Iptables（Linux Kernel 特性），跨應
       <tbody>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:</code>
-          <td>用來指定負載平衡器類型的註釋。接受值為 <code>private</code> 及 <code>public</code>。如果您要在公用 VLAN 的叢集中建立公用負載平衡器，則不需要此註釋。</td>
+          <td>用來指定負載平衡器類型的註釋。接受值為 <code>private</code> 及 <code>public</code>。如果您要在公用 VLAN 的叢集裡建立公用負載平衡器，則不需要此註釋。</td>
       </tr>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>
@@ -668,7 +668,7 @@ TCP/UDP 負載平衡器 1.0 會使用 Iptables（Linux Kernel 特性），跨應
 
 7. 選用項目：負載平衡器服務也可讓您的應用程式透過服務的 NodePort 提供使用。叢集內每個節點的每個公用及專用 IP 位址上都可以存取 [NodePort](cs_nodeport.html)。若要在使用負載平衡器服務時封鎖流向 NodePort 的資料流量，請參閱[控制負載平衡器或 NodePort 服務的入埠資料流量](cs_network_policy.html#block_ingress)。
 
-## 在單一區域叢集中設定負載平衡器 1.0
+## 在單一區域叢集裡設定負載平衡器 1.0
 {: #config}
 
 開始之前：
@@ -676,7 +676,7 @@ TCP/UDP 負載平衡器 1.0 會使用 Iptables（Linux Kernel 特性），跨應
 * 只有標準叢集才能使用此特性。
 * 您必須要有可指派給負載平衡器服務的可攜式公用或專用 IP 位址。
 
-若要在單一區域叢集中建立負載平衡器 1.0 服務，請執行下列動作：
+若要在單一區域叢集裡建立負載平衡器 1.0 服務，請執行下列動作：
 
 1.  [將應用程式部署至叢集](cs_app.html#app_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
 2.  為您要公開的應用程式建立負載平衡器服務。若要讓您的應用程式可在公用網際網路或專用網路上使用，請建立應用程式的 Kubernetes 服務。請配置服務，以將所有構成應用程式的 Pod 包含在負載平衡中。
@@ -711,7 +711,7 @@ TCP/UDP 負載平衡器 1.0 會使用 Iptables（Linux Kernel 特性），跨應
         <tbody>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
-          <td>用來指定負載平衡器類型的註釋。接受值為 `private` 及 `public`。如果您要在公用 VLAN 的叢集中建立公用負載平衡器，則不需要此註釋。</td>
+          <td>用來指定負載平衡器類型的註釋。接受值為 `private` 及 `public`。如果您要在公用 VLAN 的叢集裡建立公用負載平衡器，則不需要此註釋。</td>
         </tr>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan:`

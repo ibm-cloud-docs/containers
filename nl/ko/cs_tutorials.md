@@ -68,7 +68,7 @@ lastupdated: "2018-12-05"
 
 프로비저닝하는 데 몇 분 정도 걸릴 수 있으므로 CLI를 설치하기 전에 클러스터를 작성하십시오.
 
-1.  [{{site.data.keyword.Bluemix_notm}} 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create)에서 내부에 1개의 작업자 노드가 있는 1개 작업자 풀의 무료 또는 표준 클러스터를 작성하십시오. 
+1.  [{{site.data.keyword.Bluemix_notm}} 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create)에서 내부에 1개의 작업자 노드가 있는 1개 작업자 풀의 무료 또는 표준 클러스터를 작성하십시오.
 
     [CLI에서 클러스터](cs_clusters.html#clusters_cli)를 작성할 수도 있습니다.
     {: tip}
@@ -93,7 +93,7 @@ lastupdated: "2018-12-05"
     {: pre}
 
 5.  클러스터에 앱을 배치하려면 [Kubernetes CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)하십시오. Kubernetes CLI를 사용하여 명령을 실행하려면 `kubectl` 접두부를 사용하십시오.
-    1.  전체 기능 호환성을 위해 사용하려는 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.10.11입니다. 
+    1.  전체 기능 호환성을 위해 사용하려는 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.10.11입니다.
 
         OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.10.11/bin/darwin/amd64/kubectl)
 
@@ -165,7 +165,7 @@ lastupdated: "2018-12-05"
     연합 ID가 있으면 `--sso` 플래그를 사용하여 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오.
     {: tip}
 
-2.  클러스터가 `default` 외의 리소스 그룹에 속해 있는 경우에는 해당 리소스 그룹을 대상으로 지정하십시오. 각 클러스터가 속하는 리소스 그룹을 보려면 `ibmcloud ks clusters`를 실행하십시오. 
+2.  클러스터가 `default` 외의 리소스 그룹에 속해 있는 경우에는 해당 리소스 그룹을 대상으로 지정하십시오. 각 클러스터가 속하는 리소스 그룹을 보려면 `ibmcloud ks clusters`를 실행하십시오.
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -288,7 +288,7 @@ CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
     ```
     {: screen}
 
-3.  Kubernetes 시크릿이 클러스터 네임스페이스에서 작성되었는지 확인하십시오. 모든 {{site.data.keyword.Bluemix_notm}} 서비스는 컨테이너가 액세스하는 데 사용하는 URL 및 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키 등의 기밀 정보가 포함된 JSON 파일에 의해 정의됩니다. 이 정보를 안전하게 저장하기 위해 Kubernetes 시크릿이 사용됩니다. 이 예에서는 사용자 계정에서 프로비저닝된 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}의 인스턴스에 액세스하기 위한 API 키가 시크릿에 포함됩니다. 
+3.  Kubernetes 시크릿이 클러스터 네임스페이스에서 작성되었는지 확인하십시오. 모든 {{site.data.keyword.Bluemix_notm}} 서비스는 컨테이너가 액세스하는 데 사용하는 URL 및 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키 등의 기밀 정보가 포함된 JSON 파일에 의해 정의됩니다. 이 정보를 안전하게 저장하기 위해 Kubernetes 시크릿이 사용됩니다. 이 예에서는 사용자 계정에서 프로비저닝된 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}의 인스턴스에 액세스하기 위한 API 키가 시크릿에 포함됩니다.
 
     ```
      kubectl get secrets --namespace=default

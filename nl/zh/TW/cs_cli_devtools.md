@@ -324,7 +324,7 @@ ibmcloud plugin list
 ## API 指令
 {: #api_commands}
 
-### ibmcloud ks api ENDPOINT [--insecure][--skip-ssl-validation] [--api-version VALUE][-s]
+### ibmcloud ks api ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
 {: #cs_api}
 
 將目標設為 {{site.data.keyword.containerlong_notm}} 的 API 端點。如果您未指定端點，則可以檢視已設定目標之現行端點的相關資訊。
@@ -375,7 +375,7 @@ Region:                us-south
 {: screen}
 
 
-### ibmcloud ks api-key-info CLUSTER [--json][-s]
+### ibmcloud ks api-key-info CLUSTER [--json] [-s]
 {: #cs_api_key_info}
 
 檢視 {{site.data.keyword.containerlong_notm}} 地區中 IAM API 金鑰的擁有者的名稱及電子郵件位址。
@@ -464,7 +464,7 @@ Region:                us-south
 
 設定叢集 Kubernetes API 伺服器配置的選項。這個指令必須與您要設定之配置選項的下列其中一個次指令一起使用。
 
-#### ibmcloud ks apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
+#### ibmcloud ks apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP] [--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH] [--clientKey CLIENT_KEY_PATH]
 {: #cs_apiserver_api_webhook_set}
 
 設定 API 伺服器配置的 Webhook 後端。Webhook 後端會將 API 伺服器審核日誌轉遞至遠端伺服器。將根據您在這個指令旗標中提供的資訊，來建立 Webhook 配置。如果您未在旗標中提供任何資訊，則會使用預設 Webhook 配置。
@@ -567,7 +567,7 @@ Region:                us-south
   {: pre}
 
 
-### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
+### ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 {: #cs_init}
 
 起始設定 {{site.data.keyword.containerlong_notm}} 外掛程式，或指定您要建立或存取 Kubernetes 叢集的地區。
@@ -621,7 +621,7 @@ ibmcloud ks messages
 {: #cluster_mgmt_commands}
 
 
-### ibmcloud ks cluster-config CLUSTER [--admin][--export] [-s][--yaml]
+### ibmcloud ks cluster-config CLUSTER [--admin] [--export] [-s] [--yaml]
 {: #cs_cluster_config}
 
 登入之後，請下載 Kubernetes 配置資料及憑證來連接至叢集，以及執行 `kubectl` 指令。檔案會下載至 `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`。
@@ -654,7 +654,7 @@ ibmcloud ks cluster-config my_cluster
 {: pre}
 
 
-### ibmcloud ks cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt] [--trusted][-s]
+### ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 {: #cs_cluster_create}
 
 在您的組織中建立叢集。對於免費叢集，您只要指定叢集名稱；其他所有項目都設為預設值。在 30 天之後，會自動刪除免費的叢集。您一次可以有一個免費叢集。若要充分運用 Kubernetes 的完整功能，請建立標準叢集。
@@ -834,7 +834,7 @@ trusted: <em>true</em>
   ```
   {: pre}
 
-### ibmcloud ks cluster-feature-enable [-f] CLUSTER [--trusted][-s]
+### ibmcloud ks cluster-feature-enable [-f] CLUSTER [--trusted] [-s]
 {: #cs_cluster_feature_enable}
 
 在現有叢集上啟用特性。
@@ -1076,9 +1076,9 @@ trusted: <em>true</em>
 ### ibmcloud ks cluster-service-unbind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_GUID [-s]
 {: #cs_cluster_service_unbind}
 
-從叢集裡移除 {{site.data.keyword.Bluemix_notm}} 服務。
+從叢集移除 {{site.data.keyword.Bluemix_notm}} 服務。
 
-**附註：**移除 {{site.data.keyword.Bluemix_notm}} 服務時，會從叢集裡移除服務認證。如果 pod 仍在使用服務，會因為找不到服務認證而失敗。
+**附註：**移除 {{site.data.keyword.Bluemix_notm}} 服務時，會從叢集移除服務認證。如果 pod 仍在使用服務，會因為找不到服務認證而失敗。
 
 <strong>指令選項</strong>：
 
@@ -1105,7 +1105,7 @@ trusted: <em>true</em>
   {: pre}
 
 
-### ibmcloud ks cluster-services CLUSTER [--namespace KUBERNETES_NAMESPACE][--all-namespaces] [--json][-s]
+### ibmcloud ks cluster-services CLUSTER [--namespace KUBERNETES_NAMESPACE] [--all-namespaces] [--json] [-s]
 {: #cs_cluster_services}
 
 列出連結至叢集裡一個或所有 Kubernetes 名稱空間的服務。如果未指定任何選項，則會顯示 default 名稱空間的服務。
@@ -1572,7 +1572,7 @@ ibmcloud ks va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15
   ```
   {: pre}
 
-### ibmcloud ks alb-get --albID ALB_ID [--json][-s]
+### ibmcloud ks alb-get --albID ALB_ID [--json] [-s]
 {: #cs_alb_get}
 
 檢視 ALB 的詳細資料。
@@ -2584,7 +2584,7 @@ diskEncryption: <em>false</em></code></pre>
 ### ibmcloud ks worker-rm [-f] CLUSTER WORKER [WORKER][-s]
 {: #cs_worker_rm}
 
-從叢集裡移除一個以上的工作者節點。如果您移除工作者節點，叢集會變成不平衡。您可以執行 `ibmcloud ks worker-pool-rebalance` [指令](#cs_rebalance)，以自動重新平衡工作者節點儲存區。
+從叢集移除一個以上的工作者節點。如果您移除工作者節點，叢集會變成不平衡。您可以執行 `ibmcloud ks worker-pool-rebalance` [指令](#cs_rebalance)，以自動重新平衡工作者節點儲存區。
 
 在您移除工作者節點之前，請確定在其他工作者節點上的 Pod 已重新排程，這有助於避免應用程式關閉，或工作者節點上的資料毀損。
 {: tip}
@@ -2703,7 +2703,7 @@ diskEncryption: <em>false</em></code></pre>
    <dd>僅檢視屬於工作者節點儲存區的工作者節點。若要列出可用的工作者節點儲存區，請執行 `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`。這是選用值。</dd>
 
    <dt><code>--show-deleted</code></dt>
-   <dd>檢視已從叢集裡刪除的工作者節點，包括刪除的原因。這是選用值。</dd>
+   <dd>檢視已從叢集刪除的工作者節點，包括刪除的原因。這是選用值。</dd>
 
    <dt><code>--json</code></dt>
    <dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
@@ -2854,7 +2854,7 @@ diskEncryption: <em>false</em></code></pre>
 ### ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [--json][-s]
 {: #cs_worker_pool_rm}
 
-從叢集裡移除工作者節點儲存區。這會刪除儲存區中的所有工作者節點。刪除時會重新排定您的 Pod。為了避免當機，請確定您有足夠的工作者節點來執行工作負載。
+從叢集移除工作者節點儲存區。這會刪除儲存區中的所有工作者節點。刪除時會重新排定您的 Pod。為了避免當機，請確定您有足夠的工作者節點來執行工作負載。
 
 <strong>指令選項</strong>：
 

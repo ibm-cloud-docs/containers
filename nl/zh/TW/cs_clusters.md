@@ -53,7 +53,7 @@ lastupdated: "2018-12-05"
     *  您無法變更叢集的資源群組。叢集只能與位於相同資源群組中的其他 {{site.data.keyword.Bluemix_notm}} 服務，或不支援資源群組的服務（例如 {{site.data.keyword.registrylong_notm}}）整合。
     *  如果您計劃使用[度量值的 {{site.data.keyword.monitoringlong_notm}}](cs_health.html#view_metrics)，請計劃提供叢集的名稱，而該名稱在帳戶的所有資源群組和地區中必須是唯一的，以避免發生度量命名衝突。
     * 如果您有 {{site.data.keyword.Bluemix_dedicated}} 帳戶，則只能在 default 資源群組中建立叢集。
-4.  啟用 VLAN Spanning。如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
+4.  啟用 VLAN Spanning。如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
 
 ### 叢集層次
 {: #prepare_cluster_level}
@@ -126,7 +126,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 
 6. 輸入區域詳細資料。
 
-    1. 選取**單一區域**或**多區域**可用性。在多區域叢集中，主節點部署在具有多區域功能的區域中，而且您的叢集資源會分散到多個區域。您的選擇可能會受到地區的限制。
+    1. 選取**單一區域**或**多區域**可用性。在多區域叢集裡，主節點部署在具有多區域功能的區域中，而且您的叢集資源會分散到多個區域。您的選擇可能會受到地區的限制。
 
     2. 選取您要在其中管理叢集的特定區域。您必須至少選取 1 個區域，但可以選取所需數目的區域。如果您選取超過 1 個區域，則工作者節點會分散到您選擇的各區域，讓您具有更高的可用性。如果您只選取 1 個區域，則可以在建立叢集之後[將區域新增至叢集](#add_zone)。
 
@@ -252,7 +252,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 
         如果公用及專用 VLAN 已存在，請記下相符的路由器。專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。在範例輸出中，任何專用 VLAN 都可以與任何公用 VLAN 搭配使用，因為路由器都會包括 `02a.dal10`。
 
-        您必須將工作者節點連接至專用 VLAN，也可以選擇性地將工作者節點連接至公用 VLAN。**附註**：如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅專用叢集網路](cs_network_cluster.html#private_vlan)。
+        您必須將工作者節點連接至專用 VLAN，也可以選擇性地將工作者節點連接至公用 VLAN。**附註**：如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅限專用叢集網路](cs_network_cluster.html#private_vlan)。
 
     4.  **免費及標準叢集**：執行 `cluster-create` 指令。您可以選擇免費叢集（包括一個已設定 2vCPU 及 4GB 記憶體的工作者節點），且會在 30 天後自動刪除。當您建立標準叢集時，依預設，會加密工作者節點磁碟，其硬體由多位 IBM 客戶所共用，並且按使用時數計費。</br>標準叢集的範例。指定叢集的選項：
 
@@ -295,7 +295,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
         <td><ul>
           <li>**免費叢集**：您不需要定義公用 VLAN。免費叢集會自動連接至 IBM 所擁有的公用 VLAN。</li>
           <li>**標準叢集**：如果您在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中已設定用於該區域的公用 VLAN，請輸入公用 VLAN 的 ID。如果您只要將工作者節點連接至專用 VLAN，請不要指定此選項。<p>專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。</p>
-          <p class="note">如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅專用叢集網路](cs_network_cluster.html#private_vlan)。</p></li>
+          <p class="note">如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅限專用叢集網路](cs_network_cluster.html#private_vlan)。</p></li>
         </ul></td>
         </tr>
         <tr>
@@ -418,7 +418,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 **下一步為何？**
 
 -   如果您已在具有多區域功能的區域中建立叢集，請藉由[將區域新增至叢集](#add_zone)來展開工作者節點。
--   [在叢集中部署應用程式。](cs_app.html#app_cli)
+-   [在叢集裡部署應用程式。](cs_app.html#app_cli)
 -   [使用 `kubectl` 指令行管理叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")。](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry/index.html)
 - 如果您有防火牆，則可能需要[開啟必要埠](cs_firewall.html#firewall)，才能使用 `ibmcloud`、`kubectl` 或 `calicotl` 指令，以容許來自叢集的出埠資料流量，或容許網路服務的入埠資料流量。
@@ -533,7 +533,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
    ```
    {: pre}
 
-6. 依預設，新增工作者節點儲存區會建立沒有區域的儲存區。若要在區域中部署工作者節點，您必須將先前擷取的區域新增至工作者節點儲存區。如果您要將工作者節點分散到多個區域，請對每一個區域重複此指令。  
+6. 依預設，新增工作者節點儲存區會建立沒有區域的儲存區。若要在區域中部署工作者節點，您必須將先前擷取的區域新增至工作者節點儲存區。如果您要將工作者節點分散到多個區域，請對每一個區域重複這個指令。  
    ```
    ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
    ```
@@ -561,11 +561,11 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 
 當您將區域新增至工作者節點儲存區時，會在新的區域中佈建工作者節點儲存區中所定義的工作者節點，並考慮用於排定未來的工作負載。{{site.data.keyword.containerlong_notm}} 會自動將地區的 `failure-domain.beta.kubernetes.io/region` 標籤以及區域的 `failure-domain.beta.kubernetes.io/zone` 標籤新增至每一個工作者節點。Kubernetes 排程器使用這些標籤，以將 Pod 分散到相同地區內的區域。
 
-如果您的叢集中有多個工作者節點儲存區，請將該區域新增至所有這些儲存區，以將工作者節點平均地分散到叢集。
+如果您的叢集裡有多個工作者節點儲存區，請將該區域新增至所有這些儲存區，以將工作者節點平均地分散到叢集。
 
 開始之前：
 *  若要將區域新增至工作者節點儲存區，該工作者節點儲存區必須位於[具有多區域功能的區域](cs_regions.html#zones)中。如果您的工作者節點儲存區不在具有多區域功能的區域中，請考慮[建立新工作者節點儲存區](#add_pool)。
-*  如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
+*  如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
 
 若要將具有工作者節點的區域新增至工作者節點儲存區，請執行下列動作：
 
@@ -678,7 +678,7 @@ Kubernetes 叢集的用途是要定義一組資源、節點、網路及儲存裝
 
 您可以執行 `ibmcloud ks clusters` 指令並找出**狀況**欄位，以檢視現行叢集狀況。若要對叢集和工作者節點進行疑難排解，請參閱[叢集的疑難排解](cs_troubleshoot.html#debug_clusters)。
 
-<table summary="每個表格列都應該從左到右閱讀，第一欄為工作者節點狀況，第二欄則為說明。">
+<table summary="每個表格列都應該從左到右閱讀，第一欄為叢集狀態，第二欄則為說明。">
     <caption>叢集狀況</caption>
    <thead>
    <th>叢集狀況</th>

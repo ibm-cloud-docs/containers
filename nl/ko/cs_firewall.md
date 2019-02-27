@@ -280,7 +280,7 @@ lastupdated: "2018-12-05"
       </table>
 </p>
 
-4.  선택사항: 작업자 노드에서 {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}} 및 LogDNA 서비스로의 발신 네트워크 트래픽을 허용하십시오. 
+4.  선택사항: 작업자 노드에서 {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}} 및 LogDNA 서비스로의 발신 네트워크 트래픽을 허용하십시오.
     *   **{{site.data.keyword.monitoringlong_notm}}**:
         <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_public_IP&gt;</pre>
 <em>&lt;monitoring_public_IP&gt;</em>를 트래픽을 허용할 모니터링 지역에 대한 모든 주소로 대체하십시오.
@@ -347,11 +347,11 @@ lastupdated: "2018-12-05"
 </p>
     *   **{{site.data.keyword.la_full_notm}}**:
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
-`<logDNA_public_IP>`를 [LogDNA IP 주소](/docs/services/Log-Analysis-with-LogDNA/network.html#ips)로 대체하십시오. 
+`<logDNA_public_IP>`를 [LogDNA IP 주소](/docs/services/Log-Analysis-with-LogDNA/network.html#ips)로 대체하십시오.
 
 5. 로드 밸런서 서비스를 사용하는 경우에는 VRRP 프로토콜을 사용하는 모든 트래픽이 공용 및 개인용 인터페이스의 작업자 노드 간에 허용되는지 확인하십시오. {{site.data.keyword.containerlong_notm}}는 VRRP 프로토콜을 사용하여 공용 및 개인용 로드 밸런서의 IP 주소를 관리합니다.
 
-6. {: #pvc}데이터 스토리지에 대한 지속적 볼륨 클레임을 작성하려면 IBM Cloud 인프라(SoftLayer)에 대해 방화벽을 통한 egress 액세스를 허용하십시오. 
+6. {: #pvc}데이터 스토리지에 대한 지속적 볼륨 클레임을 작성하려면 IBM Cloud 인프라(SoftLayer)에 대해 방화벽을 통한 egress 액세스를 허용하십시오.
     - 프로비저닝 요청을 시작하기 위해 IBM Cloud 인프라(SoftLayer) API 엔드포인트에 대한 액세스 허용: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
     - [**프론트 엔드(공용) 네트워크**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#frontend-public-network) 및 [**백엔드(사설) 네트워크**](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network) 둘 다에 대해 클러스터가 있는 구역의 IBM Cloud 인프라(SoftLayer) IP 범위에 대한 액세스를 허용하십시오. 클러스터의 구역을 찾으려면 `ibmcloud ks clusters`를 실행하십시오.
 

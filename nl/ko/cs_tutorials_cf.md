@@ -44,7 +44,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 - [{{site.data.keyword.registrylong_notm}}에서 개인용 이미지 레지스트리를 작성](../services/Registry/index.html)하십시오.
 - [클러스터를 작성](cs_clusters.html#clusters_ui)하십시오.
 - [CLI에 클러스터를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
-- {{site.data.keyword.containerlong_notm}}에 대해 다음의 {{site.data.keyword.Bluemix_notm}} IAM 액세스 정책이 있는지 확인하십시오. 
+- {{site.data.keyword.containerlong_notm}}에 대해 다음의 {{site.data.keyword.Bluemix_notm}} IAM 액세스 정책이 있는지 확인하십시오.
     - [임의의 플랫폼 역할](cs_users.html#platform)
 - [Docker 및 Kubernetes 용어에 대해 학습](cs_tech.html)하십시오.
 

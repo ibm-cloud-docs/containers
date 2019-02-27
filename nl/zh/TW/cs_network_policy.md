@@ -94,7 +94,7 @@ Calico 藉由在 Kubernetes 工作者節點上設定 Linux Iptables 規則，來
   </tbody>
 </table>
 
-在 Kibernetes 1.10 版以及更新版本的叢集中，還建立了預設 Kubernetes 原則，用來限制對「Kubernetes 儀表板」的存取。Kubernetes 原則不適用於主機端點，反而適用於 `kube-dashboard` Pod。此原則適用於僅連接至專用 VLAN 的叢集，以及連接至公用及專用 VLAN 的叢集。
+在 Kibernetes 1.10 版以及更新版本的叢集裡，還建立了預設 Kubernetes 原則，用來限制對「Kubernetes 儀表板」的存取。Kubernetes 原則不適用於主機端點，反而適用於 `kube-dashboard` Pod。此原則適用於僅連接至專用 VLAN 的叢集，以及連接至公用及專用 VLAN 的叢集。
 
 <table>
 <caption>每一個叢集的預設 Kubernetes 原則</caption>
@@ -560,7 +560,7 @@ Kubernetes 1.9 版已淘汰，且自 2018 年 12 月 27 日起不再支援。不
 
 Calico DNAT 前網路原則的一些常見用途：
 
-  - 封鎖資料流量傳輸至專用負載平衡器服務的公用節點埠：負載平衡器服務可讓您的應用程式透過負載平衡器 IP 位址及埠提供使用，並讓您的應用程式可透過服務的節點埠提供使用。叢集中每個節點的每個 IP 位址（公開和專用）上都可以存取節點埠。
+  - 封鎖資料流量傳輸至專用負載平衡器服務的公用節點埠：負載平衡器服務可讓您的應用程式透過負載平衡器 IP 位址及埠提供使用，並讓您的應用程式可透過服務的節點埠提供使用。叢集裡每個節點的每個 IP 位址（公開和專用）上都可以存取節點埠。
   - 封鎖資料流量傳輸至叢集上正在執行[邊緣工作者節點](cs_edge.html#edge)的公用節點埠：封鎖節點埠可確保邊緣工作者節點是處理送入資料流量的唯一工作者節點。
   - 封鎖來自特定來源 IP 位址或 CIDR（黑名單）的資料流量
   - 只容許來自特定來源 IP 位址或 CIDR（白名單）的資料流量，並封鎖所有其他資料流量
@@ -617,7 +617,7 @@ Calico DNAT 前網路原則的一些常見用途：
     ```
     {: pre}
 
-3. 選用項目：在多區域叢集中，多區域負載平衡器 (MZLB) 會對叢集的每一個區域中的 Ingress 應用程式負載平衡器 (ALB) 進行性能檢查，並根據這些性能檢查來持續更新 DNS 查閱結果。如果您使用 DNAT 前原則封鎖 Ingress 服務的所有送入資料流量，則也必須將用來檢查 ALB 性能的 [Cloudflare 的 IPv4 IP ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.cloudflare.com/ips/) 列入白名單。如需如何建立 Calico DNAT 前原則以將這些 IP 列入白名單的步驟，請參閱 [Calico 網路原則指導教學](cs_tutorials_policies.html#lesson3)的課程 3。
+3. 選用項目：在多區域叢集裡，多區域負載平衡器 (MZLB) 會對叢集的每一個區域中的 Ingress 應用程式負載平衡器 (ALB) 進行性能檢查，並根據這些性能檢查來持續更新 DNS 查閱結果。如果您使用 DNAT 前原則封鎖 Ingress 服務的所有送入資料流量，則也必須將用來檢查 ALB 性能的 [Cloudflare 的 IPv4 IP ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.cloudflare.com/ips/) 列入白名單。如需如何建立 Calico DNAT 前原則以將這些 IP 列入白名單的步驟，請參閱 [Calico 網路原則指導教學](cs_tutorials_policies.html#lesson3)的課程 3。
 
 ## 隔離專用網路上的叢集
 {: #isolate_workers}
@@ -630,13 +630,13 @@ Calico DNAT 前網路原則的一些常見用途：
 
 **工作者節點**
 
-* 專用介面 egress 僅允許到 Pod IP、此叢集中的工作者節點，以及 UPD/TCP 埠 53（適用於 DNS 存取）、埠 2049（適用於與 NFS 檔案伺服器通訊）及埠 443 與 3260（適用於區塊儲存空間通訊）。
-* 專用介面 ingress 僅允許來自叢集中的工作者節點，且僅允許到 DNS、kubelet、ICMP 及 VRRP。
+* 專用介面 egress 僅允許到 Pod IP、此叢集裡的工作者節點，以及 UPD/TCP 埠 53（適用於 DNS 存取）、埠 2049（適用於與 NFS 檔案伺服器通訊）及埠 443 與 3260（適用於區塊儲存空間通訊）。
+* 專用介面 ingress 僅允許來自叢集裡的工作者節點，且僅允許到 DNS、kubelet、ICMP 及 VRRP。
 
 **Pod**
 
-* Pod 的所有 ingress 僅允許來自叢集中的工作者節點。
-* Pod 的 egress 僅限於到公用 IP、DNS、kubelet 及叢集中的其他 Pod。
+* Pod 的所有 ingress 僅允許來自叢集裡的工作者節點。
+* Pod 的 egress 僅限於到公用 IP、DNS、kubelet 及叢集裡的其他 Pod。
 
 開始之前：
 1. [安裝並配置 Calico CLI。](#cli_install)
@@ -670,7 +670,7 @@ Calico DNAT 前網路原則的一些常見用途：
 3. 設定專用主機端點的原則。
     1. 開啟 `generic-privatehostendpoint.yaml` 原則。
     2. 將 `<worker_name>` 取代為工作者節點的名稱，並將 `<worker-node-private-ip>` 取代為工作者節點的專用 IP 位址。若要查看工作者節點專用 IP，請執行 `ibmcloud ks workers --cluster <my_cluster>`.
-    3. 在新的一節針對叢集中的每一個工作者節點重複此步驟。
+    3. 在新的一節針對叢集裡的每一個工作者節點重複此步驟。
     **附註**：每次將工作者節點新增至叢集時，您必須使用新項目來更新主機端點檔案。
 
 4. 將所有原則套用至叢集。
@@ -807,7 +807,7 @@ spec:
 ## 記載被拒絕的資料流量
 {: #log_denied}
 
-若要記載針對叢集中的特定 Pod 而被拒絕的資料流量要求，您可以建立 Calico 日誌網路原則。
+若要記載針對叢集裡的特定 Pod 而被拒絕的資料流量要求，您可以建立 Calico 日誌網路原則。
 {: shortdesc}
 
 當您設定網路原則來限制應用程式 Pod 的資料流量時，這些原則所不允許的資料流量要求會遭到拒絕及捨棄。在某些情況下，您可能想要取得被拒絕之資料流量要求的相關資訊。例如，您可能會注意到不斷被您的其中一個網路原則拒絕的一些異常資料流量。若要監視潛在的安全威脅，您可以設定記載，在每次原則拒絕所指定的應用程式 Pod 的嘗試動作時就進行記錄。

@@ -38,7 +38,7 @@ Kubernetes의 이전 버전을 사용 중이십니까? 지금 바로 [클러스�
 **기본적으로 설정되는 정책이 있습니까? 무엇을 추가할 수 있습니까?**</br>
 기본적으로, {{site.data.keyword.containerlong_notm}}는 사용자가 삭제하거나 수정할 수 없는 [{{site.data.keyword.IBM_notm}} 클러스터 관리용 리소스](#ibm_psp)를 사용하여 `PodSecurityPolicy` 허가 제어기를 구성합니다. 또한 사용자는 허가 제어기를 사용 중지할 수 없습니다.
 
-팟(Pod) 조치는 기본적으로 잠겨 있지 않습니다. 그 대신에 클러스터에서 2개의 역할 기반 액세스 제어(RBAC) 리소스가 인가된 및 비인가된 팟(Pod)을 작성할 수 있도록 모든 관리자, 사용자, 서비스 및 노드에 권한을 부여합니다. 추가 RBAC 리소스가 [하이브리드 배치](cs_hybrid.html#hybrid_iks_icp)에 사용되는 {{site.data.keyword.Bluemix_notm}} 개인용 패키지의 이식성을 위해 포함됩니다. 
+팟(Pod) 조치는 기본적으로 잠겨 있지 않습니다. 그 대신에 클러스터에서 2개의 역할 기반 액세스 제어(RBAC) 리소스가 인가된 및 비인가된 팟(Pod)을 작성할 수 있도록 모든 관리자, 사용자, 서비스 및 노드에 권한을 부여합니다. 추가 RBAC 리소스가 [하이브리드 배치](cs_hybrid.html#hybrid_iks_icp)에 사용되는 {{site.data.keyword.Bluemix_notm}} 개인용 패키지의 이식성을 위해 포함됩니다.
 
 특정 사용자가 팟(Pod)을 작성하거나 업데이트하지 못하도록 방지하려면 [이러한 RBAC 리소스를 수정하거나 자체 리소스를 작성](#customize_psp)할 수 있습니다.
 
@@ -187,7 +187,7 @@ Kubernetes의 이전 버전을 사용 중이십니까? 지금 바로 [클러스�
 {{site.data.keyword.containerlong_notm}}의 Kubernetes 클러스터에는 {{site.data.keyword.IBM_notm}}이 클러스터를 적절하게 관리할 수 있도록 허용하는 다음의 팟(Pod) 보안 정책 및 관련 RBAC 리소스가 포함되어 있습니다.
 {: shortdesc}
 
-기본 `PodSecurityPolicy` 리소스는 {{site.data.keyword.IBM_notm}}에서 설정한 팟(Pod) 보안 정책을 참조합니다. 
+기본 `PodSecurityPolicy` 리소스는 {{site.data.keyword.IBM_notm}}에서 설정한 팟(Pod) 보안 정책을 참조합니다.
 
 **주의**: 이러한 리소스는 절대로 삭제하거나 수정하지 마십시오.
 

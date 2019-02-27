@@ -56,7 +56,7 @@ lastupdated: "2018-12-05"
    3. 重新載入您的工作者節點，以套用最新的修補程式版本。在重新載入您的工作者節點之前，請遵循 [ibmcloud ks worker-reload 指令](cs_cli_reference.html#cs_worker_reload)中的指示，以在您的工作者節點上正常地重新排程所有執行中 Pod。請注意，在重新載入期間，會使用最新的映像檔更新您的工作者節點機器，而且如果資料不是[儲存在工作者節點之外](cs_storage_planning.html#persistent_storage_overview)即會被刪除。
 
 
-2. 遵循[指示](cs_integrations.html#helm)，將 Helm 用戶端安裝在本端機器上，並將 Helm 伺服器 (tiller) 安裝在叢集中。
+2. 遵循[指示](cs_integrations.html#helm)，將 Helm 用戶端安裝在本端機器上，並將 Helm 伺服器 (tiller) 安裝在叢集裡。
 
    如果您使用 Helm 2.9 版或更高版本，請確定已使用[服務帳戶](cs_integrations.html#helm)來安裝 tiller。
    {: important}
@@ -209,7 +209,7 @@ lastupdated: "2018-12-05"
 如果您不想要在叢集裡佈建及使用 {{site.data.keyword.Bluemix_notm}} Block Storage，則可以解除安裝 Helm 圖表。
 {: shortdesc}
 
-移除外掛程式不會移除現有的 PVC、PV 或資料。移除外掛程式時，會從叢集裡移除所有相關的 Pod 及常駐程式集。在移除外掛程式之後，您無法針對叢集佈建新的區塊儲存空間，也無法使用現有的區塊儲存空間 PVC 及 PV。
+移除外掛程式不會移除現有的 PVC、PV 或資料。移除外掛程式時，會從叢集移除所有相關的 Pod 及常駐程式集。在移除外掛程式之後，您無法針對叢集佈建新的區塊儲存空間，也無法使用現有的區塊儲存空間 PVC 及 PV。
 {: important}
 
 開始之前：
@@ -395,7 +395,7 @@ lastupdated: "2018-12-05"
 建立持續性磁區要求 (PVC)，為叢集[動態佈建](cs_storage_basics.html#dynamic_provisioning)區塊儲存空間。動態佈建會自動建立相符的持續性磁區 (PV)，並以 IBM Cloud 基礎架構 (SoftLayer) 帳戶訂購實際的儲存裝置。
 {:shortdesc}
 
-區塊儲存空間隨附一個 `ReadWriteOnce` 存取模式。您一次只能將它裝載到叢集中一個工作者節點上的一個 Pod。
+區塊儲存空間隨附一個 `ReadWriteOnce` 存取模式。您一次只能將它裝載到叢集裡一個工作者節點上的一個 Pod。
 {: note}
 
 開始之前：
@@ -846,7 +846,7 @@ lastupdated: "2018-12-05"
 {: important}
 
 **如何在特定區域中建立有狀態集？** </br>
-在多區域叢集中，您可以指定要在有狀態集 YAML 的 `spec.selector.matchLabels` 及 `spec.template.metadata.labels` 區段中建立有狀態集的區域及地區。或者，您也可以將這些標籤新增至[自訂的儲存空間類別](cs_storage_basics.html#customized_storageclass)，並在有狀態集的 `volumeClaimTemplates` 區段中使用此儲存空間類別。
+在多區域叢集裡，您可以指定要在有狀態集 YAML 的 `spec.selector.matchLabels` 及 `spec.template.metadata.labels` 區段中建立有狀態集的區域及地區。或者，您也可以將這些標籤新增至[自訂的儲存空間類別](cs_storage_basics.html#customized_storageclass)，並在有狀態集的 `volumeClaimTemplates` 區段中使用此儲存空間類別。
 
 **將區塊儲存空間新增至有狀態集時有哪些選擇？** </br>
 如果您要在建立有狀態集時自動建立 PVC，請使用[動態佈建](#dynamic_statefulset)。您也可以選擇使用有狀態集來[預先佈建 PVC 或使用現有 PVC](#static_statefulset)。  
@@ -859,8 +859,8 @@ lastupdated: "2018-12-05"
 
 開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 
-1. 驗證已完整部署叢集中的所有現有有狀態集。如果仍在部署有狀態集，則無法開始建立有狀態集。您必須等到叢集中的所有有狀態集皆已完整部署，才能避免非預期的結果。
-   1. 列出叢集中的現有有狀態集。
+1. 驗證已完整部署叢集裡的所有現有有狀態集。如果仍在部署有狀態集，則無法開始建立有狀態集。您必須等到叢集裡的所有有狀態集皆已完整部署，才能避免非預期的結果。
+   1. 列出叢集裡的現有有狀態集。
       ```
       kubectl get statefulset --all-namespaces
       ```
@@ -998,7 +998,7 @@ lastupdated: "2018-12-05"
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-    <td style="text-align:left">輸入您要使用的儲存空間類別。若要列出現有儲存空間類別，請執行 <code>kubectl get storageclasses | grep block</code>。如果您未指定儲存空間類別，則會建立 PVC，其具有叢集中所設定的預設儲存空間類別。請確定預設儲存空間類別使用 <code>ibm.io/ibmc-block</code> 佈建者，以使用區塊儲存空間佈建有狀態集。</td>
+    <td style="text-align:left">輸入您要使用的儲存空間類別。若要列出現有儲存空間類別，請執行 <code>kubectl get storageclasses | grep block</code>。如果您未指定儲存空間類別，則會建立 PVC，其具有叢集裡所設定的預設儲存空間類別。請確定預設儲存空間類別使用 <code>ibm.io/ibmc-block</code> 佈建者，以使用區塊儲存空間佈建有狀態集。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
@@ -1094,7 +1094,7 @@ lastupdated: "2018-12-05"
 如需計費的相關問題，以及尋找如何使用 {{site.data.keyword.Bluemix_notm}} 主控台來修改儲存空間的步驟，請參閱[擴充 Block Storage 容量](/docs/infrastructure/BlockStorage/expandable_block_storage.html#expanding-block-storage-capacity)。如果您使用 {{site.data.keyword.Bluemix_notm}} 主控台來修改儲存空間，則必須遵循本主題中的步驟 4-7 來完成修改。
 {: tip}
 
-1. 列出叢集中的 PVC，並記下 **VOLUME** 直欄中關聯 PV 的名稱。 
+1. 列出叢集裡的 PVC，並記下 **VOLUME** 直欄中關聯 PV 的名稱。 
    ```
    kubectl get pvc
    ```
@@ -1202,7 +1202,7 @@ lastupdated: "2018-12-05"
    ```
    {: pre}
    
-   Pod 會以下列格式傳回：`<pod_name>: <pvc_name>`。 
+         Pod 會以下列格式傳回：`<pod_name>: <pvc_name>`. 
    
 6. 如果您具有使用 PVC 的 Pod，請藉由移除 Pod 並讓 Kubernetes 重建它，來重新啟動 Pod。如果您已建立 Pod，而且未使用 Kubernetes 部署或抄本集，則在移除 Pod 之後，必須予以重建。若要擷取用來建立 Pod 的 YAML 檔案，請執行 `kubectl get pod <pod_name> -o yaml >pod.yaml`。
    {: tip}

@@ -27,7 +27,7 @@ lastupdated: "2018-12-05"
 ## Ingress ALB 附加程式變更日誌
 {: #alb_changelog}
 
-檢視 {{site.data.keyword.containerlong_notm}} 叢集中 Ingress 應用程式負載平衡器 (ALB) 附加程式的建置版本變更。
+檢視 {{site.data.keyword.containerlong_notm}} 叢集裡 Ingress 應用程式負載平衡器 (ALB) 附加程式的建置版本變更。
 {:shortdesc}
 
 更新 Ingress ALB 附加程式時，所有 ALB Pod 中的 `nginx-ingress` 和 `ingress-auth` 容器都會更新至最新的建置版本。依預設，會啟用自動更新附加程式，但您可以停用自動更新並手動更新附加程式。如需相關資訊，請參閱[更新 Ingress 應用程式負載平衡器](cs_cluster_update.html#alb)。

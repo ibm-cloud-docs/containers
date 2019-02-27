@@ -27,7 +27,7 @@ lastupdated: "2018-12-05"
 **我為何要設定 Pod 優先順序？**</br>
 身為叢集管理者，您要控制哪些 Pod 對於叢集工作負載更為重要。優先順序等級可協助您控制 Kubernetes 排程器決策，使高優先順序 Pod 勝過低優先順序 Pod。排程器甚至可以先占（移除）執行中的低優先順序 Pod，以便排程擱置中的高優先順序 Pod。
 
-透過設定 Pod 優先順序，您可以協助防止較低優先順序的工作負載影響叢集中的重要工作負載，尤其是在叢集開始達到其資源容量的情況下。
+透過設定 Pod 優先順序，您可以協助防止較低優先順序的工作負載影響叢集裡的重要工作負載，尤其是在叢集開始達到其資源容量的情況下。
 
 請確定您已對叢集[設定適當的使用者存取權](cs_users.html#users)及（如果適用）[Pod 安全原則](cs_psp.html#psp)。存取權及 Pod 安全原則有助於防止不受信任的使用者部署高優先順序 Pod，而防止其他 Pod 進行排程。
 {: tip}
@@ -38,7 +38,7 @@ lastupdated: "2018-12-05"
 
 如果您沒有為 Pod 部署指定優先順序，則預設值是設為 `globalDefault` 優先順序等級。如果您沒有 `globalDefault` 優先順序等級，則所有 Pod 的預設優先順序都是零 (`0`)。依預設，{{site.data.keyword.containerlong_notm}} 不會設定 `globalDefault`，因此 Pod 預設優先順序為零。
 
-若要瞭解 Pod 優先順序與排程器如何一起運作，請考量下圖中的情境。您必須在具有可用資源的工作者節點上放置已設定優先順序的 Pod。否則，在移除現有 Pod 的同時，叢集中的高優先順序 Pod 可能保持擱置狀態，如「情境 3」所示。
+若要瞭解 Pod 優先順序與排程器如何一起運作，請考量下圖中的情境。您必須在具有可用資源的工作者節點上放置已設定優先順序的 Pod。否則，在移除現有 Pod 的同時，叢集裡的高優先順序 Pod 可能保持擱置狀態，如「情境 3」所示。
 
 _圖：Pod 優先順序情境_![Pod 優先順序情境](images/pod-priority.png)
 1.  具有高、中、低優先順序的三個 Pod 擱置排程。排程器會尋找有空間給所有 3 個 Pod 的可用工作者節點，並依優先順序排程它們，優先順序最高的 Pod 先排。
@@ -48,7 +48,7 @@ _圖：Pod 優先順序情境_![Pod 優先順序情境](images/pod-priority.png)
 **如需相關資訊**：請參閱有關 [Pod 優先順序及先占 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/)的 Kubernetes 文件。
 
 **我可以停用 Pod 優先順序許可控制器嗎？**</br>
-否。如果您不想要使用 Pod 優先順序，則不要設定 `globalDefault` 或在 Pod 部署中包含優先順序等級。除了 IBM 使用[預設優先順序等級](#default_priority_class)部署的叢集重要 Pod 之外，每個 Pod 都預設為零。因為 Pod 優先順序是相對的，所以此基本設定確保叢集重要 Pod 已針對資源設定了優先順序，並遵循您已設定的現有排程原則來排程任何其他 Pod。
+否。若您不想要使用 Pod 優先順序，則不要設定 `globalDefault` 或在 Pod 部署中包含優先順序等級。除了 IBM 使用[預設優先順序等級](#default_priority_class)部署的叢集重要 Pod 之外，每個 Pod 都預設為零。因為 Pod 優先順序是相對的，所以此基本設定確保叢集重要 Pod 已針對資源設定了優先順序，並遵循您已設定的現有排程原則來排程任何其他 Pod。
 
 **資源配額如何影響 Pod 優先順序？**</br>
 您可以針對執行 Kubernetes 1.12 或更新版本的叢集，搭配使用 Pod 優先順序與資源配額，包括[配額範圍 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes)。使用配額範圍，您可以將資源配額設為帳戶，以取得 Pod 優先順序。較高優先順序的 Pod 會在較低優先順序的 Pod 之前，開始耗用資源配額所限制的系統資源。
@@ -62,7 +62,7 @@ _圖：Pod 優先順序情境_![Pod 優先順序情境](images/pod-priority.png)
 請不要修改預設等級，其係用來正確管理您的叢集。您可以在應用程式部署中使用這些等級，或[建立您自己的優先順序等級](#create_priority_class)。
 {: important}
 
-下表說明依預設存在於您叢集中的優先順序等級及其使用原因。
+下表說明依預設存在於您叢集裡的優先順序等級及其使用原因。
 
 |名稱| 設定者 | 優先順序值 | 用途 |
 |---|---|---|
@@ -131,19 +131,19 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     </tr>
     <tr>
     <td><code>value</code></td>
-    <td>必要：輸入小於或等於 10 億 (1000000000) 的整數。值越高，優先順序越高。這些值相對於叢集中其他優先順序等級的值。對於您不想先佔（移除）的系統重要 Pod 保留非常高的數字。</br></br>例如，[預設叢集重要優先順序等級](#default_priority_class)範圍是從 900000000-2000001000 的值，所以對於新優先順序等級，請輸入小於這些數字的值，這樣就不會有任何 Pod 高於這些 Pod 的優先順序。</td>
+    <td>必要：輸入小於或等於 10 億 (1000000000) 的整數。值越高，優先順序越高。這些值相對於叢集裡其他優先順序等級的值。對於您不想先佔（移除）的系統重要 Pod 保留非常高的數字。</br></br>例如，[預設叢集重要優先順序等級](#default_priority_class)範圍是從 900000000-2000001000 的值，所以對於新優先順序等級，請輸入小於這些數字的值，這樣就不會有任何 Pod 高於這些 Pod 的優先順序。</td>
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
-    <td>選用項目：將欄位設為 `true`，讓此優先順序等級成為廣域預設值，其將套用至每一個未使用 `priorityClassName` 值進行排程的 Pod。您的叢集中只有 1 個優先順序等級可以設為廣域預設值。如果沒有廣域預設值，則未指定 `priorityClassName` 的 Pod，其優先順序為零 (`0`)。</br></br>
-    [預設優先順序等級](#default_priority_class)未設定 `globalDefault`。如果您已在叢集中建立其他優先順序等級，則可以執行 `kubectl describe priorityclass <name>`，以檢查並確定其未設定 `globalDefault`。</td>
+    <td>選用項目：將欄位設為 `true`，讓此優先順序等級成為廣域預設值，其將套用至每一個未使用 `priorityClassName` 值進行排程的 Pod。您的叢集裡只有 1 個優先順序等級可以設為廣域預設值。如果沒有廣域預設值，則未指定 `priorityClassName` 的 Pod，其優先順序為零 (`0`)。</br></br>
+    [預設優先順序等級](#default_priority_class)未設定 `globalDefault`。如果您已在叢集裡建立其他優先順序等級，則可以執行 `kubectl describe priorityclass <name>`，以檢查並確定其未設定 `globalDefault`。</td>
     </tr>
     <tr>
     <td><code>description</code></td>
     <td>選用項目：告訴使用者為何要使用此優先順序等級。請使用引號 (`""`) 括住字串。</td>
     </tr></tbody></table>
 
-3.  在叢集中建立優先順序等級。
+3.  在叢集裡建立優先順序等級。
 
     ```
     kubectl apply -f filepath/priorityclass.yaml

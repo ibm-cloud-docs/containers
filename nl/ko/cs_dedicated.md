@@ -76,7 +76,7 @@ lastupdated: "2018-12-05"
  <tr>
  <td>지속적 스토리지</td>
  <td>볼륨의 [동적 프로비저닝](cs_storage_basics.html#dynamic_provisioning) 또는 [정적 프로비저닝](cs_storage_basics.html#static_provisioning)을 사용합니다.</td>
- <td>볼륨의 [동적 프로비저닝](cs_storage_basics.html#dynamic_provisioning)을 사용합니다. 볼륨의 백업을 요청하고 볼륨에서 복원을 요청하며 기타 스토리지 기능을 수행하려면 [지원 케이스를 여십시오](/docs/get-support/howtogetsupport.html#getting-customer-support). </li></ul></td>
+ <td>볼륨의 [동적 프로비저닝](cs_storage_basics.html#dynamic_provisioning)을 사용합니다. 볼륨의 백업을 요청하고 볼륨에서 복원을 요청하며 기타 스토리지 기능을 수행하려면 [지원 케이스를 여십시오](/docs/get-support/howtogetsupport.html#getting-customer-support).</li></ul></td>
  </tr>
  <tr>
  <td>{{site.data.keyword.registryshort_notm}}의 이미지 레지스트리 URL</td>
@@ -124,7 +124,7 @@ lastupdated: "2018-12-05"
 시작하기 전에:
   * [{{site.data.keyword.Bluemix_dedicated_notm}} 환경을 설정](/docs/dedicated/index.html#setupdedicated)하십시오.
   * 로컬 시스템 또는 회사 네트워크에서 프록시 또는 방화벽을 사용하여 공용 인터넷 엔드포인트를 제어하는 경우, [방화벽에서 필수 포트 및 IP 주소를 열어야](cs_firewall.html#firewall) 합니다.
-  * [Cloud Foundry CLI를 다운로드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/cloudfoundry/cli/releases)하십시오. 
+  * [Cloud Foundry CLI를 다운로드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/cloudfoundry/cli/releases)하십시오.
 
 {{site.data.keyword.Bluemix_dedicated_notm}} 사용자가 클러스터에 액세스할 수 있도록 하려면 다음을 수행하십시오.
 
@@ -490,8 +490,7 @@ lastupdated: "2018-12-05"
 
 시작하기 전에: 사용자의 엔터프라이즈 네트워크에서 들어오고 나가는 네트워크 트래픽을 사용자 관리 서브넷을 사용할 {{site.data.keyword.Bluemix_dedicated_notm}} 네트워크로 라우팅하도록 구성하십시오.
 
-1. 고유의 서브넷을 사용하려면 [지원 케이스를 열고](/docs/get-support/howtogetsupport.html#getting-customer-support) 사용할 서브넷 CIDR의 목록을 제공하십시오.
-    **참고**: 온프레미스와 내부 계정 연결에 대해 ALB 및 로드 밸런서가 관리되는 방식은 서브넷 CIDR의 형식에 따라 다릅니다. 구성의 차이점에 대해서는 최종 단계를 참조하십시오.
+1. 고유의 서브넷을 사용하려면 [지원 케이스를 열고](/docs/get-support/howtogetsupport.html#getting-customer-support) 사용할 서브넷 CIDR의 목록을 제공하십시오. **참고**: 온프레미스와 내부 계정 연결에 대해 ALB 및 로드 밸런서가 관리되는 방식은 서브넷 CIDR의 형식에 따라 다릅니다. 구성의 차이점에 대해서는 최종 단계를 참조하십시오.
 
 2. {{site.data.keyword.IBM_notm}}에서 사용자 관리 서브넷을 프로비저닝한 후에는 Kubernetes 클러스터에 대해 해당 서브넷을 사용 가능하게 만드십시오.
 
@@ -566,6 +565,6 @@ Ingress ALB에 대해 공인 IP 주소를 사용하려면 엔터프라이즈 방
 ### 지속적 스토리지 작성
 {: #dedicated_apps_volume_claim}
 
-지속적 스토리지 작성을 위한 옵션을 검토하려면 고가용성을 위한 지속적 데이터 스토리지 옵션](cs_storage_planning.html#persistent_storage_overview)을 참조하십시오. 볼륨에 대한 백업, 볼륨에서 복원, 볼륨 삭제 또는 파일 스토리지의 주기적 스냅샷을 요청하려면 [지원 케이스를 열어야](/docs/get-support/howtogetsupport.html#getting-customer-support) 합니다. 
+지속적 스토리지 작성을 위한 옵션을 검토하려면 고가용성을 위한 지속적 데이터 스토리지 옵션](cs_storage_planning.html#persistent_storage_overview)을 참조하십시오. 볼륨에 대한 백업, 볼륨에서 복원, 볼륨 삭제 또는 파일 스토리지의 주기적 스냅샷을 요청하려면 [지원 케이스를 열어야](/docs/get-support/howtogetsupport.html#getting-customer-support) 합니다.
 
-[파일 스토리지](cs_storage_file.html#predefined_storageclass)를 프로비저닝하도록 선택한 경우에는 비-보유(non-retain) 스토리지 클래스를 선택하십시오. 비-보유 스토리지 클래스를 선택하면 지원 케이스 열기로만 제거가 가능한 IBM Cloud 인프라(SoftLayer)의 고아 지속적 스토리지 인프라를 방지하는 데 도움이 됩니다. 
+[파일 스토리지](cs_storage_file.html#predefined_storageclass)를 프로비저닝하도록 선택한 경우에는 비-보유(non-retain) 스토리지 클래스를 선택하십시오. 비-보유 스토리지 클래스를 선택하면 지원 케이스 열기로만 제거가 가능한 IBM Cloud 인프라(SoftLayer)의 고아 지속적 스토리지 인프라를 방지하는 데 도움이 됩니다.

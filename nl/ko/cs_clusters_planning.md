@@ -58,8 +58,8 @@ lastupdated: "2018-12-05"
 
 **단일 구역에서 고가용성 마스터를 보유할 수 있습니까?**</br>
 예, Kubernetes 버전 1.10 이상을 실행하는 클러스터에서 가능합니다. 단일 구역에서, 마스터는 고가용성이며 가동 중단(예: 마스터 업데이트 중에)에 대해 보호할 수 있도록 Kubernetes API 서버, etcd, 스케줄러 및 제어기 관리자에 대해 별도 실제 호스트의 복제본을 포함합니다. 구역 장애에 대해 보호하기 위해 다음을 수행할 수 있습니다.
-* 마스터가 구역 간에 전개되어 있는 [다중 구역 가능 구역에서 클러스터를 작성](cs_clusters_planning.html#multizone)합니다. 
-* [다중 클러스터를 작성](#multiple_clusters)하고 이를 글로벌 로드 밸런서와 연결합니다. 
+* 마스터가 구역 간에 전개되어 있는 [다중 구역 가능 구역에서 클러스터를 작성](cs_clusters_planning.html#multizone)합니다.
+* [다중 클러스터를 작성](#multiple_clusters)하고 이를 글로벌 로드 밸런서와 연결합니다.
 
 ## 다중 구역 클러스터
 {: #multizone}
@@ -72,7 +72,7 @@ lastupdated: "2018-12-05"
 작업자 풀은 시스템 유형, CPU 및 메모리 등의 특성이 동일한 작업자 노드의 콜렉션입니다. 새 클러스터를 작성하면 기본 작업자 풀이 사용자를 위해 자동으로 작성됩니다. 구역 간의 풀에서 작업자 노드를 전개하거나 풀에 작업자 노드를 추가하거나 작업자 노드를 업데이트하려면 새 `ibmcloud ks worker-pool` 명령을 사용할 수 있습니다.
 
 **독립형 작업자 노드를 계속 사용할 수 있습니까?**</br>
-독립형 작업자 노드의 이전 클러스터 설정은 지원은 되지만 더 이상 사용되지 않습니다. 독립형 작업자 노드 대신 사용자의 작업자 노드를 구성하려면 반드시 [작업자 풀을 클러스터에 추가](cs_clusters.html#add_pool)한 후에 [작업자 풀을 사용](cs_cluster_update.html#standalone_to_workerpool)하십시오. 
+독립형 작업자 노드의 이전 클러스터 설정은 지원은 되지만 더 이상 사용되지 않습니다. 독립형 작업자 노드 대신 사용자의 작업자 노드를 구성하려면 반드시 [작업자 풀을 클러스터에 추가](cs_clusters.html#add_pool)한 후에 [작업자 풀을 사용](cs_cluster_update.html#standalone_to_workerpool)하십시오.
 
 **내 단일 구역 클러스터를 다중 구역 클러스터로 변환할 수 있습니까?**</br>
 클러스터가 [지원되는 다중 구역 메트로 시티](cs_regions.html#zones) 중 하나에 있으면 가능합니다. [독립형 작업자 노드에서 작업자 풀로 업데이트](cs_cluster_update.html#standalone_to_workerpool)를 참조하십시오.
@@ -95,7 +95,7 @@ lastupdated: "2018-12-05"
 
 **내 Kubernetes 마스터는 어떻게 설정되어 있습니까?** </br>
 다중 구역 클러스터는 작업자와 동일한 메트로 영역에서 프로비저닝된 단일 또는 고가용성(Kubernetes 1.10 이상의) Kubernetes 마스터로 설정됩니다. 
-또한 다중 구역 클러스터를 작성하는 경우에는 고가용성 마스터가 구역 간에 전개됩니다. 예를 들어, 클러스터가 `dal10`, `dal12` 또는 `dal13` 구역에 있으면 마스터는 달라스 다중 구역 메트로 시티의 각 구역에 전개됩니다. 
+또한 다중 구역 클러스터를 작성하는 경우에는 고가용성 마스터가 구역 간에 전개됩니다. 예를 들어, 클러스터가 `dal10`, `dal12` 또는 `dal13` 구역에 있으면 마스터는 달라스 다중 구역 메트로 시티의 각 구역에 전개됩니다.
 
 **Kubernetes 마스터를 사용할 수 없게 되면 어떻게 됩니까?** </br>
 [Kubernetes 마스터](cs_tech.html#architecture)는 클러스터가 시작하고 계속 실행되도록 하는 기본 컴포넌트입니다. 마스터는 클러스터에 대한 SPOT(Single Point of Truth) 역할을 하는 etcd 데이터베이스에 클러스터 리소스와 해당 구성을 저장합니다. Kubernetes API 서버는 마스터에 대한 작업자 노드의 모든 클러스터 관리 요청을 위한 기본 시작점입니다. 또는 클러스터 리소스와 상호 작용하고자 할 때의 시작점이기도 합니다.<br><br>마스터 장애 발생 시에 워크로드는 작업자 노드에서 계속 실행되지만, 마스터의 Kubernetes API 서버가 백업될 때까지는 사용자가 `kubectl` 명령을 사용하여 클러스터 리소스 관련 작업을 수행하거나 클러스터 상태를 확인할 수 없습니다. 마스터 가동 중단 중에 팟(Pod)이 중지되는 경우에는 작업자 노드가 다시 Kubernetes API 서버에 접속할 수 있을 때까지 팟(Pod)을 다시 스케줄할 수 없습니다.<br><br>마스터 가동 중단 중에도 사용자는 여전히 {{site.data.keyword.containerlong_notm}} API에 대해 `ibmcloud ks` 명령을 실행하여 인프라 리소스(예: 작업자 노드 또는 VLAN) 관련 작업을 수행할 수 있습니다. 작업자 노드를 클러스터에 추가하거나 이에서 제거하여 현재 클러스터 구성을 변경하는 경우에는 마스터가 백업될 때까지 변경사항이 발생하지 않습니다.
@@ -145,7 +145,7 @@ NFS 파일 및 블록 스토리지는 구역 간에 공유될 수 없습니다. 
   <tbody>
     <tr>
     <td>클러스터에 작업자 노드를 추가합니다.</td>
-    <td><p class="deprecated"><code>ibmcloud ks worker-add</code>: 독립형 작업자 노드 추가. </p></td>
+    <td><p class="deprecated"><code>ibmcloud ks worker-add</code>: 독립형 작업자 노드 추가.</p></td>
     <td><ul><li>기존 풀과는 다른 머신 유형을 추가하려는 경우 <code>ibmcloud ks worker-pool-create</code> [명령](cs_cli_reference.html#cs_worker_pool_create)으로 새 작업자 풀을 작성합니다.</li>
     <li>기존 풀에 작업자 노드를 추가하려는 경우 <code>ibmcloud ks worker-pool-resize</code> [명령](cs_cli_reference.html#cs_worker_pool_resize)으로 풀에서 구역당 노드 수의 크기를 조정합니다.</li></ul></td>
     </tr>
@@ -253,7 +253,7 @@ Kubernetes는 클러스터에 속할 수 있는 작업자 노드의 최대수를
 
 ![표준 클러스터의 작업자 노드를 위한 하드웨어 옵션](images/cs_clusters_hardware.png)
 
-둘 이상의 작업자 노드 특성을 원하는 경우에는 각 특성마다 작업자 풀을 작성해야 합니다. 무료 클러스터를 작성하면 작업자 노드가 IBM Cloud 인프라(SoftLayer) 계정에서 가상, 공유 노드로서 자동으로 프로비저닝됩니다. 표준 클러스터에서 사용자는 워크로드에 가장 최적으로 작동하는 시스템 유형을 선택할 수 있습니다. 계획을 수립할 때 총 CPU 및 메모리 용량의 [작업자 노드 리소스 예약](#resource_limit_node)을 고려하십시오. 
+둘 이상의 작업자 노드 특성을 원하는 경우에는 각 특성마다 작업자 풀을 작성해야 합니다. 무료 클러스터를 작성하면 작업자 노드가 IBM Cloud 인프라(SoftLayer) 계정에서 가상, 공유 노드로서 자동으로 프로비저닝됩니다. 표준 클러스터에서 사용자는 워크로드에 가장 최적으로 작동하는 시스템 유형을 선택할 수 있습니다. 계획을 수립할 때 총 CPU 및 메모리 용량의 [작업자 노드 리소스 예약](#resource_limit_node)을 고려하십시오.
 
 [콘솔 UI](cs_clusters.html#clusters_ui) 또는 [CLI](cs_clusters.html#clusters_cli)를 사용하여 클러스터를 배치할 수 있습니다.
 
@@ -442,9 +442,9 @@ SDS(Software-Defined Storage) 특성은 실제 로컬 스토리지를 위한 추
 
 **SDS 특성을 언제 사용합니까?**</br>
 일반적으로 다음과 같은 경우에 SDS 머신을 사용합니다.
-*  클러스터에 대한 SDS 추가 기능을 사용하는 경우에는 SDS 머신을 사용하십시오. 
+*  클러스터에 대한 SDS 추가 기능을 사용하는 경우에는 SDS 머신을 사용하십시오.
 *  앱이 로컬 스토리지를 필요로 하는 [StatefulSet ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)인 경우에는 SDS 머신을 사용하고 [Kubernetes 로컬 지속적 볼륨(베타) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/)을 프로비저닝할 수 있습니다.
-*  추가 원시 로컬 스토리지를 요구하는 사용자 정의 앱이 있을 수 있습니다. 
+*  추가 원시 로컬 스토리지를 요구하는 사용자 정의 앱이 있을 수 있습니다.
 
 추가 스토리지 솔루션은 [고가용성 지속적 스토리지 계획](cs_storage_planning.html#storage_planning)을 참조하십시오.
 
@@ -506,15 +506,15 @@ SDS(Software-Defined Storage) 특성은 실제 로컬 스토리지를 위한 추
 {{site.data.keyword.containerlong_notm}}에서는 각 작업자 노드에서 사용 가능한 컴퓨팅 리소스를 제한하는 컴퓨팅 리소스 예약을 설정합니다. 예약된 메모리와 CPU 리소스는 작업자 노드의 팟(Pod)에 의해 사용될 수 없으며, 각 작업자 노드의 할당 가능한 리소스를 줄입니다. 초기에 팟(Pod)을 배치하는 경우, 작업자 노드에 할당 가능한 리소스가 충분히 없으면 배치에 실패합니다. 또한 팟(Pod)이 작업자 노드 리소스 한계를 초과하면 팟(Pod)이 제거됩니다. Kubernetes에서 이 한계는 [하드 축출 임계값(hard eviction threshold) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds)이라고 합니다.
 {:shortdesc}
 
-작업자 노드 예약 미만의 CPU 또는 메모리가 사용 가능한 경우, Kubernetes는 충분한 컴퓨팅 리소스를 복원하기 위해 팟(Pod) 제거를 시작합니다. 작업자 노드가 사용 가능한 경우 팟(Pod)은 다른 작업자 노드로 다시 스케줄됩니다. 팟(Pod)이 자주 제거되는 경우에는 클러스터에 작업자 노드를 더 추가하거나 팟(Pod)에서 [리소스 한계 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)를 설정하십시오. 
+작업자 노드 예약 미만의 CPU 또는 메모리가 사용 가능한 경우, Kubernetes는 충분한 컴퓨팅 리소스를 복원하기 위해 팟(Pod) 제거를 시작합니다. 작업자 노드가 사용 가능한 경우 팟(Pod)은 다른 작업자 노드로 다시 스케줄됩니다. 팟(Pod)이 자주 제거되는 경우에는 클러스터에 작업자 노드를 더 추가하거나 팟(Pod)에서 [리소스 한계 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)를 설정하십시오.
 
-작업자 노드에서 예약된 리소스는 작업자 노드와 함께 제공되는 CPU 및 메모리의 양에 따라 다릅니다. {{site.data.keyword.containerlong_notm}}에서는 다음 표에 표시된 대로 메모리와 CPU 티어를 정의합니다. 작업자 노드가 다중 티어의 컴퓨팅 리소스와 함께 제공되는 경우에는 CPU 및 메모리 리소스의 백분율이 각 티어마다 예약됩니다. 
+작업자 노드에서 예약된 리소스는 작업자 노드와 함께 제공되는 CPU 및 메모리의 양에 따라 다릅니다. {{site.data.keyword.containerlong_notm}}에서는 다음 표에 표시된 대로 메모리와 CPU 티어를 정의합니다. 작업자 노드가 다중 티어의 컴퓨팅 리소스와 함께 제공되는 경우에는 CPU 및 메모리 리소스의 백분율이 각 티어마다 예약됩니다.
 
 작업자 노드에서 현재 사용되는 컴퓨팅 리소스의 양을 검토하려면 [`kubectl top node` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/kubectl/overview/#top)를 실행하십시오.
 {: tip}
 
 <table summary="티어별 작업자 노드 메모리 예약.">
-<caption>티어별 작업자 노드 메모리 예약. </caption>
+<caption>티어별 작업자 노드 메모리 예약.</caption>
 <thead>
 <tr>
   <th>메모리 티어</th>

@@ -95,7 +95,7 @@ lastupdated: "2018-12-05"
          <td>20-12000 Gi</td>
          </tr>
          <tr>
-         <td>黃金級</td>
+         <td>金級</td>
          <td>10 IOPS/GB</td>
          <td>20-4000 Gi</td>
          </tr>
@@ -618,7 +618,7 @@ apiVersion: apps/v1beta1
 {: important}
 
 **如何在特定區域中建立有狀態集？** </br>
-在多區域叢集中，您可以指定要在有狀態集 YAML 的 `spec.selector.matchLabels` 及 `spec.template.metadata.labels` 區段中建立有狀態集的區域及地區。或者，您也可以將這些標籤新增至[自訂的儲存空間類別](cs_storage_basics.html#customized_storageclass)，並在有狀態集的 `volumeClaimTemplates` 區段中使用此儲存空間類別。
+在多區域叢集裡，您可以指定要在有狀態集 YAML 的 `spec.selector.matchLabels` 及 `spec.template.metadata.labels` 區段中建立有狀態集的區域及地區。或者，您也可以將這些標籤新增至[自訂的儲存空間類別](cs_storage_basics.html#customized_storageclass)，並在有狀態集的 `volumeClaimTemplates` 區段中使用此儲存空間類別。
 
 **將檔案儲存空間新增至有狀態集時有哪些選擇？** </br>
 如果您要在建立有狀態集時自動建立 PVC，請使用[動態佈建](#dynamic_statefulset)。您也可以選擇使用有狀態集來[預先佈建 PVC 或使用現有 PVC](#static_statefulset)。  
@@ -631,8 +631,8 @@ apiVersion: apps/v1beta1
 
 開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
 
-1. 驗證已完整部署叢集中的所有現有有狀態集。如果仍在部署有狀態集，則無法開始建立有狀態集。您必須等到叢集中的所有有狀態集皆已完整部署，才能避免非預期的結果。
-   1. 列出叢集中的現有有狀態集。
+1. 驗證已完整部署叢集裡的所有現有有狀態集。如果仍在部署有狀態集，則無法開始建立有狀態集。您必須等到叢集裡的所有有狀態集皆已完整部署，才能避免非預期的結果。
+   1. 列出叢集裡的現有有狀態集。
       ```
       kubectl get statefulset --all-namespaces
       ```
@@ -770,7 +770,7 @@ apiVersion: apps/v1beta1
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-    <td style="text-align:left">輸入您要使用的儲存空間類別。若要列出現有儲存空間類別，請執行 <code>kubectl get storageclasses | grep file</code>。如果您未指定儲存空間類別，則會建立 PVC，其具有叢集中所設定的預設儲存空間類別。請確定預設儲存空間類別使用 <code>ibm.io/ibmc-file</code> 佈建者，以使用檔案儲存空間佈建有狀態集。</td>
+    <td style="text-align:left">輸入您要使用的儲存空間類別。若要列出現有儲存空間類別，請執行 <code>kubectl get storageclasses | grep file</code>。如果您未指定儲存空間類別，則會建立 PVC，其具有叢集裡所設定的預設儲存空間類別。請確定預設儲存空間類別使用 <code>ibm.io/ibmc-file</code> 佈建者，以使用檔案儲存空間佈建有狀態集。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
@@ -866,7 +866,7 @@ apiVersion: apps/v1beta1
 如需計費的相關問題，以及尋找如何使用 {{site.data.keyword.Bluemix_notm}} 主控台來修改儲存空間的步驟，請參閱[擴充檔案共用容量](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity)。
 {: tip}
 
-1. 列出叢集中的 PVC，並記下 **VOLUME** 直欄中關聯 PV 的名稱。 
+1. 列出叢集裡的 PVC，並記下 **VOLUME** 直欄中關聯 PV 的名稱。 
    ```
    kubectl get pvc
    ```
@@ -1204,7 +1204,7 @@ apiVersion: apps/v1beta1
 </tbody>
 </table>
 
-### 黃金級
+### 金級
 {: #gold}
 
 <table>

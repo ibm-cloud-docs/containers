@@ -83,7 +83,7 @@ Ingress 및 로드 밸런서 서비스를 사용하려면 Calico 및 Kubernetes 
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>해당 서비스가 노출되는 팟(Pod)에 대한 수신 노드 포트, 로드 밸런서 및 Ingress 서비스 트래픽을 허용합니다. <strong>참고</strong>: Kubernetes는 대상 네트워크 주소 변환(DNAT)을 사용하여 서비스 요청을 올바른 팟(Pod)에 전달하므로 노출된 포트를 지정할 필요가 없습니다. 해당 전달은 호스트 엔드포인트 정책이 Iptables에서 적용되기 전에 이루어집니다. </td>
+      <td>해당 서비스가 노출되는 팟(Pod)에 대한 수신 노드 포트, 로드 밸런서 및 Ingress 서비스 트래픽을 허용합니다. <strong>참고</strong>: Kubernetes는 대상 네트워크 주소 변환(DNAT)을 사용하여 서비스 요청을 올바른 팟(Pod)에 전달하므로 노출된 포트를 지정할 필요가 없습니다. 해당 전달은 호스트 엔드포인트 정책이 Iptables에서 적용되기 전에 이루어집니다.</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
@@ -299,7 +299,7 @@ Kubernetes 버전 1.9은 더 이상 사용되지 않으며 2018년 12월 27일 �
 
         2. `data` 섹션에서 `etcd_host` 및 `etcd_port` 값을 찾으십시오.
 
-    2. `<CERTS_DIR>`(Kubernetes 인증서가 다운로드된 디렉토리)을 검색하십시오. 
+    2. `<CERTS_DIR>`(Kubernetes 인증서가 다운로드된 디렉토리)을 검색하십시오.
 
         - Linux 및 OS X:
           ```
@@ -500,7 +500,7 @@ Kubernetes 버전 1.9은 더 이상 사용되지 않으며 2018년 12월 27일 �
     ```
     {: pre}
 
-1. 구성 스크립트(`.yaml`)를 작성하여 Calico [네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) 또는 [글로벌 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy)을 정의하십시오. 이러한 구성 파일에는 이러한 정책이 적용되는 팟(Pod), 네임스페이스 또는 호스트를 설명하는 선택기가 포함됩니다. 사용자 공유 정책을 작성하려면 이러한 [샘플 Calico 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)을 참조하십시오. 참고로, Kubernetes 버전 1.10 이상 클러스터는 Calico v3 정책 구문을 사용해야 합니다. 
+1. 구성 스크립트(`.yaml`)를 작성하여 Calico [네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) 또는 [글로벌 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy)을 정의하십시오. 이러한 구성 파일에는 이러한 정책이 적용되는 팟(Pod), 네임스페이스 또는 호스트를 설명하는 선택기가 포함됩니다. 사용자 공유 정책을 작성하려면 이러한 [샘플 Calico 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy)을 참조하십시오. 참고로, Kubernetes 버전 1.10 이상 클러스터는 Calico v3 정책 구문을 사용해야 합니다.
 
 2. 클러스터에 정책을 적용하십시오.
     - Linux 및 OS X:
@@ -531,7 +531,7 @@ Kubernetes 버전 1.9은 더 이상 사용되지 않으며 2018년 12월 27일 �
     ```
     {: pre}
 
-1. 구성 스크립트(`.yaml`)를 작성하여 [Calico 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)을 정의하십시오. 이러한 구성 파일에는 이러한 정책이 적용되는 팟(Pod), 네임스페이스 또는 호스트를 설명하는 선택기가 포함됩니다. 사용자 공유 정책을 작성하려면 이러한 [샘플 Calico 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy)을 참조하십시오. 참고로, Kubernetes 버전 1.9 이하 클러스터는 Calico v2 정책 구문을 사용해야 합니다. 
+1. 구성 스크립트(`.yaml`)를 작성하여 [Calico 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)을 정의하십시오. 이러한 구성 파일에는 이러한 정책이 적용되는 팟(Pod), 네임스페이스 또는 호스트를 설명하는 선택기가 포함됩니다. 사용자 공유 정책을 작성하려면 이러한 [샘플 Calico 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy)을 참조하십시오. 참고로, Kubernetes 버전 1.9 이하 클러스터는 Calico v2 정책 구문을 사용해야 합니다.
 
 
 2. 클러스터에 정책을 적용하십시오.
@@ -558,7 +558,7 @@ Kubernetes 버전 1.9은 더 이상 사용되지 않으며 2018년 12월 27일 �
 [기본적으로](#default_policy) Kubernetes NodePort 및 LoadBalancer 서비스는 앱을 모든 공용 및 사설 클러스터 인터페이스에서 사용 가능하게 하도록 디자인되었습니다. 그러나 사용자는 Calico 정책을 사용하여 트래픽 소스 또는 대상을 기반으로 서비스에 대한 수신 트래픽을 차단할 수 있습니다.
 {:shortdesc}
 
-해당 서비스에 대해 생성된 DNAT Iptables 규칙으로 인해, 기본 Kubernetes 및 Calico 정책을 Kubernetes NodePort 및 LoadBalancer 서비스의 보호에 적용하기는 어렵습니다. 그러나 Kubernetes가 일반 DNAT를 사용하여 트래픽을 팟(Pod)에 전달하기 전에 Iptables 규칙을 생성하고 적용하기 때문에 사전 DNAT 정책은 특정 트래픽이 앱에 도달하지 못하도록 차단합니다. 
+해당 서비스에 대해 생성된 DNAT Iptables 규칙으로 인해, 기본 Kubernetes 및 Calico 정책을 Kubernetes NodePort 및 LoadBalancer 서비스의 보호에 적용하기는 어렵습니다. 그러나 Kubernetes가 일반 DNAT를 사용하여 트래픽을 팟(Pod)에 전달하기 전에 Iptables 규칙을 생성하고 적용하기 때문에 사전 DNAT 정책은 특정 트래픽이 앱에 도달하지 못하도록 차단합니다.
 
 Calico 사전 DNAT 네트워크 정책의 몇 가지 일반적인 사용법은 다음과 같습니다.
 
@@ -803,7 +803,7 @@ spec:
 
 이제 트래픽은 finance 마이크로서비스에서 accounts Srv1 백엔드로 이동할 수 있습니다. accounts Srv1 백엔드는 finance 마이크로서비스에 응답할 수 있지만 역방향 트래픽 연결은 설정할 수 없습니다.
 
-이 예제에서는 Finance 네임스페이스의 모든 마이크로서비스에서의 모든 트래픽이 허용됩니다. `podSelector` 및 `namespaceSelector`를 결합할 수 없으므로 사용자는 다른 네임스페이스의 특정 앱 팟(Pod)에서의 트래픽을 허용할 수 없습니다. 
+이 예제에서는 Finance 네임스페이스의 모든 마이크로서비스에서의 모든 트래픽이 허용됩니다. `podSelector` 및 `namespaceSelector`를 결합할 수 없으므로 사용자는 다른 네임스페이스의 특정 앱 팟(Pod)에서의 트래픽을 허용할 수 없습니다.
 
 ## 거부된 트래픽 로깅
 {: #log_denied}
@@ -847,7 +847,7 @@ spec:
         kubectl apply -f <policy_name>.yaml
         ```
         {: pre}
-        Calico가 Iptables 규칙으로서 적용할 수 있도록 Kubernetes 정책은 Calico NetworkPolicy으로 자동 변환됩니다. 
+        Calico가 Iptables 규칙으로서 적용할 수 있도록 Kubernetes 정책은 Calico NetworkPolicy으로 자동 변환됩니다.
 
     * Calico 정책을 적용하려면 다음을 실행하십시오.
         ```
@@ -906,7 +906,7 @@ spec:
     <tbody>
     <tr>
      <td><code>types</code></td>
-     <td>이 <code>Ingress</code> 정책은 모든 수신 트래픽 요청에 적용됩니다. <code>Ingress</code> 값은 모든 수신 트래픽에 대한 일반 용어이며, IBM Ingress ALB에서만의 트래픽을 의미하지 않습니다. </td>
+     <td>이 <code>Ingress</code> 정책은 모든 수신 트래픽 요청에 적용됩니다. <code>Ingress</code> 값은 모든 수신 트래픽에 대한 일반 용어이며, IBM Ingress ALB에서만의 트래픽을 의미하지 않습니다.</td>
     </tr>
      <tr>
       <td><code>ingress</code></td>
@@ -914,7 +914,7 @@ spec:
      </tr>
      <tr>
       <td><code>selector</code></td>
-      <td>&lt;selector&gt;를 1단계에서 Calico 정책에서 사용된 또는 3단계에서 Kubernetes 정책에 대한 Calico 구문에서 찾은 `spec.selector` 필드의 동일한 선택기로 대체하십시오. 예를 들어, 선택기 <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>를 사용하면 이 정책의 규칙이 1단계의 <code>access-nginx</code> 샘플 네트워크 규칙과 동일한 Iptables 체인에 추가됩니다. 이 정책은 동일한 팟(Pod) 선택기 레이블을 사용하는 팟(Pod)에 대한 수신 네트워크 트래픽에만 적용됩니다. </td>
+      <td>&lt;selector&gt;를 1단계에서 Calico 정책에서 사용된 또는 3단계에서 Kubernetes 정책에 대한 Calico 구문에서 찾은 `spec.selector` 필드의 동일한 선택기로 대체하십시오. 예를 들어, 선택기 <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>를 사용하면 이 정책의 규칙이 1단계의 <code>access-nginx</code> 샘플 네트워크 규칙과 동일한 Iptables 체인에 추가됩니다. 이 정책은 동일한 팟(Pod) 선택기 레이블을 사용하는 팟(Pod)에 대한 수신 네트워크 트래픽에만 적용됩니다.</td>
      </tr>
      <tr>
       <td><code>order</code></td>

@@ -281,7 +281,7 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xx
 
 2. 若要保持連線處於作用中狀態，您可以增加逾時值，或在應用程式中設定活動訊號。
 <dl><dt>變更逾時</dt>
-<dd>在 ALB 配置中增加 `proxy-read-timeout` 值。例如，若要將逾時從 `60s` 變更為較大值（例如 `300s`），請將此[註釋](cs_annotations.html#connection)新增至 Ingress 資源檔：`ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`。已變更叢集中所有公用 ALB 的逾時。</dd>
+<dd>在 ALB 配置中增加 `proxy-read-timeout` 值。例如，若要將逾時從 `60s` 變更為較大值（例如 `300s`），請將此[註釋](cs_annotations.html#connection)新增至 Ingress 資源檔：`ingress.bluemix.net/proxy-read-timeout: "serviceName=<service_name> timeout=300s"`。已變更叢集裡所有公用 ALB 的逾時。</dd>
 <dt>設定活動訊號</dt>
 <dd>如果您不要變更 ALB 的預設讀取逾時值，請設定 WebSocket 應用程式中的活動訊號。當您使用 [WAMP ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://wamp-proto.org/) 這類架構來設定活動訊號通訊協定時，應用程式的上游伺服器會定期在計時間隔傳送 "ping" 訊息，而且用戶端會回應 "pong" 訊息。請將活動訊號間隔設為 58 秒或以下，讓 "ping/pong" 資料流量保持連線開啟，再施行 60 秒的逾時值。</dd></dl>
 
@@ -297,7 +297,7 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xx
 {: tsCauses}
 當您啟用負載平衡器或 Ingress ALB 服務的來源 IP 保留時，會保留用戶端要求的來源 IP 位址。服務只會將資料流量轉遞至相同工作者節點上的應用程式 Pod，以確保要求封包的 IP 位址未變更。一般而言，負載平衡器或 Ingress ALB 服務 Pod 會部署至在其中部署應用程式 Pod 的相同工作者節點。不過，存在某些狀況，可能未在相同的工作者節點上排定服務 Pod 及應用程式 Pod。如果您在工作者節點上使用 [Kubernetes 污點 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)，即會防止所有沒有污點容忍的 Pod 在污染工作者節點上執行。來源 IP 保留可能無法根據您使用的污點類型來運作：
 
-* **邊緣節點污點**：您已將 [`dedicated=edge` 標籤新增](cs_edge.html#edge_nodes)至叢集中每個公用 VLAN 的兩個以上工作者節點，以確保 Ingress 及負載平衡器 Pod 只會部署至那些工作者節點。然後，您也可以[污染邊緣節點](cs_edge.html#edge_workloads)，以防止在邊緣節點上執行任何其他工作負載。不過，您未將邊緣節點親緣性規則及容忍新增至應用程式部署。您的應用程式 Pod 無法排定於與服務 Pod 相同的污染節點，而且沒有任何資料流量會到達您應用程式的後端服務。
+* **邊緣節點污點**：您已將 [`dedicated=edge` 標籤新增](cs_edge.html#edge_nodes)至叢集裡每個公用 VLAN 的兩個以上工作者節點，以確保 Ingress 及負載平衡器 Pod 只會部署至那些工作者節點。然後，您也可以[污染邊緣節點](cs_edge.html#edge_workloads)，以防止在邊緣節點上執行任何其他工作負載。不過，您未將邊緣節點親緣性規則及容忍新增至應用程式部署。您的應用程式 Pod 無法排定於與服務 Pod 相同的污染節點，而且沒有任何資料流量會到達您應用程式的後端服務。
 
 * **自訂污點**：您已在數個節點上使用自訂污點，因此只會將具有該污點容忍的應用程式 Pod 部署至那些節點。您已將親緣性規則及容忍新增至應用程式及負載平衡器或 Ingress 服務的部署，因此其 Pod 只會部署至這些節點。不過，在 `ibm-system` 名稱空間中自動建立的 `ibm-cloud-provider-ip` `keepalived` Pod，確保負載平衡器 Pod 及應用程式 Pod 一律排定至相同的工作者節點。這些 `keepalived` Pod 沒有您所使用之自訂污點的容忍。它們無法排定於應用程式 Pod 執行所在的相同污染節點，而且沒有任何資料流量會到達您應用程式的後端服務。
 

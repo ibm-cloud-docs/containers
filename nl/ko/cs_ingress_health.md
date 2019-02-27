@@ -138,7 +138,7 @@ Ingress ALB에 대해 수집되는 로그의 컨텐츠 및 형식을 사용자 �
 
 `ibm-cloud-provider-ingress-cm` Ingress configmap에서 `vts-status-zone-size` 필드는 메트릭 데이터 콜렉션에 대한 공유 메모리 구역의 크기를 설정합니다. 기본적으로 `vts-status-zone-size`는 `10m`로 설정되어 있습니다. 메트릭 콜렉션을 위해 추가 메모리가 필요한 대형 환경을 보유한 경우에는 다음 단계에 따라 보다 큰 값을 대신 사용하도록 기본값을 대체할 수 있습니다.
 
-시작하기 전에 `kube-system` 네임스페이스에 대해 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](cs_users.html#platform)이 있는지 확인하십시오. 
+시작하기 전에 `kube-system` 네임스페이스에 대해 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](cs_users.html#platform)이 있는지 확인하십시오.
 
 1. `ibm-cloud-provider-ingress-cm` configmap 리소스에 대한 구성 파일의 로컬 버전을 작성하고 여십시오.
 

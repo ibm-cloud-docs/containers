@@ -38,7 +38,7 @@ lastupdated: "2018-12-05"
 
 시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
-스토리지 구성을 결정하려면 다음을 수행하십시오. 
+스토리지 구성을 결정하려면 다음을 수행하십시오.
 
 1. {{site.data.keyword.containerlong}}에서 사용 가능한 스토리지 클래스를 나열하십시오.
     ```
@@ -424,7 +424,7 @@ lastupdated: "2018-12-05"
 클러스터에서 사용할 기존의 실제 스토리지 디바이스가 있는 경우, 스토리지를 [정적으로 프로비저닝](cs_storage_basics.html#static_provisioning)하기 위해 PV 및 PVC를 수동으로 작성할 수 있습니다.
 
 시작하기 전에:
-- 기존 파일 스토리지 인스턴스와 동일한 구역에 존재하는 최소한 하나의 작업자 노드를 보유 중인지 확인하십시오. 
+- 기존 파일 스토리지 인스턴스와 동일한 구역에 존재하는 최소한 하나의 작업자 노드를 보유 중인지 확인하십시오.
 - [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
 
 ### 1단계: 기존 스토리지 준비.
@@ -786,7 +786,7 @@ Stateful 세트를 작성할 때 PVC를 자동으로 작성하려면 이 선택�
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.resources.</code></br><code>requests.iops</code></td>
-    <td style="text-align:left">[성능 스토리지](#predefined_storageclass)를 프로비저닝하려면 IOPS 수를 입력하십시오. Endurance 스토리지 클래스를 사용하면서 IOPS 수를 지정하면 IOPS 수가 무시됩니다. 대신 스토리지 클래스에 지정된 IOPS가 사용됩니다.  </td>
+    <td style="text-align:left">[성능 스토리지](#predefined_storageclass)를 프로비저닝하려면 IOPS 수를 입력하십시오. Endurance 스토리지 클래스를 사용하면서 IOPS 수를 지정하면 IOPS 수가 무시됩니다. 대신 스토리지 클래스에 지정된 IOPS가 사용됩니다. </td>
     </tr>
     </tbody></table>
 
@@ -864,13 +864,13 @@ Stateful 세트를 작성하기 전에 PVC를 사전 프로비저닝하거나 �
 ## 기존 스토리지 디바이스의 크기 및 IOPS 변경
 {: #change_storage_configuration}
 
-스토리지 용량 또는 성능을 높이기 위해 기존 볼륨을 수정할 수 있습니다.
+스토리지 용량 또는 성능을 높이기 위해 기존 볼륨을 수정할 수 있습니다. 
 {: shortdesc}
 
-비용 청구에 대한 질문이 있거나 {{site.data.keyword.Bluemix_notm}} 콘솔을 사용한 스토리지 수정 방법에 대한 단계를 찾으려면 [파일 공유 용량 확장](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity)을 참조하십시오.
+비용 청구에 대한 질문이 있거나 {{site.data.keyword.Bluemix_notm}} 콘솔을 사용한 스토리지 수정 방법에 대한 단계를 찾으려면 [파일 공유 용량 확장](/docs/infrastructure/FileStorage/expandable_file_storage.html#expanding-file-share-capacity)을 참조하십시오. 
 {: tip}
 
-1. 클러스터의 PVC를 나열하고 **VOLUME** 열에서 연관된 PV의 이름을 기록해 두십시오.  
+1. 클러스터의 PVC를 나열하고 **VOLUME** 열에서 연관된 PV의 이름을 기록해 두십시오. 
    ```
 kubectl get pvc
    ```
@@ -883,7 +883,7 @@ kubectl get pvc
    ```
    {: screen}
    
-2. PVC가 바인드된 PV의 세부사항을 나열하여 PVC와 연관된 실제 파일 스토리지의 **StorageType**, **volumeId** 및 **서버**를 검색하십시오. `<pv_name>`을 이전 단계에서 검색한 PV의 이름으로 대체하십시오. 스토리지 유형, 볼륨 ID 및 서버 이름이 CLI 출력의 **레이블** 섹션에 표시됩니다.  
+2. PVC가 바인드된 PV의 세부사항을 나열하여 PVC와 연관된 실제 파일 스토리지의 **StorageType**, **volumeId** 및 **서버**를 검색하십시오. `<pv_name>`을 이전 단계에서 검색한 PV의 이름으로 대체하십시오. 스토리지 유형, 볼륨 ID 및 서버 이름이 CLI 출력의 **레이블** 섹션에 표시됩니다. 
    ```
    kubectl describe pv <pv_name>
    ```
@@ -907,15 +907,15 @@ kubectl get pvc
    ```
    {: screen}
 
-3. IBM Cloud 인프라(SoftLayer) 계정에서 볼륨의 크기 또는 IOPS를 수정하십시오.  
+3. IBM Cloud 인프라(SoftLayer) 계정에서 볼륨의 크기 또는 IOPS를 수정하십시오. 
 
-   성능 스토리지의 예:  
+   성능 스토리지의 예: 
    ```
    ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-iops <iops>
    ```
    {: pre}
    
-   endurance 스토리지의 예:  
+   endurance 스토리지의 예: 
    ```
    ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-tier <iops>
    ```
@@ -929,7 +929,7 @@ kubectl get pvc
    <tbody>
    <tr>
    <td><code>&lt;volume_ID&gt;</code></td>
-   <td>이전에 검색한 볼륨의 ID를 입력하십시오. </td>
+   <td>이전에 검색한 볼륨의 ID를 입력하십시오.</td>
    </tr>
    <tr>
    <td><code>&lt;new-size&gt;</code></td>
@@ -937,11 +937,11 @@ kubectl get pvc
    </tr>
    <tr>
    <td><code>&lt;new-iops&gt;</code></td>
-   <td>성능 스토리지에만 해당됩니다. 원하는 새 IOPS 수를 입력하십시오. 올바른 IOPS에 대해서는 [파일 스토리지 구성 결정](#predefined_storageclass)을 참조하십시오. IOPS를 지정하지 않으면 현재 IOPS가 사용됩니다. <p class="note">볼륨의 원래 IOPS/GB 비율이 0.3 미만인 경우, 새 IOPS/GB 비율은 0.3 미만이어야 합니다. 볼륨의 원래 IOPS/GB 비율이 0.3보다 크거나 같은 경우, 볼륨의 새 IOPS/GB 비율은 0.3보다 크거나 같아아야 합니다. </p> </td>
+   <td>성능 스토리지에만 해당됩니다. 원하는 새 IOPS 수를 입력하십시오. 올바른 IOPS에 대해서는 [파일 스토리지 구성 결정](#predefined_storageclass)을 참조하십시오. IOPS를 지정하지 않으면 현재 IOPS가 사용됩니다. <p class="note">볼륨의 원래 IOPS/GB 비율이 0.3 미만인 경우, 새 IOPS/GB 비율은 0.3 미만이어야 합니다. 볼륨의 원래 IOPS/GB 비율이 0.3보다 크거나 같은 경우, 볼륨의 새 IOPS/GB 비율은 0.3보다 크거나 같아아야 합니다.</p> </td>
    </tr>
    <tr>
    <td><code>&lt;new-tier&gt;</code></td>
-   <td>endurance 스토리지에만 해당됩니다. 원하는 GB당 새 IOPS 수를 입력하십시오. 올바른 IOPS에 대해서는 [파일 스토리지 구성 결정](#predefined_storageclass)을 참조하십시오. IOPS를 지정하지 않으면 현재 IOPS가 사용됩니다. <p class="note">볼륨의 원래 IOPS/GB 비율이 0.25 미만인 경우, 새 IOPS/GB 비율은 0.25 미만이어야 합니다. 볼륨의 원래 IOPS/GB 비율이 0.25보다 크거나 같은 경우, 볼륨의 새 IOPS/GB 비율은 0.25보다 크거나 같아아야 합니다. </p> </td>
+   <td>endurance 스토리지에만 해당됩니다. 원하는 GB당 새 IOPS 수를 입력하십시오. 올바른 IOPS에 대해서는 [파일 스토리지 구성 결정](#predefined_storageclass)을 참조하십시오. IOPS를 지정하지 않으면 현재 IOPS가 사용됩니다. <p class="note">볼륨의 원래 IOPS/GB 비율이 0.25 미만인 경우, 새 IOPS/GB 비율은 0.25 미만이어야 합니다. 볼륨의 원래 IOPS/GB 비율이 0.25보다 크거나 같은 경우, 볼륨의 새 IOPS/GB 비율은 0.25보다 크거나 같아아야 합니다.</p> </td>
    </tr>
    </tbody>
    </table>
@@ -961,7 +961,7 @@ kubectl get pvc
    ```
    {: screen}
    
-4. 볼륨의 크기를 변경했으며 팟(Pod)의 볼륨을 사용하는 경우에는 팟(Pod)에 로그인하여 새 크기를 확인하십시오.  
+4. 볼륨의 크기를 변경했으며 팟(Pod)의 볼륨을 사용하는 경우에는 팟(Pod)에 로그인하여 새 크기를 확인하십시오. 
    1. PVC를 사용하는 모든 팟(Pod)을 나열하십시오.
       ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
@@ -975,7 +975,7 @@ kubectl get pvc
       ```
       {: pre}
       
-   3. 디스크 사용 통계를 표시하고 이전에 검색한 볼륨의 서버 경로를 찾으십시오.
+   3. 디스크 사용 통계를 표시하고 이전에 검색한 볼륨의 서버 경로를 찾으십시오. 
       ```
       df -h
       ```
@@ -1091,12 +1091,11 @@ kubectl get pvc
 
 <dl>
   <dt>주기적 스냅샷 설정</dt>
-  <dd><p>특정 시점에 인스턴스 상태를 캡처하는 읽기 전용 이미지인 [파일 스토리지에 대한 주기적 스냅샷을 설정](/docs/infrastructure/FileStorage/snapshots.html)할 수 있습니다. 스냅샷을 저장하려면 파일 스토리지의 스냅샷 영역을 요청해야 합니다. 스냅샷은 동일한 구역 내의 기본 스토리지 인스턴스에 저장됩니다. 사용자가 실수로 볼륨에서 중요한 데이터를 제거한 경우 스냅샷에서 데이터를 복원할 수 있습니다. <p class="note">: Dedicated 계정이 있는 경우에는 [지원 케이스를 열어야](/docs/get-support/howtogetsupport.html#getting-customer-support) 합니다.
-</p></br> <strong>볼륨에 대한 스냅샷을 작성하려면 다음을 수행하십시오. </strong><ol><li>[계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).</li><li>`ibmcloud sl` CLI에 로그인하십시오. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>클러스터에 있는 기존 PV를 나열하십시오. <pre class="pre"><code>kubectl get pv</code></pre></li><li>스냅샷 영역을 작성할 PV에 대한 세부사항을 가져오고 볼륨 ID, 크기 및 IOPS를 기록해 두십시오. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 볼륨 ID, 크기 및 IOPS는 CLI 출력의 <strong>Labels</strong> 섹션에서 찾을 수 있습니다. </li><li>이전 단계에서 검색한 매개변수를 사용하여 기존 볼륨의 스냅샷 크기를 작성하십시오. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>스냅샷 크기가 작성될 때까지 기다리십시오. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>CLI 출력의 <strong>Snapshot Size (GB)</strong>가 0에서 주문한 크기로 변경된 경우 스냅샷 크기가 성공적으로 프로비저닝된 것입니다. </li><li>볼륨에 대한 스냅샷을 작성하고 작성된 스냅샷의 ID를 기록해 두십시오. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>스냅샷이 작성되었는지 확인하십시오. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>스냅샷의 데이터를 기본 볼륨에 복원하려면 다음을 수행하십시오. </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
+  <dd><p>특정 시점에 인스턴스 상태를 캡처하는 읽기 전용 이미지인 [파일 스토리지에 대한 주기적 스냅샷을 설정](/docs/infrastructure/FileStorage/snapshots.html)할 수 있습니다. 스냅샷을 저장하려면 파일 스토리지의 스냅샷 영역을 요청해야 합니다. 스냅샷은 동일한 구역 내의 기본 스토리지 인스턴스에 저장됩니다. 사용자가 실수로 볼륨에서 중요한 데이터를 제거한 경우 스냅샷에서 데이터를 복원할 수 있습니다. <p class="note">: Dedicated 계정이 있는 경우에는 [지원 케이스를 열어야](/docs/get-support/howtogetsupport.html#getting-customer-support) 합니다.</p></br> <strong>볼륨에 대한 스냅샷을 작성하려면 다음을 수행하십시오. </strong><ol><li>[계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).</li><li>`ibmcloud sl` CLI에 로그인하십시오. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>클러스터에 있는 기존 PV를 나열하십시오. <pre class="pre"><code>kubectl get pv</code></pre></li><li>스냅샷 영역을 작성할 PV에 대한 세부사항을 가져오고 볼륨 ID, 크기 및 IOPS를 기록해 두십시오. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 볼륨 ID, 크기 및 IOPS는 CLI 출력의 <strong>Labels</strong> 섹션에서 찾을 수 있습니다. </li><li>이전 단계에서 검색한 매개변수를 사용하여 기존 볼륨의 스냅샷 크기를 작성하십시오. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>스냅샷 크기가 작성될 때까지 기다리십시오. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>CLI 출력의 <strong>Snapshot Size (GB)</strong>가 0에서 주문한 크기로 변경된 경우 스냅샷 크기가 성공적으로 프로비저닝된 것입니다. </li><li>볼륨에 대한 스냅샷을 작성하고 작성된 스냅샷의 ID를 기록해 두십시오. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>스냅샷이 작성되었는지 확인하십시오. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>스냅샷의 데이터를 기본 볼륨에 복원하려면 다음을 수행하십시오. </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>다른 구역으로 스냅샷 복제</dt>
  <dd><p>구역 장애로부터 데이터를 보호하기 위해 다른 구역에서 설정된 파일 스토리지 인스턴스로 [스냅샷을 복제](/docs/infrastructure/FileStorage/replication.html#replicating-data)할 수 있습니다. 데이터는 기본 스토리지에서 백업 스토리지로만 복제할 수 있습니다. 복제된 파일 스토리지 인스턴스를 클러스터에 마운트할 수는 없습니다. 기본 스토리지에서 장애가 발생하는 경우에는 복제된 백업 스토리지가 기본 스토리지가 되도록 수동으로 설정할 수 있습니다. 그런 다음 클러스터에 이를 추가할 수 있습니다. 기본 스토리지가 복원되고 나면 백업 스토리지로부터 데이터를 복원할 수 있습니다. <strong>참고</strong>: Dedicated 계정이 있는 경우에는 스냅샷을 다른 구역으로 복제할 수 없습니다.</p></dd>
  <dt>스토리지 복제(duplicate)</dt>
- <dd><p>원본 스토리지 인스턴스와 동일한 구역에서 [파일 스토리지 인스턴스를 복제](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)할 수 있습니다. 복제본(duplicate)에는 복제본(duplicate)을 작성한 시점의 원본 스토리지 인스턴스와 동일한 데이터가 저장되어 있습니다. 복제본(replica)과 다르게 복제본(duplicate)은 원본과 별개인 스토리지 인스턴스로 사용하십시오. 복제하려면 우선 [볼륨에 대한 스냅샷을 설정](/docs/infrastructure/FileStorage/snapshots.html)하십시오. <strong>참고</strong>: Dedicated 계정이 있는 경우에는 <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">지원 케이스를 열어야</a> 합니다. </p></dd>
+ <dd><p>원본 스토리지 인스턴스와 동일한 구역에서 [파일 스토리지 인스턴스를 복제](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)할 수 있습니다. 복제본(duplicate)에는 복제본(duplicate)을 작성한 시점의 원본 스토리지 인스턴스와 동일한 데이터가 저장되어 있습니다. 복제본(replica)과 다르게 복제본(duplicate)은 원본과 별개인 스토리지 인스턴스로 사용하십시오. 복제하려면 우선 [볼륨에 대한 스냅샷을 설정](/docs/infrastructure/FileStorage/snapshots.html)하십시오. <strong>참고</strong>: Dedicated 계정이 있는 경우에는 <a href="/docs/get-support/howtogetsupport.html#getting-customer-support">지원 케이스를 열어야</a> 합니다.</p></dd>
   <dt>{{site.data.keyword.cos_full}}로 데이터 백업</dt>
   <dd><p>[**ibm-backup-restore 이미지**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)를 사용하여 클러스터에서 백업을 회전하고 팟(Pod)을 복원할 수 있습니다. 이 팟(Pod)에는 클러스터의 지속적 볼륨 클레임(PVC)에 대한 일회성 또는 주기적 백업을 실행하는 스크립트가 포함되어 있습니다. 데이터는 구역에 설정된 {{site.data.keyword.cos_full}} 인스턴스에 저장됩니다.</p>
   <p>데이터의 고가용성을 개선하고 구역 장애로부터 앱을 보호하려면 두 번째 {{site.data.keyword.cos_full}} 인스턴스를 설정하고 구역 간에 데이터를 복제하십시오. {{site.data.keyword.cos_full}} 인스턴스에서 데이터를 복원해야 하는 경우 이미지와 함께 제공된 복원 스크립트를 사용하십시오.</p></dd>

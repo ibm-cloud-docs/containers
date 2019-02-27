@@ -221,7 +221,7 @@ lastupdated: "2018-12-05"
 
         使用 `expose` 指令來產生 NodePort 時，即已將其隨機指派，但範圍落在 30000 到 32767 之間。在此範例中，NodePort 是 30872。
 
-    2.  取得工作者節點在叢集中的公用 IP 位址。
+    2.  取得工作者節點在叢集裡的公用 IP 位址。
 
         ```
         ibmcloud ks workers <cluster_name_or_ID>

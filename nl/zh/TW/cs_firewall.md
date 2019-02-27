@@ -365,9 +365,9 @@ lastupdated: "2018-12-05"
 
 1. 容許工作者節點之間的所有資料流量。
     1. 在公用及專用介面上，容許工作者節點之間的所有 TCP、UDP、VRRP 及 IPEncap 資料流量。{{site.data.keyword.containerlong_notm}} 使用 VRRP 通訊協定來管理專用負載平衡器的 IP 位址，以及使用 IPEncap 通訊協定來允許跨子網路的 Pod 至 Pod 資料流量。
-    2. 如果您使用 Calico 原則，或者您在多區域叢集的每一個區域中都有防火牆，則防火牆可能會封鎖工作者節點之間的通訊。您必須使用工作者節點的埠、工作者節點的專用 IP 位址，或 Calico 工作者節點標籤，讓叢集中的所有工作者節點都對彼此開啟。
+    2. 如果您使用 Calico 原則，或者您在多區域叢集的每一個區域中都有防火牆，則防火牆可能會封鎖工作者節點之間的通訊。您必須使用工作者節點的埠、工作者節點的專用 IP 位址，或 Calico 工作者節點標籤，讓叢集裡的所有工作者節點都對彼此開啟。
 
-2. 容許 IBM Cloud 基礎架構 (SoftLayer) 專用 IP 範圍，以便您可以在叢集中建立工作者節點。
+2. 容許 IBM Cloud 基礎架構 (SoftLayer) 專用 IP 範圍，以便您可以在叢集裡建立工作者節點。
     1. 容許適當的 IBM Cloud 基礎架構 (SoftLayer) 專用 IP 範圍。請參閱[後端（專用）網路](/docs/infrastructure/hardware-firewall-dedicated/ips.html#backend-private-network)。
     2. 容許您所使用的所有[區域](cs_regions.html#zones)的 IBM Cloud 基礎架構 (SoftLayer) 專用 IP 範圍。請注意，您必須新增 `dal01` 和 `wdc04` 區域的IP。請參閱[服務網路（在後端/專用網路上）](/docs/infrastructure/hardware-firewall-dedicated/ips.html#service-network-on-backend-private-network-)。
 

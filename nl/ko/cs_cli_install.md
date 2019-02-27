@@ -80,7 +80,7 @@ CLI를 설치하려면 다음을 수행하십시오.
 
 4.  {: #kubectl}Kubernetes 대시보드의 로컬 버전을 보고 클러스터에 앱을 배치하려면 [Kubernetes CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)하십시오. Kubernetes CLI를 사용하여 명령을 실행하기 위한 접두부는 `kubectl`입니다.
 
-    1.  사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.10.11입니다. 
+    1.  사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.10.11입니다.
 
         최소한 클러스터의 `major.minor` 버전과 일치하지 않는 `kubectl` CLI 버전을 사용하면 예상치 못한 결과가 발생할 수 있습니다. Kubernetes 클러스터 및 CLI 버전을 최신 상태로 유지해야 합니다.
         {: note}
@@ -186,11 +186,11 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
 
 Kubernetes 1.10.11에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터에서 사용이 지원됩니다. 클러스터를 작성한 후, 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을 수행할 수 있습니다.
 
-`kubectl` 명령을 실행하려면 우선 다음을 수행하십시오. 
+`kubectl` 명령을 실행하려면 우선 다음을 수행하십시오.
 * [필수 CLI를 설치](#cs_cli_install)하십시오.
 * [클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
 
-`kubectl` 명령을 사용하려면 다음을 수행하십시오. 
+`kubectl` 명령을 사용하려면 다음을 수행하십시오.
 
 1.  {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오. {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트를 포함](cs_regions.html#bluemix_regions)하십시오.
 
@@ -406,7 +406,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 
 {{site.data.keyword.containerlong_notm}} API는 헤더 정보가 필요합니다. 이 헤더 정보는 API 요청에 사용자가 제공해야 하며 사용하려는 API에 따라 다를 수 있습니다. API에 헤더 정보가 필요한지 판별하려면 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-api)를 참조하십시오.
 
-{{site.data.keyword.containerlong_notm}}의 인증을 수행하려면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 사용하여 생성되었으며 클러스터가 작성된 {{site.data.keyword.Bluemix_notm}} 계정 ID가 포함된 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) 토큰을 제공해야 합니다. {{site.data.keyword.Bluemix_notm}}의 인증 방법에 따라 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 작성을 자동화하기 위한 다음 옵션 중에서 선택할 수 있습니다. 
+{{site.data.keyword.containerlong_notm}}의 인증을 수행하려면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 사용하여 생성되었으며 클러스터가 작성된 {{site.data.keyword.Bluemix_notm}} 계정 ID가 포함된 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) 토큰을 제공해야 합니다. {{site.data.keyword.Bluemix_notm}}의 인증 방법에 따라 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 작성을 자동화하기 위한 다음 옵션 중에서 선택할 수 있습니다.
 
 [API Swagger JSON 파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api-json)을 사용하여 자동화 작업의 일부로서 API와 상호 작용할 수 있는 클라이언트를 생성할 수 있습니다.
 {: tip}
@@ -420,7 +420,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 <tbody>
 <tr>
 <td>비연합 ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호:</strong> 이 주제의 단계에 따라 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰의 작성을 완전히 자동화할 수 있습니다. </li>
+<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호:</strong> 이 주제의 단계에 따라 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰의 작성을 완전히 자동화할 수 있습니다.</li>
 <li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> {{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호 사용의 대안으로 <a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키를 사용</a>할 수 있습니다. {{site.data.keyword.Bluemix_notm}} API 키는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다. </li></ul></tr>
 <tr>
 <td>연합 ID</td>
@@ -508,9 +508,9 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     ```
     {: screen}
 
-    API 출력의 **access_token** 필드에서 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 찾을 수 있습니다. 다음 단계에서 추가 헤더 정보를 검색할 수 있도록 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 기록해 두십시오. 
+    API 출력의 **access_token** 필드에서 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 찾을 수 있습니다. 다음 단계에서 추가 헤더 정보를 검색할 수 있도록 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 기록해 두십시오.
 
-2.  클러스터가 작성된 {{site.data.keyword.Bluemix_notm}} 계정의 ID를 검색하십시오. _&lt;iam_token&gt;_을 이전 단계에서 검색한 {{site.data.keyword.Bluemix_notm}} IAM 토큰으로 대체하십시오. 
+2.  클러스터가 작성된 {{site.data.keyword.Bluemix_notm}} 계정의 ID를 검색하십시오. _&lt;iam_token&gt;_을 이전 단계에서 검색한 {{site.data.keyword.Bluemix_notm}} IAM 토큰으로 대체하십시오.
 
     ```
     GET https://accountmanagement.<region>.bluemix.net/v1/accounts
@@ -634,7 +634,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     ```
     {: screen}
 
-    **access_token**에서 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 찾고 **refresh_token**에서 새로 고치기 토큰을 찾을 수 있습니다. 
+    **access_token**에서 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 찾고 **refresh_token**에서 새로 고치기 토큰을 찾을 수 있습니다.
 
 4.  계정의 모든 Kubernetes 클러스터를 나열하십시오. 사용자의 헤더 정보를 빌드하기 위해 이전 단계에서 검색한 정보를 사용하십시오.
 
@@ -669,16 +669,16 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 API를 통해 발행된 모든 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) 액세스 토큰은 한 시간 후에 만료됩니다. {{site.data.keyword.Bluemix_notm}} API에 대한 액세스가 보장되도록 사용자는 정기적으로 액세스 토큰을 새로 고쳐야 합니다. 동일한 단계를 사용하여 새 새로 고치기 토큰을 얻을 수 있습니다.
 {:shortdesc}
 
-시작하기 전에, 새 액세스 토큰의 요청에 사용할 수 있는 {{site.data.keyword.Bluemix_notm}} API 키 또는 {{site.data.keyword.Bluemix_notm}} IAM 새로 고치기 토큰이 있는지 확인하십시오. 
+시작하기 전에, 새 액세스 토큰의 요청에 사용할 수 있는 {{site.data.keyword.Bluemix_notm}} API 키 또는 {{site.data.keyword.Bluemix_notm}} IAM 새로 고치기 토큰이 있는지 확인하십시오.
 - **새로 고치기 토큰:** [{{site.data.keyword.Bluemix_notm}} API로 클러스터 작성 및 관리 프로세스 자동화](#cs_api)의 지시사항을 따르십시오.
 - **API 키:** 다음과 같이 [{{site.data.keyword.Bluemix_notm}} ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/) API 키를 검색하십시오.
    1. 메뉴 표시줄에서 **관리** > **보안** > **플랫폼 API 키**를 클릭하십시오.
    2. **작성**을 클릭하십시오.
    3. API 키의 **이름** 및 **설명**을 입력하고 **작성**을 클릭하십시오.
    4. **표시**를 클릭하여 생성된 API를 보십시오.
-   5. 새 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰의 검색에 사용할 수 있도록 API 키를 복사하십시오. 
+   5. 새 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰의 검색에 사용할 수 있도록 API 키를 복사하십시오.
 
-{{site.data.keyword.Bluemix_notm}} IAM 토큰을 작성하거나 새 새로 고치기 토큰을 얻으려는 경우에는 다음 단계를 사용하십시오. 
+{{site.data.keyword.Bluemix_notm}} IAM 토큰을 작성하거나 새 새로 고치기 토큰을 얻으려는 경우에는 다음 단계를 사용하십시오.
 
 1.  새로 고치기 토큰이나 {{site.data.keyword.Bluemix_notm}} API 키를 사용하여 새 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰을 생성하십시오.
     ```
@@ -734,7 +734,7 @@ API를 통해 발행된 모든 {{site.data.keyword.Bluemix_notm}} IAM(Identity a
     ```
     {: screen}
 
-    **access_token**에서 새 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 찾고 API 출력의 **refresh_token** 필드에서 새로 고치기 토큰을 찾을 수 있습니다. 
+    **access_token**에서 새 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 찾고 API 출력의 **refresh_token** 필드에서 새로 고치기 토큰을 찾을 수 있습니다.
 
 2.  이전 단계의 토큰을 사용하여 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api)에 대한 작업을 진행하십시오.
 
@@ -747,6 +747,6 @@ API를 통해 발행된 모든 {{site.data.keyword.Bluemix_notm}} IAM(Identity a
 새 CLI 세션을 시작할 때 또는 현재 CLI 세션에서 24시간이 만료된 경우에는 다음을 실행하여 클러스터의 컨텍스트를 설정해야 합니다. `ibmcloud ks cluster-config <cluster_name>`. 이 명령으로 클러스터의 컨텍스트를 설정하면 Kubernetes 클러스터의 `kubeconfig` 파일이 다운로드됩니다. 또한 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) ID 토큰과 새로 고치기 토큰이 인증 제공을 위해 발행됩니다.
 {: shortdesc}
 
-**ID 토큰**: CLI를 통해 발행된 모든 IAM ID 토큰은 한 시간 후에 만료됩니다. ID 토큰이 만료되면 ID 토큰 새로 고치기를 위해 새로 고치기 토큰이 토큰 제공자에게 전송됩니다. 사용자의 인증이 새로 고쳐지며 사용자는 계속해서 클러스터에 대해 명령을 실행할 수 있습니다. 
+**ID 토큰**: CLI를 통해 발행된 모든 IAM ID 토큰은 한 시간 후에 만료됩니다. ID 토큰이 만료되면 ID 토큰 새로 고치기를 위해 새로 고치기 토큰이 토큰 제공자에게 전송됩니다. 사용자의 인증이 새로 고쳐지며 사용자는 계속해서 클러스터에 대해 명령을 실행할 수 있습니다.
 
-**새로 고치기 토큰**: 새로 고치기 토큰은 30일마다 만료됩니다. 새로 고치기 토큰이 만료되면 ID 토큰을 새로 고칠 수 없으며 사용자는 CLI에서 명령 실행을 계속할 수 없습니다. 다음을 실행하여 새 새로 고치기 토큰을 가져올 수 있습니다. `ibmcloud ks cluster-config <cluster_name>`. 또한 이 명령은 ID 토큰을 새로 고칩니다. 
+**새로 고치기 토큰**: 새로 고치기 토큰은 30일마다 만료됩니다. 새로 고치기 토큰이 만료되면 ID 토큰을 새로 고칠 수 없으며 사용자는 CLI에서 명령 실행을 계속할 수 없습니다. 다음을 실행하여 새 새로 고치기 토큰을 가져올 수 있습니다. `ibmcloud ks cluster-config <cluster_name>`. 또한 이 명령은 ID 토큰을 새로 고칩니다.

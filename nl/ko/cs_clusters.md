@@ -38,11 +38,11 @@ lastupdated: "2018-12-05"
 ### 계정 레벨
 {: #prepare_account_level}
 
-1.  [계정을 작성하거나 청구 가능 계정({{site.data.keyword.Bluemix_notm}} 종량과금제 또는 구독)으로 업그레이드](https://console.bluemix.net/registration/)하십시오. 
+1.  [계정을 작성하거나 청구 가능 계정({{site.data.keyword.Bluemix_notm}} 종량과금제 또는 구독)으로 업그레이드](https://console.bluemix.net/registration/)하십시오.
 2.  클러스터를 작성할 지역에 [{{site.data.keyword.containerlong_notm}} API 키를 설정](cs_users.html#api_key)하십시오. 이 API 키에 클러스터를 작성할 수 있는 권한을 지정하십시오.
     *  IBM Cloud 인프라(SoftLayer)에 대한 **수퍼유저** 역할.
-    *  계정 레벨에서 {{site.data.keyword.containerlong_notm}}에 대한 **관리자** 플랫폼 관리 역할. 
-    *  계정 레벨에서 {{site.data.keyword.registrylong_notm}}에 대한 **관리자** 플랫폼 관리 역할. 
+    *  계정 레벨에서 {{site.data.keyword.containerlong_notm}}에 대한 **관리자** 플랫폼 관리 역할.
+    *  계정 레벨에서 {{site.data.keyword.registrylong_notm}}에 대한 **관리자** 플랫폼 관리 역할.
 
     계정 소유자이십니까? 이 경우에는 이미 필요한 권한을 갖고 있습니다. 클러스터를 작성하면 지역 및 리소스 그룹에 대한 API 키가 사용자의 인증 정보를 사용하여 설정됩니다.
     {: tip}
@@ -50,7 +50,7 @@ lastupdated: "2018-12-05"
 3.  계정이 여러 리소스 그룹을 사용하는 경우에는 계정의 [리소스 그룹 관리](cs_users.html#resource_groups) 전략을 파악하십시오. 
     *  클러스터는 {{site.data.keyword.Bluemix_notm}}에 로그인할 때 대상으로 지정하는 리소스 그룹에 작성됩니다. 특정 리소스 그룹을 대상으로 지정하지 않으면 기본 리소스 그룹이 자동으로 대상으로 지정됩니다.
     *  기본이 아닌 리소스 그룹에 클러스터를 작성하려는 경우에는 해당 리소스 그룹에 대해 **Viewer** 이상의 역할을 갖고 있어야 합니다. 사용자에게 해당 리소스 그룹에 대한 역할이 전혀 없지만 사용자가 여전히 이 리소스 그룹 내에 있는 서비스의 **Administrator**인 경우에는 클러스터가 기본 리소스 그룹에 작성됩니다.
-    *  클러스터의 리소스 그룹은 변경할 수 없습니다. 클러스터는 동일한 리소스 그룹에 있는 기타 {{site.data.keyword.Bluemix_notm}} 서비스 또는 리소스 그룹을 지원하지 않는 서비스(예: {{site.data.keyword.registrylong_notm}})와의 통합만 가능합니다. 
+    *  클러스터의 리소스 그룹은 변경할 수 없습니다. 클러스터는 동일한 리소스 그룹에 있는 기타 {{site.data.keyword.Bluemix_notm}} 서비스 또는 리소스 그룹을 지원하지 않는 서비스(예: {{site.data.keyword.registrylong_notm}})와의 통합만 가능합니다.
     *  [메트릭에 대해 {{site.data.keyword.monitoringlong_notm}}](cs_health.html#view_metrics)을 사용하려는 경우에는 메트릭 이름 충돌을 방지하기 위해 계정 내 모든 리소스 그룹 및 지역 전체에서 고유한 이름을 클러스터에 지정하도록 계획하십시오.
     * {{site.data.keyword.Bluemix_dedicated}} 계정이 있는 경우에는 기본 리소스 그룹에만 클러스터를 작성해야 합니다.
 4.  VLAN Spanning을 사용으로 설정하십시오. 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)을 사용으로 설정해야 합니다. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](cs_users.html#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)을 사용하십시오. {{site.data.keyword.BluDirectLink}}를 사용 중인 경우에는 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)를 대신 사용해야 합니다. VRF를 사용하려면 IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오.
@@ -64,10 +64,10 @@ lastupdated: "2018-12-05"
     3.  **액세스 정책** 탭에서 자신의 **역할**이 **Administrator**인지 확인하십시오. 사용자는 계정 내 모든 리소스에 대한 **Administrator**이거나, 적어도 {{site.data.keyword.containershort_notm}}에 대해 이 역할일 수 있습니다. **참고**: 사용자가 전체 계정이 아니라 하나의 리소스 그룹 또는 지역에서만 {{site.data.keyword.containershort_notm}}에 대한 **Administrator** 역할을 갖고 있는 경우에는 계정의 VLAN을 보려면 계정 레벨에서 **Viewer** 이상의 역할을 갖고 있어야 합니다.
 2.  [무료 또는 표준 클러스터](cs_why.html#cluster_types) 간에 결정하십시오. 1개의 무료 클러스터를 작성하여 30일 동안 일부 기능을 사용해 보거나, 선택한 하드웨어 격리로 완벽히 사용자 정의가 가능한 표준 클러스터를 작성할 수 있습니다. 더 많은 혜택을 받아 보고 클러스터 성능을 제어하고자 하려면 표준 클러스터를 작성하십시오.
 3.  [클러스터 설정을 계획](cs_clusters_planning.html#plan_clusters)하십시오.
-    *  [단일 구역](cs_clusters_planning.html#single_zone) 또는 [다중 구역](cs_clusters_planning.html#multizone) 클러스터 중 무엇을 작성할지 결정하십시오. 다중 구역 클러스터는 선택된 위치에서만 사용 가능하다는 점을 참고하십시오. 
+    *  [단일 구역](cs_clusters_planning.html#single_zone) 또는 [다중 구역](cs_clusters_planning.html#multizone) 클러스터 중 무엇을 작성할지 결정하십시오. 다중 구역 클러스터는 선택된 위치에서만 사용 가능하다는 점을 참고하십시오.
     *  공용으로 액세스할 수 없는 클러스터를 작성하려는 경우에는 추가 [개인용 클러스터 단계](cs_clusters_planning.html#private_clusters)를 검토하십시오.
     *  가상 머신 또는 베어메탈 머신 중에서 선택하는 것을 포함, 클러스터의 작업자 노드에 대해 사용할 [하드웨어 및 격리](cs_clusters_planning.html#shared_dedicated_node) 유형을 선택하십시오.
-4.  표준 클러스터의 경우에는 [비용 예측기 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")를 사용하여 비용을 예측](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)할 수 있습니다. 예측기에 포함되지 않을 수 있는 비용에 대한 자세한 정보는 [가격 책정 및 비용 청구](cs_why.html#pricing)를 참조하십시오. 
+4.  표준 클러스터의 경우에는 [비용 예측기 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")를 사용하여 비용을 예측](https://console.bluemix.net/pricing/configure/iaas/containers-kubernetes)할 수 있습니다. 예측기에 포함되지 않을 수 있는 비용에 대한 자세한 정보는 [가격 및 비용 청구](cs_why.html#pricing)를 참조하십시오.
 <br>
 <br>
 
@@ -84,16 +84,16 @@ Kubernetes 클러스터의 용도는 앱의 고가용성을 유지시키는 리�
 ### 무료 클러스터 작성
 {: #clusters_ui_free}
 
-1개의 무료 클러스터를 사용하여 {{site.data.keyword.containerlong_notm}}의 작동 방법에 친숙해질 수 있습니다. 무료 클러스터를 사용하면 전문 용어를 배우고 튜토리얼을 마치며 프로덕션 레벨 표준 클러스터로 도약하기 전에 방향감을 터득할 수 있습니다. 걱정 마십시오. 청구 가능 계정이 있어도 여전히 무료 클러스터를 받을 수 있습니다. 
+1개의 무료 클러스터를 사용하여 {{site.data.keyword.containerlong_notm}}의 작동 방법에 친숙해질 수 있습니다. 무료 클러스터를 사용하면 전문 용어를 배우고 튜토리얼을 마치며 프로덕션 레벨 표준 클러스터로 도약하기 전에 방향감을 터득할 수 있습니다. 걱정 마십시오. 청구 가능 계정이 있어도 여전히 무료 클러스터를 받을 수 있습니다.
 
 무료 클러스터의 유효 기간은 30일입니다. 이 기간이 지나면 클러스터가 만료되며 클러스터와 해당 데이터가 삭제됩니다. 삭제된 데이터는 {{site.data.keyword.Bluemix_notm}}에 의해 백업되지 않으며 이를 복원할 수 없습니다. 중요한 데이터는 반드시 백업을 받으십시오.
 {: note}
 
-1. 올바른 {{site.data.keyword.Bluemix_notm}} 계정 설정과 사용자 권한이 있는지 확인하고 사용하고자 하는 리소스 그룹과 클러스터 설정을 결정할 수 있도록 [클러스터 작성을 준비](#cluster_prepare)하십시오. 
+1. 올바른 {{site.data.keyword.Bluemix_notm}} 계정 설정과 사용자 권한이 있는지 확인하고 사용하고자 하는 리소스 그룹과 클러스터 설정을 결정할 수 있도록 [클러스터 작성을 준비](#cluster_prepare)하십시오.
 
-2. [카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/catalog/?category=containers)에서 클러스터를 작성할 **{{site.data.keyword.containershort_notm}}**를 선택하십시오. 
+2. [카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/catalog/?category=containers)에서 클러스터를 작성할 **{{site.data.keyword.containershort_notm}}**를 선택하십시오.
 
-3. 클러스터를 배치할 위치를 선택하십시오. **참고**: 워싱턴 DC(US 동부) 또는 도쿄(AP 북부) 위치에서는 무료 클러스터를 작성할 수 없습니다. 
+3. 클러스터를 배치할 위치를 선택하십시오. **참고**: 워싱턴 DC(US 동부) 또는 도쿄(AP 북부) 위치에서는 무료 클러스터를 작성할 수 없습니다.
 
 4. **무료** 클러스터 플랜을 선택하십시오.
 
@@ -110,9 +110,9 @@ Kubernetes 클러스터의 용도는 앱의 고가용성을 유지시키는 리�
 ### 표준 클러스터 작성
 {: #clusters_ui_standard}
 
-1. 올바른 {{site.data.keyword.Bluemix_notm}} 계정 설정과 사용자 권한이 있는지 확인하고 사용하고자 하는 리소스 그룹과 클러스터 설정을 결정할 수 있도록 [클러스터 작성을 준비](#cluster_prepare)하십시오. 
+1. 올바른 {{site.data.keyword.Bluemix_notm}} 계정 설정과 사용자 권한이 있는지 확인하고 사용하고자 하는 리소스 그룹과 클러스터 설정을 결정할 수 있도록 [클러스터 작성을 준비](#cluster_prepare)하십시오.
 
-2. [카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/catalog/?category=containers)에서 클러스터를 작성할 **{{site.data.keyword.containershort_notm}}**를 선택하십시오. 
+2. [카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/catalog/?category=containers)에서 클러스터를 작성할 **{{site.data.keyword.containershort_notm}}**를 선택하십시오.
 
 3. 클러스터를 작성할 리소스 그룹을 선택하십시오.
   **참고**:
@@ -177,11 +177,11 @@ Kubernetes 클러스터의 용도는 앱의 고가용성을 유지시키는 리�
 Kubernetes 클러스터의 용도는 앱의 고가용성을 유지시키는 리소스, 노드, 네트워크 및 스토리지 디바이스의 세트를 정의하는 것입니다. 앱을 배치하려면 우선 클러스터를 작성하고 해당 클러스터에서 작업자 노드에 대한 정의를 설정해야 합니다.
 {:shortdesc}
 
-시작하기 전에, {{site.data.keyword.Bluemix_notm}} CLI 및 [{{site.data.keyword.containerlong_notm}} 플러그인](cs_cli_install.html#cs_cli_install)을 설치하십시오. 
+시작하기 전에, {{site.data.keyword.Bluemix_notm}} CLI 및 [{{site.data.keyword.containerlong_notm}} 플러그인](cs_cli_install.html#cs_cli_install)을 설치하십시오.
 
 클러스터를 작성하려면 다음을 수행하십시오.
 
-1. 올바른 {{site.data.keyword.Bluemix_notm}} 계정 설정과 사용자 권한이 있는지 확인하고 사용하고자 하는 리소스 그룹과 클러스터 설정을 결정할 수 있도록 [클러스터 작성을 준비](#cluster_prepare)하십시오. 
+1. 올바른 {{site.data.keyword.Bluemix_notm}} 계정 설정과 사용자 권한이 있는지 확인하고 사용하고자 하는 리소스 그룹과 클러스터 설정을 결정할 수 있도록 [클러스터 작성을 준비](#cluster_prepare)하십시오.
 
 2.  {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오.
 
@@ -563,7 +563,7 @@ Kubernetes 클러스터의 용도는 앱의 고가용성을 유지시키는 리�
 
 작업자 풀에 구역을 추가하면 작업자 풀에서 정의된 작업자 노드가 새 구역에서 프로비저닝되며 향후 워크로드 스케줄을 위해 고려됩니다. {{site.data.keyword.containerlong_notm}}는 지역에 대한 `failure-domain.beta.kubernetes.io/region` 레이블과 구역에 대한 `failure-domain.beta.kubernetes.io/zone` 레이블을 각 작업자 노드에 자동으로 추가합니다. Kubernetes 스케줄러는 이러한 레이블을 사용하여 동일한 지역 내의 구역 간에 팟(Pod)을 전개합니다.
 
-클러스터에 다중 작업자 풀이 있는 경우에는 작업자 노드가 클러스터에서 균등하게 전개되도록 이들 모두에 구역을 추가하십시오. 
+클러스터에 다중 작업자 풀이 있는 경우에는 작업자 노드가 클러스터에서 균등하게 전개되도록 이들 모두에 구역을 추가하십시오.
 
 시작하기 전에:
 *  작업자 풀에 구역을 추가하려면 작업자 풀이 [다중 구역 가능 구역](cs_regions.html#zones)에 있어야 합니다. 작업자 풀이 다중 구역 가능 구역에 없으면 [새 작업자 풀 작성](#add_pool)을 고려하십시오.
@@ -689,7 +689,7 @@ Kubernetes 클러스터의 상태를 검토하여 클러스터의 가용성과 �
    <tbody>
 <tr>
    <td>중단됨(Aborted)</td>
-   <td>Kubernetes 마스터가 배치되기 전에 사용자가 클러스터 삭제를 요청합니다. 클러스터 삭제가 완료된 후 대시보드에서 클러스터가 제거됩니다. 클러스터가 오랜 기간 동안 이 상태인 경우에는 [{{site.data.keyword.Bluemix_notm}} 지원 케이스](cs_troubleshoot.html#ts_getting_help)를 여십시오. </td>
+   <td>Kubernetes 마스터가 배치되기 전에 사용자가 클러스터 삭제를 요청합니다. 클러스터 삭제가 완료된 후 대시보드에서 클러스터가 제거됩니다. 클러스터가 오랜 기간 동안 이 상태인 경우에는 [{{site.data.keyword.Bluemix_notm}} 지원 케이스](cs_troubleshoot.html#ts_getting_help)를 여십시오.</td>
    </tr>
  <tr>
      <td>위험(Critical)</td>
@@ -717,7 +717,7 @@ Kubernetes 클러스터의 상태를 검토하여 클러스터의 가용성과 �
       </tr>
       <tr>
        <td>정상(Normal)</td>
-       <td>클러스터의 모든 작업자 노드가 시작되어 실행 중입니다. 클러스터에 액세스하고 클러스터에 앱을 배치할 수 있습니다. 이 상태는 정상으로 간주되고 사용자의 조치가 필요하지 않습니다.<p class="note">작업자 노드가 정상인 경우에도 [네트워킹](cs_troubleshoot_network.html) 및 [스토리지](cs_troubleshoot_storage.html)와 같은 기타 인프라 리소스에는 여전히 주의를 기울여야 합니다. </p></td>
+       <td>클러스터의 모든 작업자 노드가 시작되어 실행 중입니다. 클러스터에 액세스하고 클러스터에 앱을 배치할 수 있습니다. 이 상태는 정상으로 간주되고 사용자의 조치가 필요하지 않습니다.<p class="note">작업자 노드가 정상인 경우에도 [네트워킹](cs_troubleshoot_network.html) 및 [스토리지](cs_troubleshoot_storage.html)와 같은 기타 인프라 리소스에는 여전히 주의를 기울여야 합니다.</p></td>
     </tr>
       <tr>
        <td>보류 중(Pending)</td>
@@ -755,7 +755,7 @@ Kubernetes 클러스터의 상태를 검토하여 클러스터의 가용성과 �
 시작하기 전에:
 * 클러스터 ID를 기록해 두십시오. 클러스터와 함께 자동으로 삭제되지 않는 관련 IBM Cloud 인프라(SoftLayer) 리소스를 조사하여 이를 제거하려면 클러스터 ID가 필요할 수 있습니다.
 * 지속적 스토리지의 데이터를 삭제하려면 [삭제 옵션을 잘 숙지](cs_storage_remove.html#cleanup)하십시오.
-* [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오. 
+* [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](cs_users.html#platform)이 있는지 확인하십시오.
 
 클러스터를 제거하려면 다음 작업을 수행하십시오.
 
@@ -786,4 +786,4 @@ Kubernetes 클러스터의 상태를 검토하여 클러스터의 가용성과 �
 다음 단계:
 - 제거된 클러스터의 이름이 `ibmcloud ks clusters` 명령 실행 시 사용 가능한 클러스터 목록에 더 이상 나열되지 않으면 이 이름을 재사용할 수 있습니다.
 - 서브넷을 보존한 경우에는 [이를 새 클러스터에서 다시 사용](cs_subnets.html#custom)하거나 나중에 IBM Cloud 인프라(SoftLayer) 포트폴리오에서 수동으로 삭제할 수 있습니다.
-- 지속적 스토리지를 보유한 경우에는 {{site.data.keyword.Bluemix_notm}} 콘솔의 IBM Cloud 인프라(SoftLayer) 대시보드를 통해 나중에 [스토리지를 삭제](cs_storage_remove.html#cleanup)할 수 있습니다. 
+- 지속적 스토리지를 보유한 경우에는 {{site.data.keyword.Bluemix_notm}} 콘솔의 IBM Cloud 인프라(SoftLayer) 대시보드를 통해 나중에 [스토리지를 삭제](cs_storage_remove.html#cleanup)할 수 있습니다.

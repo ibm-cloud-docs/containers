@@ -91,7 +91,7 @@ lastupdated: "2018-12-06"
 </tr>
 <tr>
 <td>{{site.data.keyword.la_full_notm}}</td>
-<td>팟(Pod) 컨테이너에서 로그를 관리하기 위해 LogDNA를 작업자 노드에 써드파티 서비스로 배치하여 로그 관리 기능을 클러스터에 추가합니다. 자세한 정보는 [LogDNA로 {{site.data.keyword.loganalysisfull_notm}}에서 Kubernetes 클러스터 로그 관리](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)를 참조하십시오. </td>
+<td>팟(Pod) 컨테이너에서 로그를 관리하기 위해 LogDNA를 작업자 노드에 서드파티 서비스로 배치하여 로그 관리 기능을 클러스터에 추가합니다. 자세한 정보는 [LogDNA로 {{site.data.keyword.loganalysisfull_notm}}에서 Kubernetes 클러스터 로그 관리](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)를 참조하십시오.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
@@ -99,7 +99,7 @@ lastupdated: "2018-12-06"
 </tr>
 <tr>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>메트릭을 {{site.data.keyword.monitoringlong}}에 전달하기 위해 Sysdig를 작업자 노드에 써드파티의 서비스로 배치하여 앱의 성능과 상태에 대한 작동 가시성을 얻을 수 있습니다. 자세한 정보는 [Kubernetes 클러스터에서 앱에 대한 메트릭 분석](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)을 참조하십시오. **참고**:Kubernetes 버전 1.11 이상을 실행하는 클러스터에서 {{site.data.keyword.mon_full_notm}}을 사용할 경우 Sysdig가 현재 `containerd`를 지원하지 않으므로 일부 컨테이너만 수집됩니다. </td>
+<td>메트릭을 {{site.data.keyword.monitoringlong}}에 전달하기 위해 Sysdig를 작업자 노드에 서드파티의 서비스로 배치하여 앱의 성능과 상태에 대한 작동 가시성을 얻을 수 있습니다. 자세한 정보는 [Kubernetes 클러스터에서 앱에 대한 메트릭 분석](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)을 참조하십시오. **참고**:Kubernetes 버전 1.11 이상을 실행하는 클러스터에서 {{site.data.keyword.mon_full_notm}}을 사용할 경우 Sysdig가 현재 `containerd`를 지원하지 않으므로 일부 컨테이너만 수집됩니다.</td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -227,7 +227,7 @@ Watson AI, 데이터, 보안 및 IoT(Internet of Things) 등의 분야에서 추
 {: note}
 
 시작하기 전에:
-- 다음 역할을 보유하고 있는지 확인하십시오. 
+- 다음 역할을 보유하고 있는지 확인하십시오.
     - 클러스터에 대한 [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](cs_users.html#platform)
     - 사용하려는 영역에 대한 [**개발자** Cloud Foundry 역할](/docs/iam/mngcf.html#mngcf)
 - [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](cs_cli_install.html#cs_cli_configure).
@@ -726,7 +726,7 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
 {: #helm_links}
 
 * strongSwan Helm 차트를 사용하려면 [strongSwan IPSec VPN 서비스 Helm 차트와 VPN 연결 설정](cs_vpn.html#vpn-setup)을 참조하십시오.
-* {{site.data.keyword.Bluemix_notm}}에서 사용할 수 있는 사용 가능한 Helm 차트는 콘솔의 [Helm 차트 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts)에서 확인하십시오. 
+* {{site.data.keyword.Bluemix_notm}}에서 사용할 수 있는 사용 가능한 Helm 차트는 콘솔의 [Helm 차트 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts)에서 확인하십시오.
 * <a href="https://docs.helm.sh/helm/" target="_blank">Helm 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>에서 Helm 차트를 설정하고 관리하는 데 사용되는 Helm 명령에 대해 자세히 알아보십시오.
 * [Kubernetes Helm 차트를 사용하여 배치 속도를 향상 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/)시키는 방법에 대해 자세히 알아보십시오.
 

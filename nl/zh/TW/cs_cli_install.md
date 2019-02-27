@@ -248,7 +248,7 @@ lastupdated: "2018-12-05"
         **Mac 或 Linux 使用者**：您可以執行 `(ibmcloud ks cluster-config "<cluster-name>" | grep export)`，而不是執行 `ibmcloud ks cluster-config` 指令以及複製 `KUBECONFIG` 環境變數。
         {:tip}
 
-    3.  驗證 `KUBECONFIG` 環境變數已適當設定。
+    3.  驗證已適當地設定 `KUBECONFIG` 環境變數。
 
         範例：
 
@@ -501,15 +501,13 @@ lastupdated: "2018-12-05"
     ```
     {
     "access_token": "<iam_token>",
-    "refresh_token": "<iam_refresh_token>",
-    "uaa_token": "<uaa_token>",
-    "uaa_refresh_token": "<uaa_refresh_token>",
-    "token_type": "Bearer",
-    "expires_in": 3600,
-    "expiration": 1493747503
-    }
-
-    
+"refresh_token": "<iam_refresh_token>",
+"uaa_token": "<uaa_token>",
+"uaa_refresh_token": "<uaa_refresh_token>",
+"token_type": "Bearer",
+"expires_in": 3600,
+"expiration": 1493747503
+}
 
     ```
     {: screen}
@@ -629,13 +627,13 @@ lastupdated: "2018-12-05"
     ```
     {
       "access_token": "<iam_token>",
-      "refresh_token": "<iam_refresh_token>",
-      "uaa_token": "<uaa_token>",
-      "uaa_refresh_token": "<uaa_refresh_token>",
-      "token_type": "Bearer",
-      "expires_in": 3600,
-      "expiration": 1493747503
-    }
+"refresh_token": "<iam_refresh_token>",
+"uaa_token": "<uaa_token>",
+"uaa_refresh_token": "<uaa_refresh_token>",
+"token_type": "Bearer",
+"expires_in": 3600,
+"expiration": 1493747503
+}
 
     ```
     {: screen}
@@ -729,13 +727,13 @@ lastupdated: "2018-12-05"
     ```
     {
       "access_token": "<iam_token>",
-      "refresh_token": "<iam_refresh_token>",
-      "uaa_token": "<uaa_token>",
-      "uaa_refresh_token": "<uaa_refresh_token>",
-      "token_type": "Bearer",
-      "expires_in": 3600,
-      "expiration": 1493747503
-    }
+"refresh_token": "<iam_refresh_token>",
+"uaa_token": "<uaa_token>",
+"uaa_refresh_token": "<uaa_refresh_token>",
+"token_type": "Bearer",
+"expires_in": 3600,
+"expiration": 1493747503
+}
 
     ```
     {: screen}
@@ -750,9 +748,9 @@ lastupdated: "2018-12-05"
 ## 使用 CLI 重新整理 {{site.data.keyword.Bluemix_notm}} IAM 存取記號，並取得新的重新整理記號
 {: #cs_cli_refresh}
 
-當您啟動新的 CLI 階段作業時，或如果現行 CLI 階段作業在 24 小時後到期，您必須執行 `ibmcloud ks cluster-config <cluster_name>`，來設定叢集的環境定義。當您使用此指令來設定叢集的環境定義時，會下載 Kubernetes 叢集的 `kubeconfig` 檔案。此外，會發出 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) ID 記號及重新整理記號，以提供鑑別。
+當您啟動新的 CLI 階段作業時，或如果現行 CLI 階段作業在 24 小時後到期，您必須執行 `ibmcloud ks cluster-config <cluster_name>`，來設定叢集的環境定義。當您使用這個指令來設定叢集的環境定義時，會下載 Kubernetes 叢集的 `kubeconfig` 檔案。此外，會發出 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) ID 記號及重新整理記號，以提供鑑別。
 {: shortdesc}
 
 **ID 記號**：每個透過 CLI 發出的 IAM ID 記號都會在一個小時後到期。當 ID 記號到期時，會將重新整理記號傳送至記號提供者，以重新整理 ID 記號。您的鑑別會重新整理，而且您可以繼續針對叢集執行指令。
 
-**重新整理記號**：重新整理記號每隔 30 天到期。如果重新整理記號過期，則無法重新整理 ID 記號，而且您無法在 CLI 中繼續執行指令。您可以執行 `ibmcloud ks cluster-config <cluster_name>`，來取得新的重新整理記號。此指令也會重新整理您的 ID 記號。
+**重新整理記號**：重新整理記號每隔 30 天到期。如果重新整理記號過期，則無法重新整理 ID 記號，而且您無法在 CLI 中繼續執行指令。您可以執行 `ibmcloud ks cluster-config <cluster_name>`，來取得新的重新整理記號。這個指令也會重新整理您的 ID 記號。

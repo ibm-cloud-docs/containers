@@ -170,7 +170,7 @@ secret을 더 안전하게 보호하려 하십니까? 기존 및 신규 secret�
 ### 앱의 가용성 향상
 {: #increase_availability}
 
-앱의 가용성을 높이려면 다음 옵션을 고려하십시오.
+앱의 가용성을 높이려면 다음 옵션을 고려하십시오. 
 {: shortdesc}
 
 <dl>
@@ -621,8 +621,8 @@ spec:
 {: #db_gui}
 
 1.  [{{site.data.keyword.Bluemix_notm}} 콘솔](https://console.bluemix.net/)에 로그인하십시오.
-2.  메뉴 표시줄에서 사용자 아바타 ![아바타 아이콘](../icons/i-avatar-icon.svg "아바타 아이콘")을 클릭하고 사용할 계정을 선택하십시오. 
-3.  메뉴 ![메뉴 아이콘](../icons/icon_hamburger.svg "메뉴 아이콘")에서 **Kubernetes**를 클릭하십시오. 
+2.  메뉴 표시줄에서 사용자 아바타 ![아바타 아이콘](../icons/i-avatar-icon.svg "아바타 아이콘")을 클릭하고 사용할 계정을 선택하십시오.
+3.  메뉴 ![메뉴 아이콘](../icons/icon_hamburger.svg "메뉴 아이콘")에서 **Kubernetes**를 클릭하십시오.
 4.  **클러스터** 페이지에서 액세스하려는 클러스터를 클릭하십시오.
 5.  클러스터 세부사항 페이지에서 **Kubernetes 대시보드** 단추를 클릭하십시오.
 
@@ -850,7 +850,8 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
 GPU 머신에서 워크로드를 실행하려면 다음을 수행하십시오.
 1.  YAML 파일을 작성하십시오. 이 예에서는 `Job` YAML이 완료하도록 스케줄된 명령이 성공적으로 종료될 때까지 실행되는 일시적인 팟(Pod)을 작성하여 일괄처리와 유사한 워크로드를 관리합니다.
 
-    GPU 워크로드의 경우에는 항상 YAML 스펙에 `resources: limits: nvidia.com/gpu` 필드를 제공해야 합니다. {: note}
+    GPU 워크로드의 경우에는 항상 YAML 스펙에 `resources: limits: nvidia.com/gpu` 필드를 제공해야 합니다.
+    {: note}
 
     ```yaml
     apiVersion: batch/v1

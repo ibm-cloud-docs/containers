@@ -741,7 +741,7 @@ spec:
   </tr>
   <tr>
   <td><code>servicePort</code></td>
-  <td>這是選用參數。若已提供，埠會替換為此值，然後再將資料流量傳送至後端應用程式。否則，埠會保持與 Ingress 埠相同。如果您不想要設定此參數，則可以從配置中移除它。</td>
+  <td>這是選用參數。若已提供，埠會替換為此值，然後再將資料流量傳送至後端應用程式。否則，埠會保持與 Ingress 埠相同。如果您不想要設定此參數，則可以從配置移除它。</td>
   </tr>
   </tbody></table>
 
@@ -1379,7 +1379,7 @@ kind: Ingress
 </tr>
 <tr>
 <td><code>serviceName</code></td>
-<td>將 <code><em>&lt;myservice&gt;</em></code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。此欄位為必要欄位。如果不包括服務名稱，則會啟用所有服務的註釋。如果包括服務名稱，則只會啟用該服務的註釋。以逗點 (,) 區隔多項服務。</td>
+<td>將 <code><em>&lt;myservice&gt;</em></code> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。這是必要欄位。如果不包括服務名稱，則會啟用所有服務的註釋。如果包括服務名稱，則只會啟用該服務的註釋。以逗點 (,) 區隔多項服務。</td>
 </tr>
 </tbody></table>
 </dd>

@@ -158,7 +158,7 @@ Development Exec 在動態支付產業面臨許多挑戰。法規、消費者行
 **步驟 2：現有支付系統後端的作業及連線**
 * 使用 IBM {{site.data.keyword.SecureGateway}} 來維護內部部署工具系統的安全連線。
 * 透過 Kubernetes 提供標準化 DevOps 儀表板及作法。
-* 「開發人員」在「開發」及「測試」叢集中建置及測試應用程式之後，會使用 {{site.data.keyword.contdelivery_full}} 工具鏈，將應用程式部署至全球的 {{site.data.keyword.containerlong_notm}} 叢集。 
+* 「開發人員」在「開發」及「測試」叢集裡建置及測試應用程式之後，會使用 {{site.data.keyword.contdelivery_full}} 工具鏈，將應用程式部署至全球的 {{site.data.keyword.containerlong_notm}} 叢集。 
 * {{site.data.keyword.containerlong_notm}} 中的內建 HA 工具會平衡每個地理區域內的工作負載（包括自我修復及負載平衡）。
 
 **步驟 3：分析及防止詐騙**

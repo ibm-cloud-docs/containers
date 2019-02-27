@@ -61,7 +61,7 @@ lastupdated: "2018-12-05"
   ```
   {: pre}
 
-3. 擷取叢集中所有現有的負載平衡器及 Ingress 應用程式負載平衡器 (ALB)。
+3. 擷取叢集裡所有現有的負載平衡器及 Ingress 應用程式負載平衡器 (ALB)。
 
   ```
   kubectl get services --all-namespaces

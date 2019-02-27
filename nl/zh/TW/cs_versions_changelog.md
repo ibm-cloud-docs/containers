@@ -261,7 +261,7 @@ lastupdated: "2018-12-05"
 <td>1.12.2-68 版</td>
 <td>已更新為支援 Kubernetes 1.12 版。其他變更包括下列各項：
 <ul><li>負載平衡器 Pod（`ibm-system` 名稱空間中的 `ibm-cloud-provider-ip-*`）現在會設定 CPU 及記憶體資源要求。</li>
-<li>已新增 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 註釋，來指定負載平衡器服務要部署至其中的 VLAN。若要查看叢集中的可用 VLAN，請執行 `ibmcloud ks vlans --zone <zone>`。</li>
+<li>已新增 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 註釋，來指定負載平衡器服務要部署至其中的 VLAN。若要查看叢集裡的可用 VLAN，請執行 `ibmcloud ks vlans --zone <zone>`。</li>
 <li>新的[負載平衡器 2.0](cs_loadbalancer.html#planning_ipvs) 以測試版形式提供。</li></ul></td>
 </tr>
 <tr>
@@ -440,7 +440,7 @@ lastupdated: "2018-12-05"
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>1.11.3-100 版</td>
 <td>1.11.3-127 版</td>
-<td>已新增 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 註釋，來指定負載平衡器服務要部署至其中的 VLAN。若要查看叢集中的可用 VLAN，請執行 `ibmcloud ks vlans --zone <zone>`。</td>
+<td>已新增 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 註釋，來指定負載平衡器服務要部署至其中的 VLAN。若要查看叢集裡的可用 VLAN，請執行 `ibmcloud ks vlans --zone <zone>`。</td>
 </tr>
 <tr>
 <td>已啟用 TPM 的核心</td>
@@ -495,7 +495,7 @@ lastupdated: "2018-12-05"
 <td>加密 etcd 中的資料</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>先前，etcd 資料是儲存在主節點的 NFS 檔案儲存空間實例上，而此實例是在靜止時加密。現在，etcd 資料是儲存在主節點的本端磁碟上，並備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。不過，主節點的本端磁碟上的 etcd 資料不會加密。如果您想要將主節點的本端 etcd 資料加密，請[在您的叢集中啟用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
+<td>先前，etcd 資料是儲存在主節點的 NFS 檔案儲存空間實例上，而此實例是在靜止時加密。現在，etcd 資料是儲存在主節點的本端磁碟上，並備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。不過，主節點的本端磁碟上的 etcd 資料不會加密。如果您想要將主節點的本端 etcd 資料加密，請[在您的叢集裡啟用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
 </tr>
 </tbody>
 </table>
@@ -664,7 +664,7 @@ lastupdated: "2018-12-05"
 <td>金鑰管理服務提供者</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>已新增在叢集中使用 Kubernetes 金鑰管理服務 (KMS) 提供者的能力，以支援 {{site.data.keyword.keymanagementservicefull}}。當您[在叢集中啟用 {{site.data.keyword.keymanagementserviceshort}}](cs_encrypt.html#keyprotect) 時，會加密您的所有 Kubernetes 密碼。</td>
+<td>已新增在叢集裡使用 Kubernetes 金鑰管理服務 (KMS) 提供者的能力，以支援 {{site.data.keyword.keymanagementservicefull}}。當您[在叢集裡啟用 {{site.data.keyword.keymanagementserviceshort}}](cs_encrypt.html#keyprotect) 時，會加密您的所有 Kubernetes 密碼。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -744,7 +744,7 @@ lastupdated: "2018-12-05"
 <td>IBM 檔案儲存空間外掛程式配置</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>已從 IBM 所提供檔案儲存空間類別的裝載選項中移除預設 NFS 版本。主機的作業系統現在會與 IBM Cloud 基礎架構 (SoftLayer) NFS 伺服器協議 NFS 版本。若要手動設定特定的 NFS 版本，或變更主機作業系統所協議 PV 的 NFS 版本，請參閱[變更預設 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
+<td>已從 IBM 所提供檔案儲存空間類別的裝載選項移除預設 NFS 版本。主機的作業系統現在會與 IBM Cloud 基礎架構 (SoftLayer) NFS 伺服器協議 NFS 版本。若要手動設定特定的 NFS 版本，或變更主機作業系統所協議 PV 的 NFS 版本，請參閱[變更預設 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
 </tr>
 </tbody>
 </table>
@@ -1010,13 +1010,13 @@ lastupdated: "2018-12-05"
 <td>加密 etcd 中的資料</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>先前，etcd 資料是儲存在主節點的 NFS 檔案儲存空間實例上，而此實例是在靜止時加密。現在，etcd 資料是儲存在主節點的本端磁碟上，並備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。不過，主節點的本端磁碟上的 etcd 資料不會加密。如果您想要將主節點的本端 etcd 資料加密，請[在您的叢集中啟用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
+<td>先前，etcd 資料是儲存在主節點的 NFS 檔案儲存空間實例上，而此實例是在靜止時加密。現在，etcd 資料是儲存在主節點的本端磁碟上，並備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。不過，主節點的本端磁碟上的 etcd 資料不會加密。如果您想要將主節點的本端 etcd 資料加密，請[在您的叢集裡啟用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>1.10.8-172 版</td>
 <td>1.10.8-197 版</td>
-<td>已新增 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 註釋，來指定負載平衡器服務要部署至其中的 VLAN。若要查看叢集中的可用 VLAN，請執行 `ibmcloud ks vlans --zone <zone>`。</td>
+<td>已新增 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 註釋，來指定負載平衡器服務要部署至其中的 VLAN。若要查看叢集裡的可用 VLAN，請執行 `ibmcloud ks vlans --zone <zone>`。</td>
 </tr>
 <tr>
 <td>已啟用 TPM 的核心</td>
@@ -1139,7 +1139,7 @@ lastupdated: "2018-12-05"
 <td>金鑰管理服務提供者</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>已新增在叢集中使用 Kubernetes 金鑰管理服務 (KMS) 提供者的能力，以支援 {{site.data.keyword.keymanagementservicefull}}。當您[在叢集中啟用 {{site.data.keyword.keymanagementserviceshort}}](cs_encrypt.html#keyprotect) 時，會加密您的所有 Kubernetes 密碼。</td>
+<td>已新增在叢集裡使用 Kubernetes 金鑰管理服務 (KMS) 提供者的能力，以支援 {{site.data.keyword.keymanagementservicefull}}。當您[在叢集裡啟用 {{site.data.keyword.keymanagementserviceshort}}](cs_encrypt.html#keyprotect) 時，會加密您的所有 Kubernetes 密碼。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1254,7 +1254,7 @@ lastupdated: "2018-12-05"
 <td>IBM 檔案儲存空間外掛程式</td>
 <td>334</td>
 <td>338</td>
-<td>已將 incubator 版本更新為 1.8。檔案儲存空間會佈建給您選取的特定區域。除非您使用多區域叢集，並且需要新增地區及區域標籤，否則無法更新現有（靜態）PV 實例的標籤。<br><br> 已從 IBM 所提供檔案儲存空間類別的裝載選項中移除預設 NFS 版本。主機的作業系統現在會與 IBM Cloud 基礎架構 (SoftLayer) NFS 伺服器協議 NFS 版本。若要手動設定特定的 NFS 版本，或變更主機作業系統所協議 PV 的 NFS 版本，請參閱[變更預設 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
+<td>已將 incubator 版本更新為 1.8。檔案儲存空間會佈建給您選取的特定區域。除非您使用多區域叢集，並且需要新增地區及區域標籤，否則無法更新現有（靜態）PV 實例的標籤。<br><br> 已從 IBM 所提供檔案儲存空間類別的裝載選項移除預設 NFS 版本。主機的作業系統現在會與 IBM Cloud 基礎架構 (SoftLayer) NFS 伺服器協議 NFS 版本。若要手動設定特定的 NFS 版本，或變更主機作業系統所協議 PV 的 NFS 版本，請參閱[變更預設 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1952,7 +1952,7 @@ lastupdated: "2018-12-05"
 <td>IBM 檔案儲存空間外掛程式</td>
 <td>334</td>
 <td>338</td>
-<td>已將 incubator 版本更新為 1.8。檔案儲存空間會佈建給您選取的特定區域。除非您使用多區域叢集，並且需要新增地區及區域標籤，否則無法更新現有（靜態）PV 實例的標籤。<br><br>已從 IBM 所提供檔案儲存空間類別的裝載選項中移除預設 NFS 版本。主機的作業系統現在會與 IBM Cloud 基礎架構 (SoftLayer) NFS 伺服器協議 NFS 版本。若要手動設定特定的 NFS 版本，或變更主機作業系統所協議 PV 的 NFS 版本，請參閱[變更預設 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
+<td>已將 incubator 版本更新為 1.8。檔案儲存空間會佈建給您選取的特定區域。除非您使用多區域叢集，並且需要新增地區及區域標籤，否則無法更新現有（靜態）PV 實例的標籤。<br><br>已從 IBM 所提供檔案儲存空間類別的裝載選項移除預設 NFS 版本。主機的作業系統現在會與 IBM Cloud 基礎架構 (SoftLayer) NFS 伺服器協議 NFS 版本。若要手動設定特定的 NFS 版本，或變更主機作業系統所協議 PV 的 NFS 版本，請參閱[變更預設 NFS 版本](cs_storage_file.html#nfs_version_class)。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>

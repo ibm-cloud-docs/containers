@@ -103,7 +103,7 @@ lastupdated: "2018-12-05"
 * 然後，[建立專用 Ingress 服務](cs_ingress.html#ingress_expose_private)。
 
 舉例來說，假設您已建立專用負載平衡器服務。您也建立了 Calico DNAT 前原則來封鎖公用資料流量，使其無法到達負載平衡器所開啟的公用 NodePort。可以透過下列方式存取此專用負載平衡器：
-* 此一相同叢集中的任何 Pod
+* 此一相同叢集裡的任何 Pod
 * 相同 IBM Cloud 帳戶中任何叢集的任何 Pod
 * 如果您[已啟用 VLAN Spanning](cs_subnets.html#subnet-routing)，則為任何已連接至位於相同 IBM Cloud 帳戶中之任何專用 VLAN 的系統
 * 如果您不屬於 IBM Cloud 帳戶，而仍然在公司防火牆背後，則為透過 VPN 連線連至負載平衡器 IP 所在的子網路的任何系統

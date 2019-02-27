@@ -28,7 +28,7 @@ lastupdated: "2018-12-05"
 
 若要安裝 CLI 外掛程式，請參閱[安裝 CLI](cs_cli_install.html#cs_cli_install_steps)。
 
-在終端機中，當您更新至 `ibmcloud`CLI 和外掛程式時，會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
+在終端機中，有 `ibmcloud` CLI 及外掛程式的更新可用時，就會通知您。請務必保持最新的 CLI，讓您可以使用所有可用的指令及旗標。
 
 要尋找 `ibmcloud cr` 指令嗎？請參閱 [{{site.data.keyword.registryshort_notm}} CLI 參考資料](/docs/container-registry-cli-plugin/container-registry-cli.html#containerregcli)。要尋找 `kubectl` 指令嗎？請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)。
 {:tip}
@@ -616,7 +616,7 @@ Region:                us-south
   {: pre}
 
 
-### ibmcloud ks init [--host HOST][--insecure] [-p][-u] [-s]
+### ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 {: #cs_init}
 
 起始設定 {{site.data.keyword.containerlong_notm}} 外掛程式，或指定您要建立或存取 Kubernetes 叢集的地區。
@@ -695,7 +695,7 @@ ibmcloud ks messages
    <dd>下載「超級使用者」角色的 TLS 憑證及許可權檔案。您可以使用憑證，在叢集裡自動執行作業，而無需重新鑑別。檔案會下載至 `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`。這是選用值。</dd>
 
    <dt><code>--network</code></dt>
-   <dd>下載在叢集中執行 <code>calicoctl</code> 指令所需的 Calico 配置檔、TLS 憑證及許可權檔案。這是選用值。**附註**：若要取得已下載 Kubernetes 配置資料及憑證的 export 指令，您必須在沒有此旗標的情況下執行以下指令。</dd>
+   <dd>下載在叢集裡執行 <code>calicoctl</code> 指令所需的 Calico 配置檔、TLS 憑證及許可權檔案。這是選用值。**附註**：若要取得已下載 Kubernetes 配置資料及憑證的 export 指令，您必須在沒有此旗標的情況下執行以下指令。</dd>
 
    <dt><code>--export</code></dt>
    <dd>下載 Kubernets 配置資料及憑證，但不包含 export 指令以外的任何訊息。因為沒有顯示任何訊息，所以可以在建立自動化 Script 時使用此旗標。這是選用值。</dd>
@@ -1096,7 +1096,7 @@ trusted: <em>true</em>
   {: pre}
 
 
-### ibmcloud ks clusters [--json][-s]
+### ibmcloud ks clusters [--json] [-s]
 {: #cs_clusters}
 
 檢視組織中的叢集清單。
@@ -1407,7 +1407,7 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中建立子網路，並將它設為可供 {{site.data.keyword.containerlong_notm}} 中指定的叢集使用。
 
 <p class="important">當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。</br>
-</br>如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。</p>
+</br>如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。</p>
 
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**操作員**平台角色
 
@@ -1443,7 +1443,7 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 這個專用子網路不是 IBM Cloud 基礎架構 (SoftLayer) 所提供的專用子網路。因此，您必須配置子網路的任何入埠及出埠網路資料流量遞送。若要新增 IBM Cloud 基礎架構 (SoftLayer) 子網路，請使用 `ibmcloud ks cluster-subnet-add` [指令](#cs_cluster_subnet_add)。
 
 <p class="important">當您讓子網路可供叢集使用時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定一個子網路只搭配使用一個叢集。請不要同時將一個子網路用於多個叢集或 {{site.data.keyword.containerlong_notm}} 以外的其他用途。</br>
-</br>如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。</p>
+</br>如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。</p>
 
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**操作員**平台角色
 
@@ -1531,7 +1531,7 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 ### ibmcloud ks alb-autoupdate-disable --cluster CLUSTER
 {: #cs_alb_autoupdate_disable}
 
-依預設，會啟用 Ingress 應用程式負載平衡器 (ALB) 附加程式的自動更新。有新的建置版本可用時，會自動更新 ALB Pod。若要改為手動更新附加程式，請使用此指令來停用自動更新。然後，您可以執行 [`ibmcloud ks alb-update` 指令來更新 ALB Pod](#cs_alb_update)。
+依預設，會啟用 Ingress 應用程式負載平衡器 (ALB) 附加程式的自動更新。有新的建置版本可用時，會自動更新 ALB Pod。若要改為手動更新附加程式，請使用這個指令來停用自動更新。然後，您可以執行 [`ibmcloud ks alb-update` 指令來更新 ALB Pod](#cs_alb_update)。
 
 當您更新叢集的主要或次要 Kubernetes 版本時，IBM 會自動針對 Ingress 部署進行必要的變更，但是不會變更 Ingress ALB 附加程式的建置版本。您負責檢查最新 Kubernet 版本與 Ingress ALB 附加程式映像檔的相容性。
 
@@ -1783,7 +1783,7 @@ ibmcloud ks alb-autoupdate-get --cluster mycluster
   ```
   {: pre}
 
-### ibmcloud ks alb-get --albID ALB_ID [--json][-s]
+### ibmcloud ks alb-get --albID ALB_ID [--json] [-s]
 {: #cs_alb_get}
 
 檢視 ALB 的詳細資料。
@@ -1852,7 +1852,7 @@ ibmcloud ks alb-rollback --cluster mycluster
 ### ibmcloud ks alb-update --cluster CLUSTER
 {: #cs_alb_update}
 
-如果 Ingress ALB 附加程式的自動更新已停用，而且您想要更新附加程式，則可以強制一次性更新您的 ALB Pod。當您選擇手動更新附加程式時，叢集中的所有 ALB Pod 都會更新至最新的建置。您無法更新個別 ALB，也無法選擇要將附加程式更新至哪個建置。自動更新會保留停用狀態。
+如果 Ingress ALB 附加程式的自動更新已停用，而且您想要更新附加程式，則可以強制一次性更新您的 ALB Pod。當您選擇手動更新附加程式時，叢集裡的所有 ALB Pod 都會更新至最新的建置。您無法更新個別 ALB，也無法選擇要將附加程式更新至哪個建置。自動更新會保留停用狀態。
 
 當您更新叢集的主要或次要 Kubernetes 版本時，IBM 會自動針對 Ingress 部署進行必要的變更，但是不會變更 Ingress ALB 附加程式的建置版本。您負責檢查最新 Kubernet 版本與 Ingress ALB 附加程式映像檔的相容性。
 
@@ -2110,7 +2110,7 @@ Infrastructure credentials for user name user@email.com set for resource group d
 ### ibmcloud ks logging-autoupdate-disable --cluster CLUSTER
 {: #cs_log_autoupdate_disable}
 
-停用自動更新特定叢集中的 Fluentd Pod。當您更新叢集的主要或次要 Kubernetes 版本時，IBM 會自動針對 Fluentd ConfigMap 進行必要的變更，但是不會變更用於記載附加程式之 Fluentd 的建置版本。您負責檢查最新 Kubernet 版本與您的附加程式映像檔的相容性。
+停用自動更新特定叢集裡的 Fluentd Pod。當您更新叢集的主要或次要 Kubernetes 版本時，IBM 會自動針對 Fluentd ConfigMap 進行必要的變更，但是不會變更用於記載附加程式之 Fluentd 的建置版本。您負責檢查最新 Kubernet 版本與您的附加程式映像檔的相容性。
 
 <strong>指令選項</strong>：
 
@@ -2122,7 +2122,7 @@ Infrastructure credentials for user name user@email.com set for resource group d
 ### ibmcloud ks logging-autoupdate-enable --cluster CLUSTER
 {: #cs_log_autoupdate_enable}
 
-啟用自動更新特定叢集中的 Fluentd Pod。有新的建置版本可用時，會自動更新 Fluentd Pod。
+啟用自動更新特定叢集裡的 Fluentd Pod。有新的建置版本可用時，會自動更新 Fluentd Pod。
 
 <strong>指令選項</strong>：
 
@@ -2134,7 +2134,7 @@ Infrastructure credentials for user name user@email.com set for resource group d
 ### ibmcloud ks logging-autoupdate-get --cluster CLUSTER
 {: #cs_log_autoupdate_get}
 
-檢查是否將您的 Fluentd Pod 設為在特定叢集中自動更新。
+檢查是否將您的 Fluentd Pod 設為在特定叢集裡自動更新。
 
 <strong>指令選項</strong>：
 
@@ -2854,7 +2854,7 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>將 <code>&lt;public_VLAN&gt;</code> 取代為您要用於工作者節點的公用 VLAN ID。若要列出可用的 VLAN，請執行 <code>ibmcloud ks vlans &lt;zone&gt;</code>，並尋找開頭為 <code>fcr</code>（前端路由器）的 VLAN 路由器。<br><strong>附註</strong>：如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅專用叢集網路](cs_network_cluster.html#private_vlan)。</td>
+<td>將 <code>&lt;public_VLAN&gt;</code> 取代為您要用於工作者節點的公用 VLAN ID。若要列出可用的 VLAN，請執行 <code>ibmcloud ks vlans &lt;zone&gt;</code>，並尋找開頭為 <code>fcr</code>（前端路由器）的 VLAN 路由器。<br><strong>附註</strong>：如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅限專用叢集網路](cs_network_cluster.html#private_vlan)。</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -2882,7 +2882,7 @@ diskEncryption: <em>false</em></code></pre>
 <dd>建立叢集時所指定的專用 VLAN。這是必要值。專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。</dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-<dd>建立叢集時所指定的公用 VLAN。這是選用值。如果想要工作者節點僅存在於專用 VLAN 上，請不要提供公用 VLAN ID。專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。<p class="note">如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅專用叢集網路](cs_network_cluster.html#private_vlan)。</p></dd>
+<dd>建立叢集時所指定的公用 VLAN。這是選用值。如果想要工作者節點僅存在於專用 VLAN 上，請不要提供公用 VLAN ID。專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。<p class="note">如果將工作者節點設定為僅具有專用 VLAN，則您必須配置替代方案以進行網路連線。如需相關資訊，請參閱[規劃僅限專用叢集網路](cs_network_cluster.html#private_vlan)。</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_secure.html#encrypted_disk)。若要停用加密，請包含此選項。</dd>
@@ -3109,7 +3109,7 @@ diskEncryption: <em>false</em></code></pre>
 ### ibmcloud ks worker-rm [-f] --cluster CLUSTER --workers WORKER[,WORKER] [-s]
 {: #cs_worker_rm}
 
-從叢集裡移除一個以上的工作者節點。如果您移除工作者節點，叢集會變成不平衡。您可以執行 `ibmcloud ks worker-pool-rebalance` [指令](#cs_rebalance)，以自動重新平衡工作者節點儲存區。
+從叢集移除一個以上的工作者節點。如果您移除工作者節點，叢集會變成不平衡。您可以執行 `ibmcloud ks worker-pool-rebalance` [指令](#cs_rebalance)，以自動重新平衡工作者節點儲存區。
 
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**操作員**平台角色
 
@@ -3234,7 +3234,7 @@ diskEncryption: <em>false</em></code></pre>
    <dd>列出每一個工作者節點所屬的工作者節點儲存區。這是選用值。</dd>
 
    <dt><code>--show-deleted</code></dt>
-   <dd>檢視已從叢集裡刪除的工作者節點，包括刪除的原因。這是選用值。</dd>
+   <dd>檢視已從叢集刪除的工作者節點，包括刪除的原因。這是選用值。</dd>
 
    <dt><code>--json</code></dt>
    <dd>以 JSON 格式列印指令輸出。這是選用值。</dd>
@@ -3404,7 +3404,7 @@ diskEncryption: <em>false</em></code></pre>
 ### ibmcloud ks worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [-s]
 {: #cs_worker_pool_rm}
 
-從叢集裡移除工作者節點儲存區。這會刪除儲存區中的所有工作者節點。刪除時會重新排定您的 Pod。為了避免當機，請確定您有足夠的工作者節點來執行工作負載。
+從叢集移除工作者節點儲存區。這會刪除儲存區中的所有工作者節點。刪除時會重新排定您的 Pod。為了避免當機，請確定您有足夠的工作者節點來執行工作負載。
 
 <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**操作員**平台角色
 
@@ -3474,12 +3474,12 @@ diskEncryption: <em>false</em></code></pre>
     <dd><p>專用 VLAN 的 ID。此值是有條件的。</p>
     <p>如果您在區域中有專用 VLAN，則此值必須符合叢集裡一個以上工作者節點的專用 VLAN ID。若要查看您可用的 VLAN，請執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。新的工作者節點會新增至您指定的 VLAN，但不會變更任何現有工作者節點的 VLAN。</p>
     <p>如果您在該區域中沒有專用或公用 VLAN，請不要指定此選項。您一開始將新的區域新增至工作者節點儲存區時，即會自動為您建立專用及公用 VLAN。</p>
-    <p>如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。</p></dd>
+    <p>如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。</p></dd>
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd><p>公用 VLAN 的 ID。如果您要在建立叢集之後將節點上的工作負載公開給大眾使用，則這是必要值。它必須符合區域之叢集裡一個以上工作者節點的公用 VLAN ID。若要查看您可用的 VLAN，請執行 <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code>。新的工作者節點會新增至您指定的 VLAN，但不會變更任何現有工作者節點的 VLAN。</p>
     <p>如果您在該區域中沒有專用或公用 VLAN，請不要指定此選項。您一開始將新的區域新增至工作者節點儲存區時，即會自動為您建立專用及公用 VLAN。</p>
-    <p>如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。</p></dd>
+    <p>如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。</p></dd>
 
   <dt><code>--private-only </code></dt>
     <dd>使用此選項，以防止建立公用 VLAN。只有在您指定 `--private-vlan` 旗標時才為必要項目，並且請不要包括 `--public-vlan` 旗標。<p class="note">如果您想要僅限專用叢集，則必須配置閘道應用裝置來連接網路。如需相關資訊，請參閱[專用叢集](cs_clusters_planning.html#private_clusters)。</p></dd>
@@ -3506,7 +3506,7 @@ diskEncryption: <em>false</em></code></pre>
   <strong>最低必要許可權</strong>：{{site.data.keyword.containerlong_notm}} 中叢集的**操作員**平台角色
 
   專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。當建立叢集並指定公用和專用 VLAN 時，那些字首之後的數字和字母組合必須相符。
-  <ol><li>請檢查叢集中可用的 VLAN。<pre class="pre"><code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt; --showResources</code></pre><p>輸出範例：</p>
+  <ol><li>請檢查叢集裡可用的 VLAN。<pre class="pre"><code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt; --showResources</code></pre><p>輸出範例：</p>
   <pre class="screen"><code>Subnet VLANs
 VLAN ID   Subnet CIDR         Public   User-managed
 229xxxx   169.xx.xxx.xxx/29   true     false

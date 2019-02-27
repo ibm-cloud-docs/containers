@@ -24,7 +24,7 @@ lastupdated: "2018-12-05"
 {: #kubernetes}
 {: faq}
 
-Kubernetes 是一個開放程式碼平台，用於管理跨多個主機的容器化工作負載和服務，並提供管理工具來部署、自動執行、監視及調整容器化應用程式，只需最少或無需人為介入。構成微服務的所有容器都會分組成 Pod，這是一個可確保輕鬆管理及探索的邏輯單元。這些 Pod 會在 Kubernetes 叢集中所管理的運算主機上執行，而此叢集是可攜式、可延伸，並且在失敗時可自我修復。
+Kubernetes 是一個開放程式碼平台，用於管理跨多個主機的容器化工作負載和服務，並提供管理工具來部署、自動執行、監視及調整容器化應用程式，只需最少或無需人為介入。構成微服務的所有容器都會分組成 Pod，這是一個可確保輕鬆管理及探索的邏輯單元。這些 Pod 會在 Kubernetes 叢集裡所管理的運算主機上執行，而此叢集是可攜式、可延伸，並且在失敗時可自我修復。
 {: shortdesc}
 
 如需 Kubernetes 的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational)。 
@@ -54,7 +54,7 @@ Kubernetes 是一個開放程式碼平台，用於管理跨多個主機的容器
 Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.html#version_types)。這些更新會影響 Kubernetes API 伺服器版本或 Kubernetes 主節點的其他元件。IBM 會自動更新修補程式版本，但您必須更新主節點的主要及次要版本。
 如需相關資訊，請參閱[更新 Kubernetes 主節點](cs_cluster_update.html#master)。 
 
-標準叢集中的工作者節點會佈建至您的 {{site.data.keyword.Bluemix_notm}} 基礎架構帳戶。工作者節點為您的帳戶所專用，而且您負責向工作者節點要求及時更新，以確保工作者節點 OS 和 {{site.data.keyword.containerlong_notm}} 元件套用最新的安全更新及修補程式。IBM Site Reliability Engineer (SRE) 會提供安全更新項目與修補程式，也會持續監視工作者節點上所安裝的 Linux 映像檔，以偵測漏洞及安全規範問題。如需相關資訊，請參閱[更新工作者節點](cs_cluster_update.html#worker_node)。 
+標準叢集裡的工作者節點會佈建至您的 {{site.data.keyword.Bluemix_notm}} 基礎架構帳戶。工作者節點為您的帳戶所專用，而且您負責向工作者節點要求及時更新，以確保工作者節點 OS 和 {{site.data.keyword.containerlong_notm}} 元件套用最新的安全更新及修補程式。IBM Site Reliability Engineer (SRE) 會提供安全更新項目與修補程式，也會持續監視工作者節點上所安裝的 Linux 映像檔，以偵測漏洞及安全規範問題。如需相關資訊，請參閱[更新工作者節點](cs_cluster_update.html#worker_node)。 
 
 ## Kubernetes 主節點與工作者節點具有高可用性嗎？
 {: #ha}
@@ -74,7 +74,7 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 {: #secure_cluster}
 {: faq}
 
-您可以使用 {{site.data.keyword.containerlong_notm}} 中的內建安全特性，來保護叢集中的元件、資料及應用程式部署，以確保安全規範及資料完整性。請使用這些特性來保護 Kubernetes API 伺服器、etcd 資料儲存庫、工作者節點、儲存空間、映像檔及部署，免於惡意攻擊。您也可以運用內建的記載和監視工具，來偵測惡意攻擊和可疑的使用型樣。 
+您可以使用 {{site.data.keyword.containerlong_notm}} 中的內建安全特性，來保護叢集裡的元件、資料及應用程式部署，以確保安全規範及資料完整性。請使用這些特性來保護 Kubernetes API 伺服器、etcd 資料儲存庫、工作者節點、儲存空間、映像檔及部署，免於惡意攻擊。您也可以運用內建的記載和監視工具，來偵測惡意攻擊和可疑的使用型樣。 
 
 如需叢集元件以及如何保護每一個元件的相關資訊，請參閱 [{{site.data.keyword.containerlong_notm}} 的安全](cs_secure.html#security)。 
 
@@ -124,7 +124,7 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 {: #integrations}
 {: faq}
 
-您可以將 {{site.data.keyword.Bluemix_notm}} 平台及基礎架構服務，以及來自協力廠商供應商的服務新增至 {{site.data.keyword.containerlong_notm}}叢集，以啟用自動化、提高安全，或加強叢集中的監視和記載功能。
+您可以將 {{site.data.keyword.Bluemix_notm}} 平台及基礎架構服務，以及來自協力廠商供應商的服務新增至 {{site.data.keyword.containerlong_notm}}叢集，以啟用自動化、提高安全，或加強叢集裡的監視和記載功能。
 
 如需支援服務的清單，請參閱[整合服務](cs_integrations.html#integrations)。
 

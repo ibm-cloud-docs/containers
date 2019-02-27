@@ -72,7 +72,7 @@ lastupdated: "2018-12-05"
 <td>0.1.593</td>
 <td>2018 年 10 月 10 日</td>
 <td><ul><li>將資源群組 ID 新增至 <code>ibmcloud s cluster-get</code> 的輸出。</li>
-<li>[已啟用 {{site.data.keyword.keymanagementserviceshort}}](cs_encrypt.html#keyprotect) 作為叢集中的金鑰管理服務 (KMS) 提供者時，會在 <code>ibmcloud s cluster-get</code> 的輸出中新增已啟用 KMS 的欄位。</li></ul></td>
+<li>[已啟用 {{site.data.keyword.keymanagementserviceshort}}](cs_encrypt.html#keyprotect) 作為叢集裡的金鑰管理服務 (KMS) 提供者時，會在 <code>ibmcloud s cluster-get</code> 的輸出中新增已啟用 KMS 的欄位。</li></ul></td>
 </tr>
 <tr>
 <td>0.1.591</td>
@@ -83,8 +83,8 @@ lastupdated: "2018-12-05"
 <td>0.1.590</td>
 <td>2018 年 10 月 1 日</td>
 <td><ul>
-<li>新增 [<code>ibmcloud ks logging-collect</code>](cs_cli_reference.html#cs_log_collect) 及 [<code>ibmcloud ks logging-collect-status</code>](cs_cli_reference.html#cs_log_collect_status) 指令，用於收集叢集中的 API 伺服器日誌。</li>
-<li>新增 [<code>ibmcloud ks key-protect-enable</code> 指令](cs_cli_reference.html#cs_key_protect)，以啟用 {{site.data.keyword.keymanagementserviceshort}} 作為叢集中的金鑰管理服務 (KMS) 提供者。</li>
+<li>新增 [<code>ibmcloud ks logging-collect</code>](cs_cli_reference.html#cs_log_collect) 及 [<code>ibmcloud ks logging-collect-status</code>](cs_cli_reference.html#cs_log_collect_status) 指令，用於收集叢集裡的 API 伺服器日誌。</li>
+<li>新增 [<code>ibmcloud ks key-protect-enable</code> 指令](cs_cli_reference.html#cs_key_protect)，以啟用 {{site.data.keyword.keymanagementserviceshort}} 作為叢集裡的金鑰管理服務 (KMS) 提供者。</li>
 <li>在起始重新開機或重新載入之前，將 <code>--skip-master-health</code> 旗標新增至 [ibmcloud ks worker-reboot](cs_cli_reference.html#cs_worker_reboot) 及 [ibmcloud ks worker-reload](cs_cli_reference.html#cs_worker_reboot) 指令，以跳過主節點性能檢查。</li>
 <li>在 <code>ibmcloud ks cluster-get</code> 的輸出中，將 <code>Owner Email</code> 重新命名為 <code>Owner</code>。</li></ul></td>
 </tr>

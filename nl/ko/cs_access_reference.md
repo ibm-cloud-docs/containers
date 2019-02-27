@@ -33,7 +33,7 @@ lastupdated: "2018-12-05"
 {{site.data.keyword.containerlong_notm}}는 {{site.data.keyword.Bluemix_notm}} Identity and Access Management(IAM) 역할을 사용하도록 구성됩니다. {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할은 사용자가 클러스터에 대해 수행할 수 있는 조치를 결정합니다. 플랫폼 역할이 지정된 모든 사용자에게는 기본 네임스페이스의 해당 Kubernetes 역할 기반 액세스 제어(RBAC) 역할도 자동으로 지정됩니다. 또한 플랫폼 역할은 사용자의 기본 인프라 권한을 자동으로 설정합니다. 정책을 설정하려면 [{{site.data.keyword.Bluemix_notm}} IAM 플랫폼 권한 지정](cs_users.html#platform)을 참조하십시오. RBAC 역할에 대해 자세히 알아보려면 [RBAC 권한 지정](cs_users.html#role-binding)을 참조하십시오.
 {: shortdesc}
 
-다음 표는 각 플랫폼 역할에 의해 부여되는 클러스터 관리 권한과 해당 RBAC 역할에 대한 Kubernetes 리소스 권한을 보여줍니다. 
+다음 표는 각 플랫폼 역할에 의해 부여되는 클러스터 관리 권한과 해당 RBAC 역할에 대한 Kubernetes 리소스 권한을 보여줍니다.
 
 <table summary="표에서는 IAM 플랫폼 역할과 해당되는 RBAC 정책에 대한 사용자 권한을 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, IAM 플랫폼 역할은 1열에 있고 클러스터 권한은 2열에 있으며 해당되는 RBAC 역할은 3열에 있습니다. ">
 <caption>플랫폼 및 RBAC 역할별 클러스터 관리 권한</caption>
@@ -122,7 +122,7 @@ Ingress:<ul>
         <li>클러스터 내 모든 ALB 시크릿 나열 또는 세부사항 보기</li>
         <li>{{site.data.keyword.cloudcerts_long_notm}} 인스턴스에서 ALB로 인증서 배치</li>
         <li>클러스터에서 ALB 시크릿 업데이트 또는 제거</li></ul>
-      <p class="note">머신, VLAN 및 서브넷과 같은 리소스를 작성하려면 관리자에게 **수퍼유저** 인프라 역할이 필요합니다. </p>
+      <p class="note">머신, VLAN 및 서브넷과 같은 리소스를 작성하려면 관리자에게 **수퍼유저** 인프라 역할이 필요합니다.</p>
     </td>
     <td><code>cluster-admin</code> 클러스터 역할은 <code>ibm-admin</code> 클러스터 역할 바인딩에 의해 적용되며 다음 권한을 제공합니다.
       <ul><li>모든 네임스페이스의 리소스에 대한 읽기/쓰기 액세스 권한</li>

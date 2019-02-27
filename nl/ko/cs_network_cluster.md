@@ -81,7 +81,7 @@ lastupdated: "2018-12-05"
 **왜 이 설정을 사용해야 합니까?**
 
 * 단일 구역 클러스터의 공용 인터넷에 액세스해야 하는 앱을 사용자가 보유합니다.
-* 다중 구역 클러스터의 공용 인터넷에 액세스해야 하는 앱을 사용자가 보유합니다. 다중 구역 클러스터를 작성하려면 [VLAN Spanning](cs_subnets.html#subnet-routing)을 사용으로 설정해야 하므로, 클러스터는 동일한 IBM Cloud 계정에서 사설 VLAN에 연결된 기타 시스템과 통신할 수 있습니다. 사설 네트워크에서 다중 구역 클러스터를 분리하려면 [Calico 네트워크 정책](cs_network_policy.html#isolate_workers)을 사용할 수 있습니다. 
+* 다중 구역 클러스터의 공용 인터넷에 액세스해야 하는 앱을 사용자가 보유합니다. 다중 구역 클러스터를 작성하려면 [VLAN Spanning](cs_subnets.html#subnet-routing)을 사용으로 설정해야 하므로, 클러스터는 동일한 IBM Cloud 계정에서 사설 VLAN에 연결된 기타 시스템과 통신할 수 있습니다. 사설 네트워크에서 다중 구역 클러스터를 분리하려면 [Calico 네트워크 정책](cs_network_policy.html#isolate_workers)을 사용할 수 있습니다.
 
 **내 클러스터에 대한 공용 및 개인용 액세스를 관리하기 위한 내 옵션은 무엇입니까?**
 </br>다음 절에서는 공용 및 사설 VLAN에 연결된 클러스터에 대한 네트워킹 설정에 사용할 수 있는 {{site.data.keyword.containerlong_notm}}에서의 기능을 설명합니다.

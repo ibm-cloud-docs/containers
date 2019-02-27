@@ -40,7 +40,7 @@ lastupdated: "2018-12-05"
 <br />
 
 
-## 規劃要在叢集中執行應用程式
+## 規劃要在叢集裡執行應用程式
 {: #plan_apps}
 
 在您將應用程式部署至 {{site.data.keyword.containerlong_notm}} 叢集之前，請決定您要如何設定應用程式，以便可以適當地存取您的應用程式，而且其可與 {{site.data.keyword.Bluemix_notm}} 中的其他服務整合。
@@ -62,7 +62,7 @@ lastupdated: "2018-12-05"
 | [`ReplicaSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) | 抄本集可確保 Pod 的多個抄本執行中，並在 Pod 關閉時重新排定 Pod。您可以建立抄本集以測試 Pod 排程如何運作，但若要管理應用程式更新、推出和調整，請改為建立一個部署。|
 | [`Deployment` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | 部署是管理 Pod 或 Pod 範本的[抄本集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) 的控制器。您可以在沒有部署的情況下建立 Pod 或抄本集來測試應用程式功能。若為正式作業層次設定，請使用部署來管理應用程式更新、推出及調整。|
 | [`StatefulSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) | 與部署類似，有狀態集是管理一組 Pod 抄本的控制器。與部署不同的是，有狀態集確保您的 Pod 具有唯一的網路身分，可在重新排程時維護其狀態。當您要在雲端中執行工作負載時，請嘗試將應用程式設計為無狀態，以讓您的服務實例彼此獨立，且在失敗時不會中斷服務。不過，有些應用程式（例如資料庫）必須是無狀態。對於這些情況，請考量建立有狀態集，並使用[檔案](cs_storage_file.html#file_statefulset)、[區塊](cs_storage_block.html#block_statefulset)或[物件](cs_storage_cos.html#cos_statefulset)儲存空間，作為有狀態集的持續性儲存空間。|
-| [`DaemonSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | 當您必須在叢集中的每個工作者節點上執行相同的 Pod 時，請使用 DaemonSet。當工作者節點新增至叢集時，會自動排定 DaemonSet 所管理的 Pod。一般使用案例包括日誌收集器（例如 `logstash` 或 `promtheus`），可從每個工作者節點收集日誌，以洞察叢集或應用程式的性能。|
+| [`DaemonSet` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) | 當您必須在叢集裡的每個工作者節點上執行相同的 Pod 時，請使用 DaemonSet。當工作者節點新增至叢集時，會自動排定 DaemonSet 所管理的 Pod。一般使用案例包括日誌收集器（例如 `logstash` 或 `promtheus`），可從每個工作者節點收集日誌，以洞察叢集或應用程式的性能。|
 | [`Job` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) | 工作可確保一個以上的 Pod 順利完成。您可將工作用於佇列或批次工作，來支援個別但相關工作項目的平行處理（例如，要呈現的特定頁框數、要傳送的電子郵件，以及要轉換的檔案）。若要排定工作在特定時間執行，請使用 [Cron 工作 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)。|
 {: caption="您可以建立的 Kubernetes 工作負載物件的類型。" caption-side="top"}
 
@@ -102,7 +102,7 @@ lastupdated: "2018-12-05"
 <li><strong>認證</strong>：放置密碼、金鑰和記號這類認證，以減少意外曝光的風險。例如，當您[連結服務](cs_integrations.html#adding_cluster)至叢集時，認證會儲存在密碼中。</li></ul></dd>
 </dl>
 
-想要讓您的密碼更加安全嗎？要求叢集管理者在您的叢集中[啟用 {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect)，以加密新密碼及現有密碼。
+想要讓您的密碼更加安全嗎？要求叢集管理者在您的叢集裡[啟用 {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect)，以加密新密碼及現有密碼。
 {: tip}
 
 ### 如何將 IBM 服務新增至我的應用程式，例如 Watson？
@@ -192,7 +192,7 @@ lastupdated: "2018-12-05"
   <p><strong>在多區域叢集部署中，應用程式 Pod 是否平均分佈到各節點？</strong></p>
   <p>Pod 會平均分佈到各區域，但不一定會分佈到各節點。例如，如果您叢集的 3 個區域各有 1 個節點，並且部署 6 個 Pod 的抄本集，則每個節點都會取得 2 個 Pod。不過，如果您叢集的 3 個區域各有 2 個節點，並且部署 6 個 Pod 的抄本集，則每個區域會排定 2 個 Pod，而且每個節點或許會排定 1 個 Pod 也或許未排定。如需進一步控制排程，您可以[設定 Pod 親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node)。</p>
   <p><strong>如果區域關閉，如何將 Pod 重新排定至其他區域中的其餘節點？</strong></br>它取決於您在部署中使用的排程原則。如果您已包括[節點特定 Pod 親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)，則不會重新排定 Pod。如果您未這麼做，則會在其他區域的可用工作者節點上建立 Pod，但它們可能不平衡。例如，2 個 Pod 可能會分散到 2 個可用節點，或者它們可能會同時排定到具有可用容量的 1 個節點。同樣地，傳回無法使用區域時，不會自動刪除 Pod，也不會重新讓它在各節點之間保持平衡。如果您要在備份區域之後重新讓 Pod 在各區域之間保持平衡，請考慮使用 [Kubernetes 取消排程器 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes-incubator/descheduler)。</p>
-  <p><strong>提示</strong>：在多區域叢集中，請嘗試將每個區域的工作者節點容量保持為 50%，讓您有足夠的剩餘容量來保護叢集不發生區域失敗。</p>
+  <p><strong>提示</strong>：在多區域叢集裡，請嘗試將每個區域的工作者節點容量保持為 50%，讓您有足夠的剩餘容量來保護叢集不發生區域失敗。</p>
   <p><strong>如果我要將應用程式分散到各地區，該怎麼辨？</strong></br>為了保護應用程式不發生地區失敗，請在另一個地區建立第二個叢集、[設定廣域負載平衡器](cs_clusters_planning.html#multiple_clusters)以連接叢集，以及使用部署 YAML，以利用應用程式的 [Pod 反親緣性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 來部署重複抄本集。</p>
   <p><strong>如果應用程式需要持續性儲存空間，該怎麼辨？</strong></p>
   <p>請使用雲端服務（例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)）。</p></dd>
@@ -235,8 +235,8 @@ kind: Deployment
 </pre></code></p></dd>
 
 <dt id="label">標籤</dt>
-  <dd><p>搭配標籤，您可以使用相同的 `key: value` 配對，標示叢集中不同的資源類型。然後，您可以指定要符合標籤的選取器，讓您可以針對這些其他資源進行建置。如果您計劃公開應用程式，則必須使用一個符合您在服務中指定之選取器的標籤。在範例中，部署規格會使用符合標籤 `app: wasliberty` 的範本。</p>
-  <p>您可以擷取叢集中標示的物件，例如，查看 `staging` 或 `production` 元件。例如，列出叢集中所有名稱空間內具有 `env: production` 標籤的所有資源。請注意，您需要存取所有名稱空間，才能執行此指令。<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
+  <dd><p>搭配標籤，您可以使用相同的 `key: value` 配對，標示叢集裡不同的資源類型。然後，您可以指定要符合標籤的選取器，讓您可以針對這些其他資源進行建置。如果您計劃公開應用程式，則必須使用一個符合您在服務中指定之選取器的標籤。在範例中，部署規格會使用符合標籤 `app: wasliberty` 的範本。</p>
+  <p>您可以擷取叢集裡標示的物件，例如，查看 `staging` 或 `production` 元件。例如，列出叢集裡所有名稱空間內具有 `env: production` 標籤的所有資源。請注意，您需要存取所有名稱空間，才能執行這個指令。<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>如需標籤的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)。</li>
   <li>如需更詳細的範例，請參閱[使用標籤將應用程式部署至特定工作者節點](cs_app.html#node_affinity)。</li></ul>
   <p><pre class="codeblock"><code>selector:
@@ -252,7 +252,7 @@ kind: Deployment
   <dd><p>當您要進一步控制要在哪些工作者節點上排定 Pod 時，請指定親緣性（主機託管）。親緣性只會在排程時間影響 Pod。例如，若要將部署分散至工作者節點，而不是容許將 Pod 排定在相同節點上，請使用 <code>podAntiAffinity</code> 選項與標準叢集搭配。您可以定義兩種類型的 Pod 反親緣性：偏好或必要。</p>
   <p>如需相關資訊，請參閱關於<a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="（在新分頁或視窗中開啟）">將 Pod 指派給節點</a>的 Kubernetes 文件。</p>
   <ul><li><strong>必要的反親緣性</strong>：您只能部署對其具有工作者節點的抄本數量。比方說，如果您的叢集裡有 3 個工作者節點，但您在 YAML 檔案中定義 5 個抄本，則只會部署 3 個抄本。每一個抄本都位於不同的工作者節點上。剩餘的 2 個抄本會保持擱置狀態。如果您新增另一個工作者節點至叢集，則其中一個剩餘的抄本會自動部署至新的工作者節點。如果工作者節點失敗，則 Pod 不會重新排程，因為需要親緣性原則。如需具有必要的 Pod 反親緣性的範例 YAML，請參閱<a href="https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="（在新分頁或視窗中開啟）">具有必要的 Pod 反親緣性的 Liberty 應用程式</a>。</li>
-  <li><strong>偏好的反親緣性</strong>：您可以將 Pod 部署至具有可用容量的節點，這可為您的工作負載提供更大的彈性。可能的話，這些 Pod 會排定在不同的工作者節點上。例如，如果您的叢集中有 3 個具有足夠容量的工作者節點，則它可以跨節點排定 5 個抄本 Pod。不過，如果您又新增兩個工作者節點至叢集，則親緣性規則不會強制 2 個額外 Pod 在現有節點上執行，以重新排程至免費節點。</li>
+  <li><strong>偏好的反親緣性</strong>：您可以將 Pod 部署至具有可用容量的節點，這可為您的工作負載提供更大的彈性。可能的話，這些 Pod 會排定在不同的工作者節點上。例如，如果您的叢集裡有 3 個具有足夠容量的工作者節點，則它可以跨節點排定 5 個抄本 Pod。不過，如果您又新增兩個工作者節點至叢集，則親緣性規則不會強制 2 個額外 Pod 在現有節點上執行，以重新排程至免費節點。</li>
   <li><strong>工作者節點親緣性</strong>：您可以將部署配置為只在特定工作者節點（例如裸機）上執行。如需相關資訊，請參閱[使用標籤將應用程式部署至特定的工作者節點](cs_app.html#node_affinity)。</li></ul>
   <p>偏好的反親緣性範例：</p>
   <p><pre class="codeblock"><code>spec:
@@ -288,7 +288,7 @@ kind: Deployment
 - containerPort: 9080</pre></code></p></dd>
 
 <dt id="resourcereq">資源要求及限制</dt>
-  <dd><p>當您作為叢集管理者時，可以透過針對叢集中的每一個 Kubernetes 名稱空間建立 [ResourceQuota 物件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)，以確保共用叢集的團隊不會佔用超過其計算資源（記憶體和 CPU）的公平份額。如果叢集管理者設定計算資源配額，則部署範本內的每一個容器都必須指定記憶體及 CPU 的資源要求與限制，否則無法建立 Pod。</p>
+  <dd><p>當您作為叢集管理者時，可以透過針對叢集裡的每一個 Kubernetes 名稱空間建立 [ResourceQuota 物件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)，以確保共用叢集的團隊不會佔用超過其計算資源（記憶體和 CPU）的公平份額。如果叢集管理者設定計算資源配額，則部署範本內的每一個容器都必須指定記憶體及 CPU 的資源要求與限制，否則無法建立 Pod。</p>
   <p><ol><li>檢查是否已設定名稱空間的資源配額。<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>請參閱何謂配額限制。<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
   <p>即使未設定任何資源配額，您也可以將資源要求及限制包括在部署中，以改善工作者節點資源的管理。</p><p class="note">如果容器超出其限制，則容器可能會重新啟動或失敗。如果容器超出要求，則在工作者節點用光超出的資源時，可能會收回其 Pod。如需疑難排解資訊，請參閱 [Pod 反覆地無法重新啟動或非預期地被移除](cs_troubleshoot_clusters.html#pods_fail)。</p>
@@ -611,7 +611,7 @@ spec:
 [在 {{site.data.keyword.Bluemix_notm}} 主控台中](#db_gui)，只需按一下按鈕，即可存取儀表板。[使用 CLI](#db_cli)，您可以存取儀表板，或使用自動化處理程序中的步驟，例如針對 CI/CD 管線。
 {:shortdesc}
 
-您在叢集中具有太多的資源及使用者，以致 Kubernetes 儀表板的速度有點慢嗎？對於執行 Kibernets 1.12 版或更新版本的叢集，您的叢集管理者可以藉由執行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`，來調整 `kubernetes-dashboard` 部署。
+您在叢集裡具有太多的資源及使用者，以致 Kubernetes 儀表板的速度有點慢嗎？對於執行 Kibernets 1.12 版或更新版本的叢集，您的叢集管理者可以藉由執行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`，來調整 `kubernetes-dashboard` 部署。
 {: tip}
 
 開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
@@ -684,7 +684,7 @@ spec:
 如需使用儀表板的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)。
 {:shortdesc}
 
-您在叢集中具有太多的資源及使用者，以致 Kubernetes 儀表板的速度有點慢嗎？對於執行 Kibernets 1.12 版或更新版本的叢集，您的叢集管理者可以藉由執行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`，來調整 `kubernetes-dashboard` 部署。
+您在叢集裡具有太多的資源及使用者，以致 Kubernetes 儀表板的速度有點慢嗎？對於執行 Kibernets 1.12 版或更新版本的叢集，您的叢集管理者可以藉由執行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`，來調整 `kubernetes-dashboard` 部署。
 {: tip}
 
 開始之前：

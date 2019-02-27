@@ -78,7 +78,7 @@ lastupdated: "2018-12-05"
     {: screen}
 {: #check_pods}
 2. 檢查 ALB Pod 的狀態。
-    1. 取得在叢集中執行的 ALB Pod。
+    1. 取得在叢集裡執行的 ALB Pod。
         ```
         kubectl get pods -n kube-system | grep alb
         ```
@@ -98,7 +98,7 @@ lastupdated: "2018-12-05"
         {: pre}
 
 3. 檢查 ALB 的日誌。
-    1.  取得在叢集中執行的 ALB Pod ID。
+    1.  取得在叢集裡執行的 ALB Pod ID。
         ```
         kubectl get pods -n kube-system | grep alb
         ```
@@ -176,7 +176,7 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-4. 確定已向叢集的 IBM 所提供 Ingress 子網域，登錄您在本節步驟 2 取得之每個公用 ALB 的 IP。例如，在多區域叢集中，您必須在相同主機名稱下登錄具有工作者節點之每個區域中的公用 ALB IP。
+4. 確定已向叢集的 IBM 所提供 Ingress 子網域，登錄您在本節步驟 2 取得之每個公用 ALB 的 IP。例如，在多區域叢集裡，您必須在相同主機名稱下登錄具有工作者節點之每個區域中的公用 ALB IP。
 
     ```
     kubectl get ingress -o wide
@@ -193,7 +193,7 @@ lastupdated: "2018-12-05"
 ## 步驟 3：檢查網域對映及 Ingress 資源配置
 {: #config}
 
-1. 如果您使用自訂網域，請驗證您已使用 DNS 提供者將自訂網域對映至 IBM 提供的子網域或 ALB 的公用 IP 位址。請注意，最好使用 CNAME，因為 IBM 會在 IBM 子網域上提供自動性能檢查，並從 DNS 回應中移除任何失敗的 IP。
+1. 如果您使用自訂網域，請驗證您已使用 DNS 提供者將自訂網域對映至 IBM 提供的子網域或 ALB 的公用 IP 位址。請注意，最好使用 CNAME，因為 IBM 會在 IBM 子網域上提供自動性能檢查，並從 DNS 回應移除任何失敗的 IP。
     * IBM 提供的子網域：確認已將自訂網域對映至「標準名稱記錄 (CNAME)」中叢集的 IBM 所提供子網域。
         ```
         host www.my-domain.com
@@ -303,7 +303,7 @@ lastupdated: "2018-12-05"
         ```
         {: screen}
 
-    4. 若要從 DNS 登錄中移除 IP，請重新載入 NGINX 配置。
+    4. 若要從 DNS 登錄移除 IP，請重新載入 NGINX 配置。
         ```
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- nginx -s reload
         ```
@@ -330,7 +330,7 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-5. 檢查 Cloudflare 伺服器，以驗證已從網域的 DNS 登錄中移除 ALB IP 位址。請注意，DNS 登錄可能需要幾分鐘的時間才能更新。
+5. 檢查 Cloudflare 伺服器，以驗證已從網域的 DNS 登錄移除 ALB IP 位址。請注意，DNS 登錄可能需要幾分鐘的時間才能更新。
     ```
     host mycluster-12345.us-south.containers.appdomain.cloud ada.ns.cloudflare.com
     ```
@@ -342,7 +342,7 @@ lastupdated: "2018-12-05"
     ```
     {: screen}
 
-6. 現在，已從正式作業中移除 ALB IP，您可以透過它對應用程式執行除錯測試。若要透過此 IP 來測試與應用程式的通訊，您可以執行下列 cURL 指令，並將範例值取代為您自己的值：
+6. 現在，已從正式作業移除 ALB IP，您可以透過它對應用程式執行除錯測試。若要透過此 IP 來測試與應用程式的通訊，您可以執行下列 cURL 指令，並將範例值取代為您自己的值：
     ```
     curl -X GET --resolve mycluster-12345.us-south.containers.appdomain.cloud:443:169.62.196.238 https://mycluster-12345.us-south.containers.appdomain.cloud/
     ```

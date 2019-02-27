@@ -83,7 +83,7 @@ Docker 映像檔是您使用 {{site.data.keyword.containerlong}} 建立的每個
 使用此起始設定，即可將容器從 {{site.data.keyword.Bluemix_notm}} 帳戶之名稱空間中可用的任何映像檔，部署至叢集的 **default** 名稱空間。若要將容器部署至叢集的其他名稱空間，或者若要使用儲存在另一個 {{site.data.keyword.Bluemix_notm}} 地區或另一個 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔，則必須[為叢集建立您自己的 imagePullSecret](#other)。
 {: note}
 
-想要讓您的登錄認證更加安全嗎？請要求叢集管理者在您的叢集中[啟用 {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect)，以加密叢集中的 Kubernetes 密碼，例如儲存登錄認證的 `imagePullSecret`。
+想要讓您的登錄認證更加安全嗎？請要求叢集管理者在您的叢集裡[啟用 {{site.data.keyword.keymanagementservicefull}}](cs_encrypt.html#keyprotect)，以加密叢集裡的 Kubernetes 密碼，例如儲存登錄認證的 `imagePullSecret`。
 {: tip}
 
 開始之前：
@@ -242,14 +242,14 @@ ImagePullSecret 僅適用於建立它們的 Kubernetes 名稱空間。請針對�
     {: pre}
 
     <table>
-    <caption>瞭解此指令的元件</caption>
+    <caption>瞭解這個指令的元件</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解這個指令的元件</th>
     </thead>
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td>必要。您要使用密碼並在其中部署容器之叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
+    <td>必要。您要使用密碼並在其中部署容器之叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集裡的所有名稱空間。</td>
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
@@ -304,14 +304,14 @@ kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret
     {: pre}
 
     <table>
-    <caption>瞭解此指令的元件</caption>
+    <caption>瞭解這個指令的元件</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解這個指令的元件</th>
     </thead>
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td>必要。您要使用密碼並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
+    <td>必要。您要使用密碼並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集裡的所有名稱空間。</td>
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
@@ -426,7 +426,7 @@ kubectl get secrets --namespace <kubernetes_namespace>
     </tbody></table>
 
 3.  儲存變更。
-4.  在叢集中建立部署。
+4.  在叢集裡建立部署。
     ```
     kubectl apply -f mypod.yaml
     ```
@@ -487,7 +487,7 @@ kubectl get secrets --namespace <kubernetes_namespace>
    ```
    {: codeblock}
 
-5. 在叢集中建立部署。
+5. 在叢集裡建立部署。
    ```
    kubectl apply -f mypod.yaml
    ```

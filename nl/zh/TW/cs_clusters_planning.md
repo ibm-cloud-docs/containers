@@ -97,16 +97,16 @@ lastupdated: "2018-12-05"
 多區域叢集是搭配單一或高可用性（在 Kubernetes 1.10 或更新版本中）Kubernetes 主節點來設定的，而此主節點與工作者節點佈建在相同的都會區域中。此外，如果您建立多區域叢集，則高可用性主節點會分散在各區域之中。例如，如果叢集位於 `dal10`、`dal12` 或 `dal13` 區域中，則主節點分散在達拉斯多區域都會城市的每一個區域之中。
 
 **如果 Kubernetes 主節點變成無法使用，會發生什麼情況？**</br>
-[Kubernetes 主節點](cs_tech.html#architecture)是保持叢集運作的主要元件。主節點將叢集資源及其配置儲存在 etcd 資料庫中，作為叢集的單點真實資料 (SPOT)。Kubernetes API 伺服器是從工作者節點到主節點之所有叢集管理要求的主要進入點，或您要與叢集資源互動時。<br><br>如果發生主節點失敗，則工作負載會繼續在工作者節點上執行，但無法使用 `kubectl` 指令來使用叢集資源，或檢視叢集性能，直到備份主節點中的 Kubernetes API 伺服器為止。如果 Pod 在主節點中斷期間關閉，則除非工作者節點再次到達 Kubernetes API 伺服器，否則無法重新排定 Pod。<br><br>在主節點中斷期間，您仍然可以針對 {{site.data.keyword.containerlong_notm}} API 執行 `ibmcloud ks` 指令，以使用您的基礎架構資源（例如工作者節點或 VLAN）。如果您透過在叢集中新增或移除工作者節點來變更現行叢集配置，則除非備份主節點，否則您的變更不會發生。
+[Kubernetes 主節點](cs_tech.html#architecture)是保持叢集運作的主要元件。主節點將叢集資源及其配置儲存在 etcd 資料庫中，作為叢集的單點真實資料 (SPOT)。Kubernetes API 伺服器是從工作者節點到主節點之所有叢集管理要求的主要進入點，或您要與叢集資源互動時。<br><br>如果發生主節點失敗，則工作負載會繼續在工作者節點上執行，但無法使用 `kubectl` 指令來使用叢集資源，或檢視叢集性能，直到備份主節點中的 Kubernetes API 伺服器為止。如果 Pod 在主節點中斷期間關閉，則除非工作者節點再次到達 Kubernetes API 伺服器，否則無法重新排定 Pod。<br><br>在主節點中斷期間，您仍然可以針對 {{site.data.keyword.containerlong_notm}} API 執行 `ibmcloud ks` 指令，以使用您的基礎架構資源（例如工作者節點或 VLAN）。如果您透過在叢集裡新增或移除工作者節點來變更現行叢集配置，則除非備份主節點，否則您的變更不會發生。
 
-在主節點中斷期間，請不要將工作者節點重新啟動或重新開機。此動作會從您的工作者節點中移除 Pod。因為 Kubernetes API 伺服器無法使用，所以無法將 Pod 重新排程至叢集中的其他工作者節點。
+在主節點中斷期間，請不要將工作者節點重新啟動或重新開機。此動作會從您的工作者節點移除 Pod。因為 Kubernetes API 伺服器無法使用，所以無法將 Pod 重新排程至叢集裡的其他工作者節點。
 {: important}
 
 
 若要保護叢集不發生 Kubernetes 主節點失敗，或在多區域叢集無法使用的地區中保護叢集，您可以[設定多個叢集，並使用廣域負載平衡器進行連接](#multiple_clusters)。
 
 **我是否必須執行什麼動作才能讓主節點跨區域與工作者節點通訊？**</br>
-是。如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
+是。如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
 
 **如何讓使用者從公用網際網路存取我的應用程式？**</br>
 您可以使用 Ingress 應用程式負載平衡器 (ALB) 或負載平衡器服務來公開應用程式。
@@ -118,7 +118,7 @@ lastupdated: "2018-12-05"
 **我可以為多區域叢集設定持續性儲存空間嗎？**</br>
 對於高可用性持續性儲存空間，請使用雲端服務（例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage)）。
 
-無法跨區域共用 NFS 檔案及區塊儲存空間。持續性磁區只能在實際儲存裝置所在的區域中使用。如果您要繼續使用叢集中的現有 NFS 檔案或區塊儲存空間，則必須將地區及區域標籤套用至現有的持續性磁區。這些標籤可協助 kube-scheduler 判斷在何處排定使用持續性磁區的應用程式。執行下列指令，並將 `<mycluster>` 取代為您的叢集名稱。
+無法跨區域共用 NFS 檔案及區塊儲存空間。持續性磁區只能在實際儲存裝置所在的區域中使用。如果您要繼續使用叢集裡的現有 NFS 檔案或區塊儲存空間，則必須將地區及區域標籤套用至現有的持續性磁區。這些標籤可協助 kube-scheduler 判斷在何處排定使用持續性磁區的應用程式。執行下列指令，並將 `<mycluster>` 取代為您的叢集名稱。
 
 ```
 bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
@@ -149,7 +149,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
     <li>若要將工作者節點新增至現有儲存區，請調整儲存區中每個區域的節點數：<code>ibmcloud ks worker-pool-resize</code> [指令](cs_cli_reference.html#cs_worker_pool_resize)。</li></ul></td>
     </tr>
     <tr>
-    <td>從叢集裡移除工作者節點。</td>
+    <td>從叢集移除工作者節點。</td>
     <td><code>ibmcloud ks worker-rm</code>，仍可用來刪除叢集裡麻煩的工作者節點。</td>
     <td><ul><li>如果您的工作者節點儲存區不平衡（例如，在移除工作者節點之後），請重新予以平衡：<code>ibmcloud ks worker-pool-rebalance</code> [指令](cs_cli_reference.html#cs_rebalance)。</li>
     <li>若要減少儲存區中的工作者節點數目，請調整每個區域的數目（最小值 1）：<code>ibmcloud ks worker-pool-resize</code> [指令](cs_cli_reference.html#cs_worker_pool_resize)。</li></ul></td>
@@ -181,8 +181,8 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 **若要設定多個叢集的廣域負載平衡器，請執行下列動作：**
 
 1. 在多個區域或地區中[建立叢集](cs_clusters.html#clusters)。
-2. 如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
-3. 在每一個叢集中，使用[應用程式負載平衡器 (ALB)](cs_ingress.html#ingress_expose_public) 或[負載平衡器服務](cs_loadbalancer.html)來公開應用程式。
+2. 如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
+3. 在每一個叢集裡，使用[應用程式負載平衡器 (ALB)](cs_ingress.html#ingress_expose_public) 或[負載平衡器服務](cs_loadbalancer.html)來公開應用程式。
 4. 針對每一個叢集，列出您 ALB 或負載平衡器服務的公用 IP 位址。
    - 若要列出叢集裡所有公用已啟用 ALB 的 IP 位址，請執行下列指令：
      ```
@@ -219,11 +219,11 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 依預設，{{site.data.keyword.containerlong_notm}} 會設定叢集能夠存取專用 VLAN 和公用 VLAN。專用 VLAN 會判定指派給每一個工作者節點的專用 IP 位址，以將專用網路介面提供給每一個工作者節點。
 公用 VLAN 容許工作者節點自動及安全地連接至主節點。
 
-如果您要鎖定叢集，以容許透過專用 VLAN 傳輸專用資料流量，但封鎖透過公用 VLAN 傳輸公用資料流量，則可以[使用 Calico 網路原則來保護您的叢集免於公用存取](cs_network_cluster.html#both_vlans_private_services)。這些 Calico 網路原則不會阻止您的工作者節點與主節點通訊。您可以限制叢集中顯現的漏洞，而無需藉由[將網路工作負載隔離至邊緣工作者節點](cs_edge.html)來鎖定公用資料流量。
+如果您要鎖定叢集，以容許透過專用 VLAN 傳輸專用資料流量，但封鎖透過公用 VLAN 傳輸公用資料流量，則可以[使用 Calico 網路原則來保護您的叢集免於公用存取](cs_network_cluster.html#both_vlans_private_services)。這些 Calico 網路原則不會阻止您的工作者節點與主節點通訊。您可以限制叢集裡顯現的漏洞，而無需藉由[將網路工作負載隔離至邊緣工作者節點](cs_edge.html)來鎖定公用資料流量。
 
 如果您要建立只能存取專用 VLAN 的叢集，則可以建立單一區域或多區域專用叢集。不過，當您的工作者節點僅連接至專用 VLAN 時，工作者節點無法自動連接至主節點。您必須配置閘道應用裝置，才能提供工作者節點與主節點之間的網路連線功能。
 
-您無法轉換已連接至公用及專用 VLAN 的叢集，使其變成僅限專用叢集。從叢集中移除所有公用 VLAN 會導致數個叢集元件停止運作。您必須使用下列步驟來建立新的叢集。
+您無法轉換已連接至公用及專用 VLAN 的叢集，使其變成僅限專用叢集。從叢集移除所有公用 VLAN 會導致數個叢集元件停止運作。您必須使用下列步驟來建立新的叢集。
 {: note}
 
 如果您想要建立只能存取專用 VLAN 的叢集，請執行下列動作：
@@ -240,7 +240,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 Kubernetes 叢集包含可分組至工作者節點儲存區的工作者節點，並且由 Kubernetes 主節點集中進行監視及管理。叢集管理者可以決定如何設定工作者節點的叢集，以確保叢集使用者具有部署及執行叢集裡應用程式的所有資源。
 {:shortdesc}
 
-當您建立標準叢集時，會代表您在 IBM Cloud 基礎架構 (SoftLayer) 中訂購具有相同記憶體、CPU 及磁碟空間規格（特性）的工作者節點，並將它們新增至叢集中的預設工作者節點儲存區。每個工作者節點都會獲指派建立叢集之後即不得變更的唯一工作者節點 ID 及網域名稱。您可以選擇虛擬或實體（裸機）伺服器。視您選擇的硬體隔離層次而定，虛擬工作者節點可以設定為共用或專用節點。若要將不同的特性新增至叢集，請[建立另一個工作者節點儲存區](cs_cli_reference.html#cs_worker_pool_create)。
+當您建立標準叢集時，會代表您在 IBM Cloud 基礎架構 (SoftLayer) 中訂購具有相同記憶體、CPU 及磁碟空間規格（特性）的工作者節點，並將它們新增至叢集裡的預設工作者節點儲存區。每個工作者節點都會獲指派建立叢集之後即不得變更的唯一工作者節點 ID 及網域名稱。您可以選擇虛擬或實體（裸機）伺服器。視您選擇的硬體隔離層次而定，虛擬工作者節點可以設定為共用或專用節點。若要將不同的特性新增至叢集，請[建立另一個工作者節點儲存區](cs_cli_reference.html#cs_worker_pool_create)。
 
 Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如需相關資訊，請檢閱[工作者節點及 Pod 配額 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/setup/cluster-large/)。
 
@@ -254,7 +254,7 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 
 ![標準叢集裡的工作者節點的硬體選項](images/cs_clusters_hardware.png)
 
-如果您想要工作者節點的多個特性，則必須為每個特性建立一個工作者節點儲存區。當您建立免費叢集時，工作者節點會自動佈建為 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的虛擬共用節點。在標準叢集中，您可以選擇最適用於工作負載的機器類型。計劃時，請考量 CPU 及記憶體容量總計上的[工作者節點資源保留](#resource_limit_node)。
+如果您想要工作者節點的多個特性，則必須為每個特性建立一個工作者節點儲存區。當您建立免費叢集時，工作者節點會自動佈建為 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的虛擬共用節點。在標準叢集裡，您可以選擇最適用於工作負載的機器類型。計劃時，請考量 CPU 及記憶體容量總計上的[工作者節點資源保留](#resource_limit_node)。
 
 您可以使用[主控台使用者介面](cs_clusters.html#clusters_ui)或 [CLI](cs_clusters.html#clusters_cli) 來部署叢集。
 
@@ -443,7 +443,7 @@ Kubernetes 會限制您在叢集裡可以有的工作者節點數目上限。如
 
 **何時要使用 SDS 特性？**</br>
 一般您會在下列情況使用 SDS 機器：
-*  如果您在叢集中使用 SDS 附加程式，請使用 SDS 機器。
+*  如果您在叢集裡使用 SDS 附加程式，請使用 SDS 機器。
 *  如果您的應用程式是一個需要本端儲存空間的 [StatefulSet ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)，則可以使用 SDS 機器，並佈建 [Kubernetes 本端持續性磁區（測試版）![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/)。
 *  您可能具有需要額外原始本端儲存空間的自訂應用程式。
 

@@ -126,11 +126,11 @@ Server Version: v1.10.11+IKS
 <tbody>
 <tr>
 <td>Kubernetes Metrics Server</td>
-<td>如果您目前在叢集中已部署 Kubernetes `metric-server`，則必須先移除 `metric-server`，然後再將叢集更新至 Kubernet 1.12。此移除可防止與更新期間所部署的 `metric-server` 發生衝突。</td>
+<td>如果您目前在叢集裡已部署 Kubernetes `metric-server`，則必須先移除 `metric-server`，然後再將叢集更新至 Kubernet 1.12。此移除可防止與更新期間所部署的 `metric-server` 發生衝突。</td>
 </tr>
 <tr>
 <td>`kube-system` `default` 服務帳戶的角色連結</td>
-<td>`kube-system` `default` 服務帳戶不再具有 Kubernetes API 的 **cluster-admin** 存取權。如果您部署的特性或附加程式（例如 [Helm](cs_integrations.html#helm)）需要存取叢集中的處理程序，請設定[服務帳戶 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)。如果您需要時間來建立及設定具有適當許可權的個別服務帳戶，則可以使用下列叢集角色連結來暫時授與 **cluster-admin** 角色：`kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
+<td>`kube-system` `default` 服務帳戶不再具有 Kubernetes API 的 **cluster-admin** 存取權。如果您部署的特性或附加程式（例如 [Helm](cs_integrations.html#helm)）需要存取叢集裡的處理程序，請設定[服務帳戶 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)。如果您需要時間來建立及設定具有適當許可權的個別服務帳戶，則可以使用下列叢集角色連結來暫時授與 **cluster-admin** 角色：`kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default`</td>
 </tr>
 </tbody>
 </table>
@@ -170,7 +170,7 @@ Server Version: v1.10.11+IKS
 </tr>
 <tr>
 <td>`kubectl patch`</td>
-<td>如果 `patch` 指令導致沒有變更（冗餘修補程式），則此指令不再以 `1` 回覆碼結束。如果您的 Script 依賴先前的行為，請予以更新。</td>
+<td>如果 `patch` 指令導致沒有變更（冗餘修補程式），則這個指令不再以 `1` 回覆碼結束。如果您的 Script 依賴先前的行為，請予以更新。</td>
 </tr>
 <tr>
 <td>`kubectl version -c`</td>
@@ -178,11 +178,11 @@ Server Version: v1.10.11+IKS
 </tr>
 <tr>
 <td>`kubectl wait`</td>
-<td>如果找不到任何相符的選取器，此指令現在會列印錯誤訊息，並以 `1` 回覆碼結束。如果您的 Script 依賴先前的行為，請予以更新。</td>
+<td>如果找不到任何相符的選取器，這個指令現在會列印錯誤訊息，並以 `1` 回覆碼結束。如果您的 Script 依賴先前的行為，請予以更新。</td>
 </tr>
 <tr>
 <td>kubelet cAdvisor 埠</td>
-<td>kubelet 藉由啟動 `--cadvisor-port` 而使用的[容器顧問 (cAdvisor) ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/google/cadvisor) Web 使用者介面會從 Kubernetes 1.12 中移除。如果您仍需要執行 cAdvisor，請[將 cAdvisor 部署為常駐程式集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/google/cadvisor/tree/master/deploy/kubernetes)。<br><br>在常駐程式集中，指定埠區段，以透過 `http://node-ip:4194` 與 cAdvisor 聯繫，如下所示。請注意 cAdvisor Pod 會失敗，直到工作者節點已更新至 1.12，因為舊版 kellet 將主機埠 4194 用於 cAdvisor。<pre class="screen"><code>ports:
+<td>kubelet 藉由啟動 `--cadvisor-port` 而使用的[容器顧問 (cAdvisor) ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/google/cadvisor) Web 使用者介面會從 Kubernetes 1.12 移除。如果您仍需要執行 cAdvisor，請[將 cAdvisor 部署為常駐程式集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/google/cadvisor/tree/master/deploy/kubernetes)。<br><br>在常駐程式集中，指定埠區段，以透過 `http://node-ip:4194` 與 cAdvisor 聯繫，如下所示。請注意 cAdvisor Pod 會失敗，直到工作者節點已更新至 1.12，因為舊版 kellet 將主機埠 4194 用於 cAdvisor。<pre class="screen"><code>ports:
           - name: http
             containerPort: 8080
             hostPort: 4194
@@ -194,7 +194,7 @@ Server Version: v1.10.11+IKS
 </tr>
 <tr>
 <td id="metrics-server">Kubernetes Metrics Server</td>
-<td>Kubernetes Metrics Server 取代 Kubernetes Heapster（自 Kubernetes 1.8 版後已淘汰）作為叢集度量值提供者。如果您對叢集中的每個工作者節點執行超過 30 個 Pod，請[調整效能的 `metrics-server` 配置](cs_performance.html#metrics)。<p>Kubernetes 儀表板不會使用 `metrics-server`。如果您想要在儀表板中顯示度量，請從下列選項中選擇。</p>
+<td>Kubernetes Metrics Server 取代 Kubernetes Heapster（自 Kubernetes 1.8 版後已淘汰）作為叢集度量值提供者。如果您對叢集裡的每個工作者節點執行超過 30 個 Pod，請[調整效能的 `metrics-server` 配置](cs_performance.html#metrics)。<p>Kubernetes 儀表板不會使用 `metrics-server`。如果您想要在儀表板中顯示度量，請從下列選項中選擇。</p>
 <ul><li>使用「叢集監視儀表板」來[設定 Grafana 以分析度量值](/docs/services/cloud-monitoring/tutorials/container_service_metrics.html#container_service_metrics)。</li>
 <li>將 [Heapster ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/heapster) 部署至您的叢集。
 <ol><li>複製 `heapster-rbac` [YAML ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/heapster-rbac.yaml)、`heapster-service` [YAML ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-service.yaml) 及 `heapster-controller` [YAML ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-controller.yaml) 檔案。</li>
@@ -255,7 +255,7 @@ Server Version: v1.10.11+IKS
 </tr>
 <tr>
 <td>加密 etcd 中的資料</td>
-<td>先前，etcd 資料是儲存在主節點的 NFS 檔案儲存空間實例上，而此實例是在靜止時加密。現在，etcd 資料是儲存在主節點的本端磁碟上，並備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。不過，主節點的本端磁碟上的 etcd 資料不會加密。如果您想要將主節點的本端 etcd 資料加密，請[在您的叢集中啟用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
+<td>先前，etcd 資料是儲存在主節點的 NFS 檔案儲存空間實例上，而此實例是在靜止時加密。現在，etcd 資料是儲存在主節點的本端磁碟上，並備份至 {{site.data.keyword.cos_full_notm}}。資料是在傳送至 {{site.data.keyword.cos_full_notm}} 期間和靜止時加密。不過，主節點的本端磁碟上的 etcd 資料不會加密。如果您想要將主節點的本端 etcd 資料加密，請[在您的叢集裡啟用 {{site.data.keyword.keymanagementservicelong_notm}}](cs_encrypt.html#keyprotect)。</td>
 </tr>
 <tr>
 <td>Kubernetes 容器磁區裝載傳播</td>
@@ -462,7 +462,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 
 6.  在您完成所有[準備動作](#ha-masters)（包括這些步驟）之後，請[將叢集主節點更新為](cs_cluster_update.html#master) HA 主節點修正套件。
 
-7.  在更新完成之後，請從網路原則中移除叢集主節點 IP 位址。例如，從前一個網路原則中移除下列這幾行，然後重新套用原則。
+7.  在更新完成之後，請從網路原則移除叢集主節點 IP 位址。例如，從前一個網路原則移除下列這幾行，然後重新套用原則。
 
     ```
     - ipBlock:
@@ -484,7 +484,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 **如何知道我的應用程式依賴 `docker` 而非 `containerd`？**<br>
 您可能依賴 Docker 作為容器運行環境的情況範例：
 *  如果您使用特許容器直接存取 Docker 引擎或 API，則請更新 Pod 以支援 `containerd` 作為運行環境。例如，您可以直接呼叫 Docker Socket，來啟動容器或執行其他 Docker 作業。Docker Socket 已從 `/var/run/docker.sock` 變更為 `/run/containerd/containerd.sock`。`containerd` Socket 中使用的通訊協定，與 Docker 中的通訊協定有些許不同。請嘗試將您的應用程式更新為 `containerd` Socket。如果您要繼續使用 Docker Socket，請使用 [Docker-inside-Docker (DinD) ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://hub.docker.com/_/docker/) 來查看。
-*  您在叢集中安裝的部分協力廠商附加程式（例如記載及監視工具）可能依賴 Docker 引擎。請洽詢提供者，以確定工具與 containerd 相容。可能的使用案例包括：
+*  您在叢集裡安裝的部分協力廠商附加程式（例如記載及監視工具）可能依賴 Docker 引擎。請洽詢提供者，以確定工具與 containerd 相容。可能的使用案例包括：
    - 您的記載工具可能使用容器 `stderr/stdout` 目錄 `/var/log/pods/<pod_uuid>/<container_name>/*.log`，來存取日誌。在 Docker 中，此目錄是 `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log` 的符號鏈結，而在 `containerd` 中，您會在沒有符號鏈結的情況下直接存取目錄。
    - 您的監視工具會直接存取 Docker Socket。Docker Socket 已從 `/var/run/docker.sock` 變更為 `/run/containerd/containerd.sock`。
 
@@ -634,7 +634,7 @@ failed size validation
 </tr>
 <tr>
 <td>`kubectl --show-all, -a` 旗標</td>
-<td>只適用於人類可讀取之 Pod 指令（不是 API 呼叫）的 `--show-all, -a` 旗標已被淘汰，且未來版本不再支援它。此旗標是用來顯示終端機狀況中的 Pod。若要追蹤已終止之應用程式及容器的相關資訊，請[在叢集中設定日誌轉遞](cs_health.html#health)。</td>
+<td>只適用於人類可讀取之 Pod 指令（不是 API 呼叫）的 `--show-all, -a` 旗標已被淘汰，且未來版本不再支援它。此旗標是用來顯示終端機狀況中的 Pod。若要追蹤已終止之應用程式及容器的相關資訊，請[在叢集裡設定日誌轉遞](cs_health.html#health)。</td>
 </tr>
 <tr>
 <td>唯讀 API 資料磁區</td>
@@ -800,7 +800,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 
 6.  在您完成所有[準備動作](#ha-masters)（包括這些步驟）之後，請[將叢集主節點更新為](cs_cluster_update.html#master) HA 主節點修正套件。
 
-7.  在更新完成之後，請從網路原則中移除叢集主節點 IP 位址。例如，從前一個網路原則中移除下列這幾行，然後重新套用原則。
+7.  在更新完成之後，請從網路原則移除叢集主節點 IP 位址。例如，從前一個網路原則移除下列這幾行，然後重新套用原則。
 
     ```
     - ipBlock:

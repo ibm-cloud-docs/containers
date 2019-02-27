@@ -39,7 +39,7 @@ lastupdated: "2018-12-06"
 
 </br>
 
-**더 이상 사용되지 않는 버전**: 더 이상 사용되지 않는 Kubernetes에서 클러스터가 실행되는 경우, 버전 지원이 중단되기 전에 지원되는 Kubernetes 버전을 검토하고 이로 업데이트할 수 있도록 30일이 제공됩니다. 폐기 기간 중에도 클러스터는 작동하지만, 보안 취약성을 수정하기 위해 지원되는 릴리스로 업데이트해야 할 수 있습니다. 더 이상 사용되지 않는 버전을 사용하는 클러스터를 새로 작성할 수는 없습니다. 
+**더 이상 사용되지 않는 버전**: 더 이상 사용되지 않는 Kubernetes에서 클러스터가 실행되는 경우, 버전 지원이 중단되기 전에 지원되는 Kubernetes 버전을 검토하고 이로 업데이트할 수 있도록 30일이 제공됩니다. 폐기 기간 중에도 클러스터는 작동하지만, 보안 취약성을 수정하기 위해 지원되는 릴리스로 업데이트해야 할 수 있습니다. 더 이상 사용되지 않는 버전을 사용하는 클러스터를 새로 작성할 수는 없습니다.
 
 **지원되지 않는 버전**: 지원되지 않는 Kubernetes 버전에서 클러스터를 실행 중인 경우에는 아래 업데이트의 잠재적인 영향을 검토한 후에 즉시 [클러스터를 업데이트](cs_cluster_update.html#update)하여 중요한 보안 업데이트 및 지원을 계속 받으십시오.
 *  **주의**: 클러스터가 지원되는 버전 이전의 3개 이상의 부 버전일 때까지 기다리면 업데이트를 강제 실행해야 하며, 이로 인해 예상치 못한 결과나 장애가 발생할 수 있습니다.
@@ -80,8 +80,8 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 -  **주 버전 및 부 버전 업데이트**: 먼저 [마스터 노드를 업데이트](cs_cluster_update.html#master)한 후 [작업자 노드를 업데이트](cs_cluster_update.html#worker_node)하십시오.
    - 기본적으로 Kubernetes 마스터를 3개 이상의 부 버전 이후로 업데이트할 수 없습니다. 예를 들어, 현재 마스터가 버전 1.9인데 1.12로 업데이트하려면 먼저 1.10으로 업데이트해야 합니다. 업데이트 강제 실행을 계속할 수 있지만, 3개 이상의 부 버전을 업데이트하면 예상치 못한 결과나 장애가 발생할 수 있습니다.
    - 클러스터의 최소 `major.minor` CLI 버전과 일치하는 `kubectl` CLI 버전을 사용하는 경우 예상치 못한 결과가 발생할 수 있습니다. Kubernetes 클러스터 및 [CLI 버전](cs_cli_install.html#kubectl)을 최신 상태로 유지해야 합니다.
--  **패치 업데이트**: 패치 간 변경사항은 [버전 변경 로그](cs_versions_changelog.html)에 기록되어 있습니다. 업데이트가 사용 가능한 경우에는 `ibmcloud ks clusters`, `cluster-get`, `workers` 또는 `worker-get` 등의 명령으로 {{site.data.keyword.Bluemix_notm}} 콘솔 또는 CLI에서 마스터 및 작업자 노드에 대한 정보를 볼 때 알림을 받습니다. 
-   - **작업자 노드 패치**: 업데이트가 사용 가능한지 매월 확인하고, `ibmcloud ks worker-update` [명령](cs_cli_reference.html#cs_worker_update) 또는 `ibmcloud ks worker-reload` [명령](cs_cli_reference.html#cs_worker_reload)을 사용하여 이러한 보안 및 운영 체제 패치를 적용하십시오. 업데이트 또는 다시 로드 중 작업자 노드 머신이 다시 이미징되며, [작업자 노드 외부에 저장](cs_storage_planning.html#persistent_storage_overview)되지 않은 경우 데이터가 삭제됩니다. 
+-  **패치 업데이트**: 패치 간 변경사항은 [버전 변경 로그](cs_versions_changelog.html)에 기록되어 있습니다. 업데이트가 사용 가능한 경우에는 `ibmcloud ks clusters`, `cluster-get`, `workers` 또는 `worker-get` 등의 명령으로 {{site.data.keyword.Bluemix_notm}} 콘솔 또는 CLI에서 마스터 및 작업자 노드에 대한 정보를 볼 때 알림을 받습니다.
+   - **작업자 노드 패치**: 업데이트가 사용 가능한지 매월 확인하고, `ibmcloud ks worker-update` [명령](cs_cli_reference.html#cs_worker_update) 또는 `ibmcloud ks worker-reload` [명령](cs_cli_reference.html#cs_worker_reload)을 사용하여 이러한 보안 및 운영 체제 패치를 적용하십시오. 업데이트 또는 다시 로드 중 작업자 노드 머신이 다시 이미징되며, [작업자 노드 외부에 저장](cs_storage_planning.html#persistent_storage_overview)되지 않은 경우 데이터가 삭제됩니다.
    - **마스터 패치**: 마스터 패치는 며칠에 걸쳐 자동으로 적용되므로, 마스터에 적용되기 전에는 마스터 패치 버전이 사용 가능으로 표시되지 않을 수 있습니다. 업데이트 자동화는 비정상 상태이거나 현재 오퍼레이션이 진행 중인 클러스터 또한 건너뜁니다. 마스터가 한 부 버전에서 다른 부 버전으로 업데이트되는 경우에만 필요한 패치와 같은 특정 마스터 수정팩에 대해서는 IBM에서 자동 업데이트를 사용 안함으로 설정할 수 있습니다(변경 로그에 기록되어 있음). 이러한 경우에는 업데이트 자동화가 적용되기를 기다릴 필요 없이 직접 `ibmcloud ks cluster-update` [명령](cs_cli_reference.html#cs_cluster_update)을 사용할 수 있습니다.
 
 </br>
@@ -111,7 +111,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 ### 마스터 이전 업데이트
 {: #112_before}
 
-다음 표는 Kubernetes 마스터를 업데이트하기 전에 수행해야 하는 조치를 보여줍니다.
+다음 표는 Kubernetes 마스터를 업데이트하기 전에 수행해야 하는 조치를 보여줍니다. 
 {: shortdesc}
 
 <table summary="버전 1.12에 대한 Kubernetes 업데이트">
@@ -125,7 +125,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 <tbody>
 <tr>
 <td>Kubernetes 메트릭 서버</td>
-<td>클러스터에 Kubernetes `metric-server`가 배치되어 있는 경우 클러스터를 Kubernetes 1.12로 업데이트하기 전에 `metric-server`를 제거해야 합니다. 이를 제거하면 업데이트 중 배치된 `metric-server`와의 충돌을 방지할 수 있습니다. </td>
+<td>클러스터에 Kubernetes `metric-server`가 배치되어 있는 경우 클러스터를 Kubernetes 1.12로 업데이트하기 전에 `metric-server`를 제거해야 합니다. 이를 제거하면 업데이트 중 배치된 `metric-server`와의 충돌을 방지할 수 있습니다.</td>
 </tr>
 <tr>
 <td>`kube-system` `default` 서비스 계정에 대한 역할 바인딩</td>
@@ -137,7 +137,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 ### 마스터 이후 업데이트
 {: #112_after}
 
-다음 표는 Kubernetes 마스터를 업데이트한 후에 수행해야 하는 조치를 보여줍니다.
+다음 표는 Kubernetes 마스터를 업데이트한 후에 수행해야 하는 조치를 보여줍니다. 
 {: shortdesc}
 
 <table summary="버전 1.12에 대한 Kubernetes 업데이트">
@@ -151,12 +151,13 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 <tbody>
 <tr>
 <td>`apps/v1` Kubernetes API</td>
-<td>`apps/v1` Kubernetes API가 `extensions`, `apps/v1beta1` 및 `apps/v1alpha` API를 대체합니다. Kubernetes 프로젝트는 이전 API에 대한 지원을 `apiserver` 및 `kubectl` 클라이언트에서 단계적으로 제거하고 있습니다. <br><br>`apps/v1`을 사용하도록 모든 YAML `apiVersion` 필드를 업데이트해야 합니다. 또한 다음과 같은 `apps/v1` 관련 변경사항을 보려면 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)를 검토하십시오. <ul><li>배치를 작성한 후에는 `.spec.selector` 필드를 변경할 수 없습니다. </li>
-<li>`.spec.rollbackTo` 필드는 더 이상 사용되지 않습니다. `kubectl rollout undo` 명령을 대신 사용하십시오. </li></ul></td>
+<td>`apps/v1` Kubernetes API가 `extensions`, `apps/v1beta1` 및 `apps/v1alpha` API를 대체합니다. Kubernetes 프로젝트는 이전 API에 대한 지원을 `apiserver` 및 `kubectl` 클라이언트에서 단계적으로 제거하고 있습니다.<br><br>`apps/v1`을 사용하도록 모든 YAML `apiVersion` 필드를 업데이트해야 합니다. 또한 다음과 같은 `apps/v1` 관련 변경사항을 보려면 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)를 검토하십시오.
+<ul><li>배치를 작성한 후에는 `.spec.selector` 필드를 변경할 수 없습니다.</li>
+<li>`.spec.rollbackTo` 필드는 더 이상 사용되지 않습니다. `kubectl rollout undo` 명령을 대신 사용하십시오.</li></ul></td>
 </tr>
 <tr>
 <td>클러스터 DNS 제공자로 사용 가능한 CoreDNS</td>
-<td>Kubernetes 프로젝트는 현재 Kubernetes DNS(KubeDNS) 대신 CoreDNS를 지원하도록 전환되는 중입니다. 버전 1.12에서는 기본 클러스터 DNS가 KubeDNS로 남아 있지만, [CoreDNS를 사용하도록 선택](cs_cluster_update.html#dns) 할 수 있습니다. </td>
+<td>Kubernetes 프로젝트는 현재 Kubernetes DNS(KubeDNS) 대신 CoreDNS를 지원하도록 전환되는 중입니다. 버전 1.12에서는 기본 클러스터 DNS가 KubeDNS로 남아 있지만, [CoreDNS를 사용하도록 선택](cs_cluster_update.html#dns) 할 수 있습니다.</td>
 </tr>
 <tr>
 <td>`kubectl apply --force`</td>
@@ -164,7 +165,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 </tr>
 <tr>
 <td>`kubectl logs --interactive`</td>
-<td>`kubectl logs`에 대해 `--interactive` 플래그가 더 이상 지원되지 않습니다. 이 플래그를 사용하는 자동화가 있을 경우 업데이트하십시오. </td>
+<td>`kubectl logs`에 대해 `--interactive` 플래그가 더 이상 지원되지 않습니다. 이 플래그를 사용하는 자동화가 있을 경우 업데이트하십시오.</td>
 </tr>
 <tr>
 <td>`kubectl patch`</td>
@@ -172,7 +173,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 </tr>
 <tr>
 <td>`kubectl version -c`</td>
-<td>`-c` 약식 플래그가 더 이상 지원되지 않습니다. 전체 `--client` 플래그를 대신 사용하십시오. 이 플래그를 사용하는 자동화가 있을 경우 업데이트하십시오. </td>
+<td>`-c` 약식 플래그가 더 이상 지원되지 않습니다. 전체 `--client` 플래그를 대신 사용하십시오. 이 플래그를 사용하는 자동화가 있을 경우 업데이트하십시오.</td>
 </tr>
 <tr>
 <td>`kubectl wait`</td>
@@ -180,7 +181,7 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 </tr>
 <tr>
 <td>kubelet cAdvisor 포트</td>
-<td>`--cadvisor-port`를 사용하여 Kubelet에서 사용하는 [Container Advisor(cAdvisor) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/google/cadvisor) 웹 UI가 Kubernetes 1.12에서 제거되었습니다. 그래도 cAdvisor를 사용해야 하는 경우 [cAdvisor를 디먼 세트로 배치![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/google/cadvisor/tree/master/deploy/kubernetes)하십시오. <br><br>디먼 세트에서 cAdvisor가 `http://node-ip:4194`를 통해 연결될 수 있도록 다음과 같이 ports 섹션을 지정하십시오. 이전 버전의 kubelet에서는 cAdvisor에 포트 4194를 사용하기 때문에 작업자 노드가 1.12로 업데이트될 때까지 cAdvisor 팟(Pod)이 실패합니다.
+<td>`--cadvisor-port`를 사용하여 Kubelet에서 사용하는 [Container Advisor(cAdvisor) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/google/cadvisor) 웹 UI가 Kubernetes 1.12에서 제거되었습니다. 그래도 cAdvisor를 사용해야 하는 경우 [cAdvisor를 디먼 세트로 배치![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/google/cadvisor/tree/master/deploy/kubernetes)하십시오.<br><br>디먼 세트에서 cAdvisor가 `http://node-ip:4194`를 통해 연결될 수 있도록 다음과 같이 ports 섹션을 지정하십시오. 이전 버전의 kubelet에서는 cAdvisor에 포트 4194를 사용하기 때문에 작업자 노드가 1.12로 업데이트될 때까지 cAdvisor 팟(Pod)이 실패합니다.
 <pre class="screen"><code>ports:
           - name: http
             containerPort: 8080
@@ -189,27 +190,27 @@ Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버�
 </tr>
 <tr>
 <td>Kubernetes 대시보드</td>
-<td>`kubectl proxy`를 통해 대시보드에 액세스할 경우 로그인 페이지의 **건너뛰기** 단추가 제거됩니다. 대신 **Token**을 사용하여 로그인하십시오. </td>
+<td>`kubectl proxy`를 통해 대시보드에 액세스할 경우 로그인 페이지의 **건너뛰기** 단추가 제거됩니다. 대신 **Token**을 사용하여 로그인하십시오.</td>
 </tr>
 <tr>
 <td id="metrics-server">Kubernetes 메트릭 서버</td>
 <td>Kubernetes 메트릭 서버는 Kubernetes Heapster(Kubernetes 버전 1.8부터 더 이상 사용되지 않음)를 클러스터 메트릭 제공자로 대체합니다. 클러스터에서 작업자 노드당 30개 이상의 팟(Pod)을 실행할 경우 [성능을 위해 `metrics-server` 구성을 조정하십시오](cs_performance.html#metrics).
-<p>Kubernetes 대시보드는 `metrics-server`에서 작동하지 않습니다. 대시보드에 메트릭을 표시하려면 다음 옵션 중에서 선택하십시오. </p>
-<ul><li>클러스터 모니터링 대시보드를 사용하여 [메트릭을 분석하도록 Grafana를 설정](/docs/services/cloud-monitoring/tutorials/container_service_metrics.html#container_service_metrics)합니다. </li>
+<p>Kubernetes 대시보드는 `metrics-server`에서 작동하지 않습니다. 대시보드에 메트릭을 표시하려면 다음 옵션 중에서 선택하십시오.</p>
+<ul><li>클러스터 모니터링 대시보드를 사용하여 [메트릭을 분석하도록 Grafana를 설정](/docs/services/cloud-monitoring/tutorials/container_service_metrics.html#container_service_metrics)합니다.</li>
 <li>클러스터에 [Heapster ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/heapster)를 배치합니다.
-<ol><li>`heapster-rbac` [YAML ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/heapster-rbac.yaml), `heapster-service` [YAML ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-service.yaml) 및 `heapster-controller` [YAML ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-controller.yaml) 파일을 복사하십시오. </li>
+<ol><li>`heapster-rbac` [YAML ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/heapster-rbac.yaml), `heapster-service` [YAML ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-service.yaml) 및 `heapster-controller` [YAML ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-controller.yaml) 파일을 복사하십시오.</li>
 <li>다음 문자열을 대체하여 `heapster-controller` YAML을 편집하십시오.
-<ul><li>`{{ nanny_memory }}`를 `90Mi`로 대체하십시오. </li>
-<li>`{{ base_metrics_cpu }}`를 `80m`으로 대체하십시오. </li>
-<li>`{{ metrics_cpu_per_node }}`를 `0.5m`으로 대체하십시오. </li>
-<li>`{{ base_metrics_memory }}`를 `140Mi`로 대체하십시오. </li>
-<li>`{{ metrics_memory_per_node }}`를 `4Mi`로 대체하십시오. </li>
-<li>`{{ heapster_min_cluster_size }}`를 `16`으로 대체하십시오. </li></ul></li>
-<li>`kubectl apply -f` 명령을 실행하여 `heapster-rbac`, `heapster-service` 및 `heapster-controller` YAML 파일을 클러스터에 적용하십시오. </li></ol></li></ul></td>
+<ul><li>`{{ nanny_memory }}`를 `90Mi`로 대체하십시오.</li>
+<li>`{{ base_metrics_cpu }}`를 `80m`으로 대체하십시오.</li>
+<li>`{{ metrics_cpu_per_node }}`를 `0.5m`으로 대체하십시오.</li>
+<li>`{{ base_metrics_memory }}`를 `140Mi`로 대체하십시오.</li>
+<li>`{{ metrics_memory_per_node }}`를 `4Mi`로 대체하십시오.</li>
+<li>`{{ heapster_min_cluster_size }}`를 `16`으로 대체하십시오.</li></ul></li>
+<li>`kubectl apply -f` 명령을 실행하여 `heapster-rbac`, `heapster-service` 및 `heapster-controller` YAML 파일을 클러스터에 적용하십시오.</li></ol></li></ul></td>
 </tr>
 <tr>
 <td>`rbac.authorization.k8s.io/v1` Kubernetes API</td>
-<td>`rbac.authorization.k8s.io/v1` Kubernetes API(Kubernetes 1.8부터 지원됨)는 `rbac.authorization.k8s.io/v1alpha1` 및 `rbac.authorization.k8s.io/v1beta1` API로 대체됩니다. 지원되지 않는 `v1alpha` API에서는 더 이상 role 또는 rolebinding과 같은 RBAC 오브젝트를 작성할 수 있습니다. 기존 RBAC 오브젝트는 `v1` API로 변환됩니다. </td>
+<td>`rbac.authorization.k8s.io/v1` Kubernetes API(Kubernetes 1.8부터 지원됨)는 `rbac.authorization.k8s.io/v1alpha1` 및 `rbac.authorization.k8s.io/v1beta1` API로 대체됩니다. 지원되지 않는 `v1alpha` API에서는 더 이상 role 또는 rolebinding과 같은 RBAC 오브젝트를 작성할 수 있습니다. 기존 RBAC 오브젝트는 `v1` API로 변환됩니다.</td>
 </tr>
 </tbody>
 </table>
@@ -228,7 +229,7 @@ Kubernetes 버전 1.9 또는 이전 버전에서 버전 1.11로 클러스터를 
 ### 마스터 이전 업데이트
 {: #111_before}
 
-다음 표는 Kubernetes 마스터를 업데이트하기 전에 수행해야 하는 조치를 보여줍니다.
+다음 표는 Kubernetes 마스터를 업데이트하기 전에 수행해야 하는 조치를 보여줍니다. 
 {: shortdesc}
 
 <table summary="버전 1.11에 대한 Kubernetes 업데이트">
@@ -242,12 +243,12 @@ Kubernetes 버전 1.9 또는 이전 버전에서 버전 1.11로 클러스터를 
 <tbody>
 <tr>
 <td>클러스터 마스터 고가용성(HA) 구성</td>
-<td>고가용성(HA)을 높이도록 클러스터 마스터 구성이 업데이트되었습니다. 클러스터에는 이제 각 마스터가 별도의 실제 호스트에 배치되도록 설정된 Kubernetes 마스터 복제본이 있습니다. 또한 클러스터가 다중 구역 가능 구역에 있을 경우 마스터가 전체 구역에 분산됩니다. <br><br>취해야 할 조치는 [고가용성 클러스터 마스터로 업데이트](#ha-masters)를 참조하십시오. 이 준비 조치는 다음과 같은 경우에 적용됩니다. <ul>
-<li>방화벽 또는 사용자 정의 Calico 네트워크 정책이 있는 경우 </li>
-<li>작업자 노드에서 호스트 포트 `2040` 또는 `2041`을 사용 중인 경우 </li>
-<li>마스터에 대한 클러스터 내부 액세스를 위해 클러스터 마스터 IP 주소를 사용한 경우 </li>
-<li>Calico 정책을 작성하기 위해 Calico API 또는 CLI(`calicoctl`)를 호출하는 자동화가 있는 경우 </li>
-<li>마스터에 대한 팟(Pod) 유출 액세스를 제어하기 위해 Kubernetes 또는 Calico 네트워크 정책을 사용하는 경우 </li></ul></td>
+<td>고가용성(HA)을 높이도록 클러스터 마스터 구성이 업데이트되었습니다. 클러스터에는 이제 각 마스터가 별도의 실제 호스트에 배치되도록 설정된 Kubernetes 마스터 복제본이 있습니다. 또한 클러스터가 다중 구역 가능 구역에 있을 경우 마스터가 전체 구역에 분산됩니다.<br><br>취해야 할 조치는 [고가용성 클러스터 마스터로 업데이트](#ha-masters)를 참조하십시오. 이 준비 조치는 다음과 같은 경우에 적용됩니다.<ul>
+<li>방화벽 또는 사용자 정의 Calico 네트워크 정책이 있는 경우</li>
+<li>작업자 노드에서 호스트 포트 `2040` 또는 `2041`을 사용 중인 경우</li>
+<li>마스터에 대한 클러스터 내부 액세스를 위해 클러스터 마스터 IP 주소를 사용한 경우</li>
+<li>Calico 정책을 작성하기 위해 Calico API 또는 CLI(`calicoctl`)를 호출하는 자동화가 있는 경우</li>
+<li>마스터에 대한 팟(Pod) 유출 액세스를 제어하기 위해 Kubernetes 또는 Calico 네트워크 정책을 사용하는 경우</li></ul></td>
 </tr>
 <tr>
 <td>`containerd` 새 Kubernetes 컨테이너 런타임</td>
@@ -255,7 +256,7 @@ Kubernetes 버전 1.9 또는 이전 버전에서 버전 1.11로 클러스터를 
 </tr>
 <tr>
 <td>etcd에서 데이터 암호화</td>
-<td>이전에는 etcd 데이터가 마스터의 NFS 파일 스토리지 인스턴스에 저장되어 저장 상태로 암호화되었습니다. 이제 etcd 데이터는 마스터의 로컬 디스크에 저장되고, {{site.data.keyword.cos_full_notm}}에 백업됩니다. 데이터는 {{site.data.keyword.cos_full_notm}}로 전환하고 저장하는 동안에 암호화됩니다. 그러나 마스터의 로컬 디스크에 있는 etcd 데이터는 암호화되지 않습니다. 마스터의 로컬 etcd 데이터를 암호화하려는 경우 [클러스터에서 {{site.data.keyword.keymanagementservicelong_notm}}를 사용으로 설정하십시오](cs_encrypt.html#keyprotect). </td>
+<td>이전에는 etcd 데이터가 마스터의 NFS 파일 스토리지 인스턴스에 저장되어 저장 상태로 암호화되었습니다. 이제 etcd 데이터는 마스터의 로컬 디스크에 저장되고, {{site.data.keyword.cos_full_notm}}에 백업됩니다. 데이터는 {{site.data.keyword.cos_full_notm}}로 전환하고 저장하는 동안에 암호화됩니다. 그러나 마스터의 로컬 디스크에 있는 etcd 데이터는 암호화되지 않습니다. 마스터의 로컬 etcd 데이터를 암호화하려는 경우 [클러스터에서 {{site.data.keyword.keymanagementservicelong_notm}}를 사용으로 설정하십시오](cs_encrypt.html#keyprotect).</td>
 </tr>
 <tr>
 <td>Kubernetes 컨테이너 볼륨 마운트 전파</td>
@@ -271,7 +272,7 @@ Kubernetes 버전 1.9 또는 이전 버전에서 버전 1.11로 클러스터를 
 ### 마스터 이후 업데이트
 {: #111_after}
 
-다음 표는 Kubernetes 마스터를 업데이트한 후에 수행해야 하는 조치를 보여줍니다.
+다음 표는 Kubernetes 마스터를 업데이트한 후에 수행해야 하는 조치를 보여줍니다. 
 {: shortdesc}
 
 <table summary="버전 1.11에 대한 Kubernetes 업데이트">
@@ -320,26 +321,26 @@ Kubernetes 버전 [1.10.8_1530](#110_ha-masters), 1.11.3_1531 이상을 실행�
 클러스터를 버전 1.9 또는 1.10 또는 1.11의 이전 패치에서 이 Kubernetes 버전으로 업데이트하는 경우 이러한 준비 단계를 수행해야 합니다. 사용자에게 시간을 주기 위해 마스터의 자동 업데이트는 일시적으로 사용 안함으로 설정되었습니다. 자세한 정보 및 타임라인은 [HA 마스터 블로그 게시물](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/)을 확인하십시오.
 {: tip}
 
-HA 마스터 구성을 최대한 활용하려면 변경이 필요한 다음 상황을 검토하십시오. 
-* 방화벽 또는 사용자 정의 Calico 네트워크 정책이 있는 경우 
-* 작업자 노드에서 호스트 포트 `2040` 또는 `2041`을 사용 중인 경우 
-* 마스터에 대한 클러스터 내부 액세스를 위해 클러스터 마스터 IP 주소를 사용한 경우 
-* Calico 정책을 작성하기 위해 Calico API 또는 CLI(`calicoctl`)를 호출하는 자동화가 있는 경우 
-* 마스터에 대한 팟(Pod) 유출 액세스를 제어하기 위해 Kubernetes 또는 Calico 네트워크 정책을 사용하는 경우 
+HA 마스터 구성을 최대한 활용하려면 변경이 필요한 다음 상황을 검토하십시오.
+* 방화벽 또는 사용자 정의 Calico 네트워크 정책이 있는 경우
+* 작업자 노드에서 호스트 포트 `2040` 또는 `2041`을 사용 중인 경우
+* 마스터에 대한 클러스터 내부 액세스를 위해 클러스터 마스터 IP 주소를 사용한 경우
+* Calico 정책을 작성하기 위해 Calico API 또는 CLI(`calicoctl`)를 호출하는 자동화가 있는 경우
+* 마스터에 대한 팟(Pod) 유출 액세스를 제어하기 위해 Kubernetes 또는 Calico 네트워크 정책을 사용하는 경우
 
 <br>
 **HA 마스터에 대해 방화벽 또는 사용자 정의 Calico 네트워크 정책 업데이트**:</br>
 {: #ha-firewall}
-방화벽 또는 사용자 정의 Calico 호스트 네트워크 정책을 사용하여 작업자 노드에서의 유출을 제어하는 경우 클러스터가 있는 영역 내의 모든 구역에 대해 포트 및 IP 주소로의 발신 트래픽을 허용하십시오. [클러스터가 인프라 리소스 및 기타 서비스에 액세스하도록 허용](cs_firewall.html#firewall_outbound)을 참조하십시오. 
+방화벽 또는 사용자 정의 Calico 호스트 네트워크 정책을 사용하여 작업자 노드에서의 유출을 제어하는 경우 클러스터가 있는 영역 내의 모든 구역에 대해 포트 및 IP 주소로의 발신 트래픽을 허용하십시오. [클러스터가 인프라 리소스 및 기타 서비스에 액세스하도록 허용](cs_firewall.html#firewall_outbound)을 참조하십시오.
 
 <br>
 **작업자 노드에서 호스트 포트 `2040` 및 `2041` 예약**:</br>
 {: #ha-ports}
-HA 구성에서 클러스터 마스터에 대한 액세스를 허용하려면 호스트 포트 `2040` 및 `2041`을 모든 작업자 노드에서 사용 가능한 상태로 유지해야 합니다. 
-* `hostPort`가 `2040` 또는 `2041`로 설정된 팟(Pod)은 다른 포트를 사용하도록 업데이트하십시오. 
-* `hostNetwork`가 `true`이고 `2040` 또는 `2041` 포트에서 청취하는 팟(Pod)은 다른 포트를 사용하도록 업데이트하십시오. 
+HA 구성에서 클러스터 마스터에 대한 액세스를 허용하려면 호스트 포트 `2040` 및 `2041`을 모든 작업자 노드에서 사용 가능한 상태로 유지해야 합니다.
+* `hostPort`가 `2040` 또는 `2041`로 설정된 팟(Pod)은 다른 포트를 사용하도록 업데이트하십시오.
+* `hostNetwork`가 `true`이고 `2040` 또는 `2041` 포트에서 청취하는 팟(Pod)은 다른 포트를 사용하도록 업데이트하십시오.
 
-팟(Pod)이 현재 `2040` 또는 `2041` 포트를 사용하고 있는지 확인하려면 사용 중인 클러스터를 대상으로 설정하고 다음 명령을 실행하십시오. 
+팟(Pod)이 현재 `2040` 또는 `2041` 포트를 사용하고 있는지 확인하려면 사용 중인 클러스터를 대상으로 설정하고 다음 명령을 실행하십시오.
 
 ```
 kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
@@ -349,26 +350,26 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 <br>
 **마스터에 대한 클러스터 내부 액세스를 위해 `kubernetes` 서비스 클러스터 IP 또는 도메인 사용**:</br>
 {: #ha-incluster}
-클러스터 내의 HA 구성에서 클러스터 마스터에 액세스하려면 다음 중 하나를 사용하십시오. 
-* `kubernetes` 서비스 클러스터 IP 주소 - 기본값은 `https://172.21.0.1`입니다. 
-* `kubernetes` 서비스 도메인 이름 - 기본값은 `https://kubernetes.default.svc.cluster.local`입니다. 
+클러스터 내의 HA 구성에서 클러스터 마스터에 액세스하려면 다음 중 하나를 사용하십시오.
+* `kubernetes` 서비스 클러스터 IP 주소 - 기본값은 `https://172.21.0.1`입니다.
+* `kubernetes` 서비스 도메인 이름 - 기본값은 `https://kubernetes.default.svc.cluster.local`입니다.
 
-이전에 클러스터 마스터 IP 주소를 사용한 경우 이 방식이 계속 작동합니다. 그러나 가용성 향상을 위해 `kubernetes` 서비스 클러스터 IP 주소 또는 도메인 이름을 사용하도록 업데이트하십시오. 
+이전에 클러스터 마스터 IP 주소를 사용한 경우 이 방식이 계속 작동합니다. 그러나 가용성 향상을 위해 `kubernetes` 서비스 클러스터 IP 주소 또는 도메인 이름을 사용하도록 업데이트하십시오.
 
 <br>
 **HA 구성의 마스터에 대한 클러스터 외부 액세스를 위해 Calico 구성**:</br>
 {: #ha-outofcluster}
-`kube-system` 네임스페이스의 `calico-config` configmap에 저장된 데이터는 HA 마스터 구성을 지원하도록 변경되었습니다. 특히, `etcd_endpoints` 값은 이제 클러스터 내부 액세스만 지원합니다. 이 값을 사용하여 클러스터 외부에서 액세스하도록 Calico CLI를 구성하는 것은 더 이상 작동하지 않습니다. 
+`kube-system` 네임스페이스의 `calico-config` configmap에 저장된 데이터는 HA 마스터 구성을 지원하도록 변경되었습니다. 특히, `etcd_endpoints` 값은 이제 클러스터 내부 액세스만 지원합니다. 이 값을 사용하여 클러스터 외부에서 액세스하도록 Calico CLI를 구성하는 것은 더 이상 작동하지 않습니다.
 
-대신 `kube-system` 네임스페이스의 `cluster-info` configmap에 저장된 데이터를 사용하십시오. 특히, 클러스터 외부에서 HA 구성의 마스터에 액세스하려면 `etcd_host` 및 `etcd_port` 값을 사용하여 [Calico CLI](cs_network_policy.html#cli_install)에 대한 엔드포인트를 구성하십시오. 
+대신 `kube-system` 네임스페이스의 `cluster-info` configmap에 저장된 데이터를 사용하십시오. 특히, 클러스터 외부에서 HA 구성의 마스터에 액세스하려면 `etcd_host` 및 `etcd_port` 값을 사용하여 [Calico CLI](cs_network_policy.html#cli_install)에 대한 엔드포인트를 구성하십시오.
 
 <br>
 **Kubernetes 또는 Calico 네트워크 정책 업데이트**:</br>
 {: #ha-networkpolicies}
-[Kubernetes 또는 Calico 네트워크 정책](cs_network_policy.html#network_policies)을 사용하여 클러스터 마스터에 대한 유출 액세스를 제어하며 현재 다음을 사용 중인 경우 추가 조치를 수행해야 합니다. 
-*  Kubernetes 서비스 클러스터 IP - `kubectl get service kubernetes -o yaml | grep clusterIP`를 실행하여 얻을 수 있습니다. 
-*  kubernetes 서비스 도메인 이름 - 기본값은 `https://kubernetes.default.svc.cluster.local`입니다. 
-*  클러스터 마스터 IP - `kubectl cluster-info | grep Kubernetes`를 실행하여 얻을 수 있습니다. 
+[Kubernetes 또는 Calico 네트워크 정책](cs_network_policy.html#network_policies)을 사용하여 클러스터 마스터에 대한 유출 액세스를 제어하며 현재 다음을 사용 중인 경우 추가 조치를 수행해야 합니다.
+*  Kubernetes 서비스 클러스터 IP - `kubectl get service kubernetes -o yaml | grep clusterIP`를 실행하여 얻을 수 있습니다.
+*  kubernetes 서비스 도메인 이름 - 기본값은 `https://kubernetes.default.svc.cluster.local`입니다.
+*  클러스터 마스터 IP - `kubectl cluster-info | grep Kubernetes`를 실행하여 얻을 수 있습니다.
 
 다음 단계는 Kubernetes 네트워크 정책을 업데이트하는 방법에 대해 설명합니다. Calico 네트워크 정책을 업데이트하려면 정책 구문을 약간 변경하고 `calicoctl`를 통해 이 단계를 반복하여 정책에서 영향을 검색하십시오.
 {: note}
@@ -416,7 +417,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     ```
     {: screen}
 
-4.  클러스터 내부 마스터 프록시 IP 주소 `172.20.0.1`로의 유출을 허용하도록 Kubernetes 네트워크 정책을 수정하십시오. 지금은 클러스터 마스터 IP 주소를 유지하십시오. 예를 들어 위의 네트워크 정책 예는 다음과 같이 변경됩니다. 
+4.  클러스터 내부 마스터 프록시 IP 주소 `172.20.0.1`로의 유출을 허용하도록 Kubernetes 네트워크 정책을 수정하십시오. 지금은 클러스터 마스터 IP 주소를 유지하십시오. 예를 들어 위의 네트워크 정책 예는 다음과 같이 변경됩니다.
 
     이전에 단일 Kubernetes 마스터에 대해 단일 IP 주소와 포트만 열도록 유출 정책을 설정한 경우 이제 클러스터 내부 마스터 프록시 IP 주소 범위 172.20.0.1/32와 포트 2040을 사용하십시오.
     {: tip}
@@ -456,9 +457,9 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     ```
     {: pre}
 
-6.  이 단계를 포함하여 [준비 조치](#ha-masters)를 모두 완료한 후에는 HA 마스터 수정팩에 대해 [클러스터 마스터를 업데이트](cs_cluster_update.html#master)하십시오. 
+6.  이 단계를 포함하여 [준비 조치](#ha-masters)를 모두 완료한 후에는 HA 마스터 수정팩에 대해 [클러스터 마스터를 업데이트](cs_cluster_update.html#master)하십시오.
 
-7.  업데이트가 완료되면 클러스터 마스터 IP 주소를 네트워크 정책에서 제거하십시오. 예를 들어 위의 네트워크 정책에서 다음 행을 제거한 후 정책을 다시 적용하십시오. 
+7.  업데이트가 완료되면 클러스터 마스터 IP 주소를 네트워크 정책에서 제거하십시오. 예를 들어 위의 네트워크 정책에서 다음 행을 제거한 후 정책을 다시 적용하십시오.
 
     ```
     - ipBlock:
@@ -479,10 +480,10 @@ Kubernetes 버전 1.11 이상을 실행하는 클러스터의 경우, `container
 
 **내 앱이 `containerd`가 아닌 `docker`에 의존하는지 어떻게 알 수 있습니까? **<br>
 컨테이너 런타임으로서 Docker에 의존할 수 있는 경우의 예:
-*  권한 부여된 컨테이너를 사용하여 직접 Docker 엔진 또는 API에 액세스하는 경우에는 런타임으로서 `containerd`를 지원하도록 팟(Pod)을 업데이트하십시오. 예를 들어 Docker 소켓을 직접 호출하여 컨테이너를 실행하거나 다른 Docker 조작을 수행하십시오. Docker 소켓은 `/var/run/docker.sock`에서 `/run/containerd/containerd.sock`으로 변경되었습니다. `containerd` 소켓에 사용되는 프로토콜은 Docker에 사용된 프로토콜과 약간 다릅니다. 앱을 `containerd` 소켓으로 업데이트하도록 시도하십시오. Docker 소켓을 계속 사용하려는 경우 [Docker-inside-Docker(DinD) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://hub.docker.com/_/docker/) 사용을 검토하십시오. 
-*  클러스터에 설치되는 일부 서드파티 추가 기능(예: 로깅 및 모니터링 도구)은 Docker 엔진에 의존할 수 있습니다. 제공업체에 문의하여 해당 도구가 containerd와 호환 가능한지 확인하십시오. 가능한 유스 케이스는 다음과 같습니다. 
-   - 로깅 도구는 컨테이너 `stderr/stdout` 디렉토리 `/var/log/pods/<pod_uuid>/<container_name>/*.log`를 사용하여 로그에 액세스합니다. Docker에서 이 디렉토리는 `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log`에 대한 symlink입니다. 반면 `containerd`에서는 symlink 없이 직접 디렉토리에 액세스할 수 있습니다. 
-   - 모니터링 도구는 Docker 소켓에 직접 액세스합니다. Docker 소켓은 `/var/run/docker.sock`에서 `/run/containerd/containerd.sock`으로 변경되었습니다. 
+*  권한 부여된 컨테이너를 사용하여 직접 Docker 엔진 또는 API에 액세스하는 경우에는 런타임으로서 `containerd`를 지원하도록 팟(Pod)을 업데이트하십시오. 예를 들어 Docker 소켓을 직접 호출하여 컨테이너를 실행하거나 다른 Docker 조작을 수행하십시오. Docker 소켓은 `/var/run/docker.sock`에서 `/run/containerd/containerd.sock`으로 변경되었습니다. `containerd` 소켓에 사용되는 프로토콜은 Docker에 사용된 프로토콜과 약간 다릅니다. 앱을 `containerd` 소켓으로 업데이트하도록 시도하십시오. Docker 소켓을 계속 사용하려는 경우 [Docker-inside-Docker(DinD) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://hub.docker.com/_/docker/) 사용을 검토하십시오.
+*  클러스터에 설치되는 일부 서드파티 추가 기능(예: 로깅 및 모니터링 도구)은 Docker 엔진에 의존할 수 있습니다. 제공업체에 문의하여 해당 도구가 containerd와 호환 가능한지 확인하십시오. 가능한 유스 케이스는 다음과 같습니다.
+   - 로깅 도구는 컨테이너 `stderr/stdout` 디렉토리 `/var/log/pods/<pod_uuid>/<container_name>/*.log`를 사용하여 로그에 액세스합니다. Docker에서 이 디렉토리는 `/var/data/cripersistentstorage/containers/<container_uuid>/<container_uuid>-json.log`에 대한 symlink입니다. 반면 `containerd`에서는 symlink 없이 직접 디렉토리에 액세스할 수 있습니다.
+   - 모니터링 도구는 Docker 소켓에 직접 액세스합니다. Docker 소켓은 `/var/run/docker.sock`에서 `/run/containerd/containerd.sock`으로 변경되었습니다.
 
 <br>
 
@@ -523,13 +524,13 @@ Kubernetes 버전 1.10 또는 이전 버전에서 버전 1.11로 클러스터를
     ```
     {: pre}
 
-2.  팟(Pod)이 **실행 중** 상태가 아니면 해당 팟(Pod)을 삭제하고 계속하기 전에 **실행 중** 상태가 될 때까지 기다리십시오. 팟(Pod)이 **실행 중** 상태로 돌아가지 않을 경우 다음을 수행하십시오. 
+2.  팟(Pod)이 **실행 중** 상태가 아니면 해당 팟(Pod)을 삭제하고 계속하기 전에 **실행 중** 상태가 될 때까지 기다리십시오. 팟(Pod)이 **실행 중** 상태로 돌아가지 않을 경우 다음을 수행하십시오.
     1.  작업자 노드의 **State** 및 **Status**를 확인하십시오.
         ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
-    2.  작업자 노드가 **정상** 상태가 아닌 경우 [작업자 노드 디버깅](cs_troubleshoot.html#debug_worker_nodes) 단계를 수행하십시오. 예를 들어 **위험** 또는 **알 수 없음** 상태는 주로 [작업자 노드 다시 로드](cs_cli_reference.html#cs_worker_reload)를 수행하면 해결됩니다. 
+    2.  작업자 노드가 **정상** 상태가 아닌 경우 [작업자 노드 디버깅](cs_troubleshoot.html#debug_worker_nodes) 단계를 수행하십시오. 예를 들어 **위험** 또는 **알 수 없음** 상태는 주로 [작업자 노드 다시 로드](cs_cli_reference.html#cs_worker_reload)를 수행하면 해결됩니다.
 
 3.  Calico 정책 또는 Calico 리소스를 자동 생성하는 경우 [Calico v3 구문 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/)을 사용하여 이러한 리소스를 생성하도록 자동화 도구를 업데이트하십시오.
 
@@ -556,7 +557,7 @@ Kubernetes 1.10으로 업데이트하려면 먼저 [Calico v3으로 업데이트
 ### 마스터 이전 업데이트
 {: #110_before}
 
-다음 표는 Kubernetes 마스터를 업데이트하기 전에 수행해야 하는 조치를 보여줍니다.
+다음 표는 Kubernetes 마스터를 업데이트하기 전에 수행해야 하는 조치를 보여줍니다. 
 {: shortdesc}
 
 <table summary="버전 1.10에 대한 Kubernetes 업데이트">
@@ -574,12 +575,12 @@ Kubernetes 1.10으로 업데이트하려면 먼저 [Calico v3으로 업데이트
 </tr>
 <tr>
 <td>클러스터 마스터 고가용성(HA) 구성</td>
-<td>고가용성(HA)을 높이도록 클러스터 마스터 구성이 업데이트되었습니다. 클러스터에는 이제 각 마스터가 별도의 실제 호스트에 배치되도록 설정된 Kubernetes 마스터 복제본이 있습니다. 또한 클러스터가 다중 구역 가능 구역에 있을 경우 마스터가 전체 구역에 분산됩니다. <br><br>취해야 할 조치는 [고가용성 클러스터 마스터로 업데이트](#110_ha-masters)를 참조하십시오. 이 준비 조치는 다음과 같은 경우에 적용됩니다. <ul>
-<li>방화벽 또는 사용자 정의 Calico 네트워크 정책이 있는 경우 </li>
-<li>작업자 노드에서 호스트 포트 `2040` 또는 `2041`을 사용 중인 경우 </li>
-<li>마스터에 대한 클러스터 내부 액세스를 위해 클러스터 마스터 IP 주소를 사용한 경우 </li>
-<li>Calico 정책을 작성하기 위해 Calico API 또는 CLI(`calicoctl`)를 호출하는 자동화가 있는 경우 </li>
-<li>마스터에 대한 팟(Pod) 유출 액세스를 제어하기 위해 Kubernetes 또는 Calico 네트워크 정책을 사용하는 경우 </li></ul></td>
+<td>고가용성(HA)을 높이도록 클러스터 마스터 구성이 업데이트되었습니다. 클러스터에는 이제 각 마스터가 별도의 실제 호스트에 배치되도록 설정된 Kubernetes 마스터 복제본이 있습니다. 또한 클러스터가 다중 구역 가능 구역에 있을 경우 마스터가 전체 구역에 분산됩니다.<br><br>취해야 할 조치는 [고가용성 클러스터 마스터로 업데이트](#110_ha-masters)를 참조하십시오. 이 준비 조치는 다음과 같은 경우에 적용됩니다.<ul>
+<li>방화벽 또는 사용자 정의 Calico 네트워크 정책이 있는 경우</li>
+<li>작업자 노드에서 호스트 포트 `2040` 또는 `2041`을 사용 중인 경우</li>
+<li>마스터에 대한 클러스터 내부 액세스를 위해 클러스터 마스터 IP 주소를 사용한 경우</li>
+<li>Calico 정책을 작성하기 위해 Calico API 또는 CLI(`calicoctl`)를 호출하는 자동화가 있는 경우</li>
+<li>마스터에 대한 팟(Pod) 유출 액세스를 제어하기 위해 Kubernetes 또는 Calico 네트워크 정책을 사용하는 경우</li></ul></td>
 </tr>
 <tr>
 <td>Kubernetes 대시보드 네트워크 정책</td>
@@ -603,7 +604,7 @@ Kubernetes 1.10으로 업데이트하려면 먼저 [Calico v3으로 업데이트
 ### 마스터 이후 업데이트
 {: #110_after}
 
-다음 표는 Kubernetes 마스터를 업데이트한 후에 수행해야 하는 조치를 보여줍니다.
+다음 표는 Kubernetes 마스터를 업데이트한 후에 수행해야 하는 조치를 보여줍니다. 
 {: shortdesc}
 
 <table summary="버전 1.10에 대한 Kubernetes 업데이트">
@@ -630,7 +631,7 @@ Kubernetes 1.10으로 업데이트하려면 먼저 [Calico v3으로 업데이트
 <tr>
 <td>`kubectl --show-all, -a` flag</td>
 <td>사람이 읽을 수 있는 팟(Pod) 명령에 적용되는 `--show-all, -a` 플래그가 더 이상 사용되지 않으므로 이후 버전에서 지원되지 않습니다. 이 플래그는 터미널 상태의 팟(Pod)을 표시하는 데 사용됩니다. 
-종료된 앱 및 컨테이너에 대한 정보를 추적하려면 [클러스터에서 로그 전달을 설정](cs_health.html#health)하십시오. </td>
+종료된 앱 및 컨테이너에 대한 정보를 추적하려면 [클러스터에서 로그 전달을 설정](cs_health.html#health)하십시오.</td>
 </tr>
 <tr>
 <td>읽기 전용 API 데이터 볼륨</td>
@@ -656,26 +657,26 @@ Kubernetes 버전 1.10.8_1530, [1.11.3_1531](#ha-masters) 또는 그 이후 버�
 클러스터를 버전 1.9 또는 1.10의 이전 패치에서 이 Kubernetes 버전으로 업데이트하는 경우 이러한 준비 단계를 수행해야 합니다. 사용자에게 시간을 주기 위해 마스터의 자동 업데이트는 일시적으로 사용 안함으로 설정되었습니다. 자세한 정보 및 타임라인은 [HA 마스터 블로그 게시물](https://www.ibm.com/blogs/bluemix/2018/10/increased-availability-with-ha-masters-in-the-kubernetes-service-actions-you-must-take/)을 확인하십시오.
 {: tip}
 
-HA 마스터 구성을 최대한 활용하려면 변경이 필요한 다음 상황을 검토하십시오. 
-* 방화벽 또는 사용자 정의 Calico 네트워크 정책이 있는 경우 
-* 작업자 노드에서 호스트 포트 `2040` 또는 `2041`을 사용 중인 경우 
-* 마스터에 대한 클러스터 내부 액세스를 위해 클러스터 마스터 IP 주소를 사용한 경우 
-* Calico 정책을 작성하기 위해 Calico API 또는 CLI(`calicoctl`)를 호출하는 자동화가 있는 경우 
-* 마스터에 대한 팟(Pod) 유출 액세스를 제어하기 위해 Kubernetes 또는 Calico 네트워크 정책을 사용하는 경우 
+HA 마스터 구성을 최대한 활용하려면 변경이 필요한 다음 상황을 검토하십시오.
+* 방화벽 또는 사용자 정의 Calico 네트워크 정책이 있는 경우
+* 작업자 노드에서 호스트 포트 `2040` 또는 `2041`을 사용 중인 경우
+* 마스터에 대한 클러스터 내부 액세스를 위해 클러스터 마스터 IP 주소를 사용한 경우
+* Calico 정책을 작성하기 위해 Calico API 또는 CLI(`calicoctl`)를 호출하는 자동화가 있는 경우
+* 마스터에 대한 팟(Pod) 유출 액세스를 제어하기 위해 Kubernetes 또는 Calico 네트워크 정책을 사용하는 경우
 
 <br>
 **HA 마스터에 대해 방화벽 또는 사용자 정의 Calico 네트워크 정책 업데이트**:</br>
 {: #110_ha-firewall}
-방화벽 또는 사용자 정의 Calico 호스트 네트워크 정책을 사용하여 작업자 노드에서의 유출을 제어하는 경우 클러스터가 있는 영역 내의 모든 구역에 대해 포트 및 IP 주소로의 발신 트래픽을 허용하십시오. [클러스터가 인프라 리소스 및 기타 서비스에 액세스하도록 허용](cs_firewall.html#firewall_outbound)을 참조하십시오. 
+방화벽 또는 사용자 정의 Calico 호스트 네트워크 정책을 사용하여 작업자 노드에서의 유출을 제어하는 경우 클러스터가 있는 영역 내의 모든 구역에 대해 포트 및 IP 주소로의 발신 트래픽을 허용하십시오. [클러스터가 인프라 리소스 및 기타 서비스에 액세스하도록 허용](cs_firewall.html#firewall_outbound)을 참조하십시오.
 
 <br>
 **작업자 노드에서 호스트 포트 `2040` 및 `2041` 예약**:</br>
 {: #110_ha-ports}
-HA 구성에서 클러스터 마스터에 대한 액세스를 허용하려면 호스트 포트 `2040` 및 `2041`을 모든 작업자 노드에서 사용 가능한 상태로 유지해야 합니다. 
-* `hostPort`가 `2040` 또는 `2041`로 설정된 팟(Pod)은 다른 포트를 사용하도록 업데이트하십시오. 
-* `hostNetwork`가 `true`이고 `2040` 또는 `2041` 포트에서 청취하는 팟(Pod)은 다른 포트를 사용하도록 업데이트하십시오. 
+HA 구성에서 클러스터 마스터에 대한 액세스를 허용하려면 호스트 포트 `2040` 및 `2041`을 모든 작업자 노드에서 사용 가능한 상태로 유지해야 합니다.
+* `hostPort`가 `2040` 또는 `2041`로 설정된 팟(Pod)은 다른 포트를 사용하도록 업데이트하십시오.
+* `hostNetwork`가 `true`이고 `2040` 또는 `2041` 포트에서 청취하는 팟(Pod)은 다른 포트를 사용하도록 업데이트하십시오.
 
-팟(Pod)이 현재 `2040` 또는 `2041` 포트를 사용하고 있는지 확인하려면 사용 중인 클러스터를 대상으로 설정하고 다음 명령을 실행하십시오. 
+팟(Pod)이 현재 `2040` 또는 `2041` 포트를 사용하고 있는지 확인하려면 사용 중인 클러스터를 대상으로 설정하고 다음 명령을 실행하십시오.
 
 ```
 kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
@@ -685,26 +686,26 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 <br>
 **마스터에 대한 클러스터 내부 액세스를 위해 `kubernetes` 서비스 클러스터 IP 또는 도메인 사용**:</br>
 {: #110_ha-incluster}
-클러스터 내의 HA 구성에서 클러스터 마스터에 액세스하려면 다음 중 하나를 사용하십시오. 
-* `kubernetes` 서비스 클러스터 IP 주소 - 기본값은 `https://172.21.0.1`입니다. 
-* `kubernetes` 서비스 도메인 이름 - 기본값은 `https://kubernetes.default.svc.cluster.local`입니다. 
+클러스터 내의 HA 구성에서 클러스터 마스터에 액세스하려면 다음 중 하나를 사용하십시오.
+* `kubernetes` 서비스 클러스터 IP 주소 - 기본값은 `https://172.21.0.1`입니다.
+* `kubernetes` 서비스 도메인 이름 - 기본값은 `https://kubernetes.default.svc.cluster.local`입니다.
 
-이전에 클러스터 마스터 IP 주소를 사용한 경우 이 방식이 계속 작동합니다. 그러나 가용성 향상을 위해 `kubernetes` 서비스 클러스터 IP 주소 또는 도메인 이름을 사용하도록 업데이트하십시오. 
+이전에 클러스터 마스터 IP 주소를 사용한 경우 이 방식이 계속 작동합니다. 그러나 가용성 향상을 위해 `kubernetes` 서비스 클러스터 IP 주소 또는 도메인 이름을 사용하도록 업데이트하십시오.
 
 <br>
 **HA 구성의 마스터에 대한 클러스터 외부 액세스를 위해 Calico 구성**:</br>
 {: #110_ha-outofcluster}
-`kube-system` 네임스페이스의 `calico-config` configmap에 저장된 데이터는 HA 마스터 구성을 지원하도록 변경되었습니다. 특히, `etcd_endpoints` 값은 이제 클러스터 내부 액세스만 지원합니다. 이 값을 사용하여 클러스터 외부에서 액세스하도록 Calico CLI를 구성하는 것은 더 이상 작동하지 않습니다. 
+`kube-system` 네임스페이스의 `calico-config` configmap에 저장된 데이터는 HA 마스터 구성을 지원하도록 변경되었습니다. 특히, `etcd_endpoints` 값은 이제 클러스터 내부 액세스만 지원합니다. 이 값을 사용하여 클러스터 외부에서 액세스하도록 Calico CLI를 구성하는 것은 더 이상 작동하지 않습니다.
 
-대신 `kube-system` 네임스페이스의 `cluster-info` configmap에 저장된 데이터를 사용하십시오. 특히, 클러스터 외부에서 HA 구성의 마스터에 액세스하려면 `etcd_host` 및 `etcd_port` 값을 사용하여 [Calico CLI](cs_network_policy.html#cli_install)에 대한 엔드포인트를 구성하십시오. 
+대신 `kube-system` 네임스페이스의 `cluster-info` configmap에 저장된 데이터를 사용하십시오. 특히, 클러스터 외부에서 HA 구성의 마스터에 액세스하려면 `etcd_host` 및 `etcd_port` 값을 사용하여 [Calico CLI](cs_network_policy.html#cli_install)에 대한 엔드포인트를 구성하십시오.
 
 <br>
 **Kubernetes 또는 Calico 네트워크 정책 업데이트**:</br>
 {: #110_ha-networkpolicies}
-[Kubernetes 또는 Calico 네트워크 정책](cs_network_policy.html#network_policies)을 사용하여 클러스터 마스터에 대한 유출 액세스를 제어하며 현재 다음을 사용 중인 경우 추가 조치를 수행해야 합니다. 
-*  Kubernetes 서비스 클러스터 IP - `kubectl get service kubernetes -o yaml | grep clusterIP`를 실행하여 얻을 수 있습니다. 
-*  kubernetes 서비스 도메인 이름 - 기본값은 `https://kubernetes.default.svc.cluster.local`입니다. 
-*  클러스터 마스터 IP - `kubectl cluster-info | grep Kubernetes`를 실행하여 얻을 수 있습니다. 
+[Kubernetes 또는 Calico 네트워크 정책](cs_network_policy.html#network_policies)을 사용하여 클러스터 마스터에 대한 유출 액세스를 제어하며 현재 다음을 사용 중인 경우 추가 조치를 수행해야 합니다.
+*  Kubernetes 서비스 클러스터 IP - `kubectl get service kubernetes -o yaml | grep clusterIP`를 실행하여 얻을 수 있습니다.
+*  kubernetes 서비스 도메인 이름 - 기본값은 `https://kubernetes.default.svc.cluster.local`입니다.
+*  클러스터 마스터 IP - `kubectl cluster-info | grep Kubernetes`를 실행하여 얻을 수 있습니다.
 
 다음 단계는 Kubernetes 네트워크 정책을 업데이트하는 방법에 대해 설명합니다. Calico 네트워크 정책을 업데이트하려면 정책 구문을 약간 변경하고 `calicoctl`를 통해 이 단계를 반복하여 정책에서 영향을 검색하십시오.
 {: note}
@@ -752,7 +753,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     ```
     {: screen}
 
-4.  클러스터 내부 마스터 프록시 IP 주소 `172.20.0.1`로의 유출을 허용하도록 Kubernetes 네트워크 정책을 수정하십시오. 지금은 클러스터 마스터 IP 주소를 유지하십시오. 예를 들어 위의 네트워크 정책 예는 다음과 같이 변경됩니다. 
+4.  클러스터 내부 마스터 프록시 IP 주소 `172.20.0.1`로의 유출을 허용하도록 Kubernetes 네트워크 정책을 수정하십시오. 지금은 클러스터 마스터 IP 주소를 유지하십시오. 예를 들어 위의 네트워크 정책 예는 다음과 같이 변경됩니다.
 
     이전에 단일 Kubernetes 마스터에 대해 단일 IP 주소와 포트만 열도록 유출 정책을 설정한 경우 이제 클러스터 내부 마스터 프록시 IP 주소 범위 172.20.0.1/32와 포트 2040을 사용하십시오.
     {: tip}
@@ -792,9 +793,9 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     ```
     {: pre}
 
-6.  이 단계를 포함하여 [준비 조치](#ha-masters)를 모두 완료한 후에는 HA 마스터 수정팩에 대해 [클러스터 마스터를 업데이트](cs_cluster_update.html#master)하십시오. 
+6.  이 단계를 포함하여 [준비 조치](#ha-masters)를 모두 완료한 후에는 HA 마스터 수정팩에 대해 [클러스터 마스터를 업데이트](cs_cluster_update.html#master)하십시오.
 
-7.  업데이트가 완료되면 클러스터 마스터 IP 주소를 네트워크 정책에서 제거하십시오. 예를 들어 위의 네트워크 정책에서 다음 행을 제거한 후 정책을 다시 적용하십시오. 
+7.  업데이트가 완료되면 클러스터 마스터 IP 주소를 네트워크 정책에서 제거하십시오. 예를 들어 위의 네트워크 정책에서 다음 행을 제거한 후 정책을 다시 적용하십시오.
 
     ```
     - ipBlock:
@@ -822,13 +823,13 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
     ```
     {: pre}
 
-2.  팟(Pod)이 **실행 중** 상태가 아니면 해당 팟(Pod)을 삭제하고 계속하기 전에 **실행 중** 상태가 될 때까지 기다리십시오. 팟(Pod)이 **실행 중** 상태로 돌아가지 않을 경우 다음을 수행하십시오. 
+2.  팟(Pod)이 **실행 중** 상태가 아니면 해당 팟(Pod)을 삭제하고 계속하기 전에 **실행 중** 상태가 될 때까지 기다리십시오. 팟(Pod)이 **실행 중** 상태로 돌아가지 않을 경우 다음을 수행하십시오.
     1.  작업자 노드의 **State** 및 **Status**를 확인하십시오.
         ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
-    2.  작업자 노드가 **정상** 상태가 아닌 경우 [작업자 노드 디버깅](cs_troubleshoot.html#debug_worker_nodes) 단계를 수행하십시오. 예를 들어 **위험** 또는 **알 수 없음** 상태는 주로 [작업자 노드 다시 로드](cs_cli_reference.html#cs_worker_reload)를 수행하면 해결됩니다. 
+    2.  작업자 노드가 **정상** 상태가 아닌 경우 [작업자 노드 디버깅](cs_troubleshoot.html#debug_worker_nodes) 단계를 수행하십시오. 예를 들어 **위험** 또는 **알 수 없음** 상태는 주로 [작업자 노드 다시 로드](cs_cli_reference.html#cs_worker_reload)를 수행하면 해결됩니다.
 
 3.  Calico 정책 또는 Calico 리소스를 자동 생성하는 경우 [Calico v3 구문 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/)을 사용하여 이러한 리소스를 생성하도록 자동화 도구를 업데이트하십시오.
 
@@ -842,7 +843,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 ## 아카이브
 {: #k8s_version_archive}
 
-{{site.data.keyword.containerlong_notm}}에서 지원되지 않는 Kubernetes 버전의 개요를 찾으십시오.
+{{site.data.keyword.containerlong_notm}}에서 지원되지 않는 Kubernetes 버전의 개요를 찾으십시오. 
 {: shortdesc}
 
 ### 버전 1.9(더 이상 사용되지 않음, 2018년 12월 27일 지원되지 않음)
@@ -858,7 +859,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 ### 마스터 이전 업데이트
 {: #19_before}
 
-다음 표는 Kubernetes 마스터를 업데이트하기 전에 수행해야 하는 조치를 보여줍니다.
+다음 표는 Kubernetes 마스터를 업데이트하기 전에 수행해야 하는 조치를 보여줍니다. 
 {: shortdesc}
 
 <table summary="버전 1.9에 대한 Kubernetes 업데이트">
@@ -880,7 +881,7 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 ### 마스터 이후 업데이트
 {: #19_after}
 
-다음 표는 Kubernetes 마스터를 업데이트한 후에 수행해야 하는 조치를 보여줍니다.
+다음 표는 Kubernetes 마스터를 업데이트한 후에 수행해야 하는 조치를 보여줍니다. 
 {: shortdesc}
 
 <table summary="버전 1.9에 대한 Kubernetes 업데이트">
@@ -950,4 +951,4 @@ kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
 2018년 4월 4일부터, [Kubernetes 버전 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md)를 실행하는 {{site.data.keyword.containerlong_notm}} 클러스터는 지원되지 않습니다. 버전 1.5 클러스터는 보안 업데이트 또는 지원을 받을 수 없습니다.
 {: shortdesc}
 
-{{site.data.keyword.containerlong_notm}}에서 앱을 계속 실행하려면 [새 클러스터를 작성](cs_clusters.html#clusters)하고 새 클러스터에 [앱을 배치](cs_app.html#app)하십시오. 
+{{site.data.keyword.containerlong_notm}}에서 앱을 계속 실행하려면 [새 클러스터를 작성](cs_clusters.html#clusters)하고 새 클러스터에 [앱을 배치](cs_app.html#app)하십시오.

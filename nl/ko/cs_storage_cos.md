@@ -166,7 +166,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version   
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.10.11_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.10.11_1523* 
       ```
       {: screen}
       
@@ -176,11 +176,10 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    
    3. 작업자 노드를 다시 로드하여 최신 패치 버전을 적용하십시오. 작업자 노드를 다시 로드하기 전에 작업자 노드에서 실행 중인 팟(Pod)을 단계적으로 다시 스케줄하려면 [ibmcloud ks worker-reload 명령](cs_cli_reference.html#cs_worker_reload)의 지시사항을 따르십시오. 다시 로드하는 중에 작업자 노드 머신은 최신 이미지로 업데이트되며 [작업자 노드의 외부에 저장](cs_storage_planning.html#persistent_storage_overview)되지 않은 경우 데이터가 삭제됨을 유념하십시오.
 
-
 2. [지시사항](cs_integrations.html#helm)에 따라 로컬 머신에 Helm 클라이언트를 설치하고 클러스터에 Helm 서버(Tiller)를 설치한 후에 {{site.data.keyword.Bluemix_notm}} Helm 차트 저장소를 {{site.data.keyword.cos_full_notm}} 플러그인이 사용될 클러스터에 추가하십시오.
 
     Helm 버전 2.9 이상을 사용 중이면 [서비스 계정](cs_integrations.html#helm)으로 Tiller를 설치했는지 확인하십시오.
-   {: important}
+    {: important}
 
 3. 클러스터에 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오.
    ```
@@ -628,7 +627,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    </tr>
    <tr>
    <td><code>ibm.io/object-store-endpoint</code></td>
-   <td>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 버킷에 액세스하는 데 사용할 API 엔드포인트입니다. 엔드포인트는 클러스터의 지역에 따라 자동으로 설정됩니다. **참고**: 클러스터가 있는 지역이 아닌 다른 지역에 있는 기존 버킷에 액세스하려면 [사용자 정의 스토리지 클래스](cs_storage_basics.html#customized_storageclass)를 작성하고 버킷의 API 엔드포인트를 사용해야 합니다. </td>
+   <td>{{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 버킷에 액세스하는 데 사용할 API 엔드포인트입니다. 엔드포인트는 클러스터의 지역에 따라 자동으로 설정됩니다. **참고**: 클러스터가 있는 지역이 아닌 다른 지역에 있는 기존 버킷에 액세스하려면 [사용자 정의 스토리지 클래스](cs_storage_basics.html#customized_storageclass)를 작성하고 버킷의 API 엔드포인트를 사용해야 합니다.</td>
    </tr>
    <tr>
    <td><code>ibm.io/object-store-storage-class</code></td>
@@ -769,7 +768,7 @@ kubectl get pvc
    ```
    {: screen}
 
-4. 선택사항: 비-루트 사용자로 데이터에 액세스할 계획이거나 콘솔 또는 API를 사용하여 기존 {{site.data.keyword.cos_full_notm}} 버킷에 직접 파일을 추가한 경우에는 필요 시에 앱이 파일을 성공적으로 읽고 업데이트할 수 있도록 [파일에 올바른 권한이 지정되어 있는지](cs_troubleshoot_storage.html#cos_nonroot_access) 확인하십시오. 
+4. 선택사항: 비-루트 사용자로 데이터에 액세스할 계획이거나 콘솔 또는 API를 사용하여 기존 {{site.data.keyword.cos_full_notm}} 버킷에 직접 파일을 추가한 경우에는 필요 시에 앱이 파일을 성공적으로 읽고 업데이트할 수 있도록 [파일에 올바른 권한이 지정되어 있는지](cs_troubleshoot_storage.html#cos_nonroot_access) 확인하십시오.
 
 4.  {: #app_volume_mount}PV를 배치에 마운트하려면 구성 `.yaml` 파일을 작성하고 PV를 바인드하는 PVC를 지정하십시오.
 

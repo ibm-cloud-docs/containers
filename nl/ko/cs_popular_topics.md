@@ -41,7 +41,7 @@ lastupdated: "2018-12-06"
 <tr>
 <td>12월 6일</td>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>메트릭을 {{site.data.keyword.monitoringlong}}에 전달할 수 있도록 서드파티 서비스로서 Sysdig를 작업자 노드에 배치하여 앱의 성능과 상태에 대한 운영상의 가시성을 확보하십시오. 자세한 정보는 [Kubernetes 클러스터에 배치된 앱의 메트릭 분석](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)을 참조하십시오. **참고**: Sysdig가 현재 `containerd`를 지원하지 않으므로, Kubernetes 버전 1.11 이상을 실행하는 클러스터의 {{site.data.keyword.mon_full_notm}} 사용 시에 일부 컨테이너 메트릭은 수집되지 않습니다. </td>
+<td>메트릭을 {{site.data.keyword.monitoringlong}}에 전달할 수 있도록 서드파티 서비스로서 Sysdig를 작업자 노드에 배치하여 앱의 성능과 상태에 대한 운영상의 가시성을 확보하십시오. 자세한 정보는 [Kubernetes 클러스터에 배치된 앱의 메트릭 분석](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)을 참조하십시오. **참고**: Sysdig가 현재 `containerd`를 지원하지 않으므로, Kubernetes 버전 1.11 이상을 실행하는 클러스터의 {{site.data.keyword.mon_full_notm}} 사용 시에 일부 컨테이너 메트릭은 수집되지 않습니다.</td>
 </tr>
 </tbody></table>
 
@@ -64,32 +64,32 @@ lastupdated: "2018-12-06"
 <tr>
 <td>11월 27일</td>
 <td>{{site.data.keyword.la_full_notm}}</td>
-<td>팟(Pod) 컨테이너의 로그를 관리할 수 있도록 작업자 노드에 서드파티 서비스로서 LogDNA를 배치하여 클러스터에 로그 관리 기능을 추가합니다. 자세한 정보는 [LogDNA로 {{site.data.keyword.loganalysisfull_notm}}의 Kubernetes 클러스터 로그 관리](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)를 참조하십시오. </td>
+<td>팟(Pod) 컨테이너의 로그를 관리할 수 있도록 작업자 노드에 서드파티 서비스로서 LogDNA를 배치하여 클러스터에 로그 관리 기능을 추가합니다. 자세한 정보는 [LogDNA로 {{site.data.keyword.loganalysisfull_notm}}의 Kubernetes 클러스터 로그 관리](/docs/services/Log-Analysis-with-LogDNA/tutorials/kube.html#kube)를 참조하십시오.</td>
 </tr>
 <tr>
 <td>11월 7일</td>
 <td>로드 밸런서 2.0(베타)</td>
-<td>클러스터 앱을 안전하게 공용으로 노출하기 위해 이제 [로드 밸런서 1.0 또는 2.0](cs_loadbalancer.html#planning_ipvs) 간에 선택할 수 있습니다. </td>
+<td>클러스터 앱을 안전하게 공용으로 노출하기 위해 이제 [로드 밸런서 1.0 또는 2.0](cs_loadbalancer.html#planning_ipvs) 간에 선택할 수 있습니다.</td>
 </tr>
 <tr>
 <td>11월 7일</td>
 <td>Kubernetes 버전 1.12 사용 가능</td>
-<td>이제 [Kubernetes 버전 1.12](cs_versions.html#cs_v112)를 실행하는 클러스터를 업데이트하거나 작성할 수 있습니다! 1.12 클러스터는 기본적으로 고가용성 Kubernetes 마스터와 함께 제공됩니다. </td>
+<td>이제 [Kubernetes 버전 1.12](cs_versions.html#cs_v112)를 실행하는 클러스터를 업데이트하거나 작성할 수 있습니다! 1.12 클러스터는 기본적으로 고가용성 Kubernetes 마스터와 함께 제공됩니다.</td>
 </tr>
 <tr>
 <td>11월 7일</td>
 <td>Kubernetes 버전 1.10을 실행하는 클러스터의 고가용성 마스터</td>
-<td>고가용성 마스터를 Kubernetes 버전 1.10을 실행하는 클러스터에 사용할 수 있습니다! 취해야 하는 [준비 단계](cs_versions.html#110_ha-masters)를 포함하여 1.11 클러스터의 이전 항목에서 설명한 모든 이점이 1.10 클러스터에 적용됩니다. </td>
+<td>고가용성 마스터를 Kubernetes 버전 1.10을 실행하는 클러스터에 사용할 수 있습니다! 취해야 하는 [준비 단계](cs_versions.html#110_ha-masters)를 포함하여 1.11 클러스터의 이전 항목에서 설명한 모든 이점이 1.10 클러스터에 적용됩니다.</td>
 </tr>
 <tr>
 <td>11월 1일</td>
 <td>Kubernetes 버전 1.11을 실행하는 클러스터의 고가용성 마스터</td>
-<td>단일 구역에서, 마스터는 고가용성이며 가동 중단(예: 클러스터 업데이트 중에)에 대해 보호할 수 있도록 Kubernetes API 서버, etcd, 스케줄러 및 제어기 관리자에 대해 별도 실제 호스트의 복제본을 포함합니다. 클러스터가 다중 구역 가능 구역에 있는 경우, 고가용성 마스터도 역시 구역 장애에 대해 보호하도록 도움을 주기 위해 구역 간에 전개됩니다. <br>취해야 할 조치에 대해서는 [고가용성 클러스터 마스터에 대한 업데이트](cs_versions.html#ha-masters)를 참조하십시오. 이러한 준비 조치는 다음의 경우 적용됩니다. <ul>
-<li>방화벽 또는 사용자 정의 Calico 네트워크 정책이 있는 경우. </li>
-<li>작업자 노드에서 호스트 포트 `2040` 또는 `2041`을 사용 중인 경우. </li>
-<li>마스터에 대한 클러스터 내 액세스를 위해 클러스터 마스터 IP 주소를 사용한 경우. </li>
-<li>Calico API 또는 CLI(`calicoctl`)를 호출하는 자동화가 있는 경우(예: Calico 정책 작성을 위해). </li>
-<li>Kubernetes 또는 Calico 네트워크 정책을 사용하여 마스터에 대한 팟(Pod) egress 액세스를 제어하는 경우. </li></ul></td>
+<td>단일 구역에서, 마스터는 고가용성이며 가동 중단(예: 클러스터 업데이트 중에)에 대해 보호할 수 있도록 Kubernetes API 서버, etcd, 스케줄러 및 제어기 관리자에 대해 별도 실제 호스트의 복제본을 포함합니다. 클러스터가 다중 구역 가능 구역에 있는 경우, 고가용성 마스터도 역시 구역 장애에 대해 보호하도록 도움을 주기 위해 구역 간에 전개됩니다.<br>취해야 할 조치에 대해서는 [고가용성 클러스터 마스터에 대한 업데이트](cs_versions.html#ha-masters)를 참조하십시오. 이러한 준비 조치는 다음의 경우 적용됩니다.<ul>
+<li>방화벽 또는 사용자 정의 Calico 네트워크 정책이 있는 경우.</li>
+<li>작업자 노드에서 호스트 포트 `2040` 또는 `2041`을 사용 중인 경우.</li>
+<li>마스터에 대한 클러스터 내 액세스를 위해 클러스터 마스터 IP 주소를 사용한 경우.</li>
+<li>Calico API 또는 CLI(`calicoctl`)를 호출하는 자동화가 있는 경우(예: Calico 정책 작성을 위해).</li>
+<li>Kubernetes 또는 Calico 네트워크 정책을 사용하여 마스터에 대한 팟(Pod) egress 액세스를 제어하는 경우.</li></ul></td>
 </tr>
 </tbody></table>
 
@@ -122,7 +122,7 @@ lastupdated: "2018-12-06"
 <tr>
 <td>10월 4일</td>
 <td>[{{site.data.keyword.registrylong}}가 {{site.data.keyword.Bluemix_notm}} Identity and Access Management(IAM)와 통합됨](/docs/services/Registry/iam.html#iam)</td>
-<td>{{site.data.keyword.Bluemix_notm}} IAM을 사용하여 이미지 풀, 푸시 및 빌드와 같은 레지스트리 리소스에 대한 액세스를 제어할 수 있습니다. 클러스터를 작성할 때는 클러스터가 레지스트리에 대해 작업할 수 있도록 레지스트리 토큰 또한 작성합니다. 따라서 클러스터를 작성하려면 계정 레벨 레지스트리 **관리자** 플랫폼 관리 역할이 필요합니다. 레지스트리 계정에 대해 {{site.data.keyword.Bluemix_notm}} IAM을 사용으로 설정하려면 [기존 사용자에 대한 정책 적용의 사용 설정](/docs/services/Registry/registry_users.html#existing_users)을 참조하십시오. </td>
+<td>{{site.data.keyword.Bluemix_notm}} IAM을 사용하여 이미지 풀, 푸시 및 빌드와 같은 레지스트리 리소스에 대한 액세스를 제어할 수 있습니다. 클러스터를 작성할 때는 클러스터가 레지스트리에 대해 작업할 수 있도록 레지스트리 토큰 또한 작성합니다. 따라서 클러스터를 작성하려면 계정 레벨 레지스트리 **관리자** 플랫폼 관리 역할이 필요합니다. 레지스트리 계정에 대해 {{site.data.keyword.Bluemix_notm}} IAM을 사용으로 설정하려면 [기존 사용자에 대한 정책 적용의 사용 설정](/docs/services/Registry/registry_users.html#existing_users)을 참조하십시오.</td>
 </tr>
 <tr>
 <td>10월 1일</td>
@@ -260,7 +260,7 @@ lastupdated: "2018-12-06"
 <tr>
 <td>5월 1일</td>
 <td>[콘솔에서 Kubernetes 대시보드 배치](cs_app.html#cli_dashboard)</td>
-<td>한 번의 클릭으로 Kubernetes 대시보드에 액세스하고 싶었던 적이 있습니까? {{site.data.keyword.Bluemix_notm}} 콘솔에서 **Kubernetes 대시보드** 단추를 확인하십시오. </td>
+<td>한 번의 클릭으로 Kubernetes 대시보드에 액세스하고 싶었던 적이 있습니까? {{site.data.keyword.Bluemix_notm}} 콘솔에서 **Kubernetes 대시보드** 단추를 확인하십시오.</td>
 </tr>
 </tbody></table>
 

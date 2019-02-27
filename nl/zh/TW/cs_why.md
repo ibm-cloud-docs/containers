@@ -37,7 +37,7 @@ lastupdated: "2018-12-05"
 |-------|-----------|
 |具有運算、網路及儲存空間基礎架構隔離的單一承租戶 Kubernetes 叢集|<ul><li>建立符合組織需求的專屬自訂基礎架構。</li><li>使用 IBM Cloud 基礎架構 (SoftLayer) 所提供的資源，來佈建專用且受保護的 Kubernetes 主節點、工作者節點、虛擬網路及儲存空間。</li><li>完全受管理的 Kubernetes 主節點，它持續由 {{site.data.keyword.IBM_notm}} 監視及更新，以保持叢集可供使用。</li><li>可以選擇使用「授信運算」將工作者節點佈建為裸機伺服器。</li><li>儲存持續性資料、在 Kubernetes Pod 之間共用資料，以及在需要時使用整合且安全的磁區服務來還原資料。</li><li>獲得所有原生 Kubernetes API 的完整支援的好處。</li></ul>|
 |增加高可用性的多區域叢集 | <ul><li>使用工作者節點儲存區，輕鬆地管理相同機型（CPU、記憶體、虛擬或實體）的工作者節點。</li><li>保護區域免於失敗，方法為將節點平均地分佈在精選的多個區域，並對您的應用程式使用反親緣性 Pod 部署。</li><li>使用多區域叢集，而非複製個別叢集裡的資源來降低成本。</li><li>受益於使用多區域負載平衡器 (MZLB) 跨應用程式進行自動負載平衡，而此負載平衡器是在叢集的每一個區域中自動為您設定的。</li></ul>|
-|高可用性主節點 | <ul>可在執行 Kubernetes 1.10 版或更新版本的叢集中使用。<li>例如在主節點更新期間減少叢集關閉時間，而高可用性主節點會在您建立叢集時自動佈建。</li><li>將您的主節點分散在[多區域叢集](cs_clusters_planning.html#multizone)的各區域之中，以保護您的叢集免於發生區域失敗。</li></ul> |
+|高可用性主節點 | <ul>可在執行 Kubernetes 1.10 版或更新版本的叢集裡使用。<li>例如在主節點更新期間減少叢集關閉時間，而高可用性主節點會在您建立叢集時自動佈建。</li><li>將您的主節點分散在[多區域叢集](cs_clusters_planning.html#multizone)的各區域之中，以保護您的叢集免於發生區域失敗。</li></ul> |
 |「漏洞警告器」的映像檔安全規範|<ul><li>在我們保護的 Docker 專用映像檔登錄中設定您自己的儲存庫，而組織中的所有使用者都會在這裡儲存及共用映像檔。</li><li>受益於自動掃描專用 {{site.data.keyword.Bluemix_notm}} 登錄中的映像檔。</li><li>檢閱映像檔中所用作業系統特有的建議，來修正潛在漏洞。</li></ul>|
 |叢集性能的持續監視|<ul><li>使用叢集儀表板，快速查看及管理叢集、工作者節點及容器部署的性能。</li><li>使用 {{site.data.keyword.monitoringlong}} 來尋找詳細的耗用度量值，並快速擴展叢集以符合工作負載。</li><li>使用 {{site.data.keyword.loganalysislong}} 來檢閱記載資訊，以查看詳細的叢集活動。</li></ul>|
 |安全地將應用程式公開給大眾使用|<ul><li>選擇公用 IP 位址、{{site.data.keyword.IBM_notm}} 所提供的路徑，或您自己的自訂網域，以從網際網路存取叢集裡的服務。</li></ul>|
@@ -129,10 +129,10 @@ lastupdated: "2018-12-05"
 
 
 
-## 定價及計費
+## 定價與計費
 {: #pricing}
 
-檢閱 {{site.data.keyword.containerlong_notm}} 定價及計費的一些常見問題。對於帳戶層次問題，請參閱[管理計費及用量文件](/docs/billing-usage/how_charged.html#charges)。如需您帳戶合約的詳細資料，請參閱適當的 [{{site.data.keyword.Bluemix_notm}} 條款及注意事項](/docs/overview/terms-of-use/notices.html#terms)。
+檢閱 {{site.data.keyword.containerlong_notm}} 定價與計費的一些常見問題。對於帳戶層次問題，請參閱[管理計費及用量文件](/docs/billing-usage/how_charged.html#charges)。如需您帳戶合約的詳細資料，請參閱適當的 [{{site.data.keyword.Bluemix_notm}} 條款及注意事項](/docs/overview/terms-of-use/notices.html#terms)。
 {: shortdesc}
 
 ### 如何檢視及組織用量？

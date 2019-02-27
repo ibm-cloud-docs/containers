@@ -468,7 +468,7 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: screen}
 
 {: tsCauses}
-올바르지 않은 스토리지 클래스를 사용하여 기존 버킷에 액세스했거나 작성하지 않은 버킷에 액세스를 시도했을 수 있습니다. 
+올바르지 않은 스토리지 클래스를 사용하여 기존 버킷에 액세스했거나 작성하지 않은 버킷에 액세스를 시도했을 수 있습니다.
 
 {: tsResolve}
 1. [{{site.data.keyword.Bluemix_notm}} 대시보드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/dashboard/apps)에서 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 선택하십시오.

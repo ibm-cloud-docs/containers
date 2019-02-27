@@ -41,12 +41,12 @@ Ingress 包含三個元件：
 <dt>應用程式負載平衡器 (ALB)</dt>
 <dd>應用程式負載平衡器 (ALB) 是一種外部負載平衡器，負責接聽送入的 HTTP、HTTPS、TCP 或 UDP 服務要求。ALB 接著會根據 Ingress 資源中所定義的規則，將要求轉遞至適當的應用程式 Pod。當您建立標準叢集時，{{site.data.keyword.containerlong_notm}} 會為叢集自動建立高可用性的 ALB，並將唯一的公用路徑指派給它。公用路徑會鏈結至在建立叢集期間佈建至 IBM Cloud 基礎架構 (SoftLayer) 帳戶的可攜式公用 IP 位址。也會自動建立預設專用 ALB，但不會自動啟用它。<br></br>**多區域叢集**：當您將區域新增至叢集時，會新增一個可攜式公用子網路，並在該區域的子網路上自動建立及啟用新的公用 ALB。叢集裡的所有預設公用 ALB 會共用一個公用路徑，但具有不同的 IP 位址。也會自動在每一個區域中建立預設專用 ALB，但不會自動予以啟用。</dd>
 <dt>多區域負載平衡器 (MZLB)</dt>
-<dd><p>**多區域叢集**：每當您建立多區域叢集或[將區域新增至單一區域叢集](cs_clusters.html#add_zone)時，就會自動建立和部署 Cloudflare 多區域負載平衡器 (MZLB)，使每個地區有 1 個 MZLB。MZLB 會在相同主機名稱後面放置 ALB 的 IP 位址，並對這些 IP 位址啟用性能檢查，以判斷是否可以使用它們。例如，如果您在美國東部地區的 3 個區域有工作者節點，則主機名稱 `yourcluster.us-east.containers.appdomain.cloud` 具有 3 個 ALB IP 位址。MZLB 性能檢查會檢查地區中每一個區域的公用 ALB IP，並根據這些性能檢查來更新 DNS 查閱結果。例如，如果您的 ALB 具有 IP 位址 `1.1.1.1`、`2.2.2.2` 及 `3.3.3.3`，則 Ingress 子網域的正常作業 DNS 查閱會傳回所有 3 個 IP，用戶端會隨機存取其中之一。如果由於區域故障等任何原因而導致無法使用具有 IP 位址 `3.3.3.3` 的 ALB，則該區域的性能檢查會失敗，MZLB 會從主機名稱中移除失敗 IP，而 DNS 查閱只會傳回健全的 `1.1.1.1` 和 `2.2.2.2` ALB IP。子網域的存活時間 (TTL) 為 30 秒，因此在 30 秒之後，新的用戶端應用程式只能存取其中一個可用的健全 ALB IP。</p><p>在少數情況下，部分 DNS 解析器或用戶端應用程式可能會在 30 秒的 TTL 之後繼續使用不健全 ALB IP。這些用戶端應用程式可能會經歷較長的載入時間，直到用戶端應用程式放棄 `3.3.3.3` IP，而嘗試連接至 `1.1.1.1` 或 `2.2.2.2` 為止。視用戶端瀏覽器或用戶端應用程式設定而定，延遲範圍可能會從幾秒鐘到整個 TCP 逾時。</p>
+<dd><p>**多區域叢集**：每當您建立多區域叢集或[將區域新增至單一區域叢集](cs_clusters.html#add_zone)時，就會自動建立和部署 Cloudflare 多區域負載平衡器 (MZLB)，使每個地區有 1 個 MZLB。MZLB 會在相同主機名稱後面放置 ALB 的 IP 位址，並對這些 IP 位址啟用性能檢查，以判斷是否可以使用它們。例如，如果您在美國東部地區的 3 個區域有工作者節點，則主機名稱 `yourcluster.us-east.containers.appdomain.cloud` 具有 3 個 ALB IP 位址。MZLB 性能檢查會檢查地區中每一個區域的公用 ALB IP，並根據這些性能檢查來更新 DNS 查閱結果。例如，如果您的 ALB 具有 IP 位址 `1.1.1.1`、`2.2.2.2` 及 `3.3.3.3`，則 Ingress 子網域的正常作業 DNS 查閱會傳回所有 3 個 IP，用戶端會隨機存取其中之一。如果由於區域故障等任何原因而導致無法使用具有 IP 位址 `3.3.3.3` 的 ALB，則該區域的性能檢查會失敗，MZLB 會從主機名稱移除失敗 IP，而 DNS 查閱只會傳回健全的 `1.1.1.1` 和 `2.2.2.2` ALB IP。子網域的存活時間 (TTL) 為 30 秒，因此在 30 秒之後，新的用戶端應用程式只能存取其中一個可用的健全 ALB IP。</p><p>在少數情況下，部分 DNS 解析器或用戶端應用程式可能會在 30 秒的 TTL 之後繼續使用不健全 ALB IP。這些用戶端應用程式可能會經歷較長的載入時間，直到用戶端應用程式放棄 `3.3.3.3` IP，而嘗試連接至 `1.1.1.1` 或 `2.2.2.2` 為止。視用戶端瀏覽器或用戶端應用程式設定而定，延遲範圍可能會從幾秒鐘到整個 TCP 逾時。</p>
 <p>MZLB 會針對僅使用 IBM 提供之 Ingress 子網域的公用 ALB 進行負載平衡。如果您僅使用專用 ALB，則必須手動檢查 ALB 的性能，並更新 DNS 查閱結果。如果您使用的公用 ALB 使用自訂網域，則可以在 MZLB 負載平衡時包括 ALB，方法是在 DNS 項目中建立 CNAME，以將來自自訂網域的要求轉遞至叢集裡由 IBM 提供的 Ingress 子網域。</p>
 <p class="note">如果您使用 Calico DNAT 前網路原則封鎖 Ingress 服務的所有送入資料流量，則也必須將用來檢查 ALB 性能的 <a href="https://www.cloudflare.com/ips/">Cloudflare 的 IPv4 IP <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 列入白名單。如需如何建立 Calico DNAT 前原則以將這些 IP 列入白名單的步驟，請參閱 <a href="cs_tutorials_policies.html#lesson3">Calico 網路原則指導教學</a>的課程 3。</p></dd>
 </dl>
 
-### 如何透過單一區域叢集中的 Ingress 讓要求傳入我的應用程式？
+### 如何透過單一區域叢集裡的 Ingress 讓要求傳入我的應用程式？
 {: #architecture-single}
 
 下圖顯示 Ingress 如何在單一區域叢集裡將通訊從網際網路導向至應用程式：
@@ -63,7 +63,7 @@ Ingress 包含三個元件：
 
 5. ALB 會檢查叢集裡是否有 `myapp` 路徑的遞送規則。如果找到相符規則，則會根據您在 Ingress 資源中定義的規則，將要求轉遞至應用程式部署所在的 Pod。套件的來源 IP 位址會變更為應用程式 Pod 執行所在之工作者節點的公用 IP 位址的 IP 位址。如果叢集裡已部署多個應用程式實例，則 ALB 負載會平衡應用程式 Pod 之間的要求。
 
-### 如何透過多區域叢集中的 Ingress 讓要求傳入我的應用程式？
+### 如何透過多區域叢集裡的 Ingress 讓要求傳入我的應用程式？
 {: #architecture-multi}
 
 下圖顯示 Ingress 如何在多區域叢集裡將通訊從網際網路導向至應用程式：
@@ -72,7 +72,7 @@ Ingress 包含三個元件：
 
 1. 使用者會藉由存取應用程式的 URL，將要求傳送給您的應用程式。此 URL 是您公開之應用程式的公用 URL，並附加 Ingress 資源路徑，例如 `mycluster.us-south.containers.appdomain.cloud/myapp`。
 
-2. DNS 系統服務（其作為廣域負載平衡器）會將 URL 中的主機名稱解析為 MZLB 報告為性能良好的可用 IP 位址。MZLB 會持續檢查負載平衡器服務的可攜式公用 IP 位址，其將公開叢集中每一個區域的公用 ALB。IP 位址是以循環式週期進行解析，確保在各種區域的性能良好 ALB 之間平均地負載平衡要求。
+2. DNS 系統服務（其作為廣域負載平衡器）會將 URL 中的主機名稱解析為 MZLB 報告為性能良好的可用 IP 位址。MZLB 會持續檢查負載平衡器服務的可攜式公用 IP 位址，其將公開叢集裡每一個區域的公用 ALB。IP 位址是以循環式週期進行解析，確保在各種區域的性能良好 ALB 之間平均地負載平衡要求。
 
 3. 用戶端會將要求傳送至用於公開 ALB 之負載平衡器服務的 IP 位址。
 
@@ -95,7 +95,7 @@ Ingress 包含三個元件：
 
 **在多區域叢集裡使用 Ingress 的必要條件**：
  - 如果您將網路資料流量限制為[邊緣工作者節點](cs_edge.html)，則必須在每一個區域中至少啟用 2 個邊緣工作者節點，以取得 Ingress Pod 的高可用性。[建立邊緣節點工作者節點儲存區](cs_clusters.html#add_pool)，以跨越叢集裡的所有區域，而每個區域至少具有 2 個工作者節點。
- - 如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
+ - 如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
  - 如果發生區域故障，您可能會在該區域內 Ingress ALB 的要求中看到間歇性失敗。
 
 <br />
@@ -241,7 +241,7 @@ Ingress Secret:         <tls_secret>
       * 如果您要 Ingress 公開的應用程式位於某叢集內不同的名稱空間中，請將自訂網域登錄為萬用字元網域，例如 `*.custom_domain.net`。
 
 2.  配置網域，將送入的網路資料流量遞送至 IBM 提供的 ALB。可選擇的選項有：
-    -   將 IBM 提供的網域指定為「標準名稱記錄 (CNAME)」，以定義自訂網域的別名。若要找出 IBM 提供的 Ingress 網域，請執行 `ibmcloud ks cluster-get <cluster_name>` 並尋找 **Ingress subdomain** 欄位。最好使用 CNAME，因為 IBM 會對 IBM 子網域提供自動性能檢查，並從 DNS 回應中移除任何失敗的 IP。
+    -   將 IBM 提供的網域指定為「標準名稱記錄 (CNAME)」，以定義自訂網域的別名。若要找出 IBM 提供的 Ingress 網域，請執行 `ibmcloud ks cluster-get <cluster_name>` 並尋找 **Ingress subdomain** 欄位。最好使用 CNAME，因為 IBM 會對 IBM 子網域提供自動性能檢查，並從 DNS 回應移除任何失敗的 IP。
     -   將您的自訂網域對映至 IBM 提供的 ALB 的可攜式公用 IP 位址，方法是將 IP 位址新增為記錄。若要尋找 ALB 的可攜式公用 IP 位址，請執行 `ibmcloud ks alb-get <public_alb_ID>`。
 
 ### 步驟 3：選取 TLS 終止
@@ -273,7 +273,7 @@ Ingress Secret:         <tls_secret>
 
 **如果您使用自訂網域，請執行下列動作：**
 
-如果 TLS 憑證儲存在您要使用的 {{site.data.keyword.cloudcerts_long_notm}} 中，您可以執行下列指令，將其相關聯的密碼匯入至叢集中：
+如果 TLS 憑證儲存在您要使用的 {{site.data.keyword.cloudcerts_long_notm}} 中，您可以執行下列指令，將其相關聯的密碼匯入至叢集裡：
 
 ```
 ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
@@ -667,7 +667,7 @@ http://<subdomain2>.<domain>/<app1_path>
     public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
     ```
     {: screen}
-    在多區域叢集中，ALB ID 上的編號字尾指出新增 ALB 的順序。
+    在多區域叢集裡，ALB ID 上的編號字尾指出新增 ALB 的順序。
     * 例如，ALB `private-cr6d779503319d419aa3b4ab171d12c3b8-alb1` 上的 `-alb1` 字尾表示它是已建立的第一個預設專用 ALB。它存在於您建立叢集的區域中。在上述範例中，叢集建立於 `dal10` 中。
     * ALB `private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2` 上的 `-alb2` 字尾表示它是已建立的第二個預設專用 ALB。它存在於您已新增至叢集的第二個區域中。在上述範例中，第二個區域為 `dal12`。
 
@@ -743,7 +743,7 @@ http://<subdomain2>.<domain>/<app1_path>
       * 如果您要 Ingress 公開的應用程式位於某叢集內不同的名稱空間中，請將自訂網域登錄為萬用字元網域，例如 `*.custom_domain.net`。
 
 2.  配置網域，將送入的網路資料流量遞送至 IBM 提供的 ALB。可選擇的選項有：
-    -   將 IBM 提供的網域指定為「標準名稱記錄 (CNAME)」，以定義自訂網域的別名。若要找出 IBM 提供的 Ingress 網域，請執行 `ibmcloud ks cluster-get <cluster_name>` 並尋找 **Ingress subdomain** 欄位。最好使用 CNAME，因為 IBM 會對 IBM 子網域提供自動性能檢查，並從 DNS 回應中移除任何失敗的 IP。
+    -   將 IBM 提供的網域指定為「標準名稱記錄 (CNAME)」，以定義自訂網域的別名。若要找出 IBM 提供的 Ingress 網域，請執行 `ibmcloud ks cluster-get <cluster_name>` 並尋找 **Ingress subdomain** 欄位。最好使用 CNAME，因為 IBM 會對 IBM 子網域提供自動性能檢查，並從 DNS 回應移除任何失敗的 IP。
     -   將您的自訂網域對映至 IBM 提供的 ALB 的可攜式專用 IP 位址，方法是將 IP 位址新增為記錄。若要尋找 ALB 的可攜式公用 IP 位址，請執行 `ibmcloud ks alb-get <public_alb_ID>`。
 
 ### 步驟 4：選取 TLS 終止
@@ -756,7 +756,7 @@ ALB 會對叢集裡應用程式的 HTTP 網路資料流量進行負載平衡。�
 
 您可以使用自己的 TLS 憑證來管理 TLS 終止。如果您只在一個名稱空間中有應用程式，則可以針對該相同名稱空間中的憑證匯入或建立 TLS 密碼。如果您在多個名稱空間中有應用程式，則可以針對 `default` 名稱空間中的憑證匯入或建立 TLS 密碼，讓 ALB 可以在每個名稱空間中存取及使用憑證。如需萬用字元 TLS 憑證的相關資訊，請參閱[此附註](#wildcard_tls)。**附註**：不支援包含預先共用金鑰 (TLS-PSK) 的 TLS 憑證。
 
-如果 TLS 憑證儲存在您要使用的 {{site.data.keyword.cloudcerts_long_notm}} 中，您可以執行下列指令，將其相關聯的密碼匯入至叢集中：
+如果 TLS 憑證儲存在您要使用的 {{site.data.keyword.cloudcerts_long_notm}} 中，您可以執行下列指令，將其相關聯的密碼匯入至叢集裡：
 
 ```
 ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>

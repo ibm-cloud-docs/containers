@@ -43,7 +43,7 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 如果您的叢集是執行不受支援的 Kubernetes 版本，則可能需要強制更新。因此，請讓叢集保持最新狀態，以避免作業影響。
 
 **工作者節點所執行的版本可以比主節點還要新嗎？**</br>
-不可以。首先，請[更新主節點](#update_master)至最新的 Kubernetes 版本。然後，在叢集裡[更新工作者節點](#worker_node)。
+否。首先，[更新主節點](#update_master)為最新 Kubernetes 版本。然後，在叢集裡[更新工作者節點](#worker_node)。
 
 **如何套用修補程式更新？**</br>
 依預設，主節點的修補程式更新會在幾天內自動套用，因此，主節點修補程式版本可能會先顯示為可用，再將它套用至您的主節點。更新自動化也會跳過處於性能不佳狀態或目前正在進行作業的叢集。有時，IBM 可能會停用特定主節點修正套件的自動更新，例如只有在主節點從某個次要版本更新為另一個次要版本時才需要的修補程式。在其中任何情況下，您可以[檢查版本變更日誌](cs_versions_changelog.html)，以找出任何潛在的影響，並選擇自行安全地使用 `ibmcloud ks cluster-update` [指令](cs_cli_reference.html#cs_cluster_update)，而不需要等待套用更新自動化。
@@ -51,7 +51,7 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 與主節點不同，您必須更新每個修補程式版本的工作者節點。
 
 **在主節點更新期間會發生什麼情況？**</br>
-在執行 Kubbernets 1.11 版或更新版本的叢集中，您的主節點可以高度地與三個抄本主節點 Pod 搭配使用。主節點 Pod 具有漸進式更新，在漸進式更新期間，一次僅有一個 Pod 無法使用。兩個實例會啟動並執行，讓您可在更新期間存取和變更叢集。您的工作者節點、應用程式及資源會繼續執行。
+在執行 Kubbernets 1.11 版或更新版本的叢集裡，您的主節點可以高度地與三個抄本主節點 Pod 搭配使用。主節點 Pod 具有漸進式更新，在漸進式更新期間，一次僅有一個 Pod 無法使用。兩個實例會啟動並執行，讓您可在更新期間存取和變更叢集。您的工作者節點、應用程式及資源會繼續執行。
 
 若為執行舊版 Kubernetes 的叢集，當您更新 Kubernetes API 伺服器時，API 伺服器會關閉大約 5-10 分鐘。在更新期間，您無法存取或變更叢集。不過，叢集使用者部署的工作者節點、應用程式和資源不會修改，並將繼續執行。
 
@@ -98,7 +98,7 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
 此外，您可以建立 Kubernetes 配置對映，以指定在更新期間的某個時間可能無法使用的工作者節點數目上限。工作者節點是透過工作者節點標籤所識別。您可以使用已新增至工作者節點的 IBM 提供的標籤或自訂標籤。
 
 **我選擇不要定義配置對映的話，會發生什麼情況？**</br>
-未定義配置對映時，會使用預設值。依預設，在每個叢集中，您所有的工作者節點最多會有 20% 在更新處理程序期間無法使用。
+未定義配置對映時，會使用預設值。依預設，在每個叢集裡，您所有的工作者節點最多會有 20% 在更新處理程序期間無法使用。
 
 **開始之前**：
 - [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。
@@ -366,7 +366,7 @@ IBM 一般在給定時間會支援 3 個版本的 Kubernetes。您不能將 Kube
       ```
       {: pre}
 
-6. 驗證已從叢集裡移除工作者節點。
+6. 驗證已從叢集移除工作者節點。
    ```
    ibmcloud ks workers <cluster_name_or_ID>
    ```
@@ -503,7 +503,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
     {: pre}
 * 手動更新 Ingress ALB 附加程式。
     1. 如果有可用的更新項目，且您要更新附加程式，請先檢查[最新版 Ingress ALB 附加程式的變更日誌](cs_versions_addons.html#alb_changelog)，以驗證任何可能的非連續變更。
-    2. 強制一次性更新 ALB Pod。叢集中的所有 ALB Pod 都會更新至最新的建置版本。您無法更新個別 ALB，也無法選擇要將附加程式更新至哪個建置。自動更新會保留停用狀態。
+    2. 強制一次性更新 ALB Pod。叢集裡的所有 ALB Pod 都會更新至最新的建置版本。您無法更新個別 ALB，也無法選擇要將附加程式更新至哪個建置。自動更新會保留停用狀態。
         ```
         ibmcloud ks alb-update --cluster <cluster_name_or_ID>
         ```
@@ -574,7 +574,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
       ```
       {: pre}
 
-   2. **將區域新增至多個工作者節點儲存區**：將多個工作者節點儲存區新增至 `ibmcloud ks zone-add` 指令。若要將多個工作者節點儲存區新增至區域，您在該區域中必須要有現有專用及公用 VLAN。如果您在該區域中沒有公用及專用 VLAN，請考慮先將該區域新增至一個工作者節點儲存區，以為您建立公用及專用 VLAN。然後，您可以將該區域新增至其他工作者節點儲存區。</br></br>請務必將所有工作者節點儲存區中的工作者節點佈建至所有區域，以確保您的叢集在各區域之間保持平衡。如果您要對不同的工作者節點儲存區使用不同的 VLAN，則請針對要用於工作者節點儲存區的 VLAN 重複這個指令。如果一個叢集具有多個 VLAN，相同的 VLAN 上具有多個子網路，或多個區域叢集，您必須針對 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要檢查是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表。
+   2. **將區域新增至多個工作者節點儲存區**：將多個工作者節點儲存區新增至 `ibmcloud ks zone-add` 指令。若要將多個工作者節點儲存區新增至區域，您在該區域中必須要有現有專用及公用 VLAN。如果您在該區域中沒有公用及專用 VLAN，請考慮先將該區域新增至一個工作者節點儲存區，以為您建立公用及專用 VLAN。然後，您可以將該區域新增至其他工作者節點儲存區。</br></br>請務必將所有工作者節點儲存區中的工作者節點佈建至所有區域，以確保您的叢集在各區域之間保持平衡。如果您要對不同的工作者節點儲存區使用不同的 VLAN，則請針對要用於工作者節點儲存區的 VLAN 重複這個指令。如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
@@ -631,7 +631,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 ## 將叢集 DNS 提供者設為 CoreDNS
 {: #dns}
 
-叢集中的每個服務都會獲指派「網域名稱系統 (DNS)」名稱，而叢集 DNS 提供者會登錄此名稱，以解析 DNS 要求。預設叢集 DNS 提供者為 Kubernetes DNS (KubeDNS)。不過，對於執行 Kuberneges 1.12 版或更新版本的叢集，您可以改為選擇使用 [CoreDNS ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://coredns.io/)。您可能會使用 CoreDNS 作為早期採用者，或在 Kubernetes 專案移動，以將 KubeDNS 取代為 CoreDNS 時，測試出潛在的影響。如需服務和 Pod 之 DNS 的相關資訊，請參閱 [ Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)。
+叢集裡的每個服務都會獲指派「網域名稱系統 (DNS)」名稱，而叢集 DNS 提供者會登錄此名稱，以解析 DNS 要求。預設叢集 DNS 提供者為 Kubernetes DNS (KubeDNS)。不過，對於執行 Kuberneges 1.12 版或更新版本的叢集，您可以改為選擇使用 [CoreDNS ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://coredns.io/)。您可能會使用 CoreDNS 作為早期採用者，或在 Kubernetes 專案移動，以將 KubeDNS 取代為 CoreDNS 時，測試出潛在的影響。如需服務和 Pod 之 DNS 的相關資訊，請參閱 [ Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)。
 {: shortdesc}
 
 開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](cs_cli_install.html#cs_cli_configure)。

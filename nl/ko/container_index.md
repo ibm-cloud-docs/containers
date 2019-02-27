@@ -51,7 +51,7 @@ Kubernetes 클러스터에서 실행되는 Docker 컨테이너에 고가용성 �
 
 올바른 [{{site.data.keyword.Bluemix_notm}} 계정](https://console.bluemix.net/registration/) 유형을 가져오십시오.
 * **청구 가능(종량과금제 또는 구독)**: 무료 평가판 클러스터를 작성할 수 있습니다. 표준 클러스터에서 작성 및 사용하기 위한 IBM Cloud 인프라(SoftLayer) 리소스를 프로비저닝할 수도 있습니다.
-* **Lite**: 무료 또는 표준 클러스터를 작성할 수 없습니다. 청구 가능한 계정으로 [계정을 업그레이드](/docs/account/account_faq.html#changeacct)하십시오. 
+* **Lite**: 무료 또는 표준 클러스터를 작성할 수 없습니다. 청구 가능한 계정으로 [계정을 업그레이드](/docs/account/account_faq.html#changeacct)하십시오.
 * **평가판(교육용)**: 서비스에 익숙해지기 위해 30일 동안 사용할 수 있는 하나의 무료 클러스터를 작성할 수 있습니다.
 
 무료 클러스터를 작성하려면 다음을 수행하십시오.

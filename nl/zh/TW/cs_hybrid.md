@@ -41,13 +41,13 @@ lastupdated: "2018-12-05"
     - [從 CLI 建立標準叢集](cs_clusters.html#clusters_cli)。 
     - [使用 Cloud Automation Manager (CAM) 利用預先定義的範本來建立叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html)。當您使用 CAM 部署叢集時，會自動為您安裝 Helm tiller。
 
-2.  在 {{site.data.keyword.containerlong_notm}} 叢集中，[遵循指示來設定 strongSwan IPSec VPN 服務](cs_vpn.html#vpn_configure)。 
+2.  在 {{site.data.keyword.containerlong_notm}} 叢集裡，[遵循指示來設定 strongSwan IPSec VPN 服務](cs_vpn.html#vpn_configure)。 
 
     *  對於[步驟 2](cs_vpn.html#strongswan_2)，請注意：
 
-       * 您在 {{site.data.keyword.containerlong_notm}} 叢集中設定的 `local.id` 必須符合您稍後在 {{site.data.keyword.Bluemix}} Private 叢集中設定為 `remote.id` 的 ID。 
-       * 您在 {{site.data.keyword.containerlong_notm}} 叢集中設定的 `remote.id` 必須符合您稍後在 {{site.data.keyword.Bluemix}} Private 叢集中設定為 `local.id` 的 ID。
-       * 您在 {{site.data.keyword.containerlong_notm}} 叢集中設定的 `preshared.secret` 必須符合您稍後在 {{site.data.keyword.Bluemix}} Private 叢集中設定為 `preshared.secret` 的密碼。
+       * 您在 {{site.data.keyword.containerlong_notm}} 叢集裡設定的 `local.id` 必須符合您稍後在 {{site.data.keyword.Bluemix}} Private 叢集裡設定為 `remote.id` 的 ID。 
+       * 您在 {{site.data.keyword.containerlong_notm}} 叢集裡設定的 `remote.id` 必須符合您稍後在 {{site.data.keyword.Bluemix}} Private 叢集裡設定為 `local.id` 的 ID。
+       * 您在 {{site.data.keyword.containerlong_notm}} 叢集裡設定的 `preshared.secret` 必須符合您稍後在 {{site.data.keyword.Bluemix}} Private 叢集裡設定為 `preshared.secret` 的密碼。
 
     *  對於[步驟 3](cs_vpn.html#strongswan_3)，請配置**入埠** VPN 連線的 strongSwan。
 
@@ -66,11 +66,11 @@ lastupdated: "2018-12-05"
 
 4.  [在 {{site.data.keyword.Bluemix_notm}} 專用中建立叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html)。
 
-5.  在「{{site.data.keyword.Bluemix_notm}} 專用」叢集中，部署 strongSwan IPSec VPN 服務。
+5.  在「{{site.data.keyword.Bluemix_notm}} 專用」叢集裡，部署 strongSwan IPSec VPN 服務。
 
     1.  [完成 strongSwan IPSec VPN 暫行解決方法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html)。 
 
-    2.  在專用叢集中[設定 strongSwan VPN Helm 圖表![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html)。 
+    2.  在專用叢集裡[設定 strongSwan VPN Helm 圖表![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html)。 
     
         *  在配置參數中，將**遠端閘道**欄位設為您已設為 {{site.data.keyword.containerlong_notm}} 叢集的 `loadbalancerIP` 的可攜式公用 IP 位址的值。
     

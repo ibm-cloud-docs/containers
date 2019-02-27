@@ -32,7 +32,7 @@ lastupdated: "2018-12-05"
 如果您有更一般性的問題，請嘗試[叢集除錯](cs_troubleshoot.html)。
 {: tip}
 
-## 在多區域叢集中，持續性磁區無法裝載至 Pod
+## 在多區域叢集裡，持續性磁區無法裝載至 Pod
 {: #mz_pv_mount}
 
 {: tsSymptoms}
@@ -367,7 +367,7 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 {: screen}
 
 {: tsCauses}
-安裝 `ibmc` Helm 外掛程式時，會建立從 `./helm/plugins/helm-ibmc` 目錄到本端系統上 `ibmc` Helm 外掛程式所在目錄（通常在 `./ibmcloud-object-storage-plugin/helm-ibmc` 中）的符號鏈結。當您從本端系統中移除 `ibmc` Helm 外掛程式時，或將 `ibmc` Helm 外掛程式目錄移至不同的位置時，不會移除符號鏈結。
+安裝 `ibmc` Helm 外掛程式時，會建立從 `./helm/plugins/helm-ibmc` 目錄到本端系統上 `ibmc` Helm 外掛程式所在目錄（通常在 `./ibmcloud-object-storage-plugin/helm-ibmc` 中）的符號鏈結。當您從本端系統移除 `ibmc` Helm 外掛程式時，或將 `ibmc` Helm 外掛程式目錄移至不同的位置時，不會移除符號鏈結。
 
 {: tsResolve}
 1. 移除 {{site.data.keyword.cos_full_notm}} Helm 外掛程式。
@@ -405,7 +405,7 @@ Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.h
 {: tsResolve}
 
 
-1. 列出叢集中的密碼，並檢閱已建立 {{site.data.keyword.cos_full_notm}} 服務實例之 Kubernetes 密碼的 Kubernetes 名稱空間。密碼必須將 `ibm/ibmc-s3fs` 顯示為**類型**。
+1. 列出叢集裡的密碼，並檢閱已建立 {{site.data.keyword.cos_full_notm}} 服務實例之 Kubernetes 密碼的 Kubernetes 名稱空間。密碼必須將 `ibm/ibmc-s3fs` 顯示為**類型**。
    ```
    kubectl get secrets --all-namespaces
    ```

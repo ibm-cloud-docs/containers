@@ -263,7 +263,7 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
         ibmcloud target -g none
         ```
         {: pre}
-        此指令失敗，因為沒有名為 `none` 的資源群組。不過，指令失敗時，會自動取消將現行資源群組設為目標。
+        這個指令失敗，因為沒有名為 `none` 的資源群組。不過，指令失敗時，會自動取消將現行資源群組設為目標。
 
       2. 將目標設為叢集。
         ```
@@ -278,7 +278,7 @@ IAM token exchange request failed: Cannot create IMS portal token, as no IMS acc
           ibmcloud target -g none
           ```
           {: pre}
-          此指令失敗，因為沒有名為 `none` 的資源群組。不過，指令失敗時，會自動取消將現行資源群組設為目標。
+          這個指令失敗，因為沒有名為 `none` 的資源群組。不過，指令失敗時，會自動取消將現行資源群組設為目標。
         3. 將目標設為叢集。
           ```
           ibmcloud ks cluster-config <cluster_name_or_ID>
@@ -325,7 +325,7 @@ Instance ID inconsistent with worker records
 <br />
 
 
-## 無法修改或刪除孤立叢集中的基礎架構
+## 無法修改或刪除孤立叢集裡的基礎架構
 {: #orphaned}
 
 {: tsSymptoms}
@@ -392,7 +392,7 @@ Instance ID inconsistent with worker records
 主節點與工作者節點之間的 OpenVPN 連線未正常運作。
 
 {: tsResolve}
-1. 如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 業務代表。
+1. 如果您的叢集有多個 VLAN、同一個 VLAN 上有多個子網路，或有多區域叢集，則必須為您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning)，讓工作者節點可以在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](cs_users.html#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers/cs_cli_reference.html#cs_vlan_spanning_get)。如果您使用 {{site.data.keyword.BluDirectLink}}，則必須改為使用[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link/subnet-configuration.html#more-about-using-vrf)。若要啟用 VRF，請與 IBM Cloud 基礎架構 (SoftLayer) 客戶業務代表聯絡。
 2. 重新啟動 OpenVPN 用戶端 Pod。
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -559,7 +559,7 @@ This service doesn't support creation of keys
 您已刪除叢集裡的工作者節點，然後新增工作者節點。若您已部署 Pod 或 Kubernetes 服務，資源即無法存取新建立的工作者節點，且連線逾時。
 
 {: tsCauses}
-如果您從叢集裡刪除工作者節點，然後新增工作者節點，則可能會將已刪除工作者節點的專用 IP 位址指派給新的工作者節點。Calico 使用此專用 IP 位址作為標籤，並繼續嘗試聯繫已刪除的節點。
+如果您從叢集刪除工作者節點，然後新增工作者節點，則可能會將已刪除工作者節點的專用 IP 位址指派給新的工作者節點。Calico 使用此專用 IP 位址作為標籤，並繼續嘗試聯繫已刪除的節點。
 
 {: tsResolve}
 手動更新專用 IP 位址的參照，以指向正確的節點。
@@ -678,7 +678,7 @@ unable to validate against any pod security policy
 如果您才剛剛建立 Kubernetes 叢集，則可能仍在配置工作者節點。
 
 如果此叢集是現有叢集，請執行下列動作：
-*  您的叢集中可能沒有足夠的容量可部署 Pod。
+*  您的叢集裡可能沒有足夠的容量可部署 Pod。
 *  Pod 可能已超出資源要求或限制。
 
 {: tsResolve}
@@ -803,7 +803,7 @@ Pod 順利部署至叢集，但容器未啟動。
 
     3.  記下 `value` 欄位，以檢查您的 Pod 優先順序。
 
-4.  列出叢集中的現有優先順序類別。
+4.  列出叢集裡的現有優先順序類別。
 
     ```
     kubectl get priorityclasses
@@ -819,7 +819,7 @@ Pod 順利部署至叢集，但容器未啟動。
 
 6.  將 Pod 的優先順序類別值與其他優先順序類別值比較，以查看其優先順序較高或較低。
 
-7.  對於叢集中的其他 Pod 重複步驟 1 到 3，以檢查它們使用的優先順序類別。如果這些其他 Pod 的優先順序類別高於您的 Pod，則未佈建您 Pod，除非您的 Pod 有足夠的資源而且每個 Pod 都有較高的優先順序。
+7.  對於叢集裡的其他 Pod 重複步驟 1 到 3，以檢查它們使用的優先順序類別。如果這些其他 Pod 的優先順序類別高於您的 Pod，則未佈建您 Pod，除非您的 Pod 有足夠的資源而且每個 Pod 都有較高的優先順序。
 
 8.  聯絡叢集管理者，為您的叢集新增更多容量，並確認已指派正確的優先順序類別。
 

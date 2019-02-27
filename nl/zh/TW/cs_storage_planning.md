@@ -178,7 +178,7 @@ lastupdated: "2018-12-05"
 在尋找如何將叢集連接至內部部署資料庫嗎？請參閱[設定與叢集的 VPN 連線功能](cs_vpn.html#vpn)。
 {: tip}
 
-下圖顯示您在 {{site.data.keyword.containerlong_notm}} 中具有的選項，以永久儲存資料並使資料在叢集中具有高可用性。
+下圖顯示您在 {{site.data.keyword.containerlong_notm}} 中具有的選項，以永久儲存資料並使資料在叢集裡具有高可用性。
 
 <img src="images/cs_storage_mz-ha.png" alt="持續性儲存空間的高可用性選項"/>
 
@@ -186,7 +186,7 @@ lastupdated: "2018-12-05"
 <thead>
 <th style="text-align:left">特徵</th>
 <th style="text-align:left">檔案</th>
-<th style="text-align:left">區塊 (Block)</th>
+<th style="text-align:left">區塊</th>
 <th style="text-align:left">物件</th>
 <th style="text-align:left">DBaaS</th>
 </thead>

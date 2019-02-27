@@ -37,7 +37,7 @@ lastupdated: "2018-12-05"
 -   建立一個叢集，其包含一個具有 1 個工作者節點的工作者節點儲存區。
 -   安裝 CLI 來執行 [Kubernetes 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/)，以及管理 {{site.data.keyword.registrylong_notm}} 中的 Docker 映像檔。
 -   在 {{site.data.keyword.registrylong_notm}} 中建立專用映像檔儲存庫，以儲存您的映像檔。
--   將 {{site.data.keyword.toneanalyzershort}} 服務新增至叢集，讓叢集中的任何應用程式都可以使用該服務。
+-   將 {{site.data.keyword.toneanalyzershort}} 服務新增至叢集，讓叢集裡的任何應用程式都可以使用該服務。
 
 
 ## 所需時間

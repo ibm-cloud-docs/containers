@@ -41,7 +41,7 @@ lastupdated: "2018-12-06"
 <tr>
 <td>12 月 6 日</td>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>取得應用程式效能及性能的作業可見性，方法為將 Sysdig 作為協力廠商服務部署至工作者節點，以將度量轉遞至 {{site.data.keyword.monitoringlong}}。如需相關資訊，請參閱[分析在 Kubernetes 叢集中部署之應用程式的度量](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**附註**：如果您使用 {{site.data.keyword.mon_full_notm}} 與執行 Kubernets 1.11 版或更新版本的叢集搭配，則不會收集所有容器度量，因為 Syslig 目前不支援 `containerd`。</td>
+<td>取得應用程式效能及性能的作業可見性，方法為將 Sysdig 作為協力廠商服務部署至工作者節點，以將度量轉遞至 {{site.data.keyword.monitoringlong}}。如需相關資訊，請參閱[分析在 Kubernetes 叢集裡部署之應用程式的度量](/docs/services/Monitoring-with-Sysdig/tutorials/kubernetes_cluster.html#kubernetes_cluster)。**附註**：如果您使用 {{site.data.keyword.mon_full_notm}} 與執行 Kubernets 1.11 版或更新版本的叢集搭配，則不會收集所有容器度量，因為 Syslig 目前不支援 `containerd`。</td>
 </tr>
 </tbody></table>
 
@@ -78,12 +78,12 @@ lastupdated: "2018-12-06"
 </tr>
 <tr>
 <td>11 月 7 日</td>
-<td>執行 Kubernetes 1.10 版之叢集中的高可用性主節點</td>
+<td>執行 Kubernetes 1.10 版之叢集裡的高可用性主節點</td>
 <td>高可用性主節點適用於執行 Kubernetes 1.10 版的叢集！在 1.11 叢集的先前項目中所述的所有好處都適用於 1.10 叢集，您必須採取的[準備步驟](cs_versions.html#110_ha-masters)也同時適用。</td>
 </tr>
 <tr>
 <td>11 月 1 日</td>
-<td>執行 Kubernetes 1.11 版之叢集中的高可用性主節點</td>
+<td>執行 Kubernetes 1.11 版之叢集裡的高可用性主節點</td>
 <td>在單一區域中，您的主節點具有高可用性，且會在個別實體主機上包含 Kubernetes API 伺服器、etcd、排程器及控制器管理程式的抄本，來防範在叢集更新這類期間發生運作中斷。如果您的叢集是在具有多區域功能的區域中，則您的高可用性主節點也會分散在各個區域之中，以協助防範區域失敗。<br>如需您必須採取的動作，請參閱[更新為高可用性叢集主節點](cs_versions.html#ha-masters)。這些準備動作適用下列情況：<ul>
 <li>如果您具有防火牆或自訂 Calico 網路原則。</li>
 <li>如果您是在工作者節點上使用主機埠 `2040` 或 `2041`。</li>
@@ -117,7 +117,7 @@ lastupdated: "2018-12-06"
 <tr>
 <td>10 月 5 日</td>
 <td>與 {{site.data.keyword.keymanagementservicefull}} 整合</td>
-<td>您可以[啟用 {{site.data.keyword.keymanagementserviceshort}}（測試版）](cs_encrypt.html#keyprotect)，來加密叢集中的 Kubernetes 密碼。</td>
+<td>您可以[啟用 {{site.data.keyword.keymanagementserviceshort}}（測試版）](cs_encrypt.html#keyprotect)，來加密叢集裡的 Kubernetes 密碼。</td>
 </tr>
 <tr>
 <td>10 月 4 日</td>
@@ -170,7 +170,7 @@ lastupdated: "2018-12-06"
 <tr>
 <td>8 月 31 日</td>
 <td>{{site.data.keyword.cos_full_notm}} 現在與 {{site.data.keyword.containerlong}} 整合</td>
-<td>使用 Kubernetes 原生持續性磁區要求 (PVC) 來將 {{site.data.keyword.cos_full_notm}} 佈建給叢集。{{site.data.keyword.cos_full_notm}} 最適用於讀取密集工作量，以及您是否要將資料儲存在多區域叢集中的多個區域中。從[建立 {{site.data.keyword.cos_full_notm}} 服務實例](cs_storage_cos.html#create_cos_service)及在叢集上[安裝 {{site.data.keyword.cos_full_notm}} 外掛程式](cs_storage_cos.html#install_cos)開始。</br></br>不確定您適用哪一個儲存空間解決方案？[在這裡](cs_storage_planning.html#choose_storage_solution)開始分析您的資料，並為您的資料選擇適當的儲存空間解決方案。</td>
+<td>使用 Kubernetes 原生持續性磁區要求 (PVC) 來將 {{site.data.keyword.cos_full_notm}} 佈建給叢集。{{site.data.keyword.cos_full_notm}} 最適用於讀取密集工作量，以及您是否要將資料儲存在多區域叢集裡的多個區域中。從[建立 {{site.data.keyword.cos_full_notm}} 服務實例](cs_storage_cos.html#create_cos_service)及在叢集上[安裝 {{site.data.keyword.cos_full_notm}} 外掛程式](cs_storage_cos.html#install_cos)開始。</br></br>不確定您適用哪一個儲存空間解決方案？[在這裡](cs_storage_planning.html#choose_storage_solution)開始分析您的資料，並為您的資料選擇適當的儲存空間解決方案。</td>
 </tr>
 <tr>
 <td>8 月 14 日</td>

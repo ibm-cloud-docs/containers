@@ -22,7 +22,7 @@ lastupdated: "2018-12-05"
 # {{site.data.keyword.cloudaccesstrailshort}} 事件
 {: #at_events}
 
-您可以使用 {{site.data.keyword.cloudaccesstrailshort}} 服務，在 {{site.data.keyword.containerlong_notm}} 叢集中檢視、管理及審核使用者起始的活動。
+您可以使用 {{site.data.keyword.cloudaccesstrailshort}} 服務，在 {{site.data.keyword.containerlong_notm}} 叢集裡檢視、管理及審核使用者起始的活動。
 {: shortdesc}
 
 {{site.data.keyword.containershort_notm}} 會產生兩種類型的 {{site.data.keyword.cloudaccesstrailshort}} 事件：
@@ -40,7 +40,7 @@ lastupdated: "2018-12-05"
 ## 尋找事件的資訊
 {: #kube-find}
 
-您可以在 Kibana 儀表板中查看日誌，以監視叢集中的活動。
+您可以在 Kibana 儀表板中查看日誌，以監視叢集裡的活動。
 {: shortdesc}
 
 若要監視管理活動，請執行下列動作：
@@ -122,7 +122,7 @@ lastupdated: "2018-12-05"
 <td><code>containers-kubernetes.usersubnet.add</code></td>
 <td>使用者管理的子網路已新增至叢集。</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.delete</code></td>
-<td>已從叢集中移除使用者管理的子網路。</td></tr><tr>
+<td>已從叢集移除使用者管理的子網路。</td></tr><tr>
 <td><code>containers-kubernetes.version.update</code></td>
 <td>已更新叢集主要節點的 Kubernet 版本。</td></tr><tr>
 <td><code>containers-kubernetes.worker.create</code></td>

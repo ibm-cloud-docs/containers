@@ -55,7 +55,7 @@ lastupdated: "2018-12-05"
 {:shortdesc}
 
 1. 使用 [IBM Istio Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-istio) 來安裝 Istio。
-    1. [在叢集中設定 Helm，並將 `ibm-charts` 儲存庫新增至 Helm 實例](cs_integrations.html#helm)。
+    1. [在叢集裡設定 Helm，並將 `ibm-charts` 儲存庫新增至 Helm 實例](cs_integrations.html#helm)。
     2.  **僅限 Helm 2.9 版或更早版本**：安裝 Istio 的自訂資源定義。
         ```
         kubectl apply -f https://raw.githubusercontent.com/IBM/charts/master/stable/ibm-istio/templates/crds.yaml
