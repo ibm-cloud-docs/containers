@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-02-27"
 
 keywords: kubernetes, iks
 
@@ -46,6 +46,32 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.13 changelog
 {: #113_changelog}
+
+### Changelog for worker node fix pack 1.13.2_1509, released 27 February 2019
+{: #1132_1509}
+
+The following table shows the changes that are included in the worker node fix pack 1.13.2_1509.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.2_1508">
+<caption>Changes since version 1.13.2_1508</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Updated worker node images with kernel update for [CVE-2018-19407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.13.2_1508, released 15 February 2019
 {: #1132_1508}
@@ -209,6 +235,32 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.5_1540, released 27 February 2019
+{: #1125_1540}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.5_1540.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.5_1538">
+<caption>Changes since version 1.12.5_1538</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Updated worker node images with kernel update for [CVE-2018-19407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.5_1538, released 15 February 2019
 {: #1125_1538}
@@ -694,6 +746,32 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019
+{: #1117_1546}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.7_1546.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.7_1546">
+<caption>Changes since version 1.11.7_1546</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Updated worker node images with kernel update for [CVE-2018-19407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019
 {: #1117_1544}
@@ -1532,6 +1610,32 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 {: #110_changelog}
 
 Review the version 1.10 changelog.
+
+### Changelog for worker node fix pack 1.10.12_1546, released 27 February 2019
+{: #11012_1546}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.12_1546.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.12_1544">
+<caption>Changes since version 1.10.12_1544</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-142</td>
+<td>Updated worker node images with kernel update for [CVE-2018-19407 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://changelogs.ubuntu.com/changelogs/pool/main/l/linux/linux_4.4.0-142.168/changelog).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.12_1544, released 15 February 2019
 {: #11012_1544}
