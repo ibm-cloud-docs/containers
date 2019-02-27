@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-02-27"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -529,17 +529,17 @@ If you do not want to use Portworx in your cluster, you can uninstall the Helm c
 To protect your data in a Portworx volume, you can choose to protect your volumes with {{site.data.keyword.keymanagementservicelong_notm}}.
 {: shortdesc}
 
-{{site.data.keyword.keymanagementservicelong_notm}} helps you to provision encrypted keys that are secured by FIPS 140-2 Level 2 certified cloud-based hardware security modules (HSMs). You can use these keys to securely protect your data from unauthorized users.  
+{{site.data.keyword.keymanagementservicelong_notm}} helps you to provision encrypted keys that are secured by FIPS 140-2 Level 2 certified cloud-based hardware security modules (HSMs). You can use these keys to securely protect your data from unauthorized users. You can choose between using one encryption key to encrypt all your volumes in a cluster or using one encryption key for each volume. Portworx uses this key to encrypt data at rest and during transit when data is sent to a different worker node. For more information, see [Volume encryption ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption). For higher security, set up per-volume encryption. 
 
 Review the following information:
-- Overview of the [Portworx volume encryption workflow](#encryption) with {{site.data.keyword.keymanagementservicelong_notm}}
-- Overview of the [Portworx volume decryption workflow](#decryption) with {{site.data.keyword.keymanagementservicelong_notm}}
-- [Setting up encryption](#setup_encryption) for your Portworx volumes.
+- Overview of the [Portworx volume encryption workflow](#encryption) with {{site.data.keyword.keymanagementservicelong_notm}} for per-volume encryption
+- Overview of the [Portworx volume decryption workflow](#decryption) with {{site.data.keyword.keymanagementservicelong_notm}} for per-volume encryption
+- [Setting up per-volume encryption](#setup_encryption) for your Portworx volumes.
 
 ### Portworx volume encryption workflow
 {: #encryption}
 
-The following image illustrates the encryption workflow in Portworx with {{site.data.keyword.keymanagementservicelong_notm}}.
+The following image illustrates the encryption workflow in Portworx with {{site.data.keyword.keymanagementservicelong_notm}} when you set up per-volume encryption. 
 {: shortdesc}
 
 <img src="images/cs_portworx_volume_encryption.png" alt="Encrypting Portworx volumes by using {{site.data.keyword.keymanagementservicelong_notm}}" width="600" style="width: 600px; border-style: none"/>
@@ -553,7 +553,7 @@ The following image illustrates the encryption workflow in Portworx with {{site.
 ### Portworx volume decryption workflow
 {: #decryption}
 
-The following image illustrates the decryption workflow in Portworx with {{site.data.keyword.keymanagementservicelong_notm}}.
+The following image illustrates the decryption workflow in Portworx with {{site.data.keyword.keymanagementservicelong_notm}} when you set up per-volume encryption.
 
 <img src="images/cs_portworx_volume_decryption.png" alt="Decrypting Portworx volumes by using {{site.data.keyword.keymanagementservicelong_notm}}" width="600" style="width: 600px; border-style: none"/>
 
@@ -564,7 +564,7 @@ The following image illustrates the decryption workflow in Portworx with {{site.
 5. {{site.data.keyword.keymanagementservicelong_notm}} unwraps the DEK to extract the passphrase and returns the passphrase to the Portworx cluster.
 6. The Portworx cluster uses the passphrase to decrypt the volume. After the volume is decrypted, the passphrase is removed from the Portworx cluster.  
 
-### Setting up encryption for your Portworx volumes
+### Setting up per-volume encryption for your Portworx volumes
 {: #setup_encryption}
 
 Follow these steps to set up encryption for your Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}.

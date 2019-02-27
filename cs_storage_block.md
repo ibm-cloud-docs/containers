@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-02-27"
 
 keywords: kubernetes, iks 
 
@@ -872,7 +872,7 @@ Yes, you can [create a custom storage class](#topology_yaml) for your PVC that i
 **What options do I have to add block storage to a stateful set?** </br>
 If you want to automatically create your PVC when you create the stateful set, use [dynamic provisioning](#block_dynamic_statefulset). You can also choose to [pre-provision your PVCs or use existing PVCs](#block_static_statefulset) with your stateful set.  
 
-### Dynamically provision the PVC when you create a stateful set
+### Dynamic provisioning: Creating the PVC when you create a stateful set
 {: #block_dynamic_statefulset}
 
 Use this option if you want to automatically create the PVC when you create the stateful set.
@@ -1152,7 +1152,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    To see the current status of your PVCs, run `kubectl get pvc`. The name of your PVC is formatted as `<volume_name>-<statefulset_name>-<replica_number>`.
    {: tip}
 
-### Pre-provisioning the PVC before creating the stateful set
+### Static provisioning: Using existing PVCs with a stateful set
 {: #block_static_statefulset}
 
 You can pre-provision your PVCs before creating your stateful set or use existing PVCs with your stateful set.
@@ -1162,19 +1162,21 @@ When you [dynamically provision your PVCs when creating the stateful set](#block
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-1. Follow steps 1-3 in [Adding block storage to apps](#add_block) to create a PVC for each stateful set replica. Make sure that you create your PVC with a name that follows the following format: `<volume_name>-<statefulset_name>-<replica_number>`.
+1. If you want to pre-provision the PVC for your stateful set before you create the stateful set, follow steps 1-3 in [Adding block storage to apps](#add_block) to create a PVC for each stateful set replica. Make sure that you create your PVC with a name that follows the following format: `<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`**: Use the name that you want to specify in the `spec.volumeClaimTemplates.metadata.name` section of your stateful set, such as `nginxvol`.
    - **`<statefulset_name>`**: Use the name that you want to specify in the `metadata.name` section of your stateful set, such as `nginx_statefulset`.
    - **`<replica_number>`**: Enter the number of your replica starting with 0.
 
    For example, if you must create 3 stateful set replicas, create 3 PVCs with the following names: `nginxvol-nginx_statefulset-0`, `nginxvol-nginx_statefulset-1`, and `nginxvol-nginx_statefulset-2`.  
+   
+   Looking to create a PVC and PV for an existing storage device? Create your PVC and PV by using [static provisioning](#existing_block). 
 
-2. Follow the steps in [Dynamically provision the PVC when you create a stateful set](#block_dynamic_statefulset) to create your stateful set. Make sure to use the values from your PVC names in the stateful set specification:
-   - **`spec.volumeClaimTemplates.metadata.name`**: Enter the `<volume_name>` that you used in the previous step.
-   - **`metadata.name`**: Enter the `<statefulset_name>` that you used in the previous step.
+2. Follow the steps in [Dynamic provisioning: Creating the PVC when you create a stateful set](#block_dynamic_statefulset) to create your stateful set. The name of your PVC follows the format `<volume_name>-<statefulset_name>-<replica_number>`. Make sure to use the following values from your PVC name in the stateful set specification:
+   - **`spec.volumeClaimTemplates.metadata.name`**: Enter the `<volume_name>` of your PVC name.
+   - **`metadata.name`**: Enter the `<statefulset_name>` of your PVC name.
    - **`spec.replicas`**: Enter the number of replicas that you want to create for your stateful set. The number of replicas must equal the number of PVCs that you created earlier.
 
-   If you created your PVCs in different zones, do not include a region or zone label in your stateful set.
+   If your PVCs are in different zones, do not include a region or zone label in your stateful set.
    {: note}
 
 3. Verify that the PVCs are used in your stateful set replica pods.
