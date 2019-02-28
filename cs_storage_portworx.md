@@ -134,31 +134,6 @@ The following steps show how to provision and set up a Databases for etcd servic
       --endpoints=https://1ab234c5-12a1-1234-a123-123abc45cde1.123456ab78cd9ab1234a456740ab123c.databases.appdomain.cloud:32059
       ```
       {: screen}
-      
-   4. Find the `certificate` section of your service credentials and note the **`certificate_base64`**. 
-   
-5. Create a Kubernetes secret for your certificate. Replace `<base64_certificate>` with the **`certificate_base64`** that you retrieved earlier.   
-   1. Create a configuration file for your secret. 
-      ```
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: px-etcd-certs
-        namespace: kube-system
-      type: Opaque
-      data:
-        ca.pem: <bas64_certificate>
-        client-key.pem: ""
-        client.pem: ""
-      ```
-      {: codeblock}
-      
-   2. Create the secret in your cluster. 
-      ```
-      kubectl apply -f secret.yaml
-      ```
-
-6. [Install Portworx in your cluster](#install_portworx).
 
 
 ### Setting up a Compose for etcd service instance
@@ -254,8 +229,6 @@ To install Portworx:
    - **`usefileSystemDrive`**: Enter `true` to let Portworx find unmounted hard drives, even if they are formatted.
    - **`drives`**: Enter `none` to let Portworx find unmounted and unformatted hard drives.
    - **`etcd.credentials`**: Enter the user name and password of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `<user_name>:<password>`.
-   - **`etcd.certPath`**: Enter the path where the certificate for your database service instance are stored. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts`. For {{site.data.keyword.composeForEtcd}}, enter `none`. 
-   - **`etcd.ca`**: Enter the path to the Certificate Authority (CA) file. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts/ca.pem`. For {{site.data.keyword.composeForEtcd}}, enter `none`.
 
    For a full list of supported parameters, see the [Portworx Helm chart documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/blob/master/charts/portworx/README.md#configuration).
 
