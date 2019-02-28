@@ -431,7 +431,7 @@ Liveness probe failed: HTTP probe failed with statuscode: 500
 在前几课中，应用程序部署为一个工作程序节点中的单独组件。在本课中，您可以将使用 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服务的两个应用程序组件部署到集群中。
 {:shortdesc}
 
-将组件分隔到不同的容器中可确保更新一个组件时不会影响其他组件。然后，您可更新应用程序以使用更多副本将其向上扩展，使其可用性更高。下图包含通过完成本课进行部署的组件。
+将组件分隔到不同的容器中可确保更新一个组件时不会影响其他组件。然后，您可更新应用程序以使用更多副本将其缩放，使其可用性更高。下图包含通过完成本课进行部署的组件。
 
 ![部署设置](images/cs_app_tutorial_mz-components3.png)
 
@@ -695,5 +695,5 @@ deployment "watson-talk-pod" successfully rolled out
 现在，您已掌握了基础知识，可以移至更高级的活动。请考虑尝试下列其中一项：
 
 - 完成存储库中[更复杂的实验 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM/container-service-getting-started-wt#lab-overview)
-- 使用 {{site.data.keyword.containerlong_notm}} [自动扩展应用程序](cs_app.html#app_scaling)
+- 使用 {{site.data.keyword.containerlong_notm}} [自动缩放应用程序](cs_app.html#app_scaling)
 - 在 [IBM Developer ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/technologies/container-orchestration/) 上探索容器编排代码模式

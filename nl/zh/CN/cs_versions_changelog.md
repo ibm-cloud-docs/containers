@@ -241,7 +241,7 @@ lastupdated: "2018-12-05"
 <td>V1.8.3</td>
 <td>V1.10.0</td>
 <td>请参阅 [Kubernetes 仪表板发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/dashboard/releases/tag/v1.10.0)。<br><br>
-如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为使用**令牌**进行登录。此外，现在可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来向上扩展 Kubernetes 仪表板 pod 的数量。</td>
+如果您通过 `kubectl proxy` 来访问仪表板，那么会除去登录页面上的**跳过**按钮。请改为使用**令牌**进行登录。此外，现在可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来缩放 Kubernetes 仪表板 pod 的数量。</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
@@ -261,7 +261,7 @@ lastupdated: "2018-12-05"
 <td>V1.12.2-68</td>
 <td>更新为支持 Kubernetes 1.12 发行版。其他更改包括以下内容：
 <ul><li>现在，负载均衡器 pod（在 `ibm-system` 名称空间中为 `ibm-cloud-provider-ip-*`）可设置 CPU 和内存资源请求。</li>
-<li>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`。</li>
+<li>添加了 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` 注释，用于指定 LoadBalancer 服务部署到的 VLAN。要查看集群中的可用 VLAN，请运行 `ibmcloud ks vlans --zone <zone>`.</li>
 <li>新的[负载均衡器 2.0](cs_loadbalancer.html#planning_ipvs) 作为 Beta 提供。</li></ul></td>
 </tr>
 <tr>

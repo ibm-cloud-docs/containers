@@ -166,14 +166,14 @@ Kubernetes 存储类用于抽象 {{site.data.keyword.Bluemix_notm}} 中支持的
 ### 更改为或更新为其他存储类
 {: #update_storageclass}
 
-使用存储类动态供应持久性存储器时，供应的是具有特定配置的持久性存储器。不能更改存储类的名称，也不能更改您供应的存储器类型。但是，您可以选择扩展存储器，如下表所示。
+使用存储类动态供应持久性存储器时，供应的是具有特定配置的持久性存储器。不能更改存储类的名称，也不能更改您供应的存储器类型。但是，您可以选择缩放存储器，如下表所示。
 {: shortdesc}
 
 <table> 
-<caption>{{site.data.keyword.containerlong_notm}} 存储解决方案的扩展选项概述</caption>
+<caption>{{site.data.keyword.containerlong_notm}} 存储解决方案的缩放选项概述</caption>
 <thead>
 <th>存储解决方案</th>
-<th>扩展选项</th>
+<th>缩放选项</th>
 </thead>
 <tbody>
 <tr>

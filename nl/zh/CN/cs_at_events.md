@@ -302,19 +302,19 @@ lastupdated: "2018-12-05"
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.create</code></td>
-    <td>创建了水平 pod 自动扩展策略。</td>
+    <td>创建了水平 pod 自动缩放策略。</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.delete</code></td>
-    <td>删除了水平 pod 自动扩展策略。</td>
+    <td>删除了水平 pod 自动缩放策略。</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.patch</code></td>
-    <td>修补了水平 pod 自动扩展策略。</td>
+    <td>修补了水平 pod 自动缩放策略。</td>
   </tr>
   <tr>
     <td><code>horizontalpodautoscalers.update</code></td>
-    <td>更新了水平 pod 自动扩展策略。</td>
+    <td>更新了水平 pod 自动缩放策略。</td>
   </tr>
   <tr>
     <td><code>ingresses.create</code></td>

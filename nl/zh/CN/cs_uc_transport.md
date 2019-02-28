@@ -31,14 +31,14 @@ lastupdated: "2018-12-05"
 ## 运输公司提高针对合作伙伴生态系统的全球范围系统可用性
 {: #uc_shipping}
 
-IT 主管拥有与合作伙伴进行交互的全球运输路线和调度系统。合作伙伴需要访问这些 IoT 设备数据的系统中的最新信息。然而，这些系统无法以充分的 HA 在全球范围进行扩展。
+IT 主管拥有与合作伙伴进行交互的全球运输路线和调度系统。合作伙伴需要访问这些 IoT 设备数据的系统中的最新信息。然而，这些系统无法以充分的 HA 在全球范围进行缩放。
 {: shortdesc}
  
-为什么选择 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 可扩展可用性达 99.999% 的容器化应用程序，以满足不断增长的需求。开发者可以轻松进行试验，从而将更改快速推送到开发和测试系统时，应用程序部署每天可执行 40 次。通过 IoT Platform，可轻松访问 IoT 数据。 
+为什么选择 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 可缩放可用性达 99.999% 的容器化应用程序，以满足不断增长的需求。开发者可以轻松进行试验，从而将更改快速推送到开发和测试系统时，应用程序部署每天可执行 40 次。通过 IoT Platform，可轻松访问 IoT 数据。 
  
 关键技术：    
 * [针对合作伙伴生态系统的多个区域](https://console.bluemix.net/docs/containers/cs_regions.html#regions-and-locations)
-* [水平扩展](cs_app.html#highly_available_apps) 
+* [水平缩放](cs_app.html#highly_available_apps) 
 * [{{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
 * [面向创新的云服务](https://www.ibm.com/cloud/products/#analytics)
 * [{{site.data.keyword.messagehub_full}} 用于将事件数据提供给应用程序](https://console.bluemix.net/docs/services/MessageHub/messagehub010.html#about)
@@ -92,7 +92,7 @@ IoT 设备流式传输的数据由 {{site.data.keyword.messagehub_full}} 分发�
 * 基于应用程序的功能区域及其依赖关系，将应用程序构建成 {{site.data.keyword.containerlong_notm}} 中的一组协作微服务。
 * 将应用程序部署到 {{site.data.keyword.containerlong_notm}} 中的容器。 
 * 通过 Kubernetes 提供标准化的 DevOps 仪表板。
-* 对不频繁运行的批处理和其他库存工作负载的计算启用按需扩展。
+* 对不频繁运行的批处理和其他库存工作负载的计算启用按需缩放。
 * 使用 {{site.data.keyword.messagehub_full}} 来管理来自 IoT 设备的流式数据。
 
 **步骤 2：确保全球可用性**
@@ -155,11 +155,11 @@ IoT 设备流式传输的数据由 {{site.data.keyword.messagehub_full}} 分发�
 * IBM Logging and Monitoring
 * {{site.data.keyword.SecureGatewayfull}}
 
-加快开发速度是 HR 主管的制胜关键所在。首先，团队对其应用程序容器化，然后将其放入云中。通过使用现代容器，开发者可以使用 Node.js SDK 轻松进行试验，将更改推送到开发和测试系统，这些系统可在不同集群上向外扩展。这些推送通过开放式工具链和 {{site.data.keyword.contdelivery_full}} 自动执行。对 HR 站点的更新不用再受困于速度慢、易出错的构建过程。他们可以每天或更频繁地向其站点交付增量更新。此外，还可以快速集成 HR 站点的日志记录和监视，尤其是对于站点从后端福利系统中拉取个性化数据的方式。开发者不必浪费时间构建复杂的日志记录系统，只需要有能力对实时系统进行故障诊断即可。
+加快开发速度是 HR 主管的制胜关键所在。首先，团队对其应用程序容器化，然后将其放入云中。通过使用现代容器，开发者可以使用 Node.js SDK 轻松进行试验，将更改推送到开发和测试系统，这些系统可在不同集群上横向扩展。这些推送通过开放式工具链和 {{site.data.keyword.contdelivery_full}} 自动执行。对 HR 站点的更新不用再受困于速度慢、易出错的构建过程。他们可以每天或更频繁地向其站点交付增量更新。此外，还可以快速集成 HR 站点的日志记录和监视，尤其是对于站点从后端福利系统中拉取个性化数据的方式。开发者不必浪费时间构建复杂的日志记录系统，只需要有能力对实时系统进行故障诊断即可。
 
 通过 {{site.data.keyword.containerlong_notm}}，开发者从专用数据中心内构建过度的硬件转向可定制计算，从而减少了 IT 运营、维护和能源成本。为了托管 HR 站点，他们能够轻松设计 Kubernetes 集群，以适应自己的 CPU、RAM 和存储器需求。降低人员成本的另一个因素是由 IBM 来管理 Kubernetes，这样开发者就可以集中精力交付更好的员工福利注册体验。
 
-{{site.data.keyword.containerlong_notm}} 提供了可扩展的计算资源和关联的 DevOps 仪表板，可根据需要创建、扩展和拆除应用程序和服务。通过使用业界标准容器技术，应用程序可以在多个开发、测试和生产环境中进行快速开发和共享。此设置即时提供了可扩展性的优点。通过使用 Kubernetes 的一组丰富的部署和运行时对象，HR 团队可以可靠地监视和管理应用程序升级。他们还可以使用定义的规则和自动化 Kubernetes 编排器来复制和扩展应用程序。
+{{site.data.keyword.containerlong_notm}} 提供了可缩放的计算资源和关联的 DevOps 仪表板，可根据需要创建、缩放和拆除应用程序和服务。通过使用业界标准容器技术，应用程序可以在多个开发、测试和生产环境中进行快速开发和共享。此设置即时提供了可扩展性的优点。通过使用 Kubernetes 的一组丰富的部署和运行时对象，HR 团队可以可靠地监视和管理应用程序升级。他们还可以使用定义的规则和自动化 Kubernetes 编排器来复制和缩放应用程序。
 
 **步骤 1：容器、微服务和 Garage Method**
 * 将应用程序构建成一组在 {{site.data.keyword.containerlong_notm}} 中运行的协作微服务。该体系结构表示应用程序具有最多质量问题的功能性区域。

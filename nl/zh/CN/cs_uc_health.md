@@ -36,14 +36,14 @@ lastupdated: "2018-12-05"
 
 关键技术：    
 * [适应各种 CPU、内存和存储器需求的集群](cs_clusters_planning.html#shared_dedicated_node)
-* [水平扩展](cs_app.html#highly_available_apps)
+* [水平缩放](cs_app.html#highly_available_apps)
 * [容器安全性和隔离](cs_secure.html#security)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](https://console.bluemix.net/docs/runtimes/nodejs/index.html#nodejs_runtime)
 
 首先，他们对自己的 SaaS 系统容器化，然后将其放入云中。从第一步开始，他们从专用数据中心内构建过度的硬件转向可定制计算，从而减少了 IT 运营、维护和能源成本。为了托管 SaaS 站点，他们轻松设计了 Kubernetes 集群，以适应自己的 CPU、RAM 和存储器需求。降低员工成本的另一个因素是由 IBM 来管理 Kubernetes，这样提供者就可以集中精力交付更好的客户服务。
 
-加快开发速度是 IT 主管的制胜关键所在。通过移至公共云，开发者可以使用 Node.js SDK 轻松进行试验，将更改推送到开发和测试系统，使系统在不同集群上向外扩展。这些推送通过开放式工具链和 {{site.data.keyword.contdelivery_full}} 自动执行。对 SaaS 系统的更新不用再受困于速度慢、易出错的构建过程。开发者可以每天甚至更频繁地向其用户交付增量更新。此外，SaaS 系统的日志记录和监视功能（尤其是患者前端和后端报告交互方式）可快速集成到系统中。开发者不必浪费时间构建复杂的日志记录系统，只需要有能力对实时系统进行故障诊断即可。
+加快开发速度是 IT 主管的制胜关键所在。通过移至公共云，开发者可以使用 Node.js SDK 轻松进行试验，将更改推送到开发和测试系统，使系统在不同集群上横向扩展。这些推送通过开放式工具链和 {{site.data.keyword.contdelivery_full}} 自动执行。对 SaaS 系统的更新不用再受困于速度慢、易出错的构建过程。开发者可以每天甚至更频繁地向其用户交付增量更新。此外，SaaS 系统的日志记录和监视功能（尤其是患者前端和后端报告交互方式）可快速集成到系统中。开发者不必浪费时间构建复杂的日志记录系统，只需要有能力对实时系统进行故障诊断即可。
 
 安全第一：通过 {{site.data.keyword.containerlong_notm}} 的裸机，敏感患者工作负载现在可采用熟悉的隔离方法，但仍不脱离公共云的灵活性范围内。裸机提供了可信计算，可以验证底层硬件是否受到篡改。通过该核心，漏洞顾问程序会提供以下扫描：
 * 映像漏洞扫描
@@ -74,9 +74,9 @@ lastupdated: "2018-12-05"
 **步骤 2：提升并转换**
 * 将虚拟机映像迁移到在公共云的 {{site.data.keyword.containerlong_notm}} 中运行的容器映像。
 * 通过 Kubernetes 提供标准化的 DevOps 仪表板和实践。
-* 对不频繁运行的批处理和其他后台工作负载的计算启用按需扩展。
+* 对不频繁运行的批处理和其他后台工作负载的计算启用按需缩放。
 * 使用 {{site.data.keyword.SecureGatewayfull}} 来维护与内部部署 DBMS 的安全连接。
-* 专用数据中心/内部部署资本成本大幅减少，取而代之的是基于工作负载需求进行扩展的实用工具计算模型。
+* 专用数据中心/内部部署资本成本大幅减少，取而代之的是基于工作负载需求进行缩放的实用工具计算模型。
 
 **步骤 3：微服务和 Garage Method**
 * 将应用程序重新构建成一组协作微服务。该组协作微服务基于应用程序具有最多质量问题的功能性区域在 {{site.data.keyword.containerlong_notm}} 中运行。
@@ -91,7 +91,7 @@ lastupdated: "2018-12-05"
 
 对于最敏感的工作负载，可在 {{site.data.keyword.containerlong_notm}} for Bare Metal 中托管集群。它提供了一个可信计算平台，可自动扫描硬件和运行时代码以查找漏洞。通过使用业界标准容器技术，应用程序最初可在 {{site.data.keyword.containerlong_notm}} 上迅速重新托管，而无需重大的体系结构更改。此更改即时提供了可扩展性的优点。
 
-他们可以使用定义的规则和自动化 Kubernetes 编排器来复制和扩展应用程序。{{site.data.keyword.containerlong_notm}} 提供了可扩展的计算资源和关联的 DevOps 仪表板，可根据需要创建、扩展和拆除应用程序和服务。通过使用 Kubernetes 的部署和运行时对象，提供者可以可靠地监视和管理应用程序升级。
+他们可以使用定义的规则和自动化 Kubernetes 编排器来复制和缩放应用程序。{{site.data.keyword.containerlong_notm}} 提供了可缩放的计算资源和关联的 DevOps 仪表板，可根据需要创建、缩放和拆除应用程序和服务。通过使用 Kubernetes 的部署和运行时对象，提供者可以可靠地监视和管理应用程序升级。
 
 {{site.data.keyword.SecureGatewayfull}} 用于针对要重新托管用于在 {{site.data.keyword.containerlong_notm}} 中运行的应用程序，创建通往内部部署数据库和文档的安全管道。
 
@@ -184,7 +184,7 @@ CI/CD 过程本身的大部分内容通过云中的 IBM Continuous Delivery 服�
 * 基于应用程序的功能性区域及其依赖关系，将应用程序构建成 {{site.data.keyword.containerlong_notm}} 中的一组协作微服务。
 * 将研究应用程序部署到 {{site.data.keyword.containerlong_notm}} 中的容器。
 * 通过 Kubernetes 提供标准化的 DevOps 仪表板。
-* 对不频繁运行的批处理和其他研究工作负载的计算启用按需扩展。
+* 对不频繁运行的批处理和其他研究工作负载的计算启用按需缩放。
 * 使用 {{site.data.keyword.SecureGatewayfull}} 来维护与现有内部部署数据库的安全连接。
 
 **步骤 2：使用安全和高性能计算**

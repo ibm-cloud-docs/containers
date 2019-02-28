@@ -24,7 +24,7 @@ lastupdated: "2018-12-05"
 {: #kubernetes}
 {: faq}
 
-Kubernetes 是一个开放式源代码平台，用于管理跨多个主机的容器化工作负载和服务，并提供用于部署、自动化、监视和扩展容器化应用程序的管理工具，需要的手动干预极少，甚至不需要手动干预。组成微服务的所有容器都会分组成 pod，pod 是一种逻辑单元，可确保轻松进行管理和发现。这些 pod 在可移植、可扩展并能在发生故障转移时自我复原的 Kubernetes 集群中管理的计算主机上运行。
+Kubernetes 是一个开放式源代码平台，用于管理跨多个主机的容器化工作负载和服务，并提供用于部署、自动化、监视和缩放容器化应用程序的管理工具，需要的手动干预极少，甚至不需要手动干预。组成微服务的所有容器都会分组成 pod，pod 是一种逻辑单元，可确保轻松进行管理和发现。这些 pod 在可移植、可扩展并能在发生故障转移时自我复原的 Kubernetes 集群中管理的计算主机上运行。
 {: shortdesc}
 
 有关 Kubernetes 的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational)。 
@@ -41,7 +41,7 @@ Kubernetes 是一个开放式源代码平台，用于管理跨多个主机的容
 {: #benefits}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} 是一个受管的 Kubernetes 产品，提供功能强大的工具、直观的用户体验和内置安全性，用于快速交付可绑定到与 IBM Watson®、AI、IoT、DevOps、安全性和数据分析相关的云服务的应用程序。作为经过认证的 Kubernetes 提供程序，{{site.data.keyword.containerlong_notm}} 具备智能安排、自我复原、水平扩展、服务发现和负载均衡、自动应用和回滚以及私钥和配置管理功能。该服务还具有与简化的集群管理、容器安全性和隔离策略相关的高级功能，设计您自己的集群的功能，以及用于实现部署一致性的集成操作工具。
+{{site.data.keyword.containerlong_notm}} 是一个受管的 Kubernetes 产品，提供功能强大的工具、直观的用户体验和内置安全性，用于快速交付可绑定到与 IBM Watson®、AI、IoT、DevOps、安全性和数据分析相关的云服务的应用程序。作为经过认证的 Kubernetes 提供程序，{{site.data.keyword.containerlong_notm}} 具备智能安排、自我复原、水平缩放、服务发现和负载均衡、自动应用和回滚以及私钥和配置管理功能。该服务还具有与简化的集群管理、容器安全性和隔离策略相关的高级功能，设计您自己的集群的功能，以及用于实现部署一致性的集成操作工具。
 
 有关功能和优点的详细概述，请参阅[为什么选择 {{site.data.keyword.containerlong_notm}}](cs_why.html#cs_ov)。 
 

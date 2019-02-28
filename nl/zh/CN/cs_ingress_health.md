@@ -138,7 +138,7 @@ kubectl get pods -n kube-system | grep alb
 
 在 `ibm-cloud-provider-ingress-cm` Ingress 配置映射中，`vts-status-zone-size` 字段设置用于度量值数据收集的共享内存专区的大小。缺省情况下，`vts-status-zone-size` 设置为 `10m`。如果大型环境需要更多内存用于度量值收集，那么可以通过执行以下步骤来覆盖缺省值，而改为使用更大的值。
 
-开始之前，请确保您具有 `kube-system` 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **作者**或**管理者**服务角色](cs_users.html#platform)。
+开始之前，请确保您具有 `kube-system` 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](cs_users.html#platform)。
 
 1. 为 `ibm-cloud-provider-ingress-cm` 配置映射资源创建并打开配置文件的本地版本。
 

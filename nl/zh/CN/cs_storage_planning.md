@@ -265,8 +265,8 @@ lastupdated: "2018-12-05"
 <td style="text-align:left">可扩展性</td>
 <td style="text-align:left">难以扩展到数据中心之外。无法更改现有存储层。</td>
 <td style="text-align:left">难以扩展到数据中心之外。无法更改现有存储层。</td>
-<td style="text-align:left">轻松扩展。</td>
-<td style="text-align:left">轻松扩展。</td>
+<td style="text-align:left">轻松缩放。</td>
+<td style="text-align:left">轻松缩放。</td>
 </tr>
 <tr>
 <td style="text-align:left">加密</td>

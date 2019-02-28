@@ -688,7 +688,7 @@ Kubernetes 会自动审计通过 API 服务器传递的任何事件。可以将�
 
 2. 在已创建的存储区中生成 [HMAC 服务凭证](/docs/services/cloud-object-storage/iam/service-credentials.html)。
   1. 在 {{site.data.keyword.cos_short}} 仪表板的**服务凭证**选项卡中，单击**新建凭证**。
-  2. 为 HMAC 凭证指定`作者`服务角色。
+  2. 为 HMAC 凭证指定`写入者`服务角色。
   3. 在**添加内联配置参数**字段中，指定 `{"HMAC":true}`。
 
 3. 通过 CLI，发出获取主节点日志快照的请求。
@@ -741,7 +741,7 @@ Kubernetes 会自动审计通过 API 服务器传递的任何事件。可以将�
 
 <dl>
   <dt>{{site.data.keyword.Bluemix_notm}} 中的集群详细信息页面</dt>
-    <dd>{{site.data.keyword.containerlong_notm}} 提供了有关集群的运行状况和容量以及集群资源使用情况的信息。可以使用此控制台通过 {{site.data.keyword.Bluemix_notm}} 服务绑定来向外扩展集群，使用持久性存储器以及向集群添加更多功能。要查看集群详细信息页面，请转至 **{{site.data.keyword.Bluemix_notm}} 仪表板**，然后选择集群。</dd>
+    <dd>{{site.data.keyword.containerlong_notm}} 提供了有关集群的运行状况和容量以及集群资源使用情况的信息。可以使用此控制台通过 {{site.data.keyword.Bluemix_notm}} 服务绑定来横向扩展集群，使用持久性存储器以及向集群添加更多功能。要查看集群详细信息页面，请转至 **{{site.data.keyword.Bluemix_notm}} 仪表板**，然后选择集群。</dd>
   <dt>Kubernetes 仪表板</dt>
     <dd>Kubernetes 仪表板是一个管理 Web 界面，可以在其中查看工作程序节点的运行状况，查找 Kubernetes 资源，部署容器化应用程序，以及使用日志记录和监视信息对应用程序进行故障诊断。有关如何访问 Kubernetes 仪表板的更多信息，请参阅[启动 {{site.data.keyword.containerlong_notm}} 的 Kubernetes 仪表板](cs_app.html#cli_dashboard)。</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>

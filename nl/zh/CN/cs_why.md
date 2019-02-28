@@ -23,7 +23,7 @@ lastupdated: "2018-12-05"
 # 为什么使用 {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
-{{site.data.keyword.containerlong}} 通过组合 Docker 容器、Kubernetes 技术、直观的用户体验以及内置安全性和隔离，提供功能强大的工具来自动对计算主机集群中的容器化应用程序进行部署、操作、扩展和监视。有关证书信息，请参阅 [Compliance on the {{site.data.keyword.Bluemix_notm}} ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/compliance)。
+{{site.data.keyword.containerlong}} 通过组合 Docker 容器、Kubernetes 技术、直观的用户体验以及内置安全性和隔离，提供功能强大的工具来自动对计算主机集群中的容器化应用程序进行部署、操作、缩放和监视。有关证书信息，请参阅 [Compliance on the {{site.data.keyword.Bluemix_notm}} ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/compliance)。
 {:shortdesc}
 
 
@@ -69,7 +69,7 @@ lastupdated: "2018-12-05"
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Public
  </td>
- <td>使用位于[共享或专用硬件或者位于裸机机器上](cs_clusters_planning.html#shared_dedicated_node)的 {{site.data.keyword.Bluemix_notm}} Public 时，可以使用 {{site.data.keyword.containerlong_notm}} 在云上的集群中托管应用程序。您还可以使用多个专区中的工作程序池来创建集群，以提高应用程序的高可用性。{{site.data.keyword.containerlong_notm}} on {{site.data.keyword.Bluemix_notm}} Public 通过组合 Docker 容器、Kubernetes 技术、直观的用户体验以及内置安全性和隔离，提供功能强大的工具来自动对计算主机集群中的容器化应用程序进行部署、操作、扩展和监视。<br><br>有关更多信息，请参阅 [{{site.data.keyword.containerlong_notm}} 技术](cs_tech.html)。
+ <td>使用位于[共享或专用硬件或者位于裸机机器上](cs_clusters_planning.html#shared_dedicated_node)的 {{site.data.keyword.Bluemix_notm}} Public 时，可以使用 {{site.data.keyword.containerlong_notm}} 在云上的集群中托管应用程序。您还可以使用多个专区中的工作程序池来创建集群，以提高应用程序的高可用性。{{site.data.keyword.containerlong_notm}} on {{site.data.keyword.Bluemix_notm}} Public 通过组合 Docker 容器、Kubernetes 技术、直观的用户体验以及内置安全性和隔离，提供功能强大的工具来自动对计算主机集群中的容器化应用程序进行部署、操作、缩放和监视。<br><br>有关更多信息，请参阅 [{{site.data.keyword.containerlong_notm}} 技术](cs_tech.html)。
  </td>
  </tr>
  <tr>
@@ -115,7 +115,7 @@ lastupdated: "2018-12-05"
 |[能够在每个 {{site.data.keyword.containerlong_notm}} 区域中创建集群](cs_regions.html)| | <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[用于提高应用程序高可用性的多专区集群](cs_clusters_planning.html#multizone)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |实现更高可用性的复制主节点（Kubernetes 1.10 或更高版本）| | <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[用于增加容量的可扩展工作程序节点数](cs_app.html#app_scaling)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|[用于增加容量的可缩放工作程序节点数](cs_app.html#app_scaling)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[基于 NFS 文件的持久存储器（带有卷）](cs_storage_file.html#file_storage)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[LoadBalancer 服务对稳定 IP 地址的公共或专用网络应用程序访问权](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[Ingress 服务对稳定 IP 地址和可定制 URL 的公用网络应用程序访问权](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|

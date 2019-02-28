@@ -346,8 +346,8 @@ lastupdated: "2018-12-06"
 </tr>
 <tr>
 <td>2 月 26 日</td>
-<td>[KubeDNS 自动扩展](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/)</td>
-<td>现在，KubeDNS 可随着集群的增长而扩展。可以使用以下命令来调整扩展配额：`kubectl -n kube-system edit cm kube-dns-autoscaler`。</td>
+<td>[KubeDNS 自动缩放](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/)</td>
+<td>现在，KubeDNS 可随着集群的增长而缩放。可以使用以下命令来调整缩放配额：`kubectl -n kube-system edit cm kube-dns-autoscaler`。</td>
 </tr>
 <tr>
 <td>2 月 23 日</td>

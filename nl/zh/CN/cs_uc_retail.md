@@ -86,7 +86,7 @@ lastupdated: "2018-12-05"
 * 基于应用程序的功能性区域及其依赖关系，将应用程序构建成一组在 {{site.data.keyword.containerlong_notm}} 中运行的协作微服务。
 * 将应用程序部署到在 {{site.data.keyword.containerlong_notm}} 中运行的容器映像。 
 * 通过 Kubernetes 提供标准化的 DevOps 仪表板。
-* 对不频繁运行的批处理和其他库存工作负载启用按需扩展。
+* 对不频繁运行的批处理和其他库存工作负载启用按需缩放。
 
 **步骤 2：确保全球可用性**
 * {{site.data.keyword.containerlong_notm}} 中的内置 HA 工具对每个地理区域内的工作负载进行均衡，包括自我复原和负载均衡。
@@ -118,7 +118,7 @@ lastupdated: "2018-12-05"
 为什么选择 {{site.data.keyword.cloud_notm}}：通过 {{site.data.keyword.containerlong_notm}}，可以轻松启动更多计算能力，开发者可快速添加 Cloud Analytics 服务，以获取销售行为洞察并适应数字市场。 
 
 关键技术：    
-* [水平扩展以加速开发](cs_app.html#highly_available_apps) 
+* [水平缩放以加速开发](cs_app.html#highly_available_apps) 
 * [适应各种 CPU、内存和存储器需求的集群](cs_clusters_planning.html#shared_dedicated_node)
 * [利用 Watson Discovery 来洞察市场趋势](https://www.ibm.com/watson/services/discovery/)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
@@ -172,7 +172,7 @@ lastupdated: "2018-12-05"
 
 * 将库存分析和移动应用程序构建成微服务，然后将其部署到 {{site.data.keyword.containerlong_notm}} 中的容器。 
 * 通过 Kubernetes 提供标准化的 DevOps 仪表板。
-* 对于不频繁运行的批处理和其他库存工作负载，按需扩展计算。
+* 对于不频繁运行的批处理和其他库存工作负载，按需缩放计算。
 
 **步骤 2：分析库存和趋势**
 * {{site.data.keyword.messagehub_full}} 充当即时事件平台，将库存系统中快速变化的信息传递给 IBM Streaming Analytics。 

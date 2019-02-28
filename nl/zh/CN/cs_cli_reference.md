@@ -1268,7 +1268,7 @@ trusted: <em>true</em>
 
 [安装容器扫描程序](/docs/services/va/va_index.html#va_install_container_scanner)后，请查看集群中容器的详细漏洞评估报告。
 
-<strong>最低必需许可权</strong>：对 {{site.data.keyword.registrylong_notm}} 的**读者**服务访问角色。**注**：不要在资源组级别为 {{site.data.keyword.registryshort_notm}} 分配策略。
+<strong>最低必需许可权</strong>：对 {{site.data.keyword.registrylong_notm}} 的**读取者**服务访问角色。**注**：不要在资源组级别为 {{site.data.keyword.registryshort_notm}} 分配策略。
 
 **命令选项**：
 

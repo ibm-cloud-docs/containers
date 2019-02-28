@@ -36,7 +36,7 @@ lastupdated: "2018-12-05"
 为什么选择 {{site.data.keyword.Bluemix_notm}}：为了改进风险分析，该公司期望 {{site.data.keyword.containerlong_notm}} 和 IBM Cloud Analytic 服务可帮助降低成本，提高全球范围的可用性，并最终加快实现合规性。通过多个区域中的 {{site.data.keyword.containerlong_notm}}，可以对该公司的分析应用程序容器化并将其部署到全球范围，从而提高可用性并满足当地法规要求。这些部署通过人们熟悉的开放式源代码工具进行加速，这些工具已经是 {{site.data.keyword.containerlong_notm}} 的组成部分。
 
 {{site.data.keyword.containerlong_notm}} 和关键技术： 
-* [水平扩展](cs_app.html#highly_available_apps) 
+* [水平缩放](cs_app.html#highly_available_apps) 
 * [利用多个区域实现高可用性](cs_regions.html#regions-and-zones)
 * [适应各种 CPU、内存和存储器需求的集群](cs_clusters_planning.html#shared_dedicated_node)
 * [容器安全性和隔离](cs_secure.html#security)
@@ -45,7 +45,7 @@ lastupdated: "2018-12-05"
 
 **解决方案**
 
-首先，该公司对分析应用程序容器化，然后将其放入云中。他们头疼的硬件问题瞬间就解决了。他们能够轻松设计 Kubernetes 集群，以适应自己的高性能 CPU、RAM、存储器和安全性需求。当分析应用程序发生变化时，他们不用进行大量硬件投资就能添加或收缩计算。利用 {{site.data.keyword.containerlong_notm}} 水平扩展，他们的应用程序可随着记录数的增长而扩展，从而能更快生成法规报告。{{site.data.keyword.containerlong_notm}} 提供了全球范围的弹性计算资源，这些资源安全、性能高，可充分利用现代计算资源。
+首先，该公司对分析应用程序容器化，然后将其放入云中。他们头疼的硬件问题瞬间就解决了。他们能够轻松设计 Kubernetes 集群，以适应自己的高性能 CPU、RAM、存储器和安全性需求。当分析应用程序发生变化时，他们不用进行大量硬件投资就能添加或收缩计算。利用 {{site.data.keyword.containerlong_notm}} 水平缩放，他们的应用程序可随着记录数的增长而缩放，从而能更快生成法规报告。{{site.data.keyword.containerlong_notm}} 提供了全球范围的弹性计算资源，这些资源安全、性能高，可充分利用现代计算资源。
 
 现在，这些应用程序可从 {{site.data.keyword.cloudant}} 上的数据仓库接收大量数据。{{site.data.keyword.cloudant}} 中基于云的存储器可确保数据可用性高于原先禁锢在内部部署系统中的数据的可用性。由于可用性至关重要，因此应用程序会跨全球数据中心进行部署：解决 DR 和等待时间问题。
 
@@ -74,13 +74,13 @@ lastupdated: "2018-12-05"
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGateway}}
 
-{{site.data.keyword.containerlong_notm}} 提供了可扩展的计算资源和关联的 DevOps 仪表板，可根据需要创建、扩展和拆除应用程序和服务。通过使用业界标准容器，应用程序最初可在 {{site.data.keyword.containerlong_notm}} 上迅速重新托管，而无需重大的体系结构更改。 
+{{site.data.keyword.containerlong_notm}} 提供了可缩放的计算资源和关联的 DevOps 仪表板，可根据需要创建、缩放和拆除应用程序和服务。通过使用业界标准容器，应用程序最初可在 {{site.data.keyword.containerlong_notm}} 上迅速重新托管，而无需重大的体系结构更改。 
 
-此解决方案即时提供了可扩展性的优点。通过使用 Kubernetes 的一组丰富的部署和运行时对象，该抵押贷款公司可以可靠地监视和管理应用程序升级。他们还能够复制和扩展应用程序，以使用定义的规则和自动化 Kubernetes 编排器。
+此解决方案即时提供了可扩展性的优点。通过使用 Kubernetes 的一组丰富的部署和运行时对象，该抵押贷款公司可以可靠地监视和管理应用程序升级。他们还能够复制和缩放应用程序，以使用定义的规则和自动化 Kubernetes 编排器。
 
 {{site.data.keyword.SecureGateway}} 用于针对要重新托管以在 {{site.data.keyword.containerlong_notm}} 中运行的应用程序，创建通往内部部署数据库和文档的安全管道。
 
-{{site.data.keyword.cos_full_notm}} 在其推进过程中适用于所有原始文档和数据存储器。为了进行蒙特卡洛模拟，实施了一条工作流程管道，在其中模拟数据位于存储在 {{site.data.keyword.cos_full_notm}} 中的结构化输入文件中。用于启动模拟的触发器会扩展 {{site.data.keyword.containerlong_notm}} 中的计算服务，以将输入数据拆分成 N 个事件存储区来进行模拟处理。{{site.data.keyword.containerlong_notm}} 会自动扩展到 N 个关联的服务执行，然后将中间结果写入 {{site.data.keyword.cos_full_notm}}。这些结果由另一组 {{site.data.keyword.containerlong_notm}} 计算服务进行处理，以生成最终结果。
+{{site.data.keyword.cos_full_notm}} 在其推进过程中适用于所有原始文档和数据存储器。为了进行蒙特卡洛模拟，实施了一条工作流程管道，在其中模拟数据位于存储在 {{site.data.keyword.cos_full_notm}} 中的结构化输入文件中。用于启动模拟的触发器会缩放 {{site.data.keyword.containerlong_notm}} 中的计算服务，以将输入数据拆分成 N 个事件存储区来进行模拟处理。{{site.data.keyword.containerlong_notm}} 会自动缩放到 N 个关联的服务执行，然后将中间结果写入 {{site.data.keyword.cos_full_notm}}。这些结果由另一组 {{site.data.keyword.containerlong_notm}} 计算服务进行处理，以生成最终结果。
 
 {{site.data.keyword.cloudant}} 是一种现代 NoSQL 数据库，对于许多数据驱动的用例非常有用：从键/值到复杂的面向文档的数据存储和查询。为了管理不断增长的法规和管理报告规则集，该抵押贷款公司使用 {{site.data.keyword.cloudant}} 来存储与传入公司的原始监管数据输入关联的文档。这将触发 {{site.data.keyword.containerlong_notm}} 上的计算过程来汇集、处理和发布各种报告格式的数据。通用于各个报告的中间结果会存储为 {{site.data.keyword.cloudant}} 文档，以便可以使用模板驱动的过程来生成必要的报告。
 
@@ -140,9 +140,9 @@ lastupdated: "2018-12-05"
 
 首先，该公司对支付工具 VM 容器化，然后将其放入云中。他们头疼的硬件问题瞬间就解决了。他们能够轻松设计 Kubernetes 集群，以适应自己的 CPU、RAM、存储器和安全性需求。此外，当支付工具需要更改时，他们不用采购昂贵的硬件，也不必等待缓慢的硬件采购流程，直接就能添加或收缩计算。 
 
-利用 {{site.data.keyword.containerlong_notm}} 水平扩展，他们的应用程序可随着合作伙伴数的增长而扩展，从而能实现更快的成长。{{site.data.keyword.containerlong_notm}} 提供了全球范围的弹性计算资源，这些资源十分安全，可充分利用现代计算资源。 
+利用 {{site.data.keyword.containerlong_notm}} 水平缩放，他们的应用程序可随着合作伙伴数的增长而缩放，从而能实现更快的成长。{{site.data.keyword.containerlong_notm}} 提供了全球范围的弹性计算资源，这些资源十分安全，可充分利用现代计算资源。 
 
-加快开发速度是主管的制胜关键所在。通过使用现代容器，开发者可以轻松使用自己所选的语言进行试验，将更改推送到开发和测试系统，以及在不同集群上向外扩展。这些推送通过开放式工具链和 {{site.data.keyword.contdelivery_full}} 自动执行。对工具的更新不用再受困于速度慢、易出错的构建过程。他们可以每天或更频繁地向其工具交付增量更新。 
+加快开发速度是主管的制胜关键所在。通过使用现代容器，开发者可以轻松使用自己所选的语言进行试验，将更改推送到开发和测试系统，以及在不同集群上横向扩展。这些推送通过开放式工具链和 {{site.data.keyword.contdelivery_full}} 自动执行。对工具的更新不用再受困于速度慢、易出错的构建过程。他们可以每天或更频繁地向其工具交付增量更新。 
 
 此外，工具的日志记录和监视功能（尤其是如果使用了 {{site.data.keyword.watson}} AI）可快速集成到系统中。开发者不必浪费时间构建复杂的日志记录系统，只需要有能力对实时系统进行故障诊断即可。降低员工成本的一个关键因素是由 IBM 来管理 Kubernetes，这样开发者就可以集中精力改进支付工具。
 
@@ -152,7 +152,7 @@ lastupdated: "2018-12-05"
 * 用于管理高敏感性数据的应用程序可以在裸机上运行的 {{site.data.keyword.containerlong_notm}} 上重新托管，以实现可信计算。可信计算可以验证底层硬件是否受到篡改。 
 * 将虚拟机映像迁移到在公共 {{site.data.keyword.Bluemix_notm}} 的 {{site.data.keyword.containerlong_notm}} 中运行的容器映像。
 * 通过该核心，漏洞顾问程序可提供针对已知恶意软件的映像、策略、容器和打包漏洞扫描。 
-* 专用数据中心/内部部署资本成本大幅减少，取而代之的是基于工作负载需求进行扩展的实用工具计算模型。
+* 专用数据中心/内部部署资本成本大幅减少，取而代之的是基于工作负载需求进行缩放的实用工具计算模型。
 
 **步骤 2：操作现有支付系统后端以及与其连接**
 * 使用 IBM {{site.data.keyword.SecureGateway}} 来维护与内部部署工具系统的安全连接。
@@ -168,5 +168,5 @@ lastupdated: "2018-12-05"
 * 通过将现有整体 VM 提升到云托管的容器，迈出了支持开发主管节省资本和运营成本的第一步。
 * 通过由 IBM 来照管基础架构管理，开发团队得以腾出时间每天交付 10 次更新。 
 * 同时，提供者实施了简单的限定时间迭代，以弄明白现有技术债务。
-* 根据处理的事务数，能以指数方式扩展运营。
+* 根据处理的事务数，能以指数方式缩放运营。
 * 同时，使用 {{site.data.keyword.watson}} 进行新的欺诈分析提高了检测和预防速度，使欺诈事件降低到区域平均水平的 1/4。 

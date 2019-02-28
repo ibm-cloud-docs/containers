@@ -58,9 +58,9 @@ lastupdated: "2018-12-05"
 
 |Object|描述|
 | --- | --- |
-|[`pod` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/pod/)|pod 是工作负载的最小可部署单元，可以容纳单个或多个容器。pod 与容器类似，也设计为可一次性使用，通常用于应用程序功能的单元测试。为了避免应用程序发生停机时间，请考虑使用 Kubernetes 控制器（例如，部署）来部署 pod。部署可帮助您管理多个 pod、副本、pod 扩展、应用等。|
-|[`副本集` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)|副本集可确保 pod 的多个副本同时运行，并且如果某个 pod 关闭，会重新安排一个 pod。您可以创建副本集来测试 pod 安排的工作方式，但要管理应用程序更新、应用和扩展，请改为创建部署。|
-|[`部署` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)|部署是一种控制器，用于管理 pod 模板的 pod 或[副本集 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)。您可以不使用部署来创建 pod 或副本集，以测试应用程序功能。对于生产级别的设置，请使用部署来管理应用程序更新、应用和扩展。|
+|[`pod` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/pod/)|pod 是工作负载的最小可部署单元，可以容纳单个或多个容器。pod 与容器类似，也设计为可一次性使用，通常用于应用程序功能的单元测试。为了避免应用程序发生停机时间，请考虑使用 Kubernetes 控制器（例如，部署）来部署 pod。部署可帮助您管理多个 pod、副本、pod 缩放、应用等。|
+|[`副本集` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)|副本集可确保 pod 的多个副本同时运行，并且如果某个 pod 关闭，会重新安排一个 pod。您可以创建副本集来测试 pod 安排的工作方式，但要管理应用程序更新、应用和缩放，请改为创建部署。|
+|[`部署` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)|部署是一种控制器，用于管理 pod 模板的 pod 或[副本集 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)。您可以不使用部署来创建 pod 或副本集，以测试应用程序功能。对于生产级别的设置，请使用部署来管理应用程序更新、应用和缩放。|
 |[`有状态集` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)|有状态集与部署类似，也是管理 pod 副本集的控制器。但与部署不同的是，有状态集可确保 pod 具有唯一的网络身份，用于在重新安排期间保持相应 pod 的状态不变。如果要在云中运行工作负载，请尝试将应用程序设计为无状态，这样服务实例可实现彼此独立，并且万一发生故障也不会导致服务中断。但是，某些应用程序（例如，数据库）必须是无状态的。对于这些情况，请考虑创建有状态集，并使用[文件](cs_storage_file.html#file_statefulset)存储器、[块](cs_storage_block.html#block_statefulset)存储器或[对象](cs_storage_cos.html#cos_statefulset)存储器作为有状态集的持久性存储器。|
 |[`守护程序集` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)|必须在集群中的每个工作程序节点上运行相同的 pod 时，请使用守护程序集。将工作程序节点添加到集群时，会自动安排守护程序集所管理的 pod。典型用例包括日志收集器（例如，`logstash` 或 `prometheus`），用于从每个工作程序节点收集日志，以提供对集群或应用程序的运行状况的洞察。|
 |[`作业` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)|作业可确保一个或多个 pod 成功运行至完成。您可以使用排队的作业或批处理作业来支持并行处理不同但相关的工作项，例如要呈现的特定数量的帧、要发送的电子邮件以及要转换的文件。要将作业安排为在特定时间运行，请使用[定时作业 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)。|
@@ -130,7 +130,7 @@ lastupdated: "2018-12-05"
 {: shortdesc}
 
 ### 如何使应用程序保持最新？
-如果要动态添加和除去应用程序以响应工作负载的使用情况，请参阅[扩展应用程序](cs_app.html#app_scaling)。
+如果要动态添加和除去应用程序以响应工作负载的使用情况，请参阅[缩放应用程序](cs_app.html#app_scaling)。
 {: shortdesc}
 
 如果要管理应用程序的更新，请参阅[管理滚动部署](cs_app.html#app_rolling)。
@@ -303,7 +303,7 @@ app: wasliberty
     cpu: "1000m"</pre></code></p></dd>
 
 <dt id="probe">活性和就绪性探测器</dt>
-  <dd><p>缺省情况下，Kubernetes 在 pod 中的所有容器启动后，会将流量发送到应用程序 pod，如果容器崩溃，会重新启动这些容器。但是，您可以设置运行状况检查，以提高服务流量路由的稳健性。例如，应用程序可能会有启动延迟。应用程序进程可能在整个应用程序完全就绪之前启动，这可能会影响响应，尤其是跨多个实例向上扩展时。通过运行状况检查，您可以让系统了解应用程序是否在运行以及是否已准备好接收请求。通过设置这两个探测器，还可以帮助避免在执行应用程序的[滚动更新](#app_rolling)时发生停机时间。您可以设置两种类型的运行状况检查：活性和就绪性探测器。</p>
+  <dd><p>缺省情况下，Kubernetes 在 pod 中的所有容器启动后，会将流量发送到应用程序 pod，如果容器崩溃，会重新启动这些容器。但是，您可以设置运行状况检查，以提高服务流量路由的稳健性。例如，应用程序可能会有启动延迟。应用程序进程可能在整个应用程序完全就绪之前启动，这可能会影响响应，尤其是跨多个实例扩展时。通过运行状况检查，您可以让系统了解应用程序是否在运行以及是否已准备好接收请求。通过设置这两个探测器，还可以帮助避免在执行应用程序的[滚动更新](#app_rolling)时发生停机时间。您可以设置两种类型的运行状况检查：活性和就绪性探测器。</p>
   <p>**活性探测器**：设置活性探测器可检查容器是否在运行。如果该探测器失败，那么容器将重新启动。如果容器未指定活性探测器，那么该探测器会成功，因为它会假定当容器处于**正在运行**状态时即有活性。</p>
   <p>**就绪性探测器**：设置就绪性探测器可检查容器是否已准备好接收请求和外部流量。如果该探测器失败，那么会将 pod 的 IP 地址作为与该 pod 匹配的服务的可用 IP 地址除去，但不会重新启动容器。如果应用程序需要一段时间才能启动，那么设置具有初始延迟的就绪性探测器就尤其重要。在初始延迟之前，探测器不会启动，从而为容器提供启动时间。如果容器未提供就绪性探测器，那么该探测器会成功，因为它会假定当容器处于**正在运行**状态时即有活性。</p>
   <p>您可以将探测器设置为命令、HTTP 请求或 TCP 套接字。示例使用的是 HTTP 请求。为活性探测器提供比就绪性探测器长的时间。有关更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)。</p>
@@ -610,7 +610,7 @@ spec:
 [在 {{site.data.keyword.Bluemix_notm}} 控制台中](#db_gui)，可以使用方便的一次单击按钮来访问该仪表板。[通过 CLI](#db_cli)，可以访问该仪表板或使用自动化过程中的步骤，例如针对 CI/CD 管道的步骤。
 {:shortdesc}
 
-您的集群中是否有太多资源和用户，导致 Kubernetes 仪表板的速度有些慢？对于运行 Kubernetes 1.12 或更高版本的集群，集群管理员可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来扩展 `kubernetes-dashboard` 部署。
+您的集群中是否有太多资源和用户，导致 Kubernetes 仪表板的速度有些慢？对于运行 Kubernetes 1.12 或更高版本的集群，集群管理员可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来缩放 `kubernetes-dashboard` 部署。
 {: tip}
 
 开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
@@ -683,7 +683,7 @@ spec:
 有关使用仪表板的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)。
 {:shortdesc}
 
-您的集群中是否有太多资源和用户，导致 Kubernetes 仪表板的速度有些慢？对于运行 Kubernetes 1.12 或更高版本的集群，集群管理员可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来扩展 `kubernetes-dashboard` 部署。
+您的集群中是否有太多资源和用户，导致 Kubernetes 仪表板的速度有些慢？对于运行 Kubernetes 1.12 或更高版本的集群，集群管理员可以通过运行 `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` 来缩放 `kubernetes-dashboard` 部署。
 {: tip}
 
 开始之前：
@@ -1007,18 +1007,18 @@ kubectl logs nvidia-sim-ppkd4
 
     在此示例中，您看到两个 GPU 都用于执行作业，因为这两个 GPU 均已安排在工作程序节点中。如果限制设置为 1，那么仅显示 1 个 GPU。
 
-## 扩展应用程序
+## 缩放应用程序
 {: #app_scaling}
 
-使用 Kubernetes，可以启用[水平 pod 自动扩展 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)，以根据 CPU 来自动增加或减少应用程序的实例数。
+使用 Kubernetes，可以启用[水平 pod 自动缩放 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)，以根据 CPU 来自动增加或减少应用程序的实例数。
 {:shortdesc}
 
-需要有关扩展 Cloud Foundry 应用程序的信息？请查看 [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html)。
+需要有关缩放 Cloud Foundry 应用程序的信息？请查看 [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html)。
 {: tip}
 
 开始之前：
 - [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](cs_cli_install.html#cs_cli_configure)。
-- 必须在要自动扩展的集群中部署 heapster 监视。
+- 必须在要自动缩放的集群中部署 heapster 监视。
 
 步骤：
 
@@ -1056,7 +1056,7 @@ kubectl logs nvidia-sim-ppkd4
     对于更复杂的部署，您可能需要创建[配置文件](#app_cli)。
     {: tip}
 
-2.  创建自动扩展程序并定义策略。有关使用 `kubectl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
+2.  创建自动缩放器并定义策略。有关使用 `kubectl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>

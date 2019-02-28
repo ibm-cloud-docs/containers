@@ -388,7 +388,7 @@ kubectl get nodes
 
 **集群中有无法单独更新的附加组件吗？**</br>
 
-有。集群部署的以下受管附加组件和关联的资源不能更改，但为了获得特定性能优点而扩展 pod 或编辑配置映射时除外。如果尝试更改下列其中一个部署附加组件，其原始设置会定期复原。
+有。集群部署的以下受管附加组件和关联的资源不能更改，但为了获得特定性能优点而缩放 pod 或编辑配置映射时除外。如果尝试更改下列其中一个部署附加组件，其原始设置会定期复原。
 
 * `coredns`
 * `coredns-autoscaler`
@@ -656,7 +656,7 @@ kubectl get nodes
 
     1.  **可选**：如果在 `kube-system` 名称空间中定制了 `kube-dns` 配置映射，请将所有定制内容传输到 `kube-system` 名称空间中的 `coredns` 配置映射。请注意，`kube-dns` 和 `coredns` 配置映射的语法不同。有关示例，请参阅 CoreDNS 文档中的 [Installing CoreDNS via Kubeadm ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/)。
 
-    2.  向下扩展 KubeDNS 自动扩展程序部署。
+    2.  缩减 KubeDNS 自动缩放器部署。
         ```
         kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
         ```
@@ -668,13 +668,13 @@ kubectl get nodes
         ```
         {: pre}
 
-    4.  向下扩展 KubeDNS 部署。
+    4.  缩减 KubeDNS 部署。
         ```
         kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
         ```
         {: pre}
 
-    5.  向上扩展 CoreDNS 自动扩展程序部署。
+    5.  扩展 CoreDNS 自动缩放器部署。
         ```
         kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
         ```
@@ -697,7 +697,7 @@ kubectl get nodes
 
     1.  **可选**：如果在 `kube-system` 名称空间中定制了 `coredns` 配置映射，请将所有定制内容传输到 `kube-system` 名称空间中的 `kube-dns` 配置映射。请注意，`kube-dns` 和 `coredns` 配置映射的语法不同。有关示例，请参阅 CoreDNS 文档中的 [Installing CoreDNS via Kubeadm ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/)。
 
-    2.  向下扩展 CoreDNS 自动扩展程序部署。
+    2.  缩减 CoreDNS 自动缩放器部署。
         ```
         kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
         ```
@@ -709,13 +709,13 @@ kubectl get nodes
         ```
         {: pre}
 
-    4.  向下扩展 CoreDNS 部署。
+    4.  缩减 CoreDNS 部署。
         ```
         kubectl scale deployment -n kube-system --replicas=0 coredns
         ```
         {: pre}
 
-    5.  向上扩展 KubeDNS 自动扩展程序部署。
+    5.  扩展 KubeDNS 自动缩放器部署。
         ```
         kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
         ```

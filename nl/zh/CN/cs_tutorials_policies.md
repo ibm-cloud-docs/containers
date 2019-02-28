@@ -61,7 +61,7 @@ lastupdated: "2018-12-05"
 
 首先，部署要在整个教程中使用的样本 Web 服务器应用程序。`echoserver` Web 服务器显示有关从客户机与集群建立的连接的数据，并允许您测试对公关公司集群的访问。然后，通过创建 LoadBalancer 2.0 服务公开应用程序。LoadBalancer 2.0 服务通过 LoadBalancer 服务 IP 地址和工作程序节点的节点端口使应用程序可用。
 
-要改用使用 [Ingress 应用程序负载均衡器 (ALB)](cs_ingress.html)？请跳过步骤 3 和步骤 4 中的负载均衡器创建，而改为通过运行 `ibmcloud ks albs --cluster <cluster_name>` 来获取 ALB 的公共 IP，然后在本教程中使用这些 IP 来替代 `<loadbalancer_IP>`。
+要改用使用 [Ingress 应用程序负载均衡器 (ALB)](cs_ingress.html)？请跳过步骤 3 和步骤 4 中的负载均衡器创建，而改为通过运行 `ibmcloud ks albs --cluster <cluster_name>` 来获取 ALB 的公共 IP，然后在本教程中使用这些 IP 来替代 `<loadbalancer_IP>.`
 {: tip}
 
 下图显示了在第 1 课结束时，Web 服务器应用程序如何通过公共节点端口和公共负载均衡器公开到因特网：

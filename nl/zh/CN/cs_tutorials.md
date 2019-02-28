@@ -23,7 +23,7 @@ lastupdated: "2018-12-05"
 # 教程：创建 Kubernetes 集群
 {: #cs_cluster_tutorial}
 
-通过本教程，您可以在 {{site.data.keyword.containerlong}} 中部署和管理 Kubernetes 集群。了解如何在集群中自动执行对容器化应用程序的部署、操作、扩展和监视。
+通过本教程，您可以在 {{site.data.keyword.containerlong}} 中部署和管理 Kubernetes 集群。了解如何在集群中自动执行对容器化应用程序的部署、操作、缩放和监视。
 {:shortdesc}
 
 在本教程系列中，您可以看到虚构的公关公司使用 Kubernetes 功能在 {{site.data.keyword.Bluemix_notm}} 中部署容器化应用程序的方式。利用 {{site.data.keyword.toneanalyzerfull}}，该 PR 公司可以分析他们的新闻稿，并获得反馈。
