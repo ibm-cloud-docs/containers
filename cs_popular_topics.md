@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-02-28"
 
 keywords: kubernetes, iks
 
@@ -23,12 +23,14 @@ scope: containers
 {:download: .download}
 
 
-
 # Popular topics for {{site.data.keyword.containerlong_notm}}
 {: #cs_popular_topics}
 
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
+
+
+
 
 ## Popular topics in February 2019
 {: #feb19}
@@ -61,6 +63,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <td>Knative is an open source platform that extends the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. Managed Knative on {{site.data.keyword.containerlong_notm}} is a managed add-on that integrates Knative and Istio directly with your Kubernetes cluster. The Knative and Istio version in the add-on are tested by IBM and supported for the use in {{site.data.keyword.containerlong_notm}}.</td>
 </tr>
 </tbody></table>
+
 
 ## Popular topics in January 2019
 {: #jan19}
