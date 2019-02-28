@@ -137,7 +137,7 @@ To update your cluster image pull secret:
 *   To pull images in Kubernetes namespaces other than `default` or from other {{site.data.keyword.Bluemix_notm}} accounts, [copy or create another image pull secret](/docs/containers?topic=containers-images#other).
 *   To restrict the image pull secret access to particular registry resources such as namespaces or regions:
     1.  Make sure that [{{site.data.keyword.Bluemix_notm}} IAM policies for {{site.data.keyword.registrylong_notm}} are enabled](/docs/services/Registry?topic=registry-user#existing_users).
-    2.  [Edit the {{site.data.keyword.Bluemix_notm}} IAM policies](/docs/iam?topic=iam-serviceidpolicy#access_edit) for the service ID or [create another image pull secret](/docs/containers?topic=containers-images#other_registry_accounts).
+    2.  [Edit the {{site.data.keyword.Bluemix_notm}} IAM policies](/docs/iam?topic=iam-serviceidpolicy#access_edit) for the service ID, or [create another image pull secret](/docs/containers?topic=containers-images#other_registry_accounts).
 
 ## Deploying containers from an {{site.data.keyword.registryshort_notm}} image to the `default` Kubernetes namespace
 {: #namespace}
