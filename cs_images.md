@@ -294,7 +294,7 @@ You can copy the image pull secret that is automatically created for the `defaul
 ### Creating an image pull secret to access images in other {{site.data.keyword.Bluemix_notm}} accounts or to use IAM policies to restrict registry access
 {: #other_registry_accounts}
 
-To access images in other {{site.data.keyword.Bluemix_notm}} accounts, you must create an API key for a service ID with an {{site.data.keyword.Bluemix_notm}} IAM service access policy to {{site.data.keyword.registryshort_notm}}. Then, save the API key credentials in an image pull secret. Further, you might create a new image pull secret to apply IAM access policies that restrict permissions to specific registry image repositories, namespaces, or actions (such as `push` or `pull`).
+To access images in other {{site.data.keyword.Bluemix_notm}} accounts, you must create an API key for a service ID with an {{site.data.keyword.Bluemix_notm}} IAM service access policy to {{site.data.keyword.registryshort_notm}}. Then, save the API key credentials in an image pull secret. Further, you might create a new image pull secret to apply IAM access policies that restrict permissions to specific registry image repositories, namespaces, or actions (such as `push` or `pull`). You might choose to store the same service ID's IAM credentials in an API key that you use to create multiple image pull secrets in multiple clusters force the same registry permissions.
 {: shortdesc}
 
 Instead of using a service ID, you might want to create an API key for a user ID that has an {{site.data.keyword.Bluemix_notm}} IAM service access policy to {{site.data.keyword.registryshort_notm}}. However, make sure that the user is a functional ID or have a plan in case the user leaves so that the cluster can still access the registry.
@@ -377,7 +377,7 @@ Instead of using a service ID, you might want to create an API key for a user ID
     UUID          ApiKey-222nn2n2-o3o3-3o3o-4p44-oo444o44o4o4   
     ```
     {: screen}
-6.  Create a Kubernetes image pull secret to store the API key credentials in the cluster's namespace.
+6.  Create a Kubernetes image pull secret to store the API key credentials in the cluster's namespace. Repeat this step for each `icr.io` domain, Kubernetes namespace, and cluster that you want to pull images from registry with this service ID's IAM credentials.
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name> --docker-server=<registry_URL> --docker-username=iamapikey --docker-password=<api_key_value> --docker-email=<docker_email>
     ```
