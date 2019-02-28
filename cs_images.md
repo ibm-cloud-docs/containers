@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-26"
+lastupdated: "2019-02-28"
 
 keywords: kubernetes, iks
 
@@ -91,7 +91,7 @@ The previous method of authorizing cluster access to {{site.data.keyword.registr
 ### Updating existing clusters to use the API key image pull secret
 {: #imagePullSecret_migrate_api_key}
 
-New {{site.data.keyword.containerlong_notm}} clusters store an API key in an image pull secret to authorize access to {{site.data.keyword.registrylong_notm}}. For clusters that were created before **<DATE>**, you must update your cluster to store an API key instead of a registry token in the image pull secret.
+New {{site.data.keyword.containerlong_notm}} clusters store an API key in an image pull secret to authorize access to {{site.data.keyword.registrylong_notm}}. With these image pull secrets, you can deploy containers from images that are stored in the `icr.io` registry domains. For clusters that were created before **25 February 2019**, you must update your cluster to store an API key instead of a registry token in the image pull secret.
 {: shortdesc}
 
 Before you begin:
@@ -106,14 +106,14 @@ To update your cluster image pull secret:
     ibmcloud ks clusters
     ```
     {: pre}
-2.  Run the following command to create a service ID for the cluster, assign the service ID an IAM **Reader** service role for {{site.data.keyword.registrylong_notm}}, create an API key to impersonate the service ID credentials, and store the API key in a Kubernetes image pull secret in the cluster.
+2.  Run the following command to create a service ID for the cluster, assign the service ID an IAM **Reader** service role for {{site.data.keyword.registrylong_notm}}, create an API key to impersonate the service ID credentials, and store the API key in a Kubernetes image pull secret in the cluster. The image pull secret is in the `default` Kubernetes namespace.
     ```
     ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>
     ```
     {: pre}
     
-    When you run this command, the IAM credentials and image pull secrets are initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} domain until the image pull secret is created.
-    {: note}
+    When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} domain until the image pull secret is created.
+    {: important}
     
 3.  Verify that the image pull secrets are created in your cluster. Note that you have a separate image pull secret for each {{site.data.keyword.registrylong_notm}} region.
     ```
@@ -131,6 +131,13 @@ To update your cluster image pull secret:
     ```
     {: screen}
 4.  Update your container deployments to pull images from the `icr.io` domain name.
+5.  Optional: If you have a firewall, make sure you [allow outbound network traffic to the registry subnets](/docs/containers?topic=containers-firewall#firewall_outbound) for the domains that you use.
+
+**What's next?**
+*   To pull images in Kubernetes namespaces other than `default` or from other {{site.data.keyword.Bluemix_notm}} accounts, [copy or create another image pull secret](/docs/containers?topic=containers-images#other).
+*   To restrict the image pull secret access to particular registry resources such as namespaces or regions:
+    1.  Make sure that [{{site.data.keyword.Bluemix_notm}} IAM policies for {{site.data.keyword.registrylong_notm}} are enabled](/docs/services/Registry?topic=registry-user#existing_users).
+    2.  [Edit the {{site.data.keyword.Bluemix_notm}} IAM policies](/docs/iam?topic=iam-serviceidpolicy#access_edit) for the service ID or [create another image pull secret](/docs/containers?topic=containers-images#other_registry_accounts).
 
 ## Deploying containers from an {{site.data.keyword.registryshort_notm}} image to the `default` Kubernetes namespace
 {: #namespace}

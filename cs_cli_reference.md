@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-26"
+lastupdated: "2019-02-28"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1390,8 +1390,8 @@ ibmcloud ks cluster-get --cluster CLUSTER [--json] [--showResources] [-s]
 Make an {{site.data.keyword.Bluemix_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID. The API key is then stored in a Kubernetes `imagePullSecret` so that you can pull images from your {{site.data.keyword.registryshort_notm}} namespaces for containers that are in the `default` Kubernetes namespace. This process happens automatically when you create a cluster. If you got an error during the cluster creation process or have an existing cluster, you can use this command to apply the process again.
 {: shortdesc}
 
-When you run this command, the IAM credentials and image pull secrets are initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} domain until the image pull secret is created. To check the image pull secret, run `kubectl get secrets | grep icr`.
-{: note}
+When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} domain until the image pull secret is created. To check the image pull secret, run `kubectl get secrets | grep icr`.
+{: important}
 
 ```
 ibmcloud ks cluster-pull-secret-apply --cluster CLUSTER
