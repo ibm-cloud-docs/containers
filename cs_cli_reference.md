@@ -4121,7 +4121,7 @@ ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--
 ### ibmcloud ks worker-pool-rebalance
 {: #cs_rebalance}
 
-You can rebalance your worker pool after you delete a worker node. When you run this command a new worker or workers are added to your worker pool.
+You can rebalance your worker pool after you delete a worker node. When you run this command, a new worker or workers are added to your worker pool.
 {: shortdesc}
 
 ```
