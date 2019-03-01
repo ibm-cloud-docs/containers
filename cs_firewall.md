@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-28"
+lastupdated: "2019-03-01"
 
 keywords: kubernetes, iks
 
@@ -155,8 +155,6 @@ To allow access for a specific cluster:
    }
    ```
    {: screen}
-
-
 
 8. Optional: Repeat these steps for each cluster that you need to expose.
 
