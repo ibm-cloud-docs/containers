@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-28"
+lastupdated: "2019-03-01"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -136,6 +136,12 @@ The following steps show how to provision and set up a Databases for etcd servic
       {: screen}
       
    4. Find the `certificate` section of your service credentials and note the **`certificate_base64`**. 
+      Example output for `certificate`
+      ```
+      "certificate": {
+        "certificate_base64": "AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2..."
+      ```
+      {: screen}
    
 5. Create a Kubernetes secret for your certificate. 
    1. Create a configuration file for your secret. 
