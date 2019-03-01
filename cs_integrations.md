@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-03-01"
 
 keywords: kubernetes, iks, helm
 
@@ -47,6 +47,10 @@ You can use various external services and catalog services with a standard Kuber
 <td>You can use <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="External link icon"></a> for the continuous integration and delivery of containers. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 <tr>
+<td>Grafeas</td>
+<td>[Grafeas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafeas.io) is an open source CI/CD service that provides a common way for how to retrieve, store, and exchange metadata during the software supply chain process. For example, if you integrate Grafeas into your app build process, Grafeas can store information about the initiator of the build request, vulnerability scan results, and quality assurance signoff so that you can make an informed decision if an app can be deployed to production. You can use this metadata in audits or to prove compliance for your software supply chain. </td>
+</tr>
+<tr>
 <td>Helm</td>
 <td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. <p>For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#helm).</p></td>
 </tr>
@@ -57,6 +61,14 @@ You can use various external services and catalog services with a standard Kuber
 <tr>
 <td>Istio on {{site.data.keyword.containerlong_notm}}</td>
 <td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms. Istio on {{site.data.keyword.containerlong}} provides a one-step installation of Istio into your cluster through a managed add-on. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. To get started, see [Using the managed Istio add-on (beta)](/docs/containers?topic=containers-istio).</td>
+</tr>
+<tr>
+<td>Jenkins X</td>
+<td>Jenkins X is a Kubernetes-native continuous integration and continuous delivery platform that you can use to automate your build process. For more information about how to install it on {{site.data.keyword.containerlong_notm}}, see [Introducing the Jenkins X open source project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/08/installing-jenkins-x-on-ibm-cloud-kubernetes-service/).</td>
+</tr>
+<tr>
+<td>Knative</td>
+<td>[Knative ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others with the goal of extending the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. The platform uses a consistent approach across programming languages and frameworks to abstract the operational overhead of building, deploying and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. For more information, see [Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). </td>
 </tr>
 </tbody>
 </table>
@@ -89,16 +101,8 @@ You can use various external services and catalog services with a standard Kuber
 <td>Monitor the administrative activity made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.loganalysisfull}}</td>
-<td>Expand your log collection, retention, and search abilities with {{site.data.keyword.loganalysisfull_notm}}. For more information, see <a href="/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kube_other_logs" target="_blank">Enabling automatic collection of cluster logs <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
-</tr>
-<tr>
 <td>{{site.data.keyword.la_full_notm}}</td>
 <td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
-</tr>
-<tr>
-<td>{{site.data.keyword.monitoringlong}}</td>
-<td>Expand your metrics collection and retention capabilities by defining rules and alerts with {{site.data.keyword.monitoringlong_notm}}. For more information, see <a href="/docs/services/cloud-monitoring/tutorials?topic=cloud-monitoring-container_service_metrics" target="_blank">Analyze metrics in Grafana for an app that is deployed in a Kubernetes cluster <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.mon_full_notm}}</td>
