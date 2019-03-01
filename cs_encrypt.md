@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-03-01"
 
 keywords: kubernetes, iks 
 
@@ -126,12 +126,36 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
     ```
     {: pre}
 
-7.  Enable {{site.data.keyword.keymanagementserviceshort}} in your cluster. Fill in the flags with the information that you previously retrieved.
+7.  Enable {{site.data.keyword.keymanagementserviceshort}} in your cluster. Fill in the flags with the information that you previously retrieved. The enablement process can take some time to complete.
 
     ```
     ibmcloud ks key-protect-enable --cluster <cluster_name_or_ID> --key-protect-url <kp_endpoint> --key-protect-instance <kp_instance_ID> --crk <kp_root_key_ID>
     ```
     {: pre}
+
+8.  During the enablement, you might not be able to access the Kubernetes master such as to update YAML configurations for deployments. In the output of the following command, check that the **Master Status** is **Ready**.
+    ```
+    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ```
+    {: pre}
+    
+    Example output when the enablement is in progress:
+    ```
+    Name:                   <cluster_name>   
+    ID:                     <cluster_ID>   
+    ...
+    Master Status:          Key Protect feature enablement in progress.  
+    ```
+    {: screen}
+    
+    Example output when the master is ready:
+    ```
+    Name:                   <cluster_name>   
+    ID:                     <cluster_ID>   
+    ...
+    Master Status:          Ready (1 min ago)   
+    ```
+    {: screen}
 
 After {{site.data.keyword.keymanagementserviceshort}} is enabled in the cluster, data in `etcd`, existing secrets and new secrets that are created in the cluster are automatically encrypted by using your {{site.data.keyword.keymanagementserviceshort}} root key. You can rotate your key at any time by repeating these steps with a new root key ID.
 
