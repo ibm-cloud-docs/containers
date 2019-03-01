@@ -321,6 +321,88 @@ Before you use annotations, make sure you have properly set up your Ingress serv
 ## General annotations
 {: #general}
 
+### Custom error actions (`custom-errors`, `custom-error-actions`)
+{: #custom-errors}
+
+Indicate custom actions that the ALB can take for specific HTTP errors.
+{: shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>To handle specific HTTP errors that might occur, you can set up custom error actions for the ALB to take.<ul>
+<li>The `custom-errors` annotation defines the service name, the HTTP error to handle, and the name of the error action that the ALB takes when it encounters the specified HTTP error for the service.</li>
+<li>The `custom-error-actions` annotation defines custom error actions in NGINX code snippets.</li></ul>
+</br>For example, in the `custom-errors` annotation, you can set up the ALB to handle `401` HTTP errors for `app1` by returning a custom error action called `/errorAction401`. Then, in the `custom-error-actions` annotation, you can define a code snippet called `/errorAction401` so that the ALB returns a custom error page to the client.</br>You can also use the `custom-errors` annotation to redirect the client to an error service that you manage. You must define the path to this error service in the `paths` section of the Ingress resource file.</dd>
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+<pre class="codeblock">
+<code>
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/custom-errors: "serviceName=&lt;app1&gt; httpError=&lt;401&gt; errorActionName=&lt;/errorAction401&gt;;serviceName=&lt;app2&gt; httpError=&lt;403&gt; errorActionName=&lt;/errorPath&gt;"
+    ingress.bluemix.net/custom-error-actions: |
+         errorActionName=&lt;/errorAction401&gt;
+         #Example custom error snippet
+         proxy_pass http://example.com/forbidden.html;
+         &lt;EOS&gt;
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /path1
+        backend:
+          serviceName: app1
+          servicePort: 80
+      - path: /path2
+        backend:
+          serviceName: app2
+          servicePort: 80
+      - path: &lt;/errorPath&gt;
+        backend:
+          serviceName: &lt;error-svc&gt;
+          servicePort: 80
+</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Replace <code>&lt;<em>app1</em>&gt;</code> with the name of the Kubernetes service that the custom error applies to. The custom error applies only to the specific paths that use this same upstream service. If you do not set a service name, then the custom errors are applied to all service paths.</td>
+ </tr>
+ <tr>
+ <td><code>httpError</code></td>
+ <td>Replace <code>&lt;<em>401</em>&gt;</code> with the HTTP error code that you want to handle with a custom error action.</td>
+ </tr>
+ <tr>
+ <td><code>errorActionName</code></td>
+ <td>Replace <code>&lt;<em>/errorAction401</em>&gt;</code> with the name of a custom error action to take or the path to an error service.<ul>
+ <li>If you specify the name of a custom error action, you must define that error action in a code snippet in the <code>custom-error-actions</code> annotation. In the sample YAML, <code>app1</code> uses <code>/errorAction401</code>, which is defined in the snippet in the <code>custom-error-actions</code> annotation.</li>
+ <li>If you specify the path to an error service, you must specify that error path and the name of the error service in the <code>paths</code> section. In the sample YAML, <code>app2</code> uses <code>/errorPath</code>, which is defined at the end of the <code>paths</code> section.</li></ul></td>
+ </tr>
+ <tr>
+ <td><code>ingress.bluemix.net/custom-error-actions</code></td>
+ <td>Define a custom error action that the ALB takes for the service and HTTP error that you specified. Use an NGINX code snippet and end each snippet with <code>&lt;EOS&gt;</code>. In the sample YAML, the ALB passes a custom error page, <code>http://example.com/forbidden.html</code>, to the client when a <code>401</code> error occurs for <code>app1</code>.</td>
+ </tr>
+ </tbody></table>
+
+ </dd></dl>
+
+<br />
+
+
 ### Location snippets (`location-snippets`)
 {: #location-snippets}
 
@@ -1743,88 +1825,6 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 
 The Ingress ALB routes traffic to the paths that back-end apps listen on. With path routing annotations, you can configure how the ALB routes traffic to your apps.
 {: shortdesc}
-
-### Custom error actions (`custom-errors`, `custom-error-actions`)
-{: #custom-errors}
-
-Indicate custom actions that the ALB can take for specific HTTP errors.
-{: shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>To handle specific HTTP errors that might occur, you can set up custom error actions for the ALB to take.<ul>
-<li>The `custom-errors` annotation defines the service name, the HTTP error to handle, and the name of the error action that the ALB takes when it encounters the specified HTTP error for the service.</li>
-<li>The `custom-error-actions` annotation defines custom error actions in NGINX code snippets.</li></ul>
-</br>For example, in the `custom-errors` annotation, you can set up the ALB to handle `401` HTTP errors for `app1` by returning a custom error action called `/errorAction401`. Then, in the `custom-error-actions` annotation, you can define a code snippet called `/errorAction401` so that the ALB returns a custom error page to the client.</br>You can also use the `custom-errors` annotation to redirect the client to an error service that you manage. You must define the path to this error service in the `paths` section of the Ingress resource file.</dd>
-
-<dt>Sample Ingress resource YAML</dt>
-<dd>
-<pre class="codeblock">
-<code>
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/custom-errors: "serviceName=&lt;app1&gt; httpError=&lt;401&gt; errorActionName=&lt;/errorAction401&gt;;serviceName=&lt;app2&gt; httpError=&lt;403&gt; errorActionName=&lt;/errorPath&gt;"
-    ingress.bluemix.net/custom-error-actions: |
-         errorActionName=&lt;/errorAction401&gt;
-         #Example custom error snippet
-         proxy_pass http://example.com/forbidden.html;
-         &lt;EOS&gt;
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mysecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /path1
-        backend:
-          serviceName: app1
-          servicePort: 80
-      - path: /path2
-        backend:
-          serviceName: app2
-          servicePort: 80
-      - path: &lt;/errorPath&gt;
-        backend:
-          serviceName: &lt;error-svc&gt;
-          servicePort: 80
-</code></pre>
-
-<table>
-<caption>Understanding the annotation components</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
- </thead>
- <tbody>
- <tr>
- <td><code>serviceName</code></td>
- <td>Replace <code>&lt;<em>app1</em>&gt;</code> with the name of the Kubernetes service that the custom error applies to. The custom error applies only to the specific paths that use this same upstream service. If you do not set a service name, then the custom errors are applied to all service paths.</td>
- </tr>
- <tr>
- <td><code>httpError</code></td>
- <td>Replace <code>&lt;<em>401</em>&gt;</code> with the HTTP error code that you want to handle with a custom error action.</td>
- </tr>
- <tr>
- <td><code>errorActionName</code></td>
- <td>Replace <code>&lt;<em>/errorAction401</em>&gt;</code> with the name of a custom error action to take or the path to an error service.<ul>
- <li>If you specify the name of a custom error action, you must define that error action in a code snippet in the <code>custom-error-actions</code> annotation. In the sample YAML, <code>app1</code> uses <code>/errorAction401</code>, which is defined in the snippet in the <code>custom-error-actions</code> annotation.</li>
- <li>If you specify the path to an error service, you must specify that error path and the name of the error service in the <code>paths</code> section. In the sample YAML, <code>app2</code> uses <code>/errorPath</code>, which is defined at the end of the <code>paths</code> section.</li></ul></td>
- </tr>
- <tr>
- <td><code>ingress.bluemix.net/custom-error-actions</code></td>
- <td>Define a custom error action that the ALB takes for the service and HTTP error that you specified. Use an NGINX code snippet and end each snippet with <code>&lt;EOS&gt;</code>. In the sample YAML, the ALB passes a custom error page, <code>http://example.com/forbidden.html</code>, to the client when a <code>401</code> error occurs for <code>app1</code>.</td>
- </tr>
- </tbody></table>
-
- </dd></dl>
-
-<br />
-
 
 ### External services (`proxy-external-service`)
 {: #proxy-external-service}
