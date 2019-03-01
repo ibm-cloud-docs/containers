@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-26"
+lastupdated: "2019-03-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1351,38 +1351,32 @@ ibmcloud ks cluster-get --cluster CLUSTER [--json] [--showResources] [-s]
 
 **Example output**:
 
-  ```
-  Name:                   mycluster
-  ID:                     df253b6025d64944ab99ed63bb4567b6
-  State:                  normal
-  Created:                2018-09-28T15:43:15+0000
-  Location:               dal10
-  Master URL:             https://c3.<region>.containers.cloud.ibm.com:30426
-  Master Location:        Dallas
-  Master Status:          Ready (21 hours ago)
-  Ingress Subdomain:      ...
-  Ingress Secret:         mycluster
-  Workers:                6
-  Worker Zones:           dal10, dal12
-  Version:                1.11.3_1524
-  Owner:                  owner@email.com
-  Monitoring Dashboard:   ...
-  Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
-  Resource Group Name:    Default
+```
+Name:                           mycluster
+ID:                             df253b6025d64944ab99ed63bb4567b6
+State:                          normal
+Created:                        2018-09-28T15:43:15+0000
+Location:                       dal10
+Master URL:                     https://c3.<region>.containers.cloud.ibm.com:30426
+Master Location:                Dallas
+Master Status:                  Ready (21 hours ago)
+Ingress Subdomain:              mycluster.us-south.containers.appdomain.cloud
+Ingress Secret:                 mycluster
+Workers:                        6
+Worker Zones:                   dal10, dal12
+Version:                        1.11.3_1524
+Owner:                          owner@email.com
+Monitoring Dashboard:           ...
+Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
+Resource Group Name:            Default
 
-  Addons
-  Name                   Enabled
-  customer-storage-pod   true
-  basic-ingress-v2       true
-  storage-watcher-pod    true
+Subnet VLANs
+VLAN ID   Subnet CIDR         Public   User-managed
+2234947   10.xxx.xx.xxx/29    false    false
+2234945   169.xx.xxx.xxx/29  true    false
 
-  Subnet VLANs
-  VLAN ID   Subnet CIDR         Public   User-managed
-  2234947   10.xxx.xx.xxx/29    false    false
-  2234945   169.xx.xxx.xxx/29  true    false
-
-  ```
-  {: screen}
+```
+{: screen}
 
 ### ibmcloud ks cluster-pull-secret-apply
 {: #cs_cluster_pull_secret_apply}
@@ -1390,8 +1384,8 @@ ibmcloud ks cluster-get --cluster CLUSTER [--json] [--showResources] [-s]
 Make an {{site.data.keyword.Bluemix_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID. The API key is then stored in a Kubernetes `imagePullSecret` so that you can pull images from your {{site.data.keyword.registryshort_notm}} namespaces for containers that are in the `default` Kubernetes namespace. This process happens automatically when you create a cluster. If you got an error during the cluster creation process or have an existing cluster, you can use this command to apply the process again.
 {: shortdesc}
 
-When you run this command, the IAM credentials and image pull secrets are initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} domain until the image pull secret is created. To check the image pull secret, run `kubectl get secrets | grep icr`.
-{: note}
+When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} `icr.io` domains until the image pull secrets are created. To check the image pull secrets, run `kubectl get secrets | grep icr`.
+{: important}
 
 ```
 ibmcloud ks cluster-pull-secret-apply --cluster CLUSTER
@@ -3685,7 +3679,7 @@ ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [-
 ### ibmcloud ks worker-reboot
 {: #cs_worker_reboot}
 
-Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure (SoftLayer) is `Powered Off` and you need to turn on the worker node.
+Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure (SoftLayer) is `Powered Off` and you need to turn on the worker node. A reboot clears temporary directories, but does not clear the entire filesystem or reformat the disks.
 {: shortdesc}
 
 ```

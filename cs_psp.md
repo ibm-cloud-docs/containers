@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-02-28"
 
 keywords: kubernetes, iks 
 
@@ -26,11 +26,7 @@ scope: containers
 {: #psp}
 
 With [pod security policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), you can
-configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}. Clusters that run Kubernetes versions 1.10.3, 1.9.8, and 1.8.13 or later fixpacks support the `PodSecurityPolicy` admission controller that enforces these policies.
-{: shortdesc}
-
-Using an older version of Kubernetes? [Update your cluster](/docs/containers?topic=containers-update) today.
-{: tip}
+configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}.
 
 **Why do I set pod security policies?**</br>
 As a cluster admin, you want to control what happens in your cluster, especially actions that affect the cluster's security or readiness. Pod security policies can help you control usage of privileged containers, root namespaces, host networking and ports, volume types, host file systems, Linux permissions such as read-only or group IDs, and more.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-27"
+lastupdated: "2019-03-01"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -115,9 +115,9 @@ The following steps show how to provision and set up a Databases for etcd servic
    1. In the navigation on the service details page, click **Service Credentials**.
    2. Click **New credentials**.
    3. Enter a name for your service credentials and click **Add**.
-4. {: #databases_credentials}Retrieve your service credentials.
+4. {: #databases_credentials}Retrieve your service credentials and certificate.
    1. From the **Actions** column in the service credentials table, click **View credentials**.
-   2. Find the `grp.authentication` section of your service credentials and note the **user name** and **password**.
+   2. Find the `grp.authentication` section of your service credentials and note the **`username`** and **`password`**.
       Example output for user name and password:
       ```
       "grpc": {
@@ -134,8 +134,37 @@ The following steps show how to provision and set up a Databases for etcd servic
       --endpoints=https://1ab234c5-12a1-1234-a123-123abc45cde1.123456ab78cd9ab1234a456740ab123c.databases.appdomain.cloud:32059
       ```
       {: screen}
+      
+   4. Find the `certificate` section of your service credentials and note the **`certificate_base64`**. 
+      Example output for `certificate`
+      ```
+      "certificate": {
+        "certificate_base64": "AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2..."
+      ```
+      {: screen}
+   
+5. Create a Kubernetes secret for your certificate. 
+   1. Create a configuration file for your secret. 
+      ```
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: px-etcd-certs
+        namespace: kube-system
+      type: Opaque
+      data:
+        ca.pem: <certificate_base64>
+        client-key.pem: ""
+        client.pem: ""
+      ```
+      {: codeblock}
+      
+   2. Create the secret in your cluster. 
+      ```
+      kubectl apply -f secret.yaml
+      ```
 
-   4. Use these service credentials when you [install Portworx in your cluster](#install_portworx).
+6. [Install Portworx in your cluster](#install_portworx).
 
 
 ### Setting up a Compose for etcd service instance
@@ -225,16 +254,18 @@ To install Portworx:
 
 6. Update the following values and save your changes.
    - **`etcdEndPoint`**: Add the endpoint of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
+    - **`imageVersion`**: Enter the latest version of the Portworx Helm chart. To find the latest version, refer to the Portworx [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/release-notes/).
    - **`clusterName`**: Enter the name of the cluster where you want to install Portworx.
-   - **`etcd.credentials`**: Enter the user name and password of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `<user_name>:<password>`.
    - **`usedrivesAndPartitions`**: Enter `true` to let Portworx find unmounted hard drives and partitions.
    - **`usefileSystemDrive`**: Enter `true` to let Portworx find unmounted hard drives, even if they are formatted.
    - **`drives`**: Enter `none` to let Portworx find unmounted and unformatted hard drives.
-   - **`imageVersion`**: Enter the latest version of the Portworx Helm chart. To find the latest version, refer to the Portworx [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/release-notes/).
+   - **`etcd.credentials`**: Enter the user name and password of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `<user_name>:<password>`.
+   - **`etcd.certPath`**: Enter the path where the certificate for your database service instance are stored. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts`. For {{site.data.keyword.composeForEtcd}}, enter `none`. 
+   - **`etcd.ca`**: Enter the path to the Certificate Authority (CA) file. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts/ca.pem`. For {{site.data.keyword.composeForEtcd}}, enter `none`.
 
    For a full list of supported parameters, see the [Portworx Helm chart documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/blob/master/charts/portworx/README.md#configuration).
 
-   Example `values.yaml` file:
+   Example `values.yaml` file for Databases for etcd:
    ```
    # Please uncomment and specify values for these options as per your requirements.
 
@@ -274,8 +305,8 @@ To install Portworx:
    internalKVDB: false                   # internal KVDB
    etcd:
      credentials: <username>:<password>  # Username and password for ETCD authentication in the form user:password
-     certPath: none                      # Base path where the certificates are placed. (example: if the certificates ca,crt and the key are in /etc/pwx/etcdcerts the value should be provided as /etc/pwx/$
-     ca: none                            # Location of CA file for ETCD authentication. Should be /path/to/server.ca
+     certPath: /etc/pwx/etcdcerts                      # Base path where the certificates are placed. (example: if the certificates ca,crt and the key are in /etc/pwx/etcdcerts the value should be provided as /etc/pwx/$
+     ca: /etc/pwx/etcdcerts/ca.pem                            # Location of CA file for ETCD authentication. Should be /path/to/server.ca
      cert: none                          # Location of certificate for ETCD authentication. Should be /path/to/server.crt
      key: none                           # Location of certificate key for ETCD authentication Should be /path/to/servery.key
    consul:

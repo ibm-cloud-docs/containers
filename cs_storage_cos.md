@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-02-28"
 
 keywords: kubernetes, iks 
 
@@ -26,11 +26,17 @@ scope: containers
 # Storing data on IBM Cloud Object Storage
 {: #object_storage}
 
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage) is persistent, highly available storage that you can mount to apps that run in a Kubernetes cluster by using the {{site.data.keyword.cos_full_notm}} plug-in. The plug-in is a Kubernetes Flex-Volume plug-in that connects Cloud {{site.data.keyword.cos_short}} buckets to pods in your cluster. Information that is stored with {{site.data.keyword.cos_full_notm}} is encrypted in transit and at rest, dispersed across multiple geographic locations, and accessed over HTTP by using a REST API.
+
 ## Creating your object storage service instance
 {: #create_cos_service}
 
-Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, you must provision an {{site.data.keyword.cos_full_notm}} service instance in your account.
+Before you can start using object storage in your cluster, you must provision an {{site.data.keyword.cos_full_notm}} service instance in your account.
 {: shortdesc}
+
+The {{site.data.keyword.cos_full_notm}} plug-in is configured to work with any s3 API endpoint. For example, you might want to use a local Cloud Object Storage server, such as [Minio](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore), or connect to an s3 API endpoint that you set up at a different cloud provider instead of using an {{site.data.keyword.cos_full_notm}} service instance. 
+
+Follow these steps to create an {{site.data.keyword.cos_full_notm}} service instance. If you plan to use a local Cloud Object Storage server or a different s3 API endpoint, refer to the provider documentation to set up your Cloud Object Storage instance. 
 
 1. Deploy an {{site.data.keyword.cos_full_notm}} service instance.
    1.  Open the [{{site.data.keyword.cos_full_notm}} catalog page](https://cloud.ibm.com/catalog/services/cloud-object-storage).
@@ -54,6 +60,8 @@ Before you can start using {{site.data.keyword.cos_full_notm}} in your cluster, 
 To access your {{site.data.keyword.cos_full_notm}} service instance to read and write data, you must securely store the service credentials in a Kubernetes secret. The {{site.data.keyword.cos_full_notm}} plug-in uses these credentials for every read or write operation to your bucket.
 {: shortdesc}
 
+Follow these steps to create a Kubernetes secret for the credentials of an {{site.data.keyword.cos_full_notm}} service instance. If you plan to use a local Cloud Object Storage server or a different s3 API endpoint, create a Kubernetes secret with the appropriate credentials. 
+
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 1. Retrieve the **apikey**, or the **access_key_id** and the **secret_access_key** of your [{{site.data.keyword.cos_full_notm}} service credentials](#service_credentials).
@@ -64,7 +72,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ```
    {: pre}
 
-3. Encode the {{site.data.keyword.cos_full_notm}} **GUID** and the **apikey**, or the **access_key_id** and **secret_access_key** that you retrieved earlier to base64 and note all the base64 encoded values. Repeat this command for each parameter to retrieve the base 64 encoded value.
+3. Encode the {{site.data.keyword.cos_full_notm}} **GUID** and the **apikey**, or the **access_key_id** and **secret_access_key** that you retrieved earlier to base64 and note all the base64 encoded values. Repeat this command for each parameter to retrieve the base64 encoded value.
    ```
    echo -n "<key_value>" | base64
    ```
@@ -97,7 +105,6 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    data:
      access-key: <base64_access_key_id>
      secret-key: <base64_secret_access_key>
-     service-instance-id: <base64_guid>
    ```
    {: codeblock}
 
@@ -398,27 +405,27 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    The installation is successful when you see one `ibmcloud-object-storage-plugin` pod and one or more `ibmcloud-object-storage-driver` pods. The number of `ibmcloud-object-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a `Running` state for the plug-in to function properly. If the pods fail, run `kubectl describe pod -n kube-system <pod_name>` to find the root cause for the failure.
 
 11. Verify that the storage classes are created successfully.
-   ```
-   kubectl get storageclass | grep s3
-   ```
-   {: pre}
+    ```
+    kubectl get storageclass | grep s3
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-cross-region            ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-perf-cross-region       ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-perf-regional           ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-regional                ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-cross-region        ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-perf-cross-region   ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-perf-regional       ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-regional            ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-vault-cross-region           ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
-   ```
-   {: screen}
+    Example output:
+    ```
+    ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-cross-region            ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-perf-cross-region       ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-perf-regional           ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-regional                ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-cross-region        ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-perf-cross-region   ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-perf-regional       ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-regional            ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-vault-cross-region           ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
+    ```
+    {: screen}
 
 12. Repeat the steps for all clusters where you want to access {{site.data.keyword.cos_full_notm}} buckets.
 

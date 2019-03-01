@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-03-01"
 
 keywords: kubernetes, iks
 
@@ -96,21 +96,21 @@ To allow access for a specific cluster:
    ```
    {: pre}
 
-2. Select the region that your cluster is in.
+3. Select the region that your cluster is in.
 
    ```
    ibmcloud ks region-set
    ```
    {: pre}
 
-3. Get the name of your cluster.
+4. Get the name of your cluster.
 
    ```
    ibmcloud ks clusters
    ```
    {: pre}
 
-4. Retrieve the **Master URL** for your cluster.
+5. Retrieve the **Master URL** for your cluster.
 
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
@@ -125,9 +125,9 @@ To allow access for a specific cluster:
    ```
    {: screen}
 
-5. Allow access to the **Master URL** on the port, such as port `31142` from the previous example. If your firewall is IP-based, you can see which IP addresses are opened when you allow access to the master URL by reviewing [this table](#master_ips).
+6. Allow access to the **Master URL** on the port, such as port `31142` from the previous example. If your firewall is IP-based, you can see which IP addresses are opened when you allow access to the master URL by reviewing [this table](#master_ips).
 
-6. Verify your connection.
+7. Verify your connection.
 
    ```
    curl --insecure <master_URL>/version
@@ -156,7 +156,7 @@ To allow access for a specific cluster:
    ```
    {: screen}
 
-7. Optional: Repeat these steps for each cluster that you need to expose.
+8. Optional: Repeat these steps for each cluster that you need to expose.
 
 <br />
 

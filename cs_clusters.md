@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-02-28"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -621,32 +621,32 @@ To add a zone with worker nodes to your worker pool:
    {: pre}
 
 5. Verify that the zone is added to your cluster. Look for the added zone in the **Worker zones** field of the output. Note that the total number of workers in the **Workers** field has increased as new worker nodes are provisioned in the added zone.
-    ```
-    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
 
-    Example output:
-    ```
-    Name:                   mycluster
-    ID:                     df253b6025d64944ab99ed63bb4567b6
-    State:                  normal
-    Created:                2018-09-28T15:43:15+0000
-    Location:               dal10
-    Master URL:             https://c3.<region>.containers.cloud.ibm.com:30426
-    Master Location:        Dallas
-    Master Status:          Ready (21 hours ago)
-    Ingress Subdomain:      ...
-    Ingress Secret:         mycluster
-    Workers:                6
-    Worker Zones:           dal10, dal12
-    Version:                1.11.3_1524
-    Owner:                  owner@email.com
-    Monitoring Dashboard:   ...
-    Resource Group ID:      a8a12accd63b437bbd6d58fb6a462ca7
-    Resource Group Name:    Default
-    ```
-    {: screen}  
+  Example output:
+  ```
+  Name:                           mycluster
+  ID:                             df253b6025d64944ab99ed63bb4567b6
+  State:                          normal
+  Created:                        2018-09-28T15:43:15+0000
+  Location:                       dal10
+  Master URL:                     https://c3.<region>.containers.cloud.ibm.com:30426
+  Master Location:                Dallas
+  Master Status:                  Ready (21 hours ago)
+  Ingress Subdomain:              mycluster.us-south.containers.appdomain.cloud
+  Ingress Secret:                 mycluster
+  Workers:                        6
+  Worker Zones:                   dal10, dal12
+  Version:                        1.11.3_1524
+  Owner:                          owner@email.com
+  Monitoring Dashboard:           ...
+  Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
+  Resource Group Name:            Default
+  ```
+  {: screen}  
 
 ### Deprecated: Adding stand-alone worker nodes
 {: #standalone}
