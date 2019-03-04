@@ -232,6 +232,7 @@ Every time you log in to the {{site.data.keyword.containerlong}} CLI to work wit
     {: screen}
 
 2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
+
     **Windows PowerShell users**: Instead of copying and pasting the `SET` command from the output of `ibmcloud ks cluster-config`, you must set the `KUBECONFIG` environment variable by running, for example, `$env:KUBECONFIG = "KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml"`.
     {: note}
 

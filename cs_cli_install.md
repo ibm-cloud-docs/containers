@@ -248,6 +248,7 @@ To use `kubectl` commands:
 
         **Mac or Linux users**: Instead of running the `ibmcloud ks cluster-config` command and copying the `KUBECONFIG` environment variable, you can run `ibmcloud ks cluster-config --export <cluster-name>`. Depending on your shell, you can set up your shell by running `eval $(ibmcloud ks cluster-config --export <cluster-name>)`.
         {: tip}
+        
         **Windows PowerShell users**: Instead of copying and pasting the `SET` command from the output of `ibmcloud ks cluster-config`, you must set the `KUBECONFIG` environment variable by running, for example, `$env:KUBECONFIG = "KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml"`.
         {:tip}
 
