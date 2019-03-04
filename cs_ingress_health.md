@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-03-04"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 scope: containers
 
@@ -31,7 +31,7 @@ Customize logging and set up monitoring to help you troubleshoot issues and impr
 ## Viewing Ingress logs
 {: #ingress_logs}
 
-If you want to troubleshoot your Ingress or monitor Ingress activity, you can review the Ingress logs. 
+If you want to troubleshoot your Ingress or monitor Ingress activity, you can review the Ingress logs.
 {: shortdesc}
 
 Logs are automatically collected for your Ingress ALBs. To view the ALB logs, choose between two options.
@@ -72,7 +72,7 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"host": "$http_host"</code></td>
-<td>The host, or subdomain, that your apps are accessible through. This host is configured in the Ingress resource files for your ALBs.</td>
+<td>The host, or subdomain, that your apps are accessible through. This subdomain is configured in the Ingress resource files for your ALBs.</td>
 </tr>
 <tr>
 <td><code>"scheme": "$scheme"</code></td>
@@ -315,7 +315,7 @@ To install the metrics exporter and Prometheus agent for an ALB in your cluster:
     ```
     {:screen}
 
-8. In a browser, enter the URL for the Prometheus dashboard. This hostname has the format `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. The Prometheus dashboard for your ALB opens.
+8. In a browser, enter the URL for the Prometheus dashboard. This host name has the format `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. The Prometheus dashboard for your ALB opens.
 
 9. Review more information about the [ALB](#alb_metrics), [server](#server_metrics), and [upstream](#upstream_metrics) metrics listed in the dashboard.
 
@@ -390,7 +390,7 @@ The following table lists the supported ALB metric names with the metric labels 
 ### Server metrics
 {: #server_metrics}
 
-The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Server metrics collect data on the host defined in an Ingress resource; for example, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
+The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Server metrics collect data on the subdomain defined in an Ingress resource; for example, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
 {: shortdesc}
 
 Server metrics are in the format `kube_system_server_<ALB-ID>_<SUB-TYPE>_<SERVER-NAME>_<METRIC-NAME> <VALUE>`.

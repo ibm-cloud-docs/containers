@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-03-04"
 
 ---
 
@@ -94,9 +94,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     NAME                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
     coredns                0         0         0            0           89d
-    coredns-autoscaler     0         0         0            0           89d
     kube-dns-amd64         2         2         2            2           89d
-    kube-dns-autoscaler    1         1         1            1           89d
     ```
     {: screen}
 2.  Edit the default settings for the CoreDNS or KubeDNS configmap.
@@ -192,7 +190,9 @@ If you have a {{site.data.keyword.containerlong_notm}} cluster that runs Kuberne
 Set up CoreDNS instead of KubeDNS as the cluster DNS provider.
 {: shortdesc}
 
-1.  If you customized the `kube-dns` configmap in the `kube-system` namespace, transfer any [DNS customizations ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) to the `coredns` configmap in the `kube-system` namespace. Note that the syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [Installing CoreDNS via Kubeadm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in the CoreDNS docs.
+1.  If you customized the KubeDNS provider configmap or KubeDNS autoscaler configmap, transfer any customizations to the CoreDNS configmaps.
+    *   For the `kube-dns` configmap in the `kube-system` namespace, transfer any [DNS customizations ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) to the `coredns` configmap in the `kube-system` namespace. Note that the syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [the Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configuration-equivalent-to-kube-dns).
+    *   For the `kube-dns-autoscaler` configmap in the `kube-system` namespace, transfer any [DNS autoscaler customizations ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/) to the `coredns-autoscaler` configmap in the `kube-system` namespace. Note that the customization syntax is the same.
 2.  Scale down the KubeDNS autoscaler deployment.
     ```
     kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
@@ -233,13 +233,16 @@ Set up CoreDNS instead of KubeDNS as the cluster DNS provider.
     {: pre}
 
 
+
 ### Setting up KubeDNS as the cluster DNS provider
 {: #set_kubedns}
 
 Set up KubeDNS instead of CoreDNS as the cluster DNS provider.
 {: shortdesc}
 
-1.  If you customized the `coredns` configmap in the `kube-system` namespace, transfer any [DNS customizations ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) to the `kube-dns` configmap in the `kube-system` namespace. Note that the syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [Installing CoreDNS via Kubeadm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2018/05/21/migration-from-kube-dns-to-coredns/) in the CoreDNS docs.
+1.  If you customized the CoreDNS provider configmap or CoreDNS autoscaler configmap, transfer any customizations to the KubeDNS configmaps.
+    *   For the `coredns` configmap in the `kube-system` namespace, transfer any [DNS customizations ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) to the `kube-dns` configmap in the `kube-system` namespace. Note that the syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [the Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configuration-equivalent-to-kube-dns).
+    *   For the `coredns-autoscaler` configmap in the `kube-system` namespace, transfer any [DNS autoscaler customizations ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/) to the `kube-dns-autoscaler` configmap in the `kube-system` namespace. Note that the customization syntax is the same.
 2.  Scale down the CoreDNS autoscaler deployment.
     ```
     kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler

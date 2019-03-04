@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-03-04"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 

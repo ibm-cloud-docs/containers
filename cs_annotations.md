@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-03-04"
 
 keywords: kubernetes, iks, ingress
 
@@ -134,11 +134,6 @@ Before you use annotations, make sure you have properly set up your Ingress serv
   <th>Description</th>
   </thead>
   <tbody>
-  <tr>
-  <td><a href="#appid-auth">{{site.data.keyword.appid_short}} Authentication</a></td>
-  <td><code>appid-auth</code></td>
-  <td>Use {{site.data.keyword.appid_full}} to authenticate with your app.</td>
-  </tr>
   <tr>
   <td><a href="#custom-port">Custom HTTP and HTTPS ports</a></td>
   <td><code>custom-port</code></td>
@@ -303,10 +298,110 @@ Before you use annotations, make sure you have properly set up your Ingress serv
 
 <br>
 
+<table>
+<caption>User authentication annotations</caption>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+<thead>
+<th>User authentication annotations</th>
+<th>Name</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td><a href="#appid-auth">{{site.data.keyword.appid_short}} Authentication</a></td>
+<td><code>appid-auth</code></td>
+<td>Use {{site.data.keyword.appid_full}} to authenticate with your app.</td>
+</tr>
+</tbody></table>
 
+<br>
 
 ## General annotations
 {: #general}
+
+### Custom error actions (`custom-errors`, `custom-error-actions`)
+{: #custom-errors}
+
+Indicate custom actions that the ALB can take for specific HTTP errors.
+{: shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>To handle specific HTTP errors that might occur, you can set up custom error actions for the ALB to take.<ul>
+<li>The `custom-errors` annotation defines the service name, the HTTP error to handle, and the name of the error action that the ALB takes when it encounters the specified HTTP error for the service.</li>
+<li>The `custom-error-actions` annotation defines custom error actions in NGINX code snippets.</li></ul>
+</br>For example, in the `custom-errors` annotation, you can set up the ALB to handle `401` HTTP errors for `app1` by returning a custom error action called `/errorAction401`. Then, in the `custom-error-actions` annotation, you can define a code snippet called `/errorAction401` so that the ALB returns a custom error page to the client.</br>You can also use the `custom-errors` annotation to redirect the client to an error service that you manage. You must define the path to this error service in the `paths` section of the Ingress resource file.</dd>
+
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+<pre class="codeblock">
+<code>
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/custom-errors: "serviceName=&lt;app1&gt; httpError=&lt;401&gt; errorActionName=&lt;/errorAction401&gt;;serviceName=&lt;app2&gt; httpError=&lt;403&gt; errorActionName=&lt;/errorPath&gt;"
+    ingress.bluemix.net/custom-error-actions: |
+         errorActionName=&lt;/errorAction401&gt;
+         #Example custom error snippet
+         proxy_pass http://example.com/forbidden.html;
+         &lt;EOS&gt;
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /path1
+        backend:
+          serviceName: app1
+          servicePort: 80
+      - path: /path2
+        backend:
+          serviceName: app2
+          servicePort: 80
+      - path: &lt;/errorPath&gt;
+        backend:
+          serviceName: &lt;error-svc&gt;
+          servicePort: 80
+</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Replace <code>&lt;<em>app1</em>&gt;</code> with the name of the Kubernetes service that the custom error applies to. The custom error applies only to the specific paths that use this same upstream service. If you do not set a service name, then the custom errors are applied to all service paths.</td>
+ </tr>
+ <tr>
+ <td><code>httpError</code></td>
+ <td>Replace <code>&lt;<em>401</em>&gt;</code> with the HTTP error code that you want to handle with a custom error action.</td>
+ </tr>
+ <tr>
+ <td><code>errorActionName</code></td>
+ <td>Replace <code>&lt;<em>/errorAction401</em>&gt;</code> with the name of a custom error action to take or the path to an error service.<ul>
+ <li>If you specify the name of a custom error action, you must define that error action in a code snippet in the <code>custom-error-actions</code> annotation. In the sample YAML, <code>app1</code> uses <code>/errorAction401</code>, which is defined in the snippet in the <code>custom-error-actions</code> annotation.</li>
+ <li>If you specify the path to an error service, you must specify that error path and the name of the error service in the <code>paths</code> section. In the sample YAML, <code>app2</code> uses <code>/errorPath</code>, which is defined at the end of the <code>paths</code> section.</li></ul></td>
+ </tr>
+ <tr>
+ <td><code>ingress.bluemix.net/custom-error-actions</code></td>
+ <td>Define a custom error action that the ALB takes for the service and HTTP error that you specified. Use an NGINX code snippet and end each snippet with <code>&lt;EOS&gt;</code>. In the sample YAML, the ALB passes a custom error page, <code>http://example.com/forbidden.html</code>, to the client when a <code>401</code> error occurs for <code>app1</code>.</td>
+ </tr>
+ </tbody></table>
+
+ </dd></dl>
+
+<br />
+
 
 ### Location snippets (`location-snippets`)
 {: #location-snippets}
@@ -797,7 +892,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app. This parameter is optional. The configuration is applied to all of the services in the Ingress host unless a service is specified. If the parameter is provided, the keepalive requests are set for the given service. If the parameter is not provided, the keepalive requests are set at the server level of the <code>nginx.conf</code> for all the services that do not have the keepalive requests configured.</td>
+<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app. This parameter is optional. The configuration is applied to all of the services in the Ingress subdomain unless a service is specified. If the parameter is provided, the keepalive requests are set for the given service. If the parameter is not provided, the keepalive requests are set at the server level of the <code>nginx.conf</code> for all the services that do not have the keepalive requests configured.</td>
 </tr>
 <tr>
 <td><code>requests</code></td>
@@ -1209,118 +1304,6 @@ spec:
 With HTTPS and TLS/SSL authentication annotations, you can configure your ALB for HTTPS traffic, change default HTTPS ports, enable SSL encryption for traffic that is sent to your back-end apps, or set up mutual authentication.
 {: shortdesc}
 
-### {{site.data.keyword.appid_short_notm}} Authentication (`appid-auth`)
-{: #appid-auth}
-
-Use {{site.data.keyword.appid_full_notm}} to authenticate with your app.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>
-Authenticate web or API HTTP/HTTPS requests with {{site.data.keyword.appid_short_notm}}.
-
-<p>If you set the request type to <code>web</code>, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page. For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.</p>
-
-<p>If you set the request type to <code>api</code>, an API request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If the request does not contain an access token, a <code>401: Unauthorized</code> error message is returned to the user.</p>
-
-<p class="note">For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports back ends with TLS/SSL enabled.</p>
-</dd>
-<dt>Sample Ingress resource YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=&lt;myservice&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-<table>
-<caption>Understanding the annotation components</caption>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-</thead>
-<tbody>
-<tr>
-<td><code>bindSecret</code></td>
-<td>Replace <em><code>&lt;bind_secret&gt;</code></em> with the Kubernetes secret which stores the bind secret for your {{site.data.keyword.appid_short_notm}} service instance.</td>
-</tr>
-<tr>
-<td><code>namespace</code></td>
-<td>Replace <em><code>&lt;namespace&gt;</code></em> with the namespace of the bind secret. This field defaults to the `default` namespace.</td>
-</tr>
-<tr>
-<td><code>requestType</code></td>
-<td>Replace <code><em>&lt;request_type&gt;</em></code> with the type of request you want to send to {{site.data.keyword.appid_short_notm}}. Accepted values are `web` or `api`. The default is `api`.</td>
-</tr>
-<tr>
-<td><code>serviceName</code></td>
-<td>Replace <code><em>&lt;myservice&gt;</em></code> with the name of the Kubernetes service that you created for your app. This field is required. If a service name is not included, then the annotation is enabled for all services.  If a service name is included, then the annotation is enabled only for that service. Separate multiple services with a comma (,).</td>
-</tr>
-</tbody></table>
-</dd>
-<dt>Usage</dt></dl>
-
-Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
-
-1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
-    * To use an existing instance, ensure that the service instance name doesn't contain spaces. To remove spaces, select the more options menu next to the name of your service instance and select **Rename service**.
-    * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
-        1. Replace the auto-filled **Service name** with your own unique name for the service instance. The service instance name can't contain spaces.
-        2. Choose the same region that your cluster is deployed in.
-        3. Click **Create**.
-2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, App ID validates the request URL against the whitelist of redirect URLs.
-    1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Identity providers > Manage**.
-    2. Make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
-    3. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<app_path>/appid_callback` or `https://<hostname>/<app_path>/appid_callback`.
-      * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`.
-      * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/appid_callback`.
-
-      {{site.data.keyword.appid_full_notm}} offers a logout function: If `/logout` exists in your {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page. To use this function, you must append `/appid_logout` to your domain in the format `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_logout` and include this URL in the redirect URLs list.
-      {: note}
-
-3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
-    ```
-    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
-    ```
-    {: pre}
-    When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
-    ```
-    ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service appid1
-    Binding service instance to namespace...
-    OK
-    Namespace:    mynamespace
-    Secret name:  binding-<service_instance_name>
-    ```
-    {: screen}
-
-4. Get the secret that was created in your cluster namespace.
-    ```
-    kubectl get secrets --namespace=<namespace>
-    ```
-    {: pre}
-
-5. Use the bind secret and the cluster namespace to add the `appid-auth` annotation to your Ingress resource.
-
-<br />
-
-
-
 ### Custom HTTP and HTTPS ports (`custom-port`)
 {: #custom-port}
 
@@ -1686,7 +1669,7 @@ spec:
 
 **To create a one-way authentication secret:**
 
-1. Get the certificate authority (CA) key and certificate from your upstream server.
+1. Get the certificate authority (CA) key and certificate from your upstream server and an SSL client certificate. The IBM ALB is based on NGINX, which requires the root certificate, intermediate certificate, and back-end certificate. For more information, see the [NGINX docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/).
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert.
      ```
@@ -1700,7 +1683,7 @@ spec:
      ```
      {: codeblock}
 
-     If you want to also enforce mutual authentication for upstream traffic, you can provide a `client.crt` and `client.key` in addition to the `trusted.crt` in the data section.
+     To also enforce mutual authentication for upstream traffic, you can provide a `client.crt` and `client.key` in addition to the `trusted.crt` in the data section.
      {: tip}
 
 4. Create the certificate as a Kubernetes secret.
@@ -1842,88 +1825,6 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  1
 
 The Ingress ALB routes traffic to the paths that back-end apps listen on. With path routing annotations, you can configure how the ALB routes traffic to your apps.
 {: shortdesc}
-
-### Custom error actions (`custom-errors`, `custom-error-actions`)
-{: #custom-errors}
-
-Indicate custom actions that the ALB can take for specific HTTP errors.
-{: shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>To handle specific HTTP errors that might occur, you can set up custom error actions for the ALB to take.<ul>
-<li>The `custom-errors` annotation defines the service name, the HTTP error to handle, and the name of the error action that the ALB takes when it encounters the specified HTTP error for the service.</li>
-<li>The `custom-error-actions` annotation defines custom error actions in NGINX code snippets.</li></ul>
-</br>For example, in the `custom-errors` annotation, you can set up the ALB to handle `401` HTTP errors for `app1` by returning a custom error action called `/errorAction401`. Then, in the `custom-error-actions` annotation, you can define a code snippet called `/errorAction401` so that the ALB returns a custom error page to the client.</br>You can also use the `custom-errors` annotation to redirect the client to an error service that you manage. You must define the path to this error service in the `paths` section of the Ingress resource file.</dd>
-
-<dt>Sample Ingress resource YAML</dt>
-<dd>
-<pre class="codeblock">
-<code>
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/custom-errors: "serviceName=&lt;app1&gt; httpError=&lt;401&gt; errorActionName=&lt;/errorAction401&gt;;serviceName=&lt;app2&gt; httpError=&lt;403&gt; errorActionName=&lt;/errorPath&gt;"
-    ingress.bluemix.net/custom-error-actions: |
-         errorActionName=&lt;/errorAction401&gt;
-         #Example custom error snippet
-         proxy_pass http://example.com/forbidden.html;
-         &lt;EOS&gt;
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mysecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /path1
-        backend:
-          serviceName: app1
-          servicePort: 80
-      - path: /path2
-        backend:
-          serviceName: app2
-          servicePort: 80
-      - path: &lt;/errorPath&gt;
-        backend:
-          serviceName: &lt;error-svc&gt;
-          servicePort: 80
-</code></pre>
-
-<table>
-<caption>Understanding the annotation components</caption>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
- </thead>
- <tbody>
- <tr>
- <td><code>serviceName</code></td>
- <td>Replace <code>&lt;<em>app1</em>&gt;</code> with the name of the Kubernetes service that the custom error applies to. The custom error applies only to the specific paths that use this same upstream service. If you do not set a service name, then the custom errors are applied to all service paths.</td>
- </tr>
- <tr>
- <td><code>httpError</code></td>
- <td>Replace <code>&lt;<em>401</em>&gt;</code> with the HTTP error code that you want to handle with a custom error action.</td>
- </tr>
- <tr>
- <td><code>errorActionName</code></td>
- <td>Replace <code>&lt;<em>/errorAction401</em>&gt;</code> with the name of a custom error action to take or the path to an error service.<ul>
- <li>If you specify the name of a custom error action, you must define that error action in a code snippet in the <code>custom-error-actions</code> annotation. In the sample YAML, <code>app1</code> uses <code>/errorAction401</code>, which is defined in the snippet in the <code>custom-error-actions</code> annotation.</li>
- <li>If you specify the path to an error service, you must specify that error path and the name of the error service in the <code>paths</code> section. In the sample YAML, <code>app2</code> uses <code>/errorPath</code>, which is defined at the end of the <code>paths</code> section.</li></ul></td>
- </tr>
- <tr>
- <td><code>ingress.bluemix.net/custom-error-actions</code></td>
- <td>Define a custom error action that the ALB takes for the service and HTTP error that you specified. Use an NGINX code snippet and end each snippet with <code>&lt;EOS&gt;</code>. In the sample YAML, the ALB passes a custom error page, <code>http://example.com/forbidden.html</code>, to the client when a <code>401</code> error occurs for <code>app1</code>.</td>
- </tr>
- </tbody></table>
-
- </dd></dl>
-
-<br />
-
 
 ### External services (`proxy-external-service`)
 {: #proxy-external-service}
@@ -2258,7 +2159,7 @@ Configure the number and size of proxy buffers for the ALB.
 <dl>
 <dt>Description</dt>
 <dd>
-Set the number and size of the buffers that read a response for a single connection from the proxied server. The configuration is applied to all of the services in the Ingress host unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE number=2 size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>number=2 size=1k</code> is specified, 1k is applied to all of the services in the Ingress host.</br>
+Set the number and size of the buffers that read a response for a single connection from the proxied server. The configuration is applied to all of the services in the Ingress subdomain unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE number=2 size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>number=2 size=1k</code> is specified, 1k is applied to all of the services in the Ingress subdomain.</br>
 <p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your back end sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffers</code> and [<code>proxy-buffer-size</code>](#proxy-buffer-size).</p>
 </dd>
 <dt>Sample Ingress resource YAML</dt>
@@ -2318,7 +2219,7 @@ Configure the size of the proxy buffer that reads the first part of the response
 <dl>
 <dt>Description</dt>
 <dd>
-Set the size of the buffer that reads the first part of the response that is received from the proxied server. This part of the response usually contains a small response header. The configuration is applied to all of the services in the Ingress host unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>size=1k</code> is specified, 1k is applied to all of the services in the Ingress host.
+Set the size of the buffer that reads the first part of the response that is received from the proxied server. This part of the response usually contains a small response header. The configuration is applied to all of the services in the Ingress subdomain unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>size=1k</code> is specified, 1k is applied to all of the services in the Ingress subdomain.
 <p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your back end sent a header size that is larger than the default limit. Increase the size for both <code>proxy-buffer-size</code> and [<code>proxy-buffers</code>](#proxy-buffers).</p>
 </dd>
 
@@ -2380,7 +2281,7 @@ Configure the size of proxy buffers that can be busy.
 <dl>
 <dt>Description</dt>
 <dd>
-Limit the size of any buffers that are sending a response to the client while the response is not yet fully read. In the meantime, the rest of the buffers can read the response and, if needed, buffer part of the response to a temporary file. The configuration is applied to all of the services in the Ingress host unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>size=1k</code> is specified, 1k is applied to all of the services in the Ingress host.
+Limit the size of any buffers that are sending a response to the client while the response is not yet fully read. In the meantime, the rest of the buffers can read the response and, if needed, buffer part of the response to a temporary file. The configuration is applied to all of the services in the Ingress subdomain unless a service is specified. For example, if a configuration such as <code>serviceName=SERVICE size=1k</code> is specified, 1k is applied to the service. If a configuration such as <code>size=1k</code> is specified, 1k is applied to all of the services in the Ingress subdomain.
 </dd>
 
 
@@ -2480,7 +2381,7 @@ spec:
  <tbody>
  <tr>
  <td><code>enabled</code></td>
-   <td>To enable setting of server_port for the host, set to <code>true</code>.</td>
+   <td>To enable setting of server_port for the subdomain, set to <code>true</code>.</td>
  </tr>
  <tr>
  <td><code>serviceName</code></td>
@@ -2847,5 +2748,119 @@ spec:
 
 <br />
 
+
+## User authentication annotations
+{: #user-authentication}
+
+Use user authentication annotations if you want to use {{site.data.keyword.appid_full_notm}} to authenticate with your apps.
+{: shortdesc}
+
+### {{site.data.keyword.appid_short_notm}} Authentication (`appid-auth`)
+{: #appid-auth}
+
+Use {{site.data.keyword.appid_full_notm}} to authenticate with your app.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>
+Authenticate web or API HTTP/HTTPS requests with {{site.data.keyword.appid_short_notm}}.
+
+<p>If you set the request type to <code>web</code>, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page. For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.</p>
+
+<p>If you set the request type to <code>api</code>, an API request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If the request does not contain an access token, a <code>401: Unauthorized</code> error message is returned to the user.</p>
+
+<p class="note">For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports back ends with TLS/SSL enabled.</p>
+</dd>
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=&lt;myservice&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>bindSecret</code></td>
+<td>Replace <em><code>&lt;bind_secret&gt;</code></em> with the Kubernetes secret which stores the bind secret for your {{site.data.keyword.appid_short_notm}} service instance.</td>
+</tr>
+<tr>
+<td><code>namespace</code></td>
+<td>Replace <em><code>&lt;namespace&gt;</code></em> with the namespace of the bind secret. This field defaults to the `default` namespace.</td>
+</tr>
+<tr>
+<td><code>requestType</code></td>
+<td>Replace <code><em>&lt;request_type&gt;</em></code> with the type of request you want to send to {{site.data.keyword.appid_short_notm}}. Accepted values are `web` or `api`. The default is `api`.</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code><em>&lt;myservice&gt;</em></code> with the name of the Kubernetes service that you created for your app. This field is required. If a service name is not included, then the annotation is enabled for all services.  If a service name is included, then the annotation is enabled only for that service. Separate multiple services with a comma (,).</td>
+</tr>
+</tbody></table>
+</dd>
+<dt>Usage</dt></dl>
+
+Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret by binding the instance to your cluster.
+
+1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
+    * To use an existing instance, ensure that the service instance name doesn't contain spaces. To remove spaces, select the more options menu next to the name of your service instance and select **Rename service**.
+    * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
+        1. Replace the auto-filled **Service name** with your own unique name for the service instance. The service instance name can't contain spaces.
+        2. Choose the same region that your cluster is deployed in.
+        3. Click **Create**.
+2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, App ID validates the request URL against the whitelist of redirect URLs.
+    1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Identity providers > Manage**.
+    2. Make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
+    3. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<app_path>/appid_callback` or `https://<hostname>/<app_path>/appid_callback`.
+      * For example, an app that is registered with the IBM Ingress subdomain might look like `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_callback`.
+      * An app that is registered with a custom domain might look like `http://mydomain.net/myapp2path/appid_callback`.
+
+      {{site.data.keyword.appid_full_notm}} offers a logout function: If `/logout` exists in your {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page. To use this function, you must append `/appid_logout` to your domain in the format `https://mycluster.us-south.containers.appdomain.cloud/myapp1path/appid_logout` and include this URL in the redirect URLs list.
+      {: note}
+
+3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
+    ```
+    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
+    ```
+    {: pre}
+    When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
+    ```
+    ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service appid1
+    Binding service instance to namespace...
+    OK
+    Namespace:    mynamespace
+    Secret name:  binding-<service_instance_name>
+    ```
+    {: screen}
+
+4. Get the secret that was created in your cluster namespace.
+    ```
+    kubectl get secrets --namespace=<namespace>
+    ```
+    {: pre}
+
+5. Use the bind secret and the cluster namespace to add the `appid-auth` annotation to your Ingress resource.
 
 
