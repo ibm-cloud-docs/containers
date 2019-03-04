@@ -928,7 +928,7 @@ The following table shows the changes that are included in the patch 1.11.8_1547
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.11.7-198</td>
 <td>v1.11.8-219</td>
-<td>Updated to support the Kubernetes 1.11.8 release. Fixed periodic connectivity problems for version 1.0 load balancers that set `externalTrafficPolicy` to `local`. Updated load balancer version 1.0 and 2.0 events to use the latest {{site.data.keyword.Bluemix_notm}} documentation links.</td>
+<td>Updated to support the Kubernetes 1.11.8 release. Fixed periodic connectivity problems for load balancers that set `externalTrafficPolicy` to `local`. Updated load balancer events to use the latest {{site.data.keyword.Bluemix_notm}} documentation links.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
@@ -1870,7 +1870,7 @@ The following table shows the changes that are included in the patch 1.10.13_154
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
 <td>v1.10.12-252</td>
 <td>v1.10.13-288</td>
-<td>Updated to support the Kubernetes 1.10.13 release. Fixed periodic connectivity problems for version 1.0 load balancers that set `externalTrafficPolicy` to `local`. Updated load balancer version 1.0 and 2.0 events to use the latest {{site.data.keyword.Bluemix_notm}} documentation links.</td>
+<td>Updated to support the Kubernetes 1.10.13 release. Fixed periodic connectivity problems for load balancers that set `externalTrafficPolicy` to `local`. Updated load balancer events to use the latest {{site.data.keyword.Bluemix_notm}} documentation links.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
