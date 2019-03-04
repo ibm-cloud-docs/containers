@@ -49,6 +49,7 @@ export IKS_BETA_VERSION=<beta_version>
 ```
 {: pre}
 
+
 The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available. Note that the default behavior is `0.2`.
 
 <table>
