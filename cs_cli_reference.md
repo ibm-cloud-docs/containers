@@ -43,6 +43,7 @@ A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is 
 {: shortdesc}
 
 To use the redesigned {{site.data.keyword.containerlong_notm}} plug-in, set the `IKS_BETA_VERSION` environment variable to the beta version that you want to use:
+
 ```
 export IKS_BETA_VERSION=<beta_version>
 ```
