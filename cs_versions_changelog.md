@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-27"
+lastupdated: "2019-03-04"
 
 keywords: kubernetes, iks
 
@@ -36,8 +36,8 @@ For information about changes since the previous version, see the following chan
 -  Version 1.13 [changelog](#113_changelog).
 -  Version 1.12 [changelog](#112_changelog).
 -  Version 1.11 [changelog](#111_changelog).
--  Version 1.10 [changelog](#110_changelog).
--  [Archive](#changelog_archive) of changelogs for deprecated or unsupported versions.
+-  **Deprecated**: Version 1.10 [changelog](#110_changelog).
+-  [Archive](#changelog_archive) of changelogs for unsupported versions.
 
 Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
@@ -46,6 +46,86 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.13 changelog
 {: #113_changelog}
+
+### Changelog for 1.13.4_1510, released 4 March 2019
+{: #1134_1510}
+
+The following table shows the changes that are included in the patch 1.13.4_1510.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.2_1509">
+<caption>Changes since version 1.13.2_1509</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster DNS provider</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased Kubernetes DNS and CoreDNS pod memory limit from `170Mi` to `400Mi` in order to handle more cluster services.</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Updated images for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.2-62</td>
+<td>v1.13.4-86</td>
+<td>Updated to support the Kubernetes 1.13.4 release. Fixed periodic connectivity problems for version 1.0 load balancers that set `externalTrafficPolicy` to `local`. Updated load balancer version 1.0 and 2.0 events to use the latest {{site.data.keyword.Bluemix_notm}} documentation links.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>342</td>
+<td>344</td>
+<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>122</td>
+<td>136</td>
+<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.2</td>
+<td>v1.13.4</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.4). Update resolves [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) and [CVE-2019-1002100 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added `ExperimentalCriticalPodAnnotation=true` to the `--feature-gates` option. This setting helps migrate pods from the deprecated `scheduler.alpha.kubernetes.io/critical-pod` annotation to [Kubernetes pod priority support](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>OpenVPN client and server</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Updated image for [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Updated image for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.13.2_1509, released 27 February 2019
 {: #1132_1509}
@@ -171,7 +251,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>Updated to support the Kubernetes 1.13.2 release. Additionally, `calicoctl` version is updated to 3.4.0. Fixed unnecessary configuration updates to version 2.0 load balancers on worker node status changes.</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
@@ -235,6 +315,80 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for 1.12.6_1541, released 4 March 2019
+{: #1126_1541}
+
+The following table shows the changes that are included in the patch 1.12.6_1541.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.5_1540">
+<caption>Changes since version 1.12.5_1540</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Updated images for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.5-137</td>
+<td>v1.12.6-157</td>
+<td>Updated to support the Kubernetes 1.12.6 release. Fixed periodic connectivity problems for version 1.0 load balancers that set `externalTrafficPolicy` to `local`. Updated load balancer version 1.0 and 2.0 events to use the latest {{site.data.keyword.Bluemix_notm}} documentation links.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>342</td>
+<td>344</td>
+<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>122</td>
+<td>136</td>
+<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.5</td>
+<td>v1.12.6</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.6). Update resolves [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) and [CVE-2019-1002100 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added `ExperimentalCriticalPodAnnotation=true` to the `--feature-gates` option. This setting helps migrate pods from the deprecated `scheduler.alpha.kubernetes.io/critical-pod` annotation to [Kubernetes pod priority support](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>OpenVPN client and server</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Updated image for [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Updated image for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.5_1540, released 27 February 2019
 {: #1125_1540}
@@ -336,7 +490,7 @@ The following table shows the changes that are included in the patch 1.12.5_1537
 <td>Updated to support the Kubernetes 1.12.5 release. Additionally, `calicoctl` version is updated to 3.3.1. Fixed unnecessary configuration updates to version 2.0 load balancers on worker node status changes.</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
@@ -747,6 +901,80 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 
 Review the version 1.11 changelog.
 
+### Changelog for 1.11.8_1547, released 4 March 2019
+{: #1118_1547}
+
+The following table shows the changes that are included in the patch 1.11.8_1547.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.7_1546">
+<caption>Changes since version 1.11.7_1546</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Updated images for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.7-198</td>
+<td>v1.11.8-219</td>
+<td>Updated to support the Kubernetes 1.11.8 release. Fixed periodic connectivity problems for version 1.0 load balancers that set `externalTrafficPolicy` to `local`. Updated load balancer version 1.0 and 2.0 events to use the latest {{site.data.keyword.Bluemix_notm}} documentation links.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>342</td>
+<td>344</td>
+<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>122</td>
+<td>136</td>
+<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.7</td>
+<td>v1.11.8</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.8). Update resolves [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) and [CVE-2019-1002100 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added `ExperimentalCriticalPodAnnotation=true` to the `--feature-gates` option. This setting helps migrate pods from the deprecated `scheduler.alpha.kubernetes.io/critical-pod` annotation to [Kubernetes pod priority support](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>OpenVPN client and server</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Updated image for [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Updated image for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019
 {: #1117_1546}
 
@@ -847,7 +1075,7 @@ The following table shows the changes that are included in the patch 1.11.7_1543
 <td>Updated to support the Kubernetes 1.11.7 release. Additionally, `calicoctl` version is updated to 3.3.1. Fixed unnecessary configuration updates to version 2.0 load balancers on worker node status changes.</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
@@ -1487,7 +1715,7 @@ The following table shows the changes that are included in patch 1.11.2_1516.
 <td>Changed the cloud provider configuration to better handle updates for load balancer services with `externalTrafficPolicy` set to `local`.</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in configuration</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in configuration</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
@@ -1569,7 +1797,7 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>Updated to support Kubernetes 1.11 release. In addition, load balancer pods now use the new `ibm-app-cluster-critical` pod priority class.</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
 <td>334</td>
 <td>338</td>
 <td>Updated `incubator` version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to [add the region the zone labels](/docs/containers?topic=containers-kube_concepts#storage_multizone).</td>
@@ -1606,10 +1834,82 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <br />
 
 
-## Version 1.10 changelog
+## Deprecated: Version 1.10 changelog
 {: #110_changelog}
 
 Review the version 1.10 changelog.
+{: shortdesc}
+
+Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019. [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
+{: deprecated}
+
+### Changelog for 1.10.13_1548, released 4 March 2019
+{: #11013_1548}
+
+The following table shows the changes that are included in the patch 1.10.13_1548.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.12_1546">
+<caption>Changes since version 1.10.12_1546</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>eb3a259</td>
+<td>e32d51c</td>
+<td>Updated images for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.12-252</td>
+<td>v1.10.13-288</td>
+<td>Updated to support the Kubernetes 1.10.13 release. Fixed periodic connectivity problems for version 1.0 load balancers that set `externalTrafficPolicy` to `local`. Updated load balancer version 1.0 and 2.0 events to use the latest {{site.data.keyword.Bluemix_notm}} documentation links.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>342</td>
+<td>344</td>
+<td>Changed the base operating system for the image from Fedora to Alpine. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>122</td>
+<td>136</td>
+<td>Increased client timeout to {{site.data.keyword.keymanagementservicefull_notm}}. Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.12</td>
+<td>v1.10.13</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.13).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>132</td>
+<td>143</td>
+<td>Updated image for [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
+</tr>
+<tr>
+<td>OpenVPN client and server</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>Updated image for [CVE-2019-1559 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>1ea5ad3</td>
+<td>5f3d092</td>
+<td>Updated image for [CVE-2019-6454 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.12_1546, released 27 February 2019
 {: #11012_1546}
@@ -1699,7 +1999,7 @@ The following table shows the changes that are included in the patch 1.10.12_154
 <td>Updated images for [CVE-2019-3462 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) and [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486).</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
 <td>338</td>
 <td>342</td>
 <td>The file storage plug-in is updated as follows:
@@ -2258,7 +2558,7 @@ The following table shows the changes that are included in patch 1.10.7_1520.
 <td>Updated to support Kubernetes 1.10.7 release. In addition, changed the cloud provider configuration to better handle updates for load balancer services with `externalTrafficPolicy` set to `local`.</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
 <td>334</td>
 <td>338</td>
 <td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br> Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
@@ -2367,7 +2667,7 @@ The following table shows the changes that are included in patch 1.10.5_1517.
 <td>Updated to support Kubernetes 1.10.5 release. In addition, LoadBalancer service `create failure` events now include any portable subnet errors.</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
 <td>320</td>
 <td>334</td>
 <td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure (SoftLayer) account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
@@ -2982,7 +3282,7 @@ The following table shows the changes that are included in patch 1.9.10_1523.
 <td>Updated to support Kubernetes 1.9.10 release. In addition, changed the cloud provider configuration to better handle updates for load balancer services with `externalTrafficPolicy` set to `local`.</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
 <td>334</td>
 <td>338</td>
 <td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
@@ -3085,7 +3385,7 @@ The following table shows the changes that are included in patch 1.9.9_1520.
 <td>Updated to support Kubernetes 1.9.9 release. In addition, LoadBalancer service `create failure` events now include any portable subnet errors.</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
 <td>320</td>
 <td>334</td>
 <td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure (SoftLayer) account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
@@ -3453,7 +3753,7 @@ Review the following changes.
 <td>Updated to support Kubernetes 1.8.15 release. In addition, LoadBalancer service `create failure` events now include any portable subnet errors.</td>
 </tr>
 <tr>
-<td>IBM file storage plug-in</td>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
 <td>320</td>
 <td>334</td>
 <td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure (SoftLayer) account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>

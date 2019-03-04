@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-02-25"
+lastupdated: "2019-03-04"
 
 keywords: kubernetes, iks
 
@@ -33,13 +33,17 @@ scope: containers
 {:shortdesc}
 
 **Supported Kubernetes versions**:
-- Latest: 1.13.2
-- Default: 1.11.7
-- Other: 1.12.5, 1.10.12
+*   Latest: 1.13.4
+*   Default: 1.11.8
+*   Other: 1.12.6
+
+**Deprecated and unsupported Kubernetes versions**:
+*   Deprecated: 1.10
+*   Unsupported: 1.5, 1.7, 1.8, 1.9
 
 </br>
 
-**Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. You cannot create new clusters that use the deprecated version.
+**Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have a minimum of 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. You cannot create new clusters that use the deprecated version.
 
 **Unsupported versions**: If your clusters run a Kubernetes version that is not supported, review the following potential update impacts and then immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. You can find out if your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks clusters` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters).
 
@@ -58,7 +62,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.11.7+IKS
+Server Version: v1.11.8+IKS
 ```
 {: screen}
 
@@ -91,8 +95,8 @@ This information summarizes updates that are likely to have impact on deployed a
 -  Version 1.13 [preparation actions](#cs_v113).
 -  Version 1.12 [preparation actions](#cs_v112).
 -  Version 1.11 [preparation actions](#cs_v111).
--  Version 1.10 [preparation actions](#cs_v110).
--  [Archive](#k8s_version_archive) of deprecated or unsupported versions.
+-  **Deprecated**: Version 1.10 [preparation actions](#cs_v110).
+-  [Archive](#k8s_version_archive) of unsupported versions.
 
 <br/>
 
@@ -150,7 +154,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>![Supported checkmark icon](images/healthy.png)</td>
   <td>[1.10](#cs_v110)</td>
   <td>01 May 2018</td>
-  <td>29 Mar 2019 `†`</td>
+  <td>30 Apr 2019</td>
 </tr>
 <tr>
   <td>![Unsupported X icon](images/close.png)</td>
@@ -741,13 +745,16 @@ Before you begin, your cluster master and all worker nodes must be running Kuber
 <br />
 
 
-## Version 1.10
+## Deprecated: Version 1.10
 {: #cs_v110}
 
 <p><img src="images/certified_kubernetes_1x10.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.10 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.10 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.10.
 {: shortdesc}
+
+Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019. [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
+{: deprecated}
 
 Before you can successfully update to Kubernetes 1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).
 {: important}
