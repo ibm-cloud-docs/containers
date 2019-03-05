@@ -137,7 +137,7 @@ By default, Ingress logs are formatted in JSON and display common log fields. Ho
 
 Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -675,7 +675,7 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-s
 
 Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system

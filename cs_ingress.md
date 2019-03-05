@@ -1143,7 +1143,7 @@ Only annotations in the format `ingress.bluemix.net/<annotation>` are supported.
 By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose other ports, you can edit the `ibm-cloud-provider-ingress-cm` configmap resource.
 {:shortdesc}
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -1299,7 +1299,7 @@ When you specify the enabled protocols for all hosts, the TLSv1.1 and TLSv1.2 pa
 
 To edit the configmap to enable SSL protocols and ciphers:
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -1344,7 +1344,7 @@ To optimize performance of your Ingress ALBs, you can change the default setting
 By default, the Ingress ALB logs each request as it arrives. If you have an environment that is heavily used, logging each request as it arrives can greatly increase disk I/O utilization. To avoid continuous disk I/O, you can enable log buffering and flush timeout for the ALB by editing the `ibm-cloud-provider-ingress-cm` Ingress configmap. When buffering is enabled, instead of performing a separate write operation for each log entry, the ALB buffers a series of entries and writes them to the file together in a single operation.
 {: shortdesc}
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Create and Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -1387,7 +1387,7 @@ By default, the Ingress ALB logs each request as it arrives. If you have an envi
 Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize the performance of your ALBs, you can change the maximum number of keepalive connections between the ALB and the client and how long the keepalive connections can last.
 {: shortdesc}
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -1427,7 +1427,7 @@ You can decrease the default backlog setting for how many pending connections ca
 
 In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field sets the maximum number of pending connections that can wait in the server queue. By default, `backlog` is set to `32768`. You can override the default by editing the Ingress configmap.
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
