@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-05"
 
 ---
 
@@ -727,6 +727,37 @@ lastupdated: "2019-03-04"
 ## {{site.data.keyword.containerlong_notm}} CLI plug-in reference
 
 [Command reference](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
+* [`va` commands](/docs/containers?topic=containers-cs_cli_reference#va)
+  * [ibmcloud ks va](/docs/containers?topic=containers-cs_cli_reference#cs_va)
+* [`webhook` commands](/docs/containers?topic=containers-cs_cli_reference#webhook)
+  * [ibmcloud ks webhook-create](/docs/containers?topic=containers-cs_cli_reference#cs_webhook_create)
+* [`api-key` commands](/docs/containers?topic=containers-cs_cli_reference#api-key)
+  * [ibmcloud ks api-key info](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info)
+  * [ibmcloud ks api-key reset](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset)
+* [`credential` commands](/docs/containers?topic=containers-cs_cli_reference#credentials)
+  * [ibmcloud ks credential get](/docs/containers?topic=containers-cs_cli_reference#cs_credential_get)
+  * [ibmcloud ks credential set](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)
+  * [ibmcloud ks credential unset](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset)
+* [`subnets` commands](/docs/containers?topic=containers-cs_cli_reference#subnets)
+  * [ibmcloud ks subnets](/docs/containers?topic=containers-cs_cli_reference#cs_subnets)
+* [`vlan` commands](/docs/containers?topic=containers-cs_cli_reference#vlan)
+  * [ibmcloud ks vlan ls](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)
+  * [ibmcloud ks vlan spanning get](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)
+* [`kube-versions` commands](/docs/containers?topic=containers-cs_cli_reference#kube-versions)
+  * [ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)
+* [`machine-types` commands](/docs/containers?topic=containers-cs_cli_reference#machine-types)
+  * [ibmcloud ks machine-types](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)
+* [`messages` commands](/docs/containers?topic=containers-cs_cli_reference#messages)
+  * [ibmcloud ks messages](/docs/containers?topic=containers-cs_cli_reference#cs_messages)
+* [`api` commands](/docs/containers?topic=containers-cs_cli_reference#api)
+  * [ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_api)
+* [`init` commands](/docs/containers?topic=containers-cs_cli_reference#init)
+  * [ibmcloud ks init](/docs/containers?topic=containers-cs_cli_reference#cs_init)
+* [`region` commands](/docs/containers?topic=containers-cs_cli_reference#region)
+  * [ibmcloud ks region get](/docs/containers?topic=containers-cs_cli_reference#cs_region)
+  * [ibmcloud ks region ls](/docs/containers?topic=containers-cs_cli_reference#cs_regions)
+  * [ibmcloud ks region set](/docs/containers?topic=containers-cs_cli_reference#cs_region-set)
+  * [ibmcloud ks region unset](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference#cs_region_unset)</staging>
 * [Using the beta command structure](/docs/containers?topic=containers-cs_cli_reference#cs_beta)
 * [API commands](/docs/containers?topic=containers-cs_cli_reference#api_commands)
 * [CLI plug-in usage commands](/docs/containers?topic=containers-cs_cli_reference#cli_plug-in_commands)

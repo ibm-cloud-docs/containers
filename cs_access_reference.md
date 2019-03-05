@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks
 
@@ -344,6 +344,8 @@ The **Editor** platform role includes the permissions that are granted by **View
 </tr>
 </tbody>
 </table>
+
+
 
 <table>
 <caption>Overview of logging CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -35,7 +35,8 @@ Load balancer services are available for standard clusters only and do not suppo
 
 Choose one of the following options to get started:
 
-<img src="images/cs_loadbalancer_imagemap.png" width="725px" usemap="#image-map" style="width:725px;" alt="This imagemap provides quick links to configuration topics on this page.">
+
+<img src="images/cs_loadbalancer_imagemap_1.png" usemap="#image-map" alt="This imagemap provides quick links to configuration topics on this page.">
 <map name="image-map">
     <area target="" alt="Overview" title="Overview" href="#lb_overview" coords="35,44,175,72" shape="rect">
     <area target="" alt="Comparison of version 1.0 and 2.0 load balancers" title="Comparison of version 1.0 and 2.0 load balancers" href="#comparison" coords="34,83,173,108" shape="rect">
@@ -49,6 +50,7 @@ Choose one of the following options to get started:
     <area target="" alt="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" title="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" href="#lb_config" coords="520,122,667,146" shape="rect">
     <area target="" alt="v1.0: Enabling source IP preservation" title="v1.0: Enabling source IP preservation" href="#node_affinity_tolerations" coords="519,157,667,194" shape="rect">
 </map>
+
 
 ## Sample YAMLs
 {: #sample}
@@ -119,7 +121,7 @@ When you create a standard cluster, {{site.data.keyword.containerlong}} automati
 * The portable public subnet provides 5 usable IP addresses. 1 portable public IP address is used by the default [public Ingress ALB](/docs/containers?topic=containers-ingress). The remaining 4 portable public IP addresses can be used to expose single apps to the internet by creating public load balancer services.
 * The portable private subnet provides 5 usable IP addresses. 1 portable private IP address is used by the default [private Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress). The remaining 4 portable private IP addresses can be used to expose single apps to a private network by creating private load balancer services.
 
-Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node that the load balancer IP address is on is removed, a Keepalived daemon that constantly monitors the IP automatically moves the IP to another worker node. You can assign any port to your load balancer. The load balancer service serves as the external entry point for incoming requests for the app. To access the load balancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`.
+Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node that the load balancer IP address is on is removed, a Keepalived daemon that constantly monitors the IP automatically moves the IP to another worker node. You can assign any port to your load balancer. The load balancer service serves as the external entry point for incoming requests for the app. To access the load balancer service from the internet, you can use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`.
 
 When you expose an app with a load balancer service, your app is automatically made available over the service's NodePorts too. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address of every worker node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
@@ -153,7 +155,8 @@ Load balancer 2.0 capabilities are in beta. To use a version 2.0 load balancer, 
 
 The load balancer 2.0 is a Layer 4 load balancer that uses the Linux kernel's IP Virtual Server (IPVS). The load balancer 2.0 supports TCP and UDP, runs in front of multiple worker nodes, and uses IP over IP (IPIP) tunneling to distribute traffic that arrives to a single load balancer IP address across those worker nodes.
 
-For more details, you can also check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/).
+Want more details about the load balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/).
+{: tip}
 
 ### Traffic flow in a single-zone cluster
 {: #ipvs_single}
@@ -397,9 +400,11 @@ To set up a load balancer 2.0 in a multizone cluster:
         ```
         {: codeblock}
 
-5. To achieve high availability, repeat the above steps to add a load balancer 2.0 in each zone where you have app instances.
+5. To achieve high availability, repeat the steps 2 - 4 to add a load balancer 2.0 in each zone where you have app instances.
 
 6. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
+
+
 
 ## v2.0: Setting up a load balancer 2.0 in a single-zone cluster
 {: #ipvs_single_zone_config}
@@ -530,6 +535,8 @@ To create a load balancer 2.0 service in a single-zone cluster:
         {: codeblock}
 
 5. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
+
+
 
 <br />
 
@@ -762,13 +769,15 @@ To set up a load balancer 1.0 service in a multizone cluster:
         ```
         http://169.xx.xxx.xxx:8080
         ```
-        {: codeblock}        
+        {: codeblock}    
 
-5. If you choose to [enable source IP preservation for a version 1.0 load balancer service](#node_affinity_tolerations), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
+5. Repeat the steps 2 - 4 to add a version 1.0 load balancer in each zone.    
 
-6. Repeat the above steps to add a version 1.0 load balancer in each zone.
+6. If you choose to [enable source IP preservation for a version 1.0 load balancer service](#node_affinity_tolerations), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
 7. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
+
+
 
 ## v1.0: Setting up a load balancer 1.0 in a single-zone cluster
 {: #lb_config}
@@ -906,6 +915,8 @@ To create a load balancer 1.0 service in a single-zone cluster:
 5. If you choose to [enable source IP preservation for a version 1.0 load balancer service](#node_affinity_tolerations), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
 6. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
+
+
 
 <br />
 
@@ -1081,3 +1092,5 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
         {: screen}
 
     4. In the **Labels** section of the output, verify that the public or private VLAN is the VLAN that you designated in previous steps.
+
+
