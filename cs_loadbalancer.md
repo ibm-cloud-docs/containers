@@ -6,7 +6,7 @@ lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
-scope: containers
+subcollection: containers
 
 ---
 

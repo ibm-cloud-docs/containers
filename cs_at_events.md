@@ -2,11 +2,11 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks, audit
 
-scope: containers
+subcollection: containers
 
 ---
 

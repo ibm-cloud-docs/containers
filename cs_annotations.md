@@ -6,7 +6,7 @@ lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks, ingress
 
-scope: containers
+subcollection: containers
 
 ---
 
