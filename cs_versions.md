@@ -133,55 +133,55 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 </thead>
 <tbody>
 <tr>
-  <td>![Supported checkmark icon](images/checkmark-filled.png)</td>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.13](#cs_v113)</td>
   <td>05 Feb 2019</td>
   <td>Dec 2019 `†`</td>
 </tr>
 <tr>
-  <td>![Supported checkmark icon](images/checkmark-filled.png)</td>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.12](#cs_v112)</td>
   <td>07 Nov 2018</td>
   <td>Sep 2019 `†`</td>
 </tr>
 <tr>
-  <td>![Supported checkmark icon](images/checkmark-filled.png)</td>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.11](#cs_v111)</td>
   <td>14 Aug 2018</td>
   <td>Jun 2019 `†`</td>
 </tr>
 <tr>
-  <td>![Supported checkmark icon](images/warning-filled.png)</td>
+  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.10](#cs_v110)</td>
   <td>01 May 2018</td>
   <td>30 Apr 2019 `†`</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close-filled.png)</td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
   <td>[1.9](#cs_v19)</td>
   <td>08 Feb 2018</td>
   <td>27 Dec 2018</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close-filled.png)</td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
   <td>[1.8](#cs_v18)</td>
   <td>08 Nov 2017</td>
   <td>22 Sep 2018</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close-filled.png)</td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
   <td>[1.7](#cs_v17)</td>
   <td>19 Sep 2017</td>
   <td>21 Jun 2018</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close-filled.png)</td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
   <td>1.6</td>
   <td>N/A</td>
   <td>N/A</td>
 </tr>
 <tr>
-  <td>![Unsupported X icon](images/close-filled.png)</td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
   <td>[1.5](#cs_v1-5)</td>
   <td>23 May 2017</td>
   <td>04 Apr 2018</td>
