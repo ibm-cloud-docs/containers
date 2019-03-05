@@ -35,7 +35,6 @@ Load balancer services are available for standard clusters only and do not suppo
 
 Choose one of the following options to get started:
 
-
 <img src="images/cs_loadbalancer_imagemap_1.png" usemap="#image-map-1" alt="This imagemap provides quick links to configuration topics on this page.">
 <map name="image-map-1">
     <area target="" alt="Overview" title="Overview" href="#lb_overview" coords="35,44,175,72" shape="rect">
@@ -50,9 +49,6 @@ Choose one of the following options to get started:
     <area target="" alt="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" title="v1.0: Setting up a load balancer 1.0 in a single-zone cluster" href="#lb_config" coords="520,122,667,146" shape="rect">
     <area target="" alt="v1.0: Enabling source IP preservation" title="v1.0: Enabling source IP preservation" href="#node_affinity_tolerations" coords="519,157,667,194" shape="rect">
 </map>
-
-
-
 
 ## Sample YAMLs
 {: #sample}
