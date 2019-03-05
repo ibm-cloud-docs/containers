@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks
 
@@ -186,7 +186,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kubernetes `kubelet` configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Enabled the `ExperimentalCriticalPodAnnotation` feature gate to prevent critical static pod eviction. Decreased the `streaming-connection-idle-timeout` option from `4h` to `30m` to close an idle streaming connection faster. Set the `event-qps` option to `0` to prevent rate limiting event creation.</td>
+<td>Enabled the `ExperimentalCriticalPodAnnotation` feature gate to prevent critical static pod eviction. Set the `event-qps` option to `0` to prevent rate limiting event creation.</td>
 </tr>
 </tbody>
 </table>
@@ -333,6 +333,12 @@ The following table shows the changes that are included in the patch 1.12.6_1541
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>Cluster DNS provider</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased Kubernetes DNS and CoreDNS pod memory limit from `170Mi` to `400Mi` in order to handle more cluster services.</td>
+</tr>
 <tr>
 <td>GPU device plug-in and installer</td>
 <td>eb3a259</td>
@@ -953,6 +959,12 @@ The following table shows the changes that are included in the patch 1.11.8_1547
 <td>N/A</td>
 <td>N/A</td>
 <td>Added `ExperimentalCriticalPodAnnotation=true` to the `--feature-gates` option. This setting helps migrate pods from the deprecated `scheduler.alpha.kubernetes.io/critical-pod` annotation to [Kubernetes pod priority support](/docs/containers?topic=containers-pod_priority#pod_priority).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased Kubernetes DNS pod memory limit from `170Mi` to `400Mi` in order to handle more cluster services.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -1840,7 +1852,7 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 Review the version 1.10 changelog.
 {: shortdesc}
 
-Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019. [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
+Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
 
 ### Changelog for 1.10.13_1548, released 4 March 2019
@@ -1889,6 +1901,12 @@ The following table shows the changes that are included in the patch 1.10.13_154
 <td>v1.10.12</td>
 <td>v1.10.13</td>
 <td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.13).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased Kubernetes DNS pod memory limit from `170Mi` to `400Mi` in order to handle more cluster services.</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
