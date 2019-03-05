@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks 
 
-scope: containers
+subcollection: containers
 
 ---
 
@@ -366,7 +366,7 @@ Even if you deployed a container from an image that passes the vulnerability che
   <tbody>
     <tr>
       <td>Secured Docker private image repository in {{site.data.keyword.registryshort_notm}}</td>
-      <td>Set up your own Docker [image repository](/docs/services/Registry?topic=registry-index#index) in a multi-tenant, highly available, and scalable private image registry that is hosted and managed by IBM. By using the registry, you can build, securely store, and share Docker images across cluster users. </br></br>Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.</td>
+      <td>Set up your own Docker [image repository](/docs/services/Registry?topic=registry-getting-started#getting-started) in a multi-tenant, highly available, and scalable private image registry that is hosted and managed by IBM. By using the registry, you can build, securely store, and share Docker images across cluster users. </br></br>Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.</td>
     </tr>
     <tr>
       <td>Push images with trusted content only</td>

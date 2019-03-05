@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks 
 
-scope: containers
+subcollection: containers
 
 ---
 
@@ -27,7 +27,7 @@ scope: containers
 # Storing data on IBM Block Storage for IBM Cloud
 {: #block_storage}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#billing).
+{{site.data.keyword.Bluemix_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).
 {: shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} Block Storage is available for standard clusters only. Block storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
@@ -314,8 +314,8 @@ Make sure to choose your storage configuration carefully to have enough capacity
    {: tip}
 
 3. Choose the type of block storage that you want to provision.
-   - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#provisioning-with-endurance-tiers). Endurance storage lets you choose the size of the storage in gigabytes at predefined IOPS tiers.
-   - **Custom storage class:** This storage class provisions [Performance storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#provisioning-with-performance). With performance storage, you have more control over the size of the storage and the IOPS.
+   - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provendurance). Endurance storage lets you choose the size of the storage in gigabytes at predefined IOPS tiers.
+   - **Custom storage class:** This storage class provisions [Performance storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provperformance). With performance storage, you have more control over the size of the storage and the IOPS.
 
 4. Choose the size and IOPS for your block storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more total IOPS your storage has, the faster it processes read and write operations.
    - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte and are provisioned on SSD hard disks. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi block storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.  
@@ -606,7 +606,7 @@ To add block storage:
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>The absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the root directory in your physical block storage instance. To create directories in your physical block storage instance, you must create subdirectories in your mount path.</td>
+    <td>The absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the root directory in your physical block storage instance. If you want to share a volume between different apps, you can specify [volume sub paths ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) for each of your apps. </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.name</code></td>
@@ -1419,7 +1419,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Type</td>
-<td>[Endurance storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#provisioning-with-endurance-tiers)</td>
+<td>[Endurance storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provendurance)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1465,7 +1465,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Type</td>
-<td>[Endurance storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#provisioning-with-endurance-tiers)</td>
+<td>[Endurance storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provendurance)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1510,7 +1510,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Type</td>
-<td>[Endurance storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#provisioning-with-endurance-tiers)</td>
+<td>[Endurance storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provendurance)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1555,7 +1555,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Type</td>
-<td>[Performance](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#provisioning-with-performance)</td>
+<td>[Performance](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provperformance)</td>
 </tr>
 <tr>
 <td>File system</td>

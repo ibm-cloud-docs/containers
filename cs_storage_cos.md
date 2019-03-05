@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks 
 
-scope: containers
+subcollection: containers
 
 ---
 
@@ -864,7 +864,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
-    <td>The absolute path of the directory to where the volume is mounted inside the container.</td>
+    <td>The absolute path of the directory to where the volume is mounted inside the container. If you want to share a volume between different apps, you can specify [volume sub paths ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) for each of your apps.</td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.name</code></td>

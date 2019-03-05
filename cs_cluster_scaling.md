@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks, node scaling
 
-scope: containers
+subcollection: containers
 
 ---
 
@@ -325,9 +325,9 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
 
 **To update the cluster autoscaler configmap and values**:
 
-1.  Get the cluster autoscaler configmap YAML file.
+1.  Edit the cluster autoscaler configmap YAML file.
     ```
-    kubectl get cm iks-ca-configmap -n kube-system -o yaml > iks-ca-configmap.yaml
+    kubectl edit cm iks-ca-configmap -n kube-system -o yaml
     ```
     {: pre}
     Example output:
@@ -380,11 +380,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
     </tr>
     </tbody>
     </table>
-3.  Apply your changes to the cluster.
-    ```
-    kubectl apply -f iks-ca-configmap.yaml
-    ```
-    {: pre}
+3.  Save the configuration file.
 4.  Get your cluster autoscaler pod.
     ```
     kubectl get pods -n kube-system
@@ -706,7 +702,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     helm install  ibm/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler [--set <custom_settings>]
     ```
     {: pre}
-7.  Apply the cluster autoscaler configmap that you previously retrieved to enabled autoscaling for your worker pools.
+7.  Apply the cluster autoscaler configmap that you previously retrieved to enable autoscaling for your worker pools.
     ```
     kubectl apply -f iks-ca-configmap.yaml
     ```

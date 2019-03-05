@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-05"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
-scope: containers
+subcollection: containers
 
 ---
 
@@ -139,6 +139,7 @@ Ingress is a Kubernetes service that balances network traffic workloads in your 
 ### What comes with Ingress?
 {: #components}
 
+
 Ingress consists of three components:
 <dl>
 <dt>Ingress resource</dt>
@@ -150,6 +151,7 @@ Ingress consists of three components:
 <p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you use only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME in your DNS entry to forward requests from your custom domain to the IBM-provided Ingress subdomain for your cluster.</p>
 <p class="note">If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also whitelist <a href="https://www.cloudflare.com/ips/">Cloudflare's IPv4 IPs <img src="../icons/launch-glyph.svg" alt="External link icon"></a> that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the <a href="/docs/containers?topic=containers-policy_tutorial#lesson3">Calico network policy tutorial</a>.</p></dd>
 </dl>
+
 
 ### How are IPs assigned to Ingress ALBs?
 {: #ips}
@@ -163,7 +165,15 @@ If you have a multizone cluster, a default public ALB and a default private ALB 
 
 Portable public and private IP addresses are static floating IPs and do not change when a worker node is removed. If the worker node is removed, a `Keepalived` daemon that constantly monitors the IP automatically reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. For the life of the cluster, the ALB IP address in each zone does not change. If you remove a zone from a cluster, then the ALB IP address for that zone is removed.
 
+To see the IPs assigned to your ALBs, you can run the following command.
+```
+ibmcloud ks albs --cluster <cluster_name_or_id>
+```
+{: pre}
+
 For more information about what happens to ALB IPs in the event of a zone failure, see the definition for the [multizone load balancer component](#components).
+
+
 
 ### How does a request get to my app with Ingress in a single zone cluster?
 {: #architecture-single}
@@ -244,7 +254,7 @@ If the apps in your cluster are all in the same namespace, one Ingress resource 
 If the apps in your cluster are in different namespaces, you must create one resource per namespace to define rules for the apps that are exposed there.
 {: shortdesc}
 
-However, you can define a host in only one resource. You cannot define the same host in multiple resources. To register multiple Ingress resources with the same host, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains can all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
+However, you can define a host name in only one resource. You cannot define the same host name in multiple resources. To register multiple Ingress resources with the same host name, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains can all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
 
 For example, consider the following scenario:
 * You have two versions of the same app, `app1` and `app3`, for testing purposes.
@@ -1133,7 +1143,7 @@ Only annotations in the format `ingress.bluemix.net/<annotation>` are supported.
 By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose other ports, you can edit the `ibm-cloud-provider-ingress-cm` configmap resource.
 {:shortdesc}
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -1289,7 +1299,7 @@ When you specify the enabled protocols for all hosts, the TLSv1.1 and TLSv1.2 pa
 
 To edit the configmap to enable SSL protocols and ciphers:
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -1334,7 +1344,7 @@ To optimize performance of your Ingress ALBs, you can change the default setting
 By default, the Ingress ALB logs each request as it arrives. If you have an environment that is heavily used, logging each request as it arrives can greatly increase disk I/O utilization. To avoid continuous disk I/O, you can enable log buffering and flush timeout for the ALB by editing the `ibm-cloud-provider-ingress-cm` Ingress configmap. When buffering is enabled, instead of performing a separate write operation for each log entry, the ALB buffers a series of entries and writes them to the file together in a single operation.
 {: shortdesc}
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Create and Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -1377,7 +1387,7 @@ By default, the Ingress ALB logs each request as it arrives. If you have an envi
 Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize the performance of your ALBs, you can change the maximum number of keepalive connections between the ALB and the client and how long the keepalive connections can last.
 {: shortdesc}
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
@@ -1417,7 +1427,7 @@ You can decrease the default backlog setting for how many pending connections ca
 
 In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field sets the maximum number of pending connections that can wait in the server queue. By default, `backlog` is set to `32768`. You can override the default by editing the Ingress configmap.
 
-1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
