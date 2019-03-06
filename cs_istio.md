@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-04"
+lastupdated: "2019-03-06"
 
 ---
 
@@ -535,12 +535,12 @@ To manually inject sidecars into a deployment:
 
 1. Download the `istioctl` client.
   ```
-  curl -L https://git.io/getIstio | sh -
+  curl -L https://git.io/getLatestIstio | sh -
   ```
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.0.5
+  cd istio-1.0.6
   ```
   {: pre}
 
@@ -711,11 +711,11 @@ Before you begin:
 2. Install the `istioctl` client.
   1. Download `istioctl`.
     ```
-    curl -L https://git.io/getIstio | sh -
+    curl -L https://git.io/getLatestIstio | sh -
     ```
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.0.5
+    cd istio-1.0.6
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
