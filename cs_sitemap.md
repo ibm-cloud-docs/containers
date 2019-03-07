@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-07"
 
 ---
 
@@ -192,7 +192,7 @@ lastupdated: "2019-03-05"
 * [Viewing cluster states](/docs/containers?topic=containers-clusters#states)
 * [Removing clusters](/docs/containers?topic=containers-clusters#remove)
 
-[Scaling clusters (preview beta)](/docs/containers?topic=containers-ca#ca)
+[Scaling clusters](/docs/containers?topic=containers-ca#ca)
 * [Understanding how the cluster autoscaler works](/docs/containers?topic=containers-ca#ca_about)
 * [Deploying the cluster autoscaler Helm chart to your cluster](/docs/containers?topic=containers-ca#ca_helm)
 * [Updating the cluster autoscaler configmap](/docs/containers?topic=containers-ca#ca_cm)

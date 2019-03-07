@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-07"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -250,7 +250,7 @@ When you create a standard cluster, worker nodes of the same memory, CPU, and di
 Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/cluster-large/) for more information.
 
 
-Want to be sure that you always have enough worker nodes to cover your workload? Try out [the cluster autoscaler (beta)](/docs/containers?topic=containers-ca#ca).
+Want to be sure that you always have enough worker nodes to cover your workload? Try out [the cluster autoscaler](/docs/containers?topic=containers-ca#ca).
 {: tip}
 
 

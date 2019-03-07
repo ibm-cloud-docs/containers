@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-07"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -165,7 +165,7 @@ When the cluster is up and running, you can check out the following tasks:
 -   [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-index)
 -   If you have a firewall, you might need to [open the required ports](/docs/containers?topic=containers-firewall#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
--   [Set up the cluster autoscaler (preview beta)](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
+-   [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 -   Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
 
 <br />
@@ -440,7 +440,7 @@ To create a cluster:
 -   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-index)
 - If you have a firewall, you might need to [open the required ports](/docs/containers?topic=containers-firewall#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
--   [Set up the cluster autoscaler (preview beta)](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
+-   [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 -  Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
 
 <br />
@@ -464,7 +464,7 @@ Before you begin, make sure you have the [**Operator** or **Administrator** {{si
   * [Add a zone to your cluster and replicate the worker nodes in your worker pools across multiple zones](#add_zone)
   * [Deprecated: Add a stand-alone worker node to a cluster](#standalone)
 
-After you set up your worker pool, you can [set up the cluster autoscaler (preview beta)](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
+After you set up your worker pool, you can [set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 {:tip}
 
 ### Adding worker nodes by resizing an existing worker pool
