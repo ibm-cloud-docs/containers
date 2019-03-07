@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-07"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -68,7 +68,7 @@ To install the CLIs:
 3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containerlong_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containerlong_notm}} plug-in is `ibmcloud ks`.
 
     ```
-    ibmcloud plugin install container-service 
+    ibmcloud plugin install container-service
     ```
     {: pre}
 
@@ -79,7 +79,7 @@ To install the CLIs:
     ```
     {: pre}
 
-    The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as container-service.
+    The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as **container-service**.
 
 4.  {: #kubectl}To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, [install the Kubernetes CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
