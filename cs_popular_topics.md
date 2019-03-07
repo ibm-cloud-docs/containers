@@ -43,7 +43,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
-<td>06 Mar 2019</td>
+<td>07 Mar 2019</td>
 <td>[Cluster autoscaler moves from beta to GA](/docs/containers?topic=containers-ca#ca)</td>
 <td>The cluster autoscaler is now generally available. Install the Helm plug-in and begin to scale the worker pools in your cluster automatically to increase or decrease the number of worker nodes based on the sizing needs of your scheduled workloads.<br><br>
 Need help or have feedback on the cluster autoscaler? If you are an external user, [register for the public Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/) and post in the [#cluster-autoscaler ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CF6APMLBB) channel. If you are an IBMer, post in the [internal Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C90D3KZUL) channel.</td>
