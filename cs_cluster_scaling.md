@@ -32,9 +32,10 @@ With the {{site.data.keyword.containerlong_notm}} `ibm-iks-cluster-autoscaler` p
 
 Keep reading for more information about how cluster autoscaler works, or skip to the instructions for using it.
 * [Deploying the cluster autoscaler Helm chart to your cluster](#ca_helm)
-* [Updating the cluster autoscaler configmap](#ca_cm)
+* [Updating the cluster autoscaler configmap to enable scaling](#ca_cm)
 * [Customizing the cluster autoscaler Helm chart configuration values](#ca_chart_values)
 * [Limiting apps to run on only certain autoscaled worker pools](#ca_limit_pool)
+* [Updating the cluster autoscaler Helm chart](#ca_helm_up)
 * [Removing the cluster autoscaler](#ca_rm)
 
 Want to autoscale your pods instead? Check out [Scaling apps](/docs/containers?topic=containers-app#app_scaling).
@@ -307,7 +308,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
 <br />
 
 
-## Updating the cluster autoscaler configmap
+## Updating the cluster autoscaler configmap to enable scaling
 {: #ca_cm}
 
 Update the cluster autoscaler configmap to enable automatically scaling worker nodes in your worker pools based on the minimum and maximum values that you set.
@@ -593,6 +594,8 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
     {: pre}
 
 <br />
+
+
 
 
 ## Updating the cluster autoscaler Helm chart
