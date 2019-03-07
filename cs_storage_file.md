@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-07"
 
 keywords: kubernetes, iks 
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Storing data on IBM File Storage for IBM Cloud
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} File Storage is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} File Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/FileStorage?topic=FileStorage-GettingStarted#billing).
+{{site.data.keyword.Bluemix_notm}} File Storage is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.Bluemix_notm}} File Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
 {{site.data.keyword.Bluemix_notm}} File Storage is available for standard clusters only. NFS file storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
@@ -79,8 +79,8 @@ To decide on a storage configuration:
    {: tip}
 
 3. Choose the type of file storage that you want to provision.
-   - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-GettingStarted#provisioning-with-endurance-tiers). Endurance storage lets you choose the size of the storage in gigabytes at predefined IOPS tiers.
-   - **Custom storage class:** This storage class provisions [Performance storage](/docs/infrastructure/FileStorage?topic=FileStorage-GettingStarted#provisioning-with-performance). With performance storage, you have more control over the size of the storage and the IOPS.
+   - **Bronze, silver, and gold storage classes:** These storage classes provision [Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers). Endurance storage lets you choose the size of the storage in gigabytes at predefined IOPS tiers.
+   - **Custom storage class:** This storage class provisions [Performance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance). With performance storage, you have more control over the size of the storage and the IOPS.
 
 4. Choose the size and IOPS for your file storage. The size and the number of IOPS define the total number of IOPS (input/ output operations per second) that serves as an indicator for how fast your storage is. The more total IOPS your storage has, the faster it processes read and write operations.
    - **Bronze, silver, and gold storage classes:** These storage classes come with a fixed number of IOPS per gigabyte and are provisioned on SSD hard disks. The total number of IOPS depends on the size of the storage that you choose. You can select any whole number of gigabyte within the allowed size range, such as 20 Gi, 256 Gi, or 11854 Gi. To determine the total number of IOPS, you must multiply the IOPS with the selected size. For example, if you select a 1000Gi file storage size in the silver storage class that comes with 4 IOPS per GB, your storage has a total of 4000 IOPS.
@@ -1248,7 +1248,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Type</td>
-<td>[Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-GettingStarted#provisioning-with-endurance-tiers)</td>
+<td>[Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1294,7 +1294,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Type</td>
-<td>[Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-GettingStarted#provisioning-with-endurance-tiers)</td>
+<td>[Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1339,7 +1339,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Type</td>
-<td>[Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-GettingStarted#provisioning-with-endurance-tiers)</td>
+<td>[Endurance storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
 </tr>
 <tr>
 <td>File system</td>
@@ -1384,7 +1384,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Type</td>
-<td>[Performance](/docs/infrastructure/FileStorage?topic=FileStorage-GettingStarted#provisioning-with-performance)</td>
+<td>[Performance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)</td>
 </tr>
 <tr>
 <td>File system</td>

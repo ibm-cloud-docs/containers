@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-06"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -91,7 +91,7 @@ For more information about available license types and how to upgrade your Trial
 Set up an {{site.data.keyword.Bluemix_notm}} database service, such as [Databases for etcd](#databaseetcd) or [{{site.data.keyword.composeForEtcd}}](#compose) to create a key-value store for the Portworx cluster metadata.
 {: shortdesc}
 
-The Portworx key-value store serves as the single source of truth for your Portworx cluster. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable.
+The Portworx key-value store serves as the single source of truth for your Portworx cluster. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable. 
 
 ### Setting up a Databases for etcd service instance
 {: #databaseetcd}
@@ -567,7 +567,7 @@ Review the following information:
 - Overview of the [Portworx volume decryption workflow](#decryption) with {{site.data.keyword.keymanagementservicelong_notm}} for per-volume encryption
 - [Setting up per-volume encryption](#setup_encryption) for your Portworx volumes.
 
-### Portworx volume encryption workflow
+### Portworx per-volume encryption workflow
 {: #encryption}
 
 The following image illustrates the encryption workflow in Portworx with {{site.data.keyword.keymanagementservicelong_notm}} when you set up per-volume encryption. 
@@ -581,7 +581,7 @@ The following image illustrates the encryption workflow in Portworx with {{site.
 4. The Portworx cluster uses the passphrase to encrypt the volume.
 5. The Portworx cluster stores the DEK in plain text in the Portworx etcd database, associates the volume ID with the DEK, and removes the passphrase from its memory.
 
-### Portworx volume decryption workflow
+### Portworx per-volume decryption workflow
 {: #decryption}
 
 The following image illustrates the decryption workflow in Portworx with {{site.data.keyword.keymanagementservicelong_notm}} when you set up per-volume encryption.
@@ -645,52 +645,56 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
    ```
    {: screen}
 
-5. [Retrieve an {{site.data.keyword.keymanagementservicelong_notm}} API key](/docs/services/key-protect?topic=key-protect-set-up-api#set-up-api). The API key is used by Portworx to interact with the {{site.data.keyword.keymanagementservicelong_notm}} API on your behalf.
+5. [Create a service ID for your account](/docs/iam?topic=iam-serviceids#serviceids).  
 
-6. [Retrieve the {{site.data.keyword.keymanagementservicelong_notm}} API endpoint](/docs/services/key-protect?topic=key-protect-regions#regions) for the region where you created your service instance.
+6. [Assign your service ID permissions](/docs/iam?topic=iam-serviceidpolicy#serviceidpolicy) to your {{site.data.keyword.keymanagementservicelong_notm}} service instance. 
+   
+7. [Create an API key for your service ID](/docs/iam?topic=iam-serviceidapikeys#serviceidapikeys). This API key is used by Portworx to access the {{site.data.keyword.keymanagementservicelong_notm}} API. 
 
-7. Encode the {{site.data.keyword.keymanagementservicelong_notm}} GUID, API key, and root key to base64 and note all the base64 encoded values. Repeat this command for each parameter to retrieve the base 64 encoded value.
+8. [Retrieve the {{site.data.keyword.keymanagementservicelong_notm}} API endpoint](/docs/services/key-protect?topic=key-protect-regions#regions) for the region where you created your service instance. Make sure that you note your API endpoint in the format `https://<api_endpoint>`. 
+
+9. Encode the {{site.data.keyword.keymanagementservicelong_notm}} GUID, API key, root key, and {{site.data.keyword.keymanagementservicelong_notm}} API endpoint to base64 and note all the base64 encoded values. Repeat this command for each parameter to retrieve the base 64 encoded value.
    ```
    echo -n "<value>" | base64
    ```
    {: pre}
 
-8. Create a namespace in your cluster that is called `portworx` and allow Portworx to access all Kubernetes secrets that are stored in this namespace.
-   ```
-   apiVersion: v1
-   kind: Namespace
-   metadata:
-     name: portworx
-   ---
-   # Role to access Kubernetes secrets in the portworx namespace only
-   kind: Role
-   apiVersion: rbac.authorization.k8s.io/v1
-   metadata:
-     name: px-role
-     namespace: portworx
-   rules:
-   - apiGroups: [""]
-     resources: ["secrets"]
-     verbs: ["get", "list", "create", "update", "patch"]
-   ---
-   # Allow portworx service account to access the secrets in the portworx namespace
-   kind: RoleBinding
-   apiVersion: rbac.authorization.k8s.io/v1
-   metadata:
-     name: px-role-binding
-     namespace: portworx
-   subjects:
-   - kind: ServiceAccount
-     name: px-account
-     namespace: kube-system
-   roleRef:
-     kind: Role
-     name: px-role
-     apiGroup: rbac.authorization.k8s.io
-   ```
-   {: codeblock}
+10. Create a namespace in your cluster that is called `portworx` and allow Portworx to access all Kubernetes secrets that are stored in this namespace.
+    ```
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: portworx
+    ---
+    # Role to access Kubernetes secrets in the portworx namespace only
+    kind: Role
+    apiVersion: rbac.authorization.k8s.io/v1
+    metadata:
+      name: px-role
+      namespace: portworx
+    rules:
+    - apiGroups: [""]
+      resources: ["secrets"]
+      verbs: ["get", "list", "create", "update", "patch"]
+    ---
+    # Allow portworx service account to access the secrets in the portworx namespace
+    kind: RoleBinding
+    apiVersion: rbac.authorization.k8s.io/v1
+    metadata:
+      name: px-role-binding
+      namespace: portworx
+    subjects:
+    - kind: ServiceAccount
+      name: px-account
+      namespace: kube-system
+    roleRef:
+      kind: Role
+      name: px-role
+      apiGroup: rbac.authorization.k8s.io
+    ```
+    {: codeblock}
 
-9. Create a Kubernetes secret that is named `px-ibm` in the `portworx` namespace of your cluster to store your {{site.data.keyword.keymanagementservicelong_notm}} information.
+11. Create a Kubernetes secret that is named `px-ibm` in the `portworx` namespace of your cluster to store your {{site.data.keyword.keymanagementservicelong_notm}} information.
    1. Create a configuration file for your Kubernetes secret with the following content.
       ```
       apiVersion: v1
@@ -703,7 +707,7 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
         IBM_SERVICE_API_KEY: <base64_apikey>
         IBM_INSTANCE_ID: <base64_guid>
         IBM_CUSTOMER_ROOT_KEY: <base64_rootkey>
-	    IBM_BASE_URL: <kp_api_endpoint>
+	    IBM_BASE_URL: <base64_kp_api_endpoint>
       ```
       {: codeblock}
 
@@ -731,7 +735,7 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
       </tr>
       <tr>
       <td><code>data.IBM_BASE_URL</code></td>
-      <td>Enter the API endpoint of your {{site.data.keyword.keymanagementservicelong_notm}} service instance. </td>
+      <td>Enter the base64 encoded API endpoint of your {{site.data.keyword.keymanagementservicelong_notm}} service instance. </td>
       </tr>
       </tbody>
       </table>
@@ -748,7 +752,7 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
       ```
       {: pre}
 
-10. If you set up encryption before your installed Portworx, you can now [install Portworx in your cluster](#add_portworx_storage). To add encryption to your cluster after you installed Portworx, update the Portworx daemon set to add `"-secret_type"` and `"ibm-kp"` as additional arguments to the Portworx container definition.
+12. If you set up encryption before your installed Portworx, you can now [install Portworx in your cluster](#add_portworx_storage). To add encryption to your cluster after you installed Portworx, update the Portworx daemon set to add `"-secret_type"` and `"ibm-kp"` as additional arguments to the Portworx container definition.
    1. Update the Portworx daemon set.
       ```
       kubectl edit daemonset portworx -n kube-system

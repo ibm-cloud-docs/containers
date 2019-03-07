@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-07"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -1490,13 +1490,13 @@ Configuring your own custom Ingress controller can be useful when you have speci
 
 4. Deploy your own Ingress controller. **Important**: To continue to use the load balancer service exposing the controller and the IBM-provided Ingress subdomain, your controller must be deployed in the `kube-system` namespace.
     ```
-    kubectl apply -f customingress.yaml -n kube-system
+    kubectl apply -f deployment/customingress.yaml -n kube-system
     ```
     {: pre}
 
 5. Get the label on your custom Ingress deployment.
     ```
-    kubectl get deploy nginx-ingress-controller -n kube-system --show-labels
+    kubectl get deploy <ingress-controller-name> -n kube-system --show-labels
     ```
     {: pre}
 
@@ -1507,7 +1507,7 @@ Configuring your own custom Ingress controller can be useful when you have speci
     ```
     {: screen}
 
-5. Using the ALB ID you got in step 1, open the load balancer service that exposes the ALB.
+5. Using the ALB ID you got in step 1, open the load balancer service that exposes the IBM ALB.
     ```
     kubectl edit svc <ALB_ID> -n kube-system
     ```

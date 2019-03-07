@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-07"
 
 keywords: kubernetes, iks
 
@@ -56,7 +56,8 @@ Review the responsibilities that you share with IBM to manage your clusters.
 - [Creating public and private VLANs in IBM Cloud infrastructure (SoftLayer) for network isolation of your cluster](/docs/infrastructure/vlans?topic=vlans-getting-started-with-vlans#getting-started-with-vlans)
 - [Ensuring that all worker nodes have network connectivity to the Kubernetes master URL](/docs/containers?topic=containers-firewall#firewall) <p class="note">If a worker node has both public and private VLANs, then network connectivity is configured. If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers?topic=containers-cs_network_cluster#plan_setup_private_vlan). </p>
 - [Updating the master kube-apiserver when Kubernetes version updates are available](/docs/containers?topic=containers-update#master)
-- [Keeping the worker nodes up-to-date on major, minor, and patch versions](/docs/containers?topic=containers-update#worker_node)
+- [Keeping the worker nodes up-to-date on major, minor, and patch versions](/docs/containers?topic=containers-update#worker_node) <p class="note">You cannot change the operating system of your worker node or log into the worker node. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches. To apply the updates, the worker node must be reimaged and reloaded with the new image. Keys for the root user are automatically rotated when the worker node is reloaded. </p>
+- [Monitoring the health of your cluster by setting up log forwarding for your cluster components](/docs/containers?topic=containers-health#health).   
 - [Recovering troubled worker nodes by running `kubectl` commands, such as `cordon` or `drain`, and by running `ibmcloud ks` commands, such as `reboot`, `reload`, or `delete`](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)
 - [Adding or removing subnets in IBM Cloud infrastructure (SoftLayer) as needed](/docs/containers?topic=containers-subnets#subnets)
 - [Backing up and restoring data in persistent storage in IBM Cloud infrastructure (SoftLayer) ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter)
