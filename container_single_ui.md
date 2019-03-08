@@ -29,5 +29,3 @@ subcollection: containers
 
 The content that you are looking for moved. <a href="https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip">Download the latest information from its new location</a>.
 {:shortdesc}
-
-<img src="images/containers-wrecked.svg" alt="Topic not found image." />
