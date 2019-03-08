@@ -164,7 +164,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 <tbody>
   <tr id="appid">
     <td>{{site.data.keyword.appid_full}}</td>
-    <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-gettingstarted#gettingstarted) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
+    <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
   </tr>
 <tr>
 <td>Aqua Security</td>
@@ -280,8 +280,8 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 
      Example output:
      ```
-     Name                          Location   State    Type               Tags   
-     <iam_service_instance_name>   <region>   active   service_instance      
+     Name                          Location   State    Type               Tags
+     <iam_service_instance_name>   <region>   active   service_instance
      ```
      {: screen}
 
@@ -510,7 +510,7 @@ When you mount the secret as a volume to your pod, a file that is named `binding
 ### Referencing the secret in environment variables
 {: #reference_secret}
 
-You can add the service credentials and other key value pairs from your Kubernetes secret as environment variables to your deployment.   
+You can add the service credentials and other key value pairs from your Kubernetes secret as environment variables to your deployment.
 {: shortdesc}
 
 1. List available secrets in your cluster and note the **name** of your secret. Look for a secret of type **Opaque**. If multiple secrets exist, contact your cluster administrator to identify the correct service secret.
