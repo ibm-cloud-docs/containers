@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-08"
 
 keywords: kubernetes, iks, helm
 
@@ -42,6 +42,10 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>{{site.data.keyword.cfee_full_notm}}</td>
+<td>Deploy and manage your own Cloud Foundry platform on top of a Kubernetes cluster to develop, package, deploy, and manage cloud-native apps, and leverage the {{site.data.keyword.Bluemix_notm}} ecosystem to bind additional services to your apps. When you create an {{site.data.keyword.cfee_full_notm}} instance, you must configure your Kubernetes cluster by choosing the machine type and VLANs for your worker nodes. Your cluster is then provisioned with {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.cfee_full_notm}} is automatically deployed to your cluster. For more information about how to set up {{site.data.keyword.cfee_full_notm}}, see the [Getting started tutorial](/docs/cloud-foundry?topic=cloud-foundry-getting-started#getting-started). </td>
+</tr>
 <tr>
 <td>Codeship</td>
 <td>You can use <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="External link icon"></a> for the continuous integration and delivery of containers. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
