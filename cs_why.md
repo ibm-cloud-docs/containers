@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-11"
 
 keywords: kubernetes, iks 
 
@@ -78,7 +78,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Blue
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Dedicated
  </td>
- <td>{{site.data.keyword.Bluemix_notm}} Dedicated offers the same {{site.data.keyword.containerlong_notm}} capabilities on the cloud as {{site.data.keyword.Bluemix_notm}} Public. However, with an {{site.data.keyword.Bluemix_notm}} Dedicated account, available [physical resources are dedicated to your cluster only](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. You might choose to set up an {{site.data.keyword.Bluemix_notm}} Dedicated environment when you require isolation for your cluster and the other {{site.data.keyword.Bluemix_notm}} services that you use.<br><br>For more information, see [Getting started with clusters in {{site.data.keyword.Bluemix_notm}} Dedicated](/docs/containers?topic=containers-dedicated#dedicated).
+ <td>Similar to running a cluster on dedicated hardware in {{site.data.keyword.Bluemix_notm}} Public, available physical resources in {{site.data.keyword.Bluemix_notm}} Dedicated are dedicated to your cluster only and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. However, your cluster resides in an {{site.data.keyword.Bluemix_notm}} Dedicated environment that you set up and configure with IBM. Unlike {{site.data.keyword.Bluemix_notm}} Public, the infrastructure resources are owned and managed by IBM. Because your cluster runs in a pre-configured dedicated environment, {{site.data.keyword.Bluemix_notm}} Dedicated offers fewer configuration options and features than a cluster in {{site.data.keyword.Bluemix_notm}} Public.<br><br>For more information about the differences between {{site.data.keyword.Bluemix_notm}} Public and {{site.data.keyword.Bluemix_notm}} Dedicated, see [About the Dedicated cloud environment](/docs/containers?topic=containers-dedicated#dedicated_environment). 
  </td>
  </tr>
  <tr>
