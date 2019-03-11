@@ -739,11 +739,11 @@ Your cluster uses an API key or token that is stored in an [image pull secret](/
     - name: bluemix-default-secret
     - name: bluemix-default-secret-regional
     - name: bluemix-default-secret-international
-    - name: default-icr-us-io
-    - name: default-icr-uk-io
-    - name: default-icr-de-io
-    - name: default-icr-au-io
-    - name: default-icr-jp-io
+    - name: default-us-icr-io
+    - name: default-uk-icr-io
+    - name: default-de-icr-io
+    - name: default-au-icr-io
+    - name: default-jp-icr-io
     - name: default-icr-io
     ...
     ```

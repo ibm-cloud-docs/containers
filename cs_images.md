@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-11"
 
 keywords: kubernetes, iks
 
@@ -122,11 +122,11 @@ To update your cluster image pull secret:
     {: pre}
     Example output:
     ```
-    default-icr-us-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-uk-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-de-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-au-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-jp-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-au-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-jp-icr-io                          kubernetes.io/dockerconfigjson        1         16d
     default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
@@ -251,33 +251,33 @@ You can copy the image pull secret that is automatically created for the `defaul
     {: pre}
     Example output:
     ```
-    default-icr-us-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-uk-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-de-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-au-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-jp-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-au-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-jp-icr-io                          kubernetes.io/dockerconfigjson        1         16d
     default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
 3.  Copy each image pull secret from the `default` namespace to the namespace of your choice. The new image pull secrets are named `<namespace_name>-icr-<region>-io`.
     ```
-    kubectl get secret default-icr-us-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-us-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
     ```
-    kubectl get secret default-icr-uk-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-uk-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
     ```
-    kubectl get secret default-icr-de-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-de-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
     ```
-    kubectl get secret default-icr-au-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-au-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
     ```
-    kubectl get secret default-icr-jp-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-jp-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
     ```
