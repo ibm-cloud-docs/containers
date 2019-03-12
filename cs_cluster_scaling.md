@@ -343,11 +343,11 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
     <table>
     <caption>Cluster autoscaler configmap parameters</caption>
     <thead>
-    <th>Parameter with default value</th>
+    <th id="parameter-with-default">Parameter with default value</th>
     <th>Description</th>
     </thead>
     <tr>
-    <td>"name": "default"</td>
+    <th headers="parameter-with-default">`"name": "default"`</th>
     <td>Replace `"default"` with the name or ID of the worker pool that you want to scale. To list worker pools, run `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`.<br><br>
     To manage more than one worker pool, copy the JSON line to a comma-separated line, such as follows. <pre class="codeblock">[
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
@@ -356,15 +356,15 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler beg
     **Note**: The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check if your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](/docs/containers?topic=containers-clusters#add_pool) and use this worker pool with the cluster autoscaler.</td>
     </tr>
     <tr>
-    <td>"minSize": 1</td>
+    <th headers="parameter-with-default">`"minSize": 1`</th>
     <td>Specify the minimum number of worker nodes per zone to be in the worker pool at all times. The value must be 2 or greater so that your ALB pods can be spread for high availability. If you [disabled](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) the ALB in your standard cluster, you can set the value to `1`.</td>
     </tr>
     <tr>
-    <td>"maxSize": 2</td>
+    <th  headers="parameter-with-default">`"maxSize": 2`</th>
     <td>Specify the maximum number of worker nodes per zone to be in the worker pool. The value must be equal to or greater than the value that you set for the `minSize`.</td>
     </tr>
     <tr>
-    <td>"enabled": false</td>
+    <th  headers="parameter-with-default">`"enabled": false`</th>
     <td>Set the value to `true` for the cluster autoscaler to manage scaling for the worker pool. Set the value to `false` to stop the cluster autoscaler from scaling the worker pool.<br><br>
     Later, if you want to [remove the cluster autoscaler](#ca_rm), you must first disable each worker pool in the configmap.</td>
     </tr>
