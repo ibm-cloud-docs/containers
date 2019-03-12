@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-12"
 
 keywords: kubernetes, iks
 
@@ -53,12 +53,12 @@ In each of the following sections, the tables show cluster management, logging, 
 Any user in your account who runs the CLI command or makes the API call for the action in the following table sees the result, even if the user has no assigned permissions.
 {: shortdesc}
 
-<table>
+<table summary="Overview of CLI commands and API calls that require no permissions in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of CLI commands and API calls that require no permissions in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Cluster management action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="none-actions-action">Cluster management action</th>
+<th id="none-actions-cli">CLI command</th>
+<th id="none-actions-api">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -119,12 +119,12 @@ Any user in your account who runs the CLI command or makes the API call for the 
 The **Viewer** platform role includes the [actions that require no permissions](#none-actions), plus the permissions that are shown in the following table.
 {: shortdesc}
 
-<table>
+<table summary="Overview of cluster management CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of cluster management CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Cluster management action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="view-actions-mngt">Cluster management action</th>
+<th id="view-actions-cli">CLI command</th>
+<th id="view-actions-api">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -209,12 +209,12 @@ The **Viewer** platform role includes the [actions that require no permissions](
 </tbody>
 </table>
 
-<table>
+<table summary="Overview of Ingress CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of Ingress CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Ingress action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="view-actions-ingress">Ingress action</th>
+<th id="view-actions-cli2">CLI command</th>
+<th id="view-actions-api2">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -236,12 +236,12 @@ The **Viewer** platform role includes the [actions that require no permissions](
 </table>
 
 
-<table>
+<table summary="Overview of logging CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of logging CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Logging action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="view-actions-log">Logging action</th>
+<th id="view-actions-cli3">CLI command</th>
+<th id="view-actions-api3">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -278,12 +278,12 @@ The **Viewer** platform role includes the [actions that require no permissions](
 The **Editor** platform role includes the permissions that are granted by **Viewer**, plus the following. **Tip**: Use this role for app developers, and assign the <a href="#cloud-foundry">Cloud Foundry</a> **Developer** role.
 {: shortdesc}
 
-<table>
+<table summary="Overview of cluster management CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of cluster management CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Cluster management action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="editor-actions-mngt">Cluster management action</th>
+<th id="editor-actions-cli">CLI command</th>
+<th id="editor-actions-api">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -304,12 +304,12 @@ The **Editor** platform role includes the permissions that are granted by **View
 </tbody>
 </table>
 
-<table>
+<table summary="Overview of Ingress CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of Ingress CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Ingress action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="editor-actions-ingress">Ingress action</th>
+<th id="editor-actions-cli2">CLI command</th>
+<th id="editor-actions-api2">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -347,12 +347,12 @@ The **Editor** platform role includes the permissions that are granted by **View
 
 
 
-<table>
+<table summary="Overview of logging CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of logging CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Logging action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="editor-log">Logging action</th>
+<th id="editor-cli3">CLI command</th>
+<th id="editor-api3">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -419,12 +419,12 @@ The **Editor** platform role includes the permissions that are granted by **View
 The **Operator** platform role includes the permissions that are granted by **Viewer**, plus the permissions that are shown in the following table.
 {: shortdesc}
 
-<table>
+<table summary="Overview of cluster management CLI commands and API calls that require the Operator platform role in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of cluster management CLI commands and API calls that require the Operator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Cluster management action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="operator-mgmt">Cluster management action</th>
+<th id="operator-cli">CLI command</th>
+<th id="operator-api">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -536,12 +536,12 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 The **Administrator** platform role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles, plus the following. To create resources such as machines, VLANs, and subnets, Administrator users need the **Super user** <a href="#infra">infrastructure role</a>.
 {: shortdesc}
 
-<table>
+<table summary="Overview of cluster management CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of cluster management CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Cluster management action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="admin-mgmt">Cluster management action</th>
+<th id="admin-cli">CLI command</th>
+<th id="admin-api">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -597,12 +597,12 @@ The **Administrator** platform role includes all permissions that are granted by
 </tbody>
 </table>
 
-<table>
+<table summary="Overview of Ingress CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of Ingress CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Ingress action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="admin-ingress">Ingress action</th>
+<th id="admin-cli2">CLI command</th>
+<th id="admin-api2">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -628,12 +628,12 @@ The **Administrator** platform role includes all permissions that are granted by
 </tbody>
 </table>
 
-<table>
+<table summary="Overview of logging CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}">
 <caption>Overview of logging CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Logging action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="admin-log">Logging action</th>
+<th id="admin-cli3">CLI command</th>
+<th id="admin-api3">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -686,9 +686,9 @@ The following table shows the Kubernetes resource permissions granted by each se
 <table summary="The table shows Kubernetes resource permissions for IAM service roles and corresponding RBAC policies. Rows are to be read from the left to right, with the IAM service role in column one, the corresponding RBAC role in column two, and the Kubernetes resource permissions in column three.">
 <caption>Kubernetes resource permissions by service and corresponding RBAC roles</caption>
 <thead>
-    <th>Service role</th>
-    <th>Corresponding RBAC role, binding, and scope</th>
-    <th>Kubernetes resource permissions</th>
+    <th id="service-role">Service role</th>
+    <th id="rbac-role">Corresponding RBAC role, binding, and scope</th>
+    <th id="kube-perm">Kubernetes resource permissions</th>
   </thead>
   <tr>
     <td>**Reader**</td>
