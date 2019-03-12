@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-12"
 
 keywords: kubernetes, iks
 
@@ -29,7 +29,7 @@ subcollection: containers
 ## Kubernetes version types
 {: #version_types}
 
-{{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. 
+{{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 {:shortdesc}
 
 **Supported Kubernetes versions**:
@@ -47,7 +47,7 @@ subcollection: containers
 
 **Unsupported versions**: If your clusters run a Kubernetes version that is not supported, review the following potential update impacts and then immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. You can find out if your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks clusters` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters).
 
-If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure. For example, if your cluster runs Kubernetes version 1.9 or earlier, when you update the master directly to 1.12 or later, most pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff` or `ContainerCreating` until you update the worker nodes to the same version. To avoid this issue, update the cluster to a supported version less than three ahead of the current version, such as 1.9 to 1.11 and then update to 1.12.<br><br>After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
+If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure. Updating fails from version 1.7 or 1.8 to version 1.11 or later. For other versions, such as if your cluster runs Kubernetes version 1.9, when you update the master directly to 1.12 or later, most pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff` or `ContainerCreating` until you update the worker nodes to the same version. To avoid this issue, update the cluster to a supported version less than three ahead of the current version, such as 1.9 to 1.11 and then update to 1.12.<br><br>After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
 {: important}
 
 </br>
@@ -753,7 +753,7 @@ Before you begin, your cluster master and all worker nodes must be running Kuber
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.10.
 {: shortdesc}
 
-Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
+Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
 
 Before you can successfully update to Kubernetes 1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).
@@ -1060,7 +1060,7 @@ Find an overview of Kubernetes versions that are unsupported in {{site.data.keyw
 As of 27 December 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.9](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.9 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
 
 ### Version 1.8 (Unsupported)
 {: #cs_v18}
@@ -1068,7 +1068,7 @@ As of 27 December 2018, {{site.data.keyword.containerlong_notm}} clusters that r
 As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.8](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.8 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to 1.10. Updates fail from version 1.8 to version 1.11 or later.
 
 ### Version 1.7 (Unsupported)
 {: #cs_v17}
@@ -1076,7 +1076,7 @@ As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that 
 As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.7](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.7 clusters cannot receive security updates or support unless they are updated to the next most recently supported version ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to version 1.10. Updates fail from version 1.7 to version 1.11 or later.
 
 ### Version 1.5 (Unsupported)
 {: #cs_v1-5}
