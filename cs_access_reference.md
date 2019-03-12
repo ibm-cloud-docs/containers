@@ -53,7 +53,7 @@ In each of the following sections, the tables show cluster management, logging, 
 Any user in your account who runs the CLI command or makes the API call for the action in the following table sees the result, even if the user has no assigned permissions.
 {: shortdesc}
 
-<table summary="Overview of CLI commands and API calls that require no permissions in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of CLI commands and API calls that require no permissions in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="none-actions-action">Cluster management action</th>
@@ -119,7 +119,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 The **Viewer** platform role includes the [actions that require no permissions](#none-actions), plus the permissions that are shown in the following table.
 {: shortdesc}
 
-<table summary="Overview of cluster management CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of cluster management CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="view-actions-mngt">Cluster management action</th>
@@ -209,7 +209,7 @@ The **Viewer** platform role includes the [actions that require no permissions](
 </tbody>
 </table>
 
-<table summary="Overview of Ingress CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of Ingress CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="view-actions-ingress">Ingress action</th>
@@ -236,7 +236,7 @@ The **Viewer** platform role includes the [actions that require no permissions](
 </table>
 
 
-<table summary="Overview of logging CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of logging CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="view-actions-log">Logging action</th>
@@ -278,7 +278,7 @@ The **Viewer** platform role includes the [actions that require no permissions](
 The **Editor** platform role includes the permissions that are granted by **Viewer**, plus the following. **Tip**: Use this role for app developers, and assign the <a href="#cloud-foundry">Cloud Foundry</a> **Developer** role.
 {: shortdesc}
 
-<table summary="Overview of cluster management CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of cluster management CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="editor-actions-mngt">Cluster management action</th>
@@ -304,7 +304,7 @@ The **Editor** platform role includes the permissions that are granted by **View
 </tbody>
 </table>
 
-<table summary="Overview of Ingress CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of Ingress CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="editor-actions-ingress">Ingress action</th>
@@ -347,7 +347,7 @@ The **Editor** platform role includes the permissions that are granted by **View
 
 
 
-<table summary="Overview of logging CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of logging CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="editor-log">Logging action</th>
@@ -419,7 +419,7 @@ The **Editor** platform role includes the permissions that are granted by **View
 The **Operator** platform role includes the permissions that are granted by **Viewer**, plus the permissions that are shown in the following table.
 {: shortdesc}
 
-<table summary="Overview of cluster management CLI commands and API calls that require the Operator platform role in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of cluster management CLI commands and API calls that require the Operator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="operator-mgmt">Cluster management action</th>
@@ -536,7 +536,7 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 The **Administrator** platform role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles, plus the following. To create resources such as machines, VLANs, and subnets, Administrator users need the **Super user** <a href="#infra">infrastructure role</a>.
 {: shortdesc}
 
-<table summary="Overview of cluster management CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of cluster management CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="admin-mgmt">Cluster management action</th>
@@ -597,7 +597,7 @@ The **Administrator** platform role includes all permissions that are granted by
 </tbody>
 </table>
 
-<table summary="Overview of Ingress CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of Ingress CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="admin-ingress">Ingress action</th>
@@ -628,7 +628,7 @@ The **Administrator** platform role includes all permissions that are granted by
 </tbody>
 </table>
 
-<table summary="Overview of logging CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}">
+<table>
 <caption>Overview of logging CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
 <th id="admin-log">Logging action</th>
@@ -683,7 +683,7 @@ Looking for which Kubernetes actions each service role grants through RBAC? See 
 
 The following table shows the Kubernetes resource permissions granted by each service role and its corresponding RBAC role.
 
-<table summary="The table shows Kubernetes resource permissions for IAM service roles and corresponding RBAC policies. Rows are to be read from the left to right, with the IAM service role in column one, the corresponding RBAC role in column two, and the Kubernetes resource permissions in column three.">
+<table>
 <caption>Kubernetes resource permissions by service and corresponding RBAC roles</caption>
 <thead>
     <th id="service-role">Service role</th>
@@ -691,7 +691,7 @@ The following table shows the Kubernetes resource permissions granted by each se
     <th id="kube-perm">Kubernetes resource permissions</th>
   </thead>
   <tr>
-    <td>**Reader**</td>
+    <td>**Reader** role</td>
     <td>When scoped to one namespace: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding in each namespace of the cluster</td>
     <td><ul>
       <li>Read access to resources in a namespace</li>
@@ -700,7 +700,7 @@ The following table shows the Kubernetes resource permissions granted by each se
     </td>
   </tr>
   <tr>
-    <td>**Writer**</td>
+    <td>**Writer** role</td>
     <td>When scoped to one namespace: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding in each namespace of the cluster</td>
     <td><ul><li>Read/write access to resources in a namespace</li>
     <li>No read/write access to roles and role bindings</li>
@@ -708,7 +708,7 @@ The following table shows the Kubernetes resource permissions granted by each se
     </td>
   </tr>
   <tr>
-    <td>**Manager**</td>
+    <td>**Manager** role</td>
     <td>When scoped to one namespace: <strong><code>admin</code></strong> cluster role applied by the <strong><code>ibm-operate</code></strong> cluster role binding in only this namespace</br><br>When scoped to all namespaces: <strong><code>cluster-admin</code></strong> cluster role applied by the <strong><code>ibm-admin</code></strong> cluster role binding</td>
     <td>When scoped to one namespace:
       <ul><li>Read/write access to all resources in a namespace but not to the namespace itself</li>
@@ -738,7 +738,7 @@ Wondering if you have the correct permissions to run a certain `kubectl` command
 
 The following table shows the permissions that are granted by each RBAC role to individual Kubernetes resources. Permissions are shown as which verbs a user with that role can complete against the resource, such as "get", "list", "describe", "create", or "delete".
 
-<table summary="Kubernetes resource permissions granted by each predefined RBAC role.">
+<table>
  <caption>Kubernetes resource permissions granted by each predefined RBAC role</caption>
  <thead>
   <th>Kubernetes resource</th>
@@ -1007,7 +1007,7 @@ Cloud Foundry roles grant access to organizations and spaces within the account.
 
 The following table shows the Cloud Foundry roles required for cluster action permissions.
 
-<table summary="The table shows user permissions for Cloud Foundry. Rows are to be read from the left to right, with the Cloud Foundry role in column one, and the cluster permission in column two.">
+<table>
   <caption>Cluster management permissions by Cloud Foundry role</caption>
   <thead>
     <th>Cloud Foundry role</th>
@@ -1037,7 +1037,7 @@ When a user with the **Super User** infrastructure access role [sets the API key
 
 The following table shows the infrastructure permissions required to complete groups of common tasks.
 
-<table summary="Infrastructure permissions for common {{site.data.keyword.containerlong_notm}} scenarios.">
+<table>
  <caption>Commonly required infrastructure permissions for {{site.data.keyword.containerlong_notm}}</caption>
  <thead>
   <th>Common tasks in {{site.data.keyword.containerlong_notm}}</th>
