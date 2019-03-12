@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-11"
+lastupdated: "2019-03-12"
 
 keywords: kubernetes, iks 
 
@@ -435,7 +435,7 @@ Review the following scenarios in which VLAN spanning is also required.
 When you create a cluster, primary public and private subnets are provisioned on the public and private VLANs. The primary public subnet ends in `/28` and provides 14 public IPs for worker nodes. The primary private subnet ends in `/26` and provides private IPs for up to 62 worker nodes.
 {:shortdesc}
 
-Your might exceed the initial 14 public and 62 private IPs for worker nodes by having a large cluster or several smaller clusters in the same location on the same VLAN. When a public or private subnet reaches the limit of worker nodes, another primary subnet in the same VLAN is ordered.
+You might exceed the initial 14 public and 62 private IPs for worker nodes by having a large cluster or several smaller clusters in the same location on the same VLAN. When a public or private subnet reaches the limit of worker nodes, another primary subnet in the same VLAN is ordered.
 
 To ensure that workers in these primary subnets on the same VLAN can communicate, you must turn on VLAN spanning. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
 
