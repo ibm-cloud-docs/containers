@@ -691,7 +691,7 @@ The following table shows the Kubernetes resource permissions granted by each se
     <th id="kube-perm">Kubernetes resource permissions</th>
   </thead>
   <tr>
-    <td>**Reader** role</td>
+    <td>Reader role</td>
     <td>When scoped to one namespace: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding in each namespace of the cluster</td>
     <td><ul>
       <li>Read access to resources in a namespace</li>
@@ -700,7 +700,7 @@ The following table shows the Kubernetes resource permissions granted by each se
     </td>
   </tr>
   <tr>
-    <td>**Writer** role</td>
+    <td>Writer role</td>
     <td>When scoped to one namespace: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding in each namespace of the cluster</td>
     <td><ul><li>Read/write access to resources in a namespace</li>
     <li>No read/write access to roles and role bindings</li>
@@ -708,7 +708,7 @@ The following table shows the Kubernetes resource permissions granted by each se
     </td>
   </tr>
   <tr>
-    <td>**Manager** role</td>
+    <td>Manager role</td>
     <td>When scoped to one namespace: <strong><code>admin</code></strong> cluster role applied by the <strong><code>ibm-operate</code></strong> cluster role binding in only this namespace</br><br>When scoped to all namespaces: <strong><code>cluster-admin</code></strong> cluster role applied by the <strong><code>ibm-admin</code></strong> cluster role binding</td>
     <td>When scoped to one namespace:
       <ul><li>Read/write access to all resources in a namespace but not to the namespace itself</li>
