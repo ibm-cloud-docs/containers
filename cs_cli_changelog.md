@@ -46,7 +46,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tbody>
 <tr>
 <td>0.2.75</td>
-<td>13 Mar 2019</td>
+<td>14 Mar 2019</td>
 <td><ul><li>Hides raw HTML from error outputs.</li>
 <li>Fixes typos in help text.</li>
 <li>Fixes translation of help text.</li>
