@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks, disaster recovery, dr, ha, hadr
 
@@ -57,7 +57,7 @@ The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is 
 
 Do not restart or reboot a worker node during a master outage. This action removes the pods from your worker node. Because the Kubernetes API server is unavailable, the pods cannot be rescheduled onto other worker nodes in the cluster.
 {: important}
- In clusters that run Kubernetes version 1.10 or later, the masters are highly available and include replicas for your Kubernetes API server, etcd, scheduler, and controller manager on separate hosts to protect against an outage such as during a master update.</p><p>To protect your cluster master from a zone failure, you can: <ul><li>Create a multizone cluster, which spreads the master across zones.</li><li>Set up a second cluster in another zone.</li></ul></p>
+ The cluster masters are highly available and include replicas for your Kubernetes API server, etcd, scheduler, and controller manager on separate hosts to protect against an outage such as during a master update.</p><p>To protect your cluster master from a zone failure, you can: <ul><li>Create a cluster in a [multizone metro city](/docs/containers?topic=containers-regions-and-zones#zones), which spreads the master across zones.</li><li>Set up a second cluster in another zone.</li></ul></p>
   <p>See [Setting up highly available clusters.](/docs/containers?topic=containers-plan_clusters#ha_clusters)</p></dd>
 <dt> 4. Zone failure.</dt>
   <dd><p>A zone failure affects all physical compute hosts and NFS storage. Failures include power, cooling, networking, or storage outages, and natural disasters, like flooding, earthquakes, and hurricanes. To protect against a zone failure, you must have clusters in two different zones that are load balanced by an external load balancer.</p>
