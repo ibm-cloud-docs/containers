@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks
 
@@ -29,13 +29,13 @@ subcollection: containers
 ## Kubernetes version types
 {: #version_types}
 
-{{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. 
+{{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 {:shortdesc}
 
 **Supported Kubernetes versions**:
 *   Latest: 1.13.4
-*   Default: 1.11.8
-*   Other: 1.12.6
+*   Default: 1.12.6
+*   Other: 1.11.8
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.10
@@ -47,7 +47,7 @@ subcollection: containers
 
 **Unsupported versions**: If your clusters run a Kubernetes version that is not supported, review the following potential update impacts and then immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. You can find out if your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks clusters` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters).
 
-If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure. For example, if your cluster runs Kubernetes version 1.9 or earlier, when you update the master directly to 1.12 or later, most pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff` or `ContainerCreating` until you update the worker nodes to the same version. To avoid this issue, update the cluster to a supported version less than three ahead of the current version, such as 1.9 to 1.11 and then update to 1.12.<br><br>After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
+If you wait until your cluster is three or more minor versions behind a supported version, you must force the update, which might cause unexpected results or failure. Updating fails from version 1.7 or 1.8 to version 1.11 or later. For other versions, such as if your cluster runs Kubernetes version 1.9, when you update the master directly to 1.12 or later, most pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff` or `ContainerCreating` until you update the worker nodes to the same version. To avoid this issue, update the cluster to a supported version less than three ahead of the current version, such as 1.9 to 1.11 and then update to 1.12.<br><br>After you update the cluster to a supported version, your cluster can resume normal operations and continue receiving support.
 {: important}
 
 </br>
@@ -62,7 +62,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.11.8+IKS
+Server Version: v1.12.6+IKS
 ```
 {: screen}
 
@@ -345,8 +345,12 @@ The following table shows the actions that you must take after you update the Ku
 </thead>
 <tbody>
 <tr>
-<td>`apps/v1` Kubernetes API</td>
-<td>The `apps/v1` Kubernetes API is replacing the `extensions`, `apps/v1beta1`, and `apps/v1alpha` APIs. The Kubernetes project is deprecating and phasing out support for the previous APIs from the Kubernetes `apiserver` and the `kubectl` client.<br><br>You must update all your YAML `apiVersion` fields to use `apps/v1`. Also, review the [Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for changes related to `apps/v1`, such as the following.
+<td>APIs for Kubernetes</td>
+<td>The Kubernetes API replaces deprecated APIs as follows:
+<ul><li><strong>apps/v1</strong>: The `apps/v1` Kubernetes API replaces the `apps/v1beta1` and `apps/v1alpha` APIs. The `apps/v1` API also replaces the `extensions/v1beta1` API for `daemonset`, `deployment`, `replicaset`, and `statefulset` resources. The Kubernetes project is deprecating and phasing out support for the previous APIs from the Kubernetes `apiserver` and the `kubectl` client.</li>
+<li><strong>networking.k8s.io/v1</strong>: The `networking.k8s.io/v1` API replaces the `extensions/v1beta1` API for `networkpolicy` resources.</li>
+<li><strong>policy/v1beta1</strong>: The `policy/v1beta1` API replaces the `extensions/v1beta1` API for `podsecuritypolicy` resources.</li></ul>
+<br><br>Update all your YAML `apiVersion` fields to use the appropriate Kubernetes API before the deprecated APIs become unsupported. Also, review the [Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for changes related to `apps/v1`, such as the following.
 <ul><li>After creating a deployment, the `.spec.selector` field is immutable.</li>
 <li>The `.spec.rollbackTo` field is deprecated. Instead, use the `kubectl rollout undo` command.</li></ul></td>
 </tr>
@@ -594,7 +598,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 3.  Review the YAML. For example, if your cluster uses the following Kubernetes network policy to allow pods in the `default` namespace to access the cluster master via the `kubernetes` service cluster IP or the cluster master IP, then you must update the policy.
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -627,7 +631,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     {: tip}
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -753,7 +757,7 @@ Before you begin, your cluster master and all worker nodes must be running Kuber
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.10.
 {: shortdesc}
 
-Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
+Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
 
 Before you can successfully update to Kubernetes 1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).
@@ -934,7 +938,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 3.  Review the YAML. For example, if your cluster uses the following Kubernetes network policy to allow pods in the `default` namespace to access the cluster master via the `kubernetes` service cluster IP or the cluster master IP, then you must update the policy.
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -967,7 +971,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     {: tip}
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -1060,7 +1064,7 @@ Find an overview of Kubernetes versions that are unsupported in {{site.data.keyw
 As of 27 December 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.9](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.9 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
 
 ### Version 1.8 (Unsupported)
 {: #cs_v18}
@@ -1068,7 +1072,7 @@ As of 27 December 2018, {{site.data.keyword.containerlong_notm}} clusters that r
 As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.8](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.8 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to 1.10. Updates fail from version 1.8 to version 1.11 or later.
 
 ### Version 1.7 (Unsupported)
 {: #cs_v17}
@@ -1076,7 +1080,7 @@ As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that 
 As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.7](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.7 clusters cannot receive security updates or support unless they are updated to the next most recently supported version ([Kubernetes 1.10](#cs_v110)).
 {: shortdesc}
 
-[Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.10.
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to version 1.10. Updates fail from version 1.7 to version 1.11 or later.
 
 ### Version 1.5 (Unsupported)
 {: #cs_v1-5}

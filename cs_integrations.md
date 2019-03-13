@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks, helm
 
@@ -33,7 +33,7 @@ You can use various external services and catalog services with a standard Kuber
 
 ## DevOps services
 {: #devops_services}
-<table summary="Summary for accessibility">
+<table summary="The table shows available services that you can add to your cluster to add extra DevOps capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
 <caption>DevOps services</caption>
 <thead>
 <tr>
@@ -42,6 +42,10 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>{{site.data.keyword.cfee_full_notm}}</td>
+<td>Deploy and manage your own Cloud Foundry platform on top of a Kubernetes cluster to develop, package, deploy, and manage cloud-native apps, and leverage the {{site.data.keyword.Bluemix_notm}} ecosystem to bind additional services to your apps. When you create an {{site.data.keyword.cfee_full_notm}} instance, you must configure your Kubernetes cluster by choosing the machine type and VLANs for your worker nodes. Your cluster is then provisioned with {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.cfee_full_notm}} is automatically deployed to your cluster. For more information about how to set up {{site.data.keyword.cfee_full_notm}}, see the [Getting started tutorial](/docs/cloud-foundry?topic=cloud-foundry-getting-started#getting-started). </td>
+</tr>
 <tr>
 <td>Codeship</td>
 <td>You can use <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="External link icon"></a> for the continuous integration and delivery of containers. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
@@ -79,7 +83,7 @@ You can use various external services and catalog services with a standard Kuber
 
 ## Logging and monitoring services
 {: #health_services}
-<table summary="Summary for accessibility">
+<table summary="The table shows available services that you can add to your cluster to add extra logging and monitoring capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
 <caption>Logging and monitoring services</caption>
 <thead>
 <tr>
@@ -106,7 +110,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). **Note**: If you use {{site.data.keyword.mon_full_notm}} with clusters that run Kubernetes version 1.11 or later, not all container metrics are collected because Sysdig does not currently support `containerd`.</td>
+<td>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). </td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -128,10 +132,6 @@ You can use various external services and catalog services with a standard Kuber
 <td>Import and search your Kubernetes logging, object, and metrics data in Splunk by using Splunk Connect for Kubernetes. Splunk Connect for Kubernetes is a collection of Helm charts that deploy a Splunk-supported deployment of Fluentd to your Kubernetes cluster, a Splunk-built Fluentd HTTP Event Collector (HEC) plug-in to send logs and metadata, and a metrics deployment that captures your cluster metrics. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2019/02/solving-business-problems-with-splunk-on-ibm-cloud-kubernetes-service/" target="_blank">Solving Business Problems with Splunk on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
 <tr>
-<td>Sysdig</td>
-<td>Capture app, container, statsd, and host metrics with a single instrumentation point by using <a href="https://sysdig.com/" target="_blank">Sysdig <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/08/monitoring-ibm-bluemix-container-service-sysdig-container-intelligence/" target="_blank">Monitoring {{site.data.keyword.containerlong_notm}} with Sysdig Container Intelligence <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
-</tr>
-<tr>
 <td>Weave Scope</td>
 <td>Weave Scope provides a visual diagram of your resources within a Kubernetes cluster, including services, pods, containers, processes, nodes, and more. Weave Scope provides interactive metrics for CPU and memory and also provides tools to tail and exec into a container.<p>For more information, see [Visualizing Kubernetes cluster resources with Weave Scope and {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#weavescope).</p></li></ol>
 </td>
@@ -149,7 +149,7 @@ You can use various external services and catalog services with a standard Kuber
 Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security).
 {: shortdesc}
 
-<table summary="Summary for accessibility">
+<table summary="The table shows available services that you can add to your cluster to add extra security capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
 <caption>Security services</caption>
 <thead>
 <tr>
@@ -160,7 +160,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 <tbody>
   <tr id="appid">
     <td>{{site.data.keyword.appid_full}}</td>
-    <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-gettingstarted#gettingstarted) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
+    <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
   </tr>
 <tr>
 <td>Aqua Security</td>
@@ -199,7 +199,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 
 ## Storage services
 {: #storage_services}
-<table summary="Summary for accessibility">
+<table summary="The table shows available services that you can add to your cluster to add persistent storage capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
 <caption>Storage services</caption>
 <thead>
 <tr>
@@ -209,27 +209,53 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 </thead>
 <tbody>
 <tr>
-  <td>Heptio Ark</td>
-  <td>You can use <a href="https://github.com/heptio/ark" target="_blank">Heptio Ark <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to back up and restore cluster resources and persistent volumes. For more information, see the Heptio Ark <a href="https://github.com/heptio/ark/blob/release-0.9/docs/use-cases.md" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>Heptio Velero</td>
+  <td>You can use <a href="https://github.com/heptio/velero" target="_blank">Heptio Velero <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to back up and restore cluster resources and persistent volumes. For more information, see the Heptio Velero <a href="https://github.com/heptio/velero/blob/release-0.9/docs/use-cases.md" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
+<tr>
+  <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#getting-started-with-block-storage) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+  </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
   <td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For general information about the service, see the <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
   <tr>
-    <td>{{site.data.keyword.cloudantfull}}</td>
-    <td>{{site.data.keyword.cloudant_short_notm}} is a document-oriented DataBase as a Service (DBaaS) that stores data as documents in JSON format. The service is built for scalability, high availability, and durability. For more information, see the <a href="/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant" target="_blank">{{site.data.keyword.cloudant_short_notm}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#getting-started-with-file-storage) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
   </tr>
   <tr>
-    <td>{{site.data.keyword.composeForMongoDB_full}}</td>
-    <td>{{site.data.keyword.composeForMongoDB}} delivers high availability and redundancy, automated and on-demand no-stop backups, monitoring tools, integration into alert systems, performance analysis views, and more. For more information, see the <a href="/docs/services/ComposeForMongoDB?topic=compose-for-mongodb-about#about" target="_blank">{{site.data.keyword.composeForMongoDB}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+    <td>Portworx</td>
+    <td>[Portworx ![External link icon](../icons/launch-glyph.svg "External link icon")](https://portworx.com/products/introduction/) is a highly available software-defined storage solution that you can use to manage persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones. You can install Portworx with a Helm chart and provision storage for your apps by using Kubernetes persistent volumes. For more information about how to set up Portworx in your cluster, see [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx).</td>
   </tr>
 </tbody>
 </table>
 
-
 <br />
 
+
+## Database services
+{: #database_services}
+
+<table summary="The table shows available services that you can add to your cluster to add database capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two.">
+<caption>Database services</caption>
+<thead>
+<tr>
+<th>Service</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+  <tr>
+    <td>{{site.data.keyword.blockchainfull_notm}} Platform 2.0 beta</td>
+    <td>Deploy and manage your own {{site.data.keyword.blockchainfull_notm}} Platform on {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.blockchainfull_notm}} Platform 2.0, you can host {{site.data.keyword.blockchainfull_notm}} networks or create organizations that can join other {{site.data.keyword.blockchainfull_notm}} 2.0 networks. For more information about how to set up {{site.data.keyword.blockchainfull_notm}} in {{site.data.keyword.containerlong_notm}}, see [About {{site.data.keyword.blockchainfull_notm}} Platform free 2.0 beta](/docs/services/blockchain?topic=blockchain-ibp-console-overview#ibp-console-overview).</td>
+  </tr>
+<tr>
+  <td>Cloud databases</td>
+  <td>You can choose between a variety of {{site.data.keyword.Bluemix_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.Bluemix_notm}} catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=databases).  </td>
+  </tr>
+  </tbody>
+  </table>
 
 
 ## Adding {{site.data.keyword.Bluemix_notm}} services to clusters
@@ -276,8 +302,8 @@ To add an {{site.data.keyword.Bluemix_notm}} service to your cluster:
 
      Example output:
      ```
-     Name                          Location   State    Type               Tags   
-     <iam_service_instance_name>   <region>   active   service_instance      
+     Name                          Location   State    Type               Tags
+     <iam_service_instance_name>   <region>   active   service_instance
      ```
      {: screen}
 
@@ -393,7 +419,7 @@ When you mount the secret as a volume to your pod, a file that is named `binding
 
 2.  Create a YAML file for your Kubernetes deployment and mount the secret as a volume to your pod.
     ```
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       labels:
@@ -506,7 +532,7 @@ When you mount the secret as a volume to your pod, a file that is named `binding
 ### Referencing the secret in environment variables
 {: #reference_secret}
 
-You can add the service credentials and other key value pairs from your Kubernetes secret as environment variables to your deployment.   
+You can add the service credentials and other key value pairs from your Kubernetes secret as environment variables to your deployment.
 {: shortdesc}
 
 1. List available secrets in your cluster and note the **name** of your secret. Look for a secret of type **Opaque**. If multiple secrets exist, contact your cluster administrator to identify the correct service secret.
@@ -552,7 +578,7 @@ You can add the service credentials and other key value pairs from your Kubernet
 
 3. Create a YAML file for your Kubernetes deployment and specify an environment variable that references the `binding` key.
    ```
-   apiVersion: apps/v1beta1
+   apiVersion: apps/v1
    kind: Deployment
    metadata:
      labels:

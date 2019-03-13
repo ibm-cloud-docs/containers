@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks 
 
@@ -323,7 +323,7 @@ To add file storage:
     {: tip}
 
     ```
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: <deployment_name>
@@ -677,7 +677,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
                           billingType=hourly
                           region=us-south
                           zone=dal10
-      Annotations:        kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"apps/v1beta1","kind":"StatefulSet","metadata":{"annotations":{},"name":"nginx","namespace":"default"},"spec":{"podManagementPolicy":"Par...
+      Annotations:        kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"name":"nginx","namespace":"default"},"spec":{"podManagementPolicy":"Par...
       Replicas:           3 desired | 3 total
       Pods Status:        0 Running / 3 Waiting / 0 Succeeded / 0 Failed
       Pod Template:
@@ -712,7 +712,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
      selector:
        app: nginx
     ---
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: StatefulSet
     metadata:
      name: nginx
@@ -790,7 +790,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       selector:
         app: nginx
     ---
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: StatefulSet
     metadata:
       name: web

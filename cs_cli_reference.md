@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-06"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -4115,7 +4115,7 @@ ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--
   Workers per zone:   3
   Machine type:       b2c.4x16.encrypted
   Labels:             -
-  Version:            1.11.8_1512
+  Version:            1.12.6_1512
   ```
   {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks
 
@@ -56,9 +56,9 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <table>
 <caption>Overview of CLI commands and API calls that require no permissions in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Cluster management action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="none-actions-action">Cluster management action</th>
+<th id="none-actions-cli">CLI command</th>
+<th id="none-actions-api">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -122,9 +122,9 @@ The **Viewer** platform role includes the [actions that require no permissions](
 <table>
 <caption>Overview of cluster management CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Cluster management action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="view-actions-mngt">Cluster management action</th>
+<th id="view-actions-cli">CLI command</th>
+<th id="view-actions-api">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -212,9 +212,9 @@ The **Viewer** platform role includes the [actions that require no permissions](
 <table>
 <caption>Overview of Ingress CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Ingress action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="view-actions-ingress">Ingress action</th>
+<th id="view-actions-cli2">CLI command</th>
+<th id="view-actions-api2">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -239,9 +239,9 @@ The **Viewer** platform role includes the [actions that require no permissions](
 <table>
 <caption>Overview of logging CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Logging action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="view-actions-log">Logging action</th>
+<th id="view-actions-cli3">CLI command</th>
+<th id="view-actions-api3">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -281,9 +281,9 @@ The **Editor** platform role includes the permissions that are granted by **View
 <table>
 <caption>Overview of cluster management CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Cluster management action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="editor-actions-mngt">Cluster management action</th>
+<th id="editor-actions-cli">CLI command</th>
+<th id="editor-actions-api">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -307,9 +307,9 @@ The **Editor** platform role includes the permissions that are granted by **View
 <table>
 <caption>Overview of Ingress CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Ingress action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="editor-actions-ingress">Ingress action</th>
+<th id="editor-actions-cli2">CLI command</th>
+<th id="editor-actions-api2">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -350,9 +350,9 @@ The **Editor** platform role includes the permissions that are granted by **View
 <table>
 <caption>Overview of logging CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Logging action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="editor-log">Logging action</th>
+<th id="editor-cli3">CLI command</th>
+<th id="editor-api3">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -422,9 +422,9 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 <table>
 <caption>Overview of cluster management CLI commands and API calls that require the Operator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Cluster management action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="operator-mgmt">Cluster management action</th>
+<th id="operator-cli">CLI command</th>
+<th id="operator-api">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -539,9 +539,9 @@ The **Administrator** platform role includes all permissions that are granted by
 <table>
 <caption>Overview of cluster management CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Cluster management action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="admin-mgmt">Cluster management action</th>
+<th id="admin-cli">CLI command</th>
+<th id="admin-api">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -600,9 +600,9 @@ The **Administrator** platform role includes all permissions that are granted by
 <table>
 <caption>Overview of Ingress CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Ingress action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="admin-ingress">Ingress action</th>
+<th id="admin-cli2">CLI command</th>
+<th id="admin-api2">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -631,9 +631,9 @@ The **Administrator** platform role includes all permissions that are granted by
 <table>
 <caption>Overview of logging CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}</caption>
 <thead>
-<th>Logging action</th>
-<th>CLI command</th>
-<th>API call</th>
+<th id="admin-log">Logging action</th>
+<th id="admin-cli3">CLI command</th>
+<th id="admin-api3">API call</th>
 </thead>
 <tbody>
 <tr>
@@ -683,45 +683,43 @@ Looking for which Kubernetes actions each service role grants through RBAC? See 
 
 The following table shows the Kubernetes resource permissions granted by each service role and its corresponding RBAC role.
 
-<table summary="The table shows Kubernetes resource permissions for IAM service roles and corresponding RBAC policies. Rows are to be read from the left to right, with the IAM service role in column one, the corresponding RBAC role in column two, and the Kubernetes resource permissions in column three.">
+<table>
 <caption>Kubernetes resource permissions by service and corresponding RBAC roles</caption>
 <thead>
-    <th>Service role</th>
-    <th>Corresponding RBAC role, binding, and scope</th>
-    <th>Kubernetes resource permissions</th>
-  </thead>
+    <th id="service-role">Service role</th>
+    <th id="rbac-role">Corresponding RBAC role, binding, and scope</th>
+    <th id="kube-perm">Kubernetes resource permissions</th>
+</thead>
+<tbody>
   <tr>
-    <td>**Reader**</td>
-    <td>When scoped to one namespace: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding in each namespace of the cluster</td>
-    <td><ul>
+    <td id="service-role-reader" headers="service-role">Reader role</td>
+    <td headers="service-role-reader rbac-role">When scoped to one namespace: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding in each namespace of the cluster</td>
+    <td headers="service-role-reader kube-perm"><ul>
       <li>Read access to resources in a namespace</li>
       <li>No read access to roles and role bindings or to Kubernetes secrets</li>
       <li>Access the Kubernetes dashboard to view resources in a namespace</li></ul>
     </td>
   </tr>
   <tr>
-    <td>**Writer**</td>
-    <td>When scoped to one namespace: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding in each namespace of the cluster</td>
-    <td><ul><li>Read/write access to resources in a namespace</li>
+    <td id="service-role-writer" headers="service-role">Writer role</td>
+    <td headers="service-role-writer rbac-role">When scoped to one namespace: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>edit</code></strong> cluster role applied by the <strong><code>ibm-edit</code></strong> role binding in each namespace of the cluster</td>
+    <td headers="service-role-writer kube-perm"><ul><li>Read/write access to resources in a namespace</li>
     <li>No read/write access to roles and role bindings</li>
     <li>Access the Kubernetes dashboard to view resources in a namespace</li></ul>
     </td>
   </tr>
   <tr>
-    <td>**Manager**</td>
-    <td>When scoped to one namespace: <strong><code>admin</code></strong> cluster role applied by the <strong><code>ibm-operate</code></strong> cluster role binding in only this namespace</br><br>When scoped to all namespaces: <strong><code>cluster-admin</code></strong> cluster role applied by the <strong><code>ibm-admin</code></strong> cluster role binding</td>
-    <td>When scoped to one namespace:
-      <ul><li>Read/write access to all resources in a namespace but not to the namespace itself</li>
-      <li>Create RBAC roles and role bindings in a namespace</li>
-      <li>Access the Kubernetes dashboard to view all resources in a namespace</li></ul>
-    </br>When scoped to all namespaces:
+    <td id="service-role-manager" headers="service-role">Manager role</td>
+    <td headers="service-role-manager rbac-role">When scoped to one namespace: <strong><code>admin</code></strong> cluster role applied by the <strong><code>ibm-operate</code></strong> cluster role binding that applies to all namespaces</br><br>When scoped to all namespaces: <strong><code>cluster-admin</code></strong> cluster role applied by the <strong><code>ibm-admin</code></strong> cluster role binding</td> that applies to all namespaces
+    <td headers="service-role-manager kube-perm">
         <ul><li>Read/write access to all resources in every namespace</li>
         <li>Create RBAC roles and role bindings in a namespace or cluster roles and cluster role bindings in all namespaces</li>
         <li>Access the Kubernetes dashboard</li>
         <li>Create an Ingress resource that makes apps publicly available</li>
-        <li>Review cluster metrics such as with the <code>kubectl top nodes</code> or <code>kubectl get nodes</code> commands</li></ul>
+        <li>Review cluster metrics such as with the <code>kubectl top pods</code>, <code>kubectl top nodes</code>, or <code>kubectl get nodes</code> commands</li></ul>
     </td>
   </tr>
+</tbody>
 </table>
 
 <br />
@@ -738,7 +736,7 @@ Wondering if you have the correct permissions to run a certain `kubectl` command
 
 The following table shows the permissions that are granted by each RBAC role to individual Kubernetes resources. Permissions are shown as which verbs a user with that role can complete against the resource, such as "get", "list", "describe", "create", or "delete".
 
-<table summary="Kubernetes resource permissions granted by each predefined RBAC role.">
+<table>
  <caption>Kubernetes resource permissions granted by each predefined RBAC role</caption>
  <thead>
   <th>Kubernetes resource</th>
@@ -871,7 +869,7 @@ The following table shows the permissions that are granted by each RBAC role to 
   <td>pods</td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
-  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
+  <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>top</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
   <td>pods/attach</td>
   <td>-</td>
@@ -1007,7 +1005,7 @@ Cloud Foundry roles grant access to organizations and spaces within the account.
 
 The following table shows the Cloud Foundry roles required for cluster action permissions.
 
-<table summary="The table shows user permissions for Cloud Foundry. Rows are to be read from the left to right, with the Cloud Foundry role in column one, and the cluster permission in column two.">
+<table>
   <caption>Cluster management permissions by Cloud Foundry role</caption>
   <thead>
     <th>Cloud Foundry role</th>
@@ -1037,7 +1035,7 @@ When a user with the **Super User** infrastructure access role [sets the API key
 
 The following table shows the infrastructure permissions required to complete groups of common tasks.
 
-<table summary="Infrastructure permissions for common {{site.data.keyword.containerlong_notm}} scenarios.">
+<table>
  <caption>Commonly required infrastructure permissions for {{site.data.keyword.containerlong_notm}}</caption>
  <thead>
   <th>Common tasks in {{site.data.keyword.containerlong_notm}}</th>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks 
 
@@ -206,7 +206,7 @@ To assign priority to your pods:
 3.  In your pod spec, add the `priorityClassName` field with the name of the priority class that you retrieved in the previous step.
 
     ```yaml
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty

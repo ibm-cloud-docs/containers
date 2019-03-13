@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks, ingress
 
@@ -2642,7 +2642,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/global-rate-limit: "key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
+    ingress.bluemix.net/global-rate-limit: "key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number-of-connections&gt;"
 spec:
   tls:
   - hosts:
@@ -2665,14 +2665,14 @@ spec:
 <tbody>
 <tr>
 <td><code>key</code></td>
-<td>Supported values are `location`, `$http_` headers, and `$uri`. To set a global limit for incoming requests based on the zone or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+<td>Supported values are `location`, `$http&#95;` headers, and `$uri`. To set a global limit for incoming requests based on the zone or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http&#95;x&#95;user&#95;id`.</td>
 </tr>
 <tr>
 <td><code>rate</code></td>
 <td>Replace <code>&lt;<em>rate</em>&gt;</code> with the processing rate. Enter a value as a rate per second (r/s) or rate per minute (r/m). Example: <code>50r/m</code>.</td>
 </tr>
 <tr>
-<td><code>number-of_connections</code></td>
+<td><code>number-of-connections</code></td>
 <td>Replace <code>&lt;<em>conn</em>&gt;</code> with the number of connections.</td>
 </tr>
 </tbody></table>

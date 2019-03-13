@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -950,7 +950,7 @@ To force your app pods to deploy to edge nodes, add an edge node [affinity rule 
 Example deployment YAML file with edge node affinity and edge node toleration:
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: with-node-affinity
@@ -1019,7 +1019,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     For example, if you have multiple VLANs but want your app pods to deploy to worker nodes on the `2234945` public VLAN only:
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: with-node-affinity

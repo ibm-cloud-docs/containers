@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,14 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.2.75</td>
+<td>13 Mar 2019</td>
+<td><ul><li>Hides raw HTML from error outputs.</li>
+<li>Fixes typos in help text.</li>
+<li>Fixes translation of help text.</li>
+</ul></td>
+</tr>
 <tr>
 <td>0.2.61</td>
 <td>26 Feb 2019</td>

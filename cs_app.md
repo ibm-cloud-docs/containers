@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -151,7 +151,7 @@ To control access at the pod level, you can [configure pod security policies wit
 
 Within the app deployment YAML, you can set the security context for a pod or container. For more information, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 
-Want to control access at the application level? To create a sign-on flow that you can update at anytime without changing your app code try using [{{site.data.keyword.appid_long_notm}}](/docs/services/appid?topic=appid-gettingstarted#gettingstarted).
+Want to control access at the application level? To create a sign-on flow that you can update at anytime without changing your app code try using [{{site.data.keyword.appid_long_notm}}](/docs/services/appid?topic=appid-getting-started).
 {: tip}
 
 <br />
@@ -231,7 +231,7 @@ Review a copy of the [complete YAML file](https://raw.githubusercontent.com/IBM-
 <dl>
 <dt>Basic deployment metadata</dt>
   <dd><p>Use the appropriate API version for the [kind of Kubernetes object](#object) that you deploy. The API version determines the supported features for the Kubernetes object that are available to you. The name that you give in the metadata is the object's name, not its label. You use the name when interacting with your object, such as `kubectl get deployment <name>`.</p>
-  <p><pre class="codeblock"><code>apiVersion: apps/v1beta1
+  <p><pre class="codeblock"><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wasliberty</code></pre></p></dd>
@@ -348,7 +348,7 @@ spec:
 <dt id="configmap">Configmaps for container environment variables</dt>
 <dd><p>Configmaps provide non-sensitive configuration information for your deployment workloads. The following example shows shows how you can reference values from your configmap as environment variables in the container spec section of your deployment YAML. By referencing values from your configmap, you can decouple this configuration information from your deployment to keep your containerized app portable.<ul><li>[Help me decide whether to use a Kubernetes `ConfigMap` or `Secret` object for variables](#variables).</li>
 <li>For more ways to use configmaps, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/).</li></ul></p>
-<p><pre class="codeblock"><code>apiVersion: apps/v1beta1
+<p><pre class="codeblock"><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wasliberty
@@ -387,7 +387,7 @@ data:
   <dt id="secret">Secrets for container environment variables</dt>
   <dd><p>Secrets provide sensitive configuration information such as passwords for your deployment workloads. The following example shows shows how you can reference values from your secret as environment variables in the container spec section of your deployment YAML. You can also mount the secret as a volume. By referencing values from your secret, you can decouple this configuration information from your deployment to keep your containerized app portable.<ul><li>[Help me decide whether to use a ConfigMap or Secret for variables](#variables).</li>
   <li>For more information, see [Understanding when to use secrets](/docs/containers?topic=containers-encryption#secrets).</li></ul></p>
-  <p><pre class="codeblock"><code>apiVersion: apps/v1beta1
+  <p><pre class="codeblock"><code>apiVersion: apps/v1
   kind: Deployment
   metadata:
     name: wasliberty
@@ -426,7 +426,7 @@ data:
 
 <dt id="pv">Persistent volumes for container storage</dt>
 <dd><p>Persistent volumes (PVs) interface with physical storage to provide persistent data storage for your container workloads. The following example shows how you can add persistent storage to your app. To provision persistent storage, you create a persistent volume claim (PVC) to describe the type and size of file storage that you want to have. After creating the PVC, the persistent volume and the physical storage is automatically created by using [dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning). By referencing the PVC in your deployment YAML, the storage is automatically mounted to your app pod. When the container in your pod writes data to the `/test` mount path directory, data is stored on the NFS file storage instance.</p><ul><li>For more information, see [Understanding Kubernetes storage basics](/docs/containers?topic=containers-kube_concepts#kube_concepts).</li><li>For options on other types of storage that you can provision, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).</li></ul>
-<p><pre class="codeblock"><code>apiVersion: apps/v1beta1
+<p><pre class="codeblock"><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wasliberty
@@ -478,7 +478,7 @@ The following is a copy of the deployment YAML that is [discussed section-by-sec
 {: shortdesc}
 
 ```yaml
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wasliberty
@@ -619,7 +619,7 @@ Do you have so many resources and users in your cluster that the Kubernetes dash
 {: tip}
 
 Before you begin:
-* Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. 
+* Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
 * To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform role](/docs/containers?topic=containers-users#platform). If you are assigned only a service role but no platform role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 * [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -696,7 +696,7 @@ Before you begin:
 
 -   [Install the required CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
 -   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
--   Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. 
+-   Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
 -   To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform role](/docs/containers?topic=containers-users#platform). If you are assigned only a service role but no platform role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 
 To deploy your app:
@@ -758,7 +758,7 @@ To deploy your app:
 When you deploy an app, the app pods indiscriminately deploy to various worker nodes in your cluster. In some cases, you might want to restrict the worker nodes that the app pods to deploy to. For example, you might want app pods to only deploy to worker nodes in a certain worker pool because those worker nodes are on bare metal machines. To designate the worker nodes that app pods must deploy to, add an affinity rule to your app deployment.
 {:shortdesc}
 
-Before you begin: 
+Before you begin:
 *   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 *   Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
@@ -778,7 +778,7 @@ To deploy apps to specific worker nodes:
     Example YAML:
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: with-node-affinity

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks 
 
@@ -584,8 +584,8 @@ Manually update the reference of the private IP address to point to the correct 
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.11.8
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.11.8
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       normal    Ready    dal10      1.12.6
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b2c.4x16       deleted    -       dal10      1.12.6
   ```
   {: screen}
 
@@ -739,11 +739,11 @@ Your cluster uses an API key or token that is stored in an [image pull secret](/
     - name: bluemix-default-secret
     - name: bluemix-default-secret-regional
     - name: bluemix-default-secret-international
-    - name: default-icr-us-io
-    - name: default-icr-uk-io
-    - name: default-icr-de-io
-    - name: default-icr-au-io
-    - name: default-icr-jp-io
+    - name: default-us-icr-io
+    - name: default-uk-icr-io
+    - name: default-de-icr-io
+    - name: default-au-icr-io
+    - name: default-jp-icr-io
     - name: default-icr-io
     ...
     ```
@@ -1113,6 +1113,8 @@ To troubleshoot your Helm chart:
     {: pre}
 
 <br />
+
+
 
 
 ## Getting help and support
