@@ -263,3 +263,7 @@ In a multizone cluster, the master node is deployed in a multizone-capable zone 
     * [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability)
 
 3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
+
+
+
+
