@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks 
 
@@ -44,7 +44,7 @@ You must have the [**Manager** {{site.data.keyword.Bluemix_notm}} IAM service ro
 
 1. Save the following daemon set in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example daemon set changes the default maximum number of connections that are allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: kernel-optimization

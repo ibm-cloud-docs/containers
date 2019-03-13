@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-06"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -988,7 +988,7 @@ To access the storage from your app, you must mount the PVC to your app.
    {: tip}
 
    ```
-   apiVersion: apps/v1beta1
+   apiVersion: apps/v1
    kind: Deployment
    metadata:
      name: <deployment_name>

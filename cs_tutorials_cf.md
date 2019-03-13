@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-05"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks 
 
@@ -196,7 +196,7 @@ Deploy your app as a container in a Kubernetes cluster.
 1. Create a configuration YAML file that is named `cf-py.yaml` and update `<registry_namespace>` with the name of your private image registry. This configuration file defines a container deployment from the image that you created in the previous lesson and a service to expose the app to the public.
 
   ```
-  apiVersion: extensions/v1beta1
+  apiVersion: apps/v1
   kind: Deployment
   metadata:
     labels:
@@ -277,7 +277,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.11.8
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u2c.2x4.encrypted   normal   Ready    dal10   1.12.6
     ```
     {: screen}
 

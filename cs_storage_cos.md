@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-11"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks 
 
@@ -177,7 +177,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.11.8_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
       ```
       {: screen}
 
@@ -805,7 +805,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
 4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
     ```
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: <deployment_name>

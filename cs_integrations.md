@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-08"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks, helm
 
@@ -397,7 +397,7 @@ When you mount the secret as a volume to your pod, a file that is named `binding
 
 2.  Create a YAML file for your Kubernetes deployment and mount the secret as a volume to your pod.
     ```
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       labels:
@@ -556,7 +556,7 @@ You can add the service credentials and other key value pairs from your Kubernet
 
 3. Create a YAML file for your Kubernetes deployment and specify an environment variable that references the `binding` key.
    ```
-   apiVersion: apps/v1beta1
+   apiVersion: apps/v1
    kind: Deployment
    metadata:
      labels:

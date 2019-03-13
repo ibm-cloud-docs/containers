@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-12"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks
 
@@ -34,8 +34,8 @@ subcollection: containers
 
 **Supported Kubernetes versions**:
 *   Latest: 1.13.4
-*   Default: 1.11.8
-*   Other: 1.12.6
+*   Default: 1.12.6
+*   Other: 1.11.8
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.10
@@ -62,7 +62,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.11.8+IKS
+Server Version: v1.12.6+IKS
 ```
 {: screen}
 
@@ -345,8 +345,12 @@ The following table shows the actions that you must take after you update the Ku
 </thead>
 <tbody>
 <tr>
-<td>`apps/v1` Kubernetes API</td>
-<td>The `apps/v1` Kubernetes API is replacing the `extensions`, `apps/v1beta1`, and `apps/v1alpha` APIs. The Kubernetes project is deprecating and phasing out support for the previous APIs from the Kubernetes `apiserver` and the `kubectl` client.<br><br>You must update all your YAML `apiVersion` fields to use `apps/v1`. Also, review the [Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for changes related to `apps/v1`, such as the following.
+<td>APIs for Kubernetes</td>
+<td>The Kubernetes API replaces deprecated APIs as follows:
+<ul><li><strong>apps/v1</strong>: The `apps/v1` Kubernetes API replaces the `apps/v1beta1` and `apps/v1alpha` APIs. The `apps/v1` API also replaces the `extensions/v1beta1` API for `daemonset`, `deployment`, `replicaset`, and `statefulset` resources. The Kubernetes project is deprecating and phasing out support for the previous APIs from the Kubernetes `apiserver` and the `kubectl` client.</li>
+<li><strong>networking.k8s.io/v1</strong>: The `networking.k8s.io/v1` API replaces the `extensions/v1beta1` API for `networkpolicy` resources.</li>
+<li><strong>policy/v1beta1</strong>: The `policy/v1beta1` API replaces the `extensions/v1beta1` API for `podsecuritypolicy` resources.</li></ul>
+<br><br>Update all your YAML `apiVersion` fields to use the appropriate Kubernetes API before the deprecated APIs become unsupported. Also, review the [Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for changes related to `apps/v1`, such as the following.
 <ul><li>After creating a deployment, the `.spec.selector` field is immutable.</li>
 <li>The `.spec.rollbackTo` field is deprecated. Instead, use the `kubectl rollout undo` command.</li></ul></td>
 </tr>
@@ -594,7 +598,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 3.  Review the YAML. For example, if your cluster uses the following Kubernetes network policy to allow pods in the `default` namespace to access the cluster master via the `kubernetes` service cluster IP or the cluster master IP, then you must update the policy.
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -627,7 +631,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     {: tip}
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -934,7 +938,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 3.  Review the YAML. For example, if your cluster uses the following Kubernetes network policy to allow pods in the `default` namespace to access the cluster master via the `kubernetes` service cluster IP or the cluster master IP, then you must update the policy.
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress
@@ -967,7 +971,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     {: tip}
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
       name: all-master-egress

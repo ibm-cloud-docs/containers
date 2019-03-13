@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-12"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks 
 
@@ -641,7 +641,7 @@ To create a Calico policy to log denied traffic:
 1. Create or use an existing Kubernetes or Calico network policy that blocks or limits incoming traffic. For example, to control traffic between pods, you might use the following example Kubernetes policy named `access-nginx` that limits access to an NGINX app. Incoming traffic to pods that are labeled "run=nginx" is allowed only from pods with the "run=access" label. All other incoming traffic to the "run=nginx" app pods is blocked.
     ```
     kind: NetworkPolicy
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     metadata:
       name: access-nginx
     spec:

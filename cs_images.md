@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-11"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks
 
@@ -159,7 +159,7 @@ To deploy a container into the **default** namespace of your cluster, create a c
     To use a private image from a namespace in {{site.data.keyword.registryshort_notm}}:
 
     ```
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -532,7 +532,7 @@ To deploy a container into the **default** namespace of your cluster, create a c
     To use a private image from a namespace in {{site.data.keyword.registryshort_notm}}:
 
     ```
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
