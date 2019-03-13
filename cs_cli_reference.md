@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-12"
+lastupdated: "2019-03-13"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 

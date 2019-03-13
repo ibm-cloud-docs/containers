@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-06"
+lastupdated: "2019-03-13"
 
 ---
 
@@ -343,7 +343,7 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 {: shortdesc}
 
 <dl>
-<dt>Gateway</dt>
+<dt>`Gateway`</dt>
 <dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace, that acts as the ingress entry point for HTTP/TCP traffic for the BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
 </br></br>To see the configuration file for the BookInfo gateway, run the following command.
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
