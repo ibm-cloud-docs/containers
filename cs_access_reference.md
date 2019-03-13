@@ -690,6 +690,7 @@ The following table shows the Kubernetes resource permissions granted by each se
     <th id="rbac-role">Corresponding RBAC role, binding, and scope</th>
     <th id="kube-perm">Kubernetes resource permissions</th>
   </thead>
+  <tbody>
   <tr>
     <th id="service-role-reader" headers="service-role">Reader role</th>
     <td headers="service-role-reader rbac-role">When scoped to one namespace: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding</br><br>When scoped to all namespaces: <strong><code>view</code></strong> cluster role applied by the <strong><code>ibm-view</code></strong> role binding in each namespace of the cluster</td>
@@ -710,11 +711,7 @@ The following table shows the Kubernetes resource permissions granted by each se
   <tr>
     <th id="service-role-manager" headers="service-role">Manager role</th>
     <td headers="service-role-manager rbac-role">When scoped to one namespace: <strong><code>admin</code></strong> cluster role applied by the <strong><code>ibm-operate</code></strong> cluster role binding in only this namespace</br><br>When scoped to all namespaces: <strong><code>cluster-admin</code></strong> cluster role applied by the <strong><code>ibm-admin</code></strong> cluster role binding</td>
-    <td headers="service-role-manager kube-perm">When scoped to one namespace:
-      <ul><li>Read/write access to all resources in a namespace but not to the namespace itself</li>
-      <li>Create RBAC roles and role bindings in a namespace</li>
-      <li>Access the Kubernetes dashboard to view all resources in a namespace</li></ul>
-    </br>When scoped to all namespaces:
+    <td headers="service-role-manager kube-perm">
         <ul><li>Read/write access to all resources in every namespace</li>
         <li>Create RBAC roles and role bindings in a namespace or cluster roles and cluster role bindings in all namespaces</li>
         <li>Access the Kubernetes dashboard</li>
@@ -722,6 +719,7 @@ The following table shows the Kubernetes resource permissions granted by each se
         <li>Review cluster metrics such as with the <code>kubectl top pods</code>, <code>kubectl top nodes</code>, or <code>kubectl get nodes</code> commands</li></ul>
     </td>
   </tr>
+</tbody>
 </table>
 
 <br />
