@@ -47,7 +47,7 @@ You can create standard clusters in every supported {{site.data.keyword.containe
 | UK South | London |
 | US East (standard clusters only) | Washington DC |
 | US South | Dallas |
-{: caption="Table: Supported Kubernetes Service regions and corresponding IBM Cloud locations." caption-side="top"}
+{: caption="Supported Kubernetes Service regions and corresponding IBM Cloud locations." caption-side="top"}
 
 <br />
 
