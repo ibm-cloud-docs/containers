@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-14"
 
 ---
 
@@ -508,14 +508,10 @@ lastupdated: "2019-03-13"
 
 [Customizing Ingress with annotations](/docs/containers?topic=containers-ingress_annotation#ingress_annotation)
 * [General annotations](/docs/containers?topic=containers-ingress_annotation#general)
-  * [External services (proxy-external-service)](/docs/containers?topic=containers-ingress_annotation#proxy-external-service)
-  * [Location modifier (location-modifier)](/docs/containers?topic=containers-ingress_annotation#location-modifier)
+  * [Custom error actions (custom-errors, custom-error-actions)](/docs/containers?topic=containers-ingress_annotation#custom-errors)
   * [Location snippets (location-snippets)](/docs/containers?topic=containers-ingress_annotation#location-snippets)
   * [Private ALB routing (ALB-ID)](/docs/containers?topic=containers-ingress_annotation#alb-id)
-  * [Rewrite paths (rewrite-path)](/docs/containers?topic=containers-ingress_annotation#rewrite-path)
   * [Server snippets (server-snippets)](/docs/containers?topic=containers-ingress_annotation#server-snippets)
-  * [TCP ports (tcp-ports)](/docs/containers?topic=containers-ingress_annotation#tcp-ports)
-  * [Istio services (istio-services)](/docs/containers?topic=containers-ingress_annotation#istio-services)
 * [Connection annotations](/docs/containers?topic=containers-ingress_annotation#connection)
   * [Custom connect-timeouts and read-timeouts (proxy-connect-timeout, proxy-read-timeout)](/docs/containers?topic=containers-ingress_annotation#proxy-connect-timeout)
   * [Keepalive requests (keepalive-requests)](/docs/containers?topic=containers-ingress_annotation#keepalive-requests)
@@ -526,12 +522,16 @@ lastupdated: "2019-03-13"
   * [Upstream keepalive (upstream-keepalive)](/docs/containers?topic=containers-ingress_annotation#upstream-keepalive)
   * [Upstream maxfails (upstream-max-fails)](/docs/containers?topic=containers-ingress_annotation#upstream-max-fails)
 * [HTTPS and TLS/SSL authentication annotations](/docs/containers?topic=containers-ingress_annotation#https-auth)
-  * [App ID Authentication (appid-auth)](/docs/containers?topic=containers-ingress_annotation#appid-auth)
   * [Custom HTTP and HTTPS ports (custom-port)](/docs/containers?topic=containers-ingress_annotation#custom-port)
   * [HTTP redirects to HTTPS (redirect-to-https)](/docs/containers?topic=containers-ingress_annotation#redirect-to-https)
   * [HTTP Strict Transport Security (hsts)](/docs/containers?topic=containers-ingress_annotation#hsts)
   * [Mutual authentication (mutual-auth)](/docs/containers?topic=containers-ingress_annotation#mutual-auth)
   * [SSL services support (ssl-services)](/docs/containers?topic=containers-ingress_annotation#ssl-services)
+  * [TCP ports (tcp-ports)](/docs/containers?topic=containers-ingress_annotation#tcp-ports)
+* [Path routing annotations](/docs/containers?topic=containers-ingress_annotation#path-routing)
+  * [External services (proxy-external-service)](/docs/containers?topic=containers-ingress_annotation#proxy-external-service)
+  * [Location modifier (location-modifier)](/docs/containers?topic=containers-ingress_annotation#location-modifier)
+  * [Rewrite paths (rewrite-path)](/docs/containers?topic=containers-ingress_annotation#rewrite-path)
 * [Proxy buffer annotations](/docs/containers?topic=containers-ingress_annotation#proxy-buffer)
   * [Large client header buffers (large-client-header-buffers)](/docs/containers?topic=containers-ingress_annotation#large-client-header-buffers)
   * [Client response data buffering (proxy-buffering)](/docs/containers?topic=containers-ingress_annotation#proxy-buffering)
@@ -546,6 +546,8 @@ lastupdated: "2019-03-13"
 * [Service limit annotations](/docs/containers?topic=containers-ingress_annotation#service-limit)
   * [Global rate limits (global-rate-limit)](/docs/containers?topic=containers-ingress_annotation#global-rate-limit)
   * [Service rate limits (service-rate-limit)](/docs/containers?topic=containers-ingress_annotation#service-rate-limit)
+* [User authentication annotations](/docs/containers?topic=containers-ingress_annotation#user-authentication)
+  * [App ID Authentication (appid-auth)](/docs/containers?topic=containers-ingress_annotation#appid-auth)
 
 [Logging and monitoring Ingress](/docs/containers?topic=containers-ingress_health#ingress_health)
 * [Viewing Ingress logs](/docs/containers?topic=containers-ingress_health#ingress_logs)

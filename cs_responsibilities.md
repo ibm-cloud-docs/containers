@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-14"
 
 keywords: kubernetes, iks
 
@@ -38,6 +38,7 @@ Review the responsibilities that you share with IBM to manage your clusters.
 
 - Deploying the master, worker nodes, and management components within the cluster, such as Ingress application load balancer, at cluster creation time
 - Providing the security updates, monitoring, isolation, and recovery of the Kubernetes master for the cluster
+- Making version updates and security patches available for you to apply to your cluster worker nodes
 - Monitoring the health of the worker nodes and providing automation for the update and recovery of those worker nodes
 - Performing automation tasks against your infrastructure account, including adding worker nodes, removing worker nodes, and creating a default subnet
 - Managing, updating, and recovering operational components within the cluster, such as the Ingress application load balancer and the storage plug-in
