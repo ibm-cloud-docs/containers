@@ -780,10 +780,18 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
 2. Connect to your private cluster by using the {{site.data.keyword.Bluemix_notm}} infrastructure VPN tunnel that you set up. 
 3. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following `.yaml` file from the [{{site.data.keyword.Bluemix_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml). **Note**: To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
-    ```
-    kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml
-    ```
-    {: pre}
+    1. [Get the Kubernetes service account and cluster role binding YAML files ![External link icon](../icons/launch-glyph.svg "External link icon")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml). 
+    
+    2. Create the Kubernetes resources in your cluster. 
+       ```
+       kubectl apply -f service-account.yaml
+       ```
+       {: pre}
+       
+       ```
+       kubectl apply -f cluster-role-binding.yaml
+       ```
+       {: pre}
 
 4. Install Tiller in your private cluster. **Note:** When you initiate the Tiller installation, Helm tries to pull the image from the public Google Container Registry. Because your cluster does not allow public network connectivity, the setup of Tiller fails. 
    ```
