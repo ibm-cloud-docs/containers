@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-14"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -152,17 +152,23 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     Before continuing to the next step, the worker nodes must be ready. The **State** changes to `normal` and the **Status** is `Ready`.
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone   Version
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone     Version
     prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.12.6
     ```
     {: screen}
 
 5.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes configmap is created for you that includes all available portable public IP addresses that you can use. If no Ingress ALBs exist in the zone where the subnet's VLAN is located, one portable public and one portable private IP address is automatically used to create the public and private ALBs for that zone. You can use all other portable public and private IP addresses from the subnet to create load balancer services for your apps.
 
-    ```
-    ibmcloud ks cluster-subnet-add mycluster 807861
-    ```
-    {: pre}
+  ```
+  ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
+  ```
+  {: pre}
+
+  Example command:
+  ```
+  ibmcloud ks cluster-subnet-add --cluster mycluster --subnet-id 807861
+  ```
+  {: screen}
 
 6. **Important**: To enable communication between workers that are on different subnets on the same VLAN, you must [enable routing between subnets on the same VLAN](#subnet-routing).
 
