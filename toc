@@ -4,11 +4,10 @@
 {: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
 IBM Cloud Kubernetes Service
 
-    container_index.md
     cs_cli_reference.md
 
     {: .navgroup id="learn"}
-    getting-started.md
+    container_index.md
     
 
     {: .topicgroup}
