@@ -777,7 +777,7 @@ ibmcloud ks messages
 Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
 {: shortdesc}
 
-#### ibmcloud ks cluster-addon-disable istio
+#### ibmcloud ks cluster-addon-disable <ph class="ignoreSpelling">istio</ph>
 {: #cs_cluster_addon_disable_istio}
 
 Disable the managed Istio add-on. Removes all Istio core components from the cluster, including Prometheus.
@@ -862,7 +862,7 @@ ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster CLUSTER
   ```
   {: pre}
 
-#### ibmcloud ks cluster-addon-disable knative
+#### ibmcloud ks cluster-addon-disable <ph class="ignoreSpelling">knative</ph>
 {: #cs_cluster_addon_disable_knative}
 
 Disable the managed Knative add-on to remove the Knative serverless framework from the cluster.
@@ -895,7 +895,7 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
 {: shortdesc}
 
-#### ibmcloud ks cluster-addon-enable istio
+#### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">istio</ph>
 {: #cs_cluster_addon_enable_istio}
 
 Enable the managed [Istio add-on](/docs/containers?topic=containers-istio). Installs the core components of Istio version 1.0.5, including Prometheus.
@@ -981,7 +981,7 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
   ```
   {: pre}
 
-#### ibmcloud ks cluster-addon-enable knative
+#### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">knative</ph>
 {: #cs_cluster_addon_enable_knative}
 
 Enable the managed [Knative add-on](/docs/containers?topic=containers-knative_tutorial) to install the Knative serverless framework.
@@ -2658,7 +2658,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 
 
 
-### ibmcloud ks vlans
+### ibmcloud ks <ph class="ignoreSpelling">vlans</ph>
 {: #cs_vlans}
 
 List the public and private VLANs that are available for a zone in your IBM Cloud infrastructure (SoftLayer) account. To list available VLANs, you must have a paid account.
