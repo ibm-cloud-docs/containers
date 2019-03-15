@@ -4,6 +4,8 @@
 {: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-container_index" path="containers"}
 IBM Cloud Kubernetes Service
 
+    container_index.md
+
     {: .navgroup id="learn"}
     container_index.md
     
