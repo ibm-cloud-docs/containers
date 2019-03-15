@@ -1,14 +1,14 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-container_index" path="containers"}
+{: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
 IBM Cloud Kubernetes Service
 
     container_index.md
     cs_cli_reference.md
 
     {: .navgroup id="learn"}
-    container_index.md
+    getting-started.md
     
 
     {: .topicgroup}
