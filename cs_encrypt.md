@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks 
 
@@ -112,7 +112,7 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
 
 3.  [Create a root key](/docs/services/key-protect?topic=key-protect-create-root-keys#create-root-keys). By default, the root key is created without an expiration date.
 
-    Need to set an expiration date to comply with internal security policies? [Create the root key by using the API](/docs/services/key-protect?topic=key-protect-create-root-keys#create-root-key-api) and include the `expirationDate` parameter. **Important**: Before your root key expires, you must repeat these steps to update your cluster to use a new root key. Otherwise, you cannot unencrypt your secrets.
+    Need to set an expiration date to comply with internal security policies? [Create the root key by using the API](/docs/services/key-protect?topic=key-protect-create-root-keys#create-root-key-api) and include the `expirationDate` parameter. **Important**: Before your root key expires, you must repeat these steps to update your cluster to use a new root key. Otherwise, you cannot decrypt your secrets.
     {: tip}
 
 4.  Note the [root key **ID**](/docs/services/key-protect?topic=key-protect-view-keys#view-keys-gui).

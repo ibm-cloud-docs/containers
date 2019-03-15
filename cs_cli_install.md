@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -471,30 +471,30 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} user name and password</td>
-    <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>username: <em>&lt;username&gt;</em></li>
-    <li>password: <em>&lt;password&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li></ul>
+    <td><ul><li>`grant_type: password`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`username: <em>&lt;username&gt;</em>`</li>
+    <li>`password: <em>&lt;password&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:`</li></ul>
     <strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} API keys</td>
-    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:apikey</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>apikey: <em>&lt;api_key&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li></ul>
+    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:``</li></ul>
     <strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} one-time passcode</td>
-    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:passcode</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>passcode: <em>&lt;passcode&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li></ul>
+    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`passcode: <em>&lt;passcode&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:`</li></ul>
     <strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
     </tr>
     </tbody>
@@ -534,9 +534,9 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     <tbody>
   	<tr>
   		<td>Headers</td>
-  		<td><ul><li>Content-Type: application/json</li>
-      <li>Authorization: bearer &lt;iam_token&gt;</li>
-      <li>Accept: application/json</li></ul></td>
+  		<td><ul><li>`Content-Type: application/json`</li>
+      <li>`Authorization: bearer &lt;iam_token&gt;`</li>
+      <li>`Accept: application/json`</li></ul></td>
   	</tr>
     </tbody>
     </table>
@@ -590,38 +590,38 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     <tbody>
     <tr>
     <td>Header</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</p></li></ul>
+    <td><ul><li>`Content-Type:application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`<p><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} user name and password</td>
-    <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>username: <em>&lt;username&gt;</em></li>
-    <li>password: <em>&lt;password&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul>
+    <td><ul><li>`grant_type: password`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`username: <em>&lt;username&gt;</em>`</li>
+    <li>`password: <em>&lt;password&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:``</li>
+    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul>
     <strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} API keys</td>
-    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:apikey</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>apikey: <em>&lt;api_key&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul>
+    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:``</li>
+    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul>
       <strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} one-time passcode</td>
-    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:passcode</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>passcode: <em>&lt;passcode&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
+    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`passcode: <em>&lt;passcode&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:`</li>
+    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
     </tr>
     </tbody>
     </table>
@@ -660,8 +660,8 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
      <tbody>
      <tr>
      <td>Header</td>
-     <td><ul><li>Authorization: bearer <em>&lt;iam_token&gt;</em></li>
-     <li>X-Auth-Refresh-Token: <em>&lt;refresh_token&gt;</em></li></ul></td>
+     <td><ul><li>`Authorization: bearer <em>&lt;iam_token&gt;</em>`</li>
+     <li>`X-Auth-Refresh-Token: <em>&lt;refresh_token&gt;</em>`</li></ul></td>
      </tr>
      </tbody>
      </table>
@@ -704,25 +704,25 @@ Use the following steps if you want to create an {{site.data.keyword.Bluemix_not
     <tbody>
     <tr>
     <td>Header</td>
-    <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
-      <li>Authorization: Basic Yng6Yng=</br></br><strong>Note:</strong> <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</li></ul></td>
+    <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li>
+      <li>`Authorization: Basic Yng6Yng=`</br></br><strong>Note:</strong> <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</li></ul></td>
     </tr>
     <tr>
     <td>Body when using the refresh token</td>
-    <td><ul><li>grant_type: refresh_token</li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-    <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
+    <td><ul><li>`grant_type: refresh_token`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`refresh_token: <em>&lt;iam_refresh_token&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+    <li>`uaa_client_secret:`</li>
+    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
     </tr>
     <tr>
       <td>Body when using the {{site.data.keyword.Bluemix_notm}} API key</td>
-      <td><ul><li>grant_type: <code>urn:ibm:params:oauth:grant-type:apikey</code></li>
-    <li>response_type: cloud_iam uaa</li>
-    <li>apikey: <em>&lt;api_key&gt;</em></li>
-    <li>uaa_client_ID: cf</li>
-        <li>uaa_client_secret:</li></ul><strong>Note:</strong> Add the <code>uaa_client_secret</code> key with no value specified.</td>
+      <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
+    <li>`response_type: cloud_iam uaa`</li>
+    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`uaa_client_ID: cf`</li>
+        <li>`uaa_client_secret:`</li></ul><strong>Note:</strong> Add the <code>uaa_client_secret</code> key with no value specified.</td>
     </tr>
     </tbody>
     </table>

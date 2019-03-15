@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks
 
@@ -474,9 +474,9 @@ This task requires [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}}
    ```
    {: pre}
 
-2. Check your YAML configuration file for your PVC and pod to verify that you used the same namespace. If you want to deploy a pod in a different namespace than the one where your secret exists, [create another secret](/docs/containers?topic=containers-object_storage#create_cos_secret) in the desired namespace.
+2. Check your YAML configuration file for your PVC and pod to verify that you used the same namespace. If you want to deploy a pod in a different namespace than the one where your secret exists, [create another secret](/docs/containers?topic=containers-object_storage#create_cos_secret) in that namespace.
 
-3. Create the PVC or deploy the pod in the desired namespace.
+3. Create the PVC or deploy the pod in the appropriate namespace.
 
 <br />
 

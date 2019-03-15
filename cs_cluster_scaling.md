@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks, node scaling
 
@@ -464,7 +464,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     <tr>
     <td>`image.repository` parameter</td>
     <td>Specify the cluster autoscaler Docker image to use.</td>
-    <td>registry.bluemix.net/ibm/ibmcloud-cluster-autoscaler</td>
+    <td>`registry.bluemix.net/ibm/ibmcloud-cluster-autoscaler`</td>
     </tr>
     <tr>
     <td>`image.pullPolicy` parameter</td>
@@ -624,7 +624,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-2.  Optional: Download the latest Helm chart to your local machine. Then, unzip the package and review the `release.md` file to find the latest release information.
+2.  Optional: Download the latest Helm chart to your local machine. Then, extract the package and review the `release.md` file to find the latest release information.
     ```
     helm fetch ibm/ibm-iks-cluster-autoscaler
     ```

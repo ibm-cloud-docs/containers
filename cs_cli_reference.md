@@ -1919,7 +1919,7 @@ ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
    <dt><code>--size <em>SIZE</em></code></dt>
    <dd>The number of subnet IP addresses. This value is required. Possible values are 8, 16, 32, or 64.</dd>
 
-   <dd>The VLAN in which to create the subnet. This value is required. To list available VLANS, use the `ibmcloud ks vlans <zone>` [command](#cs_vlans). The subnet is provisioned in the same zone that the VLAN is in.</dd>
+   <dd>The VLAN in which to create the subnet. This value is required. To list available VLANs, use the `ibmcloud ks vlans <zone>` [command](#cs_vlans). The subnet is provisioned in the same zone that the VLAN is in.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2680,7 +2680,7 @@ ibmcloud ks vlans --zone ZONE [--all] [--json] [-s]
    <dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
 
    <dt><code>--all</code></dt>
-   <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANS that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
+   <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANs that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
 
    <dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -3122,7 +3122,7 @@ This example filters out all logs that are forwarded from containers with the na
   ```
   {: pre}
 
-This example filters out all of the logs that are forwarded, at an info level or less, from a specific cluster. The output is returned as JSON.
+This example filters out all of the logs that are forwarded, at an `info` level or less, from a specific cluster. The output is returned as JSON.
 
   ```
   ibmcloud ks logging-filter-create --cluster example-cluster --type all --level info --json
@@ -3274,7 +3274,7 @@ This example filters out all logs that are forwarded from containers with the na
   ```
   {: pre}
 
-This example filters out all of the logs that are forwarded, at an info level or less, from a specific cluster. The output is returned as JSON.
+This example filters out all of the logs that are forwarded, at an `info` level or less, from a specific cluster. The output is returned as JSON.
 
   ```
   ibmcloud ks logging-filter-update --cluster example-cluster --id 274885 --type all --level info --json
@@ -3682,7 +3682,7 @@ ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [-
 ### ibmcloud ks worker-reboot
 {: #cs_worker_reboot}
 
-Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure (SoftLayer) is `Powered Off` and you need to turn on the worker node. A reboot clears temporary directories, but does not clear the entire filesystem or reformat the disks.
+Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure (SoftLayer) is `Powered Off` and you need to turn on the worker node. A reboot clears temporary directories, but does not clear the entire file system or reformat the disks.
 {: shortdesc}
 
 ```

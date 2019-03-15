@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-14"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -332,7 +332,7 @@ Start by deploying your apps and creating Kubernetes services to expose them.
           <tbody>
           <tr>
           <td><code>selector</code></td>
-          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs. To target your pods and include them in the service load balancing, ensure that the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> are the same as the key/value pair in the <code>spec.template.metadata.labels</code> section of your deployment yaml.</td>
+          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs. To target your pods and include them in the service load balancing, ensure that the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> are the same as the key/value pair in the <code>spec.template.metadata.labels</code> section of your deployment YAML.</td>
            </tr>
            <tr>
            <td><code>port</code></td>
@@ -598,7 +598,7 @@ https://<domain>/<app2_path>
 ```
 {: codeblock}
 
-If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
+If you use a wildcard domain to expose apps in different namespaces, access those apps with their own subdomains.
 
 ```
 http://<subdomain1>.<domain>/<app1_path>
@@ -763,7 +763,7 @@ Start by deploying your apps and creating Kubernetes services to expose them.
           <tbody>
           <tr>
           <td><code>selector</code></td>
-          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs. To target your pods and include them in the service load balancing, ensure that the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> are the same as the key/value pair in the <code>spec.template.metadata.labels</code> section of your deployment yaml.</td>
+          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs. To target your pods and include them in the service load balancing, ensure that the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> are the same as the key/value pair in the <code>spec.template.metadata.labels</code> section of your deployment YAML.</td>
            </tr>
            <tr>
            <td><code>port</code></td>
@@ -1099,7 +1099,7 @@ https://<domain>/<app2_path>
 ```
 {: codeblock}
 
-If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
+If you use a wildcard domain to expose apps in different namespaces, access those apps with their own subdomains.
 
 ```
 http://<subdomain1>.<domain>/<app1_path>
@@ -1384,7 +1384,7 @@ By default, the Ingress ALB logs each request as it arrives. If you have an envi
 ### Changing the number or duration of keepalive connections
 {: #keepalive_time}
 
-Keepalive connections can have a major impact on performance by reducing the CPU and network overhead needed to open and close connections. To optimize the performance of your ALBs, you can change the maximum number of keepalive connections between the ALB and the client and how long the keepalive connections can last.
+Keepalive connections can have a major impact on performance by reducing the CPU and network usage that is needed to open and close connections. To optimize the performance of your ALBs, you can change the maximum number of keepalive connections between the ALB and the client and how long the keepalive connections can last.
 {: shortdesc}
 
 1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.

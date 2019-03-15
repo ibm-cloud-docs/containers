@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks
 
@@ -70,7 +70,7 @@ Secure patient data leads to happier patients.
 
 **Solution model**
 
-On-demand compute, storage, and IO services run in the public cloud with secure access to on-premises enterprise assets. Implement a CI/CD process and other parts of the IBM Garage Method to dramatically shorten delivery cycles.
+On-demand compute, storage, and I/O services run in the public cloud with secure access to on-premises enterprise assets. Implement a CI/CD process and other parts of the IBM Garage Method to dramatically shorten delivery cycles.
 
 **Step 1: Secure the compute platform**
 * Apps that manage highly sensitive patient data can be rehosted on {{site.data.keyword.containerlong_notm}} that runs on Bare Metal for Trusted Compute.
@@ -189,7 +189,7 @@ Technical solution:
 
 **Step 1: Containerize apps by using microservices**
 * Use the Node.js starter kit from IBM to jump-start development.
-* Architect apps into a set of cooperative microservices  within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
+* Structure apps into a set of cooperative microservices within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
 * Deploy research apps to containers in {{site.data.keyword.containerlong_notm}}.
 * Provide standardized DevOps dashboards through Kubernetes.
 * Enable on-demand scaling of compute for batch and other research workloads that run infrequently.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -238,7 +238,7 @@ To install Portworx:
     ```
     {: screen}
 
-3. Retrieve the etcd endpoint, user name and password of the Portworx database that you set up ealier. Depending on the type of database service that you used, see [{{site.data.keyword.composeForEtcd}}](#etcd_credentials) or [Databases for etcd](#databases_credentials).
+3. Retrieve the etcd endpoint, user name and password of the Portworx database that you set up earlier. Depending on the type of database service that you used, see [{{site.data.keyword.composeForEtcd}}](#etcd_credentials) or [Databases for etcd](#databases_credentials).
 
 4. Download the Portworx Helm chart.
    ```
@@ -280,7 +280,7 @@ To install Portworx:
    etcdEndPoint: "etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"
                                          # the default value is empty since it requires to be explicity set using either the --set option of -f values.yaml.
    clusterName: <cluster_name>                # This is the default. please change it to your cluster name.
-   usefileSystemDrive: true             # true/false Instructs PX to use an unmounted Drive even if it has a filesystem.
+   usefileSystemDrive: true             # true/false Instructs PX to use an unmounted Drive even if it has a file system.
    usedrivesAndPartitions: true          # Defaults to false. Change to true and PX will use unmounted drives and partitions.
    secretType: none                      # Defaults to None, but can be AWS / KVDB / Vault.
    drives: none                          # NOTE: This is a ";" seperated list of drives. For eg: "/dev/sda;/dev/sdb;/dev/sdc" Defaults to use -A switch.
@@ -478,7 +478,7 @@ To install Portworx:
 
    3. Verify that each storage node is listed with the correct amount of raw block storage by reviewing the **Capacity** column in the **Cluster Summary** section of your CLI output.
 
-   4. Review the Portworx IO classification that was assigned to the disks that are part of the Portworx cluster. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on how fast the network is that your worker node is connected to and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes.
+   4. Review the Portworx I/O classification that was assigned to the disks that are part of the Portworx cluster. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on how fast the network is that your worker node is connected to and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes.
 
       ```
       kubectl exec -it <portworx_pod> -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status
@@ -896,7 +896,7 @@ To request storage from your Portworx cluster and use it in your app, you must s
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>Enter the Portworx IO priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes. </br><br> When you create a PVC with a storage class, the number of replicas that you specify in <code>parameters/repl</code> takes precedence over the IO priority. For example, when you specify 3 replicas that you want to store on high speed disks, but you only have one worker node with a high speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks. </td>
+   <td>Enter the Portworx I/O priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes. </br><br> When you create a PVC with a storage class, the number of replicas that you specify in <code>parameters/repl</code> takes precedence over the I/O priority. For example, when you specify 3 replicas that you want to store on high speed disks, but you only have one worker node with a high speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks. </td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>

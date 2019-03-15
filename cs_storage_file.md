@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks 
 
@@ -1119,7 +1119,7 @@ To change the default NFS version, you can either create a new storage class to 
 To apply the latest security updates and for a better performance, use the default NFS version and do not change to an older NFS version.
 {: important}
 
-**To create a customized storage class with the desired NFS version:**
+**To create a customized storage class with a specific NFS version:**
 1. Create a [customized storage class](#nfs_version_class) with the NFS version that you want to provision.
 2. Create the storage class in your cluster.
    ```
@@ -1272,7 +1272,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Pricing</td>
-<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
+<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
 </tr>
 </tbody>
 </table>
@@ -1318,7 +1318,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Pricing</td>
-<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
+<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
 </tr>
 </tbody>
 </table>
@@ -1363,7 +1363,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Pricing</td>
-<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
+<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
 </tr>
 </tbody>
 </table>
@@ -1404,7 +1404,7 @@ Review the following backup and restore options for your file storage:
 </tr>
 <tr>
 <td>Pricing</td>
-<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
+<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</td>
 </tr>
 </tbody>
 </table>

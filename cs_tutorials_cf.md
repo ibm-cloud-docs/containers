@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks 
 
@@ -91,7 +91,7 @@ Get your code ready to go. Don't have any code yet? You can download starter cod
 
     c. From step 1 in the console instructions, click **DOWNLOAD STARTER CODE**.
 
-    d. Extract the .zip file and save its contents to your `cf-py` directory.
+    d. Extract the `.zip` file and save its contents to your `cf-py` directory.
 
 Your app code is ready to be containerized!
 
@@ -292,4 +292,4 @@ Deploy your app as a container in a Kubernetes cluster.
 
 6. In the **Workloads** tab, you can see the resources that you created.
 
-Congratulations! Your app is deployed in a container!
+Good job! Your app is deployed in a container!

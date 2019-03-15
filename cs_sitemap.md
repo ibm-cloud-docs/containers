@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-14"
+lastupdated: "2019-03-15"
 
 ---
 
@@ -57,12 +57,12 @@ lastupdated: "2019-03-14"
 * [Traditional grocer increases customer traffic and sales with digital insights](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)
 
 [Transportation use cases for {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_uc_transport#cs_uc_transport)
-* [Shipping company increases availability of worldwide systems for partner ecosystem](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)
+* [Shipping company increases availability of worldwide systems for business partner ecosystem](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)
 * [Airline delivers innovative Human Resources (HR) benefits site in under 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline)
 
 [Government use cases for {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_uc_gov#cs_uc_gov)
 * [Regional government improves collaboration and velocity with community Developers who combine public-private data](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)
-* [Large public port secures exchange of port data and ship manifests that connect public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)
+* [Large public port secures exchange of port data and shipping manifests that connect public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)
 
 ## Your cluster strategy
 
@@ -151,7 +151,7 @@ lastupdated: "2019-03-14"
 [Setting up the CLI and API](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
 * [Installing the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)
 * [Running the CLI in a container on your computer](/docs/containers?topic=containers-cs_cli_install#cs_cli_container)
-* [Configuring the CLI to run kubectl](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Configuring the CLI to run `kubectl`](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
 * [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_cli_install#cs_api)
@@ -242,7 +242,7 @@ lastupdated: "2019-03-14"
 * [Understanding when to use secrets](/docs/containers?topic=containers-encryption#secrets)
   * [Adding a service to a cluster](/docs/containers?topic=containers-encryption#secrets_service)
   * [Encrypting traffic to your apps with TLS secrets](/docs/containers?topic=containers-encryption#secrets_tls)
-  * [Accessing your registry with credentials stored in a Kubernetes imagePullSecret](/docs/containers?topic=containers-encryption#imagepullsecret)
+  * [Accessing your registry with credentials stored in a Kubernetes `imagePullSecret`](/docs/containers?topic=containers-encryption#imagepullsecret)
 * [Encrypting the Kubernetes master's local disk and secrets by using Key Protect (beta)](/docs/containers?topic=containers-encryption#keyprotect)
 * [Encrypting data by using {{site.data.keyword.datashield_full_notm}} (Beta)](/docs/containers?topic=containers-encryption#datashield)
 
@@ -301,8 +301,8 @@ lastupdated: "2019-03-14"
       * [Optional: Connect to an on-premises database by using the gateway appliance](/docs/containers?topic=containers-cs_network_cluster#private_vlan_vpn)
 
 [Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall#firewall)
-* [Running kubectl commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_kubectl)
-* [Running calicoctl commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_calicoctl)
+* [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_kubectl)
+* [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 * [Allowing the cluster to access infrastructure resources and other services](/docs/containers?topic=containers-firewall#firewall_outbound)
 * [Allowing the cluster to access resources over a private firewall](/docs/containers?topic=containers-firewall#firewall_private)
 * [Accessing NodePort, load balancer, and Ingress services from outside the cluster](/docs/containers?topic=containers-firewall#firewall_inbound)
@@ -518,13 +518,13 @@ lastupdated: "2019-03-14"
   * [Keepalive timeout (keepalive-timeout)](/docs/containers?topic=containers-ingress_annotation#keepalive-timeout)
   * [Proxy next upstream (proxy-next-upstream-config)](/docs/containers?topic=containers-ingress_annotation#proxy-next-upstream-config)
   * [Session-affinity with cookies (sticky-cookie-services)](/docs/containers?topic=containers-ingress_annotation#sticky-cookie-services)
-  * [Upstream failtimeout (upstream-fail-timeout)](/docs/containers?topic=containers-ingress_annotation#upstream-fail-timeout)
-  * [Upstream keepalive (upstream-keepalive)](/docs/containers?topic=containers-ingress_annotation#upstream-keepalive)
-  * [Upstream maxfails (upstream-max-fails)](/docs/containers?topic=containers-ingress_annotation#upstream-max-fails)
+  * [Upstream fail timeout (upstream-fail-timeout)](/docs/containers?topic=containers-ingress_annotation#upstream-fail-timeout)
+  * [Upstream keep alive (upstream-keepalive)](/docs/containers?topic=containers-ingress_annotation#upstream-keepalive)
+  * [Upstream max fails (upstream-max-fails)](/docs/containers?topic=containers-ingress_annotation#upstream-max-fails)
 * [HTTPS and TLS/SSL authentication annotations](/docs/containers?topic=containers-ingress_annotation#https-auth)
   * [Custom HTTP and HTTPS ports (custom-port)](/docs/containers?topic=containers-ingress_annotation#custom-port)
   * [HTTP redirects to HTTPS (redirect-to-https)](/docs/containers?topic=containers-ingress_annotation#redirect-to-https)
-  * [HTTP Strict Transport Security (hsts)](/docs/containers?topic=containers-ingress_annotation#hsts)
+  * [HTTP Strict Transport Security (`hsts`)](/docs/containers?topic=containers-ingress_annotation#hsts)
   * [Mutual authentication (mutual-auth)](/docs/containers?topic=containers-ingress_annotation#mutual-auth)
   * [SSL services support (ssl-services)](/docs/containers?topic=containers-ingress_annotation#ssl-services)
   * [TCP ports (tcp-ports)](/docs/containers?topic=containers-ingress_annotation#tcp-ports)
@@ -927,7 +927,7 @@ lastupdated: "2019-03-14"
 ## Troubleshooting clusters
 
 [Debugging your cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot)
-* [Running tests with the {{site.data.keyword.containerlong_notm}} Diagnosticsand Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
+* [Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
 * [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters)
 * [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes)
 * [Common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot#common_worker_nodes_issues)
@@ -942,7 +942,7 @@ lastupdated: "2019-03-14"
 * [Accessing your worker node with SSH fails](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_ssh_worker)
 * [Bare metal instance ID is inconsistent with worker records](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)
 * [Unable to modify or delete infrastructure in an orphaned cluster](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)
-* [kubectl commands time out](/docs/containers?topic=containers-cs_troubleshoot_clusters#exec_logs_fail)
+* [`kubectl` commands time out](/docs/containers?topic=containers-cs_troubleshoot_clusters#exec_logs_fail)
 * [Binding a service to a cluster results in same name error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_services)
 * [Binding a service to a cluster results in service not found error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_not_found_services)
 * [Binding a service to a cluster results in service does not support service keys error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_service_keys)

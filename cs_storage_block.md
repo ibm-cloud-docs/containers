@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks 
 
@@ -192,7 +192,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ```
    {: pre}
 
-2. Optional: Download the latest Helm chart to your local machine. Then, unzip the package and review the `release.md` file to find the latest release information.
+2. Optional: Download the latest Helm chart to your local machine. Then, extract the package and review the `release.md` file to find the latest release information.
    ```
    helm fetch ibm/ibmcloud-block-storage-plugin
    ```
@@ -1105,7 +1105,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
      </tr>
      <tr>
      <td style="text-align:left"><code>spec.podManagementPolicy</code></td>
-     <td style="text-align:left">Enter the pod management policy that you want to use for your stateful set. Choose between the following options: <ul><li><strong>OrderedReady: </strong>With this option, stateful set replicas are deployed one after another. For example, if you specified 3 replicas, then Kubernetes creates the PVC for your first replica, waits until the PVC is bound, deploys the stateful set replica, and mounts the PVC to the replica. After the deployment is finished, the second replica is deployed. For more information about this option, see [`OrderedReady` Pod Management ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel: </strong>With this option, the deployment of all stateful set replicas is started at the same time. If your app supports parallel deployment of replicas, then use this option to save deployment time for your PVCs and stateful set replicas. </li></ul></td>
+     <td style="text-align:left">Enter the pod management policy that you want to use for your stateful set. Choose between the following options: <ul><li><strong>`OrderedReady`: </strong>With this option, stateful set replicas are deployed one after another. For example, if you specified 3 replicas, then Kubernetes creates the PVC for your first replica, waits until the PVC is bound, deploys the stateful set replica, and mounts the PVC to the replica. After the deployment is finished, the second replica is deployed. For more information about this option, see [`OrderedReady` Pod Management ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel: </strong>With this option, the deployment of all stateful set replicas is started at the same time. If your app supports parallel deployment of replicas, then use this option to save deployment time for your PVCs and stateful set replicas. </li></ul></td>
      </tr>
      <tr>
      <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
@@ -1232,7 +1232,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    ```
    {: screen}
 
-2. Retrieve the **VolumeID** and the **StorageType** of the physical file storage that is associated with your PVC by listing the details of the PV that your PVC is bound to. Replace `<pv_name>` with the name of the PV that you retrieved in the previous step. The storage type is shown in the **Labels** section, and the volume ID is shown in the **Source** > **Options** section of your CLI output.
+2. Retrieve the **`VolumeID`** and the **`StorageType`** of the physical file storage that is associated with your PVC by listing the details of the PV that your PVC is bound to. Replace `<pv_name>` with the name of the PV that you retrieved in the previous step. The storage type is shown in the **Labels** section, and the volume ID is shown in the **Source** > **Options** section of your CLI output.
    ```
    kubectl describe pv <pv_name>
    ```
@@ -1443,7 +1443,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Pricing</td>
-<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
+<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
 </tr>
 </tbody>
 </table>
@@ -1489,7 +1489,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Pricing</td>
-<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
+<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
 </tr>
 </tbody>
 </table>
@@ -1534,7 +1534,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Pricing</td>
-<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
+<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
 </tr>
 </tbody>
 </table>
@@ -1575,7 +1575,7 @@ To make your data even more highly available and protect your app from a zone fa
 </tr>
 <tr>
 <td>Pricing</td>
-<td>[Pricing info ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
+<td>[Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</td>
 </tr>
 </tbody>
 </table>

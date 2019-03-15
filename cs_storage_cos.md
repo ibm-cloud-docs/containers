@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks 
 
@@ -450,7 +450,7 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
    ```
    {: pre}
 
-3. Download the latest {{site.data.keyword.cos_full_notm}} Helm chart to your local machine and unzip the package to review the `release.md` file to find the latest release information.
+3. Download the latest {{site.data.keyword.cos_full_notm}} Helm chart to your local machine and extract the package to review the `release.md` file to find the latest release information.
    ```
    helm fetch --untar ibm/ibmcloud-object-storage-plugin
    ```

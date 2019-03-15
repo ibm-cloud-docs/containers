@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks, logmet, logs, metrics 
 
@@ -421,10 +421,10 @@ You can view the logs that you forwarded to {{site.data.keyword.loganalysislong_
 If you used the default values to create your configuration file, then your logs can be found in the account, or org and space, in which the cluster was created. If you specified an org and space in your configuration file, then you can find your logs in that space. For more information about logging, see [Logging for {{site.data.keyword.containerlong_notm}}](/docs/services/CloudLogAnalysis/containers?topic=cloudloganalysis-containers_kubernetes#containers_kubernetes).
 
 To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you configured log forwarding for the cluster.
-- US-South and US-East: https://logging.ng.bluemix.net
-- UK-South: https://logging.eu-gb.bluemix.net
-- EU-Central: https://logging.eu-fra.bluemix.net
-- AP-South and AP-North: https://logging.au-syd.bluemix.net
+- US-South and US-East: `https://logging.ng.bluemix.net`
+- UK-South: `https://logging.eu-gb.bluemix.net`
+- EU-Central: `https://logging.eu-fra.bluemix.net`
+- AP-South and AP-North: `https://logging.au-syd.bluemix.net`
 
 For more information about viewing logs, see [Navigating to Kibana from a web browser](/docs/services/CloudLogAnalysis/kibana?topic=cloudloganalysis-launch#launch_Kibana_from_browser).
 
@@ -801,17 +801,17 @@ To avoid conflicts when using metrics services, be sure that clusters across res
       <tbody>
         <tr>
          <td>EU Central</td>
-         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>metrics.eu-de.bluemix.net</code></td>
          <td><code>158.177.65.80/30</code></td>
         </tr>
         <tr>
          <td>UK South</td>
-         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>metrics.eu-gb.bluemix.net</code></td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
           <td>US East, US South, AP North, AP South</td>
-          <td>metrics.ng.bluemix.net</td>
+          <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
          

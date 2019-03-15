@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks
 
@@ -459,7 +459,7 @@ To create an image pull secret:
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>Required. The name that you want to use for your imagePullSecret.</td>
+    <td>Required. The name that you want to use for your <code>imagePullSecret</code>.</td>
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
@@ -479,7 +479,7 @@ To create an image pull secret:
     </tr>
     </tbody></table>
 
-2.  Verify that the secret was created successfully. Replace <em>&lt;kubernetes_namespace&gt;</em> with the name of the namespace where you created the imagePullSecret.
+2.  Verify that the secret was created successfully. Replace <em>&lt;kubernetes_namespace&gt;</em> with the name of the namespace where you created the `imagePullSecret`.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
@@ -661,7 +661,7 @@ To access images in other {{site.data.keyword.Bluemix_notm}} regions or accounts
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
-    <td>Required. The URL to the image registry where your namespace is set up.<ul><li>For namespaces that are set up in US-South and US-East registry.ng.bluemix.net</li><li>For namespaces that are set up in UK-South registry.eu-gb.bluemix.net</li><li>For namespaces that are set up in EU-Central (Frankfurt) registry.eu-de.bluemix.net</li><li>For namespaces that are set up in Australia (Sydney) registry.au-syd.bluemix.net</li></ul></td>
+    <td>Required. The URL to the image registry where your namespace is set up.<ul><li>For namespaces that are set up in US-South and US-East <code>registry.ng.bluemix.net</code></li><li>For namespaces that are set up in UK-South <code>registry.eu-gb.bluemix.net</code></li><li>For namespaces that are set up in EU-Central (Frankfurt) <code>registry.eu-de.bluemix.net</code></li><li>For namespaces that are set up in Australia (Sydney) <code>registry.au-syd.bluemix.net</code></li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>

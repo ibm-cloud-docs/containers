@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks
 
@@ -156,7 +156,7 @@ As your cluster provisions, install the following CLIs that are used to manage c
     ```
     {: pre}
 
-Congratulations! You've successfully installed the CLIs for the following lessons and tutorials. Next, set up your cluster environment and add the {{site.data.keyword.toneanalyzershort}} service.
+Good job! You've successfully installed the CLIs for the following lessons and tutorials. Next, set up your cluster environment and add the {{site.data.keyword.toneanalyzershort}} service.
 
 
 ## Lesson 2: Setting up your private registry

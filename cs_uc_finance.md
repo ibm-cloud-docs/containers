@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks
 
@@ -63,13 +63,13 @@ They also accelerated their risk analysis and compliance. Their predictive and r
 
 The company’s problem right now is scale and time to delivery.
 
-Their current environment is 7+ years old, on-premises, and with limited compute, storage, and IO capacity.
+Their current environment is 7+ years old, on-premises, and with limited compute, storage, and I/O capacity.
 Server refreshes are costly and take a long time to complete.
 Software and app updates follow an informal process and aren't repeatable.
 The actual HPC grid is hard to program against. The API is too complex for new Developers who are brought onboard and requires non-documented knowledge.
 And major app upgrades take 6 - 9 months to complete.
 
-**Solution model: On-demand compute, storage, and IO services that run in public cloud with secure access to on-premises enterprise assets as needed**
+**Solution model: On-demand compute, storage, and I/O services that run in public cloud with secure access to on-premises enterprise assets as needed**
 
 * Secure and scalable document storage that supports structured and unstructured document query
 * "Lift and shift" existing enterprise assets and app while they enabled the integration to some on-premises systems that won't be migrated

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-14"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks
 
@@ -138,7 +138,7 @@ Need help or have feedback on the cluster autoscaler? If you are an external use
 <tr>
 <td>4 December</td>
 <td>[Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node)</td>
-<td>Are you deploying so many apps that you’re worried about maxing out your cluster? Worker node resource reserves and Kubernetes evictions protect your cluster’s compute capacity so that your cluster has enough resources to keep running. Just add a few more worker nodes, and your pods start rescheduling to them automatically. Worker node resource reserves are updated in the latest [version patch changes](/docs/containers?topic=containers-changelog#changelog).</td>
+<td>Are you deploying so many apps that you’re worried about exceeding your cluster capacity? Worker node resource reserves and Kubernetes evictions protect your cluster’s compute capacity so that your cluster has enough resources to keep running. Just add a few more worker nodes, and your pods start rescheduling to them automatically. Worker node resource reserves are updated in the latest [version patch changes](/docs/containers?topic=containers-changelog#changelog).</td>
 </tr>
 </tbody></table>
 

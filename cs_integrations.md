@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-14"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks, helm
 
@@ -52,7 +52,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Grafeas</td>
-<td>[Grafeas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafeas.io) is an open source CI/CD service that provides a common way for how to retrieve, store, and exchange metadata during the software supply chain process. For example, if you integrate Grafeas into your app build process, Grafeas can store information about the initiator of the build request, vulnerability scan results, and quality assurance signoff so that you can make an informed decision if an app can be deployed to production. You can use this metadata in audits or to prove compliance for your software supply chain. </td>
+<td>[Grafeas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafeas.io) is an open source CI/CD service that provides a common way for how to retrieve, store, and exchange metadata during the software supply chain process. For example, if you integrate Grafeas into your app build process, Grafeas can store information about the initiator of the build request, vulnerability scan results, and quality assurance sign-off so that you can make an informed decision if an app can be deployed to production. You can use this metadata in audits or to prove compliance for your software supply chain. </td>
 </tr>
 <tr>
 <td>Helm</td>
@@ -72,7 +72,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Knative</td>
-<td>[Knative ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others with the goal of extending the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. The platform uses a consistent approach across programming languages and frameworks to abstract the operational overhead of building, deploying and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. For more information, see [Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). </td>
+<td>[Knative ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others with the goal of extending the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. The platform uses a consistent approach across programming languages and frameworks to abstract the operational burden of building, deploying and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. For more information, see [Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). </td>
 </tr>
 </tbody>
 </table>
