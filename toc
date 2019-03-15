@@ -5,6 +5,7 @@
 IBM Cloud Kubernetes Service
 
     container_index.md
+    cs_cli_reference.md
 
     {: .navgroup id="learn"}
     container_index.md
@@ -107,7 +108,7 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     IBM Cloud Kubernetes Service CLI plug-in reference
-        cs_cli_reference.md
+        /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
         cs_cli_changelog.md
 
     {: .topicgroup}
