@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -23,7 +23,7 @@ subcollection: containers
 {:download: .download}
 
 
-# Command reference
+# IBM Cloud Kubernetes Service CLI
 {: #cs_cli_reference}
 
 Refer to these commands to create and manage Kubernetes clusters in {{site.data.keyword.containerlong}}.
