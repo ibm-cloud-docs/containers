@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks, helm
 
@@ -792,27 +792,10 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
        kubectl apply -f cluster-role-binding.yaml
        ```
        {: pre}
+   
+4. [Find the version of Tiller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30)] that you want to install in your cluster. If you do not need a specific version, use the latest one. 
 
-4. Install Tiller in your private cluster. **Note:** When you initiate the Tiller installation, Helm tries to pull the image from the public Google Container Registry. Because your cluster does not allow public network connectivity, the setup of Tiller fails. 
-   ```
-   helm init --service-account tiller
-   ```
-   {: pre}
-   
-5. Find the Tiller **image** that Helm wanted to pull from the public Google Container Registry. 
-   ```
-   kubectl --namespace=kube-system get deployments/tiller-deploy -o yaml | grep image
-   ```
-   {: pre} 
-   
-   Example output: 
-   ```
-   image: gcr.io/kubernetes-helm/tiller:v2.11.0
-   imagePullPolicy: IfNotPresent
-   ```
-   {: screen}
-   
-6. Pull the Tiller image to your local machine. If you want to install a different version than the default one, [find the version in the public Google Container Registry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30). 
+5. Pull the Tiller image to your local machine. 
    ```
    docker pull gcr.io/kubernetes-helm/tiller:v2.11.0
    ```
@@ -831,11 +814,13 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
    ```
    {: screen}
 
-7. [Push the Tiller image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing). 
+6. [Push the Tiller image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing). 
 
-8. Change the image for your Tiller deployment to the image that you stored in your namespace in {{site.data.keyword.registryshort_notm}}. After you change the image, the Tiller installation continues. 
+7. [Copy the image pull secret to access {{site.data.keyword.registryshort_notm}} from the default namespace to the `kube-system` namespace](/docs/containers?topic=containers-images#copy_imagePullSecret). 
+
+8. Install Tiller in your private cluster by using the image that you stored in your namespace in {{site.data.keyword.registryshort_notm}}. 
    ```
-   kubectl --namespace=kube-system set image deployments/tiller-deploy tiller=<region>.icr.io/<mynamespace>/<myimage>:<tag>
+   helm init --tiller-image <region>.icr.io/<mynamespace>/<myimage>:<tag> --service-account tiller
    ```
    {: pre}
    
