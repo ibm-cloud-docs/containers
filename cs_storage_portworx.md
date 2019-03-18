@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 
+
 # Storing data on software-defined storage (SDS) with Portworx
 {: #portworx}
 
@@ -91,7 +92,7 @@ For more information about available license types and how to upgrade your Trial
 Set up an {{site.data.keyword.Bluemix_notm}} database service, such as [Databases for etcd](#databaseetcd) or [{{site.data.keyword.composeForEtcd}}](#compose) to create a key-value store for the Portworx cluster metadata.
 {: shortdesc}
 
-The Portworx key-value store serves as the single source of truth for your Portworx cluster. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable. 
+The Portworx key-value store serves as the single source of truth for your Portworx cluster. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable.
 
 ### Setting up a Databases for etcd service instance
 {: #databaseetcd}
@@ -134,17 +135,17 @@ The following steps show how to provision and set up a Databases for etcd servic
       --endpoints=https://1ab234c5-12a1-1234-a123-123abc45cde1.123456ab78cd9ab1234a456740ab123c.databases.appdomain.cloud:32059
       ```
       {: screen}
-      
-   4. Find the `certificate` section of your service credentials and note the **`certificate_base64`**. 
+
+   4. Find the `certificate` section of your service credentials and note the **`certificate_base64`**.
       Example output for `certificate`
       ```
       "certificate": {
         "certificate_base64": "AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2..."
       ```
       {: screen}
-   
-5. Create a Kubernetes secret for your certificate. 
-   1. Create a configuration file for your secret. 
+
+5. Create a Kubernetes secret for your certificate.
+   1. Create a configuration file for your secret.
       ```
       apiVersion: v1
       kind: Secret
@@ -158,8 +159,8 @@ The following steps show how to provision and set up a Databases for etcd servic
         client.pem: ""
       ```
       {: codeblock}
-      
-   2. Create the secret in your cluster. 
+
+   2. Create the secret in your cluster.
       ```
       kubectl apply -f secret.yaml
       ```
@@ -260,7 +261,7 @@ To install Portworx:
    - **`usefileSystemDrive`**: Enter `true` to let Portworx find unmounted hard drives, even if they are formatted.
    - **`drives`**: Enter `none` to let Portworx find unmounted and unformatted hard drives.
    - **`etcd.credentials`**: Enter the user name and password of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `<user_name>:<password>`.
-   - **`etcd.certPath`**: Enter the path where the certificate for your database service instance are stored. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts`. For {{site.data.keyword.composeForEtcd}}, enter `none`. 
+   - **`etcd.certPath`**: Enter the path where the certificate for your database service instance are stored. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts`. For {{site.data.keyword.composeForEtcd}}, enter `none`.
    - **`etcd.ca`**: Enter the path to the Certificate Authority (CA) file. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts/ca.pem`. For {{site.data.keyword.composeForEtcd}}, enter `none`.
 
    For a full list of supported parameters, see the [Portworx Helm chart documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/blob/master/charts/portworx/README.md#configuration).
@@ -560,7 +561,7 @@ If you do not want to use Portworx in your cluster, you can uninstall the Helm c
 To protect your data in a Portworx volume, you can choose to protect your volumes with {{site.data.keyword.keymanagementservicelong_notm}}.
 {: shortdesc}
 
-{{site.data.keyword.keymanagementservicelong_notm}} helps you to provision encrypted keys that are secured by FIPS 140-2 Level 2 certified cloud-based hardware security modules (HSMs). You can use these keys to securely protect your data from unauthorized users. You can choose between using one encryption key to encrypt all your volumes in a cluster or using one encryption key for each volume. Portworx uses this key to encrypt data at rest and during transit when data is sent to a different worker node. For more information, see [Volume encryption ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption). For higher security, set up per-volume encryption. 
+{{site.data.keyword.keymanagementservicelong_notm}} helps you to provision encrypted keys that are secured by FIPS 140-2 Level 2 certified cloud-based hardware security modules (HSMs). You can use these keys to securely protect your data from unauthorized users. You can choose between using one encryption key to encrypt all your volumes in a cluster or using one encryption key for each volume. Portworx uses this key to encrypt data at rest and during transit when data is sent to a different worker node. For more information, see [Volume encryption ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption). For higher security, set up per-volume encryption.
 
 Review the following information:
 - Overview of the [Portworx volume encryption workflow](#encryption) with {{site.data.keyword.keymanagementservicelong_notm}} for per-volume encryption
@@ -570,7 +571,7 @@ Review the following information:
 ### Portworx per-volume encryption workflow
 {: #encryption}
 
-The following image illustrates the encryption workflow in Portworx with {{site.data.keyword.keymanagementservicelong_notm}} when you set up per-volume encryption. 
+The following image illustrates the encryption workflow in Portworx with {{site.data.keyword.keymanagementservicelong_notm}} when you set up per-volume encryption.
 {: shortdesc}
 
 <img src="images/cs_portworx_volume_encryption.png" alt="Encrypting Portworx volumes by using {{site.data.keyword.keymanagementservicelong_notm}}" width="600" style="width: 600px; border-style: none"/>
@@ -647,11 +648,11 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
 
 5. [Create a service ID for your account](/docs/iam?topic=iam-serviceids#serviceids).  
 
-6. [Assign your service ID permissions](/docs/iam?topic=iam-serviceidpolicy#serviceidpolicy) to your {{site.data.keyword.keymanagementservicelong_notm}} service instance. 
-   
-7. [Create an API key for your service ID](/docs/iam?topic=iam-serviceidapikeys#serviceidapikeys). This API key is used by Portworx to access the {{site.data.keyword.keymanagementservicelong_notm}} API. 
+6. [Assign your service ID permissions](/docs/iam?topic=iam-serviceidpolicy#serviceidpolicy) to your {{site.data.keyword.keymanagementservicelong_notm}} service instance.
 
-8. [Retrieve the {{site.data.keyword.keymanagementservicelong_notm}} API endpoint](/docs/services/key-protect?topic=key-protect-regions#regions) for the region where you created your service instance. Make sure that you note your API endpoint in the format `https://<api_endpoint>`. 
+7. [Create an API key for your service ID](/docs/iam?topic=iam-serviceidapikeys#serviceidapikeys). This API key is used by Portworx to access the {{site.data.keyword.keymanagementservicelong_notm}} API.
+
+8. [Retrieve the {{site.data.keyword.keymanagementservicelong_notm}} API endpoint](/docs/services/key-protect?topic=key-protect-regions#regions) for the region where you created your service instance. Make sure that you note your API endpoint in the format `https://<api_endpoint>`.
 
 9. Encode the {{site.data.keyword.keymanagementservicelong_notm}} GUID, API key, root key, and {{site.data.keyword.keymanagementservicelong_notm}} API endpoint to base64 and note all the base64 encoded values. Repeat this command for each parameter to retrieve the base 64 encoded value.
    ```
