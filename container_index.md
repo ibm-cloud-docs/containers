@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks 
 
@@ -52,9 +52,8 @@ So you want to deploy an app in a container? Hold on! Start by creating a Kubern
 And what is a cluster? A cluster is a set of resources, worker nodes, networks, and storage devices that keep apps highly available. After you have your cluster, then you can deploy your apps in containers.
 
 Before you begin, get the [{{site.data.keyword.Bluemix_notm}} account](https://cloud.ibm.com/registration) type that is right for you:
-* **Billable (Pay-As-You-Go or Subscription)**: You can create a free trial cluster. You can also provision IBM Cloud infrastructure (SoftLayer) resources to create and use in standard clusters.
+* **Billable (Pay-As-You-Go or Subscription)**: You can create a free cluster. You can also provision IBM Cloud infrastructure (SoftLayer) resources to create and use in standard clusters.
 * **Lite**: You cannot create a free or standard cluster. [Upgrade your account](/docs/account?topic=account-accountfaqs#changeacct) to a billable account.
-* **Trial (for educational purposes)**: You can create one free cluster per {{site.data.keyword.Bluemix_notm}} account that you can use for 30 days to get familiar with the service. 
 
 To create a free cluster:
 
