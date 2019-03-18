@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks 
 
@@ -454,7 +454,7 @@ You are responsible for ensuring the security of your personal information in Ku
 
 To set up encryption for your secrets, see [Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect).
 
-On SGX-enabled bare metal worker nodes, you can encrypt your data in use by using the [{{site.data.keyword.datashield_short}} (Beta) service](/docs/services/data-shield?topic=data-shield-gettingstarted#gettingstarted). Similar to the way encryption works for data at rest and data in motion, Fortanix Runtime Encryption that is integrated with {{site.data.keyword.datashield_short}} protects keys, data, and apps from external and internal threats. The threats might include malicious insiders, cloud providers, OS-level hacks, or network intruders.
+On SGX-enabled bare metal worker nodes, you can encrypt your data in use by using the [{{site.data.keyword.datashield_short}} (Beta) service](/docs/services/data-shield?topic=data-shield-getting-started#getting-started). Similar to the way encryption works for data at rest and data in motion, Fortanix Runtime Encryption that is integrated with {{site.data.keyword.datashield_short}} protects keys, data, and apps from external and internal threats. The threats might include malicious insiders, cloud providers, OS-level hacks, or network intruders.
 
 ## Kubernetes security bulletins
 {: #security_bulletins}

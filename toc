@@ -35,6 +35,7 @@ IBM Cloud Kubernetes Service
     Tutorials
         cs_tutorials.md
         cs_tutorials_apps.md
+        cs_tutorials_istio.md
         cs_tutorials_knative.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
