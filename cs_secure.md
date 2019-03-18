@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks 
 
@@ -85,7 +85,7 @@ The following image shows the default cluster security settings that address aut
         <ul><li><strong>etcd data store:</strong> Stores all Kubernetes resources of a cluster, such as `Services`, `Deployments`, and `Pods`. Kubernetes `ConfigMaps` and `Secrets` are app data that is stored as key value pairs so that they can be used by an app that runs in a pod. In clusters that run Kubernetes version 1.10 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](/docs/containers?topic=containers-encryption#encryption) for your cluster. The etcd data for clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.</li>
           <li><strong>kube-apiserver:</strong> Serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The kube-apiserver validates and processes requests and can read from and write to the etcd data store.</li>
           <li><strong>kube-scheduler:</strong> Decides where to deploy pods, considering the capacity and performance needs, hardware and software policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</li>
-          <li><strong>kube-controller-manager:</strong> Responsible for monitoring replica sets, and creating corresponding pods to achieve the desired state.</li>
+          <li><strong>kube-controller-manager:</strong> Responsible for monitoring replica sets, and creating corresponding pods to achieve the specified state.</li>
           <li><strong>OpenVPN:</strong> {{site.data.keyword.containerlong_notm}}-specific component to provide secured network connectivity for all Kubernetes master to worker node communication. Kubernetes master to worker node communication is initiated by the user and includes <code>kubectl</code> commands, such as <code>logs</code>, <code>attach</code>, <code>exec</code>, and <code>top</code>.</li></ul></td>
     </tr>
     <tr>
@@ -454,7 +454,7 @@ You are responsible for ensuring the security of your personal information in Ku
 
 To set up encryption for your secrets, see [Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect).
 
-On SGX-enabled bare metal worker nodes, you can encrypt your data in use by using the [{{site.data.keyword.datashield_short}} (Beta) service](/docs/services/data-shield?topic=data-shield-gettingstarted#gettingstarted). Similar to the way encryption works for data at rest and data in motion, Fortanix Runtime Encryption that is integrated with {{site.data.keyword.datashield_short}} protects keys, data, and apps from external and internal threats. The threats might include malicious insiders, cloud providers, OS-level hacks, or network intruders.
+On SGX-enabled bare metal worker nodes, you can encrypt your data in use by using the [{{site.data.keyword.datashield_short}} (Beta) service](/docs/services/data-shield?topic=data-shield-getting-started#getting-started). Similar to the way encryption works for data at rest and data in motion, Fortanix Runtime Encryption that is integrated with {{site.data.keyword.datashield_short}} protects keys, data, and apps from external and internal threats. The threats might include malicious insiders, cloud providers, OS-level hacks, or network intruders.
 
 ## Kubernetes security bulletins
 {: #security_bulletins}

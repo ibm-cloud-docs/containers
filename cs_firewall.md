@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks
 
@@ -314,17 +314,17 @@ Let your cluster access infrastructure resources and services from behind a fire
       <tbody>
         <tr>
          <td>EU Central</td>
-         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>metrics.eu-de.bluemix.net</code></td>
          <td><code>158.177.65.80/30</code></td>
         </tr>
         <tr>
          <td>UK South</td>
-         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>metrics.eu-gb.bluemix.net</code></td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
           <td>US East, US South, AP North, AP South</td>
-          <td>metrics.ng.bluemix.net</td>
+          <td><code>metrics.ng.bluemix.net</code></td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
          
@@ -347,22 +347,22 @@ Let your cluster access infrastructure resources and services from behind a fire
         <tbody>
           <tr>
             <td>US East, US South</td>
-            <td>ingest.logging.ng.bluemix.net</td>
+            <td><code>ingest.logging.ng.bluemix.net</code></td>
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
           </tr>
           <tr>
            <td>UK South</td>
-           <td>ingest.logging.eu-gb.bluemix.net</td>
+           <td><code>ingest.logging.eu-gb.bluemix.net</code></td>
            <td><code>169.50.115.113</code></td>
           </tr>
           <tr>
            <td>EU Central</td>
-           <td>ingest-eu-fra.logging.bluemix.net</td>
+           <td><code>ingest-eu-fra.logging.bluemix.net</code></td>
            <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
           </tr>
           <tr>
            <td>AP South, AP North</td>
-           <td>ingest-au-syd.logging.bluemix.net</td>
+           <td><code>ingest-au-syd.logging.bluemix.net</code></td>
            <td><code>130.198.76.125</code><br><code>168.1.209.20</code></td>
           </tr>
          </tbody>
@@ -376,7 +376,7 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 7. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
     - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
-    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Frontend (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Backend (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
+    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
 
 <br />
 

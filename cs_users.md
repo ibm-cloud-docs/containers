@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks 
 
@@ -113,7 +113,7 @@ When you create your {{site.data.keyword.Bluemix_notm}} account, the default res
   <p class="important">When you scope a service access policy to a namespace, you must [use the {{site.data.keyword.Bluemix_notm}} console](/docs/containers?topic=containers-users#add_users). You cannot use the CLI the scope a service access policy to a namespace. You also cannot assign namespace-scoped service access roles at the resource group level, or assign them at the same time as platform roles.</p></dd>
 <dt>Resource group</dt>
   <dd><p>You can organize your account resources in customizable groupings so that you can quickly assign individual or groups of users access to more than one resource at a time. Resource groups can help operators and administrators filter resources to view their current usage, troubleshoot issues, and manage teams.</p>
-  <p class="important">A cluster can integrate only with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group or services that do not support resource groups, such as {{site.data.keyword.registrylong_notm}}. A cluster can be created in only one resource group that you can't change afterward. If you create a cluster in the wrong resource group, you must delete the cluster and recreate it in the correct resource group.</p>
+  <p class="important">A cluster can integrate only with other {{site.data.keyword.Bluemix_notm}} services that are in the same resource group or services that do not support resource groups, such as {{site.data.keyword.registrylong_notm}}. A cluster can be created in only one resource group that you can't change afterward. If you create a cluster in the wrong resource group, you must delete the cluster and re-create it in the correct resource group.</p>
   <p>If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](/docs/containers?topic=containers-health#view_metrics), consider giving clusters unique names across resource groups and regions in your account to avoid metrics naming conflicts. You cannot rename a cluster.</p>
   <p>You can assign users an access role to a resource group for the following scenarios. Note that unlike resource instances, you cannot grant access to an individual instance within a resource group.</p>
   <ul><li>All {{site.data.keyword.Bluemix_notm}} IAM services in the resource group, including all clusters in {{site.data.keyword.containerlong_notm}} and images in {{site.data.keyword.registrylong_notm}}.</li>
@@ -285,7 +285,7 @@ To ensure that all infrastructure-related actions can be successfully completed 
     2.  Select the **Users** tab, click on the user. 
     3. In the **API keys** pane, verify that the user has a **Classic infrastructure API key**, or click **Create an IBM Cloud API key**. For more information, see [Managing classic infrastructure API keys](/docs/iam?topic=iam-classic_keys#classic_keys).
     4. Click the **Classic infrastructure** tab and then click the **Permissions** tab.
-    5. If the user doesn't have each category checked, you can use the **Permission sets** dropdown to assign the **Super User** role. Or you can expand each category and give the user the required [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra).
+    5. If the user doesn't have each category checked, you can use the **Permission sets** drop-down list to assign the **Super User** role. Or you can expand each category and give the user the required [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra).
 
 ### Accessing the infrastructure portfolio with your default {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account
 {: #default_account}
@@ -416,7 +416,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
   * **For resource groups**:
     1. Click **Assign access within a resource group**.
     2. Select the resource group name.
-    3. In the **Assign access to a resource group** dropdown, choose what level of permission to give the user to the resource group itself (not the resources within the group). For example, to let users see clusters that they have access to in multiple resource groups, give them the **Viewer** role for each resource group.
+    3. In the **Assign access to a resource group** drop-down list, choose what level of permission to give the user to the resource group itself (not the resources within the group). For example, to let users see clusters that they have access to in multiple resource groups, give them the **Viewer** role for each resource group.
     4. From the **Services** list, type **{{site.data.keyword.containershort_notm}}**.
     5. From the **Region** list, select one or all regions.
     6. Select a role for the policy.

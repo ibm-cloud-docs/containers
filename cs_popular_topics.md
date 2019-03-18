@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks
 
@@ -138,7 +138,7 @@ Need help or have feedback on the cluster autoscaler? If you are an external use
 <tr>
 <td>4 December</td>
 <td>[Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node)</td>
-<td>Are you deploying so many apps that you’re worried about maxing out your cluster? Worker node resource reserves and Kubernetes evictions protect your cluster’s compute capacity so that your cluster has enough resources to keep running. Just add a few more worker nodes, and your pods start rescheduling to them automatically. Worker node resource reserves are updated in the latest [version patch changes](/docs/containers?topic=containers-changelog#changelog).</td>
+<td>Are you deploying so many apps that you’re worried about exceeding your cluster capacity? Worker node resource reserves and Kubernetes evictions protect your cluster’s compute capacity so that your cluster has enough resources to keep running. Just add a few more worker nodes, and your pods start rescheduling to them automatically. Worker node resource reserves are updated in the latest [version patch changes](/docs/containers?topic=containers-changelog#changelog).</td>
 </tr>
 </tbody></table>
 
@@ -418,11 +418,6 @@ configure pod security policies to authorize who can create and update pods in {
 <td>13 March</td>
 <td>[Zone available in São Paulo](/docs/containers?topic=containers-regions-and-zones)</td>
 <td>Welcome São Paulo, Brazil as a new zone in the US South region. If you have a firewall, be sure to [open the firewall ports](/docs/containers?topic=containers-firewall#firewall) for this zone and the others within the region that your cluster is in.</td>
-</tr>
-<tr>
-<td>12 March</td>
-<td>[Just joined the {{site.data.keyword.Bluemix_notm}} with a Trial account? Try out a free Kubernetes cluster!](/docs/containers?topic=containers-container_index#clusters_gs)</td>
-<td>With a Trial [{{site.data.keyword.Bluemix_notm}} account](https://cloud.ibm.com/registration/), you can deploy one free cluster for 30 days to test out Kubernetes capabilities.</td>
 </tr>
 </tbody></table>
 

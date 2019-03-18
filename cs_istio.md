@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 ---
 
@@ -809,7 +809,7 @@ To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} AL
   ```
   {: pre}
 
-5. Optional: To create rules that are applied after traffic is routed to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [DestinationRules ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule).
+5. Optional: To create rules that are applied after traffic is routed to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule).
 
 6. Create an Ingress resource file. The {{site.data.keyword.containerlong_notm}} ALB uses the rules defined in this sample resource to forward traffic to the Istio load balancer that exposes your Istio-managed microservice.
   ```
@@ -907,7 +907,7 @@ Note that the `istio` add-on is a dependency for the `istio-extras`, `istio-samp
 4. Uninstall individual or all Istio add-ons.
   - Individual Istio add-ons:
     1. Click **Update**.
-    2. Unselect the check boxes for the add-ons you want to disable. If you unselect an add-on, other add-ons that require that ad-on as a dependency might be automatically unselected.
+    2. Clear the check boxes for the add-ons you want to disable. If you clear an add-on, other add-ons that require that add-on as a dependency might be automatically cleared.
     3. Click **Update**. The Istio add-ons are disabled and the resources for those add-ons are removed from this cluster.
   - All Istio add-ons:
     1. Click **Uninstall**. All managed Istio add-ons are disabled in this cluster and all Istio resources in this cluster are removed.

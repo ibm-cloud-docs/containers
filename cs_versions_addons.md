@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -54,10 +54,19 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
+<td>410 / 305</td>
+<td>18 Mar 2019</td>
+<td><ul>
+<li>Fixes vulnerabilities for image scans.</li>
+<li>Improves logging for {{site.data.keyword.appid_full}}.</li>
+</ul></td>
+<td>-</td>
+</tr>
+<tr>
 <td>408 / 304</td>
 <td>05 Mar 2019</td>
 <td>-</td>
-<td>Fixes bugs in the authorization integration related to logout functionality, token expiration, and the OAuth authorization callback. These fixes are implemented only if you enabled {{site.data.keyword.appid_long}} authorization by using the [`appid-auth` annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth). To implement these fixes, additional headers are added, which increases the total header size. Depending on the size of your own headers and the total size of responses, you might need to adjust any [proxy buffers annotations](/docs/containers?topic=containers-ingress_annotation#proxy-buffer) that you use.</td>
+<td>Fixes bugs in the authorization integration related to logout functionality, token expiration, and the `OAuth` authorization callback. These fixes are implemented only if you enabled {{site.data.keyword.appid_full_notm}} authorization by using the [`appid-auth`](/docs/containers?topic=containers-ingress_annotation#appid-auth) annotation. To implement these fixes, additional headers are added, which increases the total header size. Depending on the size of your own headers and the total size of responses, you might need to adjust any [proxy buffer annotations](/docs/containers?topic=containers-ingress_annotation#proxy-buffer) that you use.</td>
 </tr>
 <tr>
 <td>406 / 301</td>

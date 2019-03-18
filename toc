@@ -1,11 +1,14 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-container_index" path="containers"}
+{: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
 IBM Cloud Kubernetes Service
 
-    {: .navgroup id="learn"}
+    cs_cli_reference.md
     container_index.md
+
+    {: .navgroup id="learn"}
+    getting-started.md
     
 
     {: .topicgroup}
@@ -32,6 +35,7 @@ IBM Cloud Kubernetes Service
     Tutorials
         cs_tutorials.md
         cs_tutorials_apps.md
+        cs_tutorials_istio.md
         cs_tutorials_knative.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
@@ -105,7 +109,7 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     IBM Cloud Kubernetes Service CLI plug-in reference
-        cs_cli_reference.md
+        /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
         cs_cli_changelog.md
 
     {: .topicgroup}

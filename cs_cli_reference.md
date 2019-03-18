@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -23,7 +23,7 @@ subcollection: containers
 {:download: .download}
 
 
-# Command reference
+# IBM Cloud Kubernetes Service CLI
 {: #cs_cli_reference}
 
 Refer to these commands to create and manage Kubernetes clusters in {{site.data.keyword.containerlong}}.
@@ -777,7 +777,7 @@ ibmcloud ks messages
 Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
 {: shortdesc}
 
-#### ibmcloud ks cluster-addon-disable istio
+#### ibmcloud ks cluster-addon-disable <ph class="ignoreSpelling">istio</ph>
 {: #cs_cluster_addon_disable_istio}
 
 Disable the managed Istio add-on. Removes all Istio core components from the cluster, including Prometheus.
@@ -862,7 +862,7 @@ ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster CLUSTER
   ```
   {: pre}
 
-#### ibmcloud ks cluster-addon-disable knative
+#### ibmcloud ks cluster-addon-disable <ph class="ignoreSpelling">knative</ph>
 {: #cs_cluster_addon_disable_knative}
 
 Disable the managed Knative add-on to remove the Knative serverless framework from the cluster.
@@ -895,7 +895,7 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
 {: shortdesc}
 
-#### ibmcloud ks cluster-addon-enable istio
+#### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">istio</ph>
 {: #cs_cluster_addon_enable_istio}
 
 Enable the managed [Istio add-on](/docs/containers?topic=containers-istio). Installs the core components of Istio version 1.0.5, including Prometheus.
@@ -981,7 +981,7 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [-y]
   ```
   {: pre}
 
-#### ibmcloud ks cluster-addon-enable knative
+#### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">knative</ph>
 {: #cs_cluster_addon_enable_knative}
 
 Enable the managed [Knative add-on](/docs/containers?topic=containers-knative_tutorial) to install the Knative serverless framework.
@@ -1919,7 +1919,7 @@ ibmcloud ks cluster-subnet-create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
    <dt><code>--size <em>SIZE</em></code></dt>
    <dd>The number of subnet IP addresses. This value is required. Possible values are 8, 16, 32, or 64.</dd>
 
-   <dd>The VLAN in which to create the subnet. This value is required. To list available VLANS, use the `ibmcloud ks vlans <zone>` [command](#cs_vlans). The subnet is provisioned in the same zone that the VLAN is in.</dd>
+   <dd>The VLAN in which to create the subnet. This value is required. To list available VLANs, use the `ibmcloud ks vlans <zone>` [command](#cs_vlans). The subnet is provisioned in the same zone that the VLAN is in.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2658,7 +2658,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 
 
 
-### ibmcloud ks vlans
+### ibmcloud ks <ph class="ignoreSpelling">vlans</ph>
 {: #cs_vlans}
 
 List the public and private VLANs that are available for a zone in your IBM Cloud infrastructure (SoftLayer) account. To list available VLANs, you must have a paid account.
@@ -2680,7 +2680,7 @@ ibmcloud ks vlans --zone ZONE [--all] [--json] [-s]
    <dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
 
    <dt><code>--all</code></dt>
-   <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANS that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
+   <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANs that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
 
    <dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -3122,7 +3122,7 @@ This example filters out all logs that are forwarded from containers with the na
   ```
   {: pre}
 
-This example filters out all of the logs that are forwarded, at an info level or less, from a specific cluster. The output is returned as JSON.
+This example filters out all of the logs that are forwarded, at an `info` level or less, from a specific cluster. The output is returned as JSON.
 
   ```
   ibmcloud ks logging-filter-create --cluster example-cluster --type all --level info --json
@@ -3274,7 +3274,7 @@ This example filters out all logs that are forwarded from containers with the na
   ```
   {: pre}
 
-This example filters out all of the logs that are forwarded, at an info level or less, from a specific cluster. The output is returned as JSON.
+This example filters out all of the logs that are forwarded, at an `info` level or less, from a specific cluster. The output is returned as JSON.
 
   ```
   ibmcloud ks logging-filter-update --cluster example-cluster --id 274885 --type all --level info --json
@@ -3682,7 +3682,7 @@ ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [-
 ### ibmcloud ks worker-reboot
 {: #cs_worker_reboot}
 
-Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure (SoftLayer) is `Powered Off` and you need to turn on the worker node. A reboot clears temporary directories, but does not clear the entire filesystem or reformat the disks.
+Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure (SoftLayer) is `Powered Off` and you need to turn on the worker node. A reboot clears temporary directories, but does not clear the entire file system or reformat the disks.
 {: shortdesc}
 
 ```

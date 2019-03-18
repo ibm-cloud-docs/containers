@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks 
 
@@ -33,25 +33,25 @@ take advantage of toolchains for rapid app updates and multiregion deployments a
 
 {: shortdesc}
 
-## Shipping company increases availability of worldwide systems for partner ecosystem
+## Shipping company increases availability of worldwide systems for business partner ecosystem
 {: #uc_shipping}
 
-An IT Exec has worldwide ship routing and scheduling systems that partners interact with. Partners require up-to-the-minute information from these systems that access IoT device data. But, these systems were unable to scale across the globe with sufficient HA.
+An IT Exec has worldwide shipping routing and scheduling systems that partners interact with. Partners require up-to-the-minute information from these systems that access IoT device data. But, these systems were unable to scale across the globe with sufficient HA.
 {: shortdesc}
  
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} scales containerized apps with five 9s of availability to meet growing demands. App deployments occur 40 times daily when Developers experiment easily, pushing changes to Development and Test systems quickly. The IoT Platform makes access to IoT data easy. 
  
 Key technologies:    
-* [Multi-regions for partner ecosystem ](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [Multi-regions for business partner ecosystem ](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Horizontal scaling](/docs/containers?topic=containers-app#highly_available_apps) 
 * [Open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Cloud services for innovation](https://www.ibm.com/cloud/products/#analytics)
 * [{{site.data.keyword.messagehub_full}} to feed event data to apps](/docs/services/EventStreams?topic=eventstreams-about#about)
 
-**Context: Shipping company increases availability of worldwide systems for partner ecosystem**
+**Context: Shipping company increases availability of worldwide systems for business partner ecosystem**
 
 * Regional differences for shipping logistics made it difficult to keep up with growing number of partners in multiple countries. An example is the unique regulations and transit logistics, where the company must maintain consistent records across borders. 
-* Just-in-time data meant that the worldwide systems must be highly available to reduce lags in transit operations. Time tables for ship terminals are highly controlled and in some cases inflexible. Web usage is growing, so instability might cause a poor user experience. 
+* Just-in-time data meant that the worldwide systems must be highly available to reduce lags in transit operations. Time tables for shipping terminals are highly controlled and in some cases inflexible. Web usage is growing, so instability might cause a poor user experience. 
 * Developers needed to constantly evolve apps, but traditional tools slowed their ability to deploy updates and features frequently.  
 
 **The solution**
@@ -145,7 +145,7 @@ Key technologies:
 
 **The solution**
 
-The airline wants to design an open culture that puts people first. The HR Executive is well aware that a focus on incentivizing and retaining talent impacts the airline’s profitability. Thus, the annual rollout of benefits is a key aspect of fostering an employee-centered culture. 
+The airline wants to design an open culture that puts people first. The HR Executive is well aware that a focus on rewarding and retaining talent impacts the airline’s profitability. Thus, the annual rollout of benefits is a key aspect of fostering an employee-centered culture. 
 
 They need a solution that helps the Developers and their users:
 * FRONT-END TO EXISTING BENEFITS: insurance, educational offerings, wellness, and more

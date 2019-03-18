@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-18"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -39,11 +39,17 @@ If you have a more general issue, try out [cluster debugging](/docs/containers?t
 While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent information from your cluster.
 {: tip}
 
-## Unable to create a cluster due to permission errors
+## Unable to create a cluster or manage worker nodes due to permission errors
 {: #cs_credentials}
 
 {: tsSymptoms}
-When you create a new Kubernetes cluster, you receive an error message similar to one of the following.
+You try to manage worker nodes for a new or an existing cluster by running one of the following commands.
+* Provision workers: `ibmcloud ks cluster-create`, `ibmcloud ks worker-pool-rebalance`, or `ibmcloud ks worker-pool-resize`
+* Reload workers: `ibmcloud ks worker-reload` or `ibmcloud ks worker-update`
+* Reboot workers: `ibmcloud ks worker-reboot`
+* Delete workers: `ibmcloud ks cluster-rm`, `ibmcloud ks worker-rm`, `ibmcloud ks worker-pool-rebalance`, or `ibmcloud ks worker-pool-resize`
+
+However, you receive an error message similar to one of the following.
 
 ```
 We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account.
@@ -731,7 +737,7 @@ Your cluster uses an API key or token that is stored in an [image pull secret](/
     kubectl get pod <pod_name> -o yaml
     ```
     {: pre}
-         
+
     Example output:
     ```
     ...
@@ -773,7 +779,7 @@ The following steps assume that the API key stores the credentials of a service 
     ibmcloud iam service-ids
     ```
     {: pre}
-            
+
     Example output:
     ```
     UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked     
@@ -786,7 +792,7 @@ The following steps assume that the API key stores the credentials of a service 
     ibmcloud iam service-policies <service_ID_name>
     ```
     {: pre}
-        
+
     Example output:
     ```              
     Policy ID:   a111a111-b22b-333c-d4dd-e555555555e5   
@@ -819,14 +825,14 @@ The following steps assume that the API key stores the credentials of a service 
         echo -n "<base64_string>" | base64 --decode
         ```
         {: pre}
-        
+
         Example output:
         ```
         {"auths":{"<region>.icr.io":{"username":"iamapikey","password":"<password_string>","email":"<name@abc.com>","auth":"<auth_string>"}}}
         ```
         {: screen}
     4.  Compare the image pull secret regional registry domain name with the domain name that you specified in the container image. By default, new clusters have image pull secrets for each regional registry domain name for containers that run in the `default` Kubernetes namespace. However, if you modified the default settings or are using a different Kubernetes namespace, you might not have an image pull secret for the regional registry. [Copy an image pull secret](/docs/containers?topic=containers-images#copy_imagePullSecret) for the regional registry domain name.
-    5.  Log in to the registry from your local machine by using the `username` and `password` from your image pull secret. If you cannot log in, you might need to fix the service ID. 
+    5.  Log in to the registry from your local machine by using the `username` and `password` from your image pull secret. If you cannot log in, you might need to fix the service ID.
         ```
         docker login -u iamapikey -p <password_string> <region>.icr.io
         ```
@@ -874,7 +880,7 @@ This method of using a token to authorize cluster access to {{site.data.keyword.
     echo -n "<base64_string>" | base64 --decode
     ```
     {: pre}
-        
+
     Example output:
     ```
     {"auths":{"registry.<region>.bluemix.net":{"username":"token","password":"<password_string>","email":"<name@abc.com>","auth":"<auth_string>"}}}
@@ -891,7 +897,7 @@ This method of using a token to authorize cluster access to {{site.data.keyword.
     docker pull registry.<region>.bluemix.net/<namespace>/<image>:<tag>
     ```
     {: pre}
-        
+
 <br />
 
 

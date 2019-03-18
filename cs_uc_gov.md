@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks 
 
@@ -93,7 +93,7 @@ Technical solution:
 **Step 2: Provide access to data with APIs**
 * Use {{site.data.keyword.apiconnect_long}} for the API economy platform. APIs allow the public and private sectors to combine data into their apps.
 * Create clusters for public-private apps, which are driven by the APIs. 
-* Architect apps into a set of cooperative microservices that run within {{site.data.keyword.containerlong_notm}}, which is based on functional areas of apps and their dependencies.
+* Structure apps into a set of cooperative microservices that run within {{site.data.keyword.containerlong_notm}}, which is based on functional areas of apps and their dependencies.
 * Deploy the apps to containers that run in {{site.data.keyword.containerlong_notm}}. Built-in HA tools in {{site.data.keyword.containerlong_notm}} balance the workloads, including self-healing and load balancing.
 * Provide standardized DevOps dashboards through Kubernetes, open-source tools familiar to all types of Developers.
 
@@ -109,7 +109,7 @@ Technical solution:
 * Transparency in activities, information, and plans is provided to citizens and private sector. And, citizens are integrated into government processes, services, and support.
 * Public-private partnerships conquer Herculean tasks, such as Zika virus tracking, smart electricity distribution, analysis of crime statistics, and university "new collar" education.
 
-## Large public port secures exchange of port data and ship manifests that connect public and private organizations
+## Large public port secures exchange of port data and shipping manifests that connect public and private organizations
 {: #uc_port}
 
 IT Execs for a private shipping company and the government-operated port need to connect, provide visibility, and securely exchange port information. But no unified system existed to connect public port information and private shipping manifests.
@@ -128,7 +128,7 @@ Key technologies:
 * Disparate groups of Developers from the government and shipping company don’t have a unified platform where they can collaborate, which slows down deployments of updates and features. 
 * Developers are spread across the globe and across organizational boundaries, which means open-source and PaaS the best option.
 * Security is a primary concern, and this concern increases the collaboration burden that impacts features and updates to the software, especially after the apps are in production.
-* Just-in-time data meant that the worldwide systems must be highly available to reduce lags in transit operations. Time tables for ship terminals are highly controlled and in some cases inflexible. Web usage is growing, so instability might cause poor user experience. 
+* Just-in-time data meant that the worldwide systems must be highly available to reduce lags in transit operations. Time tables for shipping terminals are highly controlled and in some cases inflexible. Web usage is growing, so instability might cause poor user experience. 
 
 **The solution**
 
@@ -143,7 +143,7 @@ Developers started by deploying their apps in containers with {{site.data.keywor
 
 Security first: The IT Execs chose Trusted Compute for bare metal to host the clusters. With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive customs workloads now have familiar isolation but within the flexibility of public cloud. Bare metal provides Trusted Compute, which can verify the underlying hardware against tampering. 
 
-Because the shipping company wants to also partner with other ports, app security is crucial. Shipping manifests and customs information are highly confidential. From that secure core, Vulnerability Advisor provides these scans: 
+Because the shipping company also wants to work with other ports, app security is crucial. Shipping manifests and customs information are highly confidential. From that secure core, Vulnerability Advisor provides these scans: 
 * Image vulnerability scans
 * Policy scans that are based on ISO 27k
 * Live container scans
@@ -165,7 +165,7 @@ Technical solution:
 
 **Step 1: Containerize apps, by using microservices**
 * Use the Node.js starter kit from IBM to jump start development.
-* Architect apps into a set of cooperative microservices that run within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
+* Structure apps into a set of cooperative microservices that run within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
 * Deploy the manifest and shipment apps to container that run in {{site.data.keyword.containerlong_notm}}. 
 * Provide standardized DevOps dashboards through Kubernetes.
 * Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to existing on-premises databases.
@@ -183,7 +183,7 @@ Technical solution:
 * Similarly, notifications of shipments in one region can be triggered through data uploads so that all down-stream consumers can access new data.
 
 **Results**
-* With IBM starter kits, {{site.data.keyword.containerlong_notm}}, and {{site.data.keyword.contdelivery_full}} tools, global Developers partner across organizations and governments. They collaboratively develop customs apps, with familiar and interoperable tools. 
+* With IBM starter kits, {{site.data.keyword.containerlong_notm}}, and {{site.data.keyword.contdelivery_full}} tools, global Developers work together across organizations and governments. They collaboratively develop customs apps, with familiar and interoperable tools. 
 * Microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial development is fast, and updates are frequently 10 times per week.
 * Shipping customers and government officials have access to manifest data and can share customs data, while they comply with local regulations. 
 * The shipping company benefits from improved logistics management in the supply chain: reduced costs and faster clearance times.

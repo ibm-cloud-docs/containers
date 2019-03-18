@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks
 
@@ -1976,7 +1976,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Docker</td>
 <td>18.06.1-ce</td>
 <td>18.06.2-ce</td>
-<td>See the [Docker CE release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/docker/docker-ce/releases/tag/v18.06.2-ce). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+<td>See the [Docker Community Edition release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/docker/docker-ce/releases/tag/v18.06.2-ce). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
 </tr>
 <tr>
 <td>Kubernetes `kubelet` configuration</td>

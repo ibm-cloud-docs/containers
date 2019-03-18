@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks 
 
@@ -263,7 +263,7 @@ To deploy the app:
 
 12. In the **Workloads** tab, you can see the resources that you created.
 
-Congratulations! You deployed your first version of the app.
+Good job! You deployed your first version of the app.
 
 Too many commands in this lesson? Agreed. How about using a configuration script to do some of the work for you? To use a configuration script for the second version of the app, and to create higher availability by deploying multiple instances of that app, continue to the next lesson.
 
@@ -405,7 +405,7 @@ As defined in the configuration script, Kubernetes can use an availability check
        ```
        {: screen}
 
-Congratulations! You deployed the second version of the app. You had to use fewer commands, learned how health checks work, and edited a deployment, which is great! The Hello world app passed the test for the PR firm. Now, you can deploy a more useful app for the PR firm to start analyzing press releases.
+Good job! You deployed the second version of the app. You had to use fewer commands, learned how health checks work, and edited a deployment, which is great! The Hello world app passed the test for the PR firm. Now, you can deploy a more useful app for the PR firm to start analyzing press releases.
 
 Ready to delete what you created before you continue? This time, you can use the same configuration script to delete both of the resources that you created.
 
@@ -660,7 +660,7 @@ Change the name of the image:
 
 [Test your knowledge and take a quiz! ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-Congratulations! You deployed the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app. The PR firm can start to use this deployment to start analyzing their press releases.
+Good job! You deployed the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app. The PR firm can start to use this deployment to start analyzing their press releases.
 
 Ready to delete what you created? You can use the configuration script to delete the resources that you created.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks 
 
@@ -50,16 +50,16 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} p
 * The retailer is faced with strong competitive pressures. First, they need to mask the complexity of crossing into new products and new channels. For example, they need to expand product sophistication. At the same time, it needs to be simpler for their customers to jump across brands.
 * That ability to jump brand means that the retail ecosystem requires connectivity to partners. Then, the cloud can bring new value from partners, customers, and other external players. 
 * Burst user events, like Black Friday, strain existing online systems, forcing the retailer to over-provision the compute infrastructure. 
-* The retailer’s Developers needed to constantly evolve apps, but traditional tools slowed their ability to deploy updates and features frequently, especially when they collaborate with partner teams.  
+* The retailer’s Developers needed to constantly evolve apps, but traditional tools slowed their ability to deploy updates and features frequently, especially when they collaborate with business partner teams.  
 
 **The solution**
 
-A smarter shopping experience is needed to increase customer retention and gross profit margin. The retailer’s traditional sales model was suffering due to the lack of partner inventory for cross-sales and up-sales. Their shoppers are looking for increased convenience, so that they can quickly find related items together, such as yoga pants and mats. 
+A smarter shopping experience is needed to increase customer retention and gross profit margin. The retailer’s traditional sales model was suffering due to the lack of business partner inventory for cross-sales and up-sales. Their shoppers are looking for increased convenience, so that they can quickly find related items together, such as yoga pants and mats. 
 
 The retailer must also provide customers with useful content, such as product information, alternative product information, reviews, and real-time inventory visibility. And those customers want it while online and in-store through personal mobile devices and mobile-equipped store associates.
 
 The solution is made up of these primary components: 
-* INVENTORY: App for partner ecosystem that aggregates and communicates inventory, especially new product introductions, including APIs for partners to reuse in their own retail and B2B apps
+* INVENTORY: App for business partner ecosystem that aggregates and communicates inventory, especially new product introductions, including APIs for partners to reuse in their own retail and B2B apps
 * CROSS- AND UP-SALES: App that surfaces cross-sell and up-sell opportunities with APIs that can be used in various e-commerce and mobile apps
 * DEVELOPMENT ENVIRONMENT: Kubernetes clusters for Dev, Test, and Production systems increase collaboration and data sharing among the retailer and its partners
 
@@ -86,10 +86,10 @@ Technical solution:
 * {{site.data.keyword.cos_full}}
 * {{site.data.keyword.contdelivery_full}}
 * IBM Cloud Logging and Monitoring
-* {{site.data.keyword.appid.short_notm}}
+* {{site.data.keyword.appid_short_notm}}
 
 **Step 1: Containerize apps by using microservices**
-* Architect apps into a set of cooperative microservices that run within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
+* Structure apps into a set of cooperative microservices that run within {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
 * Deploy apps to container images that run in {{site.data.keyword.containerlong_notm}}. 
 * Provide standardized DevOps dashboards through Kubernetes.
 * Enable on-demand scaling of compute for batch and other inventory workloads that run infrequently.
@@ -100,8 +100,8 @@ Technical solution:
 * Using the toolchains and Helm deployment tools, the apps are also deployed to clusters across the globe, so workloads and data meet regional requirements, especially personalization. 
 
 **Step 3: Understand users**
-* {{site.data.keyword.appid.short_notm}} provides sign-on capabilities without needing to change app code.
-* After users have signed in, you can use {{site.data.keyword.appid.short_notm}} to create profiles and personalize a user's experience of your application.
+* {{site.data.keyword.appid_short_notm}} provides sign-on capabilities without needing to change app code.
+* After users have signed in, you can use {{site.data.keyword.appid_short_notm}} to create profiles and personalize a user's experience of your application.
 
 **Step 4: Share data**
 * {{site.data.keyword.cos_full}} plus {{site.data.keyword.messagehub_full}} provides real-time and historical data storage, so that cross-sales offers represent available inventory from partners. 
@@ -142,7 +142,7 @@ Key technologies:
 
 **The solution**
 
-The grocer needs an app to increase conversion and store traffic to generate new sales and build customer loyalty in a reusable cloud analytics platform. The in-store targeted experience can be an event along with a services or product vendor that attracts both loyalty and new customers based on affinity to the specific event. The store and partner then offer incentives to come to the event as well as buying products from the store or partner.  
+The grocer needs an app to increase conversion and store traffic to generate new sales and build customer loyalty in a reusable cloud analytics platform. The in-store targeted experience can be an event along with a services or product vendor that attracts both loyalty and new customers based on affinity to the specific event. The store and business partner then offer incentives to come to the event as well as buying products from the store or partner.  
 
 After the event, customers are guided to purchasing the necessary products, so they can repeat the demonstrated activity on their own in the future. The targeted customer experience is measured with incentive redemption and new loyalty customer signups. The combination of a hyper-personalized marketing event and a tool to track in-store purchases can carry the targeted experience all the way through to product purchase. All these actions result in higher traffic and conversions.
 
@@ -180,7 +180,7 @@ Technical solution:
 
 **Step 1: Containerize apps, by using microservices**
 
-* Architect inventory analysis and mobile apps into microservices and deploy them to containers in {{site.data.keyword.containerlong_notm}}. 
+* Structure inventory analysis and mobile apps into microservices and deploy them to containers in {{site.data.keyword.containerlong_notm}}. 
 * Provide standardized DevOps dashboards through Kubernetes.
 * Scale the compute on-demand for batch and other inventory workloads that run less frequently.
 

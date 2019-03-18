@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks 
 
@@ -112,7 +112,7 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
 
 3.  [Create a root key](/docs/services/key-protect?topic=key-protect-create-root-keys#create-root-keys). By default, the root key is created without an expiration date.
 
-    Need to set an expiration date to comply with internal security policies? [Create the root key by using the API](/docs/services/key-protect?topic=key-protect-create-root-keys#create-root-key-api) and include the `expirationDate` parameter. **Important**: Before your root key expires, you must repeat these steps to update your cluster to use a new root key. Otherwise, you cannot unencrypt your secrets.
+    Need to set an expiration date to comply with internal security policies? [Create the root key by using the API](/docs/services/key-protect?topic=key-protect-create-root-keys#create-root-key-api) and include the `expirationDate` parameter. **Important**: Before your root key expires, you must repeat these steps to update your cluster to use a new root key. Otherwise, you cannot decrypt your secrets.
     {: tip}
 
 4.  Note the [root key **ID**](/docs/services/key-protect?topic=key-protect-view-keys#view-keys-gui).
@@ -170,4 +170,4 @@ When it comes to protecting your data, encryption is one of the most popular and
 
 If you or your company require data sensitivity due to internal policies, government regulations, or industry compliance requirements, this solution might help you to move to the cloud. Example solutions include financial and healthcare institutions, or countries with government policies that require on-premises cloud solutions.
 
-To get started, provision an SGX-enabled bare metal worker cluster with machine type: mb2c.4x32 and check out the [the {{site.data.keyword.datashield_short}} docs](/docs/services/data-shield?topic=data-shield-gettingstarted#gettingstarted).
+To get started, provision an SGX-enabled bare metal worker cluster with machine type: mb2c.4x32 and check out the [the {{site.data.keyword.datashield_short}} docs](/docs/services/data-shield?topic=data-shield-getting-started#getting-started).

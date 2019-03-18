@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks, docker
 
@@ -122,7 +122,7 @@ Define update strategies for your app, including the number of pods that you wan
 ## Service architecture
 {: #architecture}
 
-In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, your containerized apps are hosted on compute hosts that are called worker nodes. To be more specific, the apps run in pods and the pods are hosted on worker nodes. Worker nodes are managed by the Kubernetes master. The Kubernetes master and the worker nodes communicate with each other through secure TLS certificates and an openVPN connection to orchestrate your cluster configurations.
+In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, your containerized apps are hosted on compute hosts that are called worker nodes. To be more specific, the apps run in pods and the pods are hosted on worker nodes. Worker nodes are managed by the Kubernetes master. The Kubernetes master and the worker nodes communicate with each other through secure TLS certificates and an OpenVPN connection to orchestrate your cluster configurations.
 {: shortdesc}
 
 
@@ -166,7 +166,7 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     </tr>
     <tr>
     <td>kube-controller-manager</td>
-    <td>The Kubernetes controller manager is a daemon that watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the desired state.</td>
+    <td>The Kubernetes controller manager is a daemon that watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the required state.</td>
     </tr>
     </tbody></table></dd>
   <dt>Worker node</dt>

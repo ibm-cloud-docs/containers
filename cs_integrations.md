@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks, helm
 
@@ -52,7 +52,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Grafeas</td>
-<td>[Grafeas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafeas.io) is an open source CI/CD service that provides a common way for how to retrieve, store, and exchange metadata during the software supply chain process. For example, if you integrate Grafeas into your app build process, Grafeas can store information about the initiator of the build request, vulnerability scan results, and quality assurance signoff so that you can make an informed decision if an app can be deployed to production. You can use this metadata in audits or to prove compliance for your software supply chain. </td>
+<td>[Grafeas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafeas.io) is an open source CI/CD service that provides a common way for how to retrieve, store, and exchange metadata during the software supply chain process. For example, if you integrate Grafeas into your app build process, Grafeas can store information about the initiator of the build request, vulnerability scan results, and quality assurance sign-off so that you can make an informed decision if an app can be deployed to production. You can use this metadata in audits or to prove compliance for your software supply chain. </td>
 </tr>
 <tr>
 <td>Helm</td>
@@ -72,7 +72,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Knative</td>
-<td>[Knative ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others with the goal of extending the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. The platform uses a consistent approach across programming languages and frameworks to abstract the operational overhead of building, deploying and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. For more information, see [Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). </td>
+<td>[Knative ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others with the goal of extending the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. The platform uses a consistent approach across programming languages and frameworks to abstract the operational burden of building, deploying and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. For more information, see [Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). </td>
 </tr>
 </tbody>
 </table>
@@ -172,7 +172,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}} (Beta)</td>
-  <td>You can use <a href="/docs/services/data-shield?topic=data-shield-gettingstarted#gettingstarted" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
+  <td>You can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
@@ -214,7 +214,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 </tr>
 <tr>
   <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#getting-started-with-block-storage) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-GettingStarted#GettingStarted) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
@@ -222,7 +222,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-about#getting-started-with-file-storage) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-gettingstarted#gettingstarted) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -679,7 +679,14 @@ You can add the service credentials and other key value pairs from your Kubernet
 [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh) is a Kubernetes package manager. You can create Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters.
 {:shortdesc}
 
-Before you use Helm charts with {{site.data.keyword.containerlong_notm}}, you must install and initialize a Helm instance in your cluster. You can then add the {{site.data.keyword.Bluemix_notm}} Helm repository to your Helm instance.
+To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Private clusters that are protected with a custom firewall do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](#private_local_tiller), or [install Helm charts without using Tiller](#private_install_without_tiller). 
+{: note}
+
+### Setting up Helm in a cluster with public access
+{: #public_helm_install}
+
+If your cluster has enabled the public service endpoint, you can install Tiller by using the public image in the Google Container Registry. 
+{: shortdesc}
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -691,7 +698,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-3. Initialize Helm and install `tiller` with the service account that you created.
+3. Initialize Helm and install Tiller with the service account that you created.
 
     ```
     helm init --service-account tiller
@@ -726,28 +733,115 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
         tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
         ```
         {: screen}
-
+        
 5. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
+   ```
+   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   ```
+   {: pre}
 
-    ```
-    helm repo add ibm https://registry.bluemix.net/helm/ibm
-    ```
-    {: pre}
-
-    ```
-    helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
-    ```
-    {: pre}
+   ```
+   helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
+   ```
+   {: pre}
 
 6. Update the repos to retrieve the latest versions of all Helm charts.
+   ```
+   helm repo update
+   ```
+   {: pre}
 
+7. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
+   ```
+   helm search ibm
+   ```
+   {: pre}
+
+   ```
+   helm search ibm-charts
+   ```
+   {: pre}
+
+8. Identify the Helm chart that you want to install and follow the instructions in the Helm chart `README` to install the Helm chart in your cluster. 
+
+
+### Private clusters: Pushing the Tiller image to your private registry in {{site.data.keyword.registryshort_notm}}
+{: #private_local_tiller}
+
+You can pull the Tiller image to your local machine, push it to your namespace in {{site.data.keyword.registryshort_notm}} and let Helm install Tiller by using the image in {{site.data.keyword.registryshort_notm}}. 
+{: shortdesc}
+
+Before you begin: 
+- Install Docker on your local machine. If you installed the [{{site.data.keyword.Bluemix_notm}} CLI](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli), Docker is already installed. 
+- [Install the {{site.data.keyword.registryshort_notm}} CLI plug-in and set up a namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_cli_install).
+
+To install Tiller by using {{site.data.keyword.registryshort_notm}}:
+
+1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
+2. Connect to your private cluster by using the {{site.data.keyword.Bluemix_notm}} infrastructure VPN tunnel that you set up. 
+3. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following `.yaml` file from the [{{site.data.keyword.Bluemix_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml). **Note**: To install Tiller with the service account and cluster role binding in the `kube-system` namespace, you must have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
+    1. [Get the Kubernetes service account and cluster role binding YAML files ![External link icon](../icons/launch-glyph.svg "External link icon")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml). 
+    
+    2. Create the Kubernetes resources in your cluster. 
+       ```
+       kubectl apply -f service-account.yaml
+       ```
+       {: pre}
+       
+       ```
+       kubectl apply -f cluster-role-binding.yaml
+       ```
+       {: pre}
+   
+4. [Find the version of Tiller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30)] that you want to install in your cluster. If you do not need a specific version, use the latest one. 
+
+5. Pull the Tiller image to your local machine. 
+   ```
+   docker pull gcr.io/kubernetes-helm/tiller:v2.11.0
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   docker pull gcr.io/kubernetes-helm/tiller:v2.13.0
+   v2.13.0: Pulling from kubernetes-helm/tiller
+   48ecbb6b270e: Pull complete 
+   d3fa0712c71b: Pull complete 
+   bf13a43b92e9: Pull complete 
+   b3f98be98675: Pull complete 
+   Digest: sha256:c4bf03bb67b3ae07e38e834f29dc7fd43f472f67cad3c078279ff1bbbb463aa6
+   Status: Downloaded newer image for gcr.io/kubernetes-helm/tiller:v2.13.0
+   ```
+   {: screen}
+
+6. [Push the Tiller image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing). 
+
+7. [Copy the image pull secret to access {{site.data.keyword.registryshort_notm}} from the default namespace to the `kube-system` namespace](/docs/containers?topic=containers-images#copy_imagePullSecret). 
+
+8. Install Tiller in your private cluster by using the image that you stored in your namespace in {{site.data.keyword.registryshort_notm}}. 
+   ```
+   helm init --tiller-image <region>.icr.io/<mynamespace>/<myimage>:<tag> --service-account tiller
+   ```
+   {: pre}
+   
+9. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
+   ```
+   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   ```
+   {: pre}
+
+   ```
+   helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
+   ```
+   {: pre}
+
+10. Update the repos to retrieve the latest versions of all Helm charts.
     ```
     helm repo update
     ```
     {: pre}
 
-7.  List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
-
+11. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
     ```
     helm search ibm
     ```
@@ -758,12 +852,95 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     ```
     {: pre}
 
-8. To learn more about a chart, list its settings and default values.
+12. Identify the Helm chart that you want to install and follow the instructions in the Helm chart `README` to install the Helm chart in your cluster. 
 
-    For example, to view the settings, documentation, and default values for the strongSwan IPSec VPN service Helm chart:
+### Private clusters: Installing Helm charts without using Tiller
+{: #private_install_without_tiller}
 
+If you don't want to install Tiller in your private cluster, you can manually create the Helm chart YAML files and apply them by using `kubectl` commands. 
+{: shortdesc}
+
+The steps in this example show how to install Helm charts from the {{site.data.keyword.Bluemix_notm}} Helm chart repositories in your private cluster. If you want to install a Helm chart that is not stored in one of the {{site.data.keyword.Bluemix_notm}} Helm chart repositories, you must follow the instructions in this topic to create the YAML files for your Helm chart. In addition, you must download the Helm chart image from the public container registry, push it to your namespace in {{site.data.keyword.registryshort_notm}}, and update the `values.yaml` file to use the image in {{site.data.keyword.registryshort_notm}}. 
+{: note}
+
+1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
+2. Connect to your private cluster by using the {{site.data.keyword.Bluemix_notm}} infrastructure VPN tunnel that you set up. 
+3. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
+   ```
+   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   ```
+   {: pre}
+
+   ```
+   helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
+   ```
+   {: pre}
+
+4. Update the repos to retrieve the latest versions of all Helm charts.
+   ```
+   helm repo update
+   ```
+   {: pre}
+
+5. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
+   ```
+   helm search ibm
+   ```
+   {: pre}
+
+   ```
+   helm search ibm-charts
+   ```
+   {: pre}
+
+6. Identify the Helm chart that you want to install, download the Helm chart to your local machine, and unpack the files of your Helm chart. The following example shows how to download the Helm chart for the cluster autoscaler version 1.0.3 and unpack the files in a `cluster-autoscaler` directory. 
+   ```
+   helm fetch ibm/ibm-iks-cluster-autoscaler --untar --untardir ./cluster-autoscaler --version 1.0.3
+   ```
+   {: pre}
+   
+7. Navigate to the directory where you unpacked the Helm chart files. 
+   ```
+   cd cluster-autoscaler
+   ```
+   {: pre}
+
+8. Create an `output` directory for the YAML files that you generate by using the files in your Helm chart. 
+   ```
+   mkdir output
+   ```
+   {: pre}
+   
+9. Open the `values.yaml` file and make any changes that are required by the Helm chart installation instructions. 
+   ```
+   nano ibm-iks-cluster-autoscaler/values.yaml
+   ```
+   {: pre}
+   
+10. Use your local Helm installation to create all Kubernetes YAML files for your Helm chart. The YAML files are stored in the `output` directory that you created earlier. 
     ```
-    helm inspect ibm/strongswan
+    helm template --values ./ibm-iks-cluster-autoscaler/values.yaml --output-dir ./output ./ibm-iks-cluster-autoscaler
+    ```
+    {: pre}
+   
+    Example output: 
+    ```
+    wrote ./output/ibm-iks-cluster-autoscaler/templates/ca-configmap.yaml
+    wrote ./output/ibm-iks-cluster-autoscaler/templates/ca-service-account-roles.yaml
+    wrote ./output/ibm-iks-cluster-autoscaler/templates/ca-service.yaml
+    wrote ./output/ibm-iks-cluster-autoscaler/templates/ca-deployment.yaml
+    ```
+    {: screen}
+   
+11. Deploy all YAML files to your private cluster. 
+    ```
+    kubectl apply --recursive --filename ./output
+    ```
+   {: pre}
+   
+12. Optional: Remove all YAML files from the `output` directory. 
+    ```
+    kubectl delete --recursive --filename ./output
     ```
     {: pre}
 

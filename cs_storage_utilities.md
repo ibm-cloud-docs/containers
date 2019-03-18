@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-13"
+lastupdated: "2019-03-15"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -141,7 +141,7 @@ You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage At
    ```
    {: pre}
    
-2. Optional: Download the latest Helm chart to your local machine. Then, unzip the package and review the `release.md` file to find the latest release information.
+2. Optional: Download the latest Helm chart to your local machine. Then, extract the package and review the `release.md` file to find the latest release information.
    ```
    helm fetch ibm/ibmcloud-block-storage-plugin
    ```

@@ -24,8 +24,8 @@ subcollection: containers
 
 
 
-# Getting started with {{site.data.keyword.containerlong_notm}}
-{: #container_index}
+# Getting started tutorial
+{: #getting-started}
 
 Hit the ground running with {{site.data.keyword.containerlong}} by deploying highly available apps in Docker containers that run in Kubernetes clusters.
 {:shortdesc}
