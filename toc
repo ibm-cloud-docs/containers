@@ -5,9 +5,10 @@
 IBM Cloud Kubernetes Service
 
     cs_cli_reference.md
+    container_index.md
 
     {: .navgroup id="learn"}
-    container_index.md
+    getting-started.md
     
 
     {: .topicgroup}
