@@ -86,7 +86,7 @@ In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. I
 When you create a standard cluster, subnets are automatically created for you. However, instead of using the automatically provisioned subnets, you can use existing portable subnets from your IBM Cloud infrastructure (SoftLayer) account or reuse subnets from a deleted cluster.
 {:shortdesc}
 
-Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. f instead you want to get more portable private IP addresses for your cluster load balancer services by using your own on-premises network subnet, see [Adding portable private IPs by adding user-managed subnets to private VLANs](#user_managed).
+Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. If instead you want to get more portable private IP addresses for your cluster load balancer services by using your own on-premises network subnet, see [Adding portable private IPs by adding user-managed subnets to private VLANs](#user_managed).
 
 Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
 {: note}
