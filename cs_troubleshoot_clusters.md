@@ -26,7 +26,6 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 
 
-
 # Troubleshooting clusters and worker nodes
 {: #cs_troubleshoot_clusters}
 

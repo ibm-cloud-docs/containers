@@ -24,7 +24,6 @@ subcollection: containers
 
 
 
-
 # Deploying apps in clusters
 {: #app}
 
@@ -784,7 +783,7 @@ To deploy apps to specific worker nodes:
     kubectl describe node <worker_node_private_IP>
     ```
     {: pre}
-    
+
     Example output:
     ```
     Name:               10.xxx.xx.xxx

@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # Planning highly available persistent storage
@@ -276,7 +277,7 @@ Persistent data storage options are available for standard clusters only.
 Looking to connect your cluster to an on-prem database instead? See [Setting up VPN connectivity to your cluster](/docs/containers?topic=containers-vpn#vpn).
 {: tip}
 
-The following image shows the options that you have in {{site.data.keyword.containerlong_notm}} to permanently store your data in a multizone cluster and make your data highly available. You can use these options in a single zone cluster, but you might not get the high availability benefits that your app requires. 
+The following image shows the options that you have in {{site.data.keyword.containerlong_notm}} to permanently store your data in a multizone cluster and make your data highly available. You can use these options in a single zone cluster, but you might not get the high availability benefits that your app requires.
 
 <img src="images/cs_storage_options_multizone.png" alt="High availability options for persistent storage in a multizone cluster"/>
 

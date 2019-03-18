@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 ---
 
@@ -17,7 +17,6 @@ lastupdated: "2019-03-15"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Using the managed Istio add-on (beta)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 
+
 # IBM Cloud storage utilities
 {: #utilities}
 
@@ -32,16 +33,16 @@ Use the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in to att
 {: shortdesc}
 
 For example, you want to store your data with a software-defined storage solution (SDS), such as [Portworx](/docs/containers?topic=containers-portworx), but you do not want to use bare metal worker nodes that are optimized for SDS usage and that come with extra local disks. To add local disks to your non-SDS worker node, you must manually create your block storage devices in your {{site.data.keyword.Bluemix_notm}} infrastructure account and use the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher to attach the storage to your non-SDS worker node.
-  
+
 The {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in creates pods on every worker node in your cluster as part of a daemon set and sets up a Kubernetes storage class that you later use to attach the block storage device to your non-SDS worker node.
 
 Looking for instructions for how to update or remove the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in? See [Updating the plug-in](#update_block_attacher) and [Removing the plug-in](#remove_block_attacher).
 {: tip}
 
 1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
-    
+
 2.  Verify that tiller is installed with a service account.
-    
+
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```
@@ -128,7 +129,7 @@ Looking for instructions for how to update or remove the {{site.data.keyword.Blu
    ibmc-block-attacher       ibm.io/ibmc-blockattacher   11m
    ```
    {: screen}
-   
+
 ### Updating the IBM Cloud Block Storage Attacher plug-in
 {: #update_block_attacher}
 
@@ -140,7 +141,7 @@ You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage At
    helm repo update
    ```
    {: pre}
-   
+
 2. Optional: Download the latest Helm chart to your local machine. Then, extract the package and review the `release.md` file to find the latest release information.
    ```
    helm fetch ibm/ibmcloud-block-storage-plugin
@@ -152,13 +153,13 @@ You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage At
    helm ls | grep ibm-block-storage-attacher
    ```
    {: pre}
-   
+
    Example output:
    ```
    <helm_chart_name>	1       	Wed Aug  1 14:55:15 2018	DEPLOYED	ibm-block-storage-attacher-1.0.0	default
    ```
    {: screen}
-   
+
 4. Upgrade the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher to latest.
    ```
    helm upgrade --force --recreate-pods <helm_chart_name> ibm-block-storage-attacher
@@ -176,39 +177,39 @@ If you do not want to provision and use the {{site.data.keyword.Bluemix_notm}} B
    helm ls | grep ibm-block-storage-attacher
    ```
    {: pre}
-   
+
    Example output:
    ```
    <helm_chart_name>	1       	Wed Aug  1 14:55:15 2018	DEPLOYED	ibm-block-storage-attacher-1.0.0	default
    ```
    {: screen}
-   
+
 2. Delete the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in by removing the Helm chart.
    ```
    helm delete <helm_chart_name> --purge
    ```
    {: pre}
-   
+
 3. Verify that the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher plug-in pods are removed.
    ```
    kubectl get pod -n kube-system -o wide | grep attacher
    ```
    {: pre}
-   
+
    The removal of the pods is successful if no pods are displayed in your CLI output.
-   
+
 4. Verify that the {{site.data.keyword.Bluemix_notm}} Block Storage Attacher storage class is removed.
    ```
    kubectl get storageclasses | grep attacher
    ```
    {: pre}
-   
+
    The removal of the storage class is successful if no storage class is displayed in your CLI output.
-   
+
 ## Automatically provisioning unformatted block storage and authorizing your worker nodes to access the storage
 {: #automatic_block}
 
-You can use the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in to automatically add raw, unformatted, and unmounted block storage with the same configuration to all worker nodes in your cluster. 
+You can use the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in to automatically add raw, unformatted, and unmounted block storage with the same configuration to all worker nodes in your cluster.
 {: shortdesc}
 
 The `mkpvyaml` container that is included in the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in is configured to run a script that finds all worker nodes in your cluster, creates raw block storage in the {{site.data.keyword.Bluemix_notm}} infrastructure portal, and then authorizes the worker nodes to access the storage.
@@ -321,10 +322,10 @@ To add different block storage configurations, add block storage to a subset of 
         Sending build context to Docker daemon   29.7kB
         Step 1/16 : FROM ubuntu:18.10
         18.10: Pulling from library/ubuntu
-        5940862bcfcd: Pull complete 
-        a496d03c4a24: Pull complete 
-        5d5e0ccd5d0c: Pull complete 
-        ba24b170ddf1: Pull complete 
+        5940862bcfcd: Pull complete
+        a496d03c4a24: Pull complete
+        5d5e0ccd5d0c: Pull complete
+        ba24b170ddf1: Pull complete
         Digest: sha256:20b5d52b03712e2ba8819eb53be07612c67bb87560f121cc195af27208da10e0
         Status: Downloaded newer image for ubuntu:18.10
          ---> 0bfd76efee03
@@ -500,7 +501,7 @@ To attach the block storage device to a non-SDS worker node you must create a pe
 {: shortdesc}
 
 **Before you begin**:
-- Make sure that you [automatically](#automatic_block) or [manually](#manual_block) created raw, unformatted and unmounted block storage to your non-SDS worker nodes. 
+- Make sure that you [automatically](#automatic_block) or [manually](#manual_block) created raw, unformatted and unmounted block storage to your non-SDS worker nodes.
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 **To attach raw block storage to non-SDS worker nodes**:
@@ -641,7 +642,6 @@ To attach the block storage device to a non-SDS worker node you must create a pe
    {: screen}
 
    The block storage device is successfully attached when the **ibm.io/dm** is set to a device ID, such as `/dev/dm/1`, and you can see **ibm.io/attachstatus=attached** in the **Annotations** section of your CLI output.
-   
+
 If you want to detach a volume, delete the PV. Detached volumes are still authorized to be accessed by a specific worker node and are attached again when you create a new PV with the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher storage class to attach a different volume to the same worker node. To avoid attaching the old detached volume again, unauthorize the worker node to access the detached volume by using the `ibmcloud sl block access-revoke` command. Detaching the volume does not remove the volume from your IBM Cloud infrastructure (SoftLayer) account. To cancel the billing for your volume, you must manually [remove the storage from your IBM Cloud infrastructure (SoftLayer) account](/docs/containers?topic=containers-cleanup).
 {: note}
-  
