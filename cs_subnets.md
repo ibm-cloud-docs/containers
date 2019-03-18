@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks
 
@@ -79,13 +79,13 @@ In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. I
 
 
 
-## Using custom or existing subnets to create a cluster
+## Using custom or existing IBM Cloud infrastructure (SoftLayer) subnets to create a cluster
 {: #subnets_custom}
 
 When you create a standard cluster, subnets are automatically created for you. However, instead of using the automatically provisioned subnets, you can use existing portable subnets from your IBM Cloud infrastructure (SoftLayer) account or reuse subnets from a deleted cluster.
 {:shortdesc}
 
-Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses.
+Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. f instead you want to get more portable private IP addresses for your cluster load balancer services by using your own on-premises network subnet, see [Adding portable private IPs by adding user-managed subnets to private VLANs](#user_managed).
 
 Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
 {: note}
@@ -355,11 +355,14 @@ To order a subnet:
 <br />
 
 
-### Adding portable private IPs by using user-managed subnets
+### Adding portable private IPs by adding user-managed subnets to private VLANs
 {: #user_managed}
 
-You can get more portable private IPs for load balancer services by making a subnet from an on-premises network available to your specified cluster.
+You can get more portable private IPs for load balancer services by making a subnet from an on-premises network available to your cluster.
 {:shortdesc}
+
+Want to reuse existing portable subnets in your IBM Cloud infrastructure (SoftLayer) account instead? See [Using custom or existing IBM Cloud infrastructure (SoftLayer) subnets to create a cluster](#subnets_custom).
+{: tip}
 
 Requirements:
 - User-managed subnets can be added to private VLANs only.
