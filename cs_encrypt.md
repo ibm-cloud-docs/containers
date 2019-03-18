@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-03-18"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Protecting sensitive information in your cluster
@@ -138,7 +137,7 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
     ibmcloud ks cluster-get <cluster_name_or_ID>
     ```
     {: pre}
-    
+
     Example output when the enablement is in progress:
     ```
     Name:                   <cluster_name>   
@@ -147,7 +146,7 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
     Master Status:          Key Protect feature enablement in progress.  
     ```
     {: screen}
-    
+
     Example output when the master is ready:
     ```
     Name:                   <cluster_name>   

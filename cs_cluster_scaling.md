@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks, node scaling
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:gif: data-image-type='gif'}
+
 
 
 # Scaling clusters

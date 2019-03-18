@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2019-03-15"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters
@@ -38,10 +39,10 @@ Knative comes with 3 key components, or _primitives_, that help you to build, de
 - **Eventing:** With the `Eventing` primitive, you can create triggers or event streams that other services can subscribe to. For example, you might want to kick off a new build of your app every time code is pushed to your GitHub master repo. Or you want to run a serverless app only if the temperature drops below freezing point. The `Eventing` primitive can be integrated into your CI/CD pipeline to automate the build and deployment of apps in case a specific event occurs.
 
 **What is the Managed Knative on {{site.data.keyword.containerlong_notm}} (experimental) add-on?** </br>
-Managed Knative on {{site.data.keyword.containerlong_notm}} is a managed add-on that integrates Knative and Istio directly with your Kubernetes cluster. The Knative and Istio version in the add-on are tested by IBM and supported for the use in {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.containerlong_notm}} keeps the Knative and Istio components up-to-date by automatically rolling out updates for your add-on. 
+Managed Knative on {{site.data.keyword.containerlong_notm}} is a managed add-on that integrates Knative and Istio directly with your Kubernetes cluster. The Knative and Istio version in the add-on are tested by IBM and supported for the use in {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.containerlong_notm}} keeps the Knative and Istio components up-to-date by automatically rolling out updates for your add-on.
 
 **Are there any limitations?** </br>
-If you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster, you cannot enable the managed Knative add-on in your cluster. 
+If you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster, you cannot enable the managed Knative add-on in your cluster.
 
 Sounds good? Follow this tutorial to get started with Knative in {{site.data.keyword.containerlong_notm}}.
 
@@ -74,7 +75,7 @@ This tutorial is designed for developers who are interested in learning how to u
 ## Lesson 1: Setting up the managed Knative add-on
 {: #knative_setup}
 
-Knative builds on top of Istio to ensure that your serverless and containerized workloads can be exposed within the cluster and on the internet. With Istio, you can also monitor and control network traffic between your services and ensure that your data is encrypted during transit. When you install the managed Knative add-on, the managed Istio add-on is automatically installed as well. 
+Knative builds on top of Istio to ensure that your serverless and containerized workloads can be exposed within the cluster and on the internet. With Istio, you can also monitor and control network traffic between your services and ensure that your data is encrypted during transit. When you install the managed Knative add-on, the managed Istio add-on is automatically installed as well.
 {: shortdesc}
 
 1. Enable the managed Knative add-on in your cluster. When you enable Knative in your cluster, Istio and all Knative components are installed in your cluster.

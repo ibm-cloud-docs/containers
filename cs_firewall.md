@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 
@@ -294,7 +293,7 @@ Let your cluster access infrastructure resources and services from behind a fire
                    </tr>
                   </tbody>
                 </table>
-            
+
 
 4. Allow outgoing network traffic from your worker node to {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).
     - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.bluemix.net`
@@ -452,7 +451,7 @@ If you want to access services that run inside or outside {{site.data.keyword.Bl
         ibmcloud sl subnet list | grep -e <networkID1> -e <networkID2>
         ```
         {: pre}
-        
+
         Example output:
         ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers

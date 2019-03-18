@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 
@@ -764,16 +763,53 @@ Before you begin:
 
 To deploy apps to specific worker nodes:
 
-1. Get the name of the worker pool that you want to deploy app pods to.
+1.  Get the ID of the worker pool that you want to deploy app pods to.
     ```
     ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
     ```
-    {:pre}
+    {: pre}
 
-    These steps use a worker pool name as an example. To deploy app pods to certain worker nodes based on another factor, get that value instead. For example, to deploy app pods only to worker nodes on a specific VLAN, get the VLAN ID by running `ibmcloud ks vlans --zone <zone>`.
-    {: tip}
+2.  List the worker nodes that are in the worker pool, and note one of the **Private IP** addresses.
+    ```
+    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+    ```
+    {: pre}
 
-2. [Add an affinity rule ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) for the worker pool name to the app deployment.
+3.  Describe the worker node. In the **Labels** output, note the worker pool ID label, `ibm-cloud.kubernetes.io/worker-pool-id`.
+
+    <p class="tip">The steps in this topic use a worker pool ID to deploy app pods only to worker nodes within that worker pool. To deploy app pods to specific worker nodes by using a different label, note this label instead. For example, to deploy app pods only to worker nodes on a specific private VLAN, use the `privateVLAN=` label.</p>
+
+    ```
+    kubectl describe node <worker_node_private_IP>
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    Name:               10.xxx.xx.xxx
+    Roles:              <none>
+    Labels:             arch=amd64
+                        beta.kubernetes.io/arch=amd64
+                        beta.kubernetes.io/instance-type=b2c.4x16.encrypted
+                        beta.kubernetes.io/os=linux
+                        failure-domain.beta.kubernetes.io/region=us-south
+                        failure-domain.beta.kubernetes.io/zone=dal10
+                        ibm-cloud.kubernetes.io/encrypted-docker-data=true
+                        ibm-cloud.kubernetes.io/ha-worker=true
+                        ibm-cloud.kubernetes.io/iaas-provider=softlayer
+                        ibm-cloud.kubernetes.io/machine-type=b2c.4x16.encrypted
+                        ibm-cloud.kubernetes.io/sgx-enabled=false
+                        ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
+                        ibm-cloud.kubernetes.io/worker-version=1.12.6_1534
+                        kubernetes.io/hostname=10.xxx.xx.xxx
+                        privateVLAN=1234567
+                        publicVLAN=7654321
+    Annotations:        node.alpha.kubernetes.io/ttl=0
+    ...
+    ```
+    {: screen}
+
+4. [Add an affinity rule ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) for the worker pool ID label to the app deployment.
 
     Example YAML:
 
@@ -790,23 +826,23 @@ To deploy apps to specific worker nodes:
               requiredDuringSchedulingIgnoredDuringExecution:
                 nodeSelectorTerms:
                 - matchExpressions:
-                  - key: workerPool
+                  - key: ibm-cloud.kubernetes.io/worker-pool-id
                     operator: In
                     values:
-                    - <worker_pool_name>
+                    - <worker_pool_ID>
     ...
     ```
     {: codeblock}
 
-    In the **affinity** section of the example YAML, `workerPool` is the `key` and `<worker_pool_name>` is the `value`.
+    In the **affinity** section of the example YAML, `ibm-cloud.kubernetes.io/worker-pool-id` is the `key` and `<worker_pool_ID>` is the `value`.
 
-3. Apply the updated deployment configuration file.
+5. Apply the updated deployment configuration file.
     ```
     kubectl apply -f with-node-affinity.yaml
     ```
     {: pre}
 
-4. Verify that the app pods deployed to the correct worker nodes.
+6. Verify that the app pods deployed to the correct worker nodes.
 
     1. List the pods in your cluster.
         ```
@@ -823,12 +859,12 @@ To deploy apps to specific worker nodes:
 
     2. In the output, identify a pod for your app. Note the **NODE** private IP address of the worker node that the pod is on.
 
-        In the above example output, the app pod `cf-py-d7b7d94db-vp8pq` is on a worker node with the IP address `10.176.48.78`.
+        In the previous example output, the app pod `cf-py-d7b7d94db-vp8pq` is on a worker node with the IP address `10.xxx.xx.xxx`.
 
     3. List the worker nodes in the worker pool that you designated in your app deployment.
 
         ```
-        ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
+        ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
         ```
         {: pre}
 

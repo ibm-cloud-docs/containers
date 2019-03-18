@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,7 +21,6 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Storing data on IBM Block Storage for IBM Cloud
@@ -809,7 +808,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
       resources:
         requests:
           storage: "<storage_size>"
-      storageClassName: 
+      storageClassName:
      ```
      {: codeblock}
 
@@ -1168,8 +1167,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    - **`<replica_number>`**: Enter the number of your replica starting with 0.
 
    For example, if you must create 3 stateful set replicas, create 3 PVCs with the following names: `nginxvol-nginx_statefulset-0`, `nginxvol-nginx_statefulset-1`, and `nginxvol-nginx_statefulset-2`.  
-   
-   Looking to create a PVC and PV for an existing storage device? Create your PVC and PV by using [static provisioning](#existing_block). 
+
+   Looking to create a PVC and PV for an existing storage device? Create your PVC and PV by using [static provisioning](#existing_block).
 
 2. Follow the steps in [Dynamic provisioning: Creating the PVC when you create a stateful set](#block_dynamic_statefulset) to create your stateful set. The name of your PVC follows the format `<volume_name>-<statefulset_name>-<replica_number>`. Make sure to use the following values from your PVC name in the stateful set specification:
    - **`spec.volumeClaimTemplates.metadata.name`**: Enter the `<volume_name>` of your PVC name.

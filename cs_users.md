@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # Assigning cluster access
@@ -282,7 +283,7 @@ To ensure that all infrastructure-related actions can be successfully completed 
 
 3. To make sure that all infrastructure-related actions in your cluster can be successfully performed, verify that the user has the correct infrastructure access policies.
     1.  From the menu bar, select **Manage > Access (IAM)**.
-    2.  Select the **Users** tab, click on the user. 
+    2.  Select the **Users** tab, click on the user.
     3. In the **API keys** pane, verify that the user has a **Classic infrastructure API key**, or click **Create an IBM Cloud API key**. For more information, see [Managing classic infrastructure API keys](/docs/iam?topic=iam-classic_keys#classic_keys).
     4. Click the **Classic infrastructure** tab and then click the **Permissions** tab.
     5. If the user doesn't have each category checked, you can use the **Permission sets** drop-down list to assign the **Super User** role. Or you can expand each category and give the user the required [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra).
@@ -1074,5 +1075,5 @@ You can remove IBM Cloud infrastructure (SoftLayer) permissions for a user by us
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/). From the menu bar, select **Manage > Access (IAM)**.
 2. Click the **Users** page, and then click the name of the user that you want to remove permissions from.
 4. Click the **Classic infrastructure** tab, then click the **Permissions, Devices, or VPN subnets** tabs.
-5. In each tab, deselect specific permissions. 
+5. In each tab, deselect specific permissions.
 6. To save your changes, click **Set** and **Save**. Permissions are downgraded after a few minutes.

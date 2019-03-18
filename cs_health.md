@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
-keywords: kubernetes, iks, logmet, logs, metrics 
+keywords: kubernetes, iks, logmet, logs, metrics
 
 subcollection: containers
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
 
 
 # Logging and monitoring

@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-18"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -23,6 +23,7 @@ subcollection: containers
 {:download: .download}
 
 
+
 # Storing data on IBM Cloud Object Storage
 {: #object_storage}
 
@@ -34,9 +35,9 @@ subcollection: containers
 Before you can start using object storage in your cluster, you must provision an {{site.data.keyword.cos_full_notm}} service instance in your account.
 {: shortdesc}
 
-The {{site.data.keyword.cos_full_notm}} plug-in is configured to work with any s3 API endpoint. For example, you might want to use a local Cloud Object Storage server, such as [Minio](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore), or connect to an s3 API endpoint that you set up at a different cloud provider instead of using an {{site.data.keyword.cos_full_notm}} service instance. 
+The {{site.data.keyword.cos_full_notm}} plug-in is configured to work with any s3 API endpoint. For example, you might want to use a local Cloud Object Storage server, such as [Minio](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore), or connect to an s3 API endpoint that you set up at a different cloud provider instead of using an {{site.data.keyword.cos_full_notm}} service instance.
 
-Follow these steps to create an {{site.data.keyword.cos_full_notm}} service instance. If you plan to use a local Cloud Object Storage server or a different s3 API endpoint, refer to the provider documentation to set up your Cloud Object Storage instance. 
+Follow these steps to create an {{site.data.keyword.cos_full_notm}} service instance. If you plan to use a local Cloud Object Storage server or a different s3 API endpoint, refer to the provider documentation to set up your Cloud Object Storage instance.
 
 1. Deploy an {{site.data.keyword.cos_full_notm}} service instance.
    1.  Open the [{{site.data.keyword.cos_full_notm}} catalog page](https://cloud.ibm.com/catalog/services/cloud-object-storage).
@@ -60,7 +61,7 @@ Follow these steps to create an {{site.data.keyword.cos_full_notm}} service inst
 To access your {{site.data.keyword.cos_full_notm}} service instance to read and write data, you must securely store the service credentials in a Kubernetes secret. The {{site.data.keyword.cos_full_notm}} plug-in uses these credentials for every read or write operation to your bucket.
 {: shortdesc}
 
-Follow these steps to create a Kubernetes secret for the credentials of an {{site.data.keyword.cos_full_notm}} service instance. If you plan to use a local Cloud Object Storage server or a different s3 API endpoint, create a Kubernetes secret with the appropriate credentials. 
+Follow these steps to create a Kubernetes secret for the credentials of an {{site.data.keyword.cos_full_notm}} service instance. If you plan to use a local Cloud Object Storage server or a different s3 API endpoint, create a Kubernetes secret with the appropriate credentials.
 
 Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -188,9 +189,9 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 2.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
-    
+
 3.  Verify that tiller is installed with a service account.
-    
+
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```
@@ -259,8 +260,8 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
        helm ibmc install ibm/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
       ```
       {: screen}
-      
-      If the output shows the error `Error: fork/exec /home/iksadmin/.helm/plugins/helm-ibmc/ibmc.sh: permission denied`, run `chmod 755 ~/.helm/plugins/helm-ibmc/ibmc.sh`. Then, rerun `helm ibmc --help`. 
+
+      If the output shows the error `Error: fork/exec /home/iksadmin/.helm/plugins/helm-ibmc/ibmc.sh: permission denied`, run `chmod 755 ~/.helm/plugins/helm-ibmc/ibmc.sh`. Then, rerun `helm ibmc --help`.
       {: tip}
 
 8. Optional: Limit the {{site.data.keyword.cos_full_notm}} plug-in to access only the Kubernetes secrets that hold your {{site.data.keyword.cos_full_notm}} service credentials. By default, the plug-in is authorized to access all Kubernetes secrets in your cluster.
@@ -293,13 +294,13 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    - **For macOS and Linux:**
      - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.
        ```
-       helm ibmc install ibm/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml 
+       helm ibmc install ibm/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
 
      - If you completed the previous step, install with a limitation to specific Kubernetes secrets.
        ```
-       helm ibmc install ./ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml 
+       helm ibmc install ./ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
        ```
        {: pre}
 
@@ -438,7 +439,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the latest version.
 {: shortdesc}
 
-1. If you use macOS or a Linux distribution, update the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in to the latest version. 
+1. If you use macOS or a Linux distribution, update the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in to the latest version.
    ```
    helm ibmc --update
    ```
