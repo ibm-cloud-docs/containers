@@ -859,7 +859,7 @@ To deploy apps to specific worker nodes:
 
     2. In the output, identify a pod for your app. Note the **NODE** private IP address of the worker node that the pod is on.
 
-        In the previous example output, the app pod `cf-py-d7b7d94db-vp8pq` is on a worker node with the IP address `172.30.xxx.xxx `.
+        In the previous example output, the app pod `cf-py-d7b7d94db-vp8pq` is on a worker node with the IP address `10.xxx.xx.xxx`.
 
     3. List the worker nodes in the worker pool that you designated in your app deployment.
 
