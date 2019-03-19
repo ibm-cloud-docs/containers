@@ -379,7 +379,7 @@ Let your cluster access infrastructure resources and services from behind a fire
   <tbody>
     <tr>
       <td>File storage</td>
-      <td>Kubernetes version 1.13.4_1512, 1.12.6_1543, 1.11.8_1549, 1.10.13_1550, or later</td>
+      <td>No private service endpoint support</td>
     </tr>
     <tr>
       <td>Block storage</td>
@@ -393,9 +393,8 @@ Let your cluster access infrastructure resources and services from behind a fire
   </table>
    
   If you must use a Kubernetes version or plug-in version that does not support private service endpoints for {{site.data.keyword.Bluemix_full_notm}} persistent storage, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
-  - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
+  - Allow all egress network traffic on TCP port 443. 
   - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
-  - **Required for {{site.data.keyword.cos_full_notm}} without HMAC authentication:** Allow all egress network traffic on TCP port 443. 
 
 <br />
 
