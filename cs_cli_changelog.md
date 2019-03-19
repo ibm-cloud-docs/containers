@@ -57,7 +57,8 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <li>Adds the [<code>ibmcloud ks cluster-feature-ls</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls) command.</li>
 </ul></li>
 <li>Updates documentation and translation.</li>
-<li>Updates the Go version to 1.11.6.</li></ul>
+<li>Updates the Go version to 1.11.6.</li>
+<li>Resolves intermittent networking issues for macOS users.</li></ul>
 </td>
 </tr>
 <tr>
