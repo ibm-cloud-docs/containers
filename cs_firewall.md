@@ -420,7 +420,7 @@ Depending on your cluster setup, you access the services by using the public, pr
 
 5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
-6. {: #pvc}To create persistent volume claims in a cluster by using the private service endpoints for {{site.data.keyword.Bluemix_full_notm}} persistent storage, make sure that your cluster is set up with the following Kubernetes version or plug-in versions.
+6. {: #pvc}To create persistent volume claims in a cluster by using the private service endpoints for {{site.data.keyword.Bluemix_notm}} persistent storage, make sure that your cluster is set up with the following Kubernetes version or plug-in versions.
    <table>
    <caption>Overview of required Kubernetes or plug-in versions to use private service endpoints</caption>
    <thead>
@@ -434,7 +434,7 @@ Depending on your cluster setup, you access the services by using the public, pr
     </tr>
     <tr>
       <td>Block storage</td>
-      <td>{{site.data.keyword.Bluemix_full_notm}} Block Storage plug-in version 1.3.0 or later
+      <td>{{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.3.0 or later
     </tr>
     <tr>
       <td>Object storage</td>
@@ -443,7 +443,7 @@ Depending on your cluster setup, you access the services by using the public, pr
   </tbody>
   </table>
    
-  If you must use a Kubernetes version or plug-in version that does not support private service endpoints for {{site.data.keyword.Bluemix_full_notm}} persistent storage, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
+  If you must use a Kubernetes version or plug-in version that does not support private service endpoints for {{site.data.keyword.Bluemix_notm}} persistent storage, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
   - Allow all egress network traffic on TCP port 443. 
   - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
 
