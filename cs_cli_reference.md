@@ -1338,7 +1338,7 @@ ibmcloud ks cluster-feature-enable private-service-endpoint --cluster CLUSTER [-
 To run this command:
 1. Enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure (SoftLayer) account.
 2. [Enable your {{site.data.keyword.Bluemix_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
-3. Ensure that the public service endpoint is enabled first by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`. In the output, look for the **Public Service Endpoint URL** field.
+3. **Important**: Ensure that the public service endpoint is enabled first by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`. In the output, look for the **Public Service Endpoint URL** field.
   * If the **Public Service Endpoint URL** field is populated, continue to the next step.
   * If the **Public Service Endpoint URL** field is empty, run `ibmcloud ks cluster-feature-enable public-service-endpoint --cluster <cluster_name>`.
 3. Run `ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name>`.

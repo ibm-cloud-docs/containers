@@ -232,7 +232,7 @@ The private service endpoint makes your Kubernetes master privately accessible. 
 **Steps to enable after cluster creation**</br>
 1. Enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) in your IBM Cloud infrastructure (SoftLayer) account.
 2. [Enable your {{site.data.keyword.Bluemix_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
-3. Ensure that the public service endpoint is enabled. In the output of the following command, look for the **Public Service Endpoint URL** field.
+3. **Important**: Ensure that the public service endpoint is enabled first so that you can maintain a connection to your worker nodes. In the output of the following command, look for the **Public Service Endpoint URL** field.
   ```
   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
   ```
