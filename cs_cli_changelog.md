@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,17 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.2.</td>
+<td>20 Mar 2019</td>
+<td>Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) in standard clusters that run Kubernetes version 1.11 or later in [VRF-enabled accounts](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started). For information about how to use the following commands, see [Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) and [Setting up the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).<ul>
+<li>Adds the `--private-service-endpoint` and `--public-service-endpoint` flags to the [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) command.</li>
+<li>Adds the [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint) command.</li>
+<li>Adds the [<code>ibmcloud ks cluster-feature-enable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_public_service_endpoint) command.</li>
+<li>Adds the [<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable_public_service_endpoint) command.</li>
+<li>Adds the [<code>ibmcloud ks cluster-feature-ls</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls) command.</li>
+</ul></td>
+</tr>
 <tr>
 <td>0.2.75</td>
 <td>14 Mar 2019</td>

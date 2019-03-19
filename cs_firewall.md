@@ -76,7 +76,7 @@ If corporate network policies prevent access from your local system to public en
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `kubectl` commands, you must allow TCP access for the cluster.
 {:shortdesc}
 
-When a cluster is created, the port in the master URL is randomly assigned from within 20000-32767. You can either choose to open port range 20000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
+When a cluster is created, the port in the service endpoint URLs are randomly assigned from within 20000-32767. You can either choose to open port range 20000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
 
 Before you begin, allow access to [run `ibmcloud ks` commands](#firewall_bx).
 
@@ -109,39 +109,43 @@ To allow access for a specific cluster:
    ```
    {: pre}
 
-5. Retrieve the **Master URL** for your cluster.
+5. Retrieve the service endpoint URLs for your cluster.
+ * If only the **Public Service Endpoint URL** is populated, get this URL. Your authorized cluster users can access the Kubernetes master through this endpoint on the public network.
+ * If only the **Private Service Endpoint URL** is populated, get this URL. Your authorized cluster users can access the Kubernetes master through this endpoint on the private network.
+ * If both the **Public Service Endpoint URL** and **Private Service Endpoint URL** are populated, get both URLs. Your authorized cluster users can access the Kubernetes master through the public endpoint on the public network or the private endpoint on the private network.
 
-   ```
-   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
 
-   Example output:
-   ```
-   ...
-   Master URL:		https://c3.<region>.containers.cloud.ibm.com:31142
-   ...
-   ```
-   {: screen}
+  Example output:
+  ```
+  ...
+  Public Service Endpoint URL:		https://c3.<region>.containers.cloud.ibm.com:30426
+  Private Service Endpoint URL:   https://c3-private.<region>.containers.cloud.ibm.com:31140
+  ...
+  ```
+  {: screen}
 
-6. Allow access to the **Master URL** on the port, such as port `31142` from the previous example. If your firewall is IP-based, you can see which IP addresses are opened when you allow access to the master URL by reviewing [this table](#master_ips).
+6. Allow access to the service endpoint URLs and ports that you got in the previous step. If your firewall is IP-based, you can see which IP addresses are opened when you allow access to the service endpoint URLs by reviewing [this table](#master_ips).
 
 7. Verify your connection.
+  * If the public service endpoint is enabled:
+    ```
+    curl --insecure <public_service_endpoint_URL>/version
+    ```
+    {: pre}
 
-   ```
-   curl --insecure <master_URL>/version
-   ```
-   {: pre}
+    Example command:
+    ```
+    curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
+    ```
+    {: pre}
 
-   Example command:
-   ```
-   curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   {
+    Example output:
+    ```
+    {
      "major": "1",
      "minor": "7+",
      "gitVersion": "v1.7.4-2+eb9172c211dc41",
@@ -151,9 +155,36 @@ To allow access for a specific cluster:
      "goVersion": "go1.8.3",
      "compiler": "gc",
      "platform": "linux/amd64"
-   }
-   ```
-   {: screen}
+    }
+    ```
+    {: screen}
+  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master:
+    ```
+    curl --insecure <private_service_endpoint_URL>/version
+    ```
+    {: pre}
+
+    Example command:
+    ```
+    curl --insecure https://c3-private.<region>.containers.cloud.ibm.com:31142/version
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    {
+     "major": "1",
+     "minor": "7+",
+     "gitVersion": "v1.7.4-2+eb9172c211dc41",
+     "gitCommit": "eb9172c211dc4108341c0fd5340ee5200f0ec534",
+     "gitTreeState": "clean",
+     "buildDate": "2017-11-16T08:13:08Z",
+     "goVersion": "go1.8.3",
+     "compiler": "gc",
+     "platform": "linux/amd64"
+    }
+    ```
+    {: screen}
 
 8. Optional: Repeat these steps for each cluster that you need to expose.
 
@@ -188,7 +219,8 @@ Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`
 Let your cluster access infrastructure resources and services from behind a firewall, such as for {{site.data.keyword.containerlong_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
 {:shortdesc}
 
-
+Depending on your cluster setup, you access the services by using the public, private, or both IP addresses. If you have a cluster with worker nodes on both public and private VLANs behind a firewall for both public and private networks, you must open the connection for both public and private IP addresses. If your cluster has worker nodes on only the private VLAN behind a firewall, you can open the connection to only the private IP addresses.
+{: note}
 
 1.  Note the public IP address for all of your worker nodes in the cluster.
 
@@ -209,93 +241,112 @@ Let your cluster access infrastructure resources and services from behind a fire
           <th>Region</th>
           <th>Zone</th>
           <th>Public IP address</th>
+          <th>Private IP address</th>
           </thead>
         <tbody>
           <tr>
             <td>AP North</td>
             <td>che01<br>hkg02<br>seo01<br>sng01<br><br>tok02, tok04, tok05</td>
             <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><br><code>161.202.126.210, 128.168.71.117, 165.192.69.69</code></td>
+            <td><code>166.9.40.7</code><br><code>166.9.42.7</code><br><code>166.9.44.5</code><br><code>166.9.40.8</code><br><br><code>166.9.40.6, 166.9.42.6, 166.9.44.4</code></td>
            </tr>
           <tr>
              <td>AP South</td>
              <td>mel01<br><br>syd01, syd04, syd05</td>
              <td><code>168.1.97.67</code><br><br><code>168.1.8.195, 130.198.66.26, 168.1.12.98, 130.198.64.19</code></td>
+             <td><code>166.9.54.10</code><br><br><code>166.9.52.14, 166.9.52.15, 166.9.54.11, 166.9.54.13, 166.9.54.12</code></td>
           </tr>
           <tr>
              <td>EU Central</td>
              <td>ams03<br>mil01<br>osl01<br>par01<br><br>fra02, fra04, fra05</td>
              <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code><br><br><code>169.50.56.174, 161.156.65.42, 149.81.78.114</code></td>
+             <td><code>166.9.28.17, 166.9.30.11</code><br><code>166.9.28.20, 166.9.30.12</code><br><code>166.9.32.8</code><br><code>166.9.28.19, 166.9.28.22</code><br><br><code>	166.9.28.23, 166.9.30.13, 166.9.32.9</code></td>
             </tr>
           <tr>
             <td>UK South</td>
             <td>lon02, lon04, lon05, lon06</td>
             <td><code>159.122.242.78, 158.175.111.42, 158.176.94.26, 159.122.224.242, 158.175.65.170, 158.176.95.146</code></td>
+            <td><code>166.9.34.5, 166.9.34.6, 166.9.36.10, 166.9.36.11, 166.9.36.12, 166.9.36.13, 166.9.38.6, 166.9.38.7</code></td>
           </tr>
           <tr>
             <td>US East</td>
              <td>mon01<br>tor01<br><br>wdc04, wdc06, wdc07</td>
              <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><br><code>169.63.88.186, 169.60.73.142, 169.61.109.34, 169.63.88.178, 169.60.101.42, 169.61.83.62</code></td>
+             <td><code>166.9.20.11</code><br><code>166.9.22.8</code><br><br><code>166.9.20.12, 166.9.20.13, 166.9.22.9, 166.9.22.10, 166.9.24.4, 166.9.24.5</code></td>
           </tr>
           <tr>
             <td>US South</td>
             <td>hou02<br>mex01<br>sao01<br>sjc03<br>sjc04<br><br>dal10,dal12,dal13</td>
             <td><code>184.173.44.62</code><br><code>169.57.100.18</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><br><code>169.46.7.238, 169.48.230.146, 169.61.29.194, 169.46.110.218, 169.47.70.10, 169.62.166.98, 169.48.143.218, 169.61.177.2, 169.60.128.2</code></td>
+            <td><code>166.9.15.74</code><br><code>166.9.15.76</code><br><code>166.9.12.143</code><br><code>166.9.12.144</code><br><code>166.9.15.75</code><br><br><code>166.9.12.140, 166.9.12.141, 166.9.12.142, 166.9.15.69, 166.9.15.70, 166.9.15.72, 166.9.15.71, 166.9.15.73, 166.9.16.183, 166.9.16.184, 166.9.16.185</code></td>
           </tr>
           </tbody>
         </table>
 
 3.  Allow outgoing network traffic from the worker nodes to [{{site.data.keyword.registrylong_notm}} regions](/docs/services/Registry?topic=registry-registry_overview#registry_regions):
-  -  `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
+  - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
   -  Replace <em>&lt;registry_subnet&gt;</em> with the registry subnet to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images. Port 4443 is required for notary functions, such as [Verifying image signatures](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent).
-      <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
-      <caption>IP addresses to open for Registry traffic</caption>
-          <thead>
-            <th>{{site.data.keyword.containerlong_notm}} region</th>
-            <th>Registry address</th>
-            <th>Registry subnets</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Global registry across <br>{{site.data.keyword.containerlong_notm}} regions</td>
-              <td><code>icr.io</code><br><br>
-              Deprecated: <code>registry.bluemix.net</code></td>
-              <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
-            </tr>
-            <tr>
-              <td>AP North</td>
-              <td><code>jp.icr.io</code><br><br>
-              Deprecated: <code>registry.au-syd.bluemix.net</code></td>
-              <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
-            </tr>
-            <tr>
-              <td>AP South</td>
-              <td><code>au.icr.io</code><br><br>
-              Deprecated: <code>registry.au-syd.bluemix.net</code></td>
-              <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
-            </tr>
-            <tr>
-              <td>EU Central</td>
-              <td><code>de.icr.io</code><br><br>
-              Deprecated: <code>registry.eu-de.bluemix.net</code></td>
-              <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
-             </tr>
-             <tr>
-              <td>UK South</td>
-              <td><code>uk.icr.io</code><br><br>
-              Deprecated: <code>registry.eu-gb.bluemix.net</code></td>
-              <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
-             </tr>
-             <tr>
-              <td>US East, US South</td>
-              <td><code>us.icr.io</code><br><br>
-              Deprecated: <code>registry.ng.bluemix.net</code></td>
-              <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
-             </tr>
-            </tbody>
-          </table>
-          
+  <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
+  <caption>IP addresses to open for Registry traffic</caption>
+    <thead>
+      <th>{{site.data.keyword.containerlong_notm}} region</th>
+      <th>Registry address</th>
+      <th>Registry public subnets</th>
+      <th>Registry private IP addresses</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Global registry across <br>{{site.data.keyword.containerlong_notm}} regions</td>
+        <td><strong>Public</strong>: <code>icr.io</code><br>
+        Deprecated: <code>registry.bluemix.net</code><br><br>
+        <strong>Private</strong>: <code>z1-1.private.icr.io<br>z2-1.private.icr.io<br>z3-1.private.icr.io</code></td>
+        <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
+        <td><code>166.9.20.4</code></br><code>166.9.22.3</code></br><code>166.9.24.2</code></td>
+      </tr>
+      <tr>
+        <td>AP North</td>
+        <td><strong>Public</strong>: <code>jp.icr.io</code><br>
+        Deprecated: <code>registry.au-syd.bluemix.net</code><br><br>
+        <strong>Private</strong>: <code>z1-1.private.jp.icr.io<br>z2-1.private.jp.icr.io<br>z3-1.private.jp.icr.io</code></td>
+        <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
+        <td><code>166.9.40.3</code></br><code>166.9.42.3</code></br><code>166.9.44.3</code></td>
+      </tr>
+      <tr>
+        <td>AP South</td>
+        <td><strong>Public</strong>: <code>au.icr.io</code><br>
+        Deprecated: <code>registry.au-syd.bluemix.net</code><br><br>
+        <strong>Private</strong>: <code>z1-1.private.au.icr.io<br>z2-1.private.au.icr.io<br>z3-1.private.au.icr.io</code></td>
+        <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
+        <td><code>166.9.52.2</code></br><code>166.9.54.2</code></br><code>166.9.56.3</code></td>
+      </tr>
+      <tr>
+        <td>EU Central</td>
+        <td><strong>Public</strong>: <code>de.icr.io</code><br>
+        Deprecated: <code>registry.eu-de.bluemix.net</code><br><br>
+        <strong>Private</strong>: <code>z1-1.private.de.icr.io<br>z2-1.private.de.icr.io<br>z3-1.private.de.icr.io</code></td>
+        <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
+        <td><code>166.9.28.12</code></br><code>166.9.30.9</code></br><code>166.9.32.5</code></td>
+       </tr>
+       <tr>
+        <td>UK South</td>
+        <td><strong>Public</strong>: <code>uk.icr.io</code><br>
+        Deprecated: <code>registry.eu-gb.bluemix.net</code><br><br>
+        <strong>Private</strong>: <code>z1-1.private.uk.icr.io<br>z2-1.private.uk.icr.io<br>z3-1.private.uk.icr.io</code></td>
+        <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
+        <td><code>166.9.36.9</code></br><code>166.9.38.5</code></br><code>166.9.34.4</code></td>
+       </tr>
+       <tr>
+        <td>US East, US South</td>
+        <td><strong>Public</strong>: <code>us.icr.io</code><br>
+        Deprecated: <code>registry.ng.bluemix.net</code><br><br>
+        <strong>Private</strong>: <code>z1-1.private.us.icr.io<br>z2-1.private.us.icr.io<br>z3-1.private.us.icr.io</code></td>
+        <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
+        <td><code>166.9.12.114</code></br><code>166.9.15.50</code></br><code>166.9.16.173</code></td>
+       </tr>
+      </tbody>
+    </table>
 
-5.  Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, Sysdig, and LogDNA services:
+4. Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, Sysdig, and LogDNA services:
     *   **{{site.data.keyword.monitoringlong_notm}}**:
         <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_subnet&gt;</pre>
         Replace <em>&lt;monitoring_subnet&gt;</em> with the subnets for the monitoring regions to which you want to allow traffic:
@@ -367,9 +418,9 @@ Let your cluster access infrastructure resources and services from behind a fire
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
         Replace `<logDNA_public_IP>` with the [LogDNA IP addresses](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network).
 
-6. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
+5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
-7. {: #pvc}To create persistent volume claims in a cluster by using the private service endpoints for {{site.data.keyword.Bluemix_full_notm}} persistent storage, make sure that your cluster is set up with the following Kubernetes version or plug-in versions. 
+6. {: #pvc}To create persistent volume claims in a cluster by using the private service endpoints for {{site.data.keyword.Bluemix_full_notm}} persistent storage, make sure that your cluster is set up with the following Kubernetes version or plug-in versions.
    <table>
    <caption>Overview of required Kubernetes or plug-in versions to use private service endpoints</caption>
    <thead>
