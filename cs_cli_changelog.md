@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,15 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.2.80</td>
+<td>19 Mar 2019</td>
+<td><ul>
+<li>Updates documentation and translation.</li>
+<li>Updates the Go version to 1.11.6.</li>
+<li>Resolves intermittent networking issues for macOS users.</li>
+</ul></td>
+</tr>
 <tr>
 <td>0.2.75</td>
 <td>14 Mar 2019</td>

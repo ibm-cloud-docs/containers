@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-18"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks
 
@@ -29,6 +29,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage) is persistent, highly available storage that you can mount to apps that run in a Kubernetes cluster by using the {{site.data.keyword.cos_full_notm}} plug-in. The plug-in is a Kubernetes Flex-Volume plug-in that connects Cloud {{site.data.keyword.cos_short}} buckets to pods in your cluster. Information that is stored with {{site.data.keyword.cos_full_notm}} is encrypted in transit and at rest, dispersed across multiple geographic locations, and accessed over HTTP by using a REST API.
 
+
+
 ## Creating your object storage service instance
 {: #create_cos_service}
 
@@ -49,7 +51,7 @@ Follow these steps to create an {{site.data.keyword.cos_full_notm}} service inst
    2.  Click **New credential**. A dialog box displays.
    3.  Enter a name for your credentials.
    4.  From the **Role** drop-down, select `Writer` or `Manager`. When you select `Reader`, then you cannot use the credentials to create buckets in {{site.data.keyword.cos_full_notm}} and write data to it.
-   5.  Optional: In **Add Inline Configuration Parameters (Optional)**, enter `{"HMAC":true}` to create additional HMAC credentials for the {{site.data.keyword.cos_full_notm}} service. HMAC authentication adds an extra layer of security to the OAuth2 authentication by preventing the misuse of expired or randomly created OAuth2 tokens.
+   5.  Optional: In **Add Inline Configuration Parameters (Optional)**, enter `{"HMAC":true}` to create additional HMAC credentials for the {{site.data.keyword.cos_full_notm}} service. HMAC authentication adds an extra layer of security to the OAuth2 authentication by preventing the misuse of expired or randomly created OAuth2 tokens. **Important**: If you have a private-only cluster with no public access, you must use HMAC authentication so that you can access the {{site.data.keyword.cos_full_notm}} service over the private network.
    6.  Click **Add**. Your new credentials are listed in the **Service Credentials** table.
    7.  Click **View credentials**.
    8.  Make note of the **apikey** to use OAuth2 tokens to authenticate with the {{site.data.keyword.cos_full_notm}} service. For HMAC authentication, in the **cos_hmac_keys** section, note the **access_key_id** and the **secret_access_key**.
@@ -189,6 +191,9 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 2.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+
+    The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall, you can choose to [pull the Tiller image to your local machine and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-integrations#private_local_tiller), or to [install the Helm chart without using Tiller](/docs/containers?topic=containers-integrations#private_install_without_tiller).
+    {: note}
 
 3.  Verify that tiller is installed with a service account.
 

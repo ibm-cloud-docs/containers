@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-18"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks, docker
 
@@ -128,8 +128,8 @@ In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, y
 The following image shows the components of your cluster and how they interact.
 <p>
 <figure>
- <img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
- <figcaption>{{site.data.keyword.containerlong_notm}} architecture</figcaption>
+<img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
+<figcaption>{{site.data.keyword.containerlong_notm}} architecture</figcaption>
 </figure>
 </p>
 

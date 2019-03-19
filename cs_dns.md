@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-19"
 
 ---
 
@@ -137,7 +137,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
           ```
           {: screen}
           
-          Do you have many customizations that you want to organize? In Kubernetes version 1.13 and later, you can add multiple Corefiles to the CoreDNS configmap. For more information, see [the Corefile import documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/import/).
+          Do you have many customizations that you want to organize? In Kubernetes version 1.12.6_1543 and later, you can add multiple Corefiles to the CoreDNS configmap. For more information, see [the Corefile import documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/import/).
           {: tip}
           
     *   **For KubeDNS**: Configure stubdomains and upstream nameservers in the `data` section of the configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns).

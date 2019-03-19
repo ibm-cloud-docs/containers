@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks
 
@@ -84,6 +84,5 @@ Misuse includes:
 *   Unauthorized access to any service or system
 *   Unauthorized modification of any service or system
 *   Violation of the rights of others
-
 
 See [Cloud Services terms](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms) for overall terms of use.

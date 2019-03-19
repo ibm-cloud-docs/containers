@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-18"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks
 
@@ -124,7 +124,6 @@ The following image shows the default cluster security settings that address aut
     </tr>
   </tbody>
 </table>
-
 
 
 <br />

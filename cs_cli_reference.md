@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-18"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1227,7 +1227,7 @@ trusted: <em>true</em>
 <p>To find out if you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code>.</p></dd>
 
 <dt><code>--private-only</code></dt>
-  <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  <p class="note">If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
+  <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.  <p class="note">If worker nodes are set up with a private VLAN only, you must configure a gateway device. For more information, see [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with 1 worker node is created. This value is optional for standard clusters and is not available for free clusters.
@@ -1280,28 +1280,31 @@ trusted: <em>true</em>
 ### ibmcloud ks cluster-feature-enable
 {: #cs_cluster_feature_enable}
 
-Enable a feature on an existing cluster.
+Enable a feature on an existing cluster. This command must be combined with one of the following subcommands for the feature that you want to enable.
+{: shortdesc}
+
+#### ibmcloud ks cluster-feature-enable trusted
+{: #cs_cluster_feature_enable_trusted}
+
+Enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted] [-s]
+ibmcloud ks cluster-feature-enable trusted --cluster CLUSTER [-s] [-f]
 ```
 {: pre}
+
+To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker get` [command](#cs_worker_get).
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
 
-   <dl>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Use this option to force the <code>--trusted</code> option without user prompts. This value is optional.</dd>
-
-   <dt><code><em>--trusted</em></code></dt>
-   <dd><p>Include the flag to enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
-   <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud ks machine-types <zone>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud ks cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud ks worker-get` [command](#cs_worker_get).</p></dd>
 
   <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1309,10 +1312,10 @@ ibmcloud ks cluster-feature-enable [-f] --cluster CLUSTER [--trusted] [-s]
 
 **Example**:
 
-  ```
-  ibmcloud ks cluster-feature-enable --cluster my_cluster --trusted=true
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-feature-enable trusted --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-get
 {: #cs_cluster_get}
@@ -4289,7 +4292,7 @@ ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,
     <p>If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.</p></dd>
 
   <dt><code>--private-only</code></dt>
-    <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If you want a private-only cluster, you must configure a gateway appliance for network connectivity. For more information, see [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
+    <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If worker nodes are set up with a private VLAN only, you must configure a gateway device. For more information, see [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
 
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>

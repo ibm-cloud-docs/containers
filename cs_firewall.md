@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-18"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks
 
@@ -111,49 +111,49 @@ To allow access for a specific cluster:
 
 5. Retrieve the **Master URL** for your cluster.
 
-   ```
-   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
 
-   Example output:
-   ```
-   ...
-   Master URL:		https://c3.<region>.containers.cloud.ibm.com:31142
-   ...
-   ```
-   {: screen}
+  Example output:
+  ```
+  ...
+  Master URL:		https://c3.<region>.containers.cloud.ibm.com:31142
+  ...
+  ```
+  {: screen}
 
 6. Allow access to the **Master URL** on the port, such as port `31142` from the previous example. If your firewall is IP-based, you can see which IP addresses are opened when you allow access to the master URL by reviewing [this table](#master_ips).
 
 7. Verify your connection.
 
-   ```
-   curl --insecure <master_URL>/version
-   ```
-   {: pre}
+  ```
+  curl --insecure <master_URL>/version
+  ```
+  {: pre}
 
-   Example command:
-   ```
-   curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
-   ```
-   {: pre}
+  Example command:
+  ```
+  curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
+  ```
+  {: pre}
 
-   Example output:
-   ```
-   {
-     "major": "1",
-     "minor": "7+",
-     "gitVersion": "v1.7.4-2+eb9172c211dc41",
-     "gitCommit": "eb9172c211dc4108341c0fd5340ee5200f0ec534",
-     "gitTreeState": "clean",
-     "buildDate": "2017-11-16T08:13:08Z",
-     "goVersion": "go1.8.3",
-     "compiler": "gc",
-     "platform": "linux/amd64"
-   }
-   ```
-   {: screen}
+  Example output:
+  ```
+  {
+   "major": "1",
+   "minor": "7+",
+   "gitVersion": "v1.7.4-2+eb9172c211dc41",
+   "gitCommit": "eb9172c211dc4108341c0fd5340ee5200f0ec534",
+   "gitTreeState": "clean",
+   "buildDate": "2017-11-16T08:13:08Z",
+   "goVersion": "go1.8.3",
+   "compiler": "gc",
+   "platform": "linux/amd64"
+  }
+  ```
+  {: screen}
 
 8. Optional: Repeat these steps for each cluster that you need to expose.
 
@@ -245,61 +245,57 @@ Let your cluster access infrastructure resources and services from behind a fire
         </table>
 
 3.  Allow outgoing network traffic from the worker nodes to [{{site.data.keyword.registrylong_notm}} regions](/docs/services/Registry?topic=registry-registry_overview#registry_regions):
-    -   `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
-    -   Replace <em>&lt;registry_subnet&gt;</em> with the registry subnet to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images. Port 4443 is required for notary functions, such as [Verifying image signatures](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent).
-            <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
-            <caption>IP addresses to open for Registry traffic</caption>
-                <thead>
-                  <th>{{site.data.keyword.containerlong_notm}} region</th>
-                  <th>Registry address</th>
-                  <th>Registry subnets</th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Global registry across <br>{{site.data.keyword.containerlong_notm}} regions</td>
-                    <td><code>icr.io</code><br><br>
-                    Deprecated: <code>registry.bluemix.net</code></td>
-                    <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
-                  </tr>
-                  <tr>
-                    <td>AP North</td>
-                    <td><code>jp.icr.io</code><br><br>
-                    Deprecated: <code>registry.au-syd.bluemix.net</code></td>
-                    <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
-                  </tr>
-                  <tr>
-                    <td>AP South</td>
-                    <td><code>au.icr.io</code><br><br>
-                    Deprecated: <code>registry.au-syd.bluemix.net</code></td>
-                    <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
-                  </tr>
-                  <tr>
-                    <td>EU Central</td>
-                    <td><code>de.icr.io</code><br><br>
-                    Deprecated: <code>registry.eu-de.bluemix.net</code></td>
-                    <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
-                   </tr>
-                   <tr>
-                    <td>UK South</td>
-                    <td><code>uk.icr.io</code><br><br>
-                    Deprecated: <code>registry.eu-gb.bluemix.net</code></td>
-                    <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
-                   </tr>
-                   <tr>
-                    <td>US East, US South</td>
-                    <td><code>us.icr.io</code><br><br>
-                    Deprecated: <code>registry.ng.bluemix.net</code></td>
-                    <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
-                   </tr>
-                  </tbody>
-                </table>
+  - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
+  -  Replace <em>&lt;registry_subnet&gt;</em> with the registry subnet to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images. Port 4443 is required for notary functions, such as [Verifying image signatures](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent).
+    <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
+    <caption>IP addresses to open for Registry traffic</caption>
+      <thead>
+        <th>{{site.data.keyword.containerlong_notm}} region</th>
+        <th>Registry address</th>
+        <th>Registry subnets</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Global registry across <br>{{site.data.keyword.containerlong_notm}} regions</td>
+          <td><code>icr.io</code><br><br>
+          Deprecated: <code>registry.bluemix.net</code></td>
+          <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
+        </tr>
+        <tr>
+          <td>AP North</td>
+          <td><code>jp.icr.io</code><br><br>
+          Deprecated: <code>registry.au-syd.bluemix.net</code></td>
+          <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
+        </tr>
+        <tr>
+          <td>AP South</td>
+          <td><code>au.icr.io</code><br><br>
+          Deprecated: <code>registry.au-syd.bluemix.net</code></td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
+        </tr>
+        <tr>
+          <td>EU Central</td>
+          <td><code>de.icr.io</code><br><br>
+          Deprecated: <code>registry.eu-de.bluemix.net</code></td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
+         </tr>
+         <tr>
+          <td>UK South</td>
+          <td><code>uk.icr.io</code><br><br>
+          Deprecated: <code>registry.eu-gb.bluemix.net</code></td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
+         </tr>
+         <tr>
+          <td>US East, US South</td>
+          <td><code>us.icr.io</code><br><br>
+          Deprecated: <code>registry.ng.bluemix.net</code></td>
+          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
+         </tr>
+        </tbody>
+      </table>
+      
 
-
-4. Allow outgoing network traffic from your worker node to {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.bluemix.net`
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.cloud.ibm.com`
-
-5.  Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, Sysdig, and LogDNA services:
+4. Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, Sysdig, and LogDNA services:
     *   **{{site.data.keyword.monitoringlong_notm}}**:
         <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_subnet&gt;</pre>
         Replace <em>&lt;monitoring_subnet&gt;</em> with the subnets for the monitoring regions to which you want to allow traffic:
@@ -371,9 +367,9 @@ Let your cluster access infrastructure resources and services from behind a fire
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
         Replace `<logDNA_public_IP>` with the [LogDNA IP addresses](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network).
 
-6. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
+5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
-7. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
+6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
     - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
     - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
 
@@ -431,13 +427,13 @@ If you want to access services that run inside or outside {{site.data.keyword.Bl
 {:shortdesc}
 
 1.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-2.  List all the worker nodes in your cluster and note the **Public IP** addresses. If your worker nodes are connected to a private network only and you want to connect to {{site.data.keyword.Bluemix_notm}} services by using the private service endpoint, note the **Private IP** addresses instead.
+2.  List all the worker nodes in your cluster and note the **Public IP** addresses.
     ```
     ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 3.  Optional: Get the worker node subnets. If you anticipate changing the number of worker nodes in your cluster frequently, such as if you enable the [cluster autoscaler](/docs/containers?topic=containers-ca#ca), you might not want to update your firewall for each new worker node. Instead, you can whitelist the VLAN subnets that the cluster uses.<p class="note">The **primary public subnets** that {{site.data.keyword.containerlong_notm}} provisions for your cluster come with 14 available IP addresses, and can be shared by other clusters on the same VLAN. When you have more than 14 worker nodes, another subnet is ordered, so the subnets that you need to whitelist can change. To reduce the frequency of change, create worker pools with worker node flavors of higher CPU and memory resources so that you don't need to add worker nodes as often.</p>
-    1.  From the output of the previous step, note all the unique network IDs (first 3 octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
+    1.  From the output of the previous step, note all the unique network IDs (first 3 octets) of the **Public IP** for the worker nodes in your cluster. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
         kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6   

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-18"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -253,6 +253,8 @@ Kubernetes limits the maximum number of worker nodes that you can have in a clus
 
 Want to be sure that you always have enough worker nodes to cover your workload? Try out [the cluster autoscaler](/docs/containers?topic=containers-ca#ca).
 {: tip}
+
+<br />
 
 
 ## Available hardware for worker nodes

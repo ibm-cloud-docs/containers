@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-15"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -334,7 +334,6 @@ To create a cluster:
           <td>**Standard clusters**: The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks kube-versions</code>.
 </td>
         </tr>
-        <tr>
         <td><code>--disable-disk-encrypt</code></td>
         <td>**Free and standard clusters**: Worker nodes feature AES 256-bit [disk encryption](/docs/containers?topic=containers-security#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
         </tr>

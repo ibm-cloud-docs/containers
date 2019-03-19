@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-18"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks, node scaling
 
@@ -33,6 +33,9 @@ With the {{site.data.keyword.containerlong_notm}} `ibm-iks-cluster-autoscaler` p
 
 Want to autoscale your pods instead? Check out [Scaling apps](/docs/containers?topic=containers-app#app_scaling).
 {: tip}
+
+The cluster autoscaler is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall, you cannot use the cluster autoscaler in your cluster.
+{: important}
 
 ## Understanding how the cluster autoscaler works
 {: #ca_about}
