@@ -44,19 +44,6 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
-<td>19 Mar 2019</td>
-<td>Introducing private service endpoints for your Kubernetes cluster master</td>
-<td>By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access on a public and private VLAN. Previously, if you wanted a [private VLAN-only cluster](/docs/containers?topic=containers-plan_clusters#private_clusters), you needed to set up a gateway appliance to connect the cluster's worker nodes with the master. Now, you can use the private service endpoint. With the private service endpoint enabled, all traffic between the worker nodes and the master is on the private network, without the need for a gateway appliance device. In addition to this increased security, inbound and outbound traffic on the private network is [unlimited and not charged ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth). You can still keep a public service endpoint for secure access to your Kubernetes master over the internet, for example to run `kubectl` commands without being on the private network.<br><br>
-To use private service endpoints, you must enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) and [service endpoints](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) for your IBM Cloud infrastructure (SoftLayer) account. Your cluster must run Kubernetes version 1.11 or later. If your cluster runs an earlier Kubernetes version, [update to at least 1.11](/docs/containers?topic=containers-update#update). For more information, check out the following links:<ul>
-<li>[Understanding master-to-worker communication with service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
-<li>[Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
-<li>[Switching from public to private service endpoints](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
-<li>If you have a firewall on the private network, [adding the private IP addresses for {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, and other {{site.data.keyword.Bluemix_notm}} services](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
-</ul>
-<p class="important">If you switch to a private-only service endpoint cluster, make sure that your cluster can still communicate with other {{site.data.keyword.Bluemix_notm}} services that you use, such as storage. For example, Block and Object Storage support private-only service endpoint, but File Storage and Portworx do not. Additionally, the [cluster autoscaler](/docs/containers?topic=containers-ca#ca) does not support private-only service endpoint. Use a cluster with both public and private service endpoints instead.</p>
-</td>
-</tr>
-<tr>
 <td>07 Mar 2019</td>
 <td>[Cluster autoscaler moves from beta to GA](/docs/containers?topic=containers-ca#ca)</td>
 <td>The cluster autoscaler is now generally available. Install the Helm plug-in and begin to scale the worker pools in your cluster automatically to increase or decrease the number of worker nodes based on the sizing needs of your scheduled workloads.<br><br>

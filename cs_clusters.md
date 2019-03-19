@@ -61,9 +61,7 @@ Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for 
     *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](/docs/containers?topic=containers-health#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
     * If you have an {{site.data.keyword.Bluemix_dedicated}} account, you must create clusters in the default resource group only.
 
-4.  Set up your IBM Cloud infrastructure (SoftLayer) networking. You can choose from the following options:
-    *  **VRF-enabled**: With virtual routing and forwarding (VRF) and its multiple isolation separation technology, you can use public and private service endpoints to communicate with your Kubernetes master in clusters that run Kubernetes version 1.11 or later. By using the [private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private), communication between the Kubernetes master and your worker nodes stays on the private VLAN. If you want to run `kubectl` commands from your local machine against your cluster, you must be connected to the same private VLAN that your Kubernetes master is on. To expose your apps to the internet, your worker nodes must be connected to a public VLAN so that incoming network traffic can be forwarded to your apps. To run `kubectl` commands against your cluster over the internet, you can use the public service endpoint. With the public service endpoint, network traffic is routed over the public VLAN and is secured by using an OpenVPN tunnel. To use private service endpoints, you must enable your account for VRF and service endpoints, which requires opening an  IBM Cloud infrastructure (SoftLayer) support case. For more information, see [Overview of VRF on {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [Enabling your account for service endpoints](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started).
-    *  **Non-VRF**: If you don’t want to or cannot enable VRF for your account, or if you create a cluster that runs Kubernetes version 1.10, your worker nodes can automatically connect to the Kubernetes master over the public network through the [public service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public). To secure this communication, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN connection between the Kubernetes master and the worker node when the cluster is created. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
+4.  Enable VLAN spanning. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 ### Cluster-level
 {: #prepare_cluster_level}
@@ -81,7 +79,6 @@ Follow the steps to prepare the setup of your cluster.
     *  If you want to create a cluster that is not accessible publicly, review the additional [private cluster steps](/docs/containers?topic=containers-plan_clusters#private_clusters).
     *  Choose what type of [hardware and isolation](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
 4.  For standard clusters, you can [estimate the cost](/docs/billing-usage?topic=billing-usage-cost#cost) in the {{site.data.keyword.Bluemix_notm}} console. For more information on charges that might not be included in the estimator, see [Pricing and billing](/docs/containers?topic=containers-faqs#charges).
-5.  If you create the cluster in an environment behind a firewall, [allow outbound network traffic to the public and private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for the {{site.data.keyword.Bluemix_notm}} services that you plan to use.
 <br>
 <br>
 
@@ -95,8 +92,7 @@ Follow the steps to prepare the setup of your cluster.
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
 
-Want to create a cluster that uses [service endpoints](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) for [master to worker communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)? You must create the cluster by [using the CLI](#clusters_cli).
-{: note}
+
 
 ### Creating a free cluster
 {: #clusters_ui_free}
@@ -136,7 +132,7 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
     1. Select **Single zone** or **Multizone** availability. In a multizone cluster the master node is deployed in a multizone-capable zone and your cluster's resources are spread across multiple zones. Your choices might be limited by region.
     2. Select the specific zones in which you want to host your cluster. You must select at least 1 zone but you can select as many as you would like. If you select more than 1 zone, the worker nodes are spread across the zones that you choose which gives you higher availability. If you select only 1 zone, you can [add zones to your cluster](#add_zone) after it is created.
     3. Select a public VLAN (optional) and a private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Worker nodes communicate with each other by using the private VLAN. To communicate with the Kubernetes master, you must configure public connectivity for your worker node.  If you do not have a public or private VLAN in this zone, leave it blank. A public and a private VLAN is automatically created for you. If you have existing VLANs and you do not specify a public VLAN, consider configuring a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra#about-the-vra). You can use the same VLAN for multiple clusters.
-        If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) or [configuring a gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway).
+        If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers?topic=containers-cs_network_cluster#plan_setup_private_vlan).
         {: note}
 
 7. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
@@ -195,11 +191,6 @@ Have you created a cluster before and are just looking for quick example command
 *  **Standard cluster, bare metal**:
    ```
    ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
-   ```
-   {: pre}
-*  **Standard cluster, virtual machine with [public and private service endpoints](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started) in VRF-enabled accounts**:
-   ```
-   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b2c.4x16 --hardware shared --workers 3 --public-service-endpoint --private-service-endpoint --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
 
@@ -278,12 +269,12 @@ To create a cluster:
 
         If a public and private VLAN already exist, note the matching routers. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match. In the example output, any of the private VLANs can be used with any of public VLANs because the routers all include `02a.dal10`.
 
-        You must connect your worker nodes to a private VLAN, and optionally, you can connect your worker nodes to a public VLAN. **Note**: If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) or [configuring a gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway).
+        You must connect your worker nodes to a private VLAN, and optionally, you can connect your worker nodes to a public VLAN. **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers?topic=containers-cs_network_cluster#plan_setup_private_vlan).
 
     4.  **Free and standard clusters**: Run the `cluster-create` command. You can choose between a free cluster, which includes one worker node set up with 2vCPU and 4GB memory and is automatically deleted after 30 days. When you create a standard cluster, by default, the worker node disks are AES 256-bit encrypted, its hardware is shared by multiple IBM customers, and it is billed by hours of usage. </br>Example for a standard cluster. Specify the cluster's options:
 
         ```
-        ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--private-service-endpoint] [--public-service-endpoint] [--disable-disk-encrypt] [--trusted]
+        ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--disable-disk-encrypt] [--trusted]
         ```
         {: pre}
 
@@ -322,7 +313,7 @@ To create a cluster:
           <li>**Free clusters**: You do not have to define a public VLAN. Your free cluster is automatically connected to a public VLAN that is owned by IBM.</li>
           <li>**Standard clusters**: If you already have a public VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option.
           <p>Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p>
-          <p class="note">If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) or [configuring a gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway).</p></li>
+          <p class="note">If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [Planning private-only cluster networking](/docs/containers?topic=containers-cs_network_cluster#plan_setup_private_vlan).</p></li>
         </ul></td>
         </tr>
         <tr>
@@ -343,15 +334,6 @@ To create a cluster:
           <td>**Standard clusters**: The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks kube-versions</code>.
 </td>
         </tr>
-        <tr>
-        <td><code>--private-service-endpoint</code></td>
-        <td>**Standard clusters in [VRF-enabled accounts](/docs/services/service-endpoint?topic=services/service-endpoint-getting-started#getting-started)**: Enable the [private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private service endpoint, you cannot later disable it.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster-get <cluster_name_or_ID>`.</td>
-        </tr>
-        <tr>
-        <td><code>--public-service-endpoint</code></td>
-        <td>**Standard clusters**: Enable the [public service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public) so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your terminal. If you also include the `--private-service-endpoint` flag, [master-worker node communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both) is on the private network in VRF-enabled accounts. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster-get <cluster_name_or_ID>`.</td>
-        </tr>
-        <tr>
         <td><code>--disable-disk-encrypt</code></td>
         <td>**Free and standard clusters**: Worker nodes feature AES 256-bit [disk encryption](/docs/containers?topic=containers-security#encrypted_disk) by default. If you want to disable encryption, include this option.</td>
         </tr>
@@ -603,7 +585,7 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 
 Before you begin:
 *  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
-*  If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#customer-vrf-overview) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
+*  If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get). If you are using {{site.data.keyword.BluDirectLink}}, you must instead use a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). To enable VRF, contact your IBM Cloud infrastructure (SoftLayer) account representative.
 
 To add a zone with worker nodes to your worker pool:
 
@@ -651,8 +633,6 @@ To add a zone with worker nodes to your worker pool:
   Created:                        2018-09-28T15:43:15+0000
   Location:                       dal10
   Master URL:                     https://c3.<region>.containers.cloud.ibm.com:30426
-  Public Service Endpoint URL:    https://c3.<region>.containers.cloud.ibm.com:30426
-  Private Service Endpoint URL:   https://c3-private.<region>.containers.cloud.ibm.com:31140
   Master Location:                Dallas
   Master Status:                  Ready (21 hours ago)
   Ingress Subdomain:              mycluster.us-south.containers.appdomain.cloud
@@ -715,7 +695,7 @@ If you have a cluster that was created after worker pools were introduced, you c
 Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might have occurred.
 {:shortdesc}
 
-To view information about a specific cluster, such as its zones, service endpoint URLs, Ingress subdomain, version, owner, and monitoring dashboard, use the `ibmcloud ks cluster-get <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
+To view information about a specific cluster, such as its zones, master URL, Ingress subdomain, version, owner, and monitoring dashboard, use the `ibmcloud ks cluster-get <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
 
 You can view the current cluster state by running the `ibmcloud ks clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).
 

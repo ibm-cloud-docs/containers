@@ -121,7 +121,7 @@ Additionally, your cluster admin might set up resource controls that can affect 
 *  [Pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)
 
 ### How can I access my app?
-You can access your app privately within the cluster by [using a `clusterIP` service](/docs/containers?topic=containers-cs_network_planning#in-cluster).
+You can access your app privately within the cluster by [using a `clusterIP` service](/docs/containers?topic=containers-cs_network_cluster#in-cluster)
 {: shortdesc}
 
 If you want to expose your app publicly, you have different options that depend on your cluster type.

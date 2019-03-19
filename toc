@@ -62,7 +62,6 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Setting up cluster networking
-        cs_network_ov.md
         cs_network_cluster.md
         cs_firewall.md
         cs_dns.md

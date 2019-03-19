@@ -121,25 +121,19 @@ Define update strategies for your app, including the number of pods that you wan
 ## Service architecture
 {: #architecture}
 
-In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, your containerized apps are hosted on compute hosts that are called worker nodes. To be more specific, the apps run in pods and the pods are hosted on worker nodes. Worker nodes are managed by the Kubernetes master. The communication setup between the Kubernetes master and the worker nodes depends on how you set up your IBM Cloud infrastructure (SoftLayer) network: an account with a public service endpoint, or a VRF-enabled account with public and private service endpoints.
+In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, your containerized apps are hosted on compute hosts that are called worker nodes. To be more specific, the apps run in pods and the pods are hosted on worker nodes. Worker nodes are managed by the Kubernetes master. The Kubernetes master and the worker nodes communicate with each other through secure TLS certificates and an OpenVPN connection to orchestrate your cluster configurations.
 {: shortdesc}
 
-The following image shows the components of your cluster and how they interact in an account when only the [public service endpoint is enabled](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
+
+The following image shows the components of your cluster and how they interact.
 <p>
 <figure>
- <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
- <figcaption>{{site.data.keyword.containerlong_notm}} architecture when only the public service endpoint is enabled</figcaption>
+<img src="images/cs_org_ov.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
+<figcaption>{{site.data.keyword.containerlong_notm}} architecture</figcaption>
 </figure>
 </p>
 
-The following image shows the components of your cluster and how they interact in a VRF-enabled account when the [public and private service endpoints are enabled](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both).
 
-<p>
-<figure>
- <img src="images/cs_org_ov_both_ses.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
- <figcaption>{{site.data.keyword.containerlong_notm}} architecture when public and private service endpoints are enabled</figcaption>
-</figure>
-</p>
 
 What's the difference between the Kubernetes master and a worker node? Glad you asked.
 

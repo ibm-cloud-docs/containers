@@ -569,18 +569,8 @@ The **Administrator** platform role includes all permissions that are granted by
 <td><code>[POST /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateCluster)</code></td>
 </tr>
 <tr>
-<td>Disable a specified feature for a cluster, such as the public service endpoint for the cluster master.</td>
-<td><code>[ibmcloud ks cluster-feature-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)</code></td>
-<td>-</td>
-</tr>
-<tr>
 <td>Enable a specified feature for a cluster, such as the private service endpoint for the cluster master.</td>
 <td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)</code></td>
-<td>-</td>
-</tr>
-<tr>
-<td>List enabled features in a cluster.</td>
-<td><code>[ibmcloud ks cluster-features](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls)</code></td>
 <td>-</td>
 </tr>
 <tr>
