@@ -371,22 +371,7 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
     - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
-    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.No private service endpoint support</td>
-    </tr>
-    <tr>
-      <td>Block storage</td>
-      <td>{{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.3.0 or later
-    </tr>
-    <tr>
-      <td>Object storage</td>
-      <td><ul><li>{{site.data.keyword.cos_full_notm}} plug-in version 1.0.3 or later</li><li>{{site.data.keyword.cos_full_notm}} service set up with HMAC authentication</td>
-    </tr>
-  </tbody>
-  </table></staging>
-
-  If you must use a Kubernetes version or plug-in version that does not support private service endpoints for {{site.data.keyword.Bluemix_notm}} persistent storage, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
-  - Allow all egress network traffic on TCP port 443.
-  - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
+    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
 
 <br />
 
