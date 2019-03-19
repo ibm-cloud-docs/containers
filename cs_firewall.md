@@ -295,10 +295,6 @@ Let your cluster access infrastructure resources and services from behind a fire
           </table>
           
 
-4. Allow outgoing network traffic from your worker node to {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.bluemix.net`
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.cloud.ibm.com`
-
 5.  Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, Sysdig, and LogDNA services:
     *   **{{site.data.keyword.monitoringlong_notm}}**:
         <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_subnet&gt;</pre>
@@ -373,9 +369,33 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 6. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
-7. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
-    - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
-    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
+7. {: #pvc}To create persistent volume claims in a cluster by using the private service endpoints for {{site.data.keyword.Bluemix_full_notm}} persistent storage, make sure that your cluster is set up with the following Kubernetes version or plug-in versions. 
+   <table>
+   <caption>Overview of required Kubernetes or plug-in versions to use private service endpoints</caption>
+   <thead>
+     <th>Type of storage</th>
+     <th>Required version</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>File storage</td>
+      <td>Kubernetes version 1.13.4_1512, 1.12.6_1543, 1.11.8_1549, 1.10.13_1550, or later</td>
+    </tr>
+    <tr>
+      <td>Block storage</td>
+      <td>{{site.data.keyword.Bluemix_full_notm}} Block Storage plug-in version 1.3.0 or later
+    </tr>
+    <tr>
+      <td>Object storage</td>
+      <td><ul><li>{{site.data.keyword.cos_full_notm}} plug-in version 1.0.3 or later</li><li>{{site.data.keyword.cos_full_notm}} service set up with HMAC authentication</td>
+    </tr>
+  </tbody>
+  </table>
+   
+  If you must use a Kubernetes version or plug-in version that does not support private service endpoints for {{site.data.keyword.Bluemix_full_notm}} persistent storage, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
+  - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
+  - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
+  - **Required for {{site.data.keyword.cos_full_notm}} without HMAC authentication:** Allow all egress network traffic on TCP port 443. 
 
 <br />
 
