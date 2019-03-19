@@ -1468,6 +1468,80 @@ To optimize performance of your Ingress ALBs, you can also [change the Linux ker
 
 
 
+  ```
+  {: pre}
+
+  <table>
+  <caption>Understanding this command's components</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>--cluster &lt;cluster_name_or_ID&gt;</code></td>
+  <td>The name or ID of the cluster.</td>
+  </tr>
+  <tr>
+  <td><code>--type &lt;public_or_private&gt;</code></td>
+  <td>The type of ALB: <code>public</code> or <code>private</code>.</td>
+  </tr>
+  <tr>
+  <td><code>--zone &lt;zone&gt;</code></td>
+  <td>The zone where you want to create the ALB.</td>
+  </tr>
+  <tr>
+  <td><code>--vlan &lt;VLAN_ID&gt;</code></td>
+  <td>This VLAN must match the ALB <code>type</code> and must be in the same <code>zone</code> as the ALB that you want to create.</td>
+  </tr>
+  </tbody>
+  </table>
+
+4. Verify that the ALBs that you created in each zone have a **Status** of `enabled` and that an **ALB IP** address is assigned. You can identify the ALBs by the number at the end of the ALB ID. The IDs of the ALBs that are connected to the old VLAN match the number of zones where you have worker nodes. For example, if you have worker nodes in two zones, the ALB ID ends in `-alb1` and `-alb2`. ALBs that you created on the new VLAN have subsequent numbers, for example `-alb3` and `-alb4`, as seen in the following example.
+    ```
+    ibmcloud ks alb-ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Example output for a cluster in which new public ALBs with IDs of `public-crdf253b6025d64944ab99ed63bb4567b6-alb3` and `public-crdf253b6025d64944ab99ed63bb4567b6-alb4` are created in `dal10` and `dal12`:
+    ```
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:350/ingress-auth:192
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:350/ingress-auth:192
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.48.228.78   dal12   ingress:408/ingress-auth:304
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.46.17.6     dal10   ingress:408/ingress-auth:304
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:408/ingress-auth:304
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:408/ingress-auth:304
+    ```
+    {: screen}
+
+5. Disable each ALB that is connected to the old VLANs.
+  ```
+  ibmcloud ks alb-configure --albID <old_ALB_ID> --disable
+  ```
+  {: pre}
+
+6. Verify that each ALB that is connected to the old VLANs has a **Status** of `disabled` and that no **ALB IP** address is assigned. Only the ALBs that are connected to the new VLANs receive incoming network traffic and communicate with your app pods.
+    ```
+    ibmcloud ks alb-ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Example output for a cluster in which the default public ALBs with IDs of `public-crdf253b6025d64944ab99ed63bb4567b6-alb1` and `public-crdf253b6025d64944ab99ed63bb4567b6-alb2` are disabled:
+    ```
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:350/ingress-auth:192
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:350/ingress-auth:192
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    false     disabled   public    -               dal12   ingress:408/ingress-auth:304
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    false     disabled   public    -               dal10   ingress:408/ingress-auth:304
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:408/ingress-auth:304
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:408/ingress-auth:304
+    ```
+    {: screen}
+
+<br />
+
+
+</staging>
 
 ## Bringing your own Ingress controller
 {: #user_managed}

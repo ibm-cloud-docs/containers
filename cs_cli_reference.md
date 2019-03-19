@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-18"
+lastupdated: "2019-03-19"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -4401,4 +4401,2051 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
   ```
   {: pre}
 
+ [-s]
+```
+{: pre}
 
+<strong>Minimum required permissions</strong>: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster.</dd>
+
+<dt><code>--type<em> PUBLIC|PRIVATE</em></code></dt>
+<dd>The type of ALB: <code>public</code> or <code>private</code>.</dd>
+
+<dt><code>--zone <em>ZONE</em></code></dt>
+<dd>The zone to create the ALB in.</dd>
+
+<dt><code>--vlan <em>VLAN_ID</em></code></dt>
+<dd>The ID of the VLAN to create the ALB on. This VLAN must match the ALB <code>type</code> and must be in the the same <code>zone</code> as the ALB that you want to create.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks alb create --cluster mycluster --type public --zone dal10 --vlan 2234945
+```
+{: pre}
+
+### ibmcloud ks alb get
+{: #cs_alb_get}
+
+View the details of an Ingress ALB in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks alb get --albID ALB_ID [--json] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code><em>--albID </em>ALB_ID</code></dt>
+   <dd>The ID for an ALB. Run <code>ibmcloud ks albs --cluster <em>CLUSTER</em></code> to view the IDs for the ALBs in a cluster. This value is required.</dd>
+
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+   </dl>
+
+**Example**:
+
+```
+ibmcloud ks alb get --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
+```
+{: pre}
+
+### ibmcloud ks alb ls
+{: #cs_albs}
+
+List all Ingress ALB IDs in a cluster and view whether an update for the ALB pods is available.
+{: shortdesc}
+
+```
+ibmcloud ks alb ls --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+If no ALB IDs are returned, then the cluster does not have a portable subnet. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster.
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+ <dl>
+ <dt><code><em>--cluster </em>CLUSTER</code></dt>
+ <dd>The name or ID of the cluster where you list available ALBs. This value is required.</dd>
+
+ <dt><code>--json</code></dt>
+ <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+ <dt><code>-s</code></dt>
+ <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+ </dl>
+
+**Example**:
+
+```
+ibmcloud ks alb ls --cluster my_cluster
+```
+{: pre}
+
+
+### ibmcloud ks alb rollback
+{: #cs_alb_rollback}
+
+If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can roll back the update to the build that your ALB pods were previously running. All ALB pods in your cluster revert to their previously running state.
+{: sortdesc}
+
+```
+ibmcloud ks alb rollback --cluster CLUSTER
+```
+{: pre}
+
+After you roll back an update, automatic updates for ALB pods are disabled. To re-enable automatic updates, use the [`alb autoupdate enable` command](#cs_alb_autoupdate_enable).
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb rollback --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks alb types
+{: #cs_alb_types}
+
+List Ingress ALB types that are supported in the region.
+{: shortdesc}
+
+```
+ibmcloud ks alb types [--json] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+  <dl>
+  <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
+
+**Example**:
+
+```
+ibmcloud ks alb types
+```
+{: pre}
+
+### ibmcloud ks alb update
+{: #cs_alb_update}
+
+Force an update of the Ingress ALB pods in the cluster to the latest version.
+{: shortdesc}
+
+```
+ibmcloud ks alb update --cluster CLUSTER
+```
+{: pre}
+
+If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. When you choose to manually update the add-on, all ALB pods in the cluster are updated to the latest build. You cannot update an individual ALB or choose which build to update the add-on to. Automatic updates remain disabled.
+
+When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALB add-on images.
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Example**:
+
+```
+ibmcloud ks alb-update --cluster <cluster_name_or_ID>
+```
+{: pre}
+
+<br />
+
+
+## `key-protect` commands
+{: #key-protect}
+
+### ibmcloud ks key-protect enable
+{: #cs_key_protect}
+
+Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster.
+{: shortdesc}
+
+```
+ibmcloud ks key-protect enable --cluster CLUSTER_NAME_OR_ID --key-protect-url ENDPOINT --key-protect-instance INSTANCE_GUID --crk ROOT_KEY_ID
+```
+{: pre}
+
+If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data from the secrets in your cluster.
+{: important}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--container CLUSTER_NAME_OR_ID</code></dt>
+<dd>The name or ID of the cluster.</dd>
+
+<dt><code>--key-protect-url ENDPOINT</code></dt>
+<dd>The {{site.data.keyword.keymanagementserviceshort}} endpoint for your cluster instance. To get the endpoint, see [service endpoints by region](/docs/services/key-protect?topic=key-protect-regions#service-endpoints).</dd>
+
+<dt><code>--key-protect-instance INSTANCE_GUID</code></dt>
+<dd>Your {{site.data.keyword.keymanagementserviceshort}} instance GUID. To get the instance GUID, run <code>ibmcloud resource service-instance SERVICE_INSTANCE_NAME --id</code> and copy the second value (not the full CRN).</dd>
+
+<dt><code>--crk ROOT_KEY_ID</code></dt>
+<dd>Your {{site.data.keyword.keymanagementserviceshort}} root key ID. To get the CRK, see [Viewing keys](/docs/services/key-protect?topic=key-protect-view-keys#view-keys).</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks key-protect enable --cluster mycluster --key-protect-url keyprotect.us-south.bluemix.net --key-protect-instance a11aa11a-bbb2-3333-d444-e5e555e5ee5 --crk 1a111a1a-bb22-3c3c-4d44-55e555e55e55
+```
+{: pre}
+
+<br />
+
+
+## `logging` commands
+{: #logging}
+
+Use this group of commands to forward logs from your cluster.
+{: shortdesc}
+
+### ibmcloud ks logging autoupdate
+{: #cs_logging_autoupdate}
+
+Manage automatic updates for the Fluentd add-on in a cluster. This command must be combined with one of the following subcommands.
+{: shortdesc}
+
+#### ibmcloud ks logging autoupdate disable
+{: #cs_log_autoupdate_disable}
+
+Disable automatic updates of all Fluentd pods in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks logging autoupdate disable --cluster CLUSTER
+```
+{: pre}
+
+Disable automatic updates of your Fluentd pods in a specific cluster. When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Fluentd configmap, but does not change the build version of your Fluentd for logging add-on. You are responsible for checking the compatability of the latest Kubernetes versions and your add-on images.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster where you want to disable automatic updates for the Fluentd add-on. This value is required.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks logging autoupdate disable --cluster mycluster
+```
+{: pre}
+
+#### ibmcloud ks logging autoupdate enable
+{: #cs_log_autoupdate_enable}
+
+Enable automatic updates for your Fluentd pods in a specific cluster. Fluentd pods are automatically updated when a new build version is available.
+{: shortdesc}
+
+```
+ibmcloud ks logging autoupdate enable --cluster CLUSTER
+```
+{: pre}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster where you want to enable automatic updates for the Fluentd add-on. This value is required.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks logging autoupdate enable --cluster mycluster
+```
+{: pre}
+
+#### ibmcloud ks logging autoupdate get
+{: #cs_log_autoupdate_get}
+
+View whether your Fluentd pods are set to automatically update in a cluster.
+{: shortdesc}
+
+```
+ ibmcloud ks logging autoupdate get --cluster CLUSTER
+```
+{: pre}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster where you want to check if automatic updates for the Fluentd add-on are enabled. This value is required.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks logging autoupdate get --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks logging collect
+{: #cs_log_collect}
+
+Make a request for a snapshot of your logs at a specific point in time and then store the logs in a {{site.data.keyword.cos_full_notm}} bucket.
+{: shortdesc}
+
+```
+ibmcloud ks logging collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-endpoint ENDPOINT --hmac-key-id HMAC_KEY_ID --hmac-key HMAC_KEY --type LOG_TYPE [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to create a snapshot for. This value is required.</dd>
+
+ <dt><code>--cos-bucket <em>BUCKET_NAME</em></code></dt>
+    <dd>The name of the {{site.data.keyword.cos_short}} bucket that you want to store your logs in. This value is required.</dd>
+
+  <dt><code>--cos-endpoint <em>ENDPOINT</em></code></dt>
+    <dd>The {{site.data.keyword.cos_short}} endpoint for the bucket that you are storing your logs in. This value is required.</dd>
+
+  <dt><code>--hmac-key-id <em>HMAC_KEY_ID</em></code></dt>
+    <dd>The unique ID for your HMAC credentials for your Object Storage instance. This value is required.</dd>
+
+  <dt><code>--hmac-key <em>HMAC_KEY</em></code></dt>
+    <dd>The HMAC key for your {{site.data.keyword.cos_short}} instance. This value is required.</dd>
+
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+    <dd>The type of logs that you want to create a snapshot of. Currently, `master` is the only option, as well as the default.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example command**:
+
+```
+ibmcloud ks logging collect --cluster mycluster --cos-bucket mybucket --cos-endpoint s3-api.us-geo.objectstorage.softlayer.net --hmac-key-id e2e7f5c9fo0144563c418dlhi3545m86 --hmac-key c485b9b9fo4376722f692b63743e65e1705301ab051em96j
+```
+{: pre}
+
+**Example output**:
+
+```
+There is no specified log type. The default master will be used.
+Submitting log collection request for master logs for cluster mycluster...
+OK
+The log collection request was successfully submitted. To view the status of the request run ibmcloud ks logging collect-status mycluster.
+```
+{: screen}
+
+### ibmcloud ks logging collect status
+{: #cs_log_collect_status}
+
+Check the status of the log collection snapshot request for your cluster.
+{: shortdesc}
+
+```
+ibmcloud ks logging collect status --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to create a snapshot for. This value is required.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example command**:
+
+```
+ibmcloud ks logging collect status --cluster mycluster
+```
+{: pre}
+
+**Example output**:
+
+```
+Getting the status of the last log collection request for cluster mycluster...
+OK
+State     Start Time             Error   Log URLs
+success   2018-09-18 16:49 PDT   - s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-0-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
+s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-1-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
+s3-api.us-geo.objectstorage.softlayer.net/mybucket/master-2-0862ae70a9ae6c19845ba3pc0a2a6o56-1297318756.tgz
+```
+{: screen}
+
+### ibmcloud ks logging config
+{: #cs_logging_config}
+
+View or modify log forwarding configurations for a cluster. This command must be combined with one of the following subcommands.
+{: shortdesc}
+
+#### ibmcloud ks logging config create
+{: #cs_logging_create}
+
+Create a logging configuration. You can use this command to forward logs for containers, applications, worker nodes, Kubernetes clusters, and Ingress application load balancers to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
+{: shortdesc}
+
+```
+ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL]  [--json] [--skip-validation] [--force-update][-s]
+```
+{: pre}
+
+If you are using a Dedicated account, you must log in to the public IBM Cloud endpoint and target your public org and space in order to enable log forwarding.
+{: note}
+
+<strong>Minimum required permissions</strong>: **Editor** platform role for the cluster for all log sources except `kube-audit` and **Administrator** platform role for the cluster for the `kube-audit` log source
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster.</dd>
+
+  <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
+    <dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>storage</code>, and <code>ingress</code>, and <code>kube-audit</code>. If you do not provide a log source, configurations are created for <code>container</code> and <code>ingress</code>.</dd>
+
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+    <dd>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</dd>
+
+  <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
+    <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
+
+  <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
+    <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+
+  <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
+    <dd>The port of the log collector server. This value is optional. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and the standard port <code>9091</code> is used for <code>ibm</code>.</dd>
+
+  <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
+    <dd>Optional: The name of the Cloud Foundry space that you want to send logs to. This value is valid only for log type <code>ibm</code> and is optional. If you do not specify a space, logs are sent to the account level. If you do, you must also specify an org.</dd>
+
+  <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
+    <dd>Optional: The name of the Cloud Foundry org that the space is in. This value is valid only for log type <code>ibm</code> and is required if you specified a space.</dd>
+
+  <dt><code>--app-paths</code></dt>
+    <dd>The path on the container that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. This value is required for log source <code>application</code>. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+
+  <dt><code>--syslog-protocol</code></dt>
+    <dd>The transfer layer protocol that is used when the logging type is <code>syslog</code>. Supported values are <code>tcp</code>, <code>tls</code>, and the default <code>udp</code>. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</dd>
+
+  <dt><code>--app-containers</code></dt>
+    <dd>To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>--skip-validation</code></dt>
+    <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
+
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
+
+    <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Examples**:
+
+Example for log type `ibm` that forwards from a `container` log source on default port 9091:
+```
+ibmcloud ks logging config create my_cluster --logsource container --namespace my_namespace --hostname ingest.logging.ng.bluemix.net --type ibm
+```
+{: pre}
+
+Example for log type `syslog` that forwards from a `container` log source on default port 514:
+```
+ibmcloud ks logging config create my_cluster --logsource container --namespace my_namespace  --hostname 169.xx.xxx.xxx --type syslog
+```
+{: pre}
+
+Example for log type `syslog` that forwards logs from an `ingress` source on a port different than the default:
+```
+ibmcloud ks logging config create --cluster my_cluster --logsource container --hostname 169.xx.xxx.xxx --port 5514 --type syslog
+```
+{: pre}
+
+#### ibmcloud ks logging config get
+{: #cs_logging_get}
+
+View all log forwarding configurations for a cluster, or filter logging configurations based on log source.
+{: shortdesc}
+
+```
+ibmcloud ks logging config get --cluster CLUSTER [--logsource LOG_SOURCE] [--json] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+ <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
+    <dd>The kind of log source for which you want to filter. Only logging configurations of this log source in the cluster are returned. Accepted values are <code>container</code>, <code>storage</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>. This value is optional.</dd>
+
+  <dt><code>--show-covering-filters</code></dt>
+    <dd>Shows the logging filters that render previous filters obsolete.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+ </dl>
+
+**Example**:
+
+```
+ibmcloud ks logging config get --cluster my_cluster --logsource worker
+```
+{: pre}
+
+#### ibmcloud ks logging config rm
+{: #cs_logging_rm}
+
+Delete one log forwarding configuration or all logging configurations for a cluster. This stops log forwarding to a remote syslog server or to {{site.data.keyword.loganalysisshort_notm}}.
+{: shortdesc}
+
+```
+ibmcloud ks logging config rm --cluster CLUSTER [--id LOG_CONFIG_ID] [--all] [--force-update] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Editor** platform role for the cluster for all log sources except `kube-audit` and **Administrator** platform role for the cluster for the `kube-audit` log source
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
+   <dd>If you want to remove a single logging configuration, the logging configuration ID.</dd>
+
+  <dt><code>--all</code></dt>
+   <dd>The flag to remove all logging configurations in a cluster.</dd>
+
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
+
+   <dt><code>-s</code></dt>
+     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks logging config rm --cluster my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e
+```
+{: pre}
+
+#### ibmcloud ks logging config update
+{: #cs_logging_update}
+
+Update the details of a log forwarding configuration.
+{: shortdesc}
+
+```
+ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-paths PATH] [--app-containers PATH] [--json] [--skipValidation] [--force-update] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
+   <dd>The logging configuration ID that you want to update. This value is required.</dd>
+
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+   <dd>The log forwarding protocol that you want to use. Currently, <code>syslog</code> and <code>ibm</code> are supported. This value is required.</dd>
+
+  <dt><code>--namespace <em>NAMESPACE</em></code>
+    <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
+
+  <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
+   <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+
+   <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
+   <dd>The port of the log collector server. This value is optional when the logging type is <code>syslog</code>. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and <code>9091</code> is used for <code>ibm</code>.</dd>
+
+   <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
+   <dd>Optional: The name of the space that you want to send logs to. This value is valid only for log type <code>ibm</code> and is optional. If you do not specify a space, logs are sent to the account level. If you do, you must also specify an org.</dd>
+
+   <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
+   <dd>Optional: The name of the Cloud Foundry org that the space is in. This value is valid only for log type <code>ibm</code> and is required if you specified a space.</dd>
+
+   <dt><code>--app-paths <em>PATH</em>,<em>PATH</em></code></dt>
+     <dd>An absolute file path in the container to collect logs from. Wildcards, such as '/var/log/*.log', can be used, but recursive globs, such as '/var/log/**/test.log', cannot be used. To specify more than one path, use a comma separated list. This value is required when you specify 'application' for the log source. </dd>
+
+   <dt><code>--app-containers <em>PATH</em>,<em>PATH</em></code></dt>
+     <dd>The path on the containers that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+
+   <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+   <dt><code>--skipValidation</code></dt>
+    <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
+
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
+
+   <dt><code>-s</code></dt>
+     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
+
+**Example for log type `ibm`**:
+
+  ```
+  ibmcloud ks logging config update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  ```
+  {: pre}
+
+**Example for log type `syslog`**:
+
+  ```
+  ibmcloud ks logging config update --cluster my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
+  ```
+  {: pre}
+
+### ibmcloud ks logging filter
+{: #cs_logging_filter}
+
+View or modify log filters for a cluster. This command must be combined with one of the following subcommands.
+{: shortdesc}
+
+#### ibmcloud ks logging filter create
+{: #cs_log_filter_create}
+
+Filter out logs that are forwarded by your logging configuration.
+{: shortdesc}
+
+```
+ibmcloud ks logging filter create --cluster CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [-- message MESSAGE] [--regex-message MESSAGE] [--force-update] [--json] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to create a logging filter for. This value is required.</dd>
+
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+    <dd>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</dd>
+
+  <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
+    <dd>A comma separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command. This value is optional.</dd>
+
+  <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
+    <dd>The Kubernetes namespace from which you want to filter logs. This value is optional.</dd>
+
+  <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
+    <dd>The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>. This value is optional.</dd>
+
+  <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
+    <dd>Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. This value is optional. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
+
+  <dt><code>--message <em>MESSAGE</em></code></dt>
+    <dd>Filters out any logs that contain a specified message anywhere in the log. This value is optional. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".</dd>
+
+  <dt><code>--regex-message <em>MESSAGE</em></code></dt>
+    <dd>Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. This value is optional. Example: The pattern "hello [0-9]" would apply to "hello 1", "hello 2", and "hello 9".</dd>
+
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Examples**:
+
+This example filters out all logs that are forwarded from containers with the name `test-container` in the default namespace that are at the debug level or less, and have a log message that contains "GET request".
+```
+ibmcloud ks logging filter create --cluster example-cluster --type container --namespace default --container test-container --level debug --message "GET request"
+```
+{: pre}
+
+This example filters out all of the logs that are forwarded, at an info level or less, from a specific cluster. The output is returned as JSON.
+```
+ibmcloud ks logging filter create --cluster example-cluster --type all --level info --json
+```
+{: pre}
+
+#### ibmcloud ks logging filter get
+{: #cs_log_filter_view}
+
+View a logging filter configuration.
+{: shortdesc}
+
+```
+ibmcloud ks logging filter get --cluster CLUSTER [--id FILTER_ID] [--show-matching-configs] [--show-covering-filters] [--json] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to view filters from. This value is required.</dd>
+
+  <dt><code>--id <em>FILTER_ID</em></code></dt>
+    <dd>The ID of the log filter that you want to view.</dd>
+
+  <dt><code>--show-matching-configs</code></dt>
+    <dd>Show the logging configurations that match the configuration that you're viewing. This value is optional.</dd>
+
+  <dt><code>--show-covering-filters</code></dt>
+    <dd>Show the logging filters that render previous filters obsolete. This value is optional.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks logging filter get --cluster mycluster --id 885732 --show-matching-configs
+```
+{: pre}
+
+#### ibmcloud ks logging filter rm
+{: #cs_log_filter_delete}
+
+Delete a logging filter.
+{: shortdesc}
+
+```
+ibmcloud ks logging filter rm --cluster CLUSTER [--id FILTER_ID] [--all] [--force-update] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to delete a filter from.</dd>
+
+  <dt><code>--id <em>FILTER_ID</em></code></dt>
+    <dd>The ID of the log filter to delete.</dd>
+
+  <dt><code>--all</code></dt>
+    <dd>Delete all of your log forwarding filters. This value is optional.</dd>
+
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks logging filter rm mycluster --id 885732
+```
+{: pre}
+
+#### ibmcloud ks logging filter update
+{: #cs_log_filter_update}
+
+Update a logging filter.
+{: shortdesc}
+
+```
+ibmcloud ks logging filter update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--regex-message MESSAGE] [--force-update] [--json] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
+
+ <dt><code>--id <em>FILTER_ID</em></code></dt>
+    <dd>The ID of the log filter to update.</dd>
+
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+    <dd>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</dd>
+
+  <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
+    <dd>A comma separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command. This value is optional.</dd>
+
+  <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
+    <dd>The Kubernetes namespace from which you want to filter logs. This value is optional.</dd>
+
+  <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
+    <dd>The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>. This value is optional.</dd>
+
+  <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
+    <dd>Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. This value is optional. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
+
+  <dt><code>--message <em>MESSAGE</em></code></dt>
+    <dd>Filters out any logs that contain a specified message anywhere in the log. This value is optional. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".</dd>
+
+  <dt><code>--regex-message <em>MESSAGE</em></code></dt>
+    <dd>Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. This value is optional. Example: The pattern "hello [0-9]" would apply to "hello 1", "hello 2", and "hello 9"</dd>
+
+  <dt><code>--force-update</code></dt>
+    <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Examples**:
+
+This example filters out all logs that are forwarded from containers with the name `test-container` in the default namespace that are at the debug level or less, and have a log message that contains "GET request".
+```
+ibmcloud ks logging filter update --cluster example-cluster --id 885274 --type container --namespace default --container test-container --level debug --message "GET request"
+```
+{: pre}
+
+This example filters out all of the logs that are forwarded, at an info level or less, from a specific cluster. The output is returned as JSON.
+```
+ibmcloud ks logging filter update --cluster example-cluster --id 274885 --type all --level info --json
+```
+{: pre}
+
+### ibmcloud ks logging refresh
+{: #cs_logging_refresh}
+
+Refresh the logging configuration for the cluster. This refreshes the logging token for any logging configuration that is forwarding to the space level in your cluster.
+{: shortdesc}
+
+```
+ibmcloud ks logging refresh --cluster CLUSTER [--force-update] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+   <dt><code>--force-update</code></dt>
+     <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to make changes to your logging configurations.</dd>
+
+   <dt><code>-s</code></dt>
+     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks logging refresh --cluster my_cluster
+```
+{: pre}
+
+<br />
+
+
+## `nlb-dns` commands
+{: #nlb-dns}
+
+**This section is UNDER DEVELOPMENT and is internal-only. The features described in this section are not yet available in staging or production.**
+
+Use this group of commands to create and manage host names for network load balancer (NLB) IP addresses and health check monitors for host names. For more information, see [Registering a load balancer host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
+{: shortdesc}
+
+### ibmcloud ks nlb-dns add
+{: #cs_nlb-dns-add}
+
+Add a load balancer IP to an existing host name that you created with the [`ibmcloud ks nlb-dns create` command](#cs_nlb-dns-create).
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns add --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+For example, you might create a load balancer in one zone to expose an app. If you later add more load balancers in other zones of your cluster to expose the same app, you can add the load balancer IPs to the existing host name. Note that you must run the following command for each IP address that you want to add.
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>The load balancer IP that you want to add to the hostname. To see your load balancer IPs, run <code>kubectl get svc</code>.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns list</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns add --cluster mycluster --ip 1.1.1.1 --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns create
+{: #cs_nlb-dns-create}
+
+Publicly expose your app by creating a DNS host name to register one or more load balancer IPs.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns create --cluster CLUSTER --ip IP [--json] [-s]
+```
+{: pre}
+
+For example, if you deploy load balancers for your app in 3 zones in the US-South region, you can generate the host name `*.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` for the 3 load balancer IP addresses. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that load balancer.
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>The load balancer IP address that you want to register. To see your load balancer IPs, run <code>kubectl get svc</code>. Note that you can initially create the host name with only one IP address. If you have load balancers in each zone of a multizone cluster that expose one app, you can add the IPs of the other load balancers to the host name by running the [`ibmcloud ks nlb-dns-add` command](#cs_nlb-dns-add).</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns create --cluster mycluster --ip 1.1.1.1
+```
+{: pre}
+
+### ibmcloud ks nlb-dns delete
+{: #cs_nlb-dns-delete}
+
+Remove a load balancer IP address from a host name. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it. Note that you must run this command for each IP address that you want to remove.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns delete --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>The load balancer IP that you want to remove. To see your load balancer IPs, run <code>kubectl get svc</code>.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns list</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns delete --cluster mycluster --ip 1.1.1.1 --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns ls
+{: #cs_nlb-dns-ls}
+
+List the load balancer host names and IP addresses that are registered in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns ls --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns ls --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks nlb-dns monitor
+{: #cs_nlb-dns-monitor}
+
+Create, modify, and view health check monitors for load balancer host names in a cluster. This command must be combined with one of the following subcommands.
+{: shortdesc}
+
+#### ibmcloud ks nlb-dns monitor configure
+{: #cs_nlb-dns-monitor-configure}
+
+Configure and optionally enable a health check monitor for an existing load balancer host name in a cluster. When you enable a monitor for your host name, the monitor health checks the load balancer IP in each zone and keeps the DNS lookup results updated based on these health checks.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host HOST NAME [--enable] [--desc DESCRIPTION] [--type TYPE] [--method METHOD] [--path PATH] [--timeout TIMEOUT] [--retries RETRIES] [--interval INTERVAL] [--port PORT] [--header HEADER] [--expected-body BODY STRING] [--expected-codes HTTP CODES] [--follows-redirects TRUE] [--allows-insecure TRUE] [--json] [-s]
+```
+{: pre}
+
+You can use this command to create and enable a new health check monitor, or to update the settings for an existing health check monitor. To create a new monitor, include the `--enable` flag and the flags for all settings that you want to configure. To update an existing monitor, include only the flags for the settings that you want to change.
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster where the host name is registered.</dd>
+
+<dt><code>--nlb-host <em>HOST NAME</em></code></dt>
+<dd>The host name to configure a health check monitor for. To list host names, run <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--enable</code></dt>
+<dd>Include this flag to create and enable a new health check monitor for a host name.</dd>
+
+<dt><code>--description <em>DESCRIPTION</em></code></dt>
+<dd>A description of the health monitor.</dd>
+
+<dt><code>--type <em>TYPE</em></code></dt>
+<dd>The protocol to use for the health check: <code>HTTP</code>, <code>HTTPS</code>, or <code>TCP</code>. Default: <code>HTTP</code></dd>
+
+<dt><code>--method <em>METHOD</em></code></dt>
+<dd>The method to use for the health check. Default for <code>type</code> <code>HTTP</code> and <code>HTTPS</code>: <code>GET</code>. Default for <code>type</code> <code>TCP</code>: <code>connection_established</code>.</dd>
+
+<dt><code>--path <em>PATH</em></code></dt>
+<dd>When <code>type</code> is <code>HTTPS</code>: The endpoint path to health check against. Default: <code>/</code></dd>
+
+<dt><code>--timeout <em>TIMEOUT</em></code></dt>
+<dd>The timeout, in seconds, before the IP is considered unhealthy. Default: <code>5</code></dd>
+
+<dt><code>--retries <em>RETRIES</em></code></dt>
+<dd>When a timeout occurs, the number of retries to attempt before the IP is considered unhealthy. Retries are attempted immediately. Default: <code>2</code></dd>
+
+<dt><code>--interval <em>INTERVAL</em></code></dt>
+<dd>The interval, in seconds, between each health check. Short intervals might improve failover time, but increase load on the IPs. Default: <code>60</code></dd>
+
+<dt><code>--port <em>PORT</em></code></dt>
+<dd>The port number to connect to for the health check. When <code>type</code> is <code>TCP</code>, this parameter is required. When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>, define the port only if you use a port other than 80 for HTTP or 443 for HTTPS. Default for TCP: <code>0</code>. Default for HTTP: <code>80</code>. Default for HTTPS: <code>443</code>.</dd>
+
+<dt><code>--header <em>HEADER</em></code></dt>
+<dd>When <code>type</code> is <code>HTTPS</code> or <code>HTTPS</code>: The HTTP request headers to send in the health check, such as a Host header. The User-Agent header cannot be overridden.</dd>
+
+<dt><code>--expected-body <em>BODY STRING</em></code></dt>
+<dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: A case-insensitive sub-string that the health check looks for in the response body. If this string is not found, the IP is considered unhealthy.</dd>
+
+<dt><code>--expected-codes <em>HTTP CODES</em></code></dt>
+<dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: HTTP codes that the health check looks for in the response. If the HTTP code is not found, the IP is considered unhealthy. Default: <code>200</code></dd>
+
+<dt><code>--allows-insecure <em>TRUE</em></code></dt>
+<dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: Set to <code>true</code> to not validate the certificate.</dd>
+
+<dt><code>--follows-redirects <em>TRUE</em></code></dt>
+<dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: Set to <code>true</code> to follow any redirects that are returned by the IP.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns monitor configure --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60 --header "Host":["example.com"] --expected-body "healthy" --expected-codes 200 --follows-redirects true
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns monitor details
+{: #cs_nlb-dns-monitor-details}
+
+View the settings for an existing health check monitor.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns monitor details --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns monitor details --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns monitor disable
+{: #cs_nlb-dns-monitor-disable}
+
+Disable an existing health check monitor for a host name in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns monitor disable --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns monitor enable
+{: #cs_nlb-dns-monitor-enable}
+
+Enable a health check monitor that you configured.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+Note that the first time you create a health check monitor, you must configure and enable it with the `ibmcloud ks nlb-dns monitor configure` command. Use the `ibmcloud ks nlb-dns monitor enable` command only to enable a monitor that you configured but did not yet enable, or to re-enable a monitor that you previously disabled.
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns monitor enable --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns monitor ls
+{: #cs_nlb-dns-monitor-ls}
+
+List the health check monitor settings for each load balancer host name in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns monitor ls --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns monitor ls --cluster mycluster
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns monitor status
+{: #cs_nlb-dns-monitor-status}
+
+List the health check status for the IPs behind load balancer host names in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns monitor status --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>-- <em></em></code></dt>
+<dd>Include this flag to view the status for only one host name. To list host names, run <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns monitor status --cluster mycluster
+```
+{: pre}
+
+<br />
+
+
+## `va` commands
+{: #va}
+
+### ibmcloud ks va
+{: #cs_va}
+
+After you [install the container scanner](/docs/services/va?topic=va-va_index#va_install_container_scanner), view a detailed vulnerability assessment report for a container in your cluster.
+{: shortdesc}
+
+```
+ibmcloud ks va --container CONTAINER_ID [--extended] [--vulnerabilities] [--configuration-issues] [--json]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Reader** service access role for {{site.data.keyword.registrylong_notm}}. **Note**: Do not assign policies for {{site.data.keyword.registryshort_notm}} at the resource group level.
+
+**Command options**:
+
+<dl>
+<dt><code>--container CONTAINER_ID</code></dt>
+<dd><p>The ID of the container. This value is required.</p>
+<p>To find the ID of your container:<ol><li>[Target the Kubernetes CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).</li><li>List your pods by running `kubectl get pods`.</li><li>Find the **Container ID** field in the output of the `kubectl describe pod <pod_name>` command. For example, `Container ID: containerd://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remove the `containerd://` prefix from the ID before you use the container ID for the `ibmcloud ks va` command. For example, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+
+<dt><code>--extended</code></dt>
+<dd><p>Extend the command output to show more fix information for vulnerable packages. This value is optional.</p>
+<p>By default, the scan results show the ID, policy status, affected packages, and how to resolve. With the `--extended` flag, it adds information such as the summary, vendor security notice, and official notice link.</p></dd>
+
+<dt><code>--vulnerabilities</code></dt>
+<dd>Restrict the command output to show package vulnerabilities only. This value is optional. You cannot use this flag if you use the `--configuration-issues` flag.</dd>
+
+<dt><code>--configuration-issues</code></dt>
+<dd>Restrict the command output to show configuration issues only. This value is optional. You cannot use this flag if you use the `--vulnerabilities` flag.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15 --extended --vulnerabilities --json
+```
+{: pre}
+
+<br />
+
+
+## `webhook` commands
+{: #webhook}
+
+### ibmcloud ks webhook-create
+{: #cs_webhook_create}
+
+Register a webhook.
+{: shortdesc}
+
+```
+ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+   <dt><code>--level <em>LEVEL</em></code></dt>
+   <dd>The notification level, such as <code>Normal</code> or <code>Warning</code>. <code>Warning</code> is the default value. This value is optional.</dd>
+
+   <dt><code>--type <em>slack</em></code></dt>
+   <dd>The webhook type. Currently slack is supported. This value is required.</dd>
+
+   <dt><code>--url <em>URL</em></code></dt>
+   <dd>The URL for the webhook. This value is required.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
+
+**Example**:
+
+```
+ibmcloud ks webhook-create --cluster my_cluster --level Normal --type slack --url http://github.com/mywebhook
+```
+{: pre}
+
+<br />
+
+
+## `api-key` commands
+{: #api-key}
+
+Use this group of commands to view information about the API key for a cluster or reset it to a new key.
+{: shortdesc}
+
+### ibmcloud ks api-key info
+{: #cs_api_key_info}
+
+View the name and email address for the owner of the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key in an {{site.data.keyword.containerlong_notm}} resource group and region.
+{: shortdesc}
+
+```
+ibmcloud ks api-key info --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+The {{site.data.keyword.Bluemix_notm}} API key is automatically set for a resource group and region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the `default` resource group in the `us-south` region. By doing that, the {{site.data.keyword.Bluemix_notm}} IAM API key for this user is stored in the account for this resource group and region. The API key is used to order resources in IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs. A different API key can be set for each region within a resource group.
+
+When a different user performs an action in this resource group and region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine if sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](/docs/containers?topic=containers-users#infra_access).
+
+If you find that you need to update the API key that is stored for a resource group and region, you can do so by running the [ibmcloud ks api-key reset](#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
+
+**Tip:** The API key that is returned in this command might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the [ibmcloud ks credential set](#cs_credentials_set) command.
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+   </dl>
+
+**Example**:
+
+```
+ibmcloud ks api-key info --cluster my_cluster
+```
+{: pre}
+
+### ibmcloud ks api-key reset
+{: #cs_api_key_reset}
+
+Replace the current {{site.data.keyword.Bluemix_notm}} IAM API key in an {{site.data.keyword.containerlong_notm}} region.
+{: shortdesc}
+
+```
+ibmcloud ks api-key-reset [-s]
+```
+{: pre}
+
+This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The {{site.data.keyword.Bluemix_notm}} IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how {{site.data.keyword.Bluemix_notm}} IAM API keys work, see the [`ibmcloud ks api-key info` command](#cs_api_key_info).
+
+Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users).
+{: important}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
+
+**Example**:
+
+```
+ibmcloud ks api-key reset
+```
+{: pre}
+
+<br />
+
+
+## `credential` commands
+{: #credentials}
+
+Use this group of commands to set and unset credentials that allow you to access the IBM Cloud infrastructure (SoftLayer) portfolio through your {{site.data.keyword.Bluemix_notm}} account.
+{: shortdesc}
+
+### ibmcloud ks credential get
+{: #cs_credential_get}
+
+If you set up your {{site.data.keyword.Bluemix_notm}} account to use different credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio, get the infrastructure user name for the region and resource group that you are currently targeted to.
+{: shortdesc}
+
+```
+ibmcloud ks credential get [-s] [--json]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+ <dl>
+ <dt><code>--json</code></dt>
+ <dd>Prints the command output in JSON format. This value is optional.</dd>
+ <dt><code>-s</code></dt>
+ <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+ </dl>
+
+**Example:**
+```
+ibmcloud ks credential get
+```
+{: pre}
+
+**Example output:**
+```
+Infrastructure credentials for user name user@email.com set for resource group default.
+```
+
+### ibmcloud ks credential set
+{: #cs_credentials_set}
+
+Set credentials for a resource group and region that allow you to access the IBM Cloud infrastructure (SoftLayer) portfolio through your {{site.data.keyword.Bluemix_notm}} account.
+{: shortdesc}
+
+```
+ibmcloud ks credential set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+```
+{: pre}
+
+If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using this command.
+
+If IBM Cloud infrastructure (SoftLayer) credentials are manually set for a region and a resource group, these credentials are used to order infrastructure for all clusters within that region in the resource group. These credentials are used to determine infrastructure permissions, even if an [{{site.data.keyword.Bluemix_notm}} IAM API key](#cs_api_key_info) already exists for the resource group and region. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.
+
+You cannot set multiple credentials for the same {{site.data.keyword.containerlong_notm}} resource group and region.
+
+Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#users).
+{: important}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
+  <dd>IBM Cloud infrastructure (SoftLayer) account API username. This value is required. Note that the infrastructure API username is not the same as the IBMid. To view the infrastructure API username:
+  <ol>
+  <li>Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com).
+  <li>From the menu bar, select **Manage > Access (IAM)**.
+  <li>Select the **Users** tab and then click on your user name.
+  <li>In the **API keys** pane, find the entry **Classic infrastructure API key** and click the **Action menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Details**.
+  <li>Copy the API user name.
+  </ol></dd>
+
+  <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
+  <dd>IBM Cloud infrastructure (SoftLayer) account API key. This value is required. To view or generate an infrastructure API key:
+  <li>Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com).
+  <li>From the menu bar, select **Manage > Access (IAM)**.
+  <li>Select the **Users** tab and then click on your user name.
+  <li>In the **API keys** pane, find the entry **Classic infrastructure API key** and click the **Action menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Details**. If you do not see a classic infrastructure API key, generate one by clicking **Create an {{site.data.keyword.Bluemix_notm}} API key**.
+  <li>Copy the API user name.
+  </ol>
+  </dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks credential set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+```
+{: pre}
+
+### ibmcloud ks credential unset
+{: #cs_credentials_unset}
+
+Remove the credentials for a resource group and region that allow you to access the IBM Cloud infrastructure (SoftLayer) portfolio through your {{site.data.keyword.Bluemix_notm}} account.
+{: shortdesc}
+
+```
+ibmcloud ks credential unset [-s]
+```
+{: pre}
+
+After you remove the credentials, the [{{site.data.keyword.Bluemix_notm}} IAM API key](#cs_api_key_info) is used to order resources in IBM Cloud infrastructure (SoftLayer).
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+  <dl>
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
+
+<br />
+
+
+## `subnets` commands
+{: #subnets}
+
+### ibmcloud ks subnets
+{: #cs_subnets}
+
+List available portable subnets in your IBM Cloud infrastructure (SoftLayer) account.
+{: shortdesc}
+
+```
+ibmcloud ks subnets [--json] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+  <dl>
+  <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
+
+**Example**:
+
+```
+ibmcloud ks subnets
+```
+{: pre}
+
+<br />
+
+
+## `vlan` commands
+{: #vlan}
+
+Use this groups of commands to list public and private VLANs for a zone and the VLAN spanning status.
+{: shortdesc}
+
+### ibmcloud ks <ph class="ignoreSpelling">vlan</ph> ls
+{: #cs_vlans}
+
+List the public and private VLANs that are available for a zone in your IBM Cloud infrastructure (SoftLayer) account. To list available VLANs, you must have a paid account.
+{: shortdesc}
+
+```
+ibmcloud ks vlan ls --zone ZONE [--all] [--json] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>:
+* To view the VLANs that the cluster is connected to in a zone: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+* To list all available VLANs in a zone: **Viewer** platform role for the region in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--zone <em>ZONE</em></code></dt>
+   <dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
+
+   <dt><code>--all</code></dt>
+   <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANs that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
+
+   <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
+
+**Example**:
+
+```
+ibmcloud ks vlan ls --zone dal10
+```
+{: pre}
+
+### ibmcloud ks <ph class="ignoreSpelling">vlan</ph> spanning get
+{: #cs_vlan_spanning_get}
+
+View the VLAN spanning status for an IBM Cloud infrastructure (SoftLayer) account.
+{: shortdesc}
+
+```
+ibmcloud ks vlan spanning get [--json] [-s]
+```
+{: pre}
+
+VLAN spanning enables all devices on an account to communicate with each other by means of the private network, regardless of its assigned VLAN.
+
+<strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+    <dt><code>--json</code></dt>
+      <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+    <dt><code>-s</code></dt>
+      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
+
+**Example**:
+
+```
+ibmcloud ks vlan spanning get
+```
+{: pre}
+
+<br />
+
+
+## `kube-versions` commands
+{: #kube-versions}
+
+### ibmcloud ks kube-versions
+{: #cs_kube_versions}
+
+View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) to the default version for the latest, stable capabilities.
+{: shortdesc}
+
+```
+ibmcloud ks kube-versions [--json] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: None
+
+**Command options**:
+
+  <dl>
+  <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
+
+**Example**:
+
+  ```
+  ibmcloud ks kube-versions
+  ```
+  {: pre}
+
+<br />
+
+
+
+## `machine-types` commands
+{: #machine-types}
+
+### ibmcloud ks machine-types
+{: #cs_machine_types}
+
+View a list of available machine types for your worker nodes. Machine types vary by zone.
+{:shortdesc}
+
+```
+ibmcloud ks machine-types --zone ZONE [--json] [-s]
+```
+{: pre}
+
+Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers?topic=containers-security#encrypted_disk). You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).
+
+<strong>Minimum required permissions</strong>: None
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--zone <em>ZONE</em></code></dt>
+   <dd>Enter the zone where you want to list available machine types. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
+
+   <dt><code>--json</code></dt>
+  <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
+
+**Example**:
+
+```
+ibmcloud ks machine-types --zone dal10
+```
+{: pre}
+
+<br />
+
+
+## `messages` commands
+{: #messages}
+
+### ibmcloud ks messages
+{: #cs_messages}
+
+View current messages for the IBMid user.
+{: shortdesc}
+
+```
+ibmcloud ks messages
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: None
+
+<br />
+
+
+## `api` commands
+{: #api}
+
+### ibmcloud ks api
+{: #cs_api}
+
+Target the API endpoint for {{site.data.keyword.containerlong_notm}}. If you do not specify an endpoint, you can view information about the current endpoint that is targeted.
+{: shortdesc}
+
+```
+ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
+```
+{: pre}
+
+Switching regions? Use the `ibmcloud ks region set` [command](#cs_region-set) instead.
+{: tip}
+
+<strong>Minimum required permissions</strong>: None
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
+   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint. Note that this endpoint is different than the {{site.data.keyword.Bluemix_notm}} endpoints. This value is required to set the API endpoint. Accepted values are:<ul>
+   <li>Global endpoint: https://containers.cloud.ibm.com</li>
+   <li>AP North endpoint: https://ap-north.containers.cloud.ibm.com</li>
+   <li>AP South endpoint: https://ap-south.containers.cloud.ibm.com</li>
+   <li>EU Central endpoint: https://eu-central.containers.cloud.ibm.com</li>
+   <li>UK South endpoint: https://uk-south.containers.cloud.ibm.com</li>
+   <li>US East endpoint: https://us-east.containers.cloud.ibm.com</li>
+   <li>US South endpoint: https://us-south.containers.cloud.ibm.com</li></ul>
+   </dd>
+
+   <dt><code>--insecure</code></dt>
+   <dd>Allow an insecure HTTP connection. This flag is optional.</dd>
+
+   <dt><code>--skip-ssl-validation</code></dt>
+   <dd>Allow insecure SSL certificates. This flag is optional.</dd>
+
+   <dt><code>--api-version VALUE</code></dt>
+   <dd>Specify the API version of the service that you want to use. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+   </dl>
+
+**Example**: View information about the current API endpoint that is targeted.
+```
+ibmcloud ks api
+```
+{: pre}
+
+```
+API Endpoint:          https://containers.cloud.ibm.com
+API Version:           v1
+Skip SSL Validation:   false
+Region:                us-south
+```
+{: screen}
+
+<br />
+
+
+## `init` commands
+{: #init}
+
+### ibmcloud ks init
+{: #cs_init}
+
+Initialize the {{site.data.keyword.containerlong_notm}} plug-in or specify the region where you want to create or access Kubernetes clusters.
+{: shortdesc}
+
+```
+ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: None
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--host <em>HOST</em></code></dt>
+   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use.  This value is optional. [View the available API endpoint values.](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
+
+   <dt><code>--insecure</code></dt>
+   <dd>Allow an insecure HTTP connection.</dd>
+
+   <dt><code>-p</code></dt>
+   <dd>Your IBM Cloud password.</dd>
+
+   <dt><code>-u</code></dt>
+   <dd>Your IBM Cloud username.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+   </dl>
+
+**Example**:
+```
+ibmcloud ks init --host https://stage.cont.bluemix.net
+```
+{: pre}
+
+<br />
+
+
+## `region` commands
+{: #region}
+
+Use this group of commands to view available regions, view the currently targeted region, and set the targeted region.
+{: shortdesc}
+
+### ibmcloud ks region get
+{: #cs_region}
+
+Find the {{site.data.keyword.containerlong_notm}} region that you are currently in. You create and manage clusters specific to the region. Use the `ibmcloud ks region set` command to change regions.
+{: shortdesc}
+
+```
+ibmcloud ks region get
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: None
+
+### ibmcloud ks region ls
+{: #cs_regions}
+
+List the available regions. The `Region Name` is the {{site.data.keyword.containerlong_notm}} name, and the `Region Alias` is the general {{site.data.keyword.Bluemix_notm}} name for the region.
+{: shortdesc}
+
+<strong>Minimum required permissions</strong>: None
+
+**Example**:
+
+```
+ibmcloud ks region ls
+```
+{: pre}
+
+**Output**:
+```
+Region Name   Region Alias
+ap-north      jp-tok
+ap-south      au-syd
+eu-central    eu-de
+uk-south      eu-gb
+us-east       us-east
+us-south      us-south
+```
+{: screen}
+
+### ibmcloud ks region set
+{: #cs_region-set}
+
+Set the region for {{site.data.keyword.containerlong_notm}}. You create and manage clusters specific to the region, and you might want clusters in multiple regions for high availability.
+{: shortdesc}
+
+```
+ibmcloud ks region set [--region REGION]
+```
+{: pre}
+
+For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud ks region set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud ks region set us-south` to return to US South to manage your cluster in that region.
+
+<strong>Minimum required permissions</strong>: None
+
+**Command options**:
+
+<dl>
+<dt><code>--region <em>REGION</em></code></dt>
+<dd>Enter the region that you want to target. This value is optional. If you do not provide the region, you can select it from the list in the output.
+
+For a list of available regions, review [regions and zones](/docs/containers?topic=containers-regions-and-zones) or use the `ibmcloud ks region ls` [command](#cs_regions).</dd></dl>
+
+**Example**:
+
+```
+ibmcloud ks region set eu-central
+```
+{: pre}
+
+**Output**:
+```
+Choose a region:
+1. ap-north
+2. ap-south
+3. eu-central
+4. uk-south
+5. us-east
+6. us-south
+Enter a number> 3
+OK
+```
+{: screen}
+
+### ibmcloud ks region unset
+{: #cs_region_unset}
+
+Stop targeting a region for the {{site.data.keyword.containerlong_notm}} CLI plug-in to use the global API instead.
+{: shortdesc}
+
+```
+ibmcloud ks region unset
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: None
+
+</staging>
