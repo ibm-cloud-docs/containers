@@ -34,7 +34,7 @@ With the {{site.data.keyword.containerlong_notm}} `ibm-iks-cluster-autoscaler` p
 Want to autoscale your pods instead? Check out [Scaling apps](/docs/containers?topic=containers-app#app_scaling).
 {: tip}
 
-The cluster autoscaler is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you cannot use the cluster autoscaler in your cluster. 
+The cluster autoscaler is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall, you cannot use the cluster autoscaler in your cluster.
 {: important}
 
 ## Understanding how the cluster autoscaler works

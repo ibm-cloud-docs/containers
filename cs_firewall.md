@@ -109,51 +109,51 @@ To allow access for a specific cluster:
    ```
    {: pre}
 
- 5. Retrieve the **Master URL** for your cluster.
+5. Retrieve the **Master URL** for your cluster.
 
-    ```
-    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
 
-    Example output:
-    ```
-    ...
-    Master URL:		https://c3.<region>.containers.cloud.ibm.com:31142
-    ...
-    ```
-    {: screen}
+  Example output:
+  ```
+  ...
+  Master URL:		https://c3.<region>.containers.cloud.ibm.com:31142
+  ...
+  ```
+  {: screen}
 
- 6. Allow access to the **Master URL** on the port, such as port `31142` from the previous example. If your firewall is IP-based, you can see which IP addresses are opened when you allow access to the master URL by reviewing [this table](#master_ips).
+6. Allow access to the **Master URL** on the port, such as port `31142` from the previous example. If your firewall is IP-based, you can see which IP addresses are opened when you allow access to the master URL by reviewing [this table](#master_ips).
 
- 7. Verify your connection.
+7. Verify your connection.
 
-    ```
-    curl --insecure <master_URL>/version
-    ```
-    {: pre}
+  ```
+  curl --insecure <master_URL>/version
+  ```
+  {: pre}
 
-    Example command:
-    ```
-    curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
-    ```
-    {: pre}
+  Example command:
+  ```
+  curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
+  ```
+  {: pre}
 
-    Example output:
-    ```
-    {
-     "major": "1",
-     "minor": "7+",
-     "gitVersion": "v1.7.4-2+eb9172c211dc41",
-     "gitCommit": "eb9172c211dc4108341c0fd5340ee5200f0ec534",
-     "gitTreeState": "clean",
-     "buildDate": "2017-11-16T08:13:08Z",
-     "goVersion": "go1.8.3",
-     "compiler": "gc",
-     "platform": "linux/amd64"
-    }
-    ```
-    {: screen}
+  Example output:
+  ```
+  {
+   "major": "1",
+   "minor": "7+",
+   "gitVersion": "v1.7.4-2+eb9172c211dc41",
+   "gitCommit": "eb9172c211dc4108341c0fd5340ee5200f0ec534",
+   "gitTreeState": "clean",
+   "buildDate": "2017-11-16T08:13:08Z",
+   "goVersion": "go1.8.3",
+   "compiler": "gc",
+   "platform": "linux/amd64"
+  }
+  ```
+  {: screen}
 
 8. Optional: Repeat these steps for each cluster that you need to expose.
 
@@ -369,17 +369,9 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
-6. {: #pvc}To create persistent volume claims in a cluster by using the private service endpoints for {{site.data.keyword.Bluemix_notm}} persistent storage, make sure that your cluster is set up with the following Kubernetes version or plug-in versions.
-   <table>
-   <caption>Overview of required Kubernetes or plug-in versions to use private service endpoints</caption>
-   <thead>
-     <th>Type of storage</th>
-     <th>Required version</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>File storage</td>
-      <td>No private service endpoint support</td>
+6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
+    - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
+    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.No private service endpoint support</td>
     </tr>
     <tr>
       <td>Block storage</td>
@@ -390,7 +382,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       <td><ul><li>{{site.data.keyword.cos_full_notm}} plug-in version 1.0.3 or later</li><li>{{site.data.keyword.cos_full_notm}} service set up with HMAC authentication</td>
     </tr>
   </tbody>
-  </table>
+  </table></staging>
 
   If you must use a Kubernetes version or plug-in version that does not support private service endpoints for {{site.data.keyword.Bluemix_notm}} persistent storage, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
   - Allow all egress network traffic on TCP port 443.
