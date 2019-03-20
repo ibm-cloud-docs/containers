@@ -379,7 +379,7 @@ Let your cluster access infrastructure resources and services from behind a fire
    <tbody>
      <tr>
        <td>File storage</td>
-       <td>Kubernetes version 1.13.4_1512, 1.12.6_1543, 1.11.8_1549, 1.10.13_1550, or later</td>
+       <td>Kubernetes version `1.13.4_1512`, `1.12.6_1543`, `1.11.8_1549`, `1.10.13_1550`, or later</td>
      </tr>
      <tr>
        <td>Block storage</td>
