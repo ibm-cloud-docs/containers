@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-19"
+lastupdated: "2019-03-20"
 
 keywords: kubernetes, iks
 
@@ -48,7 +48,79 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 ## Version 1.13 changelog
 {: #113_changelog}
 
+### Changelog for 1.13.4_1513, released 20 March 2019
+{: #1134_1513}
 
+The following table shows the changes that are included in the patch 1.13.4_1513.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.4_1510">
+<caption>Changes since version 1.13.4_1510</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster DNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed a bug that might cause cluster master operations, such as `refresh` or `update`, to fail when the unused cluster DNS must be scaled down.</td>
+</tr>
+<tr>
+<td>Cluster master HA proxy configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to better handle intermittent connection failures to the cluster master.</td>
+</tr>
+<tr>
+<td>CoreDNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated the CoreDNS configuration to support [multiple Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/) after updating the cluster Kubernetes version from 1.12.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.4</td>
+<td>1.2.5</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.5). Update includes improved fix for [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>344</td>
+<td>345</td>
+<td>Added support for [private service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>136</td>
+<td>166</td>
+<td>Updated image for [CVE-2018-16890 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822), and [CVE-2019-3823 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Updated image for [CVE-2018-10779 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128), and [CVE-2019-7663 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.13.4_1510, released 4 March 2019
 {: #1134_1510}
@@ -319,7 +391,73 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 Review the version 1.12 changelog.
 {: shortdesc}
 
+### Changelog for 1.12.6_1544, released 20 March 2019
+{: #1126_1544}
 
+The following table shows the changes that are included in the patch 1.12.6_1544.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.6_1541">
+<caption>Changes since version 1.12.6_1541</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster DNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed a bug that might cause cluster master operations, such as `refresh` or `update`, to fail when the unused cluster DNS must be scaled down.</td>
+</tr>
+<tr>
+<td>Cluster master HA proxy configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to better handle intermittent connection failures to the cluster master.</td>
+</tr>
+<tr>
+<td>CoreDNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated the CoreDNS configuration to support [multiple Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>344</td>
+<td>345</td>
+<td>Added support for [private service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>136</td>
+<td>166</td>
+<td>Updated image for [CVE-2018-16890 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822), and [CVE-2019-3823 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Updated image for [CVE-2018-10779 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128), and [CVE-2019-7663 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.12.6_1541, released 4 March 2019
 {: #1126_1541}
@@ -912,7 +1050,61 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 
 Review the version 1.11 changelog.
 
+### Changelog for 1.11.8_1550, released 20 March 2019
+{: #1118_1550}
 
+The following table shows the changes that are included in the patch 1.11.8_1550.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.8_1547">
+<caption>Changes since version 1.11.8_1547</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to better handle intermittent connection failures to the cluster master.</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>344</td>
+<td>345</td>
+<td>Added support for [private service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>136</td>
+<td>166</td>
+<td>Updated image for [CVE-2018-16890 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822), and [CVE-2019-3823 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Updated image for [CVE-2018-10779 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128), and [CVE-2019-7663 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.11.8_1547, released 4 March 2019
 {: #1118_1547}
@@ -1862,7 +2054,61 @@ Review the version 1.10 changelog.
 Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
 
+### Changelog for 1.10.13_1551, released 20 March 2019
+{: #11013_1551}
 
+The following table shows the changes that are included in the patch 1.10.13_1551.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.13_1548">
+<caption>Changes since version 1.10.13_1548</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to better handle intermittent connection failures to the cluster master.</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>e32d51c</td>
+<td>9ff3fda</td>
+<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>344</td>
+<td>345</td>
+<td>Added support for [private service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>4.4.0-141</td>
+<td>4.4.0-143</td>
+<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>136</td>
+<td>166</td>
+<td>Updated image for [CVE-2018-16890 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16890), [CVE-2019-3822 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3822), and [CVE-2019-3823 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3823).</td>
+</tr>
+<tr>
+<td>Trusted compute agent</td>
+<td>5f3d092</td>
+<td>a02f765</td>
+<td>Updated image for [CVE-2018-10779 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10779), [CVE-2018-12900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-12900), [CVE-2018-17000 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17000), [CVE-2018-19210 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19210), [CVE-2019-6128 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6128), and [CVE-2019-7663 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-7663).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.10.13_1548, released 4 March 2019
 {: #11013_1548}
