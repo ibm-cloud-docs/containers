@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-19"
+lastupdated: "2019-03-20"
 
 keywords: kubernetes, iks
 
@@ -455,8 +455,8 @@ If you want to access services that run inside or outside {{site.data.keyword.Bl
         7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    
         ```
         {: screen}
-    3.  Retrieve the subnet address. In the output, find the number of **IPs**. Then, calculate the square root of the number of IPs. For example, if the number of IPs is `16`, the square root is `4`. Now get the subnet CIDR by subtracting the square root number from `32` bits, for example, `32 - 4 = 28`. Combine the **identifier** mask with the CIDR value to get the full subnet address. In the previous output, the subnet addresses are:
-        *   `169.48.210.xxx/28`
-        *   `169.48.178.xxx/28`
+    3.  Retrieve the subnet address. In the output, find the number of **IPs**. Then, raise `2` to the power of `n` equal to the number of IPs. For example, if the number of IPs is `16`, then `2` is raised to the power of `4` (`n`) to equal `16`. Now get the subnet CIDR by subtracting the value of `n` from `32` bits. For example, when `n` equals `4`, then the CIDR is `28` (from the equation `32 - 4 = 28`). Combine the **identifier** mask with the CIDR value to get the full subnet address. In the previous output, the subnet addresses are:
+        *   `169.xx.210.xxx/28`
+        *   `169.xx.178.xxx/28`
 4.  Add the IP addresses to your service's firewall for outbound traffic.
 5.  Repeat these steps for each cluster that you want to whitelist.
