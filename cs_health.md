@@ -223,7 +223,7 @@ To create a configuration at the account level, for a specific container namespa
 
 Before you begin, [create](/docs/containers?topic=containers-clusters#clusters) or identify a standard cluster to use.
 
-1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/containers-kubernetes/clusters) and navigate to **Kubernetes > Clusters**.
+1. Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/kubernetes/clusters) and navigate to **Kubernetes > Clusters**.
 2. Select your standard cluster and from the **Overview** tab **Logs** field, click **Enable**.
 3. Select the **Cloud Foundry Org** and **Space** from which you want to forward logs. When you configure log forwarding in the dashboard, logs are sent to the default {{site.data.keyword.loganalysisshort_notm}} endpoint for your cluster. To forward logs to an external server, or to another {{site.data.keyword.loganalysisshort_notm}} endpoint, you can use the CLI to configure logging.
 4. Select the **Log sources** from which you want to forward logs.
