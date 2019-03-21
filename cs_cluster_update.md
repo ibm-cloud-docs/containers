@@ -294,7 +294,7 @@ To update worker nodes from the console:
 ## Updating machine types
 {: #machine_type}
 
-You can update the machine types of your worker nodes by adding new worker nodes and removing the old ones. For example, if you have virtual worker nodes on deprecated machine types with `u1c` or `b1c` in the names, create worker nodes that use machine types with `u2c` or `b2c` in the names.
+You can update the machine types of your worker nodes by adding new worker nodes and removing the old ones. For example, if your cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, create Ubuntu 18 worker nodes that use machine types with `x3c` in the names.
 {: shortdesc}
 
 Before you begin:

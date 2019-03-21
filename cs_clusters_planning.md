@@ -293,11 +293,11 @@ Some flavors are available for only one type of tenancy setup. For example, the 
 **What are the general features of VMs?**</br>
 Virtual machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. Every VM comes with 1000Mbps networking speed, 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for data such as the container runtime and the `kubelet`. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
-**What if I have deprecated `u1c` or `b1c` machine types?**</br>
-To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](/docs/containers?topic=containers-update#machine_type).
+**What if I have older machine types?**</br>
+If your cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, you can [update your cluster to have Ubuntu 18 `x3c` worker nodes](/docs/containers?topic=containers-update#machine_type).
 
 **What virtual machine flavors are available?**</br>
-Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. For example, the `m2c` VMs are only available in the Dallas location (`dal10, dal12, dal13`). You can also review available [bare metal](#bm) or [SDS](#sds) machine types.
+Worker node flavors vary by zone. The following table includes the most recent version of a flavor, such as `x3c` Ubuntu 18 worker nodes flavors, as opposed to the older `x2c` Ubuntu 16 worker node flavors. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [bare metal](#bm) or [SDS](#sds) machine types.
 
 {: #vm-table}
 <table>
@@ -310,83 +310,83 @@ Machine types vary by zone. To see the machine types available in your zone, run
 </thead>
 <tbody>
 <tr>
-<td><strong>Virtual, u2c.2x4</strong>: Use this smallest size VM for quick testing, proofs of concept, and other light workloads.</td>
+<td><strong>Virtual, u3c.2x4</strong>: Use this smallest size VM for quick testing, proofs of concept, and other light workloads.</td>
 <td>2 / 4GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b2c.4x16</strong>: Select this balanced VM for testing and development, and other light workloads.</td>
+<td><strong>Virtual, b3c.4x16</strong>: Select this balanced VM for testing and development, and other light workloads.</td>
 <td>4 / 16GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b2c.16x64</strong>: Select this balanced VM for mid-sized workloads.</td></td>
+<td><strong>Virtual, b3c.16x64</strong>: Select this balanced VM for mid-sized workloads.</td></td>
 <td>16 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b2c.32x128</strong>: Select this balanced VM for mid to large workloads, such as a database and a dynamic website with many concurrent users.</td>
+<td><strong>Virtual, b3c.32x128</strong>: Select this balanced VM for mid to large workloads, such as a database and a dynamic website with many concurrent users.</td>
 <td>32 / 128GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, b2c.56x242</strong>: Select this balanced VM for large workloads, such as a database and multiple apps with many concurrent users.</td>
+<td><strong>Virtual, b3c.56x242</strong>: Select this balanced VM for large workloads, such as a database and multiple apps with many concurrent users.</td>
 <td>56 / 242GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, c2c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node for light workloads.</td>
+<td><strong>Virtual, c3c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node for light workloads.</td>
 <td>16 / 16GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.16x32</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light to mid-sized workloads.</td>
+<td><strong>Virtual, c3c.16x32</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light to mid-sized workloads.</td>
 <td>16 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node for mid-sized workloads.</td>
+<td><strong>Virtual, c3c.32x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node for mid-sized workloads.</td>
 <td>32 / 32GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, c2c.32x64</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads.</td>
+<td><strong>Virtual, c3c.32x64</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads.</td>
 <td>32 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr>
 <tr>
-<td><strong>Virtual, m2c.8x64</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for light to mid-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m3c.8x64</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for light to mid-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
 <td>8 / 64GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m2c.16x128</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m3c.16x128</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
 <td>16 / 128GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m2c.30x240</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m3c.30x240</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
 <td>30 / 240GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m2c.48x384</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m3c.48x384</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only as `--hardware shared` tenancy.</td>
 <td>48 / 384GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m2c.56x448</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m3c.56x448</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only as `--hardware shared` tenancy.</td>
 <td>56 / 448GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
 </tr><tr>
-<td><strong>Virtual, m2c.64x512</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
+<td><strong>Virtual, m3c.64x512</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for large-sized workloads that require more memory like databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only as `--hardware shared` tenancy.</td>
 <td>64 / 512GB</td>
 <td>25GB / 100GB</td>
 <td>1000Mbps</td>
@@ -415,7 +415,7 @@ Bare metal servers are billed monthly. If you cancel a bare metal server before 
 {: important}
 
 **What bare metal flavors can I order?**</br>
-Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [VM](#vm) or [SDS](#sds) machine types.
+Worker node flavors vary by zone. The following table includes the most recent version of a flavor, such as `x3c` Ubuntu 18 worker nodes flavors, as opposed to the older `x2c` Ubuntu 16 worker node flavors. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [VM](#vm) or [SDS](#sds) machine types.
 
 Bare metal machines are optimized for different use cases such as RAM-intensive, data-intensive, or GPU-intensive workloads.
 
@@ -438,43 +438,43 @@ Choose a machine type with the right storage configuration to support your workl
 </thead>
 <tbody>
 <tr>
-<td><strong>RAM-intensive bare metal, mr1c.28x512</strong>: Maximize the RAM available to your worker nodes.</td>
+<td><strong>RAM-intensive bare metal, mr3c.28x512</strong>: Maximize the RAM available to your worker nodes.</td>
 <td>28 / 512GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>GPU bare metal, mg1c.16x128</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 1 Tesla K80 physical card that has 2 graphics processing units (GPUs) per card for a total of 2 GPUs.</td>
+<td><strong>GPU bare metal, mg3c.16x128</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 1 Tesla K80 physical card that has 2 graphics processing units (GPUs) per card for a total of 2 GPUs.</td>
 <td>16 / 128GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>GPU bare metal, mg1c.28x256</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 2 Tesla K80 physical cards that have 2 GPUs per card for a total of 4 GPUs.</td>
+<td><strong>GPU bare metal, mg3c.28x256</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 2 Tesla K80 physical cards that have 2 GPUs per card for a total of 4 GPUs.</td>
 <td>28 / 256GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Data-intensive bare metal, md1c.16x64.4x4tb</strong>: Use this type for a significant amount of local disk storage, including RAID to increase data availability, for workloads such as distributed file systems, large databases, and big data analytics.</td>
+<td><strong>Data-intensive bare metal, md3c.16x64.4x4tb</strong>: Use this type for a significant amount of local disk storage, including RAID to increase data availability, for workloads such as distributed file systems, large databases, and big data analytics.</td>
 <td>16 / 64GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Data-intensive bare metal, md1c.28x512.4x4tb</strong>: Use this type for a significant amount of local disk storage, including RAID to increase data availability, for workloads such as distributed file systems, large databases, and big data analytics..</td>
+<td><strong>Data-intensive bare metal, md3c.28x512.4x4tb</strong>: Use this type for a significant amount of local disk storage, including RAID to increase data availability, for workloads such as distributed file systems, large databases, and big data analytics..</td>
 <td>28 / 512 GB</td>
 <td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Balanced bare metal, mb2c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer. This flavor can also be enabled with Intel® Software Guard Extensions (SGX) so that you can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory.</td>
+<td><strong>Balanced bare metal, mb3c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer. This flavor can also be enabled with Intel® Software Guard Extensions (SGX) so that you can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory.</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 2TB SATA</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Balanced bare metal, mb1c.16x64</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
+<td><strong>Balanced bare metal, mb3c.16x64</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
 <td>16 / 64GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>10000Mbps</td>
@@ -498,7 +498,7 @@ You typically use SDS machines in the following cases:
 For more storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **What SDS flavors can I order?**</br>
-Machine types vary by zone. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [bare metal](#bm) or [VM](#vm) machine types.
+Worker node flavors vary by zone. The following table includes the most recent version of a flavor, such as `x3c` Ubuntu 18 worker nodes flavors, as opposed to the older `x2c` Ubuntu 16 worker node flavors. To see the machine types available in your zone, run `ibmcloud ks machine-types <zone>`. You can also review available [bare metal](#bm) or [VM](#vm) machine types.
 
 Choose a machine type with the right storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
 
@@ -520,28 +520,28 @@ Choose a machine type with the right storage configuration to support your workl
 </thead>
 <tbody>
 <tr>
-<td><strong>Bare metal with SDS, ms2c.4x32.1.9tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
+<td><strong>Bare metal with SDS, ms3c.4x32.1.9tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>4 / 32GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>1.9TB Raw SSD (device path: `/dev/sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal with SDS, ms2c.16x64.1.9tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
+<td><strong>Bare metal with SDS, ms3c.16x64.1.9tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>16 / 64GB</td>
 <td>2TB SATA / 960GB SSD</td>
 <td>1.9TB Raw SSD (device path: `/dev/sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal with SDS, ms2c.28x256.3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
+<td><strong>Bare metal with SDS, ms3c.28x256.3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>28 / 256GB</td>
 <td>2TB SATA / 1.9TB SSD</td>
 <td>3.8TB Raw SSD (device path: `/dev/sdc`)</td>
 <td>10000Mbps</td>
 </tr>
 <tr>
-<td><strong>Bare metal with SDS, ms2c.28x512.4x3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
+<td><strong>Bare metal with SDS, ms3c.28x512.4x3.8tb.ssd</strong>: If you need extra local storage for performance, use this disk-heavy flavor that supports software-defined storage (SDS).</td>
 <td>28 / 512GB</td>
 <td>2TB SATA / 1.9TB SSD</td>
 <td>4 disks, 3.8TB Raw SSD (device paths: `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
