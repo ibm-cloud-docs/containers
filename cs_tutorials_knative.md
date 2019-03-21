@@ -278,7 +278,7 @@ In this lesson, you deploy your first serverless [`Hello World`](https://hub.doc
 4. Try out your `Hello World` app.
    1. Get the default domain that is assigned to your Knative service. If you changed the name of your Knative service, or deployed the app to a different namespace, update these values in your query.
       ```
-      kubectl get ksvc/kn-helloworld
+      kubectl get svc/kn-helloworld
       ```
       {: pre}
 
