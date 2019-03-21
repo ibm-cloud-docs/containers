@@ -54,7 +54,6 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <li>Adds the [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint) command.</li>
 <li>Adds the [<code>ibmcloud ks cluster-feature-enable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_public_service_endpoint) command.</li>
 <li>Adds the [<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable_public_service_endpoint) command.</li>
-<li>Adds the [<code>ibmcloud ks cluster-feature-ls</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls) command.</li>
 </ul></li>
 <li>Updates documentation and translation.</li>
 <li>Updates the Go version to 1.11.6.</li>

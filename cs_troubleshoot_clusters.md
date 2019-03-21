@@ -371,7 +371,7 @@ Consider the following scenario to understand how clusters might become orphaned
 
 {: tsResolve}
 1.  Check which infrastructure account the region that your cluster is in currently uses to provision clusters.
-    1.  Log in to the [{{site.data.keyword.containerlong_notm}} clusters console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters).
+    1.  Log in to the [{{site.data.keyword.containerlong_notm}} clusters console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).
     2.  From the table, select your cluster.
     3.  In the **Overview** tab, check for an **Infrastructure User** field. This field helps you determine if your {{site.data.keyword.containerlong_notm}} account uses a different infrastructure account than the default.
         * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts. The cluster that cannot be modified might be provisioned in a different infrastructure account.

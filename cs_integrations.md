@@ -948,7 +948,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 {: #helm_links}
 
 * To use the strongSwan Helm chart, see [Setting up VPN connectivity with the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup).
-* View the available Helm charts that you can use with {{site.data.keyword.Bluemix_notm}} in the [Helm Charts Catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/solutions/helm-charts) in the console.
+* View the available Helm charts that you can use with {{site.data.keyword.Bluemix_notm}} in the [Helm Charts Catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) in the console.
 * Learn more about the Helm commands that are used to set up and manage Helm charts in the <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
 * Learn more about how you can [increase deployment velocity with Kubernetes Helm Charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 

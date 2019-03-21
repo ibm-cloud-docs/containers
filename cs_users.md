@@ -374,7 +374,7 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 3. [Create a cluster](/docs/containers?topic=containers-clusters). To create the cluster, the infrastructure credentials that you set for the region and resource group are used.
 
 4. Verify that your cluster uses the infrastructure account credentials that you set.
-  1. Open the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters) and select your cluster. 
+  1. Open the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters) and select your cluster. 
   2. In the Overview tab, look for an **Infrastructure User** field. 
   3. If you see that field, you do not use the default infrastructure credentials that come with your Pay-As-You-Go account in this region. Instead, the region is set to use the different infrastructure account credentials that you set.
 
@@ -952,7 +952,7 @@ Before you begin:
 Before the user leaves, the {{site.data.keyword.Bluemix_notm}} account owner must complete the following steps to prevent breaking changes in {{site.data.keyword.containerlong_notm}}.
 
 1. Determine which clusters the user created.
-    1.  Log in to the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/containers-kubernetes/clusters).
+    1.  Log in to the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).
     2.  From the table, select your cluster.
     3.  In the **Overview** tab, look for the **Owner** field.
 
