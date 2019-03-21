@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-19"
+lastupdated: "2019-03-21"
 
 ---
 
@@ -282,24 +282,31 @@ lastupdated: "2019-03-19"
 
 ## Setting up cluster networking
 
+[Planning your cluster network](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)
+* [Understanding {{site.data.keyword.containerlong_notm}} network basics](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics)
+  * [Which cluster components must communicate with each other?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_components)
+  * [How does networking work in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_vlans)
+  * [What are subnets? What types of subnets does {{site.data.keyword.containerlong_notm}} offer?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_subnets)
+  * [How are VLANs and subnets configured to ensure network segmentation?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation)
+* [Planning worker-to-worker communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker)
+  * [What are my options for worker node VLAN connectivity?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options)
+  * [I made my choice for VLAN connections. How do I set them up?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_setup)
+  * [Can I change my VLAN decision later?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_change)
+* [Planning master-to-worker communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)
+  * [Public service endpoint only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)
+  * [Private service endpoint only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)
+  * [Public and private service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)
+  * [Private networking with a gateway appliance](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)
+* [Planning cluster to on-premises network or {{site.data.keyword.icpfull_notm}} communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn)
+  * [Setting up a VPN connection for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public)
+  * [Setting up a VPN connection for a private VLAN only setup](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)
 
-
-[Planning in-cluster and private networking](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)
-  * [Understanding in-cluster networking](/docs/containers?topic=containers-cs_network_cluster#in-cluster)
-  * [Understanding VLAN connections and network interfaces](/docs/containers?topic=containers-cs_network_cluster#interfaces)
-  * [Planning default cluster networking](/docs/containers?topic=containers-cs_network_cluster#both_vlans)
-      * [Expose your apps with networking services](/docs/containers?topic=containers-cs_network_cluster#both_vlans_services)
-      * [Optional: Isolate networking workloads to edge worker nodes](/docs/containers?topic=containers-cs_network_cluster#both_vlans_edge)
-      * [Optional: Connect to an on-premises network or IBM Cloud Private by using strongSwan VPN](/docs/containers?topic=containers-cs_network_cluster#both_vlans_vpn)
-  * [Planning customized default cluster networking](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private)
-      * [Expose your apps with private networking services and secure your cluster from public access with Calico network policies](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_services)
-      * [Isolate your cluster on the private network](/docs/containers?topic=containers-cs_network_cluster#isolate)
-      * [Optional: Isolate networking workloads to edge worker nodes](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_edge)
-      * [Optional: Connect to an on-premises network or IBM Cloud Private by using strongSwan VPN](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_vpn)
-  * [Planning private-only cluster networking](/docs/containers?topic=containers-cs_network_cluster#plan_setup_private_vlan)
-      * [Configure a gateway appliance](/docs/containers?topic=containers-cs_network_cluster#private_vlan_gateway)
-      * [Expose your apps with private networking services](/docs/containers?topic=containers-cs_network_cluster#private_vlan_services)
-      * [Optional: Connect to an on-premises database by using the gateway appliance](/docs/containers?topic=containers-cs_network_cluster#private_vlan_vpn)
+[Setting up your cluster network](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)
+* [Setting up cluster networking with a public and a private VLAN](/docs/containers?topic=containers-cs_network_cluster#both_vlans)
+* [Setting up cluster networking with a private VLAN only](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan)
+* [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
+* [Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
+* [Setting up the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
 
 [Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall#firewall)
 * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_kubectl)
@@ -381,9 +388,6 @@ lastupdated: "2019-03-19"
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
 [Configuring subnets for clusters](/docs/containers?topic=containers-subnets#subnets)
-* [Default VLANs, subnets, and IPs for clusters](/docs/containers?topic=containers-subnets#default_vlans_subnets)
-  * [VLANs](/docs/containers?topic=containers-subnets#vlans)
-  * [Subnets and IP addresses](/docs/containers?topic=containers-subnets#subnets_ips)
 * [Using custom or existing subnets to create a cluster](/docs/containers?topic=containers-subnets#subnets_custom)
 * [Managing existing portable IP addresses](/docs/containers?topic=containers-subnets#managing_ips)
   * [Viewing available portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)
@@ -436,13 +440,14 @@ lastupdated: "2019-03-19"
 
 ## Networking to expose apps
 
-
-
-[Planning to expose your apps with external networking](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
-* [Choosing a NodePort, LoadBalancer, or Ingress service](/docs/containers?topic=containers-cs_network_planning#external)
-* [Planning public external networking](/docs/containers?topic=containers-cs_network_planning#public_access)
+[Planning to expose your apps with in-cluster and external networking](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
+* [Exposing apps to traffic inside the cluster through Kubernetes services](/docs/containers?topic=containers-cs_network_planning#in-cluster)
+* [Choosing a NodePort, LoadBalancer, or Ingress service to expose apps to traffic outside the cluster](/docs/containers?topic=containers-cs_network_planning#external)
+* [Planning public external networking for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_planning#public_access)
 * [Planning private external networking for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_planning#private_both_vlans)
 * [Planning private external networking for a private VLAN only setup](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)
+* [Optional: Isolating networking workloads to edge worker nodes](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge)
+* [Optional: Isolating your cluster on the private network](/docs/containers?topic=containers-cs_network_planning#isolate)
 
 [Exposing apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 * [Managing network traffic by using NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)

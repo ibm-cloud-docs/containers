@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-19"
+lastupdated: "2019-03-21"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -54,6 +54,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>411 / 306</td>
+<td>21 Mar 2019</td>
+<td>Updates the Go version to 1.12.1.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>410 / 305</td>
 <td>18 Mar 2019</td>

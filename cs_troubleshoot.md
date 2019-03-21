@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-20"
+lastupdated: "2019-03-21"
 
 keywords: kubernetes, iks
 
@@ -228,12 +228,6 @@ Review the options to debug your worker nodes and find the root causes for failu
   </table>
 
 5.  List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.
-
-   ```
-   ibmcloud ks worker-get --worker <worker_id>
-   ```
-   {: pre}
-
   ```
   ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id>
   ```
