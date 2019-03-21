@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-20"
+lastupdated: "2019-03-21"
 
 keywords: kubernetes, iks
 
@@ -193,7 +193,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 
 2.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
 
-    The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall, you can choose to [pull the Tiller image to your local machine and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-integrations#private_local_tiller), or to [install the Helm chart without using Tiller](/docs/containers?topic=containers-integrations#private_install_without_tiller).
+    The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you can choose to [pull the Tiller image to your local machine and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-integrations#private_local_tiller), or to [install the Helm chart without using Tiller](/docs/containers?topic=containers-integrations#private_install_without_tiller).
     {: note}
 
 3.  Verify that tiller is installed with a service account.
