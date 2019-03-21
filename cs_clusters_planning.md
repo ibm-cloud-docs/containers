@@ -287,7 +287,7 @@ When you create a standard virtual cluster, you must choose whether you want the
 
 Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.
 
-Some flavors are available for only one type of tenancy setup. For example, the `m2c` VMs are only available as `shared` tenancy setup.
+Some flavors are available for only one type of tenancy setup. For example, the `m3c` VMs are only available as `shared` tenancy setup.
 {: note}
 
 **What are the general features of VMs?**</br>
