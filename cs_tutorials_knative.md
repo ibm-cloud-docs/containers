@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-19"
+lastupdated: "2019-03-21"
 
 ---
 
@@ -80,13 +80,13 @@ Knative builds on top of Istio to ensure that your serverless and containerized 
 
 1. Enable the managed Knative add-on in your cluster. When you enable Knative in your cluster, Istio and all Knative components are installed in your cluster.
    ```
-   ibmcloud ks cluster-addon-enable knative --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster-addon-enable knative --cluster <cluster_name_or_ID> -y
    ```
    {: pre}
 
    Example output:
    ```
-   The istio add-on is required to enable the knative add-on. Enable istio? [y/N]> y
+   Enabling add-on knative for cluster knative...
    OK
    ```
    {: screen}
@@ -251,7 +251,7 @@ In this lesson, you deploy your first serverless [`Hello World`](https://hub.doc
     </tbody>
     </table>
 
-2. Create the Knative service in your cluster. When you create the service, the Knative `Serving` primitive creates an immutable revision, a Knative route, an Ingress routing rule, a Kubernetes service, a Kubernetes pod and a load balancer for your app. Your app is assigned a domain name in the format `<knative_service_name>.<namespace>.example.com` that you can use to access the app from the internet.
+2. Create the Knative service in your cluster. When you create the service, the Knative `Serving` primitive creates an immutable revision, a Knative route, an Ingress routing rule, a Kubernetes service, a Kubernetes pod and a load balancer for your app. Your app is assigned a subdomain from your Ingress subdomain in the format `<knative_service_name>.<namespace>.<ingress_subdomain>` that you can use to access the app from the internet.
    ```
    kubectl apply -f service.yaml
    ```
@@ -263,7 +263,7 @@ In this lesson, you deploy your first serverless [`Hello World`](https://hub.doc
    ```
    {: screen}
 
-3. Verify that your pod is created. Your pod consists of three containers. One container runs your `Hello World` app and the other two containers are side cars that run Istio and Knative monitoring and logging tools. Your pod is assigned a `00001` revision number.
+3. Verify that your pod is created. Your pod consists of two containers. One container runs your `Hello World` app and the other container is a side car that runs Istio and Knative monitoring and logging tools. Your pod is assigned a `00001` revision number.
    ```
    kubectl get pods
    ```
@@ -271,46 +271,50 @@ In this lesson, you deploy your first serverless [`Hello World`](https://hub.doc
    Example output:
    ```
    NAME                                              READY     STATUS    RESTARTS   AGE
-   kn-helloworld-00001-deployment-55db6bf4c5-2vftm   3/3       Running   0          16s
+   kn-helloworld-00001-deployment-55db6bf4c5-2vftm   2/2       Running   0          16s
    ```
    {: screen}
 
 4. Try out your `Hello World` app.
-   1. Get the **EXTERNAL-IP** address of the Istio Ingress gateway.
+   1. Get the default domain that is assigned to your Knative service. If you changed the name of your Knative service, or deployed the app to a different namespace, update these values in your query.
       ```
-      kubectl get svc istio-ingressgateway --namespace istio-system
+      kubectl get ksvc/kn-helloworld
       ```
       {: pre}
 
       Example output:
       ```
-      NAME                   TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                                                                                                                   AGE
-      istio-ingressgateway   LoadBalancer   172.21.xxx.xxx  169.xx.xxx.xxx   80:31380/TCP,443:31390/TCP,31400:31400/TCP,15011:31886/TCP,8060:32656/TCP,853:31265/TCP,15030:30719/TCP,15031:31936/TCP   3d
+      NAME         DOMAIN                                                                LATESTCREATED      LATESTREADY        READY   REASON
+      helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   helloworld-00001   helloworld-00001   True
       ```
       {: screen}
 
-   2. Get the **DOMAIN** name that Knative assigned to your app.
+   2. Make a request to your app by using the subdomain that you retrieved in the previous step.
       ```
-      kubectl get ksvc kn-helloworld --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-      ```
-      {: pre}
-
-      Example output:
-      ```
-      NAME            DOMAIN
-      kn-helloworld   kn-helloworld.default.example.com
-      ```
-      {: screen}
-
-   3. Make a request to your app. Replace `<external_IP>` with the external IP address of your Istio Ingress gateway that you retrieved earlier. If you changed the default name of your service, enter the domain name that was assigned to your service.
-      ```
-      curl -H "Host: kn-helloworld.default.example.com" http://<external_IP>
+      curl -v <service_domain>
       ```
       {: pre}
 
       Example output:
       ```
+      * Rebuilt URL to: kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud/
+      *   Trying 169.46.XX.XX...
+      * TCP_NODELAY set
+      * Connected to kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud (169.46.XX.XX) port 80 (#0)
+      > GET / HTTP/1.1
+      > Host: kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud
+      > User-Agent: curl/7.54.0
+      > Accept: */*
+      >
+      < HTTP/1.1 200 OK
+      < Date: Thu, 21 Mar 2019 01:12:48 GMT
+      < Content-Type: text/plain; charset=utf-8
+      < Content-Length: 20
+      < Connection: keep-alive
+      < x-envoy-upstream-service-time: 17
+      <
       Hello Go Sample v1!
+      * Connection #0 to host kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud left intact
       ```
       {: screen}
 
@@ -355,11 +359,12 @@ In this lesson, you deploy your first serverless [`Hello World`](https://hub.doc
 
 8. Make a new request to your app to verify that your change was applied.
    ```
-   curl -H "Host: kn-helloworld.default.example.com" http://<public_IP>
+   curl -v <service_domain>
    ```
 
    Example output:
    ```
+   ...
    Hello Mr. Smith!
    ```
    {: screen}
