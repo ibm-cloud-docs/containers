@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-19"
+lastupdated: "2019-03-20"
 
 keywords: kubernetes, iks
 
@@ -369,9 +369,33 @@ Let your cluster access infrastructure resources and services from behind a fire
 
 5. If you use load balancer services, ensure that all traffic using the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
-6. {: #pvc}To create persistent volume claims for data storage, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer):
-    - Allow access to the IBM Cloud infrastructure (SoftLayer) API endpoint to initiate provisioning requests: `TCP port 443 FROM <each_worker_node_public_IP> TO 66.228.119.120`.
-    - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
+6. {: #pvc}To create persistent volume claims in a private cluster, make sure that your cluster is set up with the following Kubernetes version or {{site.data.keyword.Bluemix_notm}} storage plug-in versions. These versions enable private network communication from your cluster to your persistent storage instances.
+    <table>
+    <caption>Overview of required Kubernetes or {{site.data.keyword.Bluemix_notm}} storage plug-in versions for private clusters</caption>
+    <thead>
+      <th>Type of storage</th>
+      <th>Required version</th>
+   </thead>
+   <tbody>
+     <tr>
+       <td>File storage</td>
+       <td>Kubernetes version <code>1.13.4_1512</code>, <code>1.12.6_1543</code>, <code>1.11.8_1549</code>, <code>1.10.13_1550</code>, or later</td>
+     </tr>
+     <tr>
+       <td>Block storage</td>
+       <td>{{site.data.keyword.Bluemix_notm}} Block Storage plug-in version 1.3.0 or later</td>
+     </tr>
+     <tr>
+       <td>Object storage</td>
+       <td><ul><li>{{site.data.keyword.cos_full_notm}} plug-in version 1.0.3 or later</li><li>{{site.data.keyword.cos_full_notm}} service set up with HMAC authentication</td>
+     </tr>
+   </tbody>
+   </table>
+
+   If you must use a Kubernetes version or {{site.data.keyword.Bluemix_notm}} storage plug-in version that does not support network communication over the private network, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure (SoftLayer) and {{site.data.keyword.Bluemix_notm}} Identity and Access Management:
+   - Allow all egress network traffic on TCP port 443.
+   - Allow access to the IBM Cloud infrastructure (SoftLayer) IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
+
 
 <br />
 
@@ -420,20 +444,24 @@ You can allow incoming access to NodePort, load balancer, and Ingress services.
 <br />
 
 
-## Whitelisting your cluster in other services' firewalls
+## Whitelisting your cluster in other services' firewalls or in on-premises firewalls
 {: #whitelist_workers}
 
-If you want to access services that run inside or outside {{site.data.keyword.Bluemix_notm}} and that are protected by a firewall, you can add the IP addresses of your worker nodes in that firewall to allow outbound network traffic to your cluster. For example, you might want to read data from an {{site.data.keyword.Bluemix_notm}} database that is protected by a firewall.
+If you want to access services that run inside or outside {{site.data.keyword.Bluemix_notm}} or on-premises and that are protected by a firewall, you can add the IP addresses of your worker nodes in that firewall to allow outbound network traffic to your cluster. For example, you might want to read data from an {{site.data.keyword.Bluemix_notm}} database that is protected by a firewall, or whitelist your worker node subnets in an on-premises firewall to allow network traffic from your cluster.
 {:shortdesc}
 
 1.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-2.  List all the worker nodes in your cluster and note the **Public IP** addresses.
-    ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-3.  Optional: Get the worker node subnets. If you anticipate changing the number of worker nodes in your cluster frequently, such as if you enable the [cluster autoscaler](/docs/containers?topic=containers-ca#ca), you might not want to update your firewall for each new worker node. Instead, you can whitelist the VLAN subnets that the cluster uses.<p class="note">The **primary public subnets** that {{site.data.keyword.containerlong_notm}} provisions for your cluster come with 14 available IP addresses, and can be shared by other clusters on the same VLAN. When you have more than 14 worker nodes, another subnet is ordered, so the subnets that you need to whitelist can change. To reduce the frequency of change, create worker pools with worker node flavors of higher CPU and memory resources so that you don't need to add worker nodes as often.</p>
-    1.  From the output of the previous step, note all the unique network IDs (first 3 octets) of the **Public IP** for the worker nodes in your cluster. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
+
+2. Get the worker node subnets or the worker node IP addresses.
+  * **Worker node subnets**: If you anticipate changing the number of worker nodes in your cluster frequently, such as if you enable the [cluster autoscaler](/docs/containers?topic=containers-ca#ca), you might not want to update your firewall for each new worker node. Instead, you can whitelist the VLAN subnets that the cluster uses. Keep in mind that the VLAN subnet might be shared by worker nodes in other clusters.
+    <p class="note">The **primary public subnets** that {{site.data.keyword.containerlong_notm}} provisions for your cluster come with 14 available IP addresses, and can be shared by other clusters on the same VLAN. When you have more than 14 worker nodes, another subnet is ordered, so the subnets that you need to whitelist can change. To reduce the frequency of change, create worker pools with worker node flavors of higher CPU and memory resources so that you don't need to add worker nodes as often.</p>
+    1. List the worker nodes in your cluster.
+      ```
+      ibmcloud ks workers --cluster <cluster_name_or_ID>
+      ```
+      {: pre}
+
+    2. From the output of the previous step, note all the unique network IDs (first 3 octets) of the **Public IP** for the worker nodes in your cluster.<staging> If you want to whitelist a private-only cluster, note the **Private IP** instead.<staging> In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
         kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal10   1.12.6   
@@ -442,7 +470,7 @@ If you want to access services that run inside or outside {{site.data.keyword.Bl
         kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b2c.4x16.encrypted   normal   Ready    dal12   1.12.6  
         ```
         {: screen}
-    2.  List the VLAN subnets for each unique network ID.
+    3.  List the VLAN subnets for each unique network ID.
         ```
         ibmcloud sl subnet list | grep -e <networkID1> -e <networkID2>
         ```
@@ -455,8 +483,13 @@ If you want to access services that run inside or outside {{site.data.keyword.Bl
         7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    
         ```
         {: screen}
-    3.  Retrieve the subnet address. In the output, find the number of **IPs**. Then, calculate the square root of the number of IPs. For example, if the number of IPs is `16`, the square root is `4`. Now get the subnet CIDR by subtracting the square root number from `32` bits, for example, `32 - 4 = 28`. Combine the **identifier** mask with the CIDR value to get the full subnet address. In the previous output, the subnet addresses are:
-        *   `169.48.210.xxx/28`
-        *   `169.48.178.xxx/28`
-4.  Add the IP addresses to your service's firewall for outbound traffic.
+    4.  Retrieve the subnet address. In the output, find the number of **IPs**. Then, raise `2` to the power of `n` equal to the number of IPs. For example, if the number of IPs is `16`, then `2` is raised to the power of `4` (`n`) to equal `16`. Now get the subnet CIDR by subtracting the value of `n` from `32` bits. For example, when `n` equals `4`, then the CIDR is `28` (from the equation `32 - 4 = 28`). Combine the **identifier** mask with the CIDR value to get the full subnet address. In the previous output, the subnet addresses are:
+        *   `169.xx.210.xxx/28`
+        *   `169.xx.178.xxx/28`
+  * **Individual worker node IP addresses**: If you have a small number of worker nodes that run only one app and do not need to scale, or if you only want to whitelist one worker node, list all the worker nodes in your cluster and note the **Public IP** addresses. If your worker nodes are connected to a private network only and you want to connect to {{site.data.keyword.Bluemix_notm}} services by using the private service endpoint, note the **Private IP** addresses instead. Note that only these worker nodes are whitelisted. If you delete the worker nodes or add worker nodes to the cluster, you must update your firewall accordingly.
+    ```
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+4.  Add the subnet CIDR or IP addresses to your service's firewall for outbound traffic or your on-premises firewall for inbound traffic.
 5.  Repeat these steps for each cluster that you want to whitelist.
