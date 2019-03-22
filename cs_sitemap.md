@@ -24,12 +24,14 @@ lastupdated: "2019-03-22"
 {: #cs_sitemap}
 
 ## Getting started with {{site.data.keyword.containerlong_notm}}
+{: #sitemap-gs}
 
 [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-container_index#container_index)
 
 
 
 ## About
+{: #sitemap-about}
 
 [Why {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)
 * [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits)
@@ -43,6 +45,8 @@ lastupdated: "2019-03-22"
 * [Service architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)
 
 ## Use cases
+{: #sitemap-usecases}
+
 [Overview of use cases](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
 
 [Financial services use cases for {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
@@ -66,6 +70,7 @@ lastupdated: "2019-03-22"
 * [Large public port secures exchange of port data and shipping manifests that connect public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)
 
 ## Your cluster strategy
+{: #sitemap-strategy}
 
 [Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#your-responsibilities-by-using-ibm-cloud-kubernetes-service)
 * [Cluster management responsibilities](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#responsibilities)
@@ -88,6 +93,7 @@ lastupdated: "2019-03-22"
 * [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
 
 ## Tutorials
+{: #sitemap-tutorials}
 
 [Tutorial: Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 * [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
@@ -148,6 +154,7 @@ lastupdated: "2019-03-22"
 [Tutorial: Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 
 ## Setting up the CLI and API
+{: #sitemap-cli-api}
 
 [Setting up the CLI and API](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
 * [Installing the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)
@@ -160,6 +167,7 @@ lastupdated: "2019-03-22"
   * [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
 
 ## Administering clusters
+{: #sitemap-clusters-admin}
 
 [Planning your cluster and worker node setup](/docs/containers?topic=containers-plan_clusters#plan_clusters)
 * [Highly available clusters](/docs/containers?topic=containers-plan_clusters#ha_clusters)
@@ -281,6 +289,7 @@ lastupdated: "2019-03-22"
 * [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
 
 ## Setting up cluster networking
+{: #sitemap-clusters-networking}
 
 [Planning your cluster network](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)
 * [Understanding {{site.data.keyword.containerlong_notm}} network basics](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics)
@@ -400,6 +409,7 @@ lastupdated: "2019-03-22"
   * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
 
 ## Building containers from images
+{: #sitemap-images}
 
 [Building containers from images](/docs/containers?topic=containers-images#images)
 * [Planning image registries](/docs/containers?topic=containers-images#planning_images)
@@ -414,6 +424,7 @@ lastupdated: "2019-03-22"
   * [Storing the image pull secret in the Kubernetes service account for the selected namespace](/docs/containers?topic=containers-images#store_imagePullSecret)
 
 ## Deploying apps in clusters
+{: #sitemap-apps}
 
 [Deploying apps in clusters](/docs/containers?topic=containers-app#app)
 * [Planning to run apps in clusters](/docs/containers?topic=containers-app#plan_apps)
@@ -439,6 +450,7 @@ lastupdated: "2019-03-22"
 * [Managing rolling deployments to update your apps](/docs/containers?topic=containers-app#app_rolling)
 
 ## Networking to expose apps
+{: #sitemap-apps-networking}
 
 [Planning to expose your apps with in-cluster and external networking](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
 * [Exposing apps to traffic inside the cluster through Kubernetes services](/docs/containers?topic=containers-cs_network_planning#in-cluster)
@@ -567,6 +579,7 @@ lastupdated: "2019-03-22"
 * [Increasing the shared memory zone size for Ingress metrics collection](/docs/containers?topic=containers-ingress_health#vts_zone_size)
 
 ## Storing data on persistent storage
+{: #sitemap-storage}
 
 [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning)
 * [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution)
@@ -680,6 +693,7 @@ lastupdated: "2019-03-22"
 * [Cleaning up persistent storage](/docs/containers?topic=containers-cleanup#storage_remove)
 
 ## Integrating services
+{: #sitemap-integrations}
 
 [Integrating services](/docs/containers?topic=containers-integrations#integrations)
 * [DevOps services](/docs/containers?topic=containers-integrations#devops_services)
@@ -695,6 +709,7 @@ lastupdated: "2019-03-22"
 * [Visualizing Kubernetes cluster resources](/docs/containers?topic=containers-integrations#weavescope)
 
 ## Activity Tracker events
+{: #sitemap-at}
 
 [Activity Tracker events](/docs/containers?topic=containers-at_events#at_events)
 * [Finding information for events](/docs/containers?topic=containers-at_events#kube-find)
@@ -702,6 +717,7 @@ lastupdated: "2019-03-22"
 * [Tracking Kubernetes audit events](/docs/containers?topic=containers-at_events#kube-events)
 
 ## Dedicated cloud
+{: #sitemap-dedicated}
 
 [Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated)
 * [About the Dedicated cloud environment](/docs/containers?topic=containers-dedicated#dedicated_environment)
@@ -723,16 +739,19 @@ lastupdated: "2019-03-22"
   * [Creating persistent storage](/docs/containers?topic=containers-dedicated#dedicated_apps_volume_claim)
 
 ## Deprecated: Running single and scalable containers
+{: #sitemap-singlescalable}
 
 [Deprecated: Running single and scalable containers](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
 ## Hybrid cloud
+{: #sitemap-hybrid}
 
 [Hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)
 * [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
 * [Running {{site.data.keyword.icpfull_notm}} images in public Kubernetes containers](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
 ## {{site.data.keyword.containerlong_notm}} CLI plug-in reference
+{: #sitemap-cli-plugin}
 
 [Command reference](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
 * [Using the beta command structure](/docs/containers?topic=containers-cs_cli_reference#cs_beta)
@@ -751,6 +770,7 @@ lastupdated: "2019-03-22"
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 ## {{site.data.keyword.containerlong_notm}} versions
+{: #sitemap-versions}
 
 [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions)
 * [Kubernetes version types](/docs/containers?topic=containers-cs_versions#version_types)
@@ -884,6 +904,7 @@ lastupdated: "2019-03-22"
 * [Ingress ALB add-on changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 
 ## Regions and zones
+{: #sitemap-locations}
 
 [Regions and zones](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Locations in {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
@@ -895,6 +916,7 @@ lastupdated: "2019-03-22"
   * [Multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 
 ## User access permissions
+{: #sitemap-user-access}
 
 [User access permissions](/docs/containers?topic=containers-access_reference)
 * [{{site.data.keyword.Bluemix_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
@@ -909,6 +931,7 @@ lastupdated: "2019-03-22"
 * [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
 ## FAQs
+{: #sitemap-faqs}
 
 [FAQs](/docs/containers?topic=containers-faqs#faqs)
 * [What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
@@ -931,6 +954,7 @@ lastupdated: "2019-03-22"
 * [Can I view my current usage?](/docs/containers?topic=containers-faqs#usage)
 
 ## Troubleshooting clusters
+{: #sitemap-ts}
 
 [Debugging your cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot)
 * [Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
@@ -1007,6 +1031,8 @@ lastupdated: "2019-03-22"
 * [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_network#network_getting_help)
 
 ## Popular topics for {{site.data.keyword.containerlong_notm}}
+{: #sitemap-poptopics}
+
 [Popular topics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_popular_topics)
 * [Popular topics in February 2019](/docs/containers?topic=containers-cs_popular_topics#feb19)
 * [Popular topics in January 2019](/docs/containers?topic=containers-cs_popular_topics#jan19)
@@ -1025,6 +1051,7 @@ lastupdated: "2019-03-22"
 * [Chat with like-minded developers on Slack](/docs/containers?topic=containers-cs_popular_topics#slack)
 
 ## Related links
+{: #sitemap-rellinks}
 
 [Related links](/docs/containers?topic=containers-cs_rellinks#cs_rellinks)
 * [{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_rellinks#containers)
