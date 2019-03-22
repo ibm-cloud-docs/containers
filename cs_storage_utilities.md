@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-22"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -554,7 +554,7 @@ To attach the block storage device to a non-SDS worker node you must create a pe
         </thead>
         <tbody>
       	<tr>
-      	<td><code>metadata.name</td>
+          <td><code>metadata.name</code></td>
       	<td>Enter a name for your PV.</td>
       	</tr>
         <tr>
@@ -582,7 +582,7 @@ To attach the block storage device to a non-SDS worker node you must create a pe
         <td>Enter the private IP address of the worker node where you want to attach the block storage device and that you authorized earlier to access your block storage device. </td>
         </tr>
         <tr>
-        <td><code>ibm.io/volID</td>
+          <td><code>ibm.io/volID</code></td>
         <td>Enter the ID of the block storage volume that you retrieved earlier. </td>
         </tr>
         <tr>
