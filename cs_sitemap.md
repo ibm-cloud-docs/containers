@@ -217,7 +217,7 @@ lastupdated: "2019-03-22"
   * [Updating worker nodes in the console](/docs/containers?topic=containers-update#worker_up_console)
 * [Updating machine types](/docs/containers?topic=containers-update#machine_type)
 * [Updating cluster add-ons](/docs/containers?topic=containers-update#addons)
-  * [Managing automatic updates for the Fluentd for logging add-on](/docs/containers?topic=containers-update#logging)
+  * [Managing automatic updates for the Fluentd for logging add-on](/docs/containers?topic=containers-update#up-logging)
   * [Managing automatic updates for the Ingress ALB add-on](/docs/containers?topic=containers-update#alb)
 * [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
@@ -764,7 +764,7 @@ lastupdated: "2019-03-22"
 * [Cluster commands: Subnets](/docs/containers?topic=containers-cs_cli_reference#cluster_subnets_commands)
 * [Ingress application load balancer (ALB) commands](/docs/containers?topic=containers-cs_cli_reference#alb_commands)
 * [Infrastructure commands](/docs/containers?topic=containers-cs_cli_reference#infrastructure_commands)
-* [Logging commands](/docs/containers?topic=containers-cs_cli_reference#logging_commands)
+* [Logging commands](/docs/containers?topic=containers-cs_cli_reference#cli-logging_commands)
 * [Region commands](/docs/containers?topic=containers-cs_cli_reference#region_commands)
 * [Worker node commands](/docs/containers?topic=containers-cs_cli_reference#worker-node-commands)
 * [Worker pool commands](/docs/containers?topic=containers-cs_cli_reference#worker-pool)

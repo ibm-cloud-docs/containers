@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-22"
 
 keywords: kubernetes, iks
 
@@ -443,7 +443,7 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 Yes. {{site.data.keyword.containerlong_notm}} provides other add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](/docs/containers?topic=containers-integrations#helm) to install the [block storage plug-in](/docs/containers?topic=containers-block_storage#install_block), [Istio](/docs/containers?topic=containers-istio), or [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup). You must update each add-on separately by following the instructions to update the Helm charts.
 
 ### Managing automatic updates for the Fluentd for logging add-on
-{: #logging}
+{: #up-logging}
 
 In order to make changes to your logging or filter configurations, the Fluentd add-on must be at the latest version. By default, automatic updates to the add-on are enabled.
 {: shortdesc}
