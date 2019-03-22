@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-22"
 
 ---
 
@@ -598,7 +598,7 @@ lastupdated: "2019-03-21"
 * [Storage class reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
   * [Bronze](/docs/containers?topic=containers-file_storage#file_bronze)
   * [Silver](/docs/containers?topic=containers-file_storage#file_silver)
-  * [Gold](/docs/containers?topic=containers-file_storage#block_gold)
+  * [Gold](/docs/containers?topic=containers-file_storage#file_gold)
   * [Custom](/docs/containers?topic=containers-file_storage#file_custom)
 * [Sample customized storage classes](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
   * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
