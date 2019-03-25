@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-22"
+lastupdated: "2019-03-25"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -2250,7 +2250,7 @@ To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manag
    <dd>Update the certificate for an ALB secret in a cluster. This value is optional.</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-   <dd>The name of the ALB secret. This value is required.</dd>
+   <dd>Specify a name for the ALB secret when it is created in the cluster. This value is required. Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running <code>ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress</code>.</dd>
 
    <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
    <dd>The certificate CRN. This value is required.</dd>
