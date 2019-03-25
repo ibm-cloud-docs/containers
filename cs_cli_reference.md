@@ -1371,7 +1371,7 @@ ibmcloud ks cluster-feature-enable public-service-endpoint --cluster CLUSTER [-s
 ```
 {: pre}
 
-After you run this command, you must refresh the API server to use the service endpoint by followung the prompt in the CLI.
+After you run this command, you must refresh the API server to use the service endpoint by following the prompt in the CLI.
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
