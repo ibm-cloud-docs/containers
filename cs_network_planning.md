@@ -73,7 +73,6 @@ To make your apps externally accessible from the public internet or a private ne
 * Every standard cluster is provisioned with four portable public and four portable private IP addresses that you can use to create an external TCP/UDP load balancer for your app. You can customize your load balancer by exposing any port that your app requires.
 * Iptables is a Linux kernel feature that load balances requests across the app's pods, provides high-performance networking routing, and provides network access control.
 * The portable public and private IP addresses that are assigned to the load balancer are permanent and do not change when a worker node is re-created in the cluster.
-* You can create a host name for your app that registers public load balancer IP addresses with a DNS entry. You can also enable health check monitors on the load balancer IPs for each host name.
 
 **[Ingress](/docs/containers?topic=containers-ingress)** (standard clusters only)
 * Expose multiple apps in a cluster by creating one external HTTP, HTTPS, or TCP application load balancer (ALB). The ALB uses a secured and unique public or private entry point, an Ingress subdomain, to route incoming requests to your apps.
