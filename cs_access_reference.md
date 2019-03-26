@@ -578,8 +578,6 @@ The **Administrator** platform role includes all permissions that are granted by
 <td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)</code></td>
 <td>-</td>
 </tr>
-<td>-</td>
-</tr>
 <tr>
 <td>Delete a cluster.</td>
 <td><code>[ibmcloud ks cluster-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_rm)</code></td>
