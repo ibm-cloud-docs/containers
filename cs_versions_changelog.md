@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks
 
@@ -47,6 +47,50 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.13 changelog
 {: #113_changelog}
+
+### Changelog for master fix pack 1.13.4_1515, released 26 March 2019
+{: #1134_1515}
+
+The following table shows the changes that are included in the master fix pack 1.13.4_1515.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.4_1513">
+<caption>Changes since version 1.13.4_1513</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster DNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed the update process from Kubernetes version 1.11 to prevent the update from switching the cluster DNS provider to CoreDNS. You can still [set up CoreDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_coredns) after the update.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>345</td>
+<td>346</td>
+<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>166</td>
+<td>167</td>
+<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrpyted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>143</td>
+<td>146</td>
+<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.13.4_1513, released 20 March 2019
 {: #1134_1513}
@@ -390,6 +434,44 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.12.6_1546, released 26 March 2019
+{: #1126_1546}
+
+The following table shows the changes that are included in the master fix pack 1.12.6_1546.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.6_1544">
+<caption>Changes since version 1.12.6_1544</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>345</td>
+<td>346</td>
+<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>166</td>
+<td>167</td>
+<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrpyted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>143</td>
+<td>146</td>
+<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.12.6_1544, released 20 March 2019
 {: #1126_1544}
@@ -1049,6 +1131,44 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for master fix pack 1.11.8_1552, released 26 March 2019
+{: #1118_1552}
+
+The following table shows the changes that are included in the master fix pack 1.11.8_1552.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.8_1550">
+<caption>Changes since version 1.11.8_1550</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>345</td>
+<td>346</td>
+<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>166</td>
+<td>167</td>
+<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrpyted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>143</td>
+<td>146</td>
+<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.11.8_1550, released 20 March 2019
 {: #1118_1550}
@@ -2053,6 +2173,44 @@ Review the version 1.10 changelog.
 
 Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
+
+### Changelog for master fix pack 1.10.13_1553, released 26 March 2019
+{: #1118_1553}
+
+The following table shows the changes that are included in the master fix pack 1.10.13_1553.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.13_1551">
+<caption>Changes since version 1.10.13_1551</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} File Storage plug-in</td>
+<td>345</td>
+<td>346</td>
+<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>166</td>
+<td>167</td>
+<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrpyted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>143</td>
+<td>146</td>
+<td>Updated image for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.10.13_1551, released 20 March 2019
 {: #11013_1551}

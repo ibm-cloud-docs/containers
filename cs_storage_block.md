@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks
 
@@ -549,7 +549,7 @@ To add block storage:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
+4.  {: #block_app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
     ```
     apiVersion: apps/v1
@@ -666,6 +666,7 @@ If you have an existing physical storage device that you want to use in your clu
 Before you can start to mount your existing storage to an app, you must retrieve all necessary information for your PV.  
 
 ### Step 1: Retrieving the information of your existing block storage
+{: #existing-block-1}
 
 1.  Retrieve or generate an API key for your IBM Cloud infrastructure (SoftLayer) account.
     1. Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/classic?).
@@ -699,6 +700,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
 7.  Note the `id`, `ip_addr`, `capacity_gb`, the `datacenter`, and `lunId` of the block storage device that you want to mount to your cluster. **Note:** To mount existing storage to a cluster, you must have a worker node in the same zone as your storage. To verify the zone of your worker node, run `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
 
 ### Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)
+{: #existing-block-2}
 
 1.  Optional: If you have storage that you provisioned with a `retain` storage class, when you remove the PVC, the PV and the physical storage device are not removed. To reuse the storage in your cluster, you must remove the PV first.
     1. List existing PVs.
@@ -847,7 +849,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
      ```
      {: screen}
 
-You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#app_volume_mount) to their deployments and start reading from and writing to the PV.
+You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#block_app_volume_mount) to their deployments and start reading from and writing to the PV.
 
 <br />
 

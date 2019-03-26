@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-22"
 
 keywords: kubernetes, iks
 
@@ -443,7 +443,7 @@ Depending on your cluster setup, you access the services by using the public, pr
      </tr>
      <tr>
        <td>Object storage</td>
-       <td><ul><li>{{site.data.keyword.cos_full_notm}} plug-in version 1.0.3 or later</li><li>{{site.data.keyword.cos_full_notm}} service set up with HMAC authentication</td>
+       <td><ul><li>{{site.data.keyword.cos_full_notm}} plug-in version 1.0.3 or later</li><li>{{site.data.keyword.cos_full_notm}} service set up with HMAC authentication</li></ul></td>
      </tr>
    </tbody>
    </table>

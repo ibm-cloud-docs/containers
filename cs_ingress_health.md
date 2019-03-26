@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-22"
 
 keywords: kubernetes, iks
 
@@ -167,7 +167,7 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
     <tbody>
     <tr>
     <td><code>log-format</code></td>
-    <td>Replace <code>&lt;key&gt;</code> with the name for the log component and <code>&lt;log&#95;variable&gt;</code> with a variable for the log component that you want to collect in log entries. You can include text and punctuation that you want the log entry to contain, such as quotation marks around string values and commas to separate log components. For example, formatting a component like <code>request: "$request"</code> generates the following in a log entry: <code>request: "GET / HTTP/1.1"</code> . For a list of all the variables you can use, see the <a href="http://nginx.org/en/docs/varindex.html">NGINX variable index</a>.<br><br>To log an additional header such as <em>x-custom-ID</em>, add the following key-value pair to the custom log content: <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>Hyphens (<code>-</code>) are converted to underscores (<code>&#95;</code>) and <code>$http_</code> must be prepended to the custom header name.</td>
+    <td>Replace <code>&lt;key&gt;</code> with the name for the log component and <code>&lt;log_variable&gt;</code> with a variable for the log component that you want to collect in log entries. You can include text and punctuation that you want the log entry to contain, such as quotation marks around string values and commas to separate log components. For example, formatting a component like <code>request: "$request"</code> generates the following in a log entry: <code>request: "GET / HTTP/1.1"</code> . For a list of all the variables you can use, see the <a href="http://nginx.org/en/docs/varindex.html">NGINX variable index</a>.<br><br>To log an additional header such as <em>x-custom-ID</em>, add the following key-value pair to the custom log content: <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>Hyphens (<code>-</code>) are converted to underscores (<code>_</code>) and <code>$http_</code> must be prepended to the custom header name.</td>
     </tr>
     <tr>
     <td><code>log-format-escape-json</code></td>
@@ -385,7 +385,7 @@ The following table lists the supported ALB metric names with the metric labels 
 <tr>
 <td><code>totalHandledRequest_total</code></td>
 <td>The total number of client requests received from clients.</td>
-</tr>
+  </tr></tbody>
 </table>
 
 ### Server metrics
@@ -510,7 +510,7 @@ The following table lists the supported server metric names.
 <tr>
 <td><code>total</code></td>
 <td>The total number of responses with status codes.</td>
-</tr>
+  </tr></tbody>
 </table>
 
 ### Upstream metrics
@@ -602,7 +602,7 @@ The following table lists the supported upstream type 1 metric names.
 <tr>
 <td><code>total</code></td>
 <td>The total number of responses with status codes.</td>
-</tr>
+  </tr></tbody>
 </table>
 
 #### Type 2 upstream metrics
@@ -660,7 +660,7 @@ The following table lists the supported upstream type 2 metric names.
 <tr>
 <td><code>responseMsec</code></td>
 <td>The average of only upstream response processing times in milliseconds.</td>
-</tr>
+  </tr></tbody>
 </table>
 
 <br />

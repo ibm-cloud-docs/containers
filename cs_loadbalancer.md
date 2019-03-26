@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
-keywords: kubernetes, iks, lb2.0, nlb
+keywords: kubernetes, iks, lb2.0, nlb, health check
 
 subcollection: containers
 
@@ -773,7 +773,7 @@ To set up a load balancer 1.0 service in a multizone cluster:
 
 5. Repeat the steps 2 - 4 to add a version 1.0 load balancer in each zone.    
 
-6. If you choose to [enable source IP preservation for a version 1.0 load balancer service](#node_affinity_tolerations), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
+6. If you choose to [enable source IP preservation for a version 1.0 load balancer service](#node_affinity_tolerations), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](#lb_edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
 7. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
@@ -912,7 +912,7 @@ To create a load balancer 1.0 service in a single-zone cluster:
         ```
         {: codeblock}
 
-5. If you choose to [enable source IP preservation for a version 1.0 load balancer service](#node_affinity_tolerations), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
+5. If you choose to [enable source IP preservation for a version 1.0 load balancer service](#node_affinity_tolerations), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](#lb_edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
 6. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using a load balancer service, see [Controlling inbound traffic to load balancer or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
@@ -940,7 +940,7 @@ After you enable the source IP, load balancer service pods must forward requests
 To force your app to deploy to specific worker nodes where load balancer service pods can also deploy to, you must add affinity rules and tolerations to your app deployment.
 
 ### Adding edge node affinity rules and tolerations
-{: #edge_nodes}
+{: #lb_edge_nodes}
 
 When you [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes) and also [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads), load balancer service pods deploy only to those edge nodes, and app pods cannot deploy to edge nodes. When source IP is enabled for the load balancer service, the load balancer pods on the edge nodes cannot forward incoming requests to your app pods on other worker nodes.
 {:shortdesc}

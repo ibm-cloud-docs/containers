@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-22"
 
 keywords: kubernetes, iks, ingress
 
@@ -2665,7 +2665,7 @@ spec:
 <tbody>
 <tr>
 <td><code>key</code></td>
-<td>Supported values are `location`, `$http&#95;` headers, and `$uri`. To set a global limit for incoming requests based on the zone or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http&#95;x&#95;user&#95;id`.</td>
+<td>Supported values are `location`, `$http_` headers, and `$uri`. To set a global limit for incoming requests based on the zone or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
 </tr>
 <tr>
 <td><code>rate</code></td>

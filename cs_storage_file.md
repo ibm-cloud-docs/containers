@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks
 
@@ -316,7 +316,7 @@ To add file storage:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
+4.  {: #file_app_volume_mount}To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
     If you have an app that requires a non-root user to write to the persistent storage, or an app that requires that the mount path is owned by the root user, see [Adding non-root user access to NFS file storage](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot) or [Enabling root permission for NFS file storage](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot).
     {: tip}
@@ -436,6 +436,7 @@ Before you begin:
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 ### Step 1: Preparing your existing storage.
+{: #existing-file-1}
 
 Before you can start to mount your existing storage to an app, you must retrieve all necessary information for your PV and prepare the storage to be accessible in your cluster.  
 {: shortdesc}
@@ -491,6 +492,7 @@ If you have a Dedicated account, you must [open a support case](/docs/get-suppor
 7.  Note the `Mount Point`, the `size`, and the `Location` field. The `Mount Point` field is displayed as `<nfs_server>:<file_storage_path>`.
 
 ### Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)
+{: #existing-file-2}
 
 1.  Create a storage configuration file for your PV. Include the values that you retrieved earlier.
 
@@ -611,7 +613,7 @@ If you have a Dedicated account, you must [open a support case](/docs/get-suppor
     {: screen}
 
 
-You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#app_volume_mount) to their deployments and start reading from and writing to the PV object.
+You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#file_app_volume_mount) to their deployments and start reading from and writing to the PV object.
 
 <br />
 
@@ -1323,7 +1325,7 @@ Review the following backup and restore options for your file storage:
 </table>
 
 ### Gold
-{: #block_gold}
+{: #file_gold}
 
 <table>
 <caption>File storage class: gold</caption>

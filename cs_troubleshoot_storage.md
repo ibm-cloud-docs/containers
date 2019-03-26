@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks
 
@@ -81,7 +81,7 @@ For a long-term fix, [update the machine type of your worker pool](/docs/contain
 {: #nonroot}
 
 {: tsSymptoms}
-After you [add NFS storage](/docs/containers?topic=containers-file_storage#app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as the following. The pod fails and is stuck in a reload cycle.
+After you [add NFS storage](/docs/containers?topic=containers-file_storage#file_app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as the following. The pod fails and is stuck in a reload cycle.
 
 ```
 write-permission
