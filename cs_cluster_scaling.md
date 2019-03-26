@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks, node scaling
 
@@ -454,7 +454,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     <tbody>
     <tr>
     <td>`api_route` parameter</td>
-    <td>Set the [{{site.data.keyword.containerlong_notm}} API endpoint](/docs/containers?topic=containers-cs_cli_reference#cs_api) for the region that your cluster is in.</td>
+    <td>Set the [{{site.data.keyword.containerlong_notm}} API endpoint](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api) for the region that your cluster is in.</td>
     <td>No default; uses the targeted region that your cluster is in.</td>
     </tr>
     <tr>

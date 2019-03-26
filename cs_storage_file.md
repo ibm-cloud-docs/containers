@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-22"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks
 
@@ -316,7 +316,7 @@ To add file storage:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
+4.  {: #file_app_volume_mount}To mount the storage to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
     If you have an app that requires a non-root user to write to the persistent storage, or an app that requires that the mount path is owned by the root user, see [Adding non-root user access to NFS file storage](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot) or [Enabling root permission for NFS file storage](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot).
     {: tip}
@@ -613,7 +613,7 @@ If you have a Dedicated account, you must [open a support case](/docs/get-suppor
     {: screen}
 
 
-You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#app_volume_mount) to their deployments and start reading from and writing to the PV object.
+You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#file_app_volume_mount) to their deployments and start reading from and writing to the PV object.
 
 <br />
 

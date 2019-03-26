@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-22"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks
 
@@ -549,7 +549,7 @@ To add block storage:
     ```
     {: screen}
 
-4.  {: #app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
+4.  {: #block_app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
     ```
     apiVersion: apps/v1
@@ -849,7 +849,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
      ```
      {: screen}
 
-You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#app_volume_mount) to their deployments and start reading from and writing to the PV.
+You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#block_app_volume_mount) to their deployments and start reading from and writing to the PV.
 
 <br />
 

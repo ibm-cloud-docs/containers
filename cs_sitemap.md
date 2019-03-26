@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-22"
+lastupdated: "2019-03-26"
 
 ---
 
@@ -217,7 +217,7 @@ lastupdated: "2019-03-22"
   * [Updating worker nodes in the console](/docs/containers?topic=containers-update#worker_up_console)
 * [Updating machine types](/docs/containers?topic=containers-update#machine_type)
 * [Updating cluster add-ons](/docs/containers?topic=containers-update#addons)
-  * [Managing automatic updates for the Fluentd for logging add-on](/docs/containers?topic=containers-update#up-logging)
+  * [Managing automatic updates for the Fluentd for logging add-on](/docs/containers?topic=containers-update#logging-up)
   * [Managing automatic updates for the Ingress ALB add-on](/docs/containers?topic=containers-update#alb)
 * [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
@@ -405,7 +405,7 @@ lastupdated: "2019-03-22"
   * [Freeing up used IP addresses](/docs/containers?topic=containers-subnets#free)
 * [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips)
   * [Adding portable IPs by ordering more subnets](/docs/containers?topic=containers-subnets#request)
-  * [Adding portable private IPs by using user-managed subnets](/docs/containers?topic=containers-subnets#user_managed)
+  * [Adding portable private IPs by using user-managed subnets](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
   * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
   * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
@@ -486,7 +486,7 @@ lastupdated: "2019-03-22"
 * [v1.0: Setting up a load balancer 1.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
 * [v1.0: Setting up a load balancer 1.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config)
 * [v1.0: Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
-  * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#edge_nodes)
+  * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
 
 [Exposing apps with Ingress](/docs/containers?topic=containers-ingress#ingress)
@@ -523,7 +523,7 @@ lastupdated: "2019-03-22"
   * [Enabling log buffering and flush timeout](/docs/containers?topic=containers-ingress#access-log)
   * [Changing the number or duration of keepalive connections](/docs/containers?topic=containers-ingress#keepalive_time)
   * [Changing the pending connections backlog](/docs/containers?topic=containers-ingress#backlog)
-  * [Tuning kernel performance](/docs/containers?topic=containers-ingress#kernel)
+  * [Tuning kernel performance](/docs/containers?topic=containers-ingress#ingress_kernel)
 * [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress#user_managed)
 
 [Customizing Ingress with annotations](/docs/containers?topic=containers-ingress_annotation#ingress_annotation)
@@ -670,7 +670,7 @@ lastupdated: "2019-03-22"
   * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 * [Encrypting Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-portworx#encrypt_volumes)
-  * [Portworx volume encryption workflow](/docs/containers?topic=containers-portworx#encryption)
+  * [Portworx volume encryption workflow](/docs/containers?topic=containers-portworx#px_encryption)
   * [Portworx volume decryption workflow](/docs/containers?topic=containers-portworx#decryption)
   * [Setting up encryption for your Portworx volumes](/docs/containers?topic=containers-portworx#setup_encryption)
 * [Adding storage from your Portworx cluster to apps](/docs/containers?topic=containers-portworx#add_portworx_storage)
@@ -729,7 +729,7 @@ lastupdated: "2019-03-22"
 * [Creating clusters](/docs/containers?topic=containers-dedicated#dedicated_administering)
   * [Creating clusters with the {{site.data.keyword.Bluemix_notm}} console](/docs/containers?topic=containers-dedicated#dedicated_creating_ui)
   * [Creating clusters with the CLI](/docs/containers?topic=containers-dedicated#dedicated_creating_cli)
-  * [Adding worker nodes](/docs/containers?topic=containers-dedicated#add_workers)
+  * [Adding worker nodes](/docs/containers?topic=containers-dedicated#add_workers_dedicated)
   * [Using private and public image registries](/docs/containers?topic=containers-dedicated#dedicated_images)
   * [Adding subnets to clusters](/docs/containers?topic=containers-dedicated#dedicated_cluster_subnet)
       * [Adding more user-managed subnets and IP addresses to your Kubernetes clusters](/docs/containers?topic=containers-dedicated#dedicated_byoip_subnets)
@@ -944,7 +944,7 @@ lastupdated: "2019-03-22"
   * [Operator actions](/docs/containers?topic=containers-access_reference#operator-actions)
   * [Administrator actions](/docs/containers?topic=containers-access_reference#admin-actions)
 * [{{site.data.keyword.Bluemix_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
-* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac)
+* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
 * [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 

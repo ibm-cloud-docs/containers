@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -78,7 +78,7 @@ See [Specifying your app requirements in your YAML file](#app_yaml) for descript
 * [Ports](#port)
 * [Resource requests and limits](#resourcereq)
 * [Liveness and readiness probes](#probe)
-* [Services](#service) to expose the app service on a port
+* [Services](#app-service) to expose the app service on a port
 * [Configmaps](#configmap) to set container environment variables
 * [Secrets](#secret) to set container environment variables
 * [Persistent volumes](#pv) that are mounted to the container for storage
@@ -220,7 +220,7 @@ Review a copy of the [complete YAML file](https://raw.githubusercontent.com/IBM-
 * [Ports](#port)
 * [Resource requests and limits](#resourcereq)
 * [Liveness and readiness probes](#probe)
-* [Services](#service) to expose the app service on a port
+* [Services](#app-service) to expose the app service on a port
 * [Configmaps](#configmap) to set container environment variables
 * [Secrets](#secret) to set container environment variables
 * [Persistent volumes](#pv) that are mounted to the container for storage
@@ -288,7 +288,7 @@ template:
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">Port for the app's service</dt>
-  <dd><p>Select a container port to open the app's services on. To see which port needs to be opened, refer to your app specs or Dockerfile. The port is accessible from the private network, but not from a public network connection. To expose the app publicly, you must create a NodePort, load balancer, or Ingress service. You use this same port number when you [create a `Service` object](#service).</p>
+  <dd><p>Select a container port to open the app's services on. To see which port needs to be opened, refer to your app specs or Dockerfile. The port is accessible from the private network, but not from a public network connection. To expose the app publicly, you must create a NodePort, load balancer, or Ingress service. You use this same port number when you [create a `Service` object](#app-service).</p>
   <p><pre class="codeblock"><code>ports:
 - containerPort: 9080</pre></code></p></dd>
 
@@ -326,7 +326,7 @@ readinessProbe:
   initialDelaySeconds: 45
   periodSeconds: 5</pre></code></p></dd>
 
-<dt id="service">Exposing the app service</dt>
+<dt id="app-service">Exposing the app service</dt>
   <dd><p>You can create a service that exposes your app. In the `spec` section, make sure to match the `port` and label values with the ones that you used in the deployment. The service exposes objects that match the label, such as `app: wasliberty` in the following example.</p>
   <ul><li>By default, a service uses [`ClusterIP` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/), which makes the service accessible only within the cluster but not outside the cluster.</li>
   <li>You can create a NodePort, load balancer, or Ingress service to expose the app publicly. These services have two IPs, one external and one internal. When traffic is received on the external IP, it is forwarded to the internal cluster IP. Then, from the internal cluster IP, the traffic is routed to the container IP of the app.</li>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks 
 
@@ -135,7 +135,7 @@ To prevent other workloads from running on edge worker nodes:
   {: pre}
   Now, only pods with the `dedicated=edge` toleration are deployed to your edge worker nodes.
 
-3. If you choose to [enable source IP preservation for a load balancer 1.0 service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](/docs/containers?topic=containers-loadbalancer#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
+3. If you choose to [enable source IP preservation for a load balancer 1.0 service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
 4. To remove a taint, run the following command.
     ```

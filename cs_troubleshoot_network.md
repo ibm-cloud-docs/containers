@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks 
 
@@ -313,7 +313,7 @@ When you enable source IP preservation for load balancer or Ingress ALB services
 {: tsResolve}
 Resolve the issue by choosing one of the following options:
 
-* **Edge node taints**: To ensure that your load balancer and app pods deploy to tainted edge nodes, [add edge node affinity rules and tolerations to your app deployment](/docs/containers?topic=containers-loadbalancer#edge_nodes). Load balancer and Ingress ALB pods have these affinity rules and tolerations by default.
+* **Edge node taints**: To ensure that your load balancer and app pods deploy to tainted edge nodes, [add edge node affinity rules and tolerations to your app deployment](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). Load balancer and Ingress ALB pods have these affinity rules and tolerations by default.
 
 * **Custom taints**: Remove custom taints that the `keepalived` pods don't have tolerations for. Instead, you can [label worker nodes as edge nodes, and then taint those edge nodes](/docs/containers?topic=containers-edge).
 

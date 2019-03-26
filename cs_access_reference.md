@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-26"
 
 keywords: kubernetes, iks
 
@@ -62,7 +62,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <tbody>
 <tr>
 <td>Target or view the API endpoint for {{site.data.keyword.containerlong_notm}}.</td>
-<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_api)</code></td>
+<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api)</code></td>
 <td>-</td>
 </tr>
 <tr>
@@ -578,9 +578,6 @@ The **Administrator** platform role includes all permissions that are granted by
 <td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)</code></td>
 <td>-</td>
 </tr>
-<tr>
-<td>List enabled features in a cluster.</td>
-<td><code>[ibmcloud ks cluster-features](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_ls)</code></td>
 <td>-</td>
 </tr>
 <tr>
@@ -687,7 +684,7 @@ The **Administrator** platform role includes all permissions that are granted by
 Every user who is assigned an {{site.data.keyword.Bluemix_notm}} IAM service access role is also automatically assigned a corresponding Kubernetes role-based access control (RBAC) role in a specific namespace. To learn more about service access roles, see [{{site.data.keyword.Bluemix_notm}} IAM service roles](/docs/containers?topic=containers-users#platform). To learn more about RBAC roles, see [Assigning RBAC permissions](/docs/containers?topic=containers-users#role-binding).
 {: shortdesc}
 
-Looking for which Kubernetes actions each service role grants through RBAC? See [Kubernetes resource permissions per RBAC role](#rbac).
+Looking for which Kubernetes actions each service role grants through RBAC? See [Kubernetes resource permissions per RBAC role](#rbac_ref).
 {: tip}
 
 The following table shows the Kubernetes resource permissions granted by each service role and its corresponding RBAC role.
@@ -739,7 +736,7 @@ The following table shows the Kubernetes resource permissions granted by each se
 
 
 ## Kubernetes resource permissions per RBAC role
-{: #rbac}
+{: #rbac_ref}
 
 Every user who is assigned an {{site.data.keyword.Bluemix_notm}} IAM service access role is also automatically assigned a corresponding, predefined Kubernetes role-based access control (RBAC) role. If you plan to manage your own custom Kubernetes RBAC roles, see [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac).
 {: shortdesc}
