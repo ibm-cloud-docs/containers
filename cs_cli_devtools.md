@@ -27,5 +27,5 @@ subcollection: containers
 # The content that you are looking for moved
 {: #cs_cli_devtools}
 
-The content that you are looking for moved. <a href="/docs/containers/cs_cli_reference.html">Check out the latest information in its new location</a>.
+The content that you are looking for moved. <a href="/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference">Check out the latest information in its new location</a>.
 {:shortdesc}
