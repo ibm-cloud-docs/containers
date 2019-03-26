@@ -84,7 +84,7 @@ The cluster could not be configured with the registry. Make sure that you have t
 
 {: tsCauses}
 You do not have the correct permissions to create a cluster. You need the following permissions to create a cluster:
-*  **Super User** role for IBM Cloud infrastructure (SoftLayer).
+*  **Super User** role for IBM Cloud infrastructure (SoftLayer), or at least [these minimum infrastructure permissions](/docs/containers?topic=containers-access_reference#infra).
 *  **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
 *  **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. Do not limit policies for {{site.data.keyword.registryshort_notm}} to the resource group level. If you started to use {{site.data.keyword.registrylong_notm}} before 4 October 2018, ensure that you [enable {{site.data.keyword.Bluemix_notm}} IAM policy enforcement](/docs/services/Registry?topic=registry-user#existing_users).
 
