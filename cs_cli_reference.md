@@ -3796,7 +3796,7 @@ ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [-
 ### ibmcloud ks worker-reboot
 {: #cs_worker_reboot}
 
-Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure (SoftLayer) is `Powered Off` and you need to turn on the worker node. A reboot clears temporary directories, but does not clear the entire file system or reformat the disks.
+Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure (SoftLayer) is `Powered Off` and you need to turn on the worker node. A reboot clears temporary directories, but does not clear the entire file system or reformat the disks. Your worker node's public and private IP address remains the same after the reboot operation.
 {: shortdesc}
 
 ```
@@ -3882,7 +3882,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
 ### ibmcloud ks worker-reload
 {: #cs_worker_reload}
 
-Reload the configurations for a worker node. A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside of the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+Reload the configurations for a worker node. A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside of the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Your worker node's IP address remains the same after the reload operation.
 {: shortdesc}
 
 ```
