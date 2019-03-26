@@ -148,6 +148,7 @@ To use a non-{{site.data.keyword.Bluemix_notm}} registry such as Docker, see [Ac
 The default cluster setup creates a service ID to store {{site.data.keyword.Bluemix_notm}} IAM API key credentials in the image pull secret. However, you can also create an API key for an individual user and store those credentials in an image pull secret. If you reach the [IAM limit for service IDs](/docs/iam?topic=iam-iam_limits#iam_limits), your cluster is created without the service ID and image pull secret and cannot pull images from the `icr.io` registry domains by default. You must [create your own image pull secret](#other_registry_accounts), but by using an API key for an individual user such as a functional ID, not a {{site.data.keyword.Bluemix_notm}} IAM service ID.
 
 **My cluster image pull secret uses a registry token. Does a token still work?**<br>
+
 The previous method of authorizing cluster access to {{site.data.keyword.registrylong_notm}} by automatically creating a [token](/docs/services/Registry?topic=registry-registry_access#registry_tokens) and storing the token in an image pull secret is supported but deprecated.
 {: deprecated}
 
