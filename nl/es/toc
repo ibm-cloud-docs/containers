@@ -4,10 +4,11 @@
 {: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers/container_index.html" path="containers"}
 Servicio Kubernetes de IBM Cloud
 
-    {: .navgroup id="learn"}
     container_index.md
-    
 
+    {: .navgroup id="learn"}
+    getting-started.md
+    
     {: .topicgroup}
     Acerca de
         cs_why.md
