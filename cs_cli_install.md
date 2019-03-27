@@ -444,8 +444,8 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    <table summary-"Input parameters to retrieve tokens">
-    <caption>Input parameters to get tokens</caption>
+    <table summary-"Input parameters to retrieve IAM tokens.">
+    <caption>Input parameters to get IAM tokens.</caption>
     <thead>
         <th>Input Parameters</th>
         <th>Values</th>
@@ -511,8 +511,8 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    <table summary="Input parameters to get {{site.data.keyword.Bluemix_notm}} account ID">
-    <caption>Input parameters to get an {{site.data.keyword.Bluemix_notm}} account ID</caption>
+    <table summary="Input parameters to get {{site.data.keyword.Bluemix_notm}} account ID.">
+    <caption>Input parameters to get an {{site.data.keyword.Bluemix_notm}} account ID.</caption>
     <thead>
   	<th>Input parameters</th>
   	<th>Values</th>
@@ -557,8 +557,8 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    <table summary-"Input parameters to retrieve tokens">
-    <caption>Input parameters to get tokens</caption>
+    <table summary-"Input parameters to retrieve IAM tokens.">
+    <caption>Input parameters to get IAM tokens.</caption>
     <thead>
         <th>Input Parameters</th>
         <th>Values</th>
@@ -624,8 +624,8 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
     
-    <table summary="Input parameters to work with API">
-    <caption>Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions</caption>
+    <table summary="Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions.">
+    <caption>Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions.</caption>
     <thead>
     <th>Input parameters</th>
     <th>Values</th>
@@ -691,8 +691,8 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
      ```
      {: codeblock}
 
-     <table summary="Input parameters to work with API">
-     <caption>Input parameters to work with the {{site.data.keyword.containerlong_notm}} API</caption>
+     <table summary="Input parameters to work with the {{site.data.keyword.containerlong_notm}} API.">
+     <caption>Input parameters to work with the {{site.data.keyword.containerlong_notm}} API.</caption>
      <thead>
      <th>Input parameters</th>
      <th>Values</th>
@@ -728,8 +728,8 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to retrieve tokens">
-   <caption>Input parameters to get an IAM delegated refresh token </caption>
+   <table summary-"Input parameters to get an IAM delegated refresh token.">
+   <caption>Input parameters to get an IAM delegated refresh token. </caption>
    <thead>
    <th>Input Parameters</th>
    <th>Values</th>
@@ -765,8 +765,8 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to retrieve tokens">
-   <caption>Input parameters to get IAM ID and IAM access tokens</caption>
+   <table summary-"Input parameters to get IAM ID and IAM access tokens.">
+   <caption>Input parameters to get IAM ID and IAM access tokens.</caption>
    <thead>
    <th>Input Parameters</th>
    <th>Values</th>
@@ -803,8 +803,8 @@ The following instructions require public network access in your cluster to conn
    ```
    GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>/config
    ```
-   <table summary-"Input parameters to retrieve tokens">
-   <caption>Input parameters to downlad the Kubernetes configuration for your cluster</caption>
+   <table summary-"Input parameters to downlad the Kubernetes configuration for your cluster.">
+   <caption>Input parameters to downlad the Kubernetes configuration for your cluster.</caption>
    <thead>
    <th>Input Parameters</th>
    <th>Values</th>
@@ -828,8 +828,8 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to retrieve tokens">
-   <caption>Input parameters to get the public service endpoint for your Kubernetes master</caption>
+   <table summary-"Input parameters to get the public service endpoint for your Kubernetes master.">
+   <caption>Input parameters to get the public service endpoint for your Kubernetes master.</caption>
    <thead>
    <th>Input Parameters</th>
    <th>Values</th>
@@ -877,8 +877,8 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to retrieve tokens">
-   <caption>Input parameters to get tokens</caption>
+   <table summary-"Input parameters to view the Kubernetes version that runs in your cluster. ">
+   <caption>Input parameters to view the Kubernetes version that runs in your cluster. </caption>
    <thead>
    <th>Input Parameters</th>
    <th>Values</th>
