@@ -19,7 +19,6 @@ lastupdated: "2019-03-27"
 {:download: .download}
 
 
-
 # Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters
 {: #knative_tutorial}
 
