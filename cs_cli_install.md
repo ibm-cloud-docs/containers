@@ -820,8 +820,7 @@ The following instructions require public network access in your cluster to conn
    <td>`<cluster_ID>`: The ID of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api).  </td>
    </tr>
    </tbody>
-   </table>
-   
+   </table>   
    
 5. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **publicServiceEndpointURL** of your API output. 
    ```
