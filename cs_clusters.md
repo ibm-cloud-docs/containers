@@ -466,7 +466,7 @@ To create a cluster:
 
 -   If you created the cluster in a multizone capable zone, spread worker nodes by [adding a zone to your cluster](#add_zone).
 -   [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
--   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
+-   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-index)
 - If you have a firewall, you might need to [open the required ports](/docs/containers?topic=containers-firewall#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 -   [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.

@@ -144,7 +144,7 @@ For reference information about these CLIs, see the documentation for those tool
 
 -   [`ibmcloud` commands](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
 -   [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
--   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
+-   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/)
 -   [`ibmcloud cr` commands](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
 
 <br />
@@ -281,7 +281,7 @@ To use `kubectl` commands:
     ```
     {: screen}
 
-Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.Bluemix_notm}}. For a full list of commands, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).
+Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.Bluemix_notm}}. For a full list of commands, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
 
 **Tip:** If you are using Windows and the Kubernetes CLI is not installed in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI, you must change directories to the path where the Kubernetes CLI is installed to run `kubectl` commands successfully.
 

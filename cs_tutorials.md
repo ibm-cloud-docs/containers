@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-27"
 
 keywords: kubernetes, iks
 
@@ -39,7 +39,7 @@ In this first tutorial, you act as the PR firm's networking administrator. You c
 {:shortdesc}
 
 -   Create a cluster with 1 worker pool that has 1 worker node.
--   Install the CLIs for running [Kubernetes commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/) and managing Docker images in {{site.data.keyword.registrylong_notm}}.
+-   Install the CLIs for running [Kubernetes commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/) and managing Docker images in {{site.data.keyword.registrylong_notm}}.
 -   Create a private image repository in {{site.data.keyword.registrylong_notm}} to store your images.
 -   Add the {{site.data.keyword.toneanalyzershort}} service to the cluster so that any app in the cluster can use that service.
 

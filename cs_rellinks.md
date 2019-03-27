@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-27"
 
 keywords: kubernetes, iks 
 
@@ -75,6 +75,7 @@ subcollection: containers
 **Integrated open source technologies**
 
 - [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/)
+- [Kubernetes CLI documentation (`kubectl`) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/)
 - [Knative documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs)
 - [Docker documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a> for Kubernetes package management
