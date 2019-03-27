@@ -219,10 +219,10 @@ Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`
 <br />
 
 
-## Allowing the cluster to access infrastructure resources and other services
+## Allowing the cluster to access infrastructure resources and other services over a public firewall
 {: #firewall_outbound}
 
-Let your cluster access infrastructure resources and services from behind a firewall, such as for {{site.data.keyword.containerlong_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
+Let your cluster access infrastructure resources and services from behind a public firewall, such as for {{site.data.keyword.containerlong_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
 {:shortdesc}
 
 Depending on your cluster setup, you access the services by using the public, private, or both IP addresses. If you have a cluster with worker nodes on both public and private VLANs behind a firewall for both public and private networks, you must open the connection for both public and private IP addresses. If your cluster has worker nodes on only the private VLAN behind a firewall, you can open the connection to only the private IP addresses.
@@ -481,6 +481,76 @@ If you have a firewall on the private network, allow communication between worke
 
 <br />
 
+
+## Allowing the cluster to access resources through Calico egress policies
+{: #firewall_calico_egress}
+
+If you use [Calico network policies](/docs/containers?topic=containers-network_policies) to act as a firewall to restrict all public worker egress, you must allow your workers to access the local proxies for the master API server and etcd.
+{: shortdesc}
+
+1. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). Include the `--admin` and `--network` options with the `ibmcloud ks cluster-config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+2. Create a Calico network policy that allows public traffic from your cluster to 172.20.0.1:2040 and 172.21.0.1:443 for the API server local proxy, and 172.20.0.1:2041 for the etcd local proxy.
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: allow-master-local
+  spec:
+    egress:
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 2040:2041
+        nets:
+        - 172.20.0.1/32
+        protocol: TCP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: UDP
+    - action: Allow
+      destination:
+        ports:
+        - 443
+        nets:
+        - 172.21.0.1/32
+        protocol: TCP
+    order: 1500
+    selector: ibm.role == 'worker_public'
+    types:
+    - Egress
+    ```
+    {: codeblock}
+
+3. Apply the policy to the cluster.
+    - Linux and OS X:
+
+      ```
+      calicoctl apply -f allow-master-local.yaml
+      ```
+      {: pre}
+
+    - Windows:
+
+      ```
+      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 ## Accessing NodePort, load balancer, and Ingress services from outside the cluster
 {: #firewall_inbound}
