@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-27"
 
 ---
 
@@ -115,7 +115,13 @@ Knative builds on top of Istio to ensure that your serverless and containerized 
    ```
    {: screen}
 
-3. Verify that all Knative components are successfully installed.
+3. Optional: If you want to use Istio for all apps in the `default` namespace, add the `istio-injection=enabled` label to the namespace. Each serverless app pod must run an Envoy proxy sidecar so that the app can be included in the Istio service mesh. This label allows Istio to automatically modify the pod template specification in new app deployments so that pods are created with Envoy proxy sidecar containers.
+  ```
+  kubectl label namespace default istio-injection=enabled
+  ```
+  {: pre}
+
+4. Verify that all Knative components are successfully installed.
    1. Verify that all pods of the Knative `Serving` component are in a `Running` state.  
       ```
       kubectl get pods --namespace knative-serving

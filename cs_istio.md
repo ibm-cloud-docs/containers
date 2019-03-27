@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-27"
 
 ---
 
@@ -112,8 +112,9 @@ Install Istio managed add-ons in an existing cluster.
 
 **Before you begin**</br>
 * Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
-* [Target the CLI to an existing 1.10 or later cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-* If you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
+* [Create or use an existing cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b2c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_cli). Each worker node must run Kubernetes version 1.11 or later.
+* [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* If are using an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
 
 ### Installing managed Istio add-ons in the CLI
 {: #istio_install_cli}
@@ -457,7 +458,7 @@ Each app pod must be running an Envoy proxy sidecar so that the microservices ca
 ### Enabling automatic sidecar injection
 {: #istio_sidecar_automatic}
 
-When automatic sidecar injection is enabled, a namespace listens for any new deployments and automatically modifies the deployment YAMLs to add sidecars. Enable automatic sidecar injection for a namespace when you plan to deploy multiple apps that you want to integrate with Istio into that namespace. Note that automatic sidecar injection is not enabled for any namespaces by default in the Istio managed add-on.
+When automatic sidecar injection is enabled, a namespace listens for any new deployments and automatically modifies the pod template specification so that app pods are created with Envoy proxy sidecar containers. Enable automatic sidecar injection for a namespace when you plan to deploy multiple apps that you want to integrate with Istio into that namespace. Note that automatic sidecar injection is not enabled for any namespaces by default in the Istio managed add-on.
 
 To enable automatic sidecar injection for a namespace:
 
