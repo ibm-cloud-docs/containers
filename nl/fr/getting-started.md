@@ -21,7 +21,7 @@ lastupdated: "2018-12-05"
 
 
 # Initiation à {{site.data.keyword.containerlong_notm}}
-{: #container_index}
+{: #getting-started}
 
 Prenez une longueur d'avance avec {{site.data.keyword.containerlong}} en déployant des applications à haute disponibilité dans des conteneurs Docker qui s'exécutent dans des clusters Kubernetes.
 {:shortdesc}
