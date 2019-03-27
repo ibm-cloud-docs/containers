@@ -35,7 +35,9 @@ Review these situations in which you might need to open specific ports and IP ad
 * [To run `calicoctl` commands](#firewall_calicoctl) from your local system when corporate network policies prevent access to public internet endpoints via proxies or firewalls.
 * [To allow communication between the Kubernetes master and the worker nodes](#firewall_outbound) when either a firewall is set up for the worker nodes or the firewall settings are customized in your IBM Cloud infrastructure (SoftLayer) account.
 * [To allow the cluster to access resources over a firewall on the private network](#firewall_private).
+* [To allow the cluster to access resources when Calico network policies block worker node egress](#firewall_calico_egress).
 * [To access the NodePort service, load balancer service, or Ingress from outside of the cluster](#firewall_inbound).
+* [To allow the cluster to access services that run inside or outside {{site.data.keyword.Bluemix_notm}} or on-premises and that are protected by a firewall](#whitelist_workers).
 
 <br />
 
@@ -534,8 +536,8 @@ If you use [Calico network policies](/docs/containers?topic=containers-network_p
     selector: ibm.role == 'worker_public'
     types:
     - Egress
-    ```
-    {: codeblock}
+  ```
+  {: codeblock}
 
 3. Apply the policy to the cluster.
     - Linux and OS X:

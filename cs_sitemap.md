@@ -324,6 +324,7 @@ lastupdated: "2019-03-27"
 * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 * [Allowing the cluster to access infrastructure resources and other services](/docs/containers?topic=containers-firewall#firewall_outbound)
 * [Allowing the cluster to access resources over a private firewall](/docs/containers?topic=containers-firewall#firewall_private)
+* [Allowing the cluster to access resources through Calico egress policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 * [Accessing NodePort, load balancer, and Ingress services from outside the cluster](/docs/containers?topic=containers-firewall#firewall_inbound)
 * [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#whitelist_workers)
 
