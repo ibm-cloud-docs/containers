@@ -344,12 +344,12 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/custom-errors: "serviceName=&lt;app1&gt; httpError=&lt;401&gt; errorActionName=&lt;/errorAction401&gt;;serviceName=&lt;app2&gt; httpError=&lt;403&gt; errorActionName=&lt;/errorPath&gt;"
+    ingress.bluemix.net/custom-errors: "serviceName=<app1> httpError=<401> errorActionName=</errorAction401>;serviceName=<app2> httpError=<403> errorActionName=</errorPath>"
     ingress.bluemix.net/custom-error-actions: |
-         errorActionName=&lt;/errorAction401&gt;
+         errorActionName=</errorAction401>
          #Example custom error snippet
          proxy_pass http://example.com/forbidden.html;
-         &lt;EOS&gt;
+         <EOS>
   spec:
     tls:
     - hosts:
@@ -367,9 +367,9 @@ metadata:
           backend:
             serviceName: app2
             servicePort: 80
-        - path: &lt;/errorPath&gt;
+        - path: </errorPath>
           backend:
-            serviceName: &lt;error-svc&gt;
+            serviceName: <error-svc>
             servicePort: 80
 ```
 {: codeblock}
@@ -416,7 +416,7 @@ When a server block receives a request, the location block matches the URI to a 
 
 To modify the server block as a whole instead, see the [`server-snippets`](#server-snippets) annotation.
 
-To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: `kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-&lt;ingress_resource_name&gt;.conf`
+To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: `kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-<ingress_resource_name>.conf`
 {: tip}
 
 **Sample Ingress resource YAML**</br>
@@ -428,15 +428,15 @@ metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/location-snippets: |
-      serviceName=&lt;myservice1&gt;
+      serviceName=<myservice1>
       # Example location snippet
       proxy_request_buffering off;
       rewrite_log on;
       proxy_set_header "x-additional-test-header" "location-snippet-header";
-      &lt;EOS&gt;
-      serviceName=&lt;myservice2&gt;
+      <EOS>
+      serviceName=<myservice2>
       proxy_set_header Authorization "";
-      &lt;EOS&gt;
+      <EOS>
 spec:
   tls:
   - hosts:
@@ -489,7 +489,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;"
+    ingress.bluemix.net/ALB-ID: "<private_ALB_ID_1>;<private_ALB_ID_2>"
 spec:
   tls:
   - hosts:
@@ -515,7 +515,7 @@ spec:
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
 <td>The ID for your private ALB. To find the private ALB ID, run <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>.<p>
-If you have a multizone cluster with more than one private ALB enabled, you can provide a list of ALB IDs separated by <code>;</code>. For example: <code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt</code></p>
+If you have a multizone cluster with more than one private ALB enabled, you can provide a list of ALB IDs separated by <code>;</code>. For example: <code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt;</code></p>
 </td>
 </tr>
 </tbody></table>
@@ -532,7 +532,7 @@ Add a custom server block configuration.
 **Description**</br>
 A server block is an NGINX directive that defines the configuration for the ALB virtual server. By providing a custom configuration snippet in the `server-snippets` annotation, you can modify how the ALB handles requests at the server level.
 
-To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: `kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-&lt;ingress_resource_name&gt;.conf`
+To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: `kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-<ingress_resource_name>.conf`
 {: tip}
 
 **Sample Ingress resource YAML**</br>
@@ -580,7 +580,7 @@ spec:
 
 <p class="tip">You can use the <code>server-snippets</code> annotation to add a header for all service responses at a server level:</br> <pre class="codeblock">annotations:
   ingress.bluemix.net/server-snippets: |
-    add_header &lt;header1&gt; &lt;value1&gt;;</pre></p>
+    add_header <header1> <value1>;</pre></p>
 
 <br />
 
@@ -615,8 +615,8 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-connect-timeout: "serviceName=<myservice> timeout=&lt;connect_timeout&gt;"
-   ingress.bluemix.net/proxy-read-timeout: "serviceName=<myservice> timeout=&lt;read_timeout&gt;"
+   ingress.bluemix.net/proxy-connect-timeout: "serviceName=<myservice> timeout=<connect_timeout>"
+   ingress.bluemix.net/proxy-read-timeout: "serviceName=<myservice> timeout=<read_timeout>"
 spec:
  tls:
  - hosts:
@@ -666,7 +666,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/keepalive-requests: "serviceName=<myservice> requests=&lt;max_requests&gt;"
+    ingress.bluemix.net/keepalive-requests: "serviceName=<myservice> requests=<max_requests>"
 spec:
   tls:
   - hosts:
@@ -716,7 +716,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/keepalive-timeout: "serviceName=<myservice> timeout=&lt;time&gt;s"
+   ingress.bluemix.net/keepalive-timeout: "serviceName=<myservice> timeout=<time>s"
 spec:
  tls:
  - hosts:
@@ -773,7 +773,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/proxy-next-upstream-config: "serviceName=&lt;myservice1&gt; retries=&lt;tries&gt; timeout=&lt;time&gt; error=true http_502=true; serviceName=&lt;myservice2&gt; http_403=true non_idempotent=true"
+    ingress.bluemix.net/proxy-next-upstream-config: "serviceName=<myservice1> retries=<tries> timeout=<time> error=true http_502=true; serviceName=<myservice2> http_403=true non_idempotent=true"
 spec:
   tls:
   - hosts:
@@ -863,7 +863,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
+    ingress.bluemix.net/sticky-cookie-services: "serviceName=<myservice1> name=<cookie_name1> expires=<expiration_time1> path=<cookie_path1> hash=<hash_algorithm1>;serviceName=<myservice2> name=<cookie_name2> expires=<expiration_time2> path=<cookie_path2> hash=<hash_algorithm2>"
 spec:
   tls:
   - hosts:
@@ -875,11 +875,11 @@ spec:
       paths:
       - path: /service1_path
         backend:
-          serviceName: &lt;myservice1&gt;
+          serviceName: <myservice1>
           servicePort: 8080
       - path: /service2_path
         backend:
-          serviceName: &lt;myservice2&gt;
+          serviceName: <myservice2>
           servicePort: 80
 ```
 {: codeblock}
@@ -932,7 +932,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/upstream-fail-timeout: "serviceName=<myservice> fail-timeout=&lt;fail_timeout&gt;"
+    ingress.bluemix.net/upstream-fail-timeout: "serviceName=<myservice> fail-timeout=<fail_timeout>"
 spec:
   tls:
   - hosts:
@@ -984,7 +984,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/upstream-keepalive: "serviceName=<myservice> keepalive=&lt;max_connections&gt;"
+    ingress.bluemix.net/upstream-keepalive: "serviceName=<myservice> keepalive=<max_connections>"
 spec:
   tls:
   - hosts:
@@ -1037,7 +1037,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/upstream-max-fails: "serviceName=<myservice> max-fails=&lt;max_fails&gt;"
+    ingress.bluemix.net/upstream-max-fails: "serviceName=<myservice> max-fails=<max_fails>"
 spec:
   tls:
   - hosts:
@@ -1097,7 +1097,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt; port=&lt;port2&gt;"
+   ingress.bluemix.net/custom-port: "protocol=<protocol1> port=<port1>;protocol=<protocol2> port=<port2>"
 spec:
  tls:
  - hosts:
@@ -1177,7 +1177,7 @@ spec:
   Your CLI output looks similar to the following:
   ```
   NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   109d
+  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx <port1>:30776/TCP,<port2>:30412/TCP   109d
   ```
   {: codeblock}
 
@@ -1247,7 +1247,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/hsts: enabled=true maxAge=&lt;31536000&gt; includeSubdomains=true
+    ingress.bluemix.net/hsts: enabled=true maxAge=<31536000> includeSubdomains=true
 spec:
   tls:
   - hosts:
@@ -1318,7 +1318,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
+    ingress.bluemix.net/mutual-auth: "secretName=<mysecret> port=<port> serviceName=<servicename1>,<servicename2>"
 spec:
   tls:
   - hosts:
@@ -1401,9 +1401,9 @@ Use the `ssl-services` annotation for SSL termination between the Ingress ALB an
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: &lt;myingressname&gt;
+  name: <myingressname>
   annotations:
-    ingress.bluemix.net/ssl-services: ssl-service=&lt;myservice1&gt; ssl-secret=&lt;service1-ssl-secret&gt;;ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
+    ingress.bluemix.net/ssl-services: ssl-service=<myservice1> ssl-secret=<service1-ssl-secret>;ssl-service=<myservice2> ssl-secret=<service2-ssl-secret>
 spec:
   tls:
   - hosts:
@@ -1512,7 +1512,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/tcp-ports: "serviceName=<myservice> ingressPort=&lt;ingress_port&gt; servicePort=&lt;service_port&gt;"
+    ingress.bluemix.net/tcp-ports: "serviceName=<myservice> ingressPort=<ingress_port> servicePort=<service_port>"
 spec:
   tls:
   - hosts:
@@ -1637,7 +1637,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/proxy-external-service: "path=&lt;mypath&gt; external-svc=https:&lt;external_service&gt; host=&lt;mydomain&gt;"
+    ingress.bluemix.net/proxy-external-service: "path=<mypath> external-svc=https:<external_service> host=<mydomain>"
 spec:
   tls:
   - hosts:
@@ -1728,7 +1728,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
+    ingress.bluemix.net/location-modifier: "modifier='<location_modifier>' serviceName=<myservice1>;modifier='<location_modifier>' serviceName=<myservice2>"
 spec:
   tls:
   - hosts:
@@ -1780,7 +1780,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/rewrite-path: "serviceName=&lt;myservice1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;myservice2&gt; rewrite=&lt;target_path2&gt;"
+    ingress.bluemix.net/rewrite-path: "serviceName=<myservice1> rewrite=<target_path1>;serviceName=<myservice2> rewrite=<target_path2>"
 spec:
   tls:
   - hosts:
@@ -1838,7 +1838,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/large-client-header-buffers: "number=&lt;number&gt; size=&lt;size&gt;"
+   ingress.bluemix.net/large-client-header-buffers: "number=<number> size=<size>"
 spec:
  tls:
  - hosts:
@@ -1894,7 +1894,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;myservice1&gt;"
+   ingress.bluemix.net/proxy-buffering: "enabled=<false> serviceName=<myservice1>"
 spec:
  tls:
  - hosts:
@@ -1949,7 +1949,7 @@ kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-buffers: "serviceName=<myservice> number=&lt;number_of_buffers&gt; size=&lt;size&gt;"
+   ingress.bluemix.net/proxy-buffers: "serviceName=<myservice> number=<number_of_buffers> size=<size>"
 spec:
  tls:
  - hosts:
@@ -2010,7 +2010,7 @@ kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-buffer-size: "serviceName=<myservice> size=&lt;size&gt;"
+   ingress.bluemix.net/proxy-buffer-size: "serviceName=<myservice> size=<size>"
 spec:
  tls:
  - hosts:
@@ -2063,7 +2063,7 @@ kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=<myservice> size=&lt;size&gt;"
+   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=<myservice> size=<size>"
 spec:
  tls:
  - hosts:
@@ -2121,7 +2121,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/add-host-port: "enabled=&lt;true&gt; serviceName=<myservice>"
+   ingress.bluemix.net/add-host-port: "enabled=<true> serviceName=<myservice>"
 spec:
  tls:
  - hosts:
@@ -2180,7 +2180,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 To add the X-Forward header information to the request that is sent to your app, use the `proxy-add-headers` annotation in the following way:
 ```
 ingress.bluemix.net/proxy-add-headers: |
-  serviceName=&lt;myservice1&gt; {
+  serviceName=<myservice1> {
   Host $host;
   X-Real-IP $remote_addr;
   X-Forwarded-Proto $scheme;
@@ -2191,7 +2191,7 @@ ingress.bluemix.net/proxy-add-headers: |
 
 <p class="tip">The <code>response-add-headers</code> annotation does not support global headers for all services. To add a header for all service responses at a server level, you can use the [<code>server-snippets</code> annotation](#server-snippets):</br> <pre class="codeblock">annotations:
   ingress.bluemix.net/server-snippets: |
-    add_header &lt;header1&gt; &lt;value1&gt;;</pre></p>
+    add_header <header1> <value1>;</pre></p>
 
 **Sample Ingress resource YAML**</br>
 ```
@@ -2201,20 +2201,20 @@ metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/proxy-add-headers: |
-      serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt; &lt;value1&gt;;
-      &lt;header2&gt; &lt;value2&gt;;
+      serviceName=<myservice1> {
+      <header1> <value1>;
+      <header2> <value2>;
       }
-      serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt; &lt;value3&gt;;
+      serviceName=<myservice2> {
+      <header3> <value3>;
       }
     ingress.bluemix.net/response-add-headers: |
-      serviceName=&lt;myservice1&gt; {
-      &lt;header1&gt;:&lt;value1&gt;;
-      &lt;header2&gt;:&lt;value2&gt;;
+      serviceName=<myservice1> {
+      <header1>:<value1>;
+      <header2>:<value2>;
       }
-      serviceName=&lt;myservice2&gt; {
-      &lt;header3&gt;:&lt;value3&gt;;
+      serviceName=<myservice2> {
+      <header3>:<value3>;
       }
 spec:
   tls:
@@ -2227,11 +2227,11 @@ spec:
       paths:
       - path: /service1_path
         backend:
-          serviceName: &lt;myservice1&gt;
+          serviceName: <myservice1>
           servicePort: 8080
       - path: /service2_path
         backend:
-          serviceName: &lt;myservice2&gt;
+          serviceName: <myservice2>
           servicePort: 80```
 {: codeblock}
 
@@ -2276,12 +2276,12 @@ metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/response-remove-headers: |
-      serviceName=&lt;myservice1&gt; {
-      "&lt;header1&gt;";
-      "&lt;header2&gt;";
+      serviceName=<myservice1> {
+      "<header1>";
+      "<header2>";
       }
-      serviceName=&lt;myservice2&gt; {
-      "&lt;header3&gt;";
+      serviceName=<myservice2> {
+      "<header3>";
       }
 spec:
   tls:
@@ -2294,11 +2294,11 @@ spec:
       paths:
       - path: /service1_path
         backend:
-          serviceName: &lt;myservice1&gt;
+          serviceName: <myservice1>
           servicePort: 8080
       - path: /service2_path
         backend:
-          serviceName: &lt;myservice2&gt;
+          serviceName: <myservice2>
           servicePort: 80
 ```
 {: codeblock}
@@ -2343,7 +2343,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=&lt;size&gt;
+   ingress.bluemix.net/client-max-body-size: size=<size>
 spec:
  tls:
  - hosts:
@@ -2398,7 +2398,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/global-rate-limit: "key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number-of-connections&gt;"
+    ingress.bluemix.net/global-rate-limit: "key=<key> rate=<rate> conn=<number-of-connections>"
 spec:
   tls:
   - hosts:
@@ -2454,7 +2454,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/service-rate-limit: "serviceName=<myservice> key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
+    ingress.bluemix.net/service-rate-limit: "serviceName=<myservice> key=<key> rate=<rate> conn=<number_of_connections>"
 spec:
   tls:
   - hosts:
@@ -2528,7 +2528,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=<myservice>"
+    ingress.bluemix.net/appid-auth: "bindSecret=<bind_secret> namespace=<namespace> requestType=<request_type> serviceName=<myservice>"
 spec:
   tls:
   - hosts:
