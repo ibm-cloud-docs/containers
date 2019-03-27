@@ -578,9 +578,15 @@ spec:
 </tbody>
 </table>
 
-<p class="tip">You can use the <code>server-snippets</code> annotation to add a header for all service responses at a server level:</br> <pre class="codeblock">annotations:
+You can use the `server-snippets` annotation to add a header for all service responses at a server level:
+{: tip}
+
+```
+annotations:
   ingress.bluemix.net/server-snippets: |
-    add_header <header1> <value1>;</pre></p>
+    add_header &lt;header1&gt; &lt;value1&gt;;
+```
+{: codeblock}
 
 <br />
 
@@ -1140,7 +1146,7 @@ spec:
 
   Your CLI output looks similar to the following:
   ```
-  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+  NAME                                             TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                      AGE
   public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d
   ```
   {: screen}
@@ -1179,7 +1185,7 @@ spec:
   NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
   public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx <port1>:30776/TCP,<port2>:30412/TCP   109d
   ```
-  {: codeblock}
+  {: screen}
 
 5. Configure your Ingress to use the non-default ports when routing incoming network traffic to your services. Use the annotation in the sample YAML file in this reference.
 
@@ -1362,21 +1368,21 @@ spec:
     {: tip}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       ca.crt: <ca_certificate>
-     ```
-     {: codeblock}
+   ```
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: ssl-my-test
+   type: Opaque
+   data:
+     ca.crt: <ca_certificate>
+   ```
+   {: codeblock}
 4. Create the certificate as a Kubernetes secret.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
+   ```
+   kubectl create -f ssl-my-test
+   ```
+   {: pre}
 
 <br />
 
@@ -1446,25 +1452,25 @@ spec:
 1. Get the certificate authority (CA) key and certificate from your upstream server and an SSL client certificate. The IBM ALB is based on NGINX, which requires the root certificate, intermediate certificate, and back-end certificate. For more information, see the [NGINX docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/).
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       trusted.crt: <ca_certificate>
-     ```
-     {: codeblock}
+   ```
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: ssl-my-test
+   type: Opaque
+   data:
+     trusted.crt: <ca_certificate>
+   ```
+   {: codeblock}
 
-     To also enforce mutual authentication for upstream traffic, you can provide a `client.crt` and `client.key` in addition to the `trusted.crt` in the data section.
-     {: tip}
+   To also enforce mutual authentication for upstream traffic, you can provide a `client.crt` and `client.key` in addition to the `trusted.crt` in the data section.
+   {: tip}
 
 4. Create the certificate as a Kubernetes secret.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
+   ```
+   kubectl create -f ssl-my-test
+   ```
+   {: pre}
 
 </br>
 **To create a mutual authentication secret:**
@@ -1474,21 +1480,21 @@ spec:
     {: tip}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
 3. Create a secret YAML file using the cert.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       ca.crt: <ca_certificate>
-     ```
-     {: codeblock}
+   ```
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: ssl-my-test
+   type: Opaque
+   data:
+     ca.crt: <ca_certificate>
+   ```
+   {: codeblock}
 4. Create the certificate as a Kubernetes secret.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
+   ```
+   kubectl create -f ssl-my-test
+   ```
+   {: pre}
 
 <br />
 
@@ -1558,8 +1564,8 @@ spec:
 
   Your CLI output looks similar to the following:
   ```
-  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx 80:30416/TCP,443:32668/TCP   109d
+  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE
+  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx   80:30416/TCP,443:32668/TCP   109d
   ```
   {: screen}
 
@@ -1576,14 +1582,14 @@ spec:
   apiVersion: v1
   kind: ConfigMap
   data:
-   public-ports: 80;443;<port1>;<port2>
+    public-ports: 80;443;<port1>;<port2>
   metadata:
-   creationTimestamp: 2017-08-22T19:06:51Z
-   name: ibm-cloud-provider-ingress-cm
-   namespace: kube-system
-   resourceVersion: "1320"
-   selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
-   uid: <uid>
+    creationTimestamp: 2017-08-22T19:06:51Z
+    name: ibm-cloud-provider-ingress-cm
+    namespace: kube-system
+    resourceVersion: "1320"
+    selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
+    uid: <uid>
    ```
   {: codeblock}
 
@@ -1594,8 +1600,8 @@ spec:
   {: pre}
   Your CLI output looks similar to the following:
   ```
-  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx <port1>:30776/TCP,<port2>:30412/TCP   109d
+  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE
+  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx   <port1>:30776/TCP,<port2>:30412/TCP   109d
   ```
   {: screen}
 
@@ -1684,7 +1690,7 @@ Modify the way the ALB matches the request URI against the app path.
 {:shortdesc}
 
 **Description**</br>
-By default, ALBs process the paths that apps listen on as prefixes. When an ALB receives a request to an app, the ALB checks the Ingress resource for a path (as a prefix) that matches the beginning of the request URI. If a match is found, the request is forwarded to the IP address of the pod where the app is deployed.<br><br>
+By default, ALBs process the paths that apps listen on as prefixes. When an ALB receives a request to an app, the ALB checks the Ingress resource for a path (as a prefix) that matches the beginning of the request URI. If a match is found, the request is forwarded to the IP address of the pod where the app is deployed.
 
 The `location-modifier` annotation changes the way the ALB searches for matches by modifying the location block configuration. The location block determines how requests are handled for the app path.
 
@@ -1809,7 +1815,7 @@ spec:
 </tr>
 <tr>
 <td><code>rewrite</code></td>
-<td>Replace <code>&lt;<em>target_path</em>&gt;</code> with the path that your app listens on. Incoming network traffic on the ALB domain is forwarded to the Kubernetes service by using this path. Most apps do not listen on a specific path, but use the root path and a specific port. In the example for <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code>, the rewrite path is <code>/coffee</code>. <strong>Note</strong>: If you apply this file and the URL shows a <code>404</code> response, your backend app might be listening on a path that ends in `/`. Try adding a trailing `/` to this rewrite field, then reapply the file and try the URL again.</td>
+<td>Replace <code>&lt;<em>target_path</em>&gt;</code> with the path that your app listens on. Incoming network traffic on the ALB domain is forwarded to the Kubernetes service by using this path. Most apps do not listen on a specific path, but use the root path and a specific port. In the example for <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code>, the rewrite path is <code>/coffee</code>. <p class= "note">If you apply this file and the URL shows a <code>404</code> response, your backend app might be listening on a path that ends in `/`. Try adding a trailing `/` to this rewrite field, then reapply the file and try the URL again.</p></td>
 </tr>
 </tbody></table>
 
@@ -2164,7 +2170,7 @@ Add extra header information to a client request before sending the request to t
 {:shortdesc}
 
 **Description**</br>
-The Ingress ALB acts as a proxy between the client app and your back-end app. Client requests that are sent to the ALB are processed (proxied) and put into a new request that is then sent to your back-end app. Similarly, back-end app responses that are sent to the ALB are processed (proxied) and put into a new response that is then sent to the client. Proxying a request or response removes HTTP header information, such as the user name, that was initially sent from the client or back-end app.<br><br>
+The Ingress ALB acts as a proxy between the client app and your back-end app. Client requests that are sent to the ALB are processed (proxied) and put into a new request that is then sent to your back-end app. Similarly, back-end app responses that are sent to the ALB are processed (proxied) and put into a new response that is then sent to the client. Proxying a request or response removes HTTP header information, such as the user name, that was initially sent from the client or back-end app.
 
 If your back-end app requires HTTP header information, you can use the `proxy-add-headers` annotation to add header information to the client request before the request is forwarded by the ALB to the back-end app. If the client web app requires HTTP header information, you can use the `response-add-headers` annotation to add header information to the response before the response is forwarded by the ALB to the client web app.<br>
 
@@ -2189,9 +2195,17 @@ ingress.bluemix.net/proxy-add-headers: |
 ```
 {: codeblock}
 
-<p class="tip">The <code>response-add-headers</code> annotation does not support global headers for all services. To add a header for all service responses at a server level, you can use the [<code>server-snippets</code> annotation](#server-snippets):</br> <pre class="codeblock">annotations:
+</br></br>
+
+The `response-add-headers` annotation does not support global headers for all services. To add a header for all service responses at a server level, you can use the [`server-snippets` annotation](#server-snippets):
+{: tip}
+```
+annotations:
   ingress.bluemix.net/server-snippets: |
-    add_header <header1> <value1>;</pre></p>
+    add_header &lt;header1&gt; &lt;value1&gt;;
+```
+{: pre}
+</br></br>
 
 **Sample Ingress resource YAML**</br>
 ```
@@ -2430,8 +2444,8 @@ spec:
 <td>Replace <code>&lt;<em>rate</em>&gt;</code> with the processing rate. Enter a value as a rate per second (r/s) or rate per minute (r/m). Example: <code>50r/m</code>.</td>
 </tr>
 <tr>
-<td><code>number-of-connections</code></td>
-<td>Replace <code>&lt;<em>conn</em>&gt;</code> with the number of connections.</td>
+<td><code>conn</code></td>
+<td>Replace <code>&lt;<em>number-of-connections</em>&gt;</code> with the number of connections.</td>
 </tr>
 </tbody></table>
 
@@ -2490,8 +2504,8 @@ spec:
 <td>Replace <code>&lt;<em>rate</em>&gt;</code> with the processing rate. To define a rate per second, use r/s: <code>10r/s</code>. To define a rate per minute, use r/m: <code>50r/m</code>.</td>
 </tr>
 <tr>
-<td><code>number-of_connections</code></td>
-<td>Replace <code>&lt;<em>conn</em>&gt;</code> with the number of connections.</td>
+<td><code>conn</code></td>
+<td>Replace <code>&lt;<em>number-of-connections</em>&gt;</code> with the number of connections.</td>
 </tr>
 </tbody></table>
 
@@ -2511,7 +2525,6 @@ Use {{site.data.keyword.appid_full_notm}} to authenticate with your app.
 {:shortdesc}
 
 **Description**</br>
-
 Authenticate web or API HTTP/HTTPS requests with {{site.data.keyword.appid_short_notm}}.
 
 If you set the request type to web, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page. For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.
@@ -2584,6 +2597,7 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
   1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Identity providers > Manage**.
   2. Make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
   3. In the **Add web redirect URLs** field, add redirect URLs for your app in the format `http://<hostname>/<app_path>/appid_callback` or `https://<hostname>/<app_path>/appid_callback`.
+
     {{site.data.keyword.appid_full_notm}} offers a logout function: If `/logout` exists in your {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page. To use this function, you must append `/appid_logout` to your domain in the format `https://<hostname>/<app_path>/appid_logout` and include this URL in the redirect URLs list.
     {: note}
 
