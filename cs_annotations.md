@@ -479,7 +479,6 @@ Route incoming requests to your apps with a private ALB.
 {:shortdesc}
 
 **Description**</br>
-
 Choose a private ALB to route incoming requests instead of the public ALB.
 
 **Sample Ingress resource YAML**</br>
@@ -584,7 +583,7 @@ You can use the `server-snippets` annotation to add a header for all service res
 ```
 annotations:
   ingress.bluemix.net/server-snippets: |
-    add_header &lt;header1&gt; &lt;value1&gt;;
+    add_header <header1> <value1>;
 ```
 {: codeblock}
 
@@ -662,7 +661,6 @@ spec:
 {: #keepalive-requests}
 
 **Description**</br>
-
 Sets the maximum number of requests that can be served through one keepalive connection.
 
 **Sample Ingress resource YAML**</br>
@@ -712,7 +710,6 @@ spec:
 {: #keepalive-timeout}
 
 **Description**</br>
-
 Sets the maximum time that a keepalive connection stays open on the server.
 
 **Sample Ingress resource YAML**</br>
@@ -765,7 +762,6 @@ Set when the ALB can pass a request to the next upstream server.
 {:shortdesc}
 
 **Description**</br>
-
 The Ingress ALB acts as a proxy between the client app and your app. Some app setups require multiple upstream servers that handle incoming client requests from the ALB. Sometimes the proxy server that the ALB uses cannot establish a connection with an upstream server that the app uses. The ALB can then try to establish a connection with the next upstream server to pass the request to it instead. You can use the `proxy-next-upstream-config` annotation to set in which cases, how long, and how many times the ALB can try to pass a request to the next upstream server.
 
 Timeout is always configured when you use `proxy-next-upstream-config`, so don't add `timeout=true` to this annotation.
@@ -928,7 +924,6 @@ Set the amount of time during which the ALB can attempt to connect to the server
 {:shortdesc}
 
 **Description**</br>
-
 Set the amount of time during which the ALB can attempt to connect to a server before the server is considered unavailable. For a server to be considered unavailable, the ALB must hit the maximum number of failed connection attempts set by the [`upstream-max-fails`](#upstream-max-fails) annotation within the set amount of time. This amount of time also determines how long the server is considered unavailable.
 
 **Sample Ingress resource YAML**</br>
@@ -980,7 +975,6 @@ Set the maximum number of idle keepalive connections for an upstream server.
 {:shortdesc}
 
 **Description**</br>
-
 Set the maximum number of idle keepalive connections to the upstream server of a given service. The upstream server has 64 idle keepalive connections by default.
 
 **Sample Ingress resource YAML**</br>
@@ -1033,7 +1027,6 @@ Set the maximum number of unsuccessful attempts to communicate with the server.
 {:shortdesc}
 
 **Description**</br>
-
 Set the maximum number of times the ALB can fail to connect to the server before the server is considered unavailable. For the server to be considered unavailable, the ALB must hit the maximum number within the duration of time set by the [`upstream-fail-timeout`](#upstream-fail-timeout) annotation. The duration of time that the server is considered unavailable is also set by the `upstream-fail-timeout` annotation.
 
 **Sample Ingress resource YAML**</br>
@@ -1163,14 +1156,14 @@ spec:
   apiVersion: v1
   kind: ConfigMap
   data:
-   public-ports: <port1>;<port2>
+    public-ports: <port1>;<port2>
   metadata:
-   creationTimestamp: 2017-08-22T19:06:51Z
-   name: ibm-cloud-provider-ingress-cm
-   namespace: kube-system
-   resourceVersion: "1320"
-   selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
-   uid: <uid>
+    creationTimestamp: 2017-08-22T19:06:51Z
+    name: ibm-cloud-provider-ingress-cm
+    namespace: kube-system
+    resourceVersion: "1320"
+    selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
+    uid: <uid>
   ```
   {: codeblock}
 
@@ -1182,8 +1175,8 @@ spec:
 
   Your CLI output looks similar to the following:
   ```
-  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
-  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx  169.xx.xxx.xxx <port1>:30776/TCP,<port2>:30412/TCP   109d
+  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                           AGE
+  public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx <port1>:30776/TCP,<port2>:30412/TCP   109d
   ```
   {: screen}
 
@@ -1243,7 +1236,6 @@ spec:
 {: #hsts}
 
 **Description**</br>
-
 HSTS instructs the browser to only access a domain by using HTTPS. Even if the user enters or follows a plain HTTP link, the browser strictly upgrades the connection to HTTPS.
 
 **Sample Ingress resource YAML**</br>
@@ -1304,7 +1296,6 @@ Configure mutual authentication for the ALB.
 {:shortdesc}
 
 **Description**</br>
-
 Configure mutual authentication of downstream traffic for the Ingress ALB. The external client authenticates the server and the server also authenticates the client by using certificates. Mutual authentication is also known as certificate-based authentication or two-way authentication.
 
 Use the `mutual-auth` annotation for SSL termination between the client and the Ingress ALB. Use the [`ssl-services` annotation](#ssl-services) for SSL termination between the Ingress ALB and the back-end app.
@@ -1394,7 +1385,6 @@ Allow HTTPS requests and encrypt traffic to your upstream apps.
 {:shortdesc}
 
 **Description**</br>
-
 When your Ingress resource configuration has a TLS section, the Ingress ALB can handle HTTPS-secured URL requests to your app. By default, the ALB terminates the TLS termination and decrypts the request before using the HTTP protocol to forward the traffic to your apps. If you have apps that require the HTTPS protocol and need traffic to be encrypted, use the `ssl-services` annotation. With the `ssl-services` annotation, the ALB terminates the external TLS connection, then creates a new SSL connection between the ALB and the app pod. Traffic is re-encrypted before it is sent to the upstream pods.
 
 If your back-end app can handle TLS and you want to add additional security, you can add one-way or mutual authentication by providing a certificate that is contained in a secret.
@@ -1506,7 +1496,6 @@ Access an app via a non-standard TCP port.
 {:shortdesc}
 
 **Description**</br>
-
 Use this annotation for an app that is running a TCP streams workload.
 
 <p class="note">The ALB operates in pass-through mode and forwards traffic to back-end apps. SSL termination is not supported in this case. The TLS connection is not terminated and passes through untouched.</p>
@@ -1600,7 +1589,7 @@ spec:
   {: pre}
   Your CLI output looks similar to the following:
   ```
-  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE
+  NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                               AGE
   public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx   <port1>:30776/TCP,<port2>:30412/TCP   109d
   ```
   {: screen}
@@ -1778,6 +1767,7 @@ Route incoming network traffic on an ALB domain path to a different path that yo
 
 **Description**</br>
 Your Ingress ALB domain routes incoming network traffic on `mykubecluster.us-south.containers.appdomain.cloud/beans` to your app. Your app listens on `/coffee`, instead of `/beans`. To forward incoming network traffic to your app, add the rewrite annotation to your Ingress resource configuration file. The rewrite annotation ensures that incoming network traffic on `/beans` is forwarded to your app by using the `/coffee` path. When including multiple services, use only a semi-colon (;) to separate them.
+
 **Sample Ingress resource YAML**</br>
 
 ```
@@ -1943,7 +1933,6 @@ Configure the number and size of proxy buffers for the ALB.
 {:shortdesc}
 
 **Description**</br>
-
 Set the number and size of the buffers that read a response for a single connection from the proxied server. The configuration is applied to all of the services in the Ingress subdomain unless a service is specified. For example, if a configuration such as `serviceName=SERVICE number=2 size=1k` is specified, 1k is applied to the service. If a configuration such as `number=2 size=1k` is specified, 1k is applied to all of the services in the Ingress subdomain.</br>
 <p class="tip">If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your back end sent a header size that is larger than the default limit. Increase the size for both `proxy-buffers` and [`proxy-buffer-size`](#proxy-buffer-size).</p>
 
@@ -1984,11 +1973,11 @@ spec:
 </tr>
 <tr>
 <td><code>number</code></td>
-<td>Replace <code>&lt;<em>number_of_buffers</em>&gt;</code> with a number, such as <em>2</em>.</td>
+<td>Replace <code>&lt;<em>number_of_buffers</em>&gt;</code> with a number, such as <code>2</code>.</td>
 </tr>
 <tr>
 <td><code>size</code></td>
-<td>Replace <code>&lt;<em>size</em>&gt;</code> with the size of each buffer in kilobytes (k or K), such as <em>1K</em>.</td>
+<td>Replace <code>&lt;<em>size</em>&gt;</code> with the size of each buffer in kilobytes (k or K), such as <code>1K</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -2003,7 +1992,6 @@ Configure the size of the proxy buffer that reads the first part of the response
 {:shortdesc}
 
 **Description**</br>
-
 Set the size of the buffer that reads the first part of the response that is received from the proxied server. This part of the response usually contains a small response header. The configuration is applied to all of the services in the Ingress subdomain unless a service is specified. For example, if a configuration such as `serviceName=SERVICE size=1k` is specified, 1k is applied to the service. If a configuration such as `size=1k` is specified, 1k is applied to all of the services in the Ingress subdomain.
 
 If you get the error message `upstream sent too big header while reading response header from upstream`, the upstream server in your back end sent a header size that is larger than the default limit. Increase the size for both `proxy-buffer-size` and [`proxy-buffers`](#proxy-buffers).
@@ -2045,7 +2033,7 @@ spec:
 </tr>
 <tr>
 <td><code>size</code></td>
-<td>Replace <code>&lt;<em>size</em>&gt;</code> with the size of each buffer in kilobytes (k or K), such as <em>1K</em>. To calculate the proper size, you can check out [this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.getpagespeed.com/server-setup/nginx/tuning-proxy_buffer_size-in-nginx). </td>
+<td>Replace <code>&lt;<em>size</em>&gt;</code> with the size of each buffer in kilobytes (k or K), such as <code>1K</code>. To calculate the proper size, you can check out [this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.getpagespeed.com/server-setup/nginx/tuning-proxy_buffer_size-in-nginx). </td>
 </tr>
 </tbody></table>
 
@@ -2059,7 +2047,6 @@ Configure the size of proxy buffers that can be busy.
 {:shortdesc}
 
 **Description**</br>
-
 Limit the size of any buffers that are sending a response to the client while the response is not yet fully read. In the meantime, the rest of the buffers can read the response and, if needed, buffer part of the response to a temporary file. The configuration is applied to all of the services in the Ingress subdomain unless a service is specified. For example, if a configuration such as `serviceName=SERVICE size=1k` is specified, 1k is applied to the service. If a configuration such as `size=1k` is specified, 1k is applied to all of the services in the Ingress subdomain.
 
 **Sample Ingress resource YAML**</br>
@@ -2098,7 +2085,7 @@ spec:
 </tr>
 <tr>
 <td><code>size</code></td>
-<td>Replace <code>&lt;<em>size</em>&gt;</code> with the size of each buffer in kilobytes (k or K), such as <em>1K</em>.</td>
+<td>Replace <code>&lt;<em>size</em>&gt;</code> with the size of each buffer in kilobytes (k or K), such as <code>1K</code>.</td>
 </tr>
 </tbody></table>
 
@@ -2195,17 +2182,17 @@ ingress.bluemix.net/proxy-add-headers: |
 ```
 {: codeblock}
 
-</br></br>
+</br>
 
 The `response-add-headers` annotation does not support global headers for all services. To add a header for all service responses at a server level, you can use the [`server-snippets` annotation](#server-snippets):
 {: tip}
 ```
 annotations:
   ingress.bluemix.net/server-snippets: |
-    add_header &lt;header1&gt; &lt;value1&gt;;
+    add_header <header1> <value1>;
 ```
 {: pre}
-</br></br>
+</br>
 
 **Sample Ingress resource YAML**</br>
 ```
@@ -2402,7 +2389,6 @@ Limit the request processing rate and number of connections per a defined key fo
 {:shortdesc}
 
 **Description**</br>
-
 For all services, limit the request processing rate and the number of connections per a defined key that are coming from a single IP address for all paths of the selected back ends.
 
 **Sample Ingress resource YAML**</br>
