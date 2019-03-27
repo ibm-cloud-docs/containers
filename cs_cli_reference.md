@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-03-27"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -1264,14 +1264,14 @@ trusted: <em>true</em>
   {: #example_cluster_create}
 
   ```
-  ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
+  ibmcloud ks cluster-create --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
   **Create subsequent standard clusters**: If you already created a standard cluster in this zone or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN with the `--public-vlan` flag. To find out if you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run `ibmcloud ks vlans <zone>`.
 
   ```
-  ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
+  ibmcloud ks cluster-create --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
@@ -3729,14 +3729,14 @@ diskEncryption: <em>false</em></code></pre>
 **Examples**:
 
   ```
-  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --hardware shared
+  ibmcloud ks worker-add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --hardware shared
   ```
   {: pre}
 
   Example for {{site.data.keyword.Bluemix_dedicated_notm}}:
 
   ```
-  ibmcloud ks worker-add --cluster my_cluster --workers 3 --machine-type b2c.4x16
+  ibmcloud ks worker-add --cluster my_cluster --workers 3 --machine-type b3c.4x16
   ```
   {: pre}
 
@@ -4178,7 +4178,7 @@ ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type
 **Example**:
 
   ```
-  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b2c.4x16 --size-per-zone 6
+  ibmcloud ks worker-pool-create --name my_pool --cluster my_cluster --machine-type b3c.4x16 --size-per-zone 6
   ```
   {: pre}
 
@@ -4227,7 +4227,7 @@ ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--
   Hardware:           shared
   Zones:              dal10,dal12
   Workers per zone:   3
-  Machine type:       b2c.4x16.encrypted
+  Machine type:       b3c.4x16.encrypted
   Labels:             -
   Version:            1.12.6_1512
   ```

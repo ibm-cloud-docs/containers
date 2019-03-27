@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-03-27"
 
 keywords: kubernetes, iks
 
@@ -72,7 +72,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 2. [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli) by using the VLAN ID that you identified. Include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
 
     ```
-    ibmcloud ks cluster-create --zone dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
+    ibmcloud ks cluster-create --zone dal10 --machine-type b3c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
     If you can't remember which zone the VLAN is in for the `--zone` flag, you can check whether the VLAN is in a certain zone by running `ibmcloud ks vlans --zone <zone>`.

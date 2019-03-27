@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-03-27"
 
 keywords: kubernetes, iks
 
@@ -142,7 +142,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
                     failure-domain.beta.kubernetes.io/zone=dal12
                     ibm-cloud.kubernetes.io/encrypted-docker-data=true
                     ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                    ibm-cloud.kubernetes.io/machine-type=u2c.2x4.encrypted
+                    ibm-cloud.kubernetes.io/machine-type=u3c.2x4.encrypted
                     kubernetes.io/hostname=10.123.45.3
                     privateVLAN=2299001
                     publicVLAN=2299012

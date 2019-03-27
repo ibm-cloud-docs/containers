@@ -790,14 +790,14 @@ To deploy apps to specific worker nodes:
     Roles:              <none>
     Labels:             arch=amd64
                         beta.kubernetes.io/arch=amd64
-                        beta.kubernetes.io/instance-type=b2c.4x16.encrypted
+                        beta.kubernetes.io/instance-type=b3c.4x16.encrypted
                         beta.kubernetes.io/os=linux
                         failure-domain.beta.kubernetes.io/region=us-south
                         failure-domain.beta.kubernetes.io/zone=dal10
                         ibm-cloud.kubernetes.io/encrypted-docker-data=true
                         ibm-cloud.kubernetes.io/ha-worker=true
                         ibm-cloud.kubernetes.io/iaas-provider=softlayer
-                        ibm-cloud.kubernetes.io/machine-type=b2c.4x16.encrypted
+                        ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
                         ibm-cloud.kubernetes.io/worker-version=1.12.6_1534
@@ -872,9 +872,9 @@ To deploy apps to specific worker nodes:
 
         ```
         ID                                                 Public IP       Private IP     Machine Type      State    Status  Zone    Version
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b2c.4x16          normal   Ready   dal10   1.8.6_1504
-        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b2c.4x16          normal   Ready   dal12   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w7   169.xx.xxx.xxx  10.176.48.78   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal10-crb20b637238bb471f8b4b8b881bbb4962-w8   169.xx.xxx.xxx  10.176.48.83   b3c.4x16          normal   Ready   dal10   1.8.6_1504
+        kube-dal12-crb20b637238bb471f8b4b8b881bbb4962-w9   169.xx.xxx.xxx  10.176.48.69   b3c.4x16          normal   Ready   dal12   1.8.6_1504
         ```
         {: screen}
 
