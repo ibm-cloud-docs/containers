@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-03-27"
 
 ---
 
@@ -163,8 +163,9 @@ lastupdated: "2019-03-26"
 * [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
 * [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_cli_install#cs_api)
-  * [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
-  * [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
+* [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_cli_install#kube_api)
+* [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
+* [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
 
 ## Administering clusters
 {: #sitemap-clusters-admin}
