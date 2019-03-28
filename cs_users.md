@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-03-28"
 
 keywords: kubernetes, iks
 
@@ -130,6 +130,8 @@ When you create your {{site.data.keyword.Bluemix_notm}} account, the default res
 
 After you [understand how roles, users, and resources in your account](#access_policies) can be managed, use the following checklist to configure user access in your cluster.
 {: shortdesc}
+
+<p class="tip">Do not assign {{site.data.keyword.Bluemix_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
 
 1. [Set the API key](#api_key) for all the regions and resource groups that you want to create clusters in.
 2. Invite users to your account and [assign them {{site.data.keyword.Bluemix_notm}} IAM roles](#platform) for the {{site.data.keyword.containerlong_notm}}. 
@@ -396,6 +398,8 @@ Set {{site.data.keyword.Bluemix_notm}} IAM platform management and service acces
 Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_notm}} IAM platform management and service access roles with the {{site.data.keyword.Bluemix_notm}} console.
 {: shortdesc}
 
+<p class="tip">Do not assign platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
+
 Before you begin, verify that you're assigned the **Administrator** platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/). From the menu bar, select **Manage > Access (IAM)**.
@@ -453,7 +457,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
 Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_notm}} IAM platform management and service access roles with the CLI.
 {: shortdesc}
 
-You cannot use the CLI to scope a service role to a Kubernetes namespace. [Use the {{site.data.keyword.Bluemix_notm}} console](#add_users) instead.
+You cannot use the CLI to scope a service role to a Kubernetes namespace. [Use the {{site.data.keyword.Bluemix_notm}} console](#add_users) instead. Do not assign {{site.data.keyword.Bluemix_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.
 {: important}
 
 **Before you begin**:

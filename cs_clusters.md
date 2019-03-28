@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-03-28"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -75,6 +75,7 @@ Follow the steps to prepare the setup of your cluster.
     1.  From the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) menu bar, click **Manage > Access (IAM)**.
     2.  Click the **Users** page, and then from the table, select yourself.
     3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}. **Note**: If you have the **Administrator** role for {{site.data.keyword.containershort_notm}} in only one resource group or region instead of the entire account, you must have at least the **Viewer** role at the account level to see the account's VLANs.
+    <p class="tip">Make sure that your account administrator does not assign you the **Administrator** platform role at the same time as a service role. You must assign platform and service roles separately.</p>
 2.  Decide between a [free or standard cluster](/docs/containers?topic=containers-cs_ov#cluster_types). You can create 1 free cluster to try out some of the capabilities for 30 days, or create fully-customizable standard clusters with your choice of hardware isolation. Create a standard cluster to get more benefits and control over your cluster performance.
 3.  [Plan your cluster set up](/docs/containers?topic=containers-plan_clusters#plan_clusters).
     *  Decide whether to create a [single zone](/docs/containers?topic=containers-plan_clusters#single_zone) or [multizone](/docs/containers?topic=containers-plan_clusters#multizone) cluster. Note that multizone clusters are available in select locations only.
