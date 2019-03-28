@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-03-28"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -42,18 +42,18 @@ You can choose your logging solution based on which cluster components you need 
 
 <dl>
 
+<dt>{{site.data.keyword.la_full_notm}}</dt>
+<dd>Manage pod container logs by deploying LogDNA as a third-party service to your cluster. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</dd>
+
 <dt>Fluentd with {{site.data.keyword.loganalysisfull_notm}} or syslog</dt>
 <dd>To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) cluster add-on collects logs from the paths for a specified source. Fluentd then forwards these logs to {{site.data.keyword.loganalysisfull_notm}} or an external syslog server.
 
-<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) expands your log collection, retention, and search abilities. When you create a logging configuration that forwards logs for a source to {{site.data.keyword.loganalysisfull_notm}}, you can view your logs in a Kibana dashboard.</li>
+<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) expands your log collection, retention, and search abilities. When you create a logging configuration that forwards logs for a source to {{site.data.keyword.loganalysisshort_notm}}, you can view your logs in a Kibana dashboard.<p class="deprecated">{{site.data.keyword.loganalysisfull_notm}} is deprecated. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting logs for your cluster, you can forward logs collected by Fluentd to an external syslog server or set up {{site.data.keyword.la_full_notm}}.</p></li>
 
 <li><strong>External syslog server</strong>: Set up an external server that accepts a syslog protocol. Then, you can create a logging configuration for a source in your cluster to forward logs to that external server.</li></ul>
 
 To get started, see [Understanding cluster and app log forwarding](#logging).
 </dd>
-
-<dt>{{site.data.keyword.la_full_notm}}</dt>
-<dd>Manage pod container logs by deploying LogDNA as a third-party service to your cluster. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</dd>
 
 <dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
 <dd>To monitor user-initiated administrative activity made in your cluster, you can collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}. Clusters generate two types of {{site.data.keyword.cloudaccesstrailshort}} events.
@@ -73,11 +73,14 @@ For more information about the types of {{site.data.keyword.containerlong_notm}}
 
 </dl>
 
-## Understanding cluster and app log forwarding
+## Understanding cluster and app log forwarding to syslog
 {: #logging}
 
 By default, logs are collected by the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) add-on in your cluster. When you create a logging configuration for a source in your cluster such as a container, the logs that Fluentd collects from that source's paths are forwarded to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server. The traffic from the source to the logging service on the ingestion port is encrypted.
 {: shortdesc}
+
+{{site.data.keyword.loganalysisfull_notm}} is deprecated. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting logs for your cluster, you can forward logs collected by Fluentd to an external syslog server or set up {{site.data.keyword.la_full_notm}}.
+{: deprecated}
 
 **What are the sources that I can configure log forwarding for?**
 
@@ -206,11 +209,14 @@ You can forward container logs from one namespace to one Cloud Foundry space, an
 <br />
 
 
-## Configuring cluster and app log forwarding
+## Forwarding cluster and app logs to syslog
 {: #configuring}
 
 You can configure logging for {{site.data.keyword.containerlong_notm}} standard clusters through the console or through the CLI.
 {: shortdesc}
+
+{{site.data.keyword.loganalysisfull_notm}} is deprecated. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting logs for your cluster, you can forward logs collected by Fluentd to an external syslog server or set up {{site.data.keyword.la_full_notm}}.
+{: deprecated}
 
 ### Enabling log forwarding with the {{site.data.keyword.Bluemix_notm}} console
 {: #enable-forwarding-ui}
@@ -240,7 +246,64 @@ You can create a configuration for cluster logging. You can differentiate betwee
 
 Before you begin, [create](/docs/containers?topic=containers-clusters#clusters) or identify a standard cluster to use.
 
-**Forwarding logs to IBM**
+**Forwarding logs to your own server over the `udp` or `tcp` protocols**
+
+1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+
+3. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
+  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
+
+  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
+
+  You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server is running: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
+  {: tip}
+
+4. Create a log forwarding configuration.
+    ```
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ```
+    {: pre}
+
+</br></br>
+
+**Forwarding logs to your own server over the `tls` protocol**
+
+The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
+{: tip}
+
+1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+    * **Editor** or **Administrator** platform role for the cluster
+    * **Writer** or **Manager** service role for the `kube-system` namespace
+
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+
+3. Set up a server that accepts a syslog protocol in one of two ways:
+  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
+
+  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You will need to inject the relevant Certificate Authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
+
+4. Save your Certificate Authority certificate to a file named `ca-cert`. It must be that exact name.
+
+5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, you will use the secret name for the `--ca-cert` flag.
+    ```
+    kubectl -n kube-system create secret generic --from-file=ca-cert
+    ```
+    {: pre}
+
+6. Create a log forwarding configuration.
+    ```
+    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
+    ```
+    {: pre}
+
+</br></br>
+
+**Forwarding logs to {{site.data.keyword.loganalysisfull_notm}}**
+
+{{site.data.keyword.loganalysisfull_notm}} is deprecated. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting logs for your cluster, you can forward logs collected by Fluentd to an external syslog server or set up {{site.data.keyword.la_full_notm}}.
+{: deprecated}
 
 1. Verify permissions.
     1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
@@ -292,67 +355,7 @@ Before you begin, [create](/docs/containers?topic=containers-clusters#clusters) 
 If you have apps that run in your containers that can't be configured to write logs to STDOUT or STDERR, you can create a logging configuration to forward logs from app log files.
 {: tip}
 
-</br>
-</br>
-
-
-**Forwarding logs to your own server over the `udp` or `tcp` protocols**
-
-1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
-
-2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
-
-3. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
-  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
-
-  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
-
-  You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server is running: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
-  {: tip}
-
-4. Create a log forwarding configuration.
-    ```
-    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
-    ```
-    {: pre}
-
-</br>
-</br>
-
-
-**Forwarding logs to your own server over the `tls` protocol**
-
-The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
-{: tip}
-
-1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
-    * **Editor** or **Administrator** platform role for the cluster
-    * **Writer** or **Manager** service role for the `kube-system` namespace
-
-2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
-
-3. Set up a server that accepts a syslog protocol in one of two ways:
-  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
-
-  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You will need to inject the relevant Certificate Authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
-
-4. Save your Certificate Authority certificate to a file named `ca-cert`. It must be that exact name.
-
-5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, you will use the secret name for the `--ca-cert` flag.
-    ```
-    kubectl -n kube-system create secret generic --from-file=ca-cert
-    ```
-    {: pre}
-
-6. Create a log forwarding configuration.
-    ```
-    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
-    ```
-    {: pre}
-
-</br>
-</br>
-
+</br></br>
 
 ### Verifying log forwarding
 {: verify-logging}
@@ -438,7 +441,7 @@ You can leverage the built-in container runtime logging capabilities to review a
 <br />
 
 
-## Filtering logs
+## Filtering logs that are forwarded to syslog
 {: #filter-logs}
 
 You can choose which logs that you forward by filtering out specific logs for a period of time. You can differentiate between the different filtering options by using flags.
@@ -523,12 +526,14 @@ You can choose which logs that you forward by filtering out specific logs for a 
 
 
 
-## Configuring log forwarding for Kubernetes API audit logs
+## Forwarding Kubernetes API audit logs to syslog
 {: #api_forward}
 
 Kubernetes automatically audits any events that are passed through your Kubernetes API server. You can forward the events to {{site.data.keyword.loganalysisshort_notm}} or to an external server.
 {: shortdesc}
 
+{{site.data.keyword.loganalysisfull_notm}} is deprecated. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting logs for your cluster, you can forward logs collected by Fluentd to an external syslog server or set up {{site.data.keyword.la_full_notm}}.
+{: deprecated}
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
 
@@ -537,92 +542,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 * There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.loganalysisshort_notm}} and an external server by creating a logging configuration and a webhook.
 * You must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
-
-### Sending audit logs to {{site.data.keyword.loganalysisshort_notm}}
-{: #audit_enable_loganalysis}
-
-You can forward your Kubernetes API server audit logs to {{site.data.keyword.loganalysisshort_notm}}.
-{: shortdesc}
-
-**Before you begin**
-
-1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containerlong_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
-
-2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
-
-**Forwarding logs**
-
-1. Create a logging configuration.
-
-    ```
-    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource kube-audit --space <cluster_space> --org <cluster_org> --hostname <ingestion_URL> --type ibm
-    ```
-    {: pre}
-
-    Example command and output:
-
-    ```
-    ibmcloud ks logging-config-create myCluster --logsource kube-audit
-    Creating logging configuration for kube-audit logs in cluster myCluster...
-    OK
-    Id                                     Source      Namespace   Host                                   Port     Org    Space   Server Type   Protocol  Application Containers   Paths
-    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -         ingest-au-syd.logging.bluemix.net✣    9091✣     -       -         ibm          -              -                  -
-
-    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
-
-    ```
-    {: screen}
-
-    <table>
-    <caption>Understanding this command's components</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-          <td>The name or ID of the cluster.</td>
-        </tr>
-        <tr>
-          <td><code><em>&lt;ingestion_URL&gt;</em></code></td>
-          <td>The endpoint where you want to forward logs. If you do not specify an [ingestion URL](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls), the endpoint for the region in which you created your cluster is used.</td>
-        </tr>
-        <tr>
-          <td><code><em>&lt;cluster_space&gt;</em></code></td>
-          <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
-        </tr>
-        <tr>
-          <td><code><em>&lt;cluster_org&gt;</em></code></td>
-          <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
-        </tr>
-      </tbody>
-    </table>
-
-2. View your cluster logging configuration to verify that it was implemented the way that you intended.
-
-    ```
-    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-    Example command and output:
-    ```
-    ibmcloud ks logging-config-get --cluster myCluster
-    Retrieving cluster myCluster logging configurations...
-    OK
-    Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
-    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -
-    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -       
-    ```
-    {: screen}
-
-3. Optional: If you want to stop forwarding audit logs, you can [delete your configuration](#log_sources_delete).
-
-<br />
-
-
-
-### Sending audit logs to an external server
+### Forwarding audit logs to an external syslog server
 {: #audit_enable}
 
 **Before you begin**
@@ -706,10 +626,90 @@ To forward Kubernetes API audit logs:
         ```
         {: pre}
 
+### Forwarding audit logs to {{site.data.keyword.loganalysisshort_notm}} (deprecated)
+{: #audit_enable_loganalysis}
+
+You can forward your Kubernetes API server audit logs to {{site.data.keyword.loganalysisshort_notm}}.
+{: shortdesc}
+
+**Before you begin**
+
+1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containerlong_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
+
+2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+
+**Forwarding logs**
+
+1. Create a logging configuration.
+
+    ```
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource kube-audit --space <cluster_space> --org <cluster_org> --hostname <ingestion_URL> --type ibm
+    ```
+    {: pre}
+
+    Example command and output:
+
+    ```
+    ibmcloud ks logging-config-create myCluster --logsource kube-audit
+    Creating logging configuration for kube-audit logs in cluster myCluster...
+    OK
+    Id                                     Source      Namespace   Host                                   Port     Org    Space   Server Type   Protocol  Application Containers   Paths
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -         ingest-au-syd.logging.bluemix.net✣    9091✣     -       -         ibm          -              -                  -
+
+    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+
+    ```
+    {: screen}
+
+    <table>
+    <caption>Understanding this command's components</caption>
+      <thead>
+        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+          <td>The name or ID of the cluster.</td>
+        </tr>
+        <tr>
+          <td><code><em>&lt;ingestion_URL&gt;</em></code></td>
+          <td>The endpoint where you want to forward logs. If you do not specify an [ingestion URL](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls), the endpoint for the region in which you created your cluster is used.</td>
+        </tr>
+        <tr>
+          <td><code><em>&lt;cluster_space&gt;</em></code></td>
+          <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
+        </tr>
+        <tr>
+          <td><code><em>&lt;cluster_org&gt;</em></code></td>
+          <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
+        </tr>
+      </tbody>
+    </table>
+
+2. View your cluster logging configuration to verify that it was implemented the way that you intended.
+
+    ```
+    ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Example command and output:
+    ```
+    ibmcloud ks logging-config-get --cluster myCluster
+    Retrieving cluster myCluster logging configurations...
+    OK
+    Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
+    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -       
+    ```
+    {: screen}
+
+3. Optional: If you want to stop forwarding audit logs, you can [delete your configuration](#log_sources_delete).
+
 <br />
 
 
-## Collecting master logs
+## Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket
 {: #collect_master}
 
 With {{site.data.keyword.containerlong_notm}}, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies.
@@ -855,14 +855,12 @@ To configure Autorecovery:
 1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
 
 2.  Verify that tiller is installed with a service account.
-
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```
     {: pre}
 
     Example output:
-
     ```
     NAME                                 SECRETS   AGE
     tiller                               1         2m
@@ -1014,35 +1012,30 @@ To configure Autorecovery:
    </table>
 
 4. Create the configuration map in your cluster.
-
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
 5. Verify that you created the configuration map with the name `ibm-worker-recovery-checks` in the `kube-system` namespace with the proper checks.
-
     ```
     kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
     ```
     {: pre}
 
 6. Deploy Autorecovery into your cluster by installing the `ibm-worker-recovery` Helm chart.
-
     ```
     helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
     ```
     {: pre}
 
 7. After a few minutes, you can check the `Events` section in the output of the following command to see activity on the Autorecovery deployment.
-
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
 
-8. If you are not seeing activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
-
+8. If you do not see activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
     ```
     helm test ibm-worker-recovery
     ```
