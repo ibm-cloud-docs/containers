@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-03-28"
 
 ---
 
@@ -272,6 +272,7 @@ In this lesson, you deploy your first serverless [`Hello World`](https://hub.doc
    ```
    kubectl get pods
    ```
+   {: pre}
 
    Example output:
    ```
