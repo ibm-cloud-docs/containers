@@ -820,7 +820,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
       </table>
  </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). **Note**: {{site.data.keyword.mon_full_notm}} does not support the `containerd` container runtime. When you use {{site.data.keyword.mon_full_notm}} with version 1.11 or later clusters, not all container metrics are collected.</dd>
+  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
 </dl>
 
 ### Other health monitoring tools
