@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-03-29"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -32,6 +32,8 @@ Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you
 
 Continuous monitoring and logging is the key to detecting attacks on your cluster and troubleshooting issues as they arise. By continuously monitoring your cluster, you're able to better understand your cluster capacity and the availability of resources that are available to your app. With this insight, you can prepare to protect your apps against downtime. **Note**: To configure logging and monitoring, you must use a standard cluster in {{site.data.keyword.containerlong_notm}}.
 
+
+
 ## Choosing a logging solution
 {: #logging_overview}
 
@@ -42,25 +44,25 @@ You can choose your logging solution based on which cluster components you need 
 
 <dl>
 
+<dt>{{site.data.keyword.la_full_notm}}</dt>
+<dd>Manage pod container logs by deploying LogDNA as a third-party service to your cluster. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</dd>
+
 <dt>Fluentd with {{site.data.keyword.loganalysisfull_notm}} or syslog</dt>
 <dd>To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) cluster add-on collects logs from the paths for a specified source. Fluentd then forwards these logs to {{site.data.keyword.loganalysisfull_notm}} or an external syslog server.
 
-<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) expands your log collection, retention, and search abilities. When you create a logging configuration that forwards logs for a source to {{site.data.keyword.loganalysisfull_notm}}, you can view your logs in a Kibana dashboard.</li>
+<ul><li><strong>{{site.data.keyword.loganalysisfull_notm}}</strong>: [{{site.data.keyword.loganalysisshort}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_analysis_ov) expands your log collection, retention, and search abilities. When you create a logging configuration that forwards logs for a source to {{site.data.keyword.loganalysisshort_notm}}, you can view your logs in a Kibana dashboard.<p class="deprecated">{{site.data.keyword.loganalysisfull_notm}} is deprecated. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting logs for your cluster, you can forward logs collected by Fluentd to an external syslog server or set up {{site.data.keyword.la_full_notm}}.</p></li>
 
 <li><strong>External syslog server</strong>: Set up an external server that accepts a syslog protocol. Then, you can create a logging configuration for a source in your cluster to forward logs to that external server.</li></ul>
 
 To get started, see [Understanding cluster and app log forwarding](#logging).
 </dd>
 
-<dt>{{site.data.keyword.la_full_notm}}</dt>
-<dd>Manage pod container logs by deploying LogDNA as a third-party service to your cluster. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</dd>
-
 <dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
 <dd>To monitor user-initiated administrative activity made in your cluster, you can collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}. Clusters generate two types of {{site.data.keyword.cloudaccesstrailshort}} events.
 
 <ul><li>Cluster management events are automatically generated and forwarded to {{site.data.keyword.cloudaccesstrailshort}}.</li>
 
-<li>Kubernetes API server audit events are automatically generated, but you must [create a logging configuration](#api_forward) so that Fluentd can forward these logs to {{site.data.keyword.loganalysisshort}}. {{site.data.keyword.cloudaccesstrailshort}} then pulls these logs from {{site.data.keyword.loganalysisshort}}.</li></ul>
+<li>Kubernetes API server audit events are automatically generated, but you must [create a logging configuration](#api_forward) so that Fluentd can forward these logs to {{site.data.keyword.cloudaccesstrailshort}}.</li></ul>
 
 For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events). For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla) documentation.
 </dd>
@@ -73,11 +75,14 @@ For more information about the types of {{site.data.keyword.containerlong_notm}}
 
 </dl>
 
-## Understanding cluster and app log forwarding
+## Understanding cluster and app log forwarding to syslog
 {: #logging}
 
 By default, logs are collected by the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) add-on in your cluster. When you create a logging configuration for a source in your cluster such as a container, the logs that Fluentd collects from that source's paths are forwarded to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server. The traffic from the source to the logging service on the ingestion port is encrypted.
 {: shortdesc}
+
+{{site.data.keyword.loganalysisfull_notm}} is deprecated. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting logs for your cluster, you can forward logs collected by Fluentd to an external syslog server or set up {{site.data.keyword.la_full_notm}}.
+{: deprecated}
 
 **What are the sources that I can configure log forwarding for?**
 
@@ -111,7 +116,7 @@ In the following image you can see the location of the sources that you can conf
 
 6. `kube-audit`: Information about cluster-related actions that is sent to the Kubernetes API server, including the time, the user, and the affected resource.
 
-7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress Application Load Balancer. For specific configuration information, check out the [Ingress documentation](/docs/containers?topic=containers-ingress_health#ingress_logs).</br>**Paths**:
+7. `ingress`: Information about the network traffic that comes into a cluster through the Ingress ALB.</br>**Paths**:
     * `/var/log/alb/ids/*.log`
     * `/var/log/alb/ids/*.err`
     * `/var/log/alb/customerlogs/*.log`
@@ -140,7 +145,7 @@ The following table shows the different options that you have when configuring l
     </tr>
     <tr>
       <td><code><em>--type</em></code></td>
-      <td>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</td>
+      <td>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server. <p class="deprecated">{{site.data.keyword.loganalysisfull_notm}} is deprecated. Existing premium plan instances are supported until 30 September 2019. Forward logs to an external syslog server by using <code>--type syslog</code>.</td>
     </tr>
     <tr>
       <td><code><em>--namespace</em></code></td>
@@ -206,11 +211,14 @@ You can forward container logs from one namespace to one Cloud Foundry space, an
 <br />
 
 
-## Configuring cluster and app log forwarding
+## Forwarding cluster and app logs to syslog
 {: #configuring}
 
 You can configure logging for {{site.data.keyword.containerlong_notm}} standard clusters through the console or through the CLI.
 {: shortdesc}
+
+{{site.data.keyword.loganalysisfull_notm}} is deprecated. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting logs for your cluster, you can forward logs collected by Fluentd to an external syslog server or set up {{site.data.keyword.la_full_notm}}.
+{: deprecated}
 
 ### Enabling log forwarding with the {{site.data.keyword.Bluemix_notm}} console
 {: #enable-forwarding-ui}
@@ -240,7 +248,64 @@ You can create a configuration for cluster logging. You can differentiate betwee
 
 Before you begin, [create](/docs/containers?topic=containers-clusters#clusters) or identify a standard cluster to use.
 
-**Forwarding logs to IBM**
+**Forwarding logs to your own server over the `udp` or `tcp` protocols**
+
+1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+
+3. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
+  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
+
+  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
+
+  You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server is running: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
+  {: tip}
+
+4. Create a log forwarding configuration.
+    ```
+    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ```
+    {: pre}
+
+</br></br>
+
+**Forwarding logs to your own server over the `tls` protocol**
+
+The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
+{: tip}
+
+1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+    * **Editor** or **Administrator** platform role for the cluster
+    * **Writer** or **Manager** service role for the `kube-system` namespace
+
+2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+
+3. Set up a server that accepts a syslog protocol in one of two ways:
+  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
+
+  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You will need to inject the relevant Certificate Authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
+
+4. Save your Certificate Authority certificate to a file named `ca-cert`. It must be that exact name.
+
+5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, you will use the secret name for the `--ca-cert` flag.
+    ```
+    kubectl -n kube-system create secret generic --from-file=ca-cert
+    ```
+    {: pre}
+
+6. Create a log forwarding configuration.
+    ```
+    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
+    ```
+    {: pre}
+
+</br></br>
+
+**Forwarding logs to {{site.data.keyword.loganalysisfull_notm}}**
+
+{{site.data.keyword.loganalysisfull_notm}} is deprecated. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting logs for your cluster, you can forward logs collected by Fluentd to an external syslog server or set up {{site.data.keyword.la_full_notm}}.
+{: deprecated}
 
 1. Verify permissions.
     1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
@@ -292,67 +357,7 @@ Before you begin, [create](/docs/containers?topic=containers-clusters#clusters) 
 If you have apps that run in your containers that can't be configured to write logs to STDOUT or STDERR, you can create a logging configuration to forward logs from app log files.
 {: tip}
 
-</br>
-</br>
-
-
-**Forwarding logs to your own server over the `udp` or `tcp` protocols**
-
-1. Ensure you have the [**Editor** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
-
-2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
-
-3. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
-  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
-
-  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
-
-  You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server is running: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
-  {: tip}
-
-4. Create a log forwarding configuration.
-    ```
-    ibmcloud ks logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
-    ```
-    {: pre}
-
-</br>
-</br>
-
-
-**Forwarding logs to your own server over the `tls` protocol**
-
-The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
-{: tip}
-
-1. Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
-    * **Editor** or **Administrator** platform role for the cluster
-    * **Writer** or **Manager** service role for the `kube-system` namespace
-
-2. For the cluster where the log source is located: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
-
-3. Set up a server that accepts a syslog protocol in one of two ways:
-  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
-
-  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You will need to inject the relevant Certificate Authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
-
-4. Save your Certificate Authority certificate to a file named `ca-cert`. It must be that exact name.
-
-5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, you will use the secret name for the `--ca-cert` flag.
-    ```
-    kubectl -n kube-system create secret generic --from-file=ca-cert
-    ```
-    {: pre}
-
-6. Create a log forwarding configuration.
-    ```
-    ibmcloud ks logging-config-create <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
-    ```
-    {: pre}
-
-</br>
-</br>
-
+</br></br>
 
 ### Verifying log forwarding
 {: verify-logging}
@@ -438,7 +443,7 @@ You can leverage the built-in container runtime logging capabilities to review a
 <br />
 
 
-## Filtering logs
+## Filtering logs that are forwarded to syslog
 {: #filter-logs}
 
 You can choose which logs that you forward by filtering out specific logs for a period of time. You can differentiate between the different filtering options by using flags.
@@ -523,30 +528,28 @@ You can choose which logs that you forward by filtering out specific logs for a 
 
 
 
-## Configuring log forwarding for Kubernetes API audit logs
+## Forwarding Kubernetes API audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}} or syslog
 {: #api_forward}
 
-Kubernetes automatically audits any events that are passed through your Kubernetes API server. You can forward the events to {{site.data.keyword.loganalysisshort_notm}} or to an external server.
+Kubernetes automatically audits any events that are passed through your Kubernetes API server. You can forward the events to {{site.data.keyword.cloudaccesstrailfull_notm}} or to an external server.
 {: shortdesc}
-
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
 
 * Currently, a default audit policy is used for all clusters with this logging configuration.
 * Currently, filters are not supported.
-* There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.loganalysisshort_notm}} and an external server by creating a logging configuration and a webhook.
+* There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.cloudaccesstrailshort}} and an external server by creating a logging configuration and a webhook.
 * You must have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
-
-### Sending audit logs to {{site.data.keyword.loganalysisshort_notm}}
+### Forwarding audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}
 {: #audit_enable_loganalysis}
 
-You can forward your Kubernetes API server audit logs to {{site.data.keyword.loganalysisshort_notm}}.
+You can forward your Kubernetes API server audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}.
 {: shortdesc}
 
 **Before you begin**
 
-1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containerlong_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
+1. Verify permissions. If you specified a space when you created the cluster, then both the account owner and {{site.data.keyword.containerlong_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
 
 2. For the cluster that you want to collect API server audit logs from: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure). **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
@@ -618,11 +621,7 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
 
 3. Optional: If you want to stop forwarding audit logs, you can [delete your configuration](#log_sources_delete).
 
-<br />
-
-
-
-### Sending audit logs to an external server
+### Forwarding audit logs to an external syslog server
 {: #audit_enable}
 
 **Before you begin**
@@ -709,7 +708,7 @@ To forward Kubernetes API audit logs:
 <br />
 
 
-## Collecting master logs
+## Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket
 {: #collect_master}
 
 With {{site.data.keyword.containerlong_notm}}, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies.
@@ -820,7 +819,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
       </table>
  </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). **Note**: {{site.data.keyword.mon_full_notm}} does not support the `containerd` container runtime. When you use {{site.data.keyword.mon_full_notm}} with version 1.11 or later clusters, not all container metrics are collected.</dd>
+  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
 </dl>
 
 ### Other health monitoring tools
@@ -855,14 +854,12 @@ To configure Autorecovery:
 1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
 
 2.  Verify that tiller is installed with a service account.
-
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```
     {: pre}
 
     Example output:
-
     ```
     NAME                                 SECRETS   AGE
     tiller                               1         2m
@@ -1014,36 +1011,258 @@ To configure Autorecovery:
    </table>
 
 4. Create the configuration map in your cluster.
-
     ```
     kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
 5. Verify that you created the configuration map with the name `ibm-worker-recovery-checks` in the `kube-system` namespace with the proper checks.
-
     ```
     kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
     ```
     {: pre}
 
 6. Deploy Autorecovery into your cluster by installing the `ibm-worker-recovery` Helm chart.
-
     ```
     helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
     ```
     {: pre}
 
 7. After a few minutes, you can check the `Events` section in the output of the following command to see activity on the Autorecovery deployment.
-
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
 
-8. If you are not seeing activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
-
+8. If you do not see activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
     ```
     helm test ibm-worker-recovery
     ```
     {: pre}
+
+
+        </tbody>
+      </table>
+ </dd>
+  <dt>{{site.data.keyword.mon_full_notm}}</dt>
+  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
+</dl>
+
+### Other health monitoring tools
+{: #health_tools}
+
+You can configure other tools for more monitoring capabilities.
+<dl>
+  <dt>Prometheus</dt>
+    <dd>Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For setup information, see [Integrating services with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#integrations).</dd>
+</dl>
+
+<br />
+
+
+## Configuring health monitoring for worker nodes with Autorecovery
+{: #autorecovery}
+
+The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
+{: shortdesc}</br> </br>
+
+Autorecovery requires at least one healthy node to function properly. Configure Autorecovery with active checks only in clusters with two or more worker nodes.
+{: note}
+
+Before you begin:
+- Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+    - **Administrator** platform role for the cluster
+    - **Writer** or **Manager** service role for the `kube-system` namespace
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+
+To configure Autorecovery:
+
+1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
+
+2.  Verify that tiller is installed with a service account.
+    ```
+    kubectl get serviceaccount -n kube-system | grep tiller
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    NAME                                 SECRETS   AGE
+    tiller                               1         2m
+    ```
+    {: screen}
+
+3. Create a configuration map file that defines your checks in JSON format. For example, the following YAML file defines three checks: an HTTP check and two Kubernetes API server checks. Refer to the tables following the example YAML file for information about the three kinds of checks and information about the individual components of the checks.
+</br>
+   **Tip:** Define each check as a unique key in the `data` section of the configuration map.
+
+   ```
+   kind: ConfigMap
+   apiVersion: v1
+   metadata:
+     name: ibm-worker-recovery-checks
+     namespace: kube-system
+   data:
+     checknode.json: |
+       {
+         "Check":"KUBEAPI",
+         "Resource":"NODE",
+         "FailureThreshold":3,
+         "CorrectiveAction":"RELOAD",
+         "CooloffSeconds":1800,
+         "IntervalSeconds":180,
+         "TimeoutSeconds":10,
+         "Enabled":true
+       }
+     checkpod.json: |
+       {
+         "Check":"KUBEAPI",
+         "Resource":"POD",
+         "PodFailureThresholdPercent":50,
+         "FailureThreshold":3,
+         "CorrectiveAction":"RELOAD",
+         "CooloffSeconds":1800,
+         "IntervalSeconds":180,
+         "TimeoutSeconds":10,
+         "Enabled":true
+       }
+     checkhttp.json: |
+       {
+         "Check":"HTTP",
+         "FailureThreshold":3,
+         "CorrectiveAction":"REBOOT",
+         "CooloffSeconds":1800,
+         "IntervalSeconds":180,
+         "TimeoutSeconds":10,
+         "Port":80,
+         "ExpectedStatus":200,
+         "Route":"/myhealth",
+         "Enabled":false
+       }
+   ```
+   {:codeblock}
+
+   <table summary="Understanding the components of the configmap">
+   <caption>Understanding the configmap components</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Idea icon"/>Understanding the configmap components</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>name</code></td>
+   <td>The configuration name <code>ibm-worker-recovery-checks</code> is a constant and cannot be changed.</td>
+   </tr>
+   <tr>
+   <td><code>namespace</code></td>
+   <td>The <code>kube-system</code> namespace is a constant and cannot be changed.</td>
+   </tr>
+   <tr>
+   <td><code>checknode.json</code></td>
+   <td>Defines a Kubernetes API node check that checks whether each worker node is in the <code>Ready</code> state. The check for a specific worker node counts as a failure if the worker node is not in the <code>Ready</code> state. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud ks worker-reload</code>.<br></br>The node check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.</td>
+   </tr>
+   <tr>
+   <td><code>checkpod.json</code></td>
+   <td>
+   Defines a Kubernetes API pod check that checks the total percentage of <code>NotReady</code> pods on a worker node based on the total pods that are assigned to that worker node. The check for a specific worker node counts as a failure if the total percentage of <code>NotReady</code> pods is greater than the defined <code>PodFailureThresholdPercent</code>. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud ks worker-reload</code>. For example, the default <code>PodFailureThresholdPercent</code> is 50%. If the percentage of <code>NotReady</code> pods is greater than 50% three consecutive times, the worker node is reloaded. <br></br>By default, pods in all namespaces are checked. To restrict the check to only pods in a specified namespace, add the <code>Namespace</code> field to the check. The pod check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.
+   </td>
+   </tr>
+   <tr>
+   <td><code>checkhttp.json</code></td>
+   <td>Defines an HTTP check that checks if an HTTP server that runs on your worker node is healthy. To use this check you must deploy an HTTP server on every worker node in your cluster by using a [daemon set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). You must implement a health check that is available at the <code>/myhealth</code> path and that can verify if your HTTP server is healthy. You can define other paths by changing the <strong>Route</strong> parameter. If the HTTP server is healthy, you must return the HTTP response code that is defined in <strong><code>ExpectedStatus</code></strong>. The HTTP server must be configured to listen on the private IP address of the worker node. You can find the private IP address by running <code>kubectl get nodes</code>.<br></br>
+   For example, consider two nodes in a cluster that have the private IP addresses 10.10.10.1 and 10.10.10.2. In this example, two routes are checked for a 200 HTTP response: <code>http://10.10.10.1:80/myhealth</code> and <code>http://10.10.10.2:80/myhealth</code>.
+   The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is rebooted. This action is equivalent to running <code>ibmcloud ks worker-reboot</code>.<br></br>The HTTP check is disabled until you set the <b>Enabled</b> field to <code>true</code>.</td>
+   </tr>
+   </tbody>
+   </table>
+
+   <table summary="Understanding individual components of checks">
+   <caption>Understanding the individual components of checks</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Idea icon"/>Understanding the individual components of checks </th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>Check</code></td>
+   <td>Enter the type of check that you want Autorecovery to use. <ul><li><code>HTTP</code>: Autorecovery calls HTTP servers that run on each node to determine whether the nodes are running properly.</li><li><code>KUBEAPI</code>: Autorecovery calls the Kubernetes API server and reads the health status data reported by the worker nodes.</li></ul></td>
+   </tr>
+   <tr>
+   <td><code>Resource</code></td>
+   <td>When the check type is <code>KUBEAPI</code>, enter the type of resource that you want Autorecovery to check. Accepted values are <code>NODE</code> or <code>POD</code>.</td>
+   </tr>
+   <tr>
+   <td><code>FailureThreshold</code></td>
+   <td>Enter the threshold for the number of consecutive failed checks. When this threshold is met, Autorecovery triggers the specified corrective action. For example, if the value is 3 and Autorecovery fails a configured check three consecutive times, Autorecovery triggers the corrective action that is associated with the check.</td>
+   </tr>
+   <tr>
+   <td><code>PodFailureThresholdPercent</code></td>
+   <td>When the resource type is <code>POD</code>, enter the threshold for the percentage of pods on a worker node that can be in a [<strong><code>NotReady</code></strong> ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) state. This percentage is based on the total number of pods that are scheduled to a worker node. When a check determines that the percentage of unhealthy pods is greater than the threshold, the check counts as one failure.</td>
+   </tr>
+   <tr>
+   <td><code>CorrectiveAction</code></td>
+   <td>Enter the action to run when the failure threshold is met. A corrective action runs only while no other workers are being repaired and when this worker node is not in a cool-off period from a previous action. <ul><li><code>REBOOT</code>: Reboots the worker node.</li><li><code>RELOAD</code>: Reloads all of the necessary configurations for the worker node from a clean OS.</li></ul></td>
+   </tr>
+   <tr>
+   <td><code>CooloffSeconds</code></td>
+   <td>Enter the number of seconds Autorecovery must wait to issue another corrective action for a node that was already issued a corrective action. The cool off period starts at the time a corrective action is issued.</td>
+   </tr>
+   <tr>
+   <td><code>IntervalSeconds</code></td>
+   <td>Enter the number of seconds in between consecutive checks. For example, if the value is 180, Autorecovery runs the check on each node every 3 minutes.</td>
+   </tr>
+   <tr>
+   <td><code>TimeoutSeconds</code></td>
+   <td>Enter the maximum number of seconds that a check call to the database takes before Autorecovery terminates the call operation. The value for <code>TimeoutSeconds</code> must be less than the value for <code>IntervalSeconds</code>.</td>
+   </tr>
+   <tr>
+   <td><code>Port</code></td>
+   <td>When the check type is <code>HTTP</code>, enter the port that the HTTP server must bind to on the worker nodes. This port must be exposed on the IP of every worker node in the cluster. Autorecovery requires a constant port number across all nodes for checking servers. Use [daemon sets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) when you deploy a custom server into a cluster.</td>
+   </tr>
+   <tr>
+   <td><code>ExpectedStatus</code></td>
+   <td>When the check type is <code>HTTP</code>, enter the HTTP server status that you expect to be returned from the check. For example, a value of 200 indicates that you expect an <code>OK</code> response from the server.</td>
+   </tr>
+   <tr>
+   <td><code>Route</code></td>
+   <td>When the check type is <code>HTTP</code>, enter the path that is requested from the HTTP server. This value is typically the metrics path for the server that is running on all of the worker nodes.</td>
+   </tr>
+   <tr>
+   <td><code>Enabled</code></td>
+   <td>Enter <code>true</code> to enable the check or <code>false</code> to disable the check.</td>
+   </tr>
+   <tr>
+   <td><code>Namespace</code></td>
+   <td> Optional: To restrict <code>checkpod.json</code> to checking only pods in one namespace, add the <code>Namespace</code> field and enter the namespace.</td>
+   </tr>
+   </tbody>
+   </table>
+
+4. Create the configuration map in your cluster.
+    ```
+    kubectl apply -f ibm-worker-recovery-checks.yaml
+    ```
+    {: pre}
+
+5. Verify that you created the configuration map with the name `ibm-worker-recovery-checks` in the `kube-system` namespace with the proper checks.
+    ```
+    kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
+    ```
+    {: pre}
+
+6. Deploy Autorecovery into your cluster by installing the `ibm-worker-recovery` Helm chart.
+    ```
+    helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
+    ```
+    {: pre}
+
+7. After a few minutes, you can check the `Events` section in the output of the following command to see activity on the Autorecovery deployment.
+    ```
+    kubectl -n kube-system describe deployment ibm-worker-recovery
+    ```
+    {: pre}
+
+8. If you do not see activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
+    ```
+    helm test ibm-worker-recovery
+    ```
+    {: pre}
+</staging>

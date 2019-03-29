@@ -165,11 +165,13 @@ If you want to create a multizone cluster, if you have multiple VLANs for a clus
 You can follow the steps in [Setting up cluster networking with a public and a private VLAN](/docs/containers?topic=containers-cs_network_cluster#both_vlans) or [Setting up cluster networking with a private VLAN only](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan).
 {: shortdesc}
 
-### Can I change my VLAN decision later?
+### Can I change my VLAN decision later? Do my worker node IP addresses change?
 {: #cs_network_ov_worker_change}
 
 You can change your VLAN setup by modifying the worker pools in your cluster. For more information, see [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
 {: shortdesc}
+
+Your worker node is assigned an IP address on the public or private VLANs that your cluster uses. The worker node IP addresses persist across `reload` and `reboot` operations. Additionally, the private IP address of the worker node is used for the worker node identity in most `kubectl` commands. If you change the VLANs that the worker pool uses, new worker nodes that are provisioned in that pool use the new VLANs for their IP addresses. Existing worker node IP addresses do not change, but you can choose to remove the worker nodes that use the old VLANs.
 
 <br />
 

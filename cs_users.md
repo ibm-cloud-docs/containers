@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-03-29"
 
 keywords: kubernetes, iks
 
@@ -130,6 +130,8 @@ When you create your {{site.data.keyword.Bluemix_notm}} account, the default res
 
 After you [understand how roles, users, and resources in your account](#access_policies) can be managed, use the following checklist to configure user access in your cluster.
 {: shortdesc}
+
+<p class="tip">Do not assign {{site.data.keyword.Bluemix_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
 
 1. [Set the API key](#api_key) for all the regions and resource groups that you want to create clusters in.
 2. Invite users to your account and [assign them {{site.data.keyword.Bluemix_notm}} IAM roles](#platform) for the {{site.data.keyword.containerlong_notm}}. 
@@ -396,6 +398,8 @@ Set {{site.data.keyword.Bluemix_notm}} IAM platform management and service acces
 Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_notm}} IAM platform management and service access roles with the {{site.data.keyword.Bluemix_notm}} console.
 {: shortdesc}
 
+<p class="tip">Do not assign platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
+
 Before you begin, verify that you're assigned the **Administrator** platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 
 1. Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/). From the menu bar, select **Manage > Access (IAM)**.
@@ -453,7 +457,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
 Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_notm}} IAM platform management and service access roles with the CLI.
 {: shortdesc}
 
-You cannot use the CLI to scope a service role to a Kubernetes namespace. [Use the {{site.data.keyword.Bluemix_notm}} console](#add_users) instead.
+You cannot use the CLI to scope a service role to a Kubernetes namespace. [Use the {{site.data.keyword.Bluemix_notm}} console](#add_users) instead. Do not assign {{site.data.keyword.Bluemix_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.
 {: important}
 
 **Before you begin**:
@@ -695,7 +699,7 @@ To prevent breaking changes, do not change the predefined `view`, `edit`, `admin
             </tr>
             <tr>
               <td><code>rules.apiGroups</code></td>
-              <td>Specify the Kubernetes [API groups ![External link icon](../icons/launch-glyph.svg "External link icon")](https://v1-9.docs.kubernetes.io/docs/reference/api-overview/#api-groups) that you want users to be able to interact with, such as `"apps"`, `"batch"`, or `"extensions"`. For access to the core API group at REST path `api/v1`, leave the group blank: `[""]`.</td>
+              <td>Specify the Kubernetes [API groups ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/using-api/api-overview/#api-groups) that you want users to be able to interact with, such as `"apps"`, `"batch"`, or `"extensions"`. For access to the core API group at REST path `api/v1`, leave the group blank: `[""]`.</td>
             </tr>
             <tr>
               <td><code>rules.resources</code></td>
@@ -703,7 +707,7 @@ To prevent breaking changes, do not change the predefined `view`, `edit`, `admin
             </tr>
             <tr>
               <td><code>rules.verbs</code></td>
-              <td>Specify the types of [actions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/) that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`.</td>
+              <td>Specify the types of [actions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/) that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`.</td>
             </tr>
           </tbody>
         </table>

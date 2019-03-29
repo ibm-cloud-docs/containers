@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-03-29"
 
 ---
 
@@ -163,8 +163,9 @@ lastupdated: "2019-03-26"
 * [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
 * [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_cli_install#cs_api)
-  * [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
-  * [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
+* [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_cli_install#kube_api)
+* [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
+* [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
 
 ## Administering clusters
 {: #sitemap-clusters-admin}
@@ -323,6 +324,7 @@ lastupdated: "2019-03-26"
 * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 * [Allowing the cluster to access infrastructure resources and other services](/docs/containers?topic=containers-firewall#firewall_outbound)
 * [Allowing the cluster to access resources over a private firewall](/docs/containers?topic=containers-firewall#firewall_private)
+* [Allowing the cluster to access resources through Calico egress policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 * [Accessing NodePort, load balancer, and Ingress services from outside the cluster](/docs/containers?topic=containers-firewall#firewall_inbound)
 * [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#whitelist_workers)
 
@@ -602,8 +604,8 @@ lastupdated: "2019-03-26"
 * [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 * [Adding file storage to apps](/docs/containers?topic=containers-file_storage#add_file)
 * [Using existing file storage in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
-  * [Step 1: Preparing your existing storage.](/docs/containers?topic=containers-file_storage#step-1-preparing-your-existing-storage-)
-  * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-file_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [Step 1: Preparing your existing storage.](/docs/containers?topic=containers-file_storage#existing-fjle-1)
+  * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-file_storage#existing-file-2)
 * [Using file storage in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
   * [Dynamically provision the PVC when you create a stateful set](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
   * [Pre-provisioning the PVC before creating the stateful set](/docs/containers?topic=containers-file_storage#file_static_statefulset)
@@ -627,8 +629,8 @@ lastupdated: "2019-03-26"
 * [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 * [Adding block storage to apps](/docs/containers?topic=containers-block_storage#add_block)
 * [Using existing block storage in your cluster](/docs/containers?topic=containers-block_storage#existing_block)
-  * [Step 1: Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#step-1-retrieving-the-information-of-your-existing-block-storage)
-  * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [Step 1: Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#existing-block-1)
+  * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
 * [Using block storage in a stateful set](/docs/containers?topic=containers-block_storage#block_statefulset)
   * [Dynamically provision the PVC when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
   * [Pre-provisioning the PVC before creating the stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)

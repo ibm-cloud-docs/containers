@@ -95,7 +95,7 @@ IBM Cloud Kubernetes Service
         cs_storage_utilities.md
         cs_storage_remove.md
 
-    cs_integrations.md
+    cs_integrations.md    
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
@@ -157,6 +157,7 @@ IBM Cloud Kubernetes Service
     container_volumes_ov.md
     cs_classic.md
     cs_cli_devtools.md
+    cs_storage.md
     transcript_autorecovery.md
     transcript_loadbalancing.md
     

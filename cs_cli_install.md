@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-27"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -144,7 +144,7 @@ For reference information about these CLIs, see the documentation for those tool
 
 -   [`ibmcloud` commands](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
 -   [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
--   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
+-   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/)
 -   [`ibmcloud cr` commands](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
 
 <br />
@@ -281,7 +281,7 @@ To use `kubectl` commands:
     ```
     {: screen}
 
-Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.Bluemix_notm}}. For a full list of commands, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).
+Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.Bluemix_notm}}. For a full list of commands, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
 
 **Tip:** If you are using Windows and the Kubernetes CLI is not installed in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI, you must change directories to the path where the Kubernetes CLI is installed to run `kubectl` commands successfully.
 
@@ -437,27 +437,15 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 </tbody>
 </table>
 
-1.  Create your {{site.data.keyword.Bluemix_notm}} IAM access token. The body information that is included in your request varies based on the {{site.data.keyword.Bluemix_notm}} authentication method that you use. Replace the following values:
-  - `<username>`: Your {{site.data.keyword.Bluemix_notm}} user name.
-  - `<password>`: Your {{site.data.keyword.Bluemix_notm}} password.
-  - `<api_key>`: Your {{site.data.keyword.Bluemix_notm}} API key.
-  - `<passcode>`: Your {{site.data.keyword.Bluemix_notm}} one-time passcode. Run `ibmcloud login --sso` and follow the instructions in your CLI output to retrieve your one-time passcode by using your web browser.
+1.  Create your {{site.data.keyword.Bluemix_notm}} IAM access token. The body information that is included in your request varies based on the {{site.data.keyword.Bluemix_notm}} authentication method that you use. 
 
     ```
-    POST https://iam.<region>.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 
-    Example:
-    ```
-    POST https://iam.ng.bluemix.net/oidc/token
-    ```
-    {: codeblock}
-
-    To specify an {{site.data.keyword.Bluemix_notm}} region, [review the region abbreviations as they are used in the API endpoints](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).
-
-    <table summary-"Input parameters to retrieve tokens">
-    <caption>Input parameters to get tokens</caption>
+    <table summary-"Input parameters to retrieve IAM tokens.">
+    <caption>Input parameters to get IAM tokens.</caption>
     <thead>
         <th>Input Parameters</th>
         <th>Values</th>
@@ -465,51 +453,50 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     <tbody>
     <tr>
     <td>Header</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</p></li></ul>
+    <td><ul><li>Content-Type: application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} user name and password</td>
     <td><ul><li>`grant_type: password`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`username: <em>&lt;username&gt;</em>`</li>
-    <li>`password: <em>&lt;password&gt;</em>`</li>
-    <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:`</li></ul>
-    <strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
+    <li>`username`: Your {{site.data.keyword.Bluemix_notm}} user name.</li>
+    <li>`password`: Your {{site.data.keyword.Bluemix_notm}} password.</li>
+    <li>`uaa_client_id: cf`</li>
+    <li>`uaa_client_secret:`</br><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</li></ul></td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} API keys</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
-    <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:``</li></ul>
-    <strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
+    <li>`apikey`: Your {{site.data.keyword.Bluemix_notm}} API key</li>
+    <li>`uaa_client_id: cf`</li>
+    <li>`uaa_client_secret:` </br><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</li></ul></td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} one-time passcode</td>
-    <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
+      <td><ul><li><code>grant_type: urn:ibm:params:oauth:grant-type:passcode</code></li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`passcode: <em>&lt;passcode&gt;</em>`</li>
-    <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:`</li></ul>
-    <strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
+    <li>`passcode`: Your {{site.data.keyword.Bluemix_notm}} one-time passcode. Run `ibmcloud login --sso` and follow the instructions in your CLI output to retrieve your one-time passcode by using your web browser.</li>
+    <li>`uaa_client_id: cf`</li>
+    <li>`uaa_client_secret:` </br><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</li></ul>
+    </td>
     </tr>
     </tbody>
     </table>
 
-    Example API output:
+    Example output:
 
     ```
     {
-    "access_token": "<iam_token>",
+    "access_token": "<iam_access_token>",
     "refresh_token": "<iam_refresh_token>",
     "uaa_token": "<uaa_token>",
     "uaa_refresh_token": "<uaa_refresh_token>",
     "token_type": "Bearer",
     "expires_in": 3600,
     "expiration": 1493747503
+    "scope": "ibm openid"
     }
 
     ```
@@ -517,15 +504,15 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 
     You can find the {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token** field of your API output. Note the {{site.data.keyword.Bluemix_notm}} IAM token to retrieve additional header information in the next steps.
 
-2.  Retrieve the ID of the {{site.data.keyword.Bluemix_notm}} account where the cluster was created. Replace `<iam_token>` with the {{site.data.keyword.Bluemix_notm}} IAM token that you retrieved in the previous step.
+2.  Retrieve the ID of the {{site.data.keyword.Bluemix_notm}} account that you want to work with. Replace `<iam_access_token>` with the {{site.data.keyword.Bluemix_notm}} IAM token that you retrieved from the **access_token** field of your API output in the previous step. In your API output, you can find the ID of your {{site.data.keyword.Bluemix_notm}} account in the **resources.metadata.guid** field. 
 
     ```
-    GET https://accountmanagement.<region>.bluemix.net/v1/accounts
+    GET https://accountmanagement.ng.bluemix.net/v1/accounts
     ```
     {: codeblock}
 
-    <table summary="Input parameters to get {{site.data.keyword.Bluemix_notm}} account ID">
-    <caption>Input parameters to get an {{site.data.keyword.Bluemix_notm}} account ID</caption>
+    <table summary="Input parameters to get {{site.data.keyword.Bluemix_notm}} account ID.">
+    <caption>Input parameters to get an {{site.data.keyword.Bluemix_notm}} account ID.</caption>
     <thead>
   	<th>Input parameters</th>
   	<th>Values</th>
@@ -533,14 +520,14 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     <tbody>
   	<tr>
   		<td>Headers</td>
-  		<td><ul><li>`Content-Type: application/json`</li>
-      <li>`Authorization: bearer &lt;iam_token&gt;`</li>
-      <li>`Accept: application/json`</li></ul></td>
+      <td><ul><li><code>Content-Type: application/json</code></li>
+        <li>`Authorization: bearer <iam_access_token>`</li>
+        <li><code>Accept: application/json</code></li></ul></td>
   	</tr>
     </tbody>
     </table>
 
-    Example API output:
+    Example output:
 
     ```
     {
@@ -560,28 +547,18 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: screen}
 
-    You can find the ID of your {{site.data.keyword.Bluemix_notm}} account in the **resources/metadata/guid** field of your API output.
+3.  Generate a new {{site.data.keyword.Bluemix_notm}} IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID that you want to work with. 
 
-3.  Generate a new {{site.data.keyword.Bluemix_notm}} IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID where the cluster was created. Replace `<account_ID>` with the ID of the {{site.data.keyword.Bluemix_notm}} account that you retrieved in the previous step.
-
-    If you are using an {{site.data.keyword.Bluemix_notm}} API key, you must use the {{site.data.keyword.Bluemix_notm}} account ID the API key was created for. To access clusters in other accounts, log into this account and create an {{site.data.keyword.Bluemix_notm}} API key that is based on this account.
+    If you use an {{site.data.keyword.Bluemix_notm}} API key, you must use the {{site.data.keyword.Bluemix_notm}} account ID the API key was created for. To access clusters in other accounts, log into this account and create an {{site.data.keyword.Bluemix_notm}} API key that is based on this account.
     {: note}
 
     ```
-    POST https://iam.<region>.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 
-    Example:
-    ```
-    POST https://iam.ng.bluemix.net/oidc/token
-    ```
-    {: codeblock}
-
-    To specify an {{site.data.keyword.Bluemix_notm}} region, [review the region abbreviations as they are used in the API endpoints](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).
-
-    <table summary-"Input parameters to retrieve tokens">
-    <caption>Input parameters to get tokens</caption>
+    <table summary-"Input parameters to retrieve IAM tokens.">
+    <caption>Input parameters to get IAM tokens.</caption>
     <thead>
         <th>Input Parameters</th>
         <th>Values</th>
@@ -589,50 +566,48 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     <tbody>
     <tr>
     <td>Header</td>
-    <td><ul><li>`Content-Type:application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`<p><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</p></li></ul>
+    <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`<p><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} user name and password</td>
     <td><ul><li>`grant_type: password`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`username: <em>&lt;username&gt;</em>`</li>
-    <li>`password: <em>&lt;password&gt;</em>`</li>
+    <li>`username`: Your {{site.data.keyword.Bluemix_notm}} user name. </li>
+    <li>`password`: Your {{site.data.keyword.Bluemix_notm}} password. </li>
     <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:``</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul>
-    <strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
+    <li>`uaa_client_secret:` </br><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</li>
+    <li>`bss_account`: The {{site.data.keyword.Bluemix_notm}} account ID that you retrieved in the previous step.</li></ul>
+    </td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} API keys</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`apikey`: Your {{site.data.keyword.Bluemix_notm}} API key.</li>
     <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:``</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul>
-      <strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
+    <li>`uaa_client_secret:` </br><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</li>
+    <li>`bss_account`: The {{site.data.keyword.Bluemix_notm}} account ID that you retrieved in the previous step.</li></ul>
+      </td>
     </tr>
     <tr>
     <td>Body for {{site.data.keyword.Bluemix_notm}} one-time passcode</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`passcode: <em>&lt;passcode&gt;</em>`</li>
+    <li>`passcode`: Your {{site.data.keyword.Bluemix_notm}} passcode. </li>
     <li>`uaa_client_ID: cf`</li>
-    <li>`uaa_client_secret:`</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
+    <li>`uaa_client_secret:` </br><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</li>
+    <li>`bss_account`: The {{site.data.keyword.Bluemix_notm}} account ID that you retrieved in the previous step.</li></ul></td>
     </tr>
     </tbody>
     </table>
 
-    Example API output:
+    Example output:
 
     ```
     {
       "access_token": "<iam_token>",
       "refresh_token": "<iam_refresh_token>",
-      "uaa_token": "<uaa_token>",
-      "uaa_refresh_token": "<uaa_refresh_token>",
       "token_type": "Bearer",
       "expires_in": 3600,
       "expiration": 1493747503
@@ -641,17 +616,83 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: screen}
 
-    You can find the {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token** and the refresh token in the **refresh_token**.
+    You can find the {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token** and the refresh token in the **refresh_token** field of your API output.
+    
+4.  List available {{site.data.keyword.containerlong_notm}} regions and select the region that you want to work in. Use the IAM access token and refresh token from the previous step to build your header information. 
+    ```
+    GET https://containers.cloud.ibm.com/v1/regions
+    ```
+    {: codeblock}
+    
+    <table summary="Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions.">
+    <caption>Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions.</caption>
+    <thead>
+    <th>Input parameters</th>
+    <th>Values</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Header</td>
+    <td><ul><li>`Authorization: bearer <iam_token>`</li>
+    <li>`X-Auth-Refresh-Token: <refresh_token>`</li></ul></td>
+    </tr>
+    </tbody>
+    </table>
+    
+    Example output: 
+    ```
+    {
+    "regions": [
+        {
+            "name": "ap-north",
+            "alias": "jp-tok",
+            "cfURL": "api.au-syd.bluemix.net",
+            "freeEnabled": false
+        },
+        {
+            "name": "ap-south",
+            "alias": "au-syd",
+            "cfURL": "api.au-syd.bluemix.net",
+            "freeEnabled": true
+        },
+        {
+            "name": "eu-central",
+            "alias": "eu-de",
+            "cfURL": "api.eu-de.bluemix.net",
+            "freeEnabled": true
+        },
+        {
+            "name": "uk-south",
+            "alias": "eu-gb",
+            "cfURL": "api.eu-gb.bluemix.net",
+            "freeEnabled": true
+        },
+        {
+            "name": "us-east",
+            "alias": "us-east",
+            "cfURL": "api.ng.bluemix.net",
+            "freeEnabled": false
+        },
+        {
+            "name": "us-south",
+            "alias": "us-south",
+            "cfURL": "api.ng.bluemix.net",
+            "freeEnabled": true
+        }
+    ]
+    }
+    ```
+    {: screen}
 
-4.  List all Kubernetes clusters in your account. Use the information that you retrieved in earlier steps to build your header information.
+5.  List all clusters in the {{site.data.keyword.containerlong_notm}} region that you selected. If you want to [run Kubernetes API requests against your cluster](#kube_api), make sure to note the **id** and **region** of your cluster. 
 
      ```
      GET https://containers.cloud.ibm.com/v1/clusters
      ```
      {: codeblock}
 
-     <table summary="Input parameters to work with API">
-     <caption>Input parameters to work with the API</caption>
+     <table summary="Input parameters to work with the {{site.data.keyword.containerlong_notm}} API.">
+     <caption>Input parameters to work with the {{site.data.keyword.containerlong_notm}} API.</caption>
      <thead>
      <th>Input parameters</th>
      <th>Values</th>
@@ -659,8 +700,8 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
      <tbody>
      <tr>
      <td>Header</td>
-     <td><ul><li>`Authorization: bearer <em>&lt;iam_token&gt;</em>`</li>
-     <li>`X-Auth-Refresh-Token: <em>&lt;refresh_token&gt;</em>`</li></ul></td>
+     <td><ul><li>`Authorization: bearer <iam_token>`</li>
+       <li>`X-Auth-Refresh-Token: <refresh_token>`</li><li>`X-Region: <region>`</li></ul></td>
      </tr>
      </tbody>
      </table>
@@ -668,6 +709,209 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 5.  Review the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api) to find a list of supported APIs.
 
 <br />
+
+
+## Working with your cluster by using the Kubernetes API 
+{: #kube_api}
+
+You can use the [Kubernetes API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/using-api/api-overview/) to interact with your cluster in {{site.data.keyword.containerlong_notm}}.
+{: shortdesc}
+
+The following instructions require public network access in your cluster to connect to the public service endpoint of your Kubernetes master.
+{: note}
+
+1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.Bluemix_notm}} IAM refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located. 
+
+2. Retrieve an {{site.data.keyword.Bluemix_notm}} IAM delegated refresh token. 
+   ```
+   POST https://iam.bluemix.net/identity/token
+   ```
+   {: codeblock}
+   
+   <table summary-"Input parameters to get an IAM delegated refresh token.">
+   <caption>Input parameters to get an IAM delegated refresh token. </caption>
+   <thead>
+   <th>Input Parameters</th>
+   <th>Values</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Header</td>
+   <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic Yng6Yng=`</br><strong>Note</strong>: <code>Yng6Yng=</code> equals the URL-encoded authorization for the user name <strong>bx</strong> and the password <strong>bx</strong>.</li><li>`cache-control: no-cache`</li></ul>
+   </td>
+   </tr>
+   <tr>
+   <td>Body</td>
+   <td><ul><li>`delegated_refresh_token_expiry: 600`</li>
+   <li>`receiver_client_ids: kube`</li>
+   <li>`response_type: delegated_refresh_token` </li>
+   <li>`refresh_token`: Your {{site.data.keyword.Bluemix_notm}} IAM refresh token. </li>
+   <li>`grant_type: refresh_token`</li></ul></td>
+   </tr>
+   </tbody>
+   </table>
+   
+   Example output: 
+   ```
+   {
+    "delegated_refresh_token": <delegated_refresh_token>
+   }
+   ```
+   {: screen}
+   
+3. Retrieve an {{site.data.keyword.Bluemix_notm}} IAM ID, IAM access, and IAM refresh token by using the delegated refresh token from the previous step. In your API output, you can find the IAM ID token in the **id_token** field, the IAM access token in the **access_token** field, and the IAM refresh token in the **refresh_token** field. 
+   ```
+   POST https://iam.bluemix.net/identity/token
+   ```
+   {: codeblock}
+   
+   <table summary-"Input parameters to get IAM ID and IAM access tokens.">
+   <caption>Input parameters to get IAM ID and IAM access tokens.</caption>
+   <thead>
+   <th>Input Parameters</th>
+   <th>Values</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Header</td>
+   <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic a3ViZTprdWJl`</br><strong>Note</strong>: <code>a3ViZTprdWJl</code> equals the URL-encoded authorization for the user name <strong>kube</strong> and the password <strong>kube</strong>.</li><li>`cache-control: no-cache`</li></ul>
+   </td>
+   </tr>
+   <tr>
+   <td>Body</td>
+   <td><ul><li>`refresh_token`: Your {{site.data.keyword.Bluemix_notm}} IAM delegated refresh token. </li>
+   <li>`grant_type: urn:ibm:params:oauth:grant-type:delegated-refresh-token`</li></ul></td>
+   </tr>
+   </tbody>
+   </table>
+   
+   Example output: 
+   ```
+   {
+    "access_token": "<iam_access_token>",
+    "id_token": "<iam_id_token>",
+    "refresh_token": "<iam_refresh_token>",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "expiration": 1553629664,
+    "scope": "ibm openid containers-kubernetes"
+   }
+   ```
+   {: screen}
+   
+4. Download the Kubernetes configuration files for your cluster. 
+   ```
+   GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>/config
+   ```
+   <table summary-"Input parameters to downlad the Kubernetes configuration for your cluster.">
+   <caption>Input parameters to downlad the Kubernetes configuration for your cluster.</caption>
+   <thead>
+   <th>Input Parameters</th>
+   <th>Values</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Header</td>
+     <td><ul><li>`Authorization`: Your {{site.data.keyword.Bluemix_notm}} IAM access token.</li><li>`X-Auth-Refresh-Token`: Your {{site.data.keyword.Bluemix_notm}} IAM refresh token.</li> <li>`X-Region`: The {{site.data.keyword.containerlong_notm}} region of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api). </li></ul>
+   </td>
+   </tr>
+   <tr>
+   <td>Path</td>
+   <td>`<cluster_ID>`: The ID of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api).  </td>
+   </tr>
+   </tbody>
+   </table>   
+   
+5. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **publicServiceEndpointURL** of your API output. 
+   ```
+   GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>
+   ```
+   {: codeblock}
+   
+   <table summary-"Input parameters to get the public service endpoint for your Kubernetes master.">
+   <caption>Input parameters to get the public service endpoint for your Kubernetes master.</caption>
+   <thead>
+   <th>Input Parameters</th>
+   <th>Values</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Header</td>
+     <td><ul><li>`Authorization`: Your {{site.data.keyword.Bluemix_notm}} IAM access token.</li><li>`X-Auth-Refresh-Token`: Your {{site.data.keyword.Bluemix_notm}} IAM refresh token.</li><li>`X-Region`: The {{site.data.keyword.containerlong_notm}} region of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api). </li></ul>
+   </td>
+   </tr>
+   <tr>
+   <td>Path</td>
+   <td>`<cluster_ID>:` The ID of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api).      </td>
+   </tr>
+   </tbody>
+   </table>
+   
+   Example output: 
+   ```
+   {
+    "location": "Dallas",
+    "dataCenter": "dal10",
+    "multiAzCapable": true,
+    "vlans": null,
+    "worker_vlans": null,
+    "workerZones": [
+        "dal10"
+    ],
+    "id": "1abc123b123b124ab1234a1a12a12a12",
+    "name": "mycluster",
+    "region": "us-south",
+    ...
+    "publicServiceEndpointURL": "https://c7.us-south.containers.cloud.ibm.com:27078"
+   }
+   ```
+   {: screen}
+
+6. Run Kubernetes API requests against your cluster by using the IAM ID token that you retrieved earlier. For example, list the Kubernetes version that runs in your cluster. 
+
+   If you enabled SSL certificate verification in your API test framework, make sure to disable this feature. 
+   {: tip}
+   
+   ```
+   GET <publicServiceEndpointURL>/version
+   ```
+   {: codeblock}
+   
+   <table summary-"Input parameters to view the Kubernetes version that runs in your cluster. ">
+   <caption>Input parameters to view the Kubernetes version that runs in your cluster. </caption>
+   <thead>
+   <th>Input Parameters</th>
+   <th>Values</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Header</td>
+   <td>`Authorization: bearer <id_token>`</td>
+   </tr>
+   <tr>
+   <td>Path</td>
+   <td>`<publicServiceEndpointURL>`: The **publicServiceEndpointURL** of your Kubernetes master that you retrieved in the previous step.      </td>
+   </tr>
+   </tbody>
+   </table>
+   
+   Example output: 
+   ```
+   {
+    "major": "1",
+    "minor": "13",
+    "gitVersion": "v1.13.4+IKS",
+    "gitCommit": "c35166bd86eaa91d17af1c08289ffeab3e71e11e",
+    "gitTreeState": "clean",
+    "buildDate": "2019-03-21T10:08:03Z",
+    "goVersion": "go1.11.5",
+    "compiler": "gc",
+    "platform": "linux/amd64"
+   }
+   ```
+   {: screen}
+   
+6. Review the [Kubernetes API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubernetes-api/) to find a list of supported APIs for the latest Kubernetes version. Make sure to use the API documentation that matches the Kubernetes version of your cluster. If you do not use the latest Kubernetes version, append your version at the end of the URL. For example, to access the API documentation for version 1.12, add `v1.12`. 
 
 
 ## Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API
@@ -710,16 +954,16 @@ Use the following steps if you want to create an {{site.data.keyword.Bluemix_not
     <td>Body when using the refresh token</td>
     <td><ul><li>`grant_type: refresh_token`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`refresh_token: <em>&lt;iam_refresh_token&gt;</em>`</li>
+    <li>`refresh_token:` Your {{site.data.keyword.Bluemix_notm}} IAM refresh token. </li>
     <li>`uaa_client_ID: cf`</li>
     <li>`uaa_client_secret:`</li>
-    <li>`bss_account: <em>&lt;account_ID&gt;</em>`</li></ul><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
+    <li>`bss_account:` Your {{site.data.keyword.Bluemix_notm}} account ID. </li></ul><strong>Note</strong>: Add the <code>uaa_client_secret</code> key with no value specified.</td>
     </tr>
     <tr>
       <td>Body when using the {{site.data.keyword.Bluemix_notm}} API key</td>
       <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey: <em>&lt;api_key&gt;</em>`</li>
+    <li>`apikey:` Your {{site.data.keyword.Bluemix_notm}} API key. </li>
     <li>`uaa_client_ID: cf`</li>
         <li>`uaa_client_secret:`</li></ul><strong>Note:</strong> Add the <code>uaa_client_secret</code> key with no value specified.</td>
     </tr>

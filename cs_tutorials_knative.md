@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-29"
 
 ---
 
@@ -17,7 +17,6 @@ lastupdated: "2019-03-21"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
 
 
 # Tutorial: Using managed Knative to run serverless apps in Kubernetes clusters
@@ -68,7 +67,7 @@ This tutorial is designed for developers who are interested in learning how to u
 {: #knative_prerequisites}
 
 -  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
--  [Create a cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b2c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_cli). Every worker node must run Kubernetes version 1.11 or higher.
+-  [Create a cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_cli). Every worker node must run Kubernetes version 1.11 or higher.
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 -  [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -115,7 +114,13 @@ Knative builds on top of Istio to ensure that your serverless and containerized 
    ```
    {: screen}
 
-3. Verify that all Knative components are successfully installed.
+3. Optional: If you want to use Istio for all apps in the `default` namespace, add the `istio-injection=enabled` label to the namespace. Each serverless app pod must run an Envoy proxy sidecar so that the app can be included in the Istio service mesh. This label allows Istio to automatically modify the pod template specification in new app deployments so that pods are created with Envoy proxy sidecar containers.
+  ```
+  kubectl label namespace default istio-injection=enabled
+  ```
+  {: pre}
+
+4. Verify that all Knative components are successfully installed.
    1. Verify that all pods of the Knative `Serving` component are in a `Running` state.  
       ```
       kubectl get pods --namespace knative-serving
@@ -267,6 +272,7 @@ In this lesson, you deploy your first serverless [`Hello World`](https://hub.doc
    ```
    kubectl get pods
    ```
+   {: pre}
 
    Example output:
    ```
@@ -278,14 +284,14 @@ In this lesson, you deploy your first serverless [`Hello World`](https://hub.doc
 4. Try out your `Hello World` app.
    1. Get the default domain that is assigned to your Knative service. If you changed the name of your Knative service, or deployed the app to a different namespace, update these values in your query.
       ```
-      kubectl get svc/kn-helloworld
+      kubectl get ksvc/kn-helloworld
       ```
       {: pre}
 
       Example output:
       ```
-      NAME         DOMAIN                                                                LATESTCREATED      LATESTREADY        READY   REASON
-      helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   helloworld-00001   helloworld-00001   True
+      NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
+      kn-helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True 
       ```
       {: screen}
 

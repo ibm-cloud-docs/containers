@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-29"
 
 keywords: kubernetes, iks
 
@@ -551,9 +551,25 @@ To allow access to the cluster master in an HA configuration, you must leave hos
 To check if your pods are currently using ports `2040` or `2041`, target your cluster and run the following command.
 
 ```
-kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
 ```
 {: pre}
+
+If you already have an HA master configuration, you see results for `ibm-master-proxy-*` in the `kube-system` namespace, such as in the following example. If other pods are returned, update their ports.
+
+```
+name: ibm-master-proxy-static
+ports:
+- containerPort: 2040
+  hostPort: 2040
+  name: apiserver
+  protocol: TCP
+- containerPort: 2041
+  hostPort: 2041
+...
+```
+{: screen}
+
 
 <br>
 **Using `kubernetes` service cluster IP or domain for in-cluster access to the master**:</br>
@@ -891,9 +907,24 @@ To allow access to the cluster master in an HA configuration, you must leave hos
 To check if your pods are currently using ports `2040` or `2041`, target your cluster and run the following command.
 
 ```
-kubectl get pods --all-namespaces -o yaml | grep "hostPort: 204[0,1]"
+kubectl get pods --all-namespaces -o yaml | grep -B 3 "hostPort: 204[0,1]"
 ```
 {: pre}
+
+If you already have an HA master configuration, you see results for `ibm-master-proxy-*` in the `kube-system` namespace, such as in the following example. If other pods are returned, update their ports.
+
+```
+name: ibm-master-proxy-static
+ports:
+- containerPort: 2040
+  hostPort: 2040
+  name: apiserver
+  protocol: TCP
+- containerPort: 2041
+  hostPort: 2041
+...
+```
+{: screen}
 
 <br>
 **Using `kubernetes` service cluster IP or domain for in-cluster access to the master**:</br>
