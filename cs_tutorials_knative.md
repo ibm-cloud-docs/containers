@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-28"
+lastupdated: "2019-03-29"
 
 ---
 
@@ -284,14 +284,14 @@ In this lesson, you deploy your first serverless [`Hello World`](https://hub.doc
 4. Try out your `Hello World` app.
    1. Get the default domain that is assigned to your Knative service. If you changed the name of your Knative service, or deployed the app to a different namespace, update these values in your query.
       ```
-      kubectl get svc/kn-helloworld
+      kubectl get ksvc/kn-helloworld
       ```
       {: pre}
 
       Example output:
       ```
-      NAME         DOMAIN                                                                LATESTCREATED      LATESTREADY        READY   REASON
-      helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   helloworld-00001   helloworld-00001   True
+      NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
+      kn-helloworld   kn-helloworld.default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True 
       ```
       {: screen}
 
