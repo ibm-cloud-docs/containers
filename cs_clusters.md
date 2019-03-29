@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-28"
+lastupdated: "2019-03-29"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -114,10 +114,10 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 4. Select the **Free** cluster plan.
 5. Give your cluster a name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 
-6. Click **Create cluster**. By default, a worker pool with one worker node is created. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab.
+6. Click **Create cluster**. By default, a worker pool with one worker node is created. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab. Note that even if the cluster is ready, some parts of the cluster that are used by other services such as Ingress secrets or registry image pull secrets, might still be in process.
 
     Changing the unique ID or domain name that is assigned during creation blocks the Kubernetes master from managing your cluster.
-    {: tip}
+    {: note}
 
 </br>
 
@@ -159,7 +159,7 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 
 8. Give your cluster a unique name. **Note**: Changing the unique ID or domain name that is assigned during creation blocks the Kubernetes master from managing your cluster.
 9. Choose the Kubernetes API server version for the cluster master node.
-10. Click **Create cluster**. A worker pool is created with the number of workers that you specified. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab.
+10. Click **Create cluster**. A worker pool is created with the number of workers that you specified. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab. Note that even if the cluster is ready, some parts of the cluster that are used by other services such as Ingress secrets or registry image pull secrets, might still be in process.
 
 **What's next?**
 
@@ -396,7 +396,7 @@ To create a cluster:
     ```
     {: pre}
 
-    When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster.
+    When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services such as Ingress secrets or registry image pull secrets, might still be in process.
 
     Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
     {: important}
@@ -769,7 +769,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
       </tr>
       <tr>
        <td>Normal</td>
-       <td>All worker nodes in a cluster are up and running. You can access the cluster and deploy apps to the cluster. This state is considered healthy and does not require an action from you.<p class="note">Although the worker nodes might be normal, other infrastructure resources, such as [networking](/docs/containers?topic=containers-cs_troubleshoot_network) and [storage](/docs/containers?topic=containers-cs_troubleshoot_storage), might still need attention.</p></td>
+       <td>All worker nodes in a cluster are up and running. You can access the cluster and deploy apps to the cluster. This state is considered healthy and does not require an action from you.<p class="note">Although the worker nodes might be normal, other infrastructure resources, such as [networking](/docs/containers?topic=containers-cs_troubleshoot_network) and [storage](/docs/containers?topic=containers-cs_troubleshoot_storage), might still need attention. If you just created the cluster, some parts of the cluster that are used by other services such as Ingress secrets or registry image pull secrets, might still be in process.</p></td>
     </tr>
       <tr>
        <td>Pending</td>
