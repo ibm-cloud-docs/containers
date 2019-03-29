@@ -699,7 +699,7 @@ To prevent breaking changes, do not change the predefined `view`, `edit`, `admin
             </tr>
             <tr>
               <td><code>rules.apiGroups</code></td>
-              <td>Specify the Kubernetes [API groups ![External link icon](../icons/launch-glyph.svg "External link icon")](https://v1-9.docs.kubernetes.io/docs/reference/api-overview/#api-groups) that you want users to be able to interact with, such as `"apps"`, `"batch"`, or `"extensions"`. For access to the core API group at REST path `api/v1`, leave the group blank: `[""]`.</td>
+              <td>Specify the Kubernetes [API groups ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/using-api/api-overview/#api-groups) that you want users to be able to interact with, such as `"apps"`, `"batch"`, or `"extensions"`. For access to the core API group at REST path `api/v1`, leave the group blank: `[""]`.</td>
             </tr>
             <tr>
               <td><code>rules.resources</code></td>
