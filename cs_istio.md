@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-03-29"
 
 ---
 
@@ -663,11 +663,11 @@ Before you begin, [enable the `istio` and `istio-sample-bookinfo` managed add-on
   <tbody>
   <tr>
   <td><code>tls.hosts</code></td>
-  <td>To use TLS, replace <em>&lt;IBM-ingress-domain&gt;</em> with the IBM-provided Ingress subdomain. Note that `bookinfo` is prepended to your IBM-provided Ingress subdomain. The IBM-provided Ingress subdomain wildcard, <code>*.&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>, is registered by default for your cluster.</td>
+  <td>To use TLS, replace <em>&lt;IBM-ingress-domain&gt;</em> with the IBM-provided Ingress subdomain. Note that `bookinfo` is prepended to your IBM-provided Ingress subdomain. This `bookinfo` subdomain is automatically registered because the IBM-provided Ingress subdomain wildcard, <code>*.&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>, is registered by default for your cluster.</td>
   </tr>
   <tr>
   <td><code>tls.secretName</code></td>
-  <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the IBM-provided Ingress secret. The IBM-provided TLS certificate is a wildcard certificate and can be used for the wildcard subdomain.<td>
+  <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the IBM-provided Ingress secret. The IBM-provided TLS certificate is a wildcard certificate and can be used for the `bookinfo` subdomain.<td>
   </tr>
   <tr>
   <td><code>host</code></td>
@@ -686,16 +686,10 @@ Before you begin, [enable the `istio` and `istio-sample-bookinfo` managed add-on
   {: pre}
 
 4. In a web browser, open the BookInfo product page.
-  - If you enabled TLS:
-    ```
-    https://bookinfo.<IBM-ingress-domain>/productpage
-    ```
-    {: codeblock}
-  - If you did not enable TLS:
-    ```
-    http://bookinfo.<IBM-ingress-domain>/productpage
-    ```
-    {: codeblock}
+  ```
+  https://bookinfo.<IBM-ingress-domain>/productpage
+  ```
+  {: codeblock}
 
 5. Try refreshing the page several times. The requests to `http://bookinfo.<IBM-domain>/productpage` are received by the ALB and are forwarded to Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
 
@@ -810,9 +804,7 @@ To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} AL
   ```
   {: pre}
 
-5. Optional: To create rules that are applied after traffic is routed to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule).
-
-6. Create an Ingress resource file. The {{site.data.keyword.containerlong_notm}} ALB uses the rules defined in this sample resource to forward traffic to the Istio load balancer that exposes your Istio-managed microservice.
+5. Create an Ingress resource file. The {{site.data.keyword.containerlong_notm}} ALB uses the rules defined in this sample resource to forward traffic to the Istio load balancer that exposes your Istio-managed microservice.
   ```
   apiVersion: extensions/v1beta1
   kind: Ingress
@@ -846,17 +838,22 @@ To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} AL
   </tr>
   </tbody></table>
 
-7. Apply the Ingress resource in the namespace where your Istio-managed microservices are deployed.
+6. Apply the Ingress resource in the namespace where your Istio-managed microservices are deployed.
   ```
   kubectl apply -f my-ingress-resource.yaml -n <namespace>
   ```
   {: pre}
 
-8. In a web browser, verify that traffic is being routed to your Istio-managed microservices by entering the URL of the app microservice to access.
+7. In a web browser, verify that traffic is being routed to your Istio-managed microservices by entering the URL of the app microservice to access.
   ```
   http://<subdomain>.<IBM-ingress-domain>/<service_path>
   ```
   {: codeblock}
+
+In review, you created a gateway called `my-gateway`. This gateway uses the existing `istio-ingressgateway` load balancer service to expose your app. The `istio-ingressgateway` load balancer uses the rules that you defined in the `my-virtual-service` virtual service to route traffic to your app. Finally, you created an Ingress resource so that the IBM ALB can forward traffic from your Ingress subdomain to the `istio-ingressgateway` load balancer. All user requests to your Ingress subdomain are forwarded to your app according to your Istio routing rules.
+
+Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule).
+{: tip}
 
 <br />
 
