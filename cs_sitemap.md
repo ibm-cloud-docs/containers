@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-03-29"
 
 ---
 
@@ -604,8 +604,8 @@ lastupdated: "2019-03-27"
 * [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 * [Adding file storage to apps](/docs/containers?topic=containers-file_storage#add_file)
 * [Using existing file storage in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
-  * [Step 1: Preparing your existing storage.](/docs/containers?topic=containers-file_storage#step-1-preparing-your-existing-storage-)
-  * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-file_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [Step 1: Preparing your existing storage.](/docs/containers?topic=containers-file_storage#existing-fjle-1)
+  * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-file_storage#existing-file-2)
 * [Using file storage in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
   * [Dynamically provision the PVC when you create a stateful set](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
   * [Pre-provisioning the PVC before creating the stateful set](/docs/containers?topic=containers-file_storage#file_static_statefulset)
@@ -629,8 +629,8 @@ lastupdated: "2019-03-27"
 * [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 * [Adding block storage to apps](/docs/containers?topic=containers-block_storage#add_block)
 * [Using existing block storage in your cluster](/docs/containers?topic=containers-block_storage#existing_block)
-  * [Step 1: Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#step-1-retrieving-the-information-of-your-existing-block-storage)
-  * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#step-2-creating-a-persistent-volume-pv-and-a-matching-persistent-volume-claim-pvc-)
+  * [Step 1: Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#existing-block-1)
+  * [Step 2: Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
 * [Using block storage in a stateful set](/docs/containers?topic=containers-block_storage#block_statefulset)
   * [Dynamically provision the PVC when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
   * [Pre-provisioning the PVC before creating the stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
