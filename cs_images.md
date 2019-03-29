@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-03-29"
 
 keywords: kubernetes, iks
 
@@ -92,21 +92,25 @@ To deploy a container into the **default** namespace of your cluster:
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: ibmliberty-deployment
+      name: <app_name>-deployment
     spec:
       replicas: 3
+      selector:
+        matchLabels:
+          app: <app_name>
       template:
         metadata:
           labels:
-            app: ibmliberty
+            app: <app_name>
         spec:
           containers:
-          - name: ibmliberty
+          - name: <app_name>
             image: <region>.icr.io/<namespace>/<my_image>:<tag>
     ```
     {: codeblock}
 
     Replace the image URL variables with the information for your image:
+    *  **`<app_name>`**: The name of your app. 
     *  **`<region>`**: The regional {{site.data.keyword.registryshort_notm}} API endpoint for the registry domain. To list the domain for the region that you are logged in to, run `ibmcloud cr api`.
     *  **`<namespace>`**: The registry namespace. To get your namespace information, run `ibmcloud cr namespace-list`.
     *  **`<my_image>:<tag>`**: The image and tag that you want to use to build the container. To get the images available in your registry, run `ibmcloud cr images`.
@@ -719,16 +723,19 @@ To deploy a container into the **default** namespace of your cluster, create a c
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: ibmliberty-deployment
+      name: <app_name>-deployment
     spec:
       replicas: 3
+      selector:
+        matchLabels:
+          app: <app_name>
       template:
         metadata:
           labels:
-            app: ibmliberty
+            app: <app_name>
         spec:
           containers:
-          - name: ibmliberty
+          - name: <app_name>
             image: registry.<region>.bluemix.net/<namespace>/<my_image>:<tag>
     ```
     {: codeblock}
