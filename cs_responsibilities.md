@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-03-30"
 
 keywords: kubernetes, iks
 
@@ -28,11 +28,13 @@ subcollection: containers
 Learn about cluster management responsibilities and terms and conditions that you have when you use {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
+
 ## Cluster management responsibilities
 {: #responsibilities}
 
 Review the responsibilities that you share with IBM to manage your clusters.
 {:shortdesc}
+
 
 **IBM is responsible for:**
 
@@ -65,6 +67,10 @@ Review the responsibilities that you share with IBM to manage your clusters.
 - Setting up [logging](/docs/containers?topic=containers-health#logging) and [monitoring](/docs/containers?topic=containers-health#view_metrics) services to support your cluster's health and performance
 - [Configuring health monitoring for worker nodes with Autorecovery](/docs/containers?topic=containers-health#autorecovery)
 - Auditing events that change resources in your cluster, such as by using [{{site.data.keyword.cloudaccesstrailfull}}](/docs/containers?topic=containers-at_events#at_events) to view user-initiated activities that change the state of your {{site.data.keyword.containerlong_notm}} instance
+
+
+
+
 
 <br />
 

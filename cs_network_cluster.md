@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-03-30"
 
 keywords: kubernetes, iks
 
@@ -45,7 +45,7 @@ This networking setup consists of the following required networking configuratio
 
 3. Choose how your Kubernetes master and worker nodes communicate.
   * If VRF is enabled in your {{site.data.keyword.Bluemix_notm}} account, enable [public-only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public), [public and private](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both), or [private-only service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private).
-  * If you cannot or do not want to enable VRF, enable the [public service endpoint only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
+  * If you cannot or do not want to enable VRF, enable the [public service endpoint only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public) and [enable VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
 
 4. After you create your cluster, you can configure the following networking options:
   * Set up a [strongSwan VPN connection service](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public) to allow communication between your cluster and an on-premises network or {{site.data.keyword.icpfull_notm}}.
