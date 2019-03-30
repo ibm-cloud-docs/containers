@@ -25,6 +25,8 @@ subcollection: containers
 
 
 # Your responsibilities by using {{site.data.keyword.containerlong_notm}}
+{: #responsibilities_iks}
+
 Learn about cluster management responsibilities and terms and conditions that you have when you use {{site.data.keyword.containerlong}}.
 {:shortdesc}
 

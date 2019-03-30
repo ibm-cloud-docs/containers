@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-03-30"
 
 ---
 
@@ -72,9 +72,9 @@ lastupdated: "2019-03-29"
 ## Your cluster strategy
 {: #sitemap-strategy}
 
-[Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#your-responsibilities-by-using-ibm-cloud-kubernetes-service)
-* [Cluster management responsibilities](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#responsibilities)
-* [Abuse of {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-your-responsibilities-by-using-ibm-cloud-kubernetes-service#terms)
+[Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#your-responsibilities-by-using-ibm-cloud-kubernetes-service)
+* [Cluster management responsibilities](/docs/containers?topic=containers-responsibilities_iks#responsibilities)
+* [Abuse of {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#terms)
 
 [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
 * [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
