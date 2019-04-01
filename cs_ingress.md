@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -1476,6 +1476,8 @@ Bring your own Ingress controller and run it on {{site.data.keyword.Bluemix_notm
 {: shortdesc}
 
 Configuring your own custom Ingress controller can be useful when you have specific Ingress requirements. When you bring your own Ingress controller instead of using the IBM-provided Ingress ALB, you are responsible for supplying the controller image, maintaining the controller, and updating the controller.
+
+**Note**: Bringing your own Ingress controller is supported only for providing public external access to your apps and is not supported for providing private external access.
 
 1. Get the ID of the default public ALB. The public ALB has a format similar to `public-cr18e61e63c6e94b658596ca93d087eed9-alb1`.
     ```

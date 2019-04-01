@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-01"
 
 ---
 
@@ -287,7 +287,7 @@ To securely connect your worker nodes and apps to an on-premises network, you ca
 ### Setting up a VPN connection for a private VLAN only setup
 {: #cs_network_ov_vpn_private}
 
-If your cluster is connected to a private VLAN only, you must set up an IPSec VPN endpoint on a VRA or FSA gateway device. Then, you can configure [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) in your cluster to use the VPN endpoint on your gateway. If you do not want to use strongSwan, you can [set up VPN connectivity directly with VRA](/docs/containers?topic=containers-vpn#vyatta).
+If your cluster is connected to a private VLAN only, you must set up an IPSec VPN endpoint on a VRA (Vyatta) or FSA gateway device. Then, you can configure [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) in your cluster to use the VPN endpoint on your gateway. If you do not want to use strongSwan, you can [set up VPN connectivity directly with VRA](/docs/containers?topic=containers-vpn#vyatta).
 {: shortdesc}
 
 <p>

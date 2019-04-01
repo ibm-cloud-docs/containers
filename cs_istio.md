@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-04-01"
 
 ---
 
@@ -63,7 +63,9 @@ If you need to use the latest version of Istio or customize your Istio installat
 {: tip}
 
 **Are there any limitations?** </br>
-If you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster, you cannot enable the managed Istio add-on in your cluster.
+You cannot enable the managed Istio add-on in your cluster if:
+* Your cluster is connected to a private VLAN only.
+* You installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster.
 
 <br />
 
@@ -345,17 +347,17 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 
 <dl>
 <dt>`Gateway`</dt>
-<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace, that acts as the ingress entry point for HTTP/TCP traffic for the BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
+<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace, that acts as the ingress entry point for HTTP/TCP traffic for the BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
 </br></br>To see the configuration file for the BookInfo gateway, run the following command.
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
 
 <dt>`VirtualService`</dt>
-<dd>The `bookinfo` [`VirtualService` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService) defines the rules that control how requests are routed within the service mesh by defining microservices as `destinations`. In the `bookinfo` virtual service, the `/productpage` URI of a request is routed to the `productpage` host on port `9080`. In this way, all requests to the BookInfo app are routed first to the `productpage` microservice, which then calls the other microservices of BookInfo.
+<dd>The `bookinfo` [`VirtualService` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) defines the rules that control how requests are routed within the service mesh by defining microservices as `destinations`. In the `bookinfo` virtual service, the `/productpage` URI of a request is routed to the `productpage` host on port `9080`. In this way, all requests to the BookInfo app are routed first to the `productpage` microservice, which then calls the other microservices of BookInfo.
 </br></br>To see the virtual service rule that is applied to BookInfo, run the following command.
 <pre class="pre"><code>kubectl get virtualservice bookinfo -o yaml</code></pre></dd>
 
 <dt>`DestinationRule`</dt>
-<dd>After the gateway routes the request according to virtual service rule, the `details`, `productpage`, `ratings`, and `reviews` [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule) define policies that are applied to the request when it reaches a microservice. For example, when you refresh the BookInfo product page, the changes that you see are the result of the `productpage` microservice randomly calling different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice. The versions are selected randomly because the `reviews` destination rule gives equal weight to the `subsets`, or the named versions, of the microservice. These subsets are used by the virtual service rules when traffic is routed to specific versions of the service.
+<dd>After the gateway routes the request according to virtual service rule, the `details`, `productpage`, `ratings`, and `reviews` [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/) define policies that are applied to the request when it reaches a microservice. For example, when you refresh the BookInfo product page, the changes that you see are the result of the `productpage` microservice randomly calling different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice. The versions are selected randomly because the `reviews` destination rule gives equal weight to the `subsets`, or the named versions, of the microservice. These subsets are used by the virtual service rules when traffic is routed to specific versions of the service.
 </br></br>To see the destination rules that are applied to BookInfo, run the following command.
 <pre class="pre"><code>kubectl describe destinationrules</code></pre></dd>
 </dl>
@@ -606,7 +608,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 After you [set up Envoy proxy sidecar injection](#istio_sidecar) and deploy your apps into the Istio service mesh, you can expose your Istio-managed apps to public requests by using the IBM-provided Ingress subdomain.
 {: shortdesc}
 
-The {{site.data.keyword.containerlong_notm}} ALB uses Kubernetes Ingress resources to control how traffic is routed to your apps. However, Istio uses [Gateways ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) and [VirtualServices ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService) to control how traffic is routed to your apps. A gateway configures a load balancer that acts as the entry point for your Istio-managed apps. Virtual services define routing rules so that traffic is properly forwarded to your app microservices.
+The {{site.data.keyword.containerlong_notm}} ALB uses Kubernetes Ingress resources to control how traffic is routed to your apps. However, Istio uses [Gateways ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) and [VirtualServices ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) to control how traffic is routed to your apps. A gateway configures a load balancer that acts as the entry point for your Istio-managed apps. Virtual services define routing rules so that traffic is properly forwarded to your app microservices.
 
 In standard clusters, an IBM-provided Ingress subdomain is automatically assigned to your cluster so that you can publicly expose your apps. You can leverage the DNS entry for this subdomain to expose your Istio-managed apps by connecting the default {{site.data.keyword.containerlong_notm}} ALB to the Istio ingress gateway.
 
@@ -701,7 +703,7 @@ For more information about the gateway, virtual service rules, and destination r
 Use the IBM-provided Ingress subdomain for your Istio-managed apps by connecting the Istio gateway and the {{site.data.keyword.containerlong_notm}} ALB. The following steps show how to set up an Istio gateway, create a virtual service that defines traffic management rules for your Istio-managed services, and configure your {{site.data.keyword.containerlong_notm}} Ingress ALB so that it directs traffic from your IBM-provided Ingress subdomain to the `istio-ingressgateway` load balancer.
 {: shortdesc}
 
-Before you begin:
+**Before you begin:**
 1. [Install the `istio` managed add-on](#istio_install) in a cluster.
 2. Install the `istioctl` client.
   1. Download `istioctl`.
@@ -715,9 +717,10 @@ Before you begin:
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
 
-To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} ALB:
+</br>
+**To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} ALB:**
 
-1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `80`, add that port. For more information about gateway YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway).
+1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `80`, add that port. For more information about gateway YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/).
   ```
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
@@ -743,7 +746,7 @@ To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} AL
   ```
   {: pre}
 
-3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService).
+3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/).
 
   If you already expose your microservice by using the {{site.data.keyword.containerlong_notm}} ALB, Istio provides a converter tool as part of the `istioctl` client that can help you migrate Ingress resource definitions to corresponding virtual services. The [`istioctl` converter tool ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/commands/istioctl/#istioctl-experimental-convert-ingress) converts Ingress resources into virtual services on a best effort basis. Note that Ingress annotations are not converted because the Istio gateway does not use Ingress annotations. The output is a starting point for your Istio ingress configuration and might require some modifications. To use the tool, run the following command: `istioctl experimental convert-ingress -f <existing_ingress_resource>.yaml > my-virtual-service.yaml`
   {: tip}
@@ -852,7 +855,7 @@ To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} AL
 
 In review, you created a gateway called `my-gateway`. This gateway uses the existing `istio-ingressgateway` load balancer service to expose your app. The `istio-ingressgateway` load balancer uses the rules that you defined in the `my-virtual-service` virtual service to route traffic to your app. Finally, you created an Ingress resource so that the IBM ALB can forward traffic from your Ingress subdomain to the `istio-ingressgateway` load balancer. All user requests to your Ingress subdomain are forwarded to your app according to your Istio routing rules.
 
-Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule).
+Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/).
 {: tip}
 
 <br />

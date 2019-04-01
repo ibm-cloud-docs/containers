@@ -350,6 +350,8 @@ lastupdated: "2019-04-01"
 * [Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
 * [Setting up the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
 * [Switching from the public service endpoint to the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
+* [Isolating networking workloads to edge worker nodes](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_edge)
+* [Isolating your cluster on the private network](/docs/containers?topic=containers-cs_network_cluster#isolate)
 
 [Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall#firewall)
 * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_kubectl)
@@ -494,8 +496,6 @@ lastupdated: "2019-04-01"
 * [Planning public external networking for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_planning#public_access)
 * [Planning private external networking for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_planning#private_both_vlans)
 * [Planning private external networking for a private VLAN only setup](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)
-* [Optional: Isolating networking workloads to edge worker nodes](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge)
-* [Optional: Isolating your cluster on the private network](/docs/containers?topic=containers-cs_network_planning#isolate)
 
 [Exposing apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 * [Managing network traffic by using NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)

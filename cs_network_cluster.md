@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-30"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,7 @@ This page helps you set up your cluster's network configuration. Not sure which 
 ## Setting up cluster networking with a public and a private VLAN
 {: #both_vlans}
 
-Set up your cluster with access to [a public VLAN and a private VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options). The following image shows network options that you can configure for your cluster with this setup.
+Set up your cluster with access to [a public VLAN and a private VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options).
 {: shortdesc}
 
 This networking setup consists of the following required networking configurations during cluster creation and optional networking configurations after cluster creation.
@@ -52,8 +52,8 @@ This networking setup consists of the following required networking configuratio
   * Create [Kubernetes discovery services](/docs/containers?topic=containers-cs_network_planning#in-cluster) to allow in-cluster communication between pods.
   * Create [public](/docs/containers?topic=containers-cs_network_planning#public_access) Ingress, load balancer, or node port services to expose apps to public networks.
   * Create [private](/docs/containers?topic=containers-cs_network_planning#private_both_vlans) Ingress, load balancer, or node port services to expose apps to private networks and create Calico network policies to secure your cluster from public access.
-  * Isolate networking workloads to [edge worker nodes](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge).
-  * [Isolate your cluster on the private network](/docs/containers?topic=containers-cs_network_planning#isolate).
+  * Isolate networking workloads to [edge worker nodes](#both_vlans_private_edge).
+  * [Isolate your cluster on the private network](#isolate).
 
 <br />
 
@@ -61,7 +61,7 @@ This networking setup consists of the following required networking configuratio
 ## Setting up cluster networking with a private VLAN only
 {: #setup_private_vlan}
 
-If you have specific security requirements or need to create custom network policies and routing rules to provide dedicated network security, set up your cluster with access to [a private VLAN only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options). The following image shows network options that you can configure for your cluster with this setup.
+If you have specific security requirements or need to create custom network policies and routing rules to provide dedicated network security, set up your cluster with access to [a private VLAN only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options).
 {: shortdesc}
 
 This networking setup consists of the following required networking configurations during cluster creation and optional networking configurations after cluster creation.
@@ -75,11 +75,11 @@ This networking setup consists of the following required networking configuratio
   * If you cannot or do not want to enable VRF, your Kubernetes master and worker nodes can't automatically connect to the master. You must configure your cluster with a [gateway appliance](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private).
 
 4. After you create your cluster, you can configure the following networking options:
-  * [Set up a VPN gateway](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private) to allow communication between your cluster and an on-premises network or {{site.data.keyword.icpfull_notm}}. If you previously set up a VRA or FSA to allow communication between the master and worker nodes, you can configure an IPSec VPN endpoint on the VRA or FSA.
+  * [Set up a VPN gateway](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private) to allow communication between your cluster and an on-premises network or {{site.data.keyword.icpfull_notm}}. If you previously set up a VRA (Vyatta) or FSA to allow communication between the master and worker nodes, you can configure an IPSec VPN endpoint on the VRA or FSA.
   * Create [Kubernetes discovery services](/docs/containers?topic=containers-cs_network_planning#in-cluster) to allow in-cluster communication between pods.
   * Create [private](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) Ingress, load balancer, or node port services to expose apps on private networks.
-  * Isolate networking workloads to [edge worker nodes](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge).
-  * [Isolate your cluster on the private network](/docs/containers?topic=containers-cs_network_planning#isolate).
+  * Isolate networking workloads to [edge worker nodes](#both_vlans_private_edge).
+  * [Isolate your cluster on the private network](#isolate).
 
 <br />
 
@@ -367,3 +367,20 @@ Note that you cannot disable the private service endpoint after you enable it.
   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
   ```
   {: pre}
+
+<br />
+
+
+## Optional: Isolating networking workloads to edge worker nodes
+{: #both_vlans_private_edge}
+
+Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads).
+{: shortdesc}
+
+If your cluster is connected to a public VLAN but you want to block traffic to public NodePorts on edge worker nodes, you can also use a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress). Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
+
+## Optional: Isolating your cluster on the private network
+{: #isolate}
+
+If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must [enable VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) or [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) so that your worker nodes can communicate with each other on the private network. However, when VLAN spanning or VRF is enabled, any system that is connected to any of the private VLANs in the same IBM Cloud account can access your workers. You can isolate your multizone cluster from other systems on the private network by using [Calico network policies](/docs/containers?topic=containers-network_policies#isolate_workers). These policies also allow ingress and egress for the private IP ranges and ports that you opened in your private firewall.
+{: shortdesc}
