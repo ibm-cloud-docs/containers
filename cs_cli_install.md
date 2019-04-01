@@ -774,7 +774,7 @@ The following instructions require public network access in your cluster to conn
    <tbody>
    <tr>
    <td>Header</td>
-   <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic a3ViZTprdWJl`</br><strong>Note</strong>: <code>a3ViZTprdWJl</code> equals the URL-encoded authorization for the user name <strong>kube</strong> and the password <strong>kube</strong>.</li><li>`cache-control: no-cache`</li></ul>
+   <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic a3ViZTprdWJl`</br><strong>Note</strong>: <code>a3ViZTprdWJl</code> equals the URL-encoded authorization for the user name <strong><code>kube</code></strong> and the password <strong><code>kube</code></strong>.</li><li>`cache-control: no-cache`</li></ul>
    </td>
    </tr>
    <tr>
