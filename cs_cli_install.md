@@ -419,7 +419,7 @@ To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide 
 You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
 {: tip}
 
-<table>
+<table summary="ID types and options with the input parameter in column 1 and the value in column 2.">
 <caption>ID types and options</caption>
 <thead>
 <th>{{site.data.keyword.Bluemix_notm}} ID</th>
@@ -444,7 +444,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    <table summary-"Input parameters to retrieve IAM tokens.">
+    <table summary="Input parameters to retrieve IAM tokens with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to get IAM tokens.</caption>
     <thead>
         <th>Input Parameters</th>
@@ -511,7 +511,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    <table summary="Input parameters to get {{site.data.keyword.Bluemix_notm}} account ID.">
+    <table summary="Input parameters to get {{site.data.keyword.Bluemix_notm}} account ID with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to get an {{site.data.keyword.Bluemix_notm}} account ID.</caption>
     <thead>
   	<th>Input parameters</th>
@@ -557,7 +557,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    <table summary-"Input parameters to retrieve IAM tokens.">
+    <table summary="Input parameters to retrieve IAM tokens with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to get IAM tokens.</caption>
     <thead>
         <th>Input Parameters</th>
@@ -624,7 +624,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
     
-    <table summary="Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions.">
+    <table summary="Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions.</caption>
     <thead>
     <th>Input parameters</th>
@@ -728,7 +728,7 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to get an IAM delegated refresh token.">
+   <table summary="Input parameters to get an IAM delegated refresh token with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get an IAM delegated refresh token. </caption>
    <thead>
    <th>Input Parameters</th>
@@ -765,7 +765,7 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to get IAM ID and IAM access tokens.">
+   <table summary="Input parameters to get IAM ID and IAM access tokens with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get IAM ID and IAM access tokens.</caption>
    <thead>
    <th>Input Parameters</th>
@@ -805,7 +805,7 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to get the public service endpoint for your Kubernetes master.">
+   <table summary="Input parameters to get the public service endpoint for your Kubernetes master with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get the public service endpoint for your Kubernetes master.</caption>
    <thead>
    <th>Input Parameters</th>
@@ -854,7 +854,7 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to view the Kubernetes version that runs in your cluster. ">
+   <table summary="Input parameters to view the Kubernetes version that runs in your cluster with the input parameter in column 1 and the value in column 2. ">
    <caption>Input parameters to view the Kubernetes version that runs in your cluster. </caption>
    <thead>
    <th>Input Parameters</th>
@@ -915,7 +915,7 @@ Use the following steps if you want to create an {{site.data.keyword.Bluemix_not
     ```
     {: codeblock}
 
-    <table summary="Input parameters for new IAM token">
+    <table summary="Input parameters for new IAM token with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters for a new {{site.data.keyword.Bluemix_notm}} IAM token</caption>
     <thead>
     <th>Input parameters</th>
