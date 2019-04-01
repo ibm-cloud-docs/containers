@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -163,8 +163,8 @@ For more information, see the [{{site.data.keyword.Bluemix_notm}} Private produc
 With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud infrastructure (SoftLayer) compute, networking, and storage resources with platform services such as Watson AI or Compose Database-as-a-Service. Each resource might entail its own charges that can be [fixed, metered, tiered, or reserved](/docs/billing-usage?topic=billing-usage-charges#charges). 
 * [Worker nodes](#nodes)
 * [Outbound networking](#bandwidth)
-* [Subnet IP addresses](#subnets)
-* [Storage](#storage)
+* [Subnet IP addresses](#subnet_ips)
+* [Storage](#persistent_storage)
 * [{{site.data.keyword.Bluemix_notm}} services](#services)
 
 <dl>
@@ -187,11 +187,11 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <li><strong>Tiered packages</strong>: After you exceed any included bandwidth, you are charged according to a tiered usage scheme that varies by location. If you exceed a tier allotment, you might also be charged a standard data transfer fee.</li></ul>
   <p>For more information, see [Bandwidth packages ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth).</p></dd>
 
-<dt id="subnets">Subnet IP addresses</dt>
+<dt id="subnet_ips">Subnet IP addresses</dt>
   <dd><p>When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly.</p><p>If you already have available subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create), and then [reuse your subnets](/docs/containers?topic=containers-subnets#subnets_custom).</p>
   </dd>
 
-<dt id="storage">Storage</dt>
+<dt id="persistent_storage">Storage</dt>
   <dd>When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly plans that you can choose from. To choose the right storage solution, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning). For more information, see:
   <ul><li>[NFS file storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</li>
   <li>[Block storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</li>
