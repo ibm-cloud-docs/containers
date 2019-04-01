@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-03-30"
+lastupdated: "2019-04-01"
 
 ---
 
@@ -91,6 +91,38 @@ lastupdated: "2019-03-30"
 
 [High availability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#ha)
 * [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
+
+[Defining your Kubernetes strategy](/docs/containers?topic=containers-strategy#strategy)
+* [Moving your workloads to the {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
+  * [What can I move to the {{site.data.keyword.Bluemix_notm}}?](/docs/containers?topic=containers-strategy#move_to_cloud)
+  * [What kind of apps can I run in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#app_types)
+    * [What are some guidelines for developing stateless, cloud-native apps?](/docs/containers?topic=containers-strategy#12factor)
+    * [I already have an app. How can I migrate it to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#migrate_containerize)
+* [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
+  * [How many resources does my app require?](/docs/containers?topic=containers-strategy#sizing_resources)
+  * [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
+  * [What type of availability do I want my workload to have?](/docs/containers?topic=containers-strategy#sizing_availability)
+  * [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
+* [Structuring your Kubernetes environment](/docs/containers?topic=containers-strategy#kube_env)
+  * [What type of cluster and machine types should I get?](/docs/containers?topic=containers-strategy#env_flavors)
+  * [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
+  * [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
+* [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
+* [Setting up service discovery](/docs/containers?topic=containers-strategy#service_discovery)
+  * [Can I customize the Kubernetes cluster DNS provider?](/docs/containers?topic=containers-strategy#services_dns)
+  * [How can I make sure that my services are connected to the right deployments and ready to go?](/docs/containers?topic=containers-strategy#services_connected)
+  * [How do I control network traffic among the services that run in my cluster?](/docs/containers?topic=containers-strategy#services_network_traffic)
+  * [How can I expose my services on the Internet?](/docs/containers?topic=containers-strategy#services_expose_apps)
+* [Deploying app workloads to clusters](/docs/containers?topic=containers-strategy#deployments)
+  * [I thought that I needed to put my app in a container. Now what's all this stuff about pods?](/docs/containers?topic=containers-strategy#deploy_pods)
+  * [So if I can just use a pod, why do I need all these different types of objects?](/docs/containers?topic=containers-strategy#deploy_objects)
+  * [How can I organize my deployments to make them easier to update and manage?](/docs/containers?topic=containers-strategy#deploy_organize)
+  * [What else can I do to prepare my app for deployment?](/docs/containers?topic=containers-strategy#deploy_prep)
+* [Packing your app](/docs/containers?topic=containers-strategy#packaging)
+* [Keeping your app up to date](/docs/containers?topic=containers-strategy#updating)
+  * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-strategy#updating_kube)
+  * [What app update strategies can I use?](/docs/containers?topic=containers-strategy#updating_apps)
+* [Monitoring your cluster performance](/docs/containers?topic=containers-strategy#health)
 
 ## Tutorials
 {: #sitemap-tutorials}

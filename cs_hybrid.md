@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks 
 
@@ -32,7 +32,7 @@ subcollection: containers
 If you have an {{site.data.keyword.Bluemix}} Private account, you can use it with select {{site.data.keyword.Bluemix_notm}} services, including {{site.data.keyword.containerlong}}. For more information, see the blog on [Hybrid experience across {{site.data.keyword.Bluemix_notm}} Private and IBM Public Cloud![External link icon](../icons/launch-glyph.svg "External link icon")](http://ibm.biz/hybridJune2018).
 {: shortdesc}
 
-You understand the [{{site.data.keyword.Bluemix_notm}} offerings](/docs/containers?topic=containers-cs_ov#differentiation). Now, you can [connect your public and private cloud](#hybrid_vpn) and [reuse your private packages for public containers](#hybrid_ppa_importer).
+You understand the [{{site.data.keyword.Bluemix_notm}} offerings](/docs/containers?topic=containers-cs_ov#differentiation) and developed your Kubernetes strategy for what [workloads to run on the cloud](/docs/containers?topic=containers-strategy#cloud_workloads). Now, you can [connect your public and private cloud](#hybrid_vpn) and [reuse your private packages for public containers](#hybrid_ppa_importer).
 
 ## Connecting your public and private cloud with the strongSwan VPN
 {: #hybrid_vpn}
