@@ -447,7 +447,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     <table summary="Input parameters to retrieve IAM tokens with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to get IAM tokens.</caption>
     <thead>
-        <th>Input Parameters</th>
+        <th>Input parameters</th>
         <th>Values</th>
     </thead>
     <tbody>
@@ -560,7 +560,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     <table summary="Input parameters to retrieve IAM tokens with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to get IAM tokens.</caption>
     <thead>
-        <th>Input Parameters</th>
+        <th>Input parameters</th>
         <th>Values</th>
     </thead>
     <tbody>
@@ -731,7 +731,7 @@ The following instructions require public network access in your cluster to conn
    <table summary="Input parameters to get an IAM delegated refresh token with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get an IAM delegated refresh token. </caption>
    <thead>
-   <th>Input Parameters</th>
+   <th>Input parameters</th>
    <th>Values</th>
    </thead>
    <tbody>
@@ -768,7 +768,7 @@ The following instructions require public network access in your cluster to conn
    <table summary="Input parameters to get IAM ID and IAM access tokens with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get IAM ID and IAM access tokens.</caption>
    <thead>
-   <th>Input Parameters</th>
+   <th>Input parameters</th>
    <th>Values</th>
    </thead>
    <tbody>
@@ -808,7 +808,7 @@ The following instructions require public network access in your cluster to conn
    <table summary="Input parameters to get the public service endpoint for your Kubernetes master with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get the public service endpoint for your Kubernetes master.</caption>
    <thead>
-   <th>Input Parameters</th>
+   <th>Input parameters</th>
    <th>Values</th>
    </thead>
    <tbody>
@@ -857,7 +857,7 @@ The following instructions require public network access in your cluster to conn
    <table summary="Input parameters to view the Kubernetes version that runs in your cluster with the input parameter in column 1 and the value in column 2. ">
    <caption>Input parameters to view the Kubernetes version that runs in your cluster. </caption>
    <thead>
-   <th>Input Parameters</th>
+   <th>Input parameters</th>
    <th>Values</th>
    </thead>
    <tbody>
