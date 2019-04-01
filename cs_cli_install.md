@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -720,7 +720,7 @@ You can use the [Kubernetes API ![External link icon](../icons/launch-glyph.svg 
 The following instructions require public network access in your cluster to connect to the public service endpoint of your Kubernetes master.
 {: note}
 
-1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.Bluemix_notm}} IAM refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located. 
+1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.Bluemix_notm}} IAM access token, refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located. 
 
 2. Retrieve an {{site.data.keyword.Bluemix_notm}} IAM delegated refresh token. 
    ```
@@ -797,32 +797,9 @@ The following instructions require public network access in your cluster to conn
     "scope": "ibm openid containers-kubernetes"
    }
    ```
-   {: screen}
+   {: screen} 
    
-4. Download the Kubernetes configuration files for your cluster. 
-   ```
-   GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>/config
-   ```
-   <table summary-"Input parameters to downlad the Kubernetes configuration for your cluster.">
-   <caption>Input parameters to downlad the Kubernetes configuration for your cluster.</caption>
-   <thead>
-   <th>Input Parameters</th>
-   <th>Values</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td>Header</td>
-     <td><ul><li>`Authorization`: Your {{site.data.keyword.Bluemix_notm}} IAM access token.</li><li>`X-Auth-Refresh-Token`: Your {{site.data.keyword.Bluemix_notm}} IAM refresh token.</li> <li>`X-Region`: The {{site.data.keyword.containerlong_notm}} region of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api). </li></ul>
-   </td>
-   </tr>
-   <tr>
-   <td>Path</td>
-   <td>`<cluster_ID>`: The ID of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api).  </td>
-   </tr>
-   </tbody>
-   </table>   
-   
-5. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **publicServiceEndpointURL** of your API output. 
+4. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **publicServiceEndpointURL** of your API output. 
    ```
    GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>
    ```
@@ -867,7 +844,7 @@ The following instructions require public network access in your cluster to conn
    ```
    {: screen}
 
-6. Run Kubernetes API requests against your cluster by using the IAM ID token that you retrieved earlier. For example, list the Kubernetes version that runs in your cluster. 
+5. Run Kubernetes API requests against your cluster by using the IAM ID token that you retrieved earlier. For example, list the Kubernetes version that runs in your cluster. 
 
    If you enabled SSL certificate verification in your API test framework, make sure to disable this feature. 
    {: tip}
