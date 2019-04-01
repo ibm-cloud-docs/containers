@@ -799,7 +799,7 @@ The following instructions require public network access in your cluster to conn
    ```
    {: screen} 
    
-4. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **publicServiceEndpointURL** of your API output. 
+4. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **`publicServiceEndpointURL`** of your API output. 
    ```
    GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>
    ```
@@ -867,7 +867,7 @@ The following instructions require public network access in your cluster to conn
    </tr>
    <tr>
    <td>Path</td>
-   <td>`<publicServiceEndpointURL>`: The **publicServiceEndpointURL** of your Kubernetes master that you retrieved in the previous step.      </td>
+   <td>`<publicServiceEndpointURL>`: The **`publicServiceEndpointURL`** of your Kubernetes master that you retrieved in the previous step.      </td>
    </tr>
    </tbody>
    </table>
