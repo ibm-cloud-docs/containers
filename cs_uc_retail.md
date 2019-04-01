@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -31,23 +31,23 @@ These use cases highlight how workloads on {{site.data.keyword.containerlong_not
 take advantage of analytics for market insights, multiregion deployments across the globe, and inventory management with {{site.data.keyword.messagehub_full}} and object storage.
 {: shortdesc}
 
-## Brick-and-mortar retailer shares data, by using APIs with global partners to drive omnichannel sales
+## Brick-and-mortar retailer shares data, by using APIs with global business partners to drive omnichannel sales
 {: #uc_data-share}
 
-A Line-of-Business (LOB) Exec needs to increase sales channels, but the retail system is closed off in an on-premises data center. The competition has global partners to cross-sell and upsell permutations of their goods: across brick-and-mortar and online sites.
+A Line-of-Business (LOB) Exec needs to increase sales channels, but the retail system is closed off in an on-premises data center. The competition has global business partners to cross-sell and upsell permutations of their goods: across brick-and-mortar and online sites.
 {: shortdesc}
 
-Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides a public-cloud ecosystem, where containers enable new partners and other external players to co-develop apps and data, through APIs. Now that the retail system is on the public cloud, APIs also streamline data sharing and jump-start new app development. App deployments increase when Developers experiment easily, pushing changes to Development and Test systems quickly with toolchains.
+Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides a public-cloud ecosystem, where containers enable new business partners and other external players to co-develop apps and data, through APIs. Now that the retail system is on the public cloud, APIs also streamline data sharing and jump-start new app development. App deployments increase when Developers experiment easily, pushing changes to Development and Test systems quickly with toolchains.
 
 {{site.data.keyword.containerlong_notm}} and key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [{{site.data.keyword.cos_full}} to persist and sync data across apps](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
-**Context: Retailer shares data, by using APIs with global partners to drive omnichannel sales**
+**Context: Retailer shares data, by using APIs with global business partners to drive omnichannel sales**
 
 * The retailer is faced with strong competitive pressures. First, they need to mask the complexity of crossing into new products and new channels. For example, they need to expand product sophistication. At the same time, it needs to be simpler for their customers to jump across brands.
-* That ability to jump brand means that the retail ecosystem requires connectivity to partners. Then, the cloud can bring new value from partners, customers, and other external players.
+* That ability to jump brand means that the retail ecosystem requires connectivity to business partners. Then, the cloud can bring new value from business partners, customers, and other external players.
 * Burst user events, like Black Friday, strain existing online systems, forcing the retailer to over-provision the compute infrastructure.
 * The retailer’s Developers needed to constantly evolve apps, but traditional tools slowed their ability to deploy updates and features frequently, especially when they collaborate with business partner teams.  
 
@@ -58,13 +58,13 @@ A smarter shopping experience is needed to increase customer retention and gross
 The retailer must also provide customers with useful content, such as product information, alternative product information, reviews, and real-time inventory visibility. And those customers want it while online and in-store through personal mobile devices and mobile-equipped store associates.
 
 The solution is made up of these primary components:
-* INVENTORY: App for business partner ecosystem that aggregates and communicates inventory, especially new product introductions, including APIs for partners to reuse in their own retail and B2B apps
+* INVENTORY: App for business partner ecosystem that aggregates and communicates inventory, especially new product introductions, including APIs for business partners to reuse in their own retail and B2B apps
 * CROSS- AND UP-SALES: App that surfaces cross-sell and up-sell opportunities with APIs that can be used in various e-commerce and mobile apps
-* DEVELOPMENT ENVIRONMENT: Kubernetes clusters for Dev, Test, and Production systems increase collaboration and data sharing among the retailer and its partners
+* DEVELOPMENT ENVIRONMENT: Kubernetes clusters for Dev, Test, and Production systems increase collaboration and data sharing among the retailer and its business partners
 
-For the retailer to work with global partners, the inventory APIs required changes to fit each region’s language and market preferences. {{site.data.keyword.containerlong_notm}} offers coverage in multiple regions, including North America, Europe, Asia, and Australia, so that the APIs reflected the needs of each country and ensured low latency for API calls.
+For the retailer to work with global business partners, the inventory APIs required changes to fit each region’s language and market preferences. {{site.data.keyword.containerlong_notm}} offers coverage in multiple regions, including North America, Europe, Asia, and Australia, so that the APIs reflected the needs of each country and ensured low latency for API calls.
 
-Another requirement is that inventory data must be shareable with the partners’ and company’s customers. With the inventory APIs, Developers can surface information in apps, such as mobile inventory apps or web e-commerce solutions. The Developers are also busy with building and maintaining the primary e-commerce site. In short, they need to focus on coding instead of managing the infrastructure.
+Another requirement is that inventory data must be shareable with the business partners’ and customers of the company. With the inventory APIs, Developers can surface information in apps, such as mobile inventory apps or web e-commerce solutions. The Developers are also busy with building and maintaining the primary e-commerce site. In short, they need to focus on coding instead of managing the infrastructure.
 
 Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
 * Managing Kubernetes master, IaaS, and operational components, such as Ingress and storage
@@ -73,7 +73,7 @@ Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies
 
 Moreover logging and monitoring for the API microservices, especially how they pull personalized data out of back-end systems, easily integrates with {{site.data.keyword.containerlong_notm}}. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems.
 
-{{site.data.keyword.messagehub_full}} acts as the just-in-time events platform to bring in the rapidly changing information from the partners’ inventory systems to {{site.data.keyword.cos_full}}.
+{{site.data.keyword.messagehub_full}} acts as the just-in-time events platform to bring in the rapidly changing information from the business partners’ inventory systems to {{site.data.keyword.cos_full}}.
 
 **Solution model**
 
@@ -103,18 +103,18 @@ Technical solution:
 * After users have signed in, you can use {{site.data.keyword.appid_short_notm}} to create profiles and personalize a user's experience of your application.
 
 **Step 4: Share data**
-* {{site.data.keyword.cos_full}} plus {{site.data.keyword.messagehub_full}} provides real-time and historical data storage, so that cross-sales offers represent available inventory from partners.
-* APIs allow the retailer’s partners to share data into their e-commerce and B2B apps.
+* {{site.data.keyword.cos_full}} plus {{site.data.keyword.messagehub_full}} provides real-time and historical data storage, so that cross-sales offers represent available inventory from business partners.
+* APIs allow the retailer’s business partners to share data into their e-commerce and B2B apps.
 
 **Step 5: Deliver continuously**
 * Debugging the co-developed APIs becomes simpler when they add on IBM Cloud Logging and Monitoring tools, cloud-based ones that are accessible to the various Developers.
 * {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain by using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
 * After Developers build and test the apps in their Development and Test clusters, they use the IBM continuous integration and delivery (CI and CD) toolchains to deploy apps into clusters across the globe.
-* {{site.data.keyword.containerlong_notm}} provides easy roll-out and roll-back of apps; tailored apps are deployed to test campaigns through Istio’s intelligent routing and load balancing.
+* {{site.data.keyword.containerlong_notm}} provides easy roll-out and roll-back of apps; tailored apps are deployed to test campaigns through the intelligent routing and load balancing of Istio.
 
 **Results**
 * Microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial worldwide development is fast, and updates are as frequent as 40 times a week.
-* The retailer and its partners have immediate access to inventory availability and delivery schedules, by using the APIs.
+* The retailer and its business partners have immediate access to inventory availability and delivery schedules, by using the APIs.
 * With {{site.data.keyword.containerlong_notm}} and IBM CI and CD tools, A-B versions of apps are ready to test campaigns.
 * {{site.data.keyword.containerlong_notm}} provides scalable compute, so that the inventory and cross-sales API workloads can grow during high-volume periods of the year, such as the fall holidays.
 
@@ -141,7 +141,7 @@ Key technologies:
 
 **The solution**
 
-The grocer needs an app to increase conversion and store traffic to generate new sales and build customer loyalty in a reusable cloud analytics platform. The in-store targeted experience can be an event along with a services or product vendor that attracts both loyalty and new customers based on affinity to the specific event. The store and business partner then offer incentives to come to the event as well as buying products from the store or partner.  
+The grocer needs an app to increase conversion and store traffic to generate new sales and build customer loyalty in a reusable cloud analytics platform. The in-store targeted experience can be an event along with a services or product vendor that attracts both loyalty and new customers based on affinity to the specific event. The store and business partner then offer incentives to come to the event as well as buying products from the store or business partner.  
 
 After the event, customers are guided to purchasing the necessary products, so they can repeat the demonstrated activity on their own in the future. The targeted customer experience is measured with incentive redemption and new loyalty customer signups. The combination of a hyper-personalized marketing event and a tool to track in-store purchases can carry the targeted experience all the way through to product purchase. All these actions result in higher traffic and conversions.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -88,9 +88,9 @@ This solution provides the immediate benefit of scalability. By using Kubernetes
 
 {{site.data.keyword.SecureGateway}} is used to create a secure pipeline to on-premises databases and documents for apps that are rehosted to run in {{site.data.keyword.containerlong_notm}}.
 
-{{site.data.keyword.cos_full_notm}} is for all raw document and data storage as they go forward. For Monte Carlo simulations, a workflow pipeline is put in place where simulation data is in structured input files that are stored in {{site.data.keyword.cos_full_notm}}. A trigger to start the simulation scales compute services in {{site.data.keyword.containerlong_notm}} to split the input data into N event buckets for simulation processing. {{site.data.keyword.containerlong_notm}} automatically scales to N associated service executions and writes intermediate results to {{site.data.keyword.cos_full_notm}}. Those results are processed by another set of the {{site.data.keyword.containerlong_notm}} compute services to produce the final results.
+{{site.data.keyword.cos_full_notm}} is for all raw document and data storage as they go forward. For Monte Carlo simulations, a workflow pipeline is put in place where simulation data is in structured files that are stored in {{site.data.keyword.cos_full_notm}}. A trigger to start the simulation scales compute services in {{site.data.keyword.containerlong_notm}} to split the data of the files into N event buckets for simulation processing. {{site.data.keyword.containerlong_notm}} automatically scales to N associated service executions and writes intermediate results to {{site.data.keyword.cos_full_notm}}. Those results are processed by another set of the {{site.data.keyword.containerlong_notm}} compute services to produce the final results.
 
-{{site.data.keyword.cloudant}} is a modern NoSQL database that is useful for many data-driven use cases: from key-value to complex document-oriented data storage and query. To manage the growing set of regulatory and management report rules, the mortgage company uses {{site.data.keyword.cloudant}} to store documents that are associated with raw regulatory data input coming into the firm. Compute processes on {{site.data.keyword.containerlong_notm}} are triggered to compile, process, and publish the data in various reporting formats. Intermediate results common across reports are stored as {{site.data.keyword.cloudant}} documents so template-driven processes can be used to produce the necessary reports.
+{{site.data.keyword.cloudant}} is a modern NoSQL database that is useful for many data-driven use cases: from key-value to complex document-oriented data storage and query. To manage the growing set of regulatory and management report rules, the mortgage company uses {{site.data.keyword.cloudant}} to store documents that are associated with raw regulatory data the come into the firm. Compute processes on {{site.data.keyword.containerlong_notm}} are triggered to compile, process, and publish the data in various reporting formats. Intermediate results common across reports are stored as {{site.data.keyword.cloudant}} documents so template-driven processes can be used to produce the necessary reports.
 
 **Results**
 

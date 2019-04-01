@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks 
 
@@ -109,10 +109,10 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     {:pre}
 
 3. After a few minutes, you can view your logs in the Kibana dashboard. To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account where you created the cluster. If you specified a space at cluster creation, go to that space instead.
-    - US-South and US-East: https://logging.ng.bluemix.net
-    - UK-South: https://logging.eu-gb.bluemix.net
-    - EU-Central: https://logging.eu-fra.bluemix.net
-    - AP-South: https://logging.au-syd.bluemix.net
+    - US-South and US-East: `https://logging.ng.bluemix.net`
+    - UK-South: `https://logging.eu-gb.bluemix.net`
+    - EU-Central: `https://logging.eu-fra.bluemix.net`
+    - AP-South: `https://logging.au-syd.bluemix.net`
 
 <br />
 

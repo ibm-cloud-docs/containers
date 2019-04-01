@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -419,7 +419,7 @@ To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide 
 You can also use the [API swagger JSON file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/swagger-api-json) to generate a client that can interact with the API as part of your automation work.
 {: tip}
 
-<table>
+<table summary="ID types and options with the input parameter in column 1 and the value in column 2.">
 <caption>ID types and options</caption>
 <thead>
 <th>{{site.data.keyword.Bluemix_notm}} ID</th>
@@ -444,10 +444,10 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    <table summary-"Input parameters to retrieve IAM tokens.">
+    <table summary="Input parameters to retrieve IAM tokens with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to get IAM tokens.</caption>
     <thead>
-        <th>Input Parameters</th>
+        <th>Input parameters</th>
         <th>Values</th>
     </thead>
     <tbody>
@@ -511,7 +511,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    <table summary="Input parameters to get {{site.data.keyword.Bluemix_notm}} account ID.">
+    <table summary="Input parameters to get {{site.data.keyword.Bluemix_notm}} account ID with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to get an {{site.data.keyword.Bluemix_notm}} account ID.</caption>
     <thead>
   	<th>Input parameters</th>
@@ -557,10 +557,10 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
 
-    <table summary-"Input parameters to retrieve IAM tokens.">
+    <table summary="Input parameters to retrieve IAM tokens with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to get IAM tokens.</caption>
     <thead>
-        <th>Input Parameters</th>
+        <th>Input parameters</th>
         <th>Values</th>
     </thead>
     <tbody>
@@ -624,7 +624,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: codeblock}
     
-    <table summary="Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions.">
+    <table summary="Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions.</caption>
     <thead>
     <th>Input parameters</th>
@@ -720,7 +720,7 @@ You can use the [Kubernetes API ![External link icon](../icons/launch-glyph.svg 
 The following instructions require public network access in your cluster to connect to the public service endpoint of your Kubernetes master.
 {: note}
 
-1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.Bluemix_notm}} IAM refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located. 
+1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.Bluemix_notm}} IAM access token, refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located. 
 
 2. Retrieve an {{site.data.keyword.Bluemix_notm}} IAM delegated refresh token. 
    ```
@@ -728,10 +728,10 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to get an IAM delegated refresh token.">
+   <table summary="Input parameters to get an IAM delegated refresh token with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get an IAM delegated refresh token. </caption>
    <thead>
-   <th>Input Parameters</th>
+   <th>Input parameters</th>
    <th>Values</th>
    </thead>
    <tbody>
@@ -765,16 +765,16 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to get IAM ID and IAM access tokens.">
+   <table summary="Input parameters to get IAM ID and IAM access tokens with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get IAM ID and IAM access tokens.</caption>
    <thead>
-   <th>Input Parameters</th>
+   <th>Input parameters</th>
    <th>Values</th>
    </thead>
    <tbody>
    <tr>
    <td>Header</td>
-   <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic a3ViZTprdWJl`</br><strong>Note</strong>: <code>a3ViZTprdWJl</code> equals the URL-encoded authorization for the user name <strong>kube</strong> and the password <strong>kube</strong>.</li><li>`cache-control: no-cache`</li></ul>
+   <td><ul><li>`Content-Type: application/x-www-form-urlencoded`</li> <li>`Authorization: Basic a3ViZTprdWJl`</br><strong>Note</strong>: <code>a3ViZTprdWJl</code> equals the URL-encoded authorization for the user name <strong><code>kube</code></strong> and the password <strong><code>kube</code></strong>.</li><li>`cache-control: no-cache`</li></ul>
    </td>
    </tr>
    <tr>
@@ -797,41 +797,18 @@ The following instructions require public network access in your cluster to conn
     "scope": "ibm openid containers-kubernetes"
    }
    ```
-   {: screen}
+   {: screen} 
    
-4. Download the Kubernetes configuration files for your cluster. 
-   ```
-   GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>/config
-   ```
-   <table summary-"Input parameters to downlad the Kubernetes configuration for your cluster.">
-   <caption>Input parameters to downlad the Kubernetes configuration for your cluster.</caption>
-   <thead>
-   <th>Input Parameters</th>
-   <th>Values</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td>Header</td>
-     <td><ul><li>`Authorization`: Your {{site.data.keyword.Bluemix_notm}} IAM access token.</li><li>`X-Auth-Refresh-Token`: Your {{site.data.keyword.Bluemix_notm}} IAM refresh token.</li> <li>`X-Region`: The {{site.data.keyword.containerlong_notm}} region of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api). </li></ul>
-   </td>
-   </tr>
-   <tr>
-   <td>Path</td>
-   <td>`<cluster_ID>`: The ID of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api).  </td>
-   </tr>
-   </tbody>
-   </table>   
-   
-5. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **publicServiceEndpointURL** of your API output. 
+4. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **`publicServiceEndpointURL`** of your API output. 
    ```
    GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to get the public service endpoint for your Kubernetes master.">
+   <table summary="Input parameters to get the public service endpoint for your Kubernetes master with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get the public service endpoint for your Kubernetes master.</caption>
    <thead>
-   <th>Input Parameters</th>
+   <th>Input parameters</th>
    <th>Values</th>
    </thead>
    <tbody>
@@ -867,7 +844,7 @@ The following instructions require public network access in your cluster to conn
    ```
    {: screen}
 
-6. Run Kubernetes API requests against your cluster by using the IAM ID token that you retrieved earlier. For example, list the Kubernetes version that runs in your cluster. 
+5. Run Kubernetes API requests against your cluster by using the IAM ID token that you retrieved earlier. For example, list the Kubernetes version that runs in your cluster. 
 
    If you enabled SSL certificate verification in your API test framework, make sure to disable this feature. 
    {: tip}
@@ -877,10 +854,10 @@ The following instructions require public network access in your cluster to conn
    ```
    {: codeblock}
    
-   <table summary-"Input parameters to view the Kubernetes version that runs in your cluster. ">
+   <table summary="Input parameters to view the Kubernetes version that runs in your cluster with the input parameter in column 1 and the value in column 2. ">
    <caption>Input parameters to view the Kubernetes version that runs in your cluster. </caption>
    <thead>
-   <th>Input Parameters</th>
+   <th>Input parameters</th>
    <th>Values</th>
    </thead>
    <tbody>
@@ -890,7 +867,7 @@ The following instructions require public network access in your cluster to conn
    </tr>
    <tr>
    <td>Path</td>
-   <td>`<publicServiceEndpointURL>`: The **publicServiceEndpointURL** of your Kubernetes master that you retrieved in the previous step.      </td>
+   <td>`<publicServiceEndpointURL>`: The **`publicServiceEndpointURL`** of your Kubernetes master that you retrieved in the previous step.      </td>
    </tr>
    </tbody>
    </table>
@@ -938,7 +915,7 @@ Use the following steps if you want to create an {{site.data.keyword.Bluemix_not
     ```
     {: codeblock}
 
-    <table summary="Input parameters for new IAM token">
+    <table summary="Input parameters for new IAM token with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters for a new {{site.data.keyword.Bluemix_notm}} IAM token</caption>
     <thead>
     <th>Input parameters</th>

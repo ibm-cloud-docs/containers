@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -48,6 +48,32 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 ## Version 1.13 changelog
 {: #113_changelog}
 
+### Changelog for worker node fix pack 1.13.4_1516, released 1 April 2019
+{: #1134_1516}
+
+The following table shows the changes that are included in the worker node fix pack 1.13.4_1516.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.4_1515">
+<caption>Changes since version 1.13.4_1515</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worker node resource utilization</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for master fix pack 1.13.4_1515, released 26 March 2019
 {: #1134_1515}
 
@@ -81,7 +107,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Key Management Service provider</td>
 <td>166</td>
 <td>167</td>
-<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrpyted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -435,6 +461,33 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 Review the version 1.12 changelog.
 {: shortdesc}
 
+### Changelog for worker node fix pack 1.12.6_1547, released 1 April 2019
+{: #1126_1547}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.6_1547.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.6_1546">
+<caption>Changes since version 1.12.6_1546</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worker node resource utilization</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
+
+
 ### Changelog for master fix pack 1.12.6_1546, released 26 March 2019
 {: #1126_1546}
 
@@ -462,7 +515,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Key Management Service provider</td>
 <td>166</td>
 <td>167</td>
-<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrpyted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -1132,6 +1185,32 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 
 Review the version 1.11 changelog.
 
+### Changelog for worker node fix pack 1.11.8_1553, released 1 April 2019
+{: #1118_1553}
+
+The following table shows the changes that are included in the worker node fix 1.11.8_1553.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.8_1552">
+<caption>Changes since version 1.11.8_1552</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worker node resource utilization</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for master fix pack 1.11.8_1552, released 26 March 2019
 {: #1118_1552}
 
@@ -1159,7 +1238,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Key Management Service provider</td>
 <td>166</td>
 <td>167</td>
-<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrpyted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -2174,6 +2253,33 @@ Review the version 1.10 changelog.
 Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
 
+### Changelog for worker node fix pack 1.10.13_1554, released 1 April 2019
+{: #11013_1554}
+
+The following table shows the changes that are included in the worker node fix 1.10.13_1554.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.13_1553">
+<caption>Changes since version 1.10.13_1553</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worker node resource utilization</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Increased memory reservations for the kubelet and containerd to prevent these components from running out of resources. For more information, see [Worker node resource reserves](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+</tr>
+</tbody>
+</table>
+
+
 ### Changelog for master fix pack 1.10.13_1553, released 26 March 2019
 {: #1118_1553}
 
@@ -2201,7 +2307,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Key Management Service provider</td>
 <td>166</td>
 <td>167</td>
-<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrpyted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
+<td>Fixes intermittent `context deadline exceeded` and `timeout` errors for managing Kubernetes secrets. In addition, fixes updates to the key management service that might leave existing Kubernetes secrets unencrypted. Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741).</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.Bluemix_notm}} Provider</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -756,247 +756,247 @@ The following table shows the permissions that are granted by each RBAC role to 
  </thead>
 <tbody>
 <tr>
-  <td>bindings</td>
+  <td><code>bindings</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>configmaps</td>
+  <td><code>configmaps</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>cronjobs.batch</td>
+  <td><code>cronjobs.batch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>daemonsets.apps </td>
+  <td><code>daemonsets.apps </code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>daemonsets.extensions</td>
+  <td><code>daemonsets.extensions</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.apps</td>
+  <td><code>deployments.apps</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.apps/rollback</td>
+  <td><code>deployments.apps/rollback</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.apps/scale</td>
+  <td><code>deployments.apps/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.extensions</td>
+  <td><code>deployments.extensions</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.extensions/rollback</td>
+  <td><code>deployments.extensions/rollback</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>deployments.extensions/scale</td>
+  <td><code>deployments.extensions/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>endpoints</td>
+  <td><code>endpoints</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>events</td>
+  <td><code>events</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>horizontalpodautoscalers.autoscaling</td>
+  <td><code>horizontalpodautoscalers.autoscaling</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>ingresses.extensions</td>
+  <td><code>ingresses.extensions</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>jobs.batch</td>
+  <td><code>jobs.batch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>limitranges</td>
+  <td><code>limitranges</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>localsubjectaccessreviews</td>
+  <td><code>localsubjectaccessreviews</code></td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code></td>
 </tr><tr>
-  <td>namespaces</td>
+  <td><code>namespaces</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></br>**cluster-admin only:** <code>create</code>, <code>delete</code></td>
 </tr><tr>
-  <td>namespaces/status</td>
+  <td><code>namespaces/status</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>networkpolicies</td>
+  <td><code>networkpolicies</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>networkpolicies.extensions</td>
+  <td><code>networkpolicies.extensions</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>persistentvolumeclaims</td>
+  <td><code>persistentvolumeclaims</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>poddisruptionbudgets.policy</td>
+  <td><code>poddisruptionbudgets.policy</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods</td>
+  <td><code>pods</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>top</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/attach</td>
+  <td><code>pods/attach</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/exec</td>
+  <td><code>pods/exec</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/log</td>
+  <td><code>pods/log</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/portforward</td>
+  <td><code>pods/portforward</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/proxy</td>
+  <td><code>pods/proxy</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>pods/status</td>
+  <td><code>pods/status</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.apps</td>
+  <td><code>replicasets.apps</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.apps/scale</td>
+  <td><code>replicasets.apps/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.extensions</td>
+  <td><code>replicasets.extensions</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicasets.extensions/scale</td>
+  <td><code>replicasets.extensions/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers</td>
+  <td><code>replicationcontrollers</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers/scale</td>
+  <td><code>replicationcontrollers/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers/status</td>
+  <td><code>replicationcontrollers/status</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>replicationcontrollers.extensions/scale</td>
+  <td><code>replicationcontrollers.extensions/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>resourcequotas</td>
+  <td><code>resourcequotas</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>resourcequotas/status</td>
+  <td><code>resourcequotas/status</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
 </tr><tr>
-  <td>rolebindings</td>
+  <td><code>rolebindings</code></td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>roles</td>
+  <td><code>roles</code></td>
   <td>-</td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>secrets</td>
+  <td><code>secrets</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>serviceaccounts</td>
+  <td><code>serviceaccounts</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code>, <code>impersonate</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code>, <code>impersonate</code></td>
 </tr><tr>
-  <td>services</td>
+  <td><code>services</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>services/proxy</td>
+  <td><code>services/proxy</code></td>
   <td>-</td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>statefulsets.apps</td>
+  <td><code>statefulsets.apps</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
 </tr><tr>
-  <td>statefulsets.apps/scale</td>
+  <td><code>statefulsets.apps/scale</code></td>
   <td><code>get</code>, <code>list</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>
   <td><code>create</code>, <code>delete</code>, <code>deletecollection</code>, <code>get</code>, <code>list</code>, <code>patch</code>, <code>update</code>, <code>watch</code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-22"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -230,13 +230,13 @@ To add different block storage configurations, add block storage to a subset of 
     ```
     {: pre}
 
-2. Navigate in to the `block-storage-utilities` directory.
+3. Navigate in to the `block-storage-utilities` directory.
    ```
    cd ibmcloud-storage-utilities/block-storage-provisioner
    ```
    {: pre}
 
-3. Open the `yamlgen.yaml` file and specify the block storage configuration that you want to add to every worker node in the cluster.
+4. Open the `yamlgen.yaml` file and specify the block storage configuration that you want to add to every worker node in the cluster.
    ```
    #
    # Can only specify 'performance' OR 'endurance' and associated clause
@@ -286,14 +286,14 @@ To add different block storage configurations, add block storage to a subset of 
    </tbody>
    </table>  
 
-4. Retrieve your IBM Cloud infrastructure (SoftLayer) user name and API key. The user name and API key are used by the `mkpvyaml` script to access the cluster.
+5. Retrieve your IBM Cloud infrastructure (SoftLayer) user name and API key. The user name and API key are used by the `mkpvyaml` script to access the cluster.
    1. Log in to the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/).
    2. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), select **Infrastructure**.
    3. From the menu bar, select **Account** > **Users** > **User List**.
    4. Find the user whose user name and API key you want to retrieve.
    5. Click **Generate** to generate an API key or **View** to view your existing API key. A pop-up window opens that shows the infrastructure user name and API key.
 
-5. Store the credentials in an environment variable.
+6. Store the credentials in an environment variable.
    1. Add the environment variables.
       ```
       export SL_USERNAME=<infrastructure_username>
@@ -311,7 +311,7 @@ To add different block storage configurations, add block storage to a subset of 
       ```
       {: pre}
 
-6.  Build and run the `mkpvyaml` container. When you run the container from the image, the `mkpvyaml.py` script is executed. The script adds a block storage device to every worker node in the cluster and authorizes each worker node to access the block storage device. At the end of the script, a `pv-<cluster_name>.yaml` YAML file is generated for you that you can later use to create the persistent volumes in the cluster.
+7.  Build and run the `mkpvyaml` container. When you run the container from the image, the `mkpvyaml.py` script is executed. The script adds a block storage device to every worker node in the cluster and authorizes each worker node to access the block storage device. At the end of the script, a `pv-<cluster_name>.yaml` YAML file is generated for you that you can later use to create the persistent volumes in the cluster.
     1.  Build the `mkpvyaml` container.
         ```
         docker build -t mkpvyaml .
@@ -344,7 +344,7 @@ To add different block storage configurations, add block storage to a subset of 
         {: screen}
     2.  Run the container to execute the `mkpvyaml.py` script.
         ```
-        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME portworx/iks-mkpvyaml
+        docker run --rm -v `pwd`:/data -v ~/.bluemix:/config -e SL_API_KEY=$SL_API_KEY -e SL_USERNAME=$SL_USERNAME mkpvyaml
         ```
         {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -25,11 +25,10 @@ subcollection: containers
 # Planning to expose your apps with in-cluster and external networking
 {: #cs_network_planning}
 
-With {{site.data.keyword.containerlong}}, you can manage in-cluster and  external networking by making apps publicly or privately accessible.
+With {{site.data.keyword.containerlong}}, you can manage in-cluster and external networking by making apps publicly or privately accessible.
 {: shortdesc}
 
-This page helps you plan in-cluster and external networking for your apps. For information about setting up your cluster for networking, see [Setting up your cluster network](/docs/containers?topic=containers-cs_network_cluster).
-{: tip}
+
 
 ## Exposing apps to traffic inside the cluster through Kubernetes services
 {: #in-cluster}
@@ -190,19 +189,5 @@ Because your worker nodes aren't connected to a public VLAN, no public traffic i
 If your cluster is connected to a private VLAN only and you enable the master and worker nodes to communicate through a private-only service endpoint, you cannot expose your apps to a private network. You must set up a gateway device, such as a [VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or an [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall and block unwanted traffic. If you do not want to set up a gateway device, you can [create a worker pool](/docs/containers?topic=containers-clusters#add_pool) that is connected to public and private VLANs. Then, you can label these worker nodes as edge nodes and use Calico policies to block all unwanted public traffic. For more information, see [Isolate networking workloads to edge worker nodes](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge).
 {: note}
 
-<br />
 
 
-## Optional: Isolating networking workloads to edge worker nodes
-{: #both_vlans_private_edge}
-
-Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads).
-{: shortdesc}
-
-If your cluster is connected to a public VLAN but you want to block traffic to public NodePorts on edge worker nodes, you can also use a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress). Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
-
-## Optional: Isolating your cluster on the private network
-{: #isolate}
-
-If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must [enable VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) or [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) so that your worker nodes can communicate with each other on the private network. However, when VLAN spanning or VRF is enabled, any system that is connected to any of the private VLANs in the same IBM Cloud account can access your workers. You can isolate your multizone cluster from other systems on the private network by using [Calico network policies](/docs/containers?topic=containers-network_policies#isolate_workers). These policies also allow ingress and egress for the private IP ranges and ports that you opened in your private firewall.
-{: shortdesc}

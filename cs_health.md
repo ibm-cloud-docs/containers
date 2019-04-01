@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -791,33 +791,32 @@ To avoid conflicts when using metrics services, be sure that clusters across res
     <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-app#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
     <dd><p>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
-    <p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.</p> <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
-  <caption>IP addresses to open for monitoring traffic</caption>
-        <thead>
-        <th>{{site.data.keyword.containerlong_notm}} region</th>
-        <th>Monitoring address</th>
-        <th>Monitoring subnets</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>EU Central</td>
-         <td><code>metrics.eu-de.bluemix.net</code></td>
-         <td><code>158.177.65.80/30</code></td>
-        </tr>
-        <tr>
-         <td>UK South</td>
-         <td><code>metrics.eu-gb.bluemix.net</code></td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>US East, US South, AP North, AP South</td>
-          <td><code>metrics.ng.bluemix.net</code></td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
- </dd>
+    <p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.</p>
+    <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
+      <caption>IP addresses to open for monitoring traffic</caption>
+            <thead>
+            <th>{{site.data.keyword.containerlong_notm}} region</th>
+            <th>Monitoring address</th>
+            <th>Monitoring subnets</th>
+            </thead>
+          <tbody>
+            <tr>
+             <td>EU Central</td>
+             <td><code>metrics.eu-de.bluemix.net</code></td>
+             <td><code>158.177.65.80/30</code></td>
+            </tr>
+            <tr>
+             <td>UK South</td>
+             <td><code>metrics.eu-gb.bluemix.net</code></td>
+             <td><code>169.50.196.136/29</code></td>
+            </tr>
+            <tr>
+              <td>US East, US South, AP North, AP South</td>
+              <td><code>metrics.ng.bluemix.net</code></td>
+              <td><code>169.47.204.128/29</code></td>
+             </tr>
+            </tbody>
+          </table> </dd>
   <dt>{{site.data.keyword.mon_full_notm}}</dt>
   <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
 </dl>
@@ -1041,228 +1040,5 @@ To configure Autorecovery:
     {: pre}
 
 
-        </tbody>
-      </table>
- </dd>
-  <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
-</dl>
-
-### Other health monitoring tools
-{: #health_tools}
-
-You can configure other tools for more monitoring capabilities.
-<dl>
-  <dt>Prometheus</dt>
-    <dd>Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For setup information, see [Integrating services with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#integrations).</dd>
-</dl>
-
-<br />
 
 
-## Configuring health monitoring for worker nodes with Autorecovery
-{: #autorecovery}
-
-The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
-{: shortdesc}</br> </br>
-
-Autorecovery requires at least one healthy node to function properly. Configure Autorecovery with active checks only in clusters with two or more worker nodes.
-{: note}
-
-Before you begin:
-- Ensure you have the following [{{site.data.keyword.Bluemix_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
-    - **Administrator** platform role for the cluster
-    - **Writer** or **Manager** service role for the `kube-system` namespace
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-
-To configure Autorecovery:
-
-1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
-
-2.  Verify that tiller is installed with a service account.
-    ```
-    kubectl get serviceaccount -n kube-system | grep tiller
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    NAME                                 SECRETS   AGE
-    tiller                               1         2m
-    ```
-    {: screen}
-
-3. Create a configuration map file that defines your checks in JSON format. For example, the following YAML file defines three checks: an HTTP check and two Kubernetes API server checks. Refer to the tables following the example YAML file for information about the three kinds of checks and information about the individual components of the checks.
-</br>
-   **Tip:** Define each check as a unique key in the `data` section of the configuration map.
-
-   ```
-   kind: ConfigMap
-   apiVersion: v1
-   metadata:
-     name: ibm-worker-recovery-checks
-     namespace: kube-system
-   data:
-     checknode.json: |
-       {
-         "Check":"KUBEAPI",
-         "Resource":"NODE",
-         "FailureThreshold":3,
-         "CorrectiveAction":"RELOAD",
-         "CooloffSeconds":1800,
-         "IntervalSeconds":180,
-         "TimeoutSeconds":10,
-         "Enabled":true
-       }
-     checkpod.json: |
-       {
-         "Check":"KUBEAPI",
-         "Resource":"POD",
-         "PodFailureThresholdPercent":50,
-         "FailureThreshold":3,
-         "CorrectiveAction":"RELOAD",
-         "CooloffSeconds":1800,
-         "IntervalSeconds":180,
-         "TimeoutSeconds":10,
-         "Enabled":true
-       }
-     checkhttp.json: |
-       {
-         "Check":"HTTP",
-         "FailureThreshold":3,
-         "CorrectiveAction":"REBOOT",
-         "CooloffSeconds":1800,
-         "IntervalSeconds":180,
-         "TimeoutSeconds":10,
-         "Port":80,
-         "ExpectedStatus":200,
-         "Route":"/myhealth",
-         "Enabled":false
-       }
-   ```
-   {:codeblock}
-
-   <table summary="Understanding the components of the configmap">
-   <caption>Understanding the configmap components</caption>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/>Understanding the configmap components</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>name</code></td>
-   <td>The configuration name <code>ibm-worker-recovery-checks</code> is a constant and cannot be changed.</td>
-   </tr>
-   <tr>
-   <td><code>namespace</code></td>
-   <td>The <code>kube-system</code> namespace is a constant and cannot be changed.</td>
-   </tr>
-   <tr>
-   <td><code>checknode.json</code></td>
-   <td>Defines a Kubernetes API node check that checks whether each worker node is in the <code>Ready</code> state. The check for a specific worker node counts as a failure if the worker node is not in the <code>Ready</code> state. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud ks worker-reload</code>.<br></br>The node check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.</td>
-   </tr>
-   <tr>
-   <td><code>checkpod.json</code></td>
-   <td>
-   Defines a Kubernetes API pod check that checks the total percentage of <code>NotReady</code> pods on a worker node based on the total pods that are assigned to that worker node. The check for a specific worker node counts as a failure if the total percentage of <code>NotReady</code> pods is greater than the defined <code>PodFailureThresholdPercent</code>. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud ks worker-reload</code>. For example, the default <code>PodFailureThresholdPercent</code> is 50%. If the percentage of <code>NotReady</code> pods is greater than 50% three consecutive times, the worker node is reloaded. <br></br>By default, pods in all namespaces are checked. To restrict the check to only pods in a specified namespace, add the <code>Namespace</code> field to the check. The pod check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.
-   </td>
-   </tr>
-   <tr>
-   <td><code>checkhttp.json</code></td>
-   <td>Defines an HTTP check that checks if an HTTP server that runs on your worker node is healthy. To use this check you must deploy an HTTP server on every worker node in your cluster by using a [daemon set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). You must implement a health check that is available at the <code>/myhealth</code> path and that can verify if your HTTP server is healthy. You can define other paths by changing the <strong>Route</strong> parameter. If the HTTP server is healthy, you must return the HTTP response code that is defined in <strong><code>ExpectedStatus</code></strong>. The HTTP server must be configured to listen on the private IP address of the worker node. You can find the private IP address by running <code>kubectl get nodes</code>.<br></br>
-   For example, consider two nodes in a cluster that have the private IP addresses 10.10.10.1 and 10.10.10.2. In this example, two routes are checked for a 200 HTTP response: <code>http://10.10.10.1:80/myhealth</code> and <code>http://10.10.10.2:80/myhealth</code>.
-   The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is rebooted. This action is equivalent to running <code>ibmcloud ks worker-reboot</code>.<br></br>The HTTP check is disabled until you set the <b>Enabled</b> field to <code>true</code>.</td>
-   </tr>
-   </tbody>
-   </table>
-
-   <table summary="Understanding individual components of checks">
-   <caption>Understanding the individual components of checks</caption>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/>Understanding the individual components of checks </th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>Check</code></td>
-   <td>Enter the type of check that you want Autorecovery to use. <ul><li><code>HTTP</code>: Autorecovery calls HTTP servers that run on each node to determine whether the nodes are running properly.</li><li><code>KUBEAPI</code>: Autorecovery calls the Kubernetes API server and reads the health status data reported by the worker nodes.</li></ul></td>
-   </tr>
-   <tr>
-   <td><code>Resource</code></td>
-   <td>When the check type is <code>KUBEAPI</code>, enter the type of resource that you want Autorecovery to check. Accepted values are <code>NODE</code> or <code>POD</code>.</td>
-   </tr>
-   <tr>
-   <td><code>FailureThreshold</code></td>
-   <td>Enter the threshold for the number of consecutive failed checks. When this threshold is met, Autorecovery triggers the specified corrective action. For example, if the value is 3 and Autorecovery fails a configured check three consecutive times, Autorecovery triggers the corrective action that is associated with the check.</td>
-   </tr>
-   <tr>
-   <td><code>PodFailureThresholdPercent</code></td>
-   <td>When the resource type is <code>POD</code>, enter the threshold for the percentage of pods on a worker node that can be in a [<strong><code>NotReady</code></strong> ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) state. This percentage is based on the total number of pods that are scheduled to a worker node. When a check determines that the percentage of unhealthy pods is greater than the threshold, the check counts as one failure.</td>
-   </tr>
-   <tr>
-   <td><code>CorrectiveAction</code></td>
-   <td>Enter the action to run when the failure threshold is met. A corrective action runs only while no other workers are being repaired and when this worker node is not in a cool-off period from a previous action. <ul><li><code>REBOOT</code>: Reboots the worker node.</li><li><code>RELOAD</code>: Reloads all of the necessary configurations for the worker node from a clean OS.</li></ul></td>
-   </tr>
-   <tr>
-   <td><code>CooloffSeconds</code></td>
-   <td>Enter the number of seconds Autorecovery must wait to issue another corrective action for a node that was already issued a corrective action. The cool off period starts at the time a corrective action is issued.</td>
-   </tr>
-   <tr>
-   <td><code>IntervalSeconds</code></td>
-   <td>Enter the number of seconds in between consecutive checks. For example, if the value is 180, Autorecovery runs the check on each node every 3 minutes.</td>
-   </tr>
-   <tr>
-   <td><code>TimeoutSeconds</code></td>
-   <td>Enter the maximum number of seconds that a check call to the database takes before Autorecovery terminates the call operation. The value for <code>TimeoutSeconds</code> must be less than the value for <code>IntervalSeconds</code>.</td>
-   </tr>
-   <tr>
-   <td><code>Port</code></td>
-   <td>When the check type is <code>HTTP</code>, enter the port that the HTTP server must bind to on the worker nodes. This port must be exposed on the IP of every worker node in the cluster. Autorecovery requires a constant port number across all nodes for checking servers. Use [daemon sets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) when you deploy a custom server into a cluster.</td>
-   </tr>
-   <tr>
-   <td><code>ExpectedStatus</code></td>
-   <td>When the check type is <code>HTTP</code>, enter the HTTP server status that you expect to be returned from the check. For example, a value of 200 indicates that you expect an <code>OK</code> response from the server.</td>
-   </tr>
-   <tr>
-   <td><code>Route</code></td>
-   <td>When the check type is <code>HTTP</code>, enter the path that is requested from the HTTP server. This value is typically the metrics path for the server that is running on all of the worker nodes.</td>
-   </tr>
-   <tr>
-   <td><code>Enabled</code></td>
-   <td>Enter <code>true</code> to enable the check or <code>false</code> to disable the check.</td>
-   </tr>
-   <tr>
-   <td><code>Namespace</code></td>
-   <td> Optional: To restrict <code>checkpod.json</code> to checking only pods in one namespace, add the <code>Namespace</code> field and enter the namespace.</td>
-   </tr>
-   </tbody>
-   </table>
-
-4. Create the configuration map in your cluster.
-    ```
-    kubectl apply -f ibm-worker-recovery-checks.yaml
-    ```
-    {: pre}
-
-5. Verify that you created the configuration map with the name `ibm-worker-recovery-checks` in the `kube-system` namespace with the proper checks.
-    ```
-    kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
-    ```
-    {: pre}
-
-6. Deploy Autorecovery into your cluster by installing the `ibm-worker-recovery` Helm chart.
-    ```
-    helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
-    ```
-    {: pre}
-
-7. After a few minutes, you can check the `Events` section in the output of the following command to see activity on the Autorecovery deployment.
-    ```
-    kubectl -n kube-system describe deployment ibm-worker-recovery
-    ```
-    {: pre}
-
-8. If you do not see activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
-    ```
-    helm test ibm-worker-recovery
-    ```
-    {: pre}
-</staging>

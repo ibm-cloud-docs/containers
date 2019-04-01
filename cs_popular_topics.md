@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -53,7 +53,7 @@ To use private service endpoints, you must enable [VRF](/docs/infrastructure/dir
 <li>[Switching from public to private service endpoints](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
 <li>If you have a firewall on the private network, [adding the private IP addresses for {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, and other {{site.data.keyword.Bluemix_notm}} services](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
 </ul>
-<p class="important">If you switch to a private-only service endpoint cluster, make sure that your cluster can still communicate with other {{site.data.keyword.Bluemix_notm}} services that you use. [NFS-based file storage](/docs/containers?topic=containers-file_storage#file_storage), [Portworx software-defined storage (SDS)](/docs/containers?topic=containers-portworx#portworx), and [cluster autoscaler](/docs/containers?topic=containers-ca#ca) do not support private-only service endpoint. Use a cluster with both public and private service endpoints instead.</p>
+<p class="important">If you switch to a private-only service endpoint cluster, make sure that your cluster can still communicate with other {{site.data.keyword.Bluemix_notm}} services that you use. [Portworx software-defined storage (SDS)](/docs/containers?topic=containers-portworx#portworx) and [cluster autoscaler](/docs/containers?topic=containers-ca#ca) do not support private-only service endpoint. Use a cluster with both public and private service endpoints instead. [NFS-based file storage](/docs/containers?topic=containers-file_storage#file_storage) is supported if your cluster runs Kubernetes version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551, or later.</p>
 </td>
 </tr>
 <tr>
