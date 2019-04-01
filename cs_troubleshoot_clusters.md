@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -1127,7 +1127,7 @@ To troubleshoot your Helm chart:
 
 {: tsSymptoms}
 
-When you try to install Helm tiller or want to deploy images from public registries, such as Dockerhub, the installation fails with an error similar to the following:
+When you try to install Helm tiller or want to deploy images from public registries, such as DockerHub, the installation fails with an error similar to the following:
 
 ```Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:```
 {: screen}
