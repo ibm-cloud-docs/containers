@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -937,7 +937,7 @@ To execute a workload on a GPU machine:
     ```
     {: codeblock}
 
-    <table>
+    <table summary="A table that describes in Column 1 the YAML file fields and in Column 2 how to fill out those fields.">
     <caption>YAML components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
@@ -1079,7 +1079,7 @@ Steps:
     ```
     {: pre}
 
-    <table>
+    <table summary="A table that describes in Column 1 the Kubectl command options and in Column 2 how to fill out those options.">
     <caption>Command components for `kubectl run`</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command&apos;s components</th>
@@ -1112,7 +1112,7 @@ Steps:
     ```
     {: pre}
 
-    <table>
+    <table summary="A table that describes in Column 1 the Kubectl command options and in Column 2 how to fill out those options.">
     <caption>Command components for `kubectl autoscale`</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command&apos;s components</th>
@@ -1151,7 +1151,60 @@ Before you begin:
 *   Make sure that you have a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To manage rolling updates to your apps:
-1.  [Roll out ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) a change. For example, you might want to change the image that you used in your initial deployment.
+1.  To make sure that your deployments are marked as ready only when the container is running and ready to service requests, add [liveness and readiness probes to your deployment](#probe).
+
+2.  Update your deployment to include a rolling update strategy that specifies the maximum surge and unavailable pods or percentage of pods during the update.
+
+    ```
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:  
+      name: nginx-test
+    spec:
+      replicas: 10
+      selector:
+        matchLabels:
+          service: http-server
+      minReadySeconds: 5
+      progressDeadlineSeconds: 600
+      strategy: 
+        type: RollingUpdate  
+        rollingUpdate:    
+          maxUnavailable: 50%
+          maxSurge: 2
+    ...
+    ```
+    {: codeblock}
+    
+    <table summary="A table that describes in Column 1 the YAML file fields and in Column 2 how to fill out those fields.">
+    <caption>YAML components</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>spec.minReadySeconds</code></td>
+    <td>By default, deployments wait until the pod is marked as `ready` to continue with the rollout. If you notice that the deployment continues to create pods even though your app in the most recent pod is not yet ready, use this field to slow down the deployment rollout. For example, if you specify `5`, the deployment waits for 5 seconds after the pod is `ready` before it creates the next pod.</td>
+    </tr>
+    <tr>
+    <td><code>spec.progressDeadlineSeconds</code></td>
+    <td>Set a timeout in seconds before a deployment is considered failed. For example, without a timeout, if your new app version has a bug and hangs immediately, the rollout cannot continue because the pod never reaches a `ready` state. If you set this timeout to `600` seconds, then if any phase of the rollout fails to progress for 10 minutes, the deployment is marked as failed and the rollout stops.</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.type</code></td>
+    <td>Specify the `RollingUpdate` strategy type.</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxUnavailable</code></td>
+    <td>Set the maximum number of pods that can be unavailable during an update, as a number (`2`) or percentage (`50%`). Generally, use a percentage so that if you change the number of replicas later you don't have to remember to update the number here, unless you want to limit the rollout to allow only one pod to be down at a time. If you never want to fall below 100% capacity, set this value to `0%` and specify the `spec.strategy.type.rollingUpdate.maxSurge` parameter.</td>
+    </tr>
+    <tr>
+    <td><code>spec.strategy.rollingUpdate.maxSurge</code></td>
+    <td>Set how many extra resources the deployment can use during the rollout, as a number (`2`) or percentage (`50%`). For example, if your deployment specifies `10` replicas and you set the `maxSurge` to `2`, then during the rollout, 2 new replicas are created. You now have 12 replicas (10 existing, 2 new). After the 2 new replicas are ready, the deployment scales down the old replicas to 8 to meet the specified 10 replicas. This process continues until the rollout is complete and all 10 replicas run the new version.<p class="tip">If you want to perform a blue-green instantaneous switch style update, set the `maxSurge` to `100%`. The deployment creates all the new required replicas, then scales down the old version replicas to 0.</p></td>
+    </tr>
+    </tbody></table>
+
+3.  [Roll out ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) a change. For example, you might want to change the image that you used in your initial deployment.
 
     1.  Get the deployment name.
 
@@ -1183,14 +1236,26 @@ To manage rolling updates to your apps:
 
     When you run the commands, the change is immediately applied and logged in the roll-out history.
 
-2.  Check the status of your deployment.
+4.  Check the status of your deployment.
 
     ```
     kubectl rollout status deployments/<deployment_name>
     ```
     {: pre}
+    
+    If you notice something in the status that you want time to follow up on, you can pause and resume your rollout with the following commands.
+    
+    ```
+    kubectl rollout pause deployment <deployment_name>
+    ```
+    {: pre}
+    
+    ```
+    kubectl rollout resume deployment <deployment_name>
+    ```
+    {: pre}
 
-3.  Roll back a change.
+5.  Roll back a change.
     1.  View the roll-out history for the deployment and identify the revision number of your last deployment.
 
         ```
