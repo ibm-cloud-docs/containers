@@ -198,7 +198,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <li>[Object storage plans![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
 
 <dt id="services">{{site.data.keyword.Bluemix_notm}} services</dt>
-  <dd>Each service that you integrate with your cluster has its own pricing model. Consult each product documentation and use the {{site.data.keyword.Bluemix_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
+  <dd>Each service that you integrate with your cluster has its own pricing model. Review each product documentation and use the {{site.data.keyword.Bluemix_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
 
 </dl>
 
