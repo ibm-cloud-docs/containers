@@ -93,7 +93,7 @@ Technical solution:
 
 **Step 1: Containerize apps, by using microservices**
 
-* Architect apps into a set of cooperative microservices in {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
+* Integrate apps into a set of cooperative microservices in {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
 * Deploy apps to containers in {{site.data.keyword.containerlong_notm}}.
 * Provide standardized DevOps dashboards through Kubernetes.
 * Enables on-demand scaling of compute for batch and other inventory workloads that run infrequently.
@@ -111,7 +111,7 @@ Technical solution:
 **Step 4: Deliver continuously**
 * {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain, by using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
 * After Developers build and test the apps in their Development and Test clusters, they use the IBM CI/CD toolchains to deploy apps into clusters across the globe.
-* {{site.data.keyword.containerlong_notm}} provides easy rollout and roll-back of apps; tailored apps are deployed to meet regional requirements through Istio’s intelligent routing and load balancing.
+* {{site.data.keyword.containerlong_notm}} provides easy rollout and roll-back of apps; tailored apps are deployed to meet regional requirements through the intelligent routing and load balancing of Istio.
 
 **Results**
 
@@ -160,7 +160,7 @@ Technical solution:
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_full_notm}}
 
-Accelerated development is a key win for the HR Exec. The team gets started by containerizing their apps and putting them in the cloud. With the use of modern containers, Developers can experiment easily with Node.js SDK and push changes to Development and Test systems, which are scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. No longer were updates to the HR site languishing in slow, error-prone build processes. They can deliver incremental updates to their site, daily or even more frequently.  Moreover logging and monitoring for the HR site is rapidly integrated, especially for how the site pulls personalized data from back-end benefit systems. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems. Developers don't have to spend time becoming experts in cloud security, they can enforce policy driven authentication easily by using {{site.data.keyword.appid_full_notm}}.
+Accelerated development is a key win for the HR Exec. The team gets started by containerizing their apps and putting them in the cloud. With the use of modern containers, Developers can experiment easily with Node.js SDK and push changes to Development and Test systems, which are scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. No longer were updates to the HR site languishing in slow, error-prone build processes. They can deliver incremental updates to their site, daily or even more frequently.  Moreover logging and monitoring for the HR site is rapidly integrated, especially for how the site pulls personalized data from back-end benefit systems. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems. Developers don't need to become experts in cloud security, they can enforce policy driven authentication easily by using {{site.data.keyword.appid_full_notm}}.
 
 With {{site.data.keyword.containerlong_notm}}, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the HR site, they could easily design Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for less personnel costs is that IBM manages Kubernetes, so the Developers can focus on delivering better employee experience for benefits enrollment.
 
@@ -184,7 +184,7 @@ With {{site.data.keyword.containerlong_notm}}, they went from over-built hardwar
 **Step 4: Deliver continuously across the globe**
 * {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain, by using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
 * After Developers build and test the apps in their Development and Test clusters, they use the IBM CI/CD toolchains to deploy apps into Production clusters across the globe.
-* {{site.data.keyword.containerlong_notm}} provides easy rollout and roll-back of apps. Tailored apps are deployed to meet regional requirements through Istio’s intelligent routing and load balancing.
+* {{site.data.keyword.containerlong_notm}} provides easy rollout and roll-back of apps. Tailored apps are deployed to meet regional requirements through the intelligent routing and load balancing of Istio.
 * Built-in HA tools in {{site.data.keyword.containerlong_notm}} balance the workload within each geographic region, including self-healing and load balancing.
 
 **Results**
