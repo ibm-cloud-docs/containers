@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -575,10 +575,22 @@ To review how much compute resources are currently used on your worker node, run
 </thead>
 <tbody>
 <tr>
-  <td>First 16GB (0-16GB)</td>
+  <td>First 4GB (0-4GB)</td>
+  <td>25% of memory</td>
+  <td>1 GB</td>
+  <td>1 GB</td>
+</tr>
+<tr>
+  <td>Next 4GB (5-8GB)</td>
+  <td>20% of memory</td>
+  <td>0.8 GB</td>
+  <td>0.8 GB</td>
+</tr>
+<tr>
+  <td>Next 8GB (9-16GB)</td>
   <td>10% of memory</td>
-  <td>1.6 GB</td>
-  <td>1.6 GB</td>
+  <td>0.8 GB</td>
+  <td>0.8 GB</td>
 </tr>
 <tr>
   <td>Next 112GB (17-128GB)</td>
@@ -601,8 +613,8 @@ To review how much compute resources are currently used on your worker node, run
 <tr>
   <td>**Total reserved**</td>
   <td>**(varies)**</td>
-  <td>**1.7 GB of 16 GB total**</td>
-  <td>**10.96 GB of 256 GB total**</td>
+  <td>**2.7 GB of 16 GB total**</td>
+  <td>**11.96 GB of 256 GB total**</td>
 </tr>
 </tbody>
 </table>
