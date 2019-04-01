@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-01"
 
 keywords: kubernetes, iks
 
@@ -62,13 +62,13 @@ The solution is made up of these primary components:
 2. Customs paperwork that’s digitally shared with applicable ports and transit partners, including access control
 3. App for shipping customers that aggregates and communicates arrival information for shipped goods, including APIs for shipping customers to reuse shipment data in their own retail and business-to-business apps
 
-For the shipping company to work with global partners, the routing and scheduling systems required local modifications to fit each region’s language, regulations, and unique port logistics. {{site.data.keyword.containerlong_notm}} offers global coverage in multiple regions, including North America, Europe, Asia, and Australia so that the company’s apps reflected the needs of its partners, in each country.
+For the shipping company to work with global partners, the routing and scheduling systems required local modifications to fit each region’s language, regulations, and unique port logistics. {{site.data.keyword.containerlong_notm}} offers global coverage in multiple regions, including North America, Europe, Asia, and Australia so that the apps reflected the needs of its partners, in each country.
 
 IoT devices stream data that {{site.data.keyword.messagehub_full}} distributes to the regional port apps and associated Customs and Container manifest data stores. {{site.data.keyword.messagehub_full}} is landing point for IoT events. It  distributes the events based on the managed connectivity that the Watson IoT Platform offers to {{site.data.keyword.messagehub_full}}.
 
 After events are in {{site.data.keyword.messagehub_full}}, they're persisted for immediate use in port transit apps and for any point in the future. Apps that require the lowest latency directly consume in real time from the event stream ({{site.data.keyword.messagehub_full}}). Other future apps, such as analytics tools, can choose to consume in a batch mode from the event store with {{site.data.keyword.cos_full}}.
 
-Since shipping data is shared with the company’s customers, the Developers ensure that the company’s customers can use APIs to surface shipping data in their own apps. Examples of those apps are mobile tracking apps or web e-commerce solutions. The Developers are also busy with building and maintaining the regional port apps that gather and disseminate the customs records and shipping manifests. In short, they need to focus on coding instead of managing the infrastructure. Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
+Since shipping data is shared with the customers of the company, the Developers ensure that the customers can use APIs to surface shipping data in their own apps. Examples of those apps are mobile tracking apps or web e-commerce solutions. The Developers are also busy with building and maintaining the regional port apps that gather and disseminate the customs records and shipping manifests. In short, they need to focus on coding instead of managing the infrastructure. Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
 * Managing Kubernetes master, IaaS, and operational components, such as Ingress and storage
 * Monitoring health and recovery for worker nodes
 * Providing global compute, so Developers aren't responsible for infrastructure in several regions where they need workloads and data to reside
@@ -106,7 +106,7 @@ Technical solution:
 
 **Step 3: Share data**
 * {{site.data.keyword.cos_full}} plus {{site.data.keyword.messagehub_full}} provides real-time and historically data storage.
-* APIs allow the shipping company’s customers to share data into their apps.
+* APIs allow the customers of the shipping company to share data into their apps.
 
 **Step 4: Deliver continuously**
 * {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain, by using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
