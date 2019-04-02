@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -181,7 +181,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
       ```
       {: screen}
 
@@ -445,15 +445,15 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the latest version.
 {: shortdesc}
 
-1. If you use macOS or a Linux distribution, update the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in to the latest version.
+1. Update the {{site.data.keyword.Bluemix_notm}} Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
-   helm ibmc --update
+   helm repo update
    ```
    {: pre}
 
-2. Update the {{site.data.keyword.Bluemix_notm}} Helm repo to retrieve the latest version of all Helm charts in this repo.
+2. If you use macOS or a Linux distribution, update the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in to the latest version.
    ```
-   helm repo update
+   helm ibmc --update
    ```
    {: pre}
 
