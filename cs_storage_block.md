@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -51,7 +51,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b2c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
       ```
       {: screen}
 
@@ -1674,7 +1674,7 @@ Create the storage class in the same region and zone as your cluster and worker 
 
 - **Example for Endurance block storage:**
   ```
-  apiVersion: storage.k8s.io/v1beta1
+  apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
     name: ibmc-block-silver-mycustom-storageclass
@@ -1693,7 +1693,7 @@ Create the storage class in the same region and zone as your cluster and worker 
 
 - **Example for Performance block storage:**
   ```
-  apiVersion: storage.k8s.io/v1beta1
+  apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
     name: ibmc-block-performance-storageclass

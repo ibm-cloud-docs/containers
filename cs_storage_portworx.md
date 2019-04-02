@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -385,7 +385,7 @@ To install Portworx:
    stork            3        3        3           0          1s
    stork-scheduler  3        3        3           0          1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                    PROVISIONER                    AGE
    px-sc-repl3-iodb-512blk-snap60-15snaps  kubernetes.io/portworx-volume  1s
    px-sc-repl3-iodb-snap60-15snaps         kubernetes.io/portworx-volume  1s
@@ -869,7 +869,7 @@ To request storage from your Portworx cluster and use it in your app, you must s
 
    ```
    kind: StorageClass
-   apiVersion: storage.k8s.io/v1beta1
+   apiVersion: storage.k8s.io/v1
    metadata:
        name: <storageclass_name>
    provisioner: kubernetes.io/portworx-volume

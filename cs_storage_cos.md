@@ -353,7 +353,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ibmcloud-object-storage-driver-tl42l             0/1    ContainerCreating  0         1s
    ibmcloud-object-storage-plugin-7d87fbcbcc-wgsn8  0/1    ContainerCreating  0         1s
 
-   ==> v1beta1/StorageClass
+   ==> v1/StorageClass
    NAME                                  PROVISIONER       AGE
    ibmc-s3fs-cold-cross-region           ibm.io/ibmc-s3fs  1s
    ibmc-s3fs-cold-regional               ibm.io/ibmc-s3fs  1s
