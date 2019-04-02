@@ -137,7 +137,6 @@ IBM Cloud Kubernetes Service
 
     cs_popular_topics.md
     cs_rellinks.md
-    cs_sitemap.md
     {: .navgroup-end}
 
     container_cli_cfic.md
