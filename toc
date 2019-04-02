@@ -8,7 +8,7 @@ IBM Cloud Kubernetes Service
 
     {: .navgroup id="learn"}
     getting-started.md
-    
+
 
     {: .topicgroup}
     About
@@ -95,7 +95,7 @@ IBM Cloud Kubernetes Service
         cs_storage_utilities.md
         cs_storage_remove.md
 
-    cs_integrations.md   
+    cs_integrations.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
@@ -137,6 +137,7 @@ IBM Cloud Kubernetes Service
 
     cs_popular_topics.md
     cs_rellinks.md
+    cs_sitemap.md
     {: .navgroup-end}
 
     container_cli_cfic.md
