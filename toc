@@ -30,6 +30,7 @@ IBM Cloud Kubernetes Service
         cs_responsibilities.md
         cs_secure.md
         cs_ha.md
+        cs_kube_strategy.md
 
     {: .topicgroup}
     Tutorials
