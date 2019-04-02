@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -2434,13 +2434,7 @@ ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disab
    <dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
 
    <dt><code>--user-ip <em>USER_IP</em></code></dt>
-   <dd>
-
-   <ul>
-    <li>This parameter is available for enabling a private ALB only.</li>
-    <li>The private ALB is deployed with an IP address from a user-provided private subnet. If no IP address is provided, the ALB is deployed with a private IP address from the portable private subnet that was provisioned automatically when you created the cluster.</li>
-   </ul>
-   </dd>
+   <dd>Optional: If you enable the ALB, you can specify an IP address for the ALB to use. If no IP address is provided, the ALB is deployed with a public or private IP address from the portable public or private subnet that was provisioned automatically when you created the cluster.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
