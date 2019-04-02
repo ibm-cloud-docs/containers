@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -2281,7 +2281,7 @@ The following table shows the changes that are included in the worker node fix 1
 
 
 ### Changelog for master fix pack 1.10.13_1553, released 26 March 2019
-{: #1118_1553}
+{: #11118_1553}
 
 The following table shows the changes that are included in the master fix pack 1.10.13_1553.
 {: shortdesc}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -29,7 +29,7 @@ subcollection: containers
 If you have an {{site.data.keyword.Bluemix_dedicated}} account, you can deploy Kubernetes clusters in a dedicated cloud environment (`https://<my-dedicated-cloud-instance>.bluemix.net`) and connect with the preselected {{site.data.keyword.Bluemix_notm}} services that are also running there.
 {:shortdesc}
 
-If you do not have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can [get started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-container_index) in a public {{site.data.keyword.Bluemix_notm}} account.
+If you do not have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can [get started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started) in a public {{site.data.keyword.Bluemix_notm}} account.
 
 ## About the Dedicated cloud environment
 {: #dedicated_environment}

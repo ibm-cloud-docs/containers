@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -84,11 +84,11 @@ To make your apps externally accessible from the public internet or a private ne
 
 To choose the best networking service for your app, you can follow this decision tree and click one of the options to get started.
 
-<img usemap="#networking_map" border="0" class="image" src="images/cs_network_planning_dt-01.png" width="500px" alt="This image walks you through choosing the best networking option for your application. If this image is not displaying, the information can still be found in the documentation." style="width:500px;" />
+<img usemap="#networking_map" border="0" class="image" src="images/cs_network_planning_dt.png" width="600" alt="This image walks you through choosing the best networking option for your application." style="width:600px;" />
 <map name="networking_map" id="networking_map">
-<area href="/docs/containers?topic=containers-nodeport" alt="Nodeport service" shape="circle" coords="52, 283, 45"/>
-<area href="/docs/containers?topic=containers-loadbalancer" alt="LoadBalancer service" shape="circle" coords="247, 419, 44"/>
-<area href="/docs/containers?topic=containers-ingress" alt="Ingress service" shape="circle" coords="445, 420, 45"/>
+<area target="" href="/docs/containers?topic=containers-nodeport" alt="NodePort service" coords="52,254,78,260,93,270,101,285,92,302,72,314,49,318,19,309,0,281,18,263" shape="poly">
+<area target="" href="/docs/containers?topic=containers-loadbalancer" alt="Network load balancer (NLB) service" coords="288,405,324,414,348,434,350,455,327,471,295,477,246,471,222,446,237,417" shape="poly">
+<area target="" href="/docs/containers?topic=containers-ingress" alt="Ingress application load balancer (ALB) service" coords="532,405,568,410,593,427,600,448,582,468,554,477,508,476,467,463,454,441,474,419" shape="poly">
 </map>
 
 Want more details about the load balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/).

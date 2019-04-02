@@ -4,7 +4,6 @@
 {: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
 IBM Cloud Kubernetes Service
 
-    container_index.md
     cs_cli_reference.md
 
     {: .navgroup id="learn"}
@@ -30,6 +29,7 @@ IBM Cloud Kubernetes Service
         cs_responsibilities.md
         cs_secure.md
         cs_ha.md
+        cs_kube_strategy.md
 
     {: .topicgroup}
     Tutorials

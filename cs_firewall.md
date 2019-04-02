@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -437,7 +437,7 @@ Depending on your cluster setup, you access the services by using the public, pr
    <tbody>
      <tr>
        <td>File storage</td>
-       <td>Kubernetes version <code>1.13.4_1512</code>, <code>1.12.6_1543</code>, <code>1.11.8_1549</code>, <code>1.10.13_1550</code>, or later</td>
+       <td>Kubernetes version <code>1.13.4_1512</code>, <code>1.12.6_1544</code>, <code>1.11.8_1550</code>, <code>1.10.13_1551</code>, or later</td>
      </tr>
      <tr>
        <td>Block storage</td>

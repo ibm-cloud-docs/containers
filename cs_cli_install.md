@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -691,7 +691,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
      ```
      {: codeblock}
 
-     <table summary="Input parameters to work with the {{site.data.keyword.containerlong_notm}} API.">
+     <table summary="Input parameters to work with the {{site.data.keyword.containerlong_notm}} API with the input parameter in column 1 and the value in column 2.">
      <caption>Input parameters to work with the {{site.data.keyword.containerlong_notm}} API.</caption>
      <thead>
      <th>Input parameters</th>

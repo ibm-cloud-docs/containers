@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-02"
 
 ---
 
@@ -26,7 +26,7 @@ lastupdated: "2019-04-01"
 ## Getting started with {{site.data.keyword.containerlong_notm}}
 {: #sitemap-gs}
 
-[Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-container_index#container_index)
+[Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
 
 
 
