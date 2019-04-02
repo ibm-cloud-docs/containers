@@ -437,7 +437,7 @@ Depending on your cluster setup, you access the services by using the public, pr
    <tbody>
      <tr>
        <td>File storage</td>
-       <td>Kubernetes version <code>1.13.4_1512</code> or later</td>
+       <td>Kubernetes version <code>1.13.4_1512</code>, <code>1.12.6_1544</code>, <code>1.11.8_1550</code>, <code>1.10.13_1551</code>, or later</td>
      </tr>
      <tr>
        <td>Block storage</td>
