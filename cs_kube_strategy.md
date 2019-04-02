@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks 
 
@@ -114,7 +114,7 @@ You can take some general steps to containerize your app as follows.
 {: shortdesc}
 
 1.  Use the [Twelve-Factor App ![External link icon](../icons/launch-glyph.svg "External link icon")](https://12factor.net/) as a guide for isolating dependencies, separating processes into separate services, and reducing the statefulness of your app as much as possible.
-2.  Find an appropriate base image to use. You can use publicly available images from [Docker Hub ![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/), [public IBM images](/docs/services/RegistryImages/index.html#ibm_images), or build and manage your own in your private {{site.data.keyword.registryshort_notm}}.
+2.  Find an appropriate base image to use. You can use publicly available images from [Docker Hub ![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/), [public IBM images](/docs/services/Registry?topic=registry-public_images#public_images), or build and manage your own in your private {{site.data.keyword.registryshort_notm}}.
 3.  Add to your Docker image only what is necessary to run the app.
 4.  Instead of relying on local storage, plan to use persistent storage or cloud database-as-a-service solutions to back up your app's data.
 5.  Over time, refactor your app processes into microservices.
@@ -217,7 +217,7 @@ The number of clusters that you create depends on your workload, company policie
   <ul><li><strong>Keep up your core strength</strong>: Each machine has a certain number of cores. Depending on your app's workload, set a limit for the number of pods per core, such as 10.</li>
   <li><strong>Avoid node overload</strong>: Similarly, just because a node can contain more than 100 pods doesn't mean that you want it to. Depending on your app's workload, set a limit for the number of pods per node, such as 40.</li>
   <li><strong>Don't tap out your cluster bandwidth</strong>: Keep in mind that network bandwidth on scaling virtual machines is around 1000 Mbps. If you need hundreds of worker nodes in a cluster, split it up into multiple clusters with fewer nodes, or order bare metal nodes.</li>
-  <li><strong>Sorting out your services</strong>: Plan out how many services that you need for your workload before you deploy. Networking and port forwarding rules are put into iptables. If you anticipate a larger number of services, such as more than 5,000 services, split up the cluster into multiple clusters.</li></ul></dd>
+  <li><strong>Sorting out your services</strong>: Plan out how many services that you need for your workload before you deploy. Networking and port forwarding rules are put into Iptables. If you anticipate a larger number of services, such as more than 5,000 services, split up the cluster into multiple clusters.</li></ul></dd>
 <dt>Provision different types of machines for a mix of computing resources.</dt>
   <dd>Everyone likes choices, right? With {{site.data.keyword.containerlong_notm}}, you have [a mix of machine types](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes) that you can deploy: from bare metal for intensive workloads to virtual machines for rapid scaling. Use labels or namespaces to organize deployments to your machines. When you create a deployment, limit it so that your app's pod only deploys on machines with the right mix of resources. For example, you might want to limit a database application to a bare metal machine with a significant amount of local disk storage like the `md1c.28x512.4x4tb`.</dd>
 <dt>Set up multiple namespaces when you have multiple teams and projects that share the cluster.</dt>
@@ -464,5 +464,5 @@ As you set up your logging and monitoring, think about the following considerati
 <dt>Test app performance</dt>
   <dd>After you set up logging and monitoring, conduct performance testing. In a test environment, deliberately create a variety of non-ideal scenarios, such as deleting all worker nodes in a zone to replicate a zonal failure. Review the logs and metrics to check how your app recovers.</dd>
 <dt>Prepare for audits</dt>
-  <dd>In addition to app logs and cluster metrics, you want to set up activity tracking so that you have an auditable record of who performed what cluster and Kubernetes actions. For more information, see [site.data.keyword.cloudaccesstrailshort](/docs/containers?topic=containers-at_events#at_events).</dd>
+  <dd>In addition to app logs and cluster metrics, you want to set up activity tracking so that you have an auditable record of who performed what cluster and Kubernetes actions. For more information, see [{{site.data.keyword.cloudaccesstrailshort}}](/docs/containers?topic=containers-at_events#at_events).</dd>
 </dl>
