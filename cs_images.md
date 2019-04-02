@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -172,12 +172,12 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [an im
 **Before you begin**:
 *   [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 *   Make sure that you have the following permissions:
-    *   {{site.data.keyword.Bluemix_notm}} IAM **Operator or Administrator** platform role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running 
+    *   {{site.data.keyword.Bluemix_notm}} IAM **Operator or Administrator** platform role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running: 
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles Administrator,Operator
         ```
         {: pre}
-    *   {{site.data.keyword.Bluemix_notm}} IAM **Administrator** platform role for {{site.data.keyword.registrylong_notm}}. The account owner can give you the role by running 
+    *   {{site.data.keyword.Bluemix_notm}} IAM **Administrator** platform role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The account owner can give you the role by running: 
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
         ```
