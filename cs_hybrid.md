@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks 
 
@@ -93,6 +93,11 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 7.  [Test the VPN connection](/docs/containers?topic=containers-vpn#vpn_test) between your clusters.
 
 8.  Repeat these steps for each cluster that you want to connect.
+
+**What's next?**
+
+*   [Run your licensed software images in public clusters](#hybrid_ppa_importer).
+*   To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.Bluemix_notm}} Public and {{site.data.keyword.Bluemix_notm}} Private, check out the [IBM Multicloud Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
 
 
 ## Running {{site.data.keyword.Bluemix_notm}} Private images in public Kubernetes containers

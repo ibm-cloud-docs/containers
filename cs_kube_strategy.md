@@ -66,10 +66,11 @@ Great! You're already in our public cloud documentation. Keep reading for more s
 
 **Interested in the private cloud?**</br>
 Explore the [{{site.data.keyword.Bluemix_notm}} Private documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.1/kc_welcome_containers.html). If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.Bluemix_notm}} Private modernization strategy with various tools.
-* To gather a better understanding about your existing apps and supporting environment, use [IBM Transformation Advisor](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/featured_applications/transformation_advisor.html).
-* To help determine your adoption readiness and provide a cloud roadmap, seek out [{{site.data.keyword.Bluemix_notm}} Advisory Services](https://www.ibm.com/us-en/marketplace/cloud-consulting-services).
-* For helping developers to build services for {{site.data.keyword.Bluemix_notm}} Private, see [IBM Microclimate](https://www.ibm.com/us-en/marketplace/microclimate).
-* For multi-cloud provisioning, consider [{{site.data.keyword.Bluemix_notm}} Automation Manager](https://www.ibm.com/us-en/marketplace/cognitive-automation).
+* To gather a better understanding about your existing apps and supporting environment, use [IBM Transformation Advisor ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/featured_applications/transformation_advisor.html).
+* To help determine your adoption readiness and provide a cloud roadmap, seek out [{{site.data.keyword.Bluemix_notm}} Advisory Services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/us-en/marketplace/cloud-consulting-services).
+* For helping developers to build services for {{site.data.keyword.Bluemix_notm}} Private, see [IBM Microclimate ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/us-en/marketplace/microclimate).
+* For multi-cloud provisioning, consider [{{site.data.keyword.Bluemix_notm}} Automation Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/us-en/marketplace/cognitive-automation).
+* To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.Bluemix_notm}} Public and {{site.data.keyword.Bluemix_notm}} Private, check out the [IBM Multicloud Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
 
 **Want to use both public and private cloud?**</br>
 Start with setting up an {{site.data.keyword.Bluemix_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.Bluemix_notm}} Private environment with a cluster in {{site.data.keyword.Bluemix_notm}} Public.
