@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-02"
 
 keywords: kubernetes, iks
 
@@ -86,7 +86,7 @@ To choose the best networking service for your app, you can follow this decision
 
 <img usemap="#networking_map" border="0" class="image" src="images/cs_network_planning_dt-01.png" width="500px" alt="This image walks you through choosing the best networking option for your application. If this image is not displaying, the information can still be found in the documentation." style="width:500px;" />
 <map name="networking_map" id="networking_map">
-<area href="/docs/containers?topic=containers-nodeport" alt="Nodeport service" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers?topic=containers-nodeport" alt="NodePort service" shape="circle" coords="52, 283, 45"/>
 <area href="/docs/containers?topic=containers-loadbalancer" alt="LoadBalancer service" shape="circle" coords="247, 419, 44"/>
 <area href="/docs/containers?topic=containers-ingress" alt="Ingress service" shape="circle" coords="445, 420, 45"/>
 </map>
