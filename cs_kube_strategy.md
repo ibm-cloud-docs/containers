@@ -62,7 +62,7 @@ With {{site.data.keyword.Bluemix_notm}}, you have flexibility to choose a [publi
 {: caption="{{site.data.keyword.Bluemix_notm}} implementations support your workloads" caption-side="top"}
 
 **Ready to run workloads in the public cloud?**</br>
-Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-container_index).
+Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
 
 **Interested in the private cloud?**</br>
 Explore the [{{site.data.keyword.Bluemix_notm}} Private documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.1/kc_welcome_containers.html). If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.Bluemix_notm}} Private modernization strategy with various tools.
