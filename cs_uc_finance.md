@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -44,7 +44,7 @@ Why {{site.data.keyword.Bluemix_notm}}: To improve risk analysis, the company lo
 * [Multiple regions for high availability](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Container security and isolation](/docs/containers?topic=containers-security#security)
-* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **The solution**
@@ -60,7 +60,7 @@ They also accelerated their risk analysis and compliance. Their predictive and r
 * Heightened need for better financial risk management drives increases in regulatory oversight. The same needs drive the associated review in risk assessment processes and disclosure of more granular, integrated, and abundant regulatory reporting.
 * High Performance Computing Grids are the key infrastructure components for financial modeling.
 
-The company’s problem right now is scale and time to delivery.
+The problem of the company right now is scale and time to delivery.
 
 Their current environment is 7+ years old, on-premises, and with limited compute, storage, and I/O capacity.
 Server refreshes are costly and take a long time to complete.
