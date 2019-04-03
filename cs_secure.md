@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -280,7 +280,7 @@ For more information about how data is encrypted for the specific storage type, 
 - [NFS file storage](/docs/infrastructure/FileStorage?topic=FileStorage-encryption#encryption)
 - [Block storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-encryption#block-storage-encryption-at-rest) </br>
 
-You can also use an {{site.data.keyword.Bluemix_notm}} database service, such as [{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant), to persist data in a managed database outside the cluster. Data that is stored with a cloud database service can be accessed across clusters, zones, and regions. For security-related information about IBM Cloudant NoSQL DB, see the [service documentation](/docs/services/Cloudant/offerings?topic=cloudant-security#security).
+You can also use an {{site.data.keyword.Bluemix_notm}} database service, such as [{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started), to persist data in a managed database outside the cluster. Data that is stored with a cloud database service can be accessed across clusters, zones, and regions. For security-related information about IBM Cloudant NoSQL DB, see the [service documentation](/docs/services/Cloudant/offerings?topic=cloudant-security#security).
 
 <br />
 
