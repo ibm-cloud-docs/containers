@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-04-03"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -451,7 +451,7 @@ To update your app, you can choose from a variety of strategies such as the foll
 
 
 ## Monitoring your cluster performance
-{: #health}
+{: #monitoring_health}
 
 With effective logging and monitoring of your cluster and apps, you can better understand your environment to optimize resource utilization and troubleshoot issues that might arise. To set up logging and monitoring solutions for your cluster, see [Logging and monitoring](/docs/containers?topic=containers-health#health).
 {: shortdesc}
