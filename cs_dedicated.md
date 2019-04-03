@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-02"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -539,7 +539,6 @@ Review the following options for other cluster configurations:
   * [Updating worker nodes](/docs/containers?topic=containers-update#worker_node)
   * [Configuring cluster logging](/docs/containers?topic=containers-health#logging). Log enablement is not supported from the Dedicated endpoint. You must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space to enable log forwarding.
   * [Configuring cluster monitoring](/docs/containers?topic=containers-health#view_metrics). An `ibm-monitoring` cluster exists within each {{site.data.keyword.Bluemix_dedicated_notm}} account. This cluster continuously monitors the health of the {{site.data.keyword.containerlong_notm}} in the Dedicated environment, checking the stability and connectivity of the environment. Do not remove this cluster from the environment.
-  * [Visualizing Kubernetes cluster resources](/docs/containers?topic=containers-integrations#weavescope)
   * [Removing clusters](/docs/containers?topic=containers-clusters#remove)
 
 <br />
