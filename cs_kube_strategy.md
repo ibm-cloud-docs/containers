@@ -155,7 +155,7 @@ Now let's add some other features that you might use.
 
 
 1.  Consider if your app pulls large or many images, which can take up local storage on the worker node.
-2.  Decide if you want to [integrate services](/docs/containers?topic=containers-integrations#integrations) into your cluster, such as [Helm](/docs/containers?topic=containers-integrations#helm) or [Prometheus ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus). These integrated services and add-ons spin up pods that consume cluster resources.
+2.  Decide if you want to [integrate services](/docs/containers?topic=containers-supported_integrations#supported_integrations) into your cluster, such as [Helm](/docs/containers?topic=containers-helm#public_helm_install) or [Prometheus ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus). These integrated services and add-ons spin up pods that consume cluster resources.
 
 ### What type of availability do I want my workload to have?
 {: #sizing_availability}
