@@ -221,7 +221,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-gettingstarted#gettingstarted) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
   </tr>
   <tr>
     <td>Portworx</td>
