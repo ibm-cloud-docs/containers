@@ -71,7 +71,7 @@ lastupdated: "2019-04-03"
 ## Your cluster strategy
 {: #sitemap-strategy}
 
-[Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#your-responsibilities-by-using-ibm-cloud-kubernetes-service)
+[Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
 * [Cluster management responsibilities](/docs/containers?topic=containers-responsibilities_iks#responsibilities)
 * [Abuse of {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#terms)
 
@@ -121,7 +121,7 @@ lastupdated: "2019-04-03"
 * [Keeping your app up to date](/docs/containers?topic=containers-strategy#updating)
   * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-strategy#updating_kube)
   * [What app update strategies can I use?](/docs/containers?topic=containers-strategy#updating_apps)
-* [Monitoring your cluster performance](/docs/containers?topic=containers-strategy#health)
+* [Monitoring your cluster performance](/docs/containers?topic=containers-strategy#monitoring_health)
 
 ## Tutorials
 {: #sitemap-tutorials}
