@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-02"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks 
 
@@ -122,7 +122,7 @@ Before you begin:
 - [Install the {{site.data.keyword.registryshort}} CLI plug-in (`ibmcloud cr`)](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install).
 - [Set up a namespace in {{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup) or retrieve your existing namespace by running `ibmcloud cr namespaces`.
 - [Target your `kubectl` CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- [Install the Helm CLI and set up tiller in your cluster](/docs/containers?topic=containers-integrations#helm).
+- [Install the Helm CLI and set up tiller in your cluster](/docs/containers?topic=containers-helm#public_helm_install).
 
 To deploy an {{site.data.keyword.Bluemix_notm}} Private image in a cluster in {{site.data.keyword.Bluemix_notm}} Public:
 
