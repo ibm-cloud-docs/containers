@@ -947,7 +947,7 @@ ibmcloud ks cluster-addon-enable istio --cluster CLUSTER [--version VERSION]
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>--version <em>VERSION</em></code></dt>
-    <dd> Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+   <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 </dl>
 
 **Example**:
@@ -977,7 +977,7 @@ ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [--version VERSI
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>--version <em>VERSION</em></code></dt>
-    <dd> Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+    <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 
   <dt><code>-y</code></dt>
    <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
@@ -1010,7 +1010,7 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [--vers
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>--version <em>VERSION</em></code></dt>
-    <dd> Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+    <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 
   <dt><code>-y</code></dt>
    <dd>Optional: Enable the <code>istio</code> and <code>istio-extras</code> add-on dependencies.</dd>
@@ -1043,7 +1043,7 @@ ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [--version VERSION] [
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>--version <em>VERSION</em></code></dt>
-    <dd> Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+    <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 
   <dt><code>-y</code></dt>
    <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
@@ -4443,7 +4443,7 @@ ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,
     <p>If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).</p></dd>
 
   <dt><code>--private-only</code></dt>
-    <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If worker nodes are set up with a private VLAN only, you must enable the private service endpoint or configure a gateway device. For more information, see [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
+    <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag. <p class="note">If worker nodes are set up with a private VLAN only, you must enable the private service endpoint or configure a gateway device. For more information, see [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
 
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
