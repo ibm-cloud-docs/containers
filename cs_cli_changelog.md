@@ -53,8 +53,8 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <li>Adds the <code>--version</code> flag to [ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable) commands.</li></ul>
 <li>Updates translations of help text.</li>
 <li>Updates short links to documentation in help text.</li>
-<li>Fixes a bug where JSON error messages print in an incorrect format.</li>
-<li>Fixes a bug where using the silent flag (`-s`) on some commands might prevent errors from being printed.</li>
+<li>Fixes a bug where JSON error messages printed in an incorrect format.</li>
+<li>Fixes a bug where using the silent flag (`-s`) on some commands prevented some errors from printing.</li>
 </ul></td>
 </tr>
 <tr>
