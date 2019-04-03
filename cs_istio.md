@@ -152,9 +152,9 @@ Install Istio managed add-ons in an existing cluster.
   Example output:
   ```
   Name                      Version
-  istio                     1.0.5
-  istio-extras              1.0.5
-  istio-sample-bookinfo     1.0.5
+  istio                     1.0.6
+  istio-extras              1.0.6
+  istio-sample-bookinfo     1.0.6
   ```
   {: screen}
 
@@ -951,7 +951,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.0.5
+    cd <filepath>/istio-1.0.6
     ```
     {: pre}
 

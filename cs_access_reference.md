@@ -65,7 +65,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <tr>
 <td>View a list of supported versions for managed add-ons in {{site.data.keyword.containerlong_notm}}.</td>
 <td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions)</code></td>
-<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetAddonVersions)</code></td>
+<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetAddons)</code></td>
 </tr>
 <tr>
 <td>Target or view the API endpoint for {{site.data.keyword.containerlong_notm}}.</td>

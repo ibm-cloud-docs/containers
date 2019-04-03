@@ -931,7 +931,7 @@ Enable a managed add-on in an existing cluster. This command must be combined wi
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">istio</ph>
 {: #cs_cluster_addon_enable_istio}
 
-Enable the managed [Istio add-on](/docs/containers?topic=containers-istio). Installs the core components of Istio version 1.0.5, including Prometheus.
+Enable the managed [Istio add-on](/docs/containers?topic=containers-istio). Installs the core components of Istio, including Prometheus.
 {: shortdesc}
 
 ```
