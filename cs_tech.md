@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks, docker
 
@@ -257,5 +257,5 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     </tbody></table></dd>
 </dl>
 
-Want to see how {{site.data.keyword.containerlong_notm}} can be used with other products and services? Check out some of the [integrations](/docs/containers?topic=containers-integrations#integrations).
+Want to see how {{site.data.keyword.containerlong_notm}} can be used with other products and services? Check out some of the [integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}
