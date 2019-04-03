@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -39,7 +39,7 @@ The {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in creates pod
 Looking for instructions for how to update or remove the {{site.data.keyword.Bluemix_notm}} Block Volume Attacher plug-in? See [Updating the plug-in](#update_block_attacher) and [Removing the plug-in](#remove_block_attacher).
 {: tip}
 
-1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
 
 2.  Verify that tiller is installed with a service account.
 
