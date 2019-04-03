@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-02"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -36,7 +36,7 @@ Click an option to get started:
 
 <img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Click an icon to get started quickly with {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.Bluemix_dedicated_notm}}, click this icon to see your options." style="width:440px;" />
 <map name="home_map" id="home_map">
-<area href="#clusters_gs" alt="Getting started with Kubernetes clusters in {{site.data.keyword.Bluemix_notm}}" title="Getting started with Kubernetes clusters in {{site.data.keyword.Bluemix_notm}}" shape="rect" coords="-7, -8, 108, 211" />
+<area href="#clusters_gs_index" alt="Getting started with Kubernetes clusters in {{site.data.keyword.Bluemix_notm}}" title="Getting started with Kubernetes clusters in {{site.data.keyword.Bluemix_notm}}" shape="rect" coords="-7, -8, 108, 211" />
 <area href="/docs/containers?topic=containers-cs_cli_install" alt="Install the CLIs." title="Install the CLIs." shape="rect" coords="155, -1, 289, 210" />
 <area href="/docs/containers?topic=containers-dedicated#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} cloud environment" title="{{site.data.keyword.Bluemix_notm}} cloud environment" shape="rect" coords="326, -10, 448, 218" />
 </map>
