@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -71,7 +71,7 @@ For more information about the types of {{site.data.keyword.containerlong_notm}}
 <dd>To collect, forward, and view logs for your cluster's Kubernetes master, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies. To get started, see [Collecting master logs](#collect_master).</dd>
 
 <dt>Third-party services</dt>
-<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-integrations#health_services). In clusters that run Kubernetes version 1.11 or later, you can collect container logs from the `/var/log/pods/` path. In clusters that run Kubernetes version 1.10 or earlier, you can collect container logs from the `/var/lib/docker/containers/` path.</dd>
+<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-supported_integrations#health_services). In clusters that run Kubernetes version 1.11 or later, you can collect container logs from the `/var/log/pods/` path. In clusters that run Kubernetes version 1.10 or earlier, you can collect container logs from the `/var/lib/docker/containers/` path.</dd>
 
 </dl>
 
@@ -827,7 +827,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 You can configure other tools for more monitoring capabilities.
 <dl>
   <dt>Prometheus</dt>
-    <dd>Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For setup information, see [Integrating services with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#integrations).</dd>
+    <dd>Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For setup information, see the [CoreOS instructions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus).</dd>
 </dl>
 
 <br />
@@ -850,7 +850,7 @@ Before you begin:
 
 To configure Autorecovery:
 
-1.  [Follow the instructions](/docs/containers?topic=containers-integrations#helm) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
+1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
 
 2.  Verify that tiller is installed with a service account.
     ```
