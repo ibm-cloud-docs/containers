@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,19 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.2.95</td>
+<td>03 Apr 2019</td>
+<td><ul>
+<li>Adds versioning support for managed cluster add-ons.</li>
+<ul><li>Adds the [<code>ibmcloud ks addon-versions</code>](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions) command.</li>
+<li>Adds the <code>--version</code> flag to [ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable) commands.</li></ul>
+<li>Updates translations of help text.</li>
+<li>Updates short links to documentation in help text.</li>
+<li>Fixes a bug where JSON error messages were not printing in the correct format.</li>
+<li>Fixes a bug where using the silent flag (`-s`) on some commands might prevent errors from being printed.</li>
+</ul></td>
+</tr>
 <tr>
 <td>0.2.80</td>
 <td>19 Mar 2019</td>
