@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-03"
 
 ---
 
@@ -53,11 +53,14 @@ An Istio service mesh is composed of a data plane and a control plane. The data 
 Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on that integrates Istio directly with your Kubernetes cluster.
 {: shortdesc}
 
+The managed Istio add-on is classified as beta and might be unstable or change frequently. Beta features also might not provide the same level of performance or compatibility that generally available features provide and are not intended for use in a production environment.
+{: note}
+
 **What does this look like in my cluster?**</br>
 When you install the Istio add-on, the Istio control and data planes use the VLANs that your cluster is already connected to. Configuration traffic flows over the private network within your cluster, and does not require you to open any additional ports or IP addresses in your firewall. If you expose your Istio-managed apps with an Istio Gateway, external traffic requests to the apps flows over the public VLAN.
 
 **How does the update process work?**</br>
-The Istio version in the managed add-on is tested by {{site.data.keyword.Bluemix_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. Additionally, the Istio add-on simplifies the maintenance of your Istio control plane so you can focus on managing your microservices. {{site.data.keyword.Bluemix_notm}} keeps all your Istio components up-to-date by automatically rolling out updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}.  
+The Istio version in the managed add-on is tested by {{site.data.keyword.Bluemix_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. To update your Istio components to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}, you can follow the steps in [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).  
 
 If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.Bluemix_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/).
 {: tip}
@@ -861,6 +864,12 @@ Looking for even more fine-grained control over routing? To create rules that ar
 <br />
 
 
+## Updating Istio on {{site.data.keyword.containerlong_notm}}
+{: #istio_update}
+
+The Istio version in the managed Istio add-on is tested by {{site.data.keyword.Bluemix_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. To update your Istio components to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}, see [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
+{: shortdesc}
+
 ## Uninstalling Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_uninstall}
 
@@ -868,6 +877,7 @@ If you're finished working with Istio, you can clean up the Istio resources in y
 {:shortdesc}
 
 Note that the `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinfo`, and [`knative`](/docs/containers?topic=containers-knative_tutorial) add-ons. The `istio-extras` add-on is a dependency for the `istio-sample-bookinfo` add-on.
+{: important}
 
 ### Uninstalling managed Istio add-ons in the CLI
 {: #istio_uninstall_cli}
@@ -907,9 +917,9 @@ Note that the `istio` add-on is a dependency for the `istio-extras`, `istio-samp
 
 4. Uninstall individual or all Istio add-ons.
   - Individual Istio add-ons:
-    1. Click **Update**.
+    1. Click **Manage**.
     2. Clear the check boxes for the add-ons you want to disable. If you clear an add-on, other add-ons that require that add-on as a dependency might be automatically cleared.
-    3. Click **Update**. The Istio add-ons are disabled and the resources for those add-ons are removed from this cluster.
+    3. Click **Manage**. The Istio add-ons are disabled and the resources for those add-ons are removed from this cluster.
   - All Istio add-ons:
     1. Click **Uninstall**. All managed Istio add-ons are disabled in this cluster and all Istio resources in this cluster are removed.
 
@@ -950,6 +960,9 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
     samples/bookinfo/platform/kube/cleanup.sh
     ```
     {: pre}
+
+<br />
+
 
 ## What's next?
 {: #istio_next}

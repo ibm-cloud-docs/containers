@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -63,6 +63,11 @@ Any user in your account who runs the CLI command or makes the API call for the 
 </thead>
 <tbody>
 <tr>
+<td>View a list of supported versions for managed add-ons in {{site.data.keyword.containerlong_notm}}.</td>
+<td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions)</code></td>
+<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetAddonVersions)</code></td>
+</tr>
+<tr>
 <td>Target or view the API endpoint for {{site.data.keyword.containerlong_notm}}.</td>
 <td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api)</code></td>
 <td>-</td>
@@ -78,7 +83,8 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td>-</td>
 </tr>
 <tr>
-<td>View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. </td><td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
+<td>View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}.</td>
+<td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
 <td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetKubeVersions)</code></td>
 </tr>
 <tr>
@@ -107,7 +113,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td><code>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</code></td>
 </tr>
 <tr>
-<td>View a list of available zones for you to create a cluster in.</td>
+<td>View a list of available zones that you can create a cluster in.</td>
 <td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cs_cli_reference#cs_datacenters)</code></td>
 <td><code>[GET /v1/zones](https://containers.cloud.ibm.com/swagger-api/#!/util/GetZones)</code></td>
 </tr>
