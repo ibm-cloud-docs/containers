@@ -765,4 +765,4 @@ To create a Calico policy to log denied traffic:
     ```
     {: pre}
 
-4. [Forward the logs](/docs/containers?topic=containers-health#configuring) from `/var/log/syslog` to {{site.data.keyword.loganalysislong}} or an external syslog server.
+4. [Forward the logs](/docs/containers?topic=containers-health#configuring) from `/var/log/syslog` to an external syslog server.
