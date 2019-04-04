@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -56,7 +56,7 @@ By default, your single zone cluster is set up with a worker pool that is named 
 When you add more worker nodes, app instances can be distributed across multiple worker nodes. If one worker node goes down, app instances on available worker nodes continue to run. Kubernetes automatically reschedules pods from unavailable worker nodes to ensure performance and capacity for your app. To ensure that your pods are evenly distributed across worker nodes, implement [pod affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
 
 **Can I convert my single zone cluster to a multizone cluster?**</br>
-If the cluster is in one of the [supported multizone metro cities](/docs/containers?topic=containers-regions-and-zones#zones), yes. See [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
+If the cluster is in one of the [supported multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones), yes. See [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 
 **Do I have to use multizone clusters?**</br>
@@ -80,7 +80,7 @@ A worker pool is a collection of worker nodes with the same flavor, such as mach
 The previous cluster setup of stand-alone worker nodes is supported, but deprecated. Be sure to [add a worker pool to your cluster](/docs/containers?topic=containers-clusters#add_pool), and then [use worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool) to organize your worker nodes instead of stand-alone worker nodes.
 
 **Can I convert my single zone cluster to a multizone cluster?**</br>
-If the cluster is in one of the [supported multizone metro cities](/docs/containers?topic=containers-regions-and-zones#zones), yes. See [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
+If the cluster is in one of the [supported multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones), yes. See [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 
 ### Tell me more about the multizone cluster setup
@@ -99,7 +99,7 @@ Let's say you need a worker node with 6 cores to handle the workload for your ap
 - **Distribute resources across 3 zones:** With this option, you deploy 3 cores per zone, which leaves you with a total capacity of 9 cores. To handle your workload, two zones must be up at a time. If one zone is unavailable, the other two zones can handle your workload. If two zones are unavailable, the 3 remaining cores are up to handle your workload. Deploying 3 cores per zone means smaller machines and hence reduced cost for you.</br>
 
 **How is my Kubernetes master set up?** </br>
-If you create a multizone cluster in [select multizone metro cities](/docs/containers?topic=containers-regions-and-zones#zones), a highly available Kubernetes master is automatically deployed and three replicas are spread across the zones of the metro. For example, if the cluster is in `dal10`, `dal12`, or `dal13` zones, the replicas of the Kubernetes master are spread across each zone in the Dallas multizone metro.
+When you create a cluster in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones), a highly available Kubernetes master is automatically deployed and three replicas are spread across the zones of the metro. For example, if the cluster is in `dal10`, `dal12`, or `dal13` zones, the replicas of the Kubernetes master are spread across each zone in the Dallas multizone metro. 
 
 **What happens if the Kubernetes master becomes unavailable?** </br>
 The [Kubernetes master](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture) is the main component that keeps your cluster up and running. The master stores cluster resources and their configurations in the etcd database that serves as the single point of truth for your cluster. The Kubernetes API server is the main entry point for all cluster management requests from the worker nodes to the master, or when you want to interact with your cluster resources.<br><br>If a master failure occurs, your workloads continue to run on the worker nodes, but you cannot use `kubectl` commands to work with your cluster resources or view the cluster health until the Kubernetes API server in the master is back up. If a pod goes down during the master outage, the pod cannot be rescheduled until the worker node can reach the Kubernetes API server again.<br><br>During a master outage, you can still run `ibmcloud ks` commands against the {{site.data.keyword.containerlong_notm}} API to work with your infrastructure resources, such as worker nodes or VLANs. If you change the current cluster configuration by adding or removing worker nodes to the cluster, your changes do not happen until the master is back up.
@@ -131,7 +131,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/
 {: pre}
 
 **I created my multizone cluster. Why is there still only one zone? How do I add zones to my cluster?**</br>
-If you [create your multizone cluster with the CLI](/docs/containers?topic=containers-clusters#clusters_cli), the cluster is created, but you must add zones to the worker pool to complete the process. To span across multiple zones, your cluster must be in a [multizone metro city](/docs/containers?topic=containers-regions-and-zones#zones). To add a zone to your cluster and spread worker nodes across zones, see [Adding a zone to your cluster](/docs/containers?topic=containers-clusters#add_zone).
+If you [create your multizone cluster with the CLI](/docs/containers?topic=containers-clusters#clusters_cli), the cluster is created, but you must add zones to the worker pool to complete the process. To span across multiple zones, your cluster must be in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones). To add a zone to your cluster and spread worker nodes across zones, see [Adding a zone to your cluster](/docs/containers?topic=containers-clusters#add_zone).
 
 ### What are some changes from how I currently manage my clusters?
 {: #mz_new_ways}

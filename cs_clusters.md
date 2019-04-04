@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -546,7 +546,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 You can add worker nodes to your cluster by creating a new worker pool.
 {:shortdesc}
 
-1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro cities](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones`.
+1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones`.
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
