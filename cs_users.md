@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks
 
@@ -111,7 +111,7 @@ When you create your {{site.data.keyword.Bluemix_notm}} account, the default res
 <dt>Kubernetes namespace</dt>
   <dd><p>As part of cluster resource instances in {{site.data.keyword.Bluemix_notm}} IAM, you can assign users with service access roles to Kubernetes namespaces within your clusters. If you scope a service role to a namespace, you cannot apply the policy to a resource group or assign a platform role at the same time.</p>
   <p>When you assign access to a namespace, the policy applies to all current and future instances of the namespace in all the clusters that you authorize. For example, say you want a `dev` group of users to be able to deploy Kubernetes resources in a `test` namespace in all your clusters in AP North. If you assign the `dev` access group the **Writer** service access role for the Kubernetes namespace test in all clusters in the AP North region within the `default` resource group, the `dev` group can access the `test` namespace in any AP North cluster in the `default` resource group that currently has or eventually has a test namespace.</p>
-  <p class="important">When you scope a service access policy to a namespace, you must [use the {{site.data.keyword.Bluemix_notm}} console](/docs/containers?topic=containers-users#add_users). You cannot use the CLI the scope a service access policy to a namespace. You also cannot assign namespace-scoped service access roles at the resource group level, or assign them at the same time as platform roles.</p></dd>
+  <p class="important">When you scope a service access policy to a namespace, you must [use the {{site.data.keyword.Bluemix_notm}} console](/docs/containers?topic=containers-users#add_users). You cannot use the CLI to scope a service access policy to a namespace. You also cannot assign namespace-scoped service access roles at the resource group level, or assign them at the same time as platform roles.</p></dd>
 <dt>Resource group</dt>
   <dd><p>You can organize your account resources in customizable groupings so that you can quickly assign individual or groups of users access to more than one resource at a time. Resource groups can help operators and administrators filter resources to view their current usage, troubleshoot issues, and manage teams.</p>
   <p class="important">A cluster can be created in only one resource group that you can't change afterward. If you create a cluster in the wrong resource group, you must delete the cluster and re-create it in the correct resource group. Furthermore, if you need to use the `ibmcloud ks cluster-service-bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.Bluemix_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.</p>
