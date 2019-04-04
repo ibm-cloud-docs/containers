@@ -909,18 +909,16 @@ ibmcloud ks cluster-addon-disable knative --cluster CLUSTER
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
-
 <dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-  <dd>The name or ID of the cluster. This value is required.</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
 
 **Example**:
-
-  ```
-  ibmcloud ks cluster-addon-disable knative --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-disable knative --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-addon-enable
 {: #cs_cluster_addon_enable}
@@ -942,20 +940,20 @@ ibmcloud ks cluster-addon-enable istio --cluster CLUSTER [--version VERSION]
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
 
-   <dt><code>--version <em>VERSION</em></code></dt>
-   <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 </dl>
 
 **Example**:
 
-  ```
-  ibmcloud ks cluster-addon-enable istio --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-enable istio --cluster my_cluster
+```
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable istio-extras
 {: #cs_cluster_addon_enable_istio_extras}
@@ -971,24 +969,22 @@ ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [--version VERSI
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 
-   <dt><code>--version <em>VERSION</em></code></dt>
-    <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
-
-  <dt><code>-y</code></dt>
-   <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
+<dt><code>-y</code></dt>
+<dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
 </dl>
 
 **Example**:
-
-  ```
-  ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-enable istio-extras --cluster my_cluster
+```
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable istio-sample-bookinfo
 {: #cs_cluster_addon_enable_istio_sample_bookinfo}
@@ -1006,22 +1002,21 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [--vers
 <strong>Command options</strong>:
 
 <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
 
-   <dt><code>--version <em>VERSION</em></code></dt>
-    <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>Optional: Enable the <code>istio</code> and <code>istio-extras</code> add-on dependencies.</dd>
+<dt><code>-y</code></dt>
+<dd>Optional: Enable the <code>istio</code> and <code>istio-extras</code> add-on dependencies.</dd>
 </dl>
 
 **Example**:
-
-  ```
-  ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster my_cluster
+```
+{: pre}
 
 #### ibmcloud ks cluster-addon-enable <ph class="ignoreSpelling">knative</ph>
 {: #cs_cluster_addon_enable_knative}
@@ -1039,22 +1034,21 @@ ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [--version VERSION] [
 <strong>Command options</strong>:
 
 <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
 
-   <dt><code>--version <em>VERSION</em></code></dt>
-    <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 
-  <dt><code>-y</code></dt>
-   <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
+<dt><code>-y</code></dt>
+<dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
 </dl>
 
 **Example**:
-
-  ```
-  ibmcloud ks cluster-addon-enable knative --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addon-enable knative --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-addons
 {: #cs_cluster_addons}
@@ -1070,18 +1064,16 @@ ibmcloud ks cluster-addons --cluster CLUSTER
 <strong>Minimum required permissions</strong>: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 <strong>Command options</strong>:
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
 
 **Example**:
-
-  ```
-  ibmcloud ks cluster-addons --cluster my_cluster
-  ```
-  {: pre}
+```
+ibmcloud ks cluster-addons --cluster my_cluster
+```
+{: pre}
 
 ### ibmcloud ks cluster-config
 {: #cs_cluster_config}
@@ -1100,32 +1092,30 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
 
 **Command options**:
 
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required.</dd>
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
 
-   <dt><code>--admin</code></dt>
-   <dd>Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to re-authenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`. This value is optional.</dd>
+<dt><code>--admin</code></dt>
+<dd>Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to re-authenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`. This value is optional.</dd>
 
-   <dt><code>--network</code></dt>
-   <dd>Download the Calico configuration file, TLS certificates, and permission files required to run <code>calicoctl</code> commands in your cluster. This value is optional. **Note**: To get the export command for the downloaded Kubernetes configuration data and certificates, you must run this command without this flag.</dd>
+<dt><code>--network</code></dt>
+<dd>Download the Calico configuration file, TLS certificates, and permission files required to run <code>calicoctl</code> commands in your cluster. This value is optional. **Note**: To get the export command for the downloaded Kubernetes configuration data and certificates, you must run this command without this flag.</dd>
 
-   <dt><code>--export</code></dt>
-   <dd>Download Kubernetes configuration data and certificates without any messages other than the export command. Because no messages are displayed, you can use this flag when you create automated scripts. This value is optional.</dd>
+<dt><code>--export</code></dt>
+<dd>Download Kubernetes configuration data and certificates without any messages other than the export command. Because no messages are displayed, you can use this flag when you create automated scripts. This value is optional.</dd>
 
-   <dt><code>--skip-rbac</code></dt>
-   <dd>Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.Bluemix_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.Bluemix_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, do not include this option.</dd>
+<dt><code>--skip-rbac</code></dt>
+<dd>Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.Bluemix_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.Bluemix_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, do not include this option.</dd>
 
-  <dt><code>-s</code></dt>
-  <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
-  <dt><code>--yaml</code></dt>
-  <dd>Prints the command output in YAML format. This value is optional.</dd>
-
-   </dl>
+<dt><code>--yaml</code></dt>
+<dd>Prints the command output in YAML format. This value is optional.</dd>
+</dl>
 
 **Example**:
-
 ```
 ibmcloud ks cluster-config --cluster my_cluster
 ```
@@ -1152,10 +1142,7 @@ ibmcloud ks cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --zone Z
 
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-
-<dd>The path to the YAML file to create your standard cluster. Instead of defining the characteristics of your cluster by using the options provided in this command, you can use a YAML file. This value is optional for standard clusters and is not available for free clusters.
-
-<p class="note">If you provide the same option in the command as parameter in the YAML file, the value in the command takes precedence over the value in the YAML. For example, you define a location in your YAML file and use the <code>--zone</code> option in the command, the value that you entered in the command option overrides the value in the YAML file.</p>
+<dd>The path to the YAML file to create your standard cluster. Instead of defining the characteristics of your cluster by using the options provided in this command, you can use a YAML file. This value is optional for standard clusters and is not available for free clusters. <p class="note">If you provide the same option in the command as parameter in the YAML file, the value in the command takes precedence over the value in the YAML. For example, you define a location in your YAML file and use the <code>--zone</code> option in the command, the value that you entered in the command option overrides the value in the YAML file.</p>
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
@@ -1170,59 +1157,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 diskEncryption: <em>false</em>
 trusted: <em>true</em>
 </code></pre>
-
-
-<table>
-    <caption>Understanding the YAML file components</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code><em>name</em></code></td>
-    <td>Replace <code><em>&lt;cluster_name&gt;</em></code> with a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
-</td>
-    </tr>
-    <tr>
-    <td><code><em>zone</em></code></td>
-    <td>Replace <code><em>&lt;zone&gt;</em></code> with the zone where you want to create your cluster. The available zones are dependent on the region that you are logged in. To list available zones, run <code>ibmcloud ks zones</code>. </td>
-     </tr>
-     <tr>
-     <td><code><em>no-subnet</em></code></td>
-     <td>By default, a public and a private portable subnet are created on the VLAN associated with the cluster. Replace <code><em>&lt;no-subnet&gt;</em></code> with <code><em>true</em></code> to avoid creating subnets with the cluster. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster later.</td>
-      </tr>
-     <tr>
-     <td><code><em>machine-type</em></code></td>
-     <td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types).</td>
-     </tr>
-     <tr>
-     <td><code><em>private-vlan</em></code></td>
-     <td>Replace <code><em>&lt;private_VLAN&gt;</em></code> with the ID of the private VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> and look for VLAN routers that start with <code>bcr</code> (back-end router).</td>
-     </tr>
-     <tr>
-     <td><code><em>public-vlan</em></code></td>
-     <td>Replace <code><em>&lt;public_VLAN&gt;</em></code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud ks vlans <em>&lt;zone&gt;</em></code> and look for VLAN routers that start with <code>fcr</code> (front-end router).</td>
-     </tr>
-     <tr>
-     <td><code><em>hardware</em></code></td>
-     <td>For virtual machine types: The level of hardware isolation for your worker node. Use dedicated if you want to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is <code>shared</code>.</td>
-     </tr>
-     <tr>
-     <td><code><em>workerNum</em></code></td>
-     <td>Replace <code><em>&lt;number_workers&gt;</em></code> with the number of worker nodes that you want to deploy.</td>
-     </tr>
-     <tr>
-      <td><code><em>kube-version</em></code></td>
-      <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks kube-versions</code>.
-</td></tr>
-      <tr>
-      <td><code>diskEncryption: <em>false</em></code></td>
-      <td>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
-      <tr>
-      <td><code>trusted: <em>true</em></code></td>
-      <td>**Bare metal only**: Enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td></tr>
-     </tbody></table>
-    </p></dd>
+</dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>The level of hardware isolation for your worker node. Use dedicated to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional for VM standard clusters and is not available for free clusters. For bare metal machine types, specify `dedicated`.</dd>
