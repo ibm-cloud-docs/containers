@@ -443,8 +443,28 @@ You can add the service credentials and other key value pairs from your Kubernet
 7. Configure your app to read the environment variable and to parse the JSON content to retrieve the information that you need to access your service.
 
    Example code in Python:
-   ```
+   ```python
    if os.environ.get('BINDING'):
         credentials = json.loads(os.environ.get('BINDING'))
    ```
    {: codeblock}
+
+8. Optional: As a precaution, add error handling to your app in case that the `BINDING` environment variable is not set properly. 
+   
+   Example code in Java: 
+   ```java
+   if (System.getenv("BINDING") == null) {
+    throw new RuntimeException("Environment variable 'SECRET' is not set!");
+   }
+   ```
+   {: codeblock}
+   
+   Example code in Node.js:
+   ```js
+   if (!process.env.BINDING) {
+    console.error('ENVIRONMENT variable "BINDING" is not set!');
+    process.exit(1);
+   }
+   ```
+   {: codeblock}
+
