@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -280,7 +280,7 @@ For more information about how data is encrypted for the specific storage type, 
 - [NFS file storage](/docs/infrastructure/FileStorage?topic=FileStorage-encryption#encryption)
 - [Block storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-encryption#block-storage-encryption-at-rest) </br>
 
-You can also use an {{site.data.keyword.Bluemix_notm}} database service, such as [{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant), to persist data in a managed database outside the cluster. Data that is stored with a cloud database service can be accessed across clusters, zones, and regions. For security-related information about IBM Cloudant NoSQL DB, see the [service documentation](/docs/services/Cloudant/offerings?topic=cloudant-security#security).
+You can also use an {{site.data.keyword.Bluemix_notm}} database service, such as [{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started), to persist data in a managed database outside the cluster. Data that is stored with a cloud database service can be accessed across clusters, zones, and regions. For security-related information about IBM Cloudant NoSQL DB, see the [service documentation](/docs/services/Cloudant/offerings?topic=cloudant-security#security).
 
 <br />
 
@@ -309,7 +309,7 @@ You can choose what events you want to log for your cluster and where you want t
 **How can I monitor the health and performance of my cluster?**</br>
 You can verify the capacity and performance of your cluster by monitoring your cluster components and compute resources, such as CPU and memory usage. {{site.data.keyword.containerlong_notm}} automatically sends metrics for standard clusters to {{site.data.keyword.monitoringlong}} so that you can [see and analyze them in Grafana](/docs/containers?topic=containers-health#view_metrics).
 
-You can also use built-in tools, such as the {{site.data.keyword.containerlong_notm}} details page, the Kubernetes dashboard, or [set up third party integrations](/docs/containers?topic=containers-integrations#health_services), such as Prometheus, Sysdig, LogDNA, Weave Scope, and others.
+You can also use built-in tools, such as the {{site.data.keyword.containerlong_notm}} details page, the Kubernetes dashboard, or [set up third party integrations](/docs/containers?topic=containers-supported_integrations#health_services), such as Prometheus, Sysdig, LogDNA, Weave Scope, and others.
 
 To set up a host-based intrusion detection system (HIDS) and security event log monitoring (SELM), install third party tools that are designed to monitor your cluster and containerized apps to detect intrusion or misuse, such as [Twistlock ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.twistlock.com/) or the [Sysdig Falco project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://sysdig.com/opensource/falco/). Sysdig Falco is a separate tool and is not included if you choose to install the IBM-provided [Sysdig add-on](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster) in your cluster.  
 

@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-02"
+lastupdated: "2019-04-04"
 
 ---
 
@@ -26,6 +26,8 @@ lastupdated: "2019-04-02"
 {: #sitemap-gs}
 
 [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
+
+
 
 ## About
 {: #sitemap-about}
@@ -69,7 +71,7 @@ lastupdated: "2019-04-02"
 ## Your cluster strategy
 {: #sitemap-strategy}
 
-[Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#your-responsibilities-by-using-ibm-cloud-kubernetes-service)
+[Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
 * [Cluster management responsibilities](/docs/containers?topic=containers-responsibilities_iks#responsibilities)
 * [Abuse of {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#terms)
 
@@ -119,7 +121,7 @@ lastupdated: "2019-04-02"
 * [Keeping your app up to date](/docs/containers?topic=containers-strategy#updating)
   * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-strategy#updating_kube)
   * [What app update strategies can I use?](/docs/containers?topic=containers-strategy#updating_apps)
-* [Monitoring your cluster performance](/docs/containers?topic=containers-strategy#health)
+* [Monitoring your cluster performance](/docs/containers?topic=containers-strategy#monitoring_health)
 
 ## Tutorials
 {: #sitemap-tutorials}
@@ -258,10 +260,10 @@ lastupdated: "2019-04-02"
   * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-users#resource_groups)
 * [Setting up access to your cluster](/docs/containers?topic=containers-users#access-checklist)
 * [Setting up the API key to enable access to the infrastructure portfolio](/docs/containers?topic=containers-users#api_key)
-  * [Understanding access to the {[softlayer]} portfolio](/docs/containers?topic=containers-users#understand_infra)
+  * [Understanding access to the IBM Cloud infrastructure (SoftLayer) portfolio](/docs/containers?topic=containers-users#understand_infra)
   * [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-users#owner_permissions)
   * [Accessing the infrastructure portfolio with your default {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](/docs/containers?topic=containers-users#default_account)
-  * [Accessing a different {[softlayer]} account](/docs/containers?topic=containers-users#credentials)
+  * [Accessing a different IBM Cloud infrastructure (SoftLayer) account](/docs/containers?topic=containers-users#credentials)
 * [Granting users access to your cluster through {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform)
   * [Assigning {{site.data.keyword.Bluemix_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
   * [Assigning {{site.data.keyword.Bluemix_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
@@ -275,7 +277,7 @@ lastupdated: "2019-04-02"
     * [Remove {{site.data.keyword.Bluemix_notm}} IAM platform permissions and the associated pre-defined RBAC permissions](/docs/containers?topic=containers-users#remove_iam_rbac)
     * [Remove custom RBAC permissions](/docs/containers?topic=containers-users#remove_custom_rbac)
     * [Remove Cloud Foundry permissions](/docs/containers?topic=containers-users#remove_cloud_foundry)
-    * [Remove {[softlayer]} permissions](/docs/containers?topic=containers-users#remove_infra)
+    * [Remove IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#remove_infra)
 
 [Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption#encryption)
 * [Understanding when to use secrets](/docs/containers?topic=containers-encryption#secrets)
@@ -725,21 +727,23 @@ lastupdated: "2019-04-02"
 [Removing persistent storage from a cluster](/docs/containers?topic=containers-cleanup#cleanup)
 * [Cleaning up persistent storage](/docs/containers?topic=containers-cleanup#storage_remove)
 
-## Integrating services
+## Enhancing cluster capabilities with integrations
 {: #sitemap-integrations}
 
 [Integrating services](/docs/containers?topic=containers-integrations#integrations)
-* [DevOps services](/docs/containers?topic=containers-integrations#devops_services)
-* [Logging and monitoring services](/docs/containers?topic=containers-integrations#health_services)
-* [Security services](/docs/containers?topic=containers-integrations#security_services)
-* [Storage services](/docs/containers?topic=containers-integrations#storage_services)
-* [Adding {{site.data.keyword.Bluemix_notm}} services to clusters](/docs/containers?topic=containers-integrations#adding_cluster)
-* [Accessing service credentials from your apps](/docs/containers?topic=containers-integrations#adding_app)
-  * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-integrations#mount_secret)
-  * [Referencing the secret in environment variables](/docs/containers?topic=containers-integrations#reference_secret)
-* [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#helm)
+* [Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons)
+  * [Adding managed add-ons](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
+  * [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
+* [Adding services by using Helm](/docs/containers?topic=containers-helm#helm)
+  * [Setting up Helm in a cluster with public access](/docs/containers?topic=containers-helm#public_helm_install)
+  * [Private clusters: Pushing the Tiller image to your private registry in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller)
+  * [Private clusters: Installing Helm charts without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller)
   * [Related Helm links](/docs/containers?topic=containers-integrations#helm_links)
-* [Visualizing Kubernetes cluster resources](/docs/containers?topic=containers-integrations#weavescope)
+* [Adding services by using {{site.data.keyword.Bluemix_notm}} service binding](/docs/containers?topic=containers-service-binding#service-binding)
+  * [Adding {{site.data.keyword.Bluemix_notm}} services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
+  * [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
+      * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
+      * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
 
 ## Activity Tracker events
 {: #sitemap-at}
@@ -978,6 +982,16 @@ lastupdated: "2019-04-02"
 * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
 * [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
+
+## Supported integrations
+{: #sitemap-supported-integrations}
+
+[Supported integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+* [DevOps services](/docs/containers?topic=containers-supported_integrations#devops_services)
+* [Logging and monitoring services](/docs/containers?topic=containers-supported_integrations#health_services)
+* [Security services](/docs/containers?topic=containers-supported_integrations#security_services)
+* [Storage services](/docs/containers?topic=containers-supported_integrations#storage_services)
+* [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
 
 ## FAQs
 {: #sitemap-faqs}

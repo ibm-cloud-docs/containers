@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -42,7 +42,7 @@ _Figure: Overview of data encryption in a cluster_
 1.  **etcd**: etcd is the component of the master that stores the data of your Kubernetes resources, such as object configuration `.yaml` files and secrets. In clusters that run Kubernetes version 1.10 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](#keyprotect) for your cluster. The etcd data in clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.
 2.  **Secondary disk of the worker node**: Your worker node's secondary disk is where the container file system and locally pulled images are stored. The disk is AES 256-bit encrypted with a LUKS encryption key that is unique to the worker node and stored as a secret in etcd, managed by IBM. When you reload or update your worker nodes, the LUKS keys are rotated.
 3.  **Storage**: You can choose to store data by [setting up file, block, or object persistent storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). The IBM Cloud infrastructure (SoftLayer) storage instances save the data on encrypted disks, so your data at rest is encrypted. Further, if you choose object storage, your data in transit is also encrypted.
-4.  **{{site.data.keyword.Bluemix_notm}} services**: You can [integrate {{site.data.keyword.Bluemix_notm}} services](/docs/containers?topic=containers-integrations#adding_cluster), such as {{site.data.keyword.registryshort_notm}} or {{site.data.keyword.watson}}, with your cluster. The service credentials are stored in a secret that is saved in etcd, that your app can access by mounting the secret as a volume or specifying the secret as an environment variable in [your deployment](/docs/containers?topic=containers-app#secret).
+4.  **{{site.data.keyword.Bluemix_notm}} services**: You can [integrate {{site.data.keyword.Bluemix_notm}} services](/docs/containers?topic=containers-service-binding#bind-services), such as {{site.data.keyword.registryshort_notm}} or {{site.data.keyword.watson}}, with your cluster. The service credentials are stored in a secret that is saved in etcd, that your app can access by mounting the secret as a volume or specifying the secret as an environment variable in [your deployment](/docs/containers?topic=containers-app#secret).
 5.  **{{site.data.keyword.keymanagementserviceshort}}**: When you [enable {{site.data.keyword.keymanagementserviceshort}}](#keyprotect) in your cluster, a wrapped data encryption key (DEK) is stored in etcd. The DEK encrypts the secrets in your cluster, including service credentials and LUKS key. Because the root key is in your {{site.data.keyword.keymanagementserviceshort}} instance, you control access to your encrypted secrets. The {{site.data.keyword.keymanagementserviceshort}} keys are secured by FIPS 140-2 Level 2 certified cloud-based hardware security modules that protect against the theft of information. For more information on how {{site.data.keyword.keymanagementserviceshort}} encryption works, see [Envelope encryption](/docs/services/key-protect/concepts?topic=key-protect-envelope-encryption#envelope-encryption).
 
 ## Understanding when to use secrets
@@ -56,7 +56,7 @@ Review the following tasks that require secrets.
 ### Adding a service to a cluster
 {: #secrets_service}
 
-When you bind a service to a cluster, you don't have to create a secret to store your service credentials. A secret is automatically created for you. For more information, see [Adding Cloud Foundry services to clusters](/docs/containers?topic=containers-integrations#adding_cluster).
+When you bind a service to a cluster, you don't have to create a secret to store your service credentials. A secret is automatically created for you. For more information, see [Adding {{site.data.keyword.Bluemix_notm}} services to clusters](/docs/containers?topic=containers-service-binding#bind-services).
 {: shortdesc}
 
 ### Encrypting traffic to your apps with TLS secrets

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks
 
@@ -425,7 +425,7 @@ configure pod security policies to authorize who can create and update pods in {
 </tr>
 <tr>
 <td>14 March</td>
-<td>[Secure sign-in with {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-integrations#appid)</td>
+<td>[Secure sign-in with {{site.data.keyword.appid_full}}](/docs/containers?topic=containers-supported_integrations#appid)</td>
 <td>Enhance your apps that are running in {{site.data.keyword.containerlong_notm}} by requiring users to sign in.</td>
 </tr>
 <tr>

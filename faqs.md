@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-03"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -134,7 +134,7 @@ For more information about supported regions, see [Regions and zones](/docs/cont
 
 You can add {{site.data.keyword.Bluemix_notm}} platform and infrastructure services as well as services from third-party vendors to your {{site.data.keyword.containerlong_notm}} cluster to enable automation, improve security, or enhance your monitoring and logging capabilities in the cluster.
 
-For a list of supported services, see [Integrating services](/docs/containers?topic=containers-integrations#integrations).
+For a list of supported services, see [Integrating services](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 
 ## Can I connect my cluster in IBM Cloud Public with apps that run in my on-prem data center?
 {: #hybrid}

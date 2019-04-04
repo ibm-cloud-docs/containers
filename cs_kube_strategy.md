@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-02"
+lastupdated: "2019-04-03"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -155,7 +155,7 @@ Now let's add some other features that you might use.
 
 
 1.  Consider if your app pulls large or many images, which can take up local storage on the worker node.
-2.  Decide if you want to [integrate services](/docs/containers?topic=containers-integrations#integrations) into your cluster, such as [Helm](/docs/containers?topic=containers-integrations#helm) or [Prometheus ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus). These integrated services and add-ons spin up pods that consume cluster resources.
+2.  Decide if you want to [integrate services](/docs/containers?topic=containers-supported_integrations#supported_integrations) into your cluster, such as [Helm](/docs/containers?topic=containers-helm#public_helm_install) or [Prometheus ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus). These integrated services and add-ons spin up pods that consume cluster resources.
 
 ### What type of availability do I want my workload to have?
 {: #sizing_availability}
@@ -249,7 +249,7 @@ Review more information about making resources highly available.
 * [Create multizone clusters](/docs/containers?topic=containers-plan_clusters#ha_clusters).
 * [Plan highly available deployments](/docs/containers?topic=containers-app#highly_available_apps) that use features such as replica sets and pod anti-affinity across multizones.
 * [Run containers that are based on images in a cloud-based public registry](/docs/containers?topic=containers-images).
-* [Plan data storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant#getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage).
+* [Plan data storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage#about-ibm-cloud-object-storage).
 * For multizone clusters, enable a [load balancer service](/docs/containers?topic=containers-loadbalancer#multi_zone_config) or the Ingress [multizone load balancer](/docs/containers?topic=containers-ingress#ingress) to expose your apps publicly.
 
 <br />
@@ -451,7 +451,7 @@ To update your app, you can choose from a variety of strategies such as the foll
 
 
 ## Monitoring your cluster performance
-{: #health}
+{: #monitoring_health}
 
 With effective logging and monitoring of your cluster and apps, you can better understand your environment to optimize resource utilization and troubleshoot issues that might arise. To set up logging and monitoring solutions for your cluster, see [Logging and monitoring](/docs/containers?topic=containers-health#health).
 {: shortdesc}
