@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks
 
@@ -81,7 +81,7 @@ The following image shows the default cluster security settings that address aut
     <tr>
       <td>Fully managed and dedicated Kubernetes master</td>
       <td><p>Every Kubernetes cluster in {{site.data.keyword.containerlong_notm}} is controlled by a dedicated Kubernetes master that is managed by IBM in an IBM-owned IBM Cloud infrastructure (SoftLayer) account. The Kubernetes master is set up with the following dedicated components that are not shared with other IBM customers.</p>
-        <ul><li><strong>etcd data store:</strong> Stores all Kubernetes resources of a cluster, such as `Services`, `Deployments`, and `Pods`. Kubernetes `ConfigMaps` and `Secrets` are app data that is stored as key value pairs so that they can be used by an app that runs in a pod. In clusters that run Kubernetes version 1.10 or later, data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](/docs/containers?topic=containers-encryption#encryption) for your cluster. The etcd data for clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.</li>
+        <ul><li><strong>etcd data store:</strong> Stores all Kubernetes resources of a cluster, such as `Services`, `Deployments`, and `Pods`. Kubernetes `ConfigMaps` and `Secrets` are app data that is stored as key value pairs so that they can be used by an app that runs in a pod. Data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](/docs/containers?topic=containers-encryption#encryption) for your cluster. The etcd data for clusters that run an earlier version of Kubernetes is stored on an encrypted disk that is managed by IBM and backed up daily. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.</li>
           <li><strong>kube-apiserver:</strong> Serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The kube-apiserver validates and processes requests and can read from and write to the etcd data store.</li>
           <li><strong>kube-scheduler:</strong> Decides where to deploy pods, considering the capacity and performance needs, hardware and software policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</li>
           <li><strong>kube-controller-manager:</strong> Responsible for monitoring replica sets, and creating corresponding pods to achieve the specified state.</li>
@@ -108,18 +108,18 @@ The following image shows the default cluster security settings that address aut
       <td>Admission controllers are implemented for specific features in Kubernetes and {{site.data.keyword.containerlong_notm}}. With admission controllers, you can set up policies in your cluster that determine if a particular action in the cluster is allowed or not. In the policy, you can specify conditions when a user cannot perform an action, even if this action is part of the general permissions that you assigned the user by using RBAC. Therefore, admission controllers can provide an extra layer of security for your cluster before an API request is processed by the Kubernetes API server. </br></br> When you create a cluster, {{site.data.keyword.containerlong_notm}} automatically installs the following [Kubernetes admission controllers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/admission-controllers/) in the Kubernetes master, which cannot be changed by the user: <ul>
       <li>`DefaultTolerationSeconds`</li>
       <li>`DefaultStorageClass`</li>
-      <li>`GenericAdmissionWebhook` (Kubernetes 1.8)</li>
+      <li>`GenericAdmissionWebhook`</li>
       <li>`Initializers`</li>
       <li>`LimitRanger`</li>
-      <li>`MutatingAdmissionWebhook` (Kubernetes 1.9 and later)</li>
+      <li>`MutatingAdmissionWebhook`</li>
       <li>`NamespaceLifecycle`</li>
       <li>`PersistentVolumeLabel`</li>
-      <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp) (Kubernetes 1.8.13, 1.9.8, or 1.10.3 and later)</li>
+      <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp)</li>
       <li>[`Priority`](/docs/containers?topic=containers-pod_priority#pod_priority) (Kubernetes 1.11.2 or later</li>
       <li>`ResourceQuota`</li>
       <li>`ServiceAccount`</li>
-      <li>`StorageObjectInUseProtection` (Kubernetes 1.10 and later)</li>
-      <li>`ValidatingAdmissionWebhook` (Kubernetes 1.9 and later)</li></ul></br>
+      <li>`StorageObjectInUseProtection`</li>
+      <li>`ValidatingAdmissionWebhook`</li></ul></br>
       You can [install your own admission controllers in the cluster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) or choose from the optional admission controllers that {{site.data.keyword.containerlong_notm}} provides: <ul><li><strong>[Container image security enforcer](/docs/services/Registry?topic=registry-security_enforce#security_enforce):</strong> Use this admission controller to enforce Vulnerability Advisor policies in your cluster to block deployments from vulnerable images.</li></ul></br><p class="note">If you manually installed admission controllers and you do not want to use them anymore, make sure to remove them entirely. If admission controllers are not entirely removed, they might block all actions that you want to perform on the cluster.</p></td>
     </tr>
   </tbody>

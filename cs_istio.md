@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 ---
 
@@ -243,7 +243,7 @@ Install Istio managed add-ons in an existing cluster.
 ### Installing managed Istio add-ons in the UI
 {: #istio_install_ui}
 
-1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of a version 1.10 or later cluster.
+1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of a cluster.
 
 2. Click the **Add-ons** tab.
 
@@ -909,7 +909,7 @@ Note that the `istio` add-on is a dependency for the `istio-extras`, `istio-samp
 ### Uninstalling managed Istio add-ons in the UI
 {: #istio_uninstall_ui}
 
-1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of a version 1.10 or later cluster.
+1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of a cluster.
 
 2. Click the **Add-ons** tab.
 

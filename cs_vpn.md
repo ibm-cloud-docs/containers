@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks
 
@@ -531,7 +531,6 @@ Before you use this solution, review the following considerations and limitation
 * The Calico global network policies in the following steps do not prevent Kubernetes pods that use host networking from sending and receiving data over the VPN. When a pod is configured with host networking, the app running in the pod can listen on the network interfaces of the worker node that it is on. These host networking pods can exist in any namespace. To determine which pods have host networking, run `kubectl get pods --all-namespaces -o wide` and look for any pods that do not have a `172.30.0.0/16` pod IP address. If you want to prevent host networking pods from sending and receiving data over the VPN, you can set the following options in your `values.yaml` deployment file: `local.subnet: 172.30.0.0/16` and `enablePodSNAT: false`. These configuration settings expose all of the Kubernetes pods over the VPN connection to the remote network. However, only the pods that are located in the specified secure namespace are reachable over the VPN.
 
 Before you begin:
-* Create or use a cluster that runs Kubernetes version 1.10 or later.
 * [Deploy the strongSwan Helm chart](#vpn_configure) and [ensure that VPN connectivity is working correctly](#vpn_test).
 * [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 

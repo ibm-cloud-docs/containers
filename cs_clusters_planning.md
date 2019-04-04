@@ -63,7 +63,7 @@ If the cluster is in one of the [supported multizone metro locations](/docs/cont
 No. You can create as many single zone clusters as you like. Indeed, you might prefer single zone clusters for simplified management or if your cluster must reside in a specific [single zone city](/docs/containers?topic=containers-regions-and-zones#zones).
 
 **Can I have a highly available master in a single zone?**</br>
-Yes, with clusters that run Kubernetes version 1.10 or later. In a single zone, your master is highly available and includes replicas on separate physical hosts for your Kubernetes API server, etcd, scheduler, and controller manager to protect against an outage such as during a master update. To protect against a zonal failure, you can:
+Yes. In a single zone, your master is highly available and includes replicas on separate physical hosts for your Kubernetes API server, etcd, scheduler, and controller manager to protect against an outage such as during a master update. To protect against a zonal failure, you can:
 * [Create a cluster in a multizone-capable zone](/docs/containers?topic=containers-plan_clusters#multizone), where the master is spread across zones.
 * [Create multiple clusters](#multiple_clusters) and connect them with a global load balancer.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks
 
@@ -100,7 +100,7 @@ Do not remove policies that are applied to a host endpoint unless you fully unde
   </tbody>
 </table>
 
-In Kubernetes version 1.10 and later clusters, a default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to clusters connected only to a private VLAN and clusters connected to a public and private VLAN.
+A default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to clusters connected only to a private VLAN and clusters connected to a public and private VLAN.
 
 <table>
 <caption>Default Kubernetes policies for each cluster</caption>
@@ -110,7 +110,7 @@ In Kubernetes version 1.10 and later clusters, a default Kubernetes policy that 
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td>In Kubernetes v1.10 or later only, provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} console or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
+  <td>Provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} console or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
  </tr>
 </tbody>
 </table>
@@ -279,7 +279,7 @@ To create Calico policies, use the following steps.
   ```
   {: pre}
 
-3. Define your Calico [network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) or [global network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own. Note that Kubernetes version 1.10 or later clusters must use Calico v3 policy syntax.
+3. Define your Calico [network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) or [global network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own. Note that clusters must use Calico v3 policy syntax.
 
 4. Apply the policies to the cluster.
     - Linux and OS X:
@@ -329,7 +329,7 @@ Before you begin:
 To create a pre-DNAT policy:
 
 1. Define a Calico pre-DNAT network policy for ingress (inbound traffic) access to Kubernetes services.
-    * Kubernetes version 1.10 or later clusters must use [Calico v3 policy syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy).
+    * Clusters must use [Calico v3 policy syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy).
     * If you manage traffic to a [version 2.0 load balancer service](/docs/containers?topic=containers-loadbalancer#planning_ipvs), you must include the `applyOnForward: true` and `doNotTrack: true` fields to the `spec` section of the policy.
 
         Example resource that blocks all node ports:

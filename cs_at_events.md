@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, audit
 
@@ -518,19 +518,19 @@ Before you begin: Be sure that your cluster is configured to forward [Kubernetes
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>For Kubernetes v1.10 and higher, a pod security policy is created.</td>
+    <td>A pod security policy is created.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>For Kubernetes v1.10 and higher, a  pod security policy is deleted.</td>
+    <td>A pod security policy is deleted.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>For Kubernetes v1.10 and higher, a  pod security policy is patched.</td>
+    <td>A pod security policy is patched.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>For Kubernetes v1.10 and higher, a  pod security policy is updated.</td>
+    <td>A pod security policy is updated.</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks 
 
@@ -570,7 +570,7 @@ When you try to view Calico network policies in your cluster by running `calicoc
 To use Calico policies, four factors must all align: your cluster Kubernetes version, Calico CLI version, Calico configuration file syntax, and view policy commands. One or more of these factors is not at the correct version.
 
 {: tsResolve}
-When your cluster is at [Kubernetes version 1.10 or later](/docs/containers?topic=containers-cs_versions), you must use Calico CLI v3.1, `calicoctl.cfg` v3 configuration file syntax, and the `calicoctl get GlobalNetworkPolicy` and `calicoctl get NetworkPolicy` commands.
+You must use Calico CLI v3.1, `calicoctl.cfg` v3 configuration file syntax, and the `calicoctl get GlobalNetworkPolicy` and `calicoctl get NetworkPolicy` commands.
 
 To ensure that all Calico factors align:
 
