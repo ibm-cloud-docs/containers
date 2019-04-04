@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-04-04"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -570,12 +570,12 @@ When you try to view Calico network policies in your cluster by running `calicoc
 To use Calico policies, four factors must all align: your cluster Kubernetes version, Calico CLI version, Calico configuration file syntax, and view policy commands. One or more of these factors is not at the correct version.
 
 {: tsResolve}
-You must use Calico CLI v3.1, `calicoctl.cfg` v3 configuration file syntax, and the `calicoctl get GlobalNetworkPolicy` and `calicoctl get NetworkPolicy` commands.
+You must use the v3.3 or later Calico CLI, `calicoctl.cfg` v3 configuration file syntax, and the `calicoctl get GlobalNetworkPolicy` and `calicoctl get NetworkPolicy` commands.
 
 To ensure that all Calico factors align:
 
-1. [Install and configure the version 3.3.1 Calico CLI](/docs/containers?topic=containers-network_policies#cli_install). Configuration includes manually updating the `calicoctl.cfg` file to use Calico v3 syntax.
-2. Ensure that any policies you create and want to apply to your cluster use [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). If you have an existing policy `.yaml` or `.json` file in Calico v2 syntax, you can convert it to Calico v3 syntax by using the [`calicoctl convert` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
+1. [Install and configure a version 3.3 or later Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
+2. Ensure that any policies you create and want to apply to your cluster use [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy). If you have an existing policy `.yaml` or `.json` file in Calico v2 syntax, you can convert it to Calico v3 syntax by using the [`calicoctl convert` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert).
 3. To [view policies](/docs/containers?topic=containers-network_policies#view_policies), ensure that you are using `calicoctl get GlobalNetworkPolicy` for global policies and `calicoctl get NetworkPolicy --namespace <policy_namespace>` for policies that are scoped to specific namespaces.
 
 <br />

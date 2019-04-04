@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks
 
@@ -348,7 +348,7 @@ The following table shows the actions that you must take after you update the Ku
 <td>APIs for Kubernetes</td>
 <td>The Kubernetes API replaces deprecated APIs as follows:
 <ul><li><strong>apps/v1</strong>: The `apps/v1` Kubernetes API replaces the `apps/v1beta1` and `apps/v1alpha` APIs. The `apps/v1` API also replaces the `extensions/v1beta1` API for `daemonset`, `deployment`, `replicaset`, and `statefulset` resources. The Kubernetes project is deprecating and phasing out support for the previous APIs from the Kubernetes `apiserver` and the `kubectl` client.</li>
-<li><strong>networking.k8s.io/v1</strong>: The `networking.k8s.io/v1` API replaces the `extensions/v1beta1` API for `networkpolicy` resources.</li>
+<li><strong>networking.k8s.io/v1</strong>: The `networking.k8s.io/v1` API replaces the `extensions/v1beta1` API for NetworkPolicy resources.</li>
 <li><strong>policy/v1beta1</strong>: The `policy/v1beta1` API replaces the `extensions/v1beta1` API for `podsecuritypolicy` resources.</li></ul>
 <br><br>Update all your YAML `apiVersion` fields to use the appropriate Kubernetes API before the deprecated APIs become unsupported. Also, review the [Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for changes related to `apps/v1`, such as the following.
 <ul><li>After creating a deployment, the `.spec.selector` field is immutable.</li>
