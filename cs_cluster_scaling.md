@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, node scaling
 
@@ -197,7 +197,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
 2.  Verify that tiller is installed with a service account.
 
     ```
-    kubectl get serviceaccount -n kube-system | grep tiller
+    kubectl get serviceaccount -n kube-system tiller
     ```
     {: pre}
 
