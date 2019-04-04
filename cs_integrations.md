@@ -707,7 +707,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
 4.  Verify that the installation is successful.
     1.  Verify that the Tiller service account is created.
         ```
-        kubectl get serviceaccount -n kube-system | grep tiller
+        kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
 
