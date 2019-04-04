@@ -122,6 +122,7 @@ For more information about supported regions, see [Regions and zones](/docs/cont
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following standards: 
+- EU-US Privacy Shield and Swiss-US Privacy Shield Framework
 - Health Insurance Portability and Accountability Act (HIPAA)
 - Service Organization Control standards (SOC 1, SOC 2 Type 1)
 - International Standard on Assurance Engagements 3402 (ISAE 3402), Assurance Reports on Controls at a Service Organization
