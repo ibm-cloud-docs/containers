@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -896,7 +896,6 @@ In the following steps, you learn how to deploy workloads that require the GPU. 
 
 Before you begin:
 * [Create a bare metal GPU machine type](/docs/containers?topic=containers-clusters#clusters_cli). Note that this process can take more than 1 business day to complete.
-* Your cluster master and GPU worker node must run Kubernetes version 1.10 or later.
 * Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To execute a workload on a GPU machine:

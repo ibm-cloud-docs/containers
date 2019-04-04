@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks
 
@@ -53,7 +53,7 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 {: #policies_prereqs}
 
-- [Create a version 1.10 or later cluster](/docs/containers?topic=containers-clusters#clusters_ui) or [update an existing cluster to version 1.10](/docs/containers?topic=containers-cs_versions#cs_v110). A Kubernetes version 1.10 or later cluster is required to use the 3.3.1 Calico CLI and Calico v3 policy syntax in this tutorial.
+- [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 - Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:

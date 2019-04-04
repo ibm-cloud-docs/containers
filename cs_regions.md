@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks 
 
@@ -179,15 +179,15 @@ To view documentation on the API commands, view [https://containers.cloud.ibm.co
 Zones are physical data centers that are available within an {{site.data.keyword.Bluemix_notm}} region. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries. The following table displays the zones available by region.
 {:shortdesc}
 
-* **Multizone Metro City**: If you create a cluster in a multizone metro city **except Sydney (AP South)**, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
-* **Single Zone City**: If you create a cluster in a single zone city, you can create multiple worker nodes, but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
+* **Multizone Metro Location**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
+* **Single Zone Location**: If you create a cluster in a single zone location, you can create multiple worker nodes, but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
 
-<table summary="The table shows the zones available by regions. Rows are to be read from the left to right, with the region in column one, the multizone metro cities in column two, and the single zone cities in column three.">
+<table summary="The table shows the zones available by regions. Rows are to be read from the left to right, with the region in column one, the multizone metro locations in column two, and the single zone locations in column three.">
 <caption>Available single and multizones by region.</caption>
   <thead>
   <th>Region</th>
-  <th>Multizone Metro City</th>
-  <th>Single Zone City</th>
+  <th>Multizone Metro Location</th>
+  <th>Single Zone Location</th>
   </thead>
   <tbody>
     <tr>

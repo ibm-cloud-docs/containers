@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, audit
 
@@ -39,12 +39,12 @@ The {{site.data.keyword.containershort_notm}} generates two types of {{site.data
     * These events are automatically generated, but you must configure your cluster to forward these events to the {{site.data.keyword.cloudaccesstrailshort}} service.
     * You can configure your cluster to send events to the {{site.data.keyword.cloudaccesstrailshort}} **account domain** or to a **space domain**. For more information, see [Sending audit logs](/docs/containers?topic=containers-health#api_forward).
 
-For more information about how the service works, see the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started#getting-started). For more information about the Kubernetes actions that are tracked, review the [Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/).
+For more information about how the service works, see the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla). For more information about the Kubernetes actions that are tracked, review the [Kubernetes documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/).
 
 ## Finding information for events
 {: #kube-find}
 
-You can monitor the activities in your cluster by looking at the logs in the Kibana dashboard. 
+You can monitor the activities in your cluster by looking at the logs in the Kibana dashboard.
 {: shortdesc}
 
 To monitor administrative activity:
@@ -518,19 +518,19 @@ Before you begin: Be sure that your cluster is configured to forward [Kubernetes
   </tr>
   <tr>
     <td><code>podsecuritypolicies.create</code></td>
-    <td>For Kubernetes v1.10 and higher, a pod security policy is created.</td>
+    <td>A pod security policy is created.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.delete</code></td>
-    <td>For Kubernetes v1.10 and higher, a  pod security policy is deleted.</td>
+    <td>A pod security policy is deleted.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.patch</code></td>
-    <td>For Kubernetes v1.10 and higher, a  pod security policy is patched.</td>
+    <td>A pod security policy is patched.</td>
   </tr>
   <tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>For Kubernetes v1.10 and higher, a  pod security policy is updated.</td>
+    <td>A pod security policy is updated.</td>
   </tr>
   <tr>
     <td><code>podtemplates.create</code></td>

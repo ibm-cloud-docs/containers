@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks
 
@@ -186,7 +186,7 @@ Because your worker nodes aren't connected to a public VLAN, no public traffic i
 * Then, [create a private Ingress service](/docs/containers?topic=containers-ingress#ingress_expose_private).
 * In your private firewall, open port 80 for HTTP or port 443 for HTTPS to the IP address for the private ALB.
 
-If your cluster is connected to a private VLAN only and you enable the master and worker nodes to communicate through a private-only service endpoint, you cannot expose your apps to a private network. You must set up a gateway device, such as a [VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or an [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall and block unwanted traffic. If you do not want to set up a gateway device, you can [create a worker pool](/docs/containers?topic=containers-clusters#add_pool) that is connected to public and private VLANs. Then, you can label these worker nodes as edge nodes and use Calico policies to block all unwanted public traffic. For more information, see [Isolate networking workloads to edge worker nodes](/docs/containers?topic=containers-cs_network_planning#both_vlans_private_edge).
+If your cluster is connected to a private VLAN only and you enable the master and worker nodes to communicate through a private-only service endpoint, you cannot expose your apps to a private network. You must set up a gateway device, such as a [VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or an [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall and block unwanted traffic. If you do not want to set up a gateway device, you can [create a worker pool](/docs/containers?topic=containers-clusters#add_pool) that is connected to public and private VLANs. Then, you can label these worker nodes as edge nodes and use Calico policies to block all unwanted public traffic. For more information, see [Isolate networking workloads to edge worker nodes](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_edge).
 {: note}
 
 

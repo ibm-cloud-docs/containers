@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks
 
@@ -31,6 +31,24 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 {:shortdesc}
 
 
+
+## Popular topics in April 2019
+{: #apr19}
+
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in April 2019</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>4 Apr 2019</td>
+<td>[Highly available masters now in Sydney](/docs/containers?topic=containers-regions-and-zones#zones)</td>
+<td>When you [create a cluster](/docs/containers?topic=containers-clusters#clusters_ui) in a multizone metro location, now including Sydney, the Kubernetes master replicas are spread across zones for high availability.</td>
+</tr>
+</tbody></table>
 
 ## Popular topics in March 2019
 {: #mar19}
@@ -189,7 +207,7 @@ Need help or have feedback on the cluster autoscaler? If you are an external use
 </tr>
 <tr>
 <td>7 November</td>
-<td>Highly available masters in clusters that run Kubernetes version 1.10</td>
+<td>Highly available masters</td>
 <td>Highly available masters are available for clusters that run Kubernetes version 1.10! All the benefits described in the earlier entry for 1.11 clusters apply to 1.10 clusters, as well as the [preparation steps](/docs/containers?topic=containers-cs_versions#110_ha-masters) that you must take.</td>
 </tr>
 <tr>
@@ -223,7 +241,7 @@ Need help or have feedback on the cluster autoscaler? If you are an external use
 <tr>
 <td>22 October</td>
 <td>[New London multizone location, `lon05`](/docs/containers?topic=containers-regions-and-zones#zones)</td>
-<td>The London multizone metro city replaces `lon02` zone with the new `lon05` zone, a zone with more infrastructure resources than `lon02`. Create new multizone clusters with `lon05`. Existing clusters with `lon02` are supported, but new multizone clusters must use `lon05` instead.</td>
+<td>The London multizone metro location replaces `lon02` zone with the new `lon05` zone, a zone with more infrastructure resources than `lon02`. Create new multizone clusters with `lon05`. Existing clusters with `lon02` are supported, but new multizone clusters must use `lon05` instead.</td>
 </tr>
 <tr>
 <td>05 October</td>

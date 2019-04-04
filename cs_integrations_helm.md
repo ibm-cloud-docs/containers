@@ -26,11 +26,27 @@ subcollection: containers
 # Adding services by using Helm charts
 {: #helm}
 
-[Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh) is a Kubernetes package manager that uses Helm charts to define, install, and upgrade complex Kubernetes apps in your cluster.
-{:shortdesc}
+You can add complex Kubernetes apps to your cluster by using Helm charts. 
+{: shortdesc}
 
+**What is Helm and how do I use it?** </br>
+[Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh) is a Kubernetes package manager that uses Helm charts to define, install, and upgrade complex Kubernetes apps in your cluster. Helm charts package the specifications to generate YAML files for Kubernetes resources that build your app. These Kubernetes resources are automatically applied in your cluster and versioned by Helm. You can also use Helm to specify and package your own app and let Helm generate the YAML files for your Kubernetes resources.  
+
+To use Helm in your cluster, you must install the Helm CLI on your local machine and the Helm server Tiller in every cluster where you want to use Helm. 
+
+**What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?** </br>
+For an overview of available Helm charts, see the [Helm charts catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts). The Helm charts listed in this catalog are grouped as follows: 
+
+- **ibm**: Helm charts that are approved for {{site.data.keyword.containerlong_notm}}. 
+- **ibm-charts**: Helm charts that are approved for {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.Bluemix_notm}} Private clusters. 
+- **kubernetes**: Helm charts that are provided by the Kubernetes community and considered `stable` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.Bluemix_notm}} Private clusters. 
+- **kubernetes-incubator**: Helm charts that are provided by the Kubernetes community and considered `incubator` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.Bluemix_notm}} Private clusters. 
+
+Helm charts from the **ibm** and **ibm-charts** repositories are fully integrated into the {{site.data.keyword.Bluemix_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help). 
+
+**What are the prerequisites to use Helm and can I use Helm in a private cluster?** </br>
 To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Clusters that have the public service endpoint enabled can automatically access the image. Private clusters that are protected with a custom firewall, or clusters that have enabled the private service endpoint only, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](#private_local_tiller), or [install Helm charts without using Tiller](#private_install_without_tiller).
-{: note}
+
 
 ## Setting up Helm in a cluster with public access
 {: #public_helm_install}
@@ -61,7 +77,7 @@ To install Helm in a cluster with public access:
 4.  Verify that the installation is successful.
     1.  Verify that the Tiller service account is created.
         ```
-        kubectl get serviceaccount -n kube-system | grep tiller
+        kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
 

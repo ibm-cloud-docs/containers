@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -63,7 +63,7 @@ Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for 
 
 4.  Set up your IBM Cloud infrastructure (SoftLayer) networking. You can choose from the following options:
     *  **VRF-enabled**: With virtual routing and forwarding (VRF) and its multiple isolation separation technology, you can use public and private service endpoints to communicate with your Kubernetes master in clusters that run Kubernetes version 1.11 or later. By using the [private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private), communication between the Kubernetes master and your worker nodes stays on the private VLAN. If you want to run `kubectl` commands from your local machine against your cluster, you must be connected to the same private VLAN that your Kubernetes master is on. To expose your apps to the internet, your worker nodes must be connected to a public VLAN so that incoming network traffic can be forwarded to your apps. To run `kubectl` commands against your cluster over the internet, you can use the public service endpoint. With the public service endpoint, network traffic is routed over the public VLAN and is secured by using an OpenVPN tunnel. To use private service endpoints, you must enable your account for VRF and service endpoints, which requires opening an  IBM Cloud infrastructure (SoftLayer) support case. For more information, see [Overview of VRF on {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [Enabling your account for service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
-    *  **Non-VRF**: If you don’t want to or cannot enable VRF for your account, or if you create a cluster that runs Kubernetes version 1.10, your worker nodes can automatically connect to the Kubernetes master over the public network through the [public service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public). To secure this communication, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN connection between the Kubernetes master and the worker node when the cluster is created. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
+    *  **Non-VRF**: If you don’t want to or cannot enable VRF for your account, your worker nodes can automatically connect to the Kubernetes master over the public network through the [public service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public). To secure this communication, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN connection between the Kubernetes master and the worker node when the cluster is created. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
 
 ### Cluster-level
 {: #prepare_cluster_level}
@@ -114,7 +114,7 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 4. Select the **Free** cluster plan.
 5. Give your cluster a name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 
-6. Click **Create cluster**. By default, a worker pool with one worker node is created. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab. Note that even if the cluster is ready, some parts of the cluster that are used by other services such as Ingress secrets or registry image pull secrets, might still be in process. 
+6. Click **Create cluster**. By default, a worker pool with one worker node is created. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab. Note that even if the cluster is ready, some parts of the cluster that are used by other services such as Ingress secrets or registry image pull secrets, might still be in process.
 
     Changing the unique ID or domain name that is assigned during creation blocks the Kubernetes master from managing your cluster.
     {: note}
@@ -171,7 +171,7 @@ When the cluster is up and running, you can check out the following tasks:
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-index)
 -   If you have a firewall, you might need to [open the required ports](/docs/containers?topic=containers-firewall#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 -   [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
--   Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
+-   Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
 
 <br />
 
@@ -471,7 +471,7 @@ To create a cluster:
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-index)
 - If you have a firewall, you might need to [open the required ports](/docs/containers?topic=containers-firewall#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 -   [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
--  Clusters with Kubernetes version 1.10 or later: Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
+-  Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
 
 <br />
 
@@ -546,7 +546,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 You can add worker nodes to your cluster by creating a new worker pool.
 {:shortdesc}
 
-1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro cities](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones`.
+1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones`.
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```

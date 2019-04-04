@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-04"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -63,7 +63,7 @@ Worker nodes in standard clusters are provisioned in to your {{site.data.keyword
 {: #faq_ha}
 {: faq}
 
-The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is designed to ensure reliability, low processing latency, and a maximum uptime of the service. By default, every cluster in {{site.data.keyword.containerlong_notm}} that runs the Kubernetes version 1.10 or higher is set up with multiple Kubernetes master instances to ensure availability and accessibility of your cluster resources, even if one or more instances of your Kubernetes master are unavailable. 
+The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is designed to ensure reliability, low processing latency, and a maximum uptime of the service. By default, every cluster in {{site.data.keyword.containerlong_notm}} is set up with multiple Kubernetes master instances to ensure availability and accessibility of your cluster resources, even if one or more instances of your Kubernetes master are unavailable. 
 
 You can make your cluster even more highly available and protect your app from a downtime by spreading your workloads across multiple worker nodes in multiple zones of a region. This setup is called a [multizone cluster](/docs/containers?topic=containers-plan_clusters#multizone) and ensures that your app is accessible, even if a worker node or an entire zone is not available. 
 
@@ -122,6 +122,7 @@ For more information about supported regions, see [Regions and zones](/docs/cont
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following standards: 
+- EU-US Privacy Shield and Swiss-US Privacy Shield Framework
 - Health Insurance Portability and Accountability Act (HIPAA)
 - Service Organization Control standards (SOC 1, SOC 2 Type 1)
 - International Standard on Assurance Engagements 3402 (ISAE 3402), Assurance Reports on Controls at a Service Organization
