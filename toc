@@ -92,7 +92,7 @@ IBM Cloud Kubernetes Service
         cs_storage_portworx.md
         cs_storage_utilities.md
         cs_storage_remove.md
-        
+
     {: .topicgroup}
     Enhancing cluster capabilities with integrations
         cs_integrations_addons.md
@@ -104,7 +104,7 @@ IBM Cloud Kubernetes Service
     cs_at_events.md
 
     {: .topicgroup}
-    Dedicated cloud
+    Deprecated: Dedicated cloud
         cs_dedicated.md
         [Deprecated: Running single and scalable containers](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
@@ -165,5 +165,3 @@ IBM Cloud Kubernetes Service
     cs_storage.md
     transcript_autorecovery.md
     transcript_loadbalancing.md
-        
-    

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -59,7 +59,6 @@ Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for 
     *  If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the default resource group.
     *  You cannot change a cluster's resource group. Furthermore, if you need to use the `ibmcloud ks cluster-service-bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.Bluemix_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.
     *  If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](/docs/containers?topic=containers-health#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
-    * If you have an {{site.data.keyword.Bluemix_dedicated}} account, you must create clusters in the default resource group only.
 
 4.  Set up your IBM Cloud infrastructure (SoftLayer) networking. You can choose from the following options:
     *  **VRF-enabled**: With virtual routing and forwarding (VRF) and its multiple isolation separation technology, you can use public and private service endpoints to communicate with your Kubernetes master in clusters that run Kubernetes version 1.11 or later. By using the [private service endpoint](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private), communication between the Kubernetes master and your worker nodes stays on the private VLAN. If you want to run `kubectl` commands from your local machine against your cluster, you must be connected to the same private VLAN that your Kubernetes master is on. To expose your apps to the internet, your worker nodes must be connected to a public VLAN so that incoming network traffic can be forwarded to your apps. To run `kubectl` commands against your cluster over the internet, you can use the public service endpoint. With the public service endpoint, network traffic is routed over the public VLAN and is secured by using an OpenVPN tunnel. To use private service endpoints, you must enable your account for VRF and service endpoints, which requires opening an  IBM Cloud infrastructure (SoftLayer) support case. For more information, see [Overview of VRF on {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [Enabling your account for service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).

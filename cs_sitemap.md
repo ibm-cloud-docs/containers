@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-05"
 
 ---
 
@@ -753,10 +753,10 @@ lastupdated: "2019-04-04"
 * [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
 * [Tracking Kubernetes audit events](/docs/containers?topic=containers-at_events#kube-events)
 
-## Dedicated cloud
+## Deprecated: Dedicated cloud
 {: #sitemap-dedicated}
 
-[Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated)
+[Deprecated: Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated)
 * [About the Dedicated cloud environment](/docs/containers?topic=containers-dedicated#dedicated_environment)
 * [Differences in cluster management between the cloud environments](/docs/containers?topic=containers-dedicated#dedicated_env_differences)
   * [Service architecture](/docs/containers?topic=containers-dedicated#dedicated_ov_architecture)

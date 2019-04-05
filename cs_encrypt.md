@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -73,7 +73,6 @@ Additionally, if you have apps that require the HTTPS protocol and need traffic 
 When you create a cluster, secrets for your {{site.data.keyword.registrylong}} credentials are automatically created for you in the `default` Kubernetes namespace. However, you must [create your own image pull secret for your cluster](/docs/containers?topic=containers-images#other) if you want to deploy a container in the following situations.
 * From an image in your {{site.data.keyword.registryshort_notm}} registry to a Kubernetes namespace other than `default`.
 * From an image in your {{site.data.keyword.registryshort_notm}} registry that is stored in a different {{site.data.keyword.Bluemix_notm}} region or {{site.data.keyword.Bluemix_notm}} account.
-* From an image that is stored in an {{site.data.keyword.Bluemix_notm}} Dedicated account.
 * From an image that is stored in an external, private registry.
 
 <br />
