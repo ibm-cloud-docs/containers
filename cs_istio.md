@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-05"
 
 ---
 
@@ -541,7 +541,7 @@ To manually inject sidecars into a deployment:
 
 1. Download the `istioctl` client.
   ```
-  curl -L https://git.io/getLatestIstio | sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.0.6 sh -
   ```
 
 2. Navigate to the Istio package directory.

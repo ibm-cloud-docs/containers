@@ -26,7 +26,7 @@ subcollection: containers
 # Deprecated: Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #dedicated}
 
-{{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_dedicated}} is deprecated. You cannot create clusters in an {{site.data.keyword.Bluemix_dedicated_notm}} environment. To create clusters in {{site.data.keyword.Bluemix_notm}} Public, see [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#container_index).
+{{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_dedicated_notm}} is deprecated. You cannot create clusters in an {{site.data.keyword.Bluemix_dedicated_notm}} environment. To create clusters in {{site.data.keyword.Bluemix_notm}} Public, see [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#container_index).
 {: deprecated}
 
 If you have an {{site.data.keyword.Bluemix_dedicated_notm}} account, you can deploy Kubernetes clusters in a dedicated cloud environment (`https://<my-dedicated-cloud-instance>.bluemix.net`) and connect with the preselected {{site.data.keyword.Bluemix_notm}} services that are also running there.
