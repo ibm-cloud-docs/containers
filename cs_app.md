@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -483,6 +483,9 @@ metadata:
   name: wasliberty
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: wasliberty
   template:
     metadata:
       labels:

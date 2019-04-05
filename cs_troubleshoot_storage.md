@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-26"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -185,6 +185,9 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       name: my_pod
     spec:
       replicas: 1
+      selector:
+        matchLabels:
+          app: jenkins      
       template:
         metadata:
           labels:

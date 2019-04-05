@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks
 
@@ -342,9 +342,13 @@ metadata:
   name: nginx-deployment
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
   template:
     metadata:
-      name: nginx
+      labels:
+        app: nginx
     spec:
       containers:
       - name: nginx
