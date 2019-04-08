@@ -773,7 +773,7 @@ To log denied traffic:
   ```
   {: pre}
 
-4. Generate log entries by sending requests to your load balancer or pod that are not allowed by the policy that you created in step 1. For example, try to ping the pod that applies the network policy from a pod or an IP address that is not permitted.
+4. Generate log entries by sending requests that are not allowed by the policy that you created in step 1. For example, try to ping the pod or load balancer that is protected by the network policy from a pod or an IP address that is not permitted.
 
 5. Check for log entries that are written to the `/var/log/syslog` path. Note that the DST (destination) or SRC (source) IP addresses in the log entry might be different than expected due to proxies, Network Address Translation (NAT), and other networking processes. The log entry looks similar to the following.
   ```
