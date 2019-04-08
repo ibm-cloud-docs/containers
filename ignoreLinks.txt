@@ -1,7 +1,6 @@
 https://ap-north.containers.cloud.ibm.com,
 https://ap-south.containers.cloud.ibm.com,
 https://console.test.cloud.ibm.com/docs/,
-https://containers.cloud.ibm.com/swagger,
 https://eu-central.containers.cloud.ibm.com,
 https://grafeas.io,
 https://lexbz181124.cloud.dst.ibm.com,
