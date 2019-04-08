@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -32,7 +32,7 @@ subcollection: containers
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting your clusters and worker nodes.
 {: shortdesc}
 
-<p class="tip"><ul><li>If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).</li><li>While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent information from your cluster.</li></p>
+<p class="tip">If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).<br>Also, while you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent information from your cluster.</p>
 
 ## Unable to create a cluster or manage worker nodes due to permission errors
 {: #cs_credentials}
