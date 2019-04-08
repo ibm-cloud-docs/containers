@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks, ingress
 
@@ -2569,6 +2569,7 @@ spec:
 <tr>
 <td><code>idToken=false</code></td>
 <td>Optional: The Liberty OIDC client is unable to parse both the access and the identity token at the same time. When working with Liberty, set this value to false so that the identity token is not sent to the Liberty server.</td>
+</tr>
 </tbody></table>
 
 **Usage**</br>
