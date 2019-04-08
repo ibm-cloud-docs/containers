@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -12,7 +12,7 @@ subcollection: containers
 
 {:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
-{:screen: .screen}/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-startedcertf
+{:screen: .screen}
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
