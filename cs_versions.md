@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -62,7 +62,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.12.6+IKS
+Server Version: v1.12.7+IKS
 ```
 {: screen}
 
