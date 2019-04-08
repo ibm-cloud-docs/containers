@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -637,28 +637,36 @@ Before you begin:
     ```
     {: pre}
 
-To create a Calico policy to log denied traffic:
+To log denied traffic:
 
-1. Create or use an existing Kubernetes or Calico network policy that blocks or limits incoming traffic. For example, to control traffic between pods, you might use the following example Kubernetes or Calico policies named `access-nginx` that limit access to an NGINX app. Incoming traffic to pods that are labeled "run=nginx" is allowed only from pods with the "run=access" label. All other incoming traffic to the "run=nginx" app pods is blocked.
+1. Create or use an existing Kubernetes or Calico network policy that blocks or limits incoming traffic.
   * **Calico**:
-    1. Create a Calico network policy.
+    1. Create a Calico network policy that controls incoming network traffic. For example, to control incoming network traffic to a load balancer 1.0, you might use the following example Calico policy named `whitelist`. Incoming network traffic to this load balancer is allowed only from a specified source CIDR. All other incoming traffic to the load balancer is blocked.
       ```
       apiVersion: projectcalico.org/v3
-      kind: NetworkPolicy
+      kind: GlobalNetworkPolicy
       metadata:
-        name: access-nginx
+        name: whitelist
       spec:
+        applyOnForward: true
+        preDNAT: true
         ingress:
         - action: Allow
-          destination: {}
+          destination:
+            nets:
+            - <loadbalancer_IP>/32
+            ports:
+            - 80
+          protocol: TCP
           source:
-            selector: projectcalico.org/orchestrator == 'k8s' && run == 'access'
-        order: 1000
-        selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
+            nets:
+            - <client_address>/32
+        selector: ibm.role=='worker_public'
+        order: 500
         types:
         - Ingress
       ```
-      {: screen}
+      {: codeblock}
 
     2. Apply the policy.
       ```
@@ -667,7 +675,7 @@ To create a Calico policy to log denied traffic:
       {: pre}
 
   * **Kubernetes**:
-    1. Create a Kubernetes network policy.
+    1. Create a Kubernetes network policy. For example, to control traffic between pods, you might use the following example Kubernetes policy named `access-nginx` that limits access to an NGINX app. Incoming traffic to pods that are labeled "run=nginx" is allowed only from pods with the "run=access" label. All other incoming traffic to the "run=nginx" app pods is blocked.
       ```
       kind: NetworkPolicy
       apiVersion: networking.k8s.io/v1
@@ -692,77 +700,85 @@ To create a Calico policy to log denied traffic:
       {: pre}
 
     3. The Kubernetes policy is automatically converted to a Calico NetworkPolicy so that Calico can apply it as Iptables rules. Review the syntax of the automatically created Calico policy and copy the value of the `spec.selector` field.
-        ```
-        calicoctl get policy -o yaml <policy_name> --config=<filepath>/calicoctl.cfg
-        ```
-        {: pre}
+      ```
+      calicoctl get policy -o yaml <policy_name> --config=<filepath>/calicoctl.cfg
+      ```
+      {: pre}
 
-        For example, after the Kubernetes policy is applied and converted to a Calico NetworkPolicy, the `access-nginx` policy has the following Calico v3 syntax. The `spec.selector` field has the value `projectcalico.org/orchestrator == 'k8s' && run == 'nginx'`.
-        ```
-        apiVersion: projectcalico.org/v3
-        kind: NetworkPolicy
-        metadata:
-          name: access-nginx
-        spec:
-          ingress:
-          - action: Allow
-            destination: {}
-            source:
-              selector: projectcalico.org/orchestrator == 'k8s' && run == 'access'
-          order: 1000
-          selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
-          types:
-          - Ingress
-        ```
-        {: screen}
+      For example, after the Kubernetes policy is applied and converted to a Calico NetworkPolicy, the `access-nginx` policy has the following Calico v3 syntax. The `spec.selector` field has the value `projectcalico.org/orchestrator == 'k8s' && run == 'nginx'`.
+      ```
+      apiVersion: projectcalico.org/v3
+      kind: NetworkPolicy
+      metadata:
+        name: access-nginx
+      spec:
+        ingress:
+        - action: Allow
+          destination: {}
+          source:
+            selector: projectcalico.org/orchestrator == 'k8s' && run == 'access'
+        order: 1000
+        selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
+        types:
+        - Ingress
+      ```
+      {: screen}
 
-2. To log all the traffic that is denied by the Calico policy that you created earlier, create a Calico NetworkPolicy named `log-denied-packets`. For example, use the following policy to log all packets that were denied by the network policy that you defined in step 1. The log policy uses the same pod selector as the example `access-nginx` policy, which adds this policy to the Calico Iptables rule chain. By using a higher order number, such as `3000`, you can ensure that this rule is added to the end of the Iptables rule chain. Any request packet from the "run=access" pod that matches the `access-nginx` policy rule is accepted by the "run=nginx" pods.  However, when packets from any other source try to match the low-order `access-nginx` policy rule, they are denied. Those packets then try to match the high-order `log-denied-packets` policy rule. `log-denied-packets` logs any packets that arrive to it, so only packets that were denied by the "run=nginx" pods are logged. After the packets' attempts are logged, the packets are dropped.
-    ```
-    apiVersion: projectcalico.org/v3
-    kind: NetworkPolicy
-    metadata:
-      name: log-denied-packets
-    spec:
-      types:
-      - Ingress
-      ingress:
-      - action: Log
-        destination: {}
-        source: {}
-      selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
-      order: 3000
-    ```
-    {: codeblock}
+2. To log all the traffic that is denied by the policy you created in the previous step, create a Calico NetworkPolicy named `log-denied-packets`. For example, the following log policy uses the same pod selector as the example `access-nginx` Kubernetes policy described in step 1, which adds this policy to the Calico Iptables rule chain. By using a higher order number, such as `3000`, you can ensure that this rule is added to the end of the Iptables rule chain. Any request packet from the `run=access`-labeled pod that matches the `access-nginx` policy rule is accepted by the `run=nginx`-labeled pods. However, when packets from any other source try to match the low-order `access-nginx` policy rule, they are denied. Those packets then try to match the high-order `log-denied-packets` policy rule. `log-denied-packets` logs any packets that arrive to it, so only packets that were denied by the `run=nginx`-labeled pods are logged. After the packets' attempts are logged, the packets are dropped.
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: NetworkPolicy
+  metadata:
+    name: log-denied-packets
+  spec:
+    types:
+    - Ingress
+    ingress:
+    - action: Log
+      destination: {}
+      source: {}
+    selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
+    order: 3000
+  ```
+  {: codeblock}
 
-    <table>
-    <caption>Understanding the log policy YAML components</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the log policy YAML components</th>
-    </thead>
-    <tbody>
-    <tr>
-     <td><code>types</code></td>
-     <td>This <code>Ingress</code> policy applies to all incoming traffic requests. The value <code>Ingress</code> is a general term for all incoming traffic, and does not refer to traffic only from the IBM Ingress ALB.</td>
-    </tr>
-     <tr>
-      <td><code>ingress</code></td>
-      <td><ul><li><code>action</code>: The <code>Log</code> action writes a log entry for any requests that match this policy to the `/var/log/syslog` path on the worker node.</li><li><code>destination</code>: No destination is specified because the <code>selector</code> applies this policy to all pods with a certain label.</li><li><code>source</code>: This policy applies to requests from any source.</td>
-     </tr>
-     <tr>
-      <td><code>selector</code></td>
-      <td>Replace &lt;selector&gt; with the same selector in the `spec.selector` field that you used in your Calico policy from step 1 or that you found in the Calico syntax for your Kubernetes policy in step 3. For example, by using the selector <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>, this policy's rule is added to the same Iptables chain as the <code>access-nginx</code> sample network policy rule in step 1. This policy applies only to incoming network traffic to pods that use the same pod selector label.</td>
-     </tr>
-     <tr>
-      <td><code>order</code></td>
-      <td>Calico policies have orders that determine when they are applied to incoming request packets. Policies with lower orders, such as <code>1000</code>, are applied first. Policies with higher orders are applied after the lower-order policies. For example, a policy with a very high order, such as <code>3000</code>, is effectively applied last after all the lower-order policies have been applied.</br></br>Incoming request packets go through the Iptables rules chain and try to match rules from lower-order policies first. If a packet matches any rule, the packet is accepted. However, if a packet doesn't match any rule, it arrives at the last rule in the Iptables rules chain with the highest order. To make sure this is the last policy in the chain, use a much higher order, such as <code>3000</code>, than the policy you created in step 1.</td>
-     </tr>
-    </tbody>
-    </table>
+  <table>
+  <caption>Understanding the log policy YAML components</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the log policy YAML components</th>
+  </thead>
+  <tbody>
+  <tr>
+   <td><code>types</code></td>
+   <td>This <code>Ingress</code> policy applies to all incoming traffic requests. The value <code>Ingress</code> is a general term for all incoming traffic, and does not refer to traffic only from the IBM Ingress ALB.</td>
+  </tr>
+   <tr>
+    <td><code>ingress</code></td>
+    <td><ul><li><code>action</code>: The <code>Log</code> action writes a log entry for any requests that match this policy to the `/var/log/syslog` path on the worker node.</li><li><code>destination</code>: No destination is specified because the <code>selector</code> applies this policy to all pods with a certain label.</li><li><code>source</code>: This policy applies to requests from any source.</td>
+   </tr>
+   <tr>
+    <td><code>selector</code></td>
+    <td>Replace &lt;selector&gt; with the same selector in the `spec.selector` field that you used in your policy from step 1. For example, by using the selector <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>, this policy's rule is added to the same Iptables chain as the <code>access-nginx</code> sample Kubernetes network policy rule in step 1. The selector <code>selector: ibm.role=='worker_public'</code> adds this policy's rule to the same Iptables chain as the <code>whitelist</code> sample Calico policy rule in step 1. This policy applies only to incoming network traffic to pods that use the same selector label.</td>
+   </tr>
+   <tr>
+    <td><code>order</code></td>
+    <td>Calico policies have orders that determine when they are applied to incoming request packets. Policies with lower orders, such as <code>1000</code>, are applied first. Policies with higher orders are applied after the lower-order policies. For example, a policy with a very high order, such as <code>3000</code>, is effectively applied last after all the lower-order policies have been applied.</br></br>Incoming request packets go through the Iptables rules chain and try to match rules from lower-order policies first. If a packet matches any rule, the packet is accepted. However, if a packet doesn't match any rule, it arrives at the last rule in the Iptables rules chain with the highest order. To make sure this is the last policy in the chain, use a much higher order, such as <code>3000</code>, than the policy you created in step 1.</td>
+   </tr>
+  </tbody>
+  </table>
 
 3. Apply the policy.
-    ```
-    calicoctl apply -f log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
-    ```
-    {: pre}
+  ```
+  calicoctl apply -f log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
 
-4. [Forward the logs](/docs/containers?topic=containers-health#configuring) from `/var/log/syslog` to an external syslog server.
+4. Generate log entries by sending requests to your load balancer or pod that are not allowed by the policy that you created in step 1. For example, try to ping the pod that applies the network policy from a pod or an IP address that is not permitted.
+
+5. Check for log entries that are written to the `/var/log/syslog` path. Note that the DST (destination) or SRC (source) IP addresses in the log entry might be different than expected due to proxies, Network Address Translation (NAT), and other networking processes. The log entry looks similar to the following.
+  ```
+  Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
+  ```
+  {: screen}
+
+6. Optional: [Forward the logs](/docs/containers?topic=containers-health#configuring) from `/var/log/syslog` to an external syslog server.
