@@ -405,13 +405,13 @@ To uninstall the CLIs:
 <br />
 
 
-## Using the Kubernetes Terminal in your web browser (experimental)
+## Using the Kubernetes Terminal in your web browser (beta)
 {: #cli_web}
 
 The Kubernetes Terminal allows you to use the {{site.data.keyword.Bluemix_notm}} CLI to manage your cluster directly from your web browser.
 {: shortdesc}
 
-The Kubernetes Terminal is released as an experimental {{site.data.keyword.containerlong_notm}} add-on and might change due to user feedback and further tests. Do not use this feature in production clusters to avoid unexpected side effects.
+The Kubernetes Terminal is released as a beta {{site.data.keyword.containerlong_notm}} add-on and might change due to user feedback and further tests. Do not use this feature in production clusters to avoid unexpected side effects.
 {: important}
 
 If you use the cluster dashboard in the {{site.data.keyword.Bluemix_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes Terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-ibmcloud-cli), the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registryshort_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.
