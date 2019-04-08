@@ -165,7 +165,7 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 When the cluster is up and running, you can check out the following tasks:
 
 -   If you created the cluster in a multizone capable zone, spread worker nodes by [adding a zone to your cluster](#add_zone).
--   [Install the CLIs to start working with your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)
+-   [Install the CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install) or [launch the Kubernetes Terminal to use the CLIs directly in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web) to start working with your cluster.
 -   [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-index)
 -   If you have a firewall, you might need to [open the required ports](/docs/containers?topic=containers-firewall#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
@@ -384,7 +384,7 @@ To create a cluster:
 
     ```
     Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.12.6      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.12.7      Default
     ```
     {: screen}
 
@@ -402,7 +402,7 @@ To create a cluster:
 
     ```
     ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.12.6      Default
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.12.7      Default
     ```
     {: screen}
 

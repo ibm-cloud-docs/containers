@@ -920,6 +920,33 @@ ibmcloud ks cluster-addon-disable knative --cluster my_cluster
 ```
 {: pre}
 
+#### ibmcloud ks cluster-addon-disable kube-terminal
+{: #cs_cluster_addon_disable_kube-terminal}
+
+Disable the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) add-on. To use the Kubernetes Terminal in the {{site.data.keyword.containerlong_notm}} cluster console, you must re-enable the add-on first.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-disable kube-terminal --cluster CLUSTER
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>The name or ID of the cluster. This value is required.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks cluster-addon-disable kube-terminal --cluster my_cluster
+```
+{: pre}
+
 ### ibmcloud ks cluster-addon-enable
 {: #cs_cluster_addon_enable}
 
@@ -1047,6 +1074,35 @@ ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [--version VERSION] [
 **Example**:
 ```
 ibmcloud ks cluster-addon-enable knative --cluster my_cluster
+```
+{: pre}
+
+#### ibmcloud ks cluster-addon-enable kube-terminal
+{: #cs_cluster_addon_enable_kube-terminal}
+
+Enable the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) add-on to use the Kubernetes Terminal in the {{site.data.keyword.containerlong_notm}} cluster console.
+{: shortdesc}
+
+```
+ibmcloud ks cluster-addon-enable kube-terminal --cluster CLUSTER [--version VERSION]
+```
+{: pre}
+
+<strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+<strong>Command options</strong>:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks cluster-addon-enable kube-terminal --cluster my_cluster
 ```
 {: pre}
 
@@ -4191,7 +4247,7 @@ ibmcloud ks worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER [-s] [--
   Workers per zone:   3
   Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.12.6_1512
+  Version:            1.12.7_1512
   ```
   {: screen}
 
