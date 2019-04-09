@@ -70,7 +70,7 @@ Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for 
 Follow the steps to prepare the setup of your cluster.
 {: shortdesc}
 
-1.  Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}.
+1.  Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}. To allow your cluster to pull images from the private registry, you also need the **Administrator** platform role for {{site.data.keyword.registrylong_notm}}. 
     1.  From the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) menu bar, click **Manage > Access (IAM)**.
     2.  Click the **Users** page, and then from the table, select yourself.
     3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}. **Note**: If you have the **Administrator** role for {{site.data.keyword.containershort_notm}} in only one resource group or region instead of the entire account, you must have at least the **Viewer** role at the account level to see the account's VLANs.
