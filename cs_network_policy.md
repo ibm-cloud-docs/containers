@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -621,6 +621,9 @@ Traffic can now flow from finance microservices to the accounts Srv1 back end. T
 
 In this example, all traffic from all microservices in the finance namespace is permitted. You can't allow traffic from specific app pods in another namespace because `podSelector` and `namespaceSelector` can't be combined.
 
+<br />
+
+
 ## Logging denied traffic
 {: #log_denied}
 
@@ -628,6 +631,9 @@ To log denied traffic requests to certain pods in your cluster, you can create a
 {: shortdesc}
 
 When you set up network policies to limit traffic to app pods, traffic requests that are not permitted by these policies are denied and dropped. In some scenarios, you might want more information about denied traffic requests. For example, you might notice some unusual traffic that is continuously being denied by one of your network policies. To monitor the potential security threat, you can set up logging to record every time that the policy denies an attempted action on specified app pods.
+
+This section shows you how to log traffic that is denied by a Kubernetes network policy. To log traffic that is denied by a Calico network policy, see [Lesson 5 of the Calico network policy tutorial](/docs/containers?topic=containers-policy_tutorial#lesson5).
+{: tip}
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
@@ -639,90 +645,55 @@ Before you begin:
 
 To log denied traffic:
 
-1. Create or use an existing Kubernetes or Calico network policy that blocks or limits incoming traffic.
-  * **Calico**:
-    1. Create a Calico network policy that controls incoming network traffic. For example, to control incoming network traffic to a load balancer 1.0, you might use the following example Calico policy named `whitelist`. Incoming network traffic to this load balancer is allowed only from a specified source CIDR. All other incoming traffic to the load balancer is blocked.
-      ```
-      apiVersion: projectcalico.org/v3
-      kind: GlobalNetworkPolicy
-      metadata:
-        name: whitelist
-      spec:
-        applyOnForward: true
-        preDNAT: true
-        ingress:
-        - action: Allow
-          destination:
-            nets:
-            - <loadbalancer_IP>/32
-            ports:
-            - 80
-          protocol: TCP
-          source:
-            nets:
-            - <client_address>/32
-        selector: ibm.role=='worker_public'
-        order: 500
-        types:
-        - Ingress
-      ```
-      {: codeblock}
+1. Create or use an existing Kubernetes network policy that blocks or limits incoming traffic.
+  1. Create a Kubernetes network policy. For example, to control traffic between pods, you might use the following example Kubernetes policy named `access-nginx` that limits access to an NGINX app. Incoming traffic to pods that are labeled "run=nginx" is allowed only from pods with the "run=access" label. All other incoming traffic to the "run=nginx" app pods is blocked.
+    ```
+    kind: NetworkPolicy
+    apiVersion: networking.k8s.io/v1
+    metadata:
+      name: access-nginx
+    spec:
+      podSelector:
+        matchLabels:
+          run: nginx
+      ingress:
+        - from:
+          - podSelector:
+              matchLabels:
+                run: access
+    ```
+    {: codeblock}
 
-    2. Apply the policy.
-      ```
-      calicoctl apply -f <policy_name>.yaml --config=<filepath>/calicoctl.cfg
-      ```
-      {: pre}
+  2. Apply the policy.
+    ```
+    kubectl apply -f <policy_name>.yaml
+    ```
+    {: pre}
 
-  * **Kubernetes**:
-    1. Create a Kubernetes network policy. For example, to control traffic between pods, you might use the following example Kubernetes policy named `access-nginx` that limits access to an NGINX app. Incoming traffic to pods that are labeled "run=nginx" is allowed only from pods with the "run=access" label. All other incoming traffic to the "run=nginx" app pods is blocked.
-      ```
-      kind: NetworkPolicy
-      apiVersion: networking.k8s.io/v1
-      metadata:
-        name: access-nginx
-      spec:
-        podSelector:
-          matchLabels:
-            run: nginx
-        ingress:
-          - from:
-            - podSelector:
-                matchLabels:
-                  run: access
-      ```
-      {: codeblock}
+  3. The Kubernetes policy is automatically converted to a Calico NetworkPolicy so that Calico can apply it as Iptables rules. Review the syntax of the automatically created Calico policy and copy the value of the `spec.selector` field.
+    ```
+    calicoctl get policy -o yaml <policy_name> --config=<filepath>/calicoctl.cfg
+    ```
+    {: pre}
 
-    2. Apply the policy.
-      ```
-      kubectl apply -f <policy_name>.yaml
-      ```
-      {: pre}
-
-    3. The Kubernetes policy is automatically converted to a Calico NetworkPolicy so that Calico can apply it as Iptables rules. Review the syntax of the automatically created Calico policy and copy the value of the `spec.selector` field.
-      ```
-      calicoctl get policy -o yaml <policy_name> --config=<filepath>/calicoctl.cfg
-      ```
-      {: pre}
-
-      For example, after the Kubernetes policy is applied and converted to a Calico NetworkPolicy, the `access-nginx` policy has the following Calico v3 syntax. The `spec.selector` field has the value `projectcalico.org/orchestrator == 'k8s' && run == 'nginx'`.
-      ```
-      apiVersion: projectcalico.org/v3
-      kind: NetworkPolicy
-      metadata:
-        name: access-nginx
-      spec:
-        ingress:
-        - action: Allow
-          destination: {}
-          source:
-            selector: projectcalico.org/orchestrator == 'k8s' && run == 'access'
-        order: 1000
-        selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
-        types:
-        - Ingress
-      ```
-      {: screen}
+    For example, after the Kubernetes policy is applied and converted to a Calico NetworkPolicy, the `access-nginx` policy has the following Calico v3 syntax. The `spec.selector` field has the value `projectcalico.org/orchestrator == 'k8s' && run == 'nginx'`.
+    ```
+    apiVersion: projectcalico.org/v3
+    kind: NetworkPolicy
+    metadata:
+      name: access-nginx
+    spec:
+      ingress:
+      - action: Allow
+        destination: {}
+        source:
+          selector: projectcalico.org/orchestrator == 'k8s' && run == 'access'
+      order: 1000
+      selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'
+      types:
+      - Ingress
+    ```
+    {: screen}
 
 2. To log all the traffic that is denied by the policy you created in the previous step, create a Calico NetworkPolicy named `log-denied-packets`. For example, the following log policy uses the same pod selector as the example `access-nginx` Kubernetes policy described in step 1, which adds this policy to the Calico Iptables rule chain. By using a higher order number, such as `3000`, you can ensure that this rule is added to the end of the Iptables rule chain. Any request packet from the `run=access`-labeled pod that matches the `access-nginx` policy rule is accepted by the `run=nginx`-labeled pods. However, when packets from any other source try to match the low-order `access-nginx` policy rule, they are denied. Those packets then try to match the high-order `log-denied-packets` policy rule. `log-denied-packets` logs any packets that arrive to it, so only packets that were denied by the `run=nginx`-labeled pods are logged. After the packets' attempts are logged, the packets are dropped.
   ```
@@ -758,7 +729,7 @@ To log denied traffic:
    </tr>
    <tr>
     <td><code>selector</code></td>
-    <td>Replace &lt;selector&gt; with the same selector in the `spec.selector` field that you used in your policy from step 1. For example, by using the selector <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>, this policy's rule is added to the same Iptables chain as the <code>access-nginx</code> sample Kubernetes network policy rule in step 1. The selector <code>selector: ibm.role=='worker_public'</code> adds this policy's rule to the same Iptables chain as the <code>whitelist</code> sample Calico policy rule in step 1. This policy applies only to incoming network traffic to pods that use the same selector label.</td>
+    <td>Replace &lt;selector&gt; with the same selector in the `spec.selector` field that you used in your policy from step 1. For example, by using the selector <code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code>, this policy's rule is added to the same Iptables chain as the <code>access-nginx</code> sample Kubernetes network policy rule in step 1. This policy applies only to incoming network traffic to pods that use the same selector label.</td>
    </tr>
    <tr>
     <td><code>order</code></td>
@@ -773,7 +744,7 @@ To log denied traffic:
   ```
   {: pre}
 
-4. Generate log entries by sending requests that are not allowed by the policy that you created in step 1. For example, try to ping the pod or load balancer that is protected by the network policy from a pod or an IP address that is not permitted.
+4. Generate log entries by sending requests that are not allowed by the policy that you created in step 1. For example, try to ping the pod that is protected by the network policy from a pod or an IP address that is not permitted.
 
 5. Check for log entries that are written to the `/var/log/syslog` path. Note that the DST (destination) or SRC (source) IP addresses in the log entry might be different than expected due to proxies, Network Address Translation (NAT), and other networking processes. The log entry looks similar to the following.
   ```

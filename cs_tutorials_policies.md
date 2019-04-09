@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -196,9 +196,9 @@ The following image shows how the web server app is exposed to the internet by t
         Example output:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.12.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
         ```
         {: screen}
 
@@ -503,41 +503,41 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
     Now, all incoming TCP and UDP traffic from any source IP to the load balancer IP address and port is permitted again.
 
 2. To deny all incoming TCP and UDP traffic from your system's source IP address to the load balancer IP address and port, create a low-order pre-DNAT policy called `blacklist.yaml` in a text editor. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the load balancer and `<client_address>` with the public IP address of your system's source IP.
-    ```
-    apiVersion: projectcalico.org/v3
-    kind: GlobalNetworkPolicy
-    metadata:
-      name: blacklist
-    spec:
-      applyOnForward: true
-      preDNAT: true
-      ingress:
-      - action: Deny
-        destination:
-          nets:
-          - <loadbalancer_IP>/32
-          ports:
-          - 80
-        protocol: TCP
-        source:
-          nets:
-          - <client_address>/32
-      - action: Deny
-        destination:
-          nets:
-          - <loadbalancer_IP>/32
-          ports:
-          - 80
-        protocol: UDP
-        source:
-          nets:
-          - <client_address>/32
-      selector: ibm.role=='worker_public'
-      order: 500
-      types:
-      - Ingress
-    ```
-    {: codeblock}
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: blacklist
+  spec:
+    applyOnForward: true
+    preDNAT: true
+    ingress:
+    - action: Deny
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: TCP
+      source:
+        nets:
+        - <client_address>/32
+    - action: Deny
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: UDP
+      source:
+        nets:
+        - <client_address>/32
+    selector: ibm.role=='worker_public'
+    order: 500
+    types:
+    - Ingress
+  ```
+  {: codeblock}
 
 3. Apply the policy.
     - Linux:
@@ -562,8 +562,75 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
     {: pre}
     At this point, all traffic to the public node ports is blocked, and all traffic to the public load balancer is allowed. Only traffic from your blacklisted system IP to the load balancer is blocked.
 
-5. To clean up this blacklist policy:
+Great work! You've successfully controlled traffic into your app by using Calico Pre-DNAT policies to blacklist source IPs.
 
+## Lesson 5: Logging blocked traffic from blacklisted IPs to the load balancer
+{: #lesson5}
+
+In the previous lesson, you blacklisted traffic from your system IP to the load balancer. In this lesson, you can learn how to log the denied traffic requests.
+{: shortdesc}
+
+In our example scenario, the PR firm you work for you wants you to set up a logging trail for any unusual traffic that is continuously being denied by one of your network policies. To monitor the potential security threat, you set up logging to record every time that your blacklist policy denies an attempted action on specified IPs.
+
+1. Create a Calico NetworkPolicy named `log-denied-packets`. The following log policy uses the same selector as the `blacklist` policy, which adds this policy to the Calico Iptables rule chain. By using a lower order number, such as `300`, you can ensure that this rule is added to the Iptables rule chain before the blacklist policy. Packets from your IP are logged by this policy before they try to match the `blacklist` policy rule and are denied.
+  ```
+  apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: log-denied-packets
+  spec:
+    applyOnForward: true
+    preDNAT: true
+    ingress:
+    - action: Log
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: TCP
+      source:
+        nets:
+        - <client_address>/32
+    - action: Deny
+      destination:
+        nets:
+        - <loadbalancer_IP>/32
+        ports:
+        - 80
+      protocol: UDP
+      source:
+        nets:
+        - <client_address>/32
+    selector: ibm.role=='worker_public'
+    order: 500
+    types:
+    - Ingress
+  ```
+  {: codeblock}
+
+2. Apply the policy.
+  ```
+  calicoctl apply -f log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+
+3. Generate log entries by sending requests to the load balancer IP. These request packets are logged before they are denied.
+  ```
+  curl --connect-timeout 10 <loadbalancer_IP>:80
+  ```
+  {: pre}
+
+4. Check for log entries that are written to the `/var/log/syslog` path. The log entry looks similar to the following.
+  ```
+  Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
+  ```
+  {: screen}
+
+Nice! You've set up logging so that blacklisted traffic can be monitored more easily.
+
+If you want to clean up the blacklist and the log policies:
+1. Clean up the blacklist policy.
     - Linux:
       ```
       calicoctl delete GlobalNetworkPolicy blacklist
@@ -576,7 +643,18 @@ In this lesson, you will test blacklisting by blocking traffic from your own sys
       ```
       {: pre}
 
-Great work! You've successfully controlled traffic into your app by using Calico Pre-DNAT policies to whitelist and blacklist source IPs.
+2. Clean up the log policy.
+    - Linux:
+      ```
+      calicoctl delete GlobalNetworkPolicy log-denied-packets
+      ```
+      {: pre}
+
+    - Windows and OS X:
+      ```
+      calicoctl delete GlobalNetworkPolicy log-denied-packets --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
 
 ## What's next?
 {: #whats_next}
