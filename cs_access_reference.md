@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -123,7 +123,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 ### Viewer actions
 {: #view-actions}
 
-The **Viewer** platform role includes the [actions that require no permissions](#none-actions), plus the permissions that are shown in the following table.
+The **Viewer** platform role includes the [actions that require no permissions](#none-actions), plus the permissions that are shown in the following table. With the **Viewer** role, users such as auditors or billing can see cluster details but not modify the infrastructure.
 {: shortdesc}
 
 <table>
@@ -282,7 +282,7 @@ The **Viewer** platform role includes the [actions that require no permissions](
 ### Editor actions
 {: #editor-actions}
 
-The **Editor** platform role includes the permissions that are granted by **Viewer**, plus the following. **Tip**: Use this role for app developers, and assign the <a href="#cloud-foundry">Cloud Foundry</a> **Developer** role.
+The **Editor** platform role includes the permissions that are granted by **Viewer**, plus the following. With the **Editor** role, users such as developers can bind services, work with Ingress resources, and set up log forwarding for their apps but cannot modify the infrastructure. **Tip**: Use this role for app developers, and assign the <a href="#cloud-foundry">Cloud Foundry</a> **Developer** role.
 {: shortdesc}
 
 <table>
@@ -423,7 +423,7 @@ The **Editor** platform role includes the permissions that are granted by **View
 ### Operator actions
 {: #operator-actions}
 
-The **Operator** platform role includes the permissions that are granted by **Viewer**, plus the permissions that are shown in the following table.
+The **Operator** platform role includes the permissions that are granted by **Viewer**, plus the permissions that are shown in the following table. With the **Operator** role, users such as site reliability engineers, DevOps engineers, or cluster administrators can add worker nodes and troubleshoot infrastructure such as by reloading a worker node, but cannot create or delete the cluster, change the credentials, or set up cluster-wide features like service endpoints or managed add-ons.
 {: shortdesc}
 
 <table>
@@ -540,7 +540,7 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 ### Administrator actions
 {: #admin-actions}
 
-The **Administrator** platform role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles, plus the following. To create resources such as machines, VLANs, and subnets, Administrator users need the **Super user** <a href="#infra">infrastructure role</a>.
+The **Administrator** platform role includes all permissions that are granted by the **Viewer**, **Editor**, and **Operator** roles, plus the following. With the **Administrator** role, users such as cluster or account administrators can create and delete clusters or set up cluster-wide features like service endpoints or managed add-ons. To create order such infrastructure resources such as worker node machines, VLANs, and subnets, Administrator users need the **Super user** <a href="#infra">infrastructure role</a> or the API key for the region must be set with the appropriate permissions.
 {: shortdesc}
 
 <table>
