@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -52,7 +52,7 @@ Before you begin:
 
 To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio with custom firewall rules or available IP addresses:
 
-1. Get the ID of the subnet that you want to use and the ID of the VLAN that the subnet is on.
+1. Get the ID of the subnet to use and the ID of the VLAN that the subnet is on.
 
     ```
     ibmcloud ks subnets
@@ -89,7 +89,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.12.6      Default
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.12.7      Default
     ```
     {: screen}
 
@@ -104,7 +104,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone     Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.12.6
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.12.7
     ```
     {: screen}
 
