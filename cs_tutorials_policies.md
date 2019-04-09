@@ -570,9 +570,9 @@ Great work! You've successfully controlled traffic into your app by using Calico
 In the previous lesson, you blacklisted traffic from your system IP to the load balancer. In this lesson, you can learn how to log the denied traffic requests.
 {: shortdesc}
 
-In our example scenario, the PR firm you work for you wants you to set up a logging trail for any unusual traffic that is continuously being denied by one of your network policies. To monitor the potential security threat, you set up logging to record every time that your blacklist policy denies an attempted action on specified IPs.
+In our example scenario, the PR firm you work for wants you to set up a logging trail for any unusual traffic that is continuously being denied by one of your network policies. To monitor the potential security threat, you set up logging to record every time that your blacklist policy denies an attempted action on the load balancer IP.
 
-1. Create a Calico NetworkPolicy named `log-denied-packets`. The following log policy uses the same selector as the `blacklist` policy, which adds this policy to the Calico Iptables rule chain. By using a lower order number, such as `300`, you can ensure that this rule is added to the Iptables rule chain before the blacklist policy. Packets from your IP are logged by this policy before they try to match the `blacklist` policy rule and are denied.
+1. Create a Calico NetworkPolicy named `log-denied-packets`. This log policy uses the same selector as the `blacklist` policy, which adds this policy to the Calico Iptables rule chain. By using a lower order number, such as `300`, you can ensure that this rule is added to the Iptables rule chain before the blacklist policy. Packets from your IP are logged by this policy before they try to match the `blacklist` policy rule and are denied.
   ```
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
@@ -615,7 +615,7 @@ In our example scenario, the PR firm you work for you wants you to set up a logg
   ```
   {: pre}
 
-3. Generate log entries by sending requests to the load balancer IP. These request packets are logged before they are denied.
+3. Generate log entries by sending requests from your system IP to the load balancer IP. These request packets are logged before they are denied.
   ```
   curl --connect-timeout 10 <loadbalancer_IP>:80
   ```
