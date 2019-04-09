@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -111,7 +111,7 @@ When you create your {{site.data.keyword.Bluemix_notm}} account, the default res
 <dt>Kubernetes namespace</dt>
   <dd><p>As part of cluster resource instances in {{site.data.keyword.Bluemix_notm}} IAM, you can assign users with service access roles to Kubernetes namespaces within your clusters. If you scope a service role to a namespace, you cannot apply the policy to a resource group or assign a platform role at the same time.</p>
   <p>When you assign access to a namespace, the policy applies to all current and future instances of the namespace in all the clusters that you authorize. For example, say you want a `dev` group of users to be able to deploy Kubernetes resources in a `test` namespace in all your clusters in AP North. If you assign the `dev` access group the **Writer** service access role for the Kubernetes namespace test in all clusters in the AP North region within the `default` resource group, the `dev` group can access the `test` namespace in any AP North cluster in the `default` resource group that currently has or eventually has a test namespace.</p>
-  <p class="important">When you scope a service access policy to a namespace, you must [use the {{site.data.keyword.Bluemix_notm}} console](/docs/containers?topic=containers-users#add_users). You cannot use the CLI to scope a service access policy to a namespace. You also cannot assign namespace-scoped service access roles at the resource group level, or assign them at the same time as platform roles.</p></dd>
+  <p class="important">You cannot assign namespace-scoped service access roles at the resource group level, or assign them at the same time as platform roles.</p></dd>
 <dt>Resource group</dt>
   <dd><p>You can organize your account resources in customizable groupings so that you can quickly assign individual or groups of users access to more than one resource at a time. Resource groups can help operators and administrators filter resources to view their current usage, troubleshoot issues, and manage teams.</p>
   <p class="important">A cluster can be created in only one resource group that you can't change afterward. If you create a cluster in the wrong resource group, you must delete the cluster and re-create it in the correct resource group. Furthermore, if you need to use the `ibmcloud ks cluster-service-bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.Bluemix_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.</p>
@@ -426,7 +426,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
     5. From the **Region** list, select one or all regions.
     6. Select a role for the policy.
        * **Platform access role**: Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. To find a list of supported actions per role, see [platform roles reference page](/docs/containers?topic=containers-access_reference#iam_platform).
-       * **Service access role**: Grants access to Kubernetes as access from within a cluster so that users can manage Kubernetes resources such as pods, deployments, services, and namespaces. To find a list of supported actions per role, see [service roles reference page](/docs/containers?topic=containers-access_reference#service).<p class="note">You cannot scope a service access role to a namespace if you assign the role at the resource group level. Assign access to a resource instance instead.</p>
+       * **Service access role**: Grants access to Kubernetes as access from within a cluster so that users can manage Kubernetes resources such as pods, deployments, services, and namespaces. To find a list of supported actions per role, see [service roles reference page](/docs/containers?topic=containers-access_reference#service).<p class="note">You cannot scope a service access role to a namespace if you assign the role at the resource group level. Assign access to a resource instance instead. Also, do not assign a platform role at the same time as you assign a service role.</p>
     7. Click **Assign**.
     8. **Optional**: If you assigned only a service roles to users, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster-config` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) or otherwise interact with the Kubernetes API. If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, repeat these steps to give the users the platform **Viewer** role.
   * **For resource instances within or across resource groups**:
@@ -457,16 +457,17 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
 Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_notm}} IAM platform management and service access roles with the CLI.
 {: shortdesc}
 
-You cannot use the CLI to scope a service role to a Kubernetes namespace. [Use the {{site.data.keyword.Bluemix_notm}} console](#add_users) instead. Do not assign {{site.data.keyword.Bluemix_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.
-{: important}
-
 **Before you begin**:
 
 - Verify that you're assigned the `cluster-admin` {{site.data.keyword.Bluemix_notm}} IAM platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 - Verify that the user is added to the account. If the user is not, invite the user to your account by running `ibmcloud account user-invite <user@email.com>`.
 - [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- Decide whether to assign [platform or service access](/docs/containers?topic=containers-users#access_policies) roles. The CLI steps vary depending on which access role you want to assign:
+  * [Assign platform roles from the CLI](#add_users_cli_platform)
+  * [Assign service roles from the CLI](#add_users_cli_service)
 
-**To assign {{site.data.keyword.Bluemix_notm}} IAM policies from the CLI:**
+**To assign {{site.data.keyword.Bluemix_notm}} IAM _platform_ roles from the CLI:**
+{: #add_users_cli_platform}
 
 1.  Create an {{site.data.keyword.Bluemix_notm}} IAM access policy to set permissions for {{site.data.keyword.containerlong_notm}} (**`--service-name containers-kubernetes`**). Scope the access policy based on what you want to assign access to.
 
@@ -503,18 +504,16 @@ You cannot use the CLI to scope a service role to a Kubernetes namespace. [Use t
         <tr>
         <td>Role</td>
         <td>`--role`</td>
-        <td>Choose the role you want to assign.
-        <ul><li>[Platform role](/docs/containers?topic=containers-access_reference#iam_platform): Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. Possible values are: `Administrator`, `Operator`, `Editor`, or `Viewer`.</li>
-        <li>[Service role](/docs/containers?topic=containers-access_reference#service): Grants access to Kubernetes as access from within a cluster so that users can manage Kubernetes resources such as pods, deployments, services, and namespaces. Possible values are: `Manager`, `Writer`, or `Reader`.</li></td>
+        <td>Choose the [platform role](/docs/containers?topic=containers-access_reference#iam_platform) that you want to assign. Possible values are: `Administrator`, `Operator`, `Editor`, or `Viewer`.</td>
         </tr>
       </tbody>
       </table>
 
     **Example commands**:
 
-    *  Assign an individual user the **Viewer** platform and **Manager** service access roles to one cluster in the default resource group and US East region:
+    *  Assign an individual user the **Viewer** platform role to one cluster in the default resource group and US East region:
        ```
-       ibmcloud iam user-policy-create user@email.com --resource-group-name default --service-name containers-kubernetes --region us-east --service-instance clusterID-1111aa2b2bb22bb3333c3c4444dd4ee5 --roles Viewer,Manager
+       ibmcloud iam user-policy-create user@email.com --resource-group-name default --service-name containers-kubernetes --region us-east --service-instance clusterID-1111aa2b2bb22bb3333c3c4444dd4ee5 --roles Viewer
        ```
        {: pre}
 
@@ -524,27 +523,156 @@ You cannot use the CLI to scope a service role to a Kubernetes namespace. [Use t
        ```
        {: pre}
 
-    *  Assign an `auditors` group of users the **Viewer** platform and **Reader** service access roles to all clusters in all resource groups:
+    *  Assign an `auditors` group of users the **Viewer** platform role to all clusters in all resource groups:
        ```
-       ibmcloud iam user-policy-create auditors --service-name containers-kubernetes --roles Viewer,Reader
+       ibmcloud iam access-group-policy-create auditors --service-name containers-kubernetes --roles Viewer
        ```
        {: pre}
 
 2. If you want users to be able to work with clusters in a resource group other than the default, these users need additional access to the resource groups that clusters are in. You can assign these users at least the **Viewer** role for resource groups. You can find the resource group ID by running `ibmcloud resource group <resource_group_name> --id`.
-    ```
-    ibmcloud iam user-policy-create <user-email_OR_access-group> --resource-type resource-group --resource <resource_group_ID> --roles Viewer
-    ```
-    {: pre}
+    *   For individual users:
+        ```
+        ibmcloud iam user-policy-create <user@email.com> --resource-type resource-group --resource <resource_group_ID> --roles Viewer
+        ```
+        {: pre}
+    *   For access groups:
+        ```
+        ibmcloud iam access-group-policy-create <access_group> --resource-type resource-group --resource <resource_group_ID> --roles Viewer
+        ```
+        {: pre}
 
-3.  If you assigned only service roles to users, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster-config` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) or otherwise interact with the Kubernetes API. If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, repeat these steps to give the users the platform **Viewer** role.
+3.  Verify that the user or access group has the assigned platform role.
+    *   For individual users:
+        ```
+        ibmcloud iam user-policies <user@email.com>
+        ```
+        {: pre}
+    *   For access groups:
+        ```
+        ibmcloud iam access-group-policies <access_group>
+        ```
+        {: pre}
 
-4.  For the changes to take effect, the user that is granted access must refresh the cluster configuration.
+<br>
+<br>
+
+**To assign {{site.data.keyword.Bluemix_notm}} IAM _service_ roles from the CLI:**
+{: #add_users_cli_service}
+
+1.  Get the user information for the individual user or access group that you want to assign the service role to.
+
+    1.  Get your **Account ID**.
+        ```
+        ibmcloud account show
+        ```
+        {: pre}
+    2.  For individual users, get the user's **userID** and **ibmUniqueId**.
+        ```
+        ibmcloud account users --account-id <account_ID> --output JSON
+        ```
+        {: pre}
+    3.  For access groups, get the **Name** and **ID**.
+        ```
+        ibmcloud iam access-groups
+        ```
+        {: pre}
+
+2.  Create a `policy.json` file that scopes the service access role to a Kubernetes namespace in your cluster.
+
+    ```
+    {
+        "subjects": [
+            {
+                "attributes": [
+                    {
+                        "name": "(iam_id|access_group_id)",
+                        "value": "<user_or_group_ID>"
+                    }
+                ]
+            }
+        ],
+        "roles": [
+            {
+                "role_id": "crn:v1:bluemix:public:iam::::serviceRole:<(Manager|Writer|Reader)>"
+            }
+        ],
+        "resources": [
+            {
+                "attributes": [
+                    {
+                        "name": "accountId",
+                        "value": "<account_ID>"
+                    },
+                    {
+                        "name": "serviceName",
+                        "value": "containers-kubernetes"
+                    },
+                    {
+                        "name": "serviceInstance",
+                        "value": "<cluster_ID1,cluster_ID2>"
+                    },
+                    {
+                        "name": "namespace",
+                        "value": "<namespace_name>"
+                    }
+                ]
+            }
+        ]
+    }
+    ```
+    {: codeblock}
+
+    <table summary="The table describes the fields to fill in for the JSON file. Rows are to be read from the left to right, with the scope in column one, the CLI flag in column two, and the description in column three.">
+    <caption>Understanding the JSON file components</caption>
+      <thead>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/>Understanding the JSON file components</th>
+      </thead>
+      <tbody>
+        <tr>
+        <td>`subjects.attributes`</td>
+        <td>Enter the {{site.data.keyword.Bluemix_notm}} IAM details for the individual user or access group that you previously retrieved.
+        <ul><li>For individual users, set `iam_id` for the `name` field. Enter **ibmUniqueId** for the `value` field.</li>
+        <li>For access groups, set `access_group_id` for the `name` field. Enter **ID** for the `value` field.</li></ul></td>
+        </tr>
+        <tr>
+        <td>`roles.role_id`</td>
+        <td>Choose the [IAM service access role](/docs/containers?topic=containers-access_reference#service) that you want to assign. Possible values are:
+        <ul><li>`crn:v1:bluemix:public:iam::::serviceRole:Manager`</li>
+        <li>`crn:v1:bluemix:public:iam::::serviceRole:Writer`</li>
+        <li>`crn:v1:bluemix:public:iam::::serviceRole:Reader`</li></ul></td>
+        </tr>
+        <tr>
+        <td>`resources.attributes`</td>
+        <td>Configure the scope of the policy to your account, cluster, and namespace. Leave the `"name"` fields as given in the example, and enter certain `"value"` fields as follows.
+        <ul><li>**For `"accountId"`**: Enter your {{site.data.keyword.Bluemix_notm}} account ID that you previously retrieved</li>
+        <li>**For `"serviceName"`**: Leave the service name as given: `containers-kubernetes`.</li>
+        <li>**For `"serviceInstance"`**: Enter your cluster ID. For multiple clusters, separate with a comma. To get your cluster ID, run `ibmcloud ks clusters`.</li>
+        <li>**For `"namespace"`**: Enter a Kubernetes namespace in your cluster. To list the namespaces in your cluster, run `kubectl get namespaces`. <p class="note">To assign the access policy to all namespaces in a cluster, remove the entire `{"name": "namespace", "value": "<namespace_name"}` entry.</p></li></td>
+        </tr>
+      </tbody>
+      </table>
+      
+3.  Apply the {{site.data.keyword.Bluemix_notm}} IAM policy to an individual user or access group.
+    *   For individual users:
+        ```
+        ibmcloud iam user-policy-create <user@email.com> --file filepath/policy.json
+        ```
+        {: pre}
+    *   For access groups:
+        ```
+        ibmcloud iam access-group-policy-create <access_group> --file filepath/policy.json
+        ```
+        {: pre}
+
+4.  If you assigned only service roles to users, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster-config` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) or otherwise interact with the Kubernetes API. If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, repeat these steps to give the users the platform **Viewer** role.
+
+5.  For the changes to take effect, the user that is granted access must refresh the cluster configuration.
     ```
     ibmcloud ks cluster-config --cluster <cluster_name_or_id>
     ```
     {: pre}
 
-5.  **Optional**: Verify the user is added to the corresponding [RBAC role binding or cluster role binding](#role-binding). Note that you must be a cluster administrator (**Manager** service role) to check role bindings and cluster role bindings.
+6.  **Optional**: Verify the user is added to the corresponding [RBAC role binding or cluster role binding](#role-binding). Note that you must be a cluster administrator (**Manager** service role) to check role bindings and cluster role bindings.
     Check the role binding or cluster role binding for the role.
     *   Reader:
         ```
