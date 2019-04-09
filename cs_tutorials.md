@@ -136,7 +136,6 @@ If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after
       echo $PATH
       ```
       {: pre}
-
       Example CLI output:
       ```
       /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin

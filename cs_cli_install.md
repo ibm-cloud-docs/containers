@@ -77,8 +77,8 @@ To install the CLIs:
 
 4. {: #kubectl}To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, [install the Kubernetes CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
-The latest stable version of `kubectl` is installed with the base {{site.data.keyword.Bluemix_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
-{: important}
+  The latest stable version of `kubectl` is installed with the base {{site.data.keyword.Bluemix_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
+  {: important}
 
   1. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.12.7.
     - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
@@ -97,7 +97,6 @@ The latest stable version of `kubectl` is installed with the base {{site.data.ke
       echo $PATH
       ```
       {: pre}
-
       Example CLI output:
       ```
       /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -116,8 +115,8 @@ For reference information about these CLIs, see the documentation for those tool
 
 -   [`ibmcloud` commands](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
 -   [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
--   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/)
 -   [`ibmcloud cr` commands](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
+-   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/)
 
 <br />
 
