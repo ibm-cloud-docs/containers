@@ -86,7 +86,7 @@ Before you begin:
 To deploy a container into the **default** namespace of your cluster:
 
 1.  Create a deployment configuration file that is named `mydeployment.yaml`.
-2.  Define the deployment and the image that you want to use from your namespace in {{site.data.keyword.registryshort_notm}}.
+2.  Define the deployment and the image to use from your namespace in {{site.data.keyword.registryshort_notm}}.
 
     ```
     apiVersion: apps/v1
