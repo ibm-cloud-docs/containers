@@ -596,7 +596,7 @@ When you refer to the image pull secret in a pod deployment, the image pull secr
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>The name of the image that you want to use. To list available images in an {{site.data.keyword.Bluemix_notm}} account, run `ibmcloud cr image-list`.</td>
+    <td>The name of the image to use. To list available images in an {{site.data.keyword.Bluemix_notm}} account, run `ibmcloud cr image-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
