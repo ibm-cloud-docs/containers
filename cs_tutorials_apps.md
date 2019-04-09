@@ -67,8 +67,7 @@ Software developers and network administrators that are deploying an app into a 
 ## Prerequisites
 {: #apps_prereqs}
 
-* [Tutorial: Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
-* Install the [container-registry plug-in](/docs/services/Registry?topic=registry-getting-started#gs_registry_cli_install).
+[Tutorial: Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 
 
 ## Lesson 1: Deploying single instance apps to Kubernetes clusters

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -39,10 +39,10 @@ Install the required CLIs to create and manage your Kubernetes clusters in {{sit
 
 This task includes the information for installing these CLIs and plug-ins:
 
--   {{site.data.keyword.Bluemix_notm}} CLI version 0.8.0 or later
--   {{site.data.keyword.containerlong_notm}} plug-in
--   Kubernetes CLI version that matches the `major.minor` version of your cluster
--   Optional: {{site.data.keyword.registryshort_notm}} plug-in
+- {{site.data.keyword.Bluemix_notm}} CLI
+- {{site.data.keyword.containerlong_notm}} plug-in
+- {{site.data.keyword.registryshort_notm}} plug-in
+- Kubernetes CLI version that matches the `major.minor` version of your cluster
 
 If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](#cli_web).
 {: tip}
@@ -50,94 +50,65 @@ If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after
 <br>
 To install the CLIs:
 
-1.  As a prerequisite for the {{site.data.keyword.containerlong_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-ibmcloud-cli). The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
+1. Install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq). This installation includes:
+  - The base {{site.data.keyword.Bluemix_notm}} CLI. The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud`.
+  - The {{site.data.keyword.containerlong_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.Bluemix_notm}} CLI is `ibmcloud ks`.
+  - {{site.data.keyword.registryshort_notm}} plug-in. Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster. The prefix for running registry commands is `ibmcloud cr`.
 
-    Plan to use the CLI a lot? Try [Enabling shell autocompletion for {{site.data.keyword.Bluemix_notm}} CLI (Linux/MacOS only)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux).
-    {: tip}
+  Plan to use the CLI a lot? Try [Enabling shell autocompletion for {{site.data.keyword.Bluemix_notm}} CLI (Linux/MacOS only)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux).
+  {: tip}
 
-2.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
+2. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
+  ```
+  ibmcloud login
+  ```
+  {: pre}
 
-    ```
-    ibmcloud login
-    ```
-    {: pre}
+  If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+  {: tip}
 
-    If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
-    {: tip}
+3. Verify that the plug-ins are installed correctly.
+  ```
+  ibmcloud plugin list
+  ```
+  {: pre}
 
-3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containerlong_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containerlong_notm}} plug-in is `ibmcloud ks`.
+  The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as **container-service**, and the {{site.data.keyword.registryshort_notm}} plug-in is displayed in the results as **container-registry**.
 
-    ```
-    ibmcloud plugin install container-service
-    ```
-    {: pre}
+4. {: #kubectl}To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, [install the Kubernetes CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
-    To verify that the plug-in is installed properly, run the following command:
+The latest stable version of `kubectl` is installed with the base {{site.data.keyword.Bluemix_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
+{: important}
 
-    ```
-    ibmcloud plugin list
-    ```
-    {: pre}
+  1. Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.12.7.
+    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
+    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
+    - **Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some file path changes when you run commands later. [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
 
-    The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as **container-service**.
+  2. If you're using OS X or Linux, complete the following steps.
+    1. Move the executable file to the `/usr/local/bin` directory.
+      ```
+      mv /filepath/kubectl /usr/local/bin/kubectl
+      ```
+      {: pre}
 
-4.  {: #kubectl}To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, [install the Kubernetes CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
+    2. Make sure that `/usr/local/bin` is listed in your `PATH` system variable. The `PATH` variable contains all directories where your operating system can find executable files. The directories that are listed in the `PATH` variable serve different purposes. `/usr/local/bin` is used to store executable files for software that is not part of the operating system and that was manually installed by the system administrator.
+      ```
+      echo $PATH
+      ```
+      {: pre}
 
-    1.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.12.7.
+      Example CLI output:
+      ```
+      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+      ```
+      {: screen}
 
-        If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
-        {: note}
-
-        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
-        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
-        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
-
-    2.  **For OS X and Linux**: Complete the following steps.
-        1.  Move the executable file to the `/usr/local/bin` directory.
-
-            ```
-            mv /filepath/kubectl /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-        2.  Make sure that `/usr/local/bin` is listed in your `PATH` system variable. The `PATH` variable contains all directories where your operating system can find executable files. The directories that are listed in the `PATH` variable serve different purposes. `/usr/local/bin` is used to store executable files for software that is not part of the operating system and that was manually installed by the system administrator.
-
-            ```
-            echo $PATH
-            ```
-            {: pre}
-
-            Example CLI output:
-
-            ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  Make the file executable.
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-    3.  **For Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI. This setup saves you some file path changes when you run commands later.
-
-5.  To manage a private image repository, install the {{site.data.keyword.registryshort_notm}} plug-in. Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster. The prefix for running registry commands is `ibmcloud cr`.
-
-    ```
-    ibmcloud plugin install container-registry 
-    ```
-    {: pre}
-
-    To verify that the plug-in is installed properly, run the following command:
-
-    ```
-    ibmcloud plugin list
-    ```
-    {: pre}
-
-    The plug-in is displayed in the results as container-registry.
+    3. Make the file executable.
+      ```
+      chmod +x /usr/local/bin/kubectl
+      ```
+      {: pre}
 
 Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli).
 
@@ -149,7 +120,6 @@ For reference information about these CLIs, see the documentation for those tool
 -   [`ibmcloud cr` commands](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
 
 <br />
-
 
 
 
