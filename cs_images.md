@@ -78,7 +78,7 @@ You can deploy containers to your cluster from an IBM-provided public image or a
 {:shortdesc}
 
 Before you begin:
-1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#registry_namespace_add).
+1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
 2. [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli).
 3. If you have an existing cluster that was created before **25 February 2019**, [update your cluster to use the API key `imagePullSecret`](#imagePullSecret_migrate_api_key).
 4. [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
@@ -236,7 +236,7 @@ Image pull secrets are valid only for the Kubernetes namespaces that they were c
 
 Before you begin:
 
-1.  [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#registry_namespace_add).
+1.  [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
 2.  [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli).
 3.  If you have an existing cluster that was created before **25 February 2019**, [update your cluster to use the API key image pull secret](#imagePullSecret_migrate_api_key).
 4.  [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
@@ -708,7 +708,7 @@ With the registry token that is stored in the image pull secret, you can deploy 
 {: shortdesc}
 
 Before you begin:
-1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#registry_namespace_add).
+1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
 2. [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli).
 3. [Target your CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
