@@ -62,7 +62,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <li>Updates translations of help text.</li>
 <li>Updates short links to documentation in help text.</li>
 <li>Fixes a bug where JSON error messages printed in an incorrect format.</li>
-<li>Fixes a bug where using the silent flag (`-s`) on some commands prevented some errors from printing.</li>
+<li>Fixes a bug where using the silent flag (`-s`) on some commands prevented errors from printing.</li>
 </ul></td>
 </tr>
 <tr>
