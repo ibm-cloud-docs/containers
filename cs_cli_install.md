@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-02"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -44,7 +44,8 @@ This task includes the information for installing these CLIs and plug-ins:
 -   Kubernetes CLI version that matches the `major.minor` version of your cluster
 -   Optional: {{site.data.keyword.registryshort_notm}} plug-in
 
-
+If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](#cli_web).
+{: tip}
 
 <br>
 To install the CLIs:
@@ -82,14 +83,14 @@ To install the CLIs:
 
 4.  {: #kubectl}To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, [install the Kubernetes CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
-    1.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.12.6.
+    1.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.12.7.
 
         If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
         {: note}
 
-        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/darwin/amd64/kubectl)
-        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/linux/amd64/kubectl)
-        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.6/bin/windows/amd64/kubectl.exe)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
 
     2.  **For OS X and Linux**: Complete the following steps.
         1.  Move the executable file to the `/usr/local/bin` directory.
@@ -186,7 +187,7 @@ Before you begin, [install Docker ![External link icon](../icons/launch-glyph.sv
 You can use the commands that are provided with the Kubernetes CLI to manage clusters in {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
-All `kubectl` commands that are available in Kubernetes 1.12.6 are supported for use with clusters in {{site.data.keyword.Bluemix_notm}}. After you create a cluster, set the context for your local CLI to that cluster with an environment variable. Then, you can run the Kubernetes `kubectl` commands to work with your cluster in {{site.data.keyword.Bluemix_notm}}.
+All `kubectl` commands that are available in Kubernetes 1.12.7 are supported for use with clusters in {{site.data.keyword.Bluemix_notm}}. After you create a cluster, set the context for your local CLI to that cluster with an environment variable. Then, you can run the Kubernetes `kubectl` commands to work with your cluster in {{site.data.keyword.Bluemix_notm}}.
 
 Before you can run `kubectl` commands:
 * [Install the required CLIs](#cs_cli_install).
@@ -276,8 +277,8 @@ To use `kubectl` commands:
     Example output:
 
     ```
-    Client Version: v1.12.6
-    Server Version: v1.12.6
+    Client Version: v1.12.7
+    Server Version: v1.12.7
     ```
     {: screen}
 
@@ -299,7 +300,7 @@ This task includes the information for updating these CLIs.
 
 -   {{site.data.keyword.Bluemix_notm}} CLI version 0.8.0 or later
 -   {{site.data.keyword.containerlong_notm}} plug-in
--   Kubernetes CLI version 1.12.6 or later
+-   Kubernetes CLI version 1.12.7 or later
 -   {{site.data.keyword.registryshort_notm}} plug-in
 
 <br>
@@ -404,6 +405,33 @@ To uninstall the CLIs:
 <br />
 
 
+## Using the Kubernetes Terminal in your web browser (beta)
+{: #cli_web}
+
+The Kubernetes Terminal allows you to use the {{site.data.keyword.Bluemix_notm}} CLI to manage your cluster directly from your web browser.
+{: shortdesc}
+
+The Kubernetes Terminal is released as a beta {{site.data.keyword.containerlong_notm}} add-on and might change due to user feedback and further tests. Do not use this feature in production clusters to avoid unexpected side effects.
+{: important}
+
+If you use the cluster dashboard in the {{site.data.keyword.Bluemix_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes Terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-ibmcloud-cli), the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registryshort_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.
+
+Any files that you download and edit locally, such as YAML files, are stored temporarily in Kubernetes Terminal and do not persist across sessions.
+{: note}
+
+To install and launch the Kubernetes Terminal:
+
+1.  Log in to the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/).
+2.  From the menu bar, select the account that you want to use.
+3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
+4.  On the **Clusters** page, click the cluster that you want to access.
+5.  From the cluster detail page, click the **Terminal** button.
+6.  Click **Install**. It might take a few minutes for the terminal add-on to install.
+7.  Click the **Terminal** button again. The terminal opens in your browser.
+
+Next time, you can launch the Kubernetes Terminal simply by clicking the **Terminal** button.
+
+<br />
 
 
 ## Automating cluster deployments with the API
@@ -437,7 +465,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 </tbody>
 </table>
 
-1.  Create your {{site.data.keyword.Bluemix_notm}} IAM access token. The body information that is included in your request varies based on the {{site.data.keyword.Bluemix_notm}} authentication method that you use. 
+1.  Create your {{site.data.keyword.Bluemix_notm}} IAM access token. The body information that is included in your request varies based on the {{site.data.keyword.Bluemix_notm}} authentication method that you use.
 
     ```
     POST https://iam.bluemix.net/identity/token
@@ -504,7 +532,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 
     You can find the {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token** field of your API output. Note the {{site.data.keyword.Bluemix_notm}} IAM token to retrieve additional header information in the next steps.
 
-2.  Retrieve the ID of the {{site.data.keyword.Bluemix_notm}} account that you want to work with. Replace `<iam_access_token>` with the {{site.data.keyword.Bluemix_notm}} IAM token that you retrieved from the **access_token** field of your API output in the previous step. In your API output, you can find the ID of your {{site.data.keyword.Bluemix_notm}} account in the **resources.metadata.guid** field. 
+2.  Retrieve the ID of the {{site.data.keyword.Bluemix_notm}} account that you want to work with. Replace `<iam_access_token>` with the {{site.data.keyword.Bluemix_notm}} IAM token that you retrieved from the **access_token** field of your API output in the previous step. In your API output, you can find the ID of your {{site.data.keyword.Bluemix_notm}} account in the **resources.metadata.guid** field.
 
     ```
     GET https://accountmanagement.ng.bluemix.net/v1/accounts
@@ -547,7 +575,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: screen}
 
-3.  Generate a new {{site.data.keyword.Bluemix_notm}} IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID that you want to work with. 
+3.  Generate a new {{site.data.keyword.Bluemix_notm}} IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID that you want to work with.
 
     If you use an {{site.data.keyword.Bluemix_notm}} API key, you must use the {{site.data.keyword.Bluemix_notm}} account ID the API key was created for. To access clusters in other accounts, log into this account and create an {{site.data.keyword.Bluemix_notm}} API key that is based on this account.
     {: note}
@@ -617,13 +645,13 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     {: screen}
 
     You can find the {{site.data.keyword.Bluemix_notm}} IAM token in the **access_token** and the refresh token in the **refresh_token** field of your API output.
-    
-4.  List available {{site.data.keyword.containerlong_notm}} regions and select the region that you want to work in. Use the IAM access token and refresh token from the previous step to build your header information. 
+
+4.  List available {{site.data.keyword.containerlong_notm}} regions and select the region that you want to work in. Use the IAM access token and refresh token from the previous step to build your header information.
     ```
     GET https://containers.cloud.ibm.com/v1/regions
     ```
     {: codeblock}
-    
+
     <table summary="Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions with the input parameter in column 1 and the value in column 2.">
     <caption>Input parameters to retrieve {{site.data.keyword.containerlong_notm}} regions.</caption>
     <thead>
@@ -638,8 +666,8 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     </tr>
     </tbody>
     </table>
-    
-    Example output: 
+
+    Example output:
     ```
     {
     "regions": [
@@ -684,7 +712,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
     ```
     {: screen}
 
-5.  List all clusters in the {{site.data.keyword.containerlong_notm}} region that you selected. If you want to [run Kubernetes API requests against your cluster](#kube_api), make sure to note the **id** and **region** of your cluster. 
+5.  List all clusters in the {{site.data.keyword.containerlong_notm}} region that you selected. If you want to [run Kubernetes API requests against your cluster](#kube_api), make sure to note the **id** and **region** of your cluster.
 
      ```
      GET https://containers.cloud.ibm.com/v1/clusters
@@ -711,7 +739,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 <br />
 
 
-## Working with your cluster by using the Kubernetes API 
+## Working with your cluster by using the Kubernetes API
 {: #kube_api}
 
 You can use the [Kubernetes API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/using-api/api-overview/) to interact with your cluster in {{site.data.keyword.containerlong_notm}}.
@@ -720,14 +748,14 @@ You can use the [Kubernetes API ![External link icon](../icons/launch-glyph.svg 
 The following instructions require public network access in your cluster to connect to the public service endpoint of your Kubernetes master.
 {: note}
 
-1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.Bluemix_notm}} IAM access token, refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located. 
+1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.Bluemix_notm}} IAM access token, refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located.
 
-2. Retrieve an {{site.data.keyword.Bluemix_notm}} IAM delegated refresh token. 
+2. Retrieve an {{site.data.keyword.Bluemix_notm}} IAM delegated refresh token.
    ```
    POST https://iam.bluemix.net/identity/token
    ```
    {: codeblock}
-   
+
    <table summary="Input parameters to get an IAM delegated refresh token with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get an IAM delegated refresh token. </caption>
    <thead>
@@ -750,21 +778,21 @@ The following instructions require public network access in your cluster to conn
    </tr>
    </tbody>
    </table>
-   
-   Example output: 
+
+   Example output:
    ```
    {
     "delegated_refresh_token": <delegated_refresh_token>
    }
    ```
    {: screen}
-   
-3. Retrieve an {{site.data.keyword.Bluemix_notm}} IAM ID, IAM access, and IAM refresh token by using the delegated refresh token from the previous step. In your API output, you can find the IAM ID token in the **id_token** field, the IAM access token in the **access_token** field, and the IAM refresh token in the **refresh_token** field. 
+
+3. Retrieve an {{site.data.keyword.Bluemix_notm}} IAM ID, IAM access, and IAM refresh token by using the delegated refresh token from the previous step. In your API output, you can find the IAM ID token in the **id_token** field, the IAM access token in the **access_token** field, and the IAM refresh token in the **refresh_token** field.
    ```
    POST https://iam.bluemix.net/identity/token
    ```
    {: codeblock}
-   
+
    <table summary="Input parameters to get IAM ID and IAM access tokens with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get IAM ID and IAM access tokens.</caption>
    <thead>
@@ -784,8 +812,8 @@ The following instructions require public network access in your cluster to conn
    </tr>
    </tbody>
    </table>
-   
-   Example output: 
+
+   Example output:
    ```
    {
     "access_token": "<iam_access_token>",
@@ -797,14 +825,14 @@ The following instructions require public network access in your cluster to conn
     "scope": "ibm openid containers-kubernetes"
    }
    ```
-   {: screen} 
-   
-4. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **`publicServiceEndpointURL`** of your API output. 
+   {: screen}
+
+4. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **`publicServiceEndpointURL`** of your API output.
    ```
    GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>
    ```
    {: codeblock}
-   
+
    <table summary="Input parameters to get the public service endpoint for your Kubernetes master with the input parameter in column 1 and the value in column 2.">
    <caption>Input parameters to get the public service endpoint for your Kubernetes master.</caption>
    <thead>
@@ -823,8 +851,8 @@ The following instructions require public network access in your cluster to conn
    </tr>
    </tbody>
    </table>
-   
-   Example output: 
+
+   Example output:
    ```
    {
     "location": "Dallas",
@@ -844,16 +872,16 @@ The following instructions require public network access in your cluster to conn
    ```
    {: screen}
 
-5. Run Kubernetes API requests against your cluster by using the IAM ID token that you retrieved earlier. For example, list the Kubernetes version that runs in your cluster. 
+5. Run Kubernetes API requests against your cluster by using the IAM ID token that you retrieved earlier. For example, list the Kubernetes version that runs in your cluster.
 
-   If you enabled SSL certificate verification in your API test framework, make sure to disable this feature. 
+   If you enabled SSL certificate verification in your API test framework, make sure to disable this feature.
    {: tip}
-   
+
    ```
    GET <publicServiceEndpointURL>/version
    ```
    {: codeblock}
-   
+
    <table summary="Input parameters to view the Kubernetes version that runs in your cluster with the input parameter in column 1 and the value in column 2. ">
    <caption>Input parameters to view the Kubernetes version that runs in your cluster. </caption>
    <thead>
@@ -871,8 +899,8 @@ The following instructions require public network access in your cluster to conn
    </tr>
    </tbody>
    </table>
-   
-   Example output: 
+
+   Example output:
    ```
    {
     "major": "1",
@@ -887,8 +915,8 @@ The following instructions require public network access in your cluster to conn
    }
    ```
    {: screen}
-   
-6. Review the [Kubernetes API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubernetes-api/) to find a list of supported APIs for the latest Kubernetes version. Make sure to use the API documentation that matches the Kubernetes version of your cluster. If you do not use the latest Kubernetes version, append your version at the end of the URL. For example, to access the API documentation for version 1.12, add `v1.12`. 
+
+6. Review the [Kubernetes API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubernetes-api/) to find a list of supported APIs for the latest Kubernetes version. Make sure to use the API documentation that matches the Kubernetes version of your cluster. If you do not use the latest Kubernetes version, append your version at the end of the URL. For example, to access the API documentation for version 1.12, add `v1.12`.
 
 
 ## Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API

@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-08"
 
 ---
 
@@ -193,6 +193,7 @@ lastupdated: "2019-04-04"
 * [Configuring the CLI to run `kubectl`](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
+* [Using the Kubernetes Terminal in your web browser (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)
 * [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_cli_install#cs_api)
 * [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_cli_install#kube_api)
 * [Refreshing {{site.data.keyword.Bluemix_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
@@ -753,10 +754,10 @@ lastupdated: "2019-04-04"
 * [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
 * [Tracking Kubernetes audit events](/docs/containers?topic=containers-at_events#kube-events)
 
-## Dedicated cloud
+## Deprecated: Dedicated cloud
 {: #sitemap-dedicated}
 
-[Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated)
+[Deprecated: Getting started with clusters in {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated)
 * [About the Dedicated cloud environment](/docs/containers?topic=containers-dedicated#dedicated_environment)
 * [Differences in cluster management between the cloud environments](/docs/containers?topic=containers-dedicated#dedicated_env_differences)
   * [Service architecture](/docs/containers?topic=containers-dedicated#dedicated_ov_architecture)

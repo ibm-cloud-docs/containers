@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -33,9 +33,9 @@ subcollection: containers
 {:shortdesc}
 
 **Supported Kubernetes versions**:
-*   Latest: 1.13.4
-*   Default: 1.12.6
-*   Other: 1.11.8
+*   Latest: 1.13.5
+*   Default: 1.12.7
+*   Other: 1.11.9
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.10
@@ -43,7 +43,7 @@ subcollection: containers
 
 </br>
 
-**Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have a minimum of 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. You cannot create new clusters that use the deprecated version.
+**Deprecated versions**: When clusters are running on a deprecated Kubernetes version, you have a minimum of 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. For example, you can add and reload worker nodes, but you cannot create new clusters that use the deprecated version.
 
 **Unsupported versions**: If your clusters run a Kubernetes version that is not supported, review the following potential update impacts and then immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes. You can find out if your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks clusters` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).
 
@@ -62,7 +62,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.12.6+IKS
+Server Version: v1.12.7+IKS
 ```
 {: screen}
 

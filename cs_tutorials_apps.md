@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -68,7 +68,7 @@ Software developers and network administrators that are deploying an app into a 
 {: #apps_prereqs}
 
 * [Tutorial: Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
-* Install the [container-registry plug-in](/docs/services/Registry?topic=registry-index#registry_cli_install).
+* Install the [container-registry plug-in](/docs/services/Registry?topic=registry-getting-started#gs_registry_cli_install).
 
 
 ## Lesson 1: Deploying single instance apps to Kubernetes clusters
@@ -243,7 +243,7 @@ To deploy the app:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
         ```
         {: screen}
 

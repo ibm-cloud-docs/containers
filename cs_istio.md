@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-08"
 
 ---
 
@@ -62,7 +62,7 @@ When you install the Istio add-on, the Istio control and data planes use the VLA
 **How does the update process work?**</br>
 The Istio version in the managed add-on is tested by {{site.data.keyword.Bluemix_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. To update your Istio components to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}, you can follow the steps in [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).  
 
-If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.Bluemix_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/).
+If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.Bluemix_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/setup/kubernetes/quick-start-ibm/).
 {: tip}
 
 **Are there any limitations?** </br>
@@ -81,7 +81,7 @@ Istio on {{site.data.keyword.containerlong_notm}} is offered as three managed ad
 
 <dl>
 <dt>Istio (`istio`)</dt>
-<dd>Installs the core components of Istio, including Prometheus. For more information about any of the following control plane components, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio).
+<dd>Installs the core components of Istio, including Prometheus. For more information about any of the following control plane components, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/concepts/what-is-istio/).
   <ul><li>`Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.</li>
   <li>`Mixer` provides telemetry collection and policy controls.<ul>
     <li>Telemetry pods are enabled with a Prometheus endpoint, which aggregates all telemetry data from the Envoy proxy sidecars and services in your app pods.</li>
@@ -94,7 +94,7 @@ Istio on {{site.data.keyword.containerlong_notm}} is offered as three managed ad
 <dt>Istio extras (`istio-extras`)</dt>
 <dd>Optional: Installs [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/) to provide extra monitoring, tracing, and visualization for Istio.</dd>
 <dt>BookInfo sample app (`istio-sample-bookinfo`)</dt>
-<dd>Optional: Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/). This deployment includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.</dd>
+<dd>Optional: Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/examples/bookinfo/). This deployment includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.</dd>
 </dl>
 
 <br>
@@ -263,7 +263,7 @@ Next, you can try out Istio's capabilities by checking out the [BookInfo sample 
 ## Trying out the BookInfo sample app
 {: #istio_bookinfo}
 
-The BookInfo add-on (`istio-sample-bookinfo`) deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/) into the `default` namespace. This deployment includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.
+The BookInfo add-on (`istio-sample-bookinfo`) deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/examples/bookinfo/) into the `default` namespace. This deployment includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.
 {: shortdesc}
 
 The four BookInfo microservices include:
@@ -277,7 +277,7 @@ The `reviews` microservice has multiple versions:
 * `v2` calls the `ratings` microservice and displays ratings as 1 to 5 black stars.
 * `v3` calls the `ratings` microservice and displays ratings as 1 to 5 red stars.
 
-The deployment YAMLs for each of these microservices are modified so that Envoy sidecar proxies are pre-injected as containers into the microservices' pods before they are deployed. For more information about manual sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/). The BookInfo app is also already exposed on a public IP ingress address by an Istio Gateway. Note that although the BookInfo app can help you get started, the app is not meant for production use.
+The deployment YAMLs for each of these microservices are modified so that Envoy sidecar proxies are pre-injected as containers into the microservices' pods before they are deployed. For more information about manual sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/setup/kubernetes/sidecar-injection/). The BookInfo app is also already exposed on a public IP ingress address by an Istio Gateway. Note that although the BookInfo app can help you get started, the app is not meant for production use.
 
 Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookinfo` managed add-ons](#istio_install) in a cluster.
 
@@ -350,17 +350,17 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 
 <dl>
 <dt>`Gateway`</dt>
-<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace, that acts as the ingress entry point for HTTP/TCP traffic for the BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
+<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/reference/config/istio.networking.v1alpha3/#Gateway) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace, that acts as the ingress entry point for HTTP/TCP traffic for the BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
 </br></br>To see the configuration file for the BookInfo gateway, run the following command.
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
 
 <dt>`VirtualService`</dt>
-<dd>The `bookinfo` [`VirtualService` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) defines the rules that control how requests are routed within the service mesh by defining microservices as `destinations`. In the `bookinfo` virtual service, the `/productpage` URI of a request is routed to the `productpage` host on port `9080`. In this way, all requests to the BookInfo app are routed first to the `productpage` microservice, which then calls the other microservices of BookInfo.
+<dd>The `bookinfo` [`VirtualService` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/reference/config/istio.networking.v1alpha3/#VirtualService) defines the rules that control how requests are routed within the service mesh by defining microservices as `destinations`. In the `bookinfo` virtual service, the `/productpage` URI of a request is routed to the `productpage` host on port `9080`. In this way, all requests to the BookInfo app are routed first to the `productpage` microservice, which then calls the other microservices of BookInfo.
 </br></br>To see the virtual service rule that is applied to BookInfo, run the following command.
 <pre class="pre"><code>kubectl get virtualservice bookinfo -o yaml</code></pre></dd>
 
 <dt>`DestinationRule`</dt>
-<dd>After the gateway routes the request according to virtual service rule, the `details`, `productpage`, `ratings`, and `reviews` [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/) define policies that are applied to the request when it reaches a microservice. For example, when you refresh the BookInfo product page, the changes that you see are the result of the `productpage` microservice randomly calling different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice. The versions are selected randomly because the `reviews` destination rule gives equal weight to the `subsets`, or the named versions, of the microservice. These subsets are used by the virtual service rules when traffic is routed to specific versions of the service.
+<dd>After the gateway routes the request according to virtual service rule, the `details`, `productpage`, `ratings`, and `reviews` [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/reference/config/istio.networking.v1alpha3/#DestinationRule) define policies that are applied to the request when it reaches a microservice. For example, when you refresh the BookInfo product page, the changes that you see are the result of the `productpage` microservice randomly calling different versions, `v1`, `v2`, and `v3`, of the `reviews` microservice. The versions are selected randomly because the `reviews` destination rule gives equal weight to the `subsets`, or the named versions, of the microservice. These subsets are used by the virtual service rules when traffic is routed to specific versions of the service.
 </br></br>To see the destination rules that are applied to BookInfo, run the following command.
 <pre class="pre"><code>kubectl describe destinationrules</code></pre></dd>
 </dl>
@@ -393,7 +393,7 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
   ```
   {: pre}
 
-2. To open the Istio Grafana dashboard, go to the following URL: http://localhost:3000/dashboard/db/istio-mesh-dashboard. If you installed the [BookInfo add-on](#istio_bookinfo), the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/) in the Istio open source documentation.
+2. To open the Istio Grafana dashboard, go to the following URL: http://localhost:3000/dashboard/db/istio-mesh-dashboard. If you installed the [BookInfo add-on](#istio_bookinfo), the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/tasks/telemetry/using-istio-dashboard/) in the Istio open source documentation.
 
 **Jaeger**</br>
 1. Start Kubernetes port forwarding for the Jaeger dashboard.
@@ -404,7 +404,7 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 
 2. To open the Jaeger UI, go to the following URL: http://localhost:16686.
 
-3. If you installed the [BookInfo add-on](#istio_bookinfo), you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample) in the Istio open source documentation.
+3. If you installed the [BookInfo add-on](#istio_bookinfo), you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample) in the Istio open source documentation.
 
 **Kiali**</br>
 1. Start Kubernetes port forwarding for the Kiali dashboard.
@@ -415,7 +415,7 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 
 2. To open the Kiali UI, go to the following URL: http://localhost:20001.
 
-3. Enter `admin` for both the user name and passphrase. For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
+3. Enter `admin` for both the user name and passphrase. For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
 
 ### Setting up logging with {{site.data.keyword.la_full_notm}}
 {: #istio_health_logdna}
@@ -459,7 +459,7 @@ For more information on referencing metrics and dashboards, monitoring Istio int
 Ready to manage your own apps by using Istio? Before you deploy your app, you must first decide how you want to inject the Envoy proxy sidecars into app pods.
 {: shortdesc}
 
-Each app pod must be running an Envoy proxy sidecar so that the microservices can be included in the service mesh. You can make sure sidecars are injected into each app pod automatically or manually. For more information about sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/).
+Each app pod must be running an Envoy proxy sidecar so that the microservices can be included in the service mesh. You can make sure sidecars are injected into each app pod automatically or manually. For more information about sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/setup/kubernetes/sidecar-injection/).
 
 ### Enabling automatic sidecar injection
 {: #istio_sidecar_automatic}
@@ -492,7 +492,7 @@ To enable automatic sidecar injection for a namespace:
     ```
     {: pre}
 
-5. If you have not created a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/spec-requirements/).
+5. If you have not created a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/setup/kubernetes/spec-requirements/).
 
   1. Define a service for the app.
     ```
@@ -541,7 +541,7 @@ To manually inject sidecars into a deployment:
 
 1. Download the `istioctl` client.
   ```
-  curl -L https://git.io/getLatestIstio | sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.0.6 sh -
   ```
 
 2. Navigate to the Istio package directory.
@@ -562,7 +562,7 @@ To manually inject sidecars into a deployment:
   ```
   {: pre}
 
-5. If you have not created a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/spec-requirements/).
+5. If you have not created a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/setup/kubernetes/spec-requirements/).
 
   1. Define a service for the app.
     ```
@@ -611,7 +611,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 After you [set up Envoy proxy sidecar injection](#istio_sidecar) and deploy your apps into the Istio service mesh, you can expose your Istio-managed apps to public requests by using the IBM-provided Ingress subdomain.
 {: shortdesc}
 
-The {{site.data.keyword.containerlong_notm}} ALB uses Kubernetes Ingress resources to control how traffic is routed to your apps. However, Istio uses [Gateways ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) and [VirtualServices ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) to control how traffic is routed to your apps. A gateway configures a load balancer that acts as the entry point for your Istio-managed apps. Virtual services define routing rules so that traffic is properly forwarded to your app microservices.
+The {{site.data.keyword.containerlong_notm}} ALB uses Kubernetes Ingress resources to control how traffic is routed to your apps. However, Istio uses [Gateways ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/reference/config/istio.networking.v1alpha3/#Gateway) and [VirtualServices ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/reference/config/istio.networking.v1alpha3/#VirtualService) to control how traffic is routed to your apps. A gateway configures a load balancer that acts as the entry point for your Istio-managed apps. Virtual services define routing rules so that traffic is properly forwarded to your app microservices.
 
 In standard clusters, an IBM-provided Ingress subdomain is automatically assigned to your cluster so that you can publicly expose your apps. You can leverage the DNS entry for this subdomain to expose your Istio-managed apps by connecting the default {{site.data.keyword.containerlong_notm}} ALB to the Istio ingress gateway.
 
@@ -723,7 +723,7 @@ Use the IBM-provided Ingress subdomain for your Istio-managed apps by connecting
 </br>
 **To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} ALB:**
 
-1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `80`, add that port. For more information about gateway YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/).
+1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `80`, add that port. For more information about gateway YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/reference/config/istio.networking.v1alpha3/#Gateway).
   ```
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
@@ -749,9 +749,9 @@ Use the IBM-provided Ingress subdomain for your Istio-managed apps by connecting
   ```
   {: pre}
 
-3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/).
+3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/reference/config/istio.networking.v1alpha3/#VirtualService).
 
-  If you already expose your microservice by using the {{site.data.keyword.containerlong_notm}} ALB, Istio provides a converter tool as part of the `istioctl` client that can help you migrate Ingress resource definitions to corresponding virtual services. The [`istioctl` converter tool ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/commands/istioctl/#istioctl-experimental-convert-ingress) converts Ingress resources into virtual services on a best effort basis. Note that Ingress annotations are not converted because the Istio gateway does not use Ingress annotations. The output is a starting point for your Istio ingress configuration and might require some modifications. To use the tool, run the following command: `istioctl experimental convert-ingress -f <existing_ingress_resource>.yaml > my-virtual-service.yaml`
+  If you already expose your microservice by using the {{site.data.keyword.containerlong_notm}} ALB, Istio provides a converter tool as part of the `istioctl` client that can help you migrate Ingress resource definitions to corresponding virtual services. The [`istioctl` converter tool ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/reference/commands/istioctl/#istioctl-experimental-convert-ingress) converts Ingress resources into virtual services on a best effort basis. Note that Ingress annotations are not converted because the Istio gateway does not use Ingress annotations. The output is a starting point for your Istio ingress configuration and might require some modifications. To use the tool, run the following command: `istioctl experimental convert-ingress -f <existing_ingress_resource>.yaml > my-virtual-service.yaml`
   {: tip}
 
   ```
@@ -858,7 +858,7 @@ Use the IBM-provided Ingress subdomain for your Istio-managed apps by connecting
 
 In review, you created a gateway called `my-gateway`. This gateway uses the existing `istio-ingressgateway` load balancer service to expose your app. The `istio-ingressgateway` load balancer uses the rules that you defined in the `my-virtual-service` virtual service to route traffic to your app. Finally, you created an Ingress resource so that the IBM ALB can forward traffic from your Ingress subdomain to the `istio-ingressgateway` load balancer. All user requests to your Ingress subdomain are forwarded to your app according to your Istio routing rules.
 
-Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/).
+Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/reference/config/istio.networking.v1alpha3/#DestinationRule).
 {: tip}
 
 <br />
@@ -947,7 +947,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
     ```
     {: pre}
 
-- If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/quick-start/#uninstall-istio-core-components).
+- If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/setup/kubernetes/quick-start/#uninstall-istio-core-components).
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
@@ -967,8 +967,8 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 ## What's next?
 {: #istio_next}
 
-* To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
-    * [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/intelligent-routing.html): This example shows how to route traffic to a specific version of BookInfo's reviews and ratings microservices by using Istio's traffic management capabilities.
-    * [In-Depth Telemetry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/telemetry.html): This example includes how to get uniform metrics, logs, and traces across BookInfo's microservices by using Istio Mixer and the Envoy proxy.
+* To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/).
+    * [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/examples/intelligent-routing/): This example shows how to route traffic to a specific version of BookInfo's reviews and ratings microservices by using Istio's traffic management capabilities.
+    * [In-Depth Telemetry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/examples/telemetry/): This example includes how to get uniform metrics, logs, and traces across BookInfo's microservices by using Istio Mixer and the Envoy proxy.
 * Take the [Cognitive Class: Getting started with Microservices with Istio and IBM Cloud Kubernetes Service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/). **Note**: You can skip the Istio installation section of this course.
 * Check out this blog post on using [Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) to visualize your Istio service mesh.

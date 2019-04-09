@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-05"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -955,6 +955,9 @@ kind: Deployment
 metadata:
   name: with-node-affinity
 spec:
+  selector:
+    matchLabels:
+      <label_name>: <label_value>
   template:
     spec:
       affinity:
@@ -1024,6 +1027,9 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
     metadata:
       name: with-node-affinity
     spec:
+      selector:
+        matchLabels:
+          <label_name>: <label_value>
       template:
         spec:
           affinity:

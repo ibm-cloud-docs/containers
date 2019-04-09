@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-08"
 
 keywords: kubernetes, iks
 
@@ -43,6 +43,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>8 Apr 2019</td>
+<td>[Kubernetes Terminal in your web browser (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
+<td>If you use the cluster dashboard in the {{site.data.keyword.Bluemix_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes Terminal. On the detail page for a cluster, launch the Kubernetes Terminal by clicking the **Terminal** button. Note that the Kubernetes Terminal is released as a beta add-on and is not intended for use in production clusters.</td>
+</tr>
 <tr>
 <td>4 Apr 2019</td>
 <td>[Highly available masters now in Sydney](/docs/containers?topic=containers-regions-and-zones#zones)</td>

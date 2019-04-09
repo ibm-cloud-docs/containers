@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -56,7 +56,7 @@ Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs
 ## Comparison of offerings and their combinations
 {: #differentiation}
 
-You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Public or Dedicated, in {{site.data.keyword.Bluemix_notm}} Private, or in a hybrid setup.
+You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Public, in {{site.data.keyword.Bluemix_notm}} Private, or in a hybrid setup.
 {:shortdesc}
 
 
@@ -76,12 +76,6 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Blue
  </td>
  </tr>
  <tr>
- <td>{{site.data.keyword.Bluemix_notm}} Dedicated
- </td>
- <td>Similar to running a cluster on dedicated hardware in {{site.data.keyword.Bluemix_notm}} Public, available physical resources in {{site.data.keyword.Bluemix_notm}} Dedicated are dedicated to your cluster only and are not shared with clusters from other {{site.data.keyword.IBM_notm}} customers. However, your cluster resides in an {{site.data.keyword.Bluemix_notm}} Dedicated environment that you set up and configure with IBM. Unlike {{site.data.keyword.Bluemix_notm}} Public, the infrastructure resources are owned and managed by IBM. Because your cluster runs in a pre-configured dedicated environment, {{site.data.keyword.Bluemix_notm}} Dedicated offers fewer configuration options and features than a cluster in {{site.data.keyword.Bluemix_notm}} Public.<br><br>For more information about the differences between {{site.data.keyword.Bluemix_notm}} Public and {{site.data.keyword.Bluemix_notm}} Dedicated, see [About the Dedicated cloud environment](/docs/containers?topic=containers-dedicated#dedicated_environment). 
- </td>
- </tr>
- <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Private
  </td>
  <td>{{site.data.keyword.Bluemix_notm}} Private is an application platform that can be installed locally on your own machines. You might choose to use Kubernetes in {{site.data.keyword.Bluemix_notm}} Private when you need to develop and manage on-prem, containerized apps in your own controlled environment behind a firewall. <br><br>For more information, see the [{{site.data.keyword.Bluemix_notm}} Private product documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
@@ -90,7 +84,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Blue
  <tr>
  <td>Hybrid setup
  </td>
- <td>Hybrid is the combined use of services that run in {{site.data.keyword.Bluemix_notm}} Public or Dedicated and other services that run on-prem, such as an app in {{site.data.keyword.Bluemix_notm}} Private. Examples for a hybrid setup: <ul><li>Provisioning a cluster with {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Public but connecting that cluster to an on-prem database.</li><li>Provisioning a cluster with {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Private and deploying an app into that cluster. However, this app might use an {{site.data.keyword.ibmwatson}} service, such as {{site.data.keyword.toneanalyzershort}}, in {{site.data.keyword.Bluemix_notm}} Public.</li></ul><br>To enable communication between services that are running in {{site.data.keyword.Bluemix_notm}} Public or Dedicated and services that are running on-prem, you must [set up a VPN connection](/docs/containers?topic=containers-vpn). For more information, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp).
+ <td>Hybrid is the combined use of services that run in {{site.data.keyword.Bluemix_notm}} Public and other services that run on-prem, such as an app in {{site.data.keyword.Bluemix_notm}} Private. Examples for a hybrid setup: <ul><li>Provisioning a cluster with {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Public but connecting that cluster to an on-prem database.</li><li>Provisioning a cluster with {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} Private and deploying an app into that cluster. However, this app might use an {{site.data.keyword.ibmwatson}} service, such as {{site.data.keyword.toneanalyzershort}}, in {{site.data.keyword.Bluemix_notm}} Public.</li></ul><br>To enable communication between services that are running in {{site.data.keyword.Bluemix_notm}} Public and services that are running on-prem, you must [set up a VPN connection](/docs/containers?topic=containers-vpn). For more information, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp).
  </td>
  </tr>
  </tbody>
@@ -125,5 +119,4 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Logging and monitoring](/docs/containers?topic=containers-health#logging)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Option to provision your worker nodes on physical (bare metal) servers](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Option to provision bare metal workers with Trusted Compute](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|[Available in {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Characteristics of free and standard clusters" caption-side="top"}

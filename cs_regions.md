@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -78,7 +78,7 @@ API endpoint: cloud.ibm.com
 
 Get One Time Code from https://identity-2.eu-central.iam.cloud.ibm.com/identity/passcode to proceed.
 Open the URL in the default browser? [Y/n]> y
-One Time Code > 
+One Time Code >
 Authenticating...
 OK
 
@@ -101,7 +101,7 @@ Select a region (or press enter to skip):
 Enter a number> 5
 Targeted region us-south
 
-                      
+
 API endpoint:      https://cloud.ibm.com   
 Region:            us-south   
 User:              first.last@email.com   

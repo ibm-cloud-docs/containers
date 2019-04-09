@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks 
 
@@ -97,7 +97,7 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [{{site.data.keyword.registryshort_notm}} documentation](/docs/services/Registry?topic=registry-index)
+- [{{site.data.keyword.registryshort_notm}} documentation](/docs/services/Registry?topic=registry-getting-started)
 - [{{site.data.keyword.registryshort_notm}} REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/container-registry)
 - [Vulnerability Advisor REST API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/container-registry/va)
 
