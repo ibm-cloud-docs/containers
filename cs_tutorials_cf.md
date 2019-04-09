@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-27"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -50,7 +50,7 @@ This tutorial is intended for Cloud Foundry app developers.
 ## Prerequisites
 {: #cf_prereqs}
 
-- [Create a private image registry in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-index).
+- [Create a private image registry in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-getting-started).
 - [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Ensure you have the following {{site.data.keyword.Bluemix_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
@@ -276,7 +276,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
     ```
     {: screen}
 

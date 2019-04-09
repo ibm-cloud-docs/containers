@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -167,7 +167,7 @@ When the cluster is up and running, you can check out the following tasks:
 -   If you created the cluster in a multizone capable zone, spread worker nodes by [adding a zone to your cluster](#add_zone).
 -   [Install the CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install) or [launch the Kubernetes Terminal to use the CLIs directly in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web) to start working with your cluster.
 -   [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
--   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-index)
+-   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-getting-started)
 -   If you have a firewall, you might need to [open the required ports](/docs/containers?topic=containers-firewall#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 -   [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 -   Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
@@ -467,7 +467,7 @@ To create a cluster:
 -   If you created the cluster in a multizone capable zone, spread worker nodes by [adding a zone to your cluster](#add_zone).
 -   [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
 -   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/)
--   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-index)
+-   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-getting-started)
 - If you have a firewall, you might need to [open the required ports](/docs/containers?topic=containers-firewall#firewall) to use `ibmcloud`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 -   [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 -  Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
