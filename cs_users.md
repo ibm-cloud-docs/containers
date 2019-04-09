@@ -631,8 +631,8 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
         <tr>
         <td>`subjects.attributes`</td>
         <td>Enter the {{site.data.keyword.Bluemix_notm}} IAM details for the individual user or access group that you previously retrieved.
-        <ul><li>For individual users, set `iam_id` for the `name` field. Enter **ibmUniqueId** for the `value` field.</li>
-        <li>For access groups, set `access_group_id` for the `name` field. Enter **ID** for the `value` field.</li></ul></td>
+        <ul><li>For individual users, set `iam_id` for the `name` field. Enter the previously retrieved **ibmUniqueId** for the `value` field.</li>
+        <li>For access groups, set `access_group_id` for the `name` field. Enter the previously retrieved **ID** for the `value` field.</li></ul></td>
         </tr>
         <tr>
         <td>`roles.role_id`</td>
@@ -655,16 +655,16 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
 3.  Apply the {{site.data.keyword.Bluemix_notm}} IAM policy to an individual user or access group.
     *   For individual users:
         ```
-        ibmcloud iam user-policy-create <user@email.com> --file filepath/policy.json
+        ibmcloud iam user-policy-create <user@email.com> --file <filepath>/policy.json
         ```
         {: pre}
     *   For access groups:
         ```
-        ibmcloud iam access-group-policy-create <access_group> --file filepath/policy.json
+        ibmcloud iam access-group-policy-create <access_group> --file <filepath>/policy.json
         ```
         {: pre}
 
-4.  If you assigned only service roles to users, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster-config` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) or otherwise interact with the Kubernetes API. If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, repeat these steps to give the users the platform **Viewer** role.
+4.  If you assigned only service roles to users, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster-config` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) or otherwise interact with the Kubernetes API. If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, [give the users the platform **Viewer** role](#add_users_cli_platform).
 
 5.  For the changes to take effect, the user that is granted access must refresh the cluster configuration.
     ```
@@ -672,7 +672,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
     ```
     {: pre}
 
-6.  **Optional**: Verify the user is added to the corresponding [RBAC role binding or cluster role binding](#role-binding). Note that you must be a cluster administrator (**Manager** service role) to check role bindings and cluster role bindings.
+6.  **Optional**: Verify that the user is added to the corresponding [RBAC role binding or cluster role binding](#role-binding). Note that you must be a cluster administrator (**Manager** service role) to check role bindings and cluster role bindings.
     Check the role binding or cluster role binding for the role.
     *   Reader:
         ```
@@ -695,7 +695,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
         ```
         {: pre}
 
-    For example, if you assign user `user@email.com` and access group `team1` the **Reader** service role and run `kubectl get rolebinding ibm-view -o yaml -n default`, the output looks like the following:
+    **Example output**: For if you assign user `user@email.com` and access group `team1` the **Reader** service role and then run `kubectl get rolebinding ibm-view -o yaml -n default`.
 
     ```
     apiVersion: rbac.authorization.k8s.io/v1
