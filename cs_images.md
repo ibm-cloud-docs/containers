@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-02"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -49,7 +49,7 @@ You can use multiple registries with {{site.data.keyword.containerlong_notm}} to
 |[Public Docker Hub![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/){: #dockerhub}|Use this option to directly use existing public images from Docker Hub in your [Kubernetes deployment![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) when no Dockerfile changes are needed. <p>**Note:** Keep in mind that this option might not meet your organization's security requirements, like access management, vulnerability scanning, or app privacy.</p>|<ul><li>No additional setup is needed for your cluster.</li><li>Includes a variety of open-source applications.</li></ul>|
 {: caption="Public and private image registry options" caption-side="top"}
 
-After you set up an image registry, cluster users can use the images for their app deployments to the cluster.
+After you set up an image registry, cluster users can use the images to deploy apps to the cluster.
 
 Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
