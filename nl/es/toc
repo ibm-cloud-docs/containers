@@ -36,18 +36,32 @@ Servicio Kubernetes de IBM Cloud
 
     {: .topicgroup}
     Administración de clústeres
+        cs_clusters_planning.md
         cs_clusters.md
-        cs_firewall.md
-        cs_network_policy.md
+        cs_cluster_scaling.md
         cs_cluster_update.md
         cs_users.md
+        cs_encrypt.md
         cs_psp.md
-        cs_edge.md
+        cs_pod_priority.md
         cs_health.md
+        cs_performance.md
+        
+    {: .topicgroup}
+    Setting up cluster networking
+        cs_network_ov.md
+        cs_network_cluster.md
+        cs_firewall.md
+        cs_dns.md
+        cs_network_policy.md
+        cs_edge.md
+        cs_istio.md
+        cs_vpn.md
+        cs_subnets.md
 
     cs_images.md
     cs_app.md
-
+    
     {: .topicgroup}
     Sistema de red para exponer apps
         cs_network_planning.md
@@ -65,6 +79,9 @@ Servicio Kubernetes de IBM Cloud
         cs_storage_basics.md
         cs_storage_file.md
         cs_storage_block.md
+        cs_storage_cos.md
+        cs_storage_portworx.md
+        cs_storage_utilities.md
         cs_storage_remove.md
 
     cs_integrations.md
@@ -73,20 +90,28 @@ Servicio Kubernetes de IBM Cloud
     {: .navgroup id="reference"}
     cs_cli_reference.md
     cs_at_events.md
+    
+    {: .topicgroup}
+    Cloud dedicado
+        cs_dedicated.md
+        [En desuso: ejecución de contenedores únicos y escalables](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
+    
+    cs_hybrid.md
+    
+    {: .topicgroup}
+    IBM Cloud Kubernetes Service CLI plug-in reference
+        /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
+        cs_cli_changelog.md
 
     {: .topicgroup}
     Versiones del servicio Kubernetes de IBM Cloud
         cs_versions.md
         cs_versions_changelog.md
-
+        cs_versions_addons.md
+        
     cs_regions.md
-    [Hybrid cloud](cs_hybrid.html#hybrid_iks_icp)
-
-    {: .topicgroup}
-    Cloud dedicado
-        cs_dedicated.md
-        [En desuso: ejecución de contenedores únicos y escalables](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
-    {: .navgroup-end}
+    cs_access_reference.md
+    {: .navgroup-end}        
 
     {: .navgroup id="help"}
     {: .topicgroup}
