@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-10"
 
 keywords: kubernetes, iks
 
@@ -75,89 +75,53 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
    ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
-
-3. Encode the {{site.data.keyword.cos_full_notm}} **GUID** and the **apikey**, or the **access_key_id** and **secret_access_key** that you retrieved earlier to base64 and note all the base64 encoded values. Repeat this command for each parameter to retrieve the base64 encoded value.
+   
+3. Create a Kubernetes secret to store your service credentials. When you create your secret, all values are automatically encoded to base64. 
+   
+   **Example for using the API key:**
    ```
-   echo -n "<key_value>" | base64
+   kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=api-key=<api_key> --from-literal=service-instance-id=<service_instance_guid>
+   ```
+   {: pre}
+   
+   **Example for HMAC authentication:**
+   ```
+   kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=access-key=<access_key_ID> --from-literal=secret-key=<secret_access_key>    
    ```
    {: pre}
 
-4. Create a configuration file to define your Kubernetes secret.
-
-   **Example for using the API key:**
-   ```
-   apiVersion: v1
-   kind: Secret
-   type: ibm/ibmc-s3fs
-   metadata:
-     name: <secret_name>
-     namespace: <namespace>
-   data:
-     api-key: <base64_apikey>
-     service-instance-id: <base64_guid>
-   ```
-   {: codeblock}
-
-   **Example for using HMAC authentication:**
-   ```
-   apiVersion: v1
-   kind: Secret
-   type: ibm/ibmc-s3fs
-   metadata:
-     name: <secret_name>
-     namespace: <namespace>
-   data:
-     access-key: <base64_access_key_id>
-     secret-key: <base64_secret_access_key>
-   ```
-   {: codeblock}
-
    <table>
-   <caption>Understanding the YAML file components</caption>
+   <caption>Understanding the command components</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the command components</th>
    </thead>
    <tbody>
    <tr>
-   <td><code>metadata.name</code></td>
-   <td>Enter a name for your {{site.data.keyword.cos_full_notm}} secret. </td>
+   <td><code>api-key</code></td>
+   <td>Enter the API key that you retrieved from your {{site.data.keyword.cos_full_notm}} service credentials earlier. If you want to use HMAC authentication, specify the <code>access-key</code> and <code>secret-key</code> instead.  </td>
    </tr>
    <tr>
-   <td><code>metadata.namespace</code></td>
-   <td>Specify the namespace where you want to create the secret. The secret must be created in the same namespace where you want to create your PVC and the pod that accesses your {{site.data.keyword.cos_full_notm}} service instance.  </td>
+   <td><code>access-key</code></td>
+   <td>Enter the access key ID that you retrieved from your {{site.data.keyword.cos_full_notm}} service credentials earlier. If you want to use OAuth2 authentication, specify the <code>api-key</code> instead.  </td>
    </tr>
    <tr>
-   <td><code>data.api-key</code></td>
-   <td>Enter the API key that you retrieved from your {{site.data.keyword.cos_full_notm}} service credentials earlier. The API key must be base64 encoded. If you want to use HMAC authentication, specify the <code>data/access-key</code> and <code>data/secret-key</code> instead.  </td>
+   <td><code>secret-key</code></td>
+   <td>Enter the secret access key that you retrieved from your {{site.data.keyword.cos_full_notm}} service credentials earlier. If you want to use OAuth2 authentication, specify the <code>api-key</code> instead.</td>
    </tr>
    <tr>
-   <td><code>data.access-key</code></td>
-   <td>Enter the access key ID that you retrieved from your {{site.data.keyword.cos_full_notm}} service credentials earlier. The access key ID must be base64 encoded. If you want to use OAuth2 authentication, specify the <code>data/api-key</code> instead.  </td>
-   </tr>
-   <tr>
-   <td><code>data.secret-key</code></td>
-   <td>Enter the secret access key that you retrieved from your {{site.data.keyword.cos_full_notm}} service credentials earlier. The secret access key must be base64 encoded. If you want to use OAuth2 authentication, specify the <code>data/api-key</code> instead.</td>
-   </tr>
-   <tr>
-   <td><code>data.service-instance-id</code></td>
-   <td>Enter the GUID of your {{site.data.keyword.cos_full_notm}} service instance that you retrieved earlier. The GUID must be base64 encoded. </td>
+   <td><code>service-instance-id</code></td>
+   <td>Enter the GUID of your {{site.data.keyword.cos_full_notm}} service instance that you retrieved earlier. </td>
    </tr>
    </tbody>
    </table>
 
-5. Create the secret in your cluster.
-   ```
-   kubectl apply -f filepath/secret.yaml
-   ```
-   {: pre}
-
-6. Verify that the secret is created in your namespace.
+4. Verify that the secret is created in your namespace.
    ```
    kubectl get secret
    ```
    {: pre}
 
-7. [Install the {{site.data.keyword.cos_full_notm}} plug-in](#install_cos), or if you already installed the plug-in, [decide on the configuration]( #configure_cos) for your {{site.data.keyword.cos_full_notm}} bucket.
+5. [Install the {{site.data.keyword.cos_full_notm}} plug-in](#install_cos), or if you already installed the plug-in, [decide on the configuration]( #configure_cos) for your {{site.data.keyword.cos_full_notm}} bucket.
 
 ## Installing the IBM Cloud Object Storage plug-in
 {: #install_cos}
@@ -181,7 +145,7 @@ Before you begin: [Log in to your account. Target the appropriate region and, if
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
       ```
       {: screen}
 

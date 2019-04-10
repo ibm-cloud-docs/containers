@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-09"
 
 keywords: kubernetes, iks
 
@@ -45,6 +45,14 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </thead>
 <tbody>
 <tr>
+<td>0.2.99</td>
+<td>09 Apr 2019</td>
+<td><ul>
+<li>Updates help text.</li>
+<li>Updates the Go version to 1.12.2.</li>
+</ul></td>
+</tr>
+<tr>
 <td>0.2.95</td>
 <td>03 Apr 2019</td>
 <td><ul>
@@ -54,14 +62,14 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <li>Updates translations of help text.</li>
 <li>Updates short links to documentation in help text.</li>
 <li>Fixes a bug where JSON error messages printed in an incorrect format.</li>
-<li>Fixes a bug where using the silent flag (`-s`) on some commands prevented some errors from printing.</li>
+<li>Fixes a bug where using the silent flag (`-s`) on some commands prevented errors from printing.</li>
 </ul></td>
 </tr>
 <tr>
 <td>0.2.80</td>
 <td>19 Mar 2019</td>
 <td><ul>
-<li>Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) in standard clusters that run Kubernetes version 1.11 or later in [VRF-enabled accounts](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started). For information about how to use the following commands, see [Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) and [Setting up the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).<ul>
+<li>Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) in standard clusters that run Kubernetes version 1.11 or later in [VRF-enabled accounts](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).<ul>
 <li>Adds the `--private-service-endpoint` and `--public-service-endpoint` flags to the [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) command.</li>
 <li>Adds the **Public Service Endpoint URL** and **Private Service Endpoint URL** fields to the output of <code>ibmcloud ks cluster-get</code>.</li>
 <li>Adds the [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint) command.</li>
