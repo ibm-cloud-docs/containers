@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-10"
 
 keywords: kubernetes, iks
 
@@ -672,7 +672,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
     ```
     {: pre}
 
-6.  **Optional**: Verify that the user is added to the corresponding [RBAC role binding or cluster role binding](#role-binding). Note that you must be a cluster administrator (**Manager** service role) to check role bindings and cluster role bindings.
+6.  **Optional**: Verify that the user is added to the corresponding [RBAC role binding or cluster role binding](#role-binding). Note that you must be a cluster administrator (**Manager** service role in all namespaces) to check role bindings and cluster role bindings.
     Check the role binding or cluster role binding for the role.
     *   Reader:
         ```
