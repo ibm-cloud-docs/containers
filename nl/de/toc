@@ -111,7 +111,6 @@ IBM Cloud Kubernetes-Service
         
     cs_regions.md
     cs_access_reference.md
-    cs_integrations_overview.md
     {: .navgroup-end}    
 
     {: .navgroup id="help"}
