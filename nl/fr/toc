@@ -36,14 +36,28 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Administration de clusters
+        cs_clusters_planning.md
         cs_clusters.md
-        cs_firewall.md
-        cs_network_policy.md
+        cs_cluster_scaling.md
         cs_cluster_update.md
         cs_users.md
+        cs_encrypt.md
         cs_psp.md
-        cs_edge.md
+        cs_pod_priority.md
         cs_health.md
+        cs_performance.md
+        
+    {: .topicgroup}
+    Setting up cluster networking
+        cs_network_ov.md
+        cs_network_cluster.md
+        cs_firewall.md
+        cs_dns.md
+        cs_network_policy.md
+        cs_edge.md
+        cs_istio.md
+        cs_vpn.md
+        cs_subnets.md
 
     cs_images.md
     cs_app.md
@@ -65,6 +79,9 @@ IBM Cloud Kubernetes Service
         cs_storage_basics.md
         cs_storage_file.md
         cs_storage_block.md
+        cs_storage_cos.md
+        cs_storage_portworx.md
+        cs_storage_utilities.md
         cs_storage_remove.md
 
     cs_integrations.md
