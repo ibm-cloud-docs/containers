@@ -456,7 +456,7 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
     ```
     {: pre}
 
-
+</br></br>
 **{{site.data.keyword.containerlong_notm}} API**:
 * [Get started with the API](/docs/containers?topic=containers-cs_cli_install#cs_api).
 * [View documentation on the API commands](https://containers.cloud.ibm.com/swagger-api/).

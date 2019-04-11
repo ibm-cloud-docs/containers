@@ -502,7 +502,6 @@ lastupdated: "2019-04-11"
 * [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
 
 [Exposing apps with load balancers](/docs/containers?topic=containers-loadbalancer#loadbalancer)
-* [Sample YAMLs](/docs/containers?topic=containers-loadbalancer#sample)
 * [Overview](/docs/containers?topic=containers-loadbalancer#lb_overview)
 * [Comparison of version 1.0 and 2.0 load balancers](/docs/containers?topic=containers-loadbalancer#comparison)
 * [v2.0: Components and architecture (beta)](/docs/containers?topic=containers-loadbalancer#planning_ipvs)
