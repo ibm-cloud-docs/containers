@@ -433,9 +433,6 @@ To use [{{site.data.keyword.la_full}}](/docs/services/Log-Analysis-with-LogDNA?t
 
 To get started, set up LogDNA for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
 
-
-
-
 ### Setting up monitoring with {{site.data.keyword.mon_full_notm}}
 {: #istio_health_sysdig}
 
