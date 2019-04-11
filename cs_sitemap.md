@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-04-11"
 
 ---
 
@@ -957,17 +957,19 @@ lastupdated: "2019-04-08"
 [Cluster add-ons changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 * [Ingress ALB add-on changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 
-## Regions and zones
+## Locations
 {: #sitemap-locations}
 
-[Regions and zones](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [Locations in {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
-* [Regions in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#container_regions)
-  * [Logging in to a different {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones#container_login_endpoints)
-  * [Using {{site.data.keyword.containerlong_notm}} API commands](/docs/containers?topic=containers-regions-and-zones#containers_api)
-* [Zones in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
+[Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
+  * [Available locations](/docs/containers?topic=containers-regions-and-zones#available-locations)
+  * [Single zone and multizone locations in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
   * [Single-zone clusters](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
   * [Multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
+* [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
+  * [Logging in to {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
+  * [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
+* [Deprecated: Previous {{site.data.keyword.Bluemix_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 ## User access permissions
 {: #sitemap-user-access}

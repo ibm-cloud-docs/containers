@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -180,12 +180,6 @@ To use `kubectl` commands:
 3.  To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks clusters`. **Note**: You must have [**Viewer** access](/docs/containers?topic=containers-users#platform) to the resource group.
     ```
     ibmcloud target -g <resource_group_name>
-    ```
-    {: pre}
-
-4.  To create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, target the region.
-    ```
-    ibmcloud ks region-set
     ```
     {: pre}
 

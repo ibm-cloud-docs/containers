@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -70,7 +70,7 @@ Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for 
 Follow the steps to prepare the setup of your cluster.
 {: shortdesc}
 
-1.  Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}. To allow your cluster to pull images from the private registry, you also need the **Administrator** platform role for {{site.data.keyword.registrylong_notm}}. 
+1.  Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}. To allow your cluster to pull images from the private registry, you also need the **Administrator** platform role for {{site.data.keyword.registrylong_notm}}.
     1.  From the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) menu bar, click **Manage > Access (IAM)**.
     2.  Click the **Users** page, and then from the table, select yourself.
     3.  From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}. **Note**: If you have the **Administrator** role for {{site.data.keyword.containershort_notm}} in only one resource group or region instead of the entire account, you must have at least the **Viewer** role at the account level to see the account's VLANs.
@@ -109,7 +109,7 @@ Free clusters have a life span of 30 days. After that time, the cluster expires 
 
 1. [Prepare to create a cluster](#cluster_prepare) to ensure that you have the correct {{site.data.keyword.Bluemix_notm}} account setup and user permissions, and to decide on the cluster setup and the resource group that you want to use.
 2. In the [catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **{{site.data.keyword.containershort_notm}}** to create a cluster.
-3. Select a location in which to deploy your cluster. **Note**: You cannot create free clusters in the Washington DC (US East) or Tokyo (AP North) locations.
+3. Select a geography in which to deploy your cluster. Your cluster is created in a zone within this geography.
 4. Select the **Free** cluster plan.
 5. Give your cluster a name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 
@@ -244,16 +244,17 @@ To create a cluster:
       ```
       {: pre}
 
-    4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud ks region-set`.
+    4. **Free clusters**: If you want to create a free cluster in a specific region, you must target that region by running `ibmcloud ks region-set`.
 
-4.  Create a cluster. Standard clusters can be created in any region and available zone. Free clusters cannot be created in the US East or AP North regions and corresponding zones, and you cannot select the zone.
+4.  Create a cluster. Standard clusters can be created in any region and available zone. Free clusters can be created in the region that you target with the `ibmcloud ks region-set` command, but you cannot select the zone.
 
-    1.  **Standard clusters**: Review the zones that are available. The zones that are shown depend on the {{site.data.keyword.containerlong_notm}} region that you are logged in. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
-
+    1.  **Standard clusters**: Review the zones that are available. To see zones in a specific location, such as a geography, country, or a metro, you can specify the location in the `--locations` flag. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
         ```
-        ibmcloud ks zones
+        ibmcloud ks zones [--locations <location>]
         ```
         {: pre}
+        When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.
+        {: note}
 
     2.  **Standard clusters**: Choose a zone and review the machine types available in that zone. The machine type specifies the virtual or physical compute hosts that are available to each worker node.
 

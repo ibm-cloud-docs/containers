@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-04-11"
 
 keywords: kubernetes, iks
 
@@ -43,6 +43,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>10 Apr 2019</td>
+<td>[Global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint)</td>
+<td>By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources that you have access to in all locations. You are not required to target a region to work with resources. To get started with the global endpoint, update your {{site.data.keyword.containerlong_notm}} plug-in to 0.3.XX by running `ibmcloud plugin update container-service`.</td>
+</tr>
 <tr>
 <td>8 Apr 2019</td>
 <td>[Kubernetes Terminal in your web browser (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
