@@ -407,7 +407,7 @@ You can organize your resources across {{site.data.keyword.Bluemix_notm}} servic
 ### Logging in to {{site.data.keyword.Bluemix_notm}}
 {: #login-ic}
 
-When you log in to the {{site.data.keyword.Bluemix_notm}} (`ibmcloud`) command line, you are prompted to select a region. However, this region does not affect the {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`) endpoint, which still uses the global endpoint. However, you do still need to target the resource group that your cluster is in if it is not in the default resource group.
+When you log in to the {{site.data.keyword.Bluemix_notm}} (`ibmcloud`) command line, you are prompted to select a region. However, this region does not affect the {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`) endpoint, which still uses the global endpoint. Note that you do still need to target the resource group that your cluster is in if it is not in the default resource group.
 {: shortdesc}
 
 To log in to the {{site.data.keyword.Bluemix_notm}} global API endpoint and target the resource group that your cluster is in:
