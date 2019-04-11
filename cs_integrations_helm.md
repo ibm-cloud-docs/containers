@@ -63,7 +63,7 @@ To install Helm in a cluster with public access:
 1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
 
 2. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod. 
-   1. Check if you already installed Tiller in your cluster. 
+   1. Check if you already installed Tiller with a Kubernetes service account in your cluster. 
       ```
       kubectl get serviceaccount --all-namespaces | grep tiller
       ```
@@ -75,17 +75,17 @@ To install Helm in a cluster with public access:
       ```
       {: screen}
       
-      If Tiller is not installed in your cluster, no CLI output is returned. 
+      The example output includes the Kubernetes namespace and name of the service account where Tiller for Tiller. If Tiller is not installed with a service account in your cluster, no CLI output is returned. 
       
    2. Set up Tiller with a service account and cluster role binding in your cluster. 
-      - **If Tiller is installed:** 
-        1. Create a service account and cluster role binding for Tiller. Replace <namespace> with the namespace where Tiller is installed in your cluster. 
+      - **If Tiller is installed with a service account:** 
+        1. Create a cluster role binding for the Tiller service account. Replace `<namespace>` with the namespace where Tiller is installed in your cluster. 
            ```
            kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=<namespace>:tiller -n <namespace>
            ```
            {: pre}
   
-        2. Update Tiller. Replace <tiller_service_account_name> with the name of the Kubernetes service account for Tiller that you retrieved in the previous step. 
+        2. Update Tiller. Replace `<tiller_service_account_name>` with the name of the Kubernetes service account for Tiller that you retrieved in the previous step. 
            ```
            helm init --upgrade --service-account <tiller_service_account_name>
            ```
@@ -105,7 +105,7 @@ To install Helm in a cluster with public access:
            ```
            {: screen}
         
-      - **If Tiller is not installed:** 
+      - **If Tiller is not installed with a service account:** 
         1. Create a Kubernetes service account and cluster role binding for Tiller in the `kube-system` namespace of your cluster. 
            ```
            kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=kube-system:tiller -n kube-system
