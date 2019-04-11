@@ -65,8 +65,8 @@ The versions of each managed add-on are tested by {{site.data.keyword.Bluemix_no
    ```
    OK
    Name      Version
-   istio     1.0.5 *(1.0.6 latest)
-   knative   0.3.0
+   istio     1.0.6 *(1.1.2 latest)
+   knative   0.4.1
    ```
    {: screen}
 
@@ -177,7 +177,3 @@ The versions of each managed add-on are tested by {{site.data.keyword.Bluemix_no
        ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
        ```
        {: pre}
-
-<br />
-
-
