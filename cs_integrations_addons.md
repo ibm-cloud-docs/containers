@@ -178,3 +178,5 @@ The versions of each managed add-on are tested by {{site.data.keyword.Bluemix_no
        ```
        {: pre}
 
+<br />
+
