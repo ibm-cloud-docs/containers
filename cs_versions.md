@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-12"
 
 keywords: kubernetes, iks
 
@@ -496,6 +496,10 @@ The following table shows the actions that you must take after you update the Ku
 The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`. If you use your own logging solution that monitors the previous directory, update accordingly.</td>
 </tr>
 <tr>
+<td>{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) support</td>
+<td>Clusters that run Kubernetes version 1.11 or later support IAM [access groups](/docs/iam?topic=iam-groups#groups) and [service IDs](/docs/iam?topic=iam-serviceids#serviceids). You can now use these features to [authorize access to your cluster](/docs/containers?topic=containers-users#users).</td>
+</tr>
+<tr>
 <td>Refresh Kubernetes configuration</td>
 <td>The OpenID Connect configuration for the cluster's Kubernetes API server is updated to support {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) access groups. As a result, you must refresh your cluster's Kubernetes configuration after the master Kubernetes v1.11 update by running `ibmcloud ks cluster-config --cluster <cluster_name_or_ID>`. With this command, the configuration is applied to role bindings in the `default` namespace.<br><br>If you do not refresh the configuration, cluster actions fail with the following error message: `You must be logged in to the server (Unauthorized).`</td>
 </tr>
@@ -598,7 +602,7 @@ You need to take additional actions if you use [Kubernetes or Calico network pol
 The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and `calicoctl` to search policies for impacts.
 {: note}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Get your cluster master IP address.
     ```
@@ -953,7 +957,7 @@ You need to take additional actions if you use [Kubernetes or Calico network pol
 The following steps describe how to update your Kubernetes network policies. To update Calico network policies, repeat these steps with some minor policy syntax changes and use `calicoctl` to search policies for impacts.
 {: note}
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Get your cluster master IP address.
     ```
