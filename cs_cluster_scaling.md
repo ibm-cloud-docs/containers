@@ -63,7 +63,7 @@ For more information, see the Kubernetes Cluster Autoscaler FAQs for [How does s
 
 **Can I change how scale-up and scale-down work?**<br>
 You can customize settings or use other Kubernetes resources to affect how scaling up and down work.
-  *   **Scale-up**: [Customize the cluster autoscaler Helm chart values](#ca_chart_values) such as `scanInterval`, `expander`, `skipNodes`, or `maxNodeProvisionTime`. Review ways to [overprovision worker nodes](#ca_scaleup) so that you can scale up worker nodes before a worker pool runs out of resources. You can also [set up Kubernetes pod budget disruptions and pod priority cutoffs](#scalable-practices-apps) to affect how scaling up works.
+*   **Scale-up**: [Customize the cluster autoscaler Helm chart values](#ca_chart_values) such as `scanInterval`, `expander`, `skipNodes`, or `maxNodeProvisionTime`. Review ways to [overprovision worker nodes](#ca_scaleup) so that you can scale up worker nodes before a worker pool runs out of resources. You can also [set up Kubernetes pod budget disruptions and pod priority cutoffs](#scalable-practices-apps) to affect how scaling up works.
 *   **Scale-down**: [Customize the cluster autoscaler Helm chart values](#ca_chart_values) such as `scaleDownUnneededTime`, `scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete`, or `scaleDownUtilizationThreshold`.
 
 **How is this behavior different from worker pools that are not manage by the cluster autoscaler?**<br>
