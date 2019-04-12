@@ -162,6 +162,7 @@ Make the most out of the cluster autoscaler by using the following strategies fo
 **Why are my autoscaled worker pools unbalanced?**<br>
 During a scale-up, the cluster autoscaler balances nodes across zones, with a permitted difference of plus or minus one (+/- 1) worker node. Your pending workloads might not request enough capacity to make each zone balanced. In this case, if you want to manually balance the worker pools, [update your cluster autoscaler configmap](#ca_cm) to remove the unbalanced worker pool. Then run the `ibmcloud ks worker-pool-rebalance` [command](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance), and add the worker pool back to the cluster autoscaler configmap.
 
+<br>
 **Why can't I resize or rebalance my worker pool?**<br>
 When the cluster autoscaler is enabled for a worker pool, you cannot [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) your worker pools. You must [edit the configmap](#ca_cm) to change the worker pool minimum or maximum sizes, or disable cluster autoscaling for that worker pool.
 
