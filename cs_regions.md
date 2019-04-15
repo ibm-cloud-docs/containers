@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 
 
-
 # Regions and zones
 {: #regions-and-zones}
 
@@ -34,12 +33,12 @@ A region is a specific geographical location where you can deploy apps, services
 
 _{{site.data.keyword.containerlong_notm}} regions and zones_
 
-{{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, its resources remain in the region that you deploy the cluster to.
+ {{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, its resources remain in the region that you deploy the cluster to.
 
-You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
+ You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
 {: note}
 
-| {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.Bluemix_notm}} location |
+ | {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.Bluemix_notm}} location |
 | --- | --- |
 | AP North (standard clusters only) | Tokyo |
 | AP South | Sydney |
@@ -49,7 +48,7 @@ You can create standard clusters in every supported {{site.data.keyword.containe
 | US South | Dallas |
 {: caption="Supported Kubernetes Service regions and corresponding IBM Cloud locations." caption-side="top"}
 
-<br />
+ <br />
 
 
 ## Locations in {{site.data.keyword.Bluemix_notm}}
@@ -102,14 +101,14 @@ Enter a number> 5
 Targeted region us-south
 
 
-API endpoint:      https://cloud.ibm.com   
-Region:            us-south   
-User:              first.last@email.com   
-Account:           TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321  
-Resource group:    default   
-CF API endpoint:      
-Org:                  
-Space:                
+API endpoint:      https://cloud.ibm.com   	
+Region:            us-south   	
+User:              first.last@email.com   	
+Account:           TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321  	
+Resource group:    default   	
+CF API endpoint:      	
+Org:                  	
+Space:                	
 
 ...
 ```
@@ -127,7 +126,7 @@ By using {{site.data.keyword.containerlong_notm}} regions, you can create or acc
 You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
 {: note}
 
-Supported {{site.data.keyword.containerlong_notm}} regions:
+ Supported {{site.data.keyword.containerlong_notm}} regions:
   * AP North (standard clusters only)
   * AP South
   * EU Central
@@ -160,13 +159,13 @@ To quickly switch regions, run [`ibmcloud ks region-set`](/docs/containers?topic
 To interact with the {{site.data.keyword.containerlong_notm}} API, enter the command type and append `/v1/command` to the global endpoint.
 {:shortdesc}
 
-Example of `GET /clusters` API:
+ Example of `GET /clusters` API:
   ```
   GET https://containers.cloud.ibm.com/v1/clusters
   ```
   {: codeblock}
 
-</br>
+ </br>
 
 To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header. To list available regions, run `ibmcloud ks regions`.
 {: tip}
@@ -257,10 +256,10 @@ In a multizone cluster, the master node is deployed in a multizone-capable zone 
 1.  Worker nodes are spread across multiple zones in one region to provide more availability for your cluster. The master remains in the same multizone-capable zone that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes through a regional endpoint.
 
 2.  Other cluster resources, such as storage, networking, compute, or apps running in pods, vary in how they deploy to the zones in your multizone cluster. For more information, review these topics:
-    * Setting up [file storage](/docs/containers?topic=containers-file_storage#add_file) and [block storage](/docs/containers?topic=containers-block_storage#add_block) in multizone clusters
-    * [Enabling public or private access to an app by using a LoadBalancer service in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-    * [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress#planning)
-    * [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability)
+  * Setting up [file storage](/docs/containers?topic=containers-file_storage#add_file) and [block storage](/docs/containers?topic=containers-block_storage#add_block) in multizone clusters
+  * [Enabling public or private access to an app by using a LoadBalancer service in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+  * [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress#planning)
+  * [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability)
 
 3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
 

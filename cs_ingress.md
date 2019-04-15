@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -24,7 +24,7 @@ subcollection: containers
 
 
 
-# Exposing apps with Ingress
+# HTTPS load balancing with Ingress application load balancers (ALB)
 {: #ingress}
 
 Expose multiple apps in your Kubernetes cluster by creating Ingress resources that are managed by the IBM-provided application load balancer in {{site.data.keyword.containerlong}}.
@@ -298,7 +298,7 @@ Expose apps that are inside your cluster to the public by using the public Ingre
 Before you begin:
 
 * Review the Ingress [prerequisites](#config_prereqs).
-* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### Step 1: Deploy apps and create app services
 {: #public_inside_1}
@@ -628,7 +628,7 @@ Before you begin:
 
 * Review the Ingress [prerequisites](#config_prereqs).
 * Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
-* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To expose apps that are outside your cluster to the public:
 

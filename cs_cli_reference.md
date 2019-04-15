@@ -328,6 +328,40 @@ ibmcloud plugin list
 
 </br>
 
+<table summary="Network load balancer (NLB) commands table">
+<caption>Network load balancer (NLB) commands</caption>
+<col width = 25%>
+<col width = 25%>
+<col width = 25%>
+  <thead>
+    <tr>
+      <th colspan=4>Network load balancer (NLB) commands</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-add](#cs_nlb-dns-add)</td>
+      <td>[ibmcloud ks nlb-dns-create](#cs_nlb-dns-create)</td>
+      <td>[ibmcloud ks nlb-dns-ls](#cs_nlb-dns-ls)</td>
+      <td>[ibmcloud ks nlb-dns-rm](#cs_nlb-dns-rm)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-monitor-configure](#cs_nlb-dns-monitor-configure)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-get](#cs_nlb-dns-monitor-get)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-disable](#cs_nlb-dns-monitor-disable)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-enable](#cs_nlb-dns-monitor-enable)</td>
+    </tr>
+    <tr>
+      <td>[ibmcloud ks nlb-dns-monitor-ls](#cs_nlb-dns-monitor-ls)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-status](#cs_nlb-dns-monitor-status)</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+</br>
+
 <table summary="Region commands table">
 <caption>Region commands</caption>
 <col width="25%">
@@ -3523,6 +3557,418 @@ ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
 
 <br />
 
+## Network load balancer commands (`nlb-dns`)
+{: #nlb-dns}
+
+Use this group of commands to create and manage host names for network load balancer (NLB) IP addresses and health check monitors for host names. For more information, see [Registering a load balancer host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
+{: shortdesc}
+
+### ibmcloud ks nlb-dns-add
+{: #cs_nlb-dns-add}
+
+Add an network load balancer (NLB) IP to an existing host name that you created with the [`ibmcloud ks nlb-dns-create` command](#cs_nlb-dns-create).
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-add --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+For example, in a multizone cluster, you might create an NLB in each zone to expose an app. You register an NLB IP in one zone with a host name by running `ibmcloud ks nlb-dns-create`, so now you can add the NLB IPs from the other zones to this existing host name. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that NLB. Note that you must run the following command for each IP address that you want to add.
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>The NLB IP that you want to add to the hostname. To see your NLB IPs, run <code>kubectl get svc</code>.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns-list</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-create
+{: #cs_nlb-dns-create}
+
+Publicly expose your app by creating a DNS host name to register a network load balancer (NLB) IP.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-create --cluster CLUSTER --ip IP [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>The network load balancer IP address that you want to register. To see your NLB IPs, run <code>kubectl get svc</code>. Note that you can initially create the host name with only one IP address. If you have NLBs in each zone of a multizone cluster that expose one app, you can add the IPs of the other NLBs to the host name by running the [`ibmcloud ks nlb-dns-add` command](#cs_nlb-dns-add).</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-create --cluster mycluster --ip 1.1.1.1
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-ls
+{: #cs_nlb-dns-ls}
+
+List the network load balancer host names and IP addresses that are registered in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-ls --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-ls --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-rm
+{: #cs_nlb-dns-rm}
+
+Remove a network load balancer IP address from a host name. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it. Note that you must run this command for each IP address that you want to remove.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>The NLB IP that you want to remove. To see your NLB IPs, run <code>kubectl get svc</code>.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns-list</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-monitor
+{: #cs_nlb-dns-monitor}
+
+Create, modify, and view health check monitors for network load balancer host names in a cluster. This command must be combined with one of the following subcommands.
+{: shortdesc}
+
+#### ibmcloud ks nlb-dns-monitor-configure
+{: #cs_nlb-dns-monitor-configure}
+
+Configure and optionally enable a health check monitor for an existing NLB host name in a cluster. When you enable a monitor for your host name, the monitor health checks the NLB IP in each zone and keeps the DNS lookup results updated based on these health checks.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-configure --cluster CLUSTER --nlb-host HOST NAME [--enable] [--desc DESCRIPTION] [--type TYPE] [--method METHOD] [--path PATH] [--timeout TIMEOUT] [--retries RETRIES] [--interval INTERVAL] [--port PORT] [--header HEADER] [--expected-body BODY STRING] [--expected-codes HTTP CODES] [--follows-redirects TRUE] [--allows-insecure TRUE] [--json] [-s]
+```
+{: pre}
+
+You can use this command to create and enable a new health check monitor, or to update the settings for an existing health check monitor. To create a new monitor, include the `--enable` flag and the flags for all settings that you want to configure. To update an existing monitor, include only the flags for the settings that you want to change.
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster where the host name is registered.</dd>
+
+<dt><code>--nlb-host <em>HOST NAME</em></code></dt>
+<dd>The host name to configure a health check monitor for. To list host names, run <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--enable</code></dt>
+<dd>Include this flag to create and enable a new health check monitor for a host name.</dd>
+
+<dt><code>--description <em>DESCRIPTION</em></code></dt>
+<dd>A description of the health monitor.</dd>
+
+<dt><code>--type <em>TYPE</em></code></dt>
+<dd>The protocol to use for the health check: <code>HTTP</code>, <code>HTTPS</code>, or <code>TCP</code>. Default: <code>HTTP</code></dd>
+
+<dt><code>--method <em>METHOD</em></code></dt>
+<dd>The method to use for the health check. Default for <code>type</code> <code>HTTP</code> and <code>HTTPS</code>: <code>GET</code>. Default for <code>type</code> <code>TCP</code>: <code>connection_established</code>.</dd>
+
+<dt><code>--path <em>PATH</em></code></dt>
+<dd>When <code>type</code> is <code>HTTPS</code>: The endpoint path to health check against. Default: <code>/</code></dd>
+
+<dt><code>--timeout <em>TIMEOUT</em></code></dt>
+<dd>The timeout, in seconds, before the IP is considered unhealthy. Default: <code>5</code></dd>
+
+<dt><code>--retries <em>RETRIES</em></code></dt>
+<dd>When a timeout occurs, the number of retries to attempt before the IP is considered unhealthy. Retries are attempted immediately. Default: <code>2</code></dd>
+
+<dt><code>--interval <em>INTERVAL</em></code></dt>
+<dd>The interval, in seconds, between each health check. Short intervals might improve failover time, but increase load on the IPs. Default: <code>60</code></dd>
+
+<dt><code>--port <em>PORT</em></code></dt>
+<dd>The port number to connect to for the health check. When <code>type</code> is <code>TCP</code>, this parameter is required. When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>, define the port only if you use a port other than 80 for HTTP or 443 for HTTPS. Default for TCP: <code>0</code>. Default for HTTP: <code>80</code>. Default for HTTPS: <code>443</code>.</dd>
+
+<dt><code>--header <em>HEADER</em></code></dt>
+<dd>When <code>type</code> is <code>HTTPS</code> or <code>HTTPS</code>: The HTTP request headers to send in the health check, such as a Host header. The User-Agent header cannot be overridden.</dd>
+
+<dt><code>--expected-body <em>BODY STRING</em></code></dt>
+<dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: A case-insensitive sub-string that the health check looks for in the response body. If this string is not found, the IP is considered unhealthy.</dd>
+
+<dt><code>--expected-codes <em>HTTP CODES</em></code></dt>
+<dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: HTTP codes that the health check looks for in the response. If the HTTP code is not found, the IP is considered unhealthy. Default: <code>2xx</code></dd>
+
+<dt><code>--allows-insecure <em>TRUE</em></code></dt>
+<dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: Set to <code>true</code> to not validate the certificate.</dd>
+
+<dt><code>--follows-redirects <em>TRUE</em></code></dt>
+<dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: Set to <code>true</code> to follow any redirects that are returned by the IP.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-get
+{: #cs_nlb-dns-monitor-get}
+
+View the settings for an existing health check monitor.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-get --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-disable
+{: #cs_nlb-dns-monitor-disable}
+
+Disable an existing health check monitor for a host name in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-disable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-enable
+{: #cs_nlb-dns-monitor-enable}
+
+Enable a health check monitor that you configured.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-enable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+Note that the first time you create a health check monitor, you must configure and enable it with the `ibmcloud ks nlb-dns-monitor-configure` command. Use the `ibmcloud ks nlb-dns-monitor-enable` command only to enable a monitor that you configured but did not yet enable, or to re-enable a monitor that you previously disabled.
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-ls
+{: #cs_nlb-dns-monitor-ls}
+
+List the health check monitor settings for each NLB host name in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-ls --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-monitor-ls --cluster mycluster
+```
+{: pre}
+
+#### ibmcloud ks nlb-dns-monitor-status
+{: #cs_nlb-dns-monitor-status}
+
+List the health check status for the IPs behind NLB host names in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-status --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>-- <em></em></code></dt>
+<dd>Include this flag to view the status for only one host name. To list host names, run <code>ibmcloud ks nlb-dns list --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-monitor-status --cluster mycluster
+```
+{: pre}
+
+<br />
+
 
 ## Region commands
 {: #region_commands}
@@ -4531,5 +4977,3 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
-
-

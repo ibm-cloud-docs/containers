@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -43,6 +43,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>15 Apr 2019</td>
+<td>[Registering a network load balancer (NLB) host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)</td>
+<td>After you set up public network load balancers (NLBs) to expose your apps to the internet, you can now create DNS entries for the NLB IPs by creating host names. {{site.data.keyword.Bluemix_notm}} takes care of generating and maintaining the wildcard SSL certificate for the host name for you. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each host name.</td>
+</tr>
 <tr>
 <td>8 Apr 2019</td>
 <td>[Kubernetes Terminal in your web browser (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)</td>
@@ -202,8 +207,8 @@ Need help or have feedback on the cluster autoscaler? If you are an external use
 </tr>
 <tr>
 <td>7 November</td>
-<td>Load balancer 2.0 (beta)</td>
-<td>You now can choose between [load balancer 1.0 or 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) to securely expose your cluster apps to the public.</td>
+<td>Network load balancer 2.0 (beta)</td>
+<td>You now can choose between [NLB 1.0 or 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) to securely expose your cluster apps to the public.</td>
 </tr>
 <tr>
 <td>7 November</td>

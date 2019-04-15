@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-12"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -55,45 +55,47 @@ If your cluster has enabled the public service endpoint, you can install the Hel
 {: shortdesc}
 
 Before you begin:
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - To install Tiller with a Kubernetes service account and cluster role binding in the `kube-system` namespace, make sure that you have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
 
 To install Helm in a cluster with public access:
 
 1. Install the <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
 
-2. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following YAML file from the [{{site.data.keyword.Bluemix_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml).
-    ```
-    kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml
-    ```
-    {: pre}
-
-3. Initialize the Helm CLI and install Tiller in your cluster with the service account that you created.
+2. Check if you already installed Tiller with a Kubernetes service account in your cluster. 
    ```
-   helm init --service-account tiller
+   kubectl get serviceaccount --all-namespaces | grep tiller
    ```
    {: pre}
-
-4.  Verify that the installation is successful.
-    1.  Verify that the Tiller service account is created.
+      
+   Example output if Tiller is installed: 
+   ```
+   kube-system      tiller                               1         189d
+   ```
+   {: screen}
+      
+   The example output includes the Kubernetes namespace and name of the service account for Tiller. If Tiller is not installed with a service account in your cluster, no CLI output is returned. 
+      
+3. **Important**: To maintain cluster security, set up Tiller with a service account and cluster role binding in your cluster. 
+   - **If Tiller is installed with a service account:** 
+     1. Create a cluster role binding for the Tiller service account. Replace `<namespace>` with the namespace where Tiller is installed in your cluster. 
         ```
-        kubectl get serviceaccount -n kube-system tiller
-        ```
-        {: pre}
-
-        Example output:
-        ```
-        NAME                                 SECRETS   AGE
-        tiller                               1         2m
-        ```
-        {: screen}
-
-    2.  Verify that the `tiller-deploy` pod has a **Status** of `Running` in your cluster.
-        ```
-        kubectl get pods -n kube-system -l app=helm
+        kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=<namespace>:tiller -n <namespace>
         ```
         {: pre}
-
+  
+     2. Update Tiller. Replace `<tiller_service_account_name>` with the name of the Kubernetes service account for Tiller that you retrieved in the previous step. 
+        ```
+        helm init --upgrade --service-account <tiller_service_account_name>
+        ```
+        {: pre}
+           
+     3. Verify that the `tiller-deploy` pod has a **Status** of `Running` in your cluster.
+        ```
+        kubectl get pods -n <namespace> -l app=helm
+        ```
+        {: pre}
+           
         Example output:
 
         ```
@@ -101,8 +103,47 @@ To install Helm in a cluster with public access:
         tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
         ```
         {: screen}
+        
+   - **If Tiller is not installed with a service account:** 
+     1. Create a Kubernetes service account and cluster role binding for Tiller in the `kube-system` namespace of your cluster. 
+        ```
+        kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=kube-system:tiller -n kube-system
+        ```
+        {: pre}
+           
+     2. Verify that the Tiller service account is created.
+        ```
+        kubectl get serviceaccount -n kube-system tiller
+        ```
+        {: pre}
+           
+        Example output: 
+        ```
+        NAME                                 SECRETS   AGE
+        tiller                               1         2m
+        ```
+        {: screen}
+          
+     3. Initialize the Helm CLI and install Tiller in your cluster with the service account that you created.
+        ```
+        helm init --service-account tiller
+        ```
+        {: pre}
+           
+     4. Verify that the `tiller-deploy` pod has a **Status** of `Running` in your cluster.
+        ```
+        kubectl get pods -n kube-system -l app=helm
+        ```
+        {: pre}
 
-5. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
+        Example output:
+        ```
+        NAME                            READY     STATUS    RESTARTS   AGE
+        tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
+        ```
+        {: screen}
+
+4. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
    ```
    helm repo add ibm https://registry.bluemix.net/helm/ibm
    ```
@@ -113,13 +154,13 @@ To install Helm in a cluster with public access:
    ```
    {: pre}
 
-6. Update the repos to retrieve the latest versions of all Helm charts.
+5. Update the repos to retrieve the latest versions of all Helm charts.
    ```
    helm repo update
    ```
    {: pre}
 
-7. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
+6. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
    ```
    helm search ibm
    ```
@@ -130,7 +171,7 @@ To install Helm in a cluster with public access:
    ```
    {: pre}
 
-8. Identify the Helm chart that you want to install and follow the instructions in the Helm chart `README` to install the Helm chart in your cluster.
+7. Identify the Helm chart that you want to install and follow the instructions in the Helm chart `README` to install the Helm chart in your cluster.
 
 
 ## Private clusters: Pushing the Tiller image to your namespace in IBM Cloud Container Registry

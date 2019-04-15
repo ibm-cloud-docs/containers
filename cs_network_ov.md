@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -81,11 +81,11 @@ The following subnets are automatically provisioned on the default public and pr
 
 **Public VLAN subnets**
 * The primary public subnet determines the public IP addresses that are assigned to worker nodes during cluster creation. Multiple clusters on the same VLAN can share one primary public subnet.
-* The portable public subnet is bound to one cluster only and provides the cluster with 8 public IP addresses. 3 IPs are reserved for IBM Cloud infrastructure (SoftLayer) functions. 1 IP is used by the default public Ingress ALB and 4 IPs can be used to create public load balancer networking services. Portable public IPs are permanent, fixed IP addresses that can be used to access load balancer services over the internet. If you need more than 4 IPs for public load balancers, see [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips).
+* The portable public subnet is bound to one cluster only and provides the cluster with 8 public IP addresses. 3 IPs are reserved for IBM Cloud infrastructure (SoftLayer) functions. 1 IP is used by the default public Ingress ALB and 4 IPs can be used to create public network load balancer (NLB) services. Portable public IPs are permanent, fixed IP addresses that can be used to access NLBs over the internet. If you need more than 4 IPs for NLBs, see [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips).
 
 **Private VLAN subnets**
 * The primary private subnet determines the private IP addresses that are assigned to worker nodes during cluster creation. Multiple clusters on the same VLAN can share one primary private subnet.
-* The portable private subnet is bound to one cluster only and provides the cluster with 8 private IP addresses. 3 IPs are reserved for IBM Cloud infrastructure (SoftLayer) functions. 1 IP is used by the default private Ingress ALB and 4 IPs can be used to create private load balancer networking services. Portable private IPs are permanent, fixed IP addresses that can be used to access load balancer services over the internet. If you need more than 4 IPs for private load balancers, see [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips).
+* The portable private subnet is bound to one cluster only and provides the cluster with 8 private IP addresses. 3 IPs are reserved for IBM Cloud infrastructure (SoftLayer) functions. 1 IP is used by the default private Ingress ALB and 4 IPs can be used to create private network load balancer (NLB) services. Portable private IPs are permanent, fixed IP addresses that can be used to access NLBs over a private network. If you need more than 4 IPs for private NLBs, see [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips).
 
 To see all of the subnets provisioned in your account, run `ibmcloud ks subnets`. To see the portable public and portable private subnets that are bound to one cluster, you can run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` and look for the **Subnet VLANs** section.
 
@@ -248,7 +248,7 @@ To make your master publicly or privately accessible to cluster users, you can e
 {: shortdesc}
 
 **Communication between worker nodes and master**</br>
-Communication is established over the private network through the private service endpoint. Even if you enable the public service endpoint for your cluster, the Kubernetes master to worker node communication stays on the private network.
+Communication is established over both the private network through the private service endpoint and the public network through the public service endpoint. By routing half of the worker-to-master traffic over the public endpoint and half over the private endpoint, your master-to-worker communication is protected from potential outages of the public or private network.
 
 **Access to the master**</br>
 The master is privately accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a VPN connection. Otherwise, the master is publicly accessible to authorized cluster users through the public service endpoint.

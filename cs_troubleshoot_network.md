@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -39,23 +39,23 @@ Having trouble connecting to your app through Ingress? Try [debugging Ingress](/
 While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent networking, Ingress, and strongSwan information from your cluster.
 {: tip}
 
-## Cannot connect to an app via a load balancer service
+## Cannot connect to an app via a network load balancer (NLB) service
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-You publicly exposed your app by creating a load balancer service in your cluster. When you tried to connect to your app by using the public IP address of the load balancer, the connection failed or timed out.
+You publicly exposed your app by creating an NLB service in your cluster. When you tried to connect to your app by using the public IP address of the NLB, the connection failed or timed out.
 
 {: tsCauses}
-Your load balancer service might not be working properly for one of the following reasons:
+Your NLB service might not be working properly for one of the following reasons:
 
 -   The cluster is a free cluster or a standard cluster with only one worker node.
 -   The cluster is not fully deployed yet.
--   The configuration script for your load balancer service includes errors.
+-   The configuration script for your NLB service includes errors.
 
 {: tsResolve}
-To troubleshoot your load balancer service:
+To troubleshoot your NLB service:
 
-1.  Check that you set up a standard cluster that is fully deployed and has at least two worker nodes to ensure high availability for your load balancer service.
+1.  Check that you set up a standard cluster that is fully deployed and has at least two worker nodes to ensure high availability for your NLB service.
 
   ```
   ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -64,10 +64,10 @@ To troubleshoot your load balancer service:
 
     In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a machine type other than **free**.
 
-2. For version 2.0 load balancers: Ensure that you complete the [load balancer 2.0 prerequisites](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
+2. For version 2.0 NLBs: Ensure that you complete the [NLB 2.0 prerequisites](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
 
-3. Check the accuracy of the configuration file for your load balancer service.
-    * Version 2.0 load balancers:
+3. Check the accuracy of the configuration file for your NLB service.
+    * Version 2.0 NLBs:
         ```
         apiVersion: v1
         kind: Service
@@ -92,7 +92,7 @@ To troubleshoot your load balancer service:
         4. Check that you used the **port** that your app listens on.
         5. Check that you set `externalTrafficPolicy` to `Local`.
 
-    * Version 1.0 load balancers:
+    * Version 1.0 NLBs:
         ```
         apiVersion: v1
         kind: Service
@@ -112,7 +112,7 @@ To troubleshoot your load balancer service:
         2. In the `spec.selector` section of the LoadBalancer service, ensure that the `<selector_key>` and `<selector_value>` is the same as the key/value pair that you used in the `spec.template.metadata.labels` section of your deployment YAML. If labels do not match, the **Endpoints** section in your LoadBalancer service displays **<none>** and your app is not accessible from the internet.
         3. Check that you used the **port** that your app listens on.
 
-3.  Check your load balancer service and review the **Events** section to find potential errors.
+3.  Check your NLB service and review the **Events** section to find potential errors.
 
     ```
     kubectl describe service <myservice>
@@ -121,22 +121,22 @@ To troubleshoot your load balancer service:
 
     Look for the following error messages:
 
-    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>To use the load balancer service, you must have a standard cluster with at least two worker nodes.</li>
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>This error message indicates that no portable public IP addresses are left to be allocated to your load balancer service. Refer to <a href="/docs/containers?topic=containers-subnets#subnets">Adding subnets to clusters</a> to find information about how to request portable public IP addresses for your cluster. After portable public IP addresses are available to the cluster, the load balancer service is automatically created.</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>You defined a portable public IP address for your load balancer service by using the **`loadBalancerIP`** section, but this portable public IP address is not available in your portable public subnet. In the **`loadBalancerIP`** section your configuration script, remove the existing IP address and add one of the available portable public IP addresses. You can also remove the **`loadBalancerIP`** section from your script so that an available portable public IP address can be allocated automatically.</li>
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>You do not have enough worker nodes to deploy a load balancer service. One reason might be that you deployed a standard cluster with more than one worker node, but the provisioning of the worker nodes failed.</li>
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>To use the NLB service, you must have a standard cluster with at least two worker nodes.</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the NLB service request. Add a portable subnet to the cluster and try again</code></pre></br>This error message indicates that no portable public IP addresses are left to be allocated to your NLB service. Refer to <a href="/docs/containers?topic=containers-subnets#subnets">Adding subnets to clusters</a> to find information about how to request portable public IP addresses for your cluster. After portable public IP addresses are available to the cluster, the NLB service is automatically created.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>You defined a portable public IP address for your load balancer YAML by using the **`loadBalancerIP`** section, but this portable public IP address is not available in your portable public subnet. In the **`loadBalancerIP`** section your configuration script, remove the existing IP address and add one of the available portable public IP addresses. You can also remove the **`loadBalancerIP`** section from your script so that an available portable public IP address can be allocated automatically.</li>
+    <li><pre class="screen"><code>No available nodes for NLB services</code></pre>You do not have enough worker nodes to deploy an NLB service. One reason might be that you deployed a standard cluster with more than one worker node, but the provisioning of the worker nodes failed.</li>
     <ol><li>List available worker nodes.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
     <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>Make sure that the public and private VLAN IDs for the worker nodes that were returned by the <code>kubectl get nodes</code> and the <code>ibmcloud ks worker-get</code> commands match.</li></ol></li></ul>
 
-4.  If you are using a custom domain to connect to your load balancer service, make sure that your custom domain is mapped to the public IP address of your load balancer service.
-    1.  Find the public IP address of your load balancer service.
+4.  If you are using a custom domain to connect to your NLB service, make sure that your custom domain is mapped to the public IP address of your NLB service.
+    1.  Find the public IP address of your NLB service.
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
-    2.  Check that your custom domain is mapped to the portable public IP address of your load balancer service in the Pointer record (PTR).
+    2.  Check that your custom domain is mapped to the portable public IP address of your NLB service in the Pointer record (PTR).
 
 <br />
 
@@ -162,7 +162,7 @@ In your CLI output, make sure that the **Status** of your worker nodes displays 
 <br />
 
 
-## Ingress application load balancer secret issues
+## Ingress application load balancer (ALB) secret issues
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
@@ -601,7 +601,7 @@ You can [delete your existing worker pool](/docs/containers?topic=containers-cs_
 
 Alternatively, you can keep your existing worker pool by ordering new VLANs and using these to create new worker nodes in the pool.
 
-Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Before you begin: [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  To get the zones that you need new VLAN IDs for, note the **Location** in the following command output. **Note**: If your cluster is a multizone, you need VLAN IDs for each zone.
 

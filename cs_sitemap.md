@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-04-15"
 
 ---
 
@@ -497,12 +497,11 @@ lastupdated: "2019-04-08"
 * [Planning private external networking for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_planning#private_both_vlans)
 * [Planning private external networking for a private VLAN only setup](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)
 
-[Exposing apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
+[Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 * [Managing network traffic by using NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
 * [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
 
-[Exposing apps with load balancers](/docs/containers?topic=containers-loadbalancer#loadbalancer)
-* [Sample YAMLs](/docs/containers?topic=containers-loadbalancer#sample)
+[Basic and DSR load balancing with network load balancers (NLB)](/docs/containers?topic=containers-loadbalancer#loadbalancer)
 * [Overview](/docs/containers?topic=containers-loadbalancer#lb_overview)
 * [Comparison of version 1.0 and 2.0 load balancers](/docs/containers?topic=containers-loadbalancer#comparison)
 * [v2.0: Components and architecture (beta)](/docs/containers?topic=containers-loadbalancer#planning_ipvs)
@@ -522,8 +521,13 @@ lastupdated: "2019-04-08"
 * [v1.0: Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
   * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
+* [Registering a load balancer host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)
+  * [Registering load balancer IPs with a DNS host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns)
+  * [Understanding the host name format](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_format)
+  * [Enable health checks on a host name by creating a health monitor](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_monitor)
+  * [Updating and removing IPs and monitors from host names](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_delete)
 
-[Exposing apps with Ingress](/docs/containers?topic=containers-ingress#ingress)
+[HTTPS load balancing with Ingress application load balancers (ALB)](/docs/containers?topic=containers-ingress#ingress)
 * [Sample YAMLs](/docs/containers?topic=containers-ingress#sample_ingress)
 * [What is Ingress?](/docs/containers?topic=containers-ingress#planning)
   * [What comes with Ingress?](/docs/containers?topic=containers-ingress#components)
@@ -956,18 +960,6 @@ lastupdated: "2019-04-08"
 
 [Cluster add-ons changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
 * [Ingress ALB add-on changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
-
-## Regions and zones
-{: #sitemap-locations}
-
-[Regions and zones](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [Locations in {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
-* [Regions in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#container_regions)
-  * [Logging in to a different {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones#container_login_endpoints)
-  * [Using {{site.data.keyword.containerlong_notm}} API commands](/docs/containers?topic=containers-regions-and-zones#containers_api)
-* [Zones in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
-  * [Single-zone clusters](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
-  * [Multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 
 ## User access permissions
 {: #sitemap-user-access}

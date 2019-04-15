@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -566,7 +566,7 @@ For {{site.data.keyword.Bluemix_dedicated_notm}} environments, public primary IP
 #### Configuring access to an app by using the load balancer service type
 {: #dedicated_apps_public_load_balancer}
 
-If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Exposing apps with load balancers](/docs/containers?topic=containers-loadbalancer).
+If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) to configure the firewall whitelist. Then, follow the steps in [Basic and DSR load balancing with network load balancers (NLB)](/docs/containers?topic=containers-loadbalancer).
 {: shortdesc}
 
 #### Configuring public access to an app by using Ingress
