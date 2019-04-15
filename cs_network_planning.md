@@ -172,7 +172,7 @@ When it comes to exposing an app with a network service, you have several choice
 <tr>
 <td>Istio + NLB host name</td>
 <td>Basic load balancing that exposes the app with a host name and uses Istio routing rules</td>
-<td>Implement Istio post-routing rules, such as routing rules for different versions of one app microservice, and configure custom health checks on the app host name.</li></ol></td>
+<td>Implement Istio post-routing rules, such as rules for different versions of one app microservice, and configure custom health checks on the app host name.</li></ol></td>
 <td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a host name and health checks](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).</td></tr>
 <tr>
 <td>Ingress ALB</td>
@@ -182,12 +182,12 @@ When it comes to exposing an app with a network service, you have several choice
 <tr>
 <td>Bring your own Ingress controller + ALB host name</td>
 <td>HTTPS load balancing with a custom Ingress controller that exposes the app with the IBM-provided ALB host name and uses custom routing rules</td>
-<td>Implement custom routing rules or other specific requirements that require custom tuning for multiple apps.</td>
+<td>Implement custom routing rules or other specific requirements for custom tuning for multiple apps.</td>
 <td>[Deploy your Ingress controller and leverage the IBM-provided ALB host name](/docs/containers?topic=containers-ingress#user_managed).</td></tr>
 <tr>
 <td>Istio + ALB host name</td>
 <td>HTTPS load balancing that exposes the app with the IBM-provided ALB host name and uses Istio routing rules</td>
-<td>Implement Istio post-routing rules, such as routing rules for different versions of one microservice of your app, and let users access your app with the IBM-provided Ingress subdomain.</td>
+<td>Implement Istio post-routing rules, such as rules for different versions of one app microservice, and let users access your app with the IBM-provided Ingress subdomain.</td>
 <td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>[Connect the default Istio load balancer to the IBM-provided public ALB](/docs/containers?topic=containers-istio#istio_expose_link).</li></ol></td></tr>
 </tbody>
 </table>

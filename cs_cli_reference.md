@@ -1757,7 +1757,7 @@ You might need to change your YAML files for future deployments. Review this [re
 View a list of clusters in your organization.
 {: shortdesc}
 
-Clusters in all locations are returned. To filter clusters by a specific location, include the `--locations` flag. Multizone clusters can be filtered by their `metro` value and single zone clusters by their `datacenter` value. For example, if you filter locations for `dal` metro, multizone clusters are returned. If you filter locations for `dal10` data center, only single zone clusters are returned, even if you have a multizone cluster with one zone in `dal10`.
+Clusters in all locations are returned. To filter clusters by a specific location, include the `--locations` flag. Multizone clusters can be filtered by their `metro` value and single zone clusters by their `datacenter` value. For example, if you filter locations for `dal` metro, multizone clusters in that metro and single-zone clusters in data centers within that metro are returned. If you filter locations for `dal10` data center, only single zone clusters are returned, even if you have a multizone cluster with one zone in `dal10`. Note that you can pass one location or a comma-separated list of locations.
 
 Deprecated: If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, only clusters that are in the region that you are currently targeted to are returned. To switch regions, run `ibmcloud ks region set`.
 
