@@ -1281,7 +1281,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
   </tr>
   <tr>
   <td><code>--expected-codes &lt;expected-codes&gt;</code></td>
-  <td>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: HTTP codes that the health check looks for in the response. If the HTTP code is not found, the IP is considered unhealthy. Default: <code>200</code></td>
+  <td>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: HTTP codes that the health check looks for in the response. If the HTTP code is not found, the IP is considered unhealthy. Default: <code>2xx</code></td>
   </tr>
   <tr>
   <td><code>--allows-insecure &lt;true&gt;</code></td>
@@ -1296,7 +1296,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
 
   Example command:
   ```
-  ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60 --expected-body "healthy" --expected-codes 200 --follows-redirects true
+  ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60 --expected-body "healthy" --expected-codes 2xx --follows-redirects true
   ```
   {: pre}
 
