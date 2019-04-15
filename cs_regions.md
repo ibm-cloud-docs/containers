@@ -141,22 +141,22 @@ You can access the {{site.data.keyword.containerlong_notm}} through one global e
 To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header.
 {: tip}
 
- ### Logging in to a different {{site.data.keyword.containerlong_notm}} region
+### Logging in to a different {{site.data.keyword.containerlong_notm}} region
 {: #container_login_endpoints}
 
- You can change regions by using the {{site.data.keyword.containerlong_notm}} CLI.
+You can change regions by using the {{site.data.keyword.containerlong_notm}} CLI.
 {:shortdesc}
 
- You might want to log in to another {{site.data.keyword.containerlong_notm}} region for the following reasons:
+You might want to log in to another {{site.data.keyword.containerlong_notm}} region for the following reasons:
   * You created {{site.data.keyword.Bluemix_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containerlong_notm}} in another region.
   * You want to access a cluster in a region that is different from the default {{site.data.keyword.Bluemix_notm}} region that you are logged in to.
 
- To quickly switch regions, run [`ibmcloud ks region-set`](/docs/containers?topic=containers-cs_cli_reference#cs_region-set).
+To quickly switch regions, run [`ibmcloud ks region-set`](/docs/containers?topic=containers-cs_cli_reference#cs_region-set).
 
- ### Using {{site.data.keyword.containerlong_notm}} API commands
+### Using {{site.data.keyword.containerlong_notm}} API commands
 {: #containers_api}
 
- To interact with the {{site.data.keyword.containerlong_notm}} API, enter the command type and append `/v1/command` to the global endpoint.
+To interact with the {{site.data.keyword.containerlong_notm}} API, enter the command type and append `/v1/command` to the global endpoint.
 {:shortdesc}
 
  Example of `GET /clusters` API:
@@ -167,21 +167,21 @@ To use the API with the global endpoint, in all your requests, pass the region n
 
  </br>
 
- To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header. To list available regions, run `ibmcloud ks regions`.
+To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header. To list available regions, run `ibmcloud ks regions`.
 {: tip}
 
- To view documentation on the API commands, view [https://containers.cloud.ibm.com/swagger-api/](https://containers.cloud.ibm.com/swagger-api/).
+To view documentation on the API commands, view [https://containers.cloud.ibm.com/swagger-api/](https://containers.cloud.ibm.com/swagger-api/).
 
- ## Zones in {{site.data.keyword.containerlong_notm}}
+## Zones in {{site.data.keyword.containerlong_notm}}
 {: #zones}
 
- Zones are physical data centers that are available within an {{site.data.keyword.Bluemix_notm}} region. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries. The following table displays the zones available by region.
+Zones are physical data centers that are available within an {{site.data.keyword.Bluemix_notm}} region. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries. The following table displays the zones available by region.
 {:shortdesc}
 
- * **Multizone Metro Location**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
+* **Multizone Metro Location**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
 * **Single Zone Location**: If you create a cluster in a single zone location, you can create multiple worker nodes, but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
 
- <table summary="The table shows the zones available by regions. Rows are to be read from the left to right, with the region in column one, the multizone metro locations in column two, and the single zone locations in column three.">
+<table summary="The table shows the zones available by regions. Rows are to be read from the left to right, with the region in column one, the multizone metro locations in column two, and the single zone locations in column three.">
 <caption>Available single and multizones by region.</caption>
   <thead>
   <th>Region</th>
@@ -230,38 +230,38 @@ To use the API with the global endpoint, in all your requests, pass the region n
   </tbody>
 </table>
 
- `*` lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.
+`*` lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.
 {: note}
 
- ### Single-zone clusters
+### Single-zone clusters
 {: #regions_single_zone}
 
- In a single-zone cluster, your cluster's resources remain in the zone in which the cluster is deployed. The following image highlights the relationship of single-zone cluster components within an example region of US East:
+In a single-zone cluster, your cluster's resources remain in the zone in which the cluster is deployed. The following image highlights the relationship of single-zone cluster components within an example region of US East:
 
- <img src="/images/region-cluster-resources.png" width="650" alt="Understanding where your cluster resources reside" style="width:650px; border-style: none"/>
+<img src="/images/region-cluster-resources.png" width="650" alt="Understanding where your cluster resources reside" style="width:650px; border-style: none"/>
 
- _Understanding where your single-zone cluster resources are._
+_Understanding where your single-zone cluster resources are._
 
- 1.  Your cluster's resources, including the master and worker nodes, are in the same zone that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes within the same zone.
+1.  Your cluster's resources, including the master and worker nodes, are in the same zone that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes within the same zone.
 
- 2.  If you set up other cluster resources, such as storage, networking, compute, or apps running in pods, the resources and their data remain in the zone that you deployed your cluster to.
+2.  If you set up other cluster resources, such as storage, networking, compute, or apps running in pods, the resources and their data remain in the zone that you deployed your cluster to.
 
- 3.  When you initiate cluster management actions, such as using `ibmcloud ks` commands, basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
+3.  When you initiate cluster management actions, such as using `ibmcloud ks` commands, basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
 
- ### Multizone clusters
+### Multizone clusters
 {: #regions_multizone}
 
- In a multizone cluster, the master node is deployed in a multizone-capable zone and your cluster's resources are spread across multiple zones.
+In a multizone cluster, the master node is deployed in a multizone-capable zone and your cluster's resources are spread across multiple zones.
 
- 1.  Worker nodes are spread across multiple zones in one region to provide more availability for your cluster. The master remains in the same multizone-capable zone that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes through a regional endpoint.
+1.  Worker nodes are spread across multiple zones in one region to provide more availability for your cluster. The master remains in the same multizone-capable zone that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes through a regional endpoint.
 
- 2.  Other cluster resources, such as storage, networking, compute, or apps running in pods, vary in how they deploy to the zones in your multizone cluster. For more information, review these topics:
-    * Setting up [file storage](/docs/containers?topic=containers-file_storage#add_file) and [block storage](/docs/containers?topic=containers-block_storage#add_block) in multizone clusters
-    * [Enabling public or private access to an app by using a LoadBalancer service in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-    * [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress#planning)
-    * [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability)
+2.  Other cluster resources, such as storage, networking, compute, or apps running in pods, vary in how they deploy to the zones in your multizone cluster. For more information, review these topics:
+  * Setting up [file storage](/docs/containers?topic=containers-file_storage#add_file) and [block storage](/docs/containers?topic=containers-block_storage#add_block) in multizone clusters
+  * [Enabling public or private access to an app by using a LoadBalancer service in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+  * [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress#planning)
+  * [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability)
 
- 3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
+3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
 
 
 

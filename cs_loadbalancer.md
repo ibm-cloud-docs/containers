@@ -1302,7 +1302,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
 
 3. Verify that the health check monitor is configured with the correct settings.
   ```
-  ibmcloud ks nlb-dns-monitor-details --cluster <cluster_name_or_id> --nlb-host <host_name>
+  ibmcloud ks nlb-dns-monitor-get --cluster <cluster_name_or_id> --nlb-host <host_name>
   ```
   {: pre}
 
@@ -1344,7 +1344,7 @@ ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-h
 
 You can also remove IP addresses of NLBs that you no longer want to be registered with a host name. Note that you must run the following command for each IP address that you want to remove. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it.
 ```
-ibmcloud ks nlb-dns-delete --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host <host_name>
+ibmcloud ks nlb-dns-rm --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host <host_name>
 ```
 {: pre}
 

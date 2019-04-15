@@ -371,14 +371,14 @@ The **Editor** platform role includes the permissions that are granted by **View
 <td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/RegisterDNSWithIP)</code></td>
 </tr>
 <tr>
-<td>Remove an NLB IP address from a host name.</td>
-<td><code>[ibmcloud ks nlb-dns-delete](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-delete)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UnregisterDNSWithIP)</code></td>
-</tr>
-<tr>
 <td>List the NLB host names and IP addresses that are registered in a cluster.</td>
 <td><code>[ibmcloud ks nlb-dns-ls](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-ls)</code></td>
 <td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/ListNLBIPsForSubdomain)</code></td>
+</tr>
+<tr>
+<td>Remove an NLB IP address from a host name.</td>
+<td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UnregisterDNSWithIP)</code></td>
 </tr>
 <tr>
 <td>Configure and optionally enable a health check monitor for an existing NLB host name in a cluster.</td>
@@ -387,7 +387,7 @@ The **Editor** platform role includes the permissions that are granted by **View
 </tr>
 <tr>
 <td>View the settings for an existing health check monitor.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-details](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-details)</code></td>
+<td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-get)</code></td>
 <td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>

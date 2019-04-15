@@ -3698,44 +3698,6 @@ ibmcloud ks nlb-dns-create --cluster mycluster --ip 1.1.1.1
 ```
 {: pre}
 
-### ibmcloud ks nlb-dns-delete
-{: #cs_nlb-dns-delete}
-
-Remove a network load balancer IP address from a host name. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it. Note that you must run this command for each IP address that you want to remove.
-{: shortdesc}
-
-```
-ibmcloud ks nlb-dns-delete --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
-```
-{: pre}
-
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-
-<dl>
-<dt><code>--cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
-
-<dt><code>--ip <em>IP</em></code></dt>
-<dd>The NLB IP that you want to remove. To see your NLB IPs, run <code>kubectl get svc</code>.</dd>
-
-<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns-list</code>.</dd>
-
-<dt><code>--json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
-
-<dt><code>-s</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks nlb-dns-delete --cluster mycluster --ip 1.1.1.1 --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
-```
-{: pre}
-
 ### ibmcloud ks nlb-dns-ls
 {: #cs_nlb-dns-ls}
 
@@ -3765,6 +3727,44 @@ ibmcloud ks nlb-dns-ls --cluster CLUSTER [--json] [-s]
 **Example**:
 ```
 ibmcloud ks nlb-dns-ls --cluster mycluster
+```
+{: pre}
+
+### ibmcloud ks nlb-dns-rm
+{: #cs_nlb-dns-rm}
+
+Remove a network load balancer IP address from a host name. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it. Note that you must run this command for each IP address that you want to remove.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>The NLB IP that you want to remove. To see your NLB IPs, run <code>kubectl get svc</code>.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns-list</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -3853,14 +3853,14 @@ ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host *.mycluster
 ```
 {: pre}
 
-#### ibmcloud ks nlb-dns-monitor-details
-{: #cs_nlb-dns-monitor-details}
+#### ibmcloud ks nlb-dns-monitor-get
+{: #cs_nlb-dns-monitor-get}
 
 View the settings for an existing health check monitor.
 {: shortdesc}
 
 ```
-ibmcloud ks nlb-dns-monitor-details --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+ibmcloud ks nlb-dns-monitor-get --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
 ```
 {: pre}
 
@@ -3884,7 +3884,7 @@ ibmcloud ks nlb-dns-monitor-details --cluster CLUSTER --nlb-host HOST_NAME [--js
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-monitor-details --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 

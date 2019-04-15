@@ -48,7 +48,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.2.XX</td>
 <td>15 Apr 2019</td>
 <td><ul>
-<li>Adds the [`ibmcloud ks nlb-dns` group of commands](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#nlb-dns) for registering and managing a host name for network load balancer (NLB) IP addresses, and the [`ibmcloud ks nlb-dns-monitor` group of commands](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_nlb-dns-monitor) for creating and modifying health check monitors for NLB host names. For more information, see [Registering NLB IPs with a DNS host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns).</li>
+<li>Adds the [`ibmcloud ks nlb-dns` group of commands](/docs/containers?topic=containers-cs_cli_reference#nlb-dns) for registering and managing a host name for network load balancer (NLB) IP addresses, and the [`ibmcloud ks nlb-dns-monitor` group of commands](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_nlb-dns-monitor) for creating and modifying health check monitors for NLB host names. For more information, see [Registering NLB IPs with a DNS host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns).</li>
 <li>...else</li>
 </ul></td>
 </tr>
