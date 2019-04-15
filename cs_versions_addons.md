@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-25"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -54,6 +54,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>411 / 315</td>
+<td>15 Apr 2019</td>
+<td>Updates the value of the {{site.data.keyword.appid_full}} cookie expiration so that it matches the value of the access token expiration.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>411 / 306</td>
 <td>22 Mar 2019</td>

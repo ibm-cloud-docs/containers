@@ -541,7 +541,7 @@ If you find that you need to update the API key that is stored for a resource gr
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>--region <em>REGION</em></code></dt>
-   <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>. Deprecated: This flag is not needed if you target a region with the <code>ibmcloud ks region-set</code> command.</dd>
+   <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
 
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -581,7 +581,7 @@ Before you use this command, make sure that the user who executes this command h
 
    <dl>
    <dt><code>--region <em>REGION</em></code></dt>
-   <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>. Deprecated: This flag is not needed if you target a region with the <code>ibmcloud ks region-set</code> command.</dd>
+   <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
@@ -2745,7 +2745,7 @@ ibmcloud ks credential-get [--region REGION] [-s] [--json]
 
  <dl>
  <dt><code>--region <em>REGION</em></code></dt>
- <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>. Deprecated: This flag is not needed if you target a region with the <code>ibmcloud ks region-set</code> command.</dd>
+ <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
  <dt><code>--json</code></dt>
  <dd>Prints the command output in JSON format. This value is optional.</dd>
  <dt><code>-s</code></dt>
@@ -2810,7 +2810,7 @@ Before you use this command, make sure that the user whose credentials are used 
   </dd>
 
   <dt><code>--region <em>REGION</em></code></dt>
-  <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>. Deprecated: This flag is not needed if you target a region with the <code>ibmcloud ks region-set</code> command.</dd>
+  <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
 
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2844,7 +2844,7 @@ ibmcloud ks credential-unset [--region REGION] [-s]
 
   <dl>
   <dt><code>--region <em>REGION</em></code></dt>
-  <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>. Deprecated: This flag is not needed if you target a region with the <code>ibmcloud ks region-set</code> command.</dd>
+  <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
   </dl>
@@ -2943,7 +2943,7 @@ ibmcloud ks vlan-spanning-get [--region REGION] [--json] [-s]
 
    <dl>
    <dt><code>--region <em>REGION</em></code></dt>
-   <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>. Deprecated: This flag is not needed if you target a region with the <code>ibmcloud ks region-set</code> command.</dd>
+   <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
 
     <dt><code>--json</code></dt>
       <dd>Prints the command output in JSON format. This value is optional.</dd>
