@@ -51,27 +51,27 @@ _{{site.data.keyword.containerlong_notm}} regions and zones_
  <br />
 
 
- ## Locations in {{site.data.keyword.Bluemix_notm}}
+## Locations in {{site.data.keyword.Bluemix_notm}}
 {: #bluemix_regions}
 
- You can organize your resources across {{site.data.keyword.Bluemix_notm}} services by using {{site.data.keyword.Bluemix_notm}} locations, also called regions. For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location.
+You can organize your resources across {{site.data.keyword.Bluemix_notm}} services by using {{site.data.keyword.Bluemix_notm}} locations, also called regions. For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location.
 {:shortdesc}
 
- You can specify an {{site.data.keyword.Bluemix_notm}} region when you log in to the global API endpoint. To list available regions, run `ibmcloud regions`. To check which {{site.data.keyword.Bluemix_notm}} location you are currently in, run `ibmcloud target` and review the **Region** field. If you do not specify a region, you are prompted to select a region.
+You can specify an {{site.data.keyword.Bluemix_notm}} region when you log in to the global API endpoint. To list available regions, run `ibmcloud regions`. To check which {{site.data.keyword.Bluemix_notm}} location you are currently in, run `ibmcloud target` and review the **Region** field. If you do not specify a region, you are prompted to select a region.
 
- For example, to log in to the global API endpoint in the Dallas (`us-south`) region:
+For example, to log in to the global API endpoint in the Dallas (`us-south`) region:
 ```
 ibmcloud login -a https://cloud.ibm.com -r us-south
 ```
 {: pre}
 
- To log in to the global API endpoint and select a region:
+To log in to the global API endpoint and select a region:
 ```
 ibmcloud login -a https://cloud.ibm.com
 ```
 {: pre}
 
- Example output:
+Example output:
 ```
 API endpoint: cloud.ibm.com
 
@@ -114,16 +114,16 @@ Space:
 ```
 {: screen}
 
- <br />
+<br />
 
 
- ## Regions in {{site.data.keyword.containerlong_notm}}
+## Regions in {{site.data.keyword.containerlong_notm}}
 {: #container_regions}
 
- By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.Bluemix_notm}} as a whole.
+By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.Bluemix_notm}} as a whole.
 {:shortdesc}
 
- You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
+You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
 {: note}
 
  Supported {{site.data.keyword.containerlong_notm}} regions:
@@ -134,11 +134,11 @@ Space:
   * US East (standard clusters only)
   * US South
 
- You can access the {{site.data.keyword.containerlong_notm}} through one global endpoint: `https://containers.cloud.ibm.com/v1`.
+You can access the {{site.data.keyword.containerlong_notm}} through one global endpoint: `https://containers.cloud.ibm.com/v1`.
 * To check which {{site.data.keyword.containerlong_notm}} region you are currently in, run `ibmcloud ks region`.
 * To retrieve a list of available regions and their endpoints, run `ibmcloud ks regions`.
 
- To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header.
+To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header.
 {: tip}
 
  ### Logging in to a different {{site.data.keyword.containerlong_notm}} region
