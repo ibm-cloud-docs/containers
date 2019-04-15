@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -47,6 +47,32 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.13 changelog
 {: #113_changelog}
+
+### Changelog for worker node fix pack 1.13.5_1518, released 15 April 2019
+{: #1135_1518}
+
+The following table shows the changes that are included in the worker node fix pack 1.13.5_1518.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.5_1517">
+<caption>Changes since version 1.13.5_1517</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.13.5_1517, released 8 April 2019
 {: #1135_1517}
@@ -522,6 +548,32 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.7_1549, released 15 April 2019
+{: #1127_1549}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.7_1549.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.7_1548">
+<caption>Changes since version 1.12.7_1548</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.12.7_1548, released 8 April 2019
 {: #1127_1548}
@@ -1308,6 +1360,32 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 {: #111_changelog}
 
 Review the version 1.11 changelog.
+
+### Changelog for worker node fix pack 1.11.9_1555, released 15 April 2019
+{: #1119_1555}
+
+The following table shows the changes that are included in the worker node fix pack 1.11.9_1555.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.9_1554">
+<caption>Changes since 1.11.9_1554</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.11.9_1554, released 8 April 2019
 {: #1119_1554}
@@ -2444,6 +2522,32 @@ Review the version 1.10 changelog.
 
 Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.10.13_1556, released 15 April 2019
+{: #11013_1556}
+
+The following table shows the changes that are included in the worker node fix pack 1.10.13_1556.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.10.13_1555">
+<caption>Changes since 1.10.13_1555</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.10.13_1555, released 8 April 2019
 {: #11013_1555}
