@@ -248,7 +248,7 @@ To make your master publicly or privately accessible to cluster users, you can e
 {: shortdesc}
 
 **Communication between worker nodes and master**</br>
-Communication is established over the private network through the private service endpoint. Even if you enable the public service endpoint for your cluster, the Kubernetes master to worker node communication stays on the private network.
+Communication is established over both the private network through the private service endpoint and the public network through the public service endpoint. By routing half of the worker-to-master traffic over the public endpoint and half over the private endpoint, your master-to-worker communication is protected from potential outages of the public or private network.
 
 **Access to the master**</br>
 The master is privately accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a VPN connection. Otherwise, the master is publicly accessible to authorized cluster users through the public service endpoint.
