@@ -71,7 +71,7 @@ Review the following reasons why your cluster logs are not appearing and the cor
   <tr>
     <td>If you specified a space at cluster creation, the account owner does not have Manager, Developer, or Auditor permissions to that space.</td>
       <td>To change access permissions for the account owner:
-      <ol><li>To find out who the account owner for the cluster is, run <code>ibmcloud ks api-key-info</hidden></code>.</li>
+      <ol><li>To find out who the account owner for the cluster is, run <code>ibmcloud ks api-key-info</code>.</li>
       <li>To grant that account owner Manager, Developer, or Auditor {{site.data.keyword.containerlong_notm}} access permissions to the space, see <a href="/docs/containers?topic=containers-users">Managing cluster access</a>.</li>
       <li>To refresh the logging token after permissions are changed, run <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>

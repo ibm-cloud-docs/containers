@@ -289,7 +289,7 @@ Review common error messages and learn how to resolve them.
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
   <td>The owner of the API key that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps:
   <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li>
-  <li>Run <code>ibmcloud ks api-key-info</hidden></code> to view the current API key owner that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio. </li>
+  <li>Run <code>ibmcloud ks api-key-info</code> to view the current API key owner that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio. </li>
   <li>Run <code>ibmcloud account list</code> to view the owner of the {{site.data.keyword.Bluemix_notm}} account that you currently use. </li>
   <li>Contact the owner of the {{site.data.keyword.Bluemix_notm}} account and report that the API key owner has insufficient permissions in IBM Cloud infrastructure (SoftLayer) or might be pending to be deleted. </li></ol>
   </br><strong>As the account owner</strong>, follow these steps:
