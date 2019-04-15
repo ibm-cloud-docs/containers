@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Configuring subnets for clusters
 {: #subnets}
 
-Change the pool of available portable public or private IP addresses for load balancer services by adding subnets to your Kubernetes cluster.
+Change the pool of available portable public or private IP addresses for network load balancer (NLB) services by adding subnets to your Kubernetes cluster.
 {:shortdesc}
 
 ## Using custom or existing IBM Cloud infrastructure (SoftLayer) subnets to create a cluster
@@ -36,13 +36,13 @@ Change the pool of available portable public or private IP addresses for load ba
 When you create a standard cluster, subnets are automatically created for you. However, instead of using the automatically provisioned subnets, you can use existing portable subnets from your IBM Cloud infrastructure (SoftLayer) account or reuse subnets from a deleted cluster.
 {:shortdesc}
 
-Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. If instead you want to get more portable private IP addresses for your cluster load balancer services by using your own on-premises network subnet, see [Adding portable private IPs by adding user-managed subnets to private VLANs](#subnet_user_managed).
+Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. If instead you want to get more portable private IP addresses for your cluster's network load balancer (NLB) services by using your own on-premises network subnet, see [Adding portable private IPs by adding user-managed subnets to private VLANs](#subnet_user_managed).
 
 Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.
 {: note}
 
 Before you begin:
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - To reuse subnets from a cluster that you no longer need, delete the unneeded cluster. Create the new cluster immediately because the subnets are deleted within 24 hours if you do not reuse them.
 
    ```
@@ -108,7 +108,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
     ```
     {: screen}
 
-5.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes configmap is created for you that includes all available portable public IP addresses that you can use. If no Ingress ALBs exist in the zone where the subnet's VLAN is located, one portable public and one portable private IP address is automatically used to create the public and private ALBs for that zone. You can use all other portable public and private IP addresses from the subnet to create load balancer services for your apps.
+5.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes configmap is created for you that includes all available portable public IP addresses that you can use. If no Ingress ALBs exist in the zone where the subnet's VLAN is located, one portable public and one portable private IP address is automatically used to create the public and private ALBs for that zone. You can use all other portable public and private IP addresses from the subnet to create NLB services for your apps.
 
   ```
   ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
@@ -129,7 +129,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 ## Managing existing portable IP addresses
 {: #managing_ips}
 
-By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](/docs/containers?topic=containers-loadbalancer). To create a load balancer service, you must have at least 1 portable IP address of the correct type available. You can view portable IP addresses that are available or free up a used portable IP address.
+By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a network load balancer (NLB) service](/docs/containers?topic=containers-loadbalancer). To create an NLB service, you must have at least 1 portable IP address of the correct type available. You can view portable IP addresses that are available or free up a used portable IP address.
 {: shortdesc}
 
 ### Viewing available portable public IP addresses
@@ -143,15 +143,15 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 ```
 {: pre}
 
-To list only portable public IP addresses that are available to create load balancers, you can use the following steps:
+To list only portable public IP addresses that are available to create NLBs, you can use the following steps:
 
 Before you begin:
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To list available portable public IP addresses:
 
-1.  Create a Kubernetes service configuration file that is named `myservice.yaml` and define a service of type `LoadBalancer` with a dummy load balancer IP address. The following example uses the IP address 1.1.1.1 as the load balancer IP address. Replace `<zone>` with the zone where you want to check for available IPs.
+1.  Create a Kubernetes service configuration file that is named `myservice.yaml` and define a service of type `LoadBalancer` with a dummy NLB IP address. The following example uses the IP address 1.1.1.1 as the NLB IP address. Replace `<zone>` with the zone where you want to check for available IPs.
 
     ```
     apiVersion: v1
@@ -190,7 +190,7 @@ To list available portable public IP addresses:
     ```
     {: pre}
 
-    The creation of this service fails because the Kubernetes master cannot find the specified load balancer IP address in the Kubernetes configmap. When you run this command, you can see the error message and the list of available public IP addresses for the cluster.
+    The creation of this service fails because the Kubernetes master cannot find the specified NLB IP address in the Kubernetes configmap. When you run this command, you can see the error message and the list of available public IP addresses for the cluster.
 
     ```
     Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IP addresses are available: <list_of_IP_addresses>
@@ -203,14 +203,14 @@ To list available portable public IP addresses:
 ### Freeing up used IP addresses
 {: #free}
 
-You can free up a used portable IP address by deleting the load balancer service that is using the portable IP address.
+You can free up a used portable IP address by deleting the network load balancer (NLB) service that is using the portable IP address.
 {:shortdesc}
 
 Before you begin:
 -  Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To delete a load balancer:
+To delete an NLB:
 
 1.  List available services in your cluster.
 
@@ -232,7 +232,7 @@ To delete a load balancer:
 ## Adding portable IP addresses
 {: #adding_ips}
 
-By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](/docs/containers?topic=containers-loadbalancer). To create more than 4 public or 4 private load balancers, you can get more portable IP addresses by adding network subnets to the cluster.
+By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a network load balancer (NLB) service](/docs/containers?topic=containers-loadbalancer). To create more than 4 public or 4 private NLBs, you can get more portable IP addresses by adding network subnets to the cluster.
 {: shortdesc}
 
 When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure to use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.
@@ -244,12 +244,12 @@ Portable public IP addresses are charged monthly. If you remove portable public 
 ### Adding portable IPs by ordering more subnets
 {: #request}
 
-You can get more portable IPs for load balancer services by creating a new subnet in an IBM Cloud infrastructure (SoftLayer) account and making it available to your specified cluster.
+You can get more portable IPs for NLB services by creating a new subnet in an IBM Cloud infrastructure (SoftLayer) account and making it available to your specified cluster.
 {:shortdesc}
 
 Before you begin:
 -  Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To order a subnet:
 
@@ -276,7 +276,7 @@ To order a subnet:
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td>Replace <code>&lt;subnet_size&gt;</code> with the number of IP addresses that you want to add from your portable subnet. Accepted values are 8, 16, 32, or 64. <p class="note"> When you add portable IP addresses for your subnet, three IP addresses are used to establish cluster-internal networking. You cannot use these three IP addresses for your application load balancer or to create a load balancer service. For example, if you request eight portable public IP addresses, you can use five of them to expose your apps to the public.</p> </td>
+    <td>Replace <code>&lt;subnet_size&gt;</code> with the number of IP addresses that you want to add from your portable subnet. Accepted values are 8, 16, 32, or 64. <p class="note"> When you add portable IP addresses for your subnet, three IP addresses are used to establish cluster-internal networking. You cannot use these three IP addresses for your Ingress application load balancers (ALBs) or to create network load balancer (NLB) services. For example, if you request eight portable public IP addresses, you can use five of them to expose your apps to the public.</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
@@ -309,7 +309,7 @@ To order a subnet:
 ### Adding portable private IPs by adding user-managed subnets to private VLANs
 {: #subnet_user_managed}
 
-You can get more portable private IPs for load balancer services by making a subnet from an on-premises network available to your cluster.
+You can get more portable private IPs for network load balancer (NLB) services by making a subnet from an on-premises network available to your cluster.
 {:shortdesc}
 
 Want to reuse existing portable subnets in your IBM Cloud infrastructure (SoftLayer) account instead? See [Using custom or existing IBM Cloud infrastructure (SoftLayer) subnets to create a cluster](#subnets_custom).
@@ -324,7 +324,7 @@ Before you begin:
 - Configure the routing of network traffic into and out of the external subnet.
 - Confirm that you have VPN connectivity between the on-premises data center network gateway and either the private network Virtual Router Appliance or the strongSwan VPN service that runs in your cluster. For more information, see [Setting up VPN connectivity](/docs/containers?topic=containers-vpn).
 -  Ensure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
-- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 
 To add a subnet from an on-premises network:
@@ -377,7 +377,7 @@ To add a subnet from an on-premises network:
 
 4. [Enable routing between subnets on the same VLAN](#subnet-routing).
 
-5. Add a [private load balancer service](/docs/containers?topic=containers-loadbalancer) or enable a [private Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress) to access your app over the private network. To use a private IP address from the subnet that you added, you must specify an IP address from the subnet CIDR. Otherwise, an IP address is chosen at random from the IBM Cloud infrastructure (SoftLayer) subnets or user-provided subnets on the private VLAN.
+5. Add a [private network load balancer (NLB) service](/docs/containers?topic=containers-loadbalancer) or enable a [private Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress) to access your app over the private network. To use a private IP address from the subnet that you added, you must specify an IP address from the subnet CIDR. Otherwise, an IP address is chosen at random from the IBM Cloud infrastructure (SoftLayer) subnets or user-provided subnets on the private VLAN.
 
 <br />
 
@@ -405,10 +405,10 @@ To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning
 ### Managing subnet routing for gateway appliances
 {: #vra-routing}
 
-When you create a cluster, a portable public and a portable private subnet are ordered on the VLANs that the cluster is connected to. These subnets provide IP addresses for Ingress and load balancer networking services.
+When you create a cluster, a portable public and a portable private subnet are ordered on the VLANs that the cluster is connected to. These subnets provide IP addresses for Ingress application load balancer (ALB) and network load balancer (NLB) services.
 {: shortdesc}
 
-However, if you have an existing router appliance, such as a [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra#about-the-vra), the newly added portable subnets from those VLANs that the cluster is connected to are not configured on the router. To use Ingress or load balancer networking services, you must ensure that network devices can route between different subnets on the same VLAN by [enabling VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
+However, if you have an existing router appliance, such as a [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra#about-the-vra), the newly added portable subnets from those VLANs that the cluster is connected to are not configured on the router. To use NLBs or Ingress ALBs, you must ensure that network devices can route between different subnets on the same VLAN by [enabling VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning).
 
 To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
 {: tip}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks, ingress
 
@@ -29,7 +29,7 @@ subcollection: containers
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
 {: shortdesc}
 
-Before you use annotations, make sure you have properly set up your Ingress service configuration by following the steps in [Exposing apps with Ingress](/docs/containers?topic=containers-ingress). Once you have set up the Ingress ALB with a basic configuration, you can then expand its capabilities by adding annotations to the Ingress resource file.
+Before you use annotations, make sure you have properly set up your Ingress service configuration by following the steps in [HTTPS load balancing with Ingress application load balancers (ALB)](/docs/containers?topic=containers-ingress). Once you have set up the Ingress ALB with a basic configuration, you can then expand its capabilities by adding annotations to the Ingress resource file.
 {: note}
 
 <table>

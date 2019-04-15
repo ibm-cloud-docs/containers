@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -113,7 +113,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 | Replicated masters for higher availability | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 |[Scalable number of worker nodes to increase capacity](/docs/containers?topic=containers-app#app_scaling)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Persistent NFS file-based storage with volumes](/docs/containers?topic=containers-file_storage#file_storage)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|[Public or private network app access by a load balancer service to a stable IP address](/docs/containers?topic=containers-loadbalancer)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Public or private network app access by a network load balancer (NLB) service to a stable IP address](/docs/containers?topic=containers-loadbalancer)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Public network app access by an Ingress service to a stable IP address and customizable URL](/docs/containers?topic=containers-ingress#planning)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Logging and monitoring](/docs/containers?topic=containers-health#logging)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|

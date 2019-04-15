@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -170,13 +170,13 @@ To successfully provision and work with clusters, you must ensure that your {{si
 
 4. Set the API key for the region and resource group.
     ```
-    ibmcloud ks api-key-reset --region <region>
+    ibmcloud ks api-key-reset
     ```
     {: pre}    
 
 5. Verify that the API key is set.
     ```
-    ibmcloud ks api-key-info <cluster_name_or_ID> --region <region>
+    ibmcloud ks api-key-info <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -290,14 +290,14 @@ To ensure that all infrastructure-related actions can be successfully completed 
 If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to a linked IBM Cloud infrastructure (SoftLayer) portfolio by default. The API key is used to order infrastructure resources from this IBM Cloud infrastructure (SoftLayer) portfolio, such as new worker nodes or VLANs.
 {: shortdec}
 
-You can find the current API key owner by running [`ibmcloud ks api-key-info --cluster <cluster> --region <region>`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [`ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
+You can find the current API key owner by running [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [`ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
 
 Be sure that you want to reset the key and understand the impact to your app. The key is used in several different places and can cause breaking changes if it's unnecessarily changed.
 {: note}
 
 **Before you begin**:
 - If the account owner is not setting the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To set the API key to access the IBM Cloud infrastructure (SoftLayer) portfolio:
 
@@ -310,12 +310,12 @@ To set the API key to access the IBM Cloud infrastructure (SoftLayer) portfolio:
         {:pre}
     4.  Set the user's API key for the region.
         ```
-        ibmcloud ks api-key-reset --region <region>
+        ibmcloud ks api-key-reset
         ```
         {: pre}    
     5.  Verify that the API key is set.
         ```
-        ibmcloud ks api-key-info --cluster <cluster_name_or_ID> --region <region>
+        ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -327,12 +327,12 @@ To set the API key to access the IBM Cloud infrastructure (SoftLayer) portfolio:
 Instead of using the default linked IBM Cloud infrastructure (SoftLayer) account to order infrastructure for clusters within a region, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using the [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set) command. The IBM Cloud infrastructure (SoftLayer) credentials are used instead of the default Pay-As-You-Go account's credentials that are stored for the region.
 {: shortdesc}
 
-The IBM Cloud infrastructure (SoftLayer) credentials set by the `ibmcloud ks credential-set` command persist after your session ends. If you remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set with the [`ibmcloud ks credential-unset --region <region>`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset) command, the default Pay-As-You-Go account credentials are used. However, this change in infrastructure account credentials might cause [orphaned clusters](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
+The IBM Cloud infrastructure (SoftLayer) credentials set by the `ibmcloud ks credential-set` command persist after your session ends. If you remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set with the [`ibmcloud ks credential-unset`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset) command, the default Pay-As-You-Go account credentials are used. However, this change in infrastructure account credentials might cause [orphaned clusters](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 {: important}
 
 **Before you begin**:
 - If you are not using the account owner's credentials, [ensure that the user whose credentials you want to set for the API key has the correct permissions](#owner_permissions).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To set infrastructure account credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio:
 
@@ -348,13 +348,13 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 
     2.  Set the infrastructure API credentials to use.
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
         ```
         {: pre}
 
     3. Verify that the correct credentials are set.
         ```
-        ibmcloud ks credential-get --region <region>
+        ibmcloud ks credential-get
         ```
         Example output:
         ```
@@ -450,7 +450,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
 
 - Verify that you're assigned the `cluster-admin` {{site.data.keyword.Bluemix_notm}} IAM platform role for the {{site.data.keyword.Bluemix_notm}} account in which you're working.
 - Verify that the user is added to the account. If the user is not, invite the user to your account by running `ibmcloud account user-invite <user@email.com>`.
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Decide whether to assign [platform or service access](/docs/containers?topic=containers-users#access_policies) roles. The CLI steps vary depending on which access role you want to assign:
   * [Assign platform roles from the CLI](#add_users_cli_platform)
   * [Assign service roles from the CLI](#add_users_cli_service)
@@ -1033,12 +1033,12 @@ Before you remove a user's specific access permissions or remove a user from you
 2. Check the owner of the API key or infrastructure credentials set for that region and resource group.
     * If you use the [API key to access the IBM Cloud infrastructure (SoftLayer) portfolio](#default_account):
         ```
-        ibmcloud ks api-key-info --cluster <cluster_name_or_id> --region <region>
+        ibmcloud ks api-key-info --cluster <cluster_name_or_id>
         ```
         {: pre}
     * If you set [infrastructure credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio](#credentials):
         ```
-        ibmcloud ks credential-get --region <region>
+        ibmcloud ks credential-get
         ```
         {: pre}
 
@@ -1049,12 +1049,12 @@ Before you remove a user's specific access permissions or remove a user from you
 
     * To reset the API key:
         ```
-        ibmcloud ks api-key-reset --region <region>
+        ibmcloud ks api-key-reset
         ```
         {: pre}
     * To reset the infrastructure credentials:
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
         ```
         {: pre}
 

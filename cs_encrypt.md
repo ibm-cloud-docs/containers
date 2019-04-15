@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -92,10 +92,10 @@ If you delete the root key in your {{site.data.keyword.keymanagementserviceshort
 {: important}
 
 Before you begin:
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Check that your cluster runs Kubernetes version 1.11.3_1521 or later by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and checking the **Version** field.
 * Ensure you have the [**Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
-* Make sure that the API key that is set for the region that your cluster is in is authorized to use Key Protect. To check the API key owner whose credentials are stored for the region, run `ibmcloud ks api-key-info --cluster <cluster_name_or_ID> --region <region>`.
+* Make sure that the API key that is set for the region that your cluster is in is authorized to use Key Protect. To check the API key owner whose credentials are stored for the region, run `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`.
 
 To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the instance or root key that encrypts secrets in the cluster:
 

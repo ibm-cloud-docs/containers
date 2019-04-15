@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -35,7 +35,7 @@ As of 30 January 2019, {{site.data.keyword.containerlong_notm}} has a new way of
 ## {{site.data.keyword.Bluemix_notm}} IAM platform roles
 {: #iam_platform}
 
-{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.Bluemix_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.Bluemix_notm}} resources such as clusters, worker nodes, and Ingress application load balancers. {{site.data.keyword.Bluemix_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.Bluemix_notm}} IAM platform permissions](/docs/containers?topic=containers-users#platform).
+{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.Bluemix_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.Bluemix_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.Bluemix_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.Bluemix_notm}} IAM platform permissions](/docs/containers?topic=containers-users#platform).
 {: shortdesc}
 
 <p class="tip">Do not assign {{site.data.keyword.Bluemix_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
@@ -111,11 +111,6 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td>Lists the available regions.</td>
 <td><code>[ibmcloud ks regions](/docs/containers?topic=containers-cs_cli_reference#cs_regions)</code></td>
 <td><code>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</code></td>
-</tr>
-<tr>
-<td>View a list of supported locations in {{site.data.keyword.containerlong_notm}}.</td>
-<td><code>[ibmcloud ks supported-locations](/docs/containers?topic=containers-cs_cli_reference#cs_supported-locations)</code></td>
-<td><code>-</code></td>
 </tr>
 <tr>
 <td>View a list of available zones that you can create a cluster in.</td>
@@ -357,7 +352,66 @@ The **Editor** platform role includes the permissions that are granted by **View
 </tbody>
 </table>
 
-
+<table>
+<caption>Overview of network load balancer (NLB) DNS host and health check monitor CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+<th id="lbdns-mgmt">Network load balancer (NLB) DNS action</th>
+<th id="lbdns-cli">CLI command</th>
+<th id="lbdns-api">API call</th>
+</thead>
+<tbody>
+<tr>
+<td>Add one NLB IP to an existing NLB host name.</td>
+<td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-add)</code></td>
+<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UpdateDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>Create a DNS host name to register one or more NLB IPs.</td>
+<td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-create)</code></td>
+<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/RegisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>Remove an NLB IP address from a host name.</td>
+<td><code>[ibmcloud ks nlb-dns-delete](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-delete)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UnregisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>List the NLB host names and IP addresses that are registered in a cluster.</td>
+<td><code>[ibmcloud ks nlb-dns-ls](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-ls)</code></td>
+<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/ListNLBIPsForSubdomain)</code></td>
+</tr>
+<tr>
+<td>Configure and optionally enable a health check monitor for an existing NLB host name in a cluster.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-configure)</code></td>
+<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>View the settings for an existing health check monitor.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-details](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-details)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>Disable an existing health check monitor for a host name in a cluster.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>Enable a health check monitor that you configured.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>List the health check monitor settings for each NLB host name in a cluster.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-ls)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
+</tr>
+<tr>
+<td>List the health check status for the IPs behind NLB host names in a cluster.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-status)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
+</tr>
+</tbody>
+</table>
 
 <table>
 <caption>Overview of logging CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>

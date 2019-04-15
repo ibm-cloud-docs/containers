@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -44,7 +44,7 @@ Use a Helm chart to configure and deploy the strongSwan IPSec VPN service inside
 
 Because strongSwan is integrated within your cluster, you don't need an external gateway device. When VPN connectivity is established, routes are automatically configured on all of the worker nodes in the cluster. These routes allow two-way connectivity through the VPN tunnel between pods on any worker node and the remote system. For example, the following diagram shows how an app in {{site.data.keyword.containerlong_notm}} can communicate with an on-premises server via a strongSwan VPN connection:
 
-<img src="images/cs_vpn_strongswan.png" width="700" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a load balancer" style="width:700px; border-style: none"/>
+<img src="images/cs_vpn_strongswan.png" width="700" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a network load balancer (NLB)" style="width:700px; border-style: none"/>
 
 1. An app in your cluster, `myapp`, receives a request from an Ingress or LoadBalancer service and needs to securely connect to data in your on-premises network.
 
@@ -164,7 +164,7 @@ Before you install the strongSwan Helm chart, you must decide on your strongSwan
 Before you begin:
 * [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection).
 * Ensure you have the [**Writer** or **Manager** {{site.data.keyword.Bluemix_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
-* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **Note**: All strongSwan configurations are permitted in standard clusters. If you use a free cluster, you can choose only an outbound VPN connection in [Step 3](#strongswan_3). Inbound VPN connections require a load balancer in the cluster, and load balancers are not available for free clusters.
 
 ### Step 1: Get the strongSwan Helm chart
@@ -239,7 +239,7 @@ If you use a free cluster, you can choose only an outbound VPN connection. Inbou
 
 To establish an inbound VPN connection, modify the following settings:
 1. Verify that `ipsec.auto` is set to `add`.
-2. Optional: Set `loadBalancerIP` to a portable public IP address for the strongSwan VPN service. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall. The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](/docs/containers?topic=containers-subnets#review_ip) or [free up a used IP address](/docs/containers?topic=containers-subnets#free).
+2. Optional: Set `loadBalancerIP` to a portable public IP address for the strongSwan VPN service. Specifying an IP address is useful when you need a stable IP address, such as when you must designate which IP addresses are permitted through an on-premises firewall. The cluster must have at least one available public load balancer IP address. [You can check to see your available public IP addresses](/docs/containers?topic=containers-subnets#review_ip) or [free up a used IP address](/docs/containers?topic=containers-subnets#free).
     * If you leave this setting blank, one of the available portable public IP addresses is used.
     * You must also configure the public IP address that you select for or the public IP address that is assigned to the cluster VPN endpoint on the on-premises VPN endpoint.
 
@@ -254,7 +254,7 @@ To establish an outbound VPN connection, modify the following settings:
         * If the remote VPN endpoint cannot handle VPN connections from multiple public IP addresses, limit the nodes that the strongSwan VPN pod deploys to. Set `nodeSelector` to the IP addresses of specific worker nodes or a worker node label. For example, the value `kubernetes.io/hostname: 10.232.xx.xx` allows the VPN pod to deploy to that worker node only. The value `strongswan: vpn` restricts the VPN pod to running on any worker nodes with that label. You can use any worker node label. To allow different worker nodes to be used with different helm chart deployments, use `strongswan: <release_name>`. For high availability, select at least two worker nodes.
     * **Public IP address of the strongSwan service**: To establish connection by using the IP address of the strongSwan VPN service, set `connectUsingLoadBalancerIP` to `true`. The strongSwan service IP address is either a portable public IP address you can specify in the `loadBalancerIP` setting, or an available portable public IP address that is automatically assigned to the service.
         <br>
-        * If you choose to select an IP address using the `loadBalancerIP` setting, the cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](/docs/containers?topic=containers-subnets#review_ip) or [free up a used IP address](/docs/containers?topic=containers-subnets#free).
+        * If you choose to select an IP address using the `loadBalancerIP` setting, the cluster must have at least one available public load balancer IP address. [You can check to see your available public IP addresses](/docs/containers?topic=containers-subnets#review_ip) or [free up a used IP address](/docs/containers?topic=containers-subnets#free).
         * All of the cluster worker nodes must be on the same public VLAN. Otherwise, you must use the `nodeSelector` setting to ensure that the VPN pod deploys to a worker node on the same public VLAN as the `loadBalancerIP`.
         * If `connectUsingLoadBalancerIP` is set to `true` and `ipsec.keyexchange` is set to `ikev1`, you must set `enableServiceSourceIP` to `true`.
 

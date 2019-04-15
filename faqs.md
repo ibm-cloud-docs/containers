@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -63,11 +63,11 @@ Worker nodes in standard clusters are provisioned in to your {{site.data.keyword
 {: #faq_ha}
 {: faq}
 
-The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is designed to ensure reliability, low processing latency, and a maximum uptime of the service. By default, every cluster in {{site.data.keyword.containerlong_notm}} is set up with multiple Kubernetes master instances to ensure availability and accessibility of your cluster resources, even if one or more instances of your Kubernetes master are unavailable. 
+The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is designed to ensure reliability, low processing latency, and a maximum uptime of the service. By default, every cluster in {{site.data.keyword.containerlong_notm}} is set up with multiple Kubernetes master instances to ensure availability and accessibility of your cluster resources, even if one or more instances of your Kubernetes master are unavailable.
 
 You can make your cluster even more highly available and protect your app from a downtime by spreading your workloads across multiple worker nodes in multiple zones of a region. This setup is called a [multizone cluster](/docs/containers?topic=containers-plan_clusters#multizone) and ensures that your app is accessible, even if a worker node or an entire zone is not available.
 
-To protect against an entire region failure, create [multiple clusters and spread them across {{site.data.keyword.containerlong_notm}} regions](/docs/containers?topic=containers-plan_clusters#multiple_clusters). By setting up a load balancer for your clusters, you can achieve cross-region load balancing and cross-region networking for your clusters.
+To protect against an entire region failure, create [multiple clusters and spread them across {{site.data.keyword.containerlong_notm}} regions](/docs/containers?topic=containers-plan_clusters#multiple_clusters). By setting up a network load balancer (NLB) for your clusters, you can achieve cross-region load balancing and cross-region networking for your clusters.
 
 If you have data that must be available, even if an outage occurs, make sure to store your data on [persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
@@ -121,7 +121,7 @@ For more information about supported regions, see [Regions and zones](/docs/cont
 {: #standards}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} implements controls commensurate with the following standards: 
+{{site.data.keyword.containerlong_notm}} implements controls commensurate with the following standards:
 - EU-US Privacy Shield and Swiss-US Privacy Shield Framework
 - Health Insurance Portability and Accountability Act (HIPAA)
 - Service Organization Control standards (SOC 1, SOC 2 Type 1)

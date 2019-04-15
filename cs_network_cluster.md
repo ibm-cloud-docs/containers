@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -50,8 +50,8 @@ This networking setup consists of the following required networking configuratio
 4. After you create your cluster, you can configure the following networking options:
   * Set up a [strongSwan VPN connection service](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public) to allow communication between your cluster and an on-premises network or {{site.data.keyword.icpfull_notm}}.
   * Create [Kubernetes discovery services](/docs/containers?topic=containers-cs_network_planning#in-cluster) to allow in-cluster communication between pods.
-  * Create [public](/docs/containers?topic=containers-cs_network_planning#public_access) Ingress, load balancer, or node port services to expose apps to public networks.
-  * Create [private](/docs/containers?topic=containers-cs_network_planning#private_both_vlans) Ingress, load balancer, or node port services to expose apps to private networks and create Calico network policies to secure your cluster from public access.
+  * Create [public](/docs/containers?topic=containers-cs_network_planning#public_access) network load balancer (NLB), Ingress application load balancer (ALB), or NodePort services to expose apps to public networks.
+  * Create [private](/docs/containers?topic=containers-cs_network_planning#private_both_vlans) network load balancer (NLB), Ingress application load balancer (ALB), or NodePort services to expose apps to private networks and create Calico network policies to secure your cluster from public access.
   * Isolate networking workloads to [edge worker nodes](#both_vlans_private_edge).
   * [Isolate your cluster on the private network](#isolate).
 
@@ -77,7 +77,7 @@ This networking setup consists of the following required networking configuratio
 4. After you create your cluster, you can configure the following networking options:
   * [Set up a VPN gateway](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private) to allow communication between your cluster and an on-premises network or {{site.data.keyword.icpfull_notm}}. If you previously set up a VRA (Vyatta) or FSA to allow communication between the master and worker nodes, you can configure an IPSec VPN endpoint on the VRA or FSA.
   * Create [Kubernetes discovery services](/docs/containers?topic=containers-cs_network_planning#in-cluster) to allow in-cluster communication between pods.
-  * Create [private](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) Ingress, load balancer, or node port services to expose apps on private networks.
+  * Create [private](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) network load balancer (NLB), Ingress application load balancer (ALB), or NodePort services to expose apps on private networks.
   * Isolate networking workloads to [edge worker nodes](#both_vlans_private_edge).
   * [Isolate your cluster on the private network](#isolate).
 
@@ -98,7 +98,7 @@ Trying to change the service endpoint for master-worker communication instead? C
 {: tip}
 
 Before you begin:
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * If your worker nodes are stand-alone (not part of a worker pool), [update them to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
 To change the VLANs that a worker pool uses to provision worker nodes:
@@ -201,7 +201,7 @@ To change the VLANs that a worker pool uses to provision worker nodes:
      ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
      ```
      {: pre}
- 
+
 8. Optional: You can repeat steps 2 - 7 for each worker pool in your cluster. After you complete these steps, all worker nodes in your cluster are set up with the new VLANs.
 
 <br />
@@ -374,7 +374,7 @@ Note that you cannot disable the private service endpoint after you enable it.
 ## Optional: Isolating networking workloads to edge worker nodes
 {: #both_vlans_private_edge}
 
-Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads).
+Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that network load balancer (NLB) and Ingress application load balancer (ALB) pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads).
 {: shortdesc}
 
 If your cluster is connected to a public VLAN but you want to block traffic to public NodePorts on edge worker nodes, you can also use a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress). Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.

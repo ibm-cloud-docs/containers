@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -45,14 +45,14 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </thead>
 <tbody>
 <tr>
-<td>0.3.XX</td>
-<td>11 Apr 2019</td>
+<td>0.2.XX</td>
+<td>15 Apr 2019</td>
 <td><ul>
-<li>Adds support for global endpoint functionality in version `0.3`. By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources in all locations. You are not required to target a region to work with resources. For more information, see [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint).</li>
+<li>Adds support for [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) in version `0.3`. By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources in all locations. You are not required to target a region to work with resources.</li>
 <ul><li>Adds the [<code>ibmcloud ks supported-locations</code>](/docs/containers?topic=containers-cs_cli_reference#cs_supported-locations) command to list all locations that {{site.data.keyword.containerlong_notm}} supports.</li>
 <li>Adds the <code>--locations</code> flag to the `clusters` and `zones` commands to filter resources by one or more locations.</li>
-<li>Adds the <code>--region</code> flag to the `credential-set/unset/get`, `api-key-info/reset`, and `vlan-spanning-get` commands. To run these commands, you must either specify a region in the `--region` flag or set a region with the `ibmcloud ks region-set` command.</li></ul>
-<li>else...</li>
+<li>Adds the <code>--region</code> flag to the `credential-set/unset/get`, `api-key-info/reset`, and `vlan-spanning-get` commands. To run these commands, you must either specify a region in the `--region` flag or set a region with the `ibmcloud ks region-set` command.</li></ul></li>
+<li>...else</li>
 </ul></td>
 </tr>
 <tr>

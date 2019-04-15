@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks
 
@@ -23,484 +23,246 @@ subcollection: containers
 {:download: .download}
 
 
-# Locations
+# Regions and zones
 {: #regions-and-zones}
 
-You can deploy {{site.data.keyword.containerlong}} clusters worldwide. When you create a Kubernetes cluster, its resources remain in the location that you deploy the cluster to. You can access the {{site.data.keyword.containerlong_notm}} via a global API endpoint to work with your cluster.
+A region is a specific geographical location where you can deploy apps, services, and other {{site.data.keyword.Bluemix}} resources. [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containerlong}} regions](#container_regions). Regions consist of one or more zones, which are physical data centers that host the compute, network, and storage resources and related cooling and power that host services and applications. Zones are isolated from each other, which ensures no shared single point of failure.
 {:shortdesc}
 
-![{{site.data.keyword.containerlong_notm}} locations](images/locations.png)
+![{{site.data.keyword.containerlong_notm}} regions and zones](images/regions-mz.png)
 
-_{{site.data.keyword.containerlong_notm}} locations_
+_{{site.data.keyword.containerlong_notm}} regions and zones_
 
-{{site.data.keyword.Bluemix_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). Use the [global endpoint](#endpoint) instead.
-{: deprecated}
+ {{site.data.keyword.Bluemix_notm}} is hosted worldwide. Services within {{site.data.keyword.Bluemix_notm}} might be available globally, or within a specific region. When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, its resources remain in the region that you deploy the cluster to.
 
-## {{site.data.keyword.containerlong_notm}} locations
-{: #locations}
+ You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
+{: note}
 
-{{site.data.keyword.Bluemix_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions. Free clusters are available in only select locations. Other {{site.data.keyword.Bluemix_notm}} services might be available globally, or within a specific location.
-{: shortdesc}
+ | {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.Bluemix_notm}} location |
+| --- | --- |
+| AP North (standard clusters only) | Tokyo |
+| AP South | Sydney |
+| EU Central | Frankfurt |
+| UK South | London |
+| US East (standard clusters only) | Washington DC |
+| US South | Dallas |
+{: caption="Supported Kubernetes Service regions and corresponding IBM Cloud locations." caption-side="top"}
 
-### Available locations
-{: #available-locations}
+ <br />
 
-To list available {{site.data.keyword.containerlong_notm}} locations, use the `ibmcloud ks supported-locations` command.
-{: shortdesc}
 
-The following output is used as an example to explain how {{site.data.keyword.Bluemix_notm}} locations are organized.
+ ## Locations in {{site.data.keyword.Bluemix_notm}}
+{: #bluemix_regions}
 
+ You can organize your resources across {{site.data.keyword.Bluemix_notm}} services by using {{site.data.keyword.Bluemix_notm}} locations, also called regions. For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location.
+{:shortdesc}
+
+ You can specify an {{site.data.keyword.Bluemix_notm}} region when you log in to the global API endpoint. To list available regions, run `ibmcloud regions`. To check which {{site.data.keyword.Bluemix_notm}} location you are currently in, run `ibmcloud target` and review the **Region** field. If you do not specify a region, you are prompted to select a region.
+
+ For example, to log in to the global API endpoint in the Dallas (`us-south`) region:
 ```
-ibmcloud catalog locations
+ibmcloud login -a https://cloud.ibm.com -r us-south
 ```
 {: pre}
 
-```       
-ID                       Kind        Display Name
-na                       geography   North America         
-|__ca                    country     Canada                
-|  |__mon                metro       Montreal              
-|  |  |__mon01           dc          Montreal 01           
-|  |__tor                metro       Toronto               
-|     |__tor01           dc          Toronto 01            
-|__mex                   country     Mexico                
-|  |__mex-cty            metro       Mexico City           
-|     |__mex01           dc          Mexico 01             
-|__us                    country     United States         
-   |__dal                metro       Dallas                   
-   |  |__dal10           dc          Dallas 10             
-   |  |__dal12           dc          Dallas 12             
-   |  |__dal13           dc          Dallas 13             
-   |  |__us-south        region      Dallas                
-   |     |__us-south-1   zone        Dallas 1              
-   |     |__us-south-2   zone        Dallas 2              
-   |     |__us-south-3   zone        Dallas 3                        
-   |__sjc                metro       San Jose              
-   |  |__sjc01           dc          San Jose 01           
-   |  |__sjc03           dc          San Jose 03                   
-   |__wdc                metro       Washington DC         
-      |__us-east         region      Washington DC         
-      |  |__us-east-1    zone        Washington DC 1       
-      |  |__us-east-2    zone        Washington DC 2       
-      |  |__us-east-3    zone        Washington DC 3         
-      |__wdc04           dc          Washington DC 04      
-      |__wdc06           dc          Washington DC 06      
-      |__wdc07           dc          Washington DC 07   
+ To log in to the global API endpoint and select a region:
+```
+ibmcloud login -a https://cloud.ibm.com
+```
+{: pre}
+
+ Example output:
+```
+API endpoint: cloud.ibm.com
+
+Get One Time Code from https://identity-2.eu-central.iam.cloud.ibm.com/identity/passcode to proceed.
+Open the URL in the default browser? [Y/n]> y
+One Time Code >
+Authenticating...
+OK
+
+Select an account:
+1. MyAccount (00a11aa1a11aa11a1111a1111aaa11aa) <-> 1234567
+2. TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
+Enter a number> 2
+Targeted account TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321
+
+
+Targeted resource group default
+
+Select a region (or press enter to skip):
+1. au-syd
+2. jp-tok
+3. eu-de
+4. eu-gb
+5. us-south
+6. us-east
+Enter a number> 5
+Targeted region us-south
+
+
+API endpoint:      https://cloud.ibm.com   	
+Region:            us-south   	
+User:              first.last@email.com   	
+Account:           TeamAccount (2bb222bb2b22222bbb2b2222bb2bb222) <-> 7654321  	
+Resource group:    default   	
+CF API endpoint:      	
+Org:                  	
+Space:                	
+
+...
 ```
 {: screen}
 
-<table summary="The table shows organization of {{site.data.keyword.Bluemix_notm}} locations. Rows are to be read from the left to right, with the location type in column one, an example of the type in column two, and the description in column three.">
-<caption>Organization of {{site.data.keyword.Bluemix_notm}} locations.</caption>
-  <thead>
-  <th>Type</th>
-  <th>Example</th>
-  <th>Description</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Geography</td>
-      <td>North America (`na`)</td>
-      <td>An organizational grouping that is based on geographic continents.</td>
-    </tr>
-    <tr>
-      <td>Country</td>
-      <td>Canada (`ca`)</td>
-      <td>The location's country within the geography.</td>
-    </tr>
-    <tr>
-      <td>Metro</td>
-      <td>Mexico City (`mex-cty`), Dallas (`dal`)</td>
-      <td>The name of a city where data centers are located. A metro can have 1 or more data centers. A metro can also support a multizone region, such as Dallas, or can have only single zone data centers.</td>
-    </tr>
-    <tr>
-      <td>Data center</td>
-      <td>Dallas 12 (`dal12`)</td>
-      <td>A physical location of the compute, network, and storage infrastructure and related cooling and power that host cloud services and applications. Data centers are isolated from each other, which ensures no shared single point of failure.</td>
-    </tr>
-    <tr>
-      <td>Region</td>
-      <td>US South (`us-south`)</td>
-      <td>A special grouping within a metro of 3 data centers that are called zones. If you create a cluster in a metro region, the Kubernetes master and worker nodes can be spread across zones for high availability. Therefore, a region is sometimes called a "multizone region." In {{site.data.keyword.containerlong_notm}}, the regions are called by the metro names as follows (previous names in parentheses).
-      <ul><li>Dallas (US South, `us-south`)</li>
-      <li>Frankfurt (EU Central, `eu-de`)</li>
-      <li>London (UK South, `eu-gb`)</li>
-      <li>Sydney (AP South, `au-syd`)</li>
-      <li>Tokyo (AP North, `jp-tok`)</li>
-      <li>Washington, D.C. (US East, `us-east`)</li></ul></td>
-    </tr>
-    <tr>
-      <td>Zone</td>
-      <td>US South 1 (`us-south-1`)</td>
-      <td>A data center within a region in which resources such as clusters can be spread across zones in an multizone architecture for high availability, thus also called an "availability zone." Zones are isolated from each other, which ensures no shared single point of failure. In {{site.data.keyword.containerlong_notm}}, the zones for a region can be filtered by the region metro name, not data center name. For example, if you filter locations for **Dallas**, multizone clusters are returned. If you filter locations for **Dallas 10 (dal10)**, only single zone clusters are returned, even if you have a multizone cluster with one zone in **Dallas 10 (dal10)**.</td>
-    </tr>
-  </tbody>
-  </table>
-
-### Single zone and multizone locations in {{site.data.keyword.containerlong_notm}}
-{: #zones}
-
-The following tables list the available single and multizone locations in {{site.data.keyword.containerlong_notm}}. Note that in certain metros, you can provision a cluster as a single zone or multizone cluster. Also, free clusters are only available in select geographies as only single zone clusters with one worker node.
-{: shortdesc}
-
-*   **Multizone**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
-*   **Single zone**: If you create a cluster in a single data center location, you can create multiple worker nodes, but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
-
-{{site.data.keyword.Bluemix_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). The tables list the previous regions for informational purposes. Going forward, you can use the [global endpoint](#endpoint) to move toward a region-less architecture.
-{: deprecated}
-
-**Multizone metro locations: Available in all six worldwide {{site.data.keyword.Bluemix_notm}} regions**
-
-<table summary="The table shows the available multizone metro locations {{site.data.keyword.containerlong_notm}}. Rows are to be read from the left to right.  Column one is the geography that the location is in, column two is the country of the location, column three is the metro of the location, column four is the data center, and column five is the deprecated region that the location used to be organized into.">
-<caption>Available multizone metro locations {{site.data.keyword.containerlong_notm}}.</caption>
-  <thead>
-  <th>Geography</th>
-  <th>Country</th>
-  <th>Metro</th>
-  <th>Data center</th>
-  <th>Deprecated region</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Australia</td>
-      <td>Sydney</td>
-      <td>syd01, syd04, syd05</td>
-      <td>AP South (`ap-south`, `au-syd`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Japan</td>
-      <td>Tokyo</td>
-      <td>tok02, tok04, tok05</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>Germany</td>
-      <td>Frankfurt</td>
-      <td>fra02, fra04, fra05</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>United Kingdom</td>
-      <td>London</td>
-      <td>lon04, lon05`*`, lon06</td>
-      <td>UK South (`uk-south`, `eu-gb`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>United States</td>
-      <td>Dallas</td>
-      <td>dal10, dal12, dal13</td>
-      <td>US South (`us-south`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>United States</td>
-      <td>Washington, D.C.</td>
-      <td>wdc04, wdc06, wdc07</td>
-      <td>US East (`us-east`)</td>
-    </tr>
-  </tbody>
-  </table>
-
-**Single zone data center locations**
-
-<table summary="The table shows the available single zone data center locations {{site.data.keyword.containerlong_notm}}. Rows are to be read from the left to right. Column one is the geography that the location is in, column two is the country of the location, column three is the metro of the location, column four is the data center, and column five is the deprecated region that the location used to be organized into.">
-<caption>Available single zone locations {{site.data.keyword.containerlong_notm}}.</caption>
-  <thead>
-  <th>Geography</th>
-  <th>Country</th>
-  <th>Metro</th>
-  <th>Data center</th>
-  <th>Deprecated region</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Australia</td>
-      <td>Melbourne</td>
-      <td>mel01</td>
-      <td>AP South (`ap-south`, `au-syd`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Australia</td>
-      <td>Sydney</td>
-      <td>syd01, syd04, syd05</td>
-      <td>AP South (`ap-south`, `au-syd`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>China</td>
-      <td>Hong Kong<br>SAR of the PRC</td>
-      <td>hkg02</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>India</td>
-      <td>Chennai</td>
-      <td>che01</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Japan</td>
-      <td>Tokyo</td>
-      <td>tok02, tok04, tok05</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Korea</td>
-      <td>Seoul</td>
-      <td>seo01</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Singapore</td>
-      <td>Singapore</td>
-      <td>sng01</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>France</td>
-      <td>Paris</td>
-      <td>par01</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>Germany</td>
-      <td>Frankfurt</td>
-      <td>fra02, fra04, fra05</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>Italy</td>
-      <td>Milan</td>
-      <td>mil01</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>The Netherlands</td>
-      <td>Amsterdam</td>
-      <td>ams03</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>Norway</td>
-      <td>Oslo</td>
-      <td>osl</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>United Kingdom</td>
-      <td>London</td>
-      <td>lon02`*`, lon04, lon05`*`, lon06</td>
-      <td>UK South (`uk-south`, `eu-gb`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>Canada</td>
-      <td>Montreal</td>
-      <td>mon01</td>
-      <td>US East (`us-east`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>Canada</td>
-      <td>Toronto</td>
-      <td>tor01</td>
-      <td>US East (`us-east`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>Mexico</td>
-      <td>Mexico City</td>
-      <td>mex01</td>
-      <td>US South (`us-south`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>United States</td>
-      <td>Dallas</td>
-      <td>dal10, dal12, dal13</td>
-      <td>US South (`us-south`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>United States</td>
-      <td>San Jose</td>
-      <td>sjc03, sjc04</td>
-      <td>US South (`us-south`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>United States</td>
-      <td>Washington, D.C.</td>
-      <td>wdc04, wdc06, wdc07</td>
-      <td>US East (`us-east`)</td>
-    </tr>
-    <tr>
-      <td>South America</td>
-      <td>Brazil</td>
-      <td>São Paulo</td>
-      <td>sao01</td>
-      <td>US South (`us-south`)</td>
-    </tr>
-  </tbody>
-  </table>
-
-`*` lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.
-{: note}
-
-### Single zone clusters
-{: #regions_single_zone}
-
-In a single zone cluster, your cluster's resources remain in the zone in which the cluster is deployed. The following image highlights the relationship of single zone cluster components with an example of the Toronto, Canada `tor01` location.
-{: shortdesc}
-
-<img src="/images/location-cluster-resources.png" width="650" alt="Understanding where your cluster resources reside" style="width:650px; border-style: none"/>
-
-_Understanding where your single zone cluster resources are._
-
-1.  Your cluster's resources, including the master and worker nodes, are in the same data center that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes within the same zone.
-
-2.  If you set up other cluster resources, such as storage, networking, compute, or apps running in pods, the resources and their data remain in the zone that you deployed your cluster to.
-
-3.  When you initiate cluster management actions, such as using `ibmcloud ks` commands, basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint via the global endpoint. Regional endpoints are located in the nearest multizone metro region. In this example, the metro region is Washington, D.C.
-
-### Multizone clusters
-{: #regions_multizone}
-
-In a multizone cluster, your cluster's resources are spread across multiple zones for higher availability.
-{: shortdesc}
-
-1.  Worker nodes are spread across multiple zones in the metro location to provide more availability for your cluster. The Kubernetes master replicas are also spread across zones. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes through the global endpoint.
-
-2.  Other cluster resources, such as storage, networking, compute, or apps running in pods, vary in how they deploy to the zones in your multizone cluster. For more information, review these topics:
-    *   Setting up [file storage](/docs/containers?topic=containers-file_storage#add_file) and [block storage](/docs/containers?topic=containers-block_storage#add_block) in multizone clusters, or [choosing a multizone persistent storage solution](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-    *   [Enabling public or private access to an app by using a LoadBalancer service in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
-    *   [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress#planning).
-    *   [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability).
-
-3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through the global endpoint.
-
-<br />
+ <br />
 
 
-## Accessing the global endpoint
-{: #endpoint}
+ ## Regions in {{site.data.keyword.containerlong_notm}}
+{: #container_regions}
 
-You can organize your resources across {{site.data.keyword.Bluemix_notm}} services by using {{site.data.keyword.Bluemix_notm}} locations (formerly called regions). For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location. To access these resources, you can use the global endpoints and filter by location.
+ By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.Bluemix_notm}} as a whole.
 {:shortdesc}
 
-### Logging in to {{site.data.keyword.Bluemix_notm}}
-{: #login-ic}
+ You can create standard clusters in every supported {{site.data.keyword.containerlong_notm}} region. Free clusters are available only in select regions.
+{: note}
 
-When you log in to the {{site.data.keyword.Bluemix_notm}} (`ibmcloud`) command line, you are prompted to select a region. However, this region does not affect the {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`) endpoint, which still uses the global endpoint. Note that you do still need to target the resource group that your cluster is in if it is not in the default resource group.
-{: shortdesc}
+ Supported {{site.data.keyword.containerlong_notm}} regions:
+  * AP North (standard clusters only)
+  * AP South
+  * EU Central
+  * UK South
+  * US East (standard clusters only)
+  * US South
 
-To log in to the {{site.data.keyword.Bluemix_notm}} global API endpoint and target the resource group that your cluster is in:
-```
-ibmcloud login -a https://cloud.ibm.com -g <nondefault_resource_group_name>
-```
-{: pre}
+ You can access the {{site.data.keyword.containerlong_notm}} through one global endpoint: `https://containers.cloud.ibm.com/v1`.
+* To check which {{site.data.keyword.containerlong_notm}} region you are currently in, run `ibmcloud ks region`.
+* To retrieve a list of available regions and their endpoints, run `ibmcloud ks regions`.
 
-### Logging in to {{site.data.keyword.containerlong_notm}}
-{: #login-iks}
+ To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header.
+{: tip}
 
-When you log in to {{site.data.keyword.Bluemix_notm}}, you can access the {{site.data.keyword.containershort_notm}}. To help you get started, check out the following resources for using the {{site.data.keyword.containerlong_notm}} CLI and API.
-{: shortdesc}
+ ### Logging in to a different {{site.data.keyword.containerlong_notm}} region
+{: #container_login_endpoints}
 
-**{{site.data.keyword.containerlong_notm}} CLI**:
-* [Set up your CLI to use the `ibmcloud ks` plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
-* [Configure your CLI to connect to a particular cluster and run `kubectl` commands](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+ You can change regions by using the {{site.data.keyword.containerlong_notm}} CLI.
+{:shortdesc}
 
-By default, you are logged in to the global {{site.data.keyword.containerlong_notm}} endpoint, `https://containers.cloud.ibm.com`.
-
-When you use the new global functionality in the {{site.data.keyword.containerlong_notm}} CLI, consider the following changes from the legacy region-based functionality.
-
-* Listing resources:
-  * When you list resources, such as with the `ibmcloud ks clusters` or `ibmcloud ks zones` commands, resources in all locations are returned. To filter resources by a specific location, certain commands include a `--location` flag. When you specify this flag in the `ibmcloud ks clusters` command, multizone clusters can be filtered by their `metro` value and single zone clusters by their `datacenter` value. For example, if you filter locations for `dal` metro, multizone clusters are returned. If you filter locations for `dal10` data center, only single zone clusters are returned, even if you have a multizone cluster with one zone in `dal10`. Note that you can pass one location or a comma-separated list of locations.
-    Example to filter by location:
-    ```
-    ibmcloud ks clusters --locations Dallas
-    ```
-    {: pre}
-  * Other commands do not return resources in all locations. To run `credential-set/unset/get`, `api-key-info/reset`, and `vlan-spanning-get` commands, you must either specify a region in the `--region` flag or set a region with the `ibmcloud ks region-set` command.
-
-* Working with resources:
-  * When you use the global endpoint, you can work with resources that you have access permissions to in any location, even if you set a region by running `ibmcloud ks region-set` and the resource that you want to work with is in another region.
-  * If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region-set` command and use the cluster name when you run commands.
-
-* Legacy functionality:
-  * If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` [command](/docs/containers?topic=containers-cs_cli_reference#cs_init) to target a regional endpoint instead of the global endpoint.
-    Example to target the US South regional endpoint:
-    ```
-    ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
-    ```
-    {: pre}
-  * To use the global functionality, you can use the `ibmcloud ks init` command again to target the global endpoint. Example to target the global endpoint again:
-    ```
-    ibmcloud ks init --host https://containers.cloud.ibm.com
-    ```
-    {: pre}
-
-</br></br>
-**{{site.data.keyword.containerlong_notm}} API**:
-* [Get started with the API](/docs/containers?topic=containers-cs_cli_install#cs_api).
-* [View documentation on the API commands](https://containers.cloud.ibm.com/swagger-api/).
-* Generate a client of the API to use in automation by using the [`swagger.json` API](https://containers.cloud.ibm.com/swagger-api-json).
-
-To interact with the global {{site.data.keyword.containerlong_notm}} API, enter the command type and append `global/v1/command` to the endpoint.
-
-Example of `GET /clusters` global API:
-```
-GET https://containers.cloud.ibm.com/global/v1/clusters
-```
-{: codeblock}
-
-</br>
-
-If you need to specify a region in an API call, remove the `/global` parameter from the path and pass the region name in the `X-Region` header. To list available regions, run `ibmcloud ks regions`.
-
-<br />
-
-
-
-## Deprecated: Previous {{site.data.keyword.Bluemix_notm}} region and zone structure
-{: #bluemix_regions}
-
-Previously, your {{site.data.keyword.Bluemix_notm}} resources were organized into regions. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries and geographies. The following table maps the previous {{site.data.keyword.Bluemix_notm}} regions, {{site.data.keyword.containerlong_notm}} regions, and {{site.data.keyword.containerlong_notm}} zones. Multizone-capable zones are in bold.
-{: shortdesc}
-
-Region-specific endpoints are deprecated. Use the [global endpoint](#endpoint) instead. If you must use regional endpoints, [set the `IKS_BETA_VERSION` environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to `0.2`](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_beta).
-{: deprecated}
-
-| {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.Bluemix_notm}} regions | Available zones in the region |
-| --- | --- | --- |
-| AP North (standard clusters only) | Tokyo | che01, hkg02, seo01, sng01, **tok02, tok04, tok05** |
-| AP South | Sydney | mel01, **syd01, syd04, syd05** |
-| EU Central | Frankfurt | ams03, **fra02, fra04, fra05**, mil01, osl01, par01 |
-| UK South | London | lon02, **lon04, lon05, lon06** |
-| US East (standard clusters only) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
-| US South | Dallas | **dal10, dal12, dal13**, mex01, sjc03, sjc04, sao01 |
-{: caption="Corresponding {{site.data.keyword.containershort_notm}} and {{site.data.keyword.Bluemix_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="top"}
-
-By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.Bluemix_notm}} as a whole.
-
-You might want to log in to another {{site.data.keyword.containerlong_notm}} region for the following reasons:
+ You might want to log in to another {{site.data.keyword.containerlong_notm}} region for the following reasons:
   * You created {{site.data.keyword.Bluemix_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containerlong_notm}} in another region.
   * You want to access a cluster in a region that is different from the default {{site.data.keyword.Bluemix_notm}} region that you are logged in to.
 
-To quickly switch regions, use the `ibmcloud ks region-set` [command](/docs/containers?topic=containers-cs_cli_reference#cs_region-set).
+ To quickly switch regions, run [`ibmcloud ks region-set`](/docs/containers?topic=containers-cs_cli_reference#cs_region-set).
+
+ ### Using {{site.data.keyword.containerlong_notm}} API commands
+{: #containers_api}
+
+ To interact with the {{site.data.keyword.containerlong_notm}} API, enter the command type and append `/v1/command` to the global endpoint.
+{:shortdesc}
+
+ Example of `GET /clusters` API:
+  ```
+  GET https://containers.cloud.ibm.com/v1/clusters
+  ```
+  {: codeblock}
+
+ </br>
+
+ To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header. To list available regions, run `ibmcloud ks regions`.
+{: tip}
+
+ To view documentation on the API commands, view [https://containers.cloud.ibm.com/swagger-api/](https://containers.cloud.ibm.com/swagger-api/).
+
+ ## Zones in {{site.data.keyword.containerlong_notm}}
+{: #zones}
+
+ Zones are physical data centers that are available within an {{site.data.keyword.Bluemix_notm}} region. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries. The following table displays the zones available by region.
+{:shortdesc}
+
+ * **Multizone Metro Location**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
+* **Single Zone Location**: If you create a cluster in a single zone location, you can create multiple worker nodes, but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
+
+ <table summary="The table shows the zones available by regions. Rows are to be read from the left to right, with the region in column one, the multizone metro locations in column two, and the single zone locations in column three.">
+<caption>Available single and multizones by region.</caption>
+  <thead>
+  <th>Region</th>
+  <th>Multizone Metro Location</th>
+  <th>Single Zone Location</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AP North</td>
+      <td>Tokyo: tok02, tok04, tok05</td>
+      <td><p>Chennai: che01</p>
+      <p>Hong Kong S.A.R. of the PRC: hkg02</p>
+      <p>Seoul: seo01</p>
+      <p>Singapore: sng01</p></td>
+    </tr>
+    <tr>
+      <td>AP South</td>
+      <td>Sydney: syd01, syd04, syd05</td>
+      <td>Melbourne: mel01</td>
+    </tr>
+    <tr>
+      <td>EU Central</td>
+      <td>Frankfurt: fra02, fra04, fra05</td>
+      <td><p>Amsterdam: ams03</p>
+      <p>Milan: mil01</p>
+      <p>Oslo: osl01</p>
+      <p>Paris: par01</p>
+      </td>
+    </tr>
+    <tr>
+      <td>UK South</td>
+      <td>London: lon04, lon05`*`, lon06</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>US East</td>
+      <td>Washington DC: wdc04, wdc06, wdc07</td>
+      <td><p>Montreal: mon01</p>
+      <p>Toronto: tor01</p></td>
+    </tr>
+    <tr>
+      <td>US South</td>
+      <td>Dallas: dal10, dal12, dal13</td>
+      <td><p>Mexico: mex01</p><p>San Jose: sjc03, sjc04</p><p>São Paulo: sao01</p></td>
+    </tr>
+  </tbody>
+</table>
+
+ `*` lon05 replaces lon02. New clusters must use lon05, and only lon05 supports highly available masters spread across zones.
+{: note}
+
+ ### Single-zone clusters
+{: #regions_single_zone}
+
+ In a single-zone cluster, your cluster's resources remain in the zone in which the cluster is deployed. The following image highlights the relationship of single-zone cluster components within an example region of US East:
+
+ <img src="/images/region-cluster-resources.png" width="650" alt="Understanding where your cluster resources reside" style="width:650px; border-style: none"/>
+
+ _Understanding where your single-zone cluster resources are._
+
+ 1.  Your cluster's resources, including the master and worker nodes, are in the same zone that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes within the same zone.
+
+ 2.  If you set up other cluster resources, such as storage, networking, compute, or apps running in pods, the resources and their data remain in the zone that you deployed your cluster to.
+
+ 3.  When you initiate cluster management actions, such as using `ibmcloud ks` commands, basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
+
+ ### Multizone clusters
+{: #regions_multizone}
+
+ In a multizone cluster, the master node is deployed in a multizone-capable zone and your cluster's resources are spread across multiple zones.
+
+ 1.  Worker nodes are spread across multiple zones in one region to provide more availability for your cluster. The master remains in the same multizone-capable zone that you deployed the cluster to. When you initiate local container orchestration actions, such as `kubectl` commands, the information is exchanged between your master and worker nodes through a regional endpoint.
+
+ 2.  Other cluster resources, such as storage, networking, compute, or apps running in pods, vary in how they deploy to the zones in your multizone cluster. For more information, review these topics:
+    * Setting up [file storage](/docs/containers?topic=containers-file_storage#add_file) and [block storage](/docs/containers?topic=containers-block_storage#add_block) in multizone clusters
+    * [Enabling public or private access to an app by using a LoadBalancer service in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+    * [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress#planning)
+    * [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability)
+
+ 3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), basic information about the cluster (such as name, ID, user, the command) is routed through a regional endpoint.
+
+
+
+
