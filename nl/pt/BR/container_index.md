@@ -34,8 +34,8 @@ Clique em uma opção para começar:
 <img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="Clique em um ícone para iniciar rapidamente com o {{site.data.keyword.containerlong_notm}}. Com o {{site.data.keyword.Bluemix_dedicated_notm}}, clique nesse ícone para ver suas opções." style="width:440px;" />
 <map name="home_map" id="home_map">
 <area href="#clusters" alt="Introdução aos clusters do Kubernetes em{{site.data.keyword.Bluemix_notm}}" title="Introdução aos clusters do Kubernetes em{{site.data.keyword.Bluemix_notm}}" shape="rect" coords="-7, -8, 108, 211" />
-<area href="cs_cli_install.html" alt="Instalar as CLIs." title="Instalar as CLIs." shape="rect" coords="155, -1, 289, 210" />
-<area href="cs_dedicated.html#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} ambiente de nuvem" title="{{site.data.keyword.Bluemix_notm}} ambiente de nuvem" shape="rect" coords="326, -10, 448, 218" />
+<area href="/docs/containers/cs_cli_install.html" alt="Instalar as CLIs." title="Instalar as CLIs." shape="rect" coords="155, -1, 289, 210" />
+<area href="/docs/containers/cs_dedicated.html#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} ambiente de nuvem" title="{{site.data.keyword.Bluemix_notm}} ambiente de nuvem" shape="rect" coords="326, -10, 448, 218" />
 </map>
 
 
@@ -66,15 +66,15 @@ Bom Trabalho! Você criou seu primeiro cluster do Kubernetes. Aqui estão alguns
 
 *   **Tipo de máquina**: o cluster grátis tem um nó do trabalhador virtual que é agrupado em um conjunto de trabalhadores, com 2 CPUs, 4 GB de memória e um único disco SAN de 100 GB disponível para seus apps usarem. Ao criar um cluster padrão, é possível escolher entre máquinas físicas (bare metal) ou virtuais, juntamente com vários tamanhos de máquina.
 *   **Mestre gerenciado**: o nó do trabalhador é monitorado e gerenciado centralmente por um mestre do Kubernetes pertencente ao {{site.data.keyword.IBM_notm}} dedicado e altamente disponível que controla e monitora todos os recursos do Kubernetes no cluster. É possível concentrar-se em seu nó do trabalhador e nos apps implementados nele sem se preocupar também com o gerenciamento desse mestre.
-*   **Recursos de infraestrutura**: os recursos que são necessários para executar o cluster, como VLANS e endereços IP, são gerenciados em uma conta de infraestrutura do IBM Cloud (SoftLayer) pertencente à {{site.data.keyword.IBM_notm}}. Ao criar um cluster padrão, você gerencia esses recursos em sua própria conta de infraestrutura do IBM Cloud (SoftLayer). É possível aprender mais sobre esses recursos e as [permissões necessárias](cs_users.html#infra_access) ao criar um cluster padrão.
-*   **Outras opções**: clusters grátis são implementados na região que você seleciona, mas não é possível escolher qual zona. Para controlar a zona, a rede e o armazenamento persistente, crie um cluster padrão. [Saiba mais sobre os benefícios de clusters grátis e padrão](cs_why.html#cluster_types).
+*   **Recursos de infraestrutura**: os recursos que são necessários para executar o cluster, como VLANS e endereços IP, são gerenciados em uma conta de infraestrutura do IBM Cloud (SoftLayer) pertencente à {{site.data.keyword.IBM_notm}}. Ao criar um cluster padrão, você gerencia esses recursos em sua própria conta de infraestrutura do IBM Cloud (SoftLayer). É possível aprender mais sobre esses recursos e as [permissões necessárias](/docs/containers/cs_users.html#infra_access) ao criar um cluster padrão.
+*   **Outras opções**: clusters grátis são implementados na região que você seleciona, mas não é possível escolher qual zona. Para controlar a zona, a rede e o armazenamento persistente, crie um cluster padrão. [Saiba mais sobre os benefícios de clusters grátis e padrão](/docs/containers/cs_why.html#cluster_types).
 
 
 **O que Vem a Seguir?**</br>
 Experimente algumas coisas com seu cluster grátis antes de expirar.
 
-* Percorra o [primeiro tutorial do {{site.data.keyword.containerlong_notm}}](cs_tutorials.html#cs_cluster_tutorial) para criar um cluster do Kubernetes, instalando a CLI, criando um registro privado, configurando seu ambiente de cluster e incluindo um serviço em seu cluster.
-* Mantenha seu ritmo com o [segundo tutorial do {{site.data.keyword.containerlong_notm}}](cs_tutorials_apps.html#cs_apps_tutorial) sobre a implementação de apps no cluster.
-* [Crie um cluster padrão](cs_clusters.html#clusters_ui) com múltiplos nós para disponibilidade mais alta.
+* Percorra o [primeiro tutorial do {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_tutorials.html#cs_cluster_tutorial) para criar um cluster do Kubernetes, instalando a CLI, criando um registro privado, configurando seu ambiente de cluster e incluindo um serviço em seu cluster.
+* Mantenha seu ritmo com o [segundo tutorial do {{site.data.keyword.containerlong_notm}}](/docs/containers/cs_tutorials_apps.html#cs_apps_tutorial) sobre a implementação de apps no cluster.
+* [Crie um cluster padrão](/docs/containers/cs_clusters.html#clusters_ui) com múltiplos nós para disponibilidade mais alta.
 
 
