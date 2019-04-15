@@ -57,7 +57,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td>411 / 315</td>
 <td>15 Apr 2019</td>
-<td>Updates the value of the {{site.data.keyword.appid_full}} cookie expiration so that it matches the value of the access token expiration.</td>
+<td>Updates the value of the {{site.data.keyword.appid_full_notm}} cookie expiration so that it matches the value of the access token expiration.</td>
 <td>-</td>
 </tr>
 <tr>
