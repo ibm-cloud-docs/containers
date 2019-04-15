@@ -35,8 +35,8 @@ lastupdated: "2018-12-05"
 <img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="单击图标可快速开始使用 {{site.data.keyword.containerlong_notm}}。对于 {{site.data.keyword.Bluemix_dedicated_notm}}，单击此图标可查看选项。" style="width:440px;" />
 <map name="home_map" id="home_map">
 <area href="#clusters" alt="在 {{site.data.keyword.Bluemix_notm}} 中开始使用 Kubernetes 集群" title="在 {{site.data.keyword.Bluemix_notm}} 中开始使用 Kubernetes 集群" shape="rect" coords="-7, -8, 108, 211" />
-<area href="cs_cli_install.html" alt="安装 CLI。" title="安装 CLI。" shape="rect" coords="155, -1, 289, 210" />
-<area href="cs_dedicated.html#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} 云环境" title="{{site.data.keyword.Bluemix_notm}} 云环境" shape="rect" coords="326, -10, 448, 218" />
+<area href="/docs/containers/cs_cli_install.html" alt="安装 CLI。" title="安装 CLI。" shape="rect" coords="155, -1, 289, 210" />
+<area href="/docs/containers/cs_dedicated.html#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} 云环境" title="{{site.data.keyword.Bluemix_notm}} 云环境" shape="rect" coords="326, -10, 448, 218" />
 </map>
 
 
@@ -67,15 +67,15 @@ lastupdated: "2018-12-05"
 
 *   **机器类型**：免费集群有一个分组到工作程序池的虚拟工作程序节点，其中有 2 个 CPU、4 GB 内存以及 1 个 100 GB 的 SAN 磁盘可供应用程序使用。创建标准集群时，可以选择物理（裸机）或虚拟机，以及各种机器大小。
 *   **受管主节点**：工作程序节点由 {{site.data.keyword.IBM_notm}} 拥有的一个专用高可用性 Kubernetes 主节点进行集中监视和管理，该主节点控制和监视集群中的所有 Kubernetes 资源。此外，您可以专注于工作程序节点以及该工作程序节点中部署的应用程序，而不必担心如何管理此主节点。
-*   **基础架构资源**：运行集群所需的资源（例如 VLAN 和 IP 地址）在 {{site.data.keyword.IBM_notm}} 拥有的 IBM Cloud Infrastructure (SoftLayer) 帐户中进行管理。创建标准集群时，可在您自己的 IBM Cloud Infrastructure (SoftLayer) 帐户中管理这些资源。创建标准集群时，可以了解有关这些资源及[所需许可权](cs_users.html#infra_access)的更多信息。
-*   **其他选项**：免费集群部署在您选择的区域内，但您无法选择部署在哪个专区。要对专区、联网和持久性存储器拥有控制权，请创建标准集群。[了解有关免费和标准集群优点的更多信息](cs_why.html#cluster_types)。
+*   **基础架构资源**：运行集群所需的资源（例如 VLAN 和 IP 地址）在 {{site.data.keyword.IBM_notm}} 拥有的 IBM Cloud Infrastructure (SoftLayer) 帐户中进行管理。创建标准集群时，可在您自己的 IBM Cloud Infrastructure (SoftLayer) 帐户中管理这些资源。创建标准集群时，可以了解有关这些资源及[所需许可权](/docs/containers/cs_users.html#infra_access)的更多信息。
+*   **其他选项**：免费集群部署在您选择的区域内，但您无法选择部署在哪个专区。要对专区、联网和持久性存储器拥有控制权，请创建标准集群。[了解有关免费和标准集群优点的更多信息](/docs/containers/cs_why.html#cluster_types)。
 
 
 **接下来要做什么？**</br>
 在免费集群到期之前，使用免费集群试用一些功能。
 
-* 完成[第一个 {{site.data.keyword.containerlong_notm}} 教程](cs_tutorials.html#cs_cluster_tutorial)，以创建 Kubernetes 集群，安装 CLI，创建专用注册表，设置集群环境以及向集群添加服务。
-* 一鼓作气完成有关将应用程序部署到集群的[第二个 {{site.data.keyword.containerlong_notm}} 教程](cs_tutorials_apps.html#cs_apps_tutorial)。
-* [创建标准集群](cs_clusters.html#clusters_ui)（具有多个节点），以实现更高的可用性。
+* 完成[第一个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers/cs_tutorials.html#cs_cluster_tutorial)，以创建 Kubernetes 集群，安装 CLI，创建专用注册表，设置集群环境以及向集群添加服务。
+* 一鼓作气完成有关将应用程序部署到集群的[第二个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers/cs_tutorials_apps.html#cs_apps_tutorial)。
+* [创建标准集群](/docs/containers/cs_clusters.html#clusters_ui)（具有多个节点），以实现更高的可用性。
 
 
