@@ -34,8 +34,8 @@ Kubernetes クラスターで稼動する Docker コンテナーに可用性の�
 <img usemap="#home_map" border="0" class="image" id="image_ztx_crb_f1b" src="images/cs_public_dedicated_options.png" width="440" alt="{{site.data.keyword.containerlong_notm}} をすぐに開始するにはこのアイコンをクリックします。{{site.data.keyword.Bluemix_dedicated_notm}} の場合は、このアイコンをクリックするとオプションが表示されます。" style="width:440px;" />
 <map name="home_map" id="home_map">
 <area href="#clusters" alt="{{site.data.keyword.Bluemix_notm}} の Kubernetes クラスターの概説" title="{{site.data.keyword.Bluemix_notm}} の Kubernetes クラスターの概説" shape="rect" coords="-7, -8, 108, 211" />
-<area href="cs_cli_install.html" alt="CLI をインストールします。" title="CLI をインストールします。" shape="rect" coords="155, -1, 289, 210" />
-<area href="cs_dedicated.html#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} クラウド環境" title="{{site.data.keyword.Bluemix_notm}} クラウド環境" shape="rect" coords="326, -10, 448, 218" />
+<area href="/docs/containers/cs_cli_install.html" alt="CLI をインストールします。" title="CLI をインストールします。" shape="rect" coords="155, -1, 289, 210" />
+<area href="/docs/containers/cs_dedicated.html#dedicated_environment" alt="{{site.data.keyword.Bluemix_dedicated_notm}} クラウド環境" title="{{site.data.keyword.Bluemix_notm}} クラウド環境" shape="rect" coords="326, -10, 448, 218" />
 </map>
 
 
@@ -66,15 +66,15 @@ Kubernetes クラスターで稼動する Docker コンテナーに可用性の�
 
 *   **マシン・タイプ**: フリー・クラスターには、ワーカー・プールにグループ化された仮想ワーカー・ノードが 1 つ含まれています。アプリでは CPU を 2 つ、メモリーを 4 GB、100 GB SAN ディスクを 1 台使用できます。 標準クラスターの作成時には、物理 (ベア・メタル) マシンと仮想マシンのどちらにするかや、さまざまなマシン・サイズを選択できます。
 *   **管理マスター**: ワーカー･ノードは、{{site.data.keyword.IBM_notm}} が所有する可用性の高い専用のマスターで一元的にモニターされ、管理されます。Kubernetes マスターは、クラスター内のすべての Kubernetes リソースを制御および管理します。 作業担当者はこのマスターの管理のことは気にせずに、ワーカー・ノードとそのワーカー・ノードにデプロイされるアプリに集中できます。
-*   **インフラストラクチャー・リソース**: VLANS や IP アドレスなどの、クラスターの実行に必要なリソースは、{{site.data.keyword.IBM_notm}} 所有の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで管理されます。 標準クラスターの作成時は、独自の IBM Cloud インフラストラクチャー (SoftLayer) アカウントでこれらのリソースを管理します。 標準クラスターの作成時に、これらのリソースおよび[必要なアクセス権](cs_users.html#infra_access)について確認できます。
-*   **その他のオプション**: フリー・クラスターは選択した地域内にデプロイされますが、ゾーンは選択できません。 ゾーン、ネットワーキング、永続ストレージを制御するには、標準クラスターを作成してください。 [フリー・クラスターと標準クラスターの利点について詳しくは、こちらを参照してください](cs_why.html#cluster_types)。
+*   **インフラストラクチャー・リソース**: VLANS や IP アドレスなどの、クラスターの実行に必要なリソースは、{{site.data.keyword.IBM_notm}} 所有の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで管理されます。 標準クラスターの作成時は、独自の IBM Cloud インフラストラクチャー (SoftLayer) アカウントでこれらのリソースを管理します。 標準クラスターの作成時に、これらのリソースおよび[必要なアクセス権](/docs/containers/cs_users.html#infra_access)について確認できます。
+*   **その他のオプション**: フリー・クラスターは選択した地域内にデプロイされますが、ゾーンは選択できません。 ゾーン、ネットワーキング、永続ストレージを制御するには、標準クラスターを作成してください。 [フリー・クラスターと標準クラスターの利点について詳しくは、こちらを参照してください](/docs/containers/cs_why.html#cluster_types)。
 
 
 **次の作業**</br>
 期限が切れる前に、フリー・クラスターでさまざまな機能を試してください。
 
-* [最初の {{site.data.keyword.containerlong_notm}} チュートリアル](cs_tutorials.html#cs_cluster_tutorial)で、Kubernetes クラスターの作成、CLI のインストール、専用レジストリーの作成、クラスター環境のセットアップ、クラスターへのサービスの追加について理解します。
-* そのまま、[2 つ目の{{site.data.keyword.containerlong_notm}} チュートリアル](cs_tutorials_apps.html#cs_apps_tutorial)も行い、クラスターにアプリをデプロイする方法について学習します。
-* 可用性を高めるために、複数のノードを使用する[標準クラスターを作成します](cs_clusters.html#clusters_ui)。
+* [最初の {{site.data.keyword.containerlong_notm}} チュートリアル](/docs/containers/cs_tutorials.html#cs_cluster_tutorial)で、Kubernetes クラスターの作成、CLI のインストール、専用レジストリーの作成、クラスター環境のセットアップ、クラスターへのサービスの追加について理解します。
+* そのまま、[2 つ目の{{site.data.keyword.containerlong_notm}} チュートリアル](/docs/containers/cs_tutorials_apps.html#cs_apps_tutorial)も行い、クラスターにアプリをデプロイする方法について学習します。
+* 可用性を高めるために、複数のノードを使用する[標準クラスターを作成します](/docs/containers/cs_clusters.html#clusters_ui)。
 
 
