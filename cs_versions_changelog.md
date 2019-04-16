@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -2520,7 +2520,7 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 Review the version 1.10 changelog.
 {: shortdesc}
 
-Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
+Kubernetes version 1.10 is deprecated and becomes unsupported on 15 May 2019. [Review potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
 
 ### Changelog for worker node fix pack 1.10.13_1556, released 15 April 2019
