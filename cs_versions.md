@@ -777,7 +777,7 @@ Before you begin, your cluster master and all worker nodes must be running Kuber
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.10.
 {: shortdesc}
 
-Kubernetes version 1.10 is deprecated and becomes unsupported on 30 April 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
+Kubernetes version 1.10 is deprecated and becomes unsupported on 15 May 2019. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.11.
 {: deprecated}
 
 Before you can successfully update to Kubernetes 1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).
