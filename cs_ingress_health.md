@@ -44,7 +44,7 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
         ```
         {: pre}
 
-    2. Open the logs for that ALB pod. Verify that logs follow the updated format.
+    2. Open the logs for that ALB pod.
         ```
         kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
         ```
@@ -167,7 +167,7 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
     <tbody>
     <tr>
     <td><code>log-format</code></td>
-    <td>Replace <code>&lt;key&gt;</code> with the name for the log component and <code>&lt;log_variable&gt;</code> with a variable for the log component that you want to collect in log entries. You can include text and punctuation that you want the log entry to contain, such as quotation marks around string values and commas to separate log components. For example, formatting a component like <code>request: "$request"</code> generates the following in a log entry: <code>request: "GET / HTTP/1.1"</code> . For a list of all the variables you can use, see the <a href="http://nginx.org/en/docs/varindex.html">NGINX variable index</a>.<br><br>To log an additional header such as <em>x-custom-ID</em>, add the following key-value pair to the custom log content: <br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>Hyphens (<code>-</code>) are converted to underscores (<code>_</code>) and <code>$http_</code> must be prepended to the custom header name.</td>
+    <td>Replace <code>&lt;key&gt;</code> with the name for the log component and <code>&lt;log_variable&gt;</code> with a variable for the log component that you want to collect in log entries. You can include text and punctuation that you want the log entry to contain, such as quotation marks around string values and commas to separate log components. For example, formatting a component like <code>request: "$request"</code> generates the following in a log entry: <code>request: "GET / HTTP/1.1"</code> . For a list of all the variables you can use, see the <a href="http://nginx.org/en/docs/varindex.html">NGINX variable index</a>.<br><br>To log an additional header such as <em>x-custom-ID</em>, add the following key-value pair to the custom log content: <br><pre class="codeblock"><code>customID: $http_x_custom&#95;id</code></pre> <br>Hyphens (<code>-</code>) are converted to underscores (<code>&#95;</code>) and <code>$http_</code> must be prepended to the custom header name.</td>
     </tr>
     <tr>
     <td><code>log-format-escape-json</code></td>
@@ -253,55 +253,75 @@ Monitor your ALBs by deploying a metrics exporter and Prometheus agent into your
 
 The ALB metrics exporter uses the NGINX directive, `vhost_traffic_status_zone`, to collect metrics data from the `/status/format/json` endpoint on each Ingress ALB pod. The metrics exporter automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Then, a Prometheus agent picks up the metrics produced by the exporter and makes the metrics visible on a Prometheus dashboard.
 
+### Installing the metrics exporter Helm chart
+{: #metrics-exporter}
+
+Install the metrics exporter Helm chart to monitor an ALB in your cluster.
+{: shortdesc}
+
 The ALB metrics exporter pods must deploy to the same worker nodes that your ALBs are deployed to. If your ALBs run on edge worker nodes, and those edge nodes are tainted to prevent other workload deployments, the metrics exporter pods cannot be scheduled. You must remove the taints by running `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
 {: note}
 
-To install the metrics exporter and Prometheus agent for an ALB in your cluster:
+1.  **Important**: [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repositories.
 
-1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.Bluemix_notm}} Helm repository.
+2. Install the `ibmcloud-alb-metrics-exporter` Helm chart to your cluster. This Helm chart deploys an ALB metrics exporter and creates an `alb-metrics-service-account` service account in the `kube-system` namespace. Replace <alb-ID> with the ID of the ALB that you want to collect metrics for. To view the IDs for the ALBs in your cluster, run <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>.
+  You must deploy a chart for each ALB that you want to monitor.
+  {: note}
+  ```
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  ```
+  {: pre}
 
-2.  Verify that tiller is installed with a service account.
-    ```
-    kubectl get serviceaccount -n kube-system | grep tiller
-    ```
-    {: pre}
+3. Check the chart deployment status. When the chart is ready, the **STATUS** field near the top of the output has a value of `DEPLOYED`.
+  ```
+  helm status ibmcloud-alb-metrics-exporter
+  ```
+  {: pre}
 
-    Example output:
+4. Verify that the `ibmcloud-alb-metrics-exporter` pods are running.
+  ```
+  kubectl get pods -n kube-system -o wide
+  ```
+  {:pre}
 
-    ```
-    NAME                                 SECRETS   AGE
-    tiller                               1         2m
-    ```
-    {: screen}
+  Example output:
+  ```
+  NAME                                             READY     STATUS      RESTARTS   AGE       IP               NODE
+  ...
+  alb-metrics-exporter-868fddf777-d49l5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  alb-metrics-exporter-868fddf777-pf7x5            1/1       Running     0          19s       172.30.xxx.xxx   10.xxx.xx.xxx
+  ```
+  {:screen}
 
-3. Install the `ibmcloud-alb-metrics-exporter` Helm chart to your cluster. This Helm chart deploys an ALB metrics exporter and creates a service account called `alb-metrics-service-account` in the `kube-system` namespace. Replace <alb-ID> with the ID of the ALB that you want to collect metrics for. To view the IDs for the ALBs in your cluster, run <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>. Note that you must deploy a chart for each ALB that you want to monitor.
+5. Optional: [Install the Prometheus agent](#prometheus-agent) to pick up the metrics produced by the exporter and make the metrics visible on a Prometheus dashboard.
 
-    ```
-    helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
-    ```
-    {: pre}
+### Installing the Prometheus agent Helm chart
+{: #prometheus-agent}
+
+After you install the [metrics exporter](#metrics-exporter), you can install the Prometheus agent Helm chart to pick up the metrics produced by the exporter and make the metrics visible on a Prometheus dashboard.
+{: shortdesc}
+
+1. Download the TAR file for the metrics exporter Helm chart from https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz
+
+2. Navigate to the Prometheus subfolder.
+  ```
+  cd ibmcloud-alb-metrics-exporter-1.0.7.tar/ibmcloud-alb-metrics-exporter/subcharts/prometheus
+  ```
+  {: pre}
+
+3. Install the Prometheus Helm chart to your cluster. Replace <ingress_subdomain> with the Ingress subdomain for your cluster. The URL for the Prometheus dashboard is a combination of the default Prometheus subdomain, `prom-dash`, and your Ingress subdomain, for example `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. To find the Ingress subdomain for your cluster, run <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>.
+  ```
+  helm install --name prometheus . --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
+  ```
+  {: pre}
 
 4. Check the chart deployment status. When the chart is ready, the **STATUS** field near the top of the output has a value of `DEPLOYED`.
-    ```
-    helm status ibmcloud-alb-metrics-exporter
-    ```
-    {: pre}
-
-5. Install the `ibmcloud-alb-metrics-exporter/subcharts/prometheus` sub-chart to your cluster. This sub-chart deploys a Prometheus agent to collect and display ALB metrics on the Prometheus dashboard. Replace <ingress_subdomain> with the Ingress subdomain for your cluster. The URL for the Prometheus dashboard is a combination of the `prom-dash` subdomain and your Ingress subdomain, for example `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. To find the Ingress subdomain for your cluster, run <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>.
-
-    ```
-    helm install iks-charts/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
-    ```
-    {: pre}
-
-6. Check the chart deployment status. When the chart is ready, the **STATUS** field near the top of the output has a value of `DEPLOYED`.
-
     ```
     helm status prometheus
     ```
     {: pre}
 
-7. Verify that the `ibmcloud-alb-metrics-exporter` and `prometheus` pods are running.
+5. Verify that the `prometheus` pod is running.
     ```
     kubectl get pods -n kube-system -o wide
     ```
@@ -316,9 +336,9 @@ To install the metrics exporter and Prometheus agent for an ALB in your cluster:
     ```
     {:screen}
 
-8. In a browser, enter the URL for the Prometheus dashboard. This host name has the format `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. The Prometheus dashboard for your ALB opens.
+6. In a browser, enter the URL for the Prometheus dashboard. This host name has the format `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. The Prometheus dashboard for your ALB opens.
 
-9. Review more information about the [ALB](#alb_metrics), [server](#server_metrics), and [upstream](#upstream_metrics) metrics listed in the dashboard.
+7. Review more information about the [ALB](#alb_metrics), [server](#server_metrics), and [upstream](#upstream_metrics) metrics listed in the dashboard.
 
 ### ALB metrics
 {: #alb_metrics}
