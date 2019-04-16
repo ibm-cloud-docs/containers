@@ -193,7 +193,7 @@ Install Helm and get the strongSwan Helm chart to view possible configurations.
 3. Save the default configuration settings for the strongSwan Helm chart in a local YAML file.
 
     ```
-    helm inspect values ibm/strongswan > config.yaml
+    helm inspect values iks-charts/strongswan > config.yaml
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -1020,7 +1020,7 @@ To configure Autorecovery:
 
 6. Deploy Autorecovery into your cluster by installing the `ibm-worker-recovery` Helm chart.
     ```
-    helm install --name ibm-worker-recovery ibm/ibm-worker-recovery  --namespace kube-system
+    helm install --name ibm-worker-recovery iks-charts/ibm-worker-recovery  --namespace kube-system
     ```
     {: pre}
 
