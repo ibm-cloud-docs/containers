@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-12"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -55,7 +55,7 @@ If your cluster has enabled the public service endpoint, you can install the Hel
 {: shortdesc}
 
 Before you begin:
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - To install Tiller with a Kubernetes service account and cluster role binding in the `kube-system` namespace, make sure that you have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
 
 To install Helm in a cluster with public access:
@@ -106,6 +106,11 @@ To install Helm in a cluster with public access:
         
    - **If Tiller is not installed with a service account:** 
      1. Create a Kubernetes service account and cluster role binding for Tiller in the `kube-system` namespace of your cluster. 
+        ```
+        kubectl create serviceaccount tiller -n kube-system
+        ```
+        {: pre}
+        
         ```
         kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=kube-system:tiller -n kube-system
         ```
