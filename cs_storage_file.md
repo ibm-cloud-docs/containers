@@ -65,7 +65,7 @@ To decide on a storage configuration:
    ibmc-file-retain-gold        ibm.io/ibmc-file
    ibmc-file-retain-silver      ibm.io/ibmc-file
    ibmc-file-silver             ibm.io/ibmc-file
-   ``
+   ```
    {: screen}
 
 2. Review the configuration of a storage class.
