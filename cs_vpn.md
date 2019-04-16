@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -346,7 +346,7 @@ Deploy the strongSwan Helm chart in your cluster with the configurations that yo
     {: tip}
 
     ```
-    helm install -f config.yaml --name=vpn ibm/strongswan
+    helm install -f config.yaml --name=vpn iks-charts/strongswan
     ```
     {: pre}
 
