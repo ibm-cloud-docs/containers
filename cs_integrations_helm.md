@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-12"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -37,12 +37,12 @@ To use Helm in your cluster, you must install the Helm CLI on your local machine
 **What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?** </br>
 For an overview of available Helm charts, see the [Helm charts catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts). The Helm charts listed in this catalog are grouped as follows:
 
-- **ibm**: Helm charts that are approved for {{site.data.keyword.containerlong_notm}}.
+- **iks-charts**: Helm charts that are approved for {{site.data.keyword.containerlong_notm}}. The name of this repo was changed from `ibm` to `iks-charts`. 
 - **ibm-charts**: Helm charts that are approved for {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.Bluemix_notm}} Private clusters.
 - **kubernetes**: Helm charts that are provided by the Kubernetes community and considered `stable` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.Bluemix_notm}} Private clusters.
 - **kubernetes-incubator**: Helm charts that are provided by the Kubernetes community and considered `incubator` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.Bluemix_notm}} Private clusters.
 
-Helm charts from the **ibm** and **ibm-charts** repositories are fully integrated into the {{site.data.keyword.Bluemix_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+Helm charts from the **iks-charts** and **ibm-charts** repositories are fully integrated into the {{site.data.keyword.Bluemix_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
 **What are the prerequisites to use Helm and can I use Helm in a private cluster?** </br>
 To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Clusters that have the public service endpoint enabled can automatically access the image. Private clusters that are protected with a custom firewall, or clusters that have enabled the private service endpoint only, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](#private_local_tiller), or [install Helm charts without using Tiller](#private_install_without_tiller).
@@ -55,7 +55,7 @@ If your cluster has enabled the public service endpoint, you can install the Hel
 {: shortdesc}
 
 Before you begin:
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Log in to your account. Target the appropriate region and, if applicable, resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - To install Tiller with a Kubernetes service account and cluster role binding in the `kube-system` namespace, make sure that you have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
 
 To install Helm in a cluster with public access:
@@ -107,6 +107,11 @@ To install Helm in a cluster with public access:
    - **If Tiller is not installed with a service account:** 
      1. Create a Kubernetes service account and cluster role binding for Tiller in the `kube-system` namespace of your cluster. 
         ```
+        kubectl create serviceaccount tiller -n kube-system
+        ```
+        {: pre}
+        
+        ```
         kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=kube-system:tiller -n kube-system
         ```
         {: pre}
@@ -145,12 +150,12 @@ To install Helm in a cluster with public access:
 
 4. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
    ```
-   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
+   helm repo add ibm-charts https://icr.io/helm/ibm-charts
    ```
    {: pre}
 
@@ -162,7 +167,7 @@ To install Helm in a cluster with public access:
 
 6. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
    ```
-   helm search ibm
+   helm search iks-charts
    ```
    {: pre}
 
@@ -239,12 +244,12 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 
 9. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
    ```
-   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
+   helm repo add ibm-charts https://icr.io/helm/ibm-charts
    ```
    {: pre}
 
@@ -256,7 +261,7 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 
 11. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
     ```
-    helm search ibm
+    helm search iks-charts
     ```
     {: pre}
 
@@ -281,12 +286,12 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 2. Connect to your private cluster by using the {{site.data.keyword.Bluemix_notm}} infrastructure VPN tunnel that you set up.
 3. Add the {{site.data.keyword.Bluemix_notm}} Helm repositories to your Helm instance.
    ```
-   helm repo add ibm https://registry.bluemix.net/helm/ibm
+   helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://registry.bluemix.net/helm/ibm-charts
+   helm repo add ibm-charts https://icr.io/helm/ibm-charts
    ```
    {: pre}
 
@@ -298,7 +303,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 
 5. List the Helm charts that are currently available in the {{site.data.keyword.Bluemix_notm}} repositories.
    ```
-   helm search ibm
+   helm search iks-charts
    ```
    {: pre}
 
@@ -309,7 +314,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 
 6. Identify the Helm chart that you want to install, download the Helm chart to your local machine, and unpack the files of your Helm chart. The following example shows how to download the Helm chart for the cluster autoscaler version 1.0.3 and unpack the files in a `cluster-autoscaler` directory.
    ```
-   helm fetch ibm/ibm-iks-cluster-autoscaler --untar --untardir ./cluster-autoscaler --version 1.0.3
+   helm fetch iks-charts/ibm-iks-cluster-autoscaler --untar --untardir ./cluster-autoscaler --version 1.0.3
    ```
    {: pre}
 

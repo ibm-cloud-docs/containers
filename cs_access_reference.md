@@ -372,7 +372,7 @@ The **Editor** platform role includes the permissions that are granted by **View
 </tr>
 <tr>
 <td>List the NLB host names and IP addresses that are registered in a cluster.</td>
-<td><code>[ibmcloud ks nlb-dns-ls](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-ls)</code></td>
+<td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-ls)</code></td>
 <td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/ListNLBIPsForSubdomain)</code></td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -121,7 +121,7 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
         <br><br>
         **Your responsibilities**:
         <ul>
-        <li>Use the provided tools and features to [configure and deploy](/docs/containers?topic=containers-app#app), [set up permissions](/docs/containers?topic=containers-users#users), [integrate with other services](/docs/containers?topic=containers-supported_integrations#supported_integrations), [externally serve](/docs/containers?topic=containers-cs_network_planning#cs_network_planning), [monitor the health](/docs/containers?topic=containers-health#health), and otherwise manage your [highly available](/docs/containers?topic=containers-ha#ha) and resilient workloads.</li>
+        <li>Use the provided tools and features to [configure and deploy](/docs/containers?topic=containers-app#app); [set up permissions](/docs/containers?topic=containers-users#users); [integrate with other services](/docs/containers?topic=containers-supported_integrations#supported_integrations); [externally serve](/docs/containers?topic=containers-cs_network_planning#cs_network_planning); [monitor the health](/docs/containers?topic=containers-health#health); [save, back up, and restore data](/docs/containers?topic=containers-storage_planning#storage_planning); and otherwise manage your [highly available](/docs/containers?topic=containers-ha#ha) and resilient workloads.</li>
         </ul>
         </td>
         </tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -342,7 +342,7 @@ ibmcloud plugin list
     <tr>
       <td>[ibmcloud ks nlb-dns-add](#cs_nlb-dns-add)</td>
       <td>[ibmcloud ks nlb-dns-create](#cs_nlb-dns-create)</td>
-      <td>[ibmcloud ks nlb-dns-ls](#cs_nlb-dns-ls)</td>
+      <td>[ibmcloud ks nlb-dnss](#cs_nlb-dns-ls)</td>
       <td>[ibmcloud ks nlb-dns-rm](#cs_nlb-dns-rm)</td>
     </tr>
     <tr>
@@ -3638,14 +3638,14 @@ ibmcloud ks nlb-dns-create --cluster mycluster --ip 1.1.1.1
 ```
 {: pre}
 
-### ibmcloud ks nlb-dns-ls
+### ibmcloud ks nlb-dnss
 {: #cs_nlb-dns-ls}
 
 List the network load balancer host names and IP addresses that are registered in a cluster.
 {: shortdesc}
 
 ```
-ibmcloud ks nlb-dns-ls --cluster CLUSTER [--json] [-s]
+ibmcloud ks nlb-dnss --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
 
@@ -3666,7 +3666,7 @@ ibmcloud ks nlb-dns-ls --cluster CLUSTER [--json] [-s]
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-ls --cluster mycluster
+ibmcloud ks nlb-dnss --cluster mycluster
 ```
 {: pre}
 

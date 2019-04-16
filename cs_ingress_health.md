@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-16"
 
 keywords: kubernetes, iks
 
@@ -277,7 +277,7 @@ To install the metrics exporter and Prometheus agent for an ALB in your cluster:
 3. Install the `ibmcloud-alb-metrics-exporter` Helm chart to your cluster. This Helm chart deploys an ALB metrics exporter and creates a service account called `alb-metrics-service-account` in the `kube-system` namespace. Replace <alb-ID> with the ID of the ALB that you want to collect metrics for. To view the IDs for the ALBs in your cluster, run <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>. Note that you must deploy a chart for each ALB that you want to monitor.
 
     ```
-    helm install ibm/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+    helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
     ```
     {: pre}
 
@@ -290,7 +290,7 @@ To install the metrics exporter and Prometheus agent for an ALB in your cluster:
 5. Install the `ibmcloud-alb-metrics-exporter/subcharts/prometheus` sub-chart to your cluster. This sub-chart deploys a Prometheus agent to collect and display ALB metrics on the Prometheus dashboard. Replace <ingress_subdomain> with the Ingress subdomain for your cluster. The URL for the Prometheus dashboard is a combination of the `prom-dash` subdomain and your Ingress subdomain, for example `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. To find the Ingress subdomain for your cluster, run <code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code>.
 
     ```
-    helm install ibm/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
+    helm install iks-charts/alb-metrics-prometheus/subcharts/prometheus --name prometheus --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
     ```
     {: pre}
 
