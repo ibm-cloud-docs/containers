@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-04-17"
 
 keywords: kubernetes, iks, node scaling
 
@@ -143,28 +143,49 @@ Make the most out of the cluster autoscaler by using the following strategies fo
 
 [Try out the cluster autoscaler](#ca_helm) with a few test workloads to get a good feel for how [scale-up and scale-down work](#ca_about), what [custom values](#ca_chart_values) you might want to configure, and any other aspects that you might want, like [overprovisioning](#ca_scaleup) worker nodes or [limiting apps](#ca_limit_pool). Then, clean up your test environment and plan to include these custom values and additional settings with a fresh installation of the cluster autoscaler.
 
-**What are some general guidelines for worker pools and nodes?**<br>
-*   You can run only one `ibm-iks-cluster-autoscaler` per cluster.
-*   You cannot set the cluster autoscaler `minSize` to `0`. Unless you [disable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) application load balancers (ALBs) in your cluster, you must change the `minSize` to `2` worker nodes per zone so that the ALB pods can be spread for high availability.
-*   The cluster autoscaler scales your cluster in response to your workload [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). As such, you do not need to [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) your worker pools.
-*   Don't use the `ibmcloud ks worker-rm` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm) to remove individual worker nodes from your worker pool, which can unbalance the worker pool.
-*   Because taints cannot be applied at the worker pool level, do not [taint worker nodes](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) to avoid unexpected results. For example, when you deploy a workload that is not tolerated by the tainted worker nodes, the worker nodes are not considered for scale-up and more worker nodes might be ordered even if the cluster has sufficient capacity. However, the tainted worker nodes are still identified as underutilized if they have less than the threshold (by default 50%) of their resources utilized and thus are considered for scale-down.
+### Can I autoscale multiple pools at once?
+{: #scalable-practices-multiple}
+Yes, after you install the Helm chart, you can choose which worker pools within the cluster to autoscale [in the configmap](#ca_cm). You can run only one `ibm-iks-cluster-autoscaler` Helm chart per cluster. 
+{: shortdesc}
 
-<br>
+### How can I make sure the cluster autoscaler responds to what resources my app needs?
+{: #scalable-practices-resrequests}
+
+The cluster autoscaler scales your cluster in response to your workload [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/). As such, specify [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) for all your deployments because the resource requests are what the cluster autoscaler uses to calculate how many worker nodes are needed to run the workload. Keep in mind that autoscaling is based on the compute usage that your workload configurations request, and does not consider other factors such as machine costs.
+{: shortdesc}
+
+### Can I scale down a worker pool to zero (0) nodes?
+{: #scalable-practices-zero}
+
+No, you cannot set the cluster autoscaler `minSize` to `0`. Additionally, unless you [disable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) application load balancers (ALBs) in your cluster, you must change the `minSize` to `2` worker nodes per zone so that the ALB pods can be spread for high availability.
+{: shortdesc}
+
+### Can I optimize my deployments for autoscaling?
 {: #scalable-practices-apps}
-**What are some general guidelines for app workloads?**<br>
-*   Keep in mind that autoscaling is based on the compute usage that your workload configurations request, and does not consider other factors such as machine costs.
-*   Specify [resource requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) for all your deployments because the resource requests are what the cluster autoscaler uses to calculate how many worker nodes are needed to run the workload.
+
+Yes, you can add several Kubernetes features to your deployment to adjust how the cluster autoscaler considers your resource requests for scaling.
+{: shortdesc}
 *   Use [pod disruption budgets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/) to prevent abrupt rescheduling or deletions of your pods.
 *   If you're using pod priority, you can [edit the priority cutoff ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-cluster-autoscaler-work-with-pod-priority-and-preemption) to change what types of priority trigger scaling up. By default, the priority cutoff is zero (`0`).
 
-<br>
-**Why are my autoscaled worker pools unbalanced?**<br>
-During a scale-up, the cluster autoscaler balances nodes across zones, with a permitted difference of plus or minus one (+/- 1) worker node. Your pending workloads might not request enough capacity to make each zone balanced. In this case, if you want to manually balance the worker pools, [update your cluster autoscaler configmap](#ca_cm) to remove the unbalanced worker pool. Then run the `ibmcloud ks worker-pool-rebalance` [command](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance), and add the worker pool back to the cluster autoscaler configmap.
+### Can I use taints and tolerations with autoscaled worker pools?
+{: #scalable-practices-taints}
 
-<br>
-**Why can't I resize or rebalance my worker pool?**<br>
-When the cluster autoscaler is enabled for a worker pool, you cannot [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) your worker pools. You must [edit the configmap](#ca_cm) to change the worker pool minimum or maximum sizes, or disable cluster autoscaling for that worker pool.
+Because taints cannot be applied at the worker pool level, do not [taint worker nodes](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) to avoid unexpected results. For example, when you deploy a workload that is not tolerated by the tainted worker nodes, the worker nodes are not considered for scale-up and more worker nodes might be ordered even if the cluster has sufficient capacity. However, the tainted worker nodes are still identified as underutilized if they have less than the threshold (by default 50%) of their resources utilized and thus are considered for scale-down.
+{: shortdesc}
+
+### Why are my autoscaled worker pools unbalanced?
+{: #scalable-practices-unbalanced}
+
+During a scale-up, the cluster autoscaler balances nodes across zones, with a permitted difference of plus or minus one (+/- 1) worker node. Your pending workloads might not request enough capacity to make each zone balanced. In this case, if you want to manually balance the worker pools, [update your cluster autoscaler configmap](#ca_cm) to remove the unbalanced worker pool. Then run the `ibmcloud ks worker-pool-rebalance` [command](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance), and add the worker pool back to the cluster autoscaler configmap.
+{: shortdesc}
+
+
+### Why can't I resize or rebalance my worker pool?
+{: #scalable-practices-resize}
+
+When the cluster autoscaler is enabled for a worker pool, you cannot [resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) your worker pools. You must [edit the configmap](#ca_cm) to change the worker pool minimum or maximum sizes, or disable cluster autoscaling for that worker pool. Don't use the `ibmcloud ks worker-rm` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm) to remove individual worker nodes from your worker pool, which can unbalance the worker pool.
+{: shortdesc}
 
 Further, if you do not disable the worker pools before you uninstall the `ibm-iks-cluster-autoscaler` Helm chart, the worker pools cannot be resized manually. Reinstall the `ibm-iks-cluster-autoscaler` Helm chart, [edit the configmap](#ca_cm) to disable the worker pool, and try again.
 
