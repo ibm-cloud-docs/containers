@@ -143,7 +143,7 @@ Make the most out of the cluster autoscaler by using the following strategies fo
 
 [Try out the cluster autoscaler](#ca_helm) with a few test workloads to get a good feel for how [scale-up and scale-down work](#ca_about), what [custom values](#ca_chart_values) you might want to configure, and any other aspects that you might want, like [overprovisioning](#ca_scaleup) worker nodes or [limiting apps](#ca_limit_pool). Then, clean up your test environment and plan to include these custom values and additional settings with a fresh installation of the cluster autoscaler.
 
-### Can I autoscale multiple pools at once?
+### Can I autoscale multiple worker pools at once?
 {: #scalable-practices-multiple}
 Yes, after you install the Helm chart, you can choose which worker pools within the cluster to autoscale [in the configmap](#ca_cm). You can run only one `ibm-iks-cluster-autoscaler` Helm chart per cluster. 
 {: shortdesc}
