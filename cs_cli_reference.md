@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-04-17"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -2001,7 +2001,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks key-protect-enable
 {: #cs_key_protect}
 
-Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster.
+Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. To rotate a key in a cluster with existing key encryption, re-run this command with a new root key ID.
 {: shortdesc}
 
 ```
@@ -2009,7 +2009,7 @@ ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url EN
 ```
 {: pre}
 
-If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data from the secrets in your cluster.
+Do not delete root keys in your {{site.data.keyword.keymanagementserviceshort}} instance. Do not delete keys even if you rotate to use a new key. You cannot access or remove the data in etcd or the data from the secrets in your cluster if you delete a root key. 
 {: important}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
