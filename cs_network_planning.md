@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-17"
 
 keywords: kubernetes, iks
 
@@ -97,8 +97,7 @@ Kubernetes supports four basic types of network services: `ClusterIP`, `NodePort
 <dd>Expose multiple apps in a cluster by creating one layer 7 HTTP, HTTPS, or TCP Ingress application load balancer (ALB). The ALB uses a secured and unique public or private entry point, an Ingress subdomain, to route incoming requests to your apps. You can use one route to expose multiple apps in your cluster as services. Ingress consists of three components:<ul>
   <li>The Ingress resource defines the rules for how to route and load balance incoming requests for an app.</li>
   <li>The ALB listens for incoming HTTP, HTTPS, or TCP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.</li>
-  <li>The multizone load balancer (MZLB) handles all incoming requests to your apps and load balances the requests among the ALBs in the various zones. It also enables health checks on the ALB IP address in each zone.</li></ul>
-Use Ingress if you need to implement custom routing rules or need SSL termination for your apps.</dd>
+  <li>The multizone load balancer (MZLB) handles all incoming requests to your apps and load balances the requests among the ALBs in the various zones. It also enables health checks on the ALB IP address in each zone.</li></ul></dd>
 </dl>
 
 </br>
@@ -111,8 +110,8 @@ The following table compares the features of each network service type.
 |Externally accessible| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |Stable external IP| | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |External host name| | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|SSL termination| | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |HTTP(S) load balancing| | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|SSL termination| | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |Custom routing rules| | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |Multiple apps per service| | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Characteristics of Kubernetes network service types" caption-side="top"}
@@ -140,7 +139,12 @@ To make an app publicly available to the internet, choose a load balancing deplo
 When it comes to exposing an app with a network service, you have several choices for deployment patterns. To quickly get started, follow the decision tree to choose a deployment pattern. For more information about each deployment pattern, why you might use it, and how to set it up, see the table following the decision tree. For basic information about the networking services that these deployment patterns use, see [Understanding Kubernetes service types](#external).
 {: shortdesc}
 
-<img src="images/cs_network_planning_dt_indepth.png" alt="This image walks you through choosing the best networking deployment pattern for your app.">
+<p>
+<figure>
+  <img src="images/cs_network_planning_dt_indepth.png" alt="This image walks you through choosing the best networking deployment pattern for your app.">
+  <figcaption>Use this decision tree to choose the best networking deployment pattern for your app. See the following table for information about each deployment pattern.</figcaption>
+</figure>
+</p>
 
 <table summary="This table reads left to right about the name, characteristics, use cases, and deployment steps of public network deployment patterns.">
 <caption>Characteristics of public network deployment patterns in IBM Cloud Kubernetes Service</caption>
@@ -162,12 +166,12 @@ When it comes to exposing an app with a network service, you have several choice
 <tr>
 <td>NLB v1.0 (+ host name)</td>
 <td>Basic load balancing that exposes the app with an IP address or a host name</td>
-<td>Quickly expose one app to the public with an IP address or a host name.</td>
+<td>Quickly expose one app to the public with an IP address or a a host name that supports SSL termination.</td>
 <td><ol><li>Create a public network load balancer (NLB) 1.0 in a [single-](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) a host name and health checks.</li></ol></td></tr>
 <tr>
 <td>NLB v2.0 (+ host name)</td>
 <td>DSR load balancing that exposes the app with an IP address or a host name</td>
-<td>Expose an app that might receive high levels of traffic to the public with an IP address or a host name.</td>
+<td>Expose an app that might receive high levels of traffic to the public with an IP address or a host name that supports SSL termination.</td>
 <td><ol><li>Complete the [prerequisites](/docs/containers?topic=containers-loadbalancer#ipvs_provision).</li><li>Create a public NLB 2.0 in a [single-](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config) or [multizone](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) a host name and health checks.</li></ol></td></tr>
 <tr>
 <td>Istio + NLB host name</td>

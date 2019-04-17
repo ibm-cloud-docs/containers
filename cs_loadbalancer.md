@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-17"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -29,9 +29,6 @@ subcollection: containers
 
 Expose a port and use a portable IP address for a Layer 4 network load balancer (NLB) to access a containerized app.
 {:shortdesc}
-
-Load balancer services are available for standard clusters only and do not support TLS termination. If your app requires TLS termination, you can expose your app by using [Ingress](/docs/containers?topic=containers-ingress), or configure your app to manage the TLS termination.
-{: note}
 
 Choose one of the following options to get started:
 
