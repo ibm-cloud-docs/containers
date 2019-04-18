@@ -61,13 +61,13 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
   </thead>
   <tbody>
     <tr>
-      <td><code>0.2</code> (deprecated)</td>
+      <td><code>0.2</code> (default)</td>
       <td>Legacy: Commands are shown in the hyphenated structure and are listed alphabetically.</td>
       <td>Legacy and beta: You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
     </tr>
     <tr>
-      <td><code>0.3</code> (default)</td>
-      <td>Legacy: Commands are shown in the hyphenated structure and are listed alphabetically.</td>
+      <td><code>0.3</code></td>
+      <td>Beta: Commands are shown in the spaced structure and are listed in categories.</td>
       <td>Legacy and beta: You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
     </tr>
     <tr>
