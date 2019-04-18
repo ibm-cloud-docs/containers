@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -1089,7 +1089,7 @@ Before you begin:
 
 To create a host name for one or more NLB IP addresses:
 
-1. Get the IP address for your NLB. If you have NLBs in each zone of a multizone cluster that expose one app, get the IPs for each NLB.
+1. Get the **EXTERNAL-IP** address for your NLB. If you have NLBs in each zone of a multizone cluster that expose one app, get the IPs for each NLB.
   ```
   kubectl get svc
   ```
