@@ -3652,7 +3652,7 @@ For example, in a multizone cluster, you might create an NLB in each zone to exp
 <dd>The NLB IP that you want to add to the hostname. To see your NLB IPs, run <code>kubectl get svc</code>.</dd>
 
 <dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns-list</code>.</dd>
+<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dnss</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -3663,7 +3663,7 @@ For example, in a multizone cluster, you might create an NLB in each zone to exp
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -3757,7 +3757,7 @@ ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [
 <dd>The NLB IP that you want to remove. To see your NLB IPs, run <code>kubectl get svc</code>.</dd>
 
 <dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns-list</code>.</dd>
+<dd>The host name that you want to remove an IP from. To see existing host names, run <code>ibmcloud ks nlb-dnss</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -3768,7 +3768,7 @@ ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -3853,7 +3853,7 @@ You can use this command to create and enable a new health check monitor, or to 
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
 ```
 {: pre}
 
@@ -3888,7 +3888,7 @@ ibmcloud ks nlb-dns-monitor-get --cluster CLUSTER --nlb-host HOST_NAME [--json] 
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -3923,7 +3923,7 @@ ibmcloud ks nlb-dns-monitor-disable --cluster CLUSTER --nlb-host HOST_NAME [--js
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -3960,7 +3960,7 @@ Note that the first time you create a health check monitor, you must configure a
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 

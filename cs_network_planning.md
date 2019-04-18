@@ -162,37 +162,33 @@ When it comes to exposing an app with a network service, you have several choice
 <td>NodePort</td>
 <td>Port on a worker node that exposes the app on the worker's public IP address</td>
 <td>Test public access to one app or provide access for only a short amount of time.</td>
-<td>[Create a public NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config).</td></tr>
-<tr>
+<td>[Create a public NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config).</td>
+</tr><tr>
 <td>NLB v1.0 (+ host name)</td>
 <td>Basic load balancing that exposes the app with an IP address or a host name</td>
 <td>Quickly expose one app to the public with an IP address or a a host name that supports SSL termination.</td>
-<td><ol><li>Create a public network load balancer (NLB) 1.0 in a [single-](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) a host name and health checks.</li></ol></td></tr>
-<tr>
+<td><ol><li>Create a public network load balancer (NLB) 1.0 in a [single-](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) a host name and health checks.</li></ol></td>
+</tr><tr>
 <td>NLB v2.0 (+ host name)</td>
 <td>DSR load balancing that exposes the app with an IP address or a host name</td>
 <td>Expose an app that might receive high levels of traffic to the public with an IP address or a host name that supports SSL termination.</td>
-<td><ol><li>Complete the [prerequisites](/docs/containers?topic=containers-loadbalancer#ipvs_provision).</li><li>Create a public NLB 2.0 in a [single-](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config) or [multizone](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) a host name and health checks.</li></ol></td></tr>
-<tr>
+<td><ol><li>Complete the [prerequisites](/docs/containers?topic=containers-loadbalancer#ipvs_provision).</li><li>Create a public NLB 2.0 in a [single-](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config) or [multizone](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) a host name and health checks.</li></ol></td>
+</tr><tr>
 <td>Istio + NLB host name</td>
 <td>Basic load balancing that exposes the app with a host name and uses Istio routing rules</td>
-<td>Implement Istio post-routing rules, such as rules for different versions of one app microservice, and configure custom health checks on the app host name.</li></ol></td>
-<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a host name and health checks](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).</td></tr>
-<tr>
+<td>Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public host name.</li></ol></td>
+<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a host name](/docs/containers?topic=containers-istio#istio_expose_link).</td>
+</tr><tr>
 <td>Ingress ALB</td>
 <td>HTTPS load balancing that exposes the app with a host name and uses custom routing rules</td>
 <td>Implement custom routing rules and SSL termination for multiple apps.</td>
-<td><ol><li>Create an [Ingress service](/docs/containers?topic=containers-ingress#ingress_expose_public) for the public ALB.</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol></td></tr>
-<tr>
+<td><ol><li>Create an [Ingress service](/docs/containers?topic=containers-ingress#ingress_expose_public) for the public ALB.</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol></td>
+</tr><tr>
 <td>Bring your own Ingress controller + ALB host name</td>
 <td>HTTPS load balancing with a custom Ingress controller that exposes the app with the IBM-provided ALB host name and uses custom routing rules</td>
 <td>Implement custom routing rules or other specific requirements for custom tuning for multiple apps.</td>
-<td>[Deploy your Ingress controller and leverage the IBM-provided ALB host name](/docs/containers?topic=containers-ingress#user_managed).</td></tr>
-<tr>
-<td>Istio + ALB host name</td>
-<td>HTTPS load balancing that exposes the app with the IBM-provided ALB host name and uses Istio routing rules</td>
-<td>Implement Istio post-routing rules, such as rules for different versions of one app microservice, and let users access your app with the IBM-provided Ingress subdomain.</td>
-<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>[Connect the default Istio load balancer to the IBM-provided public ALB](/docs/containers?topic=containers-istio#istio_expose_link).</li></ol></td></tr>
+<td>[Deploy your Ingress controller and leverage the IBM-provided ALB host name](/docs/containers?topic=containers-ingress#user_managed).</td>
+</tr>
 </tbody>
 </table>
 

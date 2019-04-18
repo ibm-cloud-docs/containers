@@ -1060,7 +1060,7 @@ After you set up network load balancers (NLBs), you can create DNS entries for t
 <dl>
 <dt>Host name</dt>
 <dd>When you create a public NLB in a single- or multizone cluster, you can expose your app to the internet by creating a host name for the NLB IP address. Additionally, {{site.data.keyword.Bluemix_notm}} takes care of generating and maintaining the wildcard SSL certificate for the host name for you.
-<p>In multizone clusters, you can create a host name and add the NLB IP address in each zone to that host name DNS entry. For example, if you deployed NLBs for your app in 3 zones in US-South, you can create the host name `*.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` for the 3 NLB IP addresses. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that NLB.</p>
+<p>In multizone clusters, you can create a host name and add the NLB IP address in each zone to that host name DNS entry. For example, if you deployed NLBs for your app in 3 zones in US-South, you can create the host name `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` for the 3 NLB IP addresses. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that NLB.</p>
 Note that you currently cannot create host names for private NLBs.</dd>
 <dt>Health check monitor</dt>
 <dd>Enable health checks on the NLB IP addresses behind a single host name to determine whether they are available or not. When you enable a monitor for your host name, the monitor health checks each NLB IP and keeps the DNS lookup results updated based on these health checks. For example, if your NLBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your host name returns all 3 IPs, 1 of which the client accesses at random. If the NLB with IP address `3.3.3.3` becomes unavailable for any reason, such as due to zone failure, then the health check for that IP fails, the monitor removes the failed IP from the host name, and the DNS lookup returns only the healthy `1.1.1.1` and `2.2.2.2` IPs.</dd>
@@ -1068,7 +1068,7 @@ Note that you currently cannot create host names for private NLBs.</dd>
 
 You can see all host names that are registered for NLB IPs in your cluster by running the following command.
 ```
-ibmcloud ks nlb-dns-list --cluster <cluster_name_or_id>
+ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
 ```
 {: pre}
 
@@ -1083,7 +1083,7 @@ Expose your app to the public internet by creating a host name for the network l
 Before you begin:
 * Review the following considerations and limitations.
   * You can create host names for public version 1.0 and 2.0 NLBs.
-  * You cannot create host names for private NLBs.
+  * You currently cannot create host names for private NLBs.
   * You can register up to 128 host names. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
 * [Create an NLB for your app in a single-zone cluster](#lb_config) or [create NLBs in each zone of a multizone cluster](#multi_zone_config).
 
@@ -1095,7 +1095,7 @@ To create a host name for one or more NLB IP addresses:
   ```
   {: pre}
 
-  In the following example output, the NLB IPs are `168.2.4.5` and `88.2.4.5`.
+  In the following example output, the NLB **EXTERNAL-IP**s are `168.2.4.5` and `88.2.4.5`.
   ```
   NAME             TYPE           CLUSTER-IP       EXTERNAL-IP       PORT(S)                AGE
   lb-myapp-dal10   LoadBalancer   172.21.xxx.xxx   168.2.4.5         1883:30303/TCP         6d
@@ -1111,18 +1111,18 @@ To create a host name for one or more NLB IP addresses:
 
 3. Verify that the host name is created.
   ```
-  ibmcloud ks nlb-dns-list --cluster <cluster_name_or_id>
+  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
   {: pre}
 
   Example output:
   ```
-  Hostname                                                                                IP(s)                                  Health Monitor   SSL Cert Status           SSL Cert Secret Name
-  *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud   168.2.4.5,88.2.4.5                     None             In progress               <certificate>
+  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.2.4.5"]      None             created                   <certificate>
   ```
   {: screen}
 
-4. If you have NLBs in each zone of a multizone cluster that expose one app, you can add the IPs of the other NLBs to the host name. Note that you must run the following command for each  IP address that you want to add.
+4. If you have NLBs in each zone of a multizone cluster that expose one app, add the IPs of the other NLBs to the host name. Note that you must run the following command for each IP address that you want to add.
   ```
   ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-host <host_name>
   ```
@@ -1151,20 +1151,16 @@ Next, you can [enable health checks on the host name by creating a health monito
 ### Understanding the host name format
 {: #loadbalancer_hostname_format}
 
-Host names for NLBs follow the format `*.<cluster_name>-<globally_unique_account_HASH>-0001.<region>.containers.appdomain.cloud`.
+Host names for NLBs follow the format `<cluster_name>-<globally_unique_account_HASH>-0001.<region>.containers.appdomain.cloud`.
 {: shortdesc}
 
-For example, a host name that you create for an NLB might look like `*.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`. The following table describes each component of the host name.
+For example, a host name that you create for an NLB might look like `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`. The following table describes each component of the host name.
 
 <table>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the LB host name format</th>
 </thead>
 <tbody>
-<tr>
-<td><code>*</code></td>
-<td>The wildcard for the host name is registered by default for your cluster.</td>
-</tr>
 <tr>
 <td><code>&lt;cluster_name&gt;</code></td>
 <td>The name of your cluster.
@@ -1205,14 +1201,14 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
 
 1. Get the name of your host name. In the output, note that the host has a monitor **Status** of `Unconfigured`.
   ```
-  ibmcloud ks nlb-dns-monitor-list --cluster <cluster_name_or_id>
+  ibmcloud ks nlb-dns-monitor-ls --cluster <cluster_name_or_id>
   ```
   {: pre}
 
   Example output:
   ```
   Hostname                                                                                   Status         Type    Port   Path
-  *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud      Unconfigured   TCP     1883   N/A
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud        Unconfigured   N/A     0      N/A
   ```
   {: screen}
 
@@ -1293,7 +1289,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
 
   Example command:
   ```
-  ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60 --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+  ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60 --expected-body "healthy" --expected-codes 2xx --follows-redirects true
   ```
   {: pre}
 
@@ -1317,9 +1313,9 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
 
   Example output:
   ```
-  Hostname                                                                                IP                 Health Monitor   H.Monitor Status
-  *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud   168.2.4.5          Enabled          Healthy
-  *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud   88.2.4.5           Enabled          Healthy
+  Hostname                                                                                IP          Health Monitor   H.Monitor Status
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     168.2.4.5   Enabled          Healthy
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     88.2.4.5    Enabled          Healthy
   ```
   {: screen}
 
