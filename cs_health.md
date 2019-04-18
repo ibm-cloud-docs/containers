@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -720,7 +720,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
 **Creating a snapshot**
 
-1. Create an Object Storage bucket through the {{site.data.keyword.Bluemix_notm}} console by following [this getting started tutorial](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started-tutorial#gs-create-buckets).
+1. Create an Object Storage bucket through the {{site.data.keyword.Bluemix_notm}} console by following [this getting started tutorial](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets).
 
 2. Generate [HMAC service credentials](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials) in the bucket that you created.
   1. In the **Service Credentials** tab of the {{site.data.keyword.cos_short}} dashboard, click **New Credential**.

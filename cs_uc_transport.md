@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -133,7 +133,7 @@ Key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Chatbot service powered by Watson](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [SDK for Node.js](https://cloud.ibm.com/developer/appservice/starter-kits)
 
 **Context: Rapidly building and deploying innovative HR benefits site in less than 3 weeks**
 * Employee growth and changing HR policies meant that a whole new site would be required for annual enrollment.

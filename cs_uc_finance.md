@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -45,7 +45,7 @@ Why {{site.data.keyword.Bluemix_notm}}: To improve risk analysis, the company lo
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Container security and isolation](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
-* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [SDK for Node.js](https://cloud.ibm.com/developer/appservice/starter-kits)
 
 **The solution**
 
@@ -113,7 +113,7 @@ Key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
 * [Fraud prevention with {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
+* [SDK for Node.js](https://cloud.ibm.com/developer/appservice/starter-kits)
 * [Sign-on capability without changing app code by using {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
 
 **Context: Streamlining developer productivity and deploying AI tools to partners 4 times faster**
