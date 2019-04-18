@@ -43,7 +43,7 @@ Key technologies:
 * [Horizontal scaling](/docs/containers?topic=containers-app#highly_available_apps)
 * [Container security and isolation](/docs/containers?topic=containers-security#security)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [SDK for Node.js](https://cloud.ibm.com/developer/appservice/starter-kits)
+* [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 * [Sign-on capability without changing app code by using {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
 
 They started by containerizing their SaaS systems and putting them in the cloud. From that first step, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the SaaS systems, they easily designed Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for decreased staff costs is that IBM manages Kubernetes, so the provider can focus on delivering better customer service.
