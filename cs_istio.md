@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-04-18"
 
 ---
 
@@ -172,7 +172,7 @@ Install Istio managed add-ons in an existing cluster.
     istio-egressgateway      ClusterIP      172.21.46.253    <none>          80/TCP,443/TCP                                                 2m
     istio-galley             ClusterIP      172.21.125.77    <none>          443/TCP,9093/TCP                                               2m
     istio-ingressgateway     LoadBalancer   172.21.230.230   169.46.56.125   80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
-                                                                              8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP   2m
+                                                                              8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  2m
     istio-pilot              ClusterIP      172.21.171.29    <none>          15010/TCP,15011/TCP,8080/TCP,9093/TCP                          2m
     istio-policy             ClusterIP      172.21.140.180   <none>          9091/TCP,15004/TCP,9093/TCP                                    2m
     istio-sidecar-injector   ClusterIP      172.21.248.36    <none>          443/TCP                                                        2m
@@ -328,13 +328,13 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
 
 3.  View the BookInfo web page in a browser.
 
-    For Mac OS or Linux:
+    Mac OS or Linux:
     ```
     open http://$GATEWAY_URL/productpage
     ```
     {: pre}
 
-    For Windows:
+    Windows:
     ```
     start http://$GATEWAY_URL/productpage
     ```
@@ -350,7 +350,7 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 
 <dl>
 <dt>`Gateway`</dt>
-<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace, that acts as the ingress entry point for HTTP/TCP traffic for the BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
+<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace, that acts as the ingress entry point for HTTP/TCP traffic for BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
 </br></br>To see the configuration file for the BookInfo gateway, run the following command.
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
 
@@ -372,7 +372,7 @@ Next, you can [expose BookInfo by using the IBM-provided Ingress subdomain](#ist
 <br />
 
 
-## Logging, monitoring, tracing, and visualizing Istio on {{site.data.keyword.containerlong_notm}}
+## Logging, monitoring, tracing, and visualizing Istio
 {: #istio_health}
 
 To log, monitor, trace, and visualize your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}, you can launch the Grafana, Jaeger, and Kiali dashboards that are installed in the `istio-extras` add-on or deploy LogDNA and Sysdig as a third-party services to your worker nodes.
@@ -429,7 +429,7 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 Seamlessly manage logs for your app container and the Envoy proxy sidecar container in each pod by deploying LogDNA to your worker nodes to forward logs to {{site.data.keyword.loganalysislong}}.
 {: shortdesc}
 
-To use [{{site.data.keyword.la_full}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
+To use [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
 
 To get started, set up LogDNA for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
 
@@ -611,105 +611,72 @@ The app pods are now integrated into your Istio service mesh because they have t
 <br />
 
 
-## Exposing Istio-managed apps by using the IBM-provided Ingress subdomain
+## Exposing Istio-managed apps by using an IBM-provided host name
 {: #istio_expose}
 
-After you [set up Envoy proxy sidecar injection](#istio_sidecar) and deploy your apps into the Istio service mesh, you can expose your Istio-managed apps to public requests by using the IBM-provided Ingress subdomain.
+After you [set up Envoy proxy sidecar injection](#istio_sidecar) and deploy your apps into the Istio service mesh, you can expose your Istio-managed apps to public requests by using an IBM-provided host name.
 {: shortdesc}
 
-The {{site.data.keyword.containerlong_notm}} ALB uses Kubernetes Ingress resources to control how traffic is routed to your apps. However, Istio uses [Gateways ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) and [VirtualServices ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) to control how traffic is routed to your apps. A gateway configures a load balancer that acts as the entry point for your Istio-managed apps. Virtual services define routing rules so that traffic is properly forwarded to your app microservices.
+Istio uses [Gateways ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) and [VirtualServices ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) to control how traffic is routed to your apps. A gateway configures a load balancer, `istio-ingressgateway`, that acts as the entry point for your Istio-managed apps. In standard clusters, you can expose your Istio-managed apps by registering the external IP address of the `istio-ingressgateway` load balancer with a DNS entry and host name.
 
-In standard clusters, an IBM-provided Ingress subdomain is automatically assigned to your cluster so that you can publicly expose your apps. You can leverage the DNS entry for this subdomain to expose your Istio-managed apps by connecting the default {{site.data.keyword.containerlong_notm}} ALB to the Istio ingress gateway.
+You can try out the [example to expose BookInfo](#istio_expose_bookinfo) first, or [publicly expose your own Istio-managed apps](#istio_expose_link).
 
-You can try out the [example to expose BookInfo by using the IBM-provided Ingress subdomain](#istio_expose_bookinfo) first, or [publicly expose your own Istio-managed apps by connecting the Istio gateway and Ingress ALB](#istio_expose_link).
-
-### Example: Exposing BookInfo by using the IBM-provided Ingress subdomain
+### Example: Exposing BookInfo by using an IBM-provided host name
 {: #istio_expose_bookinfo}
 
-When you when you enable the [BookInfo add-on](#istio_bookinfo) in your cluster, the Istio gateway `bookinfo-gateway` is created for you. The gateway uses Istio virtual service and destination rules to configure a load balancer, `istio-ingressgateway`, that publicly exposes the BookInfo app. In the following steps, you create a Kubernetes Ingress resource that forwards incoming requests to the {{site.data.keyword.containerlong_notm}} Ingress ALB to the `istio-ingressgateway` load balancer.
+When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo-gateway` is created for you. The gateway uses Istio virtual service and destination rules to configure a load balancer, `istio-ingressgateway`, that publicly exposes the BookInfo app. In the following steps, you create a host name for the `istio-ingressgateway` load balancer IP address through which you can publicly access BookInfo.
 {: shortdesc}
 
-Before you begin, [enable the `istio` and `istio-sample-bookinfo` managed add-ons](#istio_install) in a cluster.
+Before you begin, [enable the `istio-sample-bookinfo` managed add-on](#istio_install) in a cluster.
 
-1. Get the IBM-provided Ingress subdomain for your cluster. If you want to use TLS, also note the IBM-provided Ingress TLS secret in the output.
+1. Get the **EXTERNAL-IP** address for the `istio-ingressgateway` load balancer.
   ```
-  ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
+  kubectl get svc -n istio-system
+  ```
+  {: pre}
+
+  In the following example output, the **EXTERNAL-IP** is `168.1.1.1`.
+  ```
+  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
+  ...
+  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
+                                                                            8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+  ```
+  {: screen}
+
+2. Register the IP by creating a DNS host name.
+  ```
+  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
+  ```
+  {: pre}
+
+3. Verify that the host name is created.
+  ```
+  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
   {: pre}
 
   Example output:
   ```
-  Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
-  Ingress Secret:         mycluster-12345
+  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
   ```
   {: screen}
 
-2. Create an Ingress resource. The {{site.data.keyword.containerlong_notm}} ALB uses the rules defined in this resource to forward traffic to the Istio load balancer that exposes your Istio-managed app.
-  ```
-  apiVersion: extensions/v1beta1
-  kind: Ingress
-  metadata:
-    name: myingressresource
-    namespace: istio-system
-  spec:
-    tls:
-    - hosts:
-      - bookinfo.<IBM-ingress-domain>
-      secretName: <tls_secret_name>
-    rules:
-    - host: bookinfo.<IBM-ingress-domain>
-      http:
-        paths:
-        - path: /
-          backend:
-            serviceName: istio-ingressgateway
-            servicePort: 80
-  ```
-  {: codeblock}
-
-  <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>tls.hosts</code></td>
-  <td>To use TLS, replace <em>&lt;IBM-ingress-domain&gt;</em> with the IBM-provided Ingress subdomain. Note that `bookinfo` is prepended to your IBM-provided Ingress subdomain. This `bookinfo` subdomain is automatically registered because the IBM-provided Ingress subdomain wildcard, <code>*.&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>, is registered by default for your cluster.</td>
-  </tr>
-  <tr>
-  <td><code>tls.secretName</code></td>
-  <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the IBM-provided Ingress secret. The IBM-provided TLS certificate is a wildcard certificate and can be used for the `bookinfo` subdomain.<td>
-  </tr>
-  <tr>
-  <td><code>host</code></td>
-  <td>Replace <em>&lt;IBM-ingress-domain&gt;</em> with the IBM-provided Ingress subdomain. Note that `bookinfo` is prepended to your IBM-provided Ingress subdomain.</td>
-  </tr>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Note that the service name is the <code>istio-ingressgateway</code> so that the ALB forwards requests from this subdomain to the Istio load balancer service.</td>
-  </tr>
-  </tbody></table>
-
-3. Create the Ingress resource.
-  ```
-  kubectl apply -f myingressresource.yaml -n istio-system
-  ```
-  {: pre}
-
 4. In a web browser, open the BookInfo product page.
   ```
-  https://bookinfo.<IBM-ingress-domain>/productpage
+  https://<host_name>/productpage
   ```
   {: codeblock}
 
-5. Try refreshing the page several times. The requests to `http://bookinfo.<IBM-domain>/productpage` are received by the ALB and are forwarded to Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
+5. Try refreshing the page several times. The requests to `http://<host_name>/productpage` are received by the ALB and are forwarded to the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
 
-For more information about the gateway, virtual service rules, and destination rules for the BookInfo app, see [Understanding what happened](#istio_bookinfo_understanding).
+For more information about the gateway, virtual service rules, and destination rules for the BookInfo app, see [Understanding what happened](#istio_bookinfo_understanding). For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
 
-### Publicly exposing your own Istio-managed apps by connecting the Istio gateway and Ingress ALB
+### Publicly exposing your own Istio-managed apps by using an IBM-provided host name
 {: #istio_expose_link}
 
-Use the IBM-provided Ingress subdomain for your Istio-managed apps by connecting the Istio gateway and the {{site.data.keyword.containerlong_notm}} ALB. The following steps show how to set up an Istio gateway, create a virtual service that defines traffic management rules for your Istio-managed services, and configure your {{site.data.keyword.containerlong_notm}} Ingress ALB so that it directs traffic from your IBM-provided Ingress subdomain to the `istio-ingressgateway` load balancer.
+Publicly expose your Istio-managed apps by creating an Istio gateway, a virtual service that defines traffic management rules for your Istio-managed services, and a DNS host name for the external IP address of the `istio-ingressgateway` load balancer.
 {: shortdesc}
 
 **Before you begin:**
@@ -727,7 +694,7 @@ Use the IBM-provided Ingress subdomain for your Istio-managed apps by connecting
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
 
 </br>
-**To connect the Istio gateway and the {{site.data.keyword.containerlong_notm}} ALB:**
+**To publicly expose your Istio-managed apps with a host name:**
 
 1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `80`, add that port. For more information about gateway YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/).
   ```
@@ -756,10 +723,6 @@ Use the IBM-provided Ingress subdomain for your Istio-managed apps by connecting
   {: pre}
 
 3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/).
-
-  If you already expose your microservice by using the {{site.data.keyword.containerlong_notm}} ALB, Istio provides a converter tool as part of the `istioctl` client that can help you migrate Ingress resource definitions to corresponding virtual services. The [`istioctl` converter tool ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/commands/istioctl/#istioctl-experimental-convert-ingress) converts Ingress resources into virtual services on a best effort basis. Note that Ingress annotations are not converted because the Istio gateway does not use Ingress annotations. The output is a starting point for your Istio ingress configuration and might require some modifications. To use the tool, run the following command: `istioctl experimental convert-ingress -f <existing_ingress_resource>.yaml > my-virtual-service.yaml`
-  {: tip}
-
   ```
   apiVersion: networking.istio.io/v1alpha3
   kind: VirtualService
@@ -794,7 +757,7 @@ Use the IBM-provided Ingress subdomain for your Istio-managed apps by connecting
   </tr>
   <tr>
   <td><code>gateways</code></td>
-  <td>Note that <code>my-gateway</code> is specified so that the gateway can apply these virtual service routing rules to the Istio load balancer.<td>
+  <td>Note that <code>my-gateway</code> is specified so that the gateway can apply these virtual service routing rules to the <code>istio-ingressgateway</code> load balancer.<td>
   </tr>
   <tr>
   <td><code>http.match.uri.exact</code></td>
@@ -816,53 +779,47 @@ Use the IBM-provided Ingress subdomain for your Istio-managed apps by connecting
   ```
   {: pre}
 
-5. Create an Ingress resource file. The {{site.data.keyword.containerlong_notm}} ALB uses the rules defined in this sample resource to forward traffic to the Istio load balancer that exposes your Istio-managed microservice.
+5. Get the **EXTERNAL-IP** address for the `istio-ingressgateway` load balancer.
   ```
-  apiVersion: extensions/v1beta1
-  kind: Ingress
-  metadata:
-    name: my-ingress-resource
-    namespace: istio-system
-  spec:
-    rules:
-    - host: <sub-domain>.<IBM-ingress-domain>
-      http:
-        paths:
-        - path: /
-          backend:
-            serviceName: istio-ingressgateway
-            servicePort: 80
-  ```
-  {: codeblock}
-
-  <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>host</code></td>
-  <td>Replace <em>&lt;sub-domain&gt;</em> with a subdomain for your app and <em>&lt;IBM-ingress-domain&gt;</em> with the IBM-provided Ingress subdomain. You can find the IBM-provided Ingress subdomain for your cluster by running <code>ibmcloud ks cluster-get --cluster &lt;cluster_name_or_ID&gt;</code>. Your chosen subdomain is automatically registered because the IBM-provided Ingress subdomain wildcard, <code>*.&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>, is registered by default for your cluster.</td>
-  </tr>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Note that <code>istio-ingressgateway</code> is specified so that the ALB forwards incoming requests to the Istio load balancer service.</td>
-  </tr>
-  </tbody></table>
-
-6. Apply the Ingress resource in the namespace where your Istio-managed microservices are deployed.
-  ```
-  kubectl apply -f my-ingress-resource.yaml -n <namespace>
+  kubectl get svc -n istio-system
   ```
   {: pre}
 
+  In the following example output, the **EXTERNAL-IP** is `168.1.1.1`.
+  ```
+  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
+  ...
+  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
+                                                                            8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+  ```
+  {: screen}
+
+6. Register the `istio-ingressgateway` load balancer IP by creating a DNS host name.
+  ```
+  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
+  ```
+  {: pre}
+
+7. Verify that the host name is created.
+  ```
+  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+  ```
+  {: screen}
+
 7. In a web browser, verify that traffic is being routed to your Istio-managed microservices by entering the URL of the app microservice to access.
   ```
-  http://<subdomain>.<IBM-ingress-domain>/<service_path>
+  http://<host_name>/<service_path>
   ```
   {: codeblock}
 
-In review, you created a gateway called `my-gateway`. This gateway uses the existing `istio-ingressgateway` load balancer service to expose your app. The `istio-ingressgateway` load balancer uses the rules that you defined in the `my-virtual-service` virtual service to route traffic to your app. Finally, you created an Ingress resource so that the IBM ALB can forward traffic from your Ingress subdomain to the `istio-ingressgateway` load balancer. All user requests to your Ingress subdomain are forwarded to your app according to your Istio routing rules.
+In review, you created a gateway called `my-gateway`. This gateway uses the existing `istio-ingressgateway` load balancer service to expose your app. The `istio-ingressgateway` load balancer uses the rules that you defined in the `my-virtual-service` virtual service to route traffic to your app. Finally, you created a host name for the `istio-ingressgateway` load balancer. All user requests to the host name are forwarded to your app according to your Istio routing rules. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
 
 Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/).
 {: tip}
@@ -884,6 +841,23 @@ If you're finished working with Istio, you can clean up the Istio resources in y
 
 Note that the `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinfo`, and [`knative`](/docs/containers?topic=containers-knative_tutorial) add-ons. The `istio-extras` add-on is a dependency for the `istio-sample-bookinfo` add-on.
 {: important}
+
+**Optional**: Any resources that you created or modified in the `istio-system` namespace and all Kubernetes resources that were automatically generated by custom resource definitions (CRDs) are removed. If you want to keep these resources, save them before you uninstall the `istio` add-ons.
+1. Save any resources, such as configuration files for any services or apps, that you created or modified in the `istio-system` namespace.
+   Example command:
+   ```
+   kubectl get pod <pod_name> -o yaml -n istio-system
+   ```
+   {: pre}
+
+2. Save the Kubernetes resources that were automatically generated by CRDs in `istio-system` to a YAML file on your local machine.
+   1. Get the CRDs in `istio-system`.
+      ```
+      kubectl get crd -n istio-system
+      ```
+      {: pre}
+
+   2. Save any resources created from these CRDs.
 
 ### Uninstalling managed Istio add-ons in the CLI
 {: #istio_uninstall_cli}

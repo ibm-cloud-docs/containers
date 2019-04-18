@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-17"
 
 keywords: kubernetes, iks
 
@@ -88,7 +88,7 @@ By default, your cluster configuration and Kubernetes secrets are stored in the 
 
 When you enable {{site.data.keyword.keymanagementserviceshort}} in your cluster, your own root key is used to encrypt data in etcd, including the LUKS secrets. You get more control over your sensitive data by encrypting the secrets with your root key. Using your own encryption adds an layer of security to your etcd data and Kubernetes secrets and gives you more granular control of who can access sensitive cluster information. If you ever need to irreversibly remove access to etcd or your secrets, you can delete the root key.
 
-If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data in etcd or the data from the secrets in your cluster afterward.
+Do not delete root keys in your {{site.data.keyword.keymanagementserviceshort}} instance. Do not delete keys even if you rotate to use a new key. You cannot access or remove the data in etcd or the data from the secrets in your cluster if you delete a root key. 
 {: important}
 
 Before you begin:
@@ -155,7 +155,12 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
     ```
     {: screen}
 
-After {{site.data.keyword.keymanagementserviceshort}} is enabled in the cluster, data in `etcd`, existing secrets and new secrets that are created in the cluster are automatically encrypted by using your {{site.data.keyword.keymanagementserviceshort}} root key. You can rotate your key at any time by repeating these steps with a new root key ID.
+    After {{site.data.keyword.keymanagementserviceshort}} is enabled in the cluster, data in `etcd`, existing secrets and new secrets that are created in the cluster are automatically encrypted by using your {{site.data.keyword.keymanagementserviceshort}} root key.
+
+9.  Optional: To rotate your key, repeat these steps with a new root key ID. The new root key is added to the cluster configuration along with the previous root key so that existing encrypted data is still protected.
+
+Do not delete root keys in your {{site.data.keyword.keymanagementserviceshort}} instance. Do not delete keys even if you rotate to use a new key. You cannot access or remove the data in etcd or the data from the secrets in your cluster if you delete a root key. 
+{: important}
 
 
 ## Encrypting data by using IBM Cloud Data Shield (Beta)

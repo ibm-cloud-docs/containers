@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -840,7 +840,7 @@ The following steps assume that the API key stores the credentials of a service 
             ```
             {: pre}
         2.  Re-create your deployment in the `default` Kubernetes namespace. If you still see an authorization error message, repeat Steps 1-5 with the new image pull secrets. If you still cannot log in, [contact the IBM team on Slack, or open an {{site.data.keyword.Bluemix_notm}} Support case](#clusters_getting_help).
-    6.  If the login succeeds, pull an image locally. If the command fails with an `access denied` error, the registry account is in a different {{site.data.keyword.Bluemix_notm}} account than the one your cluster is in. [Create an image pull secret to access images in the other account](/docs/containers?topic=containers-images#other_registry_accounts). If the command succeeds, [contact the IBM team on Slack, or open an {{site.data.keyword.Bluemix_notm}} Support case](#clusters_getting_help).
+    6.  If the login succeeds, pull an image locally. If the command fails with an `access denied` error, the registry account is in a different {{site.data.keyword.Bluemix_notm}} account than the one your cluster is in. [Create an image pull secret to access images in the other account](/docs/containers?topic=containers-images#other_registry_accounts). If you can pull an image to your local machine, then your API key has the right permissions, but the API setup in your cluster is not correct. You cannot resolve this issue. [Contact the IBM team on Slack, or open an {{site.data.keyword.Bluemix_notm}} Support case](#clusters_getting_help).
         ```
         docker pull <region>icr.io/<namespace>/<image>:<tag>
         ```

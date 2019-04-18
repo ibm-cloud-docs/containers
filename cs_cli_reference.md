@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -36,7 +36,8 @@ In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-in
 Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_notm}} CLI reference](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference). Looking for `kubectl` commands? See the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
 {:tip}
 
-## Using the beta command structure
+
+## Using the beta {{site.data.keyword.containerlong_notm}} plug-in
 {: #cs_beta}
 
 A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from a hyphenated structure to a spaced structure.
@@ -63,7 +64,7 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
       <td><code>0.2</code> (default)</td>
       <td>Legacy: Commands are shown in the hyphenated structure and are listed alphabetically.</td>
       <td>Legacy and beta: You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
-  </tr>
+    </tr>
     <tr>
       <td><code>0.3</code></td>
       <td>Beta: Commands are shown in the spaced structure and are listed in categories.</td>
@@ -375,7 +376,7 @@ ibmcloud plugin list
     <td>[ibmcloud ks region](#cs_region)</td>
     <td>[ibmcloud ks region-set](#cs_region-set)</td>
     <td>[ibmcloud ks regions](#cs_regions)</td>
-    <td>[ibmcloud ks zones](#cs_datacenters)</td>
+  <td>[ibmcloud ks zones](#cs_datacenters)</td>
   </tr>
 </tbody>
 </table>
@@ -443,13 +444,19 @@ ibmcloud plugin list
 Target the API endpoint for {{site.data.keyword.containerlong_notm}}. If you do not specify an endpoint, you can view information about the current endpoint that is targeted.
 {: shortdesc}
 
+The following endpoints are supported:
+* Global: `https://containers.cloud.ibm.com`
+* Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
+* Frankfurt (EU Central, eu-de): `https://eu-central.containers.cloud.ibm.com`
+* London (UK South, eu-gb): `https://uk-south.containers.cloud.ibm.com`
+* Sydney (AP South, au-syd): `https://ap-south.containers.cloud.ibm.com`
+* Tokyo (AP North, jp-tok): `https://ap-north.containers.cloud.ibm.com`
+* Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
+
 ```
 ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
 ```
 {: pre}
-
-Switching regions? Use the `ibmcloud ks region-set` [command](#cs_region-set) instead.
-{: tip}
 
 <strong>Minimum required permissions</strong>: None
 
@@ -457,14 +464,7 @@ Switching regions? Use the `ibmcloud ks region-set` [command](#cs_region-set) in
 
    <dl>
    <dt><code>--endpoint <em>ENDPOINT</em></code></dt>
-   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint. Note that this endpoint is different than the {{site.data.keyword.Bluemix_notm}} endpoints. This value is required to set the API endpoint. Accepted values are:<ul>
-   <li>Global endpoint: https://containers.cloud.ibm.com</li>
-   <li>AP North endpoint: https://ap-north.containers.cloud.ibm.com</li>
-   <li>AP South endpoint: https://ap-south.containers.cloud.ibm.com</li>
-   <li>EU Central endpoint: https://eu-central.containers.cloud.ibm.com</li>
-   <li>UK South endpoint: https://uk-south.containers.cloud.ibm.com</li>
-   <li>US East endpoint: https://us-east.containers.cloud.ibm.com</li>
-   <li>US South endpoint: https://us-south.containers.cloud.ibm.com</li></ul>
+   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint. Note that this endpoint is different than the {{site.data.keyword.Bluemix_notm}} endpoints. This value is required to set the API endpoint.
    </dd>
 
    <dt><code>--insecure</code></dt>
@@ -747,11 +747,20 @@ ibmcloud ks help
 <strong>Command options</strong>: None
 
 
-### ibmcloud ks init [--host HOST]
+### ibmcloud ks init
 {: #cs_init}
 
 Initialize the {{site.data.keyword.containerlong_notm}} plug-in or specify the region where you want to create or access Kubernetes clusters.
 {: shortdesc}
+
+The following endpoints are supported:
+* Global: `https://containers.cloud.ibm.com`
+* Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
+* Frankfurt (EU Central, eu-de): `https://eu-central.containers.cloud.ibm.com`
+* London (UK South, eu-gb): `https://uk-south.containers.cloud.ibm.com`
+* Sydney (AP South, au-syd): `https://ap-south.containers.cloud.ibm.com`
+* Tokyo (AP North, jp-tok): `https://ap-north.containers.cloud.ibm.com`
+* Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
 
 ```
 ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
@@ -764,7 +773,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use.  This value is optional. [View the available API endpoint values.](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
+   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use. This value is optional. [View the available API endpoint values.](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>Allow an insecure HTTP connection.</dd>
@@ -773,18 +782,24 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
    <dd>Your IBM Cloud password.</dd>
 
    <dt><code>-u</code></dt>
-   <dd>Your IBM Cloud user name.</dd>
+   <dd>Your IBM Cloud username.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
    </dl>
 
-**Example**:
-```
-ibmcloud ks init --host https://uk-south.containers.cloud.ibm.com
-```
-{: pre}
+**Examples**:
+*  Example to target the US South regional endpoint:
+  ```
+  ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
+  ```
+  {: pre}
+*  Example to target the global endpoint:
+  ```
+  ibmcloud ks init --host https://containers.cloud.ibm.com
+  ```
+  {: pre}
 
 ### ibmcloud ks messages
 {: #cs_messages}
@@ -1253,7 +1268,7 @@ trusted: <em>true</em>
 <dd>The level of hardware isolation for your worker node. Use dedicated to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional for VM standard clusters and is not available for free clusters. For bare metal machine types, specify `dedicated`.</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>The zone where you want to create the cluster. The zones that are available to you depend on the {{site.data.keyword.Bluemix_notm}} region you are logged in to. Select the region that is physically closest to you for best performance. This value is required for standard clusters and is optional for free clusters.
+<dd>This value is required for standard clusters. Free clusters can be created in the region that you target with the <code>ibmcloud ks region-set</code> command, but you cannot specify the zone.
 
 <p>Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</p>
 
@@ -1724,8 +1739,7 @@ ibmcloud ks clusters [--json] [-s]
 
 <strong>Command options</strong>:
 
-  <dl>
-  <dt><code>--json</code></dt>
+  <dl><dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
 
   <dt><code>-s</code></dt>
@@ -1948,7 +1962,7 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 ### ibmcloud ks key-protect-enable
 {: #cs_key_protect}
 
-Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster.
+Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. To rotate a key in a cluster with existing key encryption, re-run this command with a new root key ID.
 {: shortdesc}
 
 ```
@@ -1956,7 +1970,7 @@ ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url EN
 ```
 {: pre}
 
-If you delete the root key in your {{site.data.keyword.keymanagementserviceshort}} instance, you cannot access or remove the data from the secrets in your cluster.
+Do not delete root keys in your {{site.data.keyword.keymanagementserviceshort}} instance. Do not delete keys even if you rotate to use a new key. You cannot access or remove the data in etcd or the data from the secrets in your cluster if you delete a root key.
 {: important}
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -2679,7 +2693,7 @@ ibmcloud ks albs --cluster CLUSTER [--json] [-s]
 ## Infrastructure commands
 {: #infrastructure_commands}
 
-### ibmcloud ks
+### ibmcloud ks credential-get
 {: #cs_credential_get}
 
 If you set up your IBM Cloud account to use different credentials to access the IBM Cloud infrastructure portfolio, get the infrastructure user name for the region and resource group that you're currently targeted to.
@@ -2757,7 +2771,6 @@ Before you use this command, make sure that the user whose credentials are used 
   <li>Copy the API user name.
   </ol>
   </dd>
-
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -2777,14 +2790,14 @@ Before you use this command, make sure that the user whose credentials are used 
 Remove IBM Cloud infrastructure (SoftLayer) account credentials from an {{site.data.keyword.containerlong_notm}} region.
 {: shortdesc}
 
-```
-ibmcloud ks credential-unset
-```
-{: pre}
-
 After you remove the credentials, the [{{site.data.keyword.Bluemix_notm}} IAM API key](#cs_api_key_info) is used to order resources in IBM Cloud infrastructure (SoftLayer).
 
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+```
+ibmcloud ks credential-unset [-s]
+```
+{: pre}
 
 <strong>Command options</strong>:
 
@@ -3557,6 +3570,7 @@ ibmcloud ks logging-collect-status --cluster CLUSTER [--json] [-s]
 
 <br />
 
+
 ## Network load balancer commands (`nlb-dns`)
 {: #nlb-dns}
 
@@ -3588,7 +3602,7 @@ For example, in a multizone cluster, you might create an NLB in each zone to exp
 <dd>The NLB IP that you want to add to the hostname. To see your NLB IPs, run <code>kubectl get svc</code>.</dd>
 
 <dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns-list</code>.</dd>
+<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dnss</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -3599,7 +3613,7 @@ For example, in a multizone cluster, you might create an NLB in each zone to exp
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -3693,7 +3707,7 @@ ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [
 <dd>The NLB IP that you want to remove. To see your NLB IPs, run <code>kubectl get svc</code>.</dd>
 
 <dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns-list</code>.</dd>
+<dd>The host name that you want to remove an IP from. To see existing host names, run <code>ibmcloud ks nlb-dnss</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -3704,7 +3718,7 @@ ibmcloud ks nlb-dns-rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -3789,7 +3803,7 @@ You can use this command to create and enable a new health check monitor, or to 
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
 ```
 {: pre}
 
@@ -3824,7 +3838,7 @@ ibmcloud ks nlb-dns-monitor-get --cluster CLUSTER --nlb-host HOST_NAME [--json] 
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -3859,7 +3873,7 @@ ibmcloud ks nlb-dns-monitor-disable --cluster CLUSTER --nlb-host HOST_NAME [--js
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -3896,7 +3910,7 @@ Note that the first time you create a health check monitor, you must configure a
 
 **Example**:
 ```
-ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host *.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -3973,10 +3987,13 @@ ibmcloud ks nlb-dns-monitor-status --cluster mycluster
 ## Region commands
 {: #region_commands}
 
+Use this group of commands to view available locations, view the currently targeted region, and set the targeted region.
+{: shortdesc}
+
 ### ibmcloud ks region
 {: #cs_region}
 
-Find the {{site.data.keyword.containerlong_notm}} region that you are currently in. You create and manage clusters specific to the region. Use the `ibmcloud ks region-set` command to change regions.
+Find the {{site.data.keyword.containerlong_notm}} region that you are currently targeted to. You create and manage clusters specific to the region. Use the `ibmcloud ks region-set` command to change regions.
 {: shortdesc}
 
 ```
@@ -3992,14 +4009,14 @@ ibmcloud ks region
 Set the region for {{site.data.keyword.containerlong_notm}}. You create and manage clusters specific to the region, and you might want clusters in multiple regions for high availability.
 {: shortdesc}
 
+For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud ks region-set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud ks region-set us-south` to return to US South to manage your cluster in that region.
+
+<strong>Minimum required permissions</strong>: None
+
 ```
 ibmcloud ks region-set [--region REGION]
 ```
 {: pre}
-
-For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud ks region-set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud ks region-set us-south` to return to US South to manage your cluster in that region.
-
-<strong>Minimum required permissions</strong>: None
 
 **Command options**:
 
@@ -4075,8 +4092,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
 
 <strong>Command options</strong>:
 
-   <dl>
-   <dt><code>--region-only</code></dt>
+   <dl><dt><code>--region-only</code></dt>
    <dd>List only multizones within the region that you are logged in to. This value is optional.</dd>
 
    <dt><code>--json</code></dt>
@@ -4086,12 +4102,7 @@ ibmcloud ks zones [--region-only] [--json] [-s]
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
 
-**Example**:
-
-  ```
-  ibmcloud ks zones
-  ```
-  {: pre}
+**Minimum permissions**: None
 
 <br />
 
@@ -4977,3 +4988,5 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
   ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
   ```
   {: pre}
+
+
