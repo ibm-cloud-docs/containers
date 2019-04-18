@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-04-18"
 
 keywords: kubernetes, iks
 
@@ -655,7 +655,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.Bluemix_not
 
 4.  If you assigned only service roles to users, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster-config` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) or otherwise interact with the Kubernetes API. If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, [give the users the platform **Viewer** role](#add_users_cli_platform).
 
-5.  For the changes to take effect, the user that is granted access must refresh the cluster configuration.
+5.  For the changes to take effect, the user that is granted access must refresh the cluster configuration. Users are not added to the role bindings until they individually refresh the cluster configuration, even if you added multiple users at the same time. Users are also not added to a role binding if they have a higher permission. For example, if users have a cluster role and are in a cluster role binding, they are not added to each individual namespace role binding as well.
     ```
     ibmcloud ks cluster-config --cluster <cluster_name_or_id>
     ```
