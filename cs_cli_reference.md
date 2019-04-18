@@ -50,7 +50,7 @@ export IKS_BETA_VERSION=<beta_version>
 ```
 {: pre}
 
-The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available. Note that the default behavior is `0.3`. To use the deprecated regional endpoint funtionality, you must use `0.2`.
+The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available. Note that the default behavior is `0.2`.
 
 <table>
 <caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
@@ -58,32 +58,22 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
     <th>Beta version</th>
     <th>`ibmcloud ks help` output structure</th>
     <th>Command structure</th>
-    <th>Location functionality</th>
   </thead>
   <tbody>
     <tr>
       <td><code>0.2</code> (deprecated)</td>
       <td>Legacy: Commands are shown in the hyphenated structure and are listed alphabetically.</td>
       <td>Legacy and beta: You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
-      <td>Regional: [Target a region and use a regional endpoint to work with resources in that region](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</td>
     </tr>
     <tr>
       <td><code>0.3</code> (default)</td>
       <td>Legacy: Commands are shown in the hyphenated structure and are listed alphabetically.</td>
       <td>Legacy and beta: You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
-      <td>Global: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</td>
-    </tr>
-    <tr>
-      <td><code>0.4</code></td>
-      <td>Beta: Commands are shown in the spaced structure and are listed in categories.</td>
-      <td>Legacy and beta: You can run commands either in the legacy hyphenated structure (`ibmcloud ks alb-cert-get`) or in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
-      <td>Global: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</td>
     </tr>
     <tr>
       <td><code>1.0</code></td>
       <td>Beta: Commands are shown in the spaced structure and are listed in categories.</td>
       <td>Beta: You can run commands only in the beta spaced structure (`ibmcloud ks alb cert get`).</td>
-      <td>Global: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</td>
     </tr>
   </tbody>
 </table>
@@ -383,16 +373,10 @@ ibmcloud plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud ks supported-locations](#cs_supported-locations)</td>
     <td>[ibmcloud ks region](#cs_region)</td>
     <td>[ibmcloud ks region-set](#cs_region-set)</td>
     <td>[ibmcloud ks regions](#cs_regions)</td>
-  </tr>
-  <tr>
   <td>[ibmcloud ks zones](#cs_datacenters)</td>
-  <td> </td>
-  <td> </td>
-  <td> </td>
   </tr>
 </tbody>
 </table>
@@ -460,19 +444,14 @@ ibmcloud plugin list
 Target the API endpoint for {{site.data.keyword.containerlong_notm}}. If you do not specify an endpoint, you can view information about the current endpoint that is targeted.
 {: shortdesc}
 
-Region-specific endpoints are deprecated. Use the [global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint) instead. If you must use regional endpoints, [set the `IKS_BETA_VERSION` environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to `0.2`](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_beta).
-{: deprecated}
-
-If you need to list and work with resources from one region only, you can use the `ibmcloud ks api` command to target a regional endpoint instead of the global endpoint.
-
+The following endpoints are supported:
+* Global: `https://containers.cloud.ibm.com`
 * Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
 * Frankfurt (EU Central, eu-de): `https://eu-central.containers.cloud.ibm.com`
 * London (UK South, eu-gb): `https://uk-south.containers.cloud.ibm.com`
 * Sydney (AP South, au-syd): `https://ap-south.containers.cloud.ibm.com`
 * Tokyo (AP North, jp-tok): `https://ap-north.containers.cloud.ibm.com`
 * Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
-
-To use the global functionality, you can use the `ibmcloud ks api` command again to target the global endpoint: `https://containers.cloud.ibm.com`
 
 ```
 ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
@@ -524,7 +503,7 @@ View the name and email address for the owner of the {{site.data.keyword.Bluemix
 {: shortdesc}
 
 ```
-ibmcloud ks api-key-info --cluster CLUSTER [--region REGION] [--json] [-s]
+ibmcloud ks api-key-info --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
 
@@ -543,9 +522,6 @@ If you find that you need to update the API key that is stored for a resource gr
    <dl>
    <dt><code>--cluster <em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
-
-   <dt><code>--region <em>REGION</em></code></dt>
-   <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
 
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -570,7 +546,7 @@ Replace the current {{site.data.keyword.Bluemix_notm}} IAM API key in an {{site.
 {: shortdesc}
 
 ```
-ibmcloud ks api-key-reset [--region REGION] [-s]
+ibmcloud ks api-key-reset [-s]
 ```
 {: pre}
 
@@ -584,8 +560,6 @@ Before you use this command, make sure that the user who executes this command h
 <strong>Command options</strong>:
 
    <dl>
-   <dt><code>--region <em>REGION</em></code></dt>
-   <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
@@ -779,19 +753,14 @@ ibmcloud ks help
 Initialize the {{site.data.keyword.containerlong_notm}} plug-in or specify the region where you want to create or access Kubernetes clusters.
 {: shortdesc}
 
-Region-specific endpoints are deprecated. Use the [global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint) instead. If you must use regional endpoints, [set the `IKS_BETA_VERSION` environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to `0.2`](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_beta).
-{: deprecated}
-
-If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` command to target a regional endpoint instead of the global endpoint.
-
+The following endpoints are supported:
+* Global: `https://containers.cloud.ibm.com`
 * Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
 * Frankfurt (EU Central, eu-de): `https://eu-central.containers.cloud.ibm.com`
 * London (UK South, eu-gb): `https://uk-south.containers.cloud.ibm.com`
 * Sydney (AP South, au-syd): `https://ap-south.containers.cloud.ibm.com`
 * Tokyo (AP North, jp-tok): `https://ap-north.containers.cloud.ibm.com`
 * Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
-
-To use the global functionality, you can use the `ibmcloud ks init` command again to target the global endpoint: `https://containers.cloud.ibm.com`
 
 ```
 ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
@@ -804,7 +773,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use. This value is optional. [View the available API endpoint values.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)</dd>
+   <dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use. This value is optional. [View the available API endpoint values.](/docs/containers?topic=containers-regions-and-zones#container_regions)</dd>
 
    <dt><code>--insecure</code></dt>
    <dd>Allow an insecure HTTP connection.</dd>
@@ -826,7 +795,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
   ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
   ```
   {: pre}
-*  Example to target the global endpoint again:
+*  Example to target the global endpoint:
   ```
   ibmcloud ks init --host https://containers.cloud.ibm.com
   ```
@@ -1761,12 +1730,8 @@ You might need to change your YAML files for future deployments. Review this [re
 View a list of clusters in your organization.
 {: shortdesc}
 
-Clusters in all locations are returned. To filter clusters by a specific location, include the `--locations` flag. Multizone clusters can be filtered by their `metro` value and single zone clusters by their `datacenter` value. For example, if you filter locations for `dal` metro, multizone clusters in that metro and single-zone clusters in data centers within that metro are returned. If you filter locations for `dal10` data center, only single zone clusters are returned, even if you have a multizone cluster with one zone in `dal10`. Note that you can pass one location or a comma-separated list of locations.
-
-Deprecated: If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, only clusters that are in the region that you are currently targeted to are returned. To switch regions, run `ibmcloud ks region set`.
-
 ```
-ibmcloud ks clusters [--locations LOCATION] [--json] [-s]
+ibmcloud ks clusters [--json] [-s]
 ```
 {: pre}
 
@@ -1774,11 +1739,7 @@ ibmcloud ks clusters [--locations LOCATION] [--json] [-s]
 
 <strong>Command options</strong>:
 
-  <dl>
-  <dt><code>--locations <em>LOCATION</em></code></dt>
-  <dd>Filter zones by a specific location or a list of comma-separated locations. To see supported locations, run <code>ibmcloud ks supported-locations</code>.</dd>
-
-  <dt><code>--json</code></dt>
+  <dl><dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
 
   <dt><code>-s</code></dt>
@@ -2739,7 +2700,7 @@ If you set up your IBM Cloud account to use different credentials to access the 
 {: shortdesc}
 
 ```
-ibmcloud ks credential-get [--region REGION] [-s] [--json]
+ibmcloud ks credential-get [-s] [--json]
 ```
 {: pre}
 
@@ -2748,8 +2709,6 @@ ibmcloud ks credential-get [--region REGION] [-s] [--json]
 <strong>Command options</strong>:
 
  <dl>
- <dt><code>--region <em>REGION</em></code></dt>
- <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
  <dt><code>--json</code></dt>
  <dd>Prints the command output in JSON format. This value is optional.</dd>
  <dt><code>-s</code></dt>
@@ -2774,7 +2733,7 @@ Set IBM Cloud infrastructure (SoftLayer) account credentials for an {{site.data.
 {: shortdesc}
 
 ```
-ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [--region REGION] [-s]
+ibmcloud ks credential-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 ```
 {: pre}
 
@@ -2812,10 +2771,6 @@ Before you use this command, make sure that the user whose credentials are used 
   <li>Copy the API user name.
   </ol>
   </dd>
-
-  <dt><code>--region <em>REGION</em></code></dt>
-  <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
-
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -2840,15 +2795,13 @@ After you remove the credentials, the [{{site.data.keyword.Bluemix_notm}} IAM AP
 <strong>Minimum required permissions</strong>: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 ```
-ibmcloud ks credential-unset [--region REGION] [-s]
+ibmcloud ks credential-unset [-s]
 ```
 {: pre}
 
 <strong>Command options</strong>:
 
   <dl>
-  <dt><code>--region <em>REGION</em></code></dt>
-  <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
   </dl>
@@ -2937,7 +2890,7 @@ View the VLAN spanning status for an IBM Cloud infrastructure (SoftLayer) accoun
 {: shortdesc}
 
 ```
-ibmcloud ks vlan-spanning-get [--region REGION] [--json] [-s]
+ibmcloud ks vlan-spanning-get [--json] [-s]
 ```
 {: pre}
 
@@ -2946,9 +2899,6 @@ ibmcloud ks vlan-spanning-get [--region REGION] [--json] [-s]
 <strong>Command options</strong>:
 
    <dl>
-   <dt><code>--region <em>REGION</em></code></dt>
-   <dd>Specify a region. To list available regions, run <code>ibmcloud ks regions</code>.</dd>
-
     <dt><code>--json</code></dt>
       <dd>Prints the command output in JSON format. This value is optional.</dd>
 
@@ -4034,36 +3984,17 @@ ibmcloud ks nlb-dns-monitor-status --cluster mycluster
 <br />
 
 
-## Region and location commands
+## Region commands
 {: #region_commands}
 
 Use this group of commands to view available locations, view the currently targeted region, and set the targeted region.
 {: shortdesc}
 
-### ibmcloud ks supported-locations
-{: #cs_supported-locations}
-
-List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
-{: shortdesc}
-
-```
-ibmcloud ks supported-locations
-```
-{: pre}
-
-<strong>Minimum required permissions</strong>: None
-
 ### ibmcloud ks region
 {: #cs_region}
 
-Find the {{site.data.keyword.containerlong_notm}} region that you are currently targeted to.
+Find the {{site.data.keyword.containerlong_notm}} region that you are currently targeted to. You create and manage clusters specific to the region. Use the `ibmcloud ks region-set` command to change regions.
 {: shortdesc}
-
-You can work with resources that you have access to in any location, even if you set a region by running `ibmcloud ks region-set` and the resource that you want to work with is in another region. If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region-set` command and use the cluster name when you run commands.
-
-Legacy behavior (deprecated):
-* If you use the {{site.data.keyword.containerlong_notm}} plug-in version `0.3` or later and need to list and work with resources from one region only, you can use the `ibmcloud ks init` [command](/docs/containers?topic=containers-cs_cli_reference#cs_init) to target a regional endpoint instead of the global endpoint.
-* If you [set the `IKS_BETA_VERSION` environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to `0.2`](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_beta), you create and manage clusters specific to the region. Use the `ibmcloud ks region set` command to change regions.
 
 ```
 ibmcloud ks region
@@ -4075,14 +4006,10 @@ ibmcloud ks region
 ### ibmcloud ks region-set
 {: #cs_region-set}
 
-Set the region for {{site.data.keyword.containerlong_notm}}.
+Set the region for {{site.data.keyword.containerlong_notm}}. You create and manage clusters specific to the region, and you might want clusters in multiple regions for high availability.
 {: shortdesc}
 
 For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud ks region-set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud ks region-set us-south` to return to US South to manage your cluster in that region.
-
-You can work with resources that you have access to in any location, even if you set a region by running `ibmcloud ks region-set` and the resource that you want to work with is in another region. If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region-set` command and use the cluster name when you run commands.
-
-Deprecated: If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, you create and manage clusters specific to the region. For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud ks region set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud ks region set us-south` to return to US South to manage your cluster in that region.
 
 <strong>Minimum required permissions</strong>: None
 
@@ -4155,25 +4082,17 @@ us-south      us-south
 ### ibmcloud ks zones
 {: #cs_datacenters}
 
-View a list of available zones for you to create a cluster in.
+View a list of available zones for you to create a cluster in. The available zones vary by the region that you are logged in to. To switch regions, run `ibmcloud ks region-set`.
 {: shortdesc}
 
-Zones in all locations are returned. To filter zones by a specific location, include the `--locations` flag.
-
-Deprecated: If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, the available zones vary by the region that you are logged in to. To switch regions, run `ibmcloud ks region set`.
-
 ```
-ibmcloud ks zones [--locations LOCATION] [--region-only] [--json] [-s]
+ibmcloud ks zones [--region-only] [--json] [-s]
 ```
 {: pre}
 
 <strong>Command options</strong>:
 
-   <dl>
-   <dt><code>--locations <em>LOCATION</em></code></dt>
-   <dd>Filter zones by a specific location or a list of comma-separated locations. To see supported locations, run <code>ibmcloud ks supported-locations</code>.</dd>
-
-   <dt><code>--region-only</code></dt>
+   <dl><dt><code>--region-only</code></dt>
    <dd>List only multizones within the region that you are logged in to. This value is optional.</dd>
 
    <dt><code>--json</code></dt>
