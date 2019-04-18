@@ -40,7 +40,7 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_n
 ## Using the beta {{site.data.keyword.containerlong_notm}} plug-in
 {: #cs_beta}
 
-A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from a hyphenated structure to a spaced structure. Additionally, beginning with beta version `0.3` (default), new [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) is available.
+A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from a hyphenated structure to a spaced structure.
 {: shortdesc}
 
 To use the redesigned {{site.data.keyword.containerlong_notm}} plug-in, set the `IKS_BETA_VERSION` environment variable to the beta version that you want to use:
