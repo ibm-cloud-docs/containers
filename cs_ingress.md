@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-04-19"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -1491,7 +1491,15 @@ Configuring your own custom Ingress controller can be useful when you have speci
     ```
     {: pre}
 
-3. Get the configuration file for your Ingress controller ready. For example, you can use the YAML configuration file for the [NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml).
+3. Get the configuration file for your Ingress controller ready. For example, you can use the YAML configuration file for the [NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/mandatory.yaml). If you use the community controller, edit the configuration file by following these steps.
+  1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
+  2. Replace all `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with the `app: ingress-nginx` label. After you replace the labels, all `labels` and `matchLabels` sections look similar to the following:
+    ```
+    labels:
+      app: ingress-nginx
+    ```
+    {: screen}
+  3. Replace `- --publish-service=$(POD_NAMESPACE)/ingress-nginx` with `- --publish-service=$(POD_NAMESPACE)/<ALB_ID>`. For example, the ALB ID from step 1 might look like `- --publish-service=$(POD_NAMESPACE)/public-cr18e61e63c6e94b658596ca93d087eed9-alb1`.
 
 4. Deploy your own Ingress controller. **Important**: To continue to use the load balancer service exposing the controller and the IBM-provided Ingress subdomain, your controller must be deployed in the `kube-system` namespace.
     ```
