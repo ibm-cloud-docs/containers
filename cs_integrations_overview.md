@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-22"
 
 keywords: kubernetes, iks, helm
 
@@ -217,7 +217,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.Bluemix_notm}}
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For general information about the service, see the <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For general information about the service, see the <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
