@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-23"
 
 keywords: kubernetes, iks
 
@@ -1111,36 +1111,81 @@ When a user with the **Super User** infrastructure access role [sets the API key
 The following table shows the infrastructure permissions required to complete groups of common tasks.
 
 <table>
- <caption>Commonly required infrastructure permissions for {{site.data.keyword.containerlong_notm}}</caption>
- <thead>
+<caption>Commonly required infrastructure permissions for {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
   <th>Common tasks in {{site.data.keyword.containerlong_notm}}</th>
   <th>Required infrastructure permissions by category</th>
- </thead>
- <tbody>
-   <tr>
-     <td><strong>Minimum permissions</strong>: <ul><li>Create a cluster.</li></ul></td>
-     <td><strong>Devices</strong>:<ul><li>View Virtual Server Details</li><li>Reboot server and view IPMI system information</li><li>Issue OS Reloads and Initiate Rescue Kernel</li></ul><strong>Account</strong>: <ul><li>Add Server</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>Cluster Administration</strong>: <ul><li>Create, update, and delete clusters.</li><li>Add, reload, and reboot worker nodes.</li><li>View VLANs.</li><li>Create subnets.</li><li>Deploy pods and load balancer services.</li></ul></td>
-     <td><strong>Support</strong>:<ul><li>View Tickets</li><li>Add Tickets</li><li>Edit Tickets</li></ul>
-     <strong>Devices</strong>:<ul><li>View Hardware Details</li><li>View Virtual Server Details</li><li>Reboot server and view IPMI system information</li><li>Issue OS Reloads and Initiate Rescue Kernel</li></ul>
-     <strong>Network</strong>:<ul><li>Add Compute with Public Network Port</li></ul>
-     <strong>Account</strong>:<ul><li>Cancel Server</li><li>Add Server</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>Storage</strong>: <ul><li>Create persistent volume claims to provision persistent volumes.</li><li>Create and manage storage infrastructure resources.</li></ul></td>
-     <td><strong>Services</strong>:<ul><li>Manage Storage</li></ul><strong>Account</strong>:<ul><li>Add Storage</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>Private Networking</strong>: <ul><li>Manage private VLANs for in-cluster networking.</li><li>Set up VPN connectivity to private networks.</li></ul></td>
-     <td><strong>Network</strong>:<ul><li>Manage Network Subnet Routes</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>Public Networking</strong>:<ul><li>Set up public load balancer or Ingress networking to expose apps.</li></ul></td>
-     <td><strong>Devices</strong>:<ul><li>Edit Hostname/Domain</li><li>Manage Port Control</li></ul>
-     <strong>Network</strong>:<ul><li>Add Compute with Public Network Port</li><li>Manage Network Subnet Routes</li><li>Add IP Addresses</li></ul>
-     <strong>Services</strong>:<ul><li>Manage DNS, Reverse DNS, and WHOIS</li><li>View Certificates (SSL)</li><li>Manage Certificates (SSL)</li></ul></td>
-   </tr>
- </tbody>
+</thead>
+<tbody>
+<tr>
+<td>
+  <strong>Minimum permissions</strong>: <ul>
+  <li>Create a cluster.</li></ul></td>
+<td>
+</ul><strong>Account</strong>: <ul>
+<li>Add Server</li></ul>
+  <strong>Devices</strong>:<ul>
+  <li>IPMI Remote Management</li>
+  <li>OS Reloads and Rescue Kernel</li>
+  <li>View Virtual Server Details</li></td>
+</tr>
+<tr>
+<td>
+<strong>Cluster Administration</strong>:<ul>
+  <li>Create, update, and delete clusters.</li>
+  <li>Add, reload, and reboot worker nodes.</li>
+  <li>View VLANs.</li>
+  <li>Create subnets.</li>
+  <li>Deploy pods and load balancer services.</li></ul>
+</td><td>
+<strong>Account</strong>:<ul>
+  <li>Add Server</li>
+  <li>Cancel Server</li></ul>
+<strong>Devices</strong>:<ul>
+  <li>View Hardware Details</li>
+  <li>IPMI Remote Management/li>
+  <li>OS Reloads and Rescue Kernel</li>
+  <li>View Virtual Server Details</li></ul>
+<strong>Network</strong>:<ul>
+  <li>Add Compute with Public Network Port</li></ul>
+</td>
+</tr>
+<tr>
+<td>
+  <strong>Storage</strong>: <ul>
+  <li>Create persistent volume claims to provision persistent volumes.</li>
+  <li>Create and manage storage infrastructure resources.</li></ul></td>
+<td>
+<strong>Account</strong>:<ul>
+  <li>Add/Upgrade Storage (StorageLayer)</li></ul></td>
+<strong>Services</strong>:<ul>
+  <li>Storage Manage</li></ul>
+</tr>
+<tr>
+<td>
+  <strong>Private Networking</strong>: <ul>
+  <li>Manage private VLANs for in-cluster networking.</li>
+  <li>Set up VPN connectivity to private networks.</li></ul></td>
+<td>
+  <strong>Network</strong>:<ul>
+  <li>Manage Network Subnet Routes</li></ul></td>
+</tr>
+<tr>
+<td>
+  <strong>Public Networking</strong>:<ul>
+  <li>Set up public load balancer or Ingress networking to expose apps.</li></ul></td>
+<td>
+<strong>Devices</strong>:<ul>
+<li>Manage Port Control</li>
+  <li>Edit Hostname/Domain</li></ul>
+<strong>Network</strong>:<ul>
+  <li>Add IP Addresses</li>
+  <li>Manage Network Subnet Routes</li>
+  <li>Add Compute with Public Network Port</li></ul>
+<strong>Services</strong>:<ul>
+  <li>Manage DNS</li>
+  <li>View Certificates (SSL)</li>
+  <li>Manage Certificates (SSL)</li></ul></td>
+</tr>
+</tbody>
 </table>
