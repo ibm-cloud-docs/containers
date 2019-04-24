@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-19"
+lastupdated: "2019-04-24"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -910,49 +910,7 @@ ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_
 ```
 {: pre}
 
-Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
-{: note}
-
 When you import a certificate with this command, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. When the ALB is processing requests, it follows this reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
-
-</br>
-
-If you do not have a TLS certificate ready, follow these steps:
-1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-2. Convert the cert and key into base-64.
-   1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file.
-      ```
-      openssl base64 -in tls.key -out tls.key.base64
-      ```
-      {: pre}
-
-   2. View the base-64 encoded value for your cert and key.
-      ```
-      cat tls.key.base64
-      ```
-      {: pre}
-
-3. Create a secret YAML file using the cert and key.
-     ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       tls.crt: <client_certificate>
-       tls.key: <client_key>
-     ```
-     {: codeblock}
-
-4. Create the certificate as a Kubernetes secret.
-     ```
-     kubectl create -f ssl-my-test
-     ```
-     {: pre}
-     Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
-     {: note}
-
 
 ### Step 5: Create the Ingress resource
 {: #private_5}

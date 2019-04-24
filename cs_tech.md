@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-24"
 
 keywords: kubernetes, iks, docker
 
@@ -124,7 +124,7 @@ Define update strategies for your app, including the number of pods that you wan
 In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, your containerized apps are hosted on compute hosts that are called worker nodes. To be more specific, the apps run in pods and the pods are hosted on worker nodes. Worker nodes are managed by the Kubernetes master. The communication setup between the Kubernetes master and the worker nodes depends on how you set up your IBM Cloud infrastructure (SoftLayer) network: an account with a public service endpoint, or a VRF-enabled account with public and private service endpoints.
 {: shortdesc}
 
-The following image shows the components of your cluster and how they interact in an account when only the [public service endpoint is enabled](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
+The following image shows the components of your cluster and how they interact in an account when only the [public service endpoint is enabled](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)<staging>(/docs/containers?topic=containers-plan_clusters#comm-master)<staging>.
 <p>
 <figure>
  <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes architecture">
@@ -132,7 +132,7 @@ The following image shows the components of your cluster and how they interact i
 </figure>
 </p>
 
-The following image shows the components of your cluster and how they interact in a VRF-enabled account when the [public and private service endpoints are enabled](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both).
+The following image shows the components of your cluster and how they interact in a VRF-enabled account when the [public and private service endpoints are enabled](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)<staging>(/docs/containers?topic=containers-plan_clusters#comm-master)<staging>.
 
 <p>
 <figure>

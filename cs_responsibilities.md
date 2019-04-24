@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-04-24"
 
 keywords: kubernetes, iks
 
@@ -103,7 +103,7 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
       <li>Choose how to set up your [cluster network](/docs/containers?topic=containers-cs_network_ov#cs_network_ov) and configure further [security settings](/docs/containers?topic=containers-security#security) to meet your workload's security and compliance needs. If applicable, configure your [firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
       <br><br></td>
       </tr>
-      
+
       <tr>
         <td align="center"><img src="images/icon_code.svg" alt="Icon of code brackets"/><br>App orchestration</td>
         <td>

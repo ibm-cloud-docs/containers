@@ -24,11 +24,148 @@ subcollection: containers
 
 
 
+# Planning your private cluster and worker node setup
+{: #plan_private_clusters}
 
-# Planning your cluster and worker node setup
-{: #plan_clusters}
-Design your standard cluster for maximum availability and capacity for your app with {{site.data.keyword.containerlong}}.
+You might want to create a private cluster for security or compliance requirements. Design your private cluster for maximum availability and capacity for your app with {{site.data.keyword.containerlong}}.
 {: shortdesc}
+
+## Private cluster network setups
+{: #private_setups}
+
+Plan a private networking setup for your {{site.data.keyword.containerlong}} cluster.
+{: shortdesc}
+
+When you create your cluster, you must choose a networking setup so that certain cluster components can communicate with each other and with networks or services outside of the cluster.
+* Worker-to-worker communication: All worker nodes must be connected to a VLAN in order to communicate with each other and with the Kubernetes master.
+* Cross-VLAN communication: In many cases, communication must be permitted across multiple private VLANs to allow workers to connect with each other and the master.
+* Worker-to-master and user-to-master communication: Your worker nodes and your authorized cluster users can communicate with the Kubernetes master securely over the private network.
+* Cluster communication with other {{site.data.keyword.Bluemix_notm}} services: Your cluster can securely communicate with other {{site.data.keyword.Bluemix_notm}} services, such as {{site.data.keyword.registrylong}}, through service endpoints.
+* Cluster communication with other networks: Securely connect your worker nodes and apps to an on-premises network or {{site.data.keyword.icpfull_notm}}.
+* External traffic to cluster apps: Allow public or private traffic requests from outside the cluster to your apps.
+
+Your options for creating a private cluster depend upon the type of IBM Cloud infrastructure (SoftLayer) account that you have and the VLAN setup that you want. For standard clusters, you have the following options to set up your cluster network:
+
+<table summary="This table reads left to right about the network configuration options of 3 private cluster setups.">
+<caption>Network configuration options of private cluster setups</caption>
+<thead>
+<th>Network configuration</th>
+<th>Calico-protected VRF cluster</th>
+<th>Private VRF cluster</th>
+<th>Private cluster with gateway device</th>
+</thead>
+<tbody>
+<tr>
+<td><strong>Worker-to-worker communication</strong></td>
+<td>Connect worker nodes to public and private VLANs.</td>
+<td></td>
+<td>Connect worker nodes to private VLANs only.</td>
+</tr><tr>
+<td><strong>Cross-VLAN communication</strong></td>
+<td>Enable a Virtual Router Function (VRF) in your infrastructure account. You can use Calico network policies to isolate your cluster from other resources on the private network.</td>
+<td></td>
+<td>Enable VLAN spanning in your infrastructure account.</td>
+</tr><tr>
+<td><strong>Worker-to-master and user-to-master communication</strong></td>
+<td>Enable the private service endpoint only.</td>
+<td></td>
+<td>Configure a gateway device, such as a VRA or an FSA.</td>
+</tr><tr>
+<td><strong>Cluster communication with other {{site.data.keyword.Bluemix_notm}} services</strong></td>
+<td>Your cluster can automatically, securely communicate with other {{site.data.keyword.Bluemix_notm}} services, such as {{site.data.keyword.registrylong}}.</td>
+<td></td>
+<td>Open the required ports and IPs for infrastructure resources and other services in your gateway device firewall.</td>
+</tr><tr>
+<td><strong>Cluster communication with other networks</strong></td>
+<td>Set up a strongSwan VPN service in your cluster.</td>
+<td></td>
+<td>Set up an IPSec VPN endpoint on your gateway device and configure the strongSwan IPSec VPN service in your cluster to use the VPN endpoint on your gateway.</td>
+</tr><tr>
+<td><strong>External traffic to cluster apps</strong></td>
+<td>Allow private traffic requests from outside the cluster to your apps, use Calico network policies to block all public traffic, and isolate network traffic to edge nodes.</td>
+<td></td>
+<td>Allow public and private traffic requests from outside the cluster to your apps by opening the required ports and IPs for networking services in your gateway device firewall.</td>
+</tr>
+</tbody>
+</table>
+
+### Option 1: Calico-protected VRF cluster
+{: #calico-pc}
+
+For most cases, your cluster setup can include worker nodes on both public and private VLANs. Then, you can lock down the cluster by blocking public VLAN traffic with Calico policies and restricting traffic to select edge nodes.
+{: shortdesc}
+
+If you create the cluster with both public and private VLANs, you cannot later remove the public VLANs from that cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. Instead, create a new cluster without the public VLAN.
+{: note}
+
+
+
+<dl>
+<dt>Public and private VLAN connections for worker-to-worker communication</dt>
+<dd>When you create a cluster, the cluster's worker nodes are connected automatically to a VLAN. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire and provides a channel for connectivity among the workers and pods.</br></br>
+All worker nodes must be connected to a private VLAN in order to have a network interface. This network interface allows each worker node to send and receive information to other worker nodes. When you create a cluster that is also connected to a public VLAN, you have the option of public network connectivity so that you can expose apps in your cluster to the internet. However, if you need to secure your apps from the public interface, several options are available to secure your cluster such as using Calico network policies and isolating external network workload to edge worker nodes.</br></br>
+In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. For every subsequent cluster that you create in that zone, you must specify the VLAN pair that you want to use in that zone. You can reuse the same public and private VLANs that were created for you because multiple clusters can share VLANs. For more information about VLANs, subnets, and IP addresses, see [Overview of networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics).</dd>
+
+<dt>VRF for cross-VLAN communication</dt>
+<dd>In several situations, components in your cluster must be permitted to communicate across multiple private VLANs. For example, if you want to create a multizone cluster, if you have multiple VLANs for a cluster, or if you have multiple subnets on the same VLAN, the worker nodes on different subnets in the same VLAN or in different VLANs cannot automatically communicate with each other. You must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud). A VRF enables all the VLANs and subnets in your infrastructure account to communicate with each other. Additionally, a VRF is required to allow your workers and master to communicate over the private service endpoint. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Note that VRF eliminates the VLAN spanning option for your account, because all VLANs are able to communicate unless you configure a gateway device to manage traffic.</br>
+When VRF is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.Bluemix_notm}} account can communicate with workers. You can isolate your cluster from other systems on the private network by applying [Calico private network policies](/docs/containers?topic=containers-network_policies#isolate_workers).</dd>
+
+<dt>Private service endpoint for worker-to-master and user-to-master communication</dt>
+<dd>A communication channel must be set up so that the Kubernetes master can manage your worker nodes. To make your master only privately accessible, you can enable the private service endpoint. Service endpoints allow you to connect to IBM Cloud services over the IBM Cloud private network. A VRF is required in your {{site.data.keyword.Bluemix_notm}} account, and you must [enable your {{site.data.keyword.Bluemix_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started). Note that using service endpoints incurs no billed or metered bandwidth charges.
+<ul><li>Communication between worker nodes and master is established over the private network through the private service endpoint.</li>
+<li>To run <code>kubectl</code> commands from local machines against your cluster, your cluster users must be connected to the same private VLAN that your Kubernetes master is on in your {{site.data.keyword.Bluemix_notm}} private network, or connect to the private network through a VPN connection.<p class="note">To run <code>kubectl</code> commands against your cluster over an IPSec VPN connection or through DirectLink, you must access the master through the private service endpoint. However, communication with the Kubernetes master must go through the <code>166.XXX.XXX</code> IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal <code>10.XXX.XXX</code> IP address range to the Kubernetes master.</p></li></ul><dd>
+
+<dt>Automatic cluster communication with other {{site.data.keyword.Bluemix_notm}} services</dt>
+<dd>Because your cluster is connected to a public VLAN, your cluster can automatically, securely communicate with other {{site.data.keyword.Bluemix_notm}} services, such as {{site.data.keyword.registrylong}}. However, if you use Calico network policies to lock down the public network in your cluster, you might need to allow access to the public and private IP addresses of the services that you want to use in your Calico policies.</dd>
+
+<dt>strongSwan IPSec VPN service for cluster communication with other networks</dt>
+<dd>To securely connect your worker nodes and apps to other private networks, you can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/about.html) directly in your cluster. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite.
+<ul><li>To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.</li>
+<li>To set up a secure connection between your cluster and an {{site.data.keyword.icpfull_notm}} instance, see [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn).</li></ul></dd>
+
+<dt>Calico policies and edge nodes for external traffic to cluster apps</dt>
+<dd>To allow private traffic requests from outside the cluster to your apps, you can create private Kubernetes networking services, such as private NodePorts, network load balancers (NLBs), and Ingress application load balancers (ALBs). You can then use Calico pre-DNAT policies to block traffic to public NodePorts of private networking services. For more information, see [Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access).</br></br>
+For additional security, isolate networking workloads to edge worker nodes. Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that NLB and ALB pods are deployed to only specified worker nodes, you can [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes).
+</dd>
+</dl>
+
+### Option 3: Private VRF cluster
+{: #standard-pc}
+
+TBD
+
+### Option 3: Private cluster with gateway device
+{: #legacy-pc}
+
+If you set up your worker nodes on a private VLAN only and you don’t want to or cannot enable VRF for your account, you must configure an alternative solution for network connectivity between your worker nodes and the master. You can set up a gateway with custom network policies to provide dedicated network security for your cluster and to detect and remediate network intrusion.
+{: shortdesc}
+
+
+
+<dl>
+<dt>Private VLAN connection for worker-to-worker communication</dt>
+<dd>When you create a cluster, the cluster's worker nodes are connected automatically to a VLAN. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire and provides a channel for connectivity among the workers and pods.</br></br>
+All worker nodes must be connected to a private VLAN in order to have a network interface. This network interface allows each worker node to send and receive information to other worker nodes.</br></br>
+In standard clusters, the first time that you create a cluster in a zone, a private VLAN in that zone is automatically provisioned for you in your IBM Cloud infrastructure (SoftLayer) account. For every subsequent cluster that you create in that zone, you must specify the VLAN that you want to use in that zone. You can reuse the same private VLANs that was created for you because multiple clusters can share VLANs. For more information about VLANs, subnets, and IP addresses, see [Overview of networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics).</dd>
+
+<dt>VLAN spanning for cross-VLAN communication</dt>
+<dd>In several situations, components in your cluster must be permitted to communicate across multiple private VLANs. For example, if you want to create a multizone cluster, if you have multiple VLANs for a cluster, or if you have multiple subnets on the same VLAN, the worker nodes on different subnets in the same VLAN or in different VLANs cannot automatically communicate with each other. Additionally, if you have an existing gateway device and then add a cluster, the new portable subnets that are ordered for the cluster aren't configured on the gateway device. You must enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).</dd>
+
+<dt>Gateway device for worker-to-master and user-to-master communication</dt>
+<dd>To provide a communication channel for the Kubernetes master to manage your worker nodes, you must configure a gateway device. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or a [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall to allow necessary traffic and block unwanted traffic.</br></br>
+When you set up a firewall on the public network, you must also [open up the required ports and private IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound) for each region so that the master and the worker nodes can communicate. If you also configure this firewall for the private network, you must [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
+<ul><li>Communication between worker nodes and master is established over the private network through the gateway device.</li>
+<li>To run <code>kubectl</code> commands from local machines against your cluster, your cluster users must be connected to the same private VLAN that your Kubernetes master is on in your {{site.data.keyword.Bluemix_notm}} private network, or connect to the private network through a VPN connection.</li></ul><dd>
+
+<dt>Gateway device for communication with other {{site.data.keyword.Bluemix_notm}} services</dt>
+<dd>To securely communicate with other {{site.data.keyword.Bluemix_notm}} services, such as {{site.data.keyword.registrylong}}, you must [allow access to the private IP addresses of the services that you want to use](/docs/containers?topic=containers-firewall#firewall_outbound) in your gateway device firewall.</dd>
+
+<dt>IPSec VPN endpoint on gateway device for cluster communication with other networks</dt>
+<dd>To securely connect your worker nodes and apps to an on-premises network, set up an IPSec VPN endpoint on your gateway device. Then, [configure the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) in your cluster to use the VPN endpoint on your gateway. If you do not want to use strongSwan, you can [set up VPN connectivity directly with VRA](/docs/containers?topic=containers-vpn#vyatta).</dd>
+
+<dt>Gateway device for external traffic to cluster apps</dt>
+<dd>To allow private traffic requests from outside the cluster to your apps, you can create private Kubernetes networking services, such as private NodePorts, network load balancers (NLBs), and Ingress application load balancers (ALBs). Then, you must [open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_inbound) in your gateway device firewall to permit inbound traffic to these services.</dd>
+</dl>
 
 ## Highly available clusters
 {: #ha_clusters}
@@ -42,7 +179,6 @@ Review these potential cluster setups that are ordered with increasing degrees o
 
 1. A [single zone cluster](#single_zone) with multiple worker nodes in a worker pool.
 2. A [multizone cluster](#multizone) that spreads worker nodes across zones within one region.
-3. [Multiple clusters](#multiple_clusters) that are set up across zones or regions and that are connected via a global load balancer.
 
 ## Single zone cluster
 {: #single_zone}
@@ -114,13 +250,6 @@ To protect your cluster against a Kubernetes master failure or in regions where 
 **Do I have to do anything so that the master can communicate with the workers across zones?**</br>
 Yes. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
 
-**How do I let my users access my app from the public Internet?**</br>
-You can expose your apps by using an Ingress application load balancer (ALB) or load balancer service.
-
-- **Ingress application load balancer (ALB)** By default, public ALBs are automatically created and enabled in each zone in your cluster. A Cloudflare multizone load balancer (MZLB) for your cluster is also automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same host name and enables health checks on these IP addresses to determine whether they are available or not. For example, if you have worker nodes in 3 zones in the US-East region, the host name `yourcluster.us-east.containers.appdomain.cloud` has 3 ALB IP addresses. The MZLB health checks the public ALB IP in each zone of a region and keeps the DNS lookup results updated based on these health checks. For more information, see [Ingress components and architecture](/docs/containers?topic=containers-ingress#planning).
-
-- **Load balancer services:** Load balancer services are set up in one zone only. Incoming requests to your app are routed from that one zone to all app instances in other zones. If this zone becomes unavailable, then your app might not be reachable from the internet. You can set up additional load balancer services in other zones to account for a single zone failure. For more information, see highly available [load balancer services](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
-
 **Can I set up persistent storage for my multizone cluster?**</br>
 For highly available persistent storage, use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about). You can also try a software-defined storage (SDS) solution such as [Portworx](/docs/containers?topic=containers-portworx#portworx) that uses [SDS machines](#sds). For more information, see [Comparison of persistent storage options for multizone clusters](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
@@ -169,77 +298,6 @@ The following table compares the old and new methods for a few common cluster ma
   </tbody>
   </table>
 
-## Multiple clusters connected with a global load balancer
-{: #multiple_clusters}
-
-To protect your app from a Kubernetes master failure and for regions where multizone clusters are not available, you can create multiple clusters in different zones within a region and connect them with a global load balancer.
-{: shortdesc}
-
-<img src="images/cs_multiple_cluster_zones.png" alt="High availability for multiple clusters" width="700" style="width:700px; border-style: none"/>
-
-To balance your workload across multiple clusters, you must set up a global load balancer and add the IP addresses of your application load balancers (ALBs) or load balancer services to your domain. By adding these IP addresses, you can route incoming traffic between your clusters. For the global load balancer to detect if one of your clusters is unavailable, consider adding a ping-based health check to every IP address. When you set up this check, your DNS provider regularly pings the IP addresses that you added to your domain. If one IP address becomes unavailable, then traffic is not sent to this IP address anymore. However, Kubernetes does not automatically restart pods from the unavailable cluster on worker nodes in available clusters. If you want Kubernetes to automatically restart pods in available clusters, consider setting up a [multizone cluster](#multizone).
-
-**Why do I need 3 clusters in 3 zones?** </br>
-Similar to using [3 zones in a multizone clusters](#multizone), you can provide more availability to your app by setting up 3 clusters across zones. You can also reduce costs by purchasing smaller machines to handle your workload.
-
-**What if I want to set up multiple clusters across regions?** </br>
-You can set up multiple clusters in different regions of one geolocation (such as US South and US East) or across geolocations (such as US South and EU Central). Both setups offer the same level of availability for your app, but also add complexity when it comes to data sharing and data replication. For most cases, staying within the same geolocation is sufficient. But if you have users across the world, it might be better to set up a cluster where your users are, so that your users do not experience long waiting times when they send a request to your app.
-
-**To set up a global load balancer for multiple clusters:**
-
-1. [Create clusters](/docs/containers?topic=containers-clusters#clusters) in multiple zones or regions.
-2. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
-3. In each cluster, expose your app by using an [application load balancer (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) or [load balancer service](/docs/containers?topic=containers-loadbalancer).
-4. For each cluster, list the public IP addresses for your ALBs or load balancer services.
-   - To list the IP address of all public enabled ALBs in your cluster:
-     ```
-     ibmcloud ks albs --cluster <cluster_name_or_id>
-     ```
-     {: pre}
-
-   - To list the IP address for your load balancer service:
-     ```
-     kubectl describe service <myservice>
-     ```
-     {: pre}
-
-     The **Load Balancer Ingress** IP address is the portable IP address that was assigned to your load balancer service.
-
-4.  Set up a global load balancer by using {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) or set up your own global load balancer.
-
-    **To use a CIS global load balancer**:
-    1.  Set up the service by following steps 1 - 5 in [Getting Started with {{site.data.keyword.Bluemix_notm}} Internet Services (CIS)](/docs/infrastructure/cis?topic=cis-getting-started#getting-started). These steps walk you through provisioning the service instance, adding your app domain, and configuring your name servers, and creating DNS records. Create a DNS record for each ALB or load balancer IP address that you collected. These DNS records map your app domain to all of your cluster ALBs or load balancers, and ensure that requests to your app domain are forwarded to your clusters in a round-robin cycle.
-    2. [Add health checks](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check) for the ALBs or load balancers. You can use the same health check for the ALBs or load balancers in all of your clusters, or create specific health checks to use for specific clusters.
-    3. [Add an origin pool](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool) for each cluster by adding the cluster's ALB or load balancer IPs. For example, if you have 3 clusters that each have 2 ALBs, create 3 origin pools that each have 2 ALB IP addresses. Add a health check to each origin pool that you create.
-    4. [Add a global load balancer](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers).
-
-    **To use your own global load balancer**:
-    1. Configure your domain to route incoming traffic to your ALB or load balancer services by adding the IP addresses of all public enabled ALBs and load balancer services to your domain.
-    2. For each IP address, enable a ping-based health check so that your DNS provider can detect unhealthy IP addresses. If an unhealthy IP address is detected, traffic is not routed to this IP address anymore.
-
-## Private clusters
-{: #private_clusters}
-
-By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access to a private VLAN and a public VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface. The public VLAN allows the worker nodes to automatically and securely connect to the master.
-{: shortdesc}
-
-However, you might want to create a private VLAN or private service endpoint cluster for security or compliance requirements. Your options for creating a private cluster depend upon the type of IBM Cloud infrastructure (SoftLayer) account that you have and the public and private VLAN setup that you want. For more information about each of the following setups, see [Planning your cluster network](/docs/containers?topic=containers-cs_network_ov).
-
-Do you have an existing cluster that you want to make private only? To see how you can add worker pools or modify existing worker pools with new VLANs, check out [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
-{: note}
-
-**VRF-enabled account, private Kubernetes master, worker nodes on both public and private VLANs**</br>
-In clusters that run Kubernetes version 1.11 or later, you can set up your cluster network to use public and private service endpoints. After you enable the private service endpoint, the Kubernetes master and your worker nodes always communicate over the private VLAN via the private service endpoint. Even if you enable the public service endpoint for your cluster, the Kubernetes master to worker node communication stays on the private VLAN. After you enable the private service endpoint, you cannot disable it. You can keep the public service endpoint for secure access to your Kubernetes master over the internet, for example to run `kubectl` commands, or you can disable the public service endpoint for a private service endpoint-only cluster.
-
-**Non-VRF or VRF-enabled account, Kubernetes master and worker nodes on private VLAN only**</br>
-If you set up your worker nodes on a private VLAN only, the worker nodes can't automatically expose their app services on the public network, and in a non-VRF account also cannot connect to the master. You must configure a gateway device to provide network connectivity between the worker nodes and the master.
-
-For non-VRF accounts: If you create the cluster with both public and private VLANs, you cannot later remove the public VLANs from that cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. Instead, create a new cluster without the public VLAN.
-{: note}
-
-**Non-VRF account, Kubernetes master and worker nodes on both public and private VLANs**</br>
-For most cases, your cluster setup can include worker nodes on both public and private VLANs. Then, you can lock down the cluster by blocking public VLAN traffic with Calico policies and restricting traffic to select edge nodes.
-
 ## Worker pools and worker nodes
 {: #planning_worker_nodes}
 
@@ -265,9 +323,7 @@ When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you ch
 
 <img src="images/cs_clusters_hardware.png" width="700" alt="Hardware options for worker nodes in a standard cluster" style="width:700px; border-style: none"/>
 
-If you want more than one flavor of worker node, you must create a worker pool for each flavor. You cannot resize existing worker nodes to have different resources such as CPU or memory. When you create a free cluster, your worker node is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account. In standard clusters, you can choose the type of machine that works best for your workload. As you plan, consider the [worker node resource reserves](#resource_limit_node) on the total CPU and memory capacity.
-
-You can deploy clusters by using the [console UI](/docs/containers?topic=containers-clusters#clusters_ui) or the [CLI](/docs/containers?topic=containers-clusters#clusters_cli).
+If you want more than one flavor of worker node, you must create a worker pool for each flavor. You cannot resize existing worker nodes to have different resources such as CPU or memory. As you plan the type of machine that works best for your workload, consider the [worker node resource reserves](#resource_limit_node) on the total CPU and memory capacity.
 
 Select one of the following options to decide what type of worker pool you want.
 * [Virtual machines](#vm)
@@ -671,8 +727,3 @@ Critical components, such as `containerd`, `kubelet`, `kube-proxy`, and `calico`
 {:shortdesc}
 
 You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
-
-<br />
-
-
-

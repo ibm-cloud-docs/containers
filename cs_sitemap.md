@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-24"
 
 ---
 
@@ -338,7 +338,7 @@ lastupdated: "2019-04-15"
   * [Public service endpoint only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)
   * [Private service endpoint only](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)
   * [Public and private service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)
-  * [Private networking with a gateway appliance](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)
+  * [Private networking with a gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)
 * [Planning cluster to on-premises network or {{site.data.keyword.icpfull_notm}} communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn)
   * [Setting up a VPN connection for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public)
   * [Setting up a VPN connection for a private VLAN only setup](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)
@@ -444,7 +444,7 @@ lastupdated: "2019-04-15"
   * [Adding portable private IPs by using user-managed subnets](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
   * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
-  * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
+  * [Managing subnet routing for gateway devices](/docs/containers?topic=containers-subnets#vra-routing)
 
 ## Building containers from images
 {: #sitemap-images}

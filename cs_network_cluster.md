@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-24"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,9 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+
+
+
 
 # Setting up your cluster network
 {: #cs_network_cluster}
@@ -72,7 +75,7 @@ This networking setup consists of the following required networking configuratio
 
 3. Choose how your Kubernetes master and worker nodes communicate.
   * If VRF is enabled in your {{site.data.keyword.Bluemix_notm}} account, [enable a private service endpoint](#set-up-private-se).
-  * If you cannot or do not want to enable VRF, your Kubernetes master and worker nodes can't automatically connect to the master. You must configure your cluster with a [gateway appliance](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private).
+  * If you cannot or do not want to enable VRF, your Kubernetes master and worker nodes can't automatically connect to the master. You must configure your cluster with a [gateway device](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private).
 
 4. After you create your cluster, you can configure the following networking options:
   * [Set up a VPN gateway](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private) to allow communication between your cluster and an on-premises network or {{site.data.keyword.icpfull_notm}}. If you previously set up a VRA (Vyatta) or FSA to allow communication between the master and worker nodes, you can configure an IPSec VPN endpoint on the VRA or FSA.
@@ -384,3 +387,7 @@ If your cluster is connected to a public VLAN but you want to block traffic to p
 
 If you have a multizone cluster, multiple VLANs for a single zone cluster, or multiple subnets on the same VLAN, you must [enable VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) or [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) so that your worker nodes can communicate with each other on the private network. However, when VLAN spanning or VRF is enabled, any system that is connected to any of the private VLANs in the same IBM Cloud account can access your workers. You can isolate your multizone cluster from other systems on the private network by using [Calico network policies](/docs/containers?topic=containers-network_policies#isolate_workers). These policies also allow ingress and egress for the private IP ranges and ports that you opened in your private firewall.
 {: shortdesc}
+
+
+
+</staging>

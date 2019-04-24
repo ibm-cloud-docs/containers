@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-24"
 
 ---
 
@@ -67,7 +67,7 @@ IBM Cloud infrastructure (SoftLayer) manages the VLANs that are automatically pr
 
 **How does my choice of VLANs affect my cluster?**</br>
 
-Your choice of VLAN connections determines how the Kubernetes master and worker nodes can communicate with each other in your cluster. For more information, see [Planning communication between worker nodes and the Kubernetes master](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master).
+Your choice of VLAN connections determines how the Kubernetes master and worker nodes can communicate with each other in your cluster. For more information, see [Planning communication between worker nodes and the Kubernetes master](#cs_network_ov_master).
 
 Your choice of VLAN connections also determines the network connectivity for your apps. For more information, see [Planning to expose your apps with in-cluster and external networking](/docs/containers?topic=containers-cs_network_planning).
 
@@ -104,7 +104,7 @@ However, in several situations, components in your cluster must be permitted to 
 
 <dl>
 <dt>[Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)</dt>
-<dd>A VRF enables all the VLANs and subnets in your infrastructure account to communicate with each other. Additionally, a VRF is required to allow your workers and master to communicate over the private service endpoint. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Note that VRF eliminates the VLAN spanning option for your account, because all VLANs are able to communicate unless you configure a gateway appliance to manage traffic.</dd>
+<dd>A VRF enables all the VLANs and subnets in your infrastructure account to communicate with each other. Additionally, a VRF is required to allow your workers and master to communicate over the private service endpoint. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Note that VRF eliminates the VLAN spanning option for your account, because all VLANs are able to communicate unless you configure a gateway device to manage traffic.</dd>
 <dt>[VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)</dt>
 <dd>If you cannot or do not want to enable VRF, enable VLAN spanning. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get). Note that you cannot enable the private service endpoint if you choose to enable VLAN spanning instead of a VRF.</dd>
 </dl>
@@ -190,7 +190,7 @@ A communication channel must be set up so that the Kubernetes master can manage 
   <area alt="Default networking with public, public and private, or private service endpoints" title="Default networking with public, public and private, or private service endpoints" href="#cs_network_ov_master_both" coords="0,296,195,354" shape="rect" />
   <area alt="Default networking with a public service endpoint only" title="Default networking with a public service endpoint only" href="#cs_network_ov_master_public" coords="220,295,353,352" shape="rect" />
   <area alt="Private networking with a private service endpoint only" title="Private networking with a private service endpoint only" href="#cs_network_ov_master_private" coords="393,294,524,356" shape="rect" />
-  <area alt="Private networking with a gateway appliance" title="Private networking with a gateway appliance" href="#cs_network_ov_master_gateway" coords="579,294,697,354" shape="rect" />
+  <area alt="Private networking with a gateway device" title="Private networking with a gateway device" href="#cs_network_ov_master_gateway" coords="579,294,697,354" shape="rect" />
 </map>
 
 Refer to the following sections for more information about each setup.
@@ -255,7 +255,7 @@ The master is privately accessible through the private service endpoint if autho
 
 To set up the public and private service endpoints during cluster creation, follow the steps in [Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se). After cluster creation, you can enable the [public](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) or [private](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) service endpoint individually.
 
-### Private networking with a gateway appliance
+### Private networking with a gateway device
 {: #cs_network_ov_master_gateway}
 
 If worker nodes are set up with a private VLAN only and VRF is not enabled in your {{site.data.keyword.Bluemix_notm}} account, you must configure an alternative solution for network connectivity between your worker nodes and the master. You can set up a firewall with custom network policies to provide dedicated network security for your standard cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or a [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall and block unwanted traffic. When you set up a firewall, you must also [open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound) for each region so that the master and the worker nodes can communicate.
@@ -296,3 +296,4 @@ If your cluster is connected to a private VLAN only, you must set up an IPSec VP
  <figcaption>VPN communication between a cluster and an on-premises network or {{site.data.keyword.icpfull_notm}} through a gateway device in a private networking setup</figcaption>
 </figure>
 </p>
+

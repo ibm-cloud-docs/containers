@@ -47,8 +47,8 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Administering clusters
-        cs_clusters_planning.md
         cs_clusters.md
+        cs_clusters_planning.md
         cs_cluster_scaling.md
         cs_cluster_update.md
         cs_users.md
@@ -59,7 +59,7 @@ IBM Cloud Kubernetes Service
         cs_performance.md
 
     {: .topicgroup}
-    Setting up cluster networking
+    Configuring cluster networking
         cs_network_ov.md
         cs_network_cluster.md
         cs_firewall.md

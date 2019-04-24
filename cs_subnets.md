@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-24"
 
 keywords: kubernetes, iks
 
@@ -29,6 +29,8 @@ subcollection: containers
 
 Change the pool of available portable public or private IP addresses for network load balancer (NLB) services by adding subnets to your Kubernetes cluster.
 {:shortdesc}
+
+
 
 ## Using custom or existing IBM Cloud infrastructure (SoftLayer) subnets to create a cluster
 {: #subnets_custom}
@@ -402,7 +404,7 @@ To ensure that workers in these primary subnets on the same VLAN can communicate
 To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
 {: tip}
 
-### Managing subnet routing for gateway appliances
+### Managing subnet routing for gateway devices
 {: #vra-routing}
 
 When you create a cluster, a portable public and a portable private subnet are ordered on the VLANs that the cluster is connected to. These subnets provide IP addresses for Ingress application load balancer (ALB) and network load balancer (NLB) services.
