@@ -44,21 +44,21 @@ Passez en revue les responsabilités que vous partagez avec IBM pour gérer vos 
 
 **Vous êtes chargé de :**
 
-- [Configurer la clé d'API {{site.data.keyword.containerlong_notm}} avec les droits appropriés pour accéder au portefeuille de l'infrastructure IBM Cloud (SoftLayer) et à d'autres services {{site.data.keyword.Bluemix_notm}}](cs_users.html#api_key)
-- [Déployer et gérer les ressources Kubernetes, telles que les pods, services et déploiements, au sein du cluster](cs_app.html#app_cli)
-- [Tirer parti des capacités du service et de Kubernetes pour assurer la haute disponibilité des applications](cs_app.html#highly_available_apps)
-- [Ajouter ou retirer de la capacité d'un cluster en redimensionnant vos pools de noeuds worker](cs_clusters.html#add_workers)
-- [Activer la fonction Spanning VLAN et maintenir vos pools de noeuds worker à zones multiples équilibrés entre les différentes zones](cs_clusters_planning.html#ha_clusters)
+- [Configurer la clé d'API {{site.data.keyword.containerlong_notm}} avec les droits appropriés pour accéder au portefeuille de l'infrastructure IBM Cloud (SoftLayer) et à d'autres services {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#api_key)
+- [Déployer et gérer les ressources Kubernetes, telles que les pods, services et déploiements, au sein du cluster](/docs/containers?topic=containers-app#app_cli)
+- [Tirer parti des capacités du service et de Kubernetes pour assurer la haute disponibilité des applications](/docs/containers?topic=containers-app#highly_available_apps)
+- [Ajouter ou retirer de la capacité d'un cluster en redimensionnant vos pools de noeuds worker](/docs/containers?topic=containers-clusters#add_workers)
+- [Activer la fonction Spanning VLAN et maintenir vos pools de noeuds worker à zones multiples équilibrés entre les différentes zones](/docs/containers?topic=containers-plan_clusters#ha_clusters)
 - [Créer des réseaux locaux virtuels (VLAN) publics et privés dans l'infrastructure IBM Cloud (SoftLayer) pour l'isolement réseau de votre cluster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
 - [Assurer que tous les noeuds worker ont une connectivité réseau avec l'URL du maître Kubernetes](cs_firewall.html#firewall) <p class="note">Si un noeud worker comporte à la fois des VLAN public et privé, la connectivité réseau est configurée. Si les noeuds worker sont configurés uniquement avec un VLAN privé, vous devez configurer une autre solution pour la connectivité du réseau. Pour plus d'informations, voir [Planification des réseaux de cluster privés uniquement](cs_network_cluster.html#private_vlan). </p>
-- [Mettre à jour le processus kube-apiserver du maître lorsque des mises à jour de la version Kubernetes sont disponibles](cs_cluster_update.html#master)
-- [Conserver les noeuds worker à jour sur les versions principale et secondaires, ainsi que les versions de correctif](cs_cluster_update.html#worker_node)
-- [Récupérer les noeuds worker problématiques en exécutant des commandes `kubectl`, comme `cordon` ou `drain`, et des commandes `ibmcloud ks`, comme `reboot`, `reload` ou `delete`](cs_cli_reference.html#cs_worker_reboot)
-- [Ajouter ou supprimer des sous-réseaux dans l'infrastructure IBM Cloud (SoftLayer) selon les besoins](cs_subnets.html#subnets)
-- [Sauvegarder et restaurer des données dans du stockage persistant dans l'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](../services/RegistryImages/ibm-backup-restore/index.html)
-- Configurer des services de [consignation](cs_health.html#logging) et de [surveillance](cs_health.html#view_metrics) pour gérer la santé et les performances de votre cluster
-- [Configurer la surveillance de l'état de santé des noeuds worker avec le système de reprise automatique](cs_health.html#autorecovery)
-- Effectuer l'audit des événements qui modifient les ressources dans votre cluster, en utilisant par exemple [{{site.data.keyword.cloudaccesstrailfull}}](cs_at_events.html#at_events) pour afficher les activités initiées par l'utilisateur qui modifient l'état de votre instance {{site.data.keyword.containerlong_notm}}
+- [Mettre à jour le processus kube-apiserver du maître lorsque des mises à jour de la version Kubernetes sont disponibles](/docs/containers?topic=containers-update#master)
+- [Conserver les noeuds worker à jour sur les versions principale et secondaires, ainsi que les versions de correctif](/docs/containers?topic=containers-update#worker_node)
+- [Récupérer les noeuds worker problématiques en exécutant des commandes `kubectl`, comme `cordon` ou `drain`, et des commandes `ibmcloud ks`, comme `reboot`, `reload` ou `delete`](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)
+- [Ajouter ou supprimer des sous-réseaux dans l'infrastructure IBM Cloud (SoftLayer) selon les besoins](/docs/containers?topic=containers-subnets#subnets)
+- [Sauvegarder et restaurer des données dans du stockage persistant dans l'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](docs/services/RegistryImages/ibm-backup-restore/index.html)
+- Configurer des services de [consignation](/docs/containers?topic=containers-health#logging) et de [surveillance](cs_health.html#view_metrics) pour gérer la santé et les performances de votre cluster
+- [Configurer la surveillance de l'état de santé des noeuds worker avec le système de reprise automatique](/docs/containers?topic=containers-health#autorecovery)
+- Effectuer l'audit des événements qui modifient les ressources dans votre cluster, en utilisant par exemple [{{site.data.keyword.cloudaccesstrailfull}}](/docs/containers?topic=containers-at_events#at_events) pour afficher les activités initiées par l'utilisateur qui modifient l'état de votre instance {{site.data.keyword.containerlong_notm}}
 
 <br />
 
