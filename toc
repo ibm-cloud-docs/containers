@@ -47,8 +47,8 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Administering clusters
-        cs_clusters.md
         cs_clusters_planning.md
+        cs_clusters.md
         cs_cluster_scaling.md
         cs_cluster_update.md
         cs_users.md

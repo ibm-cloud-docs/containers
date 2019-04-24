@@ -389,5 +389,3 @@ If you have a multizone cluster, multiple VLANs for a single zone cluster, or mu
 {: shortdesc}
 
 
-
-</staging>

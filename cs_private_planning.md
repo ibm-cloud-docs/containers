@@ -129,7 +129,7 @@ For additional security, isolate networking workloads to edge worker nodes. Edge
 </dd>
 </dl>
 
-### Option 3: Private VRF cluster
+### Option 2: Private VRF cluster
 {: #standard-pc}
 
 TBD
