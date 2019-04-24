@@ -84,7 +84,7 @@ Choose one of the following private cluster setups.
 * **[Private VRF cluster](#standard-pc-cluster)**: TBD
 * **[Private cluster with gateway device](#legacy-pc-cluster)**: Create worker nodes on private VLANs only. This setup requires gateway device to provide connectivity between the Kubernetes master and worker nodes, and to act as a firewall for your cluster.
 
-Want more information on each setup? See [Private cluster network setups](/docs/containers?topic=containers-cs_private_planning#private_setups).
+Want more information on each setup? See [Private cluster network setups](/docs/containers?topic=containers-plan_private_clusters#private_setups).
 {: tip}
 
 ### Create a Calico-protected VRF cluster
@@ -95,14 +95,14 @@ Want more information on each setup? See [Private cluster network setups](/docs/
   2. [Enable your {{site.data.keyword.Bluemix_notm}} account to use service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
   3. To run `kubectl` commands against your cluster over an IPSec VPN connection or through DirectLink, you must access the master through the private service endpoint. However, communication with the Kubernetes master must go through the `166.XXX.XXX` IP address range, which is not routable from a IPSec VPN connection or through DirectLink. You must set up a jump server on the private network. The VPN or DirectLink connection terminates at the jump server, and the jump server then routes communication through the internal `10.XXX.XXX` IP address range to the Kubernetes master.
 
-2. Create a standard cluster that is connected to both public and private VLANs by following the steps in [Creating a standard cluster](#clusters_ui_standard). To ensure that the Kubernetes master and worker nodes communicate over the private network only, note the following changes:
+2. Create a standard cluster that is connected to both public and private VLANs by following the steps in [Creating a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui_standard). To ensure that the Kubernetes master and worker nodes communicate over the private network only, note the following changes:
   * If you use the console, in step 8, select **Private endpoint only**.
   * If you use the CLI, in step 7, include the `--private-service-endpoint` flag and do not include the `--public-service-endpoint` flag.
 
 3. After you create the cluster, continue with [Step 3: Accessing your private cluster and viewing cluster states](#private_access_states).
 
 
-### Creating a private VRF cluster
+### Create a private VRF cluster
 {: #standard-pc-cluster}
 
 TBD
@@ -336,7 +336,8 @@ Get access to your cluster by configuring your CLI session.
 3. If you have a firewall on the private network, [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
 
 4. Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
-  If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](#cli_web).
+
+  If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
   {: tip}
   1. Get the command to set the environment variable and download the Kubernetes configuration files.
       ```
