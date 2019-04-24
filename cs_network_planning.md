@@ -22,7 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 
-# Planning to expose your apps with in-cluster and external networking
+# Planning in-cluster and external networking for apps
 {: #cs_network_planning}
 
 With {{site.data.keyword.containerlong}}, you can manage in-cluster and external networking by making apps publicly or privately accessible.

@@ -33,10 +33,9 @@ You might want to create a private cluster for security or compliance requiremen
 ## Private cluster network setups
 {: #private_setups}
 
-Plan a private networking setup for your {{site.data.keyword.containerlong}} cluster.
+When you create your cluster, you must choose a networking setup so that certain cluster components can communicate with each other and with networks or services outside of the cluster.
 {: shortdesc}
 
-When you create your cluster, you must choose a networking setup so that certain cluster components can communicate with each other and with networks or services outside of the cluster.
 * Worker-to-worker communication: All worker nodes must be connected to a VLAN in order to communicate with each other and with the Kubernetes master.
 * Cross-VLAN communication: In many cases, communication must be permitted across multiple private VLANs to allow workers to connect with each other and the master.
 * Worker-to-master and user-to-master communication: Your worker nodes and your authorized cluster users can communicate with the Kubernetes master securely over the private network.
@@ -44,15 +43,16 @@ When you create your cluster, you must choose a networking setup so that certain
 * Cluster communication with other networks: Securely connect your worker nodes and apps to an on-premises network or {{site.data.keyword.icpfull_notm}}.
 * External traffic to cluster apps: Allow public or private traffic requests from outside the cluster to your apps.
 
-Your options for creating a private cluster depend upon the type of IBM Cloud infrastructure (SoftLayer) account that you have and the VLAN setup that you want. For standard clusters, you have the following options to set up your cluster network:
+</br>
+{{site.data.keyword.containerlong_notm}} offers 3 private cluster options: a [Calico-protected VRF cluster](#calico-pc), a [private VRF cluster](#standard-pc), and a [private cluster with a gateway device](#legacy-pc). The following table compares the network configurations of each private cluster option.
 
 <table summary="This table reads left to right about the network configuration options of 3 private cluster setups.">
 <caption>Network configuration options of private cluster setups</caption>
 <thead>
 <th>Network configuration</th>
-<th>Calico-protected VRF cluster</th>
-<th>Private VRF cluster</th>
-<th>Private cluster with gateway device</th>
+<th>[Option 1: Calico-protected VRF cluster](#calico-pc)</th>
+<th>[Option 2: Private VRF cluster](#standard-pc)</th>
+<th>[Option 3: Private cluster with gateway device](#legacy-pc)</th>
 </thead>
 <tbody>
 <tr>
@@ -98,7 +98,7 @@ For most cases, your cluster setup can include worker nodes on both public and p
 If you create the cluster with both public and private VLANs, you cannot later remove the public VLANs from that cluster. Removing all public VLANs from a cluster causes several cluster components to stop working. Instead, create a new cluster without the public VLAN.
 {: note}
 
-
+TODO: architecture image
 
 <dl>
 <dt>Public and private VLAN connections for worker-to-worker communication</dt>
@@ -140,7 +140,7 @@ TBD
 If you set up your worker nodes on a private VLAN only and you don’t want to or cannot enable VRF for your account, you must configure an alternative solution for network connectivity between your worker nodes and the master. You can set up a gateway with custom network policies to provide dedicated network security for your cluster and to detect and remediate network intrusion.
 {: shortdesc}
 
-
+TODO: architecture image
 
 <dl>
 <dt>Private VLAN connection for worker-to-worker communication</dt>
@@ -175,7 +175,7 @@ Your users are less likely to experience downtime when you distribute your apps 
 
 Review these potential cluster setups that are ordered with increasing degrees of availability.
 
-![High availability for clusters](images/cs_cluster_ha_roadmap_multizone.png)
+<img src="images/cs_cluster_ha_roadmap_multizone.png" alt="High availability for clusters" width="550" style="width:550px; border-style: none"/>
 
 1. A [single zone cluster](#single_zone) with multiple worker nodes in a worker pool.
 2. A [multizone cluster](#multizone) that spreads worker nodes across zones within one region.

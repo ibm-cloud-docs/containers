@@ -61,14 +61,14 @@ IBM Cloud Kubernetes Service
     {: .topicgroup}
     Configuring cluster networking
         cs_network_ov.md
-        cs_network_cluster.md
         cs_firewall.md
-        cs_dns.md
         cs_network_policy.md
         cs_edge.md
         cs_istio.md
-        cs_vpn.md
         cs_subnets.md
+        cs_network_cluster.md
+        cs_dns.md
+        cs_vpn.md
 
     cs_images.md
     cs_app.md
