@@ -211,7 +211,7 @@ lastupdated: "2019-04-25"
 * [Multiple clusters connected with a global load balancer](/docs/containers?topic=containers-plan_clusters#multiple_clusters)
 * [Private clusters](/docs/containers?topic=containers-plan_clusters#private_clusters)
 * [Worker pools and worker nodes](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)
-* [Available hardware for worker nodes](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)
+* [Available hardware for worker nodes](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
   * [Virtual machines](/docs/containers?topic=containers-plan_clusters#vm)
   * [Physical machines (bare metal)](/docs/containers?topic=containers-plan_clusters#bm)
   * [Software-defined storage (SDS) machines](/docs/containers?topic=containers-plan_clusters#sds)

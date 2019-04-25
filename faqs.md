@@ -178,7 +178,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <p><strong>Physical machines (bare metal)</strong> yield high performance benefits for workloads such as data, AI, and GPU. Additionally, all the hardware resources are dedicated to your workloads, so you don't have "noisy neighbors". Keep in mind these factors that impact your bare metal costs:</p>
   <ul><li><strong>Monthly billing only</strong>: All bare metals are charged monthly.</li>
   <li><strong>Longer ordering process</strong>:  After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure (SoftLayer) account. Therefore, it can take more than one business day to complete.</li></ul>
-  <p>For details on the machine specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes).</p></dd>
+  <p>For details on the machine specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).</p></dd>
 
 <dt id="bandwidth">Public bandwidth</dt>
   <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.Bluemix_notm}} resources in data centers around the globe. Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.

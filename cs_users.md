@@ -1003,7 +1003,7 @@ Before you begin, make sure that you are the account owner or have **Super User*
 
 6.  In the **Device** tab, select the devices to grant access to.
 
-    * In the **Select type** group, you can grant access to all bare metal, dedicated, and virtual servers so that users can work with all [machine types for worker nodes](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes).
+    * In the **Select type** group, you can grant access to all bare metal, dedicated, and virtual servers so that users can work with all [machine types for worker nodes](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).
     * In the **Enable future access** group, you can grant the user access to all future bare metal, dedicated, and virtual servers.
     * In the table of devices, make sure that the appropriate devices are selected.
 
