@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-24"
+lastupdated: "2019-04-25"
 
 keywords: kubernetes, iks
 
@@ -75,7 +75,30 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.2.80</td>
 <td>19 Mar 2019</td>
 <td><ul>
-<li>Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)
+<li>Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) in standard clusters that run Kubernetes version 1.11 or later in [VRF-enabled accounts](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).<ul>
+<li>Adds the `--private-service-endpoint` and `--public-service-endpoint` flags to the [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) command.</li>
+<li>Adds the **Public Service Endpoint URL** and **Private Service Endpoint URL** fields to the output of <code>ibmcloud ks cluster-get</code>.</li>
+<li>Adds the [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_private_service_endpoint) command.</li>
+<li>Adds the [<code>ibmcloud ks cluster-feature-enable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable_public_service_endpoint) command.</li>
+<li>Adds the [<code>ibmcloud ks cluster-feature-disable public-service-endpoint</code>](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable) command.</li>
+</ul></li>
+<li>Updates documentation and translation.</li>
+<li>Updates the Go version to 1.11.6.</li>
+<li>Resolves intermittent networking issues for macOS users.</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.75</td>
+<td>14 Mar 2019</td>
+<td><ul><li>Hides raw HTML from error outputs.</li>
+<li>Fixes typos in help text.</li>
+<li>Fixes translation of help text.</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.2.61</td>
+<td>26 Feb 2019</td>
+<td><ul>
 <li>Adds the `cluster-pull-secret-apply` command, which creates an IAM service ID for the cluster, policies, API key, and image pull secrets so that containers that run in the `default` Kubernetes namespace can pull images from IBM Cloud Container Registry. For new clusters, image pull secrets that use IAM credentials are created by default. Use this command to update existing clusters or if your cluster has an image pull secret error during creation. For more information, see [the doc](https://test.cloud.ibm.com/docs/containers?topic=containers-images#cluster_registry_auth).</li>
 <li>Fixes a bug where `ibmcloud ks init` failures caused help output to be printed.</li>
 </ul></td>
