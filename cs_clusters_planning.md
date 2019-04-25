@@ -268,7 +268,7 @@ When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you ch
 
 If you want more than one flavor of worker node, you must create a worker pool for each flavor. You cannot resize existing worker nodes to have different resources such as CPU or memory. When you create a free cluster, your worker node is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account. In standard clusters, you can choose the type of machine that works best for your workload. As you plan, consider the [worker node resource reserves](#resource_limit_node) on the total CPU and memory capacity.
 
-You can deploy clusters by using the [console UI or the CLI](/docs/containers?topic=containers-clusters#clusters_ui).
+You can deploy clusters by using the [console UI](/docs/containers?topic=containers-clusters#clusters_ui_standard) or the [CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps).
 
 Select one of the following options to decide what type of worker pool you want.
 * [Virtual machines](#vm)

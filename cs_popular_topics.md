@@ -76,62 +76,23 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <td>Introducing private service endpoints for your Kubernetes cluster master</td>
 <td>By default, {{site.data.keyword.containerlong_notm}} sets up your cluster with access on a public and private VLAN. Previously, if you wanted a [private VLAN-only cluster](/docs/containers?topic=containers-plan_clusters#private_clusters), you needed to set up a gateway device to connect the cluster's worker nodes with the master. Now, you can use the private service endpoint. With the private service endpoint enabled, all traffic between the worker nodes and the master is on the private network, without the need for a gateway device device. In addition to this increased security, inbound and outbound traffic on the private network is [unlimited and not charged ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth). You can still keep a public service endpoint for secure access to your Kubernetes master over the internet, for example to run `kubectl` commands without being on the private network.<br><br>
 To use private service endpoints, you must enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) for your IBM Cloud infrastructure (SoftLayer) account. Your cluster must run Kubernetes version 1.11 or later. If your cluster runs an earlier Kubernetes version, [update to at least 1.11](/docs/containers?topic=containers-update#update). For more information, check out the following links:<ul>
-<li>[Service endpoints for worker-to-master and user-to-master communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master))</li>
-  <li><strong>Doc housekeeping</strong>: Updated doc anchor IDs, grammar, metadata, and other formatting throughout the documentation set.</li>
-  <li><strong>Ingress Annotation</strong>: Added TCP port annotations and rearranged content. ([link](/docs/containers?topic=containers-ingress_annotation#ingress_annotation))</li>
-  <li><strong>Integrations</strong>: Added Splunk as a supported integration. ([link](/docs/containers?topic=containers-supported_integrations#supported_integrations))</li>
-  <li><strong>New! Site map</strong>: Added a site map to the documentation. ([link](/docs/containers?topic=containers-cs_sitemap#cs_sitemap))</li></ul></td>
+<li>[Service endpoints for worker-to-master and user-to-master communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)</li>
+<li>[Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)</li>
+<li>[Switching from public to private service endpoints](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)</li>
+<li>If you have a firewall on the private network, [adding the private IP addresses for {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, and other {{site.data.keyword.Bluemix_notm}} services](/docs/containers?topic=containers-firewall#firewall_outbound)</li>
+</ul>
+<p class="important">If you switch to a private-only service endpoint cluster, make sure that your cluster can still communicate with other {{site.data.keyword.Bluemix_notm}} services that you use. [Portworx software-defined storage (SDS)](/docs/containers?topic=containers-portworx#portworx) and [cluster autoscaler](/docs/containers?topic=containers-ca#ca) do not support private-only service endpoint. Use a cluster with both public and private service endpoints instead. [NFS-based file storage](/docs/containers?topic=containers-file_storage#file_storage) is supported if your cluster runs Kubernetes version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551, or later.</p>
+</td>
 </tr>
 <tr>
-  <td>15 February 2019</td>
-  <td><ul>
-  <li><strong>Changelogs</strong>: Added changelogs for worker node fix packs. ([link](/docs/containers?topic=containers-changelog#changelog))</li>
-  <li><strong>Cluster autoscaling</strong>: Updated the `scaleDownUtilizationThreshold` custom setting. ([link](/docs/containers?topic=containers-ca#ca))</li>
-  <li><strong>Deploying apps</strong>: Added prerequisite steps to have an IAM service access role to {{site.data.keyword.containerlong_notm}} to access Kubernetes resources. ([link](/docs/containers?topic=containers-app#app))</li>
-  <li><strong>Firewall</strong>: Added a step to allow outgoing network traffic {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). ([link](/docs/containers?topic=containers-firewall#firewall_outbound))</li>
-  <li><strong>Ingress</strong>: Added information about importing certificates and using Istio with the INgress ALB. ([link](/docs/containers?topic=containers-ingress#ingress))</li>
-  <li><strong>Ingress Annotation</strong>: Updated Istio annotations. Updated `client.crt` to `ca.crt`. ([link](/docs/containers?topic=containers-ingress_annotation#ingress_annotation))</li>
-  <li><strong>Istio</strong>: Added information about the BookInfo sample app, creating Kubernetes services, and exposing apps by using the Ingress subdomain. ([link](/docs/containers?topic=containers-istio#istio))</li>
-  <li><strong>strongSwan VPN</strong>: Added how to configure the strongSwan VPN in a multizone cluster. ([link](/docs/containers?topic=containers-vpn#vpn_multizone))</li>
-  <li><strong>Subnets</strong>: Added a zone annotation to the service YAML. ([link](/docs/containers?topic=containers-subnets#review_ip))</li>
-  <li><strong>Use cases</strong>: Added {{site.data.keyword.appid_full}} to use case scenarios. ([link](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro))</li></ul></td>
-</tr>
-<tr>
-  <td>08 February 2019</td>
-  <td><ul>
-  <li><strong>CLI reference</strong>: Updated CLI reference docs with `--skip-rbac` option to speed up `cluster-config` if you use custom RBAC instead of IAM service access roles. ([link](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference))</li>
-  <li><strong>{{site.data.keyword.Bluemix_notm}} regions</strong>: Updated how to log in to {{site.data.keyword.Bluemix_notm}} by using the new `cloud.ibm.com` API endpoint instead of the previous `bluemix.net`. ([link](/docs/containers?topic=containers-regions-and-zones#bluemix_regions))</li></ul></td>
-</tr>
-<tr>
-  <td>07 February 2019</td>
-  <td><ul>
-  <li><strong>Certified Kubernetes 1.13</strong>: ([link](/docs/containers?topic=containers-cs_versions#cs_v113))</li>
-  <li><strong>CLI reference</strong>: Updated CLI reference docs with rate limit tips for `ibmcloud ks alb` commands. ([link](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference))</li>
-  <li><strong>Ingress</strong>: Clarified that Ingress requires two worker nodes per zone to ensure high availability. ([link](/docs/containers?topic=containers-ingress#config_prereqs))</li>
-  <li><strong>Ingress Annotation</strong>: Added a tip for the rewrite path annotation to include a trailing `/` if your app returns a 404 after adding the annotation. ([link](/docs/containers?topic=containers-ingress_annotation#rewrite-path))</li>
-  <li><strong>PVC attributes</strong>: The [file](/docs/containers?topic=containers-file_storage#file_storage), [block](/docs/containers?topic=containers-block_storage#block_storage), [object](/docs/containers?topic=containers-object_storage#object_storage), and [Portworx](/docs/containers?topic=containers-portworx#portworx) storage docs are updated to specify the storage class as an attribute, not an annotation, in the PVC.</li></ul></td>
-</tr>
-<tr>
-  <td>06 February 2019</td>
-  <td><ul>
-  <li><strong>Cluster DNS provider</strong>: In Kubernetes version 1.13 and later, CoreDNS is the default cluster DNS provider. You can customize CoreDNS, or change the cluster DNS provider between CoreDNS and KubeDNS. ([link](/docs/containers?topic=containers-cluster_dns#cluster_dns))</li>
-  <li><strong>New! Istio managed add-on</strong>: Istio on {{site.data.keyword.containerlong_notm}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.Bluemix_notm}} automatically keeps all your Istio components up to date. ([link](/docs/containers?topic=containers-istio)) </li>
-  <li><strong>New! Knative managed add-on</strong>: Knative is an open source platform that extends the capabilities of Kubernetes to help you create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. Managed Knative on {{site.data.keyword.containerlong_notm}} is a managed add-on that integrates Knative and Istio directly with your Kubernetes cluster. The Knative and Istio version in the add-on are tested by IBM and supported for the use in {{site.data.keyword.containerlong_notm}}. ([link](/docs/containers?topic=containers-knative_tutorial))</li>
-  <li><strong>New! Kubernetes version 1.13</strong>: Create or update your clusters to Kubernetes 1.13. ([link](/docs/containers?topic=containers-cs_versions#cs_v113))</li>
-  <li><strong>NFS file storage</strong>: The file storage docs are updated to include examples for using topology-aware volume scheduling to delay the creation of a file storage instance until the first pod that uses the storage is created. ([link](/docs/containers?topic=containers-file_storage#file-topology))</li>
-  <li><strong>Portworx storage</strong>: Added a link to the process to order a Portworx license if you are an IBM employee. ([link](/docs/containers?topic=containers-portworx#portworx))</li>
-  <li><strong>Reference topics</strong>: To support new features such as Kubernetes 1.13, Istio managed add-on, and Knative managed add-on, the [CLI](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference), [user access](/docs/containers?topic=containers-access_reference#access_reference), and [changelog](/docs/containers?topic=containers-changelog#changelog) reference pages are updated.</li></ul></td>
-</tr>
-<tr>
-  <td>04 February 2019</td>
-  <td><ul>
-  <li><strong>AES 256-bit encryption</strong>: Clarified that worker nodes feature AES 256-bit disk encryption by default. ([link](/docs/containers?topic=containers-encryption#encryption))</li>
-  <li><strong>Anchor IDs</strong>: Updated doc anchor formatting throughout the documentation set.</li>
-  <li><strong>New cluster autoscaler name</strong>: The cluster autoscaler Helm chart v1.0.3 is renamed from `ibm-ks-cluster-autoscaler` to `ibm-iks-cluster-autoscaler`. Update to the latest Helm version today. ([link](/docs/containers?topic=containers-ca#ca_helm_up_102))</li>
-  </ul></td>
+<td>07 Mar 2019</td>
+<td>[Cluster autoscaler moves from beta to GA](/docs/containers?topic=containers-ca#ca)</td>
+<td>The cluster autoscaler is now generally available. Install the Helm plug-in and begin to scale the worker pools in your cluster automatically to increase or decrease the number of worker nodes based on the sizing needs of your scheduled workloads.<br><br>
+Need help or have feedback on the cluster autoscaler? If you are an external user, [register for the public Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/) and post in the [#cluster-autoscaler ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/messages/CF6APMLBB) channel. If you are an IBMer, post in the [internal Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C90D3KZUL) channel.</td>
 </tr>
 </tbody></table>
-</staging>
+
+
 
 
 ## Popular topics in February 2019

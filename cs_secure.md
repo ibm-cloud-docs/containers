@@ -134,7 +134,48 @@ Service endpoints determine how worker nodes and cluster users can access the cl
 * Public and private service endpoints: Communication between the master and worker nodes is established over the private network through the private service endpoint. Even if you enable the public service endpoint for your cluster, the Kubernetes master to worker node communication stays on the private network. The public service endpoint is used for secure access to your Kubernetes master over the internet, for example so that authorized cluster users can run `kubectl` commands.
 * Private service endpoint only: Communication between the master and worker nodes is established over the private network. Your cluster users must be in your {{site.data.keyword.Bluemix_notm}} private network or connect to the private network through a VPN connection to access the master.
 
-For more information about service endpoints, see [Service endpoints for worker-to-master and user-to-master communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master) that run on shared or dedicated physical hardware. The worker node in a free cluster is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM.</td>
+For more information about service endpoints, see [Service endpoints for worker-to-master and user-to-master communication](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master).
+
+<br />
+
+
+## Worker node
+{: #workernodes}
+
+Worker nodes carry the deployments and services that make up your app. When you host workloads in the public cloud, you want to ensure that your app is protected from being accessed, changed or monitored by an unauthorized user or software.
+{: shortdesc}
+
+**Who owns the worker node and am I responsible to secure it?** </br>
+The ownership of a worker node depends on the type of cluster that you create. Worker nodes in free clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM. You can deploy apps to the worker node but cannot change settings or install extra software on the worker node. Due to limited capacity and limited {{site.data.keyword.containerlong_notm}} features, do not run production workloads on free clusters. Consider using standard clusters for your production workloads.
+
+Worker nodes in standard clusters are provisioned in to the IBM Cloud infrastructure (SoftLayer) account that is associated with your public or dedicated {{site.data.keyword.Bluemix_notm}} account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches.
+
+Use the `ibmcloud ks worker-update` [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version. When updates are available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.Bluemix_notm}} console or CLI, such as with the `ibmcloud ks clusters` or `ibmcloud ks workers --cluster <cluster_name>` commands. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches. To apply the updates, the worker node must be reimaged and reloaded with the new image. Keys for the root user are automatically rotated when the worker node is reloaded.
+{: important}
+
+**How does my worker node setup look like?**</br>
+The following image shows the components that are set up for every worker node to protect your worker node from malicious attacks.
+
+The image does not include components that ensure secure end-to-end communication to and from the worker node. See [network security](#network) for more information.
+{: note}
+
+<img src="images/cs_worker_setup.png" width="600" alt="Worker node setup (excluding network security" style="width:600px; border-style: none"/>
+
+<table>
+<caption>Worker node security setup</caption>
+  <thead>
+  <th>Security feature</th>
+  <th>Description</th>
+  </thead>
+  <tbody>
+    <tr><td>CIS compliant Linux image</td><td>Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The Ubuntu operating system cannot be changed by the user or the owner of the machine. To review the current Ubuntu version, run <code>kubectl get nodes -o wide</code>. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containerlong_notm}} and must be installed by the user to keep the worker node secure.<p class="important">{{site.data.keyword.containerlong_notm}} uses an Ubuntu Linux kernel for worker nodes. You can run containers based on any Linux distribution in {{site.data.keyword.containerlong_notm}}. Verify with your container image vendor if they support the container image to be run on Ubuntu Linux kernels.</p></td></tr>
+    <tr>
+    <td>Continuous monitoring by Site Reliability Engineers (SREs) </td>
+    <td>The Linux image that is installed on your worker nodes is continuously monitored by IBM Site Reliability Engineers (SREs) to detect vulnerabilities and security compliance issues. To address vulnerabilities, SREs create security patches and fix packs for your worker nodes. Make sure to apply these patches when they are available to ensure a secure environment for your worker nodes and the apps that you run on top of them.</td>
+    </tr>
+    <tr>
+  <td>Compute isolation</td>
+  <td>Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes) that run on shared or dedicated physical hardware. The worker node in a free cluster is automatically provisioned as a virtual, shared node in the IBM Cloud infrastructure (SoftLayer) account that is owned by IBM.</td>
 </tr>
 <tr>
 <td>Option to deploy bare metal</td>
