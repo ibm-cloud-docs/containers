@@ -1,75 +1,5 @@
----
-
-copyright:
-  years: 2014, 2019
-lastupdated: "2019-04-25"
-
-keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
-
-subcollection: containers
-
----
-
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
-{:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
-{:deprecated: .deprecated}
-{:download: .download}
-{:gif: data-image-type='gif'}
-
-
-# Setting up private clusters
-{: #cs_clusters_private}
-
-Create private clusters and add worker nodes to increase cluster capacity in {{site.data.keyword.containerlong}}.
-{: shortdesc}
-
-Not sure which cluster setup to choose? See [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_private_clusters).
-{: tip}
-
-Have you created a cluster before and are just looking for a quick example command? Try this example to create a standard private cluster that uses the private service endpoint only:
-```
-ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --private-service-endpoint --private-vlan <private_VLAN_ID> --private-only
-```
-{: pre}
-
-## Step 1: Prepare to create private clusters
-{: #prepare-private}
-
-Follow the steps to prepare your {{site.data.keyword.Bluemix_notm}} account for {{site.data.keyword.containerlong_notm}}. These are preparations that, after the account administrator makes them, you might not need to change each time that you create a cluster. However, each time that you create a cluster, you still want to verify that the current account-level state is what you need it to be.
-{: shortdesc}
-
-1. [Create or upgrade your account to a billable account ({{site.data.keyword.Bluemix_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
-
-2. [Set up an {{site.data.keyword.containerlong_notm}} API key](/docs/containers?topic=containers-users#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
-  * **Super User** role for IBM Cloud infrastructure (SoftLayer).
-  * **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
-  * **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. If your account predates 4 October 2018, you need to [enable {{site.data.keyword.Bluemix_notm}} IAM policies for {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-user#existing_users). With IAM policies, you can control access to resources such as registry namespaces.
-
-  Are you the account owner? You already have the necessary permissions! When you create a cluster, the API key for that region and resource group is set with your credentials.
-    {: tip}
-
-3. Verify that you have the **Administrator** platform role for {{site.data.keyword.containerlong_notm}}. To allow your cluster to pull images from the private registry, you also need the **Administrator** platform role for {{site.data.keyword.registrylong_notm}}.
-    1. From the [{{site.data.keyword.Bluemix_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) menu bar, click **Manage > Access (IAM)**.
-    2. Click the **Users** page, and then from the table, select yourself.
-    3. From the **Access policies** tab, confirm that your **Role** is **Administrator**. You can be the **Administrator** for all the resources in the account, or at least for {{site.data.keyword.containershort_notm}}. **Note**: If you have the **Administrator** role for {{site.data.keyword.containershort_notm}} in only one resource group or region instead of the entire account, you must have at least the **Viewer** role at the account level to see the account's VLANs.
-    <p class="tip">Make sure that your account administrator does not assign you the **Administrator** platform role at the same time as a service role. You must assign platform and service roles separately.</p>
-
-4. If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](/docs/containers?topic=containers-users#resource_groups).
-  * The cluster is created in the resource group that you target when you log in to {{site.data.keyword.Bluemix_notm}}. If you do not target a resource group, the default resource group is automatically targeted.
-  * If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the default resource group.
-  * You cannot change a cluster's resource group. Furthermore, if you need to use the `ibmcloud ks cluster-service-bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.Bluemix_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.
-  * If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](/docs/containers?topic=containers-health#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
-
-5. [Plan your cluster set up](/docs/containers?topic=containers-plan_clusters#plan_clusters).
-  * Decide whether to create a [single zone](/docs/containers?topic=containers-plan_clusters#single_zone) or [multizone](/docs/containers?topic=containers-plan_clusters#multizone) cluster. Note that multizone clusters are available in select locations only.
-  * Choose what type of [hardware and isolation](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
+ cluster. Note that multizone clusters are available in select locations only.
+  * Choose what type of [hardware and isolation](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) you want for your cluster's worker nodes, including the decision between virtual or bare metal machines.
 
 6. You can [estimate the cost](/docs/billing-usage?topic=billing-usage-cost#cost) in the {{site.data.keyword.Bluemix_notm}} console. For more information on charges that might not be included in the estimator, see [Pricing and billing](/docs/containers?topic=containers-faqs#charges).
 
@@ -84,7 +14,7 @@ Choose one of the following private cluster setups.
 * **[Private VRF cluster](#standard-pc-cluster)**: TBD
 * **[Private cluster with gateway device](#legacy-pc-cluster)**: Create worker nodes on private VLANs only. This setup requires gateway device to provide connectivity between the Kubernetes master and worker nodes, and to act as a firewall for your cluster.
 
-Want more information on each setup? See [Private cluster network setups](/docs/containers?topic=containers-plan_private_clusters#private_setups).
+Want more information on each setup? See [Private cluster network setups](/docs/containers?topic=containers-plan_clusters#private_clusters).
 {: tip}
 
 ### Create a Calico-protected VRF cluster
@@ -138,7 +68,7 @@ TBD
 6. Enter your metro and zone details.
   * Multizone clusters:
     1. Select a metro location. For the best performance, select the metro location that is physically closest to you. Your choices might be limited by geography.
-    2. Select the specific zones in which you want to host your cluster. You must select at least 1 zone but you can select as many as you would like. If you select more than 1 zone, the worker nodes are spread across the zones that you choose which gives you higher availability. If you select only 1 zone, you can [add zones to your cluster](#add_zone) after it is created.
+    2. Select the specific zones in which you want to host your cluster. You must select at least 1 zone but you can select as many as you would like. If you select more than 1 zone, the worker nodes are spread across the zones that you choose which gives you higher availability. If you select only 1 zone, you can [add zones to your cluster](/docs/containers?topic=containers-add_workers#add_zone) after it is created.
   * Single zone clusters: Select a zone in which you want to host your cluster. For the best performance, select the zone that is physically closest to you.
 
 7. For each zone, choose a private VLAN.
@@ -196,7 +126,7 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
   - **Virtual**: Billed hourly, virtual machines are provisioned on shared or dedicated hardware.
   - **Physical**: Billed monthly, bare metal servers are provisioned manually by IBM Cloud infrastructure (SoftLayer) after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control.
   - **Physical machines with Trusted Compute**: You can also choose to enable [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud ks feature-enable` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
-  - **Machine types**: To decide what machine type to deploy, review the core, memory, and storage combinations of the [available worker node hardware](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). After you create your cluster, you can add different physical or virtual machine types by [adding a worker pool](#add_pool).
+  - **Machine types**: To decide what machine type to deploy, review the core, memory, and storage combinations of the [available worker node hardware](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node). After you create your cluster, you can add different physical or virtual machine types by [adding a worker pool](/docs/containers?topic=containers-add_workers#add_pool).
 
      Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
      {:tip}
@@ -315,16 +245,10 @@ Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{
 <br />
 
 
-## Step 3: Accessing your private cluster and viewing cluster states
-{: #private_access_states}
-
-After you cluster is created, you can begin working with your cluster and view its state.
-{: shortdesc}
-
-### Accessing your cluster
+## Step 3: Accessing your cluster
 {: #private_access_cluster}
 
-Get access to your cluster by configuring your CLI session.
+After you cluster is created, you can setup access to begin working with your cluster.
 {: shortdesc}
 
 1. Verify that you are in your {{site.data.keyword.Bluemix_notm}} private network or are connected to the private network through a VPN connection.
@@ -383,320 +307,6 @@ Get access to your cluster by configuring your CLI session.
       ```
       {: codeblock}
 
-### Viewing cluster states
-{: #private_states}
-
-Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might have occurred.
-{:shortdesc}
-
-To view information about a specific cluster, such as its zones, service endpoint URLs, Ingress subdomain, version, owner, and monitoring dashboard, use the `ibmcloud ks cluster-get <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
-
-You can view the current cluster state by running the `ibmcloud ks clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).
-
-<table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
-<caption>Cluster states</caption>
-   <thead>
-   <th>Cluster state</th>
-   <th>Description</th>
-   </thead>
-   <tbody>
-<tr>
-   <td>Aborted</td>
-   <td>The deletion of the cluster is requested by the user before the Kubernetes master is deployed. After the deletion of the cluster is completed, the cluster is removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
-   </tr>
- <tr>
-     <td>Critical</td>
-     <td>The Kubernetes master cannot be reached or all worker nodes in the cluster are down. </td>
-    </tr>
-   <tr>
-     <td>Delete failed</td>
-     <td>The Kubernetes master or at least one worker node cannot be deleted.  </td>
-   </tr>
-   <tr>
-     <td>Deleted</td>
-     <td>The cluster is deleted but not yet removed from your dashboard. If your cluster is stuck in this state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
-   </tr>
-   <tr>
-   <td>Deleting</td>
-   <td>The cluster is being deleted and cluster infrastructure is being dismantled. You cannot access the cluster.  </td>
-   </tr>
-   <tr>
-     <td>Deploy failed</td>
-     <td>The deployment of the Kubernetes master could not be completed. You cannot resolve this state. Contact IBM Cloud support by opening an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
-   </tr>
-     <tr>
-       <td>Deploying</td>
-       <td>The Kubernetes master is not fully deployed yet. You cannot access your cluster. Wait until your cluster is fully deployed to review the health of your cluster.</td>
-      </tr>
-      <tr>
-       <td>Normal</td>
-       <td>All worker nodes in a cluster are up and running. You can access the cluster and deploy apps to the cluster. This state is considered healthy and does not require an action from you.<p class="note">Although the worker nodes might be normal, other infrastructure resources, such as [networking](/docs/containers?topic=containers-cs_troubleshoot_network) and [storage](/docs/containers?topic=containers-cs_troubleshoot_storage), might still need attention. If you just created the cluster, some parts of the cluster that are used by other services such as Ingress secrets or registry image pull secrets, might still be in process.</p></td>
-    </tr>
-      <tr>
-       <td>Pending</td>
-       <td>The Kubernetes master is deployed. The worker nodes are being provisioned and are not available in the cluster yet. You can access the cluster, but you cannot deploy apps to the cluster.  </td>
-     </tr>
-   <tr>
-     <td>Requested</td>
-     <td>A request to create the cluster and order the infrastructure for the Kubernetes master and worker nodes is sent. When the deployment of the cluster starts, the cluster state changes to <code>Deploying</code>. If your cluster is stuck in the <code>Requested</code> state for a long time, open an [{{site.data.keyword.Bluemix_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
-   </tr>
-   <tr>
-     <td>Updating</td>
-     <td>The Kubernetes API server that runs in your Kubernetes master is being updated to a new Kubernetes API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that the user deployed are not modified and continue to run. Wait for the update to complete to review the health of your cluster. </td>
-   </tr>
-    <tr>
-       <td>Warning</td>
-       <td>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. </td>
-    </tr>
-   </tbody>
- </table>
-
-
-<br />
-
-
-## Step 4: Adding worker nodes and zones to clusters
-{: #private_add_workers}
-
-To increase the availability of your apps, you can add worker nodes to an existing zone or multiple existing zones in your cluster. To help protect your apps from zone failures, you can add zones to your cluster.
-{:shortdesc}
-
-When you create a cluster, the worker nodes are provisioned in a worker pool. After cluster creation, you can add more worker nodes to a pool by resizing it or by adding more worker pools. By default, the worker pool exists in one zone. Clusters that have a worker pool in only one zone are called single zone clusters. When you add more zones to the cluster, the worker pool exists across the zones. Clusters that have a worker pool that is spread across more than one zone are called multizone clusters.
-
-If you have a multizone cluster, keep its worker node resources balanced. Make sure that all the worker pools are spread across the same zones, and add or remove workers by resizing the pools instead of adding individual nodes.
-{: tip}
-
-Before you begin, make sure you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). Then, choose one of the following sections:
-  * [Add worker nodes by resizing an existing worker pool in your cluster](#resize_pool)
-  * [Add worker nodes by adding a worker pool to your cluster](#add_pool)
-  * [Add a zone to your cluster and replicate the worker nodes in your worker pools across multiple zones](#add_zone)
-  * [Deprecated: Add a stand-alone worker node to a cluster](#standalone)
-
-After you set up your worker pool, you can [set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
-{:tip}
-
-### Adding worker nodes by resizing an existing worker pool
-{: #resize_pool}
-
-You can add or reduce the number of worker nodes in your cluster by resizing an existing worker pool, regardless of whether the worker pool is in one zone or spread across multiple zones.
-{: shortdesc}
-
-For example, consider a cluster with one worker pool that has three worker nodes per zone.
-* If the cluster is single zone and exists in `dal10`, then the worker pool has three worker nodes in `dal10`. The cluster has a total of three worker nodes.
-* If the cluster is multizone and exists in `dal10` and `dal12`, then the worker pool has three worker nodes in `dal10` and three worker nodes in `dal12`. The cluster has a total of six worker nodes.
-
-For bare metal worker pools, keep in mind that billing is monthly. If you resize up or down, it impacts your costs for the month.
-{: tip}
-
-To resize the worker pool, change the number of worker nodes that the worker pool deploys in each zone:
-
-1. Get the name of the worker pool that you want to resize.
-    ```
-    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-2. Resize the worker pool by designating the number of worker nodes that you want to deploy in each zone. The minimum value is 1.
-    ```
-    ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <pool_name> --size-per-zone <number_of_workers_per_zone>
-    ```
-    {: pre}
-
-3. Verify that the worker pool is resized.
-    ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
-    ```
-    {: pre}
-
-    Example output for a worker pool that is in two zones, `dal10` and `dal12`, and is resized to two worker nodes per zone:
-    ```
-    ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.8.6_1504
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.8.6_1504
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.8.6_1504
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.8.6_1504
-    ```
-    {: screen}
-
-### Adding worker nodes by creating a new worker pool
-{: #add_pool}
-
-You can add worker nodes to your cluster by creating a new worker pool.
-{:shortdesc}
-
-1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones`.
-   ```
-   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   ...
-   Worker Zones: dal10, dal12, dal13
-   ```
-   {: screen}
-
-2. For each zone, list available private VLANs and note the private VLAN that you want to use. If you do not have a private VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
-   ```
-   ibmcloud ks vlans --zone <zone>
-   ```
-   {: pre}
-
-3.  For each zone, review the [available machine types for worker nodes](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).
-
-    ```
-    ibmcloud ks machine-types <zone>
-    ```
-    {: pre}
-
-4. Create a worker pool. If you provision a bare metal worker pool, specify `--hardware dedicated`.
-   ```
-   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone> --hardware <dedicated_or_shared>
-   ```
-   {: pre}
-
-5. Verify that the worker pool is created.
-   ```
-   ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
-   ```
-   ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID>
-   ```
-   {: pre}
-
-7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the status changes from **provision_pending** to **normal**.
-   ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.8.6_1504
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.8.6_1504
-   ```
-   {: screen}
-
-### Adding worker nodes by adding a zone to a worker pool
-{: #add_zone}
-
-You can span your cluster across multiple zones within one region by adding a zone to your existing worker pool.
-{:shortdesc}
-
-When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
-
-If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster.
-
-Before you begin:
-*  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
-*  If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get` [command](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get).
-
-To add a zone with worker nodes to your worker pool:
-
-1. List available zones and pick the zone that you want to add to your worker pool. The zone that you choose must be a multizone-capable zone.
-   ```
-   ibmcloud ks zones
-   ```
-   {: pre}
-
-2. List available VLANs in that zone and note the private VLAN that you want to use. If you do not have a private VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
-   ```
-   ibmcloud ks vlans --zone <zone>
-   ```
-   {: pre}
-
-3. List the worker pools in your cluster and note their names.
-   ```
-   ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-4. Add the zone to your worker pool. If you have multiple worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones. Replace `<pool1_id_or_name,pool2_id_or_name,...>` with the names of all of your worker pools in a comma-separated list.
-
-    A private VLAN must exist before you can add a zone to multiple worker pools. If you do not have a private VLAN in that zone, add the zone to one worker pool first so that a private VLAN is created for you. Then, you can add the zone to other worker pools by specifying the private VLAN that was created for you.
-    {: note}
-
-   If you want to use different VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
-   {: tip}
-   ```
-   ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool1_name,pool2_name,...> --private-vlan <private_VLAN_ID>
-   ```
-   {: pre}
-
-5. Verify that the zone is added to your cluster. Look for the added zone in the **Worker zones** field of the output. Note that the total number of workers in the **Workers** field has increased as new worker nodes are provisioned in the added zone.
-  ```
-  ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
-
-  Example output:
-  ```
-  Name:                           mycluster
-  ID:                             df253b6025d64944ab99ed63bb4567b6
-  State:                          normal
-  Created:                        2018-09-28T15:43:15+0000
-  Location:                       dal10
-  Master URL:                     https://c3-private.<region>.containers.cloud.ibm.com:31140
-  Public Service Endpoint URL:    -
-  Private Service Endpoint URL:   https://c3-private.<region>.containers.cloud.ibm.com:31140
-  Master Location:                Dallas
-  Master Status:                  Ready (21 hours ago)
-  Ingress Subdomain:              mycluster.us-south.containers.appdomain.cloud
-  Ingress Secret:                 mycluster
-  Workers:                        6
-  Worker Zones:                   dal10, dal12
-  Version:                        1.11.3_1524
-  Owner:                          owner@email.com
-  Monitoring Dashboard:           ...
-  Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
-  Resource Group Name:            Default
-  ```
-  {: screen}
-
-### Deprecated: Adding stand-alone worker nodes
-{: #standalone}
-
-If you have a cluster that was created before worker pools were introduced, you can use the deprecated commands to add stand-alone worker nodes.
-{: deprecated}
-
-If you have a cluster that was created after worker pools were introduced, you cannot add stand-alone worker nodes. Instead, you can [create a worker pool](#add_pool), [resize an existing worker pool](#resize_pool), or [add a zone to a worker pool](#add_zone) to add worker nodes to your cluster.
-{: note}
-
-1. List available zones and pick the zone where you want to add worker nodes.
-   ```
-   ibmcloud ks zones
-   ```
-   {: pre}
-
-2. List available VLANs in that zone and note their ID.
-   ```
-   ibmcloud ks vlans --zone <zone>
-   ```
-   {: pre}
-
-3. List available machine types in that zone.
-   ```
-   ibmcloud ks machine-types --zone <zone>
-   ```
-   {: pre}
-
-4. Add stand-alone worker nodes to the cluster. For bare metal machine types, specify `dedicated`.
-   ```
-   ibmcloud ks worker-add --cluster <cluster_name_or_ID> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --machine-type <machine_type> --hardware <shared_or_dedicated>
-   ```
-   {: pre}
-
-5. Verify that the worker nodes are created.
-   ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
 <br />
 
 
@@ -704,6 +314,7 @@ If you have a cluster that was created after worker pools were introduced, you c
 {: #private_next_steps}
 
 When the cluster is up and running, you can check out the following tasks:
+- [ ]()
 - [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
 - [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-getting-started)
 - [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
@@ -721,3 +332,5 @@ You can also check out the following additional network configuration steps for 
   * To securely connect your worker nodes and apps to an on-premises network, set up an IPSec VPN endpoint on your gateway device. Then, [configure the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) in your cluster to use the VPN endpoint on your gateway or [set up VPN connectivity directly with VRA](/docs/containers?topic=containers-vpn#vyatta).
   * Expose your apps with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
   * [Open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_inbound) in your gateway device firewall to permit inbound traffic to networking services.
+
+</staging>

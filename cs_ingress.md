@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-24"
+lastupdated: "2019-04-25"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -140,7 +140,6 @@ Ingress is a Kubernetes service that balances network traffic workloads in your 
 ### What comes with Ingress?
 {: #components}
 
-
 Ingress consists of three components:
 <dl>
 <dt>Ingress resource</dt>
@@ -152,7 +151,6 @@ Ingress consists of three components:
 <p>The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you use only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME in your DNS entry to forward requests from your custom domain to the IBM-provided Ingress subdomain for your cluster.</p>
 <p class="note">If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also whitelist <a href="https://www.cloudflare.com/ips/">Cloudflare's IPv4 IPs <img src="../icons/launch-glyph.svg" alt="External link icon"></a> that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see Lesson 3 of the <a href="/docs/containers?topic=containers-policy_tutorial#lesson3">Calico network policy tutorial</a>.</p></dd>
 </dl>
-
 
 ### How are IPs assigned to Ingress ALBs?
 {: #ips}

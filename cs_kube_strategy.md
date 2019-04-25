@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-04-25"
 
 keywords: kubernetes, iks
 
@@ -173,7 +173,7 @@ Now that you have a good idea of what your workload looks like, let's map the es
 1.  Estimate the max worker node capacity, which depends on what type of cluster you have. You don't want to max out worker node capacity in case a surge or other temporary event happens.
     *  **Single zone clusters**: Plan to have at least 3 worker nodes in your cluster. Further, you want 1 extra node's worth of CPU and memory capacity available within the cluster.
     *  **Multizone clusters**: Plan to have at least 2 worker nodes per zone, so 6 nodes across 3 zones in total. Additionally, plan for the total capacity of your cluster to be at least 150% of your total workload's required capacity, so that if 1 zone goes down, you have resources available to maintain the workload.
-2.  Align the app size and worker node capacity with one of the [available worker node flavors](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). To see available flavors in a zone, run `ibmcloud ks machine-types <zone>`.
+2.  Align the app size and worker node capacity with one of the [available worker node flavors](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes). To see available flavors in a zone, run `ibmcloud ks machine-types <zone>`.
     *   **Don't overload worker nodes**: To avoid your pods competing for CPU or running inefficiently, you must know what resources your apps require so that you can plan the number of worker nodes that you need. For example, if your apps require less resources than the resources that are available on the worker node, you can limit the number of pods that you deploy to one worker node. Keep your worker node at around 75% capacity to leave space for other pods that might need to be scheduled. If your apps require more resources than you have available on your worker node, use a different worker node flavor that can fulfill these requirements. You know that your worker nodes are overloaded when they frequently report back a status of `NotReady` or evict pods due to the lack of memory or other resources.
     *   **Larger vs. smaller worker node flavors**: Larger nodes can be more cost efficient than smaller nodes, particularly for workloads that are designed to gain efficiency when they process on a high-performance machine. However, if a large worker node goes down, you need to be sure that your cluster has enough capacity to gracefully reschedule all the workload pods onto other worker nodes in the cluster. Smaller worker can help you scale more gracefully.
     *   **Replicas of your app**: To determine the number of worker nodes that you want, you can also consider how many replicas of your app that you want to run. For example, if you know that your workload requires 32 CPU cores, and you plan to run 16 replicas of your app, each replica pod needs 2 CPU cores. If you want to run only one app pod per worker node, you can order an appropriate number of worker nodes for your cluster type to support this configuration.

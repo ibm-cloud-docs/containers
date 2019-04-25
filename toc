@@ -59,7 +59,7 @@ IBM Cloud Kubernetes Service
         cs_performance.md
 
     {: .topicgroup}
-    Configuring cluster networking
+    Managing cluster network traffic
         cs_network_ov.md
         cs_firewall.md
         cs_network_policy.md

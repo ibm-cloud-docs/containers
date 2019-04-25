@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-04-25"
 
 keywords: kubernetes, iks, node scaling
 
@@ -145,7 +145,7 @@ Make the most out of the cluster autoscaler by using the following strategies fo
 
 ### Can I autoscale multiple worker pools at once?
 {: #scalable-practices-multiple}
-Yes, after you install the Helm chart, you can choose which worker pools within the cluster to autoscale [in the configmap](#ca_cm). You can run only one `ibm-iks-cluster-autoscaler` Helm chart per cluster. 
+Yes, after you install the Helm chart, you can choose which worker pools within the cluster to autoscale [in the configmap](#ca_cm). You can run only one `ibm-iks-cluster-autoscaler` Helm chart per cluster.
 {: shortdesc}
 
 ### How can I make sure the cluster autoscaler responds to what resources my app needs?
@@ -590,7 +590,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     helm get values ibm-iks-cluster-autoscaler -a
     ```
     {: pre}
-    
+
 
 ## Limiting apps to run on only certain autoscaled worker pools
 {: #ca_limit_pool}

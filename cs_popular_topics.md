@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-24"
+lastupdated: "2019-04-25"
 
 keywords: kubernetes, iks
 
@@ -429,7 +429,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tr>
 <td>14 May</td>
 <td>[Update: Deploy workloads on GPU bare metal worldwide](/docs/containers?topic=containers-app#gpu_app)</td>
-<td>If you have a [bare metal graphics processing unit (GPU) machine type](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
+<td>If you have a [bare metal graphics processing unit (GPU) machine type](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
 </tr>
 <tr>
 <td>03 May</td>
@@ -444,7 +444,31 @@ configure pod security policies to authorize who can create and update pods in {
 </tbody></table>
 
 
-
+</td>
+<td>Available 31 May for **internal users only**, in the Dallas, Washington DC, and Frankfurt zones. Get started with a multizone cluster today!</td>
+</tr>
+<tr>
+<td>[New Ingress subdomain format](/docs/containers?topic=containers-ingress)</td>
+<td>Available 24 May. Clusters created after 24 May are assigned an Ingress subdomain in a new format: <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>. When you use Ingress to expose your apps, you can use the new subdomain to access your apps from the internet.</td>
+</tr>
+<tr>
+<td>[Update: Deploy workloads on GPU bare metal worldwide](/docs/containers?topic=containers-app#gpu_app)</td>
+<td>Available 14 May. If you have a [bare metal graphics processing unit (GPU) machine type](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
+</tr>
+<tr>
+<td>[Container Image Security Enforcement (beta)](/docs/services/Registry?topic=registry-security_enforce#security_enforce)</td>
+<td>Available 03 May. Does your team need a little extra help to know which image to pull in your app containers? Try out the Container Image Security Enforcement beta to verify container images before you deploy them. Available for clusters that run Kubernetes 1.9 or later.</td>
+</tr>
+<tr>
+<td>[Deploy the Kubernetes dashboard from the console](/docs/containers?topic=containers-app#cli_dashboard)</td>
+<td>Available 01 May. Did you ever want to access the Kubernetes dashboard with one click? Check out the **Kubernetes Dashboard** button in the {{site.data.keyword.Bluemix_notm}} console.</td>
+</tr>
+<tr>
+<td>[Check out the latest Ingress annotations](/docs/containers?topic=containers-ingress_annotation)</td>
+<td>Use an Ingress service more effectively by trying out the supported annotations that you can add to your configuration files.</td>
+</tr>
+</tbody></table>
+</staging>
 
 ## Popular topics in April 2018
 {: #apr18}
@@ -487,7 +511,7 @@ configure pod security policies to authorize who can create and update pods in {
 <tbody>
 <tr>
 <td>16 March</td>
-<td>[Provision a bare metal cluster with Trusted Compute](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)</td>
+<td>[Provision a bare metal cluster with Trusted Compute](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)</td>
 <td>Create a bare metal cluster that runs [Kubernetes version 1.9](/docs/containers?topic=containers-cs_versions#cs_v19) or later, and enable Trusted Compute to verify your worker nodes against tampering.</td>
 </tr>
 <tr>

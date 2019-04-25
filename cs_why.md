@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-04-25"
 
 keywords: kubernetes, iks
 
@@ -72,7 +72,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Blue
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Public
  </td>
- <td>With {{site.data.keyword.Bluemix_notm}} Public on [shared or dedicated hardware or on bare metal machines](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node), you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.Bluemix_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
+ <td>With {{site.data.keyword.Bluemix_notm}} Public on [shared or dedicated hardware or on bare metal machines](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes), you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.Bluemix_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
  </td>
  </tr>
  <tr>
@@ -117,6 +117,6 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Public network app access by an Ingress service to a stable IP address and customizable URL](/docs/containers?topic=containers-ingress#planning)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Logging and monitoring](/docs/containers?topic=containers-health#logging)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|[Option to provision your worker nodes on physical (bare metal) servers](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|[Option to provision bare metal workers with Trusted Compute](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Option to provision your worker nodes on physical (bare metal) servers](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Option to provision bare metal workers with Trusted Compute](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Characteristics of free and standard clusters" caption-side="top"}

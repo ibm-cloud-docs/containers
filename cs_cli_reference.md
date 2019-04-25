@@ -2818,7 +2818,7 @@ ibmcloud ks machine-types --zone ZONE [--json] [-s]
 ```
 {: pre}
 
-You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).
+You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes).
 
 <strong>Minimum required permissions</strong>: None
 
