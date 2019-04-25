@@ -47,7 +47,7 @@ Vous devez définir des règles d'accès pour tous les utilisateurs qui utilisen
 
 Découvrez les différents types de droits et de rôles, les actions attribuées à chaque rôle, ainsi que les relations entre les rôles.
 
-Pour voir les droits spécifiques à {{site.data.keyword.containerlong_notm}} pour chaque rôle, consultez la rubrique de référence [Droits d'accès des utilisateurs](cs_access_reference.html).
+Pour voir les droits spécifiques à {{site.data.keyword.containerlong_notm}} pour chaque rôle, consultez la rubrique de référence [Droits d'accès des utilisateurs](/docs/containers?topic=containers-access_reference).
 {: tip}
 
 <dl>
@@ -102,7 +102,7 @@ Lorsque vous créez votre compte {{site.data.keyword.Bluemix_notm}}, le groupe d
 <dt>Groupe de ressources</dt>
   <dd><p>Vous pouvez organiser les ressources de votre compte en groupes personnalisables pour pouvoir affecter rapidement à des utilisateurs individuels ou à des groupes d'utilisateurs l'accès à plusieurs ressources à la fois. Les groupes de ressources peuvent aider les opérateurs et les administrateurs à filtrer les ressources pour afficher leur utilisation actuelle, identifier et résoudre des incidents et gérer des équipes.</p>
   <p class="important">Un cluster ne peut s'intégrer qu'à d'autres services {{site.data.keyword.Bluemix_notm}} figurant dans le même groupe de ressources ou à des services qui ne prennent pas en charge les groupes de ressources, tels qu'{{site.data.keyword.registrylong_notm}}. Un cluster peut être créé dans un seul groupe de ressources que vous ne pouvez plus modifier par la suite. Si vous créez un cluster dans le mauvais groupe de ressources, vous devez supprimer le cluster et le recréer dans le groupe de ressources approprié.</p>
-  <p>Si vous envisagez d'utiliser [{{site.data.keyword.monitoringlong_notm}} pour les métriques](cs_health.html#view_metrics), veillez à donner des noms uniques aux clusters dans les groupes de ressources et les régions de votre compte afin d'éviter des conflits de noms pour les métriques. Vous ne pouvez pas renommer un cluster.</p>
+  <p>Si vous envisagez d'utiliser [{{site.data.keyword.monitoringlong_notm}} pour les métriques](/docs/containers?topic=containers-health#view_metrics), veillez à donner des noms uniques aux clusters dans les groupes de ressources et les régions de votre compte afin d'éviter des conflits de noms pour les métriques. Vous ne pouvez pas renommer un cluster.</p>
   <p>Vous pouvez affecter à des utilisateurs un rôle d'accès à un groupe de ressources dans les scénarios suivants. Notez que contrairement aux instances de ressource, vous ne pouvez pas octroyer l'accès à une instance individuelle au sein d'un groupe de ressources.</p>
   <ul><li>Tous les services {{site.data.keyword.Bluemix_notm}} IAM dans le groupe de ressources, y compris tous les clusters dans {{site.data.keyword.containerlong_notm}} et les images dans {{site.data.keyword.registrylong_notm}}.</li>
   <li>Toutes les instances au sein d'un service dans le groupe de ressources, par exemple tous les clusters dans {{site.data.keyword.containerlong_notm}}.</li>
@@ -206,7 +206,7 @@ Pour accéder au portefeuille de l'infrastructure IBM Cloud (SoftLayer), vous ut
     </tr>
     <tr>
       <td>Les **comptes Abonnement** ne sont pas configurés avec l'accès au portefeuille de l'infrastructure IBM Cloud (SoftLayer).</td>
-      <td><p><strong>Option 1 :</strong> [créez un compte Paiement à la carte](/docs/account/index.html#paygo) configuré avec accès au portefeuille de l'infrastructure IBM Cloud (SoftLayer). Si vous sélectionnez cette option, vous disposerez de deux comptes {{site.data.keyword.Bluemix_notm}} avec facturation distincte.</p><p>Si vous souhaitez continuer à utiliser votre ancien compte Abonnement, vous pouvez utiliser le nouveau compte Paiement à la carte pour générer une clé d'API dans l'infrastructure IBM Cloud (SoftLayer). Vous devez ensuite définir manuellement la clé d'API de l'infrastructure IBM Cloud (SoftLayer) pour votre compte Abonnement. N'oubliez pas que les ressources d'infrastructure IBM Cloud (SoftLayer) sont facturées via votre nouveau compte Paiement à la carte.</p><p><strong>Option 2 :</strong> si vous disposez déjà d'un compte d'infrastructure IBM Cloud (SoftLayer) existant que vous désirez utiliser, vous pouvez définir manuellement les données d'identification de votre compte d'infrastructure IBM Cloud (SoftLayer) pour votre compte {{site.data.keyword.Bluemix_notm}}.</p><p class="note">Lorsque vous effectuez une liaison manuelle vers un compte d'infrastructure IBM Cloud (SoftLayer), les données d'identification sont utilisées pour toutes les actions spécifiques de l'infrastructure IBM Cloud (SoftLayer) effectuées dans votre compte {{site.data.keyword.Bluemix_notm}}. Vous devez vérifier que la clé d'API que vous avez définie dispose de [droits d'infrastructure suffisants](cs_users.html#infra_access) pour que vos utilisateurs puissent créer et gérer des clusters.</p></td>
+      <td><p><strong>Option 1 :</strong> [créez un compte Paiement à la carte](/docs/account/index.html#paygo) configuré avec accès au portefeuille de l'infrastructure IBM Cloud (SoftLayer). Si vous sélectionnez cette option, vous disposerez de deux comptes {{site.data.keyword.Bluemix_notm}} avec facturation distincte.</p><p>Si vous souhaitez continuer à utiliser votre ancien compte Abonnement, vous pouvez utiliser le nouveau compte Paiement à la carte pour générer une clé d'API dans l'infrastructure IBM Cloud (SoftLayer). Vous devez ensuite définir manuellement la clé d'API de l'infrastructure IBM Cloud (SoftLayer) pour votre compte Abonnement. N'oubliez pas que les ressources d'infrastructure IBM Cloud (SoftLayer) sont facturées via votre nouveau compte Paiement à la carte.</p><p><strong>Option 2 :</strong> si vous disposez déjà d'un compte d'infrastructure IBM Cloud (SoftLayer) existant que vous désirez utiliser, vous pouvez définir manuellement les données d'identification de votre compte d'infrastructure IBM Cloud (SoftLayer) pour votre compte {{site.data.keyword.Bluemix_notm}}.</p><p class="note">Lorsque vous effectuez une liaison manuelle vers un compte d'infrastructure IBM Cloud (SoftLayer), les données d'identification sont utilisées pour toutes les actions spécifiques de l'infrastructure IBM Cloud (SoftLayer) effectuées dans votre compte {{site.data.keyword.Bluemix_notm}}. Vous devez vérifier que la clé d'API que vous avez définie dispose de [droits d'infrastructure suffisants](/docs/containers?topic=containers-users#infra_access) pour que vos utilisateurs puissent créer et gérer des clusters.</p></td>
     </tr>
     <tr>
       <td>**Comptes d'infrastructure IBM Cloud (SoftLayer)**, aucun compte {{site.data.keyword.Bluemix_notm}}</td>
@@ -223,7 +223,7 @@ Pour activer l'accès de tous les utilisateurs au portefeuille de l'infrastructu
 
 D'autres utilisateurs dans le compte partagent la clé d'API pour accéder à l'infrastructure. Lorsque les utilisateurs se connectent au compte {{site.data.keyword.Bluemix_notm}}, un jeton {{site.data.keyword.Bluemix_notm}} IAM basé sur la clé d'API est généré pour la session de l'interface de ligne de commande (CLI) et permet aux commandes liées à l'infrastructure de s'exécuter dans un cluster.
 
-Pour voir le jeton {{site.data.keyword.Bluemix_notm}} IAM correspondant à une session CLI, vous pouvez exécuter la commande `ibmcloud iam oauth-tokens`. Les jetons {{site.data.keyword.Bluemix_notm}} IAM peuvent également être utilisés pour [effectuer des appels directement dans l'API {{site.data.keyword.containerlong_notm}}](cs_cli_install.html#cs_api).
+Pour voir le jeton {{site.data.keyword.Bluemix_notm}} IAM correspondant à une session CLI, vous pouvez exécuter la commande `ibmcloud iam oauth-tokens`. Les jetons {{site.data.keyword.Bluemix_notm}} IAM peuvent également être utilisés pour [effectuer des appels directement dans l'API {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_cli_install#cs_api).
 {: tip}
 
 **Si les utilisateurs peuvent accéder au portefeuille au moyen d'un jeton {{site.data.keyword.Bluemix_notm}} IAM, comment puis-je limiter les commandes qu'ils peuvent utiliser ?**
@@ -232,7 +232,7 @@ Après avoir configuré l'accès des utilisateurs au portefeuille dans votre com
 
 Par exemple, si vous envisagez de créer un cluster dans une nouvelle région, assurez-vous que le premier cluster est créé par un utilisateur doté du rôle d'infrastructure **Superutilisateur**, par exemple le propriétaire du compte. Vous pouvez inviter ensuite des utilisateurs individuels ou des utilisateurs figurant dans des groupes d'accès {{site.data.keyword.Bluemix_notm}} IAM dans cette région en définissant pour eux des règles de gestion de la plateforme dans cette région. Un utilisateur avec un rôle de plateforme **Afficheur** n'est pas autorisé à ajouter un noeud worker. Par conséquent, l'action `worker-add` échoue, même si la clé d'API dispose des droits d'infrastructure corrects. Si vous remplacez le rôle de plateforme de l'utilisateur par **Opérateur**, l'utilisateur est autorisé à ajouter un noeud worker. L'action `worker-add` réussit car l'utilisateur est autorisé et la clé d'API est définie correctement. Vous n'avez pas besoin d'éditer les droits de l'infrastructure IBM Cloud (SoftLayer).
 
-Pour effectuer l'audit des actions pouvant être exécutées par les utilisateurs dans votre compte, vous pouvez utiliser [{{site.data.keyword.cloudaccesstrailshort}}](cs_at_events.html) pour afficher tous les événements liés au cluster.
+Pour effectuer l'audit des actions pouvant être exécutées par les utilisateurs dans votre compte, vous pouvez utiliser [{{site.data.keyword.cloudaccesstrailshort}}](/docs/containers?topic=containers-at_events) pour afficher tous les événements liés au cluster.
 {: tip}
 
 **Et si je ne compte pas affecter le rôle d'infrastructure Superutilisateur au propriétaire de la clé d'API ou des données d'identification ?**</br>
@@ -245,7 +245,7 @@ Si l'utilisateur quitte votre organisation, le propriétaire du compte {{site.da
 
 **Comment puis-je verrouiller mon cluster si ma clé d'API se trouve compromise ?**
 
-Si une clé d'API définie pour une région et un groupe de ressources dans votre cluster est compromise, [supprimez-la](../iam/userid_keys.html#deleting-an-api-key) pour qu'il n'y ait plus aucun appel effectué en utilisant cette clé d'API pour l'authentification. Pour plus d'informations sur la sécurisation des accès au serveur d'API Kubernetes, voir la rubrique [Sécurité du serveur d'API Kubernetes et d'etcd](cs_secure.html#apiserver).
+Si une clé d'API définie pour une région et un groupe de ressources dans votre cluster est compromise, [supprimez-la](/docs/iam/userid_keys.html#deleting-an-api-key) pour qu'il n'y ait plus aucun appel effectué en utilisant cette clé d'API pour l'authentification. Pour plus d'informations sur la sécurisation des accès au serveur d'API Kubernetes, voir la rubrique [Sécurité du serveur d'API Kubernetes et d'etcd](/docs/containers?topic=containers-security#apiserver).
 
 **Comment configurer la clé d'API pour mon cluster ?**</br>
 
@@ -283,14 +283,14 @@ Pour garantir que toutes les actions liées à l'infrastructure peuvent être ef
 Si vous disposez d'un compte {{site.data.keyword.Bluemix_notm}} Paiement à la carte, vous avez accès à un portefeuille de l'infrastructure IBM Cloud (SoftLayer) lié par défaut. La clé d'API est utilisée pour commander des ressources d'infrastructure à partir de ce portefeuille de l'infrastructure IBM Cloud (SoftLayer), par exemple de nouveaux noeuds worker ou réseaux locaux virtuels (VLAN).
 {: shortdec}
 
-Vous pouvez trouver le propriétaire actuel de la clé d'API en exécutant la commande [`ibmcloud ks api-key-info`](cs_cli_reference.html#cs_api_key_info). Si vous constatez que la clé d'API stockée pour une région nécessite une mise à jour, vous pouvez le faire en exécutant la commande [`ibmcloud ks api-key-reset`](cs_cli_reference.html#cs_api_key_reset). Cette commande nécessite la règle d'accès admin {{site.data.keyword.containerlong_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte.
+Vous pouvez trouver le propriétaire actuel de la clé d'API en exécutant la commande [`ibmcloud ks api-key-info`](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_api_key_info). Si vous constatez que la clé d'API stockée pour une région nécessite une mise à jour, vous pouvez le faire en exécutant la commande [`ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_api_key_reset). Cette commande nécessite la règle d'accès admin {{site.data.keyword.containerlong_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte.
 
 Assurez-vous de vouloir réinitialiser la clé et d'en mesurer l'impact sur votre application. La clé est utilisée à plusieurs endroits et peut entraîner des modifications avec rupture si elle est modifiée inutilement.
 {: note}
 
 **Avant de commencer** :
 - Si le propriétaire du compte ne définit pas la clé d'API, [vérifiez que l'utilisateur qui définit la clé d'API dispose des droits appropriés](#owner_permissions).
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Pour définir la clé d'API permettant d'accéder au portefeuille de l'infrastructure IBM Cloud (SoftLayer) :
 
@@ -317,20 +317,20 @@ Pour définir la clé d'API permettant d'accéder au portefeuille de l'infrastru
         ```
         {: pre}
 
-2. [Créez un cluster](cs_clusters.html). Pour créer le cluster, les données d'identification de la clé d'API que vous avez définies pour la région et le groupe de ressources sont utilisées.
+2. [Créez un cluster](/docs/containers?topic=containers-clusters). Pour créer le cluster, les données d'identification de la clé d'API que vous avez définies pour la région et le groupe de ressources sont utilisées.
 
 ### Accès à un autre compte d'infrastructure IBM Cloud (SoftLayer)
 {: #credentials}
 
-Au lieu d'utiliser le compte d'infrastructure IBM Cloud (SoftLayer) lié par défaut pour commander l'infrastructure des clusters d'une région, vous envisagerez peut-être d'utiliser un autre compte d'infrastructure IBM Cloud (SoftLayer) dont vous disposez déjà. Vous pouvez lier ce compte d'infrastructure à votre compte {{site.data.keyword.Bluemix_notm}} en utilisant la commande [`ibmcloud ks credential-set`](cs_cli_reference.html#cs_credentials_set). Les données d'identification de l'infrastructure IBM Cloud (SoftLayer) sont utilisées à la place de celles du compte Paiement à la carte par défaut stockées pour la région.
+Au lieu d'utiliser le compte d'infrastructure IBM Cloud (SoftLayer) lié par défaut pour commander l'infrastructure des clusters d'une région, vous envisagerez peut-être d'utiliser un autre compte d'infrastructure IBM Cloud (SoftLayer) dont vous disposez déjà. Vous pouvez lier ce compte d'infrastructure à votre compte {{site.data.keyword.Bluemix_notm}} en utilisant la commande [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_credentials_set). Les données d'identification de l'infrastructure IBM Cloud (SoftLayer) sont utilisées à la place de celles du compte Paiement à la carte par défaut stockées pour la région.
 {: shortdesc}
 
-Les données d'identification de l'infrastructure IBM Cloud (SoftLayer) définies par la commande `ibmcloud ks credential-set` sont conservées une fois votre session terminée. Si vous supprimez les données d'identification de l'infrastructure IBM Cloud (SoftLayer) définies manuellement avec la commande [`ibmcloud ks credential-unset`](cs_cli_reference.html#cs_credentials_unset), les données d'identification du compte Paiement à la carte par défaut sont utilisées. Toutefois, ce changement de données d'identification peut entraîner des [clusters orphelins](cs_troubleshoot_clusters.html#orphaned).
+Les données d'identification de l'infrastructure IBM Cloud (SoftLayer) définies par la commande `ibmcloud ks credential-set` sont conservées une fois votre session terminée. Si vous supprimez les données d'identification de l'infrastructure IBM Cloud (SoftLayer) définies manuellement avec la commande [`ibmcloud ks credential-unset`](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_credentials_unset), les données d'identification du compte Paiement à la carte par défaut sont utilisées. Toutefois, ce changement de données d'identification peut entraîner des [clusters orphelins](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 {: important}
 
 **Avant de commencer** :
 - Si vous n'utilisez pas les données d'identification du propriétaire du compte, [vérifiez que l'utilisateur dont vous voulez définir les données d'identification pour la clé d'API dispose des droits appropriés](#owner_permissions).
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Pour définir les données d'identification du compte d'infrastructure permettant d'accéder au portefeuille de l'infrastructure IBM Cloud (SoftLayer) :
 
@@ -360,7 +360,7 @@ Pour définir les données d'identification du compte d'infrastructure permettan
         ```
         {: screen}
 
-3. [Créez un cluster](cs_clusters.html). Pour créer le cluster, les données d'identification de l'infrastructure que vous avez définies pour la région et le groupe de ressources sont utilisées.
+3. [Créez un cluster](/docs/containers?topic=containers-clusters). Pour créer le cluster, les données d'identification de l'infrastructure que vous avez définies pour la région et le groupe de ressources sont utilisées.
 
 4. Vérifiez que votre cluster utilise les données d'identification du compte d'infrastructure que vous avez définies.
   1. Ouvrez la [console {{site.data.keyword.containerlong_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/containers-kubernetes/clusters) et sélectionnez votre cluster. 
@@ -408,14 +408,14 @@ Avant de commencer, vérifiez que le rôle de plateforme **Administrateur** vous
     2. Sélectionnez le nom du groupe de ressources.
     3. Dans la liste **Services**, sélectionnez **{{site.data.keyword.containershort_notm}}**.
     4. Dans la liste **Région**, sélectionnez une région ou toutes les régions.
-    5. Sélectionnez un **rôle d'accès à une plateforme**. Pour obtenir la liste des actions prises en charge pour chaque rôle, voir [Droits d'accès des utilisateurs](/cs_access_reference.html#platform).
+    5. Sélectionnez un **rôle d'accès à une plateforme**. Pour obtenir la liste des actions prises en charge pour chaque rôle, voir [Droits d'accès des utilisateurs](/docs/containers?topic=containers-access_reference#iam_platform).
     6. Cliquez sur **Affecter**.
   * Pour octroyer l'accès à un cluster dans un groupe de ressources ou à tous les clusters dans tous les groupes de ressources :
     1. Cliquez sur **Affecter l'accès aux ressources**.
     2. Dans la liste **Services**, sélectionnez **{{site.data.keyword.containershort_notm}}**.
     3. Dans la liste **Région**, sélectionnez une région ou toutes les régions.
     4. Dans la liste **Instance de service**, sélectionnez un nom de cluster ou **Toutes les instances de service**.
-    5. Dans la section **Sélection de rôles**, choisissez un rôle d'accès de plateforme {{site.data.keyword.Bluemix_notm}} IAM. Pour obtenir la liste des actions prises en charge pour chaque rôle, voir [Droits d'accès des utilisateurs](/cs_access_reference.html#platform). Remarque : si vous affectez à un utilisateur le rôle de plateforme **Administrateur** pour un cluster unique, vous devez également lui affecter le rôle de plateforme **Afficheur** pour tous les clusters de cette région dans le groupe de ressources.
+    5. Dans la section **Sélection de rôles**, choisissez un rôle d'accès de plateforme {{site.data.keyword.Bluemix_notm}} IAM. Pour obtenir la liste des actions prises en charge pour chaque rôle, voir [Droits d'accès des utilisateurs](/docs/containers?topic=containers-access_reference#iam_platform). Remarque : si vous affectez à un utilisateur le rôle de plateforme **Administrateur** pour un cluster unique, vous devez également lui affecter le rôle de plateforme **Afficheur** pour tous les clusters de cette région dans le groupe de ressources.
     6. Cliquez sur **Affecter**.
 
 4. Si vous souhaitez que les utilisateurs puissent travailler avec des clusters dans un groupe de ressources autre que le groupe par défaut, ces utilisateurs nécessitent d'autres accès aux groupes de ressources dans lesquels se trouvent les clusters. Vous pouvez affecter au minimum à ces utilisateurs le rôle de plateforme **Afficheur** pour les groupes de ressources.
@@ -434,11 +434,11 @@ Octroyez l'accès utilisateur à vos clusters en affectant des rôles de gestion
 
 - Vérifiez que le rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM `cluster-admin` vous a été affecté pour le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous travaillez.
 - Vérifiez que l'utilisateur est ajouté au compte. Dans le cas contraire, invitez l'utilisateur dans votre compte en exécutant la commande `ibmcloud account user-invite <user@email.com>`.
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](cs_cli_install.html#cs_cli_configure).
+- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 **Pour affecter des rôles {{site.data.keyword.Bluemix_notm}} IAM à un utilisateur individuel avec l'interface de ligne de commande :**
 
-1.  Créez une règle d'accès {{site.data.keyword.Bluemix_notm}} IAM pour définir les droits d'accès pour {{site.data.keyword.containerlong_notm}} (**`--service-name containers-kubernetes`**). Vous pouvez choisir Afficheur, Editeur, Opérateur et Administrateur comme rôle de plateforme. Pour obtenir la liste des actions prises en charge pour chaque rôle, voir [Droits d'accès des utilisateurs](cs_access_reference.html#platform).
+1.  Créez une règle d'accès {{site.data.keyword.Bluemix_notm}} IAM pour définir les droits d'accès pour {{site.data.keyword.containerlong_notm}} (**`--service-name containers-kubernetes`**). Vous pouvez choisir Afficheur, Editeur, Opérateur et Administrateur comme rôle de plateforme. Pour obtenir la liste des actions prises en charge pour chaque rôle, voir [Droits d'accès des utilisateurs](/docs/containers?topic=containers-access_reference#iam_platform).
     * Pour affecter l'accès à un cluster dans un groupe de ressources :
       ```
       ibmcloud iam user-policy-create <user_email> --resource-group-name <resource_group_name> --service-name containers-kubernetes --region <region> --service-instance <cluster_ID> --roles <role>
@@ -531,7 +531,7 @@ Octroyez l'accès utilisateur à vos clusters en affectant des rôles de gestion
     ```
     {: pre}
 
-3. Créez une règle d'accès {{site.data.keyword.Bluemix_notm}} IAM afin de définir les droits pour {{site.data.keyword.containerlong_notm}}. Vous pouvez choisir Afficheur, Editeur, Opérateur et Administrateur comme rôle de plateforme. Pour obtenir la liste des actions prises en charge pour chaque rôle, voir [Droits d'accès des utilisateurs](/cs_access_reference.html#platform).
+3. Créez une règle d'accès {{site.data.keyword.Bluemix_notm}} IAM afin de définir les droits pour {{site.data.keyword.containerlong_notm}}. Vous pouvez choisir Afficheur, Editeur, Opérateur et Administrateur comme rôle de plateforme. Pour obtenir la liste des actions prises en charge pour chaque rôle, voir [Droits d'accès des utilisateurs](/docs/containers?topic=containers-access_reference#iam_platform).
   * Pour affecter l'accès à un cluster dans un groupe de ressources :
       ```
       ibmcloud iam access-group-policy-create <access_group_name> --resource-group-name <resource_group_name> --service-name containers-kubernetes --region <region> --service-instance <cluster_ID> --roles <role>
@@ -877,12 +877,12 @@ Le tableau suivant présente les relations entre les rôles de plateforme {{site
   </tr>
 </table>
 
-Pour en savoir plus sur les actions autorisées par chaque rôle RBAC, consultez la rubrique de référence [Droits d'accès des utilisateurs](cs_access_reference.html#platform).
+Pour en savoir plus sur les actions autorisées par chaque rôle RBAC, consultez la rubrique de référence [Droits d'accès des utilisateurs](/docs/containers?topic=containers-access_reference#iam_platform).
 {: tip}
 
 **Comment gérer les droits RBAC pour des espaces de nom spécifiques dans mon cluster ?**
 
-Si vous utilisez des [espaces de nom Kubernetes pour partitionner votre cluster et isoler vos charges de travail](cs_secure.html#container), vous devez affecter l'accès utilisateur à des espaces de nom spécifiques. Lorsque vous affectez à un utilisateur les rôles de plateforme **Opérateur** ou **Administrateur**, les rôles de cluster prédéfinis `admin` et `cluster-admin` sont automatiquement appliqués à l'ensemble du cluster. Cependant, lorsque vous affectez à un utilisateur les rôles de plateforme **Afficheur** ou **Editeur**, les rôles de cluster prédéfinis `view` et `edit` sont automatiquement appliqués à l'espace de nom par défaut uniquement. Pour imposer le même niveau d'accès utilisateur dans d'autres espaces de nom, vous pouvez [copier les liaisons de rôle](#rbac_copy) pour les rôles de cluster `ibm-view` et `ibm-edit` dans d'autres espaces de nom.
+Si vous utilisez des [espaces de nom Kubernetes pour partitionner votre cluster et isoler vos charges de travail](/docs/containers?topic=containers-security#container), vous devez affecter l'accès utilisateur à des espaces de nom spécifiques. Lorsque vous affectez à un utilisateur les rôles de plateforme **Opérateur** ou **Administrateur**, les rôles de cluster prédéfinis `admin` et `cluster-admin` sont automatiquement appliqués à l'ensemble du cluster. Cependant, lorsque vous affectez à un utilisateur les rôles de plateforme **Afficheur** ou **Editeur**, les rôles de cluster prédéfinis `view` et `edit` sont automatiquement appliqués à l'espace de nom par défaut uniquement. Pour imposer le même niveau d'accès utilisateur dans d'autres espaces de nom, vous pouvez [copier les liaisons de rôle](#rbac_copy) pour les rôles de cluster `ibm-view` et `ibm-edit` dans d'autres espaces de nom.
 
 **Puis-je créer des rôles ou des rôles de cluster personnalisés ?**
 
@@ -890,9 +890,9 @@ Les rôles de cluster `view`, `edit`, `admin` et `cluster-admin` sont des rôles
 
 **Quand dois-je utiliser des liaisons de rôle de cluster et des liaisons de rôle qui ne sont pas liées aux droits d'accès {{site.data.keyword.Bluemix_notm}} IAM et que je définis moi-même ?**
 
-Vous envisagerez peut-être d'autoriser certaines personnes à créer et à mettre à jour des pods dans votre cluster. Avec les [politiques de sécurité de pod](https://console.bluemix.net/docs/containers/cs_psp.html#psp), vous pouvez utiliser des liaisons de rôle de cluster existantes fournies avec votre cluster ou créez les vôtres.
+Vous envisagerez peut-être d'autoriser certaines personnes à créer et à mettre à jour des pods dans votre cluster. Avec les [politiques de sécurité de pod](/docs/containers/cs_psp.html#psp), vous pouvez utiliser des liaisons de rôle de cluster existantes fournies avec votre cluster ou créez les vôtres.
 
-Vous pouvez également souhaiter intégrer des modules complémentaires dans votre cluster. Par exemple, lorsque vous [configurez Helm dans votre cluster](cs_integrations.html#helm), vous devez créer un compte de service pour Tiller dans l'espace de nom `kube-system` et une liaison de rôle de cluster RBAC Kubernetes pour le pod `tiller-deploy`.
+Vous pouvez également souhaiter intégrer des modules complémentaires dans votre cluster. Par exemple, lorsque vous [configurez Helm dans votre cluster](/docs/containers?topic=containers-helm), vous devez créer un compte de service pour Tiller dans l'espace de nom `kube-system` et une liaison de rôle de cluster RBAC Kubernetes pour le pod `tiller-deploy`.
 
 ### Copie d'une liaison de rôle RBAC dans un autre espace de nom
 {: #rbac_copy}
@@ -944,7 +944,7 @@ Pour affecter l'accès à un processus qui s'exécute dans des pods, par exemple
 
 Avant de commencer :
 
-- Ciblez l'[interface CLI de Kubernetes](cs_cli_install.html#cs_cli_configure) sur votre cluster.
+- Ciblez l'[interface CLI de Kubernetes](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) sur votre cluster.
 - Pour affecter l'accès à des utilisateurs individuels ou à des utilisateurs dans un groupe d'accès, vérifiez que l'utilisateur ou le groupe dispose au moins d'un [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM](#platform) au niveau du service {{site.data.keyword.containerlong_notm}}.
 
 Pour créer des droits RBAC personnalisés :
@@ -1141,12 +1141,12 @@ Lorsque vous affectez le rôle d'infrastructure **Superutilisateur** à l'admini
 
 Pour des raisons de conformité, de sécurité ou de facturation, vous ne souhaiterez pas forcément octroyer le rôle d'infrastructure **Superutilisateur** à l'utilisateur ayant défini la clé d'API ou dont les données d'identification sont définies avec la commande `ibmcloud ks credential-set`. En revanche, si cet utilisateur ne dispose pas du rôle **Superutilisateur**, les actions liées à l'infrastructure, par exemple la création d'un cluster ou le rechargement d'un noeud worker, risquent d'échouer. Au lieu d'utiliser des rôles de plateforme {{site.data.keyword.Bluemix_notm}} IAM pour contrôler l'accès des utilisateurs à l'infrastructure, vous devez définir des droits d'infrastructure IBM Cloud (SoftLayer) spécifiques pour les utilisateurs.
 
-Si vous disposez de clusters à zones multiples, le propriétaire de votre compte d'infrastructure IBM Cloud (SoftLayer) doit activer la fonction Spanning VLAN pour que les noeuds situés dans des zones différentes puissent communiquer dans le cluster. Le propriétaire du compte peut également affecter à un utilisateur le droit **Réseau > Gérer spanning VLAN pour réseau** pour que cet utilisateur puisse activer la fonction Spanning VLAN. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](cs_cli_reference.html#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Si vous disposez de clusters à zones multiples, le propriétaire de votre compte d'infrastructure IBM Cloud (SoftLayer) doit activer la fonction Spanning VLAN pour que les noeuds situés dans des zones différentes puissent communiquer dans le cluster. Le propriétaire du compte peut également affecter à un utilisateur le droit **Réseau > Gérer spanning VLAN pour réseau** pour que cet utilisateur puisse activer la fonction Spanning VLAN. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 {: tip}
 
 Avant de commencer, vérifiez que vous êtes bien le propriétaire du compte ou que vous disposez du rôle **Superutilisateur** et de l'accès à toutes les unités. Vous ne pouvez pas octroyer un accès utilisateur dont vous ne bénéficiez pas vous-même.
 
-1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/) et accédez à **Gérer > Compte > Utilisateurs**.
+1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com) et accédez à **Gérer > Compte > Utilisateurs**.
 
 2. Cliquez sur le nom de l'utilisateur auquel vous souhaitez octroyer des droits.
 
@@ -1157,7 +1157,7 @@ Avant de commencer, vérifiez que vous êtes bien le propriétaire du compte ou 
         * **Afficher uniquement** permet à l'utilisateur d'afficher les détails de l'infrastructure uniquement.
         * **Utilisateur de base** octroie à l'utilisateur certains mais pas tous les droits sur l'infrastructure.
         * **Superutilisateur** octroie à l'utilisateur tous les droits sur l'infrastructure.
-    * Sélectionner des droits individuels dans chaque onglet. Pour consulter les droits nécessaires à l'exécution de tâches courantes dans {{site.data.keyword.containerlong_notm}}, voir [Droits d'accès des utilisateurs](cs_access_reference.html#infra).
+    * Sélectionner des droits individuels dans chaque onglet. Pour consulter les droits nécessaires à l'exécution de tâches courantes dans {{site.data.keyword.containerlong_notm}}, voir [Droits d'accès des utilisateurs](/docs/containers?topic=containers-access_reference#infra).
 
 5.  Pour enregistrer vos modifications, cliquez sur **Modifier droits pour le portail**.
 
@@ -1246,7 +1246,7 @@ Avant le départ de l'utilisateur, le propriétaire du compte {{site.data.keywor
         5.  Si vous ne trouvez pas l'ID du noeud worker, c'est qu'il n'est pas mis à disposition dans ce compte d'infrastructure. Passez à un autre compte d'infrastructure et réessayez.
     2. Déterminez ce qu'il advient du compte de l'infrastructure utilisé par l'utilisateur pour mettre à disposition les clusters, une fois que cet utilisateur n'est plus là.
         * Si l'utilisateur n'est pas propriétaire du compte de l'infrastructure, les autres utilisateurs ont accès à ce compte et il est conservé après le départ de cet utilisateur. Vous pouvez continuer à travailler avec ces clusters dans votre compte. Vérifiez qu'il existe au mois un autre utilisateur doté du [rôle de plateforme **Administrateur**](#platform) pour les clusters.
-        * Si l'utilisateur est propriétaire du compte de l'infrastructure, le compte de l'infrastructure est supprimé lors du départ de l'utilisateur. Vous ne pouvez plus continuer à travailler avec ces clusters. Pour éviter d'avoir des clusters orphelins, l'utilisateur doit supprimer les clusters avant son départ. Si l'utilisateur est parti et que les clusters n'ont pas été supprimés, vous devez utiliser la commande `ibmcloud ks credential-set` pour changer les données d'identification de l'infrastructure sur le compte dans lequel les noeuds worker du cluster sont mis à disposition et supprimer le cluster. Pour plus d'informations, voir [Impossible de modifier ou de supprimer des ressources d'infrastructure dans un cluster orphelin](cs_troubleshoot_clusters.html#orphaned).
+        * Si l'utilisateur est propriétaire du compte de l'infrastructure, le compte de l'infrastructure est supprimé lors du départ de l'utilisateur. Vous ne pouvez plus continuer à travailler avec ces clusters. Pour éviter d'avoir des clusters orphelins, l'utilisateur doit supprimer les clusters avant son départ. Si l'utilisateur est parti et que les clusters n'ont pas été supprimés, vous devez utiliser la commande `ibmcloud ks credential-set` pour changer les données d'identification de l'infrastructure sur le compte dans lequel les noeuds worker du cluster sont mis à disposition et supprimer le cluster. Pour plus d'informations, voir [Impossible de modifier ou de supprimer des ressources d'infrastructure dans un cluster orphelin](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 
 3. Retirez l'utilisateur du compte {{site.data.keyword.Bluemix_notm}}.
     1. Accédez à **Gérer > Compte > Utilisateurs**.
@@ -1282,7 +1282,7 @@ Avant de commencer, [vérifiez que les données d'identification d'infrastructur
 #### Retirer un utilisateur d'un groupe d'accès
 {: #remove_access_group}
 
-1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/) et accédez à **Gérer > Compte > Utilisateurs**.
+1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com) et accédez à **Gérer > Compte > Utilisateurs**.
 2. Cliquez sur le nom de l'utilisateur auquel vous souhaitez retirer des droits.
 3. Cliquez sur l'onglet **Groupe d'accès**.
 4. Dans l'entrée du tableau correspondant au groupe d'accès, cliquez sur le menu Actions et sélectionnez **Retirer l'utilisateur**. Lorsque l'utilisateur est retiré, tout rôle affecté au groupe d'accès est retiré de l'utilisateur.
@@ -1290,7 +1290,7 @@ Avant de commencer, [vérifiez que les données d'identification d'infrastructur
 #### Retirer des droits de plateforme {{site.data.keyword.Bluemix_notm}} IAM et les droits RBAC prédéfinis associés
 {: #remove_iam_rbac}
 
-1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/) et accédez à **Gérer > Compte > Utilisateurs**.
+1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com) et accédez à **Gérer > Compte > Utilisateurs**.
 2. Cliquez sur le nom de l'utilisateur auquel vous souhaitez retirer des droits.
 3. Dans l'entrée du tableau correspondant au droit que vous souhaitez retirer, cliquez sur le menu Actions.
 4. Sélectionnez **Retirer**.
@@ -1317,7 +1317,7 @@ Si vous n'avez plus besoin des droits RBAC personnalisés, vous pouvez les retir
 Pour retirer tous les droits Cloud Foundry d'un utilisateur, vous pouvez retirer les rôles d'organisation de l'utilisateur. Si vous souhaitez simplement retirer la possibilité de lier des services dans un cluster à un utilisateur, retirez uniquement les rôles d'espace de l'utilisateur.
 {: shortdesc}
 
-1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/) et accédez à **Gérer > Compte > Utilisateurs**.
+1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com) et accédez à **Gérer > Compte > Utilisateurs**.
 2. Cliquez sur le nom de l'utilisateur auquel vous souhaitez retirer des droits.
 3. Cliquez sur l'onglet **Accès Cloud Foundry**.
     * Pour retirer le rôle d'espace de l'utilisateur :
@@ -1338,7 +1338,7 @@ Pour retirer tous les droits Cloud Foundry d'un utilisateur, vous pouvez retirer
 Vous pouvez retirer des droits d'infrastructure IBM Cloud (SoftLayer) pour un utilisateur à l'aide de la console {{site.data.keyword.Bluemix_notm}}.
 {: shortdesc}
 
-1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/).
+1. Connectez-vous à la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com).
 2. Dans le menu ![Icône de menu](../icons/icon_hamburger.svg "Icône de menu"), cliquez sur **Infrastructure**.
 3. Cliquez sur l'adresse e-mail de l'utilisateur.
 4. Cliquez sur l'onglet **Autorisations du portail**.
